@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Dashbord for prognoser',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Registerdashbord for prognoser',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Prognoser',
@@ -313,7 +314,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Regnskapsår startdato:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurer tidsperioden som vil bli brukt i Prognose modulen. <br /><br />Vær oppmerksom på at tidsperiode innstillinger ikke kan endres etter første oppsettet. <br /><br />Start med å velge startdatoen for regnskapsåret. Deretter velger du hvilken type tidsperiode for prognosen. Datointervallet for tidsperioden vil bli beregnet automatisk basert på dine valg. Undertidsperioden er base for prognose regnearket. <br /><br />Den synlige fremtid og fortids tidsperioder vil avgjøre antallet synlige underperioder i Prognose modulen. Brukerne er i stand til å se og redigere prognose tallene i de synlige delperiodene.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du vil kategorisere {{forecastByModule}}. <br><br>Merk at Område-innstillingene ikke kan endres etter første lagring. For oppgraderte forekomster, er Område-innstillingen låst inn med eksisterende prognosedata.<br><br>Du kan velge to eller flere kategorier basert på sannsynlighetsområder eller opprette kategorier som ikke er basert på sannsynlighet. <br><br>Det er avmerkingsbokser til venstre for dine egendefinerte kateorier; bruk disse for å bestemme hvilke områder som vil være inkludert innenfor prognosemengden lagret og rapportert til sjefer. <br><br>En bruker kan inkludere/ekskludere status og kategori for {{forecastByModule}} manuelt fra arbeidsarket deres.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du ønsker å kategorisere {{forecastByModule}}. <br><br>Vær oppmerksom på at områdeinnstillinger kan ikke endres etter første handling. For oppgraderte instanser, låses områdeinnstillingen med eksisterende prognosedata.<br><br>Du kan velge to eller flere kategorier basert på mulighetsområde eller opprette kategorier som ikke er basert på mulighet.<br><br>Det er avkryssingsruter til venstre av dine tilpassede kategorier, bruk disse for å avgjøre hvilke områder vil bli inkludert i prognosemengden igangsatt og varsle lederne. <br><br>En bruker kan endre inkluder-/ekskluder-statusen og kategorien til {{forecastByModule}} manuelt fra arbeidsskjemaet.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Velg kolonnene du ønsker at brukeren kan fylle ut for sine Prognoser for hver {{forecastByModuleSingular}}. Vær oppmerksom på de sannsynlige beløp som er knyttet til det beløpet som vises i {{forecastByModule}}; på grunn av dette kan ikke sannsynlighet kolonnen skjules.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Velg hvilke kolonner du ønsker å se i Prognose modulen. Listen over felt vil kombinere regnearket og tillater brukeren å velge hvordan den konfigurerer sin visning.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jeg er et eksempel for prognosen ved hvordan-tekste!',

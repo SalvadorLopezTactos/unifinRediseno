@@ -33,7 +33,7 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
      */
     protected $supportedVersions = array(
         array('version' =>'5.4', 'operator' => '>='),
-        array('version' => '7.0', 'operator' => '<'),
+        array('version' => '8.0', 'operator' => '<'),
     );
 
     public function run()
@@ -87,7 +87,7 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
                 $displayText = $app_strings['LBL_EMAIL_SUCCESS'];
             } else {
                 $displayText = $app_strings['ERR_ELASTIC_TEST_FAILED'];
-                $this->error("Elastic version is unknown or unsupported!");
+                $this->error("Elastic version is unknown or unsupported, version:" . $data['version']['number'] ?? 'unknown');
             }
         } catch (Exception $e) {
             $displayText = $e->getMessage();

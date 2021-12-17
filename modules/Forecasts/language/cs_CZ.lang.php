@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Řídicí panel předpovědí',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů předpovědí',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Předpovědi',

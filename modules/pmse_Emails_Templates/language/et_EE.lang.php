@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Protsessi e-kirja mallid',
     'LBL_MODULE_NAME_SINGULAR' => 'Protsessi e-kirja mall',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Protsesside meilimallide fookuse sahtel',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Protsesside meilimallide kirjete armatuurlaud',
     'LNK_LIST' => 'Vaata protsessi e-kirja malle',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Loo protsessi e-kirja mall',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Impordi protsessi e-kirja mallid',

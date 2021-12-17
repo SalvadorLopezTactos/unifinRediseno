@@ -23,7 +23,7 @@ CommandConnectionCondition.prototype = new jCore.Command();
 CommandConnectionCondition.prototype.type = "CommandConnectionCondition";
 
 CommandConnectionCondition.prototype.initObject = function (condition) {
-    condition = $.trim(condition);
+    condition = ((typeof condition) === 'string') && !_.isEmpty(condition) ? condition.trim() : '';
     this.before = {
         condition: this.receiver.getFlowCondition(),
         type: this.receiver.flo_type

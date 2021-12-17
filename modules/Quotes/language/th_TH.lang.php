@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'แดชบอร์ดรายการอ้างอิงมา',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกที่อ้างมา',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'เสนอราคาระบบลิ้นชัก',
 
     'LBL_CONTRACTS'=>'สัญญา',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'สัญญา',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'ประเทศที่เรียกเก็บเงิน',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'รหัสไปรษณีย์ที่เรียกเก็บเงิน',
     'LBL_BILLING_ADDRESS_STATE' => 'รัฐที่เรียกเก็บเงิน',
-    'LBL_BILLING_ADDRESS_STREET' => 'ที่อยู่ที่เรียกเก็บเงิน',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'ที่อยู่ที่เรียกเก็บเงิน:',
     'LBL_BILLING_CONTACT_ID' => 'ID ที่อยู่ติดต่อที่เรียกเก็บเงิน:',
     'LBL_BILLING_CONTACT_NAME' => 'ชื่อผู้ติดต่อที่เรียกเก็บเงิน:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'ประเทศที่ส่งสินค้า',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'รหัสไปรษณีย์ที่ส่งสินค้า',
     'LBL_SHIPPING_ADDRESS_STATE' => 'รัฐที่ส่งสินค้า',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'ที่อยู่ในการส่งสินค้า',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'ที่อยู่ที่ส่งสินค้า:',
     'LBL_SHIPPING_BODY' => 'การเรียกเก็บเงินและการส่งสินค้า',
     'LBL_SHIPPING_CONTACT_ID' => 'ID ที่อยู่ติดต่อที่ส่งสินค้า:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'คัดลอกที่อยู่เรียกเก็บเงินไปยังที่อยู่จัดส่ง',
     'NTC_COPY_SHIPPING_ADDRESS' => 'คัดลอกที่อยู่จัดส่งไปยังที่อยู่เรียกเก็บเงิน',
     'NTC_COPY_BILLING_ADDRESS2' => 'คัดลอกเป็นที่อยู่จัดส่ง',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'คัดลอกเป็นที่อยู่เรียกเก็บเงิน',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายความคิดเห็นนี้ออกจากการเสนอราคา',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'คัดลอกเป็นที่อยู่เรียกเก็บเงิน',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายความคิดเห็นนี้ออกจากการเสนอราคา',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายรายการบรรทัดนี้ออกจากการเสนอราคา',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายกลุ่มนี้ออกจากการเสนอราคา',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายที่อยู่ติดต่อนี้ออกจากการเสนอราคา',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'ปริมาณ',
     'LBL_MFT_PART_NUM' => 'เลขที่ชิ้นส่วน',
     'LBL_ITEM_NAME' => 'บรรทัดรายการ',
+    'LBL_PRODUCT_TEMPLATE' => 'ผลิตภัณฑ์',
     'LBL_DISCOUNT_PRICE' => 'ราคาต่อหน่วย',
     'LBL_DISCOUNT_AMOUNT' => 'ส่วนลด',
     'LBL_LINE_ITEM_TOTAL' => 'ยอดรวมของรายการบรรทัด',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID โอกาสทางการขาย',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'โครงร่างใบเสนอราคา',
+
+    'LBL_RENEWAL' => 'การต่ออายุ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'การปฏิสัมพันธ์ของการเสนอราคา',
 );

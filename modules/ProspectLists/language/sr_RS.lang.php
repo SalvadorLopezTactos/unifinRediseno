@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Kontrolna tabla liste ciljnih listi',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o listama ciljeva',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za liste ciljeva',
+  'LBL_RELATED_ACCOUNTS' => 'Povezani nalozi',
+  'LBL_RELATED_CONTACTS' => 'Povezani kontakti',
+  'LBL_RELATED_LEADS_TARGETS' => 'Povezani potencijalni klijenti i ciljevi',
 
   'LBL_MODULE_NAME' => 'Liste ciljeva',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista ciljeva',

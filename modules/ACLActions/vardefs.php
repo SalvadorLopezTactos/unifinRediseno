@@ -14,6 +14,7 @@
 
 $dictionary['ACLAction'] = array(
   'table' => 'acl_actions',
+  'archive' => false,
   'favorites' => false,
   'comment' => 'Determine the allowable actions available to users',
   'fields' => array (
@@ -140,4 +141,3 @@ $dictionary['ACLAction'] = array(
     ),
 ),
 );
-?>

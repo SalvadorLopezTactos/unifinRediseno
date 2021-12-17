@@ -111,7 +111,7 @@ class MetaDataCache implements LoggerAwareInterface
 
             if (!empty($cacheResult)) {
                 try {
-                    $result = unserialize(gzinflate(base64_decode($cacheResult)));
+                    $result = unserialize(gzinflate(base64_decode($cacheResult)), ['allowed_classes' => false]);
                 } catch (Exception $e) {
                     $this->logger->error("Exception when decompressing metadata hash for $key:" . $e->getMessage());
                 }

@@ -14,8 +14,7 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Index\Strategy;
 
 /**
  *
- * Use a static index for given module. For ES 6.x, it requires one index per module
- *
+ * One Module Per Index Strategy
  *
  */
 class OneModulePerIndexStrategy extends StaticStrategy

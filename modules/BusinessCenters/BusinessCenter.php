@@ -535,7 +535,7 @@ class BusinessCenter extends Basic
     protected function getTimeLeftInDay(\SugarDateTime $sdt)
     {
         // How many hours is this bc open from the presented date
-        $c = $this->getCloseTimeElements($sdt->day_of_week_long);
+        $c = $this->getCloseTimeElements($sdt->day_of_week_english);
         $ch = $c['hour'];
         $cm = $c['minutes'];
 
@@ -620,7 +620,7 @@ class BusinessCenter extends Basic
         // Not entirely necessary to mutate the string name for the method, but
         // it feels right
         $method = 'get' . ucfirst(strtolower($type)) . 'TimeElements';
-        $e = $this->$method($sdt->day_of_week_long);
+        $e = $this->$method($sdt->day_of_week_english);
 
         // Set the time stamp on our date object to the close time
         $date = clone $sdt;
@@ -705,7 +705,7 @@ class BusinessCenter extends Basic
     protected function getHoursOpenForDate(\SugarDateTime $sdt)
     {
         if ($this->isOpenDate($sdt)) {
-            return $this->getHoursOpenForDay($sdt->day_of_week_long);
+            return $this->getHoursOpenForDay($sdt->day_of_week_english);
         }
 
         return 0.00;
@@ -720,7 +720,7 @@ class BusinessCenter extends Basic
     protected function isOpenDate(\SugarDateTime $date, bool $checkTime = false)
     {
         // First check the day of the week, since that is simple
-        $day = $date->day_of_week_long;
+        $day = $date->day_of_week_english;
         if (!$this->isOpen($day)) {
             return false;
         }
@@ -837,7 +837,7 @@ class BusinessCenter extends Basic
      */
     protected function getSecondsLeftInDay(\SugarDateTime $dateTime)
     {
-        $closeTime = $this->getCloseTimeElements($dateTime->day_of_week_long);
+        $closeTime = $this->getCloseTimeElements($dateTime->day_of_week_english);
 
         // Get the second of the day that closing occurs
         $closeSecond = ($closeTime['hour'] * 3600) + ($closeTime['minutes'] * 60);

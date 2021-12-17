@@ -199,5 +199,20 @@
             return moment ? moment.utc(str).fromNow() : str;
         });
 
+        /**
+         * Helper implements a boolean operation "OR"
+         * @param Variable number of parameters
+         * @return {boolean}
+         */
+        Handlebars.registerHelper('or', function() {
+            for (let i = 0; i < arguments.length - 1; i++) {
+                if (!!arguments[i]) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
     });
 })(SUGAR.App);

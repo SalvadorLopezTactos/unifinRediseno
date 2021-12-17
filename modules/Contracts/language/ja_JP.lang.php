@@ -92,9 +92,13 @@ $mod_strings = array (
     'LBL_CONTRACT_DOCUMENTS_SUBPANEL_TITLE' => 'ドキュメント',
     'LBL_CONTRACT_INFORMATION' => '契約の概要',
 
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサインされたユーザ名',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'アサインされたユーザID',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサインされたユーザー名',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'アサインされたユーザーID',
     'LBL_EXPORT_MODIFIED_USER_ID' => '更新者ID',
     'LBL_EXPORT_CREATED_BY' => '作成者ID',
     'LBL_EXPORT_TYPE_NAME' => 'タイプ名',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => '契約 フォーカス ドロワ',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => '契約記録ダッシュボード',
 );

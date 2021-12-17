@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Prozess-Geschäftsregeln',
   'LBL_MODULE_NAME_SINGULAR' => 'Prozess-Geschäftsregel',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Prozess-Geschäftsregeln',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Prozess-Geschäftsregelnbericht-Dashboard',
   'LBL_RST_UID' => 'Geschäftsregel-ID',
   'LBL_RST_TYPE' => 'Geschäftsregel-Typ',
   'LBL_RST_DEFINITION' => 'Geschäftsregel-Definition',

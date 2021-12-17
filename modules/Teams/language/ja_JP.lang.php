@@ -26,7 +26,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => '名前',
     'LBL_FIRST_NAME' => '名:',
     'LBL_LAST_NAME' => '姓:',
-    'LBL_LIST_REPORTS_TO' => '報告先',
+    'LBL_LIST_REPORTS_TO' => '上司',
     'LBL_LIST_TITLE' => '職位',
     'LBL_MODULE_NAME' => 'チーム',
     'LBL_MODULE_NAME_SINGULAR' => 'チーム',
@@ -62,7 +62,7 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_DESC' => 'チームアクセスを有効化してモジュール別にアクセスを管理します。',
     'LBL_TBA_CONFIGURATION_LABEL' => 'チーム ベースのパーミッションの有効化',
     'LBL_TBA_CONFIGURATION_MOD_LABEL' => '有効化するモジュールの選択',
-    'LBL_TBA_CONFIGURATION_TITLE' => 'チームベースのパーミッションを有効化すると、役割管理を使用して個別のモジュールのチームやユーザに特定のアクセス権を割り当てることができます。',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'チームベースのパーミッションを有効化すると、役割管理を使用して個別のモジュールのチームやユーザーに特定のアクセス権限を割り当てることができます。',
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 モジュールのチームベースのパーミッションを無効にすると、そのモジュールのチームベースのパーミッションに関連付けられているデータ (例: この機能を使用したプロセスの定義やプロセス) が元に戻されます。これには、そのモジュールの「所有者および選択したチーム」オプションを使用したロールや、そのモジュールのレコードに関連するチームベースのパーミッションデータが含まれます。
 モジュールのチームベースのパーミッションを無効化した後には、クイックリペア＆再構築ツールを使用してシステムのキャッシュをクリアにすることを推奨します。

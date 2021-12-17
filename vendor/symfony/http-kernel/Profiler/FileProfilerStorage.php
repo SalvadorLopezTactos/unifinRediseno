@@ -30,11 +30,9 @@ class FileProfilerStorage implements ProfilerStorageInterface
      *
      * Example : "file:/path/to/the/storage/folder"
      *
-     * @param string $dsn The DSN
-     *
      * @throws \RuntimeException
      */
-    public function __construct($dsn)
+    public function __construct(string $dsn)
     {
         if (0 !== strpos($dsn, 'file:')) {
             throw new \RuntimeException(sprintf('Please check your configuration. You are trying to use FileStorage with an invalid dsn "%s". The expected format is "file:/path/to/the/storage/folder".', $dsn));
@@ -118,7 +116,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
     public function read($token)
     {
         if (!$token || !file_exists($file = $this->getFilename($token))) {
-            return null;
+            return;
         }
 
         return $this->createProfileFromData($token, unserialize(file_get_contents($file)));
@@ -146,7 +144,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
         // when there are errors in sub-requests, the parent and/or children tokens
         // may equal the profile token, resulting in infinite loops
         $parentToken = $profile->getParentToken() !== $profileToken ? $profile->getParentToken() : null;
-        $childrenToken = array_filter(array_map(function ($p) use ($profileToken) {
+        $childrenToken = array_filter(array_map(function (Profile $p) use ($profileToken) {
             return $profileToken !== $p->getToken() ? $p->getToken() : null;
         }, $profile->getChildren()));
 
@@ -229,7 +227,7 @@ class FileProfilerStorage implements ProfilerStorageInterface
         $position = ftell($file);
 
         if (0 === $position) {
-            return null;
+            return;
         }
 
         while (true) {

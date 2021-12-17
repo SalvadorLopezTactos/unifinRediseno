@@ -63,11 +63,15 @@ class FormulaHelper
                 case "date":
                 case "datetime":
                 case "datetimecombo":
+                case "service-enddate":
                     $fieldArray[$fieldName] = array($fieldName, 'date');
                     break;
                 case "link":
                     if ($includeLinks)
                         $fieldArray[$fieldName] = array($fieldName, 'relate');
+                    break;
+                case "multienum":
+                    $fieldArray[$fieldName] = array($fieldName, 'enum');
                     break;
                 default:
                     //Do Nothing

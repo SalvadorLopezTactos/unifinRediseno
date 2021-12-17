@@ -67,6 +67,7 @@ class SugarFieldExpression extends GenericExpression
 
                 return $date;
             case 'date':
+            case 'service-enddate':
                 if (empty($this->context->$fieldName)) {
                     return false;
                 }

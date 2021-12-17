@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => '会议列表仪表板',
     'LBL_MEETINGS_RECORD_DASHBOARD' => '会议记录仪表板',
+    'LBL_LEAD_GUESTS' => '潜在客户宾客',
+    'LBL_CONTACT_GUESTS' => '联系人宾客',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => '会议焦点抽屉',
 
 	'ERR_DELETE_RECORD' => '必须指定记录编号才能删除会议。',
 	'LBL_ACCEPT_THIS'=>'接受？',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => '指示',
 	'LBL_LIST_DUE_DATE'=>'截止日期',
 	'LBL_LIST_FORM_TITLE' => '会议列表',
-	'LBL_LIST_MY_MEETINGS' => '我的会议',
+    'LBL_LIST_MY_MEETINGS' => '我的会议',
     'LBL_MY_SCHEDULED_MEETINGS' => '我已计划的会议',
+    'LBL_GUEST_MEETINGS' => '我的会议（作为宾客）',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => '已安排会议（作为宾客）',
 	'LBL_LIST_RELATED_TO' => '关联到',
 	'LBL_LIST_STATUS'=>'状态',
 	'LBL_LIST_SUBJECT' => '主题',

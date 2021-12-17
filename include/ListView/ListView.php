@@ -879,16 +879,15 @@ function displayArrow() {
  * All Rights Reserved.
  * Contributor(s): ______________________________________.
 */
- function getOffset($localVarName) {
- 	if($this->query_where_has_changed || isset($GLOBALS['record_has_changed'])) {
- 		$this->setSessionVariable($localVarName,"offset", 0);
- 	}
-	$offset = $this->getSessionVariable($localVarName,"offset");
-	if(isset($offset)) {
-		return $offset;
-	}
-	return 0;
-}
+    public function getOffset($localVarName)
+    {
+        if ($this->query_where_has_changed || isset($GLOBALS['record_has_changed'])) {
+            $this->setSessionVariable($localVarName, "offset", 0);
+        }
+        $offset = $this->getSessionVariable($localVarName, "offset");
+
+        return is_numeric($offset) ? (int) $offset : $offset;
+    }
 
 /**INTERNAL FUNCTION sets the offset in the session
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
@@ -1051,7 +1050,6 @@ function getUserVariable($localVarName, $varName) {
 
 
     function processUnionBeans($sugarbean, $subpanel_def, $html_var = 'CELL') {
-
 		$last_detailview_record = $this->getSessionVariable("detailview", "record");
 		if(!empty($last_detailview_record) && $last_detailview_record != $sugarbean->id){
 			$GLOBALS['record_has_changed'] = true;
@@ -1118,6 +1116,7 @@ function getUserVariable($localVarName, $varName) {
             $response = SugarBean::get_union_related_list($sugarbean,$this->sortby, $this->sort_order, $this->query_where, $current_offset, -1,-1,$this->query_limit,$subpanel_def);
             $this->response =& $response;
         }
+
         $list = $response['list'];
         $row_count = $response['row_count'];
         $next_offset = $response['next_offset'];
@@ -1333,21 +1332,6 @@ function getUserVariable($localVarName, $varName) {
 
             $end_record = $end_record-1;
 
-            echo "<script>
-                function select_dialog() {
-                	var \$dialog = \$('<div></div>')
-					.html('<a style=\'width: 150px\' name=\"thispage\" class=\'menuItem\' onmouseover=\'hiliteItem(this,\"yes\");\' onmouseout=\'unhiliteItem(this);\' onclick=\'if (document.MassUpdate.select_entire_list.value==1){document.MassUpdate.select_entire_list.value=0;sListView.check_all(document.MassUpdate, \"mass[]\", true, $this->records_per_page)}else {sListView.check_all(document.MassUpdate, \"mass[]\", true)};\' href=\'javascript:void(0)\'>{$this->local_app_strings['LBL_LISTVIEW_OPTION_CURRENT']}&nbsp;&#x28;{$this->records_per_page}&#x29;&#x200E;</a>"
-                . "<a style=\'width: 150px\' name=\"selectall\" class=\'menuItem\' onmouseover=\'hiliteItem(this,\"yes\");\' onmouseout=\'unhiliteItem(this);\' onclick=\'sListView.check_entire_list(document.MassUpdate, \"mass[]\",true,{$row_count});\' href=\'javascript:void(0)\'>{$this->local_app_strings['LBL_LISTVIEW_OPTION_ENTIRE']}&nbsp;&#x28;{$row_count}&#x29;&#x200E;</a>"
-                . "<a style=\'width: 150px\' name=\"deselect\" class=\'menuItem\' onmouseover=\'hiliteItem(this,\"yes\");\' onmouseout=\'unhiliteItem(this);\' onclick=\'sListView.clear_all(document.MassUpdate, \"mass[]\", false);\' href=\'javascript:void(0)\'>{$this->local_app_strings['LBL_LISTVIEW_NONE']}</a>')
-					.dialog({
-						autoOpen: false,
-						width: 150
-					});
-					\$dialog.dialog('open');
-
-                }
-                </script>";
-
             if($this->show_select_menu)
             {
                 $total_label = "";
@@ -1363,8 +1347,6 @@ function getUserVariable($localVarName, $varName) {
                 }
                 echo "<input type='hidden' name='show_plus' value='{$this->show_plus}'>\n";
 
-                //Bug#52931: Replace with actionMenu
-                //$select_link = "<a id='select_link' onclick='return select_dialog();' href=\"javascript:void(0)\">".$this->local_app_strings['LBL_LINK_SELECT']."&nbsp;".SugarThemeRegistry::current()->getImage('MoreDetail', 'border=0', 11, 7, '.png', $app_strings['LBL_MOREDETAIL'])."</a>";
                 $menuItems = array(
                     "<input title=\"".$app_strings['LBL_SELECT_ALL_TITLE']."\" type='checkbox' class='checkbox massall' name='massall' id='massall' value='' onclick='sListView.check_all(document.MassUpdate, \"mass[]\", this.checked);' /><a href='javascript: void(0);'></a>",
                     "<a  name='thispage' id='button_select_this_page' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' onclick='if (document.MassUpdate.select_entire_list.value==1){document.MassUpdate.select_entire_list.value=0;sListView.check_all(document.MassUpdate, \"mass[]\", true, $pageTotal)}else {sListView.check_all(document.MassUpdate, \"mass[]\", true)};' href='#'>{$app_strings['LBL_LISTVIEW_OPTION_CURRENT']}&nbsp;&#x28;{$pageTotal}&#x29;&#x200E;</a>",
@@ -1607,7 +1589,7 @@ function getUserVariable($localVarName, $varName) {
             }
             //ADD OFFSET TO ARRAY
 
-                $fields['OFFSET'] = ($offset + $count + 1);
+            $fields['OFFSET'] = is_numeric($offset) ? ($offset + $count + 1) : $offset;
 
             $fields['STAMP'] = $timeStamp;
             if($this->shouldProcess) {
@@ -1679,6 +1661,15 @@ function getUserVariable($localVarName, $varName) {
                         'buttons' => array($delete),
                     ), $this);
                 }
+
+                /* escaped fields values to use in some places in XTemplates to prevent XSS
+                   {FIELD|htmlspecialchars} does not work in XTemplates. */
+                $fields['ESCAPED'] = array_map(
+                    function ($value) {
+                        return is_string($value) ? htmlspecialchars($value, ENT_QUOTES, 'UTF-8') : $value;
+                    },
+                    $fields
+                );
 
                 $this->xTemplate->assign($html_varName, $fields);
                 $aItem->setupCustomFields($aItem->module_dir);

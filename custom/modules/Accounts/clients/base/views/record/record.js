@@ -308,7 +308,7 @@
         this.model.addValidationTask('CreditAutoUP', _.bind(this.requeridosCAUP, this));
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
-        //this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+        this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
@@ -2818,7 +2818,7 @@
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
-        if ((this.model.get('tipo_registro_cuenta_c')=="2" && (this.model.get('subtipo_registro_cuenta_c')=='8' ||this.model.get('subtipo_registro_cuenta_c')=='9' 
+        if ((this.model.get('tipo_registro_cuenta_c')=="2" && (this.model.get('subtipo_registro_cuenta_c')=='8' ||this.model.get('subtipo_registro_cuenta_c')=='9'
         ||this.model.get('subtipo_registro_cuenta_c')=='10' ||this.model.get('subtipo_registro_cuenta_c')=='12')) || this.model.get('tipo_registro_cuenta_c')=="3") {
                     if (_.isEmpty(this.model.get('email'))) {
                         errors['email'] = errors['email'] || {};
@@ -2828,7 +2828,7 @@
                         for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
                             if (this.oTelefonos.telefono[i].estatus=='Activo') {
                                 validPhone= true;
-                                
+
                             }
                         }
                         if (validPhone==false){
@@ -2836,7 +2836,7 @@
                             errors['account_telefonos'] = errors['account_telefonos'] || {};
                             errors['account_telefonos'].required = true;
                             }
-                    
+
         }else if(this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5'){
                     if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
                         app.alert.show("Correo requerido", {
@@ -5971,7 +5971,7 @@
                         errorLM +="Responsable de Validación 1 <br>";
                         faltantelm += 1;
                     }
-                    
+
                     for(var i = 0; i < contexto_cuenta.datacondiciones.records.length; i++) {
                         if ( contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value
                             && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value
@@ -6023,12 +6023,12 @@
                             faltantelm += 1;
                         }
                     }
-                        
+
                     /*if ($('.chk_l_nv')[0].checked == true && selectlmotivo.value == '' && (selectlm.value =="4" || selectlm.value =="5")) {
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                   
+
                 }
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
@@ -6167,7 +6167,7 @@
                             $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             validador2 = true;
                         }
-                    }   
+                    }
                 }
                 if(motivo_flag){
                         errorLM +="Motivo <br>";
@@ -6197,7 +6197,7 @@
                     }
                 }
             }
-            
+
             if (faltantelm > 0) {
                 app.alert.show("Faltantes No viable - Lead Management", {
                     level: "error",
@@ -6651,7 +6651,7 @@
                         $('.list_u_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                         errorLM +="Responsable de Validación 1 <br>";
-                    }         
+                    }
 
                     for(var i = 0; i < this.datacondiciones.records.length; i++) {
                         if ( this.datacondiciones.records[i].condicion == selectlm.value
@@ -6807,7 +6807,7 @@
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
 
 
-        if ($('.list_u_canal').select2('val') == "0"  && (userprod.includes('8') || userprod.includes('9'))) {
+        if ($('.list_u_canal').select2('val') == "0"  && userprod.includes('8')) {
             $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
             faltantesUniclickCanal += 1;
         }
@@ -7472,13 +7472,13 @@
 				readonly = false;
 			}
         });
-		
+
 		Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
             if(value == idUser){
 				readonly = false;
 			}
         });
-		
+
 		if(readonly){
 			this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
 		}

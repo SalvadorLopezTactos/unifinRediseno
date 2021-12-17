@@ -100,7 +100,7 @@ sortDirection = (pref.direction == 'ASC') ? YAHOO.widget.DataTable.CLASS_ASC : Y
 fieldsTable.sortColumn(fieldsTable.getColumn(pref.key), sortDirection);
 {/if}
 
-ModuleBuilder.module = '{$module->name}';
+ModuleBuilder.module = '{$moduleName}';
 ModuleBuilder.MBpackage = '{$package->name}';
 ModuleBuilder.helpRegisterByID('studiofields', 'input');
 {if $package->name != 'studio'}

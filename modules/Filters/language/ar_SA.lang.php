@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'السنة القادمة',
     'LBL_OPEN_ISSUES' => 'فتح {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'التي تم حلها مؤخرًا',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'إنشاء عامل تصفية',
+    'LBL_ERROR_FILTER_EMPTY' => 'الرجاء إضافة معايير تصفية.',
+    'LBL_ADD_FILTER' => 'إضافة معايير',
+    'LBL_FILTER_NAME' => 'اسم عامل التصفية',
+    'LBL_FILTER_FIELD' => 'الحقل',
+    'LBL_FILTER_OPERATOR' => 'المعامل',
+    'LBL_FILTER_VALUE' => 'القيمة',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'حفظ إلى تطبيق سطح المكتب',
+    'LBL_FILTER_LOCAL' => 'عامل التصفية المحلي',
 );

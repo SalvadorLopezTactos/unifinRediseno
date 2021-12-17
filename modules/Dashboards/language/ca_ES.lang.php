@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Tots els quadres de comandament pel mòdul {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Tots els quadres de comandament per la vista {{vista}} del mòdul {{module}}',
     'LBL_COPY_OF' => 'Còpia de {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'No es poden suprimir els quadres de comandament dels calaixos centrats.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Crea quadre de comandament',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

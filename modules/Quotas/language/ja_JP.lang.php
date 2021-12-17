@@ -25,7 +25,7 @@ $mod_strings = array (
   'LBL_QUOTA' => 'ノルマ:',
   'LBL_ADJUSTED' => '調整済',
   
-  'LBL_DIRECT_REPORT' => '報告先',
+  'LBL_DIRECT_REPORT' => '上司',
   'LBL_QUOTA_AMOUNT' => 'ノルマ金額',
   'LBL_LAST_MODIFIED' => '最終更新日',
   'LBL_COMMIT_STATUS' => '確定状況',

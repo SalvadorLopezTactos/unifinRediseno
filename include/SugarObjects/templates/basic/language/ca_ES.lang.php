@@ -31,6 +31,7 @@ $mod_strings = array(
  'LBL_REMOVE' => 'Suprimir',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modificat per nom',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Creat pel nom',
 
     'LBL_COMMENTLOG' => 'Comment Log',
 );

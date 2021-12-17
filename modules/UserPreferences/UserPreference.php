@@ -106,6 +106,9 @@ class UserPreference extends SugarBean
             return $sugar_config['default_date_format'];
         if ( $name == 'timef' )  // Use default time format from Admin panel (Bug57252)
             return $sugar_config['default_time_format'];
+        if ($name == 'currency') {
+            return $sugar_config['default_currency_name'];
+        }
 
         // First check for name matching $sugar_config variable
         if ( isset($sugar_config[$name]) )

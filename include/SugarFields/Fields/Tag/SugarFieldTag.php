@@ -118,7 +118,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
         $q->select(array('id', 'name', 'name_lower'));
         $q->from($tagBean)
           ->where()
-          ->equals('name_lower', strtolower($tagName));
+          ->equals('name_lower', sugarStrToLower($tagName));
         $result = $q->execute();
 
         // If there is a result for this tag name, send back the bean for it
@@ -200,7 +200,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
                 }
 
                 $tagName = trim($tagName);
-                $changedTags[strtolower($tagName)] = $tagName;
+                $changedTags[sugarStrToLower($tagName)] = $tagName;
             }
         }
         return $changedTags;
@@ -217,7 +217,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
         $originalTags = array();
         if (!empty($currRelBeans)) {
             foreach ($currRelBeans as $tagId => $tagRecord) {
-                $originalTags[strtolower($tagRecord->name)] = $tagRecord->name;
+                $originalTags[sugarStrToLower($tagRecord->name)] = $tagRecord->name;
             }
         }
         return $originalTags;

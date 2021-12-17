@@ -74,7 +74,11 @@ addForm('popup_form');
                 {html_options name="type" id="type"  options=$field_types selected=$vardef.type onchange='ModuleBuilder.moduleLoadField("", this.options[this.selectedIndex].value);'}
                 {sugar_help text=$mod_strings.LBL_POPHELP_FIELD_DATA_TYPE FIXX=250 FIXY=80}
             {else}
-                {$field_types[$vardef.type]}
+                {if !empty($display_type)}
+                    {$display_type}
+                {else}
+                    {$field_types[$vardef.type]}
+                {/if}
             {/if}
             {if empty($field_types[$vardef.type]) && !empty($vardef.type)}({$vardef.type}){/if}
             <input type='hidden' name='type' value={$vardef.type} />

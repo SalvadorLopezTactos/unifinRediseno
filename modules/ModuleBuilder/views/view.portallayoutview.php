@@ -11,7 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
-
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class ViewPortalLayoutView extends ViewLayoutView
 {
@@ -29,7 +29,7 @@ class ViewPortalLayoutView extends ViewLayoutView
 	protected function _getModuleTitleParams($browserTitle = false)
 	{
 	    global $mod_strings;
-	    
+
     	return array(
     	   translate('LBL_MODULE_NAME','Administration'),
     	   ModuleBuilderController::getModuleTitle(),
@@ -37,7 +37,7 @@ class ViewPortalLayoutView extends ViewLayoutView
     }
 
 	// DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
-	function preDisplay() 
+    public function preDisplay()
 	{
 	}
 
@@ -50,14 +50,14 @@ class ViewPortalLayoutView extends ViewLayoutView
 	{
 	    $this->parser = ParserFactory::getParser(MB_PORTAL . strtolower($this->editLayout),$this->editModule,null,null,MB_PORTAL);
 		$smarty = new Sugar_Smarty();
-		
+
 		//Add in the module we are viewing to our current mod strings
 		global $mod_strings, $current_language;
 		$editModStrings = return_module_language($current_language, $this->editModule);
 		$mod_strings = sugarArrayMerge($editModStrings, $mod_strings);
 		$smarty->assign('mod', $mod_strings);
 		$smarty->assign('MOD', $mod_strings);
-		
+
 		// assign buttons
 		$images = array('icon_save' => 'studio_save', 'icon_publish' => 'studio_publish', 'icon_address' => 'icon_Address', 'icon_emailaddress' => 'icon_EmailAddress', 'icon_phone' => 'icon_Phone');
 		foreach($images as $image=>$file) {
@@ -95,8 +95,15 @@ class ViewPortalLayoutView extends ViewLayoutView
 
 		$smarty->assign('buttons', $html);
 
+        $available_fields = $this->parser->getAvailableFields();
+        foreach ($available_fields as $key => $value) {
+            if (!AccessControlManager::instance()->allowFieldAccess($this->editModule, $value['name'])) {
+                unset($available_fields[$key]);
+            }
+        }
+
 		// assign fields and layout
-		$smarty->assign('available_fields', $this->parser->getAvailableFields());
+        $smarty->assign('available_fields', $available_fields);
         $smarty->assign ( 'field_defs', $this->parser->getFieldDefs () ) ;
 		$smarty->assign('layout', $this->parser->getLayout());
 		$smarty->assign('view_module', $this->editModule);

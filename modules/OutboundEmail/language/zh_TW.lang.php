@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => '發送電子郵件帳戶',
     'LBL_MODULE_NAME_SINGULAR' => '發送電子郵件帳戶',
+    'LBL_STATUS' => '狀態',
     'LBL_MAIL_SENDTYPE' => '郵件傳送代理',
     'LBL_MAIL_SMTPSERVER' => '伺服器',
     'LBL_MAIL_SMTPPORT' => '連接埠',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => '這是系統帳戶。',
     'LBL_EMAIL_ADDRESS_ID' => '電子郵件地址 ID',
     'LBL_TYPE' => '類型',
+    'LBL_AUTHORIZED_ACCOUNT' => '授權的電子郵件地址',
+    'LBL_FROM_EMAIL_ADDRESS' => '發件者電子郵件地址',
     'LBL_REPLY_TO_NAME' => '收件者名稱',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => '收件者電子郵件地址',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '收件者電子郵件ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => '收件者電子郵件地址',
     'LBL_PRIMARY_TEAM' => '主要小組',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '電子郵件設置焦點抽屜',
 );

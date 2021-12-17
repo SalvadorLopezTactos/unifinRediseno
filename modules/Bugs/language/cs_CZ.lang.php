@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Řídicí panel seznamu chyb',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Řídicí panel záznamů chyb',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na chyby',
 
   'LBL_MODULE_NAME' => 'Chyby',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Chyba:',

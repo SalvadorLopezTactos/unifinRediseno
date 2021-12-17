@@ -86,7 +86,8 @@ function verify_data(button) {
 				errorMessage += "\\n$err_smtpport";
 	        }
 	        if (mailsmtpauthreq.checked) {
-		        if(trim(document.getElementById('mail_smtpuser').value) == "") {
+		        if(trim(document.getElementById('mail_smtpuser').value) == "" &&
+                    document.getElementById('mail_authtype').value !== 'oauth2') {
 					isError = true;
 					errorMessage += "\\n$err_smtpuser";
 		        }
@@ -112,7 +113,7 @@ function add_checks(f) {
 	if (f.mail_sendtype.value == "SMTP") {
 		addToValidate('ConfigureSettings', 'mail_smtpserver', 'varchar', 'true', '{$mod_strings['LBL_MAIL_SMTPSERVER']}');
 		addToValidate('ConfigureSettings', 'mail_smtpport', 'int', 'true', '{$mod_strings['LBL_MAIL_SMTPPORT']}');
-		if (f.mail_smtpauth_req.checked) {
+		if (f.mail_smtpauth_req.checked && f.mail_authtype !== 'oauth2') {
 			addToValidate('ConfigureSettings', 'mail_smtpuser', 'varchar', 'true', '{$mod_strings['LBL_MAIL_SMTPUSER']}');
 			addToValidate('ConfigureSettings', 'mail_smtppass', 'varchar', 'true', '{$mod_strings['LBL_MAIL_SMTPPASS']}');
 		}

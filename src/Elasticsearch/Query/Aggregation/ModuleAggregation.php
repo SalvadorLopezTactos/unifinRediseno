@@ -28,7 +28,7 @@ class ModuleAggregation extends TermsAggregation
     public function __construct($size = 5)
     {
         $this->setOptions(array(
-            'field' => '_type',
+            'field' => Mapping::MODULE_NAME_FIELD,
             'size' => $size,
             'order' => array('_count', 'desc'),
         ));

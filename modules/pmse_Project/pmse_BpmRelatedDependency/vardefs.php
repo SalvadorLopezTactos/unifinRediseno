@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmRelatedDependency'] = array(
     'table'=>'pmse_bpm_related_dependency',
+    'archive' => false,
     'audited'=>false,
     'activity_enabled'=>false,
     'duplicate_merge'=>true,

@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Dashboard de lista de chamadas',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Dashboard de registo de chamadas',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de Chamadas',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Chamadas Telefónicas',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Utilizador Atribuído',
     'LBL_LIST_MY_CALLS' => 'As Minhas Chamadas Telefónicas',
     'LBL_MY_SCHEDULED_CALLS' => 'As minhas chamadas ao Registo',
+    'LBL_GUEST_CALLS' => 'Minhas chamadas como Convidado',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Chamadas agendadas como Convidado',
     'LBL_SELECT_FROM_DROPDOWN' => 'Por favor faça primeiro uma seleção da lista Referente A.',
 	'LBL_ASSIGNED_TO_NAME' => 'Atribuído a',
 	'LBL_ASSIGNED_TO_ID' => 'Utilizador Atribuído',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Cancelar',
     'LBL_EMPTY_SEARCH_RESULT' => 'Não foram encontrados resultados. Por favor criar um convidado abaixo.',
     'LBL_NO_ACCESS' => 'Não tem permissões para criar $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'ID de contacto do Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Tipo de Repetição',
     'LBL_REPEAT_INTERVAL' => 'Intervalo de Repetição',
     'LBL_REPEAT_END' => 'Fim',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Chamada com {{{this}}}',
     'LBL_SEND_INVITES' => 'Enviar convites',
     'LBL_REMINDER_TITLE' => 'Chamada:',
+    'LBL_CALL_RECORDING_URL' => 'URL de gravação',
+    'LBL_CALL_RECORDING' => 'Gravação',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Criou com sucesso o {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> em {{formatDate date_start}}.',

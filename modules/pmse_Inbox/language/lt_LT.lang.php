@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Process Management',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Unattended Processes',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ procesai',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Procesų įrašų ataskaitų sritis',
+
     'LBL_CAS_ID' => 'Process Number',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "task has been",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Proceso dizaino peržiūra',
     'LBL_PROJECT_RUN_ORDER' => 'Vykdyti užsakymą',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Dabartinė veikla',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Data pakeista',
+    'LBL_DATE_ENTERED' => 'Data sukurta',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Ar tikrai norite pareikšti teises į šį procesą?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Teisė į procesą buvo sėkmingai pareikšta',
 );
 

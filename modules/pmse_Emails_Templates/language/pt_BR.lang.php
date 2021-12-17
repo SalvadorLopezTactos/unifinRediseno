@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Modelos de e-mail do processo',
     'LBL_MODULE_NAME_SINGULAR' => 'Modelo de e-mail de processo',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco nos modelos de e-mail de processo',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Painel de registro de modelos de e-mail de processo',
     'LNK_LIST' => 'Visualizar modelos de e-mail de processo',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Criar Modelo de E-mail de Processos',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importar Modelos de E-mail de Processos',

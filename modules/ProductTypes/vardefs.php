@@ -11,6 +11,7 @@
  */
 $dictionary['ProductType'] = array(
     'table' => 'product_types',
+    'archive' => false,
     'favorites' => false,
     'comment' => 'Types of products',
     'fields' => array (

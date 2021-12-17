@@ -10,10 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
-	'unified_search' => true, 'full_text_search' => true, 'unified_search_default_enabled' => true,
-	'comment' => 'Meeting activities'
-                               ,'fields' => array (
+$dictionary['Meeting'] = array(
+    'table' => 'meetings',
+    'audited' => true,
+    'activity_enabled'=>true,
+    'unified_search' => true,
+    'full_text_search' => true,
+    'unified_search_default_enabled' => true,
+    'comment' => 'Meeting activities',
+    'fields' => array (
   'name' =>
   array (
     'name' => 'name',
@@ -470,6 +475,15 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'source'=>'non-db',
 		'vname'=>'LBL_NOTES',
   ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'meetings_messages',
+            'module'=>'Messages',
+            'bean_name'=>'Message',
+            'source'=>'non-db',
+            'vname'=>'LBL_MESSAGES',
+        ],
 	'contact_id' => array(
 		'name' => 'contact_id',
         'type' => 'relate',
@@ -730,7 +744,18 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 	,'meetings_notes' => array('lhs_module'=> 'Meetings', 'lhs_table'=> 'meetings', 'lhs_key' => 'id',
 							  'rhs_module'=> 'Notes', 'rhs_table'=> 'notes', 'rhs_key' => 'parent_id',
 							  'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',
-							  'relationship_role_column_value'=>'Meetings')
+                              'relationship_role_column_value' => 'Meetings'),
+     'meetings_messages' => [
+         'lhs_module'=> 'Meetings',
+         'lhs_table'=> 'meetings',
+         'lhs_key' => 'id',
+         'rhs_module'=> 'Messages',
+         'rhs_table'=> 'messages',
+         'rhs_key' => 'parent_id',
+         'relationship_type'=>'one-to-many',
+         'relationship_role_column'=>'parent_type',
+         'relationship_role_column_value'=>'Meetings',
+     ],
 	),
     'acls' => array('SugarACLOpi' => true, 'SugarACLStatic' => true),
 

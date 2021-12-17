@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'แก้ไขโดย ID',
     'LBL_EXPORT_CREATED_BY' => 'สร้างโดย ID',
     'LBL_EXPORT_TYPE_NAME' => 'ชื่อประเภท',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'สัญญาระบบลิ้นชัก',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนสัญญา',
 );

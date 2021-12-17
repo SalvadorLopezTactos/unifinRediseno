@@ -717,11 +717,14 @@ class Link2 {
      */
     protected function getRelatedBean($id = false)
     {
-        $params = array('encode' => true, 'deleted' => true);
-        // Set disable_row_level_security to true, so we can load the related bean
-        // even when the bean doesn't belong to the users teams (for flav=pro and above)
-        $params['disable_row_level_security'] = true;
-        return BeanFactory::getBean($this->getRelatedModuleName(), $id, $params);
+        return BeanFactory::getBean($this->getRelatedModuleName(), $id, [
+            'encode' => true,
+            'deleted' => true,
+
+            // Set disable_row_level_security to true, so we can load the related bean
+            // even when the bean doesn't belong to the users teams
+            'disable_row_level_security' => true,
+        ]);
     }
 
     public function &__get($name)

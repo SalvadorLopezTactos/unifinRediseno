@@ -169,17 +169,24 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                 ),
                 array(
                     'name' => 'date_closed',
-                    'related_fields' => array(
-                        'date_closed_timestamp'
-                    )
+                    'type' => 'date-cascade',
+                    'label' => 'LBL_LIST_DATE_CLOSED',
+                    'disable_field' => array(
+                        'total_revenue_line_items',
+                        'closed_revenue_line_items',
+                    ),
+                ),
+                array(
+                    'name' => 'sales_status',
                 ),
                 array(
                     'name' => 'sales_stage',
-                ),
-                'probability',
-                array(
-                    'name' => 'commit_stage',
-                    'span' => 6
+                    'type' => 'enum-cascade',
+                    'label' => 'LBL_SALES_STAGE',
+                    'disable_field' => array(
+                        'total_revenue_line_items',
+                        'closed_revenue_line_items',
+                    ),
                 ),
                 array(
                     'name' => 'amount',
@@ -195,6 +202,20 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'base_rate_field' => 'base_rate',
                 ),
                 array(
+                    'name' => 'service_start_date',
+                    'type' => 'date-cascade',
+                    'label' => 'LBL_SERVICE_START_DATE',
+                    'disable_field' => 'service_open_revenue_line_items',
+                    'related_fields' => array(
+                        'service_open_revenue_line_items',
+                    ),
+                ),
+                'probability',
+                array(
+                    'name' => 'commit_stage',
+                    'span' => 6,
+                ),
+                array(
                     'name' => 'best_case',
                     'type' => 'currency',
                     'label' => 'LBL_BEST',
@@ -206,6 +227,30 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                 ),
+                [
+                    'name' => 'service_duration',
+                    'type' => 'fieldset-cascade',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'css_class' => 'service-duration-field',
+                    'fields' => [
+                        [
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ],
+                        [
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ],
+                    ],
+                    'related_fields' => [
+                        'service_duration_value',
+                        'service_duration_unit',
+                        'service_open_flex_duration_rlis',
+                    ],
+                    'disable_field' => 'service_open_flex_duration_rlis',
+                ],
                 array(
                     'name' => 'worst_case',
                     'type' => 'currency',
@@ -218,6 +263,19 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                 ),
+                [
+                    'name' => 'commentlog',
+                    'label' => 'LBL_COMMENTLOG',
+                    'displayParams' => [
+                        'type' => 'commentlog',
+                        'fields' => [
+                            'entry',
+                            'date_entered',
+                            'created_by_name',
+                        ],
+                        'max_num' => 100,
+                    ],
+                ],
                 array(
                     'name' => 'tag',
                     'span' => 12,
@@ -235,7 +293,6 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                 'opportunity_type',
                 'renewal_parent_name',
                 'lead_source',
-                'campaign_name',
                 array(
                     'name' => 'description',
                     'span' => 12,
@@ -245,6 +302,7 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_entered_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
                     'fields' => array(
@@ -263,6 +321,7 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_modified_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
                     'fields' => array(

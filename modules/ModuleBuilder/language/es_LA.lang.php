@@ -602,6 +602,7 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
     'LBL_PORTAL_CONFIGURE' => 'Configure el Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Habilitar portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Habilitar la búsqueda antes de abrir un caso',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permitir que usuarios del portal cierren el caso',
     'LBL_PORTAL_THEME' => 'Tema del Portal',
     'LBL_PORTAL_ENABLE' => 'Habilitar',
     'LBL_PORTAL_SITE_URL' => 'El sitio del portal está disponible en:',
@@ -794,7 +795,15 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione esta opción para utilizar este campo para la búsqueda de registros desde la Búsqueda Global en este módulo.',
+'LBL_POPHELP_REQUIRED'=>"Cree una fórmula para determinar si este campo es obligatorio en presentaciones.<br/>"
+    . "Los campos obligatorios seguirán la fórmula en la vista móvil basada en navegador, <br/>"
+    . "pero no seguirán las fórmula en las aplicaciones nativas, como Sugar Mobile para iPhone. <br/>"
+    . "Estos no seguirán la fórmula en el Portal de Autoservicio de Sugar.",
+'LBL_POPHELP_READONLY'=>"Cree una fórmula para determinar si este campo es de solo lectura en diseños.<br/>"
+        . "Los campos de solo lectura seguirán la fórmula en la vista móvil basada en navegador, <br/>"
+        . "pero no seguirán la fórmula en las aplicaciones nativas, como Sugar Mobile para iPhone. <br/>"
+        . "Estos no seguirán la fórmula en el Portal de Autoservicio de Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione usar este campo al buscar registros usando Búsqueda Global en este módulo.',
 //Revert Module labels
 'LBL_RESET' => 'Restablecer',
 'LBL_RESET_MODULE' => 'Restablecer Módulo',
@@ -829,6 +838,7 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
                 'encrypt'=>'Encriptado',
                 'datetimecombo' =>'Fecha y hora',
                 'decimal'=>'Decimal',
+                'autoincrement' => 'Incremento automático',
 ),
 'labelTypes' => array(
     "" => "Etiquetas de uso frecuente",
@@ -846,4 +856,5 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
 'LBL_ALL_MODULES'=>'Todos los Módulos',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relacionado {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copiar del diseño',
+'LBL_RELATIONSHIP_TYPE' => 'Relación',
 );

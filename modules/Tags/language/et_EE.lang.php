@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Looja ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Looja kasutajanimi',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Määratud kasutajanimi',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Siltide fookuse sahtel',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Siltide kirjete töölaud',
+    'LBL_MY_TAGS' => 'Minu sildid',
+    'LBL_MY_FAVORITE_TAGS' => 'Minu lemmiksildid',
 );

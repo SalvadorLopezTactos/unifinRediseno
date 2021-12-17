@@ -348,7 +348,7 @@ function getVarsFromExpression($params)
 
 
 		// get the charAt index $i
-		$char = $params{$i};
+        $char = $params[$i];
 
 		// check for quotes and negate
 		if ( $char == '"' && !$isPrevCharBK )

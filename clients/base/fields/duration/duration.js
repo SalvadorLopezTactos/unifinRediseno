@@ -20,7 +20,15 @@
 ({
     extendsFrom: 'FieldsetField',
 
-    detailViewNames: ['record', 'create', 'create-nodupecheck', 'preview', 'pmse-case'],
+    detailViewNames: [
+        'record',
+        'create',
+        'create-nodupecheck',
+        'create-no-cancel-button',
+        'preview',
+        'pmse-case',
+        'dashablerecord',
+    ],
 
     /**
      * Set default start date time if date_start has not been set. Add custom validation

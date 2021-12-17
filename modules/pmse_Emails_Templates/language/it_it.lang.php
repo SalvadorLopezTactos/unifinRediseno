@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Modelli Email Flusso',
     'LBL_MODULE_NAME_SINGULAR' => 'Modello Email Flusso',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Elabora modelli e-mail Focus Drawer',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Dashboard dei record dei modelli e-mail flussi',
     'LNK_LIST' => 'Visualizza i Modelli Email Flusso',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Crea Modello Email Flusso',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importa Modelli Email Flusso',

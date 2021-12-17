@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'ID modifikátora',
     'LBL_EXPORT_CREATED_BY' => 'Vytvořeno od ID:',
     'LBL_EXPORT_TYPE_NAME' => 'Jméno typu',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na smlouvy',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů smluv',
 );

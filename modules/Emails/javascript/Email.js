@@ -9,6 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+// jscs:disable
 
 var uploads_arr=new Array();
 var uploads_count_map=new Object();
@@ -29,123 +30,123 @@ var lbl_email_attachments_embeded = SUGAR.language.get('app_strings', 'LBL_EMAIL
 
 
 function toggleRawEmail() {
-	var raw = document.getElementById('rawEmail');
-	var button = document.getElementById('rawButton');
+    var raw = document.getElementById('rawEmail');
+    var button = document.getElementById('rawButton');
 
-	if(raw.style.display == '') {
-		raw.style.display = 'none';
-		button.value = showRaw;
-	} else {
-		raw.style.display = '';
-		button.value = hideRaw;
-	}
+    if(raw.style.display == '') {
+        raw.style.display = 'none';
+        button.value = showRaw;
+    } else {
+        raw.style.display = '';
+        button.value = hideRaw;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 ////	DOCUMENT HANDLING HELPERS
 
 function deletePriorAttachment(id) {
-	var rem = document.getElementById('removeAttachment');
+    var rem = document.getElementById('removeAttachment');
 
-	if(rem.value != '') {
-		rem.value += "::";
-	}
-	rem.value += id;
+    if(rem.value != '') {
+        rem.value += "::";
+    }
+    rem.value += id;
 
-	document.getElementById('noteDiv'+id).style.display = 'none';
+    document.getElementById('noteDiv'+id).style.display = 'none';
 }
 
 function setDocument(target, documentId, documentName, docRevId) {
-	if(window.opener.SUGAR.email2) {
-		var idx = window.opener.SUGAR.email2.composeLayout.currentInstanceId;
-		window.opener.SUGAR.email2.composeLayout.setDocument(idx, target, documentId, documentName, docRevId);
-	} else {
-		var docId = window.opener.document.getElementById('documentId' + target);
-		var docName = window.opener.document.getElementById('documentName' + target);
-		var docRevisionId = window.opener.document.getElementById('document' + target);
-	    docId.value = documentId;
-		docName.value = documentName;
-		docRevisionId.value = docRevId;
-	}
-	window.close();
+    if(window.opener.SUGAR.email2) {
+        var idx = window.opener.SUGAR.email2.composeLayout.currentInstanceId;
+        window.opener.SUGAR.email2.composeLayout.setDocument(idx, target, documentId, documentName, docRevId);
+    } else {
+        var docId = window.opener.document.getElementById('documentId' + target);
+        var docName = window.opener.document.getElementById('documentName' + target);
+        var docRevisionId = window.opener.document.getElementById('document' + target);
+        docId.value = documentId;
+        docName.value = documentName;
+        docRevisionId.value = docRevId;
+    }
+    window.close();
 }
 
 function setDocumentToCampaignTemplate(target, documentId, documentName,docRevId, documentType) {
-	var docId = window.opener.document.getElementById('documentId');
-	var docName = window.opener.document.getElementById('documentName');
-	var docRevisionId = window.opener.document.getElementById('docRevId');
-	var docType = window.opener.document.getElementById('documentType');
+    var docId = window.opener.document.getElementById('documentId');
+    var docName = window.opener.document.getElementById('documentName');
+    var docRevisionId = window.opener.document.getElementById('docRevId');
+    var docType = window.opener.document.getElementById('documentType');
 
     docId.value = documentId;
-	docName.value = documentName;
-	docRevisionId.value = docRevId;
-	docType.value = documentType;
-	docName.onchange('docUpload(); form_reset_doc();');
-	window.close();
+    docName.value = documentName;
+    docRevisionId.value = docRevId;
+    docType.value = documentType;
+    docName.onchange('docUpload(); form_reset_doc();');
+    window.close();
 }
 
 function selectDocument(target) {
-	URL="index.php?module=Emails&action=PopupDocuments&to_pdf=true&target=" + target;
-	windowName = 'selectDocument';
-	windowFeatures = 'width=800' + ',height=600' + ',resizable=1,scrollbars=1';
+    URL="index.php?module=Emails&action=PopupDocuments&to_pdf=true&target=" + target;
+    windowName = 'selectDocument';
+    windowFeatures = 'width=800' + ',height=600' + ',resizable=1,scrollbars=1';
 
-	win = SUGAR.util.openWindow(URL, windowName, windowFeatures);
-	if(window.focus) {
-		// put the focus on the popup if the browser supports the focus() method
-		win.focus();
-	}
+    win = SUGAR.util.openWindow(URL, windowName, windowFeatures);
+    if(window.focus) {
+        // put the focus on the popup if the browser supports the focus() method
+        win.focus();
+    }
 }
 
 function addDocument() {
-	for(var i=0;i<10;i++) {
-		var elem = document.getElementById('document'+i);
-		if(elem.style.display == 'none') {
-		  	elem.style.display='block';
-			break;
-		}
-	}
+    for(var i=0;i<10;i++) {
+        var elem = document.getElementById('document'+i);
+        if(elem.style.display == 'none') {
+            elem.style.display='block';
+            break;
+        }
+    }
 }
 
 function deleteDocument(index) {
-	var elem = document.getElementById('document'+index);
-	document.getElementById('documentId'+index).value = "";
-	document.getElementById('documentName'+index).value = "";
-	elem.style.display='none';
+    var elem = document.getElementById('document'+index);
+    document.getElementById('documentId'+index).value = "";
+    document.getElementById('documentName'+index).value = "";
+    elem.style.display='none';
 }
 
 // attachment functions below
 function deleteFile(index) {
-	//get div element
-	var elem = document.getElementById('file'+index);
-	//get upload widget
-	var ea_input = document.getElementById('email_attachment'+index);
+    //get div element
+    var elem = document.getElementById('file'+index);
+    //get upload widget
+    var ea_input = document.getElementById('email_attachment'+index);
 
-	//get the parent node
-	var Parent = ea_input.parentNode;
-	//create replacement node
-	var ea = document.createElement('input');
+    //get the parent node
+    var Parent = ea_input.parentNode;
+    //create replacement node
+    var ea = document.createElement('input');
     ea.setAttribute('id', 'email_attachment' + index);
     ea.setAttribute('name', 'email_attachment' + index);
     ea.setAttribute('tabindex', '120');
     ea.setAttribute('size', '40');
     ea.setAttribute('type', 'file');
 
-	//replace the old node with the new one
+    //replace the old node with the new one
     Parent.replaceChild(ea, ea_input);
 
-	//hide the div element
-	elem.style.display='none';
+    //hide the div element
+    elem.style.display='none';
 
 }
 
 function addFile() {
-	for(var i=0;i<10;i++) {
-		var elem = document.getElementById('file'+i);
-		if(elem.style.display == 'none') {
-		  	elem.style.display='block';
-			break;
-		}
-	}
+    for(var i=0;i<10;i++) {
+        var elem = document.getElementById('file'+i);
+        if(elem.style.display == 'none') {
+            elem.style.display='block';
+            break;
+        }
+    }
 }
 ////	END DOCUMENT HANDLING HELPERS
 ///////////////////////////////////////////////////////////////////////////////
@@ -153,24 +154,24 @@ function addFile() {
 ///// New file upload code
 
 function multiFiles( list_target){
-	// Where to write the list
-	this.list_target = list_target;
-	// How many elements?
-	this.count = 0;
-	this.id = 0;
-	/**
-	 * Add a new file input element
-	 */
-	this.addElement = function( element ){
-		// Make sure it's a file input element
-		if( element.tagName == 'INPUT' && element.type == 'file' ){
-  		    var currCount =this.id++;
-			element.name = 'email_attachment' + currCount;
-		   	element.id   = 'email_attachment' + currCount;
+    // Where to write the list
+    this.list_target = list_target;
+    // How many elements?
+    this.count = 0;
+    this.id = 0;
+    /**
+     * Add a new file input element
+     */
+    this.addElement = function( element ){
+        // Make sure it's a file input element
+        if( element.tagName == 'INPUT' && element.type == 'file' ){
+            var currCount =this.id++;
+            element.name = 'email_attachment' + currCount;
+            element.id   = 'email_attachment' + currCount;
 
-			// Add reference to this object
-			element.multi_selector = this;
-			// What to do when a file is selected
+            // Add reference to this object
+            element.multi_selector = this;
+            // What to do when a file is selected
             element.onchange = function() {
                 var url = 'index.php?to_pdf=1&module=EmailTemplates&action=AttachFiles',
                     new_element;
@@ -193,40 +194,40 @@ function multiFiles( list_target){
                 //display none works fine for FF and IE
                 this.style.display = 'none';
             };
-			// File element counter
-			this.count++;
-			// Most recent element
-			this.current_element = element;
+            // File element counter
+            this.count++;
+            // Most recent element
+            this.current_element = element;
 
-		} else {
-			// This can only be applied to file input elements!
-			alert( 'Error: not a file input element' );
-		};
-	};
+        } else {
+            // This can only be applied to file input elements!
+            alert( 'Error: not a file input element' );
+        };
+    };
 
-	/**
-	 * Add a new row to the list of files
-	 */
-	this.addListRow = function( element ){
-		// Row div
-		var new_row = document.createElement( 'div' );
+    /**
+     * Add a new row to the list of files
+     */
+    this.addListRow = function( element ){
+        // Row div
+        var new_row = document.createElement( 'div' );
 
-		// Delete button
-		var new_row_button_remove = document.createElement( 'input' );
+        // Delete button
+        var new_row_button_remove = document.createElement( 'input' );
         new_row_button_remove.type = 'button';
         new_row_button_remove.value = lbl_remove;
 
-		var new_row_file_name = document.createElement( 'input' );
-		new_row_file_name.type = 'text';
-		new_row_file_name.size = '40';
-		new_row_file_name.disabled=true;
+        var new_row_file_name = document.createElement( 'input' );
+        new_row_file_name.type = 'text';
+        new_row_file_name.size = '40';
+        new_row_file_name.disabled=true;
 
-		var new_row_chk_box = document.createElement( 'input' );
-		new_row_chk_box.setAttribute('id','checkBoxFile[]');
-		new_row_chk_box.setAttribute('name','checkBoxFile[]');
-		new_row_chk_box.type = 'checkbox';
-		new_row_chk_box.checked =false;
-		new_row_chk_box.disabled =true;
+        var new_row_chk_box = document.createElement( 'input' );
+        new_row_chk_box.setAttribute('id','checkBoxFile[]');
+        new_row_chk_box.setAttribute('name','checkBoxFile[]');
+        new_row_chk_box.type = 'checkbox';
+        new_row_chk_box.checked =false;
+        new_row_chk_box.disabled =true;
 
         var new_row_attach_file = document.createElement( 'input' );
         new_row_attach_file.type = 'image';
@@ -249,21 +250,21 @@ function multiFiles( list_target){
         new_row_button_embed.setAttribute("height","16");
         new_row_button_embed.setAttribute("width","16");
 
-		// References
-		new_row.element = element;
+        // References
+        new_row.element = element;
         element.size='40';
 
-		// Delete function
-		new_row_button_remove.onclick = function() {
-			var filePathComponents = this.parentNode.element.value.split("\\"),
+        // Delete function
+        new_row_button_remove.onclick = function() {
+            var filePathComponents = this.parentNode.element.value.split("\\"),
                 fileName = (filePathComponents[filePathComponents.length - 1]),
 
                 // tinymce related
                 tiny = tinyMCE.getInstanceById('body_text'),
                 currValTiny = tiny.getContent();
 
-			// Remove row element from form
-			this.parentNode.element.parentNode.removeChild(this.parentNode.element);
+            // Remove row element from form
+            this.parentNode.element.parentNode.removeChild(this.parentNode.element);
 
             // find instances of the file and set it to ''
             while (currValTiny.indexOf(fileName) !== -1) {
@@ -271,22 +272,22 @@ function multiFiles( list_target){
                 currValTiny = currValTiny.replace(/<img[^<]*QW%%\^%%WQ[^>]*>?/, '');
             }
 
-		    tiny.setContent(currValTiny);
+            tiny.setContent(currValTiny);
 
-			// Remove this row from the list
-			this.parentNode.parentNode.removeChild(this.parentNode);
+            // Remove this row from the list
+            this.parentNode.parentNode.removeChild(this.parentNode);
 
-			// Decrement counter
-			this.parentNode.element.multi_selector.count--;
-			// Re-enable input element (if it's disabled)
-			this.parentNode.element.multi_selector.current_element.disabled = false;
+            // Decrement counter
+            this.parentNode.element.multi_selector.count--;
+            // Re-enable input element (if it's disabled)
+            this.parentNode.element.multi_selector.current_element.disabled = false;
 
-			// Appease Safari
-			// without it Safari wants to reload the browser window
-			// which nixes your already queued uploads
+            // Appease Safari
+            // without it Safari wants to reload the browser window
+            // which nixes your already queued uploads
 
-			return false;
-		};
+            return false;
+        };
 
         // Embed image into the email body template
         new_row_button_embed.onclick = function() {
@@ -309,7 +310,7 @@ function multiFiles( list_target){
             }
         };
 
-		// Set row value
+        // Set row value
         new_row_file_name_tab = element.value.split("\\");
         nbr_elements = new_row_file_name_tab.length;
         new_row_file_name.value = new_row_file_name_tab[nbr_elements-1];
@@ -318,12 +319,12 @@ function multiFiles( list_target){
         new_row.appendChild(imgElement);
         new_row.appendChild(new_row_button_embed);
         new_row.appendChild(new_row_chk_box);
-		new_row.appendChild( new_row_file_name);
-		// Add button
-		new_row.appendChild( new_row_button_remove);
-		// Add it to the list
-		this.list_target.appendChild( new_row );
-	};
+        new_row.appendChild( new_row_file_name);
+        // Add button
+        new_row.appendChild( new_row_button_remove);
+        // Add it to the list
+        this.list_target.appendChild( new_row );
+    };
 };
 
 
@@ -331,24 +332,24 @@ function docUpload() {
 
     //AJAX call begins
     var rets ='';
-	var callback = {
-	    upload: function(r) {
-           rets = YAHOO.lang.JSON.parse(r.responseText);
-	   }
+    var callback = {
+        upload: function(r) {
+            rets = YAHOO.lang.JSON.parse(r.responseText);
+        }
     }
 
-	var url ='index.php?module=EmailTemplates&action=AttachDocuments';
-	YAHOO.util.Connect.asyncRequest('POST', url, callback,null);
+    var url ='index.php?module=EmailTemplates&action=AttachDocuments';
+    YAHOO.util.Connect.asyncRequest('POST', url, callback,null);
     //AJAX call ends
 
-	var element = document.getElementById('documentName');
-	var element1 = document.getElementById('documentId');
+    var element = document.getElementById('documentName');
+    var element1 = document.getElementById('documentId');
     var element2 = document.getElementById('docRevId');
     var element3 = document.getElementById('documentType');
-	var elm = document.createElement('div');
-	elm.setAttribute('id','file'+uploadIndex);
+    var elm = document.createElement('div');
+    elm.setAttribute('id','file'+uploadIndex);
 
-	var sugarDoc = document.createElement('input');
+    var sugarDoc = document.createElement('input');
     sugarDoc.setAttribute('type', 'label');
     sugarDoc.setAttribute('disabled', 'true');
     sugarDoc.setAttribute('font', 'bold');
@@ -362,12 +363,12 @@ function docUpload() {
     var new_row_chk_box = document.createElement( 'input' );
     new_row_chk_box.setAttribute('id','checkBoxDoc'+uploadIndex);
     new_row_chk_box.setAttribute('name','checkBoxDoc'+uploadIndex);
-	new_row_chk_box.type = 'checkbox';
-	new_row_chk_box.checked =false;
+    new_row_chk_box.type = 'checkbox';
+    new_row_chk_box.checked =false;
     new_row_chk_box.disabled='true';
 
 
-	var eah = document.createElement('input');
+    var eah = document.createElement('input');
     eah.setAttribute('id', 'documentId'+uploadIndex);
     eah.setAttribute('name', 'documentId'+uploadIndex);
     eah.setAttribute('tabindex', '120');
@@ -375,7 +376,7 @@ function docUpload() {
     eah.setAttribute('value',element1.value);
 
 
-	var attId = document.createElement('input');
+    var attId = document.createElement('input');
     attId.setAttribute('id', 'docRevId'+uploadIndex);
     attId.setAttribute('name', 'docRevId'+uploadIndex);
     attId.setAttribute('tabindex', '120');
@@ -391,7 +392,7 @@ function docUpload() {
     attType.setAttribute('value',element3.value);
 
 
-	var ea = document.createElement('input');
+    var ea = document.createElement('input');
     ea.setAttribute('id', 'document[]');
     ea.setAttribute('name', 'document[]');
     ea.setAttribute('tabindex', '120');
@@ -404,33 +405,33 @@ function docUpload() {
     eai.setAttribute('type', 'button');
     eai.setAttribute('value', lbl_remove);
     eai.onclick=function(){
-    	var filename = this.parentNode.childNodes[4].value;
-	    	if(filename){
-                var tiny = tinyMCE.getInstanceById('body_text');
-				var currValTiny = tiny.getContent();
-	            while(currValTiny.indexOf(unescape(filename)) != -1){
-				   currValTiny = currValTiny.replace(unescape(filename),'QW%%^%%WQ');
-				   currValTiny = currValTiny.replace(/<img[^<]*QW%%\^%%WQ[^>]*>?/,'&#32');
-				}
-				tiny.setContent(currValTiny);
-	    	}
-    	this.parentNode.parentNode.removeChild(this.parentNode);
+        var filename = this.parentNode.childNodes[4].value;
+        if(filename){
+            var tiny = tinyMCE.getInstanceById('body_text');
+            var currValTiny = tiny.getContent();
+            while(currValTiny.indexOf(unescape(filename)) != -1){
+                currValTiny = currValTiny.replace(unescape(filename),'QW%%^%%WQ');
+                currValTiny = currValTiny.replace(/<img[^<]*QW%%\^%%WQ[^>]*>?/,'&#32');
+            }
+            tiny.setContent(currValTiny);
+        }
+        this.parentNode.parentNode.removeChild(this.parentNode);
     }
 
 
     var new_row_button_embed = document.createElement("img");
-	new_row_button_embed.setAttribute("src", "index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=attachment.gif");
-	new_row_button_embed.setAttribute("align","absmiddle");
-	new_row_button_embed.setAttribute("alt",lbl_email_attachments_embeded);
-	new_row_button_embed.setAttribute("border","0");
-	new_row_button_embed.setAttribute("height","16");
-	new_row_button_embed.setAttribute("width","16");
-	new_row_button_embed.onclick= function(){
+    new_row_button_embed.setAttribute("src", "index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=attachment.gif");
+    new_row_button_embed.setAttribute("align","absmiddle");
+    new_row_button_embed.setAttribute("alt",lbl_email_attachments_embeded);
+    new_row_button_embed.setAttribute("border","0");
+    new_row_button_embed.setAttribute("height","16");
+    new_row_button_embed.setAttribute("width","16");
+    new_row_button_embed.onclick= function(){
         //retrieve the documentid
         this.parentNode.childNodes[2].checked='true';
         var documentRevisionId = this.parentNode.childNodes[4].value;
         var mime_type = this.parentNode.childNodes[5].value;
-		if(mime_type == "image/gif" || mime_type == "image/bmp" || mime_type == "image/png" || mime_type == "image/x-png" || mime_type == "image/jpg" || mime_type == "image/jpeg")
+        if(mime_type == "image/gif" || mime_type == "image/bmp" || mime_type == "image/png" || mime_type == "image/x-png" || mime_type == "image/jpg" || mime_type == "image/jpeg")
         {
             embedImage='<img src="index.php?entryPoint=download&type=Documents&id='+documentRevisionId+'">';
             insert_variable(embedImage);
@@ -439,15 +440,15 @@ function docUpload() {
             new_row_chk_box.checked =false;
             alert(select_image);
         }
-	};
+    };
 
-   var SugarDoc = document.createElement("img");
-   SugarDoc.setAttribute("src", "index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=sugar_document.png");
-   SugarDoc.setAttribute("align","absmiddle");
-   SugarDoc.setAttribute("alt",lbl_email_attachments_document);
-   SugarDoc.setAttribute("border","0");
-   SugarDoc.setAttribute("height","16");
-   SugarDoc.setAttribute("width","16");
+    var SugarDoc = document.createElement("img");
+    SugarDoc.setAttribute("src", "index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=sugar_document.png");
+    SugarDoc.setAttribute("align","absmiddle");
+    SugarDoc.setAttribute("alt",lbl_email_attachments_document);
+    SugarDoc.setAttribute("border","0");
+    SugarDoc.setAttribute("height","16");
+    SugarDoc.setAttribute("width","16");
 
 
     //elm.appendChild(eah);
@@ -461,176 +462,176 @@ function docUpload() {
     elm.appendChild(eai);
     elm.style.display = 'block';
 
-     var rN= document.getElementById('attachments_div');
-     rN.appendChild(elm);
-     uploadIndex++;
+    var rN= document.getElementById('attachments_div');
+    rN.appendChild(elm);
+    uploadIndex++;
 }
 
 function addUploadFiles(form_name) {
-	    var chForm = document.getElementById('upload_div');
-		var theForm = document.getElementById(form_name);
-		var elems = chForm.getElementsByTagName("input");
-		//get the count of all the email_attachment file elements
-		var count = 0;
-		//Use the count to add the documents
-        count=this.multi_selector.id;
-        for (var i=0; i<count-1; i++) {
-    //  	find out all the email_attachments and append to the EditView form
-          var el = document.getElementsByName('email_attachment'+i);
-          if(el[0] != null){
-	       theForm.appendChild(el[0]);
-          }
-       }
-       var chForm = document.getElementById("upload_form");
-       var elems = chForm.getElementsByTagName("input");
-       var num = 0;
-       for (var i=0; i<elems.length; i++) {
+    var chForm = document.getElementById('upload_div');
+    var theForm = document.getElementById(form_name);
+    var elems = chForm.getElementsByTagName("input");
+    //get the count of all the email_attachment file elements
+    var count = 0;
+    //Use the count to add the documents
+    count=this.multi_selector.id;
+    for (var i=0; i<count-1; i++) {
+        //  	find out all the email_attachments and append to the EditView form
+        var el = document.getElementsByName('email_attachment'+i);
+        if(el[0] != null){
+            theForm.appendChild(el[0]);
+        }
+    }
+    var chForm = document.getElementById("upload_form");
+    var elems = chForm.getElementsByTagName("input");
+    var num = 0;
+    for (var i=0; i<elems.length; i++) {
         //find out all the email_attachments and append to the EditView form
-          var el = elems[i];
-          if(el.id == 'checkBoxFile[]'){
-	        var eah = document.createElement('input');
+        var el = elems[i];
+        if(el.id == 'checkBoxFile[]'){
+            var eah = document.createElement('input');
             eah.setAttribute('id', 'embedded'+num);
-    		eah.setAttribute('name', 'embedded'+num);
-		    eah.setAttribute('tabindex', '120');
-		    eah.setAttribute('type', 'hidden');
-		    eah.setAttribute('value',el.checked);
-	        num++;
-	        theForm.appendChild(eah);
-          }
-       }
-	}
+            eah.setAttribute('name', 'embedded'+num);
+            eah.setAttribute('tabindex', '120');
+            eah.setAttribute('type', 'hidden');
+            eah.setAttribute('value',el.checked);
+            num++;
+            theForm.appendChild(eah);
+        }
+    }
+}
 
 function addUploadDocs(form_name) {
-        var chForm = document.getElementById("upload_form");
-		var theForm = document.getElementById(form_name);
-		var attDiv = document.getElementById("attachments_div");
-		var elems = chForm.getElementsByTagName("input");
-		var elems1 = attDiv.getElementsByTagName("input");
-        for (var i=0; i<elems1.length; i++) {
-         var el = elems1[i];
+    var chForm = document.getElementById("upload_form");
+    var theForm = document.getElementById(form_name);
+    var attDiv = document.getElementById("attachments_div");
+    var elems = chForm.getElementsByTagName("input");
+    var elems1 = attDiv.getElementsByTagName("input");
+    for (var i=0; i<elems1.length; i++) {
+        var el = elems1[i];
         if(el.id=='document[]') {
-	    theForm.appendChild(el);
-		 }
+            theForm.appendChild(el);
         }
-        for (var i=0; i<elems.length; i++) {
-         var el = elems[i];
+    }
+    for (var i=0; i<elems.length; i++) {
+        var el = elems[i];
 
         if(el.id=='document[]') {
-	    theForm.appendChild(el);
-		}
-		if(el.id.indexOf('documentId')>=0 || el.id=='document[]') {
-	    theForm.appendChild(el);
-		}
-      }
-	}
+            theForm.appendChild(el);
+        }
+        if(el.id.indexOf('documentId')>=0 || el.id=='document[]') {
+            theForm.appendChild(el);
+        }
+    }
+}
 
 function form_reset_doc() {
-	 var theForm = document.getElementById('upload_div');
-	 var elems = theForm.getElementsByTagName("input");
-	 for (var i=0; i<elems.length; i++) {
-		 if (elems[i].type == "text" || "hidden" ) {
-		    var el = elems[i];
-		    if(el.id == 'documentName') {
-		        var new_el =document.createElement('input');
-		        new_el.type = 'hidden';
-		        new_el.name = el.name;
-		        new_el.id = el.id;
-		        new_el.onchange = el.onchange;
-		        new_el.siz=true;
-		        el.parentNode.replaceChild(new_el, el);
-		    }
-		    if(el.id == 'documentId') {
-		         var new_el =document.createElement('input');
-		         new_el.type = 'hidden';
-		         new_el.name = el.name;
-		         new_el.id = el.id;
-		         el.parentNode.replaceChild(new_el, el);
-		     }
-		 }
-	}
+    var theForm = document.getElementById('upload_div');
+    var elems = theForm.getElementsByTagName("input");
+    for (var i=0; i<elems.length; i++) {
+        if (elems[i].type == "text" || "hidden" ) {
+            var el = elems[i];
+            if(el.id == 'documentName') {
+                var new_el =document.createElement('input');
+                new_el.type = 'hidden';
+                new_el.name = el.name;
+                new_el.id = el.id;
+                new_el.onchange = el.onchange;
+                new_el.siz=true;
+                el.parentNode.replaceChild(new_el, el);
+            }
+            if(el.id == 'documentId') {
+                var new_el =document.createElement('input');
+                new_el.type = 'hidden';
+                new_el.name = el.name;
+                new_el.id = el.id;
+                el.parentNode.replaceChild(new_el, el);
+            }
+        }
+    }
 }
 
 
 function selectDoc() {
-	URL="index.php?module=EmailTemplates&action=PopupDocumentsCampaignTemplate&to_pdf=true&target=" ;
-	windowName = 'selectDocument';
-	windowFeatures = 'width=800' + ',height=600' + ',resizable=1,scrollbars=1';
+    URL="index.php?module=EmailTemplates&action=PopupDocumentsCampaignTemplate&to_pdf=true&target=" ;
+    windowName = 'selectDocument';
+    windowFeatures = 'width=800' + ',height=600' + ',resizable=1,scrollbars=1';
 
-	win = SUGAR.util.openWindow(URL, windowName, windowFeatures);
-	if(window.focus) {
-		// put the focus on the popup if the browser supports the focus() method
-		win.focus();
-	}
+    win = SUGAR.util.openWindow(URL, windowName, windowFeatures);
+    if(window.focus) {
+        // put the focus on the popup if the browser supports the focus() method
+        win.focus();
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 ////	HTML/PLAIN EDITOR FUNCTIONS
 function setEditor() {
-	if(document.getElementById('setEditor').checked == true) {
-		toggle_textonly();
-	}
+    if(document.getElementById('setEditor').checked == true) {
+        toggle_textonly();
+    }
 }
 
 // cn: bug 9690 - unchecked "Send HTML" - we hose the html_div contents
 function prepSave() {
-	if(document.getElementById('setEditor').checked == true) {
-		document.getElementById('html_div').innerHTML = '';
-	}
+    if(document.getElementById('setEditor').checked == true) {
+        document.getElementById('html_div').innerHTML = '';
+    }
 
 }
 
 function toggle_textonly() {
-	var altText = document.getElementById('alt_text_div');
-	var plain = document.getElementById('text_div');
-	var html = document.getElementById('html_div');
+    var altText = document.getElementById('alt_text_div');
+    var plain = document.getElementById('text_div');
+    var html = document.getElementById('html_div');
 
-	var desc = document.getElementById('description');
-	var tiny = tinyMCE.getInstanceById('description_html');
+    var desc = document.getElementById('description');
+    var tiny = tinyMCE.getInstanceById('description_html');
 
-	// toggling INTO HTML editting
-	if(html.style.display == 'none') {
-		html.style.display = 'block';
-		if(document.getElementById('toggle_textarea_elem').checked == false) {
-			plain.style.display = 'none';
-		}
-		altText.style.display = 'block';
+    // toggling INTO HTML editting
+    if(html.style.display == 'none') {
+        html.style.display = 'block';
+        if(document.getElementById('toggle_textarea_elem').checked == false) {
+            plain.style.display = 'none';
+        }
+        altText.style.display = 'block';
 
-		var plainText = new String(desc.value);
-		plainText = plainText.replace(/\n/gi, '<br />');
-		tiny.setContent(plainText);
-	} else {
-		// toggling into Plain Text ONLY
-		html.style.display = 'none';
-		plain.style.display = 'block';
-		altText.style.display = 'none';
+        var plainText = new String(desc.value);
+        plainText = plainText.replace(/\n/gi, '<br />');
+        tiny.setContent(plainText);
+    } else {
+        // toggling into Plain Text ONLY
+        html.style.display = 'none';
+        plain.style.display = 'block';
+        altText.style.display = 'none';
 
-		if(tiny.getContent()) {
-			var htmlText = new String(tiny.getContent());
-			htmlText = htmlText.replace(/<br \/>/gi, "\n");
-			htmlText = htmlText.replace(/&gt;/gi, ">");
-			htmlText = htmlText.replace(/&lt;/gi, "<");
-			htmlText = htmlText.replace(/&nbsp;/gi, " ");
-			desc.value = stripTags(htmlText);
-		}
-	}
+        if(tiny.getContent()) {
+            var htmlText = new String(tiny.getContent());
+            htmlText = htmlText.replace(/<br \/>/gi, "\n");
+            htmlText = htmlText.replace(/&gt;/gi, ">");
+            htmlText = htmlText.replace(/&lt;/gi, "<");
+            htmlText = htmlText.replace(/&nbsp;/gi, " ");
+            desc.value = stripTags(htmlText);
+        }
+    }
 }
 
 function stripTags(str) {
-	var theText = new String(str);
+    var theText = new String(str);
 
-	if(theText != 'undefined') {
-		return theText.replace(/<\/?[^>]+>/gi, '');
-	}
+    if(theText != 'undefined') {
+        return theText.replace(/<\/?[^>]+>/gi, '');
+    }
 }
 
 function toggle_textarea() {
-	var checkbox = document.getElementById('toggle_textarea_elem');
-	var plain = document.getElementById('text_div');
+    var checkbox = document.getElementById('toggle_textarea_elem');
+    var plain = document.getElementById('text_div');
 
-	if (checkbox.checked == false) {
-		plain.style.display = 'none';
-	} else {
-		plain.style.display = 'block';
-	}
+    if (checkbox.checked == false) {
+        plain.style.display = 'none';
+    } else {
+        plain.style.display = 'block';
+    }
 }
 ////	END HTML/PLAIN EDITOR FUNCTIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -641,62 +642,62 @@ function toggle_textarea() {
 ///////////////////////////////////////////////////////////////////////////////
 ////	EMAIL TEMPLATE CODE
 function appendEmailTemplateJSON() {
-	// query based on template, contact_id0,related_to
-	if(document.EditView.name.value == '') { // cn: bug 7743, don't stomp populated Subject Line
-		document.EditView.name.value = decodeURI(encodeURI(json_objects['email_template_object']['fields']['subject']));
-	}
+    // query based on template, contact_id0,related_to
+    if(document.EditView.name.value == '') { // cn: bug 7743, don't stomp populated Subject Line
+        document.EditView.name.value = decodeURI(encodeURI(json_objects['email_template_object']['fields']['subject']));
+    }
 
-	document.EditView.description.value += decodeURI(encodeURI(json_objects['email_template_object']['fields']['body'])).replace(/<BR>/ig, '\n');
-	var tiny = tinyMCE.getInstanceById("description_html");
-	var tinyHtml = tiny.getContent(true);
+    document.EditView.description.value += decodeURI(encodeURI(json_objects['email_template_object']['fields']['body'])).replace(/<BR>/ig, '\n');
+    var tiny = tinyMCE.getInstanceById("description_html");
+    var tinyHtml = tiny.getContent(true);
 
-	// cn: bug 10985 - IE6/7 will show inline image at top of screen if we set this with no valid target
-	if(document.getElementById('setEditor').checked == false) {
-		var descHtml = decodeURI(encodeURI(json_objects['email_template_object']['fields']['body_html'])).replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/<BR>/ig, '\n').replace(/&#039;/gi,'\'').replace(/&quot;/gi,'"');
+    // cn: bug 10985 - IE6/7 will show inline image at top of screen if we set this with no valid target
+    if(document.getElementById('setEditor').checked == false) {
+        var descHtml = decodeURI(encodeURI(json_objects['email_template_object']['fields']['body_html'])).replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/<BR>/ig, '\n').replace(/&#039;/gi,'\'').replace(/&quot;/gi,'"');
 
-		// cn: bug 13376 - leave &amp; to last to preserve certain HTML-entities for TinyMCE editor
-		descHtml = descHtml.replace(/&amp;/gi,'&');
+        // cn: bug 13376 - leave &amp; to last to preserve certain HTML-entities for TinyMCE editor
+        descHtml = descHtml.replace(/&amp;/gi,'&');
 
-		tiny.setContent(tinyHtml + descHtml);
-	}
+        tiny.setContent(tinyHtml + descHtml);
+    }
 
-	var htmlDiv = document.getElementById('html_div');
+    var htmlDiv = document.getElementById('html_div');
 
-	// hide the HTML editor if this is Plain-text only
-	if((tinyHtml == '' || tinyHtml == '<br>') && htmlDiv.style.display == '') {
-		var desc = document.getElementById('description');
-		var plainText = new String(desc.value);
-		plainText = plainText.replace(/\n/gi, '<br />');
-		tiny.setContent(plainText);
+    // hide the HTML editor if this is Plain-text only
+    if((tinyHtml == '' || tinyHtml == '<br>') && htmlDiv.style.display == '') {
+        var desc = document.getElementById('description');
+        var plainText = new String(desc.value);
+        plainText = plainText.replace(/\n/gi, '<br />');
+        tiny.setContent(plainText);
 
-		// cn: bug 6212
-		// if the template is plain-text, then uncheck "Send HTML Email"
-		document.getElementById('setEditor').checked = true;
-		setEditor();
-	}
+        // cn: bug 6212
+        // if the template is plain-text, then uncheck "Send HTML Email"
+        document.getElementById('setEditor').checked = true;
+        setEditor();
+    }
 }
 
 if(typeof SugarClass == "object") {
-	SugarClass.inherit("EmailJsonObj","SugarClass");
+    SugarClass.inherit("EmailJsonObj","SugarClass");
 }
 function EmailJsonObj() {
 }
 EmailJsonObj.prototype.display = function(result) {
-	var bean;
-	var block = document.getElementById('template_attachments');
-	var target = block.innerHTML;
-	var full_file_path;
+    var bean;
+    var block = document.getElementById('template_attachments');
+    var target = block.innerHTML;
+    var full_file_path;
 
-	for(i in result) {
-		if(typeof result[i] == 'object') {
-			bean = result[i];
-			full_file_path = file_path + bean['id']+bean['filename'];
-			target += '\n<input type="hidden" name="template_attachment[]" value="' + bean['id'] + '">';
-			target += '\n<input type="checkbox" name="temp_remove_attachment[]" value="' + bean['id'] + '"> '+ lnk_remove + '&nbsp;&nbsp;';
-			target += '<a href="' + full_file_path + '"target="_blank">' + bean['filename'] + '</a><br>';
-		}
-	}
-	block.innerHTML = target;
+    for(i in result) {
+        if(typeof result[i] == 'object') {
+            bean = result[i];
+            full_file_path = file_path + bean['id']+bean['filename'];
+            target += '\n<input type="hidden" name="template_attachment[]" value="' + bean['id'] + '">';
+            target += '\n<input type="checkbox" name="temp_remove_attachment[]" value="' + bean['id'] + '"> '+ lnk_remove + '&nbsp;&nbsp;';
+            target += '<a href="' + full_file_path + '"target="_blank" rel="nofollow noopener noreferrer">' + bean['filename'] + '</a><br>';
+        }
+    }
+    block.innerHTML = target;
 }
 
 ejo = new EmailJsonObj();
@@ -705,32 +706,32 @@ ejo = new EmailJsonObj();
 
 
 function fill_form(type, error_text) {
-	if(document.getElementById('subjectfield').value == '') {
-		var sendAnyways = confirm(lbl_send_anyways);
-		if(sendAnyways == false) { return false; }
-	}
+    if(document.getElementById('subjectfield').value == '') {
+        var sendAnyways = confirm(lbl_send_anyways);
+        if(sendAnyways == false) { return false; }
+    }
 
-	if(type == 'out' && document.EditView.to_addrs.value  == '' &&
-		document.EditView.cc_addrs.value  == '' &&
-		document.EditView.bcc_addrs.value  == '') {
+    if(type == 'out' && document.EditView.to_addrs.value  == '' &&
+        document.EditView.cc_addrs.value  == '' &&
+        document.EditView.bcc_addrs.value  == '') {
 
-		alert(error_text);
-		return false;
-	}
+        alert(error_text);
+        return false;
+    }
 
-	var the_form = document.EditView;
-	var inputs = the_form.getElementsByTagName('input');
+    var the_form = document.EditView;
+    var inputs = the_form.getElementsByTagName('input');
 
-	//  this detects if browser needs the following hack or not..
-	if(inputs.length > 0) {
-		// no need to appendChild to EditView to get file uploads to work
-		return check_form('EditView');
-	}
+    //  this detects if browser needs the following hack or not..
+    if(inputs.length > 0) {
+        // no need to appendChild to EditView to get file uploads to work
+        return check_form('EditView');
+    }
 
-	if(! check_form('EditView')) {
-		return false;
-	}
-	return true;
+    if(! check_form('EditView')) {
+        return false;
+    }
+    return true;
 }
 
 function setLabels(uploads_arr) {
@@ -740,146 +741,144 @@ function setLabels(uploads_arr) {
 
 //this function appends the selected email address to the aggregated email address fields.
 function set_current_parent(id,email,name,value) {
-	current_contact_id.value += id+";";
-	current_contact_email.value += email+";";
-	current_contact_name.value += name+";";
+    current_contact_id.value += id+";";
+    current_contact_email.value += email+";";
+    current_contact_name.value += name+";";
 
-	if(current_contact.value != '') {
-		current_contact.value += "; ";
-	}
+    if(current_contact.value != '') {
+        current_contact.value += "; ";
+    }
 
-	current_contact.value += name + " <" + email + ">";
+    current_contact.value += name + " <" + email + ">";
 //	current_contact.value += value;
 }
 
 function set_email_return(popup_reply_data) {
-	var form_name = popup_reply_data.form_name;
-	var name_to_value_array = popup_reply_data.name_to_value_array;
-	if (typeof name_to_value_array == "object" ) {
-		update_email_addresses(form_name,name_to_value_array);
-	} else {
-		for(var i in name_to_value_array) {
-			update_email_addresses(form_name,name_to_value_array[i]);
-		}
-	}
+    var form_name = popup_reply_data.form_name;
+    var name_to_value_array = popup_reply_data.name_to_value_array;
+    if (typeof name_to_value_array == "object" ) {
+        update_email_addresses(form_name,name_to_value_array);
+    } else {
+        for(var i in name_to_value_array) {
+            update_email_addresses(form_name,name_to_value_array[i]);
+        }
+    }
 }
 
 function update_email_addresses(form_name,name_to_value) {
-	for(var the_key in name_to_value) {
-		if(the_key == 'toJSON') {
-			/* just ignore */
-		} else {
-			var displayValue = name_to_value[the_key];
-			displayValue=displayValue.replace('&#039;',"'");  //restore escaped single quote.
-			displayValue=displayValue.replace('&amp;',"&");  //restore escaped &.
-			displayValue=displayValue.replace('&gt;',">");  //restore escaped >.
-			displayValue=displayValue.replace('&lt;',"<");  //restore escaped <.
-			displayValue=displayValue.replace('&quot; ',"\"");  //restore escaped ".
+    for(var the_key in name_to_value) {
+        if(the_key == 'toJSON') {
+            /* just ignore */
+        } else {
+            var displayValue = name_to_value[the_key];
+            displayValue=displayValue.replace('&#039;',"'");  //restore escaped single quote.
+            displayValue=displayValue.replace('&amp;',"&");  //restore escaped &.
+            displayValue=displayValue.replace('&gt;',">");  //restore escaped >.
+            displayValue=displayValue.replace('&lt;',"<");  //restore escaped <.
+            displayValue=displayValue.replace('&quot; ',"\"");  //restore escaped ".
 
-			window.document.forms[form_name].elements[the_key].value += displayValue + '; ';
-		}
-	}
+            window.document.forms[form_name].elements[the_key].value += displayValue + '; ';
+        }
+    }
 }
 
 //create references to input fields associated with the select email address button.
 //Clicked button is passed as the parameter to the function.
 function button_change_onclick(obj) {
-	var prefix = 'to_';
-	if(obj.name.match(/^cc_/i)) {
-	    prefix = 'cc_';
-	} else if(obj.name.match(/^bcc_/i)) {
-		prefix = 'bcc_';
-	}
+    var prefix = 'to_';
+    if(obj.name.match(/^cc_/i)) {
+        prefix = 'cc_';
+    } else if(obj.name.match(/^bcc_/i)) {
+        prefix = 'bcc_';
+    }
 
-	for(var i = 0; i < obj.form.length;i++) {
-		child = obj.form[i];
-		if(child.name.indexOf(prefix) != 0) {
-			continue;
-		}
+    for(var i = 0; i < obj.form.length;i++) {
+        child = obj.form[i];
+        if(child.name.indexOf(prefix) != 0) {
+            continue;
+        }
 
-		if(child.name.match(/addrs_emails$/i)) {
-			current_contact_email = child;
-		} else if(child.name.match(/addrs_ids$/i)) {
-			current_contact_id = child;
-		} else if(child.name.match(/addrs_names$/i)) {
-			current_contact_name = child;
-		} else if(child.name.match(/addrs$/i)) {
-			current_contact = child;
-		}
-	}
+        if(child.name.match(/addrs_emails$/i)) {
+            current_contact_email = child;
+        } else if(child.name.match(/addrs_ids$/i)) {
+            current_contact_id = child;
+        } else if(child.name.match(/addrs_names$/i)) {
+            current_contact_name = child;
+        } else if(child.name.match(/addrs$/i)) {
+            current_contact = child;
+        }
+    }
 
-	var filter = '';
-	var acct_name = '';
+    var filter = '';
+    var acct_name = '';
 
-	if(document.EditView.parent_type.value  == 'Accounts' && typeof(document.EditView.parent_name.value) != 'undefined' && document.EditView.parent_name.value != '') {
-		filter = "&form_submit=false&query=true&html=Email_picker&account_name=" + escape(document.EditView.parent_name.value);
-		acct_name = document.EditView.parent_name.value;
-	}
+    if(document.EditView.parent_type.value  == 'Accounts' && typeof(document.EditView.parent_name.value) != 'undefined' && document.EditView.parent_name.value != '') {
+        filter = "&form_submit=false&query=true&html=Email_picker&account_name=" + escape(document.EditView.parent_name.value);
+        acct_name = document.EditView.parent_name.value;
+    }
 
-	var popup_request_data =
-	{
-		"call_back_function" : "set_email_return",
-		"form_name" : "EditView",
-		"field_to_name_array" :
-		{
-			"id" : prefix + "addrs_ids",
-			"email1" : prefix + "addrs_emails",
-			"name" : prefix + "addrs_names",
-			"email_and_name1" : prefix + "addrs_field"
-		}
-	};
+    var popup_request_data =
+        {
+            "call_back_function" : "set_email_return",
+            "form_name" : "EditView",
+            "field_to_name_array" :
+                {
+                    "id" : prefix + "addrs_ids",
+                    "email1" : prefix + "addrs_emails",
+                    "name" : prefix + "addrs_names",
+                    "email_and_name1" : prefix + "addrs_field"
+                }
+        };
 
-	return open_popup("Contacts", 600, 400, filter, true, false, popup_request_data, 'MultiSelect', false, 'popupdefsEmail');
+    return open_popup("Contacts", 600, 400, filter, true, false, popup_request_data, 'MultiSelect', false, 'popupdefsEmail');
 }
 
 //this function clear the value stored in the aggregated email address fields(nodes).
 //it relies on the references set by the button_change_onclick method
 function clear_email_addresses() {
 
-	if(current_contact != '') {
-		current_contact.value = '';
-	}
-	if(current_contact_id != '') {
-		current_contact_id.value = '';
-	}
-	if(current_contact_email != '') {
-		current_contact_email.value = '';
-	}
-	if(current_contact_name != '') {
-		current_contact_name.value = '';
-	}
+    if(current_contact != '') {
+        current_contact.value = '';
+    }
+    if(current_contact_id != '') {
+        current_contact_id.value = '';
+    }
+    if(current_contact_email != '') {
+        current_contact_email.value = '';
+    }
+    if(current_contact_name != '') {
+        current_contact_name.value = '';
+    }
 }
 
 function quick_create_overlib(id, theme, el) {
 
-		var $dialog = $('<div></div>')
-		.html('<a style=\'width: 150px\' class=\'menuItem\' onmouseover=\'hiliteItem(this,"yes");\' onmouseout=\'unhiliteItem(this);\' href=\'index.php?module=Cases&action=EditView&inbound_email_id=' + id + '\'>' +
-            "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Cases.gif' style='margin-right:5px'>" + SUGAR.language.get('Emails', 'LBL_LIST_CASE') + '</a>' +
-            "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Leads&action=EditView&inbound_email_id=" + id + "'>" +
-                    "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Leads.gif' style='margin-right:5px'>"
-                    + SUGAR.language.get('Emails', 'LBL_LIST_LEAD') + "</a>" +
-             "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Contacts&action=EditView&inbound_email_id=" + id + "'>" +
-                    "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Contacts.gif' style='margin-right:5px'>"
-                    + SUGAR.language.get('Emails', 'LBL_LIST_CONTACT') + "</a>" +
-             "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Bugs&action=EditView&inbound_email_id=" + id + "'>"+
-                    "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Bugs.gif' style='margin-right:5px'>"
-                    + SUGAR.language.get('Emails', 'LBL_LIST_BUG') + "</a>" +
-             "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Tasks&action=EditView&inbound_email_id=" + id + "'>" +
-                    "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Tasks.gif' style='margin-right:5px'>"
-                   + SUGAR.language.get('Emails', 'LBL_LIST_TASK') + "</a>"
-                   )
-		.dialog({
-			autoOpen: false,
-			title:  SUGAR.language.get('Emails', 'LBL_QUICK_CREATE'),
-			width: 150,
-			position: {
-				    my: 'right top',
-				    at: 'left top',
-				    of: $(el)
-			  }
-		});
-		$dialog.dialog('open');
+    var $dialog = $('<div></div>')
+    .html('<a style=\'width: 150px\' class=\'menuItem\' onmouseover=\'hiliteItem(this,"yes");\' onmouseout=\'unhiliteItem(this);\' href=\'index.php?module=Cases&action=EditView&inbound_email_id=' + id + '\'>' +
+        "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Cases.gif' style='margin-right:5px'>" + SUGAR.language.get('Emails', 'LBL_LIST_CASE') + '</a>' +
+        "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Leads&action=EditView&inbound_email_id=" + id + "'>" +
+        "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Leads.gif' style='margin-right:5px'>"
+        + SUGAR.language.get('Emails', 'LBL_LIST_LEAD') + "</a>" +
+        "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Contacts&action=EditView&inbound_email_id=" + id + "'>" +
+        "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Contacts.gif' style='margin-right:5px'>"
+        + SUGAR.language.get('Emails', 'LBL_LIST_CONTACT') + "</a>" +
+        "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Bugs&action=EditView&inbound_email_id=" + id + "'>"+
+        "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Bugs.gif' style='margin-right:5px'>"
+        + SUGAR.language.get('Emails', 'LBL_LIST_BUG') + "</a>" +
+        "<a style='width: 150px' class='menuItem' onmouseover='hiliteItem(this,\"yes\");' onmouseout='unhiliteItem(this);' href='index.php?module=Tasks&action=EditView&inbound_email_id=" + id + "'>" +
+        "<img border='0' src='index.php?entryPoint=getImage&themeName="+SUGAR.themes.theme_name+"&imageName=Tasks.gif' style='margin-right:5px'>"
+        + SUGAR.language.get('Emails', 'LBL_LIST_TASK') + "</a>"
+    )
+    .dialog({
+        autoOpen: false,
+        title:  SUGAR.language.get('Emails', 'LBL_QUICK_CREATE'),
+        width: 150,
+        position: {
+            my: 'right top',
+            at: 'left top',
+            of: $(el)
+        }
+    });
+    $dialog.dialog('open');
 
 }
-
-

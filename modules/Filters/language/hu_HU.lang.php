@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'következő év',
     'LBL_OPEN_ISSUES' => '{0} megnyitása',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Legutóbb megoldott',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Szűrő létrehozása',
+    'LBL_ERROR_FILTER_EMPTY' => 'Kérjük, adjon hozzá szűrési feltételt.',
+    'LBL_ADD_FILTER' => 'Feltétel hozzáadása',
+    'LBL_FILTER_NAME' => 'Szűrő neve',
+    'LBL_FILTER_FIELD' => 'Mező',
+    'LBL_FILTER_OPERATOR' => 'Kezelő',
+    'LBL_FILTER_VALUE' => 'Érték',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Mentés az asztali alkalmazásba',
+    'LBL_FILTER_LOCAL' => 'Helyi szűrő',
 );

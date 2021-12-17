@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => '處理程序電子郵件範本',
     'LBL_MODULE_NAME_SINGULAR' => '流程電子郵件範本',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '流程電子郵件模組焦點抽屜',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => '流程電子郵件模組紀錄儀表板',
     'LNK_LIST' => '檢視處理程序電子郵件範本',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => '建立處理程序電子郵件範本',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => '匯入處理程序電子郵件範本',

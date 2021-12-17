@@ -11,8 +11,6 @@
  */
 require_once('include/templates/TemplateGroupChooser.php');
 
-use Sugarcrm\Sugarcrm\Util\Serialized;
-
 class SavedSearch extends SugarBean {
 	// Stored fields
 	var $id;
@@ -185,47 +183,36 @@ class SavedSearch extends SugarBean {
         global $db, $current_user, $currentModule;
         $this->retrieveSavedSearch($id);
 
-        $header = 'Location: index.php?action=index&module=';
-
-        $saved_search_name = '';
-        $header .= $this->contents['search_module'];
         if(empty($_SESSION['LastSavedView'])) $_SESSION['LastSavedView'] = array();
         $_SESSION['LastSavedView'][$this->contents['search_module']] = $id;
-        $saved_search_id = $id;
-        $saved_search_name = $this->name;
-        $search_form_tab = $this->contents['searchFormTab'];
-        $query = $this->contents['query'];
         $orderBy = empty($this->contents['orderBy'])? 'name' : $this->contents['orderBy'];
         //Reduce the params to avoid the problems caused by URL max length in IE.
-        header($header . '&saved_search_select=' . $saved_search_id . '&saved_search_select_name=' . $saved_search_name . '&orderBy=' . $orderBy . '&sortOrder=' . $this->contents['sortOrder'] . '&query=' . $query . '&searchFormTab='. $search_form_tab .'&showSSDIV=' . $showDiv);
+        $location = 'index.php?' . http_build_query([
+                'action' => 'index',
+                'module' => $this->contents['search_module'],
+                'saved_search_select' => $id,
+                'saved_search_select_name' => $this->name,
+                'orderBy' => $orderBy,
+                'sortOrder' => $this->contents['sortOrder'],
+                'query' => $this->contents['query'],
+                'searchFormTab' => $this->contents['searchFormTab'],
+                'showSSDIV' => $showDiv,
+            ]);
+        header("Location: $location");
 }
 
-    function returnSavedSearchContents($id) {
-		global $db, $current_user, $currentModule;
-		$query = 'SELECT id, name, contents, search_module FROM saved_search
-				  WHERE
-				  	id = \'' . $id . '\'';
-	    $result = $db->query($query, true, "Error filling in saved search list: ");
-
-	    $header = 'Location: index.php?action=index&module=';
-	    $contents = '';
-	    $saved_search_name = '';
-	    while ($row = $db->fetchByAssoc($result, false)) {
-	        $header .= $row['search_module'];
-            if(empty($_SESSION['LastSavedView'])) $_SESSION['LastSavedView'] = array();
-            $_SESSION['LastSavedView'][$row['search_module']] = $row['id'];
-            $contents = Serialized::unserialize($row['contents'], array(), true);
-	        $saved_search_id = $row['id'];
-            $saved_search_name = $row['name'];
-	    }
-
-	    return $contents;
-	}
-
-	function handleDelete($id) {
-		$this->mark_deleted($id);
-		header("Location: index.php?action=index&module={$_REQUEST['search_module']}&advanced={$_REQUEST['advanced']}&query=true&clear_query=true");
-	}
+    protected function handleDelete($id)
+    {
+        $this->mark_deleted($id);
+        $location = 'index.php?' . http_build_query([
+                'action' => 'index',
+                'module' => $_REQUEST['search_module'],
+                'advanced' => $_REQUEST['advanced'],
+                'query' => 'true',
+                'clear_query' => 'true',
+            ]);
+        header("Location: $location");
+    }
 
 	function handleSave($prefix, $redirect = true, $useRequired = false, $id = null, $searchModuleBean) {
 
@@ -306,22 +293,35 @@ class SavedSearch extends SugarBean {
 
 		$GLOBALS['log']->debug("Saved record with id of " . $focus->id);
 		$orderBy = empty($contents['orderBy'])? 'name' : $contents['orderBy'];
-        $search_query = "&orderBy=" . $orderBy . "&sortOrder=".$contents['sortOrder'] . "&query=" . $_REQUEST['query'] . "&searchFormTab=" . $_REQUEST['searchFormTab'].'&showSSDIV=' . $contents['showSSDIV'];
-
-        if($redirect)
-        {
-        	$this->handleRedirect($focus->search_module, $search_query, $saved_search_id, 'true');
+        $search_query_params = [
+            'orderBy' => $orderBy,
+            'sortOrder' => $contents['sortOrder'],
+            'query' => $_REQUEST['query'],
+            'searchFormTab' => $_REQUEST['searchFormTab'],
+            'showSSDIV' => $contents['showSSDIV'],
+            'advanced' => 'true',
+        ];
+        if ($redirect) {
+            $this->handleRedirect($focus->search_module, $search_query_params, $saved_search_id);
         }
     }
 
-	function handleRedirect($return_module, $search_query, $saved_search_id, $advanced = 'false') {
+    protected function handleRedirect(string $return_module, array $search_query_params, string $saved_search_id): void
+    {
         $_SESSION['LastSavedView'][$return_module] = $saved_search_id;
         $return_action = 'index';
-        $ajaxLoad = empty($_REQUEST['ajax_load']) ? "" : "&ajax_load=" . $_REQUEST['ajax_load'];
+        $ajaxLoad = empty($_REQUEST['ajax_load']) ? '' :  $_REQUEST['ajax_load'];
         //Reduce the params to avoid the problems caused by URL max length in IE ( the reduced params can be get from saved search according to saved_search_id).
-        header("Location: index.php?action=$return_action&module=$return_module&saved_search_select={$saved_search_id}{$search_query}&advanced={$advanced}$ajaxLoad");
+        $query_data = array_merge([
+            'action' => $return_action,
+            'module' => $return_module,
+            'saved_search_select' => $saved_search_id,
+            'ajax_load' => $ajaxLoad,
+        ], $search_query_params);
+        $location = 'index.php?' . http_build_query($query_data);
+        header("Location: $location");
         die();
-	}
+    }
 
 	function fill_in_additional_list_fields() {
 		global $app_list_strings;
@@ -332,7 +332,7 @@ class SavedSearch extends SugarBean {
 
     function retrieveSavedSearch($id) {
         parent::retrieve($id);
-        $this->contents = Serialized::unserialize($this->contents, array(), true);
+        $this->contents = unserialize(base64_decode($this->contents), ['allowed_classes' => false]);
     }
 
     function populateRequest(){

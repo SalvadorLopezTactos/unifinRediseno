@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontakter',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Leads',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Användare',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Instrumentpanel för poster för affärscenter',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för affärscenter',
 ];

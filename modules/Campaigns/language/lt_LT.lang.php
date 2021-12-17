@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Numatytas adresatų sąrašo tipas nerastas',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nerasta jokių įrašų',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Įvykdyti įrašai',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Įeinančio el. pašto parametrai',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Sistemos el. pašto nustatymai',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Sekamos nuorodos pavadinimas:',
   'LBL_EDIT_TRACKER_URL'=>'Sekamos nuorodos adresas:',

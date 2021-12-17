@@ -50,7 +50,7 @@
 <input type="hidden" name="import_type" value="{$smarty.request.import_type}">
 <input type="hidden" name="type" value="{$smarty.request.type}">
 <input type="hidden" name="file_name" value="{$smarty.request.tmp_file}">
-<input type="hidden" name="source_id" value="{$SOURCE_ID}">
+<input type="hidden" name="source_id" value="{$SOURCE_ID|escape:'html':'UTF-8'}">
 <input type="hidden" name="to_pdf" value="1">
 <input type="hidden" name="display_tabs_def">
 <input type="hidden" id="enabled_dupes" name="enabled_dupes" value="">

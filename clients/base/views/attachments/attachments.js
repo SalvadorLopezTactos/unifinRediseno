@@ -43,6 +43,19 @@
 
     /**
      * @inheritdoc
+     */
+    initialize: function(options) {
+        if (options.context) {
+            this.baseModule = options.context.get('module');
+            this.module = this.baseModule;
+            this.baseRecord = this._getBaseModel(options);
+        }
+
+        this._super('initialize', [options]);
+    },
+
+    /**
+     * @inheritdoc
      *
      * @param {String} viewName view name.
      */
@@ -76,6 +89,57 @@
         this.timer = parseInt(options['auto_refresh'], 10) * 60 * 1000;
         this.limit = options.limit;
         return this;
+    },
+
+    /**
+     * Open create drawer to create new record.
+     */
+    openCreateDrawer: function() {
+        var self = this;
+        var module = this.context.get('module');
+        var link = this.context.get('link');
+        var model = this.createLinkModel(this.baseRecord, link);
+
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                module: module,
+                model: model
+            }
+        }, function(context, model) {
+            if (!model) {
+                return;
+            }
+            self._reloadData();
+        });
+    },
+
+    /**
+     * Get base model from parent context
+     *
+     * @param {Object} options
+     * @return {Data.Bean} model the base model of the dashlet
+     * @private
+     */
+    _getBaseModel: function(options) {
+        var model;
+        var baseModule = options.context.get('parentModule');
+        var currContext = options.context;
+        while (currContext) {
+            var contextModel = currContext.get('rowModel') || currContext.get('model');
+
+            if (contextModel && contextModel.get('_module') === baseModule) {
+                model = contextModel;
+
+                var parentHasRowModel = currContext.parent && currContext.parent.has('rowModel');
+                if (!parentHasRowModel) {
+                    break;
+                }
+            }
+            currContext = currContext.parent;
+        }
+        return model;
     },
 
     /**

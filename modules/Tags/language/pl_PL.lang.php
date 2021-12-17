@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Utworzone przez (ID)',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Utworzono przez (nazwa użytkownika)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przypisano do (nazwa użytkownika)',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy znaczników',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Pulpit rekordów znaczników',
+    'LBL_MY_TAGS' => 'Moje znaczniki',
+    'LBL_MY_FAVORITE_TAGS' => 'Moje ulubione znaczniki',
 );

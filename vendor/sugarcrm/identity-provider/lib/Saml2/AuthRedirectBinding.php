@@ -15,6 +15,7 @@ namespace Sugarcrm\IdentityProvider\Saml2;
 use OneLogin\Saml2\Auth;
 use OneLogin\Saml2\Constants;
 use OneLogin\Saml2\Error;
+use OneLogin\Saml2\LogoutRequest;
 use OneLogin\Saml2\LogoutResponse;
 use OneLogin\Saml2\Utils;
 use Sugarcrm\IdentityProvider\Saml2\Builder\RequestBuilder;
@@ -177,7 +178,13 @@ class AuthRedirectBinding extends Auth
             $parameters['Signature'] = $signature;
         }
 
-        return new AuthResult($this->redirectTo($this->getSLOurl(), $parameters, true), 'GET');
+        return new AuthResult(
+            $this->redirectTo($this->getSLOurl(), $parameters, true),
+            'GET',
+            [
+                'nameId' => LogoutRequest::getNameId($logoutRequest->getXML(), $this->getSettings()->getSPkey()),
+            ]
+        );
     }
 
     /**

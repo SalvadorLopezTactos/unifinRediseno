@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Procesa e-pasta sagataves',
     'LBL_MODULE_NAME_SINGULAR' => 'E-pasta šablona apstrāde',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Procesu e-pasta veidņu fokusa panelis',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Procesu e-pasta šablonu ierakstu instrumentu panelis',
     'LNK_LIST' => 'Skatīt e-pasta šablonu apstrādi',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Izveidot procesa e-pasta sagatavi',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importēt procesa e-pasta sagataves',

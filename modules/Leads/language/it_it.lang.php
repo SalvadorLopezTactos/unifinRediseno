@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Dashboard elenco lead',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Dashboard record lead',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Potenziali clienti Focus Drawer',
 
     'ERR_DELETE_RECORD' => 'Per eliminare il lead deve essere specificato il numero del record.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descrizione Azienda',
@@ -318,4 +319,8 @@ Per creare un {{module_name}}:
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Impossibile modificare lo stato di {{moduleSingular}}. Questo modulo {{moduleSingular}} è stato già convertito.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Previsione di conversione dei lead',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Visualizza dettagli di previsione per un lead specifico',
 );

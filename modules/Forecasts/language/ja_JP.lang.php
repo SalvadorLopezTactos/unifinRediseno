@@ -13,7 +13,8 @@
 $mod_strings = array (
 
     // Dashboard Names
-    'LBL_FORECASTS_DASHBOARD' => '売上予測ダッシュボード',
+    'LBL_FORECASTS_DASHBOARD' => '売上予測ダッシュ ボード',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => '予想記録ダッシュボード',
 
     //module strings.
     'LBL_MODULE_NAME' => '売上予測',
@@ -30,7 +31,7 @@ $mod_strings = array (
     //var defs
     'LBL_TIMEPERIOD_NAME' => '期間名',
     'LBL_USER_NAME' => 'ユーザ名',
-    'LBL_REPORTS_TO_USER_NAME' => '報告先',
+    'LBL_REPORTS_TO_USER_NAME' => '上司',
 
     //forecast table
     'LBL_FORECAST_ID' => '売上予測ID',
@@ -231,7 +232,7 @@ $mod_strings = array (
     'LBL_EDITABLE_INVALID' => '{0}は無効な数値',
     'LBL_EDITABLE_INVALID_RANGE' => '数値は{0}から{1}の間であるべきです',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'ワークシートの変更を保存しませんでした',
-    'LBL_WORKSHEET_EXPORT_CONFIRM' => '保存もしくはコミットされたデータのみエクスポートできます。OKをクリックするとエクスポートを続行します。キャンセルをクリックするとワークシートに戻ります。',
+    'LBL_WORKSHEET_EXPORT_CONFIRM' => '保存もしくはコミットされたデータのみエキスポートできます。OKをクリックするとエキスポートを続行します。キャンセルをクリックするとワークシートに戻ります。',
     'LBL_WORKSHEET_ID' => 'ワークシートID',
 
     // Labels for Chart Options
@@ -271,7 +272,7 @@ $mod_strings = array (
 
     // Actions Dropdown
     'LBL_ACTIONS' => 'アクション',
-    'LBL_EXPORT_CSV' => 'CSVファイルのエクスポート',
+    'LBL_EXPORT_CSV' => 'CSVファイルのエキスポート',
     'LBL_CANCEL' => 'キャンセル',
 
     'LBL_CHART_FORECAST_FOR' => '{0}の予算',
@@ -287,11 +288,11 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE' => '売上予測設定',
 
     'LBL_FORECASTS_MISSING_STAGE_TITLE' => '売上予測設定エラー:',
-    'LBL_FORECASTS_MISSING_SALES_STAGE_VALUES' => '売上予測モジュールは不適切に設定されて利用不可です。セールスステージ受注とセールスステージ失注は、セールスステージの数値から欠落しています。管理者にお問い合わせください。',
+    'LBL_FORECASTS_MISSING_SALES_STAGE_VALUES' => '売上予測モジュールは不適切に設定されて利用不可です。セールスステージ受注とセールスステージ失注は、セールスステージの数値から欠落しています。管理者に連絡してください。',
     'LBL_FORECASTS_ACLS_NO_ACCESS_TITLE' => '売上予測アクセスエラー',
-    'LBL_FORECASTS_ACLS_NO_ACCESS_MSG' => '売上予測モジュールにアクセスする権限がありません。管理者にお問い合わせください。',
+    'LBL_FORECASTS_ACLS_NO_ACCESS_MSG' => '売上予測モジュールにアクセスする権限がありません。管理者に連絡してください。',
 
-    'LBL_FORECASTS_RECORDS_ACLS_NO_ACCESS_MSG' => '売上予測モジュールのレコードにアクセスできません。システム管理者にお問い合わせください。',
+    'LBL_FORECASTS_RECORDS_ACLS_NO_ACCESS_MSG' => '売上予測モジュールのレコードにアクセスできません。システム管理者に連絡してください。',
 
     // Panel and BreadCrumb Labels
     'LBL_FORECASTS_CONFIG_BREADCRUMB_WORKSHEET_LAYOUT' => 'ワークシートレイアウト',
@@ -312,8 +313,8 @@ $mod_strings = array (
 
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '会計年度開始日:',
 
-    'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '売上予測モジュールで使われる期間を設定してください。<br />会計年度の開始日を選択することから始めてください。そして売上予測を設定したい期間のタイプを選択してください。その選択により、期間の日にちの範囲は自動的に計算されます。サブ期間は売上予測ワークシートに基づいています。<br />閲覧できる将来と過去の期間は売上予測モジュールのサブ期間の数を決定します。ユーザは売上予測の数値をサブ期間で閲覧したり編集したりすることができます。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} を分類する方法を構成します。<br><br>最初のコメント後は、範囲設定は変更できません。アップグレードされたインスタンスの場合は、範囲設定は既存の予測データでロックされます。<br><br>確度範囲に基づいて 2 つ以上のカテゴリを選択したり、確度に基づかないカテゴリを作成したりできます。<br><br>カスタムカテゴリの左にチェックボックスがあります。これらを使って、どの範囲を確定された予測金額に含めて、上司に報告するかを決めます。<br><br>ユーザはワークシートから手動で {{forecastByModule}} の含む/除外ステータスを変更できます。',
+    'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '売上予測モジュールで使われる期間を設定してください。<br />会計年度の開始日を選択することから始めてください。そして売上予測を設定したい期間のタイプを選択してください。その選択により、期間の日にちの範囲は自動的に計算されます。サブ期間は売上予測ワークシートに基づいています。<br />閲覧できる将来と過去の期間は売上予測モジュールのサブ期間の数を決定します。ユーザーは売上予測の数値をサブ期間で閲覧したり編集したりすることができます。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} のカテゴリ分類方法を設定します。<br><br> [範囲] 設定は初回コミット後に変更できなくなることに注意してください。アップグレード済みのインスタンスの場合、[範囲] 設定は既存の[予報] データでロックされます。<br><br>確率範囲に基づいて2つ以上のカテゴリを選択するか、確率に基づかないカテゴリを作成できます。 <br><br>カスタムカテゴリの左側にチェックボックスがあります。 これらを使用して、コミットされてマネージャに報告される予測金額に含まれる範囲を決定します。<br><br>ユーザーは、自分のワークシートから追加/除外ステータスを変更したり、 {{forecastByModule}} のカテゴリを手動で変更したりすることができます。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'ユーザに記入させたいそれぞれの {{forecastByModuleSingular}} の売上予測のカラムを選択してください。達成可能の金額は、{{forecastByModule}} で表示される金額と結びついていますので注意してください。その理由で、達成可能のカラムは隠すことはできません。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '売上予測モジュールで閲覧したいカラムを選択してください。フィールドのリストがワークシートを組み合わせて、ユーザがビューをどのように設定するかを選ぶことができます。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '私はhow-to textによる売上予測の代理人です!',
@@ -327,7 +328,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TIMEPERIOD' => '予算を設定したい期間を選んでください:',
     'LBL_FORECASTS_CONFIG_LEAFPERIOD' => '見たい期間のサブピリオドを選んでください:',
     'LBL_FORECASTS_CONFIG_START_DATE' => '各年のスタートしたい日付を選んでください:',
-    'LBL_FORECASTS_CONFIG_TIMEPERIODS_FORWARD' => 'ユーザが見ることができる将来の期間を選んでください:',
+    'LBL_FORECASTS_CONFIG_TIMEPERIODS_FORWARD' => 'ユーザーが見ることができる将来の期間を選んでください:',
     'LBL_FORECASTS_CONFIG_TIMEPERIODS_BACKWARD' => 'ワークシート内で表示する過去の期間数を選択します。<br><i>この数は選択されるベースの期間に適用されます。例えば、四半期で 2 を選択すると過去 6 か月が表示されます</i>',
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_FISCAL_YEAR' => '選択された開始日は会計年度が2年にまたがることを示します。どちらの年を会計年度とするかを選んでください。',
     'LBL_FISCAL_YEAR' => '会計年度',
@@ -344,16 +345,16 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_RANGES_SETUP_NOTICE' => '範囲設定は最初保存ドラフトの後に変更できず、売上予測モジュールにおいて約束することができません。ただし、アップグレードされた例のために、すでに予測データがアップグレードを通じて入手可能なので、範囲設定は初期のセットアップの後に変更できません。',
     'LBL_FORECASTS_CONFIG_RANGES' => '売上予測範囲オプション:',
     'LBL_FORECASTS_CONFIG_RANGES_OPTIONS' => '{{forecastByModule}} を分類する方法を選んでください。',
-    'LBL_FORECASTS_CONFIG_SHOW_BINARY_RANGES_DESCRIPTION' => 'このオプションにより、ユーザは売上予測に含まれる、または除外される {{forecastByModule}} を選ぶことができます。',
+    'LBL_FORECASTS_CONFIG_SHOW_BINARY_RANGES_DESCRIPTION' => 'このオプションにより、ユーザーは売上予測に含まれる、または除外される {{forecastByModule}} を選ぶことができます。',
     'LBL_FORECASTS_CONFIG_SHOW_BUCKETS_RANGES_DESCRIPTION' => 'このオプションにより、コミットに含まれていなくても上昇傾向にあり、うまくいけば受注の可能性がある {{forecastByModule}}や、<br />売上予測から除外されるべき {{forecastByModule}}を分類することができます。',
-    'LBL_FORECASTS_CONFIG_SHOW_CUSTOM_BUCKETS_RANGES_DESCRIPTION' => 'カスタム範囲: このオプションはユーザが {{forecastByModule}}を売上予測やコミットされた範囲、コミットされていない範囲または設定されたその他にカテゴリ化できるようにします。',
+    'LBL_FORECASTS_CONFIG_SHOW_CUSTOM_BUCKETS_RANGES_DESCRIPTION' => 'カスタム範囲: このオプションはユーザが {{forecastByModule}}を売上予測やコミットされた範囲、コミットされていない範囲または設定されたその他にカテゴリー化できるようにします。',
     'LBL_FORECASTS_CONFIG_RANGES_EXCLUDE_INFO' => '除外範囲は、0%からデフォルトの前回の売上予測範囲の最少までです。',
 
     'LBL_FORECASTS_CONFIG_RANGES_ENTER_RANGE' => '範囲の名前を入力してください。。。',
 
     // scenarios config
     //TODO-sfa refactors the code references for scenarios to be scenarios (SFA-337).
-    'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS' => 'ユーザが各商談に対する売上予測を入力することができるようにする欄を選んでください。',
+    'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS' => 'ユーザーが各商談に対する売上予測を入力することができるようにする欄を選んでください。',
     'LBL_FORECASTS_CONFIG_WORKSHEET_LIKELY_INFO' => '達成可能金額は、 {{forecastByModule}}で入力された金額と結びついています。そのために達成可能の欄は隠すことができません。',
     'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_LIKELY' => '達成可能',
     'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_BEST' => 'ベスト',
@@ -380,7 +381,7 @@ $mod_strings = array (
 
     // custom ranges
     'LBL_FORECASTS_CUSTOM_RANGES_DEFAULT_NAME' => 'カスタム範囲',
-    'LBL_UNAUTH_FORECASTS' => '売上予測設定へのアクセス権がありません。',
+    'LBL_UNAUTH_FORECASTS' => '売上予測設定へのアクセス権限がありません。',
     'LBL_FORECASTS_RANGES_BASED_TITLE' => '確度に基づいた範囲',
     'LBL_FORECASTS_CUSTOM_BASED_TITLE' => '確度に基づいたカスタム範囲',
     'LBL_FORECASTS_CUSTOM_NO_BASED_TITLE' =>'確度に基づいていない範囲',
@@ -398,7 +399,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_WORKSHEET_TEXT' => 'ワークシートビューでどのカラムが表示されるか選択してください。デフォルトは下記のフィールドが選択されます。',
 
     // forecast details dashlet
-    'LBL_DASHLET_FORECAST_NOT_SETUP' => '売上予測が設定されていないため、このウィジェットを使うのには設定が必要です。システム管理者にお問い合わせください。',
+    'LBL_DASHLET_FORECAST_NOT_SETUP' => '売上予測が設定されていないため、このウィジェットを使うのには設定が必要です。システム管理者に連絡してください。',
     'LBL_DASHLET_FORECAST_NOT_SETUP_ADMIN' => '売上予測が設定されていないため、このウィジェットを使うのには設定が必要です。売上予測設定するためにはここをクリックしてください。',
     'LBL_DASHLET_FORECAST_CONFIG_LINK_TEXT' => '売上予測モジュールを設定するにはここをクリックしてください。',
     'LBL_DASHLET_MY_PIPELINE' => '私のパイプライン',
@@ -416,7 +417,7 @@ $mod_strings = array (
     'LBL_ASSIGNING_QUOTA' => 'アサインされるノルマ',
     'LBL_QUOTA_ASSIGNED' => 'アサイン成功したノルマ',
     'LBL_FORECASTS_NO_ACCESS_TO_CFG_TITLE' => '売上予測アクセスエラー',
-    'LBL_FORECASTS_NO_ACCESS_TO_CFG_MSG' => '売上予測を設定する権限がありません。管理者にお問い合わせください。',
+    'LBL_FORECASTS_NO_ACCESS_TO_CFG_MSG' => '売上予測を設定する権限がありません。管理者に連絡してください。',
     'WARNING_DELETED_RECORD_RECOMMIT_1' => 'このレコードは以下に含まれています ',
     'WARNING_DELETED_RECORD_RECOMMIT_2' => 'これは削除され、以下を再度コミットする必要があります ',
 
@@ -426,7 +427,7 @@ $mod_strings = array (
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => '保存していない変更があります。本当にワークシートをソートして変更を破棄しますか？',
 
     // Forecasts Records View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールは {{forecastby_singular_module}} レコードを組み込むことで{{forecastworksheets_module}} を構築して売上を予測します。ユーザは売上の {{quotas_module}} を目指して個人、チーム、営業組織レベルで働きます。ユーザが {{plural_module_name}} モジュールにアクセスする前に、管理者が組織に必要な期間、範囲およびシナリオを選択する必要があります。
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールは {{forecastby_singular_module}} レコードを組み込むことで{{forecastworksheets_module}} を構築して売上を予測します。ユーザーは売上の {{quotas_module}} を目指して個人、チーム、営業組織レベルで働きます。ユーザーが {{plural_module_name}} モジュールにアクセスする前に、管理者が組織に必要な期間、範囲およびシナリオを選択する必要があります。
 
-営業担当者は {{plural_module_name}} モジュールを、現在の期間が進行するに従って、アサインされた {{forecastby_module}} の仕事をするために使用します。これらのユーザはクローズ予定の {{forecastby_module}} に基づき個人的な売上の総予測をコミットします。営業マネージャは他の営業担当者と同様に、自分の {{forecastby_singular_module}} レコードを作成します。さらに、マネージャは直属の部下によりコミットされた金額を集約し、チームの総売上を予測し、各期間のチームのノルマを目指して仕事に取り組みます。また、個人のワークシート分析およびマネージャのチームワークシートの分析を含む展開可能なインテリジェントペインの要素により、更なる洞察が与えられます。'
+営業担当者は {{plural_module_name}} モジュールを、現在の期間が進行するに従って、割り当てられた {{forecastby_module}} の仕事をするために使用します。これらのユーザーはクローズ予定の {{forecastby_module}} に基づき個人的な売上の総予測をコミットします。営業マネージャーは他の営業担当者と同様に、自分の {{forecastby_singular_module}} レコードを作成します。さらに、マネージャーは直属の部下によりコミットされた金額を集約し、チームの総売上を予測し、各期間のチームのノルマを目指して仕事に取り組みます。また、個人のワークシート分析およびマネージャーのチームワークシートの分析を含む展開可能なインテリジェントペインの要素により、更なる洞察が与えられます。'
 );

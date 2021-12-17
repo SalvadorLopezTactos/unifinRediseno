@@ -70,7 +70,7 @@ class BeanFactory {
         }
 
         // Pull values from $params array
-        if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
+        if (isFromApi()) {
             // In API mode, we can cache all beans unless specifically told not
             // to retrieve a cached version.
             $encode = false;

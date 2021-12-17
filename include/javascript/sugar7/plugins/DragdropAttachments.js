@@ -71,8 +71,8 @@
 
                 // Use originalEvent to access the dataTransfer property since it may not exist on the jQuery event
                 // see http://bugs.jquery.com/ticket/7808 for more information
-                var text = $.trim(event.originalEvent.dataTransfer.getData('text')),
-                    container = this.$(event.currentTarget);
+                var text = event.originalEvent.dataTransfer.getData('text').trim();
+                var container = this.$(event.currentTarget);
                 this.shrinkNewPost(event);
 
                 if (text.length) {

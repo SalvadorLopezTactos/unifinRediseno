@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Διεργασίες Επιχειρησιακών Κανόνων',
   'LBL_MODULE_NAME_SINGULAR' => 'Διεργασίες Επιχειρησιακών Κανόνων',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης διαδικασίας επιχειρηματικών κανόνων',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Διεργασιών Επιχειρησιακών Κανόνων',
   'LBL_RST_UID' => 'Ταυτότητα Επιχειρησιακών Κανόνων',
   'LBL_RST_TYPE' => 'Τύπος Επιχειρησιακών Κανόνων',
   'LBL_RST_DEFINITION' => 'Ορισμός Επιχειρησιακών Κανόνων',

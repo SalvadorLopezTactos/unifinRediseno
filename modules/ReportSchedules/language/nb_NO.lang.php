@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Etter rapport',
     'LBL_RECENTLY_MODIFIED' => 'Nylig endret',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du opprettet {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Åpne planen for å legge til brukere via underpanelet Brukere.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Denne rapportkalenderen',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Registerdashbord for rapportkalendere',
 );

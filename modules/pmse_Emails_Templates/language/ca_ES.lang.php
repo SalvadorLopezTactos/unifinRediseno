@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Plantilles de correus electrònics de processos',
     'LBL_MODULE_NAME_SINGULAR' => 'Plantilla de correus electrònics de processos',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les plantilles de correu electrònic del procés',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de plantilles de correus electrònics de processos',
     'LNK_LIST' => 'Mostra plantilles de correus electrònics de processos',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Crea plantilla de correu electrònic de processos',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importa plantilles de correus electrònics de processos',

@@ -35,6 +35,7 @@ class Notes extends Portal
         $this->addVisibilityOrQueryCases($options);
         $this->addVisibilityOrQueryBugs($options);
         $this->addVisibilityOrQueryKBContents($options);
+        $this->addVisibilityOrQueryAttachments($options);
     }
 
     protected function addVisibilityOrQueryCases(array $options)
@@ -135,6 +136,19 @@ class Notes extends Portal
 
             $this->visibilityQueryOr->in($options['table_alias'] . '.id', $kbQb);
         }
+    }
+
+    protected function addVisibilityOrQueryAttachments($options)
+    {
+        $attachmentsQb = $this->db->getConnection()->createQueryBuilder();
+        $attachmentsQb->select(['n.id']);
+        $attachmentsQb->from('notes', 'n');
+        $attachmentsQb->where(
+            'n.contact_id = ' . $attachmentsQb->createPositionalParameter(
+                PortalFactory::getInstance('Session')->getContactId()
+            )
+        );
+        $this->visibilityQueryOr->in($options['table_alias'] . '.id', $attachmentsQb);
     }
 
     protected function validateOrQuery($queryOr)

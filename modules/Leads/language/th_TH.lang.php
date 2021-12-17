@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'แดชบอร์ดรายการข้อสำคัญ',
     'LBL_LEADS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกข้อสำคัญ',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'แนวโน้มลูกค้าระบบลิ้นชัก',
 
     'ERR_DELETE_RECORD' => 'ต้องระบุเลขที่ระเบียนเพื่อลบผู้สนใจ',
     'LBL_ACCOUNT_DESCRIPTION'=> 'คำอธิบายบัญชี',
@@ -325,4 +326,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'ไม่สามารถเปลี่ยนแปลงสถานะ {{moduleSingular}} ได้ {{moduleSingular}} นี้ได้ถูกแปลงค่าแล้ว',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'การพยากรณ์การแปลงผู้สนใจ',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'ดูรายละเอียดการพยากรณ์ผู้สนใจเฉพาะราย',
 );

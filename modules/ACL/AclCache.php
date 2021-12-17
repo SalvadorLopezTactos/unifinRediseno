@@ -86,9 +86,7 @@ class AclCache
             return null;
         }
 
-        if ($this->hashes === null) {
-            $this->hashes = $this->cache->get(self::HASH_KEY);
-        }
+        $this->hashes = $this->getHashes();
 
         if (isset($this->hashes[$userId][$key])) {
             $hash = $this->hashes[$userId][$key];
@@ -113,6 +111,7 @@ class AclCache
         }
 
         $hash = md5(serialize($value));
+        $this->hashes = $this->getHashes();
         if (!isset($this->hashes[$userId][$key]) || $this->hashes[$userId][$key] !== $hash) {
             $this->hashes[$userId][$key] = $hash;
             $this->cache->set(self::HASH_KEY, $this->hashes, 0);
@@ -130,9 +129,7 @@ class AclCache
     {
         // clear cache for a single user
         if ($userId) {
-            if ($this->hashes === null) {
-                $this->hashes = $this->cache->get(self::HASH_KEY);
-            }
+            $this->hashes = $this->getHashes();
             if (isset($this->hashes[$userId])) {
                 if ($key) {
                     if (isset($this->hashes[$userId][$key])) {
@@ -149,5 +146,14 @@ class AclCache
         // clear cache for all users
         $this->hashes = null;
         unset($this->cache->{self::HASH_KEY});
+    }
+
+    /**
+     * to init hashes
+     * @return array|null
+     */
+    protected function getHashes() : ?array
+    {
+        return $this->hashes?? $this->cache->get(self::HASH_KEY);
     }
 }

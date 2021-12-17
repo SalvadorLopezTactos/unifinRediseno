@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Giden E-posta Hesapları',
     'LBL_MODULE_NAME_SINGULAR' => 'Giden E-posta Hesabı',
+    'LBL_STATUS' => 'Durum',
     'LBL_MAIL_SENDTYPE' => 'Posta Transfer Protokolü',
     'LBL_MAIL_SMTPSERVER' => 'Sunucu',
     'LBL_MAIL_SMTPPORT' => 'Bağlantı noktası',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Bu sistem hesabıdır.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-Posta Adres Kimliği',
     'LBL_TYPE' => 'Tip',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Yetkili E-posta Adresi',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Gönderen E-Posta Adresi',
     'LBL_REPLY_TO_NAME' => 'Yanıtlanacak İsim',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Yanıtlanacak E-Posta Adresleri',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Yanıtlanacak E-Posta Adresi Kimliği',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Yanıtlanacak E-Posta Adresi',
     'LBL_PRIMARY_TEAM' => 'Birincil Takım',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-posta Ayarları Odak Bölmesi',
 );

@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Izejošo e-pastu konti',
     'LBL_MODULE_NAME_SINGULAR' => 'Izejošo e-pastu konts',
+    'LBL_STATUS' => 'Statuss',
     'LBL_MAIL_SENDTYPE' => 'Pasta pārsūtīšanas aģents',
     'LBL_MAIL_SMTPSERVER' => 'Serveris',
     'LBL_MAIL_SMTPPORT' => 'Ports',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Šis ir sistēmas konts.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-pasta adreses ID',
     'LBL_TYPE' => 'Tips',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Autorizēta e-pasta adrese',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Sūtītāja e-pasts',
     'LBL_REPLY_TO_NAME' => 'Atbildes saņēmēja vārds',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Atbildes saņēmēja e-pasta adreses',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Atbildes saņēmēja e-pasta adreses ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Atbildes saņēmēja e-pasta adrese',
     'LBL_PRIMARY_TEAM' => 'Primārā darba grupa',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-pasta iestatījumu fokusa panelis',
 );

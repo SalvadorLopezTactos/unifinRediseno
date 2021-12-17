@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Tabloul de bord Listă Listă ținte',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Tablou de bord Inregistrare liste țintă',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare liste țintă',
+  'LBL_RELATED_ACCOUNTS' => 'Conturi asociate',
+  'LBL_RELATED_CONTACTS' => 'Contacte asociate',
+  'LBL_RELATED_LEADS_TARGETS' => 'Clienți potențiali și ținte asociate',
 
   'LBL_MODULE_NAME' => 'Liste obiective',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista tinte',

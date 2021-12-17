@@ -42,10 +42,11 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
                         ],
                         [
                             'name' => 'status',
-                            'label' => 'LBL_STATUS',
+                            'label' => 'LBL_WIDGET_STATUS',
                             'default' => true,
                             'enabled' => true,
                             'type' => 'case-status',
+                            'widget_name' => 'widget_status',
                         ],
                     ],
                 ],
@@ -56,11 +57,12 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
                     'subfields' => [
                         [
                             'name' => 'follow_up_datetime',
-                            'label' => 'LBL_FOLLOW_UP_DATETIME',
+                            'label' => 'LBL_WIDGET_FOLLOW_UP_DATETIME',
                             'default' => true,
                             'enabled' => true,
                             'readonly' => true,
                             'type' => 'follow-up-datetime-colorcoded',
+                            'widget_name' => 'widget_follow_up_datetime',
                             'color_code_classes' => [
                                 'overdue' => 'expired',
                                 'in_a_day' => 'soon-expired',

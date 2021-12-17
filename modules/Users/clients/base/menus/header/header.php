@@ -108,18 +108,16 @@ $viewdefs[$moduleName]['base']['menu']['header'][] =
         'icon' => 'fa-arrows',
     );
 
-if (!$isIDMModeEnabled) {
-    $viewdefs[$moduleName]['base']['menu']['header'][] = [
-        'route' => '#bwc/index.php?' . http_build_query([
-            'module' => 'Import',
-            'action' => 'Step1',
-            'import_module' => $moduleName,
-            'return_module' => $moduleName,
-            'return_action' => 'index',
-        ]),
-        'label' => 'LNK_IMPORT_USERS',
-        'acl_action' => 'admin',
-        'acl_module' => $moduleName,
-        'icon' => 'fa-arrow-circle-o-up',
-    ];
-}
+$viewdefs[$moduleName]['base']['menu']['header'][] = [
+    'route' => '#bwc/index.php?' . http_build_query([
+        'module' => 'Import',
+        'action' => 'Step1',
+        'import_module' => $moduleName,
+        'return_module' => $moduleName,
+        'return_action' => 'index',
+    ]),
+    'label' => 'LNK_IMPORT_USERS',
+    'acl_action' => 'admin',
+    'acl_module' => $moduleName,
+    'icon' => 'fa-arrow-circle-o-up',
+];

@@ -26,12 +26,27 @@
     _saveOnSetContent: true,
 
     /**
+     * Disable field pill decoration on tinyMCE fields.
+     *
+     * Click-to-edit is disabled for this field due to our click listeners not
+     * working as intended within the tinyMCE iFrame. Blocking field pills makes
+     * the behavior consistent whether the field has contents or not.
+     */
+    disableDecoration: true,
+
+    /**
+     * Current version of tinyMCE editor. This is appended to script requests made
+     * by tinyMCE and the tinyMCE jquery plugin to ensure we don't load from the
+     * browser cache after a library upgrade.
+     */
+    tinyMCEVersion: '4.9.11',
+
+    /**
      * Render an editor for edit view or an iframe for others
      *
      * @private
      */
     _render: function() {
-
         this.destroyTinyMCEEditor();
 
         this._super('_render');
@@ -59,6 +74,19 @@
     },
 
     /**
+     * Prepare content to show
+     *
+     * @param {string} value Sanitize HTML before addition to view
+     * @private
+     */
+    sanitizeContent: function(value) {
+        return DOMPurify.sanitize(value, {
+            ADD_TAGS: ['iframe'],
+            ADD_ATTR: ['frameborder'],
+        });
+    },
+
+    /**
      * Determines if the iframe is loaded and has a body element
      *
      * @param {Object} editable A reference to a field jQuery object
@@ -77,10 +105,15 @@
         var editable = this._getHtmlEditableField();
         var styleExists = false;
         var styleSrc = 'styleguide/assets/css/iframe-sugar.css';
+        var css = [];
+        css.push(styleSrc);
 
         if (!editable) {
             return;
         }
+
+        // Prepare content to show
+        var sanitizedValue = this.sanitizeContent(value);
 
         if (this._iframeHasBody(editable)) {
             // Only add the stylesheet that is sugar-specific while making sure not to add any duplicates
@@ -91,17 +124,32 @@
             });
 
             if (!styleExists) {
-                // Add the tinyMCE specific stylesheet to the iframe
-                editable.contents().find('head').append($('<link/>', {
-                    rel: 'stylesheet',
-                    href: styleSrc,
-                    type: 'text/css'
-                }));
-            }
+                _.each(document.styleSheets, function(style) {
+                    if (style.href) {
+                        css.push(style.href);
+                    }
+                });
 
-            editable.contents().find('body').html(value);
+                _.each(css, function(href) {
+                    editable.contents().find('head').append($('<link/>', {
+                        rel: 'stylesheet',
+                        href: href,
+                        type: 'text/css'
+                    }));
+                });
+            }
+            var frame = _.find(editable, function(item) {
+                return item.tagName === 'IFRAME';
+            });
+            if (frame && frame.contentWindow && frame.contentWindow.document && !_.isNull(value)) {
+                frame.contentDocument.body.innerHTML = value;
+                frame.contentDocument.body.style.background = 'white';
+            }
         } else {
-            editable.attr('srcdoc', value);
+            // If the element has no body, the iframe hasn't loaded. Wait until it loads
+            editable.on('load', function() {
+                this.setViewContent(value);
+            }, this);
         }
     },
 
@@ -149,12 +197,15 @@
     getTinyMCEConfig: function(){
         return {
             // Location of TinyMCE script
-            script_url: 'include/javascript/tinymce4/tinymce.min.js',
+            script_url: 'include/javascript/tinymce4/tinymce.min.js?v=' + this.tinyMCEVersion,
+            // Force loading of current version of tinyMCE plugin
+            cache_suffix: '?v=' + this.tinyMCEVersion,
 
             // General options
             theme: 'modern',
             skin: 'sugar',
-            plugins: 'code,textcolor',
+            plugins: 'code,help,textcolor,insertdatetime,table,paste,charmap,' +
+                'image,link,anchor,directionality,searchreplace,hr,lists',
             browser_spellcheck: true,
 
             // User Interface options
@@ -163,9 +214,11 @@
             menubar: false,
             statusbar: false,
             resize: false,
-            toolbar: 'code | bold italic underline strikethrough | bullist numlist | alignleft aligncenter ' +
-                'alignright alignjustify | forecolor backcolor | fontsizeselect | formatselect | fontselect',
-
+            toolbar: 'code | bold italic underline strikethrough | alignleft aligncenter alignright ' +
+                'alignjustify | forecolor backcolor |  styleselect formatselect fontselect ' +
+                'fontsizeselect | cut copy paste pastetext | search searchreplace | bullist numlist | ' +
+                'outdent indent | ltr rtl | undo redo | link unlink anchor image | subscript ' +
+                'superscript | charmap | table | hr removeformat | insertdatetime',
             // Sets the text of the Target element of the link plugin. To disable
             // this completely, set target_list: false
             target_list: [
@@ -184,7 +237,11 @@
 
             // URL options
             relative_urls: false,
-            convert_urls: false
+            convert_urls: false,
+
+            // Allow image copy&paste
+            paste_data_images: true,
+            images_upload_handler: _.bind(this.tinyMCEImagePasteCallback, this)
         };
     },
 
@@ -297,6 +354,22 @@
      */
     getEditorContent: function() {
         return this._htmleditor.getContent({format: 'raw'});
+    },
+
+    /**
+     * Get the content height of the field's iframe.
+     *
+     * @private
+     * @return {number} Returns 0 if the iframe isn't found.
+     */
+    _getContentHeight: function() {
+        var editable = this._getHtmlEditableField();
+
+        if (this._iframeHasBody(editable)) {
+            return editable.contents().find('body')[0].offsetHeight;
+        }
+
+        return 0;
     },
 
     /**

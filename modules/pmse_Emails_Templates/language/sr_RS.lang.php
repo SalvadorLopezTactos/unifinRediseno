@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Šabloni procesnog Email-a',
     'LBL_MODULE_NAME_SINGULAR' => 'Šablon procesnog Email-a',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za šablone e-pošte procesa',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o šablonima e-pošte procesa',
     'LNK_LIST' => 'Prikazati šablone procesnih Email-ova',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Kreirati Šablon Procesnog Email-a',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Uvesti Šablon Procesnog Email-a',

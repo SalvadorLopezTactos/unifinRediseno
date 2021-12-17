@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontakti',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Potencijalni klijenti',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Korisnici',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Nadzorna ploča zapisa o poslovnim centrima',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za poslovne centre',
 ];

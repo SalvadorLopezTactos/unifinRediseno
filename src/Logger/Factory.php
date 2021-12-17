@@ -36,7 +36,7 @@ class Factory
     /**
      * Instantiated loggers
      *
-     * @var self[]
+     * @var LoggerInterface[]
      */
     protected static $loggers;
 

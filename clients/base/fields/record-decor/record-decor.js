@@ -25,6 +25,24 @@
         this._super('initialize', [options]);
         this.fields = [];
         this.actualFieldsMeta = [this.def.field];
+        this.disabled = false;
+        this.context.on('field:disabled', this._setDisabled, this);
+    },
+
+    /**
+     * Set the disable property and redecorate.
+     * @private
+     */
+    _setDisabled: function(fieldName) {
+        var field = this.getActualField();
+        if (!field || !field.name) {
+            return;
+        }
+        if (field.name == fieldName) {
+            this.disabled = true;
+            this.redecorate(field);
+
+        }
     },
 
     /**
@@ -65,9 +83,6 @@
             field.setElement(fieldElems[field.sfId]);
             field.render();
             this.redecorate(field);
-            if (!field.def.labelsOnTop) {
-                this.relocatePencil(field);
-            }
         }, this);
     },
 
@@ -161,7 +176,12 @@
         }
 
         // Allow fields to prevent their design to be controlled by record-decor
-        if (field.disableDecoration) {
+        if (this.fieldDecorationDisabled(field)) {
+            return;
+        }
+
+        // Do not redecorate readonly fields
+        if (app.utils.isFieldAlwaysReadOnly(field.def, field.viewDefs)) {
             return;
         }
 
@@ -173,7 +193,8 @@
         if (actionToCheck == 'detail') {
             const editAccess = app.acl.hasAccessToModel('edit', this.model, field.name);
 
-            if (field.isFieldEmpty() && editAccess) {
+            if (field.isFieldEmpty() && editAccess && !this.disabled &&
+                !(this.view && _.contains(this.view.noEditFields, field.name))) {
                 this.setCellStyle('pill');
                 field.hide();
             } else {
@@ -184,6 +205,28 @@
             this.setCellStyle('none');
             field.show();
         }
+
+        if (!field.def.labelsOnTop) {
+            this.relocatePencil();
+        }
+    },
+
+    /**
+     * Check the field to see if disableDecoration is set to true for the field,
+     * or for a fieldset for its components.
+     *
+     * @param field
+     * @return {boolean}
+     */
+    fieldDecorationDisabled: function(field) {
+        if (field.disableDecoration) {
+            return true;
+        } else if (field.type === 'fieldset' && _.some(field.fields, function(field) {
+            return field.disableDecoration;
+        })) {
+            return true;
+        }
+        return false;
     },
 
     /**
@@ -200,10 +243,10 @@
     /**
      * In labelsOnSide view, the pencil icon needs to be moved to the left
      * so it hovers near the text
-     *
-     * @param {field} field whose pencil we're moving
      */
-    relocatePencil: function(field) {
+    relocatePencil: function() {
+        var field = this.getActualField();
+
         var cell = this.getRecordCell();
         let isCellHidden = cell.parent().hasClass('hide');
 
@@ -223,16 +266,20 @@
             this.toggleRecordCellDisplay(cell);
         }
 
-        var offset = wrapperWidth - labelWidth + 5;
+        var offset = wrapperWidth - labelWidth - 6;
 
-        // bool fields' element wrappers aren't the same size as other fields,
-        // so we need to change their offset
-        if (field.type === 'bool') {
-            offset -= 15;
+        let css = {};
+
+        // change offset if it's showed children's label instead of label of field
+        if (field && field.type === 'fieldset' && field.def.show_child_labels) {
+            offset += 26;
+        }
+
+        if (field && !field.def.show_child_labels) {
+            css = {top: '6px'};
         }
 
         var direction = app.lang.direction === 'ltr' ? 'left' : 'right';
-        var css = {top: '6px'};
         css[direction] = offset + 'px';
 
         pencil.css(css);

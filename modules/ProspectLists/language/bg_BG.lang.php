@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Електронно табло със списък на Целеви групи',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Електронно табло със запис на списъци на целевите клиенти',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на списъци с цели',
+  'LBL_RELATED_ACCOUNTS' => 'Свързани профили',
+  'LBL_RELATED_CONTACTS' => 'Свързани контакти',
+  'LBL_RELATED_LEADS_TARGETS' => 'Свързани потенциални клиенти и цели',
 
   'LBL_MODULE_NAME' => 'Целеви групи',
   'LBL_MODULE_NAME_SINGULAR' => 'Целева група',

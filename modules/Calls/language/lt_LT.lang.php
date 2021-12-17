@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Skambučių sąrašo ataskaitų sritis',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Skambučių duomenų ataskaitų sritis',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Skambučių „Focus“ stalčius',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Skambučiai',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Atsakingas',
     'LBL_LIST_MY_CALLS' => 'Mano skambučiai',
     'LBL_MY_SCHEDULED_CALLS' => 'My Scheduled Calls',
+    'LBL_GUEST_CALLS' => 'Mano skambučiai kaip svečio',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Suplanuoti skambučiai kaip svečio',
     'LBL_SELECT_FROM_DROPDOWN' => 'Prašome pirmiausia pasirinkti reikšmę iš Susiję su iššokančio sąrašo.',
 	'LBL_ASSIGNED_TO_NAME' => 'Atsakingas',
 	'LBL_ASSIGNED_TO_ID' => 'Atsakingas',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Atšaukti',
     'LBL_EMPTY_SEARCH_RESULT' => 'Atsiprašome, nerasta jokių rezultatų. Prašome sukurti pakvietimą žemiau.',
     'LBL_NO_ACCESS' => 'Jūs neturi teisių prieiti prie $module modulio',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => '„Amazon Connect“ kontakto ID',
+
     'LBL_REPEAT_TYPE' => 'Pasikartojimo tipas',
     'LBL_REPEAT_INTERVAL' => 'Pasikartojimo intervalas',
     'LBL_REPEAT_END' => 'Pabaiga',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Pokalbis su {{{this}}}',
     'LBL_SEND_INVITES' => 'Siųsti pakvietimus',
     'LBL_REMINDER_TITLE' => 'Skambutis:',
+    'LBL_CALL_RECORDING_URL' => 'Įrašymo URL',
+    'LBL_CALL_RECORDING' => 'Įrašymas',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'You scheduled the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> for {{formatDate date_start}}.',

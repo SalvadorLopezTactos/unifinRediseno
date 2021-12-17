@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Vergi Sınıfı:',
   'LBL_TYPE_NAME'=>'Tip İsmi',
   'LBL_TYPE' => 'Tipi',
+  'LBL_PRODUCT_TYPE' => 'Ürün Tipi',
   'LBL_URL' => 'Ürün URL:',
   'LBL_VENDOR_PART_NUM' => 'Satıcı Parça Numarası:',
   'LBL_WEIGHT' => 'Ağırlık:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Ürün Kataloğunu Göster',
   'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Ekle',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Ürün Kataloğu Ara',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Mevcut veri yok',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atanmış Kullanıcı İsmi',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Ürün Tipleri',
   'LBL_RENEWABLE' => 'Yenilenebilir',
   'LBL_SERVICE' => 'Hizmet',
+  'LBL_LOCK_DURATION' => 'Kilitleme Süresi',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Ürün Kataloğu Listesi Panosu',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Ürün Kataloğu Kayıt Panosu',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Ürün Kataloğu Odak Bölmesi',
 );

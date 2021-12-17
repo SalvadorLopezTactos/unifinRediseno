@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' وظيفة مجدولة',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'إعادة إنشاء بيانات أمان الفريق غير المتوافقة',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'مُزيل سير النشاط',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'تحديث تعريف المنتج',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'جداول معتمدة على الوقت للعمليات',
+'LBL_OOTB_DATA_ARCHIVER' => 'تشغيل أرشيفات/محذوفات البيانات النشطة',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'الفاصل الزمني:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'دومًا',
 'LBL_CATCH_UP' => 'التنفيذ في حالة الفقدان',
+'LBL_SYSTEM_JOB' => 'هل هذا نظام مهمة حالية؟',
 'LBL_CATCH_UP_WARNING' => 'قم بإلغاء التحديد إذا كانت هذه الوظيفة ستستغرق وقتًا أكبر من لحظة حتى تعمل.',
 'LBL_DATE_TIME_END' => 'نهاية الوقت والتاريخ',
 'LBL_DATE_TIME_START' => 'بدء الوقت والتاريخ',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'إزالة ملفات الأدوات التشخيصية',
 'LBL_SUGARJOBREMOVETMPFILES' => 'إزالة الملفات المؤقتة',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'إعادة إنشاء بيانات أمان الفريق غير المتوافقة',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'تحديث تعريف المنتج',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'تشغيل حملات البريد الإلكتروني الجماعية ليلاً',
 'LBL_ASYNCMASSUPDATE' => 'عمل تحديثات عامة متزامنة',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'تنظيف قوائم انتظار الوظائف',
 'LBL_CLEANOLDRECORDLISTS' => 'تنظيف لوائح السجلات القديمة',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'مُزيل سير النشاط',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'جداول معتمدة على الوقت للعمليات',
 'LBL_PMSEENGINECRON' => 'جدولة SugarBPM',
 );
 

@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Clasa de taxe:',
   'LBL_TYPE_NAME'=>'Tastati numele',
   'LBL_TYPE' => 'Tip',
+  'LBL_PRODUCT_TYPE' => 'Tip produs',
   'LBL_URL' => 'URL',
   'LBL_VENDOR_PART_NUM' => 'Nume parte furnizor:',
   'LBL_WEIGHT' => 'Greutate:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Vezi catalog produse',
   'NTC_DELETE_CONFIRMATION' => 'Esti sigur ca vrei sa stergi aceasta inregistrare?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Adăugare',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Căutați în Catalogul de produse',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Nu există date disponibile',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Alocat utilizatorului',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Tipuri Produse',
   'LBL_RENEWABLE' => 'Se poate reînnoi',
   'LBL_SERVICE' => 'Serviciu',
+  'LBL_LOCK_DURATION' => 'Durată blocare',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Tablou de bord cu lista cataloagelor de produse',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Tablou de bord cu înregistrarea cataloagelor de produse',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare catalogul produselor',
 );

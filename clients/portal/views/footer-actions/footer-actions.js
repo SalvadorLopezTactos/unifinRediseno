@@ -31,7 +31,7 @@
      */
     support: function() {
         var serverInfo = app.metadata.getServerInfo();
-        var url = 'http://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor + '&version=' +
+        var url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor + '&version=' +
         serverInfo.version + '&module=Portal';
 
         window.open(url, '_blank');

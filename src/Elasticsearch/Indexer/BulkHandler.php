@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Indexer;
 
+use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Bulk;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
 use Elastica\Exception\Bulk\ResponseException;
 use Psr\Log\LogLevel;
@@ -28,7 +29,7 @@ class BulkHandler
     const EXPLICIT_INDEX_KEY = '_explicit_';
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Container
+     * @var Container
      */
     protected $container;
 
@@ -267,11 +268,11 @@ class BulkHandler
 
     /**
      * Get bulk object
-     * @return \Elastica\Bulk
+     * @return Bulk
      */
     protected function newBulkObject()
     {
-        return new \Elastica\Bulk($this->container->client);
+        return new Bulk($this->container->client);
     }
 
     /**

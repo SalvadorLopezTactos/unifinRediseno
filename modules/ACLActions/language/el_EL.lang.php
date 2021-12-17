@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Λίστα Ρόλων Ανά Χρήστη',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Ρόλοι Χρηστών',
 'LBL_SEARCH_FORM_TITLE'=>'Αναζήτηση',
+'LBL_ACTION_RECORD_VIEW'=>'Προβολή εγγραφής',
 'LBL_ACTION_VIEW'=>'Προβολή',
 'LBL_ACTION_EDIT'=>'Επεξεργασία',
 'LBL_ACTION_DELETE'=>'Διαγραφή',

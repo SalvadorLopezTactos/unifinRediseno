@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Gabim gjatë përftimit të të dhënave të raportit të detajuar për këtë veprim. Kontakto me zotëruesin e raportit për asistencë.',
     'LBL_CHART_NO_DRILLTHRU' => 'Nuk është i mundur detajimi',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te raportet',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Pamja në formë liste shfaq të gjitha raportet që plotësojnë kriteret e kërkimit aktual dhe në të cilat përdoruesit kanë akses. Mund të shikosh të dhënat bazë të çdo raporti brenda kolonave në fushën e pamjes në formë liste dhe te pamja paraprake. Mund të caktosh etiketa për raportet dhe të krijosh filtra. Kliko emrin e raportit për të parë raportin ose zgjidh "Modifiko raportin" në menynë e veprimeve për ta modifikuar raportin.',

@@ -15,3 +15,4 @@
 global $dictionary;
 include SugarAutoLoader::existingCustomOne('metadata/emails_beansMetaData.php');
 $dictionary['EmailText'] = $dictionary['emails_text'];
+$dictionary['EmailText']['archive'] = false;

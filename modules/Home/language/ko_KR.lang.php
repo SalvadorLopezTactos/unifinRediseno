@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet  추가되었습니다.',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => '대쉬릿이 다시 배열됩니다. 레이아웃 배치를 변경하시겠습니까?',
   'LBL_REMOVE_DASHLET_CONFIRM' => '대쉬릿을 제거하시겠습니까?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => '구성된 대시보드가 없습니다.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => '구성된 대시보드 없음',
+  'LBL_NO_DASHLETS_CONFIGURED' => '구성된 대쉬릿 없음',
   'LBL_CREATE_DASHBOARD_LINK' => '대시보드 만들기',
 
   'LBL_DASHLET_WEBPAGE_NAME' => '웹 페이지',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => '일부 사이트는 안전하지 않은 내용이나 정책으로 인해 제대로 로드되지 않을 수 있습니다',
 
-  'LBL_DASHLET_ADD' => '대쉬릿 추가하기',
+  'LBL_DASHLET_ADD' => '대쉬릿 추가',
   'LBL_DASHLET_DELETE' => '대쉬릿 삭제하기',
   'LBL_DASHLET_REFRESH' => '대쉬릿 새로고침',
   'LBL_DASHLET_EDIT' => '대쉬릿 편집하기',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Mihai Bazon에 의해 개발된 날짜 입력식의 달력',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Wayne Munro에 의해 개발된 PDF 문서 제조를 위한 자료실',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_서버- PHP에서의 WebDAV 서버 실행',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - Vincent Blavet에 의한 Zip 형식 보관을 위한 압축과 기능 발췌를 제공하는 자료실',
   'LBL_SOURCE_SMARTY' => 'Smarty - PHP를 위한 템플릿 엔진',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo!  사용자 인터페이스 자료실 - UI자료실 시설은 풍부한 고객중심 기능을 촉진시킵니다.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - PHP를 위한 전체 기능의 이메일 수송 종류',

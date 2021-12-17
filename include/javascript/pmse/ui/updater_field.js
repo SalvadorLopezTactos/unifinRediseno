@@ -2870,7 +2870,7 @@ SearchUpdaterItem.prototype._queryFunction = function(options) {
     var self = this;
     var finalData = options.page > 1 ? [] : this._filterSelections(options, this._defaultSearchOptions);
     var callbackOptions = {more: false};
-    var term = $.trim(options.term);
+    var term = options.term.trim();
     var that = this;
 
     if (term) {
@@ -2929,7 +2929,7 @@ SearchUpdaterItem.prototype._initSelection = function(element, callback) {
  */
 SearchUpdaterItem.prototype._filterSelections = function(searchOptions, results) {
     var finalData = [];
-    var term = $.trim(searchOptions.term);
+    var term = searchOptions.term.trim();
     _.each(results, function(result) {
         if (!term || searchOptions.matcher(term, result.text)) {
             finalData.push({

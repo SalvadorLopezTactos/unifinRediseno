@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Paneli i listës së këndit të njohurive',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të këndit të njohurive',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te baza e njohurive',
 
     'LBL_MODULE_NAME' => 'Baza e njohurisë',
     'LBL_MODULE_NAME_SINGULAR' => 'Artikuj të bazës së nojurive',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Jo i dobishëm',
     'LBL_RATING' => 'Klasifikimi:',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'Shkarkoji të gjitha',
-    'LBL_DOWNLOAD_ONE' => 'Shkarko',
-    'LBL_ATTACHMENTS' => 'Bashkëngjitjet',
-    'LBL_ADD_ATTACHMENT' => 'Shfleto',
     'LBL_CATEGORIES' => 'Kategoritë e bazës së njohurisë',
     'LBL_CATEGORY_NAME' => 'Kategoria',
     'LBL_USEFULNESS' => 'Dobia',

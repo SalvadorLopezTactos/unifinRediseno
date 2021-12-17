@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' งานตามกำหนดการ',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'สร้างข้อมูลความปลอดภัยของทีมที่ถูกดีนอร์มัลไลซ์ใหม่',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'ตัวล้างสตรีมกิจกรรม',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'อัปเดตคำอธิบายผลิตภัณฑ์',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'ดำเนินการกำหนดการตามเวลา',
+'LBL_OOTB_DATA_ARCHIVER' => 'ดำเนินการจัดเก็บ/ลบข้อมูลที่ใช้งานอยู่ถาวร',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'ช่วงเวลา:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'เสมอ',
 'LBL_CATCH_UP' => 'เรียกใช้ถ้าพลาด',
+'LBL_SYSTEM_JOB' => 'เป็นระบบงานปัจจุบันหรือไม่',
 'LBL_CATCH_UP_WARNING' => 'ไม่เลือกตัวเลือกนี้ถ้างานนี้ใช้เวลานานในการทำงาน',
 'LBL_DATE_TIME_END' => 'วันที่และเวลาสิ้นสุด',
 'LBL_DATE_TIME_START' => 'วันที่และเวลาเริ่มต้น',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'นำไฟล์ของเครื่องมือวินิจฉัยออก',
 'LBL_SUGARJOBREMOVETMPFILES' => 'นำไฟล์ชั่วคราวออก',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'สร้างข้อมูลความปลอดภัยของทีมที่ถูกดีนอร์มัลไลซ์ใหม่',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'อัปเดตคำอธิบายผลิตภัณฑ์',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'เรียกใช้แคมเปญของอีเมลเป็นกลุ่มในช่วงกลางคืน',
 'LBL_ASYNCMASSUPDATE' => 'ดำเนินการอัปเดตเป็นกลุ่มแบบอะซิงโครนัส',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'ล้างข้อมูลคิวงาน',
 'LBL_CLEANOLDRECORDLISTS' => 'ล้างข้อมูลรายการระเบียนเก่า',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'ตัวล้างสตรีมกิจกรรม',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'ดำเนินการกำหนดการตามเวลา',
 'LBL_PMSEENGINECRON' => 'เครื่องมือวางกำหนดการ SugarBPM',
 );
 

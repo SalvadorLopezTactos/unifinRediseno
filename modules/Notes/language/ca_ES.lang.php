@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de notas',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de notes',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les notes',
 
+    'LBL_RELATED_CONTACT' => 'Contacte relacionat',
     'ERR_DELETE_RECORD' => 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
     'LBL_ACCOUNT_ID' => 'ID del compte:',
     'LBL_CASE_ID' => 'ID Cas:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID Contacte:',
     'LBL_CONTACT_NAME' => 'Contacte:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notes',
+    'LBL_ATTACHMENTS' => 'Adjunts',
+    'LBL_ATTACHMENT_FLAG' => 'És Adjunt',
     'LBL_DESCRIPTION' => 'Descripció',
     'LBL_EMAIL_ADDRESS' => 'Adreça electrònica:',
     'LBL_EMAIL_ATTACHMENT' => 'Fitxer adjunt de correu electrònic',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes i adjunts',
     'LBL_NOTE' => 'Nota:',
     'LBL_OPPORTUNITY_ID' => 'ID d&#39;oportunitat:',
+    'LBL_NOTE_PARENT_ID' => 'ID principal de la nota:',
     'LBL_PARENT_ID' => 'ID principal:',
     'LBL_PARENT_TYPE' => 'Tipus d&#39;element principal',
     'LBL_EMAIL_TYPE' => 'Tipus de correu electrònic',

@@ -101,6 +101,7 @@ $viewdefs['pmse_Business_Rules']['base']['view']['record'] = [
                 [
                     'name' => 'picture',
                     'type' => 'avatar',
+                    'size' => 'large',
                     'width' => 42,
                     'height' => 42,
                     'dismiss_label' => true,

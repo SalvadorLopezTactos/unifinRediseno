@@ -96,7 +96,14 @@
         }
 
         if (!hasDashboardModels) {
-            var model = this._getNewDashboardObject('model', context);
+            var model;
+            if (_.contains(['multi-line', 'focus'], context.get('layout'))) {
+                // On the multi-line list and focus view, side drawer/focus drawer, the dashlets need
+                // the correct model context, which is set here.
+                model = options.layout.layout.model;
+            } else {
+                model = this._getNewDashboardObject('model', context);
+            }
             if (context.get('modelId')) {
                 model.set('id', context.get('modelId'), {silent: true});
             }
@@ -505,18 +512,32 @@
         }
 
         // For search dashboards, use the search-dashboard-headerpane
+        // For multi-line-list and focus dashboards, use the side-drawer-header
+        // Otherwise, use the dashboard-headerpane
         var headerPane;
+        var actionButtons;
+        var sideDrawerHeaderLayouts = ['multi-line', 'focus'];
         if (id === 'search') {
             headerPane = {
                 view: 'search-dashboard-headerpane'
             };
+            actionButtons = {};
         } else if (layout.context && layout.context.parent &&
-            layout.context.parent.get('layout') === 'multi-line') {
-            // don't show headerpane for multi-line dashboards
-            headerPane = {};
+            _.contains(sideDrawerHeaderLayouts, layout.context.parent.get('layout'))) {
+            headerPane = {
+                view: 'side-drawer-header'
+            };
+            actionButtons = {
+                view: 'dashboard-fab',
+                loadModule: ''
+            };
         } else {
             headerPane = {
                 view: 'dashboard-headerpane',
+                loadModule: 'Dashboards'
+            };
+            actionButtons = {
+                view: 'dashboard-fab',
                 loadModule: 'Dashboards'
             };
         }
@@ -529,7 +550,8 @@
                     headerPane,
                     {
                         layout: 'dashlet-main'
-                    }
+                    },
+                    actionButtons
                 ],
                 last_state: {
                     id: 'last-visit'
@@ -750,9 +772,11 @@
      * @private
      */
     _renderEmptyTemplate: function() {
-        var tplName = this.type || this.name;
-        var template = app.template.getLayout(tplName + '.dashboard-empty');
 
+        // Grab new dashboard-empty view
+        var template = app.template.getLayout('dashboard.dashboard-empty', 'Dashboards');
+
+        // Replace html on the layout with the empty dashboard view
         this.$el.html(template(this));
     },
 

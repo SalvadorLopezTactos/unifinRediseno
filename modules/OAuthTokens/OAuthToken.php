@@ -312,13 +312,13 @@ ORDER BY expire_ts DESC';
 	/**
 	 * Delete token by ID
 	 * @param string id
-	 * @see SugarBean::mark_deleted($id)
+     * @see SugarBean::doMarkDeleted()
 	 */
-	public function mark_deleted($id)
+    protected function doMarkDeleted(): void
 	{
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($id));
+        $conn->executeQuery($query, array($this->id));
 	}
 
 	/**

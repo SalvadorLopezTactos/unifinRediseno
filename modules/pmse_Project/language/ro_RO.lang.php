@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definiţii proces',
   'LBL_MODULE_NAME_SINGULAR' => 'Definiţie proces',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare definiri de proces',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare definiții procese',
   'LNK_LIST' => 'Vizualizare definiţii proces',
   'LNK_NEW_PMSE_PROJECT' => 'Creează Definiţie procese',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importă Definiţii procese',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Schimbă posesorul înregistrării',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Echipa:',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Realocă activitatea',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Trimite un e-mail utilizatorului procesului atunci când procesul este atribuit',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definiţie utilizator',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Metodă alocare',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Alocă utilizator',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Actualizare „Alocat lui” din înregistrare',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Setează „Atribuit lui” în funcție de disponibilitate',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Adaugă înregistrare aferentă',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Modul inrudit',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Numele activităţii nu este completat',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Numele „%s” există deja în familia de modele.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Disponibilitate de tură necesară',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Dacă nu sunt disponibili utilizatorii',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'înainte de',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Doar inregistrarile noi',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Doar înregistrări actualizate',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Doar registre actualizate (Toate actualizările - Consultaţi textul Ajutor)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Înregistrări noi sau prima actualizare',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Înregistrări noi și toate actualizările',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selectează când va începe evenimentul',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selectează când va începe procesul.<br><br>Nou: Rulează procesul atunci când este creată o nouă înregistrare.<br><br>Prima actualizare: Procesul rulează numai prima dată când sunt îndeplinite criteriile pentru o înregistrare existentă.<br><br>Toate actualizările: Procesul rulează de fiecare dată când sunt îndeplinite criteriile pentru o înregistrare existentă.<br><br>Înregistrări noi sau prima actualizare: Procesul rulează numai prima dată când sunt îndeplinite criteriile pentru o înregistrare, fie în timpul creării înregistrării, fie în timpul actualizării înregistrării.<br><br>Înregistrări noi și toate actualizările: Procesul rulează de fiecare dată pentru toate înregistrările noi și existente.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Selectează modulul SugarCRM pentru a se aplica declanşatorului de evenimente',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Dată fixată',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'se schimbă din',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'se schimbă în',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'include oricare',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'nu include niciunul',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'în data de sau după',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'în data de sau înainte',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nu este egal cu',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Adăugare',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Închidere',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Toate echipele alocate înregistrării',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Echipe',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED%asociat cu %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Utilizatorul care a creat %MODULE%',

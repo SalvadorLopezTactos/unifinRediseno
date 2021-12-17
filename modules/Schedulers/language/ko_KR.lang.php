@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' 예정된 작업',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '정규화되지 않은 팀 보안 데이터 다시 빌드',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => '활동 흐름 목록',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => '제품 정의 업데이트',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => '처리 시간 인식 일정',
+'LBL_OOTB_DATA_ARCHIVER' => '활성화된 데이터 아카이브/삭제 실행',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '간격',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => '항상',
 'LBL_CATCH_UP' => '놓친 부분 실행',
+'LBL_SYSTEM_JOB' => '현재 작업 시스템입니까?',
 'LBL_CATCH_UP_WARNING' => '실행시간이 일정시간 이상 소요되면 확인 취소하십시오',
 'LBL_DATE_TIME_END' => '날짜와 완료 시간',
 'LBL_DATE_TIME_START' => '날짜와 시작 시간',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '진단 도구 파일을 제거',
 'LBL_SUGARJOBREMOVETMPFILES' => '임시 파일 제거',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => '정규화되지 않은 팀 보안 데이터 다시 빌드',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => '제품 정의 업데이트',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '매일 저녁 대용량 이메일 캠페인 실행',
 'LBL_ASYNCMASSUPDATE' => '비동시적 대규모 업데이트를 실행합니다.',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => '대기중 작업 마무리하기',
 'LBL_CLEANOLDRECORDLISTS' => '예전 기록목록을 삭제합니다.',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => '활동 흐름 목록',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => '처리 시간 인식 일정',
 'LBL_PMSEENGINECRON' => 'SugarBPM 일정관리',
 );
 

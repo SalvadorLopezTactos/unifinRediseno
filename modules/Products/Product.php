@@ -75,6 +75,8 @@ class Product extends SugarBean
     public $commit_stage;
     public $opportunity_id;
     public $product_type;
+    public $discount_amount_signed;
+    public $renewal;
 
     // These are for related fields
     public $assigned_user_id;
@@ -95,6 +97,8 @@ class Product extends SugarBean
     public $contracts;
     public $product_index;
     public $revenuelineitem_id;
+    public $add_on_to_id;
+    public $parent_rli_id;
 
 
     /**
@@ -347,6 +351,7 @@ class Product extends SugarBean
 
         $this->calculateDiscountPrice();
 
+        $this->setDurationFields();
         $this->setServiceEndDate();
 
         $id = parent::save($check_notify);
@@ -386,6 +391,35 @@ class Product extends SugarBean
             $this->service_end_date = null;
             $this->service_duration_value = null;
             $this->service_duration_unit = null;
+        }
+    }
+
+    /**
+     * Set the service duration for coterm QLIs so the end date remains constant
+     */
+    protected function setDurationFields()
+    {
+        if (!empty($this->add_on_to_id)) {
+            $startDate = new \SugarDateTime($this->service_start_date);
+            // calculates inclusive of the end date
+            $endDate = new \SugarDateTime($this->service_end_date);
+            $endDate->modify('+1 day');
+
+            // calculates whole years/months, otherwise, days is used
+            $diff = $startDate->diff($endDate);
+            if ($diff->d > 0) {
+                $this->service_duration_unit = 'day';
+                $this->service_duration_value = $diff->days;
+            } elseif ($diff->m > 0) {
+                $this->service_duration_unit = 'month';
+                $this->service_duration_value = $diff->y * 12 + $diff->m;
+            } elseif ($diff->y > 0) {
+                $this->service_duration_unit = 'year';
+                $this->service_duration_value = $diff->y;
+            } else {
+                $this->service_duration_unit = 'day';
+                $this->service_duration_value = -1;
+            }
         }
     }
 
@@ -541,17 +575,10 @@ class Product extends SugarBean
             $endDate = $datetime->modify($this->service_duration_value . ' ' . $this->service_duration_unit);
             $rli->service_end_date = $datetime->asDbDate($endDate, false);
         }
-
-        if ($this->discount_select == 1) {
-            // we have a percentage discount, but we don't allow the use of percentages on
-            // the RevenueLineItem module yet, so we need to set discount_select to 0
-            // and calculate out the correct discount_amount.
-            $rli->discount_select = 0;
-            $rli->discount_amount = SugarMath::init()->
-                exp('(?*?)*(?/100)', array($this->discount_price, $this->quantity, $this->discount_amount))->
-                result();
+        // copy the add on to relationship
+        if (!empty($this->add_on_to_id)) {
+            $rli->add_on_to_id = $this->add_on_to_id;
         }
-
 
         // since we don't have a likely_case on products,
         if ($rli->likely_case == '0.00' || empty($rli->likely_case)) {
@@ -582,7 +609,7 @@ class Product extends SugarBean
         }
 
         $template = BeanFactory::getBean('ProductTemplates', $this->product_template_id);
-        
+
         foreach ($this->template_fields as $template_field) {
             // do not copy from template if field is:  Not empty, or has an int value equal to zero, or a string value equal to '0' or '0.0'
             if (!empty($this->$template_field)

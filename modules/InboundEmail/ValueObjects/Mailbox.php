@@ -52,6 +52,26 @@ final class Mailbox
 
     public function value(): string
     {
-        return '{' . $this->remoteSystemName->value() . ':' . $this->port . implode('', $this->flags) . '}' . $this->mailboxName;
+        return '{' . $this->getHost() . ':' . $this->getPort() . implode('', $this->flags) . '}' . $this->getMailboxName();
+    }
+
+    public function getHost(): string
+    {
+        return $this->remoteSystemName->value();
+    }
+
+    public function getPort(): int
+    {
+        return $this->port;
+    }
+
+    public function getMailboxName(): string
+    {
+        return $this->mailboxName;
+    }
+
+    public function getSecurityProtocol(): string
+    {
+        return in_array('/ssl', $this->flags) ? 'ssl': 'none';
     }
 }

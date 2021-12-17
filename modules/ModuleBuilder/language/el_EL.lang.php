@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Διαμόρφωση Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Ενεργοποίηση πύλης',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Ενεργοποιήστε την αναζήτηση πριν ανοίξετε μια υπόθεση',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Επιτρέψτε στους χρήστες της πύλης να κλείσουν την υπόθεση',
     'LBL_PORTAL_THEME' => 'Θέμα Portal',
     'LBL_PORTAL_ENABLE' => 'Ενεργοποιημένο',
     'LBL_PORTAL_SITE_URL' => 'Η Δικτυακή σας πύλη είναι διαθέσιμη στο:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Επιλέξτε να χρησιμοποιήσετε το πεδίο αυτό όταν ψάχνετε για αρχεία χρησιμοποιώντας τη Σφαιρική Αναζήτηση σε αυτή την ενότητα.',
+'LBL_POPHELP_REQUIRED'=>"Δημιουργήστε έναν τύπο για να προσδιορίσετε εάν αυτό το πεδίο απαιτείται σε διατάξεις.<br/>"
+    . "Τα απαιτούμενα πεδία θα ακολουθήσουν τον τύπο στην προβολή κινητού που βασίζεται στο πρόγραμμα περιήγησης, <br/>"
+    . "αλλά δεν θα εφαρμόσει τον τύπο στις εγγενείς εφαρμογές, όπως το Sugar Mobile για iPhone. <br/>"
+    . "Δεν θα εφαρμόσουν τον τύπο στο Portal Sugar Self-Service.",
+'LBL_POPHELP_READONLY'=>"Δημιουργήστε έναν τύπο για να προσδιορίσετε εάν αυτό το πεδίο απαιτείται σε διατάξεις.<br/>"
+        . "Τα πεδία μόνο για ανάγνωση θα ακολουθήσουν τον τύπο στην προβολή κινητού που βασίζεται στο πρόγραμμα περιήγησης, <br/>"
+        . "αλλά δεν θα εφαρμόσουν τον τύπο στις εγγενείς εφαρμογές, όπως το Sugar Mobile για iPhone. <br/>"
+        . "Δεν θα εφαρμόσουν τον τύπο στο Portal Sugar Self-Service.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Επιλέξτε να χρησιμοποιήσετε αυτό το πεδίο κατά την αναζήτηση εγγραφών χρησιμοποιώντας την Γενική αναζήτηση σε αυτήν την ενότητα.',
 //Revert Module labels
 'LBL_RESET' => 'Επαναφορά',
 'LBL_RESET_MODULE' => 'Επαναφορά Ενότητας',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Κρυπτογράφηση',
                 'datetimecombo' =>'Ημερομηνία Ώρα',
                 'decimal'=>'Δεκαδικός αριθμός',
+                'autoincrement' => 'auto-increment',
 ),
 'labelTypes' => array(
     "" => "Ετικέτες Συχνής Χρήσης",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Όλες οι Ενότητες',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Αντιγραφή από διάταξη',
+'LBL_RELATIONSHIP_TYPE' => 'Σχέση',
 );

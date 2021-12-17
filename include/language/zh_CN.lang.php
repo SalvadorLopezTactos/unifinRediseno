@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'合并记录',
       'VisualPipeline'=>'可视管道',
       'ConsoleConfiguration' => '控制台配置',
+      'SugarLive' => 'SugarLive',
     'Quotas' => '定额',
     'Teams' => '团队',
     'TeamNotices' => '团队通知',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => '流程商务规则',
     'pmse_Emails_Templates' => '流程电子邮件模板',
     'BusinessCenters' => '业务中心',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => '班次',
+    'ShiftExceptions' => '班次异常',
+    'Purchases' => '购买',
+    'PurchasedLineItems' => '已购买单项',
+    'MobileDevices' => '移动设备',
+    'PushNotifications' => '推送通知',
     'WorkFlow' => '工作流定义',
     'EAPM' => '外部帐户',
     'Worksheet' => '工作表',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => '新闻邮件',
   	'SugarFavorites'=>'收藏夹',
 	'PdfManager' => 'PDF 经理',
+    'DataArchiver' => '数据存档程序',
+    'ArchiveRuns' => '归档运行',
 
     'OAuthKeys' => 'OAuth 用户密匙',
     'OAuthTokens' => 'OAuth 令牌',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => '评论日志',
     'Holidays' => '假期',
     'ChangeTimers' => '更改计时器',
+    'Messages' => '消息',
   ),
 
     'moduleIconList' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => '制造商',
     'VisualPipeline' => '可视管道',
     'ConsoleConfiguration' => '控制台配置',
+    'MobileDevices' => '移动设备',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'合同',
     'Quotes' => '报价',
     'Products' => '已报价单项',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'通知',
     'Sync'=>'同步',
     'PdfManager' => 'PDF 经理',
+    'DataArchiver' => '数据存档程序',
+    'ArchiveRuns' => '归档运行',
     'ReportMaker' => '高级报表',
     'DataSets' => '数据格式',
     'CustomQueries' => '自定义查询',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => '流程商务规则',
     'pmse_Emails_Templates' => '流程电子邮件模板',
     'BusinessCenters' => '业务中心',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => '班次',
+    'ShiftExceptions' => '班次异常',
+    'Purchases' => '购买',
+    'PurchasedLineItems' => '已购买单项',
+    'PushNotifications' => '推送通知',
     'WorkFlow' => '工作流',
     'EAPM' => '外部帐户',
     'Worksheet' => '工作表',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => '报告日程',
     'Holidays' => '假期',
     'ChangeTimers' => '更改计时器',
+    'Messages' => '消息',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => '公共事业',
     'Other' => '其他',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => '处理中',
+        'Completed' => '已完成',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => '收件箱',
+        'Outbound' => '发件箱',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => '聊天',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => '第 1 级',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => '第 4 级',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => '是',
+      'No' => '否',
+      'Completed' => '已完成',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => '未来',
+        'Active' => '活动',
+        'Past' => '过去',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => '自我生成',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => '已安排',
+    'In Progress' => '进行中',
     'Held' => '已完成',
     'Not Held' => '已取消',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => '会议',
     'Calls' => '电话',
       'KBContents' => '知识库',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => '已购买单项',
+      'Purchases' => '购买',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => '账户',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => '目标',
       'KBContents' => '知识库',
       'Notes' => '笔记',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => '已购买单项',
+    'Purchases' => '购买',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => '门户',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => '内部',
+        'Forum' => '论坛',
+        'Web' => '网络',
+        'InboundEmail' => '电子邮件',
+        'Twitter' => 'Twitter',
+        'Portal' => '门户',
+        'Phone' => '电话',
+        'Chat' => '聊天',
+        'Chatbot' => '聊天机器人',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,9 +2041,16 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Exchange',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'Google Less Secure 应用程序',
+        'exchange' => 'Exchange',
+        'other' => '其他',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
         'other' => '其他',
     ),
     'import_enclosure_options' =>
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => '是',
         'No' => '否',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => '预测中',
         'sales_stage' => '销售阶段',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => '列表',
         'activities' => '活动流',
         'multi-line' => '多行列表',
+        'omnichannel' => '全渠道',
+        'home' => 'Home',
+        'focus' => '焦点抽屉',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => '每小时',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => '天',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => '休息时间',
+            'event' => '事件',
+            'other' => '其他',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => '日期（上次 {{module}}）',
+            'start_date:asc' => '日期（首次 {{module}}）',
+            'total_revenue:desc' => '价格（最高总计）',
+            'total_revenue:asc' => '价格（最低总计）',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '跟踪链接',
   'LBL_TOGGLE_VISIBILITY' => '切换可见选择', // Record view header panel element
   'LBL_ACTIVITIES' => '活动流',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM、Sugar 和 3-D 立方体均为 SugarCRM Inc. 的注册商标。'.
         '该产品中使用或出现的任何其他公司和产品名称可能是 '.
         'SugarCRM ®、Sugar Enterprise™ 和Sugar™ 是 SugarCRM Inc.的商标。',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "打印",
     'LBL_HELP' => "帮助",
     'LBL_TOUR' => "活动视图游览",
-    'LBL_TOUR_LINK' => '导览 — 查看导览，了解重要功能',
+    'LBL_TOUR_LINK' => '浏览此页',
     'LBL_MOBILE' => "移动电话:",
     'LBL_ID_FF_SELECT' => "选择",
     'DEFAULT'                              => '基本',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => '创建签名',
     'LBL_EMAIL_SIGNATURE_NAME'              => '命名名称',
     'LBL_EMAIL_SIGNATURE_TEXT'              => '签名内容',
-  'LBL_SMTPTYPE_GMAIL'                    => '谷歌邮箱',
-  'LBL_SMTPTYPE_YAHOO'                    => '雅虎电邮',
-  'LBL_SMTPTYPE_EXCHANGE'                 => '微软交流群组软件',
-    'LBL_SMTPTYPE_OTHER'                  => '其他',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Google Less-Secure 应用程序',
+    'LBL_SMTPTYPE_YAHOO'                    => '雅虎电邮',
+    'LBL_SMTPTYPE_EXCHANGE'                 => '微软交流群组软件',
+    'LBL_SMTPTYPE_OTHER'                    => '其他',
+    'LBL_EMAIL_AUTHORIZE'                   => '授权',
+    'LBL_EMAIL_AUTHORIZED'                  => '已授权',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => '未授权',
+    'LBL_EMAIL_AUTH_WARNING'                => '管理员必须先通过“管理”>“连接器”配置 {0} 连接器，然后才能设置此账户。有关详细信息，请参阅 {1} 文档。',
+    'LBL_EMAIL_AUTH_API_ERROR'              => '检索连接器信息时出错',
+    'LBL_EMAIL_AUTH_FAILURE'                => '授权失败。',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => '请在保存之前授权账户。',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => '请在测试之前授权账户。',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => '账户未经授权',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[远程文件夹]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ Sugar 文件夹]',
     'LBL_EMAIL_SUBJECT'                     => '主题',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => '抄送',
     'LBL_BCC' => '密件抄送',
 
+    'LBL_START_DATE' => '开始日期',
+    'LBL_END_DATE' => '结束日期',
+
     'LBL_LINK_NONE'=> '无',
     'LBL_LINK_ALL'=> '全部',
     'LBL_LINK_RECORDS'=> '记录',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => '请检查下面的错误消息:',
     'NO_QUERY_SELECTED' => '您选择的数据格式不包含查询。请为这个数据格式选择自定义查询。',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => '出现错误:',
     'ERR_AJAX_LOAD_FAILURE'     => '您的操作要求出现错误，请稍后重试.',
     'ERR_AJAX_LOAD_FOOTER' => '如果该错误仍出现，请联系您的管理员在这个模块上禁用Ajax',
@@ -2795,9 +2892,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => '此功能在本主题中无效',
     'ERR_NOT_ADMIN' => "没有管理权限。",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        '仅可在<a href="%s" target="_blank">云设置</a>中进行密码管理。',
+        '仅可在 <a href="%s" target="_blank">SugarCloud 设置</a>中进行密码管理。',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => '如果需要更改只读字段，请联系您的 Sugar 管理员。',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => '请访问 <a href="{0}" target="_blank">SugarCloud 设置</a> 对只读字段进行变更。',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填字段:',
     'ERR_INVALID_REQUIRED_FIELDS' => '无效的必填字段:',
     'ERR_INVALID_VALUE' => '无效值：',
@@ -2938,6 +3035,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => '添加',
     'LBL_ADD_BUTTON' => '添加',
+    'LBL_ADD_DASHLET_BUTTON' => '添加仪表',
     'LBL_ADD_DOCUMENT' => '增加文档',
     'LBL_REPLACE_BUTTON' => '替代',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2968,6 +3066,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => '提交',
     'LBL_CASE'=>'客户反馈',
     'LBL_CASES'=>'客户反馈',
+    'LBL_MESSAGE'=>'消息',
+    'LBL_MESSAGES'=>'消息',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => '修改密码',
     'LBL_CHANGE_BUTTON_LABEL' => '更改',
@@ -3194,6 +3294,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => '生成报价',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => '没有批量更新的匹配项',
     'LBL_MASS_UPDATE_JOB_QUEUED' => '您批量更新的请求已经被安排',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => '服务开始日期晚于服务结束日期',
     'LBL_MASS_UPDATE_SUCCESS' => '所有记录已完成更新',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => '所选记录已被添加到 <a href="{{listUrl}}">{{listName}}</a>目标列表。',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => '您批量更新到<a href="{{listUrl}}">{{listName}}</a> 目标列表的请求已经被安排。',
@@ -3429,11 +3530,12 @@ $app_strings = array (
     'LBL_SUBJECT' => '主题',
 
     'LBL_INBOUNDEMAIL_ID' => '收件箱编号',
+    'LBL_EAMP_ID' => '验证令牌 ID',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '保留所有权利。<br />SugarCRM、Sugar 和 3-D Cube 均为 SugarCRM Inc. 的注册商标。 '.
         '该产品中使用或出现的任何其他公司和产品名称可能是'.
         '与此类名称有关的公司的商标。',
@@ -3500,6 +3602,8 @@ $app_strings = array (
     'LBL_USER_MENU' => '用户菜单',
     'LBL_USERS_SYNC'=>'用户同步',
     'LBL_USERS'=>'用户',
+    'LBL_USER'=>'用户',
+    'LBL_CURRENT_USER'=>'当前用户',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'查看是否存在新邮件...',
     'LBL_VERIFY_PORTAL_NAME'=>'查看存在的门户名称...',
     'LBL_VIEW_IMAGE' => '查看',
@@ -3588,6 +3692,8 @@ $app_strings = array (
         '已达到用户许可证数量限制。仅当前用户可以登录。',
     'WARN_ONLY_ADMINS'=> "只有管理员才可以登录。",
     'WARN_UNSAVED_CHANGES'=> "您将在没有保存修改的情况下离开。您确定要离开么？",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => '刷新浏览器将自动关闭您已打开的所有 SugarLive 通话或聊天会话，任何未保存更改将丢失。是否想要继续？',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => '您的更改未保存，您确定要离开页面放弃更改吗？',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => '一个或多个 Dashlet 包含未保存的更改。是否确定要关闭抽屉？',
     'LBL_NAVIGATE_TO_REPORTS' => '您将打开报告模块，您对dashlet的修改将不会被保存，是否继续？',
@@ -3610,6 +3716,7 @@ $app_strings = array (
     'ERROR_TIME_IS_AFTER' => '错误。此字段的时间必须晚于 {{this}} 字段的时间。',
     'ERROR_NUMBER' => '错误，这个域需要一个有效的数字。',
     'ERROR_INT' => '错误。无效整数。',
+    'ERROR_URL' => '错误。URL 无效。',
     'ERROR_NO_BEAN' => '获取 Bean 失败。',
     'ERROR_ACCESS_MODULE' => '您没有访问该模块。',
     'ERROR_MAX_FILESIZE_EXCEEDED' => '错误：附件太大。',
@@ -3693,9 +3800,14 @@ $app_strings = array (
     'LBL_CREATE_OPPORTUNITY' => '创建商业机会',
     'LBL_SCHEDULE_CALL' => '记录电话',
     'LBL_SCHEDULE_MEETING' => '安排会议',
+    'LBL_CREATE_MESSAGE' => '创建消息',
     'LBL_CREATE_TASK' => '创建任务',
     'LBL_REMOVE_FROM_FAVORITES' => '从我的收藏夹中移除',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => '全部下载',
+    'LBL_DOWNLOAD_ONE' => '下载',
+    'LBL_ATTACHMENTS' => '附件',
+    'LBL_ADD_ATTACHMENT' => '浏览',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => '产生列表',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'保存潜在客户表单的网页',
@@ -3747,8 +3859,8 @@ $app_strings = array (
     'LBL_DASHLET_REFRESH_LABEL' => '刷新',
     'LBL_DASHLET_REMOVE_LABEL' => '移除',
     'LBL_DASHLET_DROP_HERE' => '放置此处',
-    'LBL_DASHLET_MINIMIZE_ALL' => '全部最小化',
-    'LBL_DASHLET_MAXIMIZE_ALL' => '全部最大化',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => '最小化',
     'LBL_DASHLET_MAXIMIZE' => '最大化',
     'LBL_DASHLET_CONFIGURE' => '配置',
@@ -3770,6 +3882,10 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_NAME' => '列表视图',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => '根据您定义的标准从一个特定的模块列表记录。',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => '控制台列表视图',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => '列出特定模块中与您在控制台中查看的记录相关的记录。',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => '记录视图',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => '在选项卡中显示记录和可选的相关记录。',
@@ -3780,6 +3896,7 @@ $app_strings = array (
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => '警告，选项卡中仅可显示 {{numWord}} ({{num}}) 个模块。 ' .
         '请在添加其他模块前移除一个或多个模块。',
     'LBL_SIX' => '六', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => '评论日志',
@@ -3804,7 +3921,13 @@ $app_strings = array (
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => '最近使用的',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => '收藏夹',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => '创建仪表板',
+    'LBL_DASHBOARD_DUPLICATE' => '复制仪表板',
+    'LBL_DASHBOARD_DELETE' => '删除仪表板',
+    'LBL_PIN_TO_TOP' => '固定到顶部',
+    'LBL_PIN_TO_BOTTOM' => '固定到底部',
+
+    'LBL_DASHBOARD_CONFIG' => '仪表板配置',
     'LBL_LIST_VIEW__NAME' => '列表视图',
     'LBL_PIPELINE_VIEW_NAME' => '平铺视图',
     'LBL_PIPELINE_VIEW_BTN' => '平铺视图',
@@ -3840,9 +3963,9 @@ $app_strings = array (
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => '学习资源',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar 大学 — 成为专家',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => '社区论坛 — 加入讨论',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => '文档与支持 — 了解详情',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => '培训与证书',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'SugarClub 社区',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => '文档与支持',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => '按国家显示销售区域',
@@ -3851,6 +3974,10 @@ $app_strings = array (
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => '知识库类别 & 发表的文章',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Displays a tree view of knowledge base categories & published articles',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => '知识库搜索',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => '显示已发布知识库文章和类别的可搜索树视图。',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => '以其他语言发表的文章',
@@ -4066,6 +4193,10 @@ $app_strings = array (
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => '请输入美国的电话号码, 包括电话区号。',
+    'LBL_CCP_NOT_INITIATED' => '在代理未登录时尝试使用 CCP 拨号。',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => '无法通过 CCP 发起通话。',
+    'LBL_CCP_DIALING_ERROR' => '无法根据拨出的号码完成此通话。',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => '请在拨出电话前关闭 SugarLive 中的所有聊天会话。',
 
     //File write error label
     'ERR_FILE_WRITE' => '错误：不能写文件 {0} .请检查系统和网络服务器权限。',
@@ -4414,8 +4545,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => '已报价单项',
     'LBL_DISCOUNT_TOTAL' => '折扣总计',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '百分比',
+    'LBL_DISCOUNT_SELECT' => '确定折扣是百分比还是固定金额',
     'LBL_TAX' => '税费',
     'LBL_SHIPPING' => '运费',
     'LBL_GRAND_TOTAL' => '总计',
@@ -4462,7 +4593,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(没有权限)',
     'LBL_NO_ACCESS_LOWER' => '用户未连接到记录',
     'LBL_NO_FIELD_ACCESS' => '没有权限',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => '所需的许可证',
     'LBL_VALUE_ERASED' => '值已删除',
     'LBL_VALUE_ERASED_TOOLTIP' => '此信息已通过数据隐私请求删除',
     'LBL_CREATE_RELATED_RECORD' => '建立关联记录',
@@ -4483,7 +4614,9 @@ $app_strings = array (
     'LBL_TASKS_SUBPANEL_TITLE' => '任务',
     'LBL_CALLS_SUBPANEL_TITLE' => '电话',
     'LBL_EMAILS_SUBPANEL_TITLE' => '电子邮件',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => '班次',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '已报价单项',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => '班次异常',
     'LNK_SETTINGS' => '设置',
     'LBL_MOBILE_SUPPORT' => '支持',
     'LBL_MOBILE_SHOW_MORE' => '显示更多...',
@@ -4643,16 +4776,14 @@ $app_strings = array (
     'LBL_MOBILE_PDF_DOWNLOAD' => '下载 {{{pdfTemplateName}}} PDF',
 
     'ERR_SYNC_FAILED' => '不能同步服务器',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => '没有SSO(单一签入)登录。确保该实例是Sugar 7.5或更高版本并配置为可用SSO。',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => '访问没有被授权。',
     'ERR_MOBILE_INVALID_CREDS' => '无效的用户名和密码。',
     'ERR_MOBILE_SESSION_EXPIRED' => '您的回话已经过期。',
     'ERR_MOBILE_NOT_FOUND' => '没有找到资源。',
     'ERR_MOBILE_TIMEOUT' => '服务器没有响应。',
     'ERR_MOBILE_CONNECTION_FAILED' => '无法访问服务器。',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => '在给定的 URL 找到没有 {{{brandName}}} 服务器。',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => '设定的URL的服务器没有响应.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => '所设定的服务器不可用.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => '互联网连接不可用。',
     'ERR_MOBILE_INTERNAL' => '网络错误 ({{{code}}}). 请稍后重试.',
     'ERR_MOBILE_VALIDATION' => '无效记录.',
@@ -4855,6 +4986,55 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => '右侧菜单按钮',
     'LBL_VO_ADD_BTN' => '“添加”按钮',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => '折扣',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => '选择映射应用程序',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => '选中的 {{entityName}} 具有相关值：{{localizedFieldNames}}。取消以保持现有值。确认以使用新值覆盖。',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => '已启用数据加密。',
+    'LBL_LEAD_ALREADY_CONVERTED' => '所选线索已转化。',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => '此操作仅当设备联网时可用',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => '您确定要从报价创建商业机会吗？',
+    'LBL_TAG_ADD' => '添加标签',
+    'LBL_TAG_ENTER_TAG_NAME' => '输入标签',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => '当设备离线时，不支持按标签筛选。',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => '显示完整评论',
+    'LBL_COMMENT_VIEW' => '查看评论',
+    'LBL_PMSE_LABEL_DUEDATE' => '到期日期',
+    'LBL_PMSE_DUE' => '到期',
+    'LBL_PMSE_DUE_ON' => '到期日期',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => '请先创建 {{conversionParentModuleName}}',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => '缺少必要的记录：{{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => '选择图像质量。在保存至服务器前，将对图像大小进行相应的调整。所选值将在未来用作所有相似操作的默认值。',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => '正在估计文件大小...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => '估计文件大小为',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => '图像质量',
+    'LBL_IMAGE_QUALITY_BEST' => '原始大小',
+    'LBL_IMAGE_QUALITY_GOOD' => '高品质',
+    'LBL_IMAGE_QUALITY_POOR' => '小尺寸',
+    'LBL_IMAGE_QUALITY_BTN' => '压缩：{{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => '在 {{module}} 上列出字段',
+    'LBL_LIST_RESET_FIELDS' => '重设为默认值',
+    'LBL_LIST_NOT_ENOUGH' => '请设置至少 1 个活动字段。',
+    'LBL_LOGIN_PERMISSION_ABORTED' => '您需要登录并接受权限才能使用 SugarCRM 实例。',
+    'LBL_SELECTING_EXISTING_RECORD' => '正在选择 {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => '正在创建新 {{{moduleSingular}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => '图像大小',
+    'LBL_COPY_ADDRESS' => '复制地址',
+    'LBL_OPEN_IN' => '打开位置',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => '未选择文件。',
+    'LBL_ATTACHMENT_ADD' => '附加',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => '此应用程式使用 cookies',
+    'LBL_USE_COOKIES_CONFIRM' => '此应用程式使用 cookies 来帮助为您提供更好的体验。如果继续，则表明您同意我们根据隐私政策使用 cookies。',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => '您正在使用在即将发布的移动版本中与 Sugar Mobile 不兼容的 Sugar 实例。 请要求您的管理员尽快升级 Sugar。',
+    'ERROR_TAG_NAME_INVALID' => '标签名称不能包含 "{{{forbiddenChars}}}" 字符',
+    'ERROR_NO_TAGS_FOUND' => '没有与 "{{{searchQuery}}}" 匹配的标签',
+    'ERR_PA_RECORD_INVALID' => '{{{moduleName}}} 记录具有一个或多个无效值，无法保存。是否想要编辑记录以执行 {{{actionLabel}}} 操作？',
+    'ERR_MOBILE_METADATA_RELOAD' => '一位管理员在您的 Sugar 实例中进行了配置更改。按一下“确定”以将应用程序的配置与服务器同步。',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => '此应用程式使用 cookies',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => '选中以接受（必选）',
@@ -4913,6 +5093,10 @@ $app_strings = array (
     'LBL_PORTAL_CONTACT_INFO_PHONE' => '电话：',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => '电子邮件：',
     'LBL_PORTAL_CONTACT_INFO_WEB' => '网络：',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => '您确定想要关闭聊天吗？',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => '您的登录不成功。请重试。',
@@ -4959,6 +5143,29 @@ $app_strings = array (
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => '姓名/账户名称',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => '全渠道仪表板',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => '客户',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} 于 {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => '您的浏览器不支持 SugarLive。请使用 Google Chrome 或 Mozilla Firefox。',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => '已创建 <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a>，其中包含您的会话详情。',
+    'LBL_OMNICHANNEL_SUBJECT' => '主题',
+    'LBL_OMNICHANNEL_DESCRIPTION' => '描述',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => '信息摘要',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => '通话摘要',
+    'LBL_OMNICHANNEL_LINK_TO' => '将 {{fromModule}} 链接到 {{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => '已链接',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => '您的浏览器不支持聊天。请使用 Google Chrome 或 Mozilla Firefox。',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => '请联系您的 Sugar 管理员获取帮助。',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => '配置布局',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => '请在拨出电话前结束配置 SugarLive。',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => '请在打开 SugarLive 前结束配置 SugarLive 布局。',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => '在配置 SugarLive 布局前，在 SugarLive 中将您自己设置为“离线”。',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => '将选项卡恢复为默认',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => '配置摘要面板',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => '用户配置文件',
@@ -4990,6 +5197,10 @@ $app_strings = array (
     'LBL_WIZ_CREATE_USERS' => '创建用户',
     'LBL_WIZ_APPLICATION_SETTINGS' => '系统设置',
     'LBL_WIZ_CONFIGURE_APPLICATION' => '工作室',
+
+    'LBL_CSP_ERROR_MESSAGE' => '您输入的值不受支持或不是可接受的格式。如需获取可接受字段值和格式的列表，请参阅<a href="{{linkToDocumentation}}" target="_blank">系统</a>文档.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => '此内容尚未批准。请更新系统的<a href="{{linkToDocumentation}}" target="_blank">内容安全政策设置</a>。',
+    'LBL_CSP_ERROR_MESSAGE_USER' => '此内容尚未批准。请要求管理员更新系统的<a href="{{linkToDocumentation}}" target="_blank">内容安全政策设置</a>。在设置更新后，您将需要刷新浏览器以使更改生效。',
 
     // For password related labels
     'LBL_PASSWORD'						=> '密码',
@@ -5118,6 +5329,12 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => '我的项目',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => '团队的项目',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => '历史',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => '历史记录仪表盘显示发送召开会议，电话记录，收到的电子邮件和电子邮件。',
@@ -5232,6 +5449,7 @@ $app_strings = array (
     //record save
     'LBL_RECORD_SAVED' => '记录已保存。', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => '您成功创建 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => '成功创建 {{moduleSingularLower}}。',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => '您成功地创建了这个记录，但是您没有权限访问此记录。', // use when user has no access to the model
     'LBL_VALIDATING' => '验证中...',
 
@@ -5310,7 +5528,7 @@ $app_strings = array (
     // Refresh button on list views
     'LBL_LIST_REFRESH' => '刷新列表',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => '刷新平铺',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => '更多',
@@ -5563,6 +5781,7 @@ $app_strings = array (
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => '待执行的活动',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => '按流程的待执行活动',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => '全部流程',
+    'LBL_RECORD_DASHBOARD' => '记录仪表板',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => '流程状态简述',
@@ -5594,7 +5813,7 @@ $app_strings = array (
     'LBL_BUSINESS_CENTER_ID' => '业务中心 ID',
     'LBL_BUSINESS_CENTER_NAME' => '业务中心名称',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => '已购买单项活动',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(新标记)',
@@ -5634,6 +5853,7 @@ $app_strings = array (
     'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} 的个人信息',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => '更改计时器',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => '消息',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => '已复制到您的剪贴板！',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => '无法复制到您的剪贴板',
@@ -5651,13 +5871,24 @@ $app_strings = array (
     'LBL_COMMENT_LOG_SHOW_LESS' => '简略显示...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => '无可用数据',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => '活动订阅',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => '只能为链接到单个账户的模块添加此仪表。请参阅<a href={{linkToDocumentation}}>活动订阅仪表</a> 文档了解更多信息。',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => '显示属于此帐户的购买：',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => '特定账户的活动订阅。',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => '，数量 {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => '总计：',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => '无活动订阅',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => '此 Dashlet 需要 {{module_name}} 才可运作。请联络您的管理员请求启用 {{module_name}}。',
+    'LBL_PURCHASE_HISTORY_DASHLET' => '购买历史记录',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => '特定账户的所有购买。',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => '仅可为链接到单个账户的模块添加此 dashlet。请参阅<a href={{linkToDocumentation}} target="_blank">购买历史记录 dashlet</a> 文档获取更多信息。',
+    'LBL_NO_PURCHASE_HISTORY' => '没有可显示的购买',
+    'LBL_NO_PLIS' => '没有已购买单项',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => '总计',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => '数量',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => '此 dashlet 需要“购买”和“已购买单项”才可运作。请告知管理员启用“购买”和“已购买单项”。',
+    'LBL_SEARCH_PURCHASE_NAME' => '按购买名称搜索...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => '前往以下位置，使用 Studio 编辑记录视图 dashlet 布局' .
@@ -5673,7 +5904,39 @@ $app_strings = array (
     'LBL_SERVICE_DURATION' => '服务持续时间',
     'LBL_SERVICE_DURATION_VALUE' => '服务持续时间值',
     'LBL_SERVICE_DURATION_UNIT' => '服务持续时间单位',
+    'LBL_LOCK_DURATION' => '锁定时长',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'Amazon Connect CCP 无法加载。请' .
+        '确保您使用的是'.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">受支持的浏览器</a>。' .
+        '如果问题仍然存在，请联系您的 Sugar 管理员。',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => '您的 Sugar 管理员尚未为 Amazon Connect 配置您的实例。',
+    'ERROR_OMNICHANNEL_TIMEOUT' => '无法与 Amazon Connect 建立连接。请联系您的 Sugar 管理员以获得帮助。',
+    'LBL_OMNICHANNEL_UNKNOWN' => '未知',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => '焦点抽屉',
+    'LBL_EXTERNAL_GUESTS' => '外部客户',
+    'LBL_MY_FAVORITE_TASKS' => '我的收藏夹任务',
+    'LBL_MY_TASKS' => '我的任务',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => '在模块：{1} 中找不到字段:：{0}',
+    'LBL_INTEGRATE_INVALID_PARAM' => '在模块： {2} 中找不到 {0}：{1} 的记录',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => '无法找到名为：{0} 的关系',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => '模块：{3} 中 ID 为 {0}，并具有 {1}：{2} 的数据库条目已存在',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => '软删除（删除标志 = 1）',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => '在模块 {2} 上找到 {0} {1} 的多个数据库记录。 ' .
+        '请移除或更新相应的匹配记录。匹配记录：{3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => '下一次运行',
+    'LBL_TIME_AWARE_TYPE' => '类型',
+    'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

@@ -316,6 +316,13 @@
      * @private
      */
     _onProductCatalogDashletAddItem: function(productData) {
+        // Set the assigned user as the currently logged in user
+        productData.assigned_user_id = app.user.get('id');
+        productData.assigned_user_name = app.user.get('full_name');
+        // Update price on Flexible Duration Service
+        productData.catalog_service_duration_value = productData.service_duration_value;
+        productData.catalog_service_duration_unit = productData.service_duration_unit;
+
         var defaultGroup = this._getComponentByGroupId(this.defaultGroupId);
 
         if (defaultGroup) {
@@ -372,24 +379,6 @@
                         };
                         bulkCalls.push(bulkRequest);
                     }
-
-                    // if the product exists but doesn't have a account ID saved, save it
-                    if (_.isEmpty(itemModel.get('account_id')) && accountId) {
-                        bulkUrl = app.api.buildURL('Products/' + prodId + '/link/account_link/' + accountId);
-                        bulkRequest = {
-                            url: bulkUrl.substr(4),
-                            method: 'POST',
-                            data: {
-                                id: prodId,
-                                link: 'account_link',
-                                relatedId: accountId,
-                                related: {
-                                    account_id: accountId
-                                }
-                            }
-                        };
-                        bulkCalls.push(bulkRequest);
-                    }
                 }
             }, this);
         }, this);
@@ -402,9 +391,9 @@
                     _.each(bulkResponses, function(response) {
                         var record = response.contents.record;
                         var relatedRecord = response.contents.related_record;
-                        var bundles = this.model.get('bundles');
 
-                        if (!_.isUndefined(record)) {
+                        if (!_.isUndefined(record) && this.model) {
+                            var bundles = this.model.get('bundles');
                             _.each(bundles.models, function(pbModel) {
                                 var pbItems = pbModel.get('product_bundle_items');
                                 _.each(pbItems.models, function(itemModel) {
@@ -474,8 +463,6 @@
                     axis: 'y',
                     // the items to make sortable
                     items: 'tr.sortable',
-                    // make the "helper" row (the row the user actually drags around) a clone of the original row
-                    helper: 'clone',
                     // adds a slow animation when "dropping" a group, removing this causes the row
                     // to immediately snap into place wherever it's sorted
                     revert: true,
@@ -490,7 +477,9 @@
                     // handler for when dragging an item out of a group
                     out: _.bind(this._onGroupDragTriggerOut, this),
                     // the cursor to use when dragging
-                    cursor: 'move'
+                    cursor: 'move',
+                    // Don't allow dragging to start from clicking in the actions menu
+                    cancel: '.dropdown-toggle, .dropdown-menu'
                 });
             }, this);
         }
@@ -601,6 +590,9 @@
 
         // re-enable tooltips in the app
         app.tooltip._enable();
+
+        // Fix for cancel/save buttons disappearing from jQuery animations
+        $item.find('.action-button-wrapper').removeClass('open');
     },
 
     /**
@@ -736,8 +728,8 @@
                 delete record.product_bundle_items;
             }
 
-            model.setSyncedAttributes(record);
             model.set(record);
+            model.setSyncedAttributes(model.attributes);
         }
     },
 
@@ -885,8 +877,10 @@
         group.groupId = this.defaultGroupId;
         // update the group's dom tbody el with the correct group id
         group.$el.attr('data-group-id', this.defaultGroupId);
+        group.$el.data('group-id', this.defaultGroupId);
         // update the tr's inside the group's dom tbody el with the correct group id
         group.$('tr').attr('data-group-id', this.defaultGroupId);
+        group.$('tr').data('group-id', this.defaultGroupId);
     },
 
     /**
@@ -1349,7 +1343,14 @@
         }
 
         productBundles.each(function(bundle) {
-            if (!_.contains(this.groupIds, bundle.cid)) {
+            // Check to see if the group already exists, but the model has been
+            // replaced, as is the case when saving at the Quote record level,
+            // when the server returns new models for the collection fields. In
+            // that case, replace the model of the group with the new one
+            var group = this._getComponentByGroupId(bundle.id);
+            if (!this.isCreateView && !_.isEmpty(group) && group.groupId !== bundle.cid) {
+                this._switchGroupModel(group, bundle);
+            } else if (!_.contains(this.groupIds, bundle.cid)) {
                 this.groupIds.push(bundle.cid);
                 this._addQuoteGroupToLayout(bundle);
             }
@@ -1361,6 +1362,20 @@
             // Rendering when user tries to create a group in Quote Copy Mode.
             this.render();
         }
+    },
+
+    /**
+     * Switches the model of an existing group and updates the groupId list
+     *
+     * @param {Layout} group the quote-data-group layout that represents a group
+     *                  of line items (Product Bundle)
+     * @param {Bean} model the model of the Product Bundle to switch the group to
+     * @private
+     */
+    _switchGroupModel: function(group, model) {
+        this.groupIds = _.without(this.groupIds, group.groupId);
+        group.switchModel(model);
+        this.groupIds.push(group.groupId);
     },
 
     /**

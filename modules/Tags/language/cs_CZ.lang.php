@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Vytvořil (ID)',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Vytvořil (uživatelské jméno)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Přiřazené uživatelské jméno',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na značky',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Řídicí panel záznamů značek',
+    'LBL_MY_TAGS' => 'Moje značky',
+    'LBL_MY_FAVORITE_TAGS' => 'Moje oblíbené značky',
 );

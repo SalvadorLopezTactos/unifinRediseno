@@ -49,13 +49,6 @@ array (
         'default' => true,
         'name' => 'parent_name',
       ),
-      'filename' => 
-      array (
-        'type' => 'name',
-        'name' => 'filename',
-        'default' => true,
-        'width' => '10%',
-      ),
       'date_entered' => 
       array (
         'type' => 'datetime',

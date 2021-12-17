@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'جهات الاتصال',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'العملاء المتوقعون',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'المستخدمون',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'لوحة معلومات سجل مراكز الأعمال',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'جدول تنظيم مراكز الأعمال',
 ];

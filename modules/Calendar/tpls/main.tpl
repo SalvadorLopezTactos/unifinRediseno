@@ -26,39 +26,40 @@
 	
 	SUGAR.util.doWhen(check_cal_loaded, function(){literal}{{/literal}
 	
-		CAL.view = "{$view}";
-		CAL.style = "{$style}";
-		CAL.t_step = {$t_step};
-		CAL.current_user_id = "{$current_user_id}";	
-		CAL.current_user_name = "{$current_user_name}";
-		CAL.time_format = "{$time_format}";
-		CAL.enable_repeat = "{$enable_repeat}";
-		CAL.items_draggable = "{$items_draggable}";
-		CAL.items_resizable = "{$items_resizable}";
-		CAL.cells_per_day = {$cells_per_day};	
+		CAL.view = "{$view|escape:'javascript':'UTF-8'}";
+		CAL.style = "{$style|escape:'javascript':'UTF-8'}";
+		CAL.t_step = {$t_step|escape:'javascript':'UTF-8'};
+		CAL.current_user_id = "{$current_user_id|escape:'javascript':'UTF-8'}";
+		CAL.current_user_name = "{$current_user_name|escape:'javascript':'UTF-8'}";
+		CAL.time_format = "{$time_format|escape:'javascript':'UTF-8'}";
+		CAL.enable_repeat = "{$enable_repeat|escape:'javascript':'UTF-8'}";
+		CAL.items_draggable = "{$items_draggable|escape:'javascript':'UTF-8'}";
+		CAL.items_resizable = "{$items_resizable|escape:'javascript':'UTF-8'}";
+		CAL.cells_per_day = {$cells_per_day|escape:'javascript':'UTF-8'};
 		CAL.current_params = {literal}{}{/literal};
-		CAL.grid_start_ts = {$grid_start_ts};
-		CAL.scroll_slot = {$scroll_slot};
-		CAL.basic.min_height = {$basic_min_height};
+		CAL.grid_start_ts = {$grid_start_ts|escape:'javascript':'UTF-8'};
+		CAL.scroll_slot = {$scroll_slot|escape:'javascript':'UTF-8'};
+		CAL.basic.min_height = {$basic_min_height|escape:'javascript':'UTF-8'};
 
-		CAL.lbl_create_new = "{$MOD.LBL_CREATE_NEW_CALL}";
-		CAL.lbl_edit = "{$MOD.LBL_EDIT_CALL}";
-		CAL.lbl_saving = "{$MOD.LBL_SAVING}";
-		CAL.lbl_loading = "{$MOD.LBL_LOADING}";
-		CAL.lbl_sending = "{$MOD.LBL_SENDING_INVITES}";
-		CAL.lbl_confirm_remove = "{$MOD.LBL_CONFIRM_REMOVE}";
-		CAL.lbl_confirm_remove_all_recurring = "{$MOD.LBL_CONFIRM_REMOVE_ALL_RECURRING}";
+		CAL.lbl_create_new = "{$MOD.LBL_CREATE_NEW_CALL|escape:'javascript':'UTF-8'}";
+		CAL.lbl_edit = "{$MOD.LBL_EDIT_CALL|escape:'javascript':'UTF-8'}";
+		CAL.lbl_saving = "{$MOD.LBL_SAVING|escape:'javascript':'UTF-8'}";
+		CAL.lbl_loading = "{$MOD.LBL_LOADING|escape:'javascript':'UTF-8'}";
+		CAL.lbl_sending = "{$MOD.LBL_SENDING_INVITES|escape:'javascript':'UTF-8'}";
+		CAL.lbl_confirm_remove = "{$MOD.LBL_CONFIRM_REMOVE|escape:'javascript':'UTF-8'}";
+		CAL.lbl_confirm_remove_all_recurring = "{$MOD.LBL_CONFIRM_REMOVE_ALL_RECURRING|escape:'javascript':'UTF-8'}";
 		
-		CAL.lbl_error_saving = "{$MOD.LBL_ERROR_SAVING}";
-		CAL.lbl_error_loading = "{$MOD.LBL_ERROR_LOADING}";
-		CAL.lbl_repeat_limit_error = "{$MOD.LBL_RECURRING_LIMIT_ERROR}";
-        CAL.lbl_no_access = "{$MOD.LBL_NO_ACCESS}";
-		
-		CAL.year = {$year};
-		CAL.month = {$month};
-		CAL.day = {$day};
+		CAL.lbl_error_saving = "{$MOD.LBL_ERROR_SAVING|escape:'javascript':'UTF-8'}";
+		CAL.lbl_error_loading = "{$MOD.LBL_ERROR_LOADING|escape:'javascript':'UTF-8'}";
+		CAL.lbl_repeat_limit_error = "{$MOD.LBL_RECURRING_LIMIT_ERROR|escape:'javascript':'UTF-8'}";
 
-		CAL.print = {$isPrint};
+		CAL.lbl_no_access = "{$MOD.LBL_NO_ACCESS|escape:'javascript':'UTF-8'}";
+
+		CAL.year = {$year|escape:'javascript':'UTF-8'};
+		CAL.month = {$month|escape:'javascript':'UTF-8'};
+		CAL.day = {$day|escape:'javascript':'UTF-8'};
+
+		CAL.print = {$isPrint|escape:'javascript':'UTF-8'};
 		
 		{literal}
 		var scrollable = CAL.get("cal-scrollable");
@@ -80,10 +81,10 @@
 		{if $view == "shared"}
 			{counter name="un" start=0 print=false assign="un"}
 			{foreach name="shared" from=$shared_ids key=k item=member_id}				
-				CAL.shared_users['{$member_id}'] = '{$un}';
+				CAL.shared_users['{$member_id|escape:'javascript':'UTF-8'}'] = '{$un|escape:'javascript':'UTF-8'}';
 				{counter name="un" print=false}
 			{/foreach}
-			CAL.shared_users_count = "{$shared_users_count}";
+			CAL.shared_users_count = "{$shared_users_count|escape:'javascript':'UTF-8'}";
 		{/if}
 	
 		CAL.field_list = new Array();
@@ -91,9 +92,9 @@
 
 		CAL.activity_colors = [];				
 		{foreach name=colors from=$activity_colors key=module item=v}
-			CAL.activity_colors['{$module}'] = [];
-			CAL.activity_colors['{$module}']['border'] = '{$v.border}';
-			CAL.activity_colors['{$module}']['body'] = '{$v.body}'
+			CAL.activity_colors['{$module|escape:'javascript':'UTF-8'}'] = [];
+			CAL.activity_colors['{$module|escape:'javascript':'UTF-8'}']['border'] = '{$v.border|escape:'javascript':'UTF-8'}';
+			CAL.activity_colors['{$module|escape:'javascript':'UTF-8'}']['body'] = '{$v.body|escape:'javascript':'UTF-8'}'
 		{/foreach}
 
 		CAL.act_types = [];
@@ -143,8 +144,8 @@
 		});				
 		
 		CAL.init_edit_dialog({
-			width: "{/literal}{$editview_width}{literal}",
-			height: "{/literal}{$editview_height}{literal}"
+			width: "{/literal}{$editview_width|escape:'javascript':'UTF-8'}{literal}",
+			height: "{/literal}{$editview_height|escape:'javascript':'UTF-8'}{literal}"
 		});
 		
 		YAHOO.util.Event.on(window, 'resize', function(){
@@ -221,10 +222,10 @@
 	<div class="bd" id="edit-dialog-content">
 		<div id="cal-tabs" class="yui-navset yui-navset-top yui-content" style="height: auto; padding: 0 2px;">
 			<ul class="yui-nav">
-				<li id="tab_general"><a tabname="cal-tab-1" id="cal-tab-1-link"><em>{$MOD.LBL_GENERAL_TAB}</em></a></li>
-				<li id="tab_invitees"><a tabname="cal-tab-2" id="cal-tab-2-link"><em>{$MOD.LBL_PARTICIPANTS_TAB}</em></a></li>
+				<li id="tab_general"><a tabname="cal-tab-1" id="cal-tab-1-link"><em>{$MOD.LBL_GENERAL_TAB|escape:'html':'UTF-8'}</em></a></li>
+				<li id="tab_invitees"><a tabname="cal-tab-2" id="cal-tab-2-link"><em>{$MOD.LBL_PARTICIPANTS_TAB|escape:'html':'UTF-8'}</em></a></li>
 				{if $enable_repeat}
-				<li id="tab_repeat"><a tabname="cal-tab-3" id="cal-tab-3-link"><em>{$MOD.LBL_REPEAT_TAB}</em></a></li>
+				<li id="tab_repeat"><a tabname="cal-tab-3" id="cal-tab-3-link"><em>{$MOD.LBL_REPEAT_TAB|escape:'html':'UTF-8'}</em></a></li>
 				{/if}
 			</ul>
 			<div id="cal-tab-1" class="yui-content">
@@ -241,11 +242,11 @@
 		</div>
 	</div>	
 	<div id="cal-edit-buttons" class="ft">
-		<button id="btn-save" class="button" type="button">{$MOD.LBL_SAVE_BUTTON}</button>
-		<button id="btn-cancel" class="button" type="button">{$MOD.LBL_CANCEL_BUTTON}</button>
-		<button id="btn-delete" class="button" type="button">{$MOD.LBL_DELETE_BUTTON}</button>
-		<button id="btn-send-invites" class="button" type="button">{$MOD.LBL_SEND_INVITES}</button>
-		<button id="btn-full-form" class="button" type="button">{$APP.LBL_FULL_FORM_BUTTON_LABEL}</button>
+		<button id="btn-save" class="button" type="button">{$MOD.LBL_SAVE_BUTTON|escape:'html':'UTF-8'}</button>
+		<button id="btn-cancel" class="button" type="button">{$MOD.LBL_CANCEL_BUTTON|escape:'html':'UTF-8'}</button>
+		<button id="btn-delete" class="button" type="button">{$MOD.LBL_DELETE_BUTTON|escape:'html':'UTF-8'}</button>
+		<button id="btn-send-invites" class="button" type="button">{$MOD.LBL_SEND_INVITES|escape:'html':'UTF-8'}</button>
+		<button id="btn-full-form" class="button" type="button">{$APP.LBL_FULL_FORM_BUTTON_LABEL|escape:'html':'UTF-8'}</button>
 	</div>
 </div>
 

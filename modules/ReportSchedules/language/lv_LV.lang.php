@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Pēc pārskata',
     'LBL_RECENTLY_MODIFIED' => 'Nesen modificēts',
     'LBL_RECORD_SAVED_SUCCESS' => 'Jūs veiksmīgi izveidojāt moduli {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Atveriet grafiku, lai pievienotu lietotājus, izmantojot lietototāju apakšpaneli.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Šis pārskata grafiks',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Pārskatu grafiku ierakstu instrumentu panelis',
 );

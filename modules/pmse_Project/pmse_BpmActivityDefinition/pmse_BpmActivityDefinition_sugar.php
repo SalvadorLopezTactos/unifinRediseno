@@ -66,6 +66,8 @@ class pmse_BpmActivityDefinition_sugar extends Basic {
     var $act_service_method;
     var $act_update_record_owner;
     var $execution_mode;
+    public $act_email_process_user;
+    public $act_email_template_id;
 
 
 	public function __construct(){

@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת שיחות',
     'LBL_CALLS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת שיחות',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס שיחות',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'שיחות',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'הוקצה עבור',
     'LBL_LIST_MY_CALLS' => 'השיחות שלי',
     'LBL_MY_SCHEDULED_CALLS' => 'השיחות המתוזמנות שלי',
+    'LBL_GUEST_CALLS' => 'השיחות שלי כאורח',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'שיחות מתוזמנות כאורח',
     'LBL_SELECT_FROM_DROPDOWN' => 'אנא בצע בחירה התפריט הנגלל',
 	'LBL_ASSIGNED_TO_NAME' => 'הוקצה עבור',
 	'LBL_ASSIGNED_TO_ID' => 'משתמש שהוקצה',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'בטל',
     'LBL_EMPTY_SEARCH_RESULT' => 'מצטער לא נמאו תוצאות,אנא צור את המוזמן הרשום מטה',
     'LBL_NO_ACCESS' => 'אין לך גישה ליצירת $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'מזהה איש קשר Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'סוג חזרה',
     'LBL_REPEAT_INTERVAL' => 'מרווחי זמן בין החזרות',
     'LBL_REPEAT_END' => 'סיום',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'התקשר עם  {{{this}}}',
     'LBL_SEND_INVITES' => 'שלח למוזמנים',
     'LBL_REMINDER_TITLE' => 'התקשר',
+    'LBL_CALL_RECORDING_URL' => 'כתובת URL של הקלטה',
+    'LBL_CALL_RECORDING' => 'הקלטה',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'יצרת בהצלחה את {{moduleSingularLower}} {{name}} עבור {{formatDate date_start}}',

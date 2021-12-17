@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 
 /**
  * Description: view handler for step 3 of the import process
@@ -28,13 +29,14 @@ class ImportViewStep3 extends ImportView
      */
  	public function display()
     {
-        global $mod_strings, $app_strings, $current_user, $sugar_config, $app_list_strings, $locale;
+        global $mod_strings, $app_strings, $current_user, $sugar_config, $app_list_strings, $locale, $current_language;
 
         $import_module = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', false);
         $this->ss->assign("IMPORT_MODULE", $import_module);
         $has_header =  ( isset( $_REQUEST['has_header']) ? 1 : 0 );
         $sugar_config['import_max_records_per_file'] = ( empty($sugar_config['import_max_records_per_file']) ? 1000 : $sugar_config['import_max_records_per_file'] );
         $this->ss->assign("CURRENT_STEP", $this->currentStep);
+        $this->ss->assign('idm_update_mode_only', $this->isLimitedForModuleInIdmMode($import_module));
         // attempt to lookup a preexisting field map
         // use the custom one if specfied to do so in step 1
         $mapping_file = BeanFactory::newBean('Import_1');
@@ -135,8 +137,40 @@ class ImportViewStep3 extends ImportView
         $this->ss->assign("DELETE_INLINE_PNG",  SugarThemeRegistry::current()->getImage('basic_search','align="absmiddle" alt="'.$app_strings['LNK_DELETE'].'" border="0"'));
         $this->ss->assign("PUBLISH_INLINE_PNG",  SugarThemeRegistry::current()->getImage('advanced_search','align="absmiddle" alt="'.$mod_strings['LBL_PUBLISH'].'" border="0"'));
 
-        $this->instruction = 'LBL_SELECT_MAPPING_INSTRUCTION';
-        $this->ss->assign('INSTRUCTION', $this->getInstruction());
+        if ($this->isLimitedForModuleInIdmMode($import_module)) {
+
+            $licenses = [Subscription::SUGAR_BASIC_KEY];
+            try {
+                $lt = $current_user->getLicenseTypes();
+                if (is_array($lt) && !empty($lt)) {
+                    $licenses = $lt;
+                }
+            } catch (SugarApiException $e) {
+            }
+
+            $instruction = $this->instruction = string_format(
+                $mod_strings['LBL_IDM_SELECT_MAPPING_INSTRUCTION'] . '<br/><br/>' .
+                $mod_strings['LBL_IDM_SELECT_MAPPING_FIELDS_INSTRUCTION'],
+                [
+                    get_help_url(
+                        $GLOBALS['sugar_flavor'],
+                        $GLOBALS['sugar_version'],
+                        $current_language,
+                        'UserFields',
+                        '',
+                        '',
+                        '',
+                        '',
+                        implode(',', getReadableProductNames($licenses))
+                    ),
+                ]
+            );
+        } else {
+            $this->instruction = 'LBL_SELECT_MAPPING_INSTRUCTION';
+            $instruction = $this->getInstruction();
+        }
+
+        $this->ss->assign('INSTRUCTION', $instruction);
 
         $this->ss->assign("MODULE_TITLE", $this->getModuleTitle(false));
         $this->ss->assign("STEP4_TITLE",
@@ -242,7 +276,11 @@ class ImportViewStep3 extends ImportView
                     $fieldtype .= ' - ' . $comment;
                 }
 
-                $options[$displayname.$fieldname] = '<option value="'.$fieldname.'" title="'. $displayname
+                if ($this->isLimitedForFieldInIdmMode($import_module, $properties)) {
+                    continue;
+                }
+
+                $options[$displayname . $fieldname] = '<option value="' . $fieldname . '" title="' . $displayname
                     . htmlentities($fieldtype, null, 'UTF-8') . '"'
                     . $selected . $req_class . '>' . $displayname . $req_mark . '</option>\n';
             }
@@ -275,6 +313,8 @@ class ImportViewStep3 extends ImportView
                 'cell2'         => strip_tags($cellTwoData),
                 'cell3'         => strip_tags($cellThreeData),
                 'show_remove'   => false,
+                'defaultFieldName' => $defaultField,
+                'hidden' => false,
                 );
         }
 
@@ -318,7 +358,11 @@ class ImportViewStep3 extends ImportView
                         $fieldtype .= ' - ' . $comment;
                     }
 
-                    $options[$displayname.$fieldname] = '<option value="'.$fieldname.'" title="'. $displayname
+                    if ($this->isLimitedForFieldInIdmMode($import_module, $properties)) {
+                        continue;
+                    }
+                    $options[$displayname . $fieldname] =
+                        '<option value="' . $fieldname . '" title="' . $displayname
                         . htmlentities($fieldtype, null, 'UTF-8') . '"'
                         . $selected . $req_class . '>' . $displayname . $req_mark . '</option>\n';
                 }
@@ -341,11 +385,28 @@ class ImportViewStep3 extends ImportView
                     'field_choices' => implode('',$options),
                     'default_field' => $defaultFieldHTML,
                     'show_remove'   => true,
+                    'defaultFieldName' => $defaultField,
+                    'hidden' => false,
                     );
 
                 $ret_field_count++;
             }
         }
+
+        if ($this->isLimitedForModuleInIdmMode($import_module)) {
+            foreach ($columns as $key => $value) {
+                $fields = $this->bean->get_importable_fields();
+                foreach ($fields as $field => $properties) {
+                    if (empty($properties['idm_mode_disabled'])) {
+                        continue;
+                    }
+                    if (isset($value['defaultFieldName']) && $properties['name'] === $value['defaultFieldName']) {
+                        $columns[$key]['hidden'] = true;
+                    }
+                }
+            }
+        }
+
 
         $this->ss->assign("COLUMNCOUNT",$ret_field_count);
         $this->ss->assign("rows",$columns);
@@ -366,6 +427,11 @@ class ImportViewStep3 extends ImportView
         for ($i = 1;isset($mod_strings[$module_key.$i]);$i++) {
             $notetext .= '<li>' . $mod_strings[$module_key.$i] . '</li>';
         }
+
+        if ($this->isLimitedForModuleInIdmMode($import_module)) {
+            $notetext = '';
+        }
+
         $this->ss->assign("NOTETEXT",$notetext);
         $this->ss->assign("HAS_HEADER",($has_header ? 'on' : 'off' ));
 
@@ -498,7 +564,30 @@ EOCSS;
      */
     protected function _getJS($required)
     {
-        global $mod_strings;
+        global $mod_strings, $sugar_config;
+
+        $importModule = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', '');
+        $customEnclosure = $this->request->getValidInputRequest('custom_enclosure', null, '');
+        $importModuleJs = json_encode($importModule);
+
+        $has_header = isset($_REQUEST['has_header']) && $_REQUEST['has_header'] === 'on';
+        $uploadFileName =  $this->request->getValidInputRequest('file_name', null, '');
+        $splitter = new ImportFileSplitter($uploadFileName, $sugar_config['import_max_records_per_file']);
+        $delimiter = $this->getDelimiterValue();
+        $splitter->splitSourceFile($delimiter, html_entity_decode($customEnclosure, ENT_QUOTES), $has_header);
+        $count = $splitter->getFileCount()-1;
+        $recCount = $splitter->getRecordCount();
+
+        $stepTitle4 = $mod_strings['LBL_IMPORT_RECORDS'];
+
+        $dateTimeFormat = $GLOBALS['timedate']->get_cal_date_time_format();
+
+        $type = $this->request->getValidInputRequest(
+            'type',
+            ['Assert\Choice' => ['choices' => ['import', 'update', '']]],
+            ''
+        );
+        $typeJs = json_encode($type);
 
         $print_required_array = "";
         foreach ($required as $name=>$display) {
@@ -518,6 +607,110 @@ EOCSS;
             document.getElementById('{$this->currentFormID}').to_pdf.value = '';
         }
         return true;
+    }
+   
+    if (document.getElementById('importnow')) {
+        document.getElementById('importnow').onclick = function(){
+            var form = document.getElementById('importstep3');
+            // Move on to next step
+            document.getElementById('importstep3').action.value = 'Step4';
+            ProcessImport.begin();
+        }
+    
+        ProcessImport = new function()
+        {
+            /*
+             * number of file to process processed
+             */
+            this.fileCount         = 0;
+        
+            /*
+             * total files to processs
+             */
+            this.fileTotal         = {$count};
+        
+            /*
+             * total records to process
+             */
+            this.recordCount       = {$recCount};
+        
+            /*
+             * maximum number of records per file
+             */
+            this.recordThreshold   = {$sugar_config['import_max_records_per_file']};
+            
+            this.type = {$typeJs};
+        
+            this.importModule = {$importModuleJs};
+            
+            /*
+             * submits the form
+             */
+            this.submit = function()
+            {
+                document.getElementById("importstep3").tmp_file.value =
+                    document.getElementById("importstep3").tmp_file_base.value + '-' + this.fileCount;
+                YAHOO.util.Connect.setForm(document.getElementById("importstep3"));
+                YAHOO.util.Connect.asyncRequest('POST', 'index.php',
+                    {
+                        success: function(o) {
+                             var locationStr = "index.php?" + SUGAR.util.paramsToUrl({
+                                module: "Import",
+                                action: "Last",
+                                current_step: document.getElementById("importstep3").current_step.value,
+                                type: ProcessImport.type,
+                                import_module: ProcessImport.importModule,
+                                has_header: document.getElementById("importstep3").has_header.value
+                             });
+                                
+                                if ( ProcessImport.fileCount >= ProcessImport.fileTotal ) {
+                                    YAHOO.SUGAR.MessageBox.updateProgress(1,'{$mod_strings['LBL_IMPORT_COMPLETED']}');
+                                    SUGAR.util.hrefURL(locationStr);
+                                }
+                                else {
+                                    ProcessImport.fileCount++;
+                                    ProcessImport.submit();
+                                }
+                        },
+                        failure: function(o) {
+                            YAHOO.SUGAR.MessageBox.minWidth = 500;
+                            YAHOO.SUGAR.MessageBox.show({
+                                type:  "alert",
+                                title: '{$mod_strings['LBL_IMPORT_ERROR']}',
+                                msg:   o.responseText,
+                                fn: function() { window.location.reload(true); }
+                            });
+                        }
+                    }
+                );
+                var move = 0;
+                if ( this.fileTotal > 0 ) {
+                    move = this.fileCount/this.fileTotal;
+                }
+                YAHOO.SUGAR.MessageBox.updateProgress( move,
+                    "{$mod_strings['LBL_IMPORT_RECORDS']} " + ((this.fileCount * this.recordThreshold) + 1)
+                                + " {$mod_strings['LBL_IMPORT_RECORDS_TO']} " + Math.min(((this.fileCount+1) * this.recordThreshold),this.recordCount)
+                                + " {$mod_strings['LBL_IMPORT_RECORDS_OF']} " + this.recordCount );
+            }
+        
+            /*
+             * begins the form submission process
+             */
+            this.begin = function()
+            {
+                datestarted = '{$mod_strings['LBL_IMPORT_STARTED']} ' +
+                        YAHOO.util.Date.format('{$dateTimeFormat}');
+                YAHOO.SUGAR.MessageBox.show({
+                    title: '{$stepTitle4}',
+                    msg: datestarted,
+                    width: 500,
+                    type: "progress",
+                    closable:false,
+                    animEl: 'importnow'
+                });
+                this.submit();
+            }
+        }
     }
 
 ImportView = {
@@ -573,7 +766,7 @@ ImportView = {
 if( document.getElementById('gonext') )
 {
     document.getElementById('gonext').onclick = function(){
-
+    
         if( ImportView.validateMappings() )
         {
             // Move on to next step

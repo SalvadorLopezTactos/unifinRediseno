@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Введений пароль не відповідає вимогам до пароля. Будь ласка, спробуйте ще раз.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Відомості про користувача не знайдено',
     'ERR_USER_NAME_EXISTS'              => 'Ім&#39;я користувача {0} вже існує. Використовувати однакові імена користувача не дозволено. Укажіть унікальне ім&#39;я користувача.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Ліцензію Sugar Hint слід зберегти зі сумісним типом додаткової ліцензії',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Даний користувач заблокований і не може увійти в систему, використовуючи існуючий пароль.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Користувачу, який використовує лише зовнішню автентифікацію, заборонено виконувати вхід за допомогою даних Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mail-адреса одержувача',
 	'ERR_SERVER_STATUS'					=> 'Статус сервера',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Система не в змозі відправити лист користувачеві. Перевірте параметри сервера вихідної пошти в <a href="index.php?module=EmailMan&action=config"> Налаштуваннях E-mail </a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Нових користувачів потрібно створювати в <a href="{0}" target="_blank">Налаштуваннях SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Адреса Email',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Прогнози',
     'LBL_WORKSHEETS'                    => 'Таблиці',
 	'LBL_CALENDARS'                     => 'Календарі',
+    'LBL_SHIFTS'                        => 'Зміни',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Виключення зміни',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Отримувати повідомлення по E-mail при призначенні задачі або об&#39;єкта.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Повідомити електронною поштою про призначення',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Отримуйте сповіщення електронною поштою, коли хтось згадує вас у записі журналу коментарів.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Повідомити електронною поштою про згадку',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Виберіть спосіб відображення імен полів у поданнях записів. Щоб зробити подання записів компактнішим, виберіть пункт "Поруч зі значенням поля".',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Розташування імені поля',
     'LBL_ABOVE_FIELD_VALUE'             => 'Над значенням поля',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Тип ліцензії',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Встановити часовий інтервал за замовчуванням для нагадування про майбутню телефонну розмову або зустріч.',
 	'LBL_REMINDER'						=> 'Нагадування',
 	'LBL_REMINDER_POPUP' => 'Спливаюче вікно',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Дана сесія була завершена, тому під цим логіном була розпочата нова сесія.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Перепризначити записи',
-	'LBL_REASS_DESC_PART1'				=> 'Виберіть модулі, що містять записи для їх перепризначення від вказаного користувача іншому користувачеві. <br/> <br/> Натисніть на Далі для огляду кількості записів, які будуть оновлені в кожному обраному модулі. Натисніть Скасування для переходу зі сторінки без перепризначення записів.',
+    'LBL_REASS_DESC_PART1'              => 'Виберіть модулі, що містять записи для їх перепризначення від вказаного користувача іншому користувачеві. <br/> <br/> Натисніть на Далі для огляду кількості записів, які будуть оновлені в кожному обраному модулі. Натисніть Скасування для переходу зі сторінки без перепризначення записів.',
         'LBL_REASS_DESC_PART2'=>                    'Будь ласка, вкажіть, які модулі повинні здійснювати наступні дії щодо інших модулів: запускати бізнес-процеси, відправляти повідомлення про призначення і здійснювати аудит стану записів у процесі перепризначення. Натисніть "Далі" щоб продовжити і перепризначити записи. Натисніть "Почати заново", щоб почати процес спочатку.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Перепризначення команд',
 	'LBL_REASS_STEP2_DESC'				=> 'Команди у списку нижче були доступні для "з команди користувача", а не "в команду користувача". Всі записи "З команди користувача" будуть відображені "В команду користувача" тільки у разі перетворення командних значень.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Профіль користувача',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Перейдіть у <a href="%s" target="_blank">Налаштування SugarCloud</a>, щоб змінювати поля лише для читання.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Щоб змінити поля, доступні тільки для читання, зверніться до адміністратора Sugar.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

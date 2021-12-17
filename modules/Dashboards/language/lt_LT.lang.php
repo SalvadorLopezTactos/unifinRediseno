@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Visos modulio {{module}} ataskaitų sritys',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Visų modulio {{module}} ataskaitų sričių rodinys {{view}}',
     'LBL_COPY_OF' => '{{{Name}}} kopija',
+    'LBL_DELETE_FOCUS_DRAWER' => '„Focus Drawer“ skydelių negalima ištrinti.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Sukurti ataskaitų sritį',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

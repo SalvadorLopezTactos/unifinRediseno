@@ -9,33 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-השג מפתח וסוד API מ-Google על ידי רישום מופע ה-Sugar שלך כאפליקציה חדשה.
-<br/><br>שלבי רישום המופע שלך:
-<br/><br/>
-<ol>
-<li>עבור לאתר של Google Developers:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>היכנס באמצעות חשבון Google שבו אתה רוצה לרשום את האפליקציה.</li>
-<li>צור פרויקט חדש </li>
-<li>הזן שם פרוייקט ולחץ \'צור\'.</li>
-<li>ברגע שהפרויקט נוצר, אפשר ה-Google Drive וה- Google Contacts API</li>
-<li>תחת חלק APIs ואימות > בחלק אישורים, צור מזהה לקוח חדש </li>
-<li>בחר Web Application ולחץ על \'קבע תצורת מסך הסכמה\'</li>
-<li>הזן שם מוצר ולחץ על \'שמור\'</li>
-<li>תחת החלק רכיבי URI ניתוב מחדש מורשים, הזן את כתובת ה-url הבאה:
-{$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>לחץ \'צור מזהה לקוח\'</li>
-<li>העתק את מזהה הלקוח וסוד הלקוח בתיבות להלן</ 5>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'רשום את מופע Sugar שלך באמצעות Google כדי לאפשר את קביעת התצורה של חשבונות Google לשימוש ב-Sugar. ' .
+        'ראה <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>תיעוד המחבר</a> לקבלת מידע נוסף.</td></tr></table>',
     'oauth2_client_id' => 'מזהה לקוח',
     'oauth2_client_secret' => 'סוד הלקוח',
 );

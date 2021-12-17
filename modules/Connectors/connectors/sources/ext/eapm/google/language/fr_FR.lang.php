@@ -9,31 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obenez une clé et un secret API de Google en enregistrant votre instance Sugar en tant que nouvelle application. 
-<br/><br>Étapes pour enregistrer votre instance :
-<br/><br/>
-<ol>
-<li>Allez sur le site des développeurs de Google :
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Connectez-vous à l\'aide du compte Google avec lequel vous désirez enregistrer l\'application.</li>
-<li>Créez un nouveau projet</li>
-<li>Saisissez un nom de Projet et cliquez sur Créer.</li>
-<li>Une fois le projet créé, activez les API Google Drive et Google Contact</li>
-<li>Dans la section APIs & Auth > Credentials créez un nouvel id client </li>
-<li>Sélectionnez Web Application et cliquez sur Configure conscent screen</li>
-<li>Saisissez un nom de produit et cliquez sur Enregistrer</li>
-<li>Dans la section Authorized redirect URIs, saisissez l\'url suivante : {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Cliquez sur Créer id client</li>
-<li>Copiez l\'id client et le code secret du client dans les cases en-dessous</li>
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Enregistrez votre instance Sugar auprès de Google pour permettre la configuration des comptes Google en vue de leur utilisation dans Sugar. ' .
+        'Reportez-vous à la <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>documentation sur les connecteurs</a> pour plus d\'informations.</td></tr></table>',
     'oauth2_client_id' => 'ID client',
     'oauth2_client_secret' => 'Code secret client',
 );

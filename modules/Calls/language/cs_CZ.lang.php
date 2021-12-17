@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Řídicí panel seznamu hovorů',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Řídicí panel záznamů hovorů',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na hovory',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Hovory',
@@ -48,7 +49,7 @@ $mod_strings = array (
     'LBL_HOURS_ABBREV' => 'h',
     'LBL_MINSS_ABBREV' => 'm',
     'LBL_COLON' => ':',
-    'LNK_NEW_CALL' => 'Log hovorů',
+    'LNK_NEW_CALL' => 'Zaznamenat hovor',
     'LNK_NEW_MEETING' => 'Harmonogram jednání',
     'LNK_CALL_LIST' => 'Hovory',
     'LNK_IMPORT_CALLS' => 'Import hovorů',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Zodpovědný uživatel',
     'LBL_LIST_MY_CALLS' => 'Tel. hovory',
     'LBL_MY_SCHEDULED_CALLS' => 'Moje naplánované hovory',
+    'LBL_GUEST_CALLS' => 'Moje hovory jako host',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Naplánované hovory jako host',
     'LBL_SELECT_FROM_DROPDOWN' => 'Prosím vyberte nejdřív z rozbalovací nabídky /\"Souvisejíci/\"',
 	'LBL_ASSIGNED_TO_NAME' => 'Přiřazeno komu',
 	'LBL_ASSIGNED_TO_ID' => 'Zodpovědný uživatel',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Zrušit',
     'LBL_EMPTY_SEARCH_RESULT' => 'Omlouváme se, ale nebyly nalezeny žádné výsledky. Prosíme, vytvořte si hosta níže.',
     'LBL_NO_ACCESS' => 'Nemáte právo k vytvoření $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'ID kontaktu Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Typ opakování',
     'LBL_REPEAT_INTERVAL' => 'Interval opakování',
     'LBL_REPEAT_END' => 'Konec',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Hovor s {{{this}}}',
     'LBL_SEND_INVITES' => 'Odeslat pozvánky',
     'LBL_REMINDER_TITLE' => 'Volání:',
+    'LBL_CALL_RECORDING_URL' => 'Nahrávání URL',
+    'LBL_CALL_RECORDING' => 'Nahrávání',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspěšně jste vytvořil {{moduleSingularLower}} {{name}} pro {{formatDate date_start}}.',

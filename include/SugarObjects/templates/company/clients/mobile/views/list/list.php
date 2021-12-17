@@ -103,7 +103,7 @@ $viewdefs[$module_name]['mobile']['view']['list'] = array(
                 ),
                 array(
                     'name' => 'phone_alternate',
-                    'label' => 'LBL_PHONE_ALTERNATE',
+                    'label' => 'LBL_PHONE_ALT',
                     'enabled' => true,
                 ),
                 array(
@@ -134,7 +134,7 @@ $viewdefs[$module_name]['mobile']['view']['list'] = array(
                 ),
                 array(
                     'name' => 'assigned_user_name',
-                    'label' => 'LBL_ASSIGNED_USER_NAME',
+                    'label' => 'LBL_ASSIGNED_TO_NAME',
                     'default' => true,
                     'enabled' => true,
                 ),

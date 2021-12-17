@@ -322,7 +322,7 @@ class GlobalSearchApi extends SugarApi
         }
 
         // Compose the bool and term filter to exclude the tag module
-        $tagFilter = new \Elastica\Query\Terms("_type", ["Tags"]);
+        $tagFilter = new \Elastica\Query\Terms(Mapping::MODULE_NAME_FIELD, ['Tags']);
         $boolFilter = new \Elastica\Query\BoolQuery();
         $boolFilter->addMustNot($tagFilter);
         $this->filters[] = $boolFilter;
@@ -437,6 +437,7 @@ class GlobalSearchApi extends SugarApi
                         unset($highlights[$field]);
                     }
                 }
+
                 $data['_highlights'] = $highlights;
             }
 
@@ -462,7 +463,7 @@ class GlobalSearchApi extends SugarApi
             // Retrieve tags' id & name
             $fields = $result->getData();
             $data['id'] = $result->getId();
-            $data['name'] = $fields['name'];
+            $data['name'] = $fields['name'] ?? $fields[$result->getModule() . Mapping::PREFIX_SEP .'name'];
 
             $formatted[] = $data;
         }

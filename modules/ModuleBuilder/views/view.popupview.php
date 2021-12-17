@@ -37,14 +37,14 @@ class ViewPopupview extends ViewListView
             $this->translatedEditModule = $moduleNames [ strtolower ( $this->editModule ) ] ;
         }
     }
-    
+
     /**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
 	protected function _getModuleTitleParams($browserTitle = false)
 	{
 	    global $mod_strings;
-	    
+
     	return array(
     	   translate('LBL_MODULE_NAME','Administration'),
     	   ModuleBuilderController::getModuleTitle(),
@@ -135,7 +135,7 @@ class ViewPopupview extends ViewListView
         $groups = array ( ) ;
         foreach ( $parser->columns as $column => $function )
         {
-            $groups [ $GLOBALS [ 'mod_strings' ] [ $column ] ] = $parser->$function () ; 
+            $groups [ $GLOBALS [ 'mod_strings' ] [ $column ] ] = $parser->$function () ;
         }
         foreach ( $groups as $groupKey => $group )
         {
@@ -147,6 +147,10 @@ class ViewPopupview extends ViewListView
                     {
 						$groups [ $groupKey ] [ $fieldKey ] [ 'width' ] = substr ( $field [ 'width' ], 0, strlen ( $field [ 'width' ] ) - 1 ) ;
                     }
+                }
+                if ($groupKey === 'Hidden' &&
+                    !AccessControlManager::instance()->allowFieldAccess($this->editModule, $fieldKey)) {
+                    unset($groups[$groupKey][$fieldKey]);
                 }
             }
         }

@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Quadre de comandament del llistat de reunions',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de reunions',
+    'LBL_LEAD_GUESTS' => 'Invitats de client potencial',
+    'LBL_CONTACT_GUESTS' => 'Invitats de contacte',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les reunions',
 
 	'ERR_DELETE_RECORD' => 'Per suprimir la reunió, heu d&#39;especificar un número de registre.',
 	'LBL_ACCEPT_THIS'=>'Acceptar?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Direcció',
 	'LBL_LIST_DUE_DATE'=>'Data de venciment',
 	'LBL_LIST_FORM_TITLE' => 'Llista de reunions',
-	'LBL_LIST_MY_MEETINGS' => 'Les Meves Reunions',
+    'LBL_LIST_MY_MEETINGS' => 'Les Meves Reunions',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Les meves reunions programades',
+    'LBL_GUEST_MEETINGS' => 'Les meves reunions com a convidat',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Reunions programades com a convidat',
 	'LBL_LIST_RELATED_TO' => 'Relatiu a',
 	'LBL_LIST_STATUS'=>'Estat',
 	'LBL_LIST_SUBJECT' => 'Assumpte',

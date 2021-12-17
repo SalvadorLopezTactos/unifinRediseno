@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Reguli operative de proces',
   'LBL_MODULE_NAME_SINGULAR' => 'Regulă operativă de proces',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare reguli operative de proces',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare reguli operative de proces',
   'LBL_RST_UID' => 'ID regulă operativă',
   'LBL_RST_TYPE' => 'Tip regulă operativă',
   'LBL_RST_DEFINITION' => 'Definire regulă operativă',

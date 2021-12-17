@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Získejte klíč rozhraní API a tajný klíč rozhraní API od společnosti Google pomocí registrace vaší instance Sugar jako nové aplikace.
-<br/><br>Kroky k registraci instance:
-<br/><br/>
-<ol>
-<li>Přejděte na stránku Google Developers:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Přihlaste se pomocí účtu Google, pod kterým chcete zaregistrovat aplikaci.</li>
-<li>Vytvořte nový projekt.</li>
-<li>Zadejte název projektu a klikněte na tlačítko vytvořeni.</li>
-<li>Po vytvoření projektu povolte služby Google Drive a Google Contacts API</li>
-<li>V části APIs & Auth > Credentials vytvořte nové ID klienta.</li>
-<li>Vyberte položku Web Application a klikněte na obrazovku Configure conscent.</li>
-<li>Zadejte název produktu a klikněte na položku Save</li>
-<li>V části Authorized redirect URIs zadejte následující adresu URL: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Klikněte na vytvoření ID klienta</li>
-<li>Do níže uvedených polí zkopírujte ID klienta a tajný klíč klienta.</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Zaregistrujte svou instanci Sugar u Google, aby bylo možné povolit konfiguraci účtů Google pro použití v Sugar. ' .
+        'Viz <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>Dokumentace konektorů</a>pro více informací.</td></tr></table>',
     'oauth2_client_id' => 'ID klienta',
     'oauth2_client_secret' => 'Tajný klíč klienta',
 );

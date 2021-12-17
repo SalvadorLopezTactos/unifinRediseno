@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Створено (ID)',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Створено користувачем',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Відповідальний користувач',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель тегів',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Інформаційна панель записів тегів',
+    'LBL_MY_TAGS' => 'Мої теги',
+    'LBL_MY_FAVORITE_TAGS' => 'Мої обрані теги',
 );

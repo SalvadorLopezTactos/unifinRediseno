@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Kontrolna tabla liste predmeta',
     'LBL_CASES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa predmeta',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Informacije o slučaju',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za slučajeve',
 
 	'ERR_DELETE_RECORD'					=> 'Morate navesti broj zapisa da bi obrisali kompaniju.',
 	'LBL_ACCOUNT_ID'					=> 'ID broj kompanije',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Prikaži u portalu',
 	'LBL_CREATE_KB_DOCUMENT' => 'Kreiraj artikal',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Baza Znanja',
+    'LBL_REQUEST_CLOSE' => 'Zatraži zatvaranje',
+    'LBL_REQUEST_CLOSE_DATE' => 'Zatraži datum zatvaranja',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Zahtev za zatvaranje',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Pošalji zahtev za zatvaranje ovog predmeta',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Želite li da zatražite zatvaranje ovog predmeta?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Moji predmeti sa zahtevom za zatvaranje',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Moji predmeti sa zahtevom za zatvaranje',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Moji predmeti sa zahtevom za zatvaranje',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Lista predmeta sa zahtevom za zatvaranje',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Prikazuje listu dodeljenih predmeta sa zahtevom za zatvaranje',
 
     'LBL_CREATED_USER' => 'Kreirao',
     'LBL_MODIFIED_USER' => 'Promenio',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ime dodeljenog korisnika',
     'LBL_EXPORT_TEAM_COUNT' => 'Veličina tima',
     'LBL_CHANGETIMERS' => 'Promeni tajmere',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Kupovine',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email adrese srodnih kontakata',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Na primer, možete ovo iskorisiti da pronađete problem koji je ranije prijavljen.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Ukoliko želite da prijavite podršci novi slučaj, to možete učiniti klikom ovde.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Klikom ovde u bilo koje vreme se vraćate na ovaj pogled.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcija predmeta',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Beleške',
 

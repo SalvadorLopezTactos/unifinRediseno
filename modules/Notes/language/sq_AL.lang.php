@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Paneli i listës së shënimeve',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të shënimeve',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te shënimet',
 
+    'LBL_RELATED_CONTACT' => 'Kontakt i lidhur',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
     'LBL_ACCOUNT_ID' => 'ID e Llogarisë',
     'LBL_CASE_ID' => 'ID e Rastit',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID e Kontaktit',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Shënimet',
+    'LBL_ATTACHMENTS' => 'Bashkëngjitje',
+    'LBL_ATTACHMENT_FLAG' => 'Është bashkëngjitje',
     'LBL_DESCRIPTION' => 'Shënim',
     'LBL_EMAIL_ADDRESS' => 'Adresa e Emailit',
     'LBL_EMAIL_ATTACHMENT' => 'bashkëngjitje të mailit',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Bashkëngjitje',
     'LBL_NOTE' => 'Shënim',
     'LBL_OPPORTUNITY_ID' => 'ID e mudëshme',
+    'LBL_NOTE_PARENT_ID' => 'ID-ja prind e shënimit:',
     'LBL_PARENT_ID' => 'ID mëmë',
     'LBL_PARENT_TYPE' => 'Lloji mëmë',
     'LBL_EMAIL_TYPE' => 'Lloji i emailit',

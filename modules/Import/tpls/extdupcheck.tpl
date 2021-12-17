@@ -37,7 +37,7 @@ textarea { width: 20em }
 <input type="hidden" name="import_type" value="{$smarty.request.import_type}">
 <input type="hidden" name="type" value="{$smarty.request.type}">
 <input type="hidden" name="file_name" value="{$smarty.request.tmp_file}">
-<input type="hidden" name="source_id" value="{$SOURCE_ID}">
+<input type="hidden" name="source_id" value="{$SOURCE_ID|escape:'html':'UTF-8'}">
 <input type="hidden" name="current_step" value="{$CURRENT_STEP}">
 <input type="hidden" name="records_per_import" value="{$RECORDTHRESHOLD}">
 <input type="hidden" name="offset" value="0">

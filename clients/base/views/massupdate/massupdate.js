@@ -192,12 +192,11 @@
             //FIXME we should not be faking metadata - (SC-2554)
             var cloneField = app.utils.deepCopy(field);
             cloneField.label = cloneField.label || cloneField.vname;
-            if (cloneField.type === 'multienum') {
-                cloneField.type = 'enum';
-            }
             massFields.push(cloneField);
         });
-        options.meta.panels[0].fields = massFields;
+
+        // Patch the fields so that types like multienum and text use the correct templates
+        options.meta.panels[0].fields = app.metadata._patchFields(options.module, metadataModule, massFields);
     },
 
     _render: function() {
@@ -1065,6 +1064,49 @@
     unbindBeforeRouteDelete: function() {
         app.routing.offBefore("route", this.beforeRouteDelete, this);
         $(window).off("beforeunload.delete" + this.cid);
+    },
+
+    /**
+     * Verifies mass-update if service start date exceeds service end date when add-on-to is selected.
+     *
+     * @return Boolean
+     */
+    isEndDateEditableByStartDate: function() {
+        var massUpdateModels = this.getMassUpdateModel(this.module).models;
+        var fieldsToValidate = this._getFieldsToValidate();
+        var checkField = 'service_start_date';
+        var updatedValues = {};
+        // Fields and their values selected for mass-update.
+        _.each(fieldsToValidate, function(field) {
+            updatedValues[field.name] = this.model.get(field.name);
+            if (!_.isUndefined(field.id_name) && this.model.has(field.id_name)) {
+                updatedValues[field.id_name] = this.model.get(field.id_name);
+            }
+        }, this);
+        // Verify each record selected in mass-update.
+        return _.every(massUpdateModels, function(model) {
+            if (model.get('add_on_to_id') && updatedValues[checkField]) {
+                var startDate = app.date(updatedValues[checkField]);
+                var endDate = app.date(model.get('service_end_date'));
+                if (!startDate.isSameOrBefore(endDate)) {
+                    return false;
+                }
+            }
+            return true;
+        }, this);
+    },
+
+    /**
+     * Display error message in when service start date is after service end date.
+     */
+    handleUnEditableEndDateErrorMessage: function() {
+        app.alert.show('stop_mass_update_for_service_start_date', {
+            level: 'error',
+            messages: app.lang.get('LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE'),
+            cancel: {
+                label: app.lang.get('LBL_CANCEL')
+            },
+        });
     },
 
     _dispose: function() {

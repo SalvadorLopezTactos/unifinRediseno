@@ -77,7 +77,7 @@
 <div id="shared_cal_edit" style="display: none; width: 400px;">
 <form name="shared_cal" action="index.php" method="post">
 {sugar_csrf_form_token}
-<div class="hd">{$MOD.LBL_EDIT_USERLIST}</div>
+<div class="hd">{$MOD.LBL_EDIT_USERLIST|escape:'html':'UTF-8'}</div>
 <div class="bd">	
 	<input type="hidden" name="module" value="Calendar">
 	<input type="hidden" name="action" value="index">
@@ -86,7 +86,7 @@
 	
 	<table cellpadding="1" cellspacing="1" border="0" class="edit view" align="center" width="100%">
 		<tr>
-			<td valign='top' nowrap><b>{$MOD.LBL_FILTER_BY_TEAM}</b></td>
+			<td valign='top' nowrap><b>{$MOD.LBL_FILTER_BY_TEAM|escape:'html':'UTF-8'}</b></td>
 			<td valign='top'>
 				<select id="shared_team_id" onchange="this.form.edit_shared.value = '1'; this.form.submit();" name="shared_team_id">
 					{$teams_options}
@@ -95,11 +95,11 @@
 	</table>
 	
 	<table cellpadding="0" cellspacing="3" border="0" align="center" width="100%">
-		<tr><th valign="top" align="center" colspan="2">{$MOD.LBL_SELECT_USERS}</th></tr>
+		<tr><th valign="top" align="center" colspan="2">{$MOD.LBL_SELECT_USERS|escape:'html':'UTF-8'}</th></tr>
 		<tr><td valign="top"></td><td valign="top">
 			<table cellpadding="1" cellspacing="1" border="0" class="edit view" align="center">
 				<tr>
-					<td valign="top" nowrap=""><b>{$MOD.LBL_USERS}:</b></td>
+					<td valign="top" nowrap=""><b>{$MOD.LBL_USERS|escape:'html':'UTF-8'}:</b></td>
 					<td valign="top" id="shared_ids_td">
 						<select id="shared_ids" name="shared_ids[]" multiple size="8">{$users_options}</select>
 					</td>					
@@ -113,8 +113,10 @@
 	</table>
 </div>
 <div class="ft" style="text-align: right;">
-	<input class="button" type="button" title="{$APP.LBL_SELECT_BUTTON_TITLE}" accesskey="{$APP.LBL_SELECT_BUTTON_KEY}" value="{$APP.LBL_SELECT_BUTTON_LABEL}" onclick="document.shared_cal.submit();"> 
-	<input class="button" onclick="CAL.sharedDialog.cancel();" type="button" title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accesskey="{$APP.LBL_CANCEL_BUTTON_KEY}" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+	 <input class="button" type="button" title="{$APP.LBL_SELECT_BUTTON_TITLE|escape:'html':'UTF-8'}" accesskey="{$APP.LBL_SELECT_BUTTON_KEY|escape:'html':'UTF-8'}"
+		   value="{$APP.LBL_SELECT_BUTTON_LABEL|escape:'html':'UTF-8'}" onclick="document.shared_cal.submit();">
+	 <input class="button" onclick="CAL.sharedDialog.cancel();" type="button" title="{$APP.LBL_CANCEL_BUTTON_TITLE|escape:'html':'UTF-8'}"
+			 accesskey="{$APP.LBL_CANCEL_BUTTON_KEY|escape:'html':'UTF-8'}" value="{$APP.LBL_CANCEL_BUTTON_LABEL|escape:'html':'UTF-8'}">
 </div>
 </form>
 </div>

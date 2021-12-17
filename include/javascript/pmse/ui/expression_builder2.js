@@ -118,6 +118,14 @@ ExpressionControl.prototype.init = function(settings) {
         helperConf.timeFormat = defaults.timeFormat;
     }
 
+
+    if (defaults.currencies){
+        helperConf.currencies = defaults.currencies;
+    }
+
+
+
+
     this.setElementHelper(helperConf)
         .setWidth(defaults.width)
         .setHeight(defaults.height)
@@ -1220,7 +1228,8 @@ ExpressionControl.prototype._createModulePanel = function () {
                     type: "dropdown",
                     name: "field",
                     label: translate("LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE"),
-                    width: "35%",
+                    width: '25%',
+                    className: 'field-evaluation-container',
                     required: true,
                     dataRoot: 'result',
                     labelField: "text",
@@ -1234,7 +1243,8 @@ ExpressionControl.prototype._createModulePanel = function () {
                     type: "dropdown",
                     name: "operator",
                     label: "",
-                    width: "30%",
+                    width: '20%',
+                    className: 'field-evaluation-container',
                     labelField: "text",
                     valueField: "value",
                     required: true,
@@ -1245,7 +1255,8 @@ ExpressionControl.prototype._createModulePanel = function () {
                     type: "text",
                     name: "value",
                     label: translate("LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE"),
-                    width: "35%",
+                    width: '55%',
+                    className: 'field-evaluation-container',
                     required: true,
                     dependencyHandler: _.bind(this.helper.valueDependencyHandler, this.helper)
                 }
@@ -1256,7 +1267,8 @@ ExpressionControl.prototype._createModulePanel = function () {
                 if (valueField instanceof FormPanelDate) {
                     valueField.close();
                 }
-            }
+            },
+            bodyClassName: 'module-field-evaluation'
         });
         this._evaluationPanel.addItem(this._evaluationPanels.module);
     }

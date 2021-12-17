@@ -62,6 +62,14 @@ $viewdefs['Quotes']['base']['view']['subpanel-list'] = array(
     // Disable inline edit for now because of INT-197
     'rowactions' => array(
         'actions' => array(
+            [
+                'type' => 'rowaction',
+                'css_class' => 'btn',
+                'tooltip' => 'LBL_PREVIEW',
+                'event' => 'list:preview:fire',
+                'icon' => 'fa-eye',
+                'acl_action' => 'view',
+            ],
             array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',

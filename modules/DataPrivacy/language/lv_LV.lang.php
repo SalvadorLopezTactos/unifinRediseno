@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Dzēšanai atzīmētie lauki',
     'LBL_NO_RECORDS_MARKED' => 'Neviens lauks vai ieraksts nav atzīmēts dzēšanai.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Datu privātuma ierakstu informācijas panelis',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Datu privātuma fokusa panelis',
 
     // list view
     'LBL_HELP_RECORDS' => 'Datu privātuma modulis izseko privātuma darbības, tostarp piekrišanas un tematu pieprasījumus, lai atbalstītu jūsu organizācijas privātuma procedūras. Lai izsekotu piekrišanu vai veiktu darbību ar privātuma pieprasījumu, Izveidojiet ar indivīda ierakstu (piemēram, kontaktinformāciju) saistītus datu privātuma ierakstus.',

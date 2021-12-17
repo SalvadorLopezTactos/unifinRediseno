@@ -203,6 +203,10 @@ class SugarWidgetFieldEnum extends SugarWidgetReportField
 				}
 			}
 			$cell = implode(", ",$cell);
+
+            if ($cell === '' && $val !== '') {
+                $cell = $val;
+            }
 		}
 		return $cell;
 	}

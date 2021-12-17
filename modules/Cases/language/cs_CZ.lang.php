@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Řídicí panel seznamu případů',
     'LBL_CASES_RECORD_DASHBOARD' => 'Řídicí panel záznamů případů',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Podrobnosti o případu',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na případy',
 
 	'ERR_DELETE_RECORD'					=> 'Pro vymazání zaměstnance musíte specifikovat číslo záznamu.',
 	'LBL_ACCOUNT_ID'					=> 'ID společnosti',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Zobrazit na portálu',
 	'LBL_CREATE_KB_DOCUMENT' => 'Vytvořit dokument',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Znalostní báze',
+    'LBL_REQUEST_CLOSE' => 'Uzavření požadavku',
+    'LBL_REQUEST_CLOSE_DATE' => 'Datum uzavření požadavku',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Požadavek na uzavření',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Odeslat požadavek na uzavření tohoto případu',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Chtěli byste požádat o uzavření tohoto případu?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Moje případy s požadavkem na uzavření',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Moje případy s požadavkem na uzavření',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Moje případy s požadavkem na uzavření',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Seznam případů s požadavkem na uzavření',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Zobrazí seznam přiřazených případů s požadavkem na uzavření',
 
     'LBL_CREATED_USER' => 'Vytvořil',
     'LBL_MODIFIED_USER' => 'Upravil',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Přiřazený uživatel',
     'LBL_EXPORT_TEAM_COUNT' => 'Počet týmů',
     'LBL_CHANGETIMERS' => 'Změňte časovače',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Nákupy',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Přiřazené kontaktní email. adresy',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Můžete například použít toto k vyhledání záležitosti, která byla předtím zapsána.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Pokud máte nový případ podpory, který byste chtěli zapsat, můžete tak učinit kliknutí zde.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Kliknutím zde se kdykoliv vrátíte do tohoto pohledu.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakce s případem',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
 
@@ -143,5 +155,5 @@ Chcete-li vytvořit modul {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Podrobnosti o SLA',
     'LBL_HOURS' => 'Hodiny',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Stav',
 );

@@ -12,6 +12,18 @@
 
 $viewdefs['Contacts']['base']['filter']['default'] = array(
     'default_filter' => 'all_records',
+    'quicksearch_field' => [
+        [
+            'first_name',
+            'last_name',
+        ],
+        'email',
+        'phone_work',
+        'phone_mobile',
+        'phone_other',
+        'assistant_phone',
+    ],
+    'quicksearch_priority' => 2,
     'fields' => array(
         'first_name' => array(),
         'last_name' => array(),

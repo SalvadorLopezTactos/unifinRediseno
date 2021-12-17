@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'A senha digitada não tem os requisitos necessários. Tente novamente.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informação do usuário não encontrada',
     'ERR_USER_NAME_EXISTS'              => 'O nome de usuário {0} já existe. Não são permitidos nomes de usuários duplicados. Mude o nome de usuário para um nome exclusivo.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'A licença do "Sugar Hint" license deve ser salva com um tipo de licença compatível adicional',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Este usuário está bloqueado do aplicativo Sugar e não pode ser conectado no sistema com a senha atual.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Apenas a autenticação externa não permite que o usuário faça login com as credenciais do Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Endereço de E-mail do Recipiente',
 	'ERR_SERVER_STATUS'					=> 'Status do servidor',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Não foi possível enviar um e-mail para o usuário. Favor checar a configuração de saída de e-mails em <a href="index.php?module=EmailMan&action=config">Configuração de E-mails</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Novos usuários precisam ser criados em <a href="{0}" target="_blank">Configurações do SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Endereço de E-mail',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Previsões',
     'LBL_WORKSHEETS'                    => 'Planilhas',
 	'LBL_CALENDARS'                     => 'Calendários',
+    'LBL_SHIFTS'                        => 'Turnos',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Exceções de turno',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Receba uma notificação por e-mail quando um registro é atribuído a você.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'E-mail sobre a atribuição',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receba uma notificação por e-mail quando alguém mencionar você em uma entrada no registro de comentários.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-mail sobre menção',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Selecione a forma como os nomes dos campos devem ser exibidos nas visualizações de registos. Escolha "Ao lado do valor do campo" para uma visualização de registo mais compacta.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Posicionamento do nome do campo',
     'LBL_ABOVE_FIELD_VALUE'             => 'Acima do valor do campo',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Tipo de licença',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Definir um padrão para os lembretes de chamadas e reuniões. Notificações pop-up aparecerão para todos os convidados utilizando Sugar. Lembretes de e-mail são enviados para todos os convidados.',
 	'LBL_REMINDER'						=> 'Avisos',
 	'LBL_REMINDER_POPUP' => 'Popup',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Esta sessão encerrou porque outra sessão começou com o mesmo usuário.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Reatribuir Registros',
-	'LBL_REASS_DESC_PART1'				=> 'Selecione os módulos que contêm os registros a transferir de um usuário específico para outro usuário.<br/><br/>Clique em Avançar para exibir o número de registros que serão atualizados em cada módulo selecionado. Clique em Cancelar para sair da página sem reatribuir nenhum registro.',
+    'LBL_REASS_DESC_PART1'              => 'Selecione os módulos que contêm os registros a transferir de um usuário específico para outro usuário.<br/><br/>Clique em Avançar para exibir o número de registros que serão atualizados em cada módulo selecionado. Clique em Cancelar para sair da página sem reatribuir nenhum registro.',
         'LBL_REASS_DESC_PART2'=>                    'Selecione os módulos com relação aos quais deseja executar fluxos de trabalho, enviar notificações de atribuição e fazer o monitoramento de auditoria durante a transferência. Clique em Avançar para continuar e transferir registros. Clique em Reiniciar para começar de novo.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Reatribuição de Equipe',
 	'LBL_REASS_STEP2_DESC'				=> 'As equipes listadas abaixo estavam disponíveis na equipe de usuários, mas não para a equipe de usuário. Todos os registros da equipe de Usuário serão invisíveis para a equipe do usuário a menos que os valores de equipe sejam mapeados. ',
@@ -633,7 +637,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Perfil do usuário',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Acesse as <a href="%s" target="_blank">Configurações do SugarCloud</a> para fazer alterações nos campos apenas de leitura.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Entre em contato com seu administrador do Sugar para realizar alterações nos campos apenas de leitura.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

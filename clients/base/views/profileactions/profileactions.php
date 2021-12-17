@@ -9,41 +9,61 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 
-$viewdefs['base']['view']['profileactions'] = array(
-    array(
+$idpConfig  = new Config(\SugarConfig::getInstance());
+$isIDMModeEnabled  = $idpConfig->isIDMModeEnabled();
+
+$viewdefs['base']['view']['profileactions'] = [
+    [
         'route' => '#profile',
         'label' => 'LBL_PROFILE',
         'css_class' => 'profileactions-profile',
         'acl_action' => 'view',
         'icon' => 'fa-user',
-    ),
-    array(
-        'route'=> '#bwc/index.php?module=Employees&action=index&query=true',
-        'label' => 'LBL_EMPLOYEES',
-        'css_class' => 'profileactions-employees',
-        'acl_action' => 'list',
-        'icon' => 'fa-users',
-    ),
-    array(
-        'route' => '#bwc/index.php?module=Administration&action=index',
-        'label' => 'LBL_ADMIN',
-        'css_class' => 'administration',
-        'module' => 'Administration',
-        'acl_action' => 'admin',
-        'icon' => 'fa-cogs',
-    ),
-    array(
-        'route' => '#about',
-        'label' => 'LNK_ABOUT',
-        'css_class' => 'profileactions-about',
+    ],
+];
+
+if ($isIDMModeEnabled) {
+    $viewdefs['base']['view']['profileactions'][] = [
+        'route' => $idpConfig->getIDMModeConfig()['profileUrls']['changePassword'],
+        'label' => 'LBL_CHANGE_PASSWORD',
+        'css_class' => 'profileactions-change-password',
         'acl_action' => 'view',
-        'icon' => 'fa-info-circle',
-    ),
-    array(
-        'route' => '#logout/?clear=1',
-        'label' => 'LBL_LOGOUT',
-        'css_class' => 'profileactions-logout',
-        'icon' => 'fa-sign-out',
-    ),
+        'icon' => 'fa-lock',
+    ];
+}
+
+$viewdefs['base']['view']['profileactions'] = array_merge(
+    $viewdefs['base']['view']['profileactions'],
+    [
+        array(
+            'route'=> '#bwc/index.php?module=Employees&action=index&query=true',
+            'label' => 'LBL_EMPLOYEES',
+            'css_class' => 'profileactions-employees',
+            'acl_action' => 'list',
+            'icon' => 'fa-users',
+        ),
+        array(
+            'route' => '#bwc/index.php?module=Administration&action=index',
+            'label' => 'LBL_ADMIN',
+            'css_class' => 'administration',
+            'module' => 'Administration',
+            'acl_action' => 'admin',
+            'icon' => 'fa-cogs',
+        ),
+        array(
+            'route' => '#about',
+            'label' => 'LNK_ABOUT',
+            'css_class' => 'profileactions-about',
+            'acl_action' => 'view',
+            'icon' => 'fa-info-circle',
+        ),
+        array(
+            'route' => '#logout/?clear=1',
+            'label' => 'LBL_LOGOUT',
+            'css_class' => 'profileactions-logout',
+            'icon' => 'fa-sign-out',
+        ),
+    ]
 );

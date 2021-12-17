@@ -164,6 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'บัก',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'การเสนอราคา',
     'LBL_RLI_SUBPANEL_TITLE' => 'รายการบรรทัดรายได้',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
-    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'ซื้อ',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'ซื้อสินค้าในไลน์',
 );

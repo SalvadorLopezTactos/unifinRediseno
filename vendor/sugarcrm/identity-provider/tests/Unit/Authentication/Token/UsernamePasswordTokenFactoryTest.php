@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Authentication\Token;
 
-use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
+use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 use Sugarcrm\IdentityProvider\Authentication\Token\MixedUsernamePasswordToken;
 use Sugarcrm\IdentityProvider\Authentication\Token\UsernamePasswordTokenFactory;
 
@@ -39,18 +39,18 @@ class UsernamePasswordTokenFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(MixedUsernamePasswordToken::class, $token);
         $this->assertEquals('username', $token->getUsername());
         $this->assertEquals('password', $token->getCredentials());
-        $this->assertEquals(AuthProviderManagerBuilder::PROVIDER_KEY_MIXED, $token->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_MIXED, $token->getProviderKey());
 
         $authTokens = $token->getTokens();
 
         $this->assertInstanceOf(UsernamePasswordToken::class, $authTokens[0]);
         $this->assertEquals('username', $authTokens[0]->getUsername());
         $this->assertEquals('password', $authTokens[0]->getCredentials());
-        $this->assertEquals(AuthProviderManagerBuilder::PROVIDER_KEY_LDAP, $authTokens[0]->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LDAP, $authTokens[0]->getProviderKey());
 
         $this->assertEquals('username', $authTokens[1]->getUsername());
         $this->assertEquals('password', $authTokens[1]->getCredentials());
-        $this->assertEquals(AuthProviderManagerBuilder::PROVIDER_KEY_LOCAL, $authTokens[1]->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LOCAL, $authTokens[1]->getProviderKey());
     }
 
     /**
@@ -69,7 +69,7 @@ class UsernamePasswordTokenFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(UsernamePasswordToken::class, $token);
         $this->assertEquals('username', $token->getUsername());
         $this->assertEquals('password', $token->getCredentials());
-        $this->assertEquals(AuthProviderManagerBuilder::PROVIDER_KEY_LOCAL, $token->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LOCAL, $token->getProviderKey());
     }
 
     /**
@@ -88,6 +88,6 @@ class UsernamePasswordTokenFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(UsernamePasswordToken::class, $token);
         $this->assertEquals('username', $token->getUsername());
         $this->assertEquals('password', $token->getCredentials());
-        $this->assertEquals(AuthProviderManagerBuilder::PROVIDER_KEY_LDAP, $token->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LDAP, $token->getProviderKey());
     }
 }

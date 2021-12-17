@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'ID de Modificado Por',
     'LBL_EXPORT_CREATED_BY' => 'Criado por ID',
     'LBL_EXPORT_TYPE_NAME' => 'Nome do Tipo',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de Contratos',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Dashboard de registo de Contratos',
 );

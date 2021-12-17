@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Áfa kulcs:',
   'LBL_TYPE_NAME'=>'Típus név',
   'LBL_TYPE' => 'Típus',
+  'LBL_PRODUCT_TYPE' => 'Terméktípus',
   'LBL_URL' => 'Termék URL:',
   'LBL_VENDOR_PART_NUM' => 'Forgalmazó cikkszáma:',
   'LBL_WEIGHT' => 'Súly:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Termékkatalógus megtekintése',
   'NTC_DELETE_CONFIRMATION' => 'Biztos benne, hogy törölni kívánja ezt rekordot?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Hozzáadás',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Keresés a termékkatalógusban',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Nincs elérhető adat',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Felelős felhasználó',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Terméktípusok',
   'LBL_RENEWABLE' => 'Megújítható',
   'LBL_SERVICE' => 'Szolgáltatás',
+  'LBL_LOCK_DURATION' => 'Zárolás időtartama',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Termékkatalógus-lista irányítópult',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Termékkatalógus-bejegyzés irányítópult',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Termékkatalógus figyelemfelhívás',
 );

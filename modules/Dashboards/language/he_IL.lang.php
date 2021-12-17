@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'כל לוחות המחוונים עבור מודל {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'כל לוחות המחוונים עבור מודל {{module}} צפה {{view}}',
     'LBL_COPY_OF' => 'עותק של {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'לא ניתן למחוק לוחות מחוונים של מגירת פוקוס.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'צור לוח מחוונים',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

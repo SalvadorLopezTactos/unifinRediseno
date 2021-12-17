@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Megjegyzések listája műszerfal',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Feljegyzések bejegyzések műszerfal',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Megjegyzések figyelemfelhívás',
 
+    'LBL_RELATED_CONTACT' => 'Kapcsolódó kapcsolat',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a kliens törléséhez!',
     'LBL_ACCOUNT_ID' => 'Kliens azonosító:',
     'LBL_CASE_ID' => 'Eset azonosító:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kapcsolati azonosító:',
     'LBL_CONTACT_NAME' => 'Kapcsolat:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Feljegyzések',
+    'LBL_ATTACHMENTS' => 'Csatolmányok',
+    'LBL_ATTACHMENT_FLAG' => 'A csatolmányban',
     'LBL_DESCRIPTION' => 'Feljegyzés',
     'LBL_EMAIL_ADDRESS' => 'Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Email melléklet',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Mellékletek',
     'LBL_NOTE' => 'Feljegyzés:',
     'LBL_OPPORTUNITY_ID' => 'Lehetőség azonosítója:',
+    'LBL_NOTE_PARENT_ID' => 'Szülőazonosító megjegyzés:',
     'LBL_PARENT_ID' => 'Szülő azonosítója:',
     'LBL_PARENT_TYPE' => 'Szülő típus',
     'LBL_EMAIL_TYPE' => 'E-mail típusa',

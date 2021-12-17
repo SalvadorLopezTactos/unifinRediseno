@@ -201,7 +201,7 @@ SQL;
         if ($focus->hasCustomFields()) {
             $this->db->getConnection()
                 ->delete(
-                    $focus->table_name,
+                    $focus->table_name . "_cstm",
                     ['id_c' => $bean_id]
                 );
         }

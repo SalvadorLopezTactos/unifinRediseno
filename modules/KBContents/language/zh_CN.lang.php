@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => '知识库列表仪表板',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => '知识库记录仪表板',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '知识库焦点抽屉',
 
     'LBL_MODULE_NAME' => '知识库',
     'LBL_MODULE_NAME_SINGULAR' => '知识库文章',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => '不实用',
     'LBL_RATING' => '评分',
     'LBL_VIEWED_COUNT' => '查看数目',
-    'LBL_DOWNLOAD_ALL' => '全部下载',
-    'LBL_DOWNLOAD_ONE' => '下载',
-    'LBL_ATTACHMENTS' => '附件',
-    'LBL_ADD_ATTACHMENT' => '浏览',
     'LBL_CATEGORIES' => '知识库类别',
     'LBL_CATEGORY_NAME' => '类别：',
     'LBL_USEFULNESS' => '实用性',

@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Τροποποιήθηκε Από Ταυτότητα',
     'LBL_EXPORT_CREATED_BY' => 'Δημιουργήθηκε Από Ταυτότητα',
     'LBL_EXPORT_TYPE_NAME' => 'Τύπος Ονόματος',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης συμβάσεων',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Συμβάσεων',
 );

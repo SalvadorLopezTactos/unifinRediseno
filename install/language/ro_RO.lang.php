@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Atentie: Nu inscripţionare',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Versiunea dumneavoastra de PHP nu este suportata de Sugar. Este necesar sa instalati o versiune compatibila cu aplicatia Sugar. Pentru Versiuni PHP suportate va rugam sa consultati Matricea de Compatibilitate din cadrul Notelor. Versiunea dumneavoastra este',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Versiunea dvs. din IIS nu este susţinută de Sugar. Veţi avea nevoie pentru a instala o versiune care este compatibilă cu aplicatia Sugar. Va rugam sa consultati Compatibility Matrix în Notele de lansare pentru versiunile acceptate IIS. Versiunea ta este',
-	'ERR_CHECKSYS_FASTCGI'              => 'Am detectat ca nu sunt folosite handler FastCGI pentru PHP. Veţi avea nevoie pentru a instala / configura o versiune care este compatibilă cu cererea Sugar. Va rugam sa consultati Matrix compatibilitate în Notele de lansare pentru versiunile acceptate. Vă rugăm să consultaţi http://www.iis.net/php/ pentru detalii',
+    'ERR_CHECKSYS_FASTCGI'              => 'Am detectat că nu folosești o mapare de gestionare FastCGI pentru PHP. Va trebui să instalezi/configurezi o versiune care este compatibilă cu aplicația Sugar. Consultă Matricea de compatibilitate din Notele de lansare pentru versiunile compatibilitate. Consultă <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> pentru detalii ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pentru o experienta optima in utilizarea IIS/FastCGI sapi, setati fastcgi.logging la valoarea 0 in fisierul dumneavoastrà php.ini',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalarea versiunii PHP nu este acceptata:(ver',
     'LBL_DB_UNAVAILABLE'                => 'Baza de date indisponibila',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nu s-a găsit Asistență baze de date. Asiguraţi-vă că aveți driverele necesare pentru unul dintre următoarele tipuri de baze de date acceptate: MySQL, MS SQLServer, Oracle sau DB2. Va trebui să eliminați extensia din fişierul php.ini sau să recompilaţi cu fişierul binar corect, în funcţie de versiunea dumneavoastră de PHP. Consultaţi Manualul PHP pentru mai multe informaţii despre cum să activaţi Asistență baze de date.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Asistență baze de date nu s-a găsit. Asiguraţi-vă că aveți driverele necesare pentru unul dintre următoarele tipuri de baze de date acceptate: MySQL, MS SQLServer, Oracle sau DB2. S-ar putea fie nevoie să eliminați extensia din fişierul php.ini sau să recompilaţi cu fişierul binar corect, în funcţie de versiunea dvs. PHP. Vă rugăm consultaţi Manualul PHP pentru mai multe informaţii despre cum să activaţi Asistență baze de date.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functiile asociate cu Librariile de parsare XML care sunt necesare aplicatiei Sugar nu au fost gasite. S-ar putea sa fie nevoie sa scoateti extensia in fisierul php.ini, sau sa recompilati cu fisierul binar corect, in functie de versiunea dumneavoastra de PHP. Va rugam sa reveniti la manualul PHP pentru mai multe informatii.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator de numere aleatorii',
     'ERR_CHECKSYS_MBSTRING'             => 'Functii asociate cu extensia "Multibyte Strings" (mbstring) care sunt necesare pentru Sugar nu au fost gasite pe server. <br />In general modulul mbstring nu este activat in mod implicit si trebuie activat cu directiva --enable-mbstring cand binarul Php este construit. Va rugam consultati manualul Php pentru mai multe informatii asupra modului in care poate fi activat suportul pentru mbstring',
@@ -476,139 +476,138 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Modulul de compatibilitate PHP Backward este activat.Seteaza zend.ze1_compatibility_modela Off pt a trece mai departe',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Mesaje e-mail de notificare a întâlnirii',
+        'subject' => 'Întâlnire SugarCRM - $event_name ',
+        'description' => 'Acest model este utilizat atunci când sistemul trimite o notificare de întâlnire unui utilizator.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Către: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user te-a invitat la o întâlnire</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Subiect: $event_name<br/>
+	Data de începere: $start_date<br/>
+	Data de închidere: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Descriere: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Acceptă această întâlnire:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Încercare de acceptare a acestei întâlniri:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Refuză această întâlnire:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Către: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user te-a invitat la o întâlnire
+Subiect: $event_name
+Data de începere: $start_date
+Data de închidere: $end_date
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
-
-Description: $description
-
-Accept this meeting:
+Descriere: $description
+Acceptă această întâlnire:
 <$accept_link>
 
-Tentatively Accept this meeting
+Încercare de acceptare a acestei întâlniri:
 <$tentative_link>
 
-Decline this meeting
+Refuză această întâlnire:
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Mesaje e-mail de notificare a apelului',
+        'subject' => 'Apel SugarCRM - $event_name ',
+        'description' => 'Acest model este utilizat atunci când sistemul trimite o notificare de apel unui utilizator.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Către: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user te-a invitat la un apel</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Subiect: $event_name<br/>
+	Data de începere: $start_date<br/>
+	Durata: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Descriere: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Acceptă acest apel:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Încercare de acceptare a acestui apel:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Refuză acest apel:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Către: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user te-a invitat la un apel
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Subiect: $event_name
+Data de începere: $start_date
+Durata: $hoursh, $minutesm
 
-Description: $description
+Descriere: $description
 
-Accept this call:
+Acceptă acest apel:
 <$accept_link>
 
-Tentatively Accept this call
+Încercare de acceptare a acestui apel:
 <$tentative_link>
 
-Decline this call
+Refuză acest apel:
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Mesaje e-mail de notificare de alocare',
+        'subject' => 'SugarCRM - $module_name alocat ',
+        'description' => 'Acest model este utilizat atunci când sistemul trimite o notificare de alocare unui utilizator.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user i-a alocat un modul&nbsp;$module_name lui&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Poți să verifici acest modul&nbsp;$module_name la:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user i-a alocat un modul$module_name lui$assigned_user.
 
-You may review this $module_name at:
+Poți să verifici acest modul$module_name la:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Mesaje e-mail de raportare programate',
+        'subject' => 'Raport programat: $report_name la $report_time',
+        'description' => 'Acest model este utilizat atunci când sistemul trimite un raport programat unui utilizator.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Bună $assigned_user,</p>
+<p>Ai primit în atașament un raport generat automat care a fost programat pentru a-ți fi trimis.</p>
+<p>Denumire raport: $report_name</p>
+<p>Data și ora raportului: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Bună $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+Ai primit în atașament un raport generat automat care a fost programat pentru a-ți fi trimis.
 
-Report Name: $report_name
+Denumire raport: $report_name
 
-Report Run Date and Time: $report_time',
+Data și ora raportului: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Notificare prin mesaj e-mail de la jurnalul de comentarii al sistemului',
+        'subject' => 'SugarCRM - $initiator_full_name te-a menționat la un modul $singular_module_name',
+        'description' => 'Acest model se utilizează pentru a trimite o notificare printr-un mesaj e-mail utilizatorilor care au fost menționați într-o secțiune a jurnalului de comentarii.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Ai fost menționat în următoarea înregistrare din jurnalul de comentarii:  <a href="$record_url">$record_name</a></p>
+                <p>Autentifică-te în Sugar pentru a vizualiza comentariul.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Ai fost menționat în următoarea înregistrare din jurnalul de comentarii: $record_name
+            Autentifică-te în Sugar pentru a vizualiza comentariul.',
     ],
 
     'advanced_password_new_account_email' => array(

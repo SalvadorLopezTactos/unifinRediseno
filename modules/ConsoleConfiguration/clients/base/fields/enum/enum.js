@@ -28,6 +28,12 @@
         // populate those field options
         if (this.orderByFieldNames.indexOf(options.def.name) > -1) {
             this.populateOrderByValues();
+
+            if (this.model) {
+                this.model.on('change:tabContent', function() {
+                    this.populateOrderByValues();
+                }, this);
+            }
         }
     },
 

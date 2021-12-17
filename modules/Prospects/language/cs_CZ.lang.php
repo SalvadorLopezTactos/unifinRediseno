@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Řídicí panel cílové skupiny',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Řídicí panel záznamů cílové skupiny',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na cíle',
 
   'LBL_MODULE_NAME' => 'Seznam adresátů',
   'LBL_MODULE_NAME_SINGULAR' => 'Kontakt',

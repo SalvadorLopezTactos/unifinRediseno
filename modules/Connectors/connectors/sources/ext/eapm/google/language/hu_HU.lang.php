@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Regisztrálja Sugar példányát új alkalmazásként, és szerezzen a Google-tól API kulcsot és titkos kulcsot.
-<br/><br>A példány regisztrálásának lépései:
-<br/><br/>
-<ol>
-<li>Látogasson el a Google Developers oldalra:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Jelentkezzen be azzal a Google fiókkal, amely alá regisztrálni szeretné az alkalmazást.</li>
-<li>Hozzon létre új projektet.</li>
-<li>Adjon meg egy projektnevet, és kattintson a létrehozásra.</li>
-<li>Miután létrehozta a projektet, engedélyezze a Google Drive és Google Contacts API-t</li>
-<li>Az APIs és eng.> Hitelesítő adatok részben hozzon létre egy új ügyfélazonosítót </li>
-<li>Válassa a Webes alkalmazást, és kattintson a Jóváhagyás konfigurálása képernyőre </li>
-<li>Adja meg a terméknevet, és kattintson a Mentés gombra</li>
-<li>Az Engedélyezett átirányítási URI részbe írja be a következő URL címet: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Kattintson az ügyfélazonosító létrehozására</li>
-<li>Másolja be az ügyfélazonosítót és ügyféltitkot az alábbi négyzetekbe</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Regisztrálja a Sugar példányát a Google szolgáltatásában, hogy engedélyezze a Google-fiókok konfigurálását Sugar rendszerben való használathoz. ' .
+        'Hivatkozzon a következőre: <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>Csatlakozók dokumentáció</a> részre.</td></tr></table>',
     'oauth2_client_id' => 'Ügyfélazonosító',
     'oauth2_client_secret' => 'Ügyféltitok',
 );

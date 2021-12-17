@@ -44,7 +44,7 @@ $mod_strings = array (
   'LBL_FILTER_LIST_STATEMEMT' => '以下に従って対象をフィルタ:',
 
   'NTC_REMOVE_TRIGGER' => '本当にこのトリガーをはずしてよいですか？',
-  'NTC_REMOVE_TRIGGER_PRIMARY' => '主のトリガーを削除しますと、すべてのトリガーを削除することになります。',
+  'NTC_REMOVE_TRIGGER_PRIMARY' => '主のトリガーを削除しますと、全てのトリガーを削除することになります。',
 
 
     'LNK_NEW_WORKFLOW' => 'ワークフロー作成',

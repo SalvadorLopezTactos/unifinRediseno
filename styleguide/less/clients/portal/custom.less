@@ -20,8 +20,23 @@ ul.nav.nav-tabs li.activity {
   top: 0;
 }
 
-#portal .touch .dashboard {
-  padding-top: 0 !important;
+#portal {
+  .touch .dashboard {
+    padding-top: 0 !important;
+  }
+
+  :focus {
+    outline: none;
+  }
+
+  .select2-container {
+    &.select2-container-active {
+      .select2-search-choice,
+      .select2-choice {
+        outline: none;
+      }
+    }
+  }
 }
 
 .dashboard {
@@ -95,6 +110,11 @@ ul.nav.nav-tabs li.activity {
       }
     }
   }
+}
+
+.span8 .headerpane {
+  width: calc(~"65.957446802% - 1px");
+  left: 0;
 }
 
 .headerpane h1 > .record-cell .record-cell {

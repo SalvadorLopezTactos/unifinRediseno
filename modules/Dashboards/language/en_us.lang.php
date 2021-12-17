@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'All Dashboards for {{module}} module',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'All Dashboards for {{module}} module {{view}} view',
     'LBL_COPY_OF' => 'Copy of {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'Focus Drawer dashboards cannot be deleted.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Create Dashboard',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

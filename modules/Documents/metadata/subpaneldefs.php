@@ -11,7 +11,6 @@
  */
  
 
-
 $layout_defs['Documents'] = array(
 	// list of what Subpanels to show in the DetailView 
 	'subpanel_setup' => array(
@@ -174,7 +173,41 @@ $layout_defs['Documents'] = array(
                     'mode' => 'MultiSelect',
                     ),
                 ),
-        ),    
+        ),
+        'purchases' => array(
+            'order' => 90,
+            'module' => 'Purchases',
+            'subpanel_name' => 'default',
+            'sort_order' => 'asc',
+            'sort_by' => 'id',
+            'title_key' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+            'get_subpanel_data' => 'purchases',
+            'top_buttons' =>
+                array (
+                    0 =>
+                        array (
+                            'widget_class' => 'SubPanelTopSelectButton',
+                            'mode' => 'MultiSelect',
+                        ),
+                ),
+        ),
+        'purchasedlineitems' => array(
+            'order' => 90,
+            'module' => 'PurchasedLineItems',
+            'subpanel_name' => 'default',
+            'sort_order' => 'asc',
+            'sort_by' => 'id',
+            'title_key' => 'LBL_PLIS_SUBPANEL_TITLE',
+            'get_subpanel_data' => 'purchasedlineitems',
+            'top_buttons' =>
+                array (
+                    0 =>
+                        array (
+                            'widget_class' => 'SubPanelTopSelectButton',
+                            'mode' => 'MultiSelect',
+                        ),
+                ),
+        ),
 	),
 );
 ?>

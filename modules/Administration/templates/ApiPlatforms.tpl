@@ -71,6 +71,7 @@
 
         var api_platforms = {$api_platforms};
         var lbl_api_platforms = '{sugar_translate label="LBL_API_PLATFORMS"}';
+        var lbl_enable_notifications = '{sugar_translate label="LBL_ENABLE_NOTIFICATIONS"}'
         var deleteImage = '{$deleteImage}';
         {literal}
         deleteRow = function(el) {
@@ -84,6 +85,7 @@
                 ".yui-dt > div { margin-right: -15px; }" +
                 ".yui-dt-liner  { font-style: italic; }" +
                 "tr.yui-dt-rec { border-bottom: 1px solid #BBB; }" +
+                "tr.yui-dt-rec > td:first-child { border-right: 1px solid #BBB; }" +
                 ".add_table td>div {" +
                     "display: inline-block;" +
                 "}" +
@@ -103,10 +105,29 @@
                     } else {
                         cell.textContent = data;
                     }
-                }}
+                }},
+                {
+                  key: 'enable_notifications',
+                  label: lbl_enable_notifications,
+                  width: 200,
+                  sortable: false,
+                  formatter: function(cell, rec, col, data) {
+                    const checkbox = document.createElement('input');
+                    checkbox.setAttribute('type', 'checkbox');
+                    checkbox.setAttribute('value', data);
+                    checkbox.setAttribute('style', 'margin-left: 48%;');
+                    if (data){
+                      checkbox.setAttribute('checked', data);
+                    }
+                    $(checkbox).click(function(event) {
+                      rec.setData('enable_notifications', !rec.getData('enable_notifications'));
+                    });
+                    cell.prepend(checkbox);
+                  }
+                }
             ],
             new YAHOO.util.LocalDataSource(api_platforms, {
-                responseSchema: {fields: ['name', 'custom']}
+                responseSchema: {fields: ['name', 'custom', 'enable_notifications']}
             }),
             {
                 height: "300px"
@@ -119,23 +140,31 @@
         SUGAR.apiPlatformsTable.addPlatform = function(){
             this.addRow({
                 name:$('#platform_name').val(),
-                custom:true
+                custom:true,
+                enable_notifications: true
             });
             $('#platform_name').val("");
         }
 
         SUGAR.saveApiPlatforms = function() {
             var apiTable = SUGAR.apiPlatformsTable;
-            var platforms = [];
+            var customPlatforms = [];
+            var platformOptions = {};
             for (var i = 0; i < apiTable.getRecordSet().getLength(); i++) {
                 var data = apiTable.getRecord(i).getData();
                 if (data.custom && data.name != '')
-                    platforms.push(data.name);
+                    customPlatforms.push(data.name);
+                if (data.name !== '') {
+                  platformOptions[data.name] = {
+                    enable_notifications: data.enable_notifications
+                  };
+                }
             }
             var urlParams = {
                 module: "Administration",
                 action: "saveApiPlatforms",
-                custom_api_platforms: JSON.stringify(platforms),
+                custom_api_platforms: JSON.stringify(customPlatforms),
+                platformoptions: JSON.stringify(platformOptions),
                 csrf_token: SUGAR.csrf.form_token
             }
 

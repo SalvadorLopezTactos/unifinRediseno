@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Configuration du portail',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Activer le portail',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Activer la recherche avant d&#39;ouvrir un dossier',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permettre aux utilisateurs du portail de clore le ticket',
     'LBL_PORTAL_THEME' => 'Thème du portail',
     'LBL_PORTAL_ENABLE' => 'Activer',
     'LBL_PORTAL_SITE_URL' => 'Votre portail Sugar est disponibleà l&#39;URL :',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Sélectionner pour utiliser ce champ dans la recherche globale sur ce module.',
+'LBL_POPHELP_REQUIRED'=>"Créez une formule pour déterminer si ce champ est nécessaire dans les mises en page.<br/>"
+    . "Les champs obligatoires suivront la formule de l'affichage mobile du navigateur, <br/>"
+    . "mais ne suivra pas la formule dans les applications natives, comme Sugar Mobile pour iPhone. <br/>"
+    . "Ils ne suivront pas la formule du portail libre-service Sugar.",
+'LBL_POPHELP_READONLY'=>"Créez une formule pour déterminer si ce champ est en lecture seule dans les mises en page.<br/>"
+        . "Les champs en lecture seule suivront la formule de l'affichage mobile du navigateur, <br/>"
+        . "mais ne suivront pas la formule dans les applications natives, comme Sugar Mobile pour iPhone. <br/>"
+        . "Ils ne suivront pas la formule du portail libre-service Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Choisissez d&#39;utiliser ce champ lorsque vous recherchez des enregistrements à l&#39;aide de la Recherche globale de ce module.',
 //Revert Module labels
 'LBL_RESET' => 'Réinitialiser',
 'LBL_RESET_MODULE' => 'Réinitialiser Module',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Crypté',
                 'datetimecombo' =>'Date/heure',
                 'decimal'=>'Décimal',
+                'autoincrement' => 'Incrément automatique',
 ),
 'labelTypes' => array(
     "" => "Libellés fréquemment utilisés",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'tous les modules',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (ID lié {1} )',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copie depuis la mise en page',
+'LBL_RELATIONSHIP_TYPE' => 'Relation',
 );

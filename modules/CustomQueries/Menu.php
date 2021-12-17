@@ -24,5 +24,3 @@ $module_menu = Array(
 	Array("index.php?module=ReportMaker&action=EditView&return_module=ReportMaker&return_action=DetailView", $mod_strings['LNK_NEW_REPORTMAKER'],"CreateReport"),
 	Array("index.php?module=ReportMaker&action=index&return_module=ReportMaker&return_action=index", $mod_strings['LNK_LIST_REPORTMAKER'],"ReportMaker"),
 	);
-
-?>

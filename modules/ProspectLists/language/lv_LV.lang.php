@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Mērķu sarakstu saraksta instrumentu panelis',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Mērķu sarakstu ierakstu instrumentu panelis',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Mērķu sarakstu fokusa panelis',
+  'LBL_RELATED_ACCOUNTS' => 'Saistītie uzņēmumi',
+  'LBL_RELATED_CONTACTS' => 'Saistītās kontaktpersonas',
+  'LBL_RELATED_LEADS_TARGETS' => 'Saistītie interesenti un mērķi',
 
   'LBL_MODULE_NAME' => 'Mērķu saraksts',
   'LBL_MODULE_NAME_SINGULAR' => 'Mērķu saraksts',

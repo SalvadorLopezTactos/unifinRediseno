@@ -9,7 +9,7 @@ class CustomPersonFilterApi extends PersonFilterApi {
     public function filterList(ServiceBase $api, array $args, $acl = 'list')
     {
 
-        if($args['filter'][0]['$and']!=null){
+        if(isset($args['filter'][0]['$and']) && $args['filter'][0]['$and']!=null){
             //Condición que sirve solo para cuando está definido el filtro default del campo puestousuario_c,
             // se omite condición status $not_equals 'Inactive' para mostrar usuarios tanto Activos como Inactivos
             if($args['filter'][0]['$and'][0]['puestousuario_c']!=null){
@@ -36,7 +36,7 @@ class CustomPersonFilterApi extends PersonFilterApi {
 
         return $this->runQuery($api, $args, $q, $options, $seed);
     }
-    
+
     protected function getCustomWhereForModule($module, $query = null) {
         if ($query instanceof SugarQuery) {
             if ($module == 'Employees') {
@@ -50,7 +50,7 @@ class CustomPersonFilterApi extends PersonFilterApi {
         if ($module == 'Employees') {
             return "users.employee_status = 'Active' AND users.show_on_employees = 1";
         }
-        
+
         return "users.status = 'Active' OR users.status = 'Inactive' AND users.portal_only = 0";
     }
 }

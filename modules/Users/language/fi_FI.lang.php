@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Salasana ei täyttänyt salasanavaatimuksia. Yritä uudelleen.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Käyttäjän tietoja ei löydy',
     'ERR_USER_NAME_EXISTS'              => 'Käyttäjänimi {0} on jo olemassa. Päällekkäisiä käyttäjänimiä ei hyväksytä. Muuta käyttäjänimi yksilölliseksi.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '"Sugar Hint" -lisenssi on tallennettava yhteensopivalla lisälisenssityypillä',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tämä käyttäjä lukittiin ulos Sugar sovelluksesta eikä voi kirjautua sisään käyttäen hänen nykyistä salasanaansa.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Käyttäjä, jolla on vain ulkoiset tunnukset, ei voi kirjautua Sugar-tunnuksilla',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Vastaanottajan sähköpostiosoite',
 	'ERR_SERVER_STATUS'					=> 'Palvelimesi tila',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Järjestelmä ei pysty lähettämään sähköpostia käyttäjälle. Tarkista lähtevän postin asetukset <a href=&#39;index.php?module=EmailMan&action=config&#39;>sähköpostiasetuksissa</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Uudet käyttäjät täytyy lisätä <a href="{0}" target="_blank">SugarCloud-asetuksista</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Sähköpostiosoite',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Ennusteet',
     'LBL_WORKSHEETS'                    => 'Työlistat',
 	'LBL_CALENDARS'                     => 'Kalenterit',
+    'LBL_SHIFTS'                        => 'Työvuorot',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Poikkeukset työvuoroissa',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Saat sähköpostitse ilmoituksen, kun tietue on osoitettu sinulle.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Lähetä sähköpostia toimeksiannosta',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Lähetä sähköposti-ilmoitus, kun joku mainitsee sinut kommenttilokissa.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Lähetä sähköpostia maininnasta',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Valitse, miten kenttien nimet näytetään tietuenäkymissä. Valitse "Kentän arvon vieressä", jos haluat kompaktimman tietuenäkymän.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Kentän nimen sijainti',
     'LBL_ABOVE_FIELD_VALUE'             => 'Kentän nimen yläpuolella',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Lisenssin tyyppi',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Aseta oletus puhelujen ja tapaamisten muistutuksille. Popup-muistutukset näkyvät kaikille Sugaria käyttäville kutsutuille. Sähköpostimuistutukset lähetetään kaikille kutsutuille.',
 	'LBL_REMINDER'						=> 'Muistutukset',
 	'LBL_REMINDER_POPUP' => 'Ponnahdusikkuna',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Tämä sessio on päätetty koska samalla käyttäjänimellä on aloitettu toinen sessio.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Siirrä tietueita',
-	'LBL_REASS_DESC_PART1'				=> 'Valitse moduulit, jotka sisältävät tietueet jotka siirretään käyttäjältä toiselle.<br /><br /><br />Klikkaa ‘Seuraava’ nähdäksesi joka moduulissa päivitettävien tietueiden määrän. Klikkaa ‘Peruuta’ poistuaksesi sivulta siirtämättä tietueita.',
+    'LBL_REASS_DESC_PART1'              => 'Valitse moduulit, jotka sisältävät tietueet jotka siirretään käyttäjältä toiselle.<br /><br /><br />Klikkaa ‘Seuraava’ nähdäksesi joka moduulissa päivitettävien tietueiden määrän. Klikkaa ‘Peruuta’ poistuaksesi sivulta siirtämättä tietueita.',
         'LBL_REASS_DESC_PART2'=>                    'Valitse moduulit, joita vastaan:<ul><li>ajetaan work floweja,</li><br /><li>lähetetään siirtoilmoituksia</li><br /><li>ja tehdään tarkastuksen seurantaa</li></ul> siirron aikana. Klikkaa <i>Seuraava</i> siirtääksesi tietueita. Klikkaa <i>Aloita alusta</i> aloittaaksesi alusta.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Tiimin siirto',
 	'LBL_REASS_STEP2_DESC'				=> 'Alla listatut tiimit ovat saatavilla lähdekäyttäjän tiimistä, muttei vastaanottavan käyttäjän tiimistä. Mitään lähdekäyttäjän tiimin tietueita ei näy vastaanottavan käyttäjän tiimeille, ellei tiimiarvoja aseteta uudelleen.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Käyttäjäprofiili',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Muutoksia vain luku -muotoisiin kenttiin voi tehdä <a href="%s" target="_blank">SugarCloud-asetuksista</a>.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Ota yhteyttä Sugar-järjestelmänvalvojaan, jos haluat tehdä muutoksia vain luku -muotoisiin kenttiin.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

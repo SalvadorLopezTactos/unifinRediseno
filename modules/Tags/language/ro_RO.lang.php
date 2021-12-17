@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Creat după ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Creat după nume utilizator',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nume de utilizator alocat',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare etichete',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Etichete',
+    'LBL_MY_TAGS' => 'Etichetele mele',
+    'LBL_MY_FAVORITE_TAGS' => 'Etichetele mele favorite',
 );

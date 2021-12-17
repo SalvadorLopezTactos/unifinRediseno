@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Dashboard Kennisbasislijst',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Dashboard kennisbasisrecord',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer kennisbasis',
 
     'LBL_MODULE_NAME' => 'Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Knowledge Base Artikel',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Niet nuttig',
     'LBL_RATING' => 'Classificering',
     'LBL_VIEWED_COUNT' => 'Teller bekijken',
-    'LBL_DOWNLOAD_ALL' => 'Alle downloaden',
-    'LBL_DOWNLOAD_ONE' => 'Downloaden',
-    'LBL_ATTACHMENTS' => 'Bijlagen:',
-    'LBL_ADD_ATTACHMENT' => 'Bladeren',
     'LBL_CATEGORIES' => 'Categorieën kennisdatabank',
     'LBL_CATEGORY_NAME' => 'Categorie',
     'LBL_USEFULNESS' => 'Nut',

@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'l&#39;any que ve',
     'LBL_OPEN_ISSUES' => 'Obre {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Resolts recentment',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Crea filtre',
+    'LBL_ERROR_FILTER_EMPTY' => 'Afegiu criteris de filtre.',
+    'LBL_ADD_FILTER' => 'Afegiu criteris',
+    'LBL_FILTER_NAME' => 'Nom de filtre',
+    'LBL_FILTER_FIELD' => 'Camp',
+    'LBL_FILTER_OPERATOR' => 'Operador',
+    'LBL_FILTER_VALUE' => 'Valor',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Desa a l&#39;Aplicació d&#39;escriptori',
+    'LBL_FILTER_LOCAL' => 'Filtre local',
 );

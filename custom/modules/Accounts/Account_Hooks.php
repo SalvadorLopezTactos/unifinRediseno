@@ -1287,6 +1287,7 @@ where rfc_c = '{$bean->rfc_c}' and
                         $beanprod->assigned_user_id = $bean->user_id_c;
                         break;
                     case '8': //Uniclick
+                        $beanprod->canal_c = 0;
                         $beanprod->assigned_user_id = $bean->user_id7_c;
                         break;
                     case '9': //Unilease

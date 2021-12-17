@@ -93,6 +93,16 @@
                 </div>
             </td>
         </tr>
+        {if $isServe}
+        <tr>
+            <td colspan='1' nowrap>
+                {$mod.LBL_PORTAL_ALLOW_CLOSE_CASE}:
+            </td>
+            <td colspan='1' nowrap>
+                <input type="checkbox" name="allowCloseCase" {if $allowCloseCase eq 'allow'}checked{/if} class='portalField' id="allowCloseCase" value="allow"/>
+            </td>
+        </tr>
+        {/if}
         <tr>
             <td>
                 {$mod.LBL_PORTAL_LOGOMARK_URL}: {sugar_help text=$mod.LBL_CONFIG_PORTAL_LOGOMARK_URL}

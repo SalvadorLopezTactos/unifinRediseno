@@ -145,7 +145,10 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'Adresa e Emailit',
   'LBL_CONTACTS_SYNC' => 'Kontaktet',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
+        'Punonjësi mund të krijohet vetëm te <a href="{0}" target="_blank">Cilësimet e SugarCloud</a>',
+
+    'LBL_COOKIE_CONSENT' => 'Miratimi i kukive',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Miratimi për kukit u mor më',
 );
 
 

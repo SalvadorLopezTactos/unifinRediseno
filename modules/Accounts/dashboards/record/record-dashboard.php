@@ -11,52 +11,66 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
-    'metadata' => array(
-        'components' => array(
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
+return [
+    'metadata' => [
+        'components' => [
+            [
+                'width' => 12,
+                'rows' => [
+                    [
+                        [
+                            'view' => [
+                                'module' => 'Accounts',
+                                'type' => 'activity-timeline',
+                                'label' => 'LBL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Accounts',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'purchase-history',
+                                'label' => 'LBL_PURCHASE_HISTORY_DASHLET',
+                                'linked_account_field' => 'id',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'active-subscriptions',
+                                'label' => 'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET',
+                                'linked_subscriptions_account_field' => 'id',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'opportunity-metrics',
                                 'label' => 'LBL_DASHLET_OPPORTUNITY_NAME',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'casessummary',
                                 'label' => 'LBL_DASHLET_CASES_SUMMARY_NAME',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'planned-activities',
-                                'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'history',
-                                'label' => 'LBL_HISTORY_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                ),
-                'width' => 12,
-            ),
-        ),
-    ),
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
     'name' => 'LBL_ACCOUNTS_RECORD_DASHBOARD',
-);
-
+];

@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => '赋税类别:',
   'LBL_TYPE_NAME'=>'类型名称',
   'LBL_TYPE' => '类型:',
+  'LBL_PRODUCT_TYPE' => '产品类型',
   'LBL_URL' => '产品网址:',
   'LBL_VENDOR_PART_NUM' => '供应商部件编号：',
   'LBL_WEIGHT' => '重量:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => '查看产品目录',
   'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录吗？',
     'LBL_ADD_TO_QUOTE_BUTTON' => '添加',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => '搜索产品目录',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => '无可用数据',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => '分配的用户名',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => '产品类型',
   'LBL_RENEWABLE' => '可续订',
   'LBL_SERVICE' => '服务',
+  'LBL_LOCK_DURATION' => '锁定时长',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '产品目录列表仪表板',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '产品目录记录仪表板',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '产品目录焦点抽屉',
 );

@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tietoarkistoluettelon työpöytä',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tietoarkistotietueen työpöytä',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Tietämyskanta-tietolaatikko',
 
     'LBL_MODULE_NAME' => 'Tietämyskanta',
     'LBL_MODULE_NAME_SINGULAR' => 'Tietämyskanta-artikkeli',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Ei hyödyllinen',
     'LBL_RATING' => 'Arvosana',
     'LBL_VIEWED_COUNT' => 'Näytä määrä',
-    'LBL_DOWNLOAD_ALL' => 'Lataa kaikki',
-    'LBL_DOWNLOAD_ONE' => 'Lataa',
-    'LBL_ATTACHMENTS' => 'Liitteet:',
-    'LBL_ADD_ATTACHMENT' => 'Selaa',
     'LBL_CATEGORIES' => 'Tietämyskannan kategoriat',
     'LBL_CATEGORY_NAME' => 'Kategoria',
     'LBL_USEFULNESS' => 'Hyödyllisyys',

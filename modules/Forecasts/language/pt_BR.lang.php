@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Painel de previsões',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Painel de registro de previsões',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Previsões',
@@ -313,7 +314,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Inicio do ano fiscal:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configurar o período que vai ser utilizado no módulo Previsões.<br><br>Observe que as configurações do período não podem ser alteradas após a configuração inicial. <br><br>Comece escolhendo a data de início de seu ano fiscal. Em seguida, escolha o tipo de período para a Previsão. O intervalo de datas para os períodos será automaticamente calculado com base em suas seleções. O subperíodo é a base para a planilha de previsões.<br><br>Os períodos futuros e passados visíveis determinarão o número de subperíodos visíveis no módulo Previsões. Os usuários podem visualizar e editar os números de Previsão na subperíodos visíveis.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure como gostaria de categorizar o {{forecastByModule}}. <br><br>Observe que as configurações de Intervalo não podem ser alteradas depois da primeira confirmação. Nas instâncias atualizadas, a configuração de Intervalo é bloqueada com os dados de Previsão existentes.<br><br>Você pode selecionar duas ou mais categorias com base em intervalos de probabilidade ou criar categorias que não sejam baseadas na probabilidade. <br><br>Existem caixas de seleção à esquerda das suas categorias personalizadas, use-as para decidir quais intervalos serão incluídos no valor da Previsão enviado e notificado aos administradores. <br><br>O usuário pode alterar manualmente o estado de inclusão/exclusão e a categoria de {{forecastByModule}} na planilha correspondente.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure a forma na qual deseja categorizar {{forecastByModule}}. <br><br>Observe que as configurações de Intervalo não podem ser alteradas depois da primeira confirmação. Para instâncias atualizadas, a configuração Intervalo é bloqueada com os dados de Previsão existentes.<br><br>Você pode selecionar duas ou mais categorias com base nos intervalos de probabilidade ou criar categorias que não sejam baseadas em probabilidades. <br><br>Há caixas de seleção à esquerda das suas categorias personalizadas; utilize-as para decidir quais intervalos serão incluídos no valor de Previsão confirmado e relatado para os gerentes. <br><br>Um usuário pode alterar a categoria e status de inclusão/exclusão de {{forecastByModule}} manualmente na planilha.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Selecione as colunas que você gostaria que o usuário preenchesse para suas Previsões de cada {{forecastByModuleSingular}}. Observe que a quantidade Provável é vinculada ao valor mostrado em {{forecastByModule}}; por essa razão, a coluna Provável não pode ser escondida.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Selecione as colunas que você gostaria de ver no módulo Previsão. A lista dos campos combinará a planilha e permitirá que o usuário escolha como configurar a sua visualização.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sou um espaço reservado para Previsão por texto explicativo!',

@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Plantillas de email de procesos',
     'LBL_MODULE_NAME_SINGULAR' => 'Plantilla de correo electrónico de procesos',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las plantillas de correo electrónico de procesos',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Cuadro de mando del registro de plantillas de correo electrónico de procesos',
     'LNK_LIST' => 'Ver plantillas de correo electrónico de procesos',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Crear plantilla de email de procesos',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importar plantillas de email de procesos',

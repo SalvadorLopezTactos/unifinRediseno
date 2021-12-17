@@ -13,6 +13,8 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard elenco articoli nell&#39;offerta',
+    'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard record prodotti offerta',
+    'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Prodotti Focus Drawer',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Elemento della Campagna Riportato',
     'LBL_MODULE_NAME' => 'Prodotti',
@@ -61,6 +63,7 @@ $mod_strings = array(
     'LBL_WEIGHT' => 'Peso:',
     'LBL_DESCRIPTION' => 'Descrizione:',
     'LBL_TYPE' => 'Tipo:',
+    'LBL_PRODUCT_TYPE' => 'Tipo di prodotto',
     'LBL_CATEGORY' => 'Categoria:',
     'LBL_QUANTITY' => 'Quantità:',
     'LBL_STATUS' => 'Stato:',
@@ -119,7 +122,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID Opportunità',
     'LBL_OPPORTUNITY' => 'Opportunità',
     'LBL_REVENUELINEITEM_ID' => 'ID Elemento dell´Opportunità:',
-    'LBL_REVENUELINEITEM' => 'Elemento dell´Opportunità', 
+    'LBL_REVENUELINEITEM' => 'Elemento dell´Opportunità',
     'LBL_EXPERT_ID' => 'Esperto di Prodotto',
     'LBL_FORECAST' => 'Includi nella Previsione',
     'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'Totale prodotto',
@@ -127,7 +130,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Contatto',
     'LBL_DISCOUNT_TOTAL' => 'Sconto',
     'LBL_DISCOUNT_AMOUNT' => 'Importo Sconto',
-    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Importo sconto firmato',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Valore importo sconto',
     'LBL_EXT_PRICE' => 'Prezzo est.',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Nome Simbolo Valuta',
@@ -145,6 +148,8 @@ $mod_strings = array(
     'LBL_SALES_STAGE' => 'Fase di Vendita',
     'LBL_SALES_STATUS' => 'Stato Elementi dell´Opportunità',
     'LBL_PIPELINE_TOTAL_IS' => 'La Pipeline Totale è',
+    'LBL_ADD_ON_TO' => 'Add-on per',
+    'LBL_ADD_ON_TO_ID' => 'Add-on per ID',
 
     'LBL_CONVERT_TO_QUOTE_ERROR' => 'Errore:',
     'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => 'Si è verificato un errore nella conversione di questa Line Item quotata in Offerta',

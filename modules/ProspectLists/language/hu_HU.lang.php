@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Céllisták listája műszerfal',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Céllisták bejegyzés műszerfal',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Célpontok listája figyelemfelhívás',
+  'LBL_RELATED_ACCOUNTS' => 'Kapcsolódó fiókok',
+  'LBL_RELATED_CONTACTS' => 'Kapcsolatai',
+  'LBL_RELATED_LEADS_TARGETS' => 'Kapcsolódó érdeklődők és célpontok',
 
   'LBL_MODULE_NAME' => 'Cél listák',
   'LBL_MODULE_NAME_SINGULAR' => 'Cél lista',

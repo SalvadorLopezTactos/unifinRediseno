@@ -11,9 +11,11 @@
  */
 --}}
 {{#if value}}
-    {{#if def.isClickable}}
-        <a class="ellipsis_inline" data-placement="bottom" title="{{value}}" {{#if def.link_target}}target="{{def.link_target}}"{{/if}} href="{{value}}"{{#if dir}} dir="{{dir}}"{{/if}}>{{value}}</a>
-    {{else}}
-        <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">{{value}}</span>
-    {{/if}}
+    <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+        {{#if def.isClickable}}
+            <a {{#if def.link_target}}target="{{def.link_target}}"{{/if}} href="{{value}}"{{#if dir}} dir="{{dir}}"{{/if}}>{{value}}</a>
+        {{else}}
+            {{value}}
+        {{/if}}
+    </span>
 {{/if}}

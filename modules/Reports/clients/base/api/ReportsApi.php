@@ -372,6 +372,7 @@ class ReportsApi extends ModuleApi
         $chartDisplay->setReporter($reporter);
 
         $chart = $chartDisplay->getSugarChart();
+        $chart->setReporter($reporter);
 
         $json = json_decode($chart->buildJson($chart->generateXML(), true), true);
 

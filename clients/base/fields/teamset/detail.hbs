@@ -11,8 +11,15 @@
  */
 --}}
 {{#each value}}
-<div class="control-group teamset">
-    {{name}} {{name_2}} {{#if primary}}<label>({{str "LBL_COLLECTION_PRIMARY"}})</label>{{/if}}
-    {{partial 'label-selected' ../this this}}
-</div>
+    <div class="control-group teamset">
+        <span class="control-group-team-name">
+            {{name}} {{name_2}}
+        </span>
+        {{#if primary}}
+            <span class="control-group-primary-label">
+                ({{str "LBL_COLLECTION_PRIMARY"}})
+            </span>
+        {{/if}}
+        {{partial 'label-selected' ../this this}}
+    </div>
 {{/each}}

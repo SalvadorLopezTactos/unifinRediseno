@@ -45,6 +45,15 @@
     },
 
     /**
+     * Replaces the model of this view with the given one
+     *
+     * @param {Bean} model the new Product Bundles model to use for this view
+     */
+    switchModel: function(model) {
+        this.model = model;
+    },
+
+    /**
      * Overriding _renderHtml to specifically place this template after the
      * quote data group list rows
      *

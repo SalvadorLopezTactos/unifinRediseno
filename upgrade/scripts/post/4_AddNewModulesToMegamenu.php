@@ -79,6 +79,23 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
             'modules' => ['BusinessCenters'],
             'forceVisible' => true,
         ],
+        // 10.1.0 new Purchases and Purchased Line Items Modules
+        [
+            'name' => 'Purchases and Purchased Line Items Modules',
+            'fromVersion' => ['10.1.0', '<'],
+            'toFlavor' => ['ent'],
+            'modules' => ['Purchases', 'PurchasedLineItems'],
+            'forceVisible' => true,
+        ],
+        // 10.1.0 new Purchases and Purchased Line Items Modules (pro->ent conversion)
+        [
+            'name' => 'Purchases and Purchased Line Items Modules',
+            'fromFlavor' => ['pro'],
+            'toFlavor' => ['ent'],
+            'fromVersion' => ['10.1.0', '>='],
+            'modules' => ['Purchases', 'PurchasedLineItems'],
+            'forceVisible' => true,
+        ],
     ];
 
     public function run()

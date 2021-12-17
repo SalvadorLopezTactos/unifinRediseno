@@ -57,6 +57,49 @@
     </tbody>
 </table>
 
+<h2>Query Parameters</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            max_num
+        </td>
+        <td>
+            Integer
+        </td>
+        <td>
+            A maximum number of records to return. The default is all records.
+        </td>
+        <td>
+            False
+        </td>
+    </tr>
+    <tr>
+        <td>
+            offset
+        </td>
+        <td>
+            Integer
+        </td>
+        <td>
+            The number of records to skip over before records are returned.
+            The default is 0. This parameter will be ignored if <code>max_num</code>parameter is missing.
+        </td>
+        <td>
+            False
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 <h2>Response Arguments</h2>
 <table class="table table-hover">
     <thead>
@@ -69,13 +112,25 @@
     <tbody>
     <tr>
         <td>
-            &lt;image file&gt;
+            next_offset
         </td>
         <td>
-            String;
+            Integer
         </td>
         <td>
-            Returns the image content with the content headers.
+            Displays the next offset for retrieval of additional results. -1 will be returned when there are no more
+            records.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            records
+        </td>
+        <td>
+            Array
+        </td>
+        <td>
+            An array of results containing matched records.
         </td>
     </tr>
     </tbody>
@@ -125,6 +180,14 @@
         </td>
         <td>
             Added <code>/Audit</code> GET endpoint.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            v11_11
+        </td>
+        <td>
+            Optional <code>max_num</code> and <code>offset</code> parameters to <code>/Audit</code> GET endpoint.
         </td>
     </tr>
     </tbody>

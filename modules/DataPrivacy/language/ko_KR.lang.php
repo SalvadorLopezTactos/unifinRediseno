@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => '삭제하기로 표시된 필드',
     'LBL_NO_RECORDS_MARKED' => '삭제로 표시된 필드 또는 기록이 없습니다.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => '데이터 개인 정보 기록 대시 보드',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '데이터 프라이버시 포커스 서랍',
 
     // list view
     'LBL_HELP_RECORDS' => '데이터 프라이버시 모듈은 개인 정보 보호 활동(동의 및 정보 요청 포함)을 추적하여 조직의 개인 정보 보호 절차를 지원합니다. 동의 기록을 추적하거나 개인 정보 요청에 대한 조치를 취하기 위해 개인 기록(예:연락처)과 관련된 데이터 개인 정보 기록을 만듭니다.',

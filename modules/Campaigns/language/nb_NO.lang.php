@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Målliste av standartypen ble ikke funnet.',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Det ble ikke funnet noen elementer',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Elementene ble behandlet',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Innstillinger for innkommende e-post',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Innstillinger for system-e-post',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Tracker Navn:',
   'LBL_EDIT_TRACKER_URL'=>'Tracker URL:',

@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Quadre de comandament del Llistat de la base de coneixement',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Quadre de comandament del Registre de la base de coneixement',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a la base de coneixement',
 
     'LBL_MODULE_NAME' => 'Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Article de la Knowledge Base',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Inútil',
     'LBL_RATING' => 'Rating',
     'LBL_VIEWED_COUNT' => 'Veure compte',
-    'LBL_DOWNLOAD_ALL' => 'Descarregar tot',
-    'LBL_DOWNLOAD_ONE' => 'Descarregar',
-    'LBL_ATTACHMENTS' => 'Adjunts',
-    'LBL_ADD_ATTACHMENT' => 'Explorar',
     'LBL_CATEGORIES' => 'Categories de Base de coneixements',
     'LBL_CATEGORY_NAME' => 'Categoria',
     'LBL_USEFULNESS' => 'Utilitat',

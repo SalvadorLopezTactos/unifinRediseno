@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\ProductDefinition\Config\Source;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Symfony\Component\HttpFoundation\Response;
 
 class HttpSource implements SourceInterface
@@ -32,7 +33,7 @@ class HttpSource implements SourceInterface
     /**
      * Default fallback version
      */
-    const DEFAULT_FALLBACK_VERSION = '10.0.0';
+    const DEFAULT_FALLBACK_VERSION = '11.0.0';
 
     /**
      * Http client
@@ -58,15 +59,43 @@ class HttpSource implements SourceInterface
         }
 
         $base_uri = rtrim($options['base_uri'], " \t\n\r\0\x0B/") . '/';
-        $this->setHttpClient(new HttpClient([
+
+        $httpOptions = [
             'base_uri' => $base_uri,
             'http_errors' => false,
             'timeout' => static::HTTP_CLIENT_TIMEOUT,
-        ]));
+        ];
+        $proxyOption = $this->getHTTPClientProxy();
+        if (!empty($proxyOption)) {
+            $httpOptions = array_merge($httpOptions, ['proxy' => $proxyOption]);
+        }
+        $this->setHttpClient(new HttpClient($httpOptions));
 
-        if (!empty($options['fallback_version'])) {
+        if (!empty($options['fallback_version']) && $this->getSugarVersion() !== $options['fallback_version']) {
             $this->fallbackVersion = $options['fallback_version'];
         }
+    }
+
+    /**
+     * Return HTTP client proxy
+     *
+     * @return string
+     */
+    protected function getHTTPClientProxy(): string
+    {
+        $proxy = '';
+        if (!empty(\BeanFactory::getBeanClass('Administration'))) {
+            $config = \Administration::getSettings('proxy');
+            if (!empty($config->settings)
+                && !empty($config->settings['proxy_on'])
+                && !empty($config->settings['proxy_host'])) {
+                $proxy = $config->settings['proxy_host'] . ':' . $config->settings['proxy_port'];
+                if (!empty($config->settings['proxy_auth'])) {
+                    $proxy = $config->settings['proxy_username'] . ':' . $config->settings['proxy_password'] . '@' . $proxy;
+                }
+            }
+        }
+        return $proxy;
     }
 
     /**
@@ -87,16 +116,52 @@ class HttpSource implements SourceInterface
     public function getDefinition():? string
     {
         $raw = $this->makeRequest($this->getSugarVersion());
-        if (is_null($raw) && !empty($this->fallbackVersion)) {
+        if (is_null($raw)) {
             $this->getLogger()->warn(sprintf(
-                'Can\'t download product definition for version %s. Trying download it for fall back version %s.',
-                $this->getSugarVersion(),
-                $this->fallbackVersion
+                'Can\'t download product definition for version %s.',
+                $this->getSugarVersion()
             ));
-            $raw = $this->makeRequest($this->fallbackVersion);
+            if (!empty($this->fallbackVersion)) {
+                $raw = $this->makeRequest($this->fallbackVersion);
+            }
         }
 
-        return $raw;
+        if ($this->validateResponse($raw)) {
+            return $raw;
+        }
+        return null;
+    }
+
+    /**
+     * validate response
+     * @param null|string $data
+     * @return bool
+     */
+    protected function validateResponse(?string $response) : bool
+    {
+        if (empty($response)) {
+            return false;
+        }
+        // verify json format
+        $decodedData = json_decode($response, true);
+        if (empty($decodedData)) {
+            return false;
+        }
+
+        $validEntries = [
+            AccessControlManager::MODULES_KEY,
+            AccessControlManager::FIELDS_KEY,
+            AccessControlManager::RECORDS_KEY,
+            AccessControlManager::DASHLETS_KEY,
+        ];
+
+        foreach ($validEntries as $key) {
+            if (empty($decodedData[$key])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

@@ -150,8 +150,11 @@
 		    if(verifyElementFlag.parentNode.childNodes.length > 1) {
 		       verifyElementFlag.parentNode.removeChild(verifyElementFlag.parentNode.lastChild);
 		    }
-		    
-		    if(/emailAddress\d+$/.test(targetEl.id) && isValidEmail(targetEl.value) && !this.verifying && verifyElementFlag.value == "false") {
+
+            if (/emailAddress\d+$/.test(targetEl.id) &&
+                isValidEmailAddress(targetEl.value) &&
+                !this.verifying &&
+                verifyElementFlag.value == 'false') {
 		        verifiedTextNode = document.createElement('span');
 		        verifyElementFlag.parentNode.appendChild(verifiedTextNode);
 		        verifiedTextNode.innerHTML = SUGAR.language.get('app_strings', 'LBL_VERIFY_EMAIL_ADDRESS');

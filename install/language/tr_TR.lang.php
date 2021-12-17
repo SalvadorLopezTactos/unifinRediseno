@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Uyarı: Yazılabilir değil',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'PHP versiyonunuz Sugar tarafından desteklenmemekte. Sugar uygulaması ile uyumlu bir versiyon indirmeniz gerekiyor. Desteklenen PHP sürümleri için Sürüm Notlarındaki Uyumluluk Matrisini inceleyin',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'IIS sürümünüz Sugar tarafından desteklenmiyor.  Sugar uygulaması ile uyumlu bir sürümü yüklemeniz gerekmektedir. Lütfen desteklenen ISS sürümleri için Uyumluluk Matrisine bakınız. Sürümünüz',
-	'ERR_CHECKSYS_FASTCGI'              => 'PHP için bir FastCGI işleyici eşlemesi kullanılmadığını algıladık.  Sugar uygulaması ile uyumlu bir sürümü yüklemeniz/yapılandırmanız gerekmektedir. Lütfen desteklenen sürümler için Uyumluluk Matrisine bakınız.  Lütfen detaylar için <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> adresini inceleyin',
+    'ERR_CHECKSYS_FASTCGI'              => 'PHP için bir FastCGI işleyici eşlemesi kullanılmadığını algıladık. Sugar uygulaması ile uyumlu bir sürümü yüklemeniz/yapılandırmanız gerekmektedir. Lütfen desteklenen sürümler için Uyumluluk Matrisine bakın.  Lütfen detaylar için <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> adresini inceleyin',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI sapi kullanımının optimal performansı için, php.ini dosyasında fastcgi.logging değerini 0 olarak belirtin.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Desteklenmeyen PHP Versiyonu Yüklendi: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Veritabanı kullanılamaz',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veri Tabanı Desteği bulunamadı. Lütfen desteklenen şu Veri Tabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQLServer, Oracle, or DB2.  PHP sürümünüze bağlı olarak php.ini dosyasındaki uzantı açıklamasını kaldırmanız veya doğru ikili dosyayla yeniden derlemeniz gerekebilir.  Veri Tabanı Desteğini etkinleştirme hakkında daha fazla bilgi için lütfen PHP Kılavuzunuza bakın.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veri Tabanı Desteği bulunamadı.  Lütfen desteklenen şu Veri Tabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQLServer, Oracle veya DB2.  PHP sürümünüze bağlı olarak php.ini dosyasındaki uzantı açıklamasını kaldırmanız veya doğru ikili dosyayla yeniden derlemeniz gerekebilir.  Veri Tabanı Desteğini etkinleştirme hakkında daha fazla bilgi için lütfen PHP Kılavuzunuza bakın.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar uygulaması tarafından ihtiyaç duyulan XML Ayrıştırıcı Kütüphaneleri fonksiyonları bulunamadı. PHP versiyonun bağlı olarak, php.ini dosyasında eklentileri aktive etmeniz veya doğru seçenekler ile tekrar derlemeniz gerekebilir. Daha fazla bilgi için PHP Kılavuzuna bakınız.',
     'LBL_CHECKSYS_CSPRNG' => 'Rasgele sayı üretici',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar uygulaması tarafından ihtiyaç duyulan Multibyte Strings PHP eki (mbstring) ile ilişkili fonksiyonlar bulunamadı.<br/><br/><br />Genellikle mbstring modülü varsayılan olarak PHP içinde etkin olmayıp, PHP programı oluşturulurken --enable-mbstring seçeneği ile etkinleştirilmelidir. <br /> Mbstring desteğini etkinleştirmek ile ilgili daha fazla bilgi için PHP Kılavuzuna bakınız.',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Geri Uyumluluk modu açık. Devam etmek için zend.ze1_compatibility_mod u kapalı duruma getirin',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Toplantı Bildirimleri E-postaları',
+        'subject' => 'SugarCRM Toplantı - $event_name ',
+        'description' => 'Bu şablon, Sistem bir kullanıcıya toplantı bildirimleri gönderdiğinde kullanılır.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Alıcı: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user sizi bir Toplantıya davet etti</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Konu: $event_name<br/>
+	Başlangıç Tarihi: $start_date<br/>
+	Bitiş Tarihi: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Açıklama: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Bu toplantıyı kabul edin:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Bu toplantıyı geçici olarak kabul edin:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Bu toplantıyı reddedin:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Alıcı: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user sizi bir toplantıya davet etti
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Konu: $event_name
+Başlangıç Tarihi: $start_date
+Bitiş Tarihi: $end_date
 
-Description: $description
+Açıklama: $description
 
-Accept this meeting:
+Bu toplantıyı kabul edin:
 <$accept_link>
 
-Tentatively Accept this meeting
+Bu toplantıyı geçici olarak kabul edin
 <$tentative_link>
 
-Decline this meeting
+Bu toplantıyı reddedin
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Arama Bildirimleri E-postaları',
+        'subject' => 'SugarCRM Arama - $event_name ',
+        'description' => 'Bu şablon, Sistem bir kullanıcıya arama bildirimleri gönderdiğinde kullanılır.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Alıcı: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user sizi bir Aramaya davet etti</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Konu: $event_name<br/>
+	Başlangıç Tarihi: $start_date<br/>
+	Süre: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Açıklama: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Bu aramayı kabul edin:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Bu aramayı geçici olarak kabul edin:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Bu aramayı reddedin:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Alıcı: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user sizi bir Aramaya davet etti
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Konu: $event_name
+Başlangıç Tarihi: $start_date
+Süre: $hoursh, $minutesm
 
-Description: $description
+Açıklama: $description
 
-Accept this call:
+Bu aramayı kabul edin:
 <$accept_link>
 
-Tentatively Accept this call
+Bu aramayı geçici olarak kabul edin
 <$tentative_link>
 
-Decline this call
+Bu aramayı reddedin
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Atama Bildirimi E-postaları',
+        'subject' => 'SugarCRM - Atanan $module_name ',
+        'description' => 'Bu şablon, Sistem bir kullanıcıya görev ataması gönderdiğinde kullanılır.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user, &nbsp;$assigned_user kullanıcısına bir&nbsp;$module_name atadı.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Bu&nbsp;$module_name modülünü inceleyebileceğiniz yer:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user, $assigned_user kullanıcısına bir $module_name atadı.
 
-You may review this $module_name at:
+Bu $module_name modülünü inceleyebileceğiniz yer:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Planlanmış Rapor E-postaları',
+        'subject' => 'Planlanan Rapor: $report_time itibarı ile $report_name',
+        'description' => 'Bu şablon, Sistem bir kullanıcıya planlanmış rapor gönderdiğinde kullanılır.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Merhaba $assigned_user,</p>
+<p>Ekte, sizin için planlanmış otomatik olarak oluşturulan bir raporu bulabilirsiniz.</p>
+<p>Rapor Adı: $report_name</p>
+<p>Rapor İşleme Tarihi ve Saati: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Merhaba $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+Ekte sizin için planlanmış otomatik olarak oluşturulan bir raporu bulabilirsiniz.
 
-Report Name: $report_name
+Rapor Adı: $report_name
 
-Report Run Date and Time: $report_time',
+Rapor İşleme Tarihi ve Saati: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Sistem Yorum Günlüğü E-posta Bildirimi',
+        'subject' => 'SugarCRM - $initiator_full_name,bir(n) $singular_module_name üzerinde sizden bahsetti',
+        'description' => 'Bu şablon, yorum günlüğü bölümünde etiketlenmiş kullanıcılara e-posta bildirimi göndermek için kullanılır.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Aşağıdaki kaydın yorum günlüğünde sizden bahsedildi:  <a href="$record_url">$record_name</a></p>
+                <p>Yorumu görmek için lütfen Sugar\'a giriş yapın.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Aşağıdaki kaydın yorum günlüğünde sizden bahsedildi: $record_name
+            Yorumu görmek için lütfen Sugar\'a giriş yapın.',
     ],
 
     'advanced_password_new_account_email' => array(

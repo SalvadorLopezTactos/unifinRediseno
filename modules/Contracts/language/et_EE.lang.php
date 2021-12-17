@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Muutja ID',
     'LBL_EXPORT_CREATED_BY' => 'Looja ID',
     'LBL_EXPORT_TYPE_NAME' => 'Tüübi nimi',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Lepingute fookuse sahtel',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Lepingukirjete töölaud',
 );

@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Procesdefinitioner',
   'LBL_MODULE_NAME_SINGULAR' => 'Procesdefinition',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Procesdefinitioner',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over processer for definitioner',
   'LNK_LIST' => 'Vis procesdefinitioner',
   'LNK_NEW_PMSE_PROJECT' => 'Opret procesdefinition',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importér procesdefinitioner',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Ændr tildelt til bruger',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Team',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Vælg ny procesbruger',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Send e-mail til procesbruger, når proces er tildelt',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Brugerdefinition',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Tildelingsmetode',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Tildel bruger',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Opdater "tildelt til" på en post',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Angiv "tildelt til" ud fra tilgængelighed',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Tilføj relateret post',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Relateret modul',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Navnet på aktivitet er tomt.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Navnet "%s" eksisterer allerede i form af familie.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Påkrævet skift-tilgængelighed',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Hvis ingen brugere er tilgængelige',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'før',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Kun nye poster',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Kun opdaterede poster (Først opdater - Se hjælpetekst)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Kun opdaterede poster (Alle opdateringer - Se hjælpetekst)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nye registre eller første opdatering',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nye registre og alle opdateringer',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Vælg, hvornår processen skal starte.<br><br>Ny: Kør processen, når der oprettes en ny proces.<br><br>First Update: Proces afvikles kun den første gang kriterierne opfylder en eksisterende post.<br><br>Alle opdateringer: Proces afvikles hver gang kriterierne opfyldes for en eksisterende post.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Vælg, når processen skal starte.<br><br>Ny: Kør processen, når der oprettes et nyt register.<br><br>Første opdatering: Processen kører kun første gang, kriterierne opfyldes for et eksisterende register.<br><br>Alle opdateringer: Processen kører hver gang, kriterierne opfyldes for et eksisterende register.<br><br>Nye registre eller første opdatering: Processen kører kun første gang, kriterierne opfyldes for et register under oprettelse eller opdatering af registeret.<br><br>Nye registre og alle opdateringer: Processen kører hver gang for alle nye og eksisterende registre.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Vælg SugarCRM modulet for at anvende hændelses-trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fast dato',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'ændringer fra',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'ændringer til',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'inkluderer enhver',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'inkluderer ikke enhver',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'på eller efter',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'på eller inden',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'er ikke lig med',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Tilføj',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Luk',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Alle teams er tildelt til posten',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Team',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% relateret til %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Bruger som oprettede %MODULE%',

@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Tableau de bord de la liste de leads',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de leads',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Leads',
 
     'ERR_DELETE_RECORD' => 'Un ID doit être renseigné pour toute suppression.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Description de compte',
@@ -325,4 +326,8 @@ Après avoir confirmé chacun des modules souhaités, cliquez sur le bouton Enre
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Impossible de changer le statut {{moduleSingular}}. Ce {{moduleSingular}} a déjà été converti.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Prévision de conversion des Leads',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Afficher les détails des prévisions pour un Lead spécifique',
 );

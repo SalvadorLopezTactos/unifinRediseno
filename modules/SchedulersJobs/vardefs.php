@@ -267,6 +267,22 @@ $dictionary['SchedulersJob'] = array(
                 'status',
             )
         ),
+        [
+            'name' => 'idx_resolution_executetime',
+            'type' => 'index',
+            'fields' => [
+                'resolution',
+                'execute_time',
+            ],
+        ],
+        [
+            'name' => 'idx_target_jobgroup',
+            'type' => 'index',
+            'fields' => [
+                'target',
+                'job_group',
+            ],
+        ],
     ),
     'acls' => array(
         'SugarACLAdminOnly' => true,

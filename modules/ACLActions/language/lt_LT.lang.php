@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Rolių sąrašas pagal vartotoją',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Vartotojų rolės',
 'LBL_SEARCH_FORM_TITLE'=>'Ieškoti',
+'LBL_ACTION_RECORD_VIEW'=>'Įrašo peržiūra',
 'LBL_ACTION_VIEW'=>'Rodyti',
 'LBL_ACTION_EDIT'=>'Redaguoti',
 'LBL_ACTION_DELETE'=>'Trinti',

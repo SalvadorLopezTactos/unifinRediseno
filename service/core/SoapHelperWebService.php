@@ -454,7 +454,7 @@ class SoapHelperWebServices {
 
 			foreach($filterFields as $field){
 				$var = $value->field_defs[$field];
-                if (isset($value->{$var['name']})) {
+                if (isset($var['name']) && isset($value->{$var['name']})) {
                     $val = $value->{$var['name']};
 					$type = $var['type'];
 
@@ -757,7 +757,9 @@ class SoapHelperWebServices {
 
 			foreach($name_value_list as $value) {
 				$val = $value['value'];
-                if ($seed->field_defs[$value['name']]['type'] == 'enum') {
+                if (is_array($seed->field_defs) && isset($value['name'])
+                    && is_array($seed->field_defs[$value['name']]) &&
+                    $seed->field_defs[$value['name']]['type'] == 'enum') {
                     $vardef = $seed->field_defs[$value['name']];
 					if(isset($app_list_strings[$vardef['options']]) && !isset($app_list_strings[$vardef['options']][$value]) ) {
 						if ( in_array($val,$app_list_strings[$vardef['options']]) ){

@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'BTW-tarief:',
   'LBL_TYPE_NAME'=>'Typenaam',
   'LBL_TYPE' => 'Type',
+  'LBL_PRODUCT_TYPE' => 'Producttype',
   'LBL_URL' => 'Product URL:',
   'LBL_VENDOR_PART_NUM' => 'Leveranciers artikelnummer:',
   'LBL_WEIGHT' => 'Gewicht:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Productcatalogus',
   'NTC_DELETE_CONFIRMATION' => 'Weet u zeker dat u dit record wilt verwijderen?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Toevoegen',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Zoeken in de productcatalogus',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Geen gegevens beschikbaar',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Toegewezen gebruikersnaam',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Producttypes',
   'LBL_RENEWABLE' => 'Verlengbaar',
   'LBL_SERVICE' => 'Dienst',
+  'LBL_LOCK_DURATION' => 'Vergrendelingsduur',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Dashboard productcataloguslijst',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Dashboard productcatalogusrecord',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer productcatalogus',
 );

@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Tarjousluettelon työpöytä',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Tarjoustietueen työpöytä',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Tarjoukset-tietolaatikko',
 
     'LBL_CONTRACTS'=>'Sopimukset',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Sopimukset',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Maa (laskutusosoite)',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Postinumero (laskutusosoite)',
     'LBL_BILLING_ADDRESS_STATE' => 'Osavaltio (laskutusosoite)',
-    'LBL_BILLING_ADDRESS_STREET' => 'Laskutusosoite',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Laskutusosoite:',
     'LBL_BILLING_CONTACT_ID' => 'Laskutuskontaktin ID:',
     'LBL_BILLING_CONTACT_NAME' => 'Laskutuskontaktin nimi:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Maa (toimitusosoite)',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Postinumero (toimitusosoite)',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Osavaltio (toimitusosoite)',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Toimitusosoite',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Toimitusosoite:',
     'LBL_SHIPPING_BODY' => 'Laskutus ja toimitus',
     'LBL_SHIPPING_CONTACT_ID' => 'Toimituskontaktin ID:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopioi laskutusosoite toimitusosoitteeseen',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopioi toimitusosoite laskutusosoitteeseen',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopioi toimitusosoitteeseen',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopioi laskutusosoitteeseen',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Poistetaanko varmasti tämä kommentti tarjouksesta?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopioi laskutusosoitteeseen',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Poistetaanko varmasti tämä kommentti tarjouksesta?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Poistetaanko varmasti tämä tuoterivi tarjouksesta?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Poistetaanko varmasti tämä ryhmä tarjouksesta?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Poistetaanko varmasti tämä kontakti tarjouksesta?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Lukumäärä',
     'LBL_MFT_PART_NUM' => 'Osanumero',
     'LBL_ITEM_NAME' => 'Tuoterivi',
+    'LBL_PRODUCT_TEMPLATE' => 'Tuote',
     'LBL_DISCOUNT_PRICE' => 'Yksikköhinta',
     'LBL_DISCOUNT_AMOUNT' => 'Alennus',
     'LBL_LINE_ITEM_TOTAL' => 'Tuoterivit yhteensä',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Myyntimahdollisuuden tunnus',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Tarjousten määrittely',
+
+    'LBL_RENEWAL' => 'Uusinta',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tarjouksen yhteydet',
 );

@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Süreç Tanımı',
   'LBL_MODULE_NAME_SINGULAR' => 'Süreç Tanımı',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Süreç Tanımları Odak Bölmesi',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Süreç Tanımları Kayıt Panosu',
   'LNK_LIST' => 'Süreç Tanımlarını Gör',
   'LNK_NEW_PMSE_PROJECT' => 'Süreç Tanımı Oluştur',
   'LNK_IMPORT_PMSE_PROJECT' => 'Süreç Tanımı İçeri Al',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Kullanıcıya Atanmışı Değiştir',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Takım',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Yeni Süreç Kullanıcısı Seç',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-Posta',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Süreç atandığında işlem kullanıcısına e-posta gönderir',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Kullanıcı Tanımı',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Atama Metodu',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Kullanıcı Ata',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Kayıtta "Şuna Atanmış"ı güncelle',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Uygunluğa göre "Atanan Kişi"yi belirleyin',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'İlişkili Kaydı Ekle',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'İlişkili Modül',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Aktivitenin ismi boş.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'İsim "%s" zaten şekil ailesinde var.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Gerekli vardiya uygunluğu',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Uygun kullanıcılar yoksa',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'önce',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Sadece Yeni Kayıtlar',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Sadece Güncellenmiş Kayıtlar (İlk Güncelleme - Yardım Metnine Bakın)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Sadece Güncellenmiş Kayıtlar (Tüm Güncellemeler - Yardım Metnine Bakın)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Yeni Kayıtlar veya Birinci Güncelleme',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Yeni Kayıtlar ve Tüm Güncellemeler',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Sürecin ne zaman başlayacağını seçin.<br><br>Yeni: Yeni kayıt oluşturulduğunda süreci çalıştır.<br><br>Birinci Güncelleme: Süreç sadece ilk kez kriteri mevcut kayıtla eşleştiğinde çalışır.<br><br>Tüm Güncellemeler: Süreç her zaman kriteri mevcut kayıtla eşleştiğinde çalışır.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Sürecin ne zaman başlayacağını seçin.<br><br>Yeni: Yeni kayıt oluşturulduğunda süreci çalıştır.<br><br>Birinci Güncelleme: Süreç sadece ilk kez kriteri mevcut kayıtla eşleştiğinde çalışır.<br><br>Tüm Güncellemeler: Süreç, her zaman kriteri mevcut kayıtla eşleştiğinde çalışır.<br><br>Yeni Kayıtlar veya Birinci Güncelleme: Süreç, kayot oluşturma veya kayıt güncelleme esnasında sadece ilk kez kriteri bir kayıtla eşleştiğinde çalışır.<br><br>Yeni Kayıtlar ve Tüm Güncellemeler: Süreç, tüm yeni ve mevcut kayıtlar için her zaman çalışır.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Olay tetikleyicisini uygulamak için SugarCRM modülünü seçin',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Sabit Tarih',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'şundan değiştirir',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'şuna değiştirir',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'herhangi birini içerir',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'hiçbirini içermez',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'tarihinde veya daha sonra',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'tarihinde veya daha önce',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'eşit değil:',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Ekle',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Kapat',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Tüm takımlar kayda atandı',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Takımlar',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% %MODULE% ile ilişkili',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => '%MODULE% modülünü oluşturan kullanıcı',

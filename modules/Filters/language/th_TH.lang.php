@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'ปีถัดไป',
     'LBL_OPEN_ISSUES' => 'เปิด {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'แก้ไขแล้วเมื่อเร็ว ๆ นี้',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'สร้างตัวกรอง',
+    'LBL_ERROR_FILTER_EMPTY' => 'โปรดใส่เกณฑ์ตัวกรอง',
+    'LBL_ADD_FILTER' => 'ใส่เกณฑ์ตัวกรอง',
+    'LBL_FILTER_NAME' => 'ชื่อตัวกรอง',
+    'LBL_FILTER_FIELD' => 'ฟิลด์',
+    'LBL_FILTER_OPERATOR' => 'โอเปอเรเตอร์',
+    'LBL_FILTER_VALUE' => 'ค่า',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'บันทึกลงในแอป Desktop',
+    'LBL_FILTER_LOCAL' => 'ตัวกรองในระบบ',
 );

@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'บัญชีอีเมลขาออก',
     'LBL_MODULE_NAME_SINGULAR' => 'บัญชีอีเมลขาออก',
+    'LBL_STATUS' => 'สถานะ',
     'LBL_MAIL_SENDTYPE' => 'โปรแกรมรับส่งอีเมล',
     'LBL_MAIL_SMTPSERVER' => 'เซิร์ฟเวอร์',
     'LBL_MAIL_SMTPPORT' => 'พอร์ต',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'นี่คือบัญชีระบบ',
     'LBL_EMAIL_ADDRESS_ID' => 'ID ที่อยู่อีเมล',
     'LBL_TYPE' => 'ประเภท',
+    'LBL_AUTHORIZED_ACCOUNT' => 'ที่อยู่อีเมลที่ได้รับอนุญาต',
+    'LBL_FROM_EMAIL_ADDRESS' => 'จากที่อยู่อีเมล',
     'LBL_REPLY_TO_NAME' => 'ชื่อสำหรับตอบกลับ',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'ที่อยู่อีเมลสำหรับตอบกลับ',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID ที่อยู่อีเมลสำหรับตอบกลับ',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'ที่อยู่อีเมลสำหรับตอบกลับ',
     'LBL_PRIMARY_TEAM' => 'ทีมหลัก',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'การตั้งค่าอีเมลระบบลิ้นชัก',
 );

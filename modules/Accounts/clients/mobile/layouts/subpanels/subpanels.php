@@ -109,13 +109,36 @@ $viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'documents',
             ),
         ),
-        array(
+        [
             'layout' => 'subpanel',
-            'label' => 'LBL_QUOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'label' => 'LBL_QUOTES_BILLTO',
+            'context' => [
                 'link' => 'quotes',
-            ),
+            ],
             'linkable' => false,
-        ),
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_QUOTES_SHIPTO',
+            'context' => [
+                'link' => 'quotes_shipto',
+            ],
+            'linkable' => false,
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchases',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PLI_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchasedlineitems',
+            ],
+            'linkable' => false,
+        ],
     ),
 );

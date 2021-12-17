@@ -14,7 +14,7 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
-    plugins: ['MetadataEventDriven'],
+    plugins: ['FocusDrawer', 'MetadataEventDriven'],
 
     _render: function() {
         // FIXME: This will be cleaned up by SC-3478.
@@ -25,5 +25,25 @@
             this.def.events = false;
         }
         this._super('_render');
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the ID of the record this field
+     * links to
+     *
+     * @return {string} the ID of the related record
+     */
+    getFocusContextModelId: function() {
+        return this.model && this.model.get('id') ? this.model.get('id') : '';
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the name of the module this
+     * field links to
+     *
+     * @return {string} the name of the related module
+     */
+    getFocusContextModule: function() {
+        return this.model && this.model.get('_module') ? this.model.get('_module') : '';
     }
 })

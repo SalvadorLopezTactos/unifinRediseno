@@ -12,7 +12,7 @@
 
 use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
-class NotesApiHelper extends SugarBeanApiHelper
+class NotesApiHelper extends AttachmentsApiHelper
 {
     /**
      * This function sets the team & assigned user and sets up the contact & account relationship
@@ -28,6 +28,12 @@ class NotesApiHelper extends SugarBeanApiHelper
         //TODO: need a more generic way to deal with file types
         if (isset($submittedData['file_mime_type'])) {
             unset($submittedData['file_mime_type']);
+        }
+
+        if (isset($submittedData['attachment_list'])) {
+            $submittedData['attachment_list'] = array_filter($submittedData['attachment_list'], function($attachment) use ($bean) {
+                return $attachment['id'] !== $bean->id;
+            });
         }
 
         $data = parent::populateFromApi($bean, $submittedData, $options);

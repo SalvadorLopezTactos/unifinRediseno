@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Paneli i listës së detyrave',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Paneli i regjistrimit të detyrave',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te detyrat',
 
+  'LBL_RELATED_CONTACT' => 'Kontakt i lidhur',
   'LBL_MODULE_NAME' => 'Detyrat',
   'LBL_MODULE_NAME_SINGULAR' => 'Detyrë',
   'LBL_TASK' => 'Detyrat',

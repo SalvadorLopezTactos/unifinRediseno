@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\PackageManager\PackageManager;
+
 /**
  * Remove WebUpgrader useless files.
  */
@@ -28,31 +30,25 @@ class SugarUpgradeRemoveWebUpgrader extends UpgradeScript
 
     public function run()
     {
-        require_once 'ModuleInstall/PackageManager/PackageManager.php';
-        $pm = new PackageManager();
-        $packages = $pm->getinstalledPackages(array('module'));
-        foreach ($packages as $pack) {
-            if (strpos($pack['name'], 'SugarCRM Upgrader') !== false) {
-                $uh = new UpgradeHistory();
-                $uh->name = $pack['name'];
-                $history = $uh->checkForExisting($uh);
-                $this->filesToRemove[] = "custom/Extension/application/Ext/Include/{$history->id_name}.php";
-                $history->delete();
-                $this->upgrader->fileToDelete($this->filesToRemove, $this);
-                $this->log("Useless files of {$pack['name']} v{$pack['version']} removed");
+        $packageManager = new PackageManager();
+        /** @var UpgradeHistory[] $packages */
+        $packages = (new UpgradeHistory())->getPackages();
+        foreach ($packages as $package) {
+            if (strpos($package->name, 'SugarCRM Upgrader') === false) {
+                continue;
             }
-        }
-        foreach ($pm->getPackagesInStaging() as $pack) {
-            if (strpos($pack['name'], 'SugarCRM Upgrader') !== false) {
-                $file = UploadStream::path(hashToFile($pack['file']));
-                $this->upgrader->fileToDelete($file, $this);
-                foreach (array('manifest', 'icon') as $meta) {
-                    $this->upgrader->fileToDelete(
-                        pathinfo($file, PATHINFO_DIRNAME) . '/' . pathinfo($file, PATHINFO_FILENAME) . "-$meta.php",
-                        $this
-                    );
-                }
+            if ($package->status === UpgradeHistory::STATUS_INSTALLED) {
+                $package->status = UpgradeHistory::STATUS_STAGED;
+                $package->save();
+                $this->filesToRemove[] = 'custom/Extension/application/Ext/Include/' . $package->id_name . '.php';
             }
+
+            try {
+                $packageManager->deletePackage($package);
+            } catch (Exception $e) {
+                $this->log('Fail to remove SugarCRM Upgrader version ' . $package->version);
+            }
+            $this->upgrader->fileToDelete($this->filesToRemove, $this);
         }
     }
 }

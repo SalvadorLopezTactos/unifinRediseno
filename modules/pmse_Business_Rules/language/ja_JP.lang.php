@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'プロセスビジネスルール',
   'LBL_MODULE_NAME_SINGULAR' => 'プロセスビジネス定義',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'プロセス ビジネスルール フォーカス ドロワ',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'ビジネスルールの処理レコードダッシュボード',
   'LBL_RST_UID' => 'ビジネスルールID',
   'LBL_RST_TYPE' => 'ビジネスルールタイプ',
   'LBL_RST_DEFINITION' => 'ビジネスルール定義',
@@ -42,7 +45,7 @@ $mod_strings = array (
     'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'インポート',
 
     'LBL_PMSE_MY_BUSINESS_RULES' => '私のプロセスビジネスルール',
-    'LBL_PMSE_ALL_BUSINESS_RULES' => 'すべてのプロセスビジネスルール',
+    'LBL_PMSE_ALL_BUSINESS_RULES' => '全てのプロセスビジネスルール',
 
     'LBL_PMSE_BUSINESS_RULES_SINGLE_HIT' => 'プロセスビジネスルール　シングルヒット',
 

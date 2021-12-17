@@ -136,7 +136,10 @@
              * otherwise `false`.
              */
             showNoData: function() {
-                return this.def.readonly && app.acl.hasAccessToModel('readonly', this.model, this.name) && this.name && !this.model.has(this.name);
+                var viewDefs = this.viewDefs || {};
+                return app.utils.isFieldAlwaysReadOnly(this.def, viewDefs) &&
+                    app.acl.hasAccessToModel('readonly', this.model, this.name) &&
+                    this.name && !this.model.has(this.name);
             },
 
             /**
@@ -150,6 +153,18 @@
                 }
 
                 return !this.model.get(this.name) && _.contains(this.model.get('_erased_fields'), this.name);
+            },
+
+            /**
+             * Returns true if the user has license access to the field.
+             *
+             * @return {boolean} true if the field can be accessed with the user's license.
+             */
+            _hasLicenseAccess: function() {
+                if (!this.model) {
+                    return true;
+                }
+                return app.acl.hasAccessToModel('license', this.model, this.name);
             },
 
             /**
@@ -194,14 +209,14 @@
                 'edit': 'detail',
                 'detail': 'noaccess',
                 'erased': 'noaccess',
-                'noaccess' : 'nodata'
+                'noaccess': 'nodata'
             },
             /**
              * List of view names that directly fallback to base template
              * instead of 'detail'.
              */
             fallbackActions: [
-                'noaccess', 'nodata', 'erased'
+                'nolicense', 'noaccess', 'nodata', 'erased'
             ],
 
             /**
@@ -228,13 +243,27 @@
             },
 
             /**
+             * Set the action and viewName to `nolicense`, if there is no access to the field
+             * due to the lack of proper license.
+             * Note that both action and viewName need to be set in order to
+             * be able to select the necessary template.
+             */
+            _markFieldLackingAccess: function() {
+                if (!this._hasLicenseAccess()) {
+                    this.action = 'nolicense';
+                    this.options.viewName = 'nolicense';
+                }
+            },
+
+            /**
              * Override _render to redecorate fields if field is on error state
              * and to add view action CSS class.
              */
-            _render: function () {
+            _render: function() {
                 this.clearErrorDecoration();
                 this._processHelp();
                 this._setErasedFieldAction();
+                this._markFieldLackingAccess();
 
                 _fieldProto._render.call(this);
 
@@ -393,12 +422,17 @@
             /**
              * @inheritdoc
              *
-             * Set the viewname for readonly fields to be detail
+             * Enforces the viewname for readonly fields to be a readonly view
+             * ('detail' or 'list'). Defaults to 'detail' in the case that the
+             * given view is neither
+             *
              * @override
              */
             setViewName: function(view) {
-                if (this.def.readonly) {
-                    view = 'detail';
+                var viewDefs = this.viewDefs || {};
+                if (app.utils.isFieldAlwaysReadOnly(this.def, viewDefs)) {
+                    var readOnlyViews = ['detail', 'list'];
+                    view = _.contains(readOnlyViews, view) ? view : 'detail';
                 }
                 this.options.viewName = view;
             },
@@ -436,6 +470,11 @@
                     this._removeViewClass(this.action);
                 }
                 _fieldProto.setDisabled.call(this, disable, options);
+                var ele = $('.' + this.baseFieldName + '_should_cascade');
+
+                if (ele.length === 1 && !(_.isUndefined(this.def.readOnlyProp) || _.isUndefined(this.readOnlyProp))) {
+                    ele.prop('disabled', (this.def.readOnlyProp || this.readOnlyProp));
+                }
             },
             /**
              * Decorate error gets called when this Field has a validation error.  This function applies custom error
@@ -492,21 +531,25 @@
              * Remove error decoration from field if it exists.
              */
             clearErrorDecoration: function () {
-                var ftag = this.fieldTag || '',
-                    $ftag = this.$(ftag);
+                var ftag = this.fieldTag || '';
+                var $ftag = this.$(ftag);
+                var $parent = $ftag.parent().first();
 
                 // Remove previous exclamation then add back.
                 this.$('.add-on.error-tooltip').remove();
-                var isWrappedError = $ftag.parent().hasClass('input-append') && $ftag.parent().hasClass('error');
+                var isWrappedError = $parent.hasClass('input-append') && $parent.hasClass('error');
 
                 // FIXME: this check for datetime should be made generic (when
                 // SC-2568 gets in) based on use of normal addon
-                var isDateField = $ftag.parent().hasClass('date'),
-                    isCurrencyField = $ftag.parent().hasClass('currency');
-                if (isDateField || isCurrencyField) {
-                    $ftag.parent().removeClass('error');
+                var isWrapperException = false;
+                _.each(['date', 'currency', 'timeselect'], function(item) {
+                    isWrapperException = isWrapperException || $parent.hasClass(item);
+                });
+
+                if (isWrapperException) {
+                    $parent.removeClass('error');
                 } else if (isWrappedError) {
-                    $ftag.unwrap();
+                    $ftag.unwrap('.input-append.error');
                 }
 
                 this.$el.removeClass(ftag);

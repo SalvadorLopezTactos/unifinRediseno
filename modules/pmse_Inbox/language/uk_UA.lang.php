@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Список процесів',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Автоматичні процеси',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель процесів',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Інформаційна панель записів процесів',
+
     'LBL_CAS_ID' => 'Процес (Id)',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Невідомий (згідно UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "завдання було",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Попередній перегляд розробки процесу',
     'LBL_PROJECT_RUN_ORDER' => 'Порядок виконання',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Поточна активність',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Дата змінення',
+    'LBL_DATE_ENTERED' => 'Дата створення',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Справді затвердити цей процес?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Процес успішно затверджено',
 );
 

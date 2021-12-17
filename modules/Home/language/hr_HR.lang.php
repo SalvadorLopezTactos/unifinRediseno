@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet dodan',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Promijenit će se raspored dashleta, jeste li sigurni da želite promijeniti izgled stupca?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Jeste li sigurni da želite ukloniti Sugar Dashlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nema konfigurirane nadzorne ploče.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nema konfigurirane nadzorne ploče',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Nema konfiguriranog Dashleta',
   'LBL_CREATE_DASHBOARD_LINK' => 'Stvori nadzornu ploču',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web-stranica',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Neka se web-mjesta možda neće ispravno učitati zbog nesigurnog sadržaja ili pravila.',
 
-  'LBL_DASHLET_ADD' => 'Dodaj',
+  'LBL_DASHLET_ADD' => 'Dodaj Dashlet',
   'LBL_DASHLET_DELETE' => 'Izbriši Sugar Dashlet',
   'LBL_DASHLET_REFRESH' => 'Osvježi Sugar Dashlet',
   'LBL_DASHLET_EDIT' => 'Uredi Sugar Dashlet',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - kalendar za unos datuma koji je stvorio Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - biblioteka za stvaranje dokumenata u formatu PDF koju je stvorio Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - implementacija poslužitelja WebDAV u PHP-u.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - biblioteka s funkcijama sažimanja i izdvajanja arhiva u formatu Zip koju je razvio Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - mehanizam za predloške PHP-a.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - uslužni programi biblioteke za korisničko sučelje olakšavaju implementaciju obogaćenih značajki strane klijenta.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - klasa za prijenos e-pošte za PHP sa svim značajkama',

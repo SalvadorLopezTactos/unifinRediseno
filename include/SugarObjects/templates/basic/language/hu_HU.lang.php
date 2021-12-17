@@ -31,6 +31,7 @@ $mod_strings = array(
  'LBL_REMOVE' => 'Eltávolítás',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Módosítva név szerint',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Név által létrehozva',
 
     'LBL_COMMENTLOG' => 'Comment Log',
 );

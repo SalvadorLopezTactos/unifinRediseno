@@ -11,6 +11,7 @@
  */
 $dictionary['Shipper'] = array(
     'table' => 'shippers',
+    'archive' => false,
     'favorites' => false,
     'fields' => array (
         'list_order' => array (

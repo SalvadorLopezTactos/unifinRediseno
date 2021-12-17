@@ -31,6 +31,7 @@ $mod_strings = array(
  'LBL_REMOVE' => 'Poista',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Muokkaajan nimi',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Luojan nimi',
 
     'LBL_COMMENTLOG' => 'Comment Log',
 );

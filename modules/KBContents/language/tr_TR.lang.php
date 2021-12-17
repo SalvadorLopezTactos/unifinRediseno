@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Bilgi Bankası Listesi Panosu',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Bilgi Bankası Kaydı Panosu',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Bilgi Tabanı Odak Bölmesi',
 
     'LBL_MODULE_NAME' => 'Bilgi Tabanı',
     'LBL_MODULE_NAME_SINGULAR' => 'Bilgi Tabanı Makalesi',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Yararlı Değil',
     'LBL_RATING' => 'Derecesi',
     'LBL_VIEWED_COUNT' => 'Sayıyı Göster',
-    'LBL_DOWNLOAD_ALL' => 'Tümünü İndir',
-    'LBL_DOWNLOAD_ONE' => 'İndir',
-    'LBL_ATTACHMENTS' => 'Ekler:',
-    'LBL_ADD_ATTACHMENT' => 'Göz at',
     'LBL_CATEGORIES' => 'Bilgi Bankası Kategoriler',
     'LBL_CATEGORY_NAME' => 'Kategori',
     'LBL_USEFULNESS' => 'Yararlılık',

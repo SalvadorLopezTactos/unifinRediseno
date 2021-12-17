@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'În funcție de raport',
     'LBL_RECENTLY_MODIFIED' => 'Modificat recent',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ați creat {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Deschideți programul pentru a adăuga utilizatori prin intermediul subpanoului Utilizatori.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Programul acestui raport',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare programe raportate',
 );

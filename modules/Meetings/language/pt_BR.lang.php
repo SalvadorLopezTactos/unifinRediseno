@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Painel de lista de reuniões',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Painel de registro de reuniões',
+    'LBL_LEAD_GUESTS' => 'Convidados potenciais',
+    'LBL_CONTACT_GUESTS' => 'Contactar convidados',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em reuniões',
 
 	'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir a reunião.',
 	'LBL_ACCEPT_THIS'=>'Aceitar?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Direção',
 	'LBL_LIST_DUE_DATE'=>'Data Limite',
 	'LBL_LIST_FORM_TITLE' => 'Lista de Reuniões',
-	'LBL_LIST_MY_MEETINGS' => 'Minhas Reuniões',
+    'LBL_LIST_MY_MEETINGS' => 'Minhas Reuniões',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Minhas reuniões agendadas',
+    'LBL_GUEST_MEETINGS' => 'Minhas reuniões como convidado',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Reuniões agendadas como convidado',
 	'LBL_LIST_RELATED_TO' => 'Referente a',
 	'LBL_LIST_STATUS'=>'Estado',
 	'LBL_LIST_SUBJECT' => 'Assunto',

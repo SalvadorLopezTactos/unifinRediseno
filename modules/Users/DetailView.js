@@ -26,7 +26,13 @@ function generatepwd(id)
             YAHOO.SUGAR.MessageBox.show({title: SUGAR.language.get("Users", "LBL_CANNOT_SEND_PASSWORD"), msg: SUGAR.language.get("app_strings", "LBL_AJAX_FAILURE")});
         }
     }
-	PostData = '&to_pdf=1&module=Users&action=GeneratePassword&userId='+id;
+    const PostData = SUGAR.util.paramsToUrl({
+        'module': 'Users',
+        'action': 'GeneratePassword',
+        'userId': id,
+        'to_pdf': 1,
+        'csrf_token': _.propertyOf(SUGAR)(['csrf', 'form_token'])
+    });
 	YAHOO.util.Connect.asyncRequest('POST', 'index.php', callback, PostData);	
 }
 

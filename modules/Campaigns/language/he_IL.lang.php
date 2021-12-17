@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'רשימות מטרה מסוג ברירת מחדל לא נמצאו',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'לא נמצעו ערכים',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'ערכים עובדו',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'הגדרות דואר נכנס',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'הגדרות דוא"ל מערכת',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Tracker Name:',
   'LBL_EDIT_TRACKER_URL'=>'Tracker URL:',

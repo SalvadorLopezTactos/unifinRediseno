@@ -12,33 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Authentication\UserProvider;
 
-use Sugarcrm\IdentityProvider\Authentication\User;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Sugarcrm\IdentityProvider\Authentication\UserProvider\BaseUserProvider;
 
-class SAMLUserProvider implements UserProviderInterface
+class SAMLUserProvider extends BaseUserProvider
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function loadUserByUsername($username)
-    {
-        return new User($username);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function refreshUser(UserInterface $user)
-    {
-        return $this->loadUserByUsername($user->getUsername());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsClass($class)
-    {
-        return $class === User::class;
-    }
 }

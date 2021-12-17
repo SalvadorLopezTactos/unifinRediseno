@@ -10,9 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+<div class="ellipsis_inline relate-field-container" data-placement="bottom" title="{{value}}">
     {{#if href}}
-        <a href="{{href}}">{{value}}</a>
+        <span class="ellipsis_inline">
+            <a href="{{href}}">{{value}}</a>
+        </span>
+        <span class="focus-icon-container hide">
+            <span class="focus-icon"></span>
+        </span>
     {{else}}
         {{value}}
     {{/if}}

@@ -492,8 +492,9 @@ class ListLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
             'orderBy' => true,
             'hideLabel' => true, 
             'customLable' => true, 
-            'currency_format' => true, 
+            'currency_format' => true,
             'readonly' => true,
+            'readonly_formula' => true,
         );
 
         $return = array_intersect_key($def, $requiredProps);

@@ -12,6 +12,8 @@
 
 
 use Doctrine\DBAL\DBALException;
+use Psr\Log\LoggerInterface;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 require_once('modules/Teams/TeamSetManager.php');
 
@@ -110,6 +112,17 @@ class TeamSetLink extends Link2 {
     public function save($checkForUpdate = true, $usedDefaultTeam = false)
     {
         if ($this->_saved == false) {
+            $isTransactionStarted = false;
+            $conn = DBManagerFactory::getInstance()->getConnection();
+            if (!(DBManagerFactory::getInstance() instanceof IBMDB2Manager)) {
+                $logger = Container::getInstance()->get(LoggerInterface::class);
+                try {
+                    $conn->beginTransaction();
+                    $isTransactionStarted = true;
+                } catch (\Throwable $e) {
+                    $logger->error('Cannot start DB transaction on team set save. Continued without transaction.');
+                }
+            }
             $previousTeamSetId = $this->focus->team_set_id;
             $previousACLTeamSetId = $this->focus->acl_team_set_id;
             //disable_team_sanity_check can be set to allow for us to just take the values provided on the bean blindly rather than
@@ -238,6 +251,9 @@ class TeamSetLink extends Link2 {
                 TeamSetManager::removeTeamSetModule($this->focus, $previousACLTeamSetId);
             }
 
+            if ($isTransactionStarted) {
+                $conn->commit();
+            }
             $this->_saved = true;
         }
 	}

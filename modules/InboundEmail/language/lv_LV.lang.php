@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Brīdinājums: Tu modificē automātiskās importēšanas iestatījumus, kas var novest pie datu pazaudēšanas.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Brīdinājums: Jābūt atļautam automātiskajam importam, kad tiek automātiski izveidoti pieteikumi.',
 	'LBL_EDIT_LAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-pasta adrese',
+    'LBL_EMAIL_PROVIDER' => 'E-pasta pakalpojumu sniedzējs',
+    'LBL_AUTH_STATUS' => 'Autorizācijas statuss',
 );
-?>

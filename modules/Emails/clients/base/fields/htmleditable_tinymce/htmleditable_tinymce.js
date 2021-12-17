@@ -158,6 +158,18 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    getTinyMCEConfig: function() {
+        var config = this._super('getTinyMCEConfig');
+        // need this call back so the file picker can be enabled in tinymce's image dialog box
+        // tinyMCEFileBrowseCallback is defined in the tinymce plugin
+        config.file_browser_callback = _.bind(this.tinyMCEFileBrowseCallback, this);
+
+        return config;
+    },
+
+    /**
      * Suppress calling the sidecar _render method in detail view
      *
      * @inheritdoc
@@ -234,16 +246,15 @@
     setViewContent: function(value) {
         var field;
         // Pad this to the final height due to the iframe margins/padding
-        var padding = 25;
+        var padding = (this.tplName === 'detail') ? 0 : 25;
         var contentHeight = 0;
 
         this._super('setViewContent', [value]);
 
-        // Only set this field height if it is in the preview pane
-        if (this.tplName !== 'preview') {
+        // Only set this field height if it is in the preview or detail pane
+        if (!_.contains(['preview', 'detail'], this.tplName)) {
             return;
         }
-
         contentHeight = this._getContentHeight() + padding;
 
         // Only resize the editor when the content is fully loaded
@@ -256,22 +267,6 @@
             field = this._getHtmlEditableField();
             field.css('height', contentHeight);
         }
-    },
-
-    /**
-     * Get the content height of the field's iframe.
-     *
-     * @private
-     * @return {number} Returns 0 if the iframe isn't found.
-     */
-    _getContentHeight: function() {
-        var editable = this._getHtmlEditableField();
-
-        if (this._iframeHasBody(editable)) {
-            return editable.contents().find('body')[0].offsetHeight;
-        }
-
-        return 0;
     },
 
     /**

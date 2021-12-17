@@ -156,17 +156,6 @@
             <input type='hidden' name='lock_subpanels' value='false'>
             <input type='checkbox' name='lock_subpanels' value='true' {$lock_subpanels_checked}>
         </td>
-    <tr>
-        <td scope="row">{$MOD.LBL_ADDITIONAL_MARKETING_CONTENT}: </td>
-        <td>
-            {if !empty($config.marketing_extras_enabled)}
-                {assign var='marketing_extras_enabled_checked' value='CHECKED'}
-            {else}
-                {assign var='marketing_extras_enabled_checked' value=''}
-            {/if}
-            <input type="hidden" name="marketing_extras_enabled" value="false">
-            <input type="checkbox" name="marketing_extras_enabled" value="true" {$marketing_extras_enabled_checked}>
-        </td>
     </tr>
 </table>
 
@@ -208,7 +197,14 @@
 
 		<td width="35%" ><input type="text" id="proxy_username" name="proxy_username" size="25"  value="{$settings.proxy_username}" tabindex='1' ></td>
 		<td width="15%" scope="row">{$MOD.LBL_PROXY_PASSWORD}<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span></td>
-		<td width="35%" ><input type="password" id="proxy_password" name="proxy_password" size="25"  value="{$settings.proxy_password}" tabindex='1' ></td>
+        <td width="35%" >
+           {if !empty($settings.proxy_password)}
+               <input type="password" id="proxy_password" name="proxy_password" size="25"  disabled tabindex="1" style="display: none">
+               <a href="javascript:void(0)" id="proxy_password_link" onClick="SUGAR.util.setEmailPasswordEdit('proxy_password')">{$APP.LBL_CHANGE_PASSWORD}</a>
+           {else}
+               <input type="password" id="proxy_password" name="proxy_password" size="25"  value="" tabindex='1' autocomplete="off">
+           {/if}
+        </td>
 		</tr></table>
 		</div>
 	</div>
@@ -219,10 +215,10 @@
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
 	<tr>
-	<th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_SKYPEOUT_TITLE}</h4></th>
+    <th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_DIALOUT_TITLE}</h4></th>
 	</tr>
 	<tr>
-	<td width="25%" scope="row" valign='middle'>{$MOD.LBL_SKYPEOUT_ON}&nbsp{sugar_help text=$MOD.LBL_SKYPEOUT_ON_DESC WIDTH=400}</td>
+    <td width="25%" scope="row" valign='middle'>{$MOD.LBL_DIALOUT_ON}&nbsp{sugar_help text=$MOD.LBL_DIALOUT_ON_DESC WIDTH=400}</td>
 	{if !empty($settings.system_skypeout_on)}
 		{assign var='system_skypeout_on_checked' value='CHECKED'}
 	{else}
@@ -449,6 +445,7 @@
 	    <td><a href="index.php?module=Configurator&action=LogView" target="_blank">{$MOD.LBL_LOGVIEW}</a></td>
 	</tr>
 </table>
+
 {if $SHOW_CATALOG_CONFIG}
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
     <tr>
@@ -463,12 +460,10 @@
 		{/if}
 		<td><input type='hidden' name='catalog_enabled' value='false'><input name='catalog_enabled'  type="checkbox" value='true' {$catalogChecked}></td>
 	</tr>
-	{if !empty($config.developerMode)}
 	<tr>
 		<td width="25%" scope="row">{$MOD.LBL_SUGAR_CATALOG_URL}</td>
 		<td><input style="width:40%" name="catalog_url" value="{$config.catalog_url}"></td>
 	</tr>
-	{/if}
 </table>
 {/if}
 

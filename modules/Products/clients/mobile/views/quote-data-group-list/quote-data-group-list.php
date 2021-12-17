@@ -30,11 +30,10 @@ $viewdefs['Products']['mobile']['view']['quote-data-group-list'] = array(
                     'rname' => 'name',
                     'id_name' => 'product_template_id',
                     'vname' => 'LBL_PRODUCT_TEMPLATE',
-                    'label' => 'LBL_ITEM_NAME',
+                    'label' => 'LBL_PRODUCT_TEMPLATE',
                     'type' => 'relate',
                     'module' => 'ProductTemplates',
                     'auto_populate' => true,
-                    'label' => 'LBL_ITEM_NAME',
                     'required' => true,
                     'populate_list' => array(
                         'name' => 'name',
@@ -75,7 +74,7 @@ $viewdefs['Products']['mobile']['view']['quote-data-group-list'] = array(
                     ),
                 ),
                 array(
-                    'name' => 'discount',
+                    'name' => 'discount_field',
                     'type' => 'fieldset',
                     'label' => 'LBL_DISCOUNT_AMOUNT',
                     'orientation' => 'horizontal',
@@ -88,7 +87,7 @@ $viewdefs['Products']['mobile']['view']['quote-data-group-list'] = array(
                         array(
                             'name' => 'discount_amount',
                             'label' => 'LBL_DISCOUNT_AMOUNT',
-                            'type' => 'discount',
+                            'type' => 'discount-amount',
                             'convertToBase' => true,
                             'showTransactionalAmount' => true,
                         ),

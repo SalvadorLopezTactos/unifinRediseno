@@ -280,18 +280,25 @@ class SearchForm
      function displaySavedSearch()
      {
         $savedSearch = BeanFactory::newBean('SavedSearch');
-        $savedSearch->init($this->listViewDefs[$this->module], $this->lv->data['pageData']['ordering']['orderBy'], $this->lv->data['pageData']['ordering']['sortOrder']);
+        $savedSearch->init(
+            $this->listViewDefs[$this->module],
+            $this->lv->data['pageData']['ordering']['orderBy'] ?? null,
+            $this->lv->data['pageData']['ordering']['sortOrder'] ?? 'DESC'
+        );
         return $savedSearch->getForm($this->module, false);
     }
 
-
-  function displaySavedSearchSelect(){
+    public function displaySavedSearchSelect()
+    {
         $savedSearch = BeanFactory::newBean('SavedSearch');
-        $savedSearch->init($this->listViewDefs[$this->module], $this->lv->data['pageData']['ordering']['orderBy'], $this->lv->data['pageData']['ordering']['sortOrder']);
+        $savedSearch->init(
+            $this->listViewDefs[$this->module],
+            $this->lv->data['pageData']['ordering']['orderBy'] ?? null,
+            $this->lv->data['pageData']['ordering']['sortOrder'] ?? 'DESC'
+        );
+
         return $savedSearch->getSelect($this->module);
     }
-
-
 
  	/**
      * displays the tabs (top of the search form)

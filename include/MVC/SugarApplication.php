@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
@@ -73,6 +72,7 @@ class SugarApplication
         $module = $this->request->getValidInputRequest('module', 'Assert\Mvc\ModuleName', $this->default_module);
 
         insert_charset_header();
+        insert_csp_header();
         $this->setupPrint();
 
         $this->controller = ControllerFactory::getController($module);
@@ -191,7 +191,7 @@ class SugarApplication
 
         SugarThemeRegistry::buildRegistry();
         $this->loadLanguages();
-          $this->checkDatabaseVersion();
+        $this->checkDatabaseVersion();
         $this->loadDisplaySettings();
         $this->loadLicense();
         $this->loadGlobals();
@@ -314,10 +314,21 @@ class SugarApplication
     }
 
     public function redirectToMobileApp(){
+        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+        $sidecarConfig = $moduleInstallerClass::getBaseConfig();
+        $auth = AuthenticationController::getInstance();
+        $config = new Config(SugarConfig::getInstance());
+        $needStoreHash = json_encode($config->isIDMModeEnabled() && !$auth->sessionAuthenticate());
+
         $mobileUrl = $this->getMobileUrl();
+        $mobileUrl_escaped = json_encode($mobileUrl);
+
         echo <<<EOF
 <script type="text/javascript">
-    window.location = '$mobileUrl' + location.hash;
+    if ($needStoreHash) {
+        localStorage.setItem('{$sidecarConfig['env']}:{$sidecarConfig['appId']}:externalAuthLastPage', location.hash);
+    }
+    window.location = {$mobileUrl_escaped} + location.hash;
 </script>
 EOF;
 
@@ -690,6 +701,7 @@ EOF;
 	    'SugarFavorites' => array('tag'),
 	    'Import' => array('last', 'undo'),
 	    'Users' => array('changepassword', "generatepassword"),
+        'Reports' => ['reportswizard'],
 	);
 
     protected function isModifyAction()
@@ -702,15 +714,14 @@ EOF;
             if ($this->modifyModules[$this->controller->module] === true) {
                 return true;
             }
-            if (in_array($this->controller->action, $this->modifyModules[$this->controller->module])) {
+            if (in_array($action, $this->modifyModules[$this->controller->module])) {
                 return true;
-
             }
         }
-        if (in_array($this->controller->action, $this->globalModifyActions)) {
+        if (in_array($action, $this->globalModifyActions)) {
             return true;
         }
-        if (in_array($this->controller->action, $this->modifyActions)) {
+        if (in_array($action, $this->modifyActions)) {
             return true;
         }
         return false;
@@ -752,7 +763,9 @@ EOF;
         'wizard',
         'historyContactsEmails',
         'GoogleOauth2Redirect',
+        'MicrosoftOauth2Redirect',
         'OAuth2CodeExchange',
+        'TrackerSettings',
     );
 
     /**
@@ -770,11 +783,11 @@ EOF;
         $whiteListString = "'" . implode("', '", $whiteListActions) . "'";
         if ($dieIfInvalid) {
             if($inBWC) {
-                if(!empty($this->controller->module)) {
-                    header("Location: index.php?module={$this->controller->module}&action=index");
-                } else {
-                    header("Location: index.php?module=Home&action=index");
-                }
+                $http_params = [
+                    'module' => !empty($this->controller->module) ? $this->controller->module : 'Home',
+                    'action' => 'index',
+                ];
+                header('Location: index.php?'.http_build_query($http_params));
             } else {
                 header("Cache-Control: no-cache, must-revalidate");
                 $ss = new Sugar_Smarty;

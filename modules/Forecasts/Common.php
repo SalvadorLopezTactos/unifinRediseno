@@ -104,11 +104,6 @@ class Common {
 				}
 			}
 		}
-
-		//print_r("<BR>all users <BR>");
-		//_pp($this->all_users);
-		//print_r("<BR>my_direct_reports <BR>");
-		//_pp($this->my_direct_reports);
 	}
 
 	//get logged in user's managers.
@@ -130,9 +125,6 @@ class Common {
 				$theuser='';
 			}
 		}
-
-		//print_r("<BR>my managers <BR>");
-		//_ppd($this->my_managers);
 	}
 
 	//return true if the logged in user is a manager.

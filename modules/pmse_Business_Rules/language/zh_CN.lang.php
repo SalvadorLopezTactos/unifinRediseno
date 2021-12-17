@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => '流程商务规则',
   'LBL_MODULE_NAME_SINGULAR' => '流程商务规则',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '流程商务规则焦点抽屉',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '流程商务规则记录仪表板',
   'LBL_RST_UID' => '商务规则编号',
   'LBL_RST_TYPE' => '商务规则类型',
   'LBL_RST_DEFINITION' => '商务规则定义',

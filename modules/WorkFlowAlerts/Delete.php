@@ -34,7 +34,12 @@ if(!isset($_REQUEST['record']))
 
 	$workflow_object = $focus->get_workflow_object();
 	$workflow_object->write_workflow();
-	
-	
-header("Location: index.php?module=".$_REQUEST['return_module']."&action=".$_REQUEST['return_action']."&record=".$_REQUEST['return_id']."&workflow_id=".$_REQUEST['workflow_id']);
+    $request = http_build_query(array(
+        'module' => $_REQUEST['return_module'],
+        'action' => $_REQUEST['return_action'],
+        'record' => $_REQUEST['return_id'],
+        'workflow_id' => $_REQUEST['workflow_id'],
+    ));
+
+    header('Location: index.php?' . $request);
 ?>

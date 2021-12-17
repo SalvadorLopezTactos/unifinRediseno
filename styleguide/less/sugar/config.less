@@ -1,9 +1,3 @@
-/*
- * MAIN VARIABLES
- */
-
-@baseUrl: "@{siteUrl}/styleguide/assets";
-@fa-font-path: "@{siteUrl}/styleguide/assets/fonts";
 
 /*
  * THIRD PARTY
@@ -14,6 +8,7 @@
 @import "../lib/colorpicker.less"; //ext lib: http://www.eyecon.ro/bootstrap-colorpicker/
 @import "../lib/select2.less"; //ext lib: http://ivaynberg.github.com/select2/
 @import "../lib/jquery.timepicker.less";
+@fa-font-path: "../../../../../styleguide/assets/fonts";
 @import "../lib/font-awesome/font-awesome.less"; //ext lib: http://fortawesome.github.com/Font-Awesome/
 @import "../lib/sucrose/sucrose.less";
 @import "./font.less";
@@ -59,6 +54,7 @@
 @import "subpanel.less";
 @import "font-awesome.less";
 @import "dashlets.less";
+@import "dashboard-fab.less";
 @import "avatar.less";
 @import "card2.less";
 @import "misc.less";
@@ -108,6 +104,8 @@
 @import "process-list.less";
 @import "process-business-rules.less";
 @import "process-definitions.less";
+@import "data-archiver.less";
+@import "safari-sticky-columns.less";
 
 @import "../rtl/config.less";
 
@@ -117,9 +115,16 @@
 
 @import "bpm.less"; // SugarBPM(TM)
 
+// Admin settings imports
+@import "adminconfig.less";
+
 // Renewal Console imports
 @import "boxplot.less"; // BoxPlot CSS
 @import "opportunities.less";
 
+// Omnichannel imports
+@import "omnichannel.less";
+
 // Console config imports
 @import "console-config.less";
+@import "config-side-pane.less";

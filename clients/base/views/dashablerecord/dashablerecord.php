@@ -21,13 +21,7 @@ $viewdefs['base']['view']['dashablerecord'] = [
                 'view' => 'record',
                 'blacklist' => [
                     'module' => [
-                        'Calls',
-                        'Emails',
                         'Home',
-                        'Meetings',
-                        'Opportunities',
-                        'Quotes',
-                        'RevenueLineItems',
                     ],
                 ],
             ],

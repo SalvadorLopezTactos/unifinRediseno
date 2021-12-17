@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Procesbeheer',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Niet-bijgewoonde processen',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer processen',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Dashboard record processen',
+
     'LBL_CAS_ID' => 'Procesnummer',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "taak werd",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Voorbeeld procesontwerp',
     'LBL_PROJECT_RUN_ORDER' => 'Volgorde uitvoering',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Huidige Activiteit',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Datum gewijzigd',
+    'LBL_DATE_ENTERED' => 'Datum ingevoerd',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Weet u zeker dat u dit proces wilt claimen?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Proces is succesvol geclaimd',
 );
 

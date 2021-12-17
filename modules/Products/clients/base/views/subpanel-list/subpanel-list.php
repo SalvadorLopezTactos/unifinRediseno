@@ -68,6 +68,11 @@ $viewdefs['Products']['base']['view']['subpanel-list'] = array(
           'default' => true,
           'name' => 'date_support_expires',
         ),
+          [
+              'name' => 'add_on_to_name',
+              'type' => 'add-on-to',
+              'default' => false,
+          ],
       ),
     ),
   ),

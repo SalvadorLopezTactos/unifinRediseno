@@ -39,7 +39,9 @@ $mod_strings = array(
 
     // Directions field strings
     'LBL_CONSOLE_DIRECTIONS' => 'Directions',
+    'LBL_CONSOLE_DIRECTIONS_DOCUMENTATION' => 'documentation',
     'LBL_CONSOLE_DIRECTIONS_DEFAULT_FILTER' => 'The default Filter is',
+    'LBL_CONSOLE_DIRECTIONS_DETAILED_INSTRUCTIONS' => 'For detailed instructions and a list of default values, refer to the',
     'LBL_CONSOLE_DIRECTIONS_DEFAULT_PRIMARY_SORT_ORDER' => 'The default Primary Sort Order is',
     'LBL_CONSOLE_DIRECTIONS_DEFAULT_SECONDARY_SORT_ORDER' => 'The default Secondary Sort Order is',
     'LBL_CONSOLE_DIRECTIONS_DESCENDING' => 'Descending',

@@ -152,6 +152,79 @@
                         return;
                     }
                     return this.toJSON();
+                },
+
+                /**
+                 * Reusable code snippet to take a key and value from a filterDef and create the necessary key and value
+                 * pair needed to get the correct operator and generate a filter field.
+                 *
+                 * @param key
+                 * @param value
+                 * @param fieldList
+                 * @return {Object}
+                 */
+                keyValueFilterDef: function(key, value, fieldList) {
+                    var isPredefinedFilter = (fieldList[key] && fieldList[key].predefined_filter === true);
+
+                    if (key === '$or') {
+                        var keys = _.reduce(value, function(memo, obj) {
+                            return memo.concat(_.keys(obj));
+                        }, []);
+
+                        key = _.find(_.keys(fieldList), function(key) {
+                            if (_.has(fieldList[key], 'dbFields')) {
+                                return _.isEqual(fieldList[key].dbFields.sort(), keys.sort());
+                            }
+                        }, this);
+
+                        // Predicates are identical, so we just use the first.
+                        value = _.values(value[0])[0];
+                    } else if (key === '$and') {
+                        var values = _.reduce(value, function(memo, obj) {
+                            return _.extend(memo, obj);
+                        }, {});
+                        var def = _.find(fieldList, function(fieldDef) {
+                            return _.has(values, fieldDef.id_name || fieldDef.name);
+                        }, this);
+
+                        var operator = '$equals';
+                        key = def ? def.name : key;
+
+                        //  We want to get the operator from our values object only for currency fields
+                        if (def && !_.isString(values[def.name]) && def.type === 'currency') {
+                            operator = _.keys(values[def.name])[0];
+                            values[key] = values[key][operator];
+                        }
+                        value = {};
+                        value[operator] = values;
+                    }
+
+                    if (!fieldList[key]) {
+                        //Make sure we use name for relate fields
+                        var relate = _.find(fieldList, function(field) { return field.id_name === key; });
+                        // field not found so don't create row for it.
+                        if (!relate) {
+                            return;
+                        }
+                        key = relate.name;
+                        // for relate fields in version < 7.7 we used `$equals` and `$not_equals` operator so for
+                        // version compatibility & as per TY-159 needed to fix this since 7.7 & onwards we will be
+                        // using `$in` & `$not_in` operators for relate fields
+                        if (_.isString(value) || _.isNumber(value)) {
+                            value = {$in: [value]};
+                        } else if (_.keys(value)[0] === '$not_equals') {
+                            var val = _.values([value])[0];
+                            value = {$not_in: val};
+                        }
+                    } else if (!fieldList[key] && !isPredefinedFilter) {
+                        return;
+                    }
+
+                    if (_.isString(value) || _.isNumber(value)) {
+                        value = {$equals: value};
+                    }
+
+                    return [key, value];
                 }
             })
         });

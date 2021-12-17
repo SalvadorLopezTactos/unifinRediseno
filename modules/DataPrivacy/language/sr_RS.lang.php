@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Polja označena za brisanje',
     'LBL_NO_RECORDS_MARKED' => 'Nema polja ili zapisa označenih za brisanje.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa o privatnosti podataka',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Fioka kokusa za privatnost podataka',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modul za privatnost podataka prati aktivnosti privatnosti, uključujući zahteve za saglasnost i pristup subjekta, u cilju pružanja podrške procedurama organizacije za privatnost. Kreirajte zapise o privatnosti podataka koji se odnose na zapis pojedinca (npr. kontakta) za praćenje saglasnosti ili preduzimanje radnji po zahtevu za privatnost podataka.',

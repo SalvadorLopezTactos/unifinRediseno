@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Rolleri Kullanıcılara Göre Listele',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Kullanıcı Rolleri',
 'LBL_SEARCH_FORM_TITLE'=>'Ara',
+'LBL_ACTION_RECORD_VIEW'=>'Kayıt Görüntüle',
 'LBL_ACTION_VIEW'=>'Göster',
 'LBL_ACTION_EDIT'=>'Değiştir',
 'LBL_ACTION_DELETE'=>'Sil',

@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Tikšanos saraksta instrumentu panelis',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tikšanos ierakstu instrumentu panelis',
+    'LBL_LEAD_GUESTS' => 'Interesenti - viesi',
+    'LBL_CONTACT_GUESTS' => 'Kontaktpersonas - viesi',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Tikšanos fokusa panelis',
 
 	'ERR_DELETE_RECORD' => 'Jānorāda ieraksta numurs, lai izdzēstu tikšanos.',
 	'LBL_ACCEPT_THIS'=>'Apstiprināt?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Virziens',
 	'LBL_LIST_DUE_DATE'=>'Izpildes datums',
 	'LBL_LIST_FORM_TITLE' => 'Tikšanos saraksts',
-	'LBL_LIST_MY_MEETINGS' => 'Manas tikšanās',
+    'LBL_LIST_MY_MEETINGS' => 'Manas tikšanās',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Manas plānotās tikšanās',
+    'LBL_GUEST_MEETINGS' => 'Manas tikšanās viesa lomā',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Plānotās tikšanās viesa lomā',
 	'LBL_LIST_RELATED_TO' => 'Attiecas uz',
 	'LBL_LIST_STATUS'=>'Statuss',
 	'LBL_LIST_SUBJECT' => 'Temats',

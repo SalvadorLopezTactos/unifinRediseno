@@ -12,6 +12,37 @@
 
 class SugarMinifyUtils
 {
+    /**
+     * @string
+     */
+    const CACHE_SUB_DIR = 'jsSourceMinifiedFiles';
+
+    /**
+     * @string
+     */
+    const SOURCE_MD5_MAP_FILENAME = 'sourceMd5Map.php';
+
+    /**
+     * @var string
+     */
+    private $cacheDir;
+
+    /**
+     * @var string
+     */
+    private $sourceMd5MapFile;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct()
+    {
+        $this->cacheDir = sugar_cached(self::CACHE_SUB_DIR) . DIRECTORY_SEPARATOR;
+        sugar_mkdir($this->cacheDir);
+        $this->sourceMd5MapFile = $this->cacheDir . self::SOURCE_MD5_MAP_FILENAME;
+    }
+
+
     /**get_exclude_files
      *
      * This method returns a predefined array.
@@ -65,76 +96,79 @@ class SugarMinifyUtils
      * This method takes in a string value of the root directory to begin processing
      * it uses the predefined array of groupings to create a concatenated file for each grouping
      * and places the concatenated file in root directory
-     * @from_path root directory where processing should take place
+     * @param string $rootDir root directory where processing should take place
      */
-    public function ConcatenateFiles($from_path){
+    public function ConcatenateFiles(string $rootDir)
+    {
         global $sugar_config;
+
+        $sourceMd5Map = [];
+        if (file_exists($this->sourceMd5MapFile)) {
+            require $this->sourceMd5MapFile;
+        }
 
         // Minifying the group files takes a long time sometimes.
         @ini_set('max_execution_time', 0);
         $js_groupings = $this->getJSGroupings();
 
         // Get the files that are not meant to be minified
-        $excludedFiles = $this->get_exclude_files($from_path);
+        $excludedFiles = $this->get_exclude_files($rootDir);
 
         // For each item in the $js_groupings array (from JSGroupings.php),
         // concatenate the source files into the target file
-        foreach ($js_groupings as $fg) {
-            // List of files to build into one
-            $buildList = array();
+        foreach ($js_groupings as $fileGroup) {
+            // Minified file group content
+            $groupContent = '';
 
             // Default the permissions to the most restrictive to start
-            $currPerm = 0;
+            $groupFilePermissions = 0;
 
-            // Process each group array. $loc is the file to read in, $trgt is
-            // the concatenated file
-            foreach($fg as $loc=>$trgt){
-                $already_minified = preg_match('/[\.\-]min\.js$/', $loc);
-                if (preg_match('/[\.\-]min\.js$/', $loc)) {
-                    $already_minified = true;
-                } else {
-                    $minified_loc = str_replace('.js', '-min.js', $loc);
-                    if (is_file($minified_loc)) {
-                        $loc = $minified_loc;
-                        $already_minified = true;
-                    }
+            // Process each group array. $sourceFile is the file to read in, $targetFile is the concatenated file
+            foreach ($fileGroup as $relativeSourceFile => $targetGroupFile) {
+                $absoluteSourceFile = $relativeSourceFile;
+                if (!empty($rootDir)) {
+                    $absoluteSourceFile = $rootDir . DIRECTORY_SEPARATOR . $relativeSourceFile;
                 }
-                $relpath = $loc;
-                $loc = $from_path.'/'.$loc;
 
-                $trgt = sugar_cached($trgt);
-                //check to see that source file is a file, and is readable.
-                if(is_file($loc) && is_readable($loc)){
-                    // Build a file perm based on the loosest file being read in
-                    $tPerm = fileperms($loc);
-                    if ($tPerm !== false && $tPerm > $currPerm) {
-                        $currPerm = $tPerm;
-                    }
+                if (!is_file($absoluteSourceFile) || !is_readable($absoluteSourceFile)) {
+                    continue;
+                }
 
-                    //make sure we have handles to both source and target file
-                    $content = file_get_contents($loc);
-                    //Skip minifying files in exclude list and already minified files
-                    if (!$already_minified && !isset($excludedFiles[$loc])) {
+                $isFileMinified = preg_match('~[\.\-]min\.js$~', $absoluteSourceFile);
+                $sourceFilePermissions = fileperms($absoluteSourceFile);
+                if ($sourceFilePermissions !== false && $sourceFilePermissions > $groupFilePermissions) {
+                    $groupFilePermissions = $sourceFilePermissions;
+                }
+
+                $sourceFileMd5 = md5_file($absoluteSourceFile);
+                if (array_key_exists($relativeSourceFile, $sourceMd5Map) && in_array($sourceFileMd5, $sourceMd5Map)) {
+                    $sourceFileContent = file_get_contents($this->cacheDir . $relativeSourceFile);
+                } else {
+                    $sourceFileContent = file_get_contents($absoluteSourceFile);
+                    $sourceMd5Map[$relativeSourceFile] = $sourceFileMd5;
+                    if (!$isFileMinified && !isset($excludedFiles[$absoluteSourceFile])) {
                         try {
-                            $content = SugarMin::minify($content);
+                            $sourceFileContent = SugarMin::minify($sourceFileContent);
                         } catch (RuntimeException  $e) {
-                            //Use unminified $buffer instead
+                            //Use unminified $sourceFileContent instead
                         }
                     }
-                    $content .= "\n/* End of File $relpath */\n\n";
-                    $buildList[] = $content;
+                    mkdir_recursive(dirname($this->cacheDir . $relativeSourceFile));
+                    sugar_file_put_contents_atomic($this->cacheDir . $relativeSourceFile, $sourceFileContent);
                 }
+                $sourceFileContent .= "\n/* End of File $relativeSourceFile */\n\n";
+                $groupContent .= $sourceFileContent;
             }
+            $targetGroupFile = sugar_cached($targetGroupFile);
 
             // Ensure target directory exists
-            $targetDir = dirname($trgt);
+            $targetDir = dirname($targetGroupFile);
             if (!file_exists($targetDir)) {
                 mkdir_recursive($targetDir);
             }
 
             // Build the file now using atomic write
-            $contents = implode("", $buildList);
-            sugar_file_put_contents_atomic($trgt, $contents);
+            sugar_file_put_contents_atomic($targetGroupFile, $groupContent);
 
             // And handle permissions like the way we used to do it
             $func = function_exists('sugar_chmod') ? 'sugar_chmod' : 'chmod';
@@ -147,11 +181,12 @@ class SugarMinifyUtils
             }
 
             // Handle permission value here
-            $newPerm = $currPerm ? $currPerm : $defaultPerm;
+            $newPerm = $groupFilePermissions ? $groupFilePermissions : $defaultPerm;
 
             // Set the perms for the new file
-            @$func($trgt, $newPerm);
+            @$func($targetGroupFile, $newPerm);
         }
+        write_array_to_file('sourceMd5Map', $sourceMd5Map, $this->sourceMd5MapFile);
     }
 
     protected function create_backup_folder($bu_path){
@@ -246,7 +281,8 @@ class SugarMinifyUtils
                             //Check to see that ReadNextLine is true, if so then add the last line collected
                             //make sure the last line is either the end to a comment block, or starts with '//'
                             //else do not add as it is live code.
-                            if(!empty($newLine) && ((strpos($newLine, '*/')!== false) || ($newLine{0}.$newLine{1}== '//'))){
+                            if (!empty($newLine)
+                                && ((strpos($newLine, '*/') !== false) || ($newLine[0] . $newLine[1] == '//'))) {
                                 //add new line to license string
                                 $lic_str .=$newLine;
                             }

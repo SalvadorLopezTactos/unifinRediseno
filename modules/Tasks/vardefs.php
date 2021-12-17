@@ -204,6 +204,7 @@ $dictionary['Task'] = array(
             'relationship' => 'contact_tasks',
             'source' => 'non-db',
             'side' => 'right',
+            'link_type' => 'one',
             'vname' => 'LBL_CONTACT',
         ),
         'accounts' => array(
@@ -279,6 +280,15 @@ $dictionary['Task'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'tasks_messages',
+            'module' => 'Notes',
+            'bean_name' => 'Note',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'quotes' => array(
             'name' => 'quotes',
             'type' => 'link',
@@ -337,6 +347,17 @@ $dictionary['Task'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Tasks'
         ),
+        'tasks_messages' => [
+            'lhs_module' => 'Tasks',
+            'lhs_table' => 'tasks',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Tasks',
+        ],
         'tasks_assigned_user' => array(
             'lhs_module' => 'Users',
             'lhs_table' => 'users',

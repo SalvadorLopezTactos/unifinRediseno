@@ -335,6 +335,9 @@ $dictionary['Lead'] = array(
             'source' => 'non-db',
             'additionalFields' => array('id' => 'campaign_id'),
             'massupdate' => false,
+            'studio' => array(
+                'mobile' => false,
+            ),
         ),
         'campaign_leads' => array(
             'name' => 'campaign_leads',
@@ -522,6 +525,13 @@ $dictionary['Lead'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_BUSINESS_CENTER',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'lead_messages',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'website' => array(
             'name' => 'website',
             'vname' => 'LBL_WEBSITE',
@@ -759,6 +769,17 @@ $dictionary['Lead'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Leads'
         ),
+        'lead_messages' => [
+            'lhs_module' => 'Leads',
+            'lhs_table' => 'leads',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Leads',
+        ],
         'lead_meetings' => array(
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',

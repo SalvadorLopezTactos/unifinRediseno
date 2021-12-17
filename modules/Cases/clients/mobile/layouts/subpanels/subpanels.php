@@ -62,5 +62,12 @@ $viewdefs['Cases']['mobile']['layout']['subpanels'] = array(
                 'link' => 'archived_emails',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchases',
+            ],
+        ],
     ),
 );

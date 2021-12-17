@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Pieteikumu saraksta instrumentu panelis',
     'LBL_CASES_RECORD_DASHBOARD' => 'Pieteikumu ierakstu instrumentu panelis',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Informācija par pieteikumu',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Pieteikumu fokusa panelis',
 
 	'ERR_DELETE_RECORD'					=> 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
 	'LBL_ACCOUNT_ID'					=> 'Uzņēmuma ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Rādīt portālā',
 	'LBL_CREATE_KB_DOCUMENT' => 'Izveidot rakstu',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Zināšanu bāze',
+    'LBL_REQUEST_CLOSE' => 'Pieprasījuma slēgšana',
+    'LBL_REQUEST_CLOSE_DATE' => 'Pieprasījuma slēgšans datums',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Slēgšanas pieprasījums',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Nosūtīt pieprasījumu, lai slēgtu šo pieteikumu',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Vai vēlaties pieprasīt, lai šis pieteikums tiktu slēgts?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Mani pieteikumi, kuriem ir pieprasīta slēgšana',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Mani pieteikumi, kuriem ir pieprasīta slēgšana',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Mani pieteikumi, kuriem ir pieprasīta slēgšana',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Pieteikumu saraksts, kuriem ir pieprasīta slēgšana',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Parāda piešķirto pieteikumu sakrakstu, kuriem ir pieprasīta slēgšana',
 
     'LBL_CREATED_USER' => 'Izveidoja',
     'LBL_MODIFIED_USER' => 'Modificēja',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Piešķirts lietotājam',
     'LBL_EXPORT_TEAM_COUNT' => 'Darba grupu skaits',
     'LBL_CHANGETIMERS' => 'Mainīt taimerus',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Pirkumi',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Saistīto kontaktu e-pasti',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Piemēram, Jūs varat izmantot šo, lai atrastu iepriekš apstiprinātas problēmas.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Ja Jums ir jauns atbalsta Pieteikums, kuru vēlaties apstiprināt, klikšķiniet šeit, lai apstiprinātu jaunu Pieteikumu',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Spiežot šeit jūs tiksiet atgriezts šajā skatījumā jebkurā laikā.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pieteikuma mijiedarbības',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Piezīmes',
 
@@ -149,5 +161,5 @@ Lai izveidotu {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Informācija par SLA',
     'LBL_HOURS' => 'Stundas',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Statuss',
 );

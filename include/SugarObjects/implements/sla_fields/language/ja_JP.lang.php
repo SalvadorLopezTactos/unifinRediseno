@@ -16,8 +16,8 @@ $mod_strings = [
     'LBL_BUSINESS_HOURS_TO_FIRST_RESPONSE' => 'ファーストレスポンスまでの営業時間数',
     'LBL_FIRST_RESPONSE_VARIANCE_FROM_TARGET' => 'ファーストレスポンス目標時刻とのバリアンス',
     'LBL_FIRST_RESPONSE_SLA_MET' => 'ファーストレスポンスSLA達成',
-    'LBL_FIRST_RESPONSE_USER_ID' => 'ファーストレスポンスユーザID',
-    'LBL_FIRST_RESPONSE_USER_NAME' => 'ファーストレスポンスユーザ',
-    'LBL_FIRST_RESPONSE_USER' => 'ファーストレスポンスユーザ',
+    'LBL_FIRST_RESPONSE_USER_ID' => 'ファーストレスポンスユーザーID',
+    'LBL_FIRST_RESPONSE_USER_NAME' => 'ファーストレスポンスユーザー',
+    'LBL_FIRST_RESPONSE_USER' => 'ファーストレスポンスユーザー',
     'LBL_FIRST_RESPONSE_SENT' => 'ファーストレスポンス送信済み',
 ];

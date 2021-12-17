@@ -51,6 +51,9 @@
                     model: model
                 },
             },
+            function(variable){
+                location.reload();
+            }
         );
     },
 
@@ -74,6 +77,9 @@
                     model: model
                 },
             },
+            function(variable){
+                location.reload();
+            }
         );
     },
 

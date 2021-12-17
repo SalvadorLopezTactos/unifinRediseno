@@ -166,6 +166,7 @@
         if (!component.context.get('fromRouter')) {
             return;
         }
+
         if (goBack) {
             this._fragments.pop();
             app.router.navigate(_.last(this._fragments));
@@ -205,7 +206,7 @@
                 drawers.$next.css('top', this._isMainAppContent(drawers.$next) ? drawerHeight : drawers.$next.offset().top - drawerHeight);
             }
 
-            this._removeTabAndBackdrop(drawers.$bottom);
+            this._removeBackdrop(drawers.$bottom);
             this._cleanUpAfterClose(drawers);
             this._afterCloseActions(args);
         }
@@ -240,9 +241,9 @@
                 height: height
             });
 
-        //refresh tab and backdrop
-        this._removeTabAndBackdrop(drawers.$top);
-        this._createTabAndBackdrop(drawers.$next, drawers.$top);
+        //refresh backdrop
+        this._removeBackdrop(drawers.$top);
+        this._createBackdrop(drawers.$next, drawers.$top);
 
         comp = _.last(this._components);
         comp.loadData();
@@ -317,7 +318,7 @@
                 .removeClass('drawer inactive')
                 .removeAttr('aria-hidden')
                 .css('top','');
-            this._removeTabAndBackdrop($main);
+            this._removeBackdrop($main);
         }
 
         $('body').removeClass('noscroll');
@@ -377,7 +378,7 @@
             belowWindowTopPos; //top position below the browser window
 
         if (drawers.$bottom) {
-            belowWindowTopPos = drawers.$bottom.offset().top + drawerHeight
+            belowWindowTopPos = drawers.$bottom.offset().top + drawerHeight;
         }
 
         if (this._isMainAppContent(drawers.$top)) {
@@ -387,8 +388,8 @@
             app.$contentEl.addClass('noscroll');
         }
 
-        //add the expand tab and the backdrop to the top drawer
-        this._createTabAndBackdrop(drawers.$next, drawers.$top);
+        //add the backdrop to the top drawer
+        this._createBackdrop(drawers.$next, drawers.$top);
 
         //indicate that it's an active drawer
         drawers.$next.addClass('drawer active');
@@ -470,7 +471,7 @@
             drawers.$next.css('top', bottomDrawerTopPos);
         }
 
-        this._removeTabAndBackdrop(drawers.$bottom);
+        this._removeBackdrop(drawers.$bottom);
     },
 
     /**
@@ -550,9 +551,16 @@
      * Create tab and the backdrop. Add the ability to expand and collapse the drawer when the tab is clicked
      * @param $top
      * @param $bottom
+     * @deprecated Since 10.3.0
      * @private
      */
     _createTabAndBackdrop: function($top, $bottom) {
+        app.logger.warn(
+            '_createTabAndBackdrop($top, $bottom) is deprecated in 10.3.0. ' +
+            'The ability to expand the drawer view has been removed. ' +
+            'Please use _createBackdrop($top, $bottom) instead.'
+        );
+
         var $drawerTab;
 
         //add the expand tab and the backdrop to the top drawer
@@ -579,17 +587,45 @@
     },
 
     /**
+     * Create backdrop for the drawer.
+     * @param $top
+     * @param $bottom
+     * @private
+     */
+    _createBackdrop: function($top, $bottom) {
+        $bottom
+            .append(this.backdropHtml);
+    },
+
+    /**
      * Remove the tab and the backdrop and the event listener that handles the ability to expand and collapse the drawer.
      * @param $drawer
+     * @deprecated Since 10.3.0.
      * @private
      */
     _removeTabAndBackdrop: function($drawer) {
+        app.logger.warn(
+            '_removeTabAndBackdrop($drawer) is deprecated in 10.3.0. ' +
+            'The ability to expand the drawer view has been removed. ' +
+            'Please use _removeBackdrop($drawer) instead.'
+        );
+
         //remove drawer tab
         var $drawerTab = $drawer.find('.drawer-tab')
             .off('click')
             .remove();
 
         //remove backdrop
+        $drawer.find('.drawer-backdrop')
+            .remove();
+    },
+
+    /**
+     * Remove the drawer backdrop.
+     * @param $drawer
+     * @private
+     */
+    _removeBackdrop: function($drawer) {
         $drawer.find('.drawer-backdrop')
             .remove();
     },

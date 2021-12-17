@@ -146,6 +146,7 @@ $viewdefs['ProductTemplates']['base']['view']['record'] = array(
                 'manufacturer_name',
                 'mft_part_num',
                 'service',
+                'renewable',
                 array(
                     'name' => 'service_duration',
                     'type' => 'fieldset',
@@ -164,7 +165,7 @@ $viewdefs['ProductTemplates']['base']['view']['record'] = array(
                         ),
                     ),
                 ),
-                'renewable',
+                'lock_duration',
                 array(
                     'name' => 'vendor_part_num',
                     'span' => 12,

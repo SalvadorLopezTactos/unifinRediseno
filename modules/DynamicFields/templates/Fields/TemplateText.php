@@ -10,9 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 class TemplateText extends TemplateField
 {
 	var $type='varchar';
+    public $massupdate = 1;
 
     /**
      * {@inheritDoc}
@@ -51,6 +55,18 @@ class TemplateText extends TemplateField
 			return $this->bean->$name;	
 		}
 		return '';
-		
 	}
+
+    /**
+     * @inheritdoc
+     */
+    public function populateFromPost(Request $request = null)
+    {
+        if (!$request) {
+            $request = InputValidation::getService();
+        }
+
+        parent::populateFromPost($request);
+        $this->massupdate = !empty($_REQUEST['massupdate']);
+    }
 }

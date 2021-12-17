@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Izveidoja ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Izveidoja lietotājs',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Piešķirts lietotājam',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Birku fokusa panelis',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Birku ierakstu instrumentu panelis',
+    'LBL_MY_TAGS' => 'Manas birkas',
+    'LBL_MY_FAVORITE_TAGS' => 'Manas izvēlētās birkas',
 );

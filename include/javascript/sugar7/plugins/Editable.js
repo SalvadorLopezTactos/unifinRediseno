@@ -50,7 +50,16 @@
                     if (sideDrawer) {
                         sideDrawer.before(
                             'side-drawer:close side-drawer:content-changed',
-                            this.beforeSideDrawerChange,
+                            this.beforeContainerChange,
+                            this
+                        );
+                    }
+
+                    var omniDashboard = this.closestComponent('omnichannel-dashboard');
+                    if (omniDashboard) {
+                        omniDashboard.before(
+                            'omni-dashboard:close omni-dashboard:content-changed',
+                            this.beforeContainerChange,
                             this
                         );
                     }
@@ -73,9 +82,13 @@
              * Pass `onConfirmRoute` as callback to continue navigating after confirmation.
              *
              * @param {Object} params Parameters that is passed from caller.
-             * @return {Boolean} True only if it contains unsaved changes.
+             * @return {boolean} True if it doesn't contain unsaved changes, false otherwise.
              */
             beforeRouteChange: function(params) {
+                if (this.closestComponent('omnichannel-dashboard')) {
+                    // don't block for omnichannnel dashboard
+                    return true;
+                }
                 var onConfirm = _.bind(this.onConfirmRoute, this);
                 return this.warnUnsavedChanges(onConfirm);
             },
@@ -89,7 +102,7 @@
              * @param {Object} param Parameters that is passed from caller.
              * @param {Function} param.callback Callback function.
              * @param {string} [param.message] Custom message.
-             * @return {boolean} `true` only if it contains unsaved changes.
+             * @return {boolean} True if it doesn't contain unsaved changes, false otherwise.
              */
             beforeViewChange: function(param) {
                 if (!(param && _.isFunction(param.callback))) {
@@ -97,6 +110,8 @@
                     return true;
                 }
                 var onConfirm = _.bind(function() {
+                    app.events.trigger('editable:beforehandlers:off');
+
                     if (param.callback && _.isFunction(param.callback)) {
                         param.callback.call(this);
                     }
@@ -105,14 +120,14 @@
             },
 
             /**
-             * Pre-event handler for closing or changing the side-drawer component.
+             * Pre-event handler for closing or changing the container component.
              *
              * @param {Object} params Parameters passed from caller.
              * @param {Function} params.callback Callback function.
              * @param {string} [params.message] Custom (translatable) message.
-             * @return {boolean} `true` only if it contains unsaved changes.
+             * @return {boolean} True if it doesn't contain unsaved changes, false otherwise.
              */
-            beforeSideDrawerChange: function(params) {
+            beforeContainerChange: function(params) {
                 var callback = params.callback;
                 var message = params.message || 'LBL_ONE_OR_MORE_UNSAVED_CHANGES';
                 return this.beforeViewChange({callback: callback, message: message});
@@ -126,13 +141,18 @@
              * @param {Function} onConfirm Callback function which is executed once the user clicks "ok".
              * @param {string} [customMessage] Custom warning message.
              * @param {Function} [onCancel] Callback function which is executed once the users clicks "cancel".
-             * @return {boolean} `true` only if it contains unsaved changes.
+             * @return {boolean} True if it doesn't contain unsaved changes, false otherwise.
              */
             warnUnsavedChanges: function(onConfirm, customMessage, onCancel) {
-                // When we reload the page after retrying a save or when this is from a disposed component,
+                // When we reload the page after retrying a save,
                 // never block it
-                if (this.resavingAfterMetadataSync || this.disposed) {
+                if (this.resavingAfterMetadataSync) {
                     return false;
+                }
+                // If current view is already disposed,
+                // it should be treated as there is no unsaved changes
+                if (this.disposed) {
+                    return true;
                 }
                 this.$(':focus').trigger('change');
                 if (_.isFunction(this.hasUnsavedChanges) && this.hasUnsavedChanges()) {
@@ -190,7 +210,7 @@
                     return;
                 }
 
-                var viewName = !!isEdit ? 'edit' : this.action;
+                var viewName = !!isEdit ? 'edit' : this._getViewAction();
                 var numOfToggledFields = fields.length;
                 var view = this;
 
@@ -206,7 +226,8 @@
                         return; //don't toggle if it's the same
                     }
                     var meta = field.def;
-                    if (meta && isEdit && meta.readonly) {
+                    var viewDefs = field.viewDefs || {};
+                    if (meta && viewDefs && isEdit && app.utils.isFieldAlwaysReadOnly(meta, viewDefs)) {
                         numOfToggledFields--;
                         return;
                     }
@@ -273,13 +294,13 @@
                 var viewName;
 
                 if (_.isUndefined(isEdit)) {
-                    if (field.tplName === this.action || field.tplName === 'erased') {
+                    if (_.contains([this.action, this.viewAction, 'erased'], field.tplName)) {
                         viewName = 'edit';
                     } else {
-                        viewName = this.action;
+                        viewName = this._getViewAction();
                     }
                 } else {
-                    viewName = !!isEdit ? 'edit' : this.action;
+                    viewName = !!isEdit ? 'edit' : this._getViewAction();
                 }
 
                 if (!field.triggerBefore('toggleField', viewName)) {
@@ -435,13 +456,22 @@
             _isReadOnly: function(field, noEditFields) {
                 var isLocked = _.contains(this.model.get('locked_fields'), field.def.name);
 
-                if (field.def.readonly ||
+                if ((app.utils.isFieldAlwaysReadOnly(field.def, field.viewDefs)) ||
                     (field.def.type !== 'fieldset' && isLocked) ||
                     _.indexOf(noEditFields, field.name) >= 0) {
                     return true;
                 }
 
                 return false;
+            },
+
+            /**
+             * Gets the action to use for determining the template when leaving edit mode
+             * @return {string}
+             * @private
+             */
+            _getViewAction: function() {
+                return !_.isEmpty(this.viewAction) ? this.viewAction : this.action;
             },
 
             /**
@@ -453,7 +483,7 @@
              * @param {View.Field} field Field that is in inline edit mode.
              */
             editableHandleMouseDown: function(evt, field) {
-                if (field.tplName === this.action) {
+                if (field.tplName === this._getViewAction()) {
                     return;
                 }
 
@@ -504,7 +534,16 @@
                 if (sideDrawer) {
                     sideDrawer.offBefore(
                         'side-drawer:close side-drawer:content-changed',
-                        this.beforeSideDrawerChange,
+                        this.beforeContainerChange,
+                        this
+                    );
+                }
+
+                var omniDashboard = this.closestComponent('omnichannel-dashboard');
+                if (omniDashboard) {
+                    omniDashboard.offBefore(
+                        'omni-dashboard:close omni-dashboard:content-changed',
+                        this.beforeContainerChange,
                         this
                     );
                 }

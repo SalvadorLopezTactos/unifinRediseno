@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Funcție programată',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruire date de securitate echipă denormalizate',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Golire flux de activități',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Actualizare definire produs',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Programe bazate pe timp de proces',
+'LBL_OOTB_DATA_ARCHIVER' => 'Rulare arhivări/ștergeri date active',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'interval',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Intotdeauna',
 'LBL_CATCH_UP' => 'Activati in cazul in care sunt pierdute',
+'LBL_SYSTEM_JOB' => 'Este un sistem de operațiuni curente?',
 'LBL_CATCH_UP_WARNING' => 'Debifaţi daca aceasta functie poate dura mai mult decât o clipă pentru a rula.',
 'LBL_DATE_TIME_END' => 'Data si timpul expirarii',
 'LBL_DATE_TIME_START' => 'Data si timpul de start',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Eliminare fişiere instrument de diagnosticare',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eliminare fişiere temporare',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstruire date de securitate echipă denormalizate',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Actualizare definire produs',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Derulati campania Nightly Mass',
 'LBL_ASYNCMASSUPDATE' => 'Realizare actualizări în masă asincrone',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Curăţare coadă de operaţii',
 'LBL_CLEANOLDRECORDLISTS' => 'Curăţare liste înregistrări vechi',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Golire flux de activități',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Programe bazate pe timp de proces',
 'LBL_PMSEENGINECRON' => 'Programator SugarBPM',
 );
 

@@ -117,28 +117,6 @@
     }, 400),
 
     /**
-     * Retrieves the labels for the fields that are searchable in the
-     * quicksearch.
-     *
-     * @param {string} moduleName The module name the fields belong to.
-     * @param {string[]} fields The list of searchable fields.
-     * @return {string[]} The list of labels.
-     */
-    getFieldLabels: function(moduleName, fields) {
-        var moduleMeta = app.metadata.getModule(moduleName);
-        var labels = [];
-
-        _.each(_.flatten(fields), function(fieldName) {
-            var fieldMeta = moduleMeta.fields[fieldName];
-            if (fieldMeta) {
-                labels.push(app.lang.get(fieldMeta.vname, moduleName).toLowerCase());
-            }
-        });
-
-        return labels;
-    },
-
-    /**
      * Update quick search placeholder to Search by Field1, Field2, Field3 when the module changes
      * @param string linkModuleName
      * @param string linkModule
@@ -149,8 +127,8 @@
         if (!this.$el.hasClass('hide') && linkModule !== 'all_modules') {
             var filtersBeanPrototype = app.data.getBeanClass('Filters').prototype,
                 fields = filtersBeanPrototype.getModuleQuickSearchMeta(linkModuleName).fieldNames,
-                fieldLabels = this.getFieldLabels(linkModuleName, fields);
-            label = app.lang.get('LBL_SEARCH_BY') + ' ' + fieldLabels.join(', ') + '...';
+                fieldLabels = app.utils.getFieldLabels(linkModuleName, fields);
+            label = app.lang.get('LBL_SEARCH_BY') + ' ' + fieldLabels.join(', ').toLowerCase() + '...';
         } else {
             label = app.lang.get('LBL_BASIC_QUICK_SEARCH');
         }

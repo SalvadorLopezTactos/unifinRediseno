@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Proces e-mailskabeloner',
     'LBL_MODULE_NAME_SINGULAR' => 'Proces e-mail-skabelon',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Skabeloner til proces-e-mail',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over proces for skabeloner til e-mail',
     'LNK_LIST' => 'Vis proces e-mail-skabeloner',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Opret proces e-mail-skabeloner',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importér proces e-mail-skabeloner',

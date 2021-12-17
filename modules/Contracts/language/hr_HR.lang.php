@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Izmijenio ID',
     'LBL_EXPORT_CREATED_BY' => 'Stvorio ID',
     'LBL_EXPORT_TYPE_NAME' => 'Naziv vrste',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za ugovore',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o ugovorima',
 );

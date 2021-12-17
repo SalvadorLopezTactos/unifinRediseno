@@ -360,7 +360,7 @@ class Scheduler extends SugarBean {
 				$hrName[] = $hrs;
 			}
 		}
-		//_pp($hrName);
+
 		// derive minutes
 		//$currentMin = date('i');
 		$currentMin = $timedate->getNow()->format('i');
@@ -411,7 +411,7 @@ class Scheduler extends SugarBean {
 				$minName[] = $mins;
 			}
 		}
-		//_pp($minName);
+
 		// prep some boundaries - these are not in GMT b/c gmt is a 24hour period, possibly bridging 2 local days
 		if(empty($focus->time_from)  && empty($focus->time_to) ) {
 			$timeFromTs = 0;
@@ -445,25 +445,14 @@ class Scheduler extends SugarBean {
 //			$dateTimeEnd = '2020-12-31 23:59:59'; // if empty, set it to something ridiculous
 		}
 		$timeEndTs++;
-		/*_pp('hours:'); _pp($hrName);_pp('mins:'); _pp($minName);*/
+
 		$dateobj = $timedate->getNow();
 		$nowTs = $dateobj->ts;
         $GLOBALS['log']->debug(sprintf("Constraints: start: %s from: %s end: %s to: %s now: %s",
             gmdate('Y-m-d H:i:s', $timeStartTs), gmdate('Y-m-d H:i:s', $timeFromTs), gmdate('Y-m-d H:i:s', $timeEndTs),
             gmdate('Y-m-d H:i:s', $timeToTs), $timedate->nowDb()
             ));
-//		_pp('currentHour: '. $currentHour);
-//		_pp('timeStartTs: '.date('r',$timeStartTs));
-//		_pp('timeFromTs: '.date('r',$timeFromTs));
-//		_pp('timeEndTs: '.date('r',$timeEndTs));
-//		_pp('timeToTs: '.date('r',$timeToTs));
-//		_pp('mktime: '.date('r',mktime()));
-//		_pp('timeLastRun: '.date('r',$lastRunTs));
-//
-//		_pp('hours: ');
-//		_pp($hrName);
-//		_pp('mins: ');
-//		_ppd($minName);
+
 		foreach($hrName as $kHr=>$hr) {
 			foreach($minName as $kMin=>$min) {
 			    $timedate->tzUser($dateobj);
@@ -476,22 +465,14 @@ class Scheduler extends SugarBean {
                             if( $tsGmt <= $timeEndTs ) { // this is taken care of by the initial query - start is less than the date spec'd by admin
                                 if( $tsGmt <= $timeToTs ) { // start is less than the time_to
                                     $validJobTime[] = $dateobj->asDb();
-                                } else {
-                                    //_pp('Job Time is NOT smaller that TimeTO: '.$tsGmt .'<='. $timeToTs);
                                 }
-                            } else {
-                                //_pp('Job Time is NOT smaller that DateTimeEnd: '.date('Y-m-d H:i:s',$tsGmt) .'<='. $dateTimeEnd); //_pp( $tsGmt .'<='. $timeEndTs );
                             }
                         }
-					} else {
-						//_pp('Job Time is NOT bigger that TimeFrom: '.$tsGmt .'>='. $timeFromTs);
 					}
-				} else {
-					//_pp('Job Time is NOT Bigger than DateTimeStart: '.date('Y-m-d H:i',$tsGmt) .'>='. $dateTimeStart);
 				}
 			}
 		}
-		//_ppd($validJobTime);
+
 		// need ascending order to compare oldest time to last_run
 		sort($validJobTime);
 		/**
@@ -813,7 +794,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_WORKFLOW'];
         $scheduler->job = 'function::processWorkflow';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '*::*::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -825,7 +806,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_REPORTS'];
         $scheduler->job = 'function::processQueue';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::6::*::*::*';
         $scheduler->status = 'Inactive';
         $scheduler->created_by = '1';
@@ -837,7 +818,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_TRACKER'];
         $scheduler->job = 'function::trimTracker';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::2::1::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -849,7 +830,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_IE'];
         $scheduler->job = 'function::pollMonitoredInboxes';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '*::*::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -861,7 +842,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_BOUNCE'];
         $scheduler->job = 'function::pollMonitoredInboxesForBouncedCampaignEmails';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::2-6::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -873,7 +854,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_CAMPAIGN'];
         $scheduler->job = 'function::runMassEmailCampaign';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::2-6::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -885,7 +866,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_PRUNE'];
         $scheduler->job = 'function::pruneDatabase';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::1::1::*::*';
         $scheduler->status = 'Inactive';
         $scheduler->created_by = '1';
@@ -897,7 +878,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_UPDATE_TRACKER_SESSIONS'];
         $scheduler->job = 'function::updateTrackerSessions';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '*::*::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -909,7 +890,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_SEND_EMAIL_REMINDERS'];
         $scheduler->job = 'function::sendEmailReminders';
         $scheduler->date_time_start = create_date(2008, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '*::*::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -921,7 +902,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_CLEANUP_QUEUE'];
         $scheduler->job = 'function::cleanJobQueue';
         $scheduler->date_time_start = create_date(2012, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::5::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -933,7 +914,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_CREATE_NEXT_TIMEPERIOD'];
         $scheduler->job = 'class::SugarJobCreateNextTimePeriod';
         $scheduler->date_time_start = create_date(2012, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::23::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -945,7 +926,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_PRUNE_RECORDLISTS'];
         $scheduler->job = 'function::cleanOldRecordLists';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '*::*::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -958,7 +939,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_HEARTBEAT'];
         $scheduler->job = 'class::SugarJobHeartbeat';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::4::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -971,7 +952,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_REMOVE_TMP_FILES'];
         $scheduler->job = 'class::SugarJobRemoveTmpFiles';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::4::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -984,7 +965,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_REMOVE_DIAGNOSTIC_FILES'];
         $scheduler->job = 'class::SugarJobRemoveDiagnosticFiles';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::4::*::*::0';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -997,7 +978,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_REMOVE_PDF_FILES'];
         $scheduler->job = 'class::SugarJobRemovePdfFiles';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::4::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -1010,8 +991,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = "SugarBPM\u{2122}" . $mod_strings['LBL_OOTB_PROCESS_AUTHOR_JOB'];
         $scheduler->job = 'function::PMSEEngineCron';
         $scheduler->date_time_start = create_date(2015, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31)
-            . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '*::*::*::*::*';;
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
@@ -1024,7 +1004,7 @@ class Scheduler extends SugarBean {
         $scheduler->name               = $mod_strings['LBL_OOTB_KBSCONTENT_EXPIRE'];
         $scheduler->job                = 'class::SugarJobKBContentUpdateArticles';
         $scheduler->date_time_start    = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end      = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end      = null;
         $scheduler->job_interval       = '0::5::*::*::*';
         $scheduler->status             = 'Active';
         $scheduler->created_by         = '1';
@@ -1037,7 +1017,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD'];
         $scheduler->job = 'class::' . RebuildJob::class;
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '*/15::*::*::*::*';
         $scheduler->status = 'Inactive';
         $scheduler->created_by = '1';
@@ -1050,7 +1030,7 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_ACTIVITY_STREAM_PURGER'];
         $scheduler->job = 'class::SugarJobActivityStreamPurger';
         $scheduler->date_time_start = create_date(2019, 4, 1) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::*/1::*::*::*';
         $scheduler->status = 'Inactive';
         $scheduler->created_by = '1';
@@ -1063,13 +1043,39 @@ class Scheduler extends SugarBean {
         $scheduler->name = $mod_strings['LBL_OOTB_UPDATE_PRODUCT_DEFINITION'];
         $scheduler->job = 'class::' . UpdateProductDefinitionJob::class;
         $scheduler->date_time_start = create_date(2020, 5, 30) . ' ' . create_time(0, 0, 1);
-        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->date_time_end = null;
         $scheduler->job_interval = '0::0::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
         $scheduler->modified_user_id = '1';
         $scheduler->catch_up = '1';
         $scheduler->system_job = '1';
+        $schedulers[$scheduler->job] = $scheduler;
+
+        // Process Time-Aware Schedules
+        $scheduler = BeanFactory::newBean('Schedulers');
+        $scheduler->name = $mod_strings['LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES'];
+        $scheduler->job = 'class::' . SugarJobProcessTimeAwareSchedules::class;
+        $scheduler->date_time_start = create_date(2020, 10, 20) . ' ' . create_time(0, 0, 1);
+        $scheduler->date_time_end = null;
+        $scheduler->job_interval = '0::*::*::*::*';
+        $scheduler->status = 'Active';
+        $scheduler->created_by = '1';
+        $scheduler->modified_user_id = '1';
+        $scheduler->catch_up = '1';
+        $schedulers[$scheduler->job] = $scheduler;
+
+        // Sugar Data Archiver
+        $scheduler = BeanFactory::newBean('Schedulers');
+        $scheduler->name = $mod_strings['LBL_OOTB_DATA_ARCHIVER'];
+        $scheduler->job = 'class::SugarJobDataArchiver';
+        $scheduler->date_time_start = create_date(2020, 8, 6) . ' ' . create_time(0, 0, 1);
+        $scheduler->date_time_end = null;
+        $scheduler->job_interval = '0::22::*::*::6';
+        $scheduler->status = 'Active';
+        $scheduler->created_by = '1';
+        $scheduler->modified_user_id = '1';
+        $scheduler->catch_up = '1';
         $schedulers[$scheduler->job] = $scheduler;
 
         return $schedulers;

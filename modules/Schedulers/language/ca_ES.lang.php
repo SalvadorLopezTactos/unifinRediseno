@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tasca planificada',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstuïu les dades de seguretat desregularitzades de l&#39;equip',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Purgador de la seqüència d&#39;activitats',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Actualitza la definició de producte',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Programes sensibles al temps del procés',
+'LBL_OOTB_DATA_ARCHIVER' => 'Executa arxiu/esborrat de dades actives',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intèrval:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Sempre',
 'LBL_CATCH_UP' => 'Executar Si Falla',
+'LBL_SYSTEM_JOB' => 'És el sistema de treball actual?',
 'LBL_CATCH_UP_WARNING' => 'Desmarqui si l´execució d´aquesta tasca pot durar més d´un moment.',
 'LBL_DATE_TIME_END' => 'Data i hora de fi',
 'LBL_DATE_TIME_START' => 'Data i hora d&#39;inici',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Esborra els arxius de les eines de diagnòstic',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Esborra els arxius temporals',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstuïu les dades de seguretat desregularitzades de l&#39;equip',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Actualitza la definició de producte',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar campanyes de Correu Massiu Nocturnes',
 'LBL_ASYNCMASSUPDATE' => 'Fer actualitzacions massives asíncrones',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Alliberar espai en cua de treball',
 'LBL_CLEANOLDRECORDLISTS' => 'Netejar antigues llistes de registres',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Purgador de la seqüència d&#39;activitats',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Programes sensibles al temps del procés',
 'LBL_PMSEENGINECRON' => 'Planificador de SugarBPM',
 );
 

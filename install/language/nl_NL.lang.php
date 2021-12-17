@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Waarschuwing: Niet Schrijfbaar',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Uw versie van PHP wordt niet ondersteund door Sugar. U moet een versie hebben die compatibel is. Raadpleeg de Compatibility Matrix in de Release Notes voor de ondersteunde PHP-versies. Uw versie is',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Uw versie van IIS wordt niet ondersteund door Sugar. Het moet een versie zijn die compatibel is met het te installeren Sugar programma. Raadpleeg de Compatibility Matrix in de Release Notes voor de ondersteunde IIS-versies. Uw versie is',
-	'ERR_CHECKSYS_FASTCGI'              => 'Er is geconstateerd dat u geen &#39;FastCGI handler mapping&#39;  voor PHP gebruikt. U dient een versie te installeren/configureren die verenigbaar is met Sugar.  Raadpleeg de Compatibility Matrix in de Release Notes voor de ondersteunde versies.  Bekijk <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> voor meer informatie.',
+    'ERR_CHECKSYS_FASTCGI'              => 'We hebben gedetecteerd dat u geen FastCGI handler mapping gebruikt voor PHP. U moet een versie installeren/configureren die compatible is met de Sugar applicatie. Raadpleeg de Compatibility Matrix in de Release Notes voor de ondersteunde versies. Zie <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> voor informatie ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Voor een optimale ervaring met IIS / FastCGI sapi, stel fastcgi.logging op 0 in je php.ini bestand.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Niet ondersteunde PHP versie geinstalleerd: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database niet beschikbaar',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database-ondersteuning niet gevonden. Controleer of u de nodige stuurprogramma\'s voor een van de volgende ondersteunde databasetypes hebt: MySQL, MS SQL Server, Oracle of DB2. Mogelijk moet u de extensie in het php.ini bestand verwijderen of moet u opnieuw compileren met het juiste binaire bestand, afhankelijk van uw versie van PHP. Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van databaseondersteuning.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database-ondersteuning niet gevonden. Controleer of u de nodige stuurprogramma\'s heeft voor een van de volgende ondersteunde soorten databases: MySQL, MS SQLServer, Oracle, of DB2.  Mogelijk moet u de extensie in het php.ini bestand verwijderen of moet u een nieuw bestand maken met het juiste binaire bestand, afhankelijk van uw versie van PHP. Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van database-ondersteuning.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functies behorende bij "XML Parser Libraries" benodigd door SugarCRM zijn niet gevonden. Controleer php.ini of de regels nog als commentaar zijn opgevoerd of hercompileer de binary file, afhankelijk van uw PHP versie. Raadpleeg de PHP handleiding voor meer informatie.',
     'LBL_CHECKSYS_CSPRNG' => 'Willekeurige nummergenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Functies behorende bij "Multibyte Strings PHP Extension" benodigd door SugarCRM zijn niet gevonden. N.B. Standaard wordt de module niet geinstalleerd in PHP, om deze alsnog te activeren dient deze met "--enable-mbstring" te worden meegegeven als de PHP Binary wordt opgebouwd. Raadpleeg de PHP handleiding voor meer informatie.',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Backward Compatibility modus is ingeschakeld. Zet zend.ze1_compatibility_mode op uitgeschakeld alvorens verder te gaan',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Voldoet aan meldingse-mails',
+        'subject' => 'SugarCRM vergadering - $event_name ',
+        'description' => 'Dit sjabloon wordt gebruikt als het systeem een vergaderingsmelding aan een gebruiker stuurt.',
         'body' => '<div>
 	<p>To: $assigned_user</p>
 
 	<p>$assigned_by_user has invited you to a Meeting</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Onderwerp: $event_name<br/>
+	Startdatum: $start_date<br/>
+	Einddatum: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Beschrijving: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Accepteer deze vergadering:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Deze vergadering onder voorbehoud accepteren:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Deze vergadering weigeren:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Aan: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user heeft u uitgenodigd voor een vergadering
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Onderwerp: $event_name
+Startdatum: $start_date
+Einddatum: $end_date
 
-Description: $description
+Beschrijving: $description
 
-Accept this meeting:
+Accepteer deze vergadering:
 <$accept_link>
 
-Tentatively Accept this meeting
+Deze vergadering onder voorbehoud accepteren
 <$tentative_link>
 
-Decline this meeting
+Deze vergadering weigeren
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Meldingse-mails bellen',
+        'subject' => 'SugarCRM oproep - $event_name ',
+        'description' => 'Dit sjabloon wordt gebruikt als het systeem een oproepmelding stuurt naar een gebruiker.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Aan: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user heeft u uitgenodigd voor een oproep</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Onderwerp: $event_name<br/>
+	Startdatum: $start_date<br/>
+	Duur: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Beschrijving: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Accepteer deze oproep:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Accepteer deze oproep onder voorbehoud:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Weiger deze oproep:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Aan: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user heeft u uitgenodigd voor een oproep
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Onderwerp: $event_name
+Startdatum: $start_date
+Duur: $hoursh, $minutesm
 
-Description: $description
+Beschrijving: $description
 
-Accept this call:
+Accepteer deze oproep:
 <$accept_link>
 
-Tentatively Accept this call
+Deze oproep onder voorbehoud accepteren
 <$tentative_link>
 
-Decline this call
+Deze oproep weigeren
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Toewijzing meldingse-mails',
+        'subject' => 'SugarCRM - Toegewezen $module_name ',
+        'description' => 'Dit sjabloon wordt gebruikt als het systeem een taaktoewijzing aan een gebruiker stuurt.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user heeft a&nbsp;$module_name to&nbsp;$assigned_user toegewezen.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>U kunt deze&nbsp;$module_name bekijken op:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user heeft een $module_name toegewezen aan $assigned_user.
 
-You may review this $module_name at:
+U kunt deze $module_name bekijken op:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Geplande rapporte-mails',
+        'subject' => 'Gepland rapport: $report_name vanaf $report_time',
+        'description' => 'Dit sjabloon wordt gebruikt als het systeem een gepland rapport naar een gebruiker stuurt.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hallo, $assigned_user,</p>
+<p>Bijgevoegd is een automatisch gegenereerd rapport dat voor u is gepland.</p>
+<p>Naam rapport: $report_name</p>
+<p>Uitvoerdatum en -tijd rapport: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Hallo, $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+Bijgevoegd is een automatisch gegenereerd rapport dat voor u is gepland.
 
-Report Name: $report_name
+Naam rapport: $report_name
 
-Report Run Date and Time: $report_time',
+Uitvoerdatum en -tijd rapport: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Melding systeemopmerking logboek e-mail',
+        'subject' => 'SugarCRM - $initiator_full_name heeft u vermeld in een $singular_module_name',
+        'description' => 'Dit sjabloon wordt gebruikt om een e-mailmelding te sturen aan gebruikers die zijn getagd in het deel opmerking logboek.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>U bent vermeld in het volgende opmerkingenlogboek van de record:  <a href="$record_url">$record_name</a></p>
+                <p>Meld aan om de opmerking te bekijken.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'U bent vermeld in het opmerkingenlogboek van de volgende record: $record_name
+            Meld aan bij Sugar om de opmerking te bekijken.',
     ],
 
     'advanced_password_new_account_email' => array(

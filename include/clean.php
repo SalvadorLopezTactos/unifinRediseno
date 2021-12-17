@@ -91,6 +91,8 @@ class SugarCleaner
         // IDs are namespaced
         $config->set('Attr.EnableID', true);
         $config->set('Attr.IDPrefix', 'sugar_text_');
+        // to allow target attributes for anchor tags
+        $config->set('Attr.AllowedFrameTargets', ['_blank','_self','_parent','_top']);
 
         if ($def = $config->maybeGetRawHTMLDefinition()) {
             // Add link tag for custom CSS

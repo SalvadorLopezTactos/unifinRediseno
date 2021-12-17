@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfiguroi Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Ota portaali käyttöön',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Ota haku käyttöön ennen palvelupyynnön avaamista',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Salli portaalin käyttäjien sulkea palvelupyyntö',
     'LBL_PORTAL_THEME' => 'Portal-teema',
     'LBL_PORTAL_ENABLE' => 'Ota käyttöön',
     'LBL_PORTAL_SITE_URL' => 'Portal-sivusi on saatavilla osoitteessa:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Valitse käyttääksesi tätä kenttää globaalissa haussa tämän moduulin tietoja varten.',
+'LBL_POPHELP_REQUIRED'=>"Luo asettelumalli, joka määrittää, onko tämä pakollinen kenttä.<br/>"
+    . "Pakolliset kentät noudattavat selainpohjaisesessa mobiilinäkymässä olevaa mallia, <br/>"
+    . "mutta ne eivät noudata alkuperäisissä sovelluksissa, kuten Sugar Mobile iPhone-laitteille, olevaa mallia.<br/>"
+    . "Ne eivät noudata Sugarin itsepalveluportaalissa olevaa mallia.",
+'LBL_POPHELP_READONLY'=>"Luo asettelumalli joka määrittää, onko tämä vain luku -kenttä.<br/>"
+        . "Vain luku -kentät noudattavat selainpohjaisesessa mobiilinäkymässä olevaa mallia, <br/>"
+        . "mutta ne eivät noudata alkuperäisten sovellusten, kuten Sugar Mobilen iPhone-laitteille, mallia.<br/>"
+        . "Ne eivät noudata Sugarin itsepalveluportaalissa olevaa mallia.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Valitse, haluatko käyttää tätä kenttää, kun etsit tietueita tämän moduulin yleisen haun avulla.',
 //Revert Module labels
 'LBL_RESET' => 'Palauta',
 'LBL_RESET_MODULE' => 'Palauta moduuli',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Salaa',
                 'datetimecombo' =>'Päivä ja aika',
                 'decimal'=>'Desimaalinumero',
+                'autoincrement' => 'Automaattinen lisäys',
 ),
 'labelTypes' => array(
     "" => "Usein käytetyt selitteet",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Kaikki moduulit',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (liittyviä {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopioi asettelusta...',
+'LBL_RELATIONSHIP_TYPE' => 'Suhde',
 );

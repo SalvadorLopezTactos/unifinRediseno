@@ -171,6 +171,12 @@
     },
 
     /**
+     * Prevent shortcuts from dashablelist overriding the shortcuts set by the main view
+     * @override
+     */
+    registerShortcuts: _.noop,
+
+    /**
      * Check if dashlet can be intelligent.
      *
      * A dashlet is considered intelligent when the data relates to the current
@@ -240,6 +246,7 @@
                 this.layout.trigger('dashlet:filter:reinitialize');
 
                 this._updateDisplayColumns();
+                this._hideUnselectedColumns();
                 this.updateLinkedFields(moduleName);
             }, this);
             this.settings.on('change:intelligent', function(model, intelligent) {
@@ -398,7 +405,7 @@
             // We are editing/creating a new filter
             if (!context.editingFilter.get('name')) {
                 context.editingFilter.set('name', app.lang.get('LBL_DASHLET') +
-                    ': ' + this.settings.get('label'));
+                    ': ' + app.lang.get(this.settings.get('label'), this.settings.get('module')));
             }
             // Triggers the save on `filter-rows` which then triggers
             // `filter:add` which then calls `updateDashletFilterAndSave`
@@ -501,6 +508,23 @@
         } else {
             this.moduleIsAvailable = false;
         }
+    },
+
+    /**
+     * When creating a dashlet by default all columns available will be shown.
+     * By a flag set in metadata (selected) some column can be rendered hidden
+     * and optionally selectable. Display only columns that are not excluded from
+     * the initial list of columns. Changes made by the users should not be overwritten.
+     */
+    _hideUnselectedColumns: function() {
+        var module = this.settings.get('module');
+        var columns = this.settings.get('display_columns');
+        _.each(this.getFieldMetaForView(this._getListMeta(module)), function(fieldDef) {
+            if (_.contains(columns, fieldDef.name) && fieldDef.selected === false) {
+                columns = _.without(columns, fieldDef.name);
+            }
+        });
+        this.settings.set('display_columns', columns);
     },
 
     /**
@@ -755,6 +779,7 @@
         var moduleMeta = app.metadata.getModule(this.module);
         if (!this.settings.get('display_columns')) {
             this._updateDisplayColumns();
+            this._hideUnselectedColumns();
         }
         if (!this.settings.get('linked_fields')) {
             this.updateLinkedFields(this.model.module);

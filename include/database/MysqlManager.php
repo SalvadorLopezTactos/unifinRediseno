@@ -132,6 +132,15 @@ abstract class MysqlManager extends DBManager
         'tinyint'  => array('min_value'=>-128, 'max_value'=>127),
     );
 
+    /**
+     * Field's max size
+     * @var array
+     */
+    protected $max_size = [
+        'text' => 65535,
+        'html' => 65535,
+    ];
+
 	protected $capabilities = array(
 		"affected_rows" => true,
 		"select_rows" => true,
@@ -233,20 +242,28 @@ abstract class MysqlManager extends DBManager
         if (empty($tablename)) {
             $this->logger->error(__METHOD__ . ' called with an empty tablename argument');
             return array();
-        }        
+        }
 
 		//find all unique indexes and primary keys.
 		$result = $this->query("DESCRIBE $tablename");
 
 		$columns = array();
-		while (($row=$this->fetchByAssoc($result)) !=null) {
+
+        while (($row=$this->fetchByAssoc($result, false)) !=null) {
 			$name = strtolower($row['Field']);
 			$columns[$name]['name']=$name;
 			$matches = array();
 			preg_match_all('/(\w+)(?:\(([0-9]+,?[0-9]*)\)|)( unsigned)?/i', $row['Type'], $matches);
 			$columns[$name]['type']=strtolower($matches[1][0]);
-			if ( isset($matches[2][0]) && in_array(strtolower($matches[1][0]),array('varchar','char','varchar2','int','decimal','float')) )
-				$columns[$name]['len']=strtolower($matches[2][0]);
+            if (isset($matches[2][0]) && in_array(strtolower($matches[1][0]), array('varchar','char','varchar2','int','decimal','float'))) {
+                $columns[$name]['len'] = strtolower($matches[2][0]);
+                //MySQL8 ignores the length of int and it's always just 32 bits int
+                if (strtolower($matches[1][0]) == 'int'
+                    && $matches[2][0] === ''
+                    && version_compare($this->version(), '8.0.17', '>=')) {
+                    $columns[$name]['len'] = 11;
+                }
+            }
 			if ( stristr($row['Extra'],'auto_increment') )
 				$columns[$name]['auto_increment'] = '1';
 			if ($row['Null'] == 'NO' && !stristr($row['Key'],'PRI'))
@@ -550,10 +567,10 @@ WHERE TABLE_SCHEMA = ?
 			$keys = ",$keys";
 
         $collation = $this->getOption('collation') ?? $this->getDefaultCollation();
-        $sql = "CREATE TABLE $tablename ($columns $keys) CHARACTER SET utf8mb4 COLLATE $collation";
-
-		if (!empty($engine))
-			$sql.= " ENGINE=$engine";
+        $sql = 'CREATE TABLE '.$tablename.' ('.$columns.' '.$keys.') CHARACTER SET utf8mb4 COLLATE '.$this->quoted($collation);
+        if (!empty($engine)) {
+            $sql .= ' ENGINE=' . $engine;
+        }
 
 		return $sql;
 	}
@@ -584,47 +601,50 @@ WHERE TABLE_SCHEMA = ?
 	/**
 	 * @see DBManager::oneColumnSQLRep()
 	 */
-	protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false)
-	{
-		// always return as array for post-processing
-		$ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true);
+    protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
+    {
+        // always return as array for post-processing
+        $ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true, $action);
 
-		if ( $ref['colType'] == 'int' && !empty($fieldDef['len']) ) {
-			$ref['colType'] .= "(".$fieldDef['len'].")";
-		}
+        if ($ref['colType'] == 'int' && !empty($fieldDef['len'])) {
+            $ref['colType'] .= "(".$fieldDef['len'].")";
+        }
 
-		// bug 22338 - don't set a default value on text or blob fields
-		if ( isset($ref['default']) &&
-            in_array($ref['colBaseType'], array('text', 'blob', 'longtext', 'longblob')))
-			    $ref['default'] = '';
+        // bug 22338 - don't set a default value on text or blob fields
+        if (isset($ref['default']) && in_array($ref['colBaseType'], array('text', 'blob', 'longtext', 'longblob'))) {
+            $ref['default'] = '';
+        }
 
-		if ( $return_as_array )
-			return $ref;
-		else
-			return "{$ref['name']} {$ref['colType']} {$ref['default']} {$ref['required']} {$ref['auto_increment']}";
-	}
+        if ($return_as_array) {
+            return $ref;
+        } else {
+            return "{$ref['name']} {$ref['colType']} {$ref['default']} {$ref['required']} {$ref['auto_increment']}";
+        }
+    }
 
     /**
      * {@inheritDoc}
      */
-	protected function changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired = false)
+    protected function changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired = false)
 	{
-		$columns = array();
-		if ($this->isFieldArray($fieldDefs)){
-			foreach ($fieldDefs as $def){
-				if ($action == 'drop')
-					$columns[] = $def['name'];
-				else
-					$columns[] = $this->oneColumnSQLRep($def, $ignoreRequired);
-			}
-		} else {
-			if ($action == 'drop')
-				$columns[] = $fieldDefs['name'];
-		else
-			$columns[] = $this->oneColumnSQLRep($fieldDefs);
-		}
+        $columns = array();
+        if ($this->isFieldArray($fieldDefs)) {
+            foreach ($fieldDefs as $def) {
+                if ($action == 'drop') {
+                    $columns[] = $def['name'];
+                } else {
+                    $columns[] = $this->oneColumnSQLRep($def, $ignoreRequired);
+                }
+            }
+        } else {
+            if ($action == 'drop') {
+                $columns[] = $fieldDefs['name'];
+            } else {
+                $columns[] = $this->oneColumnSQLRep($fieldDefs, null, $tablename, null, $action);
+            }
+        }
 
-		return "ALTER TABLE $tablename $action COLUMN ".implode(",$action column ", $columns);
+        return "ALTER TABLE $tablename $action COLUMN ".implode(",$action column ", $columns);
 	}
 
 	/**
@@ -695,10 +715,23 @@ WHERE TABLE_SCHEMA = ?
 	/**
 	 * @see DBManager::setAutoIncrement()
 	 */
-    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
-	{
-		return "auto_increment";
-	}
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [], $action = null)
+    {
+        $auto_increment_string = "auto_increment";
+
+        /**
+         * Checking to make sure that the UNIQUE constraint is present so we can successfully create the column.
+         * Also make sure the action is 'add' because of the double execution of the query on L579 of
+         * DynamicField.php. If the query is made twice with the unique constraint, a duplicate and redundant
+         * constraint is created.
+         */
+        if (isset($platformOptions['unique']) && $platformOptions['unique'] == true && $action != 'modify') {
+            // The unique constraint is added because it is required when creating an auto_increment field
+            $auto_increment_string .= ' unique';
+        }
+
+        return $auto_increment_string;
+    }
 
 	/**
 	 * Sets the next auto-increment value of a column to a specific value.
@@ -737,15 +770,15 @@ WHERE TABLE_SCHEMA = ?
 
         $columns = array();
         if (!$filterByTable) {
-            $columns[] = 'table_name';
+            $columns[] = 'table_name as table_name';
         }
 
         if (!$filterByIndex) {
-            $columns[] = 'index_name';
+            $columns[] = 'index_name as index_name';
         }
 
-        $columns[] = 'non_unique';
-        $columns[] = 'column_name';
+        $columns[] = 'non_unique as non_unique';
+        $columns[] = 'column_name as column_name';
 
         $query = 'SELECT ' . implode(', ', $columns) . '
 FROM information_schema.statistics';
@@ -810,11 +843,12 @@ FROM information_schema.statistics';
 
 	/**
 	 * @see DBManager::add_drop_constraint()
+     * @inheritDoc
 	 */
-	public function add_drop_constraint($table, $definition, $drop = false)
-	{
+    public function add_drop_constraint(string $table, array $definition, bool $drop = false): string
+    {
 		$type         = $definition['type'];
-		$fields       = implode(',',$definition['fields']);
+        $fieldsListSQL = implode(',', $definition['fields']);
 		$name         = $definition['name'];
 		$sql          = '';
 
@@ -826,26 +860,26 @@ FROM information_schema.statistics';
 			if ($drop)
 				$sql = "ALTER TABLE {$table} DROP INDEX {$name} ";
 			else
-				$sql = "ALTER TABLE {$table} ADD INDEX {$name} ({$fields})";
+                $sql = "ALTER TABLE {$table} ADD INDEX {$name} ({$fieldsListSQL})";
 			break;
 		// constraints as indices
 		case 'unique':
 			if ($drop)
 				$sql = "ALTER TABLE {$table} DROP INDEX $name";
 			else
-				$sql = "ALTER TABLE {$table} ADD CONSTRAINT UNIQUE {$name} ({$fields})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT UNIQUE {$name} ({$fieldsListSQL})";
 			break;
 		case 'primary':
 			if ($drop)
 				$sql = "ALTER TABLE {$table} DROP PRIMARY KEY";
 			else
-				$sql = "ALTER TABLE {$table} ADD CONSTRAINT PRIMARY KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT PRIMARY KEY ({$fieldsListSQL})";
 			break;
 		case 'foreign':
 			if ($drop)
-				$sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fieldsListSQL})";
 			else
-				$sql = "ALTER TABLE {$table} ADD CONSTRAINT FOREIGN KEY {$name} ({$fields}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT FOREIGN KEY {$name} ({$fieldsListSQL}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
 			break;
 		}
 		return $sql;
@@ -1195,19 +1229,33 @@ FROM information_schema.statistics';
 	 * @param string $user
 	 * @param string $password
 	 */
-	public function createDbUser($database_name, $host_name, $user, $password)
-	{
-		$qpassword = $this->quote($password);
-		$this->query("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX
-							ON `$database_name`.*
-							TO \"$user\"@\"$host_name\"
-							IDENTIFIED BY '{$qpassword}';", true);
+    public function createDbUser($database_name, $host_name, $user, $password)
+    {
+        $platform = $this->getConnection()->getDatabasePlatform();
 
-		$this->query("SET PASSWORD FOR \"{$user}\"@\"{$host_name}\" = password('{$qpassword}');", true);
-		if($host_name != 'localhost') {
-			$this->createDbUser($database_name, "localhost", $user, $password);
-		}
-	}
+        $user_string_quoted = $platform->quoteSingleIdentifier($user).'@'.$platform->quoteSingleIdentifier($host_name);
+        $database_name_quoted =  $platform->quoteSingleIdentifier($database_name);
+        $password_quoted = $platform->quoteStringLiteral($password);
+
+        $grant_query = <<<EOQ
+            GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX
+            ON $database_name_quoted.*
+            TO $user_string_quoted
+            IDENTIFIED BY $password_quoted
+EOQ;
+        $this->query($grant_query, true);
+
+        $set_password_query = <<<EOQ
+            SET PASSWORD FOR
+            $user_string_quoted = PASSWORD($password_quoted)
+EOQ;
+
+        $this->query($set_password_query, true);
+
+        if ($host_name !== 'localhost') {
+            $this->createDbUser($database_name, "localhost", $user, $password);
+        }
+    }
 
 	/**
 	 * Create a database
@@ -1216,7 +1264,7 @@ FROM information_schema.statistics';
 	public function createDatabase($dbname)
 	{
         $collation = $this->getOption('collation') ?? $this->getDefaultCollation();
-        $this->query("CREATE DATABASE `$dbname` CHARACTER SET utf8mb4 COLLATE {$collation}", true);
+        $this->query('CREATE DATABASE `'.$dbname.'` CHARACTER SET utf8mb4 COLLATE '.$this->quoted($collation), true);
 	}
 
 	/**

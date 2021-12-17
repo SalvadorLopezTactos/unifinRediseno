@@ -12,6 +12,7 @@
 $dictionary['ContractType'] = array(
     'favorites' => false,
     'table' => 'contract_types',
+    'archive' => false,
     'comment' => 'Specifies the types of contracts available',
 
     'fields' => array (
@@ -31,7 +32,12 @@ $dictionary['ContractType'] = array(
             'vname'=>'LBL_DOCUMENTS',
         ),
     ),
-    'acls' => array('SugarACLDeveloperOrAdmin' => array('aclModule'=>'Contracts')),
+    'acls' => array(
+        'SugarACLDeveloperOrAdmin' => array(
+            'aclModule' => 'Contracts',
+            'allowUserRead' => true,
+        ),
+    ),
     'uses' => array(
         'basic',
     ),

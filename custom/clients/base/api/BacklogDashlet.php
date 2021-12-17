@@ -1245,7 +1245,7 @@ SQL;
         $access = $args['data']['Access'];
         $equipo = $args['data']['equipo'];
         $mes = $args['data']['mes'];
-        if($mes == 'Todos'){
+        if($mes == 'Todos' || $mes==""){
             $mes = '1,2,3,4,5,6,7,8,9,10,11,12';
         }
 

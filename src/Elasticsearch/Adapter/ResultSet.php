@@ -152,7 +152,8 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
      */
     public function getTotalHits()
     {
-        return $this->resultSet->getTotalHits();
+        $data = $this->resultSet->getResponse()->getData();
+        return (int) ($data['hits']['total']['value'] ?? $data['hits']['total'] ?? 0);
     }
 
     /**

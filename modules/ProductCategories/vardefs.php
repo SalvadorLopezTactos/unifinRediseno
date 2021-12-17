@@ -12,6 +12,7 @@
 $dictionary['ProductCategory'] = array(
     'favorites' => false,
     'table' => 'product_categories',
+    'archive' => false,
     'unified_search' => true,
     'full_text_search' => true,
     'unified_search_default_enabled' => true,

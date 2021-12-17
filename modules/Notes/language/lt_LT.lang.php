@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Užrašų sąrašo ataskaitų sritis',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Pastabų ataskaitų sritis',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ pastabos',
 
+    'LBL_RELATED_CONTACT' => 'Susiję kontaktai',
     'ERR_DELETE_RECORD' => 'Jūs turite nurodyti įrašo numerį, kad galėtumėte ištrinti klientą.',
     'LBL_ACCOUNT_ID' => 'Kliento ID:',
     'LBL_CASE_ID' => 'Aptarnavimo ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontakto ID:',
     'LBL_CONTACT_NAME' => 'Kontaktas:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Užrašai',
+    'LBL_ATTACHMENTS' => 'Priedai',
+    'LBL_ATTACHMENT_FLAG' => 'Yra prisegtukas',
     'LBL_DESCRIPTION' => 'Aprašymas',
     'LBL_EMAIL_ADDRESS' => 'El. paštas:',
     'LBL_EMAIL_ATTACHMENT' => 'Prisegtukas',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Prisegtukai',
     'LBL_NOTE' => 'Pastaba:',
     'LBL_OPPORTUNITY_ID' => 'Pardavimo ID:',
+    'LBL_NOTE_PARENT_ID' => 'Atsižvelkite į pagrindinį ID:',
     'LBL_PARENT_ID' => 'Pagrindinis ID:',
     'LBL_PARENT_TYPE' => 'Pagrindio tipas',
     'LBL_EMAIL_TYPE' => 'El. pašto tipas',

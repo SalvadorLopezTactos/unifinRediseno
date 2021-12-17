@@ -9,7 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 
 /**
- * Event Arguments used when a Driver connection is established inside Doctrine\DBAL\Connection.
+ * Event Arguments used when a Driver connection is established inside {@link Connection}.
  */
 class ConnectionEventArgs extends EventArgs
 {
@@ -30,6 +30,8 @@ class ConnectionEventArgs extends EventArgs
     }
 
     /**
+     * @deprecated Use ConnectionEventArgs::getConnection() and Connection::getDriver() instead.
+     *
      * @return Driver
      */
     public function getDriver()
@@ -38,6 +40,8 @@ class ConnectionEventArgs extends EventArgs
     }
 
     /**
+     * @deprecated Use ConnectionEventArgs::getConnection() and Connection::getDatabasePlatform() instead.
+     *
      * @return AbstractPlatform
      */
     public function getDatabasePlatform()
@@ -46,6 +50,8 @@ class ConnectionEventArgs extends EventArgs
     }
 
     /**
+     * @deprecated Use ConnectionEventArgs::getConnection() and Connection::getSchemaManager() instead.
+     *
      * @return AbstractSchemaManager
      */
     public function getSchemaManager()

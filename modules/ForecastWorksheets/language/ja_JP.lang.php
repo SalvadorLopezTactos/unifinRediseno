@@ -33,7 +33,7 @@ $mod_strings = array (
     //var defs
     'LBL_TIMEPERIOD_NAME' => '期間',
     'LBL_USER_NAME' => 'ユーザ名',
-    'LBL_REPORTS_TO_USER_NAME' => '報告先',
+    'LBL_REPORTS_TO_USER_NAME' => '上司',
 
     //forecast table
     'LBL_FORECAST_ID' => '売上予測ID',

@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Електронно табло със списък на проблемите',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Електронно табло със запис на проблемите',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на бъгове',
 
   'LBL_MODULE_NAME' => 'Проблеми',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Проблем',

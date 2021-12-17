@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Creado por ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Creado por nombre de usuario',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nombre de usuario asignado',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las etiquetas',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Cuadro de mando del registro de etiquetas',
+    'LBL_MY_TAGS' => 'Mis etiquetas',
+    'LBL_MY_FAVORITE_TAGS' => 'Mis etiquetas favoritas',
 );

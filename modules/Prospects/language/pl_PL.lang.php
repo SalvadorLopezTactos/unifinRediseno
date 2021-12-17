@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Pulpit list docelowych',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Pulpit rekordów docelowych',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy odbiorców',
 
   'LBL_MODULE_NAME' => 'Odbiorcy',
   'LBL_MODULE_NAME_SINGULAR' => 'Odbiorca',

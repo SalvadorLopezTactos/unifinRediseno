@@ -63,6 +63,9 @@ class OutboundEmail extends SugarBean
         'mail_smtpssl',
         'mail_smtpuser',
         'mail_smtppass',
+        'mail_authtype',
+        'eapm_id',
+        'authorized_account',
     );
 
     protected $userSystemFields = array(
@@ -86,6 +89,9 @@ class OutboundEmail extends SugarBean
     public $mail_smtpauth_req;
     public $mail_smtpssl = 1;
     public $mail_smtpdisplay; // calculated value, not in DB
+    public $eapm_id;
+    public $authorized_account;
+    public $mail_authtype;
 
     /**
      * @var null|OutboundEmail
@@ -152,7 +158,7 @@ class OutboundEmail extends SugarBean
         if (empty($this->mail_smtpserver)) {
             return false;
         } elseif ($this->mail_smtpauth_req) {
-            return !empty($this->mail_smtpuser) && !empty($this->mail_smtppass);
+            return (!empty($this->mail_smtpuser) && !empty($this->mail_smtppass)) || !empty($this->eapm_id);
         }
 
         return true;
@@ -184,9 +190,11 @@ class OutboundEmail extends SugarBean
      * @param string $user_id
      * @param string $user_name
      * @param string $user_pass
+     * @param string $eapm_id
+     * @param string $authorized_account
      * @return OutboundEmail
      */
-    public function createUserSystemOverrideAccount($user_id, $user_name = '', $user_pass = '')
+    public function createUserSystemOverrideAccount($user_id, $user_name = '', $user_pass = '', $eapm_id = '', $authorized_account = '')
     {
         $ob = $this->getUsersMailerForSystemOverride($user_id);
         $saveIt = false;
@@ -206,6 +214,8 @@ class OutboundEmail extends SugarBean
             $ob->type = static::TYPE_SYSTEM_OVERRIDE;
             $ob->mail_smtpuser = $user_name;
             $ob->mail_smtppass = $user_pass;
+            $ob->eapm_id = $eapm_id;
+            $ob->authorized_account = $authorized_account;
 
             if ($user) {
                 $ob->populateFromUser($user);
@@ -220,6 +230,16 @@ class OutboundEmail extends SugarBean
 
             if (!empty($user_pass) && $user_pass !== $ob->mail_smtppass) {
                 $ob->mail_smtppass = $user_pass;
+                $saveIt = true;
+            }
+
+            if (!empty($eapm_id) && $eapm_id !== $ob->eapm_id) {
+                $ob->eapm_id = $eapm_id;
+                $saveIt = true;
+            }
+
+            if (!empty($authorized_account) && $authorized_account !== $ob->authorized_account) {
+                $ob->authorized_account = $authorized_account;
                 $saveIt = true;
             }
         }
@@ -778,10 +798,12 @@ class OutboundEmail extends SugarBean
             $this->createUserSystemOverrideAccount($this->user_id, $oe_system->mail_smtpuser, $oe_system->mail_smtppass);
         }
         else if ($this->doesUserOverrideAccountRequireCredentials($this->user_id) ||
-                 $this->isAllowUserAccessToSystemDefaultOutbound() ||
-                   ( $oe_override->mail_smtpauth_req &&
-                     $oe_override->mail_smtpserver == $oe_system->mail_smtpserver &&
-                     ( empty($oe_override->mail_smtpuser) || ($oe_system->mail_smtpuser==$oe_override->mail_smtpuser) || empty($oe_override->mail_smtppass))) ) {
+            $this->isAllowUserAccessToSystemDefaultOutbound() ||
+            ($oe_override->mail_smtpauth_req &&
+                $oe_override->mail_smtpserver == $oe_system->mail_smtpserver &&
+                (empty($oe_override->mail_smtpuser) ||
+                    ($oe_system->mail_smtpuser == $oe_override->mail_smtpuser) ||
+                    (empty($oe_override->mail_smtppass) && empty($oe_override->eapm_id))))) {
             $this->updateAdminSystemOverrideAccount();
         }
 
@@ -829,13 +851,9 @@ class OutboundEmail extends SugarBean
      *
      * {@inheritdoc}
      */
-    public function mark_deleted($id)
+    protected function doMarkDeleted(): void
     {
-        if ($this->id !== $id) {
-            return false;
-        }
-
-        return $this->delete();
+        $this->delete();
     }
 
     /**

@@ -45,6 +45,9 @@ $dictionary['EmbeddedFile'] = array(
         'taggable',
         'commentlog',
     ),
+    'portal_visibility' => [
+        'class' => 'KBContents',
+    ],
 );
 
 VardefManager::createVardef(

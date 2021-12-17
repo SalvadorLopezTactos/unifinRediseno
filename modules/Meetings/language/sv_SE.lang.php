@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Instrumentpanel med möteslista',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Instrumentpanel med mötesposter',
+    'LBL_LEAD_GUESTS' => 'Ledande gäster',
+    'LBL_CONTACT_GUESTS' => 'Kontakta gäster',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för möten',
 
 	'ERR_DELETE_RECORD' => 'Ett postnummer måste specificeras för att kunna radera mötet.',
 	'LBL_ACCEPT_THIS'=>'Acceptera?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Riktning',
 	'LBL_LIST_DUE_DATE'=>'Genomförandedatum',
 	'LBL_LIST_FORM_TITLE' => 'Lista möten',
-	'LBL_LIST_MY_MEETINGS' => 'Mina möten',
+    'LBL_LIST_MY_MEETINGS' => 'Mina möten',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Mina Schemalagda Möten',
+    'LBL_GUEST_MEETINGS' => 'Mina möten som gäst',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Schemalagda möten som gäst',
 	'LBL_LIST_RELATED_TO' => 'Relaterad till',
 	'LBL_LIST_STATUS'=>'Status',
 	'LBL_LIST_SUBJECT' => 'Ämne',

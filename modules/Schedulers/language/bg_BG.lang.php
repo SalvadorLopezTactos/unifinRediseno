@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Планирана дейност',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Регенерирай денормализираните защитени данни за екипа',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Изчистване на дейности',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Актуализиране на дефиниция на продукт',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Графици за време на процес',
+'LBL_OOTB_DATA_ARCHIVER' => 'Изпълнение на архиви/изтривания на активни данни',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Интервал на изпълнение:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Винаги',
 'LBL_CATCH_UP' => 'Изпълни, ако е пропуснато',
+'LBL_SYSTEM_JOB' => 'Текуща система на работа?',
 'LBL_CATCH_UP_WARNING' => 'Uncheck if this Job may take more than a moment to run.',
 'LBL_DATE_TIME_END' => 'Крайна дата и час',
 'LBL_DATE_TIME_START' => 'Начална дата и час',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Премахване на файловете на инструмента за диагностика',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Премахване на временните файлове',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Регенерирай денормализираните защитени данни за екипа',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Актуализиране на дефиниция на продукт',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Изпращане на електронни писма от кампании',
 'LBL_ASYNCMASSUPDATE' => 'Изпъняване на асинхронни масови актуализации',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Изчистване на опашките от заявки',
 'LBL_CLEANOLDRECORDLISTS' => 'Изчистване на списъците със стари записи',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Изчистване на дейности',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Графици за време на процес',
 'LBL_PMSEENGINECRON' => 'Автоматизирани задачи на SugarBPM',
 );
 

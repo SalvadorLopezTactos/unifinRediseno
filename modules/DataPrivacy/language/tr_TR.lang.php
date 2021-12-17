@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Silinecek Olarak İşaretlenen Alanlar',
     'LBL_NO_RECORDS_MARKED' => 'Silinecek Alanlar veya Kayıtlar işaretlenmedi.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Veri Gizliliği Kaydı Panosu',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Veri Gizliliği Odak Bölmesi',
 
     // list view
     'LBL_HELP_RECORDS' => 'Veri Gizliliği modülü, şirketinizin gizlilik prosedürlerinizi desteklemek için izin verme ve reddetme istekleri dahil gizlilik aktivitelerini takip eder. İzni takip etmek veya bir gizlilik isteği hakkında işlem yapmak için bir kişinin kaydıyla (ör. bir kontak) bağlantılı veri gizliliği kayıtları oluşturun.',

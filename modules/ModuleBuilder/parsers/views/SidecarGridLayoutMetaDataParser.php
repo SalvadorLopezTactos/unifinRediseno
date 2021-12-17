@@ -450,7 +450,8 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                             $source = $this->_originalViewDef[$fieldName];
                         }
                         elseif (isset($fielddefs[$fieldName])) {
-                            $source = self::_trimFieldDefs($fielddefs[$fieldName]);
+                            $trimmedDef = self::trimReadonlyFields($fielddefs[$fieldName]);
+                            $source = self::_trimFieldDefs($trimmedDef);
                         }
                         else {
                             $source = $cell;

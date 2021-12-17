@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Notlar Listesi Panosu',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Notlar Kaydı Panosu',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notlar Odak Bölmesi',
 
+    'LBL_RELATED_CONTACT' => 'İlişkili Kontak',
     'ERR_DELETE_RECORD' => 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
     'LBL_ACCOUNT_ID' => 'Müşteri ID:',
     'LBL_CASE_ID' => 'Talep ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontak ID:',
     'LBL_CONTACT_NAME' => 'Kontak:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notlar',
+    'LBL_ATTACHMENTS' => 'Ekler',
+    'LBL_ATTACHMENT_FLAG' => 'Ek',
     'LBL_DESCRIPTION' => 'Not',
     'LBL_EMAIL_ADDRESS' => 'E-Posta Adresi:',
     'LBL_EMAIL_ATTACHMENT' => 'E-Posta Eki',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Ekler',
     'LBL_NOTE' => 'Not:',
     'LBL_OPPORTUNITY_ID' => 'Fırsat ID:',
+    'LBL_NOTE_PARENT_ID' => 'Üst ID&#39;yi Belirtin:',
     'LBL_PARENT_ID' => 'Üst Kayıt ID:',
     'LBL_PARENT_TYPE' => 'Üst Kayıt Tipi',
     'LBL_EMAIL_TYPE' => 'E-posta Türü',

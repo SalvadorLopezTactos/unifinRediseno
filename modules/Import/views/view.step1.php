@@ -142,7 +142,9 @@ class ImportViewStep1 extends ImportView
         foreach ($beanList as $moduleName => $beanName)
         {
             $tmp = BeanFactory::newBean($moduleName);
-            if( !empty($tmp->importable) && ($tmp instanceof Person)) {
+            if (!empty($tmp->importable) &&
+                ($tmp instanceof Person) &&
+                !$this->isLimitedForModuleInIdmMode($moduleName)) {
                 $results[$moduleName] = $moduleName;
             }
         }
@@ -352,6 +354,9 @@ YAHOO.util.Event.onDOMReady(function(){
 
     $(window).on("message", function(e) {
         var data = $.parseJSON(e.originalEvent.data);
+        if (data.dataSource !== 'googleOauthRedirect') {
+            return;
+        }
         if (data.result) {
             if (!data.hasRefreshToken) {
                 alert("The application is unable to work in offline mode. Please sign out and sign in again.");

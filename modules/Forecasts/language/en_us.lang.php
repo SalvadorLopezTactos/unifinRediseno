@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Forecasts Dashboard',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Forecasts Record Dashboard',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Forecasts',

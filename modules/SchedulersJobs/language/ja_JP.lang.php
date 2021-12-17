@@ -98,24 +98,24 @@ $mod_strings = array(
 <ul>
     <li>アクセス キー ID: <i>Amazon SQS のアクセス キー ID を入力します</i></li>
     <li>秘密のアクセス キー: <i>Amazon SQSの秘密のアクセス キーを入力します</i></li>
-    <li>地域: <i>Amazon SQS サーバの地域を入力します</i></li>
-    <li>キュー名: <i>Amazon SQS サーバのキュー名を入力します</i></li>
+    <li>地域: <i>Amazon SQS サーバーの地域を入力します</i></li>
+    <li>キュー名: <i>Amazon SQS サーバーのキュー名を入力します</i></li>
 </ul>",
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP 構成のヘルプ',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP 構成セクション</b></p>
 <ul>
-    <li>サーバ URL: <i>Enter your message queue server's URL.</i></li>
+    <li>サーバー URL: <i>Enter your message queue server's URL.</i></li>
     <li>Login: <i>RabbitMQ のログインを入力します</i></li>
     <li>Password: <i>RabbitMQ のパスワードを入力します</i></li>
 </ul>",
     'LBL_CONFIG_GEARMAN_TITLE' => 'Gearman 構成のヘルプ',
     'LBL_CONFIG_GEARMAN_TEXT' => "<p><b>Gearman 構成セクション</b></p>
 <ul>
-    <li>サーバ URL: <i>メッセージ キュー サーバの URL を入力します</i></li>
+    <li>サーバー URL: <i>メッセージ キュー サーバーの URL を入力します</i></li>
 </ul>",
     'LBL_CONFIG_QUEUE_TYPE' => 'アダプター',
     'LBL_CONFIG_QUEUE_MANAGER' => 'ランナー',
-    'LBL_SERVER_URL' => 'サーバ URL',
+    'LBL_SERVER_URL' => 'サーバー URL',
     'LBL_LOGIN' => 'ログイン',
     'LBL_ACCESS_KEY' => 'アクセスキー ID',
     'LBL_REGION' => '地域',

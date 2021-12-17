@@ -10,5 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['EmailTemplates']['base']['filter']['default'] = array(
-    'default_filter' => 'all_email_type',
+    'default_filter' => 'all_records',
+    'fields' => array(
+        'name' => array(),
+        'type' => array(),
+        'description' => array(),
+        'date_entered' => array(),
+        'date_modified' => array(),
+        'assigned_user_name' => array(),
+        'tag' => array(),
+        '$owner' => array(
+            'predefined_filter' => true,
+            'vname' => 'LBL_CURRENT_USER_FILTER',
+        ),
+        '$favorite' => array(
+            'predefined_filter' => true,
+            'vname' => 'LBL_FAVORITES_FILTER',
+        ),
+    ),
 );

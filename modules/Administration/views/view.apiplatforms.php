@@ -37,10 +37,15 @@ class AdministrationViewApiplatforms extends SugarView
         }
 
         $allPlatforms = MetaDataManager::getPlatformList();
-        $api_platforms = array_map(function($platform) use ($platforms){
+        $platformOptions = MetaDataManager::getPlatformOptions();
+        $api_platforms = array_map(function ($platform) use ($platforms, $platformOptions) {
+            // If not set in platformoptions, defaults to true. If set, we use the value set in metadata
+            $enableNotifications = isset($platformOptions[$platform]) && isset($platformOptions[$platform]['enable_notifications']) ?
+                isTruthy($platformOptions[$platform]['enable_notifications']) : true;
             return [
                 'name' => $platform,
-                'custom' => in_array($platform, $platforms)
+                'custom' => in_array($platform, $platforms),
+                'enable_notifications' => $enableNotifications,
             ];
         }, $allPlatforms);
         $this->ss->assign('api_platforms', json_encode($api_platforms));

@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Ütemezett feladat',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalizált csapat biztonsági adatok újraépítése',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Tevékenységfolyam törlő',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Termékmeghatározás frissítése',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Folyamat időtudatos beosztása',
+'LBL_OOTB_DATA_ARCHIVER' => 'Aktív adatarchívum futtatása/Törlések',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervallum:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Mindig',
 'LBL_CATCH_UP' => 'Végrehajtás, ha nem talált',
+'LBL_SYSTEM_JOB' => 'Aktuális feladatrendszer?',
 'LBL_CATCH_UP_WARNING' => 'Törölje, ha ennek a munkának a futtatása több időt vehet igénybe!',
 'LBL_DATE_TIME_END' => 'Befejezés dátuma és ideje',
 'LBL_DATE_TIME_START' => 'Kezdés dátuma és ideje',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnosztikai eszközfájlok törlése',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Ideiglenes fájlok törlése',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Denormalizált csapat biztonsági adatok újraépítése',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Termékmeghatározás frissítése',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Tömeges kampány emailek éjszakai kiküldése',
 'LBL_ASYNCMASSUPDATE' => 'Aszinkron tömeges frissítések végrehajtása',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Munkalista törlése',
 'LBL_CLEANOLDRECORDLISTS' => 'Régi rekord listák törlése',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Tevékenységfolyam törlő',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Folyamat időtudatos beosztása',
 'LBL_PMSEENGINECRON' => 'SugarBPM Ütemező',
 );
 

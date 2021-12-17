@@ -17,18 +17,19 @@
 
 <div style='float:left; width: 50%;' class="calendarButtons">
 {foreach name=tabs from=$tabs key=k item=tab}
-	<input type="button" class="button" {if $view == $tab} selected {/if} id="{$tabs_params[$tab].id}" title="{$tabs_params[$tab].title}" value="{$tabs_params[$tab].title}" onclick="{$tabs_params[$tab].link}">
+	<input type="button" class="button" {if $view == $tab} selected {/if} id="{$tabs_params[$tab].id|escape:'html':'UTF-8'}"
+		title="{$tabs_params[$tab].title|escape:'html':'UTF-8'}" value="{$tabs_params[$tab].title}" onclick="{$tabs_params[$tab].link|escape:'html':'UTF-8'}">
 {/foreach}
 </div>
 
 <div style="float:left; text-align: right; width: 50%; font-size: 12px;"  class="calendarButtons">
 	{if $view == "shared"}
-		<button id="userListButtonId" type="button" class="button" onclick="javascript: CAL.toggle_shared_edit('shared_cal_edit');">{$MOD.LBL_EDIT_USERLIST}</button>
+		<button id="userListButtonId" type="button" class="button" onclick="javascript: CAL.toggle_shared_edit('shared_cal_edit');">{$MOD.LBL_EDIT_USERLIST|escape:'html':'UTF-8'}</button>
 	{/if}
 	{if $view != 'year' && !$print}
 	<span class="dateTime">
-					<img border="0" src="{$cal_img}" alt="{$APP.LBL_ENTER_DATE}" id="goto_date_trigger" align="absmiddle">
-					<input type="hidden" id="goto_date" name="goto_date" value="{$current_date}">
+		<img border="0" src="{$cal_img|escape:'html':'UTF-8'}" alt="{$APP.LBL_ENTER_DATE|escape:'html':'UTF-8'}" id="goto_date_trigger" align="absmiddle">
+		<input type="hidden" id="goto_date" name="goto_date" value="{$current_date|escape:'html':'UTF-8'}">
 					<script type="text/javascript">
 					Calendar.setup ({literal}{{/literal}
 						inputField : "goto_date",
@@ -36,10 +37,10 @@
 						daFormat : "%m/%d/%Y",
 						button : "goto_date_trigger",
 						singleClick : true,
-						dateStr : "{$current_date}",
+						dateStr : "{$current_date|escape:'javascript':'UTF-8'}",
 						step : 1,
 						onUpdate: goto_date_call,
-						startWeekday: {$start_weekday},
+						startWeekday: {$start_weekday|escape:'javascript':'UTF-8'},
 						weekNumbers:false
 					{literal}}{/literal});
 					{literal}
@@ -63,7 +64,7 @@
 
 <div class="{if $controls}monthHeader{/if}">
 	<div style='float: left; width: 20%;'>{$previous}</div>
-	<div style='float: left; width: 60%; text-align: center;'><h3>{$date_info}</h3></div>
+	<div style='float: left; width: 60%; text-align: center;'><h3>{$date_info|escape:'html':'UTF-8'}</h3></div>
 	<div style='float: right;'>{$next}</div>
 	<br style='clear:both;'>
 </div>

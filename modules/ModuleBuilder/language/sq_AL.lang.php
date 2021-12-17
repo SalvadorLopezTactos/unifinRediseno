@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfiguroni portalin',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Aktivizo portalin',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivizo kërkimin përpara se të hapësh një rast',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Lejo përdoruesit e portalit që të mbyllin rastin',
     'LBL_PORTAL_THEME' => 'Tema e portalit',
     'LBL_PORTAL_ENABLE' => 'Aktivizo',
     'LBL_PORTAL_SITE_URL' => 'Sajti i portalit tuaj është në dispozicion në:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selekto për të përdorur këtë fushë kur kërkoni regjistrimet duke përdorur Kërkimin Global në këtë modul.',
+'LBL_POPHELP_REQUIRED'=>"Krijo një formulë për të përcaktuar nëse kjo fushë kërkohet në formatime.<br/>"
+    . "Fushat e kërkuara do të ndjekin formulën në pamjen celulare të bazuar në shfletues,<br/>"
+    . "por nuk do të ndjekin formulën në aplikacionet origjinale, si \"Sugar Mobile\" për \"iPhone\". <br/>"
+    . "Ato nuk do të ndjekin formulën në portalin e vetëshërbimit të \"Sugar\".",
+'LBL_POPHELP_READONLY'=>"Krijo një formulë për të përcaktuar nëse kjo fushë është vetëm për lexim në formate.<br/>"
+        . "Fushat vetëm për lexim do të ndjekin formulën në pamjen celulare të bazuar në shfletues,<br/>"
+        . "por nuk do të ndjekin formulën në aplikacionet origjinale, si \"Sugar Mobile\" për \"iPhone\". <br/>"
+        . "Ato nuk do të ndjekin formulën në portalin e vetëshërbimit të \"Sugar\".",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Zgjidh të përdorësh këtë fushë kur kërkon për regjistrime duke përdorur "Kërkimi global" në këtë modul.',
 //Revert Module labels
 'LBL_RESET' => 'Rivendos',
 'LBL_RESET_MODULE' => 'Rivendosni Module',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Enkriptim',
                 'datetimecombo' =>'Data dhe koha',
                 'decimal'=>'Dhjetor',
+                'autoincrement' => 'Rritje automatike',
 ),
 'labelTypes' => array(
     "" => "Labelat e përdorura shpesh",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Të gjitha Modulet',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => 'LBL_E_NDERLIDHUR_FUSHE_ID_EMRI_ETIKETIM',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopjo nga faqosja',
+'LBL_RELATIONSHIP_TYPE' => 'Lidhja',
 );

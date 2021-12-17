@@ -142,8 +142,6 @@
         this.$('.connected-containers').sortable({
             // the items to make sortable
             items: '.sortable-item',
-            // make the "helper" row (the row the user actually drags around) a clone of the original row
-            helper: 'clone',
             // adds a slow animation when "dropping" a group, removing this causes the row
             // to immediately snap into place wherever it's sorted
             revert: true,

@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => '발신 이메일 계정',
     'LBL_MODULE_NAME_SINGULAR' => '발신 이메일 계정',
+    'LBL_STATUS' => '상태',
     'LBL_MAIL_SENDTYPE' => '메일 이전 대행',
     'LBL_MAIL_SMTPSERVER' => '서버',
     'LBL_MAIL_SMTPPORT' => '포트',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => '이것은 시스템 계정입니다.',
     'LBL_EMAIL_ADDRESS_ID' => '이메일 주소 ID',
     'LBL_TYPE' => '유형',
+    'LBL_AUTHORIZED_ACCOUNT' => '인증된 이메일 주소',
+    'LBL_FROM_EMAIL_ADDRESS' => '발신 이메일 주소',
     'LBL_REPLY_TO_NAME' => '답장할 이름',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => '답장할 이메일 주소',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '답장할 이메일 주소 ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => '답장할 이메일 주소',
     'LBL_PRIMARY_TEAM' => '기본 팀',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '이메일 설정 포커스 서랍',
 );

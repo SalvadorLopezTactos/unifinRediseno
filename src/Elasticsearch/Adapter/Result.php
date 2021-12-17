@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Adapter;
 
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 use Sugarcrm\Sugarcrm\SearchEngine\Capability\Aggregation\ResultInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Result\ParserInterface;
 
@@ -68,9 +69,17 @@ class Result implements ResultInterface
      */
     public function getModule()
     {
-        return $this->result->getType();
+        $data = $this->getData();
+        return $data[Mapping::MODULE_NAME_FIELD] ?? $this->result->getParam(Mapping::MODULE_NAME_FIELD) ?? null;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getType() : ?string
+    {
+        return $this->getModule();
+    }
     /**
      * {@inheritdoc}
      */

@@ -290,6 +290,7 @@ FieldPanel.prototype._onItemValueActionHandler = function () {
 
 FieldPanel.prototype.addItem = function (item) {
     if(!FieldPanelItemFactory.isProduct(item)) {
+        item._parent = this;
         item = FieldPanelItemFactory.make(item);
     }
     if(!FieldPanelItemFactory.isProduct(item)) {

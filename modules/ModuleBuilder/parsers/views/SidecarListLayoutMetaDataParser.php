@@ -143,7 +143,9 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
             if (isset($def['fields'])) {
                 foreach ($def['fields'] as $field) {
                     if (!is_array($field) && !empty($this->_fielddefs[$field])) {
+                        $fieldName = $field;
                         $field = self::_trimFieldDefs($this->_fielddefs[$field]);
+                        $field['name'] = $fieldName;
                         $field['default'] = true;
                     }
                     if (!empty($field['name'])) {
@@ -208,7 +210,9 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
             if (is_array($panel) && isset($panel['fields']) && is_array($panel['fields'])) {
                 foreach ($panel['fields'] as $field) {
                     if (!is_array($field) && !empty($this->_fielddefs[$field])) {
+                        $fieldName = $field;
                         $field = self::_trimFieldDefs($this->_fielddefs[$field]);
+                        $field['name'] = $fieldName;
                     }
                     if (isset($field['name']) && !$this->panelHasField($field['name']) || (isset($field['enabled']) && $field['enabled'] == false)) {
                         if (!isset($field['label']) && !isset($field['vname'])) {
@@ -282,7 +286,9 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
             if (isset($def['fields']) && is_array($def['fields'])) {
                 foreach ($def['fields'] as $fieldix => $field) {
                     if (!is_array($field) && !empty($this->_fielddefs[$field])) {
+                        $fieldName = $field;
                         $field = self::_trimFieldDefs($this->_fielddefs[$field]);
+                        $field['name'] = $fieldName;
                     }
                     if (isset($field['name']) && $field['name'] == $name) {
                         return array('field' => $field, 'panelix' => $panelix, 'fieldix' => $fieldix);
@@ -436,17 +442,6 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
                 }
 
                 $newPaneldefIndex++;
-            }
-        }
-
-        // Add in the non named field meta
-        foreach ($this->_paneldefs as $panel) {
-            if (isset($panel['fields']) && is_array($panel['fields'])) {
-                foreach ($panel['fields'] as $field) {
-                    if (!isset($field['name'])) {
-                        $newPaneldefs[$newPaneldefIndex++] = $field;
-                    }
-                }
             }
         }
 
@@ -782,7 +777,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
      */
     public function setDefReadonly($rawDef, $fieldDef)
     {
-        if (isset($rawDef['readonly'])) {
+        if (isset($rawDef['readonly']) && empty($rawDef['readonly_formula'])) {
             $fieldDef['readonly'] = $rawDef['readonly'];
         }
 

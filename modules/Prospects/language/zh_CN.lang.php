@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => '目标列表仪表板',
   'LBL_TARGETS_RECORD_DASHBOARD' => '目标记录仪表板',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => '目标焦点抽屉',
 
   'LBL_MODULE_NAME' => '目标',
   'LBL_MODULE_NAME_SINGULAR' => '目标',

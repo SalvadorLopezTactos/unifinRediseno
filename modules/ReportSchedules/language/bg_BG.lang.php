@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'По справка',
     'LBL_RECENTLY_MODIFIED' => 'Наскоро променени записи',
     'LBL_RECORD_SAVED_SUCCESS' => 'Успешно създадохте {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Влезте в графика, за да добавите потребители през панела със свързани записи на потребителите.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'График на тази справка',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Електронно табло със запис на графици на справки',
 );

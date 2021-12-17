@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Nije pronađen popis meta vrste „zadano”',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nije pronađen nijedan unos',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Unosi su obrađeni',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Postavke dolazne e-pošte',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Postavke e-pošte sustava',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Naziv pratitelja:',
   'LBL_EDIT_TRACKER_URL'=>'URL adresa pratitelja:',

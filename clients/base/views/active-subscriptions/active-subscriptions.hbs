@@ -11,7 +11,7 @@
  */
 --}}
 <div class="active-subscriptions">
-    {{#if opportunitiesWithRevenueLineItems}}
+    {{#if purchasesModule}}
         {{#if collection.dataFetched}}
             {{#if collection.models.length}}
                 {{#each collection.models}}
@@ -25,7 +25,7 @@
                             <div class="row-left">
                                 <a class="row-cell secondary" data-placement="bottom" rel="tooltip"
                                    title="{{fieldValue this "name"}}"
-                                   href="#RevenueLineItems/{{attributes.id}}">{{fieldValue this "name"}}</a>
+                                   href="#{{buildRoute model=this}}">{{fieldValue this "name"}}</a>
                                 <div class="row-cell">{{str "LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY" attributes._module attributes}}</div>
                             </div>
                         </div>

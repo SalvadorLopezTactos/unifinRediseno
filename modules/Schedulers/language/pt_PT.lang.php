@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tarefa Calendarizada',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruir a Equipa de Segurança de Dados não normalizados',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Purificador da cadeia de actividades',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Actualizar definição do produto',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Calendários sensíveis ao tempo do processo',
+'LBL_OOTB_DATA_ARCHIVER' => 'Executar eliminações/arquivamentos de dados activos',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalo:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Sempre',
 'LBL_CATCH_UP' => 'Executar Se Falhar',
+'LBL_SYSTEM_JOB' => 'É um sistema de trabalho actual?',
 'LBL_CATCH_UP_WARNING' => 'Desmarque se esta Tarefa levar mais do que um momento para se executada.',
 'LBL_DATE_TIME_END' => 'Data e Hora de Fim',
 'LBL_DATE_TIME_START' => 'Data e Hora de Início',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Remover ficheiros da ferramenta de diagnósticos',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Remover ficheiros temporários',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstruir a Equipa de Segurança de Dados não normalizados',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Actualizar definição do produto',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar toda a noite campanhas de e-mail massivo',
 'LBL_ASYNCMASSUPDATE' => 'Realizar actualizações em massa de forma assíncrona',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Limpar a Fila de Trabalhos',
 'LBL_CLEANOLDRECORDLISTS' => 'Limpar Listas de Registos Antigos',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Purificador da cadeia de actividades',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Calendários sensíveis ao tempo do processo',
 'LBL_PMSEENGINECRON' => 'Calendarizador SugarBPM',
 );
 

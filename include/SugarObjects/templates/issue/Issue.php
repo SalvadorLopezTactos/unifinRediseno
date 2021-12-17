@@ -284,10 +284,12 @@ class Issue extends Basic
 
         $id = parent::save($check_notify);
 
-        $changeTimerFields = $this->getChangeTimerFields();
-        if (!empty($changeTimerFields) && SugarBean::enterOperation('saving_change_timer')) {
-            $this->processChangeTimers($changeTimerFields);
-            SugarBean::leaveOperation('saving_change_timer');
+        if ($this->isLicensedForServe()) {
+            $changeTimerFields = $this->getChangeTimerFields();
+            if (!empty($changeTimerFields) && SugarBean::enterOperation('saving_change_timer')) {
+                $this->processChangeTimers($changeTimerFields);
+                SugarBean::leaveOperation('saving_change_timer');
+            }
         }
 
         return $id;

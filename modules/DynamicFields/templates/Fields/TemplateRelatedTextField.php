@@ -10,8 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 class TemplateRelatedTextField extends TemplateText{
     var $type = 'relate';
+    public $is_relationship_field = false;
+    public $is_custom_relationship = false;
 
     public function __construct()
     {
@@ -285,6 +290,43 @@ class TemplateRelatedTextField extends TemplateText{
             $this->id_name = $id->name;
         }
 
+        if ($this->is_relationship_field) {
+            // For OOTB relate fields, set the `audited` flag to false on the ID
+            // so we don't have two entries in the audit logs.
+            $bean = BeanFactory::newBean($df->getModuleName());
+            $field_defs = $bean->field_defs;
+
+            $idName = $field_defs[$this->name]['id_name'];
+            $idVardef = $field_defs[$idName];
+            $idVardef['audited'] = false;
+
+            $modifiedId = new TemplateId();
+            $modifiedId->name = $idName;
+            $df->writeVardefExtension(BeanFactory::getObjectName($df->getModuleName()), $modifiedId, $idVardef);
+
+            // We also only want to allow changes to a subset of these attributes for now.
+            // If we don't do this then the save will overwrite with default values.
+            // This can do not nice things, like turning off mass update or required.
+            $vardef = $field_defs[$this->name];
+            $allowedChanges = ['labelValue', 'label', 'help', 'comments', 'audited'];
+            foreach ($this->vardef_map as $vardefKey => $field) {
+                if (!in_array($vardefKey, $allowedChanges)) {
+                    $this->$field = $vardef[$vardefKey];
+                }
+            }
+
+            // If this is a relate field tied to a custom relationship, make sure the language key
+            // used for the field is different from the language key used for the relationship. Custom
+            // relationships use the same keys for both the relationship and the relate field, which can
+            // overwrite changes to the field's label when a new relationship is added. When the user
+            // saves the relate field the first time, create a new key to fix this.
+            $labelKey = strtoupper('LBL_' . $this->name . '_FIELD_TITLE');
+            if ($this->is_custom_relationship && $this->vname !== $labelKey) {
+                $df->setLabel($GLOBALS['current_language'], $labelKey, $this->label_value);
+                $this->vname = $labelKey;
+            }
+        }
+
         parent::save($df);
     }
 
@@ -394,6 +436,20 @@ class TemplateRelatedTextField extends TemplateText{
         }
 
         return '';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function populateFromPost(Request $request = null)
+    {
+        if (!$request) {
+            $request = InputValidation::getService();
+        }
+
+        parent::populateFromPost($request);
+        $this->is_relationship_field = !empty($_REQUEST['is_relationship_field']);
+        $this->is_custom_relationship = !empty($_REQUEST['is_custom_relationship']);
     }
 }
 

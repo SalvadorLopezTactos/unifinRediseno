@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Polia označené na vymazanie',
     'LBL_NO_RECORDS_MARKED' => 'Žiadne polia ani záznamy neboli označené na vymazanie.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Informačný panel so záznamami o ochrane osobných údajov',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na ochranu osobných údajov',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modul ochrany osobných údajov sleduje aktivity na ochranu osobných údajov vrátane žiadostí o súhlas a žiadostí subjektu, ktoré podporujú postupy vašej organizácie v oblasti ochrany osobných údajov. Vytvorte záznamy o ochrane osobných údajov, ktoré sa vzťahujú na záznam jednotlivca (napríklad kontakt), aby ste mohli sledovať súhlas alebo prijať opatrenia týkajúce sa žiadosti o ochranu osobných údajov.',

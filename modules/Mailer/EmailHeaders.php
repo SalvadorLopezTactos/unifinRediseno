@@ -286,6 +286,8 @@ class EmailHeaders
      * @param array $headers required The headers array to fill that packaging will return.
      */
     private function packageReplyTo(&$headers) {
+        global $current_user;
+
         $replyTo = $this->getReplyTo();
 
         if (!is_null($replyTo)) {
@@ -298,9 +300,18 @@ class EmailHeaders
                 $headers[self::ReplyTo] = array($replyTo->getEmail(), $replyTo->getName());
             }
         } else {
+            $primary = $current_user->emailAddress->getPrimaryAddress($current_user);
+            $replyTo = $current_user->emailAddress->getReplyToAddress($current_user, true);
+
             // the Reply-To header should always be explicit and match the From header if no Reply-To has been given
-            $from                   = $this->getFrom();
-            $headers[self::ReplyTo] = array($from->getEmail(), $from->getName());
+            $from = $this->getFrom();
+            $fromEmail = $from->getEmail();
+            $headers[self::ReplyTo] = [
+                // defensive code to check the From email address is current user's Primary email address
+                // before assigning Reply-To email address
+                !empty($replyTo) && !empty($primary) && $primary === $fromEmail ? $replyTo : $fromEmail,
+                $from->getName(),
+            ];
         }
     }
 

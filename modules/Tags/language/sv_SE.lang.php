@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Skapad av ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Skapad av användarnamn',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tilldelat användarnamn',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för taggar',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Instrumentpanel för taggposter',
+    'LBL_MY_TAGS' => 'Mina taggar',
+    'LBL_MY_FAVORITE_TAGS' => 'Mina favorittaggar',
 );

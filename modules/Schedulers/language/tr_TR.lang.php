@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Planlanmış İş',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Normalleştirilmemiş Takım Güvenliği Verisini Yeniden Oluştur',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Aktivite Akış Boşaltma Yeri',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Ütün tanımını güncelle',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Süreç Zamanına Duyarlı Planlar',
+'LBL_OOTB_DATA_ARCHIVER' => 'Aktif Veri Arşivlerini / Silme İşlemlerini Çalıştırın',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Sıklık Derecesi:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Her zaman',
 'LBL_CATCH_UP' => 'Vakti geçmiş ise çalıştır',
+'LBL_SYSTEM_JOB' => 'Mevcut iş sistemi mi?',
 'LBL_CATCH_UP_WARNING' => 'Eğer bu iş bir saniyeden daha fazla sürecek ise işareti kaldırın.',
 'LBL_DATE_TIME_END' => 'Bitiş Tarih&Zamanı',
 'LBL_DATE_TIME_START' => 'Başlangıç Tarih&Zamanı',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hata bulma aracı dosyalarını sil',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Geçici dosyaları sil',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Normalleştirilmemiş Takım Güvenliği Verisini Yeniden Oluştur',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Ütün tanımını güncelle',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Gecelik Çalışan Kitlesel E-Posta Kampanyaları',
 'LBL_ASYNCMASSUPDATE' => 'Asenkron Toplu Güncelleme Uygulayın',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'İş Kuyruğunu Temizle',
 'LBL_CLEANOLDRECORDLISTS' => 'Eski Kayıt Listesini Temizle',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktivite Akış Boşaltma Yeri',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Süreç Zamanına Duyarlı Planlar',
 'LBL_PMSEENGINECRON' => 'SugarBPM Planlayıcı',
 );
 

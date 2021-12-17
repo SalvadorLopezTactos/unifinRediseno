@@ -31,6 +31,7 @@ $mod_strings = array(
  'LBL_REMOVE' => 'Премахни',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Модифицирано от',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Създадено от Име',
 
     'LBL_COMMENTLOG' => 'Comment Log',
 );

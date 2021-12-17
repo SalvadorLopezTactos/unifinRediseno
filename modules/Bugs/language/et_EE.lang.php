@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Vigade loendi töölaud',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Veakirjete töölaud',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Vigade fookuse sahtel',
 
   'LBL_MODULE_NAME' => 'Vead',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Viga',

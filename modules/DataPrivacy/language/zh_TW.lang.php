@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => '標記為清除的欄位',
     'LBL_NO_RECORDS_MARKED' => '沒有標記要擦除的欄位或記錄。',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => '資料隱私記錄儀表板',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '數據隱私焦點抽屜',
 
     // list view
     'LBL_HELP_RECORDS' => '資料隱私模組可追蹤隱私活動，包括同意和主題請求，以支援組織的隱私程式。創建與個人記錄 (如連絡人) 相關的資料隱私記錄，以追蹤同意或對隱私請求採取行動。',

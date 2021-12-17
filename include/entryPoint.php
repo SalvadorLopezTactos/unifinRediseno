@@ -27,7 +27,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  * install.php
  * json.php
  * json_server.php
- * leadCapture.php
  * maintenance.php
  * metagen.php
  * pdf.php
@@ -62,7 +61,7 @@ if (strpos(PHP_SAPI, 'cli') !== 0
     stream_wrapper_unregister('phar');
 }
 
-$GLOBALS['starttTime'] = microtime(true);
+$GLOBALS['startTime'] = microtime(true);
 
 if(empty($GLOBALS['installing']) && !file_exists('config.php'))
 {

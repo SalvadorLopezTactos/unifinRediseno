@@ -12,7 +12,8 @@
 *}
 {strip}
     {foreach from=$teams name=tn key=key item=team}
-        {$team.title}{if $team.badges} (<em>{sugar_teamset_badges items=$team.badges}</em>){/if}
+        {$team.title|escape:'html':'UTF-8'}{if $team.badges} (<em>{sugar_teamset_badges items=$team.badges}</em>){/if}
+
         {if !$smarty.foreach.tn.last}, {/if}
     {/foreach}
 {/strip}

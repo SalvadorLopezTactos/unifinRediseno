@@ -349,13 +349,13 @@ class SchedulersJob extends Basic
 
     /**
      * Delete a job
-     * @see SugarBean::mark_deleted($id)
+     * @see SugarBean::doMarkDeleted()
      */
-    public function mark_deleted($id)
+    protected function doMarkDeleted(): void
     {
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
         $conn = $this->db->getConnection();
-        return $conn->executeQuery($query, array($id));
+        $conn->executeQuery($query, [$this->id]);
     }
 
     /**

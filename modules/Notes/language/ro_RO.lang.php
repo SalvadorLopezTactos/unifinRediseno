@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Tabloul de bord Listă note',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Notițe',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare note',
 
+    'LBL_RELATED_CONTACT' => 'Contact corelat',
     'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
     'LBL_ACCOUNT_ID' => 'Identitate Cont',
     'LBL_CASE_ID' => 'Identitate caseta:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Identificare Contact',
     'LBL_CONTACT_NAME' => 'Contact',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Note',
+    'LBL_ATTACHMENTS' => 'Atașamente',
+    'LBL_ATTACHMENT_FLAG' => 'Este atașat',
     'LBL_DESCRIPTION' => 'Nota',
     'LBL_EMAIL_ADDRESS' => 'Adresa Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Atasare email',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Atasate',
     'LBL_NOTE' => 'Nota:',
     'LBL_OPPORTUNITY_ID' => 'Identitate Oportunitate',
+    'LBL_NOTE_PARENT_ID' => 'ID părinte notă:',
     'LBL_PARENT_ID' => 'parent id',
     'LBL_PARENT_TYPE' => 'Tip Parinte',
     'LBL_EMAIL_TYPE' => 'Tip e-mail',

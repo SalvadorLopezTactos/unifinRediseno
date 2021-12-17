@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Klaidų sąrašo ataskaitų sritis',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Klaidų duomenų ataskaitų sritis',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Klaidų „Focus“ stalčius',
 
   'LBL_MODULE_NAME' => 'Klaidos',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Klaida',

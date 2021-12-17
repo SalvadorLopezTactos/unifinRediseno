@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'Imbina inregistrari',
       'VisualPipeline'=>'Sursă vizuală de informații',
       'ConsoleConfiguration' => 'Configurarea consolei',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'Contingente',
     'Teams' => 'Echipe',
     'TeamNotices' => 'Anunturile Echipei',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Reguli operative de proces',
     'pmse_Emails_Templates' => 'Şabloane E-mail proces',
     'BusinessCenters' => 'Centre de afaceri',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'Ture',
+    'ShiftExceptions' => 'Excepții tură',
+    'Purchases' => 'Achiziții',
+    'PurchasedLineItems' => 'Articole achiziționate',
+    'MobileDevices' => 'Dispozitive mobile',
+    'PushNotifications' => 'Notificări Push',
     'WorkFlow' => 'Definitia debitului de munca',
     'EAPM' => 'Conturi externe',
     'Worksheet' => 'Foaie de lucru',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'Informari',
   	'SugarFavorites'=>'Favorite',
 	'PdfManager' => 'Manager PDF',
+    'DataArchiver' => 'Arhivar de date',
+    'ArchiveRuns' => 'Rulări arhivă',
 
     'OAuthKeys' => 'Chei OAuth Consumator',
     'OAuthTokens' => 'Simboluri OAuth',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'Jurnal de comentarii',
     'Holidays' => 'Sărbători',
     'ChangeTimers' => 'Modificare temporizatoare',
+    'Messages' => 'Mesaje',
   ),
 
     'moduleIconList' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'Producator',
     'VisualPipeline' => 'Sursă vizuală de informații',
     'ConsoleConfiguration' => 'ConsoleConfiguration',
+    'MobileDevices' => 'Dispozitiv mobil',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'Contract',
     'Quotes' => 'Ofertă',
     'Products' => 'Element din ofertă',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'Notificare',
     'Sync'=>'Sincronizare',
     'PdfManager' => 'Manager PDF',
+    'DataArchiver' => 'Arhivar de date',
+    'ArchiveRuns' => 'Rulări arhivă',
     'ReportMaker' => 'Raport avansat',
     'DataSets' => 'Format data:',
     'CustomQueries' => 'Intrebare la comanda:',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Regulă operativă de proces',
     'pmse_Emails_Templates' => 'Model email',
     'BusinessCenters' => 'Centru de afaceri',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'Tură',
+    'ShiftExceptions' => 'Excepții tură',
+    'Purchases' => 'Achiziție',
+    'PurchasedLineItems' => 'Articol achiziționat',
+    'PushNotifications' => 'Notificare Push',
     'WorkFlow' => 'Flux de lucru',
     'EAPM' => 'Cont extern',
     'Worksheet' => 'Foaie de lucru',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'Raportare Program',
     'Holidays' => 'Sărbătoare',
     'ChangeTimers' => 'Modificare temporizator',
+    'Messages' => 'Mesaj',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'Utilitati',
     'Other' => 'Altul',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'În desfăşurare',
+        'Completed' => 'Finalizat',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'De intrare',
+        'Outbound' => 'De ieșire',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'Chat',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'Nivel 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'Nivel 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => 'Da',
+      'No' => 'Nu',
+      'Completed' => 'Finalizat',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'Viitor',
+        'Active' => 'Activ',
+        'Past' => 'Trecut',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'Autogenerat',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'Programate',
+    'In Progress' => 'În curs de desfășurare',
     'Held' => 'Desfăşurat',
     'Not Held' => 'Anulat',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'Intalnire:',
     'Calls' => 'Apel',
       'KBContents' => 'Baza de cunostinte',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'Articol achiziționat',
+      'Purchases' => 'Achiziție',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Cont',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'Tinta:',
       'KBContents' => 'Baza de cunostinte',
       'Notes' => 'Notă',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Articol achiziționat',
+    'Purchases' => 'Achiziție',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => 'Portal',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'Intern',
+        'Forum' => 'Forum',
+        'Web' => 'Web',
+        'InboundEmail' => 'E-mail',
+        'Twitter' => 'Twitter',
+        'Portal' => 'Portal',
+        'Phone' => 'Telefon',
+        'Chat' => 'Chat',
+        'Chatbot' => 'Robot de chat',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,9 +2041,16 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Schimb',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'Aplicații mai puțin sigure Google',
+        'exchange' => 'Schimb',
+        'other' => 'Altele',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
         'other' => 'Altele',
     ),
     'import_enclosure_options' =>
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'Da',
         'No' => 'Nu',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'In previziuni',
         'sales_stage' => 'Stadiu vanzare',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'Listă',
         'activities' => 'Flux de activități',
         'multi-line' => 'Listă multiplă',
+        'omnichannel' => 'Omnicanal',
+        'home' => 'Home',
+        'focus' => 'Sertar de focalizare',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'În fiecare oră',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'Zi(le)',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'Întrerupere',
+            'event' => 'Eveniment',
+            'other' => 'Altele',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'Data (ultimul {{module}})',
+            'start_date:asc' => 'Data (primul {{module}})',
+            'total_revenue:desc' => 'Preț (cel mai mare total)',
+            'total_revenue:asc' => 'Preț (cel mai mic total)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Urmareste linkul',
   'LBL_TOGGLE_VISIBILITY' => 'Modifica vizibilitatea', // Record view header panel element
   'LBL_ACTIVITIES' => 'Flux de activităţi',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
         'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
         'SugarCRM ®, Sugar Enterprise™ si Sugar™ sunt marci inregistrate ale SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "Tipareste",
     'LBL_HELP' => "Ajutor",
     'LBL_TOUR' => "Tur",
-    'LBL_TOUR_LINK' => 'Tur - Vizualizați turul pentru recomandări',
+    'LBL_TOUR_LINK' => 'Fă turul acestei pagini',
     'LBL_MOBILE' => "Mobil",
     'LBL_ID_FF_SELECT' => "Selecteaza",
     'DEFAULT'                              => 'Simplu',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'Creeaza semnatura',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'Nume semnatura',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'Corp semnatura',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'Alta optiune',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Aplicații mai puțin sigure Google',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'Alta optiune',
+    'LBL_EMAIL_AUTHORIZE'                   => 'Autorizare',
+    'LBL_EMAIL_AUTHORIZED'                  => 'Autorizat',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'Neautorizat',
+    'LBL_EMAIL_AUTH_WARNING'                => 'Un administrator trebuie să configureze {0} Conector prin Administrator > Conectori înainte să puteți configura acest cont. Pentru mai multe informații, consultați documentația {1}.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'Eroare la recuperarea informațiilor despre conector',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'Eroare de autorizare.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'Autorizați contul înainte de a salva.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'Autorizați contul înainte de testare.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'Contul nu este autorizat',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[ Folder extern ]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ Folder Sugar ]',
     'LBL_EMAIL_SUBJECT'                     => 'Subiect',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'CC',
     'LBL_BCC' => 'BCC',
 
+    'LBL_START_DATE' => 'Data de începere',
+    'LBL_END_DATE' => 'Data de încheiere',
+
     'LBL_LINK_NONE'=> 'Nicio optiune',
     'LBL_LINK_ALL'=> 'Toate optiunile',
     'LBL_LINK_RECORDS'=> 'Inregistrari',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => '  Te rugam sa examinezi mesajul de eroare de mai jos:',
     'NO_QUERY_SELECTED' => 'Formatul de date selectat nu contine o interogare. Selecteaza o interogare personalizata pentru acest format de date.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'A aparut o eroare:',
     'ERR_AJAX_LOAD_FAILURE'     => 'A aparut o eroare la procesarea cererii. Te rugam sa incerci din nou mai tarziu.',
     'ERR_AJAX_LOAD_FOOTER' => 'Daca aceasta eroare persista, cere administratorului de sistem sa dezactiveze Ajax pentru acest modul',
@@ -2793,9 +2890,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'Aceasta functie nu este disponibila in aceasta tema.',
     'ERR_NOT_ADMIN' => "Acces neautorizat in zona de administrare.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'Gestionarea parolei este disponibilă numai în <a href="%s" target="_blank">Setări Cloud</a>.',
+        'Gestionarea parolei este disponibilă numai în Setări SugarCloud <a href="%s" target="_blank"></a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Vă rugăm să luați legătura cu administratorul site-ului web Sugar dacă doriți să modificați câmpurile disponibile numai pentru citire.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Accesați Setări SugarCloud <a href="{0}" target="_blank"></a> pentru a face modificări în câmpurile numai în citire.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Camp obligatoriu lipsa:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Camp obligatoriu invalid:',
     'ERR_INVALID_VALUE' => 'Valoare invalida:',
@@ -2936,6 +3033,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'Adauga',
     'LBL_ADD_BUTTON' => 'Adauga',
+    'LBL_ADD_DASHLET_BUTTON' => 'Adăugare tablouri',
     'LBL_ADD_DOCUMENT' => 'Adauga document',
     'LBL_REPLACE_BUTTON' => 'Inlocuieste',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2966,6 +3064,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'Trimite',
     'LBL_CASE'=>'Tichet',
     'LBL_CASES'=>'Tichete',
+    'LBL_MESSAGE'=>'Mesaj',
+    'LBL_MESSAGES'=>'Mesaje',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Modifica parola',
     'LBL_CHANGE_BUTTON_LABEL' => 'Modifica',
@@ -3192,6 +3292,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'Generează ofertă',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'Nu este disponibil niciun camp pentru operatiunea de actualizare in masa',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'Cererea ta pentru actualizare in masa a fost programata.',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'Data de începere a serviciului depășește Data de încheiere a serviciului',
     'LBL_MASS_UPDATE_SUCCESS' => 'Toate inregistrarile au fost actualizate cu succes.',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'Toate inregistrarile selectate au fost adaugate in lista de suspecti <a href="{{listUrl}}">{{listName}}</a> .',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'Cererea ta de a adauga inregistrarile selectate in lista de suspecti <a href="{{listUrl}}">{{listName}}</a> a fost programata.',
@@ -3427,11 +3528,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'Subiect',
 
     'LBL_INBOUNDEMAIL_ID' => 'ID Primire email',
+    'LBL_EAMP_ID' => 'Autentificare ID token',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Toate drepturile rezervate.<br />SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
         'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
         'companiilor respective cu care sunt asociate.',
@@ -3498,6 +3600,8 @@ $app_strings = array (
     'LBL_USER_MENU' => 'Meniu utilizatori',
     'LBL_USERS_SYNC'=>'Sincronizare utilizatori',
     'LBL_USERS'=>'Utilizatori',
+    'LBL_USER'=>'Utilizator',
+    'LBL_CURRENT_USER'=>'Utilizator Actual',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'Verificare email existent...',
     'LBL_VERIFY_PORTAL_NAME'=>'Verificare nume portal existent...',
     'LBL_VIEW_IMAGE' => 'vizualizeaza',
@@ -3586,6 +3690,8 @@ $app_strings = array (
         'S-a atins numărul de utilizatori prevăzut de licență. Numai utilizatorii existenți se pot autentifica.',
     'WARN_ONLY_ADMINS'=> "Numai administratorii se pot autentifica.",
     'WARN_UNSAVED_CHANGES'=> "Parasesti aceasta inregistrare fara a salva modificarile facute. Esti sigur ca vrei sa parasesti inregistrarea?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Reîmprospătarea browser-ului va închide automat toate sesiunile de apel sau chat SugarLive pe care le-ați deschis și orice modificări nesalvate vor fi pierdute. Doriți să continuați?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Ai efectuat modificari care nu au fost salvate. Esti sigur ca vrei sa parasesti pagina si sa renunti la modificari?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Unul sau mai multe tablouri au modificări nesalvate. Sunteți sigur că doriți să închideți sertarul?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Te muti in modulul Rapoarte. Modificarile facute in acest dashlet nu vor fi salvate. Vrei sa continui?',
@@ -3608,6 +3714,7 @@ $app_strings = array (
     'ERROR_TIME_IS_AFTER' => 'Eroare. Ora din acest câmp trebuie să fie posterioară orei din câmpul {{this}}.',
     'ERROR_NUMBER' => 'Eroare. In acest camp trebuie completat un numar valid.',
     'ERROR_INT' => 'Eroare. Număr întreg nevalid.',
+    'ERROR_URL' => 'Eroare. URL nevalid.',
     'ERROR_NO_BEAN' => 'Nu s-a putut obţine componenta bean.',
     'ERROR_ACCESS_MODULE' => 'Nu ai acces la acest modul.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Eroare. Ataşamentul este prea mare.',
@@ -3691,9 +3798,14 @@ $app_strings = array (
     'LBL_CREATE_OPPORTUNITY' => 'Creeaza oportunitate',
     'LBL_SCHEDULE_CALL' => 'Logheaza apel',
     'LBL_SCHEDULE_MEETING' => 'Programeaza intalnire',
+    'LBL_CREATE_MESSAGE' => 'Creare mesaj',
     'LBL_CREATE_TASK' => 'Creează sarcina',
     'LBL_REMOVE_FROM_FAVORITES' => 'Eliminare din Favoritele mele',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'Descărcare totală',
+    'LBL_DOWNLOAD_ONE' => 'Descărcare',
+    'LBL_ATTACHMENTS' => 'Atașamente',
+    'LBL_ADD_ATTACHMENT' => 'Răsfoire',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Generare formular',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Salveaza formular web de captare prospecti',
@@ -3745,8 +3857,8 @@ $app_strings = array (
     'LBL_DASHLET_REFRESH_LABEL' => 'Refresh',
     'LBL_DASHLET_REMOVE_LABEL' => 'Eliminare',
     'LBL_DASHLET_DROP_HERE' => 'Fixaţi aici',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'Close All',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'Open All',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'Close',
     'LBL_DASHLET_MAXIMIZE' => 'Deschidere',
     'LBL_DASHLET_CONFIGURE' => 'Configurare',
@@ -3768,6 +3880,10 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_NAME' => 'Vizualizare listă',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Listează înregistrări dintr-un anumit modul conform cu criteriile pe care le definiţi.',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'Vizualizare listă consolă',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'Afișează înregistrările dintr-un anumit modul care sunt legate de înregistrarea pe care o vizualizați în consolă.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Vizualizare înregistrare',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Afișează o înregistrare și, opțional, înregistrări aferente în file.',
@@ -3778,6 +3894,7 @@ $app_strings = array (
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Avertizare, numai modulele {{numWord}} ({{num}}) pot fi afișate în file. ' .
         'Elimină unul sau mai multe module înainte de a adăuga module noi.',
     'LBL_SIX' => 'șase', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'Jurnal de comentarii',
@@ -3802,7 +3919,13 @@ $app_strings = array (
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Utilizate recent',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favorite',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'Creare tablou de bord',
+    'LBL_DASHBOARD_DUPLICATE' => 'Dublare tablou de bord',
+    'LBL_DASHBOARD_DELETE' => 'Ștergere tablou de bord',
+    'LBL_PIN_TO_TOP' => 'Fixare în partea de sus',
+    'LBL_PIN_TO_BOTTOM' => 'Fixare în partea de jos',
+
+    'LBL_DASHBOARD_CONFIG' => 'Configurare tablou de bord',
     'LBL_LIST_VIEW__NAME' => 'Vizualizare tip listă',
     'LBL_PIPELINE_VIEW_NAME' => 'Vizualizare tip mozaic',
     'LBL_PIPELINE_VIEW_BTN' => 'Vizualizare tip mozaic',
@@ -3838,9 +3961,9 @@ $app_strings = array (
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'Resurse de studiu',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar University - Deveniți expert',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Forumuri comunitate - Participați la discuție',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Documentație și asistență - Aflați detaliile',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Training și certificare',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Comunitatea SugarClub',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Documentație și asistență',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'Vânzări după ţară',
@@ -3849,6 +3972,10 @@ $app_strings = array (
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'Categorii bază de cunoştinţe şi articole publicate',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Displays a tree view of knowledge base categories & published articles',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'Căutare bază de cunoştinţe',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'Afișează o vizualizare arborescentă de căutare a articolelor și categoriilor bazei de cunoștințe publicate.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'Articole publicate în alte limbi',
@@ -4064,6 +4191,10 @@ $app_strings = array (
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'Introduceţi un număr de telefon numeric pentru S.U.A., inclusiv codul zonei.',
+    'LBL_CCP_NOT_INITIATED' => 'Încercare de apelare utilizând CCP în timp ce agentul nu s-a conectat.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'Imposibil de inițiat apelul prin CCP.',
+    'LBL_CCP_DIALING_ERROR' => 'Acest apel nu poate fi finalizat după formare.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'Vă rugăm închideți orice sesiune chat în SugarLive înainte de a efectua un apel de ieșire.',
 
     //File write error label
     'ERR_FILE_WRITE' => 'Eroare: Nu s-a putut scrie fişierul {0}.  Verificaţi sistemul şi permisiunile serverului web.',
@@ -4417,8 +4548,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Articol din ofertă',
     'LBL_DISCOUNT_TOTAL' => 'Total reducere',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => 'Procentaj %',
+    'LBL_DISCOUNT_SELECT' => 'Determină dacă reducerea este un procent sau o sumă fixă',
     'LBL_TAX' => 'Taxă',
     'LBL_SHIPPING' => 'Curierat',
     'LBL_GRAND_TOTAL' => 'Total General',
@@ -4465,7 +4596,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(Fără acces)',
     'LBL_NO_ACCESS_LOWER' => 'Fără acces',
     'LBL_NO_FIELD_ACCESS' => 'Imposibilitate de accesare',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'Este necesară licența',
     'LBL_VALUE_ERASED' => 'Valoare ștearsă',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Aceste informații au fost șterse prin solicitarea de confidențialitate a datelor',
     'LBL_CREATE_RELATED_RECORD' => 'Creare înregistrare asociată',
@@ -4486,7 +4617,9 @@ $app_strings = array (
     'LBL_TASKS_SUBPANEL_TITLE' => 'Task-uri',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Apeluri',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Email-uri',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'Ture',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produse din ofertă',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Excepții tură',
     'LNK_SETTINGS' => 'Settings',
     'LBL_MOBILE_SUPPORT' => 'Support',
     'LBL_MOBILE_SHOW_MORE' => 'Afişare mai multe...',
@@ -4646,16 +4779,14 @@ $app_strings = array (
     'LBL_MOBILE_PDF_DOWNLOAD' => 'Descarcă PDF {{{pdfTemplateName}}}',
 
     'ERR_SYNC_FAILED' => 'Imposibil de sincronizat cu serverul.',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'Autentificarea SSO nu este disponibilă. Asiguraţi-vă că platforma este pe Sugar 7.5 sau o versiune mai recentă şi configurată pentru SSO.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'Accesul nu este autorizat.',
     'ERR_MOBILE_INVALID_CREDS' => 'Nume de utilizator sau parolă incorectă.',
     'ERR_MOBILE_SESSION_EXPIRED' => 'Sesiunea dvs. a expirat.',
     'ERR_MOBILE_NOT_FOUND' => 'Resursa nu a fost găsită.',
     'ERR_MOBILE_TIMEOUT' => 'Serverul nu răspunde.',
     'ERR_MOBILE_CONNECTION_FAILED' => 'Nu se poate accesa serverul.',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'Nu s-a găsit niciun server {{{brandName}}} la adresa URL dată.',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'Serverul nu răspunde la adresa URL dată.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'Serverul nu este disponibil la adresa URL dată.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'Conexiunea la Internet nu este disponibilă.',
     'ERR_MOBILE_INTERNAL' => 'Eroare internă ({{{code}}}). Încercaţi din nou mai târziu.',
     'ERR_MOBILE_VALIDATION' => 'Înregistrarea nu este validă',
@@ -4854,6 +4985,55 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'Buton meniu dreapta',
     'LBL_VO_ADD_BTN' => 'Adăugare buton',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'Reducere',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'Selectați o aplicație de mapare',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => '{{entityName}} selectat are valori asociate: {{localizedFieldNames}}. Anulaţi pentru a păstra valorile existente. Confirmaţi pentru a suprascrie cu valorile noi.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'Criptarea datelor este activată.',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'Prospectul selectat este deja convertit.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'Această acțiune este disponibilă numai atunci când dipozitivul este online',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'Sigur doriți să creați o Oportunitate din Ofertă?',
+    'LBL_TAG_ADD' => 'Adăugare etichetă',
+    'LBL_TAG_ENTER_TAG_NAME' => 'Introduceți eticheta',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'Filtrarea după Etichete nu este disponibilă când dispozitivul este offline.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'Afișare comentariu întreg',
+    'LBL_COMMENT_VIEW' => 'Vizualizați un comentariu',
+    'LBL_PMSE_LABEL_DUEDATE' => 'Data scadentă',
+    'LBL_PMSE_DUE' => 'Data limită',
+    'LBL_PMSE_DUE_ON' => 'Data limită pe',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'Vă rugăm să creați mai întâi {{conversionParentModuleName}}',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'Lipsă înregistrări necesare: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'Alegeți calitatea imaginii. Imaginea va fi redimensionată corespunzător înainte de a fi salvată pe server. Valoarea selectată va fi utilizată ca implicită pentru toate operațiunile similare în viitor.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'Se estimează dimensiunea fișierului...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'Dimensiunea estimată a fișierului este',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'Calitatea imaginii',
+    'LBL_IMAGE_QUALITY_BEST' => 'Dimensiunea originală',
+    'LBL_IMAGE_QUALITY_GOOD' => 'Calitate bună',
+    'LBL_IMAGE_QUALITY_POOR' => 'Dimensiune mică',
+    'LBL_IMAGE_QUALITY_BTN' => 'Comprimare: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'Listați câmpurile pe {{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'Resetați la valorile implicite',
+    'LBL_LIST_NOT_ENOUGH' => 'Vă rugăm setați cel puțin 1 câmp activ.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'Trebuie să vă autentificați și să acceptați permisiunile pentru a putea lucra cu instanța SugarCRM.',
+    'LBL_SELECTING_EXISTING_RECORD' => 'Selectare {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => 'Creare nouă {{{moduleSingular}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'Dimensiune imagine',
+    'LBL_COPY_ADDRESS' => 'Copiați adresa',
+    'LBL_OPEN_IN' => 'Deschideți în',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'Niciun fișier selectat.',
+    'LBL_ATTACHMENT_ADD' => 'Atașați',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'Această aplicație folosește cookie-uri',
+    'LBL_USE_COOKIES_CONFIRM' => 'Această aplicație folosește cookie-uri pentru a vă oferi o experiență mai bună. Continuând, vă dați consimțământul la utilizarea cookie-urilor în conformitate cu politicile noastre de confidențialitate.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'Foloșiți o instanță Sugar care nu va fi compatibilă cu Sugar Mobile într-o versiune mobilă viitoare. Vă rugăm cereți administratorului dvs. să actualizeze Sugar cât mai curând posibil.',
+    'ERROR_TAG_NAME_INVALID' => 'Numele etichetei nu poate conține caractere "{{{forbiddenChars}}}"',
+    'ERROR_NO_TAGS_FOUND' => 'Nicio etichetă disponibilă nu se potrivește "{{{searchQuery}}}"',
+    'ERR_PA_RECORD_INVALID' => '{{{moduleName}}} înregistrarea are una sau mai multe valori nevalide și nu poate fi salvată. Doriți să editați înregistrarea pentru a efectua {{{actionLabel}}} acțiunea?',
+    'ERR_MOBILE_METADATA_RELOAD' => 'Un administrator a făcut modificări de configurație instanței dvs. Sugar. Apăsați OK pentru a sincroniza configurația aplicației cu serverul.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'Această aplicație folosește cookie-uri',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Verificați pentru a accepta (obligatoriu)',
@@ -4912,6 +5092,10 @@ $app_strings = array (
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telefon: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'E-mail: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'Web: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Sigur doriți să închideți chat-ul?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Conectarea dumneavoastră nu a reușit. Încercați din nou.',
@@ -4958,6 +5142,29 @@ $app_strings = array (
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Nume/Denumire cont',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'Tablou de bord Omnicanal',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'Client',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} la {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'Browserul tău nu este acceptat pentru SugarLive. Utilizează Google Chrome sau Mozilla Firefox.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'A fost creat un <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> care conține detaliile conversației tale.',
+    'LBL_OMNICHANNEL_SUBJECT' => 'Subiect',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'Descriere',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Rezumat mesaj',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Rezumat apel',
+    'LBL_OMNICHANNEL_LINK_TO' => 'Asociere {{fromModule}} la {{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => 'Asociat',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Browserul tău nu este acceptat pentru chat. Utilizează Google Chrome sau Mozilla Firefox.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Contactează Administratorul Sugar pentru asistență.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'Configurare Machetă',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Vă rugăm terminați configurarea SugarLive înainte de a efectua un apel de ieșire.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Vă rugăm să terminați configurarea aspectului SugarLive înainte de a deschide SugarLive.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Setați-vă statusul în mod „Offline” în SugarLive înainte de a configura aspectul SugarLive.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'Restabilire filă la valorile implicite',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'Configurare panou sumar',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'User Profile',
@@ -4989,6 +5196,10 @@ $app_strings = array (
     'LBL_WIZ_CREATE_USERS' => 'Create Users',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Setări sistem',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'Valorile introduse nu sunt acceptate sau nu corespund formatului acceptabil. Pentru o listă de valori și formate de câmp acceptabile, vă rugăm consultați <a href="{{linkToDocumentation}}" target="_blank">documenția</a> de Sistem.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'Acest conținut nu a fost aprobat. Vă rugăm să vă actualizați sistemul <a href="{{linkToDocumentation}}" target="_blank">cu setările Politicii de securitate a conținutului </a>.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'Acest conținut nu a fost aprobat. Vă rugăm cereți administratorului să actualizeze sistemul cu <a href="{{linkToDocumentation}}" target="_blank"> setările Politicii de securitate a conținutului.</a>. Odată ce setările au fost actualizate, este necesară o reîmprospătare a browser-ului pentru ca modificările să aibă efect.',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'Password',
@@ -5118,6 +5329,12 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'Elementele mele',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'Elemente echipă',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'Istoric',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'Dashlet-ul Istoric afiseaza intalnirile finalizate, apelurile logate, emailurile primite si emailurile trimise.',
@@ -5232,6 +5449,7 @@ $app_strings = array (
     //record save
     'LBL_RECORD_SAVED' => 'Înregistrarea a fost salvată.', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => 'Aţi creat cu succes {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'Ai creat cu succes {{moduleSingularLower}}.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Aţi creat cu succes această înregistrare, însă nu aveţi permisiunea de a accesa această înregistrare.', // use when user has no access to the model
     'LBL_VALIDATING' => 'În curs de validare...',
 
@@ -5310,7 +5528,7 @@ $app_strings = array (
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Reîmprospătaţi lista',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'Reîmprospătare dale',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'more',
@@ -5564,6 +5782,7 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'Activităţi în desfăşurare',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'Activităţi în desfăşurare pe Procese',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'Toate Procesele',
+    'LBL_RECORD_DASHBOARD' => 'Înregistrare Tablou de bord',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'Rezumat stare procese',
@@ -5595,7 +5814,7 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_BUSINESS_CENTER_ID' => 'ID centru de afaceri',
     'LBL_BUSINESS_CENTER_NAME' => 'Denumire centru de afaceri',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'Activități cu articolele achiziționate',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(New Tag)',
@@ -5635,6 +5854,7 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'TPL_DATAPRIVACY_PII_TITLE' => 'Informații personale pentru {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Modificare temporizatoare',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'Mesaje',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Copiat în clipboard!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Eroare la copiere în clipboard',
@@ -5652,13 +5872,24 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Afișare mai puține...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Nu există date disponibile',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Abonamente active',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'Acest tablou poate fi adăugat numai pentru module care sunt asociate unui singur Cont. Consultați documentația tabloului Abonamente active <a href={{linkToDocumentation}}></a> pentru mai multe informații.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'Afișare Achiziții care aparțin de acest Cont asociat:',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Abonamente active pentru un anumit cont.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', cantitate {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Total:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Nu există abonamente active',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Acest dashlet necesită {{module_name}} pentru a funcționa. Discută cu administratorul pentru a activa {{module_name}}.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'Istoric achiziții',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'Toate achizițiile pentru un anumit cont.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'Acest tablou poate fi adăugat numai pentru module care sunt asociate unui singur cont. Consultă documentația <a href={{linkToDocumentation}} target="_blank">tabloului Istoric achiziții</a> pentru mai multe informații.',
+    'LBL_NO_PURCHASE_HISTORY' => 'Nu există achiziții de afișat',
+    'LBL_NO_PLIS' => 'Nu există articole de linie achiziționate',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'Total',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'Cantitate',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'Acest tablou necesită Achiziții și Articole de linie achiziționate pentru a funcționa. Discută cu administratorul tău despre activarea Achizițiilor și a Articolelor de linie achiziționate.',
+    'LBL_SEARCH_PURCHASE_NAME' => 'Caută după Nume achiziție...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'Utilizează Studio pentru a edita aspectul dashlet-ului de vizualizare a înregistrării accesând ' .
@@ -5674,7 +5905,39 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_SERVICE_DURATION' => 'Durată serviciu',
     'LBL_SERVICE_DURATION_VALUE' => 'Valoare durată serviciu',
     'LBL_SERVICE_DURATION_UNIT' => 'Unitate durată serviciu',
+    'LBL_LOCK_DURATION' => 'Durată blocare',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'CCP Conectare Amazon nu a reușit să se încarce. Asigurați-vă' .
+        'că utilizați un '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">browser acceptat</a>. ' .
+        'Dacă problema persistă, contactați Administratorul Sugar.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'Administratorul Sugar nu a configurat instanța dumneavoastră pentru Conectare Amazon.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'Nu se poate stabili conexiunea cu Conectare Amazon. Contactați Administratorul Sugar pentru asistență.',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'Necunoscut',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare',
+    'LBL_EXTERNAL_GUESTS' => 'Invitați externi',
+    'LBL_MY_FAVORITE_TASKS' => 'Sarcinile mele favorite',
+    'LBL_MY_TASKS' => 'Sarcinile mele',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'Nu s-a putut găsi câmpul: {0} în modul: {1}',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'Nu s-a putut găsi înregistrarea cu {0}: {1} în modul: {2}',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'Nu s-a putut găsi o relație denumită: {0}',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'Există deja o intrare în baza de date a ID: {0}, cu {1}: {2} în modul: {3}',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'soft șters (cu steag șters = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'S-au găsit mai multe înregistrări ale bazei de date pentru {0} {1} în modul {2}. ' .
+        'Eliminați sau actualizați înregistrările potrivite în consecință. Înregistrări potrivite: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'Următoarea rulare',
+    'LBL_TIME_AWARE_TYPE' => 'Tip',
+    'LBL_TIME_AWARE_BEAN_ID' => 'ID bean',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

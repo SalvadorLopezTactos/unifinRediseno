@@ -17,3 +17,4 @@ $platforms[] = 'opi';
 $platforms[] = 'lpi';
 $platforms[] = 'collabspot';
 $platforms[] = 'collabspotbackend';
+$platforms[] = 'discover';

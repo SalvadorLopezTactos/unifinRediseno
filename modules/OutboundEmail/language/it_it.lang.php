@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Account di posta elettronica in uscita',
     'LBL_MODULE_NAME_SINGULAR' => 'Account di posta elettronica in uscita',
+    'LBL_STATUS' => 'Stato',
     'LBL_MAIL_SENDTYPE' => 'Mail transfer agent',
     'LBL_MAIL_SMTPSERVER' => 'Server',
     'LBL_MAIL_SMTPPORT' => 'Porta',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Questo è l&#39;account di sistema.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID indirizzo e-mail',
     'LBL_TYPE' => 'Tipo',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Indirizzo e-mail autorizzato',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Indirizzo e-mail mittente',
     'LBL_REPLY_TO_NAME' => 'Rispondi a Nome',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Rispondi a indirizzi e-mail',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Rispondi a ID indirizzo e-mail',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Rispondi a indirizzo e-mail',
     'LBL_PRIMARY_TEAM' => 'Gruppo Primario',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Impostazioni e-mail Focus Drawer',
 );

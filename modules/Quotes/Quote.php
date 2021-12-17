@@ -11,16 +11,6 @@
  */
 global $beanFiles;
 
-require_once($beanFiles['Contact']);
-require_once($beanFiles['Task']);
-require_once($beanFiles['Note']);
-require_once($beanFiles['Call']);
-require_once($beanFiles['Lead']);
-require_once($beanFiles['Email']);
-require_once($beanFiles['Product']);
-require_once($beanFiles['ProductBundle']);
-
-
 // Quote is used to store customer quote information.
 class Quote extends SugarBean
 {
@@ -64,6 +54,7 @@ class Quote extends SugarBean
     public $show_line_nums;
     public $team_id;
     public $team_name;
+    public $renewal;
 
     public $billing_address_street;
     public $billing_address_city;

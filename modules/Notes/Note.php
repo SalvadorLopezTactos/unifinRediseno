@@ -30,6 +30,7 @@ class Note extends SugarBean
     // used in emails
     var $file;
     var $embed_flag; // inline image flag
+    public $note_parent_id;
     var $parent_type;
     var $parent_id;
     var $contact_id;
@@ -44,6 +45,7 @@ class Note extends SugarBean
     public $file_ext;
     public $file_source;
     public $file_size;
+    public $attachment_flag;
     var $module_dir = "Notes";
     var $default_note_name_dom = array('Meeting notes', 'Reminder');
     var $table_name = "notes";
@@ -123,6 +125,7 @@ class Note extends SugarBean
             $this->file_mime_type = get_file_mime_type($filePath, 'application/octet-stream');
             $this->file_ext = pathinfo($this->filename, PATHINFO_EXTENSION);
             $this->file_size = filesize($filePath);
+            $this->attachment_flag = true;
         }
 
         $this->setContactId();

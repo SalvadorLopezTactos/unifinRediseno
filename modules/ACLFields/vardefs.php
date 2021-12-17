@@ -12,7 +12,7 @@
 
  
  
-$dictionary['ACLField'] = array('table' => 'acl_fields', 'comment' => 'Determine the allowable fields for users'
+$dictionary['ACLField'] = array('table' => 'acl_fields', 'archive' => false, 'comment' => 'Determine the allowable fields for users'
                                ,'fields' => array (
   'id' => 
   array (

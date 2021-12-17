@@ -164,6 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'Klaidos',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Pasiūlymai',
     'LBL_RLI_SUBPANEL_TITLE' => 'Revenue Line Items',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
-    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Pirkimai',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Pirkimo eilutės prekės',
 );

@@ -73,6 +73,8 @@ function getAllowedReportModules(&$local_modListHeader, $skipCache = false) {
             'CampaignLog',
             'Manufacturers',
             'ChangeTimers',
+            'ShiftExceptions',
+            'Messages',
         ];
         if (in_array($key, $specialModules)) {
             $report_modules[$key] = $value;

@@ -601,6 +601,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfigurer portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Enable portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Enable search before opening a case',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Tillad portalbrugere at lukke case',
     'LBL_PORTAL_THEME' => 'Tema portal',
     'LBL_PORTAL_ENABLE' => 'Aktivér',
     'LBL_PORTAL_SITE_URL' => 'Din portal er tilgængelig på:',
@@ -792,7 +793,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Vælg at bruge dette felt, når du søger efter poster ved hjælp af Global Søgning i dette modul.',
+'LBL_POPHELP_REQUIRED'=>"Opret en formel til at bestemme, om dette felt er påkrævet i layouts.<br/>"
+    . "Påkrævede felter vil følge formlen i den browser-baserede mobilvisning, <br/>"
+    . "men vil ikke følge formlen i de indfødte programmer, som Sugar Mobile til iPhone.<br/>"
+    . "De vil ikke følge formlen i Sugar Self-Service-portalen.",
+'LBL_POPHELP_READONLY'=>"Opret en formel til at bestemme, om dette felt er read only i layouts.<br/>"
+        . "Read only-felter vil følge formlen i den browser-baserede mobilvisning, <br/>"
+        . "men vil ikke følge formlen i de indfødte programmer, som Sugar Mobile til iPhone.<br/>"
+        . "De vil ikke følge formlen i Sugar Self-Service-portalen.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Vælg for at bruge dette felt, når du søger efter poster ved hjælp af Global Search på dette modul.',
 //Revert Module labels
 'LBL_RESET' => 'Nulstil',
 'LBL_RESET_MODULE' => 'Nulstil modul',
@@ -827,6 +836,7 @@ $mod_strings = array(
                 'encrypt'=>'Krypter',
                 'datetimecombo' =>'Dato/klokkeslæt',
                 'decimal'=>'Decimal',
+                'autoincrement' => 'auto-increment',
 ),
 'labelTypes' => array(
     "" => "Ofte brugte etiketter",
@@ -844,4 +854,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Alle moduler',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relateret {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copiér fra layout',
+'LBL_RELATIONSHIP_TYPE' => 'Forhold',
 );

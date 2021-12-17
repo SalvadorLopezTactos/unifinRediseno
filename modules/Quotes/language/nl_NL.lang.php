@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Dashboard Offertelijst',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Dashboard Offerterecord',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer offertes',
 
     'LBL_CONTRACTS'=>'Contracten',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracten',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Land (factuuradres)',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Postcode (factuuradres)',
     'LBL_BILLING_ADDRESS_STATE' => 'Provincie (factuuradres)',
-    'LBL_BILLING_ADDRESS_STREET' => 'Straat (factuuradres)',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adresregel 2 (factuuradres):',
     'LBL_BILLING_CONTACT_ID' => 'Contact ID (factuuradres):',
     'LBL_BILLING_CONTACT_NAME' => 'Contactpersoon (factuuradres):',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Land (afleveradres)',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Postcode (afleveradres)',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Provincie (afleveradres)',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Straat (afleveradres)',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Afleveradres:',
     'LBL_SHIPPING_BODY' => 'Facturering en verzending',
     'LBL_SHIPPING_CONTACT_ID' => 'Aflevering voor Persoon ID:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopieer factuuradres naar afleveradres',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopieer afleveradres naar factuuradres',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopieer naar afleveradres',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopieer naar factuuradres',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Weet u zeker dat u deze opmerking wilt verwijderen van deze offerte?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopieer naar factuuradres',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Weet u zeker dat u deze opmerking wilt verwijderen van deze offerte?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Weet u zeker dat u deze offerteregel wilt verwijderen van deze offerte?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Weet u zeker dat u deze groep wilt verwijderen van deze offerte?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Weet u zeker dat u deze persoon wilt verwijderen van deze offerte?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Hoeveelheid',
     'LBL_MFT_PART_NUM' => 'Onderdeelnummer',
     'LBL_ITEM_NAME' => 'Regelitem',
+    'LBL_PRODUCT_TEMPLATE' => 'Product',
     'LBL_DISCOUNT_PRICE' => 'Eenheidsprijs',
     'LBL_DISCOUNT_AMOUNT' => 'Korting',
     'LBL_LINE_ITEM_TOTAL' => 'Totaal regelitem',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Opportunity-ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Offerteconfiguratie',
+
+    'LBL_RENEWAL' => 'Verlenging',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactie offerte',
 );

@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Dashbord for saksliste',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashbord for saksoppføring',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Saksdetaljer',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Saker fokusskuff',
 
 	'ERR_DELETE_RECORD'					=> 'Du må oppgi et registreringsnummer for å slette denne bedrift.',
 	'LBL_ACCOUNT_ID'					=> 'Bedrift-ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Vis i portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Skap artikel',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'KB-dokumenter',
+    'LBL_REQUEST_CLOSE' => 'Be om å lukke',
+    'LBL_REQUEST_CLOSE_DATE' => 'Be om lukkedato',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Forespørsel om lukking',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Send en forespørsel om å lukke denne saken',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Vil du be om at denne saken lukkes?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Mine saker anmodet for lukking',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Mine saker anmodet for lukking',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Mine saker anmodet for lukking',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Liste over saker anmodet for lukking',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Viser en liste over tilordnede saker som er anmodet for lukking',
 
     'LBL_CREATED_USER' => 'Opprettet bruker',
     'LBL_MODIFIED_USER' => 'Endret bruker',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt Brukernavn',
     'LBL_EXPORT_TEAM_COUNT' => 'Gruppe-antall',
     'LBL_CHANGETIMERS' => 'Endre timere',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Kjøp',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Relaterte kontakers e-poster',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'For eksempel kan du bruke dette til å finne et tema som har blitt sendt inn tidligere.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Hvis du har en ny support sak du ønsker å sende, kan du klikke her for å sende inn en ny sak.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Ved å klikke her kommer du til denne visningen til enhver tid.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Saksinteraksjoner',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notater',
 

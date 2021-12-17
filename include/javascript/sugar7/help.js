@@ -134,8 +134,12 @@
                 layoutName = 'list';
             }
 
-            url = 'http://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor
-                + '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + layoutName;
+            url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor +
+                '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + layoutName;
+
+            url += app.user.get('products') ?
+                '&products=' + encodeURIComponent(app.user.get('products').join(',')) :
+                '';
 
             if (layoutName == 'bwc') {
                 var action = window.location.hash.match(/#bwc.*action=(\w*)/i);
@@ -145,7 +149,31 @@
             }
 
             return url;
-        }
+        },
+
+        /**
+         * Returns the URL for Sugar's Support documentation
+         *
+         * @param {string} [moduleName] optional The name of the Module to use, defaults to getting
+         *      module name from the controller context
+         */
+        getDocumentationUrl: function(moduleName) {
+            var serverInfo = app.metadata.getServerInfo();
+            var language = app.lang.getLanguage();
+            var module = moduleName || app.controller.context.get('module');
+            var products = app.user.get('products') ? app.user.get('products').join(',') : '';
+            var params = {
+                edition: serverInfo.flavor,
+                version: serverInfo.version,
+                lang: language,
+            };
+            if (!_.isEmpty(products)) {
+                params.products = products;
+            }
+            params.module = module;
+
+            return 'https://www.sugarcrm.com/crm/product_doc.php?' + $.param(params);
+        },
     });
 
     app.events.on("app:sync:complete", function() {

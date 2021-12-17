@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definicions de processos',
   'LBL_MODULE_NAME_SINGULAR' => 'Definició del procés',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les definicions de processos',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Quadre de comandament del registre de definicions de processos',
   'LNK_LIST' => 'Veure definicions de processos',
   'LNK_NEW_PMSE_PROJECT' => 'Crea definició de processos',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importa definicions de processos',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Canvia el propietari del registre',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Equip',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Reassigna activitat',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Correu electrònic',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Envia un correu electrònic a l&#39;usuari d&#39;un procés quan se li assigna un procés',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definició d&#39;usuari',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Mètode d&#39;assignació',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Assigna usuari',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Actualitzar "Assignat a" al registre',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Estableix "Assignat a" per disponibilitat',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Afegeix registre relacionat',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Mòdul Relacionat',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'El nom de l&#39;activitat està buit.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'El nom "%s" ja existeix a la família de formes.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Disponibilitat de torns obligatòria',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Si no hi ha usuaris disponibles',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'abans',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Només Registres Nous',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Només registres actualitzats',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Només registres actualitzats (Totes les actualitzacions - Veure text d&#39;Ajuda)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nous registres o primera actualització',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nous registres i totes les actualitzacions',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleccioneu quan començarà l&#39;esdeveniment',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleccioneu quan començarà el procés.<br><br>Nou: Executa el procés quan es crea un nou registre.<br><br>Primera actualització: Executa el procés només la primera vegada que es compleixen els criteris per a un registre existent.<br><br>Totes les actualitzacions: Executa el procés cada vegada que es compleixen els criteris per a un registre existent<br><br>Nous registres o primera actualització: Executa el procés només la primera vegada que es compleixen els criteris per a un registre, durant la seva creació o actualització.<br><br>Nous registres i totes les actualitzacions: Executa el procés cada vegada per a tots els registres nous i les actualitzacions.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Seleccioneu el mòdul SugarCRM per aplicar l&#39;activador d&#39;esdeveniments',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Data fixa',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'canvia des de',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'canvia a',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'inclou qualsevol',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'no inclou cap',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'el o després',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'o abans',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'no és igual a',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Afegeix',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Tanca',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Tots els equips assignats al registre',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Equips',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% relacionat amb %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Usuari que ha creat %MODULE%',

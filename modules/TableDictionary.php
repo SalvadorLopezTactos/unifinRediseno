@@ -33,7 +33,6 @@ include("metadata/meetings_contactsMetaData.php");
 include("metadata/meetings_usersMetaData.php");
 include("metadata/meetings_leadsMetaData.php");
 include("metadata/opportunities_contactsMetaData.php");
-include("metadata/user_feedsMetaData.php");
 include("metadata/users_passwordLinkMetaData.php");
 include("metadata/team_sets_teamsMetaData.php");
 include("metadata/prospect_list_campaignsMetaData.php");
@@ -118,11 +117,29 @@ include "metadata/locked_field_bean_relMetaData.php";
 // Holidays to Business Centers relationship
 include 'metadata/business_centers_holidaysMetaData.php';
 
+// Users to Shift Exceptions relationship
+include 'metadata/shift_exceptions_usersMetaData.php';
+
+// Users to Shifts  relationship
+include 'metadata/shifts_usersMetaData.php';
+
+// Purchases Relationships
+include 'metadata/documents_purchasesMetaData.php';
+include 'metadata/contacts_purchasesMetaData.php';
+include 'metadata/cases_purchasesMetaData.php';
+include 'metadata/accounts_purchasesMetaData.php';
+
+// Purchased Line Items to Documents relationship
+include 'metadata/documents_purchasedlineitemsMetaData.php';
+
 // Commentlog relation field
 include 'metadata/commentlog_relMetaData.php';
 
 // Product definition table
 include 'metadata/product_definitionMetaData.php';
+
+// Time-Aware Schedules table
+include 'metadata/time_aware_schedulesMetaData.php';
 
 $defs = SugarAutoLoader::loadExtension('tabledictionary');
 if($defs) {

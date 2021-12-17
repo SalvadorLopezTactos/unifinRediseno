@@ -124,9 +124,10 @@ class WorkFlowGlue {
             $equalityCheck .= " && !(\$focus->fetched_row['" . $field . "'] === null && strlen(\$focus->" . $field . ") === 0)";
         }
 
-        return " (isset(\$focus->" . $field . ") && " .
-            "(empty(\$focus->fetched_row) || array_key_exists('" . $field . "', \$focus->fetched_row)) " .
-            "&& {$equalityCheck}) ";
+        return ' (isset($focus->' . $field . ')'
+            . ' && (empty($focus->fetched_row)'
+            . ' || (array_key_exists(' . var_export($field, true) . ', $focus->fetched_row)'
+            . ' && ' . $equalityCheck . ')))';
     }
 
 	function glue_normal_compare_change(& $shell_object){
@@ -146,24 +147,21 @@ class WorkFlowGlue {
     /**
      * Generate the clauses for 'field does not change for ...'
      *
-     * @param WorkFlowActionShell $shellObject
+     * @param WorkFlowTriggerShell $shellObject
      * @return string
      */
     public function glue_normal_compare_any_time($shellObject)
     {
-
         if (empty($this->temp_eval)) {
             $this->temp_eval = "";
         }
 
         $this->temp_eval .= " ( ";
         $this->temp_eval .= $this->getCompareText($shellObject, true);
-        $this->temp_eval .= " || ( \$focus->fetched_row['" . $shellObject->field . "'] == null
-            && !isset(\$focus->" . $shellObject->field . ") )";
+        $this->temp_eval .= ' || !isset($focus->' . $shellObject->field . ')';
         $this->temp_eval .= " ) || ( ";
 
-        $this->temp_eval .= " isset(\$focus->" . $shellObject->field . ")
-		    && isset(\$_SESSION['workflow_parameters']['$shellObject->parent_id'])
+        $this->temp_eval .= "isset(\$_SESSION['workflow_parameters']['$shellObject->parent_id'])
 		    && \$_SESSION['workflow_parameters']['$shellObject->parent_id'] == \$focus->" . $shellObject->field . " \n";
 
         $this->temp_eval .= " && !empty(\$_SESSION['workflow_cron']) && \$_SESSION['workflow_cron']==\"Yes\"";

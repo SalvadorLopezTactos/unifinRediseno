@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Instrumentpanel med lista över möjliga kunder',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Instrumentpaneler med poster över möjliga kunder',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för möjliga kunder',
 
     'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att kunna radera leadet.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Organisationsbeskrivning',
@@ -314,4 +315,8 @@ För att skapa en {{module_name}}:
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Kunde inte ändra status för {{moduleSingular}}. Denna {{moduleSingular}} har redan konverterats.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Konverteringsförutsägelse möjliga kunder',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Se förutsägelseinformation för en specifik möjlig ny kund',
 );

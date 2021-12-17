@@ -142,5 +142,19 @@ $viewdefs['Contacts']['base']['layout']['subpanels'] = array(
                 'link' => 'dataprivacy',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchases',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_MESSAGES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'messages',
+            ],
+        ],
     ),
 );

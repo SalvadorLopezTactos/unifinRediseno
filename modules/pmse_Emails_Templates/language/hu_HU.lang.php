@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Email Sablonok Feldolgozása',
     'LBL_MODULE_NAME_SINGULAR' => 'Email Sablon Feldolgozása',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Folyamat e-mail sablon figyelemfelhívás',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Folyamat e-mail sablon bejegyzés műszerfal',
     'LNK_LIST' => 'Folyamati e-mail sablonok megtekintése',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Folyamati e-mail sablonok létrehozása',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Email Sablonok Feldolgozása importálása',

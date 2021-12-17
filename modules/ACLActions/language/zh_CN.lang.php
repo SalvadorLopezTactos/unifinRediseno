@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'根据用户列出角色',
 'LBL_ROLES_SUBPANEL_TITLE'=>'用户角色',
 'LBL_SEARCH_FORM_TITLE'=>'查找',
+'LBL_ACTION_RECORD_VIEW'=>'记录视图',
 'LBL_ACTION_VIEW'=>'查看',
 'LBL_ACTION_EDIT'=>'编辑',
 'LBL_ACTION_DELETE'=>'删除',

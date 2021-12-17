@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Mållistor av typen standard kunde inte hittas',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Inga poster hittades',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Posterna har behandlats',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inställningar för inkommande e-post',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Systeminställningar för e-post',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Tracker namn:',
   'LBL_EDIT_TRACKER_URL'=>'Tracker-URL:',

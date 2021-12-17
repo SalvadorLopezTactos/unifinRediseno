@@ -36,10 +36,22 @@
     groupId: undefined,
 
     /**
+     * The Quote Data Group Header view added to this layout
+     * @type View.Views.Base.ProductBundles.QuoteDataGroupHeaderView
+     */
+    quoteDataGroupHeader: undefined,
+
+    /**
      * The Quote Data Group List view added to this layout
      * @type View.Views.Base.ProductBundles.QuoteDataGroupListView
      */
     quoteDataGroupList: undefined,
+
+    /**
+     * The Quote Data Group Footer view added to this layout
+     * @type View.Views.Base.ProductBundles.QuoteDataGroupFooterView
+     */
+    quoteDataGroupFooter: undefined,
 
     /**
      * @inheritdoc
@@ -57,14 +69,9 @@
 
         // set the groupID to the model ID
         this.groupId = this.model.cid;
-        // set this collection to the product_bundle_items collection
-        this.collection = this.model.get('product_bundle_items');
-        // add comparator so the collection can sort
-        this.collection.comparator = function(model) {
-            return model.get('position');
-        };
-        // sort the collection by model position
-        this.collection.sort();
+
+        // Initialize the collection
+        this._initCollection();
 
         var listMeta = app.metadata.getView('Products', 'quote-data-group-list');
         if (listMeta && listMeta.panels && listMeta.panels[0].fields) {
@@ -88,6 +95,24 @@
     },
 
     /**
+     * Sets the collection of bundle line items and sorts its models based on
+     * their position attribute, so that line items in the group will show up
+     * in the correct order on the Quotes worksheet
+     *
+     * @private
+     */
+    _initCollection: function() {
+        // Set the collection to the bundle items collection
+        this.collection = this.model.get('product_bundle_items');
+
+        // Sort the collection by model position
+        this.collection.comparator = function(model) {
+            return model.get('position');
+        };
+        this.collection.sort();
+    },
+
+    /**
      * @inheritdoc
      */
     _render: function() {
@@ -95,10 +120,13 @@
 
         // add the group id to the bundle level tbody
         this.$el.attr('data-group-id', this.groupId);
+        this.$el.data('group-id', this.groupId);
         this.$el.attr('data-record-id', this.model.id);
+        this.$el.data('record-id', this.model.id);
 
         // set the product bundle ID on all the QLI/Notes rows
         this.$('tr.quote-data-group-list').attr('data-group-id', this.groupId);
+        this.$('tr.quote-data-group-list').data('group-id', this.groupId);
     },
 
     /**
@@ -142,6 +170,31 @@
     },
 
     /**
+     * Switches the model of this group and its components
+     *
+     * @param {Bean} model the new Product Bundles model to use for this group
+     */
+    switchModel: function(model) {
+        // Dispose the old model
+        this.model.dispose();
+
+        // Replace the old model and collection on the layout
+        this.model = model;
+        this.model.on('change:product_bundle_items', this.render, this);
+        this._initCollection();
+
+        // Set the group ID of this group layout to be the new model's cid
+        this.groupId = this.model.cid;
+
+        // Replace the model and collection on the inner views
+        this.quoteDataGroupList.switchModel(model);
+        if (!this.model.get('default_group')) {
+            this.quoteDataGroupHeader.switchModel(model);
+            this.quoteDataGroupFooter.switchModel(model);
+        }
+    },
+
+    /**
      * Gets a reference to the QuoteDataGroupList being added to the layout
      *
      * @inheritdoc
@@ -151,6 +204,10 @@
 
         if (component.name === 'quote-data-group-list') {
             this.quoteDataGroupList = component;
+        } else if (component.name === 'quote-data-group-footer') {
+            this.quoteDataGroupFooter = component;
+        } else if (component.name === 'quote-data-group-header') {
+            this.quoteDataGroupHeader = component;
         }
     },
 
@@ -164,6 +221,10 @@
 
         if (component.name === 'quote-data-group-list') {
             this.quoteDataGroupList = null;
+        } else if (component.name === 'quote-data-group-footer') {
+            this.quoteDataGroupFooter = null;
+        } else if (component.name === 'quote-data-group-header') {
+            this.quoteDataGroupHeader = null;
         }
     },
 
@@ -172,7 +233,9 @@
      */
     _dispose: function() {
         var model;
+        this.quoteDataGroupHeader = null;
         this.quoteDataGroupList = null;
+        this.quoteDataGroupFooter = null;
 
         if (this.context && this.context.parent && this.context.parent.has('model')) {
             model = this.context.parent.get('model');

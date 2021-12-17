@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'حسابات البريد الإلكتروني الصادر',
     'LBL_MODULE_NAME_SINGULAR' => 'حساب البريد الإلكتروني الصادر',
+    'LBL_STATUS' => 'الحالة',
     'LBL_MAIL_SENDTYPE' => 'برنامج نقل البريد',
     'LBL_MAIL_SMTPSERVER' => 'الخادم',
     'LBL_MAIL_SMTPPORT' => 'المنفذ',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'هذا هو حساب النظام.',
     'LBL_EMAIL_ADDRESS_ID' => 'معرف عنوان البريد الإلكتروني',
     'LBL_TYPE' => 'النوع',
+    'LBL_AUTHORIZED_ACCOUNT' => 'عنوان البريد الإلكتروني المصرح له',
+    'LBL_FROM_EMAIL_ADDRESS' => 'من عنوان البريد الإلكتروني',
     'LBL_REPLY_TO_NAME' => 'اسم "الرد على"',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'عناوين "الرد على"',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'مُعرف عنوان "الرد على"',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'عنوان "الرد على"',
     'LBL_PRIMARY_TEAM' => 'الفريق الأساسي',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم إعدادات البريد الإلكتروني',
 );

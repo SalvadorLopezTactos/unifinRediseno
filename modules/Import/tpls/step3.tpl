@@ -30,6 +30,7 @@
 <input type="hidden" name="import_module" value="{$IMPORT_MODULE}">
 <input type="hidden" name="has_header" value="{$HAS_HEADER}">
 <input type="hidden" name="tmp_file" value="{$TMP_FILE}">
+<input type="hidden" name="file_name" value="{$TMP_FILE}">
 <input type="hidden" name="tmp_file_base" value="{$TMP_FILE}">
 <input type="hidden" name="firstrow" value="{$FIRSTROW}">
 <input type="hidden" name="columncount" value ="{$COLUMNCOUNT}">
@@ -89,7 +90,7 @@
     </th>
 </tr>
 {/if}
-<tr>
+<tr {if $item.hidden}style="display:none"{/if}>
     {if $HAS_HEADER == 'on'}
     <td id="row_{$smarty.foreach.rows.index}_header">{$item.cell1}</td>
     {/if}
@@ -131,7 +132,11 @@
 <tr>
     <td align="left">
         <input title="{$MOD.LBL_BACK}"  id="goback" class="button" type="submit" name="button" value="  {$MOD.LBL_BACK}  ">&nbsp;
-        <input title="{$MOD.LBL_NEXT}"  id="gonext" class="button" type="submit" name="button" value="  {$MOD.LBL_NEXT}  ">
+        {if $idm_update_mode_only}
+            <input title="{$MOD.LBL_IMPORT_NOW}"  id="importnow" class="button" type="button" name="button" value="  {$MOD.LBL_IMPORT_NOW}  ">
+        {else}
+            <input title="{$MOD.LBL_NEXT}"  id="gonext" class="button" type="submit" name="button" value="  {$MOD.LBL_NEXT}  ">
+        {/if}
     </td>
 </tr>
 </table>

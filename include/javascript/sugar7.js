@@ -753,20 +753,11 @@
         false
     );
 
-    // For SAML Logout support
+    // For SAML/SugarIdentity Logout support
     app.events.on("app:logout:success", function(data) {
         if (app.config && app.config.externalLogin && data && data.url) {
-            if (!$('#logoutframe').length) {
-                $('#sugarcrm').append('<iframe id="logoutframe" name="logoutframe" />');
-                $('#logoutframe').hide();
-            }
-            $('#logoutframe').load(function() {
-                $('#logoutframe').off('load');
-                $('#logoutframe').attr('src','');
-            });
-
             if (typeof data.url == 'string') { // HTTP-Redirect binding
-                $('#logoutframe').attr('src',data.url);
+                document.location.href = data.url;
             } else if (typeof data.url == 'object') { // HTTP-POST binding
                 var formHTML = '<form id="externalLogoutForm" method="POST" target="logoutframe" action="' +
                     data.url.url + '">';

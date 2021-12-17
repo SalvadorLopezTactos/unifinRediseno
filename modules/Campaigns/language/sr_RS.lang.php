@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Lista ciljeva tipa podrazumevano nije nađena',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nisu nađeni unosi',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Unosi su obrađeni',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Podešavanje dolaznih e-poruka',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Podešavanja sistemskih e-poruka',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Naziv sistema za praćenje:',
   'LBL_EDIT_TRACKER_URL'=>'URL sistema za praćenje:',

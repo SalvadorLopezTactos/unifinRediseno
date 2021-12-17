@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Varsayılan tipte Hedef Liste bulunamadı',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Hiç kayıt bulunamadı',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Girişler İşlendi',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Gelen E-Posta Ayarları',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Sistem E-posta Ayarları',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Takip Edici İsmi:',
   'LBL_EDIT_TRACKER_URL'=>'Takip Edici URL:',

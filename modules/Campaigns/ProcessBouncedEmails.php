@@ -80,7 +80,7 @@ function markEmailAddressInvalid($email_address)
     if(empty($email_address))
         return;
     $sea = BeanFactory::newBean('EmailAddresses');
-    $rs = $sea->retrieve_by_string_fields( array('email_address_caps' => trim(strtoupper($email_address))) );
+    $rs = $sea->retrieve_by_string_fields(array('email_address_caps' => trim(sugarStrToUpper($email_address))));
     if($rs != null)
     {
         $sea->AddUpdateEmailAddress($email_address, 1, null, $rs->id);
@@ -136,8 +136,7 @@ function checkBouncedEmailForIdentifier($email_description)
 
 function campaign_process_bounced_emails(&$email, &$email_header) 
 {
-	global $sugar_config;
-	$emailFromAddress = $email_header->fromaddress;
+    $emailFromAddress = $email->from_name;
 	$email_description = $email->raw_source;
     	
 	//if raw_source is empty, try using the description instead

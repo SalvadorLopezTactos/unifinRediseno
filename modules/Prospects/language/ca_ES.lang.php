@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;objectius',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;objectius',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als objectius',
 
   'LBL_MODULE_NAME' => 'Objectius',
   'LBL_MODULE_NAME_SINGULAR' => 'Objectiu',

@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Tavoiteluettelojen työpöytä',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Tavoitetietueiden työpöytä',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Kohteet-tietolaatikko',
 
   'LBL_MODULE_NAME' => 'Tavoitteet',
   'LBL_MODULE_NAME_SINGULAR' => 'Tavoite',

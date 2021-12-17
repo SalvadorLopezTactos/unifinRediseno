@@ -85,8 +85,10 @@
      * @param {Object} model
      * */
     addModelFilterToLayoutFilters: function(model) {
-        this.layout.filters.collection.add(model);
-        this.layout.filters.collection.sort();
+        if (!_.isUndefined(this.layout) && !_.isEmpty(this.layout.filters)) {
+            this.layout.filters.collection.add(model);
+            this.layout.filters.collection.sort();
+        }
         this.layout.selectFilter(model.id);
     },
 

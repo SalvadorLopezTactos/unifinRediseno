@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Instrumentpanel med mållista',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Instrumentpanel med målposter',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Fokustilldragare för mål',
 
   'LBL_MODULE_NAME' => 'Targets',
   'LBL_MODULE_NAME_SINGULAR' => 'Target',

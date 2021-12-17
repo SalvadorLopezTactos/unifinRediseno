@@ -37,6 +37,7 @@ return [
                                     'width' => 12,
                                     'view' => [
                                         'limit' => '10',
+                                        'type' => 'active-tasks',
                                         'name' => 'active-tasks',
                                         'label' => 'LBL_ACTIVE_TASKS_DASHLET',
                                         'template' => 'tabbed-dashlet',
@@ -87,7 +88,7 @@ return [
                     [
                         'layout' => [
                             'name' => 'side-drawer',
-                            'type' => 'side-drawer',
+                            'type' => 'console-side-drawer',
                         ],
                     ],
                 ],
@@ -105,7 +106,7 @@ return [
                     [
                         'layout' => [
                             'name' => 'side-drawer',
-                            'type' => 'side-drawer',
+                            'type' => 'console-side-drawer',
                         ],
                     ],
                 ],

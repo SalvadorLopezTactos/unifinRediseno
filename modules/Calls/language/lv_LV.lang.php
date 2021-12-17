@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Zvanu saraksta instrumentu panelis',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Zvanu ierakstu instrumentu panelis',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Zvanu fokusa panelis',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Zvani',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Piešķirtais lietotājs',
     'LBL_LIST_MY_CALLS' => 'Mani zvani',
     'LBL_MY_SCHEDULED_CALLS' => 'Mani ieplānotie zvani',
+    'LBL_GUEST_CALLS' => 'Mani zvani viesa lomā',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Ieplānotie zvani viesa lomā',
     'LBL_SELECT_FROM_DROPDOWN' => 'Vispirms izdariet izvēli nolaižamajā sarakstā - Saistīts ar.',
 	'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam',
 	'LBL_ASSIGNED_TO_ID' => 'Piešķirtais lietotājs',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Atcelt',
     'LBL_EMPTY_SEARCH_RESULT' => 'Atvainojiet, rezultāti netika atrasti. Lūdzu zemāk izveidojiet ielūgumu.',
     'LBL_NO_ACCESS' => 'Jums nav tiesību veidot $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect kontakta Id',
+
     'LBL_REPEAT_TYPE' => 'Atkārtošanas veids',
     'LBL_REPEAT_INTERVAL' => 'Atkārtošanas intervāls',
     'LBL_REPEAT_END' => 'Beigas',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Zvans {{{this}}}',
     'LBL_SEND_INVITES' => 'Sūtīt uzaicinājumus',
     'LBL_REMINDER_TITLE' => 'Zvans:',
+    'LBL_CALL_RECORDING_URL' => 'Ieraksta URL',
+    'LBL_CALL_RECORDING' => 'Ieraksts',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Jūs ieplānojāt {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> uz {{formatDate date_start}}.',

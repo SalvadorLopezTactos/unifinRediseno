@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Seznam adresátů výchozího typu nebyl nalezen [Target list of type default was not found]',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nebyl nalezen žádný záznam',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Položky byly zpracovány',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Nastavení příchozích e-mailů',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Nastavení systémových e-mailů',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Název sledování:',
   'LBL_EDIT_TRACKER_URL'=>'URL sledování:',

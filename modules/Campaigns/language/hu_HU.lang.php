@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Alapértelmezett céllista nem található',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nem található bejegyzés',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'A bejegyzések feldolgozva',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Beérkező levelek beállításai',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Rendszer e-mail beállítások',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Követő neve:',
   'LBL_EDIT_TRACKER_URL'=>'Követő URL:',

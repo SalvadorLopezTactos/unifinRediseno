@@ -153,7 +153,7 @@ $viewdefs['Emails']['base']['view']['record'] = array(
                 ),
                 array(
                     'name' => 'description_html',
-                    'dismiss_label' => true,
+                    'label' => 'LBL_MESSAGE_BODY',
                     'readonly' => true,
                     'span' => 12,
                     'related_fields' => array(

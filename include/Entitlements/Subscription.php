@@ -16,6 +16,8 @@ namespace Sugarcrm\Sugarcrm\Entitlements;
 // to as Critical Control Software under the End User
 // License Agreement.  Neither the Company nor the Users
 // may modify any portion of the Critical Control Software.
+use Sugarcrm\Sugarcrm\inc\Entitlements\Exception\SubscriptionException;
+
 /**
  * Class Subscription
  *
@@ -29,6 +31,7 @@ class Subscription
     const SUGAR_SELL_KEY = 'SUGAR_SELL';
     const SUGAR_SERVE_KEY = 'SUGAR_SERVE';
     const SUGAR_BASIC_KEY = 'CURRENT';
+    const SUGAR_HINT_KEY = 'HINT';
 
     /**
      * unknown type
@@ -42,6 +45,7 @@ class Subscription
         self::SUGAR_BASIC_KEY,
         self::SUGAR_SELL_KEY,
         self::SUGAR_SERVE_KEY,
+        self::SUGAR_HINT_KEY,
     ];
 
     /**
@@ -53,6 +57,7 @@ class Subscription
         'ULT' => self::SUGAR_BASIC_KEY,
         'SELL' => self::SUGAR_SELL_KEY,
         'SERVE' => self::SUGAR_SERVE_KEY,
+        'HINT' => self::SUGAR_HINT_KEY,
     ];
 
     /**
@@ -100,7 +105,7 @@ class Subscription
     {
         $decodedData = json_decode($jsonData, true);
         if ($decodedData === null) {
-            throw new \Exception('Invalid subscription json data');
+            throw new SubscriptionException('Invalid subscription json data');
         }
         
         if (empty($decodedData['subscription'])) {
@@ -232,7 +237,22 @@ class Subscription
         return [
             Subscription::SUGAR_SELL_KEY,
             Subscription::SUGAR_SERVE_KEY,
+            Subscription::SUGAR_HINT_KEY,
         ];
+    }
+
+    /**
+     * check if a key is Mango key
+     * @return array
+     */
+    public static function isMangoKey(?string $key) : bool
+    {
+        $mangoKeys = [
+            Subscription::SUGAR_BASIC_KEY,
+            Subscription::SUGAR_SELL_KEY,
+            Subscription::SUGAR_SERVE_KEY,
+        ];
+        return in_array($key, $mangoKeys);
     }
 
     /**

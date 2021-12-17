@@ -16,7 +16,7 @@
     <thead>
     <tr>
         {{#each ../leftColumns}}
-        <th{{#if name}} data-fieldname="{{name}}"{{/if}}>
+        <th{{#if name}} data-fieldname="{{name}}"{{/if}} class="sticky-column stick-left">
             <span>
                 {{field ../../this template="list-header"}}
             </span>
@@ -51,7 +51,7 @@
         {{/each}}
         {{#each ../rightColumns}}
             {{#if isColumnDropdown}}
-            <th class="nosort morecol">
+            <th class="nosort morecol sticky-column stick-right">
                 <div class="dropdown">
                     <button class="btn btn-invisible" data-toggle="dropdown" data-action="fields-toggle" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></button>
                     <ul class="dropdown-menu left carettop">
@@ -85,9 +85,9 @@
         class="single{{#if attributes.includedInForecast}} included{{/if}}">
 
         {{#each ../../leftColumns}}
-        <td>
-             {{field ../../../this model=../this template=../../../this.viewName}}
-        </td>
+            <td class="sticky-column stick-left">
+                {{field ../../../this model=../this template=../../../this.viewName}}
+            </td>
         {{/each}}
         {{#each ../../_fields.visible}}
             <td class="{{name}}_field {{#if align}} {{align}}{{/if}}{{#if click_to_edit}} editableColumn{{/if}}" data-field-name="{{name}}" data-type="{{type}}">
@@ -95,9 +95,9 @@
             </td>
         {{/each}}
         {{#each ../../rightColumns}}
-        <td>
-             {{field ../../../this model=../this template=../../../this.viewName}}
-        </td>
+            <td class="sticky-column stick-right">
+                {{field ../../../this model=../this template=../../../this.viewName}}
+            </td>
         {{/each}}
     </tr>
     {{/each}}

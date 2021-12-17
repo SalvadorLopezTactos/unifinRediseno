@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Κατηγορία Φόρου:',
   'LBL_TYPE_NAME'=>'Όνομα Τύπου',
   'LBL_TYPE' => 'Τύπος',
+  'LBL_PRODUCT_TYPE' => 'Τύπος Προϊόντος',
   'LBL_URL' => 'Προϊόν URL:',
   'LBL_VENDOR_PART_NUM' => 'Αριθμός Παρτίδας Πωλητή:',
   'LBL_WEIGHT' => 'Βάρος:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Προβολή Καταλόγου Προϊόντος',
   'NTC_DELETE_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την εγγραφή;',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Προσθήκη',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Εκτελέστε αναζήτηση στον κατάλογο προϊόντων',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Δεν διατίθενται δεδομένα',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Όνομα Ανατεθειμένου Χειριστή',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Τύποι Προϊόντων',
   'LBL_RENEWABLE' => 'Ανανεώσιμη',
   'LBL_SERVICE' => 'Υπηρεσία',
+  'LBL_LOCK_DURATION' => 'Διάρκεια κλειδώματος',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Πίνακας ελέγχου λίστας καταλόγων προϊόντων',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Πίνακας ελέγχου εγγραφής καταλόγου προϊόντων',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης καταλόγου προϊόντος',
 );

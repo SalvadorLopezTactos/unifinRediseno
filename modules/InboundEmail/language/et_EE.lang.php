@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Hoiatus: muudate oma automaatse importimise sätteid, mis võib põhjustada andmekadu.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Hoiatus: automaatne importimine peab olema juhtumite automaatsel loomisel lubatud.',
 	'LBL_EDIT_LAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-posti aadress',
+    'LBL_EMAIL_PROVIDER' => 'E-posti teenuse pakkuja',
+    'LBL_AUTH_STATUS' => 'Volituse olek',
 );
-?>

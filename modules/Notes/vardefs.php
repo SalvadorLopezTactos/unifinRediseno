@@ -13,6 +13,7 @@ $dictionary['Note'] = [
     'studio_enabled' => [
         'portal' => false,
     ],
+    'audited' => true,
     'favorites' => true,
     'table' => 'notes',
     'activity_enabled' => true,
@@ -98,6 +99,7 @@ $dictionary['Note'] = [
             'comment' => 'File name associated with the note (attachment)',
             'importable' => false,
             'duplicate_on_record_copy' => 'always',
+            'studio' => false,
         ],
         'upload_id' => [
             'name' => 'upload_id',
@@ -128,6 +130,14 @@ $dictionary['Note'] = [
             'duplicate_on_record_copy' => 'always',
             'type' => 'id',
             'vname' => 'LBL_EMAIL_ID',
+        ],
+        'note_parent_id' => [
+            'name' => 'note_parent_id',
+            'vname' => 'LBL_NOTE_PARENT_ID',
+            'type' => 'id',
+            'required' => false,
+            'reportable' => true,
+            'comment' => 'The parent Note ID',
         ],
         'parent_type' => [
             'name' => 'parent_type',
@@ -373,6 +383,15 @@ $dictionary['Note'] = [
             'type' => 'link',
             'vname' => 'LBL_EMAIL_ATTACHMENT_FOR',
         ],
+        'emailtemplates_attachment_for' => [
+            'bean_name' => 'EmailTemplate',
+            'module' => 'EmailTemplates',
+            'name' => 'emailtemplates_attachment_for',
+            'relationship' => 'emailtemplates_attachments',
+            'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_EMAILTEMPLATES_ATTACHMENT_FOR',
+        ],
         'projects' => [
             'name' => 'projects',
             'type' => 'link',
@@ -435,8 +454,46 @@ $dictionary['Note'] = [
             'studio' => false,
             'processes' => true,
         ],
+        'attachment_flag' => [
+            'name' => 'attachment_flag',
+            'vname' => 'LBL_ATTACHMENT_FLAG',
+            'type' => 'bool',
+            'comment' => 'Identify this note as an attachment to another record',
+            'default' => false,
+            'readonly' => true,
+            'processes' => true,
+            'studio' => false,
+        ],
+        'attachment_list' => [
+            'name' => 'attachment_list',
+            'type' => 'file',
+            'source' => 'non-db',
+            'vname' => 'LBL_ATTACHMENTS',
+            'duplicate_on_record_copy' => 'no',
+            'studio' => false,
+            'group' => 'attachments',
+        ],
+        'attachments' => [
+            'name' => 'attachments',
+            'vname' => 'LBL_ATTACHMENTS',
+            'type' => 'link',
+            'relationship' => 'notes_attachments',
+            'module' => 'Notes',
+            'bean_name' => 'Note',
+            'source' => 'non-db',
+        ],
     ],
-    'relationships' => [],
+    'relationships' => [
+        'notes_attachments' => [
+            'lhs_module' => 'Notes',
+            'lhs_table' => 'notes',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Notes',
+            'rhs_table' => 'notes',
+            'rhs_key' => 'note_parent_id',
+            'relationship_type' => 'one-to-many',
+        ],
+    ],
     'indices' => [
         [
             'name' => 'idx_note_name',
@@ -445,6 +502,13 @@ $dictionary['Note'] = [
                 'deleted',
                 'name',
                 'date_modified',
+            ],
+        ],
+        [
+            'name' => 'idx_note_parent_id',
+            'type' => 'index',
+            'fields' => [
+                'note_parent_id',
             ],
         ],
         [

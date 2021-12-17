@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Perspėjimas: Jūs modifikuojate auto importavimo nustatymus, o tai gali sukelti duomenų praradimą.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Perspėjimas: Auto importavimas turi būti įjungtas, jei norite automatiškai kurti aptarnavimus.',
 	'LBL_EDIT_LAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'El. pašto adresas:',
+    'LBL_EMAIL_PROVIDER' => 'El. pašto teikėjas',
+    'LBL_AUTH_STATUS' => 'Nepavyko suteikti leidimo',
 );
-?>

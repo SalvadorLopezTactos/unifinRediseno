@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Yazılım Hataları Listesi Panosu',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Yazılım Hataları Kaydı Panosu',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Program Hataları Odak Bölmesi',
 
   'LBL_MODULE_NAME' => 'Hatalar',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Hata',

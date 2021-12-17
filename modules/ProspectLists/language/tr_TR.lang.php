@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Hedef Listeleri Panosu',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Hedef Listeleri Kayıt Panosu',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Hedef Listeler Odak Bölmesi',
+  'LBL_RELATED_ACCOUNTS' => 'İlişkili Hesaplar',
+  'LBL_RELATED_CONTACTS' => 'İlişkili Kontaklar',
+  'LBL_RELATED_LEADS_TARGETS' => 'İlişkili Potansiyeller ve Hedefler',
 
   'LBL_MODULE_NAME' => 'Hedef Listeler',
   'LBL_MODULE_NAME_SINGULAR' => 'Hedef Liste',

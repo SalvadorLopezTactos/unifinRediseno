@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\IdentityProvider\OAuth2StateRegistry;
+use Sugarcrm\Sugarcrm\inc\Entitlements\Exception\SubscriptionException;
 
 class UsersViewOAuth2Authenticate extends SidecarView
 {
@@ -51,27 +52,34 @@ class UsersViewOAuth2Authenticate extends SidecarView
             $this->redirect();
         }
 
-        $oAuthServer = \SugarOAuth2Server::getOAuth2Server();
+        $oAuthServer = \SugarOAuth2Server::getOAuth2Server($this->platform);
 
         try {
+            $GLOBALS['logic_hook']->call_custom_logic('Users', 'before_login');
             $this->authorization = $oAuthServer->grantAccessToken([
                 'grant_type' => 'authorization_code',
                 'code' => $code,
                 'scope' => $scope,
             ]);
 
+            $tokenInfo = $oAuthServer->verifyAccessToken($this->authorization['access_token']);
+            if (!$tokenInfo) {
+                $this->redirect();
+            }
+            /** @var User $user */
+            $user = BeanFactory::getBean('Users', $tokenInfo['user_id']);
+            if (!$user) {
+                $this->redirect();
+            }
+
+            $user->call_custom_logic('after_login');
+
             $loginStatus = apiCheckLoginStatus();
-            if (true !== $loginStatus) {
-                $oauthServer = \SugarOAuth2Server::getOAuth2Server($this->platform);
-                $tokenInfo = $oauthServer->verifyAccessToken($this->authorization['access_token']);
-                /** @var User $user */
-                $user = BeanFactory::getBean('Users', $tokenInfo['user_id']);
-                if (!$user->isAdmin()) {
-                    if ($loginStatus['level'] == 'maintenance') {
-                        SugarApplication::redirect('./#maintenance');
-                    } elseif ($loginStatus['message'] === 'ERROR_LICENSE_SEATS_MAXED') {
-                        SugarApplication::redirect('./#licenseSeats');
-                    }
+            if (true !== $loginStatus && !$user->isAdmin()) {
+                if ($loginStatus['level'] == 'maintenance') {
+                    SugarApplication::redirect('./#maintenance');
+                } elseif ($loginStatus['message'] === 'ERROR_LICENSE_SEATS_MAXED') {
+                    SugarApplication::redirect('./#licenseSeats');
                 }
             }
             // Adding the setcookie() here instead of calling $api->setHeader() because
@@ -79,12 +87,17 @@ class UsersViewOAuth2Authenticate extends SidecarView
             setcookie(
                 RestService::DOWNLOAD_COOKIE . '_' . $this->platform,
                 $this->authorization['download_token'],
-                time() + $this->authorization['refresh_expires_in'],
-                ini_get('session.cookie_path'),
-                ini_get('session.cookie_domain'),
-                ini_get('session.cookie_secure'),
-                true
+                [
+                    'expires' => time() + $this->authorization['refresh_expires_in'],
+                    'path' => ini_get('session.cookie_path'),
+                    'domain' => ini_get('session.cookie_domain'),
+                    'secure' => ini_get('session.cookie_secure'),
+                    'httponly' => ini_get('session.cookie_httponly'),
+                    'samesite' => ini_get('session.cookie_samesite'),
+                ],
             );
+        } catch (SubscriptionException $e) {
+            SugarApplication::redirect('./#licenseSeats');
         } catch (\Exception $e) {
             $this->redirect();
         }
@@ -100,6 +113,9 @@ class UsersViewOAuth2Authenticate extends SidecarView
     public function display($params = [])
     {
         if ($this->platform === 'mobile') {
+            $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+            $sidecarConfig = $moduleInstallerClass::getBaseConfig();
+            $this->ss->assign('appPrefix', $sidecarConfig['env'] . ':' . $sidecarConfig['appId'] . ':');
             $this->ss->assign("siteUrl", SugarConfig::getInstance()->get('site_url'));
             $this->ss->display('modules/Users/tpls/AuthenticateMobile.tpl');
         } else {
@@ -120,6 +136,7 @@ class UsersViewOAuth2Authenticate extends SidecarView
      */
     protected function redirect(): void
     {
+        $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
         SugarApplication::redirect('./#stsAuthError');
     }
 }

@@ -6,14 +6,14 @@
     box-shadow: none;
 
     &:not(.btn-danger) {
-      background: darken(@navbarBackground, 5%);
+      background: @grayLight;
       color: @white;
     }
   }
 
   &:hover {
     .dropdown-toggle:not(.btn-danger) {
-      background: @slate;
+      background: @gray;
     }
   }
 
@@ -137,8 +137,13 @@ ul.notification-list {
   }
 }
 
-.preview-pane .detail .label.ellipsis_inline {
-  display: inline-block !important;
+.preview-pane {
+  .detail,
+  .preview {
+    .label.ellipsis_inline {
+      display: inline-block;
+    }
+  }
 }
 
 [data-action="toggle"].label {

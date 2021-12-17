@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Rādīt lietotāja lomas',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Lietotāja lomas',
 'LBL_SEARCH_FORM_TITLE'=>'Meklēt',
+'LBL_ACTION_RECORD_VIEW'=>'Ieraksta skats',
 'LBL_ACTION_VIEW'=>'Skatīt',
 'LBL_ACTION_EDIT'=>'Rediģēt',
 'LBL_ACTION_DELETE'=>'Dzēst',

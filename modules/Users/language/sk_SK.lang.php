@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Vami zadané heslo sa nezhoduje s očakávaným heslom. Skúste to znovu.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Nenašla sa informácia o používateľovi.',
     'ERR_USER_NAME_EXISTS'              => 'Meno používateľa {0} už existuje. Duplikované mená používateľa nie sú povolené. Zmeňte meno používateľa tak, aby bolo jedinečné.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licencia „Sugar Hint“ sa musí uložiť s ďalším kompatibilným typom licencie',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tento používateľ má zablokovaný prístup do aplikácie Sugar a nemôže sa prihlásiť pomocou svojho hesla.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Používateľ len s externým overením nemá povolenie na prihlásenie pomocou poverení Sugar',
 
@@ -76,7 +77,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mailová adresa príjemcu',
 	'ERR_SERVER_STATUS'					=> 'Stav vášho servera',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systém nemôže odoslať e-mail tomuto používateľovi. Skontrolujte konfiguráciu odchádzajúcej pošty v <a href="index.php?module=EmailMan&action=config">Nastavenia e-mailu</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Noví používatelia musia byť vytvorení v časti <a href="{0}" target="_blank">Nastavenia SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailová adresa',
 
@@ -300,11 +301,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognózy',
     'LBL_WORKSHEETS'                    => 'Pracovné listy',
 	'LBL_CALENDARS'                     => 'Kalendáre',
+    'LBL_SHIFTS'                        => 'Zmeny',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Výnimky zmien',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Dostávajte e-mailové oznámenie, keď je vám priradený záznam.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'E-mail o priradení',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Dostanete e-mailové upozornenie, keď vás niekto uvedie v položke denníka komentárov.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-mail o uvedení',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Vyberte, ako by sa mali názvy polí zobraziť na zobrazeniach záznamu. Pre kompaktnejšie zobrazenie záznamu zvoľte „Vedľa hodnoty poľa“.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Umiestnenie názvu poľa',
     'LBL_ABOVE_FIELD_VALUE'             => 'Nad hodnotou poľa',
@@ -314,6 +317,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Typ licencie',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Prednastavenie pripomienok pre volania a schôdzky. Kontextové upozornenie sa zobrazí všetkým pozvaným, ktorí používajú aplikáciu Sugar. E-mailové pripomienky sú zasielané všetkým pozvaným.',
 	'LBL_REMINDER'						=> 'Upozornenia',
 	'LBL_REMINDER_POPUP' => 'Kontextové okno',
@@ -398,7 +402,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Táto relácia bola ukončená, pretože iná relácia bola spustená pod rovnakým menom používateľa.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Znovu priradiť záznamy',
-	'LBL_REASS_DESC_PART1'				=> 'Vyberte moduly obsahujúce záznamy vybratého používateľa na priradenie inému používateľovi. <br/><br/>                                                            Kliknite na možnosť Ďalej a zobrazí sa počet záznamov, ktoré budú aktualizované v každom vybratom module.                                                            Kliknite na možnosť Zrušiť, čím zatvoríte stránku bez priradenia záznamov.',
+    'LBL_REASS_DESC_PART1'              => 'Vyberte moduly obsahujúce záznamy vybratého používateľa na priradenie inému používateľovi. <br/><br/>                                                            Kliknite na možnosť Ďalej a zobrazí sa počet záznamov, ktoré budú aktualizované v každom vybratom module.                                                            Kliknite na možnosť Zrušiť, čím zatvoríte stránku bez priradenia záznamov.',
         'LBL_REASS_DESC_PART2'=>                    'Vyberte, ktoré moduly spustiť proti ktorým pracovným postupom, odošlite oznámenia o priradení a vykonajte kontrolné sledovanie v priebehu preradenia. Kliknite na možnosť Ďalej a pokračujte v priraďovaní záznamov. Kliknite na možnosť Reštartovať, ak chcete začať znova.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Prerozdelenie tímu',
 	'LBL_REASS_STEP2_DESC'				=> 'Tímy uvedené ďalej boli k dispozícii vo formulári "z používateľského tímu", ale nie vo formulári "užívateľskému tímu". Všetky záznamy z formulára "z používateľského tímu" nebudú viditeľné vo formulári "užívateľskému tímu", pokiaľ hodnoty nebudú mapované.',
@@ -634,7 +638,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profil používateľa',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Ak chcete vykonať zmeny v poliach iba na čítanie, prejdite do časti <a href="%s" target="_blank">Nastavenia SugarCloud</a>.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Ak chcete urobiť zmeny v poliach určených iba na čítanie, obráťte sa na administrátora aplikácie Sugar.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

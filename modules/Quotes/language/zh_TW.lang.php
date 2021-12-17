@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => '報價清單儀表板',
     'LBL_QUOTES_RECORD_DASHBOARD' => '報價記錄儀表板',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => '報價焦點抽屜',
 
     'LBL_CONTRACTS'=>'合約',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'合約',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => '帳單地址國家',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => '帳單地址郵遞區號',
     'LBL_BILLING_ADDRESS_STATE' => '帳單地址州',
-    'LBL_BILLING_ADDRESS_STREET' => '帳單地址',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => '帳單地址：',
     'LBL_BILLING_CONTACT_ID' => '帳單連絡人 ID：',
     'LBL_BILLING_CONTACT_NAME' => '帳單連絡人姓名：',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => '運送國家',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => '運送郵遞區號',
     'LBL_SHIPPING_ADDRESS_STATE' => '運送州',
-    'LBL_SHIPPING_ADDRESS_STREET' => '運送地址',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => '運送地址：',
     'LBL_SHIPPING_BODY' => '賬單和運輸',
     'LBL_SHIPPING_CONTACT_ID' => '運送連絡人 ID：',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => '將帳單地址複製到運送地址',
     'NTC_COPY_SHIPPING_ADDRESS' => '將運送地址複製到帳單地址',
     'NTC_COPY_BILLING_ADDRESS2' => '複製到運送',
-    'NTC_COPY_SHIPPING_ADDRESS2' => '複製到帳單',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => '確定要從報價中移除此註解嗎？',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => '複製到帳單',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => '確定要從報價中移除此註解嗎？',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => '確定要從報價中移除此項目嗎？',
     'NTC_REMOVE_GROUP_CONFIRMATION' => '確定要從報價中移除此群組嗎？',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => '確定要從報價中移除此連絡人嗎？',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => '數量',
     'LBL_MFT_PART_NUM' => '部件編號',
     'LBL_ITEM_NAME' => '項目',
+    'LBL_PRODUCT_TEMPLATE' => '產品',
     'LBL_DISCOUNT_PRICE' => '單價',
     'LBL_DISCOUNT_AMOUNT' => '折扣',
     'LBL_LINE_ITEM_TOTAL' => '項目合計',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => '商機 ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '報價設定',
+
+    'LBL_RENEWAL' => '續訂',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '報價回饋互動',
 );

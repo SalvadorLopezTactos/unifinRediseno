@@ -49,6 +49,89 @@
             },
 
             /**
+             * Handle image paste.
+             *
+             * This callaback creates new EmbeddedFile object, so this module should be present in SugarCRM.
+             * If there is no EmbeddedFile module, this method does nothing.
+             *
+             * To enable image paste in tinymce you need to specify 'paste_data_images' and 'images_upload_handler'.
+             * See [TinyMCE documentation](http://www.tinymce.com/wiki.php/Configuration:paste_data_images) and
+             * [TinyMCE documentation](http://www.tinymce.com/wiki.php/Configuration:images_upload_handler)
+             *
+             * Example:
+             *
+             * config.paste_data_images = true;
+             * config.images_upload_handler = _.bind(this.tinyMCEImagePasteCallback, this);
+             *
+             * @param {Object} blobInfo Blob containing a pasted image.
+             * @param {Function} success Success callback.
+             * @param {Function} failure Failure callback.
+             */
+            tinyMCEImagePasteCallback: function(blobInfo, success, failure) {
+                var embeddedFile = app.data.createBean('EmbeddedFiles');
+                embeddedFile.save({name: blobInfo.filename()}, {
+                    success: _.bind(this._savePastedImage, this, blobInfo, success, failure)
+                });
+            },
+
+            /**
+             * Handler to save pasted image.
+             *
+             * @param {Object} blobInfo Blob containing a pasted image.
+             * @param {Function} success Success callback.
+             * @param {Function} failure Failure callback.
+             * @param {EmbeddedFile} model Model to save.
+             * @private
+             */
+            _savePastedImage: function(blobInfo, success, failure, model) {
+                // we need to use the same data structure for a file input to use our file api
+                var imageData = [
+                    {
+                        files: [
+                            blobInfo.blob()
+                        ]
+                    }
+                ];
+                model.uploadFile(
+                    this.fileFieldName,
+                    imageData,
+                    {
+                        success: _.bind(function(rsp) {
+                            var url = app.api.buildFileURL(
+                                {
+                                    module: 'EmbeddedFiles',
+                                    id: rsp.record.id,
+                                    field: this.fileFieldName
+                                },
+                                {
+                                    htmlJsonFormat: false,
+                                    passOAuthToken: false,
+                                    cleanCache: true,
+                                    forceDownload: false
+                                }
+                            );
+
+                            // set url
+                            success(url);
+
+                            // set alt, width, height
+                            var img = tinymce.activeEditor.selection.getNode().querySelector('img');
+                            img.setAttribute('alt', rsp[this.fileFieldName].name);
+                            img.setAttribute('width', img.naturalWidth);
+                            img.setAttribute('height', img.naturalHeight);
+                        }, this),
+                        error: _.bind(function() {
+                            app.alert.show('upload-error', {
+                                level: 'error',
+                                messages: 'ERROR_UPLOAD_FAILED'
+                            });
+                            failure('', {remove: true});
+                        }, this)
+                    }
+                );
+            },
+
+            /**
              * Handle embedded file upload process.
              *
              * This callaback creates new EmbeddedFile object, so this module should be present in SugarCRM.

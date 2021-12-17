@@ -18,7 +18,7 @@ use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\RequestInterface;
 use Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\GenericProvider;
 use League\OAuth2\Client\Tool\RequestFactory;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use GuzzleHttp\ClientInterface;
 
 /**
@@ -28,7 +28,7 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|Logger
+     * @var \PHPUnit_Framework_MockObject_MockObject|LoggerInterface
      */
     protected $logger;
 
@@ -64,7 +64,7 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
     {
         parent::__construct();
 
-        $this->logger = $this->createMock(Logger::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
 
         $this->requestFactory = $this->createMock(RequestFactory::class);
         $this->request = $this->createMock(RequestInterface::class);
@@ -135,7 +135,7 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
                 'urlResourceOwnerDetails' => 'http://testUrlResourceOwnerDetails',
                 'accessTokenFile' => '/tmp/bar.php',
                 'accessTokenRefreshUrl' => 'http://some-refresh-url',
-                'logger' => $this->createMock(Logger::class)
+                'logger' => $this->createMock(LoggerInterface::class)
             ]])
             ->setMethods([
                 'verifyGrant',
@@ -191,7 +191,7 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
             'urlIntrospectToken' => 'http://testUrlIntrospectToken',
             'accessTokenFile' => '/tmp/bar.php',
             'accessTokenRefreshUrl' => 'http://some-refresh-url',
-            'logger' => $this->createMock(Logger::class)
+            'logger' => $this->createMock(LoggerInterface::class)
         ];
         $expectedResult = ['--', 'expected', '--', 'Result', '--'];
         $expectedAuthorization = 'Basic ' . base64_encode(

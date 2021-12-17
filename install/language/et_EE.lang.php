@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Hoiatus: ei ole kirjutatav',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Sugar ei toeta teie PHP versiooni. Peate installima versiooni, mis ühildub Sugari rakendusega. Vaadake toetatud PHP versioonide osas väljalaskemärkustes olevat ühilduvusmaatriksit. Teie versioon on ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Sugar ei toeta teie IIS-i versiooni. Peate installima versiooni, mis ühildub Sugari rakendusega. Vaadake toetatud IIS-i versioonide osas väljalaskemärkustes olevat ühilduvusmaatriksit. Teie versioon on ',
-	'ERR_CHECKSYS_FASTCGI'              => 'Tuvastasime, et te ei kasuta PHP puhul FastCGI draivi vastendamist. Peate installima/konfigureerima versiooni, mis ühildub Sugari rakendusega. Vaadake toetatud versioonide osas väljalaskemärkustes olevat ühilduvusmaatriksit. Lisateabe saamiseks vt <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> ',
+    'ERR_CHECKSYS_FASTCGI'              => 'Tuvastasime, et te ei kasuta PHP puhul FastCGI töötleja vastendamist. Peate installima/konfigureerima versiooni, mis ühildub Sugari rakendusega. Vaadake toetatud versioonide kohta teavet väljalaskemärkmetes olevast ühilduvusmaatriksist. Lisateabe saamiseks vt <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS-i/FastCGI sapi kasutamisel optimaalse kogemuse saamiseks seadke fastcgi.logging oma php.ini failis väärtusele 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Installitud mittetoetatud PHP versioon: (vers',
     'LBL_DB_UNAVAILABLE'                => 'Andmebaas pole saadaval',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Andmebaasituge ei leitud. Veenduge, et teil oleks olemas vajalikud draiverid ühe jaoks järgnevatest toetatud andmebaasi tüüpidest: MySQL, MS SQLServer, Oracle või DB2. Olenevalt teie PHP versioonist võib olla tarvis muuta laienduse kommentaar koodiks php.ini failis või õige kahendfailiga uuesti kompileerida. Lisateavet andmebaasitoe aktiivseks muutmise kohta leiate oma PHP juhendist.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Andmebaasituge ei leitud. Veenduge, et teil oleksid olemas vajalikud draiverid ühe järgmise toetatud andmebaasi tüübi jaoks: MySQL, MS SQLServer, Oracle või DB2. Olenevalt teie PHP versioonist võib olla tarvis php.ini failis muuta laienduse kommentaar koodiks või õige kahendfailiga uuesti kompileerida.  Lisateavet andmebaasitoe aktiivseks muutmise kohta leiate oma PHP juhendist.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugari rakenduseks vajaliku XML parseri teegiga seotud funktsioone ei leitud. Olenevalt teie PHP versioonist võib teil olla vaja php.ini failis laiend lahti kommenteerida või rekompileerida õige kahendfailiga. Lisateabe saamiseks vaadake PHP juhendit.',
     'LBL_CHECKSYS_CSPRNG' => 'Juhusliku arvu generaator',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugari rakenduseks vajaliku mitmebaidiste stringide PHP laiendiga (mbstring) seotud funktsioone ei leitud. <br/><br/>Üldjuhul pole moodul mbstring PHP-s vaikimisi lubatud ja tuleb aktiveerida suvandiga --enable-mbstring when the PHP-kahendfaili loomisel. Lisateabe saamiseks mbstring toe lubamise kohta vaadake PHP juhendit.',
@@ -532,139 +532,139 @@ Lisateabe saamiseks vaadake installijuhendit.                                ",
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP tagasiühilduvuse režiim on sisse lülitatud. Jätkamiseks seadke zend.ze1_compatibility_mode suvandile Väljas',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Kohtumise teavituste meilid',
+        'subject' => 'SugarCRM-i kohtumine – $event_name ',
+        'description' => 'See mall on kasutusel, kui süsteem saadab kasutajale kohtumise teate.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Kellele: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user kutsub sind kohtumisele</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Teema: $event_name<br/>
+	Alguskuupäev: $start_date<br/>
+	Lõppkuupäev: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Kirjeldus: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Nõustu kohtumisega:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Nõustu kohtumisega ajutiselt:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Keeldu kohtumisest:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Kellele: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user kutsub sind kohtumisele
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Teema: $event_name
+Alguskuupäev: $start_date
+Lõppkuupäev: $end_date
 
-Description: $description
+Kirjeldus: $description
 
-Accept this meeting:
+Nõustu kohtumisega:
 <$accept_link>
 
-Tentatively Accept this meeting
+Nõustu kohtumisega ajutiselt
 <$tentative_link>
 
-Decline this meeting
+Keeldu kohtumisest
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Kõne teavitusmeilid',
+        'subject' => 'SugarCRM-i kõne – $event_name ',
+        'description' => 'See mall on kasutusel, kui süsteem saadab kasutajale kõne teate.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Kellele: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user kutsub sind kõnes osalema</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Teema: $event_name<br/>
+	Alguskuupäev: $start_date<br/>
+	Kestus: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Kirjeldus: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Nõustu kõnega:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Nõustu ajutiselt kõnega:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Keeldu kõnest:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Kellele: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user kutsub sind kõnes osalema
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Teema: $event_name
+Alguskuupäev: $start_date
+Kestus: $hoursh, $minutesm
 
-Description: $description
+Kirjeldus: $description
 
-Accept this call:
+Nõustu kõnega:
 <$accept_link>
 
-Tentatively Accept this call
+Nõustu ajutiselt kõnega
 <$tentative_link>
 
-Decline this call
+Keeldu kõnest
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Määratud teavitusmeilid',
+        'subject' => 'SugarCRM – Määratud $module_name ',
+        'description' => 'See mall on kasutusel, kui süsteem saadab kasutajale tööülesande.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user määras &nbsp;$module_name kasutajale &nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Võite seda vaadata&nbsp;$module_name järgmisel lehel:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user määras $module_name kasutajale $assigned_user.
 
-You may review this $module_name at:
+Võite seda vaadata $module_name järgmisel lehel:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Ajastatud aruande meilid',
+        'subject' => 'Ajastatud aruanne: $report_name ajal $report_time',
+        'description' => 'See mall on kasutusel, kui süsteem saadab kasutajale ajastatud aruande.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Tere $assigned_user</p>
+<p>Manuses on automaatselt koostatud aruanne, mis on teile planeeritud.</p>
+<p>Aruande nimi: $report_name</p>
+<p>Aruande kuupäev ja kellaaeg: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Tere $assigned_user
 
-Attached is an auto generated report that has been scheduled for you.
+Manuses on automaatselt koostatud aruanne, mis on teile planeeritud.
 
-Report Name: $report_name
-
-Report Run Date and Time: $report_time',
+Aruande nimi: $report_name
+Aruande kuupäev ja kellaaeg: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Süsteemi kommentaaride logi meiliteade',
+        'subject' => 'SugarCRM – $initiator_full_name mainis sind moodulis $singular_module_name',
+        'description' => 'Seda malli kasutatakse kommentaaride logis märgitud kasutajatele meiliteadete saatmiseks.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Teid mainiti järgneva kirje kommentaaride logis:  <a href="$record_url">$record_name</a></p>
+                <p>Kommentaari nägemiseks logige Sugarisse sisse.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Teid mainiti järgneva kirje kommentaaride logis:  $record_name
+            Kommentaari nägemiseks logige Sugarisse sisse.',
     ],
 
     'advanced_password_new_account_email' => array(

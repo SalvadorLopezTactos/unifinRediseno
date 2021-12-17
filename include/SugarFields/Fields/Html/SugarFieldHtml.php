@@ -55,4 +55,17 @@ class SugarFieldHtml extends SugarFieldBase {
     public function normalizeDefaultValue($value) {
         return htmlspecialchars_decode($value, ENT_QUOTES);
     }
+
+    /**
+     * Validates submitted data
+     * @param SugarBean $bean
+     * @param array $params
+     * @param string $field
+     * @param array $properties
+     * @return boolean
+     */
+    public function apiValidate(SugarBean $bean, array $params, $field, $properties)
+    {
+        return $this->apiValidateFieldSize($bean, $params, $field, $properties);
+    }
 }

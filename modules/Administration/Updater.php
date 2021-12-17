@@ -21,6 +21,10 @@ global $mod_strings;
 global $current_user;
 global $sugar_config;
 
+if (!is_admin($current_user)) {
+    sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
+}
+
 $xtpl=new XTemplate ('modules/Administration/Updater.html');
 $xtpl->assign("MOD", $mod_strings);
 $xtpl->assign("APP", $app_strings);
@@ -62,12 +66,6 @@ if (isset($_REQUEST['useraction']) && $_REQUEST['useraction']=='CheckNow') {
 	loadLicense();
 
 }
-
-	/*
-
-$xtpl->parse('main.stats');
-	*/
-
 
 $has_updates= false;
 if(!empty($license->settings['license_latest_versions'])){

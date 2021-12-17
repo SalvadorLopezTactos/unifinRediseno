@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Aruande kaupa',
     'LBL_RECENTLY_MODIFIED' => 'Hiljuti muudetud',
     'LBL_RECORD_SAVED_SUCCESS' => 'Olete edukalt loonud: {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Kasutajate lisamiseks kasutajate alampaani kaudu avage ajakava.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Selle aruande ajakava',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Aruande graafikute kirjete töölaud',
 );

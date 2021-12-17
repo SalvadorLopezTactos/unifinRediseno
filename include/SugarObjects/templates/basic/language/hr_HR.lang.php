@@ -31,6 +31,7 @@ $mod_strings = array(
  'LBL_REMOVE' => 'Ukloni',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Izmijenilo ime',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Stvorio naziv',
 
     'LBL_COMMENTLOG' => 'Comment Log',
 );

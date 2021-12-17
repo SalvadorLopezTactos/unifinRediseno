@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'ผสานระเบียน',
       'VisualPipeline'=>'กระบวนการขายเสมือน',
       'ConsoleConfiguration' => 'การกำหนดค่าคอนโซล',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'โควตา',
     'Teams' => 'ทีม',
     'TeamNotices' => 'ประกาศของทีม',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'กฎทางธุรกิจของกระบวนการ',
     'pmse_Emails_Templates' => 'เทมเพลทอีเมลของกระบวนการ',
     'BusinessCenters' => 'ศูนย์บริการธุรกิจ',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'เวรทำงาน',
+    'ShiftExceptions' => 'ข้อยกเว้นเวรทำงาน',
+    'Purchases' => 'ซื้อ',
+    'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
+    'MobileDevices' => 'อุปกรณ์เคลื่อนที่',
+    'PushNotifications' => 'การแจ้งเตือนแบบพุช',
     'WorkFlow' => 'การกำหนดเวิร์กโฟลว์',
     'EAPM' => 'บัญชีภายนอก',
     'Worksheet' => 'เวิร์กชีท',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'จดหมายข่าว',
   	'SugarFavorites'=>'รายการโปรด',
 	'PdfManager' => 'เครื่องมือจัดการ PDF',
+    'DataArchiver' => 'โปรแกรมเก็บข้อมูลถาวร',
+    'ArchiveRuns' => 'ดำเนินการจัดเก็บถาวร',
 
     'OAuthKeys' => 'คีย์ผู้ใช้ OAuth',
     'OAuthTokens' => 'โทเค็น OAuth',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'บันทึกความคิดเห็น',
     'Holidays' => 'วันหยุด',
     'ChangeTimers' => 'เปลี่ยนตัวตั้งเวลา',
+    'Messages' => 'ข้อความ',
   ),
 
     'moduleIconList' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'ผู้ผลิต',
     'VisualPipeline' => 'กระบวนการขายเสมือน',
     'ConsoleConfiguration' => 'การกำหนดค่าคอนโซล',
+    'MobileDevices' => 'อุปกรณ์เคลื่อนที่',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'สัญญา',
     'Quotes' => 'การเสนอราคา',
     'Products' => 'รายการบรรทัดการเสนอราคา',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'การแจ้งเตือน',
     'Sync'=>'ซิงค์',
     'PdfManager' => 'เครื่องมือจัดการ PDF',
+    'DataArchiver' => 'โปรแกรมเก็บข้อมูลถาวร',
+    'ArchiveRuns' => 'ดำเนินการจัดเก็บถาวร',
     'ReportMaker' => ' รายงานขั้นสูง',
     'DataSets' => 'รูปแบบข้อมูล',
     'CustomQueries' => 'การสืบค้นที่กำหนดเอง',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'กฎทางธุรกิจของกระบวนการ',
     'pmse_Emails_Templates' => 'เทมเพลทอีเมลของกระบวนการ',
     'BusinessCenters' => 'ศูนย์บริการธุรกิจ',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'เวรทำงาน',
+    'ShiftExceptions' => 'ข้อยกเว้นเวรทำงาน',
+    'Purchases' => 'ซื้อ',
+    'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
+    'PushNotifications' => 'การแจ้งเตือนแบบพุช',
     'WorkFlow' => 'เวิร์กโฟลว์',
     'EAPM' => 'บัญชีภายนอก',
     'Worksheet' => 'เวิร์กชีท',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'ตารางเวลารายงาน',
     'Holidays' => 'วันหยุด',
     'ChangeTimers' => 'เปลี่ยนตัวตั้งเวลา',
+    'Messages' => 'ข้อความ',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'สาธารณูปโภค',
     'Other' => 'อื่นๆ',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'อยู่ระหว่างดำเนินการ',
+        'Completed' => 'เสร็จสมบูรณ์',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'ขาเข้า',
+        'Outbound' => 'ขาออก',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'สนทนา',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'เทียร์ 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'เทียร์ 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => 'ใช่',
+      'No' => 'ไม่',
+      'Completed' => 'เสร็จสมบูรณ์',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'อนาคต',
+        'Active' => 'ทำงาน',
+        'Past' => 'อดีต',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'สร้างขึ้นด้วยตนเอง',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'วางกำหนดการแล้ว',
+    'In Progress' => 'อยู่ระหว่างดำเนินการ',
     'Held' => 'ระงับ',
     'Not Held' => 'ยกเลิก',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'การประชุม',
     'Calls' => 'การโทร',
       'KBContents' => 'ฐานความรู้',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
+      'Purchases' => 'ซื้อ',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'บัญชี',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'เป้าหมาย',
       'KBContents' => 'ฐานความรู้',
       'Notes' => 'หมายเหตุ',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
+    'Purchases' => 'ซื้อ',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => 'พอร์ทัล',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'ภายใน',
+        'Forum' => 'ฟอรัม',
+        'Web' => 'เว็บ',
+        'InboundEmail' => 'อีเมล',
+        'Twitter' => 'Twitter',
+        'Portal' => 'พอร์ทัล',
+        'Phone' => 'โทรศัพท์',
+        'Chat' => 'สนทนา',
+        'Chatbot' => 'บอทสนทนา',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,10 +2041,17 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Exchange',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'แลกเปลี่ยนออนไลน์',
         'outlook' => 'Outlook',
+        'google' => 'แอปที่มีความปลอดภัยน้อยกว่าใน Google',
+        'exchange' => 'Exchange',
         'other' => 'อื่นๆ',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'อีเมล Google',
+        'exchange_online' => 'แลกเปลี่ยนออนไลน์',
+        'other' => 'อื่น ๆ',
     ),
     'import_enclosure_options' =>
     array (
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'ใช่',
         'No' => 'ไม่',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'ในประมาณการ',
         'sales_stage' => 'ขั้นตอนการขาย',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'รายการ',
         'activities' => 'สตรีมกิจกรรม',
         'multi-line' => 'รายการแบบหลายบรรทัด',
+        'omnichannel' => 'ช่องทางการตลาดแบบบูรณาการ',
+        'home' => 'Home',
+        'focus' => 'ระบบลิ้นชัก',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'รายชั่วโมง',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'วัน',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'หมดเวลา',
+            'event' => 'เหตุการณ์',
+            'other' => 'อื่น ๆ',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'วันที่ (วันสุดท้าย {{module}})',
+            'start_date:asc' => 'วันที่ (วันแรก {{module}})',
+            'total_revenue:desc' => 'ราคา (ยอดรวมสูงสุด)',
+            'total_revenue:asc' => 'ราคา (ยอดรวมต่ำสุด)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'เปิดลิงก์',
   'LBL_TOGGLE_VISIBILITY' => 'สลับการแสดงผล', // Record view header panel element
   'LBL_ACTIVITIES' => 'สตรีมกิจกรรม',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'SugarCRM ®, Sugar Enterprise™ และ Sugar™ เป็นเครื่องหมายการค้าของ SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "พิมพ์",
     'LBL_HELP' => "ความช่วยเหลือ",
     'LBL_TOUR' => "ทัวร์",
-    'LBL_TOUR_LINK' => 'ทัวร์ - ชมทัวร์สำหรับไฮไลท์ของคุณลักษณ์ะต่างๆ',
+    'LBL_TOUR_LINK' => 'ทัวร์ชมเพจนี้',
     'LBL_MOBILE' => "อุปกรณ์เคลื่อนที่",
     'LBL_ID_FF_SELECT' => "เลือก",
     'DEFAULT'                              => 'ขั้นต้น',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'สร้างลายเซ็น',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'ชื่อลายเซ็น',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'เนื้อหาลายเซ็น',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'อื่นๆ',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'แลกเปลี่ยนออนไลน์',
+    'LBL_SMTPTYPE_GMAIL'                    => 'แอปที่มีความปลอดภัยน้อยกว่าใน Google',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'อื่นๆ',
+    'LBL_EMAIL_AUTHORIZE'                   => 'อนุญาต',
+    'LBL_EMAIL_AUTHORIZED'                  => 'อนุญาตแล้ว',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'ไม่อนุญาต',
+    'LBL_EMAIL_AUTH_WARNING'                => 'ผู้ดูแลระบบจะต้องกำหนดค่าเครื่องมือเชื่อมต่อ {0} ผ่าน ผู้ดูแลระบบ > เครื่องมือเชื่อมต่อ ก่อนที่จะสามารถสร้างบัญชีได้ คุณสามารถดูข้อมูลเพิ่มเติมได้ที่เอกสาร {1}',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'มีข้อผิดพลาดในการดึงข้อมูลเครื่องมือเชื่อมต่อ',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'ความล้มเหลวในการอนุญาต',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'กรุณาให้อนุญาตบัญชีก่อนบันทึก',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'กรุณาให้อนุญาตบัญชีก่อนทำการทดสอบ',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'บัญชีไม่ได้รับอนุญาต',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[โฟลเดอร์ระยะไกล]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[โฟลเดอร์ Sugar]',
     'LBL_EMAIL_SUBJECT'                     => 'เรื่อง',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'สำเนาถึง',
     'LBL_BCC' => 'สำเนาลับถึง',
 
+    'LBL_START_DATE' => 'วันที่เริ่มต้น',
+    'LBL_END_DATE' => 'วันที่สิ้นสุด',
+
     'LBL_LINK_NONE'=> 'ไม่มี',
     'LBL_LINK_ALL'=> 'ทั้งหมด',
     'LBL_LINK_RECORDS'=> 'ระเบียน',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => 'โปรดตรวจสอบข้อความแสดงข้อผิดพลาดด้านล่าง:',
     'NO_QUERY_SELECTED' => 'รูปแบบข้อมูลที่คุณเลือกไม่มีการสืบค้นอยู่ โปรดเลือกการสืบค้นที่กำหนดเองสำหรับรูปแบบข้อมูลนี้',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'เกิดข้อผิดพลาด:',
     'ERR_AJAX_LOAD_FAILURE'     => 'เกิดข้อผิดพลาดในการประมวลผลคำขอ โปรดลองอีกครั้งในภายหลัง',
     'ERR_AJAX_LOAD_FOOTER' => 'ถ้าปัญหานี้ยังคงอยู่ โปรดขอให้ผู้ดูแลระบบปิดใช้งาน Ajax สำหรับโมดูลนี้',
@@ -2793,9 +2890,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'คุณลักษณะนี้ไม่สามารถใช้ได้ในธีมนี้',
     'ERR_NOT_ADMIN' => "ไม่มีสิทธิ์ในการเข้าถึงการดูแลระบบ",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'การจัดการรหัสผ่านมีให้ใช้งานใน<a href="%s" target="_blank">การตั้งค่าระบบคลาวด์</a> เท่านั้น',
+        'การจัดการรหัสผ่านมีให้ใช้งานใน<a href="%s" target="_blank">การตั้งค่าระบบ SugarCloud</a> เท่านั้น',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'กรุณาติดต่อผู้ดูแลระบบ Sugar ของคุณ ถ้าคุณต้องการทำการเปลี่ยนแปลงลงในช่องที่ตั้งค่าไว้ให้อ่านได้อย่างเดียวเท่านั้น',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'กรุณาไปที่<a href="{0}" target="_blank">การตั้งค่า SugarCloud</a> เพื่อทำการเปลี่ยนแปลงฟิลด์ที่ตั้งค่าไว้ให้อ่านได้อย่างเดียวเท่านั้น',
     'ERR_MISSING_REQUIRED_FIELDS' => 'ไม่มีข้อมูลในฟิลด์ที่ต้องระบุ',
     'ERR_INVALID_REQUIRED_FIELDS' => 'ฟิลด์ที่ต้องระบุไม่ถูกต้อง:',
     'ERR_INVALID_VALUE' => 'ค่าไม่ถูกต้อง:',
@@ -2936,6 +3033,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'เพิ่ม',
     'LBL_ADD_BUTTON' => 'เพิ่ม',
+    'LBL_ADD_DASHLET_BUTTON' => 'เพิ่มส่วนข้อมูล',
     'LBL_ADD_DOCUMENT' => 'เพิ่มเอกสาร',
     'LBL_REPLACE_BUTTON' => 'แทนที่',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2966,6 +3064,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'ส่ง',
     'LBL_CASE'=>'เคส',
     'LBL_CASES'=>'เคส',
+    'LBL_MESSAGE'=>'ข้อความ',
+    'LBL_MESSAGES'=>'ข้อความ',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'เปลี่ยนรหัสผ่าน',
     'LBL_CHANGE_BUTTON_LABEL' => 'เปลี่ยน',
@@ -3192,6 +3292,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'สร้างการเสนอราคา',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'ไม่มีฟิลด์ที่ใช้ได้สำหรับการอัปเดตเป็นกลุ่ม',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'คำขออัปเดตเป็นกลุ่มของคุณได้รับการวางกำหนดการแล้ว',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'วันที่เริ่มบริการมีค่าเกินระยะวันที่สิ้นสุดการบริการ',
     'LBL_MASS_UPDATE_SUCCESS' => 'อัปเดตระเบียนทั้งหมดสำเร็จแล้ว',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'ระเบียนที่เลือกถูกเพิ่มในรายการเป้าหมาย <a href="{{listUrl}}">{{listName}}</a> แล้ว',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'คำขอเพิ่มระเบียนที่เลือกไปยังรายการเป้าหมาย <a href="{{listUrl}}">{{listName}}</a> ได้รับการวางกำหนดการแล้ว',
@@ -3427,11 +3528,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'เรื่อง',
 
     'LBL_INBOUNDEMAIL_ID' => 'ID อีเมลขาเข้า',
+    'LBL_EAMP_ID' => 'การให้อนุญาต ID โทเค่น',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'สงวนลิขสิทธิ์<br />SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'บริษัทที่เกี่ยวข้องนั้นๆ',
@@ -3504,6 +3606,8 @@ $app_strings = array (
     'LBL_USER_MENU' => 'เมนูผู้ใช้',
     'LBL_USERS_SYNC'=>'การซิงค์ของผู้ใช้',
     'LBL_USERS'=>'ผู้ใช้',
+    'LBL_USER'=>'ผู้ใช้',
+    'LBL_CURRENT_USER'=>'ผู้ใช้ปัจจุบัน',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'กำลังตรวจสอบรายการอีเมลที่มีอยู่...',
     'LBL_VERIFY_PORTAL_NAME'=>'กำลังตรวจสอบชื่อพอร์ทัลที่มีอยู่...',
     'LBL_VIEW_IMAGE' => 'ดู',
@@ -3592,6 +3696,8 @@ $app_strings = array (
         'จำนวนผู้ใช้ใบอนุญาตมีปริมาณถึงขีดจำกัดแล้ว ผู้ใช้ที่มีอยู่เท่านั้นที่จะสามารถลงชื่อเข้าใช้ได้',
     'WARN_ONLY_ADMINS'=> "มีเพียงผู้ดูแลระบบเท่านั้นที่สามารถลงชื่อเข้าใช้งานได้",
     'WARN_UNSAVED_CHANGES'=> "คุณกำลังจะออกจากระเบียนนี้โดยไม่บันทึกการเปลี่ยนแปลงที่ทำไว้กับระเบียน คุณแน่ใจหรือไม่ว่าต้องการออกจากระเบียนนี้",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'การรีเฟรชเบราว์เซอร์จะเป็นการปิดสายเรียกเข้า SugarLive หรือรอบการสนทนาที่คุณเปิดไว้โดยอัตโนมัติ การเปลี่ยนแปลงใด ๆ ที่ไม่ได้บันทึกไว้จะสูญหาย คุณต้องการดำเนินการต่อไปหรือไม่',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'คุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก คุณต้องการออกจากเพจและยกเลิกการเปลี่ยนแปลงหรือไม่',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'ส่วนข้อมูลหนึ่งหรือมากกว่าหนึ่งแห่งมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก',
     'LBL_NAVIGATE_TO_REPORTS' => 'คุณกำลังย้ายไปที่โมดูลรายงาน การเปลี่ยนแปลงในส่วนข้อมูลจะไม่ได้รับการบันทึก ต้องการดำเนินการต่อหรือไม่',
@@ -3614,6 +3720,7 @@ $app_strings = array (
     'ERROR_TIME_IS_AFTER' => 'ข้อผิดพลาด เวลาของฟิลด์นี้ต้องอยู่ก่อนถึงเวลาของฟิลด์ {{this}}',
     'ERROR_NUMBER' => 'ข้อผิดพลาด ฟิลด์นี้ต้องมีตัวเลขที่ถูกต้อง',
     'ERROR_INT' => 'ข้อผิดพลาด จำนวนเต็มไม่ถูกต้อง',
+    'ERROR_URL' => 'มีข้อผิดพลาด URL ไม่ถูกต้อง',
     'ERROR_NO_BEAN' => 'ไม่สามารถเรียกบีน',
     'ERROR_ACCESS_MODULE' => 'คุณไม่มีสิทธิ์เข้าถึงโมดูลนี้',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'ไฟล์แนบนี้มีขนาดใหญ่เกินไป',
@@ -3697,9 +3804,14 @@ $app_strings = array (
     'LBL_CREATE_OPPORTUNITY' => 'สร้างโอกาสทางการขาย',
     'LBL_SCHEDULE_CALL' => 'ล็อกการโทร',
     'LBL_SCHEDULE_MEETING' => 'วางกำหนดการประชุม',
+    'LBL_CREATE_MESSAGE' => 'สร้างข้อความ',
     'LBL_CREATE_TASK' => 'สร้างงาน',
     'LBL_REMOVE_FROM_FAVORITES' => 'นำออกจากรายการโปรดของฉัน',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'ดาวน์โหลดทั้งหมด',
+    'LBL_DOWNLOAD_ONE' => 'ดาวน์โหลด',
+    'LBL_ATTACHMENTS' => 'ไฟล์แนบ',
+    'LBL_ADD_ATTACHMENT' => 'เรียกดู',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'สร้างฟอร์ม',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'บันทึกเว็บไปยังฟอร์มของผู้สนใจ',
@@ -3751,8 +3863,8 @@ $app_strings = array (
     'LBL_DASHLET_REFRESH_LABEL' => 'รีเฟรช',
     'LBL_DASHLET_REMOVE_LABEL' => 'นำออก',
     'LBL_DASHLET_DROP_HERE' => 'วางที่นี่',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'ปิดทั้งหมด',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'เปิดทั้งหมด',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'ปิด',
     'LBL_DASHLET_MAXIMIZE' => 'เปิด',
     'LBL_DASHLET_CONFIGURE' => 'กำหนดค่า',
@@ -3774,6 +3886,10 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_NAME' => 'มุมมองรายการ',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'แสดงระเบียนจากโมดูลหนึ่งๆ ตามเกณฑ์ที่คุณกำหนด',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'มุมมองรายการคอนโซล',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'รายการระเบียนจากโมดูลเฉพาะที่เกี่ยวข้องกับระเบียนที่คุณกำลังดูอยู่ในคอนโซล',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'มุมมองระเบียน',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'แสดงระเบียนและระเบียนเกี่ยวข้องที่เลือกในแท็บ',
@@ -3784,6 +3900,7 @@ $app_strings = array (
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'คำเตือน โมดูล {{numWord}} ({{num}}) เท่านั้นที่จะแสดงในแท็บ ' .
         'กรุณาลบหนึ่งโมดูลหรือมากกว่าก่อนที่จะเพิ่มโมดูลอื่น',
     'LBL_SIX' => 'หก', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'บันทึกความคิดเห็น',
@@ -3808,7 +3925,13 @@ $app_strings = array (
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'ใช้ล่าสุด',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'รายการโปรด',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'สร้างแดชบอร์ด',
+    'LBL_DASHBOARD_DUPLICATE' => 'สร้างแดชบอร์ดที่เหมือนกัน',
+    'LBL_DASHBOARD_DELETE' => 'ลบแดชบอร์ด',
+    'LBL_PIN_TO_TOP' => 'ปักหมุดไว้ด้านบน',
+    'LBL_PIN_TO_BOTTOM' => 'ปักหมุดไว้ด้านล่าง',
+
+    'LBL_DASHBOARD_CONFIG' => 'การกำหนดค่าแดชบอร์ด',
     'LBL_LIST_VIEW__NAME' => 'มุมมองแบบรายการ',
     'LBL_PIPELINE_VIEW_NAME' => 'มุมมองแบบแผ่นป้าย',
     'LBL_PIPELINE_VIEW_BTN' => 'มุมมองแบบแผ่นป้าย',
@@ -3844,9 +3967,9 @@ $app_strings = array (
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'แหล่งข้อมูลเพื่อการเรียนรู้',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar University - คุณก็เป็นผู้เชี่ยวชาญได้',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'ฟอรัมชุมชน - เข้าร่วมการสนทนา',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'เอกสารและการสนับสนุน - ดูรายละเอียด',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'การอบรมและใบรับรอง',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'ชุมชน SugarClub',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'เอกสารประกอบและความช่วยเหลือ',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'การขายของแต่ละประเทศ',
@@ -3855,6 +3978,10 @@ $app_strings = array (
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'หมวดหมู่ฐานความรู้และบทความที่เผยแพร่',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'แสดงมุมมองแบบต้นไม้สำหรับหมวดหมู่ฐานความรู้และบทความที่เผยแพร่',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'การค้นหาฐานความรู้',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'แสดงมุมมองแบบต้นไม้ของบทความและหมวดหมู่ตามข้อมูลที่ได้รับการเผยแพร่',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'บทความที่เผยแพร่เป็นภาษาอื่นๆ',
@@ -4070,6 +4197,10 @@ $app_strings = array (
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'โปรดป้อนหมายเลขโทรศัพท์ของสหรัฐอเมริกาเป็นตัวเลข และรวมรหัสพื้นที่',
+    'LBL_CCP_NOT_INITIATED' => 'พยายามต่อสายโดยใช้ CCP ขณะที่ตัวแทนไม่ได้เข้าระบบ',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'ไม่สามารถเริ่มการโทรผ่าน CCP ได้',
+    'LBL_CCP_DIALING_ERROR' => 'ไม่สามารถทำการโทรนี้ให้สมบูรณ์โดยการต่อสายได้',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'โปรดปิดรอบการสนทนาใน SugarLive ก่อนที่จะทำการโทรออก',
 
     //File write error label
     'ERR_FILE_WRITE' => 'ข้อผิดพลาด: ไม่สามารถเขียนข้อมูลในไฟล์ {0} โปรดตรวจสอบสิทธิ์ใช้งานของระบบและเว็บเซิร์ฟเวอร์',
@@ -4422,8 +4553,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'สินค้าในไลน์ที่เสนอราคาแล้ว',
     'LBL_DISCOUNT_TOTAL' => 'ยอดรวมส่วนลด',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% เปอร์เซ็นต์',
+    'LBL_DISCOUNT_SELECT' => 'ระบุว่าส่วนลดเป็นจำนวนเปอร์เซ็นต์ หรือเป็นจำนวนคงที่',
     'LBL_TAX' => 'ภาษี',
     'LBL_SHIPPING' => 'การขนส่ง',
     'LBL_GRAND_TOTAL' => 'ยอดรวมทั้งหมด',
@@ -4470,7 +4601,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(ไม่มีสิทธิ์เข้าถึง)',
     'LBL_NO_ACCESS_LOWER' => 'ไม่มีสิทธิ์เข้าถึง',
     'LBL_NO_FIELD_ACCESS' => 'ไม่มีสิทธิ์เข้าถึง',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'ต้องใช้ใบอนุญาต',
     'LBL_VALUE_ERASED' => 'ลบค่าแล้ว',
     'LBL_VALUE_ERASED_TOOLTIP' => 'ลบข้อมูลนี้ตามการร้องขอการคุ้มครองข้อมูลส่วนบุคคลแล้ว',
     'LBL_CREATE_RELATED_RECORD' => 'สร้างระเบียนที่เกี่ยวข้อง',
@@ -4491,7 +4622,9 @@ $app_strings = array (
     'LBL_TASKS_SUBPANEL_TITLE' => 'งาน',
     'LBL_CALLS_SUBPANEL_TITLE' => 'การโทร',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'อีเมล',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'เวรทำงาน',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'รายการบรรทัดการเสนอราคา',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'ข้อยกเว้นเวรทำงาน',
     'LNK_SETTINGS' => 'การตั้งค่า',
     'LBL_MOBILE_SUPPORT' => 'การสนับสนุน',
     'LBL_MOBILE_SHOW_MORE' => 'แสดงเพิ่มเติม...',
@@ -4651,16 +4784,14 @@ $app_strings = array (
     'LBL_MOBILE_PDF_DOWNLOAD' => 'ดาวน์โหลด PDF {{{pdfTemplateName}}}',
 
     'ERR_SYNC_FAILED' => 'ไม่สามารถซิงค์กับเซิร์ฟเวอร์',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'ล็อกอิน SSO ไม่ได้ โปรดตรวจสอบว่าอินสแตนซ์อยู่ใน Sugar 7.5 ขึ้นไปและมีการกำหนดค่าสำหรับ SSO',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'ไม่ได้รับอนุญาตให้เข้าถึง',
     'ERR_MOBILE_INVALID_CREDS' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
     'ERR_MOBILE_SESSION_EXPIRED' => 'เซสชันของคุณหมดอายุแล้ว',
     'ERR_MOBILE_NOT_FOUND' => 'ไม่พบทรัพยากร',
     'ERR_MOBILE_TIMEOUT' => 'เซิร์ฟเวอร์ไม่ตอบสนอง',
     'ERR_MOBILE_CONNECTION_FAILED' => 'ไม่สามารถติดต่อเซิร์ฟเวอร์',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'ไม่มีเซิร์ฟเวอร์ {{{brandName}}} ตาม URL ที่ระบุ',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'เซิร์ฟเวอร์ไม่ตอบสนองที่ URL ที่ระบุ',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'เซิร์ฟเวอร์ไม่สามารถใช้งานได้ตาม URL ที่ระบุ',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'ไม่มีการเชื่อมต่ออินเทอร์เน็ต',
     'ERR_MOBILE_INTERNAL' => 'ข้อผิดพลาดภายใน ({{{code}}}) โปรดลองอีกครั้งในภายหลัง',
     'ERR_MOBILE_VALIDATION' => 'ระเบียนไม่ถูกต้อง',
@@ -4859,6 +4990,55 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'ปุ่มเมนูด้านขวา',
     'LBL_VO_ADD_BTN' => 'เพิ่มปุ่ม',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'ส่วนลด',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'เลือกแอปแผนที่',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => '{{entityName}} ที่เลือกไว้มีค่าที่เกี่ยวข้อง: {{localizedFieldNames}} ยกเลิกเพื่อเก็บค่าที่มีอยู่แล้ว ยืนยันเพื่อเขียนทับด้วยค่าใหม่',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'เปิดใช้งานการเข้ารหัสข้อมูลแล้ว',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'ผู้สนใจที่เลือกได้รับการแปลงแล้ว',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'การกระทำนี้สามารถทำได้เมื่ออุปกรณ์ออนไลน์อยู่เท่านั้น',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'คุณแน่ใจหรือไม่ว่าต้องการสร้างโอกาสทางการขายจากการเสนอราคา',
+    'LBL_TAG_ADD' => 'เพิ่มแท็ก',
+    'LBL_TAG_ENTER_TAG_NAME' => 'ป้อนแท็ก',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'ไม่รองรับการกรองโดยใช้แท็กขณะที่อุปกรณ์กำลังออฟไลน์',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'แสดงความคิดเห็นทั้งหมด',
+    'LBL_COMMENT_VIEW' => 'ดูความคิดเห็น',
+    'LBL_PMSE_LABEL_DUEDATE' => 'วันที่ครบกำหนด',
+    'LBL_PMSE_DUE' => 'ครบกำหนด',
+    'LBL_PMSE_DUE_ON' => 'ครบกำหนดเมื่อ',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'โปรดสร้าง {{conversionParentModuleName}} ก่อน',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'ขาดระเบียนที่ต้องใช้: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'เลือกคุณภาพรูปภาพ รูปภาพจะได้รับการปรับขนาดให้เหมาะสมก่อนที่จะบันทึกลงในเวิร์ฟเวอร์ ค่าที่เลือกจะถูกนำมาใช้เป็นค่าเริ่มต้นสำหรับการกระทำที่คล้ายคลึงกันในอนาคต',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'กำลังคาดการณ์ขนาดไฟล์',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'ขนาดไฟล์ที่คาดการณ์คือ',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'คุณภาพรูปภาพ',
+    'LBL_IMAGE_QUALITY_BEST' => 'ขนาดเดิม',
+    'LBL_IMAGE_QUALITY_GOOD' => 'คุณภาพดี',
+    'LBL_IMAGE_QUALITY_POOR' => 'ขนาดเล็ก',
+    'LBL_IMAGE_QUALITY_BTN' => 'การบีอัด: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'ฟิลด์ที่ทำรายการใน {{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'รีเซ็ตไปใช้ค่าเริ่มต้น',
+    'LBL_LIST_NOT_ENOUGH' => 'โปรดติดตั้งฟิลด์ให้ทำงานอย่างน้อย 1 ฟิลด์',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'คุณต้องเข้าระบบและให้การอนุญาตต่าง ๆ เพื่อที่จะสามารถใช้งานอินสแตนซ์ SugarCRM ได้',
+    'LBL_SELECTING_EXISTING_RECORD' => 'กำลังเลือก {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => 'กำลังสร้าง {{{moduleSingular}}} ใหม่',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'ขนาดรูปภาพ',
+    'LBL_COPY_ADDRESS' => 'คัดลอกที่อยู่',
+    'LBL_OPEN_IN' => 'เปิดใน',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'ไม่ได้เลือกไฟล์',
+    'LBL_ATTACHMENT_ADD' => 'แนบ',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'แอปนี้ใช้คุ้กกี้',
+    'LBL_USE_COOKIES_CONFIRM' => 'แอปพลิเคชันนี้ใช้คุ้กกี้เพื่อช่วยให้คุณได้ประสบการณ์ที่ดีกว่า ในการใช้งานแอปต่อหมายความว่าคุณยินยอมต่อการใช้งานคุ้กกี้ตามนโยบายความเป็นส่วนตัวของเรา',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'คุณกำลังใช้อินสแตนซ์ Sugar ที่สามารถใช้กันได้กับ Sugar Mobile ในการปล่อยตัวแอปสำหรับโทรศัพท์มือถือที่กำลังจะมีขึ้น โปรดสอบถามผู้ดูแลระบบของคุณเพื่อทำการอัปเกรด Sugar โดยเร็วที่สุด',
+    'ERROR_TAG_NAME_INVALID' => 'ชื่อแท็กไม่สามารถประกอบด้วยตัวอักษร "{{{forbiddenChars}}}"',
+    'ERROR_NO_TAGS_FOUND' => 'ไม่มีแท็กที่ตรงกับ "{{{searchQuery}}}" พร้อมใช้งาน',
+    'ERR_PA_RECORD_INVALID' => 'ระเบียน {{{moduleName}}} มีค่าที่ไม่ถูกต้องหนึ่งหรือมากกว่าหนึ่งและไม่สามารถบันทึกได้ คุณต้องการแก้ไขระเบียนเพื่อทำการ {{{actionLabel}}} หรือไม่',
+    'ERR_MOBILE_METADATA_RELOAD' => 'ผู้ดูแลได้เปลี่ยนแปลงการกำหนดค่าในอินซแตนซ์ Sugar ของคุณ โปรดกดปุ่ม ตกลง เพื่อซิงค์การกำหนดค่าแอปของคุณเข้ากับเซิร์ฟเวอร์',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'แอปพลิเคชันนี้ใช้คุกกี้',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'ทำเครื่องหมายเพื่อยินยอม (จำเป็น)',
@@ -4917,6 +5097,10 @@ $app_strings = array (
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'โทรศัพท์: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'อีเมล: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'เว็บ: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'คุณแน่ใจหรือไม่ว่าต้องการปิดการสนทนา',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'ล็อกอินไม่สำเร็จ โปรดลองใหม่อีกครั้ง',
@@ -4963,6 +5147,29 @@ $app_strings = array (
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'ชื่อ/ชื่อบัญชี',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'แดชบอร์ดช่องทางการตลาดแบบบูรณาการ',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'ลูกค้า',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} เมื่อ {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'เบราว์เซอร์ของคุณไม่รองรับการใช้งาน SugarLive โปรดใช้ Google Chrome หรือ Mozilla Firefox',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'ระบบได้สร้าง <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> ขึ้นมาซึ่งมีรายละเอียดการสนทนาของคุณ',
+    'LBL_OMNICHANNEL_SUBJECT' => 'หัวเรื่อง',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'คำอธิบาย',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'ข้อความแบบสรุปย่อ',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'การโทรแบบสรุปย่อ',
+    'LBL_OMNICHANNEL_LINK_TO' => 'เชื่อมโยง {{fromModule}} ไปยัง {{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => 'เชื่อมโยงแล้ว',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'เบราว์เซอร์ของคุณไม่รองรับการใช้งานการสนทนา โปรดใช้ Google Chrome หรือ Mozilla Firefox',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'โปรดติดต่อผู้ดูแลระบบ Sugar ของคุณเพื่อขอความช่วยเหลือ',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'เลย์เอาต์กำหนดค่า',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'โปรดทำการกำหนดค่า SugarLive ให้แล้วเสร็จก่อนที่จะทำการโทรออก',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'โปรดทำการกำหนดค่าเลย์เอาต์ SugarLive ให้แล้วเสร็จก่อนเปิด SugarLive',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'ตั้งให้ตัวคุณ "ออฟไลน์" ใน SugarLive ก่อนกำหนดค่าเลย์เอาต์ SugarLive',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'กู้คืนแท็บให้เป็นค่าเริ่มต้น',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'แผนกำหนดค่าแบบสรุป',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'โปรไฟล์ผู้ใช้',
@@ -4994,6 +5201,10 @@ $app_strings = array (
     'LBL_WIZ_CREATE_USERS' => 'สร้างผู้ใช้',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'การตั้งค่าระบบ',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'ค่าที่คุณกรอกเป็นรูปแบบที่ไม่ได้รับการรับรอง หรือไม่เป็นที่ยอมรับ โปรดดูรายการค่าและรูปแบบที่ยอมรับได้ที่ <a href="{{linkToDocumentation}}" target="_blank">ระบบ</a> เอกสารประกอบ.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'เนื้อหานี้ยังไม่ได้รับการอนุมัติ โปรดอัปเดต <a href="{{linkToDocumentation}}" target="_blank">การตั้งค่านโยบายเพื่อความปลอดภัยของเนื้อหา</a>ในระบบคุณ',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'เนื้อหานี้ยังไม่ได้รับอนุมัติ โปรดขอให้ผู้ดูแลระบบทำการอัปเดต <a href="{{linkToDocumentation}}" target="_blank">การตั้งค่านโยบายเพื่อความปลอดภัยของเนื้อหา</a>ในระบบคุณ เมื่อการตั้งค่าได้รับการอัปเดตแล้ว คุณจะต้องรีเฟรชเบราว์เซอร์เพื่อให้การเปลี่ยนแปลงมีผลใช้งาน',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'รหัสผ่าน',
@@ -5123,6 +5334,12 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'รายการของฉัน',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'รายการของทีม',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'ประวัติ',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'ส่วนข้อมูลประวัติจะแสดงการประชุมที่ถูกระงับ การโทรที่ล็อก อีเมลที่ได้รับ และอีเมลที่ส่ง',
@@ -5237,6 +5454,7 @@ $app_strings = array (
     //record save
     'LBL_RECORD_SAVED' => 'บันทึกระเบียนแล้ว', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => 'คุณสร้าง {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> สำเร็จแล้ว', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'คุณสร้าง {{moduleSingularLower}} สำเร็จแล้ว',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'คุณสร้างระเบียนนี้สำเร็จแล้ว แต่คุณไม่มีสิทธิ์เข้าถึงระเบียนนี้', // use when user has no access to the model
     'LBL_VALIDATING' => 'กำลังตรวจสอบ...',
 
@@ -5315,7 +5533,7 @@ $app_strings = array (
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'รีเฟรชรายการ',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'รีเฟรชแผ่นป้าย',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'เพิ่มเติม',
@@ -5569,6 +5787,7 @@ $app_strings = array (
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'กิจกรรมที่รอดำเนินการ',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'กิจกรรมที่รอดำเนินการแยกตามกระบวนการ',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'กระบวนการทั้งหมด',
+    'LBL_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียน',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'ข้อมูลสรุปสถานะกระบวนการ',
@@ -5600,7 +5819,7 @@ $app_strings = array (
     'LBL_BUSINESS_CENTER_ID' => 'ID ศูนย์บริการธุรกิจ',
     'LBL_BUSINESS_CENTER_NAME' => 'ชื่อศูนย์บริการธุรกิจ',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'กิจกรรมการซื้อสินค้าในไลน์',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(แท็กใหม่)',
@@ -5640,6 +5859,7 @@ $app_strings = array (
     'TPL_DATAPRIVACY_PII_TITLE' => 'ข้อมูลส่วนตัวสำหรับ {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'เปลี่ยนเวลา',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'ข้อความ',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'คัดลอกไปยังคลิปบอร์ดของคุณ!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'ไม่สามารถคัดลอกไปยังคลิปบอร์ดได้',
@@ -5657,13 +5877,24 @@ $app_strings = array (
     'LBL_COMMENT_LOG_SHOW_LESS' => 'แสดงน้อยลง...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'ไม่มีข้อมูล',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'การเป็นสมาชิกที่เปิดใช้งาน',
-    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'การเป็นสมาชิกที่เปิดใช้งานสำหรับบัญชีเฉพาะ',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'สามารถเพิ่มส่วนข้อมูลสำหรับโมดูลต่าง ๆ ที่เชื่อมกับบัญชีเดียวเท่านั้น โปรดศึกษาเอกสาร <a href={{linkToDocumentation}}> การเป็นสมาชิกที่เปิดใช้งานส่วนข้อมูล</a>เพื่อรับข้อมูลเพิ่มเติม',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'แสดงการซื้อที่เป็นของบัญชีที่เชื่อมกันนี้:',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'การเป็นสมาชิกที่เปิดใช้งานสำหรับบัญชีเฉพาะเจาะจง',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', ปริมาณ {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'รวม:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'ไม่มีการเป็นสมาชิกที่เปิดใช้งาน',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'ส่วนข้อมูลนี้ต้องใช้ {{module_name}} ในการทำงาน กรุณาแจ้งกับผู้ดูแลระบบเรื่องการเปิดใช้งาน {{module_name}}',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'ประวัติการสั่งซื้อ',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'การสั่งซื้อทั้งหมดของบัญชีเฉพาะเจาะจง',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'สามารถเพิ่มส่วนข้อมูลสำหรับโมดูลต่าง ๆ ที่เชื่อมกับบัญชีเดียวเท่านั้น โปรดศึกษาเอกสาร <a href={{linkToDocumentation}}> ส่วนข้อมูลประวัติการสั่งซื้อ</a>เพื่อรับข้อมูลเพิ่มเติม',
+    'LBL_NO_PURCHASE_HISTORY' => 'ไม่มีการสั่งซื้อให้แสดง',
+    'LBL_NO_PLIS' => 'ไม่มีสินค้าในไลน์ที่ซื้อมา',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'รวม',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'ปริมาณ',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'ส่วนข้อมูลนี้ต้องใช้ข้อมูลการสั่งซื้อและสินค้าในไลน์ที่สั่งซื้อมาเพื่อให้สามารถทำงานได้ โปรดแจ้งให้ผู้ดูแลระบบของคุณเปิดใช้งานการสั่งซื้อและสินค้าในไลน์ที่สั่งซื้อมา',
+    'LBL_SEARCH_PURCHASE_NAME' => 'ค้นหาโดยชื่อการสั่งซื้อ...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'ใช้สตูดิโอเพื่อแก้ไขเลย์เอาต์มุมมองส่วนข้อมูลของระเบียนโดยไปที่ ' .
@@ -5679,7 +5910,39 @@ $app_strings = array (
     'LBL_SERVICE_DURATION' => 'ระยะการบริการ',
     'LBL_SERVICE_DURATION_VALUE' => 'ค่าระยะการบริการ',
     'LBL_SERVICE_DURATION_UNIT' => 'หน่วยระยะการบริการ',
+    'LBL_LOCK_DURATION' => 'ระยะเวลาการล็อก',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'ไม่สามารถโหลด Amazon Connect CCP ได้ กรุณา' .
+        'ตรวจสอบให้แน่ใจว่าคุณกำลังใช้ '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">เบราว์เซอร์ที่รองรับ</a> ' .
+        'หากยังคงมีปัญหา กรุณาติดต่อผู้ดูแลระบบ Sugar ของคุณ',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'ผู้ดูแลระบบ Sugar ของคุณยังไม่ได้กำหนดค่าอินสแตนซ์สำหรับ Amazon Connect ของคุณ',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'ไม่สามารถสร้างการเชื่อมต่อกับ Amazon Connect กรุณาติดต่อผู้ดูแลระบบ Sugar ของคุณเพื่อขอรับความช่วยเหลือ',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'ไม่รู้จัก',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชัก',
+    'LBL_EXTERNAL_GUESTS' => 'ผู้เยี่ยมชมภายนอก',
+    'LBL_MY_FAVORITE_TASKS' => 'งานโปรดของฉัน',
+    'LBL_MY_TASKS' => 'งานของฉัน',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'หาฟิลด์ไม่พบ: {0} ในโมดูล: {1}',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'หาระเบียนที่มี{0}: {1} ในโมดูล: {2} ไม่พบ',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'หาความสัมพันธ์ที่ชื่อ: {0} ไม่พบ',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'มีการกรอกฐานข้อมูลของ id: {0} กับ {1}: {2} ในโมดูล: {3} อยู่แล้ว',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'ลบรายการข้อมูลแบบไม่ลบออกจากฐานข้อมูล (ด้วยธงที่ถูกลบ = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'พบระเบียนฐานข้อมูลหลายระเบียนสำหรับ {0} {1} ในโมดูล {2} ' .
+        'กรุณาลบ หรืออัปเดตระเบียนที่ตรงกัน ระเบียนที่ตรงกัน: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'ดำเนินการครั้งถัดไป',
+    'LBL_TIME_AWARE_TYPE' => 'ประเภท',
+    'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

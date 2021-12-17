@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Atentie: Modificati setarile de import automat, care poate duce la pierderi de date.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Atentie: Importul Auto trebuie sa fie activat atunci cand creati cazuri automat.',
 	'LBL_EDIT_LAYOUT' => 'Editeaza Plan General' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adresă de e-mail',
+    'LBL_EMAIL_PROVIDER' => 'Furnizor de e-mail',
+    'LBL_AUTH_STATUS' => 'Stare autorizație',
 );
-?>

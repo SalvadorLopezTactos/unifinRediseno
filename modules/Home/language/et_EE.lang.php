@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugari dashlet on lisatud',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashletid paigutatakse ümber, kas olete kindel, et soovite veeru paigutust muuta?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Kas olete kindel, et soovite Sugari dashleti eemaldada?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Ühtegi töölauda pole konfigureeritud.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Armatuurlaud pole konfigureeritud',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Dashletis pole konfigureeritud',
   'LBL_CREATE_DASHBOARD_LINK' => 'Loo töölaud',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Veebileht',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Mõnda saiti ei pruugita ebaturvalise sisu või poliitika tõttu õigesti laadida.',
 
-  'LBL_DASHLET_ADD' => 'Lisage',
+  'LBL_DASHLET_ADD' => 'Lisa dashlet',
   'LBL_DASHLET_DELETE' => 'Kustuta Sugari dashlet',
   'LBL_DASHLET_REFRESH' => 'Uuenda Sugari dashet',
   'LBL_DASHLET_EDIT' => 'Värskenda Sugari dashleti',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – kalender kuupäevade sisestamiseks, mille on loonud Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – Wayne Munro loodud teek PDF-dokumentide loomiseks',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server – WebDAV-serveri rakendamine PHP-s.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip – Vincent Blavet&#39; loodud teek pakub zip-vormingus arhiivide tihendamist ja ekstraktimist',
   'LBL_SOURCE_SMARTY' => 'Smarty – PHP mallimootor.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! kasutajaliidese teek – kasutajaliidese teegi utiliidid hõlbustavad rikaste kliendipoolsete funktsioonide juurutamist.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer – täisfunktsionaalne e-kirja teisaldamise klass PHP puhul',

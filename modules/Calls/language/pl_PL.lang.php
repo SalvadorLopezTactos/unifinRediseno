@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Pulpit listy wywołań',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Pulpit rekordów wywołań',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy połączeń',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Rozmowy telefoniczne',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Przypisano do',
     'LBL_LIST_MY_CALLS' => 'Moje rozmowy telefoniczne',
     'LBL_MY_SCHEDULED_CALLS' => 'Moje zaplanowane rozmowy',
+    'LBL_GUEST_CALLS' => 'Moje połączenia jako gość',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Zaplanowane połączenia jako gość',
     'LBL_SELECT_FROM_DROPDOWN' => 'Najpierw dokonaj wyboru z listy rozwijanej Powiązany z.',
 	'LBL_ASSIGNED_TO_NAME' => 'Przydzielono do',
 	'LBL_ASSIGNED_TO_ID' => 'Przypisano do',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Anuluj',
     'LBL_EMPTY_SEARCH_RESULT' => 'Nie znaleziono żadnych wyników. Utwórz uczestnika poniżej.',
     'LBL_NO_ACCESS' => 'Nie posiadasz uprawnień, aby utworzyć $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'ID kontaktu Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Powtórz',
     'LBL_REPEAT_INTERVAL' => 'Co',
     'LBL_REPEAT_END' => 'Koniec',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Rozmowa telefoniczna z {{{this}}}',
     'LBL_SEND_INVITES' => 'Wyślij zaproszenia',
     'LBL_REMINDER_TITLE' => 'Rozmowa telefoniczna:',
+    'LBL_CALL_RECORDING_URL' => 'Adres URL rejestrowania',
+    'LBL_CALL_RECORDING' => 'Rejestrowanie',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Zaplanowano czynność {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> na {{formatDate date_start}}.',

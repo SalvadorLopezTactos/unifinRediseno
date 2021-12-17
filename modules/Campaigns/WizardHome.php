@@ -25,6 +25,11 @@ $focus = BeanFactory::newBean('Campaigns');
 if(isset($_REQUEST['record']) &&  !empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
 
+    if (!$focus->ACLAccess('edit')) {
+        ACLController::displayNoAccess(true);
+        sugar_cleanup(true);
+    }
+
 global $mod_strings;
 global $app_list_strings;
 global $app_strings;
@@ -217,7 +222,7 @@ function create_campaign_summary  ($focus){
                         $cmpgn_tbl .= "<td scope='row'>" .
                             TeamSetManager::getFormattedTeamsFromSet($focus, true) . "</td></tr>\n";
 		            } else {
-                       $cmpgn_tbl .= "<td scope='row'>".$focus->$key."</td></tr>\n";
+                       $cmpgn_tbl .= "<td scope='row'>".htmlspecialchars($focus->$key, ENT_QUOTES, 'UTF-8')."</td></tr>\n";
                     }
                 }
     }

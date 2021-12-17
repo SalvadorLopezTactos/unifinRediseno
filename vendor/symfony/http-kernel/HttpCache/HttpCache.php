@@ -323,10 +323,6 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
             return $this->validate($request, $entry, $catch);
         }
 
-        if ($entry->headers->hasCacheControlDirective('no-cache')) {
-            return $this->validate($request, $entry, $catch);
-        }
-
         $this->record($request, 'fresh');
 
         $entry->headers->set('Age', $entry->getAge());
@@ -356,9 +352,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
         }
 
         // add our cached last-modified validator
-        if ($entry->headers->has('Last-Modified')) {
-            $subRequest->headers->set('if_modified_since', $entry->headers->get('Last-Modified'));
-        }
+        $subRequest->headers->set('if_modified_since', $entry->headers->get('Last-Modified'));
 
         // Add our cached etag validator to the environment.
         // We keep the etags from the client to handle the case when the client
@@ -438,8 +432,9 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * All backend requests (cache passes, fetches, cache validations)
      * run through this method.
      *
-     * @param bool          $catch Whether to catch exceptions or not
-     * @param Response|null $entry A Response instance (the stale entry if present, null otherwise)
+     * @param Request  $request A Request instance
+     * @param bool     $catch   Whether to catch exceptions or not
+     * @param Response $entry   A Response instance (the stale entry if present, null otherwise)
      *
      * @return Response A Response instance
      */
@@ -639,21 +634,16 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
 
     /**
      * Records that an event took place.
-     *
-     * @param Request $request A Request instance
-     * @param string  $event   The event name
      */
-    private function record(Request $request, $event)
+    private function record(Request $request, string $event)
     {
         $this->traces[$this->getTraceKey($request)][] = $event;
     }
 
     /**
      * Calculates the key we use in the "trace" array for a given request.
-     *
-     * @return string
      */
-    private function getTraceKey(Request $request)
+    private function getTraceKey(Request $request): string
     {
         $path = $request->getPathInfo();
         if ($qs = $request->getQueryString()) {
@@ -666,10 +656,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     /**
      * Checks whether the given (cached) response may be served as "stale" when a revalidation
      * is currently in progress.
-     *
-     * @return bool true when the stale response may be served, false otherwise
      */
-    private function mayServeStaleWhileRevalidate(Response $entry)
+    private function mayServeStaleWhileRevalidate(Response $entry): bool
     {
         $timeout = $entry->headers->getCacheControlDirective('stale-while-revalidate');
 
@@ -682,12 +670,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
 
     /**
      * Waits for the store to release a locked entry.
-     *
-     * @param Request $request The request to wait for
-     *
-     * @return bool true if the lock was released before the internal timeout was hit; false if the wait timeout was exceeded
      */
-    private function waitForLock(Request $request)
+    private function waitForLock(Request $request): bool
     {
         $wait = 0;
         while ($this->store->isLocked($request) && $wait < 100) {

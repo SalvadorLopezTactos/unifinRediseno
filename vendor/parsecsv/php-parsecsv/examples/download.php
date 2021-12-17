@@ -2,11 +2,13 @@
 
 
 # include parseCSV class.
-require_once('../parsecsv.lib.php');
+require __DIR__ . '/../vendor/autoload.php';
+
+use ParseCsv\Csv;
 
 
 # create new parseCSV object.
-$csv = new parseCSV();
+$csv = new Csv();
 
 
 # Parse '_books.csv' using automatic delimiter detection...
@@ -30,5 +32,3 @@ $csv->output('books.csv');
 # data to download the output as a CSV file. if it's not set
 # or is set to null, output will only return the generated CSV
 # output data, and will not output to the browser itself.
-
-?>

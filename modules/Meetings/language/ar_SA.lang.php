@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'لوحة معلومات قائمة الاجتماعات',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'لوحة معلومات سجل الاجتماعات',
+    'LBL_LEAD_GUESTS' => 'ضيوف العميل المتوقع',
+    'LBL_CONTACT_GUESTS' => 'ضيوف جهة الاتصال',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الاجتماعات',
 
 	'ERR_DELETE_RECORD' => 'يجب أن يتم تحديد رقم السجل لحذف الاجتماع.',
 	'LBL_ACCEPT_THIS'=>'قبول؟',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'الاتجاه',
 	'LBL_LIST_DUE_DATE'=>'تاريخ الاستحقاق',
 	'LBL_LIST_FORM_TITLE' => 'قائمة الاجتماعات',
-	'LBL_LIST_MY_MEETINGS' => 'الاجتماعات الخاصة بي',
+    'LBL_LIST_MY_MEETINGS' => 'الاجتماعات الخاصة بي',
     'LBL_MY_SCHEDULED_MEETINGS' => 'الاجتماعات المجدولة الخاصة بي',
+    'LBL_GUEST_MEETINGS' => 'اجتماعاتي كضيف',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'الاجتماعات المجدولة الخاصة بي كضيف',
 	'LBL_LIST_RELATED_TO' => 'مرتبط بـ',
 	'LBL_LIST_STATUS'=>'الحالة',
 	'LBL_LIST_SUBJECT' => 'الموضوع',

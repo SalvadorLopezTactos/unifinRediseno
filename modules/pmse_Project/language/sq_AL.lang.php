@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definime procesi',
   'LBL_MODULE_NAME_SINGULAR' => 'Definimi procesit',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te përkufizimet e proceseve',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Paneli i regjistrimit të përkufizimeve të procesit',
   'LNK_LIST' => 'Shiko definimet e procesit',
   'LNK_NEW_PMSE_PROJECT' => 'Krijo definimet e procesit',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importo definimet e procesit',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Ndrysho caktimin te përdoruesi',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Grupi',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Aktiviteti i ricaktimit',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Email',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Përdoruesi i procesit të emailit kur është caktuar proces',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definim i përdoruesit',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Metoda e caktimit',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Përdorues i caktuar',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Përditëso "Caktuar te" në regjistrim',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Cakto "Caktuar për" sipas disponueshmërisë',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Shto regjistrim të lidhur',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Modul i lidhur',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Emri i aktivitetit është i zbrazur.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Emri "%s" vetëm se ekziston në familjen e formave.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Disponueshmëria e kërkuar për turnin',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Nëse nuk ka përdorues të disponueshëm',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'para',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Vetëm regjistrime të reja',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Vetëm regjistrime të përditësuara',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Vetëm regjistrimet e përditësuara (të gjitha përditësimet - Shikoni tekstin e ndihmës)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Regjistrime të reja ose Përditësimi i parë',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Regjistrime të reja dhe të gjitha përditësimet',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Zgjidh vetëm kur procesi të fillojë.<br><br>E re: Hapeni procesin kur krijohet regjistrim i ri.<br><br>Përditësimi i parë: Procesi hapet vetëm kur plotësohet kriteri i herës së parë për një regjistrim ekzistues.<br><br>Të gjitha përditësimet: Procesi hapet sa herë që plotësohet kriteri i kohës për një regjistrim ekzistues.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Zgjidhni kohën e nisjes së procesit.<br><br>I ri: Ekzekutoni procesin kur krijohet një regjistrim i ri.<br><br>Përditësimi i parë: Procesi ekzekutohet vetëm herën e parë që përmbushen kriteret për një regjistrim ekzistues.<br><br>Të gjitha përditësimet: Procesi ekzekutohet sa herë që përmbushen kriteret për një regjistrim ekzistues.<br><br>Regjistrime të reja ose përditësimi i parë: Procesi ekzekutohet vetëm herën e parë që përmbushen kriteret për një regjistrim, gjatë krijimit të regjistrimit ose gjatë përditësimit të regjistrimit.<br><br>Regjistrime të reja dhe të gjitha përditësimet: Procesi ekzekutohet çdo herë për të gjitha regjistrimet e reja dhe ekzistuese.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Selekto SugarCRM modulin për të aplikuar këmbën e ngjarjes',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Datë e fiksuar',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'ndryshon nga',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'ndryshon në',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'përmban çdo',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'nuk përmban çdo',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'më ose pas',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'më ose para',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nuk është e barabartë me',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Shto',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Mbyll',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Të gjitha ekipet e caktuara për regjistrimin',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Grupet',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% në lidhje me %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Përdoruesi që krijoji %MODULE%',

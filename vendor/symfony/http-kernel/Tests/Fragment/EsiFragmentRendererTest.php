@@ -26,19 +26,7 @@ class EsiFragmentRendererTest extends TestCase
         $strategy->render('/', Request::create('/'));
     }
 
-    /**
-     * @group legacy
-     * @expectedDeprecation Passing non-scalar values as part of URI attributes to the ESI and SSI rendering strategies is deprecated %s.
-     */
-    public function testRenderFallbackWithObjectAttributesIsDeprecated()
-    {
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true), new UriSigner('foo'));
-        $request = Request::create('/');
-        $reference = new ControllerReference('main_controller', ['foo' => new \stdClass()], []);
-        $strategy->render($reference, $request);
-    }
-
-    public function testRenderFallbackWithScalarIsNotDeprecated()
+    public function testRenderFallbackWithScalar()
     {
         $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true), new UriSigner('foo'));
         $request = Request::create('/');
@@ -77,9 +65,11 @@ class EsiFragmentRendererTest extends TestCase
         );
     }
 
+    /**
+     * @expectedException \LogicException
+     */
     public function testRenderControllerReferenceWithoutSignerThrowsException()
     {
-        $this->expectException('LogicException');
         $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy());
 
         $request = Request::create('/');
@@ -89,9 +79,11 @@ class EsiFragmentRendererTest extends TestCase
         $strategy->render(new ControllerReference('main_controller'), $request);
     }
 
+    /**
+     * @expectedException \LogicException
+     */
     public function testRenderAltControllerReferenceWithoutSignerThrowsException()
     {
-        $this->expectException('LogicException');
         $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy());
 
         $request = Request::create('/');

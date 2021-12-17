@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Klasa e taksës',
   'LBL_TYPE_NAME'=>'Emri i llojit',
   'LBL_TYPE' => 'Lloji',
+  'LBL_PRODUCT_TYPE' => 'Lloji i produktit',
   'LBL_URL' => 'URL e produktit',
   'LBL_VENDOR_PART_NUM' => 'Numri i pjesës së shitësit',
   'LBL_WEIGHT' => 'pesha',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Shiko katalogun i produkteve',
   'NTC_DELETE_CONFIRMATION' => 'A jeni të sigurtë që dëshironi të fshini këtë regjistrim?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Shto',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Kërko katalogun e produkteve',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Nuk disponohen të dhëna',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Emri i përdoruesit të caktuar',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Llojet e Produkteve',
   'LBL_RENEWABLE' => 'I rinovueshëm',
   'LBL_SERVICE' => 'Shërbimi',
+  'LBL_LOCK_DURATION' => 'Kohëzgjatja e bllokimit',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Paneli i listës së katalogut të produkteve',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Paneli i regjistrimeve në katalogun e produkteve',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te katalogu i produkteve',
 );

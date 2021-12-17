@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Op rapport',
     'LBL_RECENTLY_MODIFIED' => 'Recent gewijzigd',
     'LBL_RECORD_SAVED_SUCCESS' => 'U hebt met succes de {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> aangemaakt. Open de planning om gebruikers toe te voegen via het subpaneel Gebruikers.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Dit rapportschema',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Dashboard record rapportschema&#39;s',
 );

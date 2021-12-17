@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de pressupostos',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de pressupostos',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als pressuposts',
 
     'LBL_CONTRACTS'=>'Contractes',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contractes',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'País de facturació',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Codi postal de cobrament',
     'LBL_BILLING_ADDRESS_STATE' => 'Estat/província de facturació',
-    'LBL_BILLING_ADDRESS_STREET' => 'Adreça de facturació',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adreça de facturació:',
     'LBL_BILLING_CONTACT_ID' => 'ID de contacte de facturació:',
     'LBL_BILLING_CONTACT_NAME' => 'Nom de contacte de cobrament:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'País d&#39;enviament',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Codi postal d´enviament',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Estat/província d&#39;enviament',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Adreça d&#39;enviament',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adreça d&#39;enviament:',
     'LBL_SHIPPING_BODY' => 'Facturació i enviament',
     'LBL_SHIPPING_CONTACT_ID' => 'ID de contacte d´enviament:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Copiar la direcció de cobrament a la direcció d&#39;enviament',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Copiar direcció d´enviament a direcció de cobrament',
     'NTC_COPY_BILLING_ADDRESS2' => 'Copiar a l&#39;enviament',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copiar a direcció de cobrament',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Està segur que desitja treure aquest comentari del pressupost?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copiar a direcció de cobrament',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Està segur que desitja treure aquest comentari del pressupost?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Està segur que desitja eliminar aquesta línia de detall del pressupost?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Està segur que desitja treure aquest grup del pressupost?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Està segur que desitja treure aquest contacte del pressupost?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Quantitat',
     'LBL_MFT_PART_NUM' => 'Número de referència',
     'LBL_ITEM_NAME' => 'Element de línia',
+    'LBL_PRODUCT_TEMPLATE' => 'Producte',
     'LBL_DISCOUNT_PRICE' => 'Preu unitari',
     'LBL_DISCOUNT_AMOUNT' => 'Descompte',
     'LBL_LINE_ITEM_TOTAL' => 'Total de l&#39;element de línia',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID d&#39;oportunitat',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configuració de presusposts',
+
+    'LBL_RENEWAL' => 'Renovació',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interaccions de pressuposts',
 );

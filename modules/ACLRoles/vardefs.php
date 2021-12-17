@@ -11,7 +11,7 @@
  */
 
  
-$dictionary['ACLRole'] = array('table' => 'acl_roles', 'comment' => 'ACL Role definition'
+$dictionary['ACLRole'] = array('table' => 'acl_roles', 'archive' => false, 'comment' => 'ACL Role definition'
                                ,'fields' => array (
   'id' => 
   array (
@@ -126,6 +126,7 @@ $dictionary['ACLRole'] = array('table' => 'acl_roles', 'comment' => 'ACL Role de
 
 $dictionary['ACLRoleSet'] = array(
     'table' => 'acl_role_sets',
+    'archive' => false,
     'fields' => array(
         'hash' => array(
             'name' => 'hash',

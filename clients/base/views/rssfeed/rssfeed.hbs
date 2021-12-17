@@ -13,9 +13,9 @@
 {{#if feed}}
     <div class="rss-feed">
         <h4>
-            {{#if feed.link}}<a href="{{feed.link}}">{{/if}}
+            {{#if feed.isClickable}}<a href="{{feed.link}}">{{/if}}
             {{feed.title}}
-            {{#if feed.link}}</a>{{/if}}
+            {{#if feed.isClickable}}</a>{{/if}}
         </h4>
         <ul>
             {{#each feed.entries}}

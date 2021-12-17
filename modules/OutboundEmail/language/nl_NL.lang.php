@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Uitgaande e-mailaccounts',
     'LBL_MODULE_NAME_SINGULAR' => 'Uitgaand e-mailaccount',
+    'LBL_STATUS' => 'Status',
     'LBL_MAIL_SENDTYPE' => 'Agent voor mail overbrengen',
     'LBL_MAIL_SMTPSERVER' => 'Server',
     'LBL_MAIL_SMTPPORT' => 'Poort',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Dit is het systeemaccount.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-mailadres-ID',
     'LBL_TYPE' => 'Type',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Geautoriseerd e-mailadres',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Van e-mailadres',
     'LBL_REPLY_TO_NAME' => 'Antwoord-naar naam',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Antwoord aan e-mailadres',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Antwoord aan ID e-mailadres',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Antwoord aan e-mailadres',
     'LBL_PRIMARY_TEAM' => 'Primair team',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer e-mailinstellingen',
 );

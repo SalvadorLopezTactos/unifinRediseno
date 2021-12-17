@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Piezīmju saraksta instrumentu panelis',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Piezīmju ierakstu instrumentu panelis',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Piezīmju fokusa panelis',
 
+    'LBL_RELATED_CONTACT' => 'Saistītā kontaktpersona',
     'ERR_DELETE_RECORD' => 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
     'LBL_ACCOUNT_ID' => 'Uzņēmuma ID:',
     'LBL_CASE_ID' => 'Pieteikuma ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontakta ID:',
     'LBL_CONTACT_NAME' => 'Kontakti:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Piezīmes',
+    'LBL_ATTACHMENTS' => 'Pielikumi',
+    'LBL_ATTACHMENT_FLAG' => 'Ir pielikums',
     'LBL_DESCRIPTION' => 'Piezīme',
     'LBL_EMAIL_ADDRESS' => 'E-pasta adrese:',
     'LBL_EMAIL_ATTACHMENT' => 'E-pasta pielikums',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Piezīmes un pielikumi',
     'LBL_NOTE' => 'Piezīme:',
     'LBL_OPPORTUNITY_ID' => 'Darījuma ID:',
+    'LBL_NOTE_PARENT_ID' => 'Piezīmes sākotnējais ID:',
     'LBL_PARENT_ID' => 'Vecāka ID:',
     'LBL_PARENT_TYPE' => 'Vecāka veids',
     'LBL_EMAIL_TYPE' => 'E-pasta tips',

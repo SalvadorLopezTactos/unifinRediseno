@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Stvorio ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Stvorio korisnik s kor. imenom',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ime dodijeljenog korisnika',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za oznake',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o oznakama',
+    'LBL_MY_TAGS' => 'Moje oznake',
+    'LBL_MY_FAVORITE_TAGS' => 'Moje omiljene oznake',
 );

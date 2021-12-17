@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Apmokestinimas:',
   'LBL_TYPE_NAME'=>'Tipo pavadinimas',
   'LBL_TYPE' => 'Tipas:',
+  'LBL_PRODUCT_TYPE' => 'Produkto tipas',
   'LBL_URL' => 'Prekės nuoroda:',
   'LBL_VENDOR_PART_NUM' => 'Tiekėjo prekės Nr:',
   'LBL_WEIGHT' => 'Svoris:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Prekių katalogas',
   'NTC_DELETE_CONFIRMATION' => 'Ar tikrai norite ištrinti šį įrašą?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Įtraukti',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Ieškoti produktų kataloge',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Jokių duomenų nėra',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atsakingas',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Prekių tipai',
   'LBL_RENEWABLE' => 'Atnaujinimas',
   'LBL_SERVICE' => 'Paslauga',
+  'LBL_LOCK_DURATION' => 'Užrakto trukmė',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Produktų katalogo sąrašo ataskaitų sritis',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Produktų katalogo įrašų ataskaitų sritis',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ produktų katalogas',
 );

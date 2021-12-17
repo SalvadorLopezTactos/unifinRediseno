@@ -12,9 +12,10 @@
 
 $mod_strings = array (
     // Dashboard Names
-    'LBL_CASES_LIST_DASHBOARD' => 'Pulpit listy zgloszeń',
+    'LBL_CASES_LIST_DASHBOARD' => 'Pulpit listy zgłoszeń',
     'LBL_CASES_RECORD_DASHBOARD' => 'Pulpit listy zgłoszeń',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Szczegóły zgłoszenia',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy zgłoszeń',
 
 	'ERR_DELETE_RECORD'					=> 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
 	'LBL_ACCOUNT_ID'					=> 'ID kontrahenta',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Pokaż w Portalu',
 	'LBL_CREATE_KB_DOCUMENT' => 'Utwórz artykuł',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Baza wiedzy',
+    'LBL_REQUEST_CLOSE' => 'Zażądaj zamknięcia',
+    'LBL_REQUEST_CLOSE_DATE' => 'Data zamknięcia żądania',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Żądanie zamknięcia',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Wyślij żądanie zamknięcia tego zgłoszenia',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Czy chcesz zażądać zamknięcia tego zgłoszenia?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Moje zgłoszenia do zamknięcia',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Moje zgłoszenia do zamknięcia',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Moje zgłoszenia do zamknięcia',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Lista zgłoszeń do zamknięcia',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Pokaż listę przydzielonych zgłoszeń, które mają być zamknięte',
 
     'LBL_CREATED_USER' => 'Utworzono przez',
     'LBL_MODIFIED_USER' => 'Zmodyfikowane przez',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przypisano do (nazwa użytkownika)',
     'LBL_EXPORT_TEAM_COUNT' => 'Liczebność zespołu',
     'LBL_CHANGETIMERS' => 'Zmień liczniki',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Zakupy',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Adresy e-mail powiązanych kontaktów',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Możesz na przykład użyć tej opcji do znalezienia wcześniej dodanego zgłoszenia.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'W przypadku nowego zgłoszenia wsparcia do dodania kliknij tutaj, aby dodać nowe zgłoszenie.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Kliknięcie tutaj przeniesie Cię z powrotem do tego widoku.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcje w zgłoszeniu',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notatki',
 

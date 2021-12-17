@@ -59,6 +59,23 @@ class SugarDateTime extends DateTime
 	protected static $_gmt;
 
     /**
+     * English Language weekdays. These are needed for datetime-aware modules
+     * (e.g. Business Centers) that use english language weekdays as field
+     * names.
+     *
+     * @var array
+     */
+    protected $englishWeekdays = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+    ];
+
+    /**
      * Calendar strings
      * @var array
      */
@@ -207,6 +224,9 @@ class SugarDateTime extends DateTime
 			case "day_of_week_long":
 				$str = $this->_getStrings('dom_cal_weekdays_long');
 				return $str[$this->day_of_week];
+            case "day_of_week_english":
+                $str = $this->englishWeekdays;
+                return $str[$this->day_of_week];
 			case "month_short":
 				$str = $this->_getStrings('dom_cal_month');
 				return $str[$this->month];

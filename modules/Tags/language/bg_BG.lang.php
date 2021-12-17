@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Създадено от',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Създадено от (User Name)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Име на отговорника',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на етикети',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Електронно табло със запис на етикетите',
+    'LBL_MY_TAGS' => 'Моите етикети',
+    'LBL_MY_FAVORITE_TAGS' => 'Моите предпочитани етикети',
 );

@@ -128,27 +128,28 @@ class EAPM extends Basic {
         );
     }
 
-   function save($check_notify = FALSE ) {
-       $this->fillInName();
-       if ( !is_admin($GLOBALS['current_user']) ) {
+    public function save($check_notify = false)
+    {
+        $this->fillInName();
+        if (empty($this->skipReassignment) && !is_admin($GLOBALS['current_user'])) {
            $this->assigned_user_id = $GLOBALS['current_user']->id;
-       }
+        }
 
-       if (!empty($this->password) && $this->password == static::$passwordPlaceholder) {
-           $this->password = empty($this->fetched_row['password']) ? '' : $this->fetched_row['password'];
-       }
+        if (!empty($this->password) && $this->password == static::$passwordPlaceholder) {
+            $this->password = empty($this->fetched_row['password']) ? '' : $this->fetched_row['password'];
+        }
 
-       $parentRet = parent::save($check_notify);
+        $parentRet = parent::save($check_notify);
 
-       // Nuke the EAPM cache for this record
-       if ( isset($_SESSION['EAPM'][$this->application]) ) {
-           unset($_SESSION['EAPM'][$this->application]);
-       }
+        // Nuke the EAPM cache for this record
+        if (isset($_SESSION['EAPM'][$this->application])) {
+            unset($_SESSION['EAPM'][$this->application]);
+        }
 
-       // Nuke the Meetings type dropdown cache
-       sugar_cache_clear('meetings_type_drop_down');
+        // Nuke the Meetings type dropdown cache
+        sugar_cache_clear('meetings_type_drop_down');
 
-       return $parentRet;
+        return $parentRet;
    }
 
    function mark_deleted($id)
@@ -241,6 +242,9 @@ class EAPM extends Basic {
 function getEAPMExternalApiDropDown() {
     $apiList = ExternalAPIFactory::getModuleDropDown('',true, true);
 
+    // Reject Email Oauth connections
+    $reject = ['GoogleEmail' => 0, 'MicrosoftEmail' => 1];
+    $apiList = array_diff_key($apiList, $reject);
     return $apiList;
 
 }

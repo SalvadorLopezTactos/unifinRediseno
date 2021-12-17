@@ -603,6 +603,7 @@ Se as Oportunidades estiverem Incluídas, as Contas devem ser obrigatórias ou r
     'LBL_PORTAL_CONFIGURE' => 'Configurar Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Activar portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Activa a pesquisa antes de abrir um caso',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permitir que utilizadores do portal fechem o caso',
     'LBL_PORTAL_THEME' => 'Tema do portal',
     'LBL_PORTAL_ENABLE' => 'Activar',
     'LBL_PORTAL_SITE_URL' => 'O seu Portal está disponível em:',
@@ -794,7 +795,15 @@ Se as Oportunidades estiverem Incluídas, as Contas devem ser obrigatórias ou r
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecione para utilizar este campo quando pesquisa por registos utilizando a Pesquisa Global neste módulo.',
+'LBL_POPHELP_REQUIRED'=>"Criar uma fórmula para determinar se este campo é obrigatório em layouts.<br/>"
+    . "Os campos obrigatórios irão seguir a fórmula na vista móvel baseada em navegador, <br/>"
+    . "mas não irão seguir a fórmula nas aplicações nativas, como o Sugar Mobile para iPhone. <br/>"
+    . "Não irão seguir a fórmula no Portal de Self-Service da Sugar.",
+'LBL_POPHELP_READONLY'=>"Criar uma fórmula para determinar se este campo é apenas de leitura em layouts.<br/>"
+        . "Os campos apenas de leitura irão seguir a fórmula na vista móvel baseada em navegador, <br/>"
+        . "mas não irão seguir a fórmula nas aplicações nativas, como o Sugar Mobile para iPhone. <br/>"
+        . "Não irão seguir a fórmula no Portal de Self-Service da Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione para usar este campo quando estiver a pesquisar registos usando a Pesquisa Global neste módulo.',
 //Revert Module labels
 'LBL_RESET' => 'Reiniciar',
 'LBL_RESET_MODULE' => 'Reiniciar Módulo',
@@ -829,6 +838,7 @@ Se as Oportunidades estiverem Incluídas, as Contas devem ser obrigatórias ou r
                 'encrypt'=>'Encriptar',
                 'datetimecombo' =>'Data/Hora',
                 'decimal'=>'Decimal',
+                'autoincrement' => 'Incremento automático',
 ),
 'labelTypes' => array(
     "" => "Rótulos usados frequentemente",
@@ -846,4 +856,5 @@ Se as Oportunidades estiverem Incluídas, as Contas devem ser obrigatórias ou r
 'LBL_ALL_MODULES'=>'Todos os Módulos',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (ID {1} relacionado)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copiar do layout',
+'LBL_RELATIONSHIP_TYPE' => 'Relação',
 );

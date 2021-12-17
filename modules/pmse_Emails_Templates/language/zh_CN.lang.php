@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => '流程电子邮件模板',
     'LBL_MODULE_NAME_SINGULAR' => '流程电子邮件模板',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '流程电子邮件模板焦点抽屉',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => '流程电子邮件模板记录仪表板',
     'LNK_LIST' => '查看流程电子邮件模板',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => '新增流程电子邮件模板',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => '导入流程电子邮件模板',

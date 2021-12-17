@@ -62,7 +62,6 @@ Touched:
 - modules/Reports/schedule/save_schedule.php
 - modules/Reports/schedule/ReportSchedule.php
 - modules/Schedulers/JobThread.php
-- modules/Schedulers/SchedulerDaemon.php
 - modules/Schedulers/_AddJobsHere.php
 - modules/Schedulers/Scheduler.php
 - modules/Users/reassignUserRecords.php

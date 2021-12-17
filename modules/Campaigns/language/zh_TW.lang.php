@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'未找到類型預設值目標清單',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'未找到項目',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => '項目已處理',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => '輸入電子郵件設定',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => '系統電子郵件設定',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'追蹤器名稱：',
   'LBL_EDIT_TRACKER_URL'=>'追蹤器 URL：',

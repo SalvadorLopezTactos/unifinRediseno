@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => '电话列表仪表板',
     'LBL_CALLS_RECORD_DASHBOARD' => '电话记录仪表板',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => '通话焦点抽屉',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => '电话',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => '获指派的用户',
     'LBL_LIST_MY_CALLS' => '我的电话',
     'LBL_MY_SCHEDULED_CALLS' => '我计划的电话',
+    'LBL_GUEST_CALLS' => '我的通话（作为宾客）',
+    'LBL_GUEST_SCHEDULED_CALLS' => '已安排通话（作为宾客）',
     'LBL_SELECT_FROM_DROPDOWN' => '请先从关联下拉列表中选择一项。',
 	'LBL_ASSIGNED_TO_NAME' => '指派给',
 	'LBL_ASSIGNED_TO_ID' => '获指派的用户',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => '取消',
     'LBL_EMPTY_SEARCH_RESULT' => '很抱歉，未找到结果。请在下面创建一个受邀人。',
     'LBL_NO_ACCESS' => '您没有权限创建 $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect 联系人 ID',
+
     'LBL_REPEAT_TYPE' => '重复',
     'LBL_REPEAT_INTERVAL' => '每个',
     'LBL_REPEAT_END' => '结束',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => '电话 {{{this}}}',
     'LBL_SEND_INVITES' => '发送邀请',
     'LBL_REMINDER_TITLE' => '电话：',
+    'LBL_CALL_RECORDING_URL' => '记录 URL',
+    'LBL_CALL_RECORDING' => '记录',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => '您预定 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> 为 {{formatDate date_start}}。',

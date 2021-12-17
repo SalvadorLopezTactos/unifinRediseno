@@ -19,15 +19,17 @@
     shouldDisable: null,
 
     /**
+     * The defined iframe height, in pixels. If no height is defined,
+     * use the default height for iframes (150px)
+     */
+    defaultIframeHeight: 150,
+
+    /**
      * KB specific parameters.
      * @private
      */
     _tinyMCEConfig: {
         'height': '300',
-        'plugins': 'code,textcolor,link,image',
-        'toolbar': 'code | bold italic underline strikethrough | bullist numlist | ' +
-        'alignleft aligncenter alignright alignjustify | forecolor backcolor | ' +
-        'removeformat | image link | fontsizeselect formatselect'
     },
 
     /**
@@ -40,6 +42,8 @@
         }
         this._super('initialize', [opts]);
         this.shouldDisable = false;
+        this.resizeWindowHandler =  _.debounce(_.bind(this.adjustBodyHeight, this), 100);
+        window.addEventListener('resize', this.resizeWindowHandler);
         if (!_.isUndefined(this.def.fieldSelector)) {
             this.fieldSelector = '[data-htmleditable=' + this.def.fieldSelector + ']';
         }
@@ -53,12 +57,72 @@
 
     /**
      * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+
+        // non-editor view
+        if (this.tplName === 'detail') {
+            this.defaultIframeHeight = this._getHtmlEditableField().height();
+        }
+    },
+
+    /**
+     * Gets the iframe body element and updates its height based on window size
+     */
+    adjustBodyHeight: function() {
+        var $iframeElement = this._getHtmlEditableField();
+
+        // adjust the KB body height once the iframe is ready
+        $iframeElement.ready(_.bind(this.updateBodyHeight, this, $iframeElement));
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Apply inline css style to iframe elements in detail view.
+     */
+    setViewContent: function(value) {
+        if (!_.isEmpty(value)) {
+            var elemArr = $.parseHTML(value) || [];
+            if (elemArr.length > 0) {
+                var firstElem = $(elemArr[0]);
+                // This makes sure that the first element is aligned with the label
+                firstElem.css('font-size', '14px');
+                firstElem.css('margin-top', '7.5px');
+                elemArr[0] = firstElem[0];
+                // clear the value string before assigning it modified value
+                value = '';
+
+                value += '<div class="kbdocument-body">';
+                // iterate over each element
+                _.each(elemArr, function(elem) {
+                    // append the outerHTML of each element to recreate value string
+                    value += elem.outerHTML;
+                });
+                value += '</div>';
+            }
+        }
+        this._super('setViewContent', [value]);
+
+        this.adjustBodyHeight();
+    },
+
+    /**
+     * @inheritdoc
      *
      * Apply document css style to editor.
      */
     getTinyMCEConfig: function() {
         var config = this._super('getTinyMCEConfig'),
             content_css = [];
+
+        // To open a link in the same window we need to use _top instead of _self as target
+        _.each(config.target_list, function(target) {
+            if (target.text === app.lang.getAppString('LBL_TINYMCE_TARGET_SAME')) {
+                target.value = '_top';
+            }
+        }, this);
 
         config = _.extend(config, this._tinyMCEConfig);
 
@@ -156,5 +220,38 @@
     {
         this.destroyTinyMCEEditor();
         this._super('setViewName', arguments);
+    },
+
+    /**
+     * Update the height of the KB body, up to maxBodyHeight
+     *
+     * @param $element the jQuery element
+     */
+    updateBodyHeight: function($element) {
+        var windowHeight = $(window).height();
+        this.maxBodyHeight = 0.6 * windowHeight;
+        var contentHeight = this._getContentHeight();
+
+        // do nothing if the content height is less than the default iframe height
+        if (contentHeight < this.defaultIframeHeight) {
+            return;
+        }
+
+        // add padding to account for bottom margins/padding
+        contentHeight += 20;
+
+        if (contentHeight < this.maxBodyHeight) {
+            $element.height(contentHeight);
+        } else {
+            $element.height(this.maxBodyHeight);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        window.removeEventListener('resize', this.resizeWindowHandler);
+        this._super('_dispose');
     }
 })

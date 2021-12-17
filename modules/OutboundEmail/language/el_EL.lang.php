@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Λογαριασμοί Εξερχόμενων Email',
     'LBL_MODULE_NAME_SINGULAR' => 'Λογαριασμος Εξερχόμενων Email',
+    'LBL_STATUS' => 'Κατάσταση',
     'LBL_MAIL_SENDTYPE' => 'Πράκτορας Μεταφοράς Ταχυδρομείου',
     'LBL_MAIL_SMTPSERVER' => 'Διακομιστής',
     'LBL_MAIL_SMTPPORT' => 'Θύρα',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Αυτός είναι ο λογαριασμός συστήματος.',
     'LBL_EMAIL_ADDRESS_ID' => 'Ταυτότητα διεύθυνσης Email',
     'LBL_TYPE' => 'Τύπος',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Εξουσιοδοτημένη διεύθυνση email',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Aπό Διεύθυνση Email',
     'LBL_REPLY_TO_NAME' => 'Απάντηση-σε Όνομα',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Απάντηση-σε διευθύνσεις Email',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Απάντηση σε ταυτότητες διευθύνσεων Email',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Απάντηση-σε διεύθυνση Email',
     'LBL_PRIMARY_TEAM' => 'Κύρια ομάδα',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης ρυθμίσεων ηλεκτρονικού ταχυδρομείου',
 );

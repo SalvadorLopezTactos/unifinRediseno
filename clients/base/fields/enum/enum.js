@@ -83,6 +83,11 @@
                 }
             });
         }
+
+        // Set appendValue for mass update
+        if (!_.isUndefined(this.model) && !_.isUndefined(this.model.get(this.name + '_replace'))) {
+            this.appendValue = this.model.get(this.name + '_replace') === '1';
+        }
     },
 
     /**
@@ -244,7 +249,6 @@
      * @private
      */
     _checkForDefaultValue: function(currentValue, optionsKeys){
-
         // Javascript keys function returns strings even if keys are numbers.  The parameter optionsKeys
         // is obtained by _.keys() operation on an object. Even if the object keys were numeric originally,
         // optionsKeys will be an array of strings. Hence we need to cast currentValue to a string
@@ -265,6 +269,7 @@
             && !(this.model.has(this.name) && optionsKeys.indexOf(currentValue) > -1)
             && app.acl.hasAccessToModel('write', this.model, this.name)
             && (action == 'edit' || action == 'create')
+            && !this.def.defaultToBlank
         ) {
             var defaultValue = this._getDefaultOption(optionsKeys);
             //Forecasting uses backbone model (not bean) for custom enums so we have to check here

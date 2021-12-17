@@ -205,4 +205,12 @@ class SugarOAuth2Server extends OAuth2
     {
         $this->storage->unsetRefreshToken($token);
     }
+
+    /**
+     * Revoke access token
+     * @param string $token
+     */
+    public function unsetAccessToken(string $token): void
+    {
+    }
 }

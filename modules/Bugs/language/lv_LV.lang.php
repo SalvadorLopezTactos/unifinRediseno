@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Kļūdu saraksta instrumentu panelis',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Kļūdu ierakstu instrumentu panelis',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Kļūdu fokusa panelis',
 
   'LBL_MODULE_NAME' => 'Kļūdas',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Kļūda',

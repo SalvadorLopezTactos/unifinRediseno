@@ -12,13 +12,14 @@
 
 $mod_strings = array (
   // Dashboard Names
-  'LBL_TARGETS_LIST_DASHBOARD' => 'ターゲットリストのダッシュボード',
-  'LBL_TARGETS_RECORD_DASHBOARD' => 'ターゲットレコードのダッシュボード',
+  'LBL_TARGETS_LIST_DASHBOARD' => 'ターゲットリストのダッシュ ボード',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'ターゲットレコードのダッシュ ボード',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'ターゲット フォーカス ドロワ',
 
   'LBL_MODULE_NAME' => 'ターゲット',
   'LBL_MODULE_NAME_SINGULAR' => 'ターゲット',
   'LBL_MODULE_ID'   => 'ターゲット',
-  'LBL_INVITEE' => '報告メンバー',
+  'LBL_INVITEE' => '直接的なリポート',
   'LBL_MODULE_TITLE' => 'ターゲット: ホーム',
   'LBL_SEARCH_FORM_TITLE' => 'ターゲット検索',
   'LBL_LIST_FORM_TITLE' => 'ターゲット一覧',
@@ -85,7 +86,7 @@ $mod_strings = array (
   'LBL_ASSISTANT' => 'アシスタント:',
   'LBL_ASSISTANT_PHONE' => 'アシスタント電話:',
   'LBL_DO_NOT_CALL' => '電話不可:',
-  'LBL_EMAIL_OPT_OUT' => 'メール送信除外:',
+  'LBL_EMAIL_OPT_OUT' => 'Eメール送信除外:',
   'LBL_PRIMARY_ADDRESS' => '主となる住所:',
   'LBL_ALTERNATE_ADDRESS' => '別の住所:',
   'LBL_ANY_ADDRESS' => '住所:',
@@ -169,7 +170,7 @@ $mod_strings = array (
   'LBL_EXPORT_MODIFIED_USER_ID' => '更新者ID',
   'LBL_EXPORT_CREATED_BY' => '作成者ID',
   'LBL_EXPORT_EMAIL2'=>'その他のEメール',
-  'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>の作成に成功しました。',
+  'LBL_RECORD_SAVED_SUCCESS' => '作成に成功しました {{moduleSingularLower}} {{full_name}}.',
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B プリンシパルID',
     //Document title
@@ -185,7 +186,7 @@ $mod_strings = array (
 
 - 個々のフィールドまたは[編集] ボタンをクリックして、このレコードのフィールドを編集します。
 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示したり変更します。
-- 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードのユーザのコメントしたり表示してください。
+- 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードのユーザーのコメントしたり表示してください。
 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りに入れてください。
 - 追加のアクションは、[編集] ボタンの右にあるドロップダウンの操作メニューにあります。',
 

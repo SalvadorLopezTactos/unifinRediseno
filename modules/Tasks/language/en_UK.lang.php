@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Tasks List Dashboard',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Tasks Record Dashboard',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Tasks Focus Drawer',
 
+  'LBL_RELATED_CONTACT' => 'Related Contact',
   'LBL_MODULE_NAME' => 'Tasks',
   'LBL_MODULE_NAME_SINGULAR' => 'Task',
   'LBL_TASK' => 'Tasks:',

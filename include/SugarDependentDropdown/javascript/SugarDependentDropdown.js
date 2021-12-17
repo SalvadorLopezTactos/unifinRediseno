@@ -160,8 +160,6 @@ SUGAR.dependentDropdown.generateElement = function(focusElement, elementRow, ind
 				debugger;
 			}
 		}
-
-	} else {
 	}
 }
 

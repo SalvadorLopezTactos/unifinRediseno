@@ -10,7 +10,7 @@
  */
 ({
     extendsFrom: 'MassupdateView',
-    
+
     /**
      * @inheritdoc
      */
@@ -46,6 +46,12 @@
      */
     save: function(forCalcFields) {
         var forecastCfg = app.metadata.getModule("Forecasts", "config");
+
+        if (!this.isEndDateEditableByStartDate()) {
+            this.handleUnEditableEndDateErrorMessage();
+            return;
+        }
+
         if (forecastCfg && forecastCfg.is_setup) {
             // Forecasts is enabled and setup
             var hasCommitStage = _.some(this.fieldValues, function(field) {

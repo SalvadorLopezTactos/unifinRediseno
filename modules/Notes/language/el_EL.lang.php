@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Σημειώσεων',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Σημειώσεων',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης σημειώσεων',
 
+    'LBL_RELATED_CONTACT' => 'Σχετική Επαφή',
     'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε τον λογαριασμό.',
     'LBL_ACCOUNT_ID' => 'Ταυτότητα Λογαριασμού:',
     'LBL_CASE_ID' => 'Ταυτότητα Υπόθεσης:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Ταυτότητα Επαφής:',
     'LBL_CONTACT_NAME' => 'Επαφή:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Σημειώσεις',
+    'LBL_ATTACHMENTS' => 'Επισυνάψεις',
+    'LBL_ATTACHMENT_FLAG' => 'Είναι Επισύναψη',
     'LBL_DESCRIPTION' => 'Σημείωση',
     'LBL_EMAIL_ADDRESS' => 'Διεύθυνση Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Επισύναψη Email',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Σημειώσεις & Επισυνάψεις',
     'LBL_NOTE' => 'Σημείωση:',
     'LBL_OPPORTUNITY_ID' => 'Ταυτότητα Ευκαιρίας:',
+    'LBL_NOTE_PARENT_ID' => 'Αναγνωριστικό αρχικής σημείωσης:',
     'LBL_PARENT_ID' => 'Γονική Ταυτότητα:',
     'LBL_PARENT_TYPE' => 'Γονική Ταυτότητα',
     'LBL_EMAIL_TYPE' => 'Τύπος Email',

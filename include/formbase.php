@@ -273,20 +273,33 @@ function buildRedirectURL($return_id = '', $return_module = '', array $additiona
 		$return_id = $_REQUEST['return_id'];
 	}
 
-    $add = http_build_query($additionalFlags);
 
     if (!isset($isDuplicate) || !$isDuplicate)
     {
-        $url="index.php?action=$return_action&module=$return_module&record=$return_id&return_module=$return_module&return_action=$return_action{$add}";
+        $baseQueryData = [
+            'action' => $return_action,
+            'module' => $return_module,
+            'record' => $return_id,
+            'return_module' => $return_module,
+            'return_action' => $return_action,
+        ];
+
         if(isset($_REQUEST['offset']) && empty($_REQUEST['duplicateSave'])) {
-            $url .= "&offset=".$_REQUEST['offset'];
+            $baseQueryData['offset'] = $_REQUEST['offset'];
         }
     } else {
-    	$standard = "action=$return_action&module=$return_module&record=$return_id&isDuplicate=true&return_module=$return_module&return_action=$return_action&status=$status";
-        $url="index.php?{$standard}{$add}";
+        $baseQueryData = [
+            'action' => $return_action,
+            'module' => $return_module,
+            'record' => $return_id,
+            'isDuplicate' => 'true',
+            'return_module' => $return_module,
+            'return_action' => $return_action,
+            'status' => $status,
+        ];
     }
-
-    return $url;
+    $queryData = array_merge($baseQueryData, $additionalFlags);
+    return 'index.php?' . http_build_query($queryData);
 }
 
 function getLikeForEachWord($fieldname, $value, $minsize=4)

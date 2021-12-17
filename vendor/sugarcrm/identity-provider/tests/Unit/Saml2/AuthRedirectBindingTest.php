@@ -404,7 +404,9 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
                 'expectedResult' => [
                     'http://idp.com/saml/slo?SAMLResponse=testResponse',
                     'GET',
-                    [],
+                    [
+                        'nameId' => 'sugarcrm.idm.developer@gmail.com',
+                    ],
                 ],
             ],
             'responseNotSignedRelayStateIsNotNull' => [
@@ -417,7 +419,9 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
                 'expectedResult' => [
                     'http://idp.com/saml/slo?SAMLResponse=testResponse&RelayState=http%3A%2F%2Frelay.state',
                     'GET',
-                    [],
+                    [
+                        'nameId' => 'sugarcrm.idm.developer@gmail.com',
+                    ],
                 ],
             ],
             'responseSignedRelayStateIsNotNull' => [
@@ -432,7 +436,9 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
                         'RelayState=http%3A%2F%2Frelay.state&' .
                         'SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&Signature=signature',
                     'GET',
-                    [],
+                    [
+                        'nameId' => 'sugarcrm.idm.developer@gmail.com',
+                    ],
                 ],
             ],
         ];
@@ -450,9 +456,15 @@ class AuthRedirectBindingTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessIdpSLO($response, $relayState, array $security, array $expectedResult)
     {
-        $request = 'testRequest';
+        $request = "<samlp:LogoutRequest Destination='https://login.sugar.multiverse/saml/logout'
+                     ID='_5eee0960-3ad4-0138-9d1e-1b902fea676e' IssueInstant='2020-02-26T14:44:09Z' Version='2.0'
+                     xmlns:samlp='urn:oasis:names:tc:SAML:2.0:protocol'>
+    <saml:Issuer xmlns:saml='urn:oasis:names:tc:SAML:2.0:assertion'>https://app.onelogin.com/saml/metadata/ba2b6f75-be5a-4fea-99b4-0a931f21bda4</saml:Issuer>
+    <saml:NameID xmlns:saml='urn:oasis:names:tc:SAML:2.0:assertion'>sugarcrm.idm.developer@gmail.com</saml:NameID>
+</samlp:LogoutRequest>";
         $this->logoutRequest->id = 'logoutRequestId';
         $this->logoutRequest->expects($this->once())->method('isValid')->willReturn(true);
+        $this->logoutRequest->method('getXML')->willReturn($request);
         $this->requestBuilder->expects($this->once())
                              ->method('buildLogoutRequest')
                              ->with($request)

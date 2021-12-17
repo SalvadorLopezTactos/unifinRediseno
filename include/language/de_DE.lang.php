@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'Datensätze zusammenführen',
       'VisualPipeline'=>'Visuelle Pipeline',
       'ConsoleConfiguration' => 'Konfiguration der Konsole',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'Quoten',
     'Teams' => 'Teams',
     'TeamNotices' => 'Team-Notizen',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Prozess-Geschäftsregeln',
     'pmse_Emails_Templates' => 'Prozess-E-Mail-Vorlagen',
     'BusinessCenters' => 'Geschäftszentren',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'Schichten',
+    'ShiftExceptions' => 'Schichtausnahmen',
+    'Purchases' => 'Einkäufe',
+    'PurchasedLineItems' => 'Gekaufte Produkte',
+    'MobileDevices' => 'Mobilgeräte',
+    'PushNotifications' => 'Push-Benachrichtigungen',
     'WorkFlow' => 'Workflow-Definitionen',
     'EAPM' => 'Externe Konten',
     'Worksheet' => 'Arbeitsblatt',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'Newsletter',
   	'SugarFavorites'=>'Favoriten',
 	'PdfManager' => 'PDF-Manager',
+    'DataArchiver' => 'Datenarchivierer',
+    'ArchiveRuns' => 'Archivierungsläufe',
 
     'OAuthKeys' => 'OAuth Konsumenten-Schlüssel',
     'OAuthTokens' => 'OAuth Tokens',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'Kommentarprotokoll',
     'Holidays' => 'Feiertage',
     'ChangeTimers' => 'Zeitmesser ändern',
+    'Messages' => 'Nachrichten',
   ),
 
     'moduleIconList' =>
@@ -141,7 +147,7 @@ $app_list_strings = array (
         'Dashboards' => 'DS',
         'DataPrivacy' => 'DS',
         'BusinessCenters' => 'BC',
-        'PurchasedLineItems' => 'PL',
+        'PurchasedLineItems' => 'KP',
     ),
 
   'moduleListSingular' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'Hersteller',
     'VisualPipeline' => 'VisualPipeline',
     'ConsoleConfiguration' => 'ConsoleConfiguration',
+    'MobileDevices' => 'Mobilgerät',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'Vertrag',
     'Quotes' => 'Angebot',
     'Products' => 'Produkt',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'Benachrichtigung',
     'Sync'=>'Synchronisierung',
     'PdfManager' => 'PDF-Manager',
+    'DataArchiver' => 'Datenarchivierer',
+    'ArchiveRuns' => 'Archivierungsläufe',
     'ReportMaker' => ' Erweiterter Bericht',
     'DataSets' => 'Datenformat',
     'CustomQueries' => 'Individuelle Abfrage',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Prozess-Geschäftsregel',
     'pmse_Emails_Templates' => 'Prozess-E-Mail-Vorlage',
     'BusinessCenters' => 'Geschäftszentrum',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'Schicht',
+    'ShiftExceptions' => 'Schichtausnahmen',
+    'Purchases' => 'Einkauf',
+    'PurchasedLineItems' => 'Gekauftes Produkt',
+    'PushNotifications' => 'Push-Benachrichtigung',
     'WorkFlow' => 'Workflow',
     'EAPM' => 'Externes Konto',
     'Worksheet' => 'Arbeitsblatt',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'Berichtzeitplan',
     'Holidays' => 'Feiertag',
     'ChangeTimers' => 'Zeitmesser ändern',
+    'Messages' => 'Nachricht',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'Energieversorger',
     'Other' => 'Andere',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'In Bearbeitung',
+        'Completed' => 'Abgeschlossen',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'Eingehend',
+        'Outbound' => 'Ausgehend',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'Chat',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'Ebene 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'Ebene 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => 'Ja',
+      'No' => 'Nein',
+      'Completed' => 'Abgeschlossen',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'Zukunft',
+        'Active' => 'Aktiv',
+        'Past' => 'Vergangen',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'Selbst generiert',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'Geplant',
+    'In Progress' => 'In Bearbeitung',
     'Held' => 'Durchgeführt',
     'Not Held' => 'Abgesagt',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'Meeting',
     'Calls' => 'Anruf',
       'KBContents' => 'Wissensdatenbank',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'Gekauftes Produkt',
+      'Purchases' => 'Einkauf',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Firma',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'Zielkontakt',
       'KBContents' => 'Wissensdatenbank',
       'Notes' => 'Hinweis',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Gekauftes Produkt',
+    'Purchases' => 'Einkauf',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => 'Portal',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'Intern',
+        'Forum' => 'Forum',
+        'Web' => 'Web',
+        'InboundEmail' => 'E-Mail',
+        'Twitter' => 'Twitter',
+        'Portal' => 'Portal',
+        'Phone' => 'Telefon',
+        'Chat' => 'Chat',
+        'Chatbot' => 'Chatbot',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,9 +2041,16 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Exchange',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'Google Weniger sichere Apps',
+        'exchange' => 'Exchange',
+        'other' => 'Andere',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
         'other' => 'Andere',
     ),
     'import_enclosure_options' =>
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'Ja',
         'No' => 'Nein',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'In Prognose',
         'sales_stage' => 'Verkaufsphase',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'Liste',
         'activities' => 'Aktivitäten-Stream',
         'multi-line' => 'Mehrzeilige Liste',
+        'omnichannel' => 'Omnichannel',
+        'home' => 'Home',
+        'focus' => 'Fokus-Drawer',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Stündlich',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'Tag(e)',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'Arbeitsfreie Zeit',
+            'event' => 'Ereignis',
+            'other' => 'Andere',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'Datum (letzter {{module}})',
+            'start_date:asc' => 'Datum (erster {{module}})',
+            'total_revenue:desc' => 'Preis (höchster Gesamtbetrag)',
+            'total_revenue:asc' => 'Preis (geringster Gesamtbetrag)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Dem Link folgen',
   'LBL_TOGGLE_VISIBILITY' => 'Sichtbarkeit aktivieren', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitäten-Stream',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar und der 3-D-Würfel sind eingetragene Warenzeichen von SugarCRM Inc. '.
         'Alle anderen in diesem Produkt verwendeten oder angegebenen Firmen- und Produktnamen sind möglicherweise Markenzeichen von '.
         'SugarCRM ®, Sugar Enterprise™ und Sugar™ sind Warenzeichen von SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "Drucken",
     'LBL_HELP' => "Hilfe",
     'LBL_TOUR' => "Activity View Tour",
-    'LBL_TOUR_LINK' => 'Tour - Tour zu Highlights bei den Funktionen ansehen',
+    'LBL_TOUR_LINK' => 'Diese Seite anschauen',
     'LBL_MOBILE' => "Mobiltelefon",
     'LBL_ID_FF_SELECT' => "Auswählen",
     'DEFAULT'                              => 'Einfach',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'Signatur erstellen',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'Signaturname',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'Signatur-Inhalt',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'Andere:',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Google Weniger sichere Apps',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'Andere:',
+    'LBL_EMAIL_AUTHORIZE'                   => 'Autorisieren',
+    'LBL_EMAIL_AUTHORIZED'                  => 'Autorisiert',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'Nicht autorisiert',
+    'LBL_EMAIL_AUTH_WARNING'                => 'Ein Administrator muss den {0} Anschluss über Admin > Anschlüsse konfigurieren, bevor Sie dieses Konto einrichten können. Weitere Informationen finden Sie in der {1} Dokumentation.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'Fehler beim Abrufen der Connector-Informationen',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'Fehler bei der Autorisierunng.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'Bitte genehmigen Sie das Konto vor dem Speichern.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'Bitte autorisieren Sie das Konto vor dem Testen.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'Konto nicht autorisiert',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[ Remote-Ordner ]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ Sugar-Ordner ]',
     'LBL_EMAIL_SUBJECT'                     => 'Betreff',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'CC',
     'LBL_BCC' => 'BCC',
 
+    'LBL_START_DATE' => 'Startdatum',
+    'LBL_END_DATE' => 'Enddatum',
+
     'LBL_LINK_NONE'=> 'Kein(e)',
     'LBL_LINK_ALL'=> 'Alle',
     'LBL_LINK_RECORDS'=> 'Sätze',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => 'Bitte beachten Sie die unten stehende Fehlermeldung:',
     'NO_QUERY_SELECTED' => 'Das von Ihnen gewählte Datenformat enthält keine Abfrage. Bitte wählen Sie eine Abfrage für dieses Format aus.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'Ein Fehler ist aufgetreten',
     'ERR_AJAX_LOAD_FAILURE'     => 'Es gab einen Fehler bei dieser Abfrage, bitte später erneut versuchen.',
     'ERR_AJAX_LOAD_FOOTER' => 'Wenn der Fehler andauernd, muss der Administrator Ajax für dieses Modul deaktivieren',
@@ -2793,9 +2890,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'Diese Funktion ist für dieses Design nicht verfügbar.',
     'ERR_NOT_ADMIN' => "Unautorisierter Zugriff auf die Administration.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'Die Passwortverwaltung ist nur in den <a href="%s" target="_blank">Cloud-Einstellungen</a>verfügbar.',
+        'Die Passwortverwaltung ist nur in den <a href="%s" target="_blank">SugarCloud-Einstellungen</a>verfügbar.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Bitte wenden Sie sich an Ihren Sugar-Administrator, wenn Sie Änderungen an schreibgeschützten Feldern vornehmen möchten.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Bitte gehen Sie zu den <a href="{0}" target="_blank">SugarCloud-Einstellungen</a>, um Änderungen an schreibgeschützten Feldern vorzunehmen.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Fehlendes Pflichtfeld:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Ungültige Pflichtfelder:',
     'ERR_INVALID_VALUE' => 'Ungültiger Wert:',
@@ -2936,6 +3033,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'Hinzufügen',
     'LBL_ADD_BUTTON' => 'Hinzufügen',
+    'LBL_ADD_DASHLET_BUTTON' => 'Dashlet hinzufügen',
     'LBL_ADD_DOCUMENT' => 'Dokument hinzufügen',
     'LBL_REPLACE_BUTTON' => 'Ersetzen',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2966,6 +3064,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'Ausführen',
     'LBL_CASE'=>'Ticket',
     'LBL_CASES'=>'Tickets',
+    'LBL_MESSAGE'=>'Nachricht',
+    'LBL_MESSAGES'=>'Nachrichten',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Passwort ändern',
     'LBL_CHANGE_BUTTON_LABEL' => 'Ändern',
@@ -3192,6 +3292,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'Angebot generieren',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'Es gibt keine Felder für die Massen-Update-Funktion',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'Ihre Anforderung für das Massen-Update wurde eingeplant.',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'Service-Startdatum liegt nach Service-Enddatum.',
     'LBL_MASS_UPDATE_SUCCESS' => 'Alle Einträge wurden erfolgreich aktualisiert.',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'Die ausgewählten Datensätze wurden der Zielkontaktliste <a href="{{listUrl}}">{{listName}}</a> hinzugefügt.',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'Ihr Antrag, Datensätze der Zielkontakliste <a href="{{listUrl}}">{{listName}}</a> hinzuzufügen, wurde eingeplant.',
@@ -3427,11 +3528,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'Betreff',
 
     'LBL_INBOUNDEMAIL_ID' => 'Eingehende E-Mail-ID',
+    'LBL_EAMP_ID' => 'Token-ID für die Authentifizierung',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Alle Rechte vorbehalten.<br />SugarCRM, Sugar und der 3-D-Würfel sind eingetragene Warenzeichen von SugarCRM Inc. '.
         'Alle anderen in diesem Produkt verwendeten oder angegebenen Firmen- und Produktnamen sind möglicherweise Markenzeichen von '.
         'den jeweiligen Unternehmen, mit denen sie verbunden sind.',
@@ -3504,6 +3606,8 @@ Sincerely, SugarCRM',
     'LBL_USER_MENU' => 'Benutzer',
     'LBL_USERS_SYNC'=>'Benutzer-Synchronisierung',
     'LBL_USERS'=>'Benutzer',
+    'LBL_USER'=>'Benutzer',
+    'LBL_CURRENT_USER'=>'Aktueller Benutzer',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'Suche nach bestehenden E-Mail-Einträgen...',
     'LBL_VERIFY_PORTAL_NAME'=>'Suche nach bestehendem Portalnamen...',
     'LBL_VIEW_IMAGE' => 'Ansicht',
@@ -3592,6 +3696,8 @@ Sincerely, SugarCRM',
         'Die Höchstgrenze der Anzahl von Benutzerlizenzen wurde erreicht. Es können sich nur vorhandene Benutzer anmelden.',
     'WARN_ONLY_ADMINS'=> "Nur Administratoren dürfen sich anmelden.",
     'WARN_UNSAVED_CHANGES'=> "Sie sind dabei, diesen Eintrag zu verlassen, ohne die vorgenommenen Änderungen zu speichern. Sind Sie sicher, dass Sie das tun möchten?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Wenn Sie den Browser aktualisieren, werden automatisch alle offenen SugarLive-Anruf- oder Chat-Sitzungen geschlossen und alle nicht gespeicherten Änderungen gehen verloren. Möchten Sie fortfahren?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Die Änderungen wurden nicht gespeichert. Möchten Sie die Seite verlassen, ohne diese zu speichern?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'In einem oder mehreren Dashlets wurden Änderungen vorgenommen, die nicht gespeichert wurden. Möchten Sie die Fach wirklich schließen?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Sie navigieren zum Berichtemodul. Ihre Änderungen im Dashlet werden nicht gespeichert. Möchten Sie fortfahren?',
@@ -3614,6 +3720,7 @@ Sincerely, SugarCRM',
     'ERROR_TIME_IS_AFTER' => 'Fehler. Die Zeitangabe in diesem Feld kann nicht vor der Zeitangabe im Feld {{this}} sein.',
     'ERROR_NUMBER' => 'Fehler: Dieses Feld benötigt einen gültigen Wert.',
     'ERROR_INT' => 'Fehler. Ungültige Ganzzahl',
+    'ERROR_URL' => 'Fehler wegen ungültiger URL.',
     'ERROR_NO_BEAN' => 'Bean nicht gefunden.',
     'ERROR_ACCESS_MODULE' => 'Sie haben keine Zugriffsberechtigung für dieses Modul.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Fehler. Der Anhang ist zu groß.',
@@ -3697,9 +3804,14 @@ Sincerely, SugarCRM',
     'LBL_CREATE_OPPORTUNITY' => 'Neue Verkaufschance',
     'LBL_SCHEDULE_CALL' => 'Neuer Anruf',
     'LBL_SCHEDULE_MEETING' => 'Neues Meeting',
+    'LBL_CREATE_MESSAGE' => 'Nachricht erstellen',
     'LBL_CREATE_TASK' => 'Neue Aufgabe',
     'LBL_REMOVE_FROM_FAVORITES' => 'Aus Favoriten entfernen',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'Alle herunterladen',
+    'LBL_DOWNLOAD_ONE' => 'Herunterladen',
+    'LBL_ATTACHMENTS' => 'Anhänge',
+    'LBL_ADD_ATTACHMENT' => 'Durchsuchen',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Formular erstellen',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Web-2-Lead-Formular speichern',
@@ -3751,8 +3863,8 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_REFRESH_LABEL' => 'Aktualisieren',
     'LBL_DASHLET_REMOVE_LABEL' => 'Entfernen',
     'LBL_DASHLET_DROP_HERE' => 'Hier hinziehen',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'Alles minimieren',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'Alles maximieren',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'Minimieren',
     'LBL_DASHLET_MAXIMIZE' => 'Maximieren',
     'LBL_DASHLET_CONFIGURE' => 'Anpassen',
@@ -3774,6 +3886,10 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_LISTVIEW_NAME' => 'Meine Listenansicht',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Datensätze des angemeldeten Benutzers.',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'Listenansicht der Konsole',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'Listet Datensätze eines bestimmten Moduls auf, die sich auf den Datensatz beziehen, den Sie in der Konsole anzeigen.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Datensatzansicht',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Zeigt einen Datensatz und optional zugehörige Datensätze in Registerkarten an.',
@@ -3784,6 +3900,7 @@ Sincerely, SugarCRM',
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Achtung, nur {{numWord}} ({{num}}) Module können in Registerkarten angezeigt werden. ' .
         'Bitte entfernen Sie ein oder mehrere Module, bevor Sie weitere hinzufügen.',
     'LBL_SIX' => 'sechs', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'Kommentarprotokoll',
@@ -3808,7 +3925,13 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Zuletzt verwendet',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoriten',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'Neues Dashboard',
+    'LBL_DASHBOARD_DUPLICATE' => 'Dashboard duplizieren',
+    'LBL_DASHBOARD_DELETE' => 'Dashboard löschen',
+    'LBL_PIN_TO_TOP' => 'Oben anheften',
+    'LBL_PIN_TO_BOTTOM' => 'Unten anheften',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard-Konfiguration',
     'LBL_LIST_VIEW__NAME' => 'Listenansicht',
     'LBL_PIPELINE_VIEW_NAME' => 'Kachelansicht',
     'LBL_PIPELINE_VIEW_BTN' => 'Kachelansicht',
@@ -3844,9 +3967,9 @@ Sincerely, SugarCRM',
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'Trainingsmaterialien',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar University - Werden Sie Experte',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Community-Foren - Diskutieren Sie mit',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentation & Support - Erfahren Sie die Details',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Schulung und Zertifizierung',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'SugarClub-Community',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentation und Support',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'Umsatz nach Land',
@@ -3855,6 +3978,10 @@ Sincerely, SugarCRM',
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'Wissensdatenbank-Kategorien & veröffentlichte Artikel',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Displays a tree view of knowledge base categories & published articles',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'Suche in der Wissensdatenbank',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'Zeigt eine durchsuchbare Baumansicht veröffentlichter Artikel und Kategorien der Wissensdatenbank an.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'Veröffentlichte Artikel in anderen Sprachen',
@@ -4070,6 +4197,10 @@ Sincerely, SugarCRM',
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'Bitte geben Sie eine gültige US-Telefonnummer inklusive der Vorwahl ein.',
+    'LBL_CCP_NOT_INITIATED' => 'Wahlversuch mithilfe von CCP, während Agent nicht angemeldet ist.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'Anruf kann nicht über CCP gestartet werden.',
+    'LBL_CCP_DIALING_ERROR' => 'Dieser Anruf kann nicht als gewählt abgeschlossen werden.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'Bitte schließen Sie alle Chat-Sitzungen in SugarLive, bevor Sie einen ausgehenden Anruf tätigen.',
 
     //File write error label
     'ERR_FILE_WRITE' => 'Fehler: Datei konnte nicht erstellt werden {0}.  Bitte das System und die Rechte des Webservers überprüfen.',
@@ -4421,8 +4552,8 @@ Sincerely, SugarCRM',
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Angebotenes Produkt',
     'LBL_DISCOUNT_TOTAL' => 'Gesamt-Rabatt',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% Prozent',
+    'LBL_DISCOUNT_SELECT' => 'Bestimmt, ob der Rabatt ein Prozentsatz oder ein Pauschalbetrag ist',
     'LBL_TAX' => 'Steuer',
     'LBL_SHIPPING' => 'Lieferung',
     'LBL_GRAND_TOTAL' => 'Gesamtbetrag',
@@ -4469,7 +4600,7 @@ Sincerely, SugarCRM',
     'LBL_NO_ACCESS' => '(Kein Zugriff)',
     'LBL_NO_ACCESS_LOWER' => 'Kein Zugriff',
     'LBL_NO_FIELD_ACCESS' => 'Kein Zugriff',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'Lizenz erforderlich',
     'LBL_VALUE_ERASED' => 'Wert gelöscht',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Diese Informationen wurden aufgrund einer Datenschutzanfrage gelöscht',
     'LBL_CREATE_RELATED_RECORD' => 'Verknüpften Datensatz erstellen',
@@ -4490,7 +4621,9 @@ Sincerely, SugarCRM',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Aufgaben',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Anrufe',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'E-Mails',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'Schichten',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkte',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Schichtausnahmen',
     'LNK_SETTINGS' => 'Einstellungen',
     'LBL_MOBILE_SUPPORT' => 'Support',
     'LBL_MOBILE_SHOW_MORE' => 'Mehr anzeigen...',
@@ -4650,16 +4783,14 @@ Sincerely, SugarCRM',
     'LBL_MOBILE_PDF_DOWNLOAD' => '{{{pdfTemplateName}}} PDF herunterladen',
 
     'ERR_SYNC_FAILED' => 'Synchronisation mit dem Server nicht möglich.',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'Die SSO-Anmeldung ist nicht verfügbar. Stellen Sie sicher, dass sich die Instanz in Sugar 7.5 oder höher befindet und für SSO konfiguriert ist.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'Nicht autorisierter Zugriff.',
     'ERR_MOBILE_INVALID_CREDS' => 'Ungüliger Benutzername oder Passwort.',
     'ERR_MOBILE_SESSION_EXPIRED' => 'Ihre Sitzung ist abgelaufen.',
     'ERR_MOBILE_NOT_FOUND' => 'Ressource nicht gefunden.',
     'ERR_MOBILE_TIMEOUT' => 'Server antwortet nicht.',
     'ERR_MOBILE_CONNECTION_FAILED' => 'Server kann nicht erreicht werden.',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'Kein {{{brandName}}}-Server unter dieser URL gefunden.',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'Server unter angegebener URL antwortet nicht.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'Sever unter angegebener URL nicht verfügbar.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'Keine Internetverbindung verfügbar.',
     'ERR_MOBILE_INTERNAL' => 'Internerfehler ({{{code}}}). Bitte versuchen Sie es später erneut.',
     'ERR_MOBILE_VALIDATION' => 'Datensatz ist ungültig',
@@ -4858,6 +4989,55 @@ Sincerely, SugarCRM',
     'LBL_VO_RIGHT_MENU_BTN' => 'Rechte Menü-Schaltfläche',
     'LBL_VO_ADD_BTN' => 'Schaltfläche „Hinzufügen“',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'Rabatt',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'Wählen Sie eine Mapping-App',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => 'Der ausgewählte {{entityName}} hat verknüpfte Werte: {{localizedFieldNames}}. "Abbrechen", um die bestehenden Werte zu erhalten. Bestätigen, um diese Werte zu überschreiben.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'Die Datenverschlüsselung ist aktiviert.',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'Der ausgewählte Kontakt ist bereits konvertiert.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'Diese Aktion ist nur verfügbar, wenn das Gerät online ist',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'Möchten Sie wirklich eine Verkaufschance aus dem Angebot erstellen?',
+    'LBL_TAG_ADD' => 'Tag hinzufügen',
+    'LBL_TAG_ENTER_TAG_NAME' => 'Tag eingeben',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'Das Filtern nach Tags wird nicht unterstützt, wenn das Gerät offline ist.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'Gesamten Kommentar anzeigen',
+    'LBL_COMMENT_VIEW' => 'Einen Kommentar ansehen',
+    'LBL_PMSE_LABEL_DUEDATE' => 'Fälligkeitsdatum',
+    'LBL_PMSE_DUE' => 'Fällig',
+    'LBL_PMSE_DUE_ON' => 'Fällig am',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'Bitte erstellen Sie zuerst {{conversionParentModuleName}}',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'Fehlende erforderliche Datensätze: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'Wählen Sie die Bildqualität. Das Bild wird vor dem Speichern auf dem Server in der Größe entsprechend angepasst. Der gewählte Wert wird als Standard für alle ähnlichen Vorgänge in der Zukunft verwendet.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'Schätzen der Dateigröße…',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'Die geschätzte Dateigröße beträgt',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'Bildqualität',
+    'LBL_IMAGE_QUALITY_BEST' => 'Originalgröße',
+    'LBL_IMAGE_QUALITY_GOOD' => 'Gute Qualität',
+    'LBL_IMAGE_QUALITY_POOR' => 'Kleine Größe',
+    'LBL_IMAGE_QUALITY_BTN' => 'Kompression: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'Felder auflisten in {{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'Zurücksetzen auf Standard',
+    'LBL_LIST_NOT_ENOUGH' => 'Bitte stellen Sie mindestens 1 aktives Feld ein.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'Sie müssen sich anmelden und Berechtigungen akzeptieren, um mit der SugarCRM-Instanz arbeiten zu können.',
+    'LBL_SELECTING_EXISTING_RECORD' => '{{{moduleSingular}}} wird ausgewählt',
+    'LBL_CREATING_NEW_RECORD' => '{{{moduleSingular}}} wird neu erstellt',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'Bildgröße',
+    'LBL_COPY_ADDRESS' => 'Adresse kopieren',
+    'LBL_OPEN_IN' => 'Öffnen in',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'Keine Datei ausgewählt.',
+    'LBL_ATTACHMENT_ADD' => 'Anhängen',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'Diese Anwendung verwendet Cookies',
+    'LBL_USE_COOKIES_CONFIRM' => 'Diese Anwendung verwendet Cookies, um Ihnen eine bessere Erfahrung zu bieten. Wenn Sie fortfahren, stimmen Sie der Verwendung von Cookies gemäß unserer Datenschutzerklärung zu.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'Sie verwenden eine Sugar-Instanz, die in einer kommenden mobilen Version nicht mit Sugar Mobile kompatibel sein wird. Bitten Sie Ihren Administrator, Sugar so bald wie möglich zu aktualisieren.',
+    'ERROR_TAG_NAME_INVALID' => 'Tag-Name darf keine "{{{forbiddenChars}}}"-Zeichen enthalten',
+    'ERROR_NO_TAGS_FOUND' => 'Keine Tags verfügbar für "{{{searchQuery}}}"',
+    'ERR_PA_RECORD_INVALID' => 'Der {{{moduleName}}}-Datensatz hat einen oder mehrere ungültige Werte und kann nicht gespeichert werden. Möchten Sie den Datensatz bearbeiten, um die Aktion {{{actionLabel}}} auszuführen?',
+    'ERR_MOBILE_METADATA_RELOAD' => 'Ein Administrator hat Konfigurationsänderungen in Ihrer Sugar-Instanz vorgenommen. Drücken Sie OK, um die Konfiguration Ihrer App mit dem Server zu synchronisieren.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'Diese Anwendung verwendet Cookies',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Zum Akzeptieren auswählen  (Erforderlich)',
@@ -4916,6 +5096,10 @@ Sincerely, SugarCRM',
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telefon: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'E-Mail: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'Website: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Sind Sie sicher, dass Sie den Chat schließen möchten?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Ihre Anmeldung ist fehlgeschlagen. Bitte versuchen Sie es erneut.',
@@ -4962,6 +5146,29 @@ Sincerely, SugarCRM',
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Name/Firmenname',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'Omnichannel-Dashboard',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'Kunde',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} um {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'SugerLive wird nicht von Ihrem Browser unterstützt. Verwenden Sie Google Chrome oder Mozilla Firefox.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'Ein <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> wurde erstellt und enthält die Details Ihrer Unterhaltung.',
+    'LBL_OMNICHANNEL_SUBJECT' => 'Betreff',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'Beschreibung',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Nachrichtenzusammenfassung',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Anrufzusammenfassung',
+    'LBL_OMNICHANNEL_LINK_TO' => '{{fromModule}} mit {{toModule}} verknüpfen',
+    'LBL_OMNICHANNEL_LINKED' => 'Verknüpft',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Ihr Browser unterstützt keinen Chat. Verwenden Sie Google Chrome oder Mozilla Firefox.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Bitte wenden Sie sich für Hilfe an Ihren Sugar-Administrator.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'Layout konfigurieren',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Bitte beenden Sie die Konfiguration von SugarLive, bevor Sie einen ausgehenden Anruf tätigen.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Bitte schließen Sie die Konfiguration des SugarLive-Layouts ab, bevor Sie SugarLive öffnen.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Stellen Sie sich in SugarLive auf "Offline", bevor Sie das SugarLive-Layout konfigurieren.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'Tab auf Standard zurücksetzen',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'Zusammenfassungsfeld konfigurieren',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Benutzerprofil',
@@ -4993,6 +5200,10 @@ Sincerely, SugarCRM',
     'LBL_WIZ_CREATE_USERS' => 'Benutzer erstellen',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Systemeinstellungen',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'Die von Ihnen eingegebenen Werte werden nicht unterstützt oder stimmen nicht mit dem zulässigen Format überein. Eine Liste der zulässigen Feldwerte und Formate finden Sie in der <a href="{{linkToDocumentation}}" target="_blank">System</a>dokumentation.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'Dieser Inhalt wurde nicht genehmigt. Bitte aktualisieren Sie die <a href="{{linkToDocumentation}}" target="_blank">Einstellungen der Inhaltssicherheitsrichtlinie</a> Ihres Systems.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'Dieser Inhalt wurde nicht genehmigt. Bitten Sie Ihren Administrator, die <a href="{{linkToDocumentation}}" target="_blank">Einstellungen der Inhaltssicherheitsrichtlinie</a> Ihres Systems zu aktualisieren. Sobald die Einstellungen aktualisiert wurden, müssen Sie Ihren Browser aktualisieren, damit die Änderungen wirksam werden.',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'Passwort',
@@ -5122,6 +5333,12 @@ Sincerely, SugarCRM',
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'Meine Elemente',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'Team-Elemente',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'Verlauf',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'Das Verlaufs-Dashlet zeigt alle durchgeführten Termine, gespeicherten Anrufe und gesendete und empfangene E-Mails.',
@@ -5236,6 +5453,7 @@ Sincerely, SugarCRM',
     //record save
     'LBL_RECORD_SAVED' => 'Datensatz gespeichert.', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} Datensatz <a href="#{{buildRoute model=this}}">{{name}}</a> wurde gespeichert.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'Sie haben das {{moduleSingularLower}} erfolgreich erstellt.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Der Datensatz wurde erfolgreich angelegt. Sie besitzen allerdings nicht über die benötigte Rolle um den Datensatz zu öffnen.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Wird überprüft...',
 
@@ -5314,7 +5532,7 @@ Sincerely, SugarCRM',
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Liste aktualisieren',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'Kacheln aktualisieren',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mehr',
@@ -5568,6 +5786,7 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'Ausstehende Aktivitäten',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'Ausstehende Aktivitäten nach Prozess',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'Alle Prozesse',
+    'LBL_RECORD_DASHBOARD' => 'Bericht-Dashboard',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'Prozessstatus-Zusammenfassung',
@@ -5599,7 +5818,7 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     'LBL_BUSINESS_CENTER_ID' => 'ID des Geschäftszentrums',
     'LBL_BUSINESS_CENTER_NAME' => 'Name des Geschäftszentrums',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'Aktivitäten der gekauften Produkte',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Neuer Tag)',
@@ -5639,6 +5858,7 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     'TPL_DATAPRIVACY_PII_TITLE' => 'Persönliche Info für {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Zeitmesser ändern',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'Nachrichten',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'In Ihre Zwischenablage kopiert!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Konnte nicht in die Zwischenablage kopiert werden',
@@ -5656,13 +5876,24 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Weniger anzeigen...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Keine Daten verfügbar',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktive Abonnements',
-    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Aktive Abonnements für eine bestimmte Firma.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'Dieses Dashlet kann nur für Module hinzugefügt werden, die mit einem einzelnen Konto verknüpft sind. Weitere Informationen finden Sie in der Dokumentation zum <a href={{linkToDocumentation}}>Dashlet der aktiven Abonnements</a>.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'Einkäufe anzeigen, die zu diesem verknüpften Konto gehören:',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Aktive Abonnements für ein bestimmtes Konto.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', Menge {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Gesamt:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Keine aktiven Abonnements',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Dieses Dashlet benötigt {{module_name}}, um funktionieren zu können. Sprechen Sie mit Ihrem Administrator über die Aktivierung von {{module_name}}.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'Kaufverlauf',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'Alle Käufe für ein bestimtes Konto.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'Dieses Dashlet kann nur für Module hinzugefügt werden, die mit einem einzelnen Konto verknüpft sind. Weitere Informationen finden Sie in der Dokumentation zum <a href={{linkToDocumentation}}>Dashlet des Kaufverlaufs</a>.',
+    'LBL_NO_PURCHASE_HISTORY' => 'Keine anzuzeigenden Käufe',
+    'LBL_NO_PLIS' => 'Keine gekauften Produkte',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'Gesamt',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'Menge',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'Dieses Dashlet erfordert die Funktion von „Käufe“ und „Gekaufte Produkte“. Sprechen Sie mit Ihrem Administrtor über die Aktivierung von „Käufe“ und „Gekaufte Produkte“.',
+    'LBL_SEARCH_PURCHASE_NAME' => 'Nach Kaufname suchen...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'Verwenden Sie Studio, um das Dashlet-Layout der Datensatzansicht zu bearbeiten. Gehen Sie dazu zu' .
@@ -5678,7 +5909,40 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     'LBL_SERVICE_DURATION' => 'Servicedauer',
     'LBL_SERVICE_DURATION_VALUE' => 'Servicedauer-Wert',
     'LBL_SERVICE_DURATION_UNIT' => 'Servicedauer-Einheit',
+    'LBL_LOCK_DURATION' => 'Dauer der Sperre',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'Die Amazon Connect CCP konnte nicht geladen werden. Bitte' .
+        'stellen Sie sicher, dass Sie einen '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">unterstützte Browser</a>. ' .
+        'Wenn das Problem weiterhin besteht, wenden Sie sich bitte an Ihren Sugar-Administrator.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'Ihr Sugar-Administrator hat Ihre Instanz nicht für Amazon Connect konfiguriert.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'Die Verbindung mit Amazon Connect kann nicht hergestellt werden. Bitte wenden Sie sich an Ihren Sugar-Administrator, um Unterstützung zu erhalten.',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'Unbekannt',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer',
+    'LBL_EXTERNAL_GUESTS' => 'Externe Gäste',
+    'LBL_MY_FAVORITE_TASKS' => 'Meine favorisierten Aufgaben',
+    'LBL_MY_TASKS' => 'Meine Aufgaben',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'Das Feld: {0} im Modul: {1} konnte nicht gefunden werden',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'Der Datensatz mit {0}: {1} im Modul: {2} konnte nicht gefunden werden',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'Es konnte keine Relation mit dem Namen: {0} gefunden werden',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'Ein Datenbankeintrag mit der ID: {0} mit {1}: {2} im Modul: {3} ist bereits vorhanden
+',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'Software gelöscht (mit gelöschter Markierung = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'Es wurden mehrere Datenbankeinträge für {0} {1} auf Modul {2} gefunden. ' .
+        'Bitte entfernen oder aktualisieren Sie die übereinstimmenden Datensätze entsprechend. Übereinstimmende Datensätze: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'Nächste Ausführung',
+    'LBL_TIME_AWARE_TYPE' => 'Typ',
+    'LBL_TIME_AWARE_BEAN_ID' => 'Bean-ID',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

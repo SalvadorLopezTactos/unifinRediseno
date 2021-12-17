@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Įvestas slaptažodis neatitinka keliamų reikalavimų. Bandykite dar kartą.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Vartotojo informacija nerasta',
     'ERR_USER_NAME_EXISTS'              => 'The user name {0} already exists. Duplicate user names are not allowed. Change the user name to be unique.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '„Sugar Hint“ licencija turi būti išsaugota kartu su papildomu suderinamu licencijos tipu',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Šis vartotojas yra užblokuotas, negalima prisijungti naudojantis senu slaptažodžiu.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Tik išorinio autentifikavimo įgaliojimus turinčiam vartotojui neleidžiama prisijungti naudojant „Sugar“ kredencialus',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Gavėjo pašo adresas',
 	'ERR_SERVER_STATUS'					=> 'Jūsų serverio statusas',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistema negali išsiųsti el. pašto gavėjui. Patikrinkite Išeinančio pašto konfigūraciją: <a href="index.php?module=EmailMan&action=config">El. pašto nustatymai</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Nauji vartotojai turi būti sukurti <a href="{0}" target="_blank">„Sugar“ debesies nustatymuose</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email Address',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognozės',
     'LBL_WORKSHEETS'                    => 'Darbalapiai',
 	'LBL_CALENDARS'                     => 'Kalendoriai',
+    'LBL_SHIFTS'                        => 'Pamainos',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Pamainos išimtys',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Gauti el.pašto pranešimus, kai įrašas yra priskiriamas Jums.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Pranešti el. laišku apie užduočių paskyrimą',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Gauti el. pašto pranešimus, kai kas nors jus pamini komentarų žurnalo įraše.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Pranešti el. laišku apie paminėjimą',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Pasirinkite, kaip laukų pavadinimai turi būti rodomi įrašų rodiniuose. Norėdami naudoti kompaktiškesnį įrašų rodinį pasirinkite Šalia lauko reikšmės.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Lauko pavadinimo vieta',
     'LBL_ABOVE_FIELD_VALUE'             => 'Virš lauko reikšmės',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Licencijos tipas',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => '„Sugar Hint“',
 	'LBL_REMINDER_TEXT'					=> 'Paleisti priminimą apie artėjantį tel. skambutį arba susitikimą.',
 	'LBL_REMINDER'						=> 'Priminimai',
 	'LBL_REMINDER_POPUP' => 'Priminimo langas',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Ši sesija pasibaigė, nes kita sesija buvo paleista su tuo pačiu vartotoju',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Priskirti įrašus',
-	'LBL_REASS_DESC_PART1'				=> 'Pasirinkite modulius kurių įrašus norite iš vieno vartotojo paskirti kitam vartotojui. Spauskite Toliau, kad peržiūrėti pasirinktų modulių atnaujintų įrašų skaičių. Spauskite Atšaukti, jei norite atsisakyti įrašų perskirstymo.',
+    'LBL_REASS_DESC_PART1'              => 'Pasirinkite modulius kurių įrašus norite iš vieno vartotojo paskirti kitam vartotojui. Spauskite Toliau, kad peržiūrėti pasirinktų modulių atnaujintų įrašų skaičių. Spauskite Atšaukti, jei norite atsisakyti įrašų perskirstymo.',
         'LBL_REASS_DESC_PART2'=>                    'Pasirinkite kuriuos modulius naudosite vykdant darbo sekas, pranešimų siuntimą, auditavimą perskirstymo metu. Spauskite Toliau, kad tęsti ir perskirstyti įrašus.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Komandos paskyrimas',
 	'LBL_REASS_STEP2_DESC'				=> 'Žemiau pateiktos komandos yra Nuo vartotojų komandoje, tačiau ne Kam vartotojų komandai.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Vartotojo profilis',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Jei norite pakeisti tik skaitymo laukus, apsilankykite <a href="%s" target="_blank">„Sugar“ debesies nustatymuose</a>.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Jei norite atlikti laukų, skirtų tik skaityti, pakeitimų, susisiekite su „Sugar“ administratoriumi.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

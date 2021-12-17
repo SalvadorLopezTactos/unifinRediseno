@@ -41,6 +41,6 @@ $error_defs = array(
     'idm_mode_cannot_create_user' => [
         'number' => 1017,
         'name' => 'Can\'t create user',
-        'description' => 'The user can be created only in Cloud Settings',
+        'description' => 'The user can be created only in SugarCloud Settings',
     ],
 );

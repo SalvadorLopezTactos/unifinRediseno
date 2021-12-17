@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 use Doctrine\DBAL\Connection;
 
 class Tracker extends SugarBean
@@ -106,7 +105,7 @@ class Tracker extends SugarBean
             ->where($builder->expr()->eq('item_id', $builder->createPositionalParameter($item_id)))
             ->andWhere($builder->expr()->eq('visible', 1));
         $query->execute();
-        if(!empty($_SESSION['breadCrumbs'])){
+        if (!empty($_SESSION['breadCrumbs']) && $_SESSION['breadCrumbs'] instanceof BreadCrumbStack) {
             $breadCrumbs = $_SESSION['breadCrumbs'];
             $breadCrumbs->popItem($item_id);
         }

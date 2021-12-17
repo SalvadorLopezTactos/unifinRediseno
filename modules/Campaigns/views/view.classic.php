@@ -70,9 +70,6 @@ class CampaignsViewClassic extends SugarView
     				case 'CampaignDiagnostic':
     					$params[] = $GLOBALS['mod_strings']['LBL_CAMPAIGN_DIAGNOSTICS'];
     					break;
-    				case 'WizardEmailSetup':
-    					$params[] = $GLOBALS['mod_strings']['LBL_EMAIL_SETUP_WIZARD_TITLE'];
-    					break;
     				case 'TrackDetailView':
     					if(!empty($this->bean->id))
     					{

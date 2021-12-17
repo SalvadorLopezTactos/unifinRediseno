@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'E-Posta Şablonlarını İşle',
     'LBL_MODULE_NAME_SINGULAR' => 'İşlem E-postası Şablonu',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Süreç E-posta Şablonları Odak Bölmesi',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Süreç E-posta Şablonları Kayıt Panosu',
     'LNK_LIST' => 'İşlem E-postası Şablonlarını Göster',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Süreç E-Posta Şablonu Oluştur',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Süreç E-Posta Şablonlarını İçeri Aktar',

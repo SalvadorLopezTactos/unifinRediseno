@@ -13,31 +13,52 @@
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount;
 
 use Sugarcrm\IdentityProvider\Srn\Converter;
+use Sugarcrm\Sugarcrm\SugarCloud\AuthZ;
 
 class Checker
 {
     protected $allowedSAs = [];
     protected $ownTenantSRN = '';
 
-    public function __construct(array $idmModeConfig)
+    /**
+     * @var array
+     */
+    protected $serviceAccountPermissions = [];
+
+    /**
+     * @var AuthZ
+     */
+    private $authZ;
+
+    public function __construct(array $idmModeConfig, AuthZ $authZ)
     {
         // @deprecated: allowedSAs and check against it will be removed in the future versions.
         $this->allowedSAs = $idmModeConfig['allowedSAs'] ?? [];
         $this->ownTenantSRN = $idmModeConfig['tid'] ?? '';
+        $this->serviceAccountPermissions = $idmModeConfig['serviceAccountPermissions'] ?? [];
+
+        $this->authZ = $authZ;
     }
 
     /**
+     * @param string $accessToken
      * @param array $accessTokenInfo
      * @return bool
      */
-    public function isAllowed(array $accessTokenInfo): bool
+    public function isAllowed(string $accessToken, array $accessTokenInfo): bool
     {
         $subjectSRN = $accessTokenInfo['sub'] ?? '';
 
         $tenantID = Converter::fromString($this->ownTenantSRN)->getTenantId();
         $saTokenSubjectTenantID = Converter::fromString($subjectSRN)->getTenantId();
 
-        $isTokenForThisTenant = $tenantID == $saTokenSubjectTenantID;
-        return in_array($subjectSRN, $this->allowedSAs) || $isTokenForThisTenant;
+        $tidFromClaims = $accessTokenInfo['ext']['tid'] ?? null;
+        $isTokenForThisTenant = $tenantID === $saTokenSubjectTenantID || $tidFromClaims === $this->ownTenantSRN;
+        $isAllowedByAuthZAndTenant = $isTokenForThisTenant && $this->authZ->checkPermission(
+            $accessToken,
+            $this->ownTenantSRN,
+            $this->serviceAccountPermissions
+        );
+        return $isAllowedByAuthZAndTenant || in_array($subjectSRN, $this->allowedSAs);
     }
 }

@@ -83,6 +83,7 @@ class SugarUpgradeMerge7 extends UpgradeScript
     protected function checkFile($filename)
     {
         $this->log("Checking file $filename");
+        $filename = $this->normalizeFilepath($filename);
         list($modules, $module_name, $clients, $platform, $views, $viewname) = explode(DIRECTORY_SEPARATOR, $filename);
 
         $old_viewdefs = $this->loadFile($filename, $module_name, $platform, $viewname);
@@ -139,5 +140,15 @@ class SugarUpgradeMerge7 extends UpgradeScript
         }
 
         return $changed === false;
+    }
+
+    /**
+     * Ensure file paths use DIRECTORY_SEPARATOR as their delimiter
+     * @param string $filepath
+     * @return string
+     */
+    public function normalizeFilepath(string $filepath) : string
+    {
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $filepath);
     }
 }

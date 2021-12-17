@@ -101,7 +101,7 @@
                                             {$MOD.LBL_OLD_PASSWORD}
                                         </td>
                                         <td >
-                                            <input name='old_password' id='old_password' type='password' tabindex='2' {$DISABLED}
+                                            <input name='old_password' id='old_password' type='password' tabindex='2' autocomplete="off" {$DISABLED}
                                                onkeyup="password_confirmation();"
                                                onchange="password_confirmation();"
                                             >
@@ -119,7 +119,7 @@
                                 </td>
                                 <td class='dataField'>
 
-                                    <input name='new_password' id= "new_password" type='password' tabindex='2' {$DISABLED}
+                                    <input name='new_password' id= "new_password" type='password' tabindex='2' autocomplete="off" {$DISABLED}
                                        onkeyup="password_confirmation();newrules('{$PWDSETTINGS.minpwdlength}','{$PWDSETTINGS.maxpwdlength}','{$REGEX}');"
                                        onchange="password_confirmation();newrules('{$PWDSETTINGS.minpwdlength}','{$PWDSETTINGS.maxpwdlength}','{$REGEX}');"
                                     />
@@ -132,7 +132,8 @@
                                     {$MOD.LBL_CONFIRM_PASSWORD}
                                 </td>
                                 <td class='dataField'>
-                                    <input name='confirm_new_password' id='confirm_pwd' style ='' type='password' tabindex='2' {$DISABLED} onkeyup="password_confirmation();"  >
+                                    <input name='confirm_new_password' id='confirm_pwd' style ='' type='password' tabindex='2' autocomplete="off" {$DISABLED}
+                                        onkeyup="password_confirmation();"  >
                                 </td>
                                 <td width='40%'>
                                 <div id="comfirm_pwd_match" class="error" style="display: none;">{$MOD.ERR_PASSWORD_MISMATCH}</div>
@@ -218,22 +219,25 @@
                             <slot><input name='receive_notifications' class="checkbox" tabindex='12' type="checkbox" value="12" {$RECEIVE_NOTIFICATIONS}></slot>
                             </td>
                         </tr>
-
                         <tr>
                             <td scope="row" valign="top"><slot>{$MOD.LBL_EXPORT_CHARSET}:</slot>&nbsp;{sugar_help text=$MOD.LBL_EXPORT_CHARSET_DESC }</td>
                             <td ><slot><select tabindex='12' name="default_export_charset">{$EXPORT_CHARSET}</select></slot></td>
+                            <td scope="row" width="17%">
+                                <slot>{$MOD.LBL_SEND_EMAIL_ON_MENTION}:</slot>&nbsp;{sugar_help text=$MOD.LBL_SEND_EMAIL_ON_MENTION_TEXT}
+                            </td>
+                            <td width="33%">
+                                <slot><input name='send_email_on_mention' class="checkbox" tabindex='12' type="checkbox" {$SEND_EMAIL_ON_MENTION}></slot>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row" valign="top"><slot>{$MOD.LBL_USE_REAL_NAMES}:</slot>&nbsp;{sugar_help text=$MOD.LBL_USE_REAL_NAMES_DESC }</td>
+                            <td ><slot><input tabindex='12' type="checkbox" name="use_real_names" {$USE_REAL_NAMES}></slot></td>
                             <td scope="row" valign="top">
                             <slot>{$MOD.LBL_REMINDER}:</slot>&nbsp;{sugar_help text=$MOD.LBL_REMINDER_TEXT }
                             </td>
                             <td valign="top"  nowrap>
                                 <slot>{include file="modules/Meetings/tpls/reminders.tpl"}</slot>
                             </td>
-                        </tr>
-                        <tr>
-                            <td scope="row" valign="top"><slot>{$MOD.LBL_USE_REAL_NAMES}:</slot>&nbsp;{sugar_help text=$MOD.LBL_USE_REAL_NAMES_DESC }</td>
-                            <td ><slot><input tabindex='12' type="checkbox" name="use_real_names" {$USE_REAL_NAMES}></slot></td>
-                            <td scope="row"></td>
-                            <td></td>
                         </tr>
                         <tr>
                             {if !empty($SHOW_TEAM_SELECTION)}

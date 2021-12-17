@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => '稅種：',
   'LBL_TYPE_NAME'=>'類型名稱',
   'LBL_TYPE' => '類型',
+  'LBL_PRODUCT_TYPE' => '產品類型',
   'LBL_URL' => '產品 URL：',
   'LBL_VENDOR_PART_NUM' => '廠商部件編號：',
   'LBL_WEIGHT' => '重量：',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => '檢視產品目錄',
   'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
     'LBL_ADD_TO_QUOTE_BUTTON' => '添加',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => '搜尋產品目錄',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => '無數據可用',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => '指派的使用者名稱',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => '產品類型',
   'LBL_RENEWABLE' => '可續訂',
   'LBL_SERVICE' => '服務',
+  'LBL_LOCK_DURATION' => '鎖定時長',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '產品目錄列表儀表板',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '產品目錄紀錄儀表板',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '產品目錄焦點抽屜',
 );

@@ -41,8 +41,12 @@ $popupMeta = array('moduleMain' => 'Opportunity',
 											'SALES_STAGE' => array(
 												'width'   => '10',  
 												'label'   => 'LBL_LIST_SALES_STAGE',
-										        'default' => true), 
-										    'ASSIGNED_USER_NAME' => array(
+                                                'default' => true),
+                                            'DATE_CLOSED' => array(
+                                                'width'   => '10',
+                                                'label'   => 'LBL_DATE_CLOSED',
+                                                'default' => true),
+                                            'ASSIGNED_USER_NAME' => array(
 												'width' => '5', 
 												'label' => 'LBL_LIST_ASSIGNED_USER',
 										        'default' => true),
@@ -52,9 +56,7 @@ $popupMeta = array('moduleMain' => 'Opportunity',
 											array('name' => 'account_name', 'displayParams' => array('hideButtons'=>'true', 'size'=>30, 'class'=>'sqsEnabled sqsNoAutofill')), 
 											'opportunity_type',
 											'sales_stage',
+                                            'date_closed',
 											array('name' => 'assigned_user_id', 'type' => 'enum', 'label' => 'LBL_ASSIGNED_TO', 'function' => array('name' => 'get_user_array', 'params' => array(false))),
 										  )
 						);
-
-
-?>

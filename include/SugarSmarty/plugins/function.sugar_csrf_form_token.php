@@ -35,7 +35,7 @@ function smarty_function_sugar_csrf_form_token($params, &$smarty)
     return sprintf(
         '<input type="hidden" name="%s" value="%s" />',
         $csrf::FORM_TOKEN_FIELD,
-        $csrf->getFormToken()
+        htmlspecialchars($csrf->getFormToken(), ENT_QUOTES, 'UTF-8')
     );
 }
 

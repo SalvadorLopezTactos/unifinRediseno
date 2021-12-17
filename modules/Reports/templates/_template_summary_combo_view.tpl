@@ -198,7 +198,6 @@ for ($forLoopIndexForGroupBy = $indexOfGroupByStart ; $forLoopIndexForGroupBy < 
 {/foreach}
 							</tr>
 {php}
-		//_pp($reporter->current_summary_row_count);
   		if ($reporter->current_summary_row_count > 0) {
             setCountForRowId($rowIdToCountArray, $rowId, $row, $countKeyIndex);
   			for($i=0; $i < $reporter->current_summary_row_count; $i++ ) {

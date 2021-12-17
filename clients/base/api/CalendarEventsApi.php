@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\SugarConnect\Configuration\Configuration as SugarConnectConfiguration;
+
 class CalendarEventsApi extends ModuleApi
 {
     /**
@@ -308,6 +310,13 @@ class CalendarEventsApi extends ModuleApi
             $args['repeat_count'] = $repeatCount;
             $args['repeat_interval'] = $repeatInterval;
         }
+
+        // Only support the email_addresses argument for Sugar Connect.
+        $config = new SugarConnectConfiguration();
+        if ($config->isEnabled()) {
+            return $this->convertInviteeEmailsToIds($args, $bean);
+        }
+
         return $args;
     }
 
@@ -347,7 +356,7 @@ class CalendarEventsApi extends ModuleApi
             'repeat_ordinal',
             'repeat_unit',
         );
-        foreach($recurrenceFieldBlacklist as $fieldName) {
+        foreach ($recurrenceFieldBlacklist as $fieldName) {
             unset($args[$fieldName]);
         }
         return $args;
@@ -433,4 +442,191 @@ class CalendarEventsApi extends ModuleApi
         return $repeatDateTimeArray;
     }
 
+    /**
+     * If the REST API arguments contains `email_addresses`, then its contents
+     * are used as the current set of event attendees and all others should be
+     * removed.
+     *
+     *   "email_addresses": {
+     *       "create": [
+     *          {
+     *              "email_address": "abc@foo.com",
+     *          },
+     *          {
+     *              "email_address": "xyz@bar.com",
+     *          },
+     *       ]
+     *   }
+     *
+     *
+     * This invitees list supercedes the users, contacts, and leads links.
+     * Existing attendees that are not found in this list are removed.
+     *
+     * @param array          $args The API arguments.
+     * @param SugarBean|null $bean The bean that is being saved.
+     *
+     * @return array
+     */
+    protected function convertInviteeEmailsToIds(array $args, $bean)
+    {
+        if (!isset($args['email_addresses']['create'])
+            || !is_array($args['email_addresses']['create'])
+        ) {
+            // Nothing to do.
+            return $args;
+        }
+
+        // Get the current list of attendees. The result will be an empty array
+        // if the event is being created.
+        $currentAttendees = $this->getAttendees($bean);
+
+        // Lowercase each of the new attendee email addresses on the request.
+        // Duplicates are eliminated.
+        $newAttendees = [];
+
+        foreach ($args['email_addresses']['create'] as $attendee) {
+            if (!empty($attendee['email_address'])) {
+                $lower = strtolower($attendee['email_address']);
+                $newAttendees[$lower] = $attendee['email_address'];
+            }
+        }
+
+        // Mixed mode not allowed. When email_addresses is present, the links
+        // should not be.
+        if (isset($args['users'])
+            || isset($args['contacts'])
+            || isset($args['leads'])
+        ) {
+            throw new SugarApiExceptionInvalidParameter(
+                "email_addresses cannot be used together with contacts, leads, or users"
+            );
+        }
+
+        // Loop through the newAttendee emails on the request and if not
+        // currently on the attendeee list, append them to the args `add` list
+        // for their specific bean person type.
+        foreach ($newAttendees as $lcNewAttendeeEmail => $newAttendeeEmail) {
+            if (!isset($currentAttendees[$lcNewAttendeeEmail])) {
+                $result = $this->convertEmailAddressToPerson($lcNewAttendeeEmail);
+
+                if (!empty($result)) {
+                    $beanType = strtolower($result['bean_module']);
+                    $args[$beanType]['add'][] = $result['bean_id'];
+                }
+            }
+        }
+
+        $assignee = empty($bean) || empty($bean->assigned_user_id) ? '' : $bean->assigned_user_id;
+        $assignee = empty($args['assigned_user_id']) ? $assignee : $args['assigned_user_id'];
+
+        // Any current attendees not in the new attendees list need to be
+        // removed so they should be added to the args `delete` list for their
+        // specific bean person type.
+        foreach ($currentAttendees as $lcCurrentEmail => $attendee) {
+            if ($attendee['bean_module'] == 'Users' && $attendee['bean_id'] === $assignee) {
+                // assigned_user should never be deleted
+            } elseif (!isset($newAttendees[$lcCurrentEmail])) {
+                $beanType = strtolower($attendee['bean_module']);
+                $args[$beanType]['delete'][] = $attendee['bean_id'];
+            }
+        }
+
+        return $args;
+    }
+
+    /**
+     * Select a matching module and ID for the user, contact or lead having the
+     * supplied email address. In order to produce a preferred and predictable
+     * selection, the best candidate is determined based on whether the email
+     * address is primary together with a module order precendnce of: Users,
+     * Contacts, then Leads.
+     *
+     * @param string $emailAddress The email address to search for.
+     *
+     * @return array The best match for the email address.
+     */
+    protected function convertEmailAddressToPerson($emailAddress)
+    {
+        $personModules = [
+            'Users' => 'A',
+            'Contacts' => 'B',
+            'Leads' => 'C',
+        ];
+
+        $addressList = [];
+        $sugarEmailAddress = new SugarEmailAddress();
+        $beans = $sugarEmailAddress->getBeansByEmailAddress($emailAddress);
+
+        foreach ($beans as $bean) {
+            $module = $bean->getModuleName();
+
+            if (isset($personModules[$module]) && !empty($bean->emailAddress->addresses)) {
+                foreach ($bean->emailAddress->addresses as $addr) {
+                    $pri = ($addr['primary_address'] == 1) ? 'A' : 'B';
+                    $mod = $personModules[$module];
+                    $addressList[$pri . $mod] = $addr;
+                }
+            }
+        }
+
+        if (empty($addressList)) {
+            return [];
+        }
+
+        ksort($addressList);
+        $top = array_shift($addressList);
+
+        return [
+            'bean_module' => $top['bean_module'],
+            'bean_id' => $top['bean_id'],
+            'email_address' => $top['email_address'],
+        ];
+    }
+
+    /**
+     * Get the current list of attendees for the supplied calendar event.
+     *
+     * @param SugarBean|null $bean Meeting or Call bean.
+     *
+     * @return array
+     */
+    protected function getAttendees($bean)
+    {
+        if (empty($bean)) {
+            return [];
+        }
+
+        $attendees = [];
+
+        foreach (['users', 'contacts', 'leads'] as $link) {
+            if ($bean->load_relationship($link)) {
+                $bean->$link->resetLoaded();
+                $bean->$link->load();
+
+                foreach ($bean->$link->rows as $beanId => $row) {
+                    $person = BeanFactory::retrieveBean(
+                        $bean->$link->getRelatedModuleName(),
+                        $beanId,
+                        ['disable_row_level_security' => true]
+                    );
+                    if (!$person) {
+                        continue;
+                    }
+
+                    $attendee = [
+                        'bean_module' => $person->getModuleName(),
+                        'bean_id' => $person->id,
+                        'email_address' => $person->emailAddress->getPrimaryAddress($person),
+                    ];
+                    $emailAddress = strtolower($attendee['email_address']);
+
+                    if (!isset($attendees[$emailAddress])) {
+                        $attendees[$emailAddress] = $attendee;
+                    }
+                }
+            }
+        }
+
+        return $attendees;
+    }
 }

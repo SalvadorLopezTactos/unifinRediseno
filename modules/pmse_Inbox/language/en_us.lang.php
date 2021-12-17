@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Process Management',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Unattended Processes',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Processes Focus Drawer',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Processes Record Dashboard',
+
     'LBL_CAS_ID' => 'Process Number',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "task has been",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Process Design Preview',
     'LBL_PROJECT_RUN_ORDER' => 'Run Order',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Current Activity',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Date Modified',
+    'LBL_DATE_ENTERED' => 'Date Created',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Are you sure you want to claim this process?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Process has been claimed successfully',
 );
 

@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Notizenlisten-Dashboard',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Notizenbericht-Dashboard',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Notizen',
 
+    'LBL_RELATED_CONTACT' => 'Zugehöriger Kontakt',
     'ERR_DELETE_RECORD' => 'Zum Löschen der Firma muss eine Datensatznummer angegeben werden.',
     'LBL_ACCOUNT_ID' => 'Firmen-ID:',
     'LBL_CASE_ID' => 'Ticket-ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontakt-ID:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notizen',
+    'LBL_ATTACHMENTS' => 'Anhänge',
+    'LBL_ATTACHMENT_FLAG' => 'Ist Anhang',
     'LBL_DESCRIPTION' => 'Beschreibung',
     'LBL_EMAIL_ADDRESS' => 'E-Mail-Adresse:',
     'LBL_EMAIL_ATTACHMENT' => 'E-Mail-Anhang',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notizen & Anlagen',
     'LBL_NOTE' => 'Hinweis:',
     'LBL_OPPORTUNITY_ID' => 'Verkaufschance-ID:',
+    'LBL_NOTE_PARENT_ID' => 'Übergeordnete Notiz-ID:',
     'LBL_PARENT_ID' => 'Parent-ID:',
     'LBL_PARENT_TYPE' => 'Eltern-Typ',
     'LBL_EMAIL_TYPE' => 'E-Mail-Typ',

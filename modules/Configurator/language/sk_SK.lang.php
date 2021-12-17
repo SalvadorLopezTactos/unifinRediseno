@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Meno používateľa',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Obnoviť',
 	'LBL_SYSTEM_SETTINGS' => 'Nastavenia systému',
-	'LBL_SKYPEOUT_ON_DESC' => 'Umožňuje používateľom kliknúť na telefónne čísla a volať prostredníctvom aplikácie SkypeOut&reg;. Čísla musia byť riadne formátované, aby sa dala využiť táto funkcia. Musia obsahovať znak "+" "kód krajiny" "číslo", napríklad +421 905 999 999.',
-	'LBL_SKYPEOUT_ON' => 'Povoliť integráciu aplikácie SkypeOut&reg;',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Umožňuje používateľom kliknúť na telefónne čísla, na ktoré chcú zavolať s použitím ich predvoleného softvéru integrácie počítačovej telefónie (CTI).',
+    'LBL_DIALOUT_ON' => 'Povoliť volanie kliknutím',
+    'LBL_DIALOUT_TITLE' => 'Odchádzajúci hovor',
     'LBL_TWEETTOCASE_ON_DESC' => 'Umožňuje používateľom vytvárať prípady z príspevkov služby Tweet',
     'LBL_TWEETTOCASE_ON' => 'Povoliť službe Tweet&reg; integráciu prípadov',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; pre prípad',
@@ -375,8 +375,8 @@ Písma podporované aplikáciou SugarPDF :
 <br>
 Ak vyberiete možnosť nevkladať písmo do PDF, vygenerovaný súbor PDF bude menší, ale bude sa musieť aplikovať substitúcia, ak písmo nebude dostupné vo vašej aplikácii na čítanie.
 <br><br>
-Ak chcete vložiť písmo PDF do aplikácie SugarCRM, musíte postupovať podľa krokov 1 a 2 dokumentácie k písmam TCPDF, ktorú nájdete v časti "DOCS" na <a href="http://www.tcpdf.org" target="_blank">webovej stránke TCPDF</a>.
-<br><br>Pomôcky pfm2afm a ttf2ufm sú dostupné v písmach/pomôckach v balíku TCPDF, ktorý môžete prevziať v časti "NA PREVZATIE" na <a href="http://www.tcpdf.org" target="_blank">webovej stránke TCPDF</a>.
+Ak chcete vložiť písmo PDF do aplikácie SugarCRM, musíte postupovať podľa krokov 1 a 2 dokumentácie k písmam TCPDF, ktorú nájdete v časti „DOCS“ na <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">webovej stránke TCPDF</a>.
+<br><br>Pomôcky pfm2afm a ttf2ufm sú dostupné v písmach/pomôckach v balíku TCPDF, ktorý môžete prevziať v časti „NA PREVZATIE“ na <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">webovej stránke TCPDF</a>.
 <br><br>Nižšie môžete načítať metrický súbor vygenerovaný v kroku 2 a svoj súbor písma.
 BSOFR
 ,
@@ -429,6 +429,9 @@ Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.ph
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modul Hlásenia nie je k dispozícii pre zobrazenie v prehliadači v mobilných zariadeniach.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maximálna dĺžka by mala byť väčšia ako minimálna dĺžka',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimálna dĺžka by mala byť kladná hodnota',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maximálna dĺžka by mala byť kladná hodnota',
     'ERR_EMPTY_SAML_LOGIN' => 'Adresa SAML Login URL nemôže byť prázdna',
     'ERR_EMPTY_SAML_CERT' => 'SAML certifikát nemôže byť prázdny',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID jednotky SAML nemôže zostať prázdne',
@@ -442,9 +445,6 @@ Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.ph
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Povoliť ďalší obsah prihlasovacej obrazovky',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automaticky uložiť definície procesu',

@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'επόμενο έτος',
     'LBL_OPEN_ISSUES' => 'Ανοιχτό {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Επιλύθηκαν πρόσφατα',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Δημιουργία Φίλτρου',
+    'LBL_ERROR_FILTER_EMPTY' => 'Προσθέστε κριτήρια φίλτρου.',
+    'LBL_ADD_FILTER' => 'Προσθήκη κριτηρίων',
+    'LBL_FILTER_NAME' => 'Όνομα φίλτρου',
+    'LBL_FILTER_FIELD' => 'Πεδίο',
+    'LBL_FILTER_OPERATOR' => 'Χειριστής',
+    'LBL_FILTER_VALUE' => 'Αξία',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Αποθήκευση στην εφαρμογή για υπολογιστές',
+    'LBL_FILTER_LOCAL' => 'Τοπικό φίλτρο',
 );

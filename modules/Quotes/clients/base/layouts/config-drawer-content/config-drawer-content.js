@@ -22,6 +22,24 @@
     /**
      * @inheritdoc
      */
+    bindDataChange: function() {
+        this.on('config:panel:fields:loaded', this.onConfigPanelFieldsLoad, this);
+    },
+
+    /**
+     * Handles when the fields for a config panel are loaded. If the panel is
+     * the current/active one, set its fields as the current config fields
+     * @param configPanel the panel view containing the loaded fields
+     */
+    onConfigPanelFieldsLoad: function(configPanel) {
+        if (configPanel.name === this.selectedPanel) {
+            this.context.trigger('config:fields:change', configPanel.eventViewName, configPanel.panelFields);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
     _switchHowToData: function(helpId) {
         switch (helpId) {
             case 'config-columns':

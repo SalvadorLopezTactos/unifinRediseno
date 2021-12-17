@@ -23,76 +23,18 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts'] = array(
                     'link' => true,
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
-                    'default' => true
+                    'default' => true,
                 ),
                 array(
                         'name' => 'opportunity_name',
                         'sortable' => false,
                         'enabled' => true,
-                        'default' => true
+                        'default' => true,
                 ),
-                array(
-                    'name' => 'account_name',
-                    'readonly' => true,
-                    'sortable' => false,
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'sales_stage',
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'probability',
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'date_closed',
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'commit_stage',
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'product_template_name',
-                    'sortable' => false,
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'category_name',
-                    'sortable' => false,
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'quantity',
-                    'enabled' => true,
-                    'default' => true
-                ),
-                array(
-                    'name' => 'worst_case',
-                    'type' => 'currency',
-                    'related_fields' => array(
-                        'currency_id',
-                        'base_rate',
-                        'total_amount',
-                        'quantity',
-                        'discount_amount',
-                        'discount_price'
-                    ),
-                    'showTransactionalAmount' => true,
-                    'convertToBase' => true,
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
-                    'enabled' => true,
-                    'default' => true
-                ),
+                'sales_stage',
+                'probability',
+                'commit_stage',
+                'date_closed',
                 array(
                     'name' => 'likely_case',
                     'type' => 'currency',
@@ -102,14 +44,14 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts'] = array(
                         'total_amount',
                         'quantity',
                         'discount_amount',
-                        'discount_price'
+                        'discount_price',
                     ),
                     'showTransactionalAmount' => true,
                     'convertToBase' => true,
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
-                    'default' => true
+                    'default' => true,
                 ),
                 array(
                     'name' => 'best_case',
@@ -120,31 +62,143 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts'] = array(
                         'total_amount',
                         'quantity',
                         'discount_amount',
-                        'discount_price'
+                        'discount_price',
                     ),
                     'showTransactionalAmount' => true,
                     'convertToBase' => true,
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
-                    'default' => true
+                    'default' => true,
                 ),
                 array(
-                    'name' => 'quote_name',
-                    'label' => 'LBL_ASSOCIATED_QUOTE',
-                    'related_fields' => array('quote_id'),
-                    // this is a hack to get the quote_id field loaded
-                    'readonly' => true,
-                    'bwcLink' => true,
+                    'name' => 'worst_case',
+                    'type' => 'currency',
+                    'related_fields' => array(
+                        'currency_id',
+                        'base_rate',
+                        'total_amount',
+                        'quantity',
+                        'discount_amount',
+                        'discount_price',
+                    ),
+                    'showTransactionalAmount' => true,
+                    'convertToBase' => true,
+                    'currency_field' => 'currency_id',
+                    'base_rate_field' => 'base_rate',
                     'enabled' => true,
-                    'default' => true
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'product_template_name',
+                    'sortable' => false,
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'category_name',
+                    'sortable' => false,
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                'quantity',
+                array(
+                    'name' => 'discount_price',
+                    'type' => 'currency',
+                    'related_fields' => array(
+                        'discount_price',
+                        'currency_id',
+                        'base_rate',
+                    ),
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
+                    'currency_field' => 'currency_id',
+                    'base_rate_field' => 'base_rate',
+                ),
+                array(
+                    'name' => 'discount_field',
+                    'type' => 'fieldset',
+                    'css_class' => 'discount-field',
+                    'label' => 'LBL_DISCOUNT_AMOUNT',
+                    'enabled' => true,
+                    'default' => true,
+                    'show_child_labels' => false,
+                    'sortable' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'discount_amount',
+                            'label' => 'LBL_DISCOUNT_AMOUNT',
+                            'type' => 'discount-amount',
+                            'discountFieldName' => 'discount_select',
+                            'related_fields' => array(
+                                'currency_id',
+                            ),
+                            'convertToBase' => true,
+                            'base_rate_field' => 'base_rate',
+                            'showTransactionalAmount' => true,
+                        ),
+                        array(
+                            'type' => 'discount-select',
+                            'name' => 'discount_select',
+                            'options' => array(),
+                        ),
+                    ),
+                ),
+                array(
+                    'name' => 'total_amount',
+                    'type' => 'currency',
+                    'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
+                    'readonly' => true,
+                    'related_fields' => array(
+                        'total_amount',
+                        'currency_id',
+                        'base_rate',
+                    ),
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
+                    'currency_field' => 'currency_id',
+                    'base_rate_field' => 'base_rate',
                 ),
                 array(
                     'name' => 'assigned_user_name',
                     'sortable' => false,
                     'enabled' => true,
-                    'default' => true
-                )
+                    'default' => true,
+                ),
+                'service',
+                'service_start_date' => array(
+                    'name' => 'service_start_date',
+                    'label' => 'LBL_SERVICE_START_DATE',
+                    'type' => 'date',
+                ),
+                'service_end_date' => array(
+                    'name' => 'service_end_date',
+                    'label' => 'LBL_SERVICE_END_DATE',
+                    'type' => 'service-enddate',
+                ),
+                array(
+                    'name' => 'service_duration',
+                    'type' => 'fieldset',
+                    'css_class' => 'service-duration-field',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ),
+                        array(
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ),
+                    ),
+                ),
+                'renewable' => array(
+                    'name' => 'renewable',
+                    'label' => 'LBL_RENEWABLE',
+                    'type' => 'bool',
+                ),
             )
         )
     ),

@@ -252,6 +252,7 @@ class LogicHook{
             $hookFile = $hookDetails[2];
             $hookClass = $hookDetails[3];
             $hookFunc = $hookDetails[4];
+            $hookLabel = $hookDetails[5] ?? null;
 
             if (!$this->loadHookClass($hookClass, $hookFile)) {
                 $this->log("error", "Unable to load custom logic class '$hookClass'");
@@ -259,7 +260,7 @@ class LogicHook{
             }
 
             $context = Container::getInstance()->get(Context::class);
-            $subject = new Subject($hookClass, $hookFunc);
+            $subject = new Subject($hookClass, $hookFunc, $hookLabel);
             $context->activateSubject($subject);
 
             try {

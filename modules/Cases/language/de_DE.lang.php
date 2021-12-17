@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Falllisten-Dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Fallbericht-Dashboard',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Details zu dem Fall',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Tickets',
 
 	'ERR_DELETE_RECORD'					=> 'Zum Löschen der Firma muss eine Datensatznummer angegeben werden.',
 	'LBL_ACCOUNT_ID'					=> 'Firmen-ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Im Portal anzeigen',
 	'LBL_CREATE_KB_DOCUMENT' => 'Artikel erstellen',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Wissensdatenbank',
+    'LBL_REQUEST_CLOSE' => 'Abschluss anfordern',
+    'LBL_REQUEST_CLOSE_DATE' => 'Abschlussdatum anfordern',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Zum Abschluss anfordern',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Eine Anforderung zum Abschluss des Falls senden',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Möchten Sie anfordern, dass dieser Fall abgeschlossen wird?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Meine zum Abschluss angeforderten Fälle',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Meine zum Abschluss angeforderten Fälle',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Meine zum Abschluss angeforderten Fälle',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Liste der zum Abschluss angeforderten Fälle',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Zeigt eine Liste der zugewiesenen Fälle an, die zum Abschluss angefordert werden',
 
     'LBL_CREATED_USER' => 'Erstellt von',
     'LBL_MODIFIED_USER' => 'Geändert von',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Zugewiesener Benutzer',
     'LBL_EXPORT_TEAM_COUNT' => 'Team-Anzahl',
     'LBL_CHANGETIMERS' => 'Zeitmesser ändern',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Einkäufe',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Verknüpfte Kontakt-E-Mails',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Zum Beispiel können Sie hiermit ein Ticket finden, das vor kurzer Zeit erstellt wurde.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Haben Sie ein neues Ticket, das Sie erstellen möchten? Klicken Sie einfach hier.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Hier Klicken führt Sie jederzeit zurück zu dieser Ansicht.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interaktionen der Fälle',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notizen',
 

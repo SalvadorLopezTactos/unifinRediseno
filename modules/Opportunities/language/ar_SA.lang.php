@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الفرص',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الفرص',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'تفاصيل الفرصة',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الفرص',
+    'LBL_RENEWAL_OPPORTUNITY' => 'فرصة التجديد',
 
     'LBL_MODULE_NAME' => 'الفرص',
     'LBL_MODULE_NAME_SINGULAR' => 'الفرصة',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'النوع:',
     'LBL_CAMPAIGN' => 'الحملة:',
     'LBL_NEXT_STEP' => 'الخطوة التالية:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'تاريخ بدء الخدمة',
     'LBL_LEAD_SOURCE' => 'مصدر العميل المتوقع',
     'LBL_SALES_STAGE' => 'مرحلة المبيعات',
     'LBL_SALES_STATUS' => 'الحالة',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'تأكيد المرحلة',
     'LBL_COMMIT_STAGE_FORECAST' => 'التوقع',
     'LBL_WORKSHEET' => 'ورقة العمل',
+    'LBL_PURCHASED_LINE_ITEMS' => 'البنود المشتراة',
 
     'LBL_RENEWAL' => 'التجديد',
     'LBL_RENEWAL_OPPORTUNITIES' => 'فرص التجديد',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'معرف أصل التجديد',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}، {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'مرحلة المبيعات',
+    'LBL_WIDGET_DATE_CLOSED' => 'تاريخ الإغلاق المتوقع',
+    'LBL_WIDGET_AMOUNT' => 'المبلغ',
 
     'TPL_RLI_CREATE' => 'يجب أن يكون للفرصة بند عائدات يقترن بها.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'قم بإنشاء بند عائدات.',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'عدد بنود العائدات الإجمالية',
     'LBL_CLOSED_RLIS' => 'عدد بنود العائدات المغلقة',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'عدد بنود عائد المدة المرنة للخدمة المفتوحة',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'لا يمكنك حذف الفرص التي تحتوي على بنود عائدات مغلقة',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'واحد أو أكثر من السجلات المحددة يحتوي على بنود العائدات مغلقة ولا يمكن حذفه.',
     'LBL_INCLUDED_RLIS' => '# من بنود العائدات المضمنة',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'التحديث مفتوح',
+    'LBL_SERVICE_START_DATE_INVALID' => 'لا يمكن تحديد تاريخ بدء الخدمة بعد تاريخ نهاية الخدمة لأي بنود عائد سطرية إضافية مفتوحة.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '‏‏عروض الأسعار',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'الفرص حسب حساب ديناميكي',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'التسلسل الهيكلي للفرص',
@@ -200,7 +207,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'بعد أن تبدأ هذا التغيير، يتم إنشاء سجلات بنود العائدات لكل وحدة {{module_name}} في الخلفية. عندما تكتمل بنود العائدات وتكون متاحة، يتم إرسال إشعار إلى عنوان البريد الإلكتروني المسجل في ملف تعريف المستخدم الخاص بك. الرجاء ملاحظة أن المثيل الخاص بنا يجب أن يتم تكوينه من أجل إرسال رسائل البريد الإلكتروني عبر مسؤول > إعدادات البريد الإلكتروني من أجل أن يتم إرسال الإشعار.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'تسمح الوحدة {{plural_module_name}} بتتبع مبيعات الأفراد من البداية إلى النهاية. يمثل كل سجل {{module_name}} عملية بيع متوقعة ويتضمن بيانات المبيعات ذات الصلة، ويرتبط كذلك بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ. سيتم التقدم في {{module_name}} بصورة نموذجية عبر مراحل المبيعات المتعددة حتى تتم وضع علامة "إغلاق بسبب الفوز" أو "إغلاق بسبب الخسارة". يمكن الاستفادة من {{plural_module_name}} بصورة أكبر باستخدام وحدة {{forecasts_singular_module}} في Sugar لفهم اتجاهات المبيعات والتنبؤ بها وكذلك تركيز العمل لتحقيق الحصص النسبية من المبيعات.',
+    'LBL_HELP_RECORDS' => 'تسمح الوحدة {{plural_module_name}} بتتبع مبيعات الأفراد من البداية إلى النهاية. يمثل كل سجل {{module_name}} عملية بيع متوقعة ويتضمن بيانات المبيعات ذات الصلة، ويرتبط كذلك بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ. ستتقدم {{module_name}} بصورة نموذجية عبر مراحل المبيعات المتعددة حتى تتم وضع علامة "إغلاق بسبب الفوز" أو "إغلاق بسبب الخسارة". يمكن الاستفادة من {{plural_module_name}} بصورة أكبر باستخدام وحدة {{forecasts_singular_module}} في Sugar لفهم اتجاهات المبيعات والتنبؤ بها وكذلك تركيز العمل لتحقيق الحصص النسبية من المبيعات.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'تسمح الوحدة {{plural_module_name}} بتتبع مبيعات الأفراد والبنود التي تنتمي إلى هذه المبيعات من البداية إلى النهاية. يمثل كل سجل {{module_name}} عملية بيع محتملة ويتضمن بيانات المبيعات ذات الصلة، كما يرتبط بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ.
@@ -217,8 +224,8 @@ $mod_strings = array(
 لإنشاء {{module_name}}:
 1. قم بتزويد القيم المطلوبة في الحقول حسب الرغبة.
  - الحقول المميزة بعلامة "إجبارية" يجب إكمالها قبل الحفظ.
- - انقر فوق "إظهار المزيد" لكشف الحقول الإضافية إذا لزم الأمر.
-2. انقر فوق "حفظ" لإنهاء السجل الجديد والرجوع إلى الصفحة السابقة.',
+ - انقر فوق "عرض المزيد" لكشف الحقول الإضافية إذا لزم الأمر.
+2. انقر فوق "حفظ" لإنهاء العمل على السجل الجديد والرجوع إلى الصفحة السابقة.',
 
 // END ENT/ULT
 
@@ -231,5 +238,10 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'الفرص الخاصة بي',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "الفرص الخاصة بفريقي",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'يتعذر تغيير {{fieldName}} لأن {{moduleSingular}} لا يملك بنود مفتوحة.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'تفاعلات الفرصة',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'التنبؤ بنجاح الفرصة',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'عرض تفاصيل التنبؤ لفرصة معينة',
 );

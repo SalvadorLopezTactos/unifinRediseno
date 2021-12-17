@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'User Name',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Restore',
 	'LBL_SYSTEM_SETTINGS' => 'System Settings',
-	'LBL_SKYPEOUT_ON_DESC' => 'Allows users to click on phone numbers to call using SkypeOut&reg;. The numbers must be formatted properly to make use of this feature. That is, it must be "+"  "The Country Code" "The Number", like +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'Enable SkypeOut&reg; integration',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Allows users to click on phone numbers to call them using their default computer telephony integration (CTI) software.',
+    'LBL_DIALOUT_ON' => 'Enable Click-to-Call',
+    'LBL_DIALOUT_TITLE' => 'Outbound Calling',
     'LBL_TWEETTOCASE_ON_DESC' => 'Allows users to create cases from Tweets',
     'LBL_TWEETTOCASE_ON' => 'Enable Tweet&reg; to case integration',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; to case',
@@ -375,8 +375,8 @@ Fonts supported by SugarPDF :
 <br>
 If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
+Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF website</a>.
+<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF website</a>.
 <br><br>Load the metric file generated in step 2 and your font file below.
 BSOFR
 ,
@@ -445,9 +445,6 @@ To configure additional system settings, click <a href="index.php?module=Adminis
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Enable additional login screen content',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Auto-save process definitions',

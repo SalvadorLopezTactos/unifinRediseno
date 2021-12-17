@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'Combinació de registres',
       'VisualPipeline'=>'Objectiu visual',
       'ConsoleConfiguration' => 'Configuració de la consola',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'Quotes',
     'Teams' => 'Equips',
     'TeamNotices' => 'Notícies d´Equip',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Normes empresarials de processos',
     'pmse_Emails_Templates' => 'Plantilles de correus electrònics de processos',
     'BusinessCenters' => 'Centres de negocis',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'Torns',
+    'ShiftExceptions' => 'Excepcions dels torns',
+    'Purchases' => 'Compres',
+    'PurchasedLineItems' => 'Elements de línia comprats',
+    'MobileDevices' => 'Dispositiusmòbils',
+    'PushNotifications' => 'Notificacionsd&#39;inserció',
     'WorkFlow' => 'Definicions del flux de treball',
     'EAPM' => 'Comptes externes',
     'Worksheet' => 'Full de càlcul',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'Bolletins de Notícies',
   	'SugarFavorites'=>'Favorits',
 	'PdfManager' => 'Gestor de PDF',
+    'DataArchiver' => 'Arxiu de dades',
+    'ArchiveRuns' => 'Execucions d&#39;arxiu',
 
     'OAuthKeys' => 'Claus del consumidor OAuth',
     'OAuthTokens' => 'OAuth Tokens',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'Registre de comentaris',
     'Holidays' => 'Festius',
     'ChangeTimers' => 'Canvia els temporitzadors',
+    'Messages' => 'Missatges',
   ),
 
     'moduleIconList' =>
@@ -141,7 +147,7 @@ $app_list_strings = array (
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'PD',
         'BusinessCenters' => 'BC',
-        'PurchasedLineItems' => 'PL',
+        'PurchasedLineItems' => 'EL',
     ),
 
   'moduleListSingular' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'Fabricant',
     'VisualPipeline' => 'ObjectiuVisual',
     'ConsoleConfiguration' => 'ConfiguracióConsola',
+    'MobileDevices' => 'Dispositiumòbil',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'Contracte',
     'Quotes' => 'Pressupost',
     'Products' => 'Element de línia d&#39;oferta',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'Notificació',
     'Sync'=>'Sincronització',
     'PdfManager' => 'Gestor de PDF',
+    'DataArchiver' => 'Arxiu de dades',
+    'ArchiveRuns' => 'Execucions d&#39;arxiu',
     'ReportMaker' => ' Informe avançat',
     'DataSets' => 'Format de les dades',
     'CustomQueries' => 'Consulta personalitzada',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Norma empresarial del procés',
     'pmse_Emails_Templates' => 'Plantilla de correus electrònics de processos',
     'BusinessCenters' => 'Centre de negocis',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'Torn',
+    'ShiftExceptions' => 'Excepcions dels torns',
+    'Purchases' => 'Compra',
+    'PurchasedLineItems' => 'Element de línia comprat',
+    'PushNotifications' => 'Notificaciód&#39;inserció',
     'WorkFlow' => 'Flux de treball',
     'EAPM' => 'Compte extern',
     'Worksheet' => 'Full de càlcul',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'Programa d&#39;informes',
     'Holidays' => 'Festiu',
     'ChangeTimers' => 'Canvia el temporitzador',
+    'Messages' => 'Missatge',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'Serveis',
     'Other' => 'Un altre',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'En curs',
+        'Completed' => 'Completat',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'Entrant',
+        'Outbound' => 'Sortint',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'Xat',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'Nivell 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'Nivell 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
+      '' => '',
+      'Yes' => 'Si',
       'No' => 'No',
-      'Completed' => 'Completed',
+      'Completed' => 'Completada',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'Futur',
+        'Active' => 'Actiu',
+        'Past' => 'Passat',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'Autogenerat',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'Programada',
+    'In Progress' => 'En curs',
     'Held' => 'Celebrada',
     'Not Held' => 'Cancel·lada',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'Reunió',
     'Calls' => 'Trucada',
       'KBContents' => 'Knowledge Base',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'Element de línia comprat',
+      'Purchases' => 'Compra',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Compte',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'Objectiu',
       'KBContents' => 'Knowledge Base',
       'Notes' => 'Nota',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Element de línia comprat',
+    'Purchases' => 'Compra',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => 'Portal',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'Intern',
+        'Forum' => 'Fòrum',
+        'Web' => 'Web',
+        'InboundEmail' => 'Correu electrònic',
+        'Twitter' => 'Twitter',
+        'Portal' => 'Portal',
+        'Phone' => 'Telèfon',
+        'Chat' => 'Xat',
+        'Chatbot' => 'Xatbot',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,10 +2041,17 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Exchange',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'Aplicacions menys segures de Google',
+        'exchange' => 'Exchange',
         'other' => 'Altre',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
+        'other' => 'Altres',
     ),
     'import_enclosure_options' =>
     array (
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'Si',
         'No' => 'No',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'Inclòs en previsió',
         'sales_stage' => 'Etapa de Vendes',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'Llista',
         'activities' => 'Seqüència d&#39;activitats',
         'multi-line' => 'Llista amb múltiples línies',
+        'omnichannel' => 'Omnichannel',
+        'home' => 'Home',
+        'focus' => 'Calaix centrat',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Cada hora',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'Dia(es)',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'Descans',
+            'event' => 'Esdeveniment',
+            'other' => 'Altres',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'Data (Últim {{module}})',
+            'start_date:asc' => 'Data (Primer {{module}})',
+            'total_revenue:desc' => 'Preu (total més alt)',
+            'total_revenue:asc' => 'Preu (total més baix)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Seguir l&#39;enllaç',
   'LBL_TOGGLE_VISIBILITY' => 'Alternar la vista', // Record view header panel element
   'LBL_ACTIVITIES' => 'Seqüència d&#39;activitats',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar i el cub 3-D són marques comercials registrades de SugarCRM Inc. '.
         'La resta de noms d&#39;empreses i productes que es fan servir o que surten en aquest producte poden ser marques registrades de '.
         'SugarCRM ®, Sugar Enterprise™ i Sugar™ són marques registrades de SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "Imprimir",
     'LBL_HELP' => "Ajuda",
     'LBL_TOUR' => "Tour",
-    'LBL_TOUR_LINK' => 'Visita - mireu la visita per veure els aspectes destacats',
+    'LBL_TOUR_LINK' => 'Visiteu aquesta pàgina',
     'LBL_MOBILE' => "Mòbil:",
     'LBL_ID_FF_SELECT' => "Selecciona",
     'DEFAULT'                              => 'Basic',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'Nova Firma',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'Nom de la Firma',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'Cos de la Firma',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'Altre',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Aplicacions menys segures de Google',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'Altre',
+    'LBL_EMAIL_AUTHORIZE'                   => 'Autoritza',
+    'LBL_EMAIL_AUTHORIZED'                  => 'Autoritzat',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'No autoritzat',
+    'LBL_EMAIL_AUTH_WARNING'                => 'Un administrador ha de configurar el Connector {0} des de Administració > Connectors abans que pugueu establir aquest compte. Per obtenir-ne més informació, consulteu la documentació {1}.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'Error en recuperar la informació del connector',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'Error d&#39;autorització.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'Autoritzeu el compte abans de desar.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'Autoritzeu el compte abans de provar.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'Compte no autoritzat',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[ Remote Folders ]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ Sugar Folders ]',
     'LBL_EMAIL_SUBJECT'                     => 'Assumpte',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'Cc',
     'LBL_BCC' => 'CCO',
 
+    'LBL_START_DATE' => 'Data d&#39;inici',
+    'LBL_END_DATE' => 'Data de finalització',
+
     'LBL_LINK_NONE'=> 'Cap',
     'LBL_LINK_ALL'=> 'Tots',
     'LBL_LINK_RECORDS'=> 'Registres',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => '  Si us plau, examini el següent missatge d&#39;error:',
     'NO_QUERY_SELECTED' => 'El format de dades que ha seleccionat no conté una consulta. Si us plau, seleccioni una consulta personalitzada per aquest format de dades.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'S&#39;ha produït un error:',
     'ERR_AJAX_LOAD_FAILURE'     => 'Hi ha un error processant la seva sol·licitud; si us plau, provi-ho més tard.',
     'ERR_AJAX_LOAD_FOOTER' => 'Si l&#39;error persisteix, si us plau demani a l&#39;administrador que desactivi Ajax per a aquest mòdul',
@@ -2793,9 +2890,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'Aquesta funcionalitat no està disponible amb aquest tema.',
     'ERR_NOT_ADMIN' => "Accés no autoritzat a l´administració.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'L&#39;administració de contrasenyes només està disponible en <a href="%s" target="_blank">Configuració del núvol</a>.',
+        'L&#39;administració de contrasenyes només està disponible en <a href="%s" target="_blank">Configuració de SugarCloud</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Contacteu amb el vostre administrador de Sugar si voleu fer canvis als camps de només lectura.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Accediu a <a href="{0}" target="_blank">SugarCloud Settings</a> per fer canvis als camps només de lectura.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Falta camp requerit:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Camp requerit no vàlid:',
     'ERR_INVALID_VALUE' => 'Valor no vàlid:',
@@ -2936,6 +3033,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'Afegir [Alt+A]',
     'LBL_ADD_BUTTON' => 'Afegir',
+    'LBL_ADD_DASHLET_BUTTON' => 'Afegeix Dashlet',
     'LBL_ADD_DOCUMENT' => 'Afegir Document',
     'LBL_REPLACE_BUTTON' => 'Reemplaçar',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2966,6 +3064,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'Enviar',
     'LBL_CASE'=>'Cas',
     'LBL_CASES'=>'Casos',
+    'LBL_MESSAGE'=>'Missatge',
+    'LBL_MESSAGES'=>'Missatges',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Canviar contrasenya',
     'LBL_CHANGE_BUTTON_LABEL' => 'Camviar',
@@ -3192,6 +3292,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'Generar Pressupost',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'No hi ha camps disponibles per a l&#39;operació d&#39;actualització massiva',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'La seva sol·licitud d&#39;actualització massiva ha estat programada.',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'La data d&#39;inici del servei supera la data de final del servei',
     'LBL_MASS_UPDATE_SUCCESS' => 'Tots els registres han estat actualitzats correctament.',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'Els registres seleccionats s&#39;han agregat a la llista d&#39;objectius <a href="{{listUrl}}">{{listName}}</a>.',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'S&#39;ha programat la vostra sol·licitud per afegir registres a la llista de destinació <a href="{{listUrl}}">{{listName}}</a>.',
@@ -3427,11 +3528,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'Assumpte',
 
     'LBL_INBOUNDEMAIL_ID' => 'ID de correu electrònic entrant',
+    'LBL_EAMP_ID' => 'ID del token d&#39;autenticació',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Tots els drets reservats.<br />SugarCRM, Sugar i el cub 3-D són marques comercials registrades de SugarCRM Inc. '.
         'La resta de noms d&#39;empreses i productes que es fan servir o que surten en aquest producte poden ser marques registrades de '.
         'les empreses corresponents amb les quals estan associats.',
@@ -3500,6 +3602,8 @@ Atentament, SugarCRM',
     'LBL_USER_MENU' => 'Menú d&#39;usuari',
     'LBL_USERS_SYNC'=>'Sincronització d&#39;usuaris',
     'LBL_USERS'=>'Usuaris',
+    'LBL_USER'=>'Usuari',
+    'LBL_CURRENT_USER'=>'Usuari actual',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'Comprovant l´entrada de correu actual...',
     'LBL_VERIFY_PORTAL_NAME'=>'Comprovant el nom de portal actual...',
     'LBL_VIEW_IMAGE' => 'veura',
@@ -3588,6 +3692,8 @@ Atentament, SugarCRM',
         'S&#39;ha arribat al límit del recompte de llicències d&#39;usuari. Només els usuaris existents podran iniciar sessió.',
     'WARN_ONLY_ADMINS'=> "Només els administradors poden iniciar la sessió.",
     'WARN_UNSAVED_CHANGES'=> "Esteu a punt de deixar aquest registre sense desar els canvis que podeu haver aplicat al registre. Esteu segur que voleu navegar fora d'aquest registre?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Actualitzar el navegador tancarà automàticament totes les sessions de trucada o de xat de SugarLive que heu obert i es perdran tots els canvis no desats. Voleu continuar?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Teniu canvis que no s&#39;han desat. Estes segur que voleu abandonar la pàgina i descartar els canvis?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Un o més dashlets tenen canvis no desats. Esteu segur que voleu tancar el calaix?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Aneu cap al mòdul d&#39;informes. Els canvis fets al dashlet no es desaran. Voleu continuar?',
@@ -3610,6 +3716,7 @@ Atentament, SugarCRM',
     'ERROR_TIME_IS_AFTER' => 'Error. L&#39;hora d&#39;aquest camp ha de ser posterior a la del camp {{this}}.',
     'ERROR_NUMBER' => 'Error. Aquest camp requereix un nombre vàlid.',
     'ERROR_INT' => 'Error. Número enter no vàlid.',
+    'ERROR_URL' => 'Error. URL no vàlid.',
     'ERROR_NO_BEAN' => 'Error al obtenir el bean',
     'ERROR_ACCESS_MODULE' => 'No té permisos per accedir a aquest mòdul.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Error. L&#39;arxiu adjunt és massa gran.',
@@ -3693,9 +3800,14 @@ Atentament, SugarCRM',
     'LBL_CREATE_OPPORTUNITY' => 'Crear oportunitat',
     'LBL_SCHEDULE_CALL' => 'Programa una trucada',
     'LBL_SCHEDULE_MEETING' => 'Programa una reunió',
+    'LBL_CREATE_MESSAGE' => 'Crea missatge',
     'LBL_CREATE_TASK' => 'Crea una tasca',
     'LBL_REMOVE_FROM_FAVORITES' => 'Treure dels Meus Favorits',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'Baixa-ho tot',
+    'LBL_DOWNLOAD_ONE' => 'Baixa',
+    'LBL_ATTACHMENTS' => 'Adjunts',
+    'LBL_ADD_ATTACHMENT' => 'Explora',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Generar Formulari',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Desar Formulari Web A Client Potencial',
@@ -3747,8 +3859,8 @@ Atentament, SugarCRM',
     'LBL_DASHLET_REFRESH_LABEL' => 'Actualitzar',
     'LBL_DASHLET_REMOVE_LABEL' => 'Suprimir',
     'LBL_DASHLET_DROP_HERE' => 'Arrosega aquí',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'Tanca-ho tot',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'Obre-ho tot',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'Tancar:',
     'LBL_DASHLET_MAXIMIZE' => 'Obrir',
     'LBL_DASHLET_CONFIGURE' => 'Configuració',
@@ -3770,6 +3882,10 @@ Atentament, SugarCRM',
     'LBL_DASHLET_LISTVIEW_NAME' => 'Vista de llista',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Mostra una llista dels registres d&#39;un mòdul específic segons els criteris que definiu.',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'Vista de llista de la consola',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'Fa una llista de registres d&#39;un mòdul particular relacionats amb el registre que vegeu a la consola.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Vista del Registre',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Mostra un registre i, opcionalment, registres relacionats en pestanyes.',
@@ -3780,6 +3896,7 @@ Atentament, SugarCRM',
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Advertència, només es poden mostrar {{numWord}} ({{num}}) mòduls en pestanyes. ' .
         'Suprimiu un o més mòduls abans d&#39;afegir-ne altres.',
     'LBL_SIX' => 'sis', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'Registre de comentaris',
@@ -3804,7 +3921,13 @@ Atentament, SugarCRM',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Recentment utilitzats',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favorits',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'Crea quadre de comandament',
+    'LBL_DASHBOARD_DUPLICATE' => 'Duplica el quadre de comandament',
+    'LBL_DASHBOARD_DELETE' => 'Esborra el quadre de comandament',
+    'LBL_PIN_TO_TOP' => 'Fixa a la part superior',
+    'LBL_PIN_TO_BOTTOM' => 'Fixa a la part inferior',
+
+    'LBL_DASHBOARD_CONFIG' => 'Configuració del quadre de comandament',
     'LBL_LIST_VIEW__NAME' => 'Vista de llista',
     'LBL_PIPELINE_VIEW_NAME' => 'Vista de mosaic',
     'LBL_PIPELINE_VIEW_BTN' => 'Vista de mosaic',
@@ -3840,9 +3963,9 @@ Atentament, SugarCRM',
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'Recursos d&#39;aprenentatge',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar University - Convertiu-vos en un expert',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Fòrums de la comunitat - Participeu als debats',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Documentació i suport tècnic - Conegueu-ne els detalls',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Formació i certificació',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Comunitat SugarClub',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Documentació i suport',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'Vendes per país',
@@ -3851,6 +3974,10 @@ Atentament, SugarCRM',
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'Categories de la Base de Coneixement i Articles Publicats',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Displays a tree view of knowledge base categories & published articles',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'Cerca a la Base de coneixement',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'Mostra una vista d&#39;arbre dels articles i les categories de coneixement publicat que es pot cercar.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'Articles publicats en altres idiomes',
@@ -4066,6 +4193,10 @@ Atentament, SugarCRM',
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'Si us plau, introduïu número de telèfon dels EUA, incloent el seu codi d&#39;àrea.',
+    'LBL_CCP_NOT_INITIATED' => 'Intentant marcar amb CCP mentre l&#39;agent no ha iniciat la sessió.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'No es pot iniciar una trucada amb CCP.',
+    'LBL_CCP_DIALING_ERROR' => 'Aquesta trucada no es pot completar en marcar.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'Tanqueu totes les sessions de xat a SugarLive abans de fer una trucada sortint.',
 
     //File write error label
     'ERR_FILE_WRITE' => 'Error: No s&#39;ha pogut escriure el fitxer {0}. Si us plau, comproveu els permisos del sistema i del servidor web.',
@@ -4402,8 +4533,8 @@ Atentament, SugarCRM',
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Element de línia de pressupost',
     'LBL_DISCOUNT_TOTAL' => 'Descompte total',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% Per cent',
+    'LBL_DISCOUNT_SELECT' => 'Determina si el descompte és un percentatge o una quantitat fixa',
     'LBL_TAX' => 'Impost',
     'LBL_SHIPPING' => 'Enviaments',
     'LBL_GRAND_TOTAL' => 'Total general',
@@ -4450,7 +4581,7 @@ Atentament, SugarCRM',
     'LBL_NO_ACCESS' => '(Sense accés)',
     'LBL_NO_ACCESS_LOWER' => 'Sense accés',
     'LBL_NO_FIELD_ACCESS' => 'Sense accés',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'Llicència obligatòria',
     'LBL_VALUE_ERASED' => 'Valor esborrat',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Aquesta informació s&#39;ha esborrat mitjançant una sol·licitud de privacitat de dades',
     'LBL_CREATE_RELATED_RECORD' => 'Crear registre relacionat',
@@ -4471,7 +4602,9 @@ Atentament, SugarCRM',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Tasques',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Trucades',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Missatges de correu electrònic',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'Torns',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Elements de línies d&#39;oferta',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Excepcions dels torns',
     'LNK_SETTINGS' => 'Configuració',
     'LBL_MOBILE_SUPPORT' => 'Suport',
     'LBL_MOBILE_SHOW_MORE' => 'Veure més ...',
@@ -4631,16 +4764,14 @@ Atentament, SugarCRM',
     'LBL_MOBILE_PDF_DOWNLOAD' => 'Baixa el PDF {{{pdfTemplateName}}}',
 
     'ERR_SYNC_FAILED' => 'No es pot sincronitzar amb el servidor.',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'L&#39;inici de sessió SSO no està disponible. Assegureu-vos que la instància és a Sugar 7.5 o una versió superior i configurada per a SSO.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'Accés no autoritzat.',
     'ERR_MOBILE_INVALID_CREDS' => 'Nom d&#39;usuari o contrasenya no vàlids.',
     'ERR_MOBILE_SESSION_EXPIRED' => 'La seva sessió ha finalitzat.',
     'ERR_MOBILE_NOT_FOUND' => 'Recurs no trobat.',
     'ERR_MOBILE_TIMEOUT' => 'El servidor no respon.',
     'ERR_MOBILE_CONNECTION_FAILED' => 'No es pot accedir al servidor.',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'Cap servidor{{{brandName}}} ha estat trobat a la l&#39;URL indicada.',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'El servidor no està responent a l&#39;adreça indicada.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'Servidor no disponible a l&#39;adreça indicada.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'Connexió a Internet no disponible.',
     'ERR_MOBILE_INTERNAL' => 'Error intern ({{{code}}}). Torneu-ho a provar més tard.',
     'ERR_MOBILE_VALIDATION' => 'Registre no vàlid',
@@ -4839,6 +4970,55 @@ Atentament, SugarCRM',
     'LBL_VO_RIGHT_MENU_BTN' => 'Botó de menú de la dreta',
     'LBL_VO_ADD_BTN' => 'Afegeix botó',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'Descompte',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'Seleccioneu una aplicació d&#39;assignació',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => 'El {{entityName}} seleccionat té valors relacionats: {{localizedFieldNames}}. Cancel·leu per mantenir els valors existents. Confirmeu per sobreescriure amb els valors nous.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'El xifratge de dades està habilitat.',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'El client potencial seleccionat ja s&#39;ha convertit.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'Aquesta acció només està disponible quan el dispositiu està en línia',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'Esteu segur que voleu crear una Oportunitat del Pressupost?',
+    'LBL_TAG_ADD' => 'Afegeix etiqueta',
+    'LBL_TAG_ENTER_TAG_NAME' => 'Introdueix etiqueta',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'Filtrar per etiquetes no és compatible mentre el dispositiu està fora de línia.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'Mostra el comentari complet',
+    'LBL_COMMENT_VIEW' => 'Visualitza un Comentari',
+    'LBL_PMSE_LABEL_DUEDATE' => 'Data de venciment',
+    'LBL_PMSE_DUE' => 'Venciment',
+    'LBL_PMSE_DUE_ON' => 'Venç el',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'Creeu primer {{conversionParentModuleName}}',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'Falten registres requerits: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'Trieu la qualitat de la imatge. Es canviarà la mida de la imatge segons sigui apropiat abans de desar-la al servidor. El valor seleccionat s&#39;utilitzarà com a predeterminat per a totes les operacions similars en el futur.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'S&#39;està estimant la mida del fitxer...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'La mida estimada del fitxer és',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'Qualitat de la imatge',
+    'LBL_IMAGE_QUALITY_BEST' => 'Mida original',
+    'LBL_IMAGE_QUALITY_GOOD' => 'Bona qualitat',
+    'LBL_IMAGE_QUALITY_POOR' => 'Mida petita',
+    'LBL_IMAGE_QUALITY_BTN' => 'Compressió: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'Llista ela camps a {{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'Restaura als valors predeterminats',
+    'LBL_LIST_NOT_ENOUGH' => 'Configureu almenys 1 camp actiu.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'Cal que inicieu sessió i accepteu els permisos per poder treballar amb la instància de SugarCRM.',
+    'LBL_SELECTING_EXISTING_RECORD' => 'S&#39;està seleccionant {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => 'S&#39;està creant un nou {{{moduleSingular}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'Mida de la imatge',
+    'LBL_COPY_ADDRESS' => 'Copia l&#39;adreça',
+    'LBL_OPEN_IN' => 'Obre a',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'No s&#39;ha seleccionat cap fixer.',
+    'LBL_ATTACHMENT_ADD' => 'Adjunta',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'Aquesta aplicació utilitza cookies',
+    'LBL_USE_COOKIES_CONFIRM' => 'Aquesta aplicació utilitza cookies per ajudar a oferir-vos una millor experiència. Si continueu, consentiu l&#39;ús de cookies segons la nostra política de privacitat.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'Esteu utilitzant una instància de Sugar que no serà compatible amb Sugar Mobile en una versió mòbil vinent. Demaneu-li al vostre administrador que actualitzi Sugar al més aviat possible.',
+    'ERROR_TAG_NAME_INVALID' => 'El nom de l&#39;etiqueta no pot contenir "{{{forbiddenChars}}}" caràcters',
+    'ERROR_NO_TAGS_FOUND' => 'No hi ha cap etiqueta que coincideixi amb "{{{searchQuery}}}"',
+    'ERR_PA_RECORD_INVALID' => 'El registre {{{moduleName}}} té un o més valors invàlids i n es pot desar. Voleu editar el registre per dur a terme l&#39;acció {{{actionLabel}}}?',
+    'ERR_MOBILE_METADATA_RELOAD' => 'Un administrador ha fet canvis de configuració a la vostra instància de Sugar. Premeu OK per sincronitzar la configuració de la vostra aplicació amb el servidor.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'Aquesta aplicació utilitza cookies',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Comprova per acceptar (Obligatori)',
@@ -4897,6 +5077,10 @@ Atentament, SugarCRM',
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telèfon: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'Correu electrònic: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'Web: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Esteu segur que voleu tancar el xat?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'No heu introduït un usuari correcte. Torneu-ho a provar.',
@@ -4943,6 +5127,29 @@ Atentament, SugarCRM',
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Nom/Nom de compte',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'Quadre de comandament d&#39;Omnichannel',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'Client',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} a les {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'El vostre explorador no és compatible amb SugarLive. Utilitzeu Google Chrome o Mozilla Firefox.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'S&#39;ha creat un <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> que conté els detalls de la vostra conversa.',
+    'LBL_OMNICHANNEL_SUBJECT' => 'Assumpte',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'Descripció',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Resum del missatge',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Resum de la trucada',
+    'LBL_OMNICHANNEL_LINK_TO' => 'S&#39;ha vinculat {{fromModule}} a {{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => 'Vinculat',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'El vostre navegador no és compatible amb el xat. Utilitzeu Google Chrome o Mozilla Firefox.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Contacteu amb l&#39;administrador de Sugar per obtenir ajuda.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'Configura disseny',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Acabeu de configurar SugarLive abans de fer una trucada sortint.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Acabeu de configurar el disseny de SugarLive abans d&#39;obrir SugarLive.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Configureu-vos a "Fora de línia" a SugarLive abans de configurar el disseny de SugarLive.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'Restableix la pestanya a predeterminada',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'Configura al panell de resum',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Perfil d&#39;usuari',
@@ -4974,6 +5181,10 @@ Atentament, SugarCRM',
     'LBL_WIZ_CREATE_USERS' => 'Crear usuaris',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Configuració del sistema',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Estudi',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'Els valors que heu introduït són incompatibles o no compleixen el format acceptable. En el cas de valors i formats de camp acceptables, consulteu la documentació <a href="{{linkToDocumentation}}" target="_blank">del sistema.</a>',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'Aquest contingut no s&#39;ha aprovat. Actualitzeu la configuració de la Política de seguretat del contingut <a href="{{linkToDocumentation}}" target="_blank">del vostre sistema</a>.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'Aquest contingut no s&#39;ha aprovat. Demaneu al vostre administrador que actualitzi la configuració de la Política de seguretat del contingut <a href="{{linkToDocumentation}}" target="_blank">del vostre sistema</a>. Una vegada actualitzada la configuració, caldrà que actualitzeu el vostre navegador perquè els canvis tinguin efecte.',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'Clau de pas',
@@ -5103,6 +5314,12 @@ Atentament, SugarCRM',
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'Els meus elements',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'Elements de l&#39;equip',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'Historial',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'El dashlet de l&#39;historial mostra les reunions celebrades, trucades registrades, correus electrònics rebuts i enviats.',
@@ -5217,6 +5434,7 @@ Atentament, SugarCRM',
     //record save
     'LBL_RECORD_SAVED' => 'Registre desat', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => 'Heu creat correctament el {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'Heu creat correctament el filtre {{moduleSingularLower}}.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Heu creat correctament aquest registre, però no teniu permís per accedir-hi.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Validant...',
 
@@ -5295,7 +5513,7 @@ Atentament, SugarCRM',
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Refresca la llista',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'Actualitza el mosaic',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'més',
@@ -5549,6 +5767,7 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'Activitats pendents',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'Activitats pendents per procés',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'Tots els processos',
+    'LBL_RECORD_DASHBOARD' => 'Quadre de comandament del registre',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'Resum de l&#39;estat de processos',
@@ -5580,7 +5799,7 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_BUSINESS_CENTER_ID' => 'ID del Centre de negocis',
     'LBL_BUSINESS_CENTER_NAME' => 'Nom del Centre de negocis',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'Activitats dels elements de línia comprats',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Nova etiqueta)',
@@ -5620,6 +5839,7 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'TPL_DATAPRIVACY_PII_TITLE' => 'Informació personal per a {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Canvia els temporitzadors',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'Missatges',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Copiat al vostre porta-retalls!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'No s&#39;ha pogut copiar al vostre porta-retalls',
@@ -5637,13 +5857,24 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Mostra&#39;n menys...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'No hi ha dades disponibles',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Subscripcions actives',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'Aquest dashlet només es pot afegir a mòduls vinculats a un únic Compte. Consulteu la documentació de <a href={{linkToDocumentation}}>Dashlet de subscripcions actives</a> per obtenir-ne més informació.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'Mostra compres que pertanyen a aquest Compte vinculat:',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Subscripcions actives per a un compte específic.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', quantitat {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Total:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'No hi ha subscripcions actives',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Aquest dashlet necessita {{module_name}} per funcionar. Contacteu amb el vostre administrador per habilitar {{module_name}}.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'Historial de compres',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'Totes les compres d&#39;un compte específic.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'Aquest dashlet només es pot afegir a mòduls vinculats a un únic compte. Consulteu la documentació del <a href={{linkToDocumentation}} target="_blank">Dashlet d&#39;historial de compres</a> per obtenir-ne més informació.',
+    'LBL_NO_PURCHASE_HISTORY' => 'No hi ha compres per mostrar',
+    'LBL_NO_PLIS' => 'No hi ha elements de línia comprats',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'Total',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'Quantitat',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'Aquest dashlet necessita Compres i Elements de línia comprats per funcionar. Parleu amb el vostre administrador per habilitar Compres i Elements de línia comprats.',
+    'LBL_SEARCH_PURCHASE_NAME' => 'Cerca per Nom de compra...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'Utilitzeu l&#39;Estudi per editar editar el disseny del dashlet de la vista de registres anant a ' .
@@ -5659,7 +5890,39 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_SERVICE_DURATION' => 'Duració del servei',
     'LBL_SERVICE_DURATION_VALUE' => 'Valor de duració del servei',
     'LBL_SERVICE_DURATION_UNIT' => 'Unitat de duració del servei',
+    'LBL_LOCK_DURATION' => 'Durada del bloqueig',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'No s&#39;ha pogut carregar el CCP d&#39;Amazon Connect.' .
+        'Assegureu-vos que esteu utilitzant un '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">navegador compatible</a>. ' .
+        'Si el problema persisteix, contacteu amb el vostre Administrador de Sugar.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'El vostre Administrador de Sugar no ha configurat la vostra instància d&#39;Amazon Connect.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'No s&#39;ha pogut establir la connexió amb Amazon Connect. Contacteu amb el vostre Administrador de Sugar per obtenir assistència.',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'Desconegut',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat',
+    'LBL_EXTERNAL_GUESTS' => 'Convidats externs',
+    'LBL_MY_FAVORITE_TASKS' => 'Les meves tasques preferides',
+    'LBL_MY_TASKS' => 'Les meves tasques',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'No s&#39;ha pogut trobar el camp: {0} al mòdul: {1}',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'No s&#39;ha pogut trobar el registre amb {0}: {1} al mòdul: {2}',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'No s&#39;ha pogut trobar una relació anomenada: {0}',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'Ja existeix una entrada a la base de dades d&#39;id: {0}, amb {1}: {2} al mòdul: {3}',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'suprimit temporalment (amb indicador de supressió = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'S&#39;han trobat múltiples registres a la base de dades per a {0} {1} al mòdul {2}. ' .
+        'Suprimiu o actualitzeu els registres coincidents segons sigui apropiat. Registres coincidents: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'Següent execució',
+    'LBL_TIME_AWARE_TYPE' => 'Tipus',
+    'LBL_TIME_AWARE_BEAN_ID' => 'ID de Bean',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6739,7 +7002,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fitxer integrat';
     'BOB' => 'Bolivianos',
     'BAM' => 'Marka convertible',
     'BWP' => 'Pules',
-    'BGN' => '﷼',
+    'BGN' => '77e8',
     'BRL' => 'Reais',
     'GBP' => 'Lliures',
     'BND' => 'Dòlars',

@@ -71,7 +71,7 @@ class SugarTinyMCE
             'elements'                          => '',
             'extended_valid_elements'           => 'style[dir|lang|media|title|type],hr[class|width|size|noshade],@[class|style]',
             'content_css'                       => 'include/javascript/tiny_mce/themes/advanced/skins/default/content.css',
-
+            'oninit' =>  'onTinyMCEInit',
         );
 
 
@@ -116,19 +116,29 @@ class SugarTinyMCE
 
         $instantiateCall = '';
         $path = getJSPath('include/javascript/tiny_mce/tiny_mce.js');
-        $ret
-                   = <<<eoq
-<script type="text/javascript" language="Javascript" src="$path"></script>
 
+        $exTargets = explode(",", $targets);
+
+        $ret
+            = <<<eoq
+<script type="text/javascript" language="Javascript" src="$path"></script>
 <script type="text/javascript" language="Javascript">
 <!--
+function onTinyMCEInit() {
+eoq;
+        foreach ($exTargets as $instance) {
+            $ret .= "$('#".$instance."_ifr').contents().find('iframe[data-mce-src]').attr('src','').attr('sandbox','');\n";
+        }
+
+        $ret .= <<<eoq
+}
+
 if (!SUGAR.util.isTouchScreen()) {
     tinyMCE.init({$jsConfig});
 	{$instantiateCall}
 }
 else {
 eoq;
-        $exTargets = explode(",", $targets);
         foreach ($exTargets as $instance) {
             $ret
                 .= <<<eoq

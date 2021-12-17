@@ -42,7 +42,7 @@ $web_assigned_user = '';
 $web_team_user = '';
 $web_form_footer = '';
 $regex = "/^\w+(['\.\-\+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+\$/";
-//_ppd($web_required_symbol);
+
 if(!empty($_REQUEST['web_header'])){
     $web_form_header= $_REQUEST['web_header'];
 }
@@ -146,11 +146,9 @@ for($i= 0; $i<$columns;$i++){
 
     if(!empty($_REQUEST['colsFirst'][$i])){
         $colsFirstField = $_REQUEST['colsFirst'][$i];
-        //_pp($_REQUEST['colsFirst']);
      }
     if(!empty($_REQUEST['colsSecond'][$i])){
         $colsSecondField = $_REQUEST['colsSecond'][$i];
-        //_pp($_REQUEST['colsSecond']);
      }
 
     if(isset($lead->field_defs[$colsFirstField]) && $lead->field_defs[$colsFirstField] != null)

@@ -16,6 +16,8 @@
  */
 class TimestampExpression extends DateExpression
 {
+    public static $DATE_TYPES = ['date', 'service-enddate'];
+
     /**
      * Returns the entire enumeration bare.
      */
@@ -29,7 +31,7 @@ class TimestampExpression extends DateExpression
 
         // if the date expression doesn't have a time on it or the def is type of 'date' then force
         // the time to be midnight on that day
-        if (!DateExpression::hasTime($date) || (isset($date->def) && $date->def['type'] === 'date')) {
+        if (!DateExpression::hasTime($date) || (isset($date->def) && in_array($date->def['type'], self::$DATE_TYPES))) {
             $params->setTime(0, 0, 0);
         }
         return $params->getTimestamp();

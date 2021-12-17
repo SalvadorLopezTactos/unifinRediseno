@@ -9,19 +9,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /**
- *
  * @class View.Views.Base.ExternalAppView
- * @alias SUGAR.App.view.views.BaseAppView
+ * @alias SUGAR.App.view.views.BaseExternalAppView
  * @extends View.View
  */
 ({
-    app: null,
     mounted: false,
     rendered: false,
     className: 'external-app-interface',
     extraParcelParams: {},
     sugarAppStore: {
-        listPreviewModel: ''
+        listPreviewModel: undefined
     },
 
     /**
@@ -31,24 +29,34 @@
      */
     initialize: function(options) {
         singleSpa.start();
-        this._super('initialize', arguments);
+
+        // if coming from external-app-dashlet, this will be set to true or false
+        // else it will be undefined. Either way, if undefined or true set to true, otherwise false.
+        this.allowApp = _.isUndefined(this.allowApp) || this.allowApp;
+
+        this.isTabbedLayout = options.layout.type === 'tabbed-layout';
+
+        // set appId based on if this is in a tabbed-layout or not
+        this.appId = this.isTabbedLayout ? options.layout.cid : this.cid;
+
+        this._super('initialize', [options]);
 
         // Creating Listeners for various Sugar Events.
         this._sdkEventHandler();
 
         // pass any env options to be mounted with the external app
-        if (options.meta && options.meta.env) {
-            this.extraParcelParams = options.meta.env;
+        if (this.meta && this.meta.env) {
+            this.extraParcelParams = this.meta.env;
         }
 
-        if (options.layout.type !== 'tabbed-layout') {
-            this._onSugarAppLoad();
-        } else {
+        if (this.isTabbedLayout) {
             this.context.on(
-                'sugarApp:load:' + options.layout.cid + ':' + options.meta.srn,
+                'sugarApp:' + this.appId + ':load:' + this.meta.srn,
                 this._onSugarAppLoad,
                 this
             );
+        } else {
+            this._onSugarAppLoad();
         }
     },
 
@@ -58,7 +66,7 @@
      * @private
      */
     _sdkEventHandler: function() {
-        this.on(this.layout.cid + ':get:sugarApp:store', function(callback) {
+        this.on('sugarApp:' + this.appId + ':store:get', function(callback) {
             callback(this.sugarAppStore);
         }, this);
 
@@ -66,7 +74,7 @@
             this.sugarAppStore.listPreviewModel = model;
 
             // trigger to let store has changed
-            this.trigger(this.layout.cid + ':sugarApp:store:changed', this.sugarAppStore);
+            this.trigger('sugarApp:' + this.appId + ':store:change', this.sugarAppStore);
         }, this);
     },
 
@@ -80,13 +88,13 @@
 
     /**
      * Click handler that imports / loads the spa module that was clicked
-     * @private
+     * @protected
      */
     _onSugarAppLoad: function() {
         var serverInfo = app.metadata.getServerInfo();
 
         // don't re-import already mounted parcel apps
-        if (this.meta.src && !this.parcelApp) {
+        if (this.meta.src && !this.parcelLib) {
             var url = this.meta.src;
             if (this.meta.appendVersion && serverInfo.version) {
                 url += (url.indexOf('?') ? '&' : '?') + 'sugar_version=' + serverInfo.version;
@@ -110,14 +118,36 @@
                     }
                 }
 
-                this.parcelApp = mod;
-                //If we haven't been asked to render yet, don't force a render.
-                //If we have been rendered, mount the app into our element.
-                if (this.rendered) {
-                    this._mountApp();
+                if (this.allowApp) {
+                    // only if the app is allowed, continue loading it
+                    this.parcelLib = mod;
+                    //If we haven't been asked to render yet, don't force a render.
+                    //If we have been rendered, mount the app into our element.
+                    if (this.rendered) {
+                        this._mountApp();
+                    }
                 }
+
+            }.bind(this)).catch(function(e) {
+                if (!this.allowApp) {
+                    // catalog could not find the dashlet, and the service url failed
+                    this.errorCode = 'SVC-404';
+                    this.displayError();
+                }
+                System.delete(url);
             }.bind(this));
         }
+    },
+
+    /**
+     * Displays an error message with error code into the template
+     */
+    displayError: function() {
+        this.errorMsg = app.lang.get('LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR', null, {
+            errorCode: this.errorCode
+        });
+        this.$el.empty();
+        this.$el.append(this.template(this));
     },
 
     /**
@@ -125,7 +155,9 @@
      * @private
      */
     _mountApp: function() {
-        if (!this.mounted && this.parcelApp) {
+        if (!this.mounted && this.parcelLib) {
+            this.extraParcelParams = _.assign(this.extraParcelParams, {component: this});
+
             var root = document.createElement('div');
             //Since we can't use a shadow dom, we can at least reset the css to isolate styling.
             this.el.appendChild(root);
@@ -143,11 +175,11 @@
                 }
             }
 
-            this.parcel = singleSpa.mountRootParcel(this.parcelApp, this.parcelParams);
+            this.parcelApp = singleSpa.mountRootParcel(this.parcelLib, this.parcelParams);
             this.mounted = true;
         }
-        if (this.mounted && this.parcel && this.parcel.update) {
-            this.parcel.update(this.parcelParams);
+        if (this.mounted && this.parcelApp && this.parcelApp.update) {
+            this.parcelApp.update(this.parcelParams);
         }
     },
 
@@ -157,18 +189,13 @@
      * @private
      */
     _dispose: function() {
-        if (this.parcel && this.parcel.unmount) {
-            this.parcel.unmount();
-
-            // Removing listeners on sugar app dispose.
-            this.off(this.layout.cid + ':get:sugarApp:store');
-            this.off(this.layout.cid + ':sugarApp:store:changed');
-
-            // Resetting sugarAppStore data
-            if (this.sugarAppStore.listPreviewModel) {
-                this.sugarAppStore.listPreviewModel = null;
-            }
+        if (this.parcelApp && this.parcelApp.unmount) {
+            this.parcelApp.unmount();
         }
-        this._super('_dispose', arguments);
+
+        // Removing listener on sugar app dispose.
+        this.off('sugarApp:' + this.appId + ':store:get', null, this);
+
+        this._super('_dispose');
     }
 });

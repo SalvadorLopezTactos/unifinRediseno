@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => '연락처',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => '예비고객',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => '사용자',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => '비즈니스 센터 기록 대시보드',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => '비즈니스 센터 포커스 서랍',
 ];

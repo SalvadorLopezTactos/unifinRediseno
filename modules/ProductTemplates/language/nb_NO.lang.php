@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Skatteklasse:',
   'LBL_TYPE_NAME'=>'Typenavn',
   'LBL_TYPE' => 'Type',
+  'LBL_PRODUCT_TYPE' => 'Produkttype',
   'LBL_URL' => 'Produkt-URL:',
   'LBL_VENDOR_PART_NUM' => 'Delenummer på automat:',
   'LBL_WEIGHT' => 'Vekt:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Produktkatalog',
   'NTC_DELETE_CONFIRMATION' => 'Er du sikker på at du vil slette denne oppføringen?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Legg til',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Søk produktkatalogen',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Ingen data tilgjengelig',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt Brukernavn',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Produkttyper',
   'LBL_RENEWABLE' => 'Fornybar',
   'LBL_SERVICE' => 'Service',
+  'LBL_LOCK_DURATION' => 'Lås varighet',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Produktkatalogliste instrumentpanel',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Produktkatalogoppføring instrumentpanel',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Produktkatalog fokusskuff',
 );

@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Kūrėjo ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Sukūrė (naudotojo vardas)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atsakingo naudotojo vardas',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ žymos',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Žymų įrašų ataskaitų sritis',
+    'LBL_MY_TAGS' => 'Mano žymos',
+    'LBL_MY_FAVORITE_TAGS' => 'Mano mėgstamiausios žymos',
 );

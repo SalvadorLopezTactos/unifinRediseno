@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'แดชบอร์ดรายการพื้นฐานความรู้',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกพื้นฐานความรู้',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'ฐานความรู้ระบบลิ้นชัก',
 
     'LBL_MODULE_NAME' => 'ฐานความรู้',
     'LBL_MODULE_NAME_SINGULAR' => 'บทความฐานความรู้',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'ไม่มีประโยชน์',
     'LBL_RATING' => 'การจัดอันดับ',
     'LBL_VIEWED_COUNT' => 'ดูจำนวน',
-    'LBL_DOWNLOAD_ALL' => 'ดาวน์โหลดทั้งหมด',
-    'LBL_DOWNLOAD_ONE' => 'ดาวน์โหลด',
-    'LBL_ATTACHMENTS' => 'ไฟล์แนบ',
-    'LBL_ADD_ATTACHMENT' => 'เรียกดู',
     'LBL_CATEGORIES' => 'หมวดหมู่ฐานความรู้',
     'LBL_CATEGORY_NAME' => 'หมวดหมู่',
     'LBL_USEFULNESS' => 'ประโยชน์',

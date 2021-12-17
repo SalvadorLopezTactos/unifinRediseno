@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => '流程列表',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => '无人看管的流程',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => '流程焦点抽屉',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => '流程记录仪表板',
+
     'LBL_CAS_ID' => '流程编号',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "未知（按照 UserId：'%s'）",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "美属维尔京群岛",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => '流程设计预览',
     'LBL_PROJECT_RUN_ORDER' => '运行顺序',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => '当前活动',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => '修改日期',
+    'LBL_DATE_ENTERED' => '创建日期',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => '您是否确定要索取此流程？',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => '已成功索取流程',
 );
 

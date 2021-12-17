@@ -349,14 +349,25 @@ EmailPickerField.prototype._createPanel = function () {
 			onLoad: this._onLoadSuggestions()
 		});
 
-		this._teamsDropdown = new FormPanelDropdown({
+        this._teamsDropdown = new FormPanelFriendlyDropdown({
 			name: 'team',
 			label: 'Team',
-			type: 'dropdown',
+            type: 'friendlydropdown',
 			required: true,
 			width: '100%',
 			labelField: this._teamTextField,
-			valueField: this._teamValueField
+            valueField: this._teamValueField,
+            searchURL: 'Teams?filter[0][name][$starts]={%TERM%}' +
+                '&fields=id,name&max_num={%PAGESIZE%}&offset={%OFFSET%}',
+            searchValue: 'id',
+            searchLabel: 'name',
+            placeholder: translate('LBL_PMSE_FORM_OPTION_SELECT'),
+            searchMore: {
+                module: 'Teams',
+                fields: ['id', 'name'],
+                filterOptions: null
+            },
+            _searchMoreLayout: 'selection-list-for-bpm'
 		});
 		this.setTeams(this._teams);
 

@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Steuerklasse:',
   'LBL_TYPE_NAME'=>'Typen-Name',
   'LBL_TYPE' => 'Typ',
+  'LBL_PRODUCT_TYPE' => 'Produktart',
   'LBL_URL' => 'Produkt-URL:',
   'LBL_VENDOR_PART_NUM' => 'Verkäufer-Artikelnummer:',
   'LBL_WEIGHT' => 'Gewicht:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Produktkatalog anzeigen',
   'NTC_DELETE_CONFIRMATION' => 'Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Hinzufügen',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Produktkatalog durchsuchen',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Keine Daten verfügbar',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Zugewiesener Benutzer',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Produktarten',
   'LBL_RENEWABLE' => 'Erneuerbar',
   'LBL_SERVICE' => 'Service',
+  'LBL_LOCK_DURATION' => 'Dauer der Sperre',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Dashboard für Produktkatalogliste',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Dashboard für Produktkatalogdatensatz',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Produktkatalog',
 );

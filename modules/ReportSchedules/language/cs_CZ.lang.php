@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Podle sestavy',
     'LBL_RECENTLY_MODIFIED' => 'Nedávno změněno',
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspěšně jste vytvořili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Otevřete plán, do kterého chcete přidat uživatele, prostřednictvím dílčího panelu Uživatelé.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Tento plán sestav',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Řídicí panel záznamů plánů sestav',
 );

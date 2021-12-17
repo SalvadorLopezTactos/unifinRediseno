@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Nom d&#39;usuari',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Restaurar',
 	'LBL_SYSTEM_SETTINGS' => 'Configuració del sistema',
-	'LBL_SKYPEOUT_ON_DESC' => 'Permet als usuaris fer clic en els números de telèfon per realitzar trucades utilitzant SkypeOut&reg;. Els números han d´estar formatats degudament per utilitzar aquesta funcionalitat. El número ha de tenir el format: " + "Còdig País" "Número", com a +34 965 555 555. Per a més informació, vegi el FAQ de Skype en  <a href="http://www.skype.com/help/faq/skypeout.html#calling" target="skype">FAQ de Skype&reg;</a>',
-	'LBL_SKYPEOUT_ON' => 'Permetre integració amb SkypeOut&reg;?',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Permet que els usuaris cliquin als números de telèfon per trucar amb el seu programari predeterminat d&#39;integració de telefonia a l&#39;ordinador (CTI).',
+    'LBL_DIALOUT_ON' => 'Habilita "Clic per trucar"',
+    'LBL_DIALOUT_TITLE' => 'Trucada sortint',
     'LBL_TWEETTOCASE_ON_DESC' => 'Permet als usuaris que creen casos des de Tweets',
     'LBL_TWEETTOCASE_ON' => 'Habilita Tweet&reg; per a l&#39;integració de casos',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; a un cas',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Aquest arxiu no té una extensió d&#39;arxiu adequada',
     'LBL_PDF_INSTRUCTIONS' => 'Instruccions',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Fonts compatibles amb SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Si trieu no integrar la vostra font al PDF, el fitxer PDF generat serà més lleuger, però s'utilitzarà un substitut si la font no està disponible al sistema del lector.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Per afegir una font de PDF a SugarCRM és necessari seguir els passos 1 i 2 de la documentació de fonts TCPDF disponible a la secció "DOCUMENTS" de la <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">pàgina web de TCPDF</a>.
+<br><br>Les utilitats pfm2afm i ttf2ufm estan disponibles al paquet de fonts/utilitats TCPDF que podeu baixar a la secció "BAIXADES" de la <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">pàgina web de TCPDF</a>.
+<br><br>Pugeu el fitxer de mètrica que es genera al pas 2 i el vostre fitxer de font a continuació.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'El camp informació CID Informació no pot estasr buit.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* El mòdul d&#39;informes no està disponible per a la vista mòbil basada en navegador.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'La longitud màxima ha de ser superior a la longitud mínima',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'La longitud mínima ha de ser un valor positiu',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'La longitud màxima ha de ser un valor positiu',
     'ERR_EMPTY_SAML_LOGIN' => 'L&#39;URL d&#39;inici de sessió a SAML no pot esta buida',
     'ERR_EMPTY_SAML_CERT' => 'El certificat de SAML no pot estar buit',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'L&#39;ID de SAML no pot estar buit',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Seqüències d&#39;activitats',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Habilita les seqüències d&#39;activitats',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Activa les seqüències d&#39;activitats per a les aplicación',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Habilita contingut addicional de la pantalla d&#39;inici de sessió',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Desa automàticament les definicions de processos',
