@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Lozinka koju ste unijeli ne zadovoljava zahtjeve za lozinku. Pokušajte ponovno.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Podaci o korisniku nisu pronađeni',
     'ERR_USER_NAME_EXISTS'              => 'Korisničko ime {0} već postoji. Duplikati korisničkih imena nisu dozvoljeni. Promijenite korisničko ime da bi bilo jedinstveno.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licencu za „Sugar Hint” potrebno je spremiti s dodatnom kompatibilnom vrstom licence',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Korisniku je blokiran pristup aplikaciji Sugar i ne može se prijaviti s pomoću svoje postojeće lozinke.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Korisniku sa samo vanjskom provjerom autentičnosti nije dozvoljena prijava korištenjem Sugar vjerodajnica',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresa e-pošte primatelja',
 	'ERR_SERVER_STATUS'					=> 'Vaš status poslužitelja',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sustav ne može poslati e-poštu korisniku. Provjerite konfiguraciju za odlaznu poštu u <a href="index.php?module=EmailMan&action=config">Postavkama e-pošte</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Nove korisnike morate stvoriti u <a href="{0}" target="_blank">postavkama za SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresa e-pošte',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Predviđanja',
     'LBL_WORKSHEETS'                    => 'Radni listovi',
 	'LBL_CALENDARS'                     => 'Kalendari',
+    'LBL_SHIFTS'                        => 'Smjene',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Iznimke za smjene',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Primite obavijest putem e-pošte kada vam se dodijeli zapis.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Pošalji poruku e-pošte pri dodjeli',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Primite obavijest putem e-pošte kada vas netko spomene u unosu zapisnika komentara.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Pošalji por. e-pošte pri spomenu',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Odaberite način prikaza naziva polja u prikazima zapisa. Odaberite „Pored vrijednosti polja” za kompaktniji prikaz zapisa.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Položaj naziva polja',
     'LBL_ABOVE_FIELD_VALUE'             => 'Iznad vrijednosti polja',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Vrsta licencije',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Postavite zadanu postavku podsjetnika za pozive i sastanke. Skočne obavijesti pojavljuju se svim pozvanim korisnicima koji upotrebljavaju Sugar. Podsjetnici putem e-pošte šalju se svim pozvanim korisnicima.',
 	'LBL_REMINDER'						=> 'Podsjetnici',
 	'LBL_REMINDER_POPUP' => 'Skočni pr.',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Sesija je završila jer je druga sesija započela pod istim korisničkim imenom.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Preraspodijeli zapise',
-	'LBL_REASS_DESC_PART1'				=> 'Odaberite module koji sadrže zapise da biste ih preraspodijelili s određenog korisnika na drugog korisnika. <br/><br/>
+    'LBL_REASS_DESC_PART1'              => 'Odaberite module koji sadrže zapise da biste ih preraspodijelili s određenog korisnika na drugog korisnika. <br/><br/>
 Kliknite na Sljedeće da biste vidjeli broj zapisa koji će se ažurirati u svakom odabranom modulu.
 Kliknite na Odustani da biste izašli sa stranice bez preraspodjele zapisa.',
         'LBL_REASS_DESC_PART2'=>                    'Odaberite na kojim je modulima potrebno pokrenuti tijek rada, poslati obavijesti o dodjeli i provesti praćenje nadzora tijekom preraspodjele. Kliknite na Sljedeće da biste nastavili i preraspodijelili zapise. Kliknite na Ponovno pokreni da biste počeli ispočetka.',
@@ -635,7 +639,7 @@ Kliknite na Odustani da biste izašli sa stranice bez preraspodjele zapisa.',
     'LBL_DETAIL' => 'Korisnički profil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Pristupite <a href="%s" target="_blank">postavkama za SugarCloud</a> da biste izmijenili polja koja su samo za čitanje.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Ako želite izvršiti izmjene na poljima koja su samo za čitanje, obratite se administratoru za Sugar.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

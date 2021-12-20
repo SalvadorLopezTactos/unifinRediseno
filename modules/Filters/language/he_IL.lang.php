@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'בשנה הבאה',
     'LBL_OPEN_ISSUES' => '{0} פתוחים',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'נפתרו לאחרונה',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'יצירת מסנן',
+    'LBL_ERROR_FILTER_EMPTY' => 'יש להוסיף למסנן קריטריונים.',
+    'LBL_ADD_FILTER' => 'הוספת קריטריונים',
+    'LBL_FILTER_NAME' => 'שם המסנן',
+    'LBL_FILTER_FIELD' => 'שדה',
+    'LBL_FILTER_OPERATOR' => 'אופרטור',
+    'LBL_FILTER_VALUE' => 'ערך',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'שמירה באפליקציה למחשב שולחני',
+    'LBL_FILTER_LOCAL' => 'מסנן &#39;מקומי&#39;',
 );

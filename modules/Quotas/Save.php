@@ -87,11 +87,20 @@ else $return_action = "DetailView";
 if(isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "") $return_id = $_REQUEST['return_id'];
 if(isset($_REQUEST['return_user_id']) && $_REQUEST['return_user_id'] != "") $return_user_id = $_REQUEST['return_user_id'];
 if(isset($_REQUEST['return_timeperiod_id']) && $_REQUEST['return_timeperiod_id'] != "") $return_timeperiod_id = $_REQUEST['return_timeperiod_id'];
-if(!empty($_REQUEST['edit'])) {
-	$return_id='';
-	$edit='&edit=true';
-}
-$GLOBALS['log']->debug("Saved record with id of ".$return_id);
 
-header("Location: index.php?action=$return_action&module=$return_module&record=$return_id&user_id=$return_user_id&timeperiod_id=$return_timeperiod_id$edit");
-?>
+$query_data = [
+    'action' => $return_action,
+    'module' => $return_module,
+    'record' => $return_id,
+    'user_id' => $return_user_id,
+    'timeperiod_id' => $return_timeperiod_id,
+];
+
+if(!empty($_REQUEST['edit'])) {
+    $return_id = '';
+    $query_data['edit'] = 'true';
+    $query_data['record'] = '';
+}
+
+$GLOBALS['log']->debug("Saved record with id of ".$return_id);
+header('Location: index.php?' . http_build_query($query_data));

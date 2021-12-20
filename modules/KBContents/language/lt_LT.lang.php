@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Žinių bazės sąrašo ataskaitų sritis',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Žinių bazės duomenų ataskaitų sritos',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ žinių bazė',
 
     'LBL_MODULE_NAME' => 'Žinių bazė',
     'LBL_MODULE_NAME_SINGULAR' => 'Žinių bazės straipsnis',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Not Useful',
     'LBL_RATING' => 'Bankas:',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'Download All',
-    'LBL_DOWNLOAD_ONE' => 'Nusikrauti',
-    'LBL_ATTACHMENTS' => 'Prisegtukai:',
-    'LBL_ADD_ATTACHMENT' => 'Naršyti',
     'LBL_CATEGORIES' => 'Knowledge Base Categories',
     'LBL_CATEGORY_NAME' => 'Category',
     'LBL_USEFULNESS' => 'Usefulness',

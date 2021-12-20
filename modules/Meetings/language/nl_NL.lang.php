@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Dashboard vergaderingenlijst',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Dashboard vergaderingenrecord',
+    'LBL_LEAD_GUESTS' => 'Leadgasten',
+    'LBL_CONTACT_GUESTS' => 'Contactgasten',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer vergaderingen',
 
 	'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om deze afspraak te verwijderen.',
 	'LBL_ACCEPT_THIS'=>'Accepteren?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Richting',
 	'LBL_LIST_DUE_DATE'=>'Vervaldatum',
 	'LBL_LIST_FORM_TITLE' => 'Afspraken',
-	'LBL_LIST_MY_MEETINGS' => 'Mijn Afspraken',
+    'LBL_LIST_MY_MEETINGS' => 'Mijn Afspraken',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Mijn geplande afspraken',
+    'LBL_GUEST_MEETINGS' => 'Mijn vergaderingen als gast',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Geplande vergaderingen als gast',
 	'LBL_LIST_RELATED_TO' => 'Gerelateerd aan',
 	'LBL_LIST_STATUS'=>'Status',
 	'LBL_LIST_SUBJECT' => 'Onderwerp',

@@ -19,6 +19,7 @@ use Sugarcrm\IdentityProvider\Authentication\Exception\InvalidIdentifier\Identif
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider\SugarLocalUserProvider;
 
+use SugarEmailAddress;
 use Symfony\Component\Security\Core\User\UserChecker;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -147,7 +148,8 @@ class SugarSAMLUserChecker extends UserChecker
         if ('' == $nameIdentifier) {
             throw new EmptyIdentifierException('Empty identifier');
         }
-        if ('email' == $field && !filter_var(IdnaConvert::encodeString($nameIdentifier), FILTER_VALIDATE_EMAIL)) {
+
+        if ($field === 'email' && !SugarEmailAddress::isValidEmail($nameIdentifier)) {
             throw new IdentifierInvalidFormatException('Invalid format of nameIdentifier email expected');
         }
     }

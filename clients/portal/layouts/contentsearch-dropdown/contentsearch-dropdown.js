@@ -12,6 +12,7 @@
  * @class View.Views.Portal.ContentsearchDropdownLayout
  * @alias SUGAR.App.view.views.PortalContentsearchDropdownLayout
  * @extends View.Layout
+ * @deprecated since 10.2, will be removed in the future.
  */
 ({
     /**
@@ -21,6 +22,15 @@
 
     events: {
         'click [data-action="clicklink"]': 'linkClicked'
+    },
+
+    /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        app.logger.warn('View.Views.Portal.ContentsearchDropdownLayout is deprecated since 10.2 and will be' +
+            ' removed in the future');
+        this._super('initialize', [options]);
     },
 
     /**

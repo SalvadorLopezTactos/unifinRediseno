@@ -28,5 +28,10 @@ if (empty($focus)) {
     sugar_die($mod_strings['ERR_DELETE_EMPTY']);
 }
 $focus->mark_deleted($_REQUEST['record']);
+$request = http_build_query(array(
+    'module' => $_REQUEST['return_module'],
+    'action' => $_REQUEST['return_action'],
+    'record' => $_REQUEST['return_id'],
+));
 
-header("Location: index.php?module=".$_REQUEST['return_module']."&action=".$_REQUEST['return_action']."&record=".$_REQUEST['return_id']);
+header('Location: index.php?' . $request);

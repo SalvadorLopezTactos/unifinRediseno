@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Įspėjimas: nerašomasis',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> '„SugarCRM“ nepalaiko jūsų PHP versijos. Turite įdiegti versiją, suderinamą su „Sugar“ taikomąja programa. Palaikomas PHP versijas žr. suderinamumo matricoje, pateiktoje leidimo pastabose. Jūsų versija yra ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => '„Sugar nepalaiko jūsų IIS versijos. Turite įdiegti versiją, suderinamą su „Sugar“ taikomąja programa. Palaikomas IIS versijas žr. suderinamumo matricoje, pateiktoje leidimo pastabose. Jūsų versija yra ',
-	'ERR_CHECKSYS_FASTCGI'              => 'Aptikta, kad PHP susiejimui nenaudojate „FastCGI“ apdorojimo programos. Turite įdiegti / sukonfigūruoti versiją, palaikomą su „Sugar“ taikomąja programa. Palaikomas versijas žr. suderinamumo matricoje, pateiktoje leidimo pastabose. Išsamiau žr. <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> ',
+    'ERR_CHECKSYS_FASTCGI'              => 'Aptikome, kad nenaudojate „FastCGI“ tvarkyklės atvaizdavimo PHP. Turėsite įdiegti / sukonfigūruoti versiją, suderinamą su „Sugar“ programa. Norėdami gauti palaikomas versijas, skaitykite suderinamumo matricą leidimo pastabose. Išsamesnės informacijos žr. <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a>',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Norėdami, kad jūsų naudojimosi „IIS/FastCGI SAPI“ patirtis būtų optimali, faile php.ini nustatykite fastcgi.logging reikšmę 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Įdiegta nepalaikoma PHP versija: ( versija',
     'LBL_DB_UNAVAILABLE'                => 'Duomenų bazė neprieinama',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nerastas duomenų bazės palaikymas. Įsitikinkite, kad turite reikiamas tvarkykles, skirtas vienam iš šių palaikomų duomenų bazių tipų: „MySQL“, „MS SQLServer“, „Oracle“ arba DB2. Priklausomai nuo turimos PHP versijos gali reikėti panaikinti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Norėdami gauti daugiau informacijos, kaip įjungti duomenų bazės palaikymą, žr. PHP žinyną.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Duomenų bazės palaikymas nerastas. Įsitikinkite, kad turite reikiamas tvarkykles, palaikančias vieną iš šių palaikomų duomenų bazių tipų: „MySQL“, „MS SQLServer“, „Oracle“ ar „DB2“. Priklausomai nuo jūsų PHP versijos, gali tekti atšaukti failo php.ini plėtinį arba perkompiliuoti naudojant tinkamą dvejetainį failą. Norėdami gauti daugiau informacijos apie tai, kaip įjungti duomenų bazių palaikymą, skaitykite savo PHP vadovą.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nerasta „SugarCRM“ taikomajai programai reikalingų funkcijų, susietų su XML analizatoriaus bibliotekomis. Atsižvelgiant į naudojamą PHP versiją, gali reikėti anuliuoti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Daugiau informacijos žr. PHP žinyne.',
     'LBL_CHECKSYS_CSPRNG' => 'Atsitiktinio numerio generatorius',
     'ERR_CHECKSYS_MBSTRING'             => 'Nerasta „SugarCRM“ taikomajai programai reikalingų funkcijų, susietų su „Multibyte Strings“ PHP plėtiniu (mbstring). <br/><br/>Paprastai pagal numatytąjį nustatymą modulis mbstring nėra įgalinamas PHP, todėl jį reikia suaktyvinti naudojant --enable-mbstring, kai PHP dvejetainis failas jau būna sukompiliuotas. Daugiau informacijos apie mbstring palaikymą žr. PHP žinyne.',
@@ -519,139 +519,140 @@ Išsamesnės informacijos žr. diegimo vadove.                                ",
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP atgalinio suderinamumo režimas yra įjungtas. Prieš tęsdami, nustatykite zend.ze1_compatibility_mode išjungimo reikšmę.',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Pranešimų apie susitikimus el. laiškai',
+        'subject' => '„SugarCRM“ susitikimas – $event_name ',
+        'description' => 'Šis šablonas naudojamas, kai sistema siunčia vartotojui pranešimus apie susitikimą.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Kam: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user pakvietė jus dalyvauti susitikime</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Pavadinimas: $event_name<br/>
+	Pradžios data: $start_date<br/>
+	Pabaigos data: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Aprašas: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Patvirtinti šį susitikimą:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Neapsisprendęs dėl šio susitikimo patvirtinimo:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Atmesti šį susitikimą::<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Kam: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user pakvietė jus dalyvauti susitikime
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Pavadinimas: $event_name
+Pradžios data: $start_date
+Pabaigos data: $end_date
 
-Description: $description
+Aprašas: $description
 
-Accept this meeting:
+Priimti šį susitikimą:
 <$accept_link>
 
-Tentatively Accept this meeting
+Neapsisprendęs dėl šio susitikimo priėmimo
 <$tentative_link>
 
-Decline this meeting
+Atmesti šį susitikimą
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Pranešimų apie skambučius el. laiškai',
+        'subject' => '„SugarCRM“ skambutis – $event_name ',
+        'description' => 'Šis šablonas naudojamas, kai sistema siunčia vartotojui pranešimus apie skambutį.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Kam: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user pakvietė jus dalyvauti skambutyje</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Pavadinimas: $event_name<br/>
+	Pradžios data: $start_date<br/>
+	Trukmė: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Aprašas: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Patvirtinti šį skambutį:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Neapsisprendęs dėl šio skambučio patvirtinimo:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Atmesti šį skambutį:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Kam: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user pakvietė jus dalyvauti skambutyje
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Pavadinimas: $event_name
+Pradžios data: $start_date
+Trukmė: $hoursh, $minutesm
 
-Description: $description
+Aprašas: $description
 
-Accept this call:
+Priimti šį skambutį:
 <$accept_link>
 
-Tentatively Accept this call
+Neapsisprendęs dėl šio skambučio priėmimo
 <$tentative_link>
 
-Decline this call
+Atmesti šį skambutį
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Pranešimo apie paskyrimą el. laiškai',
+        'subject' => '„SugarCRM“ – priskirtas $module_name ',
+        'description' => 'Šis šablonas naudojamas, kai sistema siunčia vartotojui priskirtą užduotį.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user priskyrė&nbsp;$module_name vartotojui&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Galite peržiūrėti&nbsp;$module_name spustelėję nuorodą:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user priskyrė $module_name vartotojui $assigned_user.
 
-You may review this $module_name at:
+Galite peržiūrėti $module_name spustelėję nuorodą:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Suplanuotų ataskaitų el. laiškai',
+        'subject' => 'Suplanuota ataskaita: $report_name $report_time',
+        'description' => 'Šis šablonas naudojamas, kai sistema siunčia vartotojui suplanuotą ataskaitą.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Sveiki, $assigned_user!</p>
+<p>Prisegta suplanuota ir automatiškai sukurta ataskaita.</p>
+<p>Ataskaitos pavadinimas: $report_name</p>
+<p>Ataskaitos vykdymo data ir laikas: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Sveiki, $assigned_user!
 
-Attached is an auto generated report that has been scheduled for you.
+Prisegta suplanuota ir automatiškai sukurta ataskaita.
 
-Report Name: $report_name
+Ataskaitos pavadinimas: $report_name
 
-Report Run Date and Time: $report_time',
+Ataskaitos vykdymo data ir laikas: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Pranešimas el. laišku apie sistemos komentarų žurnalą',
+        'subject' => '„SugarCRM“ – $initiator_full_name jus paminėjo modulyje $singular_module_name',
+        'description' => 'Šis šablonas naudojamas siųsti vartotojams pranešimus el. laiškais, kai jie pažymimi komentarų žurnalo skiltyje.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Jus paminėjo šio įrašo komentarų žurnale: <a href="$record_url">$record_name</a></p>
+                <p>Norėdami peržiūrėti komentarą, prisijunkite prie „Sugar“.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Jus paminėjo šio įrašo komentarų žurnale: $record_name
+            Norėdami peržiūrėti komentarą, prisijunkite prie „Sugar“.',
     ],
 
     'advanced_password_new_account_email' => array(

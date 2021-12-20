@@ -414,6 +414,11 @@ function buildInstall($path){
     }
 
     function delete(){
+        $modules = [];
+        foreach ($this->modules as $module) {
+            $modules[] = $module->key_name;
+        }
+        WorkFlow::deleteWorkFlowsByModule($modules);
         return rmdir_recursive($this->getPackageDir());
     }
 

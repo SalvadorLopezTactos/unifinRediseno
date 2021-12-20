@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Procesdefinities',
   'LBL_MODULE_NAME_SINGULAR' => 'Procesdefinitie',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer procesdefinities',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Dashboard record procesdefinities',
   'LNK_LIST' => 'Bekijk Process Definities',
   'LNK_NEW_PMSE_PROJECT' => 'Nieuwe Process Definitie',
   'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definities',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Record Owner',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Team',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Reassign Activity',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail gebruiker verwerken als proces is toegewezen',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Gebruikersdefinitie',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Toewijzingsmethode',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Gebruiker toewijzen',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '"Toegewezen aan" van record bijwerken',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Stel "Toegewezen aan" in op beschikbaarheid',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Gerelateerd record toevoegen',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Gerelateerde Module',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'De naam van de activiteit is leeg.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'De naam "%s" bestaat reeds in de vorm van de familie.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Beschikbaarheid verplichte ploeg',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Indien geen gebruikers beschikbaar zijn',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'voor',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Alleen nieuwe records',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Updated records only',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Alleen bijgewerkte records (alle updates - zie hulptekst)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nieuwe records of eerste update',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nieuwe records en alle updates',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Select when the event will start',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selecteer wanneer het proces gaat starten.<br><br>Nieuw: Proce suitvoeren als nieuwe record wordt aangemaakt.<br><br>Eerste update: Proces wordt alleen uitgevoerd als voor de eerste keer aan criteria wordt voldaan voor een bestaande record.<br><br>Alle updates: Proces wordt telkens uitgevoerd als aan de criteria wordt voldaan voor een bestaande record.<br><br>Nieuwe records of eerste update: Proces wordt alleen uitgevoerd als voor de eerste keer aan de criteria wordt voldaan voor een record, tijdens het aanmaken van een record of het bijwerken ervan.<br><br>Nieuwe records en alle updates: Proces wordt telkens uitgevoerd voor alle nieuwe en bestaande records.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Selecteer de SugarCRM module die u op de gebeurtenistrigger wilt toepassen',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Vaste datum',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'wijzigingen ten opzichte van',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'wijzigt in',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'bevat alle',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'bevat niet alle',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'op of na',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'op of voor',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'is ongelijk aan',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Toevoegen',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sluiten',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Alle teams toegewezen aan het record',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Teams',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% gerelateerd aan %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Gebruiker die de %MODULE% heeft aangemaakt',

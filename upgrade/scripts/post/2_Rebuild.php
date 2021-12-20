@@ -36,10 +36,7 @@ class SugarUpgradeRebuild extends UpgradeScript
         // are included
         include 'include/Expressions/updatecache.php';
 
-        if (!empty($rac->module_list)) {
-            $this->log('Verifying audit tables for modules: ' . implode(',', $rac->module_list));
-            $rac->rebuildAuditTables();
-        }
+        $this->rebuildAudit($rac, $beanFiles);
 
         $this->log('Database repaired');
 
@@ -53,5 +50,26 @@ class SugarUpgradeRebuild extends UpgradeScript
 
         // enable metadata caching once the database schema has been rebuilt
         MetaDataManager::enableCache();
+    }
+
+    public function rebuildAudit(RepairAndClear $rac, array $beanFiles) : void
+    {
+        foreach ($beanFiles as $bean => $file) {
+            if (file_exists($file)) {
+                unset($GLOBALS['dictionary'][$bean]);
+                require_once $file;
+                $focus = new $bean ();
+
+                if ($focus instanceof SugarBean && $focus->is_AuditEnabled()) {
+                    // Check to see if we need to create the audit table
+                    $rac->module_list[] = $focus->module_name;
+                }
+            }
+        }
+
+        if (!empty($rac->module_list)) {
+            $this->log('Verifying audit tables for modules: ' . implode(',', $rac->module_list));
+            $rac->rebuildAuditTables();
+        }
     }
 }

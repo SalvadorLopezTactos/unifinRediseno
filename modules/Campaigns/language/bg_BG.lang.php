@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Целева група от тип "По подразбиране" не бе намерена',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Няма намерени записи',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Записа бяха обработени',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Настройки на входяща поща',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Системни настройки на електронната поща',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Име на маркера:',
   'LBL_EDIT_TRACKER_URL'=>'Маркер:',

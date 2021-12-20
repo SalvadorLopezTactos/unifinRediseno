@@ -330,7 +330,8 @@
 
         value = value instanceof app.BeanCollection ? value.models : value;
         value = _.map(_.union(value || [], this._placeholders.models), function(model) {
-            var attachment = _.extend({cid: model.cid}, model.toJSON());
+            var modelJSON = model instanceof Backbone.Model ? model.toJSON() : model;
+            var attachment = _.extend({cid: model.cid}, modelJSON);
 
             attachment.file_url = attachment.id ?
                 app.api.buildFileURL(_.extend({}, urlAttributes, {id: attachment.id}), urlOptions) :

@@ -31,6 +31,7 @@ $mod_strings = array(
  'LBL_REMOVE' => 'Hiqe',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modifikuar nga emri',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Krijuar sipas emrit',
 
     'LBL_COMMENTLOG' => 'Comment Log',
 );

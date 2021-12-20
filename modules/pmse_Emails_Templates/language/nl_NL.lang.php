@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Process E-mail Templates',
     'LBL_MODULE_NAME_SINGULAR' => 'Process E-mail Template',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer e-mailsjablonen verwerken',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Dashboard record e-mailsjablonen verwerken',
     'LNK_LIST' => 'Bekijk Process E-mail Templates',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Nieuw Process E-mail Template',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Import Process E-mail Templates',

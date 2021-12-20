@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'תהליך כללים עסקיים',
   'LBL_MODULE_NAME_SINGULAR' => 'תהליך כלל עסקי',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס של כללים עסקיים של תהליכים',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג כללים עסקיים',
   'LBL_RST_UID' => 'ID כלי עסקיים',
   'LBL_RST_TYPE' => 'סוג כלל עסקי',
   'LBL_RST_DEFINITION' => 'הגדרות כלי עסקיים',

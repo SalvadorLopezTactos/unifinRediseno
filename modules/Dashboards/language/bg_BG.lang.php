@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Всички Електронни табла за модула {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Всички Електронни табла за преглеждане {{view}} на модула {{module}}',
     'LBL_COPY_OF' => 'Копие на {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'Електронните табла на Чекмедже на фокус не могат да бъдат изтрити.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Създай електронно табло',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

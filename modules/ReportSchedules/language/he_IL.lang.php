@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'לפי דוח',
     'LBL_RECENTLY_MODIFIED' => 'עודכן לאחרונה',
     'LBL_RECORD_SAVED_SUCCESS' => 'יצרת בהצלחה את {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. פתח את לוח הזמנים כדי להוסיף משתמשים דרך פאנל המשנה של המשתמשים.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'התזמון לדוח זה',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג תזמוני דוחות',
 );

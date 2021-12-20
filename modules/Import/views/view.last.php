@@ -29,12 +29,13 @@ class ImportViewLast extends ImportView
     {
         global $mod_strings, $app_strings, $current_user, $sugar_config, $current_language;
 
-
-
-        $this->ss->assign("IMPORT_MODULE", $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', ''));
+        $importModule = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', '');
+        $this->ss->assign("IMPORT_MODULE", $importModule);
         $this->ss->assign("TYPE", $this->request->getValidInputRequest('type', array('Assert\Choice' => array('choices' => array('import', 'update', ''))), ''));
         $this->ss->assign("HEADER", $app_strings['LBL_IMPORT']." ". $mod_strings['LBL_MODULE_NAME']);
         $this->ss->assign("MODULE_TITLE", $this->getModuleTitle(false));
+        $importLimitedForModuleInIdmMode = $this->isLimitedForModuleInIdmMode($importModule);
+        $this->ss->assign('idm_update_mode_only', $importLimitedForModuleInIdmMode);
         // lookup this module's $mod_strings to get the correct module name
         $module_mod_strings =
             return_module_language($current_language, $_REQUEST['import_module']);
@@ -69,12 +70,15 @@ class ImportViewLast extends ImportView
         	$this->ss->assign("showUndoButton",TRUE);
         }
 
-        if ($errorCount > 0 &&  ($createdCount <= 0 && $updatedCount <= 0))
+        if ($importLimitedForModuleInIdmMode) {
             $activeTab = 2;
-        else if($dupeCount > 0 &&  ($createdCount <= 0 && $updatedCount <= 0))
+        } elseif ($errorCount > 0 && ($createdCount <= 0 && $updatedCount <= 0)) {
+            $activeTab = 2;
+        } elseif ($dupeCount > 0 && ($createdCount <= 0 && $updatedCount <= 0)) {
             $activeTab = 1;
-        else
+        } else {
             $activeTab = 0;
+        }
 
         $this->ss->assign("JAVASCRIPT", $this->_getJS($activeTab));
 

@@ -207,6 +207,8 @@ Registry\Registry::getInstance()->set('setup:disable_processes', true);
 installLog("looping through all the Beans and create their tables");
 //start by clearing out the vardefs
 VardefManager::clearVardef();
+//Initialize languages as some Beans need app_strings to be loaded in constructor
+$app_strings = return_application_language('en_us');
 installerHook('pre_createAllModuleTables');
 foreach ($beanFiles as $bean => $file) {
     $doNotInit = array('Scheduler', 'SchedulersJob', 'ProjectTask');
@@ -331,7 +333,6 @@ $KBContent = new KBContent();
 $KBContent->setupPrimaryLanguage();
 $KBContent->setupCategoryRoot();
 
-
 echo $line_entry_format . $mod_strings['LBL_PERFORM_LICENSE_SETTINGS'] . $line_exit_format;
 installLog($mod_strings['LBL_PERFORM_LICENSE_SETTINGS']);
 update_license_settings(
@@ -340,8 +341,6 @@ update_license_settings(
     $_SESSION['setup_license_key']
 );
 echo $mod_strings['LBL_PERFORM_DONE'];
-
-
 
 //Install forecasts configuration
 $forecast_config = ForecastsDefaults::setupForecastSettings();
@@ -497,6 +496,10 @@ $enabled_tabs[] = 'pmse_Inbox';
 $enabled_tabs[] = 'pmse_Business_Rules';
 $enabled_tabs[] = 'pmse_Emails_Templates';
 $enabled_tabs[] = 'BusinessCenters';
+$enabled_tabs[] = 'Shifts';
+$enabled_tabs[] = 'Purchases';
+$enabled_tabs[] = 'PurchasedLineItems';
+$enabled_tabs[] = 'Messages';
 
 if ($_SESSION['demoData'] != 'no') {
     $enabled_tabs[] = 'Bugs';
@@ -542,7 +545,9 @@ $rm->invokeArgs($converter, array('RevenueLineItems'));
 installLog('creating default dashboards');
 $defaultDashboardInstaller = new DefaultDashboardInstaller();
 global $moduleList;
-$defaultDashboardInstaller->buildDashboardsFromFiles($moduleList);
+$dashboardModule = ['Dashboards'];
+$nonMegaMenuModules = ['ReportSchedules', 'ShiftExceptions',];
+$defaultDashboardInstaller->buildDashboardsFromFiles(array_merge($dashboardModule, $moduleList, $nonMegaMenuModules));
 
 ///////////////////////////////////////////////////////////////////////////////
 ////    START DEMO DATA
@@ -605,14 +610,13 @@ if (isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::is_array_access(
     updateUpgradeHistory();
 }
 
-
 require_once('modules/Connectors/InstallDefaultConnectors.php');
 
 ///////////////////////////////////////////////////////////////////////////////
-////    INSTALL PASSWORD TEMPLATES
-include('install/seed_data/Advanced_Password_SeedData.php');
+////    INSTALL Email TEMPLATES
+include 'install/seed_data/Email_Notification_SeedData.php';
+include 'install/seed_data/Advanced_Password_SeedData.php';
 
-///////////////////////////////////////////////////////////////////////////////
 ////    INSTALL PDF TEMPLATES
 include('install/seed_data/PdfManager_SeedData.php');
 

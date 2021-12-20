@@ -14,8 +14,15 @@ use Sugarcrm\Sugarcrm\Security\ModuleScanner\CodeScanner;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\DropdownList as ConstraintsDropdownList;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 class ModuleScanner{
+
+    /**
+     * @var HealthCheckScanner
+     */
+    private $healthCheck;
+
 	private $manifestMap = array(
 			'pre_execute'=>'pre_execute',
 			'install_mkdirs'=>'mkdir',
@@ -66,7 +73,6 @@ class ModuleScanner{
 	    'ziparchive',
 	    'splfileinfo',
 	    'splfileobject',
-	    'pclzip',
         'sugarautoloader',
 
     );
@@ -137,7 +143,7 @@ class ModuleScanner{
 	'passthru',
 	'chgrp',
 	'chmod',
-	'chwown',
+    'chown',
 	'file_put_contents',
 	'file',
 	'fileatime',
@@ -183,6 +189,7 @@ class ModuleScanner{
 	'mk_temp_dir',
 	'write_array_to_file',
 	'write_encoded_file',
+    'write_array_to_file_as_key_value_pair',
 	'create_custom_directory',
 	'sugar_rename',
 	'sugar_chown',
@@ -509,7 +516,7 @@ class ModuleScanner{
         if ($this->isVardefsFileNameOrDir($file)) {
             return true;
         }
-        
+
         // check manifest file
         if (isset($this->installdefs['vardefs'])) {
             foreach ($this->installdefs['vardefs'] as $pack) {
@@ -552,10 +559,10 @@ class ModuleScanner{
         if (basename($fileInfo['dirname']) === 'Vardefs') {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Scans a directory and calls on scan file for each file
      * @param string $path path of the directory to be scanned
@@ -580,10 +587,7 @@ class ModuleScanner{
                 $this->scanDir($next, $sugarFileAllowed);
             } else {
                 $issues = $this->scanFile($next, $sugarFileAllowed);
-
-                if (count($issues) > 0) {
-                    return false;
-                }
+                $nextFileContents = file_get_contents($next);
 
                 if ($this->isLanguageFile($next)) {
                     $this->checkLanguageFileKeysValidity($next);
@@ -593,10 +597,102 @@ class ModuleScanner{
                 if ($this->isVardefFile($next)) {
                     $this->scanVardefFile($next);
                 }
+
+                if ($this->isCreateActionsFile($next)) {
+                    $this->healthCheck->updateStatus('hasCustomCreateActions', $next);
+                }
+
+                if ($this->isSidecarJSFile($next)) {
+                    $this->healthCheck->scanFileForDeprecatedJSCode($next, $nextFileContents);
+                }
+
+                if ($this->isExtensionPhpFile($next)) {
+                    $this->healthCheck->scanForOutputConstructs($nextFileContents, $next, true);
+                }
+
+                if ($this->isHookMetaFile($next)) {
+                    $hook_files = array();
+                    $this->healthCheck->extractHooks($next, $hook_files, true);
+                    foreach ($hook_files as $hookname => $hooks) {
+                        foreach ($hooks as $hook_data) {
+                            $this->healthCheck->scanFileForDeprecatedCode($hook_data[2], file_get_contents($hook_data[2]));
+                        }
+                    }
+                }
+
+                if ($this->isPhpFile($next)) {
+                    $this->healthCheck->scanFileForInvalidReferences($next, $nextFileContents);
+                    $this->healthCheck->scanFileForSessionArrayReferences($next, $nextFileContents);
+                    $this->healthCheck->scanFileForDeprecatedCode($next, $nextFileContents);
+                }
             }
         }
         return true;
     }
+
+    /**
+     * Tells whether the filename is a Logic Hook meta file
+     * @param string $file Path to the file
+     * @return bool
+     */
+    protected function isHookMetaFile(string $file): bool
+    {
+        if (false !== strpos($file, 'custom/modules/logic_hooks.php')) {
+            return true;
+        }
+        if (false !== strpos($file, 'custom/application/Ext/LogicHooks/logichooks.ext.php')) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Tells whether the filename is an extension-related PHP file
+     * @param string $file Path to the file
+     * @return bool
+     */
+    protected function isExtensionPhpFile(string $file): bool
+    {
+        if (in_array($file, $this->healthCheck->getIgnoredFiles()) || in_array($file, $this->healthCheck->getIgnoreOutputCheckFiles())) {
+            return false;
+        }
+        if (!preg_match('~custom/Extension/modules/([a-z][a-z0-9_\-]*)/Ext~is', $file)) {
+            return false;
+        }
+        return $this->isPhpFile($file);
+    }
+
+
+    /**
+     * Tells whether the filename is a PHP file
+     * @param string $file Path to the file
+     * @return bool
+     */
+    protected function isPhpFile(string $file): bool
+    {
+        return (bool) preg_match('~\.php$~', $file);
+    }
+
+    /**
+     * Tells whether the filename is a file related to create actions
+     * @param string $file Path to the file
+     * @return bool
+     */
+    protected function isCreateActionsFile(string $file): bool
+    {
+        return (bool) preg_match('~create-actions\.(php|js|hbs)$~', basename($file));
+    }
+
+    /**
+     * Tells whether the filename is a sidecar JS file
+     * @param string $file Path to the file
+     * @return bool
+     */
+    protected function isSidecarJSFile(string $file): bool
+    {
+        return (bool) preg_match('~clients/.*?/(layouts|views|fields)/.*?/.*?\.js$~', $file);
+    }
+
     /**
      * Checks if a file is a language file from manifest installdefs
      * @param string $file path to file
@@ -704,17 +800,38 @@ class ModuleScanner{
             // check 'function' attribute
             if (isset($vardefs['fields'])) {
                 foreach ($vardefs['fields'] as $field => $def) {
-                    $function = '';
+                    $functions = [];
                     if (isset($def['function_name'])) {
-                        $function = $def['function_name'];
+                        if (is_array($def['function_name'])) {
+                            $functions = $def['function_name'];
+                        } else {
+                            $functions[] = [$def['function_name']];
+                        }
                     } elseif (isset($def['function'])) {
-                        $function = is_string($def['function']) ? $def['function'] : $def['function']['name'];
+                        if (is_string($def['function'])) {
+                            $functions = [$def['function']];
+                        } else {
+                            if (!empty($def['function']['name'])) {
+                                if (is_array($def['function']['name'])) {
+                                    $functions = $def['function']['name'];
+                                } else {
+                                    $functions = [$def['function']['name']];
+                                }
+                            }
+                        }
                     }
-                    if (!empty($function)) {
-                        if (!in_array(strtolower($function), $this->blackListExempt)
-                            && in_array(strtolower($function), $this->blackList)
-                        ) {
-                            $issues[] = translate('ML_INVALID_FUNCTION') . ' ' . $function . '()';
+                    if (!empty($functions)) {
+                        foreach ($functions as $function) {
+                            if (is_string($function)) {
+                                if (!in_array(strtolower($function), $this->blackListExempt)
+                                    && in_array(strtolower($function), $this->blackList)
+                                ) {
+                                    $issues[] = translate('ML_INVALID_FUNCTION') . ' ' . $function . '()';
+                                }
+                            } else {
+                                // wrong format
+                                $issues[] = translate('ML_INVALID_FUNCTION') . ' ' . print_r($function, true);
+                            }
                         }
                     }
                 }
@@ -883,15 +1000,31 @@ class ModuleScanner{
          * @param string $sugarFileAllowed whether should allow to override core files
 	 *
 	 */
-        public function scanPackage($path, $sugarFileAllowed = true)
-        {
+    public function scanPackage($path, $sugarFileAllowed = true)
+    {
         $this->baseDir = $path;
-		$this->pathToModule = $path;
-		$this->scanManifest($path . '/manifest.php');
-		if(empty($this->config['disableFileScan'])){
+        $this->pathToModule = $path;
+        $this->scanManifest($path . '/manifest.php');
+        if (empty($this->config['disableFileScan'])) {
+            /**
+             * @var array $manifest
+             */
+            require $path . '/manifest.php';
+            $packageName = $manifest['name']?? 'unknown';
+            $logfile = 'healthcheck_' . preg_replace('~[\W]~is', '_', $packageName). time() . '.log';
+            require_once 'modules/HealthCheck/Scanner/Scanner.php';
+            $this->healthCheck = new HealthCheckScanner();
+            $this->healthCheck->initPackageScan();
+            $this->healthCheck->setLogFile($logfile);
+            ob_start();
             $this->scanDir($path, $sugarFileAllowed);
-		}
-	}
+            ob_end_clean();
+            $this->healthCheck->finishScan();
+            foreach ($this->healthCheck->getLogMeta() as $entry) {
+                $this->issues['healthcheck'][$packageName][] = "[{$entry['bucket']}][{$entry['flag_label']}] {$entry['descr']}: {$entry['title']}";
+            }
+        }
+    }
 
     /**
      * Formatted issues by type and file and return array.
@@ -924,9 +1057,18 @@ class ModuleScanner{
 	 *This function will take all issues of the current instance and print them to the screen
 	 **/
 	public function displayIssues($package='Package'){
-		global $sugar_version, $sugar_flavor;
-		echo '<h2>'.str_replace('{PACKAGE}' , $package ,translate('ML_PACKAGE_SCANNING')). '</h2><BR><h2 class="error">' . translate('ML_INSTALLATION_FAILED') . '</h2><br><p>' .str_replace('{PACKAGE}' , $package ,translate('ML_PACKAGE_NOT_CONFIRM')). '</p><ul><li>'. translate('ML_OBTAIN_NEW_PACKAGE') . '<li>' . translate('ML_RELAX_LOCAL').
-'</ul></p><br>' . ' <a href="http://www.sugarcrm.com/crm/product_doc.php?module=FailPackageScan&version=' . $sugar_version . '&edtion=' . $sugar_flavor . '" target="_blank">' . translate('ML_PKG_SCAN_GUIDE') . '</a>'.'<br><br>';
+        global $sugar_version, $sugar_flavor, $current_user;
+        $readableProductNames =
+            getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($current_user));
+        $readableProductNames = urlencode(implode(',', $readableProductNames));
+        echo '<h2>' . str_replace('{PACKAGE}', $package, translate('ML_PACKAGE_SCANNING')) .
+            '</h2><BR><h2 class="error">' . translate('ML_INSTALLATION_FAILED') . '</h2><br><p>' .
+            str_replace('{PACKAGE}', $package, translate('ML_PACKAGE_NOT_CONFIRM')) .
+            '</p><ul><li>'. translate('ML_OBTAIN_NEW_PACKAGE') . '<li>' . translate('ML_RELAX_LOCAL') .
+            '</ul></p><br>' .
+            ' <a href="https://www.sugarcrm.com/crm/product_doc.php?module=FailPackageScan&version=' .
+            $sugar_version . '&edtion=' . $sugar_flavor . '&products=' . $readableProductNames .
+            '" target="_blank">' . translate('ML_PKG_SCAN_GUIDE') . '</a>'.'<br><br>';
 
 
 		foreach($this->issues as $type=>$issues){

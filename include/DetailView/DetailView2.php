@@ -57,6 +57,4 @@ class DetailView2 extends EditView
 
         $this->defs = $viewdefs[$this->module][$this->view];
     }
-
 }
-?>

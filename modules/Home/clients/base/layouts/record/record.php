@@ -34,6 +34,9 @@ $viewdefs['Home']['base']['layout']['record'] = array(
                                 array(
                                     'layout' => 'dashlet-main',
                                 ),
+                                [
+                                    'view' => 'dashboard-fab',
+                                ],
                             ),
                             'last_state' => array(
                                 'id' => 'last-visit',

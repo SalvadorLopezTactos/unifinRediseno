@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Proces bedrijfsregels',
   'LBL_MODULE_NAME_SINGULAR' => 'Proces bedrijfsregel',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer bedrijfsregels verwerken',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Dashboard record bedrijfsregels verwerken',
   'LBL_RST_UID' => 'ID zakelijke regel',
   'LBL_RST_TYPE' => 'Type zakelijke regel',
   'LBL_RST_DEFINITION' => 'Business Rule Definitie',

@@ -120,6 +120,8 @@ $vardefs= array (
         'searchable' => true,
         'boost' => 0.26,
     ),
+    'rows' => 2,
+    'cols' => 20,
   ),
   'billing_address_street_2' =>
   array (
@@ -129,6 +131,7 @@ $vardefs= array (
     'len' => '150',
     'source'=>'non-db',
     'duplicate_on_record_copy' => 'always',
+    'massupdate' => false,
   ),
   'billing_address_street_3' =>
   array (
@@ -138,6 +141,7 @@ $vardefs= array (
     'len' => '150',
     'source'=>'non-db',
     'duplicate_on_record_copy' => 'always',
+    'massupdate' => false,
   ),
   'billing_address_street_4' =>
   array (
@@ -147,6 +151,7 @@ $vardefs= array (
     'len' => '150',
     'source'=>'non-db',
     'duplicate_on_record_copy' => 'always',
+    'massupdate' => false,
   ),
   'billing_address_city' =>
   array (
@@ -283,6 +288,8 @@ $vardefs= array (
     ),
     'comment' => 'The street address used for for shipping purposes',
     'merge_filter' => 'enabled',
+    'rows' => 2,
+    'cols' => 20,
   ),
   'shipping_address_street_2' =>
   array (
@@ -292,6 +299,7 @@ $vardefs= array (
     'len' => 150,
     'duplicate_on_record_copy' => 'always',
     'source'=>'non-db',
+    'massupdate' => false,
   ),
   'shipping_address_street_3' =>
   array (
@@ -301,6 +309,7 @@ $vardefs= array (
     'len' => 150,
     'duplicate_on_record_copy' => 'always',
     'source'=>'non-db',
+    'massupdate' => false,
   ),
   'shipping_address_street_4' =>
   array (
@@ -310,6 +319,7 @@ $vardefs= array (
     'len' => 150,
     'duplicate_on_record_copy' => 'always',
     'source'=>'non-db',
+    'massupdate' => false,
   ),
   'shipping_address_city' =>
   array (

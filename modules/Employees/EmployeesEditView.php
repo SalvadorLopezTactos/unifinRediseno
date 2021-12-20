@@ -24,6 +24,6 @@ class EmployeesEditView extends EditView
     public function isEmployeeEditable(): bool
     {
         return $this->focus->module_name === 'Employees' &&
-            (!$this->focus->isUpdate() || empty($this->focus->user_name));
+            (!$this->focus->isUpdate() || !$this->focus->canBeAuthenticated());
     }
 }

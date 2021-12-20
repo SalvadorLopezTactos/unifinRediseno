@@ -12,15 +12,12 @@
  */
 
 $viewdefs['base']['layout']['footer'] = array(
-    'components' =>array(
+    'components' => array(
         array(
-            'view' => 'mobile-action',
+            'layout' => 'footer-logos',
         ),
         array(
-            'view' => 'language-actions',
-        ),
-        array(
-            'view' => 'footer-actions',
+            'layout' => 'footer-buttons',
         ),
     ),
 );

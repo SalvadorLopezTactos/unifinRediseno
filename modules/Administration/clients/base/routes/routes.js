@@ -20,7 +20,27 @@
                         module: module
                     });
                 }
-            }
+            },
+            {
+                name: 'aws-connect',
+                route: ':Administration/awsconnect',
+                callback: function(module) {
+                    app.controller.loadView({
+                        layout: 'aws-connect',
+                        module: module
+                    });
+                }
+            },
+            {
+                name: 'csp-setting',
+                route: ':Administration/cspsetting',
+                callback: function(module) {
+                    app.controller.loadView({
+                        layout: 'csp-setting',
+                        module: module
+                    });
+                }
+            },
         ];
         app.router.addRoutes(routes);
     });

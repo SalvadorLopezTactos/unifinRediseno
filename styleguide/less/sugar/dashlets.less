@@ -93,6 +93,13 @@
     overflow-y: auto;
   }
 
+  .search-container {
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    height: auto;
+  }
+
   .rss-feed {
     ul {
       list-style-type: none;
@@ -103,6 +110,23 @@
       font-size: 12px;
     }
   }
+
+  .table thead:first-child tr:first-child th {
+    border-bottom: @borderWidgetLight;
+  }
+
+  .block-footer {
+    border-top: none;
+  }
+}
+
+.cspmessage {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: @fontSizeHeaderSubTitle;
+  line-height: 18px;
+  border: 1px solid @red;
+  padding: 6px;
 }
 
 .dashlet {
@@ -114,7 +138,18 @@
   transition: 0;
 
   &:not(.collapsed):not(.empty) {
-    min-height: 140px;
+    min-height: 132px;
+
+    .dashlet-console-list {
+      .console-list-view-table {
+        overflow: auto;
+        height: calc(~'100% - 39px');
+      }
+    }
+
+    .block-footer {
+      min-height: 37px;
+    }
   }
 
   &.collapsed {
@@ -149,7 +184,6 @@
   h4 {
     font-size: @fontSizeLarge;
     padding: 7px 80px 8px 10px;
-    cursor: move;
     border-radius: @baseBorderRadius 0 0 0;
   }
 
@@ -169,6 +203,10 @@
 
       .span6.hide + .span6 {
         min-width: 108px;
+      }
+
+      .controls.controls-two.btn-group-fit {
+        width: 100%;
       }
     }
   }
@@ -282,6 +320,67 @@
 
         .btn {
           margin-left: 0;
+        }
+      }
+
+      .planned-activities,
+      .invitation-actions {
+        .btn-mini {
+          border: 1px solid @grayMid;
+          background-image: none;
+
+          & > .fa {
+            color: @slate;
+          }
+        }
+
+        .active {
+          &.btn-mini {
+            border: 1px solid @slate;
+            background-color: @grayMid;
+
+            & > .fa {
+              color: @steel;
+            }
+          }
+        }
+
+        .rowaction:hover {
+          background-color: @lightRed;
+          border: 1px solid @darkRed;
+
+          & > .fa {
+            color: @darkRed;
+          }
+        }
+
+        :not(.active).action {
+          &-accept:hover {
+            background-color: @lightGreen;
+            border: 1px solid @darkGreen;
+
+            & > .fa {
+              color: @darkGreen;
+            }
+          }
+
+          &-tentative:hover {
+            background-color: @lightOrange;
+            border: 1px solid @darkOrange;
+
+            & > .fa {
+              color: @darkOrange;
+            }
+          }
+
+          &-decline:hover {
+            background-color: @lightRed;
+            border: 1px solid @darkRed;
+
+            & > .fa {
+              color: @darkRed;
+            }
+          }
         }
       }
 
@@ -412,11 +511,19 @@
   .webpage {
     display: block;
     line-height: 0;
+    height: 100%;
+    overflow: hidden;
 
     iframe {
       border: 0;
       width: 100%;
+      height: 100%;
       border-radius: 0 0 @baseBorderRadius @baseBorderRadius;
+    }
+
+    .cspmessage {
+      margin: 10px 10px 0;
+      border: none;
     }
   }
 
@@ -716,11 +823,7 @@
 
       .no-data {
         text-align: center;
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        padding: 10px;
       }
 
       .loading-data {
@@ -828,8 +931,8 @@
 
           //override the default .btn class properties
           .btn.active {
-            background-color: @btnPrimaryBackgroundHighlight !important;
-            color: @white !important;
+            background-color: @btnPrimaryBackgroundHighlight;
+            color: @white;
             border-radius: 5px;
           }
 
@@ -866,6 +969,7 @@
         padding: 6px;
         font-size: 12px;
         height: 80%;
+        overflow: auto;
 
         .recent-records {
           i {
@@ -879,6 +983,7 @@
           }
 
           border-bottom: none;
+          white-space: nowrap;
         }
       }
     }
@@ -1001,6 +1106,150 @@
   }
 }
 
+/* Purchase History Dashlet */
+.purchase-history {
+  .purchase-entry {
+    border-bottom: @borderWidget;
+
+    .content-row {
+      margin: 10px;
+      display: flex;
+
+      .totals-label {
+        color: @grayLightish;
+        margin-right: 5px;
+        display: inline;
+      }
+
+      .purchase-details {
+        text-align: right;
+      }
+
+      .purchase-details-total {
+        width: 30%;
+        padding-left: 20px;
+      }
+
+      .purchase-details-quantity {
+        width: 20%;
+        padding-left: 20px;
+      }
+
+      .purchase-details-date {
+        width: 40%;
+        min-width: 130px;
+      }
+
+      .row-cell {
+        white-space: nowrap;
+        vertical-align: middle;
+
+        .currency-field {
+          display: inline;
+        }
+      }
+
+      .pli-count {
+        align-self: flex-end;
+        margin-left: auto;
+        padding-left: 10px;
+
+        .pli-count-label {
+          color: @blue;
+        }
+      }
+
+      .toggle-pli-list {
+        cursor: pointer;
+      }
+    }
+
+    .pli-entries {
+      background-color: @grayLighter;
+      padding: 10px;
+
+      .pli-entry {
+        margin: 0;
+
+        .loading {
+          margin: 0 auto;
+        }
+
+        .show-more-plis {
+          border: 0;
+          padding: 0;
+        }
+      }
+
+      .pli-entry:not(:first-of-type) {
+        margin-top: 10px;
+      }
+
+      .pli-entry:not(:last-of-type) {
+        margin-bottom: 10px;
+      }
+
+      .pli-entry.pli-entry-centered {
+        display: block;
+        text-align: center;
+      }
+    }
+
+    span > .ellipsis_inline {
+      display: inline;
+    }
+  }
+
+  .listed > li {
+    padding: 0;
+  }
+}
+
+/* Dashlet search and sort controls */
+.dashlet-controls-header {
+  padding: 10px;
+  border-bottom: 1px solid @grayMid;
+  height: 30px;
+  display: flex;
+
+  .dashlet-controls-search {
+    width: 50vw;
+  }
+
+  .dashlet-controls-sort {
+    display: flex;
+    align-items: center;
+    width: 50vw;
+    margin-left: 10px;
+
+    .dashlet-controls-label {
+      margin-right: 10px;
+    }
+
+    .select2-container {
+      width: 100%;
+    }
+  }
+}
+
+/* Console List View Dashlet */
+
+.dashlet-console-list {
+  .filter.controls.btn-group-fit.controls-two {
+    padding-right: 36px;
+  }
+
+  .dashlet-console-list-row {
+    &:hover {
+      color: @darkPacific;
+    }
+
+    &:active {
+      color: @darkIndigo;
+    }
+  }
+}
+
 /* Activity Timeline Dashlet */
 .activity-timeline {
   .timeline-entry {
@@ -1060,5 +1309,17 @@
       border-bottom: @borderWidget;
       padding: 6px;
     }
+  }
+}
+
+.external-app-dashlet {
+  &.config {
+    .panel_body {
+      margin-bottom: 15px;
+    }
+  }
+
+  .error-msg {
+    padding: 10px;
   }
 }

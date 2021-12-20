@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Dashbord for møteliste',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Dashbord for møteoppføring',
+    'LBL_LEAD_GUESTS' => 'Før gjester',
+    'LBL_CONTACT_GUESTS' => 'Kontakt gjester',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Møter fokusskuff',
 
 	'ERR_DELETE_RECORD' => 'Et registreringsnummer må oppgis for å kunne slette møtet.',
 	'LBL_ACCEPT_THIS'=>'Godta?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Retning',
 	'LBL_LIST_DUE_DATE'=>'Tidsfrist',
 	'LBL_LIST_FORM_TITLE' => 'Møteliste',
-	'LBL_LIST_MY_MEETINGS' => 'Mine møter',
+    'LBL_LIST_MY_MEETINGS' => 'Mine møter',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Mine Planlagte Møter',
+    'LBL_GUEST_MEETINGS' => 'Mine møter som gjest',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Planlagte møter som gjest',
 	'LBL_LIST_RELATED_TO' => 'Tilknyttet',
 	'LBL_LIST_STATUS'=>'Status',
 	'LBL_LIST_SUBJECT' => 'Emne',

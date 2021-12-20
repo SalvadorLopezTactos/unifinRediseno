@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfigurišite portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Omogući portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Omogućite pretragu pre nego što otvorite slučaj',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Dozvoli korisnicima portala da zatvore predmet',
     'LBL_PORTAL_THEME' => 'Portal sa temama',
     'LBL_PORTAL_ENABLE' => 'Omogući',
     'LBL_PORTAL_SITE_URL' => 'Sajt Vašeg portala je dostupan na adresi:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberi da koristiš ovo polje pri pretrazi zapisa korišćenjem Globalne pretrage ovog modula',
+'LBL_POPHELP_REQUIRED'=>"Kreirajte formulu kojom se utvrđuje da li je ovo polje obavezno u rasporedima.<br/>"
+    . "Obavezna polja će pratiti formulu u mobilnom prikazu zasnovanom na pregledaču,<br/>"
+    . "ali neće pratiti formulu u izvornim aplikacijama, kao što su Sugar Mobile za iPhone.<br/>"
+    . "Neće pratiti formulu na Sugar samouslužnom portalu.",
+'LBL_POPHELP_READONLY'=>"Kreirajte formulu kojom se određuje da li je ovo polje u rasporedima dostupno samo za čitanje.<br/>"
+        . "Polja dostupna samo za čitanje će pratiti formulu u mobilnom prikazu u pregledaču, <br/>"
+        . "ali neće pratiti formulu u izvornim aplikacijama, kao što je Sugar Mobile za iPhone. <br/>"
+        . "Neće pratiti formulu na Sugar samouslužnom portalu.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite ovo polje kako biste ga koristili pri globalnom pretraživanju zapisa u ovom modulu.',
 //Revert Module labels
 'LBL_RESET' => 'Resetuj',
 'LBL_RESET_MODULE' => 'Resetuj modul',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Šifrovati',
                 'datetimecombo' =>'Datum i vreme',
                 'decimal'=>'Decimalni',
+                'autoincrement' => 'Samopovećanje',
 ),
 'labelTypes' => array(
     "" => "Često korišćene labele.",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Svi moduli',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (povezan {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopirati iz rasporeda',
+'LBL_RELATIONSHIP_TYPE' => 'Odnos',
 );

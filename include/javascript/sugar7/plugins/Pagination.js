@@ -79,7 +79,7 @@
                     if (!_.contains(this.plugins, 'Dashlet') || this.meta.config) {
                         return;
                     }
-                    if (this.layout) {
+                    if (this.layout && !this.hidePagination) {
                         this.layout.on('init', this._initPaginationBottom, this);
                     }
                 }, this);
@@ -108,7 +108,9 @@
                     },
                     module: this.module,
                     primary: false,
-                    layout: this.layout
+                    layout: this.layout,
+                    hideFirstPaginationLoadingMessage: this.hideFirstPaginationLoadingMessage,
+                    usePaginationComponent: this.usePaginationComponent,
                 });
                 this.layout.addComponent(pageComponent);
             },

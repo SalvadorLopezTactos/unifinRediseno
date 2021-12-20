@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'Zlúčiť záznamy',
       'VisualPipeline'=>'Vizuálna pipeline',
       'ConsoleConfiguration' => 'Konfigurácia konzoly',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'Kvóty',
     'Teams' => 'Tímy',
     'TeamNotices' => 'Tímové oznamy',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Pravidlá obchodných procesov',
     'pmse_Emails_Templates' => 'Šablóny e-mailov procesov',
     'BusinessCenters' => 'Obchodné centrá',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'Zmeny',
+    'ShiftExceptions' => 'Výnimky zmien',
+    'Purchases' => 'Nákupy',
+    'PurchasedLineItems' => 'Zakúpené riadkové položky',
+    'MobileDevices' => 'Mobilné zariadenia',
+    'PushNotifications' => 'Push oznámenia',
     'WorkFlow' => 'Definície pracovného postupu',
     'EAPM' => 'Externé účty',
     'Worksheet' => 'Tabuľka',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'Noviny',
   	'SugarFavorites'=>'Obľúbené',
 	'PdfManager' => 'Správca PDF',
+    'DataArchiver' => 'Archivátor údajov',
+    'ArchiveRuns' => 'Spustenia archivácie',
 
     'OAuthKeys' => 'Používateľské kľúče OAuth',
     'OAuthTokens' => 'Tokeny OAuth',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'Denník komentárov',
     'Holidays' => 'Dovolenky',
     'ChangeTimers' => 'Zmeniť časovače',
+    'Messages' => 'Správy',
   ),
 
     'moduleIconList' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'Výrobca',
     'VisualPipeline' => 'Vizuálna pipeline',
     'ConsoleConfiguration' => 'KonfiguráciaKonzoly',
+    'MobileDevices' => 'Mobilné zariadenie',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'Kontrakt',
     'Quotes' => 'Ponuka',
     'Products' => 'Položka ponuky',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'Upozornenie',
     'Sync'=>'Synchronizácia',
     'PdfManager' => 'Správca PDF',
+    'DataArchiver' => 'Archivátor údajov',
+    'ArchiveRuns' => 'Spustenia archivácie',
     'ReportMaker' => 'Pokročilé hlásenie',
     'DataSets' => 'Formát údajov',
     'CustomQueries' => 'Zákaznícka otázka',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Pravidlo obchodných procesov',
     'pmse_Emails_Templates' => 'Šablóna e-mailu procesu',
     'BusinessCenters' => 'Obchodné centrum',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'Zmena',
+    'ShiftExceptions' => 'Výnimky zmien',
+    'Purchases' => 'Nákup',
+    'PurchasedLineItems' => 'Zakúpená riadková položka',
+    'PushNotifications' => 'Push oznámenie',
     'WorkFlow' => 'Pracovný postup',
     'EAPM' => 'Externý účet',
     'Worksheet' => 'Tabuľka',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'Plán hlásení',
     'Holidays' => 'Dovolenka',
     'ChangeTimers' => 'Zmeniť časovač',
+    'Messages' => 'Správa',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'Dodávanie energií',
     'Other' => 'Iné',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'Prebieha spracovanie',
+        'Completed' => 'Dokončené',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'Prichádzajúce',
+        'Outbound' => 'Odchádzajúce',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'Chat',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'Úroveň 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'Úroveň 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => 'Áno',
+      'No' => 'Nie',
+      'Completed' => 'Dokončené',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'Budúce',
+        'Active' => 'Aktívne',
+        'Past' => 'Minulé',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'Automaticky generované',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'Plánované',
+    'In Progress' => 'Prebieha spracovanie',
     'Held' => 'Pozastavené',
     'Not Held' => 'Zrušené',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'Schôdzka',
     'Calls' => 'Volanie',
       'KBContents' => 'Báza znalostí',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'Zakúpená riadková položka',
+      'Purchases' => 'Nákup',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Účet',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'Cieľ',
       'KBContents' => 'Báza znalostí',
       'Notes' => 'Poznámka',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Zakúpená riadková položka',
+    'Purchases' => 'Nákup',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => 'Portál',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'Interné',
+        'Forum' => 'Fórum',
+        'Web' => 'Web',
+        'InboundEmail' => 'E-mail',
+        'Twitter' => 'Twitter',
+        'Portal' => 'Portál',
+        'Phone' => 'Telefón',
+        'Chat' => 'Chat',
+        'Chatbot' => 'Chatbot',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,9 +2041,16 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Zmena',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'Menej bezpečné aplikácie Google',
+        'exchange' => 'Zmena',
+        'other' => 'Iné',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Gmail',
+        'exchange_online' => 'Exchange Online',
         'other' => 'Iné',
     ),
     'import_enclosure_options' =>
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'Áno',
         'No' => 'Nie',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'V prognóze',
         'sales_stage' => 'Fáza predaja',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'Zoznam',
         'activities' => 'Aktivity',
         'multi-line' => 'Viacriadkový zoznam',
+        'omnichannel' => 'Omnichannel',
+        'home' => 'Home',
+        'focus' => 'Zásuvka zamerania',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Každú hodinu',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'Deň (dni)',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'Voľno',
+            'event' => 'Udalosť',
+            'other' => 'Iné',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'Dátum (Posledný {{module}})',
+            'start_date:asc' => 'Dátum (Prvý {{module}})',
+            'total_revenue:desc' => 'Cena (Najvyššia celková)',
+            'total_revenue:asc' => 'Cena (Najnižšia celková)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sledovať odkaz',
   'LBL_TOGGLE_VISIBILITY' => 'Prepnúť viditeľnosť', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivity',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar a 3-D kocka sú registrované ochranné známky spoločnosti SugarCRM Inc. '.
         'Všetky ostatné názvy spoločností a produktov, ktoré sú pri tomto produkte použité alebo zobrazené, môžu byť ochranné známky '.
         'SugarCRM ®, Sugar Enterprise™ a Sugar™ sú ochranné známky spoločnosti SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "Tlač",
     'LBL_HELP' => "Pomoc",
     'LBL_TOUR' => "Prehľad aktivít",
-    'LBL_TOUR_LINK' => 'Prehliadka – zobrazenie prehliadky najdôležitejších funkcií',
+    'LBL_TOUR_LINK' => 'Prehliadka tejto stránky',
     'LBL_MOBILE' => "Mobil",
     'LBL_ID_FF_SELECT' => "Vybrať",
     'DEFAULT'                              => 'Základné',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'Vytvoriť podpis',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'Názov podpisu',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'Telo podpisu',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'Iné',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Menej bezpečné aplikácie Google',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'Iné',
+    'LBL_EMAIL_AUTHORIZE'                   => 'Autorizovať',
+    'LBL_EMAIL_AUTHORIZED'                  => 'Autorizované',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'Neautorizované',
+    'LBL_EMAIL_AUTH_WARNING'                => 'Skôr, než budete môcť nastaviť tento účet, musí administrátor nakonfigurovať {0} Konektor prostredníctvom Administrátor > Konektory. Ďalšie informácie nájdete v dokumentácii {1}.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'Chyba pri načítaní informácií o konektore',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'Zlyhanie autorizácie.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'Pred uložením účet autorizujte.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'Pred testovaním účet autorizujte.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'Účet nie je autorizovaný',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[Vzdialené priečinky]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[Sugar priečinky]',
     'LBL_EMAIL_SUBJECT'                     => 'Predmet',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'Kópia',
     'LBL_BCC' => 'BCC',
 
+    'LBL_START_DATE' => 'Dátum začiatku',
+    'LBL_END_DATE' => 'Dátum ukončenia',
+
     'LBL_LINK_NONE'=> 'Žiadne',
     'LBL_LINK_ALL'=> 'Všetko',
     'LBL_LINK_RECORDS'=> 'Záznamy',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => 'Prečítajte si chybové hlásenie uvedené ďalej:',
     'NO_QUERY_SELECTED' => 'Formát údajov, ktorý ste zvolili, neobsahuje otázku. Vyberte zákaznícku otázku pre tento formát údajov.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'Vyskytla sa chyba:',
     'ERR_AJAX_LOAD_FAILURE'     => 'Pri spracovaní vašej požiadavky sa vyskytla sa chyba. Skúste to znova neskôr.',
     'ERR_AJAX_LOAD_FOOTER' => 'Ak táto chyba pretrváva, váš administrátor by mal zakázať Ajax pre tento modul',
@@ -2793,9 +2890,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'Táto funkcia nie je v tejto téme k dispozícii.',
     'ERR_NOT_ADMIN' => "Neoprávnený prístup k administrácii.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'Správa hesiel je dostupná iba v <a href="%s" target="_blank">Nastavenia cloudu</a>.',
+        'Správa hesiel je dostupná iba v časti <a href="%s" target="_blank">Nastavenia SugarCloud</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Ak chcete urobiť zmeny v poliach určených iba na čítanie, obráťte sa na administrátora aplikácie Sugar.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Ak chcete vykonať zmeny v poliach iba na čítanie, prejdite do časti <a href="{0}" target="_blank">Nastavenia SugarCloud</a>.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Chýba povinné pole:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Neplatné povinné pole:',
     'ERR_INVALID_VALUE' => 'Neplatná hodnota:',
@@ -2936,6 +3033,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'Pridať',
     'LBL_ADD_BUTTON' => 'Pridať',
+    'LBL_ADD_DASHLET_BUTTON' => 'Pridať dashlet',
     'LBL_ADD_DOCUMENT' => 'Pridať dokument',
     'LBL_REPLACE_BUTTON' => 'Nahradiť',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2966,6 +3064,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'Odoslať',
     'LBL_CASE'=>'Prípad',
     'LBL_CASES'=>'Prípady',
+    'LBL_MESSAGE'=>'Správa',
+    'LBL_MESSAGES'=>'Správy',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Zmena hesla',
     'LBL_CHANGE_BUTTON_LABEL' => 'Zmena',
@@ -3192,6 +3292,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'Generovať ponuku',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'K dispozícii nie sú žiadne polia na hromadnú aktualizáciu',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'Vaša žiadosť o hromadnú aktualizáciu bola naplánovaná.',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'Dátum začiatku služby je neskôr ako dátum ukončenia služby',
     'LBL_MASS_UPDATE_SUCCESS' => 'Všetky záznamy boli úspešne aktualizované.',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'Vybrané záznamy boli pridané do <a href="{{listUrl}}">{{listName}}</a> zoznamu cieľov.',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'Vaša požiadavka na pridanie vybraných záznamov do <a href="{{listUrl}}">{{listName}}</a> zoznamu cieľov bola naplánovaná.',
@@ -3427,11 +3528,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'Predmet',
 
     'LBL_INBOUNDEMAIL_ID' => 'ID prichádzajúceho e-mailu',
+    'LBL_EAMP_ID' => 'ID overovacieho tokenu',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Všetky práva vyhradené.<br />SugarCRM, Sugar a 3-D kocka sú registrované ochranné známky spoločnosti SugarCRM Inc. '.
         'Všetky ostatné názvy spoločností a produktov, ktoré sú pri tomto produkte použité alebo zobrazené, môžu byť ochranné známky '.
         'príslušných spoločností, s ktorými sú spojené.',
@@ -3504,6 +3606,8 @@ S pozdravom, tím SugarCRM',
     'LBL_USER_MENU' => 'Používateľská ponuka',
     'LBL_USERS_SYNC'=>'Synchronizácia používateľov',
     'LBL_USERS'=>'Používatelia',
+    'LBL_USER'=>'Používateľ',
+    'LBL_CURRENT_USER'=>'Aktuálny používateľ',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'Kontrola existujúceho e​​-mailového záznamu...',
     'LBL_VERIFY_PORTAL_NAME'=>'Kontrola existujúceho názvu portálu...',
     'LBL_VIEW_IMAGE' => 'zobraziť',
@@ -3592,6 +3696,8 @@ S pozdravom, tím SugarCRM',
         'Dosiahol sa limit počtu používateľských licencií. Prihlásiť sa smú iba existujúci používatelia.',
     'WARN_ONLY_ADMINS'=> "Prihlásiť sa smú iba administrátori.",
     'WARN_UNSAVED_CHANGES'=> "Chystáte sa opustiť tento záznam bez uloženia zmien, ktoré ste v zázname vykonali. Naozaj chcete opustiť tento záznam?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Obnovením prehliadača sa automaticky zavrú všetky relácie volania alebo chatu SugarLive, ktoré máte otvorené, a všetky neuložené zmeny sa stratia. Chcete pokračovať?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Neuložili ste zmeny. Naozaj chcete opustiť túto stránku a zahodiť zmeny?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Jeden alebo viac dashletov má neuložené zmeny. Naozaj chcete zatvoriť zásuvku?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Presúvate sa do modulu Hlásenia. Vaše zmeny v dashlete sa neuložia. Chcete pokračovať?',
@@ -3614,6 +3720,7 @@ S pozdravom, tím SugarCRM',
     'ERROR_TIME_IS_AFTER' => 'Chyba. Čas v tomto poli nesmie byť pred časom {{this}} poľa.',
     'ERROR_NUMBER' => 'Chyba. Toto pole vyžaduje platné číslo.',
     'ERROR_INT' => 'Chyba. Neplatné celé číslo.',
+    'ERROR_URL' => 'Chyba. Neplatná adresa URL.',
     'ERROR_NO_BEAN' => 'Nepodarilo sa získať objekt bean.',
     'ERROR_ACCESS_MODULE' => 'Nemáte prístup k tomuto modulu.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Príloha je príliš veľká.',
@@ -3697,9 +3804,14 @@ S pozdravom, tím SugarCRM',
     'LBL_CREATE_OPPORTUNITY' => 'Vytvoriť príležitosť',
     'LBL_SCHEDULE_CALL' => 'Záznam volania',
     'LBL_SCHEDULE_MEETING' => 'Naplánovať schôdzu',
+    'LBL_CREATE_MESSAGE' => 'Vytvoriť správu',
     'LBL_CREATE_TASK' => 'Vytvoriť úlohu',
     'LBL_REMOVE_FROM_FAVORITES' => 'Odstrániť z mojich obľúbených',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'Stiahnuť všetko',
+    'LBL_DOWNLOAD_ONE' => 'Stiahnuť',
+    'LBL_ATTACHMENTS' => 'Prílohy',
+    'LBL_ADD_ATTACHMENT' => 'Prehliadať',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Generovať z',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Uložiť formulár webu pre záujemcu',
@@ -3751,8 +3863,8 @@ S pozdravom, tím SugarCRM',
     'LBL_DASHLET_REFRESH_LABEL' => 'Obnoviť',
     'LBL_DASHLET_REMOVE_LABEL' => 'Odstrániť',
     'LBL_DASHLET_DROP_HERE' => 'Vložiť tu',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'Minimalizovať všetko',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'Maximalizovať všetko',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'Minimalizovať',
     'LBL_DASHLET_MAXIMIZE' => 'Maximalizovať',
     'LBL_DASHLET_CONFIGURE' => 'Konfigurovať',
@@ -3774,6 +3886,10 @@ S pozdravom, tím SugarCRM',
     'LBL_DASHLET_LISTVIEW_NAME' => 'Zobrazenie zoznamu',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Vytvára zoznamy záznamov z určitého modulu podľa definovaných kritérií.',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'Zobrazenie zoznamu konzoly',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'Vytvára zoznam záznamov z určitého modulu, ktoré súvisia so záznamom, ktorý si prehliadate v konzole.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Zobrazenie záznamu',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Zobrazí sa záznam a voliteľne súvisiace záznamy v kartách.',
@@ -3784,6 +3900,7 @@ S pozdravom, tím SugarCRM',
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Upozornenie, v kartách môžu byť zobrazené iba moduly {{numWord}} ({{num}}). ' .
         'Pred pridaním ďalších modulov odstráňte jeden alebo viac modulov.',
     'LBL_SIX' => 'šesť', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'Denník komentárov',
@@ -3808,7 +3925,13 @@ S pozdravom, tím SugarCRM',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Naposledy použité',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Obľúbené',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'Vytvoriť informačný panel',
+    'LBL_DASHBOARD_DUPLICATE' => 'Duplikovať informačný panel',
+    'LBL_DASHBOARD_DELETE' => 'Vymazať informačný panel',
+    'LBL_PIN_TO_TOP' => 'Pripnúť na začiatok',
+    'LBL_PIN_TO_BOTTOM' => 'Pripnúť na koniec',
+
+    'LBL_DASHBOARD_CONFIG' => 'Konfigurácia informačného panela',
     'LBL_LIST_VIEW__NAME' => 'Zobrazenie zoznamu',
     'LBL_PIPELINE_VIEW_NAME' => 'Zobrazenie dlaždíc',
     'LBL_PIPELINE_VIEW_BTN' => 'Zobrazenie dlaždíc',
@@ -3844,9 +3967,9 @@ S pozdravom, tím SugarCRM',
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'Vzdelávacie materiály',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar University – staňte sa expertom',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Diskusné fóra komunity – zapojte sa do diskusie',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentácia a podpora – získajte podrobnosti',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Školenie a certifikácia',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Komunita SugarClub',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentácia a podpora',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'Predaj podľa krajiny',
@@ -3855,6 +3978,10 @@ S pozdravom, tím SugarCRM',
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'Kategórie Bázy znalostí a zverejnené články',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Zobrazí stromovú štruktúru kategórií Bázy znalostí a zverejnené články',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'Vyhľadať v báze znalostí',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'Zobrazuje prehľadávateľné stromové zobrazenie publikovaných článkov a kategórií v báze znalostí.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'Zverejnené články v iných jazykoch',
@@ -4070,6 +4197,10 @@ S pozdravom, tím SugarCRM',
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'Zadajte USA telefónne číslo vrátane predvoľby.',
+    'LBL_CCP_NOT_INITIATED' => 'Pokus o vytočenie pomocou CCP, keď agent nie je prihlásený.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'Hovor nie je možné iniciovať prostredníctvom CCP.',
+    'LBL_CCP_DIALING_ERROR' => 'Tento hovor nie je možné dokončiť ako vytočený.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'Pred uskutočnením odchádzajúceho hovoru zatvorte všetky relácie chatu v SugarLive.',
 
     //File write error label
     'ERR_FILE_WRITE' => 'Chyba: Nemožno zapísať súbor {0}. Skontrolujte systém a oprávnenia pre webový server.',
@@ -4419,8 +4550,8 @@ S pozdravom, tím SugarCRM',
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Ponúkaná riadková položka',
     'LBL_DISCOUNT_TOTAL' => 'Zľava celkom',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% percent',
+    'LBL_DISCOUNT_SELECT' => 'Určuje, či je zľava v percentách alebo paušálna suma',
     'LBL_TAX' => 'Daň',
     'LBL_SHIPPING' => 'Doprava',
     'LBL_GRAND_TOTAL' => 'Celkový súčet',
@@ -4467,7 +4598,7 @@ S pozdravom, tím SugarCRM',
     'LBL_NO_ACCESS' => '(Žiadny prístup)',
     'LBL_NO_ACCESS_LOWER' => 'Používateľ nemá prístup',
     'LBL_NO_FIELD_ACCESS' => 'Žiadny prístup',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'Potrebná je licencia',
     'LBL_VALUE_ERASED' => 'Hodnota vymazaná',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Táto informácia bola vymazaná prostredníctvom žiadosti o ochranu osobných údajov',
     'LBL_CREATE_RELATED_RECORD' => 'Vytvoriť súvisiaci záznam',
@@ -4488,7 +4619,9 @@ S pozdravom, tím SugarCRM',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Úlohy',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Volania',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'E-maily',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'Zmeny',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Položky ponuky',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Výnimky zmien',
     'LNK_SETTINGS' => 'Nastavenia',
     'LBL_MOBILE_SUPPORT' => 'Podpora',
     'LBL_MOBILE_SHOW_MORE' => 'Zobraziť viac...',
@@ -4648,16 +4781,14 @@ S pozdravom, tím SugarCRM',
     'LBL_MOBILE_PDF_DOWNLOAD' => 'Stiahnuť {{{pdfTemplateName}}} PDF',
 
     'ERR_SYNC_FAILED' => 'Nemožno synchronizovať so serverom.',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'Prihlásenie SSO nie je dostupné. Uistite sa, že inštancia beží v Sugar 7,5 alebo novšej verzii a konfigurácia pre SSO je dokončená.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'Prístup nie je povolený.',
     'ERR_MOBILE_INVALID_CREDS' => 'Neplatné používateľské meno alebo heslo.',
     'ERR_MOBILE_SESSION_EXPIRED' => 'Platnosť vašej relácie vypršala.',
     'ERR_MOBILE_NOT_FOUND' => 'Zdroj nebol nájdený.',
     'ERR_MOBILE_TIMEOUT' => 'Server nereaguje.',
     'ERR_MOBILE_CONNECTION_FAILED' => 'Nemožno pripojiť k serveru.',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'Server {{{brandName}}} sa na uvedenej adrese URL nenašiel.',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'Server na uvedenej adrese URL neodpovedá.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'Server nie je na uvedenej adrese URL k dispozícii.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'Pripojenie k internetu nie je k dispozícii.',
     'ERR_MOBILE_INTERNAL' => 'Interná chyba ({{{code}}}). Skúste to znova neskôr.',
     'ERR_MOBILE_VALIDATION' => 'Záznam je neplatný',
@@ -4856,6 +4987,55 @@ S pozdravom, tím SugarCRM',
     'LBL_VO_RIGHT_MENU_BTN' => 'Pravé tlačidlo ponuky',
     'LBL_VO_ADD_BTN' => 'Tlačidlo Pridať',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'Zľava',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'Vybrať mapovaciu aplikáciu',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => 'Vybratá {{entityName}} má súvisiace hodnoty: {{localizedFieldNames}}. Ak si chcete existujúce hodnoty ponechať, stlačte možnosť Zrušiť. Ak chcete hodnoty prepísať novými, stlačte možnosť Potvrdiť.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'Šifrovanie údajov je povolené.',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'Vybratý záujemca je už skonvertovaný.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'Táto akcia je k dispozícii, len keď je zariadenie online',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'Naozaj chcete vytvoriť príležitosť z ponuky?',
+    'LBL_TAG_ADD' => 'Pridať štítok',
+    'LBL_TAG_ENTER_TAG_NAME' => 'Zadať štítok',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'Filtrovanie podľa štítkov nie je podporované, keď je zariadenie offline.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'Zobraziť celý komentár',
+    'LBL_COMMENT_VIEW' => 'Zobraziť komentár',
+    'LBL_PMSE_LABEL_DUEDATE' => 'Dátum dokončenia',
+    'LBL_PMSE_DUE' => 'Termín',
+    'LBL_PMSE_DUE_ON' => 'Termín dokončenia',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'Najprv vytvorte {{conversionParentModuleName}}',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'Chýbajú požadované záznamy: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'Vyberte kvalitu obrázka. Pred uložením na server sa zodpovedajúcim spôsobom zmení veľkosť obrázka. Vybratá hodnota sa použije ako predvolená pre všetky podobné operácie v budúcnosti.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'Odhaduje sa veľkosť súboru...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'Odhadovaná veľkosť súboru je',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'Kvalita obrázka',
+    'LBL_IMAGE_QUALITY_BEST' => 'Pôvodná veľkosť',
+    'LBL_IMAGE_QUALITY_GOOD' => 'Dobrá kvalita',
+    'LBL_IMAGE_QUALITY_POOR' => 'Malá veľkosť',
+    'LBL_IMAGE_QUALITY_BTN' => 'Kompresia: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'Zoznam polí v {{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'Obnoviť predvolené',
+    'LBL_LIST_NOT_ENOUGH' => 'Nastavte aspoň 1 aktívne pole.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'Aby ste mohli pracovať s inštanciou SugarCRM, musíte sa prihlásiť a prijať oprávnenia.',
+    'LBL_SELECTING_EXISTING_RECORD' => 'Vyberá sa {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => 'Vytvára sa nový {{{moduleSingular}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'Veľkosť obrázka',
+    'LBL_COPY_ADDRESS' => 'Kopírovať adresu',
+    'LBL_OPEN_IN' => 'Otvoriť v',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'Nie je vybratý žiadny súbor.',
+    'LBL_ATTACHMENT_ADD' => 'Pripojiť',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'Táto aplikácia používa súbory cookie',
+    'LBL_USE_COOKIES_CONFIRM' => 'Táto aplikácia používa súbory cookie, aby vám poskytla lepšie možnosti. Pokračovaním vyjadrujete svoj súhlas s používaním súborov cookie v súlade s našimi zásadami ochrany osobných údajov.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'Používate inštanciu Sugar, ktorá nebude v budúcom mobilnom vydaní kompatibilná s aplikáciou Sugar Mobile. Požiadajte svojho administrátora, aby čo najskôr inovoval Sugar.',
+    'ERROR_TAG_NAME_INVALID' => 'Názov štítku nemôže obsahovať znaky „{{{forbiddenChars}}}“',
+    'ERROR_NO_TAGS_FOUND' => 'Nie sú k dispozícii žiadne štítky zodpovedajúce „{{{searchQuery}}}“',
+    'ERR_PA_RECORD_INVALID' => 'Záznam {{{moduleName}}} obsahuje jednu alebo viac neplatných hodnôt a nedá sa uložiť. Chcete záznam upraviť, aby ste mohli vykonať akciu {{{actionLabel}}}?',
+    'ERR_MOBILE_METADATA_RELOAD' => 'Administrátor vykonal vo vašej inštancii Sugar zmeny konfigurácie. Stlačením OK synchronizujte konfiguráciu vašej aplikácie so serverom.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'Táto aplikácia používa súbory cookie',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Začiarknite, že súhlasíte (povinné)',
@@ -4914,6 +5094,10 @@ S pozdravom, tím SugarCRM',
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telefón: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'E-mail: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'Web: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Naozaj chcete zavrieť chat?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Vaše prihlásenie nebolo úspešné. Skúste to znova.',
@@ -4960,6 +5144,29 @@ S pozdravom, tím SugarCRM',
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Meno/názov účtu',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'Informačný panel Omnichannel',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'Zákazník',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} o {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'Váš prehliadač nie je podporovaný pre SugarLive. Použite Google Chrome alebo Mozilla Firefox.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'Vytvoril sa <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> obsahujúci podrobnosti vašej konverzácie.',
+    'LBL_OMNICHANNEL_SUBJECT' => 'Predmet',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'Popis',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Zhrnutie správ',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Zhrnutie hovorov',
+    'LBL_OMNICHANNEL_LINK_TO' => 'Prepojenie z {{fromModule}} do {{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => 'Prepojené',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Váš prehliadač nie je podporovaný pre chat. Použite Google Chrome alebo Mozilla Firefox.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Obráťte sa na administrátora aplikácie Sugar a požiadajte ho o pomoc.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'Konfigurovať rozloženie',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Pred uskutočnením odchádzajúceho hovoru dokončite konfiguráciu SugarLive.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Pred otvorením SugarLive dokončite konfiguráciu rozloženia SugarLive.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Pred konfiguráciou rozloženia SugarLive sa v SugarLive nastavte na „Offline“.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'Obnoviť kartu na predvolenú',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'Konfigurovať súhrnný panel',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Profil používateľa',
@@ -4991,6 +5198,10 @@ S pozdravom, tím SugarCRM',
     'LBL_WIZ_CREATE_USERS' => 'Vytvoriť používateľov',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Nastavenia systému',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'Hodnoty, ktoré ste zadali, sú nepodporované alebo nie sú v prijateľnom formáte. Zoznam prijateľných hodnôt polí a formátov nájdete v dokumentácii <a href="{{linkToDocumentation}}" target="_blank">Systém</a>.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'Tento obsah nebol schválený. Aktualizujte <a href="{{linkToDocumentation}}" target="_blank">Nastavenia politiky zabezpečenia obsahu</a> svojho systému.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'Tento obsah nebol schválený. Požiadajte administrátora o aktualizáciu <a href="{{linkToDocumentation}}" target="_blank">Nastavení politiky zabezpečenia obsahu</a> vášho systému. Po aktualizácii nastavení budete musieť obnoviť svoj prehliadač, aby sa zmeny prejavili.',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'Heslo',
@@ -5120,6 +5331,12 @@ S pozdravom, tím SugarCRM',
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'Moje položky',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'Položky tímu',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'História',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'Dashlet histórie zobrazuje realizované schôdzky, zaznamenané volania, doručené a odoslané e-maily.',
@@ -5234,6 +5451,7 @@ S pozdravom, tím SugarCRM',
     //record save
     'LBL_RECORD_SAVED' => 'Záznam uložený.', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspešne ste vytvorili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'Úspešne ste vytvorili {{moduleSingularLower}}.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Úspešne ste vytvorili tento záznam, ale nemáte povolenie na prístup k tomuto záznamu.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Overovanie...',
 
@@ -5312,7 +5530,7 @@ S pozdravom, tím SugarCRM',
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Aktualizovať zoznam',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'Obnoviť dlaždice',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'viac',
@@ -5566,6 +5784,7 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'Čakajúce činnosti',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'Čakajúce činnosti podľa procesu',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'Všetky procesy',
+    'LBL_RECORD_DASHBOARD' => 'Informačný panel so záznamom',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'Zhrnutie stavu procesov',
@@ -5597,7 +5816,7 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'LBL_BUSINESS_CENTER_ID' => 'ID obchodného centra',
     'LBL_BUSINESS_CENTER_NAME' => 'Názov obchodného centra',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'Aktivity zakúpených riadkových položiek',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Nový tag)',
@@ -5637,6 +5856,7 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'TPL_DATAPRIVACY_PII_TITLE' => 'Osobné údaje pre {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Zmeniť časovače',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'Správy',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Skopírované do schránky!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Nebolo možné skopírovať do schránky',
@@ -5654,13 +5874,24 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Zobraziť menej...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Žiadne údaje nie sú k dispozícii',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktívne odbery',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'Tento dashlet je možné pridať len pre moduly, ktoré sú spojené s jedným účtom. Ďalšie informácie nájdete v dokumentácii <a href={{linkToDocumentation}}>Dashlet Aktívne odbery</a>.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'Zobraziť nákupy patriace k tomuto prepojenému účtu:',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Aktívne odbery pre konkrétny účet.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', množstvo {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Celkom:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Žiadne aktívne odbery',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Tento dashlet vyžaduje, aby fungoval modul {{module_name}}. Požiadajte svojho administrátora o povolenie modulu {{module_name}}.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'História nákupov',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'Všetky nákupy pre konkrétny účet.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'Tento dashlet je možné pridať len pre moduly, ktoré sú spojené s jedným účtom. Ďalšie informácie nájdete v dokumentácii <a href={{linkToDocumentation}}>Dashlet História nákupov</a>.',
+    'LBL_NO_PURCHASE_HISTORY' => 'Žiadne nákupy na zobrazenie',
+    'LBL_NO_PLIS' => 'Žiadne zakúpené riadkové položky',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'Celkom',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'Množstvo',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'Tento dashlet vyžaduje, aby fungovali Nákupy a Zakúpené riadkové položky. Požiadajte svojho administrátora o povolenie Nákupov a Zakúpených riadkových položiek.',
+    'LBL_SEARCH_PURCHASE_NAME' => 'Vyhľadávať podľa názvu nákupu...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'Využite nástroj Studio na upravenie rozloženia dashlet zobrazenia záznamov prechodom na ' .
@@ -5676,7 +5907,39 @@ Ak chcete vytvoriť nový záznam s hodnotami, ktoré ste práve zadali, kliknit
     'LBL_SERVICE_DURATION' => 'Trvanie služby',
     'LBL_SERVICE_DURATION_VALUE' => 'Hodnota trvania služby',
     'LBL_SERVICE_DURATION_UNIT' => 'Jednotka trvania služby',
+    'LBL_LOCK_DURATION' => 'Trvanie uzamknutia',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'Amazon Connect CCP sa nepodarilo načítať. Prosím,' .
+        'uistite sa, že používate '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">podporovaný prehliadač</a>. ' .
+        'Ak problém pretrváva, obráťte sa na administrátora Sugar.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'Váš administrátor Sugar nenakonfiguroval vašu inštanciu pre Amazon Connect.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'Nedá sa nadviazať spojenie s Amazon Connect. Obráťte sa na administrátora Sugar so žiadosťou o pomoc.',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'Neznáme',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania',
+    'LBL_EXTERNAL_GUESTS' => 'Externí hostia',
+    'LBL_MY_FAVORITE_TASKS' => 'Moje obľúbené úlohy',
+    'LBL_MY_TASKS' => 'Moje úlohy',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'Nepodarilo sa nájsť pole: {0} v module: {1}',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'Nepodarilo sa nájsť záznam s {0}: {1} v module: {2}',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'Nepodarilo sa nájsť vzťah s názvom: {0}',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'Databázová položka s id: {0}, s {1}: {2} v module: {3} už existuje',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'obnoviteľne odstránené (s príznakom odstránenia = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'Našlo sa viac záznamov databázy pre {0} {1} v module {2}. ' .
+        'Odstráňte alebo aktualizujte príslušné záznamy zodpovedajúcim spôsobom. Príslušné záznamy: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'Ďalšie spustenie',
+    'LBL_TIME_AWARE_TYPE' => 'Typ',
+    'LBL_TIME_AWARE_BEAN_ID' => 'ID objektu bean',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

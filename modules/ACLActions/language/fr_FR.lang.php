@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Liste des Rôles par Utilisateur',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Rôles des Utilisateurs',
 'LBL_SEARCH_FORM_TITLE'=>'Rechercher',
+'LBL_ACTION_RECORD_VIEW'=>'Enregistrement',
 'LBL_ACTION_VIEW'=>'Afficher',
 'LBL_ACTION_EDIT'=>'Éditer',
 'LBL_ACTION_DELETE'=>'Supprimer',

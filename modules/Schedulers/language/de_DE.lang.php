@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Geplante Aufgabe',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalisierte Team-Sicherheitsdaten neu erstellen',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Aktivitäten-Stream: Reiniger',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Produktdefinition aktualisieren',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Zeitpläne für Prozessdauerbenachrichtigung',
+'LBL_OOTB_DATA_ARCHIVER' => 'Aktive Datenarchive/Löschungen ausführen',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Immer',
 'LBL_CATCH_UP' => 'Ausführen, wenn versäumt',
+'LBL_SYSTEM_JOB' => 'Ist es das aktuelle Auftragssystem?',
 'LBL_CATCH_UP_WARNING' => 'Deaktivieren, wenn die Ausführung dieses Auftrags länger dauert.',
 'LBL_DATE_TIME_END' => 'Enddatum & -zeit',
 'LBL_DATE_TIME_START' => 'Startdatum & -zeit',
@@ -148,6 +152,7 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnose-Tool-Dateien entfernen',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Temporäre Dateien entfernen',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Denormalisierte Team-Sicherheitsdaten neu erstellen',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Produktdefinition aktualisieren',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Run Nightly Mass Email Campaigns',
 'LBL_ASYNCMASSUPDATE' => 'Asynchrone Massen-Updates durchführen',
@@ -163,6 +168,7 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_CLEANJOBQUEUE' => 'Auftrags-Warteschlange bereinigen',
 'LBL_CLEANOLDRECORDLISTS' => 'Alte Datensatzlisten bereinigen',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktivitäten-Stream: Reiniger',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Zeitpläne für Prozessdauerbenachrichtigung',
 'LBL_PMSEENGINECRON' => 'SugarBPM-Zeitplaner',
 );
 

@@ -161,10 +161,17 @@
             return;
         }
 
-        this._super('_renderHtml');
-
         if (typeof this.feed !== 'undefined') {
             whiteList = app.config.allowedLinkSchemes;
+            if (!_.isEmpty(this.feed.link)) {
+                this.feed.isClickable = false;
+                for (let i = 0; i < whiteList.length; i++) {
+                    if (this.feed.link.substring(0, whiteList[i].length + 1) === whiteList[i] + ':') {
+                        this.feed.isClickable = true;
+                        break;
+                    }
+                }
+            }
             this.feed.entries.forEach(function(el) {
                 el.isClickable = false;
                 for (let i = 0; i < whiteList.length; i++) {
@@ -175,5 +182,6 @@
                 }
             });
         }
+        this._super('_renderHtml');
     }
 })

@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Σφαλμάτων',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Σφαλμάτων',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης σφαλμάτων',
 
   'LBL_MODULE_NAME' => 'Σφάλματα',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Σφάλμα',

@@ -17,7 +17,6 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 global $timedate;
@@ -114,7 +113,7 @@ $manualValidation3 = str_replace(
 );
 $xtpl->assign("MANUAL_VALIDATION3", $manualValidation3);
 
-$totalLicenseUsers = SubscriptionManager::instance()->getTotalNumberOfUsers();
+$totalLicenseUsers = SubscriptionManager::instance()->getTotalNumberOfMangoUsers();
 if (!empty($focus->settings['license_users'])) {
     $xtpl->assign("LICENSE_USERS", $totalLicenseUsers);
 }

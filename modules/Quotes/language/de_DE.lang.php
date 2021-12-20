@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Angebotslisten-Dashboard',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Angebotsbericht-Dashboard',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Angebote',
 
     'LBL_CONTRACTS'=>'Verträge',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Verträge',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Rechnungsadresse Land',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Rechnungsadresse PLZ',
     'LBL_BILLING_ADDRESS_STATE' => 'Rechnungsadresse Bundesland',
-    'LBL_BILLING_ADDRESS_STREET' => 'Rechnungsadresse',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Rechnungsadresse::',
     'LBL_BILLING_CONTACT_ID' => 'Rechnungs-Kontakt-ID:',
     'LBL_BILLING_CONTACT_NAME' => 'Kontaktname für Rechnung:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Lieferadresse Land',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Lieferadresse PLZ',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Lieferadresse Bundesland',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Lieferadresse',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Lieferadresse:',
     'LBL_SHIPPING_BODY' => 'Rechnungsstellung und Versand',
     'LBL_SHIPPING_CONTACT_ID' => 'Shipping Contact ID',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Rechnungsadresse auf Lieferadresse kopieren',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Lieferadresse auf Rechnungsadresse kopieren',
     'NTC_COPY_BILLING_ADDRESS2' => 'Auf Lieferadresse kopieren',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Auf Rechnungsadresse kopieren',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Möchten Sie diesen Kommentar wirklich aus dem Angebot entfernen?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Auf Rechnungsadresse kopieren',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Möchten Sie diesen Kommentar wirklich aus dem Angebot entfernen?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Möchten Sie diese Artikelzeile wirklich aus dem Angebot entfernen?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Möchten Sie diese Gruppe aus dem Angebot löschen?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Möchten Sie diesen Kontakt wirklich aus dem Angebot entfernen?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Menge',
     'LBL_MFT_PART_NUM' => 'Teilenummer',
     'LBL_ITEM_NAME' => 'Produkt',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkt',
     'LBL_DISCOUNT_PRICE' => 'Preis pro Einheit',
     'LBL_DISCOUNT_AMOUNT' => 'Rabatt',
     'LBL_LINE_ITEM_TOTAL' => 'Produktsumme',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Verkaufschance-ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfiguration von Angeboten',
+
+    'LBL_RENEWAL' => 'Erneuerung',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Angebotsinteraktionen',
 );

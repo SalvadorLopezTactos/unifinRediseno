@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Roolit käyttäjäkohtaisesti',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Käyttäjäroolit',
 'LBL_SEARCH_FORM_TITLE'=>'Etsi',
+'LBL_ACTION_RECORD_VIEW'=>'Tietuenäkymä',
 'LBL_ACTION_VIEW'=>'Näytä',
 'LBL_ACTION_EDIT'=>'Muokkaa',
 'LBL_ACTION_DELETE'=>'Poista',

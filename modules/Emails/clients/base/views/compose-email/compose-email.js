@@ -231,12 +231,12 @@
         var text = this.model.get('description') || '';
         var html = this.model.get('description_html') || '';
         var fullContent = subject + ' ' + text + ' ' + html;
-        var isSubjectEmpty = _.isEmpty($.trim(subject));
+        var isSubjectEmpty = _.isEmpty(subject.trim());
         // When fetching tinyMCE content, convert to jQuery Object
         // and return only if text is not empty. By wrapping the value
         // in <div> tags we remove the error if the value contains
         // no HTML markup
-        var isContentEmpty = _.isEmpty($.trim($('<div>' + html + '</div>').text()));
+        var isContentEmpty = _.isEmpty($('<div>' + html + '</div>').text().trim());
 
         var sendEmail = _.bind(function() {
             this.model.set('state', this.STATE_READY);

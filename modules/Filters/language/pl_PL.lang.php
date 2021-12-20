@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'następny rok',
     'LBL_OPEN_ISSUES' => 'Otwórz {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Ostatnio rozwiązane',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Utwórz filtr',
+    'LBL_ERROR_FILTER_EMPTY' => 'Dodaj kryteria filtra.',
+    'LBL_ADD_FILTER' => 'Dodaj kryteria',
+    'LBL_FILTER_NAME' => 'Nazwa filtra',
+    'LBL_FILTER_FIELD' => 'Pole',
+    'LBL_FILTER_OPERATOR' => 'Operator',
+    'LBL_FILTER_VALUE' => 'Wartość',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Zapisz w aplikacji pulpitu',
+    'LBL_FILTER_LOCAL' => 'Filtr lokalny',
 );

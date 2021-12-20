@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'By Report',
     'LBL_RECENTLY_MODIFIED' => 'Recently Modified',
     'LBL_RECORD_SAVED_SUCCESS' => 'You successfully created the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Open the schedule to add users via the Users subpanel.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'This Report Schedule',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Report Schedules Record Dashboard',
 );

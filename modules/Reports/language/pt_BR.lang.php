@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Erro ao recuperar os dados do Relatório de Drillthrough para esta ação. Entre em contato com o proprietário do relatório para receber assistência.',
     'LBL_CHART_NO_DRILLTHRU' => 'Drill through não disponível',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em relatórios',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'A visualização da lista exibe todos os relatórios que satisfazem os critérios de pesquisa atuais e aos quais os usuários têm acesso. Você pode ver os detalhes básicos de cada relatório dentro das colunas de campo da visualização de lista e na pré-visualização. É possível definir etiquetas para relatórios e criar filtros. Clique no nome do relatório ou selecione "Editar Relatório" no menu de ação para modificar o relatório.',

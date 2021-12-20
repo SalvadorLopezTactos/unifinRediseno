@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'تحذير: أنت تقوم بتعديل إعداد الاستيراد التلقائي هذا، مما يمكن أن يؤدي إلى فقد البيانات.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'تحذير: يجب أن يتم تمكين الاستيراد التلقائي عند إنشاء الحالات بشكل تلقائي.',
 	'LBL_EDIT_LAYOUT' => 'تعديل المخطط' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'عنوان البريد الإلكتروني',
+    'LBL_EMAIL_PROVIDER' => 'مقدم خدمة البريد الإلكتروني',
+    'LBL_AUTH_STATUS' => 'حالة التصريح',
 );
-?>

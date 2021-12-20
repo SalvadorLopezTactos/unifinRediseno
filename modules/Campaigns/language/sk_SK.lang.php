@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Nepodarilo sa nájsť zoznam cieľov typu predvolené',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nenašli sa žiadne záznamy',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Záznamy boli spracované',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Nastavenia prichádzajúcich e-mailov',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Systémové nastavenie e-mailu',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Názov stopára:',
   'LBL_EDIT_TRACKER_URL'=>'URL stopára:',

@@ -16,7 +16,11 @@ global $app_list_strings;
 global $mod_strings;
 global $currentModule;
 global $gridline;
+global $current_user;
 
+if (!is_admin($current_user)) {
+    sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
+}
 
 echo getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array($mod_strings['LBL_UPGRADE_TITLE']), false);
 
@@ -30,10 +34,6 @@ echo getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array($mod_strings['
 <tr>
 	<td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Upgrade','align="absmiddle" border="0"',null,null,'.gif',$mod_strings['LBL_UPGRADE_TEAM_TITLE']); ?>&nbsp;<a href="./index.php?module=Administration&action=upgradeTeams"><?php echo $mod_strings['LBL_UPGRADE_TEAM_TITLE']; ?></a></td>
 	<td> <?php echo $mod_strings['LBL_UPGRADE_TEAMS'] ; ?> </td>
-</tr>
-<tr>
-	<td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"', null,null,'.gif',$mod_strings['LBL_EXPAND_DATABASE_COLUMNS']); ?>&nbsp;<a href="./index.php?module=Administration&action=expandDatabase"><?php echo $mod_strings['LBL_EXPAND_DATABASE_COLUMNS']; ?></a></td>
-	<td> <?php echo $mod_strings['LBL_EXPAND_DATABASE_COLUMNS_DESC'] ; ?> </td>
 </tr>
 <tr>
 <?php

@@ -113,9 +113,10 @@ class IdMSAMLAuthenticate extends BaseAuthenticate implements ExternalLoginInter
         $user = new User();
         $user->setSugarUser($current_user);
         $logoutToken->setAttribute('user', $user);
-        if (array_key_exists('IdPSessionIndex', $session)) {
+        if (isset($session['IdPSessionIndex'])) {
             $logoutToken->setAttribute('sessionIndex', $session['IdPSessionIndex']);
         }
+        $logoutToken->setAttribute('returnTo', $config->get('site_url') . '/#logout'); // return to logout landing page
         $authManager = $this->getAuthProviderBasicBuilder($config)->buildAuthProviders();
 
         $resultToken = $authManager->authenticate($logoutToken);

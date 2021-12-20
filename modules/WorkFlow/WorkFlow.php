@@ -1581,5 +1581,29 @@ function getActiveWorkFlowCount() {
         }
     }
 
+    /**
+     * Delete all WorkFlows related to a given set of modules.
+     *
+     * @param array $modules Names of modules whose related WorkFlows we'll be deleting
+     * @throws SugarQueryException
+     */
+    public static function deleteWorkFlowsByModule($modules)
+    {
+        $query = new SugarQuery();
+        $query->select('id');
+        $query->from(BeanFactory::newBean('WorkFlow'));
+        $query->where()->in('base_module', $modules);
+        $result = $query->execute();
+        foreach ($result as $row) {
+            // WorkFlow beans override SugarBean::mark_deleted with custom logic that assumes a bean is populated
+            // with data. BeanFactory::deleteBean doesn't fetch bean data, so we retrieve and delete the related
+            // WorkFlow beans here.
+            $workFlow = BeanFactory::retrieveBean('WorkFlow', $row['id']);
+            if ($workFlow) {
+                $workFlow->mark_deleted($row['id']);
+            }
+        }
+    }
+
 //end class
 }

@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'A megadott jelszó nem felel meg a jelszó követelményeknek. Kérjük, próbálja újra!',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'A felhasználó adatai nem találhatók',
     'ERR_USER_NAME_EXISTS'              => 'A(z) {0} felhasználónév már létezik. Azonos felhasználói nevek nem engedélyezettek. Változtassa egyedivé a felhasználónevet.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'A "Sugar Hint" licencet további kompatibilis licenctípusokkal kell elmenteni',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Ez a felhasználó ki van zárva a Sugar alkalmazásból, így nem tud bejelentkezni jelenlegi jelszavával.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'A kizárólag külső hitelesítést alkalmazó felhasználók nem jelentkezhetnek be Sugar azonosítókkal',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Címzett email címe',
 	'ERR_SERVER_STATUS'					=> 'A kiszolgáló állapota',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'A rendszer nem tud emailt elküldeni a felhasználónak. Kérjük, ellenőrizze a kimenő levelek konfigurációját az Email beállítások menüpontban!',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Új felhasználók a <a href="{0}" target="_blank">SugarCloud beállítások</a> részben hozhatók létre.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email cím',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Előrejelzések',
     'LBL_WORKSHEETS'                    => 'Munkalapok',
 	'LBL_CALENDARS'                     => 'Naptárak',
+    'LBL_SHIFTS'                        => 'Műszakok',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Műszakra vonatkozó kivételek',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Figyelmeztető email küldése, ha rekordot rendelnek Önhöz.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email hozzárendeléskor',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Email értesítésben részesül, amikor valaki megemlíti Önt egy bejegyzésben a megjegyzésnaplóban.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email megemlítéskor',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Válassza ki, hogy mely mezőnevek jelenjenek meg a rekord nézeteiben. Kompaktabb rekordnézet megjelenítéséhez válassza a "Mezőérték mellett" lehetőséget.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Mezőnév elhelyezése',
     'LBL_ABOVE_FIELD_VALUE'             => 'Mezőérték fölött',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Licenc típusa',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Alapértelmezett emlékeztető hívásokhoz és találkozókhoz. Felugró figyelmeztetések jelennek meg minden meghívott Sugar felhasználó gépén, az összes meghívott emailt kap.',
 	'LBL_REMINDER'						=> 'Emlékeztetők',
 	'LBL_REMINDER_POPUP' => 'Felugró',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Ez a munkafázis megszakadt, mivel ugyanezzel a felhasználónévvel egy új munkafázis kezdődött.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Rekordok ismételt hozzárendelése',
-	'LBL_REASS_DESC_PART1'				=> 'Jelölje ki azokat a modulokat, amelyek olyan mezőket tartalmaznak, amiket más felhasználóhoz szeretne ismételten hozzárendelni.<br /><br />Kattintson a Következő gombra a frissítendő rekordok számának megjelenítéséhez! Kattintson a Mégsem gombra, ha ki szeretne lépni a rekordok ismételt hozzárendelése nélkül.',
+    'LBL_REASS_DESC_PART1'              => 'Jelölje ki azokat a modulokat, amelyek olyan mezőket tartalmaznak, amiket más felhasználóhoz szeretne ismételten hozzárendelni.<br /><br />Kattintson a Következő gombra a frissítendő rekordok számának megjelenítéséhez! Kattintson a Mégsem gombra, ha ki szeretne lépni a rekordok ismételt hozzárendelése nélkül.',
         'LBL_REASS_DESC_PART2'=>                    'Válassza ki azokat a modulokat, amelyeken munkafolyamatokat kíván futtatni, ahová hozzárendelési üzeneteket kíván küldeni és amelyet követni kíván az ismételt hozzárendelés során. Kattintson a Következő gombra a folytatáshoz és a rekordok ismételt hozzárendeléséhez! Kattintson az Újraindítás gombra az újrakezdéshez!',
 	'LBL_REASS_STEP2_TITLE'				=> 'Csoport ismételt hozzárendelése',
 	'LBL_REASS_STEP2_DESC'				=> 'Az alább listázott csoportok elérhetők a "felhasználói csoportból", nem pedig a "felhasználói csoporthoz" felsorolás alatt. A "felhasználói csoportból" rekordjai mindaddig nem lesznek elérhetők a "felhasználói csoportba" számára, amíg azokhoz nincsenek értékek hozzárendelve.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Felhasználói profil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Az írásvédett mezők módosításához nyissa meg a(z)  <a href="%s" target="_blank">SugarCloud beállítások</a> részt.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Ha csak olvasható mezőket kíván módosítani, vegye fel a kapcsolatot a Sugar rendszergazdával.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

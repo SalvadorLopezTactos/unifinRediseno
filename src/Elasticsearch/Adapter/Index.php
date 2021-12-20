@@ -13,7 +13,6 @@
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Adapter;
 
 use Elastica\Index as BaseIndex;
-use Elastica\Type;
 
 /**
  *
@@ -35,7 +34,7 @@ class Index extends BaseIndex
      * List of available types
      * @var array
      */
-    protected $types = array();
+    protected $types = [];
 
     /**
      *
@@ -70,12 +69,12 @@ class Index extends BaseIndex
      */
     public function addType($type)
     {
-        $this->types[$type] = new Type($this, $type);
+        $this->types[$type] = $type;
     }
 
     /**
      * Get available types
-     * @return \Elastica\Type[]
+     * @return array
      */
     public function getTypes()
     {

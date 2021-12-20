@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet Agregado',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Los Dashlets pueden ser reorganizados, ¿está seguro de que desea cambiar el diseño de la columna?',
   'LBL_REMOVE_DASHLET_CONFIRM' => '¿Está seguro de que desea quitar el Sugar Dashlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Ningún cuadro de mando configurado.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Ningún cuadro de mando configurado',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Ningún dashlet configurado',
   'LBL_CREATE_DASHBOARD_LINK' => 'Crear cuadro de mando',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Página Web',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Algunos sitios pueden no cargarse correctamente debido políticas o contenido no seguro',
 
-  'LBL_DASHLET_ADD' => 'Agregar un',
+  'LBL_DASHLET_ADD' => 'Añadir Dashlet',
   'LBL_DASHLET_DELETE' => 'Eliminar Sugar Dashlet',
   'LBL_DASHLET_REFRESH' => 'Actualizar Sugar Dashlet',
   'LBL_DASHLET_EDIT' => 'Editar Sugar Dashlet',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Un calendario para introducir fechas creado por Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Una librería para crear documentos PDF creado por Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - Una Implementación de Servidor WebDAV en PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - libería que ofrece funciones de compresión y extracción para archivos Zip, por Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - Un motor de plantillas para PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - La Biblioteca de Utilidades de Interfaz Gráfica facilita la implementación de características enriquecidas para el cliente.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Una clase para transferencia de correo para PHP con características completas.',

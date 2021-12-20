@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Попередження: Ви змінюєте параметр автоматичного імпорту, що може призвести до втрати даних.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Попередження: При автоматичному створенні звернень авто імпорт також повинен бути включений.',
 	'LBL_EDIT_LAYOUT' => 'Редагувати розташування' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Адреса електронної пошти',
+    'LBL_EMAIL_PROVIDER' => 'Постачальник послуг електронної пошти',
+    'LBL_AUTH_STATUS' => 'Статус авторизації',
 );
-?>

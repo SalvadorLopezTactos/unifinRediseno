@@ -58,14 +58,11 @@ class AdministrationViewEnablewirelessmodules extends SugarView
         $wireless_not_supported_modules = array(
             'Bugs',
             'Campaigns',
-            'Contracts',
             'Prospects', // this is Targets
             'Users',
             'pmse_Business_Rules',
             'pmse_Emails_Templates',
-            'pmse_Inbox',
             'pmse_Project',
-            'KBContents',
             'DataPrivacy',
             'ProductBundles',
             'ProductTemplates',

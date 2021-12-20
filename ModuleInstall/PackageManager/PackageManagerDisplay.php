@@ -91,86 +91,6 @@ class PackageManagerDisplay{
       return $str;
     }
 
-    /**
-     * A Static method to Build the display for the package manager
-     *
-     * @param String form1 - the form to display for manual downloading
-     * @param String hidden_fields - the hidden fields related to downloading a package
-     * @param String form_action - the form_action to be used when downloading from the server
-     * @param array types - the types of objects we will request from the server
-     * @param String active_form - the form to display first
-     * @return String - a string of html which will be used to display the forms
-     */
-    public static function buildPatchDisplay(
-        $form1,
-        $hidden_fields,
-        $form_action,
-        $types = array('module'),
-        $active_form = 'form1'
-    ) {
-    	global $current_language;
-        $mod_strings = return_module_language($current_language, "Administration");
-        $ss = new Sugar_Smarty();
-        $ss->assign('FORM_1_PLACE_HOLDER', $form1);
-        $ss->assign('form_action', $form_action);
-        $ss->assign('hidden_fields', $hidden_fields);
-        $mod_strings = return_module_language($current_language, "Administration");
-
-        $ss->assign('MOD', $mod_strings);
-        $result = PackageManagerDisplay::getHeader();
-        $header_text = $result['text'];
-        $isAlive = $result['isAlive'];
-        $show_login = $result['show_login'];
-        $display = 'block';
-        $form2 = "<table  class='tabForm' width='100%'  cellpadding='0' cellspacing='0' width='100%' border='0'>";
-        if(!$isAlive)
-        	$form2 .= "<tr><td><span id='span_display_html'>".$header_text."</span></td></tr>";
-        $form2 .= "</table>";
-        $form2 .= "<table width='100%'><tr><td align='left'>";
-        if($show_login){
-        	$form2 .= "<input type='button' class='button' onClick='PackageManager.showLoginDialog(true);' value='".$mod_strings['LBL_MODIFY_CREDENTIALS']."'>";
-        }
-        $form2 .= "</td><td align='right'><div id='workingStatusDiv' style='display:none;'>".SugarThemeRegistry::current()->getImage("sqsWait","border='0' align='bottom'",null,null,'.gif',"Loading")."</div></td></tr><tr><td colspan='2'>";
-
-        $loginViewStyle = ($isAlive ? 'none' : 'block');
-		$selectViewStyle = ($isAlive ? 'block' : 'none');
-		$form2 .= "<div id='selectView' style='display:".$selectViewStyle."'>";
-		$form2 .= "  <div id='patch_downloads' class='ygrid-mso' style='height:205px; display: ".$display.";'></div>";
-		 $form2 .= "</div>";
-		 if(!$show_login)
-         	$loginViewStyle = 'none';
-
-        $form2 .= "</td></tr></table>";
-        $form2 = '';
-        $packages = array();
-        $releases = array();
-        if($isAlive){
-          	$filter = array();
-          	$count = count($types);
-          	$index = 1;
-          	$type_str = '"';
-          	foreach($types as $type){
-          		$type_str .= "'".$type."'";
-          		if($index < $count)
-          			$type_str .= ",";
-          		$index++;
-          	}
-          	$type_str .= '"';
-          	$filter = array('type' => $type_str);
-          	$filter = PackageManager::toNameValueList($filter);
-            $pm = new PackageManager();
-        }
-        $tree = PackageManagerDisplay::buildTreeView('treeview', $isAlive);
-        $tree->tree_style= getVersionedPath('vendor/ytree/TreeView/css/check/tree.css');
-        $ss->assign('TREEHEADER',$tree->generate_header());
-		$ss->assign('module_load', 'false');
-		$ss->assign('MODULE_SELECTOR', PackageManagerDisplay::buildGridOutput($tree, $mod_strings, $isAlive, $show_login));
-        $ss->assign('FORM_2_PLACE_HOLDER', $form2);
-        $ss->assign('scripts', PackageManagerDisplay::getDisplayScript(false, 'patch', $releases, $types, $isAlive));
-        $str = $ss->fetch('ModuleInstall/PackageManager/tpls/PackageForm.tpl');
-        return $str;
-    }
-
     protected static function buildInstalledGrid($mod_strings, $types = array('modules'))
     {
     	  $descItemsInstalled = $mod_strings['LBL_UW_DESC_MODULES_INSTALLED'];
@@ -178,31 +98,6 @@ class PackageManagerDisplay{
           $output .= '</td></tr></table>';
           $output .= "<table width='100%'><tr><td ><div id='installed_grid' class='ygrid-mso' style='height:205px;'></div></td></tr></table>";
           return $output;
-    }
-
-    function buildLoginPanel($mod_strings, $display_cancel){
-        $credentials = PackageManager::getCredentials();
-    	$output = "<div id='login_panel'><div class='hd'><b>".$mod_strings['HDR_LOGIN_PANEL']."</b></div>";
-        $output .= "<div class='bd'><form><table><tr><td>".$mod_strings['LBL_USERNAME']."</td><td><input type='text' name='login_panel_username' id='login_panel_username' value='".$credentials['username']."'></td><td><a href='http://www.sugarcrm.com/crm/index.php?option=com_registration&task=register' target='blank'>".$mod_strings['LNK_NEW_ACCOUNT']."</a></td>";
-
-        $output .= "</tr><tr><td>".$mod_strings['LBL_PASSWORD']."</td><td><input type='password' name='login_panel_password' id='login_panel_password'></td><td><a href='http://www.sugarcrm.com/crm/component/option,com_registration/Itemid,0/task,lostPassword/' target='blank'>".$mod_strings['LNK_FORGOT_PASS']."</a></td>";
-
-		$terms = PackageManager::getTermsAndConditions();
-		$output .= "</tr><tr><td colspan='6' valign='top'><b>".$mod_strings['LBL_TERMS_AND_CONDITIONS']."</b><br><textarea readonly cols=80 rows=8>" . $terms['terms'] . '</textarea></td>';
-       	$_SESSION['SugarDepot_TermsVersion'] = (!empty($terms['version']) ? $terms['version'] : '');
-
-		$output .= "</td></tr><tr><td colspan='6'><input class='checkbox' type='checkbox' name='cb_terms' id='cb_terms' onclick='if(this.checked){this.form.panel_login_button.disabled=false;}else{this.form.panel_login_button.disabled=true;}'>".$mod_strings['LBL_ACCEPT_TERMS']."</td></tr><tr>";
-        $output .= "<td align='left'>";
-        $output .= "<input type='button' id='panel_login_button' name='panel_login_button' value='Login' class='button' onClick='PackageManager.authenticate(this.form.login_panel_username.value, this.form.login_panel_password.value, \"\",\"" . $terms['version'] . "\");' disabled>";
-
-        if($display_cancel){
-        	$output .= "&nbsp;<input type='button' id='panel_cancel_button' value='Cancel' class='button' onClick='PackageManager.showLoginDialog(false);'>";
-        }
-        $output .= "</td><td></td></tr>";
-		$output .= "<tr></td><td></td></tr>";
-		$output .= "</table></div>";
-        $output .= "<div class='ft'></div></form></div>";
-        return $output;
     }
 
     /**
@@ -245,21 +140,7 @@ class PackageManagerDisplay{
      */
     protected static function buildTreeView($div_id, $isAlive = true)
     {
-        $tree = new Tree($div_id);
-        $nodes = array();
-        if($isAlive)
-        	$nodes = PackageManager::getCategories('');
-
-        foreach($nodes as $arr_node){
-            $node = new Node($arr_node['id'], $arr_node['label']);
-            $node->dynamicloadfunction = 'PackageManager.loadDataForNodeForPackage';
-            $node->expanded = false;
-            $node->dynamic_load = true;
-            $node->set_property('href',"javascript:PackageManager.catClick('treeview');");
-            $tree->add_node($node);
-            $node->set_property('description', $arr_node['description']);
-        }
-        return $tree;
+        return new Tree($div_id);
     }
 
     /**
@@ -440,27 +321,6 @@ class PackageManagerDisplay{
         return $output;
     }
 
-   /**
-    *  This method is meant to be used to display the license agreement inline on the page
-    *  if the system would like to perform the installation on the same page via an Ajax call
-    */
-    public static function buildLicenseOutput($file)
-    {
-    	global $current_language;
-
-        $mod_strings = return_module_language($current_language, "Administration");
-        $contents = '';
-        $pm = new PackageManager();
-        $contents = $pm->getLicenseFromFile($file);
-        $ss = new Sugar_Smarty();
-        $ss->assign('MOD', $mod_strings);
-        $ss->assign('LICENSE_CONTENTS', $contents);
-        $ss->assign('FILE', $file);
-        $str = $ss->fetch('ModuleInstall/PackageManagerLicense.tpl');
-        $GLOBALS['log']->debug('LICENSE OUTPUT: '.$str);
-        return $str;
-    }
-
     public static function getHeader()
     {
     	global $current_language;
@@ -472,87 +332,7 @@ class PackageManagerDisplay{
         if(!function_exists('curl_init') && $show_login){
         	$header_text = "<font color='red'><b>".$mod_strings['ERR_ENABLE_CURL']."</b></font>";
         	$show_login = false;
-        }else{
-            $credentials = PackageManager::getCredentials();
-            if (!empty($credentials['username']) && !empty($credentials['password'])) {
-            	$result = PackageManagerComm::login();
-            	if((is_array($result) && !empty($result['faultcode'])) || $result == false){
-            		$header_text = "<font color='red'><b>".$result['faultstring']."</b></font>";
-            	}else{
-            		$header_text = PackageManager::getPromotion();
-            		$isAlive = true;
-            	}
-            }
         }
         return array('text' => $header_text, 'isAlive' => $isAlive, 'show_login' => $show_login);
-    }
-
-    function buildInstallGrid($view){
-    	$uh = new UpgradeHistory();
-    	$installeds = $uh->getAll();
-		$upgrades_installed = 0;
-		$installed_objects = array();
-		foreach($installeds as $installed)
-		{
-			$filename = from_html($installed->filename);
-			$date_entered = $installed->date_entered;
-			$type = $installed->type;
-			$version = $installed->version;
-			$upgrades_installed++;
-			$link = "";
-
-			switch($type)
-			{
-				case "theme":
-				case "langpack":
-				case "module":
-				case "patch":
-				$manifest_file = extractManifest($filename);
-				require_once($manifest_file);
-
-				$name = empty($manifest['name']) ? $filename : $manifest['name'];
-				$description = empty($manifest['description']) ? $mod_strings['LBL_UW_NONE'] : $manifest['description'];
-				if(($upgrades_installed==0 || $uh->UninstallAvailable($installeds, $installed))
-					&& is_file($filename) && !empty($manifest['is_uninstallable']))
-				{
-					$link = urlencode( $filename );
-				}
-				else
-				{
-					$link = 'false';
-				}
-
-				break;
-				default:
-					break;
-			}
-
-			if($view == 'default' && $type != 'patch')
-			{
-				continue;
-			}
-
-			if($view == 'module'
-				&& $type != 'module' && $type != 'theme' && $type != 'langpack')
-			{
-				continue;
-			}
-
-			$target_manifest = remove_file_extension( $filename ) . "-manifest.php";
-			require_once( "$target_manifest" );
-
-			if(isset($manifest['icon']) && $manifest['icon'] != "")
-			{
-				$manifest_copy_files_to_dir = isset($manifest['copy_files']['to_dir']) ? clean_path($manifest['copy_files']['to_dir']) : "";
-				$manifest_copy_files_from_dir = isset($manifest['copy_files']['from_dir']) ? clean_path($manifest['copy_files']['from_dir']) : "";
-				$manifest_icon = clean_path($manifest['icon']);
-				$icon = "<img src=\"" . $manifest_copy_files_to_dir . ($manifest_copy_files_from_dir != "" ? substr($manifest_icon, strlen($manifest_copy_files_from_dir)+1) : $manifest_icon ) . "\">";
-			}
-			else
-			{
-				$icon = getImageForType( $manifest['type'] );
-			}
-			$installed_objects[] = array('icon' => $icon, 'name' => $name, 'type' => $type, 'version' => $version, 'date_entered' => $date_entered, 'description' => $description, 'file' => $link);
-		}
     }
  }

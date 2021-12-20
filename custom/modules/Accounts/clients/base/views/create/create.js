@@ -612,8 +612,14 @@
          new_options["Cliente"]="Cliente";
          }*/
 
+        if(Object.keys(new_options).length==0){
+            new_options[""]="";
+         }
         this.model.fields['tipo_registro_cuenta_c'].options = new_options;
-        if(Object.keys(new_options).length == 0) alert("No es posible crear Cuentas");
+        if(Object.keys(new_options).length == 1 && new_options[""]==""){
+            alert("No es posible crear Cuentas");
+            this.model.set("tipo_registro_cuenta_c","");
+        }
 
         //this.model.on('change:name', this.cleanName, this);
         /*
@@ -775,7 +781,7 @@
     },
 
     _doValidateEmailTelefono: function (fields, errors, callback) {
-        if ((this.model.get('tipo_registro_cuenta_c')=="2" && (this.model.get('subtipo_registro_cuenta_c')=='8' ||this.model.get('subtipo_registro_cuenta_c')=='9' 
+        if ((this.model.get('tipo_registro_cuenta_c')=="2" && (this.model.get('subtipo_registro_cuenta_c')=='8' ||this.model.get('subtipo_registro_cuenta_c')=='9'
         ||this.model.get('subtipo_registro_cuenta_c')=='10' ||this.model.get('subtipo_registro_cuenta_c')=='12')) || this.model.get('tipo_registro_cuenta_c')=="3") {
                     if (_.isEmpty(this.model.get('email'))) {
                         errors['email'] = errors['email'] || {};
@@ -1863,13 +1869,13 @@
     },
 
     check_duplicados_account:function (fields, errors, callback) {
-        
+
         if(Object.keys(errors).length==0 && this.options.context.flagGuardarAcc!="1"){
             var telefonos=[];
             //Obtener los telefonos
             if(this.oTelefonos.telefono.length>0){
                 for (let index = 0; index < this.oTelefonos.telefono.length; index++) {
-                    telefonos.push(this.oTelefonos.telefono[index].name);  
+                    telefonos.push(this.oTelefonos.telefono[index].name);
                 }
             }
 
@@ -1884,7 +1890,7 @@
             if(this.model.get('rfc_c') != undefined && this.model.get('rfc_c') != ""){
                 rfc=this.model.get('rfc_c');
             }
-            
+
             //Parámetros para consumir servicio
             var params = {
                 'nombre': this.model.get('name'),
@@ -1892,7 +1898,7 @@
                 'telefonos': telefonos,
                 'rfc': rfc,
             };
-            
+
             /*
             var params={
                 //"nombre":"27 MICRAS INTERNACIONAL",
@@ -1908,7 +1914,7 @@
             */
 
             var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
-            
+
             App.alert.show('obteniendoDuplicados', {
                 level: 'process',
                 title: 'Cargando',
@@ -1941,7 +1947,7 @@
                             /**check whether the view already exists in the layout.
                              * If not we will create a new view and will add to the components list of the record layout
                              * */
-                    
+
                             var quickCreateView = null;
                             if (!quickCreateView) {
                                 /** Create a new view object */
@@ -1961,9 +1967,9 @@
                             this.layout.trigger("app:view:ValidaDuplicadoAccModal");
                         }
                     }
-                    
+
                     callback(null, fields, errors);
-                    
+
                 }, this)
             });
 
@@ -3256,7 +3262,7 @@
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
 
 
-        if ($('.list_u_canal').select2('val') == "0" && (userprod.includes('8') || userprod.includes('9'))) {
+        if ($('.list_u_canal').select2('val') == "0" && userprod.includes('8') ) {
             $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
             faltantesUniclickCanal += 1;
         }

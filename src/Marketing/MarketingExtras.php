@@ -21,6 +21,26 @@ use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 class MarketingExtras
 {
     /**
+     * The helper for MarketingExtrasHelper
+     * @var MarketingExtrasHelper
+     */
+    private $marketingExtrasHelper = null;
+
+    /**
+     * Creates the MarketingExtrasHelper (if it doesn't exist) and return it
+     *
+     * @return MarketingExtrasHelper
+     */
+    public function getMarketingExtrasHelper(): MarketingExtrasHelper
+    {
+        if ($this->marketingExtrasHelper === null) {
+            $this->marketingExtrasHelper = new MarketingExtrasHelper();
+        }
+
+        return $this->marketingExtrasHelper;
+    }
+
+    /**
      * Request the marketing content URL from the marketing extras server.
      * @param null|string $language The requested content language, if any.
      * @return string The URL for marketing content.
@@ -29,38 +49,28 @@ class MarketingExtras
      */
     public function getMarketingContentUrl(?string $language): string
     {
-        $sugarDetails = $this->getSugarDetails();
+        $helper = $this->getMarketingExtrasHelper();
+
+        $sugarDetails = $helper->getSugarDetails();
         $queryParams = array(
-            'language' => $this->chooseLanguage($language),
+            'language' => $helper->chooseLanguage($language),
             'version' => $sugarDetails['version'],
             'flavor' => strtolower($sugarDetails['flavor']),
             'build' => $sugarDetails['build'],
         );
 
-        $marketingExtrasSandboxTest = $this->getSugarConfig('marketing_extras_sandbox_test');
+        $marketingExtrasSandboxTest = $helper->getSugarConfig('marketing_extras_sandbox_test');
         if (isset($marketingExtrasSandboxTest)) {
             $queryParams['test'] = $marketingExtrasSandboxTest;
         }
 
-        if ($this->areMarketingExtrasEnabled()) {
-            $url = $this->getMarketingExtrasUrl();
-            $contentUrl = $this->fetchMarketingContentInfo($url, $queryParams)['content_url'];
-            if (!$this->validateUrl($contentUrl)) {
-                throw new \Exception('content_url is not actually an HTTP(S) URL');
-            } else {
-                return $contentUrl;
-            }
+        $url = $this->getMarketingExtrasUrl();
+        $contentUrl = $this->fetchMarketingContentInfo($url, $queryParams)['content_url'];
+        if (!$this->validateUrl($contentUrl)) {
+            throw new \Exception('content_url is not actually an HTTP(S) URL');
+        } else {
+            return $contentUrl;
         }
-        return '';
-    }
-
-    /**
-     * Check if marketing extras are enabled.
-     * @return bool true if marketing extras are enabled, false otherwise.
-     */
-    public function areMarketingExtrasEnabled(): bool
-    {
-        return $this->getSugarConfig('marketing_extras_enabled', false);
     }
 
     /**
@@ -85,7 +95,7 @@ class MarketingExtras
      */
     public function getMarketingExtrasUrl(): string
     {
-        $marketingExtrasUrl = $this->getSugarConfig('marketing_extras_url');
+        $marketingExtrasUrl = $this->getMarketingExtrasHelper()->getSugarConfig('marketing_extras_url');
         if (empty($marketingExtrasUrl)) {
             throw new \Exception('marketing_extras_url is not provided');
         }
@@ -102,13 +112,15 @@ class MarketingExtras
      */
     public function getBackgroundImageUrl(): string
     {
-        $backgroundImageUrl = $this->getSugarConfig('background_image');
+        $helper = $this->getMarketingExtrasHelper();
+
+        $backgroundImageUrl = $helper->getSugarConfig('background_image');
         if (!empty($backgroundImageUrl) && $this->validateUrl($backgroundImageUrl)) {
             return $backgroundImageUrl;
         }
-        $defaultBackgroundImage = $this->getSugarConfig('default_background_image');
+        $defaultBackgroundImage = $helper->getSugarConfig('default_background_image');
         if (!empty($defaultBackgroundImage) && $this->validateFile($defaultBackgroundImage)) {
-            $backgroundImageUrl = rtrim($this->getSugarConfig('site_url'), '/') . '/' . $defaultBackgroundImage;
+            $backgroundImageUrl = rtrim($helper->getSugarConfig('site_url'), '/') . '/' . $defaultBackgroundImage;
             return $backgroundImageUrl;
         }
         throw new \Exception('background_image is not provided');
@@ -120,22 +132,16 @@ class MarketingExtras
      * @return string The language to use. If set, uses the client's preferred
      *   language, then falls back to the default language of this Sugar
      *   instance, and finally to en_us.
+     * @deprecated Since 10.1, will be removed in 11.0. Use MarketingExtrasHelper::chooseLanguage
      */
     public function chooseLanguage(?string $language): string
     {
-        if (isset($language)) {
-            // because we have strict types, this implies it's a proper string
-            return $language;
-        }
+        \LoggerManager::getLogger()->deprecated(
+            'MarketingExtras::chooseLanguage has been moved to MarketingExtrasHelper::chooseLanguage ' .
+            'and will be removed from MarketingExtras in 11.0'
+        );
 
-        // no language given, check for system-wide default
-        $defaultLanguage = $this->getSugarConfig('default_language');
-        if (isset($defaultLanguage)) {
-            return $defaultLanguage;
-        }
-
-        // fall back to en_us if there's no default language set
-        return 'en_us';
+        return $this->getMarketingExtrasHelper()->chooseLanguage($language);
     }
 
     /**
@@ -216,12 +222,16 @@ class MarketingExtras
      * @param string $key Key to get.
      * @param * $default Default value.
      * @return * The value of the config flag, or the default.
+     * @deprecated Since 10.1, will be removed in 11.0. Use MarketingExtrasHelper::getSugarConfig
      */
     protected function getSugarConfig(string $key, $default = null)
     {
-        $container = Container::getInstance();
-        $config = $container->get(SugarConfig::class);
-        return $config->get($key, $default);
+        \LoggerManager::getLogger()->deprecated(
+            'MarketingExtras::getSugarConfig has been moved to MarketingExtrasHelper::getSugarConfig ' .
+            'and will be removed from MarketingExtras in 11.0'
+        );
+
+        return $this->getMarketingExtrasHelper()->getSugarConfig($key, $default);
     }
 
     /**
@@ -270,16 +280,16 @@ class MarketingExtras
      * Retrieve the build number, flavor, and version of this Sugar instance.
      * @return array An array consisting of build number, flavor, and version
      *   details.
+     * @deprecated Since 10.1, will be removed in 11.0. Use MarketingExtrasHelper::getSugarDetails
      */
     protected function getSugarDetails(): array
     {
-        global $sugar_build, $sugar_flavor, $sugar_version;
-
-        return array(
-            'version' => $sugar_version,
-            'flavor' => $sugar_flavor,
-            'build' => $sugar_build,
+        \LoggerManager::getLogger()->deprecated(
+            'MarketingExtras::getSugarDetails has been moved to MarketingExtrasHelper::getSugarDetails ' .
+            'and will be removed from MarketingExtras in 11.0'
         );
+
+        return $this->getMarketingExtrasHelper()->getSugarDetails();
     }
 
     /**

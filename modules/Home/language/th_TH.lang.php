@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'เพิ่มส่วนข้อมูล Sugar แล้ว',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'ระบบจะจัดเรียงส่วนข้อมูลใหม่ คุณแน่ใจหรือไม่ว่าต้องการเปลี่ยนเลย์เอาต์ของคอลัมน์',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการนำส่วนข้อมูล Sugar ออก',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'ไม่ได้กำหนดค่าแดชบอร์ด',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'ไม่มีแดชบอร์ดใดได้รับการกำหนดค่า',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'ไม่มีส่วนข้อมูลใดได้รับการกำหนดค่า',
   'LBL_CREATE_DASHBOARD_LINK' => 'สร้างแดชบอร์ด',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'เว็บเพจ',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'บางไซต์อาจโหลดไม่ถูกต้องเนื่องจากมีเนื้อหาหรือนโยบายที่ไม่ปลอดภัย',
 
-  'LBL_DASHLET_ADD' => 'เพิ่ม',
+  'LBL_DASHLET_ADD' => 'เพิ่มส่วนข้อมูล',
   'LBL_DASHLET_DELETE' => 'ลบส่วนข้อมูล Sugar',
   'LBL_DASHLET_REFRESH' => 'รีเฟรชส่วนข้อมูล Sugar',
   'LBL_DASHLET_EDIT' => 'แก้ไขส่วนข้อมูล Sugar',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - ปฏิทินสำหรับป้อนวันที่สำคัญต่างๆ สร้างโดย Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - ไลบรารีสำหรับการสร้างเอกสาร PDF ที่สร้างโดย Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - การใช้งานเซิร์ฟเวอร์ WebDAV ใน PHP',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - ไลบรารีที่มีฟังก์ชันการบีบอัดและการดึงข้อมูลสำหรับไฟล์ Zip โดย Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - เอ็นจินเทมเพลทสำหรับ PHP',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - ยูทิลิตีไลบรารี UI ที่ช่วยให้สามารถนำคุณลักษณะด้านไคลเอ็นต์ที่มีความสมบูรณ์มาใช้',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - คลาสการโอนอีเมลที่มีคุณลักษณะสมบูรณ์สำหรับ PHP',

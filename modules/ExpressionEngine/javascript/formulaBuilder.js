@@ -747,7 +747,7 @@ SUGAR.expressions.GridToolTip = {
         //Now find where the end point of the current string is
         var end = getCompEnd(val, offset);
 
-        return $.trim(val.substring(start, end));
+        return val.substring(start, end).trim();
     };
 
     /**

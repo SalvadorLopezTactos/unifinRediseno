@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Instrumentpanel med anteckningslistor',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Instrumentpanel med anteckningsposter',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för anteckningar',
 
+    'LBL_RELATED_CONTACT' => 'Relaterad kontakt',
     'ERR_DELETE_RECORD' => 'Ett postnummer måste specificeras för att kunna radera organisationen.',
     'LBL_ACCOUNT_ID' => 'Organisations ID:',
     'LBL_CASE_ID' => 'Ärende ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontakt ID:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Anteckningar',
+    'LBL_ATTACHMENTS' => 'Bilagor',
+    'LBL_ATTACHMENT_FLAG' => 'Är bilaga',
     'LBL_DESCRIPTION' => 'Beskrivning',
     'LBL_EMAIL_ADDRESS' => 'Emailadress:',
     'LBL_EMAIL_ATTACHMENT' => 'Emailbilaga',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Bilagor',
     'LBL_NOTE' => 'Anteckning:',
     'LBL_OPPORTUNITY_ID' => 'Affärsmöjlighet ID:',
+    'LBL_NOTE_PARENT_ID' => 'Anteckna föräldra-ID:',
     'LBL_PARENT_ID' => 'Föräldra ID:',
     'LBL_PARENT_TYPE' => 'Föräldratyp',
     'LBL_EMAIL_TYPE' => 'Typ av e-post',

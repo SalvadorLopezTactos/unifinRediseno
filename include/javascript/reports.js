@@ -3364,8 +3364,13 @@ SUGAR.reports = function() {
 			cell = row.insertCell(2);
 			cell.setAttribute('scope', 'row');
 			
-			cell.innerHTML = "<input type='text' size='50' id= 'display_cols_label_'"+totalDisplayColRows+" value=\""+displayCol.label+"\" onclick='this.focus();'>";
-
+            cell.appendChild(SUGAR.reports.createInputField({
+                type: 'text',
+                size: 50,
+                id: 'display_cols_label_' + totalDisplayColRows,
+                value: displayCol.label,
+                onclick: 'this.focus()'
+            }));
 			cell = row.insertCell(3);
 			cell.setAttribute('scope', 'row');
 			cell.innerHTML = "<input type='radio' name='order_by_radio' id='order_by_radio_"+totalDisplayColRows +"' onClick='SUGAR.reports.orderBySelected(" +totalDisplayColRows+")' >";
@@ -3537,7 +3542,13 @@ SUGAR.reports = function() {
 			}				
 			cell = row.insertCell(2);
 			cell.setAttribute('scope', 'row');
-			cell.innerHTML = "<input type='text' size='50' id= '"+id+"_input' value='"+summaryColumn.label+"' onclick='this.focus();'>";
+            cell.appendChild(SUGAR.reports.createInputField({
+                type: 'text',
+                size: 50,
+                id: id + '_input',
+                value: summaryColumn.label,
+                onclick: 'this.focus()'
+            }));
 			cell = row.insertCell(3);
 			cell.setAttribute('scope', 'row');
 			if (report_type == 'summation') {
@@ -3560,6 +3571,13 @@ SUGAR.reports = function() {
 			var dd11 = YAHOO.util.Dom.get(id);
             dd11.dd = new SUGAR.reports.reportDDProxy(id, 'group_summaries');
 		},	
+        createInputField: function(attributes) {
+            const inputField = document.createElement('input');
+            for (const attrName in attributes) {
+                inputField.setAttribute(attrName, attributes[attrName]);
+            }
+            return inputField;
+        },
 		copyFilter: function(origFilterRowId, origFilterRow, current_filters_table, filterDef) {
 			totalFilterRows++;
 			var numFilterRows = document.getElementById(current_filters_table).rows.length;

@@ -11,34 +11,112 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
-    'metadata' => array(
-        'components' => array(
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
+return [
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'LBL_MY_SCHEDULED_MEETINGS',
-                                'display_columns' => array(
+                                'display_columns' => [
                                     'date_start',
                                     'name',
                                     'parent_name',
-                                ),
+                                ],
                                 'filter_id' => 'my_scheduled_meetings',
-                            ),
-                            'context' => array(
+                            ],
+                            'context' => [
                                 'module' => 'Meetings',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'commentlog-dashlet',
+                                'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'dashablerecord',
+                                'label' => 'LBL_CONTACT_GUESTS',
+                                'module' => 'Meetings',
+                                'tabs' => [
+                                    [
+                                        'active' => true,
+                                        'label' => 'LBL_MODULE_NAME',
+                                        'link' => 'contacts',
+                                        'module' => 'Contacts',
+                                        'limit' => 5,
+                                        'fields' => [
+                                            'name',
+                                            'title',
+                                            'account_name',
+                                            'email',
+                                            'phone_work',
+                                            'assigned_user_name',
+                                            'date_modified',
+                                            'date_entered',
+                                        ],
+                                    ],
+                                ],
+                                'tab_list' => [
+                                    'contacts',
+                                ],
+                            ],
+                            'context' => [
+                                'module' => 'Meetings',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'dashablerecord',
+                                'label' => 'LBL_LEAD_GUESTS',
+                                'module' => 'Meetings',
+                                'tabs' => [
+                                    [
+                                        'active' => true,
+                                        'label' => 'LBL_MODULE_NAME',
+                                        'link' => 'leads',
+                                        'module' => 'Leads',
+                                        'limit' => 5,
+                                        'fields' => [
+                                            'name',
+                                            'status',
+                                            'account_name',
+                                            'phone_work',
+                                            'email',
+                                            'assigned_user_name',
+                                            'date_modified',
+                                            'date_entered',
+                                        ],
+                                    ],
+                                ],
+                                'tab_list' => [
+                                    'leads',
+                                ],
+                            ],
+                            'context' => [
+                                'module' => 'Meetings',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_MEETINGS_RECORD_DASHBOARD',
-);
-
+];

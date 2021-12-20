@@ -57,8 +57,8 @@ class OracleManager extends DBManager
 
     protected $maxNameLengths = array(
         'table' => 30,
-        'column' => 30,
-        'index' => 30,
+        'column' => 128,
+        'index' => 128,
         'alias' => 30
     );
 
@@ -592,8 +592,9 @@ WHERE OWNER = ?
     {
         global $sugar_config;
 
-        if(!$configOptions)
-			$configOptions = $sugar_config['dbconfig'];
+        if (is_null($configOptions)) {
+            $configOptions = $sugar_config['dbconfig'];
+        }
 
         if (empty($configOptions['db_schema_name'])) {
             $configOptions['db_schema_name'] = $configOptions['db_user_name'];
@@ -707,6 +708,7 @@ WHERE OWNER = ?
         '%Y-%m-%d' => 'YYYY-MM-DD',
         '%Y-%m' => 'YYYY-MM',
         '%Y' => 'YYYY',
+        '%x' => 'IYYY',
         '%v' => 'IW',
     );
 
@@ -740,7 +742,7 @@ WHERE OWNER = ?
             case 'left':
                 return "LTRIM($string$additional_parameters_string)";
             case 'date_format':
-                if(!empty($additional_parameters[0]) && $additional_parameters[0][0] == "'") {
+                if (isset($additional_parameters[0]) && substr($additional_parameters[0], 0, 1) === "'") {
                     $additional_parameters[0] = trim($additional_parameters[0], "'");
                 }
                 if(!empty($additional_parameters) && isset($this->date_formats[$additional_parameters[0]])) {
@@ -952,7 +954,7 @@ WHERE OWNER = ?
 	/**
      * @see DBManager::oneColumnSQLRep()
      */
-    protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false)
+    protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
     {
 		//Bug 25814
 		if(isset($fieldDef['name'])){
@@ -964,7 +966,7 @@ WHERE OWNER = ?
         if ($this->isTextType($type) && isset($fieldDef['len'])) {
             unset($fieldDef['len']);
         }
-		return parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, $return_as_array);
+        return parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, $return_as_array, $action);
 	}
 
     /**
@@ -1302,7 +1304,7 @@ WHERE OWNER = ?
     /**
      * @see DBManager::setAutoIncrement()
      */
-    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [], $action = null)
     {
         $this->deleteAutoIncrement($table, $field_name);
         $this->query(
@@ -1467,7 +1469,7 @@ LEFT JOIN all_constraints c
         if (empty($tablename)) {
             $this->logger->error(__METHOD__ . ' called with an empty tablename argument');
             return array();
-        }        
+        }
 
         $columns = array(
             'column_name',
@@ -1542,11 +1544,12 @@ LEFT JOIN all_constraints c
 
 	/**
      * @see DBManager::add_drop_constraint()
+     * @inheritDoc
      */
-    public function add_drop_constraint($table, $definition, $drop = false)
+    public function add_drop_constraint(string $table, array $definition, bool $drop = false): string
     {
         $type         = $definition['type'];
-        $fields       = is_array($definition['fields'])?implode(',',$definition['fields']):$definition['fields'];
+        $fieldsListSQL = implode(',', $definition['fields']);
         $name         = $this->getValidDBName($definition['name'], true, 'index');
         $sql          = '';
 
@@ -1562,26 +1565,26 @@ LEFT JOIN all_constraints c
             if ($drop)
                 $sql = "DROP INDEX {$name}";
             else
-                $sql = "CREATE INDEX {$name} ON {$table} ({$fields})";
+                $sql = "CREATE INDEX {$name} ON {$table} ({$fieldsListSQL})";
             break;
         // constraints as indices
         case 'unique':
             if ($drop)
                 $sql = "ALTER TABLE {$table} DROP CONSTRAINT {$name}";
             else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} UNIQUE ({$fields})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} UNIQUE ({$fieldsListSQL})";
             break;
         case 'primary':
             if ($drop)
                 $sql = "ALTER TABLE {$table} DROP PRIMARY KEY CASCADE";
             else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fieldsListSQL})";
             break;
         case 'foreign':
             if ($drop)
-                $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fieldsListSQL})";
             else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} FOREIGN KEY ({$fields}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} FOREIGN KEY ({$fieldsListSQL}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
             break;
         }
         return $sql;

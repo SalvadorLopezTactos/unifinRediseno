@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Skatteklass:',
   'LBL_TYPE_NAME'=>'Typnamn:',
   'LBL_TYPE' => 'Typ:',
+  'LBL_PRODUCT_TYPE' => 'Produkttyp',
   'LBL_URL' => 'Produkt URL:',
   'LBL_VENDOR_PART_NUM' => 'Leverantörens artikelnummer:',
   'LBL_WEIGHT' => 'Vikt:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Produktkatalog',
   'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Lägg till',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Sök i produktkatalogen',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Inga data tillgängliga',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tilldelat Användarnamn',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Produkttyper',
   'LBL_RENEWABLE' => 'Förnybar',
   'LBL_SERVICE' => 'Service',
+  'LBL_LOCK_DURATION' => 'Varaktighet för lås',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Instrumentpanel med produktkataloglista',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Instrumentpanel med produktkatalogpost',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för produktkatalog',
 );

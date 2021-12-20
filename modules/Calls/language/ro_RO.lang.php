@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Tabloul de bord Listă apeluri',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare apeluri',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare apeluri',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Apeluri',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Atrbuit lui',
     'LBL_LIST_MY_CALLS' => 'Apelurile mele',
     'LBL_MY_SCHEDULED_CALLS' => 'Apelurile mele programate',
+    'LBL_GUEST_CALLS' => 'Apelurile mele ca invitat',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Apeluri programate ca invitat',
     'LBL_SELECT_FROM_DROPDOWN' => 'Vă rugăm să faceţi o selecţie din Asociate Cu lista de abandon prima oara.',
 	'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui',
 	'LBL_ASSIGNED_TO_ID' => 'Utilizator Atribuit',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Anulare',
     'LBL_EMPTY_SEARCH_RESULT' => 'Ne pare rau, nu au fost găsite rezultate. Vă rugăm să creaţi un invitat de mai jos.',
     'LBL_NO_ACCESS' => 'Nu poti accesa acest raport din cauza restrictiilor de permisiune.',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Identificare contact Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Repeta',
     'LBL_REPEAT_INTERVAL' => 'interval',
     'LBL_REPEAT_END' => 'Sfarsit',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Intalnit cu {{{this}}}',
     'LBL_SEND_INVITES' => 'Trimite invitatii',
     'LBL_REMINDER_TITLE' => 'Apel',
+    'LBL_CALL_RECORDING_URL' => 'URL înregistrare',
+    'LBL_CALL_RECORDING' => 'Înregistrare',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Ai programat {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> pentru {{formatDate date_start}}.',

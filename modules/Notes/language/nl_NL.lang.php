@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Dashboard notitielijst',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Dashboard Notitiesrecord',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer aantekeningen',
 
+    'LBL_RELATED_CONTACT' => 'Gekoppeld contact',
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om de organisatie te verwijderen.',
     'LBL_ACCOUNT_ID' => 'Organisatie ID:',
     'LBL_CASE_ID' => 'Casus-ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Persoon ID:',
     'LBL_CONTACT_NAME' => 'Persoon:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notities',
+    'LBL_ATTACHMENTS' => 'Bijlagen',
+    'LBL_ATTACHMENT_FLAG' => 'Is een bijlage',
     'LBL_DESCRIPTION' => 'Notitie',
     'LBL_EMAIL_ADDRESS' => 'E-mailadres:',
     'LBL_EMAIL_ATTACHMENT' => 'E-mailbijlage',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notities & bijlagen',
     'LBL_NOTE' => 'Notitie:',
     'LBL_OPPORTUNITY_ID' => 'Opportunity-ID:',
+    'LBL_NOTE_PARENT_ID' => 'Opmerking bovenliggende ID:',
     'LBL_PARENT_ID' => 'Parent ID:',
     'LBL_PARENT_TYPE' => 'Type bovenliggend',
     'LBL_EMAIL_TYPE' => 'Type e-mail',

@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => '프로세스 비즈니스 규칙',
   'LBL_MODULE_NAME_SINGULAR' => '프로세스 비즈니스 규칙',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '프로세스 비즈니스 규칙 포커스 서랍',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '프로세스 비즈니스 규칙 기록 대시보드',
   'LBL_RST_UID' => '비즈니스 규칙 ID',
   'LBL_RST_TYPE' => '비즈니스 규칙 유형',
   'LBL_RST_DEFINITION' => '비즈니스 규칙 정의',

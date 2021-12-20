@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Δυνητικών Πελατών',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Δυνητικών Πελατών',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης δυνητικών πελατών',
 
     'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε τον δυνητικό πελάτη.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Περιγραφή Λογαριασμού',
@@ -325,4 +326,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Αδυναμία αλλαγής της κατάστασης της {{moduleSingular}}. Αυτή η {{moduleSingular}} έχει ήδη μετατραπεί.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Πρόβλεψη μετατροπής δυνητικών πελατών',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Προβολή λεπτομερειών πρόβλεψης για έναν συγκεκριμένο δυνητικό πελάτη',
 );

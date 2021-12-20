@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => '按 ID 修改',
     'LBL_EXPORT_CREATED_BY' => '按 ID 建立',
     'LBL_EXPORT_TYPE_NAME' => '類型名稱',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => '合約集點抽屜',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => '合約紀錄儀表板',
 );

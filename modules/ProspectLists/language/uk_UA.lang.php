@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Інформаційна панель списку списків цільових аудиторій споживачів',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Інформаційна панель записів про списки цільових аудиторій споживачів',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель списків цільових аудиторій',
+  'LBL_RELATED_ACCOUNTS' => 'Пов’язані контрагенти',
+  'LBL_RELATED_CONTACTS' => 'Пов’язані контакти',
+  'LBL_RELATED_LEADS_TARGETS' => 'Пов’язані потенційні клієнти і цільова аудиторія',
 
   'LBL_MODULE_NAME' => 'Списки цільових аудиторій споживачів',
   'LBL_MODULE_NAME_SINGULAR' => 'Список цільових аудиторій споживачів',

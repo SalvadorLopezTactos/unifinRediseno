@@ -32,7 +32,7 @@
 <input type="hidden" name="repeat_dow" id="repeat_dow">
 
 <div id="form_content">
-	<input type="hidden" name="date_start" id="date_start" value="{$user_default_date_start}">
+	<input type="hidden" name="date_start" id="date_start" value="{$user_default_date_start|escape:'html':'UTF-8'}">
 	<input type="hidden" name="duration_hours" id="duration_hours">
 	<input type="hidden" name="duration_minutes" id="duration_minutes">
 </div>
@@ -47,7 +47,7 @@ function cal_isValidDuration(){
 	if(typeof form.duration_hours == "undefined" || typeof form.duration_minutes == "undefined")
 		return true;
 	if(form.duration_hours.value + form.duration_minutes.value <= 0){
-		alert('{/literal}{$MOD.NOTICE_DURATION_TIME}{literal}'); 
+		alert('{/literal}{$MOD.NOTICE_DURATION_TIME|escape:'javascript':'UTF-8'}{literal}');
 		return false; 
 	} 
 	return true;

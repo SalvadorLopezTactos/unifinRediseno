@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Protsessi ärireeglid',
   'LBL_MODULE_NAME_SINGULAR' => 'Protsessi ärireegel',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Protsessi ärireeglite fookuse sahtel',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Protsessi ärireeglite kirjete armatuurlaud',
   'LBL_RST_UID' => 'Ärireegli ID',
   'LBL_RST_TYPE' => 'Ärireegli tüüp',
   'LBL_RST_DEFINITION' => 'Ärireegli määratlus',

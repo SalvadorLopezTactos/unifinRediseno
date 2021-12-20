@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'لوحة معلومات قائمة المكالمات',
     'LBL_CALLS_RECORD_DASHBOARD' => 'لوحة معلومات سجل المكالمات',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم المكالمات',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'المكالمات',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'المستخدم المعين',
     'LBL_LIST_MY_CALLS' => 'المكالمات الخاصة بي',
     'LBL_MY_SCHEDULED_CALLS' => 'المكالمات المجدولة الخاصة بي',
+    'LBL_GUEST_CALLS' => 'مكالماتي كضيف',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'مكالماتي المجدولة كضيف',
     'LBL_SELECT_FROM_DROPDOWN' => 'يرجى التحديد من القائمة ذات الصلة المنسدلة أولاً.',
 	'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى',
 	'LBL_ASSIGNED_TO_ID' => 'المستخدم المعين',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'إلغاء',
     'LBL_EMPTY_SEARCH_RESULT' => 'معذرة، لم يتم العثور على نتائج. يرجى إنشاء المدعو التالي.',
     'LBL_NO_ACCESS' => 'لا يمكنك الوصول لإنشاء وحدة $',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'معرف اتصال Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'التكرار',
     'LBL_REPEAT_INTERVAL' => 'كل',
     'LBL_REPEAT_END' => 'النهاية',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'الاتصال بـ {{{this}}}',
     'LBL_SEND_INVITES' => 'إرسال دعوات',
     'LBL_REMINDER_TITLE' => 'المكالمة:',
+    'LBL_CALL_RECORDING_URL' => 'عنوان URL التسجيل',
+    'LBL_CALL_RECORDING' => 'التسجيل',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'تم إنشاء {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a> بنجاح.',

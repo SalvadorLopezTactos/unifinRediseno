@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Waarschuwing: U wijzigt de automatische importeer instellingen, hetgeen kan leiden tot gegevensverlies.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Waarschuwing: Automatisch importeren moet zijn ingeschakeld voor het automatisch aanmaken van cases.',
 	'LBL_EDIT_LAYOUT' => 'Wijzig lay-out' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-mailadres',
+    'LBL_EMAIL_PROVIDER' => 'E-mail Provider',
+    'LBL_AUTH_STATUS' => 'Status autorisatie',
 );
-?>

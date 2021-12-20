@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Dashbord for feilliste',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Dashbord for feiloppføring',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Feil fokusskuff',
 
   'LBL_MODULE_NAME' => 'Feil',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Feil',

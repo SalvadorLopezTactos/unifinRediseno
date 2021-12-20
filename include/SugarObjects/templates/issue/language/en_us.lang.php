@@ -35,6 +35,7 @@ $mod_strings = array (
     'LBL_HOURS_TO_RESOLUTION' => 'Hours to Resolution',
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Business Hours to Resolution',
     'LBL_PENDING_PROCESSING' => 'Pending Processing',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date *',
   'LBL_CREATED_BY' => 'Created by:',
   'LBL_DATE_CREATED' => 'Date Created:',
   'LBL_DATE_ENTERED' => 'Date Created:',

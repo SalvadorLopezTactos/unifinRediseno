@@ -82,11 +82,7 @@ else {
  	// based on the query they used on that popup to relate them to the parent record
  	if(!empty($_REQUEST['select_entire_list']) &&  $_REQUEST['select_entire_list'] != 'undefined' && isset($_REQUEST['current_query_by_page'])){
 		$order_by = '';
-		$current_query_by_page_array = InputValidation::getService()->getValidInputRequest(
-			'current_query_by_page', 
-			array('Assert\PhpSerialized' => array('base64Encoded' => true))
-		);
-
+        $current_query_by_page_array = unserialize(base64_decode($_REQUEST['current_query_by_page']), ['allowed_classes' => false]);
         $module = $current_query_by_page_array['module'];
         $seed = BeanFactory::newBean($module);
         if(empty($seed)) sugar_die($GLOBALS['app_strings']['ERROR_NO_BEAN']);

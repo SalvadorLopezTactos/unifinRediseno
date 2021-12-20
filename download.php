@@ -204,8 +204,8 @@ else {
 		@ob_end_clean();
 		ob_start();
 
-	        readfile($download_location);
+        readfile($download_location);
+
 		@ob_flush();
 	}
 }
-?>

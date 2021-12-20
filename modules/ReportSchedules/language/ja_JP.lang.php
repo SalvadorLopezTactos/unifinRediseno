@@ -18,8 +18,12 @@ $mod_strings = array(
     'LBL_TIME_INTERVAL' => 'リピートタイプ',
     'LBL_ACTIVE' => 'アクティブ',
     'LBL_NEXT_RUN' => '次のスケジュールされたメール',
-    'LBL_USERS_SUBPANEL_TITLE' => 'ユーザ',
+    'LBL_USERS_SUBPANEL_TITLE' => 'ユーザー',
     'LBL_FILTER_BY_REPORT' => 'レポートごと',
     'LBL_RECENTLY_MODIFIED' => '最近変更された',
-    'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> を正しく作成しました。スケジュールを開き、ユーザサブパネルからユーザを追加します。',
+    'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> を正しく作成しました。スケジュールを開き、ユーザーサブパネルからユーザーを追加します。',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'このレポートのスケジュール',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'レポートスケジュールのレコードダッシュボード',
 );

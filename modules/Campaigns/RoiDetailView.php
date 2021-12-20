@@ -174,6 +174,8 @@ $click_thru_links = $campaignsData['click_thru_link'];
         $smarty->assign("ADMIN_EDIT","<a href='index.php?action=index&module=DynamicLayout&from_action=". urlencode($request_action) ."&from_module=". urlencode($request_module) ."&record=". urlencode($request_record) . "'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDIT_LAYOUT'])."</a>");
     }
 
+    $smarty->assign('HAS_EDIT_ACCESS', $focus->ACLAccess('edit'));
+
     $detailView->processListNavigation($xtpl, "CAMPAIGN", $offset, $focus->is_AuditEnabled());
     // adding custom fields:
     global $xtpl;

@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Felter markeret til sletning',
     'LBL_NO_RECORDS_MARKED' => 'Ingen felter eller poster er markeret til sletning.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Data beskyttelsespost, dashboard',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Databeskyttelse',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modulet Databeskyttelse sporer privatlivsbeskyttelsesaktiviteter, herunder samtykke og emneanmodninger, for at understøtte din organisationens privatlivsbeskyttelsesprocedurer. Oprettelse af en databeskyttelsespost relateret til en enkeltpersons post (f.eks. en kontakt) for at spore samtykke eller handle på en anmodning om beskyttelse af personlige oplysninger.',

@@ -38,13 +38,6 @@ $timedate = TimeDate::getInstance();
 setPhpIniSettings();
 $locale = Localization::getObject();
 
-if(get_magic_quotes_gpc() == 1) {
-   $_REQUEST = array_map("stripslashes_checkstrings", $_REQUEST);
-   $_POST = array_map("stripslashes_checkstrings", $_POST);
-   $_GET = array_map("stripslashes_checkstrings", $_GET);
-}
-
-
 $GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
 $setup_sugar_version = $sugar_version;
 $install_script = true;
@@ -303,8 +296,6 @@ EOHTML;
     die();
 }
 
-
-
     $exclude_files = array('register.php','download_modules.php');
 
 if(isset($next_step) && isset($workflow[$next_step]) && !in_array($workflow[$next_step],$exclude_files) && isset($sugar_config['installer_locked']) && $sugar_config['installer_locked'] == true) {
@@ -355,8 +346,6 @@ if($next_clicked) {
                 $_SESSION['setup_license_key']  = $_REQUEST['setup_license_key'];
             }
             $_SESSION['licenseKey_submitted']      = true;
-
-
 
             break;
 

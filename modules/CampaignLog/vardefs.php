@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $dictionary['CampaignLog'] = array ('audited'=>false,
+    'archive' => false,
 	'comment' => 'Tracks items of interest that occurred after you send an email campaign',
 	'table' => 'campaign_log',
 	'fields' => array (
@@ -292,6 +293,11 @@ $dictionary['CampaignLog'] = array ('audited'=>false,
 			'type' =>'index',
 			'fields'=>array('target_id','deleted')
 		),
+        [
+            'name' => 'idx_camplog_deleted',
+            'type' => 'index',
+            'fields' => ['deleted'],
+        ],
 	),
 	'relationships' => array (
         'campaignlog_contact' => array( 'lhs_module'=> 'CampaignLog',

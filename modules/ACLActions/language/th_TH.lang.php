@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'แสดงรายการบทบาทแยกตามผู้ใช้',
 'LBL_ROLES_SUBPANEL_TITLE'=>'บทบาทของผู้ใช้',
 'LBL_SEARCH_FORM_TITLE'=>'ค้นหา',
+'LBL_ACTION_RECORD_VIEW'=>'มุมมองระเบียน',
 'LBL_ACTION_VIEW'=>'ดู',
 'LBL_ACTION_EDIT'=>'แก้ไข',
 'LBL_ACTION_DELETE'=>'ลบ',

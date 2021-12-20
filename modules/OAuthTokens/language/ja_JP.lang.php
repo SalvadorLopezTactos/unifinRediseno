@@ -23,6 +23,6 @@ $mod_strings = array (
     'LBL_TS' => 'タイムスタンプ',
     'LBL_LIST_DELETE' => 'トークンの削除',
     'LBL_CONSUMER' => '顧客名',
-    'LBL_OAUTH_DISABLED' => 'OAuthのサポートが有効になっていません。 PHPのOAuthの拡張機能が失われることがあります。管理者にお問い合わせください。',
+    'LBL_OAUTH_DISABLED' => 'OAuthのサポートが有効になっていません。 PHPのOAuthの拡張機能が失われることがあります。管理者に連絡してください。',
     'LBL_CONTACTS' => '取引先担当者名',
 );

@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Contacte',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Prospecți',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Utilizatori',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Centre de afaceri',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare centre de afaceri',
 ];

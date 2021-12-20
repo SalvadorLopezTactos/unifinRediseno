@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'För rapport',
     'LBL_RECENTLY_MODIFIED' => 'Nyligen ändrad',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du har skapat {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Öppna schemat för att lägga till användare via användarnas underpanel.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Detta rapportschema',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Instrumentpanel för rapportschemaposter',
 );

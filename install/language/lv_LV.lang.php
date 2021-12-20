@@ -70,7 +70,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Brīdinājums: Nevar ierakstīt',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Sugar neatbalsta jūsu PHP versiju. Jums ir jāuzstāda Sugar programmai atbilstoša versija. Lūdzu skatīties PHP atbilstības matricu laidiena piezīmēs. Jūsu pašreizējā versija ir',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Suagr neatbalsta Jūsu IIS versiju - uzstādiet ar Sugar lietojumu saderīgu versiju. Informācija par atbalstītajām IIS versijām sniegta Laidiena piezīmēs Atbilstību matricā.  Jūsu versija ir',
-	'ERR_CHECKSYS_FASTCGI'              => 'Konstatēts, ka netiek izmantota FastCGI  funkciju kartēšana PHP valodai. Jums būs jāuzstāda/jākonfigurē Sugar lietojumam atbilstoša versija.  Informācija par atbalstītajām versijām sniegta  laidiena piezīmēs Atbilstību matricā. Papildus informācijai skatīt <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a>',
+    'ERR_CHECKSYS_FASTCGI'              => 'Konstatēts, ka netiek izmantota FastCGI  funkciju kartēšana PHP valodai. Jums būs jāuzstāda/jākonfigurē Sugar lietojumam atbilstoša versija.  Informācija par atbalstītajām versijām sniegta  laidiena piezīmēs Atbilstību matricā. Papildus informācijai skatīt <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Optimālai IIS/FastCGI sapi lietošanai php.ini datnē parametram fastcgi.logging uzstādiet vērtību 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalēta neatbalstīta PHP versija: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Datubāze nav pieejama',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php saderības režīms ir ieslēgts. Iestatiet zend.ze1_compatibility_mode uz Izslēgts, lai turpinātu',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'E-pasta paziņojumi par tikšanos',
+        'subject' => 'SugarCRM tikšanās - $event_name ',
+        'description' => 'Šī veidne tiek izmantota, kad Sistēma lietotājam nosūta paziņojumus par tikšanos.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Kam: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user uzaicināja Jūs uz tikšanos</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Temats: $event_name<br/>
+	Sākuma datums: $start_date<br/>
+	Beigu datums: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Apraksts: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Pieņemt šo tikšanos:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Nekonkrēti pieņemt šo tikšanos:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Noraidīt šo tikšanos:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Kam: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user uzaicināja Jūs uz tikšanos
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Temats: $event_name
+Sākuma datums: $start_date
+Beigu datums: $end_date
 
-Description: $description
+Apraksts: $description
 
-Accept this meeting:
+Pieņemt šo tikšanos:
 <$accept_link>
 
-Tentatively Accept this meeting
+Nekonkrēti pieņemt šo tikšanos
 <$tentative_link>
 
-Decline this meeting
+Noraidīt šo tikšanos
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'E-pasta paziņojumi par zvaniem',
+        'subject' => 'SugarCRM zvans- $event_name ',
+        'description' => 'Šī veidne tiek izmantota, kad Sistēma lietotājam nosūta paziņojumus par zvanu.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Kam: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user uzaicināja Jūs uz zvanu</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Temats: $event_name<br/>
+	Sākuma datums: $start_date<br/>
+	Ilgums: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Apraksts: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Pieņemt šo zvanu:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Nekonkrēti pieņemt šo zvanu:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Noraidīt šo zvanu:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Kam: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user uzaicināja Jūs uz zvanu
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Temats: $event_name
+Sākuma datums: $start_date
+Ilgums: $hoursh, $minutesm
 
-Description: $description
+Apraksts: $description
 
-Accept this call:
+Pieņemt šo zvanu:
 <$accept_link>
 
-Tentatively Accept this call
+Nekonkrēti pieņemt šo zvanu
 <$tentative_link>
 
-Decline this call
+Noraidīt šo zvanu
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'E-pasta paziņojumi par piešķiršanu',
+        'subject' => 'SugarCRM - piešķirts modulis $module_name ',
+        'description' => 'Šī veidne tiek izmantota, kad Sistēma lietotājam nosūta piešķirto uzdevumu.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user piešķīra &nbsp;$module_name lietotājam&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Varat apskatīt šo moduli &nbsp;$module_name saitē:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user piešķīra moduli $module_name lietotājam $assigned_user.
 
-You may review this $module_name at:
+Varat apskatīt šo moduli $module_name saitē:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'E-pasta paziņojumi par ieplānotajiem pārskatiem',
+        'subject' => 'Ieplānotais pārskats: $report_name no $report_time',
+        'description' => 'Šī veidne tiek izmantota, kad Sistēma lietotājam nosūta ieplānoto pārskatu.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Godātais/-ā $assigned_user!</p>
+<p>Pielikumā ir automātiski ģenerētais pārskats, kas ir ieplānots Jums.</p>
+<p>Pārskata nosaukums: $report_name</p>
+<p>Pārskata izpildes datums un laiks: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Godātais/-ā $assigned_user!
 
-Attached is an auto generated report that has been scheduled for you.
+Pielikumā ir automātiski ģenerētais pārskats, kas ir ieplānots Jums.
 
-Report Name: $report_name
+Pārskata nosaukums: $report_name
 
-Report Run Date and Time: $report_time',
+Pārskata izpildes datums un laiks: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'E-pasta paziņojumi par sistēmas komentāru žurnālu',
+        'subject' => 'SugarCRM - $initiator_full_name pieminēja jūs modulī $singular_module_name',
+        'description' => 'Šī veidne tiek izmantota, lai nosūtītu e-pasta paziņojumus lietotājiem, kas ir atzīmēti komentāru žurnāla sadaļā.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Jūs pieminēja tālāk norādītā ieraksta komentāru žurnālā:  <a href="$record_url">$record_name</a></p>
+                <p>Lai apskatītu komentāru, pierakstieties Sugar sistēmā.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Jūs pieminēja tālāk norādītā ieraksta komentāru žurnālā: $record_name
+            Lai apskatītu komentāru, pierakstieties Sugar sistēmā.',
     ],
 
     'advanced_password_new_account_email' => array(

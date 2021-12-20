@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Korisničko ime',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Vrati',
 	'LBL_SYSTEM_SETTINGS' => 'Postavke sustava',
-	'LBL_SKYPEOUT_ON_DESC' => 'Omogućava korisnicima da kliknu na telefonske brojeve za pozivanje s pomoću usluge SkypeOut&reg;. Brojevi moraju biti ispravno formatirani za upotrebu te značajke. Točnije, moraju izgledati kao „+” „pozivni broj zemlje” „broj”, npr. +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'Omogući integraciju usluge SkypeOut&reg;',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Korisnicima omogućava uspostavu poziva klikom na telefonske brojeve s pomoću zadanog softvera za integraciju računala i telefonije (CTI).',
+    'LBL_DIALOUT_ON' => 'Omogući poziv klikom',
+    'LBL_DIALOUT_TITLE' => 'Odlazni poziv',
     'LBL_TWEETTOCASE_ON_DESC' => 'Omogućuje korisnicima stvaranje slučajeva od objava na Twitteru',
     'LBL_TWEETTOCASE_ON' => 'Omogući integraciju objava na Twitteru&reg; u slučajeve',
     'LBL_TWEETTOCASE_TITLE' => 'Objave na Twitteru&reg; u slučajeve',
@@ -373,10 +373,10 @@ Fontovi koje podržava SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-Ako izaberete ne umetati svoj font u PDF, generirana PDF datoteka bit će manja, no upotrijebit će se zamjena ako font nije dostupan u sustavu vašeg čitača.
+Ako odlučite da nećete umetati svoj font u PDF, generirana PDF datoteka bit će manja, no upotrijebit će se zamjena ako font nije dostupan u sustavu vašeg čitača.
 <br><br>
-Dodavanje PDF fonta u SugarCRM zahtijeva korake 1 i 2 dokumentacije o TCPDF fontovima dostupne u odjeljku „DOCS” na web-mjestu TCPDF <a href="http://www.tcpdf.org" target="_blank"></a>.
-<br><br>Alati pfm2afm i ttf2ufm dostupni su u fontovima/alatima u paketu TCPDF koji možete preuzeti u odjeljku „DOWNLOAD” na web-mjestu TCPDF <a href="http://www.tcpdf.org" target="_blank"></a>.
+Za dodavanje PDF fonta u SugarCRM potrebno je slijediti korake 1 i 2 dokumentacije o TCPDF fontovima dostupne u odjeljku „DOCS” na <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">mrežnom mjestu TCPDF</a>.
+<br><br>Alati pfm2afm i ttf2ufm dostupni su u fontovima/alatima u paketu TCPDF koji možete preuzeti u odjeljku „DOWNLOAD” na <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">mrežnom mjestu TCPDF</a>.
 <br><br>Učitajte metričku datoteku generiranu u 2. koraku i svoju datoteku fonta u nastavku.
 BSOFR
 ,
@@ -429,6 +429,9 @@ Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?mod
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modul izvješća nije dostupan u mobilnom prikazu temeljenom na pregledniku.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksimalna dužina mora biti veća od minimalne dužine',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimalna dužina mora biti pozitivna vrijednost',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maksimalna dužina mora biti pozitivna vrijednost',
     'ERR_EMPTY_SAML_LOGIN' => 'URL adresa za prijavu u SAML ne može biti prazna',
     'ERR_EMPTY_SAML_CERT' => 'Certifikat za SAML ne može biti prazan',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID entiteta u SAML-u ne može biti prazan',
@@ -442,9 +445,6 @@ Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?mod
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Pregled aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Omogući pregled aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uključuje pregled aktivnosti za aplikaciju',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Omogući dodatni sadržaj na zaslonu za prijavu',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Definicije procesa automatskog spremanja',

@@ -18,6 +18,7 @@ use ModuleInstaller;
 use SugarAutoLoader;
 use Sugarcrm\Sugarcrm\Denormalization\Relate\Db\Db;
 use Sugarcrm\Sugarcrm\Denormalization\Relate\Db\OfflineOperations;
+use Sugarcrm\Sugarcrm\Denormalization\Relate\Hook\DatabaseConfiguration;
 use Sugarcrm\Sugarcrm\Denormalization\Relate\Process\Entity;
 use BeanFactory;
 use VardefManager;
@@ -170,9 +171,6 @@ final class Process
      */
     private function configureLogicHook(Entity $entity, bool $syncInProgress): void
     {
-        $administration = Administration::getSettings('denormalization');
-        $fields = $administration->settings['denormalization_fields'] ?? [];
-
         $link = [
             'linked_field_name' => $entity->sourceFieldName,
             'join_table' => $entity->relationship->join_table,
@@ -193,31 +191,37 @@ final class Process
             $link['join_linked_key'] = $entity->relationship->join_key_lhs;
         }
 
+        $hookConfig = new DatabaseConfiguration();
+
         // linked bean update options
-        $fields[$entity->getSourceModuleName()][$entity->sourceFieldName] = [
-            'module' => $entity->getTargetModuleName(),
-            'is_main' => true,
-            'denorm_field_name' => $entity->targetFieldName,
-            'link' => $link,
-            // if synchronization process still alive we should update TMP table too
-            'synchronization_in_progress' => $syncInProgress,
-        ];
+        $hookConfig->setFieldConfiguration(
+            $entity->getSourceModuleName(),
+            $entity->sourceFieldName,
+            [
+                'module' => $entity->getTargetModuleName(),
+                'is_main' => true,
+                'denorm_field_name' => $entity->targetFieldName,
+                'link' => $link,
+                // if synchronization process still alive we should update TMP table too
+                'synchronization_in_progress' => $syncInProgress,
+            ]
+        );
 
         // main bean update options
-        $fields[$entity->getTargetModuleName()][$entity->fieldName] = [
-            'module' => $entity->getSourceModuleName(),
-            'is_main' => false,
-            'denorm_field_name' => $entity->targetFieldName,
-            'link' => $link,
-            'synchronization_in_progress' => $syncInProgress,
-            // if O2M or O2O relationship changes directly by assigning a new ID - the hook should
-            // update the denormalized field
-            'track_field' => $entity->relationship->type === REL_MANY_MANY ? null : $link['main_key'],
-        ];
-
-        $administration->saveSetting('denormalization', 'fields', $fields, 'base');
-
-        HookHandler::clearCache();
+        $hookConfig->setFieldConfiguration(
+            $entity->getTargetModuleName(),
+            $entity->fieldName,
+            [
+                'module' => $entity->getSourceModuleName(),
+                'is_main' => false,
+                'denorm_field_name' => $entity->targetFieldName,
+                'link' => $link,
+                'synchronization_in_progress' => $syncInProgress,
+                // if O2M or O2O relationship changes directly by assigning a new ID - the hook should
+                // update the denormalized field
+                'track_field' => $entity->relationship->type === REL_MANY_MANY ? null : $link['main_key'],
+            ]
+        );
     }
 
     private function unsetLogicHookConfiguration(Entity $entity): void

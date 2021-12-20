@@ -94,6 +94,12 @@
      * in order to display the new value as soon as possible.
      */
     calculateEndDate: function() {
+        // Don't attempt to recalculate the end date for coterm line items. No
+        // matter what the user enters for start date for those, we don't want
+        // to change this.
+        if (!_.isEmpty(this.model.get('add_on_to_id'))) {
+            return;
+        }
         if (this.canCalculateEndDate()) {
             // Begin with the end date equal to zero hour on the specified start
             // date, correcting any offset added by the javascript Date object

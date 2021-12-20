@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'A felhasználók szerepkör listája',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Felhasználói szerepek',
 'LBL_SEARCH_FORM_TITLE'=>'Keres',
+'LBL_ACTION_RECORD_VIEW'=>'Rekord nézet',
 'LBL_ACTION_VIEW'=>'Mutat',
 'LBL_ACTION_EDIT'=>'Szerkeszt',
 'LBL_ACTION_DELETE'=>'Töröl',

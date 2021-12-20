@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'กฎทางธุรกิจของกระบวนการ',
   'LBL_MODULE_NAME_SINGULAR' => 'กฎทางธุรกิจของกระบวนการ',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'กฎการดำเนินธุรกิจระบบลิ้นชัก',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกฎเกณฑ์การดำเนินการธุรกิจ',
   'LBL_RST_UID' => 'ID กฎทางธุรกิจ',
   'LBL_RST_TYPE' => 'ประเภทกฎทางธุรกิจ',
   'LBL_RST_DEFINITION' => 'การกำหนดกฎทางธุรกิจ',

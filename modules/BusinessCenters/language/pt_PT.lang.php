@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Contactos',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Clientes Potenciais',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Utilizadores',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Dashboard de registo de Centros de negócios',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em centros de negócios',
 ];

@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-註冊您的 Sugar 實例為新的應用程式，從 Google 獲取 API 金鑰和密碼。
-<br/><br>註冊實例的步驟：
-<br/><br/>
-<ol>
-<li>前往 Google 開發者站點：
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>使用您將用於註冊應用程式的 Google 帳戶登入。</li>
-<li>建立新專案</li>
-<li>輸入專案名稱，按一下「建立」</li>
-<li>建立專案之後，啟用 Google Drive 和 Google Contacts API</li>
-<li>在 APIs & Auth > 認證部分建立新的用戶端 ID </li>
-<li>選取「網路應用程式」並按一下「配置」同意螢幕</li>
-<li>輸入產品名稱並按一下「儲存」</li>
-<li>在授權的重新導向 URL 下方輸入下列 URL： {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>按一下創建用戶端 ID</li>
-<li>將用戶端 ID 和密碼複製到下方方塊內。</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        '用 Google 註冊您的 Sugar 實例，以啟用在 Sugar 中使用的 Google 帳戶配置。 ' .
+        '請參閱 <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>連接器文件</a>了解更多訊息。</td></tr></table>',
     'oauth2_client_id' => '用戶端 ID',
-    'oauth2_client_secret' => '用戶端密碼',
+    'oauth2_client_secret' => '客戶端金鑰',
 );

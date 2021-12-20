@@ -173,8 +173,9 @@ class aCase extends Issue
             if (empty($this->resolved_datetime)) {
                 $this->resolved_datetime = TimeDate::getInstance()->nowDb();
             }
-        } elseif (!empty(\SugarConfig::getInstance()->get('clear_resolved_date')) &&
-            $this->isResolvedStatus($this->fetched_row['status'])) {
+        } elseif ($this->fetched_row !== false
+            && SugarConfig::getInstance()->get('clear_resolved_date')
+            && $this->isResolvedStatus($this->fetched_row['status'])) {
             $this->resolved_datetime = '';
         }
         if (empty($this->business_center_id)) {

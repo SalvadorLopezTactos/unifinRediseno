@@ -287,16 +287,9 @@ class Team extends SugarBean
 		return $user_list;
 	}
 
-    public function mark_deleted($id)
+    protected function doMarkDeleted(): void
     {
-        if ($id == $this->id) {
-            $this->delete_team();
-        } else {
-            $bean = BeanFactory::getBean('Teams', $id);
-            if ($bean) {
-                $bean->delete_team();
-            }
-        }
+        $this->delete_team();
 	}
 
 	/**
@@ -605,8 +598,8 @@ class Team extends SugarBean
                             $membership->save();
                         }else{
                              $GLOBALS['log']->debug("Remove membership record {$manager->user_name} from {$this->name}");
-                             $this->users->delete($this->id, $manager->id);
                             $this->getListener()->userRemovedFromTeam($manager->id, $this->id);
+                            $this->users->delete($this->id, $manager->id);
                         }
                     }
                 }
@@ -769,6 +762,15 @@ AND team_id = ?';
         return $id;
 	}
 
+    /**
+     * Return the team id for the Global team.
+     *
+     * @return string
+     */
+    public function getGlobalTeamID()
+    {
+        return $this->retrieve_team_id('Global');
+    }
 
 	/**
 	 * has_records_in_modules

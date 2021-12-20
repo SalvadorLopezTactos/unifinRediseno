@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Felter merket for sletting',
     'LBL_NO_RECORDS_MARKED' => 'Ingen felt eller poster er merket for sletting.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Personvernpostdashbord',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Datavern fokusskuff',
 
     // list view
     'LBL_HELP_RECORDS' => 'Personvernmodulen sporer personvernaktiviteter, inkludert forespørsler om samtykke og navn, for å støtte organisasjonens personvernprosedyrer. Opprett personvernposter relatert til en persons post (f.eks. en kontakt) for å spore samtykke eller handle med en personvernforespørsel.',

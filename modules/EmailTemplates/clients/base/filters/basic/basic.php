@@ -10,10 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['EmailTemplates']['base']['filter']['basic'] = array(
-    'create' => false,
+    'create' => true,
     'quicksearch_field' => array('name'),
     'quicksearch_priority' => 1,
     'filters' => array(
+        array(
+            'id' => 'all_records',
+            'name' => 'LBL_LISTVIEW_FILTER_ALL',
+            'filter_definition' => array(),
+            'editable' => false,
+        ),
         array(
             'id'                => 'all_email_type',
             'name'              => 'LBL_FILTER_EMAIL_TYPE_TEMPLATES',
@@ -27,6 +33,60 @@ $viewdefs['EmailTemplates']['base']['filter']['basic'] = array(
                     ),
                     array(
                         'type' => array('$equals' => 'email'),
+                    ),
+                ),
+            ),
+            'editable'          => false,
+        ),
+        array(
+            'id'                => 'all_campaign_type',
+            'name'              => 'LBL_FILTER_CAMPAIGN_TYPE_TEMPLATES',
+            'filter_definition' => array(
+                '$or' => array(
+                    array(
+                        'type' => array('$is_null' => ''),
+                    ),
+                    array(
+                        'type' => array('$equals' => ''),
+                    ),
+                    array(
+                        'type' => array('$equals' => 'campaign'),
+                    ),
+                ),
+            ),
+            'editable'          => false,
+        ),
+        array(
+            'id'                => 'all_workflow_type',
+            'name'              => 'LBL_FILTER_WORKFLOW_TYPE_TEMPLATES',
+            'filter_definition' => array(
+                '$or' => array(
+                    array(
+                        'type' => array('$is_null' => ''),
+                    ),
+                    array(
+                        'type' => array('$equals' => ''),
+                    ),
+                    array(
+                        'type' => array('$equals' => 'workflow'),
+                    ),
+                ),
+            ),
+            'editable'          => false,
+        ),
+        array(
+            'id'                => 'all_system_type',
+            'name'              => 'LBL_FILTER_SYSTEM_TYPE_TEMPLATES',
+            'filter_definition' => array(
+                '$or' => array(
+                    array(
+                        'type' => array('$is_null' => ''),
+                    ),
+                    array(
+                        'type' => array('$equals' => ''),
+                    ),
+                    array(
+                        'type' => array('$equals' => 'system'),
                     ),
                 ),
             ),

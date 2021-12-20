@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'gelecek yıl',
     'LBL_OPEN_ISSUES' => 'Open {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Recently Resolved',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Filtre Oluştur',
+    'LBL_ERROR_FILTER_EMPTY' => 'Lütfen filtre kriteri ekleyin.',
+    'LBL_ADD_FILTER' => 'Kriter Ekle',
+    'LBL_FILTER_NAME' => 'Filtre adı',
+    'LBL_FILTER_FIELD' => 'Alan',
+    'LBL_FILTER_OPERATOR' => 'Operatör',
+    'LBL_FILTER_VALUE' => 'Değer',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Masaüstü Uygulamasına Kaydet',
+    'LBL_FILTER_LOCAL' => 'Yerel filtre',
 );

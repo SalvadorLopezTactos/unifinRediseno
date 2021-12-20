@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Configurazione Portale',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Abilita portale',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Abilita ricerca prima di aprire un reclamo',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Consenti agli utenti del portale di chiudere il reclamo',
     'LBL_PORTAL_THEME' => 'Tema Portale',
     'LBL_PORTAL_ENABLE' => 'Abilitare',
     'LBL_PORTAL_SITE_URL' => 'Il sito del portale è disponibile all´indirizzo:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleziona per usare questo campo durante la ricerca di record tramite ricerca globale su questo modulo.',
+'LBL_POPHELP_REQUIRED'=>"Creare una formula per determinare se questo campo è obbligatorio nei layout.<br/>"
+    . "I campi obbligatori seguiranno la formula nella vista mobile basata su browser,<br/>"
+    . "ma non seguiranno la formula nelle applicazioni native, come Sugar Mobile per iPhone.<br/>"
+    . "Non seguiranno la formula nel portale Sugar Self-Service.",
+'LBL_POPHELP_READONLY'=>"Creare una formula per determinare se questo campo è di sola lettura nei layout.<br/>"
+        . "I campi di sola lettura seguiranno la formula nella vista mobile basata su browser,<br/>"
+        . "ma non seguiranno la formula nelle applicazioni native, come Sugar Mobile per iPhone.<br/>"
+        . "Non seguiranno la formula nel portale Sugar Self-Service.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selezionare per utilizzare questo campo durante la ricerca di record utilizzando la ricerca globale in questo modulo.',
 //Revert Module labels
 'LBL_RESET' => 'Reimposta',
 'LBL_RESET_MODULE' => 'Reimposta Modulo',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Crittografa',
                 'datetimecombo' =>'Data/ora',
                 'decimal'=>'Decimale',
+                'autoincrement' => 'Incremento automatico',
 ),
 'labelTypes' => array(
     "" => "Etichette utilizzate di frequente",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Tutti i Moduli',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (correlato {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copia da layout',
+'LBL_RELATIONSHIP_TYPE' => 'Relazione',
 );

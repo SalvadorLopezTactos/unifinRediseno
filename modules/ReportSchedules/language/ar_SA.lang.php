@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'حسب التقرير',
     'LBL_RECENTLY_MODIFIED' => 'التعديلات الأخيرة',
     'LBL_RECORD_SAVED_SUCCESS' => 'تم إنشاء {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> بنجاح. افتح الجدول لإضافة المستخدمين عبر اللوحة الفرعية للمستخدمين.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'جدول هذا التقرير',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'لوحة معلومات سجل جداول التقرير',
 );

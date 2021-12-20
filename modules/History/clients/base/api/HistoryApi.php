@@ -97,12 +97,31 @@ class HistoryApi extends RelateApi
 
     public function filterModuleList(ServiceBase $api, array $args, $acl = 'list')
     {
+        $orderByKeys = [];
+        if (!empty($args['order_by'])) {
+            $args['order_by'] = $this->getOrderByFromArgs($args);
+            foreach ($args['order_by'] as $parsedOrderBy) {
+                list($parsedOrderByFieldName, $parsedOrderByDirection) = $parsedOrderBy;
+                $orderByKeys[] = $parsedOrderByFieldName;
+            }
+        }
         if (!empty($args['module_list'])) {
             $module_list = explode(',', $args['module_list']);
             foreach ($this->moduleList as $link_name => $module) {
                 $seed = BeanFactory::newBean($module);
-                if (!in_array($module, $module_list) || !$seed->ACLAccess('list')) {
+                if (!in_array($module, $module_list)) {
+                    // If the module name is invalid (such as XYZ), we don't unset alias_fields
+                    // so function scrubFields will throw an invalid parameter exception
                     unset($this->moduleList[$link_name]);
+                } elseif (!$seed->ACLAccess('list')) {
+                    // If the module name is valid but not supported, such as Messages module
+                    // for an Ent only user, we unset alias_fields and silently ignore that module
+                    // without failing the API
+                    unset($this->moduleList[$link_name]);
+                    $module_list = array_diff($module_list, [$module]);
+                    foreach ($orderByKeys as $key) {
+                        unset($args['alias_fields'][$key][$module]);
+                    }
                 }
             }
         }
@@ -127,7 +146,6 @@ class HistoryApi extends RelateApi
         // Also check that at least one module has order by field
         $removedModuleDirection = false;
         if (!empty($args['order_by'])) {
-            $args['order_by'] = $this->getOrderByFromArgs($args);
             foreach ($args['order_by'] as $parsedOrderByKey => $parsedOrderBy) {
                 list($parsedOrderByFieldName, $parsedOrderByDirection) = $parsedOrderBy;
                 // `picture` is considered the same field as `module` because it
@@ -264,7 +282,7 @@ class HistoryApi extends RelateApi
             }
             $args['alias_fields'] = $validAliases;
         }
- 
+
         foreach ($args['order_by'] as $key => $order_by) {
             foreach ($this->moduleList as $module_name) {
                 $seed = BeanFactory::newBean($module_name);

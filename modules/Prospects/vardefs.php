@@ -12,6 +12,7 @@
 
 $dictionary['Prospect'] = array(
     'table' => 'prospects',
+    'archive' => false,
     'audited' => true,
     'unified_search' => true,
     'full_text_search' => true,
@@ -125,6 +126,13 @@ $dictionary['Prospect'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'prospect_messages',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'dataprivacy' => array(
             'name' => 'dataprivacy',
             'type' => 'link',
@@ -250,6 +258,17 @@ $dictionary['Prospect'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Prospects'
         ),
+        'prospect_messages' => [
+            'lhs_module' => 'Prospects',
+            'lhs_table' => 'prospects',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Prospects',
+        ],
         'prospect_meetings' => array(
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',

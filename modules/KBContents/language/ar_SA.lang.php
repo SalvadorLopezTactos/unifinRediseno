@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة قاعدة المعارف',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل قاعدة المعارف',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم قاعدة المعارف',
 
     'LBL_MODULE_NAME' => 'قاعدة المعارف',
     'LBL_MODULE_NAME_SINGULAR' => 'مقالة قاعدة المعارف',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'غير مفيد',
     'LBL_RATING' => 'التصنيف',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'تنزيل الكل',
-    'LBL_DOWNLOAD_ONE' => 'تنزيل',
-    'LBL_ATTACHMENTS' => 'المرفقات:',
-    'LBL_ADD_ATTACHMENT' => 'استعراض',
     'LBL_CATEGORIES' => 'فئات قاعدة المعارف',
     'LBL_CATEGORY_NAME' => 'الفئة',
     'LBL_USEFULNESS' => 'الإفادة',

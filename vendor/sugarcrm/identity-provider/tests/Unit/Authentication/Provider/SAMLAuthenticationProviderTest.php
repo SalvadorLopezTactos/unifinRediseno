@@ -12,8 +12,6 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Authentication\Provider;
 
-use OneLogin\Saml2\Response;
-use PHPUnit_Framework_TestCase;
 use Sugarcrm\IdentityProvider\Authentication\Provider\SAMLAuthenticationProvider;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\ConsumeLogoutToken;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\AcsToken;
@@ -24,12 +22,16 @@ use Sugarcrm\IdentityProvider\Authentication\Token\SAML\ResultToken;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\SAMLUserProvider;
 use Sugarcrm\IdentityProvider\Tests\IDMFixturesHelper;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Sugarcrm\IdentityProvider\Saml2\Request\AuthnRequest;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\SAMLUserMapping;
-use Sugarcrm\IdentityProvider\Authentication\User\SAMLUserChecker;
+
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserCheckerInterface;
+
+use OneLogin\Saml2\Response;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class covers all step of SAML authentication.
@@ -56,7 +58,7 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
     protected $userMapping = null;
 
     /**
-     * @var SAMLUserChecker
+     * @var UserCheckerInterface
      */
     protected $samlUserChecker;
 
@@ -75,10 +77,13 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
         $this->user = $this->createMock(User::class);
         $this->samlUserProvider = $this->createMock(SAMLUserProvider::class);
         $this->samlUserProvider->method('loadUserByUsername')->willReturn($this->user);
-        $this->samlUserChecker = $this->createMock(SAMLUserChecker::class);
+        $this->samlUserChecker = $this->getMockBuilder(UserCheckerInterface::class)->getMock();
         $this->session = $this->createMock(SessionInterface::class);
         $this->response = $this->createMock(Response::class);
-        $this->userMapping = $this->createMock(SAMLUserMapping::class);
+        $this->userMapping = $this->getMockBuilder(SAMLUserMapping::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['map'])
+            ->getMock();
         $this->userMapping->method('map')->willReturn([]);
     }
 
@@ -617,7 +622,9 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
             'url' =>
                 'https://sugarcrm-idmeloper-dev.onelogin.com/trust/saml2/http-redirect/slo/622315?SAMLResponse=',
             'method' => 'GET',
-            'parameters' => [],
+            'parameters' => [
+                'nameId' => 'ddolbik@sugarcrm.com',
+            ],
         ];
         $samlProvider = new SAMLAuthenticationProvider(
             $settings,

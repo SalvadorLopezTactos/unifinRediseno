@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Találkozók listája műszerfal',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Találkozó bejegyzések műszerfal',
+    'LBL_LEAD_GUESTS' => 'Ajánlás vendégek',
+    'LBL_CONTACT_GUESTS' => 'Vendégekkel történő kapcsolatfelvétel',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Találkozások figyelemfelhívás',
 
 	'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a találkozó törléséhez!',
 	'LBL_ACCEPT_THIS'=>'Elfogadja?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Irány',
 	'LBL_LIST_DUE_DATE'=>'Esedékesség dátuma',
 	'LBL_LIST_FORM_TITLE' => 'Találkozók listája',
-	'LBL_LIST_MY_MEETINGS' => 'Találkozóim',
+    'LBL_LIST_MY_MEETINGS' => 'Találkozóim',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Ütemezett Találkozóim',
+    'LBL_GUEST_MEETINGS' => 'Találkozóim vendégként',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Ütemezett találkozóim vendégként',
 	'LBL_LIST_RELATED_TO' => 'Társítva',
 	'LBL_LIST_STATUS'=>'Állapot',
 	'LBL_LIST_SUBJECT' => 'Tárgy',

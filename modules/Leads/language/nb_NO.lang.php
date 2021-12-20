@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Dashbord for emneliste',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Dashbord for emneoppføring',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Kundeemner fokusskuff',
 
     'ERR_DELETE_RECORD' => 'en_us A record number must be specified to delete the lead.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Bedriftbeskrivelse',
@@ -313,4 +314,8 @@ For å opprette {{module_name}}:
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Kan ikke endre {{moduleSingular}} status. Denne {{moduleSingular}} har allerede blitt konvertert.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Emnekonverteringsprediksjon',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Se prediskjonsdetaljer for et bestemt emne',
 );

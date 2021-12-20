@@ -115,10 +115,8 @@ class UsersApi extends ModuleApi
         $this->requireArgs($args, array('module', 'record'));
         // loadBean() handles exceptions for bean validation
         $user = $this->loadBean($api, $args, 'delete');
-        $user->deleted = 1;
-        $user->status = 'Inactive';
-        $user->employee_status = 'Terminated';
-        $user->save();
+
+        $user->mark_deleted($user->id);
 
         return array('id' => $user->id);
     }

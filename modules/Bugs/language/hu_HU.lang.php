@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Árajánlatok listája műszerfal',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Hiba bejegyzések műszerfal',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás hibái',
 
   'LBL_MODULE_NAME' => 'Hibák',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Hiba',

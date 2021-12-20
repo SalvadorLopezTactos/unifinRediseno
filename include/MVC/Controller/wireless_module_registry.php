@@ -25,4 +25,8 @@ $wireless_module_registry = array(
     'Notes' => array(),
 	'Reports' => array('disable_create' => true),
     'Emails' => array(),
+    'pmse_Inbox' => array(),
+    'Contracts' => [],
+    'ContractTypes' => [],
+    'KBContents' => [],
 );

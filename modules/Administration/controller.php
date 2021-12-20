@@ -473,25 +473,44 @@ class AdministrationController extends SugarController
             sugar_die($app_strings['ERR_NOT_ADMIN']);
         }
 
-        $api_platforms = json_decode(
+        $this->savePlatformMetadata('custom_api_platforms', 'platforms');
+        $this->savePlatformMetadata('platformoptions', 'platformoptions', '.ext');
+
+        $repairAndClear = new RepairAndClear();
+        $repairAndClear->rebuildExtensions();
+    }
+
+    /**
+     * Util to save an API Platform metadata file based on the argument passed in
+     * the http request.
+     *
+     * @param String $filename Name of file. Must be the same as the API arg key
+     * @param String $arrayName Name of global array defined in the metadata file (e.g. platforms)
+     * @param String $ext Optional file extension. Used to save extension metadata in .ext.php files
+     */
+    protected function savePlatformMetadata(String $filename, String $arrayName, String $ext = ''): void
+    {
+        $platformMeta = json_decode(
             html_entity_decode(
-                InputValidation::getService()->getValidInputRequest('custom_api_platforms'),
+                InputValidation::getService()->getValidInputRequest($filename),
                 ENT_QUOTES
-            )
+            ),
+            true
         );
 
-        $file_loc = "custom/Extension/application/Ext/Platforms/custom_api_platforms.php";
+        $file_loc = "custom/Extension/application/Ext/Platforms/$filename$ext.php";
 
         $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
-        foreach ($api_platforms as $platform) {
-            $out .= '$platforms[] = ' . var_export($platform, true) . ";\n";
+
+        // If out array values are themselves arrays, we have an
+        // associativ array, and should save key-value pairs.
+        foreach ($platformMeta as $key => $value) {
+            $key = is_array($value) ? "'$key'" : "";
+            $out .= "\$${arrayName}[$key] = " . var_export($value, true) . ";\n";
         }
 
         mkdir_recursive(dirname($file_loc));
         sugar_file_put_contents_atomic($file_loc, $out);
-
-        $repairAndClear = new RepairAndClear();
-        $repairAndClear->rebuildExtensions();
     }
 
     /**

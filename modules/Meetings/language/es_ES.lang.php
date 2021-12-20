@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Cuadro de mando de la lista de reuniones',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Cuadro de mando del registro de reuniones',
+    'LBL_LEAD_GUESTS' => 'Invitados del cliente potencial',
+    'LBL_CONTACT_GUESTS' => 'Invitados del contacto',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las reuniones',
 
 	'ERR_DELETE_RECORD' => 'Debe especificar un número de registro a eliminar.',
 	'LBL_ACCEPT_THIS'=>'¿Aceptar?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Dirección',
 	'LBL_LIST_DUE_DATE'=>'Fecha de Vencimiento',
 	'LBL_LIST_FORM_TITLE' => 'Lista de Reuniones',
-	'LBL_LIST_MY_MEETINGS' => 'Mis Reuniones',
+    'LBL_LIST_MY_MEETINGS' => 'Mis Reuniones',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Mis reuniones programadas',
+    'LBL_GUEST_MEETINGS' => 'Mis reuniones como invitado',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Reuniones programadas como invitado',
 	'LBL_LIST_RELATED_TO' => 'Relacionado con',
 	'LBL_LIST_STATUS'=>'Estado',
 	'LBL_LIST_SUBJECT' => 'Asunto',

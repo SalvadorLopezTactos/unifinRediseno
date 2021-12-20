@@ -70,7 +70,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Aviso: No Escribible',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Su versión de PHP no es compatible con Sugar.  Necesitará instalar una versión que sea compatible con la aplicación Sugar.  Consulte la Matriz de Compatibilidad en las Notas de Lanzamiento para información sobre las Versiones de PHP compatibles. Su versión es la ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Su versión de IIS no es compatible con Sugar.  Debe instalar una versión que sea compatible con la aplicación Sugar.  Consulte la Matriz de Compatibilidad en las Notas de Lanzamiento para más información sobre las versiones de IIS soportadas. Su versión es ',
-	'ERR_CHECKSYS_FASTCGI'              => 'Hemos detectado que no está usando una asociación de manejador de FastCGI para PHP. Debe instalar/configurar una versión que sea compatible con la aplicación Sugar.  Consulte la Matriz de Compatibilidad en las Notas de Lanzamiento para más información sobre las versiones compatibles. Visite <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> para obtener más detalles ',
+    'ERR_CHECKSYS_FASTCGI'              => 'Hemos detectado que no está usando una asociación de manejador de FastCGI para PHP. Debe instalar/configurar una versión que sea compatible con la aplicación Sugar.  Consulte la Matriz de Compatibilidad en las Notas de Lanzamiento para más información sobre las versiones compatibles. Visite <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> para obtener más detalles ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para unos resultados óptimos al utilizar el sapi IIS/FastCGI, ajuste fastcgi.logging en 0 en su archivo php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versión de PHP Instalada No Compatible: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Base de datos no disponible',
@@ -539,139 +539,142 @@ Para información más detallada, consulte la Guía de Instalación.            
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'El modo de compatibilidad inversa de PHP está habilitado. Establezca zend.ze1_compatibility_mode en Off antes de continuar',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Correos electrónicos de notificación de reuniones',
+        'subject' => 'Reunión de SugarCRM - $event_name ',
+        'description' => 'Esta plantilla se utiliza cuando el sistema envía una notificación de reunión a un usuario.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>A: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user le ha invitado a una reunión</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Asunto: $event_name<br/>
+	Fecha de inicio: $start_date<br/>
+	Fecha de fin: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Descripción: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Aceptar esta reunión:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Aceptar provisionalmente esta reunión:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Rechazar esta reunión:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'A: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user le ha invitado a una reunión
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Asunto: $event_name
+Fecha de inicio: $start_date
+Fecha de fin: $end_date
 
-Description: $description
+Descripción: $description
 
-Accept this meeting:
+Aceptar esta reunión:
 <$accept_link>
 
-Tentatively Accept this meeting
+Aceptar provisionalmente esta reunión:
 <$tentative_link>
 
-Decline this meeting
+
+Rechazar esta reunión:
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Correos electrónicos de notificación de llamadas',
+        'subject' => 'Llamada de SugarCRM - $event_name ',
+        'description' => 'Esta plantilla se utiliza cuando el sistema envía una notificación de llamada a un usuario.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>A: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user le ha invitado a una llamada</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Asunto: $event_name<br/>
+	Fecha de inicio: $start_date<br/>
+	Duración: $hoursh,$minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Descripción: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Aceptar esta llamada:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Aceptar provisionalmente esta llamada:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Rechazar esta llamada:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'A: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user le ha invitado a una llamada
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Asunto: $event_name
+Fecha de inicio: $start_date
+Duración: $hoursh,$minutesm
 
-Description: $description
+Descripción: $description
 
-Accept this call:
+Aceptar esta llamada:
 <$accept_link>
 
-Tentatively Accept this call
+Aceptar provisionalmente esta llamada:
 <$tentative_link>
 
-Decline this call
+
+Rechazar esta llamada:
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Correos electrónicos de notificación de asignación',
+        'subject' => 'SugarCRM - $module_name asignado ',
+        'description' => 'Esta plantilla se utiliza cuando el sistema envía una asignación de una tarea a un usuario.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user ha asignado un&nbsp;$module_name a&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Puede revisar este&nbsp;$module_name en:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user ha asignado un $module_name a $assigned_user.
 
-You may review this $module_name at:
+Puede revisar este $module_name en:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Correos electrónicos de informes programados',
+        'subject' => 'Informe programado: $report_name a fecha de $report_time',
+        'description' => 'Esta plantilla se utiliza cuando el sistema envía un informe programado a un usuario.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hola $assigned_user:</p>
+<p>Se adjunta un informe generado automáticamente que se ha programado para usted.</p>
+<p>Nombre del informe: $report_name</p>
+<p>Fecha y hora de ejecución del informe: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Hola $assigned_user:
 
-Attached is an auto generated report that has been scheduled for you.
+Se adjunta un informe generado automáticamente que se ha programado para usted.
 
-Report Name: $report_name
+Nombre del informe: $report_name
 
-Report Run Date and Time: $report_time',
+Fecha y hora de ejecución del informe: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Correo electrónico de notificación del registro de comentarios del sistema',
+        'subject' => 'SugarCRM - $initiator_full_name le ha mencionado en un $singular_module_name',
+        'description' => 'Esta plantilla se utiliza para enviar notificaciones por correo electrónico a usuarios a quién se ha etiquetado en la sección del registro de comentarios.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Le han mencionado en el registro de comentarios del siguiente registro:  <a href="$record_url">$record_name</a></p>
+                <p>Inicie sesión en Sugar para ver el comentario.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Le han mencionado en el registro de comentarios del siguiente registro: $record_name
+            Inicie sesión en Sugar para ver el comentario.',
     ],
 
     'advanced_password_new_account_email' => array(

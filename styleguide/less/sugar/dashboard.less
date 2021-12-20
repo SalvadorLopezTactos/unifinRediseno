@@ -13,6 +13,10 @@
   padding-top: 0;
 }
 
+.home-dashboard {
+  background: #f7f8f9;
+}
+
 .dashboard {
   width: 100%;
   border-right: none;
@@ -30,7 +34,7 @@
         }
 
         &.edit {
-          padding: 15px 0 0 20px;
+          padding: 12px 0 0 20px;
         }
 
         .detail {
@@ -41,6 +45,7 @@
       }
 
       input[type="text"] {
+        border: solid 1px @grayLight;
         margin: 0 0 0 -7px;
       }
     }
@@ -53,6 +58,7 @@
 
   .cols {
     margin: 0;
+    height: 100%;
     list-style: none;
 
     & > li:first-child {
@@ -234,10 +240,33 @@
   }
 }
 
+.placeholder-empty {
+  display: inline;
+  width: 320px;
+  height: 320px;
+  min-width: 320px;
+  min-height: 320px;
+  margin: 10px;
+}
+
+.empty-create-button {
+  background-color: @white;
+  color: @blue;
+  padding: 9px 14px;
+  margin: 10px auto;
+  font-size: 15px;
+}
+
+.inline {
+  display: inline;
+}
+
 /* Dashboard inside right hand side panel */
 //FIXME: UIUX-2174 will refactor this part.
 .sidebar-content {
   .dashboard {
+    padding-top: 0;
+
     .headerpane {
       width: calc(~"34.042553198% + 1px");
       border-left: @borderWidget;
@@ -254,9 +283,7 @@
       .record-cell:first-child {
         display: table-cell;
         position: relative;
-        padding-left: 10px;
-        padding-top: 14px;
-        padding-right: 0;
+        padding: 13px 0 0 18px;
         max-width: none;
       }
 
@@ -265,7 +292,6 @@
         white-space: nowrap;
         width: auto;
         padding-right: 1.5%;
-        padding-top: 16px;
       }
 
       h1 {
@@ -275,7 +301,6 @@
 
         div.error {
           input {
-            font-size: @fontSizeHeader;
             margin-top: 0;
           }
         }
@@ -283,12 +308,13 @@
         div.dropdown {
           line-height: 24px;
           padding-right: 24px;
+          display: flex;
 
           & > a {
             font-size: @fontSizeHeaderTitle;
             font-weight: 600;
             color: inherit;
-            padding: 4px 24px 4px 2px;
+            padding: 4px 0 4px 24px;
             margin-left: 0;
             max-width: 100%;
             text-align: left;
@@ -330,18 +356,10 @@
       .preview-headerbar {
         border-bottom-color: darken(@grayLighter, 10%);
       }
-
-      .dashlets {
-        width: 90%;
-        margin-left: 5%;
-      }
     }
 
     .cols {
       .dashlets {
-        width: 97%;
-        margin-left: 1.5%;
-
         .rows.well:not(.well-invisible) {
           margin: 0 -0.5% auto;
           border: 1px dashed darken(@grayLighter, 10%);
@@ -404,7 +422,7 @@
 
 .dashlet-unordered-list {
   .tab-content {
-    height: 230px;
+    height: 100%;
     overflow: auto;
 
     .block-footer {
@@ -425,21 +443,6 @@
       > .record-cell {
         /* override */
         padding-top: 10px;
-      }
-    }
-  }
-}
-
-/* Dashboard inside right hand side panel */
-.sidebar-content {
-  .dashboard {
-    /* override */
-    padding-top: 0;
-
-    .headerpane {
-      .record-cell:first-child {
-        /* override */
-        padding-top: 11px;
       }
     }
   }
@@ -571,14 +574,32 @@
   }
 }
 
-.dashboard .tabbable {
+.dashboard .tabbed-dashboard-pane {
   background-color: #fff;
+  display: flex;
+
+  .tabbable-toolbar {
+    border-bottom: 1px solid #ddd;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    padding-right: 4px;
+    height: 32px;
+  }
+
+  & + .dashlets {
+    height: calc(~'100% - 39px');
+  }
+}
+
+.dashboard .tabbable {
+  flex-grow: 1;
 
   .nav-tabs > li > a {
     border-radius: 0;
     margin-left: -1px;
-    border-left: 1px solid @grayLighter;
-    border-right: 1px solid @grayLighter;
+    border-left: 1px solid @grayMid;
+    border-right: 1px solid @grayMid;
+    border-top: 2px solid @grayMid;
     outline: none;
   }
 }
@@ -588,7 +609,6 @@
   .dashlet-container {
     overflow-y: auto;
     height: @workbenchOverviewDashletHeight;
-    max-height: @workbenchOverviewDashletHeight;
 
     > div {
       height: 100%;
@@ -637,6 +657,16 @@
       > div .thumbnail.dashlet:not(.collapsed) {
         height: ~"calc(@{workbenchDrawerDashletHeight} - 12px)";
         max-height: ~"calc(@{workbenchDrawerDashletHeight} - 12px)";
+      }
+    }
+
+    .dashboard.edit .dashlets .dashlet-container {
+      height: ~"calc(@{workbenchDrawerDashletHeight} + 20px)";
+      max-height: ~"calc(@{workbenchDrawerDashletHeight} + 20px)";
+
+      > div .thumbnail.dashlet:not(.collapsed) {
+        height: ~"calc(@{workbenchDrawerDashletHeight} -20px)";
+        max-height: ~"calc(@{workbenchDrawerDashletHeight} -20px)";
       }
     }
   }

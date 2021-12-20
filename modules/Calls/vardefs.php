@@ -9,9 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activity representing a phone call',
-                               'activity_enabled'=>true,'unified_search' => true, 'full_text_search' => true, 'unified_search_default_enabled' => true, 'fields' => array (
-
+$dictionary['Call'] = array(
+    'table' => 'calls',
+    'audited' => true,
+    'comment' => 'A Call is an activity representing a phone call',
+    'activity_enabled'=>true,
+    'unified_search' => true,
+    'full_text_search' => true,
+    'unified_search_default_enabled' => true,
+    'fields' => array (
   'name' =>
   array (
     'name' => 'name',
@@ -380,6 +386,15 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'source'=>'non-db',
 		'vname'=>'LBL_NOTES',
   ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'calls_messages',
+            'module'=>'Notes',
+            'bean_name'=>'Note',
+            'source'=>'non-db',
+            'vname'=>'LBL_MESSAGES',
+        ],
   'created_by_link' =>
   array (
         'name' => 'created_by_link',
@@ -653,7 +668,56 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
             'vname' => 'LBL_KBDOCUMENTS',
             'reportable' => false,
         ),
-),
+
+    'transcript' => [
+        'name' => 'transcript',
+        'vname' => 'LBL_TRANSCRIPT',
+        'readonly' => true,
+        'css_class' => 'call-transcript',
+        'type' => 'text',
+        'dbType' => 'longtext',
+        'duplicate_on_record_copy' => 'always',
+        'reportable' => true,
+        'full_text_search' => [
+            'enabled' => true,
+            'searchable' => true,
+        ],
+        'studio' => [
+            'recordview' => true,
+            'previewview' => true,
+            'recorddashletview' => true,
+            'visible' => false,
+        ],
+    ],
+        'aws_contact_id' => [
+            'name' => 'aws_contact_id',
+            'vname' => 'LBL_CONNECT_CONTACT_ID',
+            'readonly' => true,
+            'type' => 'id',
+            'importable' => 'false',
+            'massupdate' => false,
+            'reportable' => false,
+            'studio' => false,
+            'comment' => 'The AWS Connect Contact ID',
+        ],
+        'call_recording_url' => [
+            'name' => 'call_recording_url',
+            'vname' => 'LBL_CALL_RECORDING_URL',
+            'type' => 'varchar',
+            'len' => 255,
+            'audited' => true,
+            'pii' => true,
+            'comment' => 'The URL for the call recording',
+        ],
+        'call_recording' => [
+            'name' => 'call_recording',
+            'vname' => 'LBL_CALL_RECORDING',
+            'type' => 'call-recording',
+            'readonly' => true,
+            'source'=>'non-db',
+            'comment' => 'The friendly name for the call recording link',
+        ],
+    ),
 'indices' => array (
 	array(
 		'name' => 'idx_call_name',
@@ -701,6 +765,11 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     	'fields' => array('parent_id','parent_type','deleted')
     ),
     array('name' => 'idx_call_direction', 'type' => 'index', 'fields' => array('direction')),
+    [
+        'name' => 'idx_aws_calls_contact_id',
+        'type' => 'index',
+        'fields'=> ['aws_contact_id', 'deleted'],
+    ],
 ),
 'relationships' => array (
 		'calls_assigned_user' => array(
@@ -741,6 +810,17 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
       'relationship_role_column'=>'parent_type',
       'relationship_role_column_value'=>'Calls',
 		),
+                                'calls_messages' => [
+                                    'lhs_module' => 'Calls',
+                                    'lhs_table' => 'calls',
+                                    'lhs_key' => 'id',
+                                    'rhs_module' => 'Messages',
+                                    'rhs_table' => 'messages',
+                                    'rhs_key' => 'parent_id',
+                                    'relationship_type' => 'one-to-many',
+                                    'relationship_role_column' => 'parent_type',
+                                    'relationship_role_column_value' => 'Calls',
+                                ],
 	),
     'acls' => array('SugarACLOpi' => true, 'SugarACLStatic' => true),
 //This enables optimistic locking for Saves From EditView

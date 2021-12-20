@@ -67,14 +67,14 @@ class OAuthKey extends Basic
 	 * Delete the key
 	 * also removed all tokens
 	 */
-	public function mark_deleted($id)
+    protected function doMarkDeleted(): void
 	{
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
         $qoat = "DELETE FROM oauth_tokens WHERE consumer = ? ";
 
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($id));
-        $conn->executeQuery($qoat, array($id));
+        $conn->executeQuery($query, array($this->id));
+        $conn->executeQuery($qoat, array($this->id));
 	}
 
 }

@@ -20,6 +20,12 @@ class SugarBeanApiHelper
      */
     protected $api;
 
+    /**
+     * Constant for the string set in platformoptions metadata to enable or disable
+     * notifications by API platform.
+     */
+    private const ENABLE_NOTIFICATIONS = 'enable_notifications';
+
     public function __construct(\ServiceBase $api)
     {
         $this->api = $api;
@@ -285,9 +291,17 @@ class SugarBeanApiHelper
             if ($field != null) {
                 // validate submitted data
                 if (!$field->apiValidate($bean, $submittedData, $fieldName, $properties)) {
-                    throw new \SugarApiExceptionInvalidParameter(
-                        'Invalid field value: ' . $fieldName . ' in module: ' . $bean->module_name
-                    );
+                    if (in_array($bean->db->getFieldType($properties), ['text', 'html'])) {
+                        throw new \SugarApiExceptionInvalidParameter(
+                            'ERR_FIELD_TOO_LARGE',
+                            [$fieldName],
+                            $bean->module_name
+                        );
+                    } else {
+                        throw new \SugarApiExceptionInvalidParameter(
+                            'Invalid field value: ' . $fieldName . ' in module: ' . $bean->module_name
+                        );
+                    }
                 }
 
                 if (!empty($options['massUpdate'])) {
@@ -308,6 +322,9 @@ class SugarBeanApiHelper
      */
     public function checkNotify($bean)
     {
+        if (!$this->platformNotificationsEnabled()) {
+            return false;
+        }
         $check_notify = TRUE;
         // check update
         // if Notifications are disabled for this module set check notify to false
@@ -327,6 +344,22 @@ class SugarBeanApiHelper
         }
 
         return $check_notify;
+    }
+
+    /**
+     * Check if notifications are enabled or disabled for the current API platform.
+     * Defaults to true if not set in metadata.
+     *
+     * @return bool True if notifications are not explicitly disabled
+     */
+    public function platformNotificationsEnabled(): bool
+    {
+        $platform = $this->api->platform ?? 'base';
+        $platformOptions = MetaDataManager::getPlatformOptions();
+        if (isset($platformOptions[$platform]) && isset($platformOptions[$platform][self::ENABLE_NOTIFICATIONS])) {
+            return isTruthy($platformOptions[$platform][self::ENABLE_NOTIFICATIONS]);
+        }
+        return true;
     }
 
     /**

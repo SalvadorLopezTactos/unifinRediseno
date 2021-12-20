@@ -233,6 +233,23 @@ class ChartDisplay
     }
 
     /**
+     * Check if the value should be unformatted.
+     *
+     * @param $val
+     * @return bool
+     */
+    protected function shouldUnformat($val) : bool
+    {
+        $report_defs = $this->reporter->report_def;
+        $isCurrency = isset($report_defs['numerical_chart_column_type']) &&
+            $report_defs['numerical_chart_column_type'] === 'currency';
+
+        // For currency, the numeric value is already converted to normal format like "1,234.56"
+        // even if user has customized 1000s separator and/or Decimal Symbol.
+        return is_string($val) && ((!is_numeric($val) && $isCurrency) || !$isCurrency);
+    }
+
+    /**
      * Generate the Title for the Chart
      */
     protected function parseChartTitle()
@@ -260,7 +277,7 @@ class ChartDisplay
             }
             $total = $total_row['cells'][$total];
 
-            if(is_string($total) && !is_numeric($total)) {
+            if ($this->shouldUnformat($total)) {
                 $total = unformat_number($total);
             }
             if ($total > 100000) {
@@ -441,7 +458,7 @@ class ChartDisplay
         }
 
         $val = strip_tags($row['cells'][$this->reporter->chart_numerical_position]['val']);
-        if(is_string($val) && !is_numeric($val)) {
+        if ($this->shouldUnformat($val)) {
             $val = unformat_number($val, true);
         }
         $row_remap['numerical_value'] = $val;
@@ -496,7 +513,7 @@ class ChartDisplay
             $total_index = 0; // special for dashlets!!
         }
         $total = $total_row['cells'][$total_index]['val'];
-        if(is_string($total) && !is_numeric($total)) {
+        if ($this->shouldUnformat($total)) {
             $total = unformat_number($total, true);
         }
         global $do_thousands;
@@ -618,7 +635,7 @@ class ChartDisplay
 
         $sugarChart = $this->getSugarChart();
         if (is_object($sugarChart)) {
-            $sugarChart->reporter = $this->reporter;
+            $sugarChart->setReporter($this->reporter);
             $xmlFile = $this->get_cache_file_name();
             $sugarChart->saveXMLFile($xmlFile, $sugarChart->generateXML());
             return $sugarChart->display($guid, $xmlFile, $width, $height);

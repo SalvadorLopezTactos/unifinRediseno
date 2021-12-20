@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kapcsolatok',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Ajánlások',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Felhasználók',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Üzleti központ bejegyzések műszerfal',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Az üzletközpontok figyelemfelhívásai',
 ];

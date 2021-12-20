@@ -25,7 +25,7 @@ class UriSigner
      * @param string $secret    A secret
      * @param string $parameter Query string parameter to use
      */
-    public function __construct($secret, $parameter = '_hash')
+    public function __construct(string $secret, string $parameter = '_hash')
     {
         $this->secret = $secret;
         $this->parameter = $parameter;
@@ -79,7 +79,7 @@ class UriSigner
         $hash = $params[$this->parameter];
         unset($params[$this->parameter]);
 
-        return hash_equals($this->computeHash($this->buildUrl($url, $params)), $hash);
+        return $this->computeHash($this->buildUrl($url, $params)) === $hash;
     }
 
     private function computeHash($uri)

@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Řídicí panel seznamu nabídek',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Řídicí panel záznamů nabídek',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na nabídky',
 
     'LBL_CONTRACTS'=>'Smlouvy',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Smlouvy',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Země fakturanta',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'PSČ fakturanta',
     'LBL_BILLING_ADDRESS_STATE' => 'Kraj/Stát fakturanta',
-    'LBL_BILLING_ADDRESS_STREET' => 'Fakturační adresa:',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Fakturační adresa:',
     'LBL_BILLING_CONTACT_ID' => 'Id fakturačního kontaktu:',
     'LBL_BILLING_CONTACT_NAME' => 'Kontaktní jméno fakturanta:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Země dodání',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'PSČ dodání',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Kraj/Stát dodání',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Dodací adresa:',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Číslo domu dodání:',
     'LBL_SHIPPING_BODY' => 'Fakturace a přeprava',
     'LBL_SHIPPING_CONTACT_ID' => 'ID kontaktu dodaní:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopírovat fakturační adresu na dodací',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopírovat dodací adresu na faktrační',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopírovat do dodací adresy',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopírovat do fakturační adresy',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Jste si jisti, že chcete odstranit tento komentář nabídky?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopírovat do fakturační adresy',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Jste si jisti, že chcete odstranit tento komentář nabídky?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Jste si jisti, že chcete odstranit tuto položku z nabídky?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Jste si jisti, že chcete odstranit tuto skupinu z nabídky?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Jste si jisti, že chcete odstranit tento kontakt z nabídky?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Množství',
     'LBL_MFT_PART_NUM' => 'Číslo dílu',
     'LBL_ITEM_NAME' => 'Řádková položka',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkt',
     'LBL_DISCOUNT_PRICE' => 'Jednotková cena',
     'LBL_DISCOUNT_AMOUNT' => 'Sleva',
     'LBL_LINE_ITEM_TOTAL' => 'Řádkové položky celkem',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID příležitosti',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfigurace nabídek',
+
+    'LBL_RENEWAL' => 'Obnovení',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakce nabídek',
 );

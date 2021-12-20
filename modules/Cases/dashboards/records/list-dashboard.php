@@ -34,6 +34,18 @@ return [
                     array(
                         array(
                             'view' => array(
+                                'type' => 'request-closed-cases-dashlet',
+                                'label' => 'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME',
+                            ),
+                            'context' => array(
+                                'module' => 'Cases',
+                            ),
+                            'width' => 12,
+                        ),
+                    ),
+                    array(
+                        array(
+                            'view' => array(
                                 'type' => 'twitter',
                                 'label' => 'LBL_TWITTER_NAME',
                                 'twitter' => 'sugarcrm',

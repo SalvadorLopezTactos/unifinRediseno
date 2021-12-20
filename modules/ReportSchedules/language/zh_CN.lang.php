@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => '按照报告',
     'LBL_RECENTLY_MODIFIED' => '最近修改',
     'LBL_RECORD_SAVED_SUCCESS' => '您成功创建了 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>。请开启此日程以通过用户子面板添加用户。',
+
+    'LBL_THIS_REPORT_SCHEDULE' => '此报表计划',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => '报表计划记录仪表板',
 );

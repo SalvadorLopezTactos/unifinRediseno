@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Modèles d&#39;email des processus',
     'LBL_MODULE_NAME_SINGULAR' => 'Process modèle d&#39;email',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Modèles d&#39;email des processus',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de règles de modèles d&#39;e-mails de processus',
     'LNK_LIST' => 'Afficher les modèles d&#39;email des Process',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Créer un modèle d&#39;email pour les processus',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importer des modèles d&#39;email pour les processus',

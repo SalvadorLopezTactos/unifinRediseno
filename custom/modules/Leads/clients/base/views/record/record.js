@@ -548,6 +548,8 @@
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
+        //Ocultando campo de control que omite validación de duplicados
+        $('[data-name="omite_match_c"]').hide();
         //Oculta etiqueta de lead_direcciones
         this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
         //Ocultando campo check de homonimo

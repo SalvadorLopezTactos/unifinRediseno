@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'Spajanje zapisa',
       'VisualPipeline'=>'Vizuelni kanal',
       'ConsoleConfiguration' => 'Konfiguracija konzole',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'Kvote',
     'Teams' => 'Timovi',
     'TeamNotices' => 'Poruke tima',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Pravila procesnog poslovanja',
     'pmse_Emails_Templates' => 'Šablon procesnog Email-a',
     'BusinessCenters' => 'Poslovni centri',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'Smene',
+    'ShiftExceptions' => 'Izuzeci za smene',
+    'Purchases' => 'Kupovine',
+    'PurchasedLineItems' => 'Kupljene stavke',
+    'MobileDevices' => 'Mobilni uređaji',
+    'PushNotifications' => 'Iskačuća obaveštenja',
     'WorkFlow' => 'Definicije radnog toka',
     'EAPM' => 'Eksterni nalozi',
     'Worksheet' => 'Tabela',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'Bilteni',
   	'SugarFavorites'=>'Omiljeni',
 	'PdfManager' => 'PDF Menadžer',
+    'DataArchiver' => 'Arhivator podataka',
+    'ArchiveRuns' => 'Pokretanje arhiviranja',
 
     'OAuthKeys' => 'OAuth consumer ključevi',
     'OAuthTokens' => 'OAuth tokeni',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'Evidencija komentara',
     'Holidays' => 'Praznici',
     'ChangeTimers' => 'Promeni tajmere',
+    'Messages' => 'Poruke',
   ),
 
     'moduleIconList' =>
@@ -141,7 +147,7 @@ $app_list_strings = array (
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
         'BusinessCenters' => 'BC',
-        'PurchasedLineItems' => 'PL',
+        'PurchasedLineItems' => 'KS',
     ),
 
   'moduleListSingular' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'Proizvođač',
     'VisualPipeline' => 'Vizuelni kanal',
     'ConsoleConfiguration' => 'KonfiguracijaKonzola',
+    'MobileDevices' => 'Mobilni uređaj',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'Ugovor',
     'Quotes' => 'Ponuda',
     'Products' => 'Proizvod',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'Obaveštenje',
     'Sync'=>'Sinhronizacija',
     'PdfManager' => 'PDF Menadžer',
+    'DataArchiver' => 'Arhivator podataka',
+    'ArchiveRuns' => 'Arhiviraj pokretanja',
     'ReportMaker' => 'SweetReport',
     'DataSets' => 'Format podataka',
     'CustomQueries' => 'Upit kupaca',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Pravila procesnog poslovanja',
     'pmse_Emails_Templates' => 'Šablon procesnog Email-a',
     'BusinessCenters' => 'Poslovni centri',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'Smene',
+    'ShiftExceptions' => 'Izuzeci za smene',
+    'Purchases' => 'Kupovina',
+    'PurchasedLineItems' => 'Kupljena stavka',
+    'PushNotifications' => 'Iskačuće obaveštenje',
     'WorkFlow' => 'RadniTok',
     'EAPM' => 'Spoljni nalog',
     'Worksheet' => 'Tabela',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'Raspored izveštaja',
     'Holidays' => 'Praznik',
     'ChangeTimers' => 'Promeni tajmer',
+    'Messages' => 'Poruka',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'Komunalne usluge',
     'Other' => 'Ostalo',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'U toku',
+        'Completed' => 'Završeno',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'Dolazno',
+        'Outbound' => 'Odlazno',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'Ćaskanje',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'Klasa 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'Klasa 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => 'Da',
+      'No' => 'Ne',
+      'Completed' => 'Završeno',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'Buduće',
+        'Active' => 'Aktivno',
+        'Past' => 'Prošlo',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'Samo-generisan',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'Planiran',
+    'In Progress' => 'U toku',
     'Held' => 'Održan',
     'Not Held' => 'Poništen',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'Sastanak:',
     'Calls' => 'Poziv',
       'KBContents' => 'Baza Znanja',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'Kupljena stavka',
+      'Purchases' => 'Kupovina',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Nalog',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'Cilj',
       'KBContents' => 'Baza Znanja',
       'Notes' => 'Napomena',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Kupljena stavka',
+    'Purchases' => 'Kupovina',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => 'Portal',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'Interno',
+        'Forum' => 'Forum',
+        'Web' => 'Veb',
+        'InboundEmail' => 'E-pošta',
+        'Twitter' => 'Twitter',
+        'Portal' => 'Portal',
+        'Phone' => 'Telefon',
+        'Chat' => 'Ćaskanje',
+        'Chatbot' => 'Bot za ćaskanje',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,10 +2041,17 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Razmena',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'Google manje bezbedne aplikacije',
+        'exchange' => 'Razmena',
         'other' => 'Drugo',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
+        'other' => 'Ostalo',
     ),
     'import_enclosure_options' =>
     array (
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'Da',
         'No' => 'Ne',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'Uključeno u prognozu',
         'sales_stage' => 'Faza prodaje',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'Lista',
         'activities' => 'Tok aktivnosti',
         'multi-line' => 'Lista sa više linija',
+        'omnichannel' => 'Više kanala',
+        'home' => 'Home',
+        'focus' => 'Fioka fokusa',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Svaki sat',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'Dan(a)',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'Odmor',
+            'event' => 'Događaj',
+            'other' => 'Ostalo',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'Datum (poslednji {{module}})',
+            'start_date:asc' => 'Datum (prvi {{module}})',
+            'total_revenue:desc' => 'Cena (najviša ukupna)',
+            'total_revenue:asc' => 'Cena (najniža ukupna)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sledi link',
   'LBL_TOGGLE_VISIBILITY' => 'Izmeni vidljivost', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivnosti',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar i 3-D kocka su registrovani žigovi kompanije SugarCRM Inc. '.
         'Svi drugi nazivi kompanija ili proizvoda koji se koriste ili pojavljuju u ovom proizvodu mogu biti žigovi '.
         'SugarCRM ®, Sugar Enterprise™ i Sugar™ su zaštitni znak SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "Štampanje",
     'LBL_HELP' => "Pomoć",
     'LBL_TOUR' => "Tura pogleda aktivnosti",
-    'LBL_TOUR_LINK' => 'Obilazak – pogledajte obilazak da biste videli glavne prednosti funkcije',
+    'LBL_TOUR_LINK' => 'Upoznajte se sa ovom stranicom',
     'LBL_MOBILE' => "Mob. telefon:",
     'LBL_ID_FF_SELECT' => "Izaberi",
     'DEFAULT'                              => 'Osnovno',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'Kreiraj potpis',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'Naziv potpisa',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'Tekst potpisa',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'Ostalo',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Google manje bezbedne aplikacije',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'Ostalo',
+    'LBL_EMAIL_AUTHORIZE'                   => 'Autorizuj',
+    'LBL_EMAIL_AUTHORIZED'                  => 'Autorizovano',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'Nije autorizovano',
+    'LBL_EMAIL_AUTH_WARNING'                => 'Administrator mora da konfiguriše konektor {0} u odeljku Administrator > Konektori da biste mogli da podesite ovaj nalog. Više informacija potražite u dokumentaciji {1}.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'Greška pri dobavljanju informacija o konektoru',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'Autorizacija nija uspela.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'Autorizujte nalog pre čuvanja.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'Autorizujte nalog pre testiranja.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'Nalog nije autorizovan',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[ Udaljeni Folderi ]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ Sugar Folderi ]',
     'LBL_EMAIL_SUBJECT'                     => 'Naslov',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'Kopija',
     'LBL_BCC' => 'Skrivena kopija',
 
+    'LBL_START_DATE' => 'Datum početka',
+    'LBL_END_DATE' => 'Datum završetka',
+
     'LBL_LINK_NONE'=> 'Nijedna',
     'LBL_LINK_ALL'=> 'Svi',
     'LBL_LINK_RECORDS'=> 'Zapisi',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => 'Molim, pogledajte poruku o grešci ispod:',
     'NO_QUERY_SELECTED' => 'Format podatka koji ste izabrali ne sadrži upit. Molim, izaberite sopstveni upit za ovaj format podatka.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'Došlo je do greške:',
     'ERR_AJAX_LOAD_FAILURE'     => 'Došlo je do greške u procesiranju Vašeg zahteva, molimo pokušajte kasnije.',
     'ERR_AJAX_LOAD_FOOTER' => 'Ukoliko se greška ponavlja, zamolite Vašeg administratora da onemogući Ajax za ovaj modul.',
@@ -2795,9 +2892,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'Ovaj opcija je nedostupna u ovoj temi.',
     'ERR_NOT_ADMIN' => "Neovlašćen pristup administraciji.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'Upravljanje lozinkama je dosupno samo u <a href="%s" target="_blank">Podešavanjima za Cloud</a>.',
+        'Upravljanje lozinkama je dostupno samo u <a href="%s" target="_blank">Podešavanjima za SugarCloud</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Kontaktirajte Sugar administratora ako želite da promenite polja koja su samo za čitanje.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Pristupite <a href="{0}" target="_blank">Podešavanjima za SugarCloud</a> da biste menjali polja koja su samo za čitanje.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Nedostaje obavezno polje:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Obavezno polje nije validno:',
     'ERR_INVALID_VALUE' => 'Nevažeća vrednost:',
@@ -2938,6 +3035,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'Dodaj [Alt+A]',
     'LBL_ADD_BUTTON' => 'Dodaj',
+    'LBL_ADD_DASHLET_BUTTON' => 'Dodaj dašlet',
     'LBL_ADD_DOCUMENT' => 'Dodaj dokument',
     'LBL_REPLACE_BUTTON' => 'Zameni',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2968,6 +3066,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'Prosledi',
     'LBL_CASE'=>'Slučaj',
     'LBL_CASES'=>'Slučajevi',
+    'LBL_MESSAGE'=>'Poruka',
+    'LBL_MESSAGES'=>'Poruke',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Promena lozinke',
     'LBL_CHANGE_BUTTON_LABEL' => 'Promeni',
@@ -3194,6 +3294,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'Napravi ponudu',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'Nije dostupno ni jedno polje za operaciju masovnog ažuriranja',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'Vaš zahtev za grupnim ažuriranjem je zakazan.',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'Datum početka usluge je noviji od Datuma završetka usluge',
     'LBL_MASS_UPDATE_SUCCESS' => 'Svi zapisi su uspešno ažurirani.',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'Izabrani zapisi su dodati na <a href="{{listUrl}}">{{listName}}</a> listu ciljeva.',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'Vaš zahtev za dodavanje izabranih zapisa na <a href="{{listUrl}}">{{listName}}</a> listu ciljeva je zakazan.',
@@ -3429,11 +3530,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'Naslov',
 
     'LBL_INBOUNDEMAIL_ID' => 'ID dolaznog Email-a',
+    'LBL_EAMP_ID' => 'ID tokena za potvrdu identiteta',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Sva prava zadržana.<br />SugarCRM, Sugar i 3-D kocka su registrovani žigovi kompanije SugarCRM Inc. '.
         'Svi drugi nazivi kompanija ili proizvoda koji se koriste ili pojavljuju u ovom proizvodu mogu biti žigovi '.
         'odgovarajućih kompanija sa kojima su povezani.',
@@ -3500,6 +3602,8 @@ $app_strings = array (
     'LBL_USER_MENU' => 'Korisnički meni',
     'LBL_USERS_SYNC'=>'Sinh. korisnika',
     'LBL_USERS'=>'Korisnici',
+    'LBL_USER'=>'Korisnik',
+    'LBL_CURRENT_USER'=>'Trenutni korisnik',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'Proveravanje za postojeći Email unos...',
     'LBL_VERIFY_PORTAL_NAME'=>'Proveravanje za postojeći naziv portala...',
     'LBL_VIEW_IMAGE' => 'pregled',
@@ -3588,6 +3692,8 @@ $app_strings = array (
         'Ograničenja iz Broja korisničkih licenci su dostignuta. Samo postojeći korisnici mogu da se prijave.',
     'WARN_ONLY_ADMINS'=> "Samo administratori mogu da se prijave.",
     'WARN_UNSAVED_CHANGES'=> "Napuštate ovaj zapis bez da ste sačuvali izvršene izmene koje ste napravili. Da li ste sigurni da želite da napustite ovaj zapia?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Ako osvežite pregledač, automatski će se zatvoriti svi SugarLive pozivi ili sesije ćaskanja koje ste otvorili i izgubićete sve nesačuvane promene. Želite li da nastavite?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Imate nesačuvane izmene. Da li ste sigurni da želite da napustite stranicu i odbacite promene?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Kod jednog ili više dašleta postoje nesačuvane izmene. Želite li zaita da zatvorite fioku?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Prelazite na modul Izveštaji. Vaše izmene dašleta neće biti sačuvane. Nastaviti dalje?',
@@ -3610,6 +3716,7 @@ $app_strings = array (
     'ERROR_TIME_IS_AFTER' => 'Greška. Vreme u ovom polju ne može biti pre vremena u {{this}} polju.',
     'ERROR_NUMBER' => 'Greška. Ovo polje zahteva validni broj.',
     'ERROR_INT' => 'Greška: Nevažeći ceo broj.',
+    'ERROR_URL' => 'Greška: Nevažeći URL.',
     'ERROR_NO_BEAN' => 'Neuspelo dohvatanje zrna.',
     'ERROR_ACCESS_MODULE' => 'Nemate pristup ovom modulu.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Greška. Prikačeni dokument je preveliki.',
@@ -3693,9 +3800,14 @@ $app_strings = array (
     'LBL_CREATE_OPPORTUNITY' => 'Kreiraj prodajnu priliku',
     'LBL_SCHEDULE_CALL' => 'Evidentiraj poziv',
     'LBL_SCHEDULE_MEETING' => 'Zakaži sastanak',
+    'LBL_CREATE_MESSAGE' => 'Kreiraj poruku',
     'LBL_CREATE_TASK' => 'Kreiraj zadatak',
     'LBL_REMOVE_FROM_FAVORITES' => 'Ukloni iz Moje omiljene',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'Preuzmi sve',
+    'LBL_DOWNLOAD_ONE' => 'Preuzmi',
+    'LBL_ATTACHMENTS' => 'Prilozi',
+    'LBL_ADD_ATTACHMENT' => 'Pretraži',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Generiši Formular',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Sačuvaj Formular za dodavanje potencijalnih klijenata preko web-a',
@@ -3747,8 +3859,8 @@ $app_strings = array (
     'LBL_DASHLET_REFRESH_LABEL' => 'Osveži',
     'LBL_DASHLET_REMOVE_LABEL' => 'Ukloni',
     'LBL_DASHLET_DROP_HERE' => 'Spustite ovde',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'Smanji sve',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'Povećaj sve',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'Smanji',
     'LBL_DASHLET_MAXIMIZE' => 'Povećaj',
     'LBL_DASHLET_CONFIGURE' => 'Podešavanja',
@@ -3770,6 +3882,10 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_NAME' => 'Pregled u vidu liste',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Lista zapisa dodeljenih vama',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'Prikaz liste konzole',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'Prikazuje zapise iz određenog modula koji su povezani sa zapisom koji pregledate u konzoli.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Pregled zapisa',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Prikazuje zapis i opciono povezane zapise u karticama.',
@@ -3780,6 +3896,7 @@ $app_strings = array (
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Pažnja, samo {{numWord}} ({{num}}) modul(a) može da bude prikazano u karticama.' .
         'Uklonite jedan ili više modula pre nego što dodate druge.',
     'LBL_SIX' => 'šest', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'Evidencija komentara',
@@ -3804,7 +3921,13 @@ $app_strings = array (
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Nedavno korišćeno',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoriti',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'Kreiraj kontrolnu tablu',
+    'LBL_DASHBOARD_DUPLICATE' => 'Napravi duplikat kontrolne table',
+    'LBL_DASHBOARD_DELETE' => 'Izbriši kontrolnu tablu',
+    'LBL_PIN_TO_TOP' => 'Zakači na vrh',
+    'LBL_PIN_TO_BOTTOM' => 'Zakači na dno',
+
+    'LBL_DASHBOARD_CONFIG' => 'Konfiguracija kontrolne table',
     'LBL_LIST_VIEW__NAME' => 'Pregled u vidu liste',
     'LBL_PIPELINE_VIEW_NAME' => 'Prikaz pločica',
     'LBL_PIPELINE_VIEW_BTN' => 'Prikaz pločica',
@@ -3840,9 +3963,9 @@ $app_strings = array (
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'Resursi za učenje',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Univerzitet Sugar – postanite stručnjak',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Forumi zajednice – uključite se u diskusiju',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentacija i podrška – upoznajte se sa detaljima',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Obuka i sertifikacija',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'SugarClub zajednica',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentacija i podrška',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'Prodaja po državi',
@@ -3851,6 +3974,10 @@ $app_strings = array (
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'Kategorije baze znanja i objavljeni članci',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Prikazuje tri prikaza kategorija baze znanja i objavljenih članaka',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'Pretraživanje baze znanja',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'Prikazuje pretraživi prikaz stabla objavljenih članaka i kategorija baze znanja.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'Objavljeni članci na drugim jezicima',
@@ -4066,6 +4193,10 @@ $app_strings = array (
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'Molim, unesite numerički SAD broj telefona, uključujući i pozivni broj.',
+    'LBL_CCP_NOT_INITIATED' => 'Pokušaj pozivanja pomoću CCP-a dok agent nije prijavljen.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'Nije moguće uspostaviti poziv pomoću CCP-a.',
+    'LBL_CCP_DIALING_ERROR' => 'Poziv nije moguće obaviti na zadati način.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'Zatvorite sve sesije ćaskanja u aplikaciji SugarLive pre upućivanja odlaznog poziva.',
 
     //File write error label
     'ERR_FILE_WRITE' => 'Greška: Nije moguće upisati u fajl {0}. Molimo proverite dozvole sistema i web servera.',
@@ -4401,8 +4532,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Ponuđena stavka',
     'LBL_DISCOUNT_TOTAL' => 'Ukupno popusta',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% procenat',
+    'LBL_DISCOUNT_SELECT' => 'Određuje da li je popust procenat ili fiksni iznos',
     'LBL_TAX' => 'Porez',
     'LBL_SHIPPING' => 'Dostava',
     'LBL_GRAND_TOTAL' => 'Konačni zbir',
@@ -4449,7 +4580,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(Nemate pristup)',
     'LBL_NO_ACCESS_LOWER' => 'Korisnik nema pristup ovom zapisu',
     'LBL_NO_FIELD_ACCESS' => 'Nema pristupa',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'Licenca je obavezna',
     'LBL_VALUE_ERASED' => 'Vrednost je izbrisana',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Ova informacija je izbrisana putem zahteva za privatnost podataka',
     'LBL_CREATE_RELATED_RECORD' => 'Kreirajte povezani zapis',
@@ -4470,7 +4601,9 @@ $app_strings = array (
     'LBL_TASKS_SUBPANEL_TITLE' => 'Zadaci',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Pozivi',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Email-ovi',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'Smene',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Proizvodi',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Izuzeci za smene',
     'LNK_SETTINGS' => 'Podešavanja',
     'LBL_MOBILE_SUPPORT' => 'Podrška',
     'LBL_MOBILE_SHOW_MORE' => 'Pokaži više...',
@@ -4630,16 +4763,14 @@ $app_strings = array (
     'LBL_MOBILE_PDF_DOWNLOAD' => 'Preuzmi {{{pdfTemplateName}}} u PDF formatu',
 
     'ERR_SYNC_FAILED' => 'Nemoguće sinhronizovati sa serverom',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO prijavljivanje je nedozvoljeno. Obezbediti instancu na Sugar 7.5 ili i podesiti je za SSO.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'Pristup nije autorizovan',
     'ERR_MOBILE_INVALID_CREDS' => 'Pogrešno korisničko ime ili lozinka.',
     'ERR_MOBILE_SESSION_EXPIRED' => 'Vaša sesija je istekla.',
     'ERR_MOBILE_NOT_FOUND' => 'Resorsi nisu nadjeni.',
     'ERR_MOBILE_TIMEOUT' => 'Server ne odgovara.',
     'ERR_MOBILE_CONNECTION_FAILED' => 'Nemogu da dostići server.',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'Server nije nadjen na datom URL-u.',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'Server ne reaguje na datom URL-u.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'Server je nedostupan na datom URL-u.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'Nedostupna internet konekcija.',
     'ERR_MOBILE_INTERNAL' => 'Unutrašnja greška ({{{code}}}). Molim vas probajte kasnije.',
     'ERR_MOBILE_VALIDATION' => 'Rekord je nevažeći',
@@ -4838,6 +4969,55 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'Dugme desnog menija',
     'LBL_VO_ADD_BTN' => 'Dodaj dugme',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'Popust',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'Izaberite aplikaciju za mapiranje',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => 'Izabrani modul {{entityName}} ima povezane vrednosti: {{localizedFieldNames}}. Otkažite promenu da zadržite postojeće vrednosti. Potvrdite promenu da upišete nove vrednosti.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'Omogućeno je šifrovanje podataka.',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'Izabrani potencijalni klijent je već konvertovan.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'Ova radnja je dostupna samo kada je uređaj na mreži',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'Želite li sigurno da napravite prodajnu priliku iz ponude?',
+    'LBL_TAG_ADD' => 'Dodaj oznaku',
+    'LBL_TAG_ENTER_TAG_NAME' => 'Unesi oznaku',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'Filtriranje prema oznakama nije podržano na uređajima van mreže.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'Prikaži ceo komentar',
+    'LBL_COMMENT_VIEW' => 'Prikaži komentar',
+    'LBL_PMSE_LABEL_DUEDATE' => 'Krajnji rok',
+    'LBL_PMSE_DUE' => 'Rok',
+    'LBL_PMSE_DUE_ON' => 'Rok',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'Prvo kreirajte {{conversionParentModuleName}}',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'Nedostaju potrebni zapisi: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'Izaberite kvalitet slike. Veličina slike će u skladu sa tim biti promenjena pre čuvanja na serveru. Izabrana vrednost će biti podrazumevana za sve slične buduće radnje.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'Procenjuje se veličina datoteke...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'Procenjena veličina datoteke je',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'Kvalitet slike',
+    'LBL_IMAGE_QUALITY_BEST' => 'Originalna veličina',
+    'LBL_IMAGE_QUALITY_GOOD' => 'Dobar kvalitet',
+    'LBL_IMAGE_QUALITY_POOR' => 'Mala veličina',
+    'LBL_IMAGE_QUALITY_BTN' => 'Komprimovanje: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'Prikaži spisak polja u modulu {{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'Resetuj podrazumevane vrednosti',
+    'LBL_LIST_NOT_ENOUGH' => 'Podesite najmanje jedno aktivno polje.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'Morate da se prijavite i prihvatite dozvole da biste mogli da radite sa instancom SugarCRM.',
+    'LBL_SELECTING_EXISTING_RECORD' => 'Bira se {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => 'Kreira se novi {{{moduleSingular}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'Veličina slike',
+    'LBL_COPY_ADDRESS' => 'Kopiraj adresu',
+    'LBL_OPEN_IN' => 'Otvori u',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'Nije izabrana nijedna datoteka.',
+    'LBL_ATTACHMENT_ADD' => 'Priloži',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'Ova aplikacija koristi kolačiće',
+    'LBL_USE_COOKIES_CONFIRM' => 'Ova aplikacija koristi kolačiće kako bi vam pružila bolje iskustvo. Nastavljanjem pristajete na upotrebu kolačića u skladu sa našom politikom privatnosti.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'Koristite instancu sistema Sugar koja nije kompatibilna sa aplikacijom Sugar Mobile u predstojećoj mobilnoj verziji. Zamolite administratora da nadogradi Sugar što je pre moguće.',
+    'ERROR_TAG_NAME_INVALID' => 'Naziv oznake ne može da sadrži znakove „{{{forbiddenChars}}}”',
+    'ERROR_NO_TAGS_FOUND' => 'Nema dostupnih oznaka koje odgovaraju upitu „{{{searchQuery}}}”',
+    'ERR_PA_RECORD_INVALID' => 'Zapis modula {{{moduleName}}} sadrži jednu ili više nepravilnih vrednosti i ne može da se sačuva. Želite li da izmenite zapis kako biste obavili radnju {{{actionLabel}}}?',
+    'ERR_MOBILE_METADATA_RELOAD' => 'Administrator je promenio konfiguraciju u vašoj instanci sistema Sugar. Pritisnite U redu kako biste sinhronizovali konfiguraciju aplikacije sa serverom.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'Ova aplikacija koristi kolačiće',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Označite da biste prihvatili (obavezno)',
@@ -4896,6 +5076,10 @@ $app_strings = array (
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telefon: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'E-pošta: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'Web: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Da li ste sigurni da želite da zatvorite ćaskanje?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Vaša prijava nije bila uspešna. Pokušajte ponovo.',
@@ -4942,6 +5126,29 @@ $app_strings = array (
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Ime/Naziv naloga',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'Kontrolna tabla za više kanala',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'Klijent',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} u {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'Vaš pregledač ne podržava SugarLive. Koristite Google Chrome ili Mozilla Firefox.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'Kreiran je modul <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> koji sadrži detalje vaše konverzacije.',
+    'LBL_OMNICHANNEL_SUBJECT' => 'Tema',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'Opis',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Rezime poruke',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Rezime poziva',
+    'LBL_OMNICHANNEL_LINK_TO' => 'Veza {{fromModule}} na {{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => 'Povezano',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Vaš pregledač ne podržava ćaskanje. Koristite Google Chrome ili Mozilla Firefox.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Obratite se Sugar administratoru za pomoć.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'Konfigurišite izgled',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Dovršite konfigurisanje aplikacije SugarLive pre upućivanja odlaznog poziva.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Dovršite konfigurisanje izgleda aplikacije SugarLive pre otvaranja aplikacije SugarLive.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Podesite status na „Van mreže” u aplikaciji SugarLive pre konfigurisanja izgleda aplikacije SugarLive.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'Resetuj karticu na podrazumevana podešavanja',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'Konfigurišite tablu sa rezimeom',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Profil korisnika',
@@ -4973,6 +5180,10 @@ $app_strings = array (
     'LBL_WIZ_CREATE_USERS' => 'Napravi korisnike',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Pregledaj i upravljaj podešavanjima aplikacije',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Podesi aplikaciju',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'Vrednost(i) koje ste uneli nisu podržane ili nisu u prihvatljivom formatu. Za spisak prihvatljivih vrednosti i formata polja pogledajte <a href="{{linkToDocumentation}}" target="_blank">dokumentaciju</a> sistema.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'Ovaj sadržaj nije odobren. Ažurirajte <a href="{{linkToDocumentation}}" target="_blank">podešavanja politike bezbednosti sadržaja</a> za sistem.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'Ovaj sadržaj nije odobren. Zamolite administratora da ažurira<a href="{{linkToDocumentation}}" target="_blank">podešavanja politike bezbednosti sadržaja</a> za vaš sistem. Nakon ažuriranja postavki moraćete da osvežite pregledač kako bi se promene primenile.',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'Lozinka',
@@ -5102,6 +5313,12 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'Moja istorija',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'Timska istorija',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'Istorija',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'Dešlet Istorija prokazuje održane sastanek, obavljene pozive, primljene email poruke i poslete email poruke.',
@@ -5216,6 +5433,7 @@ $app_strings = array (
     //record save
     'LBL_RECORD_SAVED' => 'Zapis sačuvan.', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => 'Uspešno ste napravili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'Uspešno ste kreirali {{moduleSingularLower}}.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Uspešno ste napravili zapis, ali nemate dovoljna ovlašćenja da pristupite zapisu.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Validacija...',
 
@@ -5294,7 +5512,7 @@ $app_strings = array (
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Osveži listu',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'Osveži pločice',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'više',
@@ -5542,6 +5760,7 @@ $app_strings = array (
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'Nerešene aktivnosti',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'Nerešene aktivnosti prema procesima',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'Svi procesi',
+    'LBL_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'Suma statusnih procesa',
@@ -5573,7 +5792,7 @@ $app_strings = array (
     'LBL_BUSINESS_CENTER_ID' => 'ID poslovnog centra',
     'LBL_BUSINESS_CENTER_NAME' => 'Naziv poslovnog centra',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'Aktivnosti kupljenih stavki',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Nova oznaka)',
@@ -5613,6 +5832,7 @@ $app_strings = array (
     'TPL_DATAPRIVACY_PII_TITLE' => 'Lične informacije za {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Promeni tajmere',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'Poruke',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Kopirano u vaš klipbord!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Nije moguće kopirati u vaš klipbord',
@@ -5630,13 +5850,24 @@ $app_strings = array (
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Prikaži manje...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Nema podataka',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktivne pretplate',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'Ovaj dašlet može da se doda samo za module koji su povezani sa jednim nalogom. Više informacija potražite u dokumentaciji za <a href={{linkToDocumentation}}>Dašlet Aktivne pretplate</a>.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'Prikaži kupovine koje pripadaju ovom povezanom nalogu:',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Aktivne pretplate za određeni nalog.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', količina {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Ukupno:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Nema aktivnih pretplata',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Za funkcionisanje ovog dashleta je potreban modul {{module_name}}. Obratite se administratoru za omogućavanje modula {{module_name}}.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'Istorija kupovine',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'Sve kupovine za određeni nalog.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'Ovaj dašlet može da se doda samo za module koji su povezani sa jednim nalogom. Više informacija potražite u dokumentaciji za <a href={{linkToDocumentation}}>Dašlet istorije kupovine</a>.',
+    'LBL_NO_PURCHASE_HISTORY' => 'Nema kupovina za prikaz',
+    'LBL_NO_PLIS' => 'Nema kupljenih stavki',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'Ukupno',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'Količina',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'Za funkcionisanje ovog dashleta su potrebne Kupovine i Kupljene stavke. Obratite se administratoru za omogućavanje Kupovine i Kupljenih stavki.',
+    'LBL_SEARCH_PURCHASE_NAME' => 'Pretraga po nazivu kupovine...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'Koristite Studio da biste uredili pregled zapisa izgleda dašleta tako što ćete otići na ' .
@@ -5652,7 +5883,39 @@ $app_strings = array (
     'LBL_SERVICE_DURATION' => 'Trajanje usluge',
     'LBL_SERVICE_DURATION_VALUE' => 'Vrednost trajanja usluge',
     'LBL_SERVICE_DURATION_UNIT' => 'Jedinica trajanja usluge',
+    'LBL_LOCK_DURATION' => 'Trajanje zaključavanja',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'Učitavanje Amazon Connect CCP-a nije uspelo. Uverite' .
+        'se da koristite '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">podržani pregledač</a>. ' .
+        'Ako se problem i dalje bude javljao, obratite se administratoru za Sugar.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'Administrator za Sugar nije konfigurisao vašu instancu za Amazon Connect.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'Uspostavljanje veze sa Amazon Connect-om nije uspelo. Potražite pomoć od administratora za Sugar.',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'Nepoznato',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa',
+    'LBL_EXTERNAL_GUESTS' => 'Eksterni gosti',
+    'LBL_MY_FAVORITE_TASKS' => 'Moji omiljeni zadaci',
+    'LBL_MY_TASKS' => 'Moji zadaci',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'Nije pronađeno polje: {0} u modulu: {1}',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'Nije pronađen zapis sa {0}: {1} u modulu: {2}',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'Nije pronađena veza pod nazivom: {0}',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'Unos u bazi podataka sa ID-jem: {0}, sa {1}: {2} u modulu: {3} već postoji',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'uslovno izbrisano (sa izbrisanom zastavicom = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'Pronađeno je više zapisa u bazi podataka za {0} {1} na modulu {2}. ' .
+        'Uklonite ili ažurirajte zapise koji se podudaraju na odgovarajući način. Zapisi koji se podudaraju: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'Sledeće pokretanje',
+    'LBL_TIME_AWARE_TYPE' => 'Tip',
+    'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

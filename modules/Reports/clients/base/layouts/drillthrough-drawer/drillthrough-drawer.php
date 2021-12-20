@@ -72,6 +72,9 @@ $viewdefs['Reports']['base']['layout']['drillthrough-drawer'] = array(
                             'components' => array(
                                 array(
                                     'layout' => 'preview',
+                                    'xmeta' => [
+                                        'editable' => true,
+                                    ],
                                 ),
                             ),
                         ),

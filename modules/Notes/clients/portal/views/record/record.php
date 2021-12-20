@@ -38,16 +38,22 @@ $viewdefs['Notes']['portal']['view']['record'] = array(
                     'default' => true,
                     'enabled' => true,
                 ),
-                array(
-                    'name' => 'filename',
+                [
+                    'name' => 'attachment_list',
                     'default' => true,
                     'enabled' => true,
-                    'sorting' => true,
+                    'label' => 'LBL_ATTACHMENTS',
+                    'type' => 'multi-attachments',
+                    'link' => 'attachments',
+                    'module' => 'Notes',
+                    'modulefield' => 'filename',
+                    'bLabel' => 'LBL_ADD_ATTACHMENT',
                     'span' => 12,
-                    'related_fields' => array(
+                    'related_fields' => [
+                        'filename',
                         'file_mime_type',
-                    ),
-                ),
+                    ],
+                ],
                 array(
                     'name' => 'date_entered_by',
                     'readonly' => true,

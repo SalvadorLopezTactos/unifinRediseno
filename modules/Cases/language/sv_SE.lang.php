@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Panel för fallistor',
     'LBL_CASES_RECORD_DASHBOARD' => 'Panel för fallposter',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Ärendedetaljer',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för ärenden',
 
 	'ERR_DELETE_RECORD'					=> 'Ett objektnummer måste specificeras för att kunna radera organisationen.',
 	'LBL_ACCOUNT_ID'					=> 'Konto-ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Visa i portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Skapa artikel',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Kunskapsbas',
+    'LBL_REQUEST_CLOSE' => 'Begär avslut',
+    'LBL_REQUEST_CLOSE_DATE' => 'Begär avslutsdatum',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Begäran om att avsluta',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Skicka en begäran om att avsluta detta ärende',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Vill du göra en begäran om att detta ärende avslutas?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Mina ärenden som begärts att avslutas',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Mina ärenden som begärts att avslutas',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Mina ärenden som begärts att avslutas',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Lista över ärenden som begärts att avslutas',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Visar en lista över tilldelade ärenden som har begärts att avslutas',
 
     'LBL_CREATED_USER' => 'Skapad användare',
     'LBL_MODIFIED_USER' => 'Ändrad användare',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tilldelat Användarnamn',
     'LBL_EXPORT_TEAM_COUNT' => 'Team Räknare',
     'LBL_CHANGETIMERS' => 'Ändra timers',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Köp',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Relaterad Kontakts Emails',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Till exempel kan du använda detta för att hitta en fråga som tidigare har lämnats in.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Om du har en ny support case du vill skicka in kan du klicka här för att skicka in ett nytt case.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Genom att klicka här kommer du tillbaka till den här vyn när som helst.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ärendeinteraktioner',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Anteckningar',
 

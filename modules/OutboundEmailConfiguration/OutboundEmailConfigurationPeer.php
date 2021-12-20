@@ -14,8 +14,6 @@
 
 // external imports
 
-use Sugarcrm\Sugarcrm\Util\Serialized;
-
 class OutboundEmailConfigurationPeer
 {
     const MODE_DEFAULT = "default";
@@ -308,7 +306,7 @@ class OutboundEmailConfigurationPeer
         foreach ($ieAccounts as $inbox_id => $ie) {
             $name = $ie->get_stored_options('from_name');
             $addr = $ie->get_stored_options('from_addr');
-            $storedOptions = Serialized::unserialize($ie->stored_options, array(), true);
+            $storedOptions = unserialize(base64_decode($ie->stored_options), ['allowed_classes' => false]);
             $isAllowedGroup = $ie->get_stored_options('allow_outbound_group_usage',false);
             if (!$ie->is_personal && !$isAllowedGroup) {
                 continue;
@@ -581,8 +579,10 @@ class OutboundEmailConfigurationPeer
                 if ($outboundEmail->mail_smtpauth_req) {
                     // require authentication with the SMTP server
                     $outboundEmailConfiguration->setAuthenticationRequirement(true);
+                    $outboundEmailConfiguration->setAuthType($outboundEmail->mail_authtype);
                     $outboundEmailConfiguration->setUsername($outboundEmail->mail_smtpuser);
                     $outboundEmailConfiguration->setPassword($outboundEmail->mail_smtppass);
+                    $outboundEmailConfiguration->setEAPMId($outboundEmail->eapm_id);
                 }
 
                 // determine the appropriate encryption layer for the sending strategy

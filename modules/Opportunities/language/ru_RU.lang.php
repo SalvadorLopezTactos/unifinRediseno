@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Информационная панель списка сделок',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Информационная панель записей сделок',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Сведения о сделке',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для потенциальных сделок',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Продлеваемая сделка',
 
     'LBL_MODULE_NAME' => 'Сделки',
     'LBL_MODULE_NAME_SINGULAR' => 'Сделка',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Тип:',
     'LBL_CAMPAIGN' => 'Маркетинговая кампания:',
     'LBL_NEXT_STEP' => 'Следующий шаг:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Дата начала обслуживания',
     'LBL_LEAD_SOURCE' => 'Источник предварительного контакта:',
     'LBL_SALES_STAGE' => 'Стадия продажи:',
     'LBL_SALES_STATUS' => 'Статус',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Стадия совершения продажи',
     'LBL_COMMIT_STAGE_FORECAST' => 'Прогноз',
     'LBL_WORKSHEET' => 'Лист прогнозов',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Приобретенные продукты',
 
     'LBL_RENEWAL' => 'Продление',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Продлеваемые сделки',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID изначальной сделки, которая продлевается',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Стадия продажи',
+    'LBL_WIDGET_DATE_CLOSED' => 'Ожидаемая дата закрытия',
+    'LBL_WIDGET_AMOUNT' => 'Сумма',
 
     'TPL_RLI_CREATE' => 'Сделка должна быть привязана к продукту.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Создать новую позицию продажи.',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# суммарного дохода по продуктам',
     'LBL_CLOSED_RLIS' => '# закрытого дохода по продуктам',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# позиции статьи доходов с переменной длительностью открытого обслуживание',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Вы не можете удалить продажи, которые содержат закрытый доход по продукту',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Одна или более выбранных записей содержат закрытый доход по продуктам и не могут быть удалены',
     'LBL_INCLUDED_RLIS' => '# учтенного дохода по продуктам',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Открытое обновление',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Невозможно установить дату начала обслуживания после даты окончания обслуживания любых открытых дополнительных позиций доходов.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Коммерческие предложения',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Потенциальные клиенты, связанные с динамической учетной записью',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Структура сделки',
@@ -200,7 +207,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'После выполнения этого изменения в фоновом режиме для каждого имеющегося {{module_name}} будут созданы записи дохода по продуктам. Когда доходы по продуктам станут доступными и будут содержать полную информацию, на адрес электронной почты, зарегистрированный для вашего профиля пользователя, будет отправлено уведомление. Обратите внимание, что для отправки уведомлений по электронной почте в вашем экземпляре программы необходимо настроить соотвествующие параметры в меню Admin > Email Settings (Администратор > Настройки электронной почты).',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} позволяет отслеживать отдельные продажи от начала до конца. Каждая запись {{module_name}} представляет собой потенциальную сделку и содержит необходимые данные о продаже, а также данные, касающиеся других важных записей, таких как {{quotes_module}}, {{contacts_module}} и т. д. Модуль {{module_name}} обычно проходит через несколько стадий продажи до тех пор, пока ему не будет присвоен статус "Успешно закрыто" или "Потеряно". Пользу от применения модуля {{plural_module_name}} можно увеличить, используя модуль {{forecasts_singular_module}} системы Sugar для понимания и прогнозирования тенденций продаж и фокусирования усилий на достижении установленных квот сбыта.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} позволяет отслеживать отдельные продажи и относящиеся к ним продукты от начала до конца. Каждая запись {{module_name}} представляет собой потенциальную сделку и содержит необходимые данные о продаже, а также данные, касающиеся других важных записей, таких как {{quotes_module}}, {{contacts_module}}, и т. д. Модуль {{module_name}} обычно проходит через несколько стадий продажи до тех пор, пока ему не будет присвоен статус "Успешно закрыто" или "Потеряно". Пользу от применения модуля {{plural_module_name}} можно увеличить, используя модуль {{forecasts_singular_module}} системы Sugar для понимания и прогнозирования тенденций продаж и фокусирования усилий на достижении установленных квот сбыта.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Модуль {{plural_module_name}} позволяет отслеживать отдельные продажи и относящиеся к ним продукты от начала до конца. Каждая запись {{module_name}} представляет собой потенциальную сделку и содержит необходимые данные о продаже, а также данные, касающиеся других важных записей, таких как {{quotes_module}}, {{contacts_module}} и т. д.
@@ -231,5 +238,10 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Мои продажи',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Продажи моей команды",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Невозможно изменить {{fieldName}}, поскольку у этого {{moduleSingular}} нет открытых позиций каталога продуктов.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействие с потенциальным клиентом',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Прогноз по закрытию сделки',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Просмотреть подробные аналитические сведения о конкретной сделке',
 );

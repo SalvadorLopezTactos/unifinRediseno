@@ -749,6 +749,12 @@
                 // set reportData's rawChartData to the chartData from the server
                 // this will trigger chart.js' change:rawChartData and the chart will update
                 this.reportData.set('rawChartData', serverData.chartData);
+
+                // even if the chart data isn't new, we still want to update the chart to resize
+                // if the container's size has changed
+                if (_.isEmpty(this.reportData.changed)) {
+                    this.reportData.trigger('change:rawChartData', this.reportData, serverData.chartData);
+                }
             }, this),
             complete: options ? options.complete : null
         });

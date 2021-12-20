@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الحالات',
     'LBL_CASES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الحالات',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'تفاصيل الحالة',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الحالات',
 
 	'ERR_DELETE_RECORD'					=> 'يجب تحديد رقم السجل لحذف الحساب.',
 	'LBL_ACCOUNT_ID'					=> 'معرّف الحساب',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'الإظهار في البوابة',
 	'LBL_CREATE_KB_DOCUMENT' => 'إنشاء مقالة',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'قاعدة المعارف',
+    'LBL_REQUEST_CLOSE' => 'إغلاق الطلب',
+    'LBL_REQUEST_CLOSE_DATE' => 'تاريخ طلب الإغلاق',
+    'LBL_REQUEST_CLOSE_LABEL' => 'طلب الإغلاق',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'إرسال طلب لإغلاق هذه الحالة',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'هل ترغب في طلب إغلاق هذه الحالة؟',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'حالاتي التي طُلب إغلاقها',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'حالاتي التي طُلب إغلاقها',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'حالاتي التي طُلب إغلاقها',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'قائمة الحالات التي طُلب إغلاقها',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'إظهار قائمة بالحالات المخصصة التي طُلب إغلاقها',
 
     'LBL_CREATED_USER' => 'المستخدم الذي تم إنشاؤه',
     'LBL_MODIFIED_USER' => 'المستخدم الذي تم تعديله',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'اسم المستخدم المعين',
     'LBL_EXPORT_TEAM_COUNT' => 'عدد الفرق',
     'LBL_CHANGETIMERS' => 'تغيير المؤقتات',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'المشتريات',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'رسائل البريد الإلكتروني الخاصة بجهات الاتصال ذات الصلة',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'على سبيل المثال، يمكن استخدام ذلك للبحث عن مشكلة تم الإبلاغ عنها من قبل.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'في حالة العثور على دعم حالة جديد ترغب في الإبلاغ عنه، يمكنك أن تنقر هنا للإبلاغ عن حالة جديدة.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'يؤدي النقر هنا إلى إعادتك إلى طريقة العرض هذه في أي وقت.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'تفاعلات الحالة',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'ملاحظات',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'تفاصيل SLA',
     'LBL_HOURS' => 'ساعات',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'الحالة',
 );

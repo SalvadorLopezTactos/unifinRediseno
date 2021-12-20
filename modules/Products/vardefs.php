@@ -39,7 +39,6 @@ $dictionary['Product'] = array(
             'dbType' => 'varchar',
             'len' => '255',
             'source' => 'non-db',
-            'source' => 'non-db',
             'studio' => false,
             'massupdate' => false,
         ),
@@ -96,12 +95,24 @@ $dictionary['Product'] = array(
                 'base_rate' => 'base_rate',
                 'service_start_date' => 'service_start_date',
                 'service_end_date' => 'service_end_date',
-                'service_duration_value' => 'service_duration_value',
-                'service_duration_unit' => 'service_duration_unit',
+                'service_duration_value' => ['service_duration_value', 'catalog_service_duration_value'],
+                'service_duration_unit' => ['service_duration_unit', 'catalog_service_duration_unit'],
                 'renewable' => 'renewable',
                 'service' => 'service',
             ),
         ),
+        'lock_duration' => [
+            'name' => 'lock_duration',
+            'vname' => 'LBL_LOCK_DURATION',
+            'type' => 'bool',
+            'default' => 0,
+            'studio' => false,
+            'enforced' => true,
+            'calculated' => true,
+            'massupdate' => false,
+            'formula' => 'related($product_templates_link, "lock_duration")',
+            'comment' => 'Turn on or off a user ability to directly edit the duration field',
+        ],
         'account_id' => array(
             'name' => 'account_id',
             'type' => 'id',
@@ -132,14 +143,41 @@ $dictionary['Product'] = array(
                 'currency_id',
                 'base_rate',
                 'discount_price',
-                'quantity'
+                'quantity',
+                'service_duration_value',
+                'service_duration_unit',
+                'catalog_service_duration_value',
+                'catalog_service_duration_unit',
             ),
             'formula' => '
-                 ifElse(and(isNumeric($quantity), isNumeric($discount_price)),
-                   ifElse(equal($quantity, 0), "0", currencyMultiply($discount_price, $quantity))
-                 , "")',
+                ifElse(
+                    and(isNumeric($discount_price), isNumeric($quantity)),
+                    ifElse(
+                        and(
+                            isNumeric($service_duration_value),
+                            isNumeric($catalog_service_duration_value),
+                            not(equal($service_duration_unit, "")),
+                            not(equal($catalog_service_duration_unit, ""))
+                        ),
+                        prorateValue(
+                            multiply($discount_price, $quantity),
+                            number($service_duration_value),
+                            $service_duration_unit,
+                            number($catalog_service_duration_value),
+                            $catalog_service_duration_unit
+                        ),
+                        multiply($discount_price, $quantity)
+                    ),
+                    0
+                )
+            ',
             'calculated' => true,
             'enforced' => true,
+            'comment' => 'The total of the line item before any discounts are applied, taking proration into consideration',
+            'additionalCalculationTriggerFields' => [
+                'discount_amount',
+                'discount_select',
+            ],
         ),
         'total_amount' => array(
             'name' => 'total_amount',
@@ -147,17 +185,17 @@ $dictionary['Product'] = array(
             'formula' => '
                 ifElse(and(isNumeric(toString($quantity)), isNumeric(toString($discount_price))),
                     currencySubtract(
-                        currencyMultiply(
-                            $discount_price,
-                            $quantity
-                        ),
+                        ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)),
                         ifElse(equal($discount_select, "1"),
-                            currencyMultiply(currencyMultiply($discount_price, $quantity), currencyDivide($discount_amount, 100)),
-                            ifElse(isNumeric(toString($discount_amount)), $discount_amount, 0)
+                            currencyMultiply(ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)), currencyDivide($discount_amount, 100)),
+                            ifElse(greaterThan($quantity, 0), ifElse(isNumeric(toString($discount_amount)),
+                                ifElse(greaterThan(0, $discount_price), negate($discount_amount), $discount_amount), 0),
+                            ifElse(isNumeric(toString($discount_amount)), negate($discount_amount), 0))
                         )
                     ),
                     ""
-                )',
+                )
+            ',
             'calculated' => true,
             'enforced' => true,
             'vname' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
@@ -169,7 +207,8 @@ $dictionary['Product'] = array(
                 'quantity',
                 'discount_price',
                 'discount_select',
-                'discount_amount'
+                'discount_amount',
+                'subtotal',
             ),
         ),
         'contact_name' => array(
@@ -212,26 +251,25 @@ $dictionary['Product'] = array(
             'massupdate' => false,
             'comment' => 'Manufacturer of product'
         ),
-        'manufacturer_name' =>
-            array(
+        'manufacturer_name' => array(
                 'name' => 'manufacturer_name',
-                'rname' => 'name',
-                'id_name' => 'manufacturer_id',
-                'type' => 'relate',
-                'vname' => 'LBL_MANUFACTURER_NAME',
-                'join_name' => 'manufacturers',
-                'link' => 'manufacturers',
-                'table' => 'manufacturers',
-                'isnull' => 'true',
-                'source' => 'non-db',
-                'module' => 'Manufacturers',
-                'dbType' => 'varchar',
-                'len' => '255',
-                'massupdate' => false,
-                'related_fields' => array(
-                    'manufacturer_id'
-                )
+            'rname' => 'name',
+            'id_name' => 'manufacturer_id',
+            'type' => 'relate',
+            'vname' => 'LBL_MANUFACTURER_NAME',
+            'join_name' => 'manufacturers',
+            'link' => 'manufacturers',
+            'table' => 'manufacturers',
+            'isnull' => 'true',
+            'source' => 'non-db',
+            'module' => 'Manufacturers',
+            'dbType' => 'varchar',
+            'len' => '255',
+            'massupdate' => false,
+            'related_fields' => array(
+                'manufacturer_id',
             ),
+        ),
         'category_id' => array(
             'name' => 'category_id',
             'vname' => 'LBL_CATEGORY',
@@ -261,7 +299,7 @@ $dictionary['Product'] = array(
             'vname' => 'LBL_NAME',
             'dbType' => 'varchar',
             'type' => 'name',
-            'len' => '50',
+            'len' => '255',
             'unified_search' => true,
             'full_text_search' => array(
                 'enabled' => true,
@@ -299,6 +337,19 @@ $dictionary['Product'] = array(
                 'base_rate'
             ),
         ),
+        'discount_amount_signed' => array(
+            'name' => 'discount_amount_signed',
+            'vname' => 'LBL_DISCOUNT_AMOUNT_SIGNED',
+            'type' => 'currency',
+            'len' => '26,6',
+            'default' => '0',
+            'audited' => true,
+            'comment' => 'Discounted Amount Signed',
+            'formula' => 'subtract(ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)), $total_amount)',
+            'calculated' => true,
+            'studio' => false,
+            'enforced' => true,
+        ),
         'discount_price' => array(
             'name' => 'discount_price',
             'vname' => 'LBL_DISCOUNT_PRICE',
@@ -316,7 +367,7 @@ $dictionary['Product'] = array(
             'name' => 'discount_amount',
             'vname' => 'LBL_DISCOUNT_AMOUNT',
             'dbType' => 'currency',
-            'type' => 'discount',
+            'type' => 'discount-amount',
             'len' => '26,6',
             'default' => '0',
             'precision' => '6',
@@ -367,8 +418,8 @@ $dictionary['Product'] = array(
             'group' => 'deal_calc',
             'comment' => 'deal_calc',
             'formula' => 'ifElse(equal($discount_select, "1"),
-                            currencyMultiply(currencyMultiply($discount_price, $quantity), currencyDivide($discount_amount, 100)),
-                            ifElse(isNumeric($discount_amount), $discount_amount, 0)
+                            currencyMultiply(ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)), currencyDivide($discount_amount, 100)),
+                            ifElse(isNumeric($discount_amount_signed), $discount_amount_signed, 0)
                         )',
             'calculated' => true,
             'enforced' => true,
@@ -377,7 +428,8 @@ $dictionary['Product'] = array(
                 'base_rate',
                 'discount_price',
                 'quantity',
-                'discount_amount'
+                'discount_amount',
+                'subtotal',
             ),
         ),
         'deal_calc_usdollar' => array(
@@ -473,15 +525,6 @@ $dictionary['Product'] = array(
                 'searchable' => false,
             ),
         ),
-        'tax_class' => array(
-            'name' => 'tax_class',
-            'vname' => 'LBL_TAX_CLASS',
-            'type' => 'enum',
-            'options' => 'tax_class_dom',
-            'len' => 100,
-            'comment' => 'Tax classification (ex: Taxable, Non-taxable)',
-            'default' => 'Taxable',
-        ),
         'book_value_usdollar' => array(
             'name' => 'book_value_usdollar',
             'vname' => 'LBL_BOOK_VALUE_USDOLLAR',
@@ -534,6 +577,7 @@ $dictionary['Product'] = array(
             'enforced' => true,
             'calculated' => true,
             'formula' => 'timestamp($date_closed)',
+            'importable' => false,
         ),
         'next_step' => array(
             'name' => 'next_step',
@@ -568,6 +612,9 @@ $dictionary['Product'] = array(
             'table' => 'campaigns',
             'module' => 'Campaigns',
             'source' => 'non-db',
+            'studio' => array(
+                'mobile' => false,
+            ),
         ),
         'campaign_products' => array(
             'name' => 'campaign_products',
@@ -590,6 +637,13 @@ $dictionary['Product'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'product_messages',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'documents' => array(
             'name' => 'documents',
             'type' => 'link',
@@ -663,7 +717,7 @@ $dictionary['Product'] = array(
             'name' => 'type_name',
             'rname' => 'name',
             'id_name' => 'type_id',
-            'vname' => 'LBL_TYPE',
+            'vname' => 'LBL_PRODUCT_TYPE',
             'join_name' => 'types',
             'type' => 'relate',
             'link' => 'product_types_link',
@@ -728,6 +782,26 @@ $dictionary['Product'] = array(
             'source' => 'non-db',
             'duplicate_merge' => 'disabled',
         ), //bug 20184, add contact_link field
+        'pli_addons_link' => [
+            'name' => 'pli_addons_link',
+            'type' => 'link',
+            'relationship' => 'product_pli_addons',
+            'vname' => 'LBL_ADD_ON_TO',
+            'link_type' => 'one',
+            'module' => 'PurchasedLineItems',
+            'bean_name' => 'PurchasedLineItem',
+            'source' => 'non-db',
+        ],
+        'parent_rli_link' => [
+            'name' => 'parent_rli_link',
+            'type' => 'link',
+            'relationship' => 'products_parent_rli',
+            'vname' => 'LBL_REVENUELINEITEM',
+            'link_type' => 'one',
+            'module' => 'RevenueLineItems',
+            'bean_name' => 'RevenueLineItem',
+            'source' => 'non-db',
+        ],
         'account_name' => array(
             'name' => 'account_name',
             'rname' => 'name',
@@ -807,6 +881,91 @@ $dictionary['Product'] = array(
             'bean_name' => 'Manufacturer',
             'source' => 'non-db',
         ),
+        'parent_rli_id' => [
+            'name' => 'parent_rli_id',
+            'comment' => 'RLI this product was generated from',
+            'vname' => 'LBL_REVENUELINEITEM_ID',
+            'rname' => 'id',
+            'type' => 'id',
+            'dbType' => 'id',
+            'is_null' => true,
+            'reportable' => false,
+            'massupdate' => false,
+            'table' => 'revenue_line_items',
+            'module' => 'RevenueLineItems',
+            'duplicate_merge' => 'disabled',
+        ],
+        'parent_rli_name' => [
+            'name' => 'parent_rli_name',
+            'rname' => 'name',
+            'id_name' => 'parent_rli_id',
+            'vname' => 'LBL_REVENUELINEITEM',
+            'type' => 'relate',
+            'save' => true,
+            'isnull' => true,
+            'link' => 'parent_rli_link',
+            'table' => 'revenue_line_items',
+            'module' => 'RevenueLineItems',
+            'source' => 'non-db',
+            'studio' => false,
+        ],
+        'add_on_to_id' => [
+            'name' => 'add_on_to_id',
+            'comment' => 'Purchased line item that this is an add-on to',
+            'vname' => 'LBL_ADD_ON_TO_ID',
+            'rname' => 'id',
+            'type' => 'id',
+            'dbType' => 'id',
+            'table' => 'purchased_line_items',
+            'isnull' => 'true',
+            'module' => 'PurchasedLineItems',
+            'reportable' => false,
+            'massupdate' => false,
+            'duplicate_merge' => 'disabled',
+        ],
+        'add_on_to_name' => [
+            'name' => 'add_on_to_name',
+            'rname' => 'name',
+            'id_name' => 'add_on_to_id',
+            'vname' => 'LBL_ADD_ON_TO',
+            'type' => 'relate',
+            'save' => true,
+            'link' => 'pli_addons_link',
+            'isnull' => 'true',
+            'table' => 'purchased_line_items',
+            'module' => 'PurchasedLineItems',
+            'source' => 'non-db',
+            'massupdate' => false,
+            'copyFromPurchasedLineItem' => [
+                'product_template_id' => 'product_template_id',
+                'product_template_name' => 'product_template_name',
+                'service_end_date' => 'service_end_date',
+            ],
+            'copyFromProductTemplate' => [
+                'name' => 'name',
+                'category_id' => 'category_id',
+                'category_name' => 'category_name',
+                'mft_part_num' => 'mft_part_num',
+                'list_price' => 'list_price',
+                'cost_price' => 'cost_price',
+                'discount_price' => 'discount_price',
+                'list_usdollar' => 'list_usdollar',
+                'cost_usdollar' => 'cost_usdollar',
+                'discount_usdollar' => 'discount_usdollar',
+                'currency_id' => 'currency_id',
+                'base_rate' => 'base_rate',
+                'tax_class' => 'tax_class',
+                'weight' => 'weight',
+                'manufacturer_id' => 'manufacturer_id',
+                'manufacturer_name' => 'manufacturer_name',
+                'type_id' => 'type_id',
+                'type_name' => 'type_name',
+                'renewable' => 'renewable',
+                'service' => 'service',
+                'service_duration_value' => 'catalog_service_duration_value',
+                'service_duration_unit' => 'catalog_service_duration_unit',
+            ],
+        ],
     ),
     'indices' => array(
         array(
@@ -842,6 +1001,17 @@ $dictionary['Product'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Products'
         ),
+        'product_messages' => [
+            'lhs_module' => 'Products',
+            'lhs_table' => 'products',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Products',
+        ],
         'opportunities_products' => array(
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
@@ -954,6 +1124,24 @@ $dictionary['Product'] = array(
             'rhs_key' => 'manufacturer_id',
             'relationship_type' => 'one-to-many'
         ),
+        'products_parent_rli' => [
+            'lhs_module' => 'RevenueLineItems',
+            'lhs_table' => 'revenue_line_items',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Products',
+            'rhs_table' => 'products',
+            'rhs_key' => 'parent_rli_id',
+            'relationship_type' => 'one-to-many',
+        ],
+        'product_pli_addons' => [
+            'lhs_module' => 'PurchasedLineItems',
+            'lhs_table' => 'purchased_line_items',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Products',
+            'rhs_table' => 'products',
+            'rhs_key' => 'add_on_to_id',
+            'relationship_type' => 'one-to-many',
+        ],
     ),
     'duplicate_check' => array(
         'enabled' => true,

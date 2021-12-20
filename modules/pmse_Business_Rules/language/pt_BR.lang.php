@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Regras de negócios de processos',
   'LBL_MODULE_NAME_SINGULAR' => 'Regra de negócios de processo',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco nas regras de negócio dos processos',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Painel de registro de regras de negócios de processo',
   'LBL_RST_UID' => 'ID da regra de negócio',
   'LBL_RST_TYPE' => 'Tipo de regra de negócios',
   'LBL_RST_DEFINITION' => 'Definição de regra de negócio',

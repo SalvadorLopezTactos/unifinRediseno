@@ -592,6 +592,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'הגדר פורטל',
     'LBL_PORTAL_ENABLE_PORTAL' => 'הפעל פורטל',
     'LBL_PORTAL_ENABLE_SEARCH' => 'הפעל חיפוש לפני פתיחת אירוע',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'אפשר למשתמשי הפורטל לסגור פניית שירות',
     'LBL_PORTAL_THEME' => 'פורטל נושא',
     'LBL_PORTAL_ENABLE' => 'אפשר',
     'LBL_PORTAL_SITE_URL' => 'אתר הפורטל לך זמין ב',
@@ -783,7 +784,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'בחר כדי להשתמש בשדה זה בעת חיפוש עבור רישומים באמצעות החיפוש הגלובלי במודול זה.',
+'LBL_POPHELP_REQUIRED'=>"צור נוסחה כדי לקבוע אם שדה זה דרוש בתצורות.<br/>"
+    . "שדות החובה יפעלו לפי הנוסחה בתצוגת נייד מבוססת-דפדפן, <br/>"
+    . "אבל לא יפעלו לפי הנוסחה באפליקציות המקוריות, כמו Sugar Mobile ל-iPhone. <br/>"
+    . "הם לא יפעלו לפי הנוסחה בפורטל לשירות עצמי של Sugar.",
+'LBL_POPHELP_READONLY'=>"צור נוסחה כדי לקבוע אם שדה זה מוגדר לקריאה בלבד בתצורות.<br/>"
+        . "שדות לקריאה בלבד יפעלו לפי הנוסחה בתצוגת נייד מבוססת-דפדפן, <br/>"
+        . "אבל לא יפעלו לפי הנוסחה באפליקציות המקוריות, כמו Sugar Mobile ל-iPhone. <br/>"
+        . "הם לא יפעלו לפי הנוסחה בפורטל לשירות עצמי של Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'בחר כדי להשתמש בשדה זה במהלך חיפוש רשומות באמצעות חיפוש גלובלי במודול זה.',
 //Revert Module labels
 'LBL_RESET' => 'איפוס',
 'LBL_RESET_MODULE' => 'אפס מודול',
@@ -818,6 +827,7 @@ $mod_strings = array(
                 'encrypt'=>'הצפן',
                 'datetimecombo' =>'Datetime',
                 'decimal'=>'עשרונים',
+                'autoincrement' => 'תוספת אוטומטית',
 ),
 'labelTypes' => array(
     "" => "תוויות נפוצות",
@@ -835,4 +845,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'כל המודולים',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (ביחס {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'העתק מפריסת דף',
+'LBL_RELATIONSHIP_TYPE' => 'קשר גומלין',
 );

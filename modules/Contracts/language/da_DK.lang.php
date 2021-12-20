@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Ændret af id',
     'LBL_EXPORT_CREATED_BY' => 'Oprettet af id',
     'LBL_EXPORT_TYPE_NAME' => 'Typenavn',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Kontrakter',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Betjeningspanel til kontraktoptegnelse',
 );

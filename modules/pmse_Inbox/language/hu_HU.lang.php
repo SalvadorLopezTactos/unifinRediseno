@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Folyamat-Menedzsment',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Nem felügyelt Folyamatok',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Folyamatok figyelemfelhívás',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Folyamatok bejegyzés műszerfal',
+
     'LBL_CAS_ID' => 'Folyamat száma',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Ismeretlen (a felhasználói azonosító:&#39;%s&#39; szerint)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "feladattal ez történt:",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Tervezési folyamat előnézet',
     'LBL_PROJECT_RUN_ORDER' => 'Megrendelés futtatása',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Jelenlegi tevékenység',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Módosítás dátuma',
+    'LBL_DATE_ENTERED' => 'Létrehozás dátuma',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Biztos benne, hogy birtokba szeretné venni ezt a folyamatot?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'A folyamat birtokbavétele sikeres',
 );
 

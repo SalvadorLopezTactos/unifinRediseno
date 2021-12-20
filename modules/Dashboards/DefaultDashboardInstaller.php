@@ -72,7 +72,7 @@ class DefaultDashboardInstaller
         $dashboardProperties = [
             'name' => $dashboardContents['name'],
             'dashboard_module' => $module,
-            'view_name' => $module !== 'Home' ? $layout : null,
+            'view_name' => $module !== 'Home' ? $layout : 'home',
             'metadata' => json_encode($dashboardContents['metadata']),
             'default_dashboard' => true,
             'team_id' => $this->globalTeamId,

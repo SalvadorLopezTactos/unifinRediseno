@@ -9,9 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
-
 /**
  * CRON driver for job queue
  * @api
@@ -127,12 +125,13 @@ class SugarCronJobs
     /**
      * What to do if one of the jobs failed
      * @param SchedulersJob $job
+     * @param string $errMsg
      */
-    protected function jobFailed($job = null)
+    protected function jobFailed($job = null, $errMsg = '')
     {
         $this->runOk = false;
         if(!empty($job)) {
-            $GLOBALS['log']->fatal("Job {$job->id} ({$job->name}) failed in CRON run");
+            $GLOBALS['log']->fatal("Job {$job->id} ({$job->name}) failed in CRON run, " . $errMsg);
             if($this->verbose) {
                 printf(translate('ERR_JOB_FAILED_VERBOSE', 'SchedulersJobs'), $job->id, $job->name);
             }
@@ -190,17 +189,43 @@ class SugarCronJobs
         // Before calling save, we need to clear out any existing registered AWF
         // triggered start events so they can continue to trigger.
         Registry\Registry::getInstance()->drop('triggered_starts');
-
         $this->setTimeLimit($this->max_runtime);
-        $res = $this->job->runJob();
-        $this->clearTimeLimit();
-        if (!$res) {
-            // if some job fails, change run status
-            $this->jobFailed($this->job);
+        try {
+            set_error_handler([$this, "errorHandler"], E_ALL & ~E_NOTICE & ~E_STRICT);
+            $res = $this->job->runJob();
+            restore_error_handler();
+            $this->clearTimeLimit();
+            if (!$res) {
+                // if some job fails, change run status
+                $this->jobFailed($this->job);
+            }
+        } catch (Throwable $t) {
+            $this->clearTimeLimit();
+            restore_error_handler();
+            $this->jobFailed($this->job, $t->getMessage());
+            $this->job->failJob(translate('ERR_FAILED', 'SchedulersJobs'));
         }
         // If the job produced a session, destroy it - we won't need it anymore
         if (session_id()) {
             session_destroy();
+        }
+    }
+
+    /**
+     * catch error
+     * @param int    $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int    $errline
+     * @throws Exception
+     */
+    protected function errorHandler($errno, $errstr, $errfile, $errline)
+    {
+        $GLOBALS['log']->fatal("$errfile Error: $errno: $errstr");
+        if (!empty($this->job)) {
+            throw new Exception("Job {$this->job->id} ({$this->job->name}) failed, errstr: {$errstr}");
+        } else {
+            throw new Exception("Job () failed, errstr: {$errstr}");
         }
     }
 

@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmEventDefinition'] = array(
     'table' => 'pmse_bpm_event_definition',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,

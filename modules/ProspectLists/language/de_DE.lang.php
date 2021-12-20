@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Zielkontaktlisten-Dashboard',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Zielkontaktbericht-Dashboard',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Kontaktlisten',
+  'LBL_RELATED_ACCOUNTS' => 'Verknüpfte Konten',
+  'LBL_RELATED_CONTACTS' => 'Verknüpfte Kontakte',
+  'LBL_RELATED_LEADS_TARGETS' => 'Verknüpfte Leads und Zielkontakte',
 
   'LBL_MODULE_NAME' => 'Kontaktlisten',
   'LBL_MODULE_NAME_SINGULAR' => 'Zielkontaktliste',

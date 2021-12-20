@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'נוצר על ידי מזהה',
     'LBL_EXPORT_CREATED_BY_NAME' => 'נוצר על ידי שם משתמש',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'שם המשתמש שהוקצה',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס תגים',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות תגים',
+    'LBL_MY_TAGS' => 'התגים שלי',
+    'LBL_MY_FAVORITE_TAGS' => 'התגים המועדפים שלי',
 );

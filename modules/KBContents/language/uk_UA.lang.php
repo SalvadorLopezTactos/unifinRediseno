@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Інформаційна панель списку бази знань',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Інформаційна панель записів бази знань',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель баз знань',
 
     'LBL_MODULE_NAME' => 'База знань',
     'LBL_MODULE_NAME_SINGULAR' => 'Стаття бази знань',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Не корисно',
     'LBL_RATING' => 'Рейтинг',
     'LBL_VIEWED_COUNT' => 'Кількість переглядів',
-    'LBL_DOWNLOAD_ALL' => 'Завантажити все',
-    'LBL_DOWNLOAD_ONE' => 'Завантажити',
-    'LBL_ATTACHMENTS' => 'Вкладення:',
-    'LBL_ADD_ATTACHMENT' => 'Огляд',
     'LBL_CATEGORIES' => 'Категорії бази знань',
     'LBL_CATEGORY_NAME' => 'Категорія',
     'LBL_USEFULNESS' => 'Корисність',

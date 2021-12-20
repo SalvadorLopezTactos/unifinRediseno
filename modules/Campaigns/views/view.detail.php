@@ -82,6 +82,8 @@ class CampaignsViewDetail extends ViewDetail {
 	    	$this->ss->assign('CURRENCY', $currency->getDefaultISO4217() .' '.$currency->getDefaultCurrencySymbol());
 	    }
 
+        $this->ss->assign('HAS_EDIT_ACCESS', $this->bean->ACLAccess('edit'));
+
         parent::display();
 
         //We want to display subset of available, panels, so we will call subpanel

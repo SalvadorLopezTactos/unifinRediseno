@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => '프로세스 이메일 템플릿',
     'LBL_MODULE_NAME_SINGULAR' => '공정 이메일 템플릿',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '프로세스 이메일 템플릿 포커스 서랍',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => '프로세스 이메일 템플릿 기록 대시보드',
     'LNK_LIST' => '보기 프로세스 이메일 템플릿',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => '프로세스 이메일 템플릿 만들기',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => '프로세스 이메일 템플릿 가져오기',

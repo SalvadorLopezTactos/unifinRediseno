@@ -145,7 +145,10 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'Email cím',
   'LBL_CONTACTS_SYNC' => 'Kapcsolatok',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
+        'Az alkalmazott csak a <a href="{0}" target="_blank">SugarCloud beállítások</a> részben hozható létre',
+
+    'LBL_COOKIE_CONSENT' => 'Süti hozzájárulás',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Süti hozzájárulás kézhezvétele ekkor',
 );
 
 

@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => '리드 목록 대시보드',
     'LBL_LEADS_RECORD_DASHBOARD' => '리드 기록 대시보드',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => '리드 포커스 서랍',
 
     'ERR_DELETE_RECORD' => '자료를 삭제하기 위해선 정확한 자료 고유번호를 입력하셔야합니다.',
     'LBL_ACCOUNT_DESCRIPTION'=> '거래처 상세정보',
@@ -313,4 +314,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => '{{moduleSingular}}의 상태를 변경할 수 없습니다. 이 {{moduleSingular}}은(는) 이미 전환되었습니다.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => '리드 전환 예측',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => '특정 관심고객에 대한 예측 정보 보기',
 );

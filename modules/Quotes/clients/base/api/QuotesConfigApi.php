@@ -64,36 +64,28 @@ class QuotesConfigApi extends ConfigModuleApi
         );
 
         $defaultDiscountAmt = array(
-            'name' => 'discount',
+            'name' => 'discount_field',
             'type' => 'fieldset',
-            'css_class' => 'quote-discount-percent',
+            'css_class' => 'discount-field quote-discount-percent',
             'label' => 'LBL_DISCOUNT_AMOUNT',
+            'sortable' => false,
             'fields' => array(
                 array(
                     'name' => 'discount_amount',
                     'label' => 'LBL_DISCOUNT_AMOUNT',
-                    'type' => 'discount',
+                    'type' => 'discount-amount',
+                    'discountFieldName' => 'discount_select',
+                    'related_fields' => array(
+                        'currency_id',
+                    ),
                     'convertToBase' => true,
+                    'base_rate_field' => 'base_rate',
                     'showTransactionalAmount' => true,
                 ),
                 array(
                     'type' => 'discount-select',
                     'name' => 'discount_select',
-                    'no_default_action' => true,
-                    'buttons' => array(
-                        array(
-                            'type' => 'rowaction',
-                            'name' => 'select_discount_amount_button',
-                            'label' => 'LBL_DISCOUNT_AMOUNT',
-                            'event' => 'button:discount_select_change:click',
-                        ),
-                        array(
-                            'type' => 'rowaction',
-                            'name' => 'select_discount_percent_button',
-                            'label' => 'LBL_DISCOUNT_PERCENT',
-                            'event' => 'button:discount_select_change:click',
-                        ),
-                    ),
+                    'options' => array(),
                 ),
             ),
         );
@@ -103,7 +95,7 @@ class QuotesConfigApi extends ConfigModuleApi
         $quotesConfig['productsFields'] = array_merge(
             $parser->getAvailableFields(),
             $parser->getDefaultFields(),
-            array('discount' => $defaultDiscountAmt)
+            array('discount_field' => $defaultDiscountAmt)
         );
 
         $parser = ParserFactory::getParser(
@@ -128,8 +120,9 @@ class QuotesConfigApi extends ConfigModuleApi
         $this->requireArgs($args, array('worksheet_columns', 'worksheet_columns_related_fields'));
         $settings = parent::configSave($api, $args);
         $this->applyWorksheetColumnsConfig();
-        $this-> applySummaryColumnsConfig();
-        $this-> applyFooterRowsConfig();
+        $this->applySummaryColumnsConfig();
+        $this->applyFooterRowsConfig();
+        $this->saveMobileWorksheetColumnConfig($args);
 
         MetaDataManager::refreshModulesCache(array('Quotes', 'Products'));
 
@@ -513,49 +506,99 @@ class QuotesConfigApi extends ConfigModuleApi
      */
     public function applyWorksheetColumnsConfig()
     {
-        $viewdefManager = $this->getViewdefManager();
+        // Grab the Quotes config, and verify that it contains worksheet columns
+        // settings
         $settings = $this->getSettings();
-
         if (!array_key_exists('worksheet_columns', $settings) || !is_array($settings['worksheet_columns'])) {
             throw new \SugarApiExceptionInvalidParameter($GLOBALS['app_strings']['EXCEPTION_MISSING_WORKSHEET_COLUMNS']);
-        }
-
-        if (!array_key_exists('worksheet_columns_related_fields', $settings) ||
+        } elseif (!array_key_exists('worksheet_columns_related_fields', $settings) ||
             !is_array($settings['worksheet_columns_related_fields'])) {
             throw new \SugarApiExceptionInvalidParameter($GLOBALS['app_strings']['EXCEPTION_MISSING_WORKSHEET_COLUMNS_RELATED_FIELDS']);
         }
 
-        //update products c/b/v/quote-data-group-list with new fields for worksheet_columns
-        //load viewdefs
-        $qlidatagrouplistdef = $viewdefManager->loadViewdef('base', 'Products', 'quote-data-group-list');
+        // Apply the worksheet columns to the various viewdefs that use them
+        $viewdefManager = $this->getViewdefManager();
+        $this->applyWorksheetColumnsToQuoteDataGroupListView($viewdefManager, $settings);
+        $this->applyWorksheetColumnsToRecordViews($viewdefManager, $settings);
+    }
 
-        //check to see if the key we need to update exists in the loaded viewdef, if not, load the base.
+    /**
+     * Updates the quote-data-group-list view with the configured worksheet
+     * columns fields
+     *
+     * @param ViewdefManager $viewdefManager used to interface with viewdefs (read/save)
+     * @param array $settings the array of Quotes config settings
+     */
+    protected function applyWorksheetColumnsToQuoteDataGroupListView(ViewdefManager $viewdefManager, array $settings)
+    {
+        // Load the quote-data-group-list viewdef. If it does not contain the
+        // key we need to update, then load from base
+        $qlidatagrouplistdef = $viewdefManager->loadViewdef('base', 'Products', 'quote-data-group-list', false);
         if (!isset($qlidatagrouplistdef['panels'][0]['fields'])) {
             $qlidatagrouplistdef = $viewdefManager->loadViewdef('base', 'Products', 'quote-data-group-list', true);
         }
 
+        // Update the viewdef metadata with the configured worksheet_columns fields
         $qlidatagrouplistdef['panels'][0]['fields'] = $settings['worksheet_columns'];
         $viewdefManager->saveViewdef($qlidatagrouplistdef, 'Products', 'base', 'quote-data-group-list');
+    }
 
+    /**
+     * Updates Quotes record-style views (the base record view as well as mobile
+     * record-like views) to include the configured worksheet columns fields in
+     * the list of product_bundle_items fields
+     *
+     * @param ViewdefManager $viewdefManager used to interface with viewdefs (read/save)
+     * @param array $settings the array of Quotes config settings
+     */
+    protected function applyWorksheetColumnsToRecordViews(ViewdefManager $viewdefManager, array $settings)
+    {
+        // Build the list of the new worksheet columns field names. Include the
+        // configured fields and their related/dependent fields
         $columnNames = array_column($settings['worksheet_columns'], 'name');
         if (in_array('line_num', $columnNames)) {
-            $columnNames = array_diff($columnNames, array('line_num'));
+            $columnNames = array_diff($columnNames, ['line_num']);
+        }
+        $worksheetColumns = array_merge($columnNames, $settings['worksheet_columns_related_fields']);
+
+        // Write the worksheet columns to the base Quotes record view
+        $this->writeWorksheetColumnsToRecordViewDef($viewdefManager, $worksheetColumns, 'base', 'Quotes', 'record');
+
+        // Write the worksheet columns to the mobile Quotes detail and edit views
+        // Prevent the campaign_name field as Campaigns is not available on mobile
+        $mobileWorksheetColumns = array_diff($worksheetColumns, ['campaign_name']);
+        $this->writeWorksheetColumnsToRecordViewDef($viewdefManager, $mobileWorksheetColumns, 'mobile', 'Quotes', 'detail');
+        $this->writeWorksheetColumnsToRecordViewDef($viewdefManager, $mobileWorksheetColumns, 'mobile', 'Quotes', 'edit');
+    }
+
+    /**
+     * Updates a record-style view that uses worksheet columns with a new
+     * list of worksheet columns fields
+     *
+     * @param ViewdefManager $viewdefManager used to interface with viewdefs (read/save)
+     * @param array $worksheetColumns the new list of worksheet columns
+     * @param string $platform the platform of the viewdef to update
+     * @param string $module the module of the viewdef to update
+     * @param string $view the view name of the viewdef to update
+     */
+    protected function writeWorksheetColumnsToRecordViewDef(
+        ViewdefManager $viewdefManager,
+        array $worksheetColumns,
+        string $platform,
+        string $module,
+        string $view
+    ) {
+        // Load the viewDef. If it does not contain the key we need to update,
+        // then load from base/core
+        $viewDef = $viewdefManager->loadViewdef($platform, $module, $view, false);
+        if (!isset($viewDef['panels'][0]['fields'][1]['related_fields'][0]['fields'])) {
+            $viewDef = $viewdefManager->loadViewdef($platform, $module, $view, true);
         }
 
-        //update quotes c/b/v/record.php name:related_fields, bundles and product_bundle_items with everything added
-        //and anything needed for calculating fields -- include any new dependent fields
-        //load viewdefs
-        $qRecordViewdef = $viewdefManager->loadViewdef('base', 'Quotes', 'record', false);
-
-        //check to see if the key we need to update exists in the loaded viewdef, if not, load the base.
-        if (!isset($qRecordViewdef['panels'][0]['fields'][1]['related_fields'][0]['fields'])) {
-            $qRecordViewdef = $viewdefManager->loadViewdef('base', 'Quotes', 'record', true);
-        }
-
-        //now that we know the related_fields[0]['fields'] exists, we need to search that array for the array def
-        //for the product bundle items
+        // Now that we know the related_fields[0]['fields'] exists, we need to
+        // search that array for the array def for the product_bundle_items field
         $fieldsIndex = 0;
-        foreach ($qRecordViewdef['panels'][0]['fields'][1]['related_fields'][0]['fields'] as $field) {
+        foreach ($viewDef['panels'][0]['fields'][1]['related_fields'][0]['fields'] as $field) {
             if (!is_array($field)) {
                 $fieldsIndex++;
                 continue;
@@ -563,17 +606,37 @@ class QuotesConfigApi extends ConfigModuleApi
                 if (array_key_exists('name', $field) &&
                     $field['name'] == 'product_bundle_items' &&
                     array_key_exists('fields', $field)) {
-                    $qRecordViewdef['panels'][0]['fields'][1]['related_fields'][0]['fields'][$fieldsIndex]['fields'] =
-                        array_merge($columnNames, $settings['worksheet_columns_related_fields']);
+                    $viewDef['panels'][0]['fields'][1]['related_fields'][0]['fields'][$fieldsIndex]['fields'] =
+                        $worksheetColumns;
                 }
                 break;
             }
         }
 
-        //do the same as above for bundles when we're ready for that
+        // Write the updated viewdef to the file system
+        $viewdefManager->saveViewdef($viewDef, $module, $platform, $view);
+    }
 
-        //write out new quotes record.php
-        $viewdefManager->saveViewdef($qRecordViewdef, 'Quotes', 'base', 'record');
+    /**
+     * Updates the Quotes worksheet_columns mobile config property to remove the
+     * unwanted `campaign_name` field.
+     * @param array $data Worksheet columns data from config
+     * @return void
+     */
+    public function saveMobileWorksheetColumnConfig(array $data) : void
+    {
+        $worksheet_columns = $data['worksheet_columns'];
+
+        // Get the key for the data array to see if there is a campaign_name field added
+        $key = array_search('campaign_name', array_column($worksheet_columns, 'name'));
+        if ($key !== false) {
+            // Remove the campaign field from the fields array
+            array_splice($worksheet_columns, $key, 1);
+
+            // Save the modified fields in the mobile config
+            $adminBean = BeanFactory::newBean('Administration');
+            $adminBean->saveSetting('Quotes', 'worksheet_columns', $worksheet_columns, 'mobile');
+        }
     }
 
     /**

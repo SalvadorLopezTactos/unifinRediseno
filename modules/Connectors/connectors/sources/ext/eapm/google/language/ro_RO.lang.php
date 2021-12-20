@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&modul=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obţineţi o Cheie API şi Secret de la Google înregistrându-vă instanţa Sugar ca aplicaţie nouă.
-<br/><br>Paşi pentru a vă înregistra instanţa:
-<br/><br/>
-<ol>
-<li>Accesaţi Site-ul pentru dezvoltatori Google:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Faceţi sign in folosind contul Google pentru care aţi dori să înregistraţi aplicaţia.</li>
-<li>Creaţi un proiect nou</li>
-<li>Introduceţi un Nume de proiect şi faceţi clic pe Creare.</li>
-<li>După crearea proiectului, activaţi Google Drive şi Google Contacts API</li>
-<li>În secţiunea API-uri şi autentificare > Credenţiale, creaţi un id nou de client </li>
-<li>Selectaţi Aplicaţie Web şi faceţi clic pe ecranul Configurare consimţământ</li>
-<li>Introduceţi un nume de produs şi faceţi clic pe Salvare</li>
-<li>În secţiunea URl-uri de redirecţionare autorizate, introduceţi următorul url: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Faceţi clic pe creare id client</li>
-<li>Copiaţi id-ul clientului şi Secret client în casetele de mai jos</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Înregistrați-vă instanța Sugar la Google pentru a permite configurarea conturilor Google pentru utilizare în Sugar. ' .
+        'Consultă <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>Documentaţia conectorilor</a> pentru mai multe informaţii.</td></tr></table>',
     'oauth2_client_id' => 'ID client',
     'oauth2_client_secret' => 'Secret client',
 );

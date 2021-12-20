@@ -2,9 +2,9 @@
 /**
  * Created by Salvador Lopez.
  */
-class ApiCallQuantico 
+class ApiCallQuantico
 {
-    
+
     function callQuantico($url,$type){
 
         //open connection
@@ -19,11 +19,11 @@ class ApiCallQuantico
         }else{
             curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "GET");
         }
-        
+
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array()));
 
         //So that curl_exec returns the contents of the cURL; rather than echoing it
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 
         //execute post
         $result = curl_exec($ch);
@@ -77,9 +77,9 @@ $GLOBALS['log']->fatal(print_r($token,true));
 
         $GLOBALS['log']->fatal("Valida que haya token para poder cargar URL de Negociador Quantico");
 
-        $url_login=$sugar_config['quantico_url_base'];        
+        $url_login=$sugar_config['quantico_url_base'];
 
-        $urlLoginQuantico=$url_login."/Disposition_UI/Negotiator.aspx?&token=".$token."&PersonCRMId=".$idPersona;
+        $urlLoginQuantico=$url_login."/Negotiation_UI/Negotiator.aspx?&token=".$token."&PersonCRMId=".$idPersona;
         //$respuesta=ApiCallQuantico::callQuantico($urlLoginQuantico,"GET");
         //echo '<iframe src="'.$urlLoginQuantico.'" style="width:100%;height: 100%;position: absolute;"></iframe>';
         echo '<a href="'.$urlLoginQuantico.'" target="_blank" id="linkNegociadorQuantico">Negociador Quantico</a>';
@@ -93,5 +93,3 @@ $GLOBALS['log']->fatal(print_r($token,true));
 
 </body>
 </html>
-
-

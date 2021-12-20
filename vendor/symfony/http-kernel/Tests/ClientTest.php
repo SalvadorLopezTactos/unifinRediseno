@@ -39,8 +39,8 @@ class ClientTest extends TestCase
         $this->assertEquals('Request: /', $client->getResponse()->getContent(), '->doRequest() uses the request handler to make the request');
         $this->assertEquals('www.example.com', $client->getRequest()->getHost(), '->doRequest() uses the request handler to make the request');
 
-        $client->request('GET', 'http://www.example.com/?parameter=http://example.com');
-        $this->assertEquals('http://www.example.com/?parameter='.urlencode('http://example.com'), $client->getRequest()->getUri(), '->doRequest() uses the request handler to make the request');
+        $client->request('GET', 'http://www.example.com/?parameter=http://google.com');
+        $this->assertEquals('http://www.example.com/?parameter='.urlencode('http://google.com'), $client->getRequest()->getUri(), '->doRequest() uses the request handler to make the request');
     }
 
     public function testGetScript()
@@ -100,8 +100,8 @@ class ClientTest extends TestCase
         $client = new Client($kernel);
 
         $files = [
-            ['tmp_name' => $source, 'name' => 'original', 'type' => 'mime/original', 'size' => 1, 'error' => UPLOAD_ERR_OK],
-            new UploadedFile($source, 'original', 'mime/original', 1, UPLOAD_ERR_OK, true),
+            ['tmp_name' => $source, 'name' => 'original', 'type' => 'mime/original', 'size' => null, 'error' => UPLOAD_ERR_OK],
+            new UploadedFile($source, 'original', 'mime/original', UPLOAD_ERR_OK, true),
         ];
 
         $file = null;
@@ -116,8 +116,7 @@ class ClientTest extends TestCase
 
             $this->assertEquals('original', $file->getClientOriginalName());
             $this->assertEquals('mime/original', $file->getClientMimeType());
-            $this->assertSame(1, $file->getClientSize());
-            $this->assertTrue($file->isValid());
+            $this->assertEquals(1, $file->getSize());
         }
 
         $file->move(\dirname($target), basename($target));
@@ -150,14 +149,18 @@ class ClientTest extends TestCase
 
         $file = $this
             ->getMockBuilder('Symfony\Component\HttpFoundation\File\UploadedFile')
-            ->setConstructorArgs([$source, 'original', 'mime/original', 123, UPLOAD_ERR_OK, true])
-            ->setMethods(['getSize'])
+            ->setConstructorArgs([$source, 'original', 'mime/original', UPLOAD_ERR_OK, true])
+            ->setMethods(['getSize', 'getClientSize'])
             ->getMock()
         ;
-
-        $file->expects($this->once())
+        /* should be modified when the getClientSize will be removed */
+        $file->expects($this->any())
             ->method('getSize')
-            ->willReturn(INF)
+            ->will($this->returnValue(INF))
+        ;
+        $file->expects($this->any())
+            ->method('getClientSize')
+            ->will($this->returnValue(INF))
         ;
 
         $client->request('POST', '/', [], [$file]);
@@ -172,7 +175,7 @@ class ClientTest extends TestCase
         $this->assertEquals(UPLOAD_ERR_INI_SIZE, $file->getError());
         $this->assertEquals('mime/original', $file->getClientMimeType());
         $this->assertEquals('original', $file->getClientOriginalName());
-        $this->assertEquals(0, $file->getClientSize());
+        $this->assertEquals(0, $file->getSize());
 
         unlink($source);
     }

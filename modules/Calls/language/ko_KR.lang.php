@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => '전화 목록 대시보드',
     'LBL_CALLS_RECORD_DASHBOARD' => '전화 기록 대시보드',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => '통화 포커스 서랍',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => '전화상담',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => '담당자',
     'LBL_LIST_MY_CALLS' => '내 전화 상담',
     'LBL_MY_SCHEDULED_CALLS' => '내 예약 통화',
+    'LBL_GUEST_CALLS' => '게스트로서 내 전화',
+    'LBL_GUEST_SCHEDULED_CALLS' => '게스트로서 예정 통화',
     'LBL_SELECT_FROM_DROPDOWN' => '먼저 선택록에서 선택하십시오.',
 	'LBL_ASSIGNED_TO_NAME' => '담당자',
 	'LBL_ASSIGNED_TO_ID' => '담당자',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => '취소',
     'LBL_EMPTY_SEARCH_RESULT' => '죄송합니다. 발견된 결과가 없습니다. 아래 신규 초대자를 만드십시오.',
     'LBL_NO_ACCESS' => '$module 생성을 위해 접속하지 않았습니다',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect 연락 ID',
+
     'LBL_REPEAT_TYPE' => '반복',
     'LBL_REPEAT_INTERVAL' => '매',
     'LBL_REPEAT_END' => '완료',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => '{{{this}}}와 통화',
     'LBL_SEND_INVITES' => '초대하기',
     'LBL_REMINDER_TITLE' => '전화',
+    'LBL_CALL_RECORDING_URL' => '기록 URL',
+    'LBL_CALL_RECORDING' => '기록',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => '{{formatDate date_start}} 에 대한 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> 을 예약했습니다.',

@@ -242,10 +242,15 @@
         var newHash = responseText && responseText.metadata_hash;
         var userHash = responseText && responseText.user_hash;
         var afterSync = error.request.state && error.request.state.loadingAfterSync;
+        var sentHash = error.request.params.headers['X-Metadata-Hash'];
+        var sentUserHash = error.request.params.headers['X-Userpref-Hash'];
+
+        var currentHash = app.metadata.getHash();
+        var currentUserHash = app.user.get('_hash');
 
         if (
-            ((!newHash && afterSync) || newHash === app.metadata.getHash()) &&
-            ((!userHash && afterSync) || userHash === app.user.get("_hash"))
+            ((!newHash && afterSync) || (newHash === currentHash && sentHash === currentHash)) &&
+            ((!userHash && afterSync) || (userHash === currentUserHash && sentUserHash === currentUserHash))
         ) {
             app.logger.fatal('A request returned the error code "metadata_out_of_date" for no reason.');
             app.alert.show('invalid_412', {

@@ -235,8 +235,8 @@ _.extend(date, {
             return false;
         }
 
-        dateRemain = $.trim(date);
-        oldFormat = $.trim(oldFormat) + " "; // Trailing space to read as last separator.
+        dateRemain = date.trim();
+        oldFormat = oldFormat.trim() + " "; // Trailing space to read as last separator.
         for (j = 0; j < oldFormat.length; j++) {
             c = oldFormat.charAt(j);
             if (c === ':' || c === '/' || c === '-' || c === '.' || c === " " || c === 'a' || c === "A") {
@@ -261,7 +261,7 @@ _.extend(date, {
                         //Read time, assume minutes are at end of date string (we do not accept seconds)
                         timeformat = oldFormat.substring(oldFormat.length - 4);
                         v = parseInt(v, 10);
-                        var timeFormatString = $.trim(timeformat.toLowerCase());
+                        var timeFormatString = (timeformat.toLowerCase()).trim();
                         if (timeFormatString === "i a" || timeFormatString === c + "ia") {
                             var postfix = dateRemain.substring(dateRemain.length - 2).toLowerCase();
                             if (postfix === 'pm') {

@@ -30,15 +30,22 @@ final class LogicHook implements Subject
     private $method;
 
     /**
+     * @var string
+     */
+    private $label;
+
+    /**
      * Constructor
      *
      * @param string $class
      * @param string $method
+     * @param string $label
      */
-    public function __construct($class, $method)
+    public function __construct($class, $method, $label = null)
     {
         $this->class = $class;
         $this->method = $method;
+        $this->label = $label;
     }
 
     /**
@@ -50,6 +57,7 @@ final class LogicHook implements Subject
             '_type' => 'logic-hook',
             'class' => $this->class,
             'method' => $this->method,
+            'label' => $this->label,
         ];
     }
 }

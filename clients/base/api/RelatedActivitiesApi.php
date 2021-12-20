@@ -18,6 +18,18 @@ class RelatedActivitiesApi extends HistoryApi
     /**
      * {@inheritDoc}
      */
+    protected $moduleList = [
+        'meetings' => 'Meetings',
+        'calls' => 'Calls',
+        'notes' => 'Notes',
+        'tasks' => 'Tasks',
+        'emails' => 'Emails',
+        'messages' => 'Messages',
+    ];
+
+    /**
+     * {@inheritDoc}
+     */
     protected $moduleFilters = [];
 
     /**

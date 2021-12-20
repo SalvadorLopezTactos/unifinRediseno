@@ -93,22 +93,31 @@ if(isset($mbox) && count($mbox)>0){
 
 }else{
     //if array is empty, then set "bad" message and increment health counter
-    $mboxTable .=  "<tr><td colspan='5'><b class='error'>". $mod_strings['LBL_MAILBOX_CHECK1_BAD']."</b></td></tr>";
-    $email_health =$email_health +1;
+    $mboxTable .= "<tr><td colspan='5'><b class='error'>" . $mod_strings['LBL_MAILBOX_CHECK1_BAD']. "</b>";
+    if (is_admin($current_user)) {
+        $mboxTable .= "&nbsp;<a href='index.php?module=InboundEmail&action=index'>" .
+            $mod_strings['LBL_INBOUND_EMAIL_SETTINGS'] .
+            "</a>";
+    }
+    $mboxTable .= "</td></tr>";
+    $email_health += 1;
 }
 
 $mboxTable.= '</table>' ;
-
-
-    
 $ss->assign("MAILBOXES_DETECTED_MESSAGE", $mboxTable);
 
 //email settings configured 
 $conf_msg="<table border='0' width='100%' class='detail view' cellpadding='0' cellspacing='0'>";
 if (strstr($focus->settings['notify_fromaddress'], 'example.com')){
     //if from address is the default, then set "bad" message and increment health counter
-    $conf_msg .= "<tr><td colspan = '5'><b class='error'> ".$mod_strings['LBL_MAILBOX_CHECK2_BAD']." </b></td></td>";
-    $email_health =$email_health +1;
+    $conf_msg .= "<tr><td colspan = '5'><b class='error'> " . $mod_strings['LBL_MAILBOX_CHECK2_BAD'] . "</b>";
+    if (is_admin($current_user)) {
+        $conf_msg .= "&nbsp;<a href='index.php?module=EmailMan&action=config'>" .
+            $mod_strings['LBL_SYSTEM_EMAIL_SETTINGS'] .
+            "</a>";
+    }
+    $conf_msg .= "</td></td>";
+    $email_health += 1;
 }else{
     $conf_msg .= "<tr><td colspan = '5'><b> ".$mod_strings['LBL_MAILBOX_CHECK2_GOOD']."</b></td></tr>";
     $conf_msg .= "<tr><th scope='col' width='20%'><b>".$mod_strings['LBL_WIZ_FROM_NAME']."</b></th>"
@@ -135,16 +144,7 @@ if (strstr($focus->settings['notify_fromaddress'], 'example.com')){
           
 $conf_msg .= '</table>'; 
 $ss->assign("EMAIL_SETTINGS_CONFIGURED_MESSAGE", $conf_msg);
-$email_setup_wiz_link='';
-if ($email_health>0){
-    if (is_admin($current_user)){
-        $email_setup_wiz_link="<a href='index.php?module=Campaigns&action=WizardEmailSetup'>".$mod_strings['LBL_EMAIL_SETUP_WIZ']."</a>";
-    }else{
-        $email_setup_wiz_link=$mod_strings['LBL_NON_ADMIN_ERROR_MSG'];
-    }    
-}
 
-$ss->assign("EMAIL_SETUP_WIZ_LINK", $email_setup_wiz_link);
 $ss->assign( 'EMAIL_IMAGE', define_image($email_health, 2));
 $ss->assign( 'EMAIL_COMPONENTS', $mod_strings['LBL_EMAIL_COMPONENTS']);
 $ss->assign( 'SCHEDULER_COMPONENTS', $mod_strings['LBL_SCHEDULER_COMPONENTS']);

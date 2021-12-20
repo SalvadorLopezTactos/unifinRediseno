@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Επαφές',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Δυνητικοί Πελάτες',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Χρήστες',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Πίνακας ελέγχου εγγραφών επιχειρηματικών κέντρων',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης επιχειρηματικών κέντρων',
 ];

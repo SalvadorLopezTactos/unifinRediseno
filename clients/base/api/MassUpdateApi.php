@@ -99,6 +99,10 @@ class MassUpdateApi extends SugarApi {
         // to override OR append values on the request
         $mu_params = $this->handleTypeAdjustments($mu_params);
 
+        // Remove relate fields from the list. We only need to update the ID fields,
+        //nothing to be done with the relate fields as they're not actually saved.
+        $mu_params = $this->removeRelateFields($mu_params);
+
         // check ACL
         $bean = BeanFactory::newBean($mu_params['module']);
         if (!$bean instanceof SugarBean) {
@@ -146,6 +150,32 @@ class MassUpdateApi extends SugarApi {
                 } else {
                     // its a replace operation
                     $params[$typeVar] = 'replace';
+                }
+            }
+        }
+
+        return $params;
+    }
+
+    /**
+     * Check the params, and remove any relate field, leaving their ID fields.
+     * @param $params
+     * @return array
+     */
+    public function removeRelateFields($params)
+    {
+        $bean = BeanFactory::newBean($params['module']);
+        $fieldsList = $bean->field_defs;
+
+        $allowedRelateFields = ['team_name'];
+        foreach (array_keys($params) as $paramName) {
+            if (!array_key_exists($paramName, $fieldsList)) {
+                continue;
+            }
+            $field = $fieldsList[$paramName];
+            if ($field['type'] === 'relate' && !in_array($field['name'], $allowedRelateFields)) {
+                if ((empty($field['dbType']) || $field['dbType'] !== 'id') && $field['rname'] !== 'id') {
+                    unset($params[$paramName]);
                 }
             }
         }

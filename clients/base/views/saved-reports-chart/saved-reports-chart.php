@@ -31,6 +31,7 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                 "icon" => "fa-chevron-up",
                 "action" => "toggleMinify",
                 "tooltip" => "LBL_DASHLET_TOGGLE",
+                "is_chart" => true,
             ),
             array(
                 'dropdown_buttons' => array(
@@ -43,11 +44,13 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                         'type' => 'dashletaction',
                         'action' => 'viewReportClicked',
                         'label' => 'LBL_DASHLET_CONFIG_VIEW_REPORT',
+                        'review' => true,
                     ),
                     array(
                         'type' => 'dashletaction',
                         'action' => 'refreshClicked',
                         'label' => 'LBL_DASHLET_REFRESH_LABEL',
+                        'review' => true,
                     ),
                     array(
                         'type' => 'dashletaction',

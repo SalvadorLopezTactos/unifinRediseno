@@ -342,7 +342,7 @@ class TeamSetManager {
         foreach ($teams as $key => $row) {
             $isPrimaryTeam = false;
             $row['title'] = $forDisplay ?
-                $row['display_name'] :
+                htmlspecialchars($row['display_name'], ENT_QUOTES, 'UTF-8') :
                 (!empty($row['name']) ? $row['name'] : $row['name_2']);
 
             if (!empty($focus->team_id) && $row['id'] == $focus->team_id) {

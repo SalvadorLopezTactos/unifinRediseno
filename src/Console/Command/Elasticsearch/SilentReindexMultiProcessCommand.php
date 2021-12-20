@@ -156,12 +156,12 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
 
                 // create commands
                 for ($bucketId = 1; $bucketId <= $numProcesses; $bucketId++) {
-                    $commandStr = '.' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'sugarcrm';
-                    $commandStr .= " $thisCommandName  --bucket " . escapeshellarg($bucketId);
+                    $commandCmdStr = '.' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'sugarcrm';
+                    $commandArgStr = escapeshellarg($thisCommandName) . ' --bucket ' . escapeshellarg($bucketId);
                     if ($input->getOption('modules')) {
-                        $commandStr .= ' --modules ' . escapeshellarg($input->getOption('modules'));
+                        $commandArgStr .= ' --modules ' . escapeshellarg($input->getOption('modules'));
                     }
-
+                    $commandStr = escapeshellcmd($commandCmdStr) . ' ' . $commandArgStr;
                     $this->writeln("execute command: $commandStr");
                     $processes[] = new Process\Process($commandStr);
                 }

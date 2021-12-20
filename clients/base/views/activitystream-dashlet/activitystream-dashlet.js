@@ -144,9 +144,20 @@
         var endpoint = function(method, model, options, callbacks) {
             var real_module = self.context.parent.get('module'),
                 layoutType = self.context.parent.get('layout'),
-                modelId = self.context.parent.get('modelId'),
+                modelId,
                 action = model.module, // equal to 'Activities'
                 url;
+
+            switch (layoutType) {
+                case 'focus':
+                    modelId = self.context.parent.parent.get('modelId');
+                    break;
+                case 'multi-line':
+                    modelId = self.context.parent.parent.get('model').get('id');
+                    break;
+                default:
+                    modelId = self.context.parent.get('modelId');
+            }
 
             // For :Home/:record case we should call for global ActivityStream
             if (real_module == 'Home' && layoutType == 'record') {
@@ -162,6 +173,8 @@
                     url = app.api.buildURL(real_module, action, {}, options.params);
                     break;
                 case 'record':
+                case 'focus':
+                case 'multi-line':
                     url = app.api.buildURL(real_module, null, {id: modelId, link: 'activities'}, options.params);
                     break;
             }

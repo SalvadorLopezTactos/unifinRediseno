@@ -74,6 +74,8 @@
     filterMenuProperties:function(singleItem){
         if(singleItem['label'] === 'LBL_PROFILE'){
             singleItem['img_url'] = this.pictureUrl;
+        } else if (singleItem.label === 'LBL_CHANGE_PASSWORD') {
+            singleItem.route += '?user_hint=' + encodeURIComponent(app.utils.createUserSrn(app.user.id));
         }
         return singleItem;
     },

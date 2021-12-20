@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Форма на данъчно облагане:',
   'LBL_TYPE_NAME'=>'Име',
   'LBL_TYPE' => 'Категория:',
+  'LBL_PRODUCT_TYPE' => 'Тип на продукт',
   'LBL_URL' => 'URL на продукта:',
   'LBL_VENDOR_PART_NUM' => 'Партиден номер(доставчик):',
   'LBL_WEIGHT' => 'Тегло:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Продуктов каталог',
   'NTC_DELETE_CONFIRMATION' => 'Сигурни ли сте, че желаете да изтриете този запис?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Добави',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Търсене в Продуктовия каталог',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Няма налични данни',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Отговорник',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Типове продукти',
   'LBL_RENEWABLE' => 'Подновяема',
   'LBL_SERVICE' => 'Услуга',
+  'LBL_LOCK_DURATION' => 'Заключване на продължителност',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Електронно табло със списък на продуктови каталози',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Електронно табло със записи на продуктови каталози',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на продуктови каталози',
 );

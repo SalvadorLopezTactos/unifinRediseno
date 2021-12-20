@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => '标记为删除的字段',
     'LBL_NO_RECORDS_MARKED' => '没有已被标记为删除的字段或记录。',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => '数据隐私记录仪表板',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '数据隐私焦点抽屉',
 
     // list view
     'LBL_HELP_RECORDS' => '数据隐私模块可追踪隐私活动，包括许可和主题请求，以支持组织的隐私程序。创建与个人记录（如联系人）相关的数据隐私记录，以追踪许可或对隐私请求执行操作。',

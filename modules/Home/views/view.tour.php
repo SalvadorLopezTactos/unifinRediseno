@@ -28,7 +28,7 @@ class HomeViewTour extends SugarView
        //check the upgrade history to see if this instance has been upgraded, if so then present the calendar url message
        //if no upgrade history exists then we can assume this is an install and we do not show the calendar message
        $uh = new UpgradeHistory();
-       $upgrade = count($uh->getAll())>0 ? true : false;
+        $upgrade = count($uh->getPackages()) > 0 ? true : false;
        if($upgrade)
        {
             //create the url with the user id and scrolltocal flag.  This will be passed into language string

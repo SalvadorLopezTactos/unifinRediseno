@@ -11,6 +11,7 @@
  */
 $dictionary['Manufacturer'] = array(
     'table' => 'manufacturers',
+    'archive' => false,
     'favorites' => false,
     'comment' => 'Manufacturers',
     'unified_search' => true,

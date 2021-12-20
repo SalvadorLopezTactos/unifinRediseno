@@ -1502,6 +1502,9 @@ if (typeof(ModuleBuilder) == 'undefined') {
             var display = enable ? "" : "none";
 			Dom.setStyle("formulaRow", "display", display);
 			Dom.setStyle("enforcedRow", "display", display);
+            Dom.setStyle('readonlyRow', 'display', enable ? 'none' : '');
+            Dom.setStyle('readonlyFormulaRow', 'display',
+                Dom.get('readonly').checked  && !enable ? '' : 'none');
             if(Dom.get('calculated')){
 			    Dom.get('calculated').value = enable;
             }
@@ -1556,6 +1559,54 @@ if (typeof(ModuleBuilder) == 'undefined') {
             Dom.get('dependency').disabled = !enable;
 			Dom.get('dependent').value = enable;
         },
+            toggleRequiredFormula: function(enable) {
+                if (typeof(enable) == 'undefined') {
+                    enable = Dom.get('required').checked;
+                }
+                var display = enable ? '' : 'none';
+                Dom.setStyle('requiredFormulaRow', 'display', display);
+                Dom.get('required_formula').disabled = !enable;
+                Dom.get('required').value = enable;
+            },
+            handleFieldInteractions: function(field, fieldEnabled) {
+                var fields = {
+                    massupdate: {
+                        exclusiveRows: ['readonlyRow']
+                    },
+                    readonly: {
+                        exclusiveRows: ['massUpdateRow'],
+                        dependentRows: ['readonlyFormulaRow'],
+                        enabledFields: ['readonly_formula']
+                    }
+                };
+
+                if (typeof(fieldEnabled) === 'undefined') {
+                    fieldEnabled = Dom.get(field).checked;
+                }
+                if (fields[field]) {
+                    if (fields[field].exclusiveRows) {
+                        fields[field].exclusiveRows.forEach(function(row) {
+                            if (Dom.get(row)) {
+                                Dom.setStyle(row, 'display', fieldEnabled ? 'none' : '');
+                            }
+                        });
+                    }
+                    if (fields[field].dependentRows) {
+                        fields[field].dependentRows.forEach(function(row) {
+                            if (Dom.get(row)) {
+                                Dom.setStyle(row, 'display', fieldEnabled ? '' : 'none');
+                            }
+                        });
+                    }
+                    if (fields[field].enabledFields) {
+                        fields[field].enabledFields.forEach(function(field) {
+                            if (Dom.get(field)) {
+                                Dom.get(field).disabled = !fieldEnabled;
+                            }
+                        });
+                    }
+                }
+            },
         //We can only have a formula or a vis_grid. Before we save we need to clear the one we aren't using
         validateDD: function() {
             if ($('#depTypeSelect').val() != "parent")

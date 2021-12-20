@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Virhe haettaessa Drillthrough-raporttitietojen tälle toiminnolle. Ota yhteyttä raportin omistajaan.',
     'LBL_CHART_NO_DRILLTHRU' => 'Läpikatselmus ei ole käytettävissä',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Raportit-tietolaatikko',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Luettelonäkymä näyttää kaikki raportit, jotka vastaavat hakukriteerejä ja joihin käyttäjillä on pääsyoikeudet. Luettelonäkymässä ja esikatselussa näet raporttien perustiedot. Raporteille voi määrittää tunnisteita ja luoda suodattimia. Jos haluat katsella raporttia, napsauta raportin nimeä. Jos haluat muokata raporttia, valitse toimintovalikossa &#39;Muokkaa raporttia&#39;.',

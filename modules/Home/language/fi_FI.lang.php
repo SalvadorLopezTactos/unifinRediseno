@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Dashlet lisätty',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashletit järjestetään uudelleen, haluatko varmasti muuttaa sarakkeiden asettelua?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Haluatko varmasti poistaa Dashletin?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Työpöytää ei ole konfiguroitu.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Ei konfiguroituja työpöytiä',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Ei konfiguroituja dashleteja',
   'LBL_CREATE_DASHBOARD_LINK' => 'Luo työpöytä',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web-sivu',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Joitakin sivustoja ei voida ladata niissä olevan turvattoman sisällön tai tietokäytäntöjen takia.',
 
-  'LBL_DASHLET_ADD' => 'Lisää Dashlet',
+  'LBL_DASHLET_ADD' => 'Lisää dashlet',
   'LBL_DASHLET_DELETE' => 'Poista Sugar Dashlet',
   'LBL_DASHLET_REFRESH' => 'Päivitä Sugar Dashlet',
   'LBL_DASHLET_EDIT' => 'Muokkaa Sugar Dashletia',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – Kalenteri päivämäärien syöttöön. Tehnyt Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – kirjasto PDF-asiakirjojen luontiin. Tehnyt Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server – WebDAV-palvelimen toteutus PHP:lle.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip – kirjasto tarjoaa pakkaus- ja avaustoiminnot zip-pakatuille tiedostoille. Tehnyt Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty – Mallipohjamoottori PHP:lle.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library – käyttöliittymäkirjastotyökalut helpottaa rikkaiden asiakaspuolen ominaisuuksien toteuttamisessa.',
   'LBL_SOURCE_PHPMAILER' => 'Phpmailer – täysin varusteltu sähköpostin välitysluokka PHP:lle',

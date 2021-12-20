@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Tableau de bord de la liste de devis',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de devis',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Devis',
 
     'LBL_CONTRACTS'=>'Contrats',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contrats',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Facturation - Pays',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Facturation - Code postal',
     'LBL_BILLING_ADDRESS_STATE' => 'Facturation - Région',
-    'LBL_BILLING_ADDRESS_STREET' => 'Facturation - Rue',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adresse de facturation :',
     'LBL_BILLING_CONTACT_ID' => 'Facturation - Contact (ID) :',
     'LBL_BILLING_CONTACT_NAME' => 'Facturation - Nom du Contact',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Livraison - Pays',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Livraison - Code Postal',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Livraison - Région',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Livraison - Rue',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adresse :',
     'LBL_SHIPPING_BODY' => 'Facturation et expédition',
     'LBL_SHIPPING_CONTACT_ID' => 'Livraison - Contact (ID) :',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Copier adresse de facturation sur adresse de livraison',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Copier adresse de livraison sur adresse de facturation',
     'NTC_COPY_BILLING_ADDRESS2' => 'Copier vers adresse de livraison',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copier vers adresse de facturation',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Êtes-vous sûr(e) de vouloir supprimer ce Commentaire du Devis ?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copier vers adresse de facturation',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Êtes-vous sûr(e) de vouloir supprimer ce Commentaire du Devis ?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Êtes-vous sûr(e) de vouloir supprimer cet Article du devis ?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Êtes-vous sûr(e) de vouloir supprimer ce Groupe du devis ?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Êtes-vous sûr(e) de vouloir supprimer ce Contact du devis ?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Quantité',
     'LBL_MFT_PART_NUM' => 'Numéro de pièce',
     'LBL_ITEM_NAME' => 'Ligne de devis',
+    'LBL_PRODUCT_TEMPLATE' => 'Produit',
     'LBL_DISCOUNT_PRICE' => 'Prix unitaire',
     'LBL_DISCOUNT_AMOUNT' => 'Remise',
     'LBL_LINE_ITEM_TOTAL' => 'Total de ligne de devis',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Affaire (ID)',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configuration des devis',
+
+    'LBL_RENEWAL' => 'Renouvellement',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactions entre les devis',
 );

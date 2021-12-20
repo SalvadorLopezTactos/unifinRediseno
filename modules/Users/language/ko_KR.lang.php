@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => '입력한 비밀번호가 요구사항에 맞지 않습니다. 다시 시도해 주십시오',
 	'ERR_USER_INFO_NOT_FOUND'			=> '사용자 정보가 발견되지 않았습니다.',
     'ERR_USER_NAME_EXISTS'              => '사용자 이름 {0} 이미 존재합니다. 중복 사용자 이름이 허용되지 않습니다. 사용자 이름을 고유한 것으로 변경하십시오.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” 라이선스는 추가 호환 라이선스 유형과 함께 저장해야 합니다',
 	'ERR_USER_IS_LOCKED_OUT'			=> '이 사용자는 Sugar어플리케이션에 들어오지 못하며 기존의 비밀번호를 이용해 접속할수 없습니다.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => '외부 인증 전용 사용자는 Sugar 자격증명을 사용하여 로그인할 수 없습니다.',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '수신인 이메일 주소',
 	'ERR_SERVER_STATUS'					=> '귀하의 서버 상태',
 	'ERR_SERVER_SMTP_EMPTY'				=> '시스템이 사용자에 이메일을 보낼수 없습니다. 이메일 설정에서 발신 메일 구성을 확인하십시오',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => '새 사용자는 <a href="{0}" target="_blank"> SugarCloud 설정</a>에서 생성해야 합니다.',
 
     'LBL_EMAIL_ADDRESS'                 => '이메일 주소:',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => '예상',
     'LBL_WORKSHEETS'                    => '참고 자료지',
 	'LBL_CALENDARS'                     => '캘린더',
+    'LBL_SHIFTS'                        => '교대',
+    'LBL_SHIFT_EXCEPTIONS'              => '교대 예외',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => '기록이 귀하에 지정되면 이메일을 통해 통지를 받습니다.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => '배정시 이메일',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => '코멘트 로그 항목에 언급될 경우 이메일 알림을 받습니다.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => '언급시 이메일',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => '레코드 보기에서 필드 이름을 표시할 방식을 선택하십시오. 더욱 간략하게 레코드를 보려면 "필드 값 이하"를 선택하십시오.',
     'LBL_FIELD_NAME_PLACEMENT'          => '필드 이름 배치',
     'LBL_ABOVE_FIELD_VALUE'             => '필드 값 이상',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => '면허 유형',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> '전화상담과 회의를 위한 알림 초기설정을 하십시요. Sugar를 사용하는 모든 초대자에 팝업 알림이 나타납니다. 모든 초대자는 이메일을 통한 통보를 받게됩니다.',
 	'LBL_REMINDER'						=> '알림',
 	'LBL_REMINDER_POPUP' => '팝업',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => '동일 사용자명의 또다른 세션이 시작되어 귀하의 세션이 만료되었습니다.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> '기록 재배정',
-	'LBL_REASS_DESC_PART1'				=> '특정사용자에서 다른 사용자에 재지정된 기록을 포함하는 모듈을 선택하십시오.<br />각각의 선택된 모듈에서 업데이트 될 기록의 개수를 보려면 다음 버튼을 클릭하십시오.',
+    'LBL_REASS_DESC_PART1'              => '특정사용자에서 다른 사용자에 재지정된 기록을 포함하는 모듈을 선택하십시오.<br />각각의 선택된 모듈에서 업데이트 될 기록의 개수를 보려면 다음 버튼을 클릭하십시오.',
         'LBL_REASS_DESC_PART2'=>                    '어떤 모듈이 작업 흐름, 과제 통지 전송 그리고 재지정동안 추적검사를 실행할 모듈을 선택하십시오. 계속해 기록을 재지정하려면 다음 버튼을 클릭하고 다시 시작하려면 재시작 버튼을 클릭하십시오.',
 	'LBL_REASS_STEP2_TITLE'				=> '팀 재지정',
 	'LBL_REASS_STEP2_DESC'				=> '아래 목록의 팀은 수신 사용자팀이 아닌 발신 사용자팀이 사용가능합니다. 발신 사용자팀의 모든 기록은 팀의 가치가 배치되지 않는한 수신 사용자팀에 보이지 않습니다.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => '사용자 프로필',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        '<a href="%s" target="_blank">SugarCloud 설정</a>에 접근하여 읽기 전용 필드를 수정하십시오.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         '읽기 전용 필드를 변경하려면 Sugar 관리자에게 문의하십시오.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

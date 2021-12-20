@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Myyntimahdollisuuden tiedot',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Myyntimahdollisuudet-tietolaatikko',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Uusittu myyntimahdollisuus',
 
     'LBL_MODULE_NAME' => 'Myyntimahdollisuudet',
     'LBL_MODULE_NAME_SINGULAR' => 'Myyntimahdollisuus',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tyyppi:',
     'LBL_CAMPAIGN' => 'Kampanja:',
     'LBL_NEXT_STEP' => 'Seuraava vaihe:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Palvelun aloituspäivä',
     'LBL_LEAD_SOURCE' => 'Liidin lähde:',
     'LBL_SALES_STAGE' => 'Myyntivaihe:',
     'LBL_SALES_STATUS' => 'Tila',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Commitin vaihe',
     'LBL_COMMIT_STAGE_FORECAST' => 'Ennuste',
     'LBL_WORKSHEET' => 'Työkirja',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Ostojen tuoterivit',
 
     'LBL_RENEWAL' => 'Uusinta',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Uusintamahdollisuudet',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Uusinnan päätason tunnus',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Myyntivaihe',
+    'LBL_WIDGET_DATE_CLOSED' => 'Odotettu sulkupäivämäärä',
+    'LBL_WIDGET_AMOUNT' => 'Määrä',
 
     'TPL_RLI_CREATE' => 'Myyntimahdollisuudella pitää olla liittyvä tuoterivi.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Luo tuoterivi',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'Tuoterivien yhteismäärä',
     'LBL_CLOSED_RLIS' => 'Suljettujen tuoterivien määrä',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Tuoterivien määrä, joissa avoin palvelu ja joustava kesto',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Et voi poistaa myyntimahdollisuuksia joissa on suljettuja tuoterivejä',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Valituista tietueista yhdessä tai useammassa on suljettuja tuoterivejä, eikä niitä voi poistaa.',
     'LBL_INCLUDED_RLIS' => 'Mukana olevien tuoterivien #',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Päivitys avoinna',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Avointen lisätuoterivien palvelun aloituspäivä ei voi olla palvelun päättymispäivää myöhemmin.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Tarjoukset',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Myyntimahdollisuudet dynaamisen tilin mukaan',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Myyntimahdollisuushierarkia',
@@ -231,5 +238,10 @@ Luo {{module_name}} seuraavasti:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Myyntimahdollisuuteni',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Tiimini myyntimahdollisuudet",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Moduulin {{fieldName}} nimeä ei voida muuttaa, koska tässä moduulissa {{moduleSingular}} ei ole avoinna olevia tuoterivejä.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Myyntimahdollisuuden yhteydet',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Myyntimahdollisuuden sulkeutumisennuste',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Tarkastele tietyn myyntimahdollisuuden ennustetietoja',
 );

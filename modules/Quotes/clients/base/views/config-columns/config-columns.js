@@ -34,7 +34,7 @@
         'product_template_name',
         'mft_part_num',
         'discount_price',
-        'discount',
+        'discount_field',
         'total_amount'
     ],
 
@@ -212,6 +212,9 @@
         }, this);
 
         this.model.set(this.eventViewName + '_related_fields', relatedFieldsList);
+
+        // Signal to the layout that the fields for this panel are loaded
+        this.layout.trigger('config:panel:fields:loaded', this);
     },
 
     /**
@@ -276,30 +279,22 @@
                     tmpField.showTransactionalAmount = true;
                     tmpField.related_fields = ['currency_id', 'base_rate'];
                 }
-                if (field.name === 'discount') {
+                if (field.name === 'discount_field') {
                     tmpField.type = 'fieldset';
-                    tmpField.css_class += ' quote-discount-percent';
+                    tmpField.css_class += ' discount-field quote-discount-percent';
                     tmpField.fields = [{
                         name: 'discount_amount',
                         label: 'LBL_DISCOUNT_AMOUNT',
-                        type: 'discount',
+                        type: 'discount-amount',
+                        discountFieldName: 'discount_select',
+                        related_fields: ['currency_id'],
                         convertToBase: true,
+                        base_rate_field: 'base_rate',
                         showTransactionalAmount: true
                     }, {
                         name: 'discount_select',
                         type: 'discount-select',
-                        no_default_action: true,
-                        buttons: [{
-                            name: 'select_discount_amount_button',
-                            type: 'rowaction',
-                            label: 'LBL_DISCOUNT_AMOUNT',
-                            event: 'button:discount_select_change:click'
-                        }, {
-                            name: 'select_discount_percent_button',
-                            type: 'rowaction',
-                            label: 'LBL_DISCOUNT_PERCENT',
-                            event: 'button:discount_select_change:click'
-                        }]
+                        options: [],
                     }];
                 }
 

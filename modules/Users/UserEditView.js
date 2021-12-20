@@ -133,7 +133,7 @@ function sendTestEmail()
         overlay(SUGAR.language.get('app_strings',"ERR_MISSING_REQUIRED_FIELDS"), SUGAR.language.get('app_strings',"LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR"), 'alert');
         return;
     }
-    else if (!isValidEmail(fromAddress)) {
+    else if (!isValidEmailAddress(fromAddress)) {
         overlay(SUGAR.language.get('app_strings',"ERR_INVALID_REQUIRED_FIELDS"), SUGAR.language.get('app_strings',"LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR"), 'alert');
         return;
     }

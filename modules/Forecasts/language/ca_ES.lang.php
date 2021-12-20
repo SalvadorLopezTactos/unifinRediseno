@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Quadres de comandament de previsions',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de previsions',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Objectius',

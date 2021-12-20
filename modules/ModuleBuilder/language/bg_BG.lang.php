@@ -600,6 +600,7 @@ If Opportunities is included, Accounts must either be required or removed from t
     'LBL_PORTAL_CONFIGURE' => 'Конфигурация на Портал',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Разрешаване на портал',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Разрешаване на търсене преди отваряне на казус',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Разрешете на потребители на портала да затворят случая',
     'LBL_PORTAL_THEME' => 'Портал теми',
     'LBL_PORTAL_ENABLE' => 'Активирай',
     'LBL_PORTAL_SITE_URL' => 'Порталният сайт се намира на адрес:',
@@ -791,7 +792,15 @@ If Opportunities is included, Accounts must either be required or removed from t
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Маркирайте полето ако желаете то да бъде използвано при Глоблано търсене в настояшия модул.',
+'LBL_POPHELP_REQUIRED'=>"Създайте формула, за да определите дали това поле е задължително в оформления.<br/>"
+    . "Задължителните полета ще бъдат след формулата в мобилния изглед, базиран на браузър,<br/>"
+    . "но няма да бъдат след формулата в основните приложения като Sugar Mobile за iPhone. <br/>"
+    . "Те няма да бъдат след формулата в портала за самообслужване на Sugar.",
+'LBL_POPHELP_READONLY'=>"Създайте формула, за да определите дали това поле е задължително в оформления.<br/>"
+        . "Полетата само за четене ще бъдат след формулата в мобилния изглед, базиран на браузър,<br/>"
+        . "но няма да бъдат след формулата в основните приложения като Sugar Mobile за iPhone. <br/>"
+        . "Те няма да бъдат след формулата в портала за самообслужване на Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Изберете да използвате това поле, когато търсите записи с пощта на глобалното търсене в този модул.',
 //Revert Module labels
 'LBL_RESET' => 'Изпълни',
 'LBL_RESET_MODULE' => 'Първоначални настройки',
@@ -826,6 +835,7 @@ If Opportunities is included, Accounts must either be required or removed from t
                 'encrypt'=>'Шифровай',
                 'datetimecombo' =>'Дата и Час',
                 'decimal'=>'Десетично число',
+                'autoincrement' => 'Автоматично нарастване',
 ),
 'labelTypes' => array(
     "" => "Често използвани етикети",
@@ -843,4 +853,5 @@ If Opportunities is included, Accounts must either be required or removed from t
 'LBL_ALL_MODULES'=>'Всички модули',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Копирай от подредба',
+'LBL_RELATIONSHIP_TYPE' => 'Връзка',
 );

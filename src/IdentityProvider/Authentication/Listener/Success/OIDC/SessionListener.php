@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC;
 
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 
 /**
@@ -28,11 +29,23 @@ class SessionListener
     public function execute(AuthenticationEvent $event)
     {
         $token = $event->getAuthenticationToken();
+
+        $accessToken = $this->getAccessToken($token);
+
+        if (!$accessToken) {
+            return;
+        }
+
         $user = $token->getUser();
 
         $sugarUser = $user->getSugarUser();
+
+        if (!$sugarUser) {
+            return;
+        }
+
         $sugarConfig = $this->getSugarConfig();
-        $sessionId = hash('sha256', $token->getCredentials() . $sugarConfig->get('unique_key'));
+        $sessionId = hash('sha256', $accessToken . $sugarConfig->get('unique_key'));
 
         if (session_id() != $sessionId) {
             if (session_id()) {
@@ -65,5 +78,20 @@ class SessionListener
     protected function getSugarConfig()
     {
         return \SugarConfig::getInstance();
+    }
+
+    /**
+     * @param TokenInterface $token
+     * @return string|null
+     */
+    protected function getAccessToken(TokenInterface $token): ?string
+    {
+        if (!empty($token->getCredentials())) {
+            return $token->getCredentials();
+        } elseif ($token->hasAttribute('token')) {
+            return $token->getAttribute('token');
+        }
+
+        return null;
     }
 }

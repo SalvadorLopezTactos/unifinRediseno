@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontaktpersonas',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Interesenti',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Lietotāji',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Biznesa centru ierakstu instrumentu panelis',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Biznesa centru fokusa panelis',
 ];

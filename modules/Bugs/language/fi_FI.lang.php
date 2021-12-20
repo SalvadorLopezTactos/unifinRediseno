@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Bugiluettelon työpöytä',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Bugitietueiden työpöytä',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Ohjelmavirheiden tietolaatikko',
 
   'LBL_MODULE_NAME' => 'Bug Tracker',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Bugi',

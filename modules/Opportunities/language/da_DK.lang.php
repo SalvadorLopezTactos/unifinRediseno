@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Mulighedsliste-dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Mulighedsoptegnelser-dashboard',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Oplysninger om salgsmulighed',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Muligheder',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Fornyelsesmulighed',
 
     'LBL_MODULE_NAME' => 'Salgsmuligheder',
     'LBL_MODULE_NAME_SINGULAR' => 'Salgsmulighed',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Type:',
     'LBL_CAMPAIGN' => 'Kampagne:',
     'LBL_NEXT_STEP' => 'Næste trin:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Startdato for service',
     'LBL_LEAD_SOURCE' => 'Kilde til kundeemne:',
     'LBL_SALES_STAGE' => 'Salgsfase:',
     'LBL_SALES_STATUS' => 'Status',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Forpligtet fase',
     'LBL_COMMIT_STAGE_FORECAST' => 'Forpligte stadie prognose',
     'LBL_WORKSHEET' => 'Regneark',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Købte linjeprodukter',
 
     'LBL_RENEWAL' => 'Fornyelse',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Fornyelsesmuligheder',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Fornyelse overordnet ID',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Salgsfase',
+    'LBL_WIDGET_DATE_CLOSED' => 'Forventet lukkedato',
+    'LBL_WIDGET_AMOUNT' => 'Beløb',
 
     'TPL_RLI_CREATE' => 'En salgs mulighed, skal have en tilknyttet Revenue Line Item.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Skabe en Revenue Line Item.',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# Av Total Revenue poster',
     'LBL_CLOSED_RLIS' => '# Lukket Revenue poster',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# af Open Service Flex-varighed Linjeprodukter',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Du kan ikke slette Opportunities som inneholder lukkede Revenue poster',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'En eller flere av de valgte postene inneholder lukkede Revenue poster og kan ikke slettes.',
     'LBL_INCLUDED_RLIS' => '# af inkluderede indtægt linje-emner',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Åben opdatering',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Startdatoen for tjenesten kan ikke ligge tidligere end slutdatoen for tjenesten for evt. åbne tilføjelsesprodukter.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Tilbud',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Salgsmuligheder for en dynamisk virksomhed',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Muligheders hierarki',
@@ -200,24 +207,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter du indleder denne ændring, vil indtægt lije. emneposter blive oprettet for hver eksisterende {{module_name}} i baggrunden. Når indtægt linje-emner er fuldstændige og tilgængelige, vil en meddelelse blive sendt til e-mailadressen på din brugerprofil. Bemærk, at dit eksempel skal konfigureres til at sende e-mail via Admin > E-mail-indstillinger, for at beskeden kan sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulet {{plural_module_name}} gør det muligt for dig at følge individuelle salg fra start til slut. Hver enkelt {{module_name}} post angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige poster såsom {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vi typisk gå igennem adskillige faser før den angives som værende "Lukket vundet" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugars {{forecasts_singular_module}} modul til at forstå og forudsige salgstendenser, samt til at fokusere arbejde på at opnå salgsomsætning.',
+    'LBL_HELP_RECORDS' => 'Modulet {{plural_module_name}} giver dig mulighed for at spore enkelte salg fra start til slut. Hvert enkelt {{module_name}}-register angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige registre, såsom {{quotes_module}}, {{contacts_module}} osv. Et {{module_name}} gennemgår typisk flere salgsstadier, indtil det markeres som "Lukket, vundet" eller "Lukket, tabt". {{plural_module_name}} kan give yderligere fordele, hvis man benytter Sugars {{forecasts_singular_module}}ing-modul til at forstå og forudse salgstendenser samt fokusere arbejde mod at opnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulet {{plural_module_name}} gør det muligt for dig at følge individuelle salg, og de varelinjer, der hører til de pågældende salg, fra start til slut. Hver enkelt {{module_name}} post angiver et potentielt og inkluderer relevante salgsdata og relaterer til andre vigtige poster såsom {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => 'Modulet {{plural_module_name}} gør det muligt for dig at følge individuelle salg, og de produkter, der hører til de pågældende salg, fra start til slut. Hvert enkelt {{module_name}}-register angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige registre, såsom {{quotes_module}}, {{contacts_module}} osv.
 
-- Redigér dette registers felter ved at klikke på et individuelt felt eller knappen Redigér.
+- Redigér dette registers felter ved at klikke på et individuelt felt eller på knappen Redigér.
 - Se eller modificér links til andre registre i underpanelerne ved at skifte den nederste venstre rude til "Datavisning".
-- Lav og se brugerkommentarer og optag ændringshistorik i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Aktivitetsstrøm".
+- Skriv og se brugerkommentarer, og registrér ændringshistorik i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Aktivitetsstrøm".
 - Følg eller gør dette register til en favorit vha. ikonerne til højre for registernavnet.
 - Yderligere handlinger er tilgængelige i rullelisten Handlinger til højre for knappen Redigér.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulet {{plural_module_name}} giver dig mulighed for at følge individuelle salg og de varelinjer, der hører til disse salg, fra start til slut. Hvert enkelt {{module_name}} post angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige poster såsom {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => 'Modulet {{plural_module_name}} giver dig mulighed for at følge individuelle salg og de produkter, der hører til disse salg, fra start til slut. Hvert enkelt {{module_name}}-register angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige registre, såsom {{quotes_module}}, {{contacts_module}} osv.
 
 For at oprette et {{module_name}}:
 1. Angiv værdier for felterne som ønsket.
- - Felter med "Påkrævet" skal være udfyldte inden der gemmes.
- - Klik på "Se mere" for at vise yderligere felter, hvis det er nødvendigt.
+ - Felter med "Obligatorisk" skal udfyldes, inden der gemmes.
+ - Klik på "Vis mere" for at vise yderligere felter, hvis det er nødvendigt.
 2. Klik på "Gem" for at afslutte det nye register og vende tilbage til den foregående side.',
 
 // END ENT/ULT
@@ -231,5 +238,10 @@ For at oprette et {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mine muligheder',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mit teams muligheder",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Kunne ikke ændre {{fieldName}}, eftersom dette {{moduleSingular}} ikke har nogle åbne varelinjer.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Mulighed for interaktioner',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Mulighed Luk Prognose',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Se prognosedetaljer for en specifik mulighed',
 );

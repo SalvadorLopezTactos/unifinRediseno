@@ -100,6 +100,7 @@ r3 - 2004-05-26 22:30:56 -0700 (Wed, 26 May 2004) - sugarjacob - Moving project 
 */
 
 use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class XTemplate {
 
@@ -160,7 +161,6 @@ var $AUTORESET=1;										/* auto-reset sub blocks */
 	$this->alternate_include_directory = $alt_include;
 	$this->mainblock=$mainblock;
 	$this->filecontents=$this->r_getfile($file);	/* read in template file */
-	//if(substr_count($file, 'backup') == 1)_ppd($this->filecontents);
 	$this->blocks=$this->maketree($this->filecontents,$mainblock);	/* preprocess some stuff */
 }
 
@@ -532,7 +532,7 @@ function getfile($file) {
 
 	if(is_file($file))
 	{
-		$file_text=file_get_contents($file);
+        $file_text = file_get_contents(FileLoader::validateFilePath($file));
 
 	} else {
 		$this->set_error("[$file] does not exist");

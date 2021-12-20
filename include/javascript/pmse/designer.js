@@ -1276,12 +1276,12 @@ function renderProject (prjCode) {
         }
     };
     $('#txt-title').focusout(function (e) {
-        if ($.trim($('#txt-title').val()) !== '') {
+        if ($('#txt-title').val().trim() !== '') {
             save_name();
         }
     }).keypress(function(e) {
         if(e.which == 13) {
-            if ($.trim(this.value) != '') {
+            if (this.value.trim() != '') {
                 App.alert.dismiss('error-project-name');
                 save_name();
             }
@@ -1865,35 +1865,33 @@ var validateNumberOfEdges = function(minIncoming, maxIncoming, minOutgoing, maxO
  * @param {Object} validationTools is a collection of utility functions for validating element data
  */
 var validateAtom = function(type, module, field, value, element, validationTools) {
-    var i;
+    // Get the information we need for the API call to validate the data
     var searchInfo = getSearchInfo(type, module, field, value);
+    if (_.isEmpty(searchInfo) || _.isEmpty(searchInfo.url)) {
+        return;
+    }
     var options = {
         'bulk': 'validate_element_settings'
     };
-    if (searchInfo.url) {
-        validationTools.progressTracker.incrementTotalValidations();
-        App.api.call('read', searchInfo.url, null, {
-            success: function(data) {
-                for (i = 0; i < data.result.length; i++) {
-                    if (data.result[i].value === searchInfo.key) {
-                        return;
-                    }
-                }
-                // Since some types of data can be gathered from different sources,
-                // check any backup sources of the data
-                if (searchInfo.backupSearchFunction && searchInfo.backupSearchFunction()) {
-                    return;
-                }
+
+    // Add the validation call to the bulk queue
+    validationTools.progressTracker.incrementTotalValidations();
+    App.api.call('read', searchInfo.url, null, {
+        success: function(response) {
+            // If the response is false, and any backup search function is false, mark an error
+            if (!response.result &&
+                (!_.isFunction(searchInfo.backupSearchFunction) || !searchInfo.backupSearchFunction())) {
                 createWarning(element, 'LBL_PMSE_ERROR_DATA_NOT_FOUND', searchInfo.text);
-            },
-            error: function(data) {
-                createWarning(element, 'LBL_PMSE_ERROR_DATA_NOT_FOUND', searchInfo.text);
-            },
-            complete: function(data) {
-                validationTools.progressTracker.incrementValidated();
             }
-        }, options);
-    }
+        },
+        error: function() {
+            // Error while validating, mark an error
+            createWarning(element, 'LBL_PMSE_ERROR_DATA_NOT_FOUND', searchInfo.text);
+        },
+        complete: function() {
+            validationTools.progressTracker.incrementValidated();
+        }
+    }, options);
 };
 
 /**
@@ -1903,82 +1901,93 @@ var validateAtom = function(type, module, field, value, element, validationTools
  * @param {string} module is the module attribute of the atom being validated
  * @param {string} field is the field attribute of the atom being validated
  * @param {string} value is the value attribute of the atom being validated
- * @return {Object} an object containing the correct URL, search key, and text
+ * @return {Object|null} an object containing the correct URL, error type text, and backup
+ *          search function if applicable. Returns null if no valid search info exists
+ *          for the given data type
  */
 var getSearchInfo = function(type, module, field, value) {
+    var data = '';
+    var filter = '';
+    var text = '';
+    var args = {};
+    var backupSearchFunction = null;
 
-    var url;
-    var text;
-    var key;
-    var backupSearchFunction;
-
-    switch (type) {
+    switch (type.toUpperCase()) {
         case 'MODULE':
-            key = field;
+            args.key = field;
         case 'VARIABLE':
-        case 'recipient':
-            url = App.api.buildURL('pmse_Project/CrmData/fields/' + module + '?base_module=' + getTargetModule());
+        case 'RECIPIENT':
+            data = 'fields';
+            filter = module;
+            args.key = args.key || value;
+            args.base_module = getTargetModule();
             text = 'Module field';
-            key = key || value;
             backupSearchFunction = function() {
                 var fields = App.metadata.getModule(module.charAt(0).toUpperCase() + module.slice(1)).fields;
-                for (fieldName in fields) {
-                    if (fieldName === key) {
+                for (var fieldName in fields) {
+                    if (fieldName === args.key) {
                         return true;
                     }
                 }
+                return false;
             };
             break;
         case 'USER_IDENTITY':
-            url = App.api.buildURL('pmse_Project/CrmData/users/');
+            data = 'users';
+            args.key = value;
             text = 'User';
-            key = value;
             break;
         case 'USER_ROLE':
-        case 'role':
-            url = App.api.buildURL('pmse_Project/CrmData/rolesList/');
+        case 'ROLE':
+            data = 'rolesList';
+            args.key = value;
             text = 'Role';
-            key = value;
             break;
         case 'RELATIONSHIP':
-            key = value;
-        case 'user':
-            url = App.api.buildURL('pmse_Project/CrmData/related/' + getTargetModule());
+            args.key = value;
+        case 'USER':
+            args.key = args.key || module;
+            data = 'related';
+            filter = getTargetModule();
             text = 'Module relationship';
-            key = key || module;
             break;
         case 'TEAM':
-        case 'team':
-            url = App.api.buildURL('pmse_Project/CrmData/teams/public/');
+            data = 'teams';
+            filter = 'all';
+            args.key = value;
             text = 'Team';
-            key = value;
             break;
         case 'CONTROL':
-            url = App.api.buildURL('pmse_Project/CrmData/activities/' + project.uid);
+            data = 'activities';
+            filter = project.uid;
+            args.key = field;
             text = 'Form activity';
-            key = field;
             break;
         case 'ALL_BUSINESS_RULES':
-            url = App.api.buildURL('pmse_Project/CrmData/rulesets/' + project.uid);
+            data = 'rulesets';
+            filter = project.uid;
+            args.key = value;
             text = 'Business rule';
-            key = value;
             break;
         case 'BUSINESS_RULES':
-            url = App.api.buildURL('pmse_Project/CrmData/businessrules/' + project.uid);
+            data = 'businessrules';
+            filter = project.uid;
+            args.key = field;
             text = 'Business rule action';
-            key = field;
             break;
         case 'TEMPLATE':
-            url = App.api.buildURL('pmse_Project/CrmData/emailtemplates/' + getTargetModule());
+            data = 'emailtemplates';
+            filter = getTargetModule();
+            args.key = value;
             text = 'Email template';
-            key = value;
             break;
+        default:
+            return null;
     };
 
     return {
-        url: url,
+        url: App.api.buildURL('pmse_Project/validateCrmData/' + data + '/' + filter, null, null, args),
         text: text,
-        key: key,
         backupSearchFunction: backupSearchFunction
     };
 };

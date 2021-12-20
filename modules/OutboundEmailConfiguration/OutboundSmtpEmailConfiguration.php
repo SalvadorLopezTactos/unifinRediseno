@@ -31,6 +31,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
     private $authenticate;     // true=require authentication on the SMTP server
     private $username;         // the username to use if authenticate=true
     private $password;         // the password to use if authenticate=true
+    private $authType;         // the type of authentication to use when connecting to the smtp server
+    private $eapmId;           // the ID of the EAPM bean holding Oauth2 information to use if applicable
 
     /**
      * Extends the default configurations for this sending strategy. Adds default SMTP configurations needed to send
@@ -48,6 +50,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
         $this->setAuthenticationRequirement();
         $this->setUsername();
         $this->setPassword();
+        $this->setAuthType();
+        $this->setEAPMId();
     }
 
     /**
@@ -236,6 +240,64 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
     }
 
     /**
+     * Sets the type of authentication to use when connecting to the SMTP server
+     * ('LOGIN', 'XOAUTH2', etc)
+     *
+     * @param string $authType
+     * @throws MailerException
+     */
+    public function setAuthType($authType = '')
+    {
+        if (!is_string($authType) && !is_null($authType)) {
+            throw new MailerException(
+                "Invalid Configuration: authType must be a string",
+                MailerException::InvalidConfiguration
+            );
+        }
+
+        $this->authType = trim($authType);
+    }
+
+    /**
+     * Gets the type of authentication to use when connecting to the SMTP server
+     * ('LOGIN', 'XOAUTH2', etc)
+     *
+     * @return string
+     */
+    public function getAuthType()
+    {
+        return $this->authType;
+    }
+
+    /**
+     * Sets the ID of the EAPM bean storing any Oauth2 token credentials
+     *
+     * @param string $eapmId the ID of the EAPM bean
+     * @throws MailerException
+     */
+    public function setEAPMId($eapmId = '')
+    {
+        if (!is_string($eapmId) && !is_null($eapmId)) {
+            throw new MailerException(
+                "Invalid Configuration: eapmId must be a string",
+                MailerException::InvalidConfiguration
+            );
+        }
+
+        $this->eapmId = trim($eapmId);
+    }
+
+    /**
+     * Gets the ID of the EAPM bean storing any Oauth2 token credentials
+     *
+     * @return mixed
+     */
+    public function getEAPMId()
+    {
+        return $this->eapmId;
+    }
+
+    /**
      * Returns true/false indicating whether or not $securityProtocol is a valid, known security protocol for
      * the context of a Mailer.
      *
@@ -269,6 +331,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
             "securityProtocol" => $this->getSecurityProtocol(),
             "username"     => $this->getUsername(),
             "password"     => $this->getPassword(),
+            'authType'     => $this->getAuthType(),
+            'eapmId'       => $this->getEAPMId(),
         );
         return array_merge(parent::toArray(), $fields);
     }

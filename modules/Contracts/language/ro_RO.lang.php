@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Modificat după ID',
     'LBL_EXPORT_CREATED_BY' => 'Creare după ID',
     'LBL_EXPORT_TYPE_NAME' => 'Tastaţi numele',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare contracte',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Contracte',
 );

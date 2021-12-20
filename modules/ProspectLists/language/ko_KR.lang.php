@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => '목표고객 목록 대시보드',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => '목표고객 목록 기록 대시보드',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => '목표고객 목록 포커스 서랍',
+  'LBL_RELATED_ACCOUNTS' => '관련 계정',
+  'LBL_RELATED_CONTACTS' => '관련 연락처',
+  'LBL_RELATED_LEADS_TARGETS' => '관련 리드 및 목표고객',
 
   'LBL_MODULE_NAME' => '목표고객 목록',
   'LBL_MODULE_NAME_SINGULAR' => '목표고객 목록',

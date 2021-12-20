@@ -55,7 +55,13 @@ if(isset($_POST['return_action']) && $_POST['return_action'] != "") $return_acti
 else $return_action = "DetailView";
 if(isset($_POST['return_id']) && $_POST['return_id'] != "") $return_id = $_POST['return_id'];
 
-$GLOBALS['log']->debug("Saved record with id of ".$return_id);
+$GLOBALS['log']->debug('Saved record with id of ' . $return_id);
 
-header("Location: index.php?action=$return_action&module=$return_module&record=$return_id");
-?>
+$query_data = [
+    'action' => $return_action,
+    'module' => $return_module,
+    'record' => $return_id,
+];
+
+$location = 'index.php?' . http_build_query($query_data);
+header("Location: $location");

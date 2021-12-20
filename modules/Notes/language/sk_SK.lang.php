@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Informačný panel so zoznamom poznámok',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Informačný panel so záznamom poznámok',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na poznámky',
 
+    'LBL_RELATED_CONTACT' => 'Súvisiaci kontakt',
     'ERR_DELETE_RECORD' => 'K odstráneniu verzie musíte zadať číslo záznamu.',
     'LBL_ACCOUNT_ID' => 'Číslo účtu:',
     'LBL_CASE_ID' => 'Číslo udalosti:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Číslo kontaktu:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Poznámky',
+    'LBL_ATTACHMENTS' => 'Prílohy',
+    'LBL_ATTACHMENT_FLAG' => 'Je príloha',
     'LBL_DESCRIPTION' => 'Poznámka',
     'LBL_EMAIL_ADDRESS' => 'Email adresa:',
     'LBL_EMAIL_ATTACHMENT' => 'Email príloha',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Prílohy',
     'LBL_NOTE' => 'Poznámka:',
     'LBL_OPPORTUNITY_ID' => 'Číslo príležitosti:',
+    'LBL_NOTE_PARENT_ID' => 'ID nadradenej poznámky:',
     'LBL_PARENT_ID' => 'Číslo rodiča:',
     'LBL_PARENT_TYPE' => 'Typ rodiča',
     'LBL_EMAIL_TYPE' => 'Typ e-mailu',

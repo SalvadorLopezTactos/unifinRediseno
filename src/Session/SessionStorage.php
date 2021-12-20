@@ -179,13 +179,17 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
                         }
 
                         $sessionObject->restart();
-                        //First verify that the sessions still match and we didn't somehow switch users.
-                        if ((!isset($_SESSION['user_id']) && $previousUserId) ||
-                            ($previousUserId && isset($_SESSION['user_id']) && $previousUserId != $_SESSION['user_id'])
-                        ) {
-                            $logger->warning('Unexpected change in user or logout during session write at shutdown');
+                        if (isset($_SESSION) && is_array($_SESSION)) {
+                            //First verify that the sessions still match and we didn't somehow switch users.
+                            if ((!isset($_SESSION['user_id']) && $previousUserId) ||
+                                ($previousUserId && isset($_SESSION['user_id']) && $previousUserId != $_SESSION['user_id'])
+                            ) {
+                                $logger->warning('Unexpected change in user or logout during session write at shutdown');
+                            } else {
+                                $sessionObject->applyTrackedChangesToArray($_SESSION);
+                            }
                         } else {
-                            $sessionObject->applyTrackedChangesToArray($_SESSION);
+                            $logger->warning('Cannot restart session during session write at shutdown');
                         }
                     }
                 } else {

@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Warnung: Sie modifizieren ihre automatische Import-Einstellung, was zu Datenverlust führen kann.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Warnung: Auto-Import muss aktiviert sein, wenn Tickets automatisch erstellt werden sollen.',
 	'LBL_EDIT_LAYOUT' => 'Layout bearbeiten' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-Mail-Adresse',
+    'LBL_EMAIL_PROVIDER' => 'E-Mail-Anbieter',
+    'LBL_AUTH_STATUS' => 'Autorisierungsstatus',
 );
-?>

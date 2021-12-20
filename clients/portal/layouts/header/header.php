@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['portal']['layout']['header'] = array(
-    'components' => array(
-        array(
+$viewdefs['portal']['layout']['header'] = [
+    'components' => [
+        [
             'layout' => 'module-list',
-        ),
-        array(
+        ], [
             'view' => 'profileactions',
-        ),
-    ),
-);
+        ], [
+            'view' => 'portal-chat-button',
+        ],
+    ],
+];

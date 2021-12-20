@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Folyamatdefiníciók',
   'LBL_MODULE_NAME_SINGULAR' => 'Folyamatdefiníció',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Folyamatmeghatározások figyelemfelhívás',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Folyamatmeghatározások bejegyzés műszerfal',
   'LNK_LIST' => 'Folyamatdefiníciók megtekintése',
   'LNK_NEW_PMSE_PROJECT' => 'Folyamatdefiníciók létrehozása',
   'LNK_IMPORT_PMSE_PROJECT' => 'Folyamatdefiníciók importálása',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Adattulajdonos Megváltoztatása',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Csoport',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Újrahozzárendelési Tevékenység',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail folyamatfelhasználó, ha a folyamat hozzárendelésre került',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Felhasználói Definíció',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Kijelölési Módszer',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Felhasználó Hozzáadása',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Frissítse a "Hozzárendelve ehhez" bejegyzést',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => '„Felelős” beállítása elérhetőség alapján',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Megfelelő Adat Hozzáadása',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Kapcsolódó modul',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'A tevékenység neve üres.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'A "%s" név már létezik az alakcsaládban.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Kötelező műszak elérhetősége',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Ha nincs elérhető felhasználó',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'előtt',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Kizárólag új rekordok',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Csak aktualizált adatok',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Csak frissített bejegyzések (Összes frissítés - lásd a súgó szövegét)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Új bejegyzések vagy első frissítés',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Új bejegyzések és minden frissítés',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Válassza ki az esemény kezdődési időpontját',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Válassza ki, amikor a folyamat elkezdődik.<br><br>Új: futtassa a folyamatot, amikor az új bejegyzés létrehozásra kerül.<br><br>Első frissítés: a folyamat csak akkor fut, ha az első időfeltétel teljesül a már létező bejegyzésen.<br><br>Minden frissítés: a folyamatok lefutnak minden alkalommal, amikor egy, a már létező bejegyzéshez rendelt feltétel teljesül.<br><br>Új bejegyzések vagy első frissítés: a folyamatok csak akkor futnak, amikor először teljesül a bejegyzés időfeltétele akár a bejegyzés létrehozása, akár a bejegyzés frissítése közben.<br><br>Új bejegyzések és minden frissítés: a folyamatok minden alkalommal lefutnak minden új és létező bejegyzésre.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Válassza ki a SugarCRM modult az eseményindító alkalmazásához',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Meghatározott Dátum',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'változik erről:',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'változik erre:',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'beletartozik bármely',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'nem tartozik bele bármely',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'vagy azt követően',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'vagy azt megelőzően',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nem egyenlő ezzel:',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Hozzáadás',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Bezárás',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Össze csapat hozzárendelve a rekordhoz',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Csoportok',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% kapcsolódik a(z) %MODULE% modulhoz',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'A(z) %MODULE% modult létrehozó felhasználó',

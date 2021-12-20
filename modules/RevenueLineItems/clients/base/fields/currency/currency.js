@@ -22,7 +22,7 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        // Enabling currency dropdown on RLIl ist views
+        // Enabling currency dropdown on RLI list views
         this.hideCurrencyDropdown = false;
     }
 })

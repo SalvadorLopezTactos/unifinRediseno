@@ -47,11 +47,10 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
         $this->previous_date_modifier = '-3 month';
 
         //The name template
-        global $app_strings;
-        $this->name_template = $app_strings['LBL_QUARTER_TIMEPERIOD_FORMAT'];
+        $this->name_template = translate('LBL_QUARTER_TIMEPERIOD_FORMAT');
 
         //The leaf name template
-        $this->leaf_name_template = $app_strings['LBL_MONTH_TIMEPERIOD_FORMAT'];
+        $this->leaf_name_template = translate('LBL_MONTH_TIMEPERIOD_FORMAT');
 
         //The chart label
         $this->chart_label = "F Y";

@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Scheduled Job',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rebuild Denormalised Team Security Data',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Activity Stream Purger',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Update product definition',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Process Time-Aware Schedules',
+'LBL_OOTB_DATA_ARCHIVER' => 'Run Active Data Archives/Deletions',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Always',
 'LBL_CATCH_UP' => 'Execute If Missed',
+'LBL_SYSTEM_JOB' => 'Is current job system?',
 'LBL_CATCH_UP_WARNING' => 'Uncheck if this job may take more than a moment to run.',
 'LBL_DATE_TIME_END' => 'Date & Time End',
 'LBL_DATE_TIME_START' => 'Date & Time Start',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Remove diagnostic tool files',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Remove temporary files',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Rebuild Denormalised Team Security Data',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Update product definition',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Run Nightly Mass Email Campaigns',
 'LBL_ASYNCMASSUPDATE' => 'Perform Asynchronous Mass Updates',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Cleanup Job Queue',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Activity Stream Purger',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Process Time-Aware Schedules',
 'LBL_PMSEENGINECRON' => 'SugarBPM Scheduler',
 );
 

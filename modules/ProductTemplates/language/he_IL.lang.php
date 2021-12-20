@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'סוגי מיסים:',
   'LBL_TYPE_NAME'=>'שם סוג',
   'LBL_TYPE' => 'סוג:',
+  'LBL_PRODUCT_TYPE' => 'סוג מוצר',
   'LBL_URL' => 'לינק למוצר:',
   'LBL_VENDOR_PART_NUM' => 'מספר חלק אצל ספק:',
   'LBL_WEIGHT' => 'משקל:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'צפייה בקטלוג מוצרים',
   'NTC_DELETE_CONFIRMATION' => 'אתה בטוח בשברצונך למחוק רשומה זו?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'הוסף',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'חפש בקטלוג המוצרים',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'אין נתונים זמינים',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'הוקצה למשתמש ששמו',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'סוגי מוצרים',
   'LBL_RENEWABLE' => 'ניתן לחידוש',
   'LBL_SERVICE' => 'שירות',
+  'LBL_LOCK_DURATION' => 'משך הנעילה',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'לוח המחוונים של רשימת קטלוג מוצרים',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'לוח המחוונים של רשומת קטלוג מוצרים',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס קטלוג מוצרים',
 );

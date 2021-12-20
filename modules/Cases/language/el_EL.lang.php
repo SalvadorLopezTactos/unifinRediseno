@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Υποθέσεων',
     'LBL_CASES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Υποθέσεων',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Λεπτομέρειες υπόθεσης',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης υποθέσεων',
 
 	'ERR_DELETE_RECORD'					=> 'Πρέπει να προσδιορίσετε έναν αριθμό εγγραφής για να διαγράψετε τον λογαριασμό.',
 	'LBL_ACCOUNT_ID'					=> 'Ταυτότητα Λογαριασμού',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Εμφάνιση στο Portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Δημιουργία Άρθρου',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Βάση Γνώσεων',
+    'LBL_REQUEST_CLOSE' => 'Αίτημα κλεισίματος',
+    'LBL_REQUEST_CLOSE_DATE' => 'Ημερομηνία αιτήματος κλεισίματος',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Αίτημα για κλείσιμο',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Αποστολή αιτήματος για κλείσιμο αυτής της υπόθεσης',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Θέλετε να ζητήσετε το κλείσιμο αυτής της υπόθεσης;',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Οι υποθέσεις μου για τις οποίες ζητήθηκε κλείσιμο',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Οι υποθέσεις μου για τις οποίες ζητήθηκε κλείσιμο',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Οι υποθέσεις μου για τις οποίες ζητήθηκε κλείσιμο',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Κατάλογος υποθέσεων για τις οποίες ζητήθηκε κλείσιμο',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Εμφανίζει μια λίστα εκχωρημένων υποθέσεων για τις οποίες ζητείται κλείσιμο',
 
     'LBL_CREATED_USER' => 'Δημιουργήθηκε από Χειριστή',
     'LBL_MODIFIED_USER' => 'Χειριστής Τροποποίησης',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ανατεθειμένο Όνομα Χειριστή',
     'LBL_EXPORT_TEAM_COUNT' => 'Αρίθμηση Ομάδας',
     'LBL_CHANGETIMERS' => 'Αλλαγή Χρονομέτρων',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Αγορές',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Σχετικές Επαφές Emails',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Για παράδειγμα, μπορείτε να χρησιμοποιήσετε αυτό, για να βρείτε ένα ζήτημα το οποίο υποβλήθηκε προηγουμένως.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Εάν έχετε μια νέα Υπόθεση υποστήριξης που θα επιθυμούσατε να υποβάλετε, μπορείτε να πατήσετε εδώ για να υποβάλει μια νέα Υπόθεση.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Κάνοντας κλικ εδώ, θα σας επιστρέψει σε αυτήν την προβολή ανά πάσα στιγμή.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Αλληλεπιδράσεις υπόθεσης',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Σημειώσεις',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'Λεπτομέρειες SLA',
     'LBL_HOURS' => 'Ώρες',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Κατάσταση',
 );

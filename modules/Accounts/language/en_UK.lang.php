@@ -19,6 +19,7 @@ $mod_strings = array (
 	'LBL_CONTRACTS'=>'Contracts',
 	'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracts',
     'LBL_RLI_SUBPANEL_TITLE' => 'Revenue Line Items',
+    'LBL_PLI_SUBPANEL_TITLE' => 'Purchased Line Items',
 	'LBL_QUOTES_SUBPANEL_TITLE' => 'Quotes',
     'LBL_QUOTES_BILLTO' => 'Quotes (Bill To)',
     'LBL_QUOTES_SHIPTO' => 'Quotes (Ship To)',
@@ -28,12 +29,14 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Accounts List Dashboard',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Accounts Record Dashboard',
+    'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Accounts Focus Drawer',
     'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Account Details',
     'LBL_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Account Name/Industry',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Location',
     'LBL_PURCHASES' => 'Purchases',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Account Interactions',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Charts',
@@ -177,6 +180,7 @@ $mod_strings = array (
     'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Related Contacts&#39; Emails',
     'LBL_FILENAME' => 'Attachment',
     'LBL_REVENUELINEITEMS' => 'Revenue Line Items',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Purchased Line Items',
     'LBL_DUNS_NUM' => 'DUNS:',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
 

@@ -24,46 +24,24 @@ class ParserDropDown extends ModuleBuilderParser
      * @param $params $params
      * @param bool $finalize if false, the changes are not yet deployed.
      *  Useful when making multiple changes in a single request. finalize() should then be called externally.
+     * @param $lang enforce the selected language
      */
-    public function saveDropDown($params, $finalize = true)
+    public function saveDropDown($params, $finalize = true, $lang = '')
     {
         global $locale;
 
-        $emptyMarker = translate('LBL_BLANK');
-
         if (!empty($_REQUEST['dropdown_lang'])) {
             $selected_lang = InputValidation::getService()->getValidInputRequest('dropdown_lang', 'Assert\Language');
+        } elseif (!empty($lang)) {
+            $selected_lang = $lang;
         } else {
             $selected_lang = $locale->getAuthenticatedUserLanguage();
         }
 
         $type = $_REQUEST['view_package'];
         $dropdown_name = $params['dropdown_name'];
-        $json = getJSONobj();
 
-        $list_value = str_replace('&quot;&quot;:&quot;&quot;', '&quot;__empty__&quot;:&quot;&quot;', $params['list_value']);
-        //Bug 21362 ENT_QUOTES- convert single quotes to escaped single quotes.
-        $temp = $json->decode(html_entity_decode(rawurldecode($list_value), ENT_QUOTES));
-        $dropdown = array();
-        // dropdown is received as an array of (name,value) pairs - now extract to name=>value format preserving order
-        // we rely here on PHP to preserve the order of the received name=>value pairs - associative arrays in PHP are ordered
-        if (is_array($temp)) {
-            foreach ($temp as $item) {
-                $key = SugarCleaner::stripTags(from_html($item[0]), false);
-                $dropdown[$key] = empty($key) ? '' : SugarCleaner::stripTags(from_html($item[1]), false);
-            }
-        }
-        if (array_key_exists($emptyMarker, $dropdown)) {
-            $output=array();
-            foreach ($dropdown as $key => $value) {
-                if ($emptyMarker===$key) {
-                    $output['']='';
-                } else {
-                    $output[$key]=$value;
-                }
-            }
-            $dropdown=$output;
-        }
+        $dropdown = $this->formatDropdown($params['list_value']);
 
         if ($type != 'studio') {
             $mb = new ModuleBuilder();
@@ -122,15 +100,56 @@ class ParserDropDown extends ModuleBuilderParser
                     // If skip_sync, we don't want to sync ALL languages
                     $this->synchDropDown($dropdown_name, $dropdown, $selected_lang);
                 }
-
-                $contents = $this->getExtensionContents($dropdown_name, $dropdown);
-                $this->saveContents($dropdown_name, $contents, $selected_lang);
+                $this->saveDropdownToLang($dropdown_name, $dropdown, $selected_lang);
             }
         }
         //If more than one language is being updated this request, allow the caller to finalize
         if ($finalize) {
             $this->finalize($selected_lang);
         }
+    }
+
+    /**
+     * Formats the dropdown list value
+     *
+     * @param string $listValue the list value
+     * @return array
+     */
+    public function formatDropdown($listValue)
+    {
+        $emptyMarker = translate('LBL_BLANK');
+
+        $listValue = str_replace(
+            '&quot;&quot;:&quot;&quot;',
+            '&quot;__empty__&quot;:&quot;&quot;',
+            $listValue
+        );
+
+        //Bug 21362 ENT_QUOTES- convert single quotes to escaped single quotes.
+        $temp = json_decode(html_entity_decode(rawurldecode($listValue), ENT_QUOTES));
+        $dropdown = [];
+        // dropdown is received as an array of (name,value) pairs - now extract to name=>value format preserving order
+        // we rely here on PHP to preserve the order of the received name=>value pairs - associative arrays in PHP are ordered
+        if (is_array($temp)) {
+            foreach ($temp as $item) {
+                $key = SugarCleaner::stripTags(from_html($item[0]), false);
+                $dropdown[$key] = strlen($key) ? SugarCleaner::stripTags(from_html($item[1]), false) : '';
+            }
+        }
+
+        if (array_key_exists($emptyMarker, $dropdown)) {
+            $output = [];
+            foreach ($dropdown as $key => $value) {
+                if ($emptyMarker === $key) {
+                    $output[''] = '';
+                } else {
+                    $output[$key] = $value;
+                }
+            }
+            $dropdown = $output;
+        }
+
+        return $dropdown;
     }
 
     /**
@@ -214,10 +233,22 @@ class ParserDropDown extends ModuleBuilderParser
                     //if the dropdown does not exist in the language, justt use what we have.
                     $langDropDown = $dropdown;
                 }
-                $contents = $this->getExtensionContents($dropdown_name, $langDropDown);
-                $this->saveContents($dropdown_name, $contents, $lang);
+                $this->saveDropdownToLang($dropdown_name, $langDropDown, $lang);
             }
         }
+    }
+
+    /**
+     * Saves Dropdown contents to the language
+     *
+     * @param string $dropdownName The name of the dropdown to be synched
+     * @param array $dropdown The dropdown currently being saved
+     * @param string $lang saved to the language
+     */
+    public function saveDropdownToLang($dropdownName, $dropdown, $lang)
+    {
+        $contents = $this->getExtensionContents($dropdownName, $dropdown);
+        $this->saveContents($dropdownName, $contents, $lang);
     }
 
     /**

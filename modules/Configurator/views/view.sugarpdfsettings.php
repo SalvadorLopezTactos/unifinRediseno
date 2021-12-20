@@ -68,12 +68,6 @@ class ConfiguratorViewSugarpdfsettings extends SugarView
                         }
                     }
                 }
-                if(!empty($_POST["sugarpdf_pdf_class"]) && $_POST["sugarpdf_pdf_class"] != PDF_CLASS){
-                    // clear the cache for quotes detailview in order to switch the pdf class.
-                    if(is_file($cachedfile = sugar_cached('modules/Quotes/DetailView.tpl'))) {
-                        unlink($cachedfile);
-                    }
-                }
                 $focus->saveConfig();
                 header('Location: index.php?module=PdfManager&action=index');
             }

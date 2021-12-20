@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontaklar',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Potansiyeller',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Kullanıcılar',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'İş Merkezleri Kayıt Panosu',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'İş Merkezleri Odak Bölmesi',
 ];

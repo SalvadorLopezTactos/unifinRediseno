@@ -212,8 +212,8 @@ function translate_label($label_tag){
 
 }
 
-function write_workflow(& $workflow_object){
-	global $beanlist;
+function write_workflow(WorkFlow $workflow_object)
+{
 	$module = $workflow_object->base_module;
     if (!\BeanFactory::getBeanClass($module)) {
         throw new \RuntimeException(sprintf('Invalid module %s', $module));

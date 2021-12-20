@@ -716,7 +716,7 @@ EOREGEX
 
 			$stripped = $this->process_expr_list($stripped);
 			$last = array_pop($stripped);
-			if(!$alias && $last['expr_type'] == 'colref') {
+        if (!$alias && $last['expr_type'] == 'colref' && count($stripped) > 0) {
 				$prev = array_pop($stripped);
 				if($prev['expr_type'] == 'operator' ||
 				   $prev['expr_type'] == 'const' ||

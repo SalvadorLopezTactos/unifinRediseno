@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Panel för samtalslistor',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Panel för samtalsposter',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för samtal',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Telefonsamtal',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Tilldelad användare',
     'LBL_LIST_MY_CALLS' => 'Mina telefonsamtal',
     'LBL_MY_SCHEDULED_CALLS' => 'Mina schemalagda samtal',
+    'LBL_GUEST_CALLS' => 'Mina samtal som gäst',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Schemalagda samtal som gäst',
     'LBL_SELECT_FROM_DROPDOWN' => 'Var god välj först från dropdownmenyn Relaterad till.',
 	'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till',
 	'LBL_ASSIGNED_TO_ID' => 'Tilldelad användare',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Avbryt',
     'LBL_EMPTY_SEARCH_RESULT' => 'Tyvärr, inga resultat hittades. Var vänlig skapa en inbjudan nedanför.',
     'LBL_NO_ACCESS' => 'Du har inte behörighet att skapa $module.',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Kontakt-ID för Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Repetera',
     'LBL_REPEAT_INTERVAL' => 'Varje',
     'LBL_REPEAT_END' => 'Slut',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Samtal med {{{this}}}',
     'LBL_SEND_INVITES' => 'Skicka inbjudningar',
     'LBL_REMINDER_TITLE' => 'Samtal:',
+    'LBL_CALL_RECORDING_URL' => 'Inspelnings-URL',
+    'LBL_CALL_RECORDING' => 'Inspelning',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Du schemalade {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> på {{formatDate date_start}}.',

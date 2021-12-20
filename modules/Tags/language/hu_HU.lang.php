@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Azonosító által létrehozott',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Létrehozó neve',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Felelős neve',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Címkék figyelemfelhívás',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Címke bejegyzés műszerfal',
+    'LBL_MY_TAGS' => 'Címkéim',
+    'LBL_MY_FAVORITE_TAGS' => 'Kedvenc címkéim',
 );

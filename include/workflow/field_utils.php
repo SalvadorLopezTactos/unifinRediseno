@@ -854,6 +854,9 @@ function check_special_fields($field_name, $source_object, $use_past_array=false
 				 return get_display_text($source_object, $field_name, $source_object->$field_name, null, null, $context);
 		} else {
 			//use the past value
+            if ($source_object->fetched_row === false) {
+                return null;
+            }
 				return get_display_text($source_object, $field_name, $source_object->fetched_row[$field_name], null, null, $context);
 		}
 	}

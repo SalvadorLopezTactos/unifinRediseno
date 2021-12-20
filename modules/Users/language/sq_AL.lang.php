@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Fjalëkalimi që vendosët nuk i plotëson kërkesat e fjalëkalimit. Ju ltemi provoni përsëri.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informacioni i përdoruesit nuk është gjetur',
     'ERR_USER_NAME_EXISTS'              => 'Emri i përdoruesit {0} tashmë ekziston. Emrat e dubluar të përdoruesve nuk lejohen. Ndrysho emrin e përdoruesit që të jetë i veçantë.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licenca "Sugar Hint" duhet të ruhet me një lloj licence shtesë të pajtueshme',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Ky përdorues është mbyllur në aplikimin e Sigar dhe nuk mund të kyçet duke përdor fjalëkalimin e tij/saj ekzistues.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Vetëm autorizim i jashtëm, përdoruesi nuk mund të identifikohet duke përdorur kredencialet e "Sugar"',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Email adresa e pranuesit',
 	'ERR_SERVER_STATUS'					=> 'Statusin e serverit tuaj',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistemi nuk është në gjendje të dërgoj email përdoruesit. Ju luemi kontrolloni Konfigurimin e Maileve dalëse në Parametrat e Emailit.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Përdoruesit e rinj duhet të krijohen te <a href="{0}" target="_blank">Cilësimet e SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email adresa',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Parashikimet',
     'LBL_WORKSHEETS'                    => 'fletët e punës',
 	'LBL_CALENDARS'                     => 'Kalendarët',
+    'LBL_SHIFTS'                        => 'Turnet',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Përjashtimet nga turni',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Prano një email njoftues kur regjistrimi ju është drejtuar juve.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email për detyrën',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Merr njoftim me email kur dikush të përmend në një evidencë komentesh.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Emaili me përmendje',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Zgjidh mënyrën se si duhet të shfaqen emrat e fushave në pamjet e regjistrimeve. Zgjidh "Pranë vlerës së fushës" për një pamje më kompakte të regjistrimit.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Vendosja e emrit të fushës',
     'LBL_ABOVE_FIELD_VALUE'             => 'Mbi vlerën e fushës',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Lloji i licencës',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Vendos në çaktvizim të rikujtuesve për thirjet dhe mbledhjet.',
 	'LBL_REMINDER'						=> 'Kujtuesit',
 	'LBL_REMINDER_POPUP' => 'shfaqje',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Ky sesion ka përfunduar, sepse sesioni tjetër ka filluar nën emrin e njëjtë të përdoruesit.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Ricaktimi i regjistrimeve',
-	'LBL_REASS_DESC_PART1'				=> 'Selektoni modulet që përmbajnë regjistrimet për ricaktimin nga përdoruesi të veçantë për përdoruesin tjetër.<br /><br />Klikoni Vazhdo për të parë numrin e regjistrimeve që do të azhurnohen në çdo modul të selektuar. Klikoni Anulo për të dalë nga faqja pa ricaktuar çdo regjistrim.',
+    'LBL_REASS_DESC_PART1'              => 'Selektoni modulet që përmbajnë regjistrimet për ricaktimin nga përdoruesi të veçantë për përdoruesin tjetër.<br /><br />Klikoni Vazhdo për të parë numrin e regjistrimeve që do të azhurnohen në çdo modul të selektuar. Klikoni Anulo për të dalë nga faqja pa ricaktuar çdo regjistrim.',
         'LBL_REASS_DESC_PART2'=>                    'Selektoni se cilat module kundër së cilës për të drejtuar rrjedhjen e punës, dërgoni njoftimet e detyrës, dhe bëni ndjekjen e auditimit gjatë ricaktimit. Klikoni Vazhdo për të vazhduar dhe ricaktoni regjistrimet. Kliko Rifillo të filloni përsëri.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Grupi i ricaktimit',
 	'LBL_REASS_STEP2_DESC'				=> 'Grupet e listuara më poshtë ishin të disponueshme në grupin nga përdoruesit, por jo në grupin për përdoruesin. Të gjitha regjistrimet në grupin nga përdoruesit nuk do të jenë të dukshëm në grupin e përdoruesit përveç nëse vlerat e grupit janë të plotësuara.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profili i përdoruesit',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Hap <a href="%s" target="_blank">Cilësimet e SugarCloud</a> për të bërë ndryshime në fushat vetëm për lexim.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Kontakto administratorin e Sugar nëse dëshiron të bësh ndryshime te fushat vetëm për lexim.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

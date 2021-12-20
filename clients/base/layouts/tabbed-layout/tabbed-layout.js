@@ -95,7 +95,7 @@
      * @private
      */
     _triggerSugarAppLoad: function(compDef) {
-        this.context.trigger('sugarApp:load:' + this.cid + ':' + compDef.srn);
+        this.context.trigger('sugarApp:' + this.cid + ':load:' + compDef.srn);
     },
 
     /**

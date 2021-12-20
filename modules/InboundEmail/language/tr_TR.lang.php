@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Uyarı: Otomatik al ayarlarını değiştiriyorsunuz, bu işlem veri kaybına sebep olabilir.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Uyarı: Otomatik talep oluştururken otomatik al ayarı seçili olmalı.',
 	'LBL_EDIT_LAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-Posta Adresi',
+    'LBL_EMAIL_PROVIDER' => 'E-Posta Sağlayıcısı',
+    'LBL_AUTH_STATUS' => 'Yeki Durumu',
 );
-?>

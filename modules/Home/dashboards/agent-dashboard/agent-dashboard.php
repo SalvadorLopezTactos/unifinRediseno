@@ -227,7 +227,7 @@ return [
                     [
                         'layout' => [
                             'name' => 'side-drawer',
-                            'type' => 'side-drawer',
+                            'type' => 'console-side-drawer',
                         ],
                     ],
                 ],

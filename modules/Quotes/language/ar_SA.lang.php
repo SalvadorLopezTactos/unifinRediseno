@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'لوحة معلومات قائمة عروض الأسعار',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'لوحة معلومات سجل عروض الأسعار',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم العروض السعرية',
 
     'LBL_CONTRACTS'=>'العقود',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'العقود',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'بلد الفوترة',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'الرمز البريدي للفوترة',
     'LBL_BILLING_ADDRESS_STATE' => 'ولاية الفوترة',
-    'LBL_BILLING_ADDRESS_STREET' => 'عنوان الفوترة',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'عنوان الفوترة:',
     'LBL_BILLING_CONTACT_ID' => 'معرّف جهة اتصال الفوترة:',
     'LBL_BILLING_CONTACT_NAME' => 'اسم جهة اتصال الفوترة:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'بلد الشحن',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'الرمز البريدي للشحن',
     'LBL_SHIPPING_ADDRESS_STATE' => 'حالة الشحن',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'عنوان الشحن',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'عنوان الشحن:',
     'LBL_SHIPPING_BODY' => 'الفوترة والشحن',
     'LBL_SHIPPING_CONTACT_ID' => 'معرّف جهة اتصال الشحن:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'نسخ عنوان الفوترة إلى عنوان الشحن',
     'NTC_COPY_SHIPPING_ADDRESS' => 'نسخ عنوان الشحن إلى عنوان الفوترة',
     'NTC_COPY_BILLING_ADDRESS2' => 'النسخ للشحن',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'نسخ إلى الفوترة',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'هل تريد بالتأكيد إزالة هذا التعليق من عرض السعر؟',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'نسخ إلى الفوترة',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'هل تريد بالتأكيد إزالة هذا التعليق من عرض السعر؟',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'هل تريد بالتأكيد إزالة هذا السطر من عرض السعر؟',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'هل تريد بالتأكيد إزالة هذه المجموعة من عرض السعر؟',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'هل تريد بالتأكيد إزالة جهة الاتصال هذه من عرض السعر؟',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'الكمية',
     'LBL_MFT_PART_NUM' => 'رقم الجزء',
     'LBL_ITEM_NAME' => 'البند',
+    'LBL_PRODUCT_TEMPLATE' => 'المنتج',
     'LBL_DISCOUNT_PRICE' => 'سعر الوحدة',
     'LBL_DISCOUNT_AMOUNT' => 'الخصم',
     'LBL_LINE_ITEM_TOTAL' => 'إجمالي البند',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'معرّف الفرصة',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'تكوين عروض الأسعار',
+
+    'LBL_RENEWAL' => 'التجديد',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'التفاعلات مع عرض الأسعار',
 );

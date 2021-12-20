@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Adresatų sąrašo ataskaitų sritis',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Adresatų duomenų ataskaitų sritis',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ adresatai',
 
   'LBL_MODULE_NAME' => 'Adresatai',
   'LBL_MODULE_NAME_SINGULAR' => 'Adresatas',

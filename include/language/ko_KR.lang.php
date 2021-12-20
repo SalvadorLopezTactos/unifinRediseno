@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'기록 통합',
       'VisualPipeline'=>'비주얼 파이프라인',
       'ConsoleConfiguration' => '콘솔 설정',
+      'SugarLive' => 'SugarLive',
     'Quotas' => '견적',
     'Teams' => '팀',
     'TeamNotices' => '팀 알림',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => '프로세스 비즈니스 규칙',
     'pmse_Emails_Templates' => '공정 이메일 템플릿',
     'BusinessCenters' => '업무 센터',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => '교대',
+    'ShiftExceptions' => '교대 예외',
+    'Purchases' => '구매',
+    'PurchasedLineItems' => '구매한 라인아이템',
+    'MobileDevices' => '모바일 장치',
+    'PushNotifications' => '푸시 알림',
     'WorkFlow' => '작업흐름 정의',
     'EAPM' => '외부 계정',
     'Worksheet' => '워크시트',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => '뉴스레터',
   	'SugarFavorites'=>'즐겨찾기',
 	'PdfManager' => 'PDF 관리',
+    'DataArchiver' => '데이터 아카이버',
+    'ArchiveRuns' => '아카이브 실행',
 
     'OAuthKeys' => 'OAuth Key 인증',
     'OAuthTokens' => '인증 표시',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => '의견 로그',
     'Holidays' => '공휴일',
     'ChangeTimers' => '타이머 변경',
+    'Messages' => '메세지',
   ),
 
     'moduleIconList' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => '제조자',
     'VisualPipeline' => '비주얼파이프라인',
     'ConsoleConfiguration' => '콘솔설정',
+    'MobileDevices' => '모바일 장치',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'계약',
     'Quotes' => '견적',
     'Products' => '견적 라인아이템',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'알림',
     'Sync'=>'동기화',
     'PdfManager' => 'PDF 관리',
+    'DataArchiver' => '데이터 아카이버',
+    'ArchiveRuns' => '아카이브 실행',
     'ReportMaker' => ' 상위 보고서',
     'DataSets' => '데이타 형식',
     'CustomQueries' => '고객 문의사항',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => '프로세스 비즈니스 규칙',
     'pmse_Emails_Templates' => '이메일 템플릿 프로세스',
     'BusinessCenters' => '업무 센터',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => '교대',
+    'ShiftExceptions' => '교대 예외',
+    'Purchases' => '구매',
+    'PurchasedLineItems' => '구매한 라인아이템',
+    'PushNotifications' => '푸시 알림',
     'WorkFlow' => '작업흐름',
     'EAPM' => '외부 계정',
     'Worksheet' => '워크시트',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => '보고서 일정',
     'Holidays' => '공휴일',
     'ChangeTimers' => '타이머 변경',
+    'Messages' => '메세지',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => '공공사업',
     'Other' => '기타',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => '진행 중',
+        'Completed' => '완료',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => '인바운드',
+        'Outbound' => '아웃바운드',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => '채팅',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => '1단계',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => '4단계',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => '예',
+      'No' => '아니요',
+      'Completed' => '완료',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => '미래',
+        'Active' => '활성',
+        'Past' => '과거',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => '자가 생성됨',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => '예정',
+    'In Progress' => '진행 중',
     'Held' => '완료',
     'Not Held' => '취소',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => '회의',
     'Calls' => '전화상담',
       'KBContents' => '지식 기반',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => '구매한 라인아이템',
+      'Purchases' => '구매',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => '거래처',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => '목표고객',
       'KBContents' => '지식 베이스',
       'Notes' => '메모',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => '구매한 라인아이템',
+    'Purchases' => '구매',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => '트위터',
     'Portal' => '포탈',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => '내부',
+        'Forum' => '포럼',
+        'Web' => '웹',
+        'InboundEmail' => '이메일',
+        'Twitter' => '트위터',
+        'Portal' => '포탈',
+        'Phone' => '전화번호',
+        'Chat' => '채팅',
+        'Chatbot' => '챗봇',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,9 +2041,16 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => '구글',
-        'exchange' => '교환',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => '아웃룩',
+        'google' => 'Google Less Secure Apps',
+        'exchange' => '교환',
+        'other' => '기타',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
         'other' => '기타',
     ),
     'import_enclosure_options' =>
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => '예',
         'No' => '아니오',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => '예측에 포함',
         'sales_stage' => '영업단계',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => '목록',
         'activities' => '활동흐름',
         'multi-line' => '다중 회선 목록',
+        'omnichannel' => 'Omnichannel',
+        'home' => 'Home',
+        'focus' => '포커스 서랍',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => '시간당',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => '일',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => '휴가',
+            'event' => '행사',
+            'other' => '기타',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => '날짜 (마지막 {{module}})',
+            'start_date:asc' => '날짜 (첫 {{module}})',
+            'total_revenue:desc' => '가격 (최고 합계)',
+            'total_revenue:asc' => '가격 (최저 합계)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '링크 팔로잉',
   'LBL_TOGGLE_VISIBILITY' => '토글 가시성', // Record view header panel element
   'LBL_ACTIVITIES' => '액티비티 스트림',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록상표입니다. '.
         '이 제품에 사용되거나 나타난 모든 여타 기업 및 상품명은 '.
         'SugarCRM ®, Sugar Enterprise™ 및 Sugar™는 SugarCRM, Inc.의 상표입니다.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "인쇄하기",
     'LBL_HELP' => "도움말",
     'LBL_TOUR' => "둘러보기",
-    'LBL_TOUR_LINK' => '투어 - 투어로 주요 기능 보기',
+    'LBL_TOUR_LINK' => '이 페이지 둘러보기',
     'LBL_MOBILE' => "휴대폰",
     'LBL_ID_FF_SELECT' => "선택하기",
     'DEFAULT'                              => '기본',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => '서명 만들기',
     'LBL_EMAIL_SIGNATURE_NAME'              => '서명 이름',
     'LBL_EMAIL_SIGNATURE_TEXT'              => '서명 원문',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! 메일',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => '기타',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Google Less-Secure Apps',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! 메일',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => '기타',
+    'LBL_EMAIL_AUTHORIZE'                   => '승인',
+    'LBL_EMAIL_AUTHORIZED'                  => '승인 완료',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => '미승인',
+    'LBL_EMAIL_AUTH_WARNING'                => '이 계정을 설정하려면 관리자가 관리자 > 커넥터를 통해 {0} 커넥터를 구성해야 합니다. 자세한 내용은 {1} 문서를 참조하십시오.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => '커넥터 정보 검색 오류',
+    'LBL_EMAIL_AUTH_FAILURE'                => '인증 실패.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => '저장하기 전에 계정을 승인하십시오.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => '시험 전에 계정을 승인하십시오.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => '미승인 계정',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[ 원격 폴더 ]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ SugarCRM 폴더 ]',
     'LBL_EMAIL_SUBJECT'                     => '제목',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => '참조',
     'LBL_BCC' => '숨은 참조',
 
+    'LBL_START_DATE' => '시작 날짜',
+    'LBL_END_DATE' => '종료 날짜',
+
     'LBL_LINK_NONE'=> '없음',
     'LBL_LINK_ALL'=> '전부',
     'LBL_LINK_RECORDS'=> '자료',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => '아래 메세지를 조사하십시오.',
     'NO_QUERY_SELECTED' => '선택하신 데이터 형식은 쿼리를 포함하지 않습니다. 이 데이터 형식을 위한 쿼리를 선택하십시오.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => '다음과 같은 문제가 발생하였습니다.',
     'ERR_AJAX_LOAD_FAILURE'     => '요청하신 작업을 처리하는 중에 문제가 발생하였습니다. 나중에 다시 시도해 주십시오.',
     'ERR_AJAX_LOAD_FOOTER' => '이 문제가 계속 발생하면, 관리자에게 연락하여 이 모듈의 ajax 기능을 중지하도록 요청하십시오.',
@@ -2793,9 +2890,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => '현재 항목은 선택된 테마에서는 작동하지 않습니다.',
     'ERR_NOT_ADMIN' => "관리자모드 접속 승인이 필요합니다.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        '비밀번호 관리는 <a href="%s" target="_blank">클라우드 설정</a>에서만 사용 가능합니다.',
+        '비밀번호 관리는 <a href="%s" target="_blank"> SugarCloud 설정</a>에서만 사용 가능합니다.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => '읽기 전용 필드를 변경하려면 Sugar 관리자에게 문의하십시오.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => '<a href="{0}" target="_blank">SugarCloud 설정</a>에 접근하여 읽기 전용 필드를 수정하십시오.',
     'ERR_MISSING_REQUIRED_FIELDS' => '다음의 필수 항목을 입력하셔합니다:',
     'ERR_INVALID_REQUIRED_FIELDS' => '올바르지 않은 필수 항목을 입력하셨습니다:',
     'ERR_INVALID_VALUE' => '올바르지 않은 값을 입력하셨습니다:',
@@ -2936,6 +3033,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => '추가하기',
     'LBL_ADD_BUTTON' => '추가하기',
+    'LBL_ADD_DASHLET_BUTTON' => '대쉬릿 추가하기',
     'LBL_ADD_DOCUMENT' => '문서 추가하기',
     'LBL_REPLACE_BUTTON' => '대체',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2966,6 +3064,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => '제출',
     'LBL_CASE'=>'사례',
     'LBL_CASES'=>'사례',
+    'LBL_MESSAGE'=>'메세지',
+    'LBL_MESSAGES'=>'메세지',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => '비밀번호 변경하기',
     'LBL_CHANGE_BUTTON_LABEL' => '변경하기',
@@ -3192,6 +3292,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => '견적 생성하기',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => '대량 수정할 항목이 선택되지 않았습니다.',
     'LBL_MASS_UPDATE_JOB_QUEUED' => '귀하의 전체 업데이트 일정이 설정되었습니다.',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => '서비스 시작 일자가 서비스 종료 일자 이후입니다.',
     'LBL_MASS_UPDATE_SUCCESS' => '전체 레코드가 성공적으로 업데이트되었습니다.',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => '목표목록에 추가할 레코드를 선택하십시오.',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => '요청하신 레코드의 목표목록 추가가 스케줄링되었습니다.',
@@ -3427,11 +3528,12 @@ $app_strings = array (
     'LBL_SUBJECT' => '제목',
 
     'LBL_INBOUNDEMAIL_ID' => '수신 이메일 ID',
+    'LBL_EAMP_ID' => '인증 토큰 ID',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '판권 소유.<br />SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록 상표입니다. '.
         '이 제품에 사용되거나 등장하는 모든 기업 및 상품명은 '.
         '상품과 관련된 각 기업의 상표일 수 있습니다.',
@@ -3498,6 +3600,8 @@ $app_strings = array (
     'LBL_USER_MENU' => '사용자 메뉴',
     'LBL_USERS_SYNC'=>'사용자 일치화',
     'LBL_USERS'=>'사용자',
+    'LBL_USER'=>'사용자',
+    'LBL_CURRENT_USER'=>'현 사용자',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'기존 이메일 항목을 확인중입니다.',
     'LBL_VERIFY_PORTAL_NAME'=>'기존 포탈명을 확인중입니다.',
     'LBL_VIEW_IMAGE' => '이미지 보기',
@@ -3586,6 +3690,8 @@ $app_strings = array (
         '사용자 라이센스 수 한도에 도달했습니다. 기존 사용자만 로그인 할 수 있습니다.',
     'WARN_ONLY_ADMINS'=> "관리자만 로그인할 수 있습니다.",
     'WARN_UNSAVED_CHANGES'=> "입력한 정보를 저장하지 않은 상태에서 페이지를 이동하려합니다. 자료를 잃어버릴 수 있습니다. 정말 이동하시겠습니까?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => '이 브라우저를 새로고침하면 현재 열린 SugarLive 통화나 채팅 세션이 모두 자동으로 종료되며 저장하지 않은 변경 사항을 잃게 됩니다. 계속하시겠습니까?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => '저장되지 않은 변경 사항이 있습니다. 변경 사항을 취소하고 페이지를 벗어나시겠습니까?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => '1개 이상의 Dashlet에 저장되지 않은 변경사항이 있습니다. 서랍을 닫으시겠습니까?',
     'LBL_NAVIGATE_TO_REPORTS' => '보고서 모듈로 이동하고 있습니다. 대시렛창(dashlet)에 대한 변경 사항이 저장되지 않습니다. 계속하시겠습니까?',
@@ -3608,6 +3714,7 @@ $app_strings = array (
     'ERROR_TIME_IS_AFTER' => '에러. 이 필드의 시간은 {{this}} 필드의 이후이어야 합니다.',
     'ERROR_NUMBER' => '유효한 숫자를 입력하십시오.',
     'ERROR_INT' => '에러. 유효하지 않은 정수.',
+    'ERROR_URL' => '오류. 잘못된 URL.',
     'ERROR_NO_BEAN' => '값 획득 실패',
     'ERROR_ACCESS_MODULE' => '이 모듈에 접근할수 없습니다.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => '오류가 발생했습니다. 첨부 파일이 너무 큽니다.',
@@ -3691,9 +3798,14 @@ $app_strings = array (
     'LBL_CREATE_OPPORTUNITY' => '영업기회 추가하기',
     'LBL_SCHEDULE_CALL' => '전화일정',
     'LBL_SCHEDULE_MEETING' => '회의일정',
+    'LBL_CREATE_MESSAGE' => '메시지 생성',
     'LBL_CREATE_TASK' => '작업 추가하기',
     'LBL_REMOVE_FROM_FAVORITES' => '내 즐겨찾기에서 삭제',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => '모두 다운로드',
+    'LBL_DOWNLOAD_ONE' => '다운로드',
+    'LBL_ATTACHMENTS' => '첨부',
+    'LBL_ADD_ATTACHMENT' => '검색',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => '웹투리드 폼 만들기',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'웹투리드 폼으로 저장하기',
@@ -3745,8 +3857,8 @@ $app_strings = array (
     'LBL_DASHLET_REFRESH_LABEL' => '새로고침',
     'LBL_DASHLET_REMOVE_LABEL' => '제거',
     'LBL_DASHLET_DROP_HERE' => '여기에 끌어서 내립니다.',
-    'LBL_DASHLET_MINIMIZE_ALL' => '모두 닫기',
-    'LBL_DASHLET_MAXIMIZE_ALL' => '모두 열기',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => '최소화',
     'LBL_DASHLET_MAXIMIZE' => '최대화',
     'LBL_DASHLET_CONFIGURE' => '구성',
@@ -3768,6 +3880,10 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_NAME' => '목록보기',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => '지정된 분류대로 특정 모듈의 기록을 표시합니다.',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => '콘솔 목록 보기',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => '콘솔에서 보고 있는 레코드와 관련된 특정 모듈의 레코드 목록입니다.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => '레코드 보기',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => '탭에 레코드 및 선택적으로 관련된 레코드 표시.',
@@ -3778,6 +3894,7 @@ $app_strings = array (
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => '경고, 오직 {{numWord}} ({{num}}) 모듈만이 탭에 표시될 수 있습니다. ' .
         '다른 것을 추가하기 전에 하나 또는 그 이상의 모듈을 제거하십시오.',
     'LBL_SIX' => '6', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => '코멘트 로그',
@@ -3802,7 +3919,13 @@ $app_strings = array (
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => '최근 사용',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => '즐겨찾기',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => '대시보드 만들기',
+    'LBL_DASHBOARD_DUPLICATE' => '대시보드 복사',
+    'LBL_DASHBOARD_DELETE' => '대시보드 삭제',
+    'LBL_PIN_TO_TOP' => '상단에 고정',
+    'LBL_PIN_TO_BOTTOM' => '하단에 고정',
+
+    'LBL_DASHBOARD_CONFIG' => '대시보드 구성',
     'LBL_LIST_VIEW__NAME' => '목록 보기',
     'LBL_PIPELINE_VIEW_NAME' => '타일 보기',
     'LBL_PIPELINE_VIEW_BTN' => '타일 보기',
@@ -3838,9 +3961,9 @@ $app_strings = array (
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => '학습 자료',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => '슈가 대학 - 전문가 과정',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => '커뮤니티 포럼 - 토론 참여',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => '문서화 및 지원 - 세부 내용 학습',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => '교육 및 인증',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'SugarClub 커뮤니티',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => '문서 및 지원',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => '국가별 영업차트',
@@ -3849,6 +3972,10 @@ $app_strings = array (
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => '기술자료범주및게시된문서',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Displays a tree view of knowledge base categories & published articles',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => '지식 기반 검색',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => '게시된 지식기반 조항 및 범주의 검색 가능한 트리 보기를 표시합니다.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => '게시된문서(다른언어)',
@@ -4064,6 +4191,10 @@ $app_strings = array (
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => '지역번호를 포함한 미국 전화번호 숫자를 입력하십시오.',
+    'LBL_CCP_NOT_INITIATED' => '에이전트가 로그인하지 않은 상태에서 CCP로 전화를 거는 중입니다.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'CCP로 통화를 시작할 수 없습니다.',
+    'LBL_CCP_DIALING_ERROR' => '이 통화는 전화가 연결된 상태로 완료할 수 없습니다.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'SugarLive 채팅 세션을 모두 닫은 뒤 아웃바운드 통화를 시작해 주십시오.',
 
     //File write error label
     'ERR_FILE_WRITE' => '오류:파일을 덮어쓰지 못했습니다. 시스템과 웹서버 허용을 확인하십시오.',
@@ -4399,8 +4530,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => '견적 라인아이템',
     'LBL_DISCOUNT_TOTAL' => '할인 합계',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% 퍼센트',
+    'LBL_DISCOUNT_SELECT' => '할인이 백분율 또는 고정 금액인지 결정',
     'LBL_TAX' => '세금',
     'LBL_SHIPPING' => '물류/운송',
     'LBL_GRAND_TOTAL' => '최종 합계',
@@ -4447,7 +4578,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '접속할수 없습니다.',
     'LBL_NO_ACCESS_LOWER' => '레코드에접근 불가한 사용자',
     'LBL_NO_FIELD_ACCESS' => '접근 금지',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => '라이센스 필요',
     'LBL_VALUE_ERASED' => '값 삭제',
     'LBL_VALUE_ERASED_TOOLTIP' => '이 정보는 데이터 프라이버시 요청을 통해 삭제되었습니다.',
     'LBL_CREATE_RELATED_RECORD' => '관련 기록 생성하기',
@@ -4468,7 +4599,9 @@ $app_strings = array (
     'LBL_TASKS_SUBPANEL_TITLE' => '작업',
     'LBL_CALLS_SUBPANEL_TITLE' => '전화',
     'LBL_EMAILS_SUBPANEL_TITLE' => '이메일',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => '교대',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '견적 라인아이템',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => '교대 예외',
     'LNK_SETTINGS' => '설정',
     'LBL_MOBILE_SUPPORT' => '지원',
     'LBL_MOBILE_SHOW_MORE' => '더 보기',
@@ -4628,16 +4761,14 @@ $app_strings = array (
     'LBL_MOBILE_PDF_DOWNLOAD' => 'PDF {{{pdfTemplateName}}} 다운로드',
 
     'ERR_SYNC_FAILED' => '서버와 동일화가 불가능합니다.',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO 로그인을 사용할 수 없습니다. 인스턴스가 슈가 7.5 또는 이상이어야하며  SSO로 설정되어야 합니다.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => '접속이 불가능합니다.',
     'ERR_MOBILE_INVALID_CREDS' => '유효하지 않은 사용자명 또는 비밀번호',
     'ERR_MOBILE_SESSION_EXPIRED' => '귀하의 세션이 만료되었습니다.',
     'ERR_MOBILE_NOT_FOUND' => '자료가 발견되지 않았습니다.',
     'ERR_MOBILE_TIMEOUT' => '서버가 응답하지 않습니다.',
     'ERR_MOBILE_CONNECTION_FAILED' => '서버에 연결할 수 없습니다.',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => '주어진 URL의 SugarCRM과 호환가능한 서버가 발견되지 않았습니다. <최소 버전><지원되는 플레이버>가 요구됩니다.',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => '주어진 URL의 서버가 응답하지 않습니다.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => '주어진 URL의 서버가 유효하지 않습니다.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => '인터넷 연결이 불가능합니다.',
     'ERR_MOBILE_INTERNAL' => '내부 오류 <코드>. 나중에 다시 시도해주십시오.',
     'ERR_MOBILE_VALIDATION' => '기록이 유효하지 않습니다.',
@@ -4836,6 +4967,55 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => '오른쪽 메뉴 버튼',
     'LBL_VO_ADD_BTN' => '추가 버튼',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => '할인',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => '매핑 앱 선택',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => '선택한 {{entityName}}는 다음 값 {{localizedFieldNames}}과 관련이 있습니다. 기존 값을 유지하려면 취소합니다. 새 값으로 덮어 쓰기를 확인합니다.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => '데이터 암호화가 활성화되었습니다.',
+    'LBL_LEAD_ALREADY_CONVERTED' => '선택한 관심고객은 이미 전환되었습니다.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => '장치가 온라인 상태일 때만 가능한 액션입니다.',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => '견적에서 영업기회를 생성하시겠습니까?',
+    'LBL_TAG_ADD' => '태그 추가',
+    'LBL_TAG_ENTER_TAG_NAME' => '태그 입력',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => '태그별 필터링은 장치가 오프라인 상태일 때 지원되지 않습니다.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => '전체 코멘트 보기',
+    'LBL_COMMENT_VIEW' => '코멘트 보기',
+    'LBL_PMSE_LABEL_DUEDATE' => '마감일',
+    'LBL_PMSE_DUE' => '업무 만기일자',
+    'LBL_PMSE_DUE_ON' => '만기일',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => '먼저 {{conversionParentModuleName}}을 생성하십시오',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => '필요 기록 누락: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => '이미지 품질을 선택하십시오. 이미지 크기가 조정된 뒤 서버에 저장됩니다. 선택한 값은 앞으로 비슷한 모든 작업의 기본값으로 사용될 것입니다.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => '파일 크기 예측 중...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => '예측된 파일 크기는',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => '이미지 품질',
+    'LBL_IMAGE_QUALITY_BEST' => '원본 크기',
+    'LBL_IMAGE_QUALITY_GOOD' => '고품질',
+    'LBL_IMAGE_QUALITY_POOR' => '작은 크기',
+    'LBL_IMAGE_QUALITY_BTN' => '압축: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => '{{module}}의 목록 필드',
+    'LBL_LIST_RESET_FIELDS' => '기본값으로 재설정',
+    'LBL_LIST_NOT_ENOUGH' => '활성 필드를 최소 1개 설정해 주십시오.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => '로그인하여 권한을 수락해야만 SugarCRM 인스턴스로 작업 가능합니다.',
+    'LBL_SELECTING_EXISTING_RECORD' => '{{{moduleSingular}}} 선택',
+    'LBL_CREATING_NEW_RECORD' => '새 {{{moduleSingular}}} 생성',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => '이미지 크기',
+    'LBL_COPY_ADDRESS' => '주소 복사',
+    'LBL_OPEN_IN' => '열기',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => '선택한 파일이 없습니다.',
+    'LBL_ATTACHMENT_ADD' => '첨부하기',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => '이 앱은 쿠키를 사용합니다',
+    'LBL_USE_COOKIES_CONFIRM' => '이 어플리케이션은 더 나은 경험을 제공하기 위한 목적으로 쿠키를 사용합니다. 계속 진행하면 귀하는 당사 개인정보 정책에 따른 쿠키 사용을 동의하게 됩니다.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => '추후 모바일 릴리스에서 Sugar Mobile과 호환되지 않는 Sugar 인스턴스를 사용 중입니다. 관리자에게 요청하여 Sugar를 가능한 빨리 업그레이드하십시오.',
+    'ERROR_TAG_NAME_INVALID' => '태그 이름은 "{{{forbiddenChars}}}” 문자를 포함할 수 없습니다',
+    'ERROR_NO_TAGS_FOUND' => '"{{{searchQuery}}}” 일치 태그 없음',
+    'ERR_PA_RECORD_INVALID' => '{{{moduleName}}} 기록에는 유효하지 않은 값이 하나 이상 있어 저장할 수 없습니다. 기록을 편집하여 {{{actionLabel}}} 액션을 수행하시겠습니까?',
+    'ERR_MOBILE_METADATA_RELOAD' => '관리자가 귀하의 Sugar 인스턴스 설정을 변경했습니다. 확인을 눌러 앱 설정과 서버를 동기화하십시오.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => '이 어플리케이션은 쿠키를 사용합니다',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => '수락을 체크해주십시오 (필수)',
@@ -4894,6 +5074,10 @@ $app_strings = array (
     'LBL_PORTAL_CONTACT_INFO_PHONE' => '전화번호: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => '이메일: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => '웹: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => '채팅을 종료하시겠습니까?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => '귀하의 로그인이 실패했습니다. 다시 시도해 주십시오.',
@@ -4940,6 +5124,29 @@ $app_strings = array (
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => '이름/계정명',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => '옴니채널 대시보드',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => '소비자',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{Time}}의 {{type}} {{direction}} {{identifier}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => '이 브라우저는 SugarLive를 지원하지 않습니다. Google Chrome이나 Mozilla Firefox를 사용하세요.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => '대화 내역이 포함된 <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a>가 생성되었습니다.',
+    'LBL_OMNICHANNEL_SUBJECT' => '제목',
+    'LBL_OMNICHANNEL_DESCRIPTION' => '설명',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => '메시지 요약',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => '통화 요약',
+    'LBL_OMNICHANNEL_LINK_TO' => '{{fromModule}}을(를) {{toModule}}에 연결',
+    'LBL_OMNICHANNEL_LINKED' => '연결됨',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => '이 브라우저는 채팅을 지원하지 않습니다. Google Chrome이나 Mozilla Firefox를 사용하세요.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Sugar 관리자에게 연락하여 도움을 청하십시오.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => '레이아웃 설정',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'SugarLive 설정을 완료한 뒤 아웃바운드 통화를 시작하십시오.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'SugarLive 레이아웃 설정을 완료한 뒤 SugarLive를 열어 주십시오.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'SugarLive에서 상태를 "오프라인"으로 설정한 뒤 SugarLive 레이아웃을 설정해 주십시오.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => '탭을 기본값으로 복원',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => '요약 패널 설정',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => '사용자 프로필',
@@ -4971,6 +5178,10 @@ $app_strings = array (
     'LBL_WIZ_CREATE_USERS' => '신규 사용자 만들기',
     'LBL_WIZ_APPLICATION_SETTINGS' => '시스템 설정',
     'LBL_WIZ_CONFIGURE_APPLICATION' => '작업실',
+
+    'LBL_CSP_ERROR_MESSAGE' => '입력한 값이 지원되지 않거나 허용되는 형식에 맞지 않습니다. 허용되는 필드 값 및 형식 목록은 <a href="{{linkToDocumentation}}" target="_blank">시스템</a> 문서를 참조하십시오.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => '이 콘텐츠는 승인되지 않았습니다. 시스템의 <a href="{{linkToDocumentation}}" target="_blank">콘텐츠 보안 정책 설정</a>을 업데이트하십시오.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => '이 콘텐츠는 승인되지 않았습니다. 관리자에게 요청해 시스템의 <a href="{{linkToDocumentation}}" target="_blank">콘텐츠 보안 정책 설정</a>을 업데이트하십시오. 설정이 업데이트되면, 사용자는 브라우저를 새로고침하여야 변경 사항이 반영됩니다.',
 
     // For password related labels
     'LBL_PASSWORD'						=> '비밀번호:',
@@ -5100,6 +5311,12 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => '내 연혁',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => '팀 내역',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => '히스토리(History)',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => '이 대쉬릿은 회의, 전화, 수신 이메일 그리고 발신 이메일 내역을 표시합니다.',
@@ -5214,6 +5431,7 @@ $app_strings = array (
     //record save
     'LBL_RECORD_SAVED' => '기록이 저장되었습니다.', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => '성공적으로 생성하였습니다 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => '성공적으로 {{moduleSingularLower}}를 만들었습니다.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => '성공적으로 이 기록을 생성하지만, 이 기록을 액세스할 수 있는 권한이 없습니다.', // use when user has no access to the model
     'LBL_VALIDATING' => '확인중',
 
@@ -5292,7 +5510,7 @@ $app_strings = array (
     // Refresh button on list views
     'LBL_LIST_REFRESH' => '목록 새로고침',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => '타일 새로고침',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => '더보기',
@@ -5534,6 +5752,7 @@ $app_strings = array (
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => '보류 활동',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => '프로세스에 의한 보류 활동',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => '모든 프로세스',
+    'LBL_RECORD_DASHBOARD' => '기록 대시보드',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => '프로세스 상태 요약',
@@ -5565,7 +5784,7 @@ $app_strings = array (
     'LBL_BUSINESS_CENTER_ID' => '업무 센터 ID',
     'LBL_BUSINESS_CENTER_NAME' => '업무 센터 이름',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => '구매한 라인아이템 활동',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(새로운 태그)',
@@ -5605,6 +5824,7 @@ $app_strings = array (
     'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}}의 개인 정보',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => '타이머 변경',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => '메시지',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => '클립보드에 복사되었습니다!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => '클립보드에 복사할 수 없습니다',
@@ -5622,13 +5842,24 @@ $app_strings = array (
     'LBL_COMMENT_LOG_SHOW_LESS' => '메뉴 접기...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => '사용 가능한 일자가 없음',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => '구독 활성화',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => '이 대쉬릿은 단일 계정에 연결된 모듈에만 추가할 수 있습니다. 자세한 내용은 <a href={{linkToDocumentation}}>활성 구독 대쉬릿</a> 문서를 참조하십시오.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => '이 연결된 계정에 속하는 구매 표시:',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => '특정 계정의 구독을 활성화합니다.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', 재고 {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => '합계:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => '활성화된 구독 없음',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => '이 대시렛이 작동하려면 {{module_name}}이(가) 필요합니다. {{module_name}}을(를) 활성화하려면 관리자와 연락하세요.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => '구매 내역',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => '특정 계정의 모든 구매.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => '이 대쉬릿은 단일 계정에 연결된 모듈에만 추가할 수 있습니다. 자세한 내용은 <a href={{linkToDocumentation}} target="_blank">구매 내역 대쉬릿</A> 문서를 참조하십시오.',
+    'LBL_NO_PURCHASE_HISTORY' => '표시할 구매가 없음',
+    'LBL_NO_PLIS' => '구매한 라인아이템 없음',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => '합계',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => '수량',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => '이 대쉬릿이 작동하려면 구매 및 구매한 라인아이템이 필요합니다. 관리자에게 구매 및 구매한 라인아이템 활성화에 대해 문의하십시오.',
+    'LBL_SEARCH_PURCHASE_NAME' => '구매명으로 검색...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => '다음으로 이동하여 레코드 보기 대시렛 레이아웃을 편집할 수 있도록 Studio를 사용하십시오.' .
@@ -5644,7 +5875,39 @@ $app_strings = array (
     'LBL_SERVICE_DURATION' => '서비스 기간',
     'LBL_SERVICE_DURATION_VALUE' => '서비스 기간 값',
     'LBL_SERVICE_DURATION_UNIT' => '서비스 기간 단위',
+    'LBL_LOCK_DURATION' => '잠금 기간',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'Amazon Connect CCP를 로드할 수 없습니다.' .
+        '사용하시는지 확인해 주십시오'.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">지원되는 브라우저</a>.' .
+        '문제가 지속되면 Sugar 관리자에게 문의하십시오.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'Sugar 관리자가 Amazon Connect에 대한 인스턴스를 구성하지 않았습니다.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'Amazon Connect와 연결할 수 없습니다. 도움이 필요하시면 Sugar 관리자에게 문의하십시오.',
+    'LBL_OMNICHANNEL_UNKNOWN' => '알 수 없음',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => '포커스 서랍',
+    'LBL_EXTERNAL_GUESTS' => '외부 게스트',
+    'LBL_MY_FAVORITE_TASKS' => '내 즐겨찾는 작업',
+    'LBL_MY_TASKS' => '내 작업',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => '필드 찾을 수 없음: {0} (모듈 {1})',
+    'LBL_INTEGRATE_INVALID_PARAM' => '{0}의 레코드 찾을 수 없음: {1} (모듈 {2})',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => '다음 이름의 관계를 찾을 수 없음: {0}',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => '데이터베이스 엔트리 ID: {0} 및 {1}: {2} (모듈 {3}) 이미 존재',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => '소프트 삭제 (삭제 플래그 = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => '모듈 {2}에서 {0} {1}에 대한 여러 데이터베이스 레코드를 찾았습니다. ' .
+        '일치하는 레코드를 제거하거나 업데이트하십시오. 일치하는 레코드: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => '다음 실행',
+    'LBL_TIME_AWARE_TYPE' => '유형',
+    'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

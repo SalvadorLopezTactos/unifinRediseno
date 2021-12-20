@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Tabloul de bord Listă ținte',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare ținte',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare ținte',
 
   'LBL_MODULE_NAME' => 'Obiective',
   'LBL_MODULE_NAME_SINGULAR' => 'Tinta:',

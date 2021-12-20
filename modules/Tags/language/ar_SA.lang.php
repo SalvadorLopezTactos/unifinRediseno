@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'تم الإنشاء بواسطة المعرّف',
     'LBL_EXPORT_CREATED_BY_NAME' => 'تم الإنشاء بواسطة اسم المستخدم',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'اسم المستخدم المعين',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم العلامات',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'لوحة معلومات سجل العلامات',
+    'LBL_MY_TAGS' => 'علاماتي',
+    'LBL_MY_FAVORITE_TAGS' => 'علاماتي المفضلة',
 );

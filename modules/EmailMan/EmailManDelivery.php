@@ -236,11 +236,16 @@ if(isset($temp_user)){
 }
 if (isset($_REQUEST['return_module']) && isset($_REQUEST['return_action']) && isset($_REQUEST['return_id'])) {
     $from_wiz=' ';
+    $queryParams = array(
+        'module' => $_REQUEST['return_module'],
+        'action' => $_REQUEST['return_action'],
+        'record' => $_REQUEST['return_id'],
+    );
     if(isset($_REQUEST['from_wiz'])&& $_REQUEST['from_wiz']==true){
-        header("Location: index.php?module={$_REQUEST['return_module']}&action={$_REQUEST['return_action']}&record={$_REQUEST['return_id']}&from=test");
-    }else{
-		header("Location: index.php?module={$_REQUEST['return_module']}&action={$_REQUEST['return_action']}&record={$_REQUEST['return_id']}");
+        $queryParams['from'] = 'test';
     }
+    $query = http_build_query($queryParams);
+    header('Location: index.php?' . $query);
 } else {
 	/* this will be triggered when manually sending off Email campaigns from the
 	 * Mass Email Queue Manager.

@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => '會議清單儀表板',
     'LBL_MEETINGS_RECORD_DASHBOARD' => '會議記錄儀表板',
+    'LBL_LEAD_GUESTS' => '潛在訪客',
+    'LBL_CONTACT_GUESTS' => '聯繫訪客',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => '會議焦點抽屜',
 
 	'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除會議。',
 	'LBL_ACCEPT_THIS'=>'接受？',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => '方向',
 	'LBL_LIST_DUE_DATE'=>'到期日',
 	'LBL_LIST_FORM_TITLE' => '會議清單',
-	'LBL_LIST_MY_MEETINGS' => '我的會議',
+    'LBL_LIST_MY_MEETINGS' => '我的會議',
     'LBL_MY_SCHEDULED_MEETINGS' => '我的已排程會議',
+    'LBL_GUEST_MEETINGS' => '訪客的會議',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => '訪客的已排程會議',
 	'LBL_LIST_RELATED_TO' => '關聯至',
 	'LBL_LIST_STATUS'=>'狀態',
 	'LBL_LIST_SUBJECT' => '主旨',

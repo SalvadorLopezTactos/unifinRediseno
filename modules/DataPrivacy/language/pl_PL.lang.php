@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Pola oznaczone do usunięcia',
     'LBL_NO_RECORDS_MARKED' => 'Brak pól lub rekordów oznaczonych do usunięcia.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Pulpit nawigacyjny rekordów ochrony prywatności danych',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy ochrony prywatności danych',
 
     // list view
     'LBL_HELP_RECORDS' => 'Moduł ochrony danych śledzi działania z zakresu ochrony prywatności, w tym zgody i żądania podmiotów danych w celu obsługi procedur ochrony prywatności danej organizacji. Utwórz rekordy ochrony danych osobowych związane z rekordem danej osoby (np. kontaktu) do śledzenia zgody lub w celu podjęcia działań na żądanie prywatności.',

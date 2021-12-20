@@ -238,6 +238,7 @@
                      * @returns {*} The value returned by GridBuilder.build().
                      */
                     build: function() {
+                        var ratioControl = this.maxColumns > 2 ? 8 : 4;
                         _.each(this.fields, function(field) {
                             this._calculateFieldSpan(field);
 
@@ -245,7 +246,11 @@
                                 // the label span must be initialized
                                 // 4 for label span because we are using a 1/3 ratio between field span and label span
                                 // with a max of 12
-                                field.labelSpan = Math.floor(4 / this.maxColumns);
+                                // BUT
+                                // 1/3 ratio works well for 1-2 columns, however when there are more columns,
+                                // the labels will become so short that they would be often truncated/barely visible,
+                                // thus the aspect ration has to be increased to 2/2
+                                field.labelSpan = Math.floor(ratioControl / this.maxColumns);
                             }
 
                             // prevent a labelSpan of 0

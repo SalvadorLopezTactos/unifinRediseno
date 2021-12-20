@@ -59,7 +59,7 @@ class ForecastsConfigApi extends ConfigModuleApi
         //acl check, only allow if they are module admin
         if (!$api->user->isAdmin() && !$api->user->isDeveloperForModule('Forecasts')) {
             // No create access so we construct an error message and throw the exception
-            $failed_module_strings = return_module_language($GLOBALS['current_language'], 'forecasts');
+            $failed_module_strings = return_module_language($GLOBALS['current_language'], 'Forecasts');
             $moduleName = $failed_module_strings['LBL_MODULE_NAME'];
 
             $args = null;

@@ -729,6 +729,15 @@ $dictionary['pmse_BpmFlow'] = array(
                 'cas_flow_status',
             ),
         ),
+        [
+            'name' => 'idx_pmse_bpm_flow_cas_flow_status_cas_obj_id_del',
+            'type' => 'index',
+            'fields' => [
+                'cas_flow_status',
+                'cas_sugar_object_id',
+                'deleted',
+            ],
+        ],
     ),
     'relationships' => array(),
     'optimistic_locking' => true,

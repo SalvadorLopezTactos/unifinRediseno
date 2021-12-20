@@ -18,8 +18,16 @@
 ({
     extendsFrom: 'RecordlistView',
     fallbackFieldTemplate: 'list',
-    plugins: ['ErrorDecoration', 'Editable', 'SugarLogic', 'Pagination',
-        'ResizableColumns', 'MassCollection'],
+    plugins: [
+        'SugarLogic',
+        'ResizableColumns',
+        'ReorderableColumns',
+        'ListColumnEllipsis',
+        'ErrorDecoration',
+        'Editable',
+        'Pagination',
+        'MassCollection'
+    ],
 
     contextEvents: {
         "list:editall:fire": "toggleEdit",
@@ -54,6 +62,8 @@
         //when user escapes the page without confirming deletion
         app.routing.before("route", this.beforeRouteUnlink, this);
         $(window).on("beforeunload.unlink" + this.cid, _.bind(this.warnUnlinkOnRefresh, this));
+
+        this._thisListViewFieldSizesKey = this._buildWidthKey();
     },
 
     /**
@@ -194,5 +204,15 @@
     _dispose: function() {
         this.unbindBeforeRouteUnlink();
         this._super('_dispose');
-    }
+    },
+
+    /**
+     * Uniquely ID subpanel column widths by parent module to allow different
+     * widths for subpanels placed on different parent module record view
+     * @return {string} Unique key for this subpanel/parent module combination
+     * @private
+     */
+    _buildWidthKey: function() {
+        return app.user.lastState.buildKey(this._thisListViewFieldSizesKey, this.context.get('parentModule'));
+    },
 })

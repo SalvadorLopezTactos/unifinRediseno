@@ -7226,7 +7226,7 @@ p.submsg a{
 .ui-dialog {
     padding: 0px;
     box-shadow: 0 5px 10px #999999;
-    z-index: 1;
+    z-index: 1000;
 }
 
 .ui-dialog .ui-dialog-titlebar {
@@ -9172,4 +9172,9 @@ html.touch {
 sup.trademark,
 sup.heading {
   font-size: 60%;
+}
+
+/* Styles for admin pages */
+.edit #api_platforms tr th {
+  padding: 5px 3px !important;
 }

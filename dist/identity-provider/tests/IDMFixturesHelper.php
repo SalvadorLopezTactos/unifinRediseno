@@ -28,7 +28,7 @@ class IDMFixturesHelper
      */
     public static function getSpPrivateKey()
     {
-        return file_get_contents(__DIR__.'/../app/config/certs/travis.key');
+        return file_get_contents(__DIR__.'/fixtures/certs/sp.key');
     }
 
     /**
@@ -38,7 +38,7 @@ class IDMFixturesHelper
      */
     public static function getSpPublicKey()
     {
-        return file_get_contents(__DIR__.'/../app/config/certs/travis.crt');
+        return file_get_contents(__DIR__.'/fixtures/certs/sp.crt');
     }
 
     /**
@@ -49,7 +49,7 @@ class IDMFixturesHelper
      */
     public static function getIdpX509Key($idp)
     {
-        return file_get_contents(__DIR__.'/Functional/SAML/fixtures/certs/'.$idp.'/x509.crt');
+        return file_get_contents(__DIR__.'/fixtures/certs/'.$idp.'/x509.crt');
     }
 
     /**
@@ -60,7 +60,7 @@ class IDMFixturesHelper
      */
     public static function getSAMLFixture($path)
     {
-        return file_get_contents(__DIR__.'/Functional/SAML/fixtures/'.$path);
+        return file_get_contents(__DIR__.'/fixtures/'.$path);
     }
 
     /**

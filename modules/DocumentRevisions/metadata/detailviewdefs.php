@@ -26,7 +26,7 @@ $viewdefs['DocumentRevisions']['DetailView'] = array(
             array (
                 array (
                     'name' => 'document_name',
-                    'customCode' => '<a href="index.php?module=DocumentRevisions&action=DetailView&record={$fields.document_id.value|escape:"url"}">{$fields.document_name.value|escape}</a>',
+                    'customCode' => '<a href="index.php?module=DocumentRevisions&action=DetailView&record={$fields.document_id.value|escape:"url"}">{$fields.document_name.value|escape:"html":"UTF-8"}</a>',
                 ),
                 'latest_revision',
             ),
@@ -43,7 +43,7 @@ $viewdefs['DocumentRevisions']['DetailView'] = array(
             array (
                 array (
                     'name' => 'date_entered',
-                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
+                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value|escape:"html":"UTF-8"}',
                 ),
             ),
 

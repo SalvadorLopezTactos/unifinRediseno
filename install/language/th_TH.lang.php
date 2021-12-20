@@ -70,7 +70,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'คำเตือน: ไม่สามารถเขียนได้',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'เวอร์ชัน PHP ของคุณไม่มีการสนับสนุนโดย Sugar คุณจะต้องติดตั้งเวอร์ชันที่เข้ากันได้กับแอปพลิเคชัน Sugar โปรดดูตารางความเข้ากันได้ในบันทึกประจำรุ่นสำหรับเวอร์ชัน PHP ที่สนับสนุน เวอร์ชันของคุณคือ ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'เวอร์ชัน IIS ของคุณไม่มีการสนับสนุนโดย Sugar คุณจะต้องติดตั้งเวอร์ชันที่เข้ากันได้กับแอปพลิเคชัน Sugar โปรดดูตารางความเข้ากันได้ในบันทึกประจำรุ่นสำหรับเวอร์ชัน IIS ที่สนับสนุน เวอร์ชันของคุณคือ ',
-	'ERR_CHECKSYS_FASTCGI'              => 'เราตรวจพบว่าคุณไม่ได้ใช้การแมปแฮนด์เลอร์ FastCGI สำหรับ PHP คุณจะต้องติดตั้ง/กำหนดค่าเวอร์ชันที่เข้ากันได้กับแอปพลิเคชัน Sugar โปรดดูตารางความเข้ากันได้ในบันทึกประจำรุ่นสำหรับเวอร์ชันที่สนับสนุน โปรดดู <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> สำหรับรายละเอียด ',
+    'ERR_CHECKSYS_FASTCGI'              => 'เราตรวจพบว่าคุณไม่ได้ใช้การแมปแฮนด์เลอร์ FastCGI สำหรับ PHP คุณจะต้องติดตั้ง/กำหนดค่าเวอร์ชันที่เข้ากันได้กับแอปพลิเคชัน Sugar โปรดดูตารางความเข้ากันได้ในบันทึกประจำรุ่นสำหรับเวอร์ชันที่สนับสนุน โปรดไปที่ <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> เพื่อดูรายละเอียด ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'หากต้องการได้รับประสบการณ์ใช้งาน IIS/FastCGI sapi ที่ดีที่สุด ให้ตั้งค่า fastcgi.logging เป็น 0 ในไฟล์ php.ini',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'มีการติดตั้ง PHP เวอร์ชันที่ระบบไม่สนับสนุน: ( เวอร์ชัน',
     'LBL_DB_UNAVAILABLE'                => 'ฐานข้อมูลไม่สามารถใช้ได้',
@@ -556,139 +556,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'โหมดความเข้ากันได้ย้อนหลังของ PHP เปิดอยู่ ให้ตั้งค่า zend.ze1_compatibility_mode เป็นปิดเพื่อดำเนินการต่อ',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'อีเมลการแจ้งเตือนการประชุม',
+        'subject' => 'การประชุม SugarCRM - $event_name ',
+        'description' => 'เทมเพลตนี้จะถูกนำมาใช้เมื่อระบบส่งการแจ้งเตือนการประชุมไปให้ผู้ใช้',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>ถึง: $assigned_user</p>
 
 	<p>$assigned_by_user has invited you to a Meeting</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>หัวข้อ: $event_name<br/>
+	วันที่เริ่ม: $start_date<br/>
+	วันสิ้นสุด: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>รายละเอียด: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>ตอบรับการประชุม:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>อาจจะตอบรับการประชุม:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>ปฏิเสธการประชุม:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'ถึง: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user ได้เชิญคุณเข้าร่วมการประชุม
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+หัวข้อ: $event_name
+วันที่เริ่ม: $start_date
+วันสิ้นสุด: $end_date
 
-Description: $description
+รายละเอียด: $description
 
-Accept this meeting:
+ตอบรับการประชุม:
 <$accept_link>
 
-Tentatively Accept this meeting
+อาจจะตอบรับการประชุม
 <$tentative_link>
 
-Decline this meeting
+ปฏิเสธการประชุม
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'อีเมลแจ้งเตือนการโทร',
+        'subject' => 'การโทรของ SugarCRM - $event_name ',
+        'description' => 'เทมเพลตนี้จะถูกนำมาใช้เมื่อระบบส่งการแจ้งเตือนการโทรไปให้ผู้ใช้',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>ถึง: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user ได้เชิญคุณเข้าร่วมสายโทร</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>หัวข้อ: $event_name<br/>
+	วันที่เริ่ม: $start_date<br/>
+	วันสิ้นสุด: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>รายละเอียด: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>ยอมรับการโทร:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>อาจจะยอมรับการโทร:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>ปฏิเสธการโทร:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'ถึง: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user ได้เชิญคุณเข้าร่วมการโทร
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+หัวข้อ: $event_name
+วันที่เริ่ม: $start_date
+ระยะเวลา: $hoursh, $minutesm
 
-Description: $description
+รายละเอียด: $description
 
-Accept this call:
+ยอมรับการโทร:
 <$accept_link>
 
-Tentatively Accept this call
+อาจจะยอมรับการโทร
 <$tentative_link>
 
-Decline this call
+ปฏิเสธการโทร
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'อีเมลแจ้งเตือนการมอบหมาย',
+        'subject' => 'SugarCRM - ได้รับมอบหมาย $module_name ',
+        'description' => 'เทมเพลตนี้จะถูกนำมาใช้เมื่อระบบส่งการแจ้งเตือนการมอบหมายงานให้แก่ผู้ใช้',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user ได้มอบหมาย a&nbsp;$module_name ให้แก่&nbsp;$assigned_user</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>คุณสามารถดู&nbsp;$module_name ได้ที่:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user ได้มอบหมาย $module_name ให้แก่ $assigned_user
 
-You may review this $module_name at:
+คุณสามารถดู $module_name ได้ที่:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'อีเมลรายงานกำหนดการ',
+        'subject' => 'รายงานกำหนดการ: $report_name เมื่อ $report_time',
+        'description' => 'เทมเพลตนี้จะถูกนำมาใช้เมื่อระบบส่งรายงานกำหนดการให้แก่ผู้ใช้',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>สวัสดี $assigned_user,</p>
+<p>เอกสารที่แนบมาเป็นรายงานที่สร้างขึ้นอัตโนมัติเพื่อจัดกำหนดการให้คุณ</p>
+<p>ชื่อรายงาน: $report_name</p>
+<p>วันและเวลาที่สร้างรายงาน: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'สวัสดี $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+เอกสารแนบเป็นรายงานที่สร้างขึ้นอัตโนมัติเพื่อจัดกำหนดการให้คุณ
 
-Report Name: $report_name
+ชื่อรายงาน: $report_name
 
-Report Run Date and Time: $report_time',
+วันและเวลาที่สร้างรายงาน: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'การแจ้งเตือนอีเมลบันทึกความคิดเห็นระบบ',
+        'subject' => 'SugarCRM - $initiator_full_name ได้กล่าวถึงคุณใน(n) $singular_module_name',
+        'description' => 'เทมเพลตนี้จะถูกนำมาใช้เพื่อส่งอีเมลแจ้งเตือนแก่ผู้ใช้ที่ถูกแท็กชื่อในส่วนบันทึกความคิดเห็น',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>มีคนกล่าวถึงคุณในบันทึกความคิดเห็นต่อไปนี้:  <a href="$record_url">$record_name</a></p>
+                <p>โปรดเข้าระบบไปที่ Sugar เพื่อดูความคิดเห็นนั้น</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'มีคนกล่าวถึงคุณในบันทึกความคิดเห็นต่อไปนี้: $record_name
+            โปรดเข้าระบบไปที่ Sugar เพื่อดูความคิดเห็นนั้น',
     ],
 
     'advanced_password_new_account_email' => array(

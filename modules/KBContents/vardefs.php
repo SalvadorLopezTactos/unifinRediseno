@@ -16,7 +16,7 @@ $dictionary['KBContent'] = array(
     'activity_enabled' => true,
     'unified_search' => true,
     'full_text_search' => true,
-    'portal_search' => [
+    'generic_search' => [
         'Elastic' => [
             'mapping' => [
                 'name' => 'name', 'description' => 'kbdocument_body',
@@ -173,6 +173,15 @@ $dictionary['KBContent'] = array(
             'bean_name' => 'Note',
             'source' => 'non-db',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'vname' => 'LBL_MESSAGES',
+            'type' => 'link',
+            'relationship' => 'kbcontent_messages',
+            'module' => 'Notes',
+            'bean_name' => 'Note',
+            'source' => 'non-db',
+        ],
         'attachments' => array(
             'name' => 'attachments',
             'vname' => 'LBL_ATTACHMENTS',
@@ -493,6 +502,17 @@ $dictionary['KBContent'] = array(
         ),
     ),
     'relationships' => array(
+        'kbcontent_messages' => [
+            'lhs_module' => 'KBContents',
+            'lhs_table' => 'kbcontents',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'KBContents',
+        ],
         'kbcontent_notes' => array(
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',

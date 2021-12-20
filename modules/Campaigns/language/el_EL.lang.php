@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Η λίστα στόχου του προεπιλεγμένου τύπου δεν βρέθηκε',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Καμία καταχώρηση δεν βρέθηκε',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Οι καταχωρήσεις υποβλήθηκαν σε Επεξεργασία',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Ρυθμίσεις Εισερχόμενων Email',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Ρυθμίσεις συστήματος του ηλεκτρονικού ταχυδρομείου',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Όνομα Σημείου Εντοπισμού:',
   'LBL_EDIT_TRACKER_URL'=>'Σημείο Εντοπισμού URL:',

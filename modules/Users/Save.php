@@ -39,6 +39,31 @@ if (!function_exists('verifyAndCleanup')) {
     }
 }
 
+if (!function_exists('validateField')) {
+    /**
+     * Validates field
+     *
+     * @param array $field
+     * @param string $fieldName
+     * @return string
+     */
+    function validateField(array $field, string $fieldName)
+    {
+        $newValue = '';
+        if (isset($field['type'])) {
+            if ($field['type'] === 'multienum') {
+                $newValue = InputValidation::getService()->getValidInputPost(
+                    $fieldName,
+                    'Assert\ArrayRecursive'
+                );
+            } else {
+                $newValue = InputValidation::getService()->getValidInputPost($fieldName);
+            }
+        }
+        return $newValue;
+    }
+}
+
 $display_tabs_def = isset($_REQUEST['display_tabs_def']) ? html_entity_decode($_REQUEST['display_tabs_def']) : '';
 $hide_tabs_def = isset($_REQUEST['hide_tabs_def']) ? html_entity_decode($_REQUEST['hide_tabs_def']): '';
 $remove_tabs_def = isset($_REQUEST['remove_tabs_def']) ? html_entity_decode($_REQUEST['remove_tabs_def']): '';
@@ -70,6 +95,9 @@ if (!$focus->id) {
     // before the bean is saved
     $focus->id = create_guid();
     $focus->new_with_id = true;
+}
+if (!$focus->ACLAccess('edit')) {
+    sugar_die(translate('EXCEPTION_NOT_AUTHORIZED'));
 }
 
 //update any ETag seeds that are tied to the user object changing
@@ -156,6 +184,11 @@ if (isset($_POST['user_name'])) {
 if (!$focus->is_group && !$focus->portal_only) {
     foreach ($focus->column_fields as $fieldName) {
         $field = $focus->field_defs[$fieldName];
+        $newValue = validateField($field, $fieldName);
+        $isFieldChanged = !is_null($newValue) && $focus->$fieldName != $newValue;
+        if ($isFieldChanged && !$focus->ACLFieldAccess($fieldName, 'save', ['newValue' => $newValue])) {
+            sugar_die(translate('EXCEPTION_NOT_AUTHORIZED'));
+        }
         $type = !empty($field['custom_type']) ? $field['custom_type'] : $field['type'];
         $sf = $sfh->getSugarField($type);
         if ($sf != null) {
@@ -166,6 +199,11 @@ if (!$focus->is_group && !$focus->portal_only) {
     }
     foreach ($focus->additional_column_fields as $fieldName) {
         $field = $focus->field_defs[$fieldName];
+        $newValue = validateField($field, $fieldName);
+        $isFieldChanged = !is_null($newValue) && $focus->$fieldName != $newValue;
+        if ($isFieldChanged && !$focus->ACLFieldAccess($fieldName, 'save', ['newValue' => $newValue])) {
+            sugar_die(translate('EXCEPTION_NOT_AUTHORIZED'));
+        }
         $type = !empty($field['custom_type']) ? $field['custom_type'] : $field['type'];
         $sf = $sfh->getSugarField($type);
         if ($sf != null) {
@@ -375,6 +413,12 @@ if (!$focus->is_group && !$focus->portal_only) {
         $focus->setPreference('field_name_placement', $field_name_placement, 0, 'global');
     }
 
+    if (isset($_POST['send_email_on_mention'])) {
+        $focus->setPreference('send_email_on_mention', $_POST['send_email_on_mention'], 0, 'global');
+    } else {
+        $focus->setPreference('send_email_on_mention', '', 0, 'global');
+    }
+
     if (isset($_POST['mail_smtpauth_req'])) {
         $focus->setPreference('mail_smtpauth_req', $_POST['mail_smtpauth_req'], 0, 'global');
     } else {
@@ -439,10 +483,18 @@ if (!$focus->is_group && !$focus->portal_only) {
 }
 
 if (!$focus->verify_data()) {
-    header(
-        "Location: index.php?action=EditView&module=Users&isDuplicate=true&record=".$_REQUEST['return_id'].
-        "&error_string=".urlencode($focus->error_string)
-    );
+    $params = [
+        'action' => 'EditView',
+        'module' => 'Users',
+        'record' => $_REQUEST['return_id'],
+        'error_string' => $focus->error_string,
+    ];
+
+    if ($focus->isDuplicateRecord) {
+        $params['isDuplicate'] = 'true';
+    }
+
+    header('Location: index.php?' . http_build_query($params));
     exit;
 } else {
     // Handle setting of the metadata change for this user
@@ -477,15 +529,25 @@ if (!$focus->verify_data()) {
             html_entity_decode($_POST['old_password']),
             html_entity_decode($_POST['new_password'])
         )) {
-            if ((isset($_POST['page']) && $_POST['page'] == 'EditView')) {
-                header("Location: index.php?action=EditView&module=Users&record=" . $_POST['record'] .
-                    "&error_password=" . urlencode($focus->error_string));
-                exit;
-            }
-            if ((isset($_POST['page']) && $_POST['page'] == 'Change')) {
-                header("Location: index.php?action=ChangePassword&module=Users&record=" . $_POST['record'] .
-                    "&error_password=" . urlencode($focus->error_string));
-                exit;
+            if (isset($_POST['page'])) {
+                $sendHeader = false;
+                $queryParams = [
+                    'module' => 'Users',
+                    'record' => $_POST['record'],
+                    'error_password' => $focus->error_string,
+                ];
+                if ($_POST['page'] === 'EditView') {
+                    $queryParams['action'] = 'EditView';
+                    $sendHeader = true;
+                }
+                if ($_POST['page'] === 'Change') {
+                    $queryParams['action'] = 'ChangePassword';
+                    $sendHeader = true;
+                }
+                if ($sendHeader) {
+                    header('Location: index.php?'.http_build_query($queryParams));
+                    exit;
+                }
             }
         } else {
             if ($newUser) {
@@ -538,7 +600,13 @@ if (!$focus->verify_data()) {
         $ie = BeanFactory::newBean('InboundEmail');
         $ie->disable_row_level_security = true;
         if (false === $ie->savePersonalEmailAccount($return_id, $focus->user_name)) {
-            header("Location: index.php?action=Error&module=Users&error_string=&ie_error=true&id=" . $return_id);
+            header('Location: index.php?' . http_build_query([
+                'action' => 'Error',
+                'module' => 'Users',
+                'error_string' => '',
+                'ie_error' => 'true',
+                'id' => $return_id,
+            ]));
             die(); // die here, else the header redirect below takes over.
         }
     } elseif (isset($_REQUEST['ie_id']) && !empty($_REQUEST['ie_id']) && empty($_REQUEST['server_url'])) {
@@ -596,19 +664,25 @@ if (isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "" &&
 
 $GLOBALS['log']->debug("Saved record with id of ".$return_id);
 
-$redirect = "index.php?action={$return_action}&module={$return_module}&record={$return_id}";
-
+$queryParams = [
+    'action' => $return_action,
+    'module' => $return_module,
+    'record' => $return_id,
+];
 // cn: bug 6897 - detect redirect to Email compose
-$redirect .= isset($_REQUEST['type']) ? "&type={$_REQUEST['type']}" : '';
-
-$redirect .= isset($_REQUEST['return_id']) ? "&return_id={$_REQUEST['return_id']}" : '';
-
+if (isset($_REQUEST['type'])) {
+    $queryParams['type'] = $_REQUEST['type'];
+}
+if (isset($_REQUEST['return_id'])) {
+    $queryParams['return_id'] = $_REQUEST['return_id'];
+}
 // Set the refresh metadata flag for changes that require it. This includes when
 // metadata needs to be refreshed because of a user pref change, but only if its
 // for the current user changing their own profile
-$sameUser = !empty($focus->id) && $focus->id == $GLOBALS['current_user']->id;
-$redirect .= $sameUser && $refreshMetadata ? '&refreshMetadata=1' : '';
+if (!empty($focus->id) && $focus->id == $GLOBALS['current_user']->id && $refreshMetadata) {
+    $queryParams['refreshMetadata'] = 1;
+}
 $_SESSION['new_pwd'] = $new_pwd;
 if (!headers_sent()) {
-    header("Location: {$redirect}");
+    header('Location: index.php?' . http_build_query($queryParams));
 }

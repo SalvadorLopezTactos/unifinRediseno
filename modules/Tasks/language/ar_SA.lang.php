@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'لوحة معلومات قائمة المهام',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'لوحة معلومات سجل المهام',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم المهام',
 
+  'LBL_RELATED_CONTACT' => 'جهة الاتصال ذات الصلة',
   'LBL_MODULE_NAME' => 'المهام',
   'LBL_MODULE_NAME_SINGULAR' => 'المهمة',
   'LBL_TASK' => 'المهام: ',

@@ -12,8 +12,9 @@
 
 $mod_strings = array (
   // Dashboard Names
-  'LBL_BUGS_LIST_DASHBOARD' => 'バグリストのダッシュボード',
-  'LBL_BUGS_RECORD_DASHBOARD' => 'バグレコードのダッシュボード',
+  'LBL_BUGS_LIST_DASHBOARD' => 'バグリストのダッシュ ボード',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'バグレコードのダッシュ ボード',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'バグ フォーカス ドロワ',
 
   'LBL_MODULE_NAME' => 'バグトラッカー',
   'LBL_MODULE_NAME_SINGULAR'	=> 'バグトラッカー',
@@ -109,14 +110,14 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは、内部的に見つからないか、顧客から報告されたいずれか、一般的に{{plural_module_name}}や不具合と呼ばれる製品に関連する問題を追跡し、管理するために使用されます。  {{plural_module_name}}リリースで発見され修正されたものを追跡することによって優先順位付けすることができます。 {{plural_module_name}}モジュールにより、ユーザはすぐにすべての{{module_name}}の詳細およびプロセスとそれを是正するために使用されているものを再確認することができます。{{module_name}}が作成されるか、または提出されたら、{{module_name}}のレコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。各{{module_name}}レコードは、{{calls_module}}、{{contacts_module}}、{{cases_module}}など、およびその他多くの他のSugarの記録に関するものになります。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは、内部的に見つからないか、顧客から報告されたいずれか、一般的に{{plural_module_name}}や不具合と呼ばれる製品に関連する問題を追跡し、管理するために使用されます。  {{plural_module_name}}リリースで発見され修正されたものを追跡することによって優先順位付けすることができます。 {{plural_module_name}}モジュールにより、ユーザーはすぐにすべての{{module_name}}の詳細およびプロセスとそれを是正するために使用されているものを再確認することができます。{{module_name}}が作成されるか、または提出されたら、{{module_name}}のレコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。各{{module_name}}レコードは、{{calls_module}}、{{contacts_module}}、{{cases_module}}など、およびその他多くの他のSugarの記録に関するものになります。',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} モジュールは、内部的に見つからないか、顧客から報告されたいずれか、一般的に{{plural_module_name}} や不具合と呼ばれる製品に関連する問題を追跡し、管理するために使用されます。
 
 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。
 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示したり変更してください。
-- 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードの変更履歴やユーザコメントを作成したり編集したりしてください。
+- 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードの変更履歴やユーザーコメントを作成したり編集したりしてください。
 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りにしてください。
 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
 

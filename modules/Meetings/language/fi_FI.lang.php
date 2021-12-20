@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Tapaamisluettelon työpöytä',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tapaamistietueiden työpöytä',
+    'LBL_LEAD_GUESTS' => 'Liidivieraat',
+    'LBL_CONTACT_GUESTS' => 'Kontaktivieraat',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Kokoukset-tietolaatikko',
 
 	'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa tilin.',
 	'LBL_ACCEPT_THIS'=>'Hyväksy?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Suunta',
 	'LBL_LIST_DUE_DATE'=>'Eräpäivä',
 	'LBL_LIST_FORM_TITLE' => 'Kokousluettelo',
-	'LBL_LIST_MY_MEETINGS' => 'Kokoukset',
+    'LBL_LIST_MY_MEETINGS' => 'Kokoukset',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Omat kokoukset',
+    'LBL_GUEST_MEETINGS' => 'Omat kokoukset vierailijana',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Ajastetut kokoukset vierailijana',
 	'LBL_LIST_RELATED_TO' => 'Liittyy',
 	'LBL_LIST_STATUS'=>'Tila',
 	'LBL_LIST_SUBJECT' => 'Aihe',

@@ -397,7 +397,10 @@
 
             this.$(this.fieldTag).val(value['date']);
             if (value['date']) {
-                this.$(this.fieldTag).data('datepicker').setValue(value['date']);
+                var datePicker = this.$(this.fieldTag).data('datepicker');
+                if (datePicker) {
+                    datePicker.setValue(value.date);
+                }
             }
             this.$(this.secondaryFieldTag).val(value['time']);
         }, this);

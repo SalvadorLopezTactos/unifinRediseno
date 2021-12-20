@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Authentication\Token\SAML;
 
-use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
+use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 /**
@@ -49,6 +49,6 @@ class ResultToken extends AbstractToken
      */
     public function getProviderKey()
     {
-        return AuthProviderManagerBuilder::PROVIDER_KEY_SAML;
+        return Providers::PROVIDER_KEY_SAML;
     }
 }

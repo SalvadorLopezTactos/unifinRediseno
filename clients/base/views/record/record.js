@@ -41,6 +41,7 @@
     events: {
         'mousemove .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseMove',
         'mouseleave .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseLeave',
+        'mouseup .record-link-wrapper': 'handleLinkWrapperMouseUp',
         'click .record-edit-link-wrapper': 'handleEdit',
         'click .label-pill .record-label': 'handleEdit',
         'click a[name=cancel_button]': '_deprecatedCancelClicked',
@@ -98,6 +99,9 @@
          */
         options.meta = _.extend({}, app.metadata.getView(null, 'record'), options.meta);
         options.meta.hashSync = _.isUndefined(options.meta.hashSync) ? true : options.meta.hashSync;
+        if (options.meta.hasExternalFields) {
+            this.plugins = _.union(this.plugins || [], ['ExternalApp']);
+        }
         app.view.View.prototype.initialize.call(this, options);
         this.buttons = {};
         //Adding the favorite and follow fields.
@@ -205,6 +209,10 @@
         $(window).on('resize.' + this.cid, this.adjustHeaderpane);
         $(window).on('resize.' + this.cid, _.bind(this.overflowTabs, this));
 
+        if (!this.getLabelPlacement()) {
+            $(window).on('resize.' + this.cid, _.bind(_.debounce(this.relocatePencils, 500), this));
+        }
+
         // initialize tab view after the component is attached to DOM
         this.on('append', function() {
             this.overflowTabs();
@@ -229,6 +237,23 @@
 
         // Option to avoid navigating to other routes during edit/save (useful for opening in a drawer)
         this.skipRouting = this.context.get('skipRouting') || false;
+
+        // Listening for the save from preview to finish and reload data on the main record view
+        // to reflect changes from preview's edit
+        app.events.on('preview:edit:save', function() {
+            this.context.reloadData();
+        }, this);
+    },
+
+    /**
+     * Relocate all pencils of the record
+     */
+    relocatePencils: function() {
+        _.each(this.fields, function(field) {
+            if (field.type === 'record-decor') {
+                field.relocatePencil();
+            }
+        });
     },
 
     /**
@@ -445,7 +470,8 @@
 
     setLabel: function(context, value) {
         var plus = '<i class="fa fa-plus label-plus"></i>';
-        this.$('.record-label[data-name="' + value.field + '"]').html(plus + value.label);
+        this.$('.record-label[data-name="' + value.field + '"]')
+            .html(plus).append(document.createTextNode(value.label));
     },
 
     /**
@@ -493,7 +519,9 @@
         // Field labels in headerpane should be hidden on view but displayed in edit and create
         _.each(this.fields, function(field) {
             // some fields like 'favorite' is readonly by default, so we need to remove edit-link-wrapper
-            if (field.def.readonly && field.name && -1 == _.indexOf(this.noEditFields, field.name)) {
+            if (app.utils.isFieldAlwaysReadOnly(field.def, field.viewDefs) &&
+                field.name && !_.contains(this.noEditFields, field.name)
+            ) {
                 this.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
             }
         }, this);
@@ -783,7 +811,7 @@
         app.view.View.prototype._renderHtml.call(this);
         this._initButtons();
         this.setEditableFields();
-        this.adjustHeaderpane();
+        _.bind(_.debounce(this.adjustHeaderpane, 800), this)();
     },
 
     /**
@@ -950,6 +978,7 @@
         this.action = 'edit';
         this.toggleEdit(true);
         this.setRoute('edit');
+        this.focusFirstInput();
     },
 
     saveClicked: function() {
@@ -1090,6 +1119,35 @@
     },
 
     /**
+     * Handles mouseup event.
+     *
+     * @param {Event} event Event object
+     */
+    handleLinkWrapperMouseUp: function(event) {
+        // Checks if this field is editable
+        var isEF = this.$(event.target).parents('.record-cell').find('.record-edit-link-wrapper:not(.hide)').get(0);
+        var isLink = this.$(event.target).attr('href');
+        var isEditMode = this.action === 'edit' || this.$(event.target).parents('.record-cell').hasClass('edit');
+        // This handles the case where we click on a button within a field and we want that listener to fire
+        // not the one one for the record edit link wrapper.
+        var hasClickableAction = this.hasClickableAction(event.target);
+        var selection = window.getSelection ? window.getSelection().toString() : document.selection.createRange().text;
+
+        if (isEF && !isLink && !isEditMode && !hasClickableAction && !selection) {
+            this.handleEdit(event);
+        }
+    },
+
+    /**
+     * Determine if the click target has an action that should stop edit mode from triggering
+     * @param {HTMLElement} element
+     * @return {boolean}
+     */
+    hasClickableAction: function(element) {
+        return this.$(element).attr('data-action');
+    },
+
+    /**
      * Handler for intent to edit. This handler is called both as a callback
      * from click events, and also triggered as part of tab focus event.
      *
@@ -1111,6 +1169,13 @@
         cellData = cell.data();
         field = this.getField(cellData.name);
 
+        // If the focus drawer icon was clicked, open the focus drawer instead
+        // of entering edit mode
+        if (target && target.hasClass('focus-icon') && field && field.focusEnabled) {
+            field.handleFocusClick();
+            return;
+        }
+
         // Set Editing mode to on.
         this.inlineEditMode = true;
 
@@ -1118,7 +1183,7 @@
 
         this.toggleField(field);
 
-        if (cell.closest('.headerpane').length > 0) {
+        if (this.$('.headerpane').length > 0) {
             this.toggleViewButtons(true);
             this.adjustHeaderpaneFields();
         }
@@ -1186,10 +1251,11 @@
         var options,
             successCallback = _.bind(function() {
                 this.resetTemporaryFileFields();
-                // Loop through the visible subpanels and have them sync. This is to update any related
+                // Loop through the visible subpanels and previews and have them sync. This is to update any related
                 // fields to the record that may have been changed on the server on save.
                 _.each(this.context.children, function(child) {
-                    if (child.get('isSubpanel') && !child.get('hidden')) {
+                    // This will catch the preview panel since it's loaded as a record view
+                    if ((child.get('isSubpanel') && !child.get('hidden')) || child.get('isPreview')) {
                         if (child.get('collapsed')) {
                             child.resetLoadFlag({recursive: false});
                         } else {
@@ -1486,12 +1552,20 @@
         if (field.view.meta && field.view.meta.useTabsAndPanels) {
             // If field's panel is a tab, switch to the tab that contains the field with the error
             if (fieldTab.length > 0) {
+                // Make sure all previous active tab content is hidden
+                this.$('.tab-pane').removeClass('active in');
+
+                // Switch to the tab with the error
                 tabLink = this.$('[href="#' + fieldTab.attr('id') + '"][data-toggle="tab"]');
                 tabLink.tab('show');
+
                 // Put a ! next to the tab if one doesn't already exist
                 if (tabLink.find('.fa-exclamation-circle').length === 0) {
                     tabLink.append(' <i class="fa fa-exclamation-circle tab-warning"></i>');
                 }
+
+                // Make sure the new current active tab is shown
+                this.$('.tab-content [id="' + fieldTab.attr('id') + '"]').addClass('active in');
             }
 
             // If field's panel is a panel that is closed, open it and change arrow
@@ -1603,14 +1677,16 @@
 
                 // disable the pencil icon if the user doesn't have ACLs
                 if (field.fields && _.isArray(field.fields)) {
-                    if (field.readonly || this.extraNoEditFields.indexOf(field.name) !== -1 ||
+                    if ((field.readonly && this.checkReadonlyFormula(field.name)) ||
+                        _.contains(this.extraNoEditFields, field.name) ||
                         _.every(field.fields, function(field) {
                         return !app.acl.hasAccessToModel('edit', this.model, field.name);
                     }, this)) {
                         this.noEditFields.push(field.name);
                     }
-                } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name) ||
-                    this.extraNoEditFields.indexOf(field.name) !== -1) {
+                } else if ((field.readonly && this.checkReadonlyFormula(field.name)) ||
+                    !app.acl.hasAccessToModel('edit', this.model, field.name) ||
+                    _.contains(this.extraNoEditFields, field.name)) {
                     this.noEditFields.push(field.name);
                 }
 
@@ -1642,6 +1718,15 @@
                 lastTabIndex = gridResults.lastTabIndex;
             }
         }, this);
+    },
+
+    /**
+     * To check if readonly_formula is empty
+     * @param fieldName
+     * @return {*|boolean}
+     */
+    checkReadonlyFormula: function(fieldName) {
+        return (this.model.fields[fieldName] && _.isUndefined(this.model.fields[fieldName].readonly_formula));
     },
 
     /**
@@ -1876,8 +1961,10 @@
             fieldType = $ellipsisCell.data('type');
         if (fieldType === 'fullname' || fieldType === 'dashboardtitle') {
             ellipsifiedCell = this.getField($ellipsisCell.data('name'));
-            width -= ellipsifiedCell.getCellPadding();
-            ellipsifiedCell.setMaxWidth(width);
+            if (ellipsifiedCell) {
+                width -= ellipsifiedCell.getCellPadding();
+                ellipsifiedCell.setMaxWidth(width);
+            }
         } else {
             $ellipsisCell.css({'width': width}).children().css({'max-width': (width - 2) + 'px'});
         }
@@ -2153,5 +2240,36 @@
             app.alert.dismiss(alert);
         });
         this._viewAlerts = [];
+    },
+
+    /**
+     * Focus the first text input in the topmost active drawer (or content element)
+     * when the DOM is ready
+     */
+    focusFirstInput: function() {
+        var self = this;
+        $(function() {
+            var $element = (app.drawer && (app.drawer.count() > 0)) ?
+                app.drawer._components[app.drawer.count() - 1].$el
+                : app.$contentEl;
+            var $firstInput = $element.find('input[type=text]').first();
+
+            if (($firstInput.length > 0) && $firstInput.is(':visible')) {
+                $firstInput.focus();
+                self.setCaretToEnd($firstInput);
+            }
+        });
+    },
+
+    /**
+     * Move the input cursor to the end
+     *
+     * @param {jQuery} $element
+     */
+    setCaretToEnd: function($element) {
+        if ($element.val().length > 0) {
+            var elementVal = $element.val();
+            $element.val('').val(elementVal);
+        }
     }
 })

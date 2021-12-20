@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Pribavite API ključ i tajni kod od Googlea tako da registrirate svoju instancu Sugar kao novu aplikaciju.
-<br/><br>Koraci za registraciju instance:
-<br/><br/>
-<ol>
-<li>Idite na web-mjesto Google Developers:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Prijavite se s pomoću Google računa pod kojim biste željeli registrirati aplikaciju.</li>
-<li>Stvorite novi projekt</li>
-<li>Unesite naziv projekta i kliknite na Stvori.</li>
-<li>Nakon stvaranja projekta omogućite API za Google Disk i Google Kontakte</li>
-<li>U dijelu API-ovi i provjera autentičnosti > Vjerodajnice stvorite ID novog klijenta </li>
-<li>Odaberite „Web-aplikacija” i kliknite na Konfiguriraj zaslon za pristanak</li>
-<li>Unesite naziv proizvoda i kliknite na Spremi</li>
-<li>U dijelu Autorizirane URL adrese za preusmjeravanje unesite sljedeću URL adresu: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Kliknite na Stvori ID klijenta</li>
-<li>Kopirajte ID klijenta i tajni kod klijenta u okvire u nastavku</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Registrirajte svoju instancu Sugar putem Googlea kako biste omogućili konfiguraciju Google računa za uporabu u okviru Sugara. ' .
+        'Pogledajte <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>Dokumentaciju za Poveznike</a> za više informacija.</td></tr></table>',
     'oauth2_client_id' => 'ID klijenta',
-    'oauth2_client_secret' => 'Tajni kod klijenta',
+    'oauth2_client_secret' => 'Klijentski tajni ključ',
 );

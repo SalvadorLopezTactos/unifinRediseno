@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Tekijän tunnus',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Tekijän käyttäjätunnus',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Vastuuhenkilön nimi',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Tunnisteet-tietolaatikko',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Tunnistetietueiden työpöytä',
+    'LBL_MY_TAGS' => 'Omat tunnisteet',
+    'LBL_MY_FAVORITE_TAGS' => 'Suosikkitunnisteet',
 );

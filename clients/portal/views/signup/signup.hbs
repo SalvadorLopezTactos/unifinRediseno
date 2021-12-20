@@ -15,7 +15,7 @@
         <div class="tcenter">
             <h2 class="brand"><img src="{{logoUrl}}" alt="SugarCRM"></h2>
         </div>
-        <form class="tcenter">
+        <form class="tcenter" autocomplete="off">
             {{#each meta.panels}}
                 {{#each fields}}
                 <div class="control-group">{{field ../../this model=../../model template="edit"}}</div>

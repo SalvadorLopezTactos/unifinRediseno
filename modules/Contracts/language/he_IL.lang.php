@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'נערך על ידי מזהה',
     'LBL_EXPORT_CREATED_BY' => 'נוצר על ידי ID',
     'LBL_EXPORT_TYPE_NAME' => 'שם סוג',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס חוזים',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות חוזים',
 );

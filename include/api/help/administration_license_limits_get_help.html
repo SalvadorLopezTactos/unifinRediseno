@@ -17,7 +17,8 @@
 
 <h2>Summary</h2>
 <span class="lead">
-    This endpoint gets the license limits for each license types. This endpoint is only available to administrators.
+    This endpoint gets the license limits, the number of unused licensed seats for each license type.
+    This endpoint is only available to administrators.
 </span>
 
 <h2>Request Arguments</h2>
@@ -28,11 +29,18 @@
 <h3>Response</h3>
 <pre class="pre-scrollable">
 {
-    "default_limit": 100,
-    "seats": {
-        "CURRENT": 100,
-        "SUGAR_SERVE": 10
-    }
+  "default_limit": 100,
+  "limit_enforced": 1,
+  "default_license_type" : "CURRENT",
+  "seats": {
+    "CURRENT": 100,
+    "SUGAR_SERVE": 10
+  },
+  "available_seats": {
+    "CURRENT": 25,
+    "SUGAR_SERVE": 1,
+    "SUGAR_SELL":0,
+  }
 }
 </pre>
 

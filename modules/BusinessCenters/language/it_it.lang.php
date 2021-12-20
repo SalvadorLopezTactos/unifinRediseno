@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Contatti',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Clienti potenziali',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Utenti',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Dashboard record Business Center',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Business Centers Focus Drawer',
 ];

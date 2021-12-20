@@ -19,6 +19,7 @@ use \Sugarcrm\Sugarcrm\Security\Password\Hash;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
 
 /**
  * User is used to store customer information.
@@ -67,7 +68,8 @@ class User extends Person {
 	//adding a property called team_id so we can populate it for use in the team widget
 	var $team_id;
 
-	var $receive_notifications;
+    public $receive_notifications;
+    public $send_email_on_mention;
 	var $default_team;
 
     public $business_center_name;
@@ -86,9 +88,14 @@ class User extends Person {
     public $site_user_id;
 
     /**
-     * @var string, license type associated with the user
+     * license type associated with the user
      */
     public $license_type;
+
+    /**
+     * @var bool
+     */
+    public $isDuplicateRecord = false;
 
     /**
      * old license type from DB
@@ -141,6 +148,11 @@ class User extends Person {
         'UpgradeHistory',
         'pmse_Inbox',
     );
+
+    /**
+     * @var string|null
+     */
+    private $hashTS;
 
     /**
      * @param $userName
@@ -215,10 +227,26 @@ class User extends Person {
         return $this;
     }
 
+    /**
+     * Checks if the user has any registered mobile devices.
+     * @return bool
+     * @throws SugarQueryException
+     */
+    public function hasRegisteredDevices() : bool
+    {
+        $query = new SugarQuery();
+        $query->select(['id']);
+        $query->from(BeanFactory::newBean('MobileDevices'), ['team_security' => false, 'add_deleted' => true]);
+        $query->where()->queryAnd()
+            ->equals('assigned_user_id', $this->id);
+        $id = $query->getOne();
 
-	/**
-	 * convenience function to get user's default signature
-	 */
+        return !empty($id);
+    }
+
+    /**
+     * convenience function to get user's default signature
+     */
 	function getDefaultSignature() {
 		if($defaultId = $this->getPreference('signature_default')) {
 			return $this->getSignature($defaultId);
@@ -600,14 +628,13 @@ class User extends Person {
 	public static function getLicensedUsersWhere()
 	{
         $db = DBManagerFactory::getInstance();
-        $where = sprintf(
+
+        return sprintf(
             " deleted != 1 AND user_name IS NOT NULL AND is_group != 1 AND portal_only != 1 AND status = %s AND %s > 0 AND %s",
             $db->quoted('Active'),
             $db->convert('user_name', 'length'),
             self::getSystemUsersWhere()
         );
-        return $where;
-	    return "1<>1";
 	}
 
     /**
@@ -662,7 +689,7 @@ class User extends Person {
 
         // When we change a user to or from admin status, we have to flush the ACL cache
         // or else the user will not be able to access some admin modules.
-        AclCache::getInstance()->clear();
+        AclCache::getInstance()->clearAll();
         // FIXME TY-1094: investigate if we should enforce admin/portal API user/group mutual exclusivity here
     }
 
@@ -711,20 +738,22 @@ class User extends Person {
                         'The number of active users is already the maximum number of licenses allowed.'
                         . ' New user cannot be created or activated.'
                     );
-                    if (!empty($this->external_auth_only)) {
-                        $e = new SugarApiExceptionLicenseSeatsNeeded(
-                            'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS',
+
+                    $typeString = '';
+                    foreach ($exceededLicenseTypes as $type) {
+                        $typeString .= self::getLicenseTypeDescription($type) . ' ';
+                    }
+
+                    $typeString = trim($typeString);
+                    if (!empty($this->external_auth_only) || isFromApi()) {
+                        $msg = sprintf(translate('WARN_LICENSE_TYPE_SEATS_EDIT_MAXED', 'Administration'), $typeString);
+                        throw new SugarApiExceptionLicenseSeatsNeeded(
+                            $msg,
                             null,
                             null,
                             0,
                             'license_seats_needed'
                         );
-                        throw $e;
-                    }
-
-                    $typeString = '';
-                    foreach ($exceededLicenseTypes as $type) {
-                        $typeString .= self::getLicenseTypeDescription($type) . ' ';
                     }
                     $msg = sprintf(translate('WARN_LICENSE_TYPE_SEATS_EDIT_USER', 'Administration'), $typeString);
                     if (isset($_REQUEST['action'])
@@ -743,7 +772,6 @@ class User extends Person {
             }
         }
         // End Express License Enforcement Check
-
 
 		// wp: do not save user_preferences in this table, see user_preferences module
 		$this->user_preferences = '';
@@ -884,6 +912,8 @@ class User extends Person {
             return $mod_strings['LBL_LICENSE_SUGAR_SERVE'];
         } elseif ($type === Subscription::SUGAR_SELL_KEY) {
             return $mod_strings['LBL_LICENSE_SUGAR_SELL'];
+        } elseif ($type === Subscription::SUGAR_HINT_KEY) {
+            return $mod_strings['LBL_LICENSE_SUGAR_HINT'];
         } elseif ($type === Subscription::SUGAR_BASIC_KEY) {
             global $sugar_flavor;
             $mod_strings = return_module_language($current_language, 'Home');
@@ -988,8 +1018,12 @@ class User extends Person {
      */
     public function retrieve($id = -1, $encode = true, $deleted = true) {
         $ret = parent::retrieve($id, $encode, $deleted);
+
         //CurrentUserApi needs a consistent timestamp/format of the data modified for hash purposes.
-        $this->hashTS = $this->fetched_row['date_modified'];
+        if ($this->fetched_row !== false) {
+            $this->hashTS = $this->fetched_row['date_modified'];
+        }
+
 		if ($ret) {
 			if (isset($_SESSION)) {
 				$this->loadPreferences();
@@ -1017,13 +1051,13 @@ class User extends Person {
      */
     public function retrieve_by_email_address($email)
     {
-        $query = 'SELECT u.id FROM users u 
+        $query = 'SELECT u.id FROM users u
                   INNER JOIN email_addr_bean_rel eabr ON eabr.bean_id = u.id
                   INNER JOIN email_addresses ea ON ea.id = eabr.email_address_id
                   WHERE ea.email_address_caps = ? AND eabr.bean_module = ? AND ea.deleted = 0 AND eabr.deleted = 0 ';
         $stmt = $this->db->getConnection()->executeQuery(
             $query,
-            [strtoupper($email), $this->module_name]
+            [sugarStrToUpper($email), $this->module_name]
         );
         $id = $stmt->fetchColumn();
         // retrieve returns User or null so keep null instead of FALSE for compatibility
@@ -1344,12 +1378,16 @@ class User extends Person {
 	}
 
 	/**
-	 * @return -- returns a list of all users in the system.
-	 * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc..
+     * @return bool -- returns a list of all users in the system.
+     * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc..
 	 * All Rights Reserved..
 	 * Contributor(s): ______________________________________..
      * @throws SugarApiExceptionNotAuthorized - If coming from an API entry point and
      * creating a duplicate user_name or when a user reports to himself.
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionMissingParameter
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
 	 */
 	function verify_data($ieVerified=true) {
 		global $mod_strings, $current_user;
@@ -1380,8 +1418,8 @@ class User extends Person {
                     $already_seen_list[$check_user] = 1;
                     $stmt->bindValue(1, $check_user);
                     $stmt->execute();
-                    $row = $stmt->fetch();
-                    $check_user = $row['reports_to_id'];
+
+                    $check_user = $stmt->fetchColumn();
                 }
                 $stmt->closeCursor();
             }
@@ -1391,7 +1429,7 @@ class User extends Person {
 				$verified = false;
                 // Due to the amount of legacy code and no clear separation between logic and presentation layers, this
                 // is a temporary fix to make sure that users don't report to themselves under API flows.
-                if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') === 'api') {
+                if (isFromApi()) {
                     throw new SugarApiExceptionNotAuthorized('ERR_REPORT_LOOP', null, $this->module_name);
                 }
 			}
@@ -1411,15 +1449,25 @@ class User extends Person {
 		if (!empty($dup_users)) {
             // Due to the amount of legacy code and no clear separation between logic and presentation layers, this is
             // a temporary fix in order to make sure that duplicate users are not created under API flows.
-            if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') === 'api') {
+            if (isFromApi()) {
                 throw new SugarApiExceptionNotAuthorized('ERR_USER_NAME_EXISTS', array($this->user_name), $this->module_name);
             }
             $error = string_format(translate('ERR_USER_NAME_EXISTS', $this->module_name), array($this->user_name));
             $this->error_string .= $error;
-
+            $this->isDuplicateRecord = true;
             $verified = false;
 		}
-
+        // license type check
+        $licenseType = $this->processLicenseTypes($this->license_type);
+        if (!empty($licenseType)
+            && $this->validateLicenseTypes($licenseType)
+            && !$this->hasMangoLicenseTypes($this->license_type)) {
+            if (isFromApi()) {
+                throw new SugarApiExceptionMissingParameter('ERR_USER_MISSING_LICENSE_TYPE');
+            }
+            $this->error_string .= translate('ERR_USER_MISSING_LICENSE_TYPE', $this->module_name);
+            $verified = false;
+        }
 		if (is_admin($current_user)) {
             $query = 'SELECT COUNT(*) AS c FROM users WHERE is_admin = 1 AND deleted = 0';
             $remaining_admins = $conn->fetchColumn($query);
@@ -1851,12 +1899,12 @@ class User extends Person {
 		$ret1 = '';
 		$ret2 = '';
 		for($i=0; $i<strlen($macro); $i++) {
-			if(array_key_exists($macro{$i}, $format)) {
-				$ret1 .= "<i>".$format[$macro{$i}]."</i>";
-				$ret2 .= "<i>".$name[$macro{$i}]."</i>";
+            if (array_key_exists($macro[$i], $format)) {
+                $ret1 .= '<i>' . $format[$macro[$i]] . '</i>';
+                $ret2 .= '<i>' . $name[$macro[$i]] . '</i>';
 			} else {
-				$ret1 .= $macro{$i};
-				$ret2 .= $macro{$i};
+                $ret1 .= $macro[$i];
+                $ret2 .= $macro[$i];
 			}
 		}
 		return $ret1."<br />".$ret2;
@@ -1995,7 +2043,10 @@ class User extends Person {
      * @return array
      */
     public function getDeveloperModules() {
-        $cache = AclCache::getInstance();
+        if ($this->id === null) {
+            return [];
+        }
+        $cache = Container::getInstance()->get(AclCacheInterface::class);
         $modules = $cache->retrieve($this->id, 'developer_modules');
         if ($modules === null) {
             $modules = $this->_getModulesForACL('dev');
@@ -2037,7 +2088,10 @@ class User extends Person {
      * @return array
      */
     public function getAdminModules() {
-        $cache = AclCache::getInstance();
+        if ($this->id === null) {
+            return [];
+        }
+        $cache = Container::getInstance()->get(AclCacheInterface::class);
         $modules = $cache->retrieve($this->id, 'admin_modules');
         if ($modules === null) {
             $modules = $this->_getModulesForACL('admin');
@@ -2464,21 +2518,49 @@ class User extends Person {
     public static function getReporteesWithLeafCount($userId, $includeDeleted = false, $additionalFields = [])
     {
         $qb = DBManagerFactory::getConnection()->createQueryBuilder();
-        $expr = $qb->expr();
+
+        $whereNonDeleted = $qb->expr()
+            ->andX()
+            ->add("u.status = 'Active'")
+            ->add("u.deleted = 0");
+        if (!$includeDeleted) {
+            $whereCondition = $whereNonDeleted;
+        } else {
+            $whereDeleted = $qb->expr()
+                ->andX()
+                ->add("u.deleted = 1");
+            $whereCondition =  $qb->expr()
+                ->orX()
+                ->add($whereNonDeleted)
+                ->add($whereDeleted);
+        }
+
         $qb->select(['u.id', 'sum(CASE WHEN u2.id IS NULL THEN 0 ELSE 1 END) total'])
             ->from('users', 'u')
-            ->where($expr->eq('u.reports_to_id', $qb->createPositionalParameter($userId)))
-            ->andWhere("u.status = 'Active'")
+            ->where($qb->expr()->eq('u.reports_to_id', $qb->createPositionalParameter($userId)))
+            ->andWhere($whereCondition)
             ->groupBy('u.id');
 
-        $joinWhere = $expr->andX()
-            ->add('u.id = u2.reports_to_id')
-            ->add("u2.status = 'Active'");
+        $joinWhereNonDeleted = $qb->expr()
+            ->andX()
+            ->add("u2.status = 'Active'")
+            ->add("u2.deleted = 0");
 
         if (!$includeDeleted) {
-            $qb->andWhere('u.deleted = 0');
-            $joinWhere->add('u2.deleted = 0');
+            $joinWhereCondition = $joinWhereNonDeleted;
+        } else {
+            $joinWhereDeleted = $qb->expr()
+                ->andX()
+                ->add("u2.deleted = 1");
+            $joinWhereCondition =  $qb->expr()
+                ->orX()
+                ->add($joinWhereNonDeleted)
+                ->add($joinWhereDeleted);
         }
+
+        $joinWhere = $qb->expr()->andX()
+            ->add('u.id = u2.reports_to_id')
+            ->add($joinWhereCondition);
 
         $qb->leftJoin('u', 'users', 'u2', $joinWhere);
 
@@ -2576,7 +2658,6 @@ class User extends Person {
         unset($row['user_preferences']);
         return parent::populateFromRow($row, $convert);
     }
-
 
     /**
      * Replace instance variables in email templates for a particular message part.
@@ -3006,5 +3087,61 @@ class User extends Person {
     protected function getSystemSubscriptionKeys() : array
     {
         return array_keys(SubscriptionManager::instance()->getSystemSubscriptionKeys());
+    }
+
+    /**
+     * Can user be authenticated?
+     *
+     * @return bool
+     */
+    public function canBeAuthenticated(): bool
+    {
+        return !empty($this->user_name) || $this->external_auth_only;
+    }
+
+    /**
+     * Checks if a user has a license by name
+     * @param string $license System license key like SUGAR_SERVE or SUGAR SELL
+     * @param bool $prepend Whether to add the SUGAR_ prefix
+     * @return boolean
+     */
+    final public function hasLicense(string $license, $prepend = true) : bool
+    {
+        if ($prepend && stripos($license, 'sugar_') === false) {
+            $license = 'SUGAR_' . strtoupper($license);
+        }
+
+        return in_array($license, $this->getLicenseTypes());
+    }
+
+    protected function getDeleteUpdateParams(string $date = null, string $userId = null)
+    {
+        $params = parent::getDeleteUpdateParams($date, $userId);
+        $params['status'] = 'Inactive';
+        $params['employee_status'] = 'Terminated';
+
+        return $params;
+    }
+
+    /**
+     * check if license types contain at least one Mango license type
+     * @param mixed $licenseTypes
+     * @return bool
+     */
+    protected function hasMangoLicenseTypes($licenseTypes) : bool
+    {
+        if (empty($licenseTypes)) {
+            return true;
+        }
+
+        if (is_string($licenseTypes)) {
+            $licenseTypes = $this->processLicenseTypes($licenseTypes);
+        }
+        foreach ($licenseTypes as $type) {
+            if (Subscription::isMangoKey($type)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

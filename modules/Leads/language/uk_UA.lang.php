@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Інформаційна панель списку інтересів',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Інформаційна панель записів інтересів',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель потенційних клієнтів',
 
     'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису, щоб видалити інтерес.<br />.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Опис контрагента',
@@ -325,4 +326,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Не вдалося змінити статус модуля {{moduleSingular}}. Модуль {{moduleSingular}} уже конвертовано.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Передбачення щодо конвертації потенційних клієнтів',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Переглянути докладні відомості про певного потенційного клієнта',
 );

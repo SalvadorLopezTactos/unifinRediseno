@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Comptes d&#39;e-mails sortants',
     'LBL_MODULE_NAME_SINGULAR' => 'Compte d&#39;e-mails sortants',
+    'LBL_STATUS' => 'Statut',
     'LBL_MAIL_SENDTYPE' => 'Agent de transfert d&#39;e-mails',
     'LBL_MAIL_SMTPSERVER' => 'Serveur',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Ceci est le compte système.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID d&#39;adresse e-mail',
     'LBL_TYPE' => 'Type',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adresse e-mail autorisée',
+    'LBL_FROM_EMAIL_ADDRESS' => 'E-mail de l&#39;expéditeur',
     'LBL_REPLY_TO_NAME' => 'Nom du "Répondre à"',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adresses e-mail du "Répondre à"',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID d&#39;adresse e-mail du "Répondre à"',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adresse e-mail du "Répondre à"',
     'LBL_PRIMARY_TEAM' => 'Équipe principale',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Paramètres emails',
 );

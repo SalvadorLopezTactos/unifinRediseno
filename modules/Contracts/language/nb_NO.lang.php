@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Endret av Bruker ID',
     'LBL_EXPORT_CREATED_BY' => 'Opprettet Av ID',
     'LBL_EXPORT_TYPE_NAME' => 'Typenavn',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Kontrakter fokusskuff',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Registerdashbord for kontrakter',
 );

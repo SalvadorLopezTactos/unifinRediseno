@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Hívások listája műszerfal',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Hívás bejegyzések műszerfal',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás hívása',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Hívások',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Felelős',
     'LBL_LIST_MY_CALLS' => 'Hívásaim',
     'LBL_MY_SCHEDULED_CALLS' => 'Ütemezett Hívásaim',
+    'LBL_GUEST_CALLS' => 'Hívásaim vendégként',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Ütemezett hívásaim vendégként',
     'LBL_SELECT_FROM_DROPDOWN' => 'Kérem, válasszon először a kapcsolódó egységek legördülő listájából!',
 	'LBL_ASSIGNED_TO_NAME' => 'Felelős',
 	'LBL_ASSIGNED_TO_ID' => 'Hozzárendelt felhasználó',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Mégsem',
     'LBL_EMPTY_SEARCH_RESULT' => 'Nincs találat. Kérem, hozzon létre alább egy meghívottat!',
     'LBL_NO_ACCESS' => 'Nem jogosult $module létrehozására',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect kapcsolatfelvételi azonosító',
+
     'LBL_REPEAT_TYPE' => 'Típus megismétlése',
     'LBL_REPEAT_INTERVAL' => 'Intervallum megismétlése',
     'LBL_REPEAT_END' => 'Vége',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Hívás vele: {{{this}}}',
     'LBL_SEND_INVITES' => 'Meghívók küldése',
     'LBL_REMINDER_TITLE' => 'Hívás:',
+    'LBL_CALL_RECORDING_URL' => 'Felvétel hivatkozása',
+    'LBL_CALL_RECORDING' => 'Felvétel',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Ön ezt ütemezte: {{moduleSingularLower}} {{name}} ehhez {{formatDate date_start}}.',

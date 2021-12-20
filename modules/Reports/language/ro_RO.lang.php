@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Eroare la recuperarea datelor din raportul detaliat pentru această acțiune. Contactați proprietarul raportului pentru asistență.',
     'LBL_CHART_NO_DRILLTHRU' => 'Raport detaliat nedisponibil',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare rapoarte',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'O vizualizare de tip listă a unui modul afişează toate rapoartele care îndeplinesc criteriile de căutare curente şi la care utilizatorii au acces. Puteţi vizualiza detaliile de bază ale fiecărui raport în coloanele câmpului din vizualizarea listă și în previzualizare. Puteți seta etichete pentru rapoarte și puteți crea filtre. Faceți clic pe numele raportului pentru a vizualiza raportul sau selectați „Editare raport” în meniul de acțiuni pentru a modifica raportul.',

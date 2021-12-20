@@ -177,6 +177,16 @@
     },
 
     /**
+     * Open a document.
+     * @param {string} module Module name
+     * @param {string} id Record id
+     */
+    _openDocument: function(module, id) {
+        var route = app.router.buildRoute(module, id);
+        app.router.navigate(route, {trigger: true});
+    },
+
+    /**
      * Handle tree selection.
      * @param data {Object} Selected item.
      */
@@ -187,8 +197,7 @@
                     break;
                 }
                 if (!this.$el.find('[data-id=' + data.id +']').data('disabled')) {
-                    var route = app.router.buildRoute(this.extraModule.module, data.id);
-                    app.router.navigate(route, {trigger: true});
+                    this._openDocument(this.extraModule.module, data.id);
                 }
                 break;
             case 'folder':
@@ -210,7 +219,7 @@
      */
     treeLoaded: function() {
         var self = this;
-        if (this.collection === undefined) {
+        if (_.isEmpty(this.collection)) {
             return false;
         }
         this.bulkLoadLeafs(this.collection.models, function() {
@@ -377,8 +386,7 @@
                 return;
             }
             if (!this.$el.find('[data-id=' + data.id +']').data('disabled')) {
-                var route = app.router.buildRoute(this.extraModule.module, data.id);
-                app.router.navigate(route, {trigger: true});
+                this._openDocument(this.extraModule.module, data.id);
             }
             return;
         }

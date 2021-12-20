@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Per Informe',
     'LBL_RECENTLY_MODIFIED' => 'Modificat recentment',
     'LBL_RECORD_SAVED_SUCCESS' => 'Heu creat correctament el {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Obriu el programa per afegir usuaris des del Subpanell d&#39;usuaris.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Programa d&#39;aquest informe',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de programes d&#39;informe',
 );

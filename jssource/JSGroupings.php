@@ -149,7 +149,7 @@
             'include/javascript/quicksearch.js'                         => 'include/javascript/sugar_grp1_yui.js',
             'include/javascript/yui/build/menu/menu-min.js'             => 'include/javascript/sugar_grp1_yui.js',
 			'include/javascript/sugar_connection_event_listener.js'     => 'include/javascript/sugar_grp1_yui.js',
-			'include/javascript/yui/build/calendar/calendar.js'     => 'include/javascript/sugar_grp1_yui.js',
+            'include/javascript/yui/build/calendar/calendar-min.js'     => 'include/javascript/sugar_grp1_yui.js',
             'include/javascript/yui/build/history/history.js'     => 'include/javascript/sugar_grp1_yui.js',
             'include/javascript/yui/build/resize/resize-min.js'     => 'include/javascript/sugar_grp1_yui.js',
             ),
@@ -211,7 +211,6 @@
             $sugar_grp_quick_compose = array(
             'include/javascript/jsclass_base.js' => 'include/javascript/sugar_grp_quickcomp.js',
             'include/javascript/jsclass_async.js' => 'include/javascript/sugar_grp_quickcomp.js',
-            'modules/Emails/javascript/vars.js' => 'include/javascript/sugar_grp_quickcomp.js',
             'include/SugarFields/Fields/Collection/SugarFieldCollection.js' => 'include/javascript/sugar_grp_quickcomp.js', //For team selection
             'modules/Emails/javascript/EmailUIShared.js' => 'include/javascript/sugar_grp_quickcomp.js',
             'modules/Emails/javascript/ajax.js' => 'include/javascript/sugar_grp_quickcomp.js',
@@ -279,6 +278,8 @@
                     'include/javascript/sugar7/plugins/ToggleMoreLess.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/Contacts/clients/base/plugins/ContactsPortalMetadataFilter.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/pmse_Inbox/clients/base/plugins/ProcessActions.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'modules/Opportunities/clients/base/plugins/Cascade.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'modules/PurchasedLineItems/clients/base/plugins/PurchaseAndServiceChangeHandler.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/HistoricalSummary.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/MetadataEventDriven.js' =>
                         'include/javascript/sugar_sidecar.min.js',
@@ -297,6 +298,7 @@
                     'include/javascript/sugar7/plugins/Editable.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ListEditable.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/FilterSharing.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/ExternalApp.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ListRemoveLinks.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/File.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/FieldDuplicate.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -314,6 +316,7 @@
                     'include/javascript/sugar7/plugins/Chart.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/EmailClientLaunch.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/KBContents/clients/base/plugins/KBContent.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'modules/EmailTemplates/clients/base/plugins/EmailTemplates.js' => 'include/javascript/sugar_sidecar.min.js',
                     'modules/Teams/clients/base/plugins/TbACLs.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/KBContents/clients/base/plugins/KBNotify.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Tinymce.js'  => 'include/javascript/sugar_sidecar.min.js',
@@ -329,6 +332,14 @@
                     'include/javascript/tinymce4/jquery.tinymce.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/mousetrap/mousetrap.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/clipboardjs/clipboard.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                    // Library for flex-grid layouts
+                    'include/javascript/gridstack/gridstack-poly.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/gridstack/gridstack.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/gridstack/gridstack.JQueryUI.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/FocusDrawer.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/DashletSearchControls.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/dom-purify/purify.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/userAgent.js' => 'include/javascript/sugar_sidecar.min.js',
                )
            ),
 

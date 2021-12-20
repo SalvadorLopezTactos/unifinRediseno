@@ -14,6 +14,19 @@
     /**
      * @inheritdoc
      *
+     * Change layout type to 'records' for pipeline view.
+     */
+    getFilterEditStateKey: function() {
+        if (this.layoutType === 'pipeline-records') {
+            return app.user.lastState.key('edit-' + this.layout.currentModule + '-records', this);
+        } else {
+            return this._super('getFilterEditStateKey');
+        }
+    },
+
+    /**
+     * @inheritdoc
+     *
      * Applies pipeline filters if layout type is pipeline-records
      */
     applyFilter: function(query, dynamicFilterDef) {

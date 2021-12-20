@@ -808,7 +808,7 @@ abstract class MssqlManager extends DBManager
 
     /**
      * @see DBManager::getAffectedRowCount()
-     * 
+     *
      * Returns the number of rows affected by the last query
 	 * See also affected_rows capability, will return 0 unless the DB supports it
      * @param resource $result query result resource
@@ -900,6 +900,9 @@ WHERE TABLE_NAME = ?
         '%Y-%m-%d' => 10,
         '%Y-%m' => 7,
         '%Y' => 4,
+        '%x' => [
+            'format' => 'isoyear',
+        ],
         '%v' => array(
             'format' => 'isoww',
             'function' => 'datepart',
@@ -936,7 +939,17 @@ WHERE TABLE_NAME = ?
                 if(!empty($additional_parameters) && isset($this->date_formats[$additional_parameters[0]])) {
                     $parameters = $this->date_formats[$additional_parameters[0]];
                     if (is_array($parameters) && isset($parameters['format']) && isset($parameters['function'])) {
-                        return "{$parameters['function']}({$parameters['format']}, $string)";
+                        // because unlike other DBs, MsSql returns single digit response `1-9` for first 9 weeks
+                        // instead of 2 digits `01-09`, need to format it `00` means format to 2 digits
+                        return "FORMAT({$parameters['function']}({$parameters['format']}, $string), '00')";
+                    } elseif (!empty($parameters['format']) && $parameters['format'] === 'isoyear') {
+                        // SQL Server doesn't support date_format ISO Year code like other DBs
+                        // but ISO Week is supported (use isoww or isowk)
+                        // We need to calculate the associated ISO Year for SQL Server
+                        return "CASE
+                            WHEN DATEPART(isoww, {$string}) > 50 AND MONTH({$string}) = 1 THEN YEAR({$string}) - 1
+                            WHEN DATEPART(isoww, {$string}) = 1 AND MONTH({$string}) = 12 THEN YEAR({$string}) + 1
+                            ELSE YEAR({$string}) END";
                     } else {
                         return "LEFT(CONVERT(varchar($parameters)," . $string . ",120),$parameters)";
                     }
@@ -1280,7 +1293,7 @@ WHERE TABLE_NAME = ?
         return $sql;
     }
 
-    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [], $action = null)
     {
 		return "identity(1,1)";
 	}
@@ -1290,9 +1303,14 @@ WHERE TABLE_NAME = ?
      */
     public function setAutoIncrementStart($table, $field_name, $start_value)
     {
-        if($start_value > 1)
-            $start_value -= 1;
-		$this->query("DBCC CHECKIDENT ('$table', RESEED, $start_value) WITH NO_INFOMSGS");
+        $new_start_value = $start_value;
+        $prev_rows = $this->getOne("select NULL from $table");
+
+        if ($prev_rows !== false) {
+            $new_start_value = $start_value - 1;
+        }
+
+        $this->query("DBCC CHECKIDENT ('$table', RESEED, $new_start_value) WITH NO_INFOMSGS");
         return true;
     }
 
@@ -1301,8 +1319,13 @@ WHERE TABLE_NAME = ?
      */
     public function getAutoIncrement($table, $field_name)
     {
-		$result = $this->getOne("select IDENT_CURRENT('$table') + IDENT_INCR ( '$table' ) as 'Auto_increment'");
-        return $result;
+        $result = $this->getOne("select IDENT_CURRENT('$table') as 'Auto Increment'");
+        if (!empty($result)) {
+            $prev_rows = $this->getOne("select NULL from $table");
+
+            return $prev_rows === false ? $result : $result + 1;
+        }
+        return "";
     }
 
     /** {@inheritDoc} */
@@ -1393,69 +1416,14 @@ INNER JOIN sys.columns c
     }
 
     /**
-     * @see DBManager::get_columns()
-     */
-    public function get_columns($tablename)
-    {
-        // Sanity check for getting columns
-        if (empty($tablename)) {
-            $this->logger->error(__METHOD__ . ' called with an empty tablename argument');
-            return array();
-        }        
-
-        //find all unique indexes and primary keys.
-        $result = $this->query("sp_columns $tablename");
-
-        $columns = array();
-        while (($row=$this->fetchByAssoc($result)) !=null) {
-            $column_name = strtolower($row['COLUMN_NAME']);
-            $columns[$column_name]['name']=$column_name;
-            $columns[$column_name]['type']=strtolower($row['TYPE_NAME']);
-            if ( $row['TYPE_NAME'] == 'decimal' ) {
-                $columns[$column_name]['len']=strtolower($row['PRECISION']);
-                $columns[$column_name]['len'].=','.strtolower($row['SCALE']);
-            }
-			elseif ( in_array($row['TYPE_NAME'],array('nchar','nvarchar')) )
-				$columns[$column_name]['len']=strtolower($row['PRECISION']);
-            elseif ( !in_array($row['TYPE_NAME'],array('datetime','text')) )
-                $columns[$column_name]['len']=strtolower($row['LENGTH']);
-            if ( stristr($row['TYPE_NAME'],'identity') ) {
-                $columns[$column_name]['auto_increment'] = '1';
-                $columns[$column_name]['type']=str_replace(' identity','',strtolower($row['TYPE_NAME']));
-            }
-            if (strtolower($row['TYPE_NAME']) == 'ntext') {
-                $columns[$column_name]['type'] = 'nvarchar';
-                $columns[$column_name]['len'] = 'max';
-            }
-
-            if (!empty($row['IS_NULLABLE']) && $row['IS_NULLABLE'] == 'NO' && (empty($row['KEY']) || !stristr($row['KEY'],'PRI')))
-                $columns[strtolower($row['COLUMN_NAME'])]['required'] = 'true';
-
-            $column_def = 1;
-            if ( strtolower($tablename) == 'relationships' ) {
-                $column_def = $this->getOne("select cdefault from syscolumns where id = object_id('relationships') and name = '$column_name'");
-            }
-            if ( $column_def != 0 && ($row['COLUMN_DEF'] != null)) {	// NOTE Not using !empty as an empty string may be a viable default value.
-                $matches = array();
-                $row['COLUMN_DEF'] = html_entity_decode($row['COLUMN_DEF'],ENT_QUOTES);
-                if ( preg_match('/\([\(|\'](.*)[\)|\']\)/i',$row['COLUMN_DEF'],$matches) )
-                    $columns[$column_name]['default'] = $matches[1];
-                elseif ( preg_match('/\(N\'(.*)\'\)/i',$row['COLUMN_DEF'],$matches) )
-                    $columns[$column_name]['default'] = $matches[1];
-                else
-                    $columns[$column_name]['default'] = $row['COLUMN_DEF'];
-            }
-        }
-        return $columns;
-    }
-
-    /**
      * @see DBManager::add_drop_constraint()
+     * @inheritDoc
      */
-    public function add_drop_constraint($table, $definition, $drop = false)
+    public function add_drop_constraint(string $table, array $definition, bool $drop = false): string
     {
         $type         = $definition['type'];
-        $fields       = is_array($definition['fields'])?implode(',',$definition['fields']):$definition['fields'];
+        $fieldsListSQL = implode(',', $definition['fields']);
+        $fieldsListSQLNotNull = implode(' IS NOT NULL AND ', $definition['fields']) . ' IS NOT NULL';
         $name         = $definition['name'];
         $sql          = '';
 
@@ -1466,32 +1434,32 @@ INNER JOIN sys.columns c
             if ($drop)
                 $sql = "DROP INDEX {$name} ON {$table}";
             else
-                $sql = "CREATE INDEX {$name} ON {$table} ({$fields})";
+                $sql = "CREATE INDEX {$name} ON {$table} ({$fieldsListSQL})";
             break;
         case 'clustered':
             if ($drop)
                 $sql = "DROP INDEX {$name} ON {$table}";
             else
-                $sql = "CREATE CLUSTERED INDEX $name ON $table ($fields)";
+                $sql = "CREATE CLUSTERED INDEX $name ON $table ($fieldsListSQL)";
             break;
             // constraints as indices
         case 'unique':
             if ($drop)
                 $sql = "ALTER TABLE {$table} DROP CONSTRAINT $name";
             else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} UNIQUE ({$fields})";
+                $sql = "CREATE UNIQUE INDEX {$name} ON {$table} ({$fieldsListSQL}) WHERE " . $fieldsListSQLNotNull;
             break;
         case 'primary':
             if ($drop)
                 $sql = "ALTER TABLE {$table} DROP CONSTRAINT {$name}";
             else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fieldsListSQL})";
             break;
         case 'foreign':
             if ($drop)
-                $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fieldsListSQL})";
             else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name}  FOREIGN KEY ({$fields}) REFERENCES {$definition['foreignTable']}({$definition['foreignFields']})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name}  FOREIGN KEY ({$fieldsListSQL}) REFERENCES {$definition['foreignTable']}({$definition['foreignFields']})";
             break;
         }
         return $sql;
@@ -1584,7 +1552,7 @@ EOQ;
     /**
      * @see DBManager::oneColumnSQLRep()
      */
-    protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false)
+    protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
     {
         if (!empty($fieldDef['len'])) {
             // Variable-length can be a value from 1 through 8,000 or 4,000 for (n).
@@ -1634,7 +1602,7 @@ EOQ;
 		}
 
 		// always return as array for post-processing
-		$ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true);
+        $ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true, $action);
 
 		// Bug 24307 - Don't add precision for float fields.
 		if ( stristr($ref['colType'],'float') )

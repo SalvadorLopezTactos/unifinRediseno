@@ -11,38 +11,41 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-// ENT/ULT only fields
+// PRO/CORP only fields
 $fields = array(
     array(
-        'name' => 'opportunity_name',
-        'filter_relate' => array(
-            'account_id' => 'account_id',
-        ),
+        'name' => 'product_template_name',
     ),
     array(
-        'name' => 'account_name',
-        'readonly' => true,
+        'name' => 'spacer', // we need this for when forecasts is not setup and we also need to remove the spacer
+        'span' => 6,
+        'readonly' => true
     ),
-    'sales_stage',
-    'probability',
-    array(
-        'name' => 'commit_stage',
-        'span' => 6
-    ),
-    array(
-        'name' => 'date_closed',
-        'related_fields' => array(
-            'date_closed_timestamp'
-        )
-    ),
-    'product_template_name',
-    array(
-        'name' => 'category_name',
-        'type' => 'relate',
-        'label' => 'LBL_CATEGORY',
-    ),
+    'account_name',
+    'status',
     'quantity',
+    array(
+        'name' => 'cost_price',
+        'type' => 'currency',
+        'related_fields' => array(
+            'currency_id',
+            'base_rate',
+        ),
+        'convertToBase' => true,
+        'currency_field' => 'currency_id',
+        'base_rate_field' => 'base_rate',
+    ),
+    array(
+        'name' => 'list_price',
+        'type' => 'currency',
+        'related_fields' => array(
+            'currency_id',
+            'base_rate',
+        ),
+        'convertToBase' => true,
+        'currency_field' => 'currency_id',
+        'base_rate_field' => 'base_rate',
+    ),
     array(
         'name' => 'discount_price',
         'type' => 'currency',
@@ -70,12 +73,25 @@ $fields = array(
         'base_rate_field' => 'base_rate',
     ),
     array(
-        'name' => 'total_amount',
-        'type' => 'currency',
-        'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
+        'name' => 'discount_rate_percent',
         'readonly' => true,
+    ),
+    array(
+        'name' => 'tag',
+        'span' => 12,
+    ),
+);
+
+$fieldsHidden = array(
+    'serial_number',
+    'contact_name',
+    'asset_number',
+    'date_purchased',
+    array(
+        'name' => 'book_value',
+        'type' => 'currency',
         'related_fields' => array(
-            'total_amount',
+            'book_value',
             'currency_id',
             'base_rate',
         ),
@@ -83,6 +99,94 @@ $fields = array(
         'showTransactionalAmount' => true,
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
+    ),
+    'date_support_starts',
+    'book_value_date',
+    'date_support_expires',
+    'website',
+    'tax_class',
+    'manufacturer_name',
+    'weight',
+    'mft_part_num',
+    array(
+        'name' => 'category_name',
+        'type' => 'productCategoriesRelate',
+        'label' => 'LBL_CATEGORY',
+        'readonly' => true
+    ),
+    'vendor_part_num',
+    'product_type',
+    array(
+        'name' => 'description',
+        'span' => 12,
+    ),
+    'support_name',
+    'support_contact',
+    'support_description',
+    'support_term',
+    array(
+        'name' => 'date_entered_by',
+        'readonly' => true,
+        'inline' => true,
+        'type' => 'fieldset',
+        'label' => 'LBL_DATE_ENTERED',
+        'fields' => array(
+            array(
+                'name' => 'date_entered',
+            ),
+            array(
+                'type' => 'label',
+                'default_value' => 'LBL_BY',
+            ),
+            array(
+                'name' => 'created_by_name',
+            ),
+        ),
+    ),
+    array(
+        'name' => 'date_modified_by',
+        'readonly' => true,
+        'inline' => true,
+        'type' => 'fieldset',
+        'label' => 'LBL_DATE_MODIFIED',
+        'fields' => array(
+            array(
+                'name' => 'date_modified',
+            ),
+            array(
+                'type' => 'label',
+                'default_value' => 'LBL_BY',
+            ),
+            array(
+                'name' => 'modified_by_name',
+            ),
+        ),
+    ),
+);
+
+// ENT/ULT only fields
+$fields = array(
+    array(
+        'name' => 'opportunity_name',
+        'filter_relate' => array(
+            'account_id' => 'account_id',
+        ),
+    ),
+    array(
+        'name' => 'account_name',
+        'readonly' => true,
+    ),
+    'sales_stage',
+    'probability',
+    array(
+        'name' => 'commit_stage',
+        'span' => 6
+    ),
+    array(
+        'name' => 'date_closed',
+        'related_fields' => array(
+            'date_closed_timestamp'
+        )
     ),
     array(
         'name' => 'likely_case',
@@ -97,23 +201,7 @@ $fields = array(
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
     ),
-    array(
-        'name' => 'quote_name',
-        'label' => 'LBL_ASSOCIATED_QUOTE',
-        'related_fields' => array('quote_id'),
-        // this is a hack to get the quote_id field loaded
-        'readonly' => true,
-        'related_fields' => array(
-            'mft_part_num',
-        ),
-    ),
-    array(
-        'name' => 'tag',
-        'span' => 12,
-    ),
-);
-
-$fieldsHidden = array(
+    'product_type',
     array(
         'name' => 'best_case',
         'type' => 'currency',
@@ -140,11 +228,76 @@ $fieldsHidden = array(
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
     ),
-    'renewable' => array(
-        'name' => 'renewable',
-        'label' => 'LBL_RENEWABLE',
-        'type' => 'bool',
+    'product_template_name',
+    array(
+        'name' => 'category_name',
+        'type' => 'relate',
+        'label' => 'LBL_CATEGORY',
     ),
+    'quantity',
+    array(
+        'name' => 'discount_price',
+        'type' => 'currency',
+        'related_fields' => array(
+            'discount_price',
+            'currency_id',
+            'base_rate',
+        ),
+        'convertToBase' => true,
+        'showTransactionalAmount' => true,
+        'currency_field' => 'currency_id',
+        'base_rate_field' => 'base_rate',
+    ),
+    array(
+        'name' => 'discount_field',
+        'type' => 'fieldset',
+        'css_class' => 'discount-field',
+        'label' => 'LBL_DISCOUNT_AMOUNT',
+        'show_child_labels' => false,
+        'sortable' => false,
+        'fields' => array(
+            array(
+                'name' => 'discount_amount',
+                'label' => 'LBL_DISCOUNT_AMOUNT',
+                'type' => 'discount-amount',
+                'discountFieldName' => 'discount_select',
+                'related_fields' => array(
+                    'currency_id',
+                ),
+                'convertToBase' => true,
+                'base_rate_field' => 'base_rate',
+                'showTransactionalAmount' => true,
+            ),
+            array(
+                'type' => 'discount-select',
+                'name' => 'discount_select',
+                'options' => array(),
+            ),
+        ),
+    ),
+    array(
+        'name' => 'total_amount',
+        'type' => 'currency',
+        'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
+        'readonly' => true,
+        'related_fields' => array(
+            'total_amount',
+            'currency_id',
+            'base_rate',
+        ),
+        'convertToBase' => true,
+        'showTransactionalAmount' => true,
+        'currency_field' => 'currency_id',
+        'base_rate_field' => 'base_rate',
+    ),
+    array(
+        'name' => 'tag',
+        'span' => 12,
+    ),
+);
+
+$fieldsHidden = array(
+    'service',
     array(
         'name' => 'service_duration',
         'type' => 'fieldset',
@@ -163,7 +316,6 @@ $fieldsHidden = array(
             ),
         ),
     ),
-    'service',
     'service_start_date' => array(
         'name' => 'service_start_date',
         'label' => 'LBL_SERVICE_START_DATE',
@@ -174,12 +326,17 @@ $fieldsHidden = array(
         'label' => 'LBL_SERVICE_END_DATE',
         'type' => 'service-enddate',
     ),
-    'next_step',
-    'product_type',
+    'renewable' => array(
+        'name' => 'renewable',
+        'label' => 'LBL_RENEWABLE',
+        'type' => 'bool',
+    ),
+    'add_on_to_name' => [
+        'name' => 'add_on_to_name',
+        'type' => 'add-on-to',
+    ],
     'lead_source',
-    'campaign_name',
-    'assigned_user_name',
-    'team_name',
+    'next_step',
     array(
         'name' => 'description',
         'span' => 12,
@@ -198,7 +355,6 @@ $fieldsHidden = array(
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
     ),
-    'tax_class',
     array(
         'name' => 'cost_price',
         'readonly' => true,
@@ -213,6 +369,10 @@ $fieldsHidden = array(
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
     ),
+    'tax_class',
+    'name' => 'purchasedlineitem_name',
+    'team_name',
+    'assigned_user_name',
     array(
         'name' => 'date_entered_by',
         'readonly' => true,
@@ -382,7 +542,6 @@ $viewdefs['RevenueLineItems']['base']['view']['record'] = array(
                 ),
                 array(
                     'name' => 'name',
-                    'label' => 'LBL_MODULE_NAME_SINGULAR'
                 ),
                 array(
                     'name' => 'favorite',

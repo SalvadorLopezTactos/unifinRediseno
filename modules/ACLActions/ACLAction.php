@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\ACL\Cache;
+
 require_once('modules/ACLActions/actiondefs.php');
 
 /**
@@ -199,12 +202,12 @@ class ACLAction  extends SugarBean
 
     protected static function loadFromCache($user_id, $type)
     {
-        return AclCache::getInstance()->retrieve($user_id, $type);
+        return Container::getInstance()->get(Cache::class)->retrieve($user_id, $type);
     }
 
     protected static function storeToCache($user_id, $type, $data)
     {
-        return AclCache::getInstance()->store($user_id, $type, $data);
+        return Container::getInstance()->get(Cache::class)->store($user_id, $type, $data);
     }
 
     /**
@@ -222,10 +225,10 @@ class ACLAction  extends SugarBean
             return array();
         }
         //check in the cache if we already have it loaded
-        if(!$refresh && empty(self::$acls[$user_id])) {
+        if (!$refresh && empty(self::$acls[$user_id])) {
             self::$acls[$user_id] = self::loadFromCache($user_id, 'acls');
         }
-        if(!$refresh && !empty(self::$acls[$user_id])){
+        if (!$refresh && !empty(self::$acls[$user_id])){
             if(empty($category) && empty($action)){
                 return self::$acls[$user_id];
             }else{
@@ -588,7 +591,7 @@ SQL;
     public static function clearACLCache()
     {
         self::$acls = array();
-        AclCache::getInstance()->clear();
+        Container::getInstance()->get(Cache::class)->clearAll();
     }
 
     public function save($check_notify = false)
@@ -611,7 +614,10 @@ SQL;
      */
     public static function hasACLs($user_id, $module)
     {
-        if(empty(self::$acls[$user_id])) {
+        if ($user_id === null) {
+            return false;
+        }
+        if (empty(self::$acls[$user_id])) {
             self::$acls[$user_id] = self::loadFromCache($user_id, 'acls');
         }
         return !empty(self::$acls[$user_id][$module]);

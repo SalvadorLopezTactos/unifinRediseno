@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Galimų klientų sąrašo ataskaitų sritis',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Galimų klientų duomenų ataskaitų sritis',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ potencialūs kontaktai',
 
     'ERR_DELETE_RECORD' => 'Įrašo numeris turi būti nurodytas, jeigu norite ištrinti potencialų kontaktą.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Kliento aprašymas',
@@ -325,4 +326,8 @@ After confirming each required and desired module, click the Save and Convert bu
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Nepavyksta pakeisti {{moduleSingular}} būsenos. Šis {{moduleSingular}} jau konvertuotas.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Potencialių klientų konvertavimo numatymas',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Peržiūrėti konkretaus potencialaus klientu numatymo išsamią informaciją',
 );

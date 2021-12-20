@@ -86,6 +86,20 @@ $viewdefs['Cases']['base']['view']['list'] = array(
                     'enabled' => true,
                 ],
                 array(
+                    'name' => 'request_close',
+                    'label' => 'LBL_REQUEST_CLOSE',
+                    'default' => false,
+                    'enabled' => true,
+                    'readonly' => true,
+                ),
+                array(
+                    'name' => 'request_close_date',
+                    'label' => 'LBL_REQUEST_CLOSE_DATE',
+                    'default' => false,
+                    'enabled' => true,
+                    'readonly' => true,
+                ),
+                array(
                     'name' => 'business_center_name',
                     'label' => 'LBL_BUSINESS_CENTER_NAME',
                     'default' => false,

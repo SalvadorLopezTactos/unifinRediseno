@@ -3,11 +3,13 @@
 
 
 # include parseCSV class.
-require_once('../parsecsv.lib.php');
+require __DIR__ . '/../vendor/autoload.php';
+
+use ParseCsv\Csv;
 
 
 # create new parseCSV object.
-$csv = new parseCSV();
+$csv = new Csv();
 
 
 # if sorting is enabled, the whole CSV file
@@ -41,21 +43,29 @@ $csv->auto('_books.csv');
 ?>
 </pre>
 <style type="text/css" media="screen">
-	table { background-color: #BBB; }
-	th { background-color: #EEE; }
-	td { background-color: #FFF; }
+    table {
+        background-color: #BBB;
+    }
+
+    th {
+        background-color: #EEE;
+    }
+
+    td {
+        background-color: #FFF;
+    }
 </style>
-<table border="0" cellspacing="1" cellpadding="3">
-	<tr>
-		<?php foreach ($csv->titles as $value): ?>
-		<th><?php echo $value; ?></th>
-		<?php endforeach; ?>
-	</tr>
-	<?php foreach ($csv->data as $key => $row): ?>
-	<tr>
-		<?php foreach ($row as $value): ?>
-		<td><?php echo $value; ?></td>
-		<?php endforeach; ?>
-	</tr>
-	<?php endforeach; ?>
+<table>
+    <tr>
+        <?php foreach ($csv->titles as $value): ?>
+            <th><?php echo $value; ?></th>
+        <?php endforeach; ?>
+    </tr>
+    <?php foreach ($csv->data as $key => $row): ?>
+        <tr>
+            <?php foreach ($row as $value): ?>
+                <td><?php echo $value; ?></td>
+            <?php endforeach; ?>
+        </tr>
+    <?php endforeach; ?>
 </table>

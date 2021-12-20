@@ -37,6 +37,13 @@
     initialize: function(options) {
         // Use preview view if available, otherwise fallback to record view
         this.dataView = 'preview';
+        /**
+         * From SS-609.
+         * In certain instances of loading a preview, the view may fallback on the record view metadata and therefore be
+         * distinguished as 'record' view instead of 'preview'. This flag allows us to keep track of the origin of this
+         * component so we can update it upon save.
+         */
+        options.context.set('isPreview', true);
         var previewMeta = app.metadata.getView(options.module, 'preview');
         var recordMeta = app.metadata.getView(options.module, 'record');
 
@@ -47,6 +54,7 @@
         this._super('initialize', [options]);
         this.meta = _.extend(this.meta, this._previewifyMetadata(_.extend({}, recordMeta, previewMeta)));
         this.action = 'detail';
+        this.viewAction = 'preview';
         this._delegateEvents();
 
         /**
@@ -101,6 +109,12 @@
                 // redirect to list view
                 var route = app.router.buildRoute(this.module);
                 app.router.navigate(route, {trigger: true});
+            }
+        };
+
+        this.saveCallback = function(wasSaved) {
+            if (wasSaved) {
+                app.events.trigger('preview:edit:save');
             }
         };
     },
@@ -309,7 +323,15 @@
     switchModel: function(model) {
         this.model && this.model.abortFetchRequest();
         this.stopListening(this.model);
+        if (_.isFunction(this.stopSugarLogic)) {
+            this.stopSugarLogic();
+        }
+
         this.model = model;
+
+        if (_.isFunction(this.startSugarLogic)) {
+            this.startSugarLogic();
+        }
 
         // Close preview when model destroyed by deleting the record
         this.listenTo(this.model, 'destroy', function() {

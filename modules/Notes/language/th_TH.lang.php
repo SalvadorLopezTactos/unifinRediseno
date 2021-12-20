@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'แดชบอร์ดรายการโน้ต',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกหมายเหตุ',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'หมายเหตุระบบลิ้นชัก',
 
+    'LBL_RELATED_CONTACT' => 'ที่อยู่ติดต่อที่เกี่ยวข้อง',
     'ERR_DELETE_RECORD' => 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
     'LBL_ACCOUNT_ID' => 'ID บัญชี:',
     'LBL_CASE_ID' => 'ID เคส:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID ที่อยู่ติดต่อ:',
     'LBL_CONTACT_NAME' => 'ที่อยู่ติดต่อ:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'บันทึก',
+    'LBL_ATTACHMENTS' => 'ไฟล์แนบ',
+    'LBL_ATTACHMENT_FLAG' => 'คือไฟล์แนบ',
     'LBL_DESCRIPTION' => 'คำอธิบาย',
     'LBL_EMAIL_ADDRESS' => 'ที่อยู่อีเมล:',
     'LBL_EMAIL_ATTACHMENT' => 'ไฟล์แนบของอีเมล',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'บันทึกและไฟล์แนบ',
     'LBL_NOTE' => 'หมายเหตุ:',
     'LBL_OPPORTUNITY_ID' => 'ID โอกาสทางการขาย:',
+    'LBL_NOTE_PARENT_ID' => 'หมายเหตุ ID หลัก',
     'LBL_PARENT_ID' => 'ID หลัก:',
     'LBL_PARENT_TYPE' => 'ประเภทหลัก',
     'LBL_EMAIL_TYPE' => 'ประเภทอีเมล',

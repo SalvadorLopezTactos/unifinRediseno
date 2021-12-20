@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'ユーザ別役割一覧',
 'LBL_ROLES_SUBPANEL_TITLE'=>'ユーザの役割',
 'LBL_SEARCH_FORM_TITLE'=>'検索',
+'LBL_ACTION_RECORD_VIEW'=>'記録ビュー',
 'LBL_ACTION_VIEW'=>'閲覧',
 'LBL_ACTION_EDIT'=>'編集',
 'LBL_ACTION_DELETE'=>'削除',

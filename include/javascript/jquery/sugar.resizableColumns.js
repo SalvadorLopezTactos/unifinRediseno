@@ -218,6 +218,7 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
                     }
                 };
             })(this));
+            this._expectedWidths = columns;
             return this.$table.trigger('column:resize:save', [columns]);
         };
 

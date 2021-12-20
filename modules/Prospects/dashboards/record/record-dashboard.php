@@ -12,39 +12,40 @@
  */
 
 return [
-    'metadata' =>
-    array(
-        'components' =>
-        array(
-            array(
-                'rows' =>
-                array(
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'planned-activities',
-                                'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'history',
-                                'label' => 'LBL_HISTORY_DASHLET',
-                                'filter' => '7',
-                                'limit' => '10',
-                                'visibility' => 'user',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                ),
+    'metadata' => [
+        'dashlets' => [
+            [
+                'view' => [
+                    'name' => 'active-tasks',
+                    'label' => 'LBL_ACTIVE_TASKS_DASHLET',
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+                'x' => 0,
+                'y' => 0,
+            ],
+            [
+                'view' => [
+                    'type' => 'history',
+                    'label' => 'LBL_HISTORY_DASHLET',
+                    'filter' => '7',
+                    'limit' => '10',
+                    'visibility' => 'user',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 6,
+            ],
+            [
+                'view' => [
+                    'type' => 'planned-activities',
+                    'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 12,
+            ],
+        ],
+    ],
     'name' => 'LBL_TARGETS_RECORD_DASHBOARD',
     'id' => '5d671d06-7b52-11e9-83cf-f218983a1c3e',
 ];

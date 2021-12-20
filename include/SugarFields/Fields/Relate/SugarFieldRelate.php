@@ -21,6 +21,11 @@ class SugarFieldRelate extends SugarFieldBase {
         }else{
             $this->ss->assign('nolink', false);
         }
+
+        if (!isset($displayParams['htmlescape'])) {
+            $displayParams['htmlescape'] = true;
+        }
+
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('DetailView'));
     }
@@ -127,7 +132,9 @@ class SugarFieldRelate extends SugarFieldBase {
         $displayParams['accessKeyClear'] = $keys['accessKeyClear'];
         $displayParams['accessKeyClearLabel'] = $keys['accessKeyClearLabel'];
         $displayParams['accessKeyClearTitle'] = $keys['accessKeyClearTitle'];
-
+        if (!isset($displayParams['htmlescape'])) {
+            $displayParams['htmlescape'] = true;
+        }
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('EditView'));
     }

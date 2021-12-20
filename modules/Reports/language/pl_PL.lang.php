@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Błąd podczas pobierania danych raportu szczegółowego dla tej działania. Aby uzyskać pomoc, skontaktuj się z właścicielem raportu.',
     'LBL_CHART_NO_DRILLTHRU' => 'Raport szczegółowy jest niedostępny',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy raportów',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Widok listy wyświetla wszystkie raporty spełniające kryteria określonego wyszukiwania i do których użytkownicy mają dostęp. Możesz zobaczyć podstawowe dane każdego raportu w kolumnach widoku listy lub w widoku podglądu. Możesz ustawić znaczniki dla raportów i tworzyć filtry. Kliknij nazwę raportu, aby go wyświetlić lub wybierz Edytuj raport w menu działań, aby zmodyfikować raport.',

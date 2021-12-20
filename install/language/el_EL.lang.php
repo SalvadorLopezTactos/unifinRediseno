@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Προειδοποίηση: Όχι Εγγράψιμος',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Η έκδοση του PHP δεν υποστηρίζεται από το Sugar. Θα πρέπει να εγκαταστήσετε μια έκδοση που είναι συμβατή με την εφαρμογή του Sugar. Παρακαλώ συμβουλευτείτε την Μητρική Συμβατότητα στις Σημειώσεις Αναβαθμίσεων για τις υποστηριζόμενες εκδόσεις του PHP.',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Η έκδοση IIS σας δεν υποστηρίζεται από το Sugar. Θα πρέπει να εγκαταστήσετε μια έκδοση που είναι συμβατή με την εφαρμογή Sugar. Παρακαλώ συμβουλευθείτε τη Μήτρα Συμβατότητας στις Σημειώσεις Αποδέσμευσης για τις υποστηριγμένες εκδόσεις IIS. Η έκδοση σας είναι',
-	'ERR_CHECKSYS_FASTCGI'              => 'Αντιλαμβανόμαστε ότι δεν χρησιμοποιείτε χαρτογράφηση FastCGI χρήστη για την PHP. Θα πρέπει να εγκαταστήσετε/διαμορφώσετε μια έκδοση που είναι συμβατή με την εφαρμογή Sugar. Παρακαλώ συμβουλευθείτε τη Μήτρα Συμβατότητας στις Σημειώσεις Αποδέσμευσης για τις υποστηριγμένες Εκδόσεις. Παρακαλώ δείτε <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a>για λεπτομέρειες',
+    'ERR_CHECKSYS_FASTCGI'              => 'Εντοπίσαμε ότι δεν χρησιμοποιείτε χαρτογράφηση FastCGI χρήστη για την PHP. Θα πρέπει να εγκαταστήσετε/διαμορφώσετε μια έκδοση που είναι συμβατή με την εφαρμογή Sugar. Παρακαλώ συμβουλευθείτε τη Μήτρα Συμβατότητας στις Σημειώσεις Αποδέσμευσης για τις υποστηριγμένες Εκδόσεις. Παρακαλώ ανατρέξτε στο<a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a>για λεπτομέρειες ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Για βέλτιστη εμπειρία χρησιμοποιώντας IIS/FastCGI sapi, καθορίστε fastcgi.logging σε 0 στο δικό σας php.ini αρχείο.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Δεν υποστηρίζεται η εγκατάσταση της PHP Έκδοσης: ( έλεγχος',
     'LBL_DB_UNAVAILABLE'                => 'Βάση δεδομένων μη διαθέσιμη',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Δεν βρέθηκε η υποστήριξη βάσης δεδομένων. Παρακαλώ βεβαιωθείτε ότι έχετε τα απαραίτητα προγράμματα οδήγησης για έναν από τους ακόλουθους τύπους υποστηριζόμενης βάσης δεδομένων: MySQL, MS SQLServer, Oracle ή DB2. Ίσως χρειαστεί να αποσχολιάσετε την επέκταση στο αρχείο php.ini ή να μεταγλωττίσετε ξανά με το σωστό δυαδικό αρχείο, ανάλογα με την έκδοση της PHP. Παρακαλώ συμβουλευτείτε το εγχειρίδιο PHP για περισσότερες πληροφορίες σχετικά με το πώς να ενεργοποιήσετε την υποστήριξη βάσης δεδομένων.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Δεν βρέθηκε η υποστήριξη βάσης δεδομένων. Παρακαλώ βεβαιωθείτε ότι έχετε τα απαραίτητα προγράμματα οδήγησης για έναν από τους παρακάτω υποστηριζόμενους τύπους βάσεων δεδομένων: MySQL, MS SQLServer, Oracle ή DB2. Ίσως χρειαστεί να αποσχολιάσετε την επέκταση στο αρχείο php.ini ή να μεταγλωττίσετε ξανά με το σωστό δυαδικό αρχείο, ανάλογα με την έκδοση του PHP σας. Ανατρέξτε στο Εγχειρίδιο PHP για περισσότερες πληροφορίες σχετικά με τον τρόπο ενεργοποίησης της Υποστήριξης βάσεων δεδομένων.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Λειτουργίες που σχετίζονται με  XML Βιβλιοθήκες Parser που απαιτούνται από την εφαρμογή Sugar, δεν βρέθηκαν.  Ίσως χρειαστεί να αποσχολιάσετε την επέκταση στο αρχείο  php.ini, ή να ξανά-μεταγλωττίσετε με το σωστό δυαδικό αρχείο, ανάλογα με την έκδοσή του PHP σας. Ανατρέξτε στο Εγχειρίδιο PHP σας για περισσότερες πληροφορίες.',
     'LBL_CHECKSYS_CSPRNG' => 'Γεννήτρια τυχαίου αριθμού',
     'ERR_CHECKSYS_MBSTRING'             => 'Λειτουργίες που σχετίζονται με  Multibyte Strings επέκτασης PHP (mbstring) που απαιτούνται από την εφαρμογή του Sugar, δεν βρέθηκαν. <br/><br/>Γενικά, η mbstring ενότητα δεν είναι διαθέσιμη από προεπιλογή σε PHP και πρέπει να ενεργοποιηθεί με --διαθέσιμη-mbstring όταν το δυαδικό PHP είναι χτισμένο. Παρακαλώ, ανατρέξτε στο Εγχειρίδιο PHP σας για περισσότερες πληροφορίες σχετικά με το πώς να ενεργοποιήσετε mbstring υποστήριξη.',
@@ -476,139 +476,139 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Προς τα πίσω Συμβατότητα η λειτουργία είναι ενεργοποιημένη. Καθορίστε zend.ze1_compatibility_mode σε Σνενεργή για να προχωρήσει περαιτέρω',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Email ειδοποιήσεων σύσκεψης',
+        'subject' => 'Συνάντηση SugarCRM - $event_name ',
+        'description' => 'Αυτό το πρότυπο χρησιμοποιείται όταν το Σύστημα στέλνει ειδοποιήσεις σύσκεψης σε έναν χρήστη.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Προς: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user σας προσκάλεσε σε Συνάντηση</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Θέμα: $event_name<br/>
+	Ημερομηνία Έναρξης: $start_date<br/>
+	Ημερομηνία Λήξης: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Περιγραφή: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Αποδεχτείτε αυτή τη Συνάντηση:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Διστακτικά Αποδεχτείτε αυτή τη Συνάντηση:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Απορρίψε αυτή τη:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Προς: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user σας προσκάλεσε σε Συνάντηση
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Θέμα: $event_name
+Ημερομηνία Έναρξης: $start_date
+Ημερομηνία Λήξης: $end_date
 
-Description: $description
+Περιγραφή: $description
 
-Accept this meeting:
+Αποδεχτείτε αυτή τη Συνάντηση:
 <$accept_link>
 
-Tentatively Accept this meeting
+Διστακτικά Αποδεχτείτε αυτή τη Συνάντηση
 <$tentative_link>
 
-Decline this meeting
+Απορρίψε αυτή τη Συνάντηση
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Email ειδοποιήσεων κλήσεων',
+        'subject' => 'Κλήση SugarCRM - $event_name ',
+        'description' => 'Αυτό το πρότυπο χρησιμοποιείται όταν το Σύστημα στέλνει ειδοποιήσεις κλήσης σε έναν χρήστη.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Προς: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user σας προσκάλεσε σε Κλήση</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Θέμα: $event_name<br/>
+	Ημερομηνία Έναρξης: $start_date<br/>
+	Διάρκεια: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Περιγραφή: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Αποδεχτείτε αυτή την κλήση:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Διστακτικά Αποδεχτείτε αυτή την Κλήση:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Απορρίψε αυτή την κλήση:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Προς: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user σας προσκάλεσε σε Κλήση
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Θέμα: $event_name
+Ημερομηνία Έναρξης: $start_date
+Διάρκεια: $hoursh, $minutesm
 
-Description: $description
+Περιγραφή: $description
 
-Accept this call:
+Αποδεχτείτε αυτή την κλήση:
 <$accept_link>
 
-Tentatively Accept this call
+Διστακτικά Αποδεχτείτε αυτή την Κλήση:
 <$tentative_link>
 
-Decline this call
+Απορρίψε αυτή την κλήση:
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Emails Ειδοποίησης Ανάθεσης',
+        'subject' => 'SugarCRM - Ανατεθειμένου $module_name ',
+        'description' => 'Αυτό το πρότυπο χρησιμοποιείται όταν το Σύστημα στέλνει μια ανάθεση εργασίας σε έναν χρήστη.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user ανέθεσε ένα&nbsp;$module_name to&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>You Μπορείτε να το αναθεωρήσετε&nbsp;$module_name στο:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user σας ανέθεσε ένα $module_name στο $assigned_user.
 
-You may review this $module_name at:
+Μπορείτε να το αναθεωρήσετε στο $module_name at:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Emails Προγραμματισμένης Αναφοράς',
+        'subject' => 'Προγραμματισμένη αναφορά: $report_name μέχρι τις $report_time',
+        'description' => 'Αυτό το πρότυπο χρησιμοποιείται όταν το Σύστημα στέλνει μια προγραμματισμένη αναφορά σε έναν χρήστη.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Γεια σας $assigned_user,</p>
+<p>Επισυνάπτεται μια αυτόματη αναφορά που έχει προγραμματιστεί για εσάς.</p>
+<p>Όνομα αναφοράς: $report_name</p>
+<p>Ημερομηνία και Ώρα Εκτέλεσης Αναφοράς: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Γεια σας $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+Επισυνάπτεται μια αυτόματη αναφορά που έχει προγραμματιστεί για εσάς.
 
-Report Name: $report_name
-
-Report Run Date and Time: $report_time',
+Όνομα αναφοράς: $report_name
+Ημερομηνία και Ώρα Εκτέλεσης Αναφοράς: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Ειδοποίηση Email Καταγραφής Σχολίου Συστήματος',
+        'subject' => 'SugarCRM - $initiator_full_name σας ανέφερε σε $singular_module_name',
+        'description' => 'Αυτό το πρότυπο χρησιμοποιείται για την αποστολή ειδοποίησης μέσω email για χρήστες που έχουν επισημανθεί στην ενότητα καταγραφής σχολίων.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Έχετε αναφερθεί στο αρχείο καταγραφής της παρακάτω εγγραφής:  <a href="$record_url">$record_name</a></p>
+                <p>Συνδεθείτε στο Sugar για να δείτε το σχόλιο.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Έχετε αναφερθεί στο αρχείο καταγραφής της παρακάτω εγγραφής: $record_name
+            Παρακαλώ συνδεθείτε στο Sugar για να δείτε το σχόλιο.',
     ],
 
     'advanced_password_new_account_email' => array(

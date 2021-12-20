@@ -113,6 +113,7 @@ FormPanel.prototype._createField = function (settings) {
             field = new FormPanelDropdown(defaults);
             break;
         case 'friendlydropdown':
+        case 'related':
             field = new FormPanelFriendlyDropdown(defaults);
             break;
         case 'date':
@@ -360,6 +361,9 @@ FormPanel.prototype.createHTML = function () {
         jQuery(this._htmlClose).on('click', function() {
             if (self._expressionControl instanceof ExpressionControl) {
                 self._expressionControl._closeParentPanels();
+            } else if (self._parent instanceof MultipleCollapsiblePanel &&
+                self._parent._parent && typeof self._parent._parent.close === 'function') {
+                self._parent._parent.close()
             }
         });
 
@@ -392,7 +396,7 @@ FormPanelItem.prototype.init = function (settings) {
         form: null,
         label: "[form-item]",
         disabled: false,
-        height: "auto"
+        height: null
     };
 
     jQuery.extend(true, defaults, settings);
@@ -410,12 +414,12 @@ FormPanelItem.prototype.init = function (settings) {
 };
 
 FormPanelItem.prototype.setHeight = function (h) {
-    if (!(typeof h === 'number' ||
+    if (!(_.isEmpty(h) || typeof h === 'number' ||
         (typeof h === 'string' && (h === "auto" || /^\d+(\.\d+)?(em|px|pt|%)?$/.test(h))))) {
         throw new Error("setHeight(): invalid parameter.");
     }
     this.height = h;
-    if (this.html) {
+    if (this.html && !_.isEmpty(this.height)) {
         this.style.addProperties({height: this.height});
     }
     return this;
@@ -496,9 +500,13 @@ FormPanelItem.prototype._postCreateHTML = function () {
     this.style.applyStyle();
 
     this.style.addProperties({
-        width: this.width,
-        height: this.height
+        width: this.width
     });
+    if (!_.isEmpty(this.height)) {
+        this.style.addProperties({
+            height: this.height
+        });
+    }
 
     if (this._disabled) {
         this.disable();
@@ -636,7 +644,8 @@ FormPanelField.prototype.init = function (settings) {
         dependantFields: [],
         dependencyHandler: null,
         value: "",
-        required: false
+        required: false,
+        className: null,
     };
 
     jQuery.extend(true, defaults, settings);
@@ -644,6 +653,7 @@ FormPanelField.prototype.init = function (settings) {
     this.setLabel(defaults.label)
         .setValue(defaults.value)
         .setRequired(defaults.required)
+        .setClassName(defaults.className)
         .setOnChangeHandler(defaults.onChange)
         .setDependantFields(defaults.dependantFields)
         .setDependencyHandler(defaults.dependencyHandler);
@@ -666,6 +676,16 @@ FormPanelField.prototype.setForm = function (form) {
 
 FormPanelField.prototype.setRequired = function (required) {
     this.required = !!required;
+    return this;
+};
+
+/**
+ * Set the CSS class name for the field container
+ * @param className
+ * @returns {FormPanelField}
+ */
+FormPanelField.prototype.setClassName = function(className) {
+    this.className = className;
     return this;
 };
 
@@ -895,6 +915,9 @@ FormPanelField.prototype.createHTML = function () {
         html = FormPanelItem.prototype.createHTML.call(this);
         html.className += ' adam form-panel-field record-cell';
         html.className += ' adam-' + this.type.toLowerCase();
+        if (this.className) {
+            html.className += ' ' + this.className;
+        }
         htmlLabelContainer = this.createHTMLElement("div");
         htmlLabelContainer.className = 'adam form-panel-label record-label';
         span = this.createHTMLElement("span");
@@ -2135,6 +2158,7 @@ var FormPanelFriendlyDropdown = function (settings) {
     this._searchMore = null;
     this._searchMoreList = null;
     this._pageSize = null;
+    this._multiple = null;
     FormPanelFriendlyDropdown.prototype.init.call(this, settings);
 };
 
@@ -2150,7 +2174,8 @@ FormPanelFriendlyDropdown.prototype.init = function (settings) {
         searchValue: "value",
         searchDelay: 1500,
         searchMore: false,
-        pageSize: 5
+        pageSize: 5,
+        multiple: false
     };
 
     $.extend(true, defaults, settings);
@@ -2161,7 +2186,8 @@ FormPanelFriendlyDropdown.prototype.init = function (settings) {
         .setSearchDelay(defaults.searchDelay)
         .setSearchValue(defaults.searchValue)
         .setSearchLabel(defaults.searchLabel)
-        .setSearchURL(defaults.searchURL);
+        .setSearchURL(defaults.searchURL)
+        .setMultiple(defaults.multiple);
 
     if (defaults.searchMore) {
         this.enableSearchMore(defaults.searchMore);
@@ -2344,19 +2370,26 @@ FormPanelFriendlyDropdown.prototype._paintOptions = function () {};
 FormPanelFriendlyDropdown.prototype._paintOption = function () {};
 FormPanelFriendlyDropdown.prototype.clearOptions = function () {
     this._options.clear();
-    this._value = "";
+    this._value = this._multiple ? [] : '';
     if (this._htmlControl[0]) {
-        this._htmlControl[0].select2("val", "", false);
+        this._htmlControl[0].select2('val', this._multiple ? [] : '', false);
     }
     return this;
 };
 
-FormPanelFriendlyDropdown.prototype.getSelectedText = function () {
+FormPanelFriendlyDropdown.prototype.getSelectedText = function() {
     var selectedData = $(this._htmlControl[0]).select2("data");
     if (selectedData !== null) {
-        return selectedData.text;
+        if (this._multiple) {
+            var itemText = _.map(selectedData, function(item) {
+                return item.text;
+            });
+            return '[' + itemText.join(', ') + ']';
+        } else {
+            return selectedData.text;
+        }
     }
-    return "";
+    return '';
 };
 
 FormPanelFriendlyDropdown.prototype.getSelectedData = function () {
@@ -2374,16 +2407,30 @@ FormPanelFriendlyDropdown.prototype.getSelectedData = function () {
 
 FormPanelFriendlyDropdown.prototype.setValue = function (value) {
     var theText = null;
+    var originalValue = value;
     if (value && typeof value === 'object') {
-        theText = value.text;
-        value = value.value;
+        if (this._multiple) {
+            value = _.map(value, function(item) {
+                return item.value;
+            });
+        } else {
+            theText = value.text;
+            value = value.value;
+        }
     }
     if (this._htmlControl[0]) {
         if (theText !== null) {
             this._htmlControl[0].data("text", theText);
         }
+        if (this._multiple) {
+            this._value = _.map(originalValue, function (item) {
+                return item.id;
+            });
+        }
         this._htmlControl[0].select2("val", value, false);
-        this._value = this._htmlControl[0].select2("val");
+        if (!this._multiple) {
+            this._value = this._htmlControl[0].select2("val");
+        }
     } else {
         this._value = value;
     }
@@ -2397,6 +2444,22 @@ FormPanelFriendlyDropdown.prototype.setPlaceholder = function (placeholder) {
     this._placeholder = placeholder;
     if (this._htmlControl[0]) {
         this._htmlControl[0].select2("placeholder", placeholder);
+    }
+    return this;
+};
+
+/**
+ * Sets the flag for multiple selections
+ * @param multiple
+ * @returns {FormPanelFriendlyDropdown}
+ */
+FormPanelFriendlyDropdown.prototype.setMultiple = function(multiple) {
+    if (typeof multiple !== 'boolean') {
+        throw new Error('setMultiple(): The parameter must be a boolean.');
+    }
+    this._multiple = multiple;
+    if (this._htmlControl[0]) {
+        this._htmlControl[0].select2('multiple', multiple);
     }
     return this;
 };
@@ -2427,24 +2490,72 @@ FormPanelFriendlyDropdown.prototype._queryFunction = function () {
 
 };
 
+/**
+ * Sorting function for adding items via search and select
+ * @returns {function}
+ * @private
+ */
+FormPanelFriendlyDropdown.prototype._getSortResultsFunction = function () {
+    return _.bind(function (results, container, query) {
+        return _.sortBy(results, function (item) {
+            return item.text;
+        }, this);
+    }, this);
+};
+
 FormPanelFriendlyDropdown.prototype._initSelection = function () {
     var that = this;
     return function ($el, callback) {
-        var options = that._options.asArray(),
-            value = $el.val(), i, text = $el.data("text");
-        for(i = 0; i < options.length; i += 1) {
-            if (options[i][that._valueField] === value) {
-                callback({
-                    id: options[i][that._valueField],
-                    text: options[i][that._labelField]
-                });
-                return;
+        if (that._multiple) {
+            var rawValue = $el.val();
+            var value = rawValue !== '' ? $el.val().split(FormPanelMultiselect.ITEM_SEPARATOR) : [];
+            var results = [];
+
+            // Associate the values in the element with the current selected IDs
+            if (_.isArray(that._value)) {
+                for (var i = 0; i < that._value.length; i++) {
+                    results.push({
+                        id: that._value[i],
+                        text: value[i]
+                    });
+                }
             }
+
+            callback(results);
+        } else {
+            var options = that._options.asArray();
+            var value = $el.val();
+            var text = $el.data("text");
+            for (var i = 0; i < options.length; i += 1) {
+                if (options[i][that._valueField] === value) {
+                    callback({
+                        id: options[i][that._valueField],
+                        text: options[i][that._labelField]
+                    });
+                    return;
+                }
+            }
+            callback({
+                id: value,
+                text: text || value
+            });
         }
-        callback({
-            id: value,
-            text: text || value
-        });
+    };
+};
+
+/**
+ * Set up a handler so we can update the selection/IDs when items are added or removed
+ * @returns {function}
+ * @private
+ */
+FormPanelFriendlyDropdown.prototype._onChangeHandler = function () {
+    var that = this;
+    return function () {
+        var valueInControl = that._getValueFromControl();
+        if (valueInControl.length) {
+            that._setValueToControl(that._getValueFromControl());
+        }
+        FormPanelField.prototype._onChangeHandler.call(that).apply(this, arguments);
     };
 };
 
@@ -2478,9 +2589,21 @@ FormPanelFriendlyDropdown.prototype._openSearchMore = function() {
         self._htmlControl[0].select2('close');
         $(self.html).closest('.adam-modal').hide();
 
-        App.drawer.open({
-                layout: 'selection-list',
-                context: self._searchMore
+        var layout = 'selection-list';
+        var context = _.clone(self._searchMore);
+
+        if (self._multiple) {
+            layout = 'multi-selection-list';
+
+            context.isMultiSelect = true;
+            context.maxSelectedRecords = 20;
+            context.preselectedModelIds = _.isArray(self._value) ? _.clone(self._value) : [];
+        }
+
+        App.drawer.open(
+            {
+                layout: layout,
+                context: context
             },
             _.bind(function (drawerValues) {
                 var oldValue = self.getValue();
@@ -2488,13 +2611,18 @@ FormPanelFriendlyDropdown.prototype._openSearchMore = function() {
                 $(self.html).closest('.adam-modal').show();
 
                 if (!_.isUndefined(drawerValues)) {
-                    self.setValue({text: drawerValues.value, value: drawerValues.id}, true);
+                    if (self._multiple) {
+                        self.setValue(drawerValues);
+                    } else {
+                        self.setValue({text: drawerValues.value, value: drawerValues.id}, true);
+                    }
                     if (typeof self.onChange === 'function') {
                         self.onChange(self, newValue, oldValue);
                     }
                     self.fireDependentFields();
                 }
-            }, this));
+            }, this)
+        );
     };
 };
 
@@ -2526,7 +2654,13 @@ FormPanelFriendlyDropdown.prototype._createControl = function () {
             },
             formatNoMatches: function (term) {
                 return (term && (term !== '')) ? translate('LBL_PA_FORM_COMBO_NO_MATCHES_FOUND') : '';
-            }
+            },
+            multiple: this._multiple,
+            allowClear: false,
+            containerCssClass: 'select2-choices-pills-close',
+            separator: FormPanelMultiselect.ITEM_SEPARATOR,
+            sortResults: this._getSortResultsFunction(),
+            dropdownCssClass: this._multiple ? 'select2-multiple-dropdown' : ''
         });
         this._setValueToControl(this._value);
         control = this._htmlControl[0].data("select2").container[0];

@@ -274,7 +274,7 @@ function _fetchEmailAddress($emailAddress = '')
     $q->select(array('*'));
     $q->from($sea);
     $q->where()->queryAnd()
-        ->equals('email_address_caps', strtoupper($emailAddress))
+        ->equals('email_address_caps', sugarStrToUpper($emailAddress))
         ->equals('deleted', 0);
     $q->limit(1);
     $rows = $q->execute();

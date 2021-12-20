@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Ülesannete loendi töölaud',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Ülesannete kirjete töölaud',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Ülesannete fookuse sahtel',
 
+  'LBL_RELATED_CONTACT' => 'Seotud kontakt',
   'LBL_MODULE_NAME' => 'Ülesanded',
   'LBL_MODULE_NAME_SINGULAR' => 'Ülesanne',
   'LBL_TASK' => 'Ülesanded:',

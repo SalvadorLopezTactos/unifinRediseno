@@ -11,7 +11,7 @@
  */
 $dictionary['EmailTemplate'] = array(
     'table' => 'email_templates',
-
+    'archive' => false,
     'favorites' => false,
     'comment' => 'Templates used in email processing',
 	'fields' => array(
@@ -27,14 +27,14 @@ $dictionary['EmailTemplate'] = array(
 			'name' => 'date_entered',
 			'vname' => 'LBL_DATE_ENTERED',
 			'type' => 'datetime',
-			'required'=>true,
+            'required' => true,
 			'comment' => 'Date record created'
 		),
 		'date_modified' => array(
 			'name' => 'date_modified',
 			'vname' => 'LBL_DATE_MODIFIED',
 			'type' => 'datetime',
-			'required'=>true,
+            'required' => true,
 			'comment' => 'Date record last modified'
 		),
 		'modified_user_id' => array(
@@ -207,6 +207,19 @@ $dictionary['EmailTemplate'] = array(
             'type' => 'link',
             'vname' => 'LBL_ATTACHMENTS',
         ),
+        'attachments_collection' => array(
+            'name' => 'attachments_collection',
+            'links' => array(
+                'attachments',
+            ),
+            'order_by' => 'name:asc',
+            'source' => 'non-db',
+            'studio' => false,
+            'type' => 'collection',
+            'vname' => 'LBL_ATTACHMENTS',
+            'reportable' => false,
+            'hideacl' => true,
+        ),
         'has_variables' => array(
             'name' => 'has_variables',
             'vname' => 'LBL_TEMPLATE_HAS_VARIABLES',
@@ -276,6 +289,7 @@ $dictionary['EmailTemplate'] = array(
     'uses' => array(
         'assignable',
         'team_security',
+        'taggable',
     ),
     'acls' => array('SugarACLStatic' => true),
 );

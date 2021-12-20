@@ -17,7 +17,7 @@
     {{else}}
         {{#if dropdown_buttons}}
             <div class="btn-group">
-                {{#if ../../../this.canEdit}}
+                {{#if (or ../../../this.canEdit ../../../this.isChart)}}
                     <button
                         type="button"
                         data-toggle="dropdown"
@@ -31,12 +31,15 @@
                     >
                         <i data-action="loading" class="fa fa-cog" track="click:dashletToolbarCog"></i>
                     </button>
+
+                    <ul class="dropdown-menu left" role="menu">
+                        {{#each dropdown_buttons}}
+                            {{#if (or ../../../../../this.canEdit this.review)}}
+                                <li role="menuitem">{{field ../../../../../../this model=../../../../../../this.model}}</li>
+                            {{/if}}
+                        {{/each}}
+                    </ul>
                 {{/if}}
-                <ul class="dropdown-menu left" role="menu">
-                    {{#each dropdown_buttons}}
-                        <li role="menuitem">{{field ../../../../this model=../../../../this.model}}</li>
-                    {{/each}}
-                </ul>
             </div>
         {{/if}}
     {{/if}}

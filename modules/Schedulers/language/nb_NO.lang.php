@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Planlagt jobb',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Gjenoppbygg demormaliserte sikkerhetsdata for team',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Aktivitetsstrømrenser',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Oppdater produktdefinisjon',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Prosesstidsbevisste planer',
+'LBL_OOTB_DATA_ARCHIVER' => 'Kjør aktive dataarkiver/slettinger',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Alltid',
 'LBL_CATCH_UP' => 'Gjennomfør hvis savnet',
+'LBL_SYSTEM_JOB' => 'Er nåværende jobbsystem?',
 'LBL_CATCH_UP_WARNING' => 'Ta vekk markering hvis oppgaven tar land tid å gjennomføre.',
 'LBL_DATE_TIME_END' => 'Dato & tid start',
 'LBL_DATE_TIME_START' => 'Dato & tid slutt',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Fjern filer av diagnostikkverktøy',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Fjern midlertidige filer',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Gjenoppbygg demormaliserte sikkerhetsdata for team',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Oppdater produktdefinisjon',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kjør nattlige masseutsendelser av e-post-kampanje',
 'LBL_ASYNCMASSUPDATE' => 'Utfør asynkrone masseoppdateringer',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Rens jobbkø',
 'LBL_CLEANOLDRECORDLISTS' => 'Opprydding av gamle registeringslister',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktivitetsstrømrenser',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Prosesstidsbevisste planer',
 'LBL_PMSEENGINECRON' => 'SugarBPM-planlegger',
 );
 

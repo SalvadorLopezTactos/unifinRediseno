@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Varning: Du har ändrat dina automatiska import inställningar vilket kan resultera i förlust av data.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Varning: Automatisk import måste tillåtas om automatiska ärenden ska skapas.',
 	'LBL_EDIT_LAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-postadress',
+    'LBL_EMAIL_PROVIDER' => 'E-postleverantör',
+    'LBL_AUTH_STATUS' => 'Auktoriseringsstatus',
 );
-?>

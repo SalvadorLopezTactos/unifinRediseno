@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;oportunitats',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;oportunitats',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalls de l&#39;oportunitat',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les oportunitats',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Oportunitat de renovació',
 
     'LBL_MODULE_NAME' => 'Oportunitats',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunitat',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tipus:',
     'LBL_CAMPAIGN' => 'Campanya:',
     'LBL_NEXT_STEP' => 'Pas següent:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Data d&#39;inici de servei',
     'LBL_LEAD_SOURCE' => 'Origen del client potencial',
     'LBL_SALES_STAGE' => 'Etapa de vendes:',
     'LBL_SALES_STATUS' => 'Estat',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Etapa compromesa',
     'LBL_COMMIT_STAGE_FORECAST' => 'Previsió',
     'LBL_WORKSHEET' => 'Full de càlcul',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Elements de línia comprats',
 
     'LBL_RENEWAL' => 'Renovació',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Oportunitats de renovació',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID principal de la renovació',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Etapa de vendes',
+    'LBL_WIDGET_DATE_CLOSED' => 'Data de tancament prevista',
+    'LBL_WIDGET_AMOUNT' => 'Quantitat',
 
     'TPL_RLI_CREATE' => 'Una oportunitat ha de tenir associada una línia d&#39;ingressos.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Crear un element de línia d&#39;ingressos.',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# del Total de Línies d&#39;ingressos per articles',
     'LBL_CLOSED_RLIS' => '# Línies d&#39;ingressos tancades',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Quantitat d&#39;elements de línia d&#39;ingressos amb durada flexible d&#39;Open Service',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'No pot esborrar oportunitats que continguin línies d&#39;ingressos tancades',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Un o més dels registres seleccionats conté línies d&#39;ingressos tancades, i no es pot esborrar.',
     'LBL_INCLUDED_RLIS' => '# d&#39;articles de línees d&#39;ingressos incloses',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Actualitza obertura',
+    'LBL_SERVICE_START_DATE_INVALID' => 'La data d&#39;inici del servei no pot establir-se quan ja ha passat la data de final del servei de qualsevol element de la línia d&#39;ingresos adicionals oberta.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Pressupostos',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Oportunitats per compte dinàmic',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Jerarquia d&#39;oportunitats',
@@ -217,7 +224,7 @@ $mod_strings = array(
 Per crear un {{module_name}}:
 1. Proporcioneu els valors per als camps com desitgeu.
  -Els camps marcats com a "Obligatoris" s&#39;han de completar abans de desar.
- -Feu clic en "Mostra més" per mostrar els camps addicionals si fòs necessari.
+ -Feu clic en "Mostra més" per mostrar els camps addicionals si fos necessari.
 2. Feu clic en "Desa" per finalitzar el registre nou i tornar a la pàgina anterior.',
 
 // END ENT/ULT
@@ -231,5 +238,10 @@ Per crear un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Les meves oportunitats',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Les oportunitats del meu equip",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'No s&#39;ha pogut canviar el {{fieldName}} perquè aquest {{moduleSingular}} no té elements de línia oberts.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interaccions d&#39;oportunitats',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predicció de tancament d&#39;oportunitats',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Visualitza els detalls de predicció per a una Oportunitat específica',
 );

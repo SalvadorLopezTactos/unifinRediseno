@@ -28,11 +28,22 @@
 </tr>
 {/if}
 
+{if !$hideMassUpdate && !$vardef.hidemassupdate}
+    {* Readonly fields should not have a massupdate option *}
+    <tr id="massUpdateRow" {if $vardef.readonly}style="display: none"{/if}>
+        <td class='mbLBL' >{sugar_translate module="DynamicFields" label="COLUMN_TITLE_MASS_UPDATE"}:</td>
+        <td>
+            {if $hideLevel < 5}
+                <input type="checkbox" id="massupdate"  name="massupdate" value="1" {if !empty($vardef.massupdate)}checked{/if} onclick="ModuleBuilder.handleFieldInteractions('massupdate')"/>
+            {else}
+                <input type="checkbox" id="massupdate"  name="massupdate" value="1" disabled {if !empty($vardef.massupdate)}checked{/if}/>
+            {/if}
+        </td>
+    </tr>
+{/if}
+
 {include file='modules/DynamicFields/templates/Fields/Forms/coreDependent.tpl'}
 
-{if $vardef.type != 'bool' && !$hideRequired}
-<tr ><td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_REQUIRED_OPTION"}:</td><td><input type="checkbox" name="required" value="1" {if !empty($vardef.required)}CHECKED{/if} {if $hideLevel > 5}disabled{/if}/>{if $hideLevel > 5}<input type="hidden" name="required" value="{$vardef.required}">{/if}</td></tr>
-{/if}
 <tr>
 {if !$hideReportable}
 <td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_REPORTABLE"}:</td>
@@ -45,7 +56,22 @@
 {/if}
 
 {if $auditable && !in_array($vardef.type, array('parent', 'html'))}
-<tr><td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_AUDIT"}:</td><td><input id="auditedCheckbox" type="checkbox" name="audited" value="1" {if !empty($vardef.audited) || !empty($vardef.pii) }CHECKED{/if} {if $hideLevel > 5}disabled{/if}/>{if $hideLevel > 5}<input type="hidden" name="audited" value="{$vardef.audited}">{/if}</td></tr>
+<tr>
+    <td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_AUDIT"}:</td>
+    <td>
+        {if $is_relationship_field}
+            <input id="auditedCheckbox" type="checkbox" name="audited" value="1" {if !empty($relationship_field_audited) || !empty($vardef.pii) }CHECKED{/if} {if $hideLevel > 5}disabled{/if}/>
+            {if $hideLevel > 5}
+                <input type="hidden" name="audited" value="{$relationship_field_audited}">
+            {/if}
+        {else}
+            <input id="auditedCheckbox" type="checkbox" name="audited" value="1" {if !empty($vardef.audited) || !empty($vardef.pii) }CHECKED{/if} {if $hideLevel > 5}disabled{/if}/>
+            {if $hideLevel > 5}
+                <input type="hidden" name="audited" value="{$vardef.audited}">
+            {/if}
+        {/if}
+    </td>
+</tr>
 {if !in_array($vardef.type, array('bool', 'image', 'relate'))}
 <tr>
     <td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_PII"}:</td>
@@ -57,7 +83,7 @@
 {/if}
 {/if}
 
-{if !$hideImportable}
+{if !$hideImportable && (!isset($vardef.studio.importable) || isTruthy($vardef.studio.importable))}
 <tr><td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_IMPORTABLE"}:</td><td>
     {if $hideLevel < 5}
         {html_options name="importable" id="importable" selected=$vardef.importable options=$importable_options}
@@ -68,7 +94,7 @@
     {/if}
 </td></tr>
 {/if}
-{if !$hideDuplicatable}
+{if !$hideDuplicatable && (!isset($vardef.studio.duplicate_merge) || isTruthy($vardef.studio.duplicate_merge))}
 <tr><td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_DUPLICATE_MERGE"}:</td><td>
 {if $hideLevel < 5}
     {html_options name="duplicate_merge" id="duplicate_merge" selected=$vardef.duplicate_merge_dom_value options=$duplicate_merge_options}

@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Processhantering',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Oövervakade Processer',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för processer',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Instrumentpanel för processposter',
+
     'LBL_CAS_ID' => 'Processnummer',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Okänd (enligt användarid:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "uppgiften har",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Processdesign förhandsvisning',
     'LBL_PROJECT_RUN_ORDER' => 'Körningsordning',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Nuvarande aktivitet',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Redigeringsdatum',
+    'LBL_DATE_ENTERED' => 'Skapandedatum',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Är du säker på att du vill ta denna process?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Processen har tagits',
 );
 

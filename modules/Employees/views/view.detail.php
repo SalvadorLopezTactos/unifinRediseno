@@ -69,26 +69,41 @@ EOHTML;
     }
 
  	function display() {
-        $idpConfig = new IdmConfig(\SugarConfig::getInstance());
+        $idmConfig = $this->getIdmConfig();
        	if(is_admin($GLOBALS['current_user']) || $_REQUEST['record'] == $GLOBALS['current_user']->id) {
 			 $this->ss->assign('DISPLAY_EDIT', true);
         }
-        if (is_admin($GLOBALS['current_user']) && !$idpConfig->isIDMModeEnabled()) {
- 			$this->ss->assign('DISPLAY_DUPLICATE', true);
- 		}
 
- 		$showDeleteButton = FALSE;
- 		if(  $_REQUEST['record'] != $GLOBALS['current_user']->id && $GLOBALS['current_user']->isAdminForModule('Users') )
-        {
-            $showDeleteButton = TRUE;
- 		     if( empty($this->bean->user_name) ) //Indicates just employee
- 		         $deleteWarning = $GLOBALS['mod_strings']['LBL_DELETE_EMPLOYEE_CONFIRM'];
- 		     else
- 		         $deleteWarning = $GLOBALS['mod_strings']['LBL_DELETE_USER_CONFIRM'];
- 		     $this->ss->assign('DELETE_WARNING', $deleteWarning);
+        $isEmployee = !$this->bean->canBeAuthenticated();
+
+        if (is_admin($GLOBALS['current_user']) && ($isEmployee || !$idmConfig->isIDMModeEnabled())) {
+            $this->ss->assign('DISPLAY_DUPLICATE', true);
         }
-        $this->ss->assign('DISPLAY_DELETE', $showDeleteButton && !$idpConfig->isIDMModeEnabled());
-        
- 		parent::display();
- 	}
+
+        $showDeleteButton = false;
+        if ($_REQUEST['record'] != $GLOBALS['current_user']->id &&
+            $GLOBALS['current_user']->isAdminForModule('Users')) {
+            $showDeleteButton = true;
+            if ($isEmployee) {
+                $deleteWarning = $GLOBALS['mod_strings']['LBL_DELETE_EMPLOYEE_CONFIRM'];
+            } else {
+                $deleteWarning = $GLOBALS['mod_strings']['LBL_DELETE_USER_CONFIRM'];
+            }
+            $this->ss->assign('DELETE_WARNING', $deleteWarning);
+        }
+        $this->ss->assign(
+            'DISPLAY_DELETE',
+            $showDeleteButton && ($isEmployee || !$idmConfig->isIDMModeEnabled())
+        );
+
+        parent::display();
+    }
+
+    /**
+     * @return IdmConfig
+     */
+    protected function getIdmConfig(): IdmConfig
+    {
+        return new IdmConfig(\SugarConfig::getInstance());
+    }
 }

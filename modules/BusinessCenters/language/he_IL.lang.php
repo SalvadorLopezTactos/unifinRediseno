@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'אנשי קשר',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'לידים',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'משתמשים',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מרכזי עסקים',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס מוקדי שירות עסקיים',
 ];

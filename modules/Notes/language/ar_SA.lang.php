@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الملاحظات',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الملاحظات',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الملاحظات',
 
+    'LBL_RELATED_CONTACT' => 'جهة الاتصال ذات الصلة',
     'ERR_DELETE_RECORD' => 'يجب تحديد رقم السجل لحذف الحساب.',
     'LBL_ACCOUNT_ID' => 'معرّف الحساب:',
     'LBL_CASE_ID' => 'معرّف الحالة:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'معرّف جهة الاتصال:',
     'LBL_CONTACT_NAME' => 'جهة الاتصال:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'ملاحظات',
+    'LBL_ATTACHMENTS' => 'المرفقات',
+    'LBL_ATTACHMENT_FLAG' => 'مرفق',
     'LBL_DESCRIPTION' => 'الوصف',
     'LBL_EMAIL_ADDRESS' => 'عنوان البريد الإلكتروني:',
     'LBL_EMAIL_ATTACHMENT' => 'مرفق البريد الإلكتروني',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'الملاحظات والمرفقات',
     'LBL_NOTE' => 'ملاحظة:',
     'LBL_OPPORTUNITY_ID' => 'معرّف الفرصة:',
+    'LBL_NOTE_PARENT_ID' => 'المعرّف الأصل للملاحظة:',
     'LBL_PARENT_ID' => 'معرّف الأصل:',
     'LBL_PARENT_TYPE' => 'نوع الأصل',
     'LBL_EMAIL_TYPE' => 'نوع البريد الإلكتروني',

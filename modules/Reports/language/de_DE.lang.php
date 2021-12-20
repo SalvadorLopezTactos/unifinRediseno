@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Fehler beim Abrufen der Daten des Drillthrough-Berichts für diese Aktion. Kontaktieren Sie den Eigentümer des Berichts zwecks Unterstützung.',
     'LBL_CHART_NO_DRILLTHRU' => 'Drillthrough nicht gefunden',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Berichte',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Die Listenansicht zeigt alle Datensätze an, die den aktuellen Suchkriterien entsprechen und auf die der Benutzer Zugriff hat. Die Basisinformationen können innerhalb der Listespalten und in der Vorschau angezeigt werden. Es können Tags für Berichte festgelegt und Filter erstellt werden. Der Bericht kann durch Anklicken eingesehen werden oder er kann durch Klicken auf "Bericht bearbeiten" im Aktionsmenü bearbeitet werden.',

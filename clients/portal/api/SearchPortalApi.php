@@ -55,10 +55,15 @@ class SearchPortalApi extends SugarApi
      * @param array $args
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionRequestMethodFailure
+     * @deprecated Since 10.2.0.
      * @return array
      */
     public function portalSearch(ServiceBase $api, array $args) : array
     {
+        $msg = 'This endpoint is deprecated as of 10.2.0 and will be removed in a future release.';
+        $msg .= ' Use genericsearch instead.';
+        LoggerManager::getLogger()->deprecated($msg);
+
         $this->requireArgs($args, ['q']);
 
         $sugarConfig = \SugarConfig::getInstance();

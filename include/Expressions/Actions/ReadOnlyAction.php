@@ -61,6 +61,11 @@ class ReadOnlyAction extends AbstractAction
                         context.view.once('render', function(){this.exec(context);}, this);
                         return;
                     }
+                    var field = context.view.getField(this.target, context.model);
+                    if (field) {
+                        field.def.readOnlyProp = readOnly;
+                    }
+                   
 
                     context.setFieldDisabled(this.target, readOnly);
                 } else {

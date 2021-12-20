@@ -204,7 +204,7 @@ class EmailAddressHandler extends AbstractHandler implements
 
         // Load raw email addresses in prefixed email field to store in ES
         $emails = $this->getEmailAddressesForBean($bean);
-        $document->setDataField($document->getType() . Mapping::PREFIX_SEP . 'email', $emails);
+        $document->setDataField($bean->getModuleName() . Mapping::PREFIX_SEP . 'email', $emails);
         $document->removeDataField('email');
 
         // Format data for email search fields
@@ -222,7 +222,7 @@ class EmailAddressHandler extends AbstractHandler implements
         }
 
         // Set formatted value in special email search field
-        $searchField = $document->getType() . Mapping::PREFIX_SEP . $this->searchField;
+        $searchField = $bean->getModuleName() . Mapping::PREFIX_SEP . $this->searchField;
         $document->setDataField($searchField, $value);
     }
 

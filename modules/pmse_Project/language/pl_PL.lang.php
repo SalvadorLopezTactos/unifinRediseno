@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definicje procesu',
   'LBL_MODULE_NAME_SINGULAR' => 'Definicja procesu',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy definicji procesów',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Pulpit rekordów definicji procesu',
   'LNK_LIST' => 'Wyświetl definicje procesu',
   'LNK_NEW_PMSE_PROJECT' => 'Utwórz definicję procesu',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importuj definicje procesów',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Zmień użytkownika, do którego przypisano',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Zespół',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Wybierz nowego użytkownika procesu',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Wyślij wiadomość e-mail do użytkownika po przydzieleniu procesu',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definicja użytkownika',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Metoda przydzielania',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Przydziel użytkownika',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Aktualizuj pole Przypisane do rekordu',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Ustaw „Przydzielone do” wg dostępności',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Dodaj powiązany rekord',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Moduł powiązany',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Nazwa działania jest pusta.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Nazwa %s istnieje już w rodzinie kształtów.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Wymagana dostępność zmiany',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Jeśli żaden użytkownik nie jest dostępny',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'przed',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Tylko nowe rekordy',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Tylko zaktualizowane rekordy (Pierwsza aktualizacja — patrz tekst pomocy)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Tylko zaktualizowane rekordy (Wszystkie aktualizacje — patrz tekst pomocy)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nowe rekordy lub pierwsza aktualizacja',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nowe rekordy i wszystkie aktualizacje',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Wybierz moment rozpoczęcia wydarzenia.<br><br>Nowe: uruchom proces po utworzeniu nowego rekordu.<br><br>Pierwsza aktualizacja: proces jest uruchamiany tylko pierwszy raz, gdy kryteria są spełnione dla bieżącego rekordu.<br><br>Wszystkie aktualizacje: proces jest uruchomiany za każdym razem, gdy kryteria są spełnione dla bieżącego rekordu.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Wybierz moment rozpoczęcia wydarzenia.<br><br>Nowe: uruchom proces po utworzeniu nowego rekordu.<br><br>Pierwsza aktualizacja: proces jest uruchamiany tylko pierwszy raz, gdy kryteria są spełnione dla bieżącego rekordu.<br><br>Wszystkie aktualizacje: proces jest uruchomiany za każdym razem, gdy kryteria są spełnione dla bieżącego rekordu.<br><br>Nowe rekordy lub pierwsza aktualizacja: proces jest uruchamiany tylko pierwszy raz, gdy kryteria są spełnione dla rekordu w trakcie tworzenia lub aktualizacji rekordu.<br><br>Nowe rekordy i wszystkie aktualizacje: proces jest uruchamiany za każdym razem dla wszystkich nowych i istniejących rekordów.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Wybierz moduł SugarCRM, aby zastosować wywołanie wydarzenia',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Stała data',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'zmienia się z',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'zmienia się na',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'zawiera dowolne',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'nie zawiera dowolnych',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'dnia (lub później)',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'dnia (lub wcześniej)',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nie jest równy',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Dodaj',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zamknij',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Wszystkie zespoły są przydzielone do tego rekordu',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Zespoły',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% powiązane z %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Użytkownik, który utworzył %MODULE%',

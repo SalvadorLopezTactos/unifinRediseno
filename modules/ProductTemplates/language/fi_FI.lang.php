@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Veroluokka:',
   'LBL_TYPE_NAME'=>'Tyypin nimi',
   'LBL_TYPE' => 'Tyyppi',
+  'LBL_PRODUCT_TYPE' => 'Tuotetyyppi',
   'LBL_URL' => 'Tuotteen URL:',
   'LBL_VENDOR_PART_NUM' => 'Myyjän osanumero:',
   'LBL_WEIGHT' => 'Paino:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Näytä tuotekatalogi',
   'NTC_DELETE_CONFIRMATION' => 'Haluatko varmasti poistaa tämän tietueen?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Lisää',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Hae Tuoteluettelosta',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Tietoja ei saatavilla',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Vastuuhenkilö',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Tuotetyypit',
   'LBL_RENEWABLE' => 'Uusittavissa',
   'LBL_SERVICE' => 'Palvelu',
+  'LBL_LOCK_DURATION' => 'Lukituksen kesto',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Tuotekatalogin luettelon koontinäyttö',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Tuotekatalogin tietueiden koontinäyttö',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Tuoteluettelo-tietolaatikko',
 );

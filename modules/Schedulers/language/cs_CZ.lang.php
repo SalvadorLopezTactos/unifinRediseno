@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Naplánovaná úloha',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Znovu sestavit nenormalizovaná data zabezpečení týmu',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Nástroj pro vyprázdnění Přehledu aktivit',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Aktualizujte definici produktu',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Zpracovat časově orientované plány',
+'LBL_OOTB_DATA_ARCHIVER' => 'Spustit archivování/vymazání aktivních dat',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Vždy',
 'LBL_CATCH_UP' => 'Spustit, pokud mine',
+'LBL_SYSTEM_JOB' => 'Je aktuální úloha systém?',
 'LBL_CATCH_UP_WARNING' => 'Odškrtněte toto, pokud tento program poběží déle než chvilku.',
 'LBL_DATE_TIME_END' => 'Datum a čas konce',
 'LBL_DATE_TIME_START' => 'Datum a čas začátku',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Odstranit soubory diagnostického nástroje',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Odstranit dočasné soubory',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Znovu sestavit nenormalizovaná data zabezpečení týmu',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Aktualizujte definici produktu',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Spouštět noční hromadné rozesílání e-mailových kampaní',
 'LBL_ASYNCMASSUPDATE' => 'Provést asynchroní hromadnou úpravu',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Vyčištění fronty úloh',
 'LBL_CLEANOLDRECORDLISTS' => 'Vyčistit seznamy starých záznamů',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Nástroj pro vyprázdnění Přehledu aktivit',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Zpracovat časově orientované plány',
 'LBL_PMSEENGINECRON' => 'Plánovač SugarBPM',
 );
 

@@ -89,6 +89,15 @@ class MetadataApi extends SugarApi
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
             ),
+            'getSegment' => array(
+                'reqType' => 'GET',
+                'path' => array('metadata', '?', '?'),
+                'pathVars' => array('', 'module', 'segment'),
+                'method' => 'getModuleDataSegment',
+                'minVersion' => '11.11',
+                'shortHelp' => 'Gets the desired segment for the given module',
+                'longHelp' => 'include/api/help/metadata_getModuleDataSegment.html',
+            ),
         );
     }
 
@@ -393,5 +402,37 @@ class MetadataApi extends SugarApi
     public function getPublicLanguage(ServiceBase $api, array $args)
     {
         return $this->getLanguage($api, $args, true);
+    }
+
+    /**
+     * Gets the data segment associated with the given module (including invisible modules,
+     * therefore you need admin privilege)
+     * @param ServiceBase $api
+     * @param array $args
+     * @return mixed
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionMissingParameter
+     */
+    public function getModuleDataSegment(ServiceBase $api, array $args)
+    {
+        // Only allow admins to make this api call
+        if (!$api->user->isAdmin()) {
+            throw new SugarApiExceptionNotAuthorized();
+        }
+        
+        return $this->getModuleAttribute($args['module'], $args['segment'], $api->platform);
+    }
+
+    /**
+     * Returns the metadata attribute of a given module
+     * @param string $module
+     * @param string $attr
+     * @param string $platform
+     * @return array
+     */
+    private function getModuleAttribute(string $module, string $attr, string $platform = '') : array
+    {
+        $data = $this->getMetaDataManager($platform)->getModuleData($module);
+        return $data[$attr] ?? [];
     }
 }

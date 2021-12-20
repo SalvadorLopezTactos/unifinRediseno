@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Pagal ataskaitą',
     'LBL_RECENTLY_MODIFIED' => 'Neseniai modifikuota',
     'LBL_RECORD_SAVED_SUCCESS' => 'Sėkmingai sukūrėte {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Atidarykite planą, kad pridėtumėte vartotojų naudodamiesi vartotojų antriniu pultu.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Šios ataskaitos planas',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Ataskaitų planų įrašų ataskaitų sritis',
 );

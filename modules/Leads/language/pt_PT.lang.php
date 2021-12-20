@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Dashboard da Lista de Clientes Potenciais',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Dashboard do Registo de Clientes Potenciais',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de potenciais',
 
     'ERR_DELETE_RECORD' => 'Um número de registo deve ser especificado para eliminar o cliente potencial.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descrição da Conta',
@@ -325,4 +326,8 @@ Depois de confirmar cada módulo pretendido, clique no botão Gravar e Converter
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Não é possível alterar o estado do {{moduleSingular}}. Este {{moduleSingular}} já foi convertido.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Previsão de conversão de Clientes potenciais',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Visualizar detalhes de previsão para um Cliente potencial específico',
 );

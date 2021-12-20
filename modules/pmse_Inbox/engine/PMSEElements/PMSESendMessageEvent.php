@@ -106,6 +106,7 @@ class PMSESendMessageEvent extends PMSEIntermediateEvent
      */
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
+        $this->emailHandler->setFlowData($flowData);
         if ($externalAction == 'RESUME_EXECUTION') {
             $this->sendEmail($flowData);
             return $this->prepareResponse($flowData, 'NONE', 'NONE');

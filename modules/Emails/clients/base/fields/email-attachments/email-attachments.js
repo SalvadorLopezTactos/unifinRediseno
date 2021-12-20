@@ -100,7 +100,7 @@
         newTemplateAttachments = notes.map(function(model) {
             return {
                 _link: 'attachments',
-                upload_id: model.get('id'),
+                upload_id: model.get('upload_id') || model.get('id'),
                 name: model.get('filename') || model.get('name'),
                 filename: model.get('filename') || model.get('name'),
                 file_mime_type: model.get('file_mime_type'),

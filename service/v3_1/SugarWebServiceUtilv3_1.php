@@ -500,11 +500,15 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
         }
 
         $vardefs = $bean->getFieldDefinition($name);
-        $type = !empty($vardefs['custom_type']) ? $vardefs['custom_type'] : $vardefs['type'];
-        $field = $sfh->getSugarField($type);
-        
-        if ($field instanceOf SugarFieldBase) {
-            return $field->apiValidate($bean, array($name => $value), $name, $vardefs);
+        if ($vardefs !== false) {
+            $type = $vardefs['custom_type'] ?? $vardefs['type'];
+        }
+        if ($type !== null) {
+            $field = $sfh->getSugarField($type);
+
+            if ($field instanceof SugarFieldBase) {
+                return $field->apiValidate($bean, array($name => $value), $name, $vardefs);
+            }
         }
 
         return true;

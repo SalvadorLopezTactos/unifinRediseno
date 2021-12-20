@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Nadzorna ploča za popis meta',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o metama',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za mete',
 
   'LBL_MODULE_NAME' => 'Mete',
   'LBL_MODULE_NAME_SINGULAR' => 'Meta',

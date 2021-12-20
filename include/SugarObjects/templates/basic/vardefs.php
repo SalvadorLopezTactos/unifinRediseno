@@ -184,7 +184,6 @@ $vardefs = array(
                 'id_name' => 'created_by',
                 'module' => 'Users',
                 'duplicate_merge' => 'disabled',
-                'importable' => false,
                 'massupdate' => false,
                 'duplicate_on_record_copy' => 'no',
                 'readonly' => true,
@@ -315,6 +314,7 @@ $vardefs = array(
         'taggable',
         'commentlog',
         'lockable_fields',
+        'integrate_fields',
     ),
     'duplicate_check' => array(
         'enabled' => true,

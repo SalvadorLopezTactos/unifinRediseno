@@ -87,7 +87,7 @@
         url = window.location.search.split("?desktop_url=")[1],
         _normalizeUrl = function(url) {
             // Pre-pend with 'http://' if url prefix is absent (itms:// is iTunes scheme)
-            if (/https?:\/\/|itms:\/\/|itms-apps:\/\//.test(url)) return url;
+            if (/^(https?:\/\/|itms:\/\/|itms-apps:\/\/)/.test(url)) return url;
             // Pre-pend with Nomad path, if url start with "../"
             if(/^\.\.\/?/.test(url)) {
                 var urlPrefix = window.location.href.split('?')[0].split('error-not-supported-platform.html')[0];

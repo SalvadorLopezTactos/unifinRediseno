@@ -85,7 +85,7 @@ class EmailAddressesApi extends ModuleApi
 
         if (empty($guid)) {
             // Create a new email address.
-            $args['email_address_caps'] = strtoupper($args['email_address']);
+            $args['email_address_caps'] = sugarStrToUpper($args['email_address']);
             return parent::createBean($api, $args, $additionalProperties);
         } else {
             // Return the existing email address.

@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Interessentenlisten-Dashboard',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Interessentenbericht-Dashboard',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Leads',
 
     'ERR_DELETE_RECORD' => 'Die Datensatznummer muss angegeben werden, um diesen Datensatz löschen zu können.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Firma-Beschreibung',
@@ -325,4 +326,8 @@ Nach der Bestätigung der einzelnen gewünschten Module klicken Sie auf "Speiche
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Der Status {{moduleSingular}} kann nicht geändert werden. Dieses {{moduleSingular}} wurde bereits konvertiert.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Interessenten-Konvertierungsvorhersage',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Vorhersagedetails für einen bestimmten Interessenten anzeigen',
 );

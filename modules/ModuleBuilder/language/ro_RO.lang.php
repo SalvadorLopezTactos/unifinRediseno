@@ -600,6 +600,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Configurare Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Activare portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Activare căutare înainte de deschiderea unui caz',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permiteți utilizatorilor portalului să închidă cazul',
     'LBL_PORTAL_THEME' => 'Tema Portal',
     'LBL_PORTAL_ENABLE' => 'Activeaza',
     'LBL_PORTAL_SITE_URL' => 'Portalul este disponibil la adresa:',
@@ -791,7 +792,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selectaţi pentru a utiliza acest câmp, atunci când căutaţi pentru înregistrările utilizând  Cautare Globala pe acest modul.',
+'LBL_POPHELP_REQUIRED'=>"Creați o formulă pentru a determina dacă acest câmp este obligatoriu în machete.<br/>"
+    . "Câmpurile obligatorii vor respecta formula din vizualizare mobilă bazată pe browser, <br/>"
+    . "însă nu vor respecta formula din aplicațiile native, precum Sugar Mobile pentru iPhone. <br/>"
+    . "Acestea nu vor respecta formula din Portalul de autoservire Sugar.",
+'LBL_POPHELP_READONLY'=>"Creați o formulă pentru a determina dacă acest câmp este disponibil doar în modul citire în machete.<br/>"
+        . "Câmpurile în modul citire vor respecta formula din vizualizarea mobilă bazată pe browser, <br/>"
+        . "dar nu va respecta formula din aplicațiile native, cum ar fi Sugar Mobile pentru iPhone.<br/>"
+        . "Acestea nu vor respecta formula din Portalul de autoservire Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selectați acest câmp atunci când cautați înregistrări folosind căutarea globală din acest modul.',
 //Revert Module labels
 'LBL_RESET' => 'Reseteaza',
 'LBL_RESET_MODULE' => 'Reseteaza Modulul',
@@ -826,6 +835,7 @@ $mod_strings = array(
                 'encrypt'=>'Criptare',
                 'datetimecombo' =>'Datatimp',
                 'decimal'=>'Zecimal',
+                'autoincrement' => 'Autoincrementare',
 ),
 'labelTypes' => array(
     "" => "Format Implicit e-mail",
@@ -843,4 +853,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Toate modulele',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relaţionat {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copiere din plan general',
+'LBL_RELATIONSHIP_TYPE' => 'Relație',
 );

@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Calls List Dashboard',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Calls Record Dashboard',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Calls Focus Drawer',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Calls',
@@ -94,8 +95,10 @@ $mod_strings = array (
     'LBL_MEMBER_OF' => 'Member Of',
     'LBL_HISTORY_SUBPANEL_TITLE' => 'Notes',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Assigned User',
-    'LBL_LIST_MY_CALLS' => 'My Calls',
-    'LBL_MY_SCHEDULED_CALLS' => 'My Scheduled Calls',
+    'LBL_LIST_MY_CALLS' => 'My Calls as Owner',
+    'LBL_MY_SCHEDULED_CALLS' => 'Scheduled Calls as Owner',
+    'LBL_GUEST_CALLS' => 'My Calls as Guest',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Scheduled Calls as Guest',
     'LBL_SELECT_FROM_DROPDOWN' => 'Please make a selection from the Related To dropdown list first.',
 	'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
 	'LBL_ASSIGNED_TO_ID' => 'Assigned User',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Cancel',
     'LBL_EMPTY_SEARCH_RESULT' => 'Sorry, no results were found. Please create an invitee below.',
     'LBL_NO_ACCESS' => 'You have no access to create $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect Contact Id',
+
     'LBL_REPEAT_TYPE' => 'Repeat',
     'LBL_REPEAT_INTERVAL' => 'Every',
     'LBL_REPEAT_END' => 'End',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Call with {{{this}}}',
     'LBL_SEND_INVITES' => 'Send Invites',
     'LBL_REMINDER_TITLE' => 'Call:',
+    'LBL_CALL_RECORDING_URL' => 'Recording URL',
+    'LBL_CALL_RECORDING' => 'Recording',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'You scheduled the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> for {{formatDate date_start}}.',

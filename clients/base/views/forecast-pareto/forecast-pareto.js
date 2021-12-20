@@ -87,8 +87,7 @@
         }
 
         if (this.isForecastSetup && this.forecastsConfigOK) {
-            this.initOptions.meta.template = undefined;
-
+            delete this.initOptions.meta.template;
             if (!options.meta.config) {
                 // we only want to call this if forecast is setup and configured
                 // and this is not the dashlet config screen

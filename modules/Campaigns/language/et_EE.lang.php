@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Eesmärkide loendit või vaiketüüpi ei leitud',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Kandeid ei leitud',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Kandeid töödeldi',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Sissetuleva e-posti sätted',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Süsteemi e-posti sätted',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Otsija nimi:',
   'LBL_EDIT_TRACKER_URL'=>'Otsija URL:',

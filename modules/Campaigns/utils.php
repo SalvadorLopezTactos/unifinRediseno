@@ -18,7 +18,6 @@
  ********************************************************************************/
 
 use Doctrine\DBAL\DBALException;
-use Sugarcrm\Sugarcrm\Util\Serialized;
 
 /**
  * Returns a list of objects a message can be scoped by, the list contacts the current campaign
@@ -101,7 +100,7 @@ function get_campaign_mailboxes_with_stored_options() {
     $r = $db->query($q);
 
     while($a = $db->fetchByAssoc($r)) {
-        $stored_options = Serialized::unserialize($a['stored_options'], null, true);
+        $stored_options = unserialize(base64_decode($a['stored_options']), ['allowed_classes' => false]);
         if (!empty($stored_options)) {
             $ret[$a['id']] = $stored_options;
         }
@@ -759,119 +758,112 @@ SQL;
     }
 }
 
-
-    /*
-     *This function will return a string to the newsletter wizard if campaign check
-     *does not return 100% healthy.
-     */
-    function diagnose()
-    {
-        global $mod_strings;
-        global $current_user;
-        $msg = " <table class='detail view small' width='100%'><tr><td> ".$mod_strings['LNK_CAMPAIGN_DIGNOSTIC_LINK']."</td></tr>";
-        //Start with email components
-        //monitored mailbox section
-        $focus = Administration::getSettings(); //retrieve all admin settings.
-
-
-        //run query for mail boxes of type 'bounce'
-        $email_health = 0;
-        $email_components = 2;
-        $mbox_qry = "select * from inbound_email where deleted ='0' and mailbox_type = 'bounce'";
-        $mbox_res = $focus->db->query($mbox_qry);
-
-        $mbox = array();
-        while ($mbox_row = $focus->db->fetchByAssoc($mbox_res)){$mbox[] = $mbox_row;}
-        //if the array is not empty, then set "good" message
-        if(isset($mbox) && count($mbox)>0){
-            //everything is ok, do nothing
-
-        }else{
-            //if array is empty, then increment health counter
-            $email_health =$email_health +1;
-            $msg  .=  "<tr><td ><font color='red'><b>". $mod_strings['LBL_MAILBOX_CHECK1_BAD']."</b></font></td></tr>";
-        }
+/**
+ *This function will return a string to the newsletter wizard if campaign check
+ *does not return 100% healthy.
+ */
+function diagnose()
+{
+    global $mod_strings;
+    global $current_user;
+    $msg = " <table class='detail view small' width='100%'><tr><td> ".$mod_strings['LNK_CAMPAIGN_DIGNOSTIC_LINK']."</td></tr>";
+    //Start with email components
+    //monitored mailbox section
+    $focus = Administration::getSettings(); //retrieve all admin settings.
 
 
-        if (strstr($focus->settings['notify_fromaddress'], 'example.com')){
-            //if "from_address" is the default, then set "bad" message and increment health counter
-            $email_health =$email_health +1;
-            $msg .= "<tr><td ><font color='red'><b> ".$mod_strings['LBL_MAILBOX_CHECK2_BAD']." </b></font></td></tr>";
-        }else{
-            //do nothing, address has been changed
-        }
-        //if health counter is above 1, then show admin link
-        if($email_health>0){
-            if (is_admin($current_user)){
-                $msg.="<tr><td ><a href='index.php?module=Campaigns&action=WizardEmailSetup";
-                if(isset($_REQUEST['return_module'])){
-                    $msg.="&return_module=".$_REQUEST['return_module'];
-                }
-                if(isset($_REQUEST['return_action'])){
-                    $msg.="&return_action=".$_REQUEST['return_action'];
-                }
-                $msg.="'>".$mod_strings['LBL_EMAIL_SETUP_WIZ']."</a></td></tr>";
-            }else{
-                $msg.="<tr><td >".$mod_strings['LBL_NON_ADMIN_ERROR_MSG']."</td></tr>";
+    //run query for mail boxes of type 'bounce'
+    $email_health = 0;
+    $mbox_qry = "select * from inbound_email where deleted ='0' and mailbox_type = 'bounce'";
+    $mbox_res = $focus->db->query($mbox_qry);
 
-            }
-
-        }
-
-
-        // proceed with scheduler components
-
-        //create and run the scheduler queries
-        $sched_qry = "select job, name, status from schedulers where deleted = 0 and status = 'Active'";
-        $sched_res = $focus->db->query($sched_qry);
-        $sched_health = 0;
-        $sched = array();
-        $check_sched1 = 'function::runMassEmailCampaign';
-        $check_sched2 = 'function::pollMonitoredInboxesForBouncedCampaignEmails';
-        $sched_mes = '';
-        $sched_mes_body = '';
-        $scheds = array();
-
-        while ($sched_row = $focus->db->fetchByAssoc($sched_res)){$scheds[] = $sched_row;}
-        //iterate through and see which jobs were found
-        foreach ($scheds as $funct){
-          if( ($funct['job']==$check_sched1)  ||   ($funct['job']==$check_sched2)){
-                if($funct['job']==$check_sched1){
-                    $check_sched1 ="found";
-                }else{
-                    $check_sched2 ="found";
-                }
-
-          }
-        }
-        //determine if error messages need to be displayed for schedulers
-        if($check_sched2 != 'found'){
-            $sched_health =$sched_health +1;
-            $msg.= "<tr><td><font color='red'><b>".$mod_strings['LBL_SCHEDULER_CHECK1_BAD']."</b></font></td></tr>";
-        }
-        if($check_sched1 != 'found'){
-            $sched_health =$sched_health +1;
-            $msg.= "<tr><td><font color='red'><b>".$mod_strings['LBL_SCHEDULER_CHECK2_BAD']."</b></font></td></tr>";
-        }
-        //if health counter is above 1, then show admin link
-        if($sched_health>0){
-            global $current_user;
-            if (is_admin($current_user)){
-                $msg.="<tr><td ><a href='index.php?module=Schedulers&action=index'>".$mod_strings['LBL_SCHEDULER_LINK']."</a></td></tr>";
-            }else{
-                $msg.="<tr><td >".$mod_strings['LBL_NON_ADMIN_ERROR_MSG']."</td></tr>";
-            }
-
-        }
-
-        //determine whether message should be returned
-        if(($sched_health + $email_health)>0){
-            $msg  .= "</table> ";
-        }else{
-            $msg = '';
-        }
-        return $msg;
+    $mbox = array();
+    while ($mbox_row = $focus->db->fetchByAssoc($mbox_res)) {
+        $mbox[] = $mbox_row;
     }
+    if (!isset($mbox) || count($mbox) <= 0) {
+        // if array is empty, then increment health counter and set error message
+        $email_health =$email_health +1;
+        $msg .= "<tr><td ><font color='red'><b>". $mod_strings['LBL_MAILBOX_CHECK1_BAD']."</b></font>";
+        if (is_admin($current_user)) {
+            $msg .= "&nbsp;<a href='index.php?module=InboundEmail&action=index'>" .
+                    $mod_strings['LBL_INBOUND_EMAIL_SETTINGS'] .
+                    "</a>";
+        }
+        $msg .= "</td></tr>";
+    }
+
+    if (strstr($focus->settings['notify_fromaddress'], 'example.com')) {
+        //if "from_address" is the default, then set "bad" message and increment health counter
+        $email_health =$email_health +1;
+        $msg .= "<tr><td ><font color='red'><b> ".$mod_strings['LBL_MAILBOX_CHECK2_BAD']." </b></font>";
+        if (is_admin($current_user)) {
+            $msg .= "&nbsp;<a href='index.php?module=EmailMan&action=config'>" .
+                    $mod_strings['LBL_SYSTEM_EMAIL_SETTINGS'] .
+                    "</a>";
+        }
+        $msg .= "</td></tr>";
+    }
+
+    // If user isn't an admin, give them the appropriate warning message
+    if (!is_admin($current_user)) {
+        $msg .= "<tr><td >".$mod_strings['LBL_NON_ADMIN_ERROR_MSG']."</td></tr>";
+    }
+
+    // proceed with scheduler components
+
+    //create and run the scheduler queries
+    $sched_qry = "select job, name, status from schedulers where deleted = 0 and status = 'Active'";
+    $sched_res = $focus->db->query($sched_qry);
+    $sched_health = 0;
+    $sched = array();
+    $check_sched1 = 'function::runMassEmailCampaign';
+    $check_sched2 = 'function::pollMonitoredInboxesForBouncedCampaignEmails';
+    $sched_mes = '';
+    $sched_mes_body = '';
+    $scheds = array();
+
+    while ($sched_row = $focus->db->fetchByAssoc($sched_res)) {
+        $scheds[] = $sched_row;
+    }
+    //iterate through and see which jobs were found
+    foreach ($scheds as $funct) {
+        if (($funct['job']==$check_sched1) || ($funct['job']==$check_sched2)) {
+            if ($funct['job']==$check_sched1) {
+                $check_sched1 ="found";
+            } else {
+                $check_sched2 ="found";
+            }
+        }
+    }
+    //determine if error messages need to be displayed for schedulers
+    if ($check_sched2 != 'found') {
+        $sched_health =$sched_health +1;
+        $msg.= "<tr><td><font color='red'><b>".$mod_strings['LBL_SCHEDULER_CHECK1_BAD']."</b></font></td></tr>";
+    }
+    if ($check_sched1 != 'found') {
+        $sched_health =$sched_health +1;
+        $msg.= "<tr><td><font color='red'><b>".$mod_strings['LBL_SCHEDULER_CHECK2_BAD']."</b></font></td></tr>";
+    }
+    //if health counter is above 1, then show admin link
+    if ($sched_health > 0) {
+        global $current_user;
+        if (is_admin($current_user)) {
+            $msg.="<tr><td ><a href='index.php?module=Schedulers&action=index'>".$mod_strings['LBL_SCHEDULER_LINK']."</a></td></tr>";
+        } else {
+            $msg.="<tr><td >".$mod_strings['LBL_NON_ADMIN_ERROR_MSG']."</td></tr>";
+        }
+
+    }
+
+    //determine whether message should be returned
+    if (($sched_health + $email_health) > 0) {
+        $msg  .= "</table> ";
+    } else {
+        $msg = '';
+    }
+    return $msg;
+}
 
 
 /**

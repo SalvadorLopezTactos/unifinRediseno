@@ -46,7 +46,10 @@ class DependencyManager
         $formulaFields = array();
         foreach ($fields as $field => $def) {
             if (isset($def['calculated']) && $def['calculated'] && !empty($def['formula'])) {
-                $triggerFields = Parser::getFieldsFromExpression($def['formula'], $fields);
+                $triggerFields = array_merge(
+                    Parser::getFieldsFromExpression($def['formula'], $fields),
+                    $def['additionalCalculationTriggerFields'] ?? []
+                );
                 $formulaFields[$field] = $triggerFields;
                 $dep = new Dependency($field);
                 $dep->setTrigger(new Trigger('true', $triggerFields));
@@ -64,10 +67,7 @@ class DependencyManager
                 if ($view == 'CreateView') {
                     $dep->setFireOnLoad(true);
                 }
-                if (isset($def['enforced']) && $def['enforced'] &&
-                    //Check for the string "false"
-                    (!is_string($def['enforced']) || strtolower($def['enforced']) !== "false")
-                ) {
+                if (isset($def['enforced']) && !isFalsy($def['enforced'])) {
                     if ($includeReadOnly) {
                         $readOnlyDep = new Dependency("readOnly$field");
                         $readOnlyDep->setFireOnLoad(true);
@@ -170,6 +170,58 @@ class DependencyManager
                 }
             }
         }
+        return $deps;
+    }
+
+    /**
+     * Used to get a set of Dependencies to drive the required fields for this module.
+     *
+     * @param array  $fields fielddef array to create the dependencies from
+     * @return array <Dependency>
+     */
+    public static function getRequiredFieldDependencies($fields)
+    {
+        $deps = array();
+
+        foreach ($fields as $field => $def) {
+            if (!empty($def['required']) && isset($def['required_formula']) && !$def['calculated']) {
+                $value = !empty($def['required_formula']) ? $def['required_formula'] : 'true';
+                $triggerFields = !empty($def['required_formula']) ? Parser::getFieldsFromExpression($value, $fields) : [];
+
+                $dep = new Dependency($field . '_required');
+                $dep->setTrigger(new Trigger('true', $triggerFields));
+                $dep->addAction(ActionFactory::getNewAction('SetRequired', array('target' => $field, 'value' => $value)));
+                $dep->setFireOnLoad(true);
+                $deps[] = $dep;
+            }
+        }
+
+        return $deps;
+    }
+
+    /**
+     * Used to get a set of Dependencies to drive the readonly fields for this module.
+     *
+     * @param array  $fields fielddef array to create the dependencies from
+     * @return array <Dependency>
+     */
+    public static function getReadOnlyFieldDependencies($fields)
+    {
+        $deps = [];
+
+        foreach ($fields as $field => $def) {
+            if (!empty($def['readonly']) && isset($def['readonly_formula']) && !$def['calculated']) {
+                $value = !empty($def['readonly_formula']) ? $def['readonly_formula'] : 'true';
+                $triggerFields = !empty($def['readonly_formula']) ? Parser::getFieldsFromExpression($value, $fields) : [];
+
+                $dep = new Dependency($field . '_readonly');
+                $dep->setTrigger(new Trigger('true', $triggerFields));
+                $dep->addAction(ActionFactory::getNewAction('ReadOnly', ['target' => $field, 'value' => $value]));
+                $dep->setFireOnLoad(true);
+                $deps[] = $dep;
+            }
+        }
+
         return $deps;
     }
 
@@ -449,6 +501,8 @@ class DependencyManager
         {
             return array_merge(
                 self::getCalculatedFieldDependencies($fields, true, false, $view),
+                self::getRequiredFieldDependencies($fields),
+                self::getReadOnlyFieldDependencies($fields),
                 self::getDependentFieldDependencies($fields),
                 self::getDropDownDependencies($fields));
         }

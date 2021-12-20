@@ -112,6 +112,16 @@ class PMSEProjectApi extends ModuleApi
                 'shortHelp' => 'Retrieves information about Fields, Modules, Users, Roles, etc.',
                 'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_crm_data_get_help.html',
             ),
+            'validateCrmData' => [
+                'reqType' => 'GET',
+                'path' => ['pmse_Project', 'validateCrmData', '?', '?'],
+                'pathVars' => ['module', '', 'data', 'filter'],
+                'method' => 'validateCrmData',
+                'acl' => 'view',
+                'shortHelp' => 'Validates whether BPM data exists in the system (Fields, Modules, Users, Roles, etc.)',
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_validate_crm_data_get_help.html',
+                'minVersion' => '11.10',
+            ],
             'updateCrmData' => array(
                 'reqType' => 'PUT',
                 'path' => array('pmse_Project', 'CrmData', '?', '?'),
@@ -129,6 +139,16 @@ class PMSEProjectApi extends ModuleApi
                 'acl' => 'view',
 //                'shortHelp' => 'Returns information without send filter about Fields, Modules, Users, Roles,',
             ),
+            'validateCrmDataWithoutFilters' => [
+                'reqType' => 'GET',
+                'path' => ['pmse_Project', 'validateCrmData', '?'],
+                'pathVars' => ['module', '', 'data'],
+                'method' => 'validateCrmData',
+                'acl' => 'view',
+                'shortHelp' => 'Validates whether BPM data exists in the system (Fields, Modules, Users, Roles, etc.)',
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_validate_crm_data_get_help.html',
+                'minVersion' => '11.10',
+            ],
             'readActivityDefinition' => array(
                 'reqType' => 'GET',
                 'path' => array('pmse_Project', 'ActivityDefinition', '?'),
@@ -392,5 +412,34 @@ class PMSEProjectApi extends ModuleApi
             }
         }
         return false;
+    }
+
+    /**
+     * Validates that a record with the given ID/key exists in the system. Similar
+     * to getCrmData, but instead of returning a list of data, returns a simple
+     * boolean with the result
+     *
+     * @param ServiceBase $api The service object
+     * @param array $args The request arguments
+     * @return array containing the boolean result of the validation
+     *              ['result' => {true if valid, false otherwise}]
+     * @throws SugarApiExceptionMissingParameter
+     */
+    public function validateCrmData(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['key']);
+        $results = $this->getCrmData($api, $args);
+        if (!empty($results['result'])) {
+            foreach ($results['result'] as $result) {
+                if (!empty($result['value']) && $result['value'] === $args['key']) {
+                    return [
+                        'result' => true,
+                    ];
+                }
+            }
+        }
+        return [
+            'result' => false,
+        ];
     }
 }

@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'sledeće godine',
     'LBL_OPEN_ISSUES' => 'Otvori {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Nedavno razrešeno',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Kreiraj filter',
+    'LBL_ERROR_FILTER_EMPTY' => 'Dodajte kriterijum za filter.',
+    'LBL_ADD_FILTER' => 'Dodaj kriterijum',
+    'LBL_FILTER_NAME' => 'Naziv filtera',
+    'LBL_FILTER_FIELD' => 'Polje',
+    'LBL_FILTER_OPERATOR' => 'Operater',
+    'LBL_FILTER_VALUE' => 'Vrednost',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Sačuvaj u aplikaciju za računar',
+    'LBL_FILTER_LOCAL' => 'Lokalni filter',
 );

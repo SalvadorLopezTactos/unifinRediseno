@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Dashbord for anbudsliste',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Dashbord for anbudsoppføring',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Sitater fokusskuff',
 
     'LBL_CONTRACTS'=>'Kontrakter',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontrakter',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Faktureringsland',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Faktureringspostnummer',
     'LBL_BILLING_ADDRESS_STATE' => 'Faktureringsstat',
-    'LBL_BILLING_ADDRESS_STREET' => 'Faktueringsadresse',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adresse:',
     'LBL_BILLING_CONTACT_ID' => 'Fakturamottaker ID:',
     'LBL_BILLING_CONTACT_NAME' => 'Kontaktnavn for fakturering:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Sendeland',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Sende-postnummer',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Sendestat',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Sendeadresse',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adresse:',
     'LBL_SHIPPING_BODY' => 'Fakturering og frakt',
     'LBL_SHIPPING_CONTACT_ID' => 'Sendingskontakt ID:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopiér faktureringsadresse til sendeadresse',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopiér sendeadresse til faktureringsadresse',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopiér til avsender',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopiér til fakturering',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Er du sikker på at du vil fjerne denne kommentaren fra tilbudet?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopiér til fakturering',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Er du sikker på at du vil fjerne denne kommentaren fra tilbudet?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Er du sikker på at du vil fjerne denne linjeposteringen fra tilbudet?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Er du sikker på at du vil fjerne denne gruppen fra tilbudet?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Er du sikker på at du vil fjerne denne kontakten fra tilbudet?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Antall',
     'LBL_MFT_PART_NUM' => 'Delenummer',
     'LBL_ITEM_NAME' => 'Linjeelement',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkt',
     'LBL_DISCOUNT_PRICE' => 'Enhetspris',
     'LBL_DISCOUNT_AMOUNT' => 'Rabatt',
     'LBL_LINE_ITEM_TOTAL' => 'Totalsum linjelement',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Salgsmulighet-ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Tilbudskonfigurasjon',
+
+    'LBL_RENEWAL' => 'Fornyelse',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tilbudsinteraksjoner',
 );

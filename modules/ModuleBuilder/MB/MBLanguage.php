@@ -166,6 +166,13 @@ class MBLanguage{
                 'LBL_IMPORT' => translate('LBL_IMPORT') . " " . $this->label,
                 'LBL_IMPORT_VCARDTEXT' => "Automatically create a new {$this->label_singular} record by importing a vCard from your file system.",
             );
+
+            $focusDrawerKey = 'LBL_' . strtoupper($this->key_name) . '_FOCUS_DRAWER_DASHBOARD';
+            $required[$focusDrawerKey] = $this->label . ' ' . translate('LBL_FOCUS_DRAWER_DASHBOARD');
+
+            $recordDashboardKey = 'LBL_' . strtoupper($this->key_name) . '_RECORD_DASHBOARD';
+            $required[$recordDashboardKey] = $this->label . ' ' . translate('LBL_RECORD_DASHBOARD');
+
             foreach ($required as $k => $v) {
                 $values[$k] = $v;
             }

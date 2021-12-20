@@ -230,19 +230,15 @@ abstract class Db implements OfflineOperations, OnlineOperations
     }
 
     public function updateLinkedBean(
-        SugarBean $bean,
-        string $linkedFieldName,
-        string $linkedKey,
+        string $relateRecordId,
         ?string $joinTableName,
         ?string $joinPrimaryKey,
         ?string $joinLinkedKey,
         string $denormalizedFieldName,
         string $primaryTableName,
-        string $primaryKey
+        string $primaryKey,
+        $value
     ): void {
-        $value = $bean->{$linkedFieldName};
-        $linkId = $bean->{$linkedKey};
-
         if (!empty($joinTableName)) {
             $where = $this->connection->createQueryBuilder();
             $where->select($joinPrimaryKey)
@@ -258,7 +254,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
             ->set($denormalizedFieldName, ':value')
             ->where($update->expr()->in($primaryKey, $whereSql))
             ->setParameter('value', $value)
-            ->setParameter('link_id', $linkId);
+            ->setParameter('link_id', $relateRecordId);
 
         $update->execute();
     }

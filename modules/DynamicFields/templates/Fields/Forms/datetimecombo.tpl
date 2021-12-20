@@ -63,19 +63,6 @@
 	{/if}
 	</td>
 </tr>
-{* Readonly fields should not have a massupdate option *}
-{if empty($vardef.readonly)}
-<tr>
-	<td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_MASS_UPDATE"}:</td>
-	<td>
-	{if $hideLevel < 5}
-		<input type="checkbox" id="massupdate" name="massupdate" value="1" {if !empty($vardef.massupdate)}checked{/if}/>
-	{else}
-		<input type="checkbox" id="massupdate" name="massupdate" value="1" disabled {if !empty($vardef.massupdate)}checked{/if}/>
-	{/if}
-	</td>
-</tr>
-{/if}
 {if $range_search_option_enabled}
 <tr>	
     <td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_ENABLE_RANGE_SEARCH"}:</td>

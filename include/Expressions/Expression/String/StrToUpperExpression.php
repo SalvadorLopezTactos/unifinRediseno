@@ -20,10 +20,10 @@ class StrToUpperExpression extends StringExpression {
 	 */
 	function evaluate() {
 		$param =$this->getParameters();
-		if (is_array($param))
-			$param = $param[0];
-    $strtoupper = function_exists('mb_strtoupper') ? mb_strtoupper($param->evaluate(), 'UTF-8') : strtoupper($param->evaluate());
-		return $strtoupper;
+        if (is_array($param)) {
+            $param = $param[0];
+        }
+        return sugarStrToUpper($param->evaluate());
 	}
 
 	/**

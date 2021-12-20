@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת לידים',
     'LBL_LEADS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת לידים',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס לידים',
 
     'ERR_DELETE_RECORD' => 'יש לספק מספר רשומה על מנת למחוק את הליד.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'תיאור החשבון',
@@ -325,4 +326,8 @@ After confirming each required and desired module, click the Save and Convert bu
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'לא ניתן לשנות את הסטטוס של {{moduleSingular}}.‏ {{moduleSingular}} זה כבר עבר המרה.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'תחזית המרת לידים',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'הצג פרטי תחזית לגבי ליד ספציפי',
 );

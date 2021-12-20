@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Chyba pri získavaní dát správy preskúmania pre túto akciu. Obráťte sa na vlastníka správy.',
     'LBL_CHART_NO_DRILLTHRU' => 'Preskúmanie nie je k dispozícií',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na hlásenia',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'V zobrazení zoznamu sa zobrazia všetky správy, ktoré spĺňajú aktuálne kritériá vyhľadávania a ku ktorým majú používatelia prístup. Môžete zobraziť základné detaily každého záznamu v stĺpcoch polí zobrazenia zoznamu. Tiež môžete nastaviť tagy pre správy a vytvoriť filtre. Kliknite na názov správy a otvorte zobrazenie správy alebo vyberte „Upraviť správu“ v menu akcií a upravte správu.',

@@ -109,14 +109,20 @@ footer {
 /* NEW SKIN START */
 
 footer {
-  /* new variable */
   background: @footerBackgroundColor;
 
   .table-row {
     .table-cell {
       button:not(.btn-primary) {
-        /* additive */
         color: @footerButtonColor;
+      }
+
+      button:not(.btn-primary):hover {
+        color: @black;
+      }
+
+      .more-logos {
+        display: inline-block;
       }
     }
   }

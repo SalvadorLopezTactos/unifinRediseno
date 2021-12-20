@@ -31,6 +31,7 @@ $viewdefs['pmse_Business_Rules']['base']['layout']['records'] = array(
                                                 'toggle-view' => 'list',
                                             ),
                                         ),
+                                        'refresh_button' => true,
                                         'availableToggles' => array(
                                             array(
                                                 'name' => 'list',

@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'แดชบอร์ดรายการประชุม',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกการประชุม',
+    'LBL_LEAD_GUESTS' => 'ผู้ใช้ภายนอกที่สนใจ',
+    'LBL_CONTACT_GUESTS' => 'ที่อยู่ติดต่อผู้ใช้ภายนอก',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'ประชุมระบบลิ้นชัก',
 
 	'ERR_DELETE_RECORD' => 'ต้องระบุเลขที่ระเบียนเพื่อลบการประชุม',
 	'LBL_ACCEPT_THIS'=>'ยอมรับหรือไม่',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'ทิศทาง',
 	'LBL_LIST_DUE_DATE'=>'วันที่ครบกำหนด',
 	'LBL_LIST_FORM_TITLE' => 'รายการประชุม',
-	'LBL_LIST_MY_MEETINGS' => 'การประชุมของฉัน',
+    'LBL_LIST_MY_MEETINGS' => 'การประชุมของฉัน',
     'LBL_MY_SCHEDULED_MEETINGS' => 'การประชุมตามกำหนดการของฉัน',
+    'LBL_GUEST_MEETINGS' => 'การประชุมของฉันในฐานะผู้เยี่ยมชม',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'การประชุมตามกำหนดการในฐานะผู้เยี่ยมชม',
 	'LBL_LIST_RELATED_TO' => 'เกี่ยวข้องกับ',
 	'LBL_LIST_STATUS'=>'สถานะ',
 	'LBL_LIST_SUBJECT' => 'เรื่อง',

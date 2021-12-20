@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Ievadītā parole neatbilst paroles prasībām. Mēģiniet vēlreiz.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Lietotāja informācija nav atrasta',
     'ERR_USER_NAME_EXISTS'              => 'Lietotājvārds {0} jau pastāv. Vienādi lietotājvārdi nav pieļaujami. Mainiet lietotājvārdu, lai tas būtu unikāls.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” licence ir jāsaglabā ar papildu saderīgu licences veidu',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Lietotājs ir nobloķēts Sugar programmā un nevar pieteikties ar savu esošo paroli.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Lietotājam ar tikai ārēju autentifikāciju nav ļauts pieteikties, izmantojot Sugar akreditācijas datus',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Saņēmēja e-pasts',
 	'ERR_SERVER_STATUS'					=> 'Jūsu servera statuss',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistēma nevar nosūtīt lietotājam e-pastu. Pārbaudiet izejošo e-pastu konfigurāciju <a href="index.php?module=EmailMan&action=config">E-pasta uzstādījumos</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Jaunus lietotājus var izveidot <a href="{0}" target="_blank">SugarCloud iestatījumos</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-pasta adrese',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognozes',
     'LBL_WORKSHEETS'                    => 'Darblapas',
 	'LBL_CALENDARS'                     => 'Kalendāri',
+    'LBL_SHIFTS'                        => 'Maiņas',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Maiņas izņēmumi',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Saņemiet e-pasta notifikāciju, kad jums tiek piešķirts ieraksts.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Nosūtīt e-pastu pēc piešķiršanas',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Saņemt e-pasta paziņojumu, kad kāds piemin jūs komentāru žurnāla ierakstā.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Nosūtīt e-pastu pēc pieminēšanas',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Atlasiet, kā ieraksta skatos parādīt lauku nosaukumus. Izvēlieties "Blakus lauka vērtībai", lai ieraksta skats būtu kompaktāks.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Lauka nosaukuma izvietojums',
     'LBL_ABOVE_FIELD_VALUE'             => 'Virs lauka vērtības',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Licences veids',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Izveidot gaidāmo zvanu vai tikšanos atgādinātāju. Iznirstošie atgādinājumi parādās visiem Sugar lietotājiem. E-pasta atgādījumi tiek sūtīti visiem uzaicinātajiem.',
 	'LBL_REMINDER'						=> 'Atgādinātāji',
 	'LBL_REMINDER_POPUP' => 'Uznirstošais atgādinājums',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Sesija ir beigusies, jo ir uzsākta cita sesija ar tādu pašu lietotājvārdu',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Ierakstu pārvietošana',
-	'LBL_REASS_DESC_PART1'				=> 'Atzīmējies moduļus, kuros ir ieraksti, kas tiks pārcelti no viena lietotāja otram . <br/><br/><br />                                                            Spiediet Turpināt lai redzētu ierakstu skaitu kas tiks mainīti katrā modulī.<br />                                                            Spiediet Atcelt lai izietu no lapas bez ierakstu pārcelšanas.',
+    'LBL_REASS_DESC_PART1'              => 'Atzīmējies moduļus, kuros ir ieraksti, kas tiks pārcelti no viena lietotāja otram . <br/><br/><br />                                                            Spiediet Turpināt lai redzētu ierakstu skaitu kas tiks mainīti katrā modulī.<br />                                                            Spiediet Atcelt lai izietu no lapas bez ierakstu pārcelšanas.',
         'LBL_REASS_DESC_PART2'=>                    'Atzīmējiet moduļus attiecībā uz kuriem darbināt darbplūsmas, nosūtiet piešķiršanas paziņojumus un veiciet auditēšanu piešķiršanas procesa laikā. Spiediet Pārstartēt lai sāktu no jauna.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Darba grupas pārvietošana',
 	'LBL_REASS_STEP2_DESC'				=> 'Zemāk redzamas darba grupas bija pieejamas izejošo lietotāju darba grupā, bet nav mērķa lietotāju darba grupā. Visi ieraksti no izejošām darba grupām nebūs pieejami lietotājiem mērķa darba grupā kamēr darba grupu vērtības netiks nokartētas.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Lietotāja profils',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Piekļūstiet <a href="%s" target="_blank">SugarCloud iestatījumiem</a>, lai veiktu izmaiņas tikai lasāmajos laukos.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Ja vēlaties veikt izmaiņas tikai lasāmajos laukos, sazinieties ar savu Sugar administratoru.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

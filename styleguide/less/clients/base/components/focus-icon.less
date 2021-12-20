@@ -1,0 +1,139 @@
+// Surrounding container for icon
+.focus-icon-container {
+  display: none;
+  z-index: 1;
+
+  &.hide {
+    display: none;
+  }
+
+  // Focus icon and hover
+  .focus-icon {
+    display: block;
+    background-image: url("@{baseUrl}/img/icon_focus.svg");
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+
+    &:hover {
+      background-image: url("@{baseUrl}/img/icon_focus_hover.svg");
+      cursor: pointer;
+    }
+  }
+}
+
+// Hide on search and select
+table.search-and-select {
+  td {
+    &[data-fieldname="name"],
+    &[data-type="fullname"],
+    &[data-type="name"],
+    &[data-type="parent"],
+    &[data-type="relate"] {
+      .relate-field-container {
+        // Fix tooltips and ellipsed text
+        display: block;
+        flex-direction: unset;
+        justify-content: unset;
+
+        &:hover {
+          .focus-icon-container {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Record view styling
+.record-cell {
+  &[data-fieldname="name"],
+  &[data-type="fullname"],
+  &[data-type="name"],
+  &[data-type="parent"],
+  &[data-type="relate"] {
+    .relate-field-container {
+      display: flex;
+
+      .focus-icon-container {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  &:not(.edit):hover {
+    &[data-fieldname="name"],
+    &[data-type="fullname"],
+    &[data-type="name"],
+    &[data-type="parent"],
+    &[data-type="relate"] {
+      .relate-field-container {
+        .focus-icon-container:not(.hide) {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// List view styling
+td {
+  &[data-fieldname="name"],
+  &[data-type="fullname"],
+  &[data-type="name"],
+  &[data-type="parent"],
+  &[data-type="quote-data-relate"],
+  &[data-type="relate"] {
+    .relate-field-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .focus-icon-container {
+        margin-left: 10px;
+        position: static;
+      }
+
+      &:hover {
+        .focus-icon-container:not(.hide) {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// Preview styling
+.preview-data {
+  .field-row {
+    .field-value {
+      &[data-fieldname="name"],
+      &[data-fieldname="parent_name"],
+      &[data-type="fullname"],
+      &[data-type="name"],
+      &[data-type="parent"],
+      &[data-type="relate"] {
+        .relate-field-container {
+          display: flex;
+
+          .focus-icon-container {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+
+      &:hover {
+        .focus-icon-container:not(.hide) {
+          display: block;
+        }
+      }
+    }
+  }
+}

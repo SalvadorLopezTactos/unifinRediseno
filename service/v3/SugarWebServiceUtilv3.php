@@ -247,19 +247,24 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 	            }
 	            $defs = SugarAutoLoader::loadExtension('layoutdefs', $module);
 	            if($defs) {
-	            	require $defs;
+                    require $defs;
 	            }
 	    }
 
-	    //Filter results for permissions
-	    foreach ($layout_defs[$module]['subpanel_setup'] as $subpanel => $subpaneldefs)
-	    {
-	        $moduleToCheck = $subpaneldefs['module'];
-	        $bean = BeanFactory::newBean($moduleToCheck);
-	        if(empty($bean)) continue;
-	        if($bean->ACLAccess('list'))
-	            $results[$subpanel] = $subpaneldefs;
-	    }
+        if (isset($layout_defs) && is_array($layout_defs)
+            && isset($layout_defs[$module]) && is_array($layout_defs[$module])) {
+            //Filter results for permissions
+            foreach ($layout_defs[$module]['subpanel_setup'] as $subpanel => $subpaneldefs) {
+                $moduleToCheck = $subpaneldefs['module'];
+                $bean = BeanFactory::newBean($moduleToCheck);
+                if (empty($bean)) {
+                    continue;
+                }
+                if ($bean->ACLAccess('list')) {
+                    $results[$subpanel] = $subpaneldefs;
+                }
+            }
+        }
 
 	    return $results;
 

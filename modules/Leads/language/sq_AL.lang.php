@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Paneli i listës së drejtuesve',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të drejtuesve',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te klientët e mundshëm',
 
     'ERR_DELETE_RECORD' => 'en_us Duhet përcaktuar numrin e regjistrimit për të fshirëudhëheqjen',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Përshkrimi i llogarisë',
@@ -313,4 +314,8 @@ Për të krijuar një {{module_name}}:
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'E pamundur të ndryshohet statusi i {{moduleSingular}}. Ky {{moduleSingular}} është konvertuar tashmë.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Drejtues i parashikimeve të konvertimit',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Shfaq detajet e parashikimit për një drejtues specifik',
 );

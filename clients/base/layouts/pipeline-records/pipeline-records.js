@@ -39,5 +39,18 @@
         this.collection.setOption('params', {order_by: 'date_modified:DESC'});
         this.collection.setOption('limit', 2); // At most 2 rows - default config and user config (if any).
         this.collection.fetch();
+    },
+
+    /**
+     * @inheritdoc
+     */
+    render: function() {
+        this._super('render');
+
+        if (this.$('.btn-group.pipeline-refresh-btn')[0] &&
+            this.$('.btn-group.pipeline-refresh-btn')[0].firstElementChild) {
+            // Change the label of refresh button to say 'Refresh Tiles' instead on 'Refresh list'
+            this.$('.btn-group.pipeline-refresh-btn')[0].firstElementChild.title = app.lang.get('LBL_TILE_REFRESH');
+        }
     }
 })

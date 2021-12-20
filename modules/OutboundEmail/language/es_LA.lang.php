@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Cuentas de Correo Electrónico Saliente',
     'LBL_MODULE_NAME_SINGULAR' => 'Cuenta de Correo Electrónico Saliente',
+    'LBL_STATUS' => 'Estado',
     'LBL_MAIL_SENDTYPE' => 'Agente de Transferencia de Correo',
     'LBL_MAIL_SMTPSERVER' => 'Servidor',
     'LBL_MAIL_SMTPPORT' => 'Puerto',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Esta es la cuenta de sistema.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID de Dirección de Correo Electronico',
     'LBL_TYPE' => 'Tipo',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Dirección de correo electrónico autorizado',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Desde la dirección de correo electrónico',
     'LBL_REPLY_TO_NAME' => 'Nombre de Responder A',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Direcciones electrónicas de Responder a',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID de dirección electrónica de Responder a',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Dirección electrónica de Responder a',
     'LBL_PRIMARY_TEAM' => 'Equipo Principal',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Configuración de Correo Electrónico',
 );

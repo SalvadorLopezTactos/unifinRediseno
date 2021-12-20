@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => '아이디로 수정',
     'LBL_EXPORT_CREATED_BY' => '아이디로 작성',
     'LBL_EXPORT_TYPE_NAME' => '유형 이름',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => '계약서 포커스 서랍',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => '연락처 기록 대시보드',
 );

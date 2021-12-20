@@ -732,7 +732,7 @@
                                                                         <td width='25%' align="left" valign='middle'>
                                                                             <input name="ldap_admin_password" id="ldap_admin_password" size='20'
                                                                                    type="password"
-                                                                                   value="{$settings.ldap_admin_password}">
+                                                                                   value="{$settings.ldap_admin_password}" autocomplete="off">
                                                                         </td>
                                                                     </tr>
                                                                 </table>

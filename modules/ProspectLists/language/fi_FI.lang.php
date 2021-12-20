@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Tavoiteluettelojen luettelon työpöytä',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Tavoiteluettelojen tietuetyöpöytä',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Kohdeluettelot-tietolaatikko',
+  'LBL_RELATED_ACCOUNTS' => 'Tähän liittyvät asiakkaat',
+  'LBL_RELATED_CONTACTS' => 'Tähän liittyvät kontaktit',
+  'LBL_RELATED_LEADS_TARGETS' => 'Tähän liittyvät liidit ja kohteet',
 
   'LBL_MODULE_NAME' => 'Tavoitelistat',
   'LBL_MODULE_NAME_SINGULAR' => 'Tavoitelista',

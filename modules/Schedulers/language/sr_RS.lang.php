@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Planirani poslovi',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Ponovna izgradnja denormalizovanih bezbednosnih podataka o timovima',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Brisanje toka aktivnosti',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Ažuriraj definiciju proizvoda',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Planeri procesa koji se odnose na vreme',
+'LBL_OOTB_DATA_ARCHIVER' => 'Pokreni arhiviranje/brisanje aktivnih podataka',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Uvek',
 'LBL_CATCH_UP' => 'Izvrši ako je propušteno',
+'LBL_SYSTEM_JOB' => 'Trenutni sistem poslova?',
 'LBL_CATCH_UP_WARNING' => 'Isključite ako je za izvršavanje ovoga potrebno više od nekoliko trenutaka.',
 'LBL_DATE_TIME_END' => 'Datum i vreme završetka',
 'LBL_DATE_TIME_START' => 'Datum i vreme početka',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Ukloniti fajlove alata za dijagnozu',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Ukloniti privremene fajlove',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Ponovna izgradnja denormalizovanih bezbednosnih podataka o timovima',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Ažuriraj definiciju proizvoda',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Pokreni noćne masovne Email kampanje',
 'LBL_ASYNCMASSUPDATE' => 'Pokreni asinhrono masovno ažuriranje',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Red poslova čišćenja',
 'LBL_CLEANOLDRECORDLISTS' => 'Očisti listu starih zapisa',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Brisanje toka aktivnosti',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Planeri procesa koji se odnose na vreme',
 'LBL_PMSEENGINECRON' => 'SugarBPM planer',
 );
 

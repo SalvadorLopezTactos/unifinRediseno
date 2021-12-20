@@ -14,12 +14,16 @@
  * @extends View.View
  */
 ({
+    className: 'tabbed-dashboard-pane',
+
     events: {
         'click [data-toggle=tab]': 'tabClicked',
     },
 
     activeTab: 0,
     tabs: [],
+    sticky: true,
+    buttons: [],
 
     /**
      * Hash key for stickness.
@@ -36,6 +40,9 @@
     initialize: function(options) {
         this._super('initialize', [options]);
         this._initTabs(options.meta);
+        if (options.meta && !_.isUndefined(options.meta.sticky)) {
+            this.sticky = options.meta.sticky;
+        }
     },
 
     /**
@@ -44,6 +51,10 @@
      * @return {string} hash key.
      */
     getLastStateKey: function() {
+        if (!this.sticky) {
+            return '';
+        }
+
         if (this.lastStateKey) {
             return this.lastStateKey;
         }
@@ -73,7 +84,11 @@
             return true;
         }
         tabIndex = _.isUndefined(tabIndex) ? this.activeTab : tabIndex;
-        return !_.isUndefined(this.tabs[tabIndex].components.rows);
+
+        var isStandardDashboard = !!this.tabs[tabIndex].dashlets;
+        var isConsoleDashboard = !!(this.tabs[tabIndex].components && this.tabs[tabIndex].components.rows);
+
+        return isStandardDashboard || isConsoleDashboard;
     },
 
     /**
@@ -85,12 +100,78 @@
         if (index === this.activeTab) {
             return;
         }
-        // can't edit a non-dashboard tab
-        if (this.model.mode === 'edit' && !this._isDashboardTab(index)) {
+        // can't edit a non-dashboard tab or open a disabled tab
+        if (!this.canSwitchTab(index) ||
+            (this.model.mode === 'edit' && !this._isDashboardTab(index)) ||
+            !this.isTabEnabled(index)) {
             event.stopPropagation();
             return;
         }
         this.context.trigger('tabbed-dashboard:switch-tab', index);
+    },
+
+    /**
+     * Determine if anything is blocking a graceful tab switch
+     *
+     * @return boolean true if nothing blocking, false otherwise
+     */
+    canSwitchTab: function(index) {
+        var components = [];
+
+        var sideDrawer = this._getSideDrawer();
+        if (sideDrawer && sideDrawer.isOpen()) {
+            components.push(sideDrawer);
+        }
+
+        var omniDashboard = this._getOmnichannelDashboard();
+        if (omniDashboard) {
+            components.push(omniDashboard);
+        }
+
+        var blocked = _.find(components, function(component) {
+            var switchTab = _.bind(this.switchTab, this, index);
+
+            // return the first component that blocks tab switching
+            return component.triggerBefore('tabbed-dashboard:switch-tab', {callback: switchTab}) === false;
+        }, this);
+
+        return _.isUndefined(blocked);
+    },
+
+    /**
+     * Change active tab.
+     * @param {number} tabIndex
+     */
+    switchTab: function(tabIndex) {
+        if ((this.model.mode === 'edit' && !this._isDashboardTab(tabIndex)) ||
+            !this.isTabEnabled(tabIndex)) {
+            return;
+        }
+        this.context.trigger('tabbed-dashboard:switch-tab', tabIndex);
+    },
+
+    /**
+     * Enable/disable a tab.
+     * @param {number} index The tab index
+     * @param {boolean} mode True to enable, false to disbale
+     */
+    setTabMode: function(index, mode) {
+        if (this.tabs && this.tabs[index]) {
+            this.tabs[index].enabled = mode;
+        }
+        var $tab = this.$('a[data-index="' + index + '"]').closest('.tab');
+        if ($tab) {
+            mode ? $tab.removeClass('disabled') : $tab.addClass('disabled');
+        }
+    },
+
+    /**
+     * Check if tab is enabled.
+     * @param {number} index The tab index
+     * @return {boolean} True if enabled, otherwise false
+     */
+    isTabEnabled: function(index) {
+        return !(this.tabs && this.tabs[index] && this.tabs[index].enabled === false);
     },
 
     /**
@@ -142,6 +223,10 @@
             this.context.set('activeTab', this.activeTab);
             this._initTabBadges();
         }
+
+        if (!_.isUndefined(options.buttons)) {
+            this.buttons = options.buttons;
+        }
     },
 
     /**
@@ -181,12 +266,47 @@
     },
 
     /**
+     * Get the side drawer
+     *
+     * @return {Object} The side drawer
+     * @private
+     */
+    _getSideDrawer: function() {
+        var dashboard = this.closestComponent('dashboard');
+        var dmComponent = dashboard.getComponent('dashlet-main');
+
+        return dmComponent.getComponent('side-drawer');
+    },
+
+    /**
+     * Get the omnichannel dashboard
+     *
+     * @return {Object} The omnichannel dashboard
+     * @private
+     */
+    _getOmnichannelDashboard: function() {
+        return this.closestComponent('omnichannel-dashboard');
+    },
+
+    /**
      * @inheritdoc
      */
     _render: function() {
         this._super('_render');
         if (this.model.mode === 'edit') {
             this._setMode('edit');
+        }
+    },
+
+    /**
+     * Fetch the model if the model exists
+     *
+     * If new metadata is fetched, this will trigger 'change:metadata'. That will
+     * then trigger 'tabbed-dashboard:update' to set tabs and render
+     */
+    fetchModel: function() {
+        if (this.model) {
+            this.model.fetch();
         }
     }
 })

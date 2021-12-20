@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Oprettet af id',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Oprettet af brugernavn',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt af brugernavn',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Tags',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Betjeningspanel til tags-optegnelser',
+    'LBL_MY_TAGS' => 'Mine tags',
+    'LBL_MY_FAVORITE_TAGS' => 'Mine favorit-tags',
 );

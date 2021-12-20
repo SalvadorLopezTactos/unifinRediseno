@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmDynaForm'] = array(
     'table' => 'pmse_bpm_dynamic_forms',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,

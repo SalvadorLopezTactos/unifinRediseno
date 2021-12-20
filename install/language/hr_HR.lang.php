@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Upozorenje: ne može se pisati',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Sugar ne podržava vašu verziju PHP-a. Morate instalirati verziju koja je kompatibilna s aplikacijom Sugar. Podržane verzije PHP-a potražite u matrici kompatibilnosti u Bilješkama o izdanju. Vaša je verzija ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Sugar ne podržava vašu verziju IIS-a. Morate instalirati verziju koja je kompatibilna s aplikacijom Sugar. Podržane verzije IIS-a potražite u matrici kompatibilnosti u Bilješkama o izdanju. Vaša je verzija ',
-	'ERR_CHECKSYS_FASTCGI'              => 'Otkriveno je da ne upotrebljavate mapiranje rukovatelja FastCGI za PHP. Morate instalirati/konfigurirati verziju koja je kompatibilna s aplikacijom Sugar. Podržane verzije potražite u matrici kompatibilnosti u Bilješkama o izdanju. Pogledajte <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> za detalje ',
+    'ERR_CHECKSYS_FASTCGI'              => 'Otkriveno je da ne upotrebljavate mapiranje rukovatelja FastCGI za PHP. Morate instalirati/konfigurirati verziju koja je kompatibilna s aplikacijom Sugar. Podržane verzije potražite u matrici kompatibilnosti u Bilješkama o izdanju. Pogledajte <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> za pojedinosti ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Za optimalno iskustvo upotrebe sučelja IIS/FastCGI sapi postavite fastcgi.logging na 0 u svojoj datoteci php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalirana nepodržana verzija PHP-a: ( ver.',
     'LBL_DB_UNAVAILABLE'                => 'Baza podataka nije dostupna',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena. Provjerite imate li potrebne upravljačke programe za jednu od navedenih podržanih vrsta baze podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija o tome kako omogućiti Podršku za bazu podataka potražite u svojem priručniku za PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nije pronađena Podrška za bazu podataka. Provjerite imate li potrebne upravljačke programe za jednu od sljedećih podržanih vrsta baze podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s pravilnom binarnom datotekom ovisno o vašoj verziji PHP-a. Ako trebate više informacija o tome kako omogućiti Podršku za bazu podataka, proučite priručnik za PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkcije povezane s bibliotekama za raščlanjivanje XML koje su potrebne za aplikaciju Sugar nisu pronađene. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija potražite u svojem priručniku za PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator slučajnih brojeva',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcije povezane s proširenjem Multibyte Strings PHP (mbstring) koje su potrebne za aplikaciju Sugar nisu pronađene. <br/><br/>Modul mbstring inače nije zadano uključen u PHP-u i mora ga se aktivirati s pomoću opcije --enable-mbstring nakon ugradnje binarne datoteke PHP. Više informacija o tome kako uključiti podršku za mbstring potražite u svojem priručniku za PHP.',
@@ -555,139 +555,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Uključen je način rada kompatibilnosti s ranijim verzijama PHP-a. Za nastavak postavite zend.ze1_compatibility_mode na Isključeno',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Obavijesti o sastanku putem e-pošte',
+        'subject' => 'SugarCRM sastanak - $event_name ',
+        'description' => 'Ovaj se predložak upotrebljava kada sustav korisniku šalje obavijest o sastanku.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Za: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user pozvao/la vas je na sastanak</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Predmet: $event_name<br/>
+	Datum početka: $start_date<br/>
+	Datum završetka: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Opis: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Prihvatite ovaj sastanak:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Uvjetno prihvatite ovaj sastanak:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Odbijte ovaj sastanak:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Za: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user pozvao/la vas je na sastanak
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Predmet: $event_name
+Datum početka: $start_date
+Datum završetka: $end_date
 
-Description: $description
+Opis: $description
 
-Accept this meeting:
+Prihvatite ovaj sastanak:
 <$accept_link>
 
-Tentatively Accept this meeting
+Uvjetno prihvatite ovaj sastanak:
 <$tentative_link>
 
-Decline this meeting
+Odbijte ovaj sastanak:
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Obavijesti o pozivima putem e-pošte',
+        'subject' => 'SugarCRM poziv - $event_name ',
+        'description' => 'Ovaj se predložak upotrebljava kada sustav korisniku šalje obavijest o pozivu.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Za: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user pozvao/la vas je na sastanak</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Predmet: $event_name<br/>
+	Datum početka: $start_date<br/>
+	Trajanje: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Opis: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Prihvatite ovaj sastanak:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Uvjetno prihvatite ovaj sastanak:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Odbijte ovaj sastanak:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Za: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user pozvao/la vas je na poziv
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Predmet: $event_name
+Datum početka: $start_date
+Trajanje: $hoursh, $minutesm
 
-Description: $description
+Opis: $description
 
-Accept this call:
+Prihvatite ovaj poziv:
 <$accept_link>
 
-Tentatively Accept this call
+Uvjetno prihvatite ovaj poziv:
 <$tentative_link>
 
-Decline this call
+Odbijte ovaj poziv:
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Obavijesti o dodjeljivanju putem e-pošte',
+        'subject' => 'SugarCRM – Dodijeljen modul $module_name ',
+        'description' => 'Ovaj se predložak upotrebljava kada sustav korisniku šalje dodijeljeni zadatak.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user je dodijelio modul&nbsp;$module_name korisniku&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Modul&nbsp;$module_name možete pregledati na:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user je dodijelio modul $module_name korisniku $assigned_user.
 
-You may review this $module_name at:
+Modul $module_name možete pregledati na:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Poruka e-pošte o zakazanom izvješću',
+        'subject' => 'Zakazano izvješće: $report_name od $report_time',
+        'description' => 'Ovaj se predložak upotrebljava kada sustav korisniku šalje zakazano izvješće.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Pozdrav $assigned_user,</p>
+<p>u prilogu se nalazi automatski generirano izvješće koje je zakazano za Vas.</p>
+<p>Naziv izvješća: $report_name</p>
+<p>Datum i vrijeme izvođenja izvješća: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Pozdrav $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+u prilogu se nalazi automatski generirano izvješće koje je zakazano za Vas.
 
-Report Name: $report_name
+Naziv izvješća: $report_name
 
-Report Run Date and Time: $report_time',
+Datum i vrijeme izvođenja izvješća: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Obavijest o zapisniku komentara u sustavu putem poruke e-pošte',
+        'subject' => 'SugarCRM - $initiator_full_name spomenuo vas je na modulu $singular_module_name',
+        'description' => 'Ovaj predložak upotrebljava se za slanje obavijesti putem e-pošte korisnicima koji su označeni u odjeljku zapisnika komentara.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Netko vas je spomenuo u zapisniku komentara sljedećeg zapisa:  <a href="$record_url">$record_name</a></p>
+                <p>Prijavite se na Sugar kako biste vidjeli komentar.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Netko vas je spomenuo u zapisniku komentara sljedećeg zapisa: $record_name
+            Prijavite se na Sugar kako biste vidjeli komentar.',
     ],
 
     'advanced_password_new_account_email' => array(

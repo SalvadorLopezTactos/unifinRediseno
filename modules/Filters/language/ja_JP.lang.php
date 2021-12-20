@@ -11,7 +11,7 @@
  */
 
 $mod_strings = array(
-    'LBL_LISTVIEW_FILTER_ALL' => 'すべての {0}',
+    'LBL_LISTVIEW_FILTER_ALL' => '全ての {0}',
     'LBL_TEAM' => 'チーム',
     'LBL_TEAMS' => 'チーム',
     'LBL_TEAM_ID' => 'チームID',
@@ -28,9 +28,9 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => '詳細',
     'LBL_DELETED' => '削除済み',
     'LBL_NAME' => '名前',
-    'LBL_CREATED_USER' => 'ユーザにより作成',
+    'LBL_CREATED_USER' => 'ユーザーにより作成',
     'LBL_CREATED_BY_ME' => '私が作成',
-    'LBL_MODIFIED_USER' => 'ユーザにより更新',
+    'LBL_MODIFIED_USER' => 'ユーザーにより更新',
     'LBL_LIST_NAME' => '名前',
     'LBL_EDIT_BUTTON' => '編集',
     'LBL_REMOVE' => '削除',
@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => '翌年',
     'LBL_OPEN_ISSUES' => '{0} を開く',
     'LBL_RECENTLY_RESOLVED_ISSUES' => '最近解決済み',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'フィルタ作成',
+    'LBL_ERROR_FILTER_EMPTY' => 'フィルタ条件を追加してください。',
+    'LBL_ADD_FILTER' => '検索条件を追加',
+    'LBL_FILTER_NAME' => 'フィルタ名',
+    'LBL_FILTER_FIELD' => 'フィールド',
+    'LBL_FILTER_OPERATOR' => 'オペレータ',
+    'LBL_FILTER_VALUE' => '値',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'デスクトップアプリに保存',
+    'LBL_FILTER_LOCAL' => 'ローカルフィルタ',
 );

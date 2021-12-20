@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Процесс обработки бизнес-правил',
   'LBL_MODULE_NAME_SINGULAR' => 'Процесс обработки бизнес-правила',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для бизнес-правил процессов',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Информационная панель записей о бизнес-правилах процессов',
   'LBL_RST_UID' => 'ID Бизнес-правила',
   'LBL_RST_TYPE' => 'Тип бизнес-правила',
   'LBL_RST_DEFINITION' => 'Определение бизнес-правила',

@@ -15,6 +15,7 @@ namespace Sugarcrm\IdentityProvider\Saml2;
 use OneLogin\Saml2\Auth;
 use OneLogin\Saml2\Constants;
 use OneLogin\Saml2\Error;
+use OneLogin\Saml2\LogoutRequest;
 use OneLogin\Saml2\LogoutResponse;
 use OneLogin\Saml2\Utils;
 use Sugarcrm\IdentityProvider\Saml2\Builder\RequestBuilder;
@@ -155,7 +156,10 @@ class AuthPostBinding extends Auth
         $logoutResponse->build($logoutRequest->id);
 
         $resultResponse = $logoutResponse->getResponse();
-        $parameters = ['SAMLResponse' => $resultResponse];
+        $parameters = [
+            'SAMLResponse' => $resultResponse,
+            'nameId' => LogoutRequest::getNameId($logoutRequest->getXML(), $this->getSettings()->getSPkey()),
+        ];
         if (!empty($relayState)) {
             $parameters['RelayState'] = $relayState;
         }

@@ -16,6 +16,8 @@
 ({
     extendsFrom: 'FieldsetField',
 
+    plugins: ['FocusDrawer'],
+
     /**
      * Mapping name field name to format initial
      *
@@ -166,5 +168,25 @@
         if (this.$el.parents('.headerpane').length > 0 && _.isFunction(this.view.adjustHeaderpaneFields)) {
             this.view.adjustHeaderpaneFields();
         }
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the ID of the record this field
+     * links to
+     *
+     * @return {string} the ID of the related record
+     */
+    getFocusContextModelId: function() {
+        return this.model && this.model.get('id') ? this.model.get('id') : '';
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the name of the module this
+     * field links to
+     *
+     * @return {string} the name of the related module
+     */
+    getFocusContextModule: function() {
+        return this.model && this.model.get('_module') ? this.model.get('_module') : '';
     }
 })

@@ -74,6 +74,9 @@ class Call extends SugarBean {
 	var $importable = true;
 	var $recurring_source;
 	var $fill_additional_column_fields = true;
+    public $aws_contact_id;
+    public $call_recording_url;
+    public $call_recording;
 
 	// This is used to retrieve related fields from form posts.
 	var $additional_column_fields = array('assigned_user_name', 'assigned_user_id', 'contact_id', 'user_id', 'contact_name');

@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Configuració de Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Habilita portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Habilita la cerca abans d&#39;obrir un cas',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permet que els usuaris del portal tanquin el cas',
     'LBL_PORTAL_THEME' => 'Portal temàtic',
     'LBL_PORTAL_ENABLE' => 'Habilitar',
     'LBL_PORTAL_SITE_URL' => 'El seu portal està disponible a:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccioneu aquesta opció per utilitzar aquest camp en la recerca de registres utilitzant la Cerca Global en aquest mòdul.',
+'LBL_POPHELP_REQUIRED'=>"Crea una fórmula per determinar si aquest camp és obligatori al disseny.<br/>"
+    . "Els camps obligatoris seguiran la fórmula a la vista mòbil basada en navegador, <br/>"
+    . "però no seguiran la fórmula a les aplicacions natives, com ara Sugar Mobile per a iPhone.<br/>"
+    . "No seguiran la fórmula al Portal autoservei de Sugar.",
+'LBL_POPHELP_READONLY'=>"Creeu una fórmula per determinar si aquest camp és només de lectura als dissenys.<br/>"
+        . "Els camps només de lectura seguiran la fórmula a la visualització mòbil basada en el navegador, <br/>"
+        . "però no seguirà la fórmula a les aplicacions natives, com Sugar Mobile per a iPhone. <br/>"
+        . "No seguiran la fórmula al Portal autoservei de Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccioneu utilitzar aquest camp quan cerqueu registres mitjançant la Cerca global d&#39;aquest mòdul.',
 //Revert Module labels
 'LBL_RESET' => 'Restablir',
 'LBL_RESET_MODULE' => 'Restablir Mòdul',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Encriptat',
                 'datetimecombo' =>'Data i hora',
                 'decimal'=>'Decimal',
+                'autoincrement' => 'AutoIncrementa',
 ),
 'labelTypes' => array(
     "" => "Les etiquetes d&#39;ús freqüent",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Tots el mòduls',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relacionat {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copia del disseny',
+'LBL_RELATIONSHIP_TYPE' => 'Relació',
 );

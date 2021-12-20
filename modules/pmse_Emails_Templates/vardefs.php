@@ -12,6 +12,7 @@
 
 $dictionary['pmse_Emails_Templates'] = array(
     'table' => 'pmse_emails_templates',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => true,
     'duplicate_merge' => true,

@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Tableau de bord de la liste de notes',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de notes',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Notes',
 
+    'LBL_RELATED_CONTACT' => 'Contact lié',
     'ERR_DELETE_RECORD' => 'Vous devez spécifier un ID pour toute suppression.',
     'LBL_ACCOUNT_ID' => 'Compte (ID) :',
     'LBL_CASE_ID' => 'Ticket (ID) :',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Contact (ID):',
     'LBL_CONTACT_NAME' => 'Contact :',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notes',
+    'LBL_ATTACHMENTS' => 'Pièces Jointes',
+    'LBL_ATTACHMENT_FLAG' => 'Est en pièce jointe',
     'LBL_DESCRIPTION' => 'Note',
     'LBL_EMAIL_ADDRESS' => 'Adresse Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Pièces jointes',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Pièce(s) jointe(s)',
     'LBL_NOTE' => 'Note :',
     'LBL_OPPORTUNITY_ID' => 'Affaire (ID) :',
+    'LBL_NOTE_PARENT_ID' => 'Noter l&#39;ID Parent :',
     'LBL_PARENT_ID' => 'Parent (ID):',
     'LBL_PARENT_TYPE' => 'Type Parentée',
     'LBL_EMAIL_TYPE' => 'Type d&#39;e-mail',

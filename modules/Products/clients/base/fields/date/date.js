@@ -16,6 +16,70 @@
 ({
     extendsFrom: 'DateField',
 
+
+    /**
+     * @inheritdoc
+     */
+    bindDataChange: function() {
+        this._super('bindDataChange');
+
+        if (this.model && this.name && this.name === 'service_start_date') {
+            this.model.on('addon:pli:changed', this.handleRecalculateServiceDuration, this);
+            this.model.on('change:' + this.name, this.handleRecalculateServiceDuration, this);
+        }
+    },
+
+    /**
+     * If this is a coterm QLI, recalculate the service duration when the start date
+     * changes so that the end date remains constant.
+     */
+    handleRecalculateServiceDuration: function() {
+        if (!_.isEmpty(this.model.get('add_on_to_id')) && app.utils.isTruthy(this.model.get('service'))) {
+            var startDate = app.date(this.model.get('service_start_date'));
+            var endDate = app.date(this.model.get('service_end_date'));
+
+            if (startDate.isSameOrBefore(endDate)) {
+                // we want to be inclusive of the end date
+                endDate.add(1, 'days');
+            }
+
+            // calculates the whole years, months, or days
+            var wholeDurationUnit = this.getWholeDurationUnit(
+                startDate.format('YYYY-MM-DD'),
+                endDate.format('YYYY-MM-DD')
+            );
+
+            if (!_.isEmpty(wholeDurationUnit)) {
+                this.model.set('service_duration_unit', wholeDurationUnit);
+                this.model.set('service_duration_value', endDate.diff(startDate, wholeDurationUnit + 's'));
+            } else {
+                this.model.set('service_duration_unit', 'day');
+                this.model.set('service_duration_value', endDate.diff(startDate, 'days'));
+            }
+        }
+    },
+
+    /**
+     * Gets the whole years, months, or days between two dates
+     *
+     * @param {string} startDate the start date
+     * @param {string} endDate the end date
+     * @return {string} whole year, month or day unit
+     */
+    getWholeDurationUnit: function(startDate, endDate) {
+        var start = app.date(startDate);
+        var end = app.date(endDate);
+
+        var years = end.diff(start, 'years');
+        start.add(years, 'years');
+        var months = end.diff(start, 'months');
+        start.add(months, 'months');
+        var days = end.diff(start, 'days');
+
+        return days > 0 ? 'day' : (months > 0 ? 'month' : (years > 0 ? 'year' : ''));
+    },
+
+
     /**
      * @inheritdoc
      */

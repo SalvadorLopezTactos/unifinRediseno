@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Meetinglisten-Dashboard',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Meetingbericht-Dashboard',
+    'LBL_LEAD_GUESTS' => 'Gäste führen',
+    'LBL_CONTACT_GUESTS' => 'Gäste kontaktieren',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Meetings',
 
 	'ERR_DELETE_RECORD' => 'Die Datensatznummer muß angegeben werden, um diesen Eintrag löschen.',
 	'LBL_ACCEPT_THIS'=>'Bestätigen?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Richtung',
 	'LBL_LIST_DUE_DATE'=>'Fällig am',
 	'LBL_LIST_FORM_TITLE' => 'Meetingliste',
-	'LBL_LIST_MY_MEETINGS' => 'Meine Meetings',
+    'LBL_LIST_MY_MEETINGS' => 'Meine Meetings',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Meine geplanten Meetings',
+    'LBL_GUEST_MEETINGS' => 'Meine Meetings als Gast',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Geplante Meetings als Gast',
 	'LBL_LIST_RELATED_TO' => 'Bezieht sich auf',
 	'LBL_LIST_STATUS'=>'Status',
 	'LBL_LIST_SUBJECT' => 'Betreff',

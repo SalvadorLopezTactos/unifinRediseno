@@ -1004,4 +1004,25 @@ class SugarFieldBase {
 
         return in_array($fieldName, $bean->erased_fields);
     }
+
+    /**
+     * Validates field size
+     * @param SugarBean $bean
+     * @param array $params
+     * @param string $field
+     * @param array $properties
+     * @return boolean
+     */
+    public function apiValidateFieldSize(SugarBean $bean, array $params, $field, $properties)
+    {
+        if (isset($params[$field])) {
+            $maxSize = $bean->db->getMaxFieldSize($properties);
+
+            if ($maxSize > 0) {
+                return strlen($params[$field]) < $maxSize;
+            }
+        }
+
+        return true;
+    }
 }

@@ -47,6 +47,7 @@ class RecentProductApi extends SugarApi
      */
     public function getRecentRecords(ServiceBase $api, array $args)
     {
+        $this->checkAccess();
         $this->requireArgs($args, array('module'));
         $returnMostRecentRecords = [];
 
@@ -116,6 +117,17 @@ class RecentProductApi extends SugarApi
         } catch (SugarQueryException $e) {
             // Swallow the exception.
             $GLOBALS['log']->warn(__METHOD__ . ': ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Checks if the user has access to ProductTemplates
+     */
+    protected function checkAccess()
+    {
+        $ptBean = BeanFactory::newBean('ProductTemplates');
+        if (!$ptBean->aclAccess('list')) {
+            throw new SugarApiExceptionNotAuthorized('No access to view Product Catalog records');
         }
     }
 }

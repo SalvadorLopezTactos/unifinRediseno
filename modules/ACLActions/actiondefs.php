@@ -124,7 +124,7 @@ $GLOBALS['ACLActions'] = array(
             ),
             'view' => array(
                 'aclaccess' => $actionsDropdown,
-                'label' => 'LBL_ACTION_VIEW',
+                'label' => 'LBL_ACTION_RECORD_VIEW',
                 'default' => ACL_ALLOW_ALL,
             ),
             'list' => array(

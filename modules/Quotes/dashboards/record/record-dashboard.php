@@ -10,78 +10,89 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 return [
-    'metadata' => array(
-        'components' => array(
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'product-catalog-dashlet',
-                                'label' => 'LBL_PRODUCT_CATALOG_DASHLET_NAME',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'product-quick-picks-dashlet',
-                                'label' => 'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME',
-                            ),
-                            'context' => array(
-                                'module' => 'Opportunities',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'planned-activities',
-                                'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'name' => 'active-tasks',
-                                'label' => 'LBL_ACTIVE_TASKS_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'history',
-                                'label' => 'LBL_HISTORY_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'attachments',
-                                'label' => 'LBL_DASHLET_ATTACHMENTS_NAME',
-                                'limit' => '5',
-                                'auto_refresh' => '0',
-                            ),
-                            'context' => array(
-                                'module' => 'Notes',
-                                'link' => 'notes',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                ),
+    'metadata' => [
+        'dashlets' => [
+            [
+                'view' => [
+                    'type' => 'product-catalog-dashlet',
+                    'label' => 'LBL_PRODUCT_CATALOG_DASHLET_NAME',
+                ],
+                'context' => [
+                    'module' => 'ProductTemplates',
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+                'x' => 0,
+                'y' => 0,
+            ],
+            [
+                'view' => [
+                    'type' => 'product-quick-picks-dashlet',
+                    'label' => 'LBL_PRODUCT_QUICK_PICKS_DASHLET_NAME',
+                ],
+                'context' => [
+                    'module' => 'ProductTemplates',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 6,
+            ],
+            [
+                'view' => [
+                    'type' => 'dashablerecord',
+                    'label' => 'LBL_RELATED_RECORDS',
+                    'module' => 'Quotes',
+                    'tabs' => [
+                        [
+                            'active' => true,
+                            'label' => 'LBL_MODULE_NAME_SINGULAR',
+                            'link' => 'billing_accounts',
+                            'module' => 'Accounts',
+                        ],
+                        [
+                            'active' => false,
+                            'label' => 'LBL_MODULE_NAME_SINGULAR',
+                            'link' => 'opportunities',
+                            'module' => 'Opportunities',
+                        ],
+                    ],
+                    'tab_list' => [
+                        'billing_accounts',
+                        'opportunities',
+                    ],
+                    'base_module' => 'Quotes',
+                ],
+                'context' => [
+                    'module' => 'Quotes',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 12,
+            ],
+            [
+                'view' => [
+                    'module' => 'Quotes',
+                    'type' => 'activity-timeline',
+                    'label' => 'LBL_ACTIVITY_TIMELINE_DASHLET',
+                ],
+                'context' => [
+                    'module' => 'Quotes',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 18,
+            ],
+            [
+                'view' => [
+                    'type' => 'purchase-history',
+                    'label' => 'LBL_PURCHASE_HISTORY_DASHLET',
+                    'linked_account_field' => 'billing_account_id',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 24,
+            ],
+        ],
+    ],
     'name' => 'LBL_QUOTES_RECORD_DASHBOARD',
     'id' => '5d671fae-7b52-11e9-92e0-f218983a1c3e',
 ];

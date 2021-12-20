@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Dashboard elenco Elenchi obiettivi',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Dashboard record Elenco obiettivi',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Elenchi target Focus Drawer',
+  'LBL_RELATED_ACCOUNTS' => 'Account correlati',
+  'LBL_RELATED_CONTACTS' => 'Contatti correlati',
+  'LBL_RELATED_LEADS_TARGETS' => 'Potenziali clienti e target correlati',
 
   'LBL_MODULE_NAME' => 'Liste Obiettivi',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista Obiettivo',

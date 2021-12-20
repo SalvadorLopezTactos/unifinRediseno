@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Prognose-dashboard',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Forudser betjeningspanel til købsregister',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Prognoser',
@@ -313,7 +314,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Finansår startdato:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurer den tidsperiode, der skal bruges i prognose modulet.<br><br>Bemærk, at tidsperiode indstillingerne ikke kan ændres efter første opsætning.<br><br>Start med at vælge startdato for dit regnskabsår. Vælg derefter type tidsperiode for prognose. Datointervallet for tidsperioder vil automatisk blive beregnet baseret på dine valg. Sub-tidsperiode er grundlaget for Prognoseregnearket.<br><br>Den synlige fremtid og tidligere tidsperioder vil bestemme antallet af synlige sub-tidsperioder i prognosemodulet. Brugerne er i stand til at se og redigere prognosetal i de synlige delperioder.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurér, hvordan du vil kategorisere {{forecastByModule}}. <br><br>Læg mærke til, at periodeindstillingerne ikke kan ændres efter første forpligtelse. Ved opgraderede forekomster låses periodeindstillingen med eksisterende prognosedata.<br><br>Du må vælge to eller flere kategorier på basis af sandsynlighedsperioder, eller du kan oprette kategorier, der ikke er baserede på sandsynlighed. <br><br>Der er afkrydsningsfelter til venstre for dine brugerdefinerede kategorier. Brug disse til at bestemme, hvilke perioder der skal inkluderes i det forudsete beløb, der forpligtes og rapporteres til ledere. <br><br>En bruger må manuelt ændre statussen for inkludér/udeluk og kategorien for {{forecastByModule}} fra deres regneark.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer, hvordan du vil kategorisere {{forecastByModule}}. <br> <br> Bemærk venligst, at rækkeviddeindstillingerne ikke kan ændres efter det første tilsagn. For opgraderede forekomster er rækkeviddeindstillingen låst med eksisterende prognosedata. <br> <br> Du kan vælge to eller flere kategorier baseret på sandsynlighedsområder eller oprette kategorier, der ikke er baseret på sandsynlighed. <br> <br> Der er afkrydsningsfelter til venstre for dine brugerdefinerede kategorier; brug disse til at afgøre, hvilke intervaller der skal medtages i det prognosebeløb, der er givet tilsagn om og rapporteret til ledere. <br> <br> En bruger kan ændre inkludere/ekskludere status og kategori for {{forecastByModule}} manuelt fra deres regneark.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Vælg de kolonner, du ønsker at brugeren skal udfylde med sine prognoser for hver {{forecastByModuleSingular}}. Bemærk venligst at sandsynlige beløb er bundet til beløbet i {{forecastByModule}}; af denne grund kan Sandsynlig kolonne ikke skjules.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Vælg hvilke kolonner, du gerne vil se i Prognosemodulet. Listen over felter vil kombinere regnearket og giver brugeren mulighed for at vælge, hvordan konfigurationen skal vises.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jeg er en pladsholder for prognosen ved how-to tekst!',

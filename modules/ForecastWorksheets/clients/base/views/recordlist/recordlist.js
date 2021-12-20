@@ -158,7 +158,7 @@
      * Target URL of the nav action
      */
     targetURL: '',
-    
+
     /**
      * Current URL of the module
      */
@@ -272,7 +272,7 @@
                         this.context.parent.trigger('forecasts:worksheet:dirty', this.worksheetType, this.dirtyModels.length > 0);
                     }
                 }, this);
-                
+
                 this.context.parent.on('change:selectedTimePeriod', function(model, changed) {
                     this.updateSelectedTimeperiod(changed);
                 }, this);
@@ -460,7 +460,7 @@
     beforeRouteHandler: function() {
         return this.showNavigationMessage('router');
     },
-    
+
     /**
      * default navigation callback for alert message
      */
@@ -487,7 +487,7 @@
         if (!_.isFunction(callback)) {
             callback = this.defaultNavCallback;
         }
-        
+
         if (this.layout.isVisible()) {
             var canEdit = this.dirtyCanEdit || this.canEdit;
             if (canEdit && this.displayNavigationMessage) {
@@ -648,7 +648,7 @@
             this.dirtyCanEdit = this.canEdit;
         }
         this.cleanUpDirtyModels();
-        
+
         this.selectedUser = changed;
 
         // Set the flag for use in other places around this controller to suppress stuff if we can't edit

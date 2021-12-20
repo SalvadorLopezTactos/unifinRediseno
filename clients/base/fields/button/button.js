@@ -55,8 +55,22 @@
             }
         }
 
+        this.href = 'javascript:void(0);';
+        if (this.fullRoute) {
+            this.href = '#' + this.fullRoute;
+        } else if (this.def.route) {
+            var module = this.module || this.model.module ||
+                ((this.context && this.context.get('module')) ? this.context.get('module') : null);
+            var id = this.id || this.id;
+            var action = this.def.route.action;
+            this.href = app.router.buildRoute(module, id, action);
+        }
+
+        this.track = this.name ? 'click:' + this.name : 'click:' + this.label;
+
         app.view.Field.prototype._render.call(this);
     },
+
     getFieldElement: function() {
         return this.$(this.fieldTag);
     },

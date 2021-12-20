@@ -119,8 +119,9 @@
         }
         this.model.set(fieldName + '_guid', guid);
 
-        // Update filename of the model with the value from response,
-        // since it may have been modified on the server side
+        // Update filename and mime_type of the model with the value from
+        // response, since it may have been modified on the server side
+        this.model.set('file_mime_type', data.record.file_mime_type);
         this.model.set(fieldName, data.record[fieldName]);
 
         callback(null, fields, errors);
@@ -185,37 +186,11 @@
             messages: app.lang.get('LBL_FILE_DELETE_CONFIRM', self.module),
             onConfirm: function() {
                 var data = {
-                        module: self.module,
-                        id: self.model.id,
-                        field: self.name
-                    },
-                    callbacks = {
-                        success: function() {
-                            self.model.set(self.name, '');
-                            self.model.save({}, {
-                                //Show alerts for this request
-                                showAlerts: {
-                                    'process': true,
-                                    'success': {
-                                        messages: app.lang.get('LBL_FILE_DELETED', self.module)
-                                    }
-                                },
-                                fields: [self.name]
-                            });
-                            if (self.disposed) {
-                                return;
-                            }
-                            // Because delete button is enabled in edit mode only and
-                            // bindDataChange is overrided to prevent rendering field
-                            // in edit mode call render method manually
-                            self.render();
-                        },
-                        error: function(data) {
-                            // refresh token if it has expired
-                            app.error.handleHttpError(data, {});
-                        }
-                    };
-                app.api.file('delete', data, null, callbacks, {htmlJsonFormat: false});
+                    module: self.module,
+                    id: self.model.id,
+                    field: self.name
+                };
+                app.utils.deleteFileFromField(self, data, true);
             }
         });
     },

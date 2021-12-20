@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Řídicí panel seznamu úkolů',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Řídicí panel záznamů úkolů',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na úkoly',
 
+  'LBL_RELATED_CONTACT' => 'Související kontakt',
   'LBL_MODULE_NAME' => 'Úkoly',
   'LBL_MODULE_NAME_SINGULAR' => 'Úkol',
   'LBL_TASK' => 'Úkoly:',

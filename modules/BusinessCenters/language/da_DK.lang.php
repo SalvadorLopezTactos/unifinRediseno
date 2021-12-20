@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontakter',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Kundeemner',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Brugere',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelse for forretningscenter',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Forretningscentre',
 ];

@@ -55,11 +55,30 @@
                 if (self.disposed) {
                     return;
                 }
+                data = self._fixRelativeUrls(data);
                 $iframe.contents().find('style').text(data);
                 $alert.hide();
                 $iframe.show();
             });
         $iframe.contents().find('body').css('backgroundColor', 'transparent');
+    },
+
+    /**
+     * Clean up the css by fixing the scope of relative urls
+     * @param {string} css
+     * @return {string}
+     * @private
+     */
+    _fixRelativeUrls: function(css) {
+        // The css relative urls are like ../../../../../styleguide/assets/.... because
+        // we expect the css to be loaded from /cache/themes/clients/PLATFORM/THEMENAME/FILE.css
+        // In the iframe, we insert the css directly into the style tag so the scope is the iframe's
+        // src url which is <instance>/styleguide/themes/theming_preview.html. Therefore we must
+        // replace the relative urls in the css
+        var url = '../../';
+        // matches ../../../../../
+        var regex = /\.\.\/\.\.\/\.\.\/\.\.\/\.\.\//g;
+        return css.replace(regex, url);
     },
 
     /**

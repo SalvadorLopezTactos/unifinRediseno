@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Informačný panel so zoznamom záujemcov',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Informačný panel so záznamom záujemcov',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na potenciálnych zákazníkov',
 
     'ERR_DELETE_RECORD' => 'Ak chcete odstrániť tento súbor údajov, musíte zadať číslo záznamu.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Popis účtu',
@@ -325,4 +326,8 @@ Po potvrdení všetkých povinných a požadovaných modulov kliknite na tlačid
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Nie je možné zmeniť stav {{moduleSingular}}. Tento {{moduleSingular}} bol už skonvertovaný.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Predpoveď konverzie záujemcu',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Zobraziť podrobnosti predpovede pre konkrétneho záujemcu',
 );

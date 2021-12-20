@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Όνομα Χρήστη',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Επαναφορά',
 	'LBL_SYSTEM_SETTINGS' => 'Ρυθμίσεις Συστήματος',
-	'LBL_SKYPEOUT_ON_DESC' => 'Επιτρέπει στους χρήστες να καλέσουν σε τηλεφωνικούς αριθμούς χρησιμοποιώντας το SkypeOut. Οι αριθμοί πρέπει να διαμορφωθούν κατάλληλα, για να κάνετε χρήση αυτής της δυνατότητας. Δηλαδή, πρέπει να είναι "+" "Κωδικός Χώρας" "Ο Αριθμός", παράδειγμα +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'Επιτρέπει την ενσωμάτωση SkypeOut',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut',
+    'LBL_DIALOUT_ON_DESC' => 'Επιτρέπει στους χρήστες να κάνουν κλικ σε αριθμούς τηλεφώνου για να τους καλέσουν χρησιμοποιώντας το προεπιλεγμένο λογισμικό ενοποίησης τηλεφωνίας υπολογιστή (CTI).',
+    'LBL_DIALOUT_ON' => 'Ενεργοποίηση κλικ για κλήση',
+    'LBL_DIALOUT_TITLE' => 'Εξερχόμενες κλήσεις',
     'LBL_TWEETTOCASE_ON_DESC' => 'Επιτρέπει στους χρήστες να δημιουργήσουν υποθέσεις από Tweets',
     'LBL_TWEETTOCASE_ON' => 'Επιτρέπει Tweet&reg; σε περίπτωση ένταξης',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; σε περίπτωση',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Αυτό το αρχείο δεν έχει μία καλή επέκταση αρχείου.',
     'LBL_PDF_INSTRUCTIONS' => 'Οδηγίες',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Γραμματοσειρές που υποστηρίζονται από το SugarPDF:
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Εάν επιλέξετε να μην ενσωματώσετε τη γραμματοσειρά σας στο PDF, το αρχείο PDF που θα δημιουργηθεί θα είναι ελαφρύτερο αλλά θα χρησιμοποιηθεί μια εναλλακτική εάν η γραμματοσειρά δεν είναι διαθέσιμη στο σύστημα του αναγνώστη σας.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Η προσθήκη γραμματοσειράς PDF στο SugarCRM απαιτεί να ακολουθήσετε τα βήματα 1 και 2 της τεκμηρίωσης γραμματοσειρών TCPDF που διατίθενται στην ενότητα "DOCS" του <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">ιστότοπου TCPDF</a>.
+<br><br>Τα εργαλεία pfm2afm και ttf2ufm είναι διαθέσιμα στο γραμματοσειρές/βοηθητικά προγράμματα του πακέτου TCPDF που μπορείτε να κατεβάσετε στην ενότητα "ΛΗΨΗ" του <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">ιστότοπου TCPDF</a>.
+<br><br>Φορτώστε το αρχείο μέτρησης που δημιουργήθηκε στο βήμα 2 και το αρχείο γραμματοσειράς παρακάτω.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Το πεδίο πληροφορίας CID δεν μπορεί να είναι κενό.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Η ενότητα των Αναφορών δεν είναι διαθέσιμη για τον περιηγητή-βασισμένη στην προβολή mobile.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Το μέγιστο μήκος πρέπει να είναι μεγαλύτερο από το ελάχιστο μήκος',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Το ελάχιστο μήκος πρέπει να είναι θετική τιμή',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Το μέγιστο μήκος πρέπει να είναι θετική τιμή',
     'ERR_EMPTY_SAML_LOGIN' => 'Η διεύθυνση URL Σύνδεσης SAML δεν μπορεί να είναι άδεια',
     'ERR_EMPTY_SAML_CERT' => 'Το πιστοποιητικό SAML δεν μπορεί να είναι άδειο',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Η Ταυτότητα Οντότητας SAML δεν μπορεί να είναι κενή',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Ροές δραστηριότητας',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Ενεργοποίηση ροών δραστηριοτήτων',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ενεργοποιεί τις Ροές δραστηριοτήτων για την εφαρμογή',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Ενεργοποιήσετε πρόσθετο περιεχόμενο οθόνης σύνδεσης',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Αυτόματη αποθήκευση διαδικασίας ορισμών',

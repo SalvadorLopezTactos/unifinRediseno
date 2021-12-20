@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Quotes List Dashboard',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Quotes Record Dashboard',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Quotes Focus Drawer',
 
     'LBL_CONTRACTS'=>'Contracts',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracts',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Billing Country',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Billing Postcode',
     'LBL_BILLING_ADDRESS_STATE' => 'Billing County',
-    'LBL_BILLING_ADDRESS_STREET' => 'Billing Address',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Billing Address:',
     'LBL_BILLING_CONTACT_ID' => 'Billing Contact Id:',
     'LBL_BILLING_CONTACT_NAME' => 'Billing Contact Name:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Shipping Country',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Shipping Postcode',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Shipping County',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Address',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Shipping Address:',
     'LBL_SHIPPING_BODY' => 'Billing and Shipping',
     'LBL_SHIPPING_CONTACT_ID' => 'Shipping Contact Id:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Copy billing address to shipping address',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Copy shipping address to billing address',
     'NTC_COPY_BILLING_ADDRESS2' => 'Copy to shipping',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copy to billing',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Are you sure you want to remove this comment from the quote?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copy to billing',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Are you sure you want to remove this comment from the quote?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Are you sure you want to remove this line item from the quote?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Are you sure you want to remove this group from the quote?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Are you sure you want to remove this contact from the quote?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Quantity',
     'LBL_MFT_PART_NUM' => 'Part Number',
     'LBL_ITEM_NAME' => 'Line Item',
+    'LBL_PRODUCT_TEMPLATE' => 'Product',
     'LBL_DISCOUNT_PRICE' => 'Unit Price',
     'LBL_DISCOUNT_AMOUNT' => 'Discount',
     'LBL_LINE_ITEM_TOTAL' => 'Line Item Total',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Opportunity ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Quotes Configuration',
+
+    'LBL_RENEWAL' => 'Renewal',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Quote Interactions',
 );

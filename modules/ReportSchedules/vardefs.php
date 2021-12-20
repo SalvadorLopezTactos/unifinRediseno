@@ -12,6 +12,7 @@
 
 $dictionary['ReportSchedule'] = array(
     'table' => 'report_schedules',
+    'archive' => false,
     'audited' => true,
     'fields' => array(
         'user_id' => array(

@@ -44,6 +44,8 @@ class pmse_Emails_Templates_sugar extends Basic {
 		var $published;
         var $disable_row_level_security = true;
 
+    const CURRENT_ACTIVITY_LINK = 'current_activity';
+
 
 	public function __construct(){
 		parent::__construct();
@@ -57,4 +59,4 @@ class pmse_Emails_Templates_sugar extends Basic {
 }
 		
 }
-?>
+

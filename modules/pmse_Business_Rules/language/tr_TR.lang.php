@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'İş Kuralını İşlet',
   'LBL_MODULE_NAME_SINGULAR' => 'İş Kuralını İşlet',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Süreç İş Kuralları Odak Bölmesi',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Süreç İş Kuralları Kaydı Panosu',
   'LBL_RST_UID' => 'İş Kuralı ID',
   'LBL_RST_TYPE' => 'İş Kuralı Tipi',
   'LBL_RST_DEFINITION' => 'İş Kuralı Tanımı',

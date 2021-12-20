@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> '警告：不可寫入',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Sugar 不支援您的 PHP 版本。您需要安裝一個與 Sugar 應用程式相容的版本。請查詢「發行版本附註」中的「相容性矩陣」，了解支援的 PHP 版本。您的版本為 ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Sugar 不支援您的 IIS 版本。您需要安裝一個與 Sugar 應用程式相容的版本。請查詢「發行版本附註」中的「相容性矩陣」，了解支援的 IIS 版本。您的版本為 ',
-	'ERR_CHECKSYS_FASTCGI'              => '我們偵測到您沒有使用 PHP 適用的 FastCGI 常式對應。您需要安裝/設定一個與 Sugar 應用程式相容的版本。請查詢「發行版本附註」中的「相容性矩陣」，了解支援的版本。請查看 <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a>  了解詳細資料。',
+    'ERR_CHECKSYS_FASTCGI'              => '我們檢測到您目前沒有使用 FastCGI 處理器來映射 PHP。您需要安裝/配置一個和 Sugar 應用程序相容的版本。請查閱發布說明中的相容矩陣表來了解支援的版本。請參閱 <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> 以獲取詳細訊息 ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '如需獲得最佳體驗，請使用 IIS/FastCGI sapi，並在 php.ini 檔案中將 fastcgi.logging 設定為 0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '已安裝不支援的 PHP 版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '資料庫不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到數據庫支援。請確保您擁有下列受支持數據庫類型之一所需的驅動程式：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要在 php.ini 文件中取消批註擴展名，或使用正確的二進制文件重新編譯，具體取決於您的 PHP 版本。請參閱您的 PHP 手冊以獲取有關如何啟用數據庫支援的更多訊息。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '找不到數據庫支持。請確保您具有以下受支持的數據庫類型之一的必要驅動程序：MySQL，MS SQLServer，Oracle 或 DB2。您可能需要在php.ini 文件中取消註釋副檔名，或使用正確的二進制文件重新編譯，具體取決於您的 PHP 版本。有關如何啟用數據庫支持的更多訊息，請參考您的 PHP 手冊。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '未找到 Sugar 應用程式需要的與 XML 剖析器程式庫關聯的函數。您可能需要根據您的 PHP 版本，取消註解 php.ini 檔案的擴充，或使用正確的二進位檔案重新編譯。請參考 PHP 手冊了解更多資訊。',
     'LBL_CHECKSYS_CSPRNG' => '亂數產生器',
     'ERR_CHECKSYS_MBSTRING'             => '未找到 Sugar 應用程式需要的與多位元組字串 PHP 擴充 (mbstring) 關聯的函數。<br/><br/>一般，mbstring 模組在 PHP 中預設為不啟用，它必須在建立 PHP 二進位時用 --enable-mbstring 啟用。請參考 PHP 手冊了解如何啟用 mbstring 支援的更多資訊。',
@@ -550,139 +550,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => '「Php 回溯相容模式」已開啟。請將 zend.ze1_compatibility_mode 設定為「關閉」以繼續',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
+        'name' => '會議通知郵件',
         'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'description' => '當系統通知用戶會議時，會使用此範本。',
         'body' => '<div>
 	<p>To: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user 邀請你參加會議</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>主旨: $event_name<br/>
+	開始日期: $start_date<br/>
+	結束日期: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>描述: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>接受本次會議:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>暫時接受本次會議:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>拒絕接受本次會議:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
             'To: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user 邀請你參加會議
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+主旨: $event_name
+開始日期: $start_date
+結束日期: $end_date
 
-Description: $description
+描述: $description
 
-Accept this meeting:
+接受本次會議:
 <$accept_link>
 
-Tentatively Accept this meeting
+暫時接受本次會議
 <$tentative_link>
 
-Decline this meeting
+拒絕本次會議
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
+        'name' => '通話通知郵件',
         'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'description' => '當系統通知用戶通話時，會使用此範本。',
         'body' => '<div>
 	<p>To: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user 邀請你參加通話</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>主旨: $event_name<br/>
+	開始日期: $start_date<br/>
+	持續時間: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>描述: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>接受本次通話:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>暫時接受本次通話:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>拒絕接受本次通話:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
             'To: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user 邀請你參加通話
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+主旨: $event_name
+開始日期: $start_date
+持續時間: $hoursh, $minutesm
 
-Description: $description
+描述: $description
 
-Accept this call:
+接受本次通話:
 <$accept_link>
 
-Tentatively Accept this call
+暫時接受本次通話
 <$tentative_link>
 
-Decline this call
+拒絕本次通話
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => '工作分派通知郵件',
+        'subject' => 'SugarCRM - 已簽約 $module_name ',
+        'description' => '當系統通知用戶分配任務時，會使用此範本。',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user 已指派 &nbsp;$module_name 給 &nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>你可以檢視這個 &nbsp;$module_name 於此:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user 已指派 $module_name 給ˋ $assigned_user.
 
-You may review this $module_name at:
+你可以檢視這個 $module_name 於此:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => '已規劃的電子郵件報告',
+        'subject' => '已規劃的報告：$report_name（$report_time現在）',
+        'description' => '當系統通知用戶已規劃的報告時，會使用此範本。',
         'body' => '<div>
 <p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>附檔是為你自動生成的報告。</p>
+<p>報告名稱: $report_name</p>
+<p>報告開始日期與時間: $report_time</p>
 </div>',
         'txt_body' =>
             'Hello $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+附檔是為你自動生成的報告。
 
-Report Name: $report_name
+報告名稱: $report_name
 
-Report Run Date and Time: $report_time',
+報告開始日期與時間: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => '系統註釋日誌電子郵件通知',
+        'subject' => 'SugarCRM - $initiator_full_name 在 $singular_module_name 提到你',
+        'description' => '該範例用於向已標記為“註釋日誌”部分的用戶發送電子郵件通知。',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>在以下記錄的評論日誌中被提及:  <a href="$record_url">$record_name</a></p>
+                <p>請登入確認留言。</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'在以下記錄的評論日誌中被提及：$record_name
+            請登入Sugar確認留言。',
     ],
 
     'advanced_password_new_account_email' => array(

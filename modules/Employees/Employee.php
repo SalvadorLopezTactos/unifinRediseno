@@ -251,4 +251,14 @@ class Employee extends Person {
     {
         return User::staticGetPrivateTeamID($this->id);
     }
+
+    /**
+     * Can associated user be authenticated?
+     *
+     * @return bool
+     */
+    public function canBeAuthenticated(): bool
+    {
+        return !empty($this->user_name) || $this->external_auth_only;
+    }
 }

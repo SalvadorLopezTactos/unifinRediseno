@@ -10,10 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Elastica\Exception\ResponseException;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Capability\GlobalSearch\GlobalSearchCapable;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\ResultSet;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
+use Elastica\ResultSet as BaseResultSet;
+use Elastica\Response;
+use Elastica\Query;
 
 /**
  *
@@ -56,7 +60,9 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
     /**
      * {@inheritdoc}
      *
-     * @return SugarSeachEngineElasticResultSet|null
+     * @return \Sugarcrm\Sugarcrm\SearchEngine\Capability\GlobalSearch\ResultSetInterface|null
+     *
+     * @throws \Exception
      */
     public function search($query, $offset = 0, $limit = 20, $options = array())
     {
@@ -112,81 +118,25 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
         }
 
         $this->engine->setFilters($filters);
-        return $this->createResultSet($this->engine->search());
+        try {
+            return $this->createResultSet($this->engine->search());
+        } catch (ResponseException $responseException) {
+            // just return empty result
+            $emptySet = new BaseResultSet(new Response(''), new Query($query), []);
+            $empty = new ResultSet($emptySet);
+            return $this->createResultSet($empty);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
-     * Wrapper method transforming ResultSet into old format
+     * wrapper
      * @param ResultSet $resultSet
-     * @return SugarSeachEngineElasticResult
+     * @return \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\ResultSet
      */
     protected function createResultSet(ResultSet $resultSet)
     {
-        $res = new SugarSeachEngineElasticResultSet($resultSet->getResultSet());
-        $resParser = $resultSet->getResultParser();
-        if (isset($resParser)) {
-            $res->setResultParser($resParser);
-        }
-        return $res;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function indexBean($bean, $batch = true)
-    {
-        $this->logger->deprecated('SugarSearchEngineElastic::indexBean is deprecated and no longer available');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function delete(SugarBean $bean)
-    {
-        $this->logger->deprecated('SugarSearchEngineElastic::delete is deprecated and no longer available');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function bulkInsert(array $docs)
-    {
-        $this->logger->deprecated('SugarSearchEngineElastic::bulkInsert is deprecated and no longer available');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createIndexDocument($bean, $searchFields = null)
-    {
-        $this->logger->deprecated('SugarSearchEngineElastic::createIndexDocument is deprecated and no longer available');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getServerStatus()
-    {
-        global $app_strings, $sugar_config;
-        $isValid = $this->engine->isAvailable(true);
-        $status = $isValid ? $app_strings['LBL_EMAIL_SUCCESS'] : $app_strings['ERR_ELASTIC_TEST_FAILED'];
-        return array('valid' => $isValid, 'status' => $status);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createIndex($recreate = false, $modules = array())
-    {
-        $this->logger->deprecated('SugarSearchEngineElastic::createIndex is deprecated and no longer available');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isTypeFtsEnabled($type)
-    {
-        $this->logger->deprecated('SugarSearchEngineElastic::isTypeFtsEnabled is deprecated');
-        return in_array($type, $this->engine->getStudioSupportedTypes());
+        return $resultSet;
     }
 }

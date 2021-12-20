@@ -50,9 +50,6 @@ class SugarUpgradeInstallRenewalConsole extends UpgradeScript
      */
     public function installRenewalConsole()
     {
-        $this->log('Temporarily enabling admin work for Renewal Console installation');
-        AccessControlManager::instance()->setAdminWork(true);
-
         $this->log('Installing Renewal Console and its related dashboards');
 
         $this->defaultDashboardInstaller = new DefaultDashboardInstaller();
@@ -68,8 +65,6 @@ class SugarUpgradeInstallRenewalConsole extends UpgradeScript
         // Install the Accounts multi-line drawer dashboard
         $dashboardFile = 'modules/Accounts/dashboards/multi-line/multi-line-dashboard.php';
         $this->installDashboard($dashboardFile, 'Accounts', 'multi-line');
-
-        AccessControlManager::instance()->setAdminWork(false);
     }
 
     /**

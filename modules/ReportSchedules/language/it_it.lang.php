@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Per report',
     'LBL_RECENTLY_MODIFIED' => 'Modificati di recente',
     'LBL_RECORD_SAVED_SUCCESS' => 'Il {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> è stato creato correttamente. Aprire la pianificazione per aggiungere utenti attraverso il sottopannello Utenti.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Questa Pianificazione report',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Dashboard record Pianificazioni report',
 );

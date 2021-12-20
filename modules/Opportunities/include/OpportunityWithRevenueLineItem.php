@@ -49,13 +49,13 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'massupdate' => false,
         ),
         'date_closed' => array(
-            'calculated' => true,
-            'enforced' => true,
-            'formula' => 'maxRelatedDate($revenuelineitems, "date_closed")',
+            'calculated' => false,
+            'formula' => '',
             'audited' => false,
-            'importable' => true,
+            'importable' => 'false',
             'required' => false,
             'massupdate' => false,
+            'hidemassupdate' => true,
         ),
         'commit_stage' => array(
             'massupdate' => false,
@@ -64,17 +64,15 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'workflow' => false,
         ),
         'sales_stage' => array(
-            'calculated' => true,
-            'enforced' => true,
-            'formula' => 'opportunitySalesStage($revenuelineitems, "sales_stage")',
-            'readonly' => true,
+            'calculated' => false,
+            'formula' => '',
             'audited' => false,
             'required' => false,
-            'studio' => true,
             'massupdate' => false,
             'reportable' => false,
             'workflow' => false,
-            'importable' => false,
+            'importable' => 'false',
+            'hidemassupdate' => true,
         ),
         'probability' => array(
             'audited' => false,
@@ -90,8 +88,11 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'massupdate' => true,
             'importable' => true,
         ),
-        'date_closed_timestamp' => array(
-            'formula' => 'rollupMax($revenuelineitems, "date_closed_timestamp")'
+        'service_start_date' => array(
+            'studio' => true,
+            'massupdate' => false,
+            'hidemassupdate' => true,
+            'importable' => 'false',
         ),
         'total_revenue_line_items' => array(
             'reportable' => true,
@@ -135,26 +136,32 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             array(
                 'commit_stage' => false,
                 'sales_status' => true,
-                'sales_stage' => false,
+                'service_start_date' => true,
                 'probability' => false,
                 'renewal' => true,
                 'renewal_parent_name' => true,
+                'service_duration' => true,
             )
         );
 
         $this->fixListViews(
             array(
-                'sales_stage' => 'sales_status',
+                'service_start_date' => true,
+                'sales_stage' => true,
+                'sales_status' => true,
                 'probability' => false,
                 'commit_stage' => false,
+                'service_duration' => true,
             )
         );
 
         $this->fixFilter(
             array(
-                'sales_stage' => false,
+                'sales_stage' => true,
                 'sales_status' => true,
+                'service_start_date' => true,
                 'probability' => false,
+                'service_duration' => true,
             )
         );
     }
@@ -165,7 +172,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
      * - Sets the dupe check to use `sales_status` instead of `sales_stage`
      * - Add a dependency extension that turns off the default oob dependencies
      */
-    protected function fixOpportunityModule()
+    public function fixOpportunityModule()
     {
         // lets make sure the dir is there
         SugarAutoLoader::ensureDir($this->moduleExtFolder . '/Vardefs');
@@ -420,6 +427,9 @@ EOL;
                 $rli->team_id = $opp->team_id;
                 $rli->team_set_id = $opp->team_set_id;
                 $rli->acl_team_set_id = $opp->acl_team_set_id;
+
+                // make generate_purchase empty since we are coming from Opps only mode
+                $rli->generate_purchase = '';
                 $rli->save();
 
                 // set the relationship up correctly

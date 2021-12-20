@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'แดชบอร์ดรายการจุดบกพร่อง',
   'LBL_BUGS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกจุดบกพร่อง',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชักจุดบกพร่อง',
 
   'LBL_MODULE_NAME' => 'บัก',
   'LBL_MODULE_NAME_SINGULAR'	=> 'บัก',

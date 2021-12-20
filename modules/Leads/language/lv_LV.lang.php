@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Interesentu saraksta instrumentu panelis',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Interesentu ierakstu instrumentu panelis',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Interesentu fokusa panelis',
 
     'ERR_DELETE_RECORD' => 'Ir jānorāda ieraksta numurs, lai dzēstu interesentu.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Uzņēmuma apraksts',
@@ -325,4 +326,8 @@ Pēc katras prasītās moduļa apstiprināšanas spiediet "Saglabāt un Konvert�
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Nevar mainīt moduļa {{moduleSingular}} statusu. Šis modulis {{moduleSingular}} jau ir konvertēts.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Interesenta konvertēšanas prognoze',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Apskatīt prognozes informāciju par konkrētu interesentu',
 );

@@ -2971,32 +2971,6 @@ function upgradeFolderSubscriptionsTeamSetId()
     }
 
 
-	function update_iframe_dashlets(){
-		require_once(sugar_cached('dashlets/dashlets.php'));
-
-		$db = DBManagerFactory::getInstance();
-		$query = "SELECT id, contents, assigned_user_id FROM user_preferences WHERE deleted = 0 AND category = 'Home'";
-		$result = $db->query($query, true, "Unable to update new default dashlets! ");
-		while ($row = $db->fetchByAssoc($result)) {
-			$content = unserialize(base64_decode($row['contents']));
-			$assigned_user_id = $row['assigned_user_id'];
-			$record_id = $row['id'];
-
-			$current_user = new User();
-			$current_user->retrieve($row['assigned_user_id']);
-
-			if(!empty($content['dashlets']) && !empty($content['pages'])){
-				$originalDashlets = $content['dashlets'];
-				foreach($originalDashlets as $key => $ds){
-				    if(!empty($ds['options']['url']) && stristr($ds['options']['url'],'http://www.sugarcrm.com/crm/product/gopro')){
-						unset($originalDashlets[$key]);
-					}
-				}
-				$current_user->setPreference('dashlets', $originalDashlets, 0, 'Home');
-			}
-		}
-	}
-
 	 /**
      * clearHelpFiles
      * This method attempts to delete all English inline help files.
@@ -3490,12 +3464,12 @@ function getUWDirs()
     if(!class_exists('UploadStream')) {
         // we're still running the old code
         global $sugar_config;
-        return array($sugar_config['upload_dir'] . "/upgrades", $sugar_config['cache_dir'] . "upload/upgrades/temp");
+        return array("upgrades", $sugar_config['cache_dir'] . "upload/upgrades/temp");
     } else {
         if(!in_array("upload", stream_get_wrappers())) {
             UploadStream::register(); // just in case file was copied, but not run
         }
-        return array("upload://upgrades", sugar_cached("upgrades/temp"));
+        return array("upgrades", sugar_cached("upgrades/temp"));
     }
 }
 

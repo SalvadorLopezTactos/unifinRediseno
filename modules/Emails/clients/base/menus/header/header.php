@@ -33,14 +33,14 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'icon' => 'fa-bars',
     ),
     array(
-        'route'=>'#bwc/index.php?module=EmailTemplates&action=EditView&return_module=EmailTemplates&return_action=DetailView',
+        'route'=>'#EmailTemplates/create',
         'label' =>'LNK_NEW_EMAIL_TEMPLATE',
         'acl_action'=>'create',
         'acl_module'=>'EmailTemplates',
         'icon' => 'fa-plus',
     ),
     array(
-        'route'=>'#bwc/index.php?module=EmailTemplates&action=index',
+        'route'=>'#EmailTemplates',
         'label' =>'LNK_EMAIL_TEMPLATE_LIST',
         'acl_action'=>'list',
         'acl_module'=>'EmailTemplates',

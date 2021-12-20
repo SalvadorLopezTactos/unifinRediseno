@@ -1991,6 +1991,8 @@
      * @returns {String} date/time value formatted for model
      */
     CAL.unformatDateTime = function (dateTime) {
+        dateTime = CAL.updateDateTimeMeridiem(dateTime);
+
         var dateFormat = app.user.getPreference('datepref') +
                 ' ' + app.user.getPreference('timepref'),
             jsDateFormat = app.date.convertFormat(dateFormat);
@@ -2034,3 +2036,41 @@
 	CAL.remove_edit_dialog();
 	
 	var cal_loaded = true;
+
+/**
+ * Update the datetime's meridiem based on the app's current locale
+ *
+ * @param dateTime
+ * @return string the updated dateTime
+ */
+CAL.updateDateTimeMeridiem = function(dateTime) {
+    var timePref = app.user.getPreference('timepref');
+    var meridiemPrefIndex = timePref.search(/a/i);
+
+    // do nothing if there is no meridiem preference
+    if (meridiemPrefIndex === -1) {
+        return dateTime;
+    }
+
+    var meridiemChar = timePref.charAt(meridiemPrefIndex);
+    var isMeridiemLowerCase = meridiemChar === meridiemChar.toLowerCase();
+
+    var am = isMeridiemLowerCase ? 'am' : 'AM';
+    var pm = isMeridiemLowerCase ? 'pm' : 'PM';
+
+    var localeData = app.date.localeData();
+    var langMeridiem = {};
+    langMeridiem[am] = localeData.meridiem(1, 0, isMeridiemLowerCase);
+    langMeridiem[pm] = localeData.meridiem(13, 0, isMeridiemLowerCase);
+
+    var meridiem = dateTime.indexOf(am) !== -1 ? am :
+        dateTime.indexOf(pm) !== -1 ? pm :
+            '';
+
+    // do nothing if meridiem is empty or meridiem is already current
+    if (meridiem === '' || meridiem === langMeridiem[meridiem]) {
+        return dateTime;
+    }
+
+    return dateTime.replace(meridiem, langMeridiem[meridiem]);
+};

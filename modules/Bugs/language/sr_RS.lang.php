@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Kontrolna tabla liste grešaka',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa grešaka',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za greške',
 
   'LBL_MODULE_NAME' => 'Defekti',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Defekt:',

@@ -9,6 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers, requireOperatorBeforeLineBreak
+
 SUGAR.inboundEmail = { };
 
 Rot13 = {
@@ -88,8 +90,8 @@ function close_ie_test_popup() {
     SUGAR.inboundEmail.ie_test_popup_dialog.hide();
 }
 
-function ie_test_open_popup_with_submit(module_name, action, pageTarget, width, height, mail_server, protocol, port, login, password, mailbox, ssl, personal, formName, ie_id)
-{
+function ie_test_open_popup_with_submit(module_name, action, pageTarget, width, height, mail_server, protocol, port,
+    login, password, mailbox, ssl, personal, formName, ie_id, eapm_id) {
 	if (!formName) formName = "testSettingsView";
 	var words = getEncryptedPassword(login, password, mailbox);
 	var isPersonal = (personal) ? 'true' : 'false';
@@ -116,7 +118,8 @@ function ie_test_open_popup_with_submit(module_name, action, pageTarget, width, 
 		+ '&mailbox=' + words[2]
 		+ '&ssl=' + ssl
 		+ '&ie_id=' + ie_id
-		+ '&personal=' + isPersonal;
+        + '&personal=' + isPersonal
+        + '&eapm_id=' + eapm_id;
 
 	var SI = SUGAR.inboundEmail;
 	if (!SI.testDlg) {
@@ -195,28 +198,31 @@ function isDataValid(formName, validateMonitoredFolder) {
 
 } // fn
 
-function getFoldersListForInboundAccount(module_name, action, pageTarget, width, height, mail_server, protocol, port, login, password, mailbox, ssl, personal, searchFieldValue, formName) {
+function getFoldersListForInboundAccount(moduleName, action, pageTarget, width, height, mailServer,
+                                         protocol, port, login, password, mailbox, ssl, personal,
+                                         searchFieldValue, formName, eapmId) {
 	if (!formName) formName = "testSettingsView";
 
 	var words = getEncryptedPassword(login, password, mailbox);
 	var isPersonal = (personal) ? 'true' : 'false';
 
-	// launch the popup
-	URL = 'index.php?'
-        + 'module=' + module_name
-        + '&to_pdf=1'
-        + '&action=' + action
-        + '&target=' + pageTarget
-        + '&target1=' + pageTarget
-        + '&server_url=' + mail_server
-        + '&email_user=' + words[0]
-        + '&protocol=' + protocol
-        + '&port=' + port
-        + '&email_password=' + encodeURIComponent(words[1])
-        + '&mailbox=' + words[2]
-        + '&ssl=' + ssl
-        + '&personal=' + isPersonal
-		+ '&searchField='+ searchFieldValue;
+    // launch the popup
+    var url = 'index.php?' +
+        'module=' + moduleName +
+        '&to_pdf=1' +
+        '&action=' + action +
+        '&target=' + pageTarget +
+        '&target1=' + pageTarget +
+        '&server_url=' + mailServer +
+        '&eapm_id=' + eapmId +
+        '&email_user=' + words[0] +
+        '&protocol=' + protocol +
+        '&port=' + port +
+        '&email_password=' + encodeURIComponent(words[1]) +
+        '&mailbox=' + words[2] +
+        '&ssl=' + ssl +
+        '&personal=' + isPersonal +
+        '&searchField=' + searchFieldValue;
 
 	var SI = SUGAR.inboundEmail;
     if (!SI.listDlg) {
@@ -242,8 +248,14 @@ function getFoldersListForInboundAccount(module_name, action, pageTarget, width,
 
     SI.listDlg.render(document.body);
     var Connect = YAHOO.util.Connect;
-    if (Connect.url) URL = Connect.url + "&" +  url;
-    Connect.asyncRequest("POST", URL, {success:SI.listDlg._updateContent, failure:SI.listDlg.hide, scope:SI.listDlg});
+    if (Connect.url) {
+        url = Connect.url + '&' +  url;
+    }
+    Connect.asyncRequest('POST', url, {
+        success: SI.listDlg._updateContent,
+        failure: SI.listDlg.hide,
+        scope: SI.listDlg
+    });
     SI.listDlg.show();
 
 } // fn
@@ -287,6 +299,9 @@ function toggle_monitored_folder(field) {
 	var trashFolderRow = document.getElementById('trashFolderRow');
 	var trashFolderRow1 = document.getElementById('trashFolderRow1');
 	var sentFolderRow = document.getElementById('sentFolderRow');
+    var sentFolderRow1 = document.getElementById('sentFolderRow1');
+    var mailboxRow = document.getElementById('mailboxRow');
+    var mailboxRow1 = document.getElementById('mailboxRow1');
 
 	if (field1.value == 'imap') {
 		mailbox.disabled=false;
@@ -296,7 +311,10 @@ function toggle_monitored_folder(field) {
 		  trashFolderRow.style.display = '';
 		  sentFolderRow.style.display = '';
 		  trashFolderRow1.style.display = '';
-          subscribeFolderButton.style.display = '';
+            subscribeFolderButton.style.display = '';
+            sentFolderRow1.style.display = '';
+            mailboxRow.style.display = '';
+            mailboxRow1.style.display = '';
         } catch(e) {};
 		label_inbox.style.display='';
 	}
@@ -309,7 +327,10 @@ function toggle_monitored_folder(field) {
           trashFolderRow.style.display = "none";
 		  sentFolderRow.style.display = "none";
 		  trashFolderRow1.style.display = "none";
-          subscribeFolderButton.style.display = "none";
+            subscribeFolderButton.style.display = 'none';
+            sentFolderRow1.style.display = 'none';
+            mailboxRow.style.display = 'none';
+            mailboxRow1.style.display = 'none';
         } catch(e) {};
 		label_inbox.style.display = "none";
 	}

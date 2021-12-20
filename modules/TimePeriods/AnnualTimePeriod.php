@@ -41,12 +41,11 @@ class AnnualTimePeriod extends TimePeriod implements TimePeriodInterface {
         //The previous period modifier
         $this->previous_date_modifier = $this->is_fiscal ? '-52 week' : '-1 year';
 
-        global $app_strings;
         //The name template
-        $this->name_template = $app_strings['LBL_ANNUAL_TIMEPERIOD_FORMAT'];
+        $this->name_template = translate('LBL_ANNUAL_TIMEPERIOD_FORMAT');
 
         //The leaf name template
-        $this->leaf_name_template = $app_strings['LBL_QUARTER_TIMEPERIOD_FORMAT'];
+        $this->leaf_name_template = translate('LBL_QUARTER_TIMEPERIOD_FORMAT');
     }
 
 

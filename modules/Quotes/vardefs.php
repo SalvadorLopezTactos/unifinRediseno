@@ -112,7 +112,7 @@ $dictionary['Quote'] = array(
             'vname' => 'LBL_QUOTE_NAME',
             'dbType' => 'varchar',
             'type' => 'name',
-            'len' => '50',
+            'len' => '255',
             'unified_search' => true,
             'full_text_search' => array(
                 'enabled' => true,
@@ -501,6 +501,8 @@ $dictionary['Quote'] = array(
                 'searchable' => true,
                 'boost' => 0.24,
             ),
+            'rows' => 2,
+            'cols' => 20,
         ),
         'billing_address_city' => array(
             'name' => 'billing_address_city',
@@ -543,6 +545,8 @@ $dictionary['Quote'] = array(
                 'searchable' => true,
                 'boost' => 0.23,
             ),
+            'rows' => 2,
+            'cols' => 20,
         ),
         'shipping_address_city' => array(
             'name' => 'shipping_address_city',
@@ -730,6 +734,13 @@ $dictionary['Quote'] = array(
             'vname' => 'LBL_NOTES',
             'source' => 'non-db',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'quote_messages',
+            'vname' => 'LBL_MESSAGES',
+            'source' => 'non-db',
+        ],
         'meetings' => array(
             'name' => 'meetings',
             'type' => 'link',
@@ -871,7 +882,6 @@ $dictionary['Quote'] = array(
             'isnull' => 'true',
             'module' => 'Opportunities',
             'link' => 'opportunities',
-            'massupdate' => false,
             //'dbType' => 'varchar',
             'source' => 'non-db',
             'len' => 50,
@@ -886,6 +896,7 @@ $dictionary['Quote'] = array(
             'table' => 'opportunities',
             'module' => 'Opportunities',
             'link' => 'opportunities',
+            'massupdate' => false,
         ),
         'documents' => array(
             'name' => 'documents',
@@ -902,6 +913,14 @@ $dictionary['Quote'] = array(
             'link_type' => 'one',
             'source' => 'non-db',
         ),
+        'renewal' => [
+            'name' => 'renewal',
+            'vname' => 'LBL_RENEWAL',
+            'type' => 'bool',
+            'default' => 0,
+            'readonly' => true,
+            'comment' => 'Indicates whether this quote is a renewal',
+        ],
     ),
     'indices' => array(
         array(
@@ -952,6 +971,17 @@ $dictionary['Quote'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Quotes'
         ),
+        'quote_messages' => [
+            'lhs_module' => 'Quotes',
+            'lhs_table' => 'quotes',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Quotes',
+        ],
         'quote_meetings' => array(
             'lhs_module' => 'Quotes',
             'lhs_table' => 'quotes',

@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Noteeringute loendi töölaud',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Noteeringute kirjete töölaud',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Pakkumiste fookuse sahtel',
 
     'LBL_CONTRACTS'=>'Lepingud',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Lepingud',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Maakond arvel',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Arve postiaadress',
     'LBL_BILLING_ADDRESS_STATE' => 'Riik arvel',
-    'LBL_BILLING_ADDRESS_STREET' => 'Arve aadress',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Arve aadress:',
     'LBL_BILLING_CONTACT_ID' => 'Arve kontakti ID',
     'LBL_BILLING_CONTACT_NAME' => 'Arve kontaktisiku nimi:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Tarne maakond',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Tarne sihtnumber',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Tarne riik',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Tarneaadress',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Tarneaadress:',
     'LBL_SHIPPING_BODY' => 'Arveldamine ja kohaletoimetamine',
     'LBL_SHIPPING_CONTACT_ID' => 'Tarne kontakti ID:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopeeri arve aadress tarneaadressiks',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopeeri tarneaadress arve aadressiks',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopeeri tarnimiseks',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopeeri arvelduseks',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Kas olete kindel, et soovite selle kommentaari pakkumusest eemaldada?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopeeri arvelduseks',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Kas olete kindel, et soovite selle kommentaari pakkumusest eemaldada?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Kas olete kindel, et soovite selle artikli pakkumusest eemaldada?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Kas olete kindel, et soovite selle grupi pakkumusest eemaldada?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kontakti pakkumusest eemaldada?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Kogus',
     'LBL_MFT_PART_NUM' => 'Osa number',
     'LBL_ITEM_NAME' => 'Reaüksus',
+    'LBL_PRODUCT_TEMPLATE' => 'Toode',
     'LBL_DISCOUNT_PRICE' => 'Tükihind',
     'LBL_DISCOUNT_AMOUNT' => 'Allahindlus',
     'LBL_LINE_ITEM_TOTAL' => 'Reaüksuse kogusumma',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Müügivõimaluse ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Pakkumiste konfiguratsioon',
+
+    'LBL_RENEWAL' => 'Uuendamine',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pakkumuse interaktsioonid',
 );

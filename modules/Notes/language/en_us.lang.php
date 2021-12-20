@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Notes List Dashboard',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Notes Record Dashboard',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notes Focus Drawer',
 
+    'LBL_RELATED_CONTACT' => 'Related Contact',
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the Account.',
     'LBL_ACCOUNT_ID' => 'Account ID:',
     'LBL_CASE_ID' => 'Case ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Contact ID:',
     'LBL_CONTACT_NAME' => 'Contact:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notes',
+    'LBL_ATTACHMENTS' => 'Attachments',
+    'LBL_ATTACHMENT_FLAG' => 'Is Attachment',
     'LBL_DESCRIPTION' => 'Description',
     'LBL_EMAIL_ADDRESS' => 'Email Address:',
     'LBL_EMAIL_ATTACHMENT' => 'Email Attachment',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes & Attachments',
     'LBL_NOTE' => 'Note:',
     'LBL_OPPORTUNITY_ID' => 'Opportunity ID:',
+    'LBL_NOTE_PARENT_ID' => 'Note Parent ID:',
     'LBL_PARENT_ID' => 'Parent ID:',
     'LBL_PARENT_TYPE' => 'Parent Type',
     'LBL_EMAIL_TYPE' => 'Email Type',

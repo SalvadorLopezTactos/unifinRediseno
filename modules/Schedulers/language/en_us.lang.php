@@ -42,6 +42,8 @@ $mod_strings = array (
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rebuild Denormalized Team Security Data',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Activity Stream Purger',
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Update product definition',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Process Time-Aware Schedules',
+'LBL_OOTB_DATA_ARCHIVER' => 'Run Active Data Archives/Deletions',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -163,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Cleanup Job Queue',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Activity Stream Purger',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Process Time-Aware Schedules',
 'LBL_PMSEENGINECRON' => 'SugarBPM Scheduler',
 );
 

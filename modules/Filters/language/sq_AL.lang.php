@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'vitin e ardhshëm',
     'LBL_OPEN_ISSUES' => 'Hap {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Zgjidhur së fundmi',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Krijo filtër',
+    'LBL_ERROR_FILTER_EMPTY' => 'Shto kriteret e filtrit.',
+    'LBL_ADD_FILTER' => 'Shto kritere',
+    'LBL_FILTER_NAME' => 'Emri i filtrit',
+    'LBL_FILTER_FIELD' => 'Fusha',
+    'LBL_FILTER_OPERATOR' => 'Operatori',
+    'LBL_FILTER_VALUE' => 'Vlera',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Ruaj tek aplikacioni në desktop',
+    'LBL_FILTER_LOCAL' => 'Filtër lokal',
 );

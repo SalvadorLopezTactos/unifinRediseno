@@ -32,13 +32,19 @@ $mod_strings = array(
     'LBL_MEETINGS_SUBPANEL_TITLE' => '会議',
     'LBL_TASKS_SUBPANEL_TITLE' => 'タスク',
     'LBL_REVENUELINEITEMS_SUBPANEL_TITLE' => '商談品目',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積品目',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積済商品',
     'LBL_PRODUCTTEMPLATES_SUBPANEL_TITLE' => '商品カタログ',
     'LBL_PRODUCTCATEGORIES_SUBPANEL_TITLE' => '商品カテゴリ',
     'EXCEPTION_DUPLICATE_TAG_FOUND' => '重複するタグが見つかりました。タグは大文字と小文字の区別がされず、一意である必要があります。',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'アサインされたユーザID',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'アサインされたユーザー ID',
     'LBL_EXPORT_MODIFIED_USER_ID' => '更新者ID',
     'LBL_EXPORT_CREATED_BY' => '作成者ID',
-    'LBL_EXPORT_CREATED_BY_NAME' => '作成者ユーザ名',
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => '割り当てられたユーザ名',
+    'LBL_EXPORT_CREATED_BY_NAME' => '作成者ユーザー名',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => '割り当てられたユーザー名',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'タグ フォーカス ドロワ',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'タグのレコードダッシュボード',
+    'LBL_MY_TAGS' => 'マイタグ',
+    'LBL_MY_FAVORITE_TAGS' => 'お気に入りのタグ',
 );

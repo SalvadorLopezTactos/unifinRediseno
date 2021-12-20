@@ -93,6 +93,8 @@ if(!empty($_REQUEST['ie_id'])) {
         $ie->email_password = html_entity_decode($ie->email_password, ENT_QUOTES);
     }
 }
+
+$ie->eapm_id        = $_REQUEST['eapm_id'];
 $ie->email_user     = $_REQUEST['email_user'];
 $ie->server_url     = $_REQUEST['server_url'];
 $ie->port           = $_REQUEST['port'];
@@ -105,7 +107,7 @@ if(!empty($_REQUEST['email_password'])) {
 $ie->mailbox        = 'INBOX';
 
 if($popupBoolean) {
-    $msg = $ie->connectMailserver(true);
+    $msg = $ie->connectToImapServer(true);
 }
 
 ////	END TITLES

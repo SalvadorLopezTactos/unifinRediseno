@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Avís: No és pot Escriure',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'La seva versió de PHP no està soportada per Sugar. Necessitarà instalar una versió que sigui compatible amb l&#39;aplicació Sugar. Si us plau,consulti la Matriu de Compatibilitat de les Notes de Llançament per a informació sobre les Versions de PHP soportades. La seva versió és la',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'La seva versió de IIS no és compatible amb Sugar. Vostè haurà de instal·lar una versió que sigui compatible amb l&#39;aplicació de Sugar. Si us plau consulteu la taula de compatibilitat en les notes de llançament de les versions de l&#39;IIS. La seva versió és',
-	'ERR_CHECKSYS_FASTCGI'              => 'Es detecta que no està utilitzant una assignació de controlador FastCGI per PHP. Vostè haurà d&#39;instal·lar/configurar una versió que sigui compatible amb l&#39;aplicació de Sugar. Si us plau consulteu la taula de compatibilitat en les notes de llançament de les versions compatibles. Si us plau mireu els details a <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a>',
+    'ERR_CHECKSYS_FASTCGI'              => 'Es detecta que no esteu utilitzant una assignació de controlador FastCGI per PHP. Haureu d\'instal·lar/configurar una versió que sigui compatible amb l\'aplicació de Sugar. Si us plau, consulteu la taula de compatibilitat en les notes de llançament de les versions compatibles. Consulteu els detalls a <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Per a una òptima experiència d&#39;ús de IIS/FastCGI sapi, estableixi fastcgi.logging a 0 en el seu arxiu php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versió de PHP Instalada No Suportada: ( veure',
     'LBL_DB_UNAVAILABLE'                => 'Base de dades no disponible',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No s\'ha trobat l\'Assitència de bases de dades. Assegureu-vos que teniu els controladors necessaris per a un dels següents Tipus de Bases de dades compatibles: MySQL, MS SQLServer, Oracle o DB2. Tal vegada caldrà que elimineu els comentaris de l\'extensió de l\'arxiu php.ini, o que torneu a compilar l\'arxiu binari correcte, segons la vostra versió de PHP. Consulteu el Manual de PHP per obtenir més informació relativa a com habilitar l\'Assistència de bases de dades.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No s\'ha trobat el Suport de la base de dades. Assegureu-vos de tenir els controladors necessaris per a un dels següents tipus de bases de dades compatibles: MySQL, MS SQLServer, Oracle o DB2. Potser heu d\'eliminar el comentari de l\'extensió del fitxer php.ini, o tornar a compilar amb el fitxer binari correcte, en funció de la vostra versió de PHP. Consulteu el vostre Manual de PHP per obtenir-ne més informació de com habilitar el Suport de la base de dades.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les funcions associades amb les Biblioteques d´Anàlisi de l´XML que són requerides per l´aplicació Sugar no han estat trobades. És possible que hagi de descomentar l´extensió a l´arxiu php.ini, o recompilar-lo amb l´arxiu binari apropiat, depenent de la versió de PHP. Si us plau, consulti el manual de PHP per a més informació.',
     'LBL_CHECKSYS_CSPRNG' => 'Generador de nombres aleatoris',
     'ERR_CHECKSYS_MBSTRING'             => 'Les funcions associades amb l´extensió de PHP per a Cadenes Multibyte (mbstring) que són requerides per l´aplicació Sugar no han estat trobades. <br/><br/> Normalment, el mòdul mbstring no està habilitat per defecte en PHP i ha de ser activat amb --enable-mbstring en la compilació de PHP. Si us plau, consulti el manual de PHP per a més informació sobre com habilitar el suport de mbstring.',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'La manera de compatibilitat cap a enrere de PHP està habilitada. Estableixi zend.ze1_compatibility_mode a Off abans de continuar',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Correus electrònics de notificació de reunions',
+        'subject' => 'Reunió de SugarCRM - $event_name ',
+        'description' => 'Aquesta plantilla s\'utilitza quan el sistema envia notificacions de reunió a un usuari.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>A: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user us ha convidat a una Reunió</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Assumpte: $event_name<br/>
+	Data d\'inici: $start_date<br/>
+	Data de finalització: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Descripció: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Accepta aquesta reunió:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Accepta provisionalment aquesta reunió:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Rebutja aquesta reunió:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'A: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user us ha convidat a una Reunió
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Assumpte: $event_name
+Data d\'inici: $start_date
+Data de finalització: $end_date
 
-Description: $description
+Descripció: $description
 
-Accept this meeting:
+Accepta aquesta reunió
 <$accept_link>
 
-Tentatively Accept this meeting
+Accepta provisionalment aquesta reunió
 <$tentative_link>
 
-Decline this meeting
+Rebutja aquesta reunió
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Correus electrònics de notificació de trucades',
+        'subject' => 'Trucada de SugarCRM - $event_name ',
+        'description' => 'Aquesta plantilla s\'utilitza quan el sistema envia notificacions de trucades a un usuari.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>A: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user us ha convidat a una Trucada</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Assumpte: $event_name<br/>
+	Data d\'inici: $start_date<br/>
+	Duració: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Descripció: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Accepta aquesta trucada:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Accepta provisionalment aquesta trucada:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Rebutja aquesta trucada:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'A: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user us ha convidat a una Reunió
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Assumpte: $event_name
+Data d\'inici: $start_date
+Duració: $hoursh, $minutesm
 
-Description: $description
+Descripció: $description
 
-Accept this call:
+Accepta aquesta trucada
 <$accept_link>
 
-Tentatively Accept this call
+Accepta provisionalment aquesta trucada
 <$tentative_link>
 
-Decline this call
+Rebutja aquesta trucada
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Correus electrònics de notificació d\'assignacions',
+        'subject' => 'SugarCRM - $module_name assignat ',
+        'description' => 'Aquesta plantilla s\'utilitza quan el sistema envia notificacions d\'assignació de tasques a un usuari.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user ha assignat un&nbsp;$module_name a&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Podeu revisar aquest&nbsp;$module_name en:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user ha assignat un $module_name a $assigned_user.
 
-You may review this $module_name at:
+Podeu revisar aquest $module_name en:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Correus electrònics d\'informes programats',
+        'subject' => 'Informe programat: $report_name a les $report_time',
+        'description' => 'Aquesta plantilla s\'utilitza quan el sistema envia notificacions d\'un informe programat a un usuari.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hola $assigned_user:</p>
+<p>S\'adjunta un informe generat automàticament que s\'ha programat per a vós.</p>
+<p>Nom de l\'informe: $report_name</p>
+<p>Data i hora d\'execució de l\'informe: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Hola $assigned_user:
 
-Attached is an auto generated report that has been scheduled for you.
+S\'adjunta un informe generat automàticament que s\'ha programat per a vós.
 
-Report Name: $report_name
+Nom de l\'informe: $report_name
 
-Report Run Date and Time: $report_time',
+Data i hora d\'execució de l\'informe: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Correu electrònic de notificació del registre de comentaris del sistema',
+        'subject' => 'SugarCRM - $initiator_full_name us ha mencionat en un $singular_module_name',
+        'description' => 'Aquesta plantilla s\'utilitza per enviar notificacions per correu electrònic als usuaris que s\'han etiquetat a la secció del registre de comentaris.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Us han mencionat al registre de comentaris del registre següent:  <a href="$record_url">$record_name</a></p>
+                <p>Inicieu la vostra sessió a Sugar per visualitzar el comentari.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Us han mencionat al registre de comentaris del registre següent: $record_name
+            Inicieu la vostra sessió a Sugar per visualitzar el comentari.',
     ],
 
     'advanced_password_new_account_email' => array(

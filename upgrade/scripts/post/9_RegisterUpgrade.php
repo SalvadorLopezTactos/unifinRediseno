@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
+
 /**
  * Register upgrade with the system
  */
@@ -24,31 +27,58 @@ class SugarUpgradeRegisterUpgrade extends UpgradeScript
 
     public function run()
     {
-        // if error was encountered, script should have died before now
-        $new_upgrade = new UpgradeHistory();
-        $new_upgrade->filename = $this->context['zip'];
         if (!empty($this->context['zip_as_dir'])) {
-            $new_upgrade->md5sum = trim(file_get_contents($this->context['zip'] . DIRECTORY_SEPARATOR . 'md5sum'));
+            $md5sum = trim(file_get_contents($this->context['zip'] . DIRECTORY_SEPARATOR . 'md5sum'));
+        } elseif (file_exists($this->context['zip'])) {
+            $md5sum = md5_file($this->context['zip']);
         } else {
-            if (file_exists($this->context['zip'])) {
-                $new_upgrade->md5sum = md5_file($this->context['zip']);
-            } else {
-                // if file is not there, just md5 the filename
-                $new_upgrade->md5sum = md5($this->context['zip']);
-            }
+            // if file is not there, just md5 the filename
+            $md5sum = md5($this->context['zip']);
         }
-        $dup = $this->db->getOne("SELECT id FROM upgrade_history WHERE md5sum='{$new_upgrade->md5sum}'");
-        if ($dup) {
-            $this->error("Duplicate install for package, md5: {$new_upgrade->md5sum}");
-            // Not failing it - by now there's no point, we're at the end anyway
+
+        // if error was encountered, script should have died before now
+        $history = new UpgradeHistory();
+        try {
+            $md5Match = $history->retrieveByMd5($md5sum);
+        } catch (SugarQueryException $e) {
+            $this->error(sprintf('Try register upgrade package, md5: %s. SQL error: %s', $md5sum, $e->getMessage()));
             return;
         }
-        $new_upgrade->name = pathinfo($this->context['zip'], PATHINFO_FILENAME);
-        $new_upgrade->description = $this->manifest['description'];
-        $new_upgrade->type = 'patch';
-        $new_upgrade->version = $this->to_version;
-        $new_upgrade->status = "installed";
-        $new_upgrade->manifest = base64_encode(serialize($this->manifest));
-        $new_upgrade->save();
+
+        if (!empty($md5Match->id)) {
+            // Not failing it - by now there's no point, we're at the end anyway
+            $this->error('Duplicate install for upgrade package, md5:' . $md5sum);
+            return;
+        }
+
+        $manifestData = array_merge($this->manifest, ['name' => pathinfo($this->context['zip'], PATHINFO_FILENAME)]);
+        if (empty($manifestData['acceptable_sugar_versions'])) {
+            $manifestData['acceptable_sugar_versions'] = ['exact_matches' => $this->from_version];
+        }
+
+        try {
+            $manifest = new PackageManifest($manifestData, [], []);
+        } catch (SugarException $e) {
+            $this->error(sprintf(
+                'Try register upgrade package, md5: %s. Manifest error: %s',
+                $md5sum,
+                $e->getMessage()
+            ));
+            return;
+        }
+
+        $history->filename = $this->context['zip'];
+        $history->md5sum = $md5sum;
+        $history->type = $manifest->getPackageType();
+        $history->version = $this->to_version;
+        $history->status = UpgradeHistory::STATUS_INSTALLED;
+        $history->name = $manifest->getPackageName();
+        $history->description = $manifest->getManifestValue('description', '');
+        $history->id_name = $manifest->getPackageIdName();
+        $history->manifest = base64_encode(serialize($manifest->toArray()));
+        $history->published_date = $manifest->getManifestValue('published_date', '');
+        $history->uninstallable = false;
+
+        $history->save();
     }
 }

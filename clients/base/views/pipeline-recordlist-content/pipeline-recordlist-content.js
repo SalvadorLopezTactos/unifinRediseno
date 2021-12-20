@@ -25,10 +25,10 @@
     resultsPerPageColumn: 7,
 
     tileVisualIndicator: {
-        'outOfDate': '#CC1E13', // We can use any CSS accepted value for color, e.g: #CC1E13
-        'nearFuture': 'orange',
-        'inFuture': 'green',
-        'default': '#0F374B'
+        'outOfDate': '#bb0e1b', // We can use any CSS accepted value for color, e.g: #CC1E13
+        'nearFuture': '#ff9445',
+        'inFuture': '#056f37',
+        'default': '#145c95'
     },
 
     //used to force api to return these fields also for a proper coloring.
@@ -181,8 +181,6 @@
      * @param {Array} options List of options
      */
     _setRecordsToDisplay: function(headerField, options) {
-        var headerColors = this.getColumnColors();
-
         // Get all the whitelisted column names for current module
         if (!_.isUndefined(this.pipelineConfig.available_columns) &&
             !_.isUndefined(this.pipelineConfig.available_columns[this.module])) {
@@ -195,7 +193,7 @@
                         'headerName': options[key],
                         'headerKey': key,
                         'records': [],
-                        'color': !_.isUndefined(headerColors[index]) ? headerColors[index] : ''
+                        'colorIndex': index,
                     });
                     index++;
                 }
@@ -210,7 +208,7 @@
                         'headerName': option,
                         'headerKey': key,
                         'records': [],
-                        'color': !_.isUndefined(headerColors[index]) ? headerColors[index] : ''
+                        'colorIndex': index,
                     });
                 }
             }, this);
@@ -221,8 +219,6 @@
      * Gets the table headers for all the columns being displayed on the page
      */
     getTableHeader: function() {
-        var headerColors = this.getColumnColors();
-
         if (this.pipelineType !== 'date_closed') {
             var headerField = this.pipelineConfig.table_header[this.module] || '';
 
@@ -266,7 +262,7 @@
                 'headerName': currDate.format('MMMM YYYY'),
                 'headerKey': currDate.format('MMMM YYYY'),
                 'records': [],
-                'color': headerColors[0]
+                'colorIndex': 0,
             });
 
             for (var i = 1; i < this.monthsToDisplay; i++) {
@@ -275,7 +271,7 @@
                     'headerName': currDate.format('MMMM YYYY'),
                     'headerKey': currDate.format('MMMM YYYY'),
                     'records': [],
-                    'color': headerColors[i]
+                    'colorIndex': i,
                 });
             }
             this.headerField = 'date_closed';
@@ -288,8 +284,13 @@
     /**
      * Gets the colors for each of the column headers
      * @return {string[]|null|Array} an array of hexcode for the colors
+     * @deprecated Since 10.3.0
      */
     getColumnColors: function() {
+        app.logger.warn(
+            'getColumnColors() is deprecated in 10.3.0. ' +
+            'Please use the utility CSS class: .pipeline-bg-color-n where n is 0-11.'
+        );
         var columnColor = this.pipelineConfig.header_colors;
         if (_.isEmpty(columnColor) || columnColor == 'null') {
             columnColor = {};

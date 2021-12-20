@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Protsessi haldus',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Järelevalveta protsessid',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Protsesside fookuse sahtel',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Protsesside kirjete töölaud',
+
     'LBL_CAS_ID' => 'Protsessi number',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Tundmatu (asjakohane kasutaja ID:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "ülesanne on",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Protsessi kujunduse eelvaade',
     'LBL_PROJECT_RUN_ORDER' => 'Käitamise järjestus',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Praegune tegevus',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Muutmiskuupäev',
+    'LBL_DATE_ENTERED' => 'Loomiskuupäev',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Kas olete kindel, et soovite selle protsessi vastu võtta?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Protsess on edukalt vastu võetud',
 );
 

@@ -53,10 +53,11 @@ $viewdefs['Accounts']['base']['view']['multi-line-list'] = [
                     'subfields' => [
                         [
                             'name' => 'next_renewal_date',
-                            'label' => 'LBL_NEXT_RENEWAL_DATE',
+                            'label' => 'LBL_WIDGET_NEXT_RENEWAL_DATE',
                             'default' => true,
                             'enabled' => true,
                             'type' => 'relative-date',
+                            'widget_name' => 'widget_next_renewal_date',
                         ],
                         [
                             'name' => 'next_renewal_date',
@@ -97,11 +98,11 @@ $viewdefs['Accounts']['base']['view']['multi-line-list'] = [
                 ],
                 [
                     'name' => 'account_type',
-                    'label' => 'LBL_ACCOUNT_TYPE',
+                    'label' => 'LBL_TYPE',
                     'subfields' => [
                         [
                             'name' => 'account_type',
-                            'label' => 'LBL_ACCOUNT_TYPE',
+                            'label' => 'LBL_TYPE',
                             'default' => true,
                             'enabled' => true,
                             'type' => 'enum',

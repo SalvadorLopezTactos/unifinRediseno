@@ -631,7 +631,8 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
                 //Otherwise make up a viewdef for it from field_defs
                 else
                 {
-                    $def =  self::_trimFieldDefs( $def ) ;
+                    $trimmedDef = self::trimReadonlyFields($def);
+                    $def = self::_trimFieldDefs($trimmedDef);
                 }
                 $this->addField($def);
         	}
@@ -693,8 +694,9 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
                 	//Otherwise make up a viewdef for it from field_defs
                 	else if (isset ($fielddefs [ $fieldname ]))
                 	{
-                		$newRow [ $colID - $offset ] =  self::_trimFieldDefs( $fielddefs [ $fieldname ] ) ;
-
+                        $trimmedDef = self::trimReadonlyFields($fielddefs[$fieldname]);
+                        $def = self::_trimFieldDefs($trimmedDef);
+                        $newRow[$colID - $offset] = $def;
                 	}
                 	//No additional info on this field can be found, jsut use the name;
                 	else
@@ -947,6 +949,19 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
             $ret['label'] = $def['vname'];
 		return $ret;
 	}
+
+    /**
+     * Trim the readonly properties when not required
+     * @param $def array vardef for a field
+     * @return array
+     */
+    public static function trimReadonlyFields($def)
+    {
+        if (isset($def['readonly']) && !empty($def['readonly_formula'])) {
+            unset($def['readonly']);
+        }
+        return $def;
+    }
 
 	public function getUseTabs()
 	{

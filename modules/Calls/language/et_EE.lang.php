@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Kõnede loendi töölaud',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Kõnekirjete töölaud',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Kõnede fookuse sahtel',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Kõned',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Määratud kasutaja',
     'LBL_LIST_MY_CALLS' => 'Minu kõned',
     'LBL_MY_SCHEDULED_CALLS' => 'Minu plaanitud kõned',
+    'LBL_GUEST_CALLS' => 'Minu kõned külalisena',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Külalisena ajastatud kõned',
     'LBL_SELECT_FROM_DROPDOWN' => 'Tehke esmalt valik ripploendist Seotud.',
 	'LBL_ASSIGNED_TO_NAME' => 'Määratud kasutajale',
 	'LBL_ASSIGNED_TO_ID' => 'Määratud kasutaja',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Tühista',
     'LBL_EMPTY_SEARCH_RESULT' => 'Kahjuks tulemusi ei leitud. Looge kutsutu allpool.',
     'LBL_NO_ACCESS' => 'Teil pole juurdepääsu mooduli $module loomiseks',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connecti kontakti ID',
+
     'LBL_REPEAT_TYPE' => 'Korda',
     'LBL_REPEAT_INTERVAL' => 'Iga',
     'LBL_REPEAT_END' => 'Lõpp',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Helistage {{{this}}}',
     'LBL_SEND_INVITES' => 'Saada kutsed',
     'LBL_REMINDER_TITLE' => 'Kõne:',
+    'LBL_CALL_RECORDING_URL' => 'Salvestamise URL',
+    'LBL_CALL_RECORDING' => 'Salvestamine',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Plaanisite {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> ajaks {{formatDate date_start}}.',

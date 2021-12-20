@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tabloul de bord Listă bază de cunoștințe',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare bază de cunoștințe',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare bază de cunoștințe',
 
     'LBL_MODULE_NAME' => 'Baza de cunoştinţe',
     'LBL_MODULE_NAME_SINGULAR' => 'Articolul de baza a cunoasterilor',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Inutil',
     'LBL_RATING' => 'Evaluare:',
     'LBL_VIEWED_COUNT' => 'Vizualizare contor',
-    'LBL_DOWNLOAD_ALL' => 'Descărcare totală',
-    'LBL_DOWNLOAD_ONE' => 'Descarca',
-    'LBL_ATTACHMENTS' => 'Atasate',
-    'LBL_ADD_ATTACHMENT' => 'Rasfoieste',
     'LBL_CATEGORIES' => 'Categorii baze de cunoştinţe',
     'LBL_CATEGORY_NAME' => 'Categorie',
     'LBL_USEFULNESS' => 'Utilitate',

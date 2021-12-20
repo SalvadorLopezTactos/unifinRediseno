@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Opprettet Av ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Opprettet Av Brukernavn',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt Brukernavn',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Etiketter fokusskuff',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Registredashbord for etiketter',
+    'LBL_MY_TAGS' => 'Mine etiketter',
+    'LBL_MY_FAVORITE_TAGS' => 'Mine favorittetiketter',
 );

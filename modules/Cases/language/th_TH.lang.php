@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'แดชบอร์ดรายการปัญหา',
     'LBL_CASES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกปัญหา',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'รายละเอียดเคส',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชักเคส',
 
 	'ERR_DELETE_RECORD'					=> 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
 	'LBL_ACCOUNT_ID'					=> 'ID บัญชี',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'แสดงในพอร์ทัล',
 	'LBL_CREATE_KB_DOCUMENT' => 'สร้างบทความ',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'ฐานความรู้',
+    'LBL_REQUEST_CLOSE' => 'ขอปิด',
+    'LBL_REQUEST_CLOSE_DATE' => 'คำขอขอวันที่ปิด',
+    'LBL_REQUEST_CLOSE_LABEL' => 'ขอให้ปิด',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'ส่งคำขอเพื่อปิดเคสนี้',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'คุณต้องการขอให้มีการปิดเคสนี้หรือไม่',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'เคสของฉันได้รับคำขอให้ปิด',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'เคสของฉันได้รับคำขอให้ปิด',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'เคสของฉันได้รับคำขอให้ปิด',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'รายการเคสที่ได้รับคำขอให้ปิด',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'แสดงรายการเคสที่ได้รับมอบหมายที่มีการขอให้ปิด',
 
     'LBL_CREATED_USER' => 'ผู้ใช้ที่สร้าง',
     'LBL_MODIFIED_USER' => 'ผู้ใช้ที่แก้ไข',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'ชื่อผู้ใช้ที่ระบุ',
     'LBL_EXPORT_TEAM_COUNT' => 'จำนวนทีม',
     'LBL_CHANGETIMERS' => 'เปลี่ยนตัวตั้งเวลา',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'ซื้อ',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'อีเมลของผู้ติดต่อที่เกี่ยวข้อง',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'ตัวอย่างเช่น คุณอาจใช้ข้อมูลนี้เพื่อค้นหาปัญหาที่ส่งก่อนหน้านี้',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'ถ้าคุณมีเคสการสนับสนุนใหม่ที่ต้องการส่ง คุณสามารถคลิกเพื่อส่งเคสใหม่',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'การคลิกที่นี่จะนำคุณกลับมาที่มุมมองนี้ทุกเมื่อ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'การโต้ตอบเคส',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'บันทึก',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'รายละเอียด SLA',
     'LBL_HOURS' => 'ชั่วโมง',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'สถานะ',
 );

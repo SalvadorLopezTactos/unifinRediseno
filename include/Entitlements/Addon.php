@@ -16,6 +16,8 @@ namespace Sugarcrm\Sugarcrm\Entitlements;
 // to as Critical Control Software under the End User
 // License Agreement.  Neither the Company nor the Users
 // may modify any portion of the Critical Control Software.
+use Sugarcrm\Sugarcrm\inc\Entitlements\Exception\SubscriptionException;
+
 /**
  * Class Addon
  *
@@ -43,7 +45,7 @@ class Addon
     protected function parse(string $id, array $data)
     {
         if (empty($id)) {
-            throw new \Exception('No subscription Id in json data');
+            throw new SubscriptionException('No subscription Id in json data');
         }
 
         $this->data['id'] = $id;

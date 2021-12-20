@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Інформаційна панель списку звернень',
     'LBL_CASES_RECORD_DASHBOARD' => 'Інформаційна панель записів звернень',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Відомості про звернення',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель звернень',
 
 	'ERR_DELETE_RECORD'					=> 'Необхідно вказати номер запису перед видаленням.',
 	'LBL_ACCOUNT_ID'					=> 'Контрагент (ID)',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Відображати на порталі',
 	'LBL_CREATE_KB_DOCUMENT' => 'Створити статтю',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'База знань',
+    'LBL_REQUEST_CLOSE' => 'Закриття запиту',
+    'LBL_REQUEST_CLOSE_DATE' => 'Дата закриття запиту',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Запит на закриття',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Надішліть запит на закриття цього звернення',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Хочете надіслати запит на закриття цього звернення?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Мої звернення, для яких запитано закриття',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Мої звернення, для яких подано запит на закриття',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Мої звернення, для яких подано запит на закриття',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Перелік звернень, для яких подано запит на закриття',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Відображає перелік призначених звернень, для яких подано запит на закриття',
 
     'LBL_CREATED_USER' => 'Створенено користувачем',
     'LBL_MODIFIED_USER' => 'Змінено користувачем',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Відповідальний користувач',
     'LBL_EXPORT_TEAM_COUNT' => 'Команда',
     'LBL_CHANGETIMERS' => 'Змінити таймери',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Покупки',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email-повідомлення пов&#39;язаних контактів',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Наприклад, можна застосовувати це для того, щоб знайти помилку, про яку раніше звітували.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Якщо ви знайшли нову помилку, про яку ви хочете звітувати, можете натиснути тут, щоб звітувати про нову помилку.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Натиснувши тут ви повернетесь до цього режиму перегляду в будь-який час.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаємодія зі зверненням',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Примітки',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'Відомості про Угоду про рівень обслуговування (SLA)',
     'LBL_HOURS' => 'Години',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Статус',
 );

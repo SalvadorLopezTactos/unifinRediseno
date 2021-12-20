@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-<select name='parent_type' tabindex="{{$tabindex}}" id='parent_type' title='{{$vardef.help}}'  {{if !empty($displayParams.accesskey)}} accesskey='{{$displayParams.accesskey}}' {{/if}}
+<select name='parent_type' tabindex="{{$tabindex}}" id='parent_type' title='{{$vardef.help|escape:"hexentity"}}'  {{if !empty($displayParams.accesskey)}} accesskey='{{$displayParams.accesskey}}' {{/if}}
 onchange='document.{$form_name}.{{sugarvar key='name'}}.value="";document.{$form_name}.parent_id.value=""; changeParentQS("{{sugarvar key='name'}}"); checkParentType(document.{$form_name}.parent_type.value, document.{$form_name}.btn_{{sugarvar key='name'}});'>
 {html_options options={{sugarvar key='options' string=true}} selected=$fields.parent_type.value sortoptions=true}
 </select>

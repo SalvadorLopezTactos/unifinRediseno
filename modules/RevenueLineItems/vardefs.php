@@ -11,6 +11,7 @@
  */
 $dictionary['RevenueLineItem'] = array(
     'table' => 'revenue_line_items',
+    'archive' => false,
     'optimistic_locking' => true,
     'audited' => true,
     'activity_enabled' => true,
@@ -46,6 +47,7 @@ $dictionary['RevenueLineItem'] = array(
             'studio' => array('editview' => false, 'detailview' => false, 'quickcreate' => false),
             'auto_populate' => true,
             'populate_list' => array(
+                'name' => 'name',
                 'category_id' => 'category_id',
                 'category_name' => 'category_name',
                 'mft_part_num' => 'mft_part_num',
@@ -65,12 +67,24 @@ $dictionary['RevenueLineItem'] = array(
                 'type_name' => 'type_name',
                 'service_start_date' => 'service_start_date',
                 'service_end_date' => 'service_end_date',
-                'service_duration_value' => 'service_duration_value',
-                'service_duration_unit' => 'service_duration_unit',
+                'service_duration_value' => ['service_duration_value', 'catalog_service_duration_value'],
+                'service_duration_unit' => ['service_duration_unit', 'catalog_service_duration_unit'],
                 'renewable' => 'renewable',
                 'service' => 'service',
             ),
         ),
+        'lock_duration' => [
+            'name' => 'lock_duration',
+            'vname' => 'LBL_LOCK_DURATION',
+            'type' => 'bool',
+            'default' => 0,
+            'studio' => false,
+            'enforced' => true,
+            'calculated' => true,
+            'massupdate' => false,
+            'formula' => 'related($rli_templates_link, "lock_duration")',
+            'comment' => 'Turn on or off a user ability to directly edit the duration field',
+        ],
         'account_id' => array(
             'name' => 'account_id',
             'type' => 'id',
@@ -83,19 +97,73 @@ $dictionary['RevenueLineItem'] = array(
             'enforced' => true,
             'calculated' => true,
         ),
+        'subtotal' => [
+            'name' => 'subtotal',
+            'vname' => 'LBL_SUBTOTAL',
+            'type' => 'currency',
+            'len' => '26,6',
+            'calculated' => true,
+            'enforced' => true,
+            'formula' => '
+                ifElse(
+                    and(isNumeric($discount_price), isNumeric($quantity)),
+                    ifElse(
+                        and(
+                            isNumeric($service_duration_value),
+                            isNumeric($catalog_service_duration_value),
+                            not(equal($service_duration_unit, "")),
+                            not(equal($catalog_service_duration_unit, ""))
+                        ),
+                        prorateValue(
+                            multiply($discount_price, $quantity),
+                            number($service_duration_value),
+                            $service_duration_unit,
+                            number($catalog_service_duration_value),
+                            $catalog_service_duration_unit
+                        ),
+                        multiply($discount_price, $quantity)
+                    ),
+                    0
+                )
+            ',
+            'comment' => 'Stores the total of the line item before any discounts are applied, taking proration into consideration',
+            'related_fields' => [
+                'discount_price',
+                'quantity',
+                'service_duration_value',
+                'service_duration_unit',
+                'catalog_service_duration_value',
+                'catalog_service_duration_unit',
+            ],
+            'additionalCalculationTriggerFields' => [
+                'discount_amount',
+                'discount_select',
+            ],
+        ],
         'total_amount' => array(
             'name' => 'total_amount',
             'formula' => '
                 ifElse(and(isNumeric($quantity), isNumeric($discount_price)),
-                  ifElse(equal($quantity, 0),
-                    $total_amount,
-                      currencySubtract(
-                        currencyMultiply($discount_price, $quantity),
-                        ifElse(isNumeric($discount_amount), $discount_amount, 0
-                      )
-                  )
-                ), ""
-            )',
+                    ifElse(equal($quantity, 0),
+                        $total_amount,
+                        currencySubtract(
+                            ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)),
+                            ifElse(equal($discount_select, "1"),
+                                currencyMultiply(
+                                    ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)),
+                                    currencyDivide($discount_amount, 100)
+                                ),
+                                ifElse(greaterThan($quantity, 0),
+                                    ifElse(isNumeric(toString($discount_amount)),
+                                    ifElse(greaterThan(0, $discount_price),
+                                        negate($discount_amount), $discount_amount
+                                    ), 0
+                                ),
+                                ifElse(isNumeric(toString($discount_amount)), negate($discount_amount), 0))
+                            )
+                        )
+                    ), ""
+                )',
             'calculated' => true,
             'enforced' => true,
             'vname' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
@@ -104,7 +172,9 @@ $dictionary['RevenueLineItem'] = array(
             'related_fields' => array(
                 'discount_price',
                 'quantity',
-                'discount_amount'
+                'discount_amount',
+                'discount_select',
+                'subtotal',
             )
         ),
         'type_id' => array(
@@ -132,8 +202,7 @@ $dictionary['RevenueLineItem'] = array(
             'massupdate' => false,
             'comment' => 'Manufacturer of product'
         ),
-        'manufacturer_name' =>
-        array (
+        'manufacturer_name' => array (
             'name' => 'manufacturer_name',
             'rname'=> 'name',
             'id_name'=> 'manufacturer_id',
@@ -184,7 +253,7 @@ $dictionary['RevenueLineItem'] = array(
             'vname' => 'LBL_NAME',
             'dbType' => 'varchar',
             'type' => 'name',
-            'len' => '50',
+            'len' => '255',
             'unified_search' => true,
             'full_text_search' => array(
                 'enabled' => true,
@@ -228,7 +297,7 @@ $dictionary['RevenueLineItem'] = array(
                 and(
                     equal($product_template_id, ""),
                     not(isNumeric($discount_price)),
-                    greaterThan($quantity, 0)
+                    not(equal($quantity, 0))
                 ),
                 divide($likely_case, $quantity),
                 $discount_price
@@ -238,15 +307,27 @@ $dictionary['RevenueLineItem'] = array(
         ),
         'discount_amount' => array(
             'name' => 'discount_amount',
-            'vname' => 'LBL_TOTAL_DISCOUNT_AMOUNT',
-            'type' => 'currency',
+            'vname' => 'LBL_DISCOUNT_AMOUNT',
+            'dbType' => 'currency',
+            'type' => 'discount-amount',
             'len' => '26,6',
-            'precision' => 6,
+            'default' => '0',
+            'precision' => '6',
             'comment' => 'Discounted amount',
             'related_fields' => array(
                 'currency_id',
-                'base_rate'
-            )
+                'base_rate',
+                'discount_select',
+            ),
+            'studio' => false,
+        ),
+        'discount_select' => array(
+            'name' => 'discount_select',
+            'vname' => 'LBL_DISCOUNT_SELECT',
+            'type' => 'bool',
+            'default' => true,
+            'reportable' => false,
+            'studio' => false,
         ),
         'discount_rate_percent' => array(
             'name' => 'discount_rate_percent',
@@ -274,13 +355,18 @@ $dictionary['RevenueLineItem'] = array(
             'calculated' => true,
             'enforced' => true,
         ),
-        'discount_select' => array(
-            'name' => 'discount_select',
-            'vname' => 'LBL_SELECT_DISCOUNT',
-            'type' => 'bool',
-            'reportable' => false,
-            'importable' => false,
+        'discount_amount_signed' => array(
+            'name' => 'discount_amount_signed',
+            'vname' => 'LBL_DISCOUNT_AMOUNT_SIGNED',
+            'type' => 'currency',
+            'len' => '26,6',
+            'default' => '0',
+            'audited' => true,
+            'comment' => 'Discounted Amount Signed',
+            'formula' => 'subtract(ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)), $total_amount)',
+            'calculated' => true,
             'studio' => false,
+            'enforced' => true,
         ),
         'deal_calc' => array(
             'name' => 'deal_calc',
@@ -292,8 +378,8 @@ $dictionary['RevenueLineItem'] = array(
             'calculated' => true,
             'enforced' => true,
             'formula' => 'ifElse(equal($discount_select, "1"),
-                            currencyMultiply(currencyMultiply($discount_price, $quantity), currencyDivide($discount_amount, 100)),
-                            ifElse(isNumeric($discount_amount), $discount_amount, 0)
+                            currencyMultiply(ifElse(isNumeric($subtotal), $subtotal, multiply($discount_price, $quantity)), currencyDivide($discount_amount, 100)),
+                            ifElse(isNumeric($discount_amount_signed), $discount_amount_signed, 0)
                         )',
             'customCode' => '{$fields.currency_symbol.value}{$fields.deal_calc.value}&nbsp;',
             'related_fields' => array(
@@ -402,14 +488,6 @@ $dictionary['RevenueLineItem'] = array(
             'audited' => true,
             'comment' => 'Product status (ex: Quoted, Ordered, Shipped)'
         ),
-        'tax_class' => array(
-            'name' => 'tax_class',
-            'vname' => 'LBL_TAX_CLASS',
-            'type' => 'enum',
-            'options' => 'tax_class_dom',
-            'len' => 100,
-            'comment' => 'Tax classification (ex: Taxable, Non-taxable)'
-        ),
         'book_value_usdollar' => array(
             'name' => 'book_value_usdollar',
             'vname' => 'LBL_BOOK_VALUE_USDOLLAR',
@@ -438,6 +516,53 @@ $dictionary['RevenueLineItem'] = array(
             'vname' => 'LBL_QUOTE',
             'source' => 'non-db',
         ),
+        'generate_purchase' => [
+            'name' => 'generate_purchase',
+            'vname' => 'LBL_GENERATE_PURCHASE',
+            'type' => 'enum',
+            'options' => 'generate_purchase_dom',
+            'default' => 'Yes',
+            // Prevent appending defaults on upgrade
+            'no_default' => true,
+            'len' => 25,
+            'importable' => 'true',
+            'reportable' => true,
+            'massupdate' => true,
+            'comment' => 'Generate Purchase Options (ex: Yes, No, Completed)',
+        ],
+        'purchasedlineitem' => [
+            'name' => 'purchasedlineitem',
+            'type' => 'link',
+            'relationship' => 'purchasedlineitem_revenuelineitem',
+            'module' => 'PurchasedLineItems',
+            'source' => 'non-db',
+            'vname' => 'LBL_PURCHASED_LINE_ITEM',
+        ],
+        'purchasedlineitem_id' => [
+            'name' => 'purchasedlineitem_id',
+            'type' => 'id',
+            'vname' => 'LBL_PLI_ID',
+            'required' => false,
+            'reportable' => false,
+            'comment' => 'If PLI was created from this RLI, this is that PLIs ID',
+        ],
+        'purchasedlineitem_name' => [
+            'name' => 'purchasedlineitem_name',
+            'rname' => 'name',
+            'id_name' => 'purchasedlineitem_id',
+            'join_name' => 'purchased_line_items',
+            'type' => 'relate',
+            'link' => 'purchasedlineitem',
+            'table' => 'purchased_line_items',
+            'isnull' => true,
+            'required' => false,
+            'module' => 'PurchasedLineItems',
+            'dbType' => 'varchar',
+            'len' => '255',
+            'vname' => 'LBL_PURCHASED_LINE_ITEM',
+            'source' => 'non-db',
+            'comment' => 'PLI Name',
+        ],
         'best_case' => array(
             'formula' => 'ifElse(equal($best_case, ""), string($total_amount), $best_case)',
             'calculated' => true,
@@ -530,7 +655,8 @@ $dictionary['RevenueLineItem'] = array(
             'activity_enabled' => false,
             'formula' => 'timestamp($date_closed)',
             'calculated' => true,
-            'enforced' => true
+            'enforced' => true,
+            'importable' => false,
         ),
         'next_step' => array(
             'name' => 'next_step',
@@ -623,6 +749,9 @@ $dictionary['RevenueLineItem'] = array(
             'table' => 'campaigns',
             'module' => 'Campaigns',
             'source' => 'non-db',
+            'studio' => array(
+                'mobile' => false,
+            ),
         ),
         'campaign_revenuelineitems' => array(
             'name' => 'campaign_revenuelineitems',
@@ -638,6 +767,13 @@ $dictionary['RevenueLineItem'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'revenuelineitem_messages',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'tasks' => array(
             'name' => 'tasks',
             'type' => 'link',
@@ -801,6 +937,16 @@ $dictionary['RevenueLineItem'] = array(
             'bean_name' => 'ProductType',
             'source' => 'non-db',
         ),
+        'pli_addons_link' => [
+            'name' => 'pli_addons_link',
+            'type' => 'link',
+            'relationship' => 'revenuelineitem_pli_addons',
+            'vname' => 'LBL_ADD_ON_TO',
+            'link_type' => 'one',
+            'module' => 'PurchasedLineItems',
+            'bean_name' => 'PurchasedLineItem',
+            'source' => 'non-db',
+        ],
         'products' => array(
             'name' => 'products',
             'type' => 'link',
@@ -808,6 +954,13 @@ $dictionary['RevenueLineItem'] = array(
             'vname' => 'LBL_PRODUCTS',
             'source' => 'non-db',
         ),
+        'generated_products' => [
+            'name' => 'generated_products',
+            'type' => 'link',
+            'relationship' => 'products_parent_rli',
+            'vname' => 'LBL_PRODUCTS',
+            'source' => 'non-db',
+        ],
         'account_name' => array(
             'name' => 'account_name',
             'rname' => 'name',
@@ -867,6 +1020,106 @@ $dictionary['RevenueLineItem'] = array(
             'bean_name' => 'Manufacturer',
             'source' => 'non-db',
         ),
+        'add_on_to_id' => [
+            'name' => 'add_on_to_id',
+            'comment' => 'Purchased line item that this is an add-on to',
+            'vname' => 'LBL_ADD_ON_TO_ID',
+            'rname' => 'id',
+            'type' => 'id',
+            'dbType' => 'id',
+            'table' => 'purchased_line_items',
+            'isnull' => 'true',
+            'module' => 'PurchasedLineItems',
+            'reportable' => false,
+            'massupdate' => false,
+            'duplicate_merge' => 'disabled',
+        ],
+        'add_on_to_name' => [
+            'name' => 'add_on_to_name',
+            'rname' => 'name',
+            'id_name' => 'add_on_to_id',
+            'vname' => 'LBL_ADD_ON_TO',
+            'type' => 'relate',
+            'save' => true,
+            'link' => 'pli_addons_link',
+            'isnull' => 'true',
+            'table' => 'purchased_line_items',
+            'module' => 'PurchasedLineItems',
+            'source' => 'non-db',
+            'massupdate' => false,
+            'copyFromPurchasedLineItem' => [
+                'product_template_id' => 'product_template_id',
+                'product_template_name' => 'product_template_name',
+                'service_end_date' => 'service_end_date',
+            ],
+            'copyFromProductTemplate' => [
+                'name' => 'name',
+                'category_id' => 'category_id',
+                'category_name' => 'category_name',
+                'mft_part_num' => 'mft_part_num',
+                'list_price' => 'list_price',
+                'cost_price' => 'cost_price',
+                'discount_price' => 'discount_price',
+                'list_usdollar' => 'list_usdollar',
+                'cost_usdollar' => 'cost_usdollar',
+                'discount_usdollar' => 'discount_usdollar',
+                'currency_id' => 'currency_id',
+                'base_rate' => 'base_rate',
+                'tax_class' => 'tax_class',
+                'weight' => 'weight',
+                'manufacturer_id' => 'manufacturer_id',
+                'manufacturer_name' => 'manufacturer_name',
+                'type_id' => 'type_id',
+                'type_name' => 'type_name',
+                'renewable' => 'renewable',
+                'service' => 'service',
+                'service_duration_value' => 'catalog_service_duration_value',
+                'service_duration_unit' => 'catalog_service_duration_unit',
+            ],
+        ],
+        'parent_rlis_link' => [
+            'name' => 'parent_rlis_link',
+            'type' => 'link',
+            'relationship' => 'revenuelineitems_renewal_rli',
+            'module' => 'RevenueLineItems',
+            'bean_name' => 'RevenueLineItem',
+            'source' => 'non-db',
+            'vname' => 'LBL_PARENT_RLIS',
+            'side' => 'left',
+        ],
+        'renewal_rli_link' => [
+            'name' => 'renewal_rli_link',
+            'type' => 'link',
+            'relationship' => 'revenuelineitems_renewal_rli',
+            'module' => 'RevenueLineItems',
+            'bean_name' => 'RevenueLineItem',
+            'link_type' => 'one',
+            'source' => 'non-db',
+            'vname' => 'LBL_RENEWAL_RLI_NAME',
+            'side' => 'right',
+        ],
+        'renewal_rli_id' => [
+            'name' => 'renewal_rli_id',
+            'vname' => 'LBL_RENEWAL_RLI_ID',
+            'type' => 'id',
+            'required' => false,
+            'reportable' => false,
+            'comment' => 'Renewal RLI of this RLI, set during renewal generation',
+        ],
+        'renewal_rli_name' => [
+            'name' => 'renewal_rli_name',
+            'rname' => 'name',
+            'id_name' => 'renewal_rli_id',
+            'vname' => 'LBL_RENEWAL_RLI_NAME',
+            'type' => 'relate',
+            'save' => true,
+            'link' => 'renewal_rli_link',
+            'isnull' => true,
+            'massupdate' => false,
+            'table' => 'revenue_line_items',
+            'module' => 'RevenueLineItems',
+            'source' => 'non-db',
+        ],
     ),
     'indices' => array(
         array(
@@ -925,6 +1178,15 @@ $dictionary['RevenueLineItem'] = array(
                 'date_closed',
             ),
         ),
+        [
+            'name' => 'idx_renewal_rli_id_del',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'renewal_rli_id',
+                'id',
+            ],
+        ],
     ),
     'relationships' => array(
         'revenuelineitem_tasks' => array(
@@ -949,6 +1211,17 @@ $dictionary['RevenueLineItem'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'RevenueLineItems'
         ),
+        'revenuelineitem_messages' => [
+            'lhs_module' => 'RevenueLineItems',
+            'lhs_table' => 'revenue_line_items',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'RevenueLineItems',
+        ],
         'revenuelineitems_accounts' => array(
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
@@ -1025,6 +1298,24 @@ $dictionary['RevenueLineItem'] = array(
             'rhs_key' => 'manufacturer_id',
             'relationship_type' => 'one-to-many',
         ),
+        'revenuelineitem_pli_addons' => [
+            'lhs_module' => 'PurchasedLineItems',
+            'lhs_table' => 'purchased_line_items',
+            'lhs_key' => 'id',
+            'rhs_module' => 'RevenueLineItems',
+            'rhs_table' => 'revenue_line_items',
+            'rhs_key' => 'add_on_to_id',
+            'relationship_type' => 'one-to-many',
+        ],
+        'revenuelineitems_renewal_rli' => [
+            'lhs_module' => 'RevenueLineItems',
+            'lhs_table' => 'revenue_line_items',
+            'lhs_key' => 'id',
+            'rhs_module' => 'RevenueLineItems',
+            'rhs_table' => 'revenue_line_items',
+            'rhs_key' => 'renewal_rli_id',
+            'relationship_type' => 'one-to-many',
+        ],
     ),
     'duplicate_check' => array(
         'enabled' => true,

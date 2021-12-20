@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => '潜在客户列表仪表板',
     'LBL_LEADS_RECORD_DASHBOARD' => '潜在客户记录仪表板',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => '线索焦点抽屉',
 
     'ERR_DELETE_RECORD' => '要删除潜在客户必须指定记录编号。',
     'LBL_ACCOUNT_DESCRIPTION'=> '帐户说明',
@@ -325,4 +326,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => '无法更改 {{moduleSingular}} 状态。此 {{moduleSingular}} 已转换。',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => '潜在客户转化预测',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => '查看特定潜在客户的预测详细信息',
 );

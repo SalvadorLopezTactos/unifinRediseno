@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Nazdorna ploča za popis baze znanja',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapis o bazi znanja',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za bazu znanja',
 
     'LBL_MODULE_NAME' => 'Baza znanja',
     'LBL_MODULE_NAME_SINGULAR' => 'Članak baze znanja',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Nije korisno',
     'LBL_RATING' => 'Ocjena',
     'LBL_VIEWED_COUNT' => 'Prikaz broja',
-    'LBL_DOWNLOAD_ALL' => 'Preuzmi sve',
-    'LBL_DOWNLOAD_ONE' => 'Preuzmi',
-    'LBL_ATTACHMENTS' => 'Prilozi',
-    'LBL_ADD_ATTACHMENT' => 'Pregledaj',
     'LBL_CATEGORIES' => 'Kategorije baze znanja',
     'LBL_CATEGORY_NAME' => 'Kategorija',
     'LBL_USEFULNESS' => 'Korisnost',

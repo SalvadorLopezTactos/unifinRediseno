@@ -11,6 +11,7 @@
  */
 $dictionary['Release'] = array(
   'table' => 'releases',
+  'archive' => false,
   'favorites' => false,
   'fields' => array (
   'id' =>

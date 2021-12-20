@@ -111,7 +111,7 @@ ACLAllowedModules = {$ACLAllowedModules};
 					<b>{$mod_strings.LBL_DISPLAY_COLUMNS}:</b> {$reportDisplayColumnsList}
 				</td>
 				<td wrap="true">
-					<b>{$mod_strings.LBL_OWNER}:</b> {$reportAssignedToName}
+					<b>{$mod_strings.LBL_OWNER}:</b> {$reportAssignedToName|escape:'html':'UTF-8'}
 				</td>
 			</tr>
 			{$summaryAndGroupDefData}

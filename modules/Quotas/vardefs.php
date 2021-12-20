@@ -11,6 +11,7 @@
  */
 $dictionary['Quota'] = array(
     'table' => 'quotas',
+    'archive' => false,
     'audited' => true,
     'activity_enabled' => true,
     'favorites' => false,

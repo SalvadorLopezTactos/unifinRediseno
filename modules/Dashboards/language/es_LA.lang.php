@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Todos los Tableros para el módulo {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Todos los Tableros para la vista {{view}} del módulo {{module}}',
     'LBL_COPY_OF' => 'Copia de {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'No se pueden eliminar los tableros de Panel de Enfoque.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Crear Tablero',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

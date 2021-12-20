@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Liidiluettelon työpöytä',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Liiditietueiden työpöytä',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Liidit-tietolaatikko',
 
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa liidin.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Asiakkaan kuvaus',
@@ -331,4 +332,8 @@ Tietueiden vahvistamisen jälkeen paina ylhäällä olevaa ‘Tallenna ja muunna
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Moduulin {{moduleSingular}} tilaa ei voida muuttaa. {{moduleSingular}} on jo muunnettu.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Liidin muuntoennuste',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Tarkastele tietyn liidin ennustetietoja',
 );

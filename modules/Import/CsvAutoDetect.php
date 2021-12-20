@@ -10,11 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-/*********************************************************************************
- * Description: Class to detect csv file settings (delimiter, enclosure, etc)
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- ********************************************************************************/
+use ParseCsv\Csv;
 
 /* sample usage
 
@@ -54,6 +50,9 @@
 
 */
 
+/**
+ * Detects CSV file settings (delimiter, enclosure, etc)
+ */
 class CsvAutoDetect {
 
     protected $_parser = null;
@@ -99,8 +98,7 @@ class CsvAutoDetect {
     public function __construct($csv_filename, $max_depth = 2) {
         $this->_csv_file = $csv_filename;
 
-        // @see https://github.com/parsecsv/parsecsv-for-php/issues/27
-        $this->_parser = new parseCSV(null, null, null, []);
+        $this->_parser = new Csv();
 
         $this->_parser->auto_depth = $max_depth;
 

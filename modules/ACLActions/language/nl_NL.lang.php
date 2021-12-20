@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Toon Rollen per Gebruiker',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Gebruikersrollen',
 'LBL_SEARCH_FORM_TITLE'=>'Zoeken',
+'LBL_ACTION_RECORD_VIEW'=>'Recordweergave',
 'LBL_ACTION_VIEW'=>'Bekijken',
 'LBL_ACTION_EDIT'=>'Wijzigen',
 'LBL_ACTION_DELETE'=>'Verwijderen',

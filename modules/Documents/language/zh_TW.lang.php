@@ -164,6 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => '錯誤',
     'LBL_QUOTES_SUBPANEL_TITLE' => '報價',
     'LBL_RLI_SUBPANEL_TITLE' => '營收項目',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
-    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => '購買',
+    'LBL_PLIS_SUBPANEL_TITLE' => '購買項目',
 );

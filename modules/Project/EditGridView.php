@@ -336,6 +336,22 @@ for ($i = 0; $i < $count; $i++) {
 }
 // end Bug 47490
 
+// For existing tasks, format the start and finish date according to user preferences.
+// This is so the JS date calculations can work properly, as they assume these dates
+// to be in the user's specified date format
+foreach ($projectTasks as $projectTask) {
+    if (!empty($projectTask->date_start)) {
+        $projectTask->display_date_start = ViewDateFormatter::format('date', $projectTask->date_start);
+    }
+    if (!empty($projectTask->date_finish)) {
+        $projectTask->display_date_finish = ViewDateFormatter::format('date', $projectTask->date_finish);
+    }
+}
+
+// Properly format the start date for the calendar
+$formatted_start_date = ViewDateFormatter::format('date', $focus->estimated_start_date);
+$sugar_smarty->assign('formatted_start_date', $formatted_start_date);
+
 $sugar_smarty->assign("TASKS", $projectTasks);
 $sugar_smarty->assign("TASKCOUNT", $count);
 $sugar_smarty->assign("BG_COLOR", $hilite_bg);

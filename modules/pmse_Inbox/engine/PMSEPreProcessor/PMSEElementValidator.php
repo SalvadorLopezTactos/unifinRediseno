@@ -337,6 +337,20 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
                         $request->invalidate();
                     }
                     break;
+                case 'newfirstupdated':
+                    if (!$this->isCaseDuplicated($bean, $flowData)) {
+                        $request->validate();
+                    } else {
+                        $request->invalidate();
+                    }
+                    break;
+                case 'newallupdates':
+                    if (!$this->isCaseDuplicated($bean, $flowData, true)) {
+                        $request->validate();
+                    } else {
+                        $request->invalidate();
+                    }
+                    break;
                 default:
                     $request->invalidate();
                     break;

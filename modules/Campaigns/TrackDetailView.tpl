@@ -34,7 +34,9 @@
 	</td>
 		<td align='right'></td>
 	<td align='right'>		    
-		<input type="button" class="button" id="launch_wizard_button" onclick="javascript:window.location='index.php?module=Campaigns&action=WizardHome&record={$ID}';" value="{$MOD.LBL_TO_WIZARD_TITLE}" />
+        {if $HAS_EDIT_ACCESS}
+            <input type="button" class="button" id="launch_wizard_button" onclick="javascript:window.location='index.php?module=Campaigns&action=WizardHome&record={$ID}';" value="{$MOD.LBL_TO_WIZARD_TITLE}" />
+        {/if}
 		<input type="button" class="button" id="view_details_button" onclick="javascript:window.location='index.php?module=Campaigns&action=DetailView&record={$ID}';" value="{$MOD.LBL_TODETAIL_BUTTON_LABEL}" />
 		<span style="{$DISABLE_LINK}"><input type="button" class="button" id="view_roi_button" onclick="javascript:window.location='index.php?module=Campaigns&action=RoiDetailView&record={$ID}';" value="{$MOD.LBL_TRACK_ROI_BUTTON_LABEL}" /></SPAN>{$ADMIN_EDIT}
 	</td>
@@ -47,9 +49,9 @@
 <tr>
 {$PAGINATION}
 	<td width="20%" scope="row"><slot>{$MOD.LBL_NAME}</slot></td>
-	<td width="30%"><slot>{$NAME}</slot></td>
+	<td width="30%"><slot>{$NAME|escape:'html':'UTF-8'}</slot></td>
 	<td width="20%" scope="row"><slot>{$MOD.LBL_ASSIGNED_TO}</slot></td>
-	<td width="30%"><slot>{$ASSIGNED_TO}</slot></td>
+	<td width="30%"><slot>{$ASSIGNED_TO|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%" scope="row"><slot>{$MOD.LBL_CAMPAIGN_STATUS}</slot></td>
 	<td width="30%"><slot>{$STATUS}</slot></td>
@@ -65,12 +67,12 @@
 	<td width="20%" scope="row"><slot>{$MOD.LBL_CAMPAIGN_START_DATE}</slot></td>
 	<td width="30%"><slot>{$START_DATE}</slot></td>
 	<td scope="row"><slot>{$APP.LBL_DATE_MODIFIED}&nbsp;</slot></td>
-	<td><slot>{$DATE_MODIFIED} {$APP.LBL_BY} {$MODIFIED_BY}</slot></td>
+	<td><slot>{$DATE_MODIFIED} {$APP.LBL_BY} {$MODIFIED_BY|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%" scope="row"><slot>{$MOD.LBL_CAMPAIGN_END_DATE}</slot></td>
 	<td width="30%"><slot>{$END_DATE}</slot></td>
 	<td scope="row"><slot>{$APP.LBL_DATE_ENTERED}&nbsp;</slot></td>
-	<td><slot>{$DATE_ENTERED} {$APP.LBL_BY} {$CREATED_BY}</slot></td>
+	<td><slot>{$DATE_ENTERED} {$APP.LBL_BY} {$CREATED_BY|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%" scope="row"><slot>{$MOD.LBL_CAMPAIGN_TYPE}</slot></td>
 	<td width="30%"><slot>{$TYPE}</slot></td>

@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'По отчету',
     'LBL_RECENTLY_MODIFIED' => 'Недавно изменено',
     'LBL_RECORD_SAVED_SUCCESS' => 'Модуль {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> успешно создан. Откройте Расписание для добавления пользователей через субпанель пользователей.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Данный план отчетов',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Информационная панель записей о планах отчетов',
 );

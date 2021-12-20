@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Advarsel: Du er i færd med at redigere indstillingen for automatisk import, hvilket kan resultere i tab af data.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Advarsel: Automatisk import skal aktiveres, når sager oprettes automatisk.',
 	'LBL_EDIT_LAYOUT' => 'Rediger layout' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-mailadresse',
+    'LBL_EMAIL_PROVIDER' => 'E-mailudbyder',
+    'LBL_AUTH_STATUS' => 'Godkendelsesstatus',
 );
-?>

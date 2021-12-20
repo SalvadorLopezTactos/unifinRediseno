@@ -69,6 +69,11 @@
                 <td><slot>{$MOD.LBL_RECEIVE_NOTIFICATIONS_TEXT}&nbsp;</slot></td>
                 </tr>
                 <tr>
+                <td scope="row"><slot>{$MOD.LBL_SEND_EMAIL_ON_MENTION|strip_semicolon}:</slot></td>
+                <td><slot><input class="checkbox" type="checkbox" disabled {$SEND_EMAIL_ON_MENTION}></slot></td>
+                <td><slot>{$MOD.LBL_SEND_EMAIL_ON_MENTION_TEXT}&nbsp;</slot></td>
+                </tr>
+                <tr>
                 <td width="15%" scope="row"><slot>{$MOD.LBL_DEFAULT_TEAM|strip_semicolon}:</slot></td>
                 <td><slot>{$DEFAULT_TEAM_LIST}&nbsp;</slot></td>
                 <td><slot>{$MOD.LBL_DEFAULT_TEAM_TEXT}&nbsp;</slot></td>

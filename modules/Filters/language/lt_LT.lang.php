@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'next year',
     'LBL_OPEN_ISSUES' => 'Atidaryti {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Neseniai išspręsta',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Sukurti filtrą',
+    'LBL_ERROR_FILTER_EMPTY' => 'Prašome pridėti filtro kriterijus.',
+    'LBL_ADD_FILTER' => 'Pridėti kriterijų',
+    'LBL_FILTER_NAME' => 'Filtro pavadinimas',
+    'LBL_FILTER_FIELD' => 'Laukas',
+    'LBL_FILTER_OPERATOR' => 'Operatorius',
+    'LBL_FILTER_VALUE' => 'Reikšmė',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Išsaugoti darbalaukio programoje',
+    'LBL_FILTER_LOCAL' => 'Vietinis filtras',
 );

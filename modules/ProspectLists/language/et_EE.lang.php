@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Sihtmärgiloendite loendi töölaud',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Sihtmärgiloendite kirjete töölaud',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Sihtloendite fookuse sahtel',
+  'LBL_RELATED_ACCOUNTS' => 'Seotud kontod',
+  'LBL_RELATED_CONTACTS' => 'Seotud kontaktid',
+  'LBL_RELATED_LEADS_TARGETS' => 'Seotud müügivihjed ja sihtmärgid',
 
   'LBL_MODULE_NAME' => 'Eesmärgiloendid',
   'LBL_MODULE_NAME_SINGULAR' => 'Eesmärgiloend',

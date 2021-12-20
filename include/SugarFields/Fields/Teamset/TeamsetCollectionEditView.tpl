@@ -149,7 +149,7 @@ and push it outside the screen.
             {if !empty($values.secondaries)}
                 {foreach from=$values.secondaries item=secondary_field}
                 var temp_array = new Array();
-                temp_array['name'] = '{$secondary_field.name}';
+                temp_array['name'] = '{$secondary_field.name|escape}';
                 temp_array['name'] = replaceHTMLChars(temp_array['name']);
                 temp_array['id'] = '{$secondary_field.id}';
                 {if $isTBAEnabled}temp_array['selected'] = '{$secondary_field.selected}';{/if}

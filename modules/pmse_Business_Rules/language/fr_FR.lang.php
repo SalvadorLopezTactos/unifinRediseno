@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Règles de gestion',
   'LBL_MODULE_NAME_SINGULAR' => 'Règle de gestion',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Gestion des processus commerciaux',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de règles de gestion de processus',
   'LBL_RST_UID' => 'Règle de gestion (ID)',
   'LBL_RST_TYPE' => 'Type de règle de gestion',
   'LBL_RST_DEFINITION' => 'Définition de la règle de gestion',

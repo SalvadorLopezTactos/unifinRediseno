@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'ensi vuonna',
     'LBL_OPEN_ISSUES' => 'Avaa {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Viimeksi ratkaistut',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Luo suodatin',
+    'LBL_ERROR_FILTER_EMPTY' => 'Anna suodatuskriteerit.',
+    'LBL_ADD_FILTER' => 'Lisää kriteerit',
+    'LBL_FILTER_NAME' => 'Suodattimen nimi',
+    'LBL_FILTER_FIELD' => 'Kenttä',
+    'LBL_FILTER_OPERATOR' => 'Operaattori',
+    'LBL_FILTER_VALUE' => 'Arvo',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Tallenna työpöytäsovellukseen',
+    'LBL_FILTER_LOCAL' => 'Paikallinen suodatin',
 );

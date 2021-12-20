@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Информационная панель списка предварительных контактов',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Информационная панель записей предварительных контактов',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для предварительных контактов',
 
     'ERR_DELETE_RECORD' => 'Вы должны указать номер записи перед удалением предварительного контакта.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Описание контрагента',
@@ -325,4 +326,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Не удалось изменить статус модуля {{moduleSingular}}. Модуль {{moduleSingular}} уже конвертирован.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Прогноз преобразования предварительных контактов',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Просмотр подробных аналитических сведений по конкретному предварительному контакту',
 );

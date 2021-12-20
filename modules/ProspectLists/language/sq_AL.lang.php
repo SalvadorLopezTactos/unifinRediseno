@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Paneli i listës së listave të objektivave',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të listave të synuara',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te listat e synuara',
+  'LBL_RELATED_ACCOUNTS' => 'Llogari të lidhura',
+  'LBL_RELATED_CONTACTS' => 'Kontakte të lidhura',
+  'LBL_RELATED_LEADS_TARGETS' => 'Klientë të mundshëm dhe synime të lidhura',
 
   'LBL_MODULE_NAME' => 'Listat e synuara',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista e synuar',

@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Azonosító Szerinti Módosítás',
     'LBL_EXPORT_CREATED_BY' => 'Azonosító Szerinti Létrehozás',
     'LBL_EXPORT_TYPE_NAME' => 'Típus Név',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás szerződések',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Szerződések Bejegyzése Műszerfal',
 );

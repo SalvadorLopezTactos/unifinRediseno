@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Paneli i listës së rasteve',
     'LBL_CASES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të rasteve',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detajet e rastit',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te rastet',
 
 	'ERR_DELETE_RECORD'					=> 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
 	'LBL_ACCOUNT_ID'					=> 'ID e Llogarisë',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'shfaq në portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'krijo artikull',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'baza e njohurisë',
+    'LBL_REQUEST_CLOSE' => 'Kërko mbylljen',
+    'LBL_REQUEST_CLOSE_DATE' => 'Kërko datën e mbylljes',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Kërkesë për mbyllje',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Dërgo një kërkesë për mbylljen e këtij rasti',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Dëshiron të kërkosh mbylljen e këtij rasti?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Rastet e mia që janë kërkuar të mbyllen',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Rastet e mia që janë kërkuar të mbyllen',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Rastet e mia që janë kërkuar të mbyllen',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Lista e rasteve që janë kërkuar të mbyllen',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Shfaq një listë të rasteve të caktuara që janë kërkuar të mbyllen',
 
     'LBL_CREATED_USER' => 'Përdorues i krijuar',
     'LBL_MODIFIED_USER' => 'përdorues i modifikuar',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Emri i përdoruesit të caktuar',
     'LBL_EXPORT_TEAM_COUNT' => 'Numërim i grupit',
     'LBL_CHANGETIMERS' => 'Ndrysho kohëmatësin',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Blerjet',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Emailet e kontakteve të lidhur',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Për shembull, ju mund të përdorni këtë për të gjetur një çështje e cila ka qenë paraprakisht e paraqitur.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Nëse ju keni një rast të ri të mbështetjes që ju do të donit ta paraqesni, ju mund të klikoni këtu për të paraqtur një rast të ri.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Duke klikuar këtu ju do të ktheheni për ta parë në çdo kohë.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ndërveprimet e rastit',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Shënime',
 
@@ -143,5 +155,5 @@ Për të krijuar një {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Detajet e Marrëveshjes së Nivelit të Shërbimit (SLA)',
     'LBL_HOURS' => 'Orë',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Statusi',
 );

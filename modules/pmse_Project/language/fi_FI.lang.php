@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Prosessimääritelmät',
   'LBL_MODULE_NAME_SINGULAR' => 'Prosessimääritelmä',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Prosessimääritykset-tietolaatikko',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Prosessimääritelmätietueiden työpöytä',
   'LNK_LIST' => 'Näytä prosessimääritelmät',
   'LNK_NEW_PMSE_PROJECT' => 'Luo prosessimääritelmä',
   'LNK_IMPORT_PMSE_PROJECT' => 'Tuo prosessimääritelmiä',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Muuta tietueen omistajaa',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tiimi',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Siirrä tehtävä',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Sähköposti',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Lähetä sähköposti prosessin käyttäjälle kun prosessi on nimetty hänelle',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Käyttäjämäärirtelmä',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Määritelmätapa',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Aseta käyttäjälle',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Päivitä tietueen "Vastuuhenkilö"',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Määritä "Vastuuhenkilö" saatavilla olon mukaan',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Lisää liittyvä tietue',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Liittyvä moduuli',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Tämän tehtävän nimi on tyhjä.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Tehtävä “%s” on jo olemassa muotoperheessä',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Vaadittu käytettävissä olo työvuoroille',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Jos käyttäjiä ei ole saatavilla',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'ennen',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Vain uudet tietueet',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Vain päivitetyt tietueet',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Vain päivitetyt tietueet (Kaikki päivitykset - katso ohje)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Uudet tietueet tai ensimmäinen päivitys',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Uudet tietueet ja kaikki päivitykset',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Valitse, milloin tapahtuma alkaa',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Valitse, milloin prosessi käynnistyy.<br><br>Uusi: suorita prosessit, kun uusi tietue luodaan.<br><br>Ensimmäinen päivitys: prosessi suoritetaan vain, kun ensimmäisen kerran kriteerit täyttyvät olemassa olevalle tietueelle.<br><br>Kaikki päivitykset: prosessi suoritetaan joka kerralla kun kriteerit täyttyvät olemassa olevalle tietueelle.<br><br>Uudet tietueet tai ensimmäinen päivitys: prosessi suoritetaan vain, kun tietueen ensimmäistä kertaa koskevat kriteerit täyttyvät, joko tietueen luonnin tai päivityksen aikana.<br><br>Uudet tietueet ja kaikki päivitykset: prosessi suoritetaan joka kerta kaikille uusille ja olemassaoleville tietueille.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Valitse Sugar-moduuli joka soveltaa tapahtuman laukaisijan',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Määritettynä päivänä',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'muuttuu kohteesta',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'muuttuu kohteeksi',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'sisältää yhtään',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'ei sisällä yhtään',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'aikaisintaan',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'viimeistään',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'ei ole yhtä kuin',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Lisää',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sulje',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Kaikki tiimit, joille on määritetty tietue',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Tiimit',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% liittyy moduuliin %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Moduulin %MODULE% luonut käyttäjä',

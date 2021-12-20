@@ -49,6 +49,12 @@ class PMSEEmailHandler
     private $pmseRelatedModule;
 
     /**
+     * Current flow data
+     * @var array
+     */
+    private $flowData = [];
+
+    /**
      * @codeCoverageIgnore
      */
     public function __construct()
@@ -374,16 +380,24 @@ class PMSEEmailHandler
     public function processTeamEmails($bean, $entry, $flowData)
     {
         $res = array();
-        $team = $this->retrieveBean('Teams',$entry->value); //$beanFactory->getBean('Teams');
-        //$response = $team->getById();
-        $members = $team->get_team_members();
-        foreach ($members as $user) {
-            $userBean = $this->retrieveBean("Users", $user->id);
-            if ($this->isUserActiveForEmail($userBean)) {
-                $item = new stdClass();
-                $item->name = $userBean->full_name;
-                $item->address = $userBean->email1;
-                $res[] = $item;
+        $teams = [];
+        if ($entry->value === 'assigned_teams') {
+            if (!empty($bean->team_set_id)) {
+                $teams = BeanFactory::newBean('TeamSets')->getTeams($bean->team_set_id);
+            }
+        } else {
+            $teams[] = $this->retrieveBean('Teams', $entry->value);
+        }
+        foreach ($teams as $team) {
+            $members = $team->get_team_members();
+            foreach ($members as $user) {
+                $userBean = $this->retrieveBean("Users", $user->id);
+                if ($this->isUserActiveForEmail($userBean)) {
+                    $item = new stdClass();
+                    $item->name = $userBean->full_name;
+                    $item->address = $userBean->email1;
+                    $res[] = $item;
+                }
             }
         }
         return $res;
@@ -566,19 +580,40 @@ class PMSEEmailHandler
     }
 
     /**
-     * Save the email's content to the DB and then add it to the job queue to send later
+     * Save the email's content to the DB and then add it to the job queue to send later.
+     * Called by SendMessageEvent and EndSendMessageEvents.
      *
      * @param $flowData
      */
     public function queueEmail($flowData)
     {
         $id = $this->saveEmailContent($flowData);
+        $this->addIdToEmailQueue($id);
+    }
+
+    /**
+     * Save the email's content to the DB and then add it to the job queue to send later.
+     * Called by UserActivity.
+     *
+     * @param $flowData
+     * @param $actDefBean
+     * @param $userId
+     */
+    public function queueActivityEmail($flowData, $actDefBean, $userId)
+    {
+        $id = $this->saveActivityEmailContent($flowData, $actDefBean, $userId);
+        $this->addIdToEmailQueue($id);
+    }
+
+    public function addIdToEmailQueue($id)
+    {
         if (isset($id)) {
             $this->addEmailToQueue($id);
         } else {
-            $this->getLogger()->warning('Unable to queue email for flow id ' . $flowData['id']);
+            $this->getLogger()->warning('Unable to queue email for flow id ' . $id);
         }
     }
+
     /**
      * Add pmse_EmailMessage ID to the job queue to send the email through the job queue
      *
@@ -674,13 +709,14 @@ class PMSEEmailHandler
     }
 
     /**
-     * Save email to pmse_email_message table with runtime values
+     * Save email to pmse_email_message table with runtime values.
      *
      * @param array $flowData
      * @return string|null mixed
      */
     public function saveEmailContent($flowData)
     {
+        $this->setFlowData($flowData);
         $beans = $this->getBeansForEmailContentSave($flowData);
 
         if (is_null($beans)) {
@@ -690,7 +726,78 @@ class PMSEEmailHandler
         list($evnDefBean, $templateBean, $targetBean, $emailMessageBean) = $beans;
 
         $addresses = $this->getRecipients($evnDefBean, $targetBean, $flowData);
+        $sender = $this->getSenderFromEventDefinition($evnDefBean, $targetBean);
+        $outboundId = $this->getOutBoundEmailIdFromEventDefinition($evnDefBean);
 
+        return $this->saveEmailBean($targetBean, $templateBean, $sender, $addresses, $emailMessageBean, $outboundId);
+    }
+
+    /**
+     * Save email to pmse_email_message table with runtime value based on
+     * current activity. Called by UserActivity.
+     *
+     * @param $flowData
+     * @param $activityDefinitionBean
+     * @param $userId
+     * @return string|null
+     */
+    public function saveActivityEmailContent($flowData, $activityDefinitionBean, $userId)
+    {
+        $this->setFlowData($flowData);
+        $beans = $this->getBeansForActivityEmailSave($flowData, $activityDefinitionBean, $userId);
+
+        if (is_null($beans)) {
+            return null;
+        }
+
+        list($templateBean, $targetBean, $emailMessageBean, $assignee) = $beans;
+
+        $addresses = new stdClass();
+        $addresses->to = $this->getUserEmails($assignee, '');
+
+        if (empty($templateBean) || empty($targetBean) || empty($emailMessageBean)) {
+            return null;
+        }
+
+        $systemEmail = $this->getContactInformationFromId('system_email', $targetBean);
+        $sender = [
+            'from' => $systemEmail,
+            'reply' => $systemEmail,
+        ];
+
+        return $this->saveEmailBean($targetBean, $templateBean, $sender, $addresses, $emailMessageBean, null);
+    }
+
+    /**
+     * Util method to get beans needed for Activity Emails
+     *
+     * @param $flowData
+     * @param $activityDefinitionBean
+     * @param $userId
+     * @return array
+     */
+    public function getBeansForActivityEmailSave($flowData, $activityDefinitionBean, $userId)
+    {
+        $beans = $this->getBeansForEmailSave($flowData, $activityDefinitionBean->act_email_template_id);
+        $assignee = BeanFactory::retrieveBean('Users', $userId);
+        if (is_null($beans) || is_null($assignee)) {
+            return null;
+        }
+        array_push($beans, $assignee);
+        return $beans;
+    }
+
+    /**
+     * @param SugarBean $targetBean
+     * @param SugarBean $templateBean
+     * @param array|User $sender
+     * @param stdClass $addresses
+     * @param SugarBean $emailMessageBean
+     * @param string $outboundId
+     * @return string
+     */
+    public function saveEmailBean($targetBean, $templateBean, $sender, $addresses, $emailMessageBean, $outboundId)
+    {
         if (PMSEEngineUtils::isEmailRecipientEmpty($addresses)) {
             $this->getLogger()->alert('All email recipients are filtered out of the email recipient list.');
             return null;
@@ -706,13 +813,12 @@ class PMSEEmailHandler
 
         $emailMessageBean->subject = $this->getSubject($templateBean, $targetBean);
 
-        $sender = $this->getSenderFromEventDefinition($evnDefBean, $targetBean);
         $emailMessageBean->from_addr = !empty($sender['from']['address']) ? $sender['from']['address'] : null;
         $emailMessageBean->from_name = !empty($sender['from']['name']) ? $sender['from']['name'] : null;
         $emailMessageBean->reply_to_addr = !empty($sender['reply']['address']) ? $sender['reply']['address'] : null;
         $emailMessageBean->reply_to_name = !empty($sender['reply']['name']) ? $sender['reply']['name'] : null;
-        $emailMessageBean->outbound_email_id = $this->getOutBoundEmailIdFromEventDefinition($evnDefBean);
-        $emailMessageBean->flow_id = $flowData['id'];
+        $emailMessageBean->outbound_email_id = $outboundId;
+        $emailMessageBean->flow_id = $this->flowData['id'];
 
         return $emailMessageBean->save();
     }
@@ -724,27 +830,38 @@ class PMSEEmailHandler
      */
     protected function getBeansForEmailContentSave($flowData)
     {
-        $evnDefBean = BeanFactory::getBean('pmse_BpmEventDefinition', $flowData['bpmn_id']);
-        $templateBean = BeanFactory::getBean('pmse_Emails_Templates', $evnDefBean->evn_criteria);
-        $targetBean = BeanFactory::getBean($flowData['cas_sugar_module'], $flowData['cas_sugar_object_id']);
-        $emailMessageBean = BeanFactory::getBean('pmse_EmailMessage');
-
-        if (empty($evnDefBean->id)) {
-            $this->getLogger()->warning('Event Definition not found. Unable to save email');
+        $evnDefBean = BeanFactory::retrieveBean('pmse_BpmEventDefinition', $flowData['bpmn_id']);
+        $beans = $this->getBeansForEmailSave($flowData, $evnDefBean->evn_criteria);
+        if (is_null($beans) || is_null($evnDefBean)) {
             return null;
         }
+        array_unshift($beans, $evnDefBean);
+        return $beans;
+    }
 
-        if (empty($templateBean->id)) {
+    /**
+     * Util method for retrieving Email Template, Target Module, and Email Message
+     * beans as those are used by both Activity and Event emails
+     * @param $flowData
+     * @param $emailTemplateId
+     * @return array|null
+     */
+    protected function getBeansForEmailSave($flowData, $emailTemplateId)
+    {
+        $templateBean = BeanFactory::retrieveBean('pmse_Emails_Templates', $emailTemplateId);
+        $targetBean = BeanFactory::retrieveBean($flowData['cas_sugar_module'], $flowData['cas_sugar_object_id']);
+        $emailMessageBean = BeanFactory::newBean('pmse_EmailMessage');
+
+        if (is_null($templateBean)) {
             $this->getLogger()->warning('Email Template not found. Unable to save email');
             return null;
         }
 
-        if (empty($targetBean) || empty($targetBean->id)) {
+        if (is_null($targetBean) || empty($targetBean->id)) {
             $this->getLogger()->warning('Target Bean not found. Unable to save email');
             return null;
         }
-
-        return [$evnDefBean, $templateBean, $targetBean, $emailMessageBean];
+        return [$templateBean, $targetBean, $emailMessageBean];
     }
 
     /**
@@ -1010,10 +1127,17 @@ class PMSEEmailHandler
     {
         switch ($type) {
             case 'from':
-            case 'reply':
                 $info = [
                     'name' => !empty($user->full_name) ? $user->full_name : null,
                     'address' => !empty($user->email1) ? $user->email1 : null,
+                ];
+                break;
+            case 'reply':
+                $replyToAddress = $user->emailAddress->getReplyToAddress($user, true);
+                $info = [
+                    'name' => !empty($user->full_name) ? $user->full_name : null,
+                    'address' => !empty($replyToAddress) ? $replyToAddress :
+                        (!empty($user->email1) ? $user->email1 : null),
                 ];
                 break;
             default:
@@ -1068,7 +1192,9 @@ class PMSEEmailHandler
     private function mergeBeanContentIntoTemplate($content, $targetBean)
     {
         if (!empty($content)) {
-            return $this->getBeanUtils()->mergeBeanInTemplate($targetBean, $content, true);
+            $beanUtils = $this->getBeanUtils();
+            $beanUtils->setFlowData($this->flowData);
+            return $beanUtils->mergeBeanInTemplate($targetBean, $content, true, $this->flowData);
         }
 
         return null;
@@ -1225,5 +1351,23 @@ class PMSEEmailHandler
             $_REQUEST[$emailId . 'VerifiedFlag' . $item] = true;
             $_REQUEST[$emailId . 'VerifiedValue' . $item] = $data['email_address'];
         }
+    }
+
+    /**
+     * Get flow data for currently executing BPM Flow
+     * @return array
+     */
+    public function getFlowData(): array
+    {
+        return $this->flowData;
+    }
+
+    /**
+     * Set flow data
+     * @param array $flowData
+     */
+    public function setFlowData(array $flowData): void
+    {
+        $this->flowData = $flowData;
     }
 }

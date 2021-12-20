@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-U kunt van Google een API-sleutel en geheim krijgen door uw Sugar-exemplaar als een nieuwe applicatie te registreren.
-<br/><br>Stappen om uw exemplaar te registreren:
-<br/><br/>
-<ol>
-<li>Ga naar de Google Developers-website:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Meld u aan met de Google-account waarmee u de applicatie wilt registreren.</li>
-<li>Maak een nieuw project</li>
-<li>Voer een projectnaam in en klik op aanmaken.</li>
-<li>Zodra het project werd gemaakt, activeer Google Drive en Google Contacts API</li>
-<li>In het gedeelte API\'s & Auth > Verificatiegegevens, maak een nieuwe klant-id </li>
-<li>Selecteer Web Application en klik op het scherm Configure conscent</li>
-<li>Voer een productnaam in en klik op opslaan</li>
-<li>In het gedeelte Authorized redirect URIs voert u de URL in: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Klik op klant-id maken</li>
-<li>Kopieer de klant-id en het geheim in de onderstaande vakjes</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Registreer uw exemplaar van Sugar met Google om de configuratie van Google-accounts mogelijk te maken voor gebruik binnen Sugar. ' .
+        'Raadpleeg de <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>Connectors documentatie</a> voor meer informatie.</td></tr></table>',
     'oauth2_client_id' => 'Klant-id',
     'oauth2_client_secret' => 'Geheim client',
 );

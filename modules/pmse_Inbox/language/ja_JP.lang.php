@@ -19,8 +19,11 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'プロセス管理',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => '無人のプロセス',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'プロセス フォーカス ドロワ',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'プロセスレコードダッシュボード',
+
     'LBL_CAS_ID' => 'プロセス番号',
-    'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "不明（ユーザID：%sによる）",
+    'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "不明（ユーザーID：&#39;％s&#39;による）",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "タスクは以下となりました",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "タスクは以下でした",
     'LBL_PMSE_HISTORY_LOG_EDITED' => "編集済",
@@ -28,17 +31,17 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ROUTED' => "ルーティングされた",
     'LBL_PMSE_HISTORY_LOG_DONE_UNKNOWN' => "未知のタスクを完了",
     'LBL_PMSE_HISTORY_LOG_CREATED_CASE' => "プロセス #%s を作成しました ",
-    'LBL_PMSE_HISTORY_LOG_DERIVATED_CASE' => "プロセス #%s をアサインされています ",
+    'LBL_PMSE_HISTORY_LOG_DERIVATED_CASE' => "プロセス #%s を割り当てられています ",
     'LBL_PMSE_HISTORY_LOG_CURRENTLY_HAS_CASE' => "現在はプロセス #%s を持っています ",
     'LBL_PMSE_HISTORY_LOG_ACTIVITY_NAME' => "'%s'",
     'LBL_PMSE_HISTORY_LOG_ACTION_PERFORMED'  => ". 実行されたアクションは以下でした: <span style=\"font-weight: bold\">[%s]</span>",
-    'LBL_PMSE_HISTORY_LOG_ACTION_STILL_ASSIGNED' => " タスクはまだアサインされています",
+    'LBL_PMSE_HISTORY_LOG_ACTION_STILL_ASSIGNED' => " タスクはまだ割り当てられています",
     'LBL_PMSE_HISTORY_LOG_MODULE_ACTION'  => " %s レコードで %s",
     'LBL_PMSE_HISTORY_LOG_WITH_EVENT'  => " イベント %s で",
     'LBL_PMSE_HISTORY_LOG_WITH_GATEWAY'  => ". ゲートウェイ %s は評価され、次のタスクに送られました ",
     'LBL_PMSE_HISTORY_LOG_NOT_REGISTERED_ACTION'  => "登録されていないアクション",
     'LBL_PMSE_HISTORY_LOG_NO_YET_STARTED' => '(まだ開始されていない)',
-    'LBL_PMSE_HISTORY_LOG_FLOW' => 'タスクを継続するようアサインされています',
+    'LBL_PMSE_HISTORY_LOG_FLOW' => 'タスクを継続するよう割り当てられています',
 
     'LBL_PMSE_HISTORY_LOG_START_EVENT' => '%s/%s レコード、これによって、SugarBPM<sup class="trademark">TM</sup> がプロセス #%s をトリガーしました',
     'LBL_PMSE_HISTORY_LOG_GATEWAY'  => "%s %s %s は評価され、次のタスクに送られました",
@@ -80,8 +83,8 @@ $mod_strings = array (
     'LBL_PMSE_BUTTON_CLEAR' => 'クリア',
     'LBL_PMSE_WARNING_CLEAR' => '本当にログデータをクリアしますか？この動作は元に戻せません。',
 
-    'LBL_PMSE_FORM_TOOLTIP_SELECT_USER' => 'このプロセスをユーザにアサインします。',
-    'LBL_PMSE_FORM_TOOLTIP_CHANGE_USER' => 'レコード上の「アサイン先」フィールドをこのユーザで更新します。',
+    'LBL_PMSE_FORM_TOOLTIP_SELECT_USER' => 'このプロセスをユーザーに割り当てます。',
+    'LBL_PMSE_FORM_TOOLTIP_CHANGE_USER' => 'レコード上の「アサイン先」フィールドをこのユーザーで更新します。',
 
     'LBL_PMSE_ALERT_REASSIGN_UNSAVED_FORM' => '現在のフォームで未保存の変更があります。現在のタスクを再割当てする場合は、変更は破棄されます。続行しますか？',
     'LBL_PMSE_ALERT_REASSIGN_SUCCESS' => 'このプロセスは正常に再割当てされました。',
@@ -101,7 +104,7 @@ $mod_strings = array (
     'LBL_PROCESS_NAME'  => "プロセス名",
     'LBL_PROCESS_DEFINITION_NAME'  => "プロセス定義名",
     'LBL_OWNER' => 'アサイン先',
-    'LBL_ACTIVITY_OWNER'=>'プロセス ユーザ',
+    'LBL_ACTIVITY_OWNER'=>'プロセス ユーザー',
     'LBL_PROCESS_OWNER'=>'プロセス オーナー',
     'LBL_STATUS_COMPLETED' => 'プロセス完了',
     'LBL_STATUS_TERMINATED' => 'プロセス終了',
@@ -112,8 +115,8 @@ $mod_strings = array (
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'プロセス管理',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => '無人のプロセス',
     'LBL_PMSE_TITLE_REASSIGN' => 'レコードオーナーを変更',
-    'LBL_PMSE_TITLE_AD_HOC' => '新しいプロセスユーザを選択',
-    'LBL_PMSE_TITLE_ACTIVITY_TO_REASSIGN' => "新しいプロセスユーザを選択",
+    'LBL_PMSE_TITLE_AD_HOC' => '新しいプロセスユーザーを選択',
+    'LBL_PMSE_TITLE_ACTIVITY_TO_REASSIGN' => "新しいプロセスユーザーを選択",
     'LBL_PMSE_TITLE_HISTORY' => 'プロセス履歴',
     'LBL_PMSE_HISTORY_STATUS_COMPLETED' => '処理が完了しました。',
     'LBL_PMSE_HISTORY_STATUS_TERMINATED' => '処理が中止されました。',
@@ -121,7 +124,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_STATUS_ERROR' => '処理中にエラーが発生しました。',
     'LBL_PMSE_TITLE_IMAGE_GENERATOR' => 'プロセス #%s: 現在のステータス',
     'LBL_PMSE_TITLE_IMAGE_GENERATOR_OBJ' => 'プロセス #{{id}}: 現在のステータス',
-    'LBL_PMSE_TITLE_LOG_VIEWER' => 'ログビューア',
+    'LBL_PMSE_TITLE_LOG_VIEWER' => 'ログビューワー',
     'LBL_PMSE_TITLE_PROCESS_NOTES' => 'プロセスメモ',
 
     'LBL_PMSE_MY_PROCESSES' => '私のプロセス',
@@ -131,9 +134,9 @@ $mod_strings = array (
     'LBL_PMSE_ACTIVITY_STREAM_REJECT'=>"&0 on <strong>%s</strong> 却下",
     'LBL_PMSE_ACTIVITY_STREAM_ROUTE'=>'&0 on <strong>%s</strong> ルーティングされた',
     'LBL_PMSE_ACTIVITY_STREAM_CLAIM'=>"&0 on <strong>%s</strong> クレーム",
-    'LBL_PMSE_ACTIVITY_STREAM_REASSIGN'=>"&0 on <strong>%s</strong>　ユーザ&1にアサインされた",
+    'LBL_PMSE_ACTIVITY_STREAM_REASSIGN'=>"&0 on <strong>%s</strong>　ユーザー&1にアサインされた",
     'LBL_PMSE_CANCEL_MESSAGE' => "本当にプロセス番号 #{}をキャンセルしますか?",
-    'LBL_ASSIGNED_USER'=>"ユーザがアサインされました",
+    'LBL_ASSIGNED_USER'=>"ユーザーがアサインされました",
     'LBL_PMSE_SHOW_PROCESS' => 'プロセスを見る',
     'LBL_PMSE_FILTER' => '絞り込み',
 
@@ -146,10 +149,18 @@ $mod_strings = array (
     'LBL_PA_PROCESS_CLOSED' => '表示しようとしているプロセスは完了しています。',
     'LBL_PA_PROCESS_UNAVAILABLE' => '表示しようとしているプロセスは現時点で利用できません。',
 
-    'LBL_PMSE_ASSIGN_USER' => 'ユーザをアサイン',
-    'LBL_PMSE_ASSIGN_USER_APPLIED' => '適用されたユーザを割り当てる',
+    'LBL_PMSE_ASSIGN_USER' => 'ユーザーをアサイン',
+    'LBL_PMSE_ASSIGN_USER_APPLIED' => '適用されたユーザーを割り当てる',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'プロセス設計のプレビュー',
     'LBL_PROJECT_RUN_ORDER' => '注文の実行',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => '現在のアクティビティ',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => '変更された日付',
+    'LBL_DATE_ENTERED' => '作成された日付',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'このプロセスを要求しますか？',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'プロセスは正常に要求されました',
 );
 

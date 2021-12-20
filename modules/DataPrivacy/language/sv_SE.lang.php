@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Fält som markerats för radering',
     'LBL_NO_RECORDS_MARKED' => 'Inga fält eller poster har markerats för radering.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Datasekretess för posternas översikt',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för datasekretess',
 
     // list view
     'LBL_HELP_RECORDS' => 'Datasekretess modulen spårar sekretessaktiviteter, inklusive samtycke och ämnesförfrågningar, för att stödja ditt företags sekretessförfaranden. Skapa datasekretess poster (t.ex. en kontakt) för att spåra samtycke eller vidta åtgärder för en sekretessbegäran.',

@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Vytvoril ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Vytvorené používateľom',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Pridelené používateľské meno',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na tagy',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Informačný panel so záznamom štítkov',
+    'LBL_MY_TAGS' => 'Moje štítky',
+    'LBL_MY_FAVORITE_TAGS' => 'Moje obľúbené štítky',
 );

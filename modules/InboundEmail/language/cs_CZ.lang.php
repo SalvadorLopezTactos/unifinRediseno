@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Upozornění: Měníte nastavení Vašeho automatického importu, které změny mohou vést ke ztrátě dat.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Upozornění: Automatický import musí byt povolen pro automatické vytváření případů.',
 	'LBL_EDIT_LAYOUT' => 'Úprava rozvržení' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-mailová adresa',
+    'LBL_EMAIL_PROVIDER' => 'Poskytovatel e-mailu',
+    'LBL_AUTH_STATUS' => 'Stav autorizace',
 );
-?>

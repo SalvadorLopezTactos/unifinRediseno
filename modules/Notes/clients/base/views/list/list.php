@@ -60,23 +60,6 @@ $viewdefs['Notes']['base']['view']['list'] = array(
                     ),
                 ),
                 array (
-                    'name' => 'filename',
-                    'label' => 'LBL_LIST_FILENAME',
-                    'enabled' => true,
-                    'default' => true,
-                    'type' => 'file',
-                    'related_fields' =>
-                    array (
-                        'file_url',
-                        'id',
-                        'file_mime_type',
-                    ),
-                    'displayParams' =>
-                    array(
-                        'module' => 'Notes',
-                    ),
-                ),
-                array (
                     'name' => 'created_by_name',
                     'type' => 'relate',
                     'label' => 'LBL_CREATED_BY',

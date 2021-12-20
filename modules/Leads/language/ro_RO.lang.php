@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Tabloul de bord Listă clienți potențiali',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare clienți potențiali',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare clienți potențiali',
 
     'ERR_DELETE_RECORD' => 'Un număr de înregistrare trebuie specificat pentru a șterge antetul.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descrierea Contului',
@@ -319,4 +320,8 @@ După confirmarea fiecărui modul solicitat şi dorit, faceţi clic pe butonul S
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Nu se poate modifica starea {{moduleSingular}}. Acest {{moduleSingular}} a fost deja convertit.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Predicție Conversie Clienți',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Vedeți detaliile de predicție pentru un anumit candidat potențial',
 );

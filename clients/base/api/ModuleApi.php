@@ -28,6 +28,7 @@ class ModuleApi extends SugarApi {
      */
     protected $disabledUpdateFields = array(
         'deleted',
+        'created_by',
     );
 
     /**

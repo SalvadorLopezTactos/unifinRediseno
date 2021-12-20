@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'การจัดการกระบวนการ',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'กระบวนการที่ไม่มีการกำกับดูแล',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'ดำเนินการระบบลิ้นชัก',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกระบวนการ',
+
     'LBL_CAS_ID' => 'เลขที่กระบวนการ',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "ไม่ทราบ (จาก UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "งานได้รับการ",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'แสดงตัวอย่างการออกแบบกระบวนการ',
     'LBL_PROJECT_RUN_ORDER' => 'เรียกใช้คำสั่ง',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'กิจกรรมปัจจุบัน',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'วันที่แก้ไข',
+    'LBL_DATE_ENTERED' => 'วันที่สร้าง',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'คุณแน่ใจหรือไม่ว่าต้องการเรียกร้องสิทธิ์กระบวนการนี้',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'กระบวนการได้รับการเรียกร้องสิทธิ์สำเร็จแล้ว',
 );
 

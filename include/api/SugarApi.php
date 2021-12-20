@@ -284,18 +284,7 @@ abstract class SugarApi
         }
 
         $bean->my_favorite = $favorite;
-
-        // Bug59888 - If a Favorite is toggled, we need to reindex the bean for FTS engines so that the document will be updated with this change
-        if($reindexBean === true) {
-            $searchEngine = SugarSearchEngineFactory::getInstance(SugarSearchEngineFactory::getFTSEngineNameFromConfig());
-
-            if($searchEngine instanceof SugarSearchEngineAbstractBase) {
-                $searchEngine->indexBean($bean, false);
-            }
-        }
-
         return true;
-
     }
 
 

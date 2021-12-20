@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Efter rapport',
     'LBL_RECENTLY_MODIFIED' => 'Nyligt ændret',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du har nu oprettet {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Åben tidsplanen for at tilføje brugere ved hjælp af brugerunderpanelet.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Denne rapporttidsplan',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser for rapporttidsplan',
 );

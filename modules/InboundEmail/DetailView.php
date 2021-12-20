@@ -10,10 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
-use Sugarcrm\Sugarcrm\Util\Serialized;
-
 global $mod_strings;
 global $app_strings;
 global $sugar_config;
@@ -94,7 +90,7 @@ $onlySince = $mod_strings['LBL_ONLY_SINCE_NO'];
 
 if(!empty($focus->stored_options)) {
 	// FROM NAME and Address
-	$storedOptions = Serialized::unserialize($focus->stored_options, array(), true);
+    $storedOptions = unserialize(base64_decode($focus->stored_options), ['allowed_classes' => false]);
 
 	$from_name = (isset($storedOptions['from_name']) ? $storedOptions['from_name'] : "");
 	$from_addr = (isset($storedOptions['from_addr']) ? $storedOptions['from_addr'] : "");

@@ -12,6 +12,7 @@
 
 require_once('modules/Users/password_utils.php');
 use Sugarcrm\Sugarcrm\Entitlements\Subscription;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 class CurrentUserApi extends SugarApi
 {
@@ -39,6 +40,7 @@ class CurrentUserApi extends SugarApi
         'reminder_time' => 'reminder_time',
         'email_reminder_time' => 'email_reminder_time',
         'field_name_placement' => 'field_name_placement',
+        'send_email_on_mention' => 'send_email_on_mention',
     );
 
     const TYPE_ADMIN = "admin";
@@ -615,23 +617,12 @@ class CurrentUserApi extends SugarApi
         }
         $user_data['site_user_id'] = $current_user->site_user_id;
 
-        // Start with the default license case
-        $licenses = [Subscription::SUGAR_BASIC_KEY];
-        try {
-            $lt = $current_user->getLicenseTypes();
-            if (is_array($lt) && !empty($lt)) {
-                $licenses = $lt;
-            }
-        } catch (SugarApiException $e) {
-            LoggerManager::getLogger()->fatal(
-                sprintf(
-                    'Could not get license types for user ID %s: %s',
-                    $current_user->id,
-                    $e->getMessage()
-                )
-            );
-        }
+        // licenses
+        $licenses = SubscriptionManager::instance()->getUserSubscriptions($current_user);
         $user_data['licenses'] = $licenses;
+
+        // Products
+        $user_data['products'] = getReadableProductNames($licenses);
 
         // Email addresses
         $fieldDef = $current_user->getFieldDefinition('email');
@@ -695,6 +686,22 @@ class CurrentUserApi extends SugarApi
         return [
             'field_name_placement' =>
             $user->getPreference('field_name_placement', $category) ?? 'field_on_side',
+        ];
+    }
+
+    /**
+     * Utility function to get the users preference in case of comment log mention.
+     * Default is 'off'
+     *
+     * @param User $user Current User object
+     * @param string $category The category for the preference
+     * @return array
+     */
+    protected function getUserPrefSend_email_on_mention(User $user, $category = 'global')
+    {
+        return [
+            'send_email_on_mention' =>
+            $user->getPreference('send_email_on_mention', $category) ?? 'send_email_on_mention',
         ];
     }
 

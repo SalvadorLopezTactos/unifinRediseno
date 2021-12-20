@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'รหัสผ่านที่คุณป้อนไม่ตรงตามข้อกำหนดการใช้รหัสผ่าน โปรดลองอีกครั้ง',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'ไม่พบข้อมูลของผู้ใช้',
     'ERR_USER_NAME_EXISTS'              => 'มีชื่อผู้ใช้ {0} แล้ว ระบบไม่อนุญาตให้มีชื่อผู้ใช้ซ้ำกัน โปรดเปลี่ยนชื่อผู้ใช้เป็นชื่อที่ไม่ซ้ำกัน',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'จะต้องบันทึกใบอนุญาต "Sugar Hint" ไว้กับใบอนุญาตอื่นเพิ่มเติมในประเภทที่เข้ากัน',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'ผู้ใช้นี้ถูกล็อคออกจากแอปพลิเคชัน Sugar แล้วและไม่สามารถล็อกอินโดยใช้รหัสผ่านปัจจุบันได้',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'การรับรองความถูกต้องภายนอกเพียงผู้ใช้เท่านั้นจะไม่ได้รับอนุญาตให้ลงชื่อเข้าใช้ด้วยทะเบียน Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'ที่อยู่อีเมลของผู้รับ',
 	'ERR_SERVER_STATUS'					=> 'สถานะเซิร์ฟเวอร์ของคุณ',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'ระบบไม่สามารถส่งอีเมลถึงผู้ใช้ โปรดตรวจสอบการกำหนดค่าอีเมลขาออกใน <a href="index.php?module=EmailMan&action=config">การตั้งค่าอีเมล</a>',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'ต้องสร้างผู้ใช้ใหม่ใน <a href="{0}" target="_blank">การตั้งค่า SugarCloud</a>',
 
     'LBL_EMAIL_ADDRESS'                 => 'ที่อยู่อีเมล',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'ประมาณการ',
     'LBL_WORKSHEETS'                    => 'เวิร์กชีท',
 	'LBL_CALENDARS'                     => 'ปฏิทิน',
+    'LBL_SHIFTS'                        => 'เวรทำงาน',
+    'LBL_SHIFT_EXCEPTIONS'              => 'ข้อยกเว้นเวรทำงาน',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'รับการแจ้งเตือนทางอีเมลเมื่อมีการระบุระเบียนให้คุณ',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'งานมอบหมายทางอีเมล',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'รับการแจ้งเตือนทางอีเมลเมื่อมีคนกล่าวถึงคุณในบันทึกความคิดเห็น',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'อีเมลที่กล่าวถึง',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'เลือกรูปแบบที่ชื่อฟิลด์จะแสดงในมุมมองระเบียน เลือก "ค่าฟิลด์ด้านข้าง" เพื่อมุมมองระเบียนที่กะทัดรัดยิ่งขึ้น',
     'LBL_FIELD_NAME_PLACEMENT'          => 'การใส่ชื่อฟิลด์',
     'LBL_ABOVE_FIELD_VALUE'             => 'ค่าฟิลด์ด้านบน',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'ประเภทใบอนุญาต',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'ตั้งค่าเริ่มต้นสำหรับการเตือนของการโทรและการประชุม การเตือนแบบป๊อปอัปจะปรากฏสำหรับผู้รับเชิญทั้งหมดที่ใช้ Sugar ระบบจะส่งการเตือนทางอีเมลให้กับผู้รับเชิญทั้งหมด',
 	'LBL_REMINDER'						=> 'การเตือน',
 	'LBL_REMINDER_POPUP' => 'ป๊อปอัป',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'เซสชันนี้สิ้นสุดแล้ว เนื่องจากมีการเริ่มต้นเซสชันอื่นในชื่อผู้ใช้เดียวกัน',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'ระบุระเบียนใหม่',
-	'LBL_REASS_DESC_PART1'				=> 'เลือกโมดูลที่มีระเบียนซึ่งต้องการระบุใหม่จากผู้ใช้หนึ่งเป็นผู้ใช้อื่น <br/><br/>
+    'LBL_REASS_DESC_PART1'              => 'เลือกโมดูลที่มีระเบียนซึ่งต้องการระบุใหม่จากผู้ใช้หนึ่งเป็นผู้ใช้อื่น <br/><br/>
                                                             คลิกที่ถัดไปเพื่อดูจำนวนระเบียนที่จะอัปเดตในแต่ละโมดูลที่เลือกไว้
                                                             คลิกที่ยกเลิกเพื่อออกจากเพจโดยไม่ระบุระเบียนใหม่',
         'LBL_REASS_DESC_PART2'=>                    'เลือกโมดูลที่จะใช้ในการเรียกใช้เวิร์กโฟลว์ ส่งการแจ้งเตือนการมอบหมาย และดำเนินการติดตามตรวจสอบระหว่างการมอบหมายใหม่ คลิกถัดไปเพื่อดำเนินการต่อและมอบหมายระเบียนซ้ำ คลิกเริ่มต้นใหม่เพื่อเริ่มต้นใหม่',
@@ -635,7 +639,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'โปรไฟล์ผู้ใช้',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'กรุณาไปที่<a href="%s" target="_blank">การตั้งค่า SugarCloud</a> เพื่อทำการเปลี่ยนแปลงฟิลด์ที่ตั้งค่าไว้ให้อ่านได้อย่างเดียวเท่านั้น',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'กรุณาติดต่อผู้ดูแลระบบ Sugar ของคุณ ถ้าคุณต้องการทำการเปลี่ยนแปลงลงในช่องที่ตั้งค่าไว้ให้อ่านได้อย่างเดียวเท่านั้น',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'The password you entered did not meet the password requirements.  Please try again.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'User Information not found',
     'ERR_USER_NAME_EXISTS'              => 'The username {0} already exists. Duplicate usernames are not allowed. Change the username to be unique.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'The “Sugar Hint” licence must be saved with an additional compatible licence type',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'This user is locked out of the Sugar application and cannot log in using his/her existing password.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'External auth only user is not allowed to login using Sugar credentials',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Recipient Email Address',
 	'ERR_SERVER_STATUS'					=> 'Your server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'The system is unable to send an email to the user. Please check the Outgoing Mail Configuration in <a href="index.php?module=EmailMan&action=config">Email Settings</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">SugarCloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email Address',
 
@@ -298,6 +299,8 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Forecasts',
     'LBL_WORKSHEETS'                    => 'Worksheets',
 	'LBL_CALENDARS'                     => 'Calendars',
+    'LBL_SHIFTS'                        => 'Shifts',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Shift Exceptions',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Receive an email notification when a record is assigned to you.',
     'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Licence Type',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Set a default for reminders for calls and meetings.',
 	'LBL_REMINDER'						=> 'Reminders',
 	'LBL_REMINDER_POPUP' => 'Popup',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'This session has ended because another session has been started under the same username.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Reassign Records',
-	'LBL_REASS_DESC_PART1'				=> 'Select the modules containing the records to reassign from a specific user to another user. <br/><br/><br />                                                            Click Next to view the number of records that will be updated in each selected module.<br />                                                            Click Cancel to exit the page without reassigning any records.',
+    'LBL_REASS_DESC_PART1'              => 'Select the modules containing the records to reassign from a specific user to another user. <br/><br/><br />                                                            Click Next to view the number of records that will be updated in each selected module.<br />                                                            Click Cancel to exit the page without reassigning any records.',
         'LBL_REASS_DESC_PART2'=>                    'Select which modules against which to run workflows, send assignment notifications, and do auditing tracking during reassignment. Click Next to continue and reassign records. Click Restart to start over.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Team Reassignment',
 	'LBL_REASS_STEP2_DESC'				=> 'The teams listed below were available in the from user&#39;s team, but not in the to user&#39;s team. All records in the From User&#39;s team will not be visible in the To User team unless the team values are mapped. ',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'User Profile',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Please access <a href="%s" target="_blank">SugarCloud Settings</a> to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Please contact your Sugar administrator if you would like to make changes to read-only fields.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

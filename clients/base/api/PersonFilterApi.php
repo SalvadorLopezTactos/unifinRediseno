@@ -74,6 +74,8 @@ class PersonFilterApi extends FilterApi {
         $api->action = 'list';
         list($args, $q, $options, $seed) = $this->filterListSetup($api, $args);
 
+        // To maintain the contract, set this as a property on this object
+        $this->useOnlyActiveUsers = isset($args['filter']) && $this->useOnlyActiveUsers($args['filter']);
         $this->getCustomWhereForModule($args['module_list'], $q);
 
         return $this->runQuery($api, $args, $q, $options, $seed);
@@ -91,19 +93,22 @@ class PersonFilterApi extends FilterApi {
         $GLOBALS['disable_date_format'] = true;
         $search = new UnifiedSearchApi();
         $options = $search->parseSearchOptions($api,$args);
+
+        // In case we want to filter on user status
+        $this->useOnlyActiveUsers = !empty($options['fieldFilters']['status']);
         $options['custom_where'] = $this->getCustomWhereForModule($args['module_list']);
 
         $searchEngine = new SugarSpot();
         $options['resortResults'] = true;
         $recordSet = $search->globalSearchSpot($api,$args,$searchEngine,$options);
-        
+
         return $recordSet;
     }
 
     /**
      * Gets the proper query where clause to use to prevent special user types from
      * being returned in the result
-     * 
+     *
      * @param string $module The name of the module we are looking for
      * @return string
      */
@@ -113,14 +118,33 @@ class PersonFilterApi extends FilterApi {
                 $query->where()->equals('employee_status', 'Active')->equals('show_on_employees','1');
                 return;
             }
-            $query->where()->equals('status', 'Active')->equals('portal_only', '0');
+
+            // This allows us to filter on active or inactive users
+            $w = $query->where()->equals('portal_only', '0');
+            if ($this->useOnlyActiveUsers) {
+                $w->equals('status', 'Active');
+            }
             return;
         }
 
         if ($module == 'Employees') {
             return "users.employee_status = 'Active' AND users.show_on_employees = 1";
         }
-        
-        return "users.status = 'Active' AND users.portal_only = 0";
+
+        // Same here... allow filtering of active or inactive users
+        $r = $this->useOnlyActiveUsers ? "users.status = 'Active' AND " : '';
+        return "$r users.portal_only = 0";
+    }
+
+    /**
+     * Checks the filter array to see if status is a field being filtered on. If
+     * it isn't then returns true, as the default is to filter users based on
+     * status = 'Active'
+     * @param array $filter Filter definition
+     * @return boolean
+     */
+    protected function useOnlyActiveUsers(array $filter = []) : bool
+    {
+        return empty(array_column($filter, 'status'));
     }
 }

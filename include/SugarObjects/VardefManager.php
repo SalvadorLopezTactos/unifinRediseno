@@ -628,7 +628,11 @@ class VardefManager{
             } else {
                 $file = sugar_cached(self::getCacheFileName($module_dir, $object_name));
                 if (file_exists($file)) {
-                    unlink($file);
+                    if (isset($GLOBALS['installing']) && $GLOBALS['installing'] === true) {
+                        unlink($file);
+                    } else {
+                        VardefManager::refreshVardefs($module_dir, $object_name);
+                    }
                 }
             }
         }

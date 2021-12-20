@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Erreur lors de la récupération des données de rapport d&#39;exploration pour cette action. Contactez le propriétaire du rapport pour obtenir de l&#39;assistance.',
     'LBL_CHART_NO_DRILLTHRU' => 'Exploration non-disponible',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Rapports',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'La vue liste affiche l&#39;ensemble des rapports correspondant aux critères de recherche actuels et accessibles par l&#39;utilisateur connecté. Vous pouvez afficher les détails de base de chaque rapport dans les colonnes de la vue liste et dans l&#39;aperçu. Vous pouvez définir des balises pour les rapports et créer des filtres. Cliquez sur le nom du rapport pour afficher le rapport ou sélectionnez « Éditer rapport » dans le menu d&#39;action pour modifier le rapport.',

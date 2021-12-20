@@ -47,10 +47,10 @@ class SugarChart
         $this->chart_properties['gauge_target_list'] = array();
 
         if ($GLOBALS['current_user']->getPreference('currency')) {
-
             $currency = BeanFactory::getBean('Currencies', $GLOBALS['current_user']->getPreference('currency'));
             $this->div = $currency->conversion_rate;
             $this->currency_symbol = $currency->symbol;
+            $this->is_currency = true;
         } else {
             $this->currency_symbol = $GLOBALS['sugar_config']['default_currency_symbol'];
             $this->div = 1;
@@ -350,7 +350,9 @@ class SugarChart
 
         // if 'thousands' is true, we need to divide it by 1000 and add 'K'
         if (!empty($this->chart_properties['thousands']) && !empty($label) && is_numeric($label)) {
-            $label = $this->formatNumber($label / 1000) . $GLOBALS['app_strings']['LBL_THOUSANDS_SYMBOL'];
+            $label = $this->formatNumber($label / 1000, ($this->chart_properties['thousands'] ? 0 : null));
+            $label = $this->is_currency ? $this->currency_symbol . $label : $label;
+            $label .= $GLOBALS['app_strings']['LBL_THOUSANDS_SYMBOL'];
         }
         $data .= $this->tabValue('label', $label, $tablevel+1);
         $data .= $this->tab('<link>' . $link . '</link>', $tablevel+1);
@@ -649,7 +651,6 @@ class SugarChart
         }
         return $data;
     }
-
 
     /**
      * nullGroup

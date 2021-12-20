@@ -11,6 +11,7 @@
  */
 $dictionary['Holiday'] = [
     'table' => 'holidays',
+    'archive' => false,
     'favorites' => false,
     'fields' => [
         'id' => [

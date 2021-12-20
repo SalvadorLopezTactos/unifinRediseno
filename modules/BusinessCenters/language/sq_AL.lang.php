@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontaktet',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Udhëheqjet',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Përdoruesit',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Paneli i të regjistrimeve të qendrave të biznesit',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te qendrat e biznesit',
 ];

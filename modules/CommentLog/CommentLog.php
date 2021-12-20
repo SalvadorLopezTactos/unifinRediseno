@@ -215,6 +215,7 @@ class CommentLog extends Basic
     {
         $pattern = '/@\[([\w]+):([\d\w\-]+)\]/';
         $new_rel_relname = $this->new_rel_relname;
+        $recordId = $this->new_rel_id;
         $matches = [];
         // We don't have the parent record here so no point in notifying the pinged user
         if (!$new_rel_relname || !$this->load_relationship($new_rel_relname)) {
@@ -245,12 +246,18 @@ class CommentLog extends Basic
                 $singularModuleName = $appListStrings['moduleListSingular'][$module];
                 $notification->name = $singularModuleName . ': ' . $modStrings['LBL_YOU_HAVE_BEEN_MENTIONED'];
                 $notification->description = 'LBL_YOU_HAVE_BEEN_MENTIONED_BY';
-                $notification->parent_id = $this->new_rel_id;
+                $notification->parent_id = $recordId;
                 $notification->parent_type = $module;
                 $notification->assigned_user_id = $userId;
                 $notification->severity = 'information';
                 $notification->is_read = 0;
                 $notification->save();
+
+                // send email notification on mention if user preference is checked
+                if ($user->getPreference('send_email_on_mention') == 'on') {
+                    $this->sendNotificationsEmail($user, $module, $recordId, $singularModuleName);
+                }
+
                 $mentionedUsers[] = $userId;
             }
         }
@@ -271,12 +278,13 @@ class CommentLog extends Basic
      * Wrapper for BeanFactory::getBean
      * @param string $module The module name
      * @param string $id The record id
+     * @param array $params
      * @return SugarBean|null
      * @throws Exception
      */
-    public function getBean(string $module, string $id): SugarBean
+    public function getBean(string $module, string $id, $params = []): SugarBean
     {
-        return BeanFactory::getBean($module, $id);
+        return BeanFactory::getBean($module, $id, $params);
     }
 
     /**
@@ -325,5 +333,103 @@ class CommentLog extends Basic
     public function getAppListStrings(string $language): array
     {
         return return_app_list_strings_language($language);
+    }
+
+    /**
+     * Send an email to the assigned user of the job
+     *
+     * @param SugarBean $user mentioned Bean
+     * @param String $moduleName
+     * @param String $recordId
+     * @param String $singularModuleName
+     */
+    public function sendNotificationsEmail($user, $moduleName, $recordId, $singularModuleName)
+    {
+        $currentUser = $this->getCurrentUser();
+        $initiatorName = $currentUser->full_name;
+        $mailTransmissionProtocol = "unknown";
+        $record = $this->getBean($moduleName, $recordId);
+        $recordName = $record->name;
+
+        try {
+            $mailer = $this->getSystemMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+
+            // Get the comment log notification email template
+            $settings = $this->getSugarConfigValue('emailTemplate');
+            $tplID = $settings['CommentLogMention'];
+
+            $emailTemplate = $this->getBean(
+                'EmailTemplates',
+                $tplID,
+                ['disable_row_level_security' => true]
+            );
+
+            if (empty($emailTemplate->id)) {
+                \LoggerManager::getLogger()->fatal('Error sending email notification: No email template found');
+                return false;
+            }
+
+            // Place the site URL into the template
+            $recordUrl = $this->getRecordUrl($moduleName, $recordId);
+            $emailTemplate->subject = str_replace('$initiator_full_name', $initiatorName, $emailTemplate->subject);
+            $emailTemplate->subject = str_replace(
+                '$singular_module_name',
+                strtolower($singularModuleName),
+                $emailTemplate->subject
+            );
+            $emailTemplate->body_html = str_replace('$record_name', $recordName, $emailTemplate->body_html);
+            $emailTemplate->body_html = str_replace('$record_url', $recordUrl, $emailTemplate->body_html);
+
+            $emailTemplate->body = str_replace('$record_name', $recordName, $emailTemplate->body);
+            $emailTemplate->body = str_replace('$record_url', $recordUrl, $emailTemplate->body);
+
+            // add the recipient...
+            $mailer->addRecipientsTo(new EmailIdentity($user->email1, $user->full_name));
+            // set the subject
+            $mailer->setSubject($emailTemplate->subject);
+            $mailer->setTextBody($emailTemplate->body);
+            // set html content of the email
+            if (!isTruthy($emailTemplate->text_only)) {
+                $mailer->setHtmlBody($emailTemplate->body_html);
+            }
+
+            $mailer->send();
+        } catch (MailerException $me) {
+            $message = $me->getMessage();
+            $GLOBALS["log"]->warn(
+                "Notifications: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})"
+            );
+        }
+    }
+
+    /**
+     * Returns the record url
+     * @param $moduleName
+     * @param $recordId
+     * @return string
+     */
+    public function getRecordUrl($moduleName, $recordId)
+    {
+        return prependSiteURL('#' . buildSidecarRoute($moduleName, $recordId));
+    }
+
+    /**
+     * Wrapper to get system default mailer
+     * @return mixed
+     */
+    public function getSystemMailer()
+    {
+        return MailerFactory::getSystemDefaultMailer();
+    }
+
+    /**
+     * Wrapper to get current user
+     * @return null|SugarBean
+     */
+    public function getCurrentUser()
+    {
+        global $current_user;
+        return $current_user;
     }
 }

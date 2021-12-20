@@ -164,6 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'Kļūdas',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Piedāvājumi',
     'LBL_RLI_SUBPANEL_TITLE' => 'Ieņēmumu posteņi',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
-    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Pirkumi',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Iegādātie produkti',
 );

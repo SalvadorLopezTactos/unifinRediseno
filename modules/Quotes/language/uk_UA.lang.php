@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Інформаційна панель списку комерційних пропозицій',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Інформаційна панель записів комерційних пропозицій',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель комерційних пропозицій',
 
     'LBL_CONTRACTS'=>'Контракти',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Контракти',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Юридична адреса - Країна:',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Юридична адреса - Поштовий індекс:',
     'LBL_BILLING_ADDRESS_STATE' => 'Юридична адреса - Область:',
-    'LBL_BILLING_ADDRESS_STREET' => 'Юридична адреса:',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Юридична адреса:',
     'LBL_BILLING_CONTACT_ID' => 'Платник Id:',
     'LBL_BILLING_CONTACT_NAME' => 'Представник платника:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Фактична адреса - Країна:',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Фактична адреса - Поштовий індекс:',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Фактична адреса - Область:',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Фактична адреса - Вулиця',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Фактична адреса:',
     'LBL_SHIPPING_BODY' => 'Виставлення рахунків і доставка',
     'LBL_SHIPPING_CONTACT_ID' => 'Id одержувача:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Копіювати юридичну адресу в фактичну адресу',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Копіювати фактичну адресу в юридичну адресу',
     'NTC_COPY_BILLING_ADDRESS2' => 'Копіювати в фактичну адресу',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Копіювати в юридичну адресу',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Ви впевнені, що хочете видалити цей коментар з комерційної пропозиції?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Копіювати в юридичну адресу',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Ви впевнені, що хочете видалити цей коментар з комерційної пропозиції?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Ви впевнені, що хочете видалити цей коментар з комерційної пропозиції?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Ви дійсно хочете видалити цю групу з комерційної пропозиції?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Ви дійсно хочете видалити цей контакт з комерційної пропозиції?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Кількість',
     'LBL_MFT_PART_NUM' => 'Номер частини',
     'LBL_ITEM_NAME' => 'Позиція каталога продукту',
+    'LBL_PRODUCT_TEMPLATE' => 'Продукт',
     'LBL_DISCOUNT_PRICE' => 'Ціна за одиницю',
     'LBL_DISCOUNT_AMOUNT' => 'Знижка',
     'LBL_LINE_ITEM_TOTAL' => 'Загальна кількість позицій каталога продукту',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Ідентифікатор угоди',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Налаштування комерційних пропозицій',
+
+    'LBL_RENEWAL' => 'Поновлення',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаємодія з комерційною пропозицією',
 );

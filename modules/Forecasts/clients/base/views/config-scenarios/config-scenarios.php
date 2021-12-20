@@ -40,6 +40,5 @@ $viewdefs['Forecasts']['base']['view']['config-scenarios'] = array(
                 ),
             ),
         ),
-        //TODO-sfa - this will be revisited in a future sprint and determined whether it should go in 6.7, 6.8 or later
     ),
 );

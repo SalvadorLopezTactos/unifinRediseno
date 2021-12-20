@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Advarsel: Ikke skrivbar',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Din version af PHP understøttes ikke af Sugar. Du skal installere en version, der er kompatibel med Sugar-programmet. Se kompatibilitetsmatrixen "Compatibility Matrix" i produktbemærkningerne "Release Notes" for understøttede PHP-versioner. Din version er',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Din version af IIS understøttes ikke af Sugar. Du skal installere en version, der er kompatibel med Sugar-programmet. Se kompatibilitetsmatrixen "Compatibility Matrix" i produktbemærkningerne "Release Notes" for understøttede IIS-versioner. Din version er',
-	'ERR_CHECKSYS_FASTCGI'              => '"Vi har registeret, at du ikke bruger en FastCGI-handlertilknytning til PHP. Du skal installere eller konfigurere en version, der er kompatibel med Sugar-programmet. Se kompatibilitetsmatrixen "Compatibility Matrix" i produktbemærkningerne "Release Notes" for understøttede versioner. Se <a href=""http://www.iis.net/php/"" target=""_blank"">http://www.iis.net/php/</a> for at få detaljerede oplysninger "',
+    'ERR_CHECKSYS_FASTCGI'              => 'Vi har opdaget, at du ikke bruger en FastCGI-handlertilknytning til PHP. Du skal installere/konfigurere en version, der er kompatibel med Sugar-programmet. Find understøttede versioner i kompatibilitetsmatrixen (Compatibility Matrix) i produktbemærkningerne (Release Notes). Find nærmere oplysninger på <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Du kan få den optimale oplevelse med IIS/FastCGI sapi ved at angive fastcgi.logging til 0 i filen php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'En ikke-understøttet PHP-version er installeret: "ver.',
     'LBL_DB_UNAVAILABLE'                => 'Databasen er ikke tilgængelig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databaseunderstøttelse blev ikke fundet. Kontrollér, at du har de nødvendige drivere til én af følgende understøttede databasetyper: MySQL, MS SQLServer, Oracle eller DB2. Du skal måske fjerne kommentaren fra udvidelsen i filen php.ini eller genkompilere med den korrekte binære fil alt efter din version af PHP. Du kan finde flere oplysninger om, hvordan du aktiverer Databaseunderstøttelse, i PHP-vejledningen.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database-support blev ikke fundet. Du bedes venligst sørge for, at du har de nødvendige drivere til en af følgende understøttede databasetyper: MySQL, MS SQLServer, Oracle eller DB2. Du skal muligvis fjerne kommentar fra udvidelsen i php.ini-filen eller kompilere igen med den rigtige binære fil afhængigt af din version af PHP. Se din PHP-manual for mere information om, hvordan du aktiverer databasesupport.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funktioner knyttet til XML-parserbiblioteker, som skal bruges af Sugar-programmet, blev ikke fundet. Du skal måske fjerne kommentaren fra udvidelsen i filen php.ini eller genkompilere med den korrekte binære fil afhængigt af din version af PHP. Du kan finde flere oplysninger i PHP-vejledningen.',
     'LBL_CHECKSYS_CSPRNG' => 'Tilfældigt talgenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Funktioner knyttet til udvidelsen Multibyte Strings PHP "mbstring", som skal bruges af Sugar-programmet, blev ikke fundet. <br/><br/>Normalt er mbstring-modulet ikke aktiveret som standard i PHP og skal aktiveres med -aktivér-mbstring, når den binære PHP-fil bygges. Du kan finde flere oplysninger om, hvordan du aktiverer mbstring-understøttelse, i PHP-vejledningen.',
@@ -544,139 +544,140 @@ id, der sikrer, at sessioner af et Sugar-eksempel ikke bruges af andre forekomst
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Tilstanden Php-bagudkompatibilitet er slået til. Angiv zend.ze1_compatibility_mode til Fra for at fortsætte',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'E-mails med mødenotifikationer',
+        'subject' => 'SugarCRM-møde - $event_name ',
+        'description' => 'Denne skabelon bliver brugt, når systemet sender en mødenotifikation til en bruger.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Til: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user har inviteret dig til et møde</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Emne: $event_name<br/>
+	Slutdato: $start_date<br/>
+	Startdato: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Beskrivelse: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Acceptér dette møde:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Acceptér dette møde foreløbigt:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Afvis dette møde:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Til: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user har inviteret dig til et møde
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Emne: $event_name
+Startdato: $start_date
+Slutdato: $end_date
 
-Description: $description
+Beskrivelse: $description
 
-Accept this meeting:
+Acceptér dette møde:
 <$accept_link>
 
-Tentatively Accept this meeting
+Acceptér dette møde foreløbigt
 <$tentative_link>
 
-Decline this meeting
+Afvis dette møde
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'E-mails med opkaldsnotifikationer',
+        'subject' => 'SugarCRM-opkad - $event_name ',
+        'description' => 'Denne skabelon bliver brugt, når systemet sender en opkaldsnotifikation til en bruger.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Til: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user har inviteret dig til et opkald</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Emne: $event_name<br/>
+	Startdato: $start_date<br/>
+	Varighed: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Beskrivelse: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Acceptér dette opkald:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Acceptér dette opkald midlertidigt:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Afvis dette opkald:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Til: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user har inviteret dig til et opkald
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Emne: $event_name
+Startdato: $start_date
+Varighed: $hoursh, $minutesm
 
-Description: $description
+Beskrivelse: $description
 
-Accept this call:
+Acceptér dette opkald:
 <$accept_link>
 
-Tentatively Accept this call
+Acceptér dette opkald midlertidigt
 <$tentative_link>
 
-Decline this call
+Afslå dette opkald
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'E-mails med tildelingsnotifikationer',
+        'subject' => 'SugarCRM - tildelt $module_name ',
+        'description' => 'Denne skabelon bliver brugt, når systemet sender en opgavetildeling til en bruger.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user har tildelt en&nbsp;$module_name til&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Du kan gennemse dette&nbsp;$module_name her:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user har tildelt en$module_name til$assigned_user.
 
-You may review this $module_name at:
+Du kan gennemse dette$module_name her:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Skemalagte rapporterings-e-mails',
+        'subject' => 'Skemalagt rapport: $report_name fra den $report_time',
+        'description' => 'Denne skabelon bliver brugt, når systemet sender en skemalagt rapport til en bruger.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hej $assigned_user,</p>
+<p>Vedhæftet er en automatisk genereret rapport, som er blevet planlagt for dig.</p>
+<p>Rapportnavn: $report_name</p>
+<p>Rapportens kørselsdato og -tid: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Hej $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+Vedhæftet er en automatisk genereret rapport, som er blevet planlagt for dig.
 
-Report Name: $report_name
+Rapportnavn: $report_name
 
-Report Run Date and Time: $report_time',
+Rapportens kørselsdato og -tid: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'E-mail med notifikation om kommentar på systemlog',
+        'subject' => 'SugarCRM - $initiator_full_name nævnte dig i $singular_module_name',
+        'description' => 'Denne skabelon bliver brugt, når systemet sender en e-mailnotifikation til en bruger, der er blevet tagget i en kommentar til en logsektion.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Du er blevet nævnt i den følgende optegnelses kommentarlog:  <a href="$record_url">$record_name</a></p>
+                <p>Log på Sugar for at se kommentaren.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Du er blevet nævnt i den følgende optegnelses kommentarlog: $record_name
+            Log på Sugar for at se kommentaren.',
     ],
 
     'advanced_password_new_account_email' => array(

@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'הסיסמה שהזנת לא עומדת בדרישות הסיסמה. אנא נסה שוב.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'פרטי המשתמש לא נמצאו',
     'ERR_USER_NAME_EXISTS'              => 'שם המשתמש {0} כבר קיים. אין אפשרות לשמות משתמש כפולים. שנה שם המשתמש לערך ייחודי.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'יש לשמור את רישיון "Sugar Hint" עם סוג רישיון תואם נוסף',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'משתמש זה ננעל מחוץ ליישום Sugar ולא יכול להתחבר בעזרת הסיסמה הקיימת שלו.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'משתמש עם הרשאת אימות חיצוני אינה מורשה להיכנס באמצעות הרשאות Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'כתובת דוא"ל נמען',
 	'ERR_SERVER_STATUS'					=> 'מצב השרת שלך',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'המערכת לא יכולה לשלוח הודעת דוא"ל למשתמש. אנא בדוק את תצורת הדואר היוצא בתוך <a href="index.php?module=EmailMan&action=config">הגדרות דוא"ל</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'יש ליצור משתמשים רק ב<a href="{0}" target="_blank">הגדרות SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'כתובת דואר אלקטרוני:',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'תחזיות',
     'LBL_WORKSHEETS'                    => 'גליונות עבודה',
 	'LBL_CALENDARS'                     => 'לוחות שנה',
+    'LBL_SHIFTS'                        => 'משמרות',
+    'LBL_SHIFT_EXCEPTIONS'              => 'החרגות למשמרות',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'קבל התראה בהודעת דוא"ל כאשר מוקצה לך רישום.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'שלח דוא"ל לגבי הקצאה',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'קבל הודעה בדוא"ל כאשר מישהו מזכיר את שמך ברשומה ביומן ההערות.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'שלח דוא"ל לגבי אזכור',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'בחר כיצד יוצגו שמות של שדות בתצוגות של רשומות. לתצוגת רשומות קומפקטית יותר, בחר "לצד ערך השדה".',
     'LBL_FIELD_NAME_PLACEMENT'          => 'מיקום שמות השדות',
     'LBL_ABOVE_FIELD_VALUE'             => 'מעל ערך השדה',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'סוג רישיון',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Set a default for reminders for calls and meetings.',
 	'LBL_REMINDER'						=> 'תזכורות',
 	'LBL_REMINDER_POPUP' => 'הודעה קופצת',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'הפעלה זו הסתיימה מכיוון שהפעלה אחרת התחילה תחת אותו שם משתמש.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'הקצה מחדש רישומים',
-	'LBL_REASS_DESC_PART1'				=> 'Find all records in the selected modules that are assigned to a user, and reassign them to another user.',
+    'LBL_REASS_DESC_PART1'              => 'Find all records in the selected modules that are assigned to a user, and reassign them to another user.',
         'LBL_REASS_DESC_PART2'=>                    'בחר כנגד אילו מודולים להפעיל זרימות עבודה, לשלוח התראות משימה, ולבצע מעקב ביקורת במהלך הקצאה מחדש. לחץ על הבא כדי להמשיך ולהקצות רישומים מחדש. לחץ על התחל מחדש כדי להתחיל מהתחלה.',
 	'LBL_REASS_STEP2_TITLE'				=> 'הקצאה מחדש לצוותים',
 	'LBL_REASS_STEP2_DESC'				=> 'The teams listed below were available in the from user&#39;s team, but not in the to user&#39;s team. All records in the From User&#39;s team will not be visible in the To User team unless the team values are mapped.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'פרופיל משתמש',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'יש לגשת אל <a href="%s" target="_blank">הגדרות SugarCloud</a> כדי לבצע שינויים בשדות שהוגדרו לקריאה בלבד.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'צור קשר עם מנהל מערכת של Sugar אם ברצונך לבצע שינויים בשדות שהוגדרו לקריאה בלבד.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

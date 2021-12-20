@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Інформаційна панель списку приміток',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Інформаційна панель записів у примітках',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель для приміток',
 
+    'LBL_RELATED_CONTACT' => 'Пов’язаний контакт',
     'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису перед видаленням.',
     'LBL_ACCOUNT_ID' => 'Контрагент (ID):',
     'LBL_CASE_ID' => 'Звернення (ID):',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Контакт (ID):',
     'LBL_CONTACT_NAME' => 'Контакт:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Примітки',
+    'LBL_ATTACHMENTS' => 'Вкладення',
+    'LBL_ATTACHMENT_FLAG' => 'це вкладення',
     'LBL_DESCRIPTION' => 'Опис',
     'LBL_EMAIL_ADDRESS' => 'Адреса Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Вкладення Email-повідомлення',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Примітки та вкладення',
     'LBL_NOTE' => 'Примітка:',
     'LBL_OPPORTUNITY_ID' => 'Угода (ID):',
+    'LBL_NOTE_PARENT_ID' => 'Батьківський ідентифікатор примітки:',
     'LBL_PARENT_ID' => 'ID батьківського запису:',
     'LBL_PARENT_TYPE' => 'Тип батьківського запису',
     'LBL_EMAIL_TYPE' => 'Тип електронної пошти',

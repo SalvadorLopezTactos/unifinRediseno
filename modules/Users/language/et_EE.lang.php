@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Sisestatud parool ei vasta parooli nõuetele. Proovige uuesti.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Kasutaja andmeid ei leitud',
     'ERR_USER_NAME_EXISTS'              => 'Kasutajanimi {0} on juba olemas. Topelt kasutajanimed pole lubatud. Muutke kasutajanimi kordumatuks.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Sugar Hinti litsents peab olema salvestatud täiendava ühilduva litsentsitüübiga',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'See kasutaja on Sugari rakendusest välja lukustatud ega saa oma olemasoleva parooliga sisse logida.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Vaid välise autentimisega kasutajat ei lubata Sugari mandaatidega sisse logida',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Saaja e-posti aadress',
 	'ERR_SERVER_STATUS'					=> 'Teie serveri olek',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Süsteem ei saa kasutajale e-kirja saata. Kontrollige väljaminevate e-kirjade konfiguratsiooni suvandis <a href="index.php?module=EmailMan&action=config">E-posti sätted</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Uued kasutajad tuleb luua <a href="{0}" target="_blank">SugarCloudi sätetes</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-posti aadress',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognoosid',
     'LBL_WORKSHEETS'                    => 'Töölehed',
 	'LBL_CALENDARS'                     => 'Kalendrid',
+    'LBL_SHIFTS'                        => 'Vahetused',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Vahetuse erandid',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Saa e-kirja teavitus, kui teile määratakse kirje.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Meil määramisel',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Saage meiliteavitus, kui teid mainitakse kommentaaride logi kirjetes.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Meil mainimisel',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Valige, kuidas kuvada kirjevaadetes väljanimed. Kompaktsema kirjevaate saamiseks tehke valik Välja väärtuse kõrval.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Välja nime paigutus',
     'LBL_ABOVE_FIELD_VALUE'             => 'Välja väärtuse kohal',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Litsentsi tüüp',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Määra vaikesätted kõnede ja koosolekute meeldetuletuste puhul. Hüpikteated kuvatakse kõik kutsutute puhul Sugarit kasutades. E-kirja meeldetuletused saadetakse kõigile kutsututele.',
 	'LBL_REMINDER'						=> 'Meeldetuletused',
 	'LBL_REMINDER_POPUP' => 'Hüpik',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'See seanss lõppes, kuna teine seanss on käivitatud sama kasutajanime alt.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Määra kirjed ümber',
-	'LBL_REASS_DESC_PART1'				=> 'Valige moodulid, mis sisaldavad kirjeid, mida konkreetselt kasutajalt teisele kasutajale ümber määrata. <br/><br/>
+    'LBL_REASS_DESC_PART1'              => 'Valige moodulid, mis sisaldavad kirjeid, mida konkreetselt kasutajalt teisele kasutajale ümber määrata. <br/><br/>
 Klõpsake nuppu Edasi kirjete arvu vaatamiseks, mida igas valitud moodulis värskendatakse.
 Klõpsake Tühista lehelt väljumiseks ilma ühtegi kirjet ümber määramata.',
         'LBL_REASS_DESC_PART2'=>                    'Valige, milliste moodulitega käivitada töövooge, saata määramisteatisi ja jälgida auditeerimist ümbermääramisel. Jätkamiseks klõpsake nuppu Edasi ja määrake kirjed ümber. Uuesti alustamiseks klõpsake nuppu Taaskäivita.',
@@ -635,7 +639,7 @@ Klõpsake Tühista lehelt väljumiseks ilma ühtegi kirjet ümber määramata.',
     'LBL_DETAIL' => 'Kasutaja profiil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Kirjutuskaitstud väljade muutmiseks avage <a href="%s" target="_blank">SugarCloudi sätted</a>.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Kui soovite teha kirjutuskaitstud väljadel muudatusi, võtke ühendust Sugari administraatoriga.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

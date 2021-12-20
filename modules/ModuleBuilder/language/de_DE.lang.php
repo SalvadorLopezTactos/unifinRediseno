@@ -601,6 +601,7 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
     'LBL_PORTAL_CONFIGURE' => 'Portal konfigurieren',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Portal aktivieren',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivieren Sie die Suche, bevor Sie ein Ticket öffnen',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Den Benutzern des Portals erlauben, den Fall zu schließen',
     'LBL_PORTAL_THEME' => 'Design-Portal',
     'LBL_PORTAL_ENABLE' => 'Aktivieren',
     'LBL_PORTAL_SITE_URL' => 'Ihre Portal-Seite ist verfügbar unter:',
@@ -792,7 +793,15 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Markieren, um dieses Feld bei der globalen Suche in diesem Modul miteinzubeziehen.',
+'LBL_POPHELP_REQUIRED'=>"Erstellen Sie eine Formel, um festzustellen, ob dieses Feld in Layouts erforderlich ist.<br/>"
+    . "Erforderliche Felder folgen zwar der Formel in der browserbasierten mobilen Ansicht, <br/>"
+    . "jedoch nicht der Formel in nativen Anwendungen wie Sugar Mobile für iPhone. <br/>"
+    . "Sie folgen nicht der Formel im Sugar Self-Service Portal.",
+'LBL_POPHELP_READONLY'=>"Erstellen Sie eine Formel, um zu bestimmen, ob dieses Feld in Layouts schreibgeschützt ist.<br/>"
+        . "Schreibgeschützte Felder folgen zwar der Formel in der browserbasierten mobilen Ansicht, <br/>"
+        . "jedoch nicht der Formel in nativen Anwendungen wie Sugar Mobile für iPhone. <br/>"
+        . "Sie folgen nicht der Formel im Sugar Self-Service Portal.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Wählen Sie diese Option, um dieses Feld bei der Suche nach Datensätzen mit der globalen Suche in diesem Modul zu verwenden.',
 //Revert Module labels
 'LBL_RESET' => 'Zurücksetzen',
 'LBL_RESET_MODULE' => 'Modul zurücksetzen',
@@ -827,6 +836,7 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
                 'encrypt'=>'Verschlüsselt',
                 'datetimecombo' =>'Datum/Zeit',
                 'decimal'=>'Dezimalzahl',
+                'autoincrement' => 'Automatisch erhöhen',
 ),
 'labelTypes' => array(
     "" => "Häufig verwendete Bezeichnungen",
@@ -844,4 +854,5 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
 'LBL_ALL_MODULES'=>'Alle Module',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (verwandte {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Von Layout kopieren',
+'LBL_RELATIONSHIP_TYPE' => 'Beziehung',
 );

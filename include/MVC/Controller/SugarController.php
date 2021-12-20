@@ -146,6 +146,16 @@ class SugarController
     protected $request;
 
     /**
+     * A list of fields for which we disallow update through update record
+     * Same as in ModuleApi class
+     * @var array
+     */
+    protected $disabledUpdateFields = array(
+        'deleted',
+        'created_by',
+    );
+
+    /**
      * Ctor
      *
      * @param Request $request
@@ -514,6 +524,16 @@ class SugarController
 	 * Do some processing before saving the bean to the database.
 	 */
 	public function pre_save(){
+
+        $is_update = !empty($this->record);
+        if ($is_update) {
+            foreach ($this->disabledUpdateFields as $field) {
+                if (isset($_POST[$field])) {
+                    unset($_POST[$field]);
+                }
+            }
+        }
+
 		// This code is replicated for the API's in SugarApi::updateBean()
 		if(!empty($_POST['assigned_user_id']) && $_POST['assigned_user_id'] != $this->bean->assigned_user_id && $_POST['assigned_user_id'] != $GLOBALS['current_user']->id && empty($GLOBALS['sugar_config']['exclude_notifications'][$this->bean->module_dir])){
 			$this->bean->notify_on_save = true;
@@ -650,17 +670,13 @@ class SugarController
             $mass = new $massUpdateClass();
             $mass->setSugarBean($seed);
 			$module = $this->request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
-			$query = $this->request->getValidInputRequest(
-				'current_query_by_page',
-				array('Assert\PhpSerialized' => array('base64Encoded' => true))
-			);
+            $query = unserialize(base64_decode($_REQUEST['current_query_by_page']), ['allowed_classes' => false]);
             if(isset($_REQUEST['entire']) && empty($_POST['mass'])) {
                 $mass->generateSearchWhere($module, $query);
             }
             $arr = $mass->handleMassUpdate();
             $storeQuery = new StoreQuery();//restore the current search. to solve bug 24722 for multi tabs massupdate.
             $temp_req = array(
-                'current_query_by_page' => $this->request->getValidInputRequest('current_query_by_page'),
                 'return_module' => $this->request->getValidInputRequest('return_module', 'Assert\Mvc\ModuleName'),
                 'return_action' => $this->request->getValidInputRequest('return_action'),
             );

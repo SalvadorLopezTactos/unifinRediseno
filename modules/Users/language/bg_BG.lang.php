@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Въведенета парола не отговаря на зададените системни критерии.  Моля опитайте отново.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Не е намерена информация за потребителя',
     'ERR_USER_NAME_EXISTS'              => 'Потребителското име {0} вече съществува. Не се допуска дублиране на имената на потребителите. Въведете уникално потребителско име.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Лицензът „Sugar Hint" трябва да се запише с допълнителен съвместим лицензионен тип',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Потребителят е блокиран от системата и не може да се идентифицира с неговата/нейната съществуваща парола.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Потребители само с външна оторизация нямат право да влизат с идентификационните данни на Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Е-мейл адрес на получателя',
 	'ERR_SERVER_STATUS'					=> 'Статус на сървъра',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Системата не може да изпрати електронна поща на потребителя. Моля проверете настройките в секция <a href="index.php?module=EmailMan&action=config">Настройка на електронна поща</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Нови потребители трябва да бъдат създавани в <a href="{0}" target="_blank">Настройки на SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Електронна поща',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Прогнози',
     'LBL_WORKSHEETS'                    => 'План',
 	'LBL_CALENDARS'                     => 'Календар',
+    'LBL_SHIFTS'                        => 'Смени',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Изключения на смяна',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Получаване на писмо, когато Ви се присвои запис.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Имейл за възлагане',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Получавате известие по електронна поща, когато някой ви спомене в запис от регистър на коментари.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Имейл за споменаване',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Изберете как да бъдат визуализирани имената на полетата на изгледите на записи. Изберете „До стойност на поле“ за по-компактен изглед на запис.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Разположение на име на поле',
     'LBL_ABOVE_FIELD_VALUE'             => 'Над стойност на поле',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Тип на лиценза',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Визуализиране на диалогов прозорец за напомняне за наближаващи срещи или обаждания',
 	'LBL_REMINDER'						=> 'Визуализиране на диалогов прозорец за напомняне?',
 	'LBL_REMINDER_POPUP' => 'Изскачащ прозорец',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Настоящата сесия е терминирана след стартиране на нова за потребител със същото име.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Record Reassignment',
-	'LBL_REASS_DESC_PART1'				=> 'Всички записи от избраните модули ще бъдат назначени към посочения от Вас потребител. <br/><br/>
+    'LBL_REASS_DESC_PART1'              => 'Всички записи от избраните модули ще бъдат назначени към посочения от Вас потребител. <br/><br/>
 Click Next to view the number of records that will be updated in each selected module.
 Click Cancel to exit the page without reassigning any records.',
         'LBL_REASS_DESC_PART2'=>                    'Изберете модулите, за които да можете да изпълнявате автоматизирани процеси, изпращате уведомления и следите промените при промяна на отговорник. Натиснете Следваща стъпка, за да продължите с процеса на промяна на отговорника. Натиснете Restart, за да започнете процеса от начало.',
@@ -635,7 +639,7 @@ Click Cancel to exit the page without reassigning any records.',
     'LBL_DETAIL' => 'Профил на потребителя',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Отидете на <a href="%s" target="_blank">Настройки на облака</a>, за да направите промени на полета, които са само за четене.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Моля, обърнете се към администратора на Sugar, ако искате да направите промени в полетата, които са само за четене.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>
