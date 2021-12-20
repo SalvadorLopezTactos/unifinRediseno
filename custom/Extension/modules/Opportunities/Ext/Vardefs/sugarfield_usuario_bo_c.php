@@ -30,6 +30,25 @@ $dictionary['Opportunity']['fields']['usuario_bo_c']['visibility_grid']=array (
     ),
     2 => 
     array (
+      0 => 'BACKOFFICE_L1',
+      1 => 'BACKOFFICE_L2',
+      2 => 'BACKOFFICE_L3',
+      3 => 'BACKOFFICE_L4',
+      4 => 'BACKOFFICE_L5',
+      5 => 'BACKOFFICE_L6',
+      6 => 'BACKOFFICE_L7',
+      7 => 'BACKOFFICE_CCN',
+      8 => 'BACKOFFICE_GDL',
+      9 => 'BACKOFFICE_MER',
+      10 => 'BACKOFFICE_MTY',
+      11 => 'BACKOFFICE_CHI',
+      12 => 'BACKOFFICE_LEO',
+      13 => 'BACKOFFICE_PUE',
+      14 => 'BACKOFFICE_HRS',
+      15 => 'BACKOFFICE_QRO',
+      16 => 'BACKOFFICE_VER',
+      17 => 'ASISTENTE_DGA',
+      18 => 'BACKOFFICE_TOL',
     ),
     3 => 
     array (
