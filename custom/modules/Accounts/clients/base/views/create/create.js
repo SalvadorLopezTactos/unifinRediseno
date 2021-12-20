@@ -2678,7 +2678,7 @@
             ProductosPLD.creditoRevolvente.campo1=$('.campo1int-ce').val();
             ProductosPLD.creditoRevolvente.campo2=$('.campo2dec-ce').val().replace(/,/gi, "");
             ProductosPLD.creditoRevolvente.campo3=$('.campo3ddw-ce').select2('val').toString();
-            ProductosPLD.creditoRevolvente.campo5=$('.campo5ddw-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo5=$('.campo5ddw-ce').select2('val').toString();
             ProductosPLD.creditoRevolvente.campo6=$('.campo6ddw-ce').select2('val');
             ProductosPLD.creditoRevolvente.campo7=$('.campo7ddw-ce').select2('val').toString();
             ProductosPLD.creditoRevolvente.campo8=$('.campo8ddw-ce').select2('val');

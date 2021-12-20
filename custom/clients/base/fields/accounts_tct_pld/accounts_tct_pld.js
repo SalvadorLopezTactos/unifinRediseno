@@ -165,8 +165,17 @@
             arrTemp.push(pld.campo29_list[arrayCampo3[i]]);
         }
         dataPLD['creditoRevolvente']['campo3_label'] =arrTemp.join();
+
+        //Data de CR para Pregunta 5
+        var auxCampo5=dataPLD['creditoRevolvente']['campo5'].replace(/\^/g,"");
+        var arrayCampo5=auxCampo5.split(",");
+        var arrTemp=[];
+        for(var i=0;i<arrayCampo5.length;i++)
+        {
+            arrTemp.push(pld.campo30_list[arrayCampo5[i]]);
+        }
+        dataPLD['creditoRevolvente']['campo5_label'] =arrTemp.join();
         
-        dataPLD['creditoRevolvente']['campo5_label'] = pld.campo30_list[dataPLD['creditoRevolvente']['campo5']];
         dataPLD['creditoRevolvente']['campo8_label'] = pld.campo2_list[dataPLD['creditoRevolvente']['campo8']];
         dataPLD['creditoRevolvente']['campo10_label'] = pld.campo4_list[dataPLD['creditoRevolvente']['campo10']];
 
@@ -447,6 +456,12 @@
 
         //formato Multiselect Pregunta Credito Envolvente
         this.$('select.campo3ddw-ce').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+        //SE añade el campo 5 pregunta 4.-¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación? 
+        this.$('select.campo5ddw-ce').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
