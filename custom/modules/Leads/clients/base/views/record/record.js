@@ -27,6 +27,7 @@
         this.context.on('button:llamada_home:click', this.llamar_casa, this);
         this.context.on('button:llamada_work:click', this.llamar_trabajo, this);
         this.context.on('button:edit_button:click', this.noLlamar, this);
+        this.context.on('button:edit_button:click', this.editREUS, this);
         this.model.on('sync', this.siNumero, this);
         this.context.on('button:reset_lead:click', this.reset_lead, this);
         this.model.on('sync', this._hideBtnReset, this);
@@ -456,6 +457,12 @@
             $('[data-name="phone_work"]').attr('style', 'pointer-events:none');
             $('[name="label_phone_work"]').removeClass('hidden');
         }
+    },
+
+    editREUS: function () {
+        $('[name="label_phone_home"]').removeClass('hidden');
+        $('[name="label_phone_mobile"]').removeClass('hidden');
+        $('[name="label_phone_work"]').removeClass('hidden');
     },
 
     checkInVentas: function (evt) {
