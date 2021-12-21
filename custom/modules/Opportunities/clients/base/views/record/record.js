@@ -121,6 +121,8 @@
 
         this.model.on('sync', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
+        //Funcion para ocultaro mostrar el campo Renta inicial
+        this.model.on('sync', this.ocultaRentaInicial, this);
         this.getCurrentYearMonth();
 
         /*@Jesus Carrillo
@@ -3515,6 +3517,13 @@
         } else {
             callback(null, fields, errors);
         }
+    },
+
+    ocultaRentaInicial: function () {
+            if (this.model.get('tipo_producto_c') == 2 && this.model.get('negocio_c')!=10){
+                //OCULTA
+                this.$('div[data-name=porciento_ri_c]').hide();
+            }
     },
 
 })
