@@ -1,3 +1,3 @@
 <?php
 
-$mod_strings['LBL_REUS_JOB'] = 'Reproceso REUS';
+$mod_strings['LBL_reprocesoREUS_job'] = 'Reproceso REUS';

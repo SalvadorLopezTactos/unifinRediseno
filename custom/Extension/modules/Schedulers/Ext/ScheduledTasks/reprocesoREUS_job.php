@@ -107,7 +107,47 @@ function reprocesoREUS_job()
             }
         }
         if($row['tipo'] == 'cuenta'){
-            
+            $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
+            //OBTENEMOS LOS TELEFONOS DE LA CUENTA
+            if ($bean->load_relationship('accounts_tel_telefonos_1')) {
+                $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
+                foreach ($relatedTelefonos as $telefono) {
+                    $host .= $telefono->telefono.",";
+                }
+            }
+    
+            $host = substr($host,0,-1);
+            $resultado = $callApi->getDWHREUS($host);
+            $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ' . json_encode($resultado));
+    
+            if ($resultado != "" && $resultado != null) {
+                //RESULTADO DEL SERVICIO DWH REUS 
+                foreach ($resultado as $key => $val) {
+    
+                    if ($val['existe'] == 'SI') {
+                        //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
+                        // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
+                        if ($bean->load_relationship('accounts_tel_telefonos_1')) {
+                            $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
+                            
+                            foreach ($relatedTelefonos as $telefono) {
+    
+                                if ($telefono->telefono == $val['valor']) {
+    
+                                    $sql = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
+                                    $result = $GLOBALS['db']->query($sql);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            } else {
+                //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
+                $query = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                $result = $db->query($query);
+                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS'); 
+            }
         }
     }
 
