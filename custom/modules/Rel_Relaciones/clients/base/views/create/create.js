@@ -2078,18 +2078,22 @@
                                     faltantes.push('País de nacimiento');
                                 }
 
-                                if (data[0].contents.estado_nacimiento_c == ""){
-                                    faltantes.push('Estado de nacimiento');
+                                if (data[0].contents.estado_nacimiento_c == "1" || data[0].contents.estado_nacimiento_c == ""){
+                                    faltantes.push('Entidad federativa de nacimiento');
                                 }
 
-                                if (data[0].contents.actividadeconomica_c == "0"){
-                                    faltantes.push('Actividad o giro del negocio');
+                                if (data[0].contents.actividadeconomica_c == "0" || data[0].contents.actividadeconomica_c == ""){
+                                    faltantes.push('Actividad o giro del negocio al que se dedique el cliente');
                                 }
 
                                 if(data[0].tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
                                     if (data[0].contents.tct_pais_expide_rfc_c == ""){
                                         faltantes.push('País que asignó RFC');
                                     }
+                                }
+
+                                if (data[0].contents.ctpldnoseriefiel_c == ""){
+                                    faltantes.push('Número de serie de la firma electrónica avanzada');
                                 }
 
                                 if (data[0].contents.ctpldidproveedorrecursosclie_c == ""){
@@ -2164,16 +2168,30 @@
                     }
                 
                     if (faltantes.length >  0) {
-                        faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
-                        var lista="";
-                        faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
-                        app.alert.show("Campos_faltantes_en_cuenta", {
-                            level: "error",
-                            messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación  tipo '+ relacionesActivas+':' + lista,
-                            autoClose: false
-                        });
-                        errors['validacionRelacionesActivas'] = errors['validacionRelacionesActivas'] || {};
-                        errors['validacionRelacionesActivas'].required = true;
+                        if(faltantes.includes('Una persona moral no puede ser Tarjetahabiente')){
+                            app.alert.show("Campos_faltantes_en_cuenta", {
+                                level: "error",
+                                messages: 'Una persona moral no puede ser Tarjetahabiente',
+                                autoClose: false
+                            });
+
+                            errors['validacionRelacionesActivas'] = errors['validacionRelacionesActivas'] || {};
+                            errors['validacionRelacionesActivas'].required = true;
+
+                        }else{
+                            faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
+                            var lista="";
+                            faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
+                            app.alert.show("Campos_faltantes_en_cuenta", {
+                                level: "error",
+                                messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación  tipo '+ relacionesActivas+':' + lista,
+                                autoClose: false
+                            });
+                            errors['validacionRelacionesActivas'] = errors['validacionRelacionesActivas'] || {};
+                            errors['validacionRelacionesActivas'].required = true;
+
+                        }
+                        
                     }
                     callback(null, fields, errors);
                 }, this)
