@@ -2096,8 +2096,19 @@
                                     faltantes.push('Número de serie de la firma electrónica avanzada');
                                 }
 
-                                if (data[0].contents.ctpldidproveedorrecursosclie_c == ""){
+                                //validando sección de PLD
+                                if (data[3].contents.records.length==0){
                                     faltantes.push('¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?');
+                                }
+                                if(data[3].contents.records.length>0){
+                                    for (let index = 0; index < data[3].contents.records.length; index++) {
+                                        if(data[3].contents.records[index].name=='Crédito Revolvente'){
+                                            if(data[3].contents.records[index].tct_pld_campo2_ddw ==""){
+                                                faltantes.push('¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?');
+                                            }
+                                        }
+                                    }
+
                                 }
 
                                 //Validando que el usuario firmado se encuentra asignado a algún producto de la cuenta, en caso de que SI esté asignado
