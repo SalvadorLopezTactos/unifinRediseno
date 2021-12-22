@@ -11,34 +11,45 @@ function reprocesoREUS_job()
     //Inicia ejecución
     $GLOBALS['log']->fatal('Job reproceso REUS: Inicia');
     $callApi = new UnifinAPI(); //clase con las funciones de REUS
+    $respuesta = array();
 
     //recupera leads con pendiente REUS
-    $query = "SELECT id_c as id, 'lead' as tipo FROM LEADS_CSTM where pendiente_reus_c = 1";
+    $query = "SELECT id_c as id FROM LEADS_CSTM where pendiente_reus_c = 1";
     $result = $GLOBALS['db']->query($query);
-    //recupera cuentas con pendiente REUS
-    $query = "SELECT id_c as id, 'cuenta' as tipo FROM ACCOUNTS_CSTM where pendiente_reus_c = 1";
-    $result2 = $GLOBALS['db']->query($query);
-
-    $GLOBALS['log']->fatal('result',$result);
-    $GLOBALS['log']->fatal('Jresult', $result2);
-
-    $result = array_merge($result, $result2);
-
-    $GLOBALS['log']->fatal('result',$result);
-
     while($row = $GLOBALS['db']->fetchByAssoc($result) ){
-        if($row['tipo'] == 'lead'){
-            $bean = BeanFactory::retrieveBean('Leads', $row['id']);
+        $pila = array(
+            'id' => $row['id'],
+            'tipo'  => "lead"
+        );
+        array_push($respuesta, $pila);
+    }
+    //recupera cuentas con pendiente REUS
+    $query = "SELECT id_c as id FROM ACCOUNTS_CSTM where pendiente_reus_c = 1";
+    $result2 = $GLOBALS['db']->query($query);
+    while($row = $GLOBALS['db']->fetchByAssoc($result2) ){
+        $pila = array(
+            'id' => $row['id'],
+            'tipo'  => "cuenta"
+        );
+        array_push($respuesta, $pila);
+    }
+    
+    $GLOBALS['log']->fatal('result',$respuesta);
+
+    foreach($respuesta as $valor ){
+        
+        if($valor['tipo'] == 'lead'){
+            $bean = BeanFactory::retrieveBean('Leads', $valor['id']);
         }else{
-            $bean = BeanFactory::retrieveBean('Accounts', $row['id']);
+            $bean = BeanFactory::retrieveBean('Accounts', $valor['id']);
         }
 
         //Validacion REUS mail
         foreach ($bean->emailAddress->addresses as $emailAddress) {
             $hostmail .= $emailAddress['email_address'].",";
         }
-        $hostmail = substr($host,0,-1);
-        $resultadomail = $callApi->getDWHREUS($host);
+        $hostmail = substr($hostmail,0,-1);
+        $resultadomail = $callApi->getDWHREUS($hostmail);
         
         if ($resultadomail != "" && $resultadomail != null) {
             //RESULTADO DEL SERVICIO DWH REUS 
@@ -60,7 +71,7 @@ function reprocesoREUS_job()
             $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
         }
     
-        if($row['tipo'] == 'lead'){
+        if($valor['tipo'] == 'lead'){
             //Validacion REUS telefono
             $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
             $host .= ($bean->phone_mobile != "")? $bean->phone_mobile : "";
@@ -106,7 +117,7 @@ function reprocesoREUS_job()
                 $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS'); 
             }
         }
-        if($row['tipo'] == 'cuenta'){
+        if($valor['tipo'] == 'cuenta'){
             $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
             //OBTENEMOS LOS TELEFONOS DE LA CUENTA
             if ($bean->load_relationship('accounts_tel_telefonos_1')) {
@@ -151,5 +162,6 @@ function reprocesoREUS_job()
         }
     }
 
+    $GLOBALS['log']->fatal('Job reproceso REUS: Fin');
     return true;
 }
