@@ -209,5 +209,26 @@ $dependencies['Leads']['readonly_fields'] = array(
                 'value' => 'true',
             ),
         ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'c_registro_reus_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'm_registro_reus_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'o_registro_reus_c',
+                'value' => 'true',
+            ),
+        ),
     ),
 );

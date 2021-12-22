@@ -4893,6 +4893,10 @@
                     var valor5 = data.records[i].extension;
                     var valor6 = (data.records[i].principal == true) ? 1 : 0;
                     var valor7 = (data.records[i].whatsapp_c == true) ? 1 : 0;
+                    var valor8 = (data.records[i].registro_reus_c == true) ? 1 : 0;
+
+                    if(valor8 == 1 && valor7 ==1){ valor7 = 0;}
+
                     var idtel = data.records[i].id;
                     var telefono = {
                         "name": valor4,
@@ -4904,7 +4908,8 @@
                         "principal": valor6,
                         "whatsapp_c": valor7,
                         "id_cuenta": idCuenta,
-                        "id": idtel
+                        "id": idtel,
+                        "reus": valor8
                     };
                     var prev_telefono = {
                         "name": valor4,
@@ -4916,7 +4921,8 @@
                         "principal": valor6,
                         "whatsapp_c": valor7,
                         "id_cuenta": idCuenta,
-                        "id": idtel
+                        "id": idtel,
+                        "reus": valor8
                     };
                     contexto_cuenta.oTelefonos.telefono.push(telefono);
                     contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);

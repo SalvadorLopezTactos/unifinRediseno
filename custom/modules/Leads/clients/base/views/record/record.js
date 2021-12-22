@@ -6,11 +6,13 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
+        this.model.on('sync', this._readonlyTelefonoREUS, this);
         this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
+        this._readonlyTelefonoREUS();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_work]'] = 'validaSoloNumerosTel';
@@ -25,6 +27,7 @@
         this.context.on('button:llamada_home:click', this.llamar_casa, this);
         this.context.on('button:llamada_work:click', this.llamar_trabajo, this);
         this.context.on('button:edit_button:click', this.noLlamar, this);
+        this.context.on('button:edit_button:click', this.editREUS, this);
         this.model.on('sync', this.siNumero, this);
         this.context.on('button:reset_lead:click', this.reset_lead, this);
         this.model.on('sync', this._hideBtnReset, this);
@@ -427,6 +430,39 @@
 
             this._disableActionsSubpanel();
         }
+    },
+
+    _readonlyTelefonoREUS: function () {
+        var self = this;
+
+        /***************************READONLY PARA telefono casa **************************/
+        if (this.model.get('c_registro_reus_c') == '1') {
+            $('[data-name="phone_home"]').removeClass('style', 'btn-success');
+            $('[data-name="phone_home"]').addClass('style', 'btn-info');
+            $('[data-name="llamada_home"]').removeClass('style', 'btn-success');
+            $('[data-name="llamada_home"]').addClass('style', 'btn-info');
+            /***************************/
+            $('[data-name="phone_home"]').attr('style', 'pointer-events:none');
+            $('[name="label_phone_home"]').removeClass('hidden');
+        }
+        /***************************READONLY PARA telefono movil **************************/
+        if (this.model.get('m_registro_reus_c') == '1') {
+            //self.$('[data-name=' + field.phone_mobile + ']').attr('style', 'pointer-events:none;');
+            $('[data-name="phone_mobile"]').attr('style', 'pointer-events:none');
+            $('[name="label_phone_mobile"]').removeClass('hidden');
+        }
+        /***************************READONLY PARA telefono oficina **************************/
+        if (this.model.get('o_registro_reus_c') == '1') {
+            //self.$('[data-name=' + field.phone_work + ']').attr('style', 'pointer-events:none;');
+            $('[data-name="phone_work"]').attr('style', 'pointer-events:none');
+            $('[name="label_phone_work"]').removeClass('hidden');
+        }
+    },
+
+    editREUS: function () {
+        $('[name="label_phone_home"]').removeClass('hidden');
+        $('[name="label_phone_mobile"]').removeClass('hidden');
+        $('[name="label_phone_work"]').removeClass('hidden');
     },
 
     checkInVentas: function (evt) {
