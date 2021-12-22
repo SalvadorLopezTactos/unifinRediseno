@@ -5,6 +5,7 @@ function reprocesoREUS_job()
 {
     //Se obtienen valores del config, ip
     global $sugar_config, $db;
+    $error = false;
     //Host mail
     $hostmail = $sugar_config['dwh_reus_correos'] . "?valor=";
         
@@ -50,7 +51,7 @@ function reprocesoREUS_job()
         }
         $hostmail = substr($hostmail,0,-1);
         $resultadomail = $callApi->getDWHREUS($hostmail);
-        
+        $GLOBALS['log']->fatal('res',$resultadomail);
         if ($resultadomail != "" && $resultadomail != null) {
             //RESULTADO DEL SERVICIO DWH REUS 
             foreach ($resultadomail as $key => $val) {
@@ -65,10 +66,7 @@ function reprocesoREUS_job()
                 }
             }
         }else{
-            //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-            $query = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-            $result = $db->query($query);
-            $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
+            $error = true;
         }
     
         if($valor['tipo'] == 'lead'){
@@ -111,10 +109,7 @@ function reprocesoREUS_job()
                 }
                 
             } else {
-                //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-                $query = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-                $result = $db->query($query);
-                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS'); 
+                $error = true;
             }
         }
         if($valor['tipo'] == 'cuenta'){
@@ -154,11 +149,18 @@ function reprocesoREUS_job()
                 }
                 
             } else {
-                //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-                $query = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-                $result = $db->query($query);
-                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS'); 
+                $error = true;
             }
+        }
+
+        if($error){
+            //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
+            $query = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
+            $result = $db->query($query);
+        }else{
+            //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
+            $query = "UPDATE leads_cstm SET pendiente_reus_c =  0 WHERE id_c = '".$bean->id."';";
+            $result = $db->query($query);
         }
     }
 
