@@ -61,6 +61,13 @@
                 } else {
                     document.getElementsByClassName('whatsapp-tel')[i].style.visibility = 'hidden';
                 }
+                if (this.oTelefonos.telefono[i].reus == 1) {
+                    //document.getElementsByClassName('lbl_REUS_phone')[i].style.visibility = 'hidden';
+                    $('[data-name="Whatsappt"]').attr('style', 'pointer-events:none');//
+                    $('[data-name="whatsapp-tel"]').attr('style', 'pointer-events:none');//
+                    $('[data-name="Telefonot"]').attr('style', 'pointer-events:none');//
+                    $('[data-name="Extensiont"]').attr('style', 'pointer-events:none');//
+                }
             }
         }
         if (this.newArray.length > 0) {

@@ -298,6 +298,13 @@ array (
                   array (
                     'name' => 'phone_mobile',
                   ),
+                  2 => 
+                  array (
+                    'type' => 'button',
+                    'name' => 'label_phone_mobile',
+                    'label' => 'El télefono registrado en REUS.',
+                    'css_class' => 'btn-danger hidden',
+                  ),
                 ),
               ),
               24 => 
@@ -319,6 +326,13 @@ array (
                   array (
                     'name' => 'phone_home',
                   ),
+                  2 => 
+                  array (
+                    'type' => 'button',
+                    'name' => 'label_phone_home',
+                    'label' => 'El télefono registrado en REUS.',
+                    'css_class' => 'btn-danger hidden',
+                  ),
                 ),
               ),
               25 => 
@@ -338,6 +352,13 @@ array (
                   1 => 
                   array (
                     'name' => 'phone_work',
+                  ),
+                  2 => 
+                  array (
+                    'type' => 'button',
+                    'name' => 'label_phone_work',
+                    'label' => 'El télefono registrado en REUS.',
+                    'css_class' => 'btn-danger hidden',
                   ),
                 ),
               ),
@@ -652,6 +673,21 @@ array (
               array (
                 'name' => 'hora_contacto_c',
                 'label' => 'LBL_HORA_CONTACTO_C',
+              ),
+              22 => 
+              array (
+                'name' => 'c_registro_reus_c',
+                'label' => 'LBL_C_REGISTRO_REUS_C',
+              ),
+              23 => 
+              array (
+                'name' => 'm_registro_reus_c',
+                'label' => 'LBL_M_REGISTRO_REUS_C',
+              ),
+              24 => 
+              array (
+                'name' => 'o_registro_reus_c',
+                'label' => 'LBL_O_REGISTRO_REUS_C',
               ),
             ),
           ),

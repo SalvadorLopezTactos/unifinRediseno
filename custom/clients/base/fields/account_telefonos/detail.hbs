@@ -20,12 +20,21 @@
   <tbody>
     {{#each oTelefonos.telefono}}
       <tr>
-        <td>{{getUnifinListValue 'tel_tipo_list' tipotelefono}}</td>
+        <td>
+          {{getUnifinListValue 'tel_tipo_list' tipotelefono}}
+          {{#if reus}}<br>
+            <label class="lbl_REUS_phone" style="color: red;">REUS: Teléfono registrado en REUS</label>
+          {{/if}}
+        </td>
         <td>{{telefono}}</td>
         <td>{{extension}}</td>
         <td>{{getUnifinListValue 'tel_estatus_list' estatus}}</td>
-        <td align="center"><button class="mcall fa fa-phone btn-success" style="color: white;"></button></td>
-		<td>{{#if whatsapp_c}}<i class="fa fa-check"></i>{{/if}}</td>
+        {{#if reus}}
+          <td align="center"><button class="mcall fa fa-phone btn-danger" style="color: black; pointer-events:none;" disabled></button></td>
+        {{else}}
+          <td align="center"><button class="mcall fa fa-phone btn-success" style="color: white;"></button></td>
+        {{/if}}
+		    <td>{{#if whatsapp_c}}<i class="fa fa-check"></i>{{/if}}</td>
       </tr>
     {{/each}}
   </tbody>
