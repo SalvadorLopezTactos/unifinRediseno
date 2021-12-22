@@ -155,12 +155,24 @@ function reprocesoREUS_job()
 
         if($error){
             //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-            $query = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-            $result = $db->query($query);
+            if($valor['tipo'] == 'lead'){
+                $query = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                $result = $db->query($query);
+            }
+            if($valor['tipo'] == 'cuenta'){
+                $query = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                $result = $db->query($query);
+            }
         }else{
-            //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-            $query = "UPDATE leads_cstm SET pendiente_reus_c =  0 WHERE id_c = '".$bean->id."';";
-            $result = $db->query($query);
+            //Si el servicio de REUS respondio correctamente a telefono y correo
+            if($valor['tipo'] == 'lead'){
+                $query = "UPDATE leads_cstm SET pendiente_reus_c = 0 WHERE id_c = '".$bean->id."';";
+                $result = $db->query($query);
+            }
+            if($valor['tipo'] == 'cuenta'){
+                $query = "UPDATE accounts_cstm SET pendiente_reus_c = 0 WHERE id_c = '".$bean->id."';";
+                $result = $db->query($query);
+            }
         }
     }
 
