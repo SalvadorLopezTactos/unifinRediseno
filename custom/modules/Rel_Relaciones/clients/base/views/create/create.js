@@ -2066,7 +2066,7 @@
                                 
                                 if(data[0].tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
                                     if (data[0].contents.rfc_c == "") {
-                                        faltantes.push('RFC');
+                                        faltantes.push('RFC con homoclave');
                                     }
                                 }
 
