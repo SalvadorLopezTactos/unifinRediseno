@@ -694,6 +694,19 @@
     _doValidateEmailTelefono: function (fields, errors, callback) {
         //Valida que no sea relación - Persona tipo: tipo_relacion_c = Referencia Cliente/Proveedor
         //Actualización: Se añaden como requeridos los teléfonos y direcciones cuando se crea como relación Tarjetahabiente
+        if(this.model.get('tipo_relacion_c').includes('Tarjetahabiente')){
+            if (_.isEmpty(this.oDirecciones.direccion)) {
+                app.alert.show("Direccion requerida", {
+                    level: "error",
+                    title: "Al menos una dirección es requerida.",
+                    autoClose: false
+                });
+
+                errors['account_direcciones'] = errors['account_direcciones'] || {};
+                errors['account_direcciones'].required = true;
+            }
+
+        }
         if (this.model.get('tipo_relacion_c').includes('Referencia Cliente') || this.model.get('tipo_relacion_c').includes('Referencia Proveedor') || this.model.get('tipo_relacion_c').includes('Tarjetahabiente')) {
             //Pide teléfono requerido
             if (_.isEmpty(this.oTelefonos.telefono)) {
@@ -705,17 +718,6 @@
 
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
-            }
-
-            if (_.isEmpty(this.oDirecciones.direccion)) {
-                app.alert.show("Direccion requerida", {
-                    level: "error",
-                    title: "Al menos una dirección es requerida.",
-                    autoClose: false
-                });
-
-                errors['account_direcciones'] = errors['account_direcciones'] || {};
-                errors['account_direcciones'].required = true;
             }
 
         } else {
