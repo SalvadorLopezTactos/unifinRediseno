@@ -692,9 +692,9 @@
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
-
         //Valida que no sea relación - Persona tipo: tipo_relacion_c = Referencia Cliente/Proveedor
-        if (this.model.get('tipo_relacion_c').includes('Referencia Cliente') || this.model.get('tipo_relacion_c').includes('Referencia Proveedor')) {
+        //Actualización: Se añaden como requeridos los teléfonos y direcciones cuando se crea como relación Tarjetahabiente
+        if (this.model.get('tipo_relacion_c').includes('Referencia Cliente') || this.model.get('tipo_relacion_c').includes('Referencia Proveedor') || this.model.get('tipo_relacion_c').includes('Tarjetahabiente')) {
             //Pide teléfono requerido
             if (_.isEmpty(this.oTelefonos.telefono)) {
                 app.alert.show("Telefono requerido", {
@@ -705,6 +705,17 @@
 
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
+            }
+
+            if (_.isEmpty(this.oDirecciones.direccion)) {
+                app.alert.show("Direccion requerida", {
+                    level: "error",
+                    title: "Al menos una dirección es requerida.",
+                    autoClose: false
+                });
+
+                errors['account_direcciones'] = errors['account_direcciones'] || {};
+                errors['account_direcciones'].required = true;
             }
 
         } else {
