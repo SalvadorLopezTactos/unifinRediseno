@@ -24,7 +24,7 @@ class class_account_reus
                 $mailCuenta = true;
             }
         }
-        
+
         if ($mailCuenta == true) {
 
             $host = substr($host, 0, -1);
@@ -35,14 +35,17 @@ class class_account_reus
             if ($resultado != "" && $resultado != null) {
                 //RESULTADO DEL SERVICIO DWH REUS 
                 foreach ($resultado as $key => $val) {
-                    //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS 
-                    if ($val['existe'] == 'SI') {
-                        foreach ($bean->emailAddress->addresses as $emailAddress) {
+                    //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS
+                    foreach ($bean->emailAddress->addresses as $emailAddress) {
 
-                            if ($emailAddress['email_address'] == $val['valor']) {
-                                //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS 
+                        if ($emailAddress['email_address'] == $val['valor']) {
+                            //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS 
+                            if ($val['existe'] == 'SI') {
                                 $queryA = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
                                 $result = $db->query($queryA);
+                            } else {
+                                $queryA1 = "UPDATE email_addresses SET opt_out = 0 WHERE id = '" . $emailAddress['email_address_id'] . "';";
+                                $result = $db->query($queryA1);
                             }
                         }
                     }
@@ -73,7 +76,6 @@ class class_account_reus
                     $host .= $telefono->telefono . ",";
                     $phoneCuenta = true;
                 }
-                
             }
         }
 
@@ -87,19 +89,23 @@ class class_account_reus
             if ($resultado != "" && $resultado != null) {
                 //RESULTADO DEL SERVICIO DWH REUS 
                 foreach ($resultado as $key => $val) {
+                    //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
+                    // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
+                    if ($bean->load_relationship('accounts_tel_telefonos_1')) {
+                        $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
 
-                    if ($val['existe'] == 'SI') {
-                        //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
-                        // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
-                        if ($bean->load_relationship('accounts_tel_telefonos_1')) {
-                            $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
+                        foreach ($relatedTelefonos as $telefono) {
 
-                            foreach ($relatedTelefonos as $telefono) {
+                            if ($telefono->telefono == $val['valor']) {
 
-                                if ($telefono->telefono == $val['valor']) {
+                                if ($val['existe'] == 'SI') {
 
                                     $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
                                     $result = $GLOBALS['db']->query($queryC);
+
+                                } else {
+                                    $queryC1 = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
+                                    $result = $GLOBALS['db']->query($queryC1);
                                 }
                             }
                         }
