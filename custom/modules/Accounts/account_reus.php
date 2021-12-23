@@ -12,90 +12,111 @@ class class_account_reus
     public function func_valida_correos($bean = null)
     {
         global $sugar_config, $db;
+        $mailCuenta = false;
         //API DHW REUS PARA CORREOS 
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_correos'] . "?valor=";
         //SE OBTIENE LOS CORREOS DE LA CUENTA
         foreach ($bean->emailAddress->addresses as $emailAddress) {
-            $host .= $emailAddress['email_address'].",";
-        }
-        $host = substr($host,0,-1);
 
-        $GLOBALS['log']->fatal($host);
-        $resultado = $callApi->getDWHREUS($host);
-        $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
-        
-        if ($resultado != "" && $resultado != null) {
-            //RESULTADO DEL SERVICIO DWH REUS 
-            foreach ($resultado as $key => $val) {
-                //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS 
-                if ($val['existe'] == 'SI') {
+            if ($emailAddress['email_address'] != "") {
+                $host .= $emailAddress['email_address'] . ",";
+                $mailCuenta = true;
+            }
+        }
+
+        if ($mailCuenta == true) {
+
+            $host = substr($host, 0, -1);
+            $GLOBALS['log']->fatal($host);
+            $resultado = $callApi->getDWHREUS($host);
+            $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
+
+            if ($resultado != "" && $resultado != null) {
+                //RESULTADO DEL SERVICIO DWH REUS 
+                foreach ($resultado as $key => $val) {
+                    //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS
                     foreach ($bean->emailAddress->addresses as $emailAddress) {
-                        
-                        if ($emailAddress['email_address'] == $val['valor']){
+
+                        if ($emailAddress['email_address'] == $val['valor']) {
                             //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS 
-                            $query = "UPDATE email_addresses SET opt_out = 1 WHERE id = '".$emailAddress['email_address_id']."';";
-                            $result = $db->query($query); 
+                            if ($val['existe'] == 'SI') {
+                                $queryA = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
+                                $result = $db->query($queryA);
+                            } else {
+                                $queryA1 = "UPDATE email_addresses SET opt_out = 0 WHERE id = '" . $emailAddress['email_address_id'] . "';";
+                                $result = $db->query($queryA1);
+                            }
                         }
                     }
                 }
-            }        
-        
-        } else {
-            //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-            $query = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-            $result = $db->query($query);
-            $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
+            } else {
+                //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
+                $queryB = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '" . $bean->id . "';";
+                $result = $db->query($queryB);
+                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
+            }
         }
     }
 
     public function func_valida_telefonos($bean = null)
     {
         global $sugar_config, $db;
+        $phoneCuenta = false;
         //API DHW REUS PARA TELEFONOS 
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
         //OBTENEMOS LOS TELEFONOS DE LA CUENTA
         if ($bean->load_relationship('accounts_tel_telefonos_1')) {
             $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
-            
+
             foreach ($relatedTelefonos as $telefono) {
-                $host .= $telefono->telefono.",";
+
+                if ($telefono->telefono != "") {
+                    $host .= $telefono->telefono . ",";
+                    $phoneCuenta = true;
+                }
             }
         }
 
-        $host = substr($host,0,-1);
-        $GLOBALS['log']->fatal($host);
-        $resultado = $callApi->getDWHREUS($host);
-        $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ' . json_encode($resultado));
+        if ($phoneCuenta == true) {
 
-        if ($resultado != "" && $resultado != null) {
-            //RESULTADO DEL SERVICIO DWH REUS 
-            foreach ($resultado as $key => $val) {
+            $host = substr($host, 0, -1);
+            $GLOBALS['log']->fatal($host);
+            $resultado = $callApi->getDWHREUS($host);
+            $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ' . json_encode($resultado));
 
-                if ($val['existe'] == 'SI') {
+            if ($resultado != "" && $resultado != null) {
+                //RESULTADO DEL SERVICIO DWH REUS 
+                foreach ($resultado as $key => $val) {
                     //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
                     // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
                     if ($bean->load_relationship('accounts_tel_telefonos_1')) {
                         $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
-                        
+
                         foreach ($relatedTelefonos as $telefono) {
 
                             if ($telefono->telefono == $val['valor']) {
 
-                                $sql = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
-                                $result = $GLOBALS['db']->query($sql);
+                                if ($val['existe'] == 'SI') {
+
+                                    $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
+                                    $result = $GLOBALS['db']->query($queryC);
+
+                                } else {
+                                    $queryC1 = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
+                                    $result = $GLOBALS['db']->query($queryC1);
+                                }
                             }
                         }
                     }
                 }
+            } else {
+                //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
+                $queryD = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '" . $bean->id . "';";
+                $result = $db->query($queryD);
+                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS');
             }
-            
-        } else {
-            //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-            $query = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-            $result = $db->query($query);
-            $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS'); 
         }
     }
 }

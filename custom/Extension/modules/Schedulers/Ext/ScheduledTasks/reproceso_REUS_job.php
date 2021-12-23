@@ -1,7 +1,7 @@
 <?php
 
-array_push($job_strings, 'reprocesoREUS_job');
-function reprocesoREUS_job()
+array_push($job_strings, 'reproceso_REUS_job');
+function reproceso_REUS_job()
 {
     //Se obtienen valores del config, ip
     global $sugar_config, $db;

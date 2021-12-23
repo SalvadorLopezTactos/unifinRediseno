@@ -1368,6 +1368,10 @@
             var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tct_pld_1")
             requestD.url = url.substring(4);
             requests.push(requestD);
+            var requestE = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_uni_productos_1")
+            requestE.url = url.substring(4);
+            requests.push(requestE);
             var faltantes=[];
             var relacionesActivas=[];
             var self = this;
@@ -2041,7 +2045,7 @@
 
                         //Valida Relación: Tarjetahabiente
                         if (this.model.get('relaciones_activas').includes('Tarjetahabiente')){
-							relacionesActivas.push("Tarjetahabiente");
+                            relacionesActivas.push("Tarjetahabiente");
 						
 							if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
@@ -2059,10 +2063,117 @@
 								if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
                                     faltantes.push('Nacionalidad');
                                 }
-								if (data[0].contents.rfc_c == "") {
-                                    faltantes.push('RFC');
+                                
+                                if(data[0].contents.tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
+                                    if (data[0].contents.rfc_c == "") {
+                                        faltantes.push('RFC con homoclave');
+                                    }
                                 }
-                              
+
+                                if (data[0].contents.genero_c == ""){
+                                    faltantes.push('Género');
+                                }
+
+                                if (data[0].contents.pais_nacimiento_c == ""){
+                                    faltantes.push('País de nacimiento');
+                                }
+
+                                if (data[0].contents.estado_nacimiento_c == "1" || data[0].contents.estado_nacimiento_c == ""){
+                                    faltantes.push('Entidad federativa de nacimiento');
+                                }
+
+                                if (data[0].contents.actividadeconomica_c == "0" || data[0].contents.actividadeconomica_c == ""){
+                                    faltantes.push('Actividad o giro del negocio al que se dedique el cliente');
+                                }
+
+                                if(data[0].contents.tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
+                                    if (data[0].contents.tct_pais_expide_rfc_c == ""){
+                                        faltantes.push('País que asignó RFC');
+                                    }
+                                }
+
+                                if (data[0].contents.ctpldnoseriefiel_c == ""){
+                                    faltantes.push('Número de serie de la firma electrónica avanzada');
+                                }
+
+                                //validando sección de PLD
+                                if (data[3].contents.records.length==0){
+                                    faltantes.push('¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?');
+                                }
+                                if(data[3].contents.records.length>0){
+                                    for (let index = 0; index < data[3].contents.records.length; index++) {
+                                        if(data[3].contents.records[index].name=='Crédito Revolvente'){
+                                            if(data[3].contents.records[index].tct_pld_campo2_ddw ==""){
+                                                faltantes.push('¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?');
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                                //Validando que el usuario firmado se encuentra asignado a algún producto de la cuenta, en caso de que SI esté asignado
+                                //se valida dirección, correo y teléfono
+                                var id_user_log=app.user.get('id');
+                                var arr_flag=[];
+
+                                if(data[0].contents.user_id_c==id_user_log){ //Validando asignación en producto leasing
+                                   arr_flag.push(1);
+                                }
+                                if(data[0].contents.user_id1_c==id_user_log){
+                                   arr_flag.push(1);
+                                }
+                                if(data[0].contents.user_id2_c==id_user_log){
+                                    arr_flag.push(1);
+                                }
+                                if(data[0].contents.user_id6_c==id_user_log){
+                                    arr_flag.push(1);
+                                }
+                                if(data[0].contents.user_id7_c==id_user_log){
+                                    arr_flag.push(1);
+                                }
+                                if(data[0].contents.user_id8_c==id_user_log){
+                                    arr_flag.push(1);
+                                }
+
+                                //Una vez lleno el arreglo auxiliar que guarda banderas (arr_flag), se valida que exista el valor 1, ya que éste indica que el usuario si está asignado a un producto
+                                //Por lo tanto, se validan direcciones, teléfonos y correo
+                                var flag_mostrar_msj=0;
+                                if(arr_flag.includes(1)){
+                                    if (direP == 0) { //No tiene dirección particular
+                                        faltantes.push('Dirección Particular');
+                                        flag_mostrar_msj++;
+                                    }
+                                    if(telCyC==0 && telO==0){
+                                        faltantes.push('Teléfono de contacto');
+                                        flag_mostrar_msj++;
+                                    }
+                                    /*
+                                    if(data[0].contents.email1==""){
+                                        faltantes.push('Correo electrónico');
+                                        flag_mostrar_msj++;
+                                    }
+                                    */
+
+                                }else{//No está asignado a ningún producto de la cuenta, pero se valida la información de direcciones, teléfonos y direcciones
+                                    //para solicitar la asignación del registro para poder editar direcciones, teléfonos y direcciones
+                                    if (direP == 0) { //No tiene dirección particular
+                                        flag_mostrar_msj++;
+                                    }
+                                    if(telCyC==0 && telO==0){
+                                        flag_mostrar_msj++;
+                                    }
+                                    if(data[0].contents.email1==""){
+                                        flag_mostrar_msj++;
+                                    }
+                                    if(flag_mostrar_msj>0){
+                                        app.alert.show("msj_asignacion_contacto", {
+                                            level: "info",
+                                            messages: 'Solicita la asignación de ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a> para completar dirección, teléfono y correo electrónico',
+                                            autoClose: false
+                                        });
+
+                                    }
+                                }                      
 							}else{
                                 faltantes.push('Una persona moral no puede ser Tarjetahabiente'); 
                             }
@@ -2070,16 +2181,30 @@
                     }
                 
                     if (faltantes.length >  0) {
-                        faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
-                        var lista="";
-                        faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
-                        app.alert.show("Campos_faltantes_en_cuenta", {
-                            level: "error",
-                            messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación  tipo '+ relacionesActivas+':' + lista,
-                            autoClose: false
-                        });
-                        errors['validacionRelacionesActivas'] = errors['validacionRelacionesActivas'] || {};
-                        errors['validacionRelacionesActivas'].required = true;
+                        if(faltantes.includes('Una persona moral no puede ser Tarjetahabiente')){
+                            app.alert.show("Campos_faltantes_en_cuenta", {
+                                level: "error",
+                                messages: 'Una persona moral no puede ser Tarjetahabiente',
+                                autoClose: false
+                            });
+
+                            errors['validacionRelacionesActivas'] = errors['validacionRelacionesActivas'] || {};
+                            errors['validacionRelacionesActivas'].required = true;
+
+                        }else{
+                            faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
+                            var lista="";
+                            faltantes.forEach(element => lista=lista+'<br><b> '+element + '</b>');
+                            app.alert.show("Campos_faltantes_en_cuenta", {
+                                level: "error",
+                                messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación  tipo '+ relacionesActivas+':' + lista,
+                                autoClose: false
+                            });
+                            errors['validacionRelacionesActivas'] = errors['validacionRelacionesActivas'] || {};
+                            errors['validacionRelacionesActivas'].required = true;
+
+                        }
+                        
                     }
                     callback(null, fields, errors);
                 }, this)
@@ -2088,4 +2213,5 @@
             callback(null, fields, errors);
         }
     },
+
 })

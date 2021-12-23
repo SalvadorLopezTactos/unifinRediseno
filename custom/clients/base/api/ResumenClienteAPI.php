@@ -54,7 +54,7 @@ class ResumenClienteAPI extends SugarApi
         3 = CREDITO AUTOMOTRIZ
         4 = FACTORAJE
         5 = LINEA CREDITO SIMPLE
-		    6 = UNICLICK
+		6 = UNICLICK
         */
 
         //Define colores:
@@ -274,6 +274,7 @@ class ResumenClienteAPI extends SugarApi
             $linea_disp_factoring = 0;
             $linea_disp_credito_aut = 0;
             $linea_disp_sos = 0;
+			$linea_disp_factor = 0;
 
             //Linea aproximada fleet
             $linea_aprox_fleet=0;
@@ -287,8 +288,9 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_cauto = "";
             $vencimiento_sos = "";
             $vencimiento_sos='';
-			      $vencimiento_uniclick ='';
+			$vencimiento_uniclick ='';
             $vencimiento_unilease ='';
+			$vencimiento_unifactor = '';
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
@@ -434,7 +436,7 @@ class ResumenClienteAPI extends SugarApi
                     //control para Uniclick
                     if ($opps->negocio_c == 10 && $opps->estatus_c != 'K') {
                         $linea_aprox_uniclick += $opps->monto_c;
-    					          $linea_disp_sos += $opps->amount;
+    					$linea_disp_sos += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                         /*********************************/
 
@@ -454,6 +456,26 @@ class ResumenClienteAPI extends SugarApi
                         }
                     }
 
+                    //control para Unifactor
+                    if ($opps->producto_financiero_c == 50 && $opps->estatus_c != 'K') {
+                        $linea_aprox_unifactor += $opps->monto_c;
+    					$linea_disp_factor += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+                        if (!empty($opps->vigencialinea_c)) {
+                						//Establece fecha de vencimiento
+                						$dateVL = $opps->vigencialinea_c;
+                						$timedateVL = Date($dateVL);
+                						//Compara fechas
+                						if ($dateVL > $vencimiento_unifactor || empty($vencimiento_unifactor)) {
+                						   $vencimiento_unifactor = $dateVL;
+                						}
+                						$arr_principal['unifactor']['linea_autorizada'] = $linea_aprox_unifactor;
+                						$arr_principal['unifactor']['fecha_vencimiento'] = $vencimiento_unifactor;
+                						$arr_principal['unifactor']['linea_disponible'] = $linea_disp_factor;
+                        }
+                    }
+					
                     //Control para Unilease
                     if ($opps->producto_financiero_c == 41 && $opps->estatus_c != 'K') {
                         $linea_aprox_unilease += $opps->monto_c;

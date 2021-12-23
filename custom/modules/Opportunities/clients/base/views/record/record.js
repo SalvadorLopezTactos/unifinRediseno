@@ -121,6 +121,8 @@
 
         this.model.on('sync', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
+        //Funcion para ocultaro mostrar el campo Renta inicial
+        this.model.on('sync', this.ocultaRentaInicial, this);
         this.getCurrentYearMonth();
 
         /*@Jesus Carrillo
@@ -823,12 +825,10 @@
                                     if (usuarioProducto == "CA") {
                                         if (tipopersona != 'Persona Moral') {
                                             //PF - PFAE
-                                            faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                                || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
+                                            faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
                                         } else {
                                             //PM
-                                            faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                                || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
+                                            faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
                                         }
                                     }
                                 } else {
@@ -3517,6 +3517,13 @@
         } else {
             callback(null, fields, errors);
         }
+    },
+
+    ocultaRentaInicial: function () {
+            if (this.model.get('tipo_producto_c') == 2 && this.model.get('negocio_c')!=10){
+                //OCULTA
+                this.$('div[data-name=porciento_ri_c]').hide();
+            }
     },
 
 })
