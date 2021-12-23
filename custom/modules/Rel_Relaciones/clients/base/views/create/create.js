@@ -2147,10 +2147,12 @@
                                         faltantes.push('Teléfono de contacto');
                                         flag_mostrar_msj++;
                                     }
+                                    /*
                                     if(data[0].contents.email1==""){
                                         faltantes.push('Correo electrónico');
                                         flag_mostrar_msj++;
                                     }
+                                    */
 
                                 }else{//No está asignado a ningún producto de la cuenta, pero se valida la información de direcciones, teléfonos y direcciones
                                     //para solicitar la asignación del registro para poder editar direcciones, teléfonos y direcciones
