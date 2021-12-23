@@ -2086,7 +2086,7 @@
                                     faltantes.push('Actividad o giro del negocio al que se dedique el cliente');
                                 }
 
-                                if(data[0].tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
+                                if(data[0].contents.tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
                                     if (data[0].contents.tct_pais_expide_rfc_c == ""){
                                         faltantes.push('País que asignó RFC');
                                     }
@@ -2147,10 +2147,12 @@
                                         faltantes.push('Teléfono de contacto');
                                         flag_mostrar_msj++;
                                     }
+                                    /*
                                     if(data[0].contents.email1==""){
                                         faltantes.push('Correo electrónico');
                                         flag_mostrar_msj++;
                                     }
+                                    */
 
                                 }else{//No está asignado a ningún producto de la cuenta, pero se valida la información de direcciones, teléfonos y direcciones
                                     //para solicitar la asignación del registro para poder editar direcciones, teléfonos y direcciones
