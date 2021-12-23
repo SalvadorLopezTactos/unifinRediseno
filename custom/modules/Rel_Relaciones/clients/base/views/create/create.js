@@ -2086,7 +2086,7 @@
                                     faltantes.push('Actividad o giro del negocio al que se dedique el cliente');
                                 }
 
-                                if(data[0].tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
+                                if(data[0].contents.tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
                                     if (data[0].contents.tct_pais_expide_rfc_c == ""){
                                         faltantes.push('País que asignó RFC');
                                     }
