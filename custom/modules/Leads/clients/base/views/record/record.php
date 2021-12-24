@@ -288,26 +288,44 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 => 
                   array (
                     'type' => 'rowaction',
                     'event' => 'button:llamada_mobile:click',
                     'css_class' => 'llamada_mobile btn fa fa-phone fa-large btn-success',
                   ),
-                  1 => 
                   array (
                     'name' => 'phone_mobile',
-                  ),
-                  2 => 
-                  array (
-                    'type' => 'button',
-                    'name' => 'label_phone_mobile',
-                    'label' => 'El télefono registrado en REUS.',
-                    'css_class' => 'btn-danger hidden',
                   ),
                 ),
               ),
               24 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
+              ),
+              25 => 
+              array (
+                'name' => 'reus_mobile',
+                'label' => 'LBL_MOBILE_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  array (
+                    'type' => 'rowaction',
+                    'css_class' => 'btn fa fa-phone fa-large btn-danger',
+                  ),
+                  array (
+                    'name' => 'phone_mobile',
+                  ),
+                  array (
+                    'type' => 'rowaction',
+                    'label' => 'El télefono registrado en REUS.',
+                    'css_class' => 'btn-danger',
+                  ),
+                ),
+              ),
+              26 => 
               array (
                 'name' => 'phone_home',
                 'comment' => 'Home phone number of the contact',
@@ -316,26 +334,17 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 => 
                   array (
                     'type' => 'rowaction',
                     'event' => 'button:llamada_home:click',
                     'css_class' => 'llamada_home btn fa fa-phone fa-large btn-success',
                   ),
-                  1 => 
                   array (
                     'name' => 'phone_home',
                   ),
-                  2 => 
-                  array (
-                    'type' => 'button',
-                    'name' => 'label_phone_home',
-                    'label' => 'El télefono registrado en REUS.',
-                    'css_class' => 'btn-danger hidden',
-                  ),
                 ),
               ),
-              25 => 
+              27 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -343,190 +352,225 @@ array (
                 'type' => 'fieldset',
                 'fields' => 
                 array (
-                  0 => 
                   array (
                     'type' => 'rowaction',
                     'event' => 'button:llamada_work:click',
                     'css_class' => 'llamada_work btn fa fa-phone fa-large btn-success',
                   ),
-                  1 => 
                   array (
                     'name' => 'phone_work',
                   ),
-                  2 => 
+                ),
+              ),
+              28 => 
+              array (
+                'name' => 'reus_home',
+                'label' => 'LBL_HOME_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
                   array (
-                    'type' => 'button',
-                    'name' => 'label_phone_work',
+                    'type' => 'rowaction',
+                    'css_class' => 'btn fa fa-phone fa-large btn-danger',
+                  ),
+                  array (
+                    'name' => 'phone_home',
+                  ),
+                  array (
+                    'type' => 'rowaction',
                     'label' => 'El télefono registrado en REUS.',
-                    'css_class' => 'btn-danger hidden',
+                    'css_class' => 'btn-danger',
                   ),
                 ),
               ),
-              26 => 
+              29 => 
+              array (
+                'name' => 'reus_work',
+                'label' => 'LBL_OFFICE_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  array (
+                    'type' => 'rowaction',
+                    'css_class' => 'btn fa fa-phone fa-large btn-danger',
+                  ),
+                  array (
+                    'name' => 'phone_work',
+                  ),
+                  array (
+                    'type' => 'rowaction',
+                    'label' => 'El télefono registrado en REUS.',
+                    'css_class' => 'btn-danger',
+                  ),
+                ),
+              ),
+              30 => 
               array (
                 'name' => 'detalle_plataforma_c',
                 'studio' => 'visible',
                 'label' => 'LBL_DETALLE_PLATAFORMA_C',
               ),
-              27 => 
+              31 => 
               array (
                 'name' => 'oficina_c',
                 'label' => 'LBL_OFICINA',
               ),
-              28 => 
+              32 => 
               array (
                 'name' => 'nombre_de_cargar_c',
                 'label' => 'LBL_NOMBRE_DE_CARGAR',
               ),
-              29 => 
+              33 => 
               array (
                 'name' => 'alianza_c',
                 'label' => 'LBL_ALIANZA_C',
               ),
-              30 => 
+              34 => 
               array (
                 'name' => 'lead_cancelado_c',
                 'label' => 'LBL_LEAD_CANCELADO_C',
               ),
-              31 => 
+              35 => 
               array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
               ),
-              32 => 
+              36 => 
               array (
                 'name' => 'submotivo_cancelacion_c',
                 'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
                 'span' => 12,
               ),
-              33 => 
+              37 => 
               array (
                 'name' => 'assigned_user_name',
               ),
-              34 => 
+              38 => 
               array (
                 'name' => 'account_to_lead',
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
-              35 => 
+              39 => 
               array (
                 'name' => 'status_management_c',
                 'label' => 'LBL_STATUS_MANAGEMENT',
               ),
-              36 => 
+              40 => 
               array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
-              37 => 
+              41 => 
               array (
                 'name' => 'url_originacion_c',
                 'label' => 'LBL_URL_ORIGINACION_C',
                 'readonly' => true,
               ),
-              38 => 
+              42 => 
               array (
               ),
-              39 => 
+              43 => 
               array (
                 'name' => 'contacto_asociado_c',
                 'label' => 'LBL_CONTACTO_ASOCIADO_C',
               ),
-              40 => 
+              44 => 
               array (
                 'name' => 'leads_leads_1_name',
                 'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
               ),
-              41 => 
+              45 => 
               array (
                 'name' => 'pb_division_c',
                 'label' => 'LBL_PB_DIVISION',
               ),
-              42 => 
+              46 => 
               array (
                 'name' => 'pb_grupo_c',
                 'label' => 'LBL_PB_GRUPO',
               ),
-              43 => 
+              47 => 
               array (
                 'name' => 'pb_clase_c',
                 'label' => 'LBL_PB_CLASE',
               ),
-              44 => 
+              48 => 
               array (
                 'name' => 'actividad_economica_c',
                 'label' => 'LBL_ACTIVIDAD_ECONOMICA',
               ),
-              45 => 
+              49 => 
               array (
                 'name' => 'sector_economico_c',
                 'label' => 'LBL_SECTOR_ECONOMICO',
               ),
-              46 => 
+              50 => 
               array (
                 'name' => 'subsector_c',
                 'label' => 'LBL_SUBSECTOR',
               ),
-              47 => 
+              51 => 
               array (
                 'name' => 'macrosector_c',
                 'label' => 'LBL_MACROSECTOR_C',
               ),
-              48 => 
+              52 => 
               array (
                 'name' => 'inegi_clase_c',
                 'label' => 'LBL_INEGI_CLASE',
               ),
-              49 => 
+              53 => 
               array (
                 'name' => 'inegi_macro_c',
                 'label' => 'LBL_INEGI_MACRO',
               ),
-              50 => 
+              54 => 
               array (
                 'name' => 'inegi_rama_c',
                 'label' => 'LBL_INEGI_RAMA',
               ),
-              51 => 
+              55 => 
               array (
                 'name' => 'inegi_sector_c',
                 'label' => 'LBL_INEGI_SECTOR',
               ),
-              52 => 
+              56 => 
               array (
                 'name' => 'inegi_subrama_c',
                 'label' => 'LBL_INEGI_SUBRAMA',
               ),
-              53 => 
+              57 => 
               array (
                 'name' => 'inegi_subsector_c',
                 'label' => 'LBL_INEGI_SUBSECTOR',
               ),
-              54 => 
+              58 => 
               array (
                 'name' => 'metodo_asignacion_lm_c',
                 'label' => 'LBL_METODO_ASIGNACION_LM_C',
               ),
-              55 => 
+              59 => 
               array (
                 'name' => 'homonimo_c',
                 'label' => 'LBL_HOMONIMO',
               ),
-              56 => 
+              60 => 
               array (
                 'name' => 'omite_match_c',
                 'label' => 'LBL_OMITE_MATCH',
               ),
-              57 => 
+              61 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              58 => 
+              62 => 
               array (
               ),
-              59 => 
+              63 => 
               array (
                 'name' => 'lead_direcciones',
                 'studio' => 'visible',
@@ -688,6 +732,9 @@ array (
               array (
                 'name' => 'o_registro_reus_c',
                 'label' => 'LBL_O_REGISTRO_REUS_C',
+              ),
+              25 => 
+              array (
               ),
             ),
           ),
