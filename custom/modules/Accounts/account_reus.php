@@ -112,20 +112,19 @@ class class_account_reus
                         $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
 
                         foreach ($relatedTelefonos as $telefono) {
-
                             if ($telefono->telefono == $val['valor']) {
-
+                                $beantel = BeanFactory::retrieveBean('tel_telefonos', $telefono->id);
                                 if ($val['existe'] == 'SI') {
 
                                     //$queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
                                     //$result = $GLOBALS['db']->query($queryC);
-                                    $telefono->registro_reus_c = 1;
-                                    $telefono->save();
+                                    $beantel->registro_reus_c = 1;
+                                    $beantel->save();
                                 } else {
                                     //$queryC1 = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
                                     //$result = $GLOBALS['db']->query($queryC1);
-                                    $telefono->registro_reus_c = 0;
-                                    $telefono->save();
+                                    $beantel->registro_reus_c = 0;
+                                    $beantel->save();
                                 }
                             }
                         }
