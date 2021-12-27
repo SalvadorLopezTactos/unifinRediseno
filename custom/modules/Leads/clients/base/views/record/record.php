@@ -300,8 +300,8 @@ array (
               ),
               24 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'name' => 'o_registro_reus_c',
+                'label' => 'LBL_O_REGISTRO_REUS_C',
               ),
               25 => 
               array (
@@ -320,7 +320,7 @@ array (
                   ),
                   array (
                     'type' => 'rowaction',
-                    'label' => 'El télefono registrado en REUS.',
+                    'label' => 'Teléfono Registrado en REUS.',
                     'css_class' => 'btn-danger',
                   ),
                 ),
@@ -379,7 +379,7 @@ array (
                   ),
                   array (
                     'type' => 'rowaction',
-                    'label' => 'El télefono registrado en REUS.',
+                    'label' => 'Teléfono Registrado en REUS.',
                     'css_class' => 'btn-danger',
                   ),
                 ),
@@ -401,7 +401,7 @@ array (
                   ),
                   array (
                     'type' => 'rowaction',
-                    'label' => 'El télefono registrado en REUS.',
+                    'label' => 'Teléfono Registrado en REUS.',
                     'css_class' => 'btn-danger',
                   ),
                 ),
@@ -729,11 +729,6 @@ array (
                 'label' => 'LBL_M_REGISTRO_REUS_C',
               ),
               24 => 
-              array (
-                'name' => 'o_registro_reus_c',
-                'label' => 'LBL_O_REGISTRO_REUS_C',
-              ),
-              25 => 
               array (
               ),
             ),
