@@ -54,3 +54,18 @@ $dependencies['Accounts']['tct_status_atencion_ddw_c'] = array(
     ),
 );
 
+$dependencies['Accounts']['reus_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('reus_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'reus_c',
+                'value' => 'false',
+            ),
+        ),
+    ),
+);
