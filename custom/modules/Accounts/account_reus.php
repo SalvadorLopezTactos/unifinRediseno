@@ -114,7 +114,7 @@ class class_account_reus
                         foreach ($relatedTelefonos as $telefono) {
                             if ($telefono->telefono == $val['valor']) {
                                 //recupera bean de telefono
-                                $beantel = BeanFactory::retrieveBean('tel_telefonos', $telefono->id);
+                                $beantel = BeanFactory::retrieveBean('Tel_Telefonos', $telefono->id);
                                 if ($val['existe'] == 'SI') {
 
                                     //$queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
