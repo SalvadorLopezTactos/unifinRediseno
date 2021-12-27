@@ -59,3 +59,11 @@ $hook_array['before_save'][] = Array(
     'Lead_Hooks',
     'llenaMacro'
 );
+
+$hook_array['before_save'][] = Array(
+    8,
+    'Validacion REUS email y telefonos',
+    'custom/modules/Leads/lead_reus.php',
+    'class_lead_reus',
+    'func_lead_reus'
+);

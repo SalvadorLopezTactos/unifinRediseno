@@ -37,11 +37,3 @@ $hook_array['after_save'][] = Array(
     'lead_direcciones_class', // name of the class
     'lead_direcciones_function' // name of the function.
 );
-
-$hook_array['after_save'][] = Array(
-    6,
-    'Validacion REUS email y telefonos',
-    'custom/modules/Leads/lead_reus.php',
-    'class_lead_reus',
-    'func_lead_reus'
-);
