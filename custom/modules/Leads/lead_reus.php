@@ -45,8 +45,8 @@ class class_lead_reus
                 foreach ($resultado as $key => $val) {
                     //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS
                     foreach ($bean->emailAddress->addresses as $key1=>$email_bean){
-                        $bmail = BeanFactory::retrieveBean('EmailAddresses',$emailAddress['email_address_id'], array('disable_row_level_security' => true));
-                        if ($email_bean['email_address'] == $val['valor'] && $bmail->deleted == false) {
+                       
+                        if ($email_bean['email_address'] == $val['valor'] ) {
                             //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS 
                             if ($val['existe'] == 'SI') {
                 //$query1 = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
