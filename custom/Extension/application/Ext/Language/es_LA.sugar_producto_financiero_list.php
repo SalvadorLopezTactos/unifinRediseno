@@ -1,5 +1,5 @@
 <?php
- // created: 2021-09-14 20:08:09
+ // created: 2021-12-27 09:31:39
 
 $app_list_strings['producto_financiero_list']=array (
   0 => '',
@@ -75,4 +75,6 @@ $app_list_strings['producto_financiero_list']=array (
   80 => 'ARRENDAMIENTO PURO AGRICOLA DOLARES',
   81 => 'CRÉDITO CORTO PLAZO DÓLARES',
   82 => 'CRÉDITO MEDIANO PLAZO DÓLARES',
+  83 => 'UNIFACTORING',
+  84 => 'ARRENDAMIENTO OPERATIVO',
 );
