@@ -55,19 +55,22 @@ function reproceso_REUS_job()
         if ($resultadomail != "" && $resultadomail != null) {
             //RESULTADO DEL SERVICIO DWH REUS 
             foreach ($resultadomail as $key => $val) {
-                foreach ($bean->emailAddress->addresses as $emailAddress) {
-                    if ($emailAddress['email_address'] == $val['valor']){
+                foreach ($bean->emailAddress->addresses as $key1=>$email_bean){
+                    if ($email_bean['email_address'] == $val['valor'] && $bmail->deleted == false) {
                         if ($val['existe'] == 'SI') {
-                            $query = "UPDATE email_addresses SET opt_out = 1 WHERE id = '".$emailAddress['email_address_id']."'";
-                            $result = $db->query($query); 
+            //$query = "UPDATE email_addresses SET opt_out = 1 WHERE id = '".$emailAddress['email_address_id']."'";
+              //              $result = $db->query($query); 
+                            $bean->emailAddress->addresses[$key1]['opt_out'] = 1;
                         }
                         if ($val['existe'] == 'NO') {
-                            $query = "UPDATE email_addresses SET opt_out = 0 WHERE id = '".$emailAddress['email_address_id']."'";
-                            $result = $db->query($query); 
+                            //$query = "UPDATE email_addresses SET opt_out = 0 WHERE id = '".$emailAddress['email_address_id']."'";
+                            //$result = $db->query($query); 
+                            $bean->emailAddress->addresses[$key1]['opt_out'] = 0;
                         }
                     }
                 }
             }
+            $bean->save();
         }else{
             $error = true;
         }
@@ -97,36 +100,42 @@ function reproceso_REUS_job()
                         //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
                         // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
                         if ($bean->phone_mobile == $val['valor']) {                        
-                            $query = "UPDATE leads_cstm SET m_registro_reus_c = 1 WHERE id_c = '".$bean->id."';";
-                            $result = $db->query($query);                        
+                            //$query = "UPDATE leads_cstm SET m_registro_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                            //$result = $db->query($query);
+                            $bean->m_registro_reus_c = 1;
                         }
                         if ($bean->phone_home == $val['valor']) {                        
-                            $query = "UPDATE leads_cstm SET c_registro_reus_c = 1 WHERE id_c = '".$bean->id."';";
-                            $result = $db->query($query);                        
+                            //$query = "UPDATE leads_cstm SET c_registro_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                            //$result = $db->query($query);
+                            $bean->c_registro_reus_c = 1;
                         }
                         if ($bean->phone_work == $val['valor']) {                        
-                            $query = "UPDATE leads_cstm SET o_registro_reus_c = 1 WHERE id_c = '".$bean->id."';";
-                            $result = $db->query($query);                        
+                            //$query = "UPDATE leads_cstm SET o_registro_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                            //$result = $db->query($query);
+                            $bean->o_registro_reus_c = 1;
                         }
                     }
                     if ($val['existe'] == 'NO') {
                         //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
                         // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
                         if ($bean->phone_mobile == $val['valor']) {                        
-                            $query = "UPDATE leads_cstm SET m_registro_reus_c = 0 WHERE id_c = '".$bean->id."';";
-                            $result = $db->query($query);                        
+                            //$query = "UPDATE leads_cstm SET m_registro_reus_c = 0 WHERE id_c = '".$bean->id."';";
+                            //$result = $db->query($query);
+                            $bean->m_registro_reus_c = 0;                     
                         }
                         if ($bean->phone_home == $val['valor']) {                        
-                            $query = "UPDATE leads_cstm SET c_registro_reus_c = 0 WHERE id_c = '".$bean->id."';";
-                            $result = $db->query($query);                        
+                            //$query = "UPDATE leads_cstm SET c_registro_reus_c = 0 WHERE id_c = '".$bean->id."';";
+                            //$result = $db->query($query);
+                            $bean->c_registro_reus_c = 0;                      
                         }
                         if ($bean->phone_work == $val['valor']) {                        
-                            $query = "UPDATE leads_cstm SET o_registro_reus_c = 0 WHERE id_c = '".$bean->id."';";
-                            $result = $db->query($query);                        
+                            //$query = "UPDATE leads_cstm SET o_registro_reus_c = 0 WHERE id_c = '".$bean->id."';";
+                            //$result = $db->query($query);
+                            $bean->o_registro_reus_c = 0;
                         }
                     }
                 }
-                
+                $bean->save();               
             } else {
                 $error = true;
             }
@@ -156,12 +165,16 @@ function reproceso_REUS_job()
                         foreach ($relatedTelefonos as $telefono) {
                             if ($telefono->telefono == $val['valor']) {
                                 if ($val['existe'] == 'SI') {
-                                    $sql = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
-                                    $result = $GLOBALS['db']->query($sql);
+                                    //$sql = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
+                                    //$result = $GLOBALS['db']->query($sql);
+                                    $telefono->registro_reus_c = 1;
+                                    $telefono->save();
                                 }
                                 if ($val['existe'] == 'NO') {
-                                    $sql = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
-                                    $result = $GLOBALS['db']->query($sql);
+                                    //$sql = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
+                                    //$result = $GLOBALS['db']->query($sql);
+                                    $telefono->registro_reus_c = 0;
+                                    $telefono->save();
                                 }
                             }
                         }
@@ -175,23 +188,29 @@ function reproceso_REUS_job()
         if($error){
             //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
             if($valor['tipo'] == 'lead'){
-                $query = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-                $result = $db->query($query);
+                //$query = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                //$result = $db->query($query);
+                $bean->pendiente_reus_c = 1;
             }
             if($valor['tipo'] == 'cuenta'){
-                $query = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
-                $result = $db->query($query);
+                //$query = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '".$bean->id."';";
+                //$result = $db->query($query);
+                $bean->pendiente_reus_c = 1;
             }
+            $bean->pendiente_reus_c = 1;
         }else{
             //Si el servicio de REUS respondio correctamente a telefono y correo
             if($valor['tipo'] == 'lead'){
-                $query = "UPDATE leads_cstm SET pendiente_reus_c = 0 WHERE id_c = '".$bean->id."';";
-                $result = $db->query($query);
+                //$query = "UPDATE leads_cstm SET pendiente_reus_c = 0 WHERE id_c = '".$bean->id."';";
+                //$result = $db->query($query);
+                $bean->pendiente_reus_c = 0;
             }
             if($valor['tipo'] == 'cuenta'){
-                $query = "UPDATE accounts_cstm SET pendiente_reus_c = 0 WHERE id_c = '".$bean->id."';";
-                $result = $db->query($query);
+                //$query = "UPDATE accounts_cstm SET pendiente_reus_c = 0 WHERE id_c = '".$bean->id."';";
+                //$result = $db->query($query);
+                $bean->pendiente_reus_c = 0;
             }
+            $bean->save();
         }
     }
 
