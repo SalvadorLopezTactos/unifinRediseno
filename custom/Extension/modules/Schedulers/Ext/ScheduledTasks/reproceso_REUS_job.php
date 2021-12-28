@@ -165,7 +165,7 @@ function reproceso_REUS_job()
                         foreach ($relatedTelefonos as $telefono) {
                             if ($telefono->telefono == $val['valor']) {
                                 //recupera bean del telefono
-                                $beantel = BeanFactory::retrieveBean('tel_telefonos', $telefono->id);
+                                $beantel = BeanFactory::retrieveBean('Tel_Telefonos', $telefono->id);
                                 if ($val['existe'] == 'SI') {
                                     //$sql = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
                                     //$result = $GLOBALS['db']->query($sql);
