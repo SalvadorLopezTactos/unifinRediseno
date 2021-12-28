@@ -15,7 +15,7 @@ function reproceso_REUS_job()
     $respuesta = array();
 
     //recupera leads con pendiente REUS
-    $query = "SELECT id_c as id FROM LEADS_CSTM where pendiente_reus_c = 1";
+    $query = "SELECT id , last_name , deleted from leads where id in ( SELECT id_c as id FROM LEADS_CSTM where pendiente_reus_c = 1) and deleted = 0";
     $result = $GLOBALS['db']->query($query);
     while($row = $GLOBALS['db']->fetchByAssoc($result) ){
         $pila = array(
@@ -51,8 +51,9 @@ function reproceso_REUS_job()
             $hostmail .= $emailAddress['email_address'].",";
             $mailLead = true;
         }
-        $hostmail = substr($hostmail,0,-1);
+        
         if($mailLead ){
+            $hostmail = substr($hostmail,0,-1);
             $resultadomail = $callApi->getDWHREUS($hostmail);
             $GLOBALS['log']->fatal('res',$resultadomail);
             if ($resultadomail != "" && $resultadomail != null) {
@@ -80,6 +81,9 @@ function reproceso_REUS_job()
         }
     
         if($valor['tipo'] == 'lead'){
+            $GLOBALS['log']->fatal('mobile',$bean->phone_mobile);
+            $GLOBALS['log']->fatal('phone_home',$bean->phone_home);
+            $GLOBALS['log']->fatal('phone_work',$bean->phone_work);
             if( $bean->phone_mobile != "" || $bean->phone_home != "" || $bean->phone_work != "" ){
                 //Validacion REUS telefono
                 $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
@@ -209,7 +213,7 @@ function reproceso_REUS_job()
                 //$result = $db->query($query);
                 $bean->pendiente_reus_c = 1;
             }
-            $bean->pendiente_reus_c = 1;
+            $bean->save();
         }else{
             //Si el servicio de REUS respondio correctamente a telefono y correo
             if($valor['tipo'] == 'lead'){
