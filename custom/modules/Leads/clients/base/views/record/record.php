@@ -319,7 +319,7 @@ array (
                     'name' => 'phone_mobile',
                   ),
                   array (
-                    'type' => 'rowaction',
+                    'type' => 'button',
                     'label' => 'Teléfono Registrado en REUS.',
                     'css_class' => 'btn-danger',
                   ),
@@ -378,7 +378,7 @@ array (
                     'name' => 'phone_home',
                   ),
                   array (
-                    'type' => 'rowaction',
+                    'type' => 'button',
                     'label' => 'Teléfono Registrado en REUS.',
                     'css_class' => 'btn-danger',
                   ),
@@ -400,7 +400,7 @@ array (
                     'name' => 'phone_work',
                   ),
                   array (
-                    'type' => 'rowaction',
+                    'type' => 'button',
                     'label' => 'Teléfono Registrado en REUS.',
                     'css_class' => 'btn-danger',
                   ),
