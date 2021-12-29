@@ -210,6 +210,7 @@ SITE;
         $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
+        
         // Asesores
         if ($idMeetings != null) {
             $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['LEASING'];
@@ -233,6 +234,22 @@ SITE;
             $bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
         }
         $bean_account->save();
+        /************* Validación REUS correo *****************/
+         $resp_reus_mail = $this->REUS_correos($bean_account);
+        
+        // creamos las relaciones en telefono
+        if (!empty($bean_Leads->phone_mobile)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
+        }
+        if (!empty($bean_Leads->phone_home)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
+        }
+        if (!empty($bean_Leads->phone_work)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
+        }
+
+        $bean_account->pendiente_reus_c = ($resp_reus_tel == 3 || $resp_reus_mail == 3) ? true : false;
+        $bean_account->save();
         //Campos PB
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_account->id, array('disable_row_level_security' => true));
         $bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
@@ -248,16 +265,8 @@ SITE;
             $bean_Resumen->inegi_macro_c = $bean_Leads->inegi_macro_c;
         }
         $bean_Resumen->save();
-        // creamos las relaciones en telefono
-        if (!empty($bean_Leads->phone_mobile)) {
-            $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
-        }
-        if (!empty($bean_Leads->phone_home)) {
-            $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
-        }
-        if (!empty($bean_Leads->phone_work)) {
-            $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
-        }
+        
+
         return $bean_account;
     }
 
@@ -510,6 +519,9 @@ SITE;
 
     public function create_phone($idCuenta, $phone, $tipoTel)
     {
+        /************* Validación REUS telefono *****************/
+        $reus = $this->REUS_telefono($phone);
+        /************* Creación Telefono ************************/
         $bean_relacionTel = BeanFactory::newBean('Tel_Telefonos');
         $bean_relacionTel->accounts_tel_telefonos_1accounts_ida = $idCuenta;
         $bean_relacionTel->name = $phone;
@@ -519,7 +531,10 @@ SITE;
         $bean_relacionTel->tipotelefono = $tipoTel;
         $bean_relacionTel->estatus = "Activo";
         $bean_relacionTel->pais = 2;
+        if($reus == 1){  $bean_relacionTel->registro_reus_c = 1; }
+
         $bean_relacionTel->save();
+        return $reus;
     }
 
     public function re_asign_meetings($bean_LEad, $idCuenTa)
@@ -603,5 +618,99 @@ SITE;
             $beanDirecciones->accounts_dire_direccion_1accounts_ida  = $idCuenTa;
             $beanDirecciones->save();
         }
+    }
+
+    public function REUS_correos($bean = null)
+    {
+        $resp = 0;
+        global $sugar_config, $db, $current_user;
+        $mailCuenta = false;
+        $id_u_audit = create_guid();
+        $date = TimeDate::getInstance()->nowDb();
+        $event_id = create_guid();
+
+        //API DHW REUS PARA CORREOS
+        $callApi = new UnifinAPI();
+        $host = $sugar_config['dwh_reus_correos'] . "?valor=";
+        //SE OBTIENE LOS CORREOS DE LA CUENTA
+        foreach ($bean->emailAddress->addresses as $emailAddress) {
+
+            if ($emailAddress['email_address'] != "") {
+                $host .= $emailAddress['email_address'] . ",";
+                $mailCuenta = true;
+            }
+        }
+
+        if ($mailCuenta == true) {
+
+            $host = substr($host, 0, -1);
+            // $GLOBALS['log']->fatal($host);
+            $resultado = $callApi->getDWHREUS($host);
+            
+            $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
+
+            if ($resultado != "" && $resultado != null) {
+                //RESULTADO DEL SERVICIO DWH REUS
+                foreach ($resultado as $key => $val) {
+                    //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS
+                    foreach ($bean->emailAddress->addresses as $key1 => $email_bean) {
+                        if ($email_bean['email_address'] == $val['valor']) {
+                            //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS
+                            if ($val['existe'] == 'SI') {
+                                $bean->emailAddress->addresses[$key1]['opt_out'] = 1;
+                                $resp = 1;
+                            } else {
+                                $bean->emailAddress->addresses[$key1]['opt_out'] = 0;
+                                $resp = 2;
+                            }
+                        }
+                    }
+                }
+            } else {
+                //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
+                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
+                $resp = 3;
+            }
+        }else{
+            $resp = 2;
+        }
+        $bean->save();
+    }
+
+    public function REUS_telefono($telefono = null)
+    {
+        $resp = 0;
+        global $sugar_config, $db, $current_user;
+        $phoneCuenta = false;
+        //API DHW REUS PARA TELEFONOS 
+        $callApi = new UnifinAPI();
+        $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
+        //OBTENEMOS LOS TELEFONOS DE LA CUENTA
+        $host .= $telefono;
+        // $GLOBALS['log']->fatal($host);
+        $resultado = $callApi->getDWHREUS($host);
+        //$resultado = '[{"valor":"5518504488","existe":"SI"},{"valor":"5569783395","existe":"NO"}]';
+        //$resultado = json_decode($resultado);
+        $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ' . json_encode($resultado));
+        if ($resultado != "" && $resultado != null) {
+            //RESULTADO DEL SERVICIO DWH REUS 
+            foreach ($resultado as $key => $val) {
+                //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
+                // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
+                if ($telefono == $val['valor']){
+                    if ($val['existe'] == 'SI'){
+                        $resp = 1;
+                    }
+                    if ($val['existe'] == 'NO'){
+                        $resp = 2;
+                    }
+                }
+            }
+        } else {
+            //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
+            $GLOBALS['log']->fatal('SERVICIO DWH REUS CUENTAS NO RESPONDE - TELEFONOS');
+            $resp = 3;
+        }
+        return $resp;
     }
 }
