@@ -234,22 +234,7 @@ SITE;
             $bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
         }
         $bean_account->save();
-        /************* Validación REUS correo *****************/
-         $resp_reus_mail = $this->REUS_correos($bean_account);
-        
-        // creamos las relaciones en telefono
-        if (!empty($bean_Leads->phone_mobile)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
-        }
-        if (!empty($bean_Leads->phone_home)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
-        }
-        if (!empty($bean_Leads->phone_work)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
-        }
-
-        $bean_account->pendiente_reus_c = ($resp_reus_tel == 3 || $resp_reus_mail == 3) ? true : false;
-        $bean_account->save();
+         
         //Campos PB
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_account->id, array('disable_row_level_security' => true));
         $bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
@@ -265,6 +250,20 @@ SITE;
             $bean_Resumen->inegi_macro_c = $bean_Leads->inegi_macro_c;
         }
         $bean_Resumen->save();
+        
+        // creamos las relaciones en telefono
+        if (!empty($bean_Leads->phone_mobile)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
+        }
+        if (!empty($bean_Leads->phone_home)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
+        }
+        if (!empty($bean_Leads->phone_work)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
+        }
+
+        $bean_account->pendiente_reus_c = ($resp_reus_tel == 3 || $resp_reus_mail == 3) ? true : false;
+        $bean_account->save();
         
 
         return $bean_account;
@@ -618,63 +617,6 @@ SITE;
             $beanDirecciones->accounts_dire_direccion_1accounts_ida  = $idCuenTa;
             $beanDirecciones->save();
         }
-    }
-
-    public function REUS_correos($bean = null)
-    {
-        $resp = 0;
-        global $sugar_config, $db, $current_user;
-        $mailCuenta = false;
-        $id_u_audit = create_guid();
-        $date = TimeDate::getInstance()->nowDb();
-        $event_id = create_guid();
-
-        //API DHW REUS PARA CORREOS
-        $callApi = new UnifinAPI();
-        $host = $sugar_config['dwh_reus_correos'] . "?valor=";
-        //SE OBTIENE LOS CORREOS DE LA CUENTA
-        foreach ($bean->emailAddress->addresses as $emailAddress) {
-
-            if ($emailAddress['email_address'] != "") {
-                $host .= $emailAddress['email_address'] . ",";
-                $mailCuenta = true;
-            }
-        }
-
-        if ($mailCuenta == true) {
-
-            $host = substr($host, 0, -1);
-            // $GLOBALS['log']->fatal($host);
-            $resultado = $callApi->getDWHREUS($host);
-            
-            $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
-
-            if ($resultado != "" && $resultado != null) {
-                //RESULTADO DEL SERVICIO DWH REUS
-                foreach ($resultado as $key => $val) {
-                    //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS
-                    foreach ($bean->emailAddress->addresses as $key1 => $email_bean) {
-                        if ($email_bean['email_address'] == $val['valor']) {
-                            //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS
-                            if ($val['existe'] == 'SI') {
-                                $bean->emailAddress->addresses[$key1]['opt_out'] = 1;
-                                $resp = 1;
-                            } else {
-                                $bean->emailAddress->addresses[$key1]['opt_out'] = 0;
-                                $resp = 2;
-                            }
-                        }
-                    }
-                }
-            } else {
-                //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
-                $resp = 3;
-            }
-        }else{
-            $resp = 2;
-        }
-        $bean->save();
     }
 
     public function REUS_telefono($telefono = null)
