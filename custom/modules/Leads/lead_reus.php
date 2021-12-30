@@ -51,10 +51,12 @@ class class_lead_reus
                             if ($val['existe'] == 'SI') {
                 //$query1 = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
                                 $bean->emailAddress->addresses[$key1]['opt_out'] = 1;
+                                $bean->emailAddress->addresses[$key1]['invalid_email'] = 1;
                             } else {
                 //$queryA1 = "UPDATE email_addresses SET opt_out = 0 WHERE id = '" . $emailAddress['email_address_id'] . "';";
                                 //$result = $db->query($queryA1);
                                 $bean->emailAddress->addresses[$key1]['opt_out'] = 0;
+                                $bean->emailAddress->addresses[$key1]['invalid_email'] = 0;
                             }
                         }
                     }

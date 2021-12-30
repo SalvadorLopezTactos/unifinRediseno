@@ -50,8 +50,7 @@ class class_account_reus
             $host = substr($host, 0, -1);
             // $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
-            //$resultado = '[{"valor":"caro1.huesca@gmail.com","existe":"NO"},{"valor":"caro.huesca@gmail.com","existe":"SI"},{"valor":"caro3.huesca@gmail.com","existe":"NO"},{"valor":"caro.huesca@gmail.com","existe":"SI"},{"valor":"0caro.huesca@gmail.com","existe":"NO"}]';
-            //$resultado = json_decode($resultado, true);
+            
             $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
 
             if ($resultado != "" && $resultado != null) {
@@ -66,23 +65,29 @@ class class_account_reus
 
                             if ($val['existe'] == 'SI') {
 
-                                $queryA = "UPDATE email_addresses SET opt_out = 1 WHERE id = '{$email_bean['email_address_id']}'";
+                                $queryA = "UPDATE email_addresses SET opt_out = 1 , invalid_email = 1 WHERE id = '{$email_bean['email_address_id']}'";
                                 $result = $db->query($queryA);
                                 // $idmail = $emailAddress['email_address_id'];
                                 //$bean->emailAddress->addresses[$key1]['opt_out'] = 1;
                                 if ($previo != 1 || $previo != '1') {
-                                    $sqlInsert = "INSERT INTO accounts_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                     VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','opt_out','bool','{$previo}',1,NULL,NULL,'{$event_id}',NULL)";
+                                    $db->query($sqlInsert);
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','invalid_email','bool','{$previo}',1,NULL,NULL,'{$event_id}',NULL)";
                                     $db->query($sqlInsert);
                                 }
                             } else {
 
-                                $queryB = "UPDATE email_addresses SET opt_out = 0 WHERE id = '{$email_bean['email_address_id']}'";
+                                $queryB = "UPDATE email_addresses SET opt_out = 0 , invalid_email = 0 WHERE id = '{$email_bean['email_address_id']}'";
                                 $result = $db->query($queryB);
 
                                 if ($previo != 0 || $previo != '0') {
-                                    $sqlInsert = "INSERT INTO accounts_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                     VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','opt_out','bool','{$previo}',0,NULL,NULL,'{$event_id}',NULL)";
+                                    $db->query($sqlInsert);
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','invalid_email','bool','{$previo}',0,NULL,NULL,'{$event_id}',NULL)";
                                     $db->query($sqlInsert);
                                 }
                                 //$bean->emailAddress->addresses[$key1]['opt_out'] = 0;
