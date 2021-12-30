@@ -136,16 +136,19 @@
             num_errors = 0;
             if (phoneMobile) {
                 num_errors = num_errors + 1;
+				$('.Telefonom').css('border-color', 'red');
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
             }
             if (phoneHome) {
                 num_errors = num_errors + 1;
+				$('.Telefonoc').css('border-color', 'red');
                 errors['phone_home'] = errors['phone_home'] || {};
                 errors['phone_home'].required = true;
             }
             if (phoneWork) {
                 num_errors = num_errors + 1;
+				$('.Telefonot').css('border-color', 'red');
                 errors['phone_work'] = errors['phone_work'] || {};
                 errors['phone_work'].required = true;
             }
@@ -163,6 +166,8 @@
             duplicado = 0;
             if (this.model.get('phone_mobile') == this.model.get('phone_home') && this.model.get('phone_mobile') != "" && this.model.get('phone_home') != "") {
                 duplicado = duplicado + 1;
+				$('.Telefonom').css('border-color', 'red');
+				$('.Telefonoc').css('border-color', 'red');
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
                 errors['phone_home'] = errors['phone_home'] || {};
@@ -171,6 +176,8 @@
             }
             if (this.model.get('phone_mobile') == this.model.get('phone_work') && this.model.get('phone_mobile') != "" && this.model.get('phone_work') != "") {
                 duplicado = duplicado + 1;
+				$('.Telefonom').css('border-color', 'red');
+				$('.Telefonot').css('border-color', 'red');
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
                 errors['phone_work'] = errors['phone_work'] || {};
@@ -179,6 +186,8 @@
             }
             if (this.model.get('phone_home') == this.model.get('phone_work') && this.model.get('phone_home') != "" && this.model.get('phone_work') != "") {
                 duplicado = duplicado + 1;
+				$('.Telefonoc').css('border-color', 'red');
+				$('.Telefonot').css('border-color', 'red');
                 errors['phone_home'] = errors['phone_home'] || {};
                 errors['phone_home'].required = true;
                 errors['phone_work'] = errors['phone_work'] || {};
@@ -811,6 +820,7 @@
 
     handleCancel: function () {
         this._super("handleCancel");
+		window.cancel = 1;
         //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
         clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
@@ -820,7 +830,6 @@
         clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
         clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
         clasf_sectorial.render();
-
         //Direcciones
         var lead_direcciones = app.utils.deepCopy(this.prev_oDirecciones.prev_direccion);
         this.model.set('lead_direcciones', lead_direcciones);
