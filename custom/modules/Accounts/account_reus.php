@@ -159,7 +159,7 @@ class class_account_reus
                                     $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
                                     $result = $GLOBALS['db']->query($queryC);
                                     // $beantel->registro_reus_c = 1;
-                                    $GLOBALS['log']->fatal("TELEFONO REUS");
+                                    // $GLOBALS['log']->fatal("TELEFONO REUS");
                                     //Establece nuevo registro en tabla de auditoria
                                     if ($telprevio != 1 || $telprevio != '1') {
                                         $sqlInsert = "INSERT INTO accounts_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
@@ -169,7 +169,7 @@ class class_account_reus
                                 } else {
                                     $queryD = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
                                     $result = $GLOBALS['db']->query($queryD);
-                                    $GLOBALS['log']->fatal("TELEFONO NORMAL");
+                                    // $GLOBALS['log']->fatal("TELEFONO NORMAL");
                                     // $beantel->registro_reus_c = 0;
 
                                     if ($telprevio != 0 || $telprevio != '0') {
