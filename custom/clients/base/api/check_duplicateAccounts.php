@@ -210,7 +210,6 @@ SITE;
         $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
-        
         // Asesores
         if ($idMeetings != null) {
             $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['LEASING'];
@@ -234,7 +233,20 @@ SITE;
             $bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
         }
         $bean_account->save();
-         
+
+        // creamos las relaciones en telefono
+        if (!empty($bean_Leads->phone_mobile)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
+        }
+        if (!empty($bean_Leads->phone_home)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
+        }
+        if (!empty($bean_Leads->phone_work)) {
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
+        }
+
+        $bean_account->pendiente_reus_c = ($resp_reus_tel == 3) ? true : false;
+        
         //Campos PB
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_account->id, array('disable_row_level_security' => true));
         $bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
@@ -250,21 +262,6 @@ SITE;
             $bean_Resumen->inegi_macro_c = $bean_Leads->inegi_macro_c;
         }
         $bean_Resumen->save();
-        
-        // creamos las relaciones en telefono
-        if (!empty($bean_Leads->phone_mobile)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
-        }
-        if (!empty($bean_Leads->phone_home)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
-        }
-        if (!empty($bean_Leads->phone_work)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
-        }
-
-        $bean_account->pendiente_reus_c = ($resp_reus_tel == 3 || $resp_reus_mail == 3) ? true : false;
-        $bean_account->save();
-        
 
         return $bean_account;
     }
