@@ -764,9 +764,6 @@
         //Oculta etiqueta de lead_direcciones
         this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
 		//Ocutla telefonos
-		$('[data-name="reus_work"]').hide();
-		$('[data-name="reus_home"]').hide();
-		$('[data-name="reus_mobile"]').hide();
 		$('[data-name="phone_work"]').hide();
 		$('[data-name="phone_home"]').hide();
 		$('[data-name="phone_mobile"]').hide();
