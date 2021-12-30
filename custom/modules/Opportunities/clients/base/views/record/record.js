@@ -2803,10 +2803,14 @@
         var producto_financiero = this.model.get('producto_financiero_c');
         var operacion = this.model.get('tipo_de_operacion_c');
         var status = this.model.get('estatus_c');
+        //Banderas
+        var precalif_L=false;
+        var precalif_CS=false;
 
-        //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if ((producto == 1 || (producto=="2" && (negocio!="2" || negocio!="10"))) && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
-            (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true) {
+        precalif_L=(producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true)? true : false;
+        precalif_CS=(producto=="2" && (negocio!="2" && negocio!="10"))&& (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true ? true : false;
+
+        if(precalif_L || precalif_CS){
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function (data) {
                     if (data.records.length == 0) {
@@ -2832,12 +2836,19 @@
         var producto = this.model.get('tipo_producto_c');
         var negocio = this.model.get('negocio_c');
         var producto_financiero = this.model.get('producto_financiero_c');
-        var operacion = this.model.get('tipo_de_operacion_c');
         var chk = this.model.get('ratificacion_incremento_c');
         var status = this.model.get('estatus_c');
+        //Banderas
+        var precalif_L=false;
+        var precalif_CS=false;
+
+        precalif_L=((check == false || check == undefined) && producto == 1 && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
+        (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true) ? true : false;
+
+        precalif_CS=(producto=="2" && (negocio!="2" && negocio!="10")) && (check == false || check == undefined) && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true ? true : false;
+        
         if (chk != true && status != "K") {
-            if ((check == false || check == undefined) && (producto == 1 || (producto=="2" && (negocio!="2" || negocio!="10"))) && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
-                (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true) {
+            if(precalif_L || precalif_CS){
                 //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
