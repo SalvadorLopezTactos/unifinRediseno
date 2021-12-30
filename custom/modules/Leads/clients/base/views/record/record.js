@@ -6,13 +6,11 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
-        this.model.on('sync', this.readonlyTelefonoREUS, this);
         this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
-        this.readonlyTelefonoREUS();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_work]'] = 'validaSoloNumerosTel';
@@ -437,22 +435,6 @@
             });
 
             this._disableActionsSubpanel();
-        }
-    },
-
-    readonlyTelefonoREUS: function () {
-        
-        /***************************READONLY PARA telefono casa *************************/
-        if (this.model.get('c_registro_reus_c') == true) {
-            $('[data-name="reus_home"]').attr('style', 'pointer-events:none');
-        }
-        /***************************READONLY PARA telefono movil *************************/
-        if (this.model.get('m_registro_reus_c') == true) {
-            $('[data-name="reus_mobile"]').attr('style', 'pointer-events:none');
-        }
-        /***************************READONLY PARA telefono oficina *************************/
-        if (this.model.get('o_registro_reus_c') == true) {
-            $('[data-name="reus_work"]').attr('style', 'pointer-events:none');
         }
     },
 
