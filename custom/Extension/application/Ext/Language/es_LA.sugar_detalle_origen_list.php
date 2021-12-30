@@ -1,5 +1,5 @@
 <?php
- // created: 2021-09-13 16:36:56
+ // created: 2021-12-29 19:25:49
 
 $app_list_strings['detalle_origen_list']=array (
   '' => '',
@@ -88,5 +88,20 @@ $app_list_strings['detalle_origen_list']=array (
   83 => 'Reforma',
   84 => 'Facebook Megri Digital',
   85 => 'Google Megri Digital',
-
+  86 => 'Nauphilius',
+  87 => 'SkydropX',
+  88 => 'Paga Loop',
+  89 => 'LalaMove',
+  90 => 'Delia Clarisa',
+  91 => 'Raymundo Robles',
+  92 => 'Isaac David Chavero',
+  93 => 'Ykaika',
+  94 => 'Jose Lopez Delgadillo',
+  95 => 'Luis Mulhia',
+  96 => 'Alberto Organista',
+  97 => 'Coins',
+  98 => 'CreditBroker',
+  99 => 'Equity Link',
+  100 => 'Ulua Capital',
+  101 => 'DENPRO',
 );
