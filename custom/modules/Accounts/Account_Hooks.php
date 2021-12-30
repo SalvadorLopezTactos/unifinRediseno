@@ -1222,7 +1222,7 @@ where rfc_c = '{$bean->rfc_c}' and
             if (!empty($bean_user)) {
                 $user_alta_clientes = $bean_user->tct_alta_clientes_chk_c;
             }
-            
+
             for ($i = 0; $i < $count; $i++) {
                 //$GLOBALS['log']->fatal($current_prod);
                 $beanprod = BeanFactory::newBean($module);
@@ -1255,18 +1255,18 @@ where rfc_c = '{$bean->rfc_c}' and
                     $updateExecute = $db->query($update);
                 }
                 //CASO ESPECIAL DE USUARIOS CON EL CHECK ACTIVO DE ALTA CLIENTES
-                if ($user_alta_clientes == true) {        
+                if ($user_alta_clientes == true) {
                     if ($key_productos[$i] != '1') { //SI ES DIFERENTE DEL PRODUCTO LEASING
                         $beanprod->tipo_cuenta = "4"; //4-Persona
                         $beanprod->subtipo_cuenta = ""; //Vacio
                         $beanprod->tipo_subtipo_cuenta = "PERSONA";
-                    
+
                     } else {
                         //SI ES PRODUCTO LEASING
                         $beanprod->tipo_cuenta = "3"; //3-Cliente
                         $beanprod->subtipo_cuenta = "11"; //11-Venta Activo
                         $beanprod->tipo_subtipo_cuenta = "CLIENTE VENTA ACTIVO";
-                    }                                        
+                    }
                 }
 
                 //Asignación de usuario
@@ -1529,7 +1529,7 @@ where rfc_c = '{$bean->rfc_c}' and
                     //Fetch related beans
                     $solicitudes = $bean->opportunities->getBeans();
                     if (!empty($solicitudes)) {
-                        $available_financiero=array("39","50","49","48","51");
+                        $available_financiero=array("39","50","49","48","51","77");
                         foreach ($solicitudes as $sol) {
                             //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
                             if (in_array($sol->producto_financiero_c,$available_financiero ) && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {## cambiar por pPF
