@@ -134,7 +134,7 @@ class NotificacionDirector
                 if(count($rutasAdjuntos)>0){
                     $idRM=$bean->user_id1_c;
                     $Valor= "569246c7-da62-4664-ef2a-5628f649537e";
-                    $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm,$idRM,$Valor);
+                    $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm,$idRM,$Valor,$producto);
 
                     $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
                     //Enviando correo a director de solicitud con copia  a director regional leasing
@@ -181,6 +181,7 @@ class NotificacionDirector
         $idAsesor=$bean->assigned_user_id;
         $nombreAsesor=$bean->assigned_user_name;
         $producto=$bean->tipo_producto_c;
+        $negocio=$bean->negocio_c;
 
         $infoDirector=$bean->director_solicitud_c;
         $idDirector="";
@@ -189,7 +190,7 @@ class NotificacionDirector
             $idDirector=$infoDirectorSplit[0];
         }
         $GLOBALS['log']->fatal("Evalua sea Vobo o Cancelada");
-        if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){//Solicitud cancelada
+        if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && ($producto=='1' || ($producto=='2' && ($negocio!='2' || $negocio!='10')))){//Solicitud cancelada
             $GLOBALS['log']->fatal("Condicion 1, estatus K");
             //Comprobando el fetched_row
             //Enviar notificación al asesor asignado
@@ -288,7 +289,7 @@ class NotificacionDirector
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }elseif($estatus=='PE'&& $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
+        }elseif($estatus=='PE'&& $bean->assigned_user_id!="" && $current_user->id==$idDirector && ($producto=='1'|| ($producto=='2' && ($negocio!='2' || $negocio!='10')))){ //Solicitud Aprobada
 
             //Enviar notificación al asesor asignado
             $GLOBALS['log']->fatal("Entra condicion 2, enviar notificacion al Director asignado (estatus PE)");
@@ -702,12 +703,16 @@ class NotificacionDirector
        }
     }   
 
-    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm=null,$idRM,$Valor){
+    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm=null,$idRM,$Valor,$producto){
+        global $app_list_strings;
+
+        //Añadir validacion para envio de producto (no etiqueta)
+        $etiqueta= $app_list_strings['tipo_producto_list'][$producto];
 
         if ($idRM!=$Valor && !empty($nombre_rm)){      
-            $mensaje='<br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> ; se solicita su aprobación y validación de participación del asesor RM <b>'.$nombre_rm.'.</b>';  
+            $mensaje='<br><br>Se le informa que se ha generado una solicitud de '.$etiqueta. ' para la cuenta: <b>'. $nombreCuenta.'</b> ; se solicita su aprobación y validación de participación del asesor RM <b>'.$nombre_rm.'.</b>';  
         }else{
-            $mensaje='<br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación.'; 
+            $mensaje='<br><br>Se le informa que se ha generado una solicitud de '.$etiqueta. ' para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación.'; 
         }
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>'.
                 $mensaje.'
@@ -728,6 +733,7 @@ class NotificacionDirector
     }
 
     public function estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatus,$linkSolicitud){
+        
         $mensaje="";
         if($estatus=="Autorizada"){
             $estatus="cuenta con el VoBo del director de producto";

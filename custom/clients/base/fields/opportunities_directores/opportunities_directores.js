@@ -74,6 +74,8 @@
     _render: function () {
         //Obteniendo valor de campo auxiliar que guarda informacion del director
         var infoDirector=this.model.get('director_solicitud_c');
+        var producto = this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
         if(infoDirector!=null && infoDirector!=""){
             var res = infoDirector.split(",");
             this.directorSolicitud=res[1];
@@ -85,7 +87,7 @@
 
         if(this.view.action!="create"){
             if(this.model.get('tipo_producto_c')!=undefined){
-                if(this.model.get('tipo_producto_c')!='1' || (this.model.get('negocio_c')!='5' && this.model.get('producto_financiero_c')!='' && this.model.get('producto_financiero_c')!='0')){ //Tipo 1 = LEASING
+                if((producto!='1' || (producto!='2' && (negocio=='2' || negocio=='10'))) || (negocio!='5' && this.model.get('producto_financiero_c')!='' && this.model.get('producto_financiero_c')!='0')){ //Tipo 1 = LEASING
                     $('[data-type="opportunities_directores"]').hide();
                 }else{
                     if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {

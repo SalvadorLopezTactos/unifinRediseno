@@ -261,7 +261,9 @@
     muestraOcultaCampoDirector: function () {
 
         if (this.model.get('tipo_producto_c') != undefined) {
-            if (this.model.get('tipo_producto_c') != '1' && this.model.get('negocio_c') != '5' && this.model.get('producto_financiero_c') != '' && this.model.get('producto_financiero_c') != '0') { //Tipo 1 = LEASING
+            var producto = this.model.get('tipo_producto_c');
+            var negocio = this.model.get('negocio_c');
+            if ((producto != '1' || (producto!="2" && (negocio=="2" || negocio=="10"))) && this.model.get('negocio_c') != '5' && this.model.get('producto_financiero_c') != '' && this.model.get('producto_financiero_c') != '0') { //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
                 $('[data-type="asesor_rm_c"]').hide();
             } else {
@@ -658,8 +660,10 @@
     },
 
     evaluaCampoSolicitudVobo: function () {
+        var producto = this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
 
-        if (this.model.get('tipo_producto_c') == '1' && this.model.get('negocio_c') == '5' && this.model.get('producto_financiero_c') == '0' && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0))) {
+        if ((producto == '1' || (producto=="2" && (negocio!="2" || negocio!="10"))) && negocio == '5' && this.model.get('producto_financiero_c') == '0' && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0))) {
             $('[data-name="vobo_descripcion_txa_c"]').show();
             if (this.model.get('director_notificado_c')) {
                 //Se establece como solo lectura el campo
@@ -678,7 +682,8 @@
     },
 
     evaluaCampoEnviarNotificacion: function () {
-
+        var producto = this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
         //$('span[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
         if (this.model.get('director_notificado_c')) {
             //Se establece como solo lectura el campo
@@ -689,7 +694,7 @@
             $('[data-name="doc_scoring_chk_c"]').attr('style', '');
         }
 
-        if (this.model.get('tipo_producto_c') == '1' && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0))) {
+        if ((producto == '1' || (producto=="2" && (negocio!="2" || negocio!="10"))) && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0))) {
             $('[data-name="doc_scoring_chk_c"]').show();
         } else {
 
@@ -2800,7 +2805,7 @@
         var status = this.model.get('estatus_c');
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if (producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
+        if ((producto == 1 || (producto=="2" && (negocio!="2" || negocio!="10"))) && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
             (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function (data) {
@@ -2831,7 +2836,7 @@
         var chk = this.model.get('ratificacion_incremento_c');
         var status = this.model.get('estatus_c');
         if (chk != true && status != "K") {
-            if ((check == false || check == undefined) && producto == 1 && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
+            if ((check == false || check == undefined) && (producto == 1 || (producto=="2" && (negocio!="2" || negocio!="10"))) && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
                 (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true) {
                 //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
@@ -3000,11 +3005,13 @@
         $('[name="vobo_leasing"]').hide();
         $('[name="rechazo_leasing"]').hide();
         var infoDirector = this.model.get('director_solicitud_c');
+        var producto = this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
         if (infoDirector != null && infoDirector != "") {
             var res = infoDirector.split(",");
             this.directorSolicitudId = res[0];
         }
-        if (app.user.attributes.id == this.directorSolicitudId && this.model.get('tipo_producto_c') == "1" && (this.model.get('tct_etapa_ddw_c') == "SI" && this.model.get('estatus_c')!='K' && this.model.get('estatus_c')!='N')
+        if (app.user.attributes.id == this.directorSolicitudId && (producto == "1" || (producto=="2" && (negocio!="2" || negocio!="10"))) && (this.model.get('tct_etapa_ddw_c') == "SI" && this.model.get('estatus_c')!='K' && this.model.get('estatus_c')!='N')
             && this.model.get('doc_scoring_chk_c') == true && (this.model.get("fecha_validacion_c") == "" || this.model.get("fecha_validacion_c") == null)) {
             $('[name="vobo_leasing"]').removeClass('hidden');
             $('[name="rechazo_leasing"]').removeClass('hidden');
@@ -3258,8 +3265,9 @@
         var producto = this.model.get('tipo_producto_c');
         var status = this.model.get('estatus_c');
         var cuenta = this.model.get('account_id');
+        var negocio = this.model.get('negocio_c');
 
-        if (producto == "1" && status != 'K') {
+        if ((producto == "1" || (producto=="2" && (negocio!="2" || negocio!="10"))) && status != 'K') {
             app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
                 success: _.bind(function (data) {
                     if (data == '1') {
@@ -3284,8 +3292,10 @@
     },
 
     alertaDirectorNotificacion: function (fields, errors, callback) {
+        var producto = this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
 
-        if (this.model.get('ratificacion_incremento_c') == true && this.model.get('tipo_producto_c') == '1' && this.model.get('tipo_de_operacion_c') != 'RATIFICACION_INCREMENTO' && Object.keys(errors).length == 0
+        if (this.model.get('ratificacion_incremento_c') == true && (producto == '1' || (producto=="2" && (negocio!="2" || negocio!="10"))) && this.model.get('tipo_de_operacion_c') != 'RATIFICACION_INCREMENTO' && Object.keys(errors).length == 0
             && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('estatus_c') != "K" && this.model.get('estatus_c') != "N" && this.model.get('admin_cartera_c') != true) {
             app.alert.show("alert_director_ratificacion", {
                 level: "info",
@@ -3301,7 +3311,9 @@
     controlVistaCamposPrecalificacion: function () {
 
         if (this.model.get('tipo_producto_c') != undefined) {
-            if ((this.model.get('tipo_producto_c') != '1' || (this.model.get('negocio_c') != '5' && this.model.get('producto_financiero_c') != '' && this.model.get('producto_financiero_c') != '0')) || banderaExcluye.check.includes(1)) {
+            var producto = this.model.get('tipo_producto_c');
+            var negocio = this.model.get('negocio_c');
+            if (((producto != '1' || (producto!="2" && (negocio=="2" || negocio=="10"))) || (negocio != '5' && this.model.get('producto_financiero_c') != '' && this.model.get('producto_financiero_c') != '0')) || banderaExcluye.check.includes(1)) {
                 $('[data-name="opportunities_directores"]').hide();
                 $('[data-name="vobo_descripcion_txa_c"]').hide();
                 $('[data-name="doc_scoring_chk_c"]').hide();
