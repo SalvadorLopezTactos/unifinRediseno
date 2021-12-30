@@ -2070,6 +2070,7 @@
             var cuenta = this.model.get('account_id');
 
             if (operacion == 'LINEA_NUEVA' && etapa == "SI" && status != 'K') {
+                //se manda el producto 1 constante ya que no se tiene producto CS como producto en la cuenta
                 app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/1"), null, {
                     success: _.bind(function (data) {
                         if (data == '1') {
