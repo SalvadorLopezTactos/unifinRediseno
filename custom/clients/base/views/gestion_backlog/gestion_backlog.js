@@ -461,6 +461,10 @@
         var contador_lista = 0;
         var restantes = $('.registroBL').length;
 
+        //Arreglo que guarda valores ids de backlogs para guardar en tabla de auditoria
+        var ids_bl_audit={
+            "backlogs_audit":[]
+        }
         //Recorriendo los registros de la tabla para armar la petición BULK
         $('.registroBL').each(function (i, obj) {
 
@@ -482,6 +486,8 @@
             restantes--;
 
             if (concat != concatOriginal) {
+
+                ids_bl_audit["backlogs_audit"].push(id_bl);
 
                 var data = "{\"etapa_c\": \"test123\"}";
                 peticion["requests"][contador] = {
@@ -531,7 +537,7 @@
 
                         num_peticion_actual++;
 
-                        app.alert.dismiss('save-Backlog');
+                        //app.alert.dismiss('save-Backlog');
 
                         app.alert.show('backlogs_actualizados_correctos', {
                             level: 'success',
@@ -551,6 +557,19 @@
                 });
             }
 
+            //Se agrega petición para api custom que actualizará valores en la tabla audit
+            if(ids_bl_audit["backlogs_audit"].length>0){
+
+                //Llamada a api
+                app.api.call('create', app.api.buildURL('SetAuditBacklogs', null, null,ids_bl_audit ), null, {
+                    success: _.bind(function (data) {
+
+                        app.alert.dismiss('save-Backlog');
+
+                    }, self)
+                });
+
+            }
         } else {
 
             App.alert.show('backlog_sin_cambios', {
