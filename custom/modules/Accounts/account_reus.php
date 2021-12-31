@@ -73,6 +73,7 @@ class class_account_reus
                                     $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                     VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','opt_out','bool','{$previo}',1,NULL,NULL,'{$event_id}',NULL)";
                                     $db->query($sqlInsert);
+                                    $id_u_audit = create_guid();
                                     $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                     VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','invalid_email','bool','{$previo}',1,NULL,NULL,'{$event_id}',NULL)";
                                     $db->query($sqlInsert);
@@ -86,6 +87,7 @@ class class_account_reus
                                     $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                     VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','opt_out','bool','{$previo}',0,NULL,NULL,'{$event_id}',NULL)";
                                     $db->query($sqlInsert);
+                                    $id_u_audit = create_guid();
                                     $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                     VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','invalid_email','bool','{$previo}',0,NULL,NULL,'{$event_id}',NULL)";
                                     $db->query($sqlInsert);
