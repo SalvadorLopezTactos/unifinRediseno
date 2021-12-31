@@ -20,6 +20,7 @@
         var etapa= this.model.get('tct_etapa_ddw_c');
         var subetapa=this.model.get('estatus_c');
         var producto=this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
 
       //Validaciones para asignar etapas de la solicitud en formado Pipeline SOLICITUD INICIAL
         if (etapa=="SI"){
@@ -28,7 +29,7 @@
             //Añade sub etapa (solo para Leasing)
             if(typeof banderaExcluye !="undefined"){
 
-                if (producto==1 && subetapa==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
+                if ((producto==1 || (producto=="2" && (negocio!="2" || negocio!="10"))) && subetapa==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
                     $("#SE1").removeClass('ocult');
                     $('#SE1').addClass('alerta');
                     $("#SE1").html("En validación comercial");

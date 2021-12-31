@@ -5,22 +5,35 @@ class class_account_reus
 {
     public function func_account_reus($bean = null, $event = null, $args = null)
     {
+        global $db;
+
         $errorp = $this->func_valida_correos($bean);
         $errorp = $this->func_valida_telefonos($bean);
 
-        if(!$errorp){
-            $bean->pendiente_reus_c = 1;
-        }else{
-            $bean->pendiente_reus_c = 0;
+        if (!$errorp) {
+
+            $sqlA = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '{$bean->id}'";
+            $result = $db->query($sqlA);
+            // $bean->pendiente_reus_c = 1;
+            // $GLOBALS['log']->fatal("CHECK PENDIENTE SERVICIO REUS");
+        } else {
+            $sqlB = "UPDATE accounts_cstm SET pendiente_reus_c = 0 WHERE id_c = '{$bean->id}'";
+            $result = $db->query($sqlB);
+            // $bean->pendiente_reus_c = 0;
+            // $GLOBALS['log']->fatal("UNCHECK PENDIENTE SERVICIO REUS");
         }
     }
 
     public function func_valida_correos($bean = null)
     {
         $noresp = null;
-        global $sugar_config, $db;
+        global $sugar_config, $db, $current_user;
         $mailCuenta = false;
-        //API DHW REUS PARA CORREOS 
+        $id_u_audit = create_guid();
+        $date = TimeDate::getInstance()->nowDb();
+        $event_id = create_guid();
+
+        //API DHW REUS PARA CORREOS
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_correos'] . "?valor=";
         //SE OBTIENE LOS CORREOS DE LA CUENTA
@@ -35,28 +48,49 @@ class class_account_reus
         if ($mailCuenta == true) {
 
             $host = substr($host, 0, -1);
-            //$GLOBALS['log']->fatal($host);
+            // $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
-            //$resultado = '[{"valor":"caro1.huesca@gmail.com","existe":"NO"},{"valor":"caro.huesca@gmail.com","existe":"SI"},{"valor":"caro3.huesca@gmail.com","existe":"NO"},{"valor":"caro.huesca@gmail.com","existe":"SI"},{"valor":"0caro.huesca@gmail.com","existe":"NO"}]';
-            //$resultado = json_decode($resultado, true);
             
             $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
 
             if ($resultado != "" && $resultado != null) {
-                //RESULTADO DEL SERVICIO DWH REUS 
+                //RESULTADO DEL SERVICIO DWH REUS
                 foreach ($resultado as $key => $val) {
                     //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS
-                    foreach ($bean->emailAddress->addresses as $key1=>$email_bean){
-                        if ($email_bean['email_address'] == $val['valor'] ) {
-                            //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS 
+                    foreach ($bean->emailAddress->addresses as $key1 => $email_bean) {
+
+                        if ($email_bean['email_address'] == $val['valor']) {
+                            //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS
+                            $previo = $email_bean['opt_out'];
+
                             if ($val['existe'] == 'SI') {
-                                //$queryA = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
-                                //$result = $db->query($queryA);
-                                $bean->emailAddress->addresses[$key1]['opt_out'] = 1;
+
+                                $queryA = "UPDATE email_addresses SET opt_out = 1 , invalid_email = 1 WHERE id = '{$email_bean['email_address_id']}'";
+                                $result = $db->query($queryA);
+                                // $idmail = $emailAddress['email_address_id'];
+                                //$bean->emailAddress->addresses[$key1]['opt_out'] = 1;
+                                if ($previo != 1 || $previo != '1') {
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','opt_out','bool','{$previo}',1,NULL,NULL,'{$event_id}',NULL)";
+                                    $db->query($sqlInsert);
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','invalid_email','bool','{$previo}',1,NULL,NULL,'{$event_id}',NULL)";
+                                    $db->query($sqlInsert);
+                                }
                             } else {
-                                //$queryA1 = "UPDATE email_addresses SET opt_out = 0 WHERE id = '" . $emailAddress['email_address_id'] . "';";
-                                //$result = $db->query($queryA1);
-                                $bean->emailAddress->addresses[$key1]['opt_out'] = 0; 
+
+                                $queryB = "UPDATE email_addresses SET opt_out = 0 , invalid_email = 0 WHERE id = '{$email_bean['email_address_id']}'";
+                                $result = $db->query($queryB);
+
+                                if ($previo != 0 || $previo != '0') {
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','opt_out','bool','{$previo}',0,NULL,NULL,'{$event_id}',NULL)";
+                                    $db->query($sqlInsert);
+                                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                    VALUES ('{$id_u_audit}','{$email_bean['email_address_id']}','{$date}','{$current_user->id}','invalid_email','bool','{$previo}',0,NULL,NULL,'{$event_id}',NULL)";
+                                    $db->query($sqlInsert);
+                                }
+                                //$bean->emailAddress->addresses[$key1]['opt_out'] = 0;
                             }
                         }
                     }
@@ -64,11 +98,11 @@ class class_account_reus
                 $noresp = true;
             } else {
                 //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-                //$queryB = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '" . $bean->id . "';";
-                //$result = $db->query($queryB);
                 $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
                 $noresp = false;
             }
+        } else {
+            $noresp = true;
         }
         return $noresp;
     }
@@ -76,7 +110,10 @@ class class_account_reus
     public function func_valida_telefonos($bean = null)
     {
         $noresp = null;
-        global $sugar_config, $db;
+        global $sugar_config, $db, $current_user;
+        $id_u_audit = create_guid();
+        $event_id = create_guid();
+        $date = TimeDate::getInstance()->nowDb();
         $phoneCuenta = false;
         //API DHW REUS PARA TELEFONOS 
         $callApi = new UnifinAPI();
@@ -97,7 +134,7 @@ class class_account_reus
         if ($phoneCuenta == true) {
 
             $host = substr($host, 0, -1);
-            //$GLOBALS['log']->fatal($host);
+            // $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
             //$resultado = '[{"valor":"5518504488","existe":"SI"},{"valor":"5569783395","existe":"NO"}]';
             //$resultado = json_decode($resultado);
@@ -112,20 +149,34 @@ class class_account_reus
                         $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
 
                         foreach ($relatedTelefonos as $telefono) {
+
                             if ($telefono->telefono == $val['valor']) {
-                                //recupera bean de telefono
-                                $beantel = BeanFactory::retrieveBean('tel_telefonos', $telefono->id);
+
+                                $telprevio = $telefono->registro_reus_c;
+
                                 if ($val['existe'] == 'SI') {
 
-                                    //$queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
-                                    //$result = $GLOBALS['db']->query($queryC);
-                                    $beantel->registro_reus_c = 1;
-                                    $beantel->save();
+                                    $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
+                                    $result = $GLOBALS['db']->query($queryC);
+                                    // $beantel->registro_reus_c = 1;
+                                    // $GLOBALS['log']->fatal("TELEFONO REUS");
+                                    //Establece nuevo registro en tabla de auditoria
+                                    if ($telprevio != 1 || $telprevio != '1') {
+                                        $sqlInsert = "INSERT INTO accounts_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                        VALUES ('{$id_u_audit}','{$telefono->id}','{$date}','{$current_user->id}','registro_reus_c','bool','{$telprevio}',1,NULL,NULL,'{$event_id}',NULL)";
+                                        $db->query($sqlInsert);
+                                    }
                                 } else {
-                                    //$queryC1 = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
-                                    //$result = $GLOBALS['db']->query($queryC1);
-                                    $beantel->registro_reus_c = 0;
-                                    $beantel->save();
+                                    $queryD = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
+                                    $result = $GLOBALS['db']->query($queryD);
+                                    // $GLOBALS['log']->fatal("TELEFONO NORMAL");
+                                    // $beantel->registro_reus_c = 0;
+
+                                    if ($telprevio != 0 || $telprevio != '0') {
+                                        $sqlInsert = "INSERT INTO accounts_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                                        VALUES ('{$id_u_audit}','{$telefono->id}','{$date}','{$current_user->id}','registro_reus_c','bool','{$telprevio}',0,NULL,NULL,'{$event_id}',NULL)";
+                                        $db->query($sqlInsert);
+                                    }
                                 }
                             }
                         }
@@ -134,11 +185,11 @@ class class_account_reus
                 $noresp = true;
             } else {
                 //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
-                //$queryD = "UPDATE accounts_cstm SET pendiente_reus_c = 1 WHERE id_c = '" . $bean->id . "';";
-                //$result = $db->query($queryD);
-                $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS');
+                $GLOBALS['log']->fatal('SERVICIO DWH REUS CUENTAS NO RESPONDE - TELEFONOS');
                 $noresp = false;
             }
+        } else {
+            $noresp = true;
         }
         return $noresp;
     }

@@ -341,16 +341,19 @@
             num_errors = 0;
             if (phoneMobile) {
                 num_errors = num_errors + 1;
+				$('.Telefonom').css('border-color', 'red');
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
             }
             if (phoneHome) {
                 num_errors = num_errors + 1;
+				$('.Telefonoc').css('border-color', 'red');
                 errors['phone_home'] = errors['phone_home'] || {};
                 errors['phone_home'].required = true;
             }
             if (phoneWork) {
                 num_errors = num_errors + 1;
+				$('.Telefonot').css('border-color', 'red');
                 errors['phone_work'] = errors['phone_work'] || {};
                 errors['phone_work'].required = true;
             }
@@ -368,6 +371,8 @@
             duplicado = 0;
             if (this.model.get('phone_mobile') == this.model.get('phone_home') && this.model.get('phone_mobile') != undefined && this.model.get('phone_home') != undefined) {
                 duplicado = duplicado + 1;
+				$('.Telefonom').css('border-color', 'red');
+				$('.Telefonoc').css('border-color', 'red');
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
                 errors['phone_home'] = errors['phone_home'] || {};
@@ -376,6 +381,8 @@
             }
             if (this.model.get('phone_mobile') == this.model.get('phone_work') && this.model.get('phone_mobile') != undefined && this.model.get('phone_work') != undefined) {
                 duplicado = duplicado + 1;
+				$('.Telefonom').css('border-color', 'red');
+				$('.Telefonot').css('border-color', 'red');
                 errors['phone_mobile'] = errors['phone_mobile'] || {};
                 errors['phone_mobile'].required = true;
                 errors['phone_work'] = errors['phone_work'] || {};
@@ -384,6 +391,8 @@
             }
             if (this.model.get('phone_home') == this.model.get('phone_work') && this.model.get('phone_home') != undefined && this.model.get('phone_work') != undefined) {
                 duplicado = duplicado + 1;
+				$('.Telefonoc').css('border-color', 'red');
+				$('.Telefonot').css('border-color', 'red');
                 errors['phone_home'] = errors['phone_home'] || {};
                 errors['phone_home'].required = true;
                 errors['phone_work'] = errors['phone_work'] || {};
@@ -754,7 +763,10 @@
         $('[data-name="homonimo_c"]').hide();
         //Oculta etiqueta de lead_direcciones
         this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
-
+		//Ocutla telefonos
+		$('[data-name="phone_work"]').hide();
+		$('[data-name="phone_home"]').hide();
+		$('[data-name="phone_mobile"]').hide();
     },
 
     fechaAsignacion: function () {

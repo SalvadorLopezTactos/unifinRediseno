@@ -49,12 +49,14 @@ class class_lead_reus
                         if ($email_bean['email_address'] == $val['valor'] ) {
                             //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS 
                             if ($val['existe'] == 'SI') {
-                //$query1 = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
+                                //$query1 = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
                                 $bean->emailAddress->addresses[$key1]['opt_out'] = 1;
+                                $bean->emailAddress->addresses[$key1]['invalid_email'] = 1;
                             } else {
-                //$queryA1 = "UPDATE email_addresses SET opt_out = 0 WHERE id = '" . $emailAddress['email_address_id'] . "';";
+                                //$queryA1 = "UPDATE email_addresses SET opt_out = 0 WHERE id = '" . $emailAddress['email_address_id'] . "';";
                                 //$result = $db->query($queryA1);
                                 $bean->emailAddress->addresses[$key1]['opt_out'] = 0;
+                                $bean->emailAddress->addresses[$key1]['invalid_email'] = 0;
                             }
                         }
                     }
@@ -67,6 +69,8 @@ class class_lead_reus
                 $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
                 $noresp = false;
             }
+        }else{
+            $noresp = true;
         }
         return $noresp;
     }
@@ -79,34 +83,34 @@ class class_lead_reus
         //API DHW REUS PARA TELEFONOS 
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
-        //OBTENEMOS LOS TELEFONOS DEL LEAD
-        if ($bean->phone_mobile != "") {
-            $host .= $bean->phone_mobile;
-            $phoneLead = true;
-        }
-        if ($bean->phone_mobile != "" && $bean->phone_home != "") {
-            $host .= "," . $bean->phone_home;
-            $phoneLead = true;
-        } else {
 
-            if ($bean->phone_home != "") {
-                $host .= $bean->phone_home;
+        if ($bean->phone_mobile != "" || $bean->phone_home != "" || $bean->phone_work != "") {
+            //OBTENEMOS LOS TELEFONOS DEL LEAD
+            if ($bean->phone_mobile != "") {
+                $host .= $bean->phone_mobile;
                 $phoneLead = true;
             }
-        }
-        if ($bean->phone_mobile == "" && $bean->phone_home == "" && $bean->phone_work != "") {
-            $host .= $bean->phone_work;
-            $phoneLead = true;
-        } else {
-
-            if ($bean->phone_work != "") {
-                $host .= "," . $bean->phone_work;
+            if ($bean->phone_mobile != "" && $bean->phone_home != "") {
+                $host .= "," . $bean->phone_home;
                 $phoneLead = true;
+            } else {
+    
+                if ($bean->phone_home != "") {
+                    $host .= $bean->phone_home;
+                    $phoneLead = true;
+                }
             }
-        }
-
-        if ($phoneLead == true) {
-
+            if ($bean->phone_mobile == "" && $bean->phone_home == "" && $bean->phone_work != "") {
+                $host .= $bean->phone_work;
+                $phoneLead = true;
+            } else {
+    
+                if ($bean->phone_work != "") {
+                    $host .= "," . $bean->phone_work;
+                    $phoneLead = true;
+                }
+            }
+    
             //$GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
             //$resultado = '[{"valor":"5518504488","existe":"SI"},{"valor":"5569783395","existe":"NO"}]';
@@ -125,7 +129,7 @@ class class_lead_reus
                             //$result = $db->query($query3);
                             $bean->m_registro_reus_c = 1;
                         } else {
-                            //$queryB3 = "UPDATE leads_cstm SET m_registro_reus_c = 0 WHERE id_c = '" . $bean->id . "';";
+                            //$queryB3 = "UPDATE leads_cstm SET m_registro_reus_c = 0 WHERE id_c = '" . $bean->i"';";
                             //$result = $db->query($queryB3);
                             $bean->m_registro_reus_c = 0;
                         }
@@ -137,7 +141,7 @@ class class_lead_reus
                             //$result = $db->query($query4);
                             $bean->c_registro_reus_c = 1;
                         } else {
-                            //$queryC4 = "UPDATE leads_cstm SET c_registro_reus_c = 0 WHERE id_c = '" . $bean->id . "';";
+                            //$queryC4 = "UPDATE leads_cstm SET c_registro_reus_c = 0 WHERE id_c = '" . $bean->i"';";
                             //$result = $db->query($queryC4);
                             $bean->c_registro_reus_c = 0;
                         }
@@ -149,7 +153,7 @@ class class_lead_reus
                             //$result = $db->query($query5);
                             $bean->o_registro_reus_c = 1;
                         } else {
-                            //$queryD5 = "UPDATE leads_cstm SET o_registro_reus_c = 0 WHERE id_c = '" . $bean->id . "';";
+                            //$queryD5 = "UPDATE leads_cstm SET o_registro_reus_c = 0 WHERE id_c = '" . $bean->i"';";
                             //$result = $db->query($queryD5);
                             $bean->o_registro_reus_c = 0;
                         }
@@ -163,7 +167,10 @@ class class_lead_reus
                 $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS');
                 $noresp = false;
             }
+        }else{
+            $noresp = true;
         }
+            
         return $noresp;
     }
 }

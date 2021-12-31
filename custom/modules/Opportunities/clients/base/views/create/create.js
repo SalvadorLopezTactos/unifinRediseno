@@ -2059,15 +2059,19 @@
     },
 
     setValidacionComercial: function (fields, errors, callback) {
-        if (this.model.get('tipo_producto_c') == 1 && (this.model.get('negocio_c') == 5 || this.model.get('negocio_c') == 3) && (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == "0") && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
+        var producto = this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
+        var prod_financiero=this.model.get('producto_financiero_c');
+        var etapa = this.model.get('tct_etapa_ddw_c');
+        
+        if (((producto== 1 && (negocio == 5 || negocio == 3) && (prod_financiero == "" || prod_financiero == "0")) || (producto=="2" && (negocio!="2" || negocio!="10"))) && etapa == "SI" && $.isEmptyObject(errors)) {
             var operacion = this.model.get('tipo_de_operacion_c');
-            var producto = this.model.get('tipo_producto_c');
-            var etapa = this.model.get('tct_etapa_ddw_c');
             var status = this.model.get('estatus_c');
             var cuenta = this.model.get('account_id');
 
-            if (producto == "1" && operacion == 'LINEA_NUEVA' && etapa == "SI" && status != 'K') {
-                app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
+            if (operacion == 'LINEA_NUEVA' && etapa == "SI" && status != 'K') {
+                //se manda el producto 1 constante ya que no se tiene producto CS como producto en la cuenta
+                app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/1"), null, {
                     success: _.bind(function (data) {
                         if (data == '1') {
                             console.log('Recupera check excluye');
