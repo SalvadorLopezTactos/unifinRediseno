@@ -83,8 +83,8 @@
         var leadid = this.model.get('id');
         vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
         _.extend(this, vicidial);
-        if (tel_usr != '' || tel_usr != null) {
-            if (tel_client != '' || tel_client != null) {
+        if (tel_usr != '' && tel_usr != null) {
+            if (tel_client != '' && tel_client != null) {
                 context = this;
                 app.alert.show('do-call', {
                     level: 'confirmation',
@@ -98,7 +98,7 @@
                 app.alert.show('error_tel_client', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                    messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefónico</b>.'
                 });
             }
         } else {
