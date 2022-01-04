@@ -134,6 +134,7 @@ class NotificacionDirector
                 if(count($rutasAdjuntos)>0){
                     $idRM=$bean->user_id1_c;
                     $Valor= "569246c7-da62-4664-ef2a-5628f649537e";
+                    $producto=$bean->tipo_producto_c;
                     $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm,$idRM,$Valor,$producto);
 
                     $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
@@ -708,7 +709,7 @@ class NotificacionDirector
 
         //Añadir validacion para envio de producto (no etiqueta)
         $etiqueta= $app_list_strings['tipo_producto_list'][$producto];
-
+        //$GLOBALS['log']->fatal("Valor de Producto a Notificacion :" .$etiqueta);
         if ($idRM!=$Valor && !empty($nombre_rm)){      
             $mensaje='<br><br>Se le informa que se ha generado una solicitud de '.$etiqueta. ' para la cuenta: <b>'. $nombreCuenta.'</b> ; se solicita su aprobación y validación de participación del asesor RM <b>'.$nombre_rm.'.</b>';  
         }else{
