@@ -15,7 +15,7 @@ class actualizaREUS extends SugarApi
                 //request type
                 'reqType' => 'POST',
                 //set authentication
-                'noLoginRequired' => true,
+                'noLoginRequired' => false,
                 //endpoint path
                 'path' => array('actualizaReus'),
                 //endpoint variables
@@ -40,7 +40,8 @@ class actualizaREUS extends SugarApi
         $correosReus = $args['correosReus'];
         $correosNoReus = $args['correosNoReus'];
 
-        /*if(count($telefonosReus)){
+        /*
+        if(count($telefonosReus)){
             $GLOBALS['log']->fatal("telefonosReus: " . print_r($telefonosReus, true));
         
         }
@@ -49,14 +50,15 @@ class actualizaREUS extends SugarApi
         
         }
         if(count($correosReus)){
-            $GLOBALS['log']->fatal("correosReus: " . print_r($correosReus, true));
-        
+            //$GLOBALS['log']->fatal("correosReus: " . print_r($correosReus, true));
+            actualiza_email($module , $emails, $reus)
         }
         if(count($correosNoReus)){
-            $GLOBALS['log']->fatal("correosNoReus: " . print_r($correosNoReus, true));
+            //$GLOBALS['log']->fatal("correosNoReus: " . print_r($correosNoReus, true));
+            actualiza_email($module , $emails, $reus)
+        }
+        */ 
 
-        }*/
-        
         $salida["estado"] = 200;
         $salida["detalle"] = "CRM Actualizado Correctamente";
 
