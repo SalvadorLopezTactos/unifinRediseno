@@ -421,7 +421,7 @@ class NotificacionDirector
         $GLOBALS['log']->fatal("Valor Status Opp: ".$bean->estatus_c);
         $GLOBALS['log']->fatal("Valor Producto: " .$bean->tipo_producto_c);
         $mailbossRM_acc=array();
-        if ($bean->director_notificado_c==1 && $bean->doc_scoring_chk_c==1 && $bean->vobo_dir_c==1 && $bean->estatus_c=='1' && ($bean->tipo_producto_c=="1" || ($bean->tipo_producto_c=='2'){
+        if ($bean->director_notificado_c==1 && $bean->doc_scoring_chk_c==1 && $bean->vobo_dir_c==1 && $bean->estatus_c=='1' && ($bean->tipo_producto_c=="1" || $bean->tipo_producto_c=='2')){
             //Notificacion 1.-
             //Validacion para enviar notificacion al asesor RM asignado a la opp
             //obtiene el bean de la cuenta y el valor del asesor RM
