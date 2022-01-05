@@ -15,7 +15,7 @@ class actualizaREUS extends SugarApi
                 //request type
                 'reqType' => 'POST',
                 //set authentication
-                'noLoginRequired' => false,
+                'noLoginRequired' => true,
                 //endpoint path
                 'path' => array('actualizaReus'),
                 //endpoint variables
