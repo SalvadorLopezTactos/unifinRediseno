@@ -2902,7 +2902,7 @@
         var userprodprin = this.model.get('tipo_producto_c');
         var negocio = this.model.get('negocio_c');
         //Validamos que sea CS mas diferente de uniclick y SOS
-        if (userprodprin=='2' && (negocio!="2" || negocio!="10")){
+        if (userprodprin=='2' && (negocio!="2" && negocio!="10")){
             userprodprin='1';
         }
 
@@ -3284,7 +3284,12 @@
         var cuenta = this.model.get('account_id');
         var negocio = this.model.get('negocio_c');
 
-        if ((producto == "1" || (producto=="2" && (negocio!="2" || negocio!="10"))) && status != 'K') {
+        //Valida que el producto sea CS
+        if (producto=='2' && (negocio!="2" && negocio!="10")){
+            producto='1';
+        }
+
+        if ((producto == "1" && status != 'K' && (producto=="2" && (negocio!="2" && negocio!="10")))) {
             app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
                 success: _.bind(function (data) {
                     if (data == '1') {
