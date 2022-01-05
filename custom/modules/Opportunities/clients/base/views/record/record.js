@@ -2900,6 +2900,12 @@
         //this.model.save(),
 
         var userprodprin = this.model.get('tipo_producto_c');
+        var negocio = this.model.get('negocio_c');
+        //Validamos que sea CS mas diferente de uniclick y SOS
+        if (userprodprin=='2' && (negocio!="2" || negocio!="10")){
+            userprodprin='1';
+        }
+
         app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
             success: _.bind(function (cuenta) {
 
