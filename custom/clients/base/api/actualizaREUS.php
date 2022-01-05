@@ -349,7 +349,8 @@ class actualizaREUS extends SugarApi
         $id_user = "";
         global $app_list_strings;
         $lista_plataformas_audit=$app_list_strings['plataformas_habilitadas_auditoria_list'];
-        $plataforma=$GLOBALS['service']->platform;
+        //$plataforma=$GLOBALS['service']->platform;
+        $plataforma = 'dwh';
         //Obtiene el usuario relacionado a la plataforma
         $list_platform_user = $app_list_strings['plataforma_usuario_grupo_list'];
         //$GLOBALS['log']->fatal("plataforma: " . $plataforma );
