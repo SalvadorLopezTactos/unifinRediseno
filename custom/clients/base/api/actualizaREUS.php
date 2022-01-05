@@ -347,36 +347,37 @@ class actualizaREUS extends SugarApi
 
     public function user_api(){
         $id_user = "";
-        if(isset($GLOBALS['service']->platform) && $GLOBALS['service']->platform != ""){
-        $plataforma=$GLOBALS['service']->platform;
+        global $app_list_strings;
         $lista_plataformas_audit=$app_list_strings['plataformas_habilitadas_auditoria_list'];
-        $plataformas_array=array();
+        $plataforma=$GLOBALS['service']->platform;
+        //Obtiene el usuario relacionado a la plataforma
+        $list_platform_user = $app_list_strings['plataforma_usuario_grupo_list'];
+        //$GLOBALS['log']->fatal("plataforma: " . $plataforma );
+        //$GLOBALS['log']->fatal("plataformas_array: " . print_r($lista_plataformas_audit, true));
 
-
-        foreach ($lista_plataformas_audit as $clave => $valor) {
-           array_push($plataformas_array,$clave);
-        }
-
-        //Se establece tabla de auditoria solo para plataformas que existen en la lista plataformas habilitadas para auditoria
-        if(in_array($plataforma,$plataformas_array)){
-
-            //Obtiene el usuario relacionado a la plataforma
-            $list_platform_user = $app_list_strings['plataforma_usuario_grupo_list'];
-
-            //Obtiene el nombre de usuario dependiendo la plataforma
-            $nombre_usuario_gpo=$list_platform_user[$plataforma];
-
-            //Obtiene id del nombre de usuario
-            $query_user_gpo="SELECT id FROM users WHERE user_name='{$nombre_usuario_gpo}'";
-            $id_user="";
-            $resultQueryUserGpo = $db->query($query_user_gpo);
-            while ($row = $db->fetchByAssoc($resultQueryUserGpo)){
-                $id_user = $row['id'];
+        if(isset($GLOBALS['service']->platform) && $GLOBALS['service']->platform != ""){        
+            $plataformas_array=array();
+    
+            foreach ($lista_plataformas_audit as $clave => $valor) {
+               array_push($plataformas_array,$clave);
             }
-
+    
+            //Se establece tabla de auditoria solo para plataformas que existen en la lista plataformas habilitadas para    auditoria
+            //$GLOBALS['log']->fatal("array: " . print_r($plataformas_array, true));
+            if(in_array($plataforma,$plataformas_array)){
+                //Obtiene el nombre de usuario dependiendo la plataforma
+                $nombre_usuario_gpo=$list_platform_user[$plataforma];
+                //$GLOBALS['log']->fatal("nombre_usuario_gpo: " , $nombre_usuario_gpo);
+                //Obtiene id del nombre de usuario
+                $query_user_gpo="SELECT id FROM users WHERE user_name='{$nombre_usuario_gpo}'";
+                $id_user = $GLOBALS['db']->getOne($query_user_gpo);
+                /*$resultQueryUserGpo = $db->query($query_user_gpo);
+                while ($row = $db->fetchByAssoc($resultQueryUserGpo)){
+                    $id_user = $row['id'];
+                }*/
+            }
         }
-      $GLOBALS['log']->fatal("id_user: " . $id_user );
-      return $id_user;
-     }
+        $GLOBALS['log']->fatal("id_user: " . $id_user );
+        return $id_user;
     }
 }
