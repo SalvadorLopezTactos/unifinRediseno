@@ -3289,7 +3289,7 @@
             producto='1';
         }
 
-        if ((producto == "1" && status != 'K' && (producto=="2" && (negocio!="2" && negocio!="10")))) {
+        if (producto == "1" && status != 'K') {
             app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
                 success: _.bind(function (data) {
                     if (data == '1') {
