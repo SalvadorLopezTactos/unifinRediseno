@@ -41,6 +41,7 @@
             //Valida si tiene subetapa "cancelada"
             if (subetapa=="K"){
                 $("#SE1").removeClass('ocult');
+                $("#SE1").removeClass('alerta');
                 $('#SE1').addClass('error');
                 $("#SE1").html("Cancelada");
             }
