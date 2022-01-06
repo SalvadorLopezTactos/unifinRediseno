@@ -302,7 +302,7 @@
                             }else{
                                 app.alert.show("errorGetInfoCFQuantico", {
                                     level: "warning",
-                                    title: "No se recuperaron condiciones financieras de polítca para este producto.",
+                                    title: "No se recuperaron condiciones financieras de política para este producto.",
                                     autoClose: true
                                 });
                             }
