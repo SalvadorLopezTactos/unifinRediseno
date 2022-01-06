@@ -29,7 +29,7 @@
             //Añade sub etapa (solo para Leasing)
             if(typeof banderaExcluye !="undefined"){
 
-                if ((producto==1 && subetapa==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) || (producto=="2" && (negocio!="2" && negocio!="10")) ) {
+                if ((producto==1 || (producto=="2" && negocio!="2" && negocio!="10")) && subetapa==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))  ) {
 
                     $("#SE1").removeClass('ocult');
                     $('#SE1').addClass('alerta');
