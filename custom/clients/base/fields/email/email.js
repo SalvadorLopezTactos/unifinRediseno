@@ -17,9 +17,9 @@
         'change .newEmail': 'addNewAddress'
     },
     _flag2Deco: {
-        primary_address: {lbl: "LBL_EMAIL_PRIMARY", cl: "primary"},
-        opt_out: {lbl: "LBL_EMAIL_OPT_OUT", cl: "opted-out"},
-        invalid_email: {lbl: "LBL_EMAIL_INVALID", cl: "invalid"}
+        primary_address: { lbl: "LBL_EMAIL_PRIMARY", cl: "primary" },
+        opt_out: { lbl: "LBL_EMAIL_OPT_OUT", cl: "opted-out" },
+        invalid_email: { lbl: "LBL_EMAIL_INVALID", cl: "invalid" }
     },
     plugins: ['Tooltip', 'ListEditable', 'EmailClientLaunch'],
     initialize: function (options) {
@@ -35,7 +35,8 @@
             options.viewName = 'filter-rows-edit';
         }
         this._super('initialize', [options]);
-        this.addEmailOptions({related: this.model});
+        this.addEmailOptions({ related: this.model });
+        this.model.on('sync', this.reus_comunicacion, this);
     },
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
@@ -66,7 +67,7 @@
         });
     },
     addNewAddress: function (evt) {
-        if (!evt)return;
+        if (!evt) return;
         var email = this.$(evt.currentTarget).val() || this.$('.newEmail').val(), currentValue, emailFieldHtml, $newEmailField;
         email = $.trim(email);
         if ((email !== '') && (this._addNewAddressToModel(email))) {
@@ -87,7 +88,7 @@
         this._clearNewAddressField();
     },
     updateExistingAddress: function (evt) {
-        if (!evt)return;
+        if (!evt) return;
         var $inputs = this.$('.existingAddress'), $input = this.$(evt.currentTarget), index = $inputs.index($input), newEmail = $input.val(), primaryRemoved;
         newEmail = $.trim(newEmail);
         if (newEmail === '') {
@@ -117,7 +118,7 @@
         }
     },
     removeExistingAddress: function (evt) {
-        if (!evt)return;
+        if (!evt) return;
         var $deleteButtons = this.$('.removeEmail'), $deleteButton = this.$(evt.currentTarget), index = $deleteButtons.index($deleteButton), primaryRemoved, $removeThisField;
         primaryRemoved = this._removeExistingAddressInModel(index);
         $removeThisField = $deleteButton.closest('.email');
@@ -131,7 +132,7 @@
         }
     },
     toggleExistingAddressProperty: function (evt) {
-        if (!evt)return;
+        if (!evt) return;
         var $property = this.$(evt.currentTarget), property = $property.data('emailproperty'), $properties = this.$('[data-emailproperty=' + property + ']'), index = $properties.index($property);
         if (property === 'primary_address') {
             $properties.removeClass('active');
@@ -143,7 +144,7 @@
             return (address.email_address === email);
         }), success = false;
         if (_.isUndefined(dupeAddress)) {
-            existingAddresses.push({email_address: email, primary_address: (existingAddresses.length === 0)});
+            existingAddresses.push({ email_address: email, primary_address: (existingAddresses.length === 0) });
             this.model.set(this.name, existingAddresses);
             success = true;
         }
@@ -232,7 +233,7 @@
                 email.hasAnchor = this.def.emailLink && !email.opt_out && !email.invalid_email;
             }, this);
         } else if ((_.isString(value) && value !== "") || this.view.action === 'list') {
-            value = [{email_address: value, primary_address: true, hasAnchor: true}];
+            value = [{ email_address: value, primary_address: true, hasAnchor: true }];
         }
         value = this.addFlagLabels(value);
         return value;
@@ -267,7 +268,7 @@
                 return email;
             }, this);
             if (emails.length == 0) {
-                emails.push({email_address: value, primary_address: true});
+                emails.push({ email_address: value, primary_address: true });
             }
             return emails;
         }
@@ -281,6 +282,83 @@
         }
     },
     _retrieveEmailOptionsFromLink: function ($link) {
-        return {to_addresses: [{email: $link.data('email-to'), bean: this.emailOptions.related}]};
-    }
+        return { to_addresses: [{ email: $link.data('email-to'), bean: this.emailOptions.related }] };
+    },
+
+    reus_comunicacion: function () {
+
+        if (this.module == "Accounts") {
+
+            var puesto_usuario = App.user.attributes.puestousuario_c;
+            var idUsuarioLogeado = App.user.attributes.id;
+            var arrayPuestosComerciales = [];
+            var reus = false;
+            var productoREUS = false;
+            var telREUS = false;
+            var emailREUS = false;
+            //LISTA PARA PUESTOS COMERCIALES
+            Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
+                arrayPuestosComerciales.push(key);
+            });
+            //TELEFONOS QUE SOLO SON REUS
+            for (var i = 0; i < self.oTelefonos.telefono.length; i++) {
+                if (self.oTelefonos.telefono[i].reus == 1) {
+                    telREUS = true;
+                }
+            }
+            //CORREOS REUS
+            for (var i = 0; i < self.model.attributes.email.length; i++) {
+                if (self.model.attributes.email[i].opt_out == true && self.model.attributes.email[i].invalid_email == true) {
+                    emailREUS = true;
+                }
+            }
+
+            //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
+            if (self.ResumenProductos.leasing.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.leasing.tipo_cuenta == "3") {
+                productoREUS = true;
+                // console.log("LEASING USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+            }
+            if (self.ResumenProductos.factoring.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.factoring.tipo_cuenta == "3") {
+                productoREUS = true;
+                // console.log("FACTORAJE USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+            }
+            if (self.ResumenProductos.credito_auto.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.credito_auto.tipo_cuenta == "3") {
+                productoREUS = true;
+                // console.log("CREDITO-AUTO USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+            }
+            if (self.ResumenProductos.uniclick.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.uniclick.tipo_cuenta == "3") {
+                productoREUS = true;
+                // console.log("UNICLICK USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+            }
+            if (self.ResumenProductos.fleet.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.fleet.tipo_cuenta == "3") {
+                productoREUS = true;
+                // console.log("FLEET USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+            }
+            if (self.ResumenProductos.seguros.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.seguros.tipo_cuenta == "3") {
+                productoREUS = true;
+                // console.log("SEGUROS USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+            }
+
+            //EMAIL REUS
+            //PUESTOS COMERCIALES AUTORIZADOS CON LA VALIDACION DE USUARIO ASIGNADO EN ALGUN PRODUCTO CON TIPO DE CUENTA-PRODUCTO CLIENTE
+            if (emailREUS == true && arrayPuestosComerciales.includes(puesto_usuario) && productoREUS == true) {
+                reus = true;
+            }
+            //TELEFONO REUS
+            //PUESTOS COMERCIALES DIFERENTES A LOS AUTORIZADOS EN LA LISTA CON EL TIPO DE REGISTRO DE LA CUENTA CLIENTE
+            if (telREUS == true && !arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
+                reus = true;
+            }
+
+            if (reus == true) {
+
+                //Desmarca el atributo de invalid_email
+                for (var i = 0; i < self.model.attributes.email.length; i++) {
+                    if (self.model.attributes.email[i].opt_out == true && self.model.attributes.email[i].invalid_email == true) {
+                        self.model.attributes.email[i].invalid_email = false;
+                    }
+                }
+            } 
+        }
+    },
 })
