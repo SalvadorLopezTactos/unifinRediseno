@@ -264,80 +264,145 @@
     makecall: function (evt) {
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
-
         var tel_client = $input.closest("tr").find("td").eq(1).html();
         var tel_usr = app.user.attributes.ext_c;
-        var puesto_usuario = app.user.attributes.puestousuario_c;
+        var puesto_usuario = App.user.attributes.puestousuario_c;
+        var idUsuarioLogeado = App.user.attributes.id;
+        var arrayPuestosComerciales = [];
+        var reus = false;
+        var productoREUS = false;
+        var telREUS = false;
+        //LISTA PARA PUESTOS COMERCIALES
+        Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
+            arrayPuestosComerciales.push(key);
+        });
+        //TELEFONOS QUE SOLO SON REUS
+        for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
+            if (this.oTelefonos.telefono[i].reus == 1 && this.oTelefonos.telefono[i].telefono == tel_client) {
+                telREUS = true;
+            }
+        }
+        //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
+        if (self.ResumenProductos.leasing.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.leasing.tipo_cuenta == "3") {
+            productoREUS = true;
+            // console.log("LEASING USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+        }
+        if (self.ResumenProductos.factoring.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.factoring.tipo_cuenta == "3") {
+            productoREUS = true;
+            // console.log("FACTORAJE USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+        }
+        if (self.ResumenProductos.credito_auto.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.credito_auto.tipo_cuenta == "3") {
+            productoREUS = true;
+            // console.log("CREDITO-AUTO USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+        }
+        if (self.ResumenProductos.uniclick.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.uniclick.tipo_cuenta == "3") {
+            productoREUS = true;
+            // console.log("UNICLICK USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+        }
+        if (self.ResumenProductos.fleet.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.fleet.tipo_cuenta == "3") {
+            productoREUS = true;
+            // console.log("FLEET USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+        }
+        if (self.ResumenProductos.seguros.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.seguros.tipo_cuenta == "3") {
+            productoREUS = true;
+            // console.log("SEGUROS USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
+        }
 
-        //AGENTE TELEFONICO - COORDINADOR DE CENTRO DE PROSPECCION
-        if (puesto_usuario == "27" || puesto_usuario == "31" || puesto_usuario == "61") {
-            /***********************************VICIDIAL***************************************/
-            vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
-            _.extend(this, vicidial);
-
-            if (tel_usr != '' || tel_usr != null) {
-                if (tel_client != '' || tel_client != null) {
-                    context = this;
-                    app.alert.show('do-call-vicidial', {
-                        level: 'confirmation',
-                        messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
-                        autoClose: false,
-                        onConfirm: function () {
-                            context.createcall(context.resultCallback);
-                        },
-                    });
-                } else {
-                    app.alert.show('error_tel_client-vicidial', {
-                        level: 'error',
-                        autoClose: true,
-                        messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
-                    });
-                }
-            } else {
-                app.alert.show('error_tel_usr-vicidial', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
-                });
+        if (telREUS == true) {
+            //PUESTOS COMERCIALES AUTORIZADOS CON LA VALIDACION DE USUARIO ASIGNADO EN ALGUN PRODUCTO CON TIPO DE CUENTA-PRODUCTO CLIENTE
+            if (arrayPuestosComerciales.includes(puesto_usuario) && productoREUS == true) {
+                reus = true;
+            }
+            //PUESTOS COMERCIALES DIFERENTES A LOS AUTORIZADOS EN LA LISTA CON EL TIPO DE REGISTRO DE LA CUENTA CLIENTE
+            if (!arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
+                reus = true;
             }
 
         } else {
-            /**********************************ISSABEL***************************************/
+            //ENTRA PARA LAS LLAMADAS QUE NO SON REUS
+            reus = true;
+        }
 
-            //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
-            /*if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
-                 issabel='custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
-            }else {
-                issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
-            }*/
-            issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
-            _.extend(this, issabel);
+        if (reus == true) {
+            //AGENTE TELEFONICO - COORDINADOR DE CENTRO DE PROSPECCION
+            if (puesto_usuario == "27" || puesto_usuario == "31" || puesto_usuario == "61") {
+                /***********************************VICIDIAL***************************************/
+                vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
+                _.extend(this, vicidial);
 
-            if (tel_usr != '' || tel_usr != null) {
-                if (tel_client != '' || tel_client != null) {
-                    context = this;
-                    app.alert.show('do-call', {
-                        level: 'confirmation',
-                        messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
-                        autoClose: false,
-                        onConfirm: function () {
-                            context.createcall(context.resultCallback);
-                        },
-                    });
+                if (tel_usr != '' || tel_usr != null) {
+                    if (tel_client != '' || tel_client != null) {
+                        context = this;
+                        app.alert.show('do-call-vicidial', {
+                            level: 'confirmation',
+                            messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
+                            autoClose: false,
+                            onConfirm: function () {
+                                context.createcall(context.resultCallback);
+                            },
+                        });
+                    } else {
+                        app.alert.show('error_tel_client-vicidial', {
+                            level: 'error',
+                            autoClose: true,
+                            messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                        });
+                    }
                 } else {
-                    app.alert.show('error_tel_client', {
+                    app.alert.show('error_tel_usr-vicidial', {
                         level: 'error',
                         autoClose: true,
-                        messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                        messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
                     });
                 }
+
             } else {
-                app.alert.show('error_tel_usr', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
-                });
+                /**********************************ISSABEL***************************************/
+
+                //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
+                /*if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
+                     issabel='custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+                }else {
+                    issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
+                }*/
+                issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
+                _.extend(this, issabel);
+
+                if (tel_usr != '' || tel_usr != null) {
+                    if (tel_client != '' || tel_client != null) {
+                        context = this;
+                        app.alert.show('do-call', {
+                            level: 'confirmation',
+                            messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
+                            autoClose: false,
+                            onConfirm: function () {
+                                context.createcall(context.resultCallback);
+                            },
+                        });
+                    } else {
+                        app.alert.show('error_tel_client', {
+                            level: 'error',
+                            autoClose: true,
+                            messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                        });
+                    }
+                } else {
+                    app.alert.show('error_tel_usr', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
+                    });
+                }
             }
+
+        } else {
+
+            app.alert.show('message-reus-comercial', {
+                level: 'error',
+                messages: 'No se puede generar llamada a teléfono registrado en REUS',
+                autoClose: false
+            });
+
         }
     },
 
@@ -347,11 +412,11 @@
         var name_client = this.model.get('name');
         var id_client = this.model.get('id');
         var modulo = 'Accounts';
-		var posiciones = app.user.attributes.posicion_operativa_c;
-		var posicion = '';
-		if(posiciones.includes(3)) posicion = 'Ventas';
-		if(posiciones.includes(4)) posicion = 'Staff';
-		var Params = [id_client, name_client, modulo, posicion];
+        var posiciones = app.user.attributes.posicion_operativa_c;
+        var posicion = '';
+        if (posiciones.includes(3)) posicion = 'Ventas';
+        if (posiciones.includes(4)) posicion = 'Staff';
+        var Params = [id_client, name_client, modulo, posicion];
         app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
             success: _.bind(function (data) {
                 id_call = data;
@@ -371,7 +436,7 @@
         var puesto_usuario = app.user.attributes.puestousuario_c;
 
         //AGENTE TELEFONICO - COORDINADOR DE CENTRO DE PROSPECCION
-        if (puesto_usuario == "27" || puesto_usuario == "31" || puesto_usuario == "61" ) {
+        if (puesto_usuario == "27" || puesto_usuario == "31" || puesto_usuario == "61") {
             /*******************VICIDIAL********************/
             vicidial += '&leadid=' + id_call;
             console.log('VICIDIAL_LINK:' + vicidial);

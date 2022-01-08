@@ -370,8 +370,8 @@ SQL;
                 case '4':
                     $opp->assigned_user_id = $account->user_id1_c;
                     break;
-                //default:
-                //    $opp->assigned_user_id = $account->user_id_c;
+                default:
+                    $opp->assigned_user_id = $bean->assigned_user_id;
             }
 
             // Generales de la operación

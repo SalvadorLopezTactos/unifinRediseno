@@ -1,7 +1,9 @@
 <?php
- // created: 2021-09-13 17:27:18
+ // created: 2021-12-29 19:39:21
 $dictionary['Account']['fields']['detalle_origen_c']['labelValue']=' Detalle Origen';
 $dictionary['Account']['fields']['detalle_origen_c']['dependency']='';
+$dictionary['Account']['fields']['detalle_origen_c']['required_formula']='';
+$dictionary['Account']['fields']['detalle_origen_c']['readonly_formula']='';
 $dictionary['Account']['fields']['detalle_origen_c']['visibility_grid']=array (
   'trigger' => 'origen_cuenta_c',
   'values' => 
@@ -118,6 +120,22 @@ $dictionary['Account']['fields']['detalle_origen_c']['visibility_grid']=array (
       49 => '60',
       50 => '61',
       51 => '62',
+      52 => '86',
+      53 => '87',
+      54 => '88',
+      55 => '89',
+      56 => '90',
+      57 => '91',
+      58 => '92',
+      59 => '93',
+      60 => '94',
+      61 => '95',
+      62 => '96',
+      63 => '97',
+      64 => '98',
+      65 => '99',
+      66 => '100',
+      67 => '101',
     ),
     13 => 
     array (
