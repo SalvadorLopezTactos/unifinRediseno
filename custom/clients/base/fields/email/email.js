@@ -301,19 +301,14 @@
             Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
                 arrayPuestosComerciales.push(key);
             });
-            //TELEFONOS QUE SOLO SON REUS
-            for (var i = 0; i < self.oTelefonos.telefono.length; i++) {
-                if (self.oTelefonos.telefono[i].reus == 1) {
-                    telREUS = true;
-                }
-            }
+
+            if(self.model.attributes.email !=undefined){
             //CORREOS REUS
             for (var i = 0; i < self.model.attributes.email.length; i++) {
                 if (self.model.attributes.email[i].opt_out == true && self.model.attributes.email[i].invalid_email == true) {
                     emailREUS = true;
                 }
             }
-
             //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
             if (self.ResumenProductos.leasing.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.leasing.tipo_cuenta == "3") {
                 productoREUS = true;
@@ -359,7 +354,9 @@
                         self.model.attributes.email[i].invalid_email = false;
                     }
                 }
+            }
             } 
+            
         }
     },
 })
