@@ -36,7 +36,7 @@
         }
         this._super('initialize', [options]);
         this.addEmailOptions({ related: this.model });
-        this.model.on('sync', this.reus_comunicacion, this);
+        //this.model.on('sync', this.reus_comunicacion, this);
     },
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
@@ -54,6 +54,7 @@
             }, this);
             this.$el.prepend(emailsHtml);
         }
+        this.reus_comunicacion();
     },
     _buildEmailFieldHtml: function (email) {
         var editEmailFieldTemplate = app.template.getField('email', 'edit-email-field'), emails = this.model.get(this.name), index = _.indexOf(emails, email);
@@ -344,9 +345,9 @@
             if (emailREUS == true && arrayPuestosComerciales.includes(puesto_usuario) && productoREUS == true) {
                 reus = true;
             }
-            //TELEFONO REUS
+            //EMAIL REUS
             //PUESTOS COMERCIALES DIFERENTES A LOS AUTORIZADOS EN LA LISTA CON EL TIPO DE REGISTRO DE LA CUENTA CLIENTE
-            if (telREUS == true && !arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
+            if (emailREUS == true && !arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
                 reus = true;
             }
 

@@ -271,7 +271,7 @@ class actualizaREUS extends SugarApi
         $event_id = create_guid();
         $correos = "";
         for($i = 0; $i < count($emails); $i++) {
-            $correos = $correos .'"'.$emails[$i].'",';
+            $correos = $correos .'"'. strtolower($emails[$i]).'",';
         }
         $correos = substr($correos, 0, -1);
 
