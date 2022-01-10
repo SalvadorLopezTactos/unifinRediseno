@@ -301,6 +301,8 @@
             Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
                 arrayPuestosComerciales.push(key);
             });
+
+            if(self.model.attributes.email !=undefined){
             //CORREOS REUS
             for (var i = 0; i < self.model.attributes.email.length; i++) {
                 if (self.model.attributes.email[i].opt_out == true && self.model.attributes.email[i].invalid_email == true) {
@@ -352,7 +354,9 @@
                         self.model.attributes.email[i].invalid_email = false;
                     }
                 }
+            }
             } 
+            
         }
     },
 })
