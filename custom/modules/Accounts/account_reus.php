@@ -165,7 +165,7 @@ class class_account_reus
                                     // $beantel->registro_reus_c = 1;
                                     // $GLOBALS['log']->fatal("TELEFONO REUS");
                                     //Establece nuevo registro en tabla de auditoria
-                                    id_u_audit = create_guid();
+                                    $id_u_audit = create_guid();
                                     if ($telprevio != 1 || $telprevio != '1') {
                                         $sqlInsert = "INSERT INTO tel_telefonos_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                         VALUES ('{$id_u_audit}','{$telefono->id}','{$date}','{$current_user->id}','registro_reus_c','bool','{$telprevio}',1,NULL,NULL,'{$event_id}',NULL)";
@@ -176,7 +176,7 @@ class class_account_reus
                                     $result = $GLOBALS['db']->query($queryD);
                                     // $GLOBALS['log']->fatal("TELEFONO NORMAL");
                                     // $beantel->registro_reus_c = 0;
-                                    id_u_audit = create_guid();
+                                    $id_u_audit = create_guid();
                                     if ($telprevio != 0 || $telprevio != '0') {
                                         $sqlInsert = "INSERT INTO tel_telefonos_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                                         VALUES ('{$id_u_audit}','{$telefono->id}','{$date}','{$current_user->id}','registro_reus_c','bool','{$telprevio}',0,NULL,NULL,'{$event_id}',NULL)";
