@@ -14,7 +14,7 @@
     {{#if hasAnchor}}
 	    <a rel="tooltip" title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline" href="javascript:void(0);" data-action="email" data-email-to="{{email_address}}">{{email_address}}</a>
     {{else}}
-	    {{#if invalid_email}}
+	    {{#if opt_out}}
 		    <del rel="tooltip" title="{{email_address}} ({{flagLabel}})" data-placement="bottom" class="ellipsis_inline">{{email_address}}</del><label style="color: red;">Correo registrado en REUS</label>
 	    {{else}}
 	        <span rel="tooltip" title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline">{{email_address}}</span>
