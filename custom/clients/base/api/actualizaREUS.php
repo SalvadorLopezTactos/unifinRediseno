@@ -302,7 +302,8 @@ class actualizaREUS extends SugarApi
             //$GLOBALS['log']->fatal("previoopt: " . $previoopt. "previoinv: " . $previoinv );
             if ($reus == 'SI') {
                 if($previoopt != '1' && $previoinv != '1'){
-                    $queryA = "UPDATE email_addresses SET opt_out = 1 , invalid_email = 1 WHERE id = '{$row['id']}'";
+                    //$queryA = "UPDATE email_addresses SET opt_out = 1 , invalid_email = 1 WHERE id = '{$row['id']}'";
+                    $queryA = "UPDATE email_addresses SET opt_out = 1 WHERE id = '{$row['id']}'";
                     //$GLOBALS['log']->fatal("queryA: " . $queryA );
                     $db->query($queryA);
                     $id_u_audit = create_guid();
@@ -311,10 +312,11 @@ class actualizaREUS extends SugarApi
                     //$GLOBALS['log']->fatal("sqlInsert: " . $sqlInsert );
                     $db->query($sqlInsert);
                     $id_u_audit = create_guid();
-                    $sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
+                    /*$sqlInsert = "INSERT INTO email_addresses_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
                         VALUES ('{$id_u_audit}','{$row['id']}','{$date}','{$current_user}','invalid_email','bool','{$previoinv}',1,NULL,NULL,'{$event_id}',NULL)";
                     //$GLOBALS['log']->fatal("sqlInsert: " . $sqlInsert );
                     $db->query($sqlInsert);
+                    */
                 }
             }
 
