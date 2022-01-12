@@ -304,7 +304,7 @@
 
             if(self.model.attributes.email !=undefined){
             //CORREOS REUS
-            
+
             for (var i = 0; i < self.model.attributes.email.length; i++) {
                 if (self.model.attributes.email[i].opt_out == true ) {
                     emailREUS = true;
@@ -347,8 +347,8 @@
                 reus = true;
             }
 
-            if (emailREUS == true && reus == false){
-                reus == true;
+            if (emailREUS == true && reus == true){
+                reus = true;
             }
 
             //if (reus == true) {
