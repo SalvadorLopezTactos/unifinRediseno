@@ -15,21 +15,106 @@
         options.def = options.def || {};
         this._super('initialize', [options]);
         this.model.on('sync', this.loadData, this);
+		this.c_estatus1 = 1;
+		this.m_estatus1 = 1;
+		this.o_estatus1 = 1;
+		this.c_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+		this.m_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+		this.o_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
     },
 
     loadData: function () {
-		this.phone_work = this.model.get('phone_work');
 		this.phone_home = this.model.get('phone_home');
 		this.phone_mobile = this.model.get('phone_mobile');
-		this.o_registro_reus_c = this.model.get('o_registro_reus_c');
+		this.phone_work = this.model.get('phone_work');
 		this.c_registro_reus_c = this.model.get('c_registro_reus_c');
 		this.m_registro_reus_c = this.model.get('m_registro_reus_c');
+		this.o_registro_reus_c = this.model.get('o_registro_reus_c');
+		//Estatus Teléfono 06/01/2022 ECB
+		var c_estatus_telefono_c = this.model.get('c_estatus_telefono_c');
+		var m_estatus_telefono_c = this.model.get('m_estatus_telefono_c');
+		var o_estatus_telefono_c = this.model.get('o_estatus_telefono_c');
+		var c_c4 = 0;
+		var m_c4 = 0;
+		var o_c4 = 0;
+		this.c_estatus1 = 0;
+		this.c_estatus2 = 0;
+		this.c_estatus3 = 0;
+		this.m_estatus1 = 0;
+		this.m_estatus2 = 0;
+		this.m_estatus3 = 0;
+		this.o_estatus1 = 0;
+		this.o_estatus2 = 0;
+		this.o_estatus3 = 0;
+		if (c_estatus_telefono_c) {
+			var c_estatus_tel = JSON.parse(c_estatus_telefono_c);
+			if(c_estatus_tel[0].result == 0) {
+				this.c_estatus1 = 1;
+				this.c_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+			}
+			if(c_estatus_tel[0].result == 1) {
+				this.c_estatus2 = 1;
+				this.c_estatus = app.lang.getAppListStrings('estatus_telefono_list')[2] + ' (' + c_estatus_tel[0].Compania + ')';
+			}
+			if(c_estatus_tel[0].result == 2) {
+				this.c_estatus3 = 1;
+				this.c_estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
+			}
+			if(c_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.c_c4 = 1;
+		}
+		else { 
+			this.c_estatus1 = 1;
+			this.c_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+		}
+		if (m_estatus_telefono_c) {
+			var m_estatus_tel = JSON.parse(m_estatus_telefono_c);
+			if(m_estatus_tel[0].result == 0) {
+				this.m_estatus1 = 1;
+				this.m_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+			}
+			if(m_estatus_tel[0].result == 1) {
+				this.m_estatus2 = 1;
+				this.m_estatus = app.lang.getAppListStrings('estatus_telefono_list')[2] + ' (' + m_estatus_tel[0].Compania + ')';
+			}
+			if(m_estatus_tel[0].result == 2) {
+				this.m_estatus3 = 1;
+				this.m_estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
+			}
+			if(m_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.m_c4 = 1;
+		}
+		else { 
+			this.m_estatus1 = 1;
+			this.m_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+		}
+		if (o_estatus_telefono_c) {
+			var o_estatus_tel = JSON.parse(o_estatus_telefono_c);
+			if(o_estatus_tel[0].result == 0) {
+				this.o_estatus1 = 1;
+				this.o_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+			}
+			if(o_estatus_tel[0].result == 1) {
+				this.o_estatus2 = 1;
+				this.o_estatus = app.lang.getAppListStrings('estatus_telefono_list')[2] + ' (' + o_estatus_tel[0].Compania + ')';
+			}
+			if(o_estatus_tel[0].result == 2) {
+				this.o_estatus3 = 1;
+				this.o_estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
+			}
+			if(o_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.o_c4 = 1;
+		}
+		else { 
+			this.o_estatus1 = 1;
+			this.o_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+		}
 		$('[data-name="reus_work"]').hide();
 		$('[data-name="reus_home"]').hide();
 		$('[data-name="reus_mobile"]').hide();
 		$('[data-name="phone_work"]').hide();
 		$('[data-name="phone_home"]').hide();
 		$('[data-name="phone_mobile"]').hide();
+		$('[data-name="c_estatus_telefono_c"]').hide();
+		$('[data-name="m_estatus_telefono_c"]').hide();
+		$('[data-name="o_estatus_telefono_c"]').hide();
 		this.render();
     },
 

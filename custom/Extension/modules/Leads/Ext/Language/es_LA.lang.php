@@ -132,3 +132,6 @@ $mod_strings['LBL_C_REGISTRO_REUS_C'] = 'Registrado REUS Casa';
 $mod_strings['LBL_M_REGISTRO_REUS_C'] = 'Registrado REUS Móvil';
 $mod_strings['LBL_O_REGISTRO_REUS_C'] = 'Registrado REUS Oficina';
 $mod_strings['LBL_PENDIENTE_REUS_C'] = 'Pendiente de validar REUS';
+$mod_strings['LBL_C_ESTATUS_TELEFONO'] = 'Estatus teléfono Casa';
+$mod_strings['LBL_M_ESTATUS_TELEFONO'] = 'Estatus teléfono Móvil';
+$mod_strings['LBL_O_ESTATUS_TELEFONO'] = 'Estatus teléfono Oficina';
