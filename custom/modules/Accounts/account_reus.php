@@ -65,8 +65,8 @@ class class_account_reus
 
                             if ($val['existe'] == 'SI') {
 
-                                //$queryA = "UPDATE email_addresses SET opt_out = 1 , invalid_email = 1 WHERE id = '{$email_bean['email_address_id']}'";
-                                $queryA = "UPDATE email_addresses SET opt_out = 1 WHERE id = '{$email_bean['email_address_id']}'";
+                                $queryA = "UPDATE email_addresses SET opt_out = 1 , invalid_email = 0 WHERE id = '{$email_bean['email_address_id']}'";
+                                //$queryA = "UPDATE email_addresses SET opt_out = 1 WHERE id = '{$email_bean['email_address_id']}'";
                                 $result = $db->query($queryA);
                                 // $idmail = $emailAddress['email_address_id'];
                                 //$bean->emailAddress->addresses[$key1]['opt_out'] = 1;
@@ -81,8 +81,8 @@ class class_account_reus
                                 }
                             } else {
 
-                                //$queryB = "UPDATE email_addresses SET opt_out = 0 , invalid_email = 0 WHERE id = '{$email_bean['email_address_id']}'";
-                                $queryB = "UPDATE email_addresses SET opt_out = 0 WHERE id = '{$email_bean['email_address_id']}'";
+                                $queryB = "UPDATE email_addresses SET opt_out = 0 , invalid_email = 0 WHERE id = '{$email_bean['email_address_id']}'";
+                                //$queryB = "UPDATE email_addresses SET opt_out = 0 WHERE id = '{$email_bean['email_address_id']}'";
                                 $result = $db->query($queryB);
 
                                 if ($previo != 0 || $previo != '0') {
