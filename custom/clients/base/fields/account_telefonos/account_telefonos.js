@@ -283,27 +283,27 @@
             }
         }
         //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
-        if (self.ResumenProductos.leasing.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.leasing.tipo_cuenta == "3") {
+        if (self.ResumenProductos.leasing.tipo_cuenta == "3") {
             productoREUS = true;
             // console.log("LEASING USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
         }
-        if (self.ResumenProductos.factoring.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.factoring.tipo_cuenta == "3") {
+        if ( self.ResumenProductos.factoring.tipo_cuenta == "3") {
             productoREUS = true;
             // console.log("FACTORAJE USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
         }
-        if (self.ResumenProductos.credito_auto.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.credito_auto.tipo_cuenta == "3") {
+        if (self.ResumenProductos.credito_auto.tipo_cuenta == "3") {
             productoREUS = true;
             // console.log("CREDITO-AUTO USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
         }
-        if (self.ResumenProductos.uniclick.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.uniclick.tipo_cuenta == "3") {
+        if (self.ResumenProductos.uniclick.tipo_cuenta == "3") {
             productoREUS = true;
             // console.log("UNICLICK USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
         }
-        if (self.ResumenProductos.fleet.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.fleet.tipo_cuenta == "3") {
+        if (self.ResumenProductos.fleet.tipo_cuenta == "3") {
             productoREUS = true;
             // console.log("FLEET USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
         }
-        if (self.ResumenProductos.seguros.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.seguros.tipo_cuenta == "3") {
+        if (self.ResumenProductos.seguros.tipo_cuenta == "3") {
             productoREUS = true;
             // console.log("SEGUROS USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
         }

@@ -305,32 +305,32 @@
             if(self.model.attributes.email !=undefined){
             //CORREOS REUS
             for (var i = 0; i < self.model.attributes.email.length; i++) {
-                if (self.model.attributes.email[i].opt_out == true && self.model.attributes.email[i].invalid_email == true) {
+                if (self.model.attributes.email[i].opt_out == true ) {
                     emailREUS = true;
                 }
             }
             //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
-            if (self.ResumenProductos.leasing.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.leasing.tipo_cuenta == "3") {
+            if (self.ResumenProductos.leasing.tipo_cuenta == "3") {
                 productoREUS = true;
                 // console.log("LEASING USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
             }
-            if (self.ResumenProductos.factoring.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.factoring.tipo_cuenta == "3") {
+            if (self.ResumenProductos.factoring.tipo_cuenta == "3") {
                 productoREUS = true;
                 // console.log("FACTORAJE USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
             }
-            if (self.ResumenProductos.credito_auto.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.credito_auto.tipo_cuenta == "3") {
+            if ( self.ResumenProductos.credito_auto.tipo_cuenta == "3") {
                 productoREUS = true;
                 // console.log("CREDITO-AUTO USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
             }
-            if (self.ResumenProductos.uniclick.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.uniclick.tipo_cuenta == "3") {
+            if (self.ResumenProductos.uniclick.tipo_cuenta == "3") {
                 productoREUS = true;
                 // console.log("UNICLICK USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
             }
-            if (self.ResumenProductos.fleet.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.fleet.tipo_cuenta == "3") {
+            if (self.ResumenProductos.fleet.tipo_cuenta == "3") {
                 productoREUS = true;
                 // console.log("FLEET USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
             }
-            if (self.ResumenProductos.seguros.assigned_user_id == idUsuarioLogeado && self.ResumenProductos.seguros.tipo_cuenta == "3") {
+            if (self.ResumenProductos.seguros.tipo_cuenta == "3") {
                 productoREUS = true;
                 // console.log("SEGUROS USUARIO LOGEADO & TIPO DE CUENTA CLIENTE");
             }
@@ -339,24 +339,59 @@
             //PUESTOS COMERCIALES AUTORIZADOS CON LA VALIDACION DE USUARIO ASIGNADO EN ALGUN PRODUCTO CON TIPO DE CUENTA-PRODUCTO CLIENTE
             if (emailREUS == true && arrayPuestosComerciales.includes(puesto_usuario) && productoREUS == true) {
                 reus = true;
-            }
+            }else if (emailREUS == true && !arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
             //EMAIL REUS
             //PUESTOS COMERCIALES DIFERENTES A LOS AUTORIZADOS EN LA LISTA CON EL TIPO DE REGISTRO DE LA CUENTA CLIENTE
-            if (emailREUS == true && !arrayPuestosComerciales.includes(puesto_usuario) && this.model.get('tipo_registro_cuenta_c') == '3') {
                 reus = true;
             }
 
-            if (reus == true) {
+            if (emailREUS == true && reus == false){
+                reus == true;
+            }
+
+            //if (reus == true) {
 
                 //Desmarca el atributo de invalid_email
                 for (var i = 0; i < self.model.attributes.email.length; i++) {
-                    if (self.model.attributes.email[i].opt_out == true && self.model.attributes.email[i].invalid_email == true) {
+                    if (self.model.attributes.email[i].opt_out == true && reus == true) {
                         self.model.attributes.email[i].invalid_email = false;
+                    }else{
+                        self.model.attributes.email[i].invalid_email = true;
                     }
                 }
-            }
+            //}
             } 
-            
+
+        }
+
+        if (this.module == "Leads") {
+
+            var reus = false;
+            var emailREUS = false;
+            //LISTA PARA PUESTOS COMERCIALES
+            Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
+                arrayPuestosComerciales.push(key);
+            });
+
+            if(self.model.attributes.email !=undefined){
+                //CORREOS REUS
+                for (var i = 0; i < self.model.attributes.email.length; i++) {
+                    if (self.model.attributes.email[i].opt_out == true ) {
+                        self.model.attributes.email[i].invalid_email = true;
+                        //emailREUS = true;
+                    }
+                }
+                /*if (emailREUS == true) {
+                    //Desmarca el atributo de invalid_email
+                    for (var i = 0; i < self.model.attributes.email.length; i++) {
+                        if (self.model.attributes.email[i].opt_out == true ) {
+                            self.model.attributes.email[i].invalid_email = false;
+                        }else{
+                            self.model.attributes.email[i].invalid_email = true;
+                        }
+                    }
+                }*/
+            }
         }
     },
 })
