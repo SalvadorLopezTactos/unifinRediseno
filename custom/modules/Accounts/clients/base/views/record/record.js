@@ -4917,7 +4917,9 @@
 							estatus3 = 1;
 							estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
 						}
-						if(estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') c4 = 1;
+						if(estatus_tel[0].Estatus_reporte) {
+							if(estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') c4 = 1;
+						}
 					}
 					else { 
 						estatus1 = 1;

@@ -60,7 +60,9 @@
 				this.c_estatus3 = 1;
 				this.c_estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
 			}
-			if(c_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.c_c4 = 1;
+			if(c_estatus_tel[0].Estatus_reporte) {
+				if(c_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.c_c4 = 1;
+			}
 		}
 		else { 
 			this.c_estatus1 = 1;
