@@ -82,7 +82,9 @@
 				this.m_estatus3 = 1;
 				this.m_estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
 			}
-			if(m_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.m_c4 = 1;
+			if(m_estatus_tel[0].Estatus_reporte) {
+				if(m_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.m_c4 = 1;
+			}
 		}
 		else { 
 			this.m_estatus1 = 1;
@@ -102,7 +104,9 @@
 				this.o_estatus3 = 1;
 				this.o_estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
 			}
-			if(o_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.o_c4 = 1;
+			if(o_estatus_tel[0].Estatus_reporte) {
+				if(o_estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') this.o_c4 = 1;
+			}
 		}
 		else { 
 			this.o_estatus1 = 1;
