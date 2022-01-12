@@ -15,6 +15,7 @@
       <th>Estatus</th>
       <th>Llamar</th>
 	  <th>WhatsApp</th>
+	  <th>Estatus Teléfono</th>
     </tr>
   </thead>
   <tbody>
@@ -34,8 +35,32 @@
         {{else}}
           <td align="center"><button class="mcall fa fa-phone btn-success" style="color: white;"></button></td>
         {{/if}}
-		    <td>{{#if whatsapp_c}}<i class="fa fa-check"></i>{{/if}}</td>
-      </tr>
+		<td>{{#if whatsapp_c}}<i class="fa fa-check"></i>{{/if}}</td>
+		{{#if estatus1}}
+			<td>
+			  <button class="fa fa-exclamation btn-warning" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{estatus_tel}}</button>
+			  {{#if c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if estatus2}}
+			<td>
+			  <button class="fa fa-check btn-success" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{estatus_tel}}</button>
+			  {{#if c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if estatus3}}
+			<td>
+			  <button class="fa fa-times btn-danger" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{estatus_tel}}</button>
+			  {{#if c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+	  </tr>
     {{/each}}
   </tbody>
 </table>

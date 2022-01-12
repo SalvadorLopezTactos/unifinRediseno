@@ -4894,10 +4894,35 @@
                     var valor6 = (data.records[i].principal == true) ? 1 : 0;
                     var valor7 = (data.records[i].whatsapp_c == true) ? 1 : 0;
                     var valor8 = (data.records[i].registro_reus_c == true) ? 1 : 0;
-
-                    if(valor8 == 1 && valor7 ==1){ valor7 = 0;}
-
+                    if (valor8 == 1 && valor7 ==1){ valor7 = 0;}
                     var idtel = data.records[i].id;
+					//Estatus Teléfono 06/01/2022 ECB
+					var valor9 = data.records[i].estatus_telefono_c;
+					var estatus = '';
+					var estatus1 = 0;
+					var estatus2 = 0;
+					var estatus3 = 0;
+					var c4 = 0;
+					if (valor9) {
+						var estatus_tel = JSON.parse(valor9);
+						if(estatus_tel[0].result == 0) {
+							estatus1 = 1;
+							estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+						}
+						if(estatus_tel[0].result == 1) {
+							estatus2 = 1;
+							estatus = app.lang.getAppListStrings('estatus_telefono_list')[2] + ' (' + estatus_tel[0].Compania + ')';
+						}
+						if(estatus_tel[0].result == 2) {
+							estatus3 = 1;
+							estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
+						}
+						if(estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') c4 = 1;
+					}
+					else { 
+						estatus1 = 1;
+						estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+					}
                     var telefono = {
                         "name": valor4,
                         "tipotelefono": valor1,
@@ -4909,7 +4934,12 @@
                         "whatsapp_c": valor7,
                         "id_cuenta": idCuenta,
                         "id": idtel,
-                        "reus": valor8
+                        "reus": valor8,
+						"estatus1": estatus1,
+						"estatus2": estatus2,
+						"estatus3": estatus3,
+						"estatus_tel": estatus,
+						"c4": c4
                     };
                     var prev_telefono = {
                         "name": valor4,
@@ -4922,7 +4952,12 @@
                         "whatsapp_c": valor7,
                         "id_cuenta": idCuenta,
                         "id": idtel,
-                        "reus": valor8
+                        "reus": valor8,
+						"estatus1": estatus1,
+						"estatus2": estatus2,
+						"estatus3": estatus3,
+						"estatus_tel": estatus,
+						"c4": c4
                     };
                     contexto_cuenta.oTelefonos.telefono.push(telefono);
                     contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);
