@@ -287,12 +287,12 @@
     },
 
     reus_comunicacion: function () {
+        var arrayPuestosComerciales = [];
 
         if (this.module == "Accounts") {
 
             var puesto_usuario = App.user.attributes.puestousuario_c;
             var idUsuarioLogeado = App.user.attributes.id;
-            var arrayPuestosComerciales = [];
             var reus = false;
             var productoREUS = false;
             var telREUS = false;
@@ -372,7 +372,6 @@
             Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
                 arrayPuestosComerciales.push(key);
             });
-
             if(self.model.attributes.email !=undefined){
                 //CORREOS REUS
                 for (var i = 0; i < self.model.attributes.email.length; i++) {
