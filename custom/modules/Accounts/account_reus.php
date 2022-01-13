@@ -157,12 +157,13 @@ class class_account_reus
                             if ($telefono->telefono == $val['valor']) {
 
                                 $telprevio = $telefono->registro_reus_c;
-
+                                $beantel = BeanFactory::retrieveBean('Tel_Telefonos', $telefono->id);
                                 if ($val['existe'] == 'SI') {
 
-                                    $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
-                                    $result = $GLOBALS['db']->query($queryC);
-                                    // $beantel->registro_reus_c = 1;
+                                    //$queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
+                                    //$GLOBALS['db']->query($queryC);
+                                    $beantel->registro_reus_c = 1;
+                                    $beantel->save();
                                     // $GLOBALS['log']->fatal("TELEFONO REUS");
                                     //Establece nuevo registro en tabla de auditoria
                                     $id_u_audit = create_guid();
@@ -171,9 +172,12 @@ class class_account_reus
                                         VALUES ('{$id_u_audit}','{$telefono->id}','{$date}','{$current_user->id}','registro_reus_c','bool','{$telprevio}',1,NULL,NULL,'{$event_id}',NULL)";
                                         $db->query($sqlInsert);
                                     }
-                                } else {
-                                    $queryD = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
-                                    $result = $GLOBALS['db']->query($queryD);
+                                }
+                                if ($val['existe'] == 'NO') {
+                                    $beantel->registro_reus_c = 0;
+                                    $beantel->save();
+                                    //$queryD = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
+                                    //$GLOBALS['db']->query($queryD);
                                     // $GLOBALS['log']->fatal("TELEFONO NORMAL");
                                     // $beantel->registro_reus_c = 0;
                                     $id_u_audit = create_guid();
