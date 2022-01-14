@@ -282,9 +282,19 @@
                 telREUS = true;
             }
         }
+        /*
         if(self.ResumenProductos == undefined){
             self.ResumenProductos = this.ResumenProductos;
+        }*/
+
+        if(self.ResumenProductos!=undefined){
+            self1=self;
         }
+        
+        if(self.ResumenProductos==undefined){
+            self=self1;
+        }
+        
         //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
         if (self.ResumenProductos.leasing.tipo_cuenta == "3") {
             productoREUS = true;
