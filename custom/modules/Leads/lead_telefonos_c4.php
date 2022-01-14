@@ -6,8 +6,11 @@ class lead_telefonos_c4
     {
 		$telefonos = array();
 		if($bean->phone_home) array_push($telefonos, $bean->phone_home);
+		else $bean->c_estatus_telefono_c = '';
 		if($bean->phone_mobile) array_push($telefonos, $bean->phone_mobile);
+		else $bean->m_estatus_telefono_c = '';
 		if($bean->phone_work) array_push($telefonos, $bean->phone_work);
+		else $bean->o_estatus_telefono_c = '';
 		if($telefonos) {
 			global $sugar_config;
 			$url = $sugar_config['c4'].'/C4/list/';
