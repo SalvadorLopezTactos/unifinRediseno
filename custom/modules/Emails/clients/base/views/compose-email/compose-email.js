@@ -1,109 +1,473 @@
-
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+/**
+ * @class View.Views.Base.Emails.ComposeEmailView
+ * @alias SUGAR.App.view.views.BaseEmailsComposeEmailView
+ * @extends View.Views.Base.Emails.CreateView
+ */
 ({
     extendsFrom: 'EmailsCreateView',
-    
-    _render: function (fields, errors, callback) {
-        this._super("_render");
 
+    /**
+     * Constant representing the state of an email when it is a draft.
+     *
+     * @property {string}
+     */
+    STATE_DRAFT: 'Draft',
+
+    /**
+     * Constant representing the state of an email when it is ready to be sent.
+     *
+     * @property {string}
+     */
+    STATE_READY: 'Ready',
+
+    /**
+     * The name of the send button.
+     *
+     * @property {string}
+     */
+    sendButtonName: 'send_button',
+
+    /**
+     * Used for determining if an email's content contains variables.
+     *
+     * @property {RegExp}
+     */
+    _hasVariablesRegex: /\$[a-zA-Z]+_[a-zA-Z0-9_]+/,
+
+    /**
+     * False when the email client reports a configuration issue.
+     *
+     * @property {boolean}
+     */
+    _userHasConfiguration: true,
+
+    /**
+     * The label to be used as the title of the page.
+     *
+     * @property {string}
+     */
+    _titleLabel: 'LBL_COMPOSE_MODULE_NAME_SINGULAR',
+
+    /**
+     * @inheritdoc
+     *
+     * Disables the send button if email has not been configured.
+     */
+    initialize: function(options) {
+        var loadingRequests = 0;
+
+        this._super('initialize', [options]);
+
+        if (this.model.isNew()) {
+            this.model.set('state', this.STATE_DRAFT);
+        }
+
+        this.on('email_not_configured', function() {
+            var sendButton = this.getField('send_button');
+
+            if (sendButton) {
+                sendButton.setDisabled(true);
+            }
+
+            this._userHasConfiguration = false;
+        }, this);
+
+        this.on('loading_collection_field', function() {
+            loadingRequests++;
+            this.toggleButtons(false);
+        }, this);
+
+        this.on('loaded_collection_field', function() {
+            loadingRequests--;
+
+            if (loadingRequests === 0) {
+                this.toggleButtons(true);
+            }
+        }, this);
+
+        this.on('editable:toggle_fields', function(fields, viewName) {
+            var field = this.getField('recipients');
+
+            if (field) {
+                field.setMode('detail');
+            }
+        }, this);
     },
 
-    initialize: function (options) {
-        self = this;
-        contexto_mail = this;
-        this._super("initialize", [options]);
+    /**
+     * @inheritdoc
+     *
+     * Renders the recipients fieldset anytime there are changes to the `to`,
+     * `cc`, or `bcc` fields.
+     *
+     * Disables the send button if the attachments exceed the
+     * max_aggregate_email_attachments_bytes configuration. Enables the send
+     * button if the attachments are under the
+     * max_aggregate_email_attachments_bytes configuration configuration.
+     */
+    bindDataChange: function() {
+        var self = this;
+        var renderRecipientsField = _.debounce(function() {
+            var field = self.getField('recipients');
 
-        this.context.on('button:send_button:click', this.check_correo_valido, this);
-        //this.model.addValidationTask('check_correo_valido', _.bind(this.check_correo_valido, this));
-    },
-
-    check_correo_valido:function () {
-
-        if (this.model.get('parent').type == "Accounts") {
-
-            var puesto_usuario = App.user.attributes.puestousuario_c;
-            var estatusCuenta = self.model.attributes.parent.tipo_registro_cuenta_c
-            var idUsuarioLogeado = App.user.attributes.id;
-            var reus = false;
-            var emailREUS = false;
-            var idCuenta = this.model.get('parent').id;
-
-            var data = [];
-            var to = null;
-            var cc = null;
-            var cco = null;
-
-            var aux = null;
-            for (var i = 0; i < self.model.attributes.to_collection.models.length; i++) {
-                aux = null;
-                if (self.model.attributes.to_collection.models[i].attributes.parent_type != undefined) {
-                    aux = {
-                        "tipo" : "to" , 
-                        "email" : "" , 
-                        "modulo": self.model.attributes.to_collection.models[i].attributes.parent_type , 
-                        "id" : self.model.attributes.to_collection.models[0].attributes.id 
-                    };
-                }else{
-                    aux = {
-                        "tipo" : "to" , 
-                        "email" :  self.model.attributes.to_collection.models[i].attributes.email_address , 
-                        "modulo": "" , 
-                        "id" : "" 
-                    };
-                }
-                data.push(aux);
+            if (field) {
+                field.render();
             }
+        }, 200);
 
-            for (var i = 0; i < self.model.attributes.cc_collection.models.length; i++) {
-                aux = null;
-                if (self.model.attributes.cc_collection.models[i].attributes.parent_type != undefined) {
-                    aux = {
-                        "tipo" : "cc" , 
-                        "email" : "" , 
-                        "modulo": self.model.attributes.cc_collection.models[i].attributes.parent_type , 
-                        "id" : self.model.attributes.cc_collection.models[0].attributes.id 
-                    };
-                }else{
-                    aux = {
-                        "tipo" : "cc" , 
-                        "email" :  self.model.attributes.cc_collection.models[i].attributes.email_address , 
-                        "modulo": "" , 
-                        "id" : "" 
-                    };
-                }
-                data.push(aux);
-            }
+        if (this.model) {
+            this.listenTo(
+                this.model,
+                'change:to_collection change:cc_collection change:bcc_collection',
+                renderRecipientsField
+            );
+            this.listenTo(this.model, 'attachments_collection:over_max_total_bytes', function() {
+                var sendButton = this.getField(this.sendButtonName);
 
-            for (var i = 0; i < self.model.attributes.bcc_collection.models.length; i++) {
-                aux = null;
-                if (self.model.attributes.bcc_collection.models[i].attributes.parent_type != undefined) {
-                    aux = {
-                        "tipo" : "bcc" , 
-                        "email" : "" , 
-                        "modulo": self.model.attributes.bcc_collection.models[i].attributes.parent_type , 
-                        "id" : self.model.attributes.bcc_collection.models[0].attributes.id 
-                    };
-                }else{
-                    aux = {
-                        "tipo" : "bcc" , 
-                        "email" :  self.model.attributes.bcc_collection.models[i].attributes.email_address , 
-                        "modulo": "" , 
-                        "id" : "" 
-                    };
+                if (sendButton) {
+                    sendButton.setDisabled(true);
                 }
-                data.push(aux);
-            }
-             console.log(data);
-            
-            app.api.call('GET', app.api.buildURL('emailReus/'  ), null, {
-                success: _.bind(function (data) {
-                    alert("Asincorno");
-                    if (data == true) {
-                        alert("va bien - 2");
-                    } 
-                }, this),
             });
-            alert("va bien");
-        } 
+            this.listenTo(this.model, 'attachments_collection:under_max_total_bytes', function() {
+                var sendButton = this.getField(this.sendButtonName);
+
+                if (sendButton) {
+                    sendButton.setDisabled(!this._userHasConfiguration);
+                }
+            });
+        }
+
+        this._super('bindDataChange');
     },
-       
+
+    /**
+     * @inheritdoc
+     *
+     * Registers a handler to send the email when the send button is clicked.
+     */
+    delegateButtonEvents: function() {
+        this._super('delegateButtonEvents');
+        this.listenTo(this.context, 'button:' + this.sendButtonName + ':click', function() {
+            this.send();
+        });
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * The send button cannot be enabled if email is not configured for the
+     * user.
+     */
+    toggleButtons: function(enable) {
+        this._super('toggleButtons', [enable]);
+
+        if (enable && this.buttons[this.sendButtonName] && !this._userHasConfiguration) {
+            this.buttons[this.sendButtonName].setDisabled(true);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Implements the Compose:Send shortcut to send the email.
+     */
+    registerShortcuts: function() {
+        this._super('registerShortcuts');
+
+        app.shortcuts.register({
+            id: 'Compose:Send',
+            keys: ['mod+shift+s'],
+            component: this,
+            description: 'LBL_SHORTCUT_EMAIL_SEND',
+            callOnFocus: true,
+            handler: function() {
+                var $sendButton = this.$('a[name=' + this.sendButtonName + ']');
+
+                if ($sendButton.is(':visible') && !$sendButton.hasClass('disabled')) {
+                    $sendButton.get(0).click();
+                }
+            }
+        });
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * `BaseEmailsCreateView` is used when creating new emails and editing
+     * existing drafts. The model is not new when editing drafts. In those
+     * cases, {@link BaseEmailsRecordView#hasUnsavedChanges} is called to use
+     * logic that checks for unsaved changes for existing records instead of
+     * new records.
+     */
+    hasUnsavedChanges: function() {
+        if (this.model.isNew()) {
+            return this._super('hasUnsavedChanges');
+        }
+
+        return app.view.views.BaseEmailsRecordView.prototype.hasUnsavedChanges.call(this);
+    },
+
+    /**
+     * Sends the email.
+     *
+     * Warns the user if the subject and/or body are empty. The user may still
+     * send the email after confirming.
+     *
+     * Alerts the user if the email does not have any recipients.
+     */
+    send: function() {
+        var confirmationMessages = [];
+        var subject = this.model.get('name') || '';
+        var text = this.model.get('description') || '';
+        var html = this.model.get('description_html') || '';
+        var fullContent = subject + ' ' + text + ' ' + html;
+        var isSubjectEmpty = _.isEmpty(subject.trim());
+        // When fetching tinyMCE content, convert to jQuery Object
+        // and return only if text is not empty. By wrapping the value
+        // in <div> tags we remove the error if the value contains
+        // no HTML markup
+        var isContentEmpty = _.isEmpty($('<div>' + html + '</div>').text().trim());
+
+        var sendEmail = _.bind(function() {
+            this.model.set('state', this.STATE_READY);
+            this.save();
+        }, this);
+
+        this.disableButtons();
+
+        if (this.model.get('to_collection').length === 0 &&
+            this.model.get('cc_collection').length === 0 &&
+            this.model.get('bcc_collection').length === 0
+        ) {
+            this.model.trigger('error:validation:to_collection');
+            app.alert.show('send_error', {
+                level: 'error',
+                messages: 'LBL_EMAIL_COMPOSE_ERR_NO_RECIPIENTS'
+            });
+            this.enableButtons();
+        } else {
+            
+            if (this.model.get('parent').type == "Accounts") {
+
+                var puesto_usuario = App.user.attributes.puestousuario_c;
+                var estatusCuenta = self.model.attributes.tipo_registro_cuenta_c;
+                var idUsuarioLogeado = App.user.attributes.id;
+                var reus = false;
+                var emailREUS = false;
+                var idCuenta = this.model.get('parent').id;
+    
+                var data = [];
+                var correos=[];
+                var to = null;
+                var cc = null;
+                var cco = null;
+    
+                var aux = null;
+                for (var i = 0; i < this.model.get('to_collection').models.length; i++) {
+                    aux = null;
+                    if (this.model.get('to_collection').models[i].attributes.parent_type != undefined) {
+                        aux = {
+                            "tipo" : "to" , 
+                            "email" : "" , 
+                            "modulo": this.model.get('to_collection').models[i].attributes.parent_type , 
+                            "id" : this.model.get('to_collection').models[i].attributes.parent_id 
+                        };
+                    }else{
+                        aux = {
+                            "tipo" : "to" , 
+                            "email" :  this.model.get('to_collection').models[i].attributes.email_address , 
+                            "modulo": "" , 
+                            "id" : "" 
+                        };
+                    }
+                    correos.push(aux);
+    
+                }
+    
+                for (var i = 0; i < this.model.get('cc_collection').models.length; i++) {
+                    aux = null;
+                    if (this.model.get('cc_collection').models[i].attributes.parent_type != undefined) {
+                        aux = {
+                            "tipo" : "cc" , 
+                            "email" : "" , 
+                            "modulo": this.model.get('cc_collection').models[i].attributes.parent_type , 
+                            "id" : this.model.get('cc_collection').models[i].attributes.parent_id 
+                        };
+                    }else{
+                        aux = {
+                            "tipo" : "cc" , 
+                            "email" :  this.model.get('cc_collection').models[i].attributes.email_address , 
+                            "modulo": "" , 
+                            "id" : "" 
+                        };
+                    }
+                    correos.push(aux);
+                }
+    
+                for (var i = 0; i < this.model.get('bcc_collection').models.length; i++) {
+                    aux = null;
+                    if (this.model.get('bcc_collection').models[i].attributes.parent_type != undefined) {
+                        aux = {
+                            "tipo" : "bcc" , 
+                            "email" : "" , 
+                            "modulo": this.model.get('bcc_collection').models[i].attributes.parent_type , 
+                            "id" : this.model.get('bcc_collection').models[i].attributes.parent_id 
+                        };
+                    }else{
+                        aux = {
+                            "tipo" : "bcc" , 
+                            "email" :  this.model.get('bcc_collection').models[i].attributes.email_address , 
+                            "modulo": "" , 
+                            "id" : "" 
+                        };
+                    }
+                    correos.push(aux);
+                }
+                console.log(data);
+    
+    
+                //data['correos']=correos;
+    
+                var info={
+                    'puesto_usuario' : App.user.attributes.puestousuario_c,
+                    'estatusCuenta' : self.model.attributes.tipo_registro_cuenta_c,
+                    'idUsuarioLogeado' : App.user.attributes.id,
+                    'idCuenta': idCuenta
+                }
+    
+                var dataObj={
+                    'correos':correos,
+                    'info':info
+                }
+                
+                app.alert.show('vaidando_reus', {
+                    level: 'process',
+                    title: 'Cargando...'
+                });
+                app.api.call('create', app.api.buildURL('emailReus'), dataObj, {
+                    success: _.bind(function (data) {
+                        app.alert.dismiss('vaidando_reus');
+                        if (data) {
+                            app.alert.show('send_error', {
+                                level: 'error',
+                                messages: 'Email no válido, favor de verificar'
+                            });
+                            this.enableButtons();
+                        }else{
+                            // to/cc/bcc filled out, check other fields
+                            if (isSubjectEmpty && isContentEmpty) {
+                                confirmationMessages.push(app.lang.get('LBL_NO_SUBJECT_NO_BODY_SEND_ANYWAYS', this.module));
+                            } else if (isSubjectEmpty) {
+                                confirmationMessages.push(app.lang.get('LBL_SEND_ANYWAYS', this.module));
+                            } else if (isContentEmpty) {
+                                confirmationMessages.push(app.lang.get('LBL_NO_BODY_SEND_ANYWAYS', this.module));
+                            }
+
+                            if (_.isEmptyValue(this.model.get('parent_id')) && this._hasVariablesRegex.test(fullContent)) {
+                                confirmationMessages.push(app.lang.get('LBL_NO_RELATED_TO_WITH_TEMPLATE_SEND_ANYWAYS', this.module));
+                            }
+
+                            if (confirmationMessages.length > 0) {
+                                app.alert.show('send_confirmation', {
+                                    level: 'confirmation',
+                                    messages: confirmationMessages.join('<br />'),
+                                    onConfirm: sendEmail,
+                                    onCancel: _.bind(this.enableButtons, this)
+                                });
+
+                            } else {
+                                // All checks pass, send the email
+                                sendEmail();
+                            }
+                        }
+                    }, this),
+                });
+            }else{
+                this.sendFunctionCustom();
+            }
+
+        }//FIN ELSE
+    },
+
+
+    sendFunctionCustom:function(){
+
+        var confirmationMessages = [];
+        var subject = this.model.get('name') || '';
+        var text = this.model.get('description') || '';
+        var html = this.model.get('description_html') || '';
+        var fullContent = subject + ' ' + text + ' ' + html;
+        var isSubjectEmpty = _.isEmpty(subject.trim());
+        // When fetching tinyMCE content, convert to jQuery Object
+        // and return only if text is not empty. By wrapping the value
+        // in <div> tags we remove the error if the value contains
+        // no HTML markup
+        var isContentEmpty = _.isEmpty($('<div>' + html + '</div>').text().trim());
+
+        var sendEmail = _.bind(function() {
+            this.model.set('state', this.STATE_READY);
+            this.save();
+        }, this);
+
+        this.disableButtons();
+
+        if (this.model.get('to_collection').length === 0 &&
+            this.model.get('cc_collection').length === 0 &&
+            this.model.get('bcc_collection').length === 0
+        ) {
+            this.model.trigger('error:validation:to_collection');
+            app.alert.show('send_error', {
+                level: 'error',
+                messages: 'LBL_EMAIL_COMPOSE_ERR_NO_RECIPIENTS'
+            });
+            this.enableButtons();
+        } else {
+            // to/cc/bcc filled out, check other fields
+            if (isSubjectEmpty && isContentEmpty) {
+                confirmationMessages.push(app.lang.get('LBL_NO_SUBJECT_NO_BODY_SEND_ANYWAYS', this.module));
+            } else if (isSubjectEmpty) {
+                confirmationMessages.push(app.lang.get('LBL_SEND_ANYWAYS', this.module));
+            } else if (isContentEmpty) {
+                confirmationMessages.push(app.lang.get('LBL_NO_BODY_SEND_ANYWAYS', this.module));
+            }
+
+            if (_.isEmptyValue(this.model.get('parent_id')) && this._hasVariablesRegex.test(fullContent)) {
+                confirmationMessages.push(app.lang.get('LBL_NO_RELATED_TO_WITH_TEMPLATE_SEND_ANYWAYS', this.module));
+            }
+
+            if (confirmationMessages.length > 0) {
+                app.alert.show('send_confirmation', {
+                    level: 'confirmation',
+                    messages: confirmationMessages.join('<br />'),
+                    onConfirm: sendEmail,
+                    onCancel: _.bind(this.enableButtons, this)
+                });
+            } else {
+                // All checks pass, send the email
+                sendEmail();
+            }
+        }
+
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Builds the appropriate success message based on the state of the email.
+     */
+    buildSuccessMessage: function() {
+        var successLabel = this.model.get('state') === this.STATE_DRAFT ? 'LBL_DRAFT_SAVED' : 'LBL_EMAIL_SENT';
+
+        return app.lang.get(successLabel, this.module);
+    }
 })
