@@ -236,13 +236,13 @@ SITE;
 
         // creamos las relaciones en telefono
         if (!empty($bean_Leads->phone_mobile)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3, $bean_Leads->m_estatus_telefono_c);
         }
         if (!empty($bean_Leads->phone_home)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1, $bean_Leads->c_estatus_telefono_c);
         }
         if (!empty($bean_Leads->phone_work)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2, $bean_Leads->o_estatus_telefono_c);
         }
 
         $bean_account->pendiente_reus_c = ($resp_reus_tel == 3) ? true : false;
@@ -513,7 +513,7 @@ SITE;
         $bean_relacion->save();
     }
 
-    public function create_phone($idCuenta, $phone, $tipoTel)
+    public function create_phone($idCuenta, $phone, $tipoTel, $estatus_telefono)
     {
         /************* Validación REUS telefono *****************/
         $reus = $this->REUS_telefono($phone);
@@ -527,8 +527,8 @@ SITE;
         $bean_relacionTel->tipotelefono = $tipoTel;
         $bean_relacionTel->estatus = "Activo";
         $bean_relacionTel->pais = 2;
-        if($reus == 1){  $bean_relacionTel->registro_reus_c = 1; }
-
+        if($reus == 1) { $bean_relacionTel->registro_reus_c = 1; }
+		$bean_relacionTel->estatus_telefono_c = $estatus_telefono;
         $bean_relacionTel->save();
         return $reus;
     }
