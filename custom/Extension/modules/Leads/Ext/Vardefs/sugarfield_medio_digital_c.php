@@ -1,7 +1,9 @@
 <?php
- // created: 2020-11-11 11:18:04
+ // created: 2022-01-11 14:22:03
 $dictionary['Lead']['fields']['medio_digital_c']['labelValue']='Medio';
 $dictionary['Lead']['fields']['medio_digital_c']['dependency']='';
+$dictionary['Lead']['fields']['medio_digital_c']['required_formula']='';
+$dictionary['Lead']['fields']['medio_digital_c']['readonly_formula']='';
 $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
   'trigger' => 'detalle_origen_c',
   'values' => 
@@ -19,24 +21,26 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
       2 => '2',
       3 => '3',
       4 => '5',
-      5 => '6',
-      6 => '7',
-      7 => '8',
-      8 => '9',
-      9 => '15',
-      10 => '16',
-      11 => '17',
-      12 => '18',
-      13 => '19',
-      14 => '20',
-      15 => '21',
-      16 => '22',
-      17 => '23',
-      18 => '24',
-      19 => '25',
-      20 => '26',
-      21 => '27',
-      22 => '28',
+      5 => '29',
+      6 => '30',
+      7 => '6',
+      8 => '7',
+      9 => '8',
+      10 => '9',
+      11 => '15',
+      12 => '16',
+      13 => '17',
+      14 => '18',
+      15 => '19',
+      16 => '20',
+      17 => '21',
+      18 => '22',
+      19 => '23',
+      20 => '24',
+      21 => '25',
+      22 => '26',
+      23 => '27',
+      24 => '28',
     ),
     4 => 
     array (
@@ -66,6 +70,276 @@ $dictionary['Lead']['fields']['medio_digital_c']['visibility_grid']=array (
     array (
     ),
     11 => 
+    array (
+    ),
+    12 => 
+    array (
+    ),
+    13 => 
+    array (
+    ),
+    14 => 
+    array (
+    ),
+    15 => 
+    array (
+    ),
+    16 => 
+    array (
+    ),
+    17 => 
+    array (
+    ),
+    18 => 
+    array (
+    ),
+    19 => 
+    array (
+    ),
+    20 => 
+    array (
+    ),
+    21 => 
+    array (
+    ),
+    22 => 
+    array (
+    ),
+    23 => 
+    array (
+    ),
+    24 => 
+    array (
+    ),
+    25 => 
+    array (
+    ),
+    26 => 
+    array (
+    ),
+    27 => 
+    array (
+    ),
+    28 => 
+    array (
+    ),
+    29 => 
+    array (
+    ),
+    30 => 
+    array (
+    ),
+    31 => 
+    array (
+    ),
+    32 => 
+    array (
+    ),
+    33 => 
+    array (
+    ),
+    34 => 
+    array (
+    ),
+    35 => 
+    array (
+    ),
+    36 => 
+    array (
+    ),
+    37 => 
+    array (
+    ),
+    38 => 
+    array (
+    ),
+    39 => 
+    array (
+    ),
+    40 => 
+    array (
+    ),
+    41 => 
+    array (
+    ),
+    42 => 
+    array (
+    ),
+    43 => 
+    array (
+    ),
+    44 => 
+    array (
+    ),
+    45 => 
+    array (
+    ),
+    46 => 
+    array (
+    ),
+    47 => 
+    array (
+    ),
+    48 => 
+    array (
+    ),
+    49 => 
+    array (
+    ),
+    50 => 
+    array (
+    ),
+    51 => 
+    array (
+    ),
+    52 => 
+    array (
+    ),
+    53 => 
+    array (
+    ),
+    54 => 
+    array (
+    ),
+    55 => 
+    array (
+    ),
+    56 => 
+    array (
+    ),
+    57 => 
+    array (
+    ),
+    58 => 
+    array (
+    ),
+    59 => 
+    array (
+    ),
+    60 => 
+    array (
+    ),
+    61 => 
+    array (
+    ),
+    62 => 
+    array (
+    ),
+    63 => 
+    array (
+    ),
+    64 => 
+    array (
+    ),
+    65 => 
+    array (
+    ),
+    66 => 
+    array (
+    ),
+    67 => 
+    array (
+    ),
+    68 => 
+    array (
+    ),
+    69 => 
+    array (
+    ),
+    70 => 
+    array (
+    ),
+    71 => 
+    array (
+    ),
+    72 => 
+    array (
+    ),
+    73 => 
+    array (
+    ),
+    74 => 
+    array (
+    ),
+    75 => 
+    array (
+    ),
+    76 => 
+    array (
+    ),
+    77 => 
+    array (
+    ),
+    78 => 
+    array (
+    ),
+    79 => 
+    array (
+    ),
+    80 => 
+    array (
+    ),
+    81 => 
+    array (
+    ),
+    82 => 
+    array (
+    ),
+    83 => 
+    array (
+    ),
+    84 => 
+    array (
+    ),
+    85 => 
+    array (
+    ),
+    86 => 
+    array (
+    ),
+    87 => 
+    array (
+    ),
+    88 => 
+    array (
+    ),
+    89 => 
+    array (
+    ),
+    90 => 
+    array (
+    ),
+    91 => 
+    array (
+    ),
+    92 => 
+    array (
+    ),
+    93 => 
+    array (
+    ),
+    94 => 
+    array (
+    ),
+    95 => 
+    array (
+    ),
+    96 => 
+    array (
+    ),
+    97 => 
+    array (
+    ),
+    98 => 
+    array (
+    ),
+    99 => 
+    array (
+    ),
+    100 => 
+    array (
+    ),
+    101 => 
     array (
     ),
     '' => 
