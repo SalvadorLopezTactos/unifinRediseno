@@ -4882,6 +4882,7 @@
         this.model.set('account_telefonos', this.oTelefonos.telefono);
         //Recupera información
         idCuenta = this.model.get('id');
+        try{
         app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_tel_telefonos_1'), null, {
             success: function (data) {
                 for (var i = 0; i < data.records.length; i++) {
@@ -4970,9 +4971,13 @@
                 $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
             },
             error: function (e) {
+                console.log(e);
                 throw e;
             }
         });
+        } catch (err) {
+            console.log(err.message);
+        }
     },
 
     get_addresses: function () {
