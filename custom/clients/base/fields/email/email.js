@@ -302,6 +302,7 @@
                 arrayPuestosComerciales.push(key);
             });
 
+            try{
             if(self.model.attributes.email !=undefined){
             //CORREOS REUS
 
@@ -375,7 +376,9 @@
                 }
             //}
             } 
-
+            } catch (err) {
+            console.log(err.message);
+            }
         }
 
         if (this.module == "Leads") {
