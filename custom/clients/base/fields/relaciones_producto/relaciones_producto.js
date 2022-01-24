@@ -38,7 +38,7 @@
         var arr_final_rel = [];
         var AsesorRM = App.user.attributes.puestousuario_c;
         var productoUNICLICK = App.user.attributes.productos_c;
-        
+
         //Funcion donde se hace la comparación de ambas listas de relaciones, para la visualización de los valores de Relación en la tabla de Relaciones por producto
         for (var property in list_rel_prod) {
             for (var k = 0; k < arr_re_selecc.length; k++) {
@@ -48,8 +48,8 @@
                         //VALIDACIÓN DE PUESTO ASESOR RM Y PRODUCTO UNICLICK
                         if (AsesorRM == '54' && productoUNICLICK.includes("8") && (this.model.get('account_id1_c') == '' || this.model.get('account_id1_c') == undefined)) {
                             //CARGA EN AUTO TIPO DE PRODUCTO CREDITO SIMPLE, NEGOCIO UNICLIK Y PRODUCTO FINANCIERO UNICREDIT
-                            arr_final_rel.push({"rel":property,"prod":"^2^","neg":"^10^","fncro":"^39^","productoFncroList":{"39":"UNICREDIT","49":"UNIPREMIUM","77":"CRÉDITO PYME"},"negocioList":{"2":"CRÉDITO S0S","3":"ESTRUCTURADO","7":"OPERATIVO - NO NEGOCIO","10":"UNICLICK","11":"CRÉDITO SIMPLE","13":"CRÉDITO PLAZO"},"prodsFinancieros":"UNICREDIT"});
-                            
+                            arr_final_rel.push({ "rel": property, "prod": "^2^", "neg": "^10^", "fncro": "^39^", "productoFncroList": { "39": "UNICREDIT", "49": "UNIPREMIUM", "77": "CRÉDITO PYME" }, "negocioList": { "2": "CRÉDITO S0S", "3": "ESTRUCTURADO", "7": "OPERATIVO - NO NEGOCIO", "10": "UNICLICK", "11": "CRÉDITO SIMPLE", "13": "CRÉDITO PLAZO" }, "prodsFinancieros": "UNICREDIT" });
+
                         } else {
                             arr_final_rel.push({ "rel": property, "prod": "", "neg": "", 'fncro': "", 'productoFncroList': "" });
                         }
@@ -65,7 +65,15 @@
                             if (!_.isEmpty(rel_product.objectListaProdFinancieros)) {
 
                                 if (rel_product.objectListaProdFinancieros[property] == undefined) {
-                                    arr_final_rel.push({ "rel": property, "prod": "", "neg": "", 'fncro': "", 'productoFncroList': "" });
+                                    //VALIDACIÓN DE PUESTO ASESOR RM Y PRODUCTO UNICLICK
+                                    if (AsesorRM == '54' && productoUNICLICK.includes("8") && (this.model.get('account_id1_c') == '' || this.model.get('account_id1_c') == undefined)) {
+                                        //CARGA EN AUTO TIPO DE PRODUCTO CREDITO SIMPLE, NEGOCIO UNICLIK Y PRODUCTO FINANCIERO UNICREDIT
+                                        arr_final_rel.push({ "rel": property, "prod": "^2^", "neg": "^10^", "fncro": "^39^", "productoFncroList": { "39": "UNICREDIT", "49": "UNIPREMIUM", "77": "CRÉDITO PYME" }, "negocioList": { "2": "CRÉDITO S0S", "3": "ESTRUCTURADO", "7": "OPERATIVO - NO NEGOCIO", "10": "UNICLICK", "11": "CRÉDITO SIMPLE", "13": "CRÉDITO PLAZO" }, "prodsFinancieros": "UNICREDIT" });
+
+                                    } else {
+                                        arr_final_rel.push({ "rel": property, "prod": "", "neg": "", 'fncro': "", 'productoFncroList': "" });
+                                    }
+
                                 } else {
                                     arr_final_rel.push({ "rel": property, "prod": "", "neg": "", 'fncro': "", 'productoFncroList': rel_product.objectListaProdFinancieros[property] });
                                 }
@@ -74,7 +82,7 @@
                                 //VALIDACIÓN DE PUESTO ASESOR RM Y PRODUCTO UNICLICK
                                 if (AsesorRM == '54' && productoUNICLICK.includes("8") && (this.model.get('account_id1_c') == '' || this.model.get('account_id1_c') == undefined)) {
                                     //CARGA EN AUTO TIPO DE PRODUCTO CREDITO SIMPLE, NEGOCIO UNICLIK Y PRODUCTO FINANCIERO UNICREDIT
-                                    arr_final_rel.push({"rel":property,"prod":"^2^","neg":"^10^","fncro":"^39^","productoFncroList":{"39":"UNICREDIT","49":"UNIPREMIUM","77":"CRÉDITO PYME"},"negocioList":{"2":"CRÉDITO S0S","3":"ESTRUCTURADO","7":"OPERATIVO - NO NEGOCIO","10":"UNICLICK","11":"CRÉDITO SIMPLE","13":"CRÉDITO PLAZO"},"prodsFinancieros":"UNICREDIT"});
+                                    arr_final_rel.push({ "rel": property, "prod": "^2^", "neg": "^10^", "fncro": "^39^", "productoFncroList": { "39": "UNICREDIT", "49": "UNIPREMIUM", "77": "CRÉDITO PYME" }, "negocioList": { "2": "CRÉDITO S0S", "3": "ESTRUCTURADO", "7": "OPERATIVO - NO NEGOCIO", "10": "UNICLICK", "11": "CRÉDITO SIMPLE", "13": "CRÉDITO PLAZO" }, "prodsFinancieros": "UNICREDIT" });
 
                                 } else {
                                     arr_final_rel.push({ "rel": property, "prod": "", "neg": "", 'fncro': "", 'productoFncroList': "" });
