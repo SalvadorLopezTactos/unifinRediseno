@@ -46,7 +46,7 @@
                     //Se agrega condición para mantener la lista de cada fila de forma independiente
                     if (typeof (rel_product.productoSeleccionado) == "string") {
                         //VALIDACIÓN DE PUESTO ASESOR RM Y PRODUCTO UNICLICK
-                        if (AsesorRM == '54' && productoUNICLICK.includes("8") && this.model.get('account_id1_c') == undefined) {
+                        if (AsesorRM == '54' && productoUNICLICK.includes("8") && (this.model.get('account_id1_c') == '' || this.model.get('account_id1_c') == undefined)) {
                             //CARGA EN AUTO TIPO DE PRODUCTO CREDITO SIMPLE, NEGOCIO UNICLIK Y PRODUCTO FINANCIERO UNICREDIT
                             arr_final_rel.push({"rel":property,"prod":"^2^","neg":"^10^","fncro":"^39^","productoFncroList":{"39":"UNICREDIT","49":"UNIPREMIUM","77":"CRÉDITO PYME"},"negocioList":{"2":"CRÉDITO S0S","3":"ESTRUCTURADO","7":"OPERATIVO - NO NEGOCIO","10":"UNICLICK","11":"CRÉDITO SIMPLE","13":"CRÉDITO PLAZO"},"prodsFinancieros":"UNICREDIT"});
                             
@@ -72,7 +72,7 @@
 
                             } else {
                                 //VALIDACIÓN DE PUESTO ASESOR RM Y PRODUCTO UNICLICK
-                                if (AsesorRM == '54' && productoUNICLICK.includes("8") && this.model.get('account_id1_c') == undefined) {
+                                if (AsesorRM == '54' && productoUNICLICK.includes("8") && (this.model.get('account_id1_c') == '' || this.model.get('account_id1_c') == undefined)) {
                                     //CARGA EN AUTO TIPO DE PRODUCTO CREDITO SIMPLE, NEGOCIO UNICLIK Y PRODUCTO FINANCIERO UNICREDIT
                                     arr_final_rel.push({"rel":property,"prod":"^2^","neg":"^10^","fncro":"^39^","productoFncroList":{"39":"UNICREDIT","49":"UNIPREMIUM","77":"CRÉDITO PYME"},"negocioList":{"2":"CRÉDITO S0S","3":"ESTRUCTURADO","7":"OPERATIVO - NO NEGOCIO","10":"UNICLICK","11":"CRÉDITO SIMPLE","13":"CRÉDITO PLAZO"},"prodsFinancieros":"UNICREDIT"});
 
