@@ -77,7 +77,6 @@ class altaLeadServices extends SugarApi
                 /** Proceso de Guardado */
 
                 $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
-
                 /*if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
 
                     for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
@@ -199,241 +198,249 @@ class altaLeadServices extends SugarApi
             $query = $query . "WHERE name='last_assigned_user_uniclick'";
         }
         //$GLOBALS['log']->fatal("query " . $query);
-
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
 
-        //VALIDACION DE REVISTA MEDICA
-        if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
-
-            $flagCarrusel = 1;
-
-            //$GLOBALS['log']->fatal("id_landing_c "  , $id_landing_c);
-            if (strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) {
-                $subpuesto_c = 5;
-            } else {
-                if ($compania_c == 1) $subpuesto_c = 3;
-                if ($compania_c == 2) $subpuesto_c = 4;
+        $GLOBALS['log']->fatal("data_result " , $data_result);
+        if($origen == 12 && $detalleOrigen == 12 ){
+            if($data_result['lead']['status'] == "200"){
+                $this->asigna_soc($data_result['lead']['id'] , 1);
             }
-
-            $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
-            $result = $db->query($query);
-
-            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
-                if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
-                if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
-                if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
-                if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
-                if ($row['name'] == 'id_usuario_asignar_unilease') $idAsesorUnilease[] = $row['value'];
-                if ($row['name'] == 'id_ultimo_unilease') $indiceUnilease = $row['value'];
+            if($data_result['lead']['status'] == "503"){
+                if($data_result['lead']['modulo'] == "Leads"){
+                    $this->asigna_soc($data_result['lead']['id'] , 2);
+                }
+                if($data_result['lead']['modulo'] == "Cuentas"){
+                    $this->asigna_soc($data_result['lead']['id'] , 3);
+                }
             }
-
-            //VALIDACION DE ASESORES COMPANIA UNIFIN - PRODUCTO FINANCIERO UNILEASE
-            if ($compania_c == 1 && $productoFinanciero == 41) {
-                $flagCarrusel = 0;
-                $new_assigned_user = (!empty($idAsignadoAlta)) ? $idAsignadoAlta : '0';
-
-                if (count($idAsesorUnilease) > 0 && $new_assigned_user=='0') {
-                    $newIndiceUnilease = $indiceUnilease >= count($idAsesorUnilease) - 1 ? 0 : $indiceUnilease + 1;
-                    $new_assigned_user = $idAsesorUnilease[$newIndiceUnilease];
-                    $update_Indice_Unilease = "UPDATE config c SET c.value ='{$newIndiceUnilease}' WHERE c.name ='id_ultimo_unilease' and c.category = 'AltaLeadsServices'";
-                    $db->query($update_Indice_Unilease);
+        }else{
+            //VALIDACION DE REVISTA MEDICA
+            if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
+                $flagCarrusel = 1;
+                //$GLOBALS['log']->fatal("id_landing_c "  , $id_landing_c);
+                if (strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) {
+                    $subpuesto_c = 5;
+                } else {
+                    if ($compania_c == 1) $subpuesto_c = 3;
+                    if ($compania_c == 2) $subpuesto_c = 4;
                 }
 
-                $GLOBALS['log']->fatal("UNIFIN-PRODUCTO-FINANCIERO-UNILEASE "  . $new_assigned_user);
-            }
+                $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
+                $result = $db->query($query);
 
-            //VALIDACION DE ASESORES UNICLICK RESPONSABLES
-            if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
-                $new_assigned_user = $idAsesorAlianza;
-                $flagCarrusel = 0;
-                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-ALIANZA "  . $new_assigned_user);
-            }
-            if ($compania_c == 2 && $origen == 13) { //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
-                $new_assigned_user = $idAsesorCP;
-                $flagCarrusel = 0;
-                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CP "  . $new_assigned_user);
-            }
-            if ($compania_c == 2 && $origen == 14) { //COMPANIA UNICLICK Y ORIGEN CLOSER
-                $new_assigned_user = $idAsesorCloser;
-                $flagCarrusel = 0;
-                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CLOSER "  . $new_assigned_user);
-            }
-            if ($compania_c == 2 && $origen == 15) { //COMPANIA UNICLICK Y ORIGEN GROWTH
-                $new_assigned_user = $idAsesorGrowth;
-                $flagCarrusel = 0;
-                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-GROWTH "  . $new_assigned_user);
-            }
+                while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+                    if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
+                    if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
+                    if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
+                    if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
+                    if ($row['name'] == 'id_usuario_asignar_unilease') $idAsesorUnilease[] = $row['value'];
+                    if ($row['name'] == 'id_ultimo_unilease') $indiceUnilease = $row['value'];
+                }
 
-            if ($flagCarrusel == 1) {
+                //VALIDACION DE ASESORES COMPANIA UNIFIN - PRODUCTO FINANCIERO UNILEASE
+                if ($compania_c == 1 && $productoFinanciero == 41) {
+                    $flagCarrusel = 0;
+                    $new_assigned_user = (!empty($idAsignadoAlta)) ? $idAsignadoAlta : '0';
 
-                $query_asesores = "SELECT
+                    if (count($idAsesorUnilease) > 0 && $new_assigned_user=='0') {
+                        $newIndiceUnilease = $indiceUnilease >= count($idAsesorUnilease) - 1 ? 0 : $indiceUnilease + 1;
+                        $new_assigned_user = $idAsesorUnilease[$newIndiceUnilease];
+                        $update_Indice_Unilease = "UPDATE config c SET c.value ='{$newIndiceUnilease}' WHERE c.name ='id_ultimo_unilease' and c.category = 'AltaLeadsServices'";
+                        $db->query($update_Indice_Unilease);
+                    }
+                    $GLOBALS['log']->fatal("UNIFIN-PRODUCTO-FINANCIERO-UNILEASE "  . $new_assigned_user);
+                }
+                //VALIDACION DE ASESORES UNICLICK RESPONSABLES
+                if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { 
+                //COMPANIA UNICLICK, ORIGEN   ALIANZAS Y DETALLE ORIGEN
+                    $new_assigned_user = $idAsesorAlianza;
+                    $flagCarrusel = 0;
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-ALIANZA "  . $new_assigned_user);
+                }
+                if ($compania_c == 2 && $origen == 13) { //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
+                    $new_assigned_user = $idAsesorCP;
+                    $flagCarrusel = 0;
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CP "  . $new_assigned_user);
+                }
+                if ($compania_c == 2 && $origen == 14) { //COMPANIA UNICLICK Y ORIGEN CLOSER
+                    $new_assigned_user = $idAsesorCloser;
+                    $flagCarrusel = 0;
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CLOSER "  . $new_assigned_user);
+                }
+                if ($compania_c == 2 && $origen == 15) { //COMPANIA UNICLICK Y ORIGEN GROWTH
+                    $new_assigned_user = $idAsesorGrowth;
+                    $flagCarrusel = 0;
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-GROWTH "  . $new_assigned_user);
+                }
+
+                if ($flagCarrusel == 1) {
+
+                    $query_asesores = "SELECT
+                    user.id,
+                    user.date_entered,
+                    count(lead.assigned_user_id) AS total_asignados,
+                    uc.access_hours_c
+                    FROM users user
+                    INNER JOIN users_cstm uc
+                    ON uc.id_c = user.id
+                    LEFT JOIN leads lead
+                    ON lead.assigned_user_id = user.id
+                    where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
+                    GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
+
+                    //$GLOBALS['log']->fatal("query_asesores "  , $query_asesores);
+                    $result_usr = $db->query($query_asesores);
+                    //$usuarios=;
+                    //$GLOBALS['log']->fatal("result_usr "  , $result_usr);
+                    while ($row = $db->fetchByAssoc($result_usr)) {
+                        $hours = json_decode($row['access_hours_c'], true);
+                        $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+                        $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
+                        $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
+                        $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+                        //$GLOBALS['log']->fatal("hoursIn" , $hoursIn);
+                        if ($hoursIn != "" && $hoursOut != "") {
+                            if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
+                                $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
+                                if ($enable) {
+                                    $users[] = $row['id'];
+                                }
+                            } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
+                                $users[] = $row['id'];
+                            }
+                        } /*else {
+                            $users[] = $row['id'];
+                        }*/
+                    }
+                    //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+                    if (count($users) > 0) {
+                        $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+
+                        if ($compania_c == 2 && $origen == 1) { //COMPANIA UNICLICK Y ORIGEN MARKETING
+                            $new_assigned_user = $users[$new_indice];
+                            $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL");
+                        } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) { //COMPANIA UNICLICK,  ORIGEN ALIANZAS Y DETALLE ORIGEN
+                            $new_assigned_user = $users[$new_indice];
+                            $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ALIANZA-CARRUSEL");
+                        } else {
+                            $new_assigned_user = $users[$new_indice];
+                            $GLOBALS['log']->fatal("ASESOR ASIGNADO POR CARRUSEL");
+                        }
+
+                    } else {
+                        // No existen usuarios disponibles y se asigna a  9.- MKT "
+                        $new_assigned_user = $idMKT;
+                        $GLOBALS['log']->fatal("NO HAY ASESOR DISPONIBLE ASIGNA ID_MKT ");
+                    }
+                }
+
+            } else {
+
+                //USUARIOS QUE TIENEN EL EQUIPO PRINCIPAL UNICS 7 SE LEAS ASIGNA LEADS - REVISTA MEDICA
+                $query_revista = "SELECT
                 user.id,
                 user.date_entered,
                 count(lead.assigned_user_id) AS total_asignados,
                 uc.access_hours_c
                 FROM users user
                 INNER JOIN users_cstm uc
-                    ON uc.id_c = user.id
-                LEFT JOIN leads lead
-                    ON lead.assigned_user_id = user.id
-                where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-                GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
-
-                //$GLOBALS['log']->fatal("query_asesores "  , $query_asesores);
-                $result_usr = $db->query($query_asesores);
-                //$usuarios=;
-                //$GLOBALS['log']->fatal("result_usr "  , $result_usr);
-                while ($row = $db->fetchByAssoc($result_usr)) {
-                    $hours = json_decode($row['access_hours_c'], true);
-                    $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
-                    $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
-                    $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
-                    $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-                    //$GLOBALS['log']->fatal("hoursIn" , $hoursIn);
-                    if ($hoursIn != "" && $hoursOut != "") {
-                        if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
-                            $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
-                            if ($enable) {
-                                $users[] = $row['id'];
-                            }
-                        } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
-                            $users[] = $row['id'];
-                        }
-                    } /*else {
-                        $users[] = $row['id'];
-                    }*/
-                }
-                //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
-                if (count($users) > 0) {
-                    $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-
-                    if ($compania_c == 2 && $origen == 1) { //COMPANIA UNICLICK Y ORIGEN MARKETING
-                        $new_assigned_user = $users[$new_indice];
-                        $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL");
-                    } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
-                        $new_assigned_user = $users[$new_indice];
-                        $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ALIANZA-CARRUSEL");
-                    } else {
-                        $new_assigned_user = $users[$new_indice];
-                        $GLOBALS['log']->fatal("ASESOR ASIGNADO POR CARRUSEL");
-                    }
-
-                } else {
-                    // No existen usuarios disponibles y se asigna a  9.- MKT "
-                    $new_assigned_user = $idMKT;
-                    $GLOBALS['log']->fatal("NO HAY ASESOR DISPONIBLE ASIGNA ID_MKT ");
-                }
-            }
-
-        } else {
-
-            //USUARIOS QUE TIENEN EL EQUIPO PRINCIPAL UNICS 7 SE LEAS ASIGNA LEADS - REVISTA MEDICA
-            $query_revista = "SELECT
-            user.id,
-            user.date_entered,
-            count(lead.assigned_user_id) AS total_asignados,
-            uc.access_hours_c
-            FROM users user
-            INNER JOIN users_cstm uc
                 ON uc.id_c = user.id
-            LEFT JOIN leads lead
+                LEFT JOIN leads lead
                 ON lead.assigned_user_id = user.id
-            WHERE user.status = 'Active' AND equipo_c = 7
-            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
-            LIMIT 1";
+                WHERE user.status = 'Active' AND equipo_c = 7
+                GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
+                LIMIT 1";
 
-            $result_rm = $db->query($query_revista);
-            $conteo = $result_rm->num_rows;
+                $result_rm = $db->query($query_revista);
+                $conteo = $result_rm->num_rows;
 
-            if ($conteo > 0) {
-                while ($row = $db->fetchByAssoc($result_rm)) {
+                if ($conteo > 0) {
+                    while ($row = $db->fetchByAssoc($result_rm)) {
 
-                    $new_assigned_user = $row['id'];
+                        $new_assigned_user = $row['id'];
+                    }
                 }
             }
-        }
 
+            if ($regimenFiscal != "3") {
 
-        if ($regimenFiscal != "3") {
+                if ($data_result['lead']['status'] == 200) {
 
-            if ($data_result['lead']['status'] == 200) {
+                    $id_lead = $data_result['lead']['id'];
 
-                $id_lead = $data_result['lead']['id'];
-
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
-                $db->query($update_assigne_user);
-                $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
-
-                if ($new_indice > -1) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
-                    if ($compania_c == '1') {
-                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
-                    }
-                    if ($compania_c == '2') {
-                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
-                    }
+                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
                     $db->query($update_assigne_user);
-                }
-            }
-        } else {
+                    $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
 
-            if ($data_result['lead']['status'] == 200 && $data_result['asociados'][0]['status'] == 200) {
+                    if ($new_indice > -1) {
+                        $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                        if ($compania_c == '1') {
+                            $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
+                        }
+                        if ($compania_c == '2') {
+                            $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
+                        }
+                        $db->query($update_assigne_user);
+                    }
+                }
+            } else {
+
+                if ($data_result['lead']['status'] == 200 && $data_result['asociados'][0]['status'] == 200) {
                 // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
                 // $new_assigned_user = $users[$new_indice];
-                $id_lead = $data_result['lead']['id'];
-                $id_lead_asociado = $data_result['asociados'][0]['id'];
+                    $id_lead = $data_result['lead']['id'];
+                    $id_lead_asociado = $data_result['asociados'][0]['id'];
 
                 // Actualiza lead padre
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead'";
-                $db->query($update_assigne_user);
+                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead'";
+                    $db->query($update_assigne_user);
                 //Actualiza lead Hijo
-                $update_assigne_user_asociado = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead_asociado' ";
-                $db->query($update_assigne_user_asociado);
+                    $update_assigne_user_asociado = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead_asociado' ";
+                    $db->query($update_assigne_user_asociado);
 
-                if ($new_indice > -1) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
-                    if ($compania_c == '1') {
-                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
+                    if ($new_indice > -1) {
+                        $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                        if ($compania_c == '1') {
+                            $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
+                        }
+                        if ($compania_c == '2') {
+                            $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
+                        }
+                        $db->query($update_assigne_user);
                     }
-                    if ($compania_c == '2') {
-                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
+                } elseif ($data_result['lead']['status'] == 200) {
+                    // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                    //$new_assigned_user = $users[$new_indice];
+                    $id_lead = $data_result['lead']['id'];
+
+                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
+                    $db->query($update_assigne_user);
+
+                    if ($new_indice > -1) {
+                        $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                        if ($compania_c == '1') {
+                            $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
+                        }
+                        if ($compania_c == '2') {
+                            $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
+                        }
+                        $db->query($update_assigne_user);
                     }
+                } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['    status'] == 200) {
+
+                    $id_lead = $data_result['lead']['id'];
+                    $id_lead_asociado = $data_result['asociados'][0]['id'];
+
+                    $select_Existente = "Select assigned_user_id from leads where id='$id_lead'";
+                    $result_existente = $db->query($select_Existente);
+                    $row = $db->fetchByAssoc($result_existente);
+                    $existente_asignado = $row['assigned_user_id'];
+
+                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$existente_asignado'  WHERE l.id ='$id_lead_asociado' ";
                     $db->query($update_assigne_user);
                 }
-            } elseif ($data_result['lead']['status'] == 200) {
-
-                // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                //$new_assigned_user = $users[$new_indice];
-                $id_lead = $data_result['lead']['id'];
-
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
-                $db->query($update_assigne_user);
-
-                if ($new_indice > -1) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
-                    if ($compania_c == '1') {
-                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
-                    }
-                    if ($compania_c == '2') {
-                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
-                    }
-                    $db->query($update_assigne_user);
-                }
-            } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
-
-                $id_lead = $data_result['lead']['id'];
-                $id_lead_asociado = $data_result['asociados'][0]['id'];
-
-                $select_Existente = "Select assigned_user_id from leads where id='$id_lead'";
-                $result_existente = $db->query($select_Existente);
-                $row = $db->fetchByAssoc($result_existente);
-                $existente_asignado = $row['assigned_user_id'];
-
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$existente_asignado'  WHERE l.id ='$id_lead_asociado' ";
-                $db->query($update_assigne_user);
             }
         }
 
@@ -484,9 +491,12 @@ class altaLeadServices extends SugarApi
                     $this->crea_relacion($parent_id, $lead_asociado['duplicados_en_leads']);
                 }
                 $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_leads'], "Leads", "");
+                
             }
         } else {
+            $GLOBALS['log']->fatal("duplicados_en_cuentas" , $lead_asociado['duplicados_en_cuentas'] );
             $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_cuentas'], "Cuentas", "");
+            
         }
         return $response;
     }
@@ -910,11 +920,11 @@ class altaLeadServices extends SugarApi
         $user1 = '';
         $cliente = '';
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado(a) <b> user1 .</b>
-						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital.
-						<br><br>Favor de contactarlo para dar el seguimiento adecuado.
-						<br><br>Si tienes alguna duda contacta a:
-						<br><br>Equipo CRM
-						<br>Inteligencia de Negocios<br>T: (55) 5249.5800 Ext.5737 y 5677';
+                        <br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital.
+                        <br><br>Favor de contactarlo para dar el seguimiento adecuado.
+                        <br><br>Si tienes alguna duda contacta a:
+                        <br><br>Equipo CRM
+                        <br>Inteligencia de Negocios<br>T: (55) 5249.5800 Ext.5737 y 5677';
         if ($idaccount != null || $idaccount != '') {
             $beanaccount = BeanFactory::retrieveBean('Accounts', $idaccount);
             $cliente = $beanaccount->name;
@@ -980,5 +990,112 @@ class altaLeadServices extends SugarApi
         if ($dateFrom <= $dateLogin && $dateLogin <= $dateTo) $enable = 1;
         if ($dateEat <= $dateLogin && $dateLogin <= $dateRet) $enable = 0;
         return ($enable);
+    }
+
+    public function asigna_soc($lead_asociado, $tipo)
+    {
+        global $db, $app_list_strings;
+        $users = [];
+        $asigna = 0;
+        $bean = null; 
+
+        if($tipo == 2) $bean = BeanFactory::retrieveBean('Leads', $lead_asociado,array('disable_row_level_security' => true));
+        if($tipo == 3 ) $bean = BeanFactory::retrieveBean('Accounts', $lead_asociado,array('disable_row_level_security' => true));
+        if($tipo == 1 ) $asigna = 1;
+
+        if($tipo != 1){
+            if($tipo == 3){
+                $quer_inactiv = "SELECT id, status, first_name , last_name FROM users 
+    WHERE id = ( SELECT up.assigned_user_id from accounts a
+    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida 
+    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id 
+    where a.id = '{$lead_asociado}' and up.tipo_producto = 1 ) and status = 'Inactive'";
+                $GLOBALS['log']->fatal("quer_inactiv" . print_r($quer_inactiv, true));
+                $inactive = $db->query($quer_inactiv);
+            }
+            
+            if($tipo == 2){
+                $quer_inactiv = "SELECT id, status, first_name , last_name FROM users 
+    WHERE id = ( SELECT l.assigned_user_id from leads l where l.id = '{$lead_asociado}' ) and status = 'Inactive'";
+                $GLOBALS['log']->fatal("quer_inactiv" . print_r($quer_inactiv, true));
+                $inactive = $db->query($quer_inactiv);
+            }
+
+            $quer_9_0 = "
+    SELECT id, status, first_name , last_name FROM users 
+    WHERE ((first_name like '%9%' and status = 'Active') OR (last_name like '%Pendiente%'))
+    AND id = ( SELECT up.assigned_user_id from accounts a
+    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida 
+    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id 
+    where a.id = '{$lead_asociado}' and up.tipo_producto = 1 )";
+            $res_9_0 = $db->query($quer_9_0);
+            
+            if($inactive->num_rows > 0 || $res_9_0->num_rows > 0 ){
+                $asigna = 1;
+            }
+        }
+        
+        if($asigna){
+            /* Obtiene el ultimo  usuario asignado y registrado en el config*/
+            $query = "SELECT value from config where category = 'AltaLeadsServices' and name = 'id_ultimo_alianza_soc'";
+            $result = $db->query($query);
+            $row = $db->fetchByAssoc($result);
+            $last_indice = $row['value'];
+            $last_indice = $last_indice == "" ? 0 : $last_indice;
+            $GLOBALS['log']->fatal("last_indice" . $last_indice);
+
+            $query_soc = "SELECT user.id, user.date_entered, count(lead.assigned_user_id) AS total_asignados 
+            FROM users user LEFT JOIN leads lead ON lead.assigned_user_id = user.id 
+            where user.status = 'Active' AND user.id in ( 
+                SELECT value from config where category = 'AltaLeadsServices' and name = 'id_usuario_asignar_alianza_soc' )
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
+            $GLOBALS['log']->fatal("query_soc" . print_r($query_soc, true));
+            $result_usr = $db->query($query_soc);
+
+            while ($row = $db->fetchByAssoc($result_usr)) {
+                $users[] = $row['id'];
+            }
+            $GLOBALS['log']->fatal("users" , $users);
+
+            $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+            $new_assigned_user = $users[$new_indice];
+            $GLOBALS['log']->fatal("new_indice-" . $new_indice. '-'.$new_assigned_user);
+
+            $id_lead = $lead_asociado;
+            if($tipo == 1){
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user .
+                "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'
+                WHERE l.id ='$id_lead' ";
+                $db->query($update_assigne_user);
+                $GLOBALS['log']->fatal("Usuario Asignado SOC Lead  " . $new_indice . "-" . $new_assigned_user);
+            }
+            if($tipo == 2){
+                $bean->assigned_user_id = $new_assigned_user;
+                $bean->save();
+            }
+            if($tipo == 3){
+                if ($bean->load_relationship('accounts_uni_productos_1')) {
+                    $uniProducto = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
+
+                    foreach ($uniProducto as $prod) {
+                        if ($prod->tipo_producto == '1') {  //Leasing
+                            $beanPROD = BeanFactory::retrieveBean('uni_Productos', $prod->id , array('disable_row_level_security' => true));
+                            $beanPROD->assigned_user_id = $new_assigned_user;
+                        }
+                    }
+                    $beanPROD->save();
+                }
+                $bean->user_id_c = $new_assigned_user;
+                $bean->alianza_soc_chk_c = 1;
+                $bean->save();
+            }
+            
+
+            if ($new_indice > -1) {
+                $update_assigne_user = "UPDATE config SET value = $new_indice  
+                WHERE category = 'AltaLeadsServices' and name = 'id_ultimo_alianza_soc'";
+                $db->query($update_assigne_user);
+            }
+        }
     }
 }
