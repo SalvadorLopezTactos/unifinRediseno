@@ -210,6 +210,12 @@ SITE;
         $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
+
+        $GLOBALS['log']->fatal("lead". $bean_Leads->origen_c .'-'.$bean_Leads->detalle_origen_c);
+        if($bean_Leads->origen_c == '12' && $bean_Leads->detalle_origen_c == '12'){
+            $bean_account->alianza_soc_chk_c = 1;
+        }
+        
         // Asesores
         if ($idMeetings != null) {
             $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['LEASING'];
