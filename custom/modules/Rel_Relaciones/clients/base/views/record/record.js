@@ -1998,7 +1998,7 @@ extendsFrom: 'RecordView',
     validaReqUniclickPLD: function (fields, errors, callback) {
         if(App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id){
                         //Validamos que se tenga alguna de las siguientes relaciones activas
-                    if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Proveedor de los Recursos') || this.model.get('relaciones_activas').includes('Representante legal') || 
+                    if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CS') || this.model.get('relaciones_activas').includes('Representante legal') || 
                         this.model.get('relaciones_activas').includes('Accionistas') ||  this.model.get('relaciones_activas').includes('Propietario Real')  && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
                        var necesarios="";
                        var requests=[];
@@ -2187,22 +2187,22 @@ extendsFrom: 'RecordView',
                                             //Preguntas PLD
                                             if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records.tct_pld_campo4_ddw == "" || data[3].contents.records.tct_pld_campo4_ddw == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 3 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo18_ddw == "" || data[3].contents.records.tct_pld_campo18_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 5 PLD-Crédito Simple<br></b>';
                                                 }
                                                 /*if (data[3].contents.records.tct_pld_campo14_chk == "" || data[3].contents.records.tct_pld_campo14_chk == null) {
-                                                    necesarios = necesarios + '<b>regunta 6 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 6 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo19_txt == "" || data[3].contents.records.tct_pld_campo19_txt == null) {
-                                                    necesarios = necesarios + '<b>regunta 5.1 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
                                                 }*/
                                                 if (data[3].contents.records.tct_pld_campo20_ddw == "" || data[3].contents.records.tct_pld_campo20_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 7 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 7 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo6_ddw == "" || data[3].contents.records.tct_pld_campo6_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 8 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 8 PLD-Crédito Simple<br></b>';
                                                 }
                                             } 
                                             //PEPS Moral Familiar
