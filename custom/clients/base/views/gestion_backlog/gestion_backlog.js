@@ -281,6 +281,48 @@
                     $('#btn_Buscar_bl').removeAttr("disabled");
                 }
 
+                //Validar que la lista de backlogs está llena, ya que se requiere obtener información adicional del usuario asignado
+                if(self.listaBacklogs.length>0){
+                    //Recorre cada registro para obtener su región
+                    contextoUser=self;
+                    contextoUser.indice=0;
+                    for (let index = 0; index < self.listaBacklogs.length; index++) {
+                        //contextoUser.indice=index;
+                        const bl = self.listaBacklogs[index];
+                        var usuario = app.data.createBean('Users', { id: bl.assigned_user_id });
+
+                        usuario.fetch({
+                            success: _.bind(function (modelo) {
+                                //Se obtiene la región para pintar en la tabla
+                                var region=modelo.get('region_c');
+                                self.listaBacklogs[contextoUser.indice].zona=region;
+                                contextoUser.indice+=1;
+                                //Se aplica render
+                                self.render();
+
+                                //Después de render, se restablecen los valores en la barra de búsqueda para que persistan los valores
+                                if (self.mes_filtro != undefined && self.anio_filtro != undefined && self.etapa_filtro != undefined && self.producto_filtro) {
+                                    $('#mes_filtro').val(self.mes_filtro);
+                                    $('#anio_filtro').val(self.anio_filtro);
+                                    $('#etapa_filtro').val(self.etapa_filtro);
+                                    $('#producto_filtro').val(self.producto_filtro);
+                                } else {
+                                    //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
+                                    $('#mes_filtro').select2('val', ((new Date).getMonth() + 1).toString());
+                                    //$('#anio_filtro').val((new Date).getFullYear());
+                                    $('#anio_filtro').select2('val', ((new Date).getFullYear()));
+                                    $('#etapa_filtro').select2('val', "");
+                                    $('#producto_filtro').select2('val', "0");
+                                }
+
+                                //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
+                                $(".monto_prospecto").trigger("change");
+                            }, self)
+                        });
+                    }
+
+                }
+
                 app.alert.dismiss('getBacklogs');
                 $('#processing_buscar').hide();
                 $('#btn_Buscar_bl').removeAttr("disabled");
