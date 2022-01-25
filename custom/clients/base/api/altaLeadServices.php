@@ -1012,6 +1012,15 @@ class altaLeadServices extends SugarApi
     where a.id = '{$lead_asociado}' and up.tipo_producto = 1 ) and status = 'Inactive'";
                 $GLOBALS['log']->fatal("quer_inactiv" . print_r($quer_inactiv, true));
                 $inactive = $db->query($quer_inactiv);
+                $quer_9_0 = "
+    SELECT id, status, first_name , last_name FROM users 
+    WHERE ((first_name like '%9%' and status = 'Active') OR (last_name like '%Pendiente%'))
+    AND id = ( SELECT up.assigned_user_id from accounts a
+    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida 
+    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id 
+    where a.id = '{$lead_asociado}' and up.tipo_producto = 1 )";
+                $GLOBALS['log']->fatal("quer_9_0" . print_r($quer_9_0, true));
+                $res_9_0 = $db->query($quer_9_0);
             }
             
             if($tipo == 2){
@@ -1019,16 +1028,13 @@ class altaLeadServices extends SugarApi
     WHERE id = ( SELECT l.assigned_user_id from leads l where l.id = '{$lead_asociado}' ) and status = 'Inactive'";
                 $GLOBALS['log']->fatal("quer_inactiv" . print_r($quer_inactiv, true));
                 $inactive = $db->query($quer_inactiv);
-            }
-
-            $quer_9_0 = "
+                $quer_9_0 = "
     SELECT id, status, first_name , last_name FROM users 
     WHERE ((first_name like '%9%' and status = 'Active') OR (last_name like '%Pendiente%'))
-    AND id = ( SELECT up.assigned_user_id from accounts a
-    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida 
-    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id 
-    where a.id = '{$lead_asociado}' and up.tipo_producto = 1 )";
-            $res_9_0 = $db->query($quer_9_0);
+    AND id = ( SELECT l.assigned_user_id from leads l where l.id = '{$lead_asociado}')";
+                $GLOBALS['log']->fatal("quer_9_0" . print_r($quer_9_0, true));
+                $res_9_0 = $db->query($quer_9_0);
+            }
             
             if($inactive->num_rows > 0 || $res_9_0->num_rows > 0 ){
                 $asigna = 1;
