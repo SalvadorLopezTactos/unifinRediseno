@@ -7736,24 +7736,24 @@
                                                     necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
                                                 }
                                                 //Preguntas PLD
-                                                if (data[3]>0){
+                                                if (data[3].contents.records.length>0){
                                                     if (this.model.get('tct_pld_campo4_ddw') == "" || this.model.get('tct_pld_campo4_ddw') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 3 PLD<br></b>';
+                                                        necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                     }
                                                     if (this.model.get('tct_pld_campo18_ddw') == "" || this.model.get('tct_pld_campo18_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 5 PLD<br></b>';
+                                                        necesarios = necesarios + '<b>regunta 5 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.model.get('tct_pld_campo14_chk') == "" || this.model.get('tct_pld_campo14_chk') == null) {
-                                                        necesarios = necesarios + '<b>regunta 6 PLD<br></b>';
+                                                    /*if (this.model.get('tct_pld_campo14_chk') == "" || this.model.get('tct_pld_campo14_chk') == null) {
+                                                        necesarios = necesarios + '<b>regunta 6 PLD-Crédito Simple<br></b>';
                                                     }
                                                     if (this.model.get('tct_pld_campo19_txt') == "" || this.model.get('tct_pld_campo19_txt') == null) {
-                                                        necesarios = necesarios + '<b>regunta 5.1 PLD<br></b>';
-                                                    }
+                                                        necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
+                                                    }*/
                                                     if (this.model.get('tct_pld_campo20_ddw') == "" || this.model.get('tct_pld_campo20_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 7 PLD<br></b>';
+                                                        necesarios = necesarios + '<b>regunta 7 PLD-Crédito Simple<br></b>';
                                                     }
                                                     if (this.model.get('tct_pld_campo6_ddw') == "" || this.model.get('tct_pld_campo6_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 8 PLD<br></b>';
+                                                        necesarios = necesarios + '<b>regunta 8 PLD-Crédito Simple<br></b>';
                                                     }
                                                 } 
                                                 //PEPS Moral Familiar
@@ -7976,25 +7976,25 @@ validaReqUniclickInfo: function () {
                                             //Preguntas PLD
                                             if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 1 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 1 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo4_ddw == "" || data[3].contents.records[0].tct_pld_campo4_ddw == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 3 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo18_ddw == "" || data[3].contents.records[0].tct_pld_campo18_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 5 PLD-Crédito Simple<br></b>';
                                                 }
                                                 /*if (data[3].contents.records[0].tct_pld_campo14_chk == "" || data[3].contents.records[0].tct_pld_campo14_chk == null) {
-                                                    necesarios = necesarios + '<b>regunta 6 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 6 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo19_txt == "" || data[3].contents.records[0].tct_pld_campo19_txt == null) {
-                                                    necesarios = necesarios + '<b>regunta 5.1 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
                                                 }*/
                                                 if (data[3].contents.records[0].tct_pld_campo20_ddw == "" || data[3].contents.records[0].tct_pld_campo20_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 7 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 7 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo6_ddw == "" || data[3].contents.records[0].tct_pld_campo6_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 8 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>regunta 8 PLD-Crédito Simple<br></b>';
                                                 }
                                             } 
                                         }else{
