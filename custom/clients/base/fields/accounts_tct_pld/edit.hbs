@@ -370,7 +370,7 @@
             <!-- Fila 2 CS -->
             <div class="row-fluid Fila2-CS">
                 <div class="span6 campo2-cs">
-                    <label class="record-label ">¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                    <label class="record-label ">1.-¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
                     <select class="row-fluid select2  campo2ddw-cs" data-field="campo2CS" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?-cs">
                         {{#each campo2_list}}
@@ -380,14 +380,14 @@
                     </select>
                 </div>
                 <div class="span6 campo3-cs">
-                    <label class="record-label">Propietario Real</label>
+                    <label class="record-label">2.-Propietario Real</label>
                     <input type="hidden" class="bigdrop campo3rel-cs row-fluid" id="propietario_real_cs" data-name="Propietario Real-cs" data-field="campo3CS"/>
                 </div>
             </div>
             <!-- Fila 3 CS -->
             <div class="row-fluid Fila3-CS">
                 <div class="span6 campo4-cs">
-                    <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
+                    <label class="record-label">3.-¿Los recursos son propios o los recursos son de un tercero?</label>
                     <select class="row-fluid select2  campo4ddw-cs" data-field="campo4CS" data-name="¿Los recursos son propios o los recursos son de un tercero?-cs" >
                         {{#each campo4_list}}
                             <option value="{{@key}}" {{ifSelected @key
@@ -396,14 +396,14 @@
                     </select>
                 </div>
                 <div class="span6 campo5-cs hide">
-                    <label class="record-label ">Proveedor de Recursos</label>
+                    <label class="record-label ">4.-Proveedor de Recursos</label>
                     <input type="hidden" class="bigdrop campo5rel-cs row-fluid" id="proveedor_recursos_cs" data-name="Proveedor Recursos-cs" data-field="campo5CS"/>
                 </div>
             </div>
             <!-- Fila 4 CS -->
             <div class="row-fluid Fila3-CS">
                 <div class="span6 camp18-cs">
-                    <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
+                    <label class="record-label">5.-¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
                     <select class="campo18ddw-cs select2 row-fluid" id="multi13" multiple="multiple" size="6" style="display:block;" data-field="campo18CS"  data-name="¿Instrumento monetario con el que espera realizar los pagos?-cs">
                         {{#each campo18_list}}
@@ -420,7 +420,7 @@
                     </select> -->
                 </div>
                 <div class="span6 campo19-cs">
-                    <label class="record-label">Especifique:</label>
+                    <label class="record-label">5.1.-Especifique:</label>
                     <input type="text" class="campo19txt-cs" value="{{ProductosPLD.creditoSimple.campo19}}"
                            data-field="campo19CS" data-name="Especifique-monetario-cs"/>
                 </div>
@@ -428,7 +428,7 @@
             <!-- Fila 5 CS -->
             <div class="row-fluid Fila3-CS">
                 <div class="span6 camp14-cs">
-                    <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
+                    <label class="record-label">6.-¿Realizará pagos utilizando otro instrumento monetario?</label>
                     <br>
                     <input type="checkbox" class="campo14chk-cs"
                            {{#if ProductosPLD.creditoSimple.campo14}}checked{{/if}}
@@ -439,7 +439,7 @@
             <!-- Fila 6 CS -->
             <div class="row-fluid Fila8-CS">
                 <div class="span6 campo20-cs">
-                    <label class="record-label">¿Cuál es el destino de los recursos que va a obtener de la celebración
+                    <label class="record-label">7.-¿Cuál es el destino de los recursos que va a obtener de la celebración
                         de la operación?</label>
                     <select class="campo20ddw-cs select2 row-fluid" data-field="campo20CS" data-name="¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación?-cs">
                         {{#each campo20_list}}
@@ -449,7 +449,7 @@
                     </select>
                 </div>
                 <div class="span6 campo6-cs">
-                    <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
+                    <label class="record-label ">8.-¿Espera realizar pagos anticipados a su crédito?</label>
                     <select class="campo6ddw-cs select2 row-fluid" data-field="campo6CS" data-name="¿Espera realizar pagos anticipados a su crédito?-cs">
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
