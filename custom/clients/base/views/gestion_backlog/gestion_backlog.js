@@ -204,18 +204,66 @@
             }
         }
 
+        var filtroUsuarios = {
+            "filter": [
+                {
+                    "status": {
+                        "$equals": "Active"
+                    }
+                }
+            ],
+            "max_num": "-1",
+            "fields":"id,region_c,user_name"
+        }
+        var urlBacklog=app.api.buildURL('lev_Backlog', null, null, filtro);
+        var urlUsuarios=app.api.buildURL('Users', null, null, filtroUsuarios);
+
+        urlBacklog="/" + urlBacklog.split("rest/")[1];
+        urlUsuarios="/" + urlUsuarios.split("rest/")[1];
+
+
+        var requestBulk = {
+            "requests": [
+                {
+                    "url": urlBacklog, "method": "GET"
+                },
+                {
+                    "url": urlUsuarios, "method": "GET"
+                }
+
+            ]
+        }
+
         app.alert.show('getBacklogs', {
             level: 'process',
             title: 'Cargando, por favor espere.',
         });
-        app.api.call('GET', app.api.buildURL('lev_Backlog', null, null, filtro), null, {
+        /****************************** */
+        //Llamada hacia API BULK
+        app.api.call('create', app.api.buildURL('bulk', null, null, requestBulk), null, {
             success: _.bind(function (data) {
 
-                if (data.records.length > 0) {
+                if (data[0].contents.records.length > 0) 
+                {
+                    data.records=data[0].contents.records;
                     self.listaBacklogs = [];
                     self.cantidad_backlogs = data.records.length;
                     for (index = 0; index < data.records.length; index++) {
                         self.counter = 0;
+                        //Obteniendo la región (zona) a la que pertenece el usuario asignado al backlog
+                        var registros_usuarios=data[1].contents.records;
+                        if(registros_usuarios.length>0){
+                            var id_usuario_asignado=data.records[index].assigned_user_id;
+                            for (var idxUsers = 0; idxUsers < registros_usuarios.length; idxUsers++) {
+                                if(id_usuario_asignado==registros_usuarios[idxUsers].id){
+                                    data.records[index].zona=registros_usuarios[idxUsers].region_c;
+                                    //Al encontrar al usuario, se agrega condición para salir del ciclo for
+                                    idxUsers=registros_usuarios.length;
+                                }
+                                
+                            }
+
+                        }
                         //Obteniendo el nombre de la cuenta, se puede obtener a partir del nombre
                         var nombre_cuenta = data.records[index].name.split("-")[2]
                         data.records[index].nombre_cuenta = nombre_cuenta.trim();
@@ -263,6 +311,7 @@
                         data.records[index].monto_rechazado_c = tipo_op = Number(data.records[index].monto_rechazado_c);
                         data.records[index].monto_sin_solicitud_c = tipo_op = Number(data.records[index].monto_sin_solicitud_c);
                         data.records[index].monto_con_solicitud_c = tipo_op = Number(data.records[index].monto_con_solicitud_c);
+                        
 
                         self.listaBacklogs.push(data.records[index]);
                     }
@@ -279,56 +328,6 @@
                     app.alert.dismiss('getBacklogs');
                     $('#processing_buscar').hide();
                     $('#btn_Buscar_bl').removeAttr("disabled");
-                }
-
-                //Validar que la lista de backlogs está llena, ya que se requiere obtener información adicional del usuario asignado
-                if(self.listaBacklogs.length>0){
-                    //Recorre cada registro para obtener su región
-                    contextoUser=self;
-                    contextoUser.indice=0;
-                    contextoUser.bl_length=self.listaBacklogs.length;
-                    for (let index = 0; index < self.listaBacklogs.length; index++) {
-                        //contextoUser.indice=index;
-                        const bl = self.listaBacklogs[index];
-                        let pos=index;
-                        var usuario = app.data.createBean('Users', { id: bl.assigned_user_id });
-
-                        usuario.fetch({
-                            success: _.bind(function (modelo) {
-                                //Se obtiene la región para pintar en la tabla
-                                var region=modelo.get('region_c');
-                                //Encontrando el indice sobre el que se va a actualizar la zona
-
-                                self.listaBacklogs[contextoUser.indice].zona=region;
-                                contextoUser.indice+=1;
-                                //Se aplica render solo a partir de que ya se ejecutó la última llamada al api para obtener datos del usuario
-                                if(contextoUser.indice==self.listaBacklogs.length){
-                                    self.render();
-
-                                    //Después de render, se restablecen los valores en la barra de búsqueda para que persistan los valores
-                                    if (self.mes_filtro != undefined && self.anio_filtro != undefined && self.etapa_filtro != undefined && self.producto_filtro) {
-                                        $('#mes_filtro').val(self.mes_filtro);
-                                        $('#anio_filtro').val(self.anio_filtro);
-                                        $('#etapa_filtro').val(self.etapa_filtro);
-                                        $('#producto_filtro').val(self.producto_filtro);
-                                    } else {
-                                        //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
-                                        $('#mes_filtro').select2('val', ((new Date).getMonth() + 1).toString());
-                                        //$('#anio_filtro').val((new Date).getFullYear());
-                                        $('#anio_filtro').select2('val', ((new Date).getFullYear()));
-                                        $('#etapa_filtro').select2('val', "");
-                                        $('#producto_filtro').select2('val', "0");
-                                    }
-
-                                    //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
-                                    $(".monto_prospecto").trigger("change");
-
-                                }
-                                
-                            }, self)
-                        });
-                    }
-
                 }
 
                 app.alert.dismiss('getBacklogs');
@@ -357,7 +356,6 @@
 
             }, self)
         });
-
 
     },
 
