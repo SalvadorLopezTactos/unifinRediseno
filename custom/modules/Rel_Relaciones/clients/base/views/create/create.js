@@ -2410,46 +2410,46 @@
                                                     necesarios = necesarios + '<b>Pregunta 3 PLD<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo18_ddw == "" || data[3].contents.records.tct_pld_campo18_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 5 PLD<br></b>';
                                                 }
                                                 /*if (data[3].contents.records.tct_pld_campo14_chk == "" || data[3].contents.records.tct_pld_campo14_chk == null) {
-                                                    necesarios = necesarios + '<b>regunta 6 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 6 PLD<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo19_txt == "" || data[3].contents.records.tct_pld_campo19_txt == null) {
-                                                    necesarios = necesarios + '<b>regunta 5.1 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 5.1 PLD<br></b>';
                                                 }*/
                                                 if (data[3].contents.records.tct_pld_campo20_ddw == "" || data[3].contents.records.tct_pld_campo20_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 7 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 7 PLD<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo6_ddw == "" || data[3].contents.records.tct_pld_campo6_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 8 PLD<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 8 PLD<br></b>';
                                                 }
                                             } 
                                             //PEPS Moral Familiar
                                             if (data[4].contents.ctpldaccionistasconyuge_c == true) {
                                                 if (data[4].contents.tct_socio2_pm_c == "" || data[4].contents.tct_socio2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistasconyugecargo_c == "" || data[4].contents.ctpldaccionistasconyugecargo_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 6 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_nombre_pm_c == "" || data[4].contents.tct_nombre_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 5.1 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 5.1 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_cargo_pm_c == "" || data[4].contents.tct_cargo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 7 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 7 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_dependencia2_pm_c == "" || data[4].contents.tct_dependencia2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 8 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 8 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_periodo2_pm_c == "" || data[4].contents.tct_periodo2_pm_c == null) {
                                                     necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini2_pm_c == "" || data[4].contents.tct_fecha_ini2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin2_pm_c == "" || data[4].contents.tct_fecha_fin2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 6 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
                                                 } 
                                             }
 
