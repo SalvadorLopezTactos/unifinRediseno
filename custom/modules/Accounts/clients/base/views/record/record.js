@@ -8000,7 +8000,7 @@ validaReqUniclickInfo: function () {
                                         }else{
                                             //Valida persona Moral
                                             if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
-                                                necesarios = necesarios + '<b>Actidata[3].contents.records[0].vidad Económica<br></b>';
+                                                necesarios = necesarios + '<b>Actividad Económica<br></b>';
                                             }
                                             if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                                                 necesarios = necesarios + '<b>Razón Social<br></b>';
