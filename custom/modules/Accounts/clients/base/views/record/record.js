@@ -7788,7 +7788,7 @@
                                                 }
 
                                                 //PEPS Moral Personal
-                                                if(this.model.get('ctpldaccionistas_c'==true)){
+                                                if(this.model.get('ctpldaccionistas_c')==true){
                                                     if (this.model.get('tct_socio_pm_c') == "" || this.model.get('tct_socio_pm_c') == null) {
                                                         necesarios = necesarios + '<b>Nombre del Socio o Accionista</b><br>';
                                                     }
@@ -8094,7 +8094,7 @@ validaReqUniclickInfo: function () {
                                             }
 
                                             //PEPS Moral Personal
-                                            if(this.model.get('ctpldaccionistas_c'==true)){
+                                            if(this.model.get('ctpldaccionistas_c')==true){
                                                 if (this.model.get('tct_socio_pm_c') == "" || this.model.get('tct_socio_pm_c') == null) {
                                                     necesarios = necesarios + '<b>Nombre del Socio o Accionista</b><br>';
                                                 }
