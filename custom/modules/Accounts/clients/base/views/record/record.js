@@ -7717,15 +7717,6 @@
                                                 if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                                                     necesarios = necesarios + '<b>Fecha Constitutiva</b><br>';
                                                 }
-                                                if (this.model.get('apoderado_nombre_c') == "" || this.model.get('apoderado_nombre_c') == null) {
-                                                    necesarios = necesarios + '<b>Nombre Apoderado Legal</b><br>';
-                                                }
-                                                if (this.model.get('apoderado_apaterno_c') == "" || this.model.get('apoderado_apaterno_c') == null) {
-                                                    necesarios = necesarios + '<b>Apellido Paterno Apoderado Legal</b><br>';
-                                                }
-                                                if (this.model.get('apoderado_amaterno_c') == "" || this.model.get('apoderado_amaterno_c') == null) {
-                                                    necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
-                                                }
                                                 if (this.model.get('tct_cpld_pregunta_u1_ddw_c') == "" || this.model.get('tct_cpld_pregunta_u1_ddw_c') == null) {
                                                     necesarios = necesarios + '<b>Pregunta SOFOM</b><br>';
                                                 }
@@ -7734,6 +7725,18 @@
                                                 }
                                                 if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
                                                     necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
+                                                }
+                                                //Preguntas CHECK deudor_factor_c
+                                                if (this.model.get('deudor_factor_c')==true){
+                                                    if (this.model.get('apoderado_nombre_c') == "" || this.model.get('apoderado_nombre_c') == null) {
+                                                        necesarios = necesarios + '<b>Nombre Apoderado Legal</b><br>';
+                                                    }
+                                                    if (this.model.get('apoderado_apaterno_c') == "" || this.model.get('apoderado_apaterno_c') == null) {
+                                                        necesarios = necesarios + '<b>Apellido Paterno Apoderado Legal</b><br>';
+                                                    }
+                                                    if (this.model.get('apoderado_amaterno_c') == "" || this.model.get('apoderado_amaterno_c') == null) {
+                                                        necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
+                                                    }
                                                 }
                                                 //Preguntas PLD
                                                 if (data[3].contents.records.length>0){
@@ -8020,15 +8023,6 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                                                 necesarios = necesarios + '<b>Fecha Constitutiva</b><br>';
                                             }
-                                            if (this.model.get('apoderado_nombre_c') == "" || this.model.get('apoderado_nombre_c') == null) {
-                                                necesarios = necesarios + '<b>Nombre Apoderado Legal</b><br>';
-                                            }
-                                            if (this.model.get('apoderado_apaterno_c') == "" || this.model.get('apoderado_apaterno_c') == null) {
-                                                necesarios = necesarios + '<b>Apellido Paterno Apoderado Legal</b><br>';
-                                            }
-                                            if (this.model.get('apoderado_amaterno_c') == "" || this.model.get('apoderado_amaterno_c') == null) {
-                                                necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
-                                            }
                                             if (this.model.get('tct_cpld_pregunta_u1_ddw_c') == "" || this.model.get('tct_cpld_pregunta_u1_ddw_c') == null) {
                                                 necesarios = necesarios + '<b>Pregunta SOFOM</b><br>';
                                             }
@@ -8037,6 +8031,18 @@ validaReqUniclickInfo: function () {
                                             }
                                             if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
                                                 necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
+                                            }
+                                            //Preguntas CHECK deudor_factor_c
+                                            if (this.model.get('deudor_factor_c')==true){
+                                                if (this.model.get('apoderado_nombre_c') == "" || this.model.get('apoderado_nombre_c') == null) {
+                                                    necesarios = necesarios + '<b>Nombre Apoderado Legal</b><br>';
+                                                }
+                                                if (this.model.get('apoderado_apaterno_c') == "" || this.model.get('apoderado_apaterno_c') == null) {
+                                                    necesarios = necesarios + '<b>Apellido Paterno Apoderado Legal</b><br>';
+                                                }
+                                                if (this.model.get('apoderado_amaterno_c') == "" || this.model.get('apoderado_amaterno_c') == null) {
+                                                    necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
+                                                }
                                             }
                                             //Preguntas PLD
                                             if (data[3].contents.records.length>0){
