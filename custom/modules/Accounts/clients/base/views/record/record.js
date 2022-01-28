@@ -8036,9 +8036,9 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('tct_cpld_pregunta_u3_ddw_c') == "" || this.model.get('tct_cpld_pregunta_u3_ddw_c') == null) {
                                                 necesarios = necesarios + '<b>¿Cotiza en Bolsa?</b><br>';
                                             }
-                                            if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
+                                            /*if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
                                                 necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
-                                            }
+                                            }*/
                                             //Preguntas CHECK deudor_factor_c
                                             if (this.model.get('deudor_factor_c')==true){
                                                 if (this.model.get('apoderado_nombre_c') == "" || this.model.get('apoderado_nombre_c') == null) {

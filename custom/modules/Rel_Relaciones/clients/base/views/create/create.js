@@ -2394,9 +2394,9 @@
                                         if (data[4].contents.tct_cpld_pregunta_u3_ddw_c == "" || data[4].contents.tct_cpld_pregunta_u3_ddw_c == null) {
                                             necesarios = necesarios + '<b>¿Cotiza en Bolsa?</b><br>';
                                         }
-                                        if (data[4].contents.tct_fedeicomiso_chk_c == "" || data[4].contents.tct_fedeicomiso_chk_c == null) {
+                                        /*if (data[4].contents.tct_fedeicomiso_chk_c == "" || data[4].contents.tct_fedeicomiso_chk_c == null) {
                                             necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
-                                        }
+                                        }*/
                                          //Preguntas CHECK deudor_factor_c
                                          if (data[4].contents.deudor_factor_c==true){
                                             if (data[4].contents.apoderado_nombre_c == "" || data[4].contents.apoderado_nombre_c == null) {
