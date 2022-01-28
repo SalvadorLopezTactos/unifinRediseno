@@ -7675,25 +7675,25 @@
                                                 
                                                 //Preguntas PLD
                                             if (data[3].contents.records.length>0){
-                                                if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
+                                                if (this.$('.campo2ddw-cs').select2('val') == "" || this.$('.campo2ddw-cs').select2('val')  == null) {
                                                     necesarios = necesarios + '<b>Pregunta 1 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo4_ddw == "" || data[3].contents.records[0].tct_pld_campo4_ddw == null) {
+                                                if (this.$('.campo4ddw-cs').select2('val') == "" || this.$('.campo4ddw-cs').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo18_ddw == "" || data[3].contents.records[0].tct_pld_campo18_ddw == null) {
+                                                if (this.$('.campo18ddw-cs').select2('val').toString() == "" || this.$('.campo18ddw-cs').select2('val').toString() == null) {
                                                     necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                 }
-                                                /*if (data[3].contents.records[0].tct_pld_campo14_chk == "" || data[3].contents.records[0].tct_pld_campo14_chk == null) {
+                                                /*if (this.$('.campo14chk-cs')[0].checked == false) {
                                                     necesarios = necesarios + '<b>Pregunta 6 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo19_txt == "" || data[3].contents.records[0].tct_pld_campo19_txt == null) {
+                                                if (this.$('.campo19txt-cs').val() == "" || this.$('.campo19txt-cs').val() == null) {
                                                     necesarios = necesarios + '<b>Pregunta 5.1 PLD-Crédito Simple<br></b>';
                                                 }*/
-                                                if (data[3].contents.records[0].tct_pld_campo20_ddw == "" || data[3].contents.records[0].tct_pld_campo20_ddw == null) {
+                                                if (this.$('.campo20ddw-cs').select2('val') == "" || this.$('.campo20ddw-cs').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo6_ddw == "" || data[3].contents.records[0].tct_pld_campo6_ddw == null) {
+                                                if (this.$('.campo6ddw-cs').select2('val') == "" || this.$('.campo6ddw-cs').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
                                             } 
@@ -7743,22 +7743,22 @@
                                                 }
                                                 //Preguntas PLD
                                                 if (data[3].contents.records.length>0){
-                                                    if (this.model.get('tct_pld_campo4_ddw') == "" || this.model.get('tct_pld_campo4_ddw') == null) {
+                                                    if (this.$('.campo4ddw-cs').select2('val') == "" || this.$('.campo4ddw-cs').select2('val') == null) {
                                                         necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.model.get('tct_pld_campo18_ddw') == "" || this.model.get('tct_pld_campo18_ddw') == null) {
+                                                    if (this.$('.campo18ddw-cs').select2('val').toString() == "" || this.$('.campo18ddw-cs').select2('val').toString() == null) {
                                                         necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    /*if (this.model.get('tct_pld_campo14_chk') == "" || this.model.get('tct_pld_campo14_chk') == null) {
+                                                    /*if (this.$('.campo14chk-cs')[0].checked == false) {
                                                         necesarios = necesarios + '<b>regunta 6 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.model.get('tct_pld_campo19_txt') == "" || this.model.get('tct_pld_campo19_txt') == null) {
+                                                    if (this.$('.campo19txt-cs').val() == "" || this.$('.campo19txt-cs').val() == null) {
                                                         necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
                                                     }*/
-                                                    if (this.model.get('tct_pld_campo20_ddw') == "" || this.model.get('tct_pld_campo20_ddw') == null) {
+                                                    if (this.$('.campo20ddw-cs').select2('val') == "" || this.$('.campo20ddw-cs').select2('val') == null) {
                                                         necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.model.get('tct_pld_campo6_ddw') == "" || this.model.get('tct_pld_campo6_ddw') == null) {
+                                                    if (this.$('.campo6ddw-cs').select2('val') == "" || this.$('.campo6ddw-cs').select2('val') == null) {
                                                         necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                     }
                                                 } 
