@@ -7744,7 +7744,7 @@
                                                         necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                     }
                                                     if (this.model.get('tct_pld_campo18_ddw') == "" || this.model.get('tct_pld_campo18_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 5 PLD-Crédito Simple<br></b>';
+                                                        necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                     }
                                                     /*if (this.model.get('tct_pld_campo14_chk') == "" || this.model.get('tct_pld_campo14_chk') == null) {
                                                         necesarios = necesarios + '<b>regunta 6 PLD-Crédito Simple<br></b>';
@@ -7753,10 +7753,10 @@
                                                         necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
                                                     }*/
                                                     if (this.model.get('tct_pld_campo20_ddw') == "" || this.model.get('tct_pld_campo20_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 7 PLD-Crédito Simple<br></b>';
+                                                        necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                     }
                                                     if (this.model.get('tct_pld_campo6_ddw') == "" || this.model.get('tct_pld_campo6_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 8 PLD-Crédito Simple<br></b>';
+                                                        necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                     }
                                                 } 
                                                  //PEPS Moral Familiar
