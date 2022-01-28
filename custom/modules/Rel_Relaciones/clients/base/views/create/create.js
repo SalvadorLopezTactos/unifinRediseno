@@ -2459,22 +2459,22 @@
                                             //PEPS Moral Personal
                                             if(data[4].contents.ctpldaccionistas_c==true){
                                                 if (data[4].contents.tct_socio_pm_c == "" || data[4].contents.tct_socio_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Nombre del Socio o Accionista</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistascargo_c == "" || data[4].contents.ctpldaccionistascargo_c == null) {
-                                                    necesarios = necesarios + '<b>Cargo público que tiene o tuvo</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_dependencia_pm_c == "" || data[4].contents.tct_dependencia_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Dependencia</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_periodo_pm_c == "" || data[4].contents.tct_periodo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Periodo</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini_pm_c == "" || data[4].contents.tct_fecha_ini_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Fecha Inicio</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin_pm_c == "" || data[4].contents.tct_fecha_fin_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Fecha Fin</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Personal</b><br>';
                                                 }
                                             }
 
