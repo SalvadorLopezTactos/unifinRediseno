@@ -2077,7 +2077,7 @@ extendsFrom: 'RecordView',
                                                     necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                 }
                                             }
-                                            //Sección PEPS Personal
+                                            //Sección PEPS Fisica Personal
                                             if (data[4].contents.ctpldfuncionespublicas_c == true) {
                                                 var banderaPEPSPersonal="";
                                                 if (data[4].contents.ctpldfuncionespublicascargo_c == "" || data[4].contents.ctpldfuncionespublicascargo_c == null) {
@@ -2096,7 +2096,7 @@ extendsFrom: 'RecordView',
                                                     banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha de término<br></b>';
                                                 }
                                                 if (banderaPEPSPersonal!=""){
-                                                    necesarios = "Sección PEPS Personal:<br>" + banderaPEPSPersonal
+                                                    necesarios = necesarios +'<br>'+ "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                 }
                                             }
                                            
@@ -2125,7 +2125,7 @@ extendsFrom: 'RecordView',
                                                     banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de término<br></b>';
                                                 }
                                                 if (banderaPEPSFamiliar!=""){
-                                                    necesarios = "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
+                                                    necesarios = necesarios +'<br>'+"Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                 }
                                             }
                                             
@@ -2246,7 +2246,7 @@ extendsFrom: 'RecordView',
                                                     banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
                                                 }
                                                 if (banderaPEPSMoralFamiliar!=""){
-                                                    necesarios = "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
+                                                    necesarios = necesarios +'<br>'+ "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
                                                 } 
                                             }
 
@@ -2272,7 +2272,7 @@ extendsFrom: 'RecordView',
                                                     banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>Fecha de término</b><br>';
                                                 }
                                                 if (banderaPEPSMoralPersonal!=""){
-                                                    necesarios = "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
+                                                    necesarios = necesarios +'<br>'+"Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
                                                 }
                                             }
 
