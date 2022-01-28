@@ -7699,7 +7699,7 @@
                                             } 
                                             }else{
                                                 //Valida persona Moral
-                                                if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+                                                if (this.$('.list_ae').select2('val') == "" || this.$('.list_ae').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Actividad Económica<br></b>';
                                                 }
                                                 if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
@@ -8009,7 +8009,7 @@ validaReqUniclickInfo: function () {
                                             } 
                                         }else{
                                             //Valida persona Moral
-                                            if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+                                            if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
                                                 necesarios = necesarios + '<b>Actividad Económica<br></b>';
                                             }
                                             if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
