@@ -7592,16 +7592,13 @@
                                                     necesarios = necesarios + '<b>Nombre<br></b>';
                                                 }
                                                 if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                                                    necesarios = necesarios + '<b>Nombre<br></b>';
+                                                    necesarios = necesarios + '<b>Apellido Paterno<br></b>';
                                                 }
                                                 if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
                                                         necesarios = necesarios + '<b>G\u00E9nero</b><br>';
                                                 }
                                                 if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
                                                     necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
-                                                }
-                                                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
-                                                    necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                 }
                                                 if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
                                                         necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
@@ -7612,18 +7609,24 @@
                                                 if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
                                                         necesarios = necesarios + '<b>Profesión</b><br>';
                                                 }
-                                                if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
-                                                        necesarios = necesarios + '<b>CURP</b><br>';
-                                                }
+                                                
                                                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                         necesarios = necesarios + '<b>RFC</b><br>';
                                                 }
-                                                if (this.model.get('pais_nacimiento_c')!= "2" ) {
+                                                if (this.model.get('nacionalidad_c')!= "2" ) {
                                                     if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null ) {
                                                         necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                     }
+                                                    
+                                                }else{
                                                     if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == null ) {
                                                         necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
+                                                    }
+                                                    if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+                                                        necesarios = necesarios + '<b>CURP</b><br>';
+                                                    }
+                                                    if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
+                                                        necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                     }
                                                 }
                                                 //Sección PEPS Personal
@@ -7898,7 +7901,7 @@ validaReqUniclickInfo: function () {
                                                 necesarios = necesarios + '<b>Nombre<br></b>';
                                             }
                                             if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                                                necesarios = necesarios + '<b>Nombre<br></b>';
+                                                necesarios = necesarios + '<b>Apellido Paterno<br></b>';
                                             }
                                             if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
                                                     necesarios = necesarios + '<b>G\u00E9nero</b><br>';
@@ -7906,9 +7909,7 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
                                                 necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                                             }
-                                            if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
-                                                necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
-                                            }
+                                           
                                             if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
@@ -7918,18 +7919,24 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
                                                     necesarios = necesarios + '<b>Profesión</b><br>';
                                             }
-                                            if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
-                                                    necesarios = necesarios + '<b>CURP</b><br>';
-                                            }
+                                            
                                             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                     necesarios = necesarios + '<b>RFC</b><br>';
                                             }
-                                            if (this.model.get('pais_nacimiento_c')!= "2" ) {
+                                            if (this.model.get('nacionalidad_c')!= "2" ) {
                                                 if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null ) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                 }
+                                                
+                                            }else{
                                                 if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == null ) {
                                                     necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
+                                                }
+                                                if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+                                                    necesarios = necesarios + '<b>CURP</b><br>';
+                                                }
+                                                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
+                                                    necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                 }
                                             }
                                             //Sección PEPS Personal
