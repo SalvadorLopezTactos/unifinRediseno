@@ -2511,7 +2511,7 @@
                                             if (necesarios!="") {
                                                 app.alert.show("Campos Requeridos para opp CS y negocio Uniclick Moral", {
                                                 level: "error",
-                                                title: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>"+ necesarios,
+                                                title: "Hace falta completar la siguiente información en la <b>Cuenta</b> "+'<a href="#Accounts/' + Cuenta + '" target= "_blank"> '+':<br>"'+ necesarios,
                                                 autoClose: false
                                                     });
                                                     errors['accounts_cstm'] = errors['accounts_cstm'] || {};
