@@ -8123,7 +8123,7 @@ validaReqUniclickInfo: function () {
                                                     banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
                                                 } 
                                                 if (banderaPEPSMoralFamiliar!=""){
-                                                    necesarios = "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
+                                                    necesarios = necesarios +'<br>'+"Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
                                                 }
                                             }
                                             //PEPS Moral Personal
@@ -8148,7 +8148,7 @@ validaReqUniclickInfo: function () {
                                                     banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>Fecha de término</b><br>';
                                                 }
                                                 if (banderaPEPSMoralPersonal!=""){
-                                                    necesarios = "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
+                                                    necesarios = necesarios +'<br>'+"Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
                                                 }
                                             }  
 
