@@ -7648,7 +7648,7 @@
                                                         banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha de término<br></b>';
                                                     }
                                                     if (banderaPEPSPersonal!=""){
-                                                        necesarios = "Sección PEPS Personal:<br>" + banderaPEPSPersonal
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                     }
                                                 }
                                                
@@ -7677,7 +7677,7 @@
                                                         banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de término<br></b>';
                                                     }
                                                     if (banderaPEPSFamiliar!=""){
-                                                        necesarios = "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                     }
                                                 }
                                                 
@@ -7798,7 +7798,7 @@
                                                         banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
                                                     } 
                                                     if (banderaPEPSMoralFamiliar!=""){
-                                                        necesarios = "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
                                                     }
                                                 }
                                                 //PEPS Moral Personal
@@ -7823,7 +7823,7 @@
                                                         banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>Fecha de término</b><br>';
                                                     }
                                                     if (banderaPEPSMoralPersonal!=""){
-                                                        necesarios = "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
                                                     }
                                                 }                                                
 
@@ -7973,7 +7973,7 @@ validaReqUniclickInfo: function () {
                                                     banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha de término<br></b>';
                                                 }
                                                 if (banderaPEPSPersonal!=""){
-                                                    necesarios = "Sección PEPS Personal:<br>" + banderaPEPSPersonal
+                                                    necesarios = necesarios +'<br>'+ "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                 }
                                             }
                                        
@@ -8002,7 +8002,7 @@ validaReqUniclickInfo: function () {
                                                     banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de término<br></b>';
                                                 }
                                                 if (banderaPEPSFamiliar!=""){
-                                                    necesarios = "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
+                                                    necesarios = necesarios +'<br>'+ "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                 }
                                             }
                                             
