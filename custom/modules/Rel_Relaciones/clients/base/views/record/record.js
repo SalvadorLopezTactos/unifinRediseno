@@ -2211,50 +2211,50 @@ extendsFrom: 'RecordView',
                                             //PEPS Moral Familiar
                                             if (data[4].contents.ctpldaccionistasconyuge_c == true) {
                                                 if (data[4].contents.tct_socio2_pm_c == "" || data[4].contents.tct_socio2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistasconyugecargo_c == "" || data[4].contents.ctpldaccionistasconyugecargo_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_nombre_pm_c == "" || data[4].contents.tct_nombre_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 5.1 PEPS Moral Familiar<br></b>';
-                                                }
-                                                if (data[4].contents.tct_cargo_pm_c == "" || data[4].contents.tct_cargo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 7 PEPS Moral Familiar<br></b>';
-                                                }
-                                                if (data[4].contents.tct_dependencia2_pm_c == "" || data[4].contents.tct_dependencia2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 8 PEPS Moral Familiar<br></b>';
-                                                }
-                                                if (data[4].contents.tct_periodo2_pm_c == "" || data[4].contents.tct_periodo2_pm_c == null) {
                                                     necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Familiar<br></b>';
                                                 }
-                                                if (data[4].contents.tct_fecha_ini2_pm_c == "" || data[4].contents.tct_fecha_ini2_pm_c == null) {
+                                                if (data[4].contents.tct_cargo_pm_c == "" || data[4].contents.tct_cargo_pm_c == null) {
+                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Familiar<br></b>';
+                                                }
+                                                if (data[4].contents.tct_dependencia2_pm_c == "" || data[4].contents.tct_dependencia2_pm_c == null) {
                                                     necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
                                                 }
-                                                if (data[4].contents.tct_fecha_fin2_pm_c == "" || data[4].contents.tct_fecha_fin2_pm_c == null) {
+                                                if (data[4].contents.tct_periodo2_pm_c == "" || data[4].contents.tct_periodo2_pm_c == null) {
                                                     necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
+                                                }
+                                                if (data[4].contents.tct_fecha_ini2_pm_c == "" || data[4].contents.tct_fecha_ini2_pm_c == null) {
+                                                    necesarios = necesarios + '<b>Pregunta 7 PEPS Moral Familiar<br></b>';
+                                                }
+                                                if (data[4].contents.tct_fecha_fin2_pm_c == "" || data[4].contents.tct_fecha_fin2_pm_c == null) {
+                                                    necesarios = necesarios + '<b>Pregunta 8 PEPS Moral Familiar<br></b>';
                                                 } 
                                             }
 
                                             //PEPS Moral Personal
                                             if(data[4].contents.ctpldaccionistas_c==true){
                                                 if (data[4].contents.tct_socio_pm_c == "" || data[4].contents.tct_socio_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Nombre del Socio o Accionista</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistascargo_c == "" || data[4].contents.ctpldaccionistascargo_c == null) {
-                                                    necesarios = necesarios + '<b>Cargo público que tiene o tuvo</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_dependencia_pm_c == "" || data[4].contents.tct_dependencia_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Dependencia</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_periodo_pm_c == "" || data[4].contents.tct_periodo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Periodo</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini_pm_c == "" || data[4].contents.tct_fecha_ini_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Fecha Inicio</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin_pm_c == "" || data[4].contents.tct_fecha_fin_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Fecha Fin</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Personal</b><br>';
                                                 }
                                             }
 
