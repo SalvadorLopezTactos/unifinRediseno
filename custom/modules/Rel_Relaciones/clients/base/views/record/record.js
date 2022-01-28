@@ -2120,7 +2120,7 @@ extendsFrom: 'RecordView',
                                             }
                                             
                                             //Preguntas PLD
-                                            if (data[3].contents.records.length>0){
+                                            /*if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
                                                     necesarios = necesarios + '<b>Pregunta 1 PLD-Crédito Simple<br></b>';
                                                 }
@@ -2135,14 +2135,14 @@ extendsFrom: 'RecordView',
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo19_txt == "" || data[3].contents.records[0].tct_pld_campo19_txt == null) {
                                                     necesarios = necesarios + '<b>Pregunta 5.1 PLD-Crédito Simple<br></b>';
-                                                }*/
+                                                }
                                                 if (data[3].contents.records[0].tct_pld_campo20_ddw == "" || data[3].contents.records[0].tct_pld_campo20_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo6_ddw == "" || data[3].contents.records[0].tct_pld_campo6_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
-                                            } 
+                                            } */
                                         }else{
                                            //Valida persona Moral
                                            if (data[4].contents.actividadeconomica_c == "" || data[4].contents.actividadeconomica_c == null) {
@@ -2188,7 +2188,7 @@ extendsFrom: 'RecordView',
                                             }
                                         }
                                             //Preguntas PLD
-                                            if (data[3].contents.records.length>0){
+                                           /* if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records.tct_pld_campo4_ddw == "" || data[3].contents.records.tct_pld_campo4_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                 }
@@ -2200,14 +2200,14 @@ extendsFrom: 'RecordView',
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo19_txt == "" || data[3].contents.records.tct_pld_campo19_txt == null) {
                                                     necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
-                                                }*/
+                                                }
                                                 if (data[3].contents.records.tct_pld_campo20_ddw == "" || data[3].contents.records.tct_pld_campo20_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo6_ddw == "" || data[3].contents.records.tct_pld_campo6_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
-                                            } 
+                                            } */
                                             //PEPS Moral Familiar
                                             if (data[4].contents.ctpldaccionistasconyuge_c == true) {
                                                 if (data[4].contents.tct_socio2_pm_c == "" || data[4].contents.tct_socio2_pm_c == null) {
