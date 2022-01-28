@@ -7562,7 +7562,7 @@
                        var Cuenta = this.model.get('id');
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
-                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$equals]=SI");
+                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$not_equals]=N&filter[4][estatus_c][$not_equals]=R");
                            requestA.url = url.substring(4);
                            requests.push(requestA);
                            var requestB = app.utils.deepCopy(request);
@@ -7871,7 +7871,7 @@ validaReqUniclickInfo: function () {
                    var Cuenta = this.model.get('id');
                    //Obtenemos las opps de la cuenta
                    var requestA = app.utils.deepCopy(request);
-                   var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$equals]=SI");
+                   var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$not_equals]=N&filter[4][estatus_c][$not_equals]=R");
                        requestA.url = url.substring(4);
                        requests.push(requestA);
                        var requestB = app.utils.deepCopy(request);
