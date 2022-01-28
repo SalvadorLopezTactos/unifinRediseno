@@ -2226,7 +2226,7 @@
                        var Cuenta = this.model.get('account_id1_c');
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
-                           var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10");
+                           var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$equals]=SI");
                            requestA.url = url.substring(4);
                            requests.push(requestA);
                            var requestB = app.utils.deepCopy(request);
@@ -2272,7 +2272,7 @@
                                             if (data[4].contents.pais_nacimiento_c == "" || data[4].contents.pais_nacimiento_c == null) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
-                                            if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null) {
+                                            if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || data[4].contents.nacionalidad_c=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }
                                             if (data[4].contents.profesion_c == "" || data[4].contents.profesion_c == null) {
@@ -2373,7 +2373,7 @@
                                         if (data[4].contents.razonsocial_c == "" || data[4].contents.razonsocial_c == null) {
                                             necesarios = necesarios + '<b>Razón Social<br></b>';
                                         }
-                                        if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null) {
+                                        if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || data[4].contents.nacionalidad_c == '0') {
                                             necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                         }
                                         if (data[4].contents.rfc_c == "" || data[4].contents.rfc_c == null ) {
