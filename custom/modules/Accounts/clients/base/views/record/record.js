@@ -7603,7 +7603,7 @@
                                                 if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
                                                         necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                                 }
-                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                         necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                                 }
                                                 if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
