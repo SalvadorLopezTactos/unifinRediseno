@@ -2297,47 +2297,55 @@
                                                     necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                 }
                                             }
-                                            //Sección PEPS Personal
-                                            if (data[4].contents.ctpldfuncionespublicas_c == true) {
+                                             //Sección PEPS Fisica Personal
+                                             if (data[4].contents.ctpldfuncionespublicas_c == true) {
+                                                var banderaPEPSPersonal="";
                                                 if (data[4].contents.ctpldfuncionespublicascargo_c == "" || data[4].contents.ctpldfuncionespublicascargo_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 2<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_dependencia_pf_c == "" || data[4].contents.tct_dependencia_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 3<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_periodo_pf1_c == "" || data[4].contents.tct_periodo_pf1_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 4<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Periodo en el cargo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini_pf_c == "" || data[4].contents.tct_fecha_ini_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 5<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha Inicio<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin_pf_c == "" || data[4].contents.tct_fecha_fin_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 6<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha de término<br></b>';
+                                                }
+                                                if (banderaPEPSPersonal!=""){
+                                                    necesarios = "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                 }
                                             }
                                            
-                                            //Sección PEPS Familiar
+                                            //Sección PEPS Fisica Familiar
                                             if (data[4].contents.ctpldconyuge_c == true) {
+                                                var banderaPEPSFamiliar="";
                                                 if (data[4].contents.ctpldconyugecargo_c == "" || data[4].contents.ctpldconyugecargo_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 2<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Especificar parentesco o relación<br></b>';
                                                 }
                                                 if (data[4].contents.tct_nombre_pf_peps_c == "" || data[4].contents.tct_nombre_pf_peps_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 3<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Nombre de la persona que ocupa el puesto<br></b>';
                                                 }
                                                 if (data[4].contents.tct_cargo2_pf_c == "" || data[4].contents.tct_cargo2_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 4<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_dependencia2_pf_c == "" || data[4].contents.tct_dependencia2_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 5<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_periodo2_pf_c == "" || data[4].contents.tct_periodo2_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 6<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Periodo en el cargo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini2_pf_c == "" || data[4].contents.tct_fecha_ini2_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 7<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de Inicio<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin2_pf_c == "" || data[4].contents.tct_fecha_fin2_pf_c == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 8<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de término<br></b>';
+                                                }
+                                                if (banderaPEPSFamiliar!=""){
+                                                    necesarios = "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                 }
                                             }
                                             
@@ -2432,51 +2440,59 @@
                                             } */
                                             //PEPS Moral Familiar
                                             if (data[4].contents.ctpldaccionistasconyuge_c == true) {
+                                                var banderaPEPSMoralFamiliar="";
                                                 if (data[4].contents.tct_socio2_pm_c == "" || data[4].contents.tct_socio2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Nombre del Socio o Accionista<br></b>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistasconyugecargo_c == "" || data[4].contents.ctpldaccionistasconyugecargo_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Especificar parentesco o relación<br></b>';
                                                 }
                                                 if (data[4].contents.tct_nombre_pm_c == "" || data[4].contents.tct_nombre_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Nombre de la persona que ocupa el puesto<br></b>';
                                                 }
                                                 if (data[4].contents.tct_cargo_pm_c == "" || data[4].contents.tct_cargo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_dependencia2_pm_c == "" || data[4].contents.tct_dependencia2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_periodo2_pm_c == "" || data[4].contents.tct_periodo2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Periodo en el cargo<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini2_pm_c == "" || data[4].contents.tct_fecha_ini2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 7 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de Inicio<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin2_pm_c == "" || data[4].contents.tct_fecha_fin2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 8 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
+                                                }
+                                                if (banderaPEPSMoralFamiliar!=""){
+                                                    necesarios = "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
                                                 } 
                                             }
 
                                             //PEPS Moral Personal
                                             if(data[4].contents.ctpldaccionistas_c==true){
+                                                var banderaPEPSMoralPersonal="";
                                                 if (data[4].contents.tct_socio_pm_c == "" || data[4].contents.tct_socio_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Nombre del Socio o Accionista</b><br>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistascargo_c == "" || data[4].contents.ctpldaccionistascargo_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Cargo público que tiene o tuvo</b><br>';
                                                 }
                                                 if (data[4].contents.tct_dependencia_pm_c == "" || data[4].contents.tct_dependencia_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Dependencia donde ejerce o ejerció el cargo</b><br>';
                                                 }
                                                 if (data[4].contents.tct_periodo_pm_c == "" || data[4].contents.tct_periodo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Periodo en el cargo</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini_pm_c == "" || data[4].contents.tct_fecha_ini_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de Inicio</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin_pm_c == "" || data[4].contents.tct_fecha_fin_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>Fecha de término</b><br>';
+                                                }
+                                                if (banderaPEPSMoralPersonal!=""){
+                                                    necesarios = "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
                                                 }
                                             }
 
@@ -2522,9 +2538,9 @@
                                    callback(null, fields, errors);
                                }, this)
                            }); 
-                    }        
-                                   
-                           
+                }else{
+                    callback(null, fields, errors);   
+                }                    
         }else{
          callback(null, fields, errors);   
         }    
