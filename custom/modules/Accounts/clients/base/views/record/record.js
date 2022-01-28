@@ -7562,7 +7562,7 @@
                        var Cuenta = this.model.get('id');
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
-                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$not_equals]=N&filter[4][estatus_c][$not_equals]=R");
+                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[2][negocio_c][$equals]=10&filter[3][estatus_c][$not_equals]=K&filter[4][tct_etapa_ddw_c][$not_equals]=N&filter[5][estatus_c][$not_equals]=R");
                            requestA.url = url.substring(4);
                            requests.push(requestA);
                            var requestB = app.utils.deepCopy(request);
@@ -7629,35 +7629,40 @@
                                                         necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                     }
                                                 }
-                                                //Sección PEPS Personal
+                                                //Sección PEPS Física Personal
                                                 if (this.model.get('ctpldfuncionespublicas_c') == true) {
+                                                    var banderaPEPSPersonal="";
                                                     if (this.model.get('ctpldfuncionespublicascargo_c') == "" || this.model.get('ctpldfuncionespublicascargo_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 2<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                     }
                                                     if (this.model.get('tct_dependencia_pf_c') == "" || this.model.get('tct_dependencia_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 3<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_periodo_pf1_c') == "" || this.model.get('tct_periodo_pf1_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 4<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Periodo en el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_ini_pf_c') == "" || this.model.get('tct_fecha_ini_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 5<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha Inicio<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_fin_pf_c') == "" || this.model.get('tct_fecha_fin_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 6<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha de término<br></b>';
+                                                    }
+                                                    if (banderaPEPSPersonal!=""){
+                                                        necesarios = "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                     }
                                                 }
                                                
-                                                //Sección PEPS Familiar
+                                                //Sección PEPS Física Familiar
                                                 if (this.model.get('ctpldconyuge_c') == true) {
+                                                    var banderaPEPSFamiliar="";
                                                     if (this.model.get('ctpldconyugecargo_c') == "" || this.model.get('ctpldconyugecargo_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 2<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>PEPS Familiar Pregunta 2<br></b>';
                                                     }
                                                     if (this.model.get('tct_nombre_pf_peps_c') == "" || this.model.get('tct_nombre_pf_peps_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 3<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>PEPS Familiar Pregunta 3<br></b>';
                                                     }
                                                     if (this.model.get('tct_cargo2_pf_c') == "" || this.model.get('tct_cargo2_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 4<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>PEPS Familiar Pregunta 4<br></b>';
                                                     }
                                                     if (this.model.get('tct_dependencia2_pf_c') == "" || this.model.get('tct_dependencia2_pf_c') == null) {
                                                         necesarios = necesarios + '<b>PEPS Familiar Pregunta 5<br></b>';
@@ -7871,7 +7876,7 @@ validaReqUniclickInfo: function () {
                    var Cuenta = this.model.get('id');
                    //Obtenemos las opps de la cuenta
                    var requestA = app.utils.deepCopy(request);
-                   var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$not_equals]=N&filter[4][estatus_c][$not_equals]=R");
+                   var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[2][negocio_c][$equals]=10&filter[3][estatus_c][$not_equals]=K&filter[4][tct_etapa_ddw_c][$not_equals]=N&filter[5][estatus_c][$not_equals]=R");
                        requestA.url = url.substring(4);
                        requests.push(requestA);
                        var requestB = app.utils.deepCopy(request);
