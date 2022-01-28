@@ -7705,7 +7705,7 @@
                                                 if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                                                     necesarios = necesarios + '<b>Razón Social<br></b>';
                                                 }
-                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                                 }
                                                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
@@ -8015,7 +8015,7 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                                                 necesarios = necesarios + '<b>Razón Social<br></b>';
                                             }
-                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                 necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }
                                             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
