@@ -2261,16 +2261,13 @@
                                                 necesarios = necesarios + '<b>Nombre<br></b>';
                                             }
                                             if (data[4].contents.apellidopaterno_c == "" || data[4].contents.apellidopaterno_c == null) {
-                                                necesarios = necesarios + '<b>Nombre<br></b>';
+                                                necesarios = necesarios + '<b>Apellido Paterno<br></b>';
                                             }
                                             if (data[4].contents.genero_c == "" || data[4].contents.genero_c == null) {
                                                     necesarios = necesarios + '<b>G\u00E9nero</b><br>';
                                             }
                                             if (data[4].contents.fechadenacimiento_c == "" || data[4].contents.fechadenacimiento_c == null) {
                                                 necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
-                                            }
-                                            if (data[4].contents.estado_nacimiento_c == "" || data[4].contents.estado_nacimiento_c == null || data[4].contents.estado_nacimiento_c == "1") {
-                                                necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                             }
                                             if (data[4].contents.pais_nacimiento_c == "" || data[4].contents.pais_nacimiento_c == null) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
@@ -2281,18 +2278,23 @@
                                             if (data[4].contents.profesion_c == "" || data[4].contents.profesion_c == null) {
                                                     necesarios = necesarios + '<b>Profesión</b><br>';
                                             }
-                                            if (data[4].contents.curp_c == "" || data[4].contents.curp_c == null) {
-                                                    necesarios = necesarios + '<b>CURP</b><br>';
-                                            }
                                             if (data[4].contents.rfc_c == "" || data[4].contents.rfc_c == null ) {
                                                     necesarios = necesarios + '<b>RFC</b><br>';
                                             }
-                                            if (data[4].contents.pais_nacimiento_c!= "2" ) {
+                                            if (data[4].contents.nacionalidad_c!= "2" ) {
                                                 if (data[4].contents.tct_pais_expide_rfc_c == "" || data[4].contents.tct_pais_expide_rfc_c == null ) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                 }
+                                                
+                                            }else{
                                                 if (data[4].contents.ctpldnoseriefiel_c == "" || data[4].contents.ctpldnoseriefiel_c == null ) {
                                                     necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
+                                                }
+                                                if (data[4].contents.curp_c == "" || data[4].contents.curp_c == null) {
+                                                    necesarios = necesarios + '<b>CURP</b><br>';
+                                                }
+                                                if (data[4].contents.estado_nacimiento_c == "" || data[4].contents.estado_nacimiento_c == null || data[4].contents.estado_nacimiento_c == "1") {
+                                                    necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                 }
                                             }
                                             //Sección PEPS Personal
