@@ -7699,7 +7699,7 @@
                                             } 
                                             }else{
                                                 //Valida persona Moral
-                                                if (this.$('.list_ae').select2('val') == "" || this.$('.list_ae').select2('val') == null) {
+                                                if (this.$('.list_ae').select2('val') == "" || this.$('.list_ae').select2('val') == null || this.$('.list_ae').select2('val') == '0') {
                                                     necesarios = necesarios + '<b>Actividad Económica<br></b>';
                                                 }
                                                 if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
