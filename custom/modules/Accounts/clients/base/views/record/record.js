@@ -8183,7 +8183,7 @@ validaReqUniclickInfo: function () {
                                         if (necesarios!="") {
                                             app.alert.show("Campos Requeridos para opp CS y negocio Uniclick Moral", {
                                             level: "info",
-                                            title: "Hace falta completar la siguiente información en la <b>Cuenta</b> para el producto Uniclick:<br>"+ necesarios,
+                                            messages: "Hace falta completar la siguiente información en la <b>Cuenta</b> para el producto Uniclick:<br>"+ necesarios,
                                             autoClose: false
                                                 });
                                                 
