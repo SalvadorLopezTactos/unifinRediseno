@@ -158,11 +158,21 @@ class altaLeadServices extends SugarApi
     public function get_asignado($data_result, $regimenFiscal, $compania_c, $id_landing_c, $origen = null, $detalleOrigen = null, $productoFinanciero = null, $idAsignadoAlta=null)
     {
         global $db, $app_list_strings;
-        $GLOBALS['log']->fatal("compania_c " , $compania_c);
         $GLOBALS['log']->fatal("data_result " , $data_result);
 
-        if($origen == 12 && $detalleOrigen == 12 ) $soc = true;
-        
+        if($origen == 12 && $detalleOrigen == 12 ){
+            if($data_result['lead']['status'] == "200"){
+                $this->asigna_soc($data_result['lead']['id'] , 1);
+            }
+            if($data_result['lead']['status'] == "503"){
+                if($data_result['lead']['modulo'] == "Leads"){
+                    $this->asigna_soc($data_result['lead']['id'] , 2);
+                }
+                if($data_result['lead']['modulo'] == "Cuentas"){
+                    $this->asigna_soc($data_result['lead']['id'] , 3);
+                }
+            }
+        }else{
         $asignados = $this->reglas_asignado($compania_c, $id_landing_c, $origen = null, $detalleOrigen = null, $productoFinanciero = null, $idAsignadoAlta=null);
 
         $new_indice = $asignados['new_indice'];
@@ -174,9 +184,7 @@ class altaLeadServices extends SugarApi
         if ($data_result['lead']['status'] == 200) {
             $GLOBALS['log']->fatal("origen " . $origen);
             $GLOBALS['log']->fatal("detalleOrigen " . $detalleOrigen);
-            if($soc ){
-                $this->asigna_soc($data_result['lead']['id'] , 1);
-            }else{
+            
                 $id_lead = $data_result['lead']['id'];
 
                 $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
@@ -199,11 +207,9 @@ class altaLeadServices extends SugarApi
                     }
                     $db->query($update_assigne_user);
                 }
-            }
-        }elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
-            if($soc ){
-                $this->asigna_soc($data_result['lead']['id'] , 2);
-            }else{
+        }elseif ($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') {
+            
+            if ($data_result['asociados'][0]['status'] == 200) {
                 $id_lead = $data_result['lead']['id'];
                 $id_lead_asociado = $data_result['asociados'][0]['id'];
     
@@ -217,11 +223,8 @@ class altaLeadServices extends SugarApi
                 WHERE l.id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user);
             }
-        }elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Accounts')) {
-            if($soc ){
-                $this->asigna_soc($data_result['lead']['id'] , 3);
-            }
         }
+    }
 
         $update_call = "UPDATE calls c SET c.assigned_user_id ='{$new_assigned_user}' WHERE c.parent_id ='{$id_lead}'";
         $db->query($update_call);
@@ -440,6 +443,7 @@ class altaLeadServices extends SugarApi
         if($tipo == 3 ) $bean = BeanFactory::retrieveBean('Accounts', $lead_asociado,array('disable_row_level_security' => true));
         if($tipo == 1 ) $asigna = 1;
 
+        $GLOBALS['log']->fatal("tipo" . $tipo);
         if($tipo != 1){
             if($tipo == 3){
                 $quer_inactiv = "SELECT id, status, first_name , last_name FROM users 

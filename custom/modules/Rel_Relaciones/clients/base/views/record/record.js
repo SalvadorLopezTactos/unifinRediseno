@@ -2003,7 +2003,7 @@ extendsFrom: 'RecordView',
                        var necesarios="";
                        var requests=[];
                        var request={};
-                       var Cuenta = this.model.get('rel_relaciones_accounts_1').id;
+                       var Cuenta = this.model.get('account_id1_c');
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
                            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10");
@@ -2041,16 +2041,13 @@ extendsFrom: 'RecordView',
                                                 necesarios = necesarios + '<b>Nombre<br></b>';
                                             }
                                             if (data[4].contents.apellidopaterno_c == "" || data[4].contents.apellidopaterno_c == null) {
-                                                necesarios = necesarios + '<b>Nombre<br></b>';
+                                                necesarios = necesarios + '<b>Apellido Paterno<br></b>';
                                             }
                                             if (data[4].contents.genero_c == "" || data[4].contents.genero_c == null) {
                                                     necesarios = necesarios + '<b>G\u00E9nero</b><br>';
                                             }
                                             if (data[4].contents.fechadenacimiento_c == "" || data[4].contents.fechadenacimiento_c == null) {
                                                 necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
-                                            }
-                                            if (data[4].contents.estado_nacimiento_c == "" || data[4].contents.estado_nacimiento_c == null || data[4].contents.estado_nacimiento_c == "1") {
-                                                necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                             }
                                             if (data[4].contents.pais_nacimiento_c == "" || data[4].contents.pais_nacimiento_c == null) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
@@ -2061,18 +2058,23 @@ extendsFrom: 'RecordView',
                                             if (data[4].contents.profesion_c == "" || data[4].contents.profesion_c == null) {
                                                     necesarios = necesarios + '<b>Profesión</b><br>';
                                             }
-                                            if (data[4].contents.curp_c == "" || data[4].contents.curp_c == null) {
-                                                    necesarios = necesarios + '<b>CURP</b><br>';
-                                            }
                                             if (data[4].contents.rfc_c == "" || data[4].contents.rfc_c == null ) {
                                                     necesarios = necesarios + '<b>RFC</b><br>';
                                             }
-                                            if (data[4].contents.pais_nacimiento_c!= "2" ) {
+                                            if (data[4].contents.nacionalidad_c!= "2" ) {
                                                 if (data[4].contents.tct_pais_expide_rfc_c == "" || data[4].contents.tct_pais_expide_rfc_c == null ) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                 }
+                                                
+                                            }else{
                                                 if (data[4].contents.ctpldnoseriefiel_c == "" || data[4].contents.ctpldnoseriefiel_c == null ) {
                                                     necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
+                                                }
+                                                if (data[4].contents.curp_c == "" || data[4].contents.curp_c == null) {
+                                                    necesarios = necesarios + '<b>CURP</b><br>';
+                                                }
+                                                if (data[4].contents.estado_nacimiento_c == "" || data[4].contents.estado_nacimiento_c == null || data[4].contents.estado_nacimiento_c == "1") {
+                                                    necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                 }
                                             }
                                             //Sección PEPS Personal
@@ -2120,7 +2122,7 @@ extendsFrom: 'RecordView',
                                             }
                                             
                                             //Preguntas PLD
-                                            if (data[3].contents.records.length>0){
+                                            /*if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
                                                     necesarios = necesarios + '<b>Pregunta 1 PLD-Crédito Simple<br></b>';
                                                 }
@@ -2135,14 +2137,14 @@ extendsFrom: 'RecordView',
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo19_txt == "" || data[3].contents.records[0].tct_pld_campo19_txt == null) {
                                                     necesarios = necesarios + '<b>Pregunta 5.1 PLD-Crédito Simple<br></b>';
-                                                }*/
+                                                }
                                                 if (data[3].contents.records[0].tct_pld_campo20_ddw == "" || data[3].contents.records[0].tct_pld_campo20_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records[0].tct_pld_campo6_ddw == "" || data[3].contents.records[0].tct_pld_campo6_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
-                                            } 
+                                            } */
                                         }else{
                                            //Valida persona Moral
                                            if (data[4].contents.actividadeconomica_c == "" || data[4].contents.actividadeconomica_c == null) {
@@ -2166,92 +2168,95 @@ extendsFrom: 'RecordView',
                                         if (data[4].contents.fechaconstitutiva_c == "" || data[4].contents.fechaconstitutiva_c == null) {
                                             necesarios = necesarios + '<b>Fecha Constitutiva</b><br>';
                                         }
-                                        if (data[4].contents.apoderado_nombre_c == "" || data[4].contents.apoderado_nombre_c == null) {
-                                            necesarios = necesarios + '<b>Nombre Apoderado Legal</b><br>';
-                                        }
-                                        if (data[4].contents.apoderado_apaterno_c == "" || data[4].contents.apoderado_apaterno_c == null) {
-                                            necesarios = necesarios + '<b>Apellido Paterno Apoderado Legal</b><br>';
-                                        }
-                                        if (data[4].contents.apoderado_amaterno_c == "" || data[4].contents.apoderado_amaterno_c == null) {
-                                            necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
-                                        }
                                         if (data[4].contents.tct_cpld_pregunta_u1_ddw_c == "" || data[4].contents.tct_cpld_pregunta_u1_ddw_c == null) {
                                             necesarios = necesarios + '<b>Pregunta SOFOM</b><br>';
                                         }
                                         if (data[4].contents.tct_cpld_pregunta_u3_ddw_c == "" || data[4].contents.tct_cpld_pregunta_u3_ddw_c == null) {
                                             necesarios = necesarios + '<b>¿Cotiza en Bolsa?</b><br>';
                                         }
-                                        if (data[4].contents.tct_fedeicomiso_chk_c == "" || data[4].contents.tct_fedeicomiso_chk_c == null) {
+                                       /* if (data[4].contents.tct_fedeicomiso_chk_c == "" || data[4].contents.tct_fedeicomiso_chk_c == null) {
                                             necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
+                                        }*/
+                                        //Preguntas CHECK deudor_factor_c
+                                        if (data[4].contents.deudor_factor_c==true){
+                                            if (data[4].contents.apoderado_nombre_c == "" || data[4].contents.apoderado_nombre_c == null) {
+                                                necesarios = necesarios + '<b>Nombre Apoderado Legal</b><br>';
+                                            }
+                                            if (data[4].contents.apoderado_apaterno_c == "" || data[4].contents.apoderado_apaterno_c == null) {
+                                                necesarios = necesarios + '<b>Apellido Paterno Apoderado Legal</b><br>';
+                                            }
+                                            if (data[4].contents.apoderado_amaterno_c == "" || tdata[4].contents.apoderado_amaterno_c == null) {
+                                                necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
+                                            }
                                         }
                                             //Preguntas PLD
-                                            if (data[3].contents.records.length>0){
+                                           /* if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records.tct_pld_campo4_ddw == "" || data[3].contents.records.tct_pld_campo4_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo18_ddw == "" || data[3].contents.records.tct_pld_campo18_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PLD-Crédito Simple<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                 }
                                                 /*if (data[3].contents.records.tct_pld_campo14_chk == "" || data[3].contents.records.tct_pld_campo14_chk == null) {
                                                     necesarios = necesarios + '<b>regunta 6 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo19_txt == "" || data[3].contents.records.tct_pld_campo19_txt == null) {
                                                     necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
-                                                }*/
+                                                }
                                                 if (data[3].contents.records.tct_pld_campo20_ddw == "" || data[3].contents.records.tct_pld_campo20_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 7 PLD-Crédito Simple<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                 }
                                                 if (data[3].contents.records.tct_pld_campo6_ddw == "" || data[3].contents.records.tct_pld_campo6_ddw == null) {
-                                                    necesarios = necesarios + '<b>regunta 8 PLD-Crédito Simple<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
-                                            } 
+                                            } */
                                             //PEPS Moral Familiar
                                             if (data[4].contents.ctpldaccionistasconyuge_c == true) {
                                                 if (data[4].contents.tct_socio2_pm_c == "" || data[4].contents.tct_socio2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistasconyugecargo_c == "" || data[4].contents.ctpldaccionistasconyugecargo_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 6 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_nombre_pm_c == "" || data[4].contents.tct_nombre_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 5.1 PEPS Moral Familiar<br></b>';
-                                                }
-                                                if (data[4].contents.tct_cargo_pm_c == "" || data[4].contents.tct_cargo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 7 PEPS Moral Familiar<br></b>';
-                                                }
-                                                if (data[4].contents.tct_dependencia2_pm_c == "" || data[4].contents.tct_dependencia2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 8 PEPS Moral Familiar<br></b>';
-                                                }
-                                                if (data[4].contents.tct_periodo2_pm_c == "" || data[4].contents.tct_periodo2_pm_c == null) {
                                                     necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Familiar<br></b>';
                                                 }
+                                                if (data[4].contents.tct_cargo_pm_c == "" || data[4].contents.tct_cargo_pm_c == null) {
+                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Familiar<br></b>';
+                                                }
+                                                if (data[4].contents.tct_dependencia2_pm_c == "" || data[4].contents.tct_dependencia2_pm_c == null) {
+                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
+                                                }
+                                                if (data[4].contents.tct_periodo2_pm_c == "" || data[4].contents.tct_periodo2_pm_c == null) {
+                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
+                                                }
                                                 if (data[4].contents.tct_fecha_ini2_pm_c == "" || data[4].contents.tct_fecha_ini2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 5 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 7 PEPS Moral Familiar<br></b>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin2_pm_c == "" || data[4].contents.tct_fecha_fin2_pm_c == null) {
-                                                    necesarios = necesarios + '<b>regunta 6 PEPS Moral Familiar<br></b>';
+                                                    necesarios = necesarios + '<b>Pregunta 8 PEPS Moral Familiar<br></b>';
                                                 } 
                                             }
 
                                             //PEPS Moral Personal
                                             if(data[4].contents.ctpldaccionistas_c==true){
                                                 if (data[4].contents.tct_socio_pm_c == "" || data[4].contents.tct_socio_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Nombre del Socio o Accionista</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.ctpldaccionistascargo_c == "" || data[4].contents.ctpldaccionistascargo_c == null) {
-                                                    necesarios = necesarios + '<b>Cargo público que tiene o tuvo</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_dependencia_pm_c == "" || data[4].contents.tct_dependencia_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Dependencia</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_periodo_pm_c == "" || data[4].contents.tct_periodo_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Periodo</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_ini_pm_c == "" || data[4].contents.tct_fecha_ini_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Fecha Inicio</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Personal</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin_pm_c == "" || data[4].contents.tct_fecha_fin_pm_c == null) {
-                                                    necesarios = necesarios + '<b>Fecha Fin</b><br>';
+                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Personal</b><br>';
                                                 }
                                             }
 
@@ -2286,7 +2291,7 @@ extendsFrom: 'RecordView',
                                             if (necesarios!="") {
                                                 app.alert.show("Campos Requeridos para opp CS y negocio Uniclick Moral", {
                                                 level: "error",
-                                                title: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>"+ necesarios,
+                                                title: "Hace falta completar la siguiente información en la <b>Cuenta</b> "+'<a href="#Accounts/' + Cuenta + '" target= "_blank"> '+':<br>"'+ necesarios,
                                                 autoClose: false
                                                     });
                                                     errors['accounts_cstm'] = errors['accounts_cstm'] || {};
