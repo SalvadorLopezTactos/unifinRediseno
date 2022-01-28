@@ -7562,7 +7562,7 @@
                        var Cuenta = this.model.get('id');
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
-                           var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10");
+                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$equals]=SI");
                            requestA.url = url.substring(4);
                            requests.push(requestA);
                            var requestB = app.utils.deepCopy(request);
@@ -7871,7 +7871,7 @@ validaReqUniclickInfo: function () {
                    var Cuenta = this.model.get('id');
                    //Obtenemos las opps de la cuenta
                    var requestA = app.utils.deepCopy(request);
-                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10");
+                   var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$equals]=SI");
                        requestA.url = url.substring(4);
                        requests.push(requestA);
                        var requestB = app.utils.deepCopy(request);
@@ -7913,7 +7913,7 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
-                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }
                                             if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {

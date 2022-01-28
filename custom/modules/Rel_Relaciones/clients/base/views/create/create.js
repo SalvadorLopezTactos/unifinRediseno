@@ -2272,7 +2272,7 @@
                                             if (data[4].contents.pais_nacimiento_c == "" || data[4].contents.pais_nacimiento_c == null) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
-                                            if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || this.model.get('nacionalidad_c')=='0') {
+                                            if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || data[4].contents.nacionalidad_c=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }
                                             if (data[4].contents.profesion_c == "" || data[4].contents.profesion_c == null) {
@@ -2373,7 +2373,7 @@
                                         if (data[4].contents.razonsocial_c == "" || data[4].contents.razonsocial_c == null) {
                                             necesarios = necesarios + '<b>Razón Social<br></b>';
                                         }
-                                        if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null) {
+                                        if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || data[4].contents.nacionalidad_c == '0') {
                                             necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                         }
                                         if (data[4].contents.rfc_c == "" || data[4].contents.rfc_c == null ) {
