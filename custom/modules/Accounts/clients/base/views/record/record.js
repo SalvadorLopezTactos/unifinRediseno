@@ -7755,7 +7755,7 @@
                                                     if (this.$('.campo4ddw-cs').select2('val') == "" || this.$('.campo4ddw-cs').select2('val') == null) {
                                                         necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.ProductosPLD.creditoSimple.campo18 == "" || this.ProductosPLD.creditoSimple.campo18 == null) {
+                                                    if (this.$('.campo18ddw-cs').select2('val').toString() == "" || this.$('.campo18ddw-cs').select2('val').toString() == null) {
                                                         necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                     }
                                                     /*if (this.$('.campo14chk-cs')[0].checked == false) {
