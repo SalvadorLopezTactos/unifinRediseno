@@ -30,6 +30,9 @@
     anio_list_html_filter: null,
     etapa_list_html: null,
     producto_list_html: null,
+    equipo_list_html:null,
+    zona_list_html:null,
+    tipo_operacion_list_html:null,
 
     initialize: function (options) {
         self = this;
@@ -52,6 +55,24 @@
         this.producto_list_html["1"] = "Leasing";
         this.producto_list_html["2"] = "Crédito Simple";
         this.producto_list_html["3"] = "Lumo";
+
+        this.equipo_list_html=app.lang.getAppListStrings('equipo_list');
+        this.zona_list_html=app.lang.getAppListStrings('tct_team_region_list');
+        
+        var tipo_operacion_list_leasing=app.lang.getAppListStrings('num_tipo_op_leasing_list');
+        var tipo_operacion_list_credito=app.lang.getAppListStrings('num_tipo_op_credito_list');
+
+        //Generando lista con valores concatenados de 2 listas num_tipo_op_leasing_list,num_tipo_op_credito_list
+        this.tipo_operacion_list_html={};
+        for (const key in tipo_operacion_list_leasing) {
+            if(tipo_operacion_list_leasing[key]!==""){
+                this.tipo_operacion_list_html["0"+key+""]=tipo_operacion_list_leasing[key];
+            }
+        }
+
+        for (const key in tipo_operacion_list_credito) {
+            this.tipo_operacion_list_html[key]=tipo_operacion_list_credito[key];
+        }
 
         this.mes_filtro = ((new Date).getMonth() + 1).toString();
         this.anio_filtro = ((new Date).getFullYear()).toString();
@@ -117,6 +138,10 @@
         var anio = $('#anio_filtro').val();
         var etapa = $('#etapa_filtro').val();
         var producto = $('#producto_filtro').val();
+        var equipo=$('#equipo_filtro').val();
+        var asesor=$('[name="assigned_user_name"]').val();
+        var cliente=$('#filtroClienteBacklog').val();
+        var tipo_operacion=$('#tipo_operacion').val();
         //Antes de cargar los filtro con la llamada al api, validamos que los filtros de mes y año no sean de meses y años anteriores
         var mes_actual = ((new Date).getMonth() + 1).toString();
         var anio_actual = (new Date).getFullYear();
@@ -129,14 +154,18 @@
 
             return;
         }
-        this.cargarBacklogsGestion(mes, anio, etapa, producto);
+        this.cargarBacklogsGestion(mes, anio, etapa, producto,equipo,asesor,cliente,tipo_operacion);
     },
 
-    cargarBacklogsGestion: function (mes, anio, etapa, producto) {
+    cargarBacklogsGestion: function (mes, anio, etapa, producto,equipo,asesor,cliente,tipo_operacion) {
         self.mes_filtro = $('#mes_filtro').val();
         self.anio_filtro = $('#anio_filtro').val();
         self.etapa_filtro = $('#etapa_filtro').val();
         self.producto_filtro = $('#producto_filtro').val();
+        self.equipo_filtro = $('#equipo_filtro').val();
+        self.asesor_filtro=$('[name="assigned_user_name"]').val();
+        self.cliente_filtro=$('#filtroClienteBacklog').val();
+        self.tipo_operacion_filtro=$('#tipo_operacion').val();
 
         var mes_actual = ((new Date).getMonth() + 1).toString();
         var anio_actual = (new Date).getFullYear();
@@ -202,6 +231,61 @@
                     filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "lumo_cuentas_c": { "$equals": "0" } }
                 }
             }
+
+            if(equipo!=null && equipo!="" && equipo!="0"){
+                filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "equipo": { "$equals": equipo } }
+            }
+
+            if(asesor!=null && asesor!="" && asesor!=undefined){
+                filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "assigned_user_id": { "$equals": asesor } }
+            }
+
+            if(cliente!=null && cliente!="" && cliente!=undefined){
+                filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "name": { "$contains": cliente } }
+            }
+
+            if(tipo_operacion!=null && tipo_operacion!="" && tipo_operacion!=undefined && tipo_operacion.length>0){
+                
+                var array_tipo_op_leasing=[];
+                var array_tipo_op_credito=[];
+                //Si los id del select contienen un "0" al inicio, quiere decir que hay que buscar en el campo de leasing, en otro caso hay que buscar en el de crédito
+                    
+                if(tipo_operacion.includes('01')){
+                    array_tipo_op_leasing.push(1);
+                    var index=tipo_operacion.indexOf('01');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('02')){
+                    array_tipo_op_leasing.push(2);
+                    var index=tipo_operacion.indexOf('02');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('03')){
+                    array_tipo_op_leasing.push(3);
+                    var index=tipo_operacion.indexOf('03');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('04')){
+                    array_tipo_op_leasing.push(4);
+                    var index=tipo_operacion.indexOf('04');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('05')){
+                    array_tipo_op_leasing.push(5);
+                    var index=tipo_operacion.indexOf('05');
+                    tipo_operacion.splice(index,1);
+                }
+
+                if(array_tipo_op_leasing.length>0 && tipo_operacion.length==0){//Se tienen valores para Leasing y ninguno para Crédito
+                    
+                    filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "num_tipo_op_leasing_c": { "$contains": array_tipo_op_leasing } }
+                }else if(tipo_operacion.length>0 && array_tipo_op_leasing==0){
+                    filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "num_tipo_op_credito_c": { "$contains": tipo_operacion } }
+                }else{
+                    filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = {"$or":[{ "num_tipo_op_leasing_c": { "$contains": array_tipo_op_leasing } },{ "num_tipo_op_credito_c": { "$contains": tipo_operacion } }] }
+                }
+            }
+
         }
 
         var filtroUsuarios = {
@@ -342,6 +426,11 @@
                     $('#anio_filtro').val(self.anio_filtro);
                     $('#etapa_filtro').val(self.etapa_filtro);
                     $('#producto_filtro').val(self.producto_filtro);
+                    $('#equipo_filtro').select2('val',self.equipo_filtro);
+                    $('[name="assigned_user_name"]').select2('val',self.asesor_filtro);
+                    $('#filtroClienteBacklog').val(self.cliente_filtro);
+                    $('#tipo_operacion').select2('val',self.tipo_operacion_filtro);
+
                 } else {
                     //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
                     $('#mes_filtro').select2('val', ((new Date).getMonth() + 1).toString());
@@ -349,6 +438,9 @@
                     $('#anio_filtro').select2('val', ((new Date).getFullYear()));
                     $('#etapa_filtro').select2('val', "");
                     $('#producto_filtro').select2('val', "0");
+                    $('[name="assigned_user_name"]').select2("val","");
+                    $('#filtroClienteBacklog').val("");
+                    $('#tipo_operacion').select2('val',"");
                 }
 
                 //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
