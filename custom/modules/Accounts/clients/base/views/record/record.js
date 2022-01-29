@@ -286,7 +286,7 @@
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
         this.model.addValidationTask('proveedorDeRecursos', _.bind(this.proveedorRecursos, this));
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
@@ -311,6 +311,7 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
+        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
@@ -7562,7 +7563,7 @@
                        var Cuenta = this.model.get('id');
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
-                           var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10");
+                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[2][negocio_c][$equals]=10&filter[3][estatus_c][$not_equals]=K&filter[4][tct_etapa_ddw_c][$not_equals]=N&filter[5][estatus_c][$not_equals]=R");
                            requestA.url = url.substring(4);
                            requests.push(requestA);
                            var requestB = app.utils.deepCopy(request);
@@ -7592,7 +7593,7 @@
                                                     necesarios = necesarios + '<b>Nombre<br></b>';
                                                 }
                                                 if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                                                    necesarios = necesarios + '<b>Nombre<br></b>';
+                                                    necesarios = necesarios + '<b>Apellido Paterno<br></b>';
                                                 }
                                                 if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
                                                         necesarios = necesarios + '<b>G\u00E9nero</b><br>';
@@ -7600,109 +7601,120 @@
                                                 if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
                                                     necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                                                 }
-                                                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
-                                                    necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
-                                                }
                                                 if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
                                                         necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                                 }
-                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                         necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                                 }
                                                 if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
                                                         necesarios = necesarios + '<b>Profesión</b><br>';
                                                 }
-                                                if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
-                                                        necesarios = necesarios + '<b>CURP</b><br>';
-                                                }
+                                                
                                                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                         necesarios = necesarios + '<b>RFC</b><br>';
                                                 }
-                                                if (this.model.get('pais_nacimiento_c')!= "2" ) {
+                                                if (this.model.get('nacionalidad_c')!= "2" ) {
                                                     if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null ) {
                                                         necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                     }
+                                                    
+                                                }else{
                                                     if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == null ) {
                                                         necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
                                                     }
+                                                    if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+                                                        necesarios = necesarios + '<b>CURP</b><br>';
+                                                    }
+                                                    if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
+                                                        necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
+                                                    }
                                                 }
-                                                //Sección PEPS Personal
+                                                //Sección PEPS Física Personal
                                                 if (this.model.get('ctpldfuncionespublicas_c') == true) {
+                                                    var banderaPEPSPersonal="";
                                                     if (this.model.get('ctpldfuncionespublicascargo_c') == "" || this.model.get('ctpldfuncionespublicascargo_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 2<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                     }
                                                     if (this.model.get('tct_dependencia_pf_c') == "" || this.model.get('tct_dependencia_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 3<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_periodo_pf1_c') == "" || this.model.get('tct_periodo_pf1_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 4<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Periodo en el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_ini_pf_c') == "" || this.model.get('tct_fecha_ini_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 5<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha Inicio<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_fin_pf_c') == "" || this.model.get('tct_fecha_fin_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Personal Pregunta 6<br></b>';
+                                                        banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha de término<br></b>';
+                                                    }
+                                                    if (banderaPEPSPersonal!=""){
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                     }
                                                 }
                                                
-                                                //Sección PEPS Familiar
+                                                //Sección PEPS Física Familiar
                                                 if (this.model.get('ctpldconyuge_c') == true) {
+                                                    var banderaPEPSFamiliar="";
                                                     if (this.model.get('ctpldconyugecargo_c') == "" || this.model.get('ctpldconyugecargo_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 2<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Especificar parentesco o relación<br></b>';
                                                     }
                                                     if (this.model.get('tct_nombre_pf_peps_c') == "" || this.model.get('tct_nombre_pf_peps_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 3<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Nombre de la persona que ocupa el puesto<br></b>';
                                                     }
                                                     if (this.model.get('tct_cargo2_pf_c') == "" || this.model.get('tct_cargo2_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 4<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                     }
                                                     if (this.model.get('tct_dependencia2_pf_c') == "" || this.model.get('tct_dependencia2_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 5<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_periodo2_pf_c') == "" || this.model.get('tct_periodo2_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 6<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Periodo en el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_ini2_pf_c') == "" || this.model.get('tct_fecha_ini2_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 7<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de Inicio<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_fin2_pf_c') == "" || this.model.get('tct_fecha_fin2_pf_c') == null) {
-                                                        necesarios = necesarios + '<b>PEPS Familiar Pregunta 8<br></b>';
+                                                        banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de término<br></b>';
+                                                    }
+                                                    if (banderaPEPSFamiliar!=""){
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                     }
                                                 }
                                                 
                                                 //Preguntas PLD
                                             if (data[3].contents.records.length>0){
-                                                if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
+                                                if (this.$('.campo2ddw-cs').select2('val') == "" || this.$('.campo2ddw-cs').select2('val')  == null) {
                                                     necesarios = necesarios + '<b>Pregunta 1 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo4_ddw == "" || data[3].contents.records[0].tct_pld_campo4_ddw == null) {
+                                                if (this.$('.campo4ddw-cs').select2('val') == "" || this.$('.campo4ddw-cs').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo18_ddw == "" || data[3].contents.records[0].tct_pld_campo18_ddw == null) {
+                                                if (this.$('.campo18ddw-cs').select2('val').toString() == "" || this.$('.campo18ddw-cs').select2('val').toString() == null) {
                                                     necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                 }
-                                                /*if (data[3].contents.records[0].tct_pld_campo14_chk == "" || data[3].contents.records[0].tct_pld_campo14_chk == null) {
+                                                /*if (this.$('.campo14chk-cs')[0].checked == false) {
                                                     necesarios = necesarios + '<b>Pregunta 6 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo19_txt == "" || data[3].contents.records[0].tct_pld_campo19_txt == null) {
+                                                if (this.$('.campo19txt-cs').val() == "" || this.$('.campo19txt-cs').val() == null) {
                                                     necesarios = necesarios + '<b>Pregunta 5.1 PLD-Crédito Simple<br></b>';
                                                 }*/
-                                                if (data[3].contents.records[0].tct_pld_campo20_ddw == "" || data[3].contents.records[0].tct_pld_campo20_ddw == null) {
+                                                if (this.$('.campo20ddw-cs').select2('val') == "" || this.$('.campo20ddw-cs').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                 }
-                                                if (data[3].contents.records[0].tct_pld_campo6_ddw == "" || data[3].contents.records[0].tct_pld_campo6_ddw == null) {
+                                                if (this.$('.campo6ddw-cs').select2('val') == "" || this.$('.campo6ddw-cs').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
                                             } 
                                             }else{
                                                 //Valida persona Moral
-                                                if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
+                                                if (this.$('.list_ae').select2('val') == "" || this.$('.list_ae').select2('val') == null || this.$('.list_ae').select2('val') == '0') {
                                                     necesarios = necesarios + '<b>Actividad Económica<br></b>';
                                                 }
                                                 if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                                                     necesarios = necesarios + '<b>Razón Social<br></b>';
                                                 }
-                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                                if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                                 }
                                                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
@@ -7723,9 +7735,9 @@
                                                 if (this.model.get('tct_cpld_pregunta_u3_ddw_c') == "" || this.model.get('tct_cpld_pregunta_u3_ddw_c') == null) {
                                                     necesarios = necesarios + '<b>¿Cotiza en Bolsa?</b><br>';
                                                 }
-                                                if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
+                                                /*if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
                                                     necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
-                                                }
+                                                }*/
                                                 //Preguntas CHECK deudor_factor_c
                                                 if (this.model.get('deudor_factor_c')==true){
                                                     if (this.model.get('apoderado_nombre_c') == "" || this.model.get('apoderado_nombre_c') == null) {
@@ -7740,72 +7752,79 @@
                                                 }
                                                 //Preguntas PLD
                                                 if (data[3].contents.records.length>0){
-                                                    if (this.model.get('tct_pld_campo4_ddw') == "" || this.model.get('tct_pld_campo4_ddw') == null) {
+                                                    if (this.$('.campo4ddw-cs').select2('val') == "" || this.$('.campo4ddw-cs').select2('val') == null) {
                                                         necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.model.get('tct_pld_campo18_ddw') == "" || this.model.get('tct_pld_campo18_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 5 PLD-Crédito Simple<br></b>';
+                                                    if (this.$('.campo18ddw-cs').select2('val').toString() == "" || this.$('.campo18ddw-cs').select2('val').toString() == null) {
+                                                        necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    /*if (this.model.get('tct_pld_campo14_chk') == "" || this.model.get('tct_pld_campo14_chk') == null) {
+                                                    /*if (this.$('.campo14chk-cs')[0].checked == false) {
                                                         necesarios = necesarios + '<b>regunta 6 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.model.get('tct_pld_campo19_txt') == "" || this.model.get('tct_pld_campo19_txt') == null) {
+                                                    if (this.$('.campo19txt-cs').val() == "" || this.$('.campo19txt-cs').val() == null) {
                                                         necesarios = necesarios + '<b>regunta 5.1 PLD-Crédito Simple<br></b>';
                                                     }*/
-                                                    if (this.model.get('tct_pld_campo20_ddw') == "" || this.model.get('tct_pld_campo20_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 7 PLD-Crédito Simple<br></b>';
+                                                    if (this.$('.campo20ddw-cs').select2('val') == "" || this.$('.campo20ddw-cs').select2('val') == null) {
+                                                        necesarios = necesarios + '<b>Pregunta 7 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.model.get('tct_pld_campo6_ddw') == "" || this.model.get('tct_pld_campo6_ddw') == null) {
-                                                        necesarios = necesarios + '<b>regunta 8 PLD-Crédito Simple<br></b>';
+                                                    if (this.$('.campo6ddw-cs').select2('val') == "" || this.$('.campo6ddw-cs').select2('val') == null) {
+                                                        necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                     }
                                                 } 
                                                  //PEPS Moral Familiar
                                                 if (this.model.get('ctpldaccionistasconyuge_c') == true) {
+                                                    var banderaPEPSMoralFamiliar="";
                                                     if (this.model.get('tct_socio2_pm_c') == "" || this.model.get('tct_socio2_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Nombre del Socio o Accionista<br></b>';
                                                     }
                                                     if (this.model.get('ctpldaccionistasconyugecargo_c') == "" || this.model.get('ctpldaccionistasconyugecargo_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Especificar parentesco o relación<br></b>';
                                                     }
                                                     if (this.model.get('tct_nombre_pm_c') == "" || this.model.get('tct_nombre_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Nombre de la persona que ocupa el puesto<br></b>';
                                                     }
                                                     if (this.model.get('tct_cargo_pm_c') == "" || this.model.get('tct_cargo_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                     }
                                                     if (this.model.get('tct_dependencia2_pm_c') == "" || this.model.get('tct_dependencia2_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_periodo2_pm_c') == "" || this.model.get('tct_periodo2_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Periodo en el cargo<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_ini2_pm_c') == "" || this.model.get('tct_fecha_ini2_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 7 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de Inicio<br></b>';
                                                     }
                                                     if (this.model.get('tct_fecha_fin2_pm_c') == "" || this.model.get('tct_fecha_fin2_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 8 PEPS Moral Familiar<br></b>';
+                                                        banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
                                                     } 
+                                                    if (banderaPEPSMoralFamiliar!=""){
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
+                                                    }
                                                 }
-
                                                 //PEPS Moral Personal
                                                 if(this.model.get('ctpldaccionistas_c')==true){
+                                                    var banderaPEPSMoralPersonal="";
                                                     if (this.model.get('tct_socio_pm_c') == "" || this.model.get('tct_socio_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Personal</b><br>';
+                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Nombre del Socio o Accionista</b><br>';
                                                     }
                                                     if (this.model.get('ctpldaccionistascargo_c') == "" || this.model.get('ctpldaccionistascargo_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Personal</b><br>';
+                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Cargo público que tiene o tuvo</b><br>';
                                                     }
                                                     if (this.model.get('tct_dependencia_pm_c') == "" || this.model.get('tct_dependencia_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Personal</b><br>';
+                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Dependencia donde ejerce o ejerció el cargo</b><br>';
                                                     }
                                                     if (this.model.get('tct_periodo_pm_c') == "" || this.model.get('tct_periodo_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Personal</b><br>';
+                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Periodo en el cargo</b><br>';
                                                     }
                                                     if (this.model.get('tct_fecha_ini_pm_c') == "" || this.model.get('tct_fecha_ini_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Personal</b><br>';
+                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de Inicio</b><br>';
                                                     }
                                                     if (this.model.get('tct_fecha_fin_pm_c') == "" || this.model.get('tct_fecha_fin_pm_c') == null) {
-                                                        necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Personal</b><br>';
+                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de término</b><br>';
+                                                    }
+                                                    if (banderaPEPSMoralPersonal!=""){
+                                                        necesarios = necesarios +'<br>'+ "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
                                                     }
                                                 }                                                
 
@@ -7840,7 +7859,7 @@
                                             if (necesarios!="") {
                                                 app.alert.show("Campos Requeridos para opp CS y negocio Uniclick Moral", {
                                                 level: "error",
-                                                title: "Hace falta completar la siguiente información en la <b>Cuenta</b> para el producto Uniclick:<br>"+ necesarios,
+                                                messages: "Hace falta completar la siguiente información en la <b>Cuenta</b> para el producto Uniclick:<br>"+ necesarios,
                                                 autoClose: false
                                                     });
                                                     errors['accounts_cstm'] = errors['accounts_cstm'] || {};
@@ -7868,7 +7887,7 @@ validaReqUniclickInfo: function () {
                    var Cuenta = this.model.get('id');
                    //Obtenemos las opps de la cuenta
                    var requestA = app.utils.deepCopy(request);
-                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10");
+                   var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[2][estatus_c][$not_equals]=K&filter[3][tct_etapa_ddw_c][$not_equals]=N&filter[4][estatus_c][$not_equals]=R");
                        requestA.url = url.substring(4);
                        requests.push(requestA);
                        var requestB = app.utils.deepCopy(request);
@@ -7898,7 +7917,7 @@ validaReqUniclickInfo: function () {
                                                 necesarios = necesarios + '<b>Nombre<br></b>';
                                             }
                                             if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                                                necesarios = necesarios + '<b>Nombre<br></b>';
+                                                necesarios = necesarios + '<b>Apellido Paterno<br></b>';
                                             }
                                             if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
                                                     necesarios = necesarios + '<b>G\u00E9nero</b><br>';
@@ -7906,73 +7925,85 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
                                                 necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                                             }
-                                            if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
-                                                necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
-                                            }
+                                           
                                             if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
-                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }
                                             if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
                                                     necesarios = necesarios + '<b>Profesión</b><br>';
                                             }
-                                            if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
-                                                    necesarios = necesarios + '<b>CURP</b><br>';
-                                            }
+                                            
                                             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                     necesarios = necesarios + '<b>RFC</b><br>';
                                             }
-                                            if (this.model.get('pais_nacimiento_c')!= "2" ) {
+                                            if (this.model.get('nacionalidad_c')!= "2" ) {
                                                 if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null ) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                 }
+                                                
+                                            }else{
                                                 if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == null ) {
                                                     necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
                                                 }
+                                                if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+                                                    necesarios = necesarios + '<b>CURP</b><br>';
+                                                }
+                                                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
+                                                    necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
+                                                }
                                             }
-                                            //Sección PEPS Personal
+                                            //Sección PEPS Física Personal
                                             if (this.model.get('ctpldfuncionespublicas_c') == true) {
+                                                var banderaPEPSPersonal="";
                                                 if (this.model.get('ctpldfuncionespublicascargo_c') == "" || this.model.get('ctpldfuncionespublicascargo_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 2<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                 }
                                                 if (this.model.get('tct_dependencia_pf_c') == "" || this.model.get('tct_dependencia_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 3<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                 }
                                                 if (this.model.get('tct_periodo_pf1_c') == "" || this.model.get('tct_periodo_pf1_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 4<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Periodo en el cargo<br></b>';
                                                 }
                                                 if (this.model.get('tct_fecha_ini_pf_c') == "" || this.model.get('tct_fecha_ini_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 5<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha Inicio<br></b>';
                                                 }
                                                 if (this.model.get('tct_fecha_fin_pf_c') == "" || this.model.get('tct_fecha_fin_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Personal Pregunta 6<br></b>';
+                                                    banderaPEPSPersonal = banderaPEPSPersonal + '<b>-Fecha de término<br></b>';
+                                                }
+                                                if (banderaPEPSPersonal!=""){
+                                                    necesarios = necesarios +'<br>'+ "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                 }
                                             }
-                                           
-                                            //Sección PEPS Familiar
+                                       
+                                            //Sección PEPS Física Familiar
                                             if (this.model.get('ctpldconyuge_c') == true) {
+                                                var banderaPEPSFamiliar="";
                                                 if (this.model.get('ctpldconyugecargo_c') == "" || this.model.get('ctpldconyugecargo_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 2<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Especificar parentesco o relación<br></b>';
                                                 }
                                                 if (this.model.get('tct_nombre_pf_peps_c') == "" || this.model.get('tct_nombre_pf_peps_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 3<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Nombre de la persona que ocupa el puesto<br></b>';
                                                 }
                                                 if (this.model.get('tct_cargo2_pf_c') == "" || this.model.get('tct_cargo2_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 4<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                 }
                                                 if (this.model.get('tct_dependencia2_pf_c') == "" || this.model.get('tct_dependencia2_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 5<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                 }
                                                 if (this.model.get('tct_periodo2_pf_c') == "" || this.model.get('tct_periodo2_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 6<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Periodo en el cargo<br></b>';
                                                 }
                                                 if (this.model.get('tct_fecha_ini2_pf_c') == "" || this.model.get('tct_fecha_ini2_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 7<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de Inicio<br></b>';
                                                 }
                                                 if (this.model.get('tct_fecha_fin2_pf_c') == "" || this.model.get('tct_fecha_fin2_pf_c') == null) {
-                                                    necesarios = necesarios + '<b>PEPS Familiar Pregunta 8<br></b>';
+                                                    banderaPEPSFamiliar = banderaPEPSFamiliar + '<b>-Fecha de término<br></b>';
+                                                }
+                                                if (banderaPEPSFamiliar!=""){
+                                                    necesarios = necesarios +'<br>'+ "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                 }
                                             }
                                             
@@ -8008,7 +8039,7 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                                                 necesarios = necesarios + '<b>Razón Social<br></b>';
                                             }
-                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null) {
+                                            if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                 necesarios = necesarios + '<b>Nacionalidad</b><br>';
                                             }
                                             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
@@ -8029,9 +8060,9 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('tct_cpld_pregunta_u3_ddw_c') == "" || this.model.get('tct_cpld_pregunta_u3_ddw_c') == null) {
                                                 necesarios = necesarios + '<b>¿Cotiza en Bolsa?</b><br>';
                                             }
-                                            if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
+                                            /*if (this.model.get('tct_fedeicomiso_chk_c') == "" || this.model.get('tct_fedeicomiso_chk_c') == null) {
                                                 necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
-                                            }
+                                            }*/
                                             //Preguntas CHECK deudor_factor_c
                                             if (this.model.get('deudor_factor_c')==true){
                                                 if (this.model.get('apoderado_nombre_c') == "" || this.model.get('apoderado_nombre_c') == null) {
@@ -8065,55 +8096,62 @@ validaReqUniclickInfo: function () {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
                                             } 
-                                            //PEPS Moral Familiar
-                                            if (this.model.get('ctpldaccionistasconyuge_c') == true) {
+                                             //PEPS Moral Familiar
+                                             if (this.model.get('ctpldaccionistasconyuge_c') == true) {
+                                                var banderaPEPSMoralFamiliar="";
                                                 if (this.model.get('tct_socio2_pm_c') == "" || this.model.get('tct_socio2_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Nombre del Socio o Accionista<br></b>';
                                                 }
                                                 if (this.model.get('ctpldaccionistasconyugecargo_c') == "" || this.model.get('ctpldaccionistasconyugecargo_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Especificar parentesco o relación<br></b>';
                                                 }
                                                 if (this.model.get('tct_nombre_pm_c') == "" || this.model.get('tct_nombre_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Nombre de la persona que ocupa el puesto<br></b>';
                                                 }
                                                 if (this.model.get('tct_cargo_pm_c') == "" || this.model.get('tct_cargo_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Cargo público que tiene o tuvo<br></b>';
                                                 }
                                                 if (this.model.get('tct_dependencia2_pm_c') == "" || this.model.get('tct_dependencia2_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Dependencia donde ejerce o ejerció el cargo<br></b>';
                                                 }
                                                 if (this.model.get('tct_periodo2_pm_c') == "" || this.model.get('tct_periodo2_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Periodo en el cargo<br></b>';
                                                 }
                                                 if (this.model.get('tct_fecha_ini2_pm_c') == "" || this.model.get('tct_fecha_ini2_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 7 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de Inicio<br></b>';
                                                 }
                                                 if (this.model.get('tct_fecha_fin2_pm_c') == "" || this.model.get('tct_fecha_fin2_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 8 PEPS Moral Familiar<br></b>';
+                                                    banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
                                                 } 
+                                                if (banderaPEPSMoralFamiliar!=""){
+                                                    necesarios = necesarios +'<br>'+"Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
+                                                }
                                             }
-
                                             //PEPS Moral Personal
                                             if(this.model.get('ctpldaccionistas_c')==true){
+                                                var banderaPEPSMoralPersonal="";
                                                 if (this.model.get('tct_socio_pm_c') == "" || this.model.get('tct_socio_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 1 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Nombre del Socio o Accionista</b><br>';
                                                 }
                                                 if (this.model.get('ctpldaccionistascargo_c') == "" || this.model.get('ctpldaccionistascargo_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 2 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Cargo público que tiene o tuvo</b><br>';
                                                 }
                                                 if (this.model.get('tct_dependencia_pm_c') == "" || this.model.get('tct_dependencia_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 3 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Dependencia donde ejerce o ejerció el cargo</b><br>';
                                                 }
                                                 if (this.model.get('tct_periodo_pm_c') == "" || this.model.get('tct_periodo_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 4 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Periodo en el cargo</b><br>';
                                                 }
                                                 if (this.model.get('tct_fecha_ini_pm_c') == "" || this.model.get('tct_fecha_ini_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 5 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de Inicio</b><br>';
                                                 }
                                                 if (this.model.get('tct_fecha_fin_pm_c') == "" || this.model.get('tct_fecha_fin_pm_c') == null) {
-                                                    necesarios = necesarios + '<b>Pregunta 6 PEPS Moral Personal</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>Fecha de término</b><br>';
                                                 }
-                                            }
+                                                if (banderaPEPSMoralPersonal!=""){
+                                                    necesarios = necesarios +'<br>'+"Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
+                                                }
+                                            }  
 
                                         }
                                         //Itera direcciones
@@ -8146,7 +8184,7 @@ validaReqUniclickInfo: function () {
                                         if (necesarios!="") {
                                             app.alert.show("Campos Requeridos para opp CS y negocio Uniclick Moral", {
                                             level: "info",
-                                            title: "Hace falta completar la siguiente información en la <b>Cuenta</b> para el producto Uniclick:<br>"+ necesarios,
+                                            messages: "Hace falta completar la siguiente información en la <b>Cuenta</b> para el producto Uniclick:<br>"+ necesarios,
                                             autoClose: false
                                                 });
                                                 
