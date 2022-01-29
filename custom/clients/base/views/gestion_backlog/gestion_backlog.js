@@ -57,8 +57,14 @@
         this.producto_list_html["3"] = "Lumo";
 
         this.equipo_list_html=app.lang.getAppListStrings('equipo_list');
-        this.zona_list_html=app.lang.getAppListStrings('tct_team_region_list');
-        
+        var zona_list=app.lang.getAppListStrings('tct_team_region_list');
+        var zona_list_unique={"0":""};
+        for (const clave in zona_list) {
+            if (!zona_list_unique.hasOwnProperty(zona_list[clave]) && clave!="") {
+                zona_list_unique[zona_list[clave]]=zona_list[clave];
+            }
+        }
+        this.zona_list_html=zona_list_unique;
         var tipo_operacion_list_leasing=app.lang.getAppListStrings('num_tipo_op_leasing_list');
         var tipo_operacion_list_credito=app.lang.getAppListStrings('num_tipo_op_credito_list');
 
@@ -166,6 +172,7 @@
         self.asesor_filtro=$('[name="assigned_user_name"]').val();
         self.cliente_filtro=$('#filtroClienteBacklog').val();
         self.tipo_operacion_filtro=$('#tipo_operacion').val();
+        self.zona_filtro=$('#zona_filtro').val();
 
         var mes_actual = ((new Date).getMonth() + 1).toString();
         var anio_actual = (new Date).getFullYear();
@@ -399,6 +406,21 @@
 
                         self.listaBacklogs.push(data.records[index]);
                     }
+
+                    //Una vez llena la lista de Backlogs, se procede a filtrar la zona
+                    //Obtiene el valor de la zona
+                    var zona_filtro=$('#zona_filtro').val();
+                    if(self.listaBacklogs.length>0 && zona_filtro!=null && zona_filtro!="" && zona_filtro!=undefined && zona_filtro!="0"){
+                        
+                        var listaBacklogsAuxiliar=[];
+                        for (let index = 0; index < self.listaBacklogs.length; index++) {
+                            if(self.listaBacklogs[index].zona==zona_filtro){
+                                listaBacklogsAuxiliar.push(self.listaBacklogs[index]);
+                            }   
+                        }
+                        self.listaBacklogs=listaBacklogsAuxiliar;
+
+                    }
                 } else {
 
                     app.alert.show('sin_registros_bl', {
@@ -430,6 +452,7 @@
                     $('[name="assigned_user_name"]').select2('val',self.asesor_filtro);
                     $('#filtroClienteBacklog').val(self.cliente_filtro);
                     $('#tipo_operacion').select2('val',self.tipo_operacion_filtro);
+                    $('#zona_filtro').select2('val',self.zona_filtro);
 
                 } else {
                     //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
@@ -441,6 +464,7 @@
                     $('[name="assigned_user_name"]').select2("val","");
                     $('#filtroClienteBacklog').val("");
                     $('#tipo_operacion').select2('val',"");
+                    $('#zona_filtro').select2('val',"0");
                 }
 
                 //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
