@@ -286,7 +286,7 @@
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
         this.model.addValidationTask('proveedorDeRecursos', _.bind(this.proveedorRecursos, this));
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
@@ -311,6 +311,7 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
+        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
@@ -7754,7 +7755,7 @@
                                                     if (this.$('.campo4ddw-cs').select2('val') == "" || this.$('.campo4ddw-cs').select2('val') == null) {
                                                         necesarios = necesarios + '<b>Pregunta 3 PLD-Crédito Simple<br></b>';
                                                     }
-                                                    if (this.$('.campo18ddw-cs').select2('val').toString() == "" || this.$('.campo18ddw-cs').select2('val').toString() == null) {
+                                                    if (this.ProductosPLD.creditoSimple.campo18 == "" || this.ProductosPLD.creditoSimple.campo18 == null) {
                                                         necesarios = necesarios + '<b>Pregunta 5 PLD-Crédito Simple<br></b>';
                                                     }
                                                     /*if (this.$('.campo14chk-cs')[0].checked == false) {
