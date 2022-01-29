@@ -145,9 +145,9 @@
             <div class="record-label">Zona</div>
             <span>
                 <span>
-                    <select id="mes_filtro" class="filtros select2">
+                    <select id="zona_filtro" class="filtros select2">
                         {{#each zona_list_html}}
-                        <option value="{{@key}}" {{ifSelected @key ../mes_filtro}}>{{this}}</option>
+                        <option value="{{@key}}">{{this}}</option>
                         {{/each}}
                     </select>
                     <p class="help-block"></p>
