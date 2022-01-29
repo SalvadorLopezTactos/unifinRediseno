@@ -7820,7 +7820,7 @@
                                                         banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de Inicio</b><br>';
                                                     }
                                                     if (this.model.get('tct_fecha_fin_pm_c') == "" || this.model.get('tct_fecha_fin_pm_c') == null) {
-                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>Fecha de término</b><br>';
+                                                        banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de término</b><br>';
                                                     }
                                                     if (banderaPEPSMoralPersonal!=""){
                                                         necesarios = necesarios +'<br>'+ "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
