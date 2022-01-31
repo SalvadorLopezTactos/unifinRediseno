@@ -2219,14 +2219,15 @@
         if(App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id){
                         //Validamos que se tenga alguna de las siguientes relaciones activas
                     if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CS') || this.model.get('relaciones_activas').includes('Representante legal') || 
-                        this.model.get('relaciones_activas').includes('Accionistas') ||  this.model.get('relaciones_activas').includes('Propietario Real')  && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
+                        this.model.get('relaciones_activas').includes('Accionista') ||  this.model.get('relaciones_activas').includes('Propietario Real')  && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
                        var necesarios="";
                        var requests=[];
                        var request={};
                        var Cuenta = this.model.get('account_id1_c');
+                       var CuentaPadre=this.model.get('rel_relaciones_accounts_1accounts_ida');
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
-                       var url = app.api.buildURL("Accounts/" + Cuenta + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[2][negocio_c][$equals]=10&filter[3][estatus_c][$not_equals]=K&filter[4][tct_etapa_ddw_c][$not_equals]=N&filter[5][estatus_c][$not_equals]=R");
+                       var url = app.api.buildURL("Accounts/" + CuentaPadre + "/link/opportunities?filter[0][tipo_producto_c][$equals]=2&filter[1][negocio_c][$equals]=10&filter[2][negocio_c][$equals]=10&filter[3][estatus_c][$not_equals]=K&filter[4][tct_etapa_ddw_c][$not_equals]=N&filter[5][estatus_c][$not_equals]=R");
                            requestA.url = url.substring(4);
                            requests.push(requestA);
                            var requestB = app.utils.deepCopy(request);
