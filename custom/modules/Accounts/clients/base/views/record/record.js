@@ -7848,11 +7848,11 @@
                                                     }
                                                 }
                                                 //Evaluamos campos faltantes en direccion
-                                                if(direP<0){
+                                                if(direP<=0){
                                                     necesarios = necesarios + '<b>Dirección Particular<br></b>';
                                                 }
                                                 //Evaluamos campos faltantes en direccion
-                                                if(telO<0){
+                                                if(telO<=0){
                                                     necesarios = necesarios + '<b>Teléfono<br></b>';
                                                 }
                                             //Evalua si hay campos requeridos y muestra alerta
@@ -8173,11 +8173,11 @@ validaReqUniclickInfo: function () {
                                                 }
                                             }
                                             //Evaluamos campos faltantes en direccion
-                                            if(direP<0){
+                                            if(direP<=0){
                                                 necesarios = necesarios + '<b>Dirección Particular<br></b>';
                                             }
                                             //Evaluamos campos faltantes en direccion
-                                            if(telO<0){
+                                            if(telO<=0){
                                                 necesarios = necesarios + '<b>Teléfono<br></b>';
                                             }
                                         //Evalua si hay campos requeridos y muestra alerta
