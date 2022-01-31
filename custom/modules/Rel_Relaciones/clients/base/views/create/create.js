@@ -2255,6 +2255,33 @@
                                    var telO=0;
 
                                    if (data[0].contents.records.length > 0){
+                                       //Valida direcciones y teléfonos
+                                       //Itera direcciones
+                                       for (var d = 0; d < data[1].contents.records.length; d++) {
+                                        //Itera direccion Particular
+                                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
+                                            direP++;
+                                        }
+                                        }
+                                        //Itera telefonos
+                                        for (var t = 0; t < data[2].contents.records.length; t++) {
+                                            //Itera telefono casa y celular
+                                            if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
+                                                telCyC++;
+                                            }
+                                            //Itera para telefono de trabajo y celular trabajo
+                                            if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
+                                                telO++;
+                                            }
+                                        }
+                                        //Evaluamos campos faltantes en direccion
+                                        if(direP<=0){
+                                            necesarios = necesarios + '<b>Dirección Particular<br></b>';
+                                        }
+                                        //Evaluamos campos faltantes en direccion
+                                        if(telO<=0){
+                                            necesarios = necesarios + '<b>Teléfono<br></b>';
+                                        }
                                         //Validamos requeridos de la cuenta
                                         if (data[4].contents.tipodepersona_c != 'Persona Moral'){
                                             if (data[4].contents.primernombre_c == "" || data[4].contents.primernombre_c == null) {
@@ -2489,7 +2516,7 @@
                                                     banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de Inicio</b><br>';
                                                 }
                                                 if (data[4].contents.tct_fecha_fin_pm_c == "" || data[4].contents.tct_fecha_fin_pm_c == null) {
-                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>Fecha de término</b><br>';
+                                                    banderaPEPSMoralPersonal = banderaPEPSMoralPersonal + '<b>-Fecha de término</b><br>';
                                                 }
                                                 if (banderaPEPSMoralPersonal!=""){
                                                     necesarios = necesarios +'<br>'+"Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
@@ -2497,32 +2524,6 @@
                                             }
 
                                         }
-                                            //Itera direcciones
-                                            for (var d = 0; d < data[1].contents.records.length; d++) {
-                                                //Itera direccion Particular
-                                                if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
-                                                    direP++;
-                                                }
-                                                }
-                                                //Itera telefonos
-                                                for (var t = 0; t < data[2].contents.records.length; t++) {
-                                                    //Itera telefono casa y celular
-                                                    if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
-                                                        telCyC++;
-                                                    }
-                                                    //Itera para telefono de trabajo y celular trabajo
-                                                    if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
-                                                        telO++;
-                                                    }
-                                                }
-                                                //Evaluamos campos faltantes en direccion
-                                                if(direP<=0){
-                                                    necesarios = necesarios + '<b>Dirección Particular<br></b>';
-                                                }
-                                                //Evaluamos campos faltantes en direccion
-                                                if(telO<=0){
-                                                    necesarios = necesarios + '<b>Teléfono<br></b>';
-                                                }
                                             //Evalua si hay campos requeridos y muestra alerta
                                             if (necesarios!="") {
                                                 app.alert.show("Campos Requeridos para opp CS y negocio Uniclick Moral", {
