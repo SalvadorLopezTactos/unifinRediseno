@@ -2269,7 +2269,7 @@
                                             if (data[4].contents.fechadenacimiento_c == "" || data[4].contents.fechadenacimiento_c == null) {
                                                 necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                                             }
-                                            if (data[4].contents.pais_nacimiento_c == "" || data[4].contents.pais_nacimiento_c == null) {
+                                            if (data[4].contents.pais_nacimiento_c == "" || data[4].contents.pais_nacimiento_c == null ||data[4].contents.pais_nacimiento_c=='0') {
                                                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
                                             if (data[4].contents.nacionalidad_c == "" || data[4].contents.nacionalidad_c == null || data[4].contents.nacionalidad_c=='0') {
