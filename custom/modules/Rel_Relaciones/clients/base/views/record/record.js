@@ -1999,7 +1999,7 @@ extendsFrom: 'RecordView',
         if(App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id){
                         //Validamos que se tenga alguna de las siguientes relaciones activas
                     if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CS') || this.model.get('relaciones_activas').includes('Representante legal') || 
-                        this.model.get('relaciones_activas').includes('Accionistas') ||  this.model.get('relaciones_activas').includes('Propietario Real')  && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
+                        this.model.get('relaciones_activas').includes('Accionista') ||  this.model.get('relaciones_activas').includes('Propietario Real')  && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
                        var necesarios="";
                        var requests=[];
                        var request={};
