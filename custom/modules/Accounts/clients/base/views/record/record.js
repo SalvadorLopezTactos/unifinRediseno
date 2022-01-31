@@ -7601,7 +7601,7 @@
                                                 if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
                                                     necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                                                 }
-                                                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                                                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null || this.model.get('pais_nacimiento_c')=='0') {
                                                         necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                                 }
                                                 if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
@@ -7926,8 +7926,8 @@ validaReqUniclickInfo: function () {
                                                 necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                                             }
                                            
-                                            if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
-                                                    necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
+                                            if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null || this.model.get('pais_nacimiento_c')=='0') {
+                                                necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
                                             if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == null || this.model.get('nacionalidad_c')=='0') {
                                                     necesarios = necesarios + '<b>Nacionalidad</b><br>';
