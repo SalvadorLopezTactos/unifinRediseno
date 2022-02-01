@@ -15,7 +15,7 @@ $hook_array['after_save'][] = Array(
     'callLead_class',
     'ProspectoContactado'
 );
-
+/*
 $hook_array['after_save'][] = Array(
     4,
     'Convertir Lead',
@@ -23,7 +23,7 @@ $hook_array['after_save'][] = Array(
     'callLead_class',
     'ConvierteLead'
 );
-
+*/
 $hook_array['before_save'][] = Array(
     1,
     'Funcion para guardar informacion del usuario logueado asi como asignado a la call CREADA.',
