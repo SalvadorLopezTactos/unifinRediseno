@@ -2110,6 +2110,7 @@ extendsFrom: 'RecordView',
                                                         necesarios = necesarios + '<b>CURP</b><br>';
                                                     } 
                                                 }else{
+
                                                     if (data[4].contents.estado_nacimiento_c == "" || data[4].contents.estado_nacimiento_c == null || data[4].contents.estado_nacimiento_c == "1") {
                                                         necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                     }
