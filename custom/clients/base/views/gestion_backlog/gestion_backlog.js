@@ -72,7 +72,11 @@
         this.tipo_operacion_list_html={};
         for (const key in tipo_operacion_list_leasing) {
             if(tipo_operacion_list_leasing[key]!==""){
-                this.tipo_operacion_list_html["0"+key+""]=tipo_operacion_list_leasing[key];
+                //this.tipo_operacion_list_html["0"+key+""]=tipo_operacion_list_leasing[key];
+                //Se agrega condición para omitir agregarla ocpión de Crédito Puente
+                if(key!=5){
+                    this.tipo_operacion_list_html["0"+key+""]=tipo_operacion_list_leasing[key];
+                }
             }
         }
 
@@ -283,6 +287,12 @@
                     tipo_operacion.splice(index,1);
                 }
 
+                //Se agrega condición para el id 3 (Crédito Puente) para que no se duplique en la lista, pero en caso de que se seleccione
+                //busque tanto para Leasing como para Crdito
+                if(tipo_operacion.includes('3')){
+                    array_tipo_op_leasing.push(5);
+                }
+
                 if(array_tipo_op_leasing.length>0 && tipo_operacion.length==0){//Se tienen valores para Leasing y ninguno para Crédito
                     
                     filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "num_tipo_op_leasing_c": { "$contains": array_tipo_op_leasing } }
@@ -421,6 +431,20 @@
                         self.listaBacklogs=listaBacklogsAuxiliar;
 
                     }
+
+                    var cliente_filtro=$('#filtroClienteBacklog').val();
+                    if(self.listaBacklogs.length>0 && cliente_filtro!=null && cliente_filtro!="" && cliente_filtro!=undefined){
+                        
+                        var listaBacklogsAuxiliar=[];
+                        for (let index = 0; index < self.listaBacklogs.length; index++) {
+                            if(self.listaBacklogs[index].nombre_cuenta.toLowerCase().includes(cliente_filtro.toLowerCase())){
+                                listaBacklogsAuxiliar.push(self.listaBacklogs[index]);
+                            }   
+                        }
+                        self.listaBacklogs=listaBacklogsAuxiliar;
+
+                    }
+
                 } else {
 
                     app.alert.show('sin_registros_bl', {
