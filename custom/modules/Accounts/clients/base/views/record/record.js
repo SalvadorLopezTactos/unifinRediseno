@@ -7591,7 +7591,7 @@
                                        //Itera direcciones
                                        for (var d = 0; d < data[1].contents.records.length; d++) {
                                         //Itera direccion Particular
-                                        if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
+                                        if (App.lang.getAppListStrings('tipo_dir_map_list')[self.oDirecciones.direccion[d].tipodedireccion[0]].includes('1') && self.oDirecciones.direccion[d].inactivo == false) {
                                             direP++;
                                         }
                                         }
