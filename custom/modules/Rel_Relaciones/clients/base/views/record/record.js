@@ -2196,6 +2196,7 @@ extendsFrom: 'RecordView',
                                                 }
                                             }*/
                                         }else{
+                                            //PERSONA MORAL
                                         if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CS') || this.model.get('relaciones_activas').includes('Accionista')) {
                                                 if (data[4].contents.razonsocial_c == "" || data[4].contents.razonsocial_c == null) {
                                                     necesarios = necesarios + '<b>Razón Social<br></b>';
@@ -2246,7 +2247,7 @@ extendsFrom: 'RecordView',
                                            
                                         }
 
-                                        if(this.model.get('relaciones_activas').includes('Aval')){
+                                        if(this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Obligado solidario')){
                                             if (data[4].contents.tct_cpld_pregunta_u1_ddw_c == "" || data[4].contents.tct_cpld_pregunta_u1_ddw_c == null) {
                                                 necesarios = necesarios + '<b>Pregunta SOFOM</b><br>';
                                             }
