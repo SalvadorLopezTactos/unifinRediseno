@@ -2254,9 +2254,9 @@ extendsFrom: 'RecordView',
                                             if (data[4].contents.tct_cpld_pregunta_u3_ddw_c == "" || data[4].contents.tct_cpld_pregunta_u3_ddw_c == null) {
                                                 necesarios = necesarios + '<b>¿Cotiza en Bolsa?</b><br>';
                                             }
-                                            /*if (data[4].contents.tct_fedeicomiso_chk_c == "" || data[4].contents.tct_fedeicomiso_chk_c == null) {
+                                            if (data[4].contents.tct_fedeicomiso_chk_c == "" || data[4].contents.tct_fedeicomiso_chk_c == null) {
                                                 necesarios = necesarios + '<b>¿Es Fideicomiso?</b><br>';
-                                            }*/
+                                            }
                                         }
                                         if(this.model.get('relaciones_activas').includes('Proveedor de Recursos CS')){
                                                  //PEPS Moral Familiar
