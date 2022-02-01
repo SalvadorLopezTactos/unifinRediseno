@@ -167,7 +167,7 @@
         dataPLD['creditoRevolvente']['campo3_label'] =arrTemp.join();
 
         //Data de CR para Pregunta 5
-        var auxCampo5=dataPLD['creditoRevolvente']['campo5'].replace(/\^/g,"");
+        var auxCampo5=dataPLD['creditoRevolvente']['campo5']!= undefined && dataPLD['creditoRevolvente']['campo5']!=""  ? dataPLD['creditoRevolvente']['campo5'].replace(/\^/g,""):"";
         var arrayCampo5=auxCampo5.split(",");
         var arrTemp=[];
         for(var i=0;i<arrayCampo5.length;i++)
