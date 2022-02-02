@@ -351,3 +351,4 @@ $mod_strings['LBL_ALTA_PORTAL_PROVEEDOR_CHK'] = 'Alta Portal Proveedor';
 $mod_strings['LBL_ACCOUNT_TELEFONOS'] = 'Teléfonos';
 $mod_strings['LBL_LUMO'] = 'Lumo';
 $mod_strings['LBL_PENDIENTE_REUS_C'] = 'Pendiente de validar REUS';
+$mod_strings['LBL_CONVERTIDO'] = 'Convertido';

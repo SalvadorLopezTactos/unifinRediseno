@@ -210,7 +210,8 @@ SITE;
         $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
-
+		$bean_account->rfc_c = $bean_Leads->rfc_c;
+		$bean_account->convertido_c = 1;
         $GLOBALS['log']->fatal("lead". $bean_Leads->origen_c .'-'.$bean_Leads->detalle_origen_c);
         if($bean_Leads->origen_c == '12' && $bean_Leads->detalle_origen_c == '12'){
             $bean_account->alianza_soc_chk_c = 1;
