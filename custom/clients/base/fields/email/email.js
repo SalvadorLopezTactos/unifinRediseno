@@ -319,7 +319,7 @@
             if(self.ResumenProductos!=undefined){
                 self1=self;
             }
-        
+
             if(self.ResumenProductos==undefined){
                 self=self1;
             }
@@ -368,14 +368,16 @@
 
                 //Desmarca el atributo de invalid_email
                 for (var i = 0; i < self.model.attributes.email.length; i++) {
-                    if (self.model.attributes.email[i].opt_out == true && reus == true) {
-                        self.model.attributes.email[i].invalid_email = false;
-                    }else{
-                        self.model.attributes.email[i].invalid_email = true;
+                    if (self.model.attributes.email[i].opt_out == true) {
+                      if (reus == true) {
+                          self.model.attributes.email[i].invalid_email = false;
+                      }else{
+                          self.model.attributes.email[i].invalid_email = true;
+                      }
                     }
                 }
             //}
-            } 
+            }
             } catch (err) {
             console.log(err.message);
             }

@@ -184,7 +184,7 @@
         //VALIDA SI YA EXISTEN SOLICITUDES CON LÍNEAS DE CREDITO AUTORIZADAS ANTES DE CREAR UNA SOLICITUD CON TIPO PRODUCTO TARJETA DE CREDITO
         this.model.addValidationTask('validaSolCreditCard', _.bind(this.validaSolCreditCard, this));
         this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
-		
+
 		this.model.addValidationTask('SOCInicio', _.bind(this.SOCInicio, this));
     },
 
@@ -2063,8 +2063,8 @@
         var negocio = this.model.get('negocio_c');
         var prod_financiero=this.model.get('producto_financiero_c');
         var etapa = this.model.get('tct_etapa_ddw_c');
-        
-        if (((producto== 1 && (negocio == 5 || negocio == 3) && (prod_financiero == "" || prod_financiero == "0")) || (producto=="2" && (negocio!="2" || negocio!="10"))) && etapa == "SI" && $.isEmptyObject(errors)) {
+
+        if (((producto== 1 && negocio == 5 /*(negocio == 5 || negocio == 3)*/ && (prod_financiero == "" || prod_financiero == "0")) || (producto=="2" && (negocio!="2" || negocio!="10"))) && etapa == "SI" && $.isEmptyObject(errors)) {
             var operacion = this.model.get('tipo_de_operacion_c');
             var status = this.model.get('estatus_c');
             var cuenta = this.model.get('account_id');
@@ -2373,7 +2373,7 @@
                 errors['producto_financiero_c'].required = true;
             }
         }
-        
+
         callback(null, fields, errors);
     },
     asesorCCP: function () {
@@ -2405,10 +2405,10 @@
                                 montos += parseInt(solicitudes.records[i].monto_c); //SUMA LOS MONTOS DE LAS LÍNEAS DE CREDITO
                             }
                         }
-                        
+
                         var sumaMontos = parseInt(montos);
                         var totalTenPercent = (10 / 100) * sumaMontos;  //OPERACION PARA OBTENER EL 10% DE LA SUMA DE LOS MONTOS
-                        
+
                         if (totalTenPercent > 1000000) {
                             self.model.set('monto_c', 1000000);
                             self.model.set('control_monto_c', 1000000);
@@ -2429,7 +2429,7 @@
     },
 
     validaMontoCreditCard: function (fields, errors, callback) {
-        
+
         var controlMonto = this.model.get('control_monto_c');
         var formatoControlMonto = Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(controlMonto); //FORMATO MONEDA MXN
 
@@ -2466,21 +2466,21 @@
             var id_account = this.model.get('account_id');
 
             if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
-                
+
                 app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
                     success: function (solicitudes) {
 
                         var duplicado = 0;
 
                         for (var i = 0; i < solicitudes.records.length; i++) {
-                            
+
                             if (solicitudes.records[i].tipo_producto_c == '14' && solicitudes.records[i].estatus_c != 'K') {
                                 duplicado = 1;
                             }
                         }
 
                         if (duplicado == 1) {
-                            
+
                             app.alert.show('message-tipo-producto', {
                                 level: 'error',
                                 title: 'No puede guardar la presolicitud de tipo producto Tarjeta de Crédito, existe una abierta para el mismo cliente.',
@@ -2497,7 +2497,7 @@
                     }
                 });
             }
-        
+
         } else {
             callback(null, fields, errors);
         }
@@ -2552,21 +2552,21 @@
             var id_account = this.model.get('account_id');
 
             if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
-                
+
                 app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
                     success: function (solicitudes) {
 
                         var solClienteLinea = 0;
 
                         for (var i = 0; i < solicitudes.records.length; i++) {
-                            
+
                             if (solicitudes.records[i].tipo_operacion_c == '2' && solicitudes.records[i].tct_etapa_ddw_c == 'CL' && solicitudes.records[i].estatus_c == 'N') {
                                 solClienteLinea = 1;
                             }
                         }
 
                         if (solClienteLinea == 0) {
-                            
+
                             app.alert.show('message-cliente-linea', {
                                 level: 'error',
                                 title: 'No se puede generar la Presolicitud de tipo producto Tarjeta de Crédito, se requiere tener una línea de crédito previamente autorizada.',
@@ -2583,16 +2583,16 @@
                     }
                 });
             }
-        
+
         } else {
             callback(null, fields, errors);
         }
     },
 
 
-	
+
 	SOCInicio: function (fields, errors, callback) {
-				
+
 		var id_cuenta=this.model.get('account_id');
 		if(id_cuenta!='' && id_cuenta != undefined ){
 			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
@@ -2606,5 +2606,5 @@
 		}
 		callback(null, fields, errors);
     },
-	
+
 })

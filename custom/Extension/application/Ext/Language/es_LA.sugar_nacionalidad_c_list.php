@@ -1,5 +1,5 @@
 <?php
- // created: 2021-08-18 17:23:01
+ // created: 2022-01-28 14:38:26
 
 $app_list_strings['nacionalidad_c_list']=array (
   0 => '',
@@ -249,4 +249,5 @@ $app_list_strings['nacionalidad_c_list']=array (
   267 => 'Uzbekistan',
   268 => 'Zona Especial Canaria',
   269 => 'Zona Libre Ostrova',
+  270 => 'Extranjero',
 );
