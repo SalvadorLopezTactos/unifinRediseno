@@ -1,7 +1,9 @@
 <?php
- // created: 2021-09-23 16:26:07
+ // created: 2022-02-01 19:31:43
 $dictionary['Lead']['fields']['origen_c']['labelValue']='Origen';
 $dictionary['Lead']['fields']['origen_c']['dependency']='';
+$dictionary['Lead']['fields']['origen_c']['required_formula']='';
+$dictionary['Lead']['fields']['origen_c']['readonly_formula']='';
 $dictionary['Lead']['fields']['origen_c']['visibility_grid']=array (
   'trigger' => 'tipo_registro_c',
   'values' => 
@@ -17,6 +19,7 @@ $dictionary['Lead']['fields']['origen_c']['visibility_grid']=array (
       6 => '13',
       7 => '14',
       8 => '15',
+      9 => '16',
     ),
     2 => 
     array (

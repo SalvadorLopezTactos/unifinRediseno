@@ -28,4 +28,5 @@ $app_list_strings['plataformas_habilitadas_auditoria_list']=array (
   'uni2Liberacion' => 'UNI2 LIBERACION',
   'unionVita' => 'UNION VITA',
   'dwh' => 'DWH',
+  'portalUniclickV2' => 'Portal UNICLICK V2',
 );

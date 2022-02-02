@@ -1,5 +1,5 @@
 <?php
- // created: 2021-09-13 17:19:08
+ // created: 2022-02-01 19:30:58
 
 $app_list_strings['origen_lead_list']=array (
   '' => '',
@@ -18,4 +18,5 @@ $app_list_strings['origen_lead_list']=array (
   13 => 'Centro de Prospección',
   14 => 'Closer',
   15 => 'Growth',
+  16 => 'Análisis Económico',
 );

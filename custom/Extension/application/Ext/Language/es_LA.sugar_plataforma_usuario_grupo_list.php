@@ -28,4 +28,5 @@ $app_list_strings['plataforma_usuario_grupo_list']=array (
   'uni2Liberacion' => 'UNI2 LIBERACION',
   'unionVita' => 'UNION VITA',
   'dwh' => 'DWH',
+  'portalUniclickV2' => 'Portal UNICLICK V2',
 );

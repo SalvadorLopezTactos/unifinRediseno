@@ -1,5 +1,5 @@
 <?php
- // created: 2021-08-25 14:10:32
+ // created: 2022-01-28 14:39:28
 
 $app_list_strings['paises_list']=array (
   '' => '',
@@ -249,4 +249,5 @@ $app_list_strings['paises_list']=array (
   276 => 'SUDAN DEL SUR',
   277 => 'TAYIKISTAN',
   278 => 'UZBEKISTAN',
+  279 => 'Nacido en el extranjero',
 );
