@@ -15,56 +15,57 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$tracker_config = 
+/*$tracker_config =
   array (
-    'tracker' => 
+    'tracker' =>
     array (
       'bean' => 'Tracker',
       'name' => 'Tracker',
       'metadata' => 'modules/Trackers/vardefs.php',
-      'store' => 
+      'store' =>
       array (
         0 => 'DatabaseStore',
       ),
     ),
-    'tracker_sessions' => 
+    'tracker_sessions' =>
     array (
       'bean' => 'TrackerSession',
       'name' => 'tracker_sessions',
       'metadata' => 'modules/Trackers/tracker_sessionsMetaData.php',
-      'store' => 
+      'store' =>
       array (
         0 => 'TrackerSessionsDatabaseStore',
       ),
     ),
-    'tracker_perf' => 
+    'tracker_perf' =>
     array (
       'bean' => 'TrackerPerf',
       'name' => 'tracker_perf',
       'metadata' => 'modules/Trackers/tracker_perfMetaData.php',
-      'store' => 
+      'store' =>
       array (
         0 => 'DatabaseStore',
       ),
     ),
-    'tracker_queries' => 
+    'tracker_queries' =>
     array (
       'bean' => 'TrackerQuery',
       'name' => 'tracker_queries',
       'metadata' => 'modules/Trackers/tracker_queriesMetaData.php',
-      'store' => 
+      'store' =>
       array (
         0 => 'TrackerQueriesDatabaseStore',
       ),
     ),
-    'tracker_tracker_queries' => 
+    'tracker_tracker_queries' =>
     array (
       'name' => 'tracker_tracker_queries',
       'metadata' => 'modules/Trackers/tracker_tracker_queriesMetaData.php',
-      'store' => 
+      'store' =>
       array (
         0 => 'DatabaseStore',
       ),
     ),
-  );
+  );*/
+  $tracker_config = array();
 ?>
