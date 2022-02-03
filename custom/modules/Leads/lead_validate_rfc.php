@@ -14,7 +14,7 @@ class class_validate_rfc
 			if($db->getRowCount($queryResultL1) > 0) throw new SugarApiExceptionInvalidParameter('No se puede guardar el registro. El RFC '.$bean->rfc_c.' ya exite en Leads, favor de corregir');
 			$queryRFCAccount = "SELECT a.id from accounts a, accounts_cstm ac where a.id = ac.id_c 
             and a.deleted = 0 
-            and a.convertido_c <> 1 
+            and ac.convertido_c is null 
             and ac.rfc_c = '{$bean->rfc_c}'";
 			$queryResultA1 = $db->query($queryRFCAccount);
 			if($db->getRowCount($queryResultA1) > 0) throw new SugarApiExceptionInvalidParameter('No se puede guardar el registro. El RFC '.$bean->rfc_c.' ya exite en Cuentas, favor de corregir');
