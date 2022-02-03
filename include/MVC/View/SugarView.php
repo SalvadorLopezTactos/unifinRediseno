@@ -126,7 +126,7 @@ class SugarView
         $this->_checkModule();
 
         //trackView has to be here in order to track for breadcrumbs
-        $this->_trackView();
+        //$this->_trackView();
 
         //For the ajaxUI, we need to use output buffering to return the page in an ajax friendly format
         // FIXME review this code (no more ajax load)
