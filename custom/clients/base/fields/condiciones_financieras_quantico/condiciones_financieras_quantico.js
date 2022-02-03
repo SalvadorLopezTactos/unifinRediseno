@@ -307,6 +307,66 @@
                                 });
                             }
                             app.alert.dismiss('getInfoCFQuantico');
+
+                            //Se agrega ajuste para saber cuando mostrar la tabla ajustada, en caso de que solo haya 1 una cf, el campo queda como anteriormente,
+                            //En caso contrario, las condiciones financieras se consolidan solo en una fila
+                            if(self.mainRowsBodyTable.length>1){
+                                //Consolidar todas las CF en una fila
+                                self.showTableRows=0;
+                                self.bodyTableModified=self.mainRowsBodyTable[0].bodyTable;
+                                self.valoresCatalogoModified={};
+                                var listaValoresCampoSelectBase={};
+
+                                self.listaValoresRangoInferior={};
+                                //Armando la lista para mostrar las opciones disponibles en el campo select, ejemplo: Tipo Activo
+                                for (let index = 0; index < self.mainRowsBodyTable.length; index++) {
+                                    //Se obtiene la lista con los valores del catálogo para poder extraer tanto el id como el valor
+                                    for (let i = 0; i < self.mainRowsBodyTable[index].bodyTable.length; i++) {
+                                        if(self.mainRowsBodyTable[index].bodyTable[i].select=="1"){
+                                            var campoSelect=self.mainRowsBodyTable[index].bodyTable[i];
+                                            var listaValoresCampoSelectBase=self.mainRowsBodyTable[index].bodyTable[i].valoresCatalogo;
+
+                                            //Antes de agregar a la lista de valores que se mostrará, se comprueba que la clave aún no exista
+                                            if (!self.valoresCatalogoModified.hasOwnProperty(campoSelect.valorSelected)) {
+                                                self.valoresCatalogoModified[campoSelect.valorSelected]=listaValoresCampoSelectBase[campoSelect.valorSelected];
+
+                                            }
+                                            self.bodyTableModified[i].valoresCatalogoModified=self.valoresCatalogoModified;
+                                            
+                                        }
+
+                                        if(self.mainRowsBodyTable[index].bodyTable[i].text=="1" && self.mainRowsBodyTable[index].bodyTable[i].rangoInferior!=""){
+                                            
+                                            var listaValoresRangoInferior={};
+                                            var nombreColumna=self.mainRowsBodyTable[index].bodyTable[i].nombreColumna;
+
+                                            //Se recorre nuevamente el objeto completo para obtener los valores diferentes por cada rango inferior con el mismo nombreColumma
+                                            for (let x = 0; x < self.mainRowsBodyTable.length; x++) {
+
+                                                for (let y = 0; y < self.mainRowsBodyTable[x].bodyTable.length; y++) {
+                                                    if(self.mainRowsBodyTable[x].bodyTable[y].text=="1" && self.mainRowsBodyTable[x].bodyTable[y].rangoInferior!="" && self.mainRowsBodyTable[x].bodyTable[y].nombreColumna==nombreColumna){
+                                                        if (!listaValoresRangoInferior.hasOwnProperty(self.mainRowsBodyTable[x].bodyTable[y].rangoInferior)) {
+                                                            listaValoresRangoInferior[self.mainRowsBodyTable[x].bodyTable[y].rangoInferior]=self.mainRowsBodyTable[x].bodyTable[y].rangoInferior;
+                                                        }
+
+                                                    }
+                                                }
+
+                                            }
+
+                                            self.bodyTableModified[i].valoresRangoInferior=listaValoresRangoInferior;
+                                            
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+
+                            }else{
+                                self.showTableRows=1;
+                            }
+
                             self.render();
                         } catch (e) {
                         app.alert.dismiss('getInfoCFQuantico');
