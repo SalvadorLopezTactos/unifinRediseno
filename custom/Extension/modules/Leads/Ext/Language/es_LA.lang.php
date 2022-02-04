@@ -135,3 +135,4 @@ $mod_strings['LBL_PENDIENTE_REUS_C'] = 'Pendiente de validar REUS';
 $mod_strings['LBL_C_ESTATUS_TELEFONO'] = 'Estatus teléfono Casa';
 $mod_strings['LBL_M_ESTATUS_TELEFONO'] = 'Estatus teléfono Móvil';
 $mod_strings['LBL_O_ESTATUS_TELEFONO'] = 'Estatus teléfono Oficina';
+$mod_strings['LBL_ALIANZA_SOC_CHK_C'] = 'Alianza SOC';

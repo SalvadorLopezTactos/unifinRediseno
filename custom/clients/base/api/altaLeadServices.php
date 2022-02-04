@@ -516,6 +516,7 @@ class altaLeadServices extends SugarApi
             }
             if($tipo == 2){
                 $bean->assigned_user_id = $new_assigned_user;
+                $bean->alianza_soc_chk_c = 1;
                 $bean->save();
             }
             if($tipo == 3){
@@ -616,8 +617,12 @@ class altaLeadServices extends SugarApi
         $bean_Lead->apellido_paterno_c = $dataOrigen['apellido_paterno_c'];
         $bean_Lead->apellido_materno_c = $dataOrigen['apellido_materno_c'];
         $bean_Lead->origen_c = $dataOrigen['origen_c']; # se deja siempre como 1
-
         $detalle_origen = $dataOrigen['detalle_origen_c']; # se deja siempre como 3 Digital
+
+        if( $dataOrigen['origen_c'] == '12' && $dataOrigen['detalle_origen_c'] == '12'){
+            $bean_Lead->alianza_soc_chk_c = 1;
+        }
+
         $prospeccion_propia = $dataOrigen['prospeccion_propia_c']; # Prospeccion propia
         /*switch ($detalle_origen) {
             case 1:
