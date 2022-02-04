@@ -36,6 +36,7 @@
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        this.model.on('sync', this.userAlianzaSoc, this);
     },
 
     _disableActionsSubpanel: function () {
@@ -1243,6 +1244,31 @@
         }
         else {
           callback(null, fields, errors);
+        }
+    },
+
+    userAlianzaSoc: function () {
+        //Recupera variables
+        //var chksock = this.model.get('alianza_soc_chk_c');
+        var productos = App.user.attributes.productos_c; //lista de productos del usuario,
+        var idUser = App.user.attributes.id; //Id del usuario,
+        var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
+        //var listaProductosSock = [];    //Recupera Ids de usuarios que pueden editar origen
+        //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
+        var readonly = true;
+
+        if(this.model.get('assigned_user_id') == idUser ){
+            readonly = false;
+        }
+
+        Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
+            if(value == idUser){
+                readonly = false;
+            }
+        });
+
+        if(readonly){
+            this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
         }
     },
 
