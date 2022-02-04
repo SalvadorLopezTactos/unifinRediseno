@@ -155,12 +155,13 @@ class altaLeadServices extends SugarApi
         return $obj_leads;
     }
 
-    public function get_asignado($data_result, $regimenFiscal, $compania_c, $id_landing_c, $origen = null, $detalleOrigen = null, $productoFinanciero = null, $idAsignadoAlta=null)
+    public function get_asignado($data_result, $regimenFiscal, $compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero, $idAsignadoAlta)
     {
         global $db, $app_list_strings;
-        $GLOBALS['log']->fatal("data_result " , $data_result);
+        //$GLOBALS['log']->fatal("data_result " , $data_result);
+        //$GLOBALS['log']->fatal("compania_c " . $compania_c . "origen " . $origen . "detalleOrigen " . $detalleOrigen);
 
-        if($origen == 12 && $detalleOrigen == 12 ){
+        if($origen == 12 && $detalleOrigen == 12 && $compania_c != 2){
             if($data_result['lead']['status'] == "200"){
                 $this->asigna_soc($data_result['lead']['id'] , 1);
             }
@@ -173,17 +174,17 @@ class altaLeadServices extends SugarApi
                 }
             }
         }else{
-        $asignados = $this->reglas_asignado($compania_c, $id_landing_c, $origen = null, $detalleOrigen = null, $productoFinanciero = null, $idAsignadoAlta=null);
+        $asignados = $this->reglas_asignado($compania_c, $id_landing_c, $origen, $detalleOrigen , $productoFinanciero , $idAsignadoAlta);
 
         $new_indice = $asignados['new_indice'];
         $new_assigned_user = $asignados['new_assigned_user'];
 
-        $GLOBALS['log']->fatal("new_indice " . $new_indice);
-        $GLOBALS['log']->fatal("new_assigned_user " . $new_assigned_user);
+        //$GLOBALS['log']->fatal("new_indice " . $new_indice);
+        //$GLOBALS['log']->fatal("new_assigned_user " . $new_assigned_user);
 
         if ($data_result['lead']['status'] == 200) {
-            $GLOBALS['log']->fatal("origen " . $origen);
-            $GLOBALS['log']->fatal("detalleOrigen " . $detalleOrigen);
+            //$GLOBALS['log']->fatal("origen " . $origen);
+            //$GLOBALS['log']->fatal("detalleOrigen " . $detalleOrigen);
             
                 $id_lead = $data_result['lead']['id'];
 
@@ -236,7 +237,7 @@ class altaLeadServices extends SugarApi
         $db->query($update_usercall);
     }
 
-    public function reglas_asignado($compania_c, $id_landing_c, $origen = null, $detalleOrigen = null, $productoFinanciero = null, $idAsignadoAlta=null){
+    public function reglas_asignado($compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero , $idAsignadoAlta){
         global $db, $app_list_strings;
         $alianzas_carrusel_do_list = $app_list_strings['alianzas_carrusel_do_list'];
         $alianzas_responable_do_list = $app_list_strings['alianzas_responable_do_list'];
@@ -269,7 +270,7 @@ class altaLeadServices extends SugarApi
         $horaDia = $array_date[1] . ":" . $array_date[2];
         $dateInput = date('H:i', strtotime($horaDia));
 
-        //$GLOBALS['log']->fatal("compania_c " . $compania_c);
+        $GLOBALS['log']->fatal("compania_c " . $compania_c);
         /* Obtiene el ultimo  usuario asignado y registrado en el config*/
         $query = "SELECT value from config  ";
         if ($compania_c == '1') {
@@ -293,7 +294,8 @@ class altaLeadServices extends SugarApi
                 if ($compania_c == 1) $subpuesto_c = 3;
                 if ($compania_c == 2) $subpuesto_c = 4;
             }
-            $GLOBALS['log']->fatal("compania_c - "  . $compania_c . " - subpuesto_c - "  . $subpuesto_c);
+            //$GLOBALS['log']->fatal("compania_c - "  . $compania_c . " - subpuesto_c - "  . $subpuesto_c . "detalleOrigen - "  . $detalleOrigen);
+            //$GLOBALS['log']->fatal( " - key_responable_do_list - "  , $key_responable_do_list);
             $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
             $result = $db->query($query);
 
