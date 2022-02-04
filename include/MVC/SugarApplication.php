@@ -39,7 +39,7 @@ class SugarApplication
     protected $inBwc = false;
 
     /**
-     * @var Request 
+     * @var Request
      */
     protected $request;
 
@@ -115,7 +115,7 @@ class SugarApplication
                 $this->controller->action === 'index' && $this->controller->module === 'Home' &&
                 (empty($_REQUEST['entryPoint']) || (isset($_REQUEST['action']) && $_REQUEST['action'] === 'DynamicAction'))
             ) ||
-            empty($_REQUEST) || 
+            empty($_REQUEST) ||
             (!empty($_REQUEST['entryPoint']) && !$this->controller->entryPointExists($_REQUEST['entryPoint']))
         ) {
             // check for not authorised users
@@ -216,12 +216,12 @@ class SugarApplication
      * CSRF authentication for all non-GET requests. When invalid we terminate
      * our execution. Note that this functionality is beta and needs to be
      * explicitly enabled.
-     * 
+     *
      * @see CsrfAuthenticator
      */
     public function csrfAuthenticate()
     {
-        /* 
+        /*
          * Limit protected to modify actions only. A next step will be to
          * require CSRF tokens for every non-GET request.
          *
@@ -233,7 +233,7 @@ class SugarApplication
          *
          * TODO 2:
          * Move checkHTTPReferer logic into a separate class and make it
-         * an integral part of the csrfAuthentication logic. 
+         * an integral part of the csrfAuthentication logic.
          *
          */
         if (!$this->isModifyAction()) {
@@ -902,7 +902,7 @@ EOF;
     {
         $trackerManager = TrackerManager::getInstance();
         if ($monitor = $trackerManager->getMonitor('tracker_sessions')) {
-            $monitor->closeSession();
+            //$monitor->closeSession();
             $trackerManager->saveMonitor($monitor);
         }
         $sess = SessionStorage::getInstance();
@@ -1012,7 +1012,7 @@ EOF;
 
     /**
      * Filter request vars by prefix
-     * 
+     *
      * @param string $prefix Prefix to filter by
      * @param array $request Request vars
      * @param bool $add_empty Add empty vars to the result?
