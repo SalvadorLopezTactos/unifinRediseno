@@ -673,34 +673,51 @@
             filaPoliticaObtenida=this.mainRowsBodyTable[indiceFilaClickada];
             plantillaFila=App.utils.deepCopy(filaPoliticaObtenida);
         }
-        
-        for (let index = 0; index < plantillaFila.bodyTable.length; index++) {
-            if(plantillaFila.bodyTable[index].select=="1"){
-                var valorSelect=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
-                plantillaFila.bodyTable[index].valorSelected=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
-                plantillaFila.bodyTable[index].valoresCatalogo=plantillaFila.bodyTable[index].valoresCatalogoModified;
 
-            }
-
-            if(plantillaFila.bodyTable[index].text=="1"){
+        if((self.mainRowsBodyTable!=undefined && self.mainRowsBodyTable.length>1) || (this.mainRowsBodyTable!=undefined && this.mainRowsBodyTable.length>1)){
+            for (let index = 0; index < plantillaFila.bodyTable.length; index++) {
+                if(plantillaFila.bodyTable[index].select=="1"){
+                    var valorSelect=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                    plantillaFila.bodyTable[index].valorSelected=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                    plantillaFila.bodyTable[index].valoresCatalogo=plantillaFila.bodyTable[index].valoresCatalogoModified;
+    
+                }
+    
+                if(plantillaFila.bodyTable[index].text=="1"){
+                    
+                    if(plantillaFila.bodyTable[index].rangoInferior!=""){
+                        plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                    }
+    
+                    if(plantillaFila.bodyTable[index].rangoSuperior!=""){
+                        plantillaFila.bodyTable[index].rangoSuperior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                    }
+                }
+    
+                if(plantillaFila.bodyTable[index].checkbox=="1"){
+                    plantillaFila.bodyTable[index].checked=$(e.currentTarget).parent().parent().find('input[type="checkbox"]')[index].is(":checked");
+                }
                 
-                if(plantillaFila.bodyTable[index].rangoInferior!=""){
-                    plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
-                }
-
-                if(plantillaFila.bodyTable[index].rangoSuperior!=""){
-                    plantillaFila.bodyTable[index].rangoSuperior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
-                }
             }
 
-            if(plantillaFila.bodyTable[index].checkbox=="1"){
-                plantillaFila.bodyTable[index].checked=$(e.currentTarget).parent().parent().find('input[type="checkbox"]')[index].is(":checked");
-            }
-            
         }
+        
 
-        this.mainRowsConfigBodyTable.push(plantillaFila);
-
+        //Condición para controlar funcionamiento anterior, en caso de que mainRowsBodyTable traiga más de una fila, quiere decir que
+        //todas las filas se consolidaron en una sola, por lo tanto, el item a dibujar en las CF configuradas se toma a partir de plantillaFila y no de filaPoliticaObtenida
+        if(self.mainRowsBodyTable!=undefined){
+            if(self.mainRowsBodyTable.length>1){
+                this.mainRowsConfigBodyTable.push(plantillaFila);
+            }else{
+                this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
+            }   
+        }else{
+            if(this.mainRowsBodyTable.length>1){
+                this.mainRowsConfigBodyTable.push(plantillaFila);
+            }else{
+                this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
+            }
+        }
 
         if(this.model.get('cf_quantico_c')!=""){
             this.jsonCFConfiguradas=JSON.parse(this.model.get('cf_quantico_c'));
