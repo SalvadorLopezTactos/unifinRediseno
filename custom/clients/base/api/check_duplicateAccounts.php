@@ -215,6 +215,8 @@ SITE;
         $GLOBALS['log']->fatal("lead". $bean_Leads->origen_c .'-'.$bean_Leads->detalle_origen_c);
         if($bean_Leads->origen_c == '12' && $bean_Leads->detalle_origen_c == '12'){
             $bean_account->alianza_soc_chk_c = 1;
+        }else{
+            $bean_account->alianza_soc_chk_c = $bean_Leads->alianza_soc_chk_c;
         }
         
         // Asesores
