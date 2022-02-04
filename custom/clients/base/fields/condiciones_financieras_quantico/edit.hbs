@@ -15,6 +15,13 @@
         /*width: 100px;*/
     }
 </style>
+<script>
+    var $select2 = this.$('#collapseTableCF').find('select.select2');
+    $select2.select2();
+
+    var $select2config = this.$('select.fieldCFConfig');
+    $select2config.select2();
+</script>
 <div class="CFPoliticaQ container-fluid" id="cont" style="border: solid lightblue">
     <!--Sección condiciones financieras de política -->
     <div class="accordion-heading">
@@ -117,14 +124,23 @@
                                         <!--<input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">-->
                                         <select class="row-fluid select2" data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
                                            {{#each valoresRangoInferior}}
-                                                <option value="{{@key}}" {{ifSelected @key ../rangoInferior}}>{{this}}&nbsp;&nbsp;</option>
+                                                <option value="{{@key}}" {{ifSelected @key ../rangoInferior}}>{{this}}</option>
                                             {{/each}}
                                         </select>
                                     {{else}}
                                         {{#if rangoSuperior}}
-                                        <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                        <!--<input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">-->
+                                            <select data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                                {{#each valoresRangoSuperior}}
+                                                    <option value="{{@key}}" {{ifSelected @key ../rangoSuperior}}>{{this}}</option>
+                                                {{/each}}
+                                            </select>
                                         {{else}}
-                                        <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value="{{valorCampo}}" disabled style="pointer-events:none;" data-info="input">
+                                            <select data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2" data-info="input">
+                                                {{#each valoresRangoSuperior}}
+                                                    <option value="{{@key}}" {{ifSelected @key ../valorCampo}}>{{this}}</option>
+                                                {{/each}}
+                                            </select>
                                         {{/if}}
                                     {{/if}}
                                 {{/if}}

@@ -351,12 +351,31 @@
 
                                                     }
                                                 }
-
                                             }
 
                                             self.bodyTableModified[i].valoresRangoInferior=listaValoresRangoInferior;
+                                        }
+
+                                        //Llenando lista con valores de rango superior
+                                        if(self.mainRowsBodyTable[index].bodyTable[i].text=="1" && self.mainRowsBodyTable[index].bodyTable[i].rangoSuperior!=""){
                                             
-                                            
+                                            var listaValoresRangoSuperior={};
+                                            var nombreColumna=self.mainRowsBodyTable[index].bodyTable[i].nombreColumna;
+
+                                            //Se recorre nuevamente el objeto completo para obtener los valores diferentes por cada rango inferior con el mismo nombreColumma
+                                            for (let x = 0; x < self.mainRowsBodyTable.length; x++) {
+
+                                                for (let y = 0; y < self.mainRowsBodyTable[x].bodyTable.length; y++) {
+                                                    if(self.mainRowsBodyTable[x].bodyTable[y].text=="1" && self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior!="" && self.mainRowsBodyTable[x].bodyTable[y].nombreColumna==nombreColumna){
+                                                        if (!listaValoresRangoSuperior.hasOwnProperty(self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior)) {
+                                                            listaValoresRangoSuperior[self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior]=self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior;
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+
+                                            self.bodyTableModified[i].valoresRangoSuperior=listaValoresRangoSuperior;
                                         }
                                         
                                     }
@@ -642,13 +661,46 @@
 
         var indiceFilaClickada = $(e.currentTarget).parent().parent().index();
         var filaPoliticaObtenida="";
+        var plantillaFila=null;
         if(self.mainRowsBodyTable!=undefined){
             filaPoliticaObtenida = self.mainRowsBodyTable[indiceFilaClickada];
+            //Se genera deepCopy ya que si se modifica sobre un objeto "igualado" (plantillaFila=self.mainRowsBodyTable[0])
+            //todas las propiedades modificadas de plantillaFila afectan a todos los elementos del arreglo al que se genera push
+            //Creando el deepCopy, se está editando un objeto independiente y por lo tanto ya no afecta a los otros elementos del arreglo
+            plantillaFila=App.utils.deepCopy(filaPoliticaObtenida);
+
         }else{
             filaPoliticaObtenida=this.mainRowsBodyTable[indiceFilaClickada];
+            plantillaFila=App.utils.deepCopy(filaPoliticaObtenida);
+        }
+        
+        for (let index = 0; index < plantillaFila.bodyTable.length; index++) {
+            if(plantillaFila.bodyTable[index].select=="1"){
+                var valorSelect=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                plantillaFila.bodyTable[index].valorSelected=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                plantillaFila.bodyTable[index].valoresCatalogo=plantillaFila.bodyTable[index].valoresCatalogoModified;
+
+            }
+
+            if(plantillaFila.bodyTable[index].text=="1"){
+                
+                if(plantillaFila.bodyTable[index].rangoInferior!=""){
+                    plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                }
+
+                if(plantillaFila.bodyTable[index].rangoSuperior!=""){
+                    plantillaFila.bodyTable[index].rangoSuperior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                }
+            }
+
+            if(plantillaFila.bodyTable[index].checkbox=="1"){
+                plantillaFila.bodyTable[index].checked=$(e.currentTarget).parent().parent().find('input[type="checkbox"]')[index].is(":checked");
+            }
+            
         }
 
-        this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
+        this.mainRowsConfigBodyTable.push(plantillaFila);
+
 
         if(this.model.get('cf_quantico_c')!=""){
             this.jsonCFConfiguradas=JSON.parse(this.model.get('cf_quantico_c'));
@@ -658,7 +710,7 @@
             this.jsonCFConfiguradas.OpportunitiesId=this.model.get('id');
         }
 
-        //Obteniendo el campo html para conocer el tipo de campo quie se envía al json
+        //Obteniendo el campo html para conocer el tipo de campo que se envía al json
         var camposEnfila=$(e.currentTarget).parent().parent().find('td');
         var objetoTermResponseList=[];
         for (let index = 0; index < camposEnfila.length; index++) {
