@@ -307,6 +307,85 @@
                                 });
                             }
                             app.alert.dismiss('getInfoCFQuantico');
+
+                            //Se agrega ajuste para saber cuando mostrar la tabla ajustada, en caso de que solo haya 1 una cf, el campo queda como anteriormente,
+                            //En caso contrario, las condiciones financieras se consolidan solo en una fila
+                            if(self.mainRowsBodyTable.length>1){
+                                //Consolidar todas las CF en una fila
+                                self.showTableRows=0;
+                                self.bodyTableModified=self.mainRowsBodyTable[0].bodyTable;
+                                self.valoresCatalogoModified={};
+                                var listaValoresCampoSelectBase={};
+
+                                self.listaValoresRangoInferior={};
+                                //Armando la lista para mostrar las opciones disponibles en el campo select, ejemplo: Tipo Activo
+                                for (let index = 0; index < self.mainRowsBodyTable.length; index++) {
+                                    //Se obtiene la lista con los valores del catálogo para poder extraer tanto el id como el valor
+                                    for (let i = 0; i < self.mainRowsBodyTable[index].bodyTable.length; i++) {
+                                        if(self.mainRowsBodyTable[index].bodyTable[i].select=="1"){
+                                            var campoSelect=self.mainRowsBodyTable[index].bodyTable[i];
+                                            var listaValoresCampoSelectBase=self.mainRowsBodyTable[index].bodyTable[i].valoresCatalogo;
+
+                                            //Antes de agregar a la lista de valores que se mostrará, se comprueba que la clave aún no exista
+                                            if (!self.valoresCatalogoModified.hasOwnProperty(campoSelect.valorSelected)) {
+                                                self.valoresCatalogoModified[campoSelect.valorSelected]=listaValoresCampoSelectBase[campoSelect.valorSelected];
+
+                                            }
+                                            self.bodyTableModified[i].valoresCatalogoModified=self.valoresCatalogoModified;
+                                            
+                                        }
+
+                                        if(self.mainRowsBodyTable[index].bodyTable[i].text=="1" && self.mainRowsBodyTable[index].bodyTable[i].rangoInferior!=""){
+                                            
+                                            var listaValoresRangoInferior={};
+                                            var nombreColumna=self.mainRowsBodyTable[index].bodyTable[i].nombreColumna;
+
+                                            //Se recorre nuevamente el objeto completo para obtener los valores diferentes por cada rango inferior con el mismo nombreColumma
+                                            for (let x = 0; x < self.mainRowsBodyTable.length; x++) {
+
+                                                for (let y = 0; y < self.mainRowsBodyTable[x].bodyTable.length; y++) {
+                                                    if(self.mainRowsBodyTable[x].bodyTable[y].text=="1" && self.mainRowsBodyTable[x].bodyTable[y].rangoInferior!="" && self.mainRowsBodyTable[x].bodyTable[y].nombreColumna==nombreColumna){
+                                                        if (!listaValoresRangoInferior.hasOwnProperty(self.mainRowsBodyTable[x].bodyTable[y].rangoInferior)) {
+                                                            listaValoresRangoInferior[self.mainRowsBodyTable[x].bodyTable[y].rangoInferior]=self.mainRowsBodyTable[x].bodyTable[y].rangoInferior;
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+
+                                            self.bodyTableModified[i].valoresRangoInferior=listaValoresRangoInferior;
+                                        }
+
+                                        //Llenando lista con valores de rango superior
+                                        if(self.mainRowsBodyTable[index].bodyTable[i].text=="1" && self.mainRowsBodyTable[index].bodyTable[i].rangoSuperior!=""){
+                                            
+                                            var listaValoresRangoSuperior={};
+                                            var nombreColumna=self.mainRowsBodyTable[index].bodyTable[i].nombreColumna;
+
+                                            //Se recorre nuevamente el objeto completo para obtener los valores diferentes por cada rango inferior con el mismo nombreColumma
+                                            for (let x = 0; x < self.mainRowsBodyTable.length; x++) {
+
+                                                for (let y = 0; y < self.mainRowsBodyTable[x].bodyTable.length; y++) {
+                                                    if(self.mainRowsBodyTable[x].bodyTable[y].text=="1" && self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior!="" && self.mainRowsBodyTable[x].bodyTable[y].nombreColumna==nombreColumna){
+                                                        if (!listaValoresRangoSuperior.hasOwnProperty(self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior)) {
+                                                            listaValoresRangoSuperior[self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior]=self.mainRowsBodyTable[x].bodyTable[y].rangoSuperior;
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+
+                                            self.bodyTableModified[i].valoresRangoSuperior=listaValoresRangoSuperior;
+                                        }
+                                        
+                                    }
+                                    
+                                }
+
+                            }else{
+                                self.showTableRows=1;
+                            }
+
                             self.render();
                         } catch (e) {
                         app.alert.dismiss('getInfoCFQuantico');
@@ -582,13 +661,46 @@
 
         var indiceFilaClickada = $(e.currentTarget).parent().parent().index();
         var filaPoliticaObtenida="";
+        var plantillaFila=null;
         if(self.mainRowsBodyTable!=undefined){
             filaPoliticaObtenida = self.mainRowsBodyTable[indiceFilaClickada];
+            //Se genera deepCopy ya que si se modifica sobre un objeto "igualado" (plantillaFila=self.mainRowsBodyTable[0])
+            //todas las propiedades modificadas de plantillaFila afectan a todos los elementos del arreglo al que se genera push
+            //Creando el deepCopy, se está editando un objeto independiente y por lo tanto ya no afecta a los otros elementos del arreglo
+            plantillaFila=App.utils.deepCopy(filaPoliticaObtenida);
+
         }else{
             filaPoliticaObtenida=this.mainRowsBodyTable[indiceFilaClickada];
+            plantillaFila=App.utils.deepCopy(filaPoliticaObtenida);
+        }
+        
+        for (let index = 0; index < plantillaFila.bodyTable.length; index++) {
+            if(plantillaFila.bodyTable[index].select=="1"){
+                var valorSelect=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                plantillaFila.bodyTable[index].valorSelected=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                plantillaFila.bodyTable[index].valoresCatalogo=plantillaFila.bodyTable[index].valoresCatalogoModified;
+
+            }
+
+            if(plantillaFila.bodyTable[index].text=="1"){
+                
+                if(plantillaFila.bodyTable[index].rangoInferior!=""){
+                    plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                }
+
+                if(plantillaFila.bodyTable[index].rangoSuperior!=""){
+                    plantillaFila.bodyTable[index].rangoSuperior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                }
+            }
+
+            if(plantillaFila.bodyTable[index].checkbox=="1"){
+                plantillaFila.bodyTable[index].checked=$(e.currentTarget).parent().parent().find('input[type="checkbox"]')[index].is(":checked");
+            }
+            
         }
 
-        this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
+        this.mainRowsConfigBodyTable.push(plantillaFila);
+
 
         if(this.model.get('cf_quantico_c')!=""){
             this.jsonCFConfiguradas=JSON.parse(this.model.get('cf_quantico_c'));
@@ -598,7 +710,7 @@
             this.jsonCFConfiguradas.OpportunitiesId=this.model.get('id');
         }
 
-        //Obteniendo el campo html para conocer el tipo de campo quie se envía al json
+        //Obteniendo el campo html para conocer el tipo de campo que se envía al json
         var camposEnfila=$(e.currentTarget).parent().parent().find('td');
         var objetoTermResponseList=[];
         for (let index = 0; index < camposEnfila.length; index++) {

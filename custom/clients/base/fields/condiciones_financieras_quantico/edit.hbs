@@ -15,6 +15,13 @@
         /*width: 100px;*/
     }
 </style>
+<script>
+    var $select2 = this.$('#collapseTableCF').find('select.select2');
+    $select2.select2();
+
+    var $select2config = this.$('select.fieldCFConfig');
+    $select2config.select2();
+</script>
 <div class="CFPoliticaQ container-fluid" id="cont" style="border: solid lightblue">
     <!--Sección condiciones financieras de política -->
     <div class="accordion-heading">
@@ -26,59 +33,129 @@
             </a>
         </div>
     </div>
-    <div id="collapseTableCF">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">&nbsp;</th>
-                    {{#each headers}}
-                    <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}
-                    {{#each numeroEspacios}}
-                        &nbsp;
-                    {{/each}}
-                    </th>
-                    {{/each}}
-                </tr>
-            </thead>
-            <tbody>
-                {{#each mainRowsBodyTable}}
-                <tr>
-                    <th scope="row">
-                        <span class="fa-stack plusNuevaCF" style="background-color: #0089fff2;">
-                            <i class="fa fa-plus fa-inverse fa-stack" style="text-align:center;color:white"></i>
-                        </span>
-                    </th>
-                    {{#each bodyTable}}
-                        <td style="text-align:center">
-                            {{#if select}}
-                                <select class="row-fluid select2" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-name="{{nombreCampo}}" disabled style="pointer-events:none;">
-                                {{#each valoresCatalogo}}
-                                <option value="{{@key}}" {{ifSelected @key ../valorSelected}}>{{this}}</option>
-                                {{/each}}
-                                </select>
-                            {{/if}}
-                            {{#if text}}
-                                {{#if rangoInferior}}
-                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
-                                {{else}}
-                                    {{#if rangoSuperior}}
-                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+
+    {{#if showTableRows}}
+        <div id="collapseTableCF">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">&nbsp;</th>
+                        {{#each headers}}
+                        <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}
+                        {{#each numeroEspacios}}
+                            &nbsp;
+                        {{/each}}
+                        </th>
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each mainRowsBodyTable}}
+                    <tr>
+                        <th scope="row">
+                            <span class="fa-stack plusNuevaCF" style="background-color: #0089fff2;">
+                                <i class="fa fa-plus fa-inverse fa-stack" style="text-align:center;color:white"></i>
+                            </span>
+                        </th>
+                        {{#each bodyTable}}
+                            <td style="text-align:center">
+                                {{#if select}}
+                                    <select class="row-fluid select2" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-name="{{nombreCampo}}" disabled style="pointer-events:none;">
+                                    {{#each valoresCatalogo}}
+                                    <option value="{{@key}}" {{ifSelected @key ../valorSelected}}>{{this}}</option>
+                                    {{/each}}
+                                    </select>
+                                {{/if}}
+                                {{#if text}}
+                                    {{#if rangoInferior}}
+                                        <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
                                     {{else}}
-                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value="{{valorCampo}}" disabled style="pointer-events:none;" data-info="input">
+                                        {{#if rangoSuperior}}
+                                        <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                        {{else}}
+                                        <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value="{{valorCampo}}" disabled style="pointer-events:none;" data-info="input">
+                                        {{/if}}
                                     {{/if}}
                                 {{/if}}
-                            {{/if}}
-                            {{#if checkbox}}
-                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="checkbox" class="form-control" size="10" {{checked}} disabled style="pointer-events:none;">
-                            {{/if}}
-                        </td>
+                                {{#if checkbox}}
+                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="checkbox" class="form-control" size="10" {{checked}} disabled style="pointer-events:none;">
+                                {{/if}}
+                            </td>
+                        {{/each}}
+                    </tr>
                     {{/each}}
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
-    
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <!--Tabla con CF consolidadas en solo 1 fila -->
+        <div id="collapseTableCF">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">&nbsp;</th>
+                        {{#each headers}}
+                        <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}
+                        {{#each numeroEspacios}}
+                            &nbsp;
+                        {{/each}}
+                        </th>
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <span class="fa-stack plusNuevaCF" style="background-color: #0089fff2;">
+                                <i class="fa fa-plus fa-inverse fa-stack" style="text-align:center;color:white"></i>
+                            </span>
+                        </th>
+                        {{#each bodyTableModified}}
+                            <td style="text-align:center">
+                                {{#if select}}
+                                    <select class="row-fluid select2" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-name="{{nombreCampo}}">
+                                    {{#each valoresCatalogoModified}}
+                                        <option value="{{@key}}" {{ifSelected @key ../valorSelected}}>{{this}}</option>
+                                    {{/each}}
+                                    </select>
+                                {{/if}}
+                                {{#if text}}
+                                    {{#if rangoInferior}}
+                                        <!--<input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">-->
+                                        <select class="row-fluid select2" data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                           {{#each valoresRangoInferior}}
+                                                <option value="{{@key}}" {{ifSelected @key ../rangoInferior}}>{{this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    {{else}}
+                                        {{#if rangoSuperior}}
+                                        <!--<input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">-->
+                                            <select data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                                {{#each valoresRangoSuperior}}
+                                                    <option value="{{@key}}" {{ifSelected @key ../rangoSuperior}}>{{this}}</option>
+                                                {{/each}}
+                                            </select>
+                                        {{else}}
+                                            <select data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2" data-info="input">
+                                                {{#each valoresRangoSuperior}}
+                                                    <option value="{{@key}}" {{ifSelected @key ../valorCampo}}>{{this}}</option>
+                                                {{/each}}
+                                            </select>
+                                        {{/if}}
+                                    {{/if}}
+                                {{/if}}
+                                {{#if checkbox}}
+                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="checkbox" class="form-control" size="10" {{checked}} disabled style="pointer-events:none;">
+                                {{/if}}
+                            </td>
+                        {{/each}}
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+
     <!--Linea divisoria -->
     <hr size="3px" color="#9da0a4">
     <!-- Sección para condiciones financieras configuradas -->
