@@ -122,7 +122,7 @@
                                 {{#if text}}
                                     {{#if rangoInferior}}
                                         <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="hidden" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
-                                        <select class="row-fluid select2" data-type="texto" data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                        <select class="row-fluid select2 selectToHidden" data-type="texto" data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
                                            {{#each valoresRangoInferior}}
                                                 <option value="{{@key}}" {{ifSelected @key ../rangoInferior}}>{{this}}</option>
                                             {{/each}}
@@ -130,14 +130,14 @@
                                     {{else}}
                                         {{#if rangoSuperior}}
                                             <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="hidden" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
-                                            <select data-name="{{nombreCampo}}" data-type="texto" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                            <select data-name="{{nombreCampo}}" data-type="texto" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2 selectToHidden" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
                                                 {{#each valoresRangoSuperior}}
                                                     <option value="{{@key}}" {{ifSelected @key ../rangoSuperior}}>{{this}}</option>
                                                 {{/each}}
                                             </select>
                                         {{else}}
                                             <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="hidden" class="form-control" size="10" value="{{valorCampo}}" disabled style="pointer-events:none;" data-info="input">
-                                            <select data-name="{{nombreCampo}}" data-type="texto" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2" data-info="input">
+                                            <select data-name="{{nombreCampo}}" data-type="texto" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2 selectToHidden" data-info="input">
                                                 {{#each valoresRangoSuperior}}
                                                     <option value="{{@key}}" {{ifSelected @key ../valorCampo}}>{{this}}</option>
                                                 {{/each}}
