@@ -3,7 +3,8 @@
         'click  .plusNuevaCF': 'addNewCFConfigurada',
         'click  .borrarCFQuantico': 'deleteCFConfigurada',
         'change .fieldCFConfig':'updateJsonCFConfiguradas',
-        'keyup .fieldValidateRange':'validarRangos'
+        'keyup .fieldValidateRange':'validarRangos',
+        'change .selectToHidden':'setValToInputHidden'
     },
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -1218,6 +1219,12 @@
                 }
             }
         }
+    },
+
+    setValToInputHidden:function(e){
+        var valor=$(e.currentTarget).val();
+        $(e.currentTarget).siblings('input[type="hidden"]').val(valor);
+
     },
 
     //Función para solo permitir números
