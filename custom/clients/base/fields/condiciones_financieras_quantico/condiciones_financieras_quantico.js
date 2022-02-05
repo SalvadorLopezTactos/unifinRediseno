@@ -811,7 +811,7 @@
                 for (let index = 0; index < camposEnfila.length; index++) {
                     var elemento = $(camposEnfila).eq(index);
                     //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
-                    if(elemento.children('select').length>0){
+                    if(elemento.children('select').length>0 && elemento.children('input[type="hidden"]').length==0){
                          //Definición para campos de catálogo
                         var objetoSelect=this.setPlantillasJSON("Catalogo");
                         objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
@@ -918,7 +918,7 @@
                 for (let index = 0; index < camposEnfila.length; index++) {
                     var elemento = $(camposEnfila).eq(index);
                     //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
-                    if(elemento.children('select').length>0){
+                    if(elemento.children('select').length>0 && elemento.children('input[type="hidden"]').length==0){
                          //Definición para campos de catálogo
                         var objetoSelect=this.setPlantillasJSON("Catalogo");
                         objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
