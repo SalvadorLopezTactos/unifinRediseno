@@ -7,4 +7,7 @@ $app_list_strings['soc_usuario_list']=array (
   3 => 'e1791e38-ed12-11e8-bc8c-00155d967307',
   4 => 'c6f70b4c-c605-50bb-1beb-56534737d35b',
   5 => '1a45fdb6-5b0a-11e9-b39f-00155d967307',
+  6 => '0a4af676-b1b8-11eb-aaa5-00155d010c00',
+  7 => '1a45fdb6-5b0a-11e9-b39f-00155d967307',
+  8 => '923601be-ea15-164d-61c8-562a604bd27c'
 );
