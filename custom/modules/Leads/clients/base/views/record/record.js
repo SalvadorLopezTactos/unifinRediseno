@@ -1256,11 +1256,11 @@
         //var listaProductosSock = [];    //Recupera Ids de usuarios que pueden editar origen
         //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
         var readonly = true;
-
+        /*
         if(this.model.get('assigned_user_id') == idUser ){
             readonly = false;
         }
-
+        */
         Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
             if(value == idUser){
                 readonly = false;

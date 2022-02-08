@@ -7518,12 +7518,12 @@
         //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
 		var readonly = true;
 
-		Object.entries(App.lang.getAppListStrings('producto_soc_usuario_list')).forEach(([key, value]) => {
+		/*Object.entries(App.lang.getAppListStrings('producto_soc_usuario_list')).forEach(([key, value]) => {
             if(this.model.get(value) == idUser && productos.includes(key) ){
 				readonly = false;
 			}
         });
-
+        */
 		Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
             if(value == idUser){
 				readonly = false;
