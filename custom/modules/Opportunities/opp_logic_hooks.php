@@ -1118,12 +1118,16 @@ SQL;
             if ($bean->estatus_c == "N" && $producto!='3') { //Etapa solicitud= N= Autorizada
                 $GLOBALS['log']->fatal('Cliente con Línea Vigente');
                 $this->actualizaTipoCuenta('3', '18', $cliente, $producto);
-                $bean->tipo_operacion_c = '2';
+                if($bean->tipo_de_operacion_c == 'LINEA_NUEVA'){
+                    $bean->tipo_operacion_c = '2';
+                }
             }
             if ($bean->estatus_c == "N" && $producto=='3') { //Etapa solicitud= N= Autorizada
                 $GLOBALS['log']->fatal('Manda Credito Automotriz como: Prospecto con Línea');
                 $this->actualizaTipoCuenta('2', '12', $cliente, $producto);
-                $bean->tipo_operacion_c = '2';
+                if($bean->tipo_de_operacion_c == 'LINEA_NUEVA'){
+                    $bean->tipo_operacion_c = '2';
+                }
             }
         }
     }
