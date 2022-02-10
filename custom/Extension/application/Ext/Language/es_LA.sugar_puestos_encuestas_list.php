@@ -1,0 +1,15 @@
+<?php
+ // created: 2022-02-09 11:56:03
+
+$app_list_strings['puestos_encuestas_list']=array (
+  1 => 'DGA COMERCIAL LEASING',
+  2 => 'DIRECTOR LEASING',
+  3 => 'SUBDIRECTOR LEASING',
+  4 => 'GERENTE LEASING',
+  5 => 'ASESOR LEASING',
+  6 => 'BACKOFFICE LEASING',
+  20 => 'ASISTENTE LEASING',
+  33 => 'DIRECTOR REGIONAL LEASING',
+  44 => 'ESTRATEGIA LEASING',
+  55 => 'DIRECTOR SEGUIMIENTO LEASING',
+);
