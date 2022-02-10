@@ -1142,7 +1142,7 @@
             self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=valorSet;
 
 
-        }else if(tipoCampo="input"){
+        }else if(tipoCampo=="input"){
             self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=$(e.currentTarget).val();
              //Se actualiza el objeto json que se dibuja en el hbs
              self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].valorCampo=$(e.currentTarget).val();
