@@ -708,6 +708,7 @@
                             //Se añade condición para mostrar las mismas opciones que las CF de Política y no mostrar todas las opciones de la lista
                             //Esto solo se reaiza cuando se detecta que las CF de Politica, se consolidan en una sola
                             if(this.mainRowsBodyTable.length>0){
+                                //Dado que es la misma lista para cada CF configurada, se puede obtener siempre el primer item, es por eso que se pasa el "0" de manera fija
                                 valores_select=valores_select=this.mainRowsBodyTable[0].bodyTable[0].valoresCatalogoModified;
 
                                 for (const key in valores_select) {
