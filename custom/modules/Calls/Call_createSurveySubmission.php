@@ -19,8 +19,11 @@ class Call_createSurveySubmission
             1) Llamada asignada a Cuenta
             2) Usuario que cierra llamada contiene producto Leasing = 1
             3) Llamada en estatus Realizado
-            4) Resultado de llamada; Checklist_expediente,Llamada_servicio  */
-        if ($bean->parent_type == 'Accounts' && !empty($bean->parent_id) && $current_user->tipodeproducto_c=='1' && $bean->status == "Held" && $bean->fetched_row['status'] != $bean->status && ($bean->tct_resultado_llamada_ddw_c == "Checklist_expediente" || $bean->tct_resultado_llamada_ddw_c == "Llamada_servicio" )) {
+            4) Resultado de llamada; Checklist_expediente,Llamada_servicio
+			5) Puesto usuario asignado a la llamada sea de Leasing */
+        $puesto_usuario = $bean->asignado_puesto_c;
+        $lista_puestos = $app_list_strings['puestos_encuestas_list'];
+        if ($bean->parent_type == 'Accounts' && !empty($bean->parent_id) && $current_user->tipodeproducto_c=='1' && array_key_exists($puesto_usuario, $lista_puestos) && $bean->status == "Held" && $bean->fetched_row['status'] != $bean->status && ($bean->tct_resultado_llamada_ddw_c == "Checklist_expediente" || $bean->tct_resultado_llamada_ddw_c == "Llamada_servicio" )) {
             // Recupera variables de llamada
             //$GLOBALS["log"]->fatal("LH - Survey NPS :: Cumple condición de envío");
             $idCall = $bean->id;
