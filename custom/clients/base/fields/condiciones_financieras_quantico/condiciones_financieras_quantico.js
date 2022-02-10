@@ -1149,6 +1149,11 @@
             $(e.currentTarget).val("");
             return false;
         }
+
+        //Evitar keyup para tecla TAB
+        if(e.keyCode==9 || e.key=='Tab'){
+            return false;
+        }
         //Limite inferior no puede ser mayor al limite superior
         //Validar que ambos valores caigan dentro del rango
         if(limite_inferior==""){
