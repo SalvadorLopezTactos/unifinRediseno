@@ -1403,6 +1403,11 @@
        }else{
         $('[data-type="condiciones_financieras_quantico"]').attr('style',"pointer-events:block");
        }
+
+       //Parche para evitar que el campo se vea cortado específicamente para el usuario aavalos
+       if($(this.$el).parent().parent().hasClass('span10')){
+           $(this.$el).parent().parent().removeClass('span10').addClass('span12');
+       }
     
     },
 
