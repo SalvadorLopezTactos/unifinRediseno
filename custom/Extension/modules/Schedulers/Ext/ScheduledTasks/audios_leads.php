@@ -205,7 +205,7 @@ array_push($job_strings, 'audios_leads');
         //Cierra curl y regresa resultado
         curl_close ($ch);
         //$GLOBALS['log']->fatal('Termina upload_audios');
-        $GLOBALS['log']->fatal($result);
+        //$GLOBALS['log']->fatal($result);
         return json_decode($result, true);
     }
 
