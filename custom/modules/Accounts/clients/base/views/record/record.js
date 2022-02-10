@@ -7589,7 +7589,7 @@
                                    if (data[0].contents.records.length > 0){
                                        //Valida direcciones y teléfonos
                                        //Itera direcciones
-                                       for (var d = 0; d < data[1].contents.records.length; d++) {
+                                       for (var d = 0; d < this.oDirecciones.direccion.length; d++) {
                                         //Itera direccion Particular
                                         if (App.lang.getAppListStrings('tipo_dir_map_list')[self.oDirecciones.direccion[d].tipodedireccion[0]].includes('1') && self.oDirecciones.direccion[d].inactivo == false) {
                                             direP++;
@@ -7915,9 +7915,9 @@ validaReqUniclickInfo: function () {
                                    //Valida direcciones y telefonos:
 
                                    //Itera direcciones
-                                   for (var d = 0; d < data[1].contents.records.length; d++) {
+                                   for (var d = 0; d < this.oDirecciones.direccion.length; d++) {
                                     //Itera direccion Particular
-                                    if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
+                                    if (App.lang.getAppListStrings('tipo_dir_map_list')[self.oDirecciones.direccion[d].tipodedireccion[0]].includes('1') && self.oDirecciones.direccion[d].inactivo == false) {
                                         direP++;
                                     }
                                 }
