@@ -704,9 +704,21 @@
                             var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
                             var valores_select = data['listaValores'][lista_valores];
                             var valores_select_obj = {};
-                            //Convirtiendo el arreglo a objeto para poderlo mostrar en las opciones del campo select
-                            for (var j = 0; j < valores_select.length; j++) {
-                                valores_select_obj[valores_select[j].Id] = valores_select[j].Name;
+
+                            //Se añade condición para mostrar las mismas opciones que las CF de Política y no mostrar todas las opciones de la lista
+                            //Esto solo se reaiza cuando se detecta que las CF de Politica, se consolidan en una sola
+                            if(this.mainRowsBodyTable.length>0){
+                                valores_select=valores_select=this.mainRowsBodyTable[0].bodyTable[0].valoresCatalogoModified;
+
+                                for (const key in valores_select) {
+                                    valores_select_obj[valores_select[key].Id] = valores_select[key].Name;
+                                }
+
+                            }else{
+                                //Convirtiendo el arreglo a objeto para poderlo mostrar en las opciones del campo select
+                                for (var j = 0; j < valores_select.length; j++) {
+                                    valores_select_obj[valores_select[j].Id] = valores_select[j].Name;
+                                }
                             }
                             var valorSelected = arrayRespuesta.FinancialTermResponseList[i].Value.ValueId;
 
