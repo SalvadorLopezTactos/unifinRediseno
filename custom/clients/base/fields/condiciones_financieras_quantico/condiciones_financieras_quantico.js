@@ -1284,7 +1284,7 @@
                     //Buscar si el limite inferior, en este caso se regresa la primera ocurrencia dentro del arreglo
                     //pero si es limite superior, se regresa la segunda ocurrencia
                     if(inferiorOsuperior !=undefined){
-                        if(inferiorOsuperior=="inputInferior"){
+                        if(inferiorOsuperior=="inputInferior" || inferiorOsuperior=='input'){
                             indiceEncontrado=i;
                         }else{
                             //En este caso se regresa el índice con una unidad más, ya que en este caso se considera que representa a un campo de rango superior
