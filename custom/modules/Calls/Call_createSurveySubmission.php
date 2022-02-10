@@ -163,7 +163,7 @@ class Call_createSurveySubmission
         //Establece parámetros de envío
         $timedate = new TimeDate();
         $mailSubject = "¡TU OPINIÓN ES IMPORTANTE!";
-        $mailHTML = '<p align="center" class="imagen"><img border="0" style="width:135px;height:103px" id="logoUnifin" src="https://www.unifin.com.mx/img/logo.png"></span></p><br>
+        $mailHTML = '<p align="center" class="imagen"><img border="0" style="width:135px;height:103px" id="logoUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p><br>
           <p align="center" style="font-size: 14pt; font-family: "Arial",sans-serif;"><font face="Arial" color="#032258">Estimado: <b>' . $nombrePersona . '</b>
           <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>' . $Asesor . '</b>, nos gustaría conocer tu opinión acerca del servicio que has recibido.
           <center>Te invitamos a contestar la siguiente encuesta.<br><br>
