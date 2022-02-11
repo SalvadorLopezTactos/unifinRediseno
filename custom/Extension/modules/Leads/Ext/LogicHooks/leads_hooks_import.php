@@ -75,3 +75,11 @@ $hook_array['before_save'][] = Array(
     'class_validate_rfc',
     'func_validate_rfc'
 );
+
+$hook_array['before_save'][] = Array(
+    12,
+    'validacion SOC',
+    'custom/modules/Leads/Lead_Hooks.php',
+    'Lead_Hooks',
+    'validar_SOC'
+);

@@ -285,4 +285,17 @@ SQL;
 			}
 		}
     }
+
+    public function validar_SOC($bean, $event, $args)
+    {
+        if($bean->subtipo_registro_c != '4' && $bean->origen_c == '12' && $bean->detalle_origen_c == '12') {
+            $bean->alianza_soc_chk_c = 1;
+        }
+
+        if ($GLOBALS['service']->platform != 'base') {
+            if(!($bean->subtipo_registro_c != '4' && $bean->origen_c == '12' && $bean->detalle_origen_c == '12')) {
+                $bean->alianza_soc_chk_c = 0;
+            }
+        }
+    }
 }
