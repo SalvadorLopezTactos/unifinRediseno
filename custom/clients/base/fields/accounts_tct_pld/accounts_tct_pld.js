@@ -107,7 +107,7 @@
         // dataPLD['arrendamientoPuro']['campo7_label'] = pld.campo7_list[dataPLD['arrendamientoPuro']['campo7']];
         // dataPLD['arrendamientoPuro']['campo9_label'] = pld.campo9_list[dataPLD['arrendamientoPuro']['campo9']];
         dataPLD['arrendamientoPuro']['campo6_label'] = pld.campo6_list[dataPLD['arrendamientoPuro']['campo6']];
-        var auxCampo16=dataPLD['arrendamientoPuro']['campo16'].replace(/\^/g,"");
+        var auxCampo16=dataPLD['arrendamientoPuro']['campo16']!= undefined && dataPLD['arrendamientoPuro']['campo16']!=""  ? dataPLD['arrendamientoPuro']['campo16'].replace(/\^/g,""):"";
         var arrayCampo16=auxCampo16.split(",");
         var arrTemp=[];
         for(var i=0;i<arrayCampo16.length;i++)
@@ -123,7 +123,7 @@
         dataPLD['factorajeFinanciero']['campo4_label'] = pld.campo4_list[dataPLD['factorajeFinanciero']['campo4']];
         dataPLD['factorajeFinanciero']['campo21_label'] = pld.campo21_list[dataPLD['factorajeFinanciero']['campo21']];
 
-        var auxCampo16=dataPLD['factorajeFinanciero']['campo16'].replace(/\^/g,"");
+        var auxCampo16=dataPLD['factorajeFinanciero']['campo16']!= undefined && dataPLD['factorajeFinanciero']['campo16']!=""  ? dataPLD['factorajeFinanciero']['campo16'].replace(/\^/g,""):"";
         var arrayCampo16=auxCampo16.split(",");
         var arrTemp=[];
         for(var i=0;i<arrayCampo16.length;i++)
@@ -143,7 +143,7 @@
         dataPLD['creditoSimple']['campo2_label'] = pld.campo2_list[dataPLD['creditoSimple']['campo2']];
         dataPLD['creditoSimple']['campo4_label'] = pld.campo4_list[dataPLD['creditoSimple']['campo4']];
 
-        var auxCampo18=dataPLD['creditoSimple']['campo18'].replace(/\^/g,"");
+        var auxCampo18=dataPLD['creditoSimple']['campo18']!= undefined && dataPLD['creditoSimple']['campo18']!=""  ? dataPLD['creditoSimple']['campo18'].replace(/\^/g,""):"";
         var arrayCampo18=auxCampo18.split(",");
         var arrTemp=[];
         for(var i=0;i<arrayCampo18.length;i++)
@@ -157,7 +157,7 @@
         dataPLD['creditoSimple']['campo6_label'] = pld.campo6_list[dataPLD['creditoSimple']['campo6']];
 
         //data Credito Revolvente
-        var auxCampo3=dataPLD['creditoRevolvente']['campo3'].replace(/\^/g,"");
+        var auxCampo3=dataPLD['creditoRevolvente']['campo3']!= undefined && dataPLD['creditoRevolvente']['campo3']!=""  ? dataPLD['creditoRevolvente']['campo3'].replace(/\^/g,""):"";
         var arrayCampo3=auxCampo3.split(",");
         var arrTemp=[];
         for(var i=0;i<arrayCampo3.length;i++)
@@ -175,12 +175,12 @@
             arrTemp.push(pld.campo30_list[arrayCampo5[i]]);
         }
         dataPLD['creditoRevolvente']['campo5_label'] =arrTemp.join();
-        
+
         dataPLD['creditoRevolvente']['campo8_label'] = pld.campo2_list[dataPLD['creditoRevolvente']['campo8']];
         dataPLD['creditoRevolvente']['campo10_label'] = pld.campo4_list[dataPLD['creditoRevolvente']['campo10']];
 
         if (dataPLD['creditoRevolvente']['campo7'] != "" && dataPLD['creditoRevolvente']['campo7'] != null){
-            var auxCampo7=dataPLD['creditoRevolvente']['campo7'].replace(/\^/g,"");
+            var auxCampo7=dataPLD['creditoRevolvente']['campo7']!= undefined && dataPLD['creditoRevolvente']['campo7']!=""  ? dataPLD['creditoRevolvente']['campo7'].replace(/\^/g,""):"";
             var arrayCampo7=auxCampo7.split(",");
             var arrTemp=[];
             for(var i=0;i<arrayCampo7.length;i++)
@@ -189,7 +189,7 @@
             }
             dataPLD['creditoRevolvente']['campo7_label'] =arrTemp.join();
         }
-        
+
         return dataPLD;
     },
 
@@ -460,7 +460,7 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
-        //SE añade el campo 5 pregunta 4.-¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación? 
+        //SE añade el campo 5 pregunta 4.-¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación?
         this.$('select.campo5ddw-ce').select2({
             width: '100%',
             closeOnSelect: false,
@@ -813,7 +813,7 @@
     },
 
     //Validacion campo otro Credito Envolvente
-    
+
     Muestracampo2CE: function () {
         console.log("Propietario Real Credito Envolvente");
         if (this.$('.campo8ddw-ce').select2('val') == "2") {
