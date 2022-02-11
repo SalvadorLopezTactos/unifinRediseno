@@ -36,6 +36,10 @@
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        
+        /****** validaciones SOC  **********/
+        this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
+        this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on('sync', this.userAlianzaSoc, this);
     },
 
@@ -1269,6 +1273,33 @@
 
         if(readonly){
             this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
+        }
+    },
+
+    cambios_origen_SOC: function () {
+        var idUser = App.user.attributes.id; //Id del usuario,
+        var cambio = false;
+        var valor = 0;
+
+        if (this.model.get('alianza_soc_chk_c') != undefined){
+            valor = this.model.get('alianza_soc_chk_c');
+        }
+        
+        Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
+            if(value == idUser){
+                cambio = true;
+            }
+        });
+
+        if(this.model.get('subtipo_registro_c') != undefined && this.model.get('origen_c') != undefined && this.model.get('detalle_origen_c') != undefined){
+            if(this.model.get('subtipo_registro_c') != '4' && this.model.get('origen_c') == '12' && this.model.get('detalle_origen_c') == '12' ){
+                this.model.set('alianza_soc_chk_c', 1);
+            }else{
+                this.model.set('alianza_soc_chk_c', 0);
+                if(!cambio){
+                    this.model.set('alianza_soc_chk_c', this.model.get('alianza_soc_chk_c'));
+                }
+            }
         }
     },
 
