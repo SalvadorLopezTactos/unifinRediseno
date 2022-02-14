@@ -422,19 +422,17 @@
         }
         /***************************READONLY PARA SUBTIPO DE LEAD CONVERTIDO**************************/
         if (this.model.get('subtipo_registro_c') == '4') {
-
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
-
+			var btnConvert = self.getField("convert_Leads_button");
+			btnConvert.hide();
             _.each(this.model.fields, function (field) {
-
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
                     self.noEditFields.push(field.name);
                     self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
                 }
             });
-
             this._disableActionsSubpanel();
         }
     },
@@ -579,16 +577,17 @@
         };
         // alert(this.model.get('id'))
         this.valida_requeridos();
-
+		var btnConvert = this.getField("convert_Leads_button");
+		btnConvert.hide();
+		var editButton = this.getField('edit_button');
+        editButton.setDisabled(true);
         app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
-
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
-
                 console.log(data);
                 app.alert.dismiss('upload');
                 app.controller.context.reloadData({});
-
+				editButton.setDisabled(false);
                 if (data.idCuenta === "") {
                     app.alert.show("Conversión", {
                         level: "error",
@@ -602,7 +601,8 @@
                         autoClose: false
                     });
                     this._disableActionsSubpanel();
-
+					var btnConvert = this.getField("convert_Leads_button");
+					btnConvert.hide();
                 }
                 var btnConvert = this.getField("convert_Leads_button")
 
