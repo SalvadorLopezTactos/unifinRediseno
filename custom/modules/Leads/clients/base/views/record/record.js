@@ -1305,8 +1305,13 @@
                 }
 
                 if( (this.model._previousAttributes.detalle_origen_c == 12 && this.cmbio_soc > 0) || 
-                    (this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 2) || 
-                    (this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 0 && this.model.get('alianza_soc_chk_c')==1)) {
+                    (this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 2)) {
+                    this.model.set('alianza_soc_chk_c', 0);
+                }
+
+                if( (this.model._previousAttributes.detalle_origen_c != ""  && 
+                    this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 0 
+                    && this.model.get('alianza_soc_chk_c')==1)) {
                     this.model.set('alianza_soc_chk_c', 0);
                 }
                 
