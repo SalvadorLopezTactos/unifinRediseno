@@ -41,6 +41,7 @@
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on('sync', this.userAlianzaSoc, this);
+        this.cmbio_soc = 0;
     },
 
     _disableActionsSubpanel: function () {
@@ -1295,7 +1296,18 @@
             if(this.model.get('subtipo_registro_c') != '4' && this.model.get('origen_c') == '12' && this.model.get('detalle_origen_c') == '12' ){
                 this.model.set('alianza_soc_chk_c', 1);
             }else{
-                this.model.set('alianza_soc_chk_c', 0);
+
+                if(valor){
+                    this.model.set('alianza_soc_chk_c', valor);
+                    this.cmbio_soc += 1;
+                }else{
+                    this.model.set('alianza_soc_chk_c', 0);
+                }
+
+                if(this.cmbio_soc > 2){
+                    this.model.set('alianza_soc_chk_c', 0);
+                }
+                
                 if(!cambio){
                     this.model.set('alianza_soc_chk_c', this.model.get('alianza_soc_chk_c'));
                 }
