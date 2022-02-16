@@ -1241,36 +1241,48 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
         }
     }
 
-            function InfoMeet($bean = null, $event = null, $args = null)
-          {
+    function InfoMeet($bean = null, $event = null, $args = null)
+    {
+        if (!$args['isUpdate']) {
+                    global $db ,$current_user;
+                    $GLOBALS['log']->fatal("InfoMeet: Inicio");
+                    //Realiza consulta para obtener info del usuario asignado
+                    $query="SELECT cstm.region_c,cstm.equipos_c,cstm.tipodeproducto_c,cstm.puestousuario_c from users as u
+                            INNER JOIN users_cstm as cstm
+                            ON u.id=cstm.id_c
+                            WHERE id='{$bean->assigned_user_id}'";
+                            $GLOBALS['log']->fatal("InfoMeet: consulta : ".$query);
+                    $queryResult = $db->query($query);
+                    $GLOBALS['log']->fatal("InfoMeet: Consulta para usuario asignado " .print_r($queryResult, true));
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                            //Setea valores usuario ASIGNADO
+                           $bean->asignado_region_c=$row['region_c'];
+                           $bean->a_equipo_promocion_c=$row['equipos_c'];
+                           $bean->asignado_producto_c=$row['tipodeproducto_c'];
+                           $bean->asignado_puesto_c=$row['puestousuario_c'];
+                        }
+                        $GLOBALS['log']->fatal("InfoMeet: Setea valores usuario logueado");
+                   //Setea valores usuario LOGUEADO/Creador del registro
+                   $bean->creado_region_c= $current_user->region_c;
+                   $bean->c_equipo_promocion_c =$current_user->equipos_c;
+                   $bean->creado_producto_c= $current_user->tipodeproducto_c;
+                   $bean->creado_puesto_c=$current_user->puestousuario_c;
+                   $GLOBALS['log']->fatal("InfoMeet: Finaliza");
+        }
+    }
 
-                if (!$args['isUpdate']) {
-                            global $db ,$current_user;
-                            $GLOBALS['log']->fatal("InfoMeet: Inicio");
-                            //Realiza consulta para obtener info del usuario asignado
-                            $query="SELECT cstm.region_c,cstm.equipos_c,cstm.tipodeproducto_c,cstm.puestousuario_c from users as u
-                                    INNER JOIN users_cstm as cstm
-                                    ON u.id=cstm.id_c
-                                    WHERE id='{$bean->assigned_user_id}'";
-                                    $GLOBALS['log']->fatal("InfoMeet: consulta : ".$query);
-                            $queryResult = $db->query($query);
-                            $GLOBALS['log']->fatal("InfoMeet: Consulta para usuario asignado " .print_r($queryResult, true));
-                            while ($row = $db->fetchByAssoc($queryResult)) {
-                                    //Setea valores usuario ASIGNADO
-                                   $bean->asignado_region_c=$row['region_c'];
-                                   $bean->a_equipo_promocion_c=$row['equipos_c'];
-                                   $bean->asignado_producto_c=$row['tipodeproducto_c'];
-                                   $bean->asignado_puesto_c=$row['puestousuario_c'];
-                                }
-                                $GLOBALS['log']->fatal("InfoMeet: Setea valores usuario logueado");
-                           //Setea valores usuario LOGUEADO/Creador del registro
-                           $bean->creado_region_c= $current_user->region_c;
-                           $bean->c_equipo_promocion_c =$current_user->equipos_c;
-                           $bean->creado_producto_c= $current_user->tipodeproducto_c;
-                           $bean->creado_puesto_c=$current_user->puestousuario_c;
-                           $GLOBALS['log']->fatal("InfoMeet: Finaliza");
-                }
-          }
+    function SolicitudSOC($bean, $event, $arguments)
+    {
+        if (empty($bean->fetched_row['id'])) {
+            global $db;
+            $cliente = $bean->account_id;
 
+            $beanCuenta = BeanFactory::retrieveBean('Accounts', $cliente, array('disable_row_level_security' => true));
+            $GLOBALS['log']->fatal("alianza_soc_chk_c".$beanCuenta->alianza_soc_chk_c);
+            if($beanCuenta->alianza_soc_chk_c){
+                $bean->alianza_soc_chk_c = true;
+            }
+        }
+    }
 
 }
