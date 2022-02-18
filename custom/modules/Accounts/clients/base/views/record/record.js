@@ -3617,7 +3617,7 @@
                 for (var j = 0; j < telefono.length; j++) {
                     var tel1=telefono[j].telefono.replace(/ /gi, "");
                     var tel2=telefono[i].telefono.replace(/ /gi, "");
-                    if (tel1 == tel2 && i != j) {
+                    if (tel1 == tel2 && telefono[j].estatus == 'Activo' && telefono[i].estatus == 'Activo' && i != j) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -3629,7 +3629,7 @@
                 app.alert.show('error_sametelefono3', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales,favor de corregir.'
+                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales, favor de corregir.'
                 });
                 //$($input).focus();
                 if (indices.length > 0) {
