@@ -2903,7 +2903,7 @@
         Object.keys(lista).forEach(function (key) {
             //Quita años previos
             if (key < anoactual5) {
-                delete lista[key];
+                //delete lista[key];
             }
             //Quita años futuros al actual
             if (key > anoactual) {
