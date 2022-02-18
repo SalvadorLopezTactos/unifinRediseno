@@ -713,6 +713,9 @@
                                         errors['status'].required = true;
                                         callback(null, fields, errors);
                                     } else {
+                                        //Actualiza parent de llamada
+                                        self.model.set('parent_id',data.idCuenta);
+                                        self.model.set('parent_type','Accounts');
                                         app.alert.show("Conversión", {
                                             level: "success",
                                             messages: data.mensaje,
@@ -1037,7 +1040,7 @@
 		this.$('div[data-name="tct_call_from_issabel_c"]').hide();
 		if (this.model.get('tct_call_issabel_c') || this.model.get('tct_call_from_issabel_c')) this.$('div[data-name="padres_c"]').show();
     },
-	
+
 	llenaLlamada:function(){
 		if(this.model.get('parent_type') == "Accounts") this.model.set('accounts_calls_1accounts_ida', this.model.get('padres_c'));
 		if(this.model.get('parent_type') == "Leads") this.model.set('leads_calls_1leads_ida', this.model.get('padres_c'));

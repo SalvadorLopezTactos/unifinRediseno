@@ -232,9 +232,8 @@
                 this.oTelefonos.telefono.forEach(function (element) {
                     var iteracion = element.telefono;
                     iteracion = iteracion.replace(/\s+/gi, '');
-
                     var ntelefonico = this.$('.newTelefono').val().trim();
-                    if (iteracion == ntelefonico) {
+                    if (iteracion == ntelefonico && element.estatus == 'Activo') {
                         duplicados = true;
                     }
                 });
