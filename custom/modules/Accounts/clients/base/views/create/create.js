@@ -464,7 +464,7 @@
          * Adrian Arauz 23/01/2019
          * */
         //this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         this.model.addValidationTask('validarequeridosProvRec', _.bind(this.RequeridosProveedorRecursos, this));
         /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
          * Integración de Expediente
