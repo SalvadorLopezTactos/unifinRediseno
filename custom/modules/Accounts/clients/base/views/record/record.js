@@ -311,7 +311,7 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
@@ -406,6 +406,7 @@
 
     },
 
+/*
     saveProdPLD: function (fields, errors, callback) {
 
         if (this.model.get('tipo_registro_cuenta_c') != '') {
@@ -517,6 +518,7 @@
             callback(null, fields, errors);
         }
     },
+*/
 
     /* F. Javier G. Solar
      OBS299 Validar que las Direcciones no se repitan 21/11/2018

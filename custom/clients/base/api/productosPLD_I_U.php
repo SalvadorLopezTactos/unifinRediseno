@@ -169,11 +169,35 @@ class productosPLD_I_U extends SugarApi
         }
 
         $beanModule = BeanFactory::getBean("Accounts", $idCuenta);
-
+        //$GLOBALS['log']->fatal("idCuenta->",$idCuenta);
         if ($beanModule->load_relationship('accounts_tct_pld_1',array('disable_row_level_security' => true))) {
             $relatedBeans = $beanModule->accounts_tct_pld_1->getBeans();
             foreach ($relatedBeans as $value) {
+                $name_prod = $value->name;
                 $prod = $value->description;
+                $GLOBALS['log']->fatal("prod->",$value->name);
+                $GLOBALS['log']->fatal("prod->",$value->description);
+                
+                if($prod == ''){
+                    switch ($name_prod) {
+                        case "Arrendamiento Puro":
+                            $prod = "AP";
+                            break;
+                        case "Factoraje Financiero":
+                            $prod = "FF";
+                            break;
+                        case "Crédito Automotriz":
+                            $prod = "CA";
+                            break;
+                        case "Crédito Simple":
+                            $prod = "CS";
+                            break;
+                        case "Crédito Revolvente":
+                            $prod = "CR";
+                            break;   
+                    }
+
+                }
                 switch ($prod) {
                     case "AP":
                         $productosPLD['arrendamientoPuro']['id_pld'] = $value->id;
@@ -268,6 +292,7 @@ class productosPLD_I_U extends SugarApi
 
     public function SavePLD_Method($api, $args)
     {
+        $GLOBALS['log']->fatal("Guarda PLD servicio");
         //Recuperar productosPLD
         $productosPLD = $args;
         $modulo = 'tct_PLD';
