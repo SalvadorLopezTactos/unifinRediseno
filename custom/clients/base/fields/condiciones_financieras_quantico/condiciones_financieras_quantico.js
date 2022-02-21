@@ -4,7 +4,8 @@
         'click  .borrarCFQuantico': 'deleteCFConfigurada',
         'change .fieldCFConfig':'updateJsonCFConfiguradas',
         'keyup .fieldValidateRange':'validarRangos',
-        'change .selectToHidden':'setValToInputHidden'
+        'change .selectToHidden':'setValToInputHidden',
+        'change .setDefaultValues':'setDefaultValues'
     },
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -354,6 +355,10 @@
                                                 }
                                             }
 
+                                            //Se establece nuevo atributo para deshabilitar todos los campos de rango inferior excepto el primero dentro de la fila
+
+                                            self.bodyTableModified[i].deshabilitado='disabled';
+
                                             self.bodyTableModified[i].valoresRangoInferior=listaValoresRangoInferior;
                                         }
 
@@ -380,8 +385,52 @@
                                         }
                                         
                                     }
-                                    
                                 }
+
+                                //Se habilita primer rango inferior y deshabilitando los restantes
+                                self.bodyTableModified[1].deshabilitado='';
+
+                                var jsonFormatToValuesDefault={};
+                                
+                                for (var indice = 0; indice < self.mainRowsBodyTable.length; indice++) {
+                                    var columnaBaseTipo="";
+                                    var keyRangoInferior="";
+                                    for (var idx = 0; idx < self.mainRowsBodyTable[indice].bodyTable.length; idx++) {
+                                        
+                                        //Armando nuevo json para establecer valores default al aplicar evento change en campos
+                                
+                                        if(self.mainRowsBodyTable[indice].bodyTable[idx].select=="1"){
+                                            if(columnaBaseTipo==""){
+                                                var idValorSeleccionado=self.mainRowsBodyTable[indice].bodyTable[idx].valorSelected;
+                                                columnaBaseTipo=self.mainRowsBodyTable[indice].bodyTable[idx].valoresCatalogo[idValorSeleccionado];
+                                            }
+
+                                            if(!jsonFormatToValuesDefault.hasOwnProperty(columnaBaseTipo)){
+                                                jsonFormatToValuesDefault[columnaBaseTipo]={}
+                                            }
+                                            
+                                        }
+                                        if(self.mainRowsBodyTable[indice].bodyTable[idx].text=="1" && self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior!=""){
+                                            if(keyRangoInferior==""){
+                                                keyRangoInferior=self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior;
+                                            }
+                                            if(!jsonFormatToValuesDefault[columnaBaseTipo].hasOwnProperty(keyRangoInferior)){
+                                                jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior]={}
+                                            }else{
+                                                jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_inferior"]={};
+                                                jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_inferior"]=self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior;
+                                            }
+                                            
+                                            //jsonFormatToValuesDefault[self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna].rangoInferior=self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior;
+                                        }
+                                        if(self.mainRowsBodyTable[indice].bodyTable[idx].text=="1" && self.mainRowsBodyTable[indice].bodyTable[idx].rangoSuperior!=""){
+                                            jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_superior"]={};
+                                            jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_superior"]=self.mainRowsBodyTable[indice].bodyTable[idx].rangoSuperior;
+                                        }
+                                    }
+                                }
+                                //Se añade el json generado a una variable global para poder leerla a través de todo el código
+                                self.jsonToValuesDefault=jsonFormatToValuesDefault;
 
                             }else{
                                 self.showTableRows=1;
@@ -564,6 +613,8 @@
                                 if (!self.valoresCatalogoModified.hasOwnProperty(campoSelect.valorSelected)) {
                                     self.valoresCatalogoModified[campoSelect.valorSelected]=listaValoresCampoSelectBase[campoSelect.valorSelected];
                                 }
+
+                                
                                 self.bodyTableModified[i].valoresCatalogoModified=self.valoresCatalogoModified;
                                             
                             }
@@ -584,6 +635,10 @@
                                         }
                                     }
                                 }
+
+                                //Se establece nuevo atributo para deshabilitar todos los campos de rango inferior excepto el primero dentro de la fila
+
+                                self.bodyTableModified[i].deshabilitado='disabled';
 
                                 self.bodyTableModified[i].valoresRangoInferior=listaValoresRangoInferior;
                             }
@@ -612,6 +667,51 @@
                                         
                         }
                     }
+
+                    //Se habilita primer rango inferior y deshabilitando los restantes
+                    self.bodyTableModified[1].deshabilitado='';
+
+                    var jsonFormatToValuesDefault={};
+                    
+                    for (var indice = 0; indice < self.mainRowsBodyTable.length; indice++) {
+                        var columnaBaseTipo="";
+                        var keyRangoInferior="";
+                        for (var idx = 0; idx < self.mainRowsBodyTable[indice].bodyTable.length; idx++) {
+                            
+                            //Armando nuevo json para establecer valores default al aplicar evento change en campos
+                    
+                            if(self.mainRowsBodyTable[indice].bodyTable[idx].select=="1"){
+                                if(columnaBaseTipo==""){
+                                    var idValorSeleccionado=self.mainRowsBodyTable[indice].bodyTable[idx].valorSelected;
+                                    columnaBaseTipo=self.mainRowsBodyTable[indice].bodyTable[idx].valoresCatalogo[idValorSeleccionado];
+                                }
+
+                                if(!jsonFormatToValuesDefault.hasOwnProperty(columnaBaseTipo)){
+                                    jsonFormatToValuesDefault[columnaBaseTipo]={}
+                                }
+                                
+                            }
+                            if(self.mainRowsBodyTable[indice].bodyTable[idx].text=="1" && self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior!=""){
+                                if(keyRangoInferior==""){
+                                    keyRangoInferior=self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior;
+                                }
+                                if(!jsonFormatToValuesDefault[columnaBaseTipo].hasOwnProperty(keyRangoInferior)){
+                                    jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior]={}
+                                }else{
+                                    jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_inferior"]={};
+                                    jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_inferior"]=self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior;
+                                }
+                                
+                                //jsonFormatToValuesDefault[self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna].rangoInferior=self.mainRowsBodyTable[indice].bodyTable[idx].rangoInferior;
+                            }
+                            if(self.mainRowsBodyTable[indice].bodyTable[idx].text=="1" && self.mainRowsBodyTable[indice].bodyTable[idx].rangoSuperior!=""){
+                                jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_superior"]={};
+                                jsonFormatToValuesDefault[columnaBaseTipo][keyRangoInferior][self.mainRowsBodyTable[indice].bodyTable[idx].nombreColumna + "_superior"]=self.mainRowsBodyTable[indice].bodyTable[idx].rangoSuperior;
+                            }
+                        }
+                    }
+                    //Se añade el json generado a una variable global para poder leerla a través de todo el código
+                    self.jsonToValuesDefault=jsonFormatToValuesDefault;
                 
                 }else{
                     self.showTableRows=1;
@@ -1242,6 +1342,88 @@
     setValToInputHidden:function(e){
         var valor=$(e.currentTarget).val();
         $(e.currentTarget).siblings('input[type="hidden"]').val(valor);
+
+        //Manda a llamar función para establecer valores default
+        this.setDefaultValues(e);
+    },
+
+    setDefaultValues:function(e){
+
+        //Obteniendo json formateado para establecer valores default
+        console.log(this.jsonToValuesDefault);
+        //Se obtiene valor de la opción seleccionada para filtrar en el json que auxilia para establecer valores default
+        var valor_seleccionado="";
+        var valor_inferior="";
+        var elemento_disparador="";
+        //Si no se encuentra valor en el elemento previo (elemento de la izquierda), quiere decir que el evento viene disparado del select de Tipo Activo
+        //En otro caso, se asume que el evento se disparó desde el campo del rango inferior
+        if($(e.currentTarget).parent().prev().find('select').find('option:selected').text()==''){
+            elemento_disparador="select";
+            valor_seleccionado=$(e.currentTarget).find('option:selected').text();
+            valor_inferior=$(e.currentTarget).parent().next().find('option:selected').text();
+        }else{
+            //Entra condición, se obtiene elemento desde el campo de rango inferior
+            elemento_disparador="inferior";
+            valor_seleccionado=$(e.currentTarget).parent().prev().find('select').find('option:selected').text();
+            valor_inferior=$(e.currentTarget).find('option:selected').text();
+        }
+
+        var item_to_set=this.jsonToValuesDefault[valor_seleccionado][valor_inferior];
+
+        //Si se dispara desde select de Tipo Activo $(e.currentTarget).parent().next().find('select').select2('val','13')
+        //Obteniendo número de campos sobre los que se tiene que establecer valor
+        var numero_elementos=$(e.currentTarget).parent().siblings('td').length;
+
+        //Si el campo que dispara el evento es el campo del rango inferior, no se toma en cuenta el primer sibling (Tipo Activo)
+        if(elemento_disparador=='inferior'){
+            for (var index = 1; index < numero_elementos; index++) {
+                //Se obtiene el nombre de la columna
+                var nombre_columna=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).attr('data-columna');
+                //Se obtiene el campo para saber si el elemento pertenece a un rango inferior o superior
+                var inferiorSuperior=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0)[0].attributes['data-info'].value;
+                
+                for (const property in item_to_set) {
+                    var properties_split=property.split('_');
+                    if(properties_split.length >1){
+                        if(properties_split[0]==nombre_columna && properties_split[1]==inferiorSuperior){
+                            
+                            var valor_encontrado=item_to_set[property];
+                            //Estableiendo valor al input hidden
+                            $(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).val(valor_encontrado);
+                            //Estableciendo valor al select2
+                            $(e.currentTarget).parent().siblings('td').eq(index).children().eq(1).select2('val',valor_encontrado);
+
+                        }
+                    }
+                }
+            
+            }
+        }else{//La acción fue disparada a través de select de Tipo Activo
+            for (var index = 0; index < numero_elementos; index++) {
+                //Se obtiene el nombre de la columna
+                var nombre_columna=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).attr('data-columna');
+                //Se obtiene el campo para saber si el elemento pertenece a un rango inferior o superior
+                var inferiorSuperior=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0)[0].attributes['data-info'].value;
+                
+                for (const property in item_to_set) {
+                    var properties_split=property.split('_');
+                    if(properties_split.length >1){
+                        if(properties_split[0]==nombre_columna && properties_split[1]==inferiorSuperior){
+                            
+                            var valor_encontrado=item_to_set[property];
+                            //Estableiendo valor al input hidden
+                            $(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).val(valor_encontrado);
+                            //Estableciendo valor al select2
+                            $(e.currentTarget).parent().siblings('td').eq(index).children().eq(1).select2('val',valor_encontrado);
+                            //Estableciendo valor al select (no formateado por el plugin select2)
+                            $(e.currentTarget).parent().siblings('td').eq(index).children().eq(2).val(valor_encontrado);
+
+                        }
+                    }
+                }
+
+            }
+        }
 
     },
 
