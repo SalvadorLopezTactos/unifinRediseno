@@ -1177,7 +1177,7 @@ where rfc_c = '{$bean->rfc_c}' and
     public function RegistroAnalizate($bean = null, $event = null, $args = null)
     {
         //Crea nuevo bean Analizate (registro) y la relacion con acccounts (registro creado).
-        $url_portalFinanciera = '&UUID=' . $bean->id . '&RFC_CIEC=' . $bean->rfc_c;
+        $url_portalFinanciera = '&UUID=' . base64_encode($bean->id) . '&RFC_CIEC=' . base64_encode($bean->rfc_c);
         $relacion = BeanFactory::newBean('ANLZT_analizate');
         $relacion->anlzt_analizate_accountsaccounts_ida = $bean->id;
         $relacion->empresa = 1;

@@ -33,7 +33,7 @@
                     title: 'Generando descarga, por favor espere.',
                 });
                 //Peticion de servicio para obtener el documento con el id en url_documento
-                                
+
                 var host = App.config.analizate;
                 var direccion = host + archivo;
                 direccion = btoa(direccion);
@@ -71,6 +71,16 @@
     },
 
     ReenviaCorreo: function (empresa) {
+            //Valida que sea proveedor para reenviar
+            if (this.model.get('tipo_registro_cuenta_c') != "5" && !this.model.get('esproveedor_c')) {
+                app.alert.show('No Proveedor', {
+                    level: 'error',
+                    messages: 'Sólo se puede reenviar el correo a cuentas de tipo Proveedor.',
+                    autoClose: false
+                });
+                return;
+            }
+
             if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
                 app.alert.show('No Envio', {
                     level: 'error',
@@ -86,8 +96,8 @@
                 title: 'Cargando, por favor espere.',
             });
             //Se declaran variables para armar la url
-            var rfc = this.model.get('rfc_c');
-            var id = this.model.get('id');
+            var rfc = btoa(this.model.get('rfc_c'));
+            var id = btoa(this.model.get('id'));
             var link = '&UUID=' + id + '&RFC_CIEC=' + rfc;
 
             // FECHA ACTUAL
@@ -98,11 +108,11 @@
             var hour = today.getHours();
             var min = today.getMinutes();
             var secs = today.getSeconds();
-            var zona= new Date().getTimezoneOffset()/60;       
+            var zona= new Date().getTimezoneOffset()/60;
 
             if(mm<10) {
             mm = '0'+mm
-            }  
+            }
             if(dd<10) {
             dd = '0'+dd
             }
