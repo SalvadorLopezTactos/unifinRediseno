@@ -15,13 +15,13 @@ class NuevoPLD_Class
         * Tipo de cuenta = Todas
         */
       //$GLOBALS['log']->fatal("isUpdate->",$args['isUpdate']);
-      $GLOBALS['log']->fatal("isUpdate->",$bean->accounts_tct_pld);
+      //$GLOBALS['log']->fatal("isUpdate->",$bean->accounts_tct_pld);
       $productosPLD = $bean->accounts_tct_pld;
       $modulo = 'tct_PLD';
        
       if (empty($productosPLD['arrendamientoPuro']['id_pld'])) {
         //Inserta registro
-        $GLOBALS['log']->fatal("nuevo PLD");
+        //$GLOBALS['log']->fatal("nuevo PLD");
         $pldAP = BeanFactory::newBean($modulo);
       }else{
         //Actualiza registro
@@ -211,7 +211,7 @@ class NuevoPLD_Class
           $bean->load_relationship('accounts_tct_pld_1');
           $bean->accounts_tct_pld_1->add($pldCE->id);
         }
-        $productosPLD['creditoRevolvente']['id_pld'] = $pldCE->id;
+        //$productosPLD['creditoRevolvente']['id_pld'] = $pldCE->id;
         
         $GLOBALS['log']->fatal("terminoPLD");
         
