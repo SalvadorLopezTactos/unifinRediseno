@@ -175,8 +175,8 @@ class productosPLD_I_U extends SugarApi
             foreach ($relatedBeans as $value) {
                 $name_prod = $value->name;
                 $prod = $value->description;
-                $GLOBALS['log']->fatal("prod->",$value->name);
-                $GLOBALS['log']->fatal("prod->",$value->description);
+                //$GLOBALS['log']->fatal("prod->",$value->name);
+                //$GLOBALS['log']->fatal("prod->",$value->description);
                 
                 if($prod == ''){
                     switch ($name_prod) {
