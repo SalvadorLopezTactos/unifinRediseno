@@ -25,11 +25,14 @@ class analizate_hooks  {
             //$GLOBALS['log']->fatal('Envio de correo a' . $full_name . '');
             //$GLOBALS['log']->fatal('>>>>' . $url . '<<<<');
 
-            $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $full_name . '</b>
-      <br><br>Agradecemos de antemano su interés por colaborar con UNIFIN, para ello y como parte de nuestro proceso, le pedimos se complemente la información solicitada en el siguiente link.
-      <br><br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. $idCuenta. '&RFC_CIEC=' .$rfc.'">Da Click Aquí</a>
-      <br><br>Atentamente Unifin</font></p>
-      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+            $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b> Buenos días ' . $full_name . '</b>
+      <br><br>Como parte indispensable del proceso de alta de proveedor de UNIFIN FINANCIERA SAB DE CV, les solicitamos sean tan amables de proporcionar la información solicitada en el siguiente link:
+      <br><br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc).'">Da Click Aquí</a>
+      <br><br>Para cualquier comentario o duda favor de contactar al comprador de UNIFIN que los contacto.</font></p>
+      <br><br>Atentamente</font></p>
+      <br>Dirección de Compras</font></p>
+      <br>UNIFIN FINANCIERA, SA.B. DE C.V.</font></p>
+      <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
@@ -69,7 +72,7 @@ class analizate_hooks  {
 
             $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $full_name . '</b>
       <br><br>Se ha detectado un problema al realizar el resgistro con el portal Analízate. Le solicitamos ingrese de nuevo a través del siguiente enlace para llevar a cabo el registro nuevamente.
-      <br><br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. $idCuenta. '&RFC_CIEC=' .$rfc.'">Da Click Aquí</a>
+      <br><br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc).'">Da Click Aquí</a>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 
