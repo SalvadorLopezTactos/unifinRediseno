@@ -217,7 +217,7 @@ extendsFrom: 'RecordView',
 			}
 		}
 	},
- 
+
 	relacionesDuplicadas: function (fields, errors, callback){
 		console.log("relacionesDuplicadas");
 
@@ -573,7 +573,7 @@ extendsFrom: 'RecordView',
                                             for(var i=0;i<data.records.length;i++){
                                                 if(data.records[i].inactivo==true){
                                                     flag_inactivo++;
-                                                }   
+                                                }
                                             }
 
                                             if (data.records.length <= flag_inactivo) {
@@ -775,7 +775,7 @@ extendsFrom: 'RecordView',
 
     validaProveedorRecursos: function (fields, errors, callback){
         var RequeridosProvRec = "";
-        if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || 
+        if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') ||
             this.model.get('relaciones_activas').includes('Proveedor de Recursos CA') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CR') && this.model.get("relacion_c").trim()!= "") {
             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
                 success: _.bind(function (data) {
@@ -819,7 +819,7 @@ extendsFrom: 'RecordView',
                                             for(var i=0;i<data.records.length;i++){
                                                 if(data.records[i].inactivo==true){
                                                     flag_inactivo++;
-                                                }   
+                                                }
                                             }
                                             if (data.records.length <= flag_inactivo) {
                                                 RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
@@ -867,7 +867,7 @@ extendsFrom: 'RecordView',
                                             for(var i=0;i<data.records.length;i++){
                                                 if(data.records[i].inactivo==true){
                                                     flag_inactivo++;
-                                                }   
+                                                }
                                             }
                                             if (data.records.length <= flag_inactivo) {
                                                 RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
@@ -898,7 +898,7 @@ extendsFrom: 'RecordView',
 
     validaProveedorRecursoschange: function (){
         var RequeridosProvRec = "";
-        if ((this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || 
+        if ((this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') ||
             this.model.get('relaciones_activas').includes('Proveedor de Recursos CA') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CR')) && this.model.get("relacion_c").trim()!= "") {
 
             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
@@ -1277,6 +1277,10 @@ extendsFrom: 'RecordView',
             var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tel_telefonos_1")
             requestC.url = url.substring(4);
             requests.push(requestC);
+						var requestD = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tct_pld_1")
+            requestD.url = url.substring(4);
+            requests.push(requestD);
             var faltantes=[];
             var relacionesActivas=[];
             var self = this;
@@ -1417,7 +1421,7 @@ extendsFrom: 'RecordView',
                                   if (data[0].contents.nombre_comercial_c == "") {
                                       faltantes.push('Nombre Comercial');
                                   }
-                                }                                 
+                                }
                             }
                         }
                         //valida relación: Contacto
@@ -1441,7 +1445,7 @@ extendsFrom: 'RecordView',
                                   if (data[0].contents.nombre_comercial_c == "") {
                                       faltantes.push('Nombre Comercial');
                                   }
-                                }                                 
+                                }
                             }
                         }
                         //Valida Relación: Fiador
@@ -1760,7 +1764,7 @@ extendsFrom: 'RecordView',
 								if( (data[3].contents.records[t].description == 'CS' && productuser == '5') ||
 									(data[3].contents.records[t].description == 'CA' && productuser == '3') ||
 									(data[3].contents.records[t].description == 'FF' && productuser == '4') ||
-									(data[3].contents.records[t].description == 'AP' && productuser == '1') 
+									(data[3].contents.records[t].description == 'AP' && productuser == '1')
 								){
 									if (data[3].contents.records[t].tct_pld_campo2_ddw != '' ) {
 										terceros++;
@@ -1779,7 +1783,7 @@ extendsFrom: 'RecordView',
 								}
 								if (data[0].contents.apellidomaterno_c == "") {
 									faltantes.push('Apellido Materno');
-								} 								
+								}
 								if (data[0].contents.fechadenacimiento_c == "") {
 									faltantes.push('Fecha de Nacimiento');
 								}
@@ -1808,7 +1812,7 @@ extendsFrom: 'RecordView',
 									if (data[0].contents.profesion_c == "") {
 										faltantes.push('Profesión');
 									}
-								}else{									
+								}else{
 									//Pregunta por el telefono Trabajo
 									if (telO == 0) {
 										faltantes.push('Teléfono Casa o Trabajo');
@@ -1818,7 +1822,7 @@ extendsFrom: 'RecordView',
 									faltantes.push('PLD-¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?');
 								}
 								if(data[0].contents.ctpldfuncionespublicas_c == "1"){
-									if(data[0].contents.ctpldfuncionespublicascargo_c == "" ||data[0].contents.tct_dependencia_pf_c == "" 
+									if(data[0].contents.ctpldfuncionespublicascargo_c == "" ||data[0].contents.tct_dependencia_pf_c == ""
 									|| data[0].contents.tct_fecha_ini_pf_c == "" || data[0].contents.tct_fecha_fin_pf_c == ""){
 										faltantes.push("PLD Pep's Personal: ");
 									}
@@ -1836,8 +1840,8 @@ extendsFrom: 'RecordView',
 									}
 								}
 								if(data[0].contents.ctpldconyuge_c == "1"){
-									if (data[0].contents.ctpldconyugecargo_c == "" ||data[0].contents.tct_nombre_pf_peps_c == "" 
-									||data[0].contents.tct_cargo2_pf_c == "" ||data[0].contents.tct_dependencia2_pf_c == "" 
+									if (data[0].contents.ctpldconyugecargo_c == "" ||data[0].contents.tct_nombre_pf_peps_c == ""
+									||data[0].contents.tct_cargo2_pf_c == "" ||data[0].contents.tct_dependencia2_pf_c == ""
 									|| data[0].contents.tct_fecha_ini2_pf_c == "" || data[0].contents.tct_fecha_fin2_pf_c == ""){
 										faltantes.push("PLD Pep's Familiar: ");
 									}
@@ -1898,9 +1902,9 @@ extendsFrom: 'RecordView',
 									}
 								}
 								if(data[0].contents.ctpldaccionistasconyuge_c == "1"){
-									if (data[0].contents.tct_socio2_pm_c == "" || data[0].contents.tct_nombre_pm_c == "" 
-									|| data[0].contents.ctpldaccionistasconyugecargo_c == "" || data[0].contents.tct_cargo_pm_c == "" 
-									|| data[0].contents.tct_dependencia2_pm_c == "" || data[0].contents.tct_fecha_ini2_pm_c == "" 
+									if (data[0].contents.tct_socio2_pm_c == "" || data[0].contents.tct_nombre_pm_c == ""
+									|| data[0].contents.ctpldaccionistasconyugecargo_c == "" || data[0].contents.tct_cargo_pm_c == ""
+									|| data[0].contents.tct_dependencia2_pm_c == "" || data[0].contents.tct_fecha_ini2_pm_c == ""
 									|| data[0].contents.tct_fecha_fin2_pm_c == "") {
 										faltantes.push("PLD Pep's Familiar: ");
 									}
@@ -1909,13 +1913,13 @@ extendsFrom: 'RecordView',
 									}
 									if (data[0].contents.tct_nombre_pm_c == "") {
 										faltantes.push(" -Nombre de la persona que ocupa el puesto");
-									}									
+									}
 									if (data[0].contents.tct_cargo_pm_c == "") {
 										faltantes.push(" -Cargo público que tiene o tuvo");
 									}
 									if (data[0].contents.tct_dependencia2_pm_c == "") {
 										faltantes.push(" -Dependencia donde ejerce o ejerció el cargo");
-									}										
+									}
 									if (data[0].contents.tct_fecha_ini2_pm_c == "") {
 										faltantes.push(" -Fecha de inicio del cargo");
 									}
@@ -1938,10 +1942,10 @@ extendsFrom: 'RecordView',
 							}
 							if (data[0].contents.tct_pais_expide_rfc_c == "") {
 								faltantes.push('País que expide el RFC ');
-							}							
+							}
 							if (data[0].contents.ctpldnoseriefiel_c == "") {
 								faltantes.push('PLD-No serie FIEL');
-							}							
+							}
 							if ( recursos == 0) {
 								faltantes.push('PLD-¿Los recursos son propios o los recursos son de un tercero?');
 							}
@@ -1949,7 +1953,7 @@ extendsFrom: 'RecordView',
                         //Valida Relación: Tarjetahabiente
                         if (this.model.get('relaciones_activas').includes('Tarjetahabiente')){
 							relacionesActivas.push("Tarjetahabiente");
-						
+
 							if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
 									faltantes.push('Nombre');
@@ -1962,16 +1966,16 @@ extendsFrom: 'RecordView',
 								}
                                 if (data[0].contents.fechadenacimiento_c == "") {
 									faltantes.push('Fecha de Nacimiento');
-								}                             
+								}
 								if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
                                     faltantes.push('Nacionalidad');
                                 }
 								if (data[0].contents.rfc_c == "") {
                                     faltantes.push('RFC');
                                 }
-                              
+
 							}else{
-                                faltantes.push('Una persona moral no puede ser Tarjetahabiente'); 
+                                faltantes.push('Una persona moral no puede ser Tarjetahabiente');
                             }
                         }
                     }
@@ -2003,7 +2007,7 @@ extendsFrom: 'RecordView',
                        var Cuenta = this.model.get('account_id1_c');
                        var CuentaPadre=this.model.get('rel_relaciones_accounts_1accounts_ida');
                         //Validamos que se tenga alguna de las siguientes relaciones activas
-                    if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Propietario Real') || 
+                    if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Propietario Real') ||
                     this.model.get('relaciones_activas').includes('Proveedor de Recursos CS') ||  this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Obligado solidario')&& Cuenta != "") {
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
@@ -2027,7 +2031,7 @@ extendsFrom: 'RecordView',
                             var url = app.api.buildURL("Accounts/" + Cuenta);
                             requestE.url = url.substring(4);
                             requests.push(requestE);
-                           
+
                            app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                                success: _.bind(function (data) {
                                    //Variables para controlar las direcciones y telefonos
@@ -2037,7 +2041,7 @@ extendsFrom: 'RecordView',
 
                                    if (data[0].contents.records.length > 0){
                                     //Valida direcciones y teléfonos
-                                        
+
                                             for (var d = 0; d < data[1].contents.records.length; d++) {
                                             //Itera direccion Particular
                                                 if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
@@ -2108,7 +2112,7 @@ extendsFrom: 'RecordView',
                                                     }
                                                     if (data[4].contents.curp_c == "" || data[4].contents.curp_c == null) {
                                                         necesarios = necesarios + '<b>CURP</b><br>';
-                                                    } 
+                                                    }
                                                     if (data[4].contents.estado_nacimiento_c == "" || data[4].contents.estado_nacimiento_c == null || data[4].contents.estado_nacimiento_c == "1") {
                                                         necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                     }
@@ -2137,7 +2141,7 @@ extendsFrom: 'RecordView',
                                                             necesarios =  necesarios +'<br>'+"Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                         }
                                                     }
-                                                
+
                                                     //Sección PEPS Fisica Familiar
                                                     if (data[4].contents.ctpldconyuge_c == true) {
                                                         var banderaPEPSFamiliar="";
@@ -2167,8 +2171,8 @@ extendsFrom: 'RecordView',
                                                         }
                                                     }
                                             }
-                                            
-                                            
+
+
                                             //Preguntas PLD
                                             /*if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
@@ -2242,7 +2246,7 @@ extendsFrom: 'RecordView',
                                                     necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
                                                 }
                                             }
-                                           
+
                                         }
 
                                         if(this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Obligado solidario')){
@@ -2286,7 +2290,7 @@ extendsFrom: 'RecordView',
                                                 }
                                                 if (banderaPEPSMoralFamiliar!=""){
                                                     necesarios = necesarios +'<br>'+ "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
-                                                } 
+                                                }
                                             }
 
                                             //PEPS Moral Personal
@@ -2315,9 +2319,9 @@ extendsFrom: 'RecordView',
                                                 }
                                             }
                                         }
-                                        
-                                        
-                                            
+
+
+
                                             //Preguntas PLD
                                            /* if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records.tct_pld_campo4_ddw == "" || data[3].contents.records.tct_pld_campo4_ddw == null) {
@@ -2339,7 +2343,7 @@ extendsFrom: 'RecordView',
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD<br></b>';
                                                 }
                                             } */
-                                           
+
 
                                         }
                                             //Evalua si hay campos requeridos y muestra alerta
@@ -2356,13 +2360,13 @@ extendsFrom: 'RecordView',
                                    }
                                    callback(null, fields, errors);
                                }, this)
-                           }); 
+                           });
                 }else{
-                    callback(null, fields, errors);   
-                }                    
+                    callback(null, fields, errors);
+                }
         }else{
-         callback(null, fields, errors);   
-        }    
+         callback(null, fields, errors);
+        }
 },
 
 
