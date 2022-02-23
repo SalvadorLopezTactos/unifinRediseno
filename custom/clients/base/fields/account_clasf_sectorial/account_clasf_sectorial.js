@@ -20,7 +20,7 @@
 
         //Guarda valores en los campos de clasificacion sectorial
         this.model.addValidationTask('GuardaClasfSectorial', _.bind(this.SaveClasfSectorial, this));
-        this.model.on('sync', this.loadData, this);
+        //this.model.on('sync', this.loadData, this);
         clasf_sectorial.renderlista = 0;
         clasf_sectorial.check_uni2 = 0;
 

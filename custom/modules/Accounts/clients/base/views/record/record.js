@@ -211,6 +211,7 @@
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
         //this.model.on('sync', this.checkTelNorepeat, this);
+        //this.model.on('sync', this.CamposCstmLoad, this);
 
         /*
          @author Salvador Lopez
@@ -244,21 +245,11 @@
         //Oculta Botón Generar RFC
         this.model.on('sync', this.ocultaGeneraRFC, this);
 
-        //this.model.on('sync', this.get_phones, this);
+        
 
         //Recupera datos para custom fields
-
-        this.get_uni_productos();
-	    this.get_phones();
         this.get_addresses();
-        this.get_v360();
-
-        //this.get_Oproductos();
-        this.get_pld();
-        this.get_resumen();
-        this.get_analizate();
-
-        this.carga_condiciones();
+        this.CamposCstmLoad();
         //this.get_noviable();
 
 
@@ -315,7 +306,8 @@
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
-        this.model.on('sync',this.validaReqUniclickInfo,this);
+        //this.model.on('sync',this.validaReqUniclickInfo,this);
+        
     },
 
     /** Asignacion modal */
@@ -3390,7 +3382,7 @@
      * */
     setPhoneOffice: function () {
 
-        if (!_.isEmpty(this.oTelefonos.telefono)) {
+        if (!_.isEmpty(this.oTelefonos) && !_.isEmpty(this.oTelefonos.telefono)) {
             var telefono = this.oTelefonos.telefono;
             for (var i = 0; i < telefono.length; i++) {
                 if (telefono[i].principal) {
@@ -4875,113 +4867,7 @@
             });
     },
 
-    get_phones: function () {
-        //Extiende This
-        this.oTelefonos = [];
-        this.oTelefonos.telefono = [];
-        this.prev_oTelefonos = [];
-        this.prev_oTelefonos.prev_telefono = [];
-        //contexto_cuenta = this;
-        this.model.set('account_telefonos', this.oTelefonos.telefono);
-        //Recupera información
-        idCuenta = this.model.get('id');
-        try{
-        app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_tel_telefonos_1'), null, {
-            success: function (data) {
-                for (var i = 0; i < data.records.length; i++) {
-                    //Asignando valores de los campos
-                    var valor1 = data.records[i].tipotelefono;
-                    var valor2 = data.records[i].pais;
-                    var valor3 = data.records[i].estatus;
-                    var valor4 = data.records[i].telefono;
-                    var valor5 = data.records[i].extension;
-                    var valor6 = (data.records[i].principal == true) ? 1 : 0;
-                    var valor7 = (data.records[i].whatsapp_c == true) ? 1 : 0;
-                    var valor8 = (data.records[i].registro_reus_c == true) ? 1 : 0;
-                    if (valor8 == 1 && valor7 ==1){ valor7 = 0;}
-                    var idtel = data.records[i].id;
-					//Estatus Teléfono 06/01/2022 ECB
-					var valor9 = data.records[i].estatus_telefono_c;
-					var estatus = '';
-					var estatus1 = 0;
-					var estatus2 = 0;
-					var estatus3 = 0;
-					var c4 = 0;
-					if (valor9) {
-						var estatus_tel = JSON.parse(valor9);
-						if(estatus_tel[0].result == 0) {
-							estatus1 = 1;
-							estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
-						}
-						if(estatus_tel[0].result == 1) {
-							estatus2 = 1;
-							estatus = app.lang.getAppListStrings('estatus_telefono_list')[2] + ' (' + estatus_tel[0].Compania + ')';
-						}
-						if(estatus_tel[0].result == 2) {
-							estatus3 = 1;
-							estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
-						}
-						if(estatus_tel[0].Estatus_reporte) {
-							if(estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') c4 = 1;
-						}
-					}
-					else { 
-						estatus1 = 1;
-						estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
-					}
-                    var telefono = {
-                        "name": valor4,
-                        "tipotelefono": valor1,
-                        "pais": valor2,
-                        "estatus": valor3,
-                        "extension": valor5,
-                        "telefono": valor4,
-                        "principal": valor6,
-                        "whatsapp_c": valor7,
-                        "id_cuenta": idCuenta,
-                        "id": idtel,
-                        "reus": valor8,
-						"estatus1": estatus1,
-						"estatus2": estatus2,
-						"estatus3": estatus3,
-						"estatus_tel": estatus,
-						"c4": c4
-                    };
-                    var prev_telefono = {
-                        "name": valor4,
-                        "tipotelefono": valor1,
-                        "pais": valor2,
-                        "estatus": valor3,
-                        "extension": valor5,
-                        "telefono": valor4,
-                        "principal": valor6,
-                        "whatsapp_c": valor7,
-                        "id_cuenta": idCuenta,
-                        "id": idtel,
-                        "reus": valor8,
-						"estatus1": estatus1,
-						"estatus2": estatus2,
-						"estatus3": estatus3,
-						"estatus_tel": estatus,
-						"c4": c4
-                    };
-                    contexto_cuenta.oTelefonos.telefono.push(telefono);
-                    contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);
-                }
-                cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
-                cont_tel.render();
-                //Oculta campo Accounts_telefonosV2
-                $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
-            },
-            error: function (e) {
-                console.log(e);
-                throw e;
-            }
-        });
-        } catch (err) {
-            console.log(err.message);
-        }
-    },
+    
 
     get_addresses: function () {
         //Extiende This
@@ -5147,213 +5033,6 @@
         }
     },
 
-    get_v360: function () {
-        //Extiende This
-        this.ResumenCliente = [];
-        //contexto_cuenta = this;
-
-        //Recupera id de cliente
-        var id = this.model.id;
-
-        //Forma Petición de datos
-        if (id != '' && id != undefined && id != null) {
-            //Ejecuta petición ResumenCliente
-            var url = app.api.buildURL('ResumenCliente/' + id, null, null);
-            app.api.call('GET', url, {}, {
-                success: _.bind(function (data) {
-                    v360.ResumenCliente = data;
-                    //Oproductos=data;
-                    //_.extend(this, v360.ResumenCliente);
-                    v360.render();
-                }, contexto_cuenta)
-            });
-        }
-    },
-
-    get_Oproductos: function () {
-        //Extiende This
-        this.productos = [];
-        //Oproductos = [];
-        //contexto_cuenta = this;
-
-        //Recupera id de cliente
-        var id = this.model.id;
-
-        //Forma Petición de datos
-        if (id != '' && id != undefined && id != null) {
-            //Ejecuta petición ResumenCliente
-            /*
-            var url = app.api.buildURL('tct02_Resumen/' + id, null, null);
-            app.api.call('read', url, {}, {
-                success: _.bind(function (data) {
-                    Oproductos.productos = data;
-                    //contexto_cuenta.hideButton_Conversion();
-                    //_.extend(this, v360.ResumenCliente);
-                    Oproductos.render();
-                }, contexto_cuenta)
-            });
-            */
-            cont_uni_p = this;
-            this.Productos = [];
-            //Recupera información
-            var idCuenta = this.model.get('id');
-            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
-                success: function (data) {
-                    Productos = data;
-                    _.each(Productos, function (value, key) {
-                        var tipoProducto = Productos[key].tipo_producto;
-                        switch (tipoProducto) {
-                            case "1": //Leasing
-                                Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_cuenta'];
-                                Oproductos.productos.tct_subtipo_l_txf_c = Productos[key]['subtipo_cuenta'];
-                                break;
-                            case "3": //Credito-auto
-                                Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_cuenta'];
-                                Oproductos.productos.tct_subtipo_ca_txf_c = Productos[key]['subtipo_cuenta'];
-                                break;
-                            case "4": //Factoraje
-                                Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_cuenta'];
-                                Oproductos.productos.tct_subtipo_f_txf_c = Productos[key]['subtipo_cuenta'];
-                                break;
-                            case "6": //Fleet
-                                Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_cuenta'];
-                                Oproductos.productos.tct_subtipo_fl_txf_c = Productos[key]['subtipo_cuenta'];
-                                break;
-                            case "8": //Uniclick
-                                Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
-                                Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
-                                break;
-                            case "9": //Unilease
-                                Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
-                                Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
-                                break;
-                            case "10": //Seguros
-                                Oproductos.productos.tct_tipo_cuenta_se_c = Productos[key]['tipo_cuenta'];
-                                Oproductos.productos.tct_subtipo_se_txf_c = Productos[key]['subtipo_cuenta'];
-                                break;
-                            default:
-                                break;
-                        }
-                    });
-                    Oproductos.render();
-                },
-                error: function (e) {
-                    throw e;
-                }
-            });
-        }
-        //Oproductos.render();
-        //this.cuenta_productos.render();
-    },
-
-    get_resumen: function () {
-		//Extiende This
-        this.autos = [];
-        this.prev_autos = [];
-        //Recupera id de cliente
-        var id = this.model.id;
-        //Forma Petición de datos
-        if (id != '' && id != undefined && id != null) {
-            //Ejecuta petición ResumenCliente
-            var campos = ["tct_no_autos_u_int_c", "tct_no_autos_e_int_c", "tct_no_motos_int_c", "tct_no_camiones_int_c"];
-            var url = app.api.buildURL('tct02_Resumen/' + id, null, null, { fields: campos.join(',') });
-            app.api.call('read', url, {}, {
-                success: _.bind(function (data) {
-                    Pautos.autos = data;
-                    Pautos.prev_autos = app.utils.deepCopy(Pautos.autos);
-                    //contexto_cuenta.hideButton_Conversion();
-                    //_.extend(this, v360.ResumenCliente);
-                    Pautos.render();
-                }, contexto_cuenta)
-            });
-        }
-    },
-
-    get_pld: function () {
-        //Extiende This
-        this.ProductosPLD = [];
-        this.prev_ProductosPLD = [];
-        //Recupera id Cuenta
-        var idCuenta = this.model.get('id');
-        //Recupera información de PLD
-        if (idCuenta) {
-            app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
-                success: _.bind(function (data) {
-                    //Recupera resultado
-                    contexto_cuenta.ProductosPLD = pld.formatDetailPLD(data);
-                    //Establece visibilidad por tipo de productos
-                    //AP
-                    if (App.user.attributes.tipodeproducto_c == '1') {
-                        contexto_cuenta.ProductosPLD.arrendamientoPuro.visible = 'block';
-                    }
-                    //FF
-                    if (App.user.attributes.tipodeproducto_c == '4') {
-                        contexto_cuenta.ProductosPLD.factorajeFinanciero.visible = 'block';
-                    }
-                    //CA
-                    if (App.user.attributes.tipodeproducto_c == '3') {
-                        contexto_cuenta.ProductosPLD.creditoAutomotriz.visible = 'block';
-                    }
-                    //Genera objeto con valores previos para control de cancelar
-                    contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);
-                    pld.ProductosPLD = contexto_cuenta.ProductosPLD;
-
-                    //Aplica render a campo custom
-                    pld.render();
-
-                }, contexto_cuenta),
-                error: function (e) {
-                    throw e;
-                }
-            });
-        }
-    },
-
-     //Carga Condiciones
-     carga_condiciones: function () {
-
-        var filter_arguments =
-        {
-            max_num:-1,
-            "fields": [
-                "id",
-                "condicion",
-                "razon",
-                "motivo",
-                "detalle",
-                "responsable1",
-                "responsable2",
-                "bloquea",
-                "notifica",
-            ],
-        };
-        filter_arguments["filter"] = [
-            {
-                "$or":[
-                    {
-                       "condicion":"4"
-                    },
-                    {
-                       "condicion":"5"
-                    }
-                ]
-            }
-        ];
-        this.datacondiciones = [];
-        var url = app.api.buildURL('tct4_Condiciones/', null);
-        //app.api.call('read',url, null, {
-        app.api.call("read", app.api.buildURL("tct4_Condiciones", null, null, filter_arguments), null, {
-            success: _.bind(function (data) {
-				if(data.records.length > 0) {
-					contexto_cuenta.datacondiciones = data;
-                    this.datacondiciones = data;
-				}
-			}, this),
-            error: function (e) {
-                throw e;
-            }
-		});
-	},
 
     setCustomFields: function (fields, errors, callback) {
         if ($.isEmptyObject(errors)) {
@@ -5392,14 +5071,10 @@
                 }
                 //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
                 //location.reload();
-                this.get_uni_productos();
-                this.get_phones();
                 this.get_addresses();
-                this.get_pld();
-                /************************************/
-                this.get_resumen();
-                this.get_v360();
-                this.get_Oproductos();
+                this.CamposCstmLoad();
+                /************************************/                
+                
                 /***********************************/
             }, this);
 
@@ -5804,125 +5479,8 @@
     //     }
     // },
 
-    get_analizate: function () {
-        //Extiende This
-        this.Financiera = [];
-        this.Credit = [];
-        //this.Credit = [];
-        var id = this.model.id;
-        //Forma Petición de datos
-        if (id != '' && id != undefined && id != null) {
-            //Ejecuta petición ResumenCliente
 
-            var url = app.api.buildURL('ObtieneFinanciera/' + id, null, null);
-            app.api.call('read', url, {}, {
-                success: _.bind(function (data) {
-                    cont_nlzt.Financiera = data['Financiera'];
-                    cont_nlzt.Credit = data['Credit'];
-                    cont_nlzt.render();
-                }, contexto_cuenta)
-            });
-        }
-    },
-
-    get_uni_productos: function () {
-        //Extiende This
-        cont_uni_p = this;
-        Productos = [];
-        //Facha Actual
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        if (dd < 10) { dd = '0' + dd }
-        if (mm < 10) { mm = '0' + mm }
-        today = yyyy + '-' + mm + '-' + dd;
-        //Recupera información
-        var idCuenta = this.model.get('id');
-        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
-            success: function (data) {
-                Productos = data;
-                ResumenProductos = [];
-                _.each(Productos, function (value, key) {
-                    var tipoProducto = Productos[key].tipo_producto;
-                    var fechaAsignacion = Productos[key].fecha_asignacion_c;
-                    var fecha1 = moment(today);
-                    var fecha2 = moment(fechaAsignacion);
-                    Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
-                    Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
-                    Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
-                    Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
-                    Productos[key]['notificacion_noviable_c'] = (Productos[key]['notificacion_noviable_c'] == "1") ? true : false;
-                    Productos[key]['reactivacion_c'] = (Productos[key]['reactivacion_c'] == "1") ? true : false;
-                    Productos[key]['razon_c'] = (Productos[key]['razon_c'] == null) ? "" : Productos[key]['razon_c'];
-                    Productos[key]['motivo_c'] = (Productos[key]['motivo_c'] == null) ? "" : Productos[key]['motivo_c'];
-                    Productos[key]['aprueba1_c'] = (Productos[key]['aprueba1_c'] == "1") ? true : false;
-                    Productos[key]['aprueba2_c'] = (Productos[key]['aprueba2_c'] == "1") ? true : false;
-
-                    switch (tipoProducto) {
-                        case "1": //Leasing
-                            var dias = fecha1.diff(fecha2, 'days');
-                            Productos[key]['dias'] = dias;
-                            ResumenProductos['leasing'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_l_txf_c = Productos[key]['subtipo_cuenta'];
-                            break;
-                        case "3": //Credito-auto
-                            var dias = fecha1.diff(fecha2, 'days');
-                            Productos[key]['dias'] = dias;
-                            ResumenProductos['credito_auto'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_ca_txf_c = Productos[key]['subtipo_cuenta'];
-                            break;
-                        case "4": //Factoraje
-                            var dias = fecha1.diff(fecha2, 'days');
-                            Productos[key]['dias'] = dias;
-                            ResumenProductos['factoring'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_f_txf_c = Productos[key]['subtipo_cuenta'];
-                            break;
-                        case "6": //Fleet
-                            var dias = fecha1.diff(fecha2, 'days');
-                            Productos[key]['dias'] = dias;
-                            ResumenProductos['fleet'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_fl_txf_c = Productos[key]['subtipo_cuenta'];
-                            break;
-                        case "8": //Uniclick
-                            var dias = fecha1.diff(fecha2, 'days');
-                            Productos[key]['dias'] = dias;
-                            ResumenProductos['uniclick'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
-                            break;
-                        case "9": //Unilease
-                            var dias = fecha1.diff(fecha2, 'days');
-                            Productos[key]['dias'] = dias;
-                            ResumenProductos['unilease'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
-                            break;
-                        case "10": //Seguros
-                            var dias = fecha1.diff(fecha2, 'days');
-                            Productos[key]['dias'] = dias;
-                            ResumenProductos['seguros'] = Productos[key];
-                            Oproductos.productos.tct_tipo_cuenta_se_c = Productos[key]['tipo_cuenta'];
-                            Oproductos.productos.tct_subtipo_se_txf_c = Productos[key]['subtipo_cuenta'];
-                            break;
-                        default:
-                            break;
-                    }
-                });
-                cont_uni_p['ResumenProductos'] = ResumenProductos;
-				contexto_cuenta['ResumenProductos'] = ResumenProductos;
-                cont_uni_p.render();
-                Oproductos.render();
-            },
-            error: function (e) {
-                throw e;
-            }
-        });
-    },
+    
 
     /*************************************************REQUERIDOS NO VIABLE POR UNI PRODUCTOS******************************************/
 
@@ -8201,7 +7759,432 @@ validaReqUniclickInfo: function () {
     }   
 },
 
+        CamposCstmLoad: function () {
 
+            var requests=[];
+            var request={};
+            var Cuenta = this.model.get('id');
+            //Obtenemos las peticiones de los campos cstm: telefonos 0
+            var requestA = app.utils.deepCopy(request);
+            var url = app.api.buildURL('Accounts/' + Cuenta + '/link/accounts_tel_telefonos_1');
+            requestA.url = url.substring(4);
+            requests.push(requestA);
+            //Obtenemos peticion para la cuenta y traer campos para Cuenta 1
+            var requestH = app.utils.deepCopy(request);
+            var campos="actividadeconomica_c,subsectoreconomico_c,sectoreconomico_c,tct_macro_sector_ddw_c";
+            var url = app.api.buildURL('Accounts/' + Cuenta+'?fields='+campos);
+            requestH.url = url.substring(4);
+            requests.push(requestH);
+            //Obtenemos las peticiones de los campos cstm: Clasificacion Sectorial y V360 2
+            var requestC = app.utils.deepCopy(request);
+            var url = app.api.buildURL('ResumenCliente/' + Cuenta);
+            requestC.url = url.substring(4);
+            requests.push(requestC);
+            //Obtenemos las peticiones de los campos cstm: Pipeline y productos (cont_uni_p) 3
+            var requestD = app.utils.deepCopy(request);
+            var url = app.api.buildURL('GetProductosCuentas/' + Cuenta);
+            requestD.url = url.substring(4);
+            requests.push(requestD);
+            //Obtenemos las peticiones de los campos cstm: Analizate 4
+            var requestE = app.utils.deepCopy(request);
+            var url = app.api.buildURL('ObtieneFinanciera/' + Cuenta);
+            requestE.url = url.substring(4);
+            requests.push(requestE);
+            //Obtenemos las peticiones de los campos cstm: PLD 5
+            var requestF = app.utils.deepCopy(request);
+            var url = app.api.buildURL('GetProductosPLD/' + Cuenta);
+            requestF.url = url.substring(4);
+            requests.push(requestF);
+            //Obtenemos las peticiones de los campos cstm: Pautos 6
+            var requestG = app.utils.deepCopy(request);
+            var campos = "tct_no_autos_u_int_c, tct_no_autos_e_int_c, tct_no_motos_int_c, tct_no_camiones_int_c";
+            var url = app.api.buildURL('tct02_Resumen/' + Cuenta+'?fields='+campos);
+            requestG.url = url.substring(4);
+            requests.push(requestG);
+            //Obtenemos peticion para la cuenta y traer campos para condiciones 7
+            var filter_arguments =
+            {
+                max_num:-1,
+                "fields": [
+                    "id",
+                    "condicion",
+                    "razon",
+                    "motivo",
+                    "detalle",
+                    "responsable1",
+                    "responsable2",
+                    "bloquea",
+                    "notifica",
+                ],
+            };
+            filter_arguments["filter"] = [
+                {
+                    "$or":[
+                        {
+                        "condicion":"4"
+                        },
+                        {
+                        "condicion":"5"
+                        }
+                    ]
+                }
+            ];
+            var requestI = app.utils.deepCopy(request);
+            var url = app.api.buildURL("tct4_Condiciones", null, null, filter_arguments);
+            requestI.url = url.substring(4);
+            requests.push(requestI);
+            //Obtenemos las peticiones de los campos cstm: Direcciones SN
+            /*var requestB = app.utils.deepCopy(request);
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_dire_direccion_1");
+            requestB.url = url.substring(4);
+            requests.push(requestB);*/
+
+
+        app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
+            success: _.bind(function (data) {
+                //Validaciones para Telefonos
+                if (data[0].contents.records.length > 0){
+                        //Extiende This
+                        this.oTelefonos = [];
+                        this.oTelefonos.telefono = [];
+                        this.prev_oTelefonos = [];
+                        this.prev_oTelefonos.prev_telefono = [];
+                        //contexto_cuenta = this;
+                        this.model.set('account_telefonos', this.oTelefonos.telefono);
+                        //Recupera información
+                        idCuenta = this.model.get('id');
+                    for (var i = 0; i < data[0].contents.records.length; i++) {
+                            //Asignando valores de los campos
+                            var valor1 = data[0].contents.records[i].tipotelefono;
+                            var valor2 = data[0].contents.records[i].pais;
+                            var valor3 = data[0].contents.records[i].estatus;
+                            var valor4 = data[0].contents.records[i].telefono;
+                            var valor5 = data[0].contents.records[i].extension;
+                            var valor6 = (data[0].contents.records[i].principal == true) ? 1 : 0;
+                            var valor7 = (data[0].contents.records[i].whatsapp_c == true) ? 1 : 0;
+                            var valor8 = (data[0].contents.records[i].registro_reus_c == true) ? 1 : 0;
+                            if (valor8 == 1 && valor7 ==1){ valor7 = 0;}
+                            var idtel = data[0].contents.records[i].id;
+                            //Estatus Teléfono 06/01/2022 ECB
+                            var valor9 = data[0].contents.records[i].estatus_telefono_c;
+                            var estatus = '';
+                            var estatus1 = 0;
+                            var estatus2 = 0;
+                            var estatus3 = 0;
+                            var c4 = 0;
+                            if (valor9) {
+                                var estatus_tel = JSON.parse(valor9);
+                                if(estatus_tel[0].result == 0) {
+                                    estatus1 = 1;
+                                    estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+                                }
+                                if(estatus_tel[0].result == 1) {
+                                    estatus2 = 1;
+                                    estatus = app.lang.getAppListStrings('estatus_telefono_list')[2] + ' (' + estatus_tel[0].Compania + ')';
+                                }
+                                if(estatus_tel[0].result == 2) {
+                                    estatus3 = 1;
+                                    estatus = app.lang.getAppListStrings('estatus_telefono_list')[3];
+                                }
+                                if(estatus_tel[0].Estatus_reporte) {
+                                    if(estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') c4 = 1;
+                                }
+                            }
+                            else { 
+                                estatus1 = 1;
+                                estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
+                            }
+                            var telefono = {
+                                "name": valor4,
+                                "tipotelefono": valor1,
+                                "pais": valor2,
+                                "estatus": valor3,
+                                "extension": valor5,
+                                "telefono": valor4,
+                                "principal": valor6,
+                                "whatsapp_c": valor7,
+                                "id_cuenta": idCuenta,
+                                "id": idtel,
+                                "reus": valor8,
+                                "estatus1": estatus1,
+                                "estatus2": estatus2,
+                                "estatus3": estatus3,
+                                "estatus_tel": estatus,
+                                "c4": c4
+                            };
+                            var prev_telefono = {
+                                "name": valor4,
+                                "tipotelefono": valor1,
+                                "pais": valor2,
+                                "estatus": valor3,
+                                "extension": valor5,
+                                "telefono": valor4,
+                                "principal": valor6,
+                                "whatsapp_c": valor7,
+                                "id_cuenta": idCuenta,
+                                "id": idtel,
+                                "reus": valor8,
+                                "estatus1": estatus1,
+                                "estatus2": estatus2,
+                                "estatus3": estatus3,
+                                "estatus_tel": estatus,
+                                "c4": c4
+                            };
+                            contexto_cuenta.oTelefonos.telefono.push(telefono);
+                            contexto_cuenta.prev_oTelefonos.prev_telefono.push(prev_telefono);
+                        }
+                        cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
+                        cont_tel.render();
+                        //Oculta campo Accounts_telefonosV2
+                        $("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
+                }
+                //Cuenta
+                if(data[1].contents!=""){
+                    var campo1=data[1].contents.actividadeconomica_c;
+                    var campo2=data[1].contents.subsectoreconomico_c;
+                    var campo3=data[1].contents.sectoreconomico_c;
+                    var campo4=data[1].contents.tct_macro_sector_ddw_c;
+                }
+                //Validaciones para Clasificacion Sectorial y V360
+                if (data[2].contents!=""){
+                    //Extiende This
+                    v360.ResumenCliente = [];
+                    v360.ResumenCliente=data[2].contents;
+                    v360.render();
+                    //Etiquetas del campo custom Clasificacion Sectorial
+                    clasf_sectorial.ActividadEconomica = {
+                        // 'combinaciones': '',
+                        'ae': {
+                            'id': '',
+                        },
+                        'sse': {
+                            'id': '',
+                        },
+                        'se': {
+                            'id': '',
+                        },
+                        'ms': {
+                            'id': '',
+                        },
+                        'inegi_clase': '',
+                        'inegi_subrama': '',
+                        'inegi_rama': '',
+                        'inegi_subsector': '',
+                        'inegi_sector': '',
+                        'inegi_macro': '',
+                        'label_subsector': '',
+                        'label_sector': '',
+                        'label_macro': '',
+                        'label_clase': '',
+                        'label_subrama': '',
+                        'label_rama': '',
+                        'label_isubsector': '',
+                        'label_isector': '',
+                        'label_imacro': '',
+                        'label_div': '',
+                        'label_grp': '',
+                        'label_cls': ''
+                    };
+                    clasf_sectorial.prevActEconomica = {
+                        // 'combinaciones': '',
+                        'ae': {
+                            'id': '',
+                        },
+                        'sse': {
+                            'id': '',
+                        },
+                        'se': {
+                            'id': '',
+                        },
+                        'ms': {
+                            'id': '',
+                        },
+                        'inegi_clase': '',
+                        'inegi_subrama': '',
+                        'inegi_rama': '',
+                        'inegi_subsector': '',
+                        'inegi_sector': '',
+                        'inegi_macro': '',
+                        'label_subsector': '',
+                        'label_sector': '',
+                        'label_macro': '',
+                        'label_clase': '',
+                        'label_subrama': '',
+                        'label_rama': '',
+                        'label_isubsector': '',
+                        'label_isector': '',
+                        'label_imacro': '',
+                        'label_div': '',
+                        'label_grp': '',
+                        'label_cls': ''         
+                    };
+                    clasf_sectorial.ResumenCliente=data[2].contents;
+                    clasf_sectorial.ActividadEconomica.ae.id = campo1;
+                    clasf_sectorial.ActividadEconomica.sse.id = campo2;
+                    clasf_sectorial.ActividadEconomica.se.id = campo3;
+                    clasf_sectorial.ActividadEconomica.ms.id = campo4;
+                    clasf_sectorial['prevActEconomica'] = app.utils.deepCopy(clasf_sectorial.ActividadEconomica);
+                    clasf_sectorial.ActividadEconomica.label_div = app.lang.getAppListStrings('pb_division_list')[clasf_sectorial.ResumenCliente.pb.pb_division];
+                    clasf_sectorial.ActividadEconomica.label_grp = app.lang.getAppListStrings('pb_grupo_list')[clasf_sectorial.ResumenCliente.pb.pb_grupo];
+                    clasf_sectorial.ActividadEconomica.label_cls = app.lang.getAppListStrings('pb_clase_list')[clasf_sectorial.ResumenCliente.pb.pb_clase];
+                    clasf_sectorial.check_uni2 = clasf_sectorial.ResumenCliente.inegi.inegi_acualiza_uni2;
+                    _.extend(this, clasf_sectorial.ResumenCliente);
+                    clasf_sectorial.render();
+
+                }
+                //Productos y pipeline
+                if(data[3].contents!=""){
+                        Productos = [];
+                        //Facha Actual
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth() + 1;
+                        var yyyy = today.getFullYear();
+                        if (dd < 10) { dd = '0' + dd }
+                        if (mm < 10) { mm = '0' + mm }
+                        today = yyyy + '-' + mm + '-' + dd;
+                        Productos = data[3].contents;
+                        ResumenProductos = [];
+                        _.each(Productos, function (value, key) {
+                            var tipoProducto = Productos[key].tipo_producto;
+                            var fechaAsignacion = Productos[key].fecha_asignacion_c;
+                            var fecha1 = moment(today);
+                            var fecha2 = moment(fechaAsignacion);
+                            Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
+                            Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
+                            Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
+                            Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
+                            Productos[key]['notificacion_noviable_c'] = (Productos[key]['notificacion_noviable_c'] == "1") ? true : false;
+                            Productos[key]['reactivacion_c'] = (Productos[key]['reactivacion_c'] == "1") ? true : false;
+                            Productos[key]['razon_c'] = (Productos[key]['razon_c'] == null) ? "" : Productos[key]['razon_c'];
+                            Productos[key]['motivo_c'] = (Productos[key]['motivo_c'] == null) ? "" : Productos[key]['motivo_c'];
+                            Productos[key]['aprueba1_c'] = (Productos[key]['aprueba1_c'] == "1") ? true : false;
+                            Productos[key]['aprueba2_c'] = (Productos[key]['aprueba2_c'] == "1") ? true : false;
+
+                            switch (tipoProducto) {
+                                case "1": //Leasing
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['leasing'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_l_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
+                                case "3": //Credito-auto
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['credito_auto'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_ca_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
+                                case "4": //Factoraje
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['factoring'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_f_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
+                                case "6": //Fleet
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['fleet'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_fl_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
+                                case "8": //Uniclick
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['uniclick'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
+                                case "9": //Unilease
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['unilease'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
+                                case "10": //Seguros
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['seguros'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_se_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_se_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+                        cont_uni_p['ResumenProductos'] = ResumenProductos;
+                        contexto_cuenta['ResumenProductos'] = ResumenProductos;
+                        cont_uni_p.render();
+                        Oproductos.render();
+
+                        //Limpia pipeline
+                        pipeacc.render();
+                        //Ejecuta funcion para actualizar pipeline
+                        pipeacc.tipoSubtipo_vista();
+
+                }
+                //ANALIZATE
+                if(data[4].contents!=""){
+                    cont_nlzt.Analizate=[];
+                    cont_nlzt.Analizate.Financiera=[];
+                    cont_nlzt.Analizate.Credit=[];
+                    cont_nlzt.Analizate.Financiera = data[4].contents.Financiera;
+                    cont_nlzt.Analizate.Credit = data[4].contents.Credit;
+                    cont_nlzt.render();
+
+                }
+                //PLD
+                if(data[5].contents!=""){
+                    //Recupera resultado
+                    contexto_cuenta.ProductosPLD = pld.formatDetailPLD(data[5].contents);
+                    //Establece visibilidad por tipo de productos
+                    //AP
+                    if (App.user.attributes.tipodeproducto_c == '1') {
+                        contexto_cuenta.ProductosPLD.arrendamientoPuro.visible = 'block';
+                    }
+                    //FF
+                    if (App.user.attributes.tipodeproducto_c == '4') {
+                        contexto_cuenta.ProductosPLD.factorajeFinanciero.visible = 'block';
+                    }
+                    //CA
+                    if (App.user.attributes.tipodeproducto_c == '3') {
+                        contexto_cuenta.ProductosPLD.creditoAutomotriz.visible = 'block';
+                    }
+                    //Genera objeto con valores previos para control de cancelar
+                    contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);
+                    pld.ProductosPLD = contexto_cuenta.ProductosPLD;
+
+                    //Aplica render a campo custom
+                    pld.render();
+
+                }
+                //Pautos
+                if(data[6].contents!=""){
+                    contexto_cuenta.Pautos=[];
+                    contexto_cuenta.Pautos.autos=[];
+                    contexto_cuenta.Pautos.autos = data[6].contents;
+                    contexto_cuenta.Pautos.prev_autos = app.utils.deepCopy(Pautos.autos);
+                    Pautos.render();
+                }
+                
+                //Condiciones
+                if (data[7].contents!=""){
+                    this.datacondiciones = [];
+                    if(data[7].contents.records.length > 0) {
+                contexto_cuenta.datacondiciones = data;
+                this.datacondiciones = data;
+            }
+                }
+                //Final de funcion, mandamos ejecutar funcion de requniclick
+                this.validaReqUniclickInfo();
+
+            }, this)
+        });
+
+        },
 
 
 
