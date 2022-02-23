@@ -214,7 +214,7 @@
 
     _render: function () {
         this._super("_render");
-        this.obtieneCondicionesFinancieras();
+		if (window.render != 1) this.obtieneCondicionesFinancieras();
         this.model.on("change:plazo_c", _.bind(function () {
             this.obtieneCondicionesFinancieras();
         }, this));
@@ -236,7 +236,6 @@
                 this.model.set('f_aforo_c', '0.000000');
             }
         }, this));
-
         //* Quitamos los campos Vendedor y Comisión
         this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
         this.$('div[data-name=comision_c]').hide();
@@ -260,7 +259,6 @@
                 this.$('div[data-name=sub_activo_2_c]').hide();
                 this.$('div[data-name=sub_activo_3_c]').hide();
             }
-
             this.obtieneCondicionesFinancieras();
             this.verificaOperacionProspecto();
         }, this));
@@ -435,6 +433,8 @@
             $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
             $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
         }
+		this.$('[data-name="condiciones_financieras_quantico"]').hide();
+		$('[data-name="condiciones_financieras_quantico"]').hide();
     },
 
     adminUserCartera: function () {
@@ -939,7 +939,7 @@
     },
 
     _ActualizaEtiquetas: function () {
-        self.model.set('negocio_c', '0');
+        //self.model.set('negocio_c', '0');
         if (this.model.get('tipo_producto_c') == '4') {
             this.$("div.record-label[data-name='plazo_c']").text("Plazo máximo en d\u00EDas");
             this.$("div.record-label[data-name='porcentaje_ca_c']").text("Comisi\u00F3n");
@@ -1446,7 +1446,7 @@
         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
         $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
         $('div[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
-
+		$('[data-name="condiciones_financieras_quantico"]').remove();
     },
 
     /*
@@ -2323,12 +2323,11 @@
     },
 
     Updt_OptionProdFinan: function () {
-        self.model.set('producto_financiero_c', '0');
+		this.model.set('producto_financiero_c', '0');
         /** Recuperamos los productos financieros activo**/
-        if (this.model.get('tipo_producto_c') != "" && this.model.get('negocio_c') != "") {
+		if (this.model.get('tipo_producto_c') != "" && this.model.get('negocio_c') != "") {
             var tipo_producto = this.model.get('tipo_producto_c');
             var tipo_negocio = this.model.get('negocio_c');
-
             app.api.call("read", app.api.buildURL("GetProductosFinancieros/" + tipo_producto, null, null, {}), null, {
                 success: _.bind(function (data) {
                     var temp_array = [];
@@ -2344,21 +2343,22 @@
                                 delete optionsProdFinan[key];
                             }
                         });
-                        self.model.fields['producto_financiero_c'].options = optionsProdFinan;
-                        self.render();
+                        this.model.fields['producto_financiero_c'].options = optionsProdFinan;
+						window.render = 1;
+                        this.render();
                         if (temp_array != "") {
                             $('[data-name="producto_financiero_c"]').show();
-                            self.exist_PRodFinanciero = true;
+                            this.exist_PRodFinanciero = true;
                         }
                         else {
                             $('[data-name="producto_financiero_c"]').hide();
-                            self.exist_PRodFinanciero = false;
+                            this.exist_PRodFinanciero = false;
                         }
                     }
                     else {
                         $('[data-name="producto_financiero_c"]').hide();
                     }
-                }, self),
+                }, this),
             });
         }
     },
