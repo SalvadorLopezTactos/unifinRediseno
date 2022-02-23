@@ -8170,7 +8170,7 @@ validaReqUniclickInfo: function () {
                     Pautos.render();
                 }
                 
-                //Condiciones
+                //Setea dataCondiciones
                 if (data[7].contents!=""){
                     this.datacondiciones = [];
                     if(data[7].contents.records.length > 0) {
