@@ -8,6 +8,10 @@
         self = this;
         this._super("initialize", [options]);
         this.fromProtocolo=options.context.attributes.dataFromProtocolo;
+
+        /** Valida genero personas fisicas y fisica con actividad empesarial **/
+        this.model.addValidationTask('validaGenero', _.bind(this.validaGenero, this));
+
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
@@ -453,6 +457,19 @@
         if (!this.model.get('lead_cancelado_c')) {
 
             this.model.set('motivo_cancelacion_c', '');
+        }
+    },
+
+    /*************Valida Genero *****************/
+    validaGenero: function (fields, errors, callback) {
+        var genero = this.model.get('genero_c');
+        if ((genero == "" || genero == null) && (this.model.get('regimen_fiscal_c') == "1" ||
+            this.model.get('regimen_fiscal_c') == "2")) {
+            errors['genero_c'] = errors['genero_c'] || {};
+            errors['genero_c'].required = true;
+            callback(null, fields, errors);
+        } else {
+            callback(null, fields, errors);
         }
     },
 

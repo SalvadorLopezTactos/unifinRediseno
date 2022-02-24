@@ -187,70 +187,79 @@ array (
               ),
               7 => 
               array (
+                'readonly' => false,
+                'name' => 'genero_c',
+                'label' => 'LBL_GENERO',
+              ),
+              8 => 
+              array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO_C',
               ),
-              8 => 
+              9 => 
+              array (
+              ),
+              10 => 
               array (
                 'name' => 'origen_c',
                 'label' => 'LBL_ORIGEN',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'detalle_origen_c',
                 'label' => 'LBL_DETALLE_ORIGEN',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'prospeccion_propia_c',
                 'label' => 'LBL_PROSPECCION_PROPIA',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'alianza_soc_chk_c',
                 'label' => 'LBL_ALIANZA_SOC_CHK_C',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'medio_digital_c',
                 'label' => 'LBL_MEDIO_DIGITAL',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'punto_contacto_c',
                 'label' => 'LBL_PUNTO_CONTACTO',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'origen_busqueda_c',
                 'label' => 'LBL_ORIGEN_BUSQUEDA_C',
                 'span' => 12,
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'evento_c',
                 'label' => 'LBL_EVENTO_C',
                 'span' => 12,
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'camara_c',
                 'label' => 'LBL_CAMARA_C',
                 'span' => 12,
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'origen_ag_tel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ORIGEN_AG_TEL_C',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'promotor_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTOR_C',
               ),
-              19 => 
+              21 => 
               array (
                 'related_fields' => 
                 array (
@@ -260,7 +269,7 @@ array (
                 'name' => 'ventas_anuales_c',
                 'label' => 'LBL_VENTAS_ANUALES_C',
               ),
-              20 => 
+              22 => 
               array (
                 'related_fields' => 
                 array (
@@ -270,21 +279,21 @@ array (
                 'name' => 'potencial_lead_c',
                 'label' => 'LBL_POTENCIAL_LEAD',
               ),
-              21 => 
+              23 => 
               array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
               ),
-              22 => 
+              24 => 
               array (
                 'name' => 'zona_geografica_c',
                 'label' => 'LBL_ZONA_GEOGRAFICA_C',
               ),
-              23 => 
+              25 => 
               array (
                 'name' => 'email',
               ),
-              24 => 
+              26 => 
               array (
                 'name' => 'phone_mobile',
                 'label' => 'LBL_MOBILE_PHONE',
@@ -304,12 +313,12 @@ array (
                   ),
                 ),
               ),
-              25 => 
+              27 => 
               array (
                 'name' => 'o_registro_reus_c',
                 'label' => 'LBL_O_REGISTRO_REUS_C',
               ),
-              26 => 
+              28 => 
               array (
                 'name' => 'phone_home',
                 'comment' => 'Home phone number of the contact',
@@ -330,7 +339,7 @@ array (
                   ),
                 ),
               ),
-              27 => 
+              29 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -350,199 +359,199 @@ array (
                   ),
                 ),
               ),
-              28 => 
+              30 => 
               array (
                 'readonly' => false,
                 'name' => 'c_estatus_telefono_c',
                 'studio' => 'visible',
                 'label' => 'LBL_C_ESTATUS_TELEFONO',
               ),
-              29 => 
+              31 => 
               array (
                 'readonly' => false,
                 'name' => 'm_estatus_telefono_c',
                 'studio' => 'visible',
                 'label' => 'LBL_M_ESTATUS_TELEFONO',
               ),
-              30 => 
+              32 => 
               array (
                 'readonly' => false,
                 'name' => 'o_estatus_telefono_c',
                 'studio' => 'visible',
                 'label' => 'LBL_O_ESTATUS_TELEFONO',
               ),
-              31 => 
+              33 => 
               array (
                 'name' => 'lead_telefonos',
                 'studio' => 'visible',
                 'label' => 'LBL_LEAD_TELEFONOS',
                 'span' => 12,
               ),
-              32 => 
+              34 => 
               array (
                 'name' => 'detalle_plataforma_c',
                 'studio' => 'visible',
                 'label' => 'LBL_DETALLE_PLATAFORMA_C',
               ),
-              33 => 
+              35 => 
               array (
                 'name' => 'oficina_c',
                 'label' => 'LBL_OFICINA',
               ),
-              34 => 
+              36 => 
               array (
                 'name' => 'nombre_de_cargar_c',
                 'label' => 'LBL_NOMBRE_DE_CARGAR',
               ),
-              35 => 
+              37 => 
               array (
                 'name' => 'alianza_c',
                 'label' => 'LBL_ALIANZA_C',
               ),
-              36 => 
+              38 => 
               array (
                 'name' => 'lead_cancelado_c',
                 'label' => 'LBL_LEAD_CANCELADO_C',
               ),
-              37 => 
+              39 => 
               array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
               ),
-              38 => 
+              40 => 
               array (
                 'name' => 'submotivo_cancelacion_c',
                 'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
                 'span' => 12,
               ),
-              39 => 
+              41 => 
               array (
                 'name' => 'assigned_user_name',
               ),
-              40 => 
+              42 => 
               array (
                 'name' => 'account_to_lead',
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
-              41 => 
+              43 => 
               array (
                 'name' => 'status_management_c',
                 'label' => 'LBL_STATUS_MANAGEMENT',
               ),
-              42 => 
+              44 => 
               array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
-              43 => 
+              45 => 
               array (
                 'name' => 'url_originacion_c',
                 'label' => 'LBL_URL_ORIGINACION_C',
                 'readonly' => true,
               ),
-              44 => 
+              46 => 
               array (
               ),
-              45 => 
+              47 => 
               array (
                 'name' => 'contacto_asociado_c',
                 'label' => 'LBL_CONTACTO_ASOCIADO_C',
               ),
-              46 => 
+              48 => 
               array (
                 'name' => 'leads_leads_1_name',
                 'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
               ),
-              47 => 
+              49 => 
               array (
                 'name' => 'pb_division_c',
                 'label' => 'LBL_PB_DIVISION',
               ),
-              48 => 
+              50 => 
               array (
                 'name' => 'pb_grupo_c',
                 'label' => 'LBL_PB_GRUPO',
               ),
-              49 => 
+              51 => 
               array (
                 'name' => 'pb_clase_c',
                 'label' => 'LBL_PB_CLASE',
               ),
-              50 => 
+              52 => 
               array (
                 'name' => 'actividad_economica_c',
                 'label' => 'LBL_ACTIVIDAD_ECONOMICA',
               ),
-              51 => 
+              53 => 
               array (
                 'name' => 'sector_economico_c',
                 'label' => 'LBL_SECTOR_ECONOMICO',
               ),
-              52 => 
+              54 => 
               array (
                 'name' => 'subsector_c',
                 'label' => 'LBL_SUBSECTOR',
               ),
-              53 => 
+              55 => 
               array (
                 'name' => 'macrosector_c',
                 'label' => 'LBL_MACROSECTOR_C',
               ),
-              54 => 
+              56 => 
               array (
                 'name' => 'inegi_clase_c',
                 'label' => 'LBL_INEGI_CLASE',
               ),
-              55 => 
+              57 => 
               array (
                 'name' => 'inegi_macro_c',
                 'label' => 'LBL_INEGI_MACRO',
               ),
-              56 => 
+              58 => 
               array (
                 'name' => 'inegi_rama_c',
                 'label' => 'LBL_INEGI_RAMA',
               ),
-              57 => 
+              59 => 
               array (
                 'name' => 'inegi_sector_c',
                 'label' => 'LBL_INEGI_SECTOR',
               ),
-              58 => 
+              60 => 
               array (
                 'name' => 'inegi_subrama_c',
                 'label' => 'LBL_INEGI_SUBRAMA',
               ),
-              59 => 
+              61 => 
               array (
                 'name' => 'inegi_subsector_c',
                 'label' => 'LBL_INEGI_SUBSECTOR',
               ),
-              60 => 
+              62 => 
               array (
                 'name' => 'metodo_asignacion_lm_c',
                 'label' => 'LBL_METODO_ASIGNACION_LM_C',
               ),
-              61 => 
+              63 => 
               array (
                 'name' => 'homonimo_c',
                 'label' => 'LBL_HOMONIMO',
               ),
-              62 => 
+              64 => 
               array (
                 'name' => 'omite_match_c',
                 'label' => 'LBL_OMITE_MATCH',
               ),
-              63 => 
+              65 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              64 => 
+              66 => 
               array (
               ),
-              65 => 
+              67 => 
               array (
                 'name' => 'lead_direcciones',
                 'studio' => 'visible',
