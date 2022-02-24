@@ -464,7 +464,7 @@
          * Adrian Arauz 23/01/2019
          * */
         //this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         this.model.addValidationTask('validarequeridosProvRec', _.bind(this.RequeridosProveedorRecursos, this));
         /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
          * Integración de Expediente
@@ -880,7 +880,7 @@
             var indices = [];
             for (var i = 0; i < telefono.length; i++) {
                 for (var j = 0; j < telefono.length; j++) {
-                    if (telefono[j].telefono == telefono[i].telefono && i != j) {
+                    if (telefono[j].telefono == telefono[i].telefono && telefono[j].estatus == 'Activo' && telefono[i].estatus == 'Activo' && i != j) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -892,7 +892,7 @@
                 app.alert.show('error_sametelefono3', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales,favor de corregir.'
+                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales, favor de corregir.'
                 });
                 //$($input).focus();
                 if (indices.length > 0) {
@@ -2903,7 +2903,7 @@
         Object.keys(lista).forEach(function (key) {
             //Quita años previos
             if (key < anoactual5) {
-                delete lista[key];
+                //delete lista[key];
             }
             //Quita años futuros al actual
             if (key > anoactual) {

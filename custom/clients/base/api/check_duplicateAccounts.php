@@ -210,6 +210,15 @@ SITE;
         $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
+		$bean_account->rfc_c = $bean_Leads->rfc_c;
+		$bean_account->convertido_c = 1;
+        $GLOBALS['log']->fatal("lead". $bean_Leads->origen_c .'-'.$bean_Leads->detalle_origen_c);
+        if($bean_Leads->origen_c == '12' && $bean_Leads->detalle_origen_c == '12'){
+            $bean_account->alianza_soc_chk_c = 1;
+        }else{
+            $bean_account->alianza_soc_chk_c = $bean_Leads->alianza_soc_chk_c;
+        }
+
         // Asesores
         if ($idMeetings != null) {
             $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['LEASING'];
@@ -235,18 +244,22 @@ SITE;
         $bean_account->save();
 
         // creamos las relaciones en telefono
+        $principal = 1;
         if (!empty($bean_Leads->phone_mobile)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3, $bean_Leads->m_estatus_telefono_c);
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3, $bean_Leads->m_estatus_telefono_c, $principal);
+            $principal = 0;
         }
         if (!empty($bean_Leads->phone_home)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1, $bean_Leads->c_estatus_telefono_c);
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1, $bean_Leads->c_estatus_telefono_c, $principal);
+            $principal = 0;
         }
         if (!empty($bean_Leads->phone_work)) {
-            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2, $bean_Leads->o_estatus_telefono_c);
+            $resp_reus_tel = $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2, $bean_Leads->o_estatus_telefono_c, $principal);
+            $principal = 0;
         }
 
         $bean_account->pendiente_reus_c = ($resp_reus_tel == 3) ? true : false;
-        
+
         //Campos PB
         $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_account->id, array('disable_row_level_security' => true));
         $bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
@@ -513,7 +526,7 @@ SITE;
         $bean_relacion->save();
     }
 
-    public function create_phone($idCuenta, $phone, $tipoTel, $estatus_telefono)
+    public function create_phone($idCuenta, $phone, $tipoTel, $estatus_telefono, $principal)
     {
         /************* Validación REUS telefono *****************/
         $reus = $this->REUS_telefono($phone);
@@ -527,8 +540,9 @@ SITE;
         $bean_relacionTel->tipotelefono = $tipoTel;
         $bean_relacionTel->estatus = "Activo";
         $bean_relacionTel->pais = 2;
+        $bean_relacionTel->principal = $principal;
         if($reus == 1) { $bean_relacionTel->registro_reus_c = 1; }
-		$bean_relacionTel->estatus_telefono_c = $estatus_telefono;
+	      $bean_relacionTel->estatus_telefono_c = $estatus_telefono;
         $bean_relacionTel->save();
         return $reus;
     }
@@ -621,7 +635,7 @@ SITE;
         $resp = 0;
         global $sugar_config, $db, $current_user;
         $phoneCuenta = false;
-        //API DHW REUS PARA TELEFONOS 
+        //API DHW REUS PARA TELEFONOS
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
         //OBTENEMOS LOS TELEFONOS DE LA CUENTA
@@ -632,9 +646,9 @@ SITE;
         //$resultado = json_decode($resultado);
         $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ' . json_encode($resultado));
         if ($resultado != "" && $resultado != null) {
-            //RESULTADO DEL SERVICIO DWH REUS 
+            //RESULTADO DEL SERVICIO DWH REUS
             foreach ($resultado as $key => $val) {
-                //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
+                //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS
                 // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
                 if ($telefono == $val['valor']){
                     if ($val['existe'] == 'SI'){

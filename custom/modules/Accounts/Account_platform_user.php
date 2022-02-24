@@ -13,11 +13,11 @@ class Account_platform_user
         foreach ($lista_plataformas_audit as $clave => $valor) {
            array_push($plataformas_array,$clave);
         }
-        $GLOBALS['log']->fatal('PLATAFORMA');
+        /*$GLOBALS['log']->fatal('PLATAFORMA');
         $GLOBALS['log']->fatal($plataforma);
         $GLOBALS['log']->fatal('*********NUEVO LH DE CUENTAS***********');
         $GLOBALS['log']->fatal('PLATAFORMAS HABILITADAS');
-        $GLOBALS['log']->fatal(print_r($plataformas_array,true));
+        $GLOBALS['log']->fatal(print_r($plataformas_array,true));*/
 
         //Se establece tabla de auditoria solo para plataformas que existen en la lista plataformas habilitadas para auditoria
         if(in_array($plataforma,$plataformas_array)){
@@ -36,15 +36,15 @@ class Account_platform_user
                 $id_user = $row['id'];
             }
 
-            $GLOBALS['log']->fatal("ID DE USUARIO DE GRUPO OBTENIDO");
-            $GLOBALS['log']->fatal($id_user);
+            /*$GLOBALS['log']->fatal("ID DE USUARIO DE GRUPO OBTENIDO");
+            $GLOBALS['log']->fatal($id_user);*/
 
             if($id_user!=""){
                 $id_u_audit=create_guid();
                 $event_id=create_guid();
                 $date= TimeDate::getInstance()->nowDb();
                 //Establece nuevo registro en tabla de auditoria
-                $sqlInsert="INSERT INTO `accounts_audit` (`id`,`parent_id`,`date_created`,`created_by`,`field_name`,`data_type`,`before_value_string`,`after_value_string`,`before_value_text`,`after_value_text`,`event_id`,`date_updated`) 
+                $sqlInsert="INSERT INTO `accounts_audit` (`id`,`parent_id`,`date_created`,`created_by`,`field_name`,`data_type`,`before_value_string`,`after_value_string`,`before_value_text`,`after_value_text`,`event_id`,`date_updated`)
                 VALUES ('{$id_u_audit}','{$bean->id}','{$date}','{$id_user}','plataforma','varchar','','{$id_user}',NULL,NULL,'{$event_id}',NULL)";
 
                 $db->query($sqlInsert);

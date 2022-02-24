@@ -285,4 +285,26 @@ SQL;
 			}
 		}
     }
+
+    public function validar_SOC($bean, $event, $args)
+    {
+       /* $GLOBALS['log']->fatal("alianza_soc_chk_c.".$bean->alianza_soc_chk_c );
+        $GLOBALS['log']->fatal("subtipo_registro_c.".$bean->subtipo_registro_c );
+        $GLOBALS['log']->fatal("origen_c.".$bean->origen_c );
+        $GLOBALS['log']->fatal("detalle_origen_c.".$bean->detalle_origen_c );
+        */
+        if(($bean->fetched_row['origen_c'] != $bean->origen_c && $bean->fetched_row['origen_c'] == '12') 
+            && ($bean->fetched_row['detalle_origen_c'] != $bean->detalle_origen_c && $bean->fetched_row['detalle_origen_c'] == '12'))
+        {
+            if($bean->subtipo_registro_c != '4' && $bean->origen_c == '12' && $bean->detalle_origen_c == '12') {
+               $bean->alianza_soc_chk_c = 1;
+            }
+            /*
+            if ($GLOBALS['service']->platform != 'base') {
+                if(!($bean->subtipo_registro_c != '4' && $bean->origen_c == '12' && $bean->detalle_origen_c == '12')) {
+                   $bean->alianza_soc_chk_c = 0;
+                }
+            }*/
+        }
+    }
 }

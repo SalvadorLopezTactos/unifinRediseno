@@ -67,3 +67,19 @@ $hook_array['before_save'][] = Array(
     'class_lead_reus',
     'func_lead_reus'
 );
+
+$hook_array['before_save'][] = Array(
+    10,
+    'Validacion de duplicados RFC',
+    'custom/modules/Leads/lead_validate_rfc.php',
+    'class_validate_rfc',
+    'func_validate_rfc'
+);
+
+$hook_array['before_save'][] = Array(
+    12,
+    'validacion SOC',
+    'custom/modules/Leads/Lead_Hooks.php',
+    'Lead_Hooks',
+    'validar_SOC'
+);

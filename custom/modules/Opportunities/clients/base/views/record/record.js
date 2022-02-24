@@ -2807,7 +2807,7 @@
         var precalif_L=false;
         var precalif_CS=false;
 
-        precalif_L=(producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true)? true : false;
+        precalif_L=(producto == 1 && negocio == 5 /*(negocio == 5 || negocio == 3)*/ && (producto_financiero == 0 || producto_financiero == "") && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true)? true : false;
         precalif_CS=(producto=="2" && (negocio!="2" && negocio!="10"))&& (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true ? true : false;
 
         if(precalif_L || precalif_CS){
@@ -2842,11 +2842,11 @@
         var precalif_L=false;
         var precalif_CS=false;
 
-        precalif_L=((check == false || check == undefined) && producto == 1 && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
+        precalif_L=((check == false || check == undefined) && producto == 1 && negocio == 5 /*(negocio == 5 || negocio == 3)*/ && (producto_financiero == 0 || producto_financiero == "") &&
         (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true) ? true : false;
 
         precalif_CS=(producto=="2" && (negocio!="2" && negocio!="10")) && (check == false || check == undefined) && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true ? true : false;
-        
+
         if (chk != true && status != "K") {
             if(precalif_L || precalif_CS){
                 //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
@@ -3357,7 +3357,7 @@
                 }
 
             }
-            
+
 
         }
 

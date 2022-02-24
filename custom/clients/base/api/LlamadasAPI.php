@@ -31,38 +31,68 @@ class LlamadasAPI extends SugarApi
     }
 
     /**
-     * Method to be used for my customSurvey endpoint
+     * Method to be used for make a call endpoint
      */
     public function createcall($api, $args)
     {
-        $GLOBALS['log']->fatal('>>>>>>>Entro llamadasAPI');//------------------------------------
-        $id_cliente=$args['data'][0];
-        $nombre_cliente=$args['data'][1];
-        $modulo=$args['data'][2];
-		$posicion=$args['data'][3];
-        $GLOBALS['log']->fatal('id cliente: '.$id_cliente);//------------------------------------
-        $GLOBALS['log']->fatal('nombre del cliente: '.$nombre_cliente);//------------------------------------  
-        $GLOBALS['log']->fatal('modulo: '.$modulo);//------------------------------------
+        //Recupera parámetros para llamada
+        $GLOBALS['log']->fatal('Petición para API:createcall');
+        global $current_user, $app_list_strings, $sugar_config;
+        $id_cliente = isset($args['data']['id_cliente']) ? $args['data']['id_cliente'] : '';
+        $nombre_cliente = isset($args['data']['nombre_cliente']) ? $args['data']['nombre_cliente'] : '';
+        $numero_cliente = isset($args['data']['numero_cliente']) ? $args['data']['numero_cliente'] : '';
+        $modulo = isset($args['data']['modulo']) ? $args['data']['modulo'] : '';
+        $posicion = isset($args['data']['posicion']) ? $args['data']['posicion'] : '';
+        $puesto_usuario = isset($args['data']['puesto_usuario']) ? $args['data']['puesto_usuario'] : '';
+        $ext_usuario = isset($args['data']['ext_usuario']) ? $args['data']['ext_usuario'] : '';
+        $es_CP = isset($app_list_strings['puestos_vicidial_list'][$puesto_usuario]) ? true : false;
+
+        //Genera bean de llamada
         $bean_call = BeanFactory::newBean('Calls');
-        $GLOBALS['log']->fatal('Bean creado');//----------------------
         $bean_call->name ='Llamada a:' .$nombre_cliente ;
-        $GLOBALS['log']->fatal('Nombre asignado');//----------------------
         $bean_call->parent_id = $id_cliente;
         $bean_call->parent_type = $modulo;
-        $GLOBALS['log']->fatal('Id de cliente asignado');//----------------------
         $bean_call->tct_call_issabel_c=1;
-		$bean_call->tct_resultado_llamada_ddw_c = 'Llamada_servicio';
-		if($posicion == 'Ventas') $bean_call->detalle_resultado_c = 17;
-		if($posicion == 'Staff') $bean_call->detalle_resultado_c = 16;
-        global $current_user;
+        $bean_call->tct_resultado_llamada_ddw_c = 'Llamada_servicio';
+        if($posicion == 'Ventas') $bean_call->detalle_resultado_c = 17;
+        if($posicion == 'Staff') $bean_call->detalle_resultado_c = 16;
         $bean_call->assigned_user_id = $current_user->id;
         $bean_call->save();
         if($modulo == 'Leads') {
           $bean_call->load_relationship('leads');
           $bean_call->leads->add($id_cliente);
         }
-        $GLOBALS['log']->fatal('Bean de llamadas guardado');//----------------------
+        $GLOBALS['log']->fatal('Llamada generada: '. $bean_call->id);
+
+        //Valida vía de comunicación
+        if($es_CP){
+          //ViciDial
+          $callURL = $sugar_config['viciDial_trigger_path'].'?exten=SIP/'.$ext_usuario.'&number='.$numero_cliente.'&leadid='.$bean_call->id;
+        }else{
+          //Issabel
+          $callURL = $sugar_config['site_url'].'/custom/Levementum/call_unifin.php?numero='.$numero_cliente.'&userexten='.$ext_usuario.'&id_call='.$bean_call->id;
+        }
+
+        //Invoca ejecución de llamada
+        $arrContextOptions=array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+        );
+
+        $GLOBALS['log']->fatal('URL marcación: '. $callURL);
+        $response = file_get_contents($callURL,false, stream_context_create($arrContextOptions));
+        $GLOBALS['log']->fatal('Respuesta marcación: '. $response);
+
+        //Regresa Id llamada
         return $bean_call->id;
+
+
+        /*Variables a config
+          $sugar_config['viciDial_trigger_path'] = 'https://192.168.10.22/wsagixps/act_rtepoc.php';
+        */
+
     }
 }
 ?>

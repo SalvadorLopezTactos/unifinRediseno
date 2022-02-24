@@ -19,8 +19,11 @@ class Call_createSurveySubmission
             1) Llamada asignada a Cuenta
             2) Usuario que cierra llamada contiene producto Leasing = 1
             3) Llamada en estatus Realizado
-            4) Resultado de llamada; Checklist_expediente,Llamada_servicio  */
-        if ($bean->parent_type == 'Accounts' && !empty($bean->parent_id) && $current_user->tipodeproducto_c=='1' && $bean->status == "Held" && $bean->fetched_row['status'] != $bean->status && ($bean->tct_resultado_llamada_ddw_c == "Checklist_expediente" || $bean->tct_resultado_llamada_ddw_c == "Llamada_servicio" )) {
+            4) Resultado de llamada; Checklist_expediente,Llamada_servicio
+			5) Puesto usuario asignado a la llamada sea de Leasing */
+        $puesto_usuario = $bean->asignado_puesto_c;
+        $lista_puestos = $app_list_strings['puestos_encuestas_list'];
+        if ($bean->parent_type == 'Accounts' && !empty($bean->parent_id) && $current_user->tipodeproducto_c=='1' && array_key_exists($puesto_usuario, $lista_puestos) && $bean->status == "Held" && $bean->fetched_row['status'] != $bean->status && ($bean->tct_resultado_llamada_ddw_c == "Checklist_expediente" || $bean->tct_resultado_llamada_ddw_c == "Llamada_servicio" )) {
             // Recupera variables de llamada
             //$GLOBALS["log"]->fatal("LH - Survey NPS :: Cumple condición de envío");
             $idCall = $bean->id;
@@ -160,7 +163,7 @@ class Call_createSurveySubmission
         //Establece parámetros de envío
         $timedate = new TimeDate();
         $mailSubject = "¡TU OPINIÓN ES IMPORTANTE!";
-        $mailHTML = '<p align="center" class="imagen"><img border="0" style="width:135px;height:103px" id="logoUnifin" src="https://www.unifin.com.mx/img/logo.png"></span></p><br>
+        $mailHTML = '<p align="center" class="imagen"><img border="0" style="width:135px;height:103px" id="logoUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p><br>
           <p align="center" style="font-size: 14pt; font-family: "Arial",sans-serif;"><font face="Arial" color="#032258">Estimado: <b>' . $nombrePersona . '</b>
           <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>' . $Asesor . '</b>, nos gustaría conocer tu opinión acerca del servicio que has recibido.
           <center>Te invitamos a contestar la siguiente encuesta.<br><br>

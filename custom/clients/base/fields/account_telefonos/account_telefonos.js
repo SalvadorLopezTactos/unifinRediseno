@@ -232,9 +232,8 @@
                 this.oTelefonos.telefono.forEach(function (element) {
                     var iteracion = element.telefono;
                     iteracion = iteracion.replace(/\s+/gi, '');
-
                     var ntelefonico = this.$('.newTelefono').val().trim();
-                    if (iteracion == ntelefonico) {
+                    if (iteracion == ntelefonico && element.estatus == 'Activo') {
                         duplicados = true;
                     }
                 });
@@ -290,11 +289,11 @@
         if(self.ResumenProductos!=undefined){
             self1=self;
         }
-        
+
         if(self.ResumenProductos==undefined){
             self=self1;
         }
-        
+
         //VALIDACIONES PARA USUARIO LOGEADO CONTRA USUARIO ASIGNADO EN LOS PRODUCTOS Y QUE TIENEN TIPO DE CUENTA CLIENTE
         if (self.ResumenProductos.leasing.tipo_cuenta == "3") {
             productoREUS = true;
@@ -335,113 +334,74 @@
             //ENTRA PARA LAS LLAMADAS QUE NO SON REUS
             reus = true;
         }
-
+        //Valida REUS
         if (reus == true) {
-            //AGENTE TELEFONICO - COORDINADOR DE CENTRO DE PROSPECCION
-            if (puesto_usuario == "27" || puesto_usuario == "31" || puesto_usuario == "61") {
-                /***********************************VICIDIAL***************************************/
-                vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
-                _.extend(this, vicidial);
-
-                if (tel_usr != '' || tel_usr != null) {
-                    if (tel_client != '' || tel_client != null) {
-                        context = this;
-                        app.alert.show('do-call-vicidial', {
-                            level: 'confirmation',
-                            messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
-                            autoClose: false,
-                            onConfirm: function () {
-                                context.createcall(context.resultCallback);
-                            },
-                        });
-                    } else {
-                        app.alert.show('error_tel_client-vicidial', {
-                            level: 'error',
-                            autoClose: true,
-                            messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
-                        });
-                    }
-                } else {
-                    app.alert.show('error_tel_usr-vicidial', {
-                        level: 'error',
-                        autoClose: true,
-                        messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
-                    });
-                }
-
+          //Valida Teléfono y Extensión
+          if (tel_usr != '' && tel_usr != null) {
+            if (tel_client != '' && tel_client != null) {
+              context = this;
+              app.alert.show('do-call', {
+                level: 'confirmation',
+                messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
+                autoClose: false,
+                onConfirm: function () {
+                  //context.createcall(context.resultCallback);
+                  context.createcall(tel_client);
+                },
+              });
             } else {
-                /**********************************ISSABEL***************************************/
-
-                //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
-                /*if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
-                     issabel='custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
-                }else {
-                    issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
-                }*/
-                issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
-                _.extend(this, issabel);
-
-                if (tel_usr != '' || tel_usr != null) {
-                    if (tel_client != '' || tel_client != null) {
-                        context = this;
-                        app.alert.show('do-call', {
-                            level: 'confirmation',
-                            messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
-                            autoClose: false,
-                            onConfirm: function () {
-                                context.createcall(context.resultCallback);
-                            },
-                        });
-                    } else {
-                        app.alert.show('error_tel_client', {
-                            level: 'error',
-                            autoClose: true,
-                            messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
-                        });
-                    }
-                } else {
-                    app.alert.show('error_tel_usr', {
-                        level: 'error',
-                        autoClose: true,
-                        messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
-                    });
-                }
+              app.alert.show('error_tel_client', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefónico</b>.'
+              });
             }
-
+          } else {
+            app.alert.show('error_tel_usr', {
+              level: 'error',
+              autoClose: true,
+              messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
+            });
+          }
         } else {
-
             app.alert.show('message-reus-comercial', {
                 level: 'error',
                 messages: 'No se puede generar llamada a teléfono registrado en REUS',
                 autoClose: false
             });
-
         }
     },
 
-    createcall: function (callback) {
-        self = this;
-        var id_call = '';
-        var name_client = this.model.get('name');
-        var id_client = this.model.get('id');
-        var modulo = 'Accounts';
-        var posiciones = app.user.attributes.posicion_operativa_c;
-        var posicion = '';
-        if (posiciones.includes(3)) posicion = 'Ventas';
-        if (posiciones.includes(4)) posicion = 'Staff';
-        var Params = [id_client, name_client, modulo, posicion];
-        app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
-            success: _.bind(function (data) {
-                id_call = data;
-                console.log('Llamada creada, id: ' + id_call);
-                app.alert.show('message-to', {
-                    level: 'info',
-                    messages: 'Usted esta llamando a ' + name_client,
-                    autoClose: true
-                });
-                callback(id_call, self);
-            }, this),
-        });
+    createcall: function (tel_client) {
+      //Recupera variables para petición
+      self = this;
+      var posiciones = App.user.attributes.posicion_operativa_c;
+      var posicion = '';
+      var name_client = this.model.get('name');
+      if(posiciones.includes(3)) posicion = 'Ventas';
+      if(posiciones.includes(4)) posicion = 'Staff';
+      var Params = {
+          'id_cliente': this.model.get('id'),
+          'nombre_cliente': name_client,
+          'numero_cliente': tel_client,
+          'modulo': 'Accounts',
+          'posicion': posicion,
+          'puesto_usuario': App.user.attributes.puestousuario_c,
+          'ext_usuario': App.user.attributes.ext_c
+      };
+      //Ejecuta petición para generar llamada
+      app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
+        success: _.bind(function (data) {
+          id_call = data;
+          console.log('Llamada creada, id: ' + id_call);
+          app.alert.show('message-to', {
+            level: 'info',
+            messages: 'Usted está llamando a ' + name_client,
+            autoClose: true
+          });
+          //callback(id_call, self);
+        }, this),
+      });
     },
 
     resultCallback: function (id_call, context) {

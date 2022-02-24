@@ -1,5 +1,5 @@
 <?php
- // created: 2021-12-29 19:25:49
+ // created: 2022-02-01 19:40:35
 
 $app_list_strings['detalle_origen_list']=array (
   '' => '',
@@ -104,4 +104,5 @@ $app_list_strings['detalle_origen_list']=array (
   99 => 'Equity Link',
   100 => 'Ulua Capital',
   101 => 'DENPRO',
+  102 => 'Morning Espresso',
 );

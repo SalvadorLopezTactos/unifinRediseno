@@ -277,7 +277,7 @@
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
         this.model.addValidationTask('proveedorDeRecursos', _.bind(this.proveedorRecursos, this));
-        
+
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
@@ -302,7 +302,7 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
@@ -398,6 +398,7 @@
 
     },
 
+/*
     saveProdPLD: function (fields, errors, callback) {
 
         if (this.model.get('tipo_registro_cuenta_c') != '') {
@@ -509,6 +510,7 @@
             callback(null, fields, errors);
         }
     },
+*/
 
     /* F. Javier G. Solar
      OBS299 Validar que las Direcciones no se repitan 21/11/2018
@@ -3609,7 +3611,7 @@
                 for (var j = 0; j < telefono.length; j++) {
                     var tel1=telefono[j].telefono.replace(/ /gi, "");
                     var tel2=telefono[i].telefono.replace(/ /gi, "");
-                    if (tel1 == tel2 && i != j) {
+                    if (tel1 == tel2 && telefono[j].estatus == 'Activo' && telefono[i].estatus == 'Activo' && i != j) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -3621,7 +3623,7 @@
                 app.alert.show('error_sametelefono3', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales,favor de corregir.'
+                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales, favor de corregir.'
                 });
                 //$($input).focus();
                 if (indices.length > 0) {
@@ -4770,7 +4772,7 @@
         Object.keys(lista).forEach(function (key) {
             //Quita años previos
             if (key < anoactual5) {
-                delete lista[key];
+                //delete lista[key]; //Se dejan habilitadois años previos
             }
             //Quita años futuros al actual
             if (key > anoactual) {
@@ -4867,7 +4869,6 @@
             });
     },
 
-    
 
     get_addresses: function () {
         //Extiende This
@@ -7076,12 +7077,12 @@
         //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
 		var readonly = true;
 
-		Object.entries(App.lang.getAppListStrings('producto_soc_usuario_list')).forEach(([key, value]) => {
+		/*Object.entries(App.lang.getAppListStrings('producto_soc_usuario_list')).forEach(([key, value]) => {
             if(this.model.get(value) == idUser && productos.includes(key) ){
 				readonly = false;
 			}
         });
-
+        */
 		Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
             if(value == idUser){
 				readonly = false;
@@ -7136,7 +7137,7 @@
                            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tct_pld_1?filter[0][name][$equals]=Crédito Simple");
                            requestD.url = url.substring(4);
                            requests.push(requestD);
-                           
+
                            app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                                success: _.bind(function (data) {
                                    //Variables para controlar las direcciones y telefonos
@@ -7195,7 +7196,7 @@
                                                 if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
                                                         necesarios = necesarios + '<b>Profesión</b><br>';
                                                 }
-                                                
+
                                                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                         necesarios = necesarios + '<b>RFC</b><br>';
                                                 }
@@ -7203,7 +7204,7 @@
                                                     if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null ) {
                                                         necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                     }
-                                                    
+
                                                 }else{
                                                     if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == null ) {
                                                         necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
@@ -7237,7 +7238,7 @@
                                                         necesarios = necesarios +'<br>'+ "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                     }
                                                 }
-                                               
+
                                                 //Sección PEPS Física Familiar
                                                 if (this.model.get('ctpldconyuge_c') == true) {
                                                     var banderaPEPSFamiliar="";
@@ -7266,7 +7267,7 @@
                                                         necesarios = necesarios +'<br>'+ "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                     }
                                                 }
-                                                
+
                                                 //Preguntas PLD
                                             if (data[3].contents.records.length>0){
                                                 if (this.$('.campo2ddw-cs').select2('val') == "" || this.$('.campo2ddw-cs').select2('val')  == null) {
@@ -7290,7 +7291,7 @@
                                                 if (this.$('.campo6ddw-cs').select2('val') == "" || this.$('.campo6ddw-cs').select2('val') == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
-                                            } 
+                                            }
                                             }else{
                                                 //Valida persona Moral
                                                 if (this.$('.list_ae').select2('val') == "" || this.$('.list_ae').select2('val') == null || this.$('.list_ae').select2('val') == '0') {
@@ -7355,7 +7356,7 @@
                                                     if (this.$('.campo6ddw-cs').select2('val') == "" || this.$('.campo6ddw-cs').select2('val') == null) {
                                                         necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                     }
-                                                } 
+                                                }
                                                  //PEPS Moral Familiar
                                                 if (this.model.get('ctpldaccionistasconyuge_c') == true) {
                                                     var banderaPEPSMoralFamiliar="";
@@ -7382,7 +7383,7 @@
                                                     }
                                                     if (this.model.get('tct_fecha_fin2_pm_c') == "" || this.model.get('tct_fecha_fin2_pm_c') == null) {
                                                         banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
-                                                    } 
+                                                    }
                                                     if (banderaPEPSMoralFamiliar!=""){
                                                         necesarios = necesarios +'<br>'+ "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
                                                     }
@@ -7411,7 +7412,7 @@
                                                     if (banderaPEPSMoralPersonal!=""){
                                                         necesarios = necesarios +'<br>'+ "Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
                                                     }
-                                                }                                                
+                                                }
 
                                             }
                                             //Evalua si hay campos requeridos y muestra alerta
@@ -7428,14 +7429,14 @@
                                    }
                                    callback(null, fields, errors);
                                }, this)
-                           });  
-                                   
-                           
+                           });
+
+
         }else{
-         callback(null, fields, errors);   
-        }   
-        
-        
+         callback(null, fields, errors);
+        }
+
+
 },
 
 validaReqUniclickInfo: function () {
@@ -7461,7 +7462,7 @@ validaReqUniclickInfo: function () {
                        var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tct_pld_1?filter[0][name][$equals]=Crédito Simple");
                        requestD.url = url.substring(4);
                        requests.push(requestD);
-                       
+
                        app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                            success: _.bind(function (data) {
                                //Variables para controlar las direcciones y telefonos
@@ -7512,7 +7513,7 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
                                                 necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                                             }
-                                           
+
                                             if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null || this.model.get('pais_nacimiento_c')=='0') {
                                                 necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                                             }
@@ -7522,7 +7523,7 @@ validaReqUniclickInfo: function () {
                                             if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
                                                     necesarios = necesarios + '<b>Profesión</b><br>';
                                             }
-                                            
+
                                             if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null ) {
                                                     necesarios = necesarios + '<b>RFC</b><br>';
                                             }
@@ -7530,7 +7531,7 @@ validaReqUniclickInfo: function () {
                                                 if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == null ) {
                                                     necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                 }
-                                                
+
                                             }else{
                                                 if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == null ) {
                                                     necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
@@ -7564,7 +7565,7 @@ validaReqUniclickInfo: function () {
                                                     necesarios = necesarios +'<br>'+ "Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                 }
                                             }
-                                       
+
                                             //Sección PEPS Física Familiar
                                             if (this.model.get('ctpldconyuge_c') == true) {
                                                 var banderaPEPSFamiliar="";
@@ -7593,7 +7594,7 @@ validaReqUniclickInfo: function () {
                                                     necesarios = necesarios +'<br>'+ "Sección PEPS Familiar:<br>" + banderaPEPSFamiliar
                                                 }
                                             }
-                                            
+
                                             //Preguntas PLD
                                             if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
@@ -7617,7 +7618,7 @@ validaReqUniclickInfo: function () {
                                                 if (data[3].contents.records[0].tct_pld_campo6_ddw == "" || data[3].contents.records[0].tct_pld_campo6_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
-                                            } 
+                                            }
                                         }else{
                                             //Valida persona Moral
                                             if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') == null) {
@@ -7682,7 +7683,7 @@ validaReqUniclickInfo: function () {
                                                 if (data[3].contents.records[0].tct_pld_campo6_ddw == "" || data[3].contents.records[0].tct_pld_campo6_ddw == null) {
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD-Crédito Simple<br></b>';
                                                 }
-                                            } 
+                                            }
                                              //PEPS Moral Familiar
                                              if (this.model.get('ctpldaccionistasconyuge_c') == true) {
                                                 var banderaPEPSMoralFamiliar="";
@@ -7709,7 +7710,7 @@ validaReqUniclickInfo: function () {
                                                 }
                                                 if (this.model.get('tct_fecha_fin2_pm_c') == "" || this.model.get('tct_fecha_fin2_pm_c') == null) {
                                                     banderaPEPSMoralFamiliar = banderaPEPSMoralFamiliar + '<b>-Fecha de término<br></b>';
-                                                } 
+                                                }
                                                 if (banderaPEPSMoralFamiliar!=""){
                                                     necesarios = necesarios +'<br>'+"Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
                                                 }
@@ -7738,7 +7739,7 @@ validaReqUniclickInfo: function () {
                                                 if (banderaPEPSMoralPersonal!=""){
                                                     necesarios = necesarios +'<br>'+"Sección PEPS Moral Personal:<br>" + banderaPEPSMoralPersonal
                                                 }
-                                            }  
+                                            }
 
                                         }
                                         //Evalua si hay campos requeridos y muestra alerta
@@ -7748,15 +7749,15 @@ validaReqUniclickInfo: function () {
                                             messages: "Hace falta completar la siguiente información en la <b>Cuenta</b> para el producto Uniclick:<br>"+ necesarios,
                                             autoClose: false
                                                 });
-                                                
+
                                         }
 
                                }
-                              
+
                            }, this)
-                       });  
-                   
-    }   
+                       });
+
+    }
 },
 
         CamposCstmLoad: function () {
@@ -8199,5 +8200,5 @@ validaReqUniclickInfo: function () {
 
 
 
-   
+
 })

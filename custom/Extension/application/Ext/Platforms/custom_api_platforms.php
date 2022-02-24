@@ -1,5 +1,5 @@
 <?php
- // created: 2021-11-11 10:45:03
+ // created: 2022-02-01 18:46:47
 $platforms[] = 'api';
 $platforms[] = 'unifinAPI';
 $platforms[] = 'efactor';
@@ -30,3 +30,4 @@ $platforms[] = 'cvimUnion';
 $platforms[] = 'quantico';
 $platforms[] = 'uni2Liberacion';
 $platforms[] = 'unionVita';
+$platforms[] = 'portalUniclickV2';

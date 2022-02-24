@@ -36,6 +36,12 @@
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        
+        /****** validaciones SOC  **********/
+        this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
+        this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
+        this.model.on('sync', this.userAlianzaSoc, this);
+        this.cmbio_soc = 0;
     },
 
     _disableActionsSubpanel: function () {
@@ -421,19 +427,17 @@
         }
         /***************************READONLY PARA SUBTIPO DE LEAD CONVERTIDO**************************/
         if (this.model.get('subtipo_registro_c') == '4') {
-
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
-
+			var btnConvert = self.getField("convert_Leads_button");
+			btnConvert.hide();
             _.each(this.model.fields, function (field) {
-
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
                     self.noEditFields.push(field.name);
                     self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
                 }
             });
-
             this._disableActionsSubpanel();
         }
     },
@@ -578,16 +582,17 @@
         };
         // alert(this.model.get('id'))
         this.valida_requeridos();
-
+		var btnConvert = this.getField("convert_Leads_button");
+		btnConvert.hide();
+		var editButton = this.getField('edit_button');
+        editButton.setDisabled(true);
         app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
-
         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
-
                 console.log(data);
                 app.alert.dismiss('upload');
                 app.controller.context.reloadData({});
-
+				editButton.setDisabled(false);
                 if (data.idCuenta === "") {
                     app.alert.show("Conversión", {
                         level: "error",
@@ -601,7 +606,8 @@
                         autoClose: false
                     });
                     this._disableActionsSubpanel();
-
+					var btnConvert = this.getField("convert_Leads_button");
+					btnConvert.hide();
                 }
                 var btnConvert = this.getField("convert_Leads_button")
 
@@ -1243,6 +1249,76 @@
         }
         else {
           callback(null, fields, errors);
+        }
+    },
+
+    userAlianzaSoc: function () {
+        //Recupera variables
+        //var chksock = this.model.get('alianza_soc_chk_c');
+        var productos = App.user.attributes.productos_c; //lista de productos del usuario,
+        var idUser = App.user.attributes.id; //Id del usuario,
+        var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
+        //var listaProductosSock = [];    //Recupera Ids de usuarios que pueden editar origen
+        //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
+        var readonly = true;
+        /*
+        if(this.model.get('assigned_user_id') == idUser ){
+            readonly = false;
+        }
+        */
+        Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
+            if(value == idUser){
+                readonly = false;
+            }
+        });
+
+        if(readonly){
+            this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
+        }
+    },
+
+    cambios_origen_SOC: function () {
+        var idUser = App.user.attributes.id; //Id del usuario,
+        var cambio = false;
+        var valor = 0;
+
+        if (this.model.get('alianza_soc_chk_c') != undefined){
+            valor = this.model.get('alianza_soc_chk_c');
+        }
+        
+        Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
+            if(value == idUser){
+                cambio = true;
+            }
+        });
+
+        if(this.model.get('subtipo_registro_c') != undefined && this.model.get('origen_c') != undefined && this.model.get('detalle_origen_c') != undefined){
+            if(this.model.get('subtipo_registro_c') != '4' && this.model.get('origen_c') == '12' && this.model.get('detalle_origen_c') == '12' ){
+                this.model.set('alianza_soc_chk_c', 1);
+            }else{
+
+                if(valor){
+                    this.model.set('alianza_soc_chk_c', valor);
+                    this.cmbio_soc += 1;
+                }else{
+                    this.model.set('alianza_soc_chk_c', 0);
+                }
+
+                if( (this.model._previousAttributes.detalle_origen_c == 12 && this.cmbio_soc > 0) || 
+                    (this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 2)) {
+                    this.model.set('alianza_soc_chk_c', 0);
+                }
+
+                if( (this.model._previousAttributes.detalle_origen_c != ""  && 
+                    this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 0 
+                    && this.model.get('alianza_soc_chk_c')==1)) {
+                    this.model.set('alianza_soc_chk_c', 0);
+                }
+                
+                if(!cambio){
+                    this.model.set('alianza_soc_chk_c', this.model.get('alianza_soc_chk_c'));
+                }
+            }
         }
     },
 

@@ -166,3 +166,11 @@ $hook_array['after_save'][] = Array(
     'oppUnionService', // name of the class
     'idResponseUnion'
 );
+
+$hook_array['before_save'][] = Array(
+    24,
+    'default check soc',
+    'custom/modules/Opportunities/opp_logic_hooks.php',
+    'OpportunityLogic', // name of the class
+    'SolicitudSOC'
+);

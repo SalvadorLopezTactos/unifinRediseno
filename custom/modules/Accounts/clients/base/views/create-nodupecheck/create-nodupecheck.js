@@ -80,7 +80,7 @@
         //this.model.on('change:primernombre_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:apellidopaterno_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:apellidomaterno_c', this._doGenera_RFC_CURP, this);
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
         //this.model.on('change:genero_c', this._doGeneraCURP, this);
         //this.model.on('change:pais_nacimiento_c', this._doGeneraCURP, this);
@@ -1443,7 +1443,7 @@
             var indices = [];
             for (var i = 0; i < telefono.length; i++) {
                 for (var j = 0; j < telefono.length; j++) {
-                    if (telefono[j].telefono == telefono[i].telefono && i != j) {
+                    if (telefono[j].telefono == telefono[i].telefono && telefono[j].estatus == 'Activo' && telefono[i].estatus == 'Activo' && i != j) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
@@ -1455,7 +1455,7 @@
                 app.alert.show('error_sametelefono3', {
                     level: 'error',
                     autoClose: false,
-                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales,favor de corregir.'
+                    messages: 'Existen n\u00FAmeros telef\u00F3nicos iguales, favor de corregir.'
                 });
                 //$($input).focus();
                 if (indices.length > 0) {

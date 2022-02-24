@@ -30,6 +30,9 @@
     anio_list_html_filter: null,
     etapa_list_html: null,
     producto_list_html: null,
+    equipo_list_html:null,
+    zona_list_html:null,
+    tipo_operacion_list_html:null,
 
     initialize: function (options) {
         self = this;
@@ -52,6 +55,34 @@
         this.producto_list_html["1"] = "Leasing";
         this.producto_list_html["2"] = "Crédito Simple";
         this.producto_list_html["3"] = "Lumo";
+
+        this.equipo_list_html=app.lang.getAppListStrings('equipo_list');
+        var zona_list=app.lang.getAppListStrings('tct_team_region_list');
+        var zona_list_unique={"0":""};
+        for (const clave in zona_list) {
+            if (!zona_list_unique.hasOwnProperty(zona_list[clave]) && clave!="") {
+                zona_list_unique[zona_list[clave]]=zona_list[clave];
+            }
+        }
+        this.zona_list_html=zona_list_unique;
+        var tipo_operacion_list_leasing=app.lang.getAppListStrings('num_tipo_op_leasing_list');
+        var tipo_operacion_list_credito=app.lang.getAppListStrings('num_tipo_op_credito_list');
+
+        //Generando lista con valores concatenados de 2 listas num_tipo_op_leasing_list,num_tipo_op_credito_list
+        this.tipo_operacion_list_html={};
+        for (const key in tipo_operacion_list_leasing) {
+            if(tipo_operacion_list_leasing[key]!==""){
+                //this.tipo_operacion_list_html["0"+key+""]=tipo_operacion_list_leasing[key];
+                //Se agrega condición para omitir agregarla ocpión de Crédito Puente
+                if(key!=5){
+                    this.tipo_operacion_list_html["0"+key+""]=tipo_operacion_list_leasing[key];
+                }
+            }
+        }
+
+        for (const key in tipo_operacion_list_credito) {
+            this.tipo_operacion_list_html[key]=tipo_operacion_list_credito[key];
+        }
 
         this.mes_filtro = ((new Date).getMonth() + 1).toString();
         this.anio_filtro = ((new Date).getFullYear()).toString();
@@ -117,6 +148,10 @@
         var anio = $('#anio_filtro').val();
         var etapa = $('#etapa_filtro').val();
         var producto = $('#producto_filtro').val();
+        var equipo=$('#equipo_filtro').val();
+        var asesor=$('[name="assigned_user_name"]').val();
+        var cliente=$('#filtroClienteBacklog').val();
+        var tipo_operacion=$('#tipo_operacion').val();
         //Antes de cargar los filtro con la llamada al api, validamos que los filtros de mes y año no sean de meses y años anteriores
         var mes_actual = ((new Date).getMonth() + 1).toString();
         var anio_actual = (new Date).getFullYear();
@@ -129,14 +164,19 @@
 
             return;
         }
-        this.cargarBacklogsGestion(mes, anio, etapa, producto);
+        this.cargarBacklogsGestion(mes, anio, etapa, producto,equipo,asesor,cliente,tipo_operacion);
     },
 
-    cargarBacklogsGestion: function (mes, anio, etapa, producto) {
+    cargarBacklogsGestion: function (mes, anio, etapa, producto,equipo,asesor,cliente,tipo_operacion) {
         self.mes_filtro = $('#mes_filtro').val();
         self.anio_filtro = $('#anio_filtro').val();
         self.etapa_filtro = $('#etapa_filtro').val();
         self.producto_filtro = $('#producto_filtro').val();
+        self.equipo_filtro = $('#equipo_filtro').val();
+        self.asesor_filtro=$('[name="assigned_user_name"]').val();
+        self.cliente_filtro=$('#filtroClienteBacklog').val();
+        self.tipo_operacion_filtro=$('#tipo_operacion').val();
+        self.zona_filtro=$('#zona_filtro').val();
 
         var mes_actual = ((new Date).getMonth() + 1).toString();
         var anio_actual = (new Date).getFullYear();
@@ -202,20 +242,129 @@
                     filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "lumo_cuentas_c": { "$equals": "0" } }
                 }
             }
+
+            if(equipo!=null && equipo!="" && equipo!="0"){
+                filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "equipo": { "$equals": equipo } }
+            }
+
+            if(asesor!=null && asesor!="" && asesor!=undefined){
+                filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "assigned_user_id": { "$equals": asesor } }
+            }
+
+            if(cliente!=null && cliente!="" && cliente!=undefined){
+                filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "name": { "$contains": cliente } }
+            }
+
+            if(tipo_operacion!=null && tipo_operacion!="" && tipo_operacion!=undefined && tipo_operacion.length>0){
+                
+                var array_tipo_op_leasing=[];
+                var array_tipo_op_credito=[];
+                //Si los id del select contienen un "0" al inicio, quiere decir que hay que buscar en el campo de leasing, en otro caso hay que buscar en el de crédito
+                    
+                if(tipo_operacion.includes('01')){
+                    array_tipo_op_leasing.push(1);
+                    var index=tipo_operacion.indexOf('01');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('02')){
+                    array_tipo_op_leasing.push(2);
+                    var index=tipo_operacion.indexOf('02');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('03')){
+                    array_tipo_op_leasing.push(3);
+                    var index=tipo_operacion.indexOf('03');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('04')){
+                    array_tipo_op_leasing.push(4);
+                    var index=tipo_operacion.indexOf('04');
+                    tipo_operacion.splice(index,1);
+                }
+                if(tipo_operacion.includes('05')){
+                    array_tipo_op_leasing.push(5);
+                    var index=tipo_operacion.indexOf('05');
+                    tipo_operacion.splice(index,1);
+                }
+
+                //Se agrega condición para el id 3 (Crédito Puente) para que no se duplique en la lista, pero en caso de que se seleccione
+                //busque tanto para Leasing como para Crdito
+                if(tipo_operacion.includes('3')){
+                    array_tipo_op_leasing.push(5);
+                }
+
+                if(array_tipo_op_leasing.length>0 && tipo_operacion.length==0){//Se tienen valores para Leasing y ninguno para Crédito
+                    
+                    filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "num_tipo_op_leasing_c": { "$contains": array_tipo_op_leasing } }
+                }else if(tipo_operacion.length>0 && array_tipo_op_leasing==0){
+                    filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "num_tipo_op_credito_c": { "$contains": tipo_operacion } }
+                }else{
+                    filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = {"$or":[{ "num_tipo_op_leasing_c": { "$contains": array_tipo_op_leasing } },{ "num_tipo_op_credito_c": { "$contains": tipo_operacion } }] }
+                }
+            }
+
+        }
+
+        var filtroUsuarios = {
+            "filter": [
+                {
+                    "status": {
+                        "$equals": "Active"
+                    }
+                }
+            ],
+            "max_num": "-1",
+            "fields":"id,region_c,user_name"
+        }
+        var urlBacklog=app.api.buildURL('lev_Backlog', null, null, filtro);
+        var urlUsuarios=app.api.buildURL('Users', null, null, filtroUsuarios);
+
+        urlBacklog="/" + urlBacklog.split("rest/")[1];
+        urlUsuarios="/" + urlUsuarios.split("rest/")[1];
+
+
+        var requestBulk = {
+            "requests": [
+                {
+                    "url": urlBacklog, "method": "GET"
+                },
+                {
+                    "url": urlUsuarios, "method": "GET"
+                }
+
+            ]
         }
 
         app.alert.show('getBacklogs', {
             level: 'process',
             title: 'Cargando, por favor espere.',
         });
-        app.api.call('GET', app.api.buildURL('lev_Backlog', null, null, filtro), null, {
+        /****************************** */
+        //Llamada hacia API BULK
+        app.api.call('create', app.api.buildURL('bulk', null, null, requestBulk), null, {
             success: _.bind(function (data) {
 
-                if (data.records.length > 0) {
+                if (data[0].contents.records.length > 0) 
+                {
+                    data.records=data[0].contents.records;
                     self.listaBacklogs = [];
                     self.cantidad_backlogs = data.records.length;
                     for (index = 0; index < data.records.length; index++) {
                         self.counter = 0;
+                        //Obteniendo la región (zona) a la que pertenece el usuario asignado al backlog
+                        var registros_usuarios=data[1].contents.records;
+                        if(registros_usuarios.length>0){
+                            var id_usuario_asignado=data.records[index].assigned_user_id;
+                            for (var idxUsers = 0; idxUsers < registros_usuarios.length; idxUsers++) {
+                                if(id_usuario_asignado==registros_usuarios[idxUsers].id){
+                                    data.records[index].zona=registros_usuarios[idxUsers].region_c;
+                                    //Al encontrar al usuario, se agrega condición para salir del ciclo for
+                                    idxUsers=registros_usuarios.length;
+                                }
+                                
+                            }
+
+                        }
                         //Obteniendo el nombre de la cuenta, se puede obtener a partir del nombre
                         var nombre_cuenta = data.records[index].name.split("-")[2]
                         data.records[index].nombre_cuenta = nombre_cuenta.trim();
@@ -263,9 +412,39 @@
                         data.records[index].monto_rechazado_c = tipo_op = Number(data.records[index].monto_rechazado_c);
                         data.records[index].monto_sin_solicitud_c = tipo_op = Number(data.records[index].monto_sin_solicitud_c);
                         data.records[index].monto_con_solicitud_c = tipo_op = Number(data.records[index].monto_con_solicitud_c);
+                        
 
                         self.listaBacklogs.push(data.records[index]);
                     }
+
+                    //Una vez llena la lista de Backlogs, se procede a filtrar la zona
+                    //Obtiene el valor de la zona
+                    var zona_filtro=$('#zona_filtro').val();
+                    if(self.listaBacklogs.length>0 && zona_filtro!=null && zona_filtro!="" && zona_filtro!=undefined && zona_filtro!="0"){
+                        
+                        var listaBacklogsAuxiliar=[];
+                        for (let index = 0; index < self.listaBacklogs.length; index++) {
+                            if(self.listaBacklogs[index].zona==zona_filtro){
+                                listaBacklogsAuxiliar.push(self.listaBacklogs[index]);
+                            }   
+                        }
+                        self.listaBacklogs=listaBacklogsAuxiliar;
+
+                    }
+
+                    var cliente_filtro=$('#filtroClienteBacklog').val();
+                    if(self.listaBacklogs.length>0 && cliente_filtro!=null && cliente_filtro!="" && cliente_filtro!=undefined){
+                        
+                        var listaBacklogsAuxiliar=[];
+                        for (let index = 0; index < self.listaBacklogs.length; index++) {
+                            if(self.listaBacklogs[index].nombre_cuenta.toLowerCase().includes(cliente_filtro.toLowerCase())){
+                                listaBacklogsAuxiliar.push(self.listaBacklogs[index]);
+                            }   
+                        }
+                        self.listaBacklogs=listaBacklogsAuxiliar;
+
+                    }
+
                 } else {
 
                     app.alert.show('sin_registros_bl', {
@@ -293,6 +472,12 @@
                     $('#anio_filtro').val(self.anio_filtro);
                     $('#etapa_filtro').val(self.etapa_filtro);
                     $('#producto_filtro').val(self.producto_filtro);
+                    $('#equipo_filtro').select2('val',self.equipo_filtro);
+                    $('[name="assigned_user_name"]').select2('val',self.asesor_filtro);
+                    $('#filtroClienteBacklog').val(self.cliente_filtro);
+                    $('#tipo_operacion').select2('val',self.tipo_operacion_filtro);
+                    $('#zona_filtro').select2('val',self.zona_filtro);
+
                 } else {
                     //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
                     $('#mes_filtro').select2('val', ((new Date).getMonth() + 1).toString());
@@ -300,6 +485,10 @@
                     $('#anio_filtro').select2('val', ((new Date).getFullYear()));
                     $('#etapa_filtro').select2('val', "");
                     $('#producto_filtro').select2('val', "0");
+                    $('[name="assigned_user_name"]').select2("val","");
+                    $('#filtroClienteBacklog').val("");
+                    $('#tipo_operacion').select2('val',"");
+                    $('#zona_filtro').select2('val',"0");
                 }
 
                 //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
@@ -307,7 +496,6 @@
 
             }, self)
         });
-
 
     },
 
