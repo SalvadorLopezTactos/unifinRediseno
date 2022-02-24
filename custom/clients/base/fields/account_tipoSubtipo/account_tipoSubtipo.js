@@ -4,6 +4,7 @@
         //Inicializa campo custom
         options = options || {};
         options.def = options.def || {};
+        pipeacc=this;
         this._super('initialize', [options]);
         this.model.on('sync', this.tipoSubtipo_vista, this);
     },
