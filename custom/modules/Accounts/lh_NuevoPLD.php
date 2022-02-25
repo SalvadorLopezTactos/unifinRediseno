@@ -16,9 +16,14 @@ class NuevoPLD_Class
         */
       //$GLOBALS['log']->fatal("isUpdate->",$args['isUpdate']);
       //$GLOBALS['log']->fatal("isUpdate->",$bean->accounts_tct_pld);
+      //$GLOBALS['log']->fatal("nuevo PLD",$productosPLD['arrendamientoPuro']['id_pld']);
       $productosPLD = $bean->accounts_tct_pld;
       $modulo = 'tct_PLD';
        
+      if (!empty($productosPLD) || !$args['isUpdate']) {
+       ########################
+        // Arrendamiento Puro: AP
+        ########################
       if (empty($productosPLD['arrendamientoPuro']['id_pld'])) {
         //Inserta registro
         //$GLOBALS['log']->fatal("nuevo PLD");
@@ -212,7 +217,7 @@ class NuevoPLD_Class
           $bean->accounts_tct_pld_1->add($pldCE->id);
         }
         //$productosPLD['creditoRevolvente']['id_pld'] = $pldCE->id;
-        
+        }
         $GLOBALS['log']->fatal("terminoPLD");
         
     }

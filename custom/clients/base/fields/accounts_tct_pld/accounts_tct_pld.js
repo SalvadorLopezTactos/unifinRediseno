@@ -1246,12 +1246,13 @@
             pld.ProductosPLD = contexto_cuenta.ProductosPLD;
         }
         if (Object.entries(errors).length == 0 && (
-            ((self.inlineEditMode && $('.campo4ddw-cs').select2('val') != "")
-            || (self.inlineEditMode && $('.campo4ddw-ff').select2('val') != "")
-            || (self.inlineEditMode && $('.campo4ddw-ca').select2('val') != "")
-            || (self.inlineEditMode && $('.campo4ddw-ap').select2('val') != "")
+            ((self.inlineEditMode && typeof $('.campo4ddw-cs').select2('val') == "string")
+            || (self.inlineEditMode && typeof $('.campo4ddw-ff').select2('val') == "string")
+            || (self.inlineEditMode && typeof $('.campo4ddw-ca').select2('val') == "string")
+            || (self.inlineEditMode && typeof $('.campo4ddw-ap').select2('val') == "string")
             )||(self.createMode)
         )) {
+
                     this.ProductosPLD.arrendamientoPuro.campo2 = this.$('.campo2ddw-ap').select2('val');
                     this.ProductosPLD.arrendamientoPuro.campo3 = this.$('.campo3rel-ap')[0]['innerText'];
                     this.ProductosPLD.arrendamientoPuro.campo3_id = this.$('.campo3rel-ap').select2('val');
