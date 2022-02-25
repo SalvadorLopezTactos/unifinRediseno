@@ -17,8 +17,14 @@ class MambuLogic
     function create_LC($bean = null, $event = null, $args = null)
     {
         global $sugar_config,$db;
+        global $app_list_strings;
+        $available_financiero=array();
+        $lista_productos = $app_list_strings['productos_integra_mambu_list'];
+        //Recorriendo lista de de productos
+        foreach ($lista_productos as $key => $value) {
+            array_push($available_financiero,$key);
+        }
         //traer el bean de la cuenta para obtener el encodedkey_mambu_c
-        $available_financiero=array("39","50","49","48","51","77");
         $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
         if(in_array($bean->producto_financiero_c ,$available_financiero) && $bean->estatus_c=="N" && $beanCuenta->encodedkey_mambu_c!="" && $bean->tct_id_mambu_c=="") {
             $GLOBALS['log']->fatal("Inicia MambuLogic para creacion de Linea de credito Mambu");
