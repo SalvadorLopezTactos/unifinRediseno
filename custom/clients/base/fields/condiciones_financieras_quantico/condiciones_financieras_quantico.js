@@ -381,14 +381,16 @@
                                                 }
                                             }
 
+                                            self.bodyTableModified[i].deshabilitado='disabled';
+
                                             self.bodyTableModified[i].valoresRangoSuperior=listaValoresRangoSuperior;
                                         }
                                         
                                     }
                                 }
 
-                                //Se habilita primer rango inferior y deshabilitando los restantes
-                                self.bodyTableModified[1].deshabilitado='';
+                                //Se habilita primer rango superior y deshabilitando los restantes
+                                self.bodyTableModified[2].deshabilitado='';
 
                                 var jsonFormatToValuesDefault={};
                                 
@@ -662,14 +664,16 @@
                                     }
                                 }
 
+                                self.bodyTableModified[i].deshabilitado='disabled';
+
                                 self.bodyTableModified[i].valoresRangoSuperior=listaValoresRangoSuperior;
                             }
                                         
                         }
                     }
 
-                    //Se habilita primer rango inferior y deshabilitando los restantes
-                    self.bodyTableModified[1].deshabilitado='';
+                    //Se habilita primer rango superior y deshabilitando los restantes
+                    self.bodyTableModified[2].deshabilitado='';
 
                     var jsonFormatToValuesDefault={};
                     
@@ -1354,9 +1358,11 @@
         //Se obtiene valor de la opción seleccionada para filtrar en el json que auxilia para establecer valores default
         var valor_seleccionado="";
         var valor_inferior="";
+        var valor_superior="";
         var elemento_disparador="";
         //Si no se encuentra valor en el elemento previo (elemento de la izquierda), quiere decir que el evento viene disparado del select de Tipo Activo
         //En otro caso, se asume que el evento se disparó desde el campo del rango inferior
+        /*
         if($(e.currentTarget).parent().prev().find('select').find('option:selected').text()==''){
             elemento_disparador="select";
             valor_seleccionado=$(e.currentTarget).find('option:selected').text();
@@ -1367,6 +1373,34 @@
             valor_seleccionado=$(e.currentTarget).parent().prev().find('select').find('option:selected').text();
             valor_inferior=$(e.currentTarget).find('option:selected').text();
         }
+        */
+
+       if($(e.currentTarget).parent().prev().find('select[data-info="inferior"]').length==0){
+        elemento_disparador="select";
+        valor_seleccionado=$(e.currentTarget).find('option:selected').text();
+        valor_inferior=$(e.currentTarget).parent().next().find('option:selected').text();
+        }else{
+            //Entra condición, se obtiene elemento desde el campo de rango inferior
+            elemento_disparador="superior";
+            valor_seleccionado=$(e.currentTarget).parent().prev().prev().find('select').find('option:selected').text();
+
+            valor_superior=$(e.currentTarget).val();
+            var nombre_columna=$(e.currentTarget).attr('data-columna');
+            var esSuperiorInferior=$(e.currentTarget).attr('data-info');
+            var nombre_elemento=nombre_columna+"_"+esSuperiorInferior;
+
+            //valor_inferior=$(e.currentTarget).parent().prev().find('option:selected').text();
+            //Buscar dentro del objeto el item con base al rango_superior seleccionado
+            for (const key in this.jsonToValuesDefault[valor_seleccionado]) {
+                var elemento_iterado=this.jsonToValuesDefault[valor_seleccionado][key];
+                for (const k in elemento_iterado) {
+                    if (k==nombre_elemento && elemento_iterado[nombre_elemento]==valor_superior) {
+                        valor_inferior=key;
+                    }
+                }
+            }
+
+        }
 
         var item_to_set=this.jsonToValuesDefault[valor_seleccionado][valor_inferior];
 
@@ -1375,28 +1409,34 @@
         var numero_elementos=$(e.currentTarget).parent().siblings('td').length;
 
         //Si el campo que dispara el evento es el campo del rango inferior, no se toma en cuenta el primer sibling (Tipo Activo)
-        if(elemento_disparador=='inferior'){
+        if(elemento_disparador=='superior'){
             for (var index = 1; index < numero_elementos; index++) {
-                //Se obtiene el nombre de la columna
-                var nombre_columna=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).attr('data-columna');
-                //Se obtiene el campo para saber si el elemento pertenece a un rango inferior o superior
-                var inferiorSuperior=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0)[0].attributes['data-info'].value;
-                
-                for (const property in item_to_set) {
-                    var properties_split=property.split('_');
-                    if(properties_split.length >1){
-                        if(properties_split[0]==nombre_columna && properties_split[1]==inferiorSuperior){
-                            
-                            var valor_encontrado=item_to_set[property];
-                            //Estableiendo valor al input hidden
-                            $(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).val(valor_encontrado);
-                            //Estableciendo valor al select2
-                            $(e.currentTarget).parent().siblings('td').eq(index).children().eq(1).select2('val',valor_encontrado);
+                if(index==1){
+                    $(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).val(valor_inferior);
+                    $(e.currentTarget).parent().siblings('td').eq(index).children().eq(1).select2('val',valor_inferior);
 
+                }else{
+                    //Se obtiene el nombre de la columna
+                    var nombre_columna=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).attr('data-columna');
+                    //Se obtiene el campo para saber si el elemento pertenece a un rango inferior o superior
+                    var inferiorSuperior=$(e.currentTarget).parent().siblings('td').eq(index).children().eq(0)[0].attributes['data-info'].value;
+                    
+                    for (const property in item_to_set) {
+                        var properties_split=property.split('_');
+                        if(properties_split.length >1){
+                            if(properties_split[0]==nombre_columna && properties_split[1]==inferiorSuperior){
+                                
+                                var valor_encontrado=item_to_set[property];
+                                //Estableiendo valor al input hidden
+                                $(e.currentTarget).parent().siblings('td').eq(index).children().eq(0).val(valor_encontrado);
+                                //Estableciendo valor al select2
+                                $(e.currentTarget).parent().siblings('td').eq(index).children().eq(1).select2('val',valor_encontrado);
+
+                            }
                         }
                     }
                 }
-            
+                
             }
         }else{//La acción fue disparada a través de select de Tipo Activo
             for (var index = 0; index < numero_elementos; index++) {

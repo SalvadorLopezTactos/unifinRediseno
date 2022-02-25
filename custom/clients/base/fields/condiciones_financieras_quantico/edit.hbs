@@ -130,7 +130,7 @@
                                     {{else}}
                                         {{#if rangoSuperior}}
                                             <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="hidden" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
-                                            <select disabled data-name="{{nombreCampo}}" data-type="texto" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2 selectToHidden" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                            <select {{#if deshabilitado}}disabled{{/if}} data-name="{{nombreCampo}}" data-type="texto" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" class="row-fluid select2 selectToHidden" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
                                                 {{#each valoresRangoSuperior}}
                                                     <option value="{{@key}}" {{ifSelected @key ../rangoSuperior}}>{{this}}</option>
                                                 {{/each}}
