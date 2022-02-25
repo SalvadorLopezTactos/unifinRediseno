@@ -203,6 +203,7 @@ SITE;
         $bean_account->primernombre_c = $bean_Leads->nombre_c;
         $bean_account->apellidomaterno_c = $bean_Leads->apellido_materno_c;
         $bean_account->apellidopaterno_c = $bean_Leads->apellido_paterno_c;
+        $bean_account->genero_c = $bean_Leads->genero_c;
         //$bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
         $bean_account->ventas_anuales_c = $bean_Leads->ventas_anuales_c;
         $bean_account->potencial_cuenta_c = $bean_Leads->potencial_lead_c;
