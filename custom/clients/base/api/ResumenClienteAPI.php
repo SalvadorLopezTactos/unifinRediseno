@@ -239,15 +239,16 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['general_cliente']['asesorRM'] = $beanPersona->promotorrm_c;
 
             //Promotores
-            $arr_principal['leasing']['promotor']=$beanPersona->promotorleasing_c;
+            /*$arr_principal['leasing']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
             $arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
             $arr_principal['unilease']['promotor']=$beanPersona->promotorleasing_c;
+            */
             $arr_principal['rm']['promotor']=$beanPersona->promotorrm_c;
-
+            
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
             $arr_principal['factoring']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_factoring_c;
@@ -813,6 +814,8 @@ class ResumenClienteAPI extends SugarApi
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
                 $cobranza = $product->cobranza_c;
+                $asignado = $product->assigned_user_name;
+            
                 $estatusxproducto = $app_list_strings['status_management_list'][$product->status_management_c] .' / '.$app_list_strings['razon_list'][$product->razon_c];
 
                 if ($statusProducto == '' || $statusProducto == null){
@@ -827,11 +830,15 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
                         $arr_principal['leasing']['cobranza'] = $cobranza;
                         $arr_principal['leasing']['estatusxproducto'] = $estatusxproducto;
-
+                        //Promotores
+                        $arr_principal['leasing']['promotor']=$asignado;
+                        
                         $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
                         $arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['unilease']['estatus_atencion'] = $statusProducto;
                         $arr_principal['unilease']['estatusxproducto'] = $estatusxproducto;
+                        //Promotores
+                        $arr_principal['unilease']['promotor']=$asignado;
                         break;
                     case '3': //Credito-Automotriz
                         $arr_principal['credito_auto']['tipo_cuenta'] = $tipoCuenta;
@@ -839,6 +846,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['credito_auto']['estatus_atencion'] = $statusProducto;
                         $arr_principal['credito_auto']['cobranza'] = $cobranza;
                         $arr_principal['credito_auto']['estatusxproducto'] = $estatusxproducto;
+                        //Promotores
+                        $arr_principal['credito_auto']['promotor']=$asignado;
                         break;
                     case '4': //Factoraje
                         $arr_principal['factoring']['tipo_cuenta'] = $tipoCuenta;
@@ -846,6 +855,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['factoring']['estatus_atencion'] = $statusProducto;
                         $arr_principal['factoring']['cobranza'] = $cobranza;
                         $arr_principal['factoring']['estatusxproducto'] = $estatusxproducto;
+                        //Promotores
+                        $arr_principal['factoring']['promotor']=$asignado;
                         break;
                     case '6': //Fleet
                         $arr_principal['fleet']['tipo_cuenta'] = $tipoCuenta;
@@ -853,10 +864,14 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['fleet']['estatus_atencion'] = $statusProducto;
                         $arr_principal['fleet']['cobranza'] = $cobranza;
                         $arr_principal['fleet']['estatusxproducto'] = $estatusxproducto;
+                        //Promotores
+                        $arr_principal['fleet']['promotor']=$asignado;
                         break;
                     case '7': //Credito SOS
                         $arr_principal['credito_sos']['estatus_atencion'] = $statusProducto;
                         $arr_principal['credito_sos']['cobranza'] = $cobranza;
+                        //Promotores
+                        $arr_principal['credito_sos']['promotor']=$asignado;
                         break;
                     case '8': //Uniclick
                         $arr_principal['uniclick']['tipo_cuenta'] = $tipoCuenta;
@@ -864,6 +879,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
                         $arr_principal['uniclick']['estatusxproducto'] = $estatusxproducto;
+                        //Promotores
+                        $arr_principal['uniclick']['promotor']=$asignado;
                         break;
                     case '9': //Uniclick
                         //$arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
