@@ -448,6 +448,8 @@
         /***************Valida Campo de Página Web ****************************/
         this.model.addValidationTask('validaPaginaWeb', _.bind(this.validaPagWeb, this));
 
+        /** Valida genero personas fisicas y fisica con actividad empesarial **/
+        this.model.addValidationTask('validaGenero', _.bind(this.validaGenero, this));
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
 		this.model.addValidationTask('valida_actividad_economica', _.bind(this.valida_actividad_economica, this));
@@ -3224,6 +3226,19 @@
                     }, this),
                 });
             }
+        } else {
+            callback(null, fields, errors);
+        }
+    },
+
+    /*************Valida Genero *****************/
+    validaGenero: function (fields, errors, callback) {
+        var genero = this.model.get('genero_c');
+        if ((genero == "" || genero == null) && (this.model.get('tipodepersona_c') == "Persona Fisica" ||
+            this.model.get('tipodepersona_c') == "Persona Fisica con Actividad Empresarial")) {
+            errors['genero_c'] = errors['genero_c'] || {};
+            errors['genero_c'].required = true;
+            callback(null, fields, errors);
         } else {
             callback(null, fields, errors);
         }
