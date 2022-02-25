@@ -210,7 +210,12 @@ array (
               array (
                 'name' => 'disponible_seleccion',
                 'label' => 'LBL_DISPONIBLE_SELECCION',
-                'span' => 12,
+              ),
+              5 => 
+              array (
+                'readonly' => false,
+                'name' => 'asesor_producto_c',
+                'label' => 'LBL_ASESOR_PRODUCTO',
               ),
             ),
           ),
