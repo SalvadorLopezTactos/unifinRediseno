@@ -1274,11 +1274,11 @@ extendsFrom: 'RecordView',
             requestB.url = url.substring(4);
             requests.push(requestB);
             var requestC = app.utils.deepCopy(request);
-            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tel_telefonos_1")
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tel_telefonos_1");
             requestC.url = url.substring(4);
             requests.push(requestC);
 						var requestD = app.utils.deepCopy(request);
-            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tct_pld_1")
+            var url = app.api.buildURL("Accounts/" + Cuenta + "/link/accounts_tct_pld_1");
             requestD.url = url.substring(4);
             requests.push(requestD);
             var faltantes=[];
