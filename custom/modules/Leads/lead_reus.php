@@ -5,10 +5,13 @@ class class_lead_reus
 {
     public function func_lead_reus($bean = null, $event = null, $args = null)
     {
-        $errorp = $this->func_valida_correos($bean);
-        $errorp = $this->func_valida_telefonos($bean);
+        $errorcorreo = $this->func_valida_correos($bean);
+        $errortel = $this->func_valida_telefonos($bean);
 
-        if(!$errorp){
+        $GLOBALS['log']->fatal('errorcorreo-'.$errorcorreo);
+        $GLOBALS['log']->fatal('errortel-'.$errortel);
+
+        if(!$errorcorreo || !$errortel){
             $bean->pendiente_reus_c = 1;
         }else{
             $bean->pendiente_reus_c = 0;
@@ -34,7 +37,7 @@ class class_lead_reus
         if ($mailLead == true) {
 
             $host = substr($host, 0, -1);
-            //$GLOBALS['log']->fatal($host);
+            $GLOBALS['log']->fatal('mail'.$host);
             $resultado = $callApi->getDWHREUS($host);
             //$resultado = '[{"valor":"caro1@gmail.com","existe":"NO"},{"valor":"caro.huesca@gmail.com","existe":"SI"}]';
             //$resultado = json_decode($resultado, true);
@@ -83,7 +86,7 @@ class class_lead_reus
         //API DHW REUS PARA TELEFONOS 
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
-
+        $GLOBALS['log']->fatal($host);
         if ($bean->phone_mobile != "" || $bean->phone_home != "" || $bean->phone_work != "") {
             //OBTENEMOS LOS TELEFONOS DEL LEAD
             if ($bean->phone_mobile != "") {
@@ -111,7 +114,7 @@ class class_lead_reus
                 }
             }
     
-            //$GLOBALS['log']->fatal($host);
+            $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
             //$resultado = '[{"valor":"5518504488","existe":"SI"},{"valor":"5569783395","existe":"NO"}]';
             //$resultado = json_decode($resultado, true);
