@@ -98,7 +98,8 @@
             //Se declaran variables para armar la url
             var rfc = btoa(this.model.get('rfc_c'));
             var id = btoa(this.model.get('id'));
-            var link = '&UUID=' + id + '&RFC_CIEC=' + rfc;
+            var mailAccount = btoa(this.model.get('email1'));
+            var link = '&UUID=' + id + '&RFC_CIEC=' + rfc + '&MAIL=' + mailAccount;
 
             // FECHA ACTUAL
             var today = new Date();
