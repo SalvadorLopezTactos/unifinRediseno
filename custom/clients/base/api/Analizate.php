@@ -73,12 +73,12 @@ class Analizate extends SugarApi
                     if ($data['Financiera']['fecha']==""){
                         $data['Financiera']['fecha']=$estados->fecha_actualizacion;
                         $data['Financiera']['estado']=$estados->estado;
-                        $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc);
+                        $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
                     }
                     if($estados->fecha_actualizacion>$data['Financiera']['fecha']){
                         $data['Financiera']['fecha']=$estados->fecha_actualizacion;
                         $data['Financiera']['estado']=$estados->estado;
-                        $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc);
+                        $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
                     }
 
                 }else{
@@ -102,12 +102,12 @@ class Analizate extends SugarApi
                     if ($data['Credit']['fecha']==""){
                         $data['Credit']['fecha']=$estados->fecha_actualizacion;
                         $data['Credit']['estado']=$estados->estado;
-                        $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc);
+                        $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
                     }
                     if($estados->fecha_actualizacion>$data['Credit']['fecha']){
                         $data['Credit']['fecha']=$estados->fecha_actualizacion;
                         $data['Credit']['estado']=$estados->estado;
-                        $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc);
+                        $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
                     }
                 }else{
                     //Recuperar registro mas reciente (Url del documento)
