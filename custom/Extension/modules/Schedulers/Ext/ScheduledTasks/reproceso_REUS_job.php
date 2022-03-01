@@ -13,7 +13,9 @@ function reproceso_REUS_job()
     $respuesta = array();
 
     //recupera leads con pendiente REUS
-    $query = "SELECT id , last_name , deleted from leads where id in ( SELECT id_c as id FROM LEADS_CSTM where pendiente_reus_c = 1) and deleted = 0";
+    $query = "SELECT id , last_name , deleted from leads where id in ( 
+    SELECT id_c as id FROM LEADS_CSTM where pendiente_reus_c = 1 and subtipo_registro_c <> 4
+    ) and deleted = 0";
     $result = $GLOBALS['db']->query($query);
     while($row = $GLOBALS['db']->fetchByAssoc($result) ){
         $pila = array(
