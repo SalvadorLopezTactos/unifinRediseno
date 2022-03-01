@@ -80,14 +80,16 @@ class leads_validateString
 
         $servicio= isset($GLOBALS['service']->platform)?$GLOBALS['service']->platform:"base";
 
+        //$GLOBALS['log']->fatal("servicio",$servicio);
         if ($servicio== "base" || $servicio == "mobile") {
 
             // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
             if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4 && $bean->homonimo_c==0 && $bean->omite_match_c==0) {
 
                 $idPadre = $this->createCleanName($bean->leads_leads_1_name);
-                //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
-                // $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+                //$GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
+                //$GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+                //$GLOBALS['log']->fatal("para id " . $bean->id);
                 $exprNumerica = "/^[0-9]*$/";
                 /**********************VALIDACION DE CAMPOS PB ID Y DUNS ID DEBEN SER NUMERICOS*********************/
                 if (!preg_match($exprNumerica, $bean->pb_id_c)) {
@@ -100,14 +102,23 @@ class leads_validateString
                 }
 
                 //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
+                /*
                 $sql = new SugarQuery();
                 $sql->select(array('id', 'clean_name'));
                 $sql->from(BeanFactory::newBean('Accounts'), array('team_security' => false));
-                $sql->where()->equals('clean_name', $bean->clean_name_c);
-                $sql->where()->notEquals('id', $bean->id);
+                $sql->where()->queryAnd()->equals('clean_name',$bean->clean_name_c)->notEquals('id', $bean->id);
+                */
+                //$sql->where()->equals('clean_name', $bean->clean_name_c);
+                //$sql->where()->notEquals('id', $bean->id);
 
-                $result = $sql->execute();
-                $count = count($result);
+                $query = "SELECT id_c, clean_name_c FROM leads_cstm WHERE clean_name_c = '{$bean->clean_name_c}'
+                AND id_c <> '{$bean->id}'";
+                $results = $GLOBALS['db']->query($query);
+                
+                //$result = $sql->execute();
+                //$count = count($result);
+                $count = $results->num_rows;
+                //$GLOBALS['log']->fatal("pcount" . $count);
                 /************SUGARQUERY PARA VALIDAR IMPORTACION DE REGISTROS SI TIENEN IGUAL LOS MISMOS VALORES DE CLEAN_NAME O PB_ID O DUNS_ID*********/
                 $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
                 $sqlLead = new SugarQuery();
