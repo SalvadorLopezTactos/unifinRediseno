@@ -4,6 +4,9 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
+        /** Valida genero personas fisicas y fisica con actividad empesarial **/
+        this.model.addValidationTask('validaGenero', _.bind(this.validaGenero, this));
+
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
@@ -271,6 +274,18 @@
         }
     },
 
+    /*************Valida Genero *****************/
+    validaGenero: function (fields, errors, callback) {
+        var genero = this.model.get('genero_c');
+        if ((genero == "" || genero == null) && (this.model.get('regimen_fiscal_c') == "1" ||
+            this.model.get('regimen_fiscal_c') == "2")) {
+            errors['genero_c'] = errors['genero_c'] || {};
+            errors['genero_c'].required = true;
+            callback(null, fields, errors);
+        } else {
+            callback(null, fields, errors);
+        }
+    },
 
     valida_requeridos_min: function (fields, errors, callback) {
         var campos = "";

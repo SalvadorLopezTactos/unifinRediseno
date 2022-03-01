@@ -1246,10 +1246,10 @@
             pld.ProductosPLD = contexto_cuenta.ProductosPLD;
         }
         if (Object.entries(errors).length == 0 && (
-            ((self.inlineEditMode && typeof $('.campo4ddw-cs').select2('val') == "string")
-            || (self.inlineEditMode && typeof $('.campo4ddw-ff').select2('val') == "string")
-            || (self.inlineEditMode && typeof $('.campo4ddw-ca').select2('val') == "string")
-            || (self.inlineEditMode && typeof $('.campo4ddw-ap').select2('val') == "string")
+            ((typeof $('.campo4ddw-cs').select2('val') == "string")
+            || (typeof $('.campo4ddw-ff').select2('val') == "string")
+            || (typeof $('.campo4ddw-ca').select2('val') == "string")
+            || (typeof $('.campo4ddw-ap').select2('val') == "string")
             )||(self.createMode)
         )) {
 
