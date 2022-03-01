@@ -111,8 +111,9 @@ class leads_validateString
                 //$sql->where()->equals('clean_name', $bean->clean_name_c);
                 //$sql->where()->notEquals('id', $bean->id);
 
-                $query = "SELECT id_c, clean_name_c FROM leads_cstm WHERE clean_name_c = '{$bean->clean_name_c}'
-                AND id_c <> '{$bean->id}'";
+                $query = "SELECT lc.id_c, lc.clean_name_c FROM leads_cstm lc JOIN leads l
+                on l.id = lc.id_c WHERE lc.clean_name_c = '{$bean->clean_name_c}'
+                AND lc.id_c <> '{$bean->id}' AND l.deleted =0";
                 $results = $GLOBALS['db']->query($query);
                 
                 //$result = $sql->execute();
