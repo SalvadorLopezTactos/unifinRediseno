@@ -29,6 +29,12 @@
         'keydown .campo2dec-ce': 'checkInVentas',
         'keydown .campo1int-ce': 'keyDownNewExtension',
         'keydown .campo1int-ce': 'checkInVentas',
+        'change .changePLD-AP':'updatemodelPLDAP',
+        'change .changePLD-FF':'updatemodelPLDFF',
+        'change .changePLD-CA':'updatemodelPLDCA',
+        'change .changePLD-CS':'updatemodelPLDCS',
+        'change .changePLD-CR':'updatemodelPLDCR',
+        
 
 
     },
@@ -1323,7 +1329,7 @@
             
             //this.model.set('ProductosPLD', ProductosPLD);
             pld.ProductosPLD  = this.ProductosPLD;
-            //contexto_cuenta.ProductosPLD = this.ProductosPLD;
+            contexto_cuenta.ProductosPLD = this.ProductosPLD;
             this.model.set('ProductosPLD', this.ProductosPLD);
             this.model.set('accounts_tct_pld', this.ProductosPLD);
             callback(null, fields, errors);
@@ -1336,4 +1342,98 @@
         }
     },
 
+
+    updatemodelPLDAP: function (){
+
+        this.ProductosPLD.arrendamientoPuro.campo2 = this.$('.campo2ddw-ap').select2('val');
+        this.ProductosPLD.arrendamientoPuro.campo3 = this.$('.campo3rel-ap')[0]['innerText'];
+        this.ProductosPLD.arrendamientoPuro.campo3_id = this.$('.campo3rel-ap').select2('val');
+        this.ProductosPLD.arrendamientoPuro.campo4 = this.$('.campo4ddw-ap').select2('val');
+        //this.ProductosPLD.arrendamientoPuro.campo5 = this.$('.campo5rel-ap')[0]['innerText'];
+        //this.ProductosPLD.arrendamientoPuro.campo5_id = this.$('.campo5rel-ap').select2('val');
+        this.ProductosPLD.arrendamientoPuro.campo6 = this.$('.campo6ddw-ap').select2('val');
+        // this.ProductosPLD.arrendamientoPuro.campo7 = this.$('.campo7ddw-ap').select2('val');
+        // this.ProductosPLD.arrendamientoPuro.campo8 = this.$('.campo8txt-ap').val();
+        // this.ProductosPLD.arrendamientoPuro.campo9 = this.$('.campo9ddw-ap').select2('val');
+        // this.ProductosPLD.arrendamientoPuro.campo10 = this.$('.campo10txt-ap').val();
+        this.ProductosPLD.arrendamientoPuro.campo11 = this.$('.campo11ddw-ap').select2('val');
+        //this.ProductosPLD.arrendamientoPuro.campo13 = this.$('.campo13chk-ap')[0].checked;
+        this.ProductosPLD.arrendamientoPuro.campo14 = this.$('.campo14chk-ap')[0].checked;
+        this.ProductosPLD.arrendamientoPuro.campo16 = this.$('.campo16ddw-ap').select2('val').toString();
+        this.ProductosPLD.arrendamientoPuro.campo17 = this.$('.campo17txt-ap').val();
+        this.ProductosPLD.arrendamientoPuro.campo25 = this.$('.campo25ddw-ap').select2('val');
+        this.ProductosPLD.arrendamientoPuro.campo26 = this.$('.campo26txt-ap').val();
+
+        contexto_cuenta.ProductosPLD.arrendamientoPuro=this.ProductosPLD.arrendamientoPuro;
+    
+    },
+
+    updatemodelPLDFF: function (){
+        this.ProductosPLD.factorajeFinanciero.campo2 = this.$('.campo2ddw-ff').select2('val');
+        this.ProductosPLD.factorajeFinanciero.campo3 = this.$('.campo3rel-ff').val();
+        this.ProductosPLD.factorajeFinanciero.campo3_id = this.$('.campo3rel-ff').select2('val');
+        this.ProductosPLD.factorajeFinanciero.campo4 = this.$('.campo4ddw-ff').select2('val');
+        //this.ProductosPLD.factorajeFinanciero.campo5 = this.$('.campo5rel-ff').val();
+        //this.ProductosPLD.factorajeFinanciero.campo5_id = this.$('.campo5rel-ff').select2('val');
+        this.ProductosPLD.factorajeFinanciero.campo21 = this.$('.campo21ddw-ff').select2('val');
+        this.ProductosPLD.factorajeFinanciero.campo22 = this.$('.campo22int-ff').val();
+        this.ProductosPLD.factorajeFinanciero.campo23 = this.$('.campo23dec-ff').val().replace(/,/gi, "");
+        this.ProductosPLD.factorajeFinanciero.campo16 = this.$('.campo16ddw-ff').select2('val').toString();
+        this.ProductosPLD.factorajeFinanciero.campo17 = this.$('.campo17txt-ff').val();
+        this.ProductosPLD.factorajeFinanciero.campo14 = this.$('.campo14chk-ff')[0].checked;
+        this.ProductosPLD.factorajeFinanciero.campo24 = this.$('.campo24ddw-ff').select2('val');
+        this.ProductosPLD.factorajeFinanciero.campo6 = this.$('.campo6ddw-ff').select2('val');
+
+        contexto_cuenta.ProductosPLD.factorajeFinanciero=this.ProductosPLD.factorajeFinanciero;
+
+    },
+
+    updatemodelPLDCA: function (){
+        this.ProductosPLD.creditoAutomotriz.campo2 = this.$('.campo2ddw-ca').select2('val');
+        this.ProductosPLD.creditoAutomotriz.campo3 = this.$('.campo3rel-ca').val();
+        this.ProductosPLD.creditoAutomotriz.campo3_id = this.$('.campo3rel-ca').select2('val');
+        this.ProductosPLD.creditoAutomotriz.campo4 = this.$('.campo4ddw-ca').select2('val');
+        //this.ProductosPLD.creditoAutomotriz.campo5 = this.$('.campo5rel-ca').val();
+        //this.ProductosPLD.creditoAutomotriz.campo5_id = this.$('.campo5rel-ca').select2('val');
+        this.ProductosPLD.creditoAutomotriz.campo6 = this.$('.campo6ddw-ca').select2('val');
+
+        contexto_cuenta.ProductosPLD.creditoAutomotriz=this.ProductosPLD.creditoAutomotriz;
+
+    },
+
+    updatemodelPLDCS:function (){
+        // this.ProductosPLD.creditoSimple.campo1 = this.$('.campo1txt-cs').val();
+        this.ProductosPLD.creditoSimple.campo2 = this.$('.campo2ddw-cs').select2('val');
+        this.ProductosPLD.creditoSimple.campo3 = this.$('.campo3rel-cs').val();
+        this.ProductosPLD.creditoSimple.campo3_id = this.$('.campo3rel-cs').select2('val');
+        this.ProductosPLD.creditoSimple.campo4 = this.$('.campo4ddw-cs').select2('val');
+        //this.ProductosPLD.creditoSimple.campo5 = this.$('.campo5rel-cs').val();
+        //this.ProductosPLD.creditoSimple.campo5_id = this.$('.campo5rel-cs').select2('val');
+        this.ProductosPLD.creditoSimple.campo18 = this.$('.campo18ddw-cs').select2('val').toString();
+        this.ProductosPLD.creditoSimple.campo19 = this.$('.campo19txt-cs').val();
+        this.ProductosPLD.creditoSimple.campo14 = this.$('.campo14chk-cs')[0].checked;
+        this.ProductosPLD.creditoSimple.campo20 = this.$('.campo20ddw-cs').select2('val');
+        this.ProductosPLD.creditoSimple.campo6 = this.$('.campo6ddw-cs').select2('val');
+
+        contexto_cuenta.ProductosPLD.creditoSimple=this.ProductosPLD.creditoSimple;
+    },
+
+    updatemodelPLDCR: function (){
+        //Campos Credito Revolvente
+        this.ProductosPLD.creditoRevolvente.campo1=this.$('.campo1int-ce').val();
+        if(this.$('.campo2dec-ce').val()!=undefined ){this.ProductosPLD.creditoRevolvente.campo2=this.$('.campo2dec-ce').val().replace(/,/gi, "");}
+        this.ProductosPLD.creditoRevolvente.campo3=this.$('.campo3ddw-ce').select2('val').toString();
+        this.ProductosPLD.creditoRevolvente.campo5=this.$('.campo5ddw-ce').select2('val').toString();
+        this.ProductosPLD.creditoRevolvente.campo6=this.$('.campo6ddw-ce').select2('val');
+        this.ProductosPLD.creditoRevolvente.campo7=this.$('.campo7ddw-ce').select2('val').toString();
+        this.ProductosPLD.creditoRevolvente.campo8=this.$('.campo8ddw-ce').select2('val');
+        this.ProductosPLD.creditoRevolvente.campo9=this.$('.campo9rel-ce').select2('val');
+        this.ProductosPLD.creditoRevolvente.campo9_id=this.$('.campo9rel-ce').select2('val');
+        this.ProductosPLD.creditoRevolvente.campo10=this.$('.campo10ddw-ce').select2('val');
+        this.ProductosPLD.creditoRevolvente.campo11=this.$('.campo11rel-ce').select2('val');
+        this.ProductosPLD.creditoRevolvente.campo11_id=this.$('.campo11rel-ce').select2('val');
+
+        contexto_cuenta.ProductosPLD.creditoRevolvente=this.ProductosPLD.creditoRevolvente;
+    
+    },
 })
