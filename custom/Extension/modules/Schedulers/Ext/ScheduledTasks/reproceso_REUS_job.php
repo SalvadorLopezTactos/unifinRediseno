@@ -35,7 +35,7 @@ function reproceso_REUS_job()
         array_push($respuesta, $pila);
     }
     
-    $GLOBALS['log']->fatal('result_reus',$respuesta->num_rows);
+    $GLOBALS['log']->fatal('result_reus',count($respuesta));
 
     $mailLead = false;
     foreach($respuesta as $valor ){
@@ -47,7 +47,7 @@ function reproceso_REUS_job()
         }
         $bean->save();
         } catch (Exception $e) {
-            $GLOBALS['log']->fatal('result_reus_excepcion',$e);
+            $GLOBALS['log']->fatal('result_reus_excepcion',$e->messageLabel);
         }
     }
 
