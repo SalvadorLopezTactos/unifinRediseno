@@ -35,18 +35,20 @@ function reproceso_REUS_job()
         array_push($respuesta, $pila);
     }
     
-    $GLOBALS['log']->fatal('result',$respuesta);
+    $GLOBALS['log']->fatal('result_reus',$respuesta->num_rows);
 
     $mailLead = false;
     foreach($respuesta as $valor ){
-        
+        try{
         if($valor['tipo'] == 'lead'){
             $bean = BeanFactory::retrieveBean('Leads', $valor['id']);
         }else{
             $bean = BeanFactory::retrieveBean('Accounts', $valor['id']);
         }
-
         $bean->save();
+        } catch (Exception $e) {
+            $GLOBALS['log']->fatal('result_reus_excepcion',$e);
+        }
     }
 
     $GLOBALS['log']->fatal('Job reproceso REUS: Fin');
