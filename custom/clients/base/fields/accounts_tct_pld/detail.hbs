@@ -52,7 +52,7 @@
                 <div class="span6 campo2-ap">
                     <label class="record-label ">1.-¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero? <font COLOR="red">*</font></label>
-                    <label class="row-fluid campo2ddw-ap " data-field="campo2AP" data-id="{{ProductosPLD.arrendamientoPuro.campo2}}"
+                    <label class="row-fluid campo2ddw-ap changePLD-AP" data-field="campo2AP" data-id="{{ProductosPLD.arrendamientoPuro.campo2}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.arrendamientoPuro.campo2_label}}
                     </label>
@@ -61,7 +61,7 @@
                     <label class="record-label">Propietario Real</label>
                     <span class=" row-fluid">
                      <a href="/unifin/#Accounts/{{{ProductosPLD.arrendamientoPuro.campo3_id}}}"
-                        class="campo3rel-ap PR-link"
+                        class="campo3rel-ap PR-link changePLD-AP"
                         data-type="relate" data-field="campo3AP"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.arrendamientoPuro.campo3}}</a>
@@ -72,7 +72,7 @@
             <div class="row-fluid Fila3-AP">
                 <div class="span6 campo4-ap">
                     <label class="record-label">2.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red">*</font></label>
-                    <label class=" row-fluid campo4ddw-ap " data-field="campo4AP" data-id="{{ProductosPLD.arrendamientoPuro.campo4}}"
+                    <label class=" row-fluid campo4ddw-ap changePLD-AP" data-field="campo4AP" data-id="{{ProductosPLD.arrendamientoPuro.campo4}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.arrendamientoPuro.campo4_label}}
                     </label>
@@ -81,7 +81,7 @@
                     <label class="record-label ">Proveedor de Recursos</label>
                     <span class=" row-fluid">
                      <a href="/unifin/#Accounts/{{{ProductosPLD.arrendamientoPuro.campo5_id}}}"
-                        class="campo5rel-ap PR-link"
+                        class="campo5rel-ap PR-link changePLD-AP"
                         data-type="relate" data-field="campo5AP"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.arrendamientoPuro.campo5}}
@@ -95,7 +95,7 @@
             <div class="row-fluid Fila4-AP">
                 <div class="span6 campo6-ap">
                     <label class="record-label ">3.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red">*</font></label>
-                    <label class="campo6ddw-ap  row-fluid" data-field="campo6AP" id="state2"
+                    <label class="campo6ddw-ap  row-fluid changePLD-AP" data-field="campo6AP" id="state2"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.arrendamientoPuro.campo6_label}}
                     </label>
@@ -104,7 +104,7 @@
                     <label class="record-label row-fluid">4.-¿Instrumento monetario con el que espera realizar los pagos?
                         (*Es
                         posible elegir más de una opción) <font COLOR="red">*</font></label>
-                    <label class="campo16ddw-ap select2 row-fluid" data-field="campo16AP" id="multi-campo16"
+                    <label class="campo16ddw-ap select2 row-fluid changePLD-AP" data-field="campo16AP" id="multi-campo16"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.arrendamientoPuro.campo16_label}}
                     </label>
@@ -115,13 +115,13 @@
                 <div class="span6 campo14-ap">
                     <label class="record-label">5.-¿Realizará pagos utilizando otro instrumento monetario?</label>
                     <br>
-                    <input type="checkbox" class="campo14chk-ap" {{#if ProductosPLD.arrendamientoPuro.campo14}}
+                    <input type="checkbox" class="campo14chk-ap changePLD-AP" {{#if ProductosPLD.arrendamientoPuro.campo14}}
                            checked{{/if}} disabled="disabled"
                            data-field="campo14AP" style="margin: 2px 6px; padding: 5px 7px;font-size: 14px;"/>
                 </div>
                 <div class="span6 campo17-ap">
                     <label class="record-label">Especifique:</label>
-                    <label class="campo17txt-ap row-fluid" data-field="campo17AP"
+                    <label class="campo17txt-ap row-fluid changePLD-AP" data-field="campo17AP"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.arrendamientoPuro.campo17}}
                     </label>
@@ -132,13 +132,13 @@
                 <div class="span6 campo11-ap" style="display:none">
                    <label class="record-label">6.-Los recursos con los que va a celebrar su operación tiene su origen
                        en su actividad mercantil, actividad u objeto social? <font COLOR="red">*</font></label>
-                   <label  class="campo11ddw-ap  row-fluid" data-field="campo11AP" style="padding: 5px 7px;font-size: 14px;">
+                   <label  class="campo11ddw-ap  row-fluid changePLD-AP" data-field="campo11AP" style="padding: 5px 7px;font-size: 14px;">
                        {{ProductosPLD.arrendamientoPuro.campo11_label}}
                    </label>
                </div>
                <div class="span6 campo26-ap" style="display:none">
                    <label class="record-label">Especifique:</label>
-                   <label class="campo26txt-ap row-fluid" data-field="campo26AP"
+                   <label class="campo26txt-ap row-fluid changePLD-AP" data-field="campo26AP"
                           style="padding: 5px 7px;font-size: 14px;">
                        {{ProductosPLD.arrendamientoPuro.campo26}}
                    </label>
@@ -151,7 +151,7 @@
                  <div class="span6 campo25-ap" style="display:none">
                     <label class="record-label">Los recursos con los que va a celebrar su operación están destinados
                         a <font COLOR="red">*</font></label>
-                    <label class="campo25ddw-ap  row-fluid" data-field="campo25AP"
+                    <label class="campo25ddw-ap  row-fluid changePLD-AP" data-field="campo25AP"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.arrendamientoPuro.campo25_label}}
                     </label>
@@ -175,7 +175,7 @@
                 <div class="span6 campo2-ff">
                     <label class="record-label ">1.-¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un
                         tercero? <font COLOR="red">*</font></label>
-                    <label class="row-fluid campo2ddw-ff " data-field="campo2FF" data-id="{{ProductosPLD.factorajeFinanciero.campo2}}"
+                    <label class="row-fluid campo2ddw-ff changePLD-FF" data-field="campo2FF" data-id="{{ProductosPLD.factorajeFinanciero.campo2}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo2_label}}
                     </label>
@@ -184,7 +184,7 @@
                     <label class="record-label">Propietario Real</label>
                     <span class=" row-fluid">
                      <a href="/unifin/#Accounts/{{ProductosPLD.factorajeFinanciero.campo3_id}}"
-                        class="campo3rel-ff PR-link"
+                        class="campo3rel-ff PR-link changePLD-FF"
                         data-type="relate" data-field="campo3FF"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.factorajeFinanciero.campo3}}
@@ -196,7 +196,7 @@
             <div class="row-fluid Fila3-FF">
                 <div class="span6 campo4-ff">
                     <label class="record-label">2.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red">*</font></label>
-                    <label class=" row-fluid campo4ddw-ff" data-field="campo4FF" data-id="{{ProductosPLD.factorajeFinanciero.campo4}}"
+                    <label class=" row-fluid campo4ddw-ff changePLD-FF" data-field="campo4FF" data-id="{{ProductosPLD.factorajeFinanciero.campo4}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo4_label}}
                     </label>
@@ -205,7 +205,7 @@
                     <label class="record-label ">Proveedor de Recursos</label>
                     <span class=" row-fluid">
                      <a href="/unifin/#Accounts/{{{ProductosPLD.factorajeFinanciero.campo5_id}}}"
-                        class="campo5rel-ff PR-link"
+                        class="campo5rel-ff PR-link changePLD-FF"
                         data-type="relate" data-field="campo5FF"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.factorajeFinanciero.campo5}}
@@ -217,7 +217,7 @@
             <div class="row-fluid Fila3-FF">
                 <div class="span6 campo21-ff">
                     <label class="record-label">3.-¿Con qué frecuencia o periodo realizará pagos a Unifin? <font COLOR="red">*</font></label>
-                    <label class="campo21ddw-ff  row-fluid" data-field="campo21FF"
+                    <label class="campo21ddw-ff  row-fluid changePLD-FF" data-field="campo21FF"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo21_label}}
                     </label>
@@ -227,14 +227,14 @@
             <div class="row-fluid Fila5-FF">
                 <div class="span6 campo22-ff">
                     <label class="record-label">4.-¿Número de pagos que espera realizar en cada periodo? <font COLOR="red">*</font></label>
-                    <label class="campo22int-ff row-fluid" data-field="campo22FF"
+                    <label class="campo22int-ff row-fluid changePLD-FF" data-field="campo22FF"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo22}}
                     </label>
                 </div>
                 <div class="span6 campo23-ff">
                     <label class="record-label">5.-¿Monto total aproximado que espera realizar en el periodo? <font COLOR="red">*</font></label>
-                    <label data-type="currency" class="row-fluid campo23dec-ff" data-field="campo23FF"
+                    <label data-type="currency" class="row-fluid campo23dec-ff changePLD-FF" data-field="campo23FF"
                            style="padding: 5px 7px;font-size: 14px;">
                         ${{customFormatNumber ProductosPLD.factorajeFinanciero.campo23}}
                     </label>
@@ -246,14 +246,14 @@
                     <label class="record-label">6.-¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible
                         elegir más de una opción) <font COLOR="red">*</font></label>
-                    <label class="row-fluid campo16ddw-ff" data-field="campo16FF"
+                    <label class="row-fluid campo16ddw-ff changePLD-FF" data-field="campo16FF"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo16_label}}
                     </label>
                 </div>
                 <div class="span6 campo17-ff">
                     <label class="record-label ">Especifique:</label>
-                    <label type="text" class="campo17txt-ff row-fluid" data-field="campo17FF"
+                    <label type="text" class="campo17txt-ff row-fluid changePLD-FF" data-field="campo17FF"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo17}}
                     </label>
@@ -264,7 +264,7 @@
                 <div class="span6 campo14-ff">
                     <label class="record-label">7.-¿Realizará pagos utilizando otro instrumento monetario?</label>
                     <br>
-                    <input type="checkbox" class="campo14chk-ff" disabled="disabled"
+                    <input type="checkbox" class="campo14chk-ff changePLD-FF" disabled="disabled"
                            {{#if ProductosPLD.factorajeFinanciero.campo14}}checked{{/if}}
                            style="margin: 2px 6px; padding: 5px 7px;font-size: 14px;" data-field="campo14FF"/>
                 </div>
@@ -275,14 +275,14 @@
                     <label class="record-label row-fluid">8.-¿Cuál es el destino de los recursos que obtendrá de la
                         celebración
                         de esta operación? <font COLOR="red">*</font></label>
-                    <label class="campo24ddw-ff row-fluid" data-field="campo24FF"
+                    <label class="campo24ddw-ff row-fluid changePLD-FF" data-field="campo24FF"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo24_label}}
                     </label>
                 </div>
                 <div class="span6 campo6-ff">
                     <label class="record-label ">9.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red">*</font></label>
-                    <label class="campo6ddw-ff  row-fluid" data-field="campo6FF"
+                    <label class="campo6ddw-ff  row-fluid changePLD-FF" data-field="campo6FF"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.factorajeFinanciero.campo6_label}}
                     </label>
@@ -306,7 +306,7 @@
                 <div class="span6 campo2-ca">
                     <label class="record-label ">1.-¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un
                         tercero? <font COLOR="red">*</font></label>
-                    <label class="row-fluid campo2ddw-ca " data-field="campo2CA" data-id="{{ProductosPLD.creditoAutomotriz.campo2}}"
+                    <label class="row-fluid campo2ddw-ca changePLD-CA" data-field="campo2CA" data-id="{{ProductosPLD.creditoAutomotriz.campo2}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoAutomotriz.campo2_label}}
                     </label>
@@ -315,7 +315,7 @@
                     <label class="record-label">Propietario Real</label>
                     <span class=" row-fluid">
                      <a href="/unifin/#Accounts/{{{ProductosPLD.creditoAutomotriz.campo3_id}}}"
-                        class="campo3rel-ca PR-link"
+                        class="campo3rel-ca PR-link changePLD-CA"
                         data-type="relate" data-field="campo3CA"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.creditoAutomotriz.campo3}}
@@ -328,7 +328,7 @@
             <div class="row-fluid Fila3-CA">
                 <div class="span6 campo4-ca">
                     <label class="record-label">2.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red">*</font></label>
-                    <label class=" row-fluid campo4ddw-ca" data-field="campo4CA" data-id="{{ProductosPLD.creditoAutomotriz.campo4}}"
+                    <label class=" row-fluid campo4ddw-ca changePLD-CA" data-field="campo4CA" data-id="{{ProductosPLD.creditoAutomotriz.campo4}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoAutomotriz.campo4_label}}
                     </label>
@@ -337,7 +337,7 @@
                     <label class="record-label ">Proveedor de Recursos</label>
                     <span class=" row-fluid">
                      <a href="/unifin/#Accounts/{{ProductosPLD.creditoAutomotriz.campo5_id}}"
-                        class="campo5rel-ca PR-link"
+                        class="campo5rel-ca PR-link changePLD-CA"
                         data-type="relate" data-field="campo5CA"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.creditoAutomotriz.campo5}}
@@ -350,7 +350,7 @@
             <div class="row-fluid Fila8-CA">
                 <div class="span6 campo6-ca">
                     <label class="record-label ">3.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red">*</font></label>
-                    <label class="campo6ddw-ca  row-fluid" data-field="campo6CA"
+                    <label class="campo6ddw-ca  row-fluid changePLD-CA" data-field="campo6CA"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{{ProductosPLD.creditoAutomotriz.campo6_label}}}
                     </label>
@@ -374,7 +374,7 @@
                 <div class="span6 campo2-cs">
                     <label class="record-label ">1.-¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un
                         tercero?</label>
-                    <label class="row-fluid campo2ddw-cs" data-field="campo2CS" data-id="{{ProductosPLD.creditoSimple.campo2}}"
+                    <label class="row-fluid campo2ddw-cs changePLD-CS" data-field="campo2CS" data-id="{{ProductosPLD.creditoSimple.campo2}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoSimple.campo2_label}}
                     </label>
@@ -382,7 +382,7 @@
                 <div class="span6 campo3-cs">
                     <label class="record-label">2.-Propietario Real</label>
                     <span class=" row-fluid">
-                     <a href="/unifin/#Accounts/{{ProductosPLD.creditoSimple.campo3_id}}" class="campo3rel-cs PR-link"
+                     <a href="/unifin/#Accounts/{{ProductosPLD.creditoSimple.campo3_id}}" class="campo3rel-cs PR-link changePLD-CS"
                         data-type="relate" data-field="campo3CS"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.creditoSimple.campo3}}
@@ -395,7 +395,7 @@
             <div class="row-fluid Fila3-CS">
                 <div class="span6 campo4-cs">
                     <label class="record-label">3.-¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <label class=" row-fluid campo4ddw-cs" data-field="campo4CS" data-id="{{ProductosPLD.creditoSimple.campo4}}"
+                    <label class=" row-fluid campo4ddw-cs changePLD-CS" data-field="campo4CS" data-id="{{ProductosPLD.creditoSimple.campo4}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoSimple.campo4_label}}
                     </label>
@@ -403,7 +403,7 @@
                 <div class="span6 campo5-cs hide">
                     <label class="record-label ">4.-Proveedor de Recursos</label>
                     <span class=" row-fluid">
-                     <a href="/unifin/#Accounts/{{ProductosPLD.creditoSimple.campo5_id}}" class="campo5rel-cs PR-link"
+                     <a href="/unifin/#Accounts/{{ProductosPLD.creditoSimple.campo5_id}}" class="campo5rel-cs PR-link changePLD-CS"
                         data-type="relate" data-field="campo5CS"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.creditoSimple.campo5}}
@@ -417,14 +417,14 @@
                     <label class="record-label">5.-¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible
                         elegir más de una opción)</label>
-                    <label class="campo18ddw-cs multi-campo18 row-fluid" data-field="campo18CS"
+                    <label class="campo18ddw-cs multi-campo18 row-fluid changePLD-CS" data-field="campo18CS"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoSimple.campo18_label}}
                     </label>
                 </div>
                 <div class="span6 campo19-cs">
                     <label class="record-label">5.1.-Especifique:</label>
-                    <label class="campo19txt-cs row-fluid" data-field="campo19CS"
+                    <label class="campo19txt-cs row-fluid changePLD-CS" data-field="campo19CS"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoSimple.campo19}}
                     </label>
@@ -435,7 +435,7 @@
                 <div class="span6 camp14-cs">
                     <label class="record-label">6.-¿Realizará pagos utilizando otro instrumento monetario?</label>
                     <br>
-                    <input type="checkbox" class="campo14chk-cs"
+                    <input type="checkbox" class="campo14chk-cs changePLD-CS"
                            {{#if ProductosPLD.creditoSimple.campo14}}checked{{/if}}
                            data-field="campo14CS" style="margin: 2px 6px; padding: 5px 7px;font-size: 14px;"/>
                 </div>
@@ -446,14 +446,14 @@
                     <label class="record-label">7.-¿Cuál es el destino de los recursos que va a obtener de la celebración
                         de la
                         operación?</label>
-                    <label class="campo20ddw-cs  row-fluid " data-field="campo20CS"
+                    <label class="campo20ddw-cs  row-fluid changePLD-CS" data-field="campo20CS"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoSimple.campo20_label}}
                     </label>
                 </div>
                 <div class="span6 campo6-cs">
                     <label class="record-label ">8.-¿Espera realizar pagos anticipados a su crédito?</label>
-                    <label class="campo6ddw-cs  row-fluid" data-field="campo6CS"
+                    <label class="campo6ddw-cs  row-fluid changePLD-CS" data-field="campo6CS"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoSimple.campo6_label}}
                     </label>
@@ -474,14 +474,14 @@
             <div class="row-fluid Fila1-CE">
                <div class="span6 campo1-CE">
                     <label class="record-label">1.-¿Número de pagos que espera realizar mensualmente? <font COLOR="red"></font></label>
-                    <label class="campo1int-ee row-fluid" data-field="campo1EE"
+                    <label class="campo1int-ee row-fluid changePLD-CR" data-field="campo1EE"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoRevolvente.campo1}}
                     </label>
                 </div>
                  <div class="span6 campo2-ce">
                     <label class="record-label">2.-¿Monto total aproximado que espera pagar mensualmente? <font COLOR="red"></font></label>
-                    <label data-type="currency" class="row-fluid campo2-ce" data-field="campo2-ce"
+                    <label data-type="currency" class="row-fluid campo2-ce changePLD-CR" data-field="campo2-ce"
                            style="padding: 5px 7px;font-size: 14px;">
                         ${{customFormatNumber ProductosPLD.creditoRevolvente.campo2}}
                     </label>
@@ -492,7 +492,7 @@
                 <div class="span6 campo3-ce">
                     <label class="record-label">3.-¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción) <font COLOR="red"></font></label>
-                    <label class="row-fluid campo3-ce" data-field="campo3ce"
+                    <label class="row-fluid campo3-ce changePLD-CR" data-field="campo3ce"
                            style="padding: 5px 7px;font-size: 14px;">
                             {{ProductosPLD.creditoRevolvente.campo3_label}}
 
@@ -505,14 +505,14 @@
             <div class="row-fluid Fila3-CE">
                 <div class="span6 campo5-ce">
                     <label class="record-label row-fluid">4.-¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación?(Multiselección) <font COLOR="red"></font></label>
-                    <label class="campo5ddw-ce row-fluid" data-field="campo5ce"
+                    <label class="campo5ddw-ce row-fluid changePLD-CR" data-field="campo5ce"
                            style="padding: 5px 7px;font-size: 14px;">
                          {{ProductosPLD.creditoRevolvente.campo5_label}}
                     </label>
                 </div>
                 <div class="span6 campo6-ce">
                     <label class="record-label ">5.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red"></font></label>
-                    <label class="campo6ddw-ce  row-fluid" data-field="campo6ce"
+                    <label class="campo6ddw-ce  row-fluid changePLD-CR" data-field="campo6ce"
                            style="padding: 5px 7px;font-size: 14px;">
                             {{getUnifinListValue 'tct_pagoanticipado_list' ProductosPLD.creditoRevolvente.campo6}}
 
@@ -524,7 +524,7 @@
             <div class="row-fluid Fila4-CE">
                 <div class="span6 campo7-ce">
                     <label class="record-label">6.-¿Espera utilizar su tarjeta en territorio? <font COLOR="red"></font></label>
-                    <label class="campo7ddw-ce  row-fluid" data-field="campo7CE"
+                    <label class="campo7ddw-ce  row-fluid changePLD-CR" data-field="campo7CE"
                            style="padding: 5px 7px;font-size: 14px;">
                           {{ProductosPLD.creditoRevolvente.campo7_label}}
                     </label>
@@ -535,7 +535,7 @@
                 <div class="span6 campo8-ce">
                     <label class="record-label ">7.-¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero? <font COLOR="red"></font></label>
-                    <label class="row-fluid campo8ddw-ce " data-field="campo8CE" data-id="{{ProductosPLD.creditoRevolvente.campo8}}"
+                    <label class="row-fluid campo8ddw-ce changePLD-CR" data-field="campo8CE" data-id="{{ProductosPLD.creditoRevolvente.campo8}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoRevolvente.campo8_label}}
                     </label>
@@ -544,7 +544,7 @@
                     <label class="record-label">8.-Propietario Real</label>
                     <span class=" row-fluid">
                      <a href="/unifin/#Accounts/{{{ProductosPLD.creditoRevolvente.campo9_id}}}"
-                        class="campo9rel-ap PR-link"
+                        class="campo9rel-ap PR-link changePLD-CR"
                         data-type="relate" data-field="campo9CE"
                         style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
                          {{ProductosPLD.creditoRevolvente.campo9}}</a>
@@ -555,7 +555,7 @@
             <div class="row-fluid Fila6-CE">
                 <div class="span6 campo10-ce">
                     <label class="record-label">9.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red"></font></label>
-                    <label class=" row-fluid campo10ddw-ce " data-field="campo10CE" data-id="{{ProductosPLD.creditoRevolvente.campo10}}"
+                    <label class=" row-fluid campo10ddw-ce changePLD-CR" data-field="campo10CE" data-id="{{ProductosPLD.creditoRevolvente.campo10}}"
                            style="padding: 5px 7px;font-size: 14px;">
                         {{ProductosPLD.creditoRevolvente.campo10_label}}
                     </label>

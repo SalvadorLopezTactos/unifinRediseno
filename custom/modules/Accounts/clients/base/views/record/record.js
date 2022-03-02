@@ -4073,241 +4073,59 @@
         if (tipoCuenta != '') {
             //Valida campos para AP
             if (App.user.attributes.tipodeproducto_c == '1') {
-                //Pregunta: campo2ddw-ap
-                /* if($('.campo2ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                 $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo3rel-ap
-                if ($('.campo3rel-ap')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val') == '2') {
+                
+                //Pregunta: Propietario Real-ap
+                if (contexto_cuenta.ProductosPLD.arrendamientoPuro.campo3 == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && contexto_cuenta.ProductosPLD.arrendamientoPuro.campo2 == '2') {
                     $('.campo3rel-ap').find('.select2-choice').css('border-color', 'red');
-                    faltantesAP = faltantesAP + '<b>- ' + $('.campo3rel-ap')[1].getAttribute('data-name') + '<br></b>';
+                    faltantesAP = faltantesAP + '<b>-Propietario Real<br></b>';
                 } else {
                     $('.campo3rel-ap').find('.select2-choice').css('border-color', '');
                 }
-                //Pregunta: campo4ddw-ap
-                /*if($('.campo4ddw-ap').select2('val') == ''){
-                 $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo5rel-ap
-                /*if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
-                 $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo5rel-ap').find('.select2-choice').css('border-color','');
-                 }*/
-                /*//Pregunta: campo7ddw-ap
-                 if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                 $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }
-                 if ($('.campo8txt-ap').val() == '' && $('.campo7ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                 $('.campo8txt-ap').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('.campo8txt-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo8txt-ap').find('.select2-choice').css('border-color','');
-                 }
-                 if ($('.campo10txt-ap').val() == '' && $('.campo9ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                 $('.campo10txt-ap').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('.campo10txt-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo10txt-ap').find('.select2-choice').css('border-color','');
-                 }*/
-                /* //Pregunta: campo9ddw-ap
-                 if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                 $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
-                 }
-                 //Pregunta: campo6ddw-ap
-                 if($('.campo6ddw-ap').select2('val') == ''){
-                 $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo17txt-ap
-                if ($('.campo17txt-ap').val() == '' && $('.campo14chk-ap')[0].checked) {
+                
+                //Pregunta: Especifique AP
+                if (contexto_cuenta.ProductosPLD.arrendamientoPuro.campo17 == '' && contexto_cuenta.ProductosPLD.arrendamientoPuro.campo14==true) {
                     $('.campo17txt-ap').css('border-color', 'red');
-                    faltantesAP = faltantesAP + '<b>- ' + $('.campo17txt-ap')[0].getAttribute('data-name') + '<br></b>';
+                    faltantesAP = faltantesAP + '<b>-Especifique:<br></b>';
                 } else {
                     $('.campo17txt-ap').css('border-color', '');
                 }
-                //Pregunta: campo26txt-ap
-
-                /*if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
-
-                 $('.campo26txt-ap').css('border-color','red');
-                 faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo26txt-ap').css('border-color','');
-                 }*/
+                
             }
             //Valida campos para FF
             if (App.user.attributes.tipodeproducto_c == '4') {
-                //Pregunta: campo2ddw-ff
-                /*if($('.campo2ddw-ff').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                 $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
-                 faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo3rel-ff
-                if ($('.campo3rel-ff')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val') == '2') {
+                
+                //Pregunta: Propietario Real-ff
+                if (contexto_cuenta.ProductosPLD.factorajeFinanciero.campo3 == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && contexto_cuenta.ProductosPLD.factorajeFinanciero.campo2 == '2') {
                     $('.campo3rel-ff').find('.select2-choice').css('border-color', 'red');
-                    faltantesFF = faltantesFF + '<b>- ' + $('.campo3rel-ff')[1].getAttribute('data-name') + '<br></b>';
+                    faltantesFF = faltantesFF + '<b>-Propietario Real<br></b>';
                 } else {
                     $('.campo3rel-ff').find('.select2-choice').css('border-color', '');
                 }
-                //Pregunta: campo4ddw-ff
-                /* if($('.campo4ddw-ff').select2('val') == ''){
-                 $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
-                 faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo5rel-ff
-                /*if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
-                 $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
-                 faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo5rel-ff').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo21ddw-ff
-                /*  if($('.campo21ddw-ff').select2('val') == ''){
-                 $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
-                 faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
-                 }
-                 //Pregunta: campo24ddw-ff
-                 if($('.campo24ddw-ff').select2('val') == ''){
-                 $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
-                 faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
-                 }
-                 //Pregunta: campo6ddw-ff
-                 if($('.campo6ddw-ff').select2('val') == ''){
-                 $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
-                 faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo17txt-ff
-                if ($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked && $('.campo2ddw-ff').select2('val') == '2') {
+                
+                //Pregunta: Especifique-ff
+                if (contexto_cuenta.ProductosPLD.factorajeFinanciero.campo17 == '' && contexto_cuenta.ProductosPLD.factorajeFinanciero.campo14==true && contexto_cuenta.ProductosPLD.factorajeFinanciero.campo2 == '2') {
                     $('.campo17txt-ff').css('border-color', 'red');
-                    faltantesFF = faltantesFF + '<b>- ' + $('.campo17txt-ff')[0].getAttribute('data-name') + '<br></b>';
+                    faltantesFF = faltantesFF + '<b>-Especifique<br></b>';
                 } else {
                     $('.campo17txt-ff').css('border-color', '');
                 }
             }
             //Valida campos para CA
             if (App.user.attributes.tipodeproducto_c == '3') {
-                //Pregunta: campo2ddw-ca
-                /*if($('.campo2ddw-ca').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                 $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
-                 faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo3rel-ca
-                if ($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val') == '2') {
+                
+                //Pregunta: Propietario Real-ca
+                if (contexto_cuenta.ProductosPLD.creditoAutomotriz.campo3  == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && contexto_cuenta.ProductosPLD.creditoAutomotriz.campo2 == '2') {
                     $('.campo3rel-ca').find('.select2-choice').css('border-color', 'red');
-                    faltantesCA = faltantesCA + '<b>- ' + $('.campo3rel-ca')[1].getAttribute('data-name') + '<br></b>';
+                    faltantesCA = faltantesCA + '<b>-Propietario Real<br></b>';
                 } else {
                     $('.campo3rel-ca').find('.select2-choice').css('border-color', '');
                 }
-                //Pregunta: campo4ddw-ca
-                /*if($('.campo4ddw-ca').select2('val') == ''){
-                 $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
-                 faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo5rel-ca
-                /* if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
-                 $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
-                 faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo5rel-ca').find('.select2-choice').css('border-color','');
-                 }*/
-                //Pregunta: campo6ddw-ca
-                /*  if($('.campo6ddw-ca').select2('val') == ''){
-                 $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
-                 faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
-                 }*/
             }
-            //Validacion campos faltantes de Credito Revolvente
-            /*if (App.user.attributes.tipodeproducto_c == '8') {
-                //Pregunta: campo1int-ce
-                if($('.campo1int-ce').val() == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                 $('.campo1int-ce').css('border-color', 'red');
-                 faltantesCR = faltantesCR + '<b>- '+$('.campo1int-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo1int-ce').css('border-color', '');
-                 }
-                //Pregunta: campo2dec-ce
-                if($('.campo2dec-ce').val() == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                 $('.campo2dec-ce').css('border-color', 'red');
-                 faltantesCR = faltantesCR + '<b>- '+$('.campo2dec-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo2dec-ce').css('border-color', '');
-                 }
-                //Pregunta: campo3ddw-ce
-                if($('.campo3ddw-ce').select2('val') == ''){
-                 $('.campo3ddw-ce').find('.select2-choice').css('border-color','red');
-                 faltantesCR = faltantesCR + '<b>- '+$('select.campo3ddw-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo3ddw-ce').find('.select2-choice').css('border-color','');
-                 }
-                //Pregunta: campo5ddw-ce
-                if($('.campo5ddw-ce').select2('val') == ''){
-                 $('.campo5ddw-ce').find('.select2-choice').css('border-color','red');
-                 faltantesCR = faltantesCR + '<b>- '+$('select.campo5ddw-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo5ddw-ce').find('.select2-choice').css('border-color','');
-                 }
-                 //Pregunta: campo6ddw-ce
-                 if($('.campo6ddw-ce').select2('val') == ''){
-                 $('.campo6ddw-ce').find('.select2-choice').css('border-color','red');
-                 faltantesCR = faltantesCR + '<b>- '+$('select.campo6ddw-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo6ddw-ce').find('.select2-choice').css('border-color','');
-                 }
-                 //Pregunta: campo7ddw-ce
-                 if($('.campo7ddw-ce').select2('val') == ''){
-                 $('.campo7ddw-ce').find('.select2-choice').css('border-color','red');
-                 faltantesCR = faltantesCR + '<b>- '+$('select.campo7ddw-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo7ddw-ce').find('.select2-choice').css('border-color','');
-                 }
-                 //Pregunta: campo8ddw-ce
-                 if($('.campo8ddw-ce').select2('val') == ''){
-                 $('.campo8ddw-ce').find('.select2-choice').css('border-color','red');
-                 faltantesCR = faltantesCR + '<b>- '+$('select.campo8ddw-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo8ddw-ce').find('.select2-choice').css('border-color','');
-                 }
-                 //Pregunta: campo10ddw-ce
-                 if($('.campo10ddw-ce').select2('val') == ''){
-                 $('.campo10ddw-ce').find('.select2-choice').css('border-color','red');
-                 faltantesCR = faltantesCR + '<b>- '+$('select.campo10ddw-ce')[0].getAttribute('data-name')+'<br></b>';
-                 }else{
-                 $('.campo10ddw-ce').find('.select2-choice').css('border-color','');
-                 }
-            }*/
-            if ($('.campo2ddw-cs').select2('val') == "2" && $('.campo3rel-cs').select2('val') == "") {
+            //Valida campos para Credito Simple
+            //Valida Propietario Real-cs
+            if (contexto_cuenta.ProductosPLD.creditoSimple.campo2 == "2" && contexto_cuenta.ProductosPLD.creditoSimple.campo3 == "") {
                 $('.campo3rel-cs').find('.select2-choice').css('border-color', 'red');
-                faltantesCS = faltantesCS + '<b>- ' + $('.campo2ddw-cs')[1].getAttribute('data-name') + '<br></b>';
+                faltantesCS = faltantesCS + '<b>-Propietario Real<br></b>';
             }
             if (faltantesCS != "") {
                 errors['error_CS'] = errors['error_CS'] || {};
