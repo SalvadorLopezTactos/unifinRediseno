@@ -1,5 +1,5 @@
 <?php
- // created: 2021-03-08 18:22:13
+ // created: 2022-03-01 21:47:46
 
 $app_list_strings['Relaciones_Activas_list']=array (
   '' => '',
@@ -29,4 +29,5 @@ $app_list_strings['Relaciones_Activas_list']=array (
   'Toma de Decisiones Director Gral' => 'Toma de Decisiones / Director General',
   'Negocios' => 'Negocios',
   'Tarjetahabiente' => 'Tarjetahabiente',
+  'Administrador de Tarjeta de Credito' => 'Administrador de Tarjeta de Crédito',
 );
