@@ -37,18 +37,19 @@ class class_account_reus
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_correos'] . "?valor=";
         //SE OBTIENE LOS CORREOS DE LA CUENTA
+        $emailList = [];
         foreach ($bean->emailAddress->addresses as $emailAddress) {
 
             if ($emailAddress['email_address'] != "") {
-                $host .= $emailAddress['email_address'] . ",";
-                $mailCuenta = true;
+                //$host .= $emailAddress['email_address'] . ",";
+                $emailList[] = $emailAddress['email_address'];
             }
         }
 
-        if ($mailCuenta == true) {
+        if (count($emailList) > 0) {
 
-            $host = substr($host, 0, -1);
-            // $GLOBALS['log']->fatal($host);
+            $host .=  implode(',',$emailList);
+            $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
             
             $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
@@ -123,22 +124,23 @@ class class_account_reus
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
         //OBTENEMOS LOS TELEFONOS DE LA CUENTA
+        $phones = [];
         if ($bean->load_relationship('accounts_tel_telefonos_1')) {
             $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
 
             foreach ($relatedTelefonos as $telefono) {
 
                 if ($telefono->telefono != "") {
-                    $host .= $telefono->telefono . ",";
-                    $phoneCuenta = true;
+                    //$host .= $telefono->telefono . ",";
+                    $phones[] = preg_replace('/\s+/', '', $telefono->telefono);
                 }
             }
         }
 
-        if ($phoneCuenta == true) {
+        if (count($phones) > 0) {
 
-            $host = substr($host, 0, -1);
-            // $GLOBALS['log']->fatal($host);
+            $host .=  implode(',',$phones);
+            $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
             //$resultado = '[{"valor":"5518504488","existe":"SI"},{"valor":"5569783395","existe":"NO"}]';
             //$resultado = json_decode($resultado);
