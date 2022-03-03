@@ -32,11 +32,11 @@ class cleanName extends SugarApi
     }
 
     public function getCleanName($api, $args) {
-        $GLOBALS['log']->fatal('getCleanName::Init');
+        //$GLOBALS['log']->fatal('getCleanName::Init');
         ############################
         ## Declara atributos para procesamiento
         if(isset($args['names'])){
-            $names = $args['names']; 
+            $names = $args['names'];
         }else{
             $names="";
         }
@@ -73,7 +73,7 @@ class cleanName extends SugarApi
         ############################
         ## Devuleve resultado
         $result = ($mode=='1')?$itemResult:$resultList;
-        $GLOBALS['log']->fatal('getCleanName::End');
+        //$GLOBALS['log']->fatal('getCleanName::End');
         return $result;
     }
 

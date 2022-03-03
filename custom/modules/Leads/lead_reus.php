@@ -5,52 +5,48 @@ class class_lead_reus
 {
     public function func_lead_reus($bean = null, $event = null, $args = null)
     {
+        //Ejecuta validación
         $errorcorreo = $this->func_valida_correos($bean);
         $errortel = $this->func_valida_telefonos($bean);
-
-        $GLOBALS['log']->fatal('errorcorreo-'.$errorcorreo);
-        $GLOBALS['log']->fatal('errortel-'.$errortel);
-
+        //Interpreta resultado
         if(!$errorcorreo || !$errortel){
             $bean->pendiente_reus_c = 1;
         }else{
             $bean->pendiente_reus_c = 0;
         }
+        $GLOBALS['log']->fatal('Validación REUS - Correos: '.$errorcorreo.' , Teléfonos: '. $errortel . ' , Pendiente REUS: '.$bean->pendiente_reus_c);
     }
 
     public function func_valida_correos($bean = null)
     {
-        $noresp = null;
+        $noresp = true;
         global $sugar_config, $db;
-        $mailLead = false;
-        //API DHW REUS PARA CORREOS 
+        //API DHW REUS PARA CORREOS
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_correos'] . "?valor=";
         //SE OBTIENE LOS CORREOS DEL LEAD
+        $emailList = [];
         foreach ($bean->emailAddress->addresses as $emailAddress) {
             if ($emailAddress['email_address'] != "") {
-                $host .= $emailAddress['email_address'] . ",";
-                $mailLead = true;
+                $emailList[] = $emailAddress['email_address'];
             }
         }
 
-        if ($mailLead == true) {
-
-            $host = substr($host, 0, -1);
-            $GLOBALS['log']->fatal('mail'.$host);
+        if (count($emailList) > 0) {
+            $host .=  implode(',',$emailList);
+            $GLOBALS['log']->fatal('Valida emails: '.$host);
             $resultado = $callApi->getDWHREUS($host);
             //$resultado = '[{"valor":"caro1@gmail.com","existe":"NO"},{"valor":"caro.huesca@gmail.com","existe":"SI"}]';
             //$resultado = json_decode($resultado, true);
-            $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - LEADS: ' . json_encode($resultado));
-
             if ($resultado != "" && $resultado != null) {
-                //RESULTADO DEL SERVICIO DWH REUS 
+                $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - LEADS: ' . json_encode($resultado));
+                //RESULTADO DEL SERVICIO DWH REUS
                 foreach ($resultado as $key => $val) {
                     //SOLO OBTENEMOS LOS CORREOS QUE EXISTEN EN REUS
                     foreach ($bean->emailAddress->addresses as $key1=>$email_bean){
-                       
+
                         if ($email_bean['email_address'] == $val['valor'] ) {
-                            //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS 
+                            //ACTUALIZAMOS EL OPT_OUT DEL CORREO QUE SI EXISTE EN REUS
                             if ($val['existe'] == 'SI') {
                                 //$query1 = "UPDATE email_addresses SET opt_out = 1 WHERE id = '" . $emailAddress['email_address_id'] . "';";
                                 $bean->emailAddress->addresses[$key1]['opt_out'] = 1;
@@ -64,7 +60,6 @@ class class_lead_reus
                         }
                     }
                 }
-                $noresp = true;
             } else {
                 //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
                 //$query2 = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '" . $bean->id . "';";
@@ -72,58 +67,41 @@ class class_lead_reus
                 $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - CORREOS');
                 $noresp = false;
             }
-        }else{
-            $noresp = true;
         }
         return $noresp;
     }
 
     public function func_valida_telefonos($bean = null)
     {
-        $noresp = null;
+        $noresp = true;
         global $sugar_config, $db;
-        $phoneLead = false;
-        //API DHW REUS PARA TELEFONOS 
+        //API DHW REUS PARA TELEFONOS
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
-        $GLOBALS['log']->fatal($host);
-        if ($bean->phone_mobile != "" || $bean->phone_home != "" || $bean->phone_work != "") {
+        $phones = [];
+        if(trim($bean->phone_mobile) != "" || trim($bean->phone_home) != "" || trim($bean->phone_work)!= "") {
             //OBTENEMOS LOS TELEFONOS DEL LEAD
-            if ($bean->phone_mobile != "") {
-                $host .= $bean->phone_mobile;
-                $phoneLead = true;
+            if(trim($bean->phone_mobile) != "") {
+                $phones[] = preg_replace('/\s+/', '', $bean->phone_mobile);
             }
-            if ($bean->phone_mobile != "" && $bean->phone_home != "") {
-                $host .= "," . $bean->phone_home;
-                $phoneLead = true;
-            } else {
-    
-                if ($bean->phone_home != "") {
-                    $host .= $bean->phone_home;
-                    $phoneLead = true;
-                }
+            if(trim($bean->phone_home) != "") {
+                $phones[] = preg_replace('/\s+/', '', $bean->phone_home);
             }
-            if ($bean->phone_mobile == "" && $bean->phone_home == "" && $bean->phone_work != "") {
-                $host .= $bean->phone_work;
-                $phoneLead = true;
-            } else {
-    
-                if ($bean->phone_work != "") {
-                    $host .= "," . $bean->phone_work;
-                    $phoneLead = true;
-                }
+            if(trim($bean->phone_work) != "") {
+                $phones[] = preg_replace('/\s+/', '', $bean->phone_work);
             }
-    
-            $GLOBALS['log']->fatal($host);
+
+            $host .=  implode(',',$phones);
+            $GLOBALS['log']->fatal('Valida teléfonos: '.$host);
             $resultado = $callApi->getDWHREUS($host);
             //$resultado = '[{"valor":"5518504488","existe":"SI"},{"valor":"5569783395","existe":"NO"}]';
             //$resultado = json_decode($resultado, true);
-            $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - LEADS: ' . json_encode($resultado));
 
             if ($resultado != "" && $resultado != null) {
-                //RESULTADO DEL SERVICIO DWH REUS 
+                $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - LEADS: ' . json_encode($resultado));
+                //RESULTADO DEL SERVICIO DWH REUS
                 foreach ($resultado as $key => $val) {
-                    //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
+                    //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS
                     // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
                     if ($bean->phone_mobile == $val['valor']) {
 
@@ -162,7 +140,6 @@ class class_lead_reus
                         }
                     }
                 }
-                $noresp = true;
             } else {
                 //Si el servicio de REUS no responde o presenta problemas se activa el check pendiente REUS
                 //$query6 = "UPDATE leads_cstm SET pendiente_reus_c = 1 WHERE id_c = '" . $bean->id . "';";
@@ -170,10 +147,8 @@ class class_lead_reus
                 $GLOBALS['log']->fatal('SERVICIO DWH REUS NO RESPONDE - TELEFONOS');
                 $noresp = false;
             }
-        }else{
-            $noresp = true;
         }
-            
+
         return $noresp;
     }
 }
