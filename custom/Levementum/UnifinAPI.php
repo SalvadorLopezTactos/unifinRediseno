@@ -2488,7 +2488,7 @@ SQL;
             $curl_info = curl_getinfo($ch);
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $response = json_decode($result, true);
-            $GLOBALS['log']->fatal('FIN PETICIÓN DWH REUS');
+            //$GLOBALS['log']->fatal('FIN PETICIÓN DWH REUS');
 
             return $response;
 
