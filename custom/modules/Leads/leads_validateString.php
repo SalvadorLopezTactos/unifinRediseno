@@ -115,7 +115,7 @@ class leads_validateString
                 on l.id = lc.id_c WHERE lc.clean_name_c = '{$bean->clean_name_c}'
                 AND lc.id_c <> '{$bean->id}' AND l.deleted =0";
                 $results = $GLOBALS['db']->query($query);
-                
+
                 //$result = $sql->execute();
                 //$count = count($result);
                 $count = $results->num_rows;
@@ -140,8 +140,7 @@ class leads_validateString
 
                 $idExistenteLead = $countLead>0? $resultLead[0]['id']:"";
 
-                $GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
-
+                //$GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
                 if ($count > 0 || $countLead > 0) {
                     if ($_REQUEST['module'] != 'Import') {
 
