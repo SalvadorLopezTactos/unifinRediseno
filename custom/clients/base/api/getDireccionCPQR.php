@@ -47,51 +47,62 @@ class getDireccionCPQR extends SugarApi
         $municipio_id = intval(substr($resultado['idCP'], 6, 3));
 
         $arr_estado = $resultado['estados'];
-        $arr_municipio = $resultado['municipios'];        
+        $arr_municipio = $resultado['municipios'];
         
         $colonia_existe = false;
         $aux = null;
         $arrin=null;
+        
+        $auxindex = $this->searchForId($colonia_QR, $arr_colonias,'nameColonia');
         $auxindex = array_search($colonia_QR,$arr_colonias,false);
-
-
-        if( $auxindex != '-1'){
-            $arrin = array( $auxindex => $arr_colonias[$auxindex], );
+        if( !empty($auxindex)){
+            $arrin = array( $auxindex => $arr_colonias[$auxindex]);
             $aux = array( 'colonias'=> $arrin);
             $arr_colonias = $aux;
             $colonia_existe = true;
-        }else{
+        }
+        /*else{
             foreach ($arr_colonias as $colonia) {
                 if ($colonia['nameColonia'] == $colonia_QR) {
                     $colonia_existe = true;
                 }
             }  
-        }        
-        unset($resultado['colonias']); 
-        $resultado = array_replace($resultado, $arr_colonias);        
+        } */       
+        unset($resultado['colonias']);
+        $arr_colonias['colonias'][0] = $arr_colonias['colonias'][$auxindex];
+        if($auxindex != 0) unset($arr_colonias['colonias'][$auxindex]);
+        $resultado = array_replace($resultado, $arr_colonias);
         
-        $auxindex = array_search($estado_QR,$arr_estado,false);
+        //$auxindex = array_search($estado_QR,$arr_estado,false);
+        $auxindex = $this->searchForId($estado_QR, $arr_estado,'nameEstado');
+        
         if( $auxindex != '-1'){
             $arrin = array( $auxindex => $arr_estado[$auxindex], );
             $aux = array( 'estados'=> $arrin);
             $arr_estado = $aux;
             $estado_id = $auxindex;
         }
-        unset($resultado['estados']); 
+        $arr_estado['estados'][0] = $arr_estado['estados'][$auxindex];
+        if($auxindex != 0) unset($arr_estado['estados'][$auxindex]);
+        unset($resultado['estados']);
         $resultado = array_replace($resultado, $arr_estado);        
-        //$GLOBALS['log']->fatal('resultado',$resultado);
         
-        $auxindex = array_search($ciudad_QR,$arr_municipio,false);
-        if( $auxindex != '-1'){
+        //$auxindex = array_search($ciudad_QR,$arr_municipio,false);
+        $auxindex = $this->searchForId($ciudad_QR, $arr_municipio,'nameMunicipio');
+        
+        if( $auxindex != '-1' && !empty($auxindex)){
             $arrin = array( $auxindex => $arr_municipio[$auxindex], );
             $aux = array( 'municipios'=> $arrin);
             $arr_municipio = $aux;
             $municipio_id = $auxindex;
+
+            $arr_municipio['municipios'][0] = $arr_municipio['municipios'][$auxindex];
+            if($auxindex != 0) unset($arr_municipio['municipios'][$auxindex]);
+            unset($resultado['municipios']); 
+            $resultado = array_replace($resultado, $arr_municipio);        
         }
-        unset($resultado['municipios']); 
-        $resultado = array_replace($resultado, $arr_municipio);        
+        
         //$GLOBALS['log']->fatal('resultado',$resultado);
-       
         if(!$colonia_existe)
         {
             $result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
@@ -99,6 +110,15 @@ class getDireccionCPQR extends SugarApi
         }
 
         return $resultado;
+    }
+
+    public function searchForId($id, $array , $busqueda) {
+        foreach ($array as $key => $val) {
+            if ($val[$busqueda] === $id) {
+                return $key;
+            }
+        }
+        return null;
     }
 
     public function insertColonia($pais,$estado,$municipio,$cp,$colonia)
@@ -187,6 +207,4 @@ class getDireccionCPQR extends SugarApi
             $GLOBALS['log']->fatal("Error al ejecutar Insert de colonia" . $ex);
         }
     }
-
-
 }
