@@ -40,7 +40,7 @@ class getDireccionCPQR extends SugarApi
         $call_api = new GetDireccionesCP();
         //$GLOBALS['log']->fatal('args',$args);
         $resultado = $call_api->getAddressByCP($api, $args);
-        
+        //$GLOBALS['log']->fatal('resultado',$resultado);
         $arr_colonias = $resultado['colonias'];
         $pais_id = intval(substr($resultado['idCP'], 0, 3));
         $estado_id = intval(substr($resultado['idCP'], 3, 3));
@@ -52,21 +52,22 @@ class getDireccionCPQR extends SugarApi
         $colonia_existe = false;
         $aux = null;
         $arrin=null;
-        $auxindex = $this->searchForId($colonia_QR, $arr_colonias,'nameColonia');
-        //$auxindex = array_search($colonia_QR,$arr_colonias,false);
         
-        if( $auxindex != '-1'){
+        $auxindex = $this->searchForId($colonia_QR, $arr_colonias,'nameColonia');
+        $auxindex = array_search($colonia_QR,$arr_colonias,false);
+        if( !empty($auxindex)){
             $arrin = array( $auxindex => $arr_colonias[$auxindex]);
             $aux = array( 'colonias'=> $arrin);
             $arr_colonias = $aux;
             $colonia_existe = true;
-        }else{
+        }
+        /*else{
             foreach ($arr_colonias as $colonia) {
                 if ($colonia['nameColonia'] == $colonia_QR) {
                     $colonia_existe = true;
                 }
             }  
-        }        
+        } */       
         unset($resultado['colonias']);
         $arr_colonias['colonias'][0] = $arr_colonias['colonias'][$auxindex];
         if($auxindex != 0) unset($arr_colonias['colonias'][$auxindex]);
@@ -102,7 +103,6 @@ class getDireccionCPQR extends SugarApi
         }
         
         //$GLOBALS['log']->fatal('resultado',$resultado);
-       
         if(!$colonia_existe)
         {
             $result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
@@ -207,6 +207,4 @@ class getDireccionCPQR extends SugarApi
             $GLOBALS['log']->fatal("Error al ejecutar Insert de colonia" . $ex);
         }
     }
-
-
 }
