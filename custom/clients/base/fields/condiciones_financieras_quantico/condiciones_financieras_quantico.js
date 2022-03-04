@@ -439,6 +439,7 @@
                             }
 
                             self.render();
+
                         } catch (e) {
                         app.alert.dismiss('getInfoCFQuantico');
                         app.alert.show("errorGetInfoCFQuantico", {
@@ -1503,8 +1504,9 @@
                     $(e.currentTarget).parent().next().next().find('select').append(newOption).trigger('change');
                 }
 
-                //Estableciendo por default la primera opción "13" cada que se establece una nueva serie de opciones
-                $(e.currentTarget).parent().next().next().find('select').select2('val',['13']).trigger('change');;
+                //Estableciendo por default la primera opción del select cada que se establece una nueva serie de opciones
+                var first_option=$(e.currentTarget).parent().next().next().find('select').find('option:first').val();
+                $(e.currentTarget).parent().next().next().find('select').select2('val',first_option).trigger('change');;
             }
         }
 
@@ -1673,7 +1675,11 @@
        if($(this.$el).parent().parent().hasClass('span10')){
            $(this.$el).parent().parent().removeClass('span10').addClass('span12');
        }
-    
+
+       if(this.tplName=='edit' && this.mainRowsBodyTable.length>1){
+           //Se aplica evento change en vista de edicion de campo custom para establecer las opciones de Plazo Meses Días Correctamente con base al Tipo Activo seleccionado por default
+           $('select.setDefaultValues').trigger('change');
+       } 
     },
 
 })
