@@ -36,7 +36,7 @@ class customGetOpportunities extends SugarApi
         $duplicado = 0;
         $mensaje = "";
 
-        $queryData = "SSELECT distinct
+        $queryData = "SELECT distinct
         ifnull(uni_cstm.multilinea_c,0) multilinea_c,
         op_cstm.id_c,
         op_cstm.estatus_c,
