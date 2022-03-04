@@ -130,7 +130,7 @@ SQL;
             $bean->name = str_replace("PRE - ", "", $bean->name);
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
-        $available_financiero=array("39","41","50","49","51");
+        $available_financiero=array("39","41","50","49","51","83");
         if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI') {
             $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
         } elseif (in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
@@ -383,8 +383,8 @@ SQL;
                 $opp->estatus_c = "1";//VALIDACION COMERCIAL
             } else {
                 //La operación nueva debe nacer como "INTEGRACIÓN DE EXPEDIENTE" Y "EN ESPERA"
-                $opp->tct_etapa_ddw_c = "P";//Integración de Expediente
-                $opp->estatus_c = "PE";//En Espera
+                $opp->tct_etapa_ddw_c = "SI";//Solicitud inicial
+                $opp->estatus_c = "";//--
             }
 
             $opp->monto_gpo_emp_c = $bean->monto_gpo_emp_c;
