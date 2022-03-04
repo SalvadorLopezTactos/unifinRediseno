@@ -36,23 +36,27 @@ class customGetOpportunities extends SugarApi
         $duplicado = 0;
         $mensaje = "";
 
-        $queryData = "SELECT
-  uni_cstm.multilinea_c,
-  op_cstm.estatus_c,
-  op_cstm.tct_etapa_ddw_c,
-  op_cstm.tipo_producto_c
-FROM opportunities_cstm op_cstm
-  INNER JOIN accounts_opportunities op_rel
-    ON op_rel.opportunity_id = op_cstm.id_c
-  INNER JOIN accounts_uni_productos_1_c uni_rel
-    ON uni_rel.accounts_uni_productos_1accounts_ida = op_rel.account_id
-  INNER JOIN uni_productos uni
-    ON uni.id = uni_rel.accounts_uni_productos_1uni_productos_idb
-       AND uni.tipo_producto = '{$prouctId}'
-  INNER JOIN uni_productos_cstm uni_cstm
-    ON uni_cstm.id_c = uni.id
-WHERE op_rel.account_id = '{$accountId}' AND op_cstm.tipo_producto_c = '{$prouctId}' AND  op_cstm.negocio_c='{$negocio}'
- AND op_cstm.producto_financiero_c = '{$producto}' AND op_rel.deleted = 0";
+        $queryData = "SELECT distinct
+        ifnull(uni_cstm.multilinea_c,0) multilinea_c,
+        op_cstm.id_c,
+        op_cstm.estatus_c,
+        op_cstm.tct_etapa_ddw_c,
+        op_cstm.tipo_producto_c,
+        op_cstm.negocio_c,
+        op_cstm.producto_financiero_c
+      FROM opportunities_cstm op_cstm
+        INNER JOIN accounts_opportunities op_rel
+          ON op_rel.opportunity_id = op_cstm.id_c
+        INNER JOIN accounts_uni_productos_1_c uni_rel
+          ON uni_rel.accounts_uni_productos_1accounts_ida = op_rel.account_id
+        left JOIN uni_productos uni
+          ON uni.id = uni_rel.accounts_uni_productos_1uni_productos_idb
+             AND uni.tipo_producto = '{$prouctId}'
+        left JOIN uni_productos_cstm uni_cstm
+          ON uni_cstm.id_c = uni.id
+      WHERE op_rel.account_id = '{$accountId}'
+      AND op_cstm.tipo_producto_c = '{$prouctId}' AND  op_cstm.negocio_c='{$negocio}'
+       AND op_cstm.producto_financiero_c = '{$producto}' AND op_rel.deleted = 0";
 
         $result = $db->query($queryData);
 
