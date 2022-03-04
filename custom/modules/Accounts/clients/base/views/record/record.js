@@ -7661,14 +7661,13 @@ validaReqUniclickInfo: function () {
 
         app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
             success: _.bind(function (data) {
-                //Validaciones para Telefonos
+                //Extiende This
+                this.oTelefonos = [];
+                this.oTelefonos.telefono = [];
+                this.prev_oTelefonos = [];
+                this.prev_oTelefonos.prev_telefono = [];
                 if (data[0].contents.records.length > 0){
-                        //Extiende This
-                        this.oTelefonos = [];
-                        this.oTelefonos.telefono = [];
-                        this.prev_oTelefonos = [];
-                        this.prev_oTelefonos.prev_telefono = [];
-                        //contexto_cuenta = this;
+                        //Validaciones para Telefonos
                         this.model.set('account_telefonos', this.oTelefonos.telefono);
                         //Recupera información
                         idCuenta = this.model.get('id');
