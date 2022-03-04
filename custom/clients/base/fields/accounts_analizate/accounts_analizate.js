@@ -18,6 +18,8 @@
 
 
     DescargaArchivo: function (empresa) {
+        cont_nlzt.Financiera = cont_nlzt.Analizate.Financiera;
+        cont_nlzt.Credit = cont_nlzt.Analizate.Credit;
         if (cont_nlzt.Financiera != undefined || cont_nlzt.Credit!= undefined) {
             //Valida tipo de empresa
             if (empresa==1){
