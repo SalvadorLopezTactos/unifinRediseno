@@ -1463,6 +1463,49 @@
                 }
 
             }
+
+            var valorSeleccionado=$(e.currentTarget).val();
+            var arr_ids_cf=[];
+            //Una vez establecidos los valores default, se establecen nuevos valores para rango superior
+            for (var indice = 0; indice < this.mainRowsBodyTable.length; indice++) {
+                var element = this.mainRowsBodyTable[indice].bodyTable;
+                for (var pos = 0; pos < element.length; pos++) {
+                    if(element[pos].valorSelected!=undefined && element[pos].valorSelected!=""){
+                        if(element[pos].valorSelected==valorSeleccionado){
+                            arr_ids_cf.push(indice);
+                        }
+                    }
+                }
+            }
+            //Una vez lleno el arreglo que contiene los ids de las cf que corresponden al rango, se recorre para llenar el respectivo dropdown
+            if(arr_ids_cf.length>0){
+                var arreglo_rangos=[];
+                for (var idx = 0; idx < arr_ids_cf.length; idx++) {
+                    //Se toma el indice "2" ya que es el indice que tiene el rango superior que se encuentra habilitado en el front
+                    var elemento= this.mainRowsBodyTable[idx].bodyTable[2];
+                    arreglo_rangos.push(elemento.rangoSuperior);
+                }
+            }
+
+            if(arreglo_rangos.length>0){
+
+                //Eliminando todas las opciones del select antes de agregar las nueva
+                $(e.currentTarget).parent().next().next().find('select').empty();
+
+                for (let j = 0; j < arreglo_rangos.length; j++) {
+                    var dataOption = {
+                        id: arreglo_rangos[j],
+                        text: arreglo_rangos[j]
+                    };
+
+                    var newOption = new Option(dataOption.text, dataOption.id, true, true);
+                    // Append it to the select
+                    $(e.currentTarget).parent().next().next().find('select').append(newOption).trigger('change');
+                }
+
+                //Estableciendo por default la primera opción "13" cada que se establece una nueva serie de opciones
+                $(e.currentTarget).parent().next().next().find('select').select2('val',['13']).trigger('change');;
+            }
         }
 
     },
