@@ -126,6 +126,9 @@
         this.model.addValidationTask('validacamposcurppass', _.bind(this.validapasscurp, this));
         this.model.addValidationTask('porcentajeIVA', _.bind(this.validaiva, this));
 
+        /********* Validacion grupo empresarial ****************/
+        this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
+
         /*
          Salvador Lopez
          Se añaden eventos change para mostrar teléfonos y direcciones al vincular o desvincular algún registro relacionado
@@ -8019,17 +8022,53 @@ validaReqUniclickInfo: function () {
         },
 
 
+    validaGrupoEmpresarial: function (fields, errors, callback) {
+        var subtipo_prospecto = ['7','8','9','10','12'];
+        var subtipo_cliente = ['11','12','13','14','15','16','17','18','19','20'];
+        var tipo_registro_cuenta_c = this.model.get("tipo_registro_cuenta_c");
+        var subtipo_registro_cuenta_c = this.model.get("subtipo_registro_cuenta_c");
+        var tipo_gp_emp = this.model.get("situacion_gpo_empresarial_c");
+        var error = false;
+        var errorText= "";
+        
+        if( (tipo_registro_cuenta_c =="2" && subtipo_prospecto.includes(subtipo_registro_cuenta_c) )
+            || (tipo_registro_cuenta_c =="3" && subtipo_cliente.includes(subtipo_registro_cuenta_c) )  
+        ){
+           if (tipo_gp_emp == "" ) {
+                error = true;
+                errorText += 'La Situación del Grupo Empresarial no puede ser vacio. Situación Grupo Empresarial es obligatorio.<br>';
+            }
+            if ( this.model.get('parent_id') == this.model.get('id') ) {
+                error = true;
+                errorText += 'La cuenta está asociada a sí misma. Por favor, corrige el valor de Grupo Empresarial.<br>';
+            }
+            if (tipo_gp_emp.indexOf("4") !== -1 ) {
+                error = true;
+                errorText += 'La Situación del Grupo Empresarial no puede ser “Sin Grupo Empresarial Verificado”. Por favor, corrige este valor o bien asocia la cuenta a un Grupo Empresarial.<br>';
+            }
+            if (tipo_gp_emp.indexOf("3") !== -1 && (tipo_gp_emp.indexOf("1") !== -1 || tipo_gp_emp.indexOf("2") !== -1)) {
+                error = true;
+                errorText += 'La Situación del Grupo Empresarial no puede estar asociada y no pertencer a ningun Grupo Empresarial.<br>';
+            }
+            if (tipo_gp_emp.indexOf("3") !== -1 && this.model.get('parent_id')!="") {
+                error = true;
+                errorText += 'Grupo Empresarial debe tener Situación Empresarial Definida.';
+            }
 
-
-
-
-
-
-
-
-
-
-
-
+            if(error){
+                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
+                errors['situacion_gpo_empresarial_c'].required = true;
+                app.alert.show("Situación Grupo Empresarial", {
+                    level: "error",
+                    title: errorText,
+                    autoClose: false
+                });
+            }else{
+                callback(null, fields, errors);    
+            }
+        }else{
+            callback(null, fields, errors);
+        }
+    },
 
 })
