@@ -378,7 +378,7 @@ SQL;
             $opp->name = " R/I " . $bean->name;
             //author: Salvador Lopez
             //SECION DE PRECALIFICACION COMERCIAL
-            if (($bean->tipo_producto_c == '1' || ($bean->tipo_producto_c=='2' && ($bean->negocio_c!='2' || $bean->negocio_c!='10')))&& $response_exluye == 0) {
+            if ((($bean->tipo_producto_c == '1' && $bean->negocio_c=='5' && empty($bean->producto_financiero_c))|| ($bean->tipo_producto_c=='2' && ($bean->negocio_c!='2' || $bean->negocio_c!='10')))&& $response_exluye == 0) {
                 $opp->tct_etapa_ddw_c = "SI";//SOLICITUD INICIAL
                 $opp->estatus_c = "1";//VALIDACION COMERCIAL
             } else {
