@@ -1,7 +1,9 @@
 <?php
- // created: 2021-10-20 12:25:09
+ // created: 2022-03-08 17:25:49
 $dictionary['Opportunity']['fields']['negocio_c']['labelValue']='Negocio';
 $dictionary['Opportunity']['fields']['negocio_c']['dependency']='';
+$dictionary['Opportunity']['fields']['negocio_c']['required_formula']='';
+$dictionary['Opportunity']['fields']['negocio_c']['readonly_formula']='';
 $dictionary['Opportunity']['fields']['negocio_c']['visibility_grid']=array (
   'trigger' => 'tipo_producto_c',
   'values' => 
@@ -60,6 +62,7 @@ $dictionary['Opportunity']['fields']['negocio_c']['visibility_grid']=array (
     14 => 
     array (
       0 => '14',
+      1 => '10',
     ),
     '' => 
     array (
