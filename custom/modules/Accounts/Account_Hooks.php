@@ -1891,8 +1891,23 @@ where rfc_c = '{$bean->rfc_c}' and
             }
 
         }
+    }
 
-
+    public function func_grupo_empresarial($bean = null, $event = null, $args = null)
+    {
+        $sit_emp = $bean->situacion_gpo_empresarial_c;
+        $texto = "";
+        if(strpos($sit_emp, "1")){
+            $texto = "Cuenta Primaria del Grupo ".$bean->name ;
+        }
+        if(strpos($sit_emp, "2")){
+            if($texto!="") $texto .= "\n"; 
+            $texto .= "Cuenta Secundaria del Grupo ".$bean->parent_name ;
+        }
+        if(strpos($sit_emp, "3")){
+            $texto = "No pertenece a ningún Grupo Empresarial";
+        }
+        $bean->situacion_gpo_empresa_txt_c = $texto;
     }
 
 }

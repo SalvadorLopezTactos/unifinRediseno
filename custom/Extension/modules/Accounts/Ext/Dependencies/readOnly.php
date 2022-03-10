@@ -282,3 +282,23 @@ $dependencies['Accounts']['ventas_anuales_c'] = array
     ),
     'notActions' => array(),
 );*/
+
+
+// solo lectura campo detalle de grupo empresarial
+$dependencies['Accounts']['situacion_gpo_empresa_txt_c'] = array
+(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('name','id'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'situacion_gpo_empresa_txt_c',
+                'value' => 'true',
+            ),
+        ),
+    ),
+    'notActions' => array(),
+);
