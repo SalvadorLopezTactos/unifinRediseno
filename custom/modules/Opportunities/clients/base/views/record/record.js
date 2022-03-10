@@ -1503,7 +1503,7 @@
                             // @task Cancelar la operacion solamente en Sugar si no tiene ID process.
                             console.log(typeof this.model.get("id_process_c"));
                             console.log(this.model.get("id_process_c"));
-                            if (this.model.get("id_process_c") == "") {
+                            if (this.model.get("id_process_c").trim()== "") {
                                 var parametros = {
                                     'id_linea_padre': this.model.get('id_linea_credito_c'),
                                     'id': this.model.get('id'),
@@ -3294,7 +3294,7 @@
                 success: _.bind(function (data) {
                     if (data == '1') {
                         banderaExcluye.check.push(1);
-                        this.autorizapre();
+                        self.autorizapre();
                         //$('[data-name="opportunities_directores"]').hide();
                         //$('[data-name="vobo_descripcion_txa_c"]').hide();
                         //$('[data-name="doc_scoring_chk_c"]').hide();
@@ -3305,7 +3305,7 @@
                         //$('[data-name="vobo_descripcion_txa_c"]').show();
                         //$('[data-name="doc_scoring_chk_c"]').show();
                     }
-                    this.controlVistaCamposPrecalificacion();
+                    self.controlVistaCamposPrecalificacion();
                 }, self),
             });
         } else {
