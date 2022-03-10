@@ -69,3 +69,19 @@ $dependencies['Accounts']['reus_c'] = array(
         ),
     ),
 );
+
+$dependencies['Accounts']['CodigoVendor_Visibility'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_proveedor_compras_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'codigo_vendor_c',
+                'value' => 'equal($tipo_proveedor_compras_c,"6")',
+            ),
+        ),
+    ),
+);

@@ -160,8 +160,9 @@ class altaLeadServices extends SugarApi
         global $db, $app_list_strings;
         //$GLOBALS['log']->fatal("data_result " , $data_result);
         //$GLOBALS['log']->fatal("compania_c " . $compania_c . "origen " . $origen . "detalleOrigen " . $detalleOrigen);
+        //Origen 12=SOC, Origen 8=Referenciado Vendor
 
-        if($origen == 12 && $detalleOrigen == 12 && $compania_c != 2){
+        if(($origen == 12 && $detalleOrigen == 12 && $compania_c != 2) ||$origen==8){
             if($data_result['lead']['status'] == "200"){
                 $this->asigna_soc($data_result['lead']['id'] , 1);
             }
