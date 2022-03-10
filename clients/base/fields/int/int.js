@@ -13,7 +13,7 @@
  * @alias SUGAR.App.view.fields.BaseIntField
  * @extends View.Fields.Base.BaseField
  */
-({
+ ({
     /**
      * @inheritdoc
      *
@@ -110,19 +110,22 @@
      * @private
      */
     _doValidateMinMaxInt: function(fields, errors, callback) {
-        var value = this.model.get(this.name);
-        var minValue = this._minInt;
-        var maxValue = this._maxInt;
-        if (!_.isUndefined(app.config.sugarMinInt)) {
-            minValue = Math.max(minValue, app.config.sugarMinInt);
-        }
-        if (!_.isUndefined(app.config.sugarMaxInt)) {
-            maxValue = Math.min(maxValue, app.config.sugarMaxInt);
-        }
-        if (value < minValue) {
-            errors[this.name] = {'minValue': minValue};
-        } else if (value > maxValue) {
-            errors[this.name] = {'maxValue': maxValue};
+        if(this.name!=""&&this.name!=undefined &&this.name!=null){
+            console.log(this.name);
+            var value = this.model.get(this.name);
+            var minValue = this._minInt;
+            var maxValue = this._maxInt;
+            if (!_.isUndefined(app.config.sugarMinInt)) {
+                minValue = Math.max(minValue, app.config.sugarMinInt);
+            }
+            if (!_.isUndefined(app.config.sugarMaxInt)) {
+                maxValue = Math.min(maxValue, app.config.sugarMaxInt);
+            }
+            if (value < minValue) {
+                errors[this.name] = {'minValue': minValue};
+            } else if (value > maxValue) {
+                errors[this.name] = {'maxValue': maxValue};
+            }
         }
         callback(null, fields, errors);
     },
