@@ -8063,12 +8063,9 @@ validaReqUniclickInfo: function () {
                     title: errorText,
                     autoClose: false
                 });
-            }else{
-                callback(null, fields, errors);    
             }
-        }else{
-            callback(null, fields, errors);
         }
+        callback(null, fields, errors);
     },
 
 })
