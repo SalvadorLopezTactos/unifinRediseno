@@ -311,6 +311,7 @@
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
+        this.model.on('sync', this.deshabilitaOrigenCuenta, this);
         
     },
 
@@ -1221,6 +1222,9 @@
         //Oculta campos de Dynamics
         $('[data-name="control_dynamics_365_c"]').hide();
         $('[data-name="id_cpp_365_chk_c"]').hide();
+
+        //Oculta fecha de bloqueo para saber si el Origen se habilita
+        $('[data-name="fecha_bloqueo_origen_c"]').hide();
     },
 
     editClicked: function () {
@@ -6927,7 +6931,26 @@
 		if(readonly){
 			this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
 		}
-  },
+    },
+
+    deshabilitaOrigenCuenta:function(){
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = today.getMonth() + 1; // Months start at 0!
+        var dd = today.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        var hoy = yyyy+'-'+mm+'-'+dd;
+        var fecha_actual= new Date(hoy);
+        var fecha_bloqueo=new Date(this.model.get("fecha_bloqueo_origen_c"));
+
+        if(fecha_actual<=fecha_bloqueo){
+            $('[data-name="origen_cuenta_c"]').attr('style','pointer-events:none')
+            $('[data-name="detalle_origen_c"]').attr('style','pointer-events:none')
+        }
+    },
 
     func_Proveedor: function () {
         App.alert.show('ProcesoProveedor', {

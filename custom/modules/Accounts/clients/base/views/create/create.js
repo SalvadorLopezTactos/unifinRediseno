@@ -328,6 +328,9 @@
         //Oculta campos de Dynamics
         $('[data-name="control_dynamics_365_c"]').hide();
         $('[data-name="id_cpp_365_chk_c"]').hide();
+
+        //Oculta fecha de bloqueo para saber si el Origen se habilita
+        $('[data-name="fecha_bloqueo_origen_c"]').hide();
     },
 
     initialize: function (options) {

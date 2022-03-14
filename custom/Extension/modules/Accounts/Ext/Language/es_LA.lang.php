@@ -354,3 +354,4 @@ $mod_strings['LBL_PENDIENTE_REUS_C'] = 'Pendiente de validar REUS';
 $mod_strings['LBL_CONVERTIDO'] = 'Convertido';
 $mod_strings['LBL_SITUACION_GPO_EMPRESARIAL'] = ' Situación de Grupo Empresarial';
 $mod_strings['LBL_SITUACION_GPO_EMPRESA_TXT_C'] = 'Situación de Grupo Empresarial Detalle';
+$mod_strings['LBL_FECHA_BLOQUEO_ORIGEN'] = 'Fecha Bloqueo Origen';
