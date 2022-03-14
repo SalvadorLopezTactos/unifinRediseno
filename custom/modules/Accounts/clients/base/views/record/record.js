@@ -126,9 +126,6 @@
         this.model.addValidationTask('validacamposcurppass', _.bind(this.validapasscurp, this));
         this.model.addValidationTask('porcentajeIVA', _.bind(this.validaiva, this));
 
-        /********* Validacion grupo empresarial ****************/
-        this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
-
         /*
          Salvador Lopez
          Se añaden eventos change para mostrar teléfonos y direcciones al vincular o desvincular algún registro relacionado
@@ -289,12 +286,17 @@
         this.model.on('sync', this.hideButtonsModal_Account, this);
         this.context.on('button:get_account_asesor:click', this.get_Account, this);
         this.context.on('button:send_account_asesor:click', this.set_Account, this);
-    		this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
-    		this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
-    		this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
-    		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
+    	this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
+    	this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
+    	this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
+    	this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
         this.context.on('button:reactivar_noviable:click', this.reactivar_noviable, this);
-    		this.model.on('sync', this.bloqueo, this);
+    	this.model.on('sync', this.bloqueo, this);
+
+        /********* Validacion grupo empresarial ****************/
+        this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
+        this.model.on('change:situacion_gpo_empresarial_c', this.val_SituacionEmpresarial, this);
+        
 
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
@@ -8034,15 +8036,15 @@ validaReqUniclickInfo: function () {
         if( (tipo_registro_cuenta_c =="2" && subtipo_prospecto.includes(subtipo_registro_cuenta_c) )
             || (tipo_registro_cuenta_c =="3" && subtipo_cliente.includes(subtipo_registro_cuenta_c) )  
         ){
-           if (tipo_gp_emp == "" ) {
+            /*if (tipo_gp_emp == "" ) {
                 error = true;
                 errorText += 'La Situación del Grupo Empresarial no puede ser vacio. Situación Grupo Empresarial es obligatorio.<br>';
-            }
+            }*/
             if ( this.model.get('parent_id') == this.model.get('id') ) {
                 error = true;
                 errorText += 'La cuenta está asociada a sí misma. Por favor, corrige el valor de Grupo Empresarial.<br>';
             }
-            if (tipo_gp_emp.indexOf("4") !== -1 ) {
+            if (tipo_gp_emp.indexOf("4") !== -1 && this.model.get('parent_id') == "") {
                 error = true;
                 errorText += 'La Situación del Grupo Empresarial no puede ser “Sin Grupo Empresarial Verificado”. Por favor, corrige este valor o bien asocia la cuenta a un Grupo Empresarial.<br>';
             }
@@ -8066,6 +8068,26 @@ validaReqUniclickInfo: function () {
             }
         }
         callback(null, fields, errors);
+    },
+
+    val_SituacionEmpresarial: function () {
+        var tipo_gp_emp = this.model.get("situacion_gpo_empresarial_c");
+
+        if(event.type == 'mouseup'){
+            if(tipo_gp_emp.indexOf("1") !== -1 || tipo_gp_emp.indexOf("2") !== -1){
+                this.model.set("situacion_gpo_empresarial_c","");
+                app.alert.show("Situación Grupo Empresarial", {
+                    level: "error",
+                    title: "No puede seleccionar la opción",
+                    autoClose: false
+                });
+            }
+        
+            if ( tipo_gp_emp.indexOf("3") !== -1 ) {
+                this.model.set("parent_name","");
+                this.model.set("parent_id","");
+            }
+        }
     },
 
 })
