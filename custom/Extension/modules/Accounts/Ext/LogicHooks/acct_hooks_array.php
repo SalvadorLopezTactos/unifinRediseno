@@ -253,8 +253,8 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks',
     'ActualizaEmpleadosDDW'
 );
-$hook_array['after_save'][] = Array(
-    25,
+$hook_array['before_save'][] = Array(
+    24,
     'Logic Hook situacion grupo empresarial',//Just a quick comment about the logic of it
     'custom/modules/Accounts/Account_Hooks.php', //path to the logic hook
     'Account_Hooks', // name of the class

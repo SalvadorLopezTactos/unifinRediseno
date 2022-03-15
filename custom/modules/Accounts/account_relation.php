@@ -17,6 +17,6 @@ class class_account_relation
 
             $beanP = BeanFactory::retrieveBean('Accounts', $args['id']);
             if($beanP != null) $beanP->save();
-        }        
+        }     
     }
 }
