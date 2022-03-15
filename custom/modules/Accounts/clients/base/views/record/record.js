@@ -8060,13 +8060,13 @@ validaReqUniclickInfo: function () {
                 errorText += 'Grupo Empresarial debe tener Situación Empresarial Definida.';
             }
             if(error){
-                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
-                errors['situacion_gpo_empresarial_c'].required = true;
                 app.alert.show("Situación Grupo Empresarial", {
                     level: "error",
                     title: errorText,
                     autoClose: false
                 });
+                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
+                errors['situacion_gpo_empresarial_c'].required = true;
             }else{
                 callback(null, fields, errors);    
             }
