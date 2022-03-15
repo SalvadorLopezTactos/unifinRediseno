@@ -1895,19 +1895,60 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function func_grupo_empresarial($bean = null, $event = null, $args = null)
     {
-        $sit_emp = $bean->situacion_gpo_empresarial_c;
-        $texto = "";
-        if(strpos($sit_emp, "1")){
-            $texto = "Cuenta Primaria del Grupo ".$bean->name ;
+        global $db;
+        $idPadre = $bean->parent_id;
+        $situacionGE = $bean->situacion_gpo_empresarial_c;
+        $totalHijos = 0;
+        $listaSituacionGE = [];
+        $listaTextoSGE = [];
+
+        $GLOBALS['log']->fatal("LH Grupo Empresarial");
+
+        $sql = "Select id,name from accounts a where parent_id = '{$bean->id}' and deleted = 0";
+        $result = $db->query($sql);
+        $totalHijos = $result->num_rows;
+        
+        //Validar relación padre
+        if( !empty($idPadre) ) {
+            $listaSituacionGE[] = "^2^";
         }
-        if(strpos($sit_emp, "2")){
-            if($texto!="") $texto .= "\n"; 
-            $texto .= "Cuenta Secundaria del Grupo ".$bean->parent_name ;
+        
+        //Validar relación hijos
+        if( $totalHijos>0 ) {
+            $listaSituacionGE[] = "^1^";
         }
-        if(strpos($sit_emp, "3")){
-            $texto = "No pertenece a ningún Grupo Empresarial";
+        
+        //Validar Sin grupo empresaril
+        if( $totalHijos==0 && empty($idPadre) && strpos($situacionGE, "3") ) {
+            $listaSituacionGE[] = "^3^";
         }
-        $bean->situacion_gpo_empresa_txt_c = $texto;
+        if(count($listaSituacionGE)==0){
+            $listaSituacionGE[] = "^4^";
+        }
+        
+        
+        //Armar arreglo de texto SGE
+        if ( in_array("^1^", $listaSituacionGE ) ){
+            $listaTextoSGE[] = 'Cuenta primaria del grupo ' . $bean->name ;
+        }
+        if ( in_array("^2^" , $listaSituacionGE )){
+            $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $bean->parent_name;
+        }
+        if ( in_array( "^3^" , $listaSituacionGE )){
+            $listaTextoSGE[] = 'No pertenece a ningún grupo empresarial';
+        }
+        if ( in_array( "^4^" ,$listaSituacionGE) ){
+            $listaTextoSGE[] = 'Sin Grupo Empresarial Verificado';
+        }
+        $situacion = implode(",",$listaSituacionGE);
+        $situaciontxt = implode(",",$listaTextoSGE);
+        /*$bean->situacion_gpo_empresarial_c = (count($listaSituacionGE)>0) ? implode(",",$listaSituacionGE) : $bean->situacion_gpo_empresarial_c;
+
+        $bean->situacion_gpo_empresa_txt_c = (count($listaTextoSGE)>0) ? implode("\n",$listaTextoSGE) : $bean->situacion_gpo_empresa_txt_c;
+        */
+        $update = "UPDATE accounts_cstm set situacion_gpo_empresarial_c = '{$situacion}' , situacion_gpo_empresa_txt_c  ='{$situaciontxt}' where id_c = '{$bean->id}'";
+        $GLOBALS['log']->fatal("update", $update);
+        $GLOBALS['db']->query($update);
     }
 
 }
