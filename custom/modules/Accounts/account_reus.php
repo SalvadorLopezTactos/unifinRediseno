@@ -51,7 +51,7 @@ class class_account_reus
             $host .=  implode(',',$emailList);
             $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
-            
+
             $GLOBALS['log']->fatal('Resultado DWH REUS CORREOS - CUENTAS: ' . json_encode($resultado));
 
             if ($resultado != "" && $resultado != null) {
@@ -120,7 +120,7 @@ class class_account_reus
         $event_id = create_guid();
         $date = TimeDate::getInstance()->nowDb();
         $phoneCuenta = false;
-        //API DHW REUS PARA TELEFONOS 
+        //API DHW REUS PARA TELEFONOS
         $callApi = new UnifinAPI();
         $host = $sugar_config['dwh_reus_telefonos'] . "?valor=";
         //OBTENEMOS LOS TELEFONOS DE LA CUENTA
@@ -147,9 +147,9 @@ class class_account_reus
             $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ' . json_encode($resultado));
 
             if ($resultado != "" && $resultado != null) {
-                //RESULTADO DEL SERVICIO DWH REUS 
+                //RESULTADO DEL SERVICIO DWH REUS
                 foreach ($resultado as $key => $val) {
-                    //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS 
+                    //VALIDA EN LOS TELEFONOS DE MOBILE, CASA Y OFICINA SI ESTAN REGISTRADOS EN REUS
                     // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
                     if ($bean->load_relationship('accounts_tel_telefonos_1')) {
                         $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
@@ -162,10 +162,10 @@ class class_account_reus
                                 $beantel = BeanFactory::retrieveBean('Tel_Telefonos', $telefono->id);
                                 if ($val['existe'] == 'SI') {
 
-                                    //$queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}'";
-                                    //$GLOBALS['db']->query($queryC);
-                                    $beantel->registro_reus_c = 1;
-                                    $beantel->save();
+                                    $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}';";
+                                    $db->query($queryC);
+                                    // $beantel->registro_reus_c = 1;
+                                    // $beantel->save();
                                     // $GLOBALS['log']->fatal("TELEFONO REUS");
                                     //Establece nuevo registro en tabla de auditoria
                                     $id_u_audit = create_guid();
@@ -176,10 +176,10 @@ class class_account_reus
                                     }
                                 }
                                 if ($val['existe'] == 'NO') {
-                                    $beantel->registro_reus_c = 0;
-                                    $beantel->save();
-                                    //$queryD = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}'";
-                                    //$GLOBALS['db']->query($queryD);
+                                    // $beantel->registro_reus_c = 0;
+                                    // $beantel->save();
+                                    $queryD = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}';";
+                                    $db->query($queryD);
                                     // $GLOBALS['log']->fatal("TELEFONO NORMAL");
                                     // $beantel->registro_reus_c = 0;
                                     $id_u_audit = create_guid();

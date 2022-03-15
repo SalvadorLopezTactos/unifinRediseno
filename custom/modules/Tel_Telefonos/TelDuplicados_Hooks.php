@@ -13,44 +13,25 @@ class TelDuplicados_Hooks
         global $db;
 
         if ($_REQUEST['module'] != 'Import' &&  $_SESSION['platform'] != 'base') {
-           // $GLOBALS['log']->fatal('>>>>VALORES VIENE DE UN API ');
             $idCuenta = $bean->accounts_tel_telefonos_1accounts_ida;
-            //$GLOBALS['log']->fatal('>>>>$args Cuenta ' . $idCuenta);
-            //$GLOBALS['log']->fatal('>>>>VALORES INICIALES ' . $bean->telefono . " -- " . $bean->principal . " -- " . $bean->deleted);
-            $espacioTel = str_replace(' ', '', $bean->telefono);
-            $bean->name = str_replace(' ', '', $bean->name);
 
-            // Recuperamos todos los telefonos asociados a la cuenta
-
-            $QuerySelect = "SELECT telefono.id,telefono.telefono,telefono.principal,telefono.estatus,telefono.tipotelefono 
-FROM accounts_tel_telefonos_1_c rel
-INNER JOIN tel_telefonos telefono
-ON telefono.id=rel.accounts_tel_telefonos_1tel_telefonos_idb
-WHERE rel.accounts_tel_telefonos_1accounts_ida='{$idCuenta}'
-AND rel.deleted=0
-AND telefono.deleted=0";
+            //Valida existencia de teléfono principal
+            $QuerySelect = "SELECT telefono.id,telefono.telefono,telefono.principal,telefono.estatus,telefono.tipotelefono
+              FROM accounts_tel_telefonos_1_c rel
+              INNER JOIN tel_telefonos telefono
+                ON telefono.id=rel.accounts_tel_telefonos_1tel_telefonos_idb
+              WHERE rel.accounts_tel_telefonos_1accounts_ida='{$idCuenta}'
+                AND rel.deleted=0
+                AND telefono.deleted=0
+                AND telefono.id!='{$bean->id}'
+                AND telefono.principal = 1";
             $resultQ = $db->query($QuerySelect);
-            $existPrincipal = false;
-            $existTel = false;
-            while ($row = $db->fetchByAssoc($resultQ)) {
-                if ($row['principal']) {
-                    $existPrincipal = true;
-                }
-                if ($row['telefono'] == $espacioTel) {
-                    $existTel = true;
-                }
+            $totalPrincipal = $resultQ->num_rows;
+            if($totalPrincipal>0){
+              $bean->principal = 0;
+            }else{
+              $bean->principal = 1;
             }
-            if (!$existTel) {
-                if ($existPrincipal) {
-                    $bean->principal = 0;
-                }
-            } else {
-                if ($existPrincipal) {
-                    $bean->principal = 0;
-                }
-                    //$bean->deleted = 1;
-            }
-            //$GLOBALS['log']->fatal('>>>>VALORES FINALES ' . $bean->telefono . " -- " . $bean->principal . " -- " . $bean->deleted);
         }
     }
 }
