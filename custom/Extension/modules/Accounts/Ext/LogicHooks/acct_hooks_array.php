@@ -260,3 +260,12 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks', // name of the class
     'func_grupo_empresarial' // name of the function.
 );
+
+$hook_array['before_save'][] = Array(
+    23,
+    'Validacion de duplicados codigo Vendor',
+    'custom/modules/Accounts/validate_vendor.php',
+    'class_validate_vendor',
+    'func_validate_vendor_code'
+
+);
