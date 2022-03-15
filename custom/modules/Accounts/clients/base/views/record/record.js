@@ -8062,7 +8062,7 @@ validaReqUniclickInfo: function () {
             if(error){
                 app.alert.show("Situación Grupo Empresarial", {
                     level: "error",
-                    title: errorText,
+                    messages: errorText,
                     autoClose: false
                 });
                 errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
