@@ -37,3 +37,11 @@ $hook_array['after_save'][] = Array(
     'lead_direcciones_class', // name of the class
     'lead_direcciones_function' // name of the function.
 );
+
+$hook_array['after_save'][] = Array(
+    6,
+    'Enviar notificaciones a Vendors',//Just a quick comment about the logic of it
+    'custom/modules/Leads/NotificacionVendor.php', //path to the logic hook
+    'NotificacionVendor', // name of the class
+    'notificaVendors' // name of the function.
+);
