@@ -21,10 +21,15 @@ function notificaVendors($bean, $event, $arguments)
             $accountName=$accountVendor->name;
             $accountVendorCode=$accountVendor->codigo_vendor_c;
 
-            //Setea cuerpo de notificacion
-            $cuerpoCorreo= $this->CuerpoNotificacion($accountName,$accountVendorCode,$idregistro,$lead);
-            //Ejecuta la función para envío de notificaciones a la lista Vendor
-            $this->enviarNotificacionVendor("Oportunidad de negocio por Vendor",$cuerpoCorreo,$correosVendor, $idregistro);
+            //Validamos que si se tiene codigo vendor NO vacío, se manden los correos
+            if(!empty($accountVendorCode)){
+                //Setea cuerpo de notificacion
+                $cuerpoCorreo= $this->CuerpoNotificacion($accountName,$accountVendorCode,$idregistro,$lead);
+                //Ejecuta la función para envío de notificaciones a la lista Vendor
+                $this->enviarNotificacionVendor("Oportunidad de negocio por Vendor",$cuerpoCorreo,$correosVendor, $idregistro);
+            }else{
+                $GLOBALS['log']->fatal("No cumple condicion proceso de notificacion Vendors ya que no tiene codigo_vendor_c");
+            }
         }else{
             $GLOBALS['log']->fatal("No cumple condicion proceso de notificacion Vendors");
         }
