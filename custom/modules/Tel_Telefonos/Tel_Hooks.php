@@ -10,20 +10,21 @@ class Tel_Hooks{
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/4/2015 Description: get the last sequencia number (MAX) related to the person, and adds 1 to it then it stores the telefono record.*/
     public function setSequencia($bean = null, $event = null, $args = null){
+      if($bean->accounts_tel_telefonos_1accounts_ida != null && empty($bean->secuencia)){
+          global $db;
+          $query = "SELECT MAX(secuencia)
+            FROM tel_telefonos
+            left join accounts_tel_telefonos_1_c on accounts_tel_telefonos_1tel_telefonos_idb=tel_telefonos.id
+            WHERE accounts_tel_telefonos_1accounts_ida = '{$bean->accounts_tel_telefonos_1accounts_ida}'
+            and tel_telefonos.deleted=0
+            and accounts_tel_telefonos_1_c.deleted=0
+            limit 1;";
 
-         global $db;
-         $query = <<<SQL
-SELECT MAX(secuencia) FROM tel_telefonos
-left join accounts_tel_telefonos_1_c on accounts_tel_telefonos_1tel_telefonos_idb=tel_telefonos.id
-WHERE accounts_tel_telefonos_1accounts_ida = '{$bean->accounts_tel_telefonos_1accounts_ida}'
-SQL;
-        $queryResult = $db->getOne($query);
-        if($bean->accounts_tel_telefonos_1accounts_ida != null && empty($bean->secuencia)){
-           $bean->secuencia = 0;
-           $total = $queryResult + 1;
-           $bean->secuencia = $total;
-        }
-
+          $queryResult = $db->getOne($query);
+          $bean->secuencia = 0;
+          $total = $queryResult + 1;
+          $bean->secuencia = $total;
+      }
     }
     /* END CUSTOMIZATION */
 

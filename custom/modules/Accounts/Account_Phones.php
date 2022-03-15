@@ -18,34 +18,43 @@ class Account_Phones
             $base = substr($phone_office, 0, 4);
         }
         //Condición para saber que el registro NO ha sido creado en Móvil (platform=mobile)
-        if ($base !== "base") {
+        if ($base !== "base" && !empty($bean->phone_office)) {
             //OBTENER TELEFONOS RELACIONADOS
             if ($bean->load_relationship('accounts_tel_telefonos_1')) {
                 $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
                 $totalTelefonos = count($relatedTelefonos);
                 if ($totalTelefonos > 0) {
                     //Valida si cuenta con teléfono principal
-                    $contador=0;
-                    $principal=-99;
-                    $id_tel="";
+                    $existePrincipal=false;
+                    $idTelPrincipal="";
+                    $idTelefonoActual = "";
                     foreach ($relatedTelefonos as $telefono) {
                         if ($telefono->principal) {
                             //Ya cuenta con un teléfono principal, actualizando
-                            $principal=$contador;
+                            $existePrincipal=true;
                             $id_tel=$telefono->id;
                         }
-                        $contador++;
-                    }//Termina foreach
-                    if($principal !==-99){
-                        //Actualiza teléfono principal
-                        /*$relatedTelefonos[$principal]['telefono']=$phone_office;
-                        $beanTelefono = BeanFactory::retrieveBean('Tel_Telefonos', $id_tel);
-                        $beanTelefono->name=$phone_office;
-                        $beanTelefono->telefono = $phone_office;
-                        $beanTelefono->save();*/
-						$sql = "UPDATE tel_telefonos SET name = '{$phone_office}' AND telefono = '{$phone_office}' WHERE id = '{$bean->id_tel}'";
-						$result = $GLOBALS['db']->query($sql);
-                    }else{
+                        if($telefono->telefono == $bean->phone_office){
+                            $idTelefonoActual = $telefono->id;
+                        }
+                    }
+                    //No Coincide principal y teléfono
+                    if(!empty($id_tel) && !empty($idTelefonoActual) && $id_tel != $idTelefonoActual){
+                        //Desmarca principal actual
+                        $sqlA = "UPDATE tel_telefonos SET principal = 0 WHERE id = '{$id_tel}';";
+            						$resultA = $GLOBALS['db']->query($sqlA);
+                        //Actualiza nuevo principal
+                        $sqlB = "UPDATE tel_telefonos SET principal = 1 WHERE id = '{$idTelefonoActual}';";
+            						$resultB = $GLOBALS['db']->query($sqlB);
+
+                    }
+                    if(!$existePrincipal && !empty($idTelefonoActual)){
+                        //Actualiza nuevo principal
+                        $sqlB = "UPDATE tel_telefonos SET principal = 1 WHERE id = '{$idTelefonoActual}';";
+                        $resultB = $GLOBALS['db']->query($sqlB);
+                    }
+
+                    if(empty($idTelefonoActual)){
                         //Agrega nuevo teléfono principal de trabajo Tipo 2
                         $beanTelefono = BeanFactory::newBean("Tel_Telefonos");
                         $beanTelefono->accounts_tel_telefonos_1accounts_ida=$bean->id;
@@ -57,6 +66,7 @@ class Account_Phones
                         $beanTelefono->pais = '2';
                         $beanTelefono->save();
                     }
+
                 }else{
                     $beanTelefono = BeanFactory::newBean("Tel_Telefonos");
                     $beanTelefono->accounts_tel_telefonos_1accounts_ida=$bean->id;
