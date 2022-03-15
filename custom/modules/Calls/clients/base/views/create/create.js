@@ -13,7 +13,7 @@
         this.on('render', this.noestatusedit, this);
         // this.model.on("change:date_start_date", _.bind(this.validaFecha, this));
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
-        this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
+        //this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicialCall, this));
         //this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));

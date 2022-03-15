@@ -142,7 +142,6 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array(
 
 /*@Jesus Carrillo
     Dependencias en base al resultado de llamadas
-*/
 $dependencies['Calls']['ResultadoCalls'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -162,6 +161,7 @@ $dependencies['Calls']['ResultadoCalls'] = array(
         ),
     ),
 );
+*/
 $dependencies['Calls']['MotivoIlocalizable'] = array(
     'hooks' => array("all"),
     'triggerFields' => array('tct_resultado_llamada_ddw_c', 'status', 'id'),
