@@ -34,29 +34,31 @@ class customGetOpportunities extends SugarApi
         $negocio = $args['data']['negocio_c'];
 
         $duplicado = 0;
+        $multilinea = 0;
         $mensaje = "";
 
         $queryData = "SELECT distinct
-        ifnull(uni_cstm.multilinea_c,0) multilinea_c,
-        op_cstm.id_c,
-        op_cstm.estatus_c,
-        op_cstm.tct_etapa_ddw_c,
-        op_cstm.tipo_producto_c,
-        op_cstm.negocio_c,
-        op_cstm.producto_financiero_c
-      FROM opportunities_cstm op_cstm
-        INNER JOIN accounts_opportunities op_rel
-          ON op_rel.opportunity_id = op_cstm.id_c
-        INNER JOIN accounts_uni_productos_1_c uni_rel
-          ON uni_rel.accounts_uni_productos_1accounts_ida = op_rel.account_id
-        left JOIN uni_productos uni
-          ON uni.id = uni_rel.accounts_uni_productos_1uni_productos_idb
-             AND uni.tipo_producto = '{$prouctId}'
-        left JOIN uni_productos_cstm uni_cstm
-          ON uni_cstm.id_c = uni.id
-      WHERE op_rel.account_id = '{$accountId}'
-      AND op_cstm.tipo_producto_c = '{$prouctId}' AND  op_cstm.negocio_c='{$negocio}'
-       AND op_cstm.producto_financiero_c = '{$producto}' AND op_rel.deleted = 0";
+              max(ifnull(uni_cstm.multilinea_c,0)) multilinea_c,
+              op_cstm.id_c,
+              op_cstm.estatus_c,
+              op_cstm.tct_etapa_ddw_c,
+              op_cstm.tipo_producto_c,
+              op_cstm.negocio_c,
+              op_cstm.producto_financiero_c
+            FROM opportunities_cstm op_cstm
+              INNER JOIN accounts_opportunities op_rel
+                ON op_rel.opportunity_id = op_cstm.id_c
+              INNER JOIN accounts_uni_productos_1_c uni_rel
+                ON uni_rel.accounts_uni_productos_1accounts_ida = op_rel.account_id
+              LEFT JOIN uni_productos uni
+                ON uni.id = uni_rel.accounts_uni_productos_1uni_productos_idb
+                   AND uni.tipo_producto = '{$prouctId}'
+              LEFT JOIN uni_productos_cstm uni_cstm
+                ON uni_cstm.id_c = uni.id
+            WHERE op_rel.account_id = '{$accountId}'
+              AND op_cstm.tipo_producto_c = '{$prouctId}' AND  op_cstm.negocio_c='{$negocio}'
+              AND op_cstm.producto_financiero_c = '{$producto}' AND op_rel.deleted = 0
+            GROUP BY op_cstm.id_c";
 
         $result = $db->query($queryData);
 
@@ -66,18 +68,16 @@ class customGetOpportunities extends SugarApi
             $estatus = $row['estatus_c'];
             $etapa_ddw = $row['tct_etapa_ddw_c'];
             $tipo_producto = $row['tipo_producto_c'];
-            $multilinea = $row['multilinea_c'];
+            $multilinea = ($multilinea==0) ? $row['multilinea_c'] : $multilinea;
 
             if ($estatus != "K" && $etapa_ddw != "CL" && $etapa_ddw != "R" ) {
                 $mensaje = "No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.";
                 $duplicado = 1;
 
-            }elseif ($etapa_ddw == "CL" && ($tipo_producto == "1" || $tipo_producto == "4") && $multilinea !="1") {
-
+            }elseif ($etapa_ddw == "CL" && ($tipo_producto == "1" || $tipo_producto == "4") && $multilinea !=1) {
                 $mensaje = "No es posible crear una Pre-solicitud cuando ya se tiene una línea de crédito autorizada.";
                 $duplicado = 1;
             }
-
         }
 
         $respuesta=["duplicado"=>$duplicado,"mensaje"=>$mensaje];
