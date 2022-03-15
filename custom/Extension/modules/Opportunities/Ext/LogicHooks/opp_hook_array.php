@@ -174,3 +174,11 @@ $hook_array['before_save'][] = Array(
     'OpportunityLogic', // name of the class
     'SolicitudSOC'
 );
+
+$hook_array['after_save'][] = Array(
+    19,
+    'Enviar notificaciones a Vendors',//Just a quick comment about the logic of it
+    'custom/modules/Opportunities/opp_notificacion_vendor.php', //path to the logic hook
+    'NotificacionVendor', // name of the class
+    'notificaVendors' // name of the function.
+);
