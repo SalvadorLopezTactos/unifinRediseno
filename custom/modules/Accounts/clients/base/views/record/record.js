@@ -125,6 +125,8 @@
         this.model.addValidationTask('validaformato3campos', _.bind(this.validaformato, this));
         this.model.addValidationTask('validacamposcurppass', _.bind(this.validapasscurp, this));
         this.model.addValidationTask('porcentajeIVA', _.bind(this.validaiva, this));
+        this.model.addValidationTask('ValidacionReferidoPorVENDOR', _.bind(this.validaReferido, this));
+        
 
         /*
          Salvador Lopez
@@ -308,6 +310,8 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
+         /********* Validacion grupo empresarial ****************/
+         this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
         //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
@@ -8023,7 +8027,6 @@ validaReqUniclickInfo: function () {
 
         },
 
-
     validaGrupoEmpresarial: function (fields, errors, callback) {
         var subtipo_prospecto = ['7','8','9','10','12'];
         var subtipo_cliente = ['11','12','13','14','15','16','17','18','19','20'];
@@ -8056,7 +8059,6 @@ validaReqUniclickInfo: function () {
                 error = true;
                 errorText += 'Grupo Empresarial debe tener Situación Empresarial Definida.';
             }
-
             if(error){
                 errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
                 errors['situacion_gpo_empresarial_c'].required = true;
@@ -8065,9 +8067,38 @@ validaReqUniclickInfo: function () {
                     title: errorText,
                     autoClose: false
                 });
+            }else{
+                callback(null, fields, errors);    
             }
+        }else{
+            callback(null, fields, errors);
         }
+    },
+
+    validaReferido: function (fields, errors, callback) {
+        var referido=this.model.get('account_id1_c');
+        var consulta = app.api.buildURL('Accounts/' + referido, null, null);
+    
+        if(this.model.get('origen_cuenta_c')=='8'){
+        app.api.call('read', consulta, {}, {
+                success: _.bind(function (data) {
+                    if(data.tipo_proveedor_compras_c!='6' && data.codigo_vendor_c=="") {                           
+                            app.alert.show("Cuenta no VENDOR", {
+                                level: "error",
+                                messages: 'La cuenta Referida no tiene un <b>código vendor</b>. Favor de verificar.',
+                                autoClose: false
+                            });
+                            errors['referido_cliente_prov_c'] = errors['referido_cliente_prov_c'] || {};
+                            errors['referido_cliente_prov_c'].required = true;
+                            
+                        }
+                        callback(null, fields, errors);
+                }, this)
+            });
+        }else{
         callback(null, fields, errors);
+        } 
+    
     },
 
     val_SituacionEmpresarial: function () {
