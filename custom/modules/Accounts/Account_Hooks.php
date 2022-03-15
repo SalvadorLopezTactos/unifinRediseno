@@ -1932,7 +1932,12 @@ where rfc_c = '{$bean->rfc_c}' and
             $listaTextoSGE[] = 'Cuenta primaria del grupo ' . $bean->name ;
         }
         if ( in_array("^2^" , $listaSituacionGE )){
-            $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $bean->parent_name;
+            if(empty($bean->parent_name)){
+                $beanrel = BeanFactory::retrieveBean('Accounts', $bean->parent_id);
+                $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $beanrel->name;
+            }else{
+                $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $bean->name;
+            }
         }
         if ( in_array( "^3^" , $listaSituacionGE )){
             $listaTextoSGE[] = 'No pertenece a ningún grupo empresarial';
@@ -1940,15 +1945,11 @@ where rfc_c = '{$bean->rfc_c}' and
         if ( in_array( "^4^" ,$listaSituacionGE) ){
             $listaTextoSGE[] = 'Sin Grupo Empresarial Verificado';
         }
-        $situacion = implode(",",$listaSituacionGE);
-        $situaciontxt = implode(",",$listaTextoSGE);
-        /*$bean->situacion_gpo_empresarial_c = (count($listaSituacionGE)>0) ? implode(",",$listaSituacionGE) : $bean->situacion_gpo_empresarial_c;
+        //$situacion = implode(",",$listaSituacionGE);
+        //$situaciontxt = implode("\n",$listaTextoSGE);
+        $bean->situacion_gpo_empresarial_c = (count($listaSituacionGE)>0) ? implode(",",$listaSituacionGE) : $bean->situacion_gpo_empresarial_c;
 
         $bean->situacion_gpo_empresa_txt_c = (count($listaTextoSGE)>0) ? implode("\n",$listaTextoSGE) : $bean->situacion_gpo_empresa_txt_c;
-        */
-        $update = "UPDATE accounts_cstm set situacion_gpo_empresarial_c = '{$situacion}' , situacion_gpo_empresa_txt_c  ='{$situaciontxt}' where id_c = '{$bean->id}'";
-        $GLOBALS['log']->fatal("update", $update);
-        $GLOBALS['db']->query($update);
+        
     }
-
 }
