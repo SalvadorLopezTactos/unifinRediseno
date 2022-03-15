@@ -61,14 +61,14 @@ function notificaVendors($bean, $event, $arguments)
         $recipients=$app_list_strings['usuarios_vendor_list'];
         foreach ($recipients as $key => $value) {
             $GLOBALS['log']->fatal("Iterando y agregando correos a: ".$value);
-            $mailer->addRecipientsTo(new EmailIdentity($key, $value));
+            $mailer->addRecipientsTo(new EmailIdentity($value));
         }
         
         //Envia correos.
         $result = $mailer->send();
 
     } catch (Exception $e){
-        $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$nombreDirector);
+        $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email.");
         $GLOBALS['log']->fatal("Exception ".$e);
 
         } catch (MailerException $me) {
