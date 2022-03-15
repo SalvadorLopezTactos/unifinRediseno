@@ -8065,12 +8065,10 @@ validaReqUniclickInfo: function () {
                 });
                 errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
                 errors['situacion_gpo_empresarial_c'].required = true;
-            }else{
-                callback(null, fields, errors);    
             }
-        }else{
-            callback(null, fields, errors);
         }
+            callback(null, fields, errors);
+        
     },
 
     validaReferido: function (fields, errors, callback) {
