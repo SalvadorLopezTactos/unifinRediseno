@@ -310,8 +310,6 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
-         /********* Validacion grupo empresarial ****************/
-         this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
         //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
@@ -8060,19 +8058,17 @@ validaReqUniclickInfo: function () {
                 errorText += 'Grupo Empresarial debe tener Situación Empresarial Definida.';
             }
             if(error){
-                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
-                errors['situacion_gpo_empresarial_c'].required = true;
                 app.alert.show("Situación Grupo Empresarial", {
                     level: "error",
-                    title: errorText,
+                    messages: errorText,
                     autoClose: false
                 });
-            }else{
-                callback(null, fields, errors);    
+                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
+                errors['situacion_gpo_empresarial_c'].required = true;
             }
-        }else{
-            callback(null, fields, errors);
         }
+            callback(null, fields, errors);
+        
     },
 
     validaReferido: function (fields, errors, callback) {
