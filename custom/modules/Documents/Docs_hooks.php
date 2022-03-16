@@ -50,12 +50,12 @@ class Upload_documents
                     //$fiel_ext = get_file_extension($file_name, true);
                     $file_content = sugar_file_get_contents('upload/'.$file_id, true);
                     $file_encoded= base64_encode($file_content);
-                    $GLOBALS['log']->fatal('File encoded :' .$file_encoded);
+                    //$GLOBALS['log']->fatal('File encoded :' .$file_encoded);
 
                     //obtenemos el mime type
                     $file_mime = get_file_mime_type('upload/'.$file_id, true);
                     $GLOBALS['log']->fatal('File name :' .$file_name);
-                    $GLOBALS['log']->fatal('File Mime :' .$file_mime);
+                    //$GLOBALS['log']->fatal('File Mime :' .$file_mime);
                     $file->setName($file_name);
 
                     //id de la carpeta donde hemos dado el permiso a la cuenta de servicio
@@ -105,7 +105,7 @@ class Upload_documents
                         );
 
                         //invoca a unifinPostCall
-                        $GLOBALS['log']->fatal('Petición: ' . json_encode($body));
+                        //$GLOBALS['log']->fatal('Petición: ' . json_encode($body));
                         //Llama a unifinPostCall para que realice el consumo de servicio a Alfresco
                         $callApi = new UnifinAPI();
                         $resultado = $callApi->unifinPostCall($url, $body);

@@ -25,11 +25,11 @@ class GetDetalleLManagement extends SugarApi
             $id_user = $current_user->id;
             $posicion_operativa = $current_user->posicion_operativa_c;
             $tdirector = $args['tdirector'];
-            
+
             $GLOBALS['log']->fatal('posicion_operativa', $posicion_operativa);
             $GLOBALS['log']->fatal('id_user', $id_user,' - ',$current_user->user_name);
             $GLOBALS['log']->fatal('tdirector', $tdirector);
-            
+
             $records = [];
             $records_exp = [];
             $records_int = [];
@@ -43,7 +43,7 @@ class GetDetalleLManagement extends SugarApi
             $detalle_cnt_aplazado = [];
             $equip = [];
             $reg = [];
-        
+
             list ($usuarios, $equip, $reg) = $this->getusuarios($id_user, $tdirector , $posicion_operativa);
             $GLOBALS['log']->fatal('usuarios', $usuarios);
             $GLOBALS['log']->fatal('equipo', $equipo);
@@ -73,15 +73,15 @@ class GetDetalleLManagement extends SugarApi
             $detalle_cnt_aplazado   = array('contactado_aplazado' => $detalle_cnt_aplazado);
             $detalle_led_activo     = array('lead_activo' => $detalle_led_activo);
             $detalle_led_aplazado   = array('lead_aplazado' => $detalle_led_aplazado);
-            
+
             $records = array_merge(
                 $detalle_exp_activo, $detalle_exp_aplazado
                 ,$detalle_int_activo,$detalle_int_aplazado
                 ,$detalle_cnt_activo , $detalle_cnt_aplazado
-              ,$detalle_led_activo,$detalle_led_aplazado 
+              ,$detalle_led_activo,$detalle_led_aplazado
             );
 
-            $GLOBALS['log']->fatal('records2-json', json_encode($records));
+            //$GLOBALS['log']->fatal('records2-json', json_encode($records));
             //$GLOBALS['log']->fatal('records2', $records);
             return $records;
         } catch (Exception $e) {
@@ -98,7 +98,7 @@ class GetDetalleLManagement extends SugarApi
 
         $sqlteams = "SELECT REPLACE(uc.equipos_c,'^','\'') as equipos from users_cstm uc
         where id_c = '{$id_user}'";
-        
+
         $result = $GLOBALS['db']->query($sqlteams);
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $tteams = $row['equipos'];
@@ -108,11 +108,11 @@ class GetDetalleLManagement extends SugarApi
 
         $pos = strrpos($posicion_operativa, "1");
         if ($pos != '' && $tdirector == 1) { //valida usuario director equipo
-            $queryusuarios = "SELECT id, user_name, puestousuario_c,equipo_c, region_c from users 
+            $queryusuarios = "SELECT id, user_name, puestousuario_c,equipo_c, region_c from users
             join users_cstm on users.id = users_cstm.id_c where equipo_c in ({$tteams})
-            and posicion_operativa_c like '%3%' --  puestousuario_c in ('5') -- ('1','2','3','4','5','6','20','33','44','55') 
+            and posicion_operativa_c like '%3%' --  puestousuario_c in ('5') -- ('1','2','3','4','5','6','20','33','44','55')
             order by equipo_c";
-            $GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
+            //$GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
             $result = $GLOBALS['db']->query($queryusuarios);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $usuariosin = $usuariosin."'". $row['id'] . "',";
@@ -121,17 +121,17 @@ class GetDetalleLManagement extends SugarApi
             }
             $usuariosin = substr($usuariosin,0,-1);
         }
-        
+
         $pos = strrpos($posicion_operativa, "2");
         //$GLOBALS['log']->fatal('pos', $pos);
-        
+
         if ($pos  != ''  && $tdirector == 2) { //valida usuario director regional
             $usuariosin ="";
             $equipos_director = [];
             $equipomu = "SELECT REPLACE(uc.equipos_c,'^','\'') as equipos2
             from users_cstm uc where id_c in (
-                select id -- , user_name, puestousuario_c , posicion_operativa_c , region_c , equipo_c, reports_to_id 
-                from users join users_cstm on users.id = users_cstm.id_c where 
+                select id -- , user_name, puestousuario_c , posicion_operativa_c , region_c , equipo_c, reports_to_id
+                from users join users_cstm on users.id = users_cstm.id_c where
                 equipo_c in ($tteams)  and  posicion_operativa_c like '%1%' )";
             //$GLOBALS['log']->fatal('equipomu', $equipomu);
             $result = $GLOBALS['db']->query($equipomu);
@@ -139,7 +139,7 @@ class GetDetalleLManagement extends SugarApi
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 array_push($equipos_director,$row['equipos2']);
             }
-            $GLOBALS['log']->fatal('equipos_director', $equipos_director);
+            //$GLOBALS['log']->fatal('equipos_director', $equipos_director);
             $equiposf = [];
             foreach ($equipos_director as $key => $value) {
                 $porciones = explode(",", $value);
@@ -154,11 +154,11 @@ class GetDetalleLManagement extends SugarApi
             if($rest == ','){
                 $salidaequipos = substr($casalidaequiposdena, 0, -1);
             }
-            $queryusuarios = "SELECT id, user_name, puestousuario_c,equipo_c,region_c from users 
-            join users_cstm on users.id = users_cstm.id_c where equipo_c in 
-            ( {$salidaequipos} ) and posicion_operativa_c like '%3%' -- puestousuario_c in ('5') -- ('1','2','3','4','5','6','20','33','44','55') 
+            $queryusuarios = "SELECT id, user_name, puestousuario_c,equipo_c,region_c from users
+            join users_cstm on users.id = users_cstm.id_c where equipo_c in
+            ( {$salidaequipos} ) and posicion_operativa_c like '%3%' -- puestousuario_c in ('5') -- ('1','2','3','4','5','6','20','33','44','55')
              order by equipo_c";
-            $GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
+            //$GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
             $result = $GLOBALS['db']->query($queryusuarios);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $usuariosin = $usuariosin. "'".$row['id'] . "',";
@@ -172,10 +172,10 @@ class GetDetalleLManagement extends SugarApi
         $equipo = array('equipo' => $equipo);
         $region = array_unique($region);
         $region = array('region' => $region);
-        
+
         return array($usuariosin, $equipo, $region);
     }
-    
+
     public function detalle_expediente($usuarios,$statusProduct){
         //$GLOBALS['log']->fatal('usuarios detalle expediente',$usuarios);
 
@@ -281,7 +281,7 @@ class GetDetalleLManagement extends SugarApi
             LEFT JOIN
             (SELECT
                     app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
-                    opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, 
+                    opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned,
                     oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,	oppcstm.tct_estapa_subetapa_txf_c, opp.amount as monto
                 FROM accounts_opportunities app
                 INNER JOIN opportunities opp on opp.id = app.opportunity_id
@@ -289,12 +289,12 @@ class GetDetalleLManagement extends SugarApi
                 INNER JOIN (
                     SELECT app.account_id uac, opp.id oppid, opp.name, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
                     FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
-                    where  opp.assigned_user_id in ({$usuarios}) 
+                    where  opp.assigned_user_id in ({$usuarios})
                     group by app.account_id order by app.account_id
                 ) AS ultimos on ultimos.uac = app.account_id and ultimos.dayb = opp.date_modified
             WHERE
-            oppcstm.tipo_producto_c = '1' 
-            and opp.assigned_user_id in ({$usuarios}) 
+            oppcstm.tipo_producto_c = '1'
+            and opp.assigned_user_id in ({$usuarios})
             group by app.account_id
             order by app.account_id
             ) as solicitudes
@@ -346,7 +346,7 @@ class GetDetalleLManagement extends SugarApi
         and up.tipo_producto = '1'
         and upc.status_management_c = '{$statusProduct}'
         order by usuario.asesor , a.name ";
-        $GLOBALS['log']->fatal('query cn '. $query);
+        //$GLOBALS['log']->fatal('query cn '. $query);
         /*if ($estadoProducto == 2) {
             $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";
         }*/
@@ -356,7 +356,7 @@ class GetDetalleLManagement extends SugarApi
          $records_in['records'][] = array(
                 'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'],'idEmpresarial' => $row['idEmpresarial'],'gpoEmpresarial'=>$row['gpoEmpresarial'],
                 'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'], 'region' => $row['region_c'] , 'tipoCuenta' => $row['tipoCuenta'],
-                'subtipoCuenta' => $row['subtipoCuenta'], 'fecha_asignacion' => $row['fecha_asignacion'], 
+                'subtipoCuenta' => $row['subtipoCuenta'], 'fecha_asignacion' => $row['fecha_asignacion'],
                 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $semaforoBool
             );
         }
@@ -416,8 +416,8 @@ class GetDetalleLManagement extends SugarApi
         usuario.id = tablaLeads.assigned_user_id
         group by idLead, nombre, subtipo, estatus
         order by asesor ,  nombre ";
-        
-        $GLOBALS['log']->fatal('query lead '. $query);
+
+        //$GLOBALS['log']->fatal('query lead '. $query);
         $result = $GLOBALS['db']->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
@@ -425,10 +425,10 @@ class GetDetalleLManagement extends SugarApi
             $records_in['records'][] = array(
             'idLead' => $row['idLead'], 'nombre' => $row['nombre'],
             'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'],'region' => $row['region_c'],
-            'tipo' => $row['tipo'] , 'subtipo' => $row['subtipo'], 'estatus' => $row['estatus'], 
+            'tipo' => $row['tipo'] , 'subtipo' => $row['subtipo'], 'estatus' => $row['estatus'],
             'fecha_asignacion' => $row['fecha_asignacion'],'semaforo' => $semaforoBool);
         }
-        
+
         return $records_in;
     }
 }
