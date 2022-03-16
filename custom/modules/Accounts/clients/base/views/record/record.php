@@ -453,30 +453,28 @@ array (
             array (
               0 => 
               array (
+                'readonly' => false,
+                'name' => 'fecha_bloqueo_origen_c',
+                'label' => 'LBL_FECHA_BLOQUEO_ORIGEN',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'origen_cuenta_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ORIGEN_CUENTA_C',
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'detalle_origen_c',
                 'label' => 'LBL_DETALLE_ORIGEN_C',
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'prospeccion_propia_c',
                 'label' => 'LBL_PROSPECCION_PROPIA_C',
-              ),
-              3 => 
-              array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
-              ),
-              4 => 
-              array (
-                'name' => 'referenciador_c',
-                'studio' => 'visible',
-                'label' => 'LBL_REFERENCIADOR',
               ),
               5 => 
               array (
@@ -485,9 +483,9 @@ array (
               ),
               6 => 
               array (
-                'name' => 'referido_cliente_prov_c',
+                'name' => 'referenciador_c',
                 'studio' => 'visible',
-                'label' => 'LBL_REFERIDO_CLIENTE_PROV',
+                'label' => 'LBL_REFERENCIADOR',
               ),
               7 => 
               array (
@@ -496,8 +494,9 @@ array (
               ),
               8 => 
               array (
-                'name' => 'referenciado_agencia_c',
-                'label' => 'LBL_REFERENCIADO_AGENCIA',
+                'name' => 'referido_cliente_prov_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERIDO_CLIENTE_PROV',
               ),
               9 => 
               array (
@@ -506,9 +505,8 @@ array (
               ),
               10 => 
               array (
-                'name' => 'tct_referenciado_dir_rel_c',
-                'studio' => 'visible',
-                'label' => 'LBL_TCT_REFERENCIADO_DIR_REL',
+                'name' => 'referenciado_agencia_c',
+                'label' => 'LBL_REFERENCIADO_AGENCIA',
               ),
               11 => 
               array (
@@ -517,55 +515,66 @@ array (
               ),
               12 => 
               array (
-                'name' => 'tct_origen_busqueda_txf_c',
-                'label' => 'LBL_TCT_ORIGEN_BUSQUEDA_TXF',
+                'name' => 'tct_referenciado_dir_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_REFERENCIADO_DIR_REL',
               ),
               13 => 
-              array (
-                'name' => 'tct_origen_base_ddw_c',
-                'label' => 'LBL_TCT_ORIGEN_BASE_DDW',
-              ),
-              14 => 
-              array (
-                'name' => 'medio_detalle_origen_c',
-                'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
-              ),
-              15 => 
-              array (
-                'name' => 'punto_contacto_origen_c',
-                'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
-              ),
-              16 => 
-              array (
-                'name' => 'evento_c',
-                'label' => 'LBL_EVENTO',
-              ),
-              17 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
+              14 => 
+              array (
+                'name' => 'tct_origen_busqueda_txf_c',
+                'label' => 'LBL_TCT_ORIGEN_BUSQUEDA_TXF',
+              ),
+              15 => 
+              array (
+                'name' => 'tct_origen_base_ddw_c',
+                'label' => 'LBL_TCT_ORIGEN_BASE_DDW',
+              ),
+              16 => 
+              array (
+                'name' => 'medio_detalle_origen_c',
+                'label' => 'LBL_MEDIO_DETALLE_ORIGEN_C',
+              ),
+              17 => 
+              array (
+                'name' => 'punto_contacto_origen_c',
+                'label' => 'LBL_PUNTO_CONTACTO_ORIGEN_C',
+              ),
               18 => 
+              array (
+                'name' => 'evento_c',
+                'label' => 'LBL_EVENTO',
+              ),
+              19 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
+              ),
+              20 => 
               array (
                 'name' => 'camara_c',
                 'label' => 'LBL_CAMARA',
               ),
-              19 => 
+              21 => 
               array (
                 'name' => 'alianza_soc_chk_c',
                 'label' => 'LBL_ALIANZA_SOC_CHK',
               ),
-              20 => 
+              22 => 
               array (
                 'name' => 'como_se_entero_c',
                 'label' => 'LBL_COMO_SE_ENTERO',
               ),
-              21 => 
+              23 => 
               array (
                 'name' => 'cual_c',
                 'label' => 'LBL_CUAL',
               ),
-              22 => 
+              24 => 
               array (
                 'name' => 'tct_origen_ag_tel_rel_c',
                 'studio' => 'visible',
@@ -581,7 +590,7 @@ array (
                   ),
                 ),
               ),
-              23 => 
+              25 => 
               array (
                 'name' => 'tct_que_promotor_rel_c',
                 'studio' => 'visible',

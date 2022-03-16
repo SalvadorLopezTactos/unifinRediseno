@@ -137,4 +137,6 @@ $mod_strings['LBL_M_ESTATUS_TELEFONO'] = 'Estatus teléfono Móvil';
 $mod_strings['LBL_O_ESTATUS_TELEFONO'] = 'Estatus teléfono Oficina';
 $mod_strings['LBL_ALIANZA_SOC_CHK_C'] = 'Alianza SOC';
 $mod_strings['LBL_GENERO'] = 'Género';
+$mod_strings['LBL_FECHA_BLOQUEO_ORIGEN'] = 'Fecha Bloqueo Origen';
+$mod_strings['LBL_ONBOARDING_CHK'] = 'Onboarding';
 $mod_strings['LBL_REFERIDO_CLIENTE_PROV'] = 'Referido';

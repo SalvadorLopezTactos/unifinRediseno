@@ -618,6 +618,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->nombre_empresa_c = $dataOrigen['nombre_empresa_c'];
         $bean_Lead->apellido_paterno_c = $dataOrigen['apellido_paterno_c'];
         $bean_Lead->apellido_materno_c = $dataOrigen['apellido_materno_c'];
+        $bean_Lead->onboarding_chk_c=$dataOrigen['onboarding_chk_c'];
         $bean_Lead->origen_c = $dataOrigen['origen_c']; # se deja siempre como 1
         $detalle_origen = $dataOrigen['detalle_origen_c']; # se deja siempre como 3 Digital
 
