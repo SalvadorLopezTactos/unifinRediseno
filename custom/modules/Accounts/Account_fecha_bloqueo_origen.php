@@ -101,7 +101,7 @@ class Account_fecha_bloqueo_origen
             $GLOBALS['log']->fatal("Validando fecha de bloqueo antes de cambiar el origen en Cuentas");
             $GLOBALS['log']->fatal("Fecha actual: ".$fecha_actual. ", Fecha bloqueo: ".$fecha_bloqueo_format);
 
-            if($fecha_actual <= $fecha_bloqueo_format){
+            if($fecha_actual <= $fecha_bloqueo_format && !empty($bean->fetched_row['origen_cuenta_c'])){
                 $GLOBALS['log']->fatal("********** La fecha de bloqueo no se ha cumplido, el origen se queda igual **********");
                 //Aún no se cumple la fecha de bloqueo por lo tanto el valor de "origen" no se puede cambiar
                 $bean->origen_cuenta_c=$bean->fetched_row['origen_cuenta_c'];
