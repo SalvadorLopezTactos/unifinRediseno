@@ -149,67 +149,76 @@ array (
             array (
               0 => 
               array (
+                'readonly' => false,
+                'name' => 'fecha_bloqueo_origen_c',
+                'label' => 'LBL_FECHA_BLOQUEO_ORIGEN',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'tipo_registro_c',
                 'label' => 'LBL_TIPO_REGISTRO',
                 'readonly' => true,
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'subtipo_registro_c',
                 'label' => 'LBL_SUBTIPO_REGISTRO',
                 'readonly' => true,
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'regimen_fiscal_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMEN_FISCAL',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'nombre_empresa_c',
                 'label' => 'LBL_NOMBRE_EMPRESA',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'nombre_c',
                 'label' => 'LBL_NOMBRE',
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'apellido_paterno_c',
                 'label' => 'LBL_APELLIDO_PATERNO_C',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'apellido_materno_c',
                 'label' => 'LBL_APELLIDO_MATERNO_C',
               ),
-              7 => 
+              9 => 
               array (
                 'readonly' => false,
                 'name' => 'genero_c',
                 'label' => 'LBL_GENERO',
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO_C',
               ),
-              9 => 
+              11 => 
               array (
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'origen_c',
                 'label' => 'LBL_ORIGEN',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'detalle_origen_c',
                 'label' => 'LBL_DETALLE_ORIGEN',
               ),
-              12 => 
+              14 => 
               array (
                 'readonly' => false,
                 'name' => 'referido_cliente_prov_c',

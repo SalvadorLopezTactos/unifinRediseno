@@ -455,6 +455,27 @@
             });
             this._disableActionsSubpanel();
         }
+
+        this.deshabilitaOrigen();
+    },
+
+    deshabilitaOrigen:function(){
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var mm = today.getMonth() + 1; // Months start at 0!
+        var dd = today.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        var hoy = yyyy+'-'+mm+'-'+dd;
+        var fecha_actual= new Date(hoy);
+        var fecha_bloqueo=new Date(this.model.get("fecha_bloqueo_origen_c"));
+
+        if(fecha_actual<=fecha_bloqueo){
+            $('[data-name="origen_c"]').attr('style','pointer-events:none')
+            $('[data-name="detalle_origen_c"]').attr('style','pointer-events:none')
+        }
     },
 
     editClicked: function () {
@@ -587,6 +608,9 @@
         this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
         //Ocultando campo check de homonimo
         $('[data-name="homonimo_c"]').hide();
+
+        //Oculta fecha de bloqueo
+        $('[data-name="fecha_bloqueo_origen_c"]').hide();
 
     },
 

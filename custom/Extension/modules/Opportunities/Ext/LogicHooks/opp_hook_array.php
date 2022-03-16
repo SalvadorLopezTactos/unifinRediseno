@@ -175,6 +175,13 @@ $hook_array['before_save'][] = Array(
     'SolicitudSOC'
 );
 
+$hook_array['before_save'][] = Array(
+    25,
+    'Establece la misma estructura que el Origen de la cuenta relacionada',
+    'custom/modules/Opportunities/opp_logic_hooks.php',
+    'OpportunityLogic', // name of the class
+    'estableceOrigenDeCuenta');
+
 $hook_array['after_save'][] = Array(
     19,
     'Enviar notificaciones a Vendors',//Just a quick comment about the logic of it
