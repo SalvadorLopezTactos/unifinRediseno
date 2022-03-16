@@ -181,7 +181,7 @@ SQL;
     {
         $current_id_list = array();
 
-        if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
+        if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] == 'base') {
             //add update current records
             foreach ($bean->account_telefonos as $a_telefono) {
                 if (!empty($a_telefono['id'])) {
@@ -190,13 +190,13 @@ SQL;
                     $telefono = BeanFactory::newBean('Tel_Telefonos');
                 }
                 $telefono->name = $a_telefono['telefono'] . ' ' . $a_telefono['extension'];
-                $telefono->secuencia = $a_telefono['secuencia'];
+                //$telefono->secuencia = $a_telefono['secuencia'];
                 $telefono->telefono = $a_telefono['telefono'];
                 $telefono->tipotelefono = $a_telefono['tipotelefono'];
                 $telefono->extension = $a_telefono['extension'];
                 $telefono->estatus = $a_telefono['estatus'];
                 $telefono->pais = $a_telefono['pais'];
-                $telefono->principal = $a_telefono['principal'] == 1 ? 1 : 0;
+                $telefono->principal = ($a_telefono['principal'] == 1) ? 1 : 0;
                 $telefono->accounts_tel_telefonos_1accounts_ida = $bean->id;
                 $telefono->assigned_user_id = $bean->assigned_user_id;
                 $telefono->team_set_id = $bean->team_set_id;
@@ -205,12 +205,12 @@ SQL;
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
-            $bean->load_relationship('accounts_tel_telefonos_1');
+            /*$bean->load_relationship('accounts_tel_telefonos_1');
             foreach ($bean->accounts_tel_telefonos_1->getBeans() as $a_telefono) {
                 if (!in_array($a_telefono->id, $current_id_list)) {
                     //$a_telefono->mark_deleted($a_telefono->id);
                 }
-            }
+            }*/
         }
     }
 
@@ -1895,19 +1895,61 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function func_grupo_empresarial($bean = null, $event = null, $args = null)
     {
-        $sit_emp = $bean->situacion_gpo_empresarial_c;
-        $texto = "";
-        if(strpos($sit_emp, "1")){
-            $texto = "Cuenta Primaria del Grupo ".$bean->name ;
-        }
-        if(strpos($sit_emp, "2")){
-            if($texto!="") $texto .= "\n"; 
-            $texto .= "Cuenta Secundaria del Grupo ".$bean->parent_name ;
-        }
-        if(strpos($sit_emp, "3")){
-            $texto = "No pertenece a ningún Grupo Empresarial";
-        }
-        $bean->situacion_gpo_empresa_txt_c = $texto;
-    }
+        global $db;
+        $idPadre = $bean->parent_id;
+        $situacionGE = $bean->situacion_gpo_empresarial_c;
+        $totalHijos = 0;
+        $listaSituacionGE = [];
+        $listaTextoSGE = [];
 
+        $GLOBALS['log']->fatal("LH Grupo Empresarial");
+
+        $sql = "Select id,name from accounts a where parent_id = '{$bean->id}' and deleted = 0";
+        $result = $db->query($sql);
+        $totalHijos = $result->num_rows;
+
+        //Validar relación padre
+        if( !empty($idPadre) ) {
+            $listaSituacionGE[] = "^2^";
+        }
+
+        //Validar relación hijos
+        if( $totalHijos>0 ) {
+            $listaSituacionGE[] = "^1^";
+        }
+
+        //Validar Sin grupo empresaril
+        if( $totalHijos==0 && empty($idPadre) && strpos($situacionGE, "3") ) {
+            $listaSituacionGE[] = "^3^";
+        }
+        if(count($listaSituacionGE)==0){
+            $listaSituacionGE[] = "^4^";
+        }
+
+
+        //Armar arreglo de texto SGE
+        if ( in_array("^1^", $listaSituacionGE ) ){
+            $listaTextoSGE[] = 'Cuenta primaria del grupo ' . $bean->name ;
+        }
+        if ( in_array("^2^" , $listaSituacionGE )){
+            if(empty($bean->parent_name)){
+                $beanrel = BeanFactory::retrieveBean('Accounts', $bean->parent_id);
+                $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $beanrel->name;
+            }else{
+                $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $bean->name;
+            }
+        }
+        if ( in_array( "^3^" , $listaSituacionGE )){
+            $listaTextoSGE[] = 'No pertenece a ningún grupo empresarial';
+        }
+        if ( in_array( "^4^" ,$listaSituacionGE) ){
+            $listaTextoSGE[] = 'Sin Grupo Empresarial Verificado';
+        }
+        //$situacion = implode(",",$listaSituacionGE);
+        //$situaciontxt = implode("\n",$listaTextoSGE);
+        $bean->situacion_gpo_empresarial_c = (count($listaSituacionGE)>0) ? implode(",",$listaSituacionGE) : $bean->situacion_gpo_empresarial_c;
+
+        $bean->situacion_gpo_empresa_txt_c = (count($listaTextoSGE)>0) ? implode("\n",$listaTextoSGE) : $bean->situacion_gpo_empresa_txt_c;
+        
+    }
 }

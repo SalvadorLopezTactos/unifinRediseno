@@ -1,5 +1,5 @@
 <?php
- // created: 2022-03-08 17:25:49
+ // created: 2022-03-11 10:29:03
 $dictionary['Opportunity']['fields']['negocio_c']['labelValue']='Negocio';
 $dictionary['Opportunity']['fields']['negocio_c']['dependency']='';
 $dictionary['Opportunity']['fields']['negocio_c']['required_formula']='';
@@ -13,6 +13,7 @@ $dictionary['Opportunity']['fields']['negocio_c']['visibility_grid']=array (
       0 => '5',
       1 => '3',
       2 => '10',
+      3 => '8',
     ),
     2 => 
     array (

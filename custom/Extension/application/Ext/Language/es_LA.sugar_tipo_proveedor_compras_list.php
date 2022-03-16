@@ -8,4 +8,5 @@ $app_list_strings['tipo_proveedor_compras_list']=array (
   3 => 'Fabricante no reconocido',
   4 => 'Comercializadora',
   5 => 'Ensamblador',
+  6 => 'Vendor',
 );

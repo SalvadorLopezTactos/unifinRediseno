@@ -125,9 +125,8 @@
         this.model.addValidationTask('validaformato3campos', _.bind(this.validaformato, this));
         this.model.addValidationTask('validacamposcurppass', _.bind(this.validapasscurp, this));
         this.model.addValidationTask('porcentajeIVA', _.bind(this.validaiva, this));
-
-        /********* Validacion grupo empresarial ****************/
-        this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
+        this.model.addValidationTask('ValidacionReferidoPorVENDOR', _.bind(this.validaReferido, this));
+        
 
         /*
          Salvador Lopez
@@ -289,12 +288,17 @@
         this.model.on('sync', this.hideButtonsModal_Account, this);
         this.context.on('button:get_account_asesor:click', this.get_Account, this);
         this.context.on('button:send_account_asesor:click', this.set_Account, this);
-    		this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
-    		this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
-    		this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
-    		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
+    	this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
+    	this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
+    	this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
+    	this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
         this.context.on('button:reactivar_noviable:click', this.reactivar_noviable, this);
-    		this.model.on('sync', this.bloqueo, this);
+    	this.model.on('sync', this.bloqueo, this);
+
+        /********* Validacion grupo empresarial ****************/
+        this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
+        this.model.on('change:situacion_gpo_empresarial_c', this.val_SituacionEmpresarial, this);
+        
 
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
@@ -8044,7 +8048,6 @@ validaReqUniclickInfo: function () {
 
         },
 
-
     validaGrupoEmpresarial: function (fields, errors, callback) {
         var subtipo_prospecto = ['7','8','9','10','12'];
         var subtipo_cliente = ['11','12','13','14','15','16','17','18','19','20'];
@@ -8057,15 +8060,15 @@ validaReqUniclickInfo: function () {
         if( (tipo_registro_cuenta_c =="2" && subtipo_prospecto.includes(subtipo_registro_cuenta_c) )
             || (tipo_registro_cuenta_c =="3" && subtipo_cliente.includes(subtipo_registro_cuenta_c) )  
         ){
-           if (tipo_gp_emp == "" ) {
+            /*if (tipo_gp_emp == "" ) {
                 error = true;
                 errorText += 'La Situación del Grupo Empresarial no puede ser vacio. Situación Grupo Empresarial es obligatorio.<br>';
-            }
+            }*/
             if ( this.model.get('parent_id') == this.model.get('id') ) {
                 error = true;
                 errorText += 'La cuenta está asociada a sí misma. Por favor, corrige el valor de Grupo Empresarial.<br>';
             }
-            if (tipo_gp_emp.indexOf("4") !== -1 ) {
+            if (tipo_gp_emp.indexOf("4") !== -1 && this.model.get('parent_id') == "") {
                 error = true;
                 errorText += 'La Situación del Grupo Empresarial no puede ser “Sin Grupo Empresarial Verificado”. Por favor, corrige este valor o bien asocia la cuenta a un Grupo Empresarial.<br>';
             }
@@ -8077,18 +8080,64 @@ validaReqUniclickInfo: function () {
                 error = true;
                 errorText += 'Grupo Empresarial debe tener Situación Empresarial Definida.';
             }
-
             if(error){
-                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
-                errors['situacion_gpo_empresarial_c'].required = true;
                 app.alert.show("Situación Grupo Empresarial", {
                     level: "error",
-                    title: errorText,
+                    messages: errorText,
+                    autoClose: false
+                });
+                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
+                errors['situacion_gpo_empresarial_c'].required = true;
+            }
+        }
+            callback(null, fields, errors);
+        
+    },
+
+    validaReferido: function (fields, errors, callback) {
+        var referido=this.model.get('account_id1_c');
+        var consulta = app.api.buildURL('Accounts/' + referido, null, null);
+    
+        if(this.model.get('origen_cuenta_c')=='8'){
+        app.api.call('read', consulta, {}, {
+                success: _.bind(function (data) {
+                    if(data.tipo_proveedor_compras_c!='6' && data.codigo_vendor_c=="") {                           
+                            app.alert.show("Cuenta no VENDOR", {
+                                level: "error",
+                                messages: 'La cuenta Referida no tiene un <b>código vendor</b>. Favor de verificar.',
+                                autoClose: false
+                            });
+                            errors['referido_cliente_prov_c'] = errors['referido_cliente_prov_c'] || {};
+                            errors['referido_cliente_prov_c'].required = true;
+                            
+                        }
+                        callback(null, fields, errors);
+                }, this)
+            });
+        }else{
+        callback(null, fields, errors);
+        } 
+    
+    },
+
+    val_SituacionEmpresarial: function () {
+        var tipo_gp_emp = this.model.get("situacion_gpo_empresarial_c");
+
+        if(event.type == 'mouseup'){
+            if(tipo_gp_emp.indexOf("1") !== -1 || tipo_gp_emp.indexOf("2") !== -1){
+                this.model.set("situacion_gpo_empresarial_c","");
+                app.alert.show("Situación Grupo Empresarial", {
+                    level: "error",
+                    title: "No puede seleccionar la opción",
                     autoClose: false
                 });
             }
+        
+            if ( tipo_gp_emp.indexOf("3") !== -1 ) {
+                this.model.set("parent_name","");
+                this.model.set("parent_id","");
+            }
         }
-        callback(null, fields, errors);
     },
 
 })

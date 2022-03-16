@@ -1,5 +1,5 @@
 <?php
-// created: 2020-05-07 13:09:53
+// created: 2022-03-09 02:15:23
 $viewdefs['Accounts']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -23,6 +23,12 @@ $viewdefs['Accounts']['base']['filter']['default'] = array (
     array (
     ),
     'promotorcredit_c' => 
+    array (
+    ),
+    'codigo_vendor_c' => 
+    array (
+    ),
+    'tipo_proveedor_compras_c' => 
     array (
     ),
   ),

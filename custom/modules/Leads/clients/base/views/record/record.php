@@ -220,6 +220,16 @@ array (
               ),
               14 => 
               array (
+                'readonly' => false,
+                'name' => 'referido_cliente_prov_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERIDO_CLIENTE_PROV',
+              ),
+              13 => 
+              array (
+              ),
+              14 => 
+              array (
                 'name' => 'prospeccion_propia_c',
                 'label' => 'LBL_PROSPECCION_PROPIA',
               ),

@@ -180,5 +180,12 @@ $hook_array['before_save'][] = Array(
     'Establece la misma estructura que el Origen de la cuenta relacionada',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
-    'estableceOrigenDeCuenta'
+    'estableceOrigenDeCuenta');
+
+$hook_array['after_save'][] = Array(
+    19,
+    'Enviar notificaciones a Vendors',//Just a quick comment about the logic of it
+    'custom/modules/Opportunities/opp_notificacion_vendor.php', //path to the logic hook
+    'NotificacionVendor', // name of the class
+    'notificaVendors' // name of the function.
 );

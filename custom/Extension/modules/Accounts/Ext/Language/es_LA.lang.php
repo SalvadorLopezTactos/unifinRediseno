@@ -356,3 +356,4 @@ $mod_strings['LBL_SITUACION_GPO_EMPRESARIAL'] = ' Situación de Grupo Empresaria
 $mod_strings['LBL_SITUACION_GPO_EMPRESA_TXT_C'] = 'Situación de Grupo Empresarial Detalle';
 $mod_strings['LBL_FECHA_BLOQUEO_ORIGEN'] = 'Fecha Bloqueo Origen';
 $mod_strings['LBL_ONBOARDING_CHK'] = 'Onboarding';
+$mod_strings['LBL_CODIGO_VENDOR_C'] = 'Código Vendor';

@@ -910,8 +910,9 @@ array (
               ),
               1 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'readonly' => false,
+                'name' => 'codigo_vendor_c',
+                'label' => 'LBL_CODIGO_VENDOR_C',
               ),
               2 => 
               array (
