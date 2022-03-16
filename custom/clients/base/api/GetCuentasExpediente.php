@@ -99,7 +99,7 @@ class GetCuentasExpediente extends SugarApi
                 $records_in['status'] = '200';
                 $records_in['message'] = 'Validar que el estatus del Producto sea Activo o Aplazado';
             }
-            $GLOBALS['log']->fatal('records_in', $records_in);
+            //$GLOBALS['log']->fatal('records_in', $records_in);
             return $records_in;
 
         } catch (Exception $e) {
