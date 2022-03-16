@@ -126,7 +126,7 @@
         this.model.addValidationTask('validacamposcurppass', _.bind(this.validapasscurp, this));
         this.model.addValidationTask('porcentajeIVA', _.bind(this.validaiva, this));
         this.model.addValidationTask('ValidacionReferidoPorVENDOR', _.bind(this.validaReferido, this));
-        
+
 
         /*
          Salvador Lopez
@@ -248,7 +248,7 @@
         //Oculta Botón Generar RFC
         this.model.on('sync', this.ocultaGeneraRFC, this);
 
-        
+
 
         //Recupera datos para custom fields
         this.get_addresses();
@@ -298,7 +298,7 @@
         /********* Validacion grupo empresarial ****************/
         this.model.addValidationTask('validaGrupoEmpresarial', _.bind(this.validaGrupoEmpresarial, this));
         this.model.on('change:situacion_gpo_empresarial_c', this.val_SituacionEmpresarial, this);
-        
+
 
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
@@ -316,7 +316,7 @@
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
         this.model.on('sync', this.deshabilitaOrigenCuenta, this);
-        
+
     },
 
     /** Asignacion modal */
@@ -4085,7 +4085,7 @@
         if (tipoCuenta != '') {
             //Valida campos para AP
             if (App.user.attributes.tipodeproducto_c == '1') {
-                
+
                 //Pregunta: Propietario Real-ap
                 if (contexto_cuenta.ProductosPLD.arrendamientoPuro.campo3 == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && contexto_cuenta.ProductosPLD.arrendamientoPuro.campo2 == '2') {
                     $('.campo3rel-ap').find('.select2-choice').css('border-color', 'red');
@@ -4093,7 +4093,7 @@
                 } else {
                     $('.campo3rel-ap').find('.select2-choice').css('border-color', '');
                 }
-                
+
                 //Pregunta: Especifique AP
                 if (contexto_cuenta.ProductosPLD.arrendamientoPuro.campo17 == '' && contexto_cuenta.ProductosPLD.arrendamientoPuro.campo14==true) {
                     $('.campo17txt-ap').css('border-color', 'red');
@@ -4101,11 +4101,11 @@
                 } else {
                     $('.campo17txt-ap').css('border-color', '');
                 }
-                
+
             }
             //Valida campos para FF
             if (App.user.attributes.tipodeproducto_c == '4') {
-                
+
                 //Pregunta: Propietario Real-ff
                 if (contexto_cuenta.ProductosPLD.factorajeFinanciero.campo3 == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && contexto_cuenta.ProductosPLD.factorajeFinanciero.campo2 == '2') {
                     $('.campo3rel-ff').find('.select2-choice').css('border-color', 'red');
@@ -4113,7 +4113,7 @@
                 } else {
                     $('.campo3rel-ff').find('.select2-choice').css('border-color', '');
                 }
-                
+
                 //Pregunta: Especifique-ff
                 if (contexto_cuenta.ProductosPLD.factorajeFinanciero.campo17 == '' && contexto_cuenta.ProductosPLD.factorajeFinanciero.campo14==true && contexto_cuenta.ProductosPLD.factorajeFinanciero.campo2 == '2') {
                     $('.campo17txt-ff').css('border-color', 'red');
@@ -4124,7 +4124,7 @@
             }
             //Valida campos para CA
             if (App.user.attributes.tipodeproducto_c == '3') {
-                
+
                 //Pregunta: Propietario Real-ca
                 if (contexto_cuenta.ProductosPLD.creditoAutomotriz.campo3  == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && contexto_cuenta.ProductosPLD.creditoAutomotriz.campo2 == '2') {
                     $('.campo3rel-ca').find('.select2-choice').css('border-color', 'red');
@@ -4904,8 +4904,8 @@
                 //location.reload();
                 this.get_addresses();
                 this.CamposCstmLoad();
-                /************************************/                
-                
+                /************************************/
+
                 /***********************************/
             }, this);
 
@@ -5311,7 +5311,7 @@
     // },
 
 
-    
+
 
     /*************************************************REQUERIDOS NO VIABLE POR UNI PRODUCTOS******************************************/
 
@@ -7752,7 +7752,7 @@ validaReqUniclickInfo: function () {
                                     if(estatus_tel[0].Estatus_reporte.substring(0,3) == 'Con') c4 = 1;
                                 }
                             }
-                            else { 
+                            else {
                                 estatus1 = 1;
                                 estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
                             }
@@ -7878,7 +7878,7 @@ validaReqUniclickInfo: function () {
                         'label_imacro': '',
                         'label_div': '',
                         'label_grp': '',
-                        'label_cls': ''         
+                        'label_cls': ''
                     };
                     clasf_sectorial.ResumenCliente=data[2].contents;
                     clasf_sectorial.ActividadEconomica.ae.id = campo1;
@@ -8031,7 +8031,7 @@ validaReqUniclickInfo: function () {
                     contexto_cuenta.Pautos.prev_autos = app.utils.deepCopy(Pautos.autos);
                     Pautos.render();
                 }
-                
+
                 //Setea dataCondiciones
                 if (data[7].contents!=""){
                     this.datacondiciones = [];
@@ -8056,52 +8056,48 @@ validaReqUniclickInfo: function () {
         var tipo_gp_emp = this.model.get("situacion_gpo_empresarial_c");
         var error = false;
         var errorText= "";
-        
-        if( (tipo_registro_cuenta_c =="2" && subtipo_prospecto.includes(subtipo_registro_cuenta_c) )
-            || (tipo_registro_cuenta_c =="3" && subtipo_cliente.includes(subtipo_registro_cuenta_c) )  
-        ){
-            /*if (tipo_gp_emp == "" ) {
-                error = true;
-                errorText += 'La Situación del Grupo Empresarial no puede ser vacio. Situación Grupo Empresarial es obligatorio.<br>';
-            }*/
-            if ( this.model.get('parent_id') == this.model.get('id') ) {
-                error = true;
-                errorText += 'La cuenta está asociada a sí misma. Por favor, corrige el valor de Grupo Empresarial.<br>';
-            }
+        //Valida que no se asocie la misma cuenta como padre
+        if(this.model.get('parent_id') == this.model.get('id')) {
+            error = true;
+            errorText += 'La cuenta está asociada a si misma. Por favor, corrige el valor de <b>Grupo Empresarial</b>.<br>';
+        }
+        //Valida situación de grupo empresarial para pospecto interesado en adelante
+        if( (tipo_registro_cuenta_c =="2" && subtipo_prospecto.includes(subtipo_registro_cuenta_c) ) || (tipo_registro_cuenta_c =="3" && subtipo_cliente.includes(subtipo_registro_cuenta_c)) ){
             if (tipo_gp_emp.indexOf("4") !== -1 && this.model.get('parent_id') == "") {
                 error = true;
-                errorText += 'La Situación del Grupo Empresarial no puede ser “Sin Grupo Empresarial Verificado”. Por favor, corrige este valor o bien asocia la cuenta a un Grupo Empresarial.<br>';
+                errorText += 'La Situación del Grupo Empresarial no puede ser <b>Sin Grupo Empresarial Verificado</b>. Por favor, corrige este valor o bien asocia la cuenta a un <b>Grupo Empresarial</b>.<br>';
             }
             if (tipo_gp_emp.indexOf("3") !== -1 && (tipo_gp_emp.indexOf("1") !== -1 || tipo_gp_emp.indexOf("2") !== -1)) {
                 error = true;
-                errorText += 'La Situación del Grupo Empresarial no puede estar asociada y no pertencer a ningun Grupo Empresarial.<br>';
+                errorText += 'La Situación del Grupo Empresarial no puede estar asociada y no pertencer a ningun <b>Grupo Empresarial</b>.<br>';
             }
             if (tipo_gp_emp.indexOf("3") !== -1 && this.model.get('parent_id')!="") {
                 error = true;
-                errorText += 'Grupo Empresarial debe tener Situación Empresarial Definida.';
-            }
-            if(error){
-                app.alert.show("Situación Grupo Empresarial", {
-                    level: "error",
-                    messages: errorText,
-                    autoClose: false
-                });
-                errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
-                errors['situacion_gpo_empresarial_c'].required = true;
+                errorText += 'Grupo Empresarial debe tener <b>Situación Empresarial Definida</b>.';
             }
         }
-            callback(null, fields, errors);
-        
+        //Valida y muestra errires
+        if(error){
+            app.alert.show("Situacion Grupo Empresarial", {
+                level: "error",
+                messages: errorText,
+                autoClose: false
+            });
+            errors['situacion_gpo_empresarial_c'] = errors['situacion_gpo_empresarial_c'] || {};
+            errors['situacion_gpo_empresarial_c'].required = true;
+        }
+        callback(null, fields, errors);
+
     },
 
     validaReferido: function (fields, errors, callback) {
         var referido=this.model.get('account_id1_c');
         var consulta = app.api.buildURL('Accounts/' + referido, null, null);
-    
+
         if(this.model.get('origen_cuenta_c')=='8'){
         app.api.call('read', consulta, {}, {
                 success: _.bind(function (data) {
-                    if(data.tipo_proveedor_compras_c!='6' && data.codigo_vendor_c=="") {                           
+                    if(data.tipo_proveedor_compras_c!='6' && data.codigo_vendor_c=="") {
                             app.alert.show("Cuenta no VENDOR", {
                                 level: "error",
                                 messages: 'La cuenta Referida no tiene un <b>código vendor</b>. Favor de verificar.',
@@ -8109,15 +8105,15 @@ validaReqUniclickInfo: function () {
                             });
                             errors['referido_cliente_prov_c'] = errors['referido_cliente_prov_c'] || {};
                             errors['referido_cliente_prov_c'].required = true;
-                            
+
                         }
                         callback(null, fields, errors);
                 }, this)
             });
         }else{
         callback(null, fields, errors);
-        } 
-    
+        }
+
     },
 
     val_SituacionEmpresarial: function () {
@@ -8132,7 +8128,7 @@ validaReqUniclickInfo: function () {
                     autoClose: false
                 });
             }
-        
+
             if ( tipo_gp_emp.indexOf("3") !== -1 ) {
                 this.model.set("parent_name","");
                 this.model.set("parent_id","");

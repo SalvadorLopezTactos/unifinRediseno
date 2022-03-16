@@ -1183,7 +1183,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $relacion->empresa = 1;
         $relacion->estado = 1;
         $relacion->tipo = 1;
-        $relacion->fecha_actualizacion = $bean->date_entered;
+        $relacion->fecha_actualizacion = $bean->date_entered; //Cambiar a fecha actual
         $relacion->url_portal = $url_portalFinanciera;
         $relacion->assigned_user_id = $bean->user_id_c;
         $relacion->load_relationship('anlzt_analizate_accounts');
@@ -1589,17 +1589,19 @@ where rfc_c = '{$bean->rfc_c}' and
     public function estableceCuerpoCorreoErrorMambu($contenidoPeticion,$contenidoError){
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br>
-        Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br><br>'.json_encode($contenidoError).'
-      <br><br>En donde la petición enviada fue la siguiente:<br><br>'.json_encode($contenidoPeticion).'
-      <br><br>Atentamente Unifin</font></p>
-      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
-
-      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
-      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
-       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
-       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
-       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
-       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+            Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br><br>'.json_encode($contenidoError).'
+            <br><br>En donde la petición enviada fue la siguiente:<br><br>'.json_encode($contenidoPeticion).'
+            <br><br>Atentamente Unifin</font></p>
+            <br><br><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png">
+            <br><span style="font-size:8.5pt;color:#757b80">____________________________________________</span>
+            <p class="MsoNormal" style="text-align: justify;">
+              <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+                Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+                Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+                No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+                Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro <a href="https://www.unifin.com.mx/aviso-de-privacidad" target="_blank">Aviso de Privacidad</a>  publicado en <a href="http://www.unifin.com.mx/" target="_blank">www.unifin.com.mx</a>
+              </span>
+            </p>';
 
         return $mailHTML;
 
@@ -1899,45 +1901,40 @@ where rfc_c = '{$bean->rfc_c}' and
         $idPadre = $bean->parent_id;
         $situacionGE = $bean->situacion_gpo_empresarial_c;
         $totalHijos = 0;
+        $nombrePadre ='';
         $listaSituacionGE = [];
         $listaTextoSGE = [];
 
-        $GLOBALS['log']->fatal("LH Grupo Empresarial");
-
+        //$GLOBALS['log']->fatal("LH Grupo Empresarial");
         $sql = "Select id,name from accounts a where parent_id = '{$bean->id}' and deleted = 0";
         $result = $db->query($sql);
         $totalHijos = $result->num_rows;
-
         //Validar relación padre
         if( !empty($idPadre) ) {
             $listaSituacionGE[] = "^2^";
+            //Recupera cuenta padre
+            $cuentaPadre = BeanFactory::retrieveBean('Accounts', $bean->parent_id, array('disable_row_level_security' => true));
+            $nombrePadre = $cuentaPadre->name;
         }
-
         //Validar relación hijos
         if( $totalHijos>0 ) {
             $listaSituacionGE[] = "^1^";
         }
-
         //Validar Sin grupo empresaril
         if( $totalHijos==0 && empty($idPadre) && strpos($situacionGE, "3") ) {
             $listaSituacionGE[] = "^3^";
         }
+        //Establece valor default
         if(count($listaSituacionGE)==0){
             $listaSituacionGE[] = "^4^";
         }
-
 
         //Armar arreglo de texto SGE
         if ( in_array("^1^", $listaSituacionGE ) ){
             $listaTextoSGE[] = 'Cuenta primaria del grupo ' . $bean->name ;
         }
         if ( in_array("^2^" , $listaSituacionGE )){
-            if(empty($bean->parent_name)){
-                $beanrel = BeanFactory::retrieveBean('Accounts', $bean->parent_id);
-                $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $beanrel->name;
-            }else{
-                $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $bean->name;
-            }
+            $listaTextoSGE[] = 'Cuenta secundaria del grupo ' . $nombrePadre;
         }
         if ( in_array( "^3^" , $listaSituacionGE )){
             $listaTextoSGE[] = 'No pertenece a ningún grupo empresarial';
@@ -1945,11 +1942,18 @@ where rfc_c = '{$bean->rfc_c}' and
         if ( in_array( "^4^" ,$listaSituacionGE) ){
             $listaTextoSGE[] = 'Sin Grupo Empresarial Verificado';
         }
-        //$situacion = implode(",",$listaSituacionGE);
-        //$situaciontxt = implode("\n",$listaTextoSGE);
-        $bean->situacion_gpo_empresarial_c = (count($listaSituacionGE)>0) ? implode(",",$listaSituacionGE) : $bean->situacion_gpo_empresarial_c;
 
+        //Establece valores para situación de grupo empresarial
+        $bean->situacion_gpo_empresarial_c = (count($listaSituacionGE)>0) ? implode(",",$listaSituacionGE) : $bean->situacion_gpo_empresarial_c;
         $bean->situacion_gpo_empresa_txt_c = (count($listaTextoSGE)>0) ? implode("\n",$listaTextoSGE) : $bean->situacion_gpo_empresa_txt_c;
-        
+        // $GLOBALS['log']->fatal("LH Grupo Empresarial_Previo_ ".$bean->fetched_row['parent_id']);
+        // $GLOBALS['log']->fatal("LH Grupo Empresarial_Previo ". $bean->parent_id);
+        //Actualiza cuenta padre cuando se elimina relación
+        if(!empty($bean->fetched_row['parent_id']) && $bean->parent_id!=$bean->fetched_row['parent_id'] ) {
+            //Recupera cuenta padre (previa)
+            $bean->parent_id_previo = $bean->fetched_row['parent_id'];
+            //$GLOBALS['log']->fatal("Id Padre previo: ". $bean->parent_id_previo);
+        }
     }
+
 }
