@@ -30,8 +30,6 @@ function notificaVendors($bean, $event, $arguments)
             }else{
                 $GLOBALS['log']->fatal("No cumple condicion proceso de notificacion Vendors ya que no tiene codigo_vendor_c");
             }
-
-            
         }else{
             $GLOBALS['log']->fatal("No cumple condicion proceso de notificacion Vendors");
         }
@@ -42,7 +40,7 @@ function notificaVendors($bean, $event, $arguments)
                   
         $mailHTML = '<font face="verdana" color="#635f5f">
                 <br>Estimado asesor: <br><br> Te notificamos que el vendor '.$accountName. ' (<b>'.$accountVendorCode.'</b>) registró una nueva oportunidad de negocio.</b>
-                Para visualizarla da clic en el siguiente enlace: <br><br><a id="idregistro" href="'. $idregistro.'">Lead '.$lead.'</a>
+                Para visualizarla da clic en el siguiente enlace: <br><br><br><a id="idregistro" href="'. $idregistro.'">Lead '.$lead.'</a>
                 
                 <br><br>Atentamente</font></p>
                 <p class="imagen"><img border="0" width="350" height="107" style="width: 1.5in; height: 1in;" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
