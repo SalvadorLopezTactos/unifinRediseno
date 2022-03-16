@@ -1175,7 +1175,7 @@ SQL;
     {
         //Función que cancela línea SOS a partir de una línea de Leasing
         //Valida que Solicitud Leasing se cancela
-        if ($bean->tipo_producto_c == 1 && !empty($bean->opportunities_opportunities_2opportunities_ida) && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row[tct_oportunidad_perdida_chk_c] != $bean->tct_oportunidad_perdida_chk_c) {
+        if ($bean->tipo_producto_c == 1 && !empty($bean->opportunities_opportunities_2opportunities_ida) && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row["tct_oportunidad_perdida_chk_c"] != $bean->tct_oportunidad_perdida_chk_c) {
             //Recupera solicitud SOS asociada
             $GLOBALS['log']->fatal("cancelaSOS : Inicia proceso para cancelar SOS asociada a Leasing");
             $beanSOS = BeanFactory::retrieveBean("Opportunities", $bean->opportunities_opportunities_2opportunities_ida);
@@ -1195,7 +1195,7 @@ SQL;
         }
 
         //Valida existencia de Id Process en Solicitud SOS para cancelar en BPM
-        if ($bean->tipo_producto_c == 7 && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row[tct_oportunidad_perdida_chk_c] != $bean->tct_oportunidad_perdida_chk_c) {
+        if ($bean->tipo_producto_c == 7 && $bean->tct_oportunidad_perdida_chk_c && $bean->fetched_row["tct_oportunidad_perdida_chk_c"] != $bean->tct_oportunidad_perdida_chk_c) {
             //Valida id Proceso
             if (!empty($bean->id_process_c)) {
                 //Ejecuta proceso para cancelar en BPM
@@ -1220,6 +1220,7 @@ SQL;
 
 function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
         {
+            global $app_list_strings;
             //Valuda cuenta Asociada y producto
       		  if($idCuenta && $tipoProducto){
                 //Recupera cuenta
@@ -1287,6 +1288,68 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                 $bean->alianza_soc_chk_c = true;
             }
         }
+    }
+
+    function estableceOrigenDeCuenta($bean, $event, $arguments){
+
+        //Obtiene la cuenta relacionada y sus respectivas solicitudes para saber lo siguiente:
+        //1.- Si es generada desde Onboarding, el origen se establece con el mismo valor que se establece en el servicio
+        //2.- Si es la primera solicitud, hereda origen de la cuenta de forma idéntica
+        //3.- A partir de la segunda solicitud el origen nade como "Prospección Propia"
+        
+        if($bean->onboarding_chk_c!=1){//No fue generada desde onboarding, por lo tanto se aplican las reglas 2 y 3
+            $GLOBALS['log']->fatal("**********ENTRA LH PARA SOLICITUDES ONBOARDING**********");
+            $idCuenta=$bean->account_id;
+            $GLOBALS['log']->fatal("**********ID CUENTA:".$idCuenta."**********");
+            $beanCuenta = BeanFactory::getBean("Accounts", $idCuenta);
+
+            if ($beanCuenta->load_relationship('opportunities')) {
+                $solicitudes = $beanCuenta->opportunities->getBeans($beanCuenta->id, array('disable_row_level_security' => true));
+                $numero_solicitudes=count($solicitudes);
+                $GLOBALS['log']->fatal("la cuenta tiene: ".$numero_solicitudes. " solicitudes");
+                if($numero_solicitudes>0){
+                    $sumaSols=0;
+                    foreach ($solicitudes as $sol) {
+                        //Se toman en cuenta todas las solicitudes excepto las que están En Crédito, Autorizada, Rechazada o Cancelada
+                        if ($sol->estatus_c != 'K' && //Cancelada
+                            $sol->estatus_c!='R' &&  // Rechazada Crédito
+                            $sol->estatus_c!='N' &&  // Autorizada
+                            $sol->tct_etapa_ddw_c!='C' && // Crédito
+                            $sol->tct_etapa_ddw_c!='R' // Rechazado
+                        ) {
+                            $sumaSols+=1;
+                        }
+                    }
+                    if($sumaSols>0){
+                        $GLOBALS['log']->fatal("********** Solicitud se establece como Prospeción Propia**********");
+                        $bean->origen_c='3';//Prospección propia
+                    }else{//Ninguna de las solicitudes relacionadas se toma en cuenta, por lo tanto, ésta creada se toma como la primera, se hereda el origen de la cuenta
+                        $GLOBALS['log']->fatal("********** Primera solicitud, se copia el origen de la cuenta**********");
+                        $bean->origen_c=$beanCuenta->origen_cuenta_c;
+                        $bean->detalle_origen_c=$beanCuenta->detalle_origen_c;
+                        $bean->prospeccion_propia_c=$beanCuenta->prospeccion_propia_c;
+                        $bean->medio_digital_c=$beanCuenta->medio_digital_c;
+                        $bean->evento_c=$beanCuenta->evento_c;
+                        $bean->origen_busqueda_c=$beanCuenta->origen_busqueda_c;
+                        $bean->camara_c=$beanCuenta->camara_c;                    } 
+                }else{
+                    //No tiene solicitudes, por lo tanto, ésta solicitud creada es la primera
+                    $GLOBALS['log']->fatal("********** Primera solicitud, se copia el origen de la cuenta**********");
+                    $bean->origen_c=$beanCuenta->origen_cuenta_c;
+                    $bean->detalle_origen_c=$beanCuenta->detalle_origen_c;
+                    $bean->prospeccion_propia_c=$beanCuenta->prospeccion_propia_c;
+                    $bean->medio_digital_c=$beanCuenta->medio_digital_c;
+                    $bean->evento_c=$beanCuenta->evento_c;
+                    $bean->origen_busqueda_c=$beanCuenta->origen_busqueda_c;
+                    $bean->camara_c=$beanCuenta->camara_c;
+
+                }
+                
+            }
+
+        }
+        
+
     }
 
 }

@@ -15,3 +15,11 @@ $hook_array['before_save'][] = Array(
     'Account_fecha_bloqueo_origen',
     'establece_fecha_bloqueo_account'
 );
+
+$hook_array['before_save'][] = Array(
+    28,
+    'Genera solicitudes dummy en caso de que la cuenta venga desde Onboarding',
+    'custom/modules/Accounts/Account_fecha_bloqueo_origen.php',
+    'Account_fecha_bloqueo_origen',
+    'solicitudes_dummy_onboarding'
+);

@@ -156,6 +156,9 @@
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
         //this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
         this.model.on('sync', this.adminUserCartera, this);
+
+        //Evalua el campo onboarding para saber si se debe de bloquear el origen
+        this.model.on('sync', this.deshabilitaOrigen, this);
         //this.adminUserCartera();
 		//VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
@@ -165,7 +168,8 @@
 		//this.model.on("change:alianza_soc_chk_c", _.bind(this.SOCflag, this));
 		//this.events['click a[name=alianza_soc_chk_c]'] = 'SOCflag';
 		this.model.addValidationTask('validacionSOC', _.bind(this.validacionSOC, this));
-	/***********************************************/
+    /***********************************************/
+       
 
     },
 
@@ -657,6 +661,9 @@
             $('[data-name="producto_origen_vencido_c"]').hide();
             $('[data-name="cartera_dias_vencido_c"]').hide();
         }*/
+
+        //Oculta campo Onboarding, el cual se utiliza para saber si los datos de la solicitud llegaron a través de Onboarding
+        $('[data-name="onboarding_chk_c"]').hide();
     },
 
     evaluaCampoSolicitudVobo: function () {
@@ -3422,6 +3429,35 @@
             $('[data-name="producto_origen_vencido_c"]').hide();
             $('[data-name="cartera_dias_vencido_c"]').hide();
         }
+    },
+
+    deshabilitaOrigen:function(){
+       if(this.model.get('onboarding_chk_c')==1){ //La solicitud llegó desde onboarding, por lo tanto el origen se bloquea
+            $('[data-name="origen_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="detalle_origen_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="prospeccion_propia_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="medio_digital_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="evento_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
+       }else{
+            /*
+            estatus_c = 'K':Cancelada,'R':Rechazada Crédito,'N':Autorizada
+            tct_etapa_ddw_c = 'C':Crédito, 'R': Rechazado
+            */
+           if(this.model.get('tct_etapa_ddw_c')=='C' || this.model.get('tct_etapa_ddw_c')=='R' || 
+              this.model.get('estatus_c')=='N' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='K'  
+           ){
+                $('[data-name="origen_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="detalle_origen_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="prospeccion_propia_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="medio_digital_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="evento_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
+           }
+       }
+
     },
 
     validaUserCartera: function (fields, errors, callback) {

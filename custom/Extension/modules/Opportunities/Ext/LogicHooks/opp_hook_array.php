@@ -174,3 +174,11 @@ $hook_array['before_save'][] = Array(
     'OpportunityLogic', // name of the class
     'SolicitudSOC'
 );
+
+$hook_array['before_save'][] = Array(
+    25,
+    'Establece la misma estructura que el Origen de la cuenta relacionada',
+    'custom/modules/Opportunities/opp_logic_hooks.php',
+    'OpportunityLogic', // name of the class
+    'estableceOrigenDeCuenta'
+);
