@@ -8083,7 +8083,7 @@ validaReqUniclickInfo: function () {
         //Valida que no se asocie la misma cuenta como padre
         if(this.model.get('parent_id') == this.model.get('id')) {
             error = true;
-            errorText += 'La cuenta está asociada a si misma. Por favor, corrige el valor de <b>Grupo Empresarial</b>.<br>';
+            errorText += 'La cuenta está asociada a si misma como grupo empresarial. Por favor, corrige este valor.<br>';
         }
         //Valida situación de grupo empresarial para pospecto interesado en adelante
         if( (tipo_registro_cuenta_c =="2" && subtipo_prospecto.includes(subtipo_registro_cuenta_c) ) || (tipo_registro_cuenta_c =="3" && subtipo_cliente.includes(subtipo_registro_cuenta_c)) ){
@@ -8148,7 +8148,7 @@ validaReqUniclickInfo: function () {
                 this.model.set("situacion_gpo_empresarial_c","");
                 app.alert.show("Situación Grupo Empresarial", {
                     level: "error",
-                    title: "No puede seleccionar la opción",
+                    title: "Las opciones Cuenta primaria y cuenta secuendaria no son elegibles manualmente. Para usar estás 2 opciones debes asociar la cuenta a un grupo empresarial.",
                     autoClose: false
                 });
             }

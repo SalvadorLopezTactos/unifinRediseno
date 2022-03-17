@@ -2000,7 +2000,8 @@ extendsFrom: 'RecordView',
     },
 
     validaReqUniclickPLD: function (fields, errors, callback) {
-        if(App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id){
+				if(App.lang.getAppListStrings('puestos_uniclick_list')[App.user.attributes.puestousuario_c] != undefined){
+        //if(App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id){
                        var necesarios="";
                        var requests=[];
                        var request={};

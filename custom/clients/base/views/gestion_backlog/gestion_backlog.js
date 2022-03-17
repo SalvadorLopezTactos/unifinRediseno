@@ -256,11 +256,11 @@
             }
 
             if(tipo_operacion!=null && tipo_operacion!="" && tipo_operacion!=undefined && tipo_operacion.length>0){
-                
+
                 var array_tipo_op_leasing=[];
                 var array_tipo_op_credito=[];
                 //Si los id del select contienen un "0" al inicio, quiere decir que hay que buscar en el campo de leasing, en otro caso hay que buscar en el de crédito
-                    
+
                 if(tipo_operacion.includes('01')){
                     array_tipo_op_leasing.push(1);
                     var index=tipo_operacion.indexOf('01');
@@ -294,7 +294,7 @@
                 }
 
                 if(array_tipo_op_leasing.length>0 && tipo_operacion.length==0){//Se tienen valores para Leasing y ninguno para Crédito
-                    
+
                     filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "num_tipo_op_leasing_c": { "$contains": array_tipo_op_leasing } }
                 }else if(tipo_operacion.length>0 && array_tipo_op_leasing==0){
                     filtro["filter"][0]["$and"][filtro["filter"][0]["$and"].length] = { "num_tipo_op_credito_c": { "$contains": tipo_operacion } }
@@ -344,7 +344,7 @@
         app.api.call('create', app.api.buildURL('bulk', null, null, requestBulk), null, {
             success: _.bind(function (data) {
 
-                if (data[0].contents.records.length > 0) 
+                if (data[0].contents.records.length > 0)
                 {
                     data.records=data[0].contents.records;
                     self.listaBacklogs = [];
@@ -361,7 +361,7 @@
                                     //Al encontrar al usuario, se agrega condición para salir del ciclo for
                                     idxUsers=registros_usuarios.length;
                                 }
-                                
+
                             }
 
                         }
@@ -412,7 +412,7 @@
                         data.records[index].monto_rechazado_c = tipo_op = Number(data.records[index].monto_rechazado_c);
                         data.records[index].monto_sin_solicitud_c = tipo_op = Number(data.records[index].monto_sin_solicitud_c);
                         data.records[index].monto_con_solicitud_c = tipo_op = Number(data.records[index].monto_con_solicitud_c);
-                        
+
 
                         self.listaBacklogs.push(data.records[index]);
                     }
@@ -421,12 +421,12 @@
                     //Obtiene el valor de la zona
                     var zona_filtro=$('#zona_filtro').val();
                     if(self.listaBacklogs.length>0 && zona_filtro!=null && zona_filtro!="" && zona_filtro!=undefined && zona_filtro!="0"){
-                        
+
                         var listaBacklogsAuxiliar=[];
                         for (let index = 0; index < self.listaBacklogs.length; index++) {
                             if(self.listaBacklogs[index].zona==zona_filtro){
                                 listaBacklogsAuxiliar.push(self.listaBacklogs[index]);
-                            }   
+                            }
                         }
                         self.listaBacklogs=listaBacklogsAuxiliar;
 
@@ -434,12 +434,12 @@
 
                     var cliente_filtro=$('#filtroClienteBacklog').val();
                     if(self.listaBacklogs.length>0 && cliente_filtro!=null && cliente_filtro!="" && cliente_filtro!=undefined){
-                        
+
                         var listaBacklogsAuxiliar=[];
                         for (let index = 0; index < self.listaBacklogs.length; index++) {
                             if(self.listaBacklogs[index].nombre_cuenta.toLowerCase().includes(cliente_filtro.toLowerCase())){
                                 listaBacklogsAuxiliar.push(self.listaBacklogs[index]);
-                            }   
+                            }
                         }
                         self.listaBacklogs=listaBacklogsAuxiliar;
 
@@ -685,7 +685,7 @@
                         "\"monto_rechazado_c\":" + Number(monto_rechazado) + "," +
                         "\"monto_sin_solicitud_c\": " + Number(monto_sin_solicitud) + "," +
                         "\"monto_con_solicitud_c\": " + Number(monto_con_solicitud) + "," +
-                        "\"monto_comprometido\": " + Number(monto) + "," +
+                        //"\"monto_comprometido\": " + Number(monto) + "," +
                         "\"comentarios_c\": \"" + comentarios + "\"," +
                         "\"tct_conversion_c\": " + Number(probabilidad) + "," +
                         "\"bl_estimado_c\": " + Number(bl_estimado) + "," +
