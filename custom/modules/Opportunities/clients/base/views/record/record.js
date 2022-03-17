@@ -3618,7 +3618,7 @@
             app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
                 success: _.bind(function (cuenta) {
                     if(cuenta.id == cuenta.parent_id){
-                        errorText = 'La cuenta está asociada a sí misma. Por favor, corrige el valor de Grupo Empresarial.<br>';
+                        errorText = 'La cuenta está asociada a si misma como grupo empresarial. Por favor, corrige este valor';
                         app.alert.show("Situación Grupo Empresarial", {
                             level: "error",
                             title: errorText,
