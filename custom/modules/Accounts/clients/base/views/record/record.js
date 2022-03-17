@@ -8148,7 +8148,7 @@ validaReqUniclickInfo: function () {
                 this.model.set("situacion_gpo_empresarial_c","");
                 app.alert.show("Situación Grupo Empresarial", {
                     level: "error",
-                    title: "Las opciones Cuenta primaria y cuenta secuendaria no son elegibles manualmente. Para usar estás 2 opciones debes asociar la cuenta a un grupo empresarial.",
+                    title: "Las opciones Cuenta Primaria y Cuenta Secundaria no son elegibles manualmente. Para usar éstas 2 opciones debes asociar la cuenta a un grupo empresarial.",
                     autoClose: false
                 });
             }
