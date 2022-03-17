@@ -163,10 +163,6 @@
 		//VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
 
-        /****************  Validacion grupo empresarial  *******************/
-       this.model.addValidationTask('validacionCuentaGrupoEmpresarial', _.bind(this.validacionCuentaGrupoEmpresarial, this));
-      
-
 	/*************** validacion SOC ****************/
 		//this.model.on('sync', this.SOCInicio, this);
 		//this.model.on("change:alianza_soc_chk_c", _.bind(this.SOCflag, this));
@@ -3608,29 +3604,6 @@
                 //OCULTA
                 this.$('div[data-name=porciento_ri_c]').hide();
             }
-    },
-
-    validacionCuentaGrupoEmpresarial: function (fields, errors, callback) {
-        self = this;
-        var cuentaId = this.model.get('account_id');
-        var errorText = "";
-        if (this.model.get('tct_etapa_ddw_c') == 'SI' ) {
-            app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
-                success: _.bind(function (cuenta) {
-                    if(cuenta.id == cuenta.parent_id){
-                        errorText = 'La cuenta está asociada a si misma como grupo empresarial. Por favor, corrige este valor';
-                        app.alert.show("Situación Grupo Empresarial", {
-                            level: "error",
-                            title: errorText,
-                            autoClose: false
-                        });
-                    }
-                    callback(null, fields, errors);
-                }, self),
-            });
-        }else {
-            callback(null, fields, errors);
-        }
     },
 
 })
