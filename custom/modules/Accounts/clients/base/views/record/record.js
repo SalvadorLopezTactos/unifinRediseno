@@ -315,7 +315,9 @@
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
-        this.model.on('sync', this.deshabilitaOrigenCuenta, this);
+
+        //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
+        //this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
