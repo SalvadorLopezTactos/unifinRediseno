@@ -48,6 +48,9 @@
         this.model.addValidationTask('check_direcciones', _.bind(this.validadireccexisting, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+
+        //Función para eliminar opciones del campo origen
+        this.estableceOpcionesOrigenLeads();
     },
 
     delegateButtonEvents: function() {
@@ -613,6 +616,22 @@
             self.noEditFields.push('origen_c');
             self.noEditFields.push('detalle_origen_c');
         }
+    },
+
+    //Función para eliminar opciones del campo origen
+    estableceOpcionesOrigenLeads:function(){
+        var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
+
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+            Object.keys(opciones_origen).forEach(function (key) {
+                if (key == "14" || key == "15") {
+                    delete opciones_origen[key];
+                }
+            });
+        }
+
+        this.model.fields['origen_c'].options = opciones_origen;
+
     },
 
     setButtonStates: function (state) {

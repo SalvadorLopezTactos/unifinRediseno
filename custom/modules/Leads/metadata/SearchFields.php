@@ -1,5 +1,14 @@
 <?php
-// created: 2022-03-13 16:31:43
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 $searchFields['Leads'] = array (
   'first_name' => 
   array (
@@ -236,6 +245,10 @@ $searchFields['Leads'] = array (
     'query_type' => 'default',
   ),
   'opportunity_amount' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'description' => 
   array (
     'query_type' => 'default',
   ),

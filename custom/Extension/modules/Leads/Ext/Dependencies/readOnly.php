@@ -232,3 +232,124 @@ $dependencies['Leads']['readonly_fields'] = array(
         ),
     ),
 );
+
+$dependencies['Leads']['origen_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'origen_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
+$dependencies['Leads']['detalle_origen_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'detalle_origen_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
+$dependencies['Leads']['medio_digital_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'medio_digital_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
+$dependencies['Leads']['evento_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'evento_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
+$dependencies['Leads']['origen_busqueda_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'origen_busqueda_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
+$dependencies['Leads']['camara_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'camara_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
+$dependencies['Leads']['promotor_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'promotor_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
+$dependencies['Leads']['prospeccion_propia_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            'params' => array(
+                'target' => 'prospeccion_propia_c',
+                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+            ),
+        ),
+    ),
+);
