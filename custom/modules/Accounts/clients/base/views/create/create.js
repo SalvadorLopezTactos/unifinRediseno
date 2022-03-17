@@ -652,6 +652,8 @@
 
         //Validation task que muestra modal sobre duplicados
         this.model.addValidationTask('check_duplicados_account', _.bind(this.check_duplicados_account, this));
+
+        this.estableceOpcionesOrigen();
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -1982,6 +1984,21 @@
         }else{
             callback(null, fields, errors);
         }
+    },
+
+    estableceOpcionesOrigen:function(){
+        var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
+
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+            Object.keys(opciones_origen).forEach(function (key) {
+                if (key == "14" || key == "15") {
+                    delete opciones_origen[key];
+                }
+            });
+        }
+
+        this.model.fields['origen_cuenta_c'].options = opciones_origen;
+
     },
 
     changeLabelMarketing: function () {
