@@ -317,6 +317,9 @@
         //this.model.on('sync',this.validaReqUniclickInfo,this);
         this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
+        //Función para eliminar opciones del campo origen
+        this.estableceOpcionesOrigen();
+
     },
 
     /** Asignacion modal */
@@ -6951,9 +6954,30 @@
         var fecha_bloqueo=new Date(this.model.get("fecha_bloqueo_origen_c"));
 
         if(fecha_actual<=fecha_bloqueo){
-            $('[data-name="origen_cuenta_c"]').attr('style','pointer-events:none')
-            $('[data-name="detalle_origen_c"]').attr('style','pointer-events:none')
+            $('[data-name="origen_cuenta_c"]').css({ "pointer-events":"none"});
+            $('[data-name="detalle_origen_c"]').css({ "pointer-events":"none"});
+            $('[data-name="prospeccion_propia_c"]').css({ "pointer-events":"none"});
+            $('[data-name="medio_detalle_origen_c"]').css({ "pointer-events":"none"});
+            $('[data-name="punto_contacto_origen_c"]').css({ "pointer-events":"none"});
+            $('[data-name="evento_c"]').css({ "pointer-events":"none"});
+            $('[data-name="camara_c"]').css({ "pointer-events":"none"});
+            $('[data-name="tct_que_promotor_rel_c"]').css({ "pointer-events":"none"});
         }
+    },
+
+    estableceOpcionesOrigen:function(){
+        var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
+
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+            Object.keys(opciones_origen).forEach(function (key) {
+                if (key == "14" || key == "15") {
+                    delete opciones_origen[key];
+                }
+            });
+        }
+
+        this.model.fields['origen_cuenta_c'].options = opciones_origen;
+
     },
 
     func_Proveedor: function () {
