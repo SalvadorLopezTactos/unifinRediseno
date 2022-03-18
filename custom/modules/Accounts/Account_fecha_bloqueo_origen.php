@@ -131,6 +131,7 @@ class Account_fecha_bloqueo_origen
                 $beanSolicitud->monto_c=0;
 
                 //Campos de origen
+                $GLOBALS['log']->fatal("Valor del Referido de la cuenta: ".$bean->account_id1_c);
                 $beanSolicitud->origen_c=$bean->origen_cuenta_c;
                 $beanSolicitud->account_id3_c=$bean->account_id1_c;
                 $beanSolicitud->detalle_origen_c=$bean->detalle_origen_c;
