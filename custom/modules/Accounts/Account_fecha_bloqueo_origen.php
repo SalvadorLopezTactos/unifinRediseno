@@ -149,11 +149,11 @@ class Account_fecha_bloqueo_origen
             
         }else{
             //Cuando sea actualización, antes de establecer la actualización del origen, validar si ya se cumplió la fecha de bloqueo del origen para la cuenta
-            if($bean->onboarding_chk_c==1){
+            if($bean->onboarding_chk_c==1 && $bean->fetched_row['onboarding_chk_c'] != $bean->onboarding_chk_c){
                 //Valida si la fecha de bloqueo ya se cumplió
                 if($bean->fetched_row['origen_cuenta_c'] != $bean->origen_cuenta_c){
                     $GLOBALS['log']->fatal("********** Entra condición (actualización de Cuenta) para generar solicitud Dummy proveniente de Onboarding **********");
-
+                    $GLOBALS['log']->fatal("Valor del id del referido:".$bean->account_id1_c);
                     //Se genera solicitud dummy
                     $beanSolicitud= BeanFactory::newBean('Opportunities');
                     $beanSolicitud->tct_etapa_ddw_c='SI';
@@ -165,6 +165,7 @@ class Account_fecha_bloqueo_origen
     
                     //Campos de origen
                     $beanSolicitud->origen_c=$bean->origen_cuenta_c;
+                    $beanSolicitud->account_id3_c=$bean->account_id1_c;
                     $beanSolicitud->detalle_origen_c=$bean->detalle_origen_c;
                     $beanSolicitud->medio_digital_c=$bean->medio_digital_c;
                     $beanSolicitud->evento_c=$bean->evento_c;
