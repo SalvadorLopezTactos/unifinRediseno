@@ -625,6 +625,11 @@ class altaLeadServices extends SugarApi
         if( $dataOrigen['origen_c'] == '12' && $dataOrigen['detalle_origen_c'] == '12'){
             $bean_Lead->alianza_soc_chk_c = 1;
         }
+        //Validacion para Vendors y enviar el Referido (id)
+        if($dataOrigen['origen_c'] == '8'){
+            $bean_Lead->account_id1_c = $dataOrigen['account_id1_c'];
+            
+        }   
 
         $prospeccion_propia = $dataOrigen['prospeccion_propia_c']; # Prospeccion propia
         /*switch ($detalle_origen) {
