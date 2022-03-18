@@ -306,14 +306,14 @@ $dependencies['Accounts']['situacion_gpo_empresa_txt_c'] = array
 $dependencies['Accounts']['origen_cuenta_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'triggerFields' => array('name','id','fecha_bloqueo_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly', //Action type
             'params' => array(
                 'target' => 'origen_cuenta_c',
-                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+                'value'  => 'or(equal(daysUntil($fecha_bloqueo_origen_c),0),greaterThan(daysUntil($fecha_bloqueo_origen_c),0))',
             ),
         ),
     ),
@@ -321,14 +321,14 @@ $dependencies['Accounts']['origen_cuenta_c'] = array(
 $dependencies['Accounts']['detalle_origen_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'triggerFields' => array('name','id','fecha_bloqueo_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly', //Action type
             'params' => array(
                 'target' => 'detalle_origen_c',
-                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+                'value'  => 'or(equal(daysUntil($fecha_bloqueo_origen_c),0),greaterThan(daysUntil($fecha_bloqueo_origen_c),0))',
             ),
         ),
     ),
@@ -336,14 +336,14 @@ $dependencies['Accounts']['detalle_origen_c'] = array(
 $dependencies['Accounts']['medio_detalle_origen_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'triggerFields' => array('name','id','fecha_bloqueo_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly', //Action type
             'params' => array(
                 'target' => 'medio_detalle_origen_c',
-                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+                'value'  => 'or(equal(daysUntil($fecha_bloqueo_origen_c),0),greaterThan(daysUntil($fecha_bloqueo_origen_c),0))',
             ),
         ),
     ),
@@ -351,14 +351,14 @@ $dependencies['Accounts']['medio_detalle_origen_c'] = array(
 $dependencies['Accounts']['punto_contacto_origen_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'triggerFields' => array('name','id','fecha_bloqueo_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly', //Action type
             'params' => array(
                 'target' => 'punto_contacto_origen_c',
-                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+                'value'  => 'or(equal(daysUntil($fecha_bloqueo_origen_c),0),greaterThan(daysUntil($fecha_bloqueo_origen_c),0))',
             ),
         ),
     ),
@@ -366,14 +366,14 @@ $dependencies['Accounts']['punto_contacto_origen_c'] = array(
 $dependencies['Accounts']['evento_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'triggerFields' => array('name','id','fecha_bloqueo_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly', //Action type
             'params' => array(
                 'target' => 'evento_c',
-                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+                'value'  => 'or(equal(daysUntil($fecha_bloqueo_origen_c),0),greaterThan(daysUntil($fecha_bloqueo_origen_c),0))',
             ),
         ),
     ),
@@ -382,14 +382,14 @@ $dependencies['Accounts']['evento_c'] = array(
 $dependencies['Accounts']['camara_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'triggerFields' => array('name','id','fecha_bloqueo_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly', //Action type
             'params' => array(
                 'target' => 'camara_c',
-                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+                'value'  => 'or(equal(daysUntil($fecha_bloqueo_origen_c),0),greaterThan(daysUntil($fecha_bloqueo_origen_c),0))',
             ),
         ),
     ),
@@ -398,14 +398,14 @@ $dependencies['Accounts']['camara_c'] = array(
 $dependencies['Accounts']['prospeccion_propia_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('id','fecha_bloqueo_origen_c'),
+    'triggerFields' => array('name','id','fecha_bloqueo_origen_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'ReadOnly', //Action type
             'params' => array(
                 'target' => 'prospeccion_propia_c',
-                'value'  => 'greaterThan(daysUntil($fecha_bloqueo_origen_c),0)',
+                'value'  => 'or(equal(daysUntil($fecha_bloqueo_origen_c),0),greaterThan(daysUntil($fecha_bloqueo_origen_c),0))',
             ),
         ),
     ),
