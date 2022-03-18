@@ -157,6 +157,7 @@ class Account_fecha_bloqueo_origen
                     //Se genera solicitud dummy
                     $beanSolicitud= BeanFactory::newBean('Opportunities');
                     $beanSolicitud->tct_etapa_ddw_c='SI';
+                    $beanSolicitud->estatus_c='1';
                     $beanSolicitud->onboarding_chk_c=1;
     
                     //Establece bandera para evitar convertir a Prospecto Interesado
