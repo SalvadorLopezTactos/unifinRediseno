@@ -511,10 +511,10 @@
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
         this.events['keydown [name=ctpldnoseriefiel_c]'] = 'keyDownNewExtension';
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'keyDownNewExtension';
-        this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'keyDownNewExtension';
+        //this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'keyDownNewExtension';
         //this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'checkInVentas';
-        this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
+        //this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
         //Funcion para validar que no hayan direcciones repetidas al momento de darle en el check
         this.promotores_default();
 
@@ -813,6 +813,8 @@
         }
         callback(null, fields, errors);
     },
+
+
     /*Victor Martinez Lopez 12-09-2018
      *La casilla proveedor se debe mantener activa al crear un proveedor
      * */
