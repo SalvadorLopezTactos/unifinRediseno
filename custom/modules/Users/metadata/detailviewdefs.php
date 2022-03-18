@@ -80,6 +80,16 @@ array (
             'customCode' => '{$USER_TYPE_READONLY}',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'fecha_baja_c',
+            'label' => 'LBL_FECHA_BAJA',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_detailview_panel2' => 
       array (

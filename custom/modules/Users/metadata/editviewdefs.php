@@ -115,6 +115,16 @@ array (
             'customCode' => '{if $IS_ADMIN && !$IDM_MODE_ENABLED}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
           ),
         ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'fecha_baja_c',
+            'label' => 'LBL_FECHA_BAJA',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel3' => 
       array (
