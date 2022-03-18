@@ -14,19 +14,21 @@ function notificaVendors($bean, $event, $arguments)
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Accounts/';
             $urlOpp=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
-            $lead=$bean->name;
             $codigo=$bean->codigo_vendor_c;
             $idregistroOpp=$urlOpp.$bean->id;
             $GLOBALS['log']->fatal("Realiza retrieve bean de la cuenta referida- notificacion Vendors");
-            $accountVendor = BeanFactory::retrieveBean("Accounts", $bean->account_id_c);
-            $accountName=$accountVendor->name;
-            $accountVendorCode=$accountVendor->codigo_vendor_c;
-            $idregistroAcc=$urlSugar.$accountVendor->id;
+            $accountData = BeanFactory::retrieveBean("Accounts", $bean->account_id_c);
+            $idregistroAcc=$urlSugar.$accountData->id;
+            $accountDataName=$accountData->name;
+
+            $accountVendor = BeanFactory::retrieveBean("Accounts", $accountVendor->account_id1_c);
+            $VendorName=$accountVendor->name;
+            $VendorCode=$accountVendor->codigo_vendor_c;
 
             //Validamos que si se tiene codigo vendor NO vacío, se manden los correos
             if(!empty($accountVendorCode)){
                 //Setea cuerpo de notificacion
-                $cuerpoCorreo= $this->CuerpoNotificacion($accountName,$accountVendorCode,$idregistroAcc,$lead,$idregistroOpp);
+                $cuerpoCorreo= $this->CuerpoNotificacion($VendorName,$VendorCode,$idregistroAcc,$accountDataName,$idregistroOpp);
                 //Ejecuta la función para envío de notificaciones a la lista Vendor
                 $this->enviarNotificacionVendor("Oportunidad de negocio por Vendor",$cuerpoCorreo,$correosVendor,$idregistroAcc);
             }else{
@@ -38,11 +40,11 @@ function notificaVendors($bean, $event, $arguments)
         
     }
 
- public function CuerpoNotificacion($accountName,$accountVendorCode,$idregistroAcc,$lead,$idregistroOpp){
+ public function CuerpoNotificacion($VendorName,$VendorCode,$idregistroAcc,$accountDataName,$idregistroOpp){
                   
         $mailHTML = '<font face="verdana" color="#635f5f">
-                <br>Estimado asesor: <br><br> Te notificamos que el vendor '.$accountName. ' (<b>'.$accountVendorCode.'</b>) registró una nueva oportunidad de negocio.</b>
-                Para visualizarla da clic en el siguiente enlace: <br><br><br><a id="idregistro" href="'. $idregistroAcc.'">Cuenta '.$lead.'</a>
+                <br>Estimado asesor: <br><br> Te notificamos que el vendor '.$VendorName. ' (<b>'.$VendorCode.'</b>) registró una nueva oportunidad de negocio.</b>
+                Para visualizarla da clic en el siguiente enlace: <br><br><br><a id="idregistro" href="'. $idregistroAcc.'">Cuenta '.$accountDataName.'</a>
                 <br><br><a id="idregistroOpp" href="'. $idregistroOpp.'">PreSolicitud</a>
                 
                 <br><br>Atentamente</font></p>
