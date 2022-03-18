@@ -1183,7 +1183,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $relacion->empresa = 1;
         $relacion->estado = 1;
         $relacion->tipo = 1;
-        $relacion->fecha_actualizacion = $bean->date_entered; //Cambiar a fecha actual
+        $relacion->fecha_actualizacion = $bean->date_modified; //Cambiar a fecha actual
         $relacion->url_portal = $url_portalFinanciera;
         $relacion->assigned_user_id = $bean->user_id_c;
         $relacion->load_relationship('anlzt_analizate_accounts');

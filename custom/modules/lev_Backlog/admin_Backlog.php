@@ -19,7 +19,7 @@ class class_Backlog_Admin
 
         //Actualiza rango Backlog
         global $app_list_strings;
-        $valorMonto = $bean->monto_comprometido;
+        $valorMonto = $bean->monto_prospecto_c + $bean->monto_credito_c + $bean->monto_rechazado_c + $bean->monto_sin_solicitud_c + $bean->monto_con_solicitud_c; //$bean->monto_comprometido;
         $listaRangos = $app_list_strings['rango_bl_list'];
         $rangoEncontrado = '';
         $bandera = 0;

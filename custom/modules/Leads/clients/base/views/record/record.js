@@ -45,6 +45,9 @@
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on('sync', this.userAlianzaSoc, this);
         this.cmbio_soc = 0;
+
+        //Función para eliminar opciones del campo origen
+        this.estableceOpcionesOrigenLeads();
     },
 
     _disableActionsSubpanel: function () {
@@ -456,7 +459,8 @@
             this._disableActionsSubpanel();
         }
 
-        this.deshabilitaOrigen();
+        //Se omite función para deshabilitar origen, ya que se opta por hacerlo a través de dependencias
+        //this.deshabilitaOrigen();
     },
 
     deshabilitaOrigen:function(){
@@ -476,6 +480,21 @@
             $('[data-name="origen_c"]').attr('style','pointer-events:none')
             $('[data-name="detalle_origen_c"]').attr('style','pointer-events:none')
         }
+    },
+
+    //Función para eliminar opciones del campo origen
+    estableceOpcionesOrigenLeads:function(){
+        var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
+
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+            Object.keys(opciones_origen).forEach(function (key) {
+                if (key == "14" || key == "15") {
+                    delete opciones_origen[key];
+                }
+            });
+        }
+
+        this.model.fields['origen_c'].options = opciones_origen;
     },
 
     editClicked: function () {

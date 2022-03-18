@@ -169,7 +169,7 @@
 		//this.events['click a[name=alianza_soc_chk_c]'] = 'SOCflag';
 		this.model.addValidationTask('validacionSOC', _.bind(this.validacionSOC, this));
     /***********************************************/
-       
+       this.estableceOpcionesOrigenSolicitudes();
 
     },
 
@@ -3570,6 +3570,20 @@
 			});
 		}
         callback(null, fields, errors);
+    },
+
+    estableceOpcionesOrigenSolicitudes:function(){
+        var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
+
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+            Object.keys(opciones_origen).forEach(function (key) {
+                if (key == "14" || key == "15") {
+                    delete opciones_origen[key];
+                }
+            });
+        }
+
+        this.model.fields['origen_c'].options = opciones_origen;
     },
 
     validaMontoCreditCard: function (fields, errors, callback) {

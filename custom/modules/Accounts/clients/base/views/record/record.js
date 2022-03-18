@@ -315,7 +315,12 @@
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
-        this.model.on('sync', this.deshabilitaOrigenCuenta, this);
+
+        //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
+        //this.model.on('sync', this.deshabilitaOrigenCuenta, this);
+
+        //Función para eliminar opciones del campo origen
+        this.estableceOpcionesOrigen();
 
     },
 
@@ -1102,7 +1107,19 @@
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
-          self.noEditFields.push('tipo_proveedor_compras_c');
+            //Se agrega validacion para la lista de Vendors y puedan editar el campo Tipo Proveedor Compras C
+            var Banderita=0;
+            Object.entries(App.lang.getAppListStrings('equipo_a_eco_y_est_list')).forEach(([key, value]) => {
+                if(value==App.user.attributes.id){
+                    Banderita=1;
+                }
+             });
+            if(Banderita!=1){
+                self.noEditFields.push('tipo_proveedor_compras_c');
+            }
+                
+            
+          
         }
         this._super('_renderHtml');
     },
@@ -6951,9 +6968,30 @@
         var fecha_bloqueo=new Date(this.model.get("fecha_bloqueo_origen_c"));
 
         if(fecha_actual<=fecha_bloqueo){
-            $('[data-name="origen_cuenta_c"]').attr('style','pointer-events:none')
-            $('[data-name="detalle_origen_c"]').attr('style','pointer-events:none')
+            $('[data-name="origen_cuenta_c"]').css({ "pointer-events":"none"});
+            $('[data-name="detalle_origen_c"]').css({ "pointer-events":"none"});
+            $('[data-name="prospeccion_propia_c"]').css({ "pointer-events":"none"});
+            $('[data-name="medio_detalle_origen_c"]').css({ "pointer-events":"none"});
+            $('[data-name="punto_contacto_origen_c"]').css({ "pointer-events":"none"});
+            $('[data-name="evento_c"]').css({ "pointer-events":"none"});
+            $('[data-name="camara_c"]').css({ "pointer-events":"none"});
+            $('[data-name="tct_que_promotor_rel_c"]').css({ "pointer-events":"none"});
         }
+    },
+
+    estableceOpcionesOrigen:function(){
+        var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
+
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+            Object.keys(opciones_origen).forEach(function (key) {
+                if (key == "14" || key == "15") {
+                    delete opciones_origen[key];
+                }
+            });
+        }
+
+        this.model.fields['origen_cuenta_c'].options = opciones_origen;
+
     },
 
     func_Proveedor: function () {
