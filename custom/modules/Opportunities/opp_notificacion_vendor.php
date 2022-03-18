@@ -14,15 +14,16 @@ function notificaVendors($bean, $event, $arguments)
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Accounts/';
             $urlOpp=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
-            $codigo=$bean->codigo_vendor_c;
             $idregistroOpp=$urlOpp.$bean->id;
             $GLOBALS['log']->fatal("Realiza retrieve bean de la cuenta referida- notificacion Vendors");
             $accountData = BeanFactory::retrieveBean("Accounts", $bean->account_id_c);
             $idregistroAcc=$urlSugar.$accountData->id;
+            
             $accountDataName=$accountData->name;
 
-            $accountVendor = BeanFactory::retrieveBean("Accounts", $accountVendor->account_id1_c);
+            $accountVendor = BeanFactory::retrieveBean("Accounts", $bean->account_id3_c);
             $VendorName=$accountVendor->name;
+            $codigo=$accountVendor->codigo_vendor_c;
             $VendorCode=$accountVendor->codigo_vendor_c;
 
             //Validamos que si se tiene codigo vendor NO vacío, se manden los correos
