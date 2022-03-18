@@ -973,8 +973,9 @@ array (
               4 => 
               array (
                 'readonly' => false,
-                'name' => 'prospeccion_propia_c',
-                'label' => 'LBL_PROSPECCION_PROPIA',
+                'name' => 'referido_cliente_prov_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERIDO_CLIENTE_PROV_C',
               ),
               5 => 
               array (
@@ -982,8 +983,8 @@ array (
               6 => 
               array (
                 'readonly' => false,
-                'name' => 'medio_digital_c',
-                'label' => 'LBL_MEDIO_DIGITAL',
+                'name' => 'prospeccion_propia_c',
+                'label' => 'LBL_PROSPECCION_PROPIA',
               ),
               7 => 
               array (
@@ -991,32 +992,41 @@ array (
               8 => 
               array (
                 'readonly' => false,
+                'name' => 'medio_digital_c',
+                'label' => 'LBL_MEDIO_DIGITAL',
+              ),
+              9 => 
+              array (
+              ),
+              10 => 
+              array (
+                'readonly' => false,
                 'name' => 'origen_busqueda_c',
                 'label' => 'LBL_ORIGEN_BUSQUEDA',
               ),
-              9 => 
+              11 => 
               array (
                 'readonly' => false,
                 'name' => 'evento_c',
                 'label' => 'LBL_EVENTO',
               ),
-              10 => 
+              12 => 
               array (
                 'readonly' => false,
                 'name' => 'camara_c',
                 'label' => 'LBL_CAMARA',
               ),
-              11 => 
+              13 => 
               array (
               ),
-              12 => 
+              14 => 
               array (
                 'readonly' => false,
                 'name' => 'promotor_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTOR',
               ),
-              13 => 
+              15 => 
               array (
               ),
             ),

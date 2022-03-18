@@ -115,7 +115,7 @@ class Account_fecha_bloqueo_origen
         //Cuando la cuenta es Nueva y viene desde onboarding, se genera Presolicitud como "Solicitud Inicial"
         //Cuando la cuenta ya es existente (actualización) y viene desde Onboarding
         if(!$args['isUpdate']){//Es creación
-            if($bean->onboarding_chk_c==1){
+            if($bean->onboarding_chk_c==1 && $bean->fetched_row['onboarding_chk_c'] != $bean->onboarding_chk_c){
                 $GLOBALS['log']->fatal("********** Entra condición para generar solicitud Dummy proveniente de Onboarding **********");
                 //Modificar Process Author: Solicitud inicial a Prospecto v2, añadiendo la condición que solo convierta
                 //a Prospecto Interesado cuando el nuevo campo no_convertir_prospecto_c es null o false
@@ -132,6 +132,7 @@ class Account_fecha_bloqueo_origen
 
                 //Campos de origen
                 $beanSolicitud->origen_c=$bean->origen_cuenta_c;
+                $beanSolicitud->account_id3_c=$bean->account_id1_c;
                 $beanSolicitud->detalle_origen_c=$bean->detalle_origen_c;
                 $beanSolicitud->medio_digital_c=$bean->medio_digital_c;
                 $beanSolicitud->evento_c=$bean->evento_c;
