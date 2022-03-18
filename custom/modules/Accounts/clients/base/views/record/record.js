@@ -1101,7 +1101,19 @@
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
-          self.noEditFields.push('tipo_proveedor_compras_c');
+            //Se agrega validacion para la lista de Vendors y puedan editar el campo Tipo Proveedor Compras C
+            var Banderita=0;
+            Object.entries(App.lang.getAppListStrings('equipo_a_eco_y_est_list')).forEach(([key, value]) => {
+                if(value==App.user.attributes.id){
+                    Banderita=1;
+                }
+             });
+            if(Banderita!=1){
+                self.noEditFields.push('tipo_proveedor_compras_c');
+            }
+                
+            
+          
         }
         this._super('_renderHtml');
     },
