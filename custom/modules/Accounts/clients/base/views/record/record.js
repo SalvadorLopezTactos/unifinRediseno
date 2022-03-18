@@ -272,10 +272,10 @@
         this.events['keydown [name=tct_depositos_promedio_c]'] = 'checkInVentas';
         this.events['keydown [name=ctpldnoseriefiel_c]'] = 'keyDownNewExtension';
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'keyDownNewExtension';
-        this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'keyDownNewExtension';
+        //this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'keyDownNewExtension';
         //this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'checkInVentas';
-        this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
+        //this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
         // this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
