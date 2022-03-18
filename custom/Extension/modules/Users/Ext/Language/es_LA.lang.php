@@ -72,3 +72,4 @@ $mod_strings['LBL_PORTAL_PROVEEDORES'] = 'Enviar a Portal Proveedores';
 $mod_strings['LBL_EDITAR_BACKLOG_CHK'] = 'Editar Backlog';
 $mod_strings['LBL_BLOQUEO_CUENTAS'] = 'Bloqueo de Cuentas';
 $mod_strings['LBL_ADMIN_BACKLOG'] = 'Administración de Backlog';
+$mod_strings['LBL_FECHA_BAJA'] = ' Fecha de Baja';
