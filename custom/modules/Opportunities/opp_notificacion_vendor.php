@@ -8,28 +8,25 @@ class NotificacionVendor
 function notificaVendors($bean, $event, $arguments)
     {
         global $current_user,$db;
-
+        $GLOBALS['log']->fatal("***Notificacion para Vendors CONDICION***");
         if($bean->origen_c=="8" && $bean->date_entered==$bean->date_modified){
             $GLOBALS['log']->fatal("Inicia proceso de notificacion Vendors");
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Accounts/';
             $urlOpp=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
             $idregistroOpp=$urlOpp.$bean->id;
-            $GLOBALS['log']->fatal("Realiza retrieve bean de la cuenta referida- notificacion Vendors");
-            $accountData = BeanFactory::retrieveBean("Accounts", $bean->account_id_c);
-            $idregistroAcc=$urlSugar.$accountData->id;
-            
-            $accountDataName=$accountData->name;
-
+            //Recupera el bean de la Cuenta Padre
+            $accountPadre = BeanFactory::retrieveBean("Accounts", $bean->account_id);
+            $idregistroAcc=$urlSugar.$accountPadre->id;
+            $GLOBALS['log']->fatal("ID de la cuenta Padre: ".$accountPadre->id);
+            //Recupera bean del Referido Vendor (nombre y código)
             $accountVendor = BeanFactory::retrieveBean("Accounts", $bean->account_id3_c);
             $VendorName=$accountVendor->name;
             $codigo=$accountVendor->codigo_vendor_c;
-            $VendorCode=$accountVendor->codigo_vendor_c;
-
             //Validamos que si se tiene codigo vendor NO vacío, se manden los correos
-            if(!empty($accountVendorCode)){
+            if(!empty($codigo)){
                 //Setea cuerpo de notificacion
-                $cuerpoCorreo= $this->CuerpoNotificacion($VendorName,$VendorCode,$idregistroAcc,$accountDataName,$idregistroOpp);
+                $cuerpoCorreo= $this->CuerpoNotificacion($VendorName,$codigo,$idregistroAcc,$accountDataName,$idregistroOpp);
                 //Ejecuta la función para envío de notificaciones a la lista Vendor
                 $this->enviarNotificacionVendor("Oportunidad de negocio por Vendor",$cuerpoCorreo,$correosVendor,$idregistroAcc);
             }else{
@@ -41,10 +38,10 @@ function notificaVendors($bean, $event, $arguments)
         
     }
 
- public function CuerpoNotificacion($VendorName,$VendorCode,$idregistroAcc,$accountDataName,$idregistroOpp){
+ public function CuerpoNotificacion($VendorName,$codigo,$idregistroAcc,$accountDataName,$idregistroOpp){
                   
         $mailHTML = '<font face="verdana" color="#635f5f">
-                <br>Estimado asesor: <br><br> Te notificamos que el vendor '.$VendorName. ' (<b>'.$VendorCode.'</b>) registró una nueva oportunidad de negocio.</b>
+                <br>Estimado asesor: <br><br> Te notificamos que el vendor '.$VendorName. ' (<b>'.$codigo.'</b>) registró una nueva oportunidad de negocio.</b>
                 Para visualizarla da clic en el siguiente enlace: <br><br><br><a id="idregistro" href="'. $idregistroAcc.'">Cuenta '.$accountDataName.'</a>
                 <br><br><a id="idregistroOpp" href="'. $idregistroOpp.'">PreSolicitud</a>
                 
@@ -66,7 +63,6 @@ function notificaVendors($bean, $event, $arguments)
  public function enviarNotificacionVendor($asunto,$cuerpoCorreo,$recipients=array(),$idregistro){
     
     global $app_list_strings;
-        
     $cc ='';
     $GLOBALS['log']->fatal("Correo a: ".print_r($recipients,true));
     try{
@@ -88,7 +84,6 @@ function notificaVendors($bean, $event, $arguments)
             $GLOBALS['log']->fatal("Iterando y agregando correos de copia : ".$value);
             $mailer->addRecipientsCc(new EmailIdentity($value));
         }
-        
         //Envia correos.
         $result = $mailer->send();
         $GLOBALS['log']->fatal("Termina proceso de notificacion Vendors con envío de correo(s)");
