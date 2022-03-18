@@ -627,7 +627,7 @@ class altaLeadServices extends SugarApi
         }
         //Validacion para Vendors y enviar el Referido (id)
         if($dataOrigen['origen_c'] == '8'){
-            $bean_Lead->account_id1_c = $dataOrigen['account_id1_c'];
+            $bean_Lead->account_id_c = $dataOrigen['account_id_c'];
             
         }   
 
