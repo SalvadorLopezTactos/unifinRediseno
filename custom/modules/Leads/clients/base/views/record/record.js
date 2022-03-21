@@ -558,11 +558,11 @@
             $('.record-cell[data-name="medio_digital_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
             $('.record-cell[data-name="medio_digital_c"]').find('.record-edit-link-wrapper').addClass('hide');
 
-            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.edit').addClass('disabled');
-            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
-            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
-            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
-            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.record-edit-link-wrapper').addClass('hide');
+            $('.record-cell[data-name="punto_contacto_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="punto_contacto_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="punto_contacto_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="punto_contacto_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="punto_contacto_c"]').find('.record-edit-link-wrapper').addClass('hide');
 
             $('[data-name="evento_c"]').css({ "pointer-events":"none"});
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
