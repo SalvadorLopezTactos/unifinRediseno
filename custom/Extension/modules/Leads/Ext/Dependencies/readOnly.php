@@ -233,6 +233,7 @@ $dependencies['Leads']['readonly_fields'] = array(
     ),
 );
 
+/*
 $dependencies['Leads']['origen_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -368,3 +369,4 @@ $dependencies['Leads']['punto_contacto_c'] = array(
         ),
     ),
 );
+*/

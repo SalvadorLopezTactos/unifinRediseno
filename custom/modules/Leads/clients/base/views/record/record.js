@@ -50,6 +50,63 @@
         this.estableceOpcionesOrigenLeads();
     },
 
+    handleEdit: function(e, cell) {
+        var target,
+            cellData,
+            field;
+
+        if (e) { // If result of click event, extract target and cell.
+            target = this.$(e.target);
+            cell = target.parents('.record-cell');
+            // hide tooltip
+            this.handleMouseLeave(e);
+        }
+
+        cellData = cell.data();
+        field = this.getField(cellData.name);
+
+        // If the focus drawer icon was clicked, open the focus drawer instead
+        // of entering edit mode
+        if (target && target.hasClass('focus-icon') && field && field.focusEnabled) {
+            field.handleFocusClick();
+            return;
+        }
+
+        // Set Editing mode to on.
+        this.inlineEditMode = true;
+
+        this.setButtonStates(this.STATE.EDIT);
+
+        this.toggleField(field);
+
+        if (this.$('.headerpane').length > 0) {
+            this.toggleViewButtons(true);
+            this.adjustHeaderpaneFields();
+        }
+        this.deshabilitaOrigen();
+    },
+
+    /*
+    Se sobreescribe la función de caja para poder evaluar si los campos de origen se deben de bloquear ya que a nivel de dependencoa
+    no estaba tomando los diapradores para bloquear dichos campos
+    */
+    focusFirstInput: function() {
+        var self = this;
+        $(function() {
+            var $element = (app.drawer && (app.drawer.count() > 0)) ?
+                app.drawer._components[app.drawer.count() - 1].$el
+                : app.$contentEl;
+            var $firstInput = $element.find('input[type=text]').first();
+
+            if (($firstInput.length > 0) && $firstInput.is(':visible')) {
+                $firstInput.focus();
+                self.setCaretToEnd($firstInput);
+            }
+            self.deshabilitaOrigen();
+        });
+    },
+
+
     _disableActionsSubpanel: function () {
         $('[data-subpanel-link="calls"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="meetings"]').find(".subpanel-controls").hide();
@@ -477,8 +534,39 @@
         var fecha_bloqueo=new Date(this.model.get("fecha_bloqueo_origen_c"));
 
         if(fecha_actual<=fecha_bloqueo){
-            $('[data-name="origen_c"]').attr('style','pointer-events:none')
-            $('[data-name="detalle_origen_c"]').attr('style','pointer-events:none')
+            $('.record-cell[data-name="origen_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="origen_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="origen_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="origen_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="origen_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="detalle_origen_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="medio_digital_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="medio_digital_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="medio_digital_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="medio_digital_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="medio_digital_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('[data-name="evento_c"]').css({ "pointer-events":"none"});
+            $('[data-name="camara_c"]').css({ "pointer-events":"none"});
+            $('[data-name="promotor_c"]').css({ "pointer-events":"none"});
         }
     },
 
