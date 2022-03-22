@@ -805,11 +805,11 @@
 
         /*
          -- Bloquea campos si;
-         1.- Origen es Marketing = 1 o Inteligencia de negocio = 2
+         1.- Origen es Marketing = 1 o Inteligencia de negocio = 2 (Ya no aplica la regla de solo lectura cuando el Origen es Marketing, solo se deja la condición para Inteligencia de negocio)
          2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
          3.- Usuario no está en lista de Usuario que pueden editar
          */
-        if ((origen == "1" || origen == "2") && (puesto != '27' && puesto != '31') && !listaEdicionOrigen.includes(App.user.attributes.id) ) {
+        if ((origen == "2") && (puesto != '27' && puesto != '31') && !listaEdicionOrigen.includes(App.user.attributes.id) ) {
             //Establece como no editables campos de origen
             this.noEditFields.push('origen_cuenta_c');
             this.noEditFields.push('detalle_origen_c');
