@@ -15,9 +15,11 @@ function notificaVendors($bean, $event, $arguments)
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Accounts/';
             $urlOpp=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
             $idregistroOpp=$urlOpp.$bean->id;
+            $oppName=$bean->name;
             //Recupera el bean de la Cuenta Padre
             $accountPadre = BeanFactory::retrieveBean("Accounts", $bean->account_id);
             $idregistroAcc=$urlSugar.$accountPadre->id;
+            $accountDataName=$accountPadre->name;
             $GLOBALS['log']->fatal("ID de la cuenta Padre: ".$accountPadre->id);
             //Recupera bean del Referido Vendor (nombre y código)
             $accountVendor = BeanFactory::retrieveBean("Accounts", $bean->account_id3_c);
@@ -26,7 +28,7 @@ function notificaVendors($bean, $event, $arguments)
             //Validamos que si se tiene codigo vendor NO vacío, se manden los correos
             if(!empty($codigo)){
                 //Setea cuerpo de notificacion
-                $cuerpoCorreo= $this->CuerpoNotificacion($VendorName,$codigo,$idregistroAcc,$accountDataName,$idregistroOpp);
+                $cuerpoCorreo= $this->CuerpoNotificacion($VendorName,$codigo,$idregistroAcc,$accountDataName,$idregistroOpp,$oppName);
                 //Ejecuta la función para envío de notificaciones a la lista Vendor
                 $this->enviarNotificacionVendor("Oportunidad de negocio por Vendor",$cuerpoCorreo,$correosVendor,$idregistroAcc);
             }else{
@@ -38,12 +40,12 @@ function notificaVendors($bean, $event, $arguments)
         
     }
 
- public function CuerpoNotificacion($VendorName,$codigo,$idregistroAcc,$accountDataName,$idregistroOpp){
+ public function CuerpoNotificacion($VendorName,$codigo,$idregistroAcc,$accountDataName,$idregistroOpp,$oppName){
                   
         $mailHTML = '<font face="verdana" color="#635f5f">
                 <br>Estimado asesor: <br><br> Te notificamos que el vendor '.$VendorName. ' (<b>'.$codigo.'</b>) registró una nueva oportunidad de negocio.</b>
                 Para visualizarla da clic en el siguiente enlace: <br><br><br><a id="idregistro" href="'. $idregistroAcc.'">Cuenta '.$accountDataName.'</a>
-                <br><br><a id="idregistroOpp" href="'. $idregistroOpp.'">PreSolicitud</a>
+                <br><br><a id="idregistroOpp" href="'. $idregistroOpp.'">PreSolicitud '.$oppName.'</a>
                 
                 <br><br>Atentamente</font></p>
                 <p class="imagen"><img border="0" width="350" height="107" style="width: 1.5in; height: 1in;" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
