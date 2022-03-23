@@ -50,6 +50,13 @@ class AltaSolicitud extends SugarApi
         $monto = isset($args['monto_c']) ? $args['monto_c'] : '';
         $id_usuario_asignado = isset($args['assigned_user_id']) ? $args['assigned_user_id'] : '';
         $onboarding = isset($args['onboarding_chk_c']) ? $args['onboarding_chk_c'] : '';
+        $origen = isset($args['origen_c']) ? $args['origen_c'] : '';
+        $detalle_origen=isset($args['detalle_origen_c']) ? $args['detalle_origen_c'] : '';
+        $medio_digital=isset($args['medio_digital_c']) ? $args['medio_digital_c'] : '';
+        $evento=isset($args['evento_c']) ? $args['evento_c'] : '';
+        $origen_busqueda=isset($args['origen_busqueda_c']) ? $args['origen_busqueda_c'] : '';
+        $camara=isset($args['camara_c']) ? $args['camara_c'] : '';
+        $prospeccion_propia=isset($args['prospeccion_propia_c']) ? $args['prospeccion_propia_c'] : '';
         
         //Obtiene solicitudes de la cuenta para saber si ya cuenta con solicitudes dummy
         $beanCuenta = BeanFactory::getBean("Accounts", $id_cuenta);
@@ -73,6 +80,14 @@ class AltaSolicitud extends SugarApi
                         $sol->producto_financiero_c=$producto_financiero;
                         $sol->monto_c=$monto;
                         $sol->assigned_user_id=$id_usuario_asignado;
+
+                        $sol->origen_c=$origen;
+                        $sol->detalle_origen_c=$detalle_origen;
+                        $sol->medio_digital_c=$medio_digital;
+                        $sol->evento_c=$evento;
+                        $sol->origen_busqueda_c=$origen_busqueda;
+                        $sol->camara_c=$camara;
+                        $sol->prospeccion_propia_c=$prospeccion_propia;
                         
                         $sol->save();
                         $beanSolicitud=$sol;
@@ -94,6 +109,15 @@ class AltaSolicitud extends SugarApi
                 $beanSolicitud->assigned_user_id=$id_usuario_asignado;
                 $beanSolicitud->onboarding_chk_c=$onboarding;
                 $beanSolicitud->account_id=$id_cuenta;
+
+                $sol->origen_c=$origen;
+                $sol->detalle_origen_c=$detalle_origen;
+                $sol->medio_digital_c=$medio_digital;
+                $sol->evento_c=$evento;
+                $sol->origen_busqueda_c=$origen_busqueda;
+                $sol->camara_c=$camara;
+                $sol->prospeccion_propia_c=$prospeccion_propia;
+                
                 $beanSolicitud->save();
                 
             }
