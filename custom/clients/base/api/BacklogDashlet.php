@@ -145,7 +145,7 @@ class BacklogDashlet extends SugarApi
 		$producto_filtro = $args['data']['producto'];
         $sortBy = $args['data']['sortBy'];
         $sortByDireccion = $args['data']['sortByDireccion'];
-		
+
         $query = <<<SQL
 SELECT r.name FROM acl_roles r
 INNER JOIN acl_roles_users ru ON ru.role_id = r.id AND ru.deleted = 0
@@ -302,7 +302,7 @@ CASE WHEN blcs.estatus_operacion_c = '1' THEN 0 ELSE
   + CASE WHEN '{$etapa}' LIKE '%Rechazada%' THEN  monto_rechazado_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaSinSolicitud%'  THEN  monto_sin_solicitud_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaConSolicitud%' THEN  monto_con_solicitud_c  ELSE 0 END  END*/  END AS bl_actual,
-tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c, estado_cancelacion_c 
+tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c, estado_cancelacion_c
 , blcs.producto_c, blcs.num_tipo_op_credito_c, blcs.num_tipo_op_leasing_c
 FROM lev_backlog lb
 INNER JOIN lev_backlog_cstm blcs ON blcs.id_c = lb.id
@@ -358,7 +358,7 @@ SQL;
 				$query .= " AND blcs.estatus_operacion_c = {$estatus}";
 			}
         }
-		
+
 		if(!empty($producto)){
 			if($producto == '1'){
 				$query .= " AND blcs.producto_c = '1'";
@@ -387,7 +387,7 @@ SQL;
         global $app_list_strings;
         $queryResult = $db->query($query);
         while ($row = $db->fetchByAssoc($queryResult)) {
-			
+
 			$response['linea'][$row['id']]['producto'] = $app_list_strings['tipo_producto_list'][$row['producto_c']];
 			$response['linea'][$row['id']]['tipo_operacion_producto'] = $this->get_multivalor('num_tipo_op_credito_list' , $row['num_tipo_op_credito_c']). $this->get_multivalor('num_tipo_op_leasing_list' , $row['num_tipo_op_leasing_c']);
             $response['linea'][$row['id']]['estatus_operacion_c'] = $app_list_strings['estatus_operacion_c_list'][$row['estatus_operacion_c']];
@@ -1049,7 +1049,7 @@ SQL;
             'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
 	*/
 		fputcsv($fp, array('PRODUCTO','TIPO OPERACION PRODUCTO','ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
-            'BACKLOG','ETAPA INICIO MES', 'ETAPA', 
+            'BACKLOG','ETAPA INICIO MES', 'ETAPA',
             'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
@@ -1149,7 +1149,7 @@ SQL;
             $args['data']['backlogs']['backlogs']['totales']['total_bl_actual'],$args['data']['backlogs']['backlogs']['totales']['total_monto_real'],$args['data']['backlogs']['backlogs']['totales']['total_renta_real'],
             $args['data']['backlogs']['backlogs']['totales']['total_monto_cancelado'],$args['data']['backlogs']['backlogs']['totales']['total_ri_cancelada'],'','','','','','','','',''));
 		*/
-		/*fputcsv($fp,array('', '','', '', '', '', '', '', '','','', 
+		/*fputcsv($fp,array('', '','', '', '', '', '', '', '','','',
 			$args['data']['backlogs']['backlogs']['totales']['total_monto_original'],
 			$args['data']['backlogs']['backlogs']['totales']['total_monto_comprometido'],
             $args['data']['backlogs']['backlogs']['totales']['total_renta_inicial'],0,
@@ -1161,10 +1161,10 @@ SQL;
             $args['data']['backlogs']['backlogs']['totales']['total_monto_cancelado'],
 			$args['data']['backlogs']['backlogs']['totales']['total_ri_cancelada'],'','','','','','','','',''));
 		*/
-		fputcsv($fp,array('', '','', '', '', '', '', '', '','','', 
+		fputcsv($fp,array('', '','', '', '', '', '', '', '','','',
 			$args['data']['backlogs']['backlogs']['totales']['total_monto_original'],
 		));
-		
+
         fclose($fp);
 
         return $backlog_doc_name;
@@ -1252,7 +1252,7 @@ SQL;
         $query = <<<SQL
 SELECT distinct u.id, user_name, CONCAT(first_name, " ", last_name) AS full_name, equipo_c
 FROM users u
-INNER JOIN users_cstm uc ON uc.id_c = u.id  AND status = 'Active'
+INNER JOIN users_cstm uc ON uc.id_c = u.id  -- AND status = 'Active'
 LEFT OUTER JOIN lev_Backlog bl on bl.assigned_user_id = u.id and bl.mes IN ({$mes})
 WHERE u.deleted = 0
 and (u.status = 'Active' or (u.status = 'Inactive' and bl.id is not null))
@@ -1488,12 +1488,12 @@ SQL;
         $callApi->unifinPostCall($url,$fields);
 
     }
-	
+
 	public function get_multivalor($lista, $valor){
 		 global $app_list_strings;
 		$salida = "";
 		$porciones =  explode(",", str_replace("^","",$valor));
-		
+
 		for ($i = 0; $i < count($porciones) ; $i++) {
 			$porciones[$i] = $app_list_strings[$lista][$porciones[$i]];
 		}
