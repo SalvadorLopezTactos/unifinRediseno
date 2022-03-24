@@ -19,11 +19,13 @@ class Account_fecha_bloqueo_origen
             Prospecto=2 Contactado=2
             Prospecto=2 Interesado=7
             Prospecto=2 Integración Expediente=8
+            Prospecto=2 Rechazado=10
             */
             if( ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='1') ||
                 ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='2') ||
                 ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='7') ||
-                ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='8')
+                ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='8') ||
+                ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='10')  
             ){
                 $GLOBALS['log']->fatal("**********Actualiza fecha de bloqueo en Cuentas**********");
                 //La fecha de bloqueo se establece a 1 año
@@ -47,13 +49,15 @@ class Account_fecha_bloqueo_origen
                 Prospecto=2 Contactado=2
                 Prospecto=2 Interesado=7
                 Prospecto=2 Integración Expediente=8
+                Prospecto=2 Rechazado=10
                 */
                 if( ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='1') ||
                     ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='2') ||
                     ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='7') ||
-                    ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='8')
+                    ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='8') ||
+                    ($bean->tipo_registro_cuenta_c=='2' && $bean->subtipo_registro_cuenta_c=='10') 
                 ){
-                    
+                    $GLOBALS['log']->fatal("**********Entra evento disparador 2**********");
                     //La fecha de bloqueo se establece a 6 meses a partir de la fecha actual
                     $current_date_time = new SugarDateTime();
                     $fecha_6_meses=$current_date_time->modify("+12 month");
@@ -77,11 +81,13 @@ class Account_fecha_bloqueo_origen
             if( ($bean->fetched_row['subtipo_registro_cuenta_c'] != $bean->subtipo_registro_cuenta_c && $bean->subtipo_registro_cuenta_c=='9' && $bean->tipo_registro_cuenta_c=='2') ||
                 ($bean->fetched_row['tipo_registro_cuenta_c'] != $bean->tipo_registro_cuenta_c && $bean->tipo_registro_cuenta_c=='3')
             ){
+                $GLOBALS['log']->fatal("**********Entra evento disparador 3 para fecha de bloqueo**********");
                 $bean->fecha_bloqueo_origen_c='2100-01-01';
             }
 
             //Cambió de Prospecto Crédito a Prospecto Rechazado, es el evento disparador número 4
-            if(($bean->fetched_row['subtipo_registro_cuenta_c'] == '9' && $bean->subtipo_registro_cuenta_c=='10' && $bean->tipo_registro_cuenta_c=='2')){
+            if($bean->fetched_row['subtipo_registro_cuenta_c'] == '9' && $bean->subtipo_registro_cuenta_c=='10' && $bean->tipo_registro_cuenta_c=='2'){
+                $GLOBALS['log']->fatal("**********Entra evento disparador 4: Prospecto rechazado, bloqueo se establece a 1 año**********");
                 $bean->fecha_bloqueo_origen_c='2100-01-01';
             }
         }
