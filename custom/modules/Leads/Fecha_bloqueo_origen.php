@@ -50,7 +50,9 @@ class Fecha_bloqueo_origen
             }
 
             if(($bean->fetched_row['subtipo_registro_c'] != $bean->subtipo_registro_c && $bean->subtipo_registro_c=='4') ||
-            ($bean->fetched_row['subtipo_registro_c'] != $bean->subtipo_registro_c && $bean->subtipo_registro_c=='3')
+            ($bean->fetched_row['subtipo_registro_c'] != $bean->subtipo_registro_c && $bean->subtipo_registro_c=='3') ||
+            //Se agrega condición para el escenario en el que el lead se cancela desde la casilla de verifcación les_cancelado_c
+            ($bean->lead_cancelado_c == 1 && $bean->motivo_cancelacion_c != '' && $bean->fetched_row['lead_cancelado_c'] != $bean->lead_cancelado_c)
             ){//Cambió a Prospecto Convertido/Cancelado, es el evento disparador número 3
                 $bean->fecha_bloqueo_origen_c='2100-01-01';
             }
