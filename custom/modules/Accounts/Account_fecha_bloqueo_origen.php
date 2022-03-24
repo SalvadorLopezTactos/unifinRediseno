@@ -129,7 +129,7 @@ class Account_fecha_bloqueo_origen
                 //$bean_llamada->leads->add($bean->parent_id);
                 
                 $beanSolicitud= BeanFactory::newBean('Opportunities');
-                $beanSolicitud->tipo_producto_c="";
+                $beanSolicitud->tipo_producto_c= ($bean->origen_cuenta_c== 8) ? "1" : "";
                 $beanSolicitud->tct_etapa_ddw_c='SI';
                 $beanSolicitud->onboarding_chk_c=1;
 
@@ -163,7 +163,7 @@ class Account_fecha_bloqueo_origen
                     $GLOBALS['log']->fatal("Valor del id del referido:".$bean->account_id1_c);
                     //Se genera solicitud dummy
                     $beanSolicitud= BeanFactory::newBean('Opportunities');
-                    $beanSolicitud->tipo_producto_c="";
+                    $beanSolicitud->tipo_producto_c= ($bean->origen_cuenta_c== 8) ? "1" : "";
                     $beanSolicitud->tct_etapa_ddw_c='SI';
                     $beanSolicitud->estatus_c='1';
                     $beanSolicitud->onboarding_chk_c=1;
