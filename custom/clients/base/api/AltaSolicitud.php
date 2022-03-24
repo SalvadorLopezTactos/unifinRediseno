@@ -75,11 +75,6 @@ class AltaSolicitud extends SugarApi
 
                         $tieneDummy=true;
                         $GLOBALS['log']->fatal("La cuenta tiene solicitud dummy : ".$sol->id);
-                        //Se establece en validación comercial
-                        if((($sol->tipo_producto_c=="1" && $sol->negocio_c=="5" && ($sol->producto_financiero_c=="" || $sol->producto_financiero_c=="0")) || ($sol->tipo_producto_c=="2" && ($sol->negocio_c!="2" || $sol->negocio_c!="10"))) && $sol->tct_etapa_ddw_c=="SI"){
-                            $GLOBALS['log']->fatal("La solicitud dummy se establece como en Validación Comercial");
-                            $sol->estatus_c="1";
-                        }
                         $sol->tipo_producto_c=$tipo_producto;
                         $sol->negocio_c=$negocio;
                         $sol->producto_financiero_c=$producto_financiero;
@@ -95,7 +90,13 @@ class AltaSolicitud extends SugarApi
                         $sol->prospeccion_propia_c=$prospeccion_propia;
 
                         //Se establece bandera para que Process Author no actualice la Cuenta a Prospecto Contactado
-                        $sol->no_convertir_prospecto_c=1;
+                        $sol->no_convertir_prospecto_c=0;
+
+                        //Se establece en validación comercial
+                        if((($sol->tipo_producto_c=="1" && $sol->negocio_c=="5" && ($sol->producto_financiero_c=="" || $sol->producto_financiero_c=="0")) || ($sol->tipo_producto_c=="2" && ($sol->negocio_c!="2" || $sol->negocio_c!="10"))) && $sol->tct_etapa_ddw_c=="SI"){
+                            $GLOBALS['log']->fatal("La solicitud dummy se establece como en Validación Comercial");
+                            $sol->estatus_c="1";
+                        }
 
                         $sol->save();
                         $beanSolicitud=$sol;
@@ -110,10 +111,7 @@ class AltaSolicitud extends SugarApi
                 $GLOBALS['log']->fatal("La cuenta NO tiene solicitud dummy, se procede a generar nueva solicitud");
                 //Si no existe solicitud Dummy, se crea la solicitud con los datos que se envían en la petición
                 $beanSolicitud= BeanFactory::newBean('Opportunities');
-                if((($beanSolicitud->tipo_producto_c=="1" && $beanSolicitud->negocio_c=="5" && ($beanSolicitud->producto_financiero_c=="" || $beanSolicitud->producto_financiero_c=="0")) || ($beanSolicitud->tipo_producto_c=="2" && ($beanSolicitud->negocio_c!="2" || $beanSolicitud->negocio_c!="10"))) && $beanSolicitud->tct_etapa_ddw_c=="SI"){
-                    $GLOBALS['log']->fatal("La solicitud dummy se establece como en Validación Comercial");
-                    $beanSolicitud->estatus_c="1";
-                }
+                
                 $beanSolicitud->tipo_producto_c=$tipo_producto;
                 $beanSolicitud->negocio_c=$negocio;
                 $beanSolicitud->producto_financiero_c=$producto_financiero;
@@ -131,7 +129,12 @@ class AltaSolicitud extends SugarApi
                 $beanSolicitud->prospeccion_propia_c=$prospeccion_propia;
 
                 //Se establece bandera para que Process Author no actualice la Cuenta a Prospecto Contactado
-                $beanSolicitud->no_convertir_prospecto_c=1;
+                $beanSolicitud->no_convertir_prospecto_c=0;
+
+                if((($beanSolicitud->tipo_producto_c=="1" && $beanSolicitud->negocio_c=="5" && ($beanSolicitud->producto_financiero_c=="" || $beanSolicitud->producto_financiero_c=="0")) || ($beanSolicitud->tipo_producto_c=="2" && ($beanSolicitud->negocio_c!="2" || $beanSolicitud->negocio_c!="10"))) && $beanSolicitud->tct_etapa_ddw_c=="SI"){
+                    $GLOBALS['log']->fatal("La solicitud dummy se establece como en Validación Comercial");
+                    $beanSolicitud->estatus_c="1";
+                }
                 
                 $beanSolicitud->save();
                 
