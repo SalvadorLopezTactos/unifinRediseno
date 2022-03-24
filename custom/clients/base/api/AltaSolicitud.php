@@ -110,13 +110,13 @@ class AltaSolicitud extends SugarApi
                 $beanSolicitud->onboarding_chk_c=$onboarding;
                 $beanSolicitud->account_id=$id_cuenta;
 
-                $sol->origen_c=$origen;
-                $sol->detalle_origen_c=$detalle_origen;
-                $sol->medio_digital_c=$medio_digital;
-                $sol->evento_c=$evento;
-                $sol->origen_busqueda_c=$origen_busqueda;
-                $sol->camara_c=$camara;
-                $sol->prospeccion_propia_c=$prospeccion_propia;
+                $beanSolicitud->origen_c=$origen;
+                $beanSolicitud->detalle_origen_c=$detalle_origen;
+                $beanSolicitud->medio_digital_c=$medio_digital;
+                $beanSolicitud->evento_c=$evento;
+                $beanSolicitud->origen_busqueda_c=$origen_busqueda;
+                $beanSolicitud->camara_c=$camara;
+                $beanSolicitud->prospeccion_propia_c=$prospeccion_propia;
                 
                 $beanSolicitud->save();
                 
