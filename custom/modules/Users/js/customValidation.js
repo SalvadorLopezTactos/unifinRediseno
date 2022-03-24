@@ -1,6 +1,22 @@
 SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'function'", function() {
     check_form = _.wrap(check_form, function(originalCheckFormFunction, originalCheckFormFunctionArg) {
         // Adding custom validation
+        if (document.getElementById("status").value  == 'Active' && document.getElementById("fecha_baja_c").value != "") {
+          alert("No puede capturar Fecha de Baja cuando el usuario es Activo ");
+          return false;
+        }else{
+          if (document.getElementById("status").value  == 'Inactive' && document.getElementById("fecha_baja_c").value != "") {
+            //var expresion = new RegExp("/^\d{1,2}\/\d{1,2}\/\d{2,4}$/");
+            var expresionC = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+            //new RegExp("/^(?:(?:(?:0?[1-9]|1\d|2[0-8])[/](?:0?[1-9]|1[0-2])|(?:29|30)[/](?:0?[13-9]|1[0-2])|31[/](?:0?[13578]|1[02]))[/](?:0{2,3}[1-9]|0{1,2}[1-9]\d|0?[1-9]\d{2}|[1-9]\d{3})|29[/]0?2[/](?:\d{1,2}(?:0[48]|[2468][048]|[13579][26])|(?:0?[48]|[13579][26]|[2468][048])00))$/");
+            var fecha_baja= document.getElementById("fecha_baja_c").value.trim();
+            var comprueba = expresionC.test(fecha_baja);
+            if (comprueba) {
+              alert("Formato incorrecto en Fecha de Baja, favor de seleccionar desde 'calendario'");
+              return false;
+            }
+          }
+        }
 
         //console.log(document.getElementById("contraseniaactual_c").value);
         //console.log(document.getElementById("nuevacontrasenia_c").value);
@@ -154,6 +170,7 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
         // } else {
         //     return false;
         // }
+
     });
 });
 
@@ -250,4 +267,5 @@ $(window).load(function(){
   catch(error){
       console.log(error.message);
   }
+
 });
