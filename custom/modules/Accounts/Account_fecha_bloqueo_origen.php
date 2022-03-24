@@ -115,7 +115,7 @@ class Account_fecha_bloqueo_origen
         //Cuando la cuenta es Nueva y viene desde onboarding, se genera Presolicitud como "Solicitud Inicial"
         //Cuando la cuenta ya es existente (actualización) y viene desde Onboarding
         if(!$args['isUpdate']){//Es creación
-            if($bean->onboarding_chk_c==1 && $bean->fetched_row['onboarding_chk_c'] != $bean->onboarding_chk_c){
+            if($bean->onboarding_chk_c==1){
                 $GLOBALS['log']->fatal("********** Entra condición para generar solicitud Dummy proveniente de Onboarding **********");
                 //Modificar Process Author: Solicitud inicial a Prospecto v2, añadiendo la condición que solo convierta
                 //a Prospecto Interesado cuando el nuevo campo no_convertir_prospecto_c es null o false
@@ -123,6 +123,7 @@ class Account_fecha_bloqueo_origen
                 //$bean_llamada->leads->add($bean->parent_id);
                 
                 $beanSolicitud= BeanFactory::newBean('Opportunities');
+                $beanSolicitud->tipo_producto_c="";
                 $beanSolicitud->tct_etapa_ddw_c='SI';
                 $beanSolicitud->onboarding_chk_c=1;
 
@@ -156,6 +157,7 @@ class Account_fecha_bloqueo_origen
                     $GLOBALS['log']->fatal("Valor del id del referido:".$bean->account_id1_c);
                     //Se genera solicitud dummy
                     $beanSolicitud= BeanFactory::newBean('Opportunities');
+                    $beanSolicitud->tipo_producto_c="";
                     $beanSolicitud->tct_etapa_ddw_c='SI';
                     $beanSolicitud->estatus_c='1';
                     $beanSolicitud->onboarding_chk_c=1;
