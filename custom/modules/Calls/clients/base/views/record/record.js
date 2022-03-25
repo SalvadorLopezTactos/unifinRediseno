@@ -1,5 +1,7 @@
 ({
     extendsFrom: 'RecordView',
+	cuenta:0,
+	persona:0,
 	description:0,
     fechaInicioTemp: "",
     personasRelData_list: null,
@@ -24,7 +26,7 @@
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
         this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
-		this.model.addValidationTask('VaildaPadres', _.bind(this.validaPadres, this));
+		//this.model.addValidationTask('VaildaPadres', _.bind(this.validaPadres, this));
         /*****************************************/
         //this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
         /*********************************************/
@@ -46,16 +48,18 @@
 		this.model.on('change:padres_c', this.llenaLlamada, this);
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
         // this.events['click a[name=edit_button]'] = 'fechascallsymeet';
-        this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
+        //this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
         /***********  Lead Management  *************/
         this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
         //this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
 		this.model.addValidationTask('description', _.bind(this.valida_description, this));
 		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+		this.model.addValidationTask('avisa_persona',_.bind(this.avisa_persona, this));
         this.model.on('sync', this._readOnlyDateSE, this);
         this.model.on('sync', this.validaRelLeadCall, this);
 		this.model.on('sync', this.roDescription, this);
+		this.model.on('sync', this.muestrAlerta, this);
         this.omiteLlamadaPreventiva();
     },
 
@@ -900,15 +904,15 @@
                 success: function (data) {
                     console.log(data);
                     person.TipoDePersona=data.tipodepersona_c;
-                   if (arrayPuestos.includes(puesto_usr) && data.tipodepersona_c == 'Persona Moral') {
+                   if (data.tipodepersona_c == 'Persona Moral') {
                        person.$('[data-name="persona_relacion_c"]').hide()
                         // Valida si el usuario firmado pertenece a la cuenta o a la llamada
                         var idUsrFirmado = app.user.attributes.id;
                         var idUsrLeading = data.user_id_c;
                         var idUsrAsignado = person.model.get('assigned_user_id');
-                        if (idUsrFirmado != idUsrAsignado ) {
+                        /*if (idUsrFirmado != idUsrAsignado ) {
                             $('[data-name="calls_persona_relacion"]').attr('style', 'pointer-events:none')
-                        }
+                        }*/
                     }
                     else {
                        person.$('[data-name="calls_persona_relacion"]').hide();
@@ -1033,12 +1037,11 @@
 
     hideLlamadas: function()
     {
-		this.$('div[data-name="padres_c"]').hide();
         this.$('div[data-name="accounts_calls_1_name"]').hide();
         this.$('div[data-name="leads_calls_1_name"]').hide();
 		this.$('div[data-name="tct_call_issabel_c"]').hide();
 		this.$('div[data-name="tct_call_from_issabel_c"]').hide();
-		if (this.model.get('tct_call_issabel_c') || this.model.get('tct_call_from_issabel_c')) this.$('div[data-name="padres_c"]').show();
+		this.$('div[data-name="detalle_c"]').hide();
     },
 
 	llenaLlamada:function(){
@@ -1114,6 +1117,63 @@
         }
         else {
           callback(null, fields, errors);
+        }
+    },
+
+    avisa_persona:function (fields, errors, callback) {
+		if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+			var account = app.api.buildURL('Accounts/' + this.model.get('parent_id'), null, null);
+			app.api.call('read', account, {}, {
+				success: _.bind(function (data) {
+					this.model.set('detalle_c','');
+					if(this.model.get('persona_relacion_c') == '' && data.tipodepersona_c == 'Persona Moral') {
+						app.alert.show('persona', {
+							level: 'warning',
+							messages: 'No se ha seleccionado la persona relacionada con quién se atendió la llamada. Por favor, ayúdanos completando esta información.',
+							autoClose: false
+						});
+						this.model.set('detalle_c',2);
+						this.persona = 1;
+					}
+					else {
+						this.persona = 0;
+					}
+					if(this.model.get('padres_c') == '' && window.padres > 0) {
+						app.alert.show('cuenta', {
+							level: 'warning',
+							messages: 'No se ha seleccionado una Cuenta Principal para vincular la llamada. Por favor, ayúdanos completando esta información.',
+							autoClose: false
+						});
+						this.model.set('detalle_c',1);
+						this.cuenta = 1;
+					}
+					else {
+						this.cuenta = 0;
+					}
+					callback(null, fields, errors);
+				}, this)
+			});
+		} else {
+			callback(null, fields, errors);
+		}
+    },
+
+    muestrAlerta: function () {
+        if(this.model.get('detalle_c') == 1 && this.cuenta == 0) {
+			app.alert.show("cuentas", {
+                level: "warning",
+                title: "Aviso",
+                messages: "No se ha seleccionado una Cuenta Principal para vincular la llamada. Por favor, ayúdanos completando esta información.",
+                autoClose: false
+            });
+        }
+        if(this.model.get('detalle_c') == 2 && this.persona == 0) {
+			app.alert.show("personas", {
+                level: "warning",
+                title: "Aviso",
+                messages: "No se ha seleccionado la persona relacionada con quién se atendió la llamada. Por favor, ayúdanos completando esta información.",
+                autoClose: false
+            });
         }
     },
 })

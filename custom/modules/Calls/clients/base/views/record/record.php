@@ -340,6 +340,9 @@ array (
               ),
               9 => 
               array (
+                'readonly' => false,
+                'name' => 'detalle_c',
+                'label' => 'LBL_DETALLE',
               ),
               10 => 
               array (

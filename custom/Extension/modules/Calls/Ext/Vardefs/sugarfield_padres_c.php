@@ -1,6 +1,9 @@
 <?php
- // created: 2021-07-29 19:34:01
-$dictionary['Call']['fields']['padres_c']['labelValue']='Padres Relacionados';
+ // created: 2022-03-22 12:51:10
+$dictionary['Call']['fields']['padres_c']['labelValue']='Cuenta Principal';
+$dictionary['Call']['fields']['padres_c']['dependency']='';
+$dictionary['Call']['fields']['padres_c']['required_formula']='';
+$dictionary['Call']['fields']['padres_c']['readonly_formula']='';
 $dictionary['Call']['fields']['padres_c']['visibility_grid']='';
 
  ?>

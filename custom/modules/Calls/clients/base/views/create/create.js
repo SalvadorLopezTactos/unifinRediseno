@@ -11,6 +11,7 @@
         this.on('render', this.disableparentsfields, this);
         // this.on('render',this.disabledates,this);
         this.on('render', this.noestatusedit, this);
+		this.model.on('change:padres_c', this.llenaLlamada, this);
         // this.model.on("change:date_start_date", _.bind(this.validaFecha, this));
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         //this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
@@ -20,6 +21,7 @@
         this.on('render', this.hidePErsonaEdit, this);
         this.model.addValidationTask('validaRelLeadCall', _.bind(this.validaRelLeadCall, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+		this.model.addValidationTask('avisa_persona',_.bind(this.avisa_persona, this));
 		this.on('render', this.hideLlamadas, this);
         this.omiteLlamadaPreventiva();
     },
@@ -289,7 +291,11 @@
             person.$('[data-name="calls_persona_relacion"]').hide();
             person.$('[data-name="persona_relacion_c"]').hide();
         }
-
+		if (tipoCuenta == 'Persona Moral' && parentModule == 'Accounts') {
+			person.$('[data-name="calls_persona_relacion"]').show();
+			this.$('[data-name="calls_persona_relacion"]').attr('style', '');
+		}
+		//person.$('[data-name="regimen_fiscal_c"]').hide();
     },
 
     omiteLlamadaPreventiva:function(){
@@ -357,12 +363,10 @@
 
     hideLlamadas: function()
     {
-		this.$('div[data-name="padres_c"]').hide();
         this.$('div[data-name="accounts_calls_1_name"]').hide();
         this.$('div[data-name="leads_calls_1_name"]').hide();
 		this.$('div[data-name="tct_call_issabel_c"]').hide();
 		this.$('div[data-name="tct_call_from_issabel_c"]').hide();
-		if (this.model.get('tct_call_issabel_c') || this.model.get('tct_call_from_issabel_c')) this.$('div[data-name="padres_c"]').show();
     },
 
     valida_usuarios_inactivos:function (fields, errors, callback) {
@@ -397,5 +401,39 @@
         else {
           callback(null, fields, errors);
         }
+    },
+
+	llenaLlamada:function(){
+		if(this.model.get('parent_type') == "Accounts") this.model.set('accounts_calls_1accounts_ida', this.model.get('padres_c'));
+    },
+
+    avisa_persona:function (fields, errors, callback) {
+		if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+			var account = app.api.buildURL('Accounts/' + this.model.get('parent_id'), null, null);
+			app.api.call('read', account, {}, {
+				success: _.bind(function (data) {
+					this.model.set('detalle_c','');
+					if(this.model.get('persona_relacion_c') == undefined && data.tipodepersona_c == 'Persona Moral') {
+						app.alert.show('persona', {
+							level: 'warning',
+							messages: 'No se ha seleccionado la persona relacionada con quién se atendió la llamada. Por favor, ayúdanos completando esta información.',
+							autoClose: false
+						});
+						this.model.set('detalle_c',2);
+					}
+					if(this.model.get('padres_c') == null && window.padres > 0) {
+						app.alert.show('cuenta', {
+							level: 'warning',
+							messages: 'No se ha seleccionado una Cuenta Principal para vincular la llamada. Por favor, ayúdanos completando esta información.',
+							autoClose: false
+						});
+						this.model.set('detalle_c',1);
+					}
+					callback(null, fields, errors);
+				}, this)
+			});
+		} else {
+			callback(null, fields, errors);
+		}
     },
 })
