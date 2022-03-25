@@ -367,6 +367,7 @@
         this.$('div[data-name="leads_calls_1_name"]').hide();
 		this.$('div[data-name="tct_call_issabel_c"]').hide();
 		this.$('div[data-name="tct_call_from_issabel_c"]').hide();
+		this.$('div[data-name="detalle_c"]').hide();
     },
 
     valida_usuarios_inactivos:function (fields, errors, callback) {
