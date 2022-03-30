@@ -30,7 +30,7 @@ class reasigna_class
         * Aplica para llamadas asociadas a personas && verifica existencia de nivel superior && Verifica que no sea asignación manual
       */
       //Identifica si tiene persona y valida que sea tipo Persona
-      if (!empty($bean->parent_id) && $bean->parent_type == 'Accounts' && $bean->asigna_manual_c == false) {
+      /*if (!empty($bean->parent_id) && $bean->parent_type == 'Accounts' && $bean->asigna_manual_c == false) {
         $GLOBALS['log']->fatal('Proceso: Asocia llamada - Inicia Persona');
 
         //Recupera persona
@@ -61,7 +61,7 @@ class reasigna_class
 
   				}
         }
-      }
+      }*/
     }
 
     function cambiAdmin ($bean = null, $event = null, $args = null)
