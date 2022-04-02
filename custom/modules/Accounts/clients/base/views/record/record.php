@@ -240,6 +240,13 @@ array (
                 'label' => 'Enviar al portal de proveedor',
                 'event' => 'button:enviar_portal_proveedores:click',
               ),
+              18 => 
+              array (
+                'name' => 'proveedor_quantico',
+                'type' => 'rowaction',
+                'label' => 'Tarea IE Proveedor Quantico',
+                'event' => 'button:proveedor_quantico:click',
+              ),
             ),
           ),
           9 => 
