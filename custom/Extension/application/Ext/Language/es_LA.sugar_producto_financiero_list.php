@@ -77,5 +77,5 @@ $app_list_strings['producto_financiero_list']=array (
   82 => 'CRÉDITO MEDIANO PLAZO DÓLARES',
   83 => 'UNIFACTORING',
   84 => 'ARRENDAMIENTO OPERATIVO',
-  85 => 'UNIFINCARD',
+  85 => 'UNIFIN CARD',
 );
