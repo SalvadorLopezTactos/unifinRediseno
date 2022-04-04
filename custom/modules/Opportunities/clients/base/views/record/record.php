@@ -1029,6 +1029,25 @@ array (
               15 => 
               array (
               ),
+              16 => 
+              array (
+                'readonly' => false,
+                'name' => 'referenciador_sc_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERENCIADOR_SC',
+              ),
+              17 => 
+              array (
+              ),
+              18 => 
+              array (
+                'readonly' => false,
+                'name' => 'codigo_expo_c',
+                'label' => 'LBL_CODIGO_EXPO',
+              ),
+              19 => 
+              array (
+              ),
             ),
           ),
           4 => 
