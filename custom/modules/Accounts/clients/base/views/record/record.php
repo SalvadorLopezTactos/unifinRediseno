@@ -558,8 +558,6 @@ array (
               ),
               19 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
               ),
               20 => 
               array (
@@ -568,8 +566,6 @@ array (
               ),
               21 => 
               array (
-                'name' => 'alianza_soc_chk_c',
-                'label' => 'LBL_ALIANZA_SOC_CHK',
               ),
               22 => 
               array (
@@ -602,6 +598,17 @@ array (
                 'name' => 'tct_que_promotor_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_QUE_PROMOTOR_REL',
+              ),
+              26 => 
+              array (
+                'readonly' => false,
+                'name' => 'codigo_expo_c',
+                'label' => 'LBL_CODIGO_EXPO',
+              ),
+              27 => 
+              array (
+                'name' => 'alianza_soc_chk_c',
+                'label' => 'LBL_ALIANZA_SOC_CHK',
               ),
             ),
           ),

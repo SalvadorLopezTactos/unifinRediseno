@@ -1334,6 +1334,7 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                         $bean->camara_c=$beanCuenta->camara_c;
                         $bean->account_id4_c=$beanCuenta->account_id_c; //Socio comercial
                         $bean->account_id3_c=$beanCuenta->account_id1_c; //Vendor
+                        $bean->codigo_expo_c=$beanCuenta->codigo_expo_c; //Código Expo
                     }
                 }else{
                     //No tiene solicitudes, por lo tanto, ésta solicitud creada es la primera
@@ -1347,6 +1348,7 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                     $bean->camara_c=$beanCuenta->camara_c;
                     $bean->account_id4_c=$beanCuenta->account_id_c; //Socio comercial
                     $bean->account_id3_c=$beanCuenta->account_id1_c; //Vendor
+                    $bean->codigo_expo_c=$beanCuenta->codigo_expo_c; //Código Expo
 
                 }
 

@@ -1137,7 +1137,7 @@
             self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
-        var origen = this.model.get('origen_cuenta_c');
+        /*var origen = this.model.get('origen_cuenta_c');
         if (origen == "Marketing" || origen == "2") {
             var self = this;
             self.noEditFields.push('origen_cuenta_c');
@@ -1150,7 +1150,7 @@
             self.noEditFields.push('evento_c');
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
-        }
+        }*/
 
         if (App.user.attributes.deudor_factoraje_c != true) {
             //Readonly check factoraje
@@ -7061,6 +7061,8 @@
             $('[data-name="evento_c"]').css({ "pointer-events":"none"});
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
             $('[data-name="tct_que_promotor_rel_c"]').css({ "pointer-events":"none"});
+            $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
+
 
         }
     },

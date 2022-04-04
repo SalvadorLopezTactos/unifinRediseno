@@ -1039,6 +1039,15 @@ array (
               17 => 
               array (
               ),
+              18 => 
+              array (
+                'readonly' => false,
+                'name' => 'codigo_expo_c',
+                'label' => 'LBL_CODIGO_EXPO',
+              ),
+              19 => 
+              array (
+              ),
             ),
           ),
           4 => 

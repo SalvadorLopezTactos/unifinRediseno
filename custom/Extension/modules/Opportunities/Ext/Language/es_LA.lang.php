@@ -260,3 +260,4 @@ $mod_strings['LBL_NO_CONVERTIR_PROSPECTO'] = 'No convertir a prospecto interesad
 $mod_strings['LBL_REFERIDO_CLIENTE_PROV_C'] = 'Referido';
 $mod_strings['LBL_REFERENCIADOR_SC_ACCOUNT_ID'] = 'Referenciado por SC (relacionado Cuenta ID)';
 $mod_strings['LBL_REFERENCIADOR_SC'] = 'Referenciado por SC';
+$mod_strings['LBL_CODIGO_EXPO'] = 'Código de Expo';

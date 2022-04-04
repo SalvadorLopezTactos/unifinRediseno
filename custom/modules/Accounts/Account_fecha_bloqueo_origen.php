@@ -150,6 +150,7 @@ class Account_fecha_bloqueo_origen
                 $beanSolicitud->camara_c=$bean->camara_c;
                 $beanSolicitud->prospeccion_propia_c=$bean->prospeccion_propia_c;
                 $beanSolicitud->account_id4_c=$bean->account_id_c; //Socio comercial
+                $beanSolicitud->codigo_expo_c=$bean->codigo_expo_c; //Código Expo
                 //Relaciona Solicitud con la cuenta Actual
                 $beanSolicitud->account_id=$bean->id;
                 $beanSolicitud->save();
@@ -180,6 +181,7 @@ class Account_fecha_bloqueo_origen
                     $beanSolicitud->origen_busqueda_c=$bean->origen_busqueda_c;
                     $beanSolicitud->camara_c=$bean->camara_c;
                     $beanSolicitud->prospeccion_propia_c=$bean->prospeccion_propia_c;
+                    $beanSolicitud->codigo_expo_c=$bean->codigo_expo_c; //Código Expo
                     $beanSolicitud->account_id4_c=$bean->account_id_c; //Socio comercial
                     //Relaciona Solicitud con la cuenta Actual
                     $beanSolicitud->account_id=$bean->id;

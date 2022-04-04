@@ -750,6 +750,7 @@ class altaLeadServices extends SugarApi
                 $bean_Lead->punto_contacto_c = $dataOrigen['punto_contacto_c'];
                 break;
         }*/
+        $bean_Lead->codigo_expo_c = $dataOrigen['codigo_expo_c'];
         $bean_Lead->punto_contacto_c = $punto_contacto;
         $bean_Lead->origen_ag_tel_c = $dataOrigen['origen_ag_tel_c'];
         $bean_Lead->promotor_c = $dataOrigen['promotor_c'];

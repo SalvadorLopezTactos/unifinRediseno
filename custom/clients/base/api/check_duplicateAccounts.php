@@ -200,6 +200,7 @@ SITE;
         $bean_account->tct_que_promotor_rel_c = $bean_Leads->origen_ag_tel_c;
         $bean_account->account_id1_c = $bean_Leads->account_id_c; //Vendor
         $bean_account->account_id_c = $bean_Leads->account_id1_c; //Socio comercial
+        $bean_account->codigo_expo_c = $bean_Leads->codigo_expo_c; //Código Expo
         $bean_account->nombre_comercial_c = $bean_Leads->nombre_empresa_c;
         $bean_account->razonsocial_c = $bean_Leads->nombre_empresa_c;
         $bean_account->primernombre_c = $bean_Leads->nombre_c;

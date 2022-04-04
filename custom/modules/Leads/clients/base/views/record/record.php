@@ -259,27 +259,46 @@ array (
               ),
               22 => 
               array (
+                'readonly' => false,
+                'name' => 'referido_cliente_prov_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERIDO_CLIENTE_PROV',
+              ),
+              23 => 
+              array (
+              ),
+              24 => 
+              array (
+                'readonly' => false,
+                'name' => 'codigo_expo_c',
+                'label' => 'LBL_CODIGO_EXPO',
+              ),
+              25 => 
+              array (
+              ),
+              26 => 
+              array (
                 'name' => 'origen_ag_tel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ORIGEN_AG_TEL_C',
               ),
-              23 => 
+              27 => 
               array (
                 'name' => 'promotor_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTOR_C',
               ),
-              24 => 
+              28 => 
               array (
                 'name' => 'prospeccion_propia_c',
                 'label' => 'LBL_PROSPECCION_PROPIA',
               ),
-              25 => 
+              29 => 
               array (
                 'name' => 'alianza_soc_chk_c',
                 'label' => 'LBL_ALIANZA_SOC_CHK_C',
               ),
-              26 => 
+              30 => 
               array (
                 'related_fields' => 
                 array (
@@ -289,7 +308,7 @@ array (
                 'name' => 'ventas_anuales_c',
                 'label' => 'LBL_VENTAS_ANUALES_C',
               ),
-              27 => 
+              31 => 
               array (
                 'related_fields' => 
                 array (
@@ -299,21 +318,21 @@ array (
                 'name' => 'potencial_lead_c',
                 'label' => 'LBL_POTENCIAL_LEAD',
               ),
-              28 => 
+              32 => 
               array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
               ),
-              29 => 
+              33 => 
               array (
                 'name' => 'zona_geografica_c',
                 'label' => 'LBL_ZONA_GEOGRAFICA_C',
               ),
-              30 => 
+              34 => 
               array (
                 'name' => 'email',
               ),
-              31 => 
+              35 => 
               array (
                 'name' => 'phone_mobile',
                 'label' => 'LBL_MOBILE_PHONE',
@@ -333,12 +352,12 @@ array (
                   ),
                 ),
               ),
-              32 => 
+              36 => 
               array (
                 'name' => 'o_registro_reus_c',
                 'label' => 'LBL_O_REGISTRO_REUS_C',
               ),
-              33 => 
+              37 => 
               array (
                 'name' => 'phone_home',
                 'comment' => 'Home phone number of the contact',
@@ -359,7 +378,7 @@ array (
                   ),
                 ),
               ),
-              34 => 
+              38 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -379,199 +398,199 @@ array (
                   ),
                 ),
               ),
-              35 => 
+              39 => 
               array (
                 'readonly' => false,
                 'name' => 'c_estatus_telefono_c',
                 'studio' => 'visible',
                 'label' => 'LBL_C_ESTATUS_TELEFONO',
               ),
-              36 => 
+              40 => 
               array (
                 'readonly' => false,
                 'name' => 'm_estatus_telefono_c',
                 'studio' => 'visible',
                 'label' => 'LBL_M_ESTATUS_TELEFONO',
               ),
-              37 => 
+              41 => 
               array (
                 'readonly' => false,
                 'name' => 'o_estatus_telefono_c',
                 'studio' => 'visible',
                 'label' => 'LBL_O_ESTATUS_TELEFONO',
               ),
-              38 => 
+              42 => 
               array (
                 'name' => 'lead_telefonos',
                 'studio' => 'visible',
                 'label' => 'LBL_LEAD_TELEFONOS',
                 'span' => 12,
               ),
-              39 => 
+              43 => 
               array (
                 'name' => 'detalle_plataforma_c',
                 'studio' => 'visible',
                 'label' => 'LBL_DETALLE_PLATAFORMA_C',
               ),
-              40 => 
+              44 => 
               array (
                 'name' => 'oficina_c',
                 'label' => 'LBL_OFICINA',
               ),
-              41 => 
+              45 => 
               array (
                 'name' => 'nombre_de_cargar_c',
                 'label' => 'LBL_NOMBRE_DE_CARGAR',
               ),
-              42 => 
+              46 => 
               array (
                 'name' => 'alianza_c',
                 'label' => 'LBL_ALIANZA_C',
               ),
-              43 => 
+              47 => 
               array (
                 'name' => 'lead_cancelado_c',
                 'label' => 'LBL_LEAD_CANCELADO_C',
               ),
-              44 => 
+              48 => 
               array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
               ),
-              45 => 
+              49 => 
               array (
                 'name' => 'submotivo_cancelacion_c',
                 'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
                 'span' => 12,
               ),
-              46 => 
+              50 => 
               array (
                 'name' => 'assigned_user_name',
               ),
-              47 => 
+              51 => 
               array (
                 'name' => 'account_to_lead',
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
-              48 => 
+              52 => 
               array (
                 'name' => 'status_management_c',
                 'label' => 'LBL_STATUS_MANAGEMENT',
               ),
-              49 => 
+              53 => 
               array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
-              50 => 
+              54 => 
               array (
                 'name' => 'url_originacion_c',
                 'label' => 'LBL_URL_ORIGINACION_C',
                 'readonly' => true,
               ),
-              51 => 
+              55 => 
               array (
               ),
-              52 => 
+              56 => 
               array (
                 'name' => 'contacto_asociado_c',
                 'label' => 'LBL_CONTACTO_ASOCIADO_C',
               ),
-              53 => 
+              57 => 
               array (
                 'name' => 'leads_leads_1_name',
                 'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
               ),
-              54 => 
+              58 => 
               array (
                 'name' => 'pb_division_c',
                 'label' => 'LBL_PB_DIVISION',
               ),
-              55 => 
+              59 => 
               array (
                 'name' => 'pb_grupo_c',
                 'label' => 'LBL_PB_GRUPO',
               ),
-              56 => 
+              60 => 
               array (
                 'name' => 'pb_clase_c',
                 'label' => 'LBL_PB_CLASE',
               ),
-              57 => 
+              61 => 
               array (
                 'name' => 'actividad_economica_c',
                 'label' => 'LBL_ACTIVIDAD_ECONOMICA',
               ),
-              58 => 
+              62 => 
               array (
                 'name' => 'sector_economico_c',
                 'label' => 'LBL_SECTOR_ECONOMICO',
               ),
-              59 => 
+              63 => 
               array (
                 'name' => 'subsector_c',
                 'label' => 'LBL_SUBSECTOR',
               ),
-              60 => 
+              64 => 
               array (
                 'name' => 'macrosector_c',
                 'label' => 'LBL_MACROSECTOR_C',
               ),
-              61 => 
+              65 => 
               array (
                 'name' => 'inegi_clase_c',
                 'label' => 'LBL_INEGI_CLASE',
               ),
-              62 => 
+              66 => 
               array (
                 'name' => 'inegi_macro_c',
                 'label' => 'LBL_INEGI_MACRO',
               ),
-              63 => 
+              67 => 
               array (
                 'name' => 'inegi_rama_c',
                 'label' => 'LBL_INEGI_RAMA',
               ),
-              64 => 
+              68 => 
               array (
                 'name' => 'inegi_sector_c',
                 'label' => 'LBL_INEGI_SECTOR',
               ),
-              65 => 
+              69 => 
               array (
                 'name' => 'inegi_subrama_c',
                 'label' => 'LBL_INEGI_SUBRAMA',
               ),
-              66 => 
+              70 => 
               array (
                 'name' => 'inegi_subsector_c',
                 'label' => 'LBL_INEGI_SUBSECTOR',
               ),
-              67 => 
+              71 => 
               array (
                 'name' => 'metodo_asignacion_lm_c',
                 'label' => 'LBL_METODO_ASIGNACION_LM_C',
               ),
-              68 => 
+              72 => 
               array (
                 'name' => 'homonimo_c',
                 'label' => 'LBL_HOMONIMO',
               ),
-              69 => 
+              73 => 
               array (
                 'name' => 'omite_match_c',
                 'label' => 'LBL_OMITE_MATCH',
               ),
-              70 => 
+              74 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              71 => 
+              75 => 
               array (
               ),
-              72 => 
+              76 => 
               array (
                 'name' => 'lead_direcciones',
                 'studio' => 'visible',
