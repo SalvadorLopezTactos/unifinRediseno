@@ -312,7 +312,7 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
-        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));      
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
@@ -4152,7 +4152,6 @@
         var faltantesFF = "";
         var faltantesCA = "";
         var faltantesCS = "";
-        var faltantesCR = "";
 
         //Valida requeridos a partir de Prospecto Interesado
         var tipoCuenta = this.model.get('tipo_registro_cuenta_c');
@@ -4250,14 +4249,7 @@
                     title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
                 });
             }
-            if (faltantesCR != "") {
-                errors['PreguntasCR'] = "";
-                errors['PreguntasCR'].required = true;
-                app.alert.show("faltantesCR", {
-                    level: "error",
-                    title: "PLD Crédito Revolvente - Faltan las siguientes preguntas por contestar: <br>" + faltantesCR
-                });
-            }
+            
         }
         callback(null, fields, errors);
     },
@@ -4531,8 +4523,8 @@
 
     proveedorRecursos: function (fields, errors, callback) {
         if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" || $('.campo10ddw-ce').select2('val') == "2") {
-
-            var apicall = app.api.buildURL('Rel_Relaciones?filter[0][rel_relaciones_accounts_1accounts_ida][$equals]=' + this.model.get("id"), null);
+            var Cuenta = this.model.get('id')
+            var apicall = app.api.buildURL('Rel_Relaciones/?filter[0][$or][0][account_id1_c][$equals]=' + Cuenta +'&filter[0][$or][1][rel_relaciones_accounts_1accounts_ida][$equals]=' + Cuenta, null, null);
             app.api.call('GET', apicall, {}, {
                 success: _.bind(function (data) {
 
@@ -4543,11 +4535,18 @@
                     var relacioncr =0;
                     var productos = "";
                     if (data.records.length > 0) {
+                        var esPropietario=false;
+                        var esCLiente=false;
+                        var esTercero=false;
+                        var tieneProvRec=false;
+                        esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
+                        tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
+                        esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo10 =='2') ? true : false;
                         for (var l = 0; l < data.records.length; l++) {
                             //Producto Arrendamiento Puro
                             if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacionl++;
 
                                 }
@@ -4555,29 +4554,32 @@
                             //Producto Credito Automotriz
                             if (App.user.attributes.productos_c.includes(3) && $('.campo4ddw-ca').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CA')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CA')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacionca++;
                                 }
                             }
                             //Producto Factoraje Financiero
                             if (App.user.attributes.productos_c.includes(4) && $('.campo4ddw-ff').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos F')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos F')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacionff++;
                                 }
                             }
                             //Producto Credito Simple
                             if ($('.campo4ddw-cs').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacioncs++;
                                 }
                             }
                             //Credito Envolvente
                             if (App.user.attributes.productos_c.includes(8) && $('.campo10ddw-ce').select2('val') == "2") {
-
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CR')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CR') && data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacioncr++;
+                                    tieneProvRec=true;
+                                }
+                                if (data.records[l].relaciones_activas.includes('Propietario Real') && data.records[l].account_id1_c==Cuenta) { 
+                                    esPropietario=true;
                                 }
                             }
                         }
@@ -4621,7 +4623,7 @@
                         $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
                     }
                     //Validacion Credito revolvente
-                    if (relacioncr == 0 && $('.campo10ddw-ce').select2('val') == "2") {
+                    if((!esPropietario && esTercero) || (esCLiente && esTercero) && !tieneProvRec){
                         $('.campo10ddw-ce').find('.select2-choice').css('border-color', 'red');
                         productos = productos + '<b>Crédito Revolvente</b><br>';
                         errors['error_CR'] = errors['error_FPR'] || {};
@@ -8258,6 +8260,7 @@ validaReqUniclickInfo: function () {
         }
     },
 
+
     ocultaproveedor: function () {
 		var Proveedor = 0;
         var Boton1 = this.getField("proveedor_quantico");
@@ -8289,4 +8292,53 @@ validaReqUniclickInfo: function () {
             }, this),
         });		
     },
+validaPropRealCR: function (fields, errors, callback) {
+        var esPropietario=false;
+       var esCLiente=false;
+       var esTercero=false;
+       var tienePR=false;
+   
+       esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
+       esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo8=='2') ? true : false;
+       tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
+       
+       
+        if(App.user.attributes.productos_c.includes('14')){
+                if((this.model.get('tipo_registro_cuenta_c')!="4" || this.model.get('tipo_registro_cuenta_c')!="5") && !esCLiente){
+                    
+                    //Realizamos apicall para buscar que la cuenta tenga alguna relacion con otra
+                    var Cuenta=this.model.get('id');
+                    var consulta = app.api.buildURL('Rel_Relaciones/?filter[0][account_id1_c][$equals]=' + Cuenta, null, null);
+                       app.api.call('read', consulta, {}, {
+                           success: _.bind(function (data) {
+                               if(data.records.length>0){
+                                   //Validamos que las relaciones sean de tipo Propietario Real
+                                   for (var i = 0; i < data.records.length; i++) {
+                                       if (data.records[i].relaciones_activas == 'Propietario Real') { 
+                                           esPropietario=true;
+                                       }
+                                   }
+                                   
+                                   if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
+                                           $('.campo9rel-ap').find('.select2-choice').css('border-color', 'red');
+   
+                                       app.alert.show("existen_relaciones_PR", {
+                                       level: "error",
+                                       messages: "Favor de seleccionar un <b>Propietario Real</b> en la sección de PLD- Crédito Revolvente.",
+                                       autoClose: false
+                                       });
+                                       errors['propetariorealCR'] = errors['propetariorealCR'] || {};
+                                       errors['propetariorealCR'].required = true;
+                                   }   
+                               }
+                               callback(null, fields, errors);
+                           }, this)
+                        });
+                }else{
+                    callback(null, fields, errors);
+                }
+       }else{
+           callback(null, fields, errors);
+       }	   
+   },
 })
