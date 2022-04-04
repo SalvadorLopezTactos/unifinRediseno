@@ -140,3 +140,5 @@ $mod_strings['LBL_GENERO'] = 'Género';
 $mod_strings['LBL_FECHA_BLOQUEO_ORIGEN'] = 'Fecha Bloqueo Origen';
 $mod_strings['LBL_ONBOARDING_CHK'] = 'Onboarding';
 $mod_strings['LBL_REFERIDO_CLIENTE_PROV'] = 'Referido';
+$mod_strings['LBL_REFERENCIADOR_ACCOUNT_ID'] = 'Referenciado por (relacionado Cuenta ID)';
+$mod_strings['LBL_REFERENCIADOR'] = 'Referenciado por';

@@ -1029,6 +1029,16 @@ array (
               15 => 
               array (
               ),
+              16 => 
+              array (
+                'readonly' => false,
+                'name' => 'referenciador_sc_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERENCIADOR_SC',
+              ),
+              17 => 
+              array (
+              ),
             ),
           ),
           4 => 

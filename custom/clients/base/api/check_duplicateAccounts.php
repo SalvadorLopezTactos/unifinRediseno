@@ -198,6 +198,8 @@ SITE;
         $bean_account->tct_origen_busqueda_txf_c = $bean_Leads->origen_busqueda_c;
         $bean_account->camara_c = $bean_Leads->camara_c;
         $bean_account->tct_que_promotor_rel_c = $bean_Leads->origen_ag_tel_c;
+        $bean_account->account_id1_c = $bean_Leads->account_id_c; //Vendor
+        $bean_account->account_id_c = $bean_Leads->account_id1_c; //Socio comercial
         $bean_account->nombre_comercial_c = $bean_Leads->nombre_empresa_c;
         $bean_account->razonsocial_c = $bean_Leads->nombre_empresa_c;
         $bean_account->primernombre_c = $bean_Leads->nombre_c;
@@ -211,7 +213,7 @@ SITE;
         $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
-		$bean_account->rfc_c = $bean_Leads->rfc_c;
+		    $bean_account->rfc_c = $bean_Leads->rfc_c;
         $bean_account->convertido_c = 1;
         $bean_account->onboarding_chk_c=$bean_Leads->onboarding_chk_c;
         $GLOBALS['log']->fatal("lead". $bean_Leads->origen_c .'-'.$bean_Leads->detalle_origen_c);
