@@ -1,5 +1,5 @@
 <?php
- // created: 2022-03-16 16:08:09
+ // created: 2022-04-04 17:44:57
 
 $app_list_strings['origen_lead_list']=array (
   '' => '',
@@ -14,4 +14,5 @@ $app_list_strings['origen_lead_list']=array (
   14 => 'Closer',
   15 => 'Growth',
   17 => 'Unilease',
+  18 => 'Expos',
 );

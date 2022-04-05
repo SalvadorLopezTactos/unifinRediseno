@@ -1,5 +1,5 @@
 <?php
- // created: 2021-12-28 12:31:09
+ // created: 2022-04-04 15:17:08
 
 $app_list_strings['producto_financiero_list']=array (
   0 => '',
@@ -33,7 +33,7 @@ $app_list_strings['producto_financiero_list']=array (
   38 => 'ARRENDAMIENTO FRONTERA 8%',
   39 => 'UNICREDIT',
   40 => 'CRÉDITO SOS',
-  41 => 'UNILEASE',
+  41 => 'UNILEASING',
   42 => 'ARRENDAMIENTO ESTRUCTURADO',
   43 => 'CRÉDITO ESTRUCTURADO',
   44 => 'ARRENDAMIENTO ESTRUCTURADO USD',
@@ -77,4 +77,5 @@ $app_list_strings['producto_financiero_list']=array (
   82 => 'CRÉDITO MEDIANO PLAZO DÓLARES',
   83 => 'UNIFACTORING',
   84 => 'ARRENDAMIENTO OPERATIVO',
+  85 => 'UNIFIN CARD',
 );
