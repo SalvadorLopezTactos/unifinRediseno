@@ -1,5 +1,5 @@
 <?php
-// created: 2020-01-30 12:06:14
+// created: 2022-04-06 12:40:40
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -15,8 +15,18 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
     'default' => true,
   ),
+  'detalle_c' => 
+  array (
+    'readonly_formula' => '',
+    'readonly' => false,
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_DETALLE',
+    'width' => 10,
+  ),
   'tct_resultado_llamada_ddw_c' => 
   array (
+    'readonly' => false,
     'type' => 'enum',
     'default' => true,
     'vname' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',

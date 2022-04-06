@@ -1,5 +1,5 @@
 <?php
-// created: 2019-01-16 11:23:50
+// created: 2022-04-06 12:40:09
 $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
   'panels' => 
   array (
@@ -36,6 +36,14 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         ),
         3 => 
         array (
+          'name' => 'detalle_c',
+          'label' => 'LBL_DETALLE',
+          'enabled' => true,
+          'readonly' => false,
+          'default' => true,
+        ),
+        4 => 
+        array (
           'name' => 'date_start',
           'label' => 'LBL_LIST_DATE',
           'type' => 'datetimecombo-colorcoded',
@@ -49,7 +57,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
             0 => 'status',
           ),
         ),
-        4 => 
+        5 => 
         array (
           'label' => 'LBL_DATE_END',
           'enabled' => true,
@@ -57,7 +65,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
           'name' => 'date_end',
           'css_class' => 'overflow-visible',
         ),
-        5 => 
+        6 => 
         array (
           'name' => 'parent_name',
           'label' => 'LBL_LIST_RELATED_TO',
@@ -67,7 +75,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
           'sortable' => false,
           'default' => true,
         ),
-        6 => 
+        7 => 
         array (
           'name' => 'assigned_user_name',
           'target_record_key' => 'assigned_user_id',
@@ -92,7 +100,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         'icon' => 'fa-eye',
         'acl_action' => 'view',
       ),
-      2 =>
+      2 => 
       array (
         'type' => 'unlink-action',
         'icon' => 'fa-chain-broken',
