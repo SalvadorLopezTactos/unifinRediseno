@@ -319,7 +319,7 @@
         //this.model.on('sync',this.validaReqUniclickInfo,this);
 
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
-        //this.model.on('sync', this.deshabilitaOrigenCuenta, this);
+        this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
@@ -7062,6 +7062,7 @@
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
             $('[data-name="tct_que_promotor_rel_c"]').css({ "pointer-events":"none"});
             $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
+            $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
 
 
         }
