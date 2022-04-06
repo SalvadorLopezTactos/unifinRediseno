@@ -8320,7 +8320,7 @@ validaPropRealCR: function (fields, errors, callback) {
                                    }
                                    
                                    if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
-                                           $('.campo9rel-ap').find('.select2-choice').css('border-color', 'red');
+                                           $('.campo9rel-ce').find('.select2-choice').css('border-color', 'red');
    
                                        app.alert.show("existen_relaciones_PR", {
                                        level: "error",
