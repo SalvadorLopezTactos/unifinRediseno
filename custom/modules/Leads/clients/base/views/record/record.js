@@ -517,7 +517,7 @@
         }
 
         //Se omite función para deshabilitar origen, ya que se opta por hacerlo a través de dependencias
-        //this.deshabilitaOrigen();
+        this.deshabilitaOrigen();
     },
 
     deshabilitaOrigen:function(){
@@ -568,6 +568,7 @@
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
             $('[data-name="promotor_c"]').css({ "pointer-events":"none"});
             $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
+            $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
         }
     },
 
