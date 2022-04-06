@@ -8317,7 +8317,7 @@ validaPropRealCR: function (fields, errors, callback) {
                                if(data.records.length>0){
                                    //Validamos que las relaciones sean de tipo Propietario Real
                                    for (var i = 0; i < data.records.length; i++) {
-                                       if (data.records[i].relaciones_activas == 'Propietario Real') {
+                                       if (data.records[i].relaciones_activas.includes('Propietario Real')) {
                                            esPropietario=true;
                                        }
                                    }
