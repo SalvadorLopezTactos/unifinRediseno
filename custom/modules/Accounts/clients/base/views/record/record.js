@@ -4573,7 +4573,7 @@
                                 }
                             }
                             //Credito Envolvente
-                            if (App.user.attributes.productos_c.includes(8) || App.user.attributes.productos_c.includes(14) && $('.campo10ddw-ce').select2('val') == "2") {
+                            if ((App.user.attributes.productos_c.includes(8) || App.user.attributes.productos_c.includes(14)) && $('.campo10ddw-ce').select2('val') == "2") {
                                 if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CR') && data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacioncr++;
                                     tieneProvRec=true;
