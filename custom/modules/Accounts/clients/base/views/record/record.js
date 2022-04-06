@@ -8306,7 +8306,7 @@ validaPropRealCR: function (fields, errors, callback) {
 
 
         if(App.user.attributes.productos_c.includes('14')){
-                if((this.model.get('tipo_registro_cuenta_c')!="4" || this.model.get('tipo_registro_cuenta_c')!="5") && !esCLiente){
+                if((this.model.get('tipo_registro_cuenta_c')!="4" || this.model.get('tipo_registro_cuenta_c')!="5")){
 
                     //Realizamos apicall para buscar que la cuenta tenga alguna relacion con otra
                     var Cuenta=this.model.get('id');
