@@ -8310,7 +8310,7 @@ validaPropRealCR: function (fields, errors, callback) {
 
                     //Realizamos apicall para buscar que la cuenta tenga alguna relacion con otra
                     var Cuenta=this.model.get('id');
-                    var consulta = app.api.buildURL('Rel_Relaciones/?filter[0][account_id1_c][$equals]=' + Cuenta, null, null);
+                    var consulta = app.api.buildURL('Rel_Relaciones/?filter[0][account_id1_c][$equals]=' + Cuenta +'&filter[0][$or][1][rel_relaciones_accounts_1accounts_ida][$equals]=' + Cuenta, null, null);
                        app.api.call('read', consulta, {}, {
                            success: _.bind(function (data) {
                                if(data.records.length>0){
