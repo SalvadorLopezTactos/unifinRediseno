@@ -903,9 +903,9 @@
         cont_dir.render();
 
         //PLD
-        var accounts_tct_pld_1 = app.utils.deepCopy(this.prev_ProductosPLD);
+        var accounts_tct_pld_1 = app.utils.deepCopy(contexto_cuenta.prev_ProductosPLD);
         this.model.set('accounts_tct_pld_1', accounts_tct_pld_1);
-        this.ProductosPLD = accounts_tct_pld_1;
+        pld.ProductosPLD = accounts_tct_pld_1;
         pld.render();
         //Potencial Autos
         Pautos.autos = app.utils.deepCopy(Pautos.prev_autos);
