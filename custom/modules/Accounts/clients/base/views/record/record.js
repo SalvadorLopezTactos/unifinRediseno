@@ -312,7 +312,7 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
-        this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));      
+        this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
@@ -1137,7 +1137,7 @@
             self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
-        var origen = this.model.get('origen_cuenta_c');
+        /*var origen = this.model.get('origen_cuenta_c');
         if (origen == "Marketing" || origen == "2") {
             var self = this;
             self.noEditFields.push('origen_cuenta_c');
@@ -1150,7 +1150,7 @@
             self.noEditFields.push('evento_c');
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
-        }
+        }*/
 
         if (App.user.attributes.deudor_factoraje_c != true) {
             //Readonly check factoraje
@@ -1175,9 +1175,9 @@
             if(Banderita!=1){
                 self.noEditFields.push('tipo_proveedor_compras_c');
             }
-                
-            
-          
+
+
+
         }
         this._super('_renderHtml');
     },
@@ -4249,7 +4249,7 @@
                     title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
                 });
             }
-            
+
         }
         callback(null, fields, errors);
     },
@@ -4578,7 +4578,7 @@
                                     relacioncr++;
                                     tieneProvRec=true;
                                 }
-                                if (data.records[l].relaciones_activas.includes('Propietario Real') && data.records[l].account_id1_c==Cuenta) { 
+                                if (data.records[l].relaciones_activas.includes('Propietario Real') && data.records[l].account_id1_c==Cuenta) {
                                     esPropietario=true;
                                 }
                             }
@@ -7061,14 +7061,16 @@
             $('[data-name="evento_c"]').css({ "pointer-events":"none"});
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
             $('[data-name="tct_que_promotor_rel_c"]').css({ "pointer-events":"none"});
-            
+            $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
+
+
         }
     },
 
     estableceOpcionesOrigen:function(){
         var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
 
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth
             Object.keys(opciones_origen).forEach(function (key) {
                 if (key == "14" || key == "15") {
                     delete opciones_origen[key];
@@ -8160,9 +8162,9 @@ validaReqUniclickInfo: function () {
                 if (data[7].contents!=""){
                     this.datacondiciones = [];
                     if(data[7].contents.records.length > 0) {
-                contexto_cuenta.datacondiciones = data;
-                this.datacondiciones = data;
-            }
+                      contexto_cuenta.datacondiciones = data[7].contents;
+                      this.datacondiciones = data[7].contents;
+                    }
                 }
                 //Final de funcion, mandamos ejecutar funcion de requniclick
                 this.validaReqUniclickInfo();
@@ -8290,22 +8292,22 @@ validaReqUniclickInfo: function () {
                     messages: data,
                 });
             }, this),
-        });		
+        });
     },
 validaPropRealCR: function (fields, errors, callback) {
         var esPropietario=false;
        var esCLiente=false;
        var esTercero=false;
        var tienePR=false;
-   
+
        esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
        esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo8=='2') ? true : false;
        tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
-       
-       
+
+
         if(App.user.attributes.productos_c.includes('14')){
                 if((this.model.get('tipo_registro_cuenta_c')!="4" || this.model.get('tipo_registro_cuenta_c')!="5") && !esCLiente){
-                    
+
                     //Realizamos apicall para buscar que la cuenta tenga alguna relacion con otra
                     var Cuenta=this.model.get('id');
                     var consulta = app.api.buildURL('Rel_Relaciones/?filter[0][account_id1_c][$equals]=' + Cuenta, null, null);
@@ -8314,14 +8316,14 @@ validaPropRealCR: function (fields, errors, callback) {
                                if(data.records.length>0){
                                    //Validamos que las relaciones sean de tipo Propietario Real
                                    for (var i = 0; i < data.records.length; i++) {
-                                       if (data.records[i].relaciones_activas == 'Propietario Real') { 
+                                       if (data.records[i].relaciones_activas == 'Propietario Real') {
                                            esPropietario=true;
                                        }
                                    }
-                                   
+
                                    if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
-                                           $('.campo9rel-ce').find('.select2-choice').css('border-color', 'red');
-   
+                                       $('.campo9rel-ce').find('.select2-choice').css('border-color', 'red');
+
                                        app.alert.show("existen_relaciones_PR", {
                                        level: "error",
                                        messages: "Favor de seleccionar un <b>Propietario Real</b> en la sección de PLD- Crédito Revolvente.",
@@ -8329,7 +8331,7 @@ validaPropRealCR: function (fields, errors, callback) {
                                        });
                                        errors['propetariorealCR'] = errors['propetariorealCR'] || {};
                                        errors['propetariorealCR'].required = true;
-                                   }   
+                                   }
                                }
                                callback(null, fields, errors);
                            }, this)
@@ -8339,6 +8341,6 @@ validaPropRealCR: function (fields, errors, callback) {
                 }
        }else{
            callback(null, fields, errors);
-       }	   
+       }
    },
 })

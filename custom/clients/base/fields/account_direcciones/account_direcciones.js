@@ -353,7 +353,7 @@
 
                             evt.idEstado=cont_dir.oDirecciones.direccion[index].estado;
                             cont_dir.populateCiudadesByEstadoDE(evt);
-                            
+
                             evt.idMunicipio=cont_dir.oDirecciones.direccion[index].municipio;
                             cont_dir.populateColoniasByMunicipioDE(evt);
                         }else {
@@ -677,8 +677,8 @@
 			duplicado = (direccion[key].inactivo == this.nuevaDireccion.inactivo && this.nuevaDireccion.inactivo == 0) ? duplicado+1 : duplicado;
             //cDireccionFiscal = (direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0) ? cDireccionFiscal+1 : cDireccionFiscal;
             //cDireccionAdmin = (direccion[key].indicadorSeleccionados.includes('16') && direccion[key].inactivo == 0) ? cDireccionAdmin+1 : cDireccionAdmin;
-			if(direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0){ cDireccionFiscal = cDireccionFiscal+1; }
-			if(direccion[key].indicadorSeleccionados.includes('16') && direccion[key].inactivo == 0){ cDireccionAdmin = cDireccionAdmin+1 ; }
+			if(direccion[key].indicadorSeleccionados.includes('^2^') && direccion[key].inactivo == 0){ cDireccionFiscal = cDireccionFiscal+1; }
+			if(direccion[key].indicadorSeleccionados.includes('^16^') && direccion[key].inactivo == 0){ cDireccionAdmin = cDireccionAdmin+1 ; }
             //Valida duplicado
             if(duplicado == 9){
                 cDuplicado++;
@@ -695,7 +695,7 @@
         }
 
         //Valida multiples direcciones fiscales
-        if(cDireccionFiscal >=1 && this.nuevaDireccion.indicadorSeleccionados.includes('2')){
+        if(cDireccionFiscal >=1 && this.nuevaDireccion.indicadorSeleccionados.includes('^2^')){
             app.alert.show('multiple_fiscal', {
                 level: 'error',
                 autoClose: true,
@@ -706,7 +706,7 @@
         }
 
         //Valida multiples direcciones administración
-        if(cDireccionAdmin >=1 && this.nuevaDireccion.indicadorSeleccionados.includes('16')){
+        if(cDireccionAdmin >=1 && this.nuevaDireccion.indicadorSeleccionados.includes('^16^')){
             app.alert.show('multiple_admin', {
                 level: 'error',
                 autoClose: true,
@@ -1146,15 +1146,15 @@
             var direccion = cont_dir.oDirecciones.direccion;
             for (iDireccion = 0; iDireccion < direccion.length; iDireccion++) {
                 //Indicador: 1.- Correspondencia
-                if(direccion[iDireccion].indicadorSeleccionados.includes('1') && direccion[iDireccion].inactivo == 0){
+                if(direccion[iDireccion].indicadorSeleccionados.includes('^1^') && direccion[iDireccion].inactivo == 0){
                     cDireccionCorrs++;
                 }
                 //Indicador: 2 = Fiscal
-                if(direccion[iDireccion].indicadorSeleccionados.includes('2') && direccion[iDireccion].inactivo == 0){
+                if(direccion[iDireccion].indicadorSeleccionados.includes('^2^') && direccion[iDireccion].inactivo == 0){
                     cDireccionFiscal++;
                 }
                 //Indicador: 16 = Administración
-                if(direccion[iDireccion].indicadorSeleccionados.includes('16') && direccion[iDireccion].inactivo == 0){
+                if(direccion[iDireccion].indicadorSeleccionados.includes('^16^') && direccion[iDireccion].inactivo == 0){
                     cDireccionAdmin++;
                 }
 

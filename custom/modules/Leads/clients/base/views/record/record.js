@@ -39,7 +39,7 @@
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
-        
+
         /****** validaciones SOC  **********/
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
@@ -567,6 +567,7 @@
             $('[data-name="evento_c"]').css({ "pointer-events":"none"});
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
             $('[data-name="promotor_c"]').css({ "pointer-events":"none"});
+            $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
         }
     },
 
@@ -574,7 +575,7 @@
     estableceOpcionesOrigenLeads:function(){
         var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
 
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth
             Object.keys(opciones_origen).forEach(function (key) {
                 if (key == "14" || key == "15") {
                     delete opciones_origen[key];
@@ -587,7 +588,7 @@
 
     editClicked: function () {
         this._super("editClicked");
-        
+
     },
 
     checkInVentas: function (evt) {
@@ -873,7 +874,7 @@
 		var posiciones = app.user.attributes.posicion_operativa_c;
 		var posicion = '';
 		if(posiciones.includes(3)) posicion = 'Ventas';
-		if(posiciones.includes(4)) posicion = 'Staff';		
+		if(posiciones.includes(4)) posicion = 'Staff';
         var Params = [id_client, name_client, modulo, posicion];
         app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
             success: _.bind(function (data) {
@@ -1431,7 +1432,7 @@
         if (this.model.get('alianza_soc_chk_c') != undefined){
             valor = this.model.get('alianza_soc_chk_c');
         }
-        
+
         Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
             if(value == idUser){
                 cambio = true;
@@ -1450,17 +1451,17 @@
                     this.model.set('alianza_soc_chk_c', 0);
                 }
 
-                if( (this.model._previousAttributes.detalle_origen_c == 12 && this.cmbio_soc > 0) || 
+                if( (this.model._previousAttributes.detalle_origen_c == 12 && this.cmbio_soc > 0) ||
                     (this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 2)) {
                     this.model.set('alianza_soc_chk_c', 0);
                 }
 
-                if( (this.model._previousAttributes.detalle_origen_c != ""  && 
-                    this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 0 
+                if( (this.model._previousAttributes.detalle_origen_c != ""  &&
+                    this.model._previousAttributes.detalle_origen_c != 12 && this.cmbio_soc > 0
                     && this.model.get('alianza_soc_chk_c')==1)) {
                     this.model.set('alianza_soc_chk_c', 0);
                 }
-                
+
                 if(!cambio){
                     this.model.set('alianza_soc_chk_c', this.model.get('alianza_soc_chk_c'));
                 }
