@@ -8320,9 +8320,9 @@ validaPropRealCR: function (fields, errors, callback) {
                                            esPropietario=true;
                                        }
                                    }
-
-                                   if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
-                                       $('.campo9rel-ce').find('.select2-choice').css('border-color', 'red');
+                               }
+                                if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
+                                    $('.campo9rel-ce').find('.select2-choice').css('border-color', 'red');
 
                                        app.alert.show("existen_relaciones_PR", {
                                        level: "error",
@@ -8331,7 +8331,7 @@ validaPropRealCR: function (fields, errors, callback) {
                                        });
                                        errors['propetariorealCR'] = errors['propetariorealCR'] || {};
                                        errors['propetariorealCR'].required = true;
-                                   }
+                                
                                }
                                callback(null, fields, errors);
                            }, this)
