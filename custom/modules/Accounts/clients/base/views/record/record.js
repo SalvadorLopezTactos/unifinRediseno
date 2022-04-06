@@ -4534,14 +4534,14 @@
                     var relacioncs = 0;
                     var relacioncr =0;
                     var productos = "";
-                    if (data.records.length > 0) {
-                        var esPropietario=false;
-                        var esCLiente=false;
-                        var esTercero=false;
-                        var tieneProvRec=false;
-                        esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
-                        tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
-                        esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo10 =='2') ? true : false;
+                    var esPropietario=false;
+                    var esCLiente=false;
+                    var esTercero=false;
+                    var tieneProvRec=false;
+                    esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
+                    tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
+                    esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo10 =='2') ? true : false;
+                    if (data.records.length > 0) {                        
                         for (var l = 0; l < data.records.length; l++) {
                             //Producto Arrendamiento Puro
                             if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
