@@ -1092,6 +1092,13 @@
                 pld.$('.campo19-cs').hide();
             }
 
+            //Oculta campo de Credito Revolvente
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && pld.$('.campo8ddw-ce').select2('val') == '2' || pld.$('.campo8ddw-ce').attr('data-id') == '2') {
+                pld.$('.campo9-ce').show();
+            } else {
+                pld.$('.campo9-ce').hide();
+            }
+
             pld.$('.campo11-ap').hide();
             pld.$('.campo25-ap').hide();
             pld.$('.campo26-ap').hide();
