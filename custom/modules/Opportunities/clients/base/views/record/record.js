@@ -3440,13 +3440,14 @@
             $('[data-name="evento_c"]').attr('style', 'pointer-events:none');
             $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
             $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="codigo_expo_c"]').attr('style', 'pointer-events:none');
        }else{
             /*
             estatus_c = 'K':Cancelada,'R':Rechazada Crédito,'N':Autorizada
             tct_etapa_ddw_c = 'C':Crédito, 'R': Rechazado
             */
-           if(this.model.get('tct_etapa_ddw_c')=='C' || this.model.get('tct_etapa_ddw_c')=='R' || 
-              this.model.get('estatus_c')=='N' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='K'  
+           if(this.model.get('tct_etapa_ddw_c')=='C' || this.model.get('tct_etapa_ddw_c')=='R' ||
+              this.model.get('estatus_c')=='N' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='K'
            ){
                 $('[data-name="origen_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="detalle_origen_c"]').attr('style', 'pointer-events:none');
@@ -3455,6 +3456,7 @@
                 $('[data-name="evento_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="codigo_expo_c"]').attr('style', 'pointer-events:none');
            }
        }
 
@@ -3575,7 +3577,7 @@
     estableceOpcionesOrigenSolicitudes:function(){
         var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
 
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth
             Object.keys(opciones_origen).forEach(function (key) {
                 if (key == "14" || key == "15") {
                     delete opciones_origen[key];

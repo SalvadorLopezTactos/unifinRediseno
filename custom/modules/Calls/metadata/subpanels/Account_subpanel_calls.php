@@ -1,5 +1,5 @@
 <?php
-// created: 2019-01-16 11:23:49
+// created: 2022-04-06 12:40:08
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -10,6 +10,7 @@ $subpanel_layout['list_fields'] = array (
   ),
   'tct_resultado_llamada_ddw_c' => 
   array (
+    'readonly' => false,
     'type' => 'enum',
     'default' => true,
     'vname' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
@@ -21,6 +22,15 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_STATUS',
     'width' => 10,
     'default' => true,
+  ),
+  'detalle_c' => 
+  array (
+    'readonly_formula' => '',
+    'readonly' => false,
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_DETALLE',
+    'width' => 10,
   ),
   'date_start' => 
   array (
