@@ -45,6 +45,7 @@ class IntegracionQuantico
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $bean->negocio_c == '3') ? true : $generaSolicitud;
 		    $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '1') ? false: $generaSolicitud;
+        $generaSolicitud = $bean->tipo_producto_c == '14' ? false: $generaSolicitud;
 
         if ( ( ($bean->id_process_c != "" && $iniciaPUni2) || (!$iniciaPUni2) ) && $bean->idsolicitud_c != "" && $bean->quantico_id_c == "" && $generaSolicitud) {
             $GLOBALS['log']->fatal("Inicia Petición de integración con Quantico");
