@@ -4541,7 +4541,7 @@
                     esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
                     tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
                     esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo10 =='2') ? true : false;
-                    if (data.records.length > 0) {                        
+                    if (data.records.length > 0) {
                         for (var l = 0; l < data.records.length; l++) {
                             //Producto Arrendamiento Puro
                             if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
@@ -8260,6 +8260,11 @@ validaReqUniclickInfo: function () {
                 this.model.set("parent_name","");
                 this.model.set("parent_id","");
             }
+            //Si se tiene la combinación 3 y 4 se borra el valor 4
+            if(tipo_gp_emp.includes('3') && tipo_gp_emp.includes('4')){
+                delete tipo_gp_emp[tipo_gp_emp.indexOf('4')];
+                this.model.set("situacion_gpo_empresarial_c",tipo_gp_emp);
+            }
         }
     },
 
@@ -8332,7 +8337,7 @@ validaPropRealCR: function (fields, errors, callback) {
                                        });
                                        errors['propetariorealCR'] = errors['propetariorealCR'] || {};
                                        errors['propetariorealCR'].required = true;
-                                
+
                                }
                                callback(null, fields, errors);
                            }, this)
