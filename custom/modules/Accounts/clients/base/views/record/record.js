@@ -7939,6 +7939,10 @@ validaReqUniclickInfo: function () {
                     v360.ResumenCliente = [];
                     v360.ResumenCliente=data[2].contents;
                     v360.render();
+
+                    vista360.ResumenCliente = [];
+                    vista360.ResumenCliente=data[2].contents;
+                    vista360.render();
                     //Etiquetas del campo custom Clasificacion Sectorial
                     clasf_sectorial.ActividadEconomica = {
                         // 'combinaciones': '',

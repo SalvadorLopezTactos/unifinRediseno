@@ -95,12 +95,24 @@ class ResumenClienteAPI extends SugarApi
         //General
         $arr_principal['general_cliente'] = array(
             "tipo" => "No definido",
+            "cliente_desde"=>"No definido",
             "segmento" => "Sin Segmento",
             "cobranza" => "Sin Clasificar",
             "sector_economico" => "Sin Especificar",
             "grupo_empresarial" => "Sin Grupo empresarial",
             "nivel_satisfaccion" => "Sin Clasificar",
             "color" => $Azul);
+
+        $arr_principal['contactos'] = array(
+            "nombre_negocios" => "No definido",
+            "puesto_negocios"=>"No definido",
+            "telefono_negocios" => "",
+            "correo_negocios" => "",
+            "nombre_secundario" => "No definido",
+            "puesto_secundario"=>"No definido",
+            "telefono_secundario" => "",
+            "correo_secundario" => ""
+        );
         //Leasing
         $arr_principal['leasing'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
@@ -231,12 +243,19 @@ class ResumenClienteAPI extends SugarApi
         if($beanPersona){
             //General
             $arr_principal['general_cliente']['tipo'] = $beanPersona->tct_tipo_subtipo_txf_c;  // tipo_general_c
+            $arr_principal['general_cliente']['cliente_desde'] = $beanPersona->fecha_cliente_c;  // tipo_general_c
             $arr_principal['general_cliente']['segmento'] = $beanPersona->segmento_c;
             $arr_principal['general_cliente']['cobranza'] = $beanPersona->cobranza_c;
             $arr_principal['general_cliente']['sector_economico'] = isset($app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c]) ? $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c] : '';
             $arr_principal['general_cliente']['grupo_empresarial'] = $beanPersona->parent_name;
+            $arr_principal['general_cliente']['situacion_grupo_empresarial'] = $beanPersona->situacion_gpo_empresa_txt_c;
             $arr_principal['general_cliente']['nivel_satisfaccion'] = isset($app_list_strings['nivel_satisfaccion_list'][$beanPersona->nivel_satisfaccion_c]) ? $app_list_strings['nivel_satisfaccion_list'][$beanPersona->nivel_satisfaccion_c] : '';
             $arr_principal['general_cliente']['asesorRM'] = $beanPersona->promotorrm_c;
+            $arr_principal['general_cliente']['actividad_economica'] = isset($app_list_strings['actividad_list'][$beanPersona->actividadeconomica_c]) ? $app_list_strings['actividad_list'][$beanPersona->actividadeconomica_c] : '';
+            $arr_principal['general_cliente']['ventas_anuales'] = $beanPersona->ventas_anuales_c;
+            $arr_principal['general_cliente']['anio_ventas_anuales'] = $beanPersona->tct_ano_ventas_ddw_c;
+            $arr_principal['general_cliente']['fecha_cons_nac'] = ($beanPersona->tipodepersona_c != "Persona Moral") ? $beanPersona->fechadenacimiento_c:$beanPersona->fechaconstitutiva_c;
+            $arr_principal['general_cliente']['num_empleados'] = $beanPersona->total_empleados_c;
 
             //Promotores
             /*$arr_principal['leasing']['promotor']=$beanPersona->promotorleasing_c;
@@ -293,8 +312,14 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_unilease ='';
 			$vencimiento_unifactor = '';
 
+            $str_productos_contratados='';
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
+
+                //Obtener productos de las solicitudes que se encuentran como Cliente con Linea Autorizada
+                if($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N'){
+                    $str_productos_contratados.=$app_list_strings['tipo_producto_list'][$opps->tipo_producto_c].", ";
+                }
 
                 /**
                  *Filtro para operaciones
@@ -512,6 +537,8 @@ class ResumenClienteAPI extends SugarApi
                 }
 
             }
+            //Se aplica substring para eliminar la última coma
+            $arr_principal['general_cliente']['productos_contratados'] = substr($str_productos_contratados, 0, -2);
         }
 
         ############################
@@ -715,6 +742,8 @@ class ResumenClienteAPI extends SugarApi
                 //Recupera Leasing
                 // $arr_principal['leasing']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_l_c;
                 $arr_principal['leasing']['fecha_pago']= $beanResumen->leasing_fecha_pago;
+
+                $arr_principal['general_cliente']['score_credito'] = $beanResumen->score_credito_c;
                 //Victor
                 //codigo para cargar el contenido del .txt de la noticia actualizada
                 $filename = 'custom/pdf/noticiaGeneral.txt';
@@ -1136,6 +1165,72 @@ class ResumenClienteAPI extends SugarApi
           }
         }
 
+        ############################
+        ## Recupera información de Relaciones para mostrar en sección de Contactos en vista 360
+        ############################
+        if($beanPersona->load_relationship('rel_relaciones_accounts_1')) {
+            $relatedRelaciones = $beanPersona->rel_relaciones_accounts_1->getBeans();
+            if($relatedRelaciones) {
+                
+                foreach($relatedRelaciones as $rel) {
+                    $GLOBALS['log']->fatal("RELACION ACTIVA: ".$rel->relaciones_activas);
+                    //La primer relacion encontrada tipo Negocios, se establece como principal, en otro caso se establece como secundaria
+                    if(strpos($rel->relaciones_activas, 'Negocios') !== false){
+                        $id_relacion=$rel->account_id1_c;
+                        //Obtiene bean de la relación para traer el teléfono y el correo relacionado
+                        $beanRelacionNegocios = BeanFactory::getBean("Accounts", $id_relacion,array('disable_row_level_security' => true));
+
+                        //Obtiene teléfonos
+                        $telefono_principal_negocio="";
+                        if($beanRelacionNegocios->load_relationship('accounts_tel_telefonos_1')){
+                            $relatedTelefonos = $beanRelacionNegocios->accounts_tel_telefonos_1->getBeans();
+                            if(count($relatedTelefonos)>0){
+
+                                foreach($relatedTelefonos as $tel) {
+                                    if($tel->principal==1){
+                                        $telefono_principal_negocio=$tel->telefono;
+                                    }
+                                }    
+                            }
+                        }
+
+                        $arr_principal['contactos']['nombre_negocios'] = $rel->relacion_c;
+                        $arr_principal['contactos']['id_nombre_negocios'] = $id_relacion;
+                        $arr_principal['contactos']['puesto_negocios'] = isset($app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c] : '';
+                        $arr_principal['contactos']['telefono_negocios'] = $telefono_principal_negocio;
+                        $arr_principal['contactos']['correo_negocios'] = $beanRelacionNegocios->email1;
+
+                    }else{
+                        $id_relacion=$rel->account_id1_c;
+                        //Obtiene bean de la relación para traer el teléfono y el correo relacionado
+                        $beanRelacionSecundaria = BeanFactory::getBean("Accounts", $id_relacion,array('disable_row_level_security' => true));
+
+                        //Obtiene teléfonos
+                        $telefono_principal_secundario="";
+                        if($beanRelacionSecundaria->load_relationship('accounts_tel_telefonos_1')){
+                            $relatedTelefonos = $beanRelacionSecundaria->accounts_tel_telefonos_1->getBeans();
+                            if(count($relatedTelefonos)>0){
+
+                                foreach($relatedTelefonos as $tel) {
+                                    $GLOBALS['log']->fatal("TELEFONO ".$tel->telefono);
+                                    if($tel->principal==1){
+                                        $telefono_principal_secundario=$tel->telefono;
+                                    }
+                                }    
+                            }
+                        }
+
+                        $arr_principal['contactos']['nombre_secundario'] = $rel->relacion_c;
+                        $arr_principal['contactos']['id_nombre_secundario'] = $id_relacion;
+                        $arr_principal['contactos']['puesto_secundario'] =isset($app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c] : '';
+                        $arr_principal['contactos']['telefono_secundario'] = $telefono_principal_secundario;
+                        $arr_principal['contactos']['correo_secundario'] = $beanRelacionSecundaria->email1;
+                    }
+                    
+                }
+                
+            }
+        }
         ############################
         ## Regresa resultado
         // $GLOBALS['log']->fatal('resultado de API:');
