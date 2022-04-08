@@ -3441,6 +3441,7 @@
             $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
             $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
             $('[data-name="codigo_expo_c"]').attr('style', 'pointer-events:none');
+            $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
        }else{
             /*
             estatus_c = 'K':Cancelada,'R':Rechazada Crédito,'N':Autorizada
@@ -3457,6 +3458,7 @@
                 $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="codigo_expo_c"]').attr('style', 'pointer-events:none');
+                $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
            }
        }
 

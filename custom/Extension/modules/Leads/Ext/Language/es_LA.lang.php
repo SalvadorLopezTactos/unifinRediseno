@@ -143,3 +143,4 @@ $mod_strings['LBL_REFERIDO_CLIENTE_PROV'] = 'Referido';
 $mod_strings['LBL_REFERENCIADOR_ACCOUNT_ID'] = 'Referenciado por (relacionado Cuenta ID)';
 $mod_strings['LBL_REFERENCIADOR'] = 'Referenciado por';
 $mod_strings['LBL_CODIGO_EXPO'] = 'Código de Expo';
+$mod_strings['LBL_CALLS_SUBPANEL_TITLE'] = 'Llamadas';

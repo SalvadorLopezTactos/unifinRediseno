@@ -130,7 +130,14 @@ SQL;
             $bean->name = str_replace("PRE - ", "", $bean->name);
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
-        $available_financiero=array("39","41","50","48","49","51","77","83");
+        global $app_list_strings;
+        $available_financiero=array();
+        $lista_productos = $app_list_strings['productos_genera_name_sol_list'];
+        //$available_financiero=array("39","41","50","48","49","51","77","83");
+        foreach ($lista_productos as $key => $value) {
+            array_push($available_financiero,$key);
+        }
+
         if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI'&& $bean->tipo_de_operacion_c != 'RATIFICACION_INCREMENTO') {
             $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
         } elseif (in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
@@ -1083,7 +1090,14 @@ SQL;
         //Evalua cambio en etapa o subetapa
         if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
             //Actualiza producto uniclick
-            $available_financiero=array("39","41","50","49","48","51");
+            global $app_list_strings;
+            $available_financiero=array();
+            $lista_productos = $app_list_strings['productos_uniclick_list'];
+            //$available_financiero=array("39","41","50","49","48","51");
+            foreach ($lista_productos as $key => $value) {
+                array_push($available_financiero,$key);
+            }
+
             if(in_array($bean->producto_financiero_c ,$available_financiero))
             {
                 $producto=8;

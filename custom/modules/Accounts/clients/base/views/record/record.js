@@ -319,7 +319,7 @@
         //this.model.on('sync',this.validaReqUniclickInfo,this);
 
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
-        //this.model.on('sync', this.deshabilitaOrigenCuenta, this);
+        this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
@@ -4534,14 +4534,14 @@
                     var relacioncs = 0;
                     var relacioncr =0;
                     var productos = "";
+                    var esPropietario=false;
+                    var esCLiente=false;
+                    var esTercero=false;
+                    var tieneProvRec=false;
+                    esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
+                    tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
+                    esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo10 =='2') ? true : false;
                     if (data.records.length > 0) {
-                        var esPropietario=false;
-                        var esCLiente=false;
-                        var esTercero=false;
-                        var tieneProvRec=false;
-                        esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
-                        tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
-                        esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo10 =='2') ? true : false;
                         for (var l = 0; l < data.records.length; l++) {
                             //Producto Arrendamiento Puro
                             if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
@@ -4573,8 +4573,8 @@
                                 }
                             }
                             //Credito Envolvente
-                            if (App.user.attributes.productos_c.includes(8) && $('.campo10ddw-ce').select2('val') == "2") {
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CR') && data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
+                            if ((App.user.attributes.productos_c.includes(8) || App.user.attributes.productos_c.includes(14)) && $('.campo10ddw-ce').select2('val') == "2") {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de los Recursos CR') && data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacioncr++;
                                     tieneProvRec=true;
                                 }
@@ -7062,6 +7062,7 @@
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
             $('[data-name="tct_que_promotor_rel_c"]').css({ "pointer-events":"none"});
             $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
+            $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
 
 
         }
@@ -8263,6 +8264,11 @@ validaReqUniclickInfo: function () {
                 this.model.set("parent_name","");
                 this.model.set("parent_id","");
             }
+            //Si se tiene la combinación 3 y 4 se borra el valor 4
+            if(tipo_gp_emp.includes('3') && tipo_gp_emp.includes('4')){
+                delete tipo_gp_emp[tipo_gp_emp.indexOf('4')];
+                this.model.set("situacion_gpo_empresarial_c",tipo_gp_emp);
+            }
         }
     },
 
@@ -8310,7 +8316,7 @@ validaPropRealCR: function (fields, errors, callback) {
 
 
         if(App.user.attributes.productos_c.includes('14')){
-                if((this.model.get('tipo_registro_cuenta_c')!="4" || this.model.get('tipo_registro_cuenta_c')!="5") && !esCLiente){
+                if((this.model.get('tipo_registro_cuenta_c')!="4" || this.model.get('tipo_registro_cuenta_c')!="5")){
 
                     //Realizamos apicall para buscar que la cuenta tenga alguna relacion con otra
                     var Cuenta=this.model.get('id');
@@ -8320,13 +8326,13 @@ validaPropRealCR: function (fields, errors, callback) {
                                if(data.records.length>0){
                                    //Validamos que las relaciones sean de tipo Propietario Real
                                    for (var i = 0; i < data.records.length; i++) {
-                                       if (data.records[i].relaciones_activas == 'Propietario Real') {
+                                       if (data.records[i].relaciones_activas.includes('Propietario Real')) {
                                            esPropietario=true;
                                        }
                                    }
-
-                                   if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
-                                           $('.campo9rel-ap').find('.select2-choice').css('border-color', 'red');
+                               }
+                                if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
+                                    $('.campo9rel-ce').find('.select2-choice').css('border-color', 'red');
 
                                        app.alert.show("existen_relaciones_PR", {
                                        level: "error",
@@ -8335,7 +8341,7 @@ validaPropRealCR: function (fields, errors, callback) {
                                        });
                                        errors['propetariorealCR'] = errors['propetariorealCR'] || {};
                                        errors['propetariorealCR'].required = true;
-                                   }
+
                                }
                                callback(null, fields, errors);
                            }, this)
