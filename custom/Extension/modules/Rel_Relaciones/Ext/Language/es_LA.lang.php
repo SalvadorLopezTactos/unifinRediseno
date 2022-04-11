@@ -5,3 +5,4 @@ $mod_strings['LBL_RELACION'] = 'Relación';
 $mod_strings['LBL_TCT_VALIDADO_JURIDICO'] = 'Validaro por Jurídico';
 $mod_strings['LBL_TCT_VALIDADO_JURIDICO_CHK'] = 'Validado por Jurídico';
 $mod_strings['LBL_RELACIONES_PRODUCTO_C'] = 'Relaciones Producto';
+$mod_strings['LBL_ESTATUS_TARJETA_C'] = 'Estatus Tarjeta';

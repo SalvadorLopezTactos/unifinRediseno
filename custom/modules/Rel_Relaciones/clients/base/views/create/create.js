@@ -221,6 +221,7 @@
 		this.$("div[data-name='producto']").hide();
 		this.$("div[data-name='puesto']").hide();
 		this.$("div[data-name='puestodescription']").hide();
+        this.$("div[data-name='estatus_tarjeta_c']").hide();
 
 
 		for(var x = 0; x < arrRelaciones.length; x++){
@@ -230,9 +231,12 @@
 					this.$("div[data-name='miembrodecomite']").show();
 					this.$("div[data-name='porcentaje_participacion_c']").show();
 					break;
-				case "Contacto":
-					this.$("div[data-name='tipodecontacto']").show();
+				case "Tarjetahabiente":
+					this.$("div[data-name='estatus_tarjeta_c']").show();
 					break;
+                case "Contacto":
+                    this.$("div[data-name='tipodecontacto']").show();
+                    break;    
 				case "Referencia Personal":
 					this.$("div[data-name='parentesco']").show();
 					this.$("div[data-name='tiempodeconocerloano']").show();
