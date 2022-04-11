@@ -140,21 +140,9 @@ function InboundPopUpANI(message) {
     iwscore.addJSONObjectInMemory(message);
 }
 function searchContactCreateCall(message, contactId) {
-    var searchFilter = {
-        "filter": [
-            {
-                "$or": [
-                    {
-                        "phone_mobile": contactId
-                    },
-                    {
-                        "phone_work": contactId
-                    }
-                ]
-            }
-        ]
-    };
-    SUGAR.App.api.records("read", "Contacts", {}, searchFilter, {
+    
+    //console.log('ejc-interno');
+    SUGAR.App.api.records("read", "existeCliente/"+contactId, {}, null , {
         success: function (res) {
             console.log("**** result success from query : ", res);
             var id;
