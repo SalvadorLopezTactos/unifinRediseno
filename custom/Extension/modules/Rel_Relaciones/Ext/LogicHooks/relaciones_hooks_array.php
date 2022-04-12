@@ -40,12 +40,3 @@ $hook_array['before_save'][] = Array(
     'Relacion_platform_user',
     'set_audit_user_platform'
 );
-
-$hook_array['before_save'][] = Array(
-    3,
-    'Regresa a Cliente si cambia a Prospecto',
-    'custom/modules/Rel_Relaciones/regresa_cliente.php',
-    'regresa_cliente',
-    'regresa_cliente'
-);
-
