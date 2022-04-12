@@ -596,7 +596,7 @@
 
                 //Se agrega ajuste para saber cuando mostrar la tabla ajustada, en caso de que solo haya 1 una cf, el campo queda como anteriormente,
                 //En caso contrario, las condiciones financieras se consolidan solo en una fila
-                if(self.mainRowsBodyTable.length>1){
+                if(self.mainRowsBodyTable.length>1 && self.mainRowsBodyTable[0].bodyTable[0].select=='1'){
                     //Consolidar todas las CF en una fila
                     self.showTableRows=0;
                     self.bodyTableModified=self.mainRowsBodyTable[0].bodyTable;
@@ -879,11 +879,20 @@
                 if(plantillaFila.bodyTable[index].text=="1"){
                     
                     if(plantillaFila.bodyTable[index].rangoInferior!=""){
-                        plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                        if($(e.currentTarget).parent().parent().find('select.row-fluid').length>0){
+                            plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                        }else{
+                            plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('input[type="text"]')[index].value;
+                        }
                     }
     
                     if(plantillaFila.bodyTable[index].rangoSuperior!=""){
-                        plantillaFila.bodyTable[index].rangoSuperior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                        if($(e.currentTarget).parent().parent().find('select.row-fluid').length>0){
+                            plantillaFila.bodyTable[index].rangoSuperior=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
+                        }else{
+                            plantillaFila.bodyTable[index].rangoInferior=$(e.currentTarget).parent().parent().find('input[type="text"]')[index].value;
+                        }
+                        
                     }
                 }
     
@@ -927,57 +936,114 @@
         /* Condición para seguir controlando el ajuste para filas consolidades en una sola para cuando las CF politica vienen con más de 1 valor*/ 
         if(self.mainRowsBodyTable!=undefined){
             if(self.mainRowsBodyTable.length>1){
-                for (let index = 0; index < camposEnfila.length; index++) {
-                    var elemento = $(camposEnfila).eq(index);
-                    //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
-                    if(elemento.children('select').length>0 && elemento.children('input[type="hidden"]').length==0){
-                         //Definición para campos de catálogo
-                        var objetoSelect=this.setPlantillasJSON("Catalogo");
-                        objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
-                        objetoSelect.Id=$(camposEnfila).eq(index).children('select').attr('data-id-nodo');
-                        objetoSelect.Value.Value=$(camposEnfila).eq(index).children('select').children('option:selected').html();
-                        objetoSelect.Value.ValueId=$(camposEnfila).eq(index).children('select').eq(0).children(':selected').val();
-        
-                        objetoTermResponseList.push(objetoSelect);
-        
-                    }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='inferior'){
-                        //Definición para campos de rango
-                        var objetoRango=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
-                        objetoRango.Name=elemento.children('input[type="hidden"]').attr('data-columna');
-                        objetoRango.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
-                        objetoRango.Value.ValueMin=elemento.children('input[type="hidden"]').val();
-                        //Para el value max, se toma el siguiente campo en <td>, por lo tanto se aumenta el index
-                        objetoRango.Value.ValueMax=$(camposEnfila).eq(index+1).children('input[type="hidden"]').val();
-                        index=index+1;
-                        objetoTermResponseList.push(objetoRango);
-        
-                    }else if(elemento.children('input[type="checkbox"]').length>0){
-                         //Definición para campos Boolean
-                        var objetoCheckBox=this.setPlantillasJSON(elemento.children('input[type="checkbox"]').attr('data-name'));
-                        var valorCheck=elemento.children('input[type="checkbox"]').eq(0).attr('checked');
-                        var valorJsonChk="";
-                        if(valorCheck=="checked"){
-                            valorJsonChk="True";
-                        }else{
-                            valorJsonChk="False";
+                //Validando que el primer elemento sea un select
+                if(self.mainRowsBodyTable[0].bodyTable[0].select=='1'){
+                    for (let index = 0; index < camposEnfila.length; index++) {
+                        var elemento = $(camposEnfila).eq(index);
+                        //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
+                        if(elemento.children('select').length>0 && elemento.children('input[type="hidden"]').length==0){
+                             //Definición para campos de catálogo
+                            var objetoSelect=this.setPlantillasJSON("Catalogo");
+                            objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
+                            objetoSelect.Id=$(camposEnfila).eq(index).children('select').attr('data-id-nodo');
+                            objetoSelect.Value.Value=$(camposEnfila).eq(index).children('select').children('option:selected').html();
+                            objetoSelect.Value.ValueId=$(camposEnfila).eq(index).children('select').eq(0).children(':selected').val();
+            
+                            objetoTermResponseList.push(objetoSelect);
+            
+                        }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='inferior'){
+                            //Definición para campos de rango
+                            var objetoRango=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
+                            objetoRango.Name=elemento.children('input[type="hidden"]').attr('data-columna');
+                            objetoRango.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
+                            objetoRango.Value.ValueMin=elemento.children('input[type="hidden"]').val();
+                            //Para el value max, se toma el siguiente campo en <td>, por lo tanto se aumenta el index
+                            objetoRango.Value.ValueMax=$(camposEnfila).eq(index+1).children('input[type="hidden"]').val();
+                            index=index+1;
+                            objetoTermResponseList.push(objetoRango);
+            
+                        }else if(elemento.children('input[type="checkbox"]').length>0){
+                             //Definición para campos Boolean
+                            var objetoCheckBox=this.setPlantillasJSON(elemento.children('input[type="checkbox"]').attr('data-name'));
+                            var valorCheck=elemento.children('input[type="checkbox"]').eq(0).attr('checked');
+                            var valorJsonChk="";
+                            if(valorCheck=="checked"){
+                                valorJsonChk="True";
+                            }else{
+                                valorJsonChk="False";
+                            }
+            
+                            objetoCheckBox.Name=elemento.children('input[type="checkbox"]').attr('data-columna');
+                            objetoCheckBox.Id=elemento.children('input[type="checkbox"]').attr('data-id-nodo');
+                            objetoCheckBox.Value.Value=valorJsonChk;
+                            objetoTermResponseList.push(objetoCheckBox);
+                        }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='input'){
+                            //Definición para campos númerico
+                            var objetoNumerico=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
+                            objetoNumerico.Name=elemento.children('input[type="hidden"]').attr('data-columna');
+                            objetoNumerico.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
+                            objetoNumerico.Value.Value=elemento.children('input[type="hidden"]').val();
+            
+                            objetoTermResponseList.push(objetoNumerico);
+            
                         }
-        
-                        objetoCheckBox.Name=elemento.children('input[type="checkbox"]').attr('data-columna');
-                        objetoCheckBox.Id=elemento.children('input[type="checkbox"]').attr('data-id-nodo');
-                        objetoCheckBox.Value.Value=valorJsonChk;
-                        objetoTermResponseList.push(objetoCheckBox);
-                    }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='input'){
-                        //Definición para campos númerico
-                        var objetoNumerico=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
-                        objetoNumerico.Name=elemento.children('input[type="hidden"]').attr('data-columna');
-                        objetoNumerico.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
-                        objetoNumerico.Value.Value=elemento.children('input[type="hidden"]').val();
-        
-                        objetoTermResponseList.push(objetoNumerico);
-        
+            
                     }
-        
+
+                }else{
+                        for (let index = 0; index < camposEnfila.length; index++) {
+                            var elemento = $(camposEnfila).eq(index);
+                            //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
+                            if(elemento.children('select').length>0){
+                                 //Definición para campos de catálogo
+                                var objetoSelect=this.setPlantillasJSON("Catalogo");
+                                objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
+                                objetoSelect.Id=$(camposEnfila).eq(index).children('select').attr('data-id-nodo');
+                                objetoSelect.Value.Value=$(camposEnfila).eq(index).children('select').children('option:selected').html();
+                                objetoSelect.Value.ValueId=$(camposEnfila).eq(index).children('select').eq(0).children(':selected').val();
+                
+                                objetoTermResponseList.push(objetoSelect);
+                
+                            }else if(elemento.children('input[type="text"]').length>0 && elemento.children('input[type="text"]').attr('data-info')=='inferior'){
+                                //Definición para campos de rango
+                                var objetoRango=this.setPlantillasJSON(elemento.children('input[type="text"]').attr('data-name'));
+                                objetoRango.Name=elemento.children('input[type="text"]').attr('data-columna');
+                                objetoRango.Id=elemento.children('input[type="text"]').attr('data-id-nodo');
+                                objetoRango.Value.ValueMin=elemento.children('input[type="text"]').val();
+                                //Para el value max, se toma el siguiente campo en <td>, por lo tanto se aumenta el indec
+                                objetoRango.Value.ValueMax=$(camposEnfila).eq(index+1).children('input[type="text"]').val();
+                                index=index+1;
+                                objetoTermResponseList.push(objetoRango);
+                
+                            }else if(elemento.children('input[type="checkbox"]').length>0){
+                                 //Definición para campos Boolean
+                                var objetoCheckBox=this.setPlantillasJSON(elemento.children('input[type="checkbox"]').attr('data-name'));
+                                var valorCheck=elemento.children('input[type="checkbox"]').eq(0).attr('checked');
+                                var valorJsonChk="";
+                                if(valorCheck=="checked"){
+                                    valorJsonChk="True";
+                                }else{
+                                    valorJsonChk="False";
+                                }
+                
+                                objetoCheckBox.Name=elemento.children('input[type="checkbox"]').attr('data-columna');
+                                objetoCheckBox.Id=elemento.children('input[type="checkbox"]').attr('data-id-nodo');
+                                objetoCheckBox.Value.Value=valorJsonChk;
+                                objetoTermResponseList.push(objetoCheckBox);
+                            }else if(elemento.children('input[type="text"]').length>0 && elemento.children('input[type="text"]').attr('data-info')=='input'){
+                                //Definición para campos númerico
+                                var objetoNumerico=this.setPlantillasJSON(elemento.children('input[type="text"]').attr('data-name'));
+                                objetoNumerico.Name=elemento.children('input[type="text"]').attr('data-columna');
+                                objetoNumerico.Id=elemento.children('input[type="text"]').attr('data-id-nodo');
+                                objetoNumerico.Value.Value=elemento.children('input[type="text"]').val();
+                
+                                objetoTermResponseList.push(objetoNumerico);
+                
+                            }
+            
+                    }
                 }
+                
             }else{
                 
                 for (let index = 0; index < camposEnfila.length; index++) {
@@ -1034,57 +1100,115 @@
             }
         }else{
             if(this.mainRowsBodyTable.length>1){
-                for (let index = 0; index < camposEnfila.length; index++) {
-                    var elemento = $(camposEnfila).eq(index);
-                    //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
-                    if(elemento.children('select').length>0 && elemento.children('input[type="hidden"]').length==0){
-                         //Definición para campos de catálogo
-                        var objetoSelect=this.setPlantillasJSON("Catalogo");
-                        objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
-                        objetoSelect.Id=$(camposEnfila).eq(index).children('select').attr('data-id-nodo');
-                        objetoSelect.Value.Value=$(camposEnfila).eq(index).children('select').children('option:selected').html();
-                        objetoSelect.Value.ValueId=$(camposEnfila).eq(index).children('select').eq(0).children(':selected').val();
-        
-                        objetoTermResponseList.push(objetoSelect);
-        
-                    }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='inferior'){
-                        //Definición para campos de rango
-                        var objetoRango=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
-                        objetoRango.Name=elemento.children('input[type="hidden"]').attr('data-columna');
-                        objetoRango.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
-                        objetoRango.Value.ValueMin=elemento.children('input[type="hidden"]').val();
-                        //Para el value max, se toma el siguiente campo en <td>, por lo tanto se aumenta el index
-                        objetoRango.Value.ValueMax=$(camposEnfila).eq(index+1).children('input[type="hidden"]').val();
-                        index=index+1;
-                        objetoTermResponseList.push(objetoRango);
-        
-                    }else if(elemento.children('input[type="checkbox"]').length>0){
-                         //Definición para campos Boolean
-                        var objetoCheckBox=this.setPlantillasJSON(elemento.children('input[type="checkbox"]').attr('data-name'));
-                        var valorCheck=elemento.children('input[type="checkbox"]').eq(0).attr('checked');
-                        var valorJsonChk="";
-                        if(valorCheck=="checked"){
-                            valorJsonChk="True";
-                        }else{
-                            valorJsonChk="False";
+                if(this.mainRowsBodyTable[0].bodyTable[0].select=='1'){
+                    for (let index = 0; index < camposEnfila.length; index++) {
+                        var elemento = $(camposEnfila).eq(index);
+                        //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
+                        if(elemento.children('select').length>0 && elemento.children('input[type="hidden"]').length==0){
+                             //Definición para campos de catálogo
+                            var objetoSelect=this.setPlantillasJSON("Catalogo");
+                            objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
+                            objetoSelect.Id=$(camposEnfila).eq(index).children('select').attr('data-id-nodo');
+                            objetoSelect.Value.Value=$(camposEnfila).eq(index).children('select').children('option:selected').html();
+                            objetoSelect.Value.ValueId=$(camposEnfila).eq(index).children('select').eq(0).children(':selected').val();
+            
+                            objetoTermResponseList.push(objetoSelect);
+            
+                        }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='inferior'){
+                            //Definición para campos de rango
+                            var objetoRango=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
+                            objetoRango.Name=elemento.children('input[type="hidden"]').attr('data-columna');
+                            objetoRango.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
+                            objetoRango.Value.ValueMin=elemento.children('input[type="hidden"]').val();
+                            //Para el value max, se toma el siguiente campo en <td>, por lo tanto se aumenta el index
+                            objetoRango.Value.ValueMax=$(camposEnfila).eq(index+1).children('input[type="hidden"]').val();
+                            index=index+1;
+                            objetoTermResponseList.push(objetoRango);
+            
+                        }else if(elemento.children('input[type="checkbox"]').length>0){
+                             //Definición para campos Boolean
+                            var objetoCheckBox=this.setPlantillasJSON(elemento.children('input[type="checkbox"]').attr('data-name'));
+                            var valorCheck=elemento.children('input[type="checkbox"]').eq(0).attr('checked');
+                            var valorJsonChk="";
+                            if(valorCheck=="checked"){
+                                valorJsonChk="True";
+                            }else{
+                                valorJsonChk="False";
+                            }
+            
+                            objetoCheckBox.Name=elemento.children('input[type="checkbox"]').attr('data-columna');
+                            objetoCheckBox.Id=elemento.children('input[type="checkbox"]').attr('data-id-nodo');
+                            objetoCheckBox.Value.Value=valorJsonChk;
+                            objetoTermResponseList.push(objetoCheckBox);
+                        }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='input'){
+                            //Definición para campos númerico
+                            var objetoNumerico=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
+                            objetoNumerico.Name=elemento.children('input[type="hidden"]').attr('data-columna');
+                            objetoNumerico.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
+                            objetoNumerico.Value.Value=elemento.children('input[type="hidden"]').val();
+            
+                            objetoTermResponseList.push(objetoNumerico);
+            
                         }
-        
-                        objetoCheckBox.Name=elemento.children('input[type="checkbox"]').attr('data-columna');
-                        objetoCheckBox.Id=elemento.children('input[type="checkbox"]').attr('data-id-nodo');
-                        objetoCheckBox.Value.Value=valorJsonChk;
-                        objetoTermResponseList.push(objetoCheckBox);
-                    }else if(elemento.children('input[type="hidden"]').length>0 && elemento.children('input[type="hidden"]').attr('data-info')=='input'){
-                        //Definición para campos númerico
-                        var objetoNumerico=this.setPlantillasJSON(elemento.children('input[type="hidden"]').attr('data-name'));
-                        objetoNumerico.Name=elemento.children('input[type="hidden"]').attr('data-columna');
-                        objetoNumerico.Id=elemento.children('input[type="hidden"]').attr('data-id-nodo');
-                        objetoNumerico.Value.Value=elemento.children('input[type="hidden"]').val();
-        
-                        objetoTermResponseList.push(objetoNumerico);
-        
+            
                     }
-        
-                }
+
+                }else{
+
+                    for (let index = 0; index < camposEnfila.length; index++) {
+                        var elemento = $(camposEnfila).eq(index);
+                        //Comprobar si el campo es select, por lo tanto se agrega json con definición de Catálogo
+                        if(elemento.children('select').length>0){
+                             //Definición para campos de catálogo
+                            var objetoSelect=this.setPlantillasJSON("Catalogo");
+                            objetoSelect.Name=$(camposEnfila).eq(index).children('select').attr('data-columna');
+                            objetoSelect.Id=$(camposEnfila).eq(index).children('select').attr('data-id-nodo');
+                            objetoSelect.Value.Value=$(camposEnfila).eq(index).children('select').children('option:selected').html();
+                            objetoSelect.Value.ValueId=$(camposEnfila).eq(index).children('select').eq(0).children(':selected').val();
+            
+                            objetoTermResponseList.push(objetoSelect);
+            
+                        }else if(elemento.children('input[type="text"]').length>0 && elemento.children('input[type="text"]').attr('data-info')=='inferior'){
+                            //Definición para campos de rango
+                            var objetoRango=this.setPlantillasJSON(elemento.children('input[type="text"]').attr('data-name'));
+                            objetoRango.Name=elemento.children('input[type="text"]').attr('data-columna');
+                            objetoRango.Id=elemento.children('input[type="text"]').attr('data-id-nodo');
+                            objetoRango.Value.ValueMin=elemento.children('input[type="text"]').val();
+                            //Para el value max, se toma el siguiente campo en <td>, por lo tanto se aumenta el indec
+                            objetoRango.Value.ValueMax=$(camposEnfila).eq(index+1).children('input[type="text"]').val();
+                            index=index+1;
+                            objetoTermResponseList.push(objetoRango);
+            
+                        }else if(elemento.children('input[type="checkbox"]').length>0){
+                             //Definición para campos Boolean
+                            var objetoCheckBox=this.setPlantillasJSON(elemento.children('input[type="checkbox"]').attr('data-name'));
+                            var valorCheck=elemento.children('input[type="checkbox"]').eq(0).attr('checked');
+                            var valorJsonChk="";
+                            if(valorCheck=="checked"){
+                                valorJsonChk="True";
+                            }else{
+                                valorJsonChk="False";
+                            }
+            
+                            objetoCheckBox.Name=elemento.children('input[type="checkbox"]').attr('data-columna');
+                            objetoCheckBox.Id=elemento.children('input[type="checkbox"]').attr('data-id-nodo');
+                            objetoCheckBox.Value.Value=valorJsonChk;
+                            objetoTermResponseList.push(objetoCheckBox);
+                        }else if(elemento.children('input[type="text"]').length>0 && elemento.children('input[type="text"]').attr('data-info')=='input'){
+                            //Definición para campos númerico
+                            var objetoNumerico=this.setPlantillasJSON(elemento.children('input[type="text"]').attr('data-name'));
+                            objetoNumerico.Name=elemento.children('input[type="text"]').attr('data-columna');
+                            objetoNumerico.Id=elemento.children('input[type="text"]').attr('data-id-nodo');
+                            objetoNumerico.Value.Value=elemento.children('input[type="text"]').val();
+            
+                            objetoTermResponseList.push(objetoNumerico);
+            
+                        }
+            
+                    }
+
+                }//fin else
+                
             }else{
                 for (let index = 0; index < camposEnfila.length; index++) {
                     var elemento = $(camposEnfila).eq(index);
