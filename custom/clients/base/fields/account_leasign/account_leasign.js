@@ -2,13 +2,18 @@
  * Created by Tactos - 08/12/2017.
  **/
 
-({
+ ({
   //Definición de eventos
   events: {
       //Despliegue de detalle
       'click .openModalAnexos': 'getAnexos',
       'click .openModalCesiones': 'getCesiones',
       'click .openModalContratos': 'getContratos',
+      //Despliegue de detalle Historicos
+      'click .openModalAnexosH': 'getAnexosH',
+      'click .openModalCesionesH': 'getCesionesH',
+      'click .openModalContratosH': 'getContratosH',
+
 
       //Cierre de detalle
       'click .closeModalAnexos': 'closeModal',
@@ -97,6 +102,22 @@
     this.getData(peticion, id);
   },
 
+  //Funciones para drawers de Historicos
+  getAnexosH: function () {
+    var id = this.model.get('idcliente_c');
+    var peticion="anexos_historicos";
+    this.getData(peticion, id,);
+  },
+  getCesionesH: function () {
+    var id = this.model.get('idcliente_c');
+    var peticion="cesiones_historicas"
+    this.getData(peticion, id);
+  },
+  getContratosH: function () {
+    var id = this.model.get('idcliente_c');
+    var peticion="contratos_historicos";
+    this.getData(peticion, id);
+  },
 
   /**
     Funciones de despliegue:
@@ -110,6 +131,10 @@
       $("#openAnexos").removeClass("openModalAnexos");
       $("#openCesiones").removeClass("openModalCesiones");
       $("#openContratos").removeClass("openModalContratos");
+      //Historicos
+      $("#openAnexosH").removeClass("openModalAnexosH");
+      $("#openCesionesH").removeClass("openModalCesionesH");
+      $("#openContratosH").removeClass("openModalContratosH");
 
       if (!records) {
         //Genera petición
@@ -154,6 +179,10 @@
             $("#openAnexos").removeClass("openModalAnexos");
             $("#openCesiones").removeClass("openModalCesiones");
             $("#openContratos").removeClass("openModalContratos");
+            //Historicos
+            $("#openAnexosH").removeClass("openModalAnexosH");
+            $("#openCesionesH").removeClass("openModalCesionesH");
+            $("#openContratosH").removeClass("openModalContratosH");
 
           }
         });
@@ -178,6 +207,10 @@
       $("#openAnexos").addClass("openModalAnexos");
       $("#openCesiones").addClass("openModalCesiones");
       $("#openContratos").addClass("openModalContratos");
+
+      $("#openAnexosH").addClass("openModalAnexosH");
+      $("#openCesionesH").addClass("openModalCesionesH");
+      $("#openContratosH").addClass("openModalContratosH");
 
   },
 
