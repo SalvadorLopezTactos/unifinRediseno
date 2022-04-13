@@ -291,13 +291,13 @@
                                       </div>
                                       Anexos activos
                                   </div>
-                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                  <div id="openAnexos" class="span6 openModalAnexosH divAnexos">
                                       <div class="row-fluid" style="background-color: #555">
                                         <div class="span7" style="text-align:right;" >
                                           <strong>{{ResumenCliente.leasing.anexos_historicos}}</strong>
                                         </div>
                                         <div class="span5" style="text-align:right;">
-                                          <i class="fa fa-eye" style="color:white"></i>
+                                          <i class="fa fa-book" style="color:white"></i>
                                         </div>
                                       </div>
                                       Anexos históricos
@@ -417,7 +417,7 @@
                         <!-- Preview de Cesiones -->
                         {{#if ResumenCliente.factoring.tiene_cesiones_liberado}}
                             <div class="row-fluid">
-                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                  <div id="openAnexos" class="span6 openModalCesiones divAnexos">
                                       <div class="row-fluid" style="background-color: #555">
                                         <div class="span7" style="text-align:right;" >
                                           <strong>{{ResumenCliente.factoring.cesiones_activas}}</strong>
@@ -428,13 +428,13 @@
                                       </div>
                                       Cesiones activas
                                   </div>
-                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                  <div id="openAnexos" class="span6 openModalCesionesH divAnexos">
                                       <div class="row-fluid" style="background-color: #555">
                                         <div class="span7" style="text-align:right;" >
                                           <strong>{{ResumenCliente.factoring.cesiones_historicas}}</strong>
                                         </div>
                                         <div class="span5" style="text-align:right;">
-                                          <i class="fa fa-eye" style="color:white"></i>
+                                          <i class="fa fa-book" style="color:white"></i>
                                         </div>
                                       </div>
                                       Cesiones históricas
@@ -550,7 +550,7 @@
                         <!-- Preview de Contratos -->
                         {{#if ResumenCliente.credito_auto.tiene_contrato_liberado}}
                             <div class="row-fluid">
-                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                  <div id="openAnexos" class="span6 openModalContratos divAnexos">
                                       <div class="row-fluid" style="background-color: #555">
                                         <div class="span7" style="text-align:right;" >
                                           <strong>{{ResumenCliente.credito_auto.contratos_activos}}</strong>
@@ -561,13 +561,13 @@
                                       </div>
                                       Contratos activos
                                   </div>
-                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                  <div id="openAnexos" class="span6 openModalContratosH divAnexos">
                                       <div class="row-fluid" style="background-color: #555">
                                         <div class="span7" style="text-align:right;" >
                                           <strong>{{ResumenCliente.credito_auto.contratos_historicos}}</strong>
                                         </div>
                                         <div class="span5" style="text-align:right;">
-                                          <i class="fa fa-eye" style="color:white"></i>
+                                          <i class="fa fa-book" style="color:white"></i>
                                         </div>
                                       </div>
                                       Contratos históricos
@@ -690,6 +690,640 @@
             <div class="span4"> </div>
           </div>
           <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALES BOTONES (Ojo y libro)
+<!-- Modal- Activos -->
+<div id="myModal1" class="row-fluid" style="display:none">
+  <div class="modal" style="background-color: #21618C">
+    <!-- Modal content -->
+    <center><font color="white">
+      Recuperando información
+      <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+    </font></center>
+  </div>
+</div>
+<!-- MODAL ACTIVOS CABECERA DE MODAL y TOTALES por Sección-->
+<div id="myModal" class="row-fluid" style="display:none">
+  <div class="modal span12" style="width:100%">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <!-- Modal header -->
+      <div class="modal-header">
+        <span class="close closeModalAnexos">&times;</span>
+        <h2> &nbsp;&nbsp; {{anexosdata.titulo_modal}}</h2>
+        <!-- Habilita cabeceras -->
+        <!-- Anexos -->
+        {{#if anexosdata.habilita_anexos_activos}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+          <thead>
+          <tr>
+          <th class="span4">Activo</th>
+          <th class="span2">Anexo <em id="orderByAnexo" class="fa fa-unsorted"></em></th>
+          <th class="span2">Fecha de contrataci&oacute;n <em id="orderByAnexoContrata" class="fa fa-unsorted"></em></th>
+          <th class="span2">Fecha de terminaci&oacute;n <em id="orderByAnexoTermino" class="fa fa-unsorted"></em></th>
+          <th class="span2">Renta</th>
+          <th class="span2">Pr&oacute;xima Renta</th>
+          <th class="span2">Vigencia del seguro</th>
+          <th class="span2">Monto Renta</th>
+          <th class="span2">Monto Activado</th>
+          <th class="span2">Valor residual sin IVA</th>
+          <th class="span2">Saldo insoluto</th>
+          <th class="span2">Cartera vencida</th>
+          <th class="span2">Moratorios</th>
+          <th class="span2">D&iacute;as de Mora</th>
+          <th class="span2">Tasa</th>
+          <th class="span2">Estatus Contrato</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr class="modal-body">
+          <td class="span4 totales">TOTALES</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna9}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna10}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna11}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna12}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna13}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna14}}</td>
+          <td class="span2 totales">{{anexosdata.totales_anexos_activos.columna15}}</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          </tr>
+          </tbody>
+          </table>
+        {{/if}}
+        <!-- Cesiones -->
+        {{#if anexosdata.habilita_cesiones_activas}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="span2">
+                  No. de Cesión
+                  <i id="orderByCesion" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span4">Deudor(es)</th>
+                <th class="span2">
+                  Fecha de Vencimiento
+                  <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">Monto por Vencer Financiado</th>
+                <th class="span2">Monto de Descuento</th>
+                <th class="span2">No. de contrato</th>
+                <th class="span2">Fecha de vencimiento contrato</th>
+                <th class="span2">Cartera vencida</th>
+                <th class="span2">Moratorios</th>
+                <th class="span2">Días de Mora</th>
+                <th class="span2">Estatus contrato</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr style="color:#000000;" class="modal-body">
+              <td class="span4 totales">TOTALES</td>
+              <td class="span2">&nbsp;</td>
+              <td class="span2">&nbsp;</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna4}}</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna5}}</td>
+              <td class="span2 totales">&nbsp;</td>
+              <td class="span2 totales">&nbsp;</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna8}}</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna9}}</td>
+              <td class="span2 totales">{{anexosdata.totales_cesiones_activas.columna10}}</td>
+              <td class="span2">&nbsp;</td>
+              </tr>
+              </tbody>
+          </table>
+        {{/if}}
+        <!-- Contratos -->
+        {{#if anexosdata.habilita_contratos_activos}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="span4">Unidad</th>
+                <th class="span2">
+                  Contrato
+                  <i id="orderByContrato" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de contratación
+                  <i id="orderByContratoContrata" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de terminación
+                  <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">Mensualidad</th>
+                <th class="span2">Próxima Domiciliación</th>
+                <th class="span2">Vigencia del seguro</th>
+                <th class="span2">Colocación </th>
+                <th class="span2">Saldo Insoluto</th>
+                <th class="span2">Cartera vencida </th>
+                <th class="span2">Moratorios </th>
+                <th class="span2">Días de Mora </th>  
+                <th class="span2">Tasa </th>
+                <th class="span2">Estatus Contrato </th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr style="color:#000000;" class="modal-body">
+          <td class="span4 totales">TOTALES</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>         
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna8}}</td>
+          <td class="span2 totales">{{anexosdata.totales_contratos_activos.columna9}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna10}}</td>
+          <td class="span2 totales">{{anexosdata.totales_contratos_activos.columna11}}</td>
+          <td class="span2 totales">{{anexosdata.totales_contratos_activos.columna12}}</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          </tr>
+          </tbody>
+          </table>
+        {{/if}}
+         {{#if anexosdata.habilita_anexos_activos_historicos}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+          <thead>
+          <tr>
+          <th class="span4">Activo</th>
+          <th class="span2">Anexo <em id="orderByAnexo" class="fa fa-unsorted"></em></th>
+          <th class="span2">Fecha de contrataci&oacute;n <em id="orderByAnexoContrata" class="fa fa-unsorted"></em></th>
+          <th class="span2">Fecha de terminaci&oacute;n <em id="orderByAnexoTermino" class="fa fa-unsorted"></em></th>
+          <th class="span2">Renta</th>
+          <th class="span2">Pr&oacute;xima Renta</th>
+          <th class="span2">Vigencia del seguro</th>
+          <th class="span2">Monto Renta</th>
+          <th class="span2">Monto Activado</th>
+          <th class="span2">Valor residual sin IVA</th>
+          <th class="span2">Saldo insoluto</th>
+          <th class="span2">Cartera vencida</th>
+          <th class="span2">Moratorios</th>
+          <th class="span2">D&iacute;as de Mora</th>
+          <th class="span2">Tasa</th>
+          <th class="span2">Estatus Contrato</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr style="color:#000000;" class="modal-body">
+          <td class="span4 totales">TOTALES</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna9}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna10}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna11}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna12}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna13}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna14}}</td>
+          <td class="span2 totales">{{anexosdata.totales_anexos_historicos.columna15}}</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          </tr>
+          </tbody>
+          </table>
+        {{/if}}
+        <!-- Cesiones HISTORICAS-->
+        {{#if anexosdata.habilita_cesiones_activas_historicas}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="span2">
+                  No. de Cesión
+                  <i id="orderByCesion" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span4">Deudor(es)</th>
+                <th class="span2">
+                  Fecha de Vencimiento
+                  <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">Monto por Vencer Financiado</th>
+                <th class="span2">Monto de Descuento</th>
+                <th class="span2">No. de contrato</th>
+                <th class="span2">Fecha de vencimiento contrato</th>
+                <th class="span2">Cartera vencida</th>
+                <th class="span2">Moratorios</th>
+                <th class="span2">Días de Mora</th>
+                <th class="span2">Estatus contrato</th>
+              </tr>
+              <tbody>
+                <tr style="color:#000000" class="modal-body">
+              <td class="span4 totales">TOTALES</td>
+              <td class="span2">&nbsp;</td>
+              <td class="span2">&nbsp;</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna4}}</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna5}}</td>
+              <td class="span2">&nbsp;</td>
+              <td class="span2">&nbsp;</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna8}}</td>
+              <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna9}}</td>
+              <td class="span2 totales">{{anexosdata.totales_cesiones_historicas.columna10}}</td>
+              <td class="span2">&nbsp;</td>
+              </tr>
+              </tbody>
+            </thead>
+          </table>
+        {{/if}}
+        <!-- Contratos HISTORICOS-->
+        {{#if anexosdata.habilita_contratos_activos_historicos}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="span4">Unidad</th>
+                <th class="span2">
+                  Contrato
+                  <i id="orderByContrato" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de contratación
+                  <i id="orderByContratoContrata" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de terminación
+                  <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">Mensualidad</th>
+                <th class="span2">Próxima Domiciliación</th>
+                <th class="span2">Vigencia del seguro</th>
+                <th class="span2">Colocación </th>
+                <th class="span2">Saldo Insoluto </th>
+                <th class="span2">Cartera vencida </th>
+                <th class="span2">Moratorios </th>
+                <th class="span2">Días de Mora </th>  
+                <th class="span2">Tasa </th>
+                <th class="span2">Estatus Contrato </th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr style="color:#000000;" class="modal-body">
+          <td class="span4">TOTALES</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna8}}</td>
+          <td class="span2 totales">{{anexosdata.totales_contratos_historicos.columna9}}</td>
+          <td class="span2 totales">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna10}}</td>
+          <td class="span2 totales">{{anexosdata.totales_contratos_historicos.columna11}}</td>
+          <td class="span2 totales">{{anexosdata.totales_contratos_historicos.columna12}}</td>
+          <td class="span2">&nbsp;</td>
+          <td class="span2">&nbsp;</td>
+          </tr>
+          </tbody>
+          </table>
+        {{/if}}
+
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+            <!-- Anexos -->
+            {{#if anexosdata.habilita_anexos_activos}}
+            	{{#if anexosdata.anexos_activos}}
+                <!--Lista -->
+                <div class="list-view">
+                  <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                    <thead class="hide">
+                      <tr>
+                        <th class="span4">Activo</th>
+                        <th class="span2">
+                          Anexo
+                          <i id="orderByAnexo" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">
+                          Fecha de contratación
+                          <i id="orderByAnexoContrata" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">
+                          Fecha de terminación
+                          <i id="orderByAnexoTermino" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">Renta</th>
+                        <th class="span2">Próxima Renta</th>
+                        <th class="span2">Vigencia del seguro</th>
+                        
+                        <th class="span2">Monto Renta</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each anexosdata.anexos_activos}}
+                       <tr>
+                         <td class="span4" style="white-space:initial;">{{columna1}}</td>
+                         <td class="span2">{{columna2}}</td>
+                         <td class="span2">{{columna3}}</td>
+                         <td class="span2">{{columna4}}</td>
+                         <td class="span2">{{columna5}}</td>
+                         <td class="span2">{{columna6}}</td>
+                         <td class="span2">{{columna7}}</td>
+                         <td class="span2">$ {{customFormatNumber columna9}}</td>
+                         <td class="span2">$ {{customFormatNumber columna10}}</td>
+                         <td class="span2">$ {{customFormatNumber columna11}}</td>
+                         <td class="span2">$ {{customFormatNumber columna12}}</td>
+                         <td class="span2">$ {{customFormatNumber columna13}}</td>
+                         <td class="span2">$ {{customFormatNumber columna14}}</td>
+                         <td class="span2">{{columna15}}</td>
+                         <td class="span2">{{columna16}}</td>
+                         <td class="span2">{{columna17}}</td>
+                       
+                       </tr>
+                     {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+               
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <!-- Anexos HISTORICOS (Registros) -->
+            <!-- Anexos -->
+            {{#if anexosdata.habilita_anexos_activos_historicos}}
+            	{{#if anexosdata.anexos_historicos}}
+                <!--Lista -->
+                <div class="list-view">
+                  <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                    <thead class="hide">
+                      <tr>
+                        <th class="span4">Activo</th>
+                        <th class="span2">
+                          Anexo
+                          <i id="orderByAnexo" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">
+                          Fecha de contratación
+                          <i id="orderByAnexoContrata" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">
+                          Fecha de terminación
+                          <i id="orderByAnexoTermino" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">Renta</th>
+                        <th class="span2">Próxima Renta</th>
+                        <th class="span2">Vigencia del seguro</th>
+                        
+                        <th class="span2">Monto Renta</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each anexosdata.anexos_historicos}}
+                       <tr>
+                         <td class="span4" style="white-space:initial;">{{columna1}}</td>
+                         <td class="span2">{{columna2}}</td>
+                         <td class="span2">{{columna3}}</td>
+                         <td class="span2">{{columna4}}</td>
+                         <td class="span2">{{columna5}}</td>
+                         <td class="span2">{{columna6}}</td>
+                         <td class="span2">{{columna7}}</td>
+                         <td class="span2">$ {{customFormatNumber columna9}}</td>
+                         <td class="span2">$ {{customFormatNumber columna10}}</td>
+                         <td class="span2">$ {{customFormatNumber columna11}}</td>
+                         <td class="span2">$ {{customFormatNumber columna12}}</td>
+                         <td class="span2">$ {{customFormatNumber columna13}}</td>
+                         <td class="span2">$ {{customFormatNumber columna14}}</td>
+                         <td class="span2">{{columna15}}</td>
+                         <td class="span2">{{columna16}}</td>
+                         <td class="span2">{{columna17}}</td>
+                       
+                       </tr>
+                     {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+                
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+
+            <!-- Cesiones -->
+            {{#if anexosdata.habilita_cesiones_activas}}
+            	{{#if anexosdata.cesiones_activas}}
+              <!--Lista -->
+              <div class="list-view">
+                <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                  <thead class="hide">
+                    <tr>
+                      <th class="span2">
+                        No. de Cesión
+                        <i id="orderByCesion" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span4" style="white-space:initial;">Deudor(es)</th>
+                      <th class="span2">
+                        Fecha de Vencimiento
+                        <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">Monto por Vencer Financiado</th>
+                      <th class="span2">Monto de Descuento</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each anexosdata.cesiones_activas}}
+                     <tr>
+                       <td class="span2">{{columna1}}</td>
+                       <td class="span4" style="white-space:initial;">{{columna2}}</td>
+                       <td class="span2">{{columna3}}</td>
+                       <td class="span2">$ {{customFormatNumber columna4}}</td>
+                       <td class="span2">$ {{customFormatNumber columna5}}</td>
+                       <td class="span2">{{columna6}}</td>
+                       <td class="span2">{{columna7}}</td>
+                       <td class="span2">$ {{customFormatNumber columna8}}</td>
+                       <td class="span2">$ {{customFormatNumber columna9}}</td>
+                       <td class="span2">{{columna10}}</td>
+                       <td class="span2">{{columna11}}</td>
+                     </tr>
+                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+               
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <!-- Cesiones Historicas-->
+
+            {{#if anexosdata.habilita_cesiones_activas_historicas}}
+            	{{#if anexosdata.cesiones_historicas}}
+              <!--Lista -->
+              <div class="list-view">
+                <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                  <thead class="hide">
+                    <tr>
+                      <th class="span2">
+                        No. de Cesión
+                        <i id="orderByCesion" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span4" style="white-space:initial;">Deudor(es)</th>
+                      <th class="span2">
+                        Fecha de Vencimiento
+                        <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">Monto por Vencer Financiado</th>
+                      <th class="span2">Monto de Descuento</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each anexosdata.cesiones_historicas}}
+                     <tr>
+                       <td class="span2">{{columna1}}</td>
+                       <td class="span4" style="white-space:initial;">{{columna2}}</td>
+                       <td class="span2">{{columna3}}</td>
+                       <td class="span2">$ {{customFormatNumber columna4}}</td>
+                       <td class="span2">$ {{customFormatNumber columna5}}</td>
+                       <td class="span2">{{columna6}}</td>
+                       <td class="span2">{{columna7}}</td>
+                       <td class="span2">$ {{customFormatNumber columna8}}</td>
+                       <td class="span2">$ {{customFormatNumber columna9}}</td>
+                       <td class="span2">{{columna10}}</td>
+                       <td class="span2">{{columna11}}</td>
+                     </tr>
+                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <!-- Contratos -->
+            {{#if anexosdata.habilita_contratos_activos}}
+            	{{#if anexosdata.contratos_activos}}
+              <!--Lista -->
+              <div class="list-view">
+                <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                  <thead class="hide">
+                    <tr>
+                      <th class="span4">Unidad</th>
+                      <th class="span2">
+                        Contrato
+                        <i id="orderByContrato" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">
+                        Fecha de contratación
+                        <i id="orderByContratoContrata" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">
+                        Fecha de terminación
+                        <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">Mensualidad</th>
+                      <th class="span2">Próxima Domiciliación</th>
+                      <th class="span2">Vigencia del seguro</th>
+                      <th class="span2">Colocación</th>
+                      <th class="span2">Saldo Insoluto</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each anexosdata.contratos_activos}}
+                     <tr>
+                       <td class="span4" style="white-space:initial;">{{columna1}}</td>
+                       <td class="span2">{{columna2}}</td>
+                       <td class="span2">{{columna3}}</td>
+                       <td class="span2">{{columna4}}</td>
+                       <td class="span2">{{columna5}}</td>
+                       <td class="span2">{{columna6}}</td>
+                       <td class="span2">{{columna7}}</td>
+                       <td class="span2">$ {{customFormatNumber columna8}}</td>
+                       <td class="span2">$ {{customFormatNumber columna9}}</td>
+                       <td class="span2">$ {{customFormatNumber columna10}}</td>
+                       <td class="span2">$ {{customFormatNumber columna11}}</td>
+                       <td class="span2">{{ columna12}}</td>
+                       <td class="span2">{{ columna13}}</td>
+                       <td class="span2">{{ columna14}}</td>
+                     </tr>
+                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+               
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <!-- CONTRATOS HISTORICOS-->
+             {{#if anexosdata.habilita_contratos_activos_historicos}}
+            	{{#if anexosdata.contratos_historicos}}
+              <!--Lista -->
+              <div class="list-view">
+                <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                  <thead class="hide">
+                    <tr>
+                      <th class="span4">Unidad</th>
+                      <th class="span2">
+                        Contrato
+                        <i id="orderByContrato" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">
+                        Fecha de contratación
+                        <i id="orderByContratoContrata" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">
+                        Fecha de terminación
+                        <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">Mensualidad</th>
+                      <th class="span2">Próxima Domiciliación</th>
+                      <th class="span2">Vigencia del seguro</th>
+                      <th class="span2">Colocación</th>
+                      <th class="span2">Saldo Insoluto</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each anexosdata.contratos_historicos}}
+                     <tr>
+                       <td class="span4" style="white-space:initial;">{{columna1}}</td>
+                       <td class="span2">{{columna2}}</td>
+                       <td class="span2">{{columna3}}</td>
+                       <td class="span2">{{columna4}}</td>
+                       <td class="span2">{{columna5}}</td>
+                       <td class="span2">{{columna6}}</td>
+                       <td class="span2">{{columna7}}</td>
+                       <td class="span2">$ {{customFormatNumber columna8}}</td>
+                       <td class="span2">$ {{customFormatNumber columna9}}</td>
+                       <td class="span2">$ {{customFormatNumber columna10}}</td>
+                       <td class="span2">$ {{customFormatNumber columna11}}</td>
+                       <td class="span2">{{ columna12}}</td>
+                       <td class="span2">{{ columna13}}</td>
+                       <td class="span2">{{ columna14}}</td>
+                     </tr>
+                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+               
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <br>
       </div>
     </div>
   </div>
