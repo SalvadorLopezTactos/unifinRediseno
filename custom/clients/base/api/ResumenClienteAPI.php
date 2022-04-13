@@ -151,8 +151,8 @@ class ResumenClienteAPI extends SugarApi
             "fecha_completa_vencimiento" => "",
             "linea_disponible" => "",
             "fecha_pago" => "",
-            "anexos_activos" => 0,
-            "anexos_historicos" => 0,
+            "cesiones_activas" => 0,
+            "cesiones_historicas" => 0,
             "nivel_satisfaccion" => "Sin Clasificar",
             "promotor" => "",
             "color" => "",
@@ -166,10 +166,11 @@ class ResumenClienteAPI extends SugarApi
             "fecha_proximo_pago" => "",
             "mensualidad_activa" => "",
             "dias_atraso" => 0,
+            "tipo_linea" => 0,
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
             "tiene_linea_autorizadda" => false,
-            "tiene_anexo_liberado" => false
+            "tiene_cesiones_liberado" => false
           );
         //Crédito automotriz
         $arr_principal['credito_auto'] = array("linea_autorizada" => "",
@@ -180,8 +181,8 @@ class ResumenClienteAPI extends SugarApi
             "fecha_completa_vencimiento" => "",
             "linea_disponible" => "",
             "fecha_pago" => "",
-            "anexos_activos" => 0,
-            "anexos_historicos" => 0,
+            "contratos_activos" => 0,
+            "contratos_historicos" => 0,
             "nivel_satisfaccion" => "Sin Clasificar",
             "promotor" => "",
             "color" => "",
@@ -198,7 +199,7 @@ class ResumenClienteAPI extends SugarApi
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
             "tiene_linea_autorizadda" => false,
-            "tiene_anexo_liberado" => false
+            "tiene_contrato_liberado" => false
           );
         //Fleet
         $arr_principal['fleet'] = array("linea_aproximada" => "",
@@ -237,7 +238,6 @@ class ResumenClienteAPI extends SugarApi
             "promotorId" => "",
             "ultima_cita" => "",
             "ultima_llamada" => "",
-            "total_oportunidades" => "",
             "op_ganadas" => "",
             "op_presentacion" => "",
             "op_cotizando" => "",
@@ -247,10 +247,8 @@ class ResumenClienteAPI extends SugarApi
             "cobranza" => "",
             "kam_asignado" => "",
             "muestra_producto" => false,
-            "es_prospecto_cliente" => false,
-            "tiene_linea_autorizadda" => false,
-            "tiene_anexo_liberado" => false
-
+            "tiene_seguros" => false,
+            "tiene_ganada" => false
         );
         //Crédito Simple
         $arr_principal['credito_simple'] = array("linea_autorizada" => "",
@@ -409,7 +407,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['credito_auto']['contratos_historicos'] = $registros_historicos;
                         $arr_principal['credito_auto']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['credito_auto']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
-                        $arr_principal['credito_auto']['tiene_anexo_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['credito_auto']['tiene_contrato_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
                         break;
                     case '4': //Factoraje
                         $arr_principal['factoring']['tipo_cuenta'] = $tipoCuenta;
@@ -428,7 +426,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['factoring']['cesiones_historicas'] = $registros_historicos;
                         $arr_principal['factoring']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['factoring']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
-                        $arr_principal['factoring']['tiene_anexo_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['factoring']['tiene_cesiones_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
                         break;
                     case '6': //Fleet
                         $arr_principal['fleet']['tipo_cuenta'] = $tipoCuenta;
@@ -483,6 +481,9 @@ class ResumenClienteAPI extends SugarApi
                         //$arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
                         //$arr_principal['unilease']['estatus_atencion'] = $statusProducto;
                         $arr_principal['unilease']['cobranza'] = $cobranza;
+                        break;
+                    case '10': //Seguros
+                        $arr_principal['seguros']['cobranza'] = $cobranza;
                         break;
                     default:
                         break;
@@ -581,6 +582,8 @@ class ResumenClienteAPI extends SugarApi
                     //Control para factoring
                     if ($opps->tipo_producto_c == 4 && $opps->negocio_c == 4 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
                         $arr_principal['factoring']['tiene_linea_autorizadda'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['factoring']['tiene_linea_autorizadda'];
+                        $arr_principal['factoring']['tipo_linea'] = $opps->f_tipo_linea_c;
+
                         $linea_aut_factoring += $opps->monto_c;
                         $linea_disp_factoring += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -1122,11 +1125,18 @@ class ResumenClienteAPI extends SugarApi
               else {
                 if($seguro->etapa != 10) $proceso = $proceso + 1;
               }
+              $arr_principal['seguros']['op_ganadas'] = ($seguro->etapa == '9') ? $arr_principal['seguros']['op_ganadas']+1 : $arr_principal['seguros']['op_ganadas'];
+              $arr_principal['seguros']['op_presentacion'] = ($seguro->etapa == '6') ? $arr_principal['seguros']['op_presentacion']+1 : $arr_principal['seguros']['op_presentacion'];
+              $arr_principal['seguros']['op_cotizando'] = ($seguro->etapa == '2') ? $arr_principal['seguros']['op_cotizando']+1 : $arr_principal['seguros']['op_cotizando'];
+              $arr_principal['seguros']['op_no_cotizado'] = ($seguro->etapa == '5') ? $arr_principal['seguros']['op_no_cotizado']+1 : $arr_principal['seguros']['op_no_cotizado'];
+              $arr_principal['seguros']['op_no_ganada'] = ($seguro->etapa == '10') ? $arr_principal['seguros']['op_no_ganada']+1 : $arr_principal['seguros']['op_no_ganada'];
+              $arr_principal['seguros']['kam_asignado'] = $seguro->ejecutivo_c;
             }
             $arr_principal['seguros']['ganadas'] = $ganadas;
             $arr_principal['seguros']['proceso'] = $proceso;
             $arr_principal['seguros']['prima'] = $prima;
             $arr_principal['seguros']['ingreso'] = $ingreso;
+            $arr_principal['seguros']['muestra_producto'] = true;
           }
         }
 
@@ -1201,6 +1211,25 @@ class ResumenClienteAPI extends SugarApi
         // $GLOBALS['log']->fatal('resultado de API:');
         // $GLOBALS['log']->fatal($api->platform);
         //$api->platform;
+
+        $arr_principal['leasing']['muestra_producto'] = true;
+        $arr_principal['leasing']['es_prospecto_cliente'] = true;
+        $arr_principal['leasing']['tiene_anexo_liberado'] = true;
+        $arr_principal['leasing']['tiene_linea_autorizadda'] = true;
+
+        $arr_principal['factoring']['muestra_producto'] = true;
+        $arr_principal['factoring']['es_prospecto_cliente'] = true;
+        $arr_principal['factoring']['tiene_linea_autorizadda'] = true;
+        $arr_principal['factoring']['tiene_cesiones_liberado'] = true;
+
+        $arr_principal['credito_auto']['muestra_producto'] = true;
+        $arr_principal['credito_auto']['es_prospecto_cliente'] = true;
+        $arr_principal['credito_auto']['tiene_linea_autorizadda'] = true;
+        $arr_principal['credito_auto']['tiene_contrato_liberado'] = true;
+
+        $arr_principal['seguros']['muestra_producto'] = true;
+        $arr_principal['seguros']['tiene_seguros'] = true;
+        $arr_principal['seguros']['tiene_ganada'] = true;
 
         return $arr_principal;
     }
