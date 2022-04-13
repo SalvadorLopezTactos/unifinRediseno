@@ -305,7 +305,11 @@ class ResumenClienteAPI extends SugarApi
         if($beanPersona){
             //General
             $arr_principal['general_cliente']['tipo'] = $beanPersona->tct_tipo_subtipo_txf_c;  // tipo_general_c
-            $arr_principal['general_cliente']['cliente_desde'] = $beanPersona->fecha_cliente_c;  // tipo_general_c
+            //Se establece atributo para mostrar campos de Gpo Empresarial solo si el tipo Gral es Prospecto o Cliente
+            if($beanPersona->tipo_registro_cuenta_c=='2' || $beanPersona->tipo_registro_cuenta_c=='3'){
+                $arr_principal['general_cliente']['muestra_gpo_empresarial']='1';
+            }
+            $arr_principal['general_cliente']['cliente_desde'] = $beanPersona->fecha_cliente_c;
             $arr_principal['general_cliente']['segmento'] = $beanPersona->segmento_c;
             $arr_principal['general_cliente']['cobranza'] = $beanPersona->cobranza_c;
             $arr_principal['general_cliente']['sector_economico'] = isset($app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c]) ? $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c] : '';
@@ -740,6 +744,9 @@ class ResumenClienteAPI extends SugarApi
             }
             //Se aplica substring para eliminar la última coma
             $arr_principal['general_cliente']['productos_contratados'] = substr($str_productos_contratados, 0, -2);
+            if($str_productos_contratados!=''){
+                $arr_principal['general_cliente']['show_if_linea_autorizada'] = '1';
+            }
         }
 
         ############################

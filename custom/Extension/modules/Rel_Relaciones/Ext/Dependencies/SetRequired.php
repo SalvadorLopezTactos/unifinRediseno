@@ -30,6 +30,21 @@ $dependencies['Rel_Relaciones']['rel_relaciones_accounts_name_readonly'] = array
         ),
     ),
 );
+
+$dependencies['Rel_Relaciones']['estatus_tarjeta_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'estatus_tarjeta_c',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
    
 
     //////////***************************   END: READ ONLY   ******************************////////////////////////////

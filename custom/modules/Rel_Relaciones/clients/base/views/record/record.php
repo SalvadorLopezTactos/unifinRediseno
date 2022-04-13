@@ -284,6 +284,15 @@ array (
               26 => 
               array (
               ),
+              27 => 
+              array (
+                'readonly' => false,
+                'name' => 'estatus_tarjeta_c',
+                'label' => 'LBL_ESTATUS_TARJETA_C',
+              ),
+              28 => 
+              array (
+              ),
             ),
           ),
           2 => 
