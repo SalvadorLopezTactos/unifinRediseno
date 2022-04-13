@@ -14,7 +14,7 @@ $hook_array['before_save'][] = Array(
 $hook_array['before_save'][] = Array(
     2,
     'Regresa a Cliente si cambia a Prospecto',
-    'custom/modules/uni_Productos/regresa_cliente.php',
-    'regresa_cliente',
-    'regresa_cliente'
+    'custom/modules/uni_Productos/regresa_cliente1.php',
+    'regresa_cliente1',
+    'regresa_cliente1'
 );
