@@ -325,6 +325,66 @@ array (
           ),
           2 => 
           array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'readonly' => false,
+                'name' => 'vencimiento_anexo_final_c',
+                'label' => 'LBL_VENCIMIENTO_ANEXO_FINAL',
+              ),
+              1 => 
+              array (
+                'readonly' => false,
+                'name' => 'vencimiento_anexo_prox_c',
+                'label' => 'LBL_VENCIMIENTO_ANEXO_PROX',
+              ),
+              2 => 
+              array (
+                'readonly' => false,
+                'name' => 'proxima_mensualidad_c',
+                'label' => 'LBL_PROXIMA_MENSUALIDAD',
+              ),
+              3 => 
+              array (
+                'readonly' => false,
+                'name' => 'mensualidad_activa_c',
+                'label' => 'LBL_MENSUALIDAD_ACTIVA',
+              ),
+              4 => 
+              array (
+                'readonly' => false,
+                'name' => 'dias_atraso_c',
+                'label' => 'LBL_DIAS_ATRASO',
+              ),
+              5 => 
+              array (
+                'readonly' => false,
+                'name' => 'cobranza_c',
+                'label' => 'LBL_COBRANZA',
+              ),
+              6 => 
+              array (
+                'readonly' => false,
+                'name' => 'registros_activos_c',
+                'label' => 'LBL_REGISTROS_ACTIVOS',
+              ),
+              7 => 
+              array (
+                'readonly' => false,
+                'name' => 'registros_historicos_c',
+                'label' => 'LBL_REGISTROS_HISTORICOS',
+              ),
+            ),
+          ),
+          3 => 
+          array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,

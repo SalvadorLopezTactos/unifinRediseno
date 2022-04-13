@@ -36,3 +36,4 @@ $mod_strings['LBL_MENSUALIDAD_ACTIVA'] = 'Mensualidad activa';
 $mod_strings['LBL_DIAS_ATRASO'] = 'Días de atraso';
 $mod_strings['LBL_REGISTROS_ACTIVOS'] = 'Registros Activos';
 $mod_strings['LBL_REGISTROS_HISTORICOS'] = 'Registros Históricos';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Campos Vista 360';
