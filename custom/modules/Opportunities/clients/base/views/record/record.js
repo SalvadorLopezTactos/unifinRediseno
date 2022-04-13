@@ -1638,7 +1638,7 @@
 
         if(!cancelar){
             app.alert.show("CancelcacSol", {
-                level: "alert",
+                level: "error",
                 title: respuesta.ErrorMessage,
                 autoClose: false
             });
