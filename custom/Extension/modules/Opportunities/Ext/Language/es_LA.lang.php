@@ -261,3 +261,4 @@ $mod_strings['LBL_REFERIDO_CLIENTE_PROV_C'] = 'Referido';
 $mod_strings['LBL_REFERENCIADOR_SC_ACCOUNT_ID'] = 'Referenciado por SC (relacionado Cuenta ID)';
 $mod_strings['LBL_REFERENCIADOR_SC'] = 'Referenciado por SC';
 $mod_strings['LBL_CODIGO_EXPO'] = 'Código de Expo';
+$mod_strings['LBL_F_TIPO_LINEA'] = 'Tipo de línea';

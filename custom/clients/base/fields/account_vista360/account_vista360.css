@@ -81,3 +81,79 @@ abbr{
 .table-borderless > thead > tr > th {
     border: none;
 }
+
+/*
+  Clases:
+  .divProductos = formato para div divisor de Productos
+  .divInline = Mantiene divs en misma línea
+  .contenedorIcono = formato para contener icono de producto
+  .contenedorTitulo = formato para contener titulo de producto (incluye división en diagonal)
+  .formatoTitulo = centra y da formato a titulo de producto
+  .formatoHC = formato para título de historial de contacto
+  .formatoFilaG = formato para filas gris
+*/
+.divProductos {
+  text-align: center;
+  color: white;
+  font-family: verdana;
+  font-size: 15px;padding: 10px 0;
+  background-color:#0A5E83;
+}
+.divInline {
+  display: flex;
+  justify-content: center;
+}
+.contenedorIcono {
+  width: 30%;
+  height: 50px;
+  background: white;
+  text-align: center;
+}
+.contenedorTitulo {
+  width: 70%;
+  height: 0px;
+  border-left: 30px solid white;
+  border-bottom: 50px solid #021741;
+}
+.formatoTitulo {
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+  font-family: verdana;
+  font-size: 15px;
+}
+.formatTitulooHC {
+  color: #021741;
+  font-family: verdana;
+  /* font-size: 15px; */
+  text-align: center;
+  background-color:#E6E7E9;
+}
+.formatoHC {
+  color: white;
+  font-family: verdana;
+  /* font-size: 15px; */
+  /* text-align: center; */
+  background-color:#021741;
+}
+.formatoFilaG {
+  color: #021741;
+  font-family: verdana;
+  /* font-size: 15px; */
+  /* text-align: center; */
+  background-color:#E6E7E9;
+}
+.formatoFilaA {
+  color: #E6E7E9;
+  font-family: verdana;
+  /* font-size: 15px; */
+  /* text-align: center; */
+  background-color:#021741;
+}
+.divAnexos {
+  text-align: center;
+  color: white;
+  font-family: verdana;
+  font-size: 10px;padding: 5px 0;
+  background-color:#555554;
+}

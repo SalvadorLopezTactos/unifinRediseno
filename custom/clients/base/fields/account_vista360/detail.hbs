@@ -61,7 +61,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>                                           
+            </div>
         </div>
 
         <!-- DIV sección Contacto-->
@@ -146,10 +146,151 @@
                     </div>
                 </div>
 
-            </div>                                           
+            </div>
         </div>
         <div class="span2"></div>
     </div>
+
+    <!-- Comienza nueva sección productos -->
+    <div id="cards-container_division" class="row-fluid divProductos">
+      PRODUCTOS
+    </div>
+    <!-- Tarjetas de productos -->
+    <div id="cards-container_products" class="row-fluid" style="background-color:#C0BEC1">
+        <!-- DIV Producto Leasing-->
+        {{#if ResumenCliente.leasing.muestra_producto}}
+            <div class="span4 card-container">
+                <!-- Título producto -->
+                <div class="divInline">
+                	  <!-- Icono -->
+                	  <div class="contenedorIcono">
+                		    <img src="{{getUnifinListValue 'iconos_vista360_list' 'leasing'}}" style="height: 50px; width: 50px;">
+                    </div>
+                	  <!-- Nombre producto -->
+                  	<div class="contenedorTitulo">
+                     	  <div class="formatoTitulo">
+                      		  LEASING
+                      	</div>
+                  	</div>
+                </div>
+                <!-- Detalle del producto -->
+                <div class="information-container">
+                    <!-- Detalle -->
+                    <div class="information-general-container">
+                        <table style="font-size:10px;color:#021741">
+                            <tbody>
+                                <!-- Historial de contactos -->
+                                <tr class="formatoFilaG">
+                                    <td colspan="2"><strong><center>HISTORIAL DE CONTACTO</center></strong></td>
+                                </tr>
+                                <tr class="formatoFilaA"  style="border-bottom-style: solid; border-color: white;">
+                                    <td style="width:40%;"><strong>Última cita</strong></td>
+                                    <td>{{ResumenCliente.leasing.ultima_cita}}</td>
+                                </tr>
+                                <tr class="formatoFilaA">
+                                    <td><strong>Última llamada</strong></td>
+                                    <td>{{ResumenCliente.leasing.ultima_llamada}}</td>
+                                </tr>
+                                <!-- Detalle -->
+                                <tr>
+                                    <td><strong>Estatus de atención</strong></td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</td>
+                                </tr>
+                                {{#if ResumenCliente.leasing.tiene_linea_autorizadda}}
+                                    <tr>
+                                        <td><strong>Estatus del producto</strong></td>
+                                        <td>{{ResumenCliente.leasing.estatusxproducto}}</td>
+                                    </tr>
+                                {{/if}}
+                                <tr>
+                                    <td><strong>Tipo de cuenta</strong></td>
+                                    <td>
+                                        {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.leasing.tipo_cuenta}}
+                                        {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.leasing.subtipo_cuenta}}
+                                    </td>
+                                </tr>
+                                {{#if ResumenCliente.leasing.tiene_linea_autorizadda}}
+                                    <tr class="formatoFilaG">
+                                        <td><strong>Línea autorizada</strong></td>
+                                        <td>$ {{customFormatNumber ResumenCliente.leasing.linea_autorizada}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fecha de vencimiento de la línea</strong></td>
+                                        <td>{{ResumenCliente.leasing.fecha_vencimiento}}</td>
+                                    </tr>
+                                    <tr class="formatoFilaG">
+                                        <td><strong>Línea disponible</strong></td>
+                                        <td>$ {{customFormatNumber ResumenCliente.leasing.linea_disponible}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Estatus de la línea</strong></td>
+                                        <td>{{ResumenCliente.leasing.estatus_linea}}</td>
+                                    </tr>
+                                {{/if}}
+                                {{#if ResumenCliente.leasing.tiene_anexo_liberado}}
+                                    <tr>
+                                        <td><strong>Vencimiento anexo final</strong></td>
+                                        <td>{{ResumenCliente.leasing.vencimiento_anexo_final}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Vencimiento siguiente anexo</strong></td>
+                                        <td>{{ResumenCliente.leasing.vencimiento_siguiente_anexo}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Próxima mensualidad</strong></td>
+                                        <td>{{ResumenCliente.leasing.fecha_proximo_pago}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mensualidad activa</strong></td>
+                                        <td>{{ResumenCliente.leasing.mensualidad_activa}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Días de atraso</strong></td>
+                                        <td>{{ResumenCliente.leasing.dias_atraso}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cobranza</strong></td>
+                                        <td>{{ResumenCliente.leasing.cobranza}}</td>
+                                    </tr>
+                                {{/if}}
+                                <tr>
+                                    <td><strong>Asesor</strong></td>
+                                    <td>{{ResumenCliente.leasing.promotor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Preview de Anexos -->
+                        {{#if ResumenCliente.leasing.tiene_anexo_liberado}}
+                            <div class="row-fluid">
+                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                      <div class="row-fluid" style="background-color: #555">
+                                        <div class="span7" style="text-align:right;" >
+                                          <strong>{{ResumenCliente.leasing.anexos_activos}}</strong>
+                                        </div>
+                                        <div class="span5" style="text-align:right;">
+                                          <i class="fa fa-eye" style="color:white"></i>
+                                        </div>
+                                      </div>
+                                      Anexos activos
+                                  </div>
+                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                      <div class="row-fluid" style="background-color: #555">
+                                        <div class="span7" style="text-align:right;" >
+                                          <strong>{{ResumenCliente.leasing.anexos_historicos}}</strong>
+                                        </div>
+                                        <div class="span5" style="text-align:right;">
+                                          <i class="fa fa-eye" style="color:white"></i>
+                                        </div>
+                                      </div>
+                                      Anexos históricos
+                                  </div>
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+          {{/if}}
+      </div>
 </div>
 <!-- Sección para modales -->
 <div id="modalGpoEmpresarial" class="row-fluid" style="display:none">
