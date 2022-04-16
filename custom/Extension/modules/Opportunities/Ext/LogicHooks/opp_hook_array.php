@@ -134,7 +134,7 @@ $hook_array['after_save'][] = Array(
     'IntegracionQuantico', // name of the class
     'QuanticoIntegracion'
 );
-
+/*
 $hook_array['after_save'][] = Array(
     15,
     'Actualizacion Quantico de Leasing, Factoraje y CA',
@@ -142,7 +142,7 @@ $hook_array['after_save'][] = Array(
     'IntegracionQuantico', // name of the class
     'QuanticoUpdate'
 );
-
+*/
 $hook_array['after_save'][] = Array(
     16,
     'Actualizacion de valores para condiciones financieras de quantico',
@@ -159,13 +159,13 @@ $hook_array['before_save'][] = Array(
     'InfoMeet'
 );
 
-$hook_array['after_save'][] = Array(
+/*$hook_array['after_save'][] = Array(
     18,
     'POST UNION SERVICE',
     'custom/modules/Opportunities/opp_union.php',
     'oppUnionService', // name of the class
     'idResponseUnion'
-);
+);*/
 
 $hook_array['before_save'][] = Array(
     24,

@@ -1814,9 +1814,9 @@
             }
         }
 
-        //Eliminar los productos Unilease, Credito sos Lista
+        //Eliminar los productos Unilease, Credito SOS y Tarjeta de Crédito de la lista
         Object.keys(op2).forEach(function (key) {
-            if (key == 9 || key == 7 || key == "0" || key == 8) {
+            if (key == 9 || key == 7 || key == "0" || key == 8 || key == 14) {
                 delete op2[key];
             }
         });
