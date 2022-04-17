@@ -103,12 +103,12 @@ class ResumenClienteAPI extends SugarApi
             "color" => $Azul);
 
         $arr_principal['contactos'] = array(
-            "nombre_negocios" => "No definido",
-            "puesto_negocios"=>"No definido",
+            "nombre_negocios" => "",
+            "puesto_negocios"=>"",
             "telefono_negocios" => "",
             "correo_negocios" => "",
-            "nombre_secundario" => "No definido",
-            "puesto_secundario"=>"No definido",
+            "nombre_secundario" => "",
+            "puesto_secundario"=>"",
             "telefono_secundario" => "",
             "correo_secundario" => ""
         );
@@ -1147,13 +1147,52 @@ class ResumenClienteAPI extends SugarApi
             $relatedRelaciones = $beanPersona->rel_relaciones_accounts_1->getBeans();
             if($relatedRelaciones) {
 
-                foreach($relatedRelaciones as $rel) {
-                    $GLOBALS['log']->fatal("RELACION ACTIVA: ".$rel->relaciones_activas);
-                    //La primer relacion encontrada tipo Negocios, se establece como principal, en otro caso se establece como secundaria
-                    if(strpos($rel->relaciones_activas, 'Negocios') !== false){
-                        $id_relacion=$rel->account_id1_c;
-                        //Obtiene bean de la relación para traer el teléfono y el correo relacionado
-                        $beanRelacionNegocios = BeanFactory::getBean("Accounts", $id_relacion,array('disable_row_level_security' => true));
+                $queryOrdenRelaciones = "SELECT a.name,
+                r.relaciones_activas,
+                r.id relacion_id,
+                ac.tipodepersona_c,
+                IF(ac.tipodepersona_c='Persona Moral',
+                    CASE
+                        WHEN r.relaciones_activas like '%Negocios%' THEN 1
+                        WHEN (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='3' THEN 2 -- Cuenta relacionada tiene como puesto Director General
+                        WHEN (r.relaciones_activas like '%Directivo%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) IN ('4','5','6','7')) THEN 3 -- Relación incluye relación activa Directivo o Cuenta Relacionada tiene algún puesto de Director
+                        WHEN (r.relaciones_activas like '%Accionista%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='2') THEN 4 -- Relación incluye relación activa Accionista o Cuenta Relacionada tiene puesto Accionistas
+                        WHEN r.relaciones_activas like '%Representante%' THEN 5 -- Relación incluye relación activa Representante
+                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 6 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo	
+                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 7 -- Relación incluye relación activa Propietario Real	
+                        ELSE 8
+                    END,
+                    CASE -- Es PF o PFAE
+                        WHEN a.id= rc.account_id1_c THEN 1 -- Cuenta Principal es igual a Cuenta Relacionada
+                        WHEN r.relaciones_activas like '%Negocios%' THEN 2 -- Relación incluye relación activa Negocios
+                        WHEN (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='3' THEN 3 -- Cuenta relacionada tiene como puesto Director General
+                        WHEN (r.relaciones_activas like '%Directivo%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) IN ('4','5','6','7')) THEN 4 -- Relación incluye relación activa Directivo o Cuenta Relacionada tiene algún puesto de Director
+                        WHEN (r.relaciones_activas like '%Accionista%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='2') THEN 5 -- Relación incluye relación activa Accionista o Cuenta Relacionada tiene puesto Accionistas
+                        WHEN r.relaciones_activas like '%Representante%' THEN 6 -- Relación incluye relación activa Representante
+                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 7 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo	
+                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 8 -- Relación incluye relación activa Propietario Real	
+                        ELSE 9
+                    END
+                    ) orden
+                FROM rel_relaciones_accounts_1_c ra
+                INNER JOIN rel_relaciones r on ra.rel_relaciones_accounts_1rel_relaciones_idb=r.id
+                INNER JOIN rel_relaciones_cstm rc on r.id=rc.id_c
+                INNER JOIN accounts a on ra.rel_relaciones_accounts_1accounts_ida=a.id
+                INNER JOIN accounts_cstm ac on a.id=ac.id_c
+                WHERE ra.rel_relaciones_accounts_1accounts_ida='{$beanPersona->id}'
+                AND r.deleted=0 AND a.deleted=0
+                ORDER by orden asc;";
+                $queryResultOrdenRelaciones = $db->query($queryOrdenRelaciones);
+
+                $count=0;
+                while ($row = $db->fetchByAssoc($queryResultOrdenRelaciones)) {
+                    if($count==0){//El primer registro en el orden corresponde al Contacto de Negocios
+                        $GLOBALS['log']->fatal("COUNT 0 ES EL CONTACTO DE NEGOCIOS");
+                        $id_relacion=$row['relacion_id'];
+                        $rel = BeanFactory::getBean("Rel_Relaciones", $id_relacion);
+
+                        //Obtengo bean de la cuenta relacionada para recuperar su teléfono y email
+                        $beanRelacionNegocios = BeanFactory::getBean("Accounts", $rel->account_id1_c,array('disable_row_level_security' => true));
 
                         //Obtiene teléfonos
                         $telefono_principal_negocio="";
@@ -1168,17 +1207,21 @@ class ResumenClienteAPI extends SugarApi
                                 }
                             }
                         }
-
                         $arr_principal['contactos']['nombre_negocios'] = $rel->relacion_c;
                         $arr_principal['contactos']['id_nombre_negocios'] = $id_relacion;
                         $arr_principal['contactos']['puesto_negocios'] = isset($app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_negocios'] = $telefono_principal_negocio;
                         $arr_principal['contactos']['correo_negocios'] = $beanRelacionNegocios->email1;
 
-                    }else{
-                        $id_relacion=$rel->account_id1_c;
-                        //Obtiene bean de la relación para traer el teléfono y el correo relacionado
-                        $beanRelacionSecundaria = BeanFactory::getBean("Accounts", $id_relacion,array('disable_row_level_security' => true));
+                        $count++;
+
+                    }else if($count==1){//El segundo registro en el orden se toma como el Contacto Secundario
+                        $GLOBALS['log']->fatal("COUNT 1 ES EL CONTACTO SECUNDARIO");
+                        $id_relacion=$row['relacion_id'];
+                        $rel = BeanFactory::getBean("Rel_Relaciones", $id_relacion);
+
+                        //Obtengo bean de la cuenta relacionada para recuperar su teléfono y email
+                        $beanRelacionSecundaria = BeanFactory::getBean("Accounts", $rel->account_id1_c,array('disable_row_level_security' => true));
 
                         //Obtiene teléfonos
                         $telefono_principal_secundario="";
@@ -1200,8 +1243,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['contactos']['puesto_secundario'] =isset($app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_secundario'] = $telefono_principal_secundario;
                         $arr_principal['contactos']['correo_secundario'] = $beanRelacionSecundaria->email1;
+                        $count++;
                     }
-
                 }
 
             }
