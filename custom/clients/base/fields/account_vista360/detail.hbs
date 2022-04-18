@@ -174,10 +174,10 @@
       PRODUCTOS
     </div>
     <!-- Tarjetas de productos -->
-    <div id="cards-container_products" class="divInline" style="background-color:#C0BEC1">
+    <div class="horizontalScroll" style="background-color:#C0BEC1">
         <!-- DIV Producto Leasing-->
         {{#if ResumenCliente.leasing.muestra_producto}}
-            <div class="span4 card-container">
+            <div class="card-container">
                 <!-- Título producto -->
                 <div class="divInline">
                 	  <!-- Icono -->
@@ -310,7 +310,7 @@
           {{/if}}
         <!-- DIV Producto Factoring-->
         {{#if ResumenCliente.factoring.muestra_producto}}
-            <div class="span4 card-container">
+            <div class="card-container">
                 <!-- Título producto -->
                 <div class="divInline">
                 	  <!-- Icono -->
@@ -445,9 +445,9 @@
                 </div>
             </div>
         {{/if}}
-        <!-- DIV Producto Creidto Auto-->
+        <!-- DIV Producto Crédito Auto-->
         {{#if ResumenCliente.credito_auto.muestra_producto}}
-            <div class="span4 card-container">
+            <div class="card-container">
                 <!-- Título producto -->
                 <div class="divInline">
                     <!-- Icono -->
@@ -580,7 +580,7 @@
         {{/if}}
         <!-- DIV Producto Seguros-->
         {{#if ResumenCliente.seguros.muestra_producto}}
-            <div class="span4 card-container">
+            <div class="card-container">
                 <!-- Título producto -->
                 <div class="divInline">
                     <!-- Icono -->
@@ -642,11 +642,11 @@
                                 {{#if ResumenCliente.seguros.tiene_ganada}}
                                     <tr class="formatoFilaG">
                                         <td><strong>Prima neta</strong></td>
-                                        <td>{{ResumenCliente.seguros.prima}}</td>
+                                        <td>$ {{customFormatNumber ResumenCliente.seguros.prima}}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Ingreso UNIFIN</strong></td>
-                                        <td>{{ResumenCliente.seguros.ingreso}}</td>
+                                        <td>$ {{customFormatNumber ResumenCliente.seguros.ingreso}}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Días de atraso</strong></td>
@@ -669,8 +669,259 @@
                 </div>
             </div>
         {{/if}}
+        <!-- DIV Producto Fleet-->
+        {{#if ResumenCliente.fleet.muestra_producto}}
+            <div class="card-container">
+                <!-- Título producto -->
+                <div class="divInline">
+                    <!-- Icono -->
+                    <div class="contenedorIcono">
+                        <img src="{{getUnifinListValue 'iconos_vista360_list' 'fleet'}}" style="height: 50px; width: 50px;">
+                    </div>
+                    <!-- Nombre producto -->
+                    <div class="contenedorTitulo">
+                        <div class="formatoTitulo">
+                            FLEET
+                        </div>
+                    </div>
+                </div>
+                <!-- Detalle del producto -->
+                <div class="information-container">
+                    <!-- Detalle -->
+                    <div class="information-general-container">
+                        <table style="font-size:10px;color:#021741">
+                            <tbody>
+                                <!-- Detalle -->
+                                <tr>
+                                    <td><strong>Estatus de atención</strong></td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.fleet.estatus_atencion}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Estatus del producto</strong></td>
+                                    <td>{{ResumenCliente.fleet.estatusxproducto}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tipo de cuenta</strong></td>
+                                    <td>
+                                      {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.fleet.tipo_cuenta}}
+                                      {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.fleet.subtipo_cuenta}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Línea aproximada</strong></td>
+                                    <td>$ {{customFormatNumber ResumenCliente.fleet.linea_aproximada}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Número de vehículos</strong></td>
+                                    <td>{{ResumenCliente.fleet.numero_vehiculos}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Crobranza</strong></td>
+                                    <td>{{ResumenCliente.fleet.cobranza}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Asesor</strong></td>
+                                    <td>{{ResumenCliente.fleet.promotor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        <!-- DIV Producto Unicredit-->
+        {{#if ResumenCliente.uniclick.muestra_producto}}
+            <div class="card-container">
+                <!-- Título producto -->
+                <div class="divInline">
+                    <!-- Icono -->
+                    <div class="contenedorIcono">
+                        <img src="{{getUnifinListValue 'iconos_vista360_list' 'uniclick'}}" style="height: 50px; width: 50px;">
+                    </div>
+                    <!-- Nombre producto -->
+                    <div class="contenedorTitulo">
+                        <div class="formatoTitulo">
+                            UNICREDIT
+                        </div>
+                    </div>
+                </div>
+                <!-- Detalle del producto -->
+                <div class="information-container">
+                    <!-- Detalle -->
+                    <div class="information-general-container">
+                        <table style="font-size:10px;color:#021741">
+                            <tbody>
+                                <!-- Detalle -->
+                                <tr>
+                                    <td><strong>Estatus de atención</strong></td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.uniclick.estatus_atencion}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Estatus del producto</strong></td>
+                                    <td>{{ResumenCliente.uniclick.estatusxproducto}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tipo de cuenta</strong></td>
+                                    <td>
+                                      {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.uniclick.tipo_cuenta}}
+                                      {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.uniclick.subtipo_cuenta}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Línea autorizada</strong></td>
+                                    <td>$ {{customFormatNumber ResumenCliente.uniclick.linea_autorizada}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fecha de vencimiento</strong></td>
+                                    <td>{{ResumenCliente.uniclick.fecha_vencimiento}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Línea disponible</strong></td>
+                                    <td>$ {{customFormatNumber ResumenCliente.uniclick.linea_disponible}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Crobranza</strong></td>
+                                    <td>{{ResumenCliente.uniclick.cobranza}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Asesor</strong></td>
+                                    <td>{{ResumenCliente.uniclick.promotor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        <!-- DIV Producto Unifacror-->
+        {{#if ResumenCliente.unifactor.muestra_producto}}
+            <div class="card-container">
+                <!-- Título producto -->
+                <div class="divInline">
+                    <!-- Icono -->
+                    <div class="contenedorIcono">
+                        <img src="{{getUnifinListValue 'iconos_vista360_list' 'uniclick'}}" style="height: 50px; width: 50px;">
+                    </div>
+                    <!-- Nombre producto -->
+                    <div class="contenedorTitulo">
+                        <div class="formatoTitulo">
+                            UNIFACTOR
+                        </div>
+                    </div>
+                </div>
+                <!-- Detalle del producto -->
+                <div class="information-container">
+                    <!-- Detalle -->
+                    <div class="information-general-container">
+                        <table style="font-size:10px;color:#021741">
+                            <tbody>
+                                <!-- Detalle -->
+                                <tr>
+                                    <td><strong>Estatus de atención</strong></td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.uniclick.estatus_atencion}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Estatus del producto</strong></td>
+                                    <td>{{ResumenCliente.uniclick.estatusxproducto}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tipo de cuenta</strong></td>
+                                    <td>
+                                      {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.uniclick.tipo_cuenta}}
+                                      {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.uniclick.subtipo_cuenta}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Línea autorizada</strong></td>
+                                    <td>$ {{customFormatNumber ResumenCliente.unifactor.linea_disponible}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fecha de vencimiento</strong></td>
+                                    <td>{{ResumenCliente.unifactor.fecha_vencimiento}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Línea disponible</strong></td>
+                                    <td>$ {{customFormatNumber ResumenCliente.unifactor.linea_disponible}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Crobranza</strong></td>
+                                    <td>{{ResumenCliente.uniclick.cobranza}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Asesor</strong></td>
+                                    <td>{{ResumenCliente.uniclick.promotor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        <!-- DIV Producto Crédito Simple-->
+        {{#if ResumenCliente.credito_simple.muestra_producto}}
+            <div class="card-container">
+                <!-- Título producto -->
+                <div class="divInline">
+                    <!-- Icono -->
+                    <div class="contenedorIcono">
+                        <img src="{{getUnifinListValue 'iconos_vista360_list' 'leasing'}}" style="height: 50px; width: 50px;">
+                    </div>
+                    <!-- Nombre producto -->
+                    <div class="contenedorTitulo">
+                        <div class="formatoTitulo">
+                            CRÉDITO SIMPLE
+                        </div>
+                    </div>
+                </div>
+                <!-- Detalle del producto -->
+                <div class="information-container">
+                    <!-- Detalle -->
+                    <div class="information-general-container">
+                        <table style="font-size:10px;color:#021741">
+                            <tbody>
+                                <!-- Detalle -->
+                                <tr>
+                                    <td><strong>Estatus de atención</strong></td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Estatus del producto</strong></td>
+                                    <td>{{ResumenCliente.leasing.estatusxproducto}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tipo de cuenta</strong></td>
+                                    <td>
+                                      {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.leasing.tipo_cuenta}}
+                                      {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.leasing.subtipo_cuenta}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Línea autorizada</strong></td>
+                                    <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_disponible}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fecha de vencimiento</strong></td>
+                                    <td>{{ResumenCliente.credito_simple.fecha_vencimiento}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Línea disponible</strong></td>
+                                    <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_disponible}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Crobranza</strong></td>
+                                    <td>{{ResumenCliente.leasing.cobranza}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Asesor</strong></td>
+                                    <td>{{ResumenCliente.leasing.promotor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
     </div>
-
 </div>
 <!-- Sección para modales -->
 <div id="modalGpoEmpresarial" class="row-fluid" style="display:none">
@@ -827,7 +1078,7 @@
                 <th class="span2">Saldo Insoluto</th>
                 <th class="span2">Cartera vencida </th>
                 <th class="span2">Moratorios </th>
-                <th class="span2">Días de Mora </th>  
+                <th class="span2">Días de Mora </th>
                 <th class="span2">Tasa </th>
                 <th class="span2">Estatus Contrato </th>
               </tr>
@@ -840,7 +1091,7 @@
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
-          <td class="span2">&nbsp;</td>         
+          <td class="span2">&nbsp;</td>
           <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna8}}</td>
           <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_contratos_activos.columna9}}</td>
           <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna10}}</td>
@@ -962,7 +1213,7 @@
                 <th class="span2">Saldo Insoluto </th>
                 <th class="span2">Cartera vencida </th>
                 <th class="span2">Moratorios </th>
-                <th class="span2">Días de Mora </th>  
+                <th class="span2">Días de Mora </th>
                 <th class="span2">Tasa </th>
                 <th class="span2">Estatus Contrato </th>
               </tr>
@@ -1015,7 +1266,7 @@
                         <th class="span2">Renta</th>
                         <th class="span2">Próxima Renta</th>
                         <th class="span2">Vigencia del seguro</th>
-                        
+
                         <th class="span2">Monto Renta</th>
                       </tr>
                     </thead>
@@ -1038,13 +1289,13 @@
                          <td class="span2">{{columna15}}</td>
                          <td class="span2">{{columna16}}</td>
                          <td class="span2">{{columna17}}</td>
-                       
+
                        </tr>
                      {{/each}}
                     </tbody>
                   </table>
                 </div>
-               
+
               {{else}}
                 <div class="row-fluid" style="color:gray;">
                   <div class="span12"> No se han encontrado registros</div>
@@ -1076,7 +1327,7 @@
                         <th class="span2">Renta</th>
                         <th class="span2">Próxima Renta</th>
                         <th class="span2">Vigencia del seguro</th>
-                        
+
                         <th class="span2">Monto Renta</th>
                       </tr>
                     </thead>
@@ -1099,13 +1350,13 @@
                          <td class="span2">{{columna15}}</td>
                          <td class="span2">{{columna16}}</td>
                          <td class="span2">{{columna17}}</td>
-                       
+
                        </tr>
                      {{/each}}
                     </tbody>
                   </table>
                 </div>
-                
+
               {{else}}
                 <div class="row-fluid" style="color:gray;">
                   <div class="span12"> No se han encontrado registros</div>
@@ -1153,7 +1404,7 @@
                   </tbody>
                 </table>
               </div>
-               
+
               {{else}}
                 <div class="row-fluid" style="color:gray;">
                   <div class="span12"> No se han encontrado registros</div>
@@ -1258,7 +1509,7 @@
                   </tbody>
                 </table>
               </div>
-               
+
               {{else}}
                 <div class="row-fluid" style="color:gray;">
                   <div class="span12"> No se han encontrado registros</div>
@@ -1316,7 +1567,7 @@
                   </tbody>
                 </table>
               </div>
-               
+
               {{else}}
                 <div class="row-fluid" style="color:gray;">
                   <div class="span12"> No se han encontrado registros</div>

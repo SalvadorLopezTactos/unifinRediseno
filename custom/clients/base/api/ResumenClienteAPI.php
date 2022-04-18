@@ -204,11 +204,16 @@ class ResumenClienteAPI extends SugarApi
         //Fleet
         $arr_principal['fleet'] = array("linea_aproximada" => "",
             "estatus_atencion"=>"",
+            "estatusxproducto" => "",
             "tipo_cuenta"=>"",
             "subtipo_cuenta"=>"",
             "numero_vehiculos" => "",
             "promotor" => "",
-            "color" => "");
+            "linea_aproximada" => "",
+            "cobranza" => "",
+            "color" => "",
+            "muestra_producto" => false
+          );
         //Uniclick
         $arr_principal['uniclick'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
@@ -217,7 +222,9 @@ class ResumenClienteAPI extends SugarApi
             "fecha_vencimiento"=>"",
             "linea_disponible" => "",
             "promotor" => "",
-            "color" => "");
+            "color" => "",
+            "muestra_producto" => false
+          );
         //Unifactor
         $arr_principal['unifactor'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
@@ -226,7 +233,9 @@ class ResumenClienteAPI extends SugarApi
             "fecha_vencimiento"=>"",
             "linea_disponible" => "",
             "promotor" => "",
-            "color" => "");
+            "color" => "",
+            "muestra_producto" => false
+          );
         //Seguros
         $arr_principal['seguros'] = array(
             "total" => 0,
@@ -258,7 +267,9 @@ class ResumenClienteAPI extends SugarApi
             "fecha_vencimiento"=>"",
             "linea_disponible" => "",
             "promotor" => "",
-            "color" => "");
+            "color" => "",
+            "muestra_producto" => false
+        );
         //Historial de contactos
         $arr_principal['historial_contactos'] = array(
             "ultima_cita" => "",
@@ -436,14 +447,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['fleet']['estatusxproducto'] = $estatusxproducto;
                         $arr_principal['fleet']['promotor']=$asignado;
                         $arr_principal['fleet']['promotorId']=$product->assigned_user_id;
-                        $arr_principal['fleet']['vencimiento_anexo_final'] = $vencimiento_anexo_final;
-                        $arr_principal['fleet']['vencimiento_siguiente_anexo'] = $vencimiento_siguiente_anexo;
-                        $arr_principal['fleet']['mensualidad_activa'] = $mensualidad_activa;
-                        $arr_principal['fleet']['dias_atraso'] = $dias_atraso;
-                        $arr_principal['fleet']['fecha_proximo_pago'] = $fecha_proximo_pago;
                         $arr_principal['fleet']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
-                        $arr_principal['fleet']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
-                        $arr_principal['fleet']['tiene_anexo_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
                         break;
                     case '7': //Credito SOS
                         $arr_principal['credito_sos']['estatus_atencion'] = $statusProducto;
@@ -510,6 +514,7 @@ class ResumenClienteAPI extends SugarApi
             $linea_disp_credito_aut = 0;
             $linea_disp_sos = 0;
             $linea_disp_factor = 0;
+            $linea_disp_cs = 0;
 
             //Linea aproximada fleet
             $linea_aprox_fleet=0;
@@ -526,6 +531,7 @@ class ResumenClienteAPI extends SugarApi
             $vencimiento_uniclick ='';
             $vencimiento_unilease ='';
             $vencimiento_unifactor = '';
+            $vencimiento_cs = '';
             //Estatus línea
             $fecha_actual = date('Y-m-d');
             $estatus_linea_leasing = 'Vencida';
@@ -669,6 +675,7 @@ class ResumenClienteAPI extends SugarApi
 
                     //control para Uniclick
                     if ($opps->negocio_c == 10 && $opps->estatus_c != 'K') {
+                        $arr_principal['uniclick']['muestra_producto'] = true;
                         $linea_aprox_uniclick += $opps->monto_c;
                         $linea_disp_sos += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -692,6 +699,7 @@ class ResumenClienteAPI extends SugarApi
 
                     //control para Unifactor
                     if ($opps->producto_financiero_c == 50 && $opps->estatus_c != 'K') {
+                        $arr_principal['unifactor']['muestra_producto'] = true;
                         $linea_aprox_unifactor += $opps->monto_c;
                         $linea_disp_factor += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -707,6 +715,27 @@ class ResumenClienteAPI extends SugarApi
                 						$arr_principal['unifactor']['linea_autorizada'] = $linea_aprox_unifactor;
                 						$arr_principal['unifactor']['fecha_vencimiento'] = $vencimiento_unifactor;
                 						$arr_principal['unifactor']['linea_disponible'] = $linea_disp_factor;
+                        }
+                    }
+
+                    //control para Crédito simple
+                    if ($opps->tipo_producto_c == 2 && $opps->estatus_c != 'K') {
+                        $arr_principal['credito_simple']['muestra_producto'] = true;
+                        $linea_aprox_cs += $opps->monto_c;
+                        $linea_disp_cs += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+                        if (!empty($opps->vigencialinea_c)) {
+                						//Establece fecha de vencimiento
+                						$dateVCS = $opps->vigencialinea_c;
+                						$timedateVCS = Date($dateCS);
+                						//Compara fechas
+                						if ($dateVCS > $vencimiento_cs || empty($vencimiento_cs)) {
+                						   $vencimiento_cs = $dateVCS;
+                						}
+                						$arr_principal['credito_simple']['linea_autorizada'] = $linea_aprox_cs;
+                						$arr_principal['credito_simple']['fecha_vencimiento'] = $vencimiento_cs;
+                						$arr_principal['credito_simple']['linea_disponible'] = $linea_disp_cs;
                         }
                     }
 
@@ -1230,6 +1259,11 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['seguros']['muestra_producto'] = true;
         $arr_principal['seguros']['tiene_seguros'] = true;
         $arr_principal['seguros']['tiene_ganada'] = true;
+
+        $arr_principal['fleet']['muestra_producto'] = true;
+        $arr_principal['credito_simple']['muestra_producto'] = true;
+        $arr_principal['uniclick']['muestra_producto'] = true;
+        $arr_principal['unifactor']['muestra_producto'] = true;
 
         return $arr_principal;
     }

@@ -11,6 +11,7 @@
     border: 1px solid #E5E5E5;
     border-radius: 10px;
     margin-top: 13px;
+    margin-right: 10px;
     box-shadow: 0px 0px 0px grey;
     transition:  box-shadow .2s ease-out;
 }
@@ -86,6 +87,7 @@ abbr{
   Clases:
   .divProductos = formato para div divisor de Productos
   .divInline = Mantiene divs en misma línea
+  .horizontalScroll = Permite generar desplazamiento horizontal para divs
   .contenedorIcono = formato para contener icono de producto
   .contenedorTitulo = formato para contener titulo de producto (incluye división en diagonal)
   .formatoTitulo = centra y da formato a titulo de producto
@@ -102,6 +104,11 @@ abbr{
 .divInline {
   display: flex;
   justify-content: center;
+}
+.horizontalScroll {
+  white-space: nowrap;
+  overflow-x: scroll;
+  display: flex;
 }
 .contenedorIcono {
   width: 30%;
@@ -240,7 +247,7 @@ abbr{
 
   .totales-shadow {
     background-color: #E6E7E9;
-    
+
   }
 
   .modal-footer {
@@ -252,5 +259,3 @@ abbr{
   }
 
   .pointer {cursor: pointer;}
-
-
