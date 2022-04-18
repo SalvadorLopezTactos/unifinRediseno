@@ -3529,7 +3529,7 @@
             });
         }
 
-        //this.model.fields['origen_c'].options = opciones_origen;
+        this.model.fields['origen_c'].options = opciones_origen;
     },
 
     validaMontoCreditCard: function (fields, errors, callback) {
