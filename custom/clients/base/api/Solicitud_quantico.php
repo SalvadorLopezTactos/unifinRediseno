@@ -6,7 +6,9 @@
  */
 
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once("custom/Levementum/UnifinAPI.php");
+require_once('custom/Levementum/UnifinAPI.php');
+require_once('custom/modules/Opportunities/clients/base/api/CancelaRatificacion.php');
+require_once('custom/modules/Opportunities/clients/base/api/cancelaOperacionBPM.php:');
 
 class Solicitud_quantico extends SugarApi
 {
@@ -33,17 +35,21 @@ class Solicitud_quantico extends SugarApi
 
         //$data = '{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}';
 
-        //$data = json_decode($data);
-        $GLOBALS['log']->fatal('data',$data);
+        $data = json_encode($data);
+        //$GLOBALS['log']->fatal('data',$data);
         return $data;
     }
 
     public function QuanticoUpdate( $SolId )
     {
         $bean = BeanFactory::getBean('Opportunities', $SolId , array('disable_row_level_security' => true));
-        
-        if ($bean->id != '') {    
-        //if ($bean->idsolicitud_c != "" && $bean->quantico_id_c != "" && $bean->cancelado_quantico_c == "" && $bean->tct_oportunidad_perdida_chk_c) {
+        $mensaje = "";
+        $codigo = "";
+        $servicio = "";
+        $estatus = "";
+
+        //if ($bean->id != '') {   
+        if ($bean->idsolicitud_c != "" && $bean->quantico_id_c != "" && $bean->cancelado_quantico_c == "" && $bean->tct_oportunidad_perdida_chk_c) {
             $GLOBALS['log']->fatal('Inicia Cancelación de Solicitud Quantico ejc');
             global $sugar_config, $db, $app_list_strings, $current_user;
             $user = $sugar_config['quantico_usr'];
@@ -102,20 +108,145 @@ class Solicitud_quantico extends SugarApi
             $resultado = $callApi->postQuantico($host, $body, $auth_encode);
 
             $GLOBALS['log']->fatal('Resultado: Actualizacion Quantico ' . json_encode($resultado));
+
+            $cancelar = false;
+            //{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}
+            
+            if ($resultado->Success && $resultado->ErrorMessage == "") {
+                $cancelar = true;
+            } else {
+                //$GLOBALS['log']->fatal("Error al actualizar a Quantico: ");
+                $GLOBALS['log']->fatal("Error al actualizar a Quantico: " , $resultado->Code);
+                if($resultado->Code == '404'){
+                    $cancelar = true;                
+                }
+            }
+
+            $mensaje = "";
+            $codigo = "";
+            $servicio = "";
+            $estatus = "";
+
+            if($cancelar){
+                if ($bean->tct_etapa_ddw_c == "SI" && $bean->tipo_de_operacion_c != "RATIFICACION_INCREMENTO") {
+                    $bean->estatus_c = 'K';
+                } else {
+                    $GLOBALS['log']->fatal('id_process_c',$bean->id_process_c);
+                    if (trim($bean->id_process_c , "") == "") {
+                        $parametros = new stdClass();
+                        $parametros->id_linea_padre = $bean->id_linea_credito_c;
+                        $parametros->id = $bean->id;
+                        $parametros->conProceso = 0;
+                        $parametros->tipo_de_operacion_c = $bean->tipo_de_operacion_c;
+                        $parametros->tipo_operacion_c = $bean->tipo_operacion_c;
+                        
+                        $parametrosJSON = json_encode($parametros);
+
+                        $callRatificacion = new CancelaRatificacion();
+                        //$GLOBALS['log']->fatal('args',$args);
+                        $resultado = $callRatificacion->cancelRatificacion($api, $parametrosJSON);
+                        if ($resultado != null) {
+                            $GLOBALS['log']->fatal('Se cancelo padre1');
+                            $bean->estatus_c = 'K';
+                            $bean->save();
+                            /**************************/
+                            $mensaje = "Se cancelo el Padre";
+                            $codigo = "";
+                            $servicio = "ratificacion";
+                            $estatus = "Success";
+                            $GLOBALS['log']->fatal('id_process_c',$id_process_c);
+                        } else {
+                            $GLOBALS['log']->fatal('No Se cancelo padre');
+                            $mensaje = "No Se cancelo padre";
+                            $codigo = "";
+                            $servicio = "ratificacion";
+                            $estatus = "Success";
+                        }
+                    } else {
+                        if ($bean->estatus_c != 'K') {
+                            $OppParams = new stdClass();
+                            $OppParams->idSolicitud = $bean->idsolicitud_c;
+                            $OppParams->usuarioAutenticado = $bean->user_name;
+                            $OppParamsJSON = json_encode($OppParams);
+
+                            $callOpBPM = new cancelaOperacionBPM();
+                            //$GLOBALS['log']->fatal('args',$args);
+                            $resultadoRat = $callOpBPM->cancelaOperacion($api, $callOpBPM);
+                            if ($resultadoRat != null) {
+                                if ($resultadoRat->estatus == 'error') {
+                                    $mensaje = "Error: " . $resultadoRat->descripcion;
+                                    $codigo = "";
+                                    $servicio = "operaBpm";
+                                    $estatus = "error";
+                                } else {
+                                    $mensaje = "Se ha cancelado la operaci\u00F3n";
+                                    $codigo = "";
+                                    $servicio = "operaBpm";
+                                    $estatus = "Success";
+                                }
+                                // mandamos llamar el servicio para cancelar localmente:                            
+                                $parametros = new stdClass();
+                                $parametros->id_linea_padre = $bean->id_linea_credito_c;
+                                $parametros->id = $bean->id;
+                                $parametros->conProceso = 1;
+                                $parametros->tipo_de_operacion_c = $bean->tipo_de_operacion_c;
+                                $parametros->tipo_operacion_c = $bean->tipo_operacion_c;
+                            
+                                $parametrosJSON = json_encode($parametros);
+
+                                $callRatificacion = new CancelaRatificacion();
+                                //$GLOBALS['log']->fatal('args',$args);
+                                $resultado = $callRatificacion->cancelRatificacion($api, $parametrosJSON);
+                                if ($resultado != null) {
+                                    $GLOBALS['log']->fatal('Se cancelo padre2');
+                                    $bean->estatus_c = 'K';
+                                    $bean->save();$mensaje = "Se cancelo el Padre";
+                                    
+                                    $mensaje = "Se ha cancelado la operaci\u00F3n";
+                                    $codigo = "";
+                                    $servicio = "ratificacion";
+                                    $estatus = "Success";
+                                    $GLOBALS['log']->fatal('Se cancela padre');
+                                } else {
+                                    $GLOBALS['log']->fatal('No Se cancelo padre');
+                                    $mensaje = "No Se cancelo padre";
+                                    $codigo = "";
+                                    $servicio = "ratificacion";
+                                    $estatus = "Success";
+                                }
+                            }
+                        }else {
+                            $mensaje = "Esta Operaci\u00F3n ya habia sido cancelada anteriormente";
+                            $codigo = "";
+                            $servicio = "";
+                            $estatus = "error";
+                        }
+                    }
+                }
+            }else{
+                $bean->tct_razon_op_perdida_ddw_c = '';
+                $bean->tct_oportunidad_perdida_chk_c = $cancelar;
+                $bean->save();
+
+                $mensaje = $resultado->ErrorMessage;
+                $estatus = "error";
+                $codigo = $resultado->Code;
+                $servicio = "Quatico";
+            }
         }
-        $GLOBALS['log']->fatal('Finaliza QuanticoUpdate');
-        return $resultado;
+        $GLOBALS['log']->fatal('Finaliza cancelado');
+
+        $data = $this->estatus($codigo,$estatus ,$mensaje,$servicio);
+        return $data;
     }
 
-    public function estatus($codigo, $descripcion, $id, $modulo, $errores)
+    public function estatus($codigo , $estatus , $mensaje, $servicio)
     {
         $array_status = array();
-        $array_status['status'] = $codigo;
-        $array_status['descripcion'] = $descripcion;
-        $array_status['id'] = $id;
-        $array_status['modulo'] = $modulo;
-        $array_status['errores'] = $errores;
-
+        $array_status['estatus'] = $estatus;
+        $array_status['mensaje'] = $mensaje;
+        $array_status['code'] = $codigo;
+        $array_status['servicio'] = $servicio;
 
         return $array_status;
     }
