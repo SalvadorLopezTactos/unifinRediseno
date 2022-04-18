@@ -359,7 +359,10 @@
         if (this.model.get('negocio_c') == "" || this.model.get('negocio_c') == 0) {
             this.$(".record-cell[data-name='negocio_c']").hide();
         }
-
+		if (this.model.get('tipo_producto_c') == '14') {
+			this.noEditFields.push('monto_c');
+			this.$('[data-name="monto_c"]').attr('style', 'pointer-events:none');
+		}
     },
 
     _render: function () {
