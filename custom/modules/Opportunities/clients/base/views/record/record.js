@@ -362,6 +362,8 @@
 		if (this.model.get('tipo_producto_c') == '14') {
 			this.noEditFields.push('monto_c');
 			this.$('[data-name="monto_c"]').attr('style', 'pointer-events:none');
+			this.noEditFields.push('amount');
+			this.$('[data-name="amount"]').attr('style', 'pointer-events:none');
 		}
     },
 
