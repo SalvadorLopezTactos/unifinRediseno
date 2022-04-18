@@ -1,0 +1,261 @@
+#cards-container{
+    padding: 20px 0px;
+}
+/*
+.span4.card-container{
+    margin-left: 13px !important;
+}
+*/
+.card-container{
+    /*height: 350px;*/
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    margin-top: 13px;
+    margin-right: 10px;
+    box-shadow: 0px 0px 0px grey;
+    transition:  box-shadow .2s ease-out;
+}
+.card-container:hover{
+    cursor:pointer;
+    box-shadow: 1px 8px 20px grey;
+    transition: box-shadow .2s ease-in;
+}
+
+.information-container{
+    background: white;
+    width: 100%;
+    height: 50%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.attribute-general-container{
+    display: flex !important;
+    padding: 0px 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.attribute-general-container abbr{
+    margin-bottom: 0px !important;
+    font-size: 13px;
+}
+.attribute-general-container i{
+    width: 10px;
+    margin-right: 10px;
+}
+abbr{
+    text-decoration: none;
+    border-bottom: none !important;
+    cursor:default !important;
+}
+
+#title-general{
+    background-color:#021741;
+    width: 100%;
+    height: 15%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#title-general p{
+    color:#E5E5E5;
+    text-align: center;
+    padding:7px;
+}
+
+.table-borderless{
+    font-size: 10px;
+}
+
+#title-general{
+    background-color:#021741;
+    width: 100%;height: 10%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+}
+
+/*
+  Clases:
+  .divProductos = formato para div divisor de Productos
+  .divInline = Mantiene divs en misma línea
+  .horizontalScroll = Permite generar desplazamiento horizontal para divs
+  .contenedorIcono = formato para contener icono de producto
+  .contenedorTitulo = formato para contener titulo de producto (incluye división en diagonal)
+  .formatoTitulo = centra y da formato a titulo de producto
+  .formatoHC = formato para título de historial de contacto
+  .formatoFilaG = formato para filas gris
+*/
+.divProductos {
+  text-align: center;
+  color: white;
+  font-family: verdana;
+  font-size: 15px;padding: 10px 0;
+  background-color:#0A5E83;
+}
+.divInline {
+  display: flex;
+  justify-content: center;
+}
+.horizontalScroll {
+  white-space: nowrap;
+  overflow-x: scroll;
+  display: flex;
+}
+.contenedorIcono {
+  width: 30%;
+  height: 50px;
+  background: white;
+  text-align: center;
+}
+.contenedorTitulo {
+  width: 70%;
+  height: 0px;
+  border-left: 30px solid white;
+  border-bottom: 50px solid #021741;
+}
+.formatoTitulo {
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+  font-family: verdana;
+  font-size: 15px;
+}
+.formatTitulooHC {
+  color: #021741;
+  font-family: verdana;
+  /* font-size: 15px; */
+  text-align: center;
+  background-color:#E6E7E9;
+}
+.formatoHC {
+  color: white;
+  font-family: verdana;
+  /* font-size: 15px; */
+  /* text-align: center; */
+  background-color:#021741;
+}
+.formatoFilaG {
+  color: #021741;
+  font-family: verdana;
+  /* font-size: 15px; */
+  /* text-align: center; */
+  background-color:#E6E7E9;
+}
+.formatoFilaA {
+  color: #E6E7E9;
+  font-family: verdana;
+  /* font-size: 15px; */
+  /* text-align: center; */
+  background-color:#021741;
+}
+.divAnexos {
+  text-align: center;
+  color: white;
+  font-family: verdana;
+  font-size: 10px;padding: 5px 0;
+  background-color:#555554;
+}
+
+  /* The Modal (background) */
+  .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+
+  .sinborde { /*Table without border*/
+  border: 0;
+  }
+
+  .modal {
+      position: fixed; /* Stay in place */
+      padding-top: 100px; /* Location of the box */
+      padding-bottom: 100px;
+      top: 0;
+      left:0;
+      /* width: 100%; /* Full width */
+      /*height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 1px;
+      border: 1px solid #888;
+      width: 98%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  /* The Close Button */
+  .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  .modal-header {
+      padding: .5px 0px;
+      background-color: #21618C;
+      color: white;
+  }
+
+  .modal-body {
+    padding: .5px 0px;
+    font-size: 12px;
+    text-align: center;
+    color:#000000;
+  }
+
+  .totales-shadow {
+    background-color: #E6E7E9;
+
+  }
+
+  .modal-footer {
+      padding: 2px 16px;
+      background-color: #21618C;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+  }
+
+  .pointer {cursor: pointer;}

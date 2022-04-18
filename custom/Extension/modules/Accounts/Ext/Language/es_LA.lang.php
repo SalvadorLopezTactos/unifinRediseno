@@ -357,6 +357,7 @@ $mod_strings['LBL_SITUACION_GPO_EMPRESA_TXT_C'] = 'Situación de Grupo Empresari
 $mod_strings['LBL_FECHA_BLOQUEO_ORIGEN'] = 'Fecha Bloqueo Origen';
 $mod_strings['LBL_ONBOARDING_CHK'] = 'Onboarding';
 $mod_strings['LBL_CODIGO_VENDOR_C'] = 'Código Vendor';
+$mod_strings['LBL_FECHA_CLIENTE'] = 'Cliente desde';
 $mod_strings['LBL_PROVEEDOR_QUANTICO'] = 'Proveedor Quantico';
 $mod_strings['LBL_CODIGO_EXPO'] = 'Código de Expo';
 $mod_strings['LBL_ENVIO_INVITACION_TDC'] = 'Fecha de envío de invitación';

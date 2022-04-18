@@ -291,11 +291,16 @@ array (
             array (
               0 => 
               array (
-                'name' => 'account_leasing',
+                'name' => 'account_vista360',
+                'label' => 'Vista 360',
                 'studio' => 'visible',
+                'span' => 12,
+              ),
+              1 => 
+              array (
+                'name' => 'account_leasing',
                 'label' => 'LBL_ACCOUNT_LEASING',
-                'readonly' => true,
-                'dismiss_label' => true,
+                'studio' => 'visible',
                 'span' => 12,
               ),
             ),
