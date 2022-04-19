@@ -174,7 +174,7 @@ class Solicitud_quantico extends SugarApi
                         if ($bean->estatus_c != 'K') {
                             $OppParams = new stdClass();
                             $OppParams->idSolicitud = $bean->idsolicitud_c;
-                            $OppParams->usuarioAutenticado = $bean->user_name;
+                            $OppParams->usuarioAutenticado = $bean->assigned_user_name;
                             $OppParamsJSON = json_encode($OppParams);
 
                             $callOpBPM = new cancelaOperacionBPM();
@@ -252,12 +252,16 @@ class Solicitud_quantico extends SugarApi
 
     public function estatus($codigo , $estatus , $mensaje, $servicio)
     {
-        $array_status = array();
-        $array_status['estatus'] = $estatus;
-        $array_status['mensaje'] = $mensaje;
-        $array_status['code'] = $codigo;
-        $array_status['servicio'] = $servicio;
-
+        if($codigo == "" && $estatus == "" && $mensaje == "" && $servicio == ""){
+            $array_status = "";
+        }else{
+            $array_status = array();
+            $array_status['estatus'] = $estatus;
+            $array_status['mensaje'] = $mensaje;
+            $array_status['code'] = $codigo;
+            $array_status['servicio'] = $servicio;
+        }
+        
         return $array_status;
     }
     
