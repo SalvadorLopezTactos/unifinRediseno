@@ -7940,7 +7940,7 @@ validaReqUniclickInfo: function () {
                     v360.ResumenCliente = [];
                     v360.ResumenCliente=data[2].contents;
                     v360.render();
-
+                    vista360 = v360;
                     vista360.ResumenCliente = [];
                     vista360.ResumenCliente=data[2].contents;
                     vista360.render();
