@@ -1509,14 +1509,18 @@
                             success: _.bind(function (data) {
                                 //{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}
                             
-                                if(data != null){
+                                if(data != null || data != ""){
                                     if(data['estatus'] == 'error'){
                                         app.alert.show("Cancela Operacion", {
                                             level: "error",
                                             title: "Error: "+ data['code'] + " - " + data['mensaje'],
                                             autoClose: false
                                         });
+                                    }else{
+                                        callback(null, fields, errors);
                                     }
+                                }else{
+                                    callback(null, fields, errors);
                                 }
                             }, this)
                         });
