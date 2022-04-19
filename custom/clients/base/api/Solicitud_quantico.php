@@ -35,7 +35,7 @@ class Solicitud_quantico extends SugarApi
 
         //$data = '{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}';
 
-        $data = json_encode($data);
+        //$data = json_encode($data);
         //$GLOBALS['log']->fatal('data',$data);
         return $data;
     }
@@ -43,13 +43,14 @@ class Solicitud_quantico extends SugarApi
     public function QuanticoUpdate( $SolId )
     {
         $bean = BeanFactory::getBean('Opportunities', $SolId , array('disable_row_level_security' => true));
+        $GLOBALS['log']->fatal('Id',$bean->id);
         $mensaje = "";
         $codigo = "";
         $servicio = "";
         $estatus = "";
 
-        //if ($bean->id != '') {   
-        if ($bean->idsolicitud_c != "" && $bean->quantico_id_c != "" && $bean->cancelado_quantico_c == "" && $bean->tct_oportunidad_perdida_chk_c) {
+        if ($bean->id != '') {   
+        //if ($bean->idsolicitud_c != "" && $bean->quantico_id_c != "" && $bean->cancelado_quantico_c == "" && $bean->tct_oportunidad_perdida_chk_c) {
             $GLOBALS['log']->fatal('Inicia Cancelación de Solicitud Quantico ejc');
             global $sugar_config, $db, $app_list_strings, $current_user;
             $user = $sugar_config['quantico_usr'];
@@ -107,18 +108,17 @@ class Solicitud_quantico extends SugarApi
             
             $resultado = $callApi->postQuantico($host, $body, $auth_encode);
 
-            $GLOBALS['log']->fatal('Resultado: Actualizacion Quantico ' . json_encode($resultado));
-
-            $cancelar = false;
+            $GLOBALS['log']->fatal('Resultado: Actualizacion Quantico ' , $resultado);
+            $cancelar = False;
             //{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}
             
-            if ($resultado->Success && $resultado->ErrorMessage == "") {
-                $cancelar = true;
+            if ($resultado['Success'] != '' && $resultado['ErrorMessage'] == "") {
+                $cancelar = True;
             } else {
                 //$GLOBALS['log']->fatal("Error al actualizar a Quantico: ");
-                $GLOBALS['log']->fatal("Error al actualizar a Quantico: " , $resultado->Code);
-                if($resultado->Code == '404'){
-                    $cancelar = true;                
+                $GLOBALS['log']->fatal("Error al actualizar a Quantico: " , $resultado['Code']);
+                if($resultado['Code'] == '404'){
+                    $cancelar = True;                
                 }
             }
 
@@ -126,12 +126,19 @@ class Solicitud_quantico extends SugarApi
             $codigo = "";
             $servicio = "";
             $estatus = "";
-
-            if($cancelar){
+            
+            if($cancelar ){
                 if ($bean->tct_etapa_ddw_c == "SI" && $bean->tipo_de_operacion_c != "RATIFICACION_INCREMENTO") {
+                    
+                    $mensaje = "";
+                    $estatus = "Success";
+                    $codigo = "";
+                    $servicio = "";
                     $bean->estatus_c = 'K';
+                    $bean->save();
                 } else {
-                    $GLOBALS['log']->fatal('id_process_c',$bean->id_process_c);
+                    
+                    $GLOBALS['log']->fatal('id_process_c : '.$bean->id_process_c);
                     if (trim($bean->id_process_c , "") == "") {
                         $parametros = new stdClass();
                         $parametros->id_linea_padre = $bean->id_linea_credito_c;
@@ -143,10 +150,11 @@ class Solicitud_quantico extends SugarApi
                         $parametrosJSON = json_encode($parametros);
 
                         $callRatificacion = new CancelaRatificacion();
-                        //$GLOBALS['log']->fatal('args',$args);
+                        $GLOBALS['log']->fatal('parametrosJSON-ratificaicon : '.$parametrosJSON);
                         $resultado = $callRatificacion->cancelRatificacion($api, $parametrosJSON);
+                        $GLOBALS['log']->fatal('resultado_ratificacion: '.$resultado);
                         if ($resultado != null) {
-                            $GLOBALS['log']->fatal('Se cancelo padre1');
+                            $GLOBALS['log']->fatal('Se cancelo padre');
                             $bean->estatus_c = 'K';
                             $bean->save();
                             /**************************/
@@ -154,7 +162,7 @@ class Solicitud_quantico extends SugarApi
                             $codigo = "";
                             $servicio = "ratificacion";
                             $estatus = "Success";
-                            $GLOBALS['log']->fatal('id_process_c',$id_process_c);
+                            $GLOBALS['log']->fatal('id_process_c: '.$id_process_c);
                         } else {
                             $GLOBALS['log']->fatal('No Se cancelo padre');
                             $mensaje = "No Se cancelo padre";
@@ -170,8 +178,10 @@ class Solicitud_quantico extends SugarApi
                             $OppParamsJSON = json_encode($OppParams);
 
                             $callOpBPM = new cancelaOperacionBPM();
-                            //$GLOBALS['log']->fatal('args',$args);
-                            $resultadoRat = $callOpBPM->cancelaOperacion($api, $callOpBPM);
+                            
+                            $GLOBALS['log']->fatal('parametrosJSON',$OppParamsJSON);
+                            $resultadoRat = $callOpBPM->cancelaOperacion($api, $OppParamsJSON);
+                            $GLOBALS['log']->fatal('resultadoRat',$resultadoRat);
                             if ($resultadoRat != null) {
                                 if ($resultadoRat->estatus == 'error') {
                                     $mensaje = "Error: " . $resultadoRat->descripcion;
@@ -198,10 +208,9 @@ class Solicitud_quantico extends SugarApi
                                 //$GLOBALS['log']->fatal('args',$args);
                                 $resultado = $callRatificacion->cancelRatificacion($api, $parametrosJSON);
                                 if ($resultado != null) {
-                                    $GLOBALS['log']->fatal('Se cancelo padre2');
                                     $bean->estatus_c = 'K';
-                                    $bean->save();$mensaje = "Se cancelo el Padre";
-                                    
+                                    $bean->save();
+
                                     $mensaje = "Se ha cancelado la operaci\u00F3n";
                                     $codigo = "";
                                     $servicio = "ratificacion";
@@ -228,15 +237,16 @@ class Solicitud_quantico extends SugarApi
                 $bean->tct_oportunidad_perdida_chk_c = $cancelar;
                 $bean->save();
 
-                $mensaje = $resultado->ErrorMessage;
+                $mensaje = $resultado['ErrorMessage'];
                 $estatus = "error";
-                $codigo = $resultado->Code;
-                $servicio = "Quatico";
+                $codigo = $resultado['Code'];
+                $servicio = "Quantico";
             }
         }
         $GLOBALS['log']->fatal('Finaliza cancelado');
 
         $data = $this->estatus($codigo,$estatus ,$mensaje,$servicio);
+        $GLOBALS['log']->fatal('data',$data);
         return $data;
     }
 
