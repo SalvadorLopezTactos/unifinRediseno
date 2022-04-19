@@ -44,7 +44,7 @@ class GetProductosCuentas extends SugarApi
             inner join uni_productos_cstm upc on upc.id_c = up.id
             and a.id = '{$id}' and up.deleted = 0
          ) AS PRODUCTOS
-            INNER JOIN users AS uassign ON PRODUCTOS.assigned_user_id = uassign.id
+            LEFT JOIN users AS uassign ON PRODUCTOS.assigned_user_id = uassign.id
             LEFT JOIN users AS u1 ON PRODUCTOS.user_id_c = u1.id
             LEFT JOIN users AS u2 ON PRODUCTOS.user_id1_c = u2.id
             LEFT JOIN users AS u3 ON PRODUCTOS.user_id2_c = u3.id ";
