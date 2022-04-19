@@ -8,7 +8,7 @@
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('custom/Levementum/UnifinAPI.php');
 require_once('custom/modules/Opportunities/clients/base/api/CancelaRatificacion.php');
-require_once('custom/modules/Opportunities/clients/base/api/cancelaOperacionBPM.php:');
+require_once('custom/modules/Opportunities/clients/base/api/cancelaOperacionBPM.php');
 
 class Solicitud_quantico extends SugarApi
 {
