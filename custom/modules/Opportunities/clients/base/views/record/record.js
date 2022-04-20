@@ -1511,18 +1511,19 @@
                             
                                 if(data != null || data != ""){
                                     if( data['estatus'] == 'error' ){
-                                        //errors['tct_razon_op_perdida_ddw_c'] = 'Campo requerido para cancelar';
-                                        errors['tct_oportunidad_perdida_chk_c'].required = true;
+                                        this.model.set('tct_oportunidad_perdida_chk_c',0);
+                                        this.model.set('tct_razon_op_perdida_ddw_c','');
+                                        errors['tct_oportunidad_perdida_chk_c'] = 'Validar informaci\u00F3n';
                                         app.alert.show("Cancela Operacion", {
                                             level: "error",
                                             title: "Error: "+ data['code'] + " - " + data['mensaje'],
                                             autoClose: false
                                         });
+                                        callback(null, fields, errors);
                                     }else{
                                         this.model.set('estatus_c', 'K');
                                         callback(null, fields, errors);
                                     }
-                                    
                                 }else{
                                     this.model.set('estatus_c', 'K');
                                     callback(null, fields, errors);
