@@ -134,8 +134,8 @@ class Solicitud_quantico extends SugarApi
                     $estatus = "Success";
                     $codigo = "";
                     $servicio = "";
-                    $bean->estatus_c = 'K';
-                    $bean->save();
+                    //$bean->estatus_c = 'K';
+                    //$bean->save();
                 } else {
                     
                     $GLOBALS['log']->fatal('id_process_c : '.$bean->id_process_c);
@@ -155,22 +155,22 @@ class Solicitud_quantico extends SugarApi
                         $GLOBALS['log']->fatal('resultado_ratificacion: '.$resultado);
                         if ($resultado != null) {
                             $GLOBALS['log']->fatal('Se cancelo padre');
-                            $bean->estatus_c = 'K';
-                            $bean->save();
+                            //$bean->estatus_c = 'K';
+                            //$bean->save();
                             /**************************/
-                            /*$mensaje = "Se cancelo el Padre";
+                            $mensaje = "Se cancelo el Padre";
                             $codigo = "";
                             $servicio = "ratificacion";
                             $estatus = "Success";
-                            */
+                            
                             $GLOBALS['log']->fatal('id_process_c: '.$id_process_c);
                         } else {
                             $GLOBALS['log']->fatal('No Se cancelo padre');
-                            /*$mensaje = "No Se cancelo padre";
+                            $mensaje = "No Se cancelo padre";
                             $codigo = "";
                             $servicio = "ratificacion";
-                            $estatus = "Success";
-                            */
+                            $estatus = "error";
+                            
                         }
                     } else {
                         if ($bean->estatus_c != 'K') {
@@ -186,15 +186,19 @@ class Solicitud_quantico extends SugarApi
                             $GLOBALS['log']->fatal('resultadoRat',$resultadoRat);
                             if ($resultadoRat != null) {
                                 if ($resultadoRat->estatus == 'error') {
+                                    /*
                                     $mensaje = "Error: " . $resultadoRat->descripcion;
                                     $codigo = "";
                                     $servicio = "operaBpm";
                                     $estatus = "error";
+                                    */
                                 } else {
+                                    /*
                                     $mensaje = "Se ha cancelado la operaci\u00F3n";
                                     $codigo = "";
                                     $servicio = "operaBpm";
                                     $estatus = "Success";
+                                    */
                                 }
                                 // mandamos llamar el servicio para cancelar localmente:                            
                                 $parametros = new stdClass();
@@ -210,22 +214,22 @@ class Solicitud_quantico extends SugarApi
                                 //$GLOBALS['log']->fatal('args',$args);
                                 $resultado = $callRatificacion->cancelRatificacion($api, $parametrosJSON);
                                 if ($resultado != null) {
-                                    $bean->estatus_c = 'K';
-                                    $bean->save();
+                                    //$bean->estatus_c = 'K';
+                                    //$bean->save();
 
-                                    /*$mensaje = "Se ha cancelado la operaci\u00F3n";
+                                    $mensaje = "Se ha cancelado la operaci\u00F3n";
                                     $codigo = "";
                                     $servicio = "ratificacion";
                                     $estatus = "Success";
-                                    */
+                                    
                                     $GLOBALS['log']->fatal('Se cancela padre');
                                 } else {
                                     $GLOBALS['log']->fatal('No Se cancelo padre');
-                                    /*$mensaje = "No Se cancelo padre";
+                                    $mensaje = "No Se cancelo padre";
                                     $codigo = "";
                                     $servicio = "ratificacion";
                                     $estatus = "error";
-                                    */
+                                    
                                 }
                             }
                         }else {
