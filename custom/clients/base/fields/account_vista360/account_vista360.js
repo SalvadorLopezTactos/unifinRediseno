@@ -104,6 +104,7 @@
                             context: {
                                 create: true,
                                 module: 'Rel_Relaciones',
+                                from360:'1',
                                 model: model
                                 },
                             },
@@ -125,6 +126,7 @@
                             context: {
                                 create: true,
                                 module: 'Rel_Relaciones',
+                                from360:'1',
                                 model: model
                             },
                         },
@@ -147,6 +149,7 @@
                         context: {
                               create: true,
                               module: 'Rel_Relaciones',
+                              from360:'1',
                               model: model
                           },
                       },
