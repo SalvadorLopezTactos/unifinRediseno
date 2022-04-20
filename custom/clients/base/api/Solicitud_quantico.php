@@ -158,17 +158,19 @@ class Solicitud_quantico extends SugarApi
                             $bean->estatus_c = 'K';
                             $bean->save();
                             /**************************/
-                            $mensaje = "Se cancelo el Padre";
+                            /*$mensaje = "Se cancelo el Padre";
                             $codigo = "";
                             $servicio = "ratificacion";
                             $estatus = "Success";
+                            */
                             $GLOBALS['log']->fatal('id_process_c: '.$id_process_c);
                         } else {
                             $GLOBALS['log']->fatal('No Se cancelo padre');
-                            $mensaje = "No Se cancelo padre";
+                            /*$mensaje = "No Se cancelo padre";
                             $codigo = "";
                             $servicio = "ratificacion";
                             $estatus = "Success";
+                            */
                         }
                     } else {
                         if ($bean->estatus_c != 'K') {
@@ -211,17 +213,19 @@ class Solicitud_quantico extends SugarApi
                                     $bean->estatus_c = 'K';
                                     $bean->save();
 
-                                    $mensaje = "Se ha cancelado la operaci\u00F3n";
+                                    /*$mensaje = "Se ha cancelado la operaci\u00F3n";
                                     $codigo = "";
                                     $servicio = "ratificacion";
                                     $estatus = "Success";
+                                    */
                                     $GLOBALS['log']->fatal('Se cancela padre');
                                 } else {
                                     $GLOBALS['log']->fatal('No Se cancelo padre');
-                                    $mensaje = "No Se cancelo padre";
+                                    /*$mensaje = "No Se cancelo padre";
                                     $codigo = "";
                                     $servicio = "ratificacion";
-                                    $estatus = "Success";
+                                    $estatus = "error";
+                                    */
                                 }
                             }
                         }else {
