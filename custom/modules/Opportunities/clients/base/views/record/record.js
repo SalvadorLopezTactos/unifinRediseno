@@ -1506,6 +1506,8 @@
                             
                                 if(data != null || data != ""){
                                     if( data['estatus'] == 'error' ){
+                                        //errors['tct_razon_op_perdida_ddw_c'] = 'Campo requerido para cancelar';
+                                        errors['tct_oportunidad_perdida_chk_c'].required = true;
                                         app.alert.show("Cancela Operacion", {
                                             level: "error",
                                             title: "Error: "+ data['code'] + " - " + data['mensaje'],
@@ -1515,6 +1517,7 @@
                                         this.model.set('estatus_c', 'K');
                                         callback(null, fields, errors);
                                     }
+                                    
                                 }else{
                                     this.model.set('estatus_c', 'K');
                                     callback(null, fields, errors);
