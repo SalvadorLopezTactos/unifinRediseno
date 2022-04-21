@@ -213,6 +213,10 @@
         Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
             arrayPuestosComerciales.push(key);
         });
+        
+        if(self.oTelefonos==undefined){
+            self.oTelefonos=this.view.oTelefonos;
+        }
         //TELEFONOS QUE SOLO SON REUS
         for (var i = 0; i < self.oTelefonos.telefono.length; i++) {
             if (self.oTelefonos.telefono[i].reus == 1 && self.oTelefonos.telefono[i].telefono == tel_client) {
