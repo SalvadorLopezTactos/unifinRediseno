@@ -1212,7 +1212,6 @@ class ResumenClienteAPI extends SugarApi
                 AND r.deleted=0 AND a.deleted=0
                 ORDER by orden asc;";
                 $queryResultOrdenRelaciones = $db->query($queryOrdenRelaciones);
-
                 $count=0;
                 while ($row = $db->fetchByAssoc($queryResultOrdenRelaciones)) {
                     if($count==0){//El primer registro en el orden corresponde al Contacto de Negocios
@@ -1237,7 +1236,7 @@ class ResumenClienteAPI extends SugarApi
                             }
                         }
                         $arr_principal['contactos']['nombre_negocios'] = $rel->relacion_c;
-                        $arr_principal['contactos']['id_nombre_negocios'] = $id_relacion;
+                        $arr_principal['contactos']['id_nombre_negocios'] = $beanRelacionNegocios->id;
                         $arr_principal['contactos']['puesto_negocios'] = isset($app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_negocios'] = $telefono_principal_negocio;
                         $arr_principal['contactos']['correo_negocios'] = $beanRelacionNegocios->email1;
@@ -1268,7 +1267,7 @@ class ResumenClienteAPI extends SugarApi
                         }
 
                         $arr_principal['contactos']['nombre_secundario'] = $rel->relacion_c;
-                        $arr_principal['contactos']['id_nombre_secundario'] = $id_relacion;
+                        $arr_principal['contactos']['id_nombre_secundario'] = $beanRelacionSecundaria->id;
                         $arr_principal['contactos']['puesto_secundario'] =isset($app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_secundario'] = $telefono_principal_secundario;
                         $arr_principal['contactos']['correo_secundario'] = $beanRelacionSecundaria->email1;
