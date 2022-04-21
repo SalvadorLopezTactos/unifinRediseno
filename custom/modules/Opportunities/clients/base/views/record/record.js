@@ -1504,16 +1504,18 @@
                             title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
                             autoClose: true
                         });
-                        
+
                         app.api.records("read", "cancelQuantico/"+idSol, {}, null , {
                             success: _.bind(function (data) {
                                 //{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}
-                            
+
                                 if(data != null || data != ""){
                                     if( data['estatus'] == 'error' ){
                                         this.model.set('tct_oportunidad_perdida_chk_c',0);
                                         this.model.set('tct_razon_op_perdida_ddw_c','');
-                                        errors['tct_oportunidad_perdida_chk_c'] = 'Validar informaci\u00F3n';
+                                        errors['cancelacion_operacion'] = 'No se puede cancelar';
+                                        errors['cancelacion_operacion'].required = true;
+
                                         app.alert.show("Cancela Operacion", {
                                             level: "error",
                                             title: "Error: "+ data['code'] + " - " + data['mensaje'],
@@ -1530,7 +1532,7 @@
                                 }
                             }, this)
                         });
-                        
+
                     }else {
                         errors['tct_razon_op_perdida_ddw_c'] = 'Campo requerido para cancelar';
                         errors['tct_razon_op_perdida_ddw_c'].required = true;
@@ -1546,16 +1548,16 @@
     },
 
     respQuanticoCancel: function (respuesta) {
-        
+
         var cancelar = false;
         //{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}
-            
+
         if (respuesta.Success &&  respuesta.ErrorMessage == "") {
             cancelar = true;
         } else {
             console.log("Error al actualizar a Quantico: " + respuesta.Code);
             if(respuesta.Code == '404'){
-                cancelar = true;                
+                cancelar = true;
             }
         }
 
@@ -3258,19 +3260,19 @@
                 success: _.bind(function (data) {
                     if (data == '1') {
                         banderaExcluye.check.push(1);
-                        self.autorizapre();
+                        banderaExcluye.autorizapre();
                         //$('[data-name="opportunities_directores"]').hide();
                         //$('[data-name="vobo_descripcion_txa_c"]').hide();
                         //$('[data-name="doc_scoring_chk_c"]').hide();
-                        self.model.set('bandera_excluye_chk_c', 1);
+                        banderaExcluye.model.set('bandera_excluye_chk_c', 1);
                     } else {
                         banderaExcluye.check.push(0);
                         //$('[data-name="opportunities_directores"]').show();
                         //$('[data-name="vobo_descripcion_txa_c"]').show();
                         //$('[data-name="doc_scoring_chk_c"]').show();
                     }
-                    self.controlVistaCamposPrecalificacion();
-                }, self),
+                    banderaExcluye.controlVistaCamposPrecalificacion();
+                }, banderaExcluye),
             });
         } else {
             this.controlVistaCamposPrecalificacion();

@@ -1187,8 +1187,8 @@ class ResumenClienteAPI extends SugarApi
                         WHEN (r.relaciones_activas like '%Directivo%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) IN ('4','5','6','7')) THEN 3 -- Relación incluye relación activa Directivo o Cuenta Relacionada tiene algún puesto de Director
                         WHEN (r.relaciones_activas like '%Accionista%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='2') THEN 4 -- Relación incluye relación activa Accionista o Cuenta Relacionada tiene puesto Accionistas
                         WHEN r.relaciones_activas like '%Representante%' THEN 5 -- Relación incluye relación activa Representante
-                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 6 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo	
-                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 7 -- Relación incluye relación activa Propietario Real	
+                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 6 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo
+                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 7 -- Relación incluye relación activa Propietario Real
                         ELSE 8
                     END,
                     CASE -- Es PF o PFAE
@@ -1198,8 +1198,8 @@ class ResumenClienteAPI extends SugarApi
                         WHEN (r.relaciones_activas like '%Directivo%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) IN ('4','5','6','7')) THEN 4 -- Relación incluye relación activa Directivo o Cuenta Relacionada tiene algún puesto de Director
                         WHEN (r.relaciones_activas like '%Accionista%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='2') THEN 5 -- Relación incluye relación activa Accionista o Cuenta Relacionada tiene puesto Accionistas
                         WHEN r.relaciones_activas like '%Representante%' THEN 6 -- Relación incluye relación activa Representante
-                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 7 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo	
-                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 8 -- Relación incluye relación activa Propietario Real	
+                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 7 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo
+                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 8 -- Relación incluye relación activa Propietario Real
                         ELSE 9
                     END
                     ) orden
@@ -1215,7 +1215,7 @@ class ResumenClienteAPI extends SugarApi
                 $count=0;
                 while ($row = $db->fetchByAssoc($queryResultOrdenRelaciones)) {
                     if($count==0){//El primer registro en el orden corresponde al Contacto de Negocios
-                        $GLOBALS['log']->fatal("COUNT 0 ES EL CONTACTO DE NEGOCIOS");
+                        //$GLOBALS['log']->fatal("COUNT 0 ES EL CONTACTO DE NEGOCIOS");
                         $id_relacion=$row['relacion_id'];
                         $rel = BeanFactory::getBean("Rel_Relaciones", $id_relacion);
 
@@ -1227,8 +1227,8 @@ class ResumenClienteAPI extends SugarApi
                         if($beanRelacionNegocios->load_relationship('accounts_tel_telefonos_1')){
                             $relatedTelefonos = $beanRelacionNegocios->accounts_tel_telefonos_1->getBeans();
                             if(count($relatedTelefonos)>0){
-
                                 foreach($relatedTelefonos as $tel) {
+                                     //$GLOBALS['log']->fatal(print_r($tel,true));
                                     if($tel->principal==1){
                                         $telefono_principal_negocio=$tel->telefono;
                                     }
@@ -1244,7 +1244,7 @@ class ResumenClienteAPI extends SugarApi
                         $count++;
 
                     }else if($count==1){//El segundo registro en el orden se toma como el Contacto Secundario
-                        $GLOBALS['log']->fatal("COUNT 1 ES EL CONTACTO SECUNDARIO");
+                        //$GLOBALS['log']->fatal("COUNT 1 ES EL CONTACTO SECUNDARIO");
                         $id_relacion=$row['relacion_id'];
                         $rel = BeanFactory::getBean("Rel_Relaciones", $id_relacion);
 
@@ -1282,7 +1282,7 @@ class ResumenClienteAPI extends SugarApi
         // $GLOBALS['log']->fatal('resultado de API:');
         // $GLOBALS['log']->fatal($api->platform);
         //$api->platform;
-
+	/*
         $arr_principal['leasing']['muestra_producto'] = true;
         $arr_principal['leasing']['es_prospecto_cliente'] = true;
         $arr_principal['leasing']['tiene_anexo_liberado'] = true;
@@ -1305,7 +1305,7 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['fleet']['muestra_producto'] = true;
         $arr_principal['credito_simple']['muestra_producto'] = true;
         $arr_principal['uniclick']['muestra_producto'] = true;
-        $arr_principal['unifactor']['muestra_producto'] = true;
+        $arr_principal['unifactor']['muestra_producto'] = true;*/
 
         return $arr_principal;
     }
@@ -1317,7 +1317,7 @@ class ResumenClienteAPI extends SugarApi
         if(!empty($idUsuario)){
             //Valida usuario
             global $db;
-            $queryU = "select id from users where id='{$idUsuario}' and is_group=0 and deleted=0 limit 1;";
+            $queryU = "select count(*) from users where id='{$idUsuario}' and is_group=0 and deleted=0 limit 1;";
             $queryResult = $db->getOne($queryU);
             $valido = ($queryResult > 0) ? true : false;
         }
