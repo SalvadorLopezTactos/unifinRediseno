@@ -20,7 +20,7 @@ class tarea_quantico extends SugarApi
 
 	public function tareas_quantico($api, $args){
         global $sugar_config;
-		$url = $sugar_config['quantico_url_base'].'/Suppliers_WS/rest/SupplierAPI/CreateSupplierExpedientTask/';
+		$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierExpedientTask/';
 		$content = $args['id'];
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_ENCODING, '');
@@ -44,7 +44,7 @@ class tarea_quantico extends SugarApi
                 "RFC" => $account->rfc_c,
                 "PersonTypeExternalId" => $regimen
             );
-			$url = $sugar_config['quantico_url_base'].'/Suppliers_WS/rest/SupplierAPI/CreateSupplierInQuantico/';
+			$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierInQuantico/';
 			$content = json_encode($arreglo);
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_ENCODING, '');
@@ -60,7 +60,7 @@ class tarea_quantico extends SugarApi
 			if($response['IsValid']) {
 				$account->proveedor_quantico_c = 1;
 				$account->save();
-				$url = $sugar_config['quantico_url_base'].'/Suppliers_WS/rest/SupplierAPI/CreateSupplierExpedientTask/';
+				$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierExpedientTask/';
 				$content = $args['id'];
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_ENCODING, '');
