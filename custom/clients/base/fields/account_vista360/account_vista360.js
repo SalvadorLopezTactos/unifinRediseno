@@ -6,6 +6,8 @@
         'click .btnNuevaReunion':'openDrawerReunion',
         'click .addCall':'generatecall',
         'click .sendEmail':'openDrawerSendEmail',
+        'click .btnNewPre':'openDrawerPre',
+
 
         //Despliegue de detalle
       'click .openModalAnexos': 'getAnexos',
@@ -57,11 +59,11 @@
         var modal = $('#modalGpoEmpresarial');
         if (modal) {
             modal.hide();
-        }   
+        }
     },
 
     openDrawerRelacion:function(){
-        
+
         self_v360=this;
         var id_cuenta=this.model.get('id');
         //Consumir servicio para establecer campo de
@@ -78,7 +80,7 @@
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
                 app.alert.dismiss('loadingGetRelaciones');
-                
+
                 if(data.records.length>0){
                     //Evaluar que ya tenga alguna relación de tipo Negocios
                     var tieneNegocio=0;
@@ -112,7 +114,7 @@
                                 console.log("DESDE PREVIEW RELACION");
                             }
                         );
-                        
+
                     }else{
                         //No tiene relaciones, Relaciones Activas se establece como tipo Negocios
                         var model=App.data.createBean('Rel_Relaciones');
@@ -156,9 +158,9 @@
                       function(variable){
                           console.log("DESDE PREVIEW RELACION");
                       }
-                    ); 
+                    );
                 }
-                
+
             }, this)
         });
 
@@ -193,7 +195,7 @@
                 messages: 'No existe una Cuenta para agendar reunión'
               });
         }
-                        
+
     },
 
     generatecall: function (evt) {
@@ -201,7 +203,7 @@
         var tel_client = $(evt.currentTarget).attr('data-telefono');
         this.nombre_cliente_llamada=$(evt.currentTarget).attr('data-nombre');
         this.id_cliente_llamada=$(evt.currentTarget).attr('data-id-nombre');
-        
+
         var tel_usr = app.user.attributes.ext_c;
         var puesto_usuario = App.user.attributes.puestousuario_c;
         var idUsuarioLogeado = App.user.attributes.id;
@@ -350,10 +352,10 @@
 
     openDrawerSendEmail:function(e){
 
-        //prepopulateEmailForCreate        
+        //prepopulateEmailForCreate
         var id_cuenta=$(e.currentTarget).attr('data-id-nombre');
         var nombre_cuenta=$(e.currentTarget).attr('data-name');
-        
+
         var beanContacto=app.data.createBean('Accounts', {id:id_cuenta});
 
         app.alert.show('loadingOpenDrawerEmail', {
@@ -386,14 +388,14 @@
                         create: true,
                         module: 'Emails',
                         model: modeloEmail
-        
+
                     },
                 },function(variable){
                     console.log("Cierra drawer de Emails");
                 });
 
             }
-        }); 
+        });
     },
 
     getAnexos: function () {
@@ -401,19 +403,19 @@
         var peticion = "anexos_activos";
         this.getData(peticion, id);
       },
-    
+
       getCesiones: function () {
         var id = this.model.get('idcliente_c');
         var peticion = "cesiones_activas";
         this.getData(peticion, id);
       },
-    
+
       getContratos: function () {
         var id = this.model.get('idcliente_c');
         var peticion = "contratos_activos";
         this.getData(peticion, id);
       },
-    
+
       //Funciones para drawers de Historicos
       getAnexosH: function () {
         var id = this.model.get('idcliente_c');
@@ -430,7 +432,7 @@
         var peticion="contratos_historicos";
         this.getData(peticion, id);
       },
-    
+
       /**
         Funciones de despliegue:
          - getData: consume servicio para obtención de información y despliegue de resultado
@@ -438,7 +440,7 @@
       */
       getData: function (peticion, id, records=null ) {
           console.log("getAnexos - clic");
-    
+
           //Bloque botones
           $("#openAnexos").removeClass("openModalAnexos");
           $("#openCesiones").removeClass("openModalCesiones");
@@ -447,7 +449,7 @@
           $("#openAnexosH").removeClass("openModalAnexosH");
           $("#openCesionesH").removeClass("openModalCesionesH");
           $("#openContratosH").removeClass("openModalContratosH");
-    
+
           if (!records) {
             //Genera petición
             var Params = {
@@ -455,15 +457,15 @@
                 'tipo_peticion': peticion,
             };
             var url = app.api.buildURL('ConsultaAnexos','', {}, {});
-    
+
             //
             App.alert.show('openAnexos', {
                 level: 'process'
             });
-    
+
             // $("#myModal1").show();
             // $(".loadingIcon").show();
-    
+
             //Ejecuta petición
             var self = this;
             app.api.call('create', url, {data: Params},{
@@ -471,22 +473,22 @@
                 //Logs
                 console.log('data:');
                 console.log(data);
-    
+
                 //var records2 = data;
                 _.extend(self, {anexosdata:data});
                 self.render();
-    
+
                 //Muestra modal
                 App.alert.dismiss('openAnexos');
-    
+
                 // $("#loadingIcon").hide();
                 // $(".myModal1").hide();
-    
+
                 var modal = $('#myModal');
                 if (modal) {
                     modal.show();
                 }
-    
+
                 //Bloque botones
                 $("#openAnexos").removeClass("openModalAnexos");
                 $("#openCesiones").removeClass("openModalCesiones");
@@ -495,7 +497,7 @@
                 $("#openAnexosH").removeClass("openModalAnexosH");
                 $("#openCesionesH").removeClass("openModalCesionesH");
                 $("#openContratosH").removeClass("openModalContratosH");
-    
+
               }
             });
           }else {
@@ -507,30 +509,30 @@
             }
           }
       },
-    
+
       closeModal: function () {
           console.log("closeModal - clic");
           var modal = $('#myModal');
           if (modal) {
               modal.hide();
           }
-    
+
           //Habilita botones
           $("#openAnexos").addClass("openModalAnexos");
           $("#openCesiones").addClass("openModalCesiones");
           $("#openContratos").addClass("openModalContratos");
-    
+
           $("#openAnexosH").addClass("openModalAnexosH");
           $("#openCesionesH").addClass("openModalCesionesH");
           $("#openContratosH").addClass("openModalContratosH");
-    
-      }, 
+
+      },
 
       orderAnexo: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
         // console.log(this.anexosdata);
-    
+
         var orderData = this.anexosdata;
         if (this.sortAnexo == "ASC") {
           orderData.anexos_activos = this.anexosdata.anexos_activos.sort(function (a, b) {
@@ -555,14 +557,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexo = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderAnexoContratacion: function(){
         //Ordenamiento: Anexos por fecha de contratación - Columna 3
         // console.log('--anexosdata--');
@@ -592,14 +594,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoContratacion = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderAnexoTerminacion: function(){
         //Ordenamiento: Anexos por fecha de terminación - Columna 4
         // console.log('--anexosdata--');
@@ -629,17 +631,17 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoTerminacion = "ASC";
         }
         this.getData(null,null,orderData);
       },
-    
+
       orderContrato: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
         // console.log(this.anexosdata);
-    
+
         var orderData = this.anexosdata;
         if (this.sortAnexo == "ASC") {
           orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
@@ -664,14 +666,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexo = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderContratoContratacion: function(){
         //Ordenamiento: Anexos por fecha de contratación - Columna 3
         // console.log('--anexosdata--');
@@ -701,14 +703,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoContratacion = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderContratoTerminacion: function(){
         //Ordenamiento: Anexos por fecha de terminación - Columna 4
         // console.log('--anexosdata--');
@@ -738,12 +740,12 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoTerminacion = "ASC";
         }
         this.getData(null,null,orderData);
       },
-    
+
       Save_comentario: function(){
         var self =this;
             var comentario = this.$('#txtComment').val();
@@ -762,14 +764,14 @@
                        }
                    }, this)
                });
-    
+
             }
       },
       orderCesion: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
         // console.log(this.anexosdata);
-    
+
         var orderData = this.anexosdata;
         if (this.sortAnexo == "ASC") {
           orderData.cesiones_activas = this.anexosdata.cesiones_activas.sort(function (a, b) {
@@ -794,14 +796,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexo = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderCesionVencimiento: function(){
         //Ordenamiento: Anexos por fecha de contratación - Columna 3
         // console.log('--anexosdata--');
@@ -831,11 +833,11 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoTerminacion = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
       // Función para comparación de fechas
@@ -856,5 +858,31 @@
             //Abre ventana nueva con las dimensiones establecidas.
             window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
         },
+
+    openDrawerPre:function(e){
+        var modeloOppty = App.data.createBean('Opportunities');
+        var id_cuenta = contexto_cuenta.model.attributes.id;
+        var nombre_cuenta= contexto_cuenta.model.attributes.name;
+        var tipo_producto = $(e.currentTarget).attr('data-name');
+        modeloOppty.set('account_id',id_cuenta);
+        modeloOppty.set('account_name',nombre_cuenta);
+        modeloOppty.set('tipo_producto_c',tipo_producto);
+
+        App.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                module: 'Opportunities',
+                model: modeloOppty
+                },
+            },
+            function(variable){
+                console.log("Cierra drawer de Opportunities");
+            }
+        );
+
+
+    },
+
 
 })
