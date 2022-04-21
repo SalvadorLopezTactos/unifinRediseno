@@ -60,7 +60,13 @@
         }   
     },
 
-    openDrawerRelacion:function(){
+    openDrawerRelacion:function(e){
+        this.e=e;
+        if($(e.currentTarget).attr('disabled')==undefined){
+            $(e.currentTarget).attr('disabled','disabled');
+        }else{
+            $(e.currentTarget).removeAttr('disabled');
+        }
         
         self_v360=this;
         var id_cuenta=this.model.get('id');
@@ -109,7 +115,11 @@
                                 },
                             },
                             function(variable){
-                                console.log("DESDE PREVIEW RELACION");
+                                if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                                    $(self_v360.e.currentTarget).attr('disabled','disabled');
+                                }else{
+                                    $(self_v360.e.currentTarget).removeAttr('disabled');
+                                }
                             }
                         );
                         
@@ -131,7 +141,11 @@
                             },
                         },
                         function(variable){
-                            console.log("DESDE PREVIEW RELACION");
+                            if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                                $(self_v360.e.currentTarget).attr('disabled','disabled');
+                            }else{
+                                $(self_v360.e.currentTarget).removeAttr('disabled');
+                            }
                         }
                         );
                     }
@@ -154,7 +168,11 @@
                           },
                       },
                       function(variable){
-                          console.log("DESDE PREVIEW RELACION");
+                        if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                            $(self_v360.e.currentTarget).attr('disabled','disabled');
+                        }else{
+                            $(self_v360.e.currentTarget).removeAttr('disabled');
+                        }
                       }
                     ); 
                 }
