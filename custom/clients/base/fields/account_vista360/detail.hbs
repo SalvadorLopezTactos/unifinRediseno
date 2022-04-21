@@ -115,7 +115,7 @@
                             </tr>
                             <tr style="background-color:#C0BEC1" height="20px">
                                 <td><strong style="padding:8px">Correo Electrónico</strong></td>
-                                <td>{{ResumenCliente.contactos.correo_negocios}}&nbsp;&nbsp;{{#if ResumenCliente.contactos.correo_negocios}}<i class="fa fa-envelope fa-md sendEmail" tabindex="-1"></i>{{/if}}</td>
+                                <td>{{ResumenCliente.contactos.correo_negocios}}&nbsp;&nbsp;{{#if ResumenCliente.contactos.correo_negocios}}<i class="fa fa-envelope fa-md sendEmail" data-nombre="{{ResumenCliente.contactos.nombre_negocios}}" data-id-nombre="{{ResumenCliente.contactos.id_nombre_negocios}}" tabindex="-1"></i>{{/if}}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -62,8 +62,14 @@
         }
     },
 
-    openDrawerRelacion:function(){
-
+    openDrawerRelacion:function(e){
+        this.e=e;
+        if($(e.currentTarget).attr('disabled')==undefined){
+            $(e.currentTarget).attr('disabled','disabled');
+        }else{
+            $(e.currentTarget).removeAttr('disabled');
+        }
+        
         self_v360=this;
         var id_cuenta=this.model.get('id');
         //Consumir servicio para establecer campo de
@@ -111,7 +117,11 @@
                                 },
                             },
                             function(variable){
-                                console.log("DESDE PREVIEW RELACION");
+                                if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                                    $(self_v360.e.currentTarget).attr('disabled','disabled');
+                                }else{
+                                    $(self_v360.e.currentTarget).removeAttr('disabled');
+                                }
                             }
                         );
 
@@ -133,7 +143,11 @@
                             },
                         },
                         function(variable){
-                            console.log("DESDE PREVIEW RELACION");
+                            if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                                $(self_v360.e.currentTarget).attr('disabled','disabled');
+                            }else{
+                                $(self_v360.e.currentTarget).removeAttr('disabled');
+                            }
                         }
                         );
                     }
@@ -156,7 +170,11 @@
                           },
                       },
                       function(variable){
-                          console.log("DESDE PREVIEW RELACION");
+                        if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                            $(self_v360.e.currentTarget).attr('disabled','disabled');
+                        }else{
+                            $(self_v360.e.currentTarget).removeAttr('disabled');
+                        }
                       }
                     );
                 }
@@ -215,6 +233,10 @@
         Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
             arrayPuestosComerciales.push(key);
         });
+        
+        if(self.oTelefonos==undefined){
+            self.oTelefonos=this.view.oTelefonos;
+        }
         //TELEFONOS QUE SOLO SON REUS
         for (var i = 0; i < self.oTelefonos.telefono.length; i++) {
             if (self.oTelefonos.telefono[i].reus == 1 && self.oTelefonos.telefono[i].telefono == tel_client) {
@@ -354,8 +376,7 @@
 
         //prepopulateEmailForCreate
         var id_cuenta=$(e.currentTarget).attr('data-id-nombre');
-        var nombre_cuenta=$(e.currentTarget).attr('data-name');
-
+        var nombre_cuenta=$(e.currentTarget).attr('data-nombre');
         var beanContacto=app.data.createBean('Accounts', {id:id_cuenta});
 
         app.alert.show('loadingOpenDrawerEmail', {
