@@ -352,7 +352,7 @@
 
         //prepopulateEmailForCreate        
         var id_cuenta=$(e.currentTarget).attr('data-id-nombre');
-        var nombre_cuenta=$(e.currentTarget).attr('data-name');
+        var nombre_cuenta=$(e.currentTarget).attr('data-nombre');
         
         var beanContacto=app.data.createBean('Accounts', {id:id_cuenta});
 
