@@ -139,7 +139,7 @@ class ResumenClienteAPI extends SugarApi
             "dias_atraso" => 0,
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
-            "tiene_linea_autorizadda" => false,
+            "tiene_linea_autorizada" => false,
             "tiene_anexo_liberado" => false
           );
         //Factoraje
@@ -169,7 +169,7 @@ class ResumenClienteAPI extends SugarApi
             "tipo_linea" => 0,
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
-            "tiene_linea_autorizadda" => false,
+            "tiene_linea_autorizada" => false,
             "tiene_cesiones_liberado" => false
           );
         //Crédito automotriz
@@ -198,7 +198,7 @@ class ResumenClienteAPI extends SugarApi
             "dias_atraso" => 0,
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
-            "tiene_linea_autorizadda" => false,
+            "tiene_linea_autorizada" => false,
             "tiene_contrato_liberado" => false
           );
         //Fleet
@@ -558,7 +558,7 @@ class ResumenClienteAPI extends SugarApi
                     $operaciones_ids .= ",'$opps->id'";
                     //Control para leasing
                     if ($opps->tipo_producto_c == 1 && $opps->negocio_c == 5 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
-                        $arr_principal['leasing']['tiene_linea_autorizadda'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['leasing']['tiene_linea_autorizadda'];
+                        $arr_principal['leasing']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['leasing']['tiene_linea_autorizada'];
                         $linea_aut_leasing += $opps->monto_c;
                         $linea_disp_leasing += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -587,7 +587,7 @@ class ResumenClienteAPI extends SugarApi
 
                     //Control para factoring
                     if ($opps->tipo_producto_c == 4 && $opps->negocio_c == 4 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
-                        $arr_principal['factoring']['tiene_linea_autorizadda'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['factoring']['tiene_linea_autorizadda'];
+                        $arr_principal['factoring']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['factoring']['tiene_linea_autorizada'];
                         $arr_principal['factoring']['tipo_linea'] = $opps->f_tipo_linea_c;
 
                         $linea_aut_factoring += $opps->monto_c;
@@ -617,8 +617,8 @@ class ResumenClienteAPI extends SugarApi
 
                     //Control para crédito auto
                     $fecha_val = date("Y-m-d");
-                    if ($opps->tipo_producto_c == 3 && $opps->vigencialinea_c >= $fecha_val) {
-                        $arr_principal['credito_auto']['tiene_linea_autorizadda'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['credito_auto']['tiene_linea_autorizadda'];
+                    if ($opps->tipo_producto_c == 3) {
+                        $arr_principal['credito_auto']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['credito_auto']['tiene_linea_autorizada'];
                         $linea_aut_credito_aut += $opps->monto_c;
                         $linea_disp_credito_aut += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -1286,16 +1286,16 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['leasing']['muestra_producto'] = true;
         $arr_principal['leasing']['es_prospecto_cliente'] = true;
         $arr_principal['leasing']['tiene_anexo_liberado'] = true;
-        $arr_principal['leasing']['tiene_linea_autorizadda'] = true;
+        $arr_principal['leasing']['tiene_linea_autorizada'] = true;
 
         $arr_principal['factoring']['muestra_producto'] = true;
         $arr_principal['factoring']['es_prospecto_cliente'] = true;
-        $arr_principal['factoring']['tiene_linea_autorizadda'] = true;
+        $arr_principal['factoring']['tiene_linea_autorizada'] = true;
         $arr_principal['factoring']['tiene_cesiones_liberado'] = true;
 
         $arr_principal['credito_auto']['muestra_producto'] = true;
         $arr_principal['credito_auto']['es_prospecto_cliente'] = true;
-        $arr_principal['credito_auto']['tiene_linea_autorizadda'] = true;
+        $arr_principal['credito_auto']['tiene_linea_autorizada'] = true;
         $arr_principal['credito_auto']['tiene_contrato_liberado'] = true;
 
         $arr_principal['seguros']['muestra_producto'] = true;
