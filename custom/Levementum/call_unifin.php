@@ -30,7 +30,11 @@ $strCallerId="1";
             fputs($oSocket, "Username: $strUser\r\n");
             fputs($oSocket, "Secret: $strSecret\r\n\r\n");
             fputs($oSocket, "Action: originate\r\n");
-            fputs($oSocket, "Channel: SIP/$exten_issabel\r\n");
+            if (strlen($exten_issabel) == 5){
+              fputs($oSocket, "Channel: Local/FMGL-$exten_issabel#@from-internal\r\n");
+            } else {
+              fputs($oSocket, "Channel: SIP/$exten_issabel\r\n");
+            }
             fputs($oSocket, "WaitTime: $strWaitTime\r\n");
             fputs($oSocket, "Variable: id_call=$id_call\r\n" );//Enviamos ID de CRM en la variable IDCRM y es recibida por Asterisk
             fputs($oSocket, "Variable: userexten=$exten_issabel\r\n" );
