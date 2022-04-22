@@ -1150,6 +1150,7 @@ class ResumenClienteAPI extends SugarApi
                 $ganadas = $ganadas + 1;
                 $prima += $seguro->prima_neta_ganada_c;
                 $ingreso += $seguro->prima_neta;
+                $arr_principal['seguros']['tiene_ganada'] = true;
               }
               else {
                 if($seguro->etapa != 10) $proceso = $proceso + 1;
@@ -1166,6 +1167,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['seguros']['prima'] = $prima;
             $arr_principal['seguros']['ingreso'] = $ingreso;
             $arr_principal['seguros']['muestra_producto'] = true;
+            $arr_principal['seguros']['tiene_seguros'] = true;
           }
         }
 
