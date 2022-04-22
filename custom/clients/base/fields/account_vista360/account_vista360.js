@@ -6,7 +6,7 @@
         'click .btnNuevaReunion':'openDrawerReunion',
         'click .addCall':'generatecall',
         'click .sendEmail':'openDrawerSendEmail',
-        'click .btnNewPre':'openDrawerPre',
+        'click .btnNuevaLinea':'creaNuevaLinea',
 
 
         //Despliegue de detalle
@@ -69,7 +69,7 @@
         }else{
             $(e.currentTarget).removeAttr('disabled');
         }
-        
+
         self_v360=this;
         var id_cuenta=this.model.get('id');
         //Consumir servicio para establecer campo de
@@ -233,7 +233,7 @@
         Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
             arrayPuestosComerciales.push(key);
         });
-        
+
         if(self.oTelefonos==undefined){
             self.oTelefonos=this.view.oTelefonos;
         }
@@ -880,28 +880,52 @@
             window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
         },
 
-    openDrawerPre:function(e){
-        var modeloOppty = App.data.createBean('Opportunities');
+    creaNuevaLinea:function(e){
+        var tipo_producto = $(e.currentTarget).attr('data-name');
         var id_cuenta = contexto_cuenta.model.attributes.id;
         var nombre_cuenta= contexto_cuenta.model.attributes.name;
-        var tipo_producto = $(e.currentTarget).attr('data-name');
-        modeloOppty.set('account_id',id_cuenta);
-        modeloOppty.set('account_name',nombre_cuenta);
-        modeloOppty.set('tipo_producto_c',tipo_producto);
+        var producto = 'leasing';
+        switch (tipo_producto) {
+            case '1':
+                producto = 'leasing';
+            break;
+            case '4':
+                producto = 'factoring';
+            break;
+            default:
+        }
+        if(!vista360.ResumenCliente[producto].tiene_linea_autorizada){
+            // Drawer Pre-solicitud
+            var modeloOppty = App.data.createBean('Opportunities');
+            modeloOppty.set('account_id',id_cuenta);
+            modeloOppty.set('account_name',nombre_cuenta);
+            modeloOppty.set('tipo_producto_c',tipo_producto);
 
-        App.drawer.open({
-            layout: 'create',
-            context: {
-                create: true,
-                module: 'Opportunities',
-                model: modeloOppty
+            App.drawer.open({
+                layout: 'create',
+                context: {
+                    create: true,
+                    module: 'Opportunities',
+                    model: modeloOppty
+                    },
+                },
+                function(variable){
+                    console.log("Cierra drawer de Opportunities");
+                }
+            );
+        }else{
+            //Drawer Pre o R/I
+            App.drawer.open({
+                layout: 'solicitud-layout',
+                context: {
+                    nuevaOpp: {"idCuenta":id_cuenta,"idProducto":tipo_producto,"nombreCuenta":nombre_cuenta}
                 },
             },
-            function(variable){
+            function() {
+                //on close, throw an alert
                 console.log("Cierra drawer de Opportunities");
-            }
-        );
-
+            });
+        }
 
     },
 
