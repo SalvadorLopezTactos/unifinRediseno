@@ -233,7 +233,7 @@
                                     <td><strong>Estatus de atención</strong></td>
                                     <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</td>
                                 </tr>
-                                {{#if ResumenCliente.leasing.tiene_linea_autorizadda}}
+                                {{#if ResumenCliente.leasing.tiene_linea_autorizada}}
                                     <tr>
                                         <td><strong>Estatus del producto</strong></td>
                                         <td>{{ResumenCliente.leasing.estatusxproducto}}</td>
@@ -246,7 +246,7 @@
                                         {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.leasing.subtipo_cuenta}}
                                     </td>
                                 </tr>
-                                {{#if ResumenCliente.leasing.tiene_linea_autorizadda}}
+                                {{#if ResumenCliente.leasing.tiene_linea_autorizada}}
                                     <tr class="formatoFilaG">
                                         <td><strong>Línea autorizada</strong></td>
                                         <td>$ {{customFormatNumber ResumenCliente.leasing.linea_autorizada}}</td>
@@ -379,7 +379,7 @@
                                     <td><strong>Estatus de atención</strong></td>
                                     <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.factoring.estatus_atencion}}</td>
                                 </tr>
-                                {{#if ResumenCliente.factoring.tiene_linea_autorizadda}}
+                                {{#if ResumenCliente.factoring.tiene_linea_autorizada}}
                                     <tr>
                                         <td><strong>Estatus del producto</strong></td>
                                         <td>{{ResumenCliente.factoring.estatusxproducto}}</td>
@@ -392,7 +392,7 @@
                                         {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.factoring.subtipo_cuenta}}
                                     </td>
                                 </tr>
-                                {{#if ResumenCliente.factoring.tiene_linea_autorizadda}}
+                                {{#if ResumenCliente.factoring.tiene_linea_autorizada}}
                                     <tr class="formatoFilaG">
                                         <td><strong>Línea autorizada</strong></td>
                                         <td>$ {{customFormatNumber ResumenCliente.factoring.linea_autorizada}}</td>
@@ -409,10 +409,10 @@
                                         <td><strong>Línea disponible</strong></td>
                                         <td>$ {{customFormatNumber ResumenCliente.factoring.linea_disponible}}</td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td><strong>Estatus de la línea</strong></td>
                                         <td>{{ResumenCliente.factoring.estatus_linea}}</td>
-                                    </tr>
+                                    </tr> -->
                                 {{/if}}
                                 {{#if ResumenCliente.factoring.tiene_cesiones_liberado}}
                                     <tr>
@@ -512,11 +512,11 @@
                                     <td>{{ResumenCliente.credito_auto.ultima_llamada}}</td>
                                 </tr>
                                 <!-- Detalle -->
-                                <tr>
+                                <!-- <tr>
                                     <td><strong>Estatus de atención</strong></td>
                                     <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.credito_auto.estatus_atencion}}</td>
-                                </tr>
-                                {{#if ResumenCliente.credito_auto.tiene_linea_autorizadda}}
+                                </tr> -->
+                                {{#if ResumenCliente.credito_auto.tiene_linea_autorizada}}
                                     <tr>
                                         <td><strong>Estatus del producto</strong></td>
                                         <td>{{ResumenCliente.credito_auto.estatusxproducto}}</td>
@@ -529,7 +529,7 @@
                                         {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.credito_auto.subtipo_cuenta}}
                                     </td>
                                 </tr>
-                                {{#if ResumenCliente.credito_auto.tiene_linea_autorizadda}}
+                                {{#if ResumenCliente.credito_auto.tiene_linea_autorizada}}
                                     <tr class="formatoFilaG">
                                         <td><strong>Línea autorizada</strong></td>
                                         <td>$ {{customFormatNumber ResumenCliente.credito_auto.linea_autorizada}}</td>
