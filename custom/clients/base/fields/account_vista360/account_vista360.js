@@ -395,8 +395,20 @@
                     parent_name: data.get('name')
                 });
 
+                var email = app.data.createBean('EmailAddresses');
+                email.set('email_address',data.attributes.email1);
+
+                registro.set({
+                    email_addresses: app.utils.deepCopy(email),
+                    email_address_id: data.attributes.email[0].email_address_id,
+                    email_address: email.get('email_address'),
+                    invalid_email: email.get('invalid_email'),
+                    opt_out: email.get('opt_out')
+                });
+
+                
                 var modeloEmail=App.data.createBean('Emails');
-                modeloEmail.set('name','Correo desde 360');
+                modeloEmail.set('name','');
                 modeloEmail.set('parent_type',"Accounts");
                 modeloEmail.set('parent_id',data.id);
                 modeloEmail.set('parent_name',data.get('name'));
