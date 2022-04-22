@@ -406,9 +406,11 @@
                     opt_out: email.get('opt_out')
                 });
 
+                data.attributes.type="Accounts";
                 
                 var modeloEmail=App.data.createBean('Emails');
                 modeloEmail.set('name','');
+                modeloEmail.set('parent',data.attributes);
                 modeloEmail.set('parent_type',"Accounts");
                 modeloEmail.set('parent_id',data.id);
                 modeloEmail.set('parent_name',data.get('name'));
