@@ -53,6 +53,9 @@ class ConsultaAnexos extends SugarApi
         $arr_principal['anexos_activos'] = array();
         $arr_principal['cesiones_activas'] = array();
         $arr_principal['contratos_activos'] = array();
+        $arr_principal['anexos_historicos'] = array();
+        $arr_principal['cesiones_historicas'] = array();
+        $arr_principal['contratos_historicos'] = array();
         $arr_principal['habilita_anexos_activos'] = false;
         $arr_principal['habilita_cesiones_activas'] = false;
         $arr_principal['habilita_contratos_activos'] = false;
@@ -127,12 +130,12 @@ class ConsultaAnexos extends SugarApi
             $callApi = new UnifinAPI();
             $GLOBALS['log']->fatal('---Petición Anexos---');
             $response = $callApi->unifingetCall($host);
-            //$GLOBALS['log']->fatal($response);
+            $GLOBALS['log']->fatal($response);
         } catch (Exception $e) {
             $response = null;
         }
 
-
+        $GLOBALS['log']->fatal('TipoProducto: '. $idTipoProducto.'- peticion: '. $tipo_peticion);
         if (count($response)>0) {
             //Procesa resultado
             switch ($idTipoProducto) {
@@ -170,7 +173,7 @@ class ConsultaAnexos extends SugarApi
                     }
                     break;
                 case 3:
-                    foreach ($response['resultSet1'] as $key => $value) {
+                    foreach ($response as $key => $value) {
                         //Contratos activos
                         $arr_principal[$tipo_peticion][] = array(
                             "columna1" => $value['Activo'],
@@ -198,7 +201,7 @@ class ConsultaAnexos extends SugarApi
                     }
                     break;
                 case 4:
-                    foreach ($response['resultSet1'] as $key => $value) {
+                    foreach ($response as $key => $value) {
                         //Cesiones activas
                         $arr_principal[$tipo_peticion][] = array(
                             "columna1" => $value['NumeroCesion'],
