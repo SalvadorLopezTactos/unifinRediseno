@@ -1,0 +1,134 @@
+<!--
+/**
+ * Created by Eduardo Carrasco
+ * User: ecarrasco
+ * Date: 29/12/2021
+ */
+-->
+<table class="table table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>Tipo Teléfono</th>
+      <th>Teléfono</th>
+      <th>Llamar</th>
+      <th>Estatus Reus</th>
+	  <th>Estatus Teléfono</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>TELEFONO TRABAJO</td>
+		<td><input type="text" class="Telefonot" placeholder="Teléfono Trabajo" value="{{phone_work}}" data-field="phone_work" data-name="phone_work" maxlength="13" {{#if o_registro_reus_c}} disabled {{/if}}/></td>
+        {{#if o_registro_reus_c}}
+          <td align="center"><button class="mcall fa fa-phone btn-danger" style="color: black; pointer-events:none;" disabled></button></td>
+        {{else}}
+          <td align="center"><button class="mcall fa fa-phone btn-success" style="color: white;" disabled></button></td>
+        {{/if}}
+        {{#if o_registro_reus_c}}
+          <td>Registrado en Reus</td>
+		{{else}}
+		  <td></td>
+		{{/if}}
+		{{#if o_estatus1}}
+			<td>
+			  <button class="fa fa-exclamation btn-warning" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{o_estatus}}</button>
+			  {{#if o_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if o_estatus2}}
+			<td>
+			  <button class="fa fa-check btn-success" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{o_estatus}}</button>
+			  {{#if o_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if o_estatus3}}
+			<td>
+			  <button class="fa fa-times btn-danger" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{o_estatus}}</button>
+			  {{#if o_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+    </tr>
+    <tr>
+        <td>TELEFONO CASA</td>
+		<td><input type="text" class="Telefonoc" placeholder="Teléfono Casa" value="{{phone_home}}" data-field="phone_home" data-name="phone_home" maxlength="13" {{#if c_registro_reus_c}} disabled {{/if}}/></td>
+        {{#if c_registro_reus_c}}
+          <td align="center"><button class="mcall fa fa-phone btn-danger" style="color: black; pointer-events:none;" disabled></button></td>
+        {{else}}
+          <td align="center"><button class="mcall fa fa-phone btn-success" style="color: white;" disabled></button></td>
+        {{/if}}
+        {{#if c_registro_reus_c}}
+          <td>Registrado en Reus</td>
+		{{else}}
+		  <td></td>
+        {{/if}}
+		{{#if c_estatus1}}
+			<td>
+			  <button class="fa fa-exclamation btn-warning" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{c_estatus}}</button>
+			  {{#if c_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if c_estatus2}}
+			<td>
+			  <button class="fa fa-check btn-success" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{c_estatus}}</button>
+			  {{#if c_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if c_estatus3}}
+			<td>
+			  <button class="fa fa-times btn-danger" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{c_estatus}}</button>
+			  {{#if c_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+	</tr>
+    <tr>
+        <td>TELEFONO CELULAR</td>
+		<td><input type="text" class="Telefonom" placeholder="Teléfono Celular" value="{{phone_mobile}}" data-field="phone_mobile" data-name="phone_mobile" maxlength="13" {{#if m_registro_reus_c}} disabled {{/if}}/></td>
+        {{#if m_registro_reus_c}}
+          <td align="center"><button class="mcall fa fa-phone btn-danger" style="color: black; pointer-events:none;" disabled></button></td>
+        {{else}}
+          <td align="center"><button class="mcall fa fa-phone btn-success" style="color: white;" disabled></button></td>
+        {{/if}}
+        {{#if m_registro_reus_c}}
+          <td>Registrado en Reus</td>
+		{{else}}
+		  <td></td>
+        {{/if}}
+		{{#if m_estatus1}}
+			<td>
+			  <button class="fa fa-exclamation btn-warning" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{m_estatus}}</button>
+			  {{#if m_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if m_estatus2}}
+			<td>
+			  <button class="fa fa-check btn-success" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{m_estatus}}</button>
+			  {{#if m_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+		{{#if m_estatus3}}
+			<td>
+			  <button class="fa fa-times btn-danger" style="width: 100%; height: 100%; color: black; pointer-events:none;" disabled> {{m_estatus}}</button>
+			  {{#if m_c4}}<br>
+				<label class="lbl_c4_phone" style="color: red;">Con reporte de engaño telefónico en las bases de c4</label>
+			  {{/if}}
+			</td>
+		{{/if}}
+    </tr>
+  </tbody>
+</table>
