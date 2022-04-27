@@ -29,9 +29,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'Sepomex',
-  'published_date' => '2022-04-27 19:34:07',
+  'published_date' => '2022-04-27 19:56:13',
   'type' => 'module',
-  'version' => 1651088049,
+  'version' => 1651089374,
   'remove_tables' => 'prompt',
 );
 

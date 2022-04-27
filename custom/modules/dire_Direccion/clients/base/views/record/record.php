@@ -138,6 +138,11 @@ array (
                 'name' => 'leads_dire_direccion_1_name',
                 'span' => 6,
               ),
+              22 => 
+              array (
+                'name' => 'dir_sepomex_dire_direccion_name',
+                'label' => 'LBL_DIR_SEPOMEX_DIRE_DIRECCION_FROM_DIR_SEPOMEX_TITLE',
+              ),
             ),
           ),
           2 => 
