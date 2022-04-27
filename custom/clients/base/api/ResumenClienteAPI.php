@@ -110,7 +110,9 @@ class ResumenClienteAPI extends SugarApi
             "nombre_secundario" => "",
             "puesto_secundario"=>"",
             "telefono_secundario" => "",
-            "correo_secundario" => ""
+            "correo_secundario" => "",
+            "tiene_negocio" => false,
+            "tiene_secundario" =>false
         );
         //Leasing
         $arr_principal['leasing'] = array("linea_autorizada" => "",
@@ -1242,6 +1244,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['contactos']['puesto_negocios'] = isset($app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_negocios'] = $telefono_principal_negocio;
                         $arr_principal['contactos']['correo_negocios'] = $beanRelacionNegocios->email1;
+                        $arr_principal['contactos']['tiene_negocio'] = true;
 
                         $count++;
 
@@ -1273,6 +1276,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['contactos']['puesto_secundario'] =isset($app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_secundario'] = $telefono_principal_secundario;
                         $arr_principal['contactos']['correo_secundario'] = $beanRelacionSecundaria->email1;
+                        $arr_principal['contactos']['tiene_secundario'] = true;
                         $count++;
                     }
                 }
