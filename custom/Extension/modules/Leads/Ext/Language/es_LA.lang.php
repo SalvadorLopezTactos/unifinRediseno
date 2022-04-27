@@ -147,5 +147,6 @@ $mod_strings['LBL_CALLS_SUBPANEL_TITLE'] = 'Llamadas';
 $mod_strings['LBL_PROSPECTS_TELEFONOS'] = 'Prospectos Telefonos';
 $mod_strings['LBL_PROSPECTS_DIRECCIONES'] = 'Prospectos Direcciones';
 $mod_strings['LBL_PROSPECTS_CLASF_SECTORIAL'] = 'Prospectos Clasif Sectorial';
-
-
+$mod_strings['LBL_ESTATUS_LD_C'] = 'Estatus ';
+$mod_strings['LBL_SUBESTATUS_LD_C'] = 'Subestatus ';
+$mod_strings['LBL_DETALLE_SUBESTATUS_LD'] = 'Detalle Subestatus';

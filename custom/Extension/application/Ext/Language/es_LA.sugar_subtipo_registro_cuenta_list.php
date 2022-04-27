@@ -1,5 +1,5 @@
 <?php
- // created: 2022-04-07 00:42:16
+ // created: 2022-04-26 18:55:19
 
 $app_list_strings['subtipo_registro_cuenta_list']=array (
   1 => 'Sin Contactar',
