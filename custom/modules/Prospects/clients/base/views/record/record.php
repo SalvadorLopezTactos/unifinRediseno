@@ -225,25 +225,168 @@ array (
             'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 'account_name',
-              1 => 'title',
+              0 => 
+              array (
+                'readonly' => false,
+                'name' => 'estatus_po_c',
+                'label' => 'LBL_ESTATUS_PO',
+              ),
+              1 => 
+              array (
+                'readonly' => false,
+                'name' => 'subestatus_po_c',
+                'label' => 'LBL_SUBESTATUS_PO',
+              ),
               2 => 
+              array (
+                'readonly' => false,
+                'name' => 'detalle_subestatus_po_c',
+                'label' => 'LBL_DETALLE_SUBESTATUS_PO',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
               array (
                 'readonly' => false,
                 'name' => 'regimen_fiscal_c',
                 'label' => 'LBL_REGIMEN_FISCAL_C',
               ),
-              3 => 
+              5 => 
               array (
+                'readonly' => false,
+                'name' => 'nombre_empresa_c',
+                'label' => 'LBL_NOMBRE_EMPRESA_C',
               ),
-              4 => 'email',
-              5 => 'department',
-              6 => 'phone_mobile',
-              7 => 'do_not_call',
+              6 => 
+              array (
+                'readonly' => false,
+                'name' => 'nombre_c',
+                'label' => 'LBL_NOMBRE_C',
+              ),
+              7 => 
+              array (
+                'readonly' => false,
+                'name' => 'apellido_paterno_c',
+                'label' => 'LBL_APELLIDO_PATERNO_C',
+              ),
               8 => 
               array (
-                'name' => 'tag',
+                'readonly' => false,
+                'name' => 'apellido_materno_c',
+                'label' => 'LBL_APELLIDO_MATERNO_C',
+              ),
+              9 => 
+              array (
+                'readonly' => false,
+                'name' => 'genero_c',
+                'label' => 'LBL_GENERO',
+              ),
+              10 => 
+              array (
+                'readonly' => false,
+                'name' => 'puesto_c',
+                'label' => 'LBL_PUESTO_C',
+              ),
+              11 => 
+              array (
+              ),
+              12 => 
+              array (
+                'readonly' => false,
+                'name' => 'origen_c',
+                'label' => 'LBL_ORIGEN_C',
+              ),
+              13 => 
+              array (
+                'readonly' => false,
+                'name' => 'detalle_origen_c',
+                'label' => 'LBL_DETALLE_ORIGEN_C',
+              ),
+              14 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'readonly' => false,
+                'name' => 'ventas_anuales_c',
+                'label' => 'LBL_VENTAS_ANUALES_C',
+              ),
+              15 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'readonly' => false,
+                'name' => 'potencial_lead_c',
+                'label' => 'LBL_POTENCIAL_LEAD_C',
+              ),
+              16 => 
+              array (
+                'readonly' => false,
+                'name' => 'rfc_c',
+                'label' => 'LBL_RFC',
+              ),
+              17 => 
+              array (
+                'readonly' => false,
+                'name' => 'zona_geografica_c',
+                'label' => 'LBL_ZONA_GEOGRAFICA_C',
+              ),
+              18 => 
+              array (
+                'name' => 'email',
+              ),
+              19 => 
+              array (
+              ),
+              20 => 
+              array (
+                'name' => 'prospects_telefonos',
+                'studio' => 'visible',
+                'label' => 'LBL_PROSPECTS_TELEFONOS',
                 'span' => 12,
+              ),
+              21 => 
+              array (
+                'name' => 'prospects_direcciones',
+                'studio' => 'visible',
+                'label' => 'LBL_PROSPECTS_DIRECCIONES',
+                'span' => 12,
+              ),
+              22 => 
+              array (
+                'name' => 'prospects_clasf_sectorial',
+                'studio' => 'visible',
+                'label' => 'LBL_PROSPECTS_CLASF_SECTORIAL',
+                'span' => 12,
+              ),
+              23 => 'assigned_user_name',
+              24 => 
+              array (
+                'readonly' => false,
+                'name' => 'fecha_asignacion_c',
+                'label' => 'LBL_FECHA_ASIGNACION',
+              ),
+              25 => 
+              array (
+                'readonly' => false,
+                'name' => 'contacto_asociado_c',
+                'label' => 'LBL_CONTACTO_ASOCIADO',
+              ),
+              26 => 
+              array (
+              ),
+              27 => 
+              array (
+                'name' => 'account_name',
+              ),
+              28 => 
+              array (
               ),
             ),
           ),
@@ -261,108 +404,6 @@ array (
             array (
               0 => 
               array (
-                'name' => 'primary_address',
-                'type' => 'fieldset',
-                'css_class' => 'address',
-                'label' => 'LBL_PRIMARY_ADDRESS',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'primary_address_street',
-                    'css_class' => 'address_street',
-                    'placeholder' => 'LBL_PRIMARY_ADDRESS_STREET',
-                  ),
-                  1 => 
-                  array (
-                    'name' => 'primary_address_city',
-                    'css_class' => 'address_city',
-                    'placeholder' => 'LBL_PRIMARY_ADDRESS_CITY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'primary_address_state',
-                    'css_class' => 'address_state',
-                    'placeholder' => 'LBL_PRIMARY_ADDRESS_STATE',
-                  ),
-                  3 => 
-                  array (
-                    'name' => 'primary_address_postalcode',
-                    'css_class' => 'address_zip',
-                    'placeholder' => 'LBL_PRIMARY_ADDRESS_POSTALCODE',
-                  ),
-                  4 => 
-                  array (
-                    'name' => 'primary_address_country',
-                    'css_class' => 'address_country',
-                    'placeholder' => 'LBL_PRIMARY_ADDRESS_COUNTRY',
-                  ),
-                ),
-              ),
-              1 => 
-              array (
-                'name' => 'alt_address',
-                'type' => 'fieldset',
-                'css_class' => 'address',
-                'label' => 'LBL_ALT_ADDRESS',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'alt_address_street',
-                    'css_class' => 'address_street',
-                    'placeholder' => 'LBL_STREET',
-                  ),
-                  1 => 
-                  array (
-                    'name' => 'alt_address_city',
-                    'css_class' => 'address_city',
-                    'placeholder' => 'LBL_CITY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'alt_address_state',
-                    'css_class' => 'address_state',
-                    'placeholder' => 'LBL_STATE',
-                  ),
-                  3 => 
-                  array (
-                    'name' => 'alt_address_postalcode',
-                    'css_class' => 'address_zip',
-                    'placeholder' => 'LBL_POSTAL_CODE',
-                  ),
-                  4 => 
-                  array (
-                    'name' => 'alt_address_country',
-                    'css_class' => 'address_country',
-                    'placeholder' => 'LBL_COUNTRY',
-                  ),
-                  5 => 
-                  array (
-                    'name' => 'copy',
-                    'label' => 'NTC_COPY_PRIMARY_ADDRESS',
-                    'type' => 'copy',
-                    'mapping' => 
-                    array (
-                      'primary_address_street' => 'alt_address_street',
-                      'primary_address_city' => 'alt_address_city',
-                      'primary_address_state' => 'alt_address_state',
-                      'primary_address_postalcode' => 'alt_address_postalcode',
-                      'primary_address_country' => 'alt_address_country',
-                    ),
-                  ),
-                ),
-              ),
-              2 => 'phone_work',
-              3 => 'assigned_user_name',
-              4 => 'twitter',
-              5 => 
-              array (
-                'name' => 'dnb_principal_id',
-                'readonly' => true,
-              ),
-              6 => 
-              array (
                 'name' => 'description',
                 'related_fields' => 
                 array (
@@ -370,7 +411,7 @@ array (
                 ),
                 'span' => 12,
               ),
-              7 => 
+              1 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -394,8 +435,7 @@ array (
                   ),
                 ),
               ),
-              8 => 'team_name',
-              9 => 
+              2 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -419,7 +459,8 @@ array (
                   ),
                 ),
               ),
-              10 => 
+              3 => 'team_name',
+              4 => 
               array (
                 'name' => 'tct_link_personalizado_txf_c',
                 'studio' => 'visible',

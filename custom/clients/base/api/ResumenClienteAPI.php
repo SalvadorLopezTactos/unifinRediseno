@@ -110,7 +110,9 @@ class ResumenClienteAPI extends SugarApi
             "nombre_secundario" => "",
             "puesto_secundario"=>"",
             "telefono_secundario" => "",
-            "correo_secundario" => ""
+            "correo_secundario" => "",
+            "tiene_negocio" => false,
+            "tiene_secundario" =>false
         );
         //Leasing
         $arr_principal['leasing'] = array("linea_autorizada" => "",
@@ -139,7 +141,7 @@ class ResumenClienteAPI extends SugarApi
             "dias_atraso" => 0,
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
-            "tiene_linea_autorizadda" => false,
+            "tiene_linea_autorizada" => false,
             "tiene_anexo_liberado" => false
           );
         //Factoraje
@@ -169,7 +171,7 @@ class ResumenClienteAPI extends SugarApi
             "tipo_linea" => 0,
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
-            "tiene_linea_autorizadda" => false,
+            "tiene_linea_autorizada" => false,
             "tiene_cesiones_liberado" => false
           );
         //Crédito automotriz
@@ -198,7 +200,7 @@ class ResumenClienteAPI extends SugarApi
             "dias_atraso" => 0,
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
-            "tiene_linea_autorizadda" => false,
+            "tiene_linea_autorizada" => false,
             "tiene_contrato_liberado" => false
           );
         //Fleet
@@ -558,7 +560,7 @@ class ResumenClienteAPI extends SugarApi
                     $operaciones_ids .= ",'$opps->id'";
                     //Control para leasing
                     if ($opps->tipo_producto_c == 1 && $opps->negocio_c == 5 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
-                        $arr_principal['leasing']['tiene_linea_autorizadda'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['leasing']['tiene_linea_autorizadda'];
+                        $arr_principal['leasing']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['leasing']['tiene_linea_autorizada'];
                         $linea_aut_leasing += $opps->monto_c;
                         $linea_disp_leasing += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -587,7 +589,7 @@ class ResumenClienteAPI extends SugarApi
 
                     //Control para factoring
                     if ($opps->tipo_producto_c == 4 && $opps->negocio_c == 4 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
-                        $arr_principal['factoring']['tiene_linea_autorizadda'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['factoring']['tiene_linea_autorizadda'];
+                        $arr_principal['factoring']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['factoring']['tiene_linea_autorizada'];
                         $arr_principal['factoring']['tipo_linea'] = $opps->f_tipo_linea_c;
 
                         $linea_aut_factoring += $opps->monto_c;
@@ -617,8 +619,8 @@ class ResumenClienteAPI extends SugarApi
 
                     //Control para crédito auto
                     $fecha_val = date("Y-m-d");
-                    if ($opps->tipo_producto_c == 3 && $opps->vigencialinea_c >= $fecha_val) {
-                        $arr_principal['credito_auto']['tiene_linea_autorizadda'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['credito_auto']['tiene_linea_autorizadda'];
+                    if ($opps->tipo_producto_c == 3) {
+                        $arr_principal['credito_auto']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['credito_auto']['tiene_linea_autorizada'];
                         $linea_aut_credito_aut += $opps->monto_c;
                         $linea_disp_credito_aut += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -1150,6 +1152,7 @@ class ResumenClienteAPI extends SugarApi
                 $ganadas = $ganadas + 1;
                 $prima += $seguro->prima_neta_ganada_c;
                 $ingreso += $seguro->prima_neta;
+                $arr_principal['seguros']['tiene_ganada'] = true;
               }
               else {
                 if($seguro->etapa != 10) $proceso = $proceso + 1;
@@ -1166,6 +1169,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['seguros']['prima'] = $prima;
             $arr_principal['seguros']['ingreso'] = $ingreso;
             $arr_principal['seguros']['muestra_producto'] = true;
+            $arr_principal['seguros']['tiene_seguros'] = true;
           }
         }
 
@@ -1187,8 +1191,8 @@ class ResumenClienteAPI extends SugarApi
                         WHEN (r.relaciones_activas like '%Directivo%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) IN ('4','5','6','7')) THEN 3 -- Relación incluye relación activa Directivo o Cuenta Relacionada tiene algún puesto de Director
                         WHEN (r.relaciones_activas like '%Accionista%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='2') THEN 4 -- Relación incluye relación activa Accionista o Cuenta Relacionada tiene puesto Accionistas
                         WHEN r.relaciones_activas like '%Representante%' THEN 5 -- Relación incluye relación activa Representante
-                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 6 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo	
-                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 7 -- Relación incluye relación activa Propietario Real	
+                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 6 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo
+                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 7 -- Relación incluye relación activa Propietario Real
                         ELSE 8
                     END,
                     CASE -- Es PF o PFAE
@@ -1198,8 +1202,8 @@ class ResumenClienteAPI extends SugarApi
                         WHEN (r.relaciones_activas like '%Directivo%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) IN ('4','5','6','7')) THEN 4 -- Relación incluye relación activa Directivo o Cuenta Relacionada tiene algún puesto de Director
                         WHEN (r.relaciones_activas like '%Accionista%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='2') THEN 5 -- Relación incluye relación activa Accionista o Cuenta Relacionada tiene puesto Accionistas
                         WHEN r.relaciones_activas like '%Representante%' THEN 6 -- Relación incluye relación activa Representante
-                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 7 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo	
-                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 8 -- Relación incluye relación activa Propietario Real	
+                        WHEN (r.relaciones_activas like '%Contacto%' or (SELECT puesto_cuenta_c FROM accounts_cstm WHERE id_c=rc.account_id1_c) ='10') THEN 7 -- Relación incluye relación activa Contacto o Cuenta Relacionada tiene puesto Administrativo
+                        WHEN r.relaciones_activas like '%Propietario Real%' THEN 8 -- Relación incluye relación activa Propietario Real
                         ELSE 9
                     END
                     ) orden
@@ -1212,11 +1216,10 @@ class ResumenClienteAPI extends SugarApi
                 AND r.deleted=0 AND a.deleted=0
                 ORDER by orden asc;";
                 $queryResultOrdenRelaciones = $db->query($queryOrdenRelaciones);
-
                 $count=0;
                 while ($row = $db->fetchByAssoc($queryResultOrdenRelaciones)) {
                     if($count==0){//El primer registro en el orden corresponde al Contacto de Negocios
-                        $GLOBALS['log']->fatal("COUNT 0 ES EL CONTACTO DE NEGOCIOS");
+                        //$GLOBALS['log']->fatal("COUNT 0 ES EL CONTACTO DE NEGOCIOS");
                         $id_relacion=$row['relacion_id'];
                         $rel = BeanFactory::getBean("Rel_Relaciones", $id_relacion);
 
@@ -1228,8 +1231,8 @@ class ResumenClienteAPI extends SugarApi
                         if($beanRelacionNegocios->load_relationship('accounts_tel_telefonos_1')){
                             $relatedTelefonos = $beanRelacionNegocios->accounts_tel_telefonos_1->getBeans();
                             if(count($relatedTelefonos)>0){
-
                                 foreach($relatedTelefonos as $tel) {
+                                     //$GLOBALS['log']->fatal(print_r($tel,true));
                                     if($tel->principal==1){
                                         $telefono_principal_negocio=$tel->telefono;
                                     }
@@ -1237,15 +1240,16 @@ class ResumenClienteAPI extends SugarApi
                             }
                         }
                         $arr_principal['contactos']['nombre_negocios'] = $rel->relacion_c;
-                        $arr_principal['contactos']['id_nombre_negocios'] = $id_relacion;
+                        $arr_principal['contactos']['id_nombre_negocios'] = $beanRelacionNegocios->id;
                         $arr_principal['contactos']['puesto_negocios'] = isset($app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionNegocios->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_negocios'] = $telefono_principal_negocio;
                         $arr_principal['contactos']['correo_negocios'] = $beanRelacionNegocios->email1;
+                        $arr_principal['contactos']['tiene_negocio'] = true;
 
                         $count++;
 
                     }else if($count==1){//El segundo registro en el orden se toma como el Contacto Secundario
-                        $GLOBALS['log']->fatal("COUNT 1 ES EL CONTACTO SECUNDARIO");
+                        //$GLOBALS['log']->fatal("COUNT 1 ES EL CONTACTO SECUNDARIO");
                         $id_relacion=$row['relacion_id'];
                         $rel = BeanFactory::getBean("Rel_Relaciones", $id_relacion);
 
@@ -1268,10 +1272,11 @@ class ResumenClienteAPI extends SugarApi
                         }
 
                         $arr_principal['contactos']['nombre_secundario'] = $rel->relacion_c;
-                        $arr_principal['contactos']['id_nombre_secundario'] = $id_relacion;
+                        $arr_principal['contactos']['id_nombre_secundario'] = $beanRelacionSecundaria->id;
                         $arr_principal['contactos']['puesto_secundario'] =isset($app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c]) ? $app_list_strings['puestos_list'][$beanRelacionSecundaria->puesto_cuenta_c] : '';
                         $arr_principal['contactos']['telefono_secundario'] = $telefono_principal_secundario;
                         $arr_principal['contactos']['correo_secundario'] = $beanRelacionSecundaria->email1;
+                        $arr_principal['contactos']['tiene_secundario'] = true;
                         $count++;
                     }
                 }
@@ -1283,20 +1288,20 @@ class ResumenClienteAPI extends SugarApi
         // $GLOBALS['log']->fatal('resultado de API:');
         // $GLOBALS['log']->fatal($api->platform);
         //$api->platform;
-
+	/*
         $arr_principal['leasing']['muestra_producto'] = true;
         $arr_principal['leasing']['es_prospecto_cliente'] = true;
         $arr_principal['leasing']['tiene_anexo_liberado'] = true;
-        $arr_principal['leasing']['tiene_linea_autorizadda'] = true;
+        $arr_principal['leasing']['tiene_linea_autorizada'] = true;
 
         $arr_principal['factoring']['muestra_producto'] = true;
         $arr_principal['factoring']['es_prospecto_cliente'] = true;
-        $arr_principal['factoring']['tiene_linea_autorizadda'] = true;
+        $arr_principal['factoring']['tiene_linea_autorizada'] = true;
         $arr_principal['factoring']['tiene_cesiones_liberado'] = true;
 
         $arr_principal['credito_auto']['muestra_producto'] = true;
         $arr_principal['credito_auto']['es_prospecto_cliente'] = true;
-        $arr_principal['credito_auto']['tiene_linea_autorizadda'] = true;
+        $arr_principal['credito_auto']['tiene_linea_autorizada'] = true;
         $arr_principal['credito_auto']['tiene_contrato_liberado'] = true;
 
         $arr_principal['seguros']['muestra_producto'] = true;
@@ -1306,7 +1311,7 @@ class ResumenClienteAPI extends SugarApi
         $arr_principal['fleet']['muestra_producto'] = true;
         $arr_principal['credito_simple']['muestra_producto'] = true;
         $arr_principal['uniclick']['muestra_producto'] = true;
-        $arr_principal['unifactor']['muestra_producto'] = true;
+        $arr_principal['unifactor']['muestra_producto'] = true;*/
 
         return $arr_principal;
     }
@@ -1318,7 +1323,7 @@ class ResumenClienteAPI extends SugarApi
         if(!empty($idUsuario)){
             //Valida usuario
             global $db;
-            $queryU = "select id from users where id='{$idUsuario}' and is_group=0 and deleted=0 limit 1;";
+            $queryU = "select count(*) from users where id='{$idUsuario}' and is_group=0 and deleted=0 limit 1;";
             $queryResult = $db->getOne($queryU);
             $valido = ($queryResult > 0) ? true : false;
         }

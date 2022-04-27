@@ -378,11 +378,13 @@
     },
 
     loadData: function () {
-        //Carga de Inicio todos los valores que se tiene en el JSON en el campo de relaciones_producto_c
-        var relacionProducto = rel_product.model.get('relaciones_producto_c');
-        rel_product.productoSeleccionado = JSON.parse(relacionProducto);
-        this.aux_bandera = 1;
-        rel_product.render();
+        if(rel_product.model.attributes.relaciones_producto_c!=""){
+            //Carga de Inicio todos los valores que se tiene en el JSON en el campo de relaciones_producto_c
+            var relacionProducto = rel_product.model.get('relaciones_producto_c');
+            rel_product.productoSeleccionado = JSON.parse(relacionProducto);
+            this.aux_bandera = 1;
+            rel_product.render();
+        }  
     },
 
     _render: function () {

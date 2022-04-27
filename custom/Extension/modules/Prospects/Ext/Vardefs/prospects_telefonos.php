@@ -1,6 +1,6 @@
 <?php
 
-$dictionary['Prospects']['fields']['prospects_telefonos'] = array (
+$dictionary['Prospect']['fields']['prospects_telefonos'] = array (
     'name' => 'prospects_telefonos',
     'id_name' => 'prospects_telefonos',
     'type' => 'prospects_telefonos',

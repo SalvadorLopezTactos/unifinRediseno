@@ -15,7 +15,7 @@ class proveedor_quantico
                 "PersonTypeExternalId" => $regimen
             );
 			global $sugar_config;
-			$url = $sugar_config['quantico_url_base'].'/Suppliers_WS/rest/SupplierAPI/CreateSupplierInQuantico/';
+			$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierInQuantico/';
 			$content = json_encode($arreglo);
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_ENCODING, '');

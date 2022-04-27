@@ -81,7 +81,7 @@
 
         //this.model.addValidationTask('check_valida_multiactivo', _.bind(this.validaMultiactivo, this));
 
-        this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinanceras, this));
+        //this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinanceras, this));
         this.model.addValidationTask('setRequiredAforoTipoFactoraje', _.bind(this.setRequiredAforoTipoFactoraje, this));
         //this.model.addValidationTask('check_requeridos', _.bind(this.validaDatosRequeridos, this));
         this.model.addValidationTask('producto_financiero_c', _.bind(this.reqPrpductoFinanciero, this));
@@ -214,10 +214,10 @@
 
     _render: function () {
         this._super("_render");
-		if (window.render != 1) this.obtieneCondicionesFinancieras();
+		    /*if (window.render != 1) this.obtieneCondicionesFinancieras();
         this.model.on("change:plazo_c", _.bind(function () {
             this.obtieneCondicionesFinancieras();
-        }, this));
+        }, this));*/
         // CVV - 28/03/2016 - Se reemplaza por control de condiciones financieras
         this.model.on("change:es_multiactivo_c", _.bind(function () {
             if (this.model.get('es_multiactivo_c') == true) {
@@ -250,7 +250,7 @@
                     });
                     //this.model.set('tipo_producto_c','1');
                 }
-                this.obtieneCondicionesFinancieras();
+                //this.obtieneCondicionesFinancieras();
             }
             if (this.model.get('tipo_producto_c') == '4') {
                 //Oculta los campos
@@ -259,8 +259,8 @@
                 this.$('div[data-name=sub_activo_2_c]').hide();
                 this.$('div[data-name=sub_activo_3_c]').hide();
             }
-            this.obtieneCondicionesFinancieras();
-            this.verificaOperacionProspecto();
+            //this.obtieneCondicionesFinancieras();
+            //this.verificaOperacionProspecto();
         }, this));
 
 
@@ -1087,11 +1087,11 @@
                 errors['instrumento_c'] = errors['instrumento_c'] || {};
                 errors['instrumento_c'].required = true;
             }
-            if (this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c')) < 0 || Number(this.model.get('puntos_sobre_tasa_c')) > 99.999999)) {
+            /*if (this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c')) < 0 || Number(this.model.get('puntos_sobre_tasa_c')) > 99.999999)) {
                 //error
                 errors['puntos_sobre_tasa_c'] = errors['puntos_sobre_tasa_c'] || {};
                 errors['puntos_sobre_tasa_c'].required = true;
-            }
+            }*/
             if (this.model.get('tipo_tasa_moratorio_c') == undefined || this.model.get('tipo_tasa_moratorio_c') == "") {
                 //error
                 errors['tipo_tasa_moratorio_c'] = errors['tipo_tasa_moratorio_c'] || {};
@@ -1823,56 +1823,58 @@
         this.model.fields['tipo_producto_c'].options = op2;
 
         var i = 0;
-        for (var prop in op2) {
-            if (prop == 4 && i == 0) { //Se valida i=0 para comprobar la primera posición, equivalente a op2[0]
-                this.model.set('tipo_producto_c', '4');
-            } else if (prop == 1 && i == 0) {
+        if(op2[this.model.attributes.tipo_producto_c]==undefined){
+          for (var prop in op2) {
+              if (prop == 4 && i == 0) { //Se valida i=0 para comprobar la primera posición, equivalente a op2[0]
+                  this.model.set('tipo_producto_c', '4');
+              } else if (prop == 1 && i == 0) {
 
-                //Solo hacer set al modelo, cuando en las opciones del campo se tenga el producto s setear
-                if (this.model.fields['tipo_producto_c'].options[prop] != undefined) {
-                    this.model.set('tipo_producto_c', '1');
-                }
-                //Solo agregar el producto 7 CRÉDITO SOS, cuando éste valor se encuentre en la lista de opciones del campo
-                if (7 in this.model.fields['tipo_producto_c'].options) {
-                    this.model.set('tipo_producto_c', '7');
-                }
-                //console.log("LEASING");
-            } else if (prop == 3 && i == 0) {
-                this.model.set('tipo_producto_c', '3');
-                //console.log("AUTMOTRIZ");
-            } else if (prop == 2 && i == 0) {
-                this.model.set('tipo_producto_c', '3');
-                //console.log("3");
-            }
-            else if (prop == 5 && i == 0) {
-                this.model.set('tipo_producto_c', '5');
-                //console.log("5");
-            }
-            else if (prop == 6 && i == 0) {
-                this.model.set('tipo_producto_c', '6');
-                //console.log("5");
-            }
-            else if (prop == 8 && i == 0) {//Uniclick
+                  //Solo hacer set al modelo, cuando en las opciones del campo se tenga el producto s setear
+                  if (this.model.fields['tipo_producto_c'].options[prop] != undefined) {
+                      this.model.set('tipo_producto_c', '1');
+                  }
+                  //Solo agregar el producto 7 CRÉDITO SOS, cuando éste valor se encuentre en la lista de opciones del campo
+                  if (7 in this.model.fields['tipo_producto_c'].options) {
+                      this.model.set('tipo_producto_c', '7');
+                  }
+                  //console.log("LEASING");
+              } else if (prop == 3 && i == 0) {
+                  this.model.set('tipo_producto_c', '3');
+                  //console.log("AUTMOTRIZ");
+              } else if (prop == 2 && i == 0) {
+                  this.model.set('tipo_producto_c', '3');
+                  //console.log("3");
+              }
+              else if (prop == 5 && i == 0) {
+                  this.model.set('tipo_producto_c', '5');
+                  //console.log("5");
+              }
+              else if (prop == 6 && i == 0) {
+                  this.model.set('tipo_producto_c', '6');
+                  //console.log("5");
+              }
+              else if (prop == 8 && i == 0) {//Uniclick
 
-                if (8 in this.model.fields['tipo_producto_c'].options) {
-                    this.model.set('tipo_producto_c', '8');
-                }
+                  if (8 in this.model.fields['tipo_producto_c'].options) {
+                      this.model.set('tipo_producto_c', '8');
+                  }
 
-                if (9 in this.model.fields['tipo_producto_c'].options) {
-                    this.model.set('tipo_producto_c', '9');
-                }
-            }
-            else if (prop == 9 && i == 0) {//Unilease
-                if (8 in this.model.fields['tipo_producto_c'].options) {
-                    this.model.set('tipo_producto_c', '8');
-                }
+                  if (9 in this.model.fields['tipo_producto_c'].options) {
+                      this.model.set('tipo_producto_c', '9');
+                  }
+              }
+              else if (prop == 9 && i == 0) {//Unilease
+                  if (8 in this.model.fields['tipo_producto_c'].options) {
+                      this.model.set('tipo_producto_c', '8');
+                  }
 
-                if (9 in this.model.fields['tipo_producto_c'].options) {
-                    this.model.set('tipo_producto_c', '9');
-                }
+                  if (9 in this.model.fields['tipo_producto_c'].options) {
+                      this.model.set('tipo_producto_c', '9');
+                  }
 
-            }
-            i++;
+              }
+              i++;
+          }
         }
         /*
         if (op2[0] == "4") {

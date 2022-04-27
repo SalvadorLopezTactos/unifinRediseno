@@ -5,7 +5,10 @@
 	{
 		relContext = this;
         accountContext = null; //._previousAttributes.model._previousAttributes;
-
+        if(options.context.attributes.from360!=undefined){
+            this.desdeVista360=options.context.attributes.from360;
+        }
+        
         /*
          If you are on 7.2.0, there is a dependency bug that can cause the screen to render an empty form.
          To correct this, uncomment the code below:
@@ -96,6 +99,11 @@
 		this.doRelationFields();
         this.$('div[data-name=relacion_c]').hide();
         $('[data-name=tct_validado_juridico_chk_c]').hide();
+        if(this.desdeVista360!=undefined){
+            if(this.desdeVista360=='1'){
+                this.$('div[data-name=relacion_c]').show();
+            }
+        }
         this.model.on("change:relaciones_activas", _.bind(function(){
             if(new String(this.model.get('relaciones_activas'))==""){
                 this.$('div[data-name=relacion_c]').hide();

@@ -41,3 +41,6 @@ $mod_strings['LBL_ESTATUS_PO'] = 'Estatus';
 $mod_strings['LBL_SUBESTATUS_PO'] = 'Subestatus';
 $mod_strings['LBL_DETALLE_SUBESTATUS_PO'] = 'Detalle Subestatus';
 $mod_strings['LBL_INEGI_SUBSECTOR_C'] = 'Subsector';
+$mod_strings['LBL_PROSPECTS_TELEFONOS'] = 'Teléfonos';
+$mod_strings['LBL_PROSPECTS_DIRECCIONES'] = 'Direcciones';
+$mod_strings['LBL_PROSPECTS_CLASF_SECTORIAL'] = 'Clasificación Sectorial';

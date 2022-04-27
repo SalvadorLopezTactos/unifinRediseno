@@ -6,6 +6,8 @@
         'click .btnNuevaReunion':'openDrawerReunion',
         'click .addCall':'generatecall',
         'click .sendEmail':'openDrawerSendEmail',
+        'click .btnNuevaLinea':'creaNuevaLinea',
+
 
         //Despliegue de detalle
       'click .openModalAnexos': 'getAnexos',
@@ -44,6 +46,7 @@
         this.sortAnexo = "ASC";
         this.sortAnexoContratacion = "ASC";
         this.sortAnexoTerminacion = "ASC";
+        this.model.on('sync', this.hideElements, this);
     },
 
     openGpoEmpresarial:function(){
@@ -57,11 +60,17 @@
         var modal = $('#modalGpoEmpresarial');
         if (modal) {
             modal.hide();
-        }   
+        }
     },
 
-    openDrawerRelacion:function(){
-        
+    openDrawerRelacion:function(e){
+        this.e=e;
+        if($(e.currentTarget).attr('disabled')==undefined){
+            $(e.currentTarget).attr('disabled','disabled');
+        }else{
+            $(e.currentTarget).removeAttr('disabled');
+        }
+
         self_v360=this;
         var id_cuenta=this.model.get('id');
         //Consumir servicio para establecer campo de
@@ -78,7 +87,7 @@
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
                 app.alert.dismiss('loadingGetRelaciones');
-                
+
                 if(data.records.length>0){
                     //Evaluar que ya tenga alguna relación de tipo Negocios
                     var tieneNegocio=0;
@@ -104,14 +113,19 @@
                             context: {
                                 create: true,
                                 module: 'Rel_Relaciones',
+                                from360:'1',
                                 model: model
                                 },
                             },
                             function(variable){
-                                console.log("DESDE PREVIEW RELACION");
+                                if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                                    $(self_v360.e.currentTarget).attr('disabled','disabled');
+                                }else{
+                                    $(self_v360.e.currentTarget).removeAttr('disabled');
+                                }
                             }
                         );
-                        
+
                     }else{
                         //No tiene relaciones, Relaciones Activas se establece como tipo Negocios
                         var model=App.data.createBean('Rel_Relaciones');
@@ -125,11 +139,16 @@
                             context: {
                                 create: true,
                                 module: 'Rel_Relaciones',
+                                from360:'1',
                                 model: model
                             },
                         },
                         function(variable){
-                            console.log("DESDE PREVIEW RELACION");
+                            if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                                $(self_v360.e.currentTarget).attr('disabled','disabled');
+                            }else{
+                                $(self_v360.e.currentTarget).removeAttr('disabled');
+                            }
                         }
                         );
                     }
@@ -147,15 +166,20 @@
                         context: {
                               create: true,
                               module: 'Rel_Relaciones',
+                              from360:'1',
                               model: model
                           },
                       },
                       function(variable){
-                          console.log("DESDE PREVIEW RELACION");
+                        if($(self_v360.e.currentTarget).attr('disabled')==undefined){
+                            $(self_v360.e.currentTarget).attr('disabled','disabled');
+                        }else{
+                            $(self_v360.e.currentTarget).removeAttr('disabled');
+                        }
                       }
-                    ); 
+                    );
                 }
-                
+
             }, this)
         });
 
@@ -190,7 +214,7 @@
                 messages: 'No existe una Cuenta para agendar reunión'
               });
         }
-                        
+
     },
 
     generatecall: function (evt) {
@@ -198,7 +222,7 @@
         var tel_client = $(evt.currentTarget).attr('data-telefono');
         this.nombre_cliente_llamada=$(evt.currentTarget).attr('data-nombre');
         this.id_cliente_llamada=$(evt.currentTarget).attr('data-id-nombre');
-        
+
         var tel_usr = app.user.attributes.ext_c;
         var puesto_usuario = App.user.attributes.puestousuario_c;
         var idUsuarioLogeado = App.user.attributes.id;
@@ -210,6 +234,10 @@
         Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
             arrayPuestosComerciales.push(key);
         });
+
+        if(self.oTelefonos==undefined){
+            self.oTelefonos=this.view.oTelefonos;
+        }
         //TELEFONOS QUE SOLO SON REUS
         for (var i = 0; i < self.oTelefonos.telefono.length; i++) {
             if (self.oTelefonos.telefono[i].reus == 1 && self.oTelefonos.telefono[i].telefono == tel_client) {
@@ -347,10 +375,9 @@
 
     openDrawerSendEmail:function(e){
 
-        //prepopulateEmailForCreate        
+        //prepopulateEmailForCreate
         var id_cuenta=$(e.currentTarget).attr('data-id-nombre');
-        var nombre_cuenta=$(e.currentTarget).attr('data-name');
-        
+        var nombre_cuenta=$(e.currentTarget).attr('data-nombre');
         var beanContacto=app.data.createBean('Accounts', {id:id_cuenta});
 
         app.alert.show('loadingOpenDrawerEmail', {
@@ -369,8 +396,22 @@
                     parent_name: data.get('name')
                 });
 
+                var email = app.data.createBean('EmailAddresses');
+                email.set('email_address',data.attributes.email1);
+
+                registro.set({
+                    email_addresses: app.utils.deepCopy(email),
+                    email_address_id: data.attributes.email[0].email_address_id,
+                    email_address: email.get('email_address'),
+                    invalid_email: email.get('invalid_email'),
+                    opt_out: email.get('opt_out')
+                });
+
+                data.attributes.type="Accounts";
+
                 var modeloEmail=App.data.createBean('Emails');
-                modeloEmail.set('name','Correo desde 360');
+                modeloEmail.set('name','');
+                modeloEmail.set('parent',data.attributes);
                 modeloEmail.set('parent_type',"Accounts");
                 modeloEmail.set('parent_id',data.id);
                 modeloEmail.set('parent_name',data.get('name'));
@@ -383,14 +424,14 @@
                         create: true,
                         module: 'Emails',
                         model: modeloEmail
-        
+
                     },
                 },function(variable){
                     console.log("Cierra drawer de Emails");
                 });
 
             }
-        }); 
+        });
     },
 
     getAnexos: function () {
@@ -398,19 +439,19 @@
         var peticion = "anexos_activos";
         this.getData(peticion, id);
       },
-    
+
       getCesiones: function () {
         var id = this.model.get('idcliente_c');
         var peticion = "cesiones_activas";
         this.getData(peticion, id);
       },
-    
+
       getContratos: function () {
         var id = this.model.get('idcliente_c');
         var peticion = "contratos_activos";
         this.getData(peticion, id);
       },
-    
+
       //Funciones para drawers de Historicos
       getAnexosH: function () {
         var id = this.model.get('idcliente_c');
@@ -427,7 +468,7 @@
         var peticion="contratos_historicos";
         this.getData(peticion, id);
       },
-    
+
       /**
         Funciones de despliegue:
          - getData: consume servicio para obtención de información y despliegue de resultado
@@ -435,7 +476,7 @@
       */
       getData: function (peticion, id, records=null ) {
           console.log("getAnexos - clic");
-    
+
           //Bloque botones
           $("#openAnexos").removeClass("openModalAnexos");
           $("#openCesiones").removeClass("openModalCesiones");
@@ -444,7 +485,7 @@
           $("#openAnexosH").removeClass("openModalAnexosH");
           $("#openCesionesH").removeClass("openModalCesionesH");
           $("#openContratosH").removeClass("openModalContratosH");
-    
+
           if (!records) {
             //Genera petición
             var Params = {
@@ -452,15 +493,15 @@
                 'tipo_peticion': peticion,
             };
             var url = app.api.buildURL('ConsultaAnexos','', {}, {});
-    
+
             //
             App.alert.show('openAnexos', {
                 level: 'process'
             });
-    
+
             // $("#myModal1").show();
             // $(".loadingIcon").show();
-    
+
             //Ejecuta petición
             var self = this;
             app.api.call('create', url, {data: Params},{
@@ -468,22 +509,22 @@
                 //Logs
                 console.log('data:');
                 console.log(data);
-    
+
                 //var records2 = data;
                 _.extend(self, {anexosdata:data});
                 self.render();
-    
+
                 //Muestra modal
                 App.alert.dismiss('openAnexos');
-    
+
                 // $("#loadingIcon").hide();
                 // $(".myModal1").hide();
-    
+
                 var modal = $('#myModal');
                 if (modal) {
                     modal.show();
                 }
-    
+
                 //Bloque botones
                 $("#openAnexos").removeClass("openModalAnexos");
                 $("#openCesiones").removeClass("openModalCesiones");
@@ -492,7 +533,7 @@
                 $("#openAnexosH").removeClass("openModalAnexosH");
                 $("#openCesionesH").removeClass("openModalCesionesH");
                 $("#openContratosH").removeClass("openModalContratosH");
-    
+
               }
             });
           }else {
@@ -504,30 +545,30 @@
             }
           }
       },
-    
+
       closeModal: function () {
           console.log("closeModal - clic");
           var modal = $('#myModal');
           if (modal) {
               modal.hide();
           }
-    
+
           //Habilita botones
           $("#openAnexos").addClass("openModalAnexos");
           $("#openCesiones").addClass("openModalCesiones");
           $("#openContratos").addClass("openModalContratos");
-    
+
           $("#openAnexosH").addClass("openModalAnexosH");
           $("#openCesionesH").addClass("openModalCesionesH");
           $("#openContratosH").addClass("openModalContratosH");
-    
-      }, 
+
+      },
 
       orderAnexo: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
         // console.log(this.anexosdata);
-    
+
         var orderData = this.anexosdata;
         if (this.sortAnexo == "ASC") {
           orderData.anexos_activos = this.anexosdata.anexos_activos.sort(function (a, b) {
@@ -552,14 +593,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexo = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderAnexoContratacion: function(){
         //Ordenamiento: Anexos por fecha de contratación - Columna 3
         // console.log('--anexosdata--');
@@ -589,14 +630,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoContratacion = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderAnexoTerminacion: function(){
         //Ordenamiento: Anexos por fecha de terminación - Columna 4
         // console.log('--anexosdata--');
@@ -626,17 +667,17 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoTerminacion = "ASC";
         }
         this.getData(null,null,orderData);
       },
-    
+
       orderContrato: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
         // console.log(this.anexosdata);
-    
+
         var orderData = this.anexosdata;
         if (this.sortAnexo == "ASC") {
           orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
@@ -661,14 +702,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexo = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderContratoContratacion: function(){
         //Ordenamiento: Anexos por fecha de contratación - Columna 3
         // console.log('--anexosdata--');
@@ -698,14 +739,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoContratacion = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderContratoTerminacion: function(){
         //Ordenamiento: Anexos por fecha de terminación - Columna 4
         // console.log('--anexosdata--');
@@ -735,12 +776,12 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoTerminacion = "ASC";
         }
         this.getData(null,null,orderData);
       },
-    
+
       Save_comentario: function(){
         var self =this;
             var comentario = this.$('#txtComment').val();
@@ -759,14 +800,14 @@
                        }
                    }, this)
                });
-    
+
             }
       },
       orderCesion: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
         // console.log(this.anexosdata);
-    
+
         var orderData = this.anexosdata;
         if (this.sortAnexo == "ASC") {
           orderData.cesiones_activas = this.anexosdata.cesiones_activas.sort(function (a, b) {
@@ -791,14 +832,14 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexo = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
-    
+
       orderCesionVencimiento: function(){
         //Ordenamiento: Anexos por fecha de contratación - Columna 3
         // console.log('--anexosdata--');
@@ -828,11 +869,11 @@
             // a must be equal to b
             return 0;
           });
-    
+
           this.sortAnexoTerminacion = "ASC";
         }
-    
-    
+
+
         this.getData(null,null,orderData);
       },
       // Función para comparación de fechas
@@ -844,14 +885,58 @@
         d.setDate(s[0]);
         return d;
       },
-        //Funcion para descargar el pdf de la seccion vista 360
-        descargapdf: function() {
-            //Variable url con estructura de dirección de descarga dinámica, sin importar el ambiente en el que se encuentre.
-            var url = window.location.origin+window.location.pathname+'custom/pdf/NoticiasUnifin.pdf';
-            //Elimina index.php en caso de tenerlo para dejar la url intacta.
-            url = url.replace(/index.php/gi, "");
-            //Abre ventana nueva con las dimensiones establecidas.
-            window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
-        },
+
+    creaNuevaLinea:function(e){
+        var tipo_producto = $(e.currentTarget).attr('data-name');
+        var id_cuenta = contexto_cuenta.model.attributes.id;
+        var nombre_cuenta= contexto_cuenta.model.attributes.name;
+        var producto = 'leasing';
+        switch (tipo_producto) {
+            case '1':
+                producto = 'leasing';
+            break;
+            case '4':
+                producto = 'factoring';
+            break;
+            default:
+        }
+        if(!vista360.ResumenCliente[producto].tiene_linea_autorizada){
+            // Drawer Pre-solicitud
+            var modeloOppty = App.data.createBean('Opportunities');
+            modeloOppty.set('account_id',id_cuenta);
+            modeloOppty.set('account_name',nombre_cuenta);
+            modeloOppty.set('tipo_producto_c',tipo_producto);
+
+            App.drawer.open({
+                layout: 'create',
+                context: {
+                    create: true,
+                    module: 'Opportunities',
+                    model: modeloOppty
+                    },
+                },
+                function(variable){
+                    console.log("Cierra drawer de Opportunities");
+                }
+            );
+        }else{
+            //Drawer Pre o R/I
+            App.drawer.open({
+                layout: 'solicitud-layout',
+                context: {
+                    nuevaOpp: {"idCuenta":id_cuenta,"idProducto":tipo_producto,"nombreCuenta":nombre_cuenta}
+                },
+            },
+            function() {
+                //on close, throw an alert
+                console.log("Cierra drawer de Opportunities");
+            });
+        }
+
+    },
+    hideElements: function(s) {
+      console.log('test');
+    },
+
 
 })
