@@ -100,10 +100,7 @@ array (
               ),
               14 => 
               array (
-              ),
-              15 => 
-              array (
-                'name' => 'dir_sepomex_dire_direccion_name',
+                'span' => 12,
               ),
             ),
           ),
