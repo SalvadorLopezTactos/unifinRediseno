@@ -37,3 +37,7 @@ $mod_strings['LBL_INEGI_RAMA'] = 'Rama';
 $mod_strings['LBL_INEGI_SECTOR'] = 'Sector';
 $mod_strings['LBL_INEGI_MACRO_C'] = 'Macro';
 $mod_strings['LBL_GENERO'] = 'Género';
+$mod_strings['LBL_ESTATUS_PO'] = 'Estatus';
+$mod_strings['LBL_SUBESTATUS_PO'] = 'Subestatus';
+$mod_strings['LBL_DETALLE_SUBESTATUS_PO'] = 'Detalle Subestatus';
+$mod_strings['LBL_INEGI_SUBSECTOR_C'] = 'Subsector';
