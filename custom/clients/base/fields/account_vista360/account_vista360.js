@@ -46,6 +46,7 @@
         this.sortAnexo = "ASC";
         this.sortAnexoContratacion = "ASC";
         this.sortAnexoTerminacion = "ASC";
+        this.model.on('sync', this.hideElements, this);
     },
 
     openGpoEmpresarial:function(){
@@ -407,7 +408,7 @@
                 });
 
                 data.attributes.type="Accounts";
-                
+
                 var modeloEmail=App.data.createBean('Emails');
                 modeloEmail.set('name','');
                 modeloEmail.set('parent',data.attributes);
@@ -884,15 +885,6 @@
         d.setDate(s[0]);
         return d;
       },
-        //Funcion para descargar el pdf de la seccion vista 360
-        descargapdf: function() {
-            //Variable url con estructura de dirección de descarga dinámica, sin importar el ambiente en el que se encuentre.
-            var url = window.location.origin+window.location.pathname+'custom/pdf/NoticiasUnifin.pdf';
-            //Elimina index.php en caso de tenerlo para dejar la url intacta.
-            url = url.replace(/index.php/gi, "");
-            //Abre ventana nueva con las dimensiones establecidas.
-            window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
-        },
 
     creaNuevaLinea:function(e){
         var tipo_producto = $(e.currentTarget).attr('data-name');
@@ -941,6 +933,9 @@
             });
         }
 
+    },
+    hideElements: function(s) {
+      console.log('test');
     },
 
 

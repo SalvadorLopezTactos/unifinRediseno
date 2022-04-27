@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="custom/clients/base/fields/account_vista360/account_vista360.css">
 <div id="cards-properties">
-    <div id="cards-container" class="row-fluid" style="background-color:#E6E7E9">
+    <div class="row-fluid" style="background-color:#E6E7E9">
         <div class="span2"></div>
         <!-- DIV sección General-->
         <div class="span4 card-container">
@@ -9,14 +9,12 @@
             </div>
             <div class="information-container">
                 <div class="information-general-container">
-                    <table class="table table-borderless" style="font-size:10px;color:#021741">
-                        <thead>
+                    <table style="font-size:10px;color:#021741">
+                        <tbody>
                             <tr>
                                 <td><strong>Tipo</strong></td>
                                 <td>{{ResumenCliente.general_cliente.tipo}}</td>
                             </tr>
-                        </thead>
-                        <tbody>
                             {{#if ResumenCliente.general_cliente.show_if_linea_autorizada}}
                             <tr>
                                 <td><strong>Cliente desde</strong></td>
@@ -90,12 +88,14 @@
                 </p>
             </div>
             <div class="information-container">
-                <div style="text-align: center;">
-                    <p style="font-size: 10px;padding:8px">
-                        <b>CONTACTO DE NEGOCIOS</b>
-                    </p>
-                </div>
-                <div class="information-contacts-container">
+                <!-- Contacto Negocios -->
+                {{#if ResumenCliente.contactos.tiene_negocio}}
+                    <div style="text-align: center;">
+                        <p style="font-size: 10px;padding:8px">
+                            <b>CONTACTO DE NEGOCIOS</b>
+                        </p>
+                    </div>
+                    <div class="information-contacts-container">
                     <table class="table-borderless" style="font-size:10px;color:#021741;width:100%;margin-bottom:10px">
                         <thead>
                             <tr height="20px">
@@ -109,11 +109,11 @@
                                 <td>{{ResumenCliente.contactos.puesto_negocios}}</td>
                             </tr>
                             <tr>
-                            <tr style="background-color:#C0BEC1" height="20px">
+                            <tr style="background-color:#E6E7E9" height="20px">
                                 <td><strong style="padding:8px">Teléfono Principal</strong></td>
                                 <td>{{ResumenCliente.contactos.telefono_negocios}}&nbsp;{{#if ResumenCliente.contactos.telefono_negocios}}<i class="fa fa-phone fa-md addCall" data-telefono="{{ResumenCliente.contactos.telefono_negocios}}" data-nombre="{{ResumenCliente.contactos.nombre_negocios}}" data-id-nombre="{{ResumenCliente.contactos.id_nombre_negocios}}" tabindex="-1"></i>&nbsp;<strong>Llamar</strong>{{/if}}</td>
                             </tr>
-                            <tr style="background-color:#C0BEC1" height="20px">
+                            <tr style="background-color:#E6E7E9" height="20px">
                                 <td><strong style="padding:8px">Correo Electrónico</strong></td>
                                 <td>{{ResumenCliente.contactos.correo_negocios}}&nbsp;&nbsp;{{#if ResumenCliente.contactos.correo_negocios}}<i class="fa fa-envelope fa-md sendEmail" data-nombre="{{ResumenCliente.contactos.nombre_negocios}}" data-id-nombre="{{ResumenCliente.contactos.id_nombre_negocios}}" tabindex="-1"></i>{{/if}}</td>
                             </tr>
@@ -125,11 +125,12 @@
                                 Click aquí para <br>agendar reunión <i class="fa fa-users" style="color: #ffff"></i>
                         </button>
                         -->
-                        <img {{#if ResumenCliente.contactos.id_nombre_negocios}}class="btnNuevaReunion"{{/if}} class="btnNuevaReunion" data-id="{{ResumenCliente.contactos.id_nombre_negocios}}" data-name="{{ResumenCliente.contactos.nombre_negocios}}" data-type="negocios" src="{{getUnifinListValue 'iconos_vista360_list' 'nueva_reunion'}}" style="width: 220px;padding:5px">
+                        <img {{#if ResumenCliente.contactos.id_nombre_negocios}}class="btnNuevaReunion"{{/if}} class="btnNuevaReunion" data-id="{{ResumenCliente.contactos.id_nombre_negocios}}" data-name="{{ResumenCliente.contactos.nombre_negocios}}" data-type="negocios" src="{{getUnifinListValue 'iconos_vista360_list' 'nueva_reunion'}}" style="width: 150px;padding:5px">
                     </div>
                 </div>
-
-                <div style="margin-top:8px">
+                {{/if}}
+                <!-- Contacto Secundario -->
+                {{#if ResumenCliente.contactos.tiene_secundario}}
                     <div style="text-align: center;">
                         <p style="font-size: 10px;padding:8px">
                             <b>CONTACTO SECUNDARIO</b>
@@ -149,11 +150,11 @@
                                     <td>{{ResumenCliente.contactos.puesto_secundario}}</td>
                                 </tr>
                                 <tr>
-                                <tr style="background-color:#C0BEC1" height="20px">
+                                <tr style="background-color:#E6E7E9" height="20px">
                                     <td><strong style="padding:8px">Teléfono Principal</strong></td>
                                     <td>{{ResumenCliente.contactos.telefono_secundario}}&nbsp;{{#if ResumenCliente.contactos.telefono_secundario}}<i class="fa fa-phone fa-md addCall" data-telefono="{{ResumenCliente.contactos.telefono_secundario}}" data-nombre="{{ResumenCliente.contactos.nombre_secundario}}" data-id-nombre="{{ResumenCliente.contactos.id_nombre_secundario}}" tabindex="-1"></i>&nbsp;<strong>Llamar</strong>{{/if}}</td>
                                 </tr>
-                                <tr style="background-color:#C0BEC1" height="20px">
+                                <tr style="background-color:#E6E7E9" height="20px">
                                     <td><strong style="padding:8px">Correo Electrónico</strong></td>
                                     <td>{{ResumenCliente.contactos.correo_secundario}}&nbsp;&nbsp;{{#if ResumenCliente.contactos.correo_secundario}}<i class="fa fa-envelope fa-md sendEmail" data-nombre="{{ResumenCliente.contactos.nombre_secundario}}" data-id-nombre="{{ResumenCliente.contactos.id_nombre_secundario}}" tabindex="-1"></i>{{/if}}</td>
                                 </tr>
@@ -165,11 +166,10 @@
                                     Click aquí para <br>agendar reunión <i class="fa fa-users" style="color: #ffff"></i>
                             </button>
                             -->
-                            <img {{#if ResumenCliente.contactos.id_nombre_secundario}}class="btnNuevaReunion"{{/if}} data-id="{{ResumenCliente.contactos.id_nombre_secundario}}" data-name="{{ResumenCliente.contactos.nombre_secundario}}" data-type="secundario" src="{{getUnifinListValue 'iconos_vista360_list' 'nueva_reunion'}}" style="width: 220px;padding:5px">
+                            <img {{#if ResumenCliente.contactos.id_nombre_secundario}}class="btnNuevaReunion"{{/if}} data-id="{{ResumenCliente.contactos.id_nombre_secundario}}" data-name="{{ResumenCliente.contactos.nombre_secundario}}" data-type="secundario" src="{{getUnifinListValue 'iconos_vista360_list' 'nueva_reunion'}}" style="width: 150px;padding:5px">
                         </div>
                     </div>
-                </div>
-
+                {{/if}}
             </div>
         </div>
         <div class="span2"></div>
@@ -543,11 +543,11 @@
                                 {{/if}}
                                 {{#if ResumenCliente.credito_auto.tiene_contrato_liberado}}
                                     <tr>
-                                        <td><strong>Vencimiento cesión final</strong></td>
+                                        <td><strong>Vencimiento contrato final</strong></td>
                                         <td>{{ResumenCliente.credito_auto.vencimiento_anexo_final}}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Vencimiento siguiente cesión</strong></td>
+                                        <td><strong>Vencimiento siguiente contrato</strong></td>
                                         <td>{{ResumenCliente.credito_auto.vencimiento_siguiente_anexo}}</td>
                                     </tr>
                                     <tr>
