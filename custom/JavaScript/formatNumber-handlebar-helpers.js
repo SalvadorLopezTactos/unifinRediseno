@@ -28,10 +28,10 @@
                     n = (x1 + x2);
                     return n;
                 } else {
-                    return null;
+                    return '0';
                 }
             } else {
-                return null;
+                return '0';
             }
         });
 

@@ -1304,6 +1304,11 @@
 
         //Oculta fecha de bloqueo para saber si el Origen se habilita
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
+
+        //Oculta etiquetas 360
+        this.$('.record-edit-link-wrapper[data-name="account_vista360"]').remove();
+        this.$('div[data-name=account_vista360]').find('div.record-label').addClass('hide');
+
     },
 
     editClicked: function () {
@@ -2147,7 +2152,7 @@
         }
         if (this.model.get("tipo_registro_cuenta_c") == "2" && this.model.get("subtipo_registro_cuenta_c") == "2" && totalProspecto == totalProspectoG) {
             //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
-            v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
+            vista360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
             this.model.set("tipo_registro_cuenta_c", "2");
             this.model.set("subtipo_registro_cuenta_c", "1");
             this.model.set("tct_tipo_subtipo_txf_c", "PROSPECTO SIN CONTACTAR");
@@ -2169,12 +2174,12 @@
                         messages: 'Cambio realizado',
                     });
                     //Actualiza modelo vista v360
-                    v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
-                    v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
-                    v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
-                    v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                    vista360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                    vista360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                    vista360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                    vista360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
                     Oproductos.render();
-                    v360.render();
+                    vista360.render();
                 })
             });
         }
@@ -2409,13 +2414,13 @@
                             messages: 'Cambio realizado',
                         });
                         //Actualiza modelo vista v360
-                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
-                        v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
-                        v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
-                        v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
-                        v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                        vista360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
+                        vista360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                        vista360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                        vista360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                        vista360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
                         Oproductos.render();
-                        v360.render();
+                        vista360.render();
                     })
                 });
             }
@@ -2732,7 +2737,7 @@
                     }
 
                     if (this.model.get("tipo_registro_cuenta_c") == "4" || this.model.get('tipo_registro_cuenta_c') == "5") {
-                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
+                        vista360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
                         this.model.set("tipo_registro_cuenta_c", "2");
                         this.model.set("subtipo_registro_cuenta_list", "1");
                         this.model.set("show_panel_c", 1);
@@ -2751,8 +2756,8 @@
                     api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_l_c = '2';
                     Oproductos.productos.tct_subtipo_l_txf_c = '1';
-                    v360.ResumenCliente.leasing.tipo_cuenta = '2';
-                    v360.ResumenCliente.leasing.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.leasing.tipo_cuenta = '2';
+                    vista360.ResumenCliente.leasing.subtipo_cuenta = '1';
                 }
 
             }
@@ -2764,8 +2769,8 @@
                     api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_ca_c = '2';
                     Oproductos.productos.tct_subtipo_ca_txf_c = '1';
-                    v360.ResumenCliente.credito_auto.tipo_cuenta = '2';
-                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.credito_auto.tipo_cuenta = '2';
+                    vista360.ResumenCliente.credito_auto.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_f_c == "4" || Oproductos.productos.tct_tipo_cuenta_f_c == "5") && productousuario.includes('4')) {
@@ -2776,8 +2781,8 @@
                     api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_f_c = '2';
                     Oproductos.productos.tct_subtipo_f_txf_c = '1';
-                    v360.ResumenCliente.factoring.tipo_cuenta = '2';
-                    v360.ResumenCliente.factoring.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.factoring.tipo_cuenta = '2';
+                    vista360.ResumenCliente.factoring.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_fl_c == "4" || Oproductos.productos.tct_tipo_cuenta_fl_c == "5") && productousuario.includes('6')) {
@@ -2788,8 +2793,8 @@
                     api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_fl_c = '2';
                     Oproductos.productos.tct_subtipo_fl_txf_c = '1';
-                    v360.ResumenCliente.fleet.tipo_cuenta = '2';
-                    v360.ResumenCliente.fleet.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.fleet.tipo_cuenta = '2';
+                    vista360.ResumenCliente.fleet.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_uc_c == "4" || Oproductos.productos.tct_tipo_cuenta_uc_c == "5") && productousuario.includes('8')) {
@@ -2800,8 +2805,8 @@
                     api_params["tct_tipo_cuenta_uc_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_uc_c = '2';
                     Oproductos.productos.tct_subtipo_uc_txf_c = '1';
-                    v360.ResumenCliente.uniclick.tipo_cuenta = '2';
-                    v360.ResumenCliente.uniclick.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.uniclick.tipo_cuenta = '2';
+                    vista360.ResumenCliente.uniclick.subtipo_cuenta = '1';
                 }
             }
             // Actualiza Productos
@@ -2841,7 +2846,7 @@
 
                             cont_uni_p.render();
                             Oproductos.render();
-                            v360.render();
+                            vista360.render();
                             //Deja activa la pestaña de la vista360
                             $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
                             $("#recordTab>li.tab").removeClass('active');
@@ -5363,16 +5368,16 @@
     //                     var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
     //                     app.api.call('update', uni, params, {
     //                         success: _.bind(function (data) {
-    //                             v360.ResumenCliente.uniclick.tipo_cuenta = '3';
-    //                             v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
-    //                             v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
+    //                             vista360.ResumenCliente.uniclick.tipo_cuenta = '3';
+    //                             vista360.ResumenCliente.uniclick.subtipo_cuenta = '18';
+    //                             vista360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
     //                             app.alert.dismiss('convierte_Cliente_uniclick');
     //                             app.alert.show('errorAlert', {
     //                                 level: 'success',
     //                                 messages: "Se ha realizado la conversión correctamente.",
     //                             });
 
-    //                             v360.render();
+    //                             vista360.render();
     //                             Oproductos.render();
     //                             //Deja activa la pestaña de la vista360
     //                             $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
@@ -7937,10 +7942,6 @@ validaReqUniclickInfo: function () {
                 //Validaciones para Clasificacion Sectorial y V360
                 if (data[2].contents!=""){
                     //Extiende This
-                    v360.ResumenCliente = [];
-                    v360.ResumenCliente=data[2].contents;
-                    v360.render();
-
                     vista360.ResumenCliente = [];
                     vista360.ResumenCliente=data[2].contents;
                     vista360.render();
