@@ -1,5 +1,5 @@
 <?php
- // created: 2020-04-30 18:27:04
+ // created: 2022-04-07 00:42:16
 
 $app_list_strings['subtipo_registro_cuenta_list']=array (
   1 => 'Sin Contactar',
@@ -22,5 +22,14 @@ $app_list_strings['subtipo_registro_cuenta_list']=array (
   18 => 'Con Línea Vigente',
   19 => 'Con Línea Vencida',
   20 => 'Con Más de un Año sin Operar',
+  21 => 'Calificado',
+  22 => 'En Documento de valor',
+  23 => 'En Gestión de Firmas',
+  24 => 'En Alta de Cuentas',
+  25 => 'En Envío de Tarjetas',
+  26 => 'En Activación de Tarjetas',
+  27 => 'Con Tarjeta Activa',
+  28 => 'Con Tarjeta Inactiva',
+  29 => 'Con Tarjeta Cancelada',
   '' => '',
 );

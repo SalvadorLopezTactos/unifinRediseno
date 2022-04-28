@@ -43,7 +43,7 @@ class envio_unics
                     "clCbClabe" => $bean->clabe,
                     "clCbsucursal" => $bean->sucursal,
                     "clCbPlaza" => $bean->plaza,
-                    "IdUsoCuentaBancaria" => $domiciliacion,
+                    "idUsoCuentaBancaria" => $domiciliacion,
                     "clCbIndicadorEstado" => $estado,
                     "idCuentaBancaria" => $bean->idcorto_c,
                     "idCliente" => $beanCuenta->idcliente_c,

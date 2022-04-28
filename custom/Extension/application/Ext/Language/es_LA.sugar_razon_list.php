@@ -1,5 +1,5 @@
 <?php
- // created: 2021-10-27 13:13:43
+ // created: 2022-04-06 17:03:07
 
 $app_list_strings['razon_list']=array (
   '' => '',
@@ -19,4 +19,7 @@ $app_list_strings['razon_list']=array (
   14 => 'Trabaja con la competencia',
   15 => 'Relacionado a Cliente Vetado',
   16 => 'Genera negocios de riesgo para Unifin',
+  17 => 'Dación en Pago',
+  18 => 'Causó pérdida a la Institución',
+  19 => 'Cartera Castigada',
 );

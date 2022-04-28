@@ -289,8 +289,8 @@ class Dynamics365 extends SugarApi
         $GLOBALS['log']->fatal("VALOR DE BANDERA CPP: ".$beanCuenta->control_cpp_chk_c);
         if(!$beanCuenta->control_cpp_chk_c){
             $GLOBALS['log']->fatal("Request cuentas por pagar: url: ".$urlCPP." idProveedor: ".$beanCuenta->idcliente_c);
-            $responseCPP=$this->postCPP("http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365",$beanCuenta->idcliente_c);
-        
+            //$responseCPP=$this->postCPP("http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365",$beanCuenta->idcliente_c);
+            $responseCPP=$this->postCPP($urlCPP,$beanCuenta->idcliente_c);
             $GLOBALS['log']->fatal("RESPONSE CUENTAS POR PAGAR");
             $GLOBALS['log']->fatal(print_r($responseCPP,true));
 

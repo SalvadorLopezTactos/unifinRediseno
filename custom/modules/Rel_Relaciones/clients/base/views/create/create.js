@@ -5,7 +5,10 @@
 	{
 		relContext = this;
         accountContext = null; //._previousAttributes.model._previousAttributes;
-
+        if(options.context.attributes.from360!=undefined){
+            this.desdeVista360=options.context.attributes.from360;
+        }
+        
         /*
          If you are on 7.2.0, there is a dependency bug that can cause the screen to render an empty form.
          To correct this, uncomment the code below:
@@ -96,6 +99,11 @@
 		this.doRelationFields();
         this.$('div[data-name=relacion_c]').hide();
         $('[data-name=tct_validado_juridico_chk_c]').hide();
+        if(this.desdeVista360!=undefined){
+            if(this.desdeVista360=='1'){
+                this.$('div[data-name=relacion_c]').show();
+            }
+        }
         this.model.on("change:relaciones_activas", _.bind(function(){
             if(new String(this.model.get('relaciones_activas'))==""){
                 this.$('div[data-name=relacion_c]').hide();
@@ -221,6 +229,7 @@
 		this.$("div[data-name='producto']").hide();
 		this.$("div[data-name='puesto']").hide();
 		this.$("div[data-name='puestodescription']").hide();
+        this.$("div[data-name='estatus_tarjeta_c']").hide();
 
 
 		for(var x = 0; x < arrRelaciones.length; x++){
@@ -230,9 +239,12 @@
 					this.$("div[data-name='miembrodecomite']").show();
 					this.$("div[data-name='porcentaje_participacion_c']").show();
 					break;
-				case "Contacto":
-					this.$("div[data-name='tipodecontacto']").show();
+				case "Tarjetahabiente":
+					this.$("div[data-name='estatus_tarjeta_c']").show();
 					break;
+                case "Contacto":
+                    this.$("div[data-name='tipodecontacto']").show();
+                    break;    
 				case "Referencia Personal":
 					this.$("div[data-name='parentesco']").show();
 					this.$("div[data-name='tiempodeconocerloano']").show();

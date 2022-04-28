@@ -359,7 +359,12 @@
         if (this.model.get('negocio_c') == "" || this.model.get('negocio_c') == 0) {
             this.$(".record-cell[data-name='negocio_c']").hide();
         }
-
+		if (this.model.get('tipo_producto_c') == '14') {
+			this.noEditFields.push('monto_c');
+			this.$('[data-name="monto_c"]').attr('style', 'pointer-events:none');
+			this.noEditFields.push('amount');
+			this.$('[data-name="amount"]').attr('style', 'pointer-events:none');
+		}
     },
 
     _render: function () {
@@ -1481,6 +1486,8 @@
         if (Object.keys(errors).length == 0) {
             console.log(fields);
             console.log(errors);
+            var idSol = this.model.get('id');
+            var estatusCancel = false;
             if (this.model.get('tct_oportunidad_perdida_chk_c') == true) {
                 if (this.model.get('estatus_c') == 'K') {
                     app.alert.show("Cancela Operacion", {
@@ -1488,128 +1495,80 @@
                         title: "No puedes cancelar una operaci\u00F3n cancelada",
                         autoClose: false
                     });
-
-                }
-                else {
+                    callback(null, fields, errors);
+                }else {
                     if (this.model.get('tct_razon_op_perdida_ddw_c') != "") {
-                        if (this.model.get('tct_etapa_ddw_c') == "SI" && this.model.get('tipo_de_operacion_c') != "RATIFICACION_INCREMENTO") {
-                            this.model.set('estatus_c', 'K');
 
-                            app.alert.show("CancelcacSol", {
-                                level: "process",
-                                title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
-                                autoClose: true
-                            });
-                        } else {
-                            app.alert.show("EstatusCancelcacion", {
-                                level: "process",
-                                title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
-                                autoClose: false
-                            });
-                            // @author Carlos Zaragoza
-                            // @task Cancelar la operacion solamente en Sugar si no tiene ID process.
-                            console.log(typeof this.model.get("id_process_c"));
-                            console.log(this.model.get("id_process_c"));
-                            if (this.model.get("id_process_c").trim()== "") {
-                                var parametros = {
-                                    'id_linea_padre': this.model.get('id_linea_credito_c'),
-                                    'id': this.model.get('id'),
-                                    'conProceso': 0,
-                                    'tipo_de_operacion_c': this.model.get('tipo_de_operacion_c'),
-                                    'tipo_operacion_c': this.model.get('tipo_operacion_c'),
-                                };
-                                var cancelarOperacionPadre = app.api.buildURL("CancelaRatificacion", '', {}, {});
-                                app.api.call("create", cancelarOperacionPadre, { data: parametros }, {
-                                    success: _.bind(function (data) {
-                                        if (data != null) {
-                                            console.log("Se cancelo padre1");
-                                            self.model.set('estatus_c', 'K');
-                                            self.model.save();
-                                            self.render();
-                                            app.alert.dismiss('EstatusCancelcacion');
-                                        } else {
-                                            console.log("No se cancela Padre");
-                                        }
-                                    }, self)
-                                });
-                                callback(null, fields, errors); //Pendiente
-                            } else {
-                                if (this.model.get('estatus_c') != 'K') {
-                                    var Operacion = this;
-                                    var OppParams = {
-                                        'idSolicitud': this.model.get("idsolicitud_c"),
-                                        'usuarioAutenticado': app.user.get('user_name'),
-                                    };
-                                    var cancelaOperacionUrl = app.api.buildURL("cancelaOperacionBPM", '', {}, {});
-                                    app.api.call("create", cancelaOperacionUrl, { data: OppParams }, {
-                                        success: _.bind(function (data) {
-                                            if (data != null) {
-                                                if (data['estatus'] == 'error') {
-                                                    app.alert.show("Cancela Operacion", {
-                                                        level: "error",
-                                                        title: "Error: " + data['descripcion'],
-                                                        autoClose: false
-                                                    });
-                                                    callback(null, fields, errors);
-                                                } else {
-                                                    app.alert.show("ExitoCancel", {
-                                                        level: 'success',
-                                                        title: 'Se ha cancelado la operaci\u00F3n',
-                                                        autoClose: true
-                                                    });
-                                                    callback(null, fields, errors);
-                                                }
-                                            }
-                                        }, self)
-                                    });
-                                    // mandamos llamar el servicio para cancelar localmente:
-                                    var parametros = {
-                                        'id_linea_padre': this.model.get('id_linea_credito_c'),
-                                        'id': this.model.get('id'),
-                                        'conProceso': 1,
-                                        'tipo_de_operacion_c': this.model.get('tipo_de_operacion_c'),
-                                        'tipo_operacion_c': this.model.get('tipo_operacion_c'),
-                                    };
-                                    console.log(parametros);
-                                    var cancelarOperacionPadre = app.api.buildURL("CancelaRatificacion", '', {}, {});
-                                    app.api.call("create", cancelarOperacionPadre, { data: parametros }, {
-                                        success: _.bind(function (data) {
-                                            if (data != null) {
-                                                console.log("Se cancelo padre2");
-                                                this.model.set('estatus_c', 'K');
-                                                this.model.save();
-                                                //window.location.reload()
-                                                /*@Jesus Carrillo*/
-                                                /*window.setTimeout(function () {
-                                                    window.history.back();
-                                                    app.alert.dismiss('EstatusCancelcacion');
-                                                }, 25000);*/
-                                                self.render();
-                                                app.alert.dismiss('EstatusCancelcacion');
-                                            } else {
-                                                console.log("No se cancela Padre");
-                                            }
-                                        }, self)
-                                    });
-                                } else {
-                                    app.alert.show("Operacion Cancelada", {
-                                        level: "error",
-                                        title: "Esta Operaci\u00F3n ya habia sido cancelada anteriormente",
-                                        autoClose: false
-                                    });
+                        app.alert.show("CancelcacSol", {
+                            level: "process",
+                            title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
+                            autoClose: true
+                        });
+
+                        app.api.records("read", "cancelQuantico/"+idSol, {}, null , {
+                            success: _.bind(function (data) {
+                                //{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}
+
+                                if(data != null || data != ""){
+                                    if( data['estatus'] == 'error' ){
+                                        this.model.set('tct_oportunidad_perdida_chk_c',0);
+                                        this.model.set('tct_razon_op_perdida_ddw_c','');
+                                        errors['cancelacion_operacion'] = 'No se puede cancelar';
+                                        errors['cancelacion_operacion'].required = true;
+
+                                        app.alert.show("Cancela Operacion", {
+                                            level: "error",
+                                            title: "Error: "+ data['code'] + " - " + data['mensaje'],
+                                            autoClose: false
+                                        });
+                                        callback(null, fields, errors);
+                                    }else{
+                                        this.model.set('estatus_c', 'K');
+                                        callback(null, fields, errors);
+                                    }
+                                }else{
+                                    this.model.set('estatus_c', 'K');
                                     callback(null, fields, errors);
                                 }
-                            }
-                        }
-                    }// fin if
-                    else {
+                            }, this)
+                        });
+
+                    }else {
                         errors['tct_razon_op_perdida_ddw_c'] = 'Campo requerido para cancelar';
                         errors['tct_razon_op_perdida_ddw_c'].required = true;
+                        callback(null, fields, errors);
                     }
                 }
+            }else{
+                callback(null, fields, errors);
+            }
+        }else{
+            callback(null, fields, errors);
+        }
+    },
+
+    respQuanticoCancel: function (respuesta) {
+
+        var cancelar = false;
+        //{"Success":false,"Code":"405","ErrorMessage":"El usuario que  intenta cancelar la solicitud no existe en Quantico "}
+
+        if (respuesta.Success &&  respuesta.ErrorMessage == "") {
+            cancelar = true;
+        } else {
+            console.log("Error al actualizar a Quantico: " + respuesta.Code);
+            if(respuesta.Code == '404'){
+                cancelar = true;
             }
         }
-        callback(null, fields, errors);
+
+        if(!cancelar){
+            app.alert.show("CancelcacSol", {
+                level: "error",
+                title: respuesta.ErrorMessage,
+                autoClose: false
+            });
+        }
+        return cancelar;
     },
 
     calcularRI: function () {
@@ -3301,19 +3260,19 @@
                 success: _.bind(function (data) {
                     if (data == '1') {
                         banderaExcluye.check.push(1);
-                        self.autorizapre();
+                        banderaExcluye.autorizapre();
                         //$('[data-name="opportunities_directores"]').hide();
                         //$('[data-name="vobo_descripcion_txa_c"]').hide();
                         //$('[data-name="doc_scoring_chk_c"]').hide();
-                        self.model.set('bandera_excluye_chk_c', 1);
+                        banderaExcluye.model.set('bandera_excluye_chk_c', 1);
                     } else {
                         banderaExcluye.check.push(0);
                         //$('[data-name="opportunities_directores"]').show();
                         //$('[data-name="vobo_descripcion_txa_c"]').show();
                         //$('[data-name="doc_scoring_chk_c"]').show();
                     }
-                    self.controlVistaCamposPrecalificacion();
-                }, self),
+                    banderaExcluye.controlVistaCamposPrecalificacion();
+                }, banderaExcluye),
             });
         } else {
             this.controlVistaCamposPrecalificacion();
@@ -3440,13 +3399,15 @@
             $('[data-name="evento_c"]').attr('style', 'pointer-events:none');
             $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
             $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="codigo_expo_c"]').attr('style', 'pointer-events:none');
+            $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
        }else{
             /*
             estatus_c = 'K':Cancelada,'R':Rechazada Crédito,'N':Autorizada
             tct_etapa_ddw_c = 'C':Crédito, 'R': Rechazado
             */
-           if(this.model.get('tct_etapa_ddw_c')=='C' || this.model.get('tct_etapa_ddw_c')=='R' || 
-              this.model.get('estatus_c')=='N' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='K'  
+           if(this.model.get('tct_etapa_ddw_c')=='C' || this.model.get('tct_etapa_ddw_c')=='R' ||
+              this.model.get('estatus_c')=='N' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='K'
            ){
                 $('[data-name="origen_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="detalle_origen_c"]').attr('style', 'pointer-events:none');
@@ -3455,6 +3416,8 @@
                 $('[data-name="evento_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="origen_busqueda_c"]').attr('style', 'pointer-events:none');
                 $('[data-name="camara_c"]').attr('style', 'pointer-events:none');
+                $('[data-name="codigo_expo_c"]').attr('style', 'pointer-events:none');
+                $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
            }
        }
 
@@ -3575,7 +3538,7 @@
     estableceOpcionesOrigenSolicitudes:function(){
         var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
 
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth
             Object.keys(opciones_origen).forEach(function (key) {
                 if (key == "14" || key == "15") {
                     delete opciones_origen[key];

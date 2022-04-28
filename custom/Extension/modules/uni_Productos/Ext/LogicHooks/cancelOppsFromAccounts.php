@@ -10,3 +10,11 @@ $hook_array['before_save'][] = Array(
     'uni_Productos_hooks',
     'cancelarOppsFromAccounts'
 );
+
+$hook_array['before_save'][] = Array(
+    2,
+    'Regresa a Cliente si cambia a Prospecto',
+    'custom/modules/uni_Productos/regresa_cliente1.php',
+    'regresa_cliente1',
+    'regresa_cliente1'
+);

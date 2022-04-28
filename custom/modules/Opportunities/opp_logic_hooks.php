@@ -130,7 +130,14 @@ SQL;
             $bean->name = str_replace("PRE - ", "", $bean->name);
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
-        $available_financiero=array("39","41","50","48","49","51","77","83");
+        global $app_list_strings;
+        $available_financiero=array();
+        $lista_productos = $app_list_strings['productos_genera_name_sol_list'];
+        //$available_financiero=array("39","41","50","48","49","51","77","83");
+        foreach ($lista_productos as $key => $value) {
+            array_push($available_financiero,$key);
+        }
+
         if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI'&& $bean->tipo_de_operacion_c != 'RATIFICACION_INCREMENTO') {
             $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
         } elseif (in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
@@ -1083,7 +1090,14 @@ SQL;
         //Evalua cambio en etapa o subetapa
         if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
             //Actualiza producto uniclick
-            $available_financiero=array("39","41","50","49","48","51");
+            global $app_list_strings;
+            $available_financiero=array();
+            $lista_productos = $app_list_strings['productos_uniclick_list'];
+            //$available_financiero=array("39","41","50","49","48","51");
+            foreach ($lista_productos as $key => $value) {
+                array_push($available_financiero,$key);
+            }
+
             if(in_array($bean->producto_financiero_c ,$available_financiero))
             {
                 $producto=8;
@@ -1296,11 +1310,11 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
         //1.- Si es generada desde Onboarding, el origen se establece con el mismo valor que se establece en el servicio
         //2.- Si es la primera solicitud, hereda origen de la cuenta de forma idéntica
         //3.- A partir de la segunda solicitud el origen nade como "Prospección Propia"
-        
-        if($bean->onboarding_chk_c!=1){//No fue generada desde onboarding, por lo tanto se aplican las reglas 2 y 3
-            $GLOBALS['log']->fatal("**********ENTRA LH PARA SOLICITUDES ONBOARDING**********");
+
+        if($bean->onboarding_chk_c!=1 && !$arguments['isUpdate']){//No fue generada desde onboarding, por lo tanto se aplican las reglas 2 y 3
+            //$GLOBALS['log']->fatal("**********ENTRA LH PARA SOLICITUDES ONBOARDING**********");
             $idCuenta=$bean->account_id;
-            $GLOBALS['log']->fatal("**********ID CUENTA:".$idCuenta."**********");
+            //$GLOBALS['log']->fatal("**********ID CUENTA:".$idCuenta."**********");
             $beanCuenta = BeanFactory::getBean("Accounts", $idCuenta);
 
             if ($beanCuenta->load_relationship('opportunities')) {
@@ -1321,20 +1335,24 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                         }
                     }
                     if($sumaSols>0){
-                        $GLOBALS['log']->fatal("********** Solicitud se establece como Prospeción Propia**********");
+                        //$GLOBALS['log']->fatal("********** Solicitud se establece como Prospeción Propia**********");
                         $bean->origen_c='3';//Prospección propia
                     }else{//Ninguna de las solicitudes relacionadas se toma en cuenta, por lo tanto, ésta creada se toma como la primera, se hereda el origen de la cuenta
-                        $GLOBALS['log']->fatal("********** Primera solicitud, se copia el origen de la cuenta**********");
+                        //$GLOBALS['log']->fatal("********** Primera solicitud, se copia el origen de la cuenta**********");
                         $bean->origen_c=$beanCuenta->origen_cuenta_c;
                         $bean->detalle_origen_c=$beanCuenta->detalle_origen_c;
                         $bean->prospeccion_propia_c=$beanCuenta->prospeccion_propia_c;
                         $bean->medio_digital_c=$beanCuenta->medio_digital_c;
                         $bean->evento_c=$beanCuenta->evento_c;
                         $bean->origen_busqueda_c=$beanCuenta->origen_busqueda_c;
-                        $bean->camara_c=$beanCuenta->camara_c;                    } 
+                        $bean->camara_c=$beanCuenta->camara_c;
+                        $bean->account_id4_c=$beanCuenta->account_id_c; //Socio comercial
+                        $bean->account_id3_c=$beanCuenta->account_id1_c; //Vendor
+                        $bean->codigo_expo_c=$beanCuenta->codigo_expo_c; //Código Expo
+                    }
                 }else{
                     //No tiene solicitudes, por lo tanto, ésta solicitud creada es la primera
-                    $GLOBALS['log']->fatal("********** Primera solicitud, se copia el origen de la cuenta**********");
+                    //$GLOBALS['log']->fatal("********** Primera solicitud, se copia el origen de la cuenta**********");
                     $bean->origen_c=$beanCuenta->origen_cuenta_c;
                     $bean->detalle_origen_c=$beanCuenta->detalle_origen_c;
                     $bean->prospeccion_propia_c=$beanCuenta->prospeccion_propia_c;
@@ -1342,13 +1360,16 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                     $bean->evento_c=$beanCuenta->evento_c;
                     $bean->origen_busqueda_c=$beanCuenta->origen_busqueda_c;
                     $bean->camara_c=$beanCuenta->camara_c;
+                    $bean->account_id4_c=$beanCuenta->account_id_c; //Socio comercial
+                    $bean->account_id3_c=$beanCuenta->account_id1_c; //Vendor
+                    $bean->codigo_expo_c=$beanCuenta->codigo_expo_c; //Código Expo
 
                 }
-                
+
             }
 
         }
-        
+
 
     }
 

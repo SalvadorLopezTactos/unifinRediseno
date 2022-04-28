@@ -322,7 +322,16 @@
           $('[data-name="generar_rfc_c"]').hide();
         }
         if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
-          this.$('div[data-name=tipo_proveedor_compras_c]').css("pointer-events", "none");
+            //Se agrega validacion para la lista de Vendors y puedan editar el campo Tipo Proveedor Compras C
+            var Banderita=0;
+            Object.entries(App.lang.getAppListStrings('equipo_a_eco_y_est_list')).forEach(([key, value]) => {
+                if(value==App.user.attributes.id){
+                    Banderita=1;
+                }
+            });
+            if(Banderita!=1){
+                this.$('div[data-name=tipo_proveedor_compras_c]').css("pointer-events", "none");
+            }
         }
 
         //Oculta campos de Dynamics
@@ -1991,7 +2000,7 @@
     estableceOpcionesOrigen:function(){
         var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
 
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth
             Object.keys(opciones_origen).forEach(function (key) {
                 if (key == "14" || key == "15") {
                     delete opciones_origen[key];

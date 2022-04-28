@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="custom/clients/base/fields/account_vista360/account_vista360.css">
+{{#if loadView}}
+<br>
+<div>
+    <button class="btn btn-large btn-block btn-primary preSolicitud" type="button">Crear Pre solicitud</button>
+    <button class="btn btn-large btn-block btn-secondary ratificaIncremento" type="button">Generar Ratificación/Incremento</button>
+</div>
+<br>
+{{#if muestraSolicitudes}}
+  <div>
+    <div class="list-view">
+      <table class="dataTable table-striped table-border">
+        <thead >
+          <tr>
+            <th class="span8">Solicitud</th>
+            <th class="span2">Monto</th>
+            <th class="span2">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each solicitudes}}
+           <tr>
+             <td class="span8">{{name}}</td>
+             <td class="span2">$ {{customFormatNumber monto_c}}</td>
+             <td class="span2">
+               <center><button class="btn btn-mini btn-secondary ratificaIncrementoUnico" data-name="{{id}}" type="button">Ratificación/Incremento</button></center>
+             </td>
+           </tr>
+         {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{{/if}}
+<br>
+<div>
+    <button class="btn btn-large btn-block btn-danger cierraSolicitud" type="button">Cancelar</button>
+</div>
+{{/if}}

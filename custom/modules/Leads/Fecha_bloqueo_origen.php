@@ -50,7 +50,9 @@ class Fecha_bloqueo_origen
             }
 
             if(($bean->fetched_row['subtipo_registro_c'] != $bean->subtipo_registro_c && $bean->subtipo_registro_c=='4') ||
-            ($bean->fetched_row['subtipo_registro_c'] != $bean->subtipo_registro_c && $bean->subtipo_registro_c=='3')
+            ($bean->fetched_row['subtipo_registro_c'] != $bean->subtipo_registro_c && $bean->subtipo_registro_c=='3') ||
+            //Se agrega condición para el escenario en el que el lead se cancela desde la casilla de verifcación les_cancelado_c
+            ($bean->lead_cancelado_c == 1 && $bean->motivo_cancelacion_c != '')
             ){//Cambió a Prospecto Convertido/Cancelado, es el evento disparador número 3
                 $bean->fecha_bloqueo_origen_c='2100-01-01';
             }
@@ -65,17 +67,20 @@ class Fecha_bloqueo_origen
             $current_date_time = new SugarDateTime();
             $fecha_actual=$current_date_time->format("Y-m-d");
 
-            $fecha_bloqueo=new SugarDateTime($bean->fecha_bloqueo_origen_c);
-            $fecha_bloqueo_format=$fecha_bloqueo->format("Y-m-d");
+            if($bean->fecha_bloqueo_origen_c!="" && $bean->fecha_bloqueo_origen_c!=null){
+                $fecha_bloqueo=new SugarDateTime($bean->fecha_bloqueo_origen_c);
+                $fecha_bloqueo_format=$fecha_bloqueo->format("Y-m-d");
 
-            $GLOBALS['log']->fatal("Validando fecha de bloqueo antes de cambiar el origen");
-            $GLOBALS['log']->fatal("Fecha actual: ".$fecha_actual. ", Fecha bloqueo: ".$fecha_bloqueo_format);
+                $GLOBALS['log']->fatal("Validando fecha de bloqueo antes de cambiar el origen");
+                $GLOBALS['log']->fatal("Fecha actual: ".$fecha_actual. ", Fecha bloqueo: ".$fecha_bloqueo_format);
 
-            if($fecha_actual <= $fecha_bloqueo_format && !empty($bean->fetched_row['origen_c'])){
-                $GLOBALS['log']->fatal("********** La fecha de bloqueo no se ha cumplido, el origen se queda igual **********");
-                //Aún no se cumple la fecha de bloqueo por lo tanto el valor de "origen" no se puede cambiar
-                $bean->origen_c=$bean->fetched_row['origen_c'];
+                if($fecha_actual <= $fecha_bloqueo_format && !empty($bean->fetched_row['origen_c'])){
+                    $GLOBALS['log']->fatal("********** La fecha de bloqueo no se ha cumplido, el origen se queda igual **********");
+                    //Aún no se cumple la fecha de bloqueo por lo tanto el valor de "origen" no se puede cambiar
+                    $bean->origen_c=$bean->fetched_row['origen_c'];
+                }
             }
+            
 
         }
 

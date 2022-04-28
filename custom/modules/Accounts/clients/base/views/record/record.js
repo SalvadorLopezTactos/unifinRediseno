@@ -248,7 +248,8 @@
         //Oculta Botón Generar RFC
         this.model.on('sync', this.ocultaGeneraRFC, this);
 
-
+        //Oculta Menú Tarea IE Proveedor Quantico
+        this.model.on('sync', this.ocultaproveedor, this);
 
         //Recupera datos para custom fields
         this.get_addresses();
@@ -301,6 +302,7 @@
 
 
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
+		this.context.on('button:proveedor_quantico:click', this.proveedor_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
@@ -310,14 +312,14 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
-        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
 
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
-        //this.model.on('sync', this.deshabilitaOrigenCuenta, this);
+        this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
@@ -805,11 +807,11 @@
 
         /*
          -- Bloquea campos si;
-         1.- Origen es Marketing = 1 o Inteligencia de negocio = 2
+         1.- Origen es Marketing = 1 o Inteligencia de negocio = 2 (Ya no aplica la regla de solo lectura cuando el Origen es Marketing, solo se deja la condición para Inteligencia de negocio)
          2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
          3.- Usuario no está en lista de Usuario que pueden editar
          */
-        if ((origen == "1" || origen == "2") && (puesto != '27' && puesto != '31') && !listaEdicionOrigen.includes(App.user.attributes.id) ) {
+        if ((origen == "2") && (puesto != '27' && puesto != '31') && !listaEdicionOrigen.includes(App.user.attributes.id) ) {
             //Establece como no editables campos de origen
             this.noEditFields.push('origen_cuenta_c');
             this.noEditFields.push('detalle_origen_c');
@@ -901,9 +903,9 @@
         cont_dir.render();
 
         //PLD
-        var accounts_tct_pld_1 = app.utils.deepCopy(this.prev_ProductosPLD);
+        var accounts_tct_pld_1 = app.utils.deepCopy(contexto_cuenta.prev_ProductosPLD);
         this.model.set('accounts_tct_pld_1', accounts_tct_pld_1);
-        this.ProductosPLD = accounts_tct_pld_1;
+        pld.ProductosPLD = accounts_tct_pld_1;
         pld.render();
         //Potencial Autos
         Pautos.autos = app.utils.deepCopy(Pautos.prev_autos);
@@ -945,6 +947,62 @@
         clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
         clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
         clasf_sectorial.render();
+    },
+
+    handleEdit: function(e, cell) {
+        var target,
+            cellData,
+            field;
+
+        if (e) { // If result of click event, extract target and cell.
+            target = this.$(e.target);
+            cell = target.parents('.record-cell');
+            // hide tooltip
+            this.handleMouseLeave(e);
+        }
+
+        cellData = cell.data();
+        field = this.getField(cellData.name);
+
+        // If the focus drawer icon was clicked, open the focus drawer instead
+        // of entering edit mode
+        if (target && target.hasClass('focus-icon') && field && field.focusEnabled) {
+            field.handleFocusClick();
+            return;
+        }
+
+        // Set Editing mode to on.
+        this.inlineEditMode = true;
+
+        this.setButtonStates(this.STATE.EDIT);
+
+        this.toggleField(field);
+
+        if (this.$('.headerpane').length > 0) {
+            this.toggleViewButtons(true);
+            this.adjustHeaderpaneFields();
+        }
+        this.deshabilitaOrigenCuenta();
+    },
+
+    /*
+    Se sobreescribe la función de caja para poder evaluar si los campos de origen se deben de bloquear ya que a nivel de dependencoa
+    no estaba tomando los diapradores para bloquear dichos campos
+    */
+    focusFirstInput: function() {
+        var self = this;
+        $(function() {
+            var $element = (app.drawer && (app.drawer.count() > 0)) ?
+                app.drawer._components[app.drawer.count() - 1].$el
+                : app.$contentEl;
+            var $firstInput = $element.find('input[type=text]').first();
+
+            if (($firstInput.length > 0) && $firstInput.is(':visible')) {
+                $firstInput.focus();
+                self.setCaretToEnd($firstInput);
+            }
+            self.deshabilitaOrigenCuenta();
+        });
     },
 
     bindDataChange: function () {
@@ -1079,7 +1137,7 @@
             self.noEditFields.push('tipo_registro_cuenta_c');
         }
 
-        var origen = this.model.get('origen_cuenta_c');
+        /*var origen = this.model.get('origen_cuenta_c');
         if (origen == "Marketing" || origen == "2") {
             var self = this;
             self.noEditFields.push('origen_cuenta_c');
@@ -1092,7 +1150,7 @@
             self.noEditFields.push('evento_c');
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
-        }
+        }*/
 
         if (App.user.attributes.deudor_factoraje_c != true) {
             //Readonly check factoraje
@@ -1117,9 +1175,9 @@
             if(Banderita!=1){
                 self.noEditFields.push('tipo_proveedor_compras_c');
             }
-                
-            
-          
+
+
+
         }
         this._super('_renderHtml');
     },
@@ -1246,6 +1304,11 @@
 
         //Oculta fecha de bloqueo para saber si el Origen se habilita
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
+
+        //Oculta etiquetas 360
+        this.$('.record-edit-link-wrapper[data-name="account_vista360"]').remove();
+        this.$('div[data-name=account_vista360]').find('div.record-label').addClass('hide');
+
     },
 
     editClicked: function () {
@@ -1261,8 +1324,8 @@
           this.$('div[data-name=rfc_c]').css("pointer-events", "none");
           $('[data-name="generar_rfc_c"]').hide();
         }
-		contexto_cuenta.cambioEdit=1;
-	},
+        contexto_cuenta.cambioEdit=1;
+    },
 
     hideconfiinfo: function () {
         $('div[data-name=account_telefonos]').hide();
@@ -2089,7 +2152,7 @@
         }
         if (this.model.get("tipo_registro_cuenta_c") == "2" && this.model.get("subtipo_registro_cuenta_c") == "2" && totalProspecto == totalProspectoG) {
             //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
-            v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
+            vista360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
             this.model.set("tipo_registro_cuenta_c", "2");
             this.model.set("subtipo_registro_cuenta_c", "1");
             this.model.set("tct_tipo_subtipo_txf_c", "PROSPECTO SIN CONTACTAR");
@@ -2111,12 +2174,12 @@
                         messages: 'Cambio realizado',
                     });
                     //Actualiza modelo vista v360
-                    v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
-                    v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
-                    v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
-                    v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                    vista360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                    vista360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                    vista360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                    vista360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
                     Oproductos.render();
-                    v360.render();
+                    vista360.render();
                 })
             });
         }
@@ -2351,13 +2414,13 @@
                             messages: 'Cambio realizado',
                         });
                         //Actualiza modelo vista v360
-                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
-                        v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
-                        v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
-                        v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
-                        v360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
+                        vista360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
+                        vista360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
+                        vista360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
+                        vista360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
+                        vista360.ResumenCliente.fleet.tipo_cuenta = data.tct_tipo_cuenta_fl_c;
                         Oproductos.render();
-                        v360.render();
+                        vista360.render();
                     })
                 });
             }
@@ -2674,7 +2737,7 @@
                     }
 
                     if (this.model.get("tipo_registro_cuenta_c") == "4" || this.model.get('tipo_registro_cuenta_c') == "5") {
-                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
+                        vista360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
                         this.model.set("tipo_registro_cuenta_c", "2");
                         this.model.set("subtipo_registro_cuenta_list", "1");
                         this.model.set("show_panel_c", 1);
@@ -2693,8 +2756,8 @@
                     api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_l_c = '2';
                     Oproductos.productos.tct_subtipo_l_txf_c = '1';
-                    v360.ResumenCliente.leasing.tipo_cuenta = '2';
-                    v360.ResumenCliente.leasing.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.leasing.tipo_cuenta = '2';
+                    vista360.ResumenCliente.leasing.subtipo_cuenta = '1';
                 }
 
             }
@@ -2706,8 +2769,8 @@
                     api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_ca_c = '2';
                     Oproductos.productos.tct_subtipo_ca_txf_c = '1';
-                    v360.ResumenCliente.credito_auto.tipo_cuenta = '2';
-                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.credito_auto.tipo_cuenta = '2';
+                    vista360.ResumenCliente.credito_auto.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_f_c == "4" || Oproductos.productos.tct_tipo_cuenta_f_c == "5") && productousuario.includes('4')) {
@@ -2718,8 +2781,8 @@
                     api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_f_c = '2';
                     Oproductos.productos.tct_subtipo_f_txf_c = '1';
-                    v360.ResumenCliente.factoring.tipo_cuenta = '2';
-                    v360.ResumenCliente.factoring.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.factoring.tipo_cuenta = '2';
+                    vista360.ResumenCliente.factoring.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_fl_c == "4" || Oproductos.productos.tct_tipo_cuenta_fl_c == "5") && productousuario.includes('6')) {
@@ -2730,8 +2793,8 @@
                     api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_fl_c = '2';
                     Oproductos.productos.tct_subtipo_fl_txf_c = '1';
-                    v360.ResumenCliente.fleet.tipo_cuenta = '2';
-                    v360.ResumenCliente.fleet.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.fleet.tipo_cuenta = '2';
+                    vista360.ResumenCliente.fleet.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_uc_c == "4" || Oproductos.productos.tct_tipo_cuenta_uc_c == "5") && productousuario.includes('8')) {
@@ -2742,8 +2805,8 @@
                     api_params["tct_tipo_cuenta_uc_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_uc_c = '2';
                     Oproductos.productos.tct_subtipo_uc_txf_c = '1';
-                    v360.ResumenCliente.uniclick.tipo_cuenta = '2';
-                    v360.ResumenCliente.uniclick.subtipo_cuenta = '1';
+                    vista360.ResumenCliente.uniclick.tipo_cuenta = '2';
+                    vista360.ResumenCliente.uniclick.subtipo_cuenta = '1';
                 }
             }
             // Actualiza Productos
@@ -2783,7 +2846,7 @@
 
                             cont_uni_p.render();
                             Oproductos.render();
-                            v360.render();
+                            vista360.render();
                             //Deja activa la pestaña de la vista360
                             $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
                             $("#recordTab>li.tab").removeClass('active');
@@ -4094,7 +4157,6 @@
         var faltantesFF = "";
         var faltantesCA = "";
         var faltantesCS = "";
-        var faltantesCR = "";
 
         //Valida requeridos a partir de Prospecto Interesado
         var tipoCuenta = this.model.get('tipo_registro_cuenta_c');
@@ -4192,14 +4254,7 @@
                     title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
                 });
             }
-            if (faltantesCR != "") {
-                errors['PreguntasCR'] = "";
-                errors['PreguntasCR'].required = true;
-                app.alert.show("faltantesCR", {
-                    level: "error",
-                    title: "PLD Crédito Revolvente - Faltan las siguientes preguntas por contestar: <br>" + faltantesCR
-                });
-            }
+
         }
         callback(null, fields, errors);
     },
@@ -4473,8 +4528,8 @@
 
     proveedorRecursos: function (fields, errors, callback) {
         if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" || $('.campo10ddw-ce').select2('val') == "2") {
-
-            var apicall = app.api.buildURL('Rel_Relaciones?filter[0][rel_relaciones_accounts_1accounts_ida][$equals]=' + this.model.get("id"), null);
+            var Cuenta = this.model.get('id')
+            var apicall = app.api.buildURL('Rel_Relaciones/?filter[0][$or][0][account_id1_c][$equals]=' + Cuenta +'&filter[0][$or][1][rel_relaciones_accounts_1accounts_ida][$equals]=' + Cuenta, null, null);
             app.api.call('GET', apicall, {}, {
                 success: _.bind(function (data) {
 
@@ -4484,12 +4539,19 @@
                     var relacioncs = 0;
                     var relacioncr =0;
                     var productos = "";
+                    var esPropietario=false;
+                    var esCLiente=false;
+                    var esTercero=false;
+                    var tieneProvRec=false;
+                    esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
+                    tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
+                    esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo10 =='2') ? true : false;
                     if (data.records.length > 0) {
                         for (var l = 0; l < data.records.length; l++) {
                             //Producto Arrendamiento Puro
                             if (App.user.attributes.productos_c.includes(1) && $('.campo4ddw-ap').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos L')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacionl++;
 
                                 }
@@ -4497,29 +4559,32 @@
                             //Producto Credito Automotriz
                             if (App.user.attributes.productos_c.includes(3) && $('.campo4ddw-ca').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CA')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CA')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacionca++;
                                 }
                             }
                             //Producto Factoraje Financiero
                             if (App.user.attributes.productos_c.includes(4) && $('.campo4ddw-ff').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos F')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos F')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacionff++;
                                 }
                             }
                             //Producto Credito Simple
                             if ($('.campo4ddw-cs').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')&& data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacioncs++;
                                 }
                             }
                             //Credito Envolvente
-                            if (App.user.attributes.productos_c.includes(8) && $('.campo10ddw-ce').select2('val') == "2") {
-
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CR')) {
+                            if ((App.user.attributes.productos_c.includes(8) || App.user.attributes.productos_c.includes(14)) && $('.campo10ddw-ce').select2('val') == "2") {
+                                if (data.records[l].relaciones_activas.includes('Proveedor de los Recursos CR') && data.records[l].rel_relaciones_accounts_1accounts_ida==Cuenta) {
                                     relacioncr++;
+                                    tieneProvRec=true;
+                                }
+                                if (data.records[l].relaciones_activas.includes('Propietario Real') && data.records[l].account_id1_c==Cuenta) {
+                                    esPropietario=true;
                                 }
                             }
                         }
@@ -4563,7 +4628,7 @@
                         $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
                     }
                     //Validacion Credito revolvente
-                    if (relacioncr == 0 && $('.campo10ddw-ce').select2('val') == "2") {
+                    if((!esPropietario && esTercero) || (esCLiente && esTercero) && !tieneProvRec){
                         $('.campo10ddw-ce').find('.select2-choice').css('border-color', 'red');
                         productos = productos + '<b>Crédito Revolvente</b><br>';
                         errors['error_CR'] = errors['error_FPR'] || {};
@@ -5303,16 +5368,16 @@
     //                     var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
     //                     app.api.call('update', uni, params, {
     //                         success: _.bind(function (data) {
-    //                             v360.ResumenCliente.uniclick.tipo_cuenta = '3';
-    //                             v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
-    //                             v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
+    //                             vista360.ResumenCliente.uniclick.tipo_cuenta = '3';
+    //                             vista360.ResumenCliente.uniclick.subtipo_cuenta = '18';
+    //                             vista360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
     //                             app.alert.dismiss('convierte_Cliente_uniclick');
     //                             app.alert.show('errorAlert', {
     //                                 level: 'success',
     //                                 messages: "Se ha realizado la conversión correctamente.",
     //                             });
 
-    //                             v360.render();
+    //                             vista360.render();
     //                             Oproductos.render();
     //                             //Deja activa la pestaña de la vista360
     //                             $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
@@ -6968,21 +7033,50 @@
         var fecha_bloqueo=new Date(this.model.get("fecha_bloqueo_origen_c"));
 
         if(fecha_actual<=fecha_bloqueo){
-            $('[data-name="origen_cuenta_c"]').css({ "pointer-events":"none"});
-            $('[data-name="detalle_origen_c"]').css({ "pointer-events":"none"});
-            $('[data-name="prospeccion_propia_c"]').css({ "pointer-events":"none"});
-            $('[data-name="medio_detalle_origen_c"]').css({ "pointer-events":"none"});
-            $('[data-name="punto_contacto_origen_c"]').css({ "pointer-events":"none"});
+            $('.record-cell[data-name="origen_cuenta_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="origen_cuenta_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="origen_cuenta_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="origen_cuenta_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="origen_cuenta_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="detalle_origen_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="detalle_origen_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="prospeccion_propia_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="medio_detalle_origen_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="medio_detalle_origen_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="medio_detalle_origen_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="medio_detalle_origen_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="medio_detalle_origen_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.edit').addClass('disabled');
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.select2-container').addClass('select2-container-disabled');
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('.select2-container').find('.select2-focusser').attr('disabled',"");
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.normal.index').find('input[type="hidden"]').attr('disabled',"");
+            $('.record-cell[data-name="punto_contacto_origen_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
             $('[data-name="evento_c"]').css({ "pointer-events":"none"});
             $('[data-name="camara_c"]').css({ "pointer-events":"none"});
             $('[data-name="tct_que_promotor_rel_c"]').css({ "pointer-events":"none"});
+            $('[data-name="codigo_expo_c"]').css({ "pointer-events":"none"});
+            $('.record-cell[data-name="codigo_expo_c"]').find('.record-edit-link-wrapper').addClass('hide');
+
+
         }
     },
 
     estableceOpcionesOrigen:function(){
         var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
 
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth
             Object.keys(opciones_origen).forEach(function (key) {
                 if (key == "14" || key == "15") {
                     delete opciones_origen[key];
@@ -7848,9 +7942,9 @@ validaReqUniclickInfo: function () {
                 //Validaciones para Clasificacion Sectorial y V360
                 if (data[2].contents!=""){
                     //Extiende This
-                    v360.ResumenCliente = [];
-                    v360.ResumenCliente=data[2].contents;
-                    v360.render();
+                    vista360.ResumenCliente = [];
+                    vista360.ResumenCliente=data[2].contents;
+                    vista360.render();
                     //Etiquetas del campo custom Clasificacion Sectorial
                     clasf_sectorial.ActividadEconomica = {
                         // 'combinaciones': '',
@@ -8011,6 +8105,13 @@ validaReqUniclickInfo: function () {
                                     Oproductos.productos.tct_tipo_cuenta_se_c = Productos[key]['tipo_cuenta'];
                                     Oproductos.productos.tct_subtipo_se_txf_c = Productos[key]['subtipo_cuenta'];
                                     break;
+                                case "14": //Tarjeta Crédito
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['tarjetaCredito'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_tc_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_tc_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
                                 default:
                                     break;
                             }
@@ -8074,9 +8175,9 @@ validaReqUniclickInfo: function () {
                 if (data[7].contents!=""){
                     this.datacondiciones = [];
                     if(data[7].contents.records.length > 0) {
-                contexto_cuenta.datacondiciones = data;
-                this.datacondiciones = data;
-            }
+                      contexto_cuenta.datacondiciones = data[7].contents;
+                      this.datacondiciones = data[7].contents;
+                    }
                 }
                 //Final de funcion, mandamos ejecutar funcion de requniclick
                 this.validaReqUniclickInfo();
@@ -8171,7 +8272,93 @@ validaReqUniclickInfo: function () {
                 this.model.set("parent_name","");
                 this.model.set("parent_id","");
             }
+            //Si se tiene la combinación 3 y 4 se borra el valor 4
+            if(tipo_gp_emp.includes('3') && tipo_gp_emp.includes('4')){
+                delete tipo_gp_emp[tipo_gp_emp.indexOf('4')];
+                this.model.set("situacion_gpo_empresarial_c",tipo_gp_emp);
+            }
         }
     },
 
+
+    ocultaproveedor: function () {
+		var Proveedor = 0;
+        var Boton1 = this.getField("proveedor_quantico");
+		if (this.model.get("esproveedor_c") || this.model.get("tipo_registro_cuenta_c") == 5) Proveedor = 1;
+        if (Boton1) {
+            Boton1.listenTo(Boton1, "render", function () {
+                if (Proveedor) {
+                    Boton1.show();
+                } else {
+                    Boton1.hide();
+                }
+            });
+        }
+    },
+
+    proveedor_quantico:function(){
+        //Creación de tarea de integración de expediente de proveedor en Quantico
+        app.alert.show('proveedor_quantico', {
+            level: 'process',
+            title: 'Creando tarea de integración de expediente en Quantico para el proveedor, por favor espere.',
+        });
+        app.api.call("read", app.api.buildURL("tarea_quantico/" + this.model.get('id'), null, null, {}), null, {
+            success: _.bind(function (data) {
+                app.alert.dismiss('proveedor_quantico');
+				app.alert.show('tarea_quantico', {
+                    level: 'warning',
+                    messages: data,
+                });
+            }, this),
+        });
+    },
+validaPropRealCR: function (fields, errors, callback) {
+        var esPropietario=false;
+       var esCLiente=false;
+       var esTercero=false;
+       var tienePR=false;
+
+       esCLiente=(this.model.get('tipo_registro_cuenta_c')=="3") ? true : false;
+       esTercero=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo8=='2') ? true : false;
+       tienePR=(contexto_cuenta.ProductosPLD.creditoRevolvente.campo9=='') ? false : true;
+
+
+        if(App.user.attributes.productos_c.includes('14')){
+                if((this.model.get('tipo_registro_cuenta_c')!="4" || this.model.get('tipo_registro_cuenta_c')!="5")){
+
+                    //Realizamos apicall para buscar que la cuenta tenga alguna relacion con otra
+                    var Cuenta=this.model.get('id');
+                    var consulta = app.api.buildURL('Rel_Relaciones/?filter[0][account_id1_c][$equals]=' + Cuenta, null, null);
+                       app.api.call('read', consulta, {}, {
+                           success: _.bind(function (data) {
+                               if(data.records.length>0){
+                                   //Validamos que las relaciones sean de tipo Propietario Real
+                                   for (var i = 0; i < data.records.length; i++) {
+                                       if (data.records[i].relaciones_activas.includes('Propietario Real')) {
+                                           esPropietario=true;
+                                       }
+                                   }
+                               }
+                                if((!esPropietario && esTercero && !tienePR) || (esCLiente && esTercero && !tienePR)){
+                                    $('.campo9rel-ce').find('.select2-choice').css('border-color', 'red');
+
+                                       app.alert.show("existen_relaciones_PR", {
+                                       level: "error",
+                                       messages: "Favor de seleccionar un <b>Propietario Real</b> en la sección de PLD- Crédito Revolvente.",
+                                       autoClose: false
+                                       });
+                                       errors['propetariorealCR'] = errors['propetariorealCR'] || {};
+                                       errors['propetariorealCR'].required = true;
+
+                               }
+                               callback(null, fields, errors);
+                           }, this)
+                        });
+                }else{
+                    callback(null, fields, errors);
+                }
+       }else{
+           callback(null, fields, errors);
+       }
+   },
 })

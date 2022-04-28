@@ -185,7 +185,7 @@ class altaLeadServices extends SugarApi
         if ($data_result['lead']['status'] == 200) {
             //$GLOBALS['log']->fatal("origen " . $origen);
             //$GLOBALS['log']->fatal("detalleOrigen " . $detalleOrigen);
-            
+
                 $id_lead = $data_result['lead']['id'];
 
                 $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
@@ -209,18 +209,18 @@ class altaLeadServices extends SugarApi
                     $db->query($update_assigne_user);
                 }
         }elseif ($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') {
-            
+
             if ($data_result['asociados'][0]['status'] == 200) {
                 $id_lead = $data_result['lead']['id'];
                 $id_lead_asociado = $data_result['asociados'][0]['id'];
-    
+
                 $select_Existente = "Select assigned_user_id from leads where id='$id_lead'";
                 $result_existente = $db->query($select_Existente);
                 $row = $db->fetchByAssoc($result_existente);
                 $existente_asignado = $row['assigned_user_id'];
-    
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET 
-                l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$existente_asignado'  
+
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET
+                l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$existente_asignado'
                 WHERE l.id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user);
             }
@@ -322,7 +322,7 @@ class altaLeadServices extends SugarApi
                 $GLOBALS['log']->fatal("UNIFIN-PRODUCTO-FINANCIERO-UNILEASE "  . $new_assigned_user);
             }
                 //VALIDACION DE ASESORES UNICLICK RESPONSABLES
-            if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { 
+            if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) {
                 //COMPANIA UNICLICK, ORIGEN   ALIANZAS Y DETALLE ORIGEN
                 $new_assigned_user = $idAsesorAlianza;
                 $flagCarrusel = 0;
@@ -350,7 +350,7 @@ class altaLeadServices extends SugarApi
                 user.date_entered,
                 count(lead.assigned_user_id) AS total_asignados,
                 uc.access_hours_c
-                FROM users user 
+                FROM users user
                 INNER JOIN users_cstm uc ON uc.id_c = user.id
                 LEFT JOIN leads lead ON lead.assigned_user_id = user.id
                 where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
@@ -387,7 +387,7 @@ class altaLeadServices extends SugarApi
                     if ($compania_c == 2 && $origen == 1) { //COMPANIA UNICLICK Y ORIGEN MARKETING
                         $new_assigned_user = $users[$new_indice];
                         $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL");
-                    } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) { 
+                    } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) {
                         //COMPANIA UNICLICK,  ORIGEN ALIANZAS Y DETALLE ORIGEN
                         $new_assigned_user = $users[$new_indice];
                         $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ALIANZA-CARRUSEL");
@@ -414,9 +414,9 @@ class altaLeadServices extends SugarApi
             INNER JOIN users_cstm uc ON uc.id_c = user.id
             LEFT JOIN leads lead ON lead.assigned_user_id = user.id
             WHERE user.status = 'Active' AND equipo_c = 7
-            GROUP BY lead.assigned_user_id , user.id 
+            GROUP BY lead.assigned_user_id , user.id
             ORDER BY total_asignados,date_entered ASC LIMIT 1";
-                
+
             $result_rm = $db->query($query_revista);
             $conteo = $result_rm->num_rows;
 
@@ -439,7 +439,7 @@ class altaLeadServices extends SugarApi
         global $db, $app_list_strings;
         $users = [];
         $asigna = 0;
-        $bean = null; 
+        $bean = null;
 
         if($tipo == 2) $bean = BeanFactory::retrieveBean('Leads', $lead_asociado,array('disable_row_level_security' => true));
         if($tipo == 3 ) $bean = BeanFactory::retrieveBean('Accounts', $lead_asociado,array('disable_row_level_security' => true));
@@ -448,40 +448,40 @@ class altaLeadServices extends SugarApi
         $GLOBALS['log']->fatal("tipo" . $tipo);
         if($tipo != 1){
             if($tipo == 3){
-                $quer_inactiv = "SELECT id, status, first_name , last_name FROM users 
+                $quer_inactiv = "SELECT id, status, first_name , last_name FROM users
                     WHERE id = ( SELECT up.assigned_user_id from accounts a
-                    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida 
-                    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id 
+                    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida
+                    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id
                     where a.id = '{$lead_asociado}' and up.tipo_producto = 1 ) and status = 'Inactive'";
                 $GLOBALS['log']->fatal("quer_inactiv" . print_r($quer_inactiv, true));
                 $inactive = $db->query($quer_inactiv);
-                $quer_9_0 = "SELECT id, status, first_name , last_name FROM users 
+                $quer_9_0 = "SELECT id, status, first_name , last_name FROM users
                     WHERE ((first_name like '%9%' and status = 'Active') OR (last_name like '%Pendiente%'))
                     AND id = ( SELECT up.assigned_user_id from accounts a
-                    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida 
-                    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id 
+                    inner join accounts_uni_productos_1_c aupc on a.id = aupc.accounts_uni_productos_1accounts_ida
+                    inner join uni_productos up on aupc.accounts_uni_productos_1uni_productos_idb = up.id
                     where a.id = '{$lead_asociado}' and up.tipo_producto = 1 )";
                 $GLOBALS['log']->fatal("quer_9_0" . print_r($quer_9_0, true));
                 $res_9_0 = $db->query($quer_9_0);
             }
-            
+
             if($tipo == 2){
-                $quer_inactiv = "SELECT id, status, first_name , last_name FROM users 
+                $quer_inactiv = "SELECT id, status, first_name , last_name FROM users
                 WHERE id = ( SELECT l.assigned_user_id from leads l where l.id = '{$lead_asociado}' ) and status = 'Inactive'";
                 $GLOBALS['log']->fatal("quer_inactiv" . print_r($quer_inactiv, true));
                 $inactive = $db->query($quer_inactiv);
-                $quer_9_0 = "SELECT id, status, first_name , last_name FROM users 
+                $quer_9_0 = "SELECT id, status, first_name , last_name FROM users
                 WHERE ((first_name like '%9%' and status = 'Active') OR (last_name like '%Pendiente%'))
                 AND id = ( SELECT l.assigned_user_id from leads l where l.id = '{$lead_asociado}')";
                 $GLOBALS['log']->fatal("quer_9_0" . print_r($quer_9_0, true));
                 $res_9_0 = $db->query($quer_9_0);
             }
-            
+
             if($inactive->num_rows > 0 || $res_9_0->num_rows > 0 ){
                 $asigna = 1;
             }
         }
-        
+
         if($asigna){
             /* Obtiene el ultimo  usuario asignado y registrado en el config*/
             $query = "SELECT value from config where category = 'AltaLeadsServices' and name = 'id_ultimo_alianza_soc'";
@@ -491,9 +491,9 @@ class altaLeadServices extends SugarApi
             $last_indice = $last_indice == "" ? 0 : $last_indice;
             $GLOBALS['log']->fatal("last_indice" . $last_indice);
 
-            $query_soc = "SELECT user.id, user.date_entered, count(lead.assigned_user_id) AS total_asignados 
-            FROM users user LEFT JOIN leads lead ON lead.assigned_user_id = user.id 
-            where user.status = 'Active' AND user.id in ( 
+            $query_soc = "SELECT user.id, user.date_entered, count(lead.assigned_user_id) AS total_asignados
+            FROM users user LEFT JOIN leads lead ON lead.assigned_user_id = user.id
+            where user.status = 'Active' AND user.id in (
                 SELECT value from config where category = 'AltaLeadsServices' and name = 'id_usuario_asignar_alianza_soc' )
             GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
             $GLOBALS['log']->fatal("query_soc" . print_r($query_soc, true));
@@ -537,10 +537,10 @@ class altaLeadServices extends SugarApi
                 $bean->alianza_soc_chk_c = 1;
                 $bean->save();
             }
-            
+
 
             if ($new_indice > -1) {
-                $update_assigne_user = "UPDATE config SET value = $new_indice  
+                $update_assigne_user = "UPDATE config SET value = $new_indice
                 WHERE category = 'AltaLeadsServices' and name = 'id_ultimo_alianza_soc'";
                 $db->query($update_assigne_user);
             }
@@ -584,12 +584,12 @@ class altaLeadServices extends SugarApi
                     $this->crea_relacion($parent_id, $lead_asociado['duplicados_en_leads']);
                 }
                 $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_leads'], "Leads", "");
-                
+
             }
         } else {
             $GLOBALS['log']->fatal("duplicados_en_cuentas" , $lead_asociado['duplicados_en_cuentas'] );
             $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_cuentas'], "Cuentas", "");
-            
+
         }
         return $response;
     }
@@ -624,6 +624,14 @@ class altaLeadServices extends SugarApi
 
         if( $dataOrigen['origen_c'] == '12' && $dataOrigen['detalle_origen_c'] == '12'){
             $bean_Lead->alianza_soc_chk_c = 1;
+        }
+        //Validacion para Vendors y enviar el Referido (id)
+        if($dataOrigen['origen_c'] == '8'){
+            $bean_Lead->account_id_c = $dataOrigen['account_id_c'];
+        }
+        //Validacion para referenciado socio comercial
+        if($dataOrigen['origen_c'] == '6'){
+            $bean_Lead->account_id1_c = $dataOrigen['account_id1_c'];
         }
 
         $prospeccion_propia = $dataOrigen['prospeccion_propia_c']; # Prospeccion propia
@@ -742,8 +750,8 @@ class altaLeadServices extends SugarApi
                 $bean_Lead->punto_contacto_c = $dataOrigen['punto_contacto_c'];
                 break;
         }*/
+        $bean_Lead->codigo_expo_c = $dataOrigen['codigo_expo_c'];
         $bean_Lead->punto_contacto_c = $punto_contacto;
-
         $bean_Lead->origen_ag_tel_c = $dataOrigen['origen_ag_tel_c'];
         $bean_Lead->promotor_c = $dataOrigen['promotor_c'];
         $bean_Lead->origen_busqueda_c = $dataOrigen['origen_busqueda_c'];

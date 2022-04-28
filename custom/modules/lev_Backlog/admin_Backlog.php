@@ -38,7 +38,8 @@ class class_Backlog_Admin
               }
             }
         }
-        $bean->rango_bl_c = ($valorMonto=='') ? '' : $rangoEncontrado;
+        $bean->rango_bl_c = ($valorMonto=='') ? '' : $rangoEncontrado; //Valida suma de montosº
+        $bean->rango_bl_c = ($bean->estatus_operacion_c=='1') ? '' : $rangoEncontrado; //Valida estatus de operación: Cancelado = 1
 
     }
 }

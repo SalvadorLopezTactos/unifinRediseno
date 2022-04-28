@@ -35,7 +35,7 @@ class IntegracionQuantico
         $row = $bean->db->fetchByAssoc($queryResult);
         //condiciones
         $generaSolicitud = false;
-        $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c != '6' && ($bean->tipo_producto_c != '1' || ($bean->tipo_producto_c=='2' && ($bean->negocio_c=='2' || $bean->negocio_c=='10')))) ? true : $generaSolicitud;
+        $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c != '6' && ($bean->tipo_producto_c != '1' || ($bean->tipo_producto_c=='2' && ($bean->negocio_c=='2' || $bean->negocio_c=='10'))) && $bean->estatus_c!='1' ) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && ($bean->tipo_producto_c == '1' || ($bean->tipo_producto_c=='2' && ($bean->negocio_c!='2' || $bean->negocio_c!='10'))) && $bean->vobo_dir_c == true) ? true : $generaSolicitud;
 		    //$generaSolicitud = ($bean->tipo_producto_c == '3' || $bean->producto_financiero_c == '40' || ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && ($bean->tipo_producto_c != '1' || ($bean->tipo_producto_c=='2' && ($bean->negocio_c=='2' || $bean->negocio_c=='10'))))) ? true : $generaSolicitud;
         $generaSolicitud = ($bean->tipo_producto_c == '3' || $bean->producto_financiero_c == '40') ? true : $generaSolicitud;
@@ -45,8 +45,9 @@ class IntegracionQuantico
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $bean->negocio_c == '3') ? true : $generaSolicitud;
 		    $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '1') ? false: $generaSolicitud;
+        $generaSolicitud = $bean->tipo_producto_c == '14' ? false: $generaSolicitud;
 
-        if ( ( ($bean->id_process_c != "" && $iniciaPUni2) || (!$iniciaPUni2) ) && $bean->idsolicitud_c != "" && $bean->quantico_id_c == "" && $generaSolicitud) {
+        if ( ( ($bean->id_process_c != "" && $iniciaPUni2) || (!$iniciaPUni2) ) && $bean->idsolicitud_c != "" && $bean->quantico_id_c == "" && $generaSolicitud && !$bean->tct_oportunidad_perdida_chk_c) {
             $GLOBALS['log']->fatal("Inicia Petición de integración con Quantico");
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 

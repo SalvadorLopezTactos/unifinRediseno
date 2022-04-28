@@ -1,21 +1,22 @@
 <?php
- // created: 2021-10-27 13:17:08
+ // created: 2022-04-06 17:12:07
 $dictionary['tct4_Condiciones']['fields']['razon']['visibility_grid']=array (
   'trigger' => 'condicion',
   'values' => 
   array (
     1 => 
     array (
-      0 => '1',
-      1 => '2',
-      2 => '3',
-      3 => '4',
-      4 => '16',
+      0 => '17',
+      1 => '18',
+      2 => '19',
+      3 => '1',
+      4 => '2',
+      5 => '3',
+      6 => '4',
     ),
     2 => 
     array (
       0 => '5',
-      1 => '15',
     ),
     3 => 
     array (
@@ -40,5 +41,6 @@ $dictionary['tct4_Condiciones']['fields']['razon']['visibility_grid']=array (
     ),
   ),
 );
+$dictionary['tct4_Condiciones']['fields']['razon']['hidemassupdate']=false;
 
  ?>
