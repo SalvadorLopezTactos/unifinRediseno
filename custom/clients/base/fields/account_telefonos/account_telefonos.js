@@ -372,7 +372,7 @@
         }
     },
 
-    createcallGen: function (tel_client) {
+    createcallGen: function (tel_client , id_client) {
       
       var posiciones = App.user.attributes.posicion_operativa_c;
       var posicion = '';
@@ -382,7 +382,10 @@
             number: tel_client,
             type: "call",
             autoPlace: true,
-            attributes: {}
+            attributes: {
+                contact_id: id_client,
+                contact_type: "Accounts"
+            }
         });
     },
 
@@ -393,6 +396,7 @@
         var gen = App.user.attributes.llamada_genesys_c;
         var posicion = '';
         var name_client = this.model.get('name');
+        var id_client = this.model.get('id');
         if(posiciones.includes(3)) posicion = 'Ventas';
         if(posiciones.includes(4)) posicion = 'Staff';
         var Params = {
@@ -405,7 +409,7 @@
             'ext_usuario': App.user.attributes.ext_c
         };
         if(gen){
-            self.createcallGen(tel_client);
+            self.createcallGen(tel_client , id_client);
         }else{
             //Ejecuta petición para generar llamada
             app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
