@@ -61,6 +61,9 @@
 		this.model.on('sync', this.roDescription, this);
 		this.model.on('sync', this.muestrAlerta, this);
         this.omiteLlamadaPreventiva();
+		 // @author Erick de jesus	//Se manda a llamar función para omitir opción de puesto de investigacion de mercados
+        this.llamadaInvMercados();
+        
     },
 
     abre: function () {
@@ -1175,5 +1178,24 @@
                 autoClose: false
             });
         }
+    },
+	
+	/*
+     @author Erick de jesus
+     Se omite la opción de "encuesta exitosa" y "encuesta no exitosa" dentro del campo resultado de llamada
+     * */
+    llamadaInvMercados: function () {
+        var puesto = App.user.attributes.puestousuario_c;
+        
+        var new_options = app.lang.getAppListStrings('tct_resultado_llamada_ddw_list');
+       
+        Object.keys(new_options).forEach(function (key) {
+            if (key.indexOf("Encuesta") !== -1 && puesto != "63"){
+                delete new_options[key];
+            }
+        });
+        
+        this.model.fields['tct_resultado_llamada_ddw_c'].options = new_options;
+
     },
 })
