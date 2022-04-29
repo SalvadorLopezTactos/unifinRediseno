@@ -65,4 +65,5 @@ $app_list_strings['puestousuario_c_list']=array (
   60 => 'COMERCIAL SEGUROS UNIFIN',
   61 => 'ASESOR CAC',
   62 => 'ASESOR HUNTER',
+  63 => 'INVESTIGACIÓN DE MERCADOS',
 );

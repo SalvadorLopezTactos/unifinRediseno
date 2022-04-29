@@ -12,4 +12,6 @@ $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   'Razon_Social' => 'Con seguimiento en otra Razón Social',
   'Llamada_servicio' => 'Seguimiento',
   'Llamada_preventiva' => 'Llamada Preventiva',
+  'Encuesta_Exitosa' => 'Encuesta Exitosa',
+  'Encuesta_no_Exitosa' => 'Encuesta no Exitosa',
 );
