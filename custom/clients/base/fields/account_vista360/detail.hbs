@@ -16,23 +16,23 @@
                                 <td>{{ResumenCliente.general_cliente.tipo}}</td>
                             </tr>
                             {{#if ResumenCliente.general_cliente.show_if_linea_autorizada}}
-                            <tr>
-                                <td><strong>Cliente desde</strong></td>
-                                <td>{{ResumenCliente.general_cliente.cliente_desde}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Cliente desde</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.cliente_desde}}</td>
+                                </tr>
                             {{/if}}
                             <tr>
                             {{#if ResumenCliente.general_cliente.muestra_gpo_empresarial}}
-                            <tr>
-                                <td><strong>Grupo Empresarial</strong>&nbsp;&nbsp;<i class="fa fa-eye fa-md gpoEmpresarial"></i></td>
-                                <td>{{ResumenCliente.general_cliente.grupo_empresarial}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Grupo Empresarial</strong>&nbsp;&nbsp;<i class="fa fa-eye fa-md gpoEmpresarial"></i></td>
+                                    <td>{{ResumenCliente.general_cliente.grupo_empresarial}}</td>
+                                </tr>
                             {{/if}}
                             {{#if ResumenCliente.general_cliente.show_if_linea_autorizada}}
-                            <tr>
-                                <td><strong>Productos Contratados</strong></td>
-                                <td>{{ResumenCliente.general_cliente.productos_contratados}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Productos Contratados</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.productos_contratados}}</td>
+                                </tr>
                             {{/if}}
                             <tr>
                                 <td><strong>Actividad Económica</strong></td>
@@ -51,29 +51,29 @@
                                 <td>{{ResumenCliente.general_cliente.fecha_cons_nac}}</td>
                             </tr>
                             {{#if ResumenCliente.general_cliente.show_if_linea_autorizada}}
-                            <tr>
-                                <td><strong>Score Crédito</strong></td>
-                                <td>{{ResumenCliente.general_cliente.score_credito}}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Status Cobranza</strong></td>
-                                <td>{{ResumenCliente.general_cliente.score_credito}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Score Crédito</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.score_credito}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status Cobranza</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.score_credito}}</td>
+                                </tr>
                             {{/if}}
-                            {{#if ResumenCliente.general_cliente.muestra_gpo_empresarial}}
                             <tr>
                                 <td><strong>Núm de Empleados</strong></td>
                                 <td>{{ResumenCliente.general_cliente.num_empleados}}</td>
                             </tr>
+                            {{#if ResumenCliente.general_cliente.tiene_condicion}}
+                                <tr>
+                                    <td><strong>Condición del Cliente</strong></td>
+                                    <td>
+                                        {{ResumenCliente.general_cliente.condicion}}<br>
+                                        {{ResumenCliente.general_cliente.condicion2}}<br>
+                                        {{ResumenCliente.general_cliente.condicion3}}
+                                    </td>
+                                </tr>
                             {{/if}}
-                            <tr>
-                                <td><strong>Condición del Cliente</strong></td>
-                                <td>
-                                    {{ResumenCliente.general_cliente.condicion}}<br>
-                                    {{ResumenCliente.general_cliente.condicion2}}<br>
-                                    {{ResumenCliente.general_cliente.condicion3}}
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -92,7 +92,11 @@
                 {{#if ResumenCliente.contactos.tiene_negocio}}
                     <div style="text-align: center;">
                         <p style="font-size: 10px;padding:8px">
-                            <b>CONTACTO DE NEGOCIOS</b>
+                            {{#if ResumenCliente.contactos.rel_activa_negocio}}
+                                <b>CONTACTO DE NEGOCIOS</b>
+                            {{else}}
+                                <b>CONTACTO SECUNDARIO</b>
+                            {{/if}}
                         </p>
                     </div>
                     <div class="information-contacts-container">
