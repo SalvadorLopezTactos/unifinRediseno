@@ -3,6 +3,11 @@
     initialize: function(options) {
         this._super('initialize', [options]);
         this.context.on('button:add_iws:click', this._openIWSInteractionModal, this);
+        // @author Erick de jesus
+        //Se manda a llamar función para omitir opción de puesto de investigacion de mercados
+        //this.model.on('sync', this.llamadaInvMercados, this);
+        this.llamadaInvMercados();
+        
         this.on('render', this._checkIWSToolbar, this);
     },
 
@@ -57,5 +62,24 @@
             this.layout.$el.append(quickCreateView.$el);
         }
         this.layout.trigger("app:view:viewinteraction");
+    },
+
+    /*
+     @author Erick de jesus
+     Se omite la opción de "encuesta exitosa" y "encuesta no exitosa" dentro del campo resultado de llamada
+     * */
+    llamadaInvMercados: function () {
+        var puesto = App.user.attributes.puestousuario_c;
+        
+        var new_options = app.lang.getAppListStrings('tct_resultado_llamada_ddw_list');
+       
+        Object.keys(new_options).forEach(function (key) {
+            if (key.indexOf("Encuesta") !== -1 && puesto != "63"){
+                delete new_options[key];
+            }
+        });
+        
+        this.model.fields['tct_resultado_llamada_ddw_c'].options = new_options;
+
     },
 })
