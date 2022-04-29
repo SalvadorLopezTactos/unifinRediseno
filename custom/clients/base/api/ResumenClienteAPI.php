@@ -100,6 +100,7 @@ class ResumenClienteAPI extends SugarApi
             "sector_economico" => "Sin Especificar",
             "grupo_empresarial" => "Sin Grupo empresarial",
             "nivel_satisfaccion" => "Sin Clasificar",
+            "tiene_condicion" => false,
             "color" => $Azul);
 
         $arr_principal['contactos'] = array(
@@ -112,7 +113,8 @@ class ResumenClienteAPI extends SugarApi
             "telefono_secundario" => "",
             "correo_secundario" => "",
             "tiene_negocio" => false,
-            "tiene_secundario" =>false
+            "tiene_secundario" =>false,
+            "rel_activa_negocio" => false,
         );
         //Leasing
         $arr_principal['leasing'] = array("linea_autorizada" => "",
@@ -919,6 +921,7 @@ class ResumenClienteAPI extends SugarApi
         				$arr_principal['general_cliente']['condicion'] = $app_list_strings['condicion_cliente_list'][$beanResumen->condicion_cliente_c];
         				$arr_principal['general_cliente']['condicion2'] = $app_list_strings['condicion_cliente_list'][$beanResumen->condicion2_c];
         				$arr_principal['general_cliente']['condicion3'] = $app_list_strings['condicion_cliente_list'][$beanResumen->condicion3_c];
+                $arr_principal['general_cliente']['tiene_condicion'] = (!empty($arr_principal['general_cliente']['condicion']) || !empty($arr_principal['general_cliente']['condicion2']) || !empty($arr_principal['general_cliente']['condicion3'])) ? true: false;
             }
         }
 
@@ -1245,6 +1248,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['contactos']['telefono_negocios'] = $telefono_principal_negocio;
                         $arr_principal['contactos']['correo_negocios'] = $beanRelacionNegocios->email1;
                         $arr_principal['contactos']['tiene_negocio'] = true;
+                        $arr_principal['contactos']['rel_activa_negocio'] = (strpos($rel->relaciones_activas, 'Negocios') !== false) ? true: false;
 
                         $count++;
 
