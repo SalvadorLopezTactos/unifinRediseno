@@ -268,6 +268,35 @@ class ResumenClienteAPI extends SugarApi
             "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
             "subtipo_cuenta"=>"",
+            "fecha_vencimiento" => "",//más proxima
+            "fecha_completa_vencimiento" => "",
+            "linea_disponible" => "",
+            "potencial" => "",
+            "fecha_pago" => "",//mas lejana
+            "anexos_activos" => 0,
+            "anexos_historicos" => 0,
+            "nivel_satisfaccion" => "Sin Clasificar",
+            "promotor" => "",
+            "color" => "",
+            "promotorId" => "",
+            "ultima_cita" => "",
+            "ultima_llamada" => "",
+            "estatusxproducto" => "",
+            "estatus_linea" => "",
+            "vencimiento_anexo_final" => "",
+            "vencimiento_siguiente_anexo" => "",
+            "fecha_proximo_pago" => "",
+            "mensualidad_activa" => "",
+            "dias_atraso" => 0,
+            "muestra_producto" => false,
+            "es_prospecto_cliente" => false,
+            "tiene_linea_autorizada" => false,
+        );
+        //Unifactor
+        $arr_principal['tarjeta_credito'] = array("linea_autorizada" => "",
+            "estatus_atencion"=>"",
+            "tipo_cuenta"=>"",
+            "subtipo_cuenta"=>"",
             "fecha_vencimiento"=>"",
             "linea_disponible" => "",
             "promotor" => "",
@@ -493,6 +522,16 @@ class ResumenClienteAPI extends SugarApi
                     case '10': //Seguros
                         $arr_principal['seguros']['cobranza'] = $cobranza;
                         break;
+                    case '14': //Tarjeta Crédito
+                        $arr_principal['tarjeta_credito']['cobranza'] = $cobranza;
+                        $arr_principal['tarjeta_credito']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['tarjeta_credito']['subtipo_cuenta'] = $subtipoCuenta;
+                        $arr_principal['tarjeta_credito']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['tarjeta_credito']['cobranza'] = $cobranza;
+                        $arr_principal['tarjeta_credito']['estatusxproducto'] = $estatusxproducto;
+                        $arr_principal['tarjeta_credito']['promotor']= $asignado;
+                        $arr_principal['tarjeta_credito']['promotorId']= $asignadoId;
+                        break;
                     default:
                         break;
                 }
@@ -561,7 +600,7 @@ class ResumenClienteAPI extends SugarApi
                     //Agrega Operaciones asociadas
                     $operaciones_ids .= ",'$opps->id'";
                     //Control para leasing
-                    if ($opps->tipo_producto_c == 1 && $opps->negocio_c == 5 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
+                  if ($opps->tipo_producto_c == 1 /*&& $opps->negocio_c == 5 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")*/) {
                         $arr_principal['leasing']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['leasing']['tiene_linea_autorizada'];
                         $linea_aut_leasing += $opps->monto_c;
                         $linea_disp_leasing += $opps->amount;
@@ -722,8 +761,8 @@ class ResumenClienteAPI extends SugarApi
                         }
                     }
 
-                    //control para Crédito simple
-                    if ($opps->tipo_producto_c == 2 && $opps->estatus_c != 'K') {
+                    //control para Crédito simple | No cuenta solicitudes de negocio Uniclick
+                    if ($opps->tipo_producto_c == 2 && $opps->estatus_c != 'K' && $opps->negocio_c != 10 ) {
                         $arr_principal['credito_simple']['muestra_producto'] = true;
                         $linea_aprox_cs += $opps->monto_c;
                         $linea_disp_cs += $opps->amount;
@@ -732,14 +771,16 @@ class ResumenClienteAPI extends SugarApi
                         if (!empty($opps->vigencialinea_c)) {
                 						//Establece fecha de vencimiento
                 						$dateVCS = $opps->vigencialinea_c;
-                						$timedateVCS = Date($dateCS);
+                						$timedateVCS = Date($dateVCS);
                 						//Compara fechas
                 						if ($dateVCS > $vencimiento_cs || empty($vencimiento_cs)) {
                 						   $vencimiento_cs = $dateVCS;
                 						}
+                            $estatus_linea_cs = ($timedateVCS>=$fecha_actual) ? 'Vigente' : $estatus_linea_cs;
                 						$arr_principal['credito_simple']['linea_autorizada'] = $linea_aprox_cs;
                 						$arr_principal['credito_simple']['fecha_vencimiento'] = $vencimiento_cs;
                 						$arr_principal['credito_simple']['linea_disponible'] = $linea_disp_cs;
+                            $arr_principal['credito_simple']['estatus_linea'] = $estatus_linea_cs;
                         }
                     }
 
@@ -763,6 +804,29 @@ class ResumenClienteAPI extends SugarApi
                             $arr_principal['unilease']['linea_autorizada'] = $linea_aprox_unilease;
                             $arr_principal['unilease']['fecha_vencimiento'] = $vencimiento_unilease;
                             $arr_principal['unilease']['linea_disponible'] = $linea_disp_sos;
+                        }
+                    }
+
+                    //control para Tarjeta de Crédito
+                    if ($opps->tipo_producto_c == 14) {
+                        $arr_principal['tarjeta_credito']['muestra_producto'] = true;
+                        $linea_aprox_tc += $opps->monto_c;
+                        $linea_disp_tc += $opps->amount;
+                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
+                        /*********************************/
+                        if (!empty($opps->vigencialinea_c)) {
+                						//Establece fecha de vencimiento
+                						$dateVTC = $opps->vigencialinea_c;
+                						$timedateVTC = Date($dateVTC);
+                						//Compara fechas
+                						if ($dateVTC > $vencimiento_tc || empty($vencimiento_tc)) {
+                						   $vencimiento_tc = $dateVTC;
+                						}
+                            $estatus_linea_tc = ($timedateVTC>=$fecha_actual) ? 'Vigente' : $estatus_linea_tc;
+                						$arr_principal['tarjeta_credito']['linea_autorizada'] = $linea_aprox_tc;
+                						$arr_principal['tarjeta_credito']['fecha_vencimiento'] = $vencimiento_tc;
+                						$arr_principal['tarjeta_credito']['linea_disponible'] = $linea_disp_tc;
+                            $arr_principal['tarjeta_credito']['estatus_linea'] = $estatus_linea_tc;
                         }
                     }
 
@@ -811,6 +875,7 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['uniclick']['ultima_cita'] = ($row['assigned_user_id'] == $arr_principal['uniclick']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['uniclick']['ultima_cita'];
                 $arr_principal['unilease']['ultima_cita'] = ($row['assigned_user_id'] == $arr_principal['unilease']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['unilease']['ultima_cita'];
                 $arr_principal['seguros']['ultima_cita'] = ($row['assigned_user_id'] == $arr_principal['seguros']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['seguros']['ultima_cita'];
+                $arr_principal['credito_simple']['ultima_cita'] = ($row['assigned_user_id'] == $arr_principal['credito_simple']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['credito_simple']['ultima_cita'];
             }
         }
 
@@ -840,6 +905,7 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['uniclick']['ultima_llamada'] = ($row['assigned_user_id'] == $arr_principal['uniclick']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['uniclick']['ultima_llamada'];
                 $arr_principal['unilease']['ultima_llamada'] = ($row['assigned_user_id'] == $arr_principal['unilease']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['unilease']['ultima_llamada'];
                 $arr_principal['seguros']['ultima_llamada'] = ($row['assigned_user_id'] == $arr_principal['seguros']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['seguros']['ultima_llamada'];
+                $arr_principal['credito_simple']['ultima_llamada'] = ($row['assigned_user_id'] == $arr_principal['credito_simple']['promotorId']) ? date_format($timedateFR->fromDb($row['last_date_start']), "d/m/Y") : $arr_principal['credito_simple']['ultima_llamada'];
             }
         }
 
@@ -1287,35 +1353,6 @@ class ResumenClienteAPI extends SugarApi
 
             }
         }
-        ############################
-        ## Regresa resultado
-        // $GLOBALS['log']->fatal('resultado de API:');
-        // $GLOBALS['log']->fatal($api->platform);
-        //$api->platform;
-	/*
-        $arr_principal['leasing']['muestra_producto'] = true;
-        $arr_principal['leasing']['es_prospecto_cliente'] = true;
-        $arr_principal['leasing']['tiene_anexo_liberado'] = true;
-        $arr_principal['leasing']['tiene_linea_autorizada'] = true;
-
-        $arr_principal['factoring']['muestra_producto'] = true;
-        $arr_principal['factoring']['es_prospecto_cliente'] = true;
-        $arr_principal['factoring']['tiene_linea_autorizada'] = true;
-        $arr_principal['factoring']['tiene_cesiones_liberado'] = true;
-
-        $arr_principal['credito_auto']['muestra_producto'] = true;
-        $arr_principal['credito_auto']['es_prospecto_cliente'] = true;
-        $arr_principal['credito_auto']['tiene_linea_autorizada'] = true;
-        $arr_principal['credito_auto']['tiene_contrato_liberado'] = true;
-
-        $arr_principal['seguros']['muestra_producto'] = true;
-        $arr_principal['seguros']['tiene_seguros'] = true;
-        $arr_principal['seguros']['tiene_ganada'] = true;
-
-        $arr_principal['fleet']['muestra_producto'] = true;
-        $arr_principal['credito_simple']['muestra_producto'] = true;
-        $arr_principal['uniclick']['muestra_producto'] = true;
-        $arr_principal['unifactor']['muestra_producto'] = true;*/
 
         return $arr_principal;
     }

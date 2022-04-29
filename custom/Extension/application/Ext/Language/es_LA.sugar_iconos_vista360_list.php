@@ -1,5 +1,5 @@
 <?php
- // created: 2022-04-17 18:17:51
+ // created: 2022-04-29 13:07:50
 
 $app_list_strings['iconos_vista360_list']=array (
   'leasing' => 'custom/include/images/Leasing_icon.png',
@@ -12,4 +12,6 @@ $app_list_strings['iconos_vista360_list']=array (
   'seguros' => 'custom/include/images/Insurance_icon.png',
   'nueva_reunion' => 'custom/include/images/boton_nueva_reunion.png',
   'nuevo_contacto' => 'custom/include/images/contacto_nuevo.png',
+  'credito_simple' => 'custom/include/images/Leasing_icon.png',
+  'tarjeta_credito' => 'custom/include/images/Leasing_icon.png',
 );
