@@ -74,11 +74,17 @@
     cleanName: function (fields, errors, callback) {
         if(_.isEmpty(errors)){
             //Recupera variables
-            var postData = {
-                'name': this.model.get("name")
-            };
+            var regimen= this.model.get("regimen_fiscal_c");
+            var fullname= this.model.get('nombre_c')+this.model.get('apellido_paterno_c')+this.model.get('apellido_materno_c');
+            var fullnamePM=this.model.get('nombre_empresa_c');
+            var postData={'name':""};
+            if (regimen!='3'){
+                postData= {'name': fullname};
+            }else{
+                postData= {'name': fullnamePM};
+            }
             //Consume servicio
-            if(this.model.get("name").trim()!='') {
+            if(postData!='') {
                 var serviceURI = app.api.buildURL("getCleanName", '', {}, {});
                 App.api.call("create", serviceURI, postData, {
                     success: _.bind(function (data) {

@@ -185,12 +185,25 @@ array (
               ),
               1 => 
               array (
+                'name' => 'name',
+                'type' => 'fullname',
+                'label' => 'LBL_NAME',
+                'dismiss_label' => true,
+                'fields' => 
+                array (
+                  0 => 'salutation',
+                  1 => 'first_name',
+                  2 => 'last_name',
+                ),
+              ),
+              2 => 
+              array (
                 'name' => 'favorite',
                 'label' => 'LBL_FAVORITE',
                 'type' => 'favorite',
                 'dismiss_label' => true,
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'follow',
                 'label' => 'LBL_FOLLOW',

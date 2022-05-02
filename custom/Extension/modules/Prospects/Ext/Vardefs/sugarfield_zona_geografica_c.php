@@ -1,5 +1,5 @@
 <?php
- // created: 2022-04-25 18:52:22
+ // created: 2022-04-27 20:17:18
 $dictionary['Prospect']['fields']['zona_geografica_c']['labelValue']='Zona Geográfica';
 $dictionary['Prospect']['fields']['zona_geografica_c']['dependency']='';
 $dictionary['Prospect']['fields']['zona_geografica_c']['required_formula']='';
