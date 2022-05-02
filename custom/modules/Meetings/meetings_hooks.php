@@ -469,70 +469,20 @@ class Meetings_Hooks
   */
   function sendEmailSurvey($beanReunion)
   {
-      //Genrea url - string b64
-      $args = [];
-      $args['data']=[];
-      $args['data']['idMeeting'] = $beanReunion->id;
-      $args['data']['idUser'] = $beanReunion->assigned_user_id;
-      $args['data']['email'] = true;
-      $args['data']['nameUser']= $beanReunion->assigned_user_name;
-      //Recupera site_url
-      global $sugar_config;
-      $sugarHost = $sugar_config['site_url'] . '/survey_submission.php?q=';
-      //Obtiene stringBase64
-      $encuestaMinuta = new EncuestaMinuta();
-      $stringBase64 = $encuestaMinuta->createSurveySubmission('',$args);
-      //Genera url de encuesta
-      $urlSurvey = $sugarHost . $stringBase64;
-      // $GLOBALS["log"]->fatal($sugarHost);
-      // $GLOBALS["log"]->fatal($stringBase64);
-      // $GLOBALS["log"]->fatal($urlSurvey);
-      //Establece parámetros de envío
-      $timedate = new TimeDate();
-      $datetime = $timedate->to_display_date_time($beanReunion->date_start);
-      $beanUser = BeanFactory::getBean('Users', $beanReunion->assigned_user_id);
-      $mailSubject = "DÉJANOS SABER POR QUE NO SE REALIZÓ LA CITA-CONFERENCIA";
-      $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">HOLA! <b>'. $beanUser->first_name . ' ' . $beanUser->last_name .'</b>
-      <br><br>Sabemos que la cita-conferencia que tenías programada con la empresa '. $beanReunion->parent_name .' el día '. $datetime .' no se llevó a cabo.
-      <br><br>Para nosotros es muy importante escucharte, es por eso que te invitamos a contestar esta encuesta para entender cuales fueron los motivos.
-      <br><br>RECUERDA QUE ESTA ENCUESTA SOLO PERMANECERÁ ACTIVA HASTA MAÑANA AL MEDIO DÍA.</font></p>
-      <center><a href="'. $urlSurvey .'">Comenzar la encuesta</a><center>';
-      $mailTo = array(
-          0 => array(
-              'name' => $beanUser->first_name . ' ' . $beanUser->last_name ,
-              'email' => $beanUser->email1,
-          )
-      );
-
-      //Prepara ejecución de correo
-      try {
-          $mailer = MailerFactory::getSystemDefaultMailer();
-          $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-          $mailer->setSubject($mailSubject);
-          $body = trim($mailHTML);
-          $mailer->setHtmlBody($body);
-          $mailer->clearRecipients();
-          $mailer->addRecipientsTo(new EmailIdentity($beanUser->email1, $beanUser->first_name . ' ' . $beanUser->last_name));
-
-          //Ejecuta
-          $result = $mailer->send();
-          if ($result) {
-              //$GLOBALS["log"]->fatal("surveyNotHeld :: Se envío correctamente: " . $urlSurvey);
-          } else {
-              $GLOBALS["log"]->fatal("surveyNotHeld :: El correo no pudo realizarse de forma correcta");
-
-          }
-      } catch (MailerException $me) {
-          $message = $me->getMessage();
-          switch ($me->getCode()) {
-              case \MailerException::FailedToConnectToRemoteServer:
-                  $GLOBALS["log"]->fatal("surveyNotHeld :: error sending email, system smtp server is not set");
-                  break;
-              default:
-                  $GLOBALS["log"]->fatal("surveyNotHeld :: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
-                  break;
-          }
-      }
+	  //Consulta Id de Encuesta NPS
+	  global $db;
+	  $queryCita = "select id from qpro_gestion_encuestas where name = 'Cita no realizada' and deleted = 0";
+	  $resultCita = $db->query($queryCita);
+	  $rowCita = $db->fetchByAssoc($resultCita);
+	  $idEncuesta = $rowCita['id'];
+      //Ejecuta proceso para insertar registro en Encuestas
+	  $beanEncuesta= BeanFactory::newBean('QPRO_Encuestas');
+	  $beanEncuesta->name = $beanReunion->assigned_user_name;
+	  $beanEncuesta->related_module = "Users";
+	  $beanEncuesta->user_id_c = $beanReunion->assigned_user_id;
+	  $beanEncuesta->assigned_user_id = $beanReunion->assigned_user_id;
+	  $beanEncuesta->qpro_gestion_encuestas_qpro_encuestasqpro_gestion_encuestas_ida = $idEncuesta;
+	  $beanEncuesta->save();
   }
 
   function guardaproductos ($bean, $event, $args){
