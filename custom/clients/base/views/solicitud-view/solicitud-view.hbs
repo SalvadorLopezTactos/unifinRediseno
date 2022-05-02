@@ -12,16 +12,28 @@
       <table class="dataTable table-striped table-border">
         <thead >
           <tr>
-            <th class="span8">Solicitud</th>
+            <th class="span4">Solicitud</th>
             <th class="span2">Monto</th>
+            <th class="span2">Producto</th>
+            <th class="span2">Negocio</th>
+            <th class="span2">Producto Financiero</th>
             <th class="span2">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           {{#each solicitudes}}
            <tr>
-             <td class="span8">{{name}}</td>
+             <td class="span4">{{name}}</td>
              <td class="span2">$ {{customFormatNumber monto_c}}</td>
+             <td class="span2">
+                {{getUnifinListValue 'tipo_producto_list' tipo_producto_c}}
+             </td>
+             <td class="span2">
+                {{getUnifinListValue 'producto_negocio_list' negocio_c}}
+             </td>
+             <td class="span2">
+                {{getUnifinListValue 'producto_financiero_list' producto_financiero_c}}
+             </td>
              <td class="span2">
                <center><button class="btn btn-mini btn-secondary ratificaIncrementoUnico" data-name="{{id}}" type="button">Ratificación/Incremento</button></center>
              </td>
