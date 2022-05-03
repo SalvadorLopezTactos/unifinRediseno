@@ -11,7 +11,7 @@
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_Po_to_Lead:click', this.convert_Po_to_Lead, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-        this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
+        
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
@@ -323,14 +323,6 @@
                     btnConvert.hide();
                 }
             });
-        }
-    },
-
-    _subMotivoCancelacion: function () {
-
-        if (!this.model.get('lead_cancelado_c')) {
-
-            this.model.set('motivo_cancelacion_c', '');
         }
     },
 
