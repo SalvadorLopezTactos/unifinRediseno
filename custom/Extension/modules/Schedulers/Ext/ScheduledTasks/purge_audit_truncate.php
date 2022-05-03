@@ -22,4 +22,6 @@ function purge_audit_truncate()
     $db->execute($sql);
   
     $GLOBALS['log']->fatal('Job limpieza truncate: Fin');
+
+    return true;
 }

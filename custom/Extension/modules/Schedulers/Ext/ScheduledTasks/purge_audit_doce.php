@@ -13,4 +13,6 @@ function purge_audit_doce()
     $db->execute($sql);
   
     $GLOBALS['log']->fatal('Job limpieza doce: Fin');
+
+    return true;
 }
