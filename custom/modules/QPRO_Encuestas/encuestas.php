@@ -34,6 +34,7 @@ class encuestas
 					}
 					$url = $beanGestion->url."?idpersona=".$bean->related_id."&idencuesta=".$bean->id;
 					$nombre = $beanRel->name;
+					if($beanGestion->name == "Cita no realizada") $nombre = $bean->name;
 					$fecha = $bean->fecha_envio;
 					$template_name = $beanGestion->plantilla;
 					// Ejecuta envío de correo electrónico
