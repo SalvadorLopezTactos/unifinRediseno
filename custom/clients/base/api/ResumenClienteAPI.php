@@ -763,25 +763,24 @@ class ResumenClienteAPI extends SugarApi
 
                     //control para Crédito simple | No cuenta solicitudes de negocio Uniclick
                     if ($opps->tipo_producto_c == 2 && $opps->estatus_c != 'K' && $opps->negocio_c != 10 ) {
+                        $arr_principal['credito_simple']['tiene_linea_autorizada'] = ($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N') ? true : $arr_principal['credito_simple']['tiene_linea_autorizada'];
                         $arr_principal['credito_simple']['muestra_producto'] = true;
                         $linea_aprox_cs += $opps->monto_c;
                         $linea_disp_cs += $opps->amount;
-                        /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
-                        /*********************************/
-                        if (!empty($opps->vigencialinea_c)) {
-                						//Establece fecha de vencimiento
-                						$dateVCS = $opps->vigencialinea_c;
-                						$timedateVCS = Date($dateVCS);
-                						//Compara fechas
-                						if ($dateVCS > $vencimiento_cs || empty($vencimiento_cs)) {
-                						   $vencimiento_cs = $dateVCS;
-                						}
-                            $estatus_linea_cs = ($timedateVCS>=$fecha_actual) ? 'Vigente' : $estatus_linea_cs;
-                						$arr_principal['credito_simple']['linea_autorizada'] = $linea_aprox_cs;
-                						$arr_principal['credito_simple']['fecha_vencimiento'] = $vencimiento_cs;
-                						$arr_principal['credito_simple']['linea_disponible'] = $linea_disp_cs;
-                            $arr_principal['credito_simple']['estatus_linea'] = $estatus_linea_cs;
-                        }
+
+                        //Establece fecha de vencimiento
+            						$dateVCS = $opps->vigencialinea_c;
+            						$timedateVCS = Date($dateVCS);
+            						//Compara fechas
+            						if ($dateVCS > $vencimiento_cs || empty($vencimiento_cs)) {
+            						   $vencimiento_cs = $dateVCS;
+            						}
+                        $estatus_linea_cs = ($timedateVCS>=$fecha_actual) ? 'Vigente' : $estatus_linea_cs;
+            						$arr_principal['credito_simple']['linea_autorizada'] = $linea_aprox_cs;
+            						$arr_principal['credito_simple']['fecha_vencimiento'] = $vencimiento_cs;
+            						$arr_principal['credito_simple']['linea_disponible'] = $linea_disp_cs;
+                        $arr_principal['credito_simple']['estatus_linea'] = $estatus_linea_cs;
+
                     }
 
                     //Control para Unilease
