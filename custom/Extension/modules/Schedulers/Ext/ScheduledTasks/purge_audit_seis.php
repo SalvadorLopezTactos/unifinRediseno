@@ -13,4 +13,6 @@ function purge_audit_seis()
     $db->execute($sql);
   
     $GLOBALS['log']->fatal('Job limpieza seis: Fin');
+
+    return true;
 }
