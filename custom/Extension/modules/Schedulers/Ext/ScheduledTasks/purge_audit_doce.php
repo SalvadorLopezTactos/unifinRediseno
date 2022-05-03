@@ -10,7 +10,9 @@ function purge_audit_doce()
     $GLOBALS['log']->fatal('Job limpieza doce: Inicia');
 
     $sql = "DELETE from calls_audit WHERE date_created < DATE_SUB(now(), INTERVAL 12 MONTH);";
-    $db->execute($sql);
+    $GLOBALS['db']->query($sql);
   
     $GLOBALS['log']->fatal('Job limpieza doce: Fin');
+    
+    return true;
 }

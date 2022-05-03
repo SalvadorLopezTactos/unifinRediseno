@@ -10,16 +10,18 @@ function purge_audit_truncate()
     $GLOBALS['log']->fatal('Job limpieza truncate: Inicia');
 
     $sql = "TRUNCATE TABLE activities;";
-    $db->execute($sql);
+    $GLOBALS['db']->query($sql);
     
     $sql = "TRUNCATE TABLE audit_events;";
-    $db->execute($sql);
+    $GLOBALS['db']->query($sql);
 
     $sql = "TRUNCATE TABLE tct_usersplatform_audit;";
-    $db->execute($sql);
+    $GLOBALS['db']->query($sql);
     
     $sql = "TRUNCATE TABLE job_queue_audit;";
-    $db->execute($sql);
+    $GLOBALS['db']->query($sql);
   
     $GLOBALS['log']->fatal('Job limpieza truncate: Fin');
+
+    return true;
 }
