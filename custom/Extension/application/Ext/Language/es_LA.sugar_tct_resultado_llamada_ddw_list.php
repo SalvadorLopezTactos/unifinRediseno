@@ -1,5 +1,5 @@
 <?php
- // created: 2021-07-20 15:29:17
+ // created: 2022-04-28 10:43:05
 
 $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   '' => '',
@@ -12,4 +12,6 @@ $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   'Razon_Social' => 'Con seguimiento en otra Razón Social',
   'Llamada_servicio' => 'Seguimiento',
   'Llamada_preventiva' => 'Llamada Preventiva',
+  'Encuesta_Exitosa' => 'Encuesta Exitosa',
+  'Encuesta_no_Exitosa' => 'Encuesta no Exitosa',
 );

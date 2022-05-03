@@ -560,7 +560,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $call) {
                     global $db;
-                    $meetUpdate = "update calls set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
+                    $meetUpdate = "update calls set parent_type = 'Accounts', status='Held', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
                     $updateResult = $db->query($meetUpdate);
                 }
             }

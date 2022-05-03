@@ -61,7 +61,6 @@
                 }
             }, this)
         });
-
     },
 
     _render: function(){
@@ -751,28 +750,19 @@
     validaEncuesta:function(fields, errors, callback){
         if (this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25") {
             var id_meeting=this.model.get('minut_minutas_meetingsmeetings_idb');
-
-            if(id_meeting!= undefined){
-                //Generar petición para validación
-                app.api.call('GET', app.api.buildURL('GetSurveyOfMeeting/' + id_meeting), null, {
-                    success: _.bind(function(data) {
-                                if(!data){
-                                    app.alert.show("survey_required", {
-                                        level: "error",
-                                        messages: "Para guardar la minuta es necesario contestar la <b>Encuesta de Calidad</b>",
-                                        autoClose: false
-                                    });
-                                    errors['encuesta'] = errors['encuesta'] || {};
-                                    errors['encuesta'].required = true;
-                                }
-                                callback(null, fields, errors);
-                            }, this)
-                    });
-            }
+            if(id_meeting!= undefined && !window.encuesta){
+                app.alert.show("survey_required", {
+                    level: "error",
+                    messages: "Para guardar la minuta es necesario contestar la <b>Encuesta de Calidad</b>",
+                    autoClose: false
+                });
+                errors['encuesta'] = errors['encuesta'] || {};
+                errors['encuesta'].required = true;
+			}
+            callback(null, fields, errors);
         }else{
             callback(null, fields, errors);
         }
-
     },
 
     view_document: function(){
@@ -1145,48 +1135,53 @@
 
         app.api.call("read", url, null, {
             success: _.bind(function (data) {
-              /*
-              Condiciones
-                puesto
-                  27- Agente teléfonico
-                  31 - Coordinador CP
-                Usuario OmarVenegas: eeae5860-bb05-4ae5-3579-56ddd8a85c31
-              */
-              if (data.puestousuario_c == '27' || data.puestousuario_c == '31' || data.id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31') {
-                  //Genera apertura de encuesta
-                  var sugarHost = window.location.origin+window.location.pathname + "survey_submission.php?q=";
-                  sugarHost = sugarHost.replace(/index.php/gi, "");
-                  var url = "";
-                  if (self.urlEncuesta == undefined || self.urlEncuesta == null) {
-                      //Genera petición para obtener url de encuesta
-                      var args = {
-                          'idMeeting': self.model.attributes.minut_minutas_meetingsmeetings_idb,
-                          'idUser': App.user.id,
-                          'nameUser': App.user.attributes.full_name
-                      };
-                      var encuestaURL = app.api.buildURL("createSubmission", '', {}, {});
-                      app.api.call("create", encuestaURL, {data:args}, {
-                          success: _.bind(function (data) {
-                              if (data) {
-                                  self.urlEncuesta = data;
-                                  url = sugarHost + self.urlEncuesta;
-                                  window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
-                              }
-                          }, this)
-                      });
-
-                  }else{
-                      url = sugarHost + self.urlEncuesta;
-                      window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
-                  }
-              }else {
-                  App.alert.show("survey_no_access", {
-                      level: "info",
-                      messages: "No cuenta con permiso para contestar encuesta",
-                      autoClose: true,
-                  });
-                  return;
-              }
+                /*
+                Condiciones:
+                  puesto
+                    27- Agente teléfonico
+                    31 - Coordinador CP
+                  Usuario OmarVenegas: eeae5860-bb05-4ae5-3579-56ddd8a85c31
+                */
+                if (data.puestousuario_c == '27' || data.puestousuario_c == '31' || data.id == 'eeae5860-bb05-4ae5-3579-56ddd8a85c31') {
+					// Obtiene URL de Encuesta de QuestionPro
+                    var campos = ["id", "name", "url"];
+                    app.api.call("read", app.api.buildURL("QPRO_Gestion_Encuestas/", null, null, {
+                        campos: campos.join(','),
+                        max_num: 4,
+                        "filter": [
+                            {
+								"name": "Calidad de cita",
+                            }
+                        ]
+                    }), null, {
+                        success: _.bind(function (encuesta) {
+                            if (encuesta.records.length > 0) {
+								//Guarda registro en Encuestas
+								var qpencuesta = app.data.createBean('QPRO_Encuestas');
+								qpencuesta.set("name", app.user.attributes.full_name);	
+								qpencuesta.set("related_module", "Users");
+								qpencuesta.set("user_id_c", app.user.id);
+								qpencuesta.set("assigned_user_id", app.user.id);
+								qpencuesta.set("qpro_gestion_encuestas_qpro_encuestasqpro_gestion_encuestas_ida", encuesta.records[0].id);
+								qpencuesta.save(null,{
+									success:function() {
+										var url = encuesta.records[0].url+"?idpersona="+app.user.id+"&idencuesta="+qpencuesta.get("id");
+										window.open(url, 'Noticias', 'width=450, height=500, top=85, left=50', true);
+										window.encuesta = qpencuesta.get("id");
+									},
+									error:function() {}
+								});
+                            }
+                        }, this)
+                    });
+                }else {
+                    app.alert.show("survey_no_access", {
+                        level: "info",
+                        messages: "No cuenta con permiso para contestar encuesta",
+                        autoClose: true,
+                    });
+                    return;
+                }
             }, this)
         });
     },

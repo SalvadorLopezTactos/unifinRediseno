@@ -185,12 +185,16 @@ array (
               ),
               1 => 
               array (
+                'name' => 'name_c',
+              ),
+              2 => 
+              array (
                 'name' => 'favorite',
                 'label' => 'LBL_FAVORITE',
                 'type' => 'favorite',
                 'dismiss_label' => true,
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'follow',
                 'label' => 'LBL_FOLLOW',
@@ -293,13 +297,69 @@ array (
               14 => 
               array (
                 'readonly' => false,
-                'name' => 'prospeccion_propia_c',
-                'label' => 'LBL_PROSPECCION_PROPIA',
+                'name' => 'medio_digital_c',
+                'label' => 'LBL_MEDIO_DIGITAL',
               ),
               15 => 
               array (
               ),
               16 => 
+              array (
+                'readonly' => false,
+                'name' => 'referido_cliente_prov_c',
+                'studio' => 'visible',
+                'label' => 'LBL_REFERIDO_CLIENTE_PROV',
+              ),
+              17 => 
+              array (
+              ),
+              18 => 
+              array (
+                'readonly' => false,
+                'name' => 'codigo_expo_c',
+                'label' => 'LBL_CODIGO_EXPO',
+              ),
+              19 => 
+              array (
+              ),
+              20 => 
+              array (
+                'readonly' => false,
+                'name' => 'prospeccion_propia_c',
+                'label' => 'LBL_PROSPECCION_PROPIA',
+              ),
+              21 => 
+              array (
+              ),
+              22 => 
+              array (
+                'readonly' => false,
+                'name' => 'evento_c',
+                'label' => 'LBL_EVENTO',
+              ),
+              23 => 
+              array (
+              ),
+              24 => 
+              array (
+                'readonly' => false,
+                'name' => 'camara_c',
+                'label' => 'LBL_CAMARA_C',
+              ),
+              25 => 
+              array (
+              ),
+              26 => 
+              array (
+                'readonly' => false,
+                'name' => 'promotor_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTOR',
+              ),
+              27 => 
+              array (
+              ),
+              28 => 
               array (
                 'related_fields' => 
                 array (
@@ -310,7 +370,7 @@ array (
                 'name' => 'ventas_anuales_c',
                 'label' => 'LBL_VENTAS_ANUALES_C',
               ),
-              17 => 
+              29 => 
               array (
                 'related_fields' => 
                 array (
@@ -321,66 +381,44 @@ array (
                 'name' => 'potencial_lead_c',
                 'label' => 'LBL_POTENCIAL_LEAD_C',
               ),
-              18 => 
+              30 => 
               array (
                 'readonly' => false,
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
               ),
-              19 => 
+              31 => 
               array (
                 'readonly' => false,
                 'name' => 'zona_geografica_c',
                 'label' => 'LBL_ZONA_GEOGRAFICA_C',
               ),
-              20 => 
+              32 => 
               array (
                 'name' => 'email',
               ),
-              21 => 
+              33 => 
               array (
               ),
-              22 => 
+              34 => 
               array (
                 'name' => 'prospects_telefonos',
                 'studio' => 'visible',
                 'label' => 'LBL_PROSPECTS_TELEFONOS',
                 'span' => 12,
               ),
-              23 => 
-              array (
-              ),
-              24 => 
-              array (
-              ),
-              25 => 'assigned_user_name',
-              26 => 
+              35 => 'assigned_user_name',
+              36 => 
               array (
                 'readonly' => false,
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION',
               ),
-              27 => 
-              array (
-                'readonly' => false,
-                'name' => 'contacto_asociado_c',
-                'label' => 'LBL_CONTACTO_ASOCIADO',
-              ),
-              28 => 
-              array (
-              ),
-              29 => 
-              array (
-                'name' => 'account_name',
-              ),
-              30 => 
-              array (
-              ),
-              31 => 
+              37 => 
               array (
                 'name' => 'prospects_prospects_1_name',
               ),
-              32 => 
+              38 => 
               array (
               ),
             ),
@@ -446,30 +484,6 @@ array (
               ),
               1 => 
               array (
-                'name' => 'date_modified_by',
-                'readonly' => true,
-                'inline' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_MODIFIED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_modified',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'modified_by_name',
-                  ),
-                ),
-              ),
-              2 => 
-              array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
                 'inline' => true,
@@ -492,12 +506,216 @@ array (
                   ),
                 ),
               ),
-              3 => 'team_name',
+              2 => 
+              array (
+                'name' => 'date_modified_by',
+                'readonly' => true,
+                'inline' => true,
+                'type' => 'fieldset',
+                'label' => 'LBL_DATE_MODIFIED',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'name' => 'date_modified',
+                  ),
+                  1 => 
+                  array (
+                    'type' => 'label',
+                    'default_value' => 'LBL_BY',
+                  ),
+                  2 => 
+                  array (
+                    'name' => 'modified_by_name',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          5 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL3',
+            'label' => 'LBL_RECORDVIEW_PANEL3',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 'phone_work',
+              1 => 'phone_mobile',
+              2 => 
+              array (
+                'name' => 'phone_home',
+                'comment' => 'Home phone number of the contact',
+                'label' => 'LBL_HOME_PHONE',
+              ),
+              3 => 
+              array (
+                'readonly' => false,
+                'name' => 'c_estatus_telefono_c',
+                'studio' => 'visible',
+                'label' => 'LBL_C_ESTATUS_TELEFONO',
+              ),
               4 => 
               array (
-                'name' => 'tct_link_personalizado_txf_c',
+                'readonly' => false,
+                'name' => 'm_estatus_telefono_c',
                 'studio' => 'visible',
-                'label' => 'LBL_TCT_LINK_PERSONALIZADO_TXF',
+                'label' => 'LBL_M_ESTATUS_TELEFONO',
+              ),
+              5 => 
+              array (
+                'readonly' => false,
+                'name' => 'o_estatus_telefono_c',
+                'studio' => 'visible',
+                'label' => 'LBL_O_ESTATUS_TELEFONO',
+              ),
+              6 => 
+              array (
+                'readonly' => false,
+                'name' => 'pendiente_reus_c',
+                'label' => 'LBL_PENDIENTE_REUS',
+              ),
+              7 => 
+              array (
+                'readonly' => false,
+                'name' => 'm_registro_reus_c',
+                'label' => 'LBL_M_REGISTRO_REUS',
+              ),
+              8 => 
+              array (
+                'readonly' => false,
+                'name' => 'o_registro_reus_c',
+                'label' => 'LBL_O_REGISTRO_REUS',
+              ),
+              9 => 
+              array (
+                'readonly' => false,
+                'name' => 'c_registro_reus_c',
+                'label' => 'LBL_C_REGISTRO_REUS',
+              ),
+              10 => 
+              array (
+                'readonly' => false,
+                'name' => 'actividad_economica_c',
+                'label' => 'LBL_ACTIVIDAD_ECONOMICA',
+              ),
+              11 => 
+              array (
+                'readonly' => false,
+                'name' => 'macrosector_c',
+                'label' => 'LBL_MACROSECTOR',
+              ),
+              12 => 
+              array (
+                'readonly' => false,
+                'name' => 'sector_economico_c',
+                'label' => 'LBL_SECTOR_ECONOMICO',
+              ),
+              13 => 
+              array (
+                'readonly' => false,
+                'name' => 'subsector_c',
+                'label' => 'LBL_SUBSECTOR',
+              ),
+              14 => 
+              array (
+                'readonly' => false,
+                'name' => 'inegi_clase_c',
+                'label' => 'LBL_INEGI_CLASE_C',
+              ),
+              15 => 
+              array (
+                'readonly' => false,
+                'name' => 'inegi_macro_c',
+                'label' => 'LBL_INEGI_MACRO_C',
+              ),
+              16 => 
+              array (
+                'readonly' => false,
+                'name' => 'inegi_sector_c',
+                'label' => 'LBL_INEGI_SECTOR',
+              ),
+              17 => 
+              array (
+                'readonly' => false,
+                'name' => 'inegi_subsector_c',
+                'label' => 'LBL_INEGI_SUBSECTOR_C',
+              ),
+              18 => 
+              array (
+                'readonly' => false,
+                'name' => 'inegi_rama_c',
+                'label' => 'LBL_INEGI_RAMA',
+              ),
+              19 => 
+              array (
+                'readonly' => false,
+                'name' => 'inegi_subrama_c',
+                'label' => 'LBL_INEGI_SUBRAMA',
+              ),
+              20 => 
+              array (
+                'readonly' => false,
+                'name' => 'pb_id_c',
+                'label' => 'LBL_PB_ID',
+              ),
+              21 => 
+              array (
+                'readonly' => false,
+                'name' => 'pb_grupo_c',
+                'label' => 'LBL_PB_GRUPO',
+              ),
+              22 => 
+              array (
+                'readonly' => false,
+                'name' => 'pb_clase_c',
+                'label' => 'LBL_PB_CLASE',
+              ),
+              23 => 
+              array (
+                'readonly' => false,
+                'name' => 'pb_division_c',
+                'label' => 'LBL_PB_DIVISION',
+              ),
+              24 => 
+              array (
+                'readonly' => false,
+                'name' => 'nombre_de_carga_c',
+                'label' => 'LBL_NOMBRE_DE_CARGA',
+              ),
+              25 => 
+              array (
+                'readonly' => false,
+                'name' => 'resultado_de_carga_c',
+                'label' => 'LBL_RESULTADO_DE_CARGA',
+              ),
+              26 => 
+              array (
+                'readonly' => false,
+                'name' => 'clean_name_c',
+                'label' => 'LBL_CLEAN_NAME',
+              ),
+              27 => 
+              array (
+                'name' => 'team_name',
+              ),
+              28 => 
+              array (
+                'readonly' => false,
+                'name' => 'contacto_asociado_c',
+                'label' => 'LBL_CONTACTO_ASOCIADO',
+              ),
+              29 => 
+              array (
+              ),
+              30 => 
+              array (
+                'name' => 'account_name',
+              ),
+              31 => 
+              array (
               ),
             ),
           ),

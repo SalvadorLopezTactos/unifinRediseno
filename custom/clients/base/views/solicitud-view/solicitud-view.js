@@ -20,11 +20,25 @@
         nuevaSolicitud.solicitudes = [];
         nuevaSolicitud.loadView = false;
         nuevaSolicitud.muestraSolicitudes = false;
+        nuevaSolicitud.filters = '';
+        switch (nuevaSolicitud.idProducto) {
+          case "1": //leasing
+            nuevaSolicitud.filters = "filter[0][account_id][$equals]="+nuevaSolicitud.idCuenta+"&filter[1][tipo_producto_c][$equals]="+nuevaSolicitud.idProducto+"&filter[2][estatus_c][$not_equals]=K";
+            break;
+          case "2": //Crédito simple
+            nuevaSolicitud.filters = "filter[0][account_id][$equals]="+nuevaSolicitud.idCuenta+"&filter[1][tipo_producto_c][$equals]="+nuevaSolicitud.idProducto+"&filter[2][estatus_c][$not_equals]=K&filter[3][negocio_c][$not_equals]=10";
+            break;
+          case "4": //Factoraje
+            nuevaSolicitud.filters = "filter[0][account_id][$equals]="+nuevaSolicitud.idCuenta+"&filter[1][tipo_producto_c][$equals]="+nuevaSolicitud.idProducto+"&filter[2][estatus_c][$not_equals]=K";
+            break;
+          default:
+        }
+        //Recupera líneas existentes
         App.alert.show('loadingOpptys', {
             level: 'process',
             title: 'Cargando...',
         });
-        App.api.call("read", app.api.buildURL("Opportunities?filter[0][account_id][$equals]="+nuevaSolicitud.idCuenta+"&filter[1][tipo_producto_c][$equals]="+nuevaSolicitud.idProducto+"&filter[2][estatus_c][$not_equals]=K&fields=tipo_operacion_c,tipo_producto_c,producto_financiero_c,negocio_c,tct_etapa_ddw_c,estatus_c,tipo_operacion_c,tipo_de_operacion_c,ratificacion_incremento_c,name,monto_c,assigned_user_name", null, null, {
+        App.api.call("read", app.api.buildURL("Opportunities?"+nuevaSolicitud.filters+"&fields=tipo_operacion_c,tipo_producto_c,producto_financiero_c,negocio_c,tct_etapa_ddw_c,estatus_c,tipo_operacion_c,tipo_de_operacion_c,ratificacion_incremento_c,name,monto_c,assigned_user_name", null, null, {
         }), null, {
             success: _.bind(function (data) {
                 if(data.records){

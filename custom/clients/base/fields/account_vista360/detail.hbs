@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="custom/clients/base/fields/account_vista360/account_vista360.css">
 <div id="cards-properties">
+    <!-- Sección Principal : General - Contactos -->
     <div class="row-fluid" style="background-color:#E6E7E9">
         <div class="span2"></div>
         <!-- DIV sección General-->
@@ -16,23 +17,23 @@
                                 <td>{{ResumenCliente.general_cliente.tipo}}</td>
                             </tr>
                             {{#if ResumenCliente.general_cliente.show_if_linea_autorizada}}
-                            <tr>
-                                <td><strong>Cliente desde</strong></td>
-                                <td>{{ResumenCliente.general_cliente.cliente_desde}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Cliente desde</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.cliente_desde}}</td>
+                                </tr>
                             {{/if}}
                             <tr>
                             {{#if ResumenCliente.general_cliente.muestra_gpo_empresarial}}
-                            <tr>
-                                <td><strong>Grupo Empresarial</strong>&nbsp;&nbsp;<i class="fa fa-eye fa-md gpoEmpresarial"></i></td>
-                                <td>{{ResumenCliente.general_cliente.grupo_empresarial}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Grupo Empresarial</strong>&nbsp;&nbsp;<i class="fa fa-eye fa-md gpoEmpresarial"></i></td>
+                                    <td>{{ResumenCliente.general_cliente.grupo_empresarial}}</td>
+                                </tr>
                             {{/if}}
                             {{#if ResumenCliente.general_cliente.show_if_linea_autorizada}}
-                            <tr>
-                                <td><strong>Productos Contratados</strong></td>
-                                <td>{{ResumenCliente.general_cliente.productos_contratados}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Productos Contratados</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.productos_contratados}}</td>
+                                </tr>
                             {{/if}}
                             <tr>
                                 <td><strong>Actividad Económica</strong></td>
@@ -51,29 +52,29 @@
                                 <td>{{ResumenCliente.general_cliente.fecha_cons_nac}}</td>
                             </tr>
                             {{#if ResumenCliente.general_cliente.show_if_linea_autorizada}}
-                            <tr>
-                                <td><strong>Score Crédito</strong></td>
-                                <td>{{ResumenCliente.general_cliente.score_credito}}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Status Cobranza</strong></td>
-                                <td>{{ResumenCliente.general_cliente.score_credito}}</td>
-                            </tr>
+                                <tr>
+                                    <td><strong>Score Crédito</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.score_credito}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status Cobranza</strong></td>
+                                    <td>{{ResumenCliente.general_cliente.score_credito}}</td>
+                                </tr>
                             {{/if}}
-                            {{#if ResumenCliente.general_cliente.muestra_gpo_empresarial}}
                             <tr>
                                 <td><strong>Núm de Empleados</strong></td>
                                 <td>{{ResumenCliente.general_cliente.num_empleados}}</td>
                             </tr>
+                            {{#if ResumenCliente.general_cliente.tiene_condicion}}
+                                <tr>
+                                    <td><strong>Condición del Cliente</strong></td>
+                                    <td>
+                                        {{ResumenCliente.general_cliente.condicion}}<br>
+                                        {{ResumenCliente.general_cliente.condicion2}}<br>
+                                        {{ResumenCliente.general_cliente.condicion3}}
+                                    </td>
+                                </tr>
                             {{/if}}
-                            <tr>
-                                <td><strong>Condición del Cliente</strong></td>
-                                <td>
-                                    {{ResumenCliente.general_cliente.condicion}}<br>
-                                    {{ResumenCliente.general_cliente.condicion2}}<br>
-                                    {{ResumenCliente.general_cliente.condicion3}}
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -92,7 +93,11 @@
                 {{#if ResumenCliente.contactos.tiene_negocio}}
                     <div style="text-align: center;">
                         <p style="font-size: 10px;padding:8px">
-                            <b>CONTACTO DE NEGOCIOS</b>
+                            {{#if ResumenCliente.contactos.rel_activa_negocio}}
+                                <b>CONTACTO DE NEGOCIOS</b>
+                            {{else}}
+                                <b>CONTACTO SECUNDARIO</b>
+                            {{/if}}
                         </p>
                     </div>
                     <div class="information-contacts-container">
@@ -175,11 +180,11 @@
         <div class="span2"></div>
     </div>
 
-    <!-- Comienza nueva sección productos -->
+    <!-- Sección División: División de productos -->
     <div id="cards-container_division" class="row-fluid divProductos">
       PRODUCTOS
     </div>
-    <!-- Tarjetas de productos -->
+    <!-- Sección Secundaria - Tarjetas de productos -->
     <div class="horizontalScroll" style="background-color:#C0BEC1">
         <!-- DIV Producto Leasing-->
         {{#if ResumenCliente.leasing.muestra_producto}}
@@ -888,14 +893,122 @@
             <div class="card-container">
                 <!-- Título producto -->
                 <div class="divInline">
+                	  <!-- Icono -->
+                	  <div class="contenedorIcono">
+                		    <img src="{{getUnifinListValue 'iconos_vista360_list' 'credito_simple'}}" style="height: 50px; width: 50px;">
+                    </div>
+                	  <!-- Nombre producto -->
+                  	<div class="contenedorTitulo">
+                     	  <div class="formatoTitulo">
+                      		  CRÉDITO SIMPLE
+                      	</div>
+                  	</div>
+                </div>
+                <!-- Detalle del producto -->
+                <div class="information-container">
+                    <!-- Detalle -->
+                    <div class="information-general-container">
+                        <table style="font-size:10px;color:#021741">
+                            <tbody>
+                                <!-- Historial de contactos -->
+                                <tr class="formatoFilaG">
+                                    <td colspan="2"><strong><center>HISTORIAL DE CONTACTO</center></strong></td>
+                                </tr>
+                                <tr class="formatoFilaA"  style="border-bottom-style: solid; border-color: white;">
+                                    <td style="width:40%;"><strong>Última cita</strong></td>
+                                    <td>{{ResumenCliente.credito_simple.ultima_cita}}</td>
+                                </tr>
+                                <tr class="formatoFilaA">
+                                    <td><strong>Última llamada</strong></td>
+                                    <td>{{ResumenCliente.credito_simple.ultima_llamada}}</td>
+                                </tr>
+                                <!-- Nueva solicitud -->
+                                <tr class="formatoFilaG">
+                                    <td colspan="2">
+                                        <center>
+                                            <button class="btn btnNuevaLinea" type="button" data-name="2" style="border-radius: 20%;">
+                                                Nueva línea
+                                            </button>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <!-- Detalle -->
+                                <tr>
+                                    <td><strong>Estatus de atención</strong></td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</td>
+                                </tr>
+                                {{#if ResumenCliente.credito_simple.tiene_linea_autorizada}}
+                                    <tr>
+                                        <td><strong>Estatus del producto</strong></td>
+                                        <td>{{ResumenCliente.leasing.estatusxproducto}}</td>
+                                    </tr>
+                                {{/if}}
+                                <tr>
+                                    <td><strong>Tipo de cuenta</strong></td>
+                                    <td>
+                                        {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.leasing.tipo_cuenta}}
+                                        {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.leasing.subtipo_cuenta}}
+                                    </td>
+                                </tr>
+                                {{#if ResumenCliente.credito_simple.tiene_linea_autorizada}}
+                                    <tr class="formatoFilaG">
+                                        <td><strong>Línea autorizada</strong></td>
+                                        <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_autorizada}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fecha de vencimiento de la línea</strong></td>
+                                        <td>{{ResumenCliente.credito_simple.fecha_vencimiento}}</td>
+                                    </tr>
+                                    <tr class="formatoFilaG">
+                                        <td><strong>Línea disponible</strong></td>
+                                        <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_disponible}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Estatus de la línea</strong></td>
+                                        <td>{{ResumenCliente.credito_simple.estatus_linea}}</td>
+                                    </tr>
+                                {{/if}}
+                                {{#if ResumenCliente.credito_simple.tiene_anexo_liberado}}
+                                    <tr>
+                                        <td><strong>Próxima mensualidad</strong></td>
+                                        <td>{{ResumenCliente.leasing.fecha_proximo_pago}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mensualidad activa</strong></td>
+                                        <td>{{ResumenCliente.leasing.mensualidad_activa}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Días de atraso</strong></td>
+                                        <td>{{ResumenCliente.leasing.dias_atraso}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cobranza</strong></td>
+                                        <td>{{ResumenCliente.leasing.cobranza}}</td>
+                                    </tr>
+                                {{/if}}
+                                <tr>
+                                    <td><strong>Asesor</strong></td>
+                                    <td>{{ResumenCliente.leasing.promotor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          {{/if}}
+        <!-- DIV Producto Tarjeta de Crédito -->
+        {{#if ResumenCliente.tarjeta_credito.muestra_producto}}
+            <div class="card-container">
+                <!-- Título producto -->
+                <div class="divInline">
                     <!-- Icono -->
                     <div class="contenedorIcono">
-                        <img src="{{getUnifinListValue 'iconos_vista360_list' 'leasing'}}" style="height: 50px; width: 50px;">
+                        <img src="{{getUnifinListValue 'iconos_vista360_list' 'tarjeta_credito'}}" style="height: 50px; width: 50px;">
                     </div>
                     <!-- Nombre producto -->
                     <div class="contenedorTitulo">
                         <div class="formatoTitulo">
-                            CRÉDITO SIMPLE
+                            TARJETA CRÉDITO
                         </div>
                     </div>
                 </div>
@@ -908,38 +1021,38 @@
                                 <!-- Detalle -->
                                 <tr>
                                     <td><strong>Estatus de atención</strong></td>
-                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.tarjeta_credito.estatus_atencion}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Estatus del producto</strong></td>
-                                    <td>{{ResumenCliente.leasing.estatusxproducto}}</td>
+                                    <td>{{ResumenCliente.tarjeta_credito.estatusxproducto}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Tipo de cuenta</strong></td>
                                     <td>
-                                      {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.leasing.tipo_cuenta}}
-                                      {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.leasing.subtipo_cuenta}}
+                                      {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.tarjeta_credito.tipo_cuenta}}
+                                      {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.tarjeta_credito.subtipo_cuenta}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Línea autorizada</strong></td>
-                                    <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_disponible}}</td>
+                                    <td>$ {{customFormatNumber ResumenCliente.tarjeta_credito.linea_disponible}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Fecha de vencimiento</strong></td>
-                                    <td>{{ResumenCliente.credito_simple.fecha_vencimiento}}</td>
+                                    <td>{{ResumenCliente.tarjeta_credito.fecha_vencimiento}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Línea disponible</strong></td>
-                                    <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_disponible}}</td>
+                                    <td>$ {{customFormatNumber ResumenCliente.tarjeta_credito.linea_disponible}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Cobranza</strong></td>
-                                    <td>{{ResumenCliente.leasing.cobranza}}</td>
+                                    <td>{{ResumenCliente.tarjeta_credito.cobranza}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Asesor</strong></td>
-                                    <td>{{ResumenCliente.leasing.promotor}}</td>
+                                    <td>{{ResumenCliente.tarjeta_credito.promotor}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -972,7 +1085,7 @@
   </div>
 </div>
 
-<!-- MODALES BOTONES (Ojo y libro)
+<!-- MODALES BOTONES (Ojo y libro) -->
 <!-- Modal- Activos -->
 <div id="myModal1" class="row-fluid" style="display:none">
   <div class="modal" style="background-color: #21618C">
@@ -1005,12 +1118,12 @@
           <th class="span2">Renta</th>
           <th class="span2">Pr&oacute;xima Renta</th>
           <th class="span2">Vigencia del seguro</th>
-          <th class="span2">Monto Renta</th>
-          <th class="span2">Monto Activado</th>
-          <th class="span2">Valor residual sin IVA</th>
-          <th class="span2">Saldo insoluto</th>
-          <th class="span2">Cartera vencida</th>
-          <th class="span2">Moratorios</th>
+          <th class="span3">Monto Renta</th>
+          <th class="span3">Monto Activado</th>
+          <th class="span3">Valor residual sin IVA</th>
+          <th class="span3">Saldo insoluto</th>
+          <th class="span3">Cartera vencida</th>
+          <th class="span3">Moratorios</th>
           <th class="span2">D&iacute;as de Mora</th>
           <th class="span2">Tasa</th>
           <th class="span2">Estatus Contrato</th>
@@ -1025,12 +1138,12 @@
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna9}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna10}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna11}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna12}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna13}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna14}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna9}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna10}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna11}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna12}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna13}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_activos.columna14}}</td>
           <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_anexos_activos.columna15}}</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
@@ -1052,28 +1165,28 @@
                   Fecha de Vencimiento
                   <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
                 </th>
-                <th class="span2">Monto por Vencer Financiado</th>
-                <th class="span2">Monto de Descuento</th>
+                <th class="span3">Monto por Vencer Financiado</th>
+                <th class="span3">Monto de Descuento</th>
                 <th class="span2">No. de contrato</th>
                 <th class="span2">Fecha de vencimiento contrato</th>
-                <th class="span2">Cartera vencida</th>
-                <th class="span2">Moratorios</th>
+                <th class="span3">Cartera vencida</th>
+                <th class="span3">Moratorios</th>
                 <th class="span2">Días de Mora</th>
                 <th class="span2">Estatus contrato</th>
               </tr>
             </thead>
             <tbody>
                 <tr style="color:#000000;" class="modal-body">
-              <td class="span4"style="background-color: #E6E7E9">TOTALES</td>
+              <td class="span4" style="background-color: #E6E7E9">TOTALES</td>
               <td class="span2">&nbsp;</td>
               <td class="span2">&nbsp;</td>
-              <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna4}}</td>
-              <td class="span2">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna5}}</td>
+              <td class="span3" style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna4}}</td>
+              <td class="span3" style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna5}}</td>
               <td class="span2">&nbsp;</td>
               <td class="span2">&nbsp;</td>
-              <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna8}}</td>
-              <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna9}}</td>
-              <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_cesiones_activas.columna10}}</td>
+              <td class="span3" style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna8}}</td>
+              <td class="span3" style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_activas.columna9}}</td>
+              <td class="span2" style="background-color: #E6E7E9">{{anexosdata.totales_cesiones_activas.columna10}}</td>
               <td class="span2">&nbsp;</td>
               </tr>
               </tbody>
@@ -1100,10 +1213,10 @@
                 <th class="span2">Mensualidad</th>
                 <th class="span2">Próxima Domiciliación</th>
                 <th class="span2">Vigencia del seguro</th>
-                <th class="span2">Colocación </th>
-                <th class="span2">Saldo Insoluto</th>
-                <th class="span2">Cartera vencida </th>
-                <th class="span2">Moratorios </th>
+                <th class="span3">Colocación </th>
+                <th class="span3">Saldo Insoluto</th>
+                <th class="span3">Cartera vencida </th>
+                <th class="span3">Moratorios </th>
                 <th class="span2">Días de Mora </th>
                 <th class="span2">Tasa </th>
                 <th class="span2">Estatus Contrato </th>
@@ -1118,10 +1231,10 @@
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna8}}</td>
-          <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_contratos_activos.columna9}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna10}}</td>
-          <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_contratos_activos.columna11}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna8}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna9}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna10}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_activos.columna11}}</td>
           <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_contratos_activos.columna12}}</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
@@ -1129,7 +1242,8 @@
           </tbody>
           </table>
         {{/if}}
-         {{#if anexosdata.habilita_anexos_activos_historicos}}
+        <!-- Anexos Históricos -->
+        {{#if anexosdata.habilita_anexos_activos_historicos}}
           <table class="dataTable table-striped table-border" style="table-layout: fixed;">
           <thead>
           <tr>
@@ -1140,12 +1254,12 @@
           <th class="span2">Renta</th>
           <th class="span2">Pr&oacute;xima Renta</th>
           <th class="span2">Vigencia del seguro</th>
-          <th class="span2">Monto Renta</th>
-          <th class="span2">Monto Activado</th>
-          <th class="span2">Valor residual sin IVA</th>
-          <th class="span2">Saldo insoluto</th>
-          <th class="span2">Cartera vencida</th>
-          <th class="span2">Moratorios</th>
+          <th class="span3">Monto Renta</th>
+          <th class="span3">Monto Activado</th>
+          <th class="span3">Valor residual sin IVA</th>
+          <th class="span3">Saldo insoluto</th>
+          <th class="span3">Cartera vencida</th>
+          <th class="span3">Moratorios</th>
           <th class="span2">D&iacute;as de Mora</th>
           <th class="span2">Tasa</th>
           <th class="span2">Estatus Contrato</th>
@@ -1160,12 +1274,12 @@
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna9}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna10}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna11}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna12}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna13}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna14}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna9}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna10}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna11}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna12}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna13}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_anexos_historicos.columna14}}</td>
           <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_anexos_historicos.columna15}}</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
@@ -1173,7 +1287,7 @@
           </tbody>
           </table>
         {{/if}}
-        <!-- Cesiones HISTORICAS-->
+        <!-- Cesiones Históricas-->
         {{#if anexosdata.habilita_cesiones_activas_historicas}}
           <table class="dataTable table-striped table-border" style="table-layout: fixed;">
             <thead>
@@ -1187,12 +1301,12 @@
                   Fecha de Vencimiento
                   <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
                 </th>
-                <th class="span2">Monto por Vencer Financiado</th>
-                <th class="span2">Monto de Descuento</th>
+                <th class="span3">Monto por Vencer Financiado</th>
+                <th class="span3">Monto de Descuento</th>
                 <th class="span2">No. de contrato</th>
                 <th class="span2">Fecha de vencimiento contrato</th>
-                <th class="span2">Cartera vencida</th>
-                <th class="span2">Moratorios</th>
+                <th class="span3">Cartera vencida</th>
+                <th class="span3">Moratorios</th>
                 <th class="span2">Días de Mora</th>
                 <th class="span2">Estatus contrato</th>
               </tr>
@@ -1201,12 +1315,12 @@
               <td class="span4"style="background-color: #E6E7E9">TOTALES</td>
               <td class="span2">&nbsp;</td>
               <td class="span2">&nbsp;</td>
-              <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna4}}</td>
-              <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna5}}</td>
+              <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna4}}</td>
+              <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna5}}</td>
               <td class="span2">&nbsp;</td>
               <td class="span2">&nbsp;</td>
-              <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna8}}</td>
-              <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna9}}</td>
+              <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna8}}</td>
+              <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_cesiones_historicas.columna9}}</td>
               <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_cesiones_historicas.columna10}}</td>
               <td class="span2">&nbsp;</td>
               </tr>
@@ -1214,7 +1328,7 @@
             </thead>
           </table>
         {{/if}}
-        <!-- Contratos HISTORICOS-->
+        <!-- Contratos Históricos-->
         {{#if anexosdata.habilita_contratos_activos_historicos}}
           <table class="dataTable table-striped table-border" style="table-layout: fixed;">
             <thead>
@@ -1235,10 +1349,10 @@
                 <th class="span2">Mensualidad</th>
                 <th class="span2">Próxima Domiciliación</th>
                 <th class="span2">Vigencia del seguro</th>
-                <th class="span2">Colocación </th>
-                <th class="span2">Saldo Insoluto </th>
-                <th class="span2">Cartera vencida </th>
-                <th class="span2">Moratorios </th>
+                <th class="span3">Colocación </th>
+                <th class="span3">Saldo Insoluto </th>
+                <th class="span3">Cartera vencida </th>
+                <th class="span3">Moratorios </th>
                 <th class="span2">Días de Mora </th>
                 <th class="span2">Tasa </th>
                 <th class="span2">Estatus Contrato </th>
@@ -1253,10 +1367,10 @@
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna8}}</td>
-          <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_contratos_historicos.columna9}}</td>
-          <td class="span2"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna10}}</td>
-          <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_contratos_historicos.columna11}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna8}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna9}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna10}}</td>
+          <td class="span3"style="background-color: #E6E7E9">$ {{customFormatNumber anexosdata.totales_contratos_historicos.columna11}}</td>
           <td class="span2"style="background-color: #E6E7E9">{{anexosdata.totales_contratos_historicos.columna12}}</td>
           <td class="span2">&nbsp;</td>
           <td class="span2">&nbsp;</td>
@@ -1306,15 +1420,15 @@
                          <td class="span2">{{columna5}}</td>
                          <td class="span2">{{columna6}}</td>
                          <td class="span2">{{columna7}}</td>
-                         <td class="span2">$ {{customFormatNumber columna9}}</td>
-                         <td class="span2">$ {{customFormatNumber columna10}}</td>
-                         <td class="span2">$ {{customFormatNumber columna11}}</td>
-                         <td class="span2">$ {{customFormatNumber columna12}}</td>
-                         <td class="span2">$ {{customFormatNumber columna13}}</td>
-                         <td class="span2">$ {{customFormatNumber columna14}}</td>
+                         <td class="span3">$ {{customFormatNumber columna9}}</td>
+                         <td class="span3">$ {{customFormatNumber columna10}}</td>
+                         <td class="span3">$ {{customFormatNumber columna11}}</td>
+                         <td class="span3">$ {{customFormatNumber columna12}}</td>
+                         <td class="span3">$ {{customFormatNumber columna13}}</td>
+                         <td class="span3">$ {{customFormatNumber columna14}}</td>
                          <td class="span2">{{columna15}}</td>
                          <td class="span2">{{columna16}}</td>
-                         <td class="span2">{{columna17}}</td>
+                         <td class="span2" style="white-space:initial;">{{columna17}}</td>
 
                        </tr>
                      {{/each}}
@@ -1367,15 +1481,15 @@
                          <td class="span2">{{columna5}}</td>
                          <td class="span2">{{columna6}}</td>
                          <td class="span2">{{columna7}}</td>
-                         <td class="span2">$ {{customFormatNumber columna9}}</td>
-                         <td class="span2">$ {{customFormatNumber columna10}}</td>
-                         <td class="span2">$ {{customFormatNumber columna11}}</td>
-                         <td class="span2">$ {{customFormatNumber columna12}}</td>
-                         <td class="span2">$ {{customFormatNumber columna13}}</td>
-                         <td class="span2">$ {{customFormatNumber columna14}}</td>
+                         <td class="span3">$ {{customFormatNumber columna9}}</td>
+                         <td class="span3">$ {{customFormatNumber columna10}}</td>
+                         <td class="span3">$ {{customFormatNumber columna11}}</td>
+                         <td class="span3">$ {{customFormatNumber columna12}}</td>
+                         <td class="span3">$ {{customFormatNumber columna13}}</td>
+                         <td class="span3">$ {{customFormatNumber columna14}}</td>
                          <td class="span2">{{columna15}}</td>
                          <td class="span2">{{columna16}}</td>
-                         <td class="span2">{{columna17}}</td>
+                         <td class="span2" style="white-space:initial;">{{columna17}}</td>
 
                        </tr>
                      {{/each}}
@@ -1417,14 +1531,14 @@
                        <td class="span2">{{columna1}}</td>
                        <td class="span4" style="white-space:initial;">{{columna2}}</td>
                        <td class="span2">{{columna3}}</td>
-                       <td class="span2">$ {{customFormatNumber columna4}}</td>
-                       <td class="span2">$ {{customFormatNumber columna5}}</td>
+                       <td class="span3">$ {{customFormatNumber columna4}}</td>
+                       <td class="span3">$ {{customFormatNumber columna5}}</td>
                        <td class="span2">{{columna6}}</td>
                        <td class="span2">{{columna7}}</td>
-                       <td class="span2">$ {{customFormatNumber columna8}}</td>
-                       <td class="span2">$ {{customFormatNumber columna9}}</td>
+                       <td class="span3">$ {{customFormatNumber columna8}}</td>
+                       <td class="span3">$ {{customFormatNumber columna9}}</td>
                        <td class="span2">{{columna10}}</td>
-                       <td class="span2">{{columna11}}</td>
+                       <td class="span2" style="white-space:initial;">{{columna11}}</td>
                      </tr>
                    {{/each}}
                   </tbody>
@@ -1465,14 +1579,14 @@
                        <td class="span2">{{columna1}}</td>
                        <td class="span4" style="white-space:initial;">{{columna2}}</td>
                        <td class="span2">{{columna3}}</td>
-                       <td class="span2">$ {{customFormatNumber columna4}}</td>
-                       <td class="span2">$ {{customFormatNumber columna5}}</td>
+                       <td class="span3">$ {{customFormatNumber columna4}}</td>
+                       <td class="span3">$ {{customFormatNumber columna5}}</td>
                        <td class="span2">{{columna6}}</td>
                        <td class="span2">{{columna7}}</td>
-                       <td class="span2">$ {{customFormatNumber columna8}}</td>
-                       <td class="span2">$ {{customFormatNumber columna9}}</td>
+                       <td class="span3">$ {{customFormatNumber columna8}}</td>
+                       <td class="span3">$ {{customFormatNumber columna9}}</td>
                        <td class="span2">{{columna10}}</td>
-                       <td class="span2">{{columna11}}</td>
+                       <td class="span2" style="white-space:initial;">{{columna11}}</td>
                      </tr>
                    {{/each}}
                   </tbody>
@@ -1523,13 +1637,13 @@
                        <td class="span2">{{columna5}}</td>
                        <td class="span2">{{columna6}}</td>
                        <td class="span2">{{columna7}}</td>
-                       <td class="span2">$ {{customFormatNumber columna8}}</td>
-                       <td class="span2">$ {{customFormatNumber columna9}}</td>
-                       <td class="span2">$ {{customFormatNumber columna10}}</td>
-                       <td class="span2">$ {{customFormatNumber columna11}}</td>
+                       <td class="span3">$ {{customFormatNumber columna8}}</td>
+                       <td class="span3">$ {{customFormatNumber columna9}}</td>
+                       <td class="span3">$ {{customFormatNumber columna10}}</td>
+                       <td class="span3">$ {{customFormatNumber columna11}}</td>
                        <td class="span2">{{ columna12}}</td>
                        <td class="span2">{{ columna13}}</td>
-                       <td class="span2">{{ columna14}}</td>
+                       <td class="span2" style="white-space:initial;">{{ columna14}}</td>
                      </tr>
                    {{/each}}
                   </tbody>
@@ -1581,13 +1695,13 @@
                        <td class="span2">{{columna5}}</td>
                        <td class="span2">{{columna6}}</td>
                        <td class="span2">{{columna7}}</td>
-                       <td class="span2">$ {{customFormatNumber columna8}}</td>
-                       <td class="span2">$ {{customFormatNumber columna9}}</td>
-                       <td class="span2">$ {{customFormatNumber columna10}}</td>
-                       <td class="span2">$ {{customFormatNumber columna11}}</td>
+                       <td class="span3">$ {{customFormatNumber columna8}}</td>
+                       <td class="span3">$ {{customFormatNumber columna9}}</td>
+                       <td class="span3">$ {{customFormatNumber columna10}}</td>
+                       <td class="span3">$ {{customFormatNumber columna11}}</td>
                        <td class="span2">{{ columna12}}</td>
                        <td class="span2">{{ columna13}}</td>
-                       <td class="span2">{{ columna14}}</td>
+                       <td class="span2" style="white-space:initial;">{{ columna14}}</td>
                      </tr>
                    {{/each}}
                   </tbody>
