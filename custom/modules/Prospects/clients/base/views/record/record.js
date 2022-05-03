@@ -9,7 +9,7 @@
 
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
-        this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
+        this.context.on('button:convert_Po_to_Lead:click', this.convert_Po_to_Lead, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
         this.model.on('sync', this._hideBtnConvert, this);
@@ -723,7 +723,7 @@
 
     },
 
-    convert_Lead_to_Accounts: function () {
+    convert_Po_to_Lead: function () {
         self = this;
         var filter_arguments = {
             "id": this.model.get('id')
@@ -735,7 +735,7 @@
 		var editButton = this.getField('edit_button');
         editButton.setDisabled(true);
         app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
-        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+        app.api.call("create", app.api.buildURL("existsPOLeads", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
                 console.log(data);
                 app.alert.dismiss('upload');
