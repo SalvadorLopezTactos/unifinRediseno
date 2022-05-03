@@ -8,7 +8,7 @@
       'change .Telefonoc': 'updateTelefonoc', //Casa
       'change .Telefonom': 'updateTelefonom', //Celular
     },
-  
+
     initialize: function (options) {
       //Inicializa campo custom
       options = options || {};
@@ -22,7 +22,7 @@
       this.m_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
       this.o_estatus = app.lang.getAppListStrings('estatus_telefono_list')[1];
     },
-  
+
     loadData: function () {
       this.phone_home = this.model.get('phone_home');
       this.phone_mobile = this.model.get('phone_mobile');
@@ -123,14 +123,14 @@
       $('[data-name="o_estatus_telefono_c"]').hide();
       this.render();
     },
-  
+
     bindDataChange: function () {
       this.model.on('change:' + this.name, function () {
         if (this.action !== 'edit') {
         }
       }, this);
     },
-  
+
     _render: function () {
       this._super("_render");
       if(window.cancel) {
@@ -144,14 +144,14 @@
         this.render();
       }
     },
-  
+
     keyDownNewExtension: function (evt) {
       if (!evt) return;
       if (!this.checkNumOnly(evt)) {
         return false;
       }
     },
-  
+
     //UNI349 Control Telefonos - En el campo teléfono, extensión no se debe permitir caracteres diferentes a numéricos
     checkNumOnly: function (evt) {
       if ($.inArray(evt.keyCode, [110, 188, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 16, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
@@ -165,13 +165,13 @@
         return true;
       }
     },
-  
+
     makecall: function (evt) {
       if (!evt) return;
       var $input = this.$(evt.currentTarget);
       var tel_client = $input.closest("tr").find("td").eq(1).html();
       var tel_usr = app.user.attributes.ext_c;
-      var leadid = this.model.get('id');
+      var prospectid = this.model.get('id');
       //vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
       //_.extend(this, vicidial);
       if (tel_usr != '' && tel_usr != null) {
@@ -201,7 +201,7 @@
         });
       }
     },
-  
+
     createcall: function (tel_client) {
       //Recupera variables para petición
       self = this;
@@ -214,7 +214,7 @@
           'id_cliente': this.model.get('id'),
           'nombre_cliente': name_client,
           'numero_cliente': tel_client,
-          'modulo': 'Leads',
+          'modulo': 'Prospects',
           'posicion': posicion,
           'puesto_usuario': App.user.attributes.puestousuario_c,
           'ext_usuario': App.user.attributes.ext_c
@@ -233,17 +233,17 @@
         }, this),
       });
     },
-  
+
     resultCallback: function (id_call, context) {
       self = context;
-      vicidial += '&leadid=' + id_call;
+      vicidial += '&prospectid=' + id_call;
       $.ajax({
         cache: false,
         type: "get",
         url: vicidial,
       });
     },
-  
+
     updateTelefonot: function (evt) {
       var inputs = this.$('.Telefonot'),
       input = this.$(evt.currentTarget),
@@ -252,7 +252,7 @@
       this.model.set('phone_work',telefonot);
       this.phone_work = telefonot;
     },
-  
+
     updateTelefonoc: function (evt) {
       var inputs = this.$('.Telefonoc'),
       input = this.$(evt.currentTarget),
@@ -261,7 +261,7 @@
       this.model.set('phone_home',telefonoc);
       this.phone_home = telefonoc;
     },
-  
+
     updateTelefonom: function (evt) {
       var inputs = this.$('.Telefonom'),
       input = this.$(evt.currentTarget),
@@ -271,4 +271,3 @@
       this.phone_mobile = telefonom;
     },
   })
-  

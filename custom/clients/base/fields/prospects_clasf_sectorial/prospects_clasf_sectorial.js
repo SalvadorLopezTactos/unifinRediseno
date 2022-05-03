@@ -71,7 +71,7 @@
             'label_imacro': '',
 			'label_div': '',
 			'label_grp': '',
-			'label_cls': ''			
+			'label_cls': ''
         };
 
         this.ResumenCliente = {
@@ -87,7 +87,7 @@
                 'pb_division': '',
                 'pb_grupo': '',
                 'pb_clase': ''
-            },			
+            },
         };
     },
 
@@ -144,24 +144,24 @@
 
     _render: function () {
         this._super("_render");
-		//Carga Lista de Actividad Economica
-		clasf_sectorial.actividad_list = app.lang.getAppListStrings('actividad_list');
-		//Oculta campos
-		$('[data-name="pb_division_c"]').hide();
-		$('[data-name="pb_grupo_c"]').hide();
-		$('[data-name="pb_clase_c"]').hide();
-		$('[data-name="actividad_economica_c"]').hide();
-		$('[data-name="sector_economico_c"]').hide();
-		$('[data-name="subsector_c"]').hide();
-		$('[data-name="macrosector_c"]').hide();
-		$('[data-name="inegi_clase_c"]').hide();
-		$('[data-name="inegi_subrama_c"]').hide();
-		$('[data-name="inegi_rama_c"]').hide();
-		$('[data-name="inegi_subsector_c"]').hide();
-		$('[data-name="inegi_sector_c"]').hide();
-		$('[data-name="inegi_macro_c"]').hide();
-        //campo custom lead_clasf_sectorial ocualta la Etiqueta
-        $("div.record-label[data-name='lead_clasf_sectorial']").attr('style', 'display:none;');
+    		//Carga Lista de Actividad Economica
+    		clasf_sectorial.actividad_list = app.lang.getAppListStrings('actividad_list');
+    		//Oculta campos
+    		$('[data-name="pb_division_c"]').hide();
+    		$('[data-name="pb_grupo_c"]').hide();
+    		$('[data-name="pb_clase_c"]').hide();
+    		$('[data-name="actividad_economica_c"]').hide();
+    		$('[data-name="sector_economico_c"]').hide();
+    		$('[data-name="subsector_c"]').hide();
+    		$('[data-name="macrosector_c"]').hide();
+    		$('[data-name="inegi_clase_c"]').hide();
+    		$('[data-name="inegi_subrama_c"]').hide();
+    		$('[data-name="inegi_rama_c"]').hide();
+    		$('[data-name="inegi_subsector_c"]').hide();
+    		$('[data-name="inegi_sector_c"]').hide();
+    		$('[data-name="inegi_macro_c"]').hide();
+        //campo custom prospects_clasf_sectorial ocualta la Etiqueta
+        $("div.record-label[data-name='prospects_clasf_sectorial']").attr('style', 'display:none;');
         //Funcion para dar estilo select2 a las listas deplegables.
         var $select = $('select.select2');
         $select.select2();
@@ -173,7 +173,7 @@
         $(".campoSSE").attr('style', 'pointer-events:none;');
         $(".campoSE").attr('style', 'pointer-events:none;');
         $(".campoMS").attr('style', 'pointer-events:none;');
-        //Campos INEGI de Solo Lectura 
+        //Campos INEGI de Solo Lectura
         $(".campoIC").attr('style', 'pointer-events:none;');
         $(".campoISR").attr('style', 'pointer-events:none;');
         $(".campoIR").attr('style', 'pointer-events:none;');
@@ -188,18 +188,18 @@
         $('.list_ae').change(function (evt) {
             clasf_sectorial.fClasfSectorial(evt);
         });
-		if(window.actualiza == 1) {
+    		if(window.actualiza == 1) {
             this.model.set("actividad_economica_c", clasf_sectorial.ActividadEconomica.ae.id);
-			this.model.set("subsector_c", clasf_sectorial.ActividadEconomica.sse.id);
-			this.model.set("sector_economico_c", clasf_sectorial.ActividadEconomica.se.id);
-			this.model.set("macrosector_c", clasf_sectorial.ActividadEconomica.ms.id);
-			this.model.set("inegi_clase_c", clasf_sectorial.ActividadEconomica.inegi_clase);
-			this.model.set("inegi_subrama_c", clasf_sectorial.ActividadEconomica.inegi_subrama);
-			this.model.set("inegi_rama_c", clasf_sectorial.ActividadEconomica.inegi_rama);
-			this.model.set("inegi_subsector_c", clasf_sectorial.ActividadEconomica.inegi_subsector);
-			this.model.set("inegi_sector_c", clasf_sectorial.ActividadEconomica.inegi_sector);
-			this.model.set("inegi_macro_c", clasf_sectorial.ActividadEconomica.inegi_macro);
-			window.actualiza = 0;
+      			this.model.set("subsector_c", clasf_sectorial.ActividadEconomica.sse.id);
+      			this.model.set("sector_economico_c", clasf_sectorial.ActividadEconomica.se.id);
+      			this.model.set("macrosector_c", clasf_sectorial.ActividadEconomica.ms.id);
+      			this.model.set("inegi_clase_c", clasf_sectorial.ActividadEconomica.inegi_clase);
+      			this.model.set("inegi_subrama_c", clasf_sectorial.ActividadEconomica.inegi_subrama);
+      			this.model.set("inegi_rama_c", clasf_sectorial.ActividadEconomica.inegi_rama);
+      			this.model.set("inegi_subsector_c", clasf_sectorial.ActividadEconomica.inegi_subsector);
+      			this.model.set("inegi_sector_c", clasf_sectorial.ActividadEconomica.inegi_sector);
+      			this.model.set("inegi_macro_c", clasf_sectorial.ActividadEconomica.inegi_macro);
+    		    window.actualiza = 0;
         }
     },
 

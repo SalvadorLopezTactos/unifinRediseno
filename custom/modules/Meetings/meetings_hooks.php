@@ -638,7 +638,17 @@ class Meetings_Hooks
             }
           }
         }
-	  }
+
+        //Actualiza estatus Público objetivo
+        if ($parentType == 'Prospects' && $bean->status == "Held") {
+            $beanPO = BeanFactory::getBean('Prospects', $parent_id);
+            if($beanPO->estatus_po_c == '1'){
+                $beanPO->estatus_po_c = '2';
+                $beanPO->subestatus_po_c = '1';
+                $beanPO->save();
+            }
+        }
+    }
 
     function ConvierteLead($bean, $event, $arguments)
     {
@@ -653,11 +663,11 @@ class Meetings_Hooks
       $resultMeetConvert = $app_list_strings['convertir_result_reunion_list'];
       $listMeetConvert = array();
       foreach ($resultMeetConvert as $key => $value){
-        $listMeetConvert[] = $key;        
+        $listMeetConvert[] = $key;
       }
-      
+
       if (in_array($bean->resultado_c, $listMeetConvert)) {
-        
+
         if($bean->status == "Held" && $parentType == 'Leads') {
           $GLOBALS['log']->fatal('Entro conversión');
           require_once("custom/clients/base/api/check_duplicateAccounts.php");
@@ -674,7 +684,7 @@ class Meetings_Hooks
     function InfoMeet($bean = null, $event = null, $args = null)
     {
 
-          if (!$args['isUpdate']) { 
+          if (!$args['isUpdate']) {
                       global $db ,$current_user;
                       $GLOBALS['log']->fatal("InfoMeet: Inicio");
                       //Realiza consulta para obtener info del usuario asignado
@@ -700,5 +710,5 @@ class Meetings_Hooks
                      $bean->creado_puesto_c=$current_user->puestousuario_c;
                      $GLOBALS['log']->fatal("InfoMeet: Finaliza");
           }
-    }	
+    }
 }

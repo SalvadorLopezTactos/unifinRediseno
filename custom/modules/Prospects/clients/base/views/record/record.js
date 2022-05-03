@@ -33,7 +33,7 @@
         this.model.on('sync', this._hideBtnReset, this);
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
         //Direcciones
-        contexto_lead = this;
+        contexto_prospect = this;
         this.get_addresses();
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
@@ -115,7 +115,7 @@
         $('[data-subpanel-link="campaigns"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="archived_emails"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="leads_leads_1"]').find(".subpanel-controls").hide();
-        $("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
+        $("div.record-label[data-name='prospects_direcciones']").attr('style', 'display:none;');
     },
 
     expmail: function (fields, errors, callback) {
@@ -441,7 +441,7 @@
             _.each(this.model.fields, function (field) {
                 if (_.isEqual(field.name, key)) {
                     if (field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Leads") + '</b><br>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Prospects") + '</b><br>';
                     }
                 }
             }, this);
@@ -713,8 +713,8 @@
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Ocultando campo de control que omite validación de duplicados
         $('[data-name="omite_match_c"]').hide();
-        //Oculta etiqueta de lead_direcciones
-        this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
+        //Oculta etiqueta de prospects_direcciones
+        this.$("div.record-label[data-name='prospects_direcciones']").attr('style', 'display:none;');
         //Ocultando campo check de homonimo
         $('[data-name="homonimo_c"]').hide();
 
@@ -836,7 +836,7 @@
 
     llamar_vicidial: function (tel_client) {
         var tel_usr = app.user.attributes.ext_c;
-        var leadid = this.model.get('id');
+        var prospectid = this.model.get('id');
         vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
         _.extend(this, vicidial);
         if (tel_usr != '' || tel_usr != null) {
@@ -871,11 +871,11 @@
         var id_call = '';
         var name_client = this.model.get('name');
         var id_client = this.model.get('id');
-        var modulo = 'Leads';
-		var posiciones = app.user.attributes.posicion_operativa_c;
-		var posicion = '';
-		if(posiciones.includes(3)) posicion = 'Ventas';
-		if(posiciones.includes(4)) posicion = 'Staff';
+        var modulo = 'Prospects';
+    		var posiciones = app.user.attributes.posicion_operativa_c;
+    		var posicion = '';
+    		if(posiciones.includes(3)) posicion = 'Ventas';
+    		if(posiciones.includes(4)) posicion = 'Staff';
         var Params = [id_client, name_client, modulo, posicion];
         app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
             success: _.bind(function (data) {
@@ -893,7 +893,7 @@
 
     resultCallback: function (id_call, context) {
         self = context;
-        vicidial += '&leadid=' + id_call;
+        vicidial += '&prospectid=' + id_call;
         $.ajax({
             cache: false,
             type: "get",
@@ -956,7 +956,7 @@
 
     handleCancel: function () {
         this._super("handleCancel");
-		window.cancel = 1;
+		    window.cancel = 1;
         //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
         clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
@@ -967,11 +967,11 @@
         clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
         clasf_sectorial.render();
         //Direcciones
-        var lead_direcciones = app.utils.deepCopy(this.prev_oDirecciones.prev_direccion);
-        this.model.set('lead_direcciones', lead_direcciones);
-        this.oDirecciones.direccion = lead_direcciones;
-        lead_dir.nuevaDireccion = lead_dir.limpiaNuevaDireccion();
-        lead_dir.render();
+        var prospects_direcciones = app.utils.deepCopy(this.prev_oDirecciones.prev_direccion);
+        this.model.set('prospects_direcciones', prospects_direcciones);
+        this.oDirecciones.direccion = prospects_direcciones;
+        prospect_dir.nuevaDireccion = prospect_dir.limpiaNuevaDireccion();
+        prospect_dir.render();
     },
 
     get_addresses: function () {
@@ -986,11 +986,11 @@
         var listTipo = App.lang.getAppListStrings('dir_tipo_unique_list');
         var listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         var listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
-        var idLead = this.model.get('id');
+        var idProspect = this.model.get('id');
 
         //Recupera información
-        if (!_.isEmpty(idLead) && idLead != "") {
-            app.api.call('GET', app.api.buildURL('Leads/' + idLead + '/link/leads_dire_direccion_1'), null, {
+        if (!_.isEmpty(idProspect) && idProspect != "") {
+            app.api.call('GET', app.api.buildURL('Prospects/' + idProspect + '/link/prospects_dire_direccion_1'), null, {
                 success: function (data) {
                     //Itera y agrega direcciones
                     for (var i = 0; i < data.records.length; i++) {
@@ -1066,7 +1066,7 @@
                         };
 
                         //Agregar dirección
-                        contexto_lead.oDirecciones.direccion.push(direccion);
+                        contexto_prospect.oDirecciones.direccion.push(direccion);
 
                         //recupera información asociada a CP
                         var strUrl = 'DireccionesCP/' + valCodigoPostal + '/' + i;
@@ -1084,50 +1084,50 @@
                                 for (var i = 0; i < list_paises.length; i++) {
                                     listPais[list_paises[i].idPais] = list_paises[i].namePais;
                                 }
-                                contexto_lead.oDirecciones.direccion[data.indice].listPais = listPais;
-                                contexto_lead.oDirecciones.direccion[data.indice].listPaisFull = listPais;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listPais = listPais;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listPaisFull = listPais;
                                 //Municipio
                                 listMunicipio = {};
                                 for (var i = 0; i < list_municipios.length; i++) {
                                     listMunicipio[list_municipios[i].idMunicipio] = list_municipios[i].nameMunicipio;
                                 }
-                                contexto_lead.oDirecciones.direccion[data.indice].listMunicipio = listMunicipio;
-                                contexto_lead.oDirecciones.direccion[data.indice].listMunicipioFull = listMunicipio;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listMunicipio = listMunicipio;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listMunicipioFull = listMunicipio;
                                 //Estado
                                 listEstado = {};
                                 for (var i = 0; i < list_estados.length; i++) {
                                     listEstado[list_estados[i].idEstado] = list_estados[i].nameEstado;
                                 }
-                                contexto_lead.oDirecciones.direccion[data.indice].listEstado = listEstado;
-                                contexto_lead.oDirecciones.direccion[data.indice].listEstadoFull = listEstado;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listEstado = listEstado;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listEstadoFull = listEstado;
                                 //Colonia
                                 listColonia = {};
                                 for (var i = 0; i < list_colonias.length; i++) {
                                     listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
                                 }
-                                contexto_lead.oDirecciones.direccion[data.indice].listColonia = listColonia;
-                                contexto_lead.oDirecciones.direccion[data.indice].listColoniaFull = listColonia;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listColonia = listColonia;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listColoniaFull = listColonia;
                                 //Ciudad
                                 listCiudad = {}
                                 ciudades = Object.values(city_list);
-                                for (var [key, value] of Object.entries(contexto_lead.oDirecciones.direccion[data.indice].listEstado)) {
+                                for (var [key, value] of Object.entries(contexto_prospect.oDirecciones.direccion[data.indice].listEstado)) {
                                     for (var i = 0; i < ciudades.length; i++) {
                                         if (ciudades[i].estado_id == key) {
                                             listCiudad[ciudades[i].id] = ciudades[i].name;
                                         }
                                     }
                                 }
-                                contexto_lead.oDirecciones.direccion[data.indice].listCiudad = listCiudad;
-                                contexto_lead.oDirecciones.direccion[data.indice].listCiudadFull = listCiudad;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listCiudad = listCiudad;
+                                contexto_prospect.oDirecciones.direccion[data.indice].listCiudadFull = listCiudad;
 
                                 //Genera objeto con valores previos para control de cancelar
-                                contexto_lead.prev_oDirecciones.prev_direccion = app.utils.deepCopy(contexto_lead.oDirecciones.direccion);
-                                lead_dir.oDirecciones = contexto_lead.oDirecciones;
+                                contexto_prospect.prev_oDirecciones.prev_direccion = app.utils.deepCopy(contexto_prospect.oDirecciones.direccion);
+                                prospect_dir.oDirecciones = contexto_prospect.oDirecciones;
 
                                 //Aplica render a campo custom
-                                lead_dir.render();
+                                prospect_dir.render();
 
-                            }, contexto_lead)
+                            }, contexto_prospect)
                         });
                     }
                 },
@@ -1213,7 +1213,7 @@
         if ($.isEmptyObject(errors)) {
             //Direcciones
             this.prev_oDirecciones.prev_direccion = app.utils.deepCopy(this.oDirecciones.direccion);
-            this.model.set('lead_direcciones', this.oDirecciones.direccion);
+            this.model.set('prospects_direcciones', this.oDirecciones.direccion);
         }
         //Callback a validation task
         callback(null, fields, errors);
@@ -1270,7 +1270,7 @@
     /** Description: On Inline edit disable the TAB Key in order to prevent the field from going to detail mode.*/
     handleKeyDown: function (e, field) {
         if (e.which === 9) {
-            if (field.name != this.model.fields.lead_direcciones.name) {
+            if (field.name != this.model.fields.prospects_direcciones.name) {
                 e.preventDefault();
                 this.nextField(field, e.shiftKey ? 'prevField' : 'nextField');
                 this.adjustHeaderpane();

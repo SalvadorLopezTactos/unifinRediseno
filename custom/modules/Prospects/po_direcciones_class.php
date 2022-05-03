@@ -12,7 +12,7 @@ class po_direcciones_class
 
         if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
 
-            foreach ($bean->lead_direcciones as $direccion_row) {
+            foreach ($bean->prospects_direcciones as $direccion_row) {
 
                 $direccion = BeanFactory::getBean('dire_Direccion', $direccion_row['id']);
 
@@ -46,8 +46,8 @@ class po_direcciones_class
                 $direccion->team_set_id = $bean->team_set_id;
                 $direccion->assigned_user_id = $bean->assigned_user_id;
 
-                // populate related lead id
-                $direccion->leads_dire_direccion_1leads_ida = $bean->id;
+                // populate related prospect id
+                $direccion->prospects_dire_direccion_1prospects_ida = $bean->id;
 
                 $nombre_colonia_query = "SELECT name from dire_colonia where id ='" . $direccion_row['colonia'] . "'";
                 $nombre_municipio_query = "SELECT name from dire_municipio where id ='" . $direccion_row['municipio'] . "'";
@@ -133,8 +133,8 @@ SQL;
                 //$direccion->save();
             }
             //retrieve all related records
-            $bean->load_relationship('leads_dire_direccion_1');
-            foreach ($bean->leads_dire_direccion_1->getBeans() as $a_direccion) {
+            $bean->load_relationship('prospects_dire_direccion_1');
+            foreach ($bean->prospects_dire_direccion_1->getBeans() as $a_direccion) {
                 if (!in_array($a_direccion->id, $current_id_list)) {
                     //$a_direccion->mark_deleted($a_direccion->id);
                 }

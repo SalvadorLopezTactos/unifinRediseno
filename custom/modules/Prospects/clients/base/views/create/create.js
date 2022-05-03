@@ -39,7 +39,7 @@
         this.metodo_asignacion_lm_lead();
 
         //Direcciones
-        contexto_lead = this;
+        contexto_prospect = this;
         this.oDirecciones = [];
         this.oDirecciones.direccion = [];
         this.prev_oDirecciones = [];
@@ -190,7 +190,7 @@
             var nombre = this.model.get('nombre_c');
             var comprueba = expresion.test(nombre);
             if (comprueba != true) {
-                camponame = camponame + '<b>' + app.lang.get("LBL_NOMBRE", "Leads") + '</b><br>';
+                camponame = camponame + '<b>' + app.lang.get("LBL_NOMBRE", "Prospects") + '</b><br>';
                 errors['nombre_c'] = errors['nombre_c'] || {};
                 errors['nombre_c'].required = true;
             }
@@ -200,7 +200,7 @@
             var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaap = expresion.test(apaterno);
             if (validaap != true) {
-                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Leads") + '</b><br>';
+                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_PATERNO_C", "Prospects") + '</b><br>';
                 errors['apellido_paterno_c'] = errors['apellido_paterno_c'] || {};
                 errors['apellido_paterno_c'].required = true;
             }
@@ -210,7 +210,7 @@
             var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
             var validaam = expresion.test(amaterno);
             if (validaam != true) {
-                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Leads") + '</b><br>';
+                camponame = camponame + '<b>' + app.lang.get("LBL_APELLIDO_MATERNO_C", "Prospects") + '</b><br>';
                 errors['apellido_materno_c'] = errors['apellido_materno_c'] || {};
                 errors['apellido_materno_c'].required = true;
             }
@@ -320,7 +320,7 @@
                                     registros:self.duplicados,
                                     name: 'ValidaDuplicadoModal',
                                     layout: this.layout,
-                                    module: 'Leads'
+                                    module: 'Prospects'
                                 });
                                 /** add the new view to the components list of the record layout*/
                                 this.layout._components.push(quickCreateView);
@@ -628,7 +628,7 @@
     estableceOpcionesOrigenLeads:function(){
         var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
 
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
+        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth
             Object.keys(opciones_origen).forEach(function (key) {
                 if (key == "14" || key == "15") {
                     delete opciones_origen[key];
@@ -824,17 +824,17 @@
         $('[data-name="omite_match_c"]').hide();
         //Ocultando campo check de homonimo
         $('[data-name="homonimo_c"]').hide();
-        //Oculta etiqueta de lead_direcciones
-        this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
+        //Oculta etiqueta de prospects_direcciones
+        this.$("div.record-label[data-name='prospects_direcciones']").attr('style', 'display:none;');
 		//Oculta telefonos
 		$('[data-name="phone_work"]').hide();
 		$('[data-name="phone_home"]').hide();
         $('[data-name="phone_mobile"]').hide();
-        
+
         //Oculta fecha de bloqueo
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
     },
- 
+
     fechaAsignacion: function () {
 
         //Asigna fecha de asignacion con los puestos de Asesor Leasing:2 y Director Leasing:5
@@ -883,10 +883,10 @@
 
     setCustomFields: function (fields, errors, callback) {
         //Direcciones
-        this.model.set('lead_direcciones', this.oDirecciones.direccion);
+        this.model.set('prospects_direcciones', this.oDirecciones.direccion);
 
         callback(null, fields, errors);
-    },    
+    },
 
     validadireccexisting: function (fields, errors, callback) {
         //Campos requeridos
@@ -1043,7 +1043,7 @@
                       }
                       app.alert.show("Usuarios", {
                           level: "error",
-                          messages: "No es posible generar un Lead con el siguiente usuario inactivo:<br>"+nombres,
+                          messages: "No es posible guardar con el siguiente usuario inactivo:<br>"+nombres,
                           autoClose: false
                       });
                       errors['usuariostatus'] = errors['usuariostatus'] || {};

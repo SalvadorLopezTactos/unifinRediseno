@@ -1,6 +1,7 @@
 <?php
- // created: 2022-04-26 21:00:46
+ // created: 2022-05-03 03:19:35
 $dictionary['Prospect']['fields']['subestatus_po_c']['labelValue']='Subestatus';
+$dictionary['Prospect']['fields']['subestatus_po_c']['dependency']='';
 $dictionary['Prospect']['fields']['subestatus_po_c']['required_formula']='';
 $dictionary['Prospect']['fields']['subestatus_po_c']['readonly_formula']='';
 $dictionary['Prospect']['fields']['subestatus_po_c']['visibility_grid']=array (
