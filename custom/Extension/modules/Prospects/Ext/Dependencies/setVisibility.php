@@ -12,10 +12,20 @@ $dependencies['Prospects']['panel_3_visibility'] = array(
     'onload' => true,
     'actions' => array(
         array(
-            'name' => 'SetVisibility',
+            'name' => 'SetPanelVisibility',
             'params' => array(
-                'target' => 'detailpanel_3',
+                'target' => 'LBL_RECORDVIEW_PANEL3',
                 'value' => 'true',
+            ),
+        ),
+    ),
+    //notActions is a list of actions to fire when the trigger is false
+    'notActions' => array(
+        array(
+            'name' => 'SetPanelVisibility',
+            'params' => array(
+                'target' => 'LBL_RECORDVIEW_PANEL3',
+                'value' => 'false',
             ),
         ),
     ),
