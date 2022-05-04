@@ -153,6 +153,7 @@ SITE;
         $bean_lead->contacto_asociado_c = $beanPO->contacto_asociado_c;
         $bean_lead->leads_leads_1_name = $beanPO->leads_leads_1_name;
         $bean_lead->genero_c = $beanPO->genero_c;
+        $bean_Lead->medio_digital_c=$beanPO->medio_digital_c;
         
         $bean_lead->email = $beanPO->email;
         $bean_lead->clean_name = $beanPO->clean_name_c;
@@ -181,26 +182,18 @@ SITE;
             $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_mobile, 3, $beanPO->m_estatus_telefono_c, $principal);
             $principal = 0;
         }
-        if (!empty($bean_Leads->phone_home)) {
+        if (!empty($beanPO->phone_home)) {
             $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_home, 1, $beanPO->c_estatus_telefono_c, $principal);
             $principal = 0;
         }
-        if (!empty($bean_Leads->phone_work)) {
+        if (!empty($beanPO->phone_work)) {
             $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_work, 2, $beanPO->o_estatus_telefono_c, $principal);
             $principal = 0;
         }
 
         $bean_lead->pendiente_reus_c = ($resp_reus_tel == 3) ? true : false;
 
-        //Campos PB
-        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_lead->id, array('disable_row_level_security' => true));
-        $bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
-        $bean_Resumen->pb_grupo_c = $bean_Leads->pb_grupo_c;
-        $bean_Resumen->pb_clase_c = $bean_Leads->pb_clase_c;
-        
-        $bean_Resumen->save();
-
-        return $bean_account;
+        return $bean_lead;
     }
 
     public function existLeadAccount($bean_lead)
