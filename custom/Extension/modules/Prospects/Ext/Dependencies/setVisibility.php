@@ -5,8 +5,8 @@
  * Time: 11:35 AM
  */
 
-$dependencies['Prospects']['panel_auxiliar'] = array(
-    'hooks' => array("all"),
+$dependencies['Prospects']['panel_3_visibility'] = array(
+    'hooks' => array("edit","view"),
     'trigger' => 'true',
     'triggerFields' => array('panel_auxiliar'),
     'onload' => true,
@@ -14,7 +14,7 @@ $dependencies['Prospects']['panel_auxiliar'] = array(
         array(
             'name' => 'SetVisibility',
             'params' => array(
-                'target' => 'LBL_RECORDVIEW_PANEL3',
+                'target' => 'detailpanel_3',
                 'value' => 'true',
             ),
         ),
