@@ -234,6 +234,8 @@ SQL;
 
         //Nuevo account_direcciones_n
         if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
+            $GLOBALS['log']->fatal("DIRECCIONES:*********************");
+            $GLOBALS['log']->fatal(print_r($bean->account_direcciones,true));
             foreach ($bean->account_direcciones as $direccion_row) {
                 /** @var dire_Direccion $direccion */
                 $direccion = BeanFactory::getBean('dire_Direccion', $direccion_row['id']);
@@ -271,17 +273,49 @@ SQL;
                 // populate related account id
                 $direccion->accounts_dire_direccion_1accounts_ida = $bean->id;
 
+                /*
                 $nombre_colonia_query = "Select name from dire_colonia where id ='" . $direccion_row['colonia'] . "'";
                 $nombre_municipio_query = "Select name from dire_municipio where id ='" . $direccion_row['municipio'] . "'";
                 $querycolonia = $db->query($nombre_colonia_query);
                 $coloniaName = $db->fetchByAssoc($querycolonia);
                 $querymunicipio = $db->query($nombre_municipio_query);
                 $municipioName = $db->fetchByAssoc($querymunicipio);
-                $direccion_completa = $direccion_row['calle'] . " " . $direccion_row['numext'] . " " . ($direccion_row['numint'] != "" ? "Int: " . $direccion_row['numint'] : "") . ", Colonia " . $coloniaName['name'] . ", Municipio " . $municipioName['name'];
+                */
+                $query_sepomex="SELECT * FROM dir_sepomex WHERE id='" . $direccion_row['postal'] . "'";
+                $GLOBALS['log']->fatal("QUERY SEPOMEX");
+                $GLOBALS['log']->fatal($query_sepomex);
+                $result_sepomex = $db->query($query_sepomex);
+                while ($row = $GLOBALS['db']->fetchByAssoc($result_sepomex)) {
+                    $namePais=$row['pais'];
+                    $idPais=$row['id_pais'];
+                    $nameCP=$row['codigo_postal'];
+                    $nameEstado=$row['estado'];
+                    $idEstado=$row['id_estado'];
+                    $nameCiudad=$row['ciudad'];
+                    $idCiudad=$row['id_ciudad'];
+                    $nameColonia=$row['colonia'];
+                    $idColonia=$row['id_colonia'];
+                    $nameMunicipio=$row['municipio'];
+                    $idMunicipio=$row['id_municipio'];
+                }
+               
+                $direccion_completa = $direccion_row['calle'] . " " . $direccion_row['numext'] . " " . ($direccion_row['numint'] != "" ? "Int: " . $direccion_row['numint'] : "") . ", Colonia " . $nameColonia. ", Municipio " . $nameMunicipio;
                 $direccion->name = $direccion_completa;
 
+                $direccion->pais_c=$namePais;
+                $direccion->codigo_postal_c=$nameCP;
+                $direccion->estado_c=$nameEstado;
+                $direccion->ciudad_c=$nameCiudad;
+                $direccion->municipio_c=$nameMunicipio;
+                $direccion->colonia_c=$nameColonia;
+                //Se utiliza campo descripcion de la direccion para ya no crear campos nuevos solo para los id
+                $direccion->description="{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}";
+
+                //Se genera relación entre la dirección y Sepomex
+                $direccion->dir_sepomex_dire_direcciondir_sepomex_ida=$direccion_row['postal'];
 
                 // update related records
+                /*
                 if ($direccion->load_relationship('dire_direccion_dire_pais')) {
                     if ($direccion_row['pais'] !== $direccion->dire_direccion_dire_paisdire_pais_ida) {
                         $direccion->dire_direccion_dire_pais->delete($direccion->id);
@@ -309,7 +343,7 @@ SQL;
                         $direccion->dire_direccion_dire_ciudad->add($direccion_row['ciudad']);
                     }
                 }
-
+                
                 if ($direccion->load_relationship('dire_direccion_dire_codigopostal')) {
                     try {
                         //if (!empty($direccion_row['postal'])) {
@@ -321,15 +355,16 @@ SQL;
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
                     }
                 }
-
+                
                 if ($direccion->load_relationship('dire_direccion_dire_colonia')) {
                     if ($direccion_row['colonia'] !== $direccion->dire_direccion_dire_coloniadire_colonia_ida) {
                         $direccion->dire_direccion_dire_colonia->delete($direccion->id);
                         $direccion->dire_direccion_dire_colonia->add($direccion_row['colonia']);
                     }
                 }
+                */
 
-                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : DIRECCION NOMBRE" . $direccion_completa);
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : DIRECCION NOMBRE: " . $direccion_completa);
                 $current_id_list[] = $direccion->id;
                 if ($new) {
                     $direccion->save();
