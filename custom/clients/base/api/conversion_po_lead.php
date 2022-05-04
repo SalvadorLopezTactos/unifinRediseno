@@ -160,6 +160,8 @@ SITE;
         
         $bean_lead->convertido_c = 0;
         $bean_lead->onboarding_chk_c=0;
+        //Nace lead como NUEVO =13
+        $bean_lead->subtipo_registro_c='13';
         
         //Clasificación Sectorial
         if (!empty($beanPO->actividad_economica_c)) {
