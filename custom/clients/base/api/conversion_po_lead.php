@@ -48,13 +48,13 @@ class conversion_po_lead extends SugarApi
          */
         $beanPO = BeanFactory::retrieveBean('Prospects', $id_Lead, array('disable_row_level_security' => true));
         // $GLOBALS['log']->fatal("nombre del LEads " . $bean->first_name);
-        $result = $this->existLeadAccount($bean);
+        $result = $this->existLeadAccount($beanPO);
         $count = count($result);
-        if ($bean->subtipo_registro_c != "4" && $bean->subtipo_registro_c != "3") { //SUBTIPO DE LEAD ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
+        if ($bean->estatus_po_c != "4" && $bean->estatus_po_c != "3") { //Estatus ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
             if ($count == 0) {
 
 
-                $responsMeeting = $this->getMeetingsUser($bean);
+                $responsMeeting = $this->getMeetingsUser($beanPO);
                 $requeridos = $this->validaRequeridos($beanPO);
 
                 if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
@@ -63,23 +63,23 @@ class conversion_po_lead extends SugarApi
                     $bean_Lead = $this->createLead($beanPO, false);
 
                         if (!empty($bean_Lead->id)) {
-                            $resultadoRelaciones = $this->getContactAssoc($bean, $bean_Lead);
+                            $resultadoRelaciones = $this->getContactAssoc($beanPO, $bean_Lead);
 
                             // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
                             // $bean->tipo_registro_c = "";
-                            $bean->subtipo_registro_c = 4;
-                            $bean->account_id = $bean_account->id;
-                            $bean->account_name = $bean_account->name;
-                            $bean->save();
-                            // Re-asignamos reuniones, llamadas, tareas y notas de Leads a Cuentas
-                            $this->re_asign_meetings($bean, $bean_account->id);
+                            $bean_Lead->subtipo_registro_c = 13;
+                            $bean_Lead->account_id = $beanPO->id;
+                            $bean_Lead->account_name = $beanPO->name;
+                            $bean_Lead->save();
+                            // Re-asignamos reuniones, llamadas, tareas y notas de PO a Leads
+                            $this->re_asign_meetings($beanPO, $bean_Lead->id);
 
                             $msj_succes = <<<SITE
                             Conversión Completa <br>
-    <b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
+    <b></b><a href="$url/#Accounts/$bean_Lead->id">$bean_Lead->name</a></b>
     SITE;
 
-                            $finish = array("idCuenta" => $bean_account->id, "mensaje" => $msj_succes);
+                            $finish = array("idCuenta" => $bean_Lead->id, "mensaje" => $msj_succes);
                         }
                     
 
@@ -198,9 +198,9 @@ SITE;
         return $bean_lead;
     }
 
-    public function existLeadAccount($bean_lead)
+    public function existLeadAccount($beanPO)
     {
-        $leads_bean = BeanFactory::getBean('Leads');
+        $leads_bean = BeanFactory::getBean('Prospects');
         $leads_bean->disable_row_level_security = true;
 
         $sql = new SugarQuery();
