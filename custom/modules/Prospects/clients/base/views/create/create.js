@@ -484,32 +484,14 @@
 
     valida_requeridos: function (fields, errors, callback) {
         var campos = "";
-        var subTipoLead = this.model.get('subtipo_registro_c');
+        
         var tipoPersona = this.model.get('regimen_fiscal_c');
         var campos_req = ['origen_c'];
 
-        switch (subTipoLead) {
-            /*******SUB-TIPO SIN CONTACTAR*****/
-            case '1':
-                if (tipoPersona == '3') {
-                    campos_req.push('nombre_empresa_c');
-                }
-                else {
-                    campos_req.push('nombre_c', 'apellido_paterno_c');
-                }
-                break;
-            /********SUB-TIPO CONTACTADO*******/
-            case '2':
-                if (tipoPersona == '3') {
-                    campos_req.push('nombre_empresa_c');
-                }
-                else {
-                    campos_req.push('nombre_c', 'apellido_paterno_c', 'apellido_materno_c');
-                }
-                break;
-
-            default:
-                break;
+        if (tipoPersona!='3'){
+            campos_req.push('nombre_c', 'apellido_paterno_c', 'apellido_materno_c');
+        }else{
+            campos_req.push('nombre_empresa_c');
         }
 
         if (campos_req.length > 0) {
@@ -529,7 +511,7 @@
             _.each(this.model.fields, function (field) {
                 if (_.isEqual(field.name, key)) {
                     if (field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Leads") + '</b><br>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Prospects") + '</b><br>';
                     }
                 }
             }, this);
@@ -552,19 +534,10 @@
             errors['phone_work'] = errors['phone_work'] || {};
             errors['phone_work'].required = true;
         }
-        /*****CHECK LEAD CANCELAR*********/
-        if (this.model.get('lead_cancelado_c') == '1') {
-            if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
-
-                campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
-                errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
-                errors['motivo_cancelacion_c'].required = true;
-            }
-        }
         if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                messages: "Hace falta completar la siguiente información para guardar un <b>Público Objetivo: </b><br>" + campos,
                 autoClose: false
             });
         }
