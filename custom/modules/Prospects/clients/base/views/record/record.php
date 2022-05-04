@@ -163,11 +163,11 @@ array (
             ),
             17 => 
               array (
-                'name' => 'convert_Po_to_Lead',
+                'name' => 'convert_po_to_Lead',
                 'type' => 'rowaction',
                 'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
                 'acl_action' => 'view',
-                'event' => 'button:convert_Po_to_Lead:click',
+                'event' => 'button:convert_po_to_Lead:click',
                 'class' => 'btn_convertLeads',
               ),
           ),

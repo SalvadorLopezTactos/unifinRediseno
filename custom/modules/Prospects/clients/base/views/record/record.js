@@ -9,7 +9,7 @@
 
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
-        this.context.on('button:convert_Po_to_Lead:click', this.convert_Po_to_Lead, this);
+        this.context.on('button:convert_po_to_Lead:click', this.convert_Po_to_Lead, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         
         this.model.on('sync', this._hideBtnConvert, this);
@@ -722,7 +722,7 @@
         };
         // alert(this.model.get('id'))
         this.valida_requeridos();
-		var btnConvert = this.getField("convert_Leads_button");
+		var btnConvert = this.getField("convert_po_to_Lead");
 		btnConvert.hide();
 		var editButton = this.getField('edit_button');
         editButton.setDisabled(true);
