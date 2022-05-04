@@ -17,6 +17,14 @@ class callLead_class
   					$beanLead->save();
   				}
   			}
+        if ($parentType == 'Prospects') {
+  				$beanPO = BeanFactory::getBean('Prospects', $parent_id);
+  				if($beanPO->estatus_po_c == '1'){
+            $beanPO->estatus_po_c = '2';
+  					$beanPO->subestatus_po_c = '1';
+  					$beanPO->save();
+  				}
+  			}
 		  }
 	  }
 
