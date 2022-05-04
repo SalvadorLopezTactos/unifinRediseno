@@ -9,9 +9,9 @@
 
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
-        this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
+        this.context.on('button:convert_po_to_Lead:click', this.convert_Po_to_Lead, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-        this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
+        
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
@@ -326,14 +326,6 @@
         }
     },
 
-    _subMotivoCancelacion: function () {
-
-        if (!this.model.get('lead_cancelado_c')) {
-
-            this.model.set('motivo_cancelacion_c', '');
-        }
-    },
-
     /*************Valida Genero *****************/
     validaGenero: function (fields, errors, callback) {
         var genero = this.model.get('genero_c');
@@ -485,18 +477,17 @@
     _readonlyFields: function () {
         var self = this;
         /***************************READONLY PARA SUBTIPO DE LEAD CANCELADO**************************/
-        if (this.model.get('lead_cancelado_c') == '1' && this.model.get('subtipo_registro_c') == '3') {
+        if (this.model.get('estatus_po_c') == '3' || this.model.get('estatus_po_c') == '4') {
 
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
 
             _.each(this.model.fields, function (field) {
 
-                if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
                     self.noEditFields.push(field.name);
                     self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
-                }
+                
             });
             this._disableActionsSubpanel();
         }
@@ -712,7 +703,7 @@
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Ocultando campo de control que omite validación de duplicados
-        $('[data-name="omite_match_c"]').hide();
+        $('[data-name="excluye_campana_c"]').hide();
         //Oculta etiqueta de prospects_direcciones
         this.$("div.record-label[data-name='prospects_direcciones']").attr('style', 'display:none;');
         //Ocultando campo check de homonimo
@@ -723,19 +714,19 @@
 
     },
 
-    convert_Lead_to_Accounts: function () {
+    convert_Po_to_Lead: function () {
         self = this;
         var filter_arguments = {
             "id": this.model.get('id')
         };
         // alert(this.model.get('id'))
         this.valida_requeridos();
-		var btnConvert = this.getField("convert_Leads_button");
+		var btnConvert = this.getField("convert_po_to_Lead");
 		btnConvert.hide();
 		var editButton = this.getField('edit_button');
         editButton.setDisabled(true);
         app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
-        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+        app.api.call("create", app.api.buildURL("existsPOLeads", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
                 console.log(data);
                 app.alert.dismiss('upload');

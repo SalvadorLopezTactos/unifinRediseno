@@ -5,16 +5,18 @@ class class_po_reus
 {
     public function func_po_reus($bean = null, $event = null, $args = null)
     {
-        //Ejecuta validación
-        $errorcorreo = $this->func_valida_correos($bean);
-        $errortel = $this->func_valida_telefonos($bean);
-        //Interpreta resultado
-        if(!$errorcorreo || !$errortel){
-            $bean->pendiente_reus_c = 1;
-        }else{
-            $bean->pendiente_reus_c = 0;
+        if (!$bean->excluye_campana_c){
+            //Ejecuta validación
+            $errorcorreo = $this->func_valida_correos($bean);
+            $errortel = $this->func_valida_telefonos($bean);
+            //Interpreta resultado
+            if(!$errorcorreo || !$errortel){
+                $bean->pendiente_reus_c = 1;
+            }else{
+                $bean->pendiente_reus_c = 0;
+            }
+            $GLOBALS['log']->fatal('Validación REUS - Correos: '.$errorcorreo.' , Teléfonos: '. $errortel . ' , Pendiente REUS: '.$bean->pendiente_reus_c);
         }
-        $GLOBALS['log']->fatal('Validación REUS - Correos: '.$errorcorreo.' , Teléfonos: '. $errortel . ' , Pendiente REUS: '.$bean->pendiente_reus_c);
     }
 
     public function func_valida_correos($bean = null)

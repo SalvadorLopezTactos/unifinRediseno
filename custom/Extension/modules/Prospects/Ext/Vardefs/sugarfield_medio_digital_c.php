@@ -1,6 +1,7 @@
 <?php
- // created: 2022-05-03 00:18:15
+ // created: 2022-05-04 17:39:13
 $dictionary['Prospect']['fields']['medio_digital_c']['labelValue']='Medio';
+$dictionary['Prospect']['fields']['medio_digital_c']['dependency']='';
 $dictionary['Prospect']['fields']['medio_digital_c']['required_formula']='';
 $dictionary['Prospect']['fields']['medio_digital_c']['readonly_formula']='';
 $dictionary['Prospect']['fields']['medio_digital_c']['visibility_grid']=array (
@@ -16,6 +17,29 @@ $dictionary['Prospect']['fields']['medio_digital_c']['visibility_grid']=array (
     3 => 
     array (
       0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '5',
+      5 => '29',
+      6 => '6',
+      7 => '7',
+      8 => '8',
+      9 => '9',
+      10 => '15',
+      11 => '16',
+      12 => '17',
+      13 => '18',
+      14 => '19',
+      15 => '20',
+      16 => '21',
+      17 => '22',
+      18 => '23',
+      19 => '24',
+      20 => '25',
+      21 => '26',
+      22 => '27',
+      23 => '28',
     ),
     4 => 
     array (
@@ -35,6 +59,11 @@ $dictionary['Prospect']['fields']['medio_digital_c']['visibility_grid']=array (
     9 => 
     array (
       0 => '',
+      1 => '10',
+      2 => '11',
+      3 => '12',
+      4 => '13',
+      5 => '14',
     ),
     10 => 
     array (

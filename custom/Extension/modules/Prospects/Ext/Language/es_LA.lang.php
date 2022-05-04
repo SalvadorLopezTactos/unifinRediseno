@@ -72,3 +72,4 @@ $mod_strings['LBL_CODIGO_EXPO'] = 'Código de Expo';
 $mod_strings['LBL_NAME'] = 'Nombre PO';
 $mod_strings['LBL_CLEAN_NAME'] = 'Nombre único';
 $mod_strings['LBL_PROSPECTS_PROSPECTS_1_FROM_PROSPECTS_L_TITLE'] = 'Contacto Asociado';
+$mod_strings['LBL_EXCLUYE_CAMPANA'] = 'Excluye Campaña';

@@ -161,6 +161,15 @@ array (
                 'event' => 'button:send_poll:click',
               ),
             ),
+            17 => 
+              array (
+                'name' => 'convert_po_to_Lead',
+                'type' => 'rowaction',
+                'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
+                'acl_action' => 'view',
+                'event' => 'button:convert_po_to_Lead:click',
+                'class' => 'btn_convertLeads',
+              ),
           ),
           3 => 
           array (
