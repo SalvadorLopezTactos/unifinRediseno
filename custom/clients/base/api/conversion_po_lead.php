@@ -206,8 +206,8 @@ SITE;
         $sql = new SugarQuery();
         $sql->select(array('id', 'clean_name'));
         $sql->from($leads_bean);
-        $sql->where()->equals('clean_name', $bean_lead->clean_name_c);
-        $sql->where()->notEquals('id', $bean_lead->id);
+        $sql->where()->equals('clean_name', $leads_bean->clean_name_c);
+        $sql->where()->notEquals('id', $leads_bean->id);
 
         $result = $sql->execute();
         return $result;
