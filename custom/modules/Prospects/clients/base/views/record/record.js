@@ -477,18 +477,17 @@
     _readonlyFields: function () {
         var self = this;
         /***************************READONLY PARA SUBTIPO DE LEAD CANCELADO**************************/
-        if (this.model.get('lead_cancelado_c') == '1' && this.model.get('subtipo_registro_c') == '3') {
+        if (this.model.get('estatus_po_c') == '3' || this.model.get('estatus_po_c') == '4') {
 
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
 
             _.each(this.model.fields, function (field) {
 
-                if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
                     self.noEditFields.push(field.name);
                     self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
-                }
+                
             });
             this._disableActionsSubpanel();
         }
@@ -704,7 +703,7 @@
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Ocultando campo de control que omite validación de duplicados
-        $('[data-name="omite_match_c"]').hide();
+        $('[data-name="excluye_campana_c"]').hide();
         //Oculta etiqueta de prospects_direcciones
         this.$("div.record-label[data-name='prospects_direcciones']").attr('style', 'display:none;');
         //Ocultando campo check de homonimo
