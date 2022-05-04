@@ -98,7 +98,7 @@ SITE;
             } elseif ($count > 0) {
                 /** Si la cuenta existe actualizamos los asesores que se encuentre vacios o como 9 sin gestor en la cuenta encontrada */
                 $id_account = $result[0]['id'];
-                $responsMeeting = $this->getMeetingsUser($bean);
+                $responsMeeting = $this->getMeetingsUser($beanPO);
                 if ($responsMeeting['status'] == 'continue') {
                     $beanAccountExist = BeanFactory::retrieveBean('Accounts', $id_account, array('disable_row_level_security' => true));
                     $beanAccountExist->user_id_c = (($beanAccountExist->user_id_c == "569246c7-da62-4664-ef2a-5628f649537e"
@@ -213,12 +213,12 @@ SITE;
         return $result;
     }
 
-    public function getMeetingsUser($beanL)
+    public function getMeetingsUser($beanPO)
     {
         $procede = array("status" => "stop", "data" => array());
         //Recupera reuniones
-        if ($beanL->load_relationship('meetings')) {
-            $relatedBeans = $beanL->meetings->getBeans();
+        if ($beanPO->load_relationship('meetings')) {
+            $relatedBeans = $beanPO->meetings->getBeans();
 
             if (!empty($relatedBeans)) {
 
@@ -246,8 +246,8 @@ SITE;
             }
         }
         //Recupera llamadas
-        if ($beanL->load_relationship('calls')) {
-            $relatedBeans = $beanL->calls->getBeans();
+        if ($beanPO->load_relationship('calls')) {
+            $relatedBeans = $beanPO->calls->getBeans();
 
             if (!empty($relatedBeans)) {
 
