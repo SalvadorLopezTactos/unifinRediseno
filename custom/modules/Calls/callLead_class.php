@@ -12,7 +12,7 @@ class callLead_class
   			if ($parentType == 'Leads') {
   				$beanLead = BeanFactory::getBean('Leads', $parent_id);
   				//$GLOBALS['log']->fatal('Id_lead',$beanLead->id);
-  				if($beanLead->subtipo_registro_c == '1'){
+  				if($beanLead->subtipo_registro_c == '13' || $beanLead->subtipo_registro_c == '1'){
   					$beanLead->subtipo_registro_c = '2';
   					$beanLead->save();
   				}
