@@ -114,25 +114,20 @@ class clean_fields_class
                   AND pc.id_c <> '{$bean->id}' AND p.deleted =0;";
                 $results = $GLOBALS['db']->query($query);
 
+                $queryL = "SELECT lc.id_c, lc.clean_name_c FROM leads_cstm lc JOIN leads l
+                on l.id = lc.id_c WHERE lc.clean_name_c = '{$bean->clean_name_c}'
+                AND lc.id_c <> '{$bean->lead_id}' AND l.deleted =0";
+                $resultsL = $GLOBALS['db']->query($queryL);
+                $countLead = $resultsL->num_rows;
+
                 //$result = $sql->execute();
                 //$count = count($result);
                 $count = $results->num_rows;
-                //$GLOBALS['log']->fatal("pcount" . $count);
+                $GLOBALS['log']->fatal("pcount" . $count);
+                $GLOBALS['log']->fatal("countLeads" . $countLead);
                 /************SUGARQUERY PARA VALIDAR IMPORTACION DE REGISTROS SI TIENEN IGUAL LOS MISMOS VALORES DE CLEAN_NAME O PB_ID O DUNS_ID*********/
-                $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
-                $sqlLead = new SugarQuery();
-                $sqlLead->select(array('id', 'clean_name_c', 'pb_id_c', 'duns_id_c'));
-                $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
-                $sqlLead->where()->equals('homonimo_c', 0);
-                $sqlLead->where()
-                    ->queryOr()
-                    ->equals('clean_name_c', $bean->clean_name_c)
-                    ->equals('pb_id_c', $bean->pb_id_c)
-                    ->equals('duns_id_c', $bean->duns_id_c);
-                $sqlLead->where()->notEquals('id', $bean->id);
-                $resultLead = $sqlLead->execute();
-                // $GLOBALS['log']->fatal("Result SugarQuery Lead " . print_r($resultLead));
-                $countLead = count($resultLead);
+                $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Prospecto.';
+              
                 //Get the Name of the account
                // $Leadone = $resultLead[0];
 

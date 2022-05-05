@@ -1,5 +1,5 @@
 <?php
- // created: 2022-05-03 00:25:49
+ // created: 2022-05-04 20:31:50
 $dictionary['Prospect']['fields']['codigo_expo_c']['labelValue']='Código de Expo';
 $dictionary['Prospect']['fields']['codigo_expo_c']['full_text_search']=array (
   'enabled' => '0',
