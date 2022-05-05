@@ -4,6 +4,7 @@ class telefonos_c4_class
 {
     function telefonos_c4_function($bean, $event, $arguments)
     {
+		if (!$bean->excluye_campana_c){
     		$telefonos = array();
     		if($bean->phone_home) array_push($telefonos, $bean->phone_home);
     		else $bean->c_estatus_telefono_c = '';
@@ -34,5 +35,6 @@ class telefonos_c4_class
         				}
       			}
     		}
+		}	
     }
 }

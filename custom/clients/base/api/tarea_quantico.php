@@ -38,12 +38,24 @@ class tarea_quantico extends SugarApi
 			if($account->tipodepersona_c == "Persona Fisica") $regimen = 1;
 			if($account->tipodepersona_c == "Persona Fisica con Actividad Empresarial") $regimen = 2;
 			if($account->tipodepersona_c == "Persona Moral") $regimen = 3;
-			$arreglo = array(
-                "CRMId" => $account->id,
-                "Name" => $account->name,
-                "RFC" => $account->rfc_c,
-                "PersonTypeExternalId" => $regimen
-            );
+			if($regimen == 3) {
+				$arreglo = array(
+					"CRMId" => $account->id,
+					"Name" => $account->name,
+					"RFC" => $account->rfc_c,
+					"PersonTypeExternalId" => $regimen
+				);
+			}
+			else {
+				$arreglo = array(
+					"CRMId" => $account->id,
+					"Name" => $account->primernombre_c,
+					"MiddleName" => $account->apellidopaterno_c,
+					"LastName" => $account->apellidomaterno_c,
+					"RFC" => $account->rfc_c,
+					"PersonTypeExternalId" => $regimen
+				);
+			}
 			$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierInQuantico/';
 			$content = json_encode($arreglo);
 			$ch = curl_init();
