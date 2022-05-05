@@ -327,7 +327,11 @@
                             //Colonia
                             listColonia = {};
                             for (var i = 0; i < list_colonias.length; i++) {
-                                listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
+                                //listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
+                                listColonia[i]={};
+                                listColonia[i]['idColonia']=list_colonias[i].idColonia;
+                                listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
+                                listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
                             }
                             cont_dir.oDirecciones.direccion[index].listColonia = listColonia;
                             cont_dir.oDirecciones.direccion[index].listColoniaFull = listColonia;
@@ -1458,6 +1462,10 @@
         var idColonia = input.val();
         //Actualiza modelo
         this.oDirecciones.direccion[index].colonia = idColonia;
+
+        //Al actualizar colonia nueva también se establece el id del Código Postal
+        var idCP=$(evt.currentTarget).find('option:selected').attr('data-cp');
+        this.oDirecciones.direccion[index].postal=idCP;
     },
 
     /**

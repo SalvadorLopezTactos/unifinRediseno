@@ -234,11 +234,12 @@ SQL;
 
         //Nuevo account_direcciones_n
         if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
-            $GLOBALS['log']->fatal("DIRECCIONES:*********************");
-            $GLOBALS['log']->fatal(print_r($bean->account_direcciones,true));
+            //$GLOBALS['log']->fatal("DIRECCIONES:*********************");
+            //$GLOBALS['log']->fatal(print_r($bean->account_direcciones,true));
             foreach ($bean->account_direcciones as $direccion_row) {
                 /** @var dire_Direccion $direccion */
                 $direccion = BeanFactory::getBean('dire_Direccion', $direccion_row['id']);
+                $id_sepomex_anterior=$direccion->dir_sepomex_dire_direcciondir_sepomex_ida;
 
                 if (empty($direccion_row['id'])) {
                     //generar el guid
@@ -281,7 +282,9 @@ SQL;
                 $querymunicipio = $db->query($nombre_municipio_query);
                 $municipioName = $db->fetchByAssoc($querymunicipio);
                 */
-                $query_sepomex="SELECT * FROM dir_sepomex WHERE id='" . $direccion_row['postal'] . "'";
+                $id_postal=$direccion_row['postal'];
+                $GLOBALS['log']->fatal("POSTAL: ".$id_postal);
+                $query_sepomex="SELECT * FROM dir_sepomex WHERE id='{$id_postal}'";
                 $GLOBALS['log']->fatal("QUERY SEPOMEX");
                 $GLOBALS['log']->fatal($query_sepomex);
                 $result_sepomex = $db->query($query_sepomex);
@@ -371,12 +374,62 @@ SQL;
                 } else {
                     $inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
                     $principal = $direccion->principal == 1 ? $direccion->principal : 0;
+                    
+                    /*
                     $query = <<<SQL
-update dire_direccion set  name = '{$direccion->name}', tipodedireccion = '{$direccion->tipodedireccion}',indicador = '{$direccion->indicador}',  calle = '{$direccion->calle}', numext = '{$direccion->numext}', numint= '{$direccion->numint}', principal=$principal, inactivo =$inactivo  where id = '{$direccion->id}';
+                        update dire_direccion 
+                        set  name = '{$direccion->name}', 
+                        tipodedireccion = '{$direccion->tipodedireccion}',
+                        indicador = '{$direccion->indicador}',
+                        calle = '{$direccion->calle}',
+                        numext = '{$direccion->numext}',
+                        numint= '{$direccion->numint}',
+                        principal=$principal,
+                        inactivo =$inactivo,
+                        where id = '{$direccion->id}';
+SQL;*/
+                    $query=<<<SQL
+                    UPDATE dire_direccion d
+INNER JOIN dire_direccion_cstm dc on d.id=dc.id_c
+SET d.name = '{$direccion->name}', 
+                        d.tipodedireccion = '{$direccion->tipodedireccion}',
+                        d.indicador = '{$direccion->indicador}',
+                        d.calle = '{$direccion->calle}',
+                        d.numext = '{$direccion->numext}',
+                        d.numint= '{$direccion->numint}',
+                        d.principal=$principal,
+                        d.inactivo =$inactivo,
+                        d.description='{$direccion->description}',
+                        dc.pais_c='{$direccion->pais_c}',
+                        dc.codigo_postal_c='{$direccion->codigo_postal_c}',
+                        dc.estado_c='{$direccion->estado_c}',
+                        dc.ciudad_c='{$direccion->ciudad_c}',
+                        dc.municipio_c='{$direccion->municipio_c}',
+                        dc.colonia_c='{$direccion->colonia_c}'
+WHERE d.id='{$direccion->id}';
 SQL;
+                    //Actualiza también la relación entre la dirección y dir_Sepomex
+                    //Query para obtener id de la relación entre dirección y dir_Sepomex
+                    $queryGetIdRelacion="SELECT id FROM dir_sepomex_dire_direccion_c 
+                    WHERE dir_sepomex_dire_direcciondir_sepomex_ida='{$id_sepomex_anterior}' AND dir_sepomex_dire_direcciondire_direccion_idb='{$direccion->id}'";
+                    $resultIdRelacion = $db->query($queryGetIdRelacion);
+                    $id_relacion="";
+                    while ($row = $db->fetchByAssoc($resultIdRelacion)) {
+                        $id_relacion=$row['id'];
+                    }
+
+                    $queryUpdateRelacion=<<<SQL
+                    UPDATE dir_sepomex_dire_direccion_c
+                    SET dir_sepomex_dire_direcciondir_sepomex_ida='{$direccion->dir_sepomex_dire_direcciondir_sepomex_ida}'
+                    WHERE id='{$id_relacion}';
+                    SQL;
+
                     try {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Update *784 " . $query);
+                        
                         $resultado = $db->query($query);
+                        $resultadoRelacion=$db->query($queryUpdateRelacion);
+
                         $callApi = new UnifinAPI();
                         if ($direccion->sincronizado_unics_c == '0') {
                             $direccion = $callApi->insertaDireccion($direccion);
@@ -384,6 +437,7 @@ SQL;
                             $direccion = $callApi->actualizaDireccion($direccion);
                         }
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : resultado " . $db->getAffectedRowCount($resultado));
+                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : resultadoUpdateRelacion " . $db->getAffectedRowCount($resultadoRelacion));
                     } catch (Exception $e) {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
                     }

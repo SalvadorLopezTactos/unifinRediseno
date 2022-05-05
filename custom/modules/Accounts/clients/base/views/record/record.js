@@ -4835,6 +4835,7 @@
                         var identificadorColonia=ids[4];
                         
                         var valCodigoPostal = data.records[i].codigo_postal_c;
+                        var idCodigoPostal=data.records[i].dir_sepomex_dire_direcciondir_sepomex_ida;
                         var valPais = data.records[i].pais_c;
                         var idPais = identificadorPais;
                         var valEstado = data.records[i].estado_c;
@@ -4867,7 +4868,7 @@
                             "listIndicador": listIndicador,
                             "indicadorSeleccionados": indicadorSeleccionados,
                             "valCodigoPostal": valCodigoPostal,
-                            //"postal": idCodigoPostal,
+                            "postal": idCodigoPostal,
                             "valPais": valPais,
                             "pais": idPais,
                             "listPais": {},
