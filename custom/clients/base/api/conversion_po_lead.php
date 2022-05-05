@@ -64,13 +64,10 @@ class conversion_po_lead extends SugarApi
 
                         if (!empty($bean_Lead->id)) {
                             $resultadoRelaciones = $this->getContactAssoc($beanPO, $bean_Lead);
-
-                            // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
-                            // $bean->tipo_registro_c = "";
-                            $bean_Lead->subtipo_registro_c = 13;
-                            $bean_Lead->account_id = $beanPO->id;
-                            $bean_Lead->account_name = $beanPO->name;
-                            $bean_Lead->save();
+                            //Actualiza registro PO
+                            $beanPO->estatus_po_c = "3";
+                            $beanPO->lead_id = $bean_Lead->id;
+                            $beanPO->save();
                             // Re-asignamos reuniones, llamadas, tareas y notas de PO a Leads
                             $this->re_asign_meetings($beanPO, $bean_Lead->id);
 
@@ -81,8 +78,6 @@ class conversion_po_lead extends SugarApi
 
                             $finish = array("idCuenta" => $bean_Lead->id, "mensaje" => $msj_succes);
                         }
-                    
-
                     // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
                 } else {
                     if ($requeridos != "") {
@@ -97,29 +92,12 @@ SITE;
                 }
             } elseif ($count > 0) {
                 /** Si la cuenta existe actualizamos los asesores que se encuentre vacios o como 9 sin gestor en la cuenta encontrada */
-                $id_account = $result[0]['id'];
-                $responsMeeting = $this->getMeetingsUser($beanPO);
-                if ($responsMeeting['status'] == 'continue') {
-                    $beanAccountExist = BeanFactory::retrieveBean('Accounts', $id_account, array('disable_row_level_security' => true));
-                    $beanAccountExist->user_id_c = (($beanAccountExist->user_id_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id_c == "") && $responsMeeting['data']['LEASING'] != "") ? $responsMeeting['data']['LEASING'] : $beanAccountExist->user_id_c;
-                    $beanAccountExist->user_id1_c = (($beanAccountExist->user_id1_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id1_c == "") && $responsMeeting['data']['FACTORAJE'] != "") ? $responsMeeting['data']['FACTORAJE'] : $beanAccountExist->user_id1_c;
-                    $beanAccountExist->user_id2_c = (($beanAccountExist->user_id2_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id2_c == "") && $responsMeeting['data']['CREDITO AUTOMOTRIZ'] != "") ? $responsMeeting['data']['CREDITO AUTOMOTRIZ'] : $beanAccountExist->user_id2_c;
-                    $beanAccountExist->user_id6_c = (($beanAccountExist->user_id6_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id6_c == "") && $responsMeeting['data']['FLEET'] != "") ? $responsMeeting['data']['FLEET'] : $beanAccountExist->user_id6_c;
-                    $beanAccountExist->user_id8_c = (($beanAccountExist->user_id8_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id8_c == "") && $responsMeeting['data']['RM'] != "") ? $responsMeeting['data']['RM'] : $beanAccountExist->user_id8_c;
-                    $beanAccountExist->save();
-                }
-                $bean->subtipo_registro_c = "4";
-                $bean->save();
+                $beanLeadExist = BeanFactory::retrieveBean('Leads', $id_account, array('disable_row_level_security' => true));
                 $msj_succes_duplic = <<<SITE
-                        Los Asesores han sido actualizados en la cuenta <br>
-<b></b><a href="$url/#Accounts/$beanAccountExist->id">$beanAccountExist->name</a></b>
+                        Este registro ya existe como Lead. No puede ser convertido. <br>
+<b></b><a href="$url/#Leads/$beanLeadExist->id">$beanLeadExist->name</a></b>
 SITE;
-                $finish = array("idCuenta" => $beanAccountExist->id, "mensaje" => $msj_succes_duplic);
+                $finish = array("idCuenta" => $beanLeadExist->id, "mensaje" => $msj_succes_duplic);
             }
         } else {
             $finish = array("idCuenta" => "", "mensaje" => "El Lead ya ha sido convertido.");
@@ -176,8 +154,7 @@ SITE;
             $bean_lead->inegi_sector_c = $beanPO->inegi_sector_c;
             $bean_lead->inegi_macro_c = $beanPO->inegi_macro_c;
         }
-        $bean_lead->save();
-
+        
         // creamos las relaciones en telefono
         $principal = 1;
         if (!empty($beanPO->phone_mobile)) {
@@ -195,19 +172,20 @@ SITE;
 
         $bean_lead->pendiente_reus_c = ($resp_reus_tel == 3) ? true : false;
 
+        $bean_lead->save();
         return $bean_lead;
     }
 
     public function existLeadAccount($beanPO)
     {
-        $leads_bean = BeanFactory::getBean('Prospects');
+        $leads_bean = BeanFactory::getBean('Leads');
         $leads_bean->disable_row_level_security = true;
 
         $sql = new SugarQuery();
-        $sql->select(array('id', 'clean_name'));
+        $sql->select(array('id', 'clean_name_c'));
         $sql->from($leads_bean);
-        $sql->where()->equals('clean_name', $leads_bean->clean_name_c);
-        $sql->where()->notEquals('id', $leads_bean->id);
+        $sql->where()->equals('clean_name_c', $beanPO->clean_name_c);
+        $sql->where()->notEquals('id', $beanPO->id);
 
         $result = $sql->execute();
         return $result;
