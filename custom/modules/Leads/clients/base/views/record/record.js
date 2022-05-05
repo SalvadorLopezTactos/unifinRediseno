@@ -331,6 +331,8 @@
         if (!this.model.get('lead_cancelado_c')) {
 
             this.model.set('motivo_cancelacion_c', '');
+            this.model.set('subtipo_registro_c', '3');
+
         }
     },
 
