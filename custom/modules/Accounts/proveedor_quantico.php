@@ -8,12 +8,24 @@ class proveedor_quantico
 			if($bean->tipodepersona_c == "Persona Fisica") $regimen = 1;
 			if($bean->tipodepersona_c == "Persona Fisica con Actividad Empresarial") $regimen = 2;
 			if($bean->tipodepersona_c == "Persona Moral") $regimen = 3;
-			$arreglo = array(
-                "CRMId" => $bean->id,
-                "Name" => $bean->name,
-                "RFC" => $bean->rfc_c,
-                "PersonTypeExternalId" => $regimen
-            );
+			if($regimen == 3) {
+				$arreglo = array(
+					"CRMId" => $bean->id,
+					"Name" => $bean->name,
+					"RFC" => $bean->rfc_c,
+					"PersonTypeExternalId" => $regimen
+				);
+			}
+			else {
+				$arreglo = array(
+					"CRMId" => $bean->id,
+					"Name" => $bean->primernombre_c,
+					"MiddleName" => $bean->apellidopaterno_c,
+					"LastName" => $bean->apellidomaterno_c,
+					"RFC" => $bean->rfc_c,
+					"PersonTypeExternalId" => $regimen
+				);
+			}
 			global $sugar_config;
 			$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierInQuantico/';
 			$content = json_encode($arreglo);
