@@ -34,7 +34,7 @@ class conversion_po_lead extends SugarApi
 
     public function validation_process($api, $args)
     {
-        $id_Lead = $args['id'];
+        $id_Prospect = $args['id'];
         $msjExiste = "El registro Público Objetivo que intentas convertir ya está registrada como Lead";
         $hayReunionPlaneada = false;
         $responseLEads = array();
@@ -46,34 +46,38 @@ class conversion_po_lead extends SugarApi
         /**
          * Validamos que el PO no exista en Leads
          */
-        $beanPO = BeanFactory::retrieveBean('Prospects', $id_Lead, array('disable_row_level_security' => true));
+        $beanPO = BeanFactory::retrieveBean('Prospects', $id_Prospect, array('disable_row_level_security' => true));
         // $GLOBALS['log']->fatal("nombre del LEads " . $bean->first_name);
         $result = $this->existLeadAccount($beanPO);
         $count = count($result);
-        if ($bean->estatus_po_c != "4" && $bean->estatus_po_c != "3") { //Estatus ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
+        if ($beanPO->estatus_po_c != "4" && $beanPO->estatus_po_c != "3") { //Estatus ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
             if ($count == 0) {
-
 
                 $responsMeeting = $this->getMeetingsUser($beanPO);
                 $requeridos = $this->validaRequeridos($beanPO);
 
-                if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
+                if ($responsMeeting['status'] != "stop" && $requeridos == "") {
 
                     /** Creamos el registro LEAD */
-                    $bean_Lead = $this->createLead($beanPO, false);
+                    $bean_Lead = $this->createLead($beanPO, $responsMeeting, false);
+                    $GLOBALS['log']->fatal("Genera conversion y registro en Leads");
+                    $GLOBALS['log']->fatal($bean_Lead->id);
 
-                        if (!empty($bean_Lead->id)) {
-                            $resultadoRelaciones = $this->getContactAssoc($beanPO, $bean_Lead);
+                        if ($bean_Lead->id) {
+                            //$resultadoRelaciones = $this->getContactAssoc($beanPO, $bean_Lead);
                             //Actualiza registro PO
-                            $beanPO->estatus_po_c = "3";
+                            $GLOBALS['log']->fatal("el ID no esta vacio, actualiza valores PO");
+                            $beanPO->estatus_po_c = 3;
                             $beanPO->lead_id = $bean_Lead->id;
-                            $beanPO->save();
+                            //$beanPO->save();
+                            $GLOBALS['log']->fatal("Actualiza valores en el registro PO (Estatus)");
                             // Re-asignamos reuniones, llamadas, tareas y notas de PO a Leads
                             $this->re_asign_meetings($beanPO, $bean_Lead->id);
+                            $GLOBALS['log']->fatal("Obtiene reuniones para re asignarlas PO");
 
                             $msj_succes = <<<SITE
                             Conversión Completa <br>
-    <b></b><a href="$url/#Accounts/$bean_Lead->id">$bean_Lead->name</a></b>
+    <b></b><a href="$url/#Leads/$bean_Lead->id">$bean_Lead->name</a></b>
     SITE;
 
                             $finish = array("idCuenta" => $bean_Lead->id, "mensaje" => $msj_succes);
@@ -92,7 +96,7 @@ SITE;
                 }
             } elseif ($count > 0) {
                 /** Si la cuenta existe actualizamos los asesores que se encuentre vacios o como 9 sin gestor en la cuenta encontrada */
-                $beanLeadExist = BeanFactory::retrieveBean('Leads', $id_account, array('disable_row_level_security' => true));
+                $beanLeadExist = BeanFactory::retrieveBean('Leads', $bean_Lead->id, array('disable_row_level_security' => true));
                 $msj_succes_duplic = <<<SITE
                         Este registro ya existe como Lead. No puede ser convertido. <br>
 <b></b><a href="$url/#Leads/$beanLeadExist->id">$beanLeadExist->name</a></b>
@@ -100,7 +104,7 @@ SITE;
                 $finish = array("idCuenta" => $beanLeadExist->id, "mensaje" => $msj_succes_duplic);
             }
         } else {
-            $finish = array("idCuenta" => "", "mensaje" => "El Lead ya ha sido convertido.");
+            $finish = array("idCuenta" => "", "mensaje" => "El registro ya ha sido convertido.");
         }
         return $finish;
     }
@@ -124,7 +128,7 @@ SITE;
         $bean_lead->potencial_lead_c = $beanPO->potencial_lead_c;
         $bean_lead->rfc_c = $beanPO->rfc_c;
         $bean_lead->zona_geografica_c = $beanPO->zona_geografica_c;
-        $bean_lead->nombre_de_cargar_c = $beanPO->nombre_de_cargar_c;
+        $bean_lead->nombre_de_cargar_c = $beanPO->nombre_de_carga_c;
         $bean_lead->alianza_c = $beanPO->alianza_c;
         $bean_lead->status_management_c = $beanPO->status_management_c;
         $bean_lead->fecha_asignacion_c = $beanPO->fecha_asignacion_c;
@@ -140,6 +144,7 @@ SITE;
         $bean_lead->onboarding_chk_c=0;
         //Nace lead como NUEVO =13
         $bean_lead->subtipo_registro_c='13';
+        $bean_lead->assigned_user_id=$beanPO->assigned_user_id;
         
         //Clasificación Sectorial
         if (!empty($beanPO->actividad_economica_c)) {
@@ -195,27 +200,15 @@ SITE;
     {
         $procede = array("status" => "stop", "data" => array());
         //Recupera reuniones
+        $beanPO->load_relationship('meetings');
         if ($beanPO->load_relationship('meetings')) {
             $relatedBeans = $beanPO->meetings->getBeans();
 
             if (!empty($relatedBeans)) {
 
-                foreach ($relatedBeans as $meeting) {
-
-                    //if ($meeting->status != "Not Held") {
-
-                    $procede['status'] = "continue";
-                    $sqlUser = new SugarQuery();
-                    $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
-                    $sqlUser->from(BeanFactory::newBean('Users'));
-                    $sqlUser->where()->equals('id', $meeting->assigned_user_id);
-                    //$sqlUser->where()->notEquals('puestousuario_c', "");
-                    $sqlResult = $sqlUser->execute();
-
-                    $procede['vacio'] = empty($procede['data']) ? true : false;
-
-                    //}
-                }
+                $procede['vacio'] = false;
+                $procede['status'] = "continue";
+                
             } else {
                 $procede['status'] = "stop";
                 $procede['data'] = array();
@@ -255,7 +248,7 @@ SITE;
     public function validaRequeridos($beanPO)
     {
         $campos = "";
-        $tipoPersona = $beanLEad->regimen_fiscal_c;
+        $tipoPersona = $beanPO->regimen_fiscal_c;
         $campos_req = [];
         $response = false;
         $errors = [];
@@ -291,32 +284,30 @@ SITE;
         return $campos;
     }
 
-    public function getContactAssoc($beanLead, $bean_account)
+    public function getContactAssoc($beanPO, $bean_Lead)
     {
         $resultado = array("data" => array());
-        if ($beanLead->load_relationship('leads_leads_1')) {
-            $relatedBeans = $beanLead->leads_leads_1->getBeans();
+        if ($beanPO->load_relationship('prospects_prospects_1')) {
+            $relatedBeans = $beanPO->prospects_prospects_1->getBeans();
             if (!empty($relatedBeans)) {
-                foreach ($relatedBeans as $lead) {
-                    $result = $this->existLeadAccount($lead);
+                foreach ($relatedBeans as $PO) {
+                    $result = $this->existLeadAccount($PO);
                     $count = count($result);
                     if ($count > 0) {
                         // $GLOBALS['log']->fatal("Si existe recupero el id  " . $result[0]['id'] . " y creamos la relacion");
-                        $this->create_relationship($bean_account, $result[0]['id']);
                         array_push($resultado['data'], $result[0]['id']);
                     } else {
                         // $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
-                        $cuenta = $this->createLead($lead, null, true);
-                        if (!empty($cuenta->id)) {
-                            $this->re_asign_meetings($lead, $cuenta->id);
-                            $this->create_relationship($bean_account, $cuenta->id);
-                            array_push($resultado['data'], $cuenta->id);
-                            $lead->account_id = $cuenta->id;
-                            $lead->account_name = $cuenta->name;
+                        $lead = $this->createLead($PO, null, true);
+                        if (!empty($lead->id)) {
+                            $this->re_asign_meetings($PO, $lead->id);
+                            $this->create_relationship($bean_Lead, $lead->id);
+                            array_push($resultado['data'], $lead->id);
+                            $PO->lead_id = $lead->id;                            
                         }
                     }
-                    $lead->subtipo_registro_c = 4;
-                    $lead->save();
+                    $PO->estatus_po_c = "3";
+                    $PO->save();
                 }
             } else {
                 // no existen Asociados no se hace nada
@@ -327,16 +318,12 @@ SITE;
         return $resultado;
     }
 
-    public function create_relationship($id_parent, $idAccount)
+    public function create_relationship($id_parent, $idLead)
     {
         // rel_relaciones_accounts_1
         // $GLOBALS['log']->fatal("id Padre " . $id_parent->id . "  id hijo " . $idAccount);
-        $bean_relacion = BeanFactory::newBean('Rel_Relaciones');
-        $bean_relacion->rel_relaciones_accounts_1accounts_ida = $id_parent->id; // Cuenta padre
-        $bean_relacion->rel_relaciones_accounts_1_name = $id_parent->name;
-        $bean_relacion->relaciones_activas = "^Contacto^";
-        $bean_relacion->account_id1_c = $idAccount; // cuenta hijo
-        $bean_relacion->tipodecontacto = "Promocion";
+        $bean_relacion = BeanFactory::retrieveBean('Leads', $idLead, array('disable_row_level_security' => true));
+        $bean_relacion->leads_leads_1leads_ida=$id_parent->id;
         $bean_relacion->save();
     }
 
