@@ -29,6 +29,7 @@
         this.context.on('button:llamada_work:click', this.llamar_trabajo, this);
         this.context.on('button:edit_button:click', this.noLlamar, this);
         this.model.on('sync', this.siNumero, this);
+        this.model.on('sync', this.seteaSubTipoLead, this);
         this.context.on('button:reset_lead:click', this.reset_lead, this);
         this.model.on('sync', this._hideBtnReset, this);
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
@@ -327,10 +328,15 @@
     },
 
     _subMotivoCancelacion: function () {
-
-        if (!this.model.get('lead_cancelado_c')) {
-
+           
+        if (this.model.get('lead_cancelado_c')== true) {
+           
             this.model.set('motivo_cancelacion_c', '');
+            this.model.set('subtipo_registro_c', '3');
+
+        }else{
+            this.model.set('motivo_cancelacion_c', '');
+            this.model.set('subtipo_registro_c',this.valorPrevio);
         }
     },
 
@@ -493,9 +499,11 @@
             _.each(this.model.fields, function (field) {
 
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
-                    self.noEditFields.push(field.name);
-                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                    self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    if((field.name!='subestatus_ld_c' && field.name!='detalle_subestatus_ld_c' && App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] == undefined)){
+                        self.noEditFields.push(field.name);
+                        self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                        self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    }
                 }
             });
             this._disableActionsSubpanel();
@@ -905,6 +913,11 @@
         if (!this.model.get('phone_mobile')) $('.llamada_mobile').hide();
         if (!this.model.get('phone_home')) $('.llamada_home').hide();
         if (!this.model.get('phone_work')) $('.llamada_work').hide();
+    },
+
+    seteaSubTipoLead: function (){
+        //realizamos copia del valor previo en subtipo de lead
+        this.valorPrevio= contexto_lead.model.attributes.subtipo_registro_c;
     },
 
     noLlamar: function () {
