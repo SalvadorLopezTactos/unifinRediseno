@@ -39,6 +39,7 @@
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL3']").hide();
 
         /****** validaciones SOC  **********/
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
@@ -700,6 +701,7 @@
 
     _render: function (options) {
         this._super("_render");
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL3']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Ocultando campo de control que omite validación de duplicados
