@@ -493,9 +493,11 @@
             _.each(this.model.fields, function (field) {
 
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
-                    self.noEditFields.push(field.name);
-                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                    self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    if((field.name!='subestatus_ld_c' && field.name!='detalle_subestatus_ld_c' && App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] == undefined)){
+                        self.noEditFields.push(field.name);
+                        self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                        self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    }
                 }
             });
             this._disableActionsSubpanel();
