@@ -29,7 +29,6 @@
         this.context.on('button:llamada_work:click', this.llamar_trabajo, this);
         this.context.on('button:edit_button:click', this.noLlamar, this);
         this.model.on('sync', this.siNumero, this);
-        this.model.on('sync', this.seteaSubTipoLead, this);
         this.context.on('button:reset_lead:click', this.reset_lead, this);
         this.model.on('sync', this._hideBtnReset, this);
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
@@ -41,6 +40,7 @@
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
 
+        this.model.on('sync', this.seteaSubTipoLead, this);
         /****** validaciones SOC  **********/
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
@@ -49,6 +49,10 @@
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigenLeads();
+    },
+    seteaSubTipoLead: function (){
+        //realizamos copia del valor previo en subtipo de lead
+        this.valorPrevio= contexto_lead.model.attributes.subtipo_registro_c;
     },
 
     handleEdit: function(e, cell) {
@@ -328,16 +332,18 @@
     },
 
     _subMotivoCancelacion: function () {
-           
-        if (this.model.get('lead_cancelado_c')== true) {
-           
-            this.model.set('motivo_cancelacion_c', '');
-            this.model.set('subtipo_registro_c', '3');
+        if(this.valorPrevio!=undefined){
 
-        }else{
-            this.model.set('motivo_cancelacion_c', '');
-            this.model.set('subtipo_registro_c',this.valorPrevio);
-        }
+            if (this.model.get('lead_cancelado_c')== true) {
+            
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c', '3');
+
+            }else{
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c',this.valorPrevio);
+            }
+        }    
     },
 
     /*************Valida Genero *****************/
@@ -913,11 +919,6 @@
         if (!this.model.get('phone_mobile')) $('.llamada_mobile').hide();
         if (!this.model.get('phone_home')) $('.llamada_home').hide();
         if (!this.model.get('phone_work')) $('.llamada_work').hide();
-    },
-
-    seteaSubTipoLead: function (){
-        //realizamos copia del valor previo en subtipo de lead
-        this.valorPrevio= contexto_lead.model.attributes.subtipo_registro_c;
     },
 
     noLlamar: function () {
