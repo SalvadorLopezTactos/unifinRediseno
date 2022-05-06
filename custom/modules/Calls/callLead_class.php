@@ -12,9 +12,17 @@ class callLead_class
   			if ($parentType == 'Leads') {
   				$beanLead = BeanFactory::getBean('Leads', $parent_id);
   				//$GLOBALS['log']->fatal('Id_lead',$beanLead->id);
-  				if($beanLead->subtipo_registro_c == '1'){
+  				if($beanLead->subtipo_registro_c == '13' || $beanLead->subtipo_registro_c == '1'){
   					$beanLead->subtipo_registro_c = '2';
   					$beanLead->save();
+  				}
+  			}
+        if ($parentType == 'Prospects') {
+  				$beanPO = BeanFactory::getBean('Prospects', $parent_id);
+  				if($beanPO->estatus_po_c == '1'){
+            $beanPO->estatus_po_c = '2';
+  					$beanPO->subestatus_po_c = '1';
+  					$beanPO->save();
   				}
   			}
 		  }

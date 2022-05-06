@@ -48,9 +48,6 @@
         this.model.addValidationTask('check_direcciones', _.bind(this.validadireccexisting, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
-
-        //Función para eliminar opciones del campo origen
-        this.estableceOpcionesOrigenLeads();
     },
 
     delegateButtonEvents: function() {
@@ -595,43 +592,6 @@
 
             });
         }
-
-        this.deshabilitaOrigen();
-    },
-
-    deshabilitaOrigen:function(){
-        var today = new Date();
-        var yyyy = today.getFullYear();
-        var mm = today.getMonth() + 1; // Months start at 0!
-        var dd = today.getDate();
-
-        if (dd < 10) dd = '0' + dd;
-        if (mm < 10) mm = '0' + mm;
-
-        var hoy = yyyy+'-'+mm+'-'+dd;
-        var fecha_actual= new Date(hoy);
-        var fecha_bloqueo=new Date(this.model.get("fecha_bloqueo_origen_c"));
-
-        if(fecha_actual<=fecha_bloqueo){
-            self.noEditFields.push('origen_c');
-            self.noEditFields.push('detalle_origen_c');
-        }
-    },
-
-    //Función para eliminar opciones del campo origen
-    estableceOpcionesOrigenLeads:function(){
-        var opciones_origen = app.lang.getAppListStrings('origen_lead_list');
-
-        if (App.user.attributes.puestousuario_c != '53') { //Si no tiene puesto uniclick, se eliminan las opciones Closer y Growth 
-            Object.keys(opciones_origen).forEach(function (key) {
-                if (key == "14" || key == "15") {
-                    delete opciones_origen[key];
-                }
-            });
-        }
-
-        this.model.fields['origen_c'].options = opciones_origen;
-
     },
 
     setButtonStates: function (state) {
@@ -820,15 +780,12 @@
         $('[data-name="homonimo_c"]').hide();
         //Oculta etiqueta de lead_direcciones
         this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
-		//Oculta telefonos
+		//Ocutla telefonos
 		$('[data-name="phone_work"]').hide();
 		$('[data-name="phone_home"]').hide();
-        $('[data-name="phone_mobile"]').hide();
-        
-        //Oculta fecha de bloqueo
-        $('[data-name="fecha_bloqueo_origen_c"]').hide();
+		$('[data-name="phone_mobile"]').hide();
     },
- 
+
     fechaAsignacion: function () {
 
         //Asigna fecha de asignacion con los puestos de Asesor Leasing:2 y Director Leasing:5

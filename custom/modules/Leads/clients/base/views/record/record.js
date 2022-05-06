@@ -40,6 +40,7 @@
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
 
+        this.model.on('sync', this.seteaSubTipoLead, this);
         /****** validaciones SOC  **********/
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
@@ -48,6 +49,10 @@
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigenLeads();
+    },
+    seteaSubTipoLead: function (){
+        //realizamos copia del valor previo en subtipo de lead
+        this.valorPrevio= contexto_lead.model.attributes.subtipo_registro_c;
     },
 
     handleEdit: function(e, cell) {
@@ -327,11 +332,18 @@
     },
 
     _subMotivoCancelacion: function () {
+        if(this.valorPrevio!=undefined){
 
-        if (!this.model.get('lead_cancelado_c')) {
+            if (this.model.get('lead_cancelado_c')== true) {
+            
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c', '3');
 
-            this.model.set('motivo_cancelacion_c', '');
-        }
+            }else{
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c',this.valorPrevio);
+            }
+        }    
     },
 
     /*************Valida Genero *****************/
@@ -493,9 +505,11 @@
             _.each(this.model.fields, function (field) {
 
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
-                    self.noEditFields.push(field.name);
-                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                    self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    if((field.name!='subestatus_ld_c' && field.name!='detalle_subestatus_ld_c' && App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] == undefined)){
+                        self.noEditFields.push(field.name);
+                        self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                        self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    }
                 }
             });
             this._disableActionsSubpanel();
