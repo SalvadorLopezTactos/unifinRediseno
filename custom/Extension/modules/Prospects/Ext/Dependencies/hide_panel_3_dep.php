@@ -5,28 +5,18 @@
  * Time: 11:35 AM
  */
 
-$dependencies['Prospects']['LBL_RECORDVIEW_PANEL3'] = array(
-    'hooks' => array("edit","view"),
+$dependencies['Propects']['hide_panel_3_dep']=array(
+ 'hooks' => array("edit","view"),
     'trigger' => 'true',
-    'triggerFields' => array('LBL_RECORDVIEW_PANEL3'),
+    'triggerFields' => array('id'),  // what field should this be triggered on
     'onload' => true,
     'actions' => array(
         array(
-            'name' => 'SetPanelVisibility',
+            'name' => 'SetPanelVisibility',  // the action you want to run
             'params' => array(
-                'target' => 'LBL_RECORDVIEW_PANEL3',
-                'value' => 'true',
-            ),
-        ),
-    ),
-    //notActions is a list of actions to fire when the trigger is false
-    'notActions' => array(
-        array(
-            'name' => 'SetPanelVisibility',
-            'params' => array(
-                'target' => 'LBL_RECORDVIEW_PANEL3',
-                'value' => 'false',
-            ),
-        ),
+                'target' => 'LBL_RECORDVIEW_PANEL3',  // name of the panel, can be found in the vardefs.
+                'value' => 'not(equal($id, ""))',  // the formula to run to determine if the panel should be hidden or not.
+            ),            
+        ),        
     ),
 );
