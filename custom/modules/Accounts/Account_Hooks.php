@@ -305,67 +305,17 @@ SQL;
                 $direccion_completa = $direccion_row['calle'] . " " . $direccion_row['numext'] . " " . ($direccion_row['numint'] != "" ? "Int: " . $direccion_row['numint'] : "") . ", Colonia " . $nameColonia. ", Municipio " . $nameMunicipio;
                 $direccion->name = $direccion_completa;
 
-                $direccion->pais_c=$namePais;
-                $direccion->codigo_postal_c=$nameCP;
-                $direccion->estado_c=$nameEstado;
-                $direccion->ciudad_c=$nameCiudad;
-                $direccion->municipio_c=$nameMunicipio;
-                $direccion->colonia_c=$nameColonia;
+                //$direccion->pais_c=$namePais;
+                //$direccion->codigo_postal_c=$nameCP;
+                //$direccion->estado_c=$nameEstado;
+                //$direccion->ciudad_c=$nameCiudad;
+                //$direccion->municipio_c=$nameMunicipio;
+                //$direccion->colonia_c=$nameColonia;
                 //Se utiliza campo descripcion de la direccion para ya no crear campos nuevos solo para los id
                 $direccion->description="{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}";
 
                 //Se genera relación entre la dirección y Sepomex
                 $direccion->dir_sepomex_dire_direcciondir_sepomex_ida=$direccion_row['postal'];
-
-                // update related records
-                /*
-                if ($direccion->load_relationship('dire_direccion_dire_pais')) {
-                    if ($direccion_row['pais'] !== $direccion->dire_direccion_dire_paisdire_pais_ida) {
-                        $direccion->dire_direccion_dire_pais->delete($direccion->id);
-                        $direccion->dire_direccion_dire_pais->add($direccion_row['pais']);
-                    }
-                }
-
-                if ($direccion->load_relationship('dire_direccion_dire_estado')) {
-                    if ($direccion_row['estado'] !== $direccion->dire_direccion_dire_estadodire_estado_ida) {
-                        $direccion->dire_direccion_dire_estado->delete($direccion->id);
-                        $direccion->dire_direccion_dire_estado->add($direccion_row['estado']);
-                    }
-                }
-
-                if ($direccion->load_relationship('dire_direccion_dire_municipio')) {
-                    if ($direccion_row['municipio'] !== $direccion->dire_direccion_dire_municipiodire_municipio_ida) {
-                        $direccion->dire_direccion_dire_municipio->delete($direccion->id);
-                        $direccion->dire_direccion_dire_municipio->add($direccion_row['municipio']);
-                    }
-                }
-
-                if ($direccion->load_relationship('dire_direccion_dire_ciudad')) {
-                    if ($direccion_row['ciudad'] !== $direccion->dire_direccion_dire_ciudaddire_ciudad_ida) {
-                        $direccion->dire_direccion_dire_ciudad->delete($direccion->id);
-                        $direccion->dire_direccion_dire_ciudad->add($direccion_row['ciudad']);
-                    }
-                }
-                
-                if ($direccion->load_relationship('dire_direccion_dire_codigopostal')) {
-                    try {
-                        //if (!empty($direccion_row['postal'])) {
-                        if ($direccion_row['postal'] !== $direccion->dire_direccion_dire_codigopostal) {
-                            $direccion->dire_direccion_dire_codigopostal->delete($direccion->id);
-                            $direccion->dire_direccion_dire_codigopostal->add($direccion_row['postal']);
-                        }
-                    } catch (Exception $e) {
-                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
-                    }
-                }
-                
-                if ($direccion->load_relationship('dire_direccion_dire_colonia')) {
-                    if ($direccion_row['colonia'] !== $direccion->dire_direccion_dire_coloniadire_colonia_ida) {
-                        $direccion->dire_direccion_dire_colonia->delete($direccion->id);
-                        $direccion->dire_direccion_dire_colonia->add($direccion_row['colonia']);
-                    }
-                }
-                */
 
                 $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : DIRECCION NOMBRE: " . $direccion_completa);
                 $current_id_list[] = $direccion->id;
@@ -375,19 +325,10 @@ SQL;
                     $inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
                     $principal = $direccion->principal == 1 ? $direccion->principal : 0;
                     
+                    $direccion->inactivo=$inactivo;
+                    $direccion->principal=$principal;
+                    
                     /*
-                    $query = <<<SQL
-                        update dire_direccion 
-                        set  name = '{$direccion->name}', 
-                        tipodedireccion = '{$direccion->tipodedireccion}',
-                        indicador = '{$direccion->indicador}',
-                        calle = '{$direccion->calle}',
-                        numext = '{$direccion->numext}',
-                        numint= '{$direccion->numint}',
-                        principal=$principal,
-                        inactivo =$inactivo,
-                        where id = '{$direccion->id}';
-SQL;*/
                     $query=<<<SQL
                     UPDATE dire_direccion d
 INNER JOIN dire_direccion_cstm dc on d.id=dc.id_c
@@ -423,12 +364,14 @@ SQL;
                     SET dir_sepomex_dire_direcciondir_sepomex_ida='{$direccion->dir_sepomex_dire_direcciondir_sepomex_ida}'
                     WHERE id='{$id_relacion}';
                     SQL;
-
+                    */
                     try {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Update *784 " . $query);
                         
-                        $resultado = $db->query($query);
-                        $resultadoRelacion=$db->query($queryUpdateRelacion);
+                        //$resultado = $db->query($query);
+                        //$resultadoRelacion=$db->query($queryUpdateRelacion);
+
+                        $direccion->save();
 
                         $callApi = new UnifinAPI();
                         if ($direccion->sincronizado_unics_c == '0') {
