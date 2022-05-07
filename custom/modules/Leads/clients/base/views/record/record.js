@@ -40,6 +40,7 @@
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
 
+        this.model.on('sync', this.seteaSubTipoLead, this);
         /****** validaciones SOC  **********/
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
@@ -48,6 +49,10 @@
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigenLeads();
+    },
+    seteaSubTipoLead: function (){
+        //realizamos copia del valor previo en subtipo de lead
+        this.valorPrevio= contexto_lead.model.attributes.subtipo_registro_c;
     },
 
     handleEdit: function(e, cell) {
@@ -327,11 +332,18 @@
     },
 
     _subMotivoCancelacion: function () {
+        if(this.valorPrevio!=undefined){
 
-        if (!this.model.get('lead_cancelado_c')) {
+            if (this.model.get('lead_cancelado_c')== true) {
+            
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c', '3');
 
-            this.model.set('motivo_cancelacion_c', '');
-        }
+            }else{
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c',this.valorPrevio);
+            }
+        }    
     },
 
     /*************Valida Genero *****************/

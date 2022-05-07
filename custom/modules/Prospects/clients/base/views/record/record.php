@@ -76,7 +76,7 @@ array (
               ),
               5 => 
               array (
-               'name' => 'convert_po_to_Lead',
+                'name' => 'convert_po_to_Lead',
                 'type' => 'rowaction',
                 'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
                 'acl_action' => 'view',
@@ -403,23 +403,49 @@ array (
               ),
               34 => 
               array (
+                'readonly' => false,
+                'name' => 'origen_ag_tel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ORIGEN_AG_TEL_C',
+              ),
+              35 => 
+              array (
+                'readonly' => false,
+                'name' => 'alianza_c',
+                'label' => 'LBL_ALIANZA',
+              ),
+              36 => 
+              array (
+                'readonly' => false,
+                'name' => 'persona_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PERSONA',
+              ),
+              37 => 
+              array (
+                'readonly' => false,
+                'name' => 'status_management_c',
+                'label' => 'LBL_STATUS_MANAGEMENT_C',
+              ),
+              38 => 
+              array (
                 'name' => 'prospects_telefonos',
                 'studio' => 'visible',
                 'label' => 'LBL_PROSPECTS_TELEFONOS',
                 'span' => 12,
               ),
-              35 => 'assigned_user_name',
-              36 => 
+              39 => 'assigned_user_name',
+              40 => 
               array (
                 'readonly' => false,
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION',
               ),
-              37 => 
+              41 => 
               array (
                 'name' => 'prospects_prospects_1_name',
               ),
-              38 => 
+              42 => 
               array (
               ),
             ),
@@ -576,7 +602,6 @@ array (
               array (
                 'readonly' => false,
                 'name' => 'pendiente_reus_c',
-                'label' => 'LBL_PENDIENTE_REUS',
               ),
               7 => 
               array (
@@ -729,3 +754,5 @@ array (
     ),
   ),
 );
+
+
