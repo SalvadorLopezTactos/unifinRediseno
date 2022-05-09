@@ -1088,7 +1088,7 @@ SQL;
         $subetapa = $bean->estatus_c;
         $cliente = $bean->account_id;
         //Evalua cambio en etapa o subetapa
-        if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
+        if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa && !empty($producto)) {
             //Actualiza producto uniclick
             global $app_list_strings;
             $available_financiero=array();
