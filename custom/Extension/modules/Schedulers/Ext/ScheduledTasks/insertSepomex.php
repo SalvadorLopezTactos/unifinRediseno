@@ -9,7 +9,6 @@
         $GLOBALS['log']->fatal('>>>>>>COMIENZA PROCESO DE OBTENCIÓN CP - SEPOMEX:');//------------------------------------
         //Declara variables
 			$path = 'https://www.correosdemexico.gob.mx/datosabiertos/cp/cpdescarga.txt'; //Ubicación pública de archivo sepomex
-			//$path='custom/dir.txt';
 			//Inicia
 			//Lee archivo
 			$fila = 0;
@@ -42,10 +41,9 @@
 							if ($filaBloque==$bloque) {
 								$filaBloque=0;
 							}
-							if($fila>1){ //Utilizada para omitir cabeceras 0 y 1
-								//$date = TimeDate::getInstance()->nowDb();
-								$date="2022-04-29 02:55:43";
-								$current_user="1";
+                            if($fila>1){ //Utilizada para omitir cabeceras 0 y 1
+                                $id_usuario=$current_user->id;
+							    $date = TimeDate::getInstance()->nowDb();
 								$id_pais="2";
 								$pais="México";
 								$codigo_postal=$datos[0];
@@ -58,9 +56,7 @@
 								$colonia=$datos[1];
 								$id_colonia=$datos[12];
 
-								 $insertStatement ="('2".$datos[0].$datos[7].$datos[11].$datos[12]."',
-								 'México ".$datos[0]." ".$datos[4]." ".$datos[1]."',
-								 '{$date}','{$date}','{$current_user}','{$current_user}',0,'México','2','{$codigo_postal}','{$estado}','{$id_estado}','{$ciudad}','{$id_ciudad}','{$municipio}','{$id_municipio}','{$colonia}','{$id_colonia}');\n";
+								 $insertStatement ="('2".$datos[0].$datos[7].$datos[11].$datos[12]."','México ".$datos[0]." ".$datos[4]." ".$datos[1]."','{$date}','{$date}','{$id_usuario}','{$id_usuario}',0,'México','2','{$codigo_postal}','{$estado}','{$id_estado}','{$ciudad}','{$id_ciudad}','{$municipio}','{$id_municipio}','{$colonia}','{$id_colonia}');";
                                 
                                 try {
                                     $insertInto=$sqlInsertCP.$insertStatement;
@@ -75,6 +71,8 @@
 							$fila++;
 			    }
 			    fclose($gestor);
-			}
+            }
+            
+        $GLOBALS['log']->fatal('>>>>>>FINALIZA PROCESO SEPOMEX');
 		return true;
     }
