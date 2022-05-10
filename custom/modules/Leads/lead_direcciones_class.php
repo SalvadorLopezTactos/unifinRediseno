@@ -84,6 +84,7 @@ class lead_direcciones_class
                 if ($new) {
                     $direccion->save();
                 } else {
+                    $direccion->save();
                     /*$inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
                     $principal = $direccion->principal == 1 ? $direccion->principal : 0;
                     $query = <<<SQL
