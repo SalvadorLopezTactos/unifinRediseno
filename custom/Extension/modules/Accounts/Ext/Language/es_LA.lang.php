@@ -361,3 +361,5 @@ $mod_strings['LBL_FECHA_CLIENTE'] = 'Cliente desde';
 $mod_strings['LBL_PROVEEDOR_QUANTICO'] = 'Proveedor Quantico';
 $mod_strings['LBL_CODIGO_EXPO'] = 'Código de Expo';
 $mod_strings['LBL_ENVIO_INVITACION_TDC'] = 'Fecha de envío de invitación';
+$mod_strings['LBL_DENOMINACION'] = 'Denominación';
+$mod_strings['LBL_REGIMEN_FISCAL_SAT'] = 'Régimen fiscal SAT';
