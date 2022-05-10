@@ -203,10 +203,10 @@
 
                             //Ejecuta filtro por dependencia de País
                             prospect_dir.nuevaDireccion.pais = (Object.keys(prospect_dir.nuevaDireccion.listPais)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listPais)[0] : "";
-                            prospect_dir.nuevaDireccion.municipio = (Object.keys(lead_dir.nuevaDireccion.listMunicipio)[0] != undefined) ? Object.keys(lead_dir.nuevaDireccion.listMunicipio)[0] : "";
-                            prospect_dir.nuevaDireccion.estado = (Object.keys(lead_dir.nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(lead_dir.nuevaDireccion.listEstado)[0] : "";
-                            prospect_dir.nuevaDireccion.colonia = (Object.keys(lead_dir.nuevaDireccion.listColonia)[0] != undefined) ? Object.keys(lead_dir.nuevaDireccion.listColonia)[0] : "";
-                            prospect_dir.nuevaDireccion.ciudad = (Object.keys(lead_dir.nuevaDireccion.listCiudad)[0] != undefined) ? Object.keys(lead_dir.nuevaDireccion.listCiudad)[0] : "";
+                            prospect_dir.nuevaDireccion.municipio = (Object.keys(prospect_dir.nuevaDireccion.listMunicipio)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listMunicipio)[0] : "";
+                            prospect_dir.nuevaDireccion.estado = (Object.keys(prospect_dir.nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listEstado)[0] : "";
+                            prospect_dir.nuevaDireccion.colonia = (Object.keys(prospect_dir.nuevaDireccion.listColonia)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listColonia)[0] : "";
+                            prospect_dir.nuevaDireccion.ciudad = (Object.keys(prospect_dir.nuevaDireccion.listCiudad)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listCiudad)[0] : "";
                             
                         } else {
                             app.alert.show('cp_not_found', {
