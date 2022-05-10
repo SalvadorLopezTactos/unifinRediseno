@@ -135,7 +135,7 @@ SITE;
         $bean_lead->contacto_asociado_c = $beanPO->contacto_asociado_c;
         $bean_lead->leads_leads_1_name = $beanPO->leads_leads_1_name;
         $bean_lead->genero_c = $beanPO->genero_c;
-        $bean_Lead->medio_digital_c=$beanPO->medio_digital_c;
+        $bean_lead->medio_digital_c=$beanPO->medio_digital_c;
         
         $bean_lead->email = $beanPO->email;
         $bean_lead->clean_name = $beanPO->clean_name_c;

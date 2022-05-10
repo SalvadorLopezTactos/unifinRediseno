@@ -26,7 +26,7 @@
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
-        this.model.addValidationTask('checkCreateRecord', _.bind(this.checkCreateRecord, this));
+        
         //Validation task que muestra modal sobre duplicados
         this.model.addValidationTask('check_duplicados_modal', _.bind(this.check_duplicados_modal, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
@@ -144,32 +144,6 @@
         }
 
         callback(null, fields, errors);
-    },
-
-    checkCreateRecord:function(fields, errors, callback){
-        //Obteniendo el puesto del usuario
-        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios
-        //Asesor Leasing:2, Director Leasing:5
-        var puesto=App.user.attributes.puestousuario_c;
-        var posicionOperativa = (App.user.attributes.posicion_operativa_c == undefined) ? '' : App.user.attributes.posicion_operativa_c;
-        var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
-        var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
-        var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
-
-        if(this.total_asignados>=maximo_registros && posicionOperativa.includes("^3^")){
-
-            app.alert.show("error_create_leads", {
-                level: "error",
-                messages: 'No es posible crear Lead ya que tiene asignado el límite máximo de registros<br>Para crear registro, por favor atienda alguno de los registros que tiene asignado',
-                autoClose: false
-            });
-
-            errors['no_create_lead'] = errors['no_create_lead'] || {};
-            errors['no_create_lead'].required = true;
-        }
-
-        callback(null, fields, errors);
-
     },
 
     checkTextOnly: function (fields, errors, callback) {
