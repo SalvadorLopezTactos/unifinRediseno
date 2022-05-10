@@ -319,7 +319,7 @@
         if (btnConvert) {
             btnConvert.listenTo(btnConvert, "render", function () {
 
-                if (this.model.get('estatus_po_c') != '3' && this.model.get('estatus_po_c') != '4') {
+                if (this.model.get('estatus_po_c') == '2') {
                     btnConvert.show();
                 } else {
                     btnConvert.hide();
@@ -756,7 +756,7 @@
                 }
                 var btnConvert = this.getField("convert_po_to_Lead")
 
-                if (this.model.get('estatus_po_c') != '3' && this.model.get('estatus_po_c') != '4') {
+                if (this.model.get('estatus_po_c') == '2') {
                     btnConvert.show();
                 } else {
                     btnConvert.hide();

@@ -160,22 +160,19 @@ SITE;
             $bean_lead->inegi_macro_c = $beanPO->inegi_macro_c;
         }
 
-        // creamos las relaciones en telefono
-        $principal = 1;
-        if (!empty($beanPO->phone_mobile)) {
-            $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_mobile, 3, $beanPO->m_estatus_telefono_c, $principal);
-            $principal = 0;
-        }
-        if (!empty($beanPO->phone_home)) {
-            $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_home, 1, $beanPO->c_estatus_telefono_c, $principal);
-            $principal = 0;
-        }
-        if (!empty($beanPO->phone_work)) {
-            $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_work, 2, $beanPO->o_estatus_telefono_c, $principal);
-            $principal = 0;
-        }
+        // Mapeo en Teléfonos
+        $bean_lead->phone_mobile=$beanPO->phone_mobile;
+        $bean_lead->phone_home=$beanPO->phone_home;
+        $bean_lead->phone_work=$beanPO->phone_work;
 
-        //$bean_lead->pendiente_reus_c = ($resp_reus_tel == 3) ? true : false;
+        $bean_lead->m_estatus_telefono_c=$beanPO->m_estatus_telefono_c;
+        $bean_lead->c_estatus_telefono_c=$beanPO->c_estatus_telefono_c;
+        $bean_lead->o_estatus_telefono_c=$beanPO->o_estatus_telefono_c;
+
+        $bean_lead->c_registro_reus_c=$beanPO->c_registro_reus_c;
+        $bean_lead->m_registro_reus_c=$beanPO->m_registro_reus_c;
+        $bean_lead->o_registro_reus_c=$beanPO->o_registro_reus_c;
+        $bean_lead->pendiente_reus_c=$beanPO->pendiente_reus_c;
 
         $bean_lead->save();
         return $bean_lead;
@@ -327,26 +324,6 @@ SITE;
         $bean_relacion->save();
     }
 
-    public function create_phone($idCuenta, $phone, $tipoTel, $estatus_telefono, $principal)
-    {
-        /************* Validación REUS telefono *****************/
-        //$reus = $this->REUS_telefono($phone);
-        /************* Creación Telefono ************************/
-        $bean_relacionTel = BeanFactory::newBean('Tel_Telefonos');
-        $bean_relacionTel->accounts_tel_telefonos_1accounts_ida = $idCuenta;
-        $bean_relacionTel->name = $phone;
-        $bean_relacionTel->telefono = $phone;
-        $bean_relacionTel->tipotelefono = $tipoTel;
-        $bean_relacionTel->tipotelefono = $tipoTel;
-        $bean_relacionTel->tipotelefono = $tipoTel;
-        $bean_relacionTel->estatus = "Activo";
-        $bean_relacionTel->pais = 2;
-        $bean_relacionTel->principal = $principal;
-        if($reus == 1) { $bean_relacionTel->registro_reus_c = 1; }
-        $bean_relacionTel->estatus_telefono_c = $estatus_telefono;
-        $bean_relacionTel->save();
-        return '2'; //$reus;
-    }
 
     public function re_asign_meetings($bean_LEad, $idCuenTa)
     {
@@ -356,7 +333,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $call) {
                     global $db;
-                    $meetUpdate = "update calls set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
+                    $meetUpdate = "update calls set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
                     $updateResult = $db->query($meetUpdate);
                 }
             }
@@ -367,7 +344,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $meeting) {
                     global $db;
-                    $meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
+                    $meetUpdate = "update meetings set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
                     $updateResult = $db->query($meetUpdate);
                 }
             }
@@ -378,7 +355,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $task) {
                     global $db;
-                    $meetUpdate = "update tasks set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
+                    $meetUpdate = "update tasks set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
                     $updateResult = $db->query($meetUpdate);
                     $bean_LEad->load_relationship('tasks_leads_1');
                     $bean_LEad->tasks_leads_1->add($task->id);
@@ -391,7 +368,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $note) {
                     global $db;
-                    $meetUpdate = "update notes set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
+                    $meetUpdate = "update notes set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
                     $updateResult = $db->query($meetUpdate);
                     $bean_LEad->load_relationship('notes_leads_1');
                     $bean_LEad->notes_leads_1->add($note->id);
@@ -404,14 +381,14 @@ SITE;
         $GLOBALS['log']->fatal("Obtiene Direcciones y las guarda en la cuenta.");
         global $db;
         $queryDir = "SELECT direccion.id FROM dire_direccion as direccion
-        INNER JOIN leads_dire_direccion_1_c as intermedia ON intermedia.leads_dire_direccion_1dire_direccion_idb = direccion.id AND intermedia.deleted = 0
-        WHERE intermedia.leads_dire_direccion_1leads_ida = '{$bean_LEad->id}'";
+        INNER JOIN prospects_dire_direccion_1_c as intermedia ON intermedia.prospects_dire_direccion_1dire_direccion_idb = direccion.id AND intermedia.deleted = 0
+        WHERE intermedia.prospects_dire_direccion_1prospects_ida = '{$bean_LEad->id}'";
 
         $queryResultD = $db->query($queryDir);
         while ($rowD = $db->fetchByAssoc($queryResultD)) {
 
             $beanDirecciones = BeanFactory::retrieveBean('dire_Direccion', $rowD['id'], array('disable_row_level_security' => true));
-            $beanDirecciones->accounts_dire_direccion_1accounts_ida  = $idCuenTa;
+            $beanDirecciones->prospects_dire_direccion_1prospects_ida  = $idCuenTa;
             $beanDirecciones->save();
         }
     }
