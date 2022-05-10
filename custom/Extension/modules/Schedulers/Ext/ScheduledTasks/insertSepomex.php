@@ -14,7 +14,7 @@
 			$fila = 0;
 			$filaBloque = 0;
 			$bloque = 1000;
-			$sqlInsertCP = 'INSERT IGNORE INTO dir_sepomex (`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `deleted`, `pais`, `id_pais`, `codigo_postal`, `estado`, `id_estado`, `ciudad`, `id_ciudad`, `municipio`, `id_municipio`, `colonia`, `id_colonia`) VALUES';
+			$sqlInsertCP = 'INSERT IGNORE INTO dir_sepomex (`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `deleted`, `pais`, `id_pais`, `codigo_postal`, `estado`, `id_estado`, `ciudad`, `id_ciudad`, `municipio`, `id_municipio`, `colonia`, `id_colonia`,`team_id`,`team_set_id`) VALUES';
 
 			/*
 			* Mapeo columnas; d_codigo|d_asenta|d_tipo_asenta|D_mnpio|d_estado|d_ciudad|d_CP|c_estado|c_oficina|c_CP|c_tipo_asenta|c_mnpio|id_asenta_cpcons|d_zona|c_cve_ciudad
@@ -56,7 +56,7 @@
 								$colonia=$datos[1];
 								$id_colonia=$datos[12];
 
-								 $insertStatement ="('2".$datos[0].$datos[7].$datos[11].$datos[12]."','México ".$datos[0]." ".$datos[4]." ".$datos[1]."','{$date}','{$date}','{$id_usuario}','{$id_usuario}',0,'México','2','{$codigo_postal}','{$estado}','{$id_estado}','{$ciudad}','{$id_ciudad}','{$municipio}','{$id_municipio}','{$colonia}','{$id_colonia}');";
+								 $insertStatement ="('2".$datos[0].$datos[7].$datos[11].$datos[12]."','México ".$datos[0]." ".$datos[4]." ".$datos[1]."','{$date}','{$date}','{$id_usuario}','{$id_usuario}',0,'México','2','{$codigo_postal}','{$estado}','{$id_estado}','{$ciudad}','{$id_ciudad}','{$municipio}','{$id_municipio}','{$colonia}','{$id_colonia}','1','1');";
                                 
                                 try {
                                     $insertInto=$sqlInsertCP.$insertStatement;
