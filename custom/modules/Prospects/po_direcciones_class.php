@@ -7,7 +7,7 @@ class po_direcciones_class
 {
     public function po_direcciones_function($bean, $event, $args)
     {
-        if (!$bean->excluye_campana_c){
+        
             global $current_user, $db;
             $current_id_list = array();
 
@@ -84,27 +84,7 @@ class po_direcciones_class
                     $current_id_list[] = $direccion->id;
                     if ($new) {
                         $direccion->save();
-                    } else {
-                        /*$inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
-                        $principal = $direccion->principal == 1 ? $direccion->principal : 0;
-                        $query = <<<SQL
-    update dire_direccion set  name = '{$direccion->name}', tipodedireccion = '{$direccion->tipodedireccion}',indicador = '{$direccion->indicador}',  calle = '{$direccion->calle}', numext = '{$direccion->numext}', numint= '{$direccion->numint}', principal=$principal, inactivo =$inactivo  where id = '{$direccion->id}';
-    SQL;
-                        try {
-                            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Update *784 " . $query);
-                            $resultado = $db->query($query);
-                            $callApi = new UnifinAPI();
-                            if ($direccion->sincronizado_unics_c == '0') {
-                                $direccion = $callApi->insertaDireccion($direccion);
-                            } else {
-                                $direccion = $callApi->actualizaDireccion($direccion);
-                            }
-                            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : resultado " . $db->getAffectedRowCount($resultado));
-                        } catch (Exception $e) {
-                            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
-                        }*/
-                    }
-                    //$direccion->save();
+                    } 
                 }
                 //retrieve all related records
                 $bean->load_relationship('prospects_dire_direccion_1');
@@ -114,7 +94,7 @@ class po_direcciones_class
                     }
                 }
             }
-        }    
+           
 
     }
 }
