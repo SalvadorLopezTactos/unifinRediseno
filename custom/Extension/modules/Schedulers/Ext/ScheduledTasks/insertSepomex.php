@@ -60,7 +60,7 @@
                                 
                                 try {
                                     $insertInto=$sqlInsertCP.$insertStatement;
-                                    $GLOBALS['log']->fatal("INSERT SEPOMEX: ".$insertInto);
+                                    //$GLOBALS['log']->fatal("INSERT SEPOMEX: ".$insertInto);
                                     $db->query($insertInto);
                                  } catch (Exception $e) {
                                     $GLOBALS['log']->fatal("Error: " . $e->getMessage());
