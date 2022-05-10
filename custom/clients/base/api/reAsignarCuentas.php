@@ -105,8 +105,7 @@ class reAsignarCuentas extends SugarApi
                                     }
                                     # estatus_atencion
                                     if ($asignaFecha->estatus_atencion == '2') {
-                                        /** diferente de Activo */
-#1-5 y 3 es cliente
+                                        /** diferente de Activo */ #1-5 y 3 es cliente
                                         if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
                                             $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
                                             $regla2 = $this->SolicitudCredito($account->id);
@@ -132,6 +131,11 @@ class reAsignarCuentas extends SugarApi
                                     }
 
                                 }
+                                if ($asignaFecha->tipo_producto == '2' || $asignaFecha->tipo_producto == '9' || $asignaFecha->tipo_producto == '7') {  //Crédito Simple - Unilease - SOS
+                                    // $GLOBALS['log']->fatal("Leasing UniProductos - Reasignado");
+                                    $asignaFecha->fecha_asignacion_c = $fechaReAsignaAsesor;
+                                    $asignaFecha->assigned_user_id = $reAsignado;
+                                }
                                 break;
                             case 'CREDITO AUTOMOTRIZ':
                                 if ($asignaFecha->tipo_producto == '3') { //Credito-Automotriz
@@ -153,8 +157,7 @@ class reAsignarCuentas extends SugarApi
                                     }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
-                                        /** diferente de Activo */
-#1-5 y 3 es cliente
+                                        /** diferente de Activo */ #1-5 y 3 es cliente
                                         if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
                                             $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
                                             $regla2 = $this->SolicitudCredito($account->id);
@@ -200,8 +203,7 @@ class reAsignarCuentas extends SugarApi
                                     }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
-                                        /** diferente de Activo */
-#1-5 y 3 es cliente
+                                        /** diferente de Activo */ #1-5 y 3 es cliente
                                         if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
                                             $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
                                             $regla2 = $this->SolicitudCredito($account->id);
@@ -247,8 +249,7 @@ class reAsignarCuentas extends SugarApi
                                     }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
-                                        /** diferente de Activo */
-#1-5 y 3 es cliente
+                                        /** diferente de Activo */ #1-5 y 3 es cliente
                                         if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
                                             $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
                                             $regla2 = $this->SolicitudCredito($account->id);
@@ -294,8 +295,7 @@ class reAsignarCuentas extends SugarApi
                                     }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
-                                        /** diferente de Activo */
-#1-5 y 3 es cliente
+                                        /** diferente de Activo */ #1-5 y 3 es cliente
                                         if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
                                             $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
                                             $regla2 = $this->SolicitudCredito($account->id);
@@ -341,8 +341,7 @@ class reAsignarCuentas extends SugarApi
                                     }
 
                                     if ($asignaFecha->estatus_atencion == '2') {
-                                        /** diferente de Activo */
-#1-5 y 3 es cliente
+                                        /** diferente de Activo */ #1-5 y 3 es cliente
                                         if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
                                             $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
                                             $regla2 = $this->SolicitudCredito($account->id);
@@ -376,8 +375,7 @@ class reAsignarCuentas extends SugarApi
                             $asignaFecha->assigned_user_id = $reAsignado;
 
                             if ($asignaFecha->estatus_atencion == '2') {
-                                /** diferente de Activo */
-#1-5 y 3 es cliente
+                                /** diferente de Activo */ #1-5 y 3 es cliente
                                 if ($account->tipo_registro_cuenta_c == 1 || $account->tipo_registro_cuenta_c == 2) {
                                     $regla1 = $this->MeetOrCallValid(30, $account->id, $reAsignado);
                                     $regla2 = $this->SolicitudCredito($account->id);

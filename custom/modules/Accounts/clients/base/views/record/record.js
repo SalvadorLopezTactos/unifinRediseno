@@ -8151,6 +8151,13 @@ validaReqUniclickInfo: function () {
                                     Oproductos.productos.tct_tipo_cuenta_tc_c = Productos[key]['tipo_cuenta'];
                                     Oproductos.productos.tct_subtipo_tc_txf_c = Productos[key]['subtipo_cuenta'];
                                     break;
+                                case "2": //Crédito Simple
+                                    var dias = fecha1.diff(fecha2, 'days');
+                                    Productos[key]['dias'] = dias;
+                                    ResumenProductos['tarjetaCredito'] = Productos[key];
+                                    Oproductos.productos.tct_tipo_cuenta_cs_c = Productos[key]['tipo_cuenta'];
+                                    Oproductos.productos.tct_subtipo_cs_txf_c = Productos[key]['subtipo_cuenta'];
+                                    break;
                                 default:
                                     break;
                             }

@@ -532,6 +532,10 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['tarjeta_credito']['promotor']= $asignado;
                         $arr_principal['tarjeta_credito']['promotorId']= $asignadoId;
                         break;
+                    case '2': //Crédito Simple
+                        $arr_principal['credito_simple']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['credito_simple']['subtipo_cuenta'] = $subtipoCuenta;
+                        break;
                     default:
                         break;
                 }

@@ -29,6 +29,8 @@ class proveedor_quantico
 			global $sugar_config;
 			$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierInQuantico/';
 			$content = json_encode($arreglo);
+			$GLOBALS['log']->fatal('SOLICITUD PROVEEDOR QUANTICO');
+			$GLOBALS['log']->fatal($content);
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_ENCODING, '');
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -40,6 +42,8 @@ class proveedor_quantico
           	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
 			$result = curl_exec($ch);
 			$response = json_decode($result, true);
+			$GLOBALS['log']->fatal('RESPUESTA PROVEEDOR QUANTICO');
+			$GLOBALS['log']->fatal($response);
 			if($response['IsValid']) $bean->proveedor_quantico_c = 1;
 		}
     }

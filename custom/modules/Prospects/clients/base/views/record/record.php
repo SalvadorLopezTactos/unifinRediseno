@@ -49,20 +49,13 @@ array (
               ),
               1 => 
               array (
-                'type' => 'shareaction',
-                'name' => 'share',
-                'label' => 'LBL_RECORD_SHARE_BUTTON',
-                'acl_action' => 'view',
-              ),
-              2 => 
-              array (
                 'type' => 'pdfaction',
                 'name' => 'download-pdf',
                 'label' => 'LBL_PDF_VIEW',
                 'action' => 'download',
                 'acl_action' => 'view',
               ),
-              3 => 
+              2 => 
               array (
                 'type' => 'pdfaction',
                 'name' => 'email-pdf',
@@ -70,31 +63,38 @@ array (
                 'action' => 'email',
                 'acl_action' => 'view',
               ),
-              4 => 
+              3 => 
               array (
                 'type' => 'divider',
               ),
-              5 => 
+              4 => 
               array (
-               'name' => 'convert_po_to_Lead',
+                'name' => 'convert_po_to_Lead',
                 'type' => 'rowaction',
                 'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
                 'acl_action' => 'view',
                 'event' => 'button:convert_po_to_Lead:click',
                 'class' => 'btn_convertLeads',
               ),
+              5 => 
+              array (
+                'type' => 'divider',
+              ),
               6 => 
               array (
-                'type' => 'manage-subscription',
-                'name' => 'manage_subscription_button',
-                'label' => 'LBL_MANAGE_SUBSCRIPTIONS',
+                'type' => 'rowaction',
+                'event' => 'button:historical_summary_button:click',
+                'name' => 'historical_summary_button',
+                'label' => 'LBL_HISTORICAL_SUMMARY',
+                'acl_action' => 'view',
               ),
               7 => 
               array (
-                'type' => 'vcard',
-                'name' => 'vcard_button',
-                'label' => 'LBL_VCARD_DOWNLOAD',
-                'acl_action' => 'edit',
+                'type' => 'rowaction',
+                'event' => 'button:audit_button:click',
+                'name' => 'audit_button',
+                'label' => 'LNK_VIEW_CHANGE_LOG',
+                'acl_action' => 'view',
               ),
               8 => 
               array (
@@ -103,63 +103,10 @@ array (
               9 => 
               array (
                 'type' => 'rowaction',
-                'event' => 'button:find_duplicates_button:click',
-                'name' => 'find_duplicates_button',
-                'label' => 'LBL_DUP_MERGE',
-                'acl_action' => 'edit',
-              ),
-              10 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:duplicate_button:click',
-                'name' => 'duplicate_button',
-                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'Prospects',
-                'acl_action' => 'create',
-              ),
-              11 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:historical_summary_button:click',
-                'name' => 'historical_summary_button',
-                'label' => 'LBL_HISTORICAL_SUMMARY',
-                'acl_action' => 'view',
-              ),
-              12 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:audit_button:click',
-                'name' => 'audit_button',
-                'label' => 'LNK_VIEW_CHANGE_LOG',
-                'acl_action' => 'view',
-              ),
-              13 => 
-              array (
-                'type' => 'divider',
-              ),
-              14 => 
-              array (
-                'type' => 'rowaction',
                 'event' => 'button:delete_button:click',
                 'name' => 'delete_button',
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
-              ),
-              15 => 
-              array (
-                'name' => 'send_survey',
-                'type' => 'rowaction',
-                'label' => 'Send Survey',
-                'acl_action' => 'send_survey',
-                'event' => 'button:send_survey:click',
-              ),
-              16 => 
-              array (
-                'name' => 'send_poll',
-                'type' => 'rowaction',
-                'label' => 'Send Poll',
-                'acl_action' => 'send_poll',
-                'event' => 'button:send_poll:click',
               ),
             ),
           ),
@@ -403,17 +350,22 @@ array (
               ),
               34 => 
               array (
-                'name' => 'prospects_telefonos',
+                'readonly' => false,
+                'name' => 'origen_ag_tel_c',
                 'studio' => 'visible',
-                'label' => 'LBL_PROSPECTS_TELEFONOS',
-                'span' => 12,
+                'label' => 'LBL_ORIGEN_AG_TEL_C',
               ),
-              35 => 'assigned_user_name',
+              35 => 
+              array (
+                'readonly' => false,
+                'name' => 'alianza_c',
+                'label' => 'LBL_ALIANZA',
+              ),
               36 => 
               array (
                 'readonly' => false,
-                'name' => 'fecha_asignacion_c',
-                'label' => 'LBL_FECHA_ASIGNACION',
+                'name' => 'status_management_c',
+                'label' => 'LBL_STATUS_MANAGEMENT_C',
               ),
               37 => 
               array (
@@ -421,6 +373,17 @@ array (
               ),
               38 => 
               array (
+                'name' => 'prospects_telefonos',
+                'studio' => 'visible',
+                'label' => 'LBL_PROSPECTS_TELEFONOS',
+                'span' => 12,
+              ),
+              39 => 'assigned_user_name',
+              40 => 
+              array (
+                'readonly' => false,
+                'name' => 'fecha_asignacion_c',
+                'label' => 'LBL_FECHA_ASIGNACION',
               ),
             ),
           ),
@@ -576,7 +539,6 @@ array (
               array (
                 'readonly' => false,
                 'name' => 'pendiente_reus_c',
-                'label' => 'LBL_PENDIENTE_REUS',
               ),
               7 => 
               array (
