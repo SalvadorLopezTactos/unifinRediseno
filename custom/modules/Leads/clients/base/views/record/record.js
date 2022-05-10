@@ -335,7 +335,7 @@
         if(this.valorPrevio!=undefined){
 
             if (this.model.get('lead_cancelado_c')== true) {
-            
+
                 this.model.set('motivo_cancelacion_c', '');
                 this.model.set('subtipo_registro_c', '3');
 
@@ -343,7 +343,7 @@
                 this.model.set('motivo_cancelacion_c', '');
                 this.model.set('subtipo_registro_c',this.valorPrevio);
             }
-        }    
+        }
     },
 
     /*************Valida Genero *****************/
@@ -518,14 +518,31 @@
         if (this.model.get('subtipo_registro_c') == '4') {
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
-			var btnConvert = self.getField("convert_Leads_button");
-			btnConvert.hide();
+      			var btnConvert = self.getField("convert_Leads_button");
+      			btnConvert.hide();
+            var noEditCampo = true;
+            var pointerEvents = true;
             _.each(this.model.fields, function (field) {
-                if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
+                //Valida si el campo debe evitar bloqueo por pointer-events:none
+                if (field.name == 'origen_ag_tel_c' || field.name == 'promotor_c' || field.name == 'account_to_lead' || field.name == 'assigned_user_name' || field.name == 'email') {
+                    pointerEvents = false;
+                }
+                //Valida si el campo debe evitar bloqueo para CP
+                if((field.name=='subestatus_ld_c' || field.name=='detalle_subestatus_ld_c') && App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] != undefined) {
+                    noEditCampo = false;
+                    pointerEvents = false;
+                }
+
+                //Bloquea campos
+                if(noEditCampo){
                     self.noEditFields.push(field.name);
                     self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                }
+                if(pointerEvents){
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
                 }
+                noEditCampo = true;
+                pointerEvents = true;
             });
             this._disableActionsSubpanel();
         }
