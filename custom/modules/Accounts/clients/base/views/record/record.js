@@ -4835,9 +4835,6 @@
                         var identificadorColonia=ids[4];
                         
                         var valCodigoPostal = data.records[i].codigo_postal_c;
-                        if(valCodigoPostal==""){
-                            valCodigoPostal= data.records[i].dire_direccion_dire_codigopostal_name;
-                        }
                         var idCodigoPostal=data.records[i].dir_sepomex_dire_direcciondir_sepomex_ida;
                         var valPais = data.records[i].pais_c;
                         var idPais = identificadorPais;
