@@ -123,8 +123,9 @@ class Account_fecha_bloqueo_origen
 
         //Cuando la cuenta es Nueva y viene desde onboarding, se genera Presolicitud como "Solicitud Inicial"
         //Cuando la cuenta ya es existente (actualización) y viene desde Onboarding
+        $tiposNoProcesa = array("4", "5"); //No procesa Persona y Proveedor
         if(!$args['isUpdate']){//Es creación
-            if($bean->onboarding_chk_c==1){
+            if($bean->onboarding_chk_c==1 && !in_array($bean->tipo_registro_cuenta_c, $tiposNoProcesa) ){
                 $GLOBALS['log']->fatal("********** Entra condición para generar solicitud Dummy proveniente de Onboarding **********");
                 //Modificar Process Author: Solicitud inicial a Prospecto v2, añadiendo la condición que solo convierta
                 //a Prospecto Interesado cuando el nuevo campo no_convertir_prospecto_c es null o false
@@ -158,7 +159,7 @@ class Account_fecha_bloqueo_origen
             }
         }else{
             //Cuando sea actualización, antes de establecer la actualización del origen, validar si ya se cumplió la fecha de bloqueo del origen para la cuenta
-            if($bean->onboarding_chk_c==1 && $bean->fetched_row['onboarding_chk_c'] != $bean->onboarding_chk_c){
+            if($bean->onboarding_chk_c==1 && $bean->fetched_row['onboarding_chk_c'] != $bean->onboarding_chk_c && !in_array($bean->tipo_registro_cuenta_c, $tiposNoProcesa) ){
                 //Valida si la fecha de bloqueo ya se cumplió
                 if($bean->fetched_row['origen_cuenta_c'] != $bean->origen_cuenta_c){
                     $GLOBALS['log']->fatal("********** Entra condición (actualización de Cuenta) para generar solicitud Dummy proveniente de Onboarding **********");

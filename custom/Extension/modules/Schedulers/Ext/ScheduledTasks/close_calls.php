@@ -32,5 +32,13 @@
 			}
         }
         $GLOBALS['log']->fatal('>>>>>>TERMINA JOB CLOSE_CALLS_ISSABEL:'+$contador);//------------------------------------
+        $query="select calls.id, calls.date_entered, calls.description, calls.assigned_user_id from calls, calls_cstm where calls.id=calls_cstm.id_c and calls.status='Planned' and date_entered < UTC_TIMESTAMP() - interval 1 day and calls_cstm.tct_call_issabel_c=1 and deleted=0";
+        $result = $GLOBALS['db']->query($query);
+        while($row = $GLOBALS['db']->fetchByAssoc($result) )
+        {
+		    $id = $row['id'];
+			$queryUpdate="update calls, calls_cstm set calls.status = 'Not Held', calls_cstm.tct_resultado_llamada_ddw_c = 'Ilocalizable', detalle_resultado_c = 13 where calls.id = calls_cstm.id_c and calls.id ='{$id}';";
+			$resultUpdate = $GLOBALS['db']->query($queryUpdate);
+		}
 		return true;
     }

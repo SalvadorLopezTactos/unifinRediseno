@@ -1155,7 +1155,7 @@
                         ]
                     }), null, {
                         success: _.bind(function (encuesta) {
-                            if (encuesta.records.length > 0) {
+                            if (encuesta.records.length > 0 && !window.encuesta) {
 								//Guarda registro en Encuestas
 								var qpencuesta = app.data.createBean('QPRO_Encuestas');
 								qpencuesta.set("name", app.user.attributes.full_name);	
@@ -1172,6 +1172,13 @@
 									error:function() {}
 								});
                             }
+							else {
+							    app.alert.show("survey_open", {
+									level: "info",
+									messages: "Ya se cuenta con un registro para contestar la encuesta",
+									autoClose: true,
+								});
+							}
                         }, this)
                     });
                 }else {

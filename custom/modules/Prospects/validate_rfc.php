@@ -5,7 +5,7 @@ class class_validate_rfc
     public function func_validate_rfc($bean = null, $event = null, $args = null)
     {
         global $db;
-        if($bean->rfc_c != '' && $bean->rfc_c != 'XXX010101XXX' && $bean->rfc_c != 'XXXX010101XXX') {
+        if($bean->rfc_c != '' && $bean->rfc_c != 'XXX010101XXX' && $bean->rfc_c != 'XXXX010101XXX' && $bean->estatus_po_c!='3') {
             $queryRFCPO = "SELECT p.id from prospects p, prospects_cstm pc where p.id = pc.id_c
               and p.deleted = 0
               and p.id <> '{$bean->id}'

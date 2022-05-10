@@ -11,7 +11,7 @@
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_po_to_Lead:click', this.convert_Po_to_Lead, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-        
+
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
@@ -44,6 +44,7 @@
         /****** validaciones SOC  **********/
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
+        this.model.on("change:estatus_po_c", _.bind(this.change_estatus, this));
         this.model.on('sync', this.userAlianzaSoc, this);
         this.cmbio_soc = 0;
 
@@ -313,12 +314,12 @@
 
     _hideBtnConvert: function () {
 
-        var btnConvert = this.getField("convert_Leads_button");
+        var btnConvert = this.getField("convert_po_to_Lead");
 
         if (btnConvert) {
             btnConvert.listenTo(btnConvert, "render", function () {
 
-                if (this.model.get('subtipo_registro_c') == '2') {
+                if (this.model.get('estatus_po_c') != '3' && this.model.get('estatus_po_c') != '4') {
                     btnConvert.show();
                 } else {
                     btnConvert.hide();
@@ -488,16 +489,16 @@
                     self.noEditFields.push(field.name);
                     self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
-                
+
             });
             this._disableActionsSubpanel();
         }
         /***************************READONLY PARA SUBTIPO DE LEAD CONVERTIDO**************************/
-        if (this.model.get('subtipo_registro_c') == '4') {
+        if (this.model.get('estatus_po_c') == '3' || this.model.get('estatus_po_c') == '4') {
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
-			var btnConvert = self.getField("convert_Leads_button");
-			btnConvert.hide();
+      			var btnConvert = self.getField("convert_po_to_Lead");
+      			btnConvert.hide();
             _.each(this.model.fields, function (field) {
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
                     self.noEditFields.push(field.name);
@@ -723,9 +724,9 @@
         };
         // alert(this.model.get('id'))
         this.valida_requeridos();
-		var btnConvert = this.getField("convert_po_to_Lead");
-		btnConvert.hide();
-		var editButton = this.getField('edit_button');
+    		var btnConvert = this.getField("convert_po_to_Lead");
+    		btnConvert.hide();
+    		var editButton = this.getField('edit_button');
         editButton.setDisabled(true);
         app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
         app.api.call("create", app.api.buildURL("existsPOLeads", null, null, filter_arguments), null, {
@@ -733,8 +734,8 @@
                 console.log(data);
                 app.alert.dismiss('upload');
                 app.controller.context.reloadData({});
-				editButton.setDisabled(false);
-                if (data.idCuenta === "") {
+		            editButton.setDisabled(false);
+                if (data.idCuenta === "" || data.idCuenta == null) {
                     app.alert.show("Conversión", {
                         level: "error",
                         messages: data.mensaje,
@@ -747,28 +748,20 @@
                         autoClose: false
                     });
                     this._disableActionsSubpanel();
-					var btnConvert = this.getField("convert_Leads_button");
-					btnConvert.hide();
+          					var btnConvert = this.getField("convert_po_to_Lead");
+          					btnConvert.hide();
+                    self.model.set('estatus_po_c','3');
+                    self.model.set('lead_id',data.idCuenta);
+                    self.model.save();
                 }
-                var btnConvert = this.getField("convert_Leads_button")
+                var btnConvert = this.getField("convert_po_to_Lead")
 
-                if (this.model.get('subtipo_registro_c') == '2') {
+                if (this.model.get('estatus_po_c') != '3' && this.model.get('estatus_po_c') != '4') {
                     btnConvert.show();
                 } else {
                     btnConvert.hide();
                 }
-                //app.controller.context.reloadData({});
-                //SUGAR.App.controller.context.reloadData({})
-                /* Para refrescar solo un campo
-
-                 model.fetch({
-
-                  view: undefined,
-
-                  fields: ['industry']
-
-                });
-                 */
+                self.render();
 
             }, this),
             failure: _.bind(function (data) {
@@ -1459,6 +1452,18 @@
                 if(!cambio){
                     this.model.set('alianza_soc_chk_c', this.model.get('alianza_soc_chk_c'));
                 }
+            }
+        }
+    },
+
+    change_estatus: function () {
+        var prev_status = this.model.previousAttributes().estatus_po_c;
+        var status = this.model.get("estatus_po_c");
+
+        if(event.type == 'mouseup'){
+            //Si nuevo valor es Convertido y valor previo es diferente a convertido regresa a estatus previo
+            if (status=='3' && prev_status!='3') {
+                this.model.set("estatus_po_c",prev_status);
             }
         }
     },

@@ -477,7 +477,7 @@ class Meetings_Hooks
 	  $idEncuesta = $rowCita['id'];
       //Ejecuta proceso para insertar registro en Encuestas
 	  $beanEncuesta= BeanFactory::newBean('QPRO_Encuestas');
-	  $beanEncuesta->name = $beanReunion->assigned_user_name;
+	  $beanEncuesta->name = $beanReunion->parent_name;
 	  $beanEncuesta->related_module = "Users";
 	  $beanEncuesta->user_id_c = $beanReunion->assigned_user_id;
 	  $beanEncuesta->assigned_user_id = $beanReunion->assigned_user_id;

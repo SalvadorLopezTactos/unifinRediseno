@@ -6,9 +6,9 @@
  */
 
 $dependencies['Propects']['hide_panel_3_dep']=array(
-    'hooks' => array("edit","view"),
+    'hooks' => array("all"),
        'trigger' => 'true',
-       'triggerFields' => array('id'),  // what field should this be triggered on
+       'triggerFields' => array('id','name','estatus_po_c'),  // what field should this be triggered on
        'onload' => true,
        'actions' => array(
            array(
@@ -16,9 +16,7 @@ $dependencies['Propects']['hide_panel_3_dep']=array(
                'params' => array(
                    'target' => 'LBL_RECORDVIEW_PANEL3',  // name of the panel, can be found in the vardefs.
                    'value' => 'false',  // the formula to run to determine if the panel should be hidden or not.
-               ),            
-           ),        
+               ),
+           ),
        ),
    );
-
-   
