@@ -64,3 +64,12 @@ $hook_array['after_save'][] = Array(
     'po_direcciones_class', // name of the class
     'po_direcciones_function' // name of the function.
 );
+
+
+$hook_array['before_save'][] = Array(
+    9,
+    'Actualiza a los usuario a quien les reporta',
+    'custom/modules/Users/filterPO.php',
+    'filterPO',
+    'AssignFilterAccounts_ByUsr'
+);
