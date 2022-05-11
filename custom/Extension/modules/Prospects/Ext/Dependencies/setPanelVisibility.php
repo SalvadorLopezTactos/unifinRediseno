@@ -8,7 +8,7 @@
 $dependencies['Propects']['hide_panel_3_dep']=array(
     'hooks' => array("all"),
        'trigger' => 'true',
-       'triggerFields' => array('id','name','estatus_po_c'),  // what field should this be triggered on
+       'triggerFields' => array('assigned_user_id','date_entered','estatus_po_c'),  // what field should this be triggered on
        'onload' => true,
        'actions' => array(
            array(
