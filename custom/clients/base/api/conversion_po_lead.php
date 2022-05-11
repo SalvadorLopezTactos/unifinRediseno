@@ -378,7 +378,7 @@ SITE;
 
 
         //Reasigna Direcciones
-        $GLOBALS['log']->fatal("Obtiene Direcciones y las guarda en la cuenta.");
+        $GLOBALS['log']->fatal("Obtiene Direcciones y las guarda en el LEAD.");
         global $db;
         $queryDir = "SELECT direccion.id FROM dire_direccion as direccion
         INNER JOIN prospects_dire_direccion_1_c as intermedia ON intermedia.prospects_dire_direccion_1dire_direccion_idb = direccion.id AND intermedia.deleted = 0
@@ -388,7 +388,7 @@ SITE;
         while ($rowD = $db->fetchByAssoc($queryResultD)) {
 
             $beanDirecciones = BeanFactory::retrieveBean('dire_Direccion', $rowD['id'], array('disable_row_level_security' => true));
-            $beanDirecciones->prospects_dire_direccion_1prospects_ida  = $idCuenTa;
+            $beanDirecciones->leads_dire_direccion_1leads_ida  = $idCuenTa;
             $beanDirecciones->save();
         }
     }
