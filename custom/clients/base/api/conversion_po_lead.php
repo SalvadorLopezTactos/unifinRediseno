@@ -297,7 +297,7 @@ SITE;
                         // $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
                         $lead = $this->createLead($PO, null, true);
                         if (!empty($lead->id)) {
-                            $this->re_asign_meetings($O, $lead->id);
+                            $this->re_asign_meetings($PO, $lead->id);
                             $this->create_relationship($bean_Lead, $lead->id);
                             array_push($resultado['data'], $lead->id);
                             $PO->lead_id = $lead->id;
