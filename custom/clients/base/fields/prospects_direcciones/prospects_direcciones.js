@@ -185,11 +185,7 @@
                             //Colonia
                             listColonia = {};
                             for (var i = 0; i < list_colonias.length; i++) {
-                                //listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
-                                listColonia[i]={};
-                                listColonia[i]['idColonia']=list_colonias[i].idColonia;
-                                listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
-                                listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
+                                listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
                             }
                             prospect_dir.nuevaDireccion.listColonia = listColonia;
                             prospect_dir.nuevaDireccion.listColoniaFull = listColonia;
@@ -203,10 +199,9 @@
 
                             //Ejecuta filtro por dependencia de País
                             prospect_dir.nuevaDireccion.pais = (Object.keys(prospect_dir.nuevaDireccion.listPais)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listPais)[0] : "";
-                            prospect_dir.nuevaDireccion.municipio = (Object.keys(prospect_dir.nuevaDireccion.listMunicipio)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listMunicipio)[0] : "";
-                            prospect_dir.nuevaDireccion.estado = (Object.keys(prospect_dir.nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listEstado)[0] : "";
-                            prospect_dir.nuevaDireccion.colonia = (Object.keys(prospect_dir.nuevaDireccion.listColonia)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listColonia)[0] : "";
-                            prospect_dir.nuevaDireccion.ciudad = (Object.keys(prospect_dir.nuevaDireccion.listCiudad)[0] != undefined) ? Object.keys(prospect_dir.nuevaDireccion.listCiudad)[0] : "";
+                            prospect_dir.populateEdoByPais(prospect_dir.nuevaDireccion.pais);
+                            prospect_dir.populateCiudadesByEstado(prospect_dir.nuevaDireccion.estado);
+                            prospect_dir.populateColoniasByMunicipio(prospect_dir.nuevaDireccion.municipio);
                             
                         } else {
                             app.alert.show('cp_not_found', {
@@ -316,10 +311,7 @@
                             //Colonia
                             listColonia = {};
                             for (var i = 0; i < list_colonias.length; i++) {
-                                listColonia[i]={};
-                                listColonia[i]['idColonia']=list_colonias[i].idColonia;
-                                listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
-                                listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
+                                listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia; 
                             }
                             prospect_dir.oDirecciones.direccion[index].listColonia = listColonia;
                             prospect_dir.oDirecciones.direccion[index].listColoniaFull = listColonia;
@@ -336,13 +328,13 @@
                             evt.index = index;
 
                             evt.idPais = prospect_dir.oDirecciones.direccion[index].pais;
-                            //prospect_dir.populateEdoByPaisDE(evt);
+                            prospect_dir.populateEdoByPaisDE(evt);
 
                             evt.idEstado = prospect_dir.oDirecciones.direccion[index].estado;
-                            //prospect_dir.populateCiudadesByEstadoDE(evt);
+                            prospect_dir.populateCiudadesByEstadoDE(evt);
 
                             evt.idMunicipio = prospect_dir.oDirecciones.direccion[index].municipio;
-                            //prospect_dir.populateColoniasByMunicipioDE(evt);
+                            prospect_dir.populateColoniasByMunicipioDE(evt);
                         } else {
                             app.alert.show('cp_not_found', {
                                 level: 'error',
@@ -1234,10 +1226,6 @@
         var idCiudad = this.$(evt.currentTarget).val();
         //Actualiza modelo
         this.nuevaDireccion.ciudad = idCiudad;
-        
-        //Al actualizar colonia nueva también se establece el id del Código Postal
-        var idCP=$(evt.currentTarget).find('option:selected').attr('data-cp');
-        this.nuevaDireccion.postal=idCP;
     },
 
     limpiaNuevaDireccion: function () {

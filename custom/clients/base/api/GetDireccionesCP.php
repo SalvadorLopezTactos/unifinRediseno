@@ -59,7 +59,6 @@ class GetDireccionesCP extends SugarApi
         }
         //$indice= (strval($args['indice'])=="")? "0" : $args['indice'];
 
-        /*
         $query = "SELECT
   cp.id                                                   AS idCP,
   cp.name                                                 AS nameCP,
@@ -94,23 +93,6 @@ FROM dire_codigopostal cp
   -- on co.codigo_postal = cp.name
     ON co.id LIKE concat(cp_m.dire_codigopostal_dire_municipiodire_municipio_ida, cp.name, '%') and co.deleted=0
 WHERE cp.name = '{$cp}'";
-*/
-
-        $query="SELECT
-        id as idCP,
-        codigo_postal as nameCP,
-        id_municipio as idMunicipio,
-        municipio as nameMunicipio,
-        id_estado as idEstado,
-        estado as nameEstado,
-        id_pais as idPais,
-        pais as namePais,
-        id_ciudad as idCiudad,
-        ciudad as nameCiudad,
-        id_colonia as idColonia,
-        colonia as nameColonia
-        FROM dir_sepomex
-        WHERE codigo_postal='{$cp}'";
 
         $result = $GLOBALS['db']->query($query);
 
@@ -118,11 +100,6 @@ WHERE cp.name = '{$cp}'";
 
         $pos=0;
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
-            if($pos==0){
-              $idCP=$row['idCP'];
-              $codigoPostal=$row['nameCP'];
-            }
 
             $idPais=$row['idPais'];
             $namePais = $row['namePais'];
@@ -142,11 +119,8 @@ WHERE cp.name = '{$cp}'";
             $arrPais=array('idPais'=>$idPais,'namePais'=>$namePais);
             $arrMunicipio=array('idMunicipio'=>$idMunicipio,'nameMunicipio'=>$nameMunicipio);
             $arrEstado=array('idEstado'=>$idEstado,'nameEstado'=>$nameEstado);
-            $arrColonia=array('idColonia'=>$idColonia,'nameColonia'=>$nameColonia,'idCodigoPostal'=>$row['idCP']);
+            $arrColonia=array('idColonia'=>$idColonia,'nameColonia'=>$nameColonia);
             $arrCiudad=array('idCiudad'=>$idCiudad,'nameCiudad'=>$nameCiudad);
-
-            $arrPadre['idCP']=$idCP;
-            $arrPadre['nameCP']=$codigoPostal;
 
             $arrPadre['paises'][$pos]=$arrPais;
             $arrPadre['municipios'][$pos]=$arrMunicipio;
@@ -175,15 +149,14 @@ WHERE cp.name = '{$cp}'";
         $arrPadre['colonias']=$arrNewColonias;
         $arrPadre['ciudades']=$arrNewCiudades;
 
-        /*
+        
         $queryIdCP="SELECT id FROM dire_codigopostal WHERE name='{$cp}' LIMIT 1;";
         $resultID = $GLOBALS['db']->query($queryIdCP);
         while ($row = $GLOBALS['db']->fetchByAssoc($resultID)) {
             $idCP=$row['id'];
         }
-        */
-
-        //$arrPadre['idCP']=$idCP;
+        
+        $arrPadre['idCP']=$idCP;
         $arrPadre['indice']=$indice;
 
         return $arrPadre;
