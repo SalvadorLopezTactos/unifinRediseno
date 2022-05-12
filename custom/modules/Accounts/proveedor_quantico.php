@@ -13,6 +13,7 @@ class proveedor_quantico
 					"CRMId" => $bean->id,
 					"Name" => $bean->name,
 					"RFC" => $bean->rfc_c,
+					"Email" => $bean->email1,
 					"PersonTypeExternalId" => $regimen
 				);
 			}
@@ -23,6 +24,7 @@ class proveedor_quantico
 					"MiddleName" => $bean->apellidopaterno_c,
 					"LastName" => $bean->apellidomaterno_c,
 					"RFC" => $bean->rfc_c,
+					"Email" => $bean->email1,
 					"PersonTypeExternalId" => $regimen
 				);
 			}
