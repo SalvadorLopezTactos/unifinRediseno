@@ -121,6 +121,7 @@
     _hidechkLeadCancelado: function () {
         /****Oculta check Lead Cancelado solo al crear Lead****/
         this.$('[data-name=lead_cancelado_c]').hide();
+        this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').hide();
     },
 
     expmail: function (fields, errors, callback) {
