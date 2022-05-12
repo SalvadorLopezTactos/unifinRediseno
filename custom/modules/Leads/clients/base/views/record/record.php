@@ -602,7 +602,19 @@ array (
               77 => 
               array (
               ),
-              78 => 
+            ),
+          ),
+          2 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL3',
+            'label' => 'LBL_RECORDVIEW_PANEL3',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
               array (
                 'name' => 'lead_direcciones',
                 'studio' => 'visible',
@@ -611,7 +623,7 @@ array (
               ),
             ),
           ),
-          2 => 
+          3 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
@@ -630,7 +642,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          4 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
