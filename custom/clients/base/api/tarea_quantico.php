@@ -47,6 +47,7 @@ class tarea_quantico extends SugarApi
 					"CRMId" => $account->id,
 					"Name" => $account->name,
 					"RFC" => $account->rfc_c,
+					"Email" => $account->email1,
 					"PersonTypeExternalId" => $regimen
 				);
 			}
@@ -57,6 +58,7 @@ class tarea_quantico extends SugarApi
 					"MiddleName" => $account->apellidopaterno_c,
 					"LastName" => $account->apellidomaterno_c,
 					"RFC" => $account->rfc_c,
+					"Email" => $account->email1,
 					"PersonTypeExternalId" => $regimen
 				);
 			}
