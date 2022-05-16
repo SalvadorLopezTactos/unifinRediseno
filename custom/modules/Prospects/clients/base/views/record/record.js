@@ -12,6 +12,7 @@
 
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
+        this.valoresList();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_work]'] = 'validaSoloNumerosTel';
@@ -44,6 +45,7 @@
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:estatus_po_c", _.bind(this.change_estatus, this));
         this.model.on('sync', this.userAlianzaSoc, this);
+        this.model.on('sync', this.valoresList, this);
         this.cmbio_soc = 0;
 
         //Función para eliminar opciones del campo origen
@@ -1451,6 +1453,29 @@
                 this.model.set("estatus_po_c",prev_status);
             }
         }
+    },
+
+    valoresList: function () {
+        
+       
+        var estatus = this.model.get('estatus_po_c');
+        var lista = App.lang.getAppListStrings('estatus_po_list');
+        Object.keys(lista).forEach(function (key) {
+             //Quita valores 1 y 4 si el registro es 2 o 3
+             if (estatus=='2' || estatus=='3'){
+                switch (key) {
+                    case '1':
+                        delete lista[key];
+                        break;
+                    case '4':
+                        delete lista[key];
+                        break;
+                default:
+                 break;
+                }
+            }
+        });
+        this.model.fields['estatus_po_list'].options = lista;
     },
 
 })
