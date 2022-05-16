@@ -49,14 +49,14 @@
 								$codigo_postal=$datos[0];
 								$estado=$datos[4];
 								$id_estado=$datos[7];
-								$ciudad=$datos[5];
-								$id_ciudad=$datos[14];
+								$ciudad=($datos[5]=="") ? "Sin Ciudad":$datos[5];
+								$id_ciudad=($datos[14]=="" )? "0":$datos[14];
 								$municipio=$datos[3];
 								$id_municipio=$datos[11];
 								$colonia=$datos[1];
 								$id_colonia=$datos[12];
 
-								 $insertStatement ="('2".$datos[0].$datos[7].$datos[11].$datos[12]."','México ".$datos[0]." ".$datos[4]." ".$datos[1]."','{$date}','{$date}','{$id_usuario}','{$id_usuario}',0,'México','2','{$codigo_postal}','{$estado}','{$id_estado}','{$ciudad}','{$id_ciudad}','{$municipio}','{$id_municipio}','{$colonia}','{$id_colonia}','1','1');";
+								$insertStatement ="('2".$datos[0].$datos[7].$datos[11].$datos[12]."','México ".$datos[0]." ".$datos[4]." ".$datos[1]."','{$date}','{$date}','{$id_usuario}','{$id_usuario}',0,'México','2','{$codigo_postal}','{$estado}','{$id_estado}','{$ciudad}','{$id_ciudad}','{$municipio}','{$id_municipio}','{$colonia}','{$id_colonia}','1','1');";
                                 
                                 try {
                                     $insertInto=$sqlInsertCP.$insertStatement;
