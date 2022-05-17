@@ -136,7 +136,7 @@ SITE;
         $bean_lead->leads_leads_1_name = $beanPO->leads_leads_1_name;
         $bean_lead->genero_c = $beanPO->genero_c;
         $bean_lead->medio_digital_c=$beanPO->medio_digital_c;
-        
+
         $bean_lead->email = $beanPO->email;
         $bean_lead->clean_name = $beanPO->clean_name_c;
 
@@ -253,10 +253,10 @@ SITE;
         /*******Campos requeridos en LEAD en PF y PM*****/
 
         if ($tipoPersona != '3') {
-            array_push($campos_req, 'nombre_c', 'apellido_paterno_c','origen_c');
+            array_push($campos_req, 'nombre_c', 'apellido_paterno_c');
 
         }else{
-            array_push($campos_req, 'nombre_empresa_c','origen_c');
+            array_push($campos_req, 'nombre_empresa_c');
 
         }
 
@@ -357,8 +357,8 @@ SITE;
                     global $db;
                     $meetUpdate = "update tasks set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
                     $updateResult = $db->query($meetUpdate);
-                    $bean_LEad->load_relationship('tasks_leads_1');
-                    $bean_LEad->tasks_leads_1->add($task->id);
+                    // $bean_LEad->load_relationship('tasks_leads_1');
+                    // $bean_LEad->tasks_leads_1tasks_ida->add($task->id);
                 }
             }
         }
@@ -370,8 +370,8 @@ SITE;
                     global $db;
                     $meetUpdate = "update notes set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
                     $updateResult = $db->query($meetUpdate);
-                    $bean_LEad->load_relationship('notes_leads_1');
-                    $bean_LEad->notes_leads_1->add($note->id);
+                    // $bean_LEad->load_relationship('notes_leads_1');
+                    // $bean_LEad->notes_leads_1notes_ida->add($note->id);
                 }
             }
         }

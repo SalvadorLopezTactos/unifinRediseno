@@ -469,7 +469,7 @@
 
     valida_requeridos: function (fields, errors, callback) {
         var campos = "";
-        
+
         var tipoPersona = this.model.get('regimen_fiscal_c');
         var campos_req = [];
 
@@ -784,13 +784,17 @@
         $('[data-name="homonimo_c"]').hide();
         //Oculta etiqueta de prospects_direcciones
         this.$("div.record-label[data-name='prospects_direcciones']").attr('style', 'display:none;');
-		//Oculta telefonos
-		$('[data-name="phone_work"]').hide();
-		$('[data-name="phone_home"]').hide();
+    		//Oculta telefonos
+    		$('[data-name="phone_work"]').hide();
+    		$('[data-name="phone_home"]').hide();
         $('[data-name="phone_mobile"]').hide();
 
         //Oculta fecha de bloqueo
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
+
+        //Deshabilita Estado
+        $('[data-name="estatus_po_c"]').attr('style', 'pointer-events:none');
+
     },
 
     fechaAsignacion: function () {

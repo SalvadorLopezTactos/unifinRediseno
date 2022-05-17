@@ -1,5 +1,5 @@
 <?php
- // created: 2022-05-09 16:30:16
+ // created: 2022-05-17 03:03:06
 $dictionary['Lead']['fields']['subestatus_ld_c']['labelValue']='Subestatus ';
 $dictionary['Lead']['fields']['subestatus_ld_c']['dependency']='';
 $dictionary['Lead']['fields']['subestatus_ld_c']['required_formula']='';
@@ -16,14 +16,14 @@ $dictionary['Lead']['fields']['subestatus_ld_c']['visibility_grid']=array (
     ),
     3 => 
     array (
-      0 => '1',
+      0 => '',
+      1 => '1',
     ),
     4 => 
     array (
       0 => '',
-      1 => '2',
-      2 => '3',
-      3 => '4',
+      1 => '3',
+      2 => '4',
     ),
     5 => 
     array (
