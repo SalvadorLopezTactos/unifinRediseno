@@ -34,7 +34,7 @@ class conversion_po_lead extends SugarApi
 
     public function validation_process($api, $args)
     {
-        $id_Lead = $args['id'];
+        $id_Prospect = $args['id'];
         $msjExiste = "El registro Público Objetivo que intentas convertir ya está registrada como Lead";
         $hayReunionPlaneada = false;
         $responseLEads = array();
@@ -46,43 +46,42 @@ class conversion_po_lead extends SugarApi
         /**
          * Validamos que el PO no exista en Leads
          */
-        $beanPO = BeanFactory::retrieveBean('Prospects', $id_Lead, array('disable_row_level_security' => true));
+        $beanPO = BeanFactory::retrieveBean('Prospects', $id_Prospect, array('disable_row_level_security' => true));
         // $GLOBALS['log']->fatal("nombre del LEads " . $bean->first_name);
-        $result = $this->existLeadAccount($bean);
+        $result = $this->existLeadAccount($beanPO);
         $count = count($result);
-        if ($bean->subtipo_registro_c != "4" && $bean->subtipo_registro_c != "3") { //SUBTIPO DE LEAD ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
+        if ($beanPO->estatus_po_c != "4" && $beanPO->estatus_po_c != "3") { //Estatus ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
             if ($count == 0) {
 
-
-                $responsMeeting = $this->getMeetingsUser($bean);
+                $responsMeeting = $this->getMeetingsUser($beanPO);
                 $requeridos = $this->validaRequeridos($beanPO);
 
-                if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
+                if ($responsMeeting['status'] != "stop" && $requeridos == "") {
 
                     /** Creamos el registro LEAD */
-                    $bean_Lead = $this->createLead($beanPO, false);
+                    $bean_Lead = $this->createLead($beanPO, $responsMeeting, false);
+                    $GLOBALS['log']->fatal("Genera conversion y registro en Leads");
+                    $GLOBALS['log']->fatal($bean_Lead->id);
 
-                        if (!empty($bean_Lead->id)) {
-                            $resultadoRelaciones = $this->getContactAssoc($bean, $bean_Lead);
-
-                            // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
-                            // $bean->tipo_registro_c = "";
-                            $bean->subtipo_registro_c = 4;
-                            $bean->account_id = $bean_account->id;
-                            $bean->account_name = $bean_account->name;
-                            $bean->save();
-                            // Re-asignamos reuniones, llamadas, tareas y notas de Leads a Cuentas
-                            $this->re_asign_meetings($bean, $bean_account->id);
+                        if ($bean_Lead->id) {
+                            //$resultadoRelaciones = $this->getContactAssoc($beanPO, $bean_Lead);
+                            //Actualiza registro PO
+                            //$GLOBALS['log']->fatal("el ID no esta vacio, actualiza valores PO");
+                            $beanPO->estatus_po_c = 3;
+                            $beanPO->lead_id = $bean_Lead->id;
+                            //$beanPO->save();
+                            //$GLOBALS['log']->fatal("Actualiza valores en el registro PO (Estatus)");
+                            // Re-asignamos reuniones, llamadas, tareas y notas de PO a Leads
+                            $this->re_asign_meetings($beanPO, $bean_Lead->id);
+                            //$GLOBALS['log']->fatal("Obtiene reuniones para re asignarlas PO");
 
                             $msj_succes = <<<SITE
                             Conversión Completa <br>
-    <b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
+    <b></b><a href="$url/#Leads/$bean_Lead->id">$bean_Lead->name</a></b>
     SITE;
 
-                            $finish = array("idCuenta" => $bean_account->id, "mensaje" => $msj_succes);
+                            $finish = array("idCuenta" => $bean_Lead->id, "mensaje" => $msj_succes);
                         }
-                    
-
                     // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
                 } else {
                     if ($requeridos != "") {
@@ -97,32 +96,15 @@ SITE;
                 }
             } elseif ($count > 0) {
                 /** Si la cuenta existe actualizamos los asesores que se encuentre vacios o como 9 sin gestor en la cuenta encontrada */
-                $id_account = $result[0]['id'];
-                $responsMeeting = $this->getMeetingsUser($bean);
-                if ($responsMeeting['status'] == 'continue') {
-                    $beanAccountExist = BeanFactory::retrieveBean('Accounts', $id_account, array('disable_row_level_security' => true));
-                    $beanAccountExist->user_id_c = (($beanAccountExist->user_id_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id_c == "") && $responsMeeting['data']['LEASING'] != "") ? $responsMeeting['data']['LEASING'] : $beanAccountExist->user_id_c;
-                    $beanAccountExist->user_id1_c = (($beanAccountExist->user_id1_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id1_c == "") && $responsMeeting['data']['FACTORAJE'] != "") ? $responsMeeting['data']['FACTORAJE'] : $beanAccountExist->user_id1_c;
-                    $beanAccountExist->user_id2_c = (($beanAccountExist->user_id2_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id2_c == "") && $responsMeeting['data']['CREDITO AUTOMOTRIZ'] != "") ? $responsMeeting['data']['CREDITO AUTOMOTRIZ'] : $beanAccountExist->user_id2_c;
-                    $beanAccountExist->user_id6_c = (($beanAccountExist->user_id6_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id6_c == "") && $responsMeeting['data']['FLEET'] != "") ? $responsMeeting['data']['FLEET'] : $beanAccountExist->user_id6_c;
-                    $beanAccountExist->user_id8_c = (($beanAccountExist->user_id8_c == "569246c7-da62-4664-ef2a-5628f649537e"
-                        || $beanAccountExist->user_id8_c == "") && $responsMeeting['data']['RM'] != "") ? $responsMeeting['data']['RM'] : $beanAccountExist->user_id8_c;
-                    $beanAccountExist->save();
-                }
-                $bean->subtipo_registro_c = "4";
-                $bean->save();
+                $beanLeadExist = BeanFactory::retrieveBean('Leads', $bean_Lead->id, array('disable_row_level_security' => true));
                 $msj_succes_duplic = <<<SITE
-                        Los Asesores han sido actualizados en la cuenta <br>
-<b></b><a href="$url/#Accounts/$beanAccountExist->id">$beanAccountExist->name</a></b>
+                        Este registro ya existe como Lead. No puede ser convertido. <br>
+<b></b><a href="$url/#Leads/$beanLeadExist->id">$beanLeadExist->name</a></b>
 SITE;
-                $finish = array("idCuenta" => $beanAccountExist->id, "mensaje" => $msj_succes_duplic);
+                $finish = array("idCuenta" => $beanLeadExist->id, "mensaje" => $msj_succes_duplic);
             }
         } else {
-            $finish = array("idCuenta" => "", "mensaje" => "El Lead ya ha sido convertido.");
+            $finish = array("idCuenta" => "", "mensaje" => "El registro ya ha sido convertido.");
         }
         return $finish;
     }
@@ -146,20 +128,24 @@ SITE;
         $bean_lead->potencial_lead_c = $beanPO->potencial_lead_c;
         $bean_lead->rfc_c = $beanPO->rfc_c;
         $bean_lead->zona_geografica_c = $beanPO->zona_geografica_c;
-        $bean_lead->nombre_de_cargar_c = $beanPO->nombre_de_cargar_c;
+        $bean_lead->nombre_de_cargar_c = $beanPO->nombre_de_carga_c;
         $bean_lead->alianza_c = $beanPO->alianza_c;
         $bean_lead->status_management_c = $beanPO->status_management_c;
         $bean_lead->fecha_asignacion_c = $beanPO->fecha_asignacion_c;
         $bean_lead->contacto_asociado_c = $beanPO->contacto_asociado_c;
         $bean_lead->leads_leads_1_name = $beanPO->leads_leads_1_name;
         $bean_lead->genero_c = $beanPO->genero_c;
+        $bean_lead->medio_digital_c=$beanPO->medio_digital_c;
         
         $bean_lead->email = $beanPO->email;
         $bean_lead->clean_name = $beanPO->clean_name_c;
-        
+
         $bean_lead->convertido_c = 0;
         $bean_lead->onboarding_chk_c=0;
-        
+        //Nace lead como NUEVO =13
+        $bean_lead->subtipo_registro_c='13';
+        $bean_lead->assigned_user_id=$beanPO->assigned_user_id;
+
         //Clasificación Sectorial
         if (!empty($beanPO->actividad_economica_c)) {
             $bean_lead->actividad_economica_c = $beanPO->actividad_economica_c;
@@ -173,76 +159,53 @@ SITE;
             $bean_lead->inegi_sector_c = $beanPO->inegi_sector_c;
             $bean_lead->inegi_macro_c = $beanPO->inegi_macro_c;
         }
+
+        // Mapeo en Teléfonos
+        $bean_lead->phone_mobile=$beanPO->phone_mobile;
+        $bean_lead->phone_home=$beanPO->phone_home;
+        $bean_lead->phone_work=$beanPO->phone_work;
+
+        $bean_lead->m_estatus_telefono_c=$beanPO->m_estatus_telefono_c;
+        $bean_lead->c_estatus_telefono_c=$beanPO->c_estatus_telefono_c;
+        $bean_lead->o_estatus_telefono_c=$beanPO->o_estatus_telefono_c;
+
+        $bean_lead->c_registro_reus_c=$beanPO->c_registro_reus_c;
+        $bean_lead->m_registro_reus_c=$beanPO->m_registro_reus_c;
+        $bean_lead->o_registro_reus_c=$beanPO->o_registro_reus_c;
+        $bean_lead->pendiente_reus_c=$beanPO->pendiente_reus_c;
+
         $bean_lead->save();
-
-        // creamos las relaciones en telefono
-        $principal = 1;
-        if (!empty($beanPO->phone_mobile)) {
-            $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_mobile, 3, $beanPO->m_estatus_telefono_c, $principal);
-            $principal = 0;
-        }
-        if (!empty($bean_Leads->phone_home)) {
-            $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_home, 1, $beanPO->c_estatus_telefono_c, $principal);
-            $principal = 0;
-        }
-        if (!empty($bean_Leads->phone_work)) {
-            $resp_reus_tel = $this->create_phone($bean_lead->id, $beanPO->phone_work, 2, $beanPO->o_estatus_telefono_c, $principal);
-            $principal = 0;
-        }
-
-        $bean_lead->pendiente_reus_c = ($resp_reus_tel == 3) ? true : false;
-
-        //Campos PB
-        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_lead->id, array('disable_row_level_security' => true));
-        $bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
-        $bean_Resumen->pb_grupo_c = $bean_Leads->pb_grupo_c;
-        $bean_Resumen->pb_clase_c = $bean_Leads->pb_clase_c;
-        
-        $bean_Resumen->save();
-
-        return $bean_account;
+        return $bean_lead;
     }
 
-    public function existLeadAccount($bean_lead)
+    public function existLeadAccount($beanPO)
     {
         $leads_bean = BeanFactory::getBean('Leads');
         $leads_bean->disable_row_level_security = true;
 
         $sql = new SugarQuery();
-        $sql->select(array('id', 'clean_name'));
+        $sql->select(array('id', 'clean_name_c'));
         $sql->from($leads_bean);
-        $sql->where()->equals('clean_name', $bean_lead->clean_name_c);
-        $sql->where()->notEquals('id', $bean_lead->id);
+        $sql->where()->equals('clean_name_c', $beanPO->clean_name_c);
+        $sql->where()->notEquals('id', $beanPO->id);
 
         $result = $sql->execute();
         return $result;
     }
 
-    public function getMeetingsUser($beanL)
+    public function getMeetingsUser($beanPO)
     {
         $procede = array("status" => "stop", "data" => array());
         //Recupera reuniones
-        if ($beanL->load_relationship('meetings')) {
-            $relatedBeans = $beanL->meetings->getBeans();
+        $beanPO->load_relationship('meetings');
+        if ($beanPO->load_relationship('meetings')) {
+            $relatedBeans = $beanPO->meetings->getBeans();
 
             if (!empty($relatedBeans)) {
 
-                foreach ($relatedBeans as $meeting) {
+                $procede['vacio'] = false;
+                $procede['status'] = "continue";
 
-                    //if ($meeting->status != "Not Held") {
-
-                    $procede['status'] = "continue";
-                    $sqlUser = new SugarQuery();
-                    $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
-                    $sqlUser->from(BeanFactory::newBean('Users'));
-                    $sqlUser->where()->equals('id', $meeting->assigned_user_id);
-                    //$sqlUser->where()->notEquals('puestousuario_c', "");
-                    $sqlResult = $sqlUser->execute();
-
-                    $procede['vacio'] = empty($procede['data']) ? true : false;
-
-                    //}
-                }
             } else {
                 $procede['status'] = "stop";
                 $procede['data'] = array();
@@ -251,8 +214,8 @@ SITE;
             }
         }
         //Recupera llamadas
-        if ($beanL->load_relationship('calls')) {
-            $relatedBeans = $beanL->calls->getBeans();
+        if ($beanPO->load_relationship('calls')) {
+            $relatedBeans = $beanPO->calls->getBeans();
 
             if (!empty($relatedBeans)) {
 
@@ -282,20 +245,20 @@ SITE;
     public function validaRequeridos($beanPO)
     {
         $campos = "";
-        $tipoPersona = $beanLEad->regimen_fiscal_c;
+        $tipoPersona = $beanPO->regimen_fiscal_c;
         $campos_req = [];
         $response = false;
         $errors = [];
 
         /*******Campos requeridos en LEAD en PF y PM*****/
-  
+
         if ($tipoPersona != '3') {
             array_push($campos_req, 'nombre_c', 'apellido_paterno_c','origen_c');
 
         }else{
             array_push($campos_req, 'nombre_empresa_c','origen_c');
-            
-        }        
+
+        }
 
         /** Validamos que el valor no sea vacio, null o undefined */
         $flag_req = [];
@@ -318,32 +281,30 @@ SITE;
         return $campos;
     }
 
-    public function getContactAssoc($beanLead, $bean_account)
+    public function getContactAssoc($beanPO, $bean_Lead)
     {
         $resultado = array("data" => array());
-        if ($beanLead->load_relationship('leads_leads_1')) {
-            $relatedBeans = $beanLead->leads_leads_1->getBeans();
+        if ($beanPO->load_relationship('prospects_prospects_1')) {
+            $relatedBeans = $beanPO->prospects_prospects_1->getBeans();
             if (!empty($relatedBeans)) {
-                foreach ($relatedBeans as $lead) {
-                    $result = $this->existLeadAccount($lead);
+                foreach ($relatedBeans as $PO) {
+                    $result = $this->existLeadAccount($PO);
                     $count = count($result);
                     if ($count > 0) {
                         // $GLOBALS['log']->fatal("Si existe recupero el id  " . $result[0]['id'] . " y creamos la relacion");
-                        $this->create_relationship($bean_account, $result[0]['id']);
                         array_push($resultado['data'], $result[0]['id']);
                     } else {
                         // $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
-                        $cuenta = $this->createLead($lead, null, true);
-                        if (!empty($cuenta->id)) {
-                            $this->re_asign_meetings($lead, $cuenta->id);
-                            $this->create_relationship($bean_account, $cuenta->id);
-                            array_push($resultado['data'], $cuenta->id);
-                            $lead->account_id = $cuenta->id;
-                            $lead->account_name = $cuenta->name;
+                        $lead = $this->createLead($PO, null, true);
+                        if (!empty($lead->id)) {
+                            $this->re_asign_meetings($PO, $lead->id);
+                            $this->create_relationship($bean_Lead, $lead->id);
+                            array_push($resultado['data'], $lead->id);
+                            $PO->lead_id = $lead->id;
                         }
                     }
-                    $lead->subtipo_registro_c = 4;
-                    $lead->save();
+                    $PO->estatus_po_c = "3";
+                    $PO->save();
                 }
             } else {
                 // no existen Asociados no se hace nada
@@ -354,39 +315,15 @@ SITE;
         return $resultado;
     }
 
-    public function create_relationship($id_parent, $idAccount)
+    public function create_relationship($id_parent, $idLead)
     {
         // rel_relaciones_accounts_1
         // $GLOBALS['log']->fatal("id Padre " . $id_parent->id . "  id hijo " . $idAccount);
-        $bean_relacion = BeanFactory::newBean('Rel_Relaciones');
-        $bean_relacion->rel_relaciones_accounts_1accounts_ida = $id_parent->id; // Cuenta padre
-        $bean_relacion->rel_relaciones_accounts_1_name = $id_parent->name;
-        $bean_relacion->relaciones_activas = "^Contacto^";
-        $bean_relacion->account_id1_c = $idAccount; // cuenta hijo
-        $bean_relacion->tipodecontacto = "Promocion";
+        $bean_relacion = BeanFactory::retrieveBean('Leads', $idLead, array('disable_row_level_security' => true));
+        $bean_relacion->leads_leads_1leads_ida=$id_parent->id;
         $bean_relacion->save();
     }
 
-    public function create_phone($idCuenta, $phone, $tipoTel, $estatus_telefono, $principal)
-    {
-        /************* Validación REUS telefono *****************/
-        $reus = $this->REUS_telefono($phone);
-        /************* Creación Telefono ************************/
-        $bean_relacionTel = BeanFactory::newBean('Tel_Telefonos');
-        $bean_relacionTel->accounts_tel_telefonos_1accounts_ida = $idCuenta;
-        $bean_relacionTel->name = $phone;
-        $bean_relacionTel->telefono = $phone;
-        $bean_relacionTel->tipotelefono = $tipoTel;
-        $bean_relacionTel->tipotelefono = $tipoTel;
-        $bean_relacionTel->tipotelefono = $tipoTel;
-        $bean_relacionTel->estatus = "Activo";
-        $bean_relacionTel->pais = 2;
-        $bean_relacionTel->principal = $principal;
-        if($reus == 1) { $bean_relacionTel->registro_reus_c = 1; }
-          $bean_relacionTel->estatus_telefono_c = $estatus_telefono;
-        $bean_relacionTel->save();
-        return $reus;
-    }
 
     public function re_asign_meetings($bean_LEad, $idCuenTa)
     {
@@ -396,7 +333,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $call) {
                     global $db;
-                    $meetUpdate = "update calls set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
+                    $meetUpdate = "update calls set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
                     $updateResult = $db->query($meetUpdate);
                 }
             }
@@ -407,7 +344,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $meeting) {
                     global $db;
-                    $meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
+                    $meetUpdate = "update meetings set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
                     $updateResult = $db->query($meetUpdate);
                 }
             }
@@ -418,7 +355,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $task) {
                     global $db;
-                    $meetUpdate = "update tasks set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
+                    $meetUpdate = "update tasks set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
                     $updateResult = $db->query($meetUpdate);
                     $bean_LEad->load_relationship('tasks_leads_1');
                     $bean_LEad->tasks_leads_1->add($task->id);
@@ -431,7 +368,7 @@ SITE;
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $note) {
                     global $db;
-                    $meetUpdate = "update notes set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
+                    $meetUpdate = "update notes set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
                     $updateResult = $db->query($meetUpdate);
                     $bean_LEad->load_relationship('notes_leads_1');
                     $bean_LEad->notes_leads_1->add($note->id);
@@ -441,17 +378,17 @@ SITE;
 
 
         //Reasigna Direcciones
-        $GLOBALS['log']->fatal("Obtiene Direcciones y las guarda en la cuenta.");
+        $GLOBALS['log']->fatal("Obtiene Direcciones y las guarda en el LEAD.");
         global $db;
         $queryDir = "SELECT direccion.id FROM dire_direccion as direccion
-        INNER JOIN leads_dire_direccion_1_c as intermedia ON intermedia.leads_dire_direccion_1dire_direccion_idb = direccion.id AND intermedia.deleted = 0
-        WHERE intermedia.leads_dire_direccion_1leads_ida = '{$bean_LEad->id}'";
+        INNER JOIN prospects_dire_direccion_1_c as intermedia ON intermedia.prospects_dire_direccion_1dire_direccion_idb = direccion.id AND intermedia.deleted = 0
+        WHERE intermedia.prospects_dire_direccion_1prospects_ida = '{$bean_LEad->id}'";
 
         $queryResultD = $db->query($queryDir);
         while ($rowD = $db->fetchByAssoc($queryResultD)) {
 
             $beanDirecciones = BeanFactory::retrieveBean('dire_Direccion', $rowD['id'], array('disable_row_level_security' => true));
-            $beanDirecciones->accounts_dire_direccion_1accounts_ida  = $idCuenTa;
+            $beanDirecciones->leads_dire_direccion_1leads_ida  = $idCuenTa;
             $beanDirecciones->save();
         }
     }
@@ -493,7 +430,3 @@ SITE;
         return $resp;
     }
 }
-
-
-
-

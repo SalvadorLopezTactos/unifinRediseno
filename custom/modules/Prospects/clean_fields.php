@@ -79,83 +79,79 @@ class clean_fields_class
         $idPadre = "";
 
         $servicio= isset($GLOBALS['service']->platform)?$GLOBALS['service']->platform:"base";
+        if(!$bean->excluye_campana_c){
+                //$GLOBALS['log']->fatal("servicio",$servicio);
+                if ($servicio== "base" || $servicio == "mobile") {
 
-        //$GLOBALS['log']->fatal("servicio",$servicio);
-        if ($servicio== "base" || $servicio == "mobile") {
+                    // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
+                    if ($bean->estatus_po_c != 3 && $bean->estatus_po_c != 4) {
 
-            // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
-            if ($bean->estatus_po_c != 3 && $bean->estatus_po_c != 4) {
+                        $idPadre = $this->createCleanName($bean->leads_leads_1_name);
+                        //$GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
+                        //$GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
+                        //$GLOBALS['log']->fatal("para id " . $bean->id);
+                        $exprNumerica = "/^[0-9]*$/";
+                        /**********************VALIDACION DE CAMPOS PB ID Y DUNS ID DEBEN SER NUMERICOS*********************/
+                        if (!preg_match($exprNumerica, $bean->pb_id_c)) {
+                            $bean->pb_id_c = "";
+                        }
+                        if (!preg_match($exprNumerica, $bean->duns_id_c)) {
+                            $bean->duns_id_c = "";
+                        }
 
-                $idPadre = $this->createCleanName($bean->leads_leads_1_name);
-                //$GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
-                //$GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
-                //$GLOBALS['log']->fatal("para id " . $bean->id);
-                $exprNumerica = "/^[0-9]*$/";
-                /**********************VALIDACION DE CAMPOS PB ID Y DUNS ID DEBEN SER NUMERICOS*********************/
-                if (!preg_match($exprNumerica, $bean->pb_id_c)) {
-                    $bean->pb_id_c = "";
-                }
-                if (!preg_match($exprNumerica, $bean->duns_id_c)) {
-                    $bean->duns_id_c = "";
-                }
+                        //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
+                        /*
+                        $sql = new SugarQuery();
+                        $sql->select(array('id', 'clean_name'));
+                        $sql->from(BeanFactory::newBean('Accounts'), array('team_security' => false));
+                        $sql->where()->queryAnd()->equals('clean_name',$bean->clean_name_c)->notEquals('id', $bean->id);
+                        */
+                        //$sql->where()->equals('clean_name', $bean->clean_name_c);
+                        //$sql->where()->notEquals('id', $bean->id);
 
-                //$duplicateproductMessageAccounts = 'Ya existe una cuenta con la misma información';
-                /*
-                $sql = new SugarQuery();
-                $sql->select(array('id', 'clean_name'));
-                $sql->from(BeanFactory::newBean('Accounts'), array('team_security' => false));
-                $sql->where()->queryAnd()->equals('clean_name',$bean->clean_name_c)->notEquals('id', $bean->id);
-                */
-                //$sql->where()->equals('clean_name', $bean->clean_name_c);
-                //$sql->where()->notEquals('id', $bean->id);
+                        $query = "SELECT pc.id_c, pc.clean_name_c FROM prospects_cstm pc inner join prospects p
+                        on p.id = pc.id_c WHERE pc.clean_name_c = '{$bean->clean_name_c}'
+                        AND pc.id_c <> '{$bean->id}' AND p.deleted =0;";
+                        $results = $GLOBALS['db']->query($query);
 
-                $query = "SELECT pc.id_c, pc.clean_name_c FROM prospects_cstm pc inner join prospects p
-                  on p.id = pc.id_c WHERE pc.clean_name_c = '{$bean->clean_name_c}'
-                  AND pc.id_c <> '{$bean->id}' AND p.deleted =0;";
-                $results = $GLOBALS['db']->query($query);
+                        $queryL = "SELECT lc.id_c, lc.clean_name_c FROM leads_cstm lc JOIN leads l
+                        on l.id = lc.id_c WHERE lc.clean_name_c = '{$bean->clean_name_c}'
+                        AND lc.id_c <> '{$bean->lead_id}' AND l.deleted =0";
+                        $resultsL = $GLOBALS['db']->query($queryL);
+                        $countLead = $resultsL->num_rows;
 
-                //$result = $sql->execute();
-                //$count = count($result);
-                $count = $results->num_rows;
-                //$GLOBALS['log']->fatal("pcount" . $count);
-                /************SUGARQUERY PARA VALIDAR IMPORTACION DE REGISTROS SI TIENEN IGUAL LOS MISMOS VALORES DE CLEAN_NAME O PB_ID O DUNS_ID*********/
-                $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Cuenta.';
-                $sqlLead = new SugarQuery();
-                $sqlLead->select(array('id', 'clean_name_c', 'pb_id_c', 'duns_id_c'));
-                $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
-                $sqlLead->where()->equals('homonimo_c', 0);
-                $sqlLead->where()
-                    ->queryOr()
-                    ->equals('clean_name_c', $bean->clean_name_c)
-                    ->equals('pb_id_c', $bean->pb_id_c)
-                    ->equals('duns_id_c', $bean->duns_id_c);
-                $sqlLead->where()->notEquals('id', $bean->id);
-                $resultLead = $sqlLead->execute();
-                // $GLOBALS['log']->fatal("Result SugarQuery Lead " . print_r($resultLead));
-                $countLead = count($resultLead);
-                //Get the Name of the account
-               // $Leadone = $resultLead[0];
+                        //$result = $sql->execute();
+                        //$count = count($result);
+                        $count = $results->num_rows;
+                        $GLOBALS['log']->fatal("pcount" . $count);
+                        $GLOBALS['log']->fatal("countLeads" . $countLead);
+                        /************SUGARQUERY PARA VALIDAR IMPORTACION DE REGISTROS SI TIENEN IGUAL LOS MISMOS VALORES DE CLEAN_NAME O PB_ID O DUNS_ID*********/
+                        $duplicateproductMessageLeads = 'El registro que intentas guardar ya existe como Lead/Prospecto.';
+                    
+                        //Get the Name of the account
+                    // $Leadone = $resultLead[0];
 
-                $idExistenteLead = $countLead>0? $resultLead[0]['id']:"";
+                        $idExistenteLead = $countLead>0? $resultLead[0]['id']:"";
 
-                //$GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
-                if ($count > 0 || $countLead > 0) {
-                    if ($_REQUEST['module'] != 'Import') {
+                        //$GLOBALS['log']->fatal("c---- " . $countLead . "  " . $count);
+                        if ($count > 0 || $countLead > 0) {
+                            if ($_REQUEST['module'] != 'Import') {
 
-                        throw new SugarApiExceptionInvalidParameter($duplicateproductMessageLeads);
-                    } else {
-                        $bean->deleted = 1;
-                        $bean->resultado_de_carga_c = 'Registro Duplicado';
+                                throw new SugarApiExceptionInvalidParameter($duplicateproductMessageLeads);
+                            } else {
+                                $bean->deleted = 1;
+                                $bean->resultado_de_carga_c = 'Registro Duplicado';
+                            }
+                        } else {
+                            $bean->resultado_de_carga_c = 'Registro Exitoso';
+                        }
+                        $fechaCarga = date("Ymd");
+                        //$GLOBALS['log']->fatal("fecha hoy ". $fechaCarga . " valor campo ". $bean->nombre_de_cargar_c);
+                        $requestModule = isset($_REQUEST['module']) ? $_REQUEST['module'] : '';
+                        $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c == "" && $requestModule == 'Import') ? "Carga_" . $fechaCarga : $bean->nombre_de_cargar_c;
                     }
-                } else {
-                    $bean->resultado_de_carga_c = 'Registro Exitoso';
                 }
-                $fechaCarga = date("Ymd");
-                //$GLOBALS['log']->fatal("fecha hoy ". $fechaCarga . " valor campo ". $bean->nombre_de_cargar_c);
-                $requestModule = isset($_REQUEST['module']) ? $_REQUEST['module'] : '';
-                $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c == "" && $requestModule == 'Import') ? "Carga_" . $fechaCarga : $bean->nombre_de_cargar_c;
-            }
-        }
+            }        
     }
 
     public function createCleanName($nameCuenta)

@@ -1,6 +1,7 @@
 <?php
- // created: 2022-04-27 15:43:24
+ // created: 2022-05-09 16:30:16
 $dictionary['Lead']['fields']['subestatus_ld_c']['labelValue']='Subestatus ';
+$dictionary['Lead']['fields']['subestatus_ld_c']['dependency']='';
 $dictionary['Lead']['fields']['subestatus_ld_c']['required_formula']='';
 $dictionary['Lead']['fields']['subestatus_ld_c']['readonly_formula']='';
 $dictionary['Lead']['fields']['subestatus_ld_c']['visibility_grid']=array (
@@ -19,7 +20,10 @@ $dictionary['Lead']['fields']['subestatus_ld_c']['visibility_grid']=array (
     ),
     4 => 
     array (
-      0 => '2',
+      0 => '',
+      1 => '2',
+      2 => '3',
+      3 => '4',
     ),
     5 => 
     array (

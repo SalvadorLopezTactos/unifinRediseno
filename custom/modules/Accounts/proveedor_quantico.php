@@ -8,15 +8,31 @@ class proveedor_quantico
 			if($bean->tipodepersona_c == "Persona Fisica") $regimen = 1;
 			if($bean->tipodepersona_c == "Persona Fisica con Actividad Empresarial") $regimen = 2;
 			if($bean->tipodepersona_c == "Persona Moral") $regimen = 3;
-			$arreglo = array(
-                "CRMId" => $bean->id,
-                "Name" => $bean->name,
-                "RFC" => $bean->rfc_c,
-                "PersonTypeExternalId" => $regimen
-            );
+			if($regimen == 3) {
+				$arreglo = array(
+					"CRMId" => $bean->id,
+					"Name" => $bean->name,
+					"RFC" => $bean->rfc_c,
+					"Email" => $bean->email1,
+					"PersonTypeExternalId" => $regimen
+				);
+			}
+			else {
+				$arreglo = array(
+					"CRMId" => $bean->id,
+					"Name" => $bean->primernombre_c,
+					"MiddleName" => $bean->apellidopaterno_c,
+					"LastName" => $bean->apellidomaterno_c,
+					"RFC" => $bean->rfc_c,
+					"Email" => $bean->email1,
+					"PersonTypeExternalId" => $regimen
+				);
+			}
 			global $sugar_config;
 			$url = $sugar_config['quantico_url_base'].'/Suppliers_API/rest/SupplierAPI/CreateSupplierInQuantico/';
 			$content = json_encode($arreglo);
+			$GLOBALS['log']->fatal('SOLICITUD PROVEEDOR QUANTICO');
+			$GLOBALS['log']->fatal($content);
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_ENCODING, '');
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -28,6 +44,8 @@ class proveedor_quantico
           	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
 			$result = curl_exec($ch);
 			$response = json_decode($result, true);
+			$GLOBALS['log']->fatal('RESPUESTA PROVEEDOR QUANTICO');
+			$GLOBALS['log']->fatal($response);
 			if($response['IsValid']) $bean->proveedor_quantico_c = 1;
 		}
     }

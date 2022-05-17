@@ -40,6 +40,7 @@
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
 
+        this.model.on('sync', this.seteaSubTipoLead, this);
         /****** validaciones SOC  **********/
         this.model.on("change:detalle_origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
@@ -48,6 +49,10 @@
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigenLeads();
+    },
+    seteaSubTipoLead: function (){
+        //realizamos copia del valor previo en subtipo de lead
+        this.valorPrevio= contexto_lead.model.attributes.subtipo_registro_c;
     },
 
     handleEdit: function(e, cell) {
@@ -327,10 +332,17 @@
     },
 
     _subMotivoCancelacion: function () {
+        if(this.valorPrevio!=undefined){
 
-        if (!this.model.get('lead_cancelado_c')) {
+            if (this.model.get('lead_cancelado_c')== true) {
 
-            this.model.set('motivo_cancelacion_c', '');
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c', '3');
+
+            }else{
+                this.model.set('motivo_cancelacion_c', '');
+                this.model.set('subtipo_registro_c',this.valorPrevio);
+            }
         }
     },
 
@@ -493,9 +505,11 @@
             _.each(this.model.fields, function (field) {
 
                 if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
-                    self.noEditFields.push(field.name);
-                    self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
-                    self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    if((field.name!='subestatus_ld_c' && field.name!='detalle_subestatus_ld_c' && App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] == undefined)){
+                        self.noEditFields.push(field.name);
+                        self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                        self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
+                    }
                 }
             });
             this._disableActionsSubpanel();
@@ -504,14 +518,31 @@
         if (this.model.get('subtipo_registro_c') == '4') {
             var editButton = self.getField('edit_button');
             editButton.setDisabled(true);
-			var btnConvert = self.getField("convert_Leads_button");
-			btnConvert.hide();
+      			var btnConvert = self.getField("convert_Leads_button");
+      			btnConvert.hide();
+            var noEditCampo = true;
+            var pointerEvents = true;
             _.each(this.model.fields, function (field) {
-                if (field.name != 'origen_ag_tel_c' && field.name != 'promotor_c' && field.name != 'account_to_lead' && field.name != 'assigned_user_name' && field.name != 'email') {
+                //Valida si el campo debe evitar bloqueo por pointer-events:none
+                if (field.name == 'origen_ag_tel_c' || field.name == 'promotor_c' || field.name == 'account_to_lead' || field.name == 'assigned_user_name' || field.name == 'email') {
+                    pointerEvents = false;
+                }
+                //Valida si el campo debe evitar bloqueo para CP
+                if((field.name=='subestatus_ld_c' || field.name=='detalle_subestatus_ld_c') && App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] != undefined) {
+                    noEditCampo = false;
+                    pointerEvents = false;
+                }
+
+                //Bloquea campos
+                if(noEditCampo){
                     self.noEditFields.push(field.name);
                     self.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+                }
+                if(pointerEvents){
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
                 }
+                noEditCampo = true;
+                pointerEvents = true;
             });
             this._disableActionsSubpanel();
         }
@@ -999,18 +1030,31 @@
                         var tipoSeleccionados = '^' + listMapIndicador[tipo].replace(/,/gi, "^,^") + '^';
                         var indicador = data.records[i].indicador;
                         var indicadorSeleccionados = '^' + listMapIndicador[indicador].replace(/,/gi, "^,^") + '^';
-                        var valCodigoPostal = data.records[i].dire_direccion_dire_codigopostal_name;
-                        var idCodigoPostal = data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida;
-                        var valPais = data.records[i].dire_direccion_dire_pais_name;
-                        var idPais = data.records[i].dire_direccion_dire_paisdire_pais_ida;
-                        var valEstado = data.records[i].dire_direccion_dire_estado_name;
-                        var idEstado = data.records[i].dire_direccion_dire_estadodire_estado_ida;
-                        var valMunicipio = data.records[i].dire_direccion_dire_municipio_name;
-                        var idMunicipio = data.records[i].dire_direccion_dire_municipiodire_municipio_ida;
-                        var valCiudad = data.records[i].dire_direccion_dire_ciudad_name;
-                        var idCiudad = data.records[i].dire_direccion_dire_ciudaddire_ciudad_ida;
-                        var valColonia = data.records[i].dire_direccion_dire_colonia_name;
-                        var idColonia = data.records[i].dire_direccion_dire_coloniadire_colonia_ida;
+
+                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline | 
+                        //ejemplo: "{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}"
+
+                        var description=data.records[i].description;
+                        var ids=description.split('|');
+
+                        var identificadorPais=ids[0];
+                        var identificadorEstado=ids[1];
+                        var identificadorCiudad=ids[2];
+                        var identificadorMunicipio=ids[3];
+                        var identificadorColonia=ids[4];
+
+                        var valCodigoPostal = data.records[i].codigo_postal_c;
+                        var idCodigoPostal=data.records[i].dir_sepomex_dire_direcciondir_sepomex_ida;
+                        var valPais = data.records[i].pais_c;
+                        var idPais = identificadorPais;
+                        var valEstado = data.records[i].estado_c;
+                        var idEstado = identificadorEstado;
+                        var valMunicipio = data.records[i].municipio_c;
+                        var idMunicipio = identificadorMunicipio;
+                        var valCiudad = data.records[i].ciudad_c;
+                        var idCiudad=identificadorCiudad;
+                        var valColonia = data.records[i].colonia_c;
+                        var idColonia = identificadorColonia;
                         var calle = data.records[i].calle;
                         var numExt = data.records[i].numext;
                         var numInt = data.records[i].numint;
@@ -1068,67 +1112,69 @@
                         //Agregar dirección
                         contexto_lead.oDirecciones.direccion.push(direccion);
 
-                        //recupera información asociada a CP
-                        var strUrl = 'DireccionesCP/' + valCodigoPostal + '/' + i;
-                        app.api.call('GET', app.api.buildURL(strUrl), null, {
-                            success: _.bind(function (data) {
-                                //recupera info
-                                var list_paises = data.paises;
-                                var list_municipios = data.municipios;
-                                var city_list = App.metadata.getCities();
-                                var list_estados = data.estados;
-                                var list_colonias = data.colonias;
-                                //Poarsea valores para listas
-                                //País
-                                listPais = {};
-                                for (var i = 0; i < list_paises.length; i++) {
-                                    listPais[list_paises[i].idPais] = list_paises[i].namePais;
-                                }
-                                contexto_lead.oDirecciones.direccion[data.indice].listPais = listPais;
-                                contexto_lead.oDirecciones.direccion[data.indice].listPaisFull = listPais;
-                                //Municipio
-                                listMunicipio = {};
-                                for (var i = 0; i < list_municipios.length; i++) {
-                                    listMunicipio[list_municipios[i].idMunicipio] = list_municipios[i].nameMunicipio;
-                                }
-                                contexto_lead.oDirecciones.direccion[data.indice].listMunicipio = listMunicipio;
-                                contexto_lead.oDirecciones.direccion[data.indice].listMunicipioFull = listMunicipio;
-                                //Estado
-                                listEstado = {};
-                                for (var i = 0; i < list_estados.length; i++) {
-                                    listEstado[list_estados[i].idEstado] = list_estados[i].nameEstado;
-                                }
-                                contexto_lead.oDirecciones.direccion[data.indice].listEstado = listEstado;
-                                contexto_lead.oDirecciones.direccion[data.indice].listEstadoFull = listEstado;
-                                //Colonia
-                                listColonia = {};
-                                for (var i = 0; i < list_colonias.length; i++) {
-                                    listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
-                                }
-                                contexto_lead.oDirecciones.direccion[data.indice].listColonia = listColonia;
-                                contexto_lead.oDirecciones.direccion[data.indice].listColoniaFull = listColonia;
-                                //Ciudad
-                                listCiudad = {}
-                                ciudades = Object.values(city_list);
-                                for (var [key, value] of Object.entries(contexto_lead.oDirecciones.direccion[data.indice].listEstado)) {
-                                    for (var i = 0; i < ciudades.length; i++) {
-                                        if (ciudades[i].estado_id == key) {
-                                            listCiudad[ciudades[i].id] = ciudades[i].name;
-                                        }
+                        if(valCodigoPostal!=""){
+                            //recupera información asociada a CP
+                            var strUrl = 'DireccionesCP/' + valCodigoPostal + '/' + i;
+                            app.api.call('GET', app.api.buildURL(strUrl), null, {
+                                success: _.bind(function (data) {
+                                    //recupera info
+                                    var list_paises = data.paises;
+                                    var list_municipios = data.municipios;
+                                    var city_list = App.metadata.getCities();
+                                    var list_ciudades=data.ciudades;
+                                    var list_estados = data.estados;
+                                    var list_colonias = data.colonias;
+                                    //Poarsea valores para listas
+                                    //País
+                                    listPais = {};
+                                    for (var i = 0; i < list_paises.length; i++) {
+                                        listPais[list_paises[i].idPais] = list_paises[i].namePais;
                                     }
-                                }
-                                contexto_lead.oDirecciones.direccion[data.indice].listCiudad = listCiudad;
-                                contexto_lead.oDirecciones.direccion[data.indice].listCiudadFull = listCiudad;
+                                    contexto_lead.oDirecciones.direccion[data.indice].listPais = listPais;
+                                    contexto_lead.oDirecciones.direccion[data.indice].listPaisFull = listPais;
+                                    //Municipio
+                                    listMunicipio = {};
+                                    for (var i = 0; i < list_municipios.length; i++) {
+                                        listMunicipio[list_municipios[i].idMunicipio] = list_municipios[i].nameMunicipio;
+                                    }
+                                    contexto_lead.oDirecciones.direccion[data.indice].listMunicipio = listMunicipio;
+                                    contexto_lead.oDirecciones.direccion[data.indice].listMunicipioFull = listMunicipio;
+                                    //Estado
+                                    listEstado = {};
+                                    for (var i = 0; i < list_estados.length; i++) {
+                                        listEstado[list_estados[i].idEstado] = list_estados[i].nameEstado;
+                                    }
+                                    contexto_lead.oDirecciones.direccion[data.indice].listEstado = listEstado;
+                                    contexto_lead.oDirecciones.direccion[data.indice].listEstadoFull = listEstado;
+                                    //Colonia
+                                    listColonia = {};
+                                    for (var i = 0; i < list_colonias.length; i++) {
+                                        //listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
+                                        listColonia[i]={};
+                                        listColonia[i]['idColonia']=list_colonias[i].idColonia;
+                                        listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
+                                        listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
+                                    }
+                                    contexto_lead.oDirecciones.direccion[data.indice].listColonia = listColonia;
+                                    contexto_lead.oDirecciones.direccion[data.indice].listColoniaFull = listColonia;
+                                    //Ciudad
+                                    listCiudad = {};
+                                    for (var i = 0; i < list_ciudades.length; i++) {
+                                        listCiudad[list_ciudades[i].idCiudad] = list_ciudades[i].nameCiudad;
+                                    }
+                                    contexto_lead.oDirecciones.direccion[data.indice].listCiudad = listCiudad;
+                                    contexto_lead.oDirecciones.direccion[data.indice].listCiudadFull = listCiudad;
 
-                                //Genera objeto con valores previos para control de cancelar
-                                contexto_lead.prev_oDirecciones.prev_direccion = app.utils.deepCopy(contexto_lead.oDirecciones.direccion);
-                                lead_dir.oDirecciones = contexto_lead.oDirecciones;
+                                    //Genera objeto con valores previos para control de cancelar
+                                    contexto_lead.prev_oDirecciones.prev_direccion = app.utils.deepCopy(contexto_lead.oDirecciones.direccion);
+                                    lead_dir.oDirecciones = contexto_lead.oDirecciones;
 
-                                //Aplica render a campo custom
-                                lead_dir.render();
+                                    //Aplica render a campo custom
+                                    lead_dir.render();
 
-                            }, contexto_lead)
-                        });
+                                }, contexto_lead)
+                            });
+                        }
                     }
                 },
                 error: function (e) {

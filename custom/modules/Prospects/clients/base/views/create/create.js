@@ -9,9 +9,6 @@
         this._super("initialize", [options]);
         this.fromProtocolo=options.context.attributes.dataFromProtocolo;
 
-        /** Valida genero personas fisicas y fisica con actividad empesarial **/
-        this.model.addValidationTask('validaGenero', _.bind(this.validaGenero, this));
-
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
@@ -124,6 +121,7 @@
     _hidechkLeadCancelado: function () {
         /****Oculta check Lead Cancelado solo al crear Lead****/
         this.$('[data-name=lead_cancelado_c]').hide();
+        this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').hide();
     },
 
     expmail: function (fields, errors, callback) {
@@ -275,7 +273,7 @@
             };
             */
 
-            var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
+            var urlValidaDuplicados = app.api.buildURL("validaDuplicadoPO", '', {}, {});
 
             App.alert.show('obteniendoDuplicados', {
                 level: 'process',
@@ -469,47 +467,16 @@
         }
     },
 
-    /*************Valida Genero *****************/
-    validaGenero: function (fields, errors, callback) {
-        var genero = this.model.get('genero_c');
-        if ((genero == "" || genero == null) && (this.model.get('regimen_fiscal_c') == "1" ||
-            this.model.get('regimen_fiscal_c') == "2")) {
-            errors['genero_c'] = errors['genero_c'] || {};
-            errors['genero_c'].required = true;
-            callback(null, fields, errors);
-        } else {
-            callback(null, fields, errors);
-        }
-    },
-
     valida_requeridos: function (fields, errors, callback) {
         var campos = "";
-        var subTipoLead = this.model.get('subtipo_registro_c');
+        
         var tipoPersona = this.model.get('regimen_fiscal_c');
-        var campos_req = ['origen_c'];
+        var campos_req = [];
 
-        switch (subTipoLead) {
-            /*******SUB-TIPO SIN CONTACTAR*****/
-            case '1':
-                if (tipoPersona == '3') {
-                    campos_req.push('nombre_empresa_c');
-                }
-                else {
-                    campos_req.push('nombre_c', 'apellido_paterno_c');
-                }
-                break;
-            /********SUB-TIPO CONTACTADO*******/
-            case '2':
-                if (tipoPersona == '3') {
-                    campos_req.push('nombre_empresa_c');
-                }
-                else {
-                    campos_req.push('nombre_c', 'apellido_paterno_c', 'apellido_materno_c');
-                }
-                break;
-
-            default:
-                break;
+        if (tipoPersona!='3'){
+            campos_req.push('nombre_c', 'apellido_paterno_c', 'apellido_materno_c');
+        }else{
+            campos_req.push('nombre_empresa_c');
         }
 
         if (campos_req.length > 0) {
@@ -529,7 +496,7 @@
             _.each(this.model.fields, function (field) {
                 if (_.isEqual(field.name, key)) {
                     if (field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Leads") + '</b><br>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Prospects") + '</b><br>';
                     }
                 }
             }, this);
@@ -552,19 +519,10 @@
             errors['phone_work'] = errors['phone_work'] || {};
             errors['phone_work'].required = true;
         }
-        /*****CHECK LEAD CANCELAR*********/
-        if (this.model.get('lead_cancelado_c') == '1') {
-            if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
-
-                campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
-                errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
-                errors['motivo_cancelacion_c'].required = true;
-            }
-        }
         if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                messages: "Hace falta completar la siguiente información para guardar un <b>Lead: </b><br>" + campos,
+                messages: "Hace falta completar la siguiente información para guardar un <b>Público Objetivo: </b><br>" + campos,
                 autoClose: false
             });
         }
@@ -821,7 +779,7 @@
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Ocultando campo de control que omite validación de duplicados
-        $('[data-name="omite_match_c"]').hide();
+        $('[data-name="excluye_campana_c"]').hide();
         //Ocultando campo check de homonimo
         $('[data-name="homonimo_c"]').hide();
         //Oculta etiqueta de prospects_direcciones

@@ -361,7 +361,7 @@ SQL;
         $response_exluye = $EjecutaApi->Excluyeprecalif(null, $args_uni_producto);
 
         $_REQUEST['crea_ratificacion'] += 1;
-        if ($bean->ratificacion_incremento_c == 1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA') {
+        if ($bean->fetched_row['ratificacion_incremento_c'] != $bean->ratificacion_incremento_c && $bean->ratificacion_incremento_c == 1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA' && $bean->retoma_ri_c != 1) {
             // CVV - 30/03/2016 - Crea una nueva operacion para la solicitud de R/I
             $opp = BeanFactory::getBean('Opportunities');
 
@@ -1088,7 +1088,7 @@ SQL;
         $subetapa = $bean->estatus_c;
         $cliente = $bean->account_id;
         //Evalua cambio en etapa o subetapa
-        if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
+        if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa && !empty($producto)) {
             //Actualiza producto uniclick
             global $app_list_strings;
             $available_financiero=array();
