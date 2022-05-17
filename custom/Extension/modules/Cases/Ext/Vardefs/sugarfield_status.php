@@ -1,5 +1,5 @@
 <?php
- // created: 2022-05-08 23:33:07
+ // created: 2022-05-17 13:55:24
 $dictionary['Case']['fields']['status']['default']='1';
 $dictionary['Case']['fields']['status']['required']=true;
 $dictionary['Case']['fields']['status']['massupdate']=true;
