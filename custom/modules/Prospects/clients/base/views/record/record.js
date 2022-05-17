@@ -4,7 +4,7 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-       
+
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_po_to_Lead:click', this.convert_Po_to_Lead, this);
@@ -12,7 +12,7 @@
 
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
-        this.valoresList();
+        //this.valoresList();
         this.events['keypress [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keypress [name=phone_work]'] = 'validaSoloNumerosTel';
@@ -45,7 +45,7 @@
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on("change:estatus_po_c", _.bind(this.change_estatus, this));
         this.model.on('sync', this.userAlianzaSoc, this);
-        this.model.on('sync', this.valoresList, this);
+        //this.model.on('sync', this.valoresList, this);
         this.cmbio_soc = 0;
 
         //Función para eliminar opciones del campo origen
@@ -972,7 +972,7 @@
                         var tipoSeleccionados = '^' + listMapIndicador[tipo].replace(/,/gi, "^,^") + '^';
                         var indicador = data.records[i].indicador;
                         var indicadorSeleccionados = '^' + listMapIndicador[indicador].replace(/,/gi, "^,^") + '^';
-                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline | 
+                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline |
                         //ejemplo: "{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}"
 
                         var description=data.records[i].description;
@@ -1470,26 +1470,24 @@
     },
 
     valoresList: function () {
-        
-       
         var estatus = this.model.get('estatus_po_c');
         var lista = App.lang.getAppListStrings('estatus_po_list');
+        //Itera lista
         Object.keys(lista).forEach(function (key) {
-             //Quita valores 1 y 4 si el registro es 2 o 3
-             if (estatus=='2' || estatus=='3'){
-                switch (key) {
-                    case '1':
-                        delete lista[key];
-                        break;
-                    case '4':
-                        delete lista[key];
-                        break;
-                default:
-                 break;
+            if (estatus=='1'){
+                if (key == "2" || key == "3") {
+                    delete lista[key];
+                }
+            }
+            if (estatus=='2'){
+                if (key == "1" || key == "3") {
+                    delete lista[key];
                 }
             }
         });
-        this.model.fields['estatus_po_list'].options = lista;
+
+        contexto_prospect.model.fields['estatus_po_c'].options = lista;
+        //contexto_prospect.render();
     },
 
 })
