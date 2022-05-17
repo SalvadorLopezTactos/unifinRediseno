@@ -30,7 +30,7 @@ $dependencies['Leads']['assigned_user_name'] = array(
             'name' => 'SetRequired', //Action type
             'params' => array(
                 'target' => 'assigned_user_name',
-                'label'  => 'assigned_user_name_label', 
+                'label'  => 'assigned_user_name_label',
                 'value'  => 'equal($subtipo_registro_c, "2")',  //SUB-TIPO LEAD ES CONTACTADO
             ),
         ),
@@ -48,7 +48,7 @@ $dependencies['Leads']['promotor_c'] = array(
             'name' => 'SetRequired', //Action type
             'params' => array(
                 'target' => 'promotor_c',
-                'label'  => 'promotor_c_label', 
+                'label'  => 'promotor_c_label',
                 'value'  => 'and(equal($origen_c, "2"),equal($detalle_origen_c, "10"))',
             ),
         ),
@@ -56,7 +56,7 @@ $dependencies['Leads']['promotor_c'] = array(
 );
 
 /*******************MOTIVO DE CANCELACION*****************/
-$dependencies['Leads']['motivo_cancelacion_c'] = array(
+/*$dependencies['Leads']['motivo_cancelacion_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     'triggerFields' => array('subtipo_registro_c'),
@@ -66,12 +66,12 @@ $dependencies['Leads']['motivo_cancelacion_c'] = array(
             'name' => 'SetRequired', //Action type
             'params' => array(
                 'target' => 'motivo_cancelacion_c',
-                'label'  => 'motivo_cancelacion_c_label', 
+                'label'  => 'motivo_cancelacion_c_label',
                 'value'  => 'equal($subtipo_registro_c, "3")',  //SUB-TIPO LEAD ES CANCELADO
             ),
         ),
     ),
-);
+);*/
 
 /*******************NOMBRE EMPRESA*****************/
 $dependencies['Leads']['nombre_empresa_c'] = array(

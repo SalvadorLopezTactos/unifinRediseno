@@ -374,11 +374,19 @@
 
         /*****CHECK LEAD CANCELAR*********/
         if (this.model.get('lead_cancelado_c') == '1') {
-            if (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) {
+            //Pide requerido motivo si el usuario no es del CP
+            if (App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] == undefined && (this.model.get('motivo_cancelacion_c') == '' || this.model.get('motivo_cancelacion_c') == null) ) {
 
                 campos = campos + '<b>' + app.lang.get("LBL_MOTIVO_CANCELACION_C", "Leads") + '</b><br>';
                 errors['motivo_cancelacion_c'] = errors['motivo_cancelacion_c'] || {};
                 errors['motivo_cancelacion_c'].required = true;
+            }
+            //Pide requerido subestatys si el usuario es del CP
+            if (App.lang.getAppListStrings('puestos_vicidial_list')[App.user.attributes.puestousuario_c] != undefined && (this.model.get('subestatus_ld_c') == '' || this.model.get('subestatus_ld_c') == null) ) {
+
+                campos = campos + '<b>' + app.lang.get("LBL_SUBESTATUS_LD_C", "Leads") + '</b><br>';
+                errors['subestatus_ld_c'] = errors['subestatus_ld_c'] || {};
+                errors['subestatus_ld_c'].required = true;
             }
         }
 
@@ -1031,7 +1039,7 @@
                         var indicador = data.records[i].indicador;
                         var indicadorSeleccionados = '^' + listMapIndicador[indicador].replace(/,/gi, "^,^") + '^';
 
-                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline | 
+                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline |
                         //ejemplo: "{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}"
 
                         var description=data.records[i].description;
