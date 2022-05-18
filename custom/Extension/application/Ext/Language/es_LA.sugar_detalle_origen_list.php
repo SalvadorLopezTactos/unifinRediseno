@@ -1,5 +1,5 @@
 <?php
- // created: 2022-03-04 09:03:41
+ // created: 2022-05-18 13:44:01
 
 $app_list_strings['detalle_origen_list']=array (
   '' => '',
@@ -113,4 +113,5 @@ $app_list_strings['detalle_origen_list']=array (
   108 => 'Medios',
   109 => 'SEM',
   110 => 'SEO',
+  111 => 'VWMAN',
 );
