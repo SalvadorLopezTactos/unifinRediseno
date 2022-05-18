@@ -1,5 +1,5 @@
 <?php
- // created: 2022-03-14 00:25:22
+ // created: 2022-05-18 13:51:00
 $dictionary['Opportunity']['fields']['detalle_origen_c']['labelValue']='Detalle Origen';
 $dictionary['Opportunity']['fields']['detalle_origen_c']['dependency']='';
 $dictionary['Opportunity']['fields']['detalle_origen_c']['required_formula']='';
@@ -144,6 +144,7 @@ $dictionary['Opportunity']['fields']['detalle_origen_c']['visibility_grid']=arra
       66 => '100',
       67 => '101',
       68 => '103',
+      69 => '111',
     ),
     13 => 
     array (
@@ -166,6 +167,9 @@ $dictionary['Opportunity']['fields']['detalle_origen_c']['visibility_grid']=arra
       0 => '102',
     ),
     17 => 
+    array (
+    ),
+    18 => 
     array (
     ),
     '' => 

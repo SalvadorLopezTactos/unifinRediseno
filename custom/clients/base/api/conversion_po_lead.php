@@ -325,53 +325,77 @@ SITE;
     }
 
 
-    public function re_asign_meetings($bean_LEad, $idCuenTa)
+    public function re_asign_meetings($beanPO, $idLead)
     {
         //Reasigna Llamadas
-        if ($bean_LEad->load_relationship('calls')) {
-            $relatedBeans = $bean_LEad->calls->getBeans();
+        if ($beanPO->load_relationship('calls')) {
+            $relatedBeans = $beanPO->calls->getBeans();
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $call) {
                     global $db;
-                    $meetUpdate = "update calls set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
-                    $updateResult = $db->query($meetUpdate);
+                    // $meetUpdate = "update calls set parent_type = 'Leads', parent_id = '{$idLead}' where id = '{$call->id}'";
+                    // $updateResult = $db->query($meetUpdate);
+                    $insertCallsLeads = "INSERT INTO calls_leads (id, call_id, lead_id, required, accept_status, date_modified, deleted)
+                                          VALUES (uuid(), '{$call->id}', '{$idLead}', '1', 'none', UTC_TIMESTAMP(), '0');";
+                    $insertResultCL = $db->query($insertCallsLeads);
                 }
             }
         }
         //Reasigna Reuniones
-        if ($bean_LEad->load_relationship('meetings')) {
-            $relatedBeans = $bean_LEad->meetings->getBeans();
+        if ($beanPO->load_relationship('meetings')) {
+            $relatedBeans = $beanPO->meetings->getBeans();
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $meeting) {
                     global $db;
-                    $meetUpdate = "update meetings set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
-                    $updateResult = $db->query($meetUpdate);
+                    // $meetUpdate = "update meetings set parent_type = 'Leads', parent_id = '{$idLead}' where id = '{$meeting->id}'";
+                    // $updateResult = $db->query($meetUpdate);
+                    // $beanLead->load_relationship('lead_meetings');
+                    // $beanLead->lead_meetings->add($meeting->id);
+                    $insertMeetLeads = "INSERT INTO meetings_leads (id, meeting_id, lead_id, required, accept_status, date_modified, deleted)
+                                          VALUES (uuid(), '{$meeting->id}', '{$idLead}', '1', 'none', UTC_TIMESTAMP(), '0');";
+                    $insertResultML = $db->query($insertMeetLeads);
                 }
             }
         }
         //Reasigna Tareas
-        if ($bean_LEad->load_relationship('tasks')) {
-            $relatedBeans = $bean_LEad->tasks->getBeans();
+        if ($beanPO->load_relationship('tasks')) {
+            $relatedBeans = $beanPO->tasks->getBeans();
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $task) {
                     global $db;
-                    $meetUpdate = "update tasks set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
+                    $meetUpdate = "update tasks set parent_type = 'Leads', parent_id = '{$idLead}' where id = '{$task->id}'";
                     $updateResult = $db->query($meetUpdate);
-                    // $bean_LEad->load_relationship('tasks_leads_1');
-                    // $bean_LEad->tasks_leads_1tasks_ida->add($task->id);
+                  //  $beanLead->load_relationship('lead_tasks');
+                    // $beanLead->lead_tasks->add($task->id);
+                    // $beanTask = BeanFactory::retrieveBean('Tasks', $task->id, array('disable_row_level_security' => true));
+                    // $beanNewTask = BeanFactory::newBean('Tasks');
+                    // $beanNewTask = $beanTask;
+                    // $beanNewTask->id = '';
+                    // $beanNewTask->parent_type = 'Leads';
+                    // $beanNewTask->parent_id = $idLead;
+                    // $beanNewTask->update_date_modified = false;
+                    // $beanNewTask->save();
                 }
             }
         }
         //Reasigna Notas
-        if ($bean_LEad->load_relationship('notes')) {
-            $relatedBeans = $bean_LEad->notes->getBeans();
+        if ($beanPO->load_relationship('notes')) {
+            $relatedBeans = $beanPO->notes->getBeans();
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $note) {
                     global $db;
-                    $meetUpdate = "update notes set parent_type = 'Leads', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
+                    $meetUpdate = "update notes set parent_type = 'Leads', parent_id = '{$idLead}' where id = '{$note->id}'";
                     $updateResult = $db->query($meetUpdate);
-                    // $bean_LEad->load_relationship('notes_leads_1');
-                    // $bean_LEad->notes_leads_1notes_ida->add($note->id);
+                    // $beanPO->load_relationship('lead_notes');
+                    // $beanPO->lead_notes->add($note->id);
+                    // $beanNote = BeanFactory::retrieveBean('Notes', $note->id, array('disable_row_level_security' => true));
+                    // $beanNewNote = BeanFactory::newBean('Notes');
+                    // $beanNewNote = $beanNote;
+                    // $beanNewNote->id = '';
+                    // $beanNewNote->parent_type = 'Leads';
+                    // $beanNewNote->parent_id = $idLead;
+                    // $beanNewNote->update_date_modified = false;
+                    // $beanNewNote->save();
                 }
             }
         }
@@ -382,13 +406,13 @@ SITE;
         global $db;
         $queryDir = "SELECT direccion.id FROM dire_direccion as direccion
         INNER JOIN prospects_dire_direccion_1_c as intermedia ON intermedia.prospects_dire_direccion_1dire_direccion_idb = direccion.id AND intermedia.deleted = 0
-        WHERE intermedia.prospects_dire_direccion_1prospects_ida = '{$bean_LEad->id}'";
+        WHERE intermedia.prospects_dire_direccion_1prospects_ida = '{$beanPO->id}'";
 
         $queryResultD = $db->query($queryDir);
         while ($rowD = $db->fetchByAssoc($queryResultD)) {
 
             $beanDirecciones = BeanFactory::retrieveBean('dire_Direccion', $rowD['id'], array('disable_row_level_security' => true));
-            $beanDirecciones->leads_dire_direccion_1leads_ida  = $idCuenTa;
+            $beanDirecciones->leads_dire_direccion_1leads_ida  = $idLead;
             $beanDirecciones->save();
         }
     }
