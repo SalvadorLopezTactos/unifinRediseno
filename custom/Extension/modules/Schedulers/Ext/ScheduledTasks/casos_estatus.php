@@ -20,7 +20,7 @@ function casos_estatus()
         $beanCase = BeanFactory::retrieveBean('Cases', $row['id'] ,array('disable_row_level_security' => true));
         $GLOBALS['log']->fatal("*id".$beanCase->id);
         $GLOBALS['log']->fatal("*id".$beanCase->name);
-        $beanCase->status = 4;
+        $beanCase->status = '4';
         $beanCase->save();
     }
       
