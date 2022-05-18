@@ -7,6 +7,7 @@
         self = this;
         this._super("initialize", [options]);
         
+        this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this.getPersonas, this);
         this.model.on('change:account_name', this.getPersonas, this);       
     },
@@ -21,6 +22,29 @@
         {
             self.model.set('case_cuenta_relacion','Muestra');
         }
+    },
+
+    valida_requeridos_min: function (fields, errors, callback) {
+        var campos = "";
+
+        _.each(errors, function (value, key) {
+            _.each(this.model.fields, function (field) {
+                if (_.isEqual(field.name, key)) {
+                    if (field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Cases") + '</b><br>';
+                    }
+                }
+            }, this);
+        }, this);
+
+        if (campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información para guardar un <b>Caso: </b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 
     getPersonas: function () {
