@@ -8,6 +8,22 @@ class Seguimiento_Hook
         //Eventos para establecer fecha de seguimiento:
         if(!$args['isUpdate']){//Es creación, evento disparador número 1
             $fecha_s = ""; 
+            $GLOBALS['log']->fatal("********** Prioridad **********");
+            /* ******************** Prioridad *****************+
+            Prioridad Baja: Usuario y contraseña del portal , Error para visualizar información ,Error en la carga de archivos ,Error para descarga de archivos
+            Prioridad Media: Cantidad cobrada no coincide, Cargos duplicados,Cargos cancelados,Reporte por daño
+            Prioridad Alta: Cargos no reconocidos,Bloqueos preventivos por fraude, Reporte por robo,Reporte por extravío,Caída completa de plataformas
+            */
+            if($bean->subtipo_c == '9' || $bean->subtipo_c == '10' || $bean->subtipo_c == '11' || $bean->subtipo_c == '12'){
+                $bean->priority = 'P3'; 
+            }
+            if($bean->subtipo_c == '1' || $bean->subtipo_c == '2' || $bean->subtipo_c == '3' || $bean->subtipo_c == '8'){
+                $bean->priority = 'P2'; 
+            }
+            if($bean->subtipo_c == '4' || $bean->subtipo_c == '5' || $bean->subtipo_c == '6'|| $bean->subtipo_c == '7'|| $bean->subtipo_c == '13'){
+                $bean->priority = 'P1'; 
+            }
+            
             /*La fecha de seguimiento se establece deacuerdo a:
             |Subtipo de caso|Prioridad|Fecha de seguimiento|
             |Cargos no reconocidos|Alta|1 día|
