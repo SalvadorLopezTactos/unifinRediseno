@@ -12,7 +12,7 @@ function casos_estatus()
     global $db;
     $sql = "SELECT id, name,status,follow_up_datetime,CURDATE() hoy, DATE_FORMAT(follow_up_datetime, '%Y-%m-%d ')  as dd
     from cases where follow_up_datetime is not null
-	and (status = 1 or status = 2) and (curdate() >= DATE_FORMAT(follow_up_datetime, '%Y-%m-%d '))";
+	and (status = 1 or status = 2 or status = 5) and (curdate() >= DATE_FORMAT(follow_up_datetime, '%Y-%m-%d '))";
     $result = $db->query($sql);
     
     while ($row = $db->fetchByAssoc($result)) {
