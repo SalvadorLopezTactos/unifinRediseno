@@ -65,6 +65,10 @@ class Seguimiento_Hook
             }
 
             $bean->follow_up_datetime = $fecha_s;
+        }else{
+            if($bean->fetched_row['status'] != $bean->status && $bean->status == '3'){
+                $bean->resolved_datetime = $bean->date_modified;
+            }
         }
         
     }
