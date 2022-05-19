@@ -38,7 +38,7 @@ class BacklogServsProducto extends SugarApi
 			AND cs.tipo_producto_c ='{$idProducto}'
 			AND op.date_entered > date_add(NOW(), INTERVAL -2 MONTH)
 			AND cs.estatus_c IN ('R','CM')
-            SQL;
+SQL;
             $row = $db->getone($query);
             if($row > 0){
                 $Etapa = 'Rechazada';
@@ -52,7 +52,7 @@ class BacklogServsProducto extends SugarApi
                 AND cs.tipo_producto_c ='{$idProducto}'
                 AND op.date_entered > date_add(NOW(), INTERVAL -2 MONTH)
                 AND cs.estatus_c IN ('E','D','BC','EF','SC','RF','CC','RM')
-                SQL;
+SQL;
                 $row = $db->getone($query);
                 if($row > 0){
 					$Etapa = 'Credito';
@@ -66,7 +66,7 @@ class BacklogServsProducto extends SugarApi
 					AND cs.tipo_producto_c = '{$idProducto}'
 					AND op.date_entered > date_add(NOW(), INTERVAL -12 MONTH)
 					AND cs.estatus_c = 'N'
-                    SQL;
+SQL;
 					$row = $db->getone($query);
 					if($row > 0){
 						$Etapa = 'Autorizada';
