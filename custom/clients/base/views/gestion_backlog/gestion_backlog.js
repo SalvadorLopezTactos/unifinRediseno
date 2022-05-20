@@ -546,9 +546,10 @@
             var monto_rechazado = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",", "");
             var monto_sin_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",", "");
             var monto_con_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",", "");
+            var monto_devuelta = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_devuelta"]').val().replaceAll(",", "");
             var comentarios = $(e.currentTarget).parent().parent().parent().find('[data-field="comentarios"]').val();
             var probabilidad = $(e.currentTarget).parent().parent().parent().find('[data-field="probabilidad"]').val();
-            var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + comentarios + probabilidad;
+            var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + monto_devuelta + comentarios + probabilidad;
             $(e.currentTarget).parent().parent().parent().find('[name="actualizado"]').val(concat);
 
         }
@@ -843,6 +844,10 @@
         if (campo == 'monto_con_solicitud' && valorCampo != "") {
             $(".monto_con_solicitud").val(valorCampo);
             $(".monto_con_solicitud").trigger('change');
+        }
+        if (campo == 'devuelta' && valorCampo != "") {
+            $(".monto_devuelta").val(valorCampo);
+            $(".monto_devuelta").trigger('change');
         }
     },
 })
