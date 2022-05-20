@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-19 08:07:48
+ // created: 2022-05-17 10:40:56
 
 $app_list_strings['etapa_c_list']=array (
   '' => '',
@@ -7,4 +7,5 @@ $app_list_strings['etapa_c_list']=array (
   2 => 'Rechazada',
   3 => 'Prospecto',
   4 => 'Crédito',
+  5 => 'Devuelta',
 );

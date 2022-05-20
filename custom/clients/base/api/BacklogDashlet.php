@@ -293,10 +293,11 @@ when 'PUE' then 16 when 'VER' then 17  when 'CUN' then 18 when 'CAN' then 18 whe
 case blcs.estatus_operacion_c when '2' then 1 when '1' then 2 when '2' then 3
 when 'Enviada a otro mes' then 4 when 'Enviada a otro mes - Autom�tico' then 5 when 'Cancelada por cliente' then 6 else 10 end as ordenEstatus,
 uc.iniciales_c AS iniciales, IFNULL(blcs.monto_activado_anticipado_c,0) AS monto_anticipado, IFNULL(blcs.ri_activada_anticipada_c,0) AS ri_anticipada,
-IFNULL(monto_disp_vencido_c,0) disp_vencido, acc.idcliente_c idcliente, monto_prospecto_c, monto_credito_c, monto_rechazado_c, monto_sin_solicitud_c, monto_con_solicitud_c,
+IFNULL(monto_disp_vencido_c,0) disp_vencido, acc.idcliente_c idcliente, 
+monto_prospecto_c, monto_credito_c, monto_rechazado_c, monto_sin_solicitud_c, monto_con_solicitud_c, IFNULL(monto_devuelta_c,0) as monto_devuelta_c ,
 ri_prospecto_c, ri_credito_c, ri_rechazada_c, ri_sin_solicitud_c, ri_con_solicitud_c,
 CASE WHEN blcs.estatus_operacion_c = '1' THEN 0 ELSE
-0 + /*CASE '{$etapa}' WHEN '' THEN */ monto_prospecto_c + monto_credito_c + monto_rechazado_c + monto_sin_solicitud_c + monto_con_solicitud_c /*ELSE
+0 + /*CASE '{$etapa}' WHEN '' THEN */ monto_prospecto_c + monto_credito_c + monto_rechazado_c + monto_sin_solicitud_c + monto_con_solicitud_c + IFNULL(monto_devuelta_c,0) /*ELSE
     CASE WHEN '{$etapa}' LIKE '%Prospecto%' THEN  monto_prospecto_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%Credito%' THEN  monto_credito_c     ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%Rechazada%' THEN  monto_rechazado_c ELSE 0 END
@@ -383,6 +384,7 @@ SQL;
             $query .= " ORDER BY  ordenEstatus, ordenEquipo, uc.iniciales_c, lb.monto_comprometido desc";
         }
 
+        $GLOBALS['log']->fatal(">>>>>>>>>sql: ",$query);
         //Recupera listas de valores
         global $app_list_strings;
         $queryResult = $db->query($query);
@@ -464,6 +466,9 @@ SQL;
             $response['linea'][$row['id']]['monto_rechazado'] = $row['monto_rechazado_c'];
             $response['linea'][$row['id']]['monto_sin_solicitud'] = $row['monto_sin_solicitud_c'];
             $response['linea'][$row['id']]['monto_con_solicitud'] = $row['monto_con_solicitud_c'];
+            
+            $response['linea'][$row['id']]['monto_devuelta'] = $row['monto_devuelta_c'];
+
             //$response['linea'][$row['id']]['ri_prospecto'] = $row['ri_prospecto_c'];
             //$response['linea'][$row['id']]['ri_credito'] = $row['ri_credito_c'];
             //$response['linea'][$row['id']]['ri_rechazada'] = $row['ri_rechazada_c'];
@@ -517,6 +522,7 @@ SQL;
                 $total['total_monto_rechazado'] += $value['monto_rechazado'];
                 $total['total_sin_solicitud'] += $value['monto_sin_solicitud'];
                 $total['total_con_solicitud'] += $value['monto_con_solicitud'];
+                $total['total_monto_devuelta'] += $value['monto_devuelta'];
             }
         }
 
@@ -542,6 +548,7 @@ SQL;
                         $total['total_monto_rechazado'] += $amount['monto_rechazado'];
                         $total['total_sin_solicitud'] += $amount['monto_sin_solicitud'];
                         $total['total_con_solicitud'] += $amount['monto_con_solicitud'];
+                        $total['total_monto_devuelta'] += $amount['monto_devuelta'];
                     }
                 }
             }
@@ -570,6 +577,7 @@ SQL;
                             $total['total_monto_rechazado'] += $children_amount['monto_rechazado'];
                             $total['total_sin_solicitud'] += $children_amount['monto_sin_solicitud'];
                             $total['total_con_solicitud'] += $children_amount['monto_con_solicitud'];
+                            $total['total_monto_devuelta'] += $children_amount['monto_devuelta'];
                         }
                     }
                 }
@@ -594,6 +602,7 @@ SQL;
         $total['total_monto_rechazado'] = $total['total_monto_rechazado'];
         $total['total_sin_solicitud'] = $total['total_sin_solicitud'];
         $total['total_con_solicitud'] = $total['total_con_solicitud'];
+        $total['total_monto_devuelta'] = round($total['total_monto_devuelta'],0);
 
         return $total;
     }
@@ -1028,6 +1037,8 @@ SQL;
         $new_backlog->monto_final_comprometido_c = $original_backlog->monto_final_comprometido_c;
         $new_backlog->ri_final_comprometida_c = $original_backlog->ri_final_comprometida_c;
 
+        $new_backlog->monto_devuelta_c = $original_backlog->monto_devuelta_c;
+
         $new_backlog->save();
 
     }
@@ -1050,7 +1061,7 @@ SQL;
 	*/
 		fputcsv($fp, array('PRODUCTO','TIPO OPERACION PRODUCTO','ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
             'BACKLOG','ETAPA INICIO MES', 'ETAPA',
-            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
+            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','DEVUELTA','TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
             foreach ($values as $index => $linea) {
@@ -1305,11 +1316,11 @@ SQL;
     {
         global $db;
         $query = <<<SQL
-SELECT id, CONCAT(first_name, " ", last_name) AS full_name FROM users u
-INNER JOIN users_cstm uc ON uc.id_c = u.id
-WHERE u.deleted = 0
-AND reports_to_id = '{$id}'
-SQL;
+    SELECT id, CONCAT(first_name, " ", last_name) AS full_name FROM users u
+    INNER JOIN users_cstm uc ON uc.id_c = u.id
+    WHERE u.deleted = 0
+    AND reports_to_id = '{$id}'
+    SQL;
         $queryResult = $db->query($query);
 
         while($row = $db->fetchByAssoc($queryResult))
@@ -1336,15 +1347,15 @@ SQL;
         $access = $args['data']['Access'];
 
         $query = <<<SQL
-SELECT DISTINCT equipo_c, u.reports_to_id, u.id,
-case equipo_c when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
-when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'QRO2' then 15  when 'LEO' then 16
-when 'PUE' then 17 when 'VER' then 18 when 'CUN' then 19 when 'CAN' then 19 when 'MER' then 20 when 'TOL' then 21 when 'CASA' then 22 when '0' then 50 else equipo_c end AS ordenEquipo
-FROM users_cstm uc
-INNER JOIN users u ON u.id = uc.id_c
-WHERE u.deleted = 0
-and equipo_c not in ('CA','CA1','CA2','CA3','CAS','F1','F2','F3','F4','F5')
-SQL;
+        SELECT DISTINCT equipo_c, u.reports_to_id, u.id,
+        case equipo_c when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
+        when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'QRO2' then 15  when 'LEO' then 16
+        when 'PUE' then 17 when 'VER' then 18 when 'CUN' then 19 when 'CAN' then 19 when 'MER' then 20 when 'TOL' then 21 when 'CASA' then 22 when '0' then 50 else equipo_c end AS ordenEquipo
+        FROM users_cstm uc
+        INNER JOIN users u ON u.id = uc.id_c
+        WHERE u.deleted = 0
+        and equipo_c not in ('CA','CA1','CA2','CA3','CAS','F1','F2','F3','F4','F5')
+    SQL;
 
         if($access != "Full_Access"){
             $query .= " AND u.reports_to_id = '{$current_user->id}' ";
@@ -1353,13 +1364,13 @@ SQL;
             //Si es BackOffice solo debe ver los equipos que tiene asociados su usuario
             $EquiposVisibles = '';
             $qry = <<<SQL
-SELECT replace(replace(usr.equipos_c,'^',''),',',''',''') equipos
-FROM acl_roles r
-INNER JOIN acl_roles_users ru ON ru.role_id = r.id AND ru.deleted = 0
-INNER JOIN users_cstm usr on usr.id_c = ru.user_id
-WHERE r.name in ('Backlog-BO')
-and ru.user_id = '{$current_user->id}'
-SQL;
+            SELECT replace(replace(usr.equipos_c,'^',''),',',''',''') equipos
+            FROM acl_roles r
+            INNER JOIN acl_roles_users ru ON ru.role_id = r.id AND ru.deleted = 0
+            INNER JOIN users_cstm usr on usr.id_c = ru.user_id
+            WHERE r.name in ('Backlog-BO')
+            and ru.user_id = '{$current_user->id}'
+    SQL;
             $EquiposVisibles = $db->getone($qry);
             if(!empty($EquiposVisibles) || $EquiposVisibles != ''){
                 $query .= " AND equipo_c in ('{$EquiposVisibles}') ";
@@ -1396,16 +1407,16 @@ SQL;
         $users = array();
 
         $query = <<<SQL
-SELECT DISTINCT equipo_c, u.reports_to_id, u.id,
-case equipo_c when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
-when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'QRO2' then 15 when 'LEO' then 16
-when 'PUE' then 17 when 'VER' then 18 when 'CUN' then 19 when 'CAN' then 19 when 'MER' then 20 when 'TOL' then 21 when 'CASA' then 22 when '0' then 50 else equipo_c end AS ordenEquipo
-FROM users_cstm uc
-INNER JOIN users u ON u.id = uc.id_c
-WHERE u.deleted = 0 AND u.reports_to_id = '{$id}'
-and equipo_c not in ('CA','CA1','CA2','CA3','CAS','F1','F2','F3','F4','F5')
-ORDER BY  ordenEquipo
-SQL;
+        SELECT DISTINCT equipo_c, u.reports_to_id, u.id,
+        case equipo_c when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
+        when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'QRO2' then 15 when 'LEO' then 16
+        when 'PUE' then 17 when 'VER' then 18 when 'CUN' then 19 when 'CAN' then 19 when 'MER' then 20 when 'TOL' then 21 when 'CASA' then 22 when '0' then 50 else equipo_c end AS ordenEquipo
+        FROM users_cstm uc
+        INNER JOIN users u ON u.id = uc.id_c
+        WHERE u.deleted = 0 AND u.reports_to_id = '{$id}'
+        and equipo_c not in ('CA','CA1','CA2','CA3','CAS','F1','F2','F3','F4','F5')
+        ORDER BY  ordenEquipo
+        SQL;
 
         $queryResult = $db->query($query);
 
