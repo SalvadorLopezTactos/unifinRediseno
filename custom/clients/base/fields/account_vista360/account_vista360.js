@@ -50,9 +50,19 @@
       'click #orderByAnexoTasaHistorico': 'orderAnexoTasaHistorico',
 
       //Contratos
+      'click #orderByUnidad': 'orderUnidad',
       'click #orderByContrato': 'orderContrato',
       'click #orderByContratoContrata': 'orderContratoContratacion',
       'click #orderByContratoTermino': 'orderContratoTerminacion',
+      'click #orderByProxDom': 'orderProximaDomiciliacion',
+      'click #orderByVigenciaSeguro': 'orderVigenciaSeguro',
+      'click #orderByColocacion': 'orderColocacion',
+      'click #orderBySaldoInsoluto': 'orderSaldoInsoluto',
+      'click #orderByCarteraVencida': 'orderCarteraVencida',
+      'click #orderByMoratorios': 'orderMoratorios',
+      'click #orderByDiasMora': 'orderDiasMora',
+      'click #orderByTasa': 'orderTasa',
+      
       //Cesiones
       'click #orderByCesion': 'orderCesion',
       'click #orderByCesionVencimiento': 'orderCesionVencimiento',
@@ -89,6 +99,16 @@
         this.sortAnexoDiasMoraHistorico="ASC";
         this.sortAnexoTasa="ASC";
         this.sortAnexoTasaHistorico="ASC";
+        this.sortProxDomiciliacion="ASC";
+        this.sortVigenciaSeguro = "ASC";
+        this.sortColocacion = "ASC";
+        this.sortSaldoInsoluto="ASC";
+
+        this.sortUnidad="ASC";
+        this.sortCarteraVencida="ASC";
+        this.sortMoratorios="ASC";
+        this.sortDiasMora="ASC";
+        this.sortTasa="ASC";
 
         this.model.on('sync', this.hideElements, this);
     },
@@ -1471,6 +1491,40 @@
 
       },
 
+      orderUnidad:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortUnidad == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+            if (a.columna1.trim() < b.columna1.trim()) {
+              return -1;
+            }
+            if (b.columna1.trim() > a.columna1.trim()) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortUnidad = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (a.columna1.trim() > b.columna1.trim()) {
+              return -1;
+            }
+            if (b.columna1.trim() > a.columna1.trim()) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortUnidad = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
       orderContrato: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
@@ -1516,10 +1570,10 @@
         var orderData = this.anexosdata;
         if (this.sortAnexoContratacion == "ASC") {
           orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
-            if (self.fDate(a.columna3) > self.fDate(b.columna3)) {
+            if (self.stringToDate(a.columna3) > self.stringToDate(b.columna3)) {
               return 1;
             }
-            if (self.fDate(a.columna3) < self.fDate(b.columna3)) {
+            if (self.stringToDate(a.columna3) < self.stringToDate(b.columna3)) {
               return -1;
             }
             // a must be equal to b
@@ -1528,10 +1582,10 @@
           this.sortAnexoContratacion = "DESC";
         }else{
           orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
-            if (self.fDate(a.columna3) < self.fDate(b.columna3)) {
+            if (self.stringToDate(a.columna3) < self.stringToDate(b.columna3)) {
               return 1;
             }
-            if (self.fDate(a.columna3) > self.fDate(b.columna3)) {
+            if (self.stringToDate(a.columna3) > self.stringToDate(b.columna3)) {
               return -1;
             }
             // a must be equal to b
@@ -1553,10 +1607,10 @@
         var orderData = this.anexosdata;
         if (this.sortAnexoTerminacion == "ASC") {
           orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
-          if (self.fDate(a.columna4) > self.fDate(b.columna4)) {
+          if (self.stringToDate(a.columna4) > self.stringToDate(b.columna4)) {
               return 1;
             }
-            if (self.fDate(a.columna4) < self.fDate(b.columna4)) {
+            if (self.stringToDate(a.columna4) < self.stringToDate(b.columna4)) {
               return -1;
             }
             // a must be equal to b
@@ -1565,10 +1619,10 @@
           this.sortAnexoTerminacion = "DESC";
         }else{
           orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
-          if (self.fDate(a.columna4) < self.fDate(b.columna4)) {
+          if (self.stringToDate(a.columna4) < self.stringToDate(b.columna4)) {
               return 1;
             }
-            if (self.fDate(a.columna4) > self.fDate(b.columna4)) {
+            if (self.stringToDate(a.columna4) > self.stringToDate(b.columna4)) {
               return -1;
             }
             // a must be equal to b
@@ -1578,6 +1632,293 @@
           this.sortAnexoTerminacion = "ASC";
         }
         this.getData(null,null,orderData);
+      },
+
+      orderProximaDomiciliacion:function(){
+        var self = this;
+        var orderData = this.anexosdata;
+        if (this.sortProxDomiciliacion == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (self.stringToDate(a.columna6) > self.stringToDate(b.columna6)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna6) < self.stringToDate(b.columna6)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortProxDomiciliacion = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (self.stringToDate(a.columna6) < self.stringToDate(b.columna6)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna6) > self.stringToDate(b.columna6)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortProxDomiciliacion = "ASC";
+        }
+        this.getData(null,null,orderData);
+
+      },
+
+      orderVigenciaSeguro:function(){
+        var self = this;
+        var orderData = this.anexosdata;
+        if (this.sortVigenciaSeguro == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (self.stringToDate(a.columna7) > self.stringToDate(b.columna7)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna7) < self.stringToDate(b.columna7)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortVigenciaSeguro = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (self.stringToDate(a.columna7) < self.stringToDate(b.columna7)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna7) > self.stringToDate(b.columna7)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortVigenciaSeguro = "ASC";
+        }
+        this.getData(null,null,orderData);
+
+      },
+
+      orderColocacion:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortColocacion == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (parseFloat(a.columna8) > parseFloat(b.columna8)) {
+              return 1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortColocacion = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna8) - parseFloat(a.columna8);
+          });
+
+          this.sortColocacion = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
+      orderSaldoInsoluto:function(){
+        
+        var orderData = this.anexosdata;
+        if (this.sortSaldoInsoluto == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (parseFloat(a.columna9) > parseFloat(b.columna9)) {
+              return 1;
+            }
+            if (parseFloat(a.columna9) < parseFloat(b.columna9)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortSaldoInsoluto = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna9) - parseFloat(a.columna9);
+          });
+
+          this.sortSaldoInsoluto = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
+      orderCarteraVencida:function(){
+        
+        var orderData = this.anexosdata;
+        if (this.sortCarteraVencida == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (parseFloat(a.columna10) > parseFloat(b.columna10)) {
+              return 1;
+            }
+            if (parseFloat(a.columna10) < parseFloat(b.columna10)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortCarteraVencida = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna10) - parseFloat(a.columna10);
+          });
+
+          this.sortCarteraVencida = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
+      orderMoratorios:function(){
+        
+        var orderData = this.anexosdata;
+        if (this.sortMoratorios == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (parseFloat(a.columna11) > parseFloat(b.columna11)) {
+              return 1;
+            }
+            if (parseFloat(a.columna11) < parseFloat(b.columna11)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortMoratorios = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna11) - parseFloat(a.columna11);
+          });
+
+          this.sortMoratorios = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
+      orderDiasMora:function(){
+        var orderData = this.anexosdata;
+        if (this.sortDiasMora == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (Number(a.columna12) > Number(b.columna12)) {
+              return 1;
+            }
+            if (Number(a.columna12) < Number(b.columna12)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortDiasMora = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return Number(b.columna12) - Number(a.columna12);
+          });
+
+
+          this.sortDiasMora = "ASC";
+        }
+        this.getData(null,null,orderData);
+
+      },
+
+      orderTasa:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortTasa == "ASC") {
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+          if (parseFloat(a.columna13) > parseFloat(b.columna13)) {
+              return 1;
+            }
+            if (parseFloat(a.columna13) < parseFloat(b.columna13)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortTasa = "DESC";
+        }else{
+          orderData.contratos_activos = this.anexosdata.contratos_activos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna13) - parseFloat(a.columna13);
+          });
+
+
+          this.sortTasa = "ASC";
+        }
+        this.getData(null,null,orderData);
+
       },
 
       Save_comentario: function(){
