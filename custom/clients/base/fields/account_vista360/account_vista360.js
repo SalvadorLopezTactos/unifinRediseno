@@ -78,6 +78,13 @@
       'click #orderByCesionVencimiento': 'orderCesionVencimiento',
       'click .btn-Guardar': 'Save_comentario',
       'click #btn-Descargar':'descargapdf',
+      //Cesiones Históricas
+      'click #orderByCesionHistorico': 'orderCesionHistorico',
+      'click #orderByDeudoresHistorico': 'orderDeudorHistorico',
+      'click #orderByMontoVencerHistorico': 'orderMontoVencerHistorico',
+      'click #orderByMontoDescuentoHistorico': 'orderMontoDescuentoHistorico',
+      
+
     },
 
     initialize: function(options) {
@@ -129,6 +136,11 @@
         this.sortMoratoriosHistorico="ASC";
         this.sortDiasMoraHistorico="ASC";
         this.sortTasaHistorico="ASC";
+
+        this.sortCesionHistorico="ASC";
+        this.sortDeudorHistorico="ASC";
+        this.sortMontoVencerHistorico="ASC";
+        this.sortMontoDescuentoHistorico="ASC";
 
         this.model.on('sync', this.hideElements, this);
     },
@@ -2355,6 +2367,145 @@
 
 
         this.getData(null,null,orderData);
+      },
+
+      orderCesionHistorico:function(){
+        var orderData = this.anexosdata;
+        if (this.sortCesionHistorico== "ASC") {
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+          if (a.columna1 > b.columna1) {
+              return 1;
+            }
+            if (a.columna1 < b.columna1) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortCesionHistorico = "DESC";
+        }else{
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+          if (a.columna1 < b.columna1) {
+              return 1;
+            }
+            if (a.columna1 > b.columna1) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortCesionHistorico = "ASC";
+        }
+
+
+        this.getData(null,null,orderData);
+      },
+
+      orderDeudorHistorico:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortDeudorHistorico == "ASC") {
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+            if (a.columna2 < b.columna2) {
+              return -1;
+            }
+            if (b.columna2 > a.columna2) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortDeudorHistorico = "DESC";
+        }else{
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+          if (a.columna2 > b.columna2) {
+              return -1;
+            }
+            if (b.columna2 > a.columna2) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortDeudorHistorico = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
+      orderMontoVencerHistorico:function(){
+        var orderData = this.anexosdata;
+        if (this.sortMontoVencerHistorico == "ASC") {
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+          if (parseFloat(a.columna4) > parseFloat(b.columna4)) {
+              return 1;
+            }
+            if (parseFloat(a.columna4) < parseFloat(b.columna4)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortMontoVencerHistorico = "DESC";
+        }else{
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna4) - parseFloat(a.columna4);
+          });
+
+          this.sortMontoVencerHistorico = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+      },
+
+      orderMontoDescuentoHistorico:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortMontoDescuentoHistorico == "ASC") {
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+          if (parseFloat(a.columna5) > parseFloat(b.columna5)) {
+              return 1;
+            }
+            if (parseFloat(a.columna5) < parseFloat(b.columna5)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortMontoDescuentoHistorico = "DESC";
+        }else{
+          orderData.cesiones_historicas = this.anexosdata.cesiones_historicas.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna5) - parseFloat(a.columna5);
+          });
+
+          this.sortMontoDescuentoHistorico = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
       },
       // Función para comparación de fechas
       fDate: function(s) {
