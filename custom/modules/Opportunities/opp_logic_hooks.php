@@ -147,8 +147,8 @@ SQL;
          * Convertir a prospecto  interesado , si la cuenta inicial es prospecto
          */
         //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
-        if (($beanCuenta->tipo_registro_cuenta_c == '2' && ($beanCuenta->subtipo_registro_cuenta_c == '2' || $beanCuenta->subtipo_registro_cuenta_c == '10')) || ($beanCuenta->tipo_registro_cuenta_c == '1'
-                && in_array($bean->producto_financiero_c ,$available_financiero))) { // Prospecto - 2  // Contactado - 2 // Rechazado - 10
+        if ( !$bean->onboarding_chk_c && (($beanCuenta->tipo_registro_cuenta_c == '2' && ($beanCuenta->subtipo_registro_cuenta_c == '2' || $beanCuenta->subtipo_registro_cuenta_c == '10')) || ($beanCuenta->tipo_registro_cuenta_c == '1' && in_array($bean->producto_financiero_c ,$available_financiero)))) {
+          // Prospecto - 2  // Contactado - 2 // Rechazado - 10
             $beanCuenta->tipo_registro_cuenta_c = '2'; //Prospecto - 2
             $beanCuenta->subtipo_registro_cuenta_c = '7'; //Interesado - 7
             $beanCuenta->save();

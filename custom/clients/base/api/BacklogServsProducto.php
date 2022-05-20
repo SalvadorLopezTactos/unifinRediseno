@@ -70,7 +70,9 @@ SQL;
 					$row = $db->getone($query);
 					if($row > 0){
 						$Etapa = 'Autorizada';
-					}
+					}else{
+                        $Etapa = 'Devuelta';
+                    }
 				}
             }
             return $Etapa;
