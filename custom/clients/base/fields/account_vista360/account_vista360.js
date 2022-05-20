@@ -62,6 +62,16 @@
       'click #orderByMoratorios': 'orderMoratorios',
       'click #orderByDiasMora': 'orderDiasMora',
       'click #orderByTasa': 'orderTasa',
+      //Contratos Históricos
+      'click #orderByUnidadHistorico': 'orderUnidadHistorico',
+      'click #orderByProxDomHistorico': 'orderProximaDomiciliacionHistorico',
+      'click #orderByVigenciaSeguroHistorico': 'orderVigenciaSeguroHistorico',
+      'click #orderByColocacionHistorico': 'orderColocacionHistorico',
+      'click #orderBySaldoInsolutoHistorico': 'orderSaldoInsolutoHistorico',
+      'click #orderByCarteraVencidaHistorico': 'orderCarteraVencidaHistorico',
+      'click #orderByMoratoriosHistorico': 'orderMoratoriosHistorico',
+      'click #orderByDiasMoraHistorico': 'orderDiasMoraHistorico',
+      'click #orderByTasaHistorico': 'orderTasaHistorico',
       
       //Cesiones
       'click #orderByCesion': 'orderCesion',
@@ -109,6 +119,16 @@
         this.sortMoratorios="ASC";
         this.sortDiasMora="ASC";
         this.sortTasa="ASC";
+
+        this.sortUnidadHistorico="ASC";
+        this.sortProxDomiciliacionHistorico="ASC";
+        this.sortVigenciaSeguroHistorico= "ASC";
+        this.sortColocacionHistorico = "ASC";
+        this.sortSaldoInsolutoHistorico="ASC";
+        this.sortCarteraVencidaHistorico="ASC";
+        this.sortMoratoriosHistorico="ASC";
+        this.sortDiasMoraHistorico="ASC";
+        this.sortTasaHistorico="ASC";
 
         this.model.on('sync', this.hideElements, this);
     },
@@ -1525,6 +1545,40 @@
 
       },
 
+      orderUnidadHistorico:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortUnidadHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+            if (a.columna1.trim() < b.columna1.trim()) {
+              return -1;
+            }
+            if (b.columna1.trim() > a.columna1.trim()) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortUnidadHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (a.columna1.trim() > b.columna1.trim()) {
+              return -1;
+            }
+            if (b.columna1.trim() > a.columna1.trim()) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortUnidadHistorico = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
       orderContrato: function(){
         //Ordenamiento: Anexos por Anexo - Columna 2
         // console.log('--anexosdata--');
@@ -1667,6 +1721,39 @@
 
       },
 
+      orderProximaDomiciliacionHistorico:function(){
+        var self = this;
+        var orderData = this.anexosdata;
+        if (this.sortProxDomiciliacionHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (self.stringToDate(a.columna6) > self.stringToDate(b.columna6)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna6) < self.stringToDate(b.columna6)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortProxDomiciliacionHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (self.stringToDate(a.columna6) < self.stringToDate(b.columna6)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna6) > self.stringToDate(b.columna6)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortProxDomiciliacionHistorico = "ASC";
+        }
+        this.getData(null,null,orderData);
+
+      },
+
       orderVigenciaSeguro:function(){
         var self = this;
         var orderData = this.anexosdata;
@@ -1695,6 +1782,39 @@
           });
 
           this.sortVigenciaSeguro = "ASC";
+        }
+        this.getData(null,null,orderData);
+
+      },
+
+      orderVigenciaSeguroHistorico:function(){
+        var self = this;
+        var orderData = this.anexosdata;
+        if (this.sortVigenciaSeguroHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (self.stringToDate(a.columna7) > self.stringToDate(b.columna7)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna7) < self.stringToDate(b.columna7)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortVigenciaSeguroHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (self.stringToDate(a.columna7) < self.stringToDate(b.columna7)) {
+              return 1;
+            }
+            if (self.stringToDate(a.columna7) > self.stringToDate(b.columna7)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+
+          this.sortVigenciaSeguroHistorico = "ASC";
         }
         this.getData(null,null,orderData);
 
@@ -1731,6 +1851,43 @@
           });
 
           this.sortColocacion = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
+      orderColocacionHistorico:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortColocacionHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (parseFloat(a.columna8) > parseFloat(b.columna8)) {
+              return 1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortColocacionHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna8) - parseFloat(a.columna8);
+          });
+
+          this.sortColocacionHistorico = "ASC";
         }
 
         this.getData(null,null,orderData);
@@ -1774,6 +1931,43 @@
 
       },
 
+      orderSaldoInsolutoHistorico:function(){
+        
+        var orderData = this.anexosdata;
+        if (this.sortSaldoInsolutoHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (parseFloat(a.columna9) > parseFloat(b.columna9)) {
+              return 1;
+            }
+            if (parseFloat(a.columna9) < parseFloat(b.columna9)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortSaldoInsolutoHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna9) - parseFloat(a.columna9);
+          });
+
+          this.sortSaldoInsolutoHistorico = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
       orderCarteraVencida:function(){
         
         var orderData = this.anexosdata;
@@ -1805,6 +1999,43 @@
           });
 
           this.sortCarteraVencida = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
+      orderCarteraVencidaHistorico:function(){
+        
+        var orderData = this.anexosdata;
+        if (this.sortCarteraVencidaHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (parseFloat(a.columna10) > parseFloat(b.columna10)) {
+              return 1;
+            }
+            if (parseFloat(a.columna10) < parseFloat(b.columna10)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortCarteraVencidaHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna10) - parseFloat(a.columna10);
+          });
+
+          this.sortCarteraVencidaHistorico = "ASC";
         }
 
         this.getData(null,null,orderData);
@@ -1848,6 +2079,43 @@
 
       },
 
+      orderMoratoriosHistorico:function(){
+        
+        var orderData = this.anexosdata;
+        if (this.sortMoratoriosHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (parseFloat(a.columna11) > parseFloat(b.columna11)) {
+              return 1;
+            }
+            if (parseFloat(a.columna11) < parseFloat(b.columna11)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortMoratoriosHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna11) - parseFloat(a.columna11);
+          });
+
+          this.sortMoratoriosHistorico = "ASC";
+        }
+
+        this.getData(null,null,orderData);
+
+      },
+
       orderDiasMora:function(){
         var orderData = this.anexosdata;
         if (this.sortDiasMora == "ASC") {
@@ -1879,6 +2147,42 @@
 
 
           this.sortDiasMora = "ASC";
+        }
+        this.getData(null,null,orderData);
+
+      },
+
+      orderDiasMoraHistorico:function(){
+        var orderData = this.anexosdata;
+        if (this.sortDiasMoraHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (Number(a.columna12) > Number(b.columna12)) {
+              return 1;
+            }
+            if (Number(a.columna12) < Number(b.columna12)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortDiasMoraHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return Number(b.columna12) - Number(a.columna12);
+          });
+
+
+          this.sortDiasMoraHistorico = "ASC";
         }
         this.getData(null,null,orderData);
 
@@ -1916,6 +2220,43 @@
 
 
           this.sortTasa = "ASC";
+        }
+        this.getData(null,null,orderData);
+
+      },
+
+      orderTasaHistorico:function(){
+
+        var orderData = this.anexosdata;
+        if (this.sortTasaHistorico == "ASC") {
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+          if (parseFloat(a.columna13) > parseFloat(b.columna13)) {
+              return 1;
+            }
+            if (parseFloat(a.columna13) < parseFloat(b.columna13)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          this.sortTasaHistorico = "DESC";
+        }else{
+          orderData.contratos_historicos = this.anexosdata.contratos_historicos.sort(function (a, b) {
+            /*
+          if (parseFloat(b.columna8) > parseFloat(a.columna8)) {
+              return -1;
+            }
+            if (parseFloat(a.columna8) < parseFloat(b.columna8)) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+            */
+           return parseFloat(b.columna13) - parseFloat(a.columna13);
+          });
+
+
+          this.sortTasaHistorico = "ASC";
         }
         this.getData(null,null,orderData);
 
