@@ -68,7 +68,7 @@
          * */
         this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
 
-        this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
+        //this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
 
         /* F. Javier G. Solar
          OBS299 Validar que las Direcciones no se repitan 21/11/2018
@@ -4821,19 +4821,19 @@
                         var valColonia = data.records[i].dire_direccion_dire_colonia_name;
                         var idColonia = data.records[i].dire_direccion_dire_coloniadire_colonia_ida;
                         */
-                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline | 
+                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline |
                         //ejemplo: "{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}"
-                        
+
                         var description=data.records[i].description;
-                        
+
                         var ids=description.split('|');
-                        
+
                         var identificadorPais=ids[0];
                         var identificadorEstado=ids[1];
                         var identificadorCiudad=ids[2];
                         var identificadorMunicipio=ids[3];
                         var identificadorColonia=ids[4];
-                        
+
                         var valCodigoPostal = data.records[i].codigo_postal_c;
                         var idCodigoPostal=data.records[i].dir_sepomex_dire_direcciondir_sepomex_ida;
                         var valPais = data.records[i].pais_c;

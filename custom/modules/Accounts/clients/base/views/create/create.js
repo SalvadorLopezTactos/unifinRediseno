@@ -412,7 +412,7 @@
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
         //this.model.addValidationTask('tipo_proveedor', _.bind(this.tipoProveedor_check,this));
         //this.model.addValidationTask('check_formato_curp_c', _.bind(this.ValidaFormatoCURP, this));
-        this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
+        //this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
 
 
         /* F. Javier G. Solar
