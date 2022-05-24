@@ -7194,7 +7194,7 @@
                                         for (var t = 0; t < data[2].contents.records.length; t++) {
                                             //Itera telefono casa y celular
                                             if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
-                                                telCyC++;
+                                                telO++;
                                             }
                                             //Itera para telefono de trabajo y celular trabajo
                                             if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
@@ -7520,7 +7520,7 @@ validaReqUniclickInfo: function () {
                                 for (var t = 0; t < data[2].contents.records.length; t++) {
                                     //Itera telefono casa y celular
                                     if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
-                                        telCyC++;
+                                        telO++;
                                     }
                                     //Itera para telefono de trabajo y celular trabajo
                                     if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
