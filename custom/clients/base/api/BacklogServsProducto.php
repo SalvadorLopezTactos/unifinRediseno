@@ -71,7 +71,20 @@ SQL;
 					if($row > 0){
 						$Etapa = 'Autorizada';
 					}else{
-                        $Etapa = 'Devuelta';
+                        $query = <<<SQL
+                        SELECT count(op.id)
+                        FROM Opportunities op
+                        INNER JOIN Opportunities_cstm cs ON cs.id_c = op.id
+                        INNER JOIN accounts_opportunities acc_opp ON acc_opp.opportunity_id = op.id
+                        WHERE acc_opp.account_id = '{$idCliente}'
+                        AND cs.tipo_producto_c = '{$idProducto}'
+                        AND op.date_entered > date_add(NOW(), INTERVAL -2 MONTH)
+                        AND cs.estatus_c = 'DP'
+SQL;
+					    $row = $db->getone($query);
+                        if($row > 0){
+                            $Etapa = 'Devuelta'; // DP
+                        }
                     }
 				}
             }
