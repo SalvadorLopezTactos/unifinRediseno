@@ -692,7 +692,7 @@
                         "\"monto_rechazado_c\":" + Number(monto_rechazado) + "," +
                         "\"monto_sin_solicitud_c\": " + Number(monto_sin_solicitud) + "," +
                         "\"monto_con_solicitud_c\": " + Number(monto_con_solicitud) + "," +
-                        "\"monto_devuelta\": " + Number(monto_devuelta) + "," +
+                        "\"monto_devuelta_c\": " + Number(monto_devuelta) + "," +
                         //"\"monto_comprometido\": " + Number(monto) + "," +
                         "\"comentarios_c\": \"" + comentarios + "\"," +
                         "\"tct_conversion_c\": " + Number(probabilidad) + "," +
