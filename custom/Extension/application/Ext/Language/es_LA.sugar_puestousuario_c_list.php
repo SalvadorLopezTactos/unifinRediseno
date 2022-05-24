@@ -1,5 +1,5 @@
 <?php
- // created: 2022-04-28 11:18:27
+ // created: 2022-05-18 10:25:30
 
 $app_list_strings['puestousuario_c_list']=array (
   '' => '',
@@ -66,4 +66,5 @@ $app_list_strings['puestousuario_c_list']=array (
   61 => 'ASESOR CAC',
   62 => 'ASESOR HUNTER',
   63 => 'INVESTIGACIÓN DE MERCADOS',
+  64 => 'ASESOR LEASING JR',
 );

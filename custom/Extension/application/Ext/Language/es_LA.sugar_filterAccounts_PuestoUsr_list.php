@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-21 11:00:12
+ // created: 2022-05-24 12:50:29
 
 $app_list_strings['filterAccounts_PuestoUsr_list']=array (
   1 => 'EquipoPromo',
@@ -20,4 +20,6 @@ $app_list_strings['filterAccounts_PuestoUsr_list']=array (
   16 => 'Propietario',
   17 => 'EquipoPromo',
   33 => 'EquipoPromo',
+  62 => 'Propietario',
+  64 => 'Propietario',
 );
