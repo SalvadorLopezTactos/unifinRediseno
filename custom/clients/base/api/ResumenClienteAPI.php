@@ -585,13 +585,14 @@ class ResumenClienteAPI extends SugarApi
             $estatus_linea_factoring = 'Vencida';
             $estatus_linea_credito_auto = 'Vencida';
 
-            $str_productos_contratados='';
+            //$str_productos_contratados='';
+            $arr_productos_contratados=[];
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
 
                 //Obtener productos de las solicitudes que se encuentran como Cliente con Linea Autorizada
                 if($opps->tct_etapa_ddw_c=='CL' && $opps->estatus_c=='N'){
-                    $str_productos_contratados.=$app_list_strings['tipo_producto_list'][$opps->tipo_producto_c].", ";
+                    $arr_productos_contratados[]=$app_list_strings['tipo_producto_list'][$opps->tipo_producto_c];
                 }
 
                 /**
@@ -846,8 +847,9 @@ class ResumenClienteAPI extends SugarApi
 
             }
             //Se aplica substring para eliminar la última coma
-            $arr_principal['general_cliente']['productos_contratados'] = substr($str_productos_contratados, 0, -2);
-            if($str_productos_contratados!=''){
+            $arr_principal['general_cliente']['productos_contratados'] = (count($arr_productos_contratados) > 0) ? implode(", ",array_unique($arr_productos_contratados)): '';
+            // substr($str_productos_contratados, 0, -2);
+            if($arr_principal['general_cliente']['productos_contratados'] != ''){
                 $arr_principal['general_cliente']['show_if_linea_autorizada'] = '1';
             }
         }
