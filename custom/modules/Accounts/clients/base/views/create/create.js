@@ -340,6 +340,14 @@
 
         //Oculta fecha de bloqueo para saber si el Origen se habilita
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
+		
+		//Campos Denominación y Régimen Fiscal SAT
+        Object.entries(app.lang.getAppListStrings('actualiza_sat_list')).forEach(([key, value]) => {
+            if(value!=app.user.attributes.id) {
+				this.$('div[data-name=denominacion_c]').css("pointer-events", "none");
+				this.$('div[data-name=regimen_fiscal_sat_c]').css("pointer-events", "none");
+			}
+		});
     },
 
     initialize: function (options) {
