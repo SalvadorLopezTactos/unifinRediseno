@@ -53,7 +53,7 @@ class BacklogServs extends SugarApi
 			AND cs.tipo_producto_c =1
 			AND op.date_entered > date_add(NOW(), INTERVAL -2 MONTH)
 			AND cs.estatus_c IN ('R','CM')
-    SQL;
+SQL;
             $row = $db->getone($query);
             if($row > 0){
                 $Etapa = 'Rechazada';
@@ -67,7 +67,7 @@ class BacklogServs extends SugarApi
                 AND cs.tipo_producto_c =1
                 AND op.date_entered > date_add(NOW(), INTERVAL -2 MONTH)
                 AND cs.estatus_c IN ('E','D','BC','EF','SC','RF','CC','RM')
-    SQL;
+SQL;
                 $row = $db->getone($query);
                 if($row > 0){
                     $Etapa = 'Credito';
@@ -81,7 +81,7 @@ class BacklogServs extends SugarApi
 					AND cs.tipo_producto_c = 1
 					AND op.date_entered > date_add(NOW(), INTERVAL -2 MONTH)
 					AND cs.estatus_c = 'N'
-    SQL;
+SQL;
 					$row = $db->getone($query);
 					if($row > 0){
 						$Etapa = 'Autorizada';
@@ -95,7 +95,7 @@ class BacklogServs extends SugarApi
                         AND cs.tipo_producto_c = 1
                         AND op.date_entered > date_add(NOW(), INTERVAL -2 MONTH)
                         AND cs.estatus_c = 'DP'
-    SQL;
+SQL;
 					    $row = $db->getone($query);
                         if($row > 0){
                             $Etapa = 'Devuelta'; // DP 
@@ -126,7 +126,7 @@ class BacklogServs extends SugarApi
 			WHERE deleted = 0 and estatus_de_la_operacion = 'Comprometida' and tipo_de_operacion NOT IN ('Carga General')
 			AND bl.account_id_c = '{$idCliente}' AND ((mes >= MONTH(NOW()) and anio = YEAR(NOW())) or (anio > YEAR(NOW())))
 
-    SQL;
+SQL;
         if($BL > 0){
             $query .= " and numero_de_backlog = {$BL}";
         }
@@ -185,7 +185,7 @@ class BacklogServs extends SugarApi
 			AND ((mes >= MONTH(NOW()) and anio = YEAR(NOW())) or (anio > YEAR(NOW())))
 			order by bl.anio, bl.mes asc
 			LIMIT 1
-    SQL;
+SQL;
 
         $rows = $db->query($query);
 
