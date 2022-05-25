@@ -1202,8 +1202,9 @@
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //Oculta nombre de campo Potencial_Autos
         $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
-        //Oculta etiqueta de Analizate
+        //Oculta etiqueta de Analizate y analizate cliente
         this.$("div.record-label[data-name='accounts_analizate']").attr('style', 'display:none;');
+        this.$("div.record-label[data-name='accounts_analizate_clientes']").attr('style', 'display:none;');
         //Oculta etiqueta de uni_productos
         this.$("div.record-label[data-name='account_uni_productos']").attr('style', 'display:none;');
 
@@ -8184,6 +8185,13 @@ validaReqUniclickInfo: function () {
                     cont_nlzt.Analizate.Financiera = data[4].contents.Financiera;
                     cont_nlzt.Analizate.Credit = data[4].contents.Credit;
                     cont_nlzt.render();
+                    analizate_cl.Analizate=[];
+                    analizate_cl.Analizate.Financiera=[];
+                    analizate_cl.Analizate.Credit=[];
+                    analizate_cl.Analizate.Financiera = data[4].contents.Financiera;
+                    analizate_cl.Analizate.Credit = data[4].contents.Credit;
+                    analizate_cl.render();
+                   
 
                 }
                 //PLD
@@ -8410,4 +8418,12 @@ validaPropRealCR: function (fields, errors, callback) {
            callback(null, fields, errors);
        }
    },
+
+   muestraCIEC: function (){
+       //Validamos que el usuario logueado sea el mismo asignado a alguno de los productos de la cuenta
+       if(App.user.attributes.id== ( (contexto_cuenta.ResumenProductos.leasing.assigned_user_id && contexto_cuenta.ResumenProductos.leasing.tipo_cuenta=='3' ) || (contexto_cuenta.ResumenProductos.factoring.assigned_user_id && contexto_cuenta.ResumenProductos.factoring.tipo_cuenta=='3') || (contexto_cuenta.ResumenProductos.credito_auto.assigned_user_id && contexto_cuenta.ResumenProductos.credito_auto.tipo_cuenta=='3') ||
+        (contexto_cuenta.ResumenProductos.fleet.assigned_user_id  &&contexto_cuenta.ResumenProductos.fleet.tipo_cuenta=='3' )|| contexto_cuenta.ResumenProductos.uniclick.assigned_user_id || contexto_cuenta.ResumenProductos.seguros.assigned_user_id)){
+
+       }
+   }
 })

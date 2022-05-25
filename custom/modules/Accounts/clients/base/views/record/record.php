@@ -247,6 +247,13 @@ array (
                 'label' => 'Tarea IE Proveedor Quantico',
                 'event' => 'button:proveedor_quantico:click',
               ),
+              19 => 
+              array (
+                'name' => 'solicitar_ciec',
+                'type' => 'rowaction',
+                'label' => 'Solicitar CIEC',
+                'event' => 'button:solicitar_ciec:click',
+              ),
             ),
           ),
           9 => 
@@ -1313,6 +1320,25 @@ array (
           ),
           16 => 
           array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL24',
+            'label' => 'LBL_RECORDVIEW_PANEL24',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'accounts_analizate_clientes',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNTS_ANALIZATE_CLIENTES',
+                'span' => 12,
+              ),
+            ),
+          ),
+          17 => 
+          array (
             'newTab' => true,
             'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL1',
@@ -1378,7 +1404,7 @@ array (
               ),
             ),
           ),
-          17 => 
+          18 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1421,7 +1447,7 @@ array (
               ),
             ),
           ),
-          18 => 
+          19 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1474,7 +1500,7 @@ array (
               ),
             ),
           ),
-          19 => 
+          20 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1537,7 +1563,7 @@ array (
               ),
             ),
           ),
-          20 => 
+          21 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1590,7 +1616,7 @@ array (
               ),
             ),
           ),
-          21 => 
+          22 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
