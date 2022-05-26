@@ -1178,12 +1178,14 @@
         }
 		
 		//Campos Denominación y Régimen Fiscal SAT
-        Object.entries(app.lang.getAppListStrings('actualiza_sat_list')).forEach(([key, value]) => {
-            if(value!=app.user.attributes.id) {
-				self.noEditFields.push('denominacion_c');
-				self.noEditFields.push('regimen_fiscal_sat_c');
-			}
-		});
+		var listaUsuarios = [];
+        Object.entries(App.lang.getAppListStrings('actualiza_sat_list')).forEach(([key, value]) => {
+            listaUsuarios.push(value);
+        });
+        if(!listaUsuarios.includes(app.user.attributes.id)) {
+			self.noEditFields.push('denominacion_c');
+			self.noEditFields.push('regimen_fiscal_sat_c');
+		}
         this._super('_renderHtml');
     },
 
