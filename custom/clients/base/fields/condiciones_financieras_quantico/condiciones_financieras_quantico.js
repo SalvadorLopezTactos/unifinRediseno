@@ -312,7 +312,7 @@
 
                             //Se agrega ajuste para saber cuando mostrar la tabla ajustada, en caso de que solo haya 1 una cf, el campo queda como anteriormente,
                             //En caso contrario, las condiciones financieras se consolidan solo en una fila
-                            if(self.mainRowsBodyTable.length>1){
+                            if(self.mainRowsBodyTable.length>1 && self.mainRowsBodyTable[0].bodyTable[0].select=='1'){//Se aplica parche para condiciones financieras múltiples para tipo Factoraje
                                 //Consolidar todas las CF en una fila
                                 self.showTableRows=0;
                                 self.bodyTableModified=self.mainRowsBodyTable[0].bodyTable;
@@ -812,7 +812,7 @@
 
                             //Se añade condición para mostrar las mismas opciones que las CF de Política y no mostrar todas las opciones de la lista
                             //Esto solo se reaiza cuando se detecta que las CF de Politica, se consolidan en una sola
-                            if(this.mainRowsBodyTable.length>1){
+                            if(this.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4'){
                                 //Dado que es la misma lista para cada CF configurada, se puede obtener siempre el primer item, es por eso que se pasa el "0" de manera fija
                                 valores_select=valores_select=this.mainRowsBodyTable[0].bodyTable[0].valoresCatalogoModified;
 
@@ -867,13 +867,13 @@
             plantillaFila=App.utils.deepCopy(filaPoliticaObtenida);
         }
 
-        if((self.mainRowsBodyTable!=undefined && self.mainRowsBodyTable.length>1) || (this.mainRowsBodyTable!=undefined && this.mainRowsBodyTable.length>1)){
+        //Se aplica condición para cuando se detecte el producto factoraje, se aplique la funcionalidad anterior, es decir, que no se consolide todo sobre una fila y si muestre todas las condiciones disponibles
+        if((self.mainRowsBodyTable!=undefined && self.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4') || (this.mainRowsBodyTable!=undefined && this.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4')){
             for (let index = 0; index < plantillaFila.bodyTable.length; index++) {
                 if(plantillaFila.bodyTable[index].select=="1"){
                     var valorSelect=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
                     plantillaFila.bodyTable[index].valorSelected=$(e.currentTarget).parent().parent().find('select.row-fluid')[index].value;
                     plantillaFila.bodyTable[index].valoresCatalogo=plantillaFila.bodyTable[index].valoresCatalogoModified;
-
                 }
 
                 if(plantillaFila.bodyTable[index].text=="1"){
@@ -908,13 +908,13 @@
         //Condición para controlar funcionamiento anterior, en caso de que mainRowsBodyTable traiga más de una fila, quiere decir que
         //todas las filas se consolidaron en una sola, por lo tanto, el item a dibujar en las CF configuradas se toma a partir de plantillaFila y no de filaPoliticaObtenida
         if(self.mainRowsBodyTable!=undefined){
-            if(self.mainRowsBodyTable.length>1){
+            if(self.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4'){
                 this.mainRowsConfigBodyTable.push(plantillaFila);
             }else{
                 this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
             }
         }else{
-            if(this.mainRowsBodyTable.length>1){
+            if(this.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4'){
                 this.mainRowsConfigBodyTable.push(plantillaFila);
             }else{
                 this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
@@ -935,7 +935,7 @@
 
         /* Condición para seguir controlando el ajuste para filas consolidades en una sola para cuando las CF politica vienen con más de 1 valor*/
         if(self.mainRowsBodyTable!=undefined){
-            if(self.mainRowsBodyTable.length>1){
+            if(self.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4'){
                 //Validando que el primer elemento sea un select
                 if(self.mainRowsBodyTable[0].bodyTable[0].select=='1'){
                     for (let index = 0; index < camposEnfila.length; index++) {
@@ -1099,7 +1099,7 @@
                 }
             }
         }else{
-            if(this.mainRowsBodyTable.length>1){
+            if(this.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4'){
                 if(this.mainRowsBodyTable[0].bodyTable[0].select=='1'){
                     for (let index = 0; index < camposEnfila.length; index++) {
                         var elemento = $(camposEnfila).eq(index);
@@ -1800,7 +1800,7 @@
            $(this.$el).parent().parent().removeClass('span10').addClass('span12');
        }
 
-       if(this.view.currentState != "create" && this.view.currentState != "" && this.tplName=='edit' && this.mainRowsBodyTable.length>1){
+       if(this.view.currentState != "create" && this.view.currentState != "" && this.tplName=='edit' && this.mainRowsBodyTable.length>1 && this.model.get('tipo_producto_c')!='4'){
            //Se aplica evento change en vista de edicion de campo custom para establecer las opciones de Plazo Meses Días Correctamente con base al Tipo Activo seleccionado por default
            $('select.setDefaultValues').trigger('change');
        }
