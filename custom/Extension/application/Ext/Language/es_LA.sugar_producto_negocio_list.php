@@ -1,5 +1,5 @@
 <?php
- // created: 2022-02-28 12:36:36
+ // created: 2022-05-20 10:39:37
 
 $app_list_strings['producto_negocio_list']=array (
   0 => '',

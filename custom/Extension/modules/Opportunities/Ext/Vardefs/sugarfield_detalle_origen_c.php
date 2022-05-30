@@ -1,5 +1,5 @@
 <?php
- // created: 2022-05-18 13:51:00
+ // created: 2022-05-27 09:05:43
 $dictionary['Opportunity']['fields']['detalle_origen_c']['labelValue']='Detalle Origen';
 $dictionary['Opportunity']['fields']['detalle_origen_c']['dependency']='';
 $dictionary['Opportunity']['fields']['detalle_origen_c']['required_formula']='';
