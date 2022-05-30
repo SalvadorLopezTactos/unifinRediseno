@@ -227,8 +227,10 @@ SQL;
         $args_uni_producto = [];
         $args_uni_producto['idCuenta'] = $bean->account_id;
         $args_uni_producto['Producto'] = $bean->tipo_producto_c;
+		$args_uni_producto['Negocio'] = $bean->negocio_c;
+		$args_uni_producto['Financiero'] = $bean->producto_financiero_c;
         //$GLOBALS['log']->fatal('Tipo producto JG: ' . $args_uni_producto['Producto']);
-       // $GLOBALS['log']->fatal('Vobo Director JG: ' . $bean->vobo_dir_c);
+        // $GLOBALS['log']->fatal('Vobo Director JG: ' . $bean->vobo_dir_c);
 
         $EjecutaApi = new excluir_productos();
         $response_exluye = $EjecutaApi->Excluyeprecalif(null, $args_uni_producto);
@@ -263,7 +265,7 @@ SQL;
         //$GLOBALS['log']->fatal('if para sos ' .$bean->id_process_c);
         if ($bean->tipo_producto_c == 1 && ($bean->producto_financiero_c == 0 ||$bean->producto_financiero_c == "") && $bean->monto_c >= 7500000 ) {
             $GLOBALS['log']->fatal('Valida creación de SOS' );
-            OpportunityLogic::solicitudSOS($bean);
+            //OpportunityLogic::solicitudSOS($bean);
         }
 
         if ($generaSolicitud) {
@@ -357,6 +359,8 @@ SQL;
         $args_uni_producto = [];
         $args_uni_producto['idCuenta'] = $bean->account_id;
         $args_uni_producto['Producto'] = $bean->tipo_producto_c;
+		$args_uni_producto['Negocio'] = $bean->negocio_c;
+		$args_uni_producto['Financiero'] = $bean->producto_financiero_c;
         $EjecutaApi = new excluir_productos();
         $response_exluye = $EjecutaApi->Excluyeprecalif(null, $args_uni_producto);
 

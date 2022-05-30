@@ -1,5 +1,5 @@
 <?php
- // created: 2021-02-08 11:37:09
+ // created: 2022-05-25 18:57:27
 
 $app_list_strings['tipo_proveedor_compras_list']=array (
   '' => '',
@@ -9,4 +9,5 @@ $app_list_strings['tipo_proveedor_compras_list']=array (
   4 => 'Comercializadora',
   5 => 'Ensamblador',
   6 => 'Vendor',
+  7 => 'fleet',
 );

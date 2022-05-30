@@ -473,7 +473,12 @@ array (
             'name' => 'admin_backlog_c',
             'label' => 'LBL_ADMIN_BACKLOG',
           ),
-          1 => '',
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'excluye_valida_c',
+            'label' => 'LBL_EXCLUYE_VALIDA',
+          ),
         ),
       ),
     ),
