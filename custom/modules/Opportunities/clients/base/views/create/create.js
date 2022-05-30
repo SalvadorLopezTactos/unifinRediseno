@@ -435,7 +435,6 @@
         }
 		this.$('[data-name="condiciones_financieras_quantico"]').hide();
 		$('[data-name="condiciones_financieras_quantico"]').hide();
-		this.model.set('detalle_origen_c','1');
     },
 
     adminUserCartera: function () {
@@ -1750,9 +1749,6 @@
     },
 
     valida_requeridos: function (fields, errors, callback) {
-		errors['detalle_origen_c'].required = false;
-		delete errors['detalle_origen_c'];
-		console.log(errors);
         var campos = "";
         var omitir = [];
         _.each(errors, function (value, key) {
