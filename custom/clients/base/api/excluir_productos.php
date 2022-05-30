@@ -13,7 +13,7 @@ class excluir_productos extends SugarApi
         return array(
             'GET_UserRoles' => array(
                 'reqType' => 'GET',
-                'path' => array('productoExcluye', '?', '?'),
+                'path' => array('productoExcluye', '?', '?', '?', '?'),
                 'pathVars' => array('', 'idCuenta', 'Producto', 'Negocio', 'Financiero'),
                 'method' => 'Excluyeprecalif',
                 'shortHelp' => 'Obtiene el campo exluir_precalifica de Uni_productos de la cuenta',
