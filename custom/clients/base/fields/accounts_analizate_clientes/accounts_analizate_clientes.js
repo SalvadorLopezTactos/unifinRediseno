@@ -16,8 +16,8 @@
         //Y subtipo_registro_cuenta_c
        //var estado =analizate_cl.Financiera.estado;       
        //var fecha = analizate_cl.Financiera.fecha;
-        //var estado = Analizate.Credit.estado;
-        //var fecha = Analizate.Credit.fecha;
+        var estado = Analizate.Credit.estado;
+        var fecha = Analizate.Credit.fecha;
         console.log("Inicia campo cstm analizate clientes.");
         if (estado == 1) {
             $("#estado1").removeClass('ocult');
