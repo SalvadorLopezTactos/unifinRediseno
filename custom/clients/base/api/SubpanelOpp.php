@@ -58,15 +58,13 @@ SQL;
     public function duplicadosBenefeSuby($api, $args)
     {
         $GLOBALS['log']->fatal("Del query " . print_r($args, true));
-
         global $db;
-
         $accountId = $args['data']['account_id'];
         $tipo_producto_c = $args['data']['tipo_producto_c'];
         $idOportunidad=$args['data']['idOportunidad'];
         $concatenado=$args['data']['concatenado'];
-
-
+		$negocio_c=$args['data']['negocio_c'];
+		$producto_financiero_c=$args['data']['producto_financiero_c'];
         $GLOBALS['log']->fatal("id oportunidad " . $idOportunidad + "  c " .$concatenado);
 
         $query = "SELECT * from accounts_opportunities rel
@@ -78,15 +76,13 @@ SQL;
 WHERE CONCAT(COALESCE(cstm.estado_benef_c,''),COALESCE(cstm.municipio_benef_c,''),COALESCE(cstm.ent_gob_benef_c,''),
                      COALESCE(cstm.account_id1_c,''),COALESCE(cstm.emp_no_reg_benef_c,''))='{$concatenado}'
       AND cstm.tipo_producto_c= '{$tipo_producto_c}'
+	  AND cstm.negocio_c= '{$negocio_c}'
+	  AND cstm.producto_financiero_c= '{$producto_financiero_c}'
       AND op.deleted=0
       AND (cstm.estatus_c!='K' AND cstm.estatus_c!='R' AND cstm.estatus_c!='CM' OR cstm.estatus_c is NULL )
       AND op.id !='{$idOportunidad}'";
 
         $GLOBALS['log']->fatal("Del query " . $query);
-
-
-
-
 
         $result = $db->query($query);
         $duplicado = 0;
@@ -98,11 +94,8 @@ WHERE CONCAT(COALESCE(cstm.estado_benef_c,''),COALESCE(cstm.municipio_benef_c,''
             $mensaje = 'No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud con
             la misma información del Área beneficiada';
         }
-
         $respuesta = ["duplicado" => $duplicado, "mensaje" => $mensaje];
         $GLOBALS['log']->fatal("Del query " . print_r($respuesta, true));
-
         return $respuesta;
-
     }
 }

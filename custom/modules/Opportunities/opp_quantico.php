@@ -23,6 +23,8 @@ class IntegracionQuantico
         $args_uni_producto = [];
         $args_uni_producto['idCuenta'] = $bean->account_id;
         $args_uni_producto['Producto'] = $bean->tipo_producto_c;
+		$args_uni_producto['Negocio'] = $bean->negocio_c;
+		$args_uni_producto['Financiero'] = $bean->producto_financiero_c;
         $EjecutaApi = new excluir_productos();
         $response_exluye = $EjecutaApi->Excluyeprecalif(null, $args_uni_producto);
         //consulta no viable

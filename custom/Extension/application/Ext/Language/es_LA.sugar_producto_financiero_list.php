@@ -1,5 +1,5 @@
 <?php
- // created: 2022-04-04 15:17:08
+ // created: 2022-05-20 12:16:58
 
 $app_list_strings['producto_financiero_list']=array (
   0 => '',
@@ -34,7 +34,7 @@ $app_list_strings['producto_financiero_list']=array (
   39 => 'UNICREDIT',
   40 => 'CRÉDITO SOS',
   41 => 'UNILEASING',
-  42 => 'ARRENDAMIENTO ESTRUCTURADO',
+  42 => 'ARRENDAMIENTO ESTRUCTURADO PURO',
   43 => 'CRÉDITO ESTRUCTURADO',
   44 => 'ARRENDAMIENTO ESTRUCTURADO USD',
   45 => 'CRÉDITO ESTRUCTURADO UC',
@@ -78,4 +78,9 @@ $app_list_strings['producto_financiero_list']=array (
   83 => 'UNIFACTORING',
   84 => 'ARRENDAMIENTO OPERATIVO',
   85 => 'UNIFIN CARD',
+  86 => 'ARRENDAMIENTO ESTRUCTURADO FRONTERA 8%',
+  87 => 'ARRENDAMIENTO ESTRUCTURADO AGRICOLA DOLARES',
+  88 => 'ARRENDAMIENTO ESTRUCTURADO AGRÍCOLA',
+  89 => 'ARRENDAMIENTO ESTRUCTURADO FRONTERA',
+  90 => 'CRÉDITO PUENTE',
 );

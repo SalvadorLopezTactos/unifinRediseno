@@ -214,8 +214,20 @@ array (
               5 => 
               array (
                 'readonly' => false,
+                'name' => 'valida_comercial_c',
+                'label' => 'LBL_VALIDA_COMERCIAL',
+              ),
+              6 => 
+              array (
+                'readonly' => false,
                 'name' => 'asesor_producto_c',
                 'label' => 'LBL_ASESOR_PRODUCTO',
+              ),
+              7 => 
+              array (
+                'readonly' => false,
+                'name' => 'excluir_precalifica_c',
+                'label' => 'LBL_EXCLUIR_PRECALIFICA',
               ),
             ),
           ),
