@@ -8,14 +8,14 @@
         this._super('initialize', [options]);
         //Carga lista de valores para la creacion de la url portal
         cont_nlzt.lista_url = App.lang.getAppListStrings('analizate_url_list');
-        this.model.on('sync', this.tipoSubtipo_vista, this);
+        this.model.on('sync', this.cargapipelineCliente, this);
     },
 
-    tipoSubtipo_vista: function () {
+    cargapipelineCliente: function () {
         // tipo_registro_cuenta_c
         //Y subtipo_registro_cuenta_c
-       var estado =analizate_cl.Financiera.estado;       
-       var fecha = analizate_cl.Financiera.fecha;
+       //var estado =analizate_cl.Financiera.estado;       
+       //var fecha = analizate_cl.Financiera.fecha;
         //var estado = Analizate.Credit.estado;
         //var fecha = Analizate.Credit.fecha;
         console.log("Inicia campo cstm analizate clientes.");

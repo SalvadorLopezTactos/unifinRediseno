@@ -321,6 +321,8 @@
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
         this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
+        
+
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
 
@@ -8238,6 +8240,10 @@ validaReqUniclickInfo: function () {
                 }
                 //Final de funcion, mandamos ejecutar funcion de requniclick
                 this.validaReqUniclickInfo();
+                //Ejecuta funcion para boton CIEC
+                this.muestraCIEC();
+                //render a campo cstm Clientes analizate
+                analizate_cl.render();
 
             }, this)
         });
@@ -8421,9 +8427,16 @@ validaPropRealCR: function (fields, errors, callback) {
 
    muestraCIEC: function (){
        //Validamos que el usuario logueado sea el mismo asignado a alguno de los productos de la cuenta
-       if(App.user.attributes.id== ( (contexto_cuenta.ResumenProductos.leasing.assigned_user_id && contexto_cuenta.ResumenProductos.leasing.tipo_cuenta=='3' ) || (contexto_cuenta.ResumenProductos.factoring.assigned_user_id && contexto_cuenta.ResumenProductos.factoring.tipo_cuenta=='3') || (contexto_cuenta.ResumenProductos.credito_auto.assigned_user_id && contexto_cuenta.ResumenProductos.credito_auto.tipo_cuenta=='3') ||
-        (contexto_cuenta.ResumenProductos.fleet.assigned_user_id  &&contexto_cuenta.ResumenProductos.fleet.tipo_cuenta=='3' )|| contexto_cuenta.ResumenProductos.uniclick.assigned_user_id || contexto_cuenta.ResumenProductos.seguros.assigned_user_id)){
-
+        var leasing= App.user.attributes.id== contexto_cuenta.ResumenProductos.leasing.assigned_user_id && contexto_cuenta.ResumenProductos.leasing.tipo_cuenta=='3' ? true : false;;
+        var factoring= App.user.attributes.id==contexto_cuenta.ResumenProductos.factoring.assigned_user_id && contexto_cuenta.ResumenProductos.factoring.tipo_cuenta=='3'? true : false;;
+        var creditauto= App.user.attributes.id== contexto_cuenta.ResumenProductos.credito_auto.assigned_user_id && contexto_cuenta.ResumenProductos.credito_auto.tipo_cuenta=='3' ? true : false;;
+        var fleet = App.user.attributes.id== contexto_cuenta.ResumenProductos.fleet.assigned_user_id && contexto_cuenta.ResumenProductos.fleet.tipo_cuenta=='3'? true : false;;
+        var uniclick = App.user.attributes.id==contexto_cuenta.ResumenProductos.uniclick.assigned_user_id && contexto_cuenta.ResumenProductos.uniclick.tipo_cuenta=='3'? true : false;;
+    
+        if(leasing==true || factoring==true||creditauto==true||fleet==true||uniclick==true){
+            $('[name="solicitar_ciec"]').show();
+       }else{
+            $('[name="solicitar_ciec"]').hide();
        }
    }
 })
