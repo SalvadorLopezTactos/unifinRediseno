@@ -1,14 +1,16 @@
 ({
-    visible: false,
     initialize: function (options) {
         //Inicializa campo custom
         options = options || {};
         options.def = options.def || {};
         analizate_cl=this;
         this._super('initialize', [options]);
-        //Carga lista de valores para la creacion de la url portal
-        cont_nlzt.lista_url = App.lang.getAppListStrings('analizate_url_list');
+        //Carga lista de valores para la creacion de la url portal        
         this.model.on('sync', this.cargapipelineCliente, this);
+    },
+
+    _render: function () {
+        this._super("_render");
     },
 
     cargapipelineCliente: function () {
@@ -16,8 +18,7 @@
         //Y subtipo_registro_cuenta_c
        //var estado =analizate_cl.Financiera.estado;       
        //var fecha = analizate_cl.Financiera.fecha;
-        var estado = Analizate.Credit.estado;
-        var fecha = Analizate.Credit.fecha;
+       
         console.log("Inicia campo cstm analizate clientes.");
         if (estado == 1) {
             $("#estado1").removeClass('ocult');
@@ -73,7 +74,5 @@
         $('[data-name="subtipo_registro_cuenta_c"]').hide();
     },
 
-    _render: function () {
-        this._super("_render");
-    }
+   
 })

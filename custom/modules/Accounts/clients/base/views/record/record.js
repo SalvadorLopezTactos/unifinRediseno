@@ -233,6 +233,10 @@
         this.model.on('sync', this.checkProveedor, this);
         //Display or Hide Vista360
         this.model.on('sync', this._hideVista360, this);
+        //Display or Hide Proveedor Analizte
+        this.model.on('sync', this._panel_anlzt_proveedor, this);
+         //Display or Hide Analizte Cliente
+         this.model.on('sync', this._panel_anlzt_cliente, this);
         //Solo Lectura campos Origen
         this.model.on('sync', this.readOnlyOrigen, this);
         /* @author F. Javier Garcia S. 10/07/2018
@@ -8193,6 +8197,7 @@ validaReqUniclickInfo: function () {
                     analizate_cl.Analizate.Financiera = data[4].contents.Financiera;
                     analizate_cl.Analizate.Credit = data[4].contents.Credit;
                     analizate_cl.render();
+                    analizate_cl.cargapipelineCliente();
                    
 
                 }
@@ -8438,5 +8443,24 @@ validaPropRealCR: function (fields, errors, callback) {
        }else{
             $('[name="solicitar_ciec"]').hide();
        }
-   }
+   },
+
+   _panel_anlzt_proveedor: function () {
+        if (this.model.get('tipo_registro_cuenta_c') == '5') {
+                //Muestra subpanel Proveedor De Analizate
+                this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").show();
+
+        }else{
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+        }
+    }, 
+    _panel_anlzt_cliente: function () {
+        if (this.model.get('tipo_registro_cuenta_c') == '3') {
+                //Muestra subpanel Cliente De Analizate
+                this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").show();
+
+        }else{
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").hide();
+        }
+    }, 
 })
