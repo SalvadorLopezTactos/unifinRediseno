@@ -8461,7 +8461,7 @@ validaReqUniclickInfo: function () {
    },
 
    _panel_anlzt_proveedor: function () {
-        if (this.model.get('tipo_registro_cuenta_c') == '5') {
+        if (this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c')==true) {
             //Muestra subpanel Proveedor De Analizate
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").show();
         }else{
