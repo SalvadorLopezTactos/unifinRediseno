@@ -38,7 +38,7 @@ class Analizate extends SugarApi
     }
 
     public function ObtieneFinanciera($api, $args){
-
+        //Respuesta analizate proveedor financiera
         $data=array();
         $data['Financiera']=array();
         $data['Financiera']['estado']="";
@@ -48,7 +48,7 @@ class Analizate extends SugarApi
         $data['Financiera']['url_documento']="";
         $data['Financiera']['url_portal']="";
         $idCuenta = $args['id'];
-
+        //Respuesta analizate proveedor credit
         $data['Credit']=array();
         $data['Credit']['estado']="";
         $data['Credit']['fecha']="";
@@ -56,6 +56,14 @@ class Analizate extends SugarApi
         $data['Credit']['fecha_documento']="";
         $data['Credit']['url_documento']="";
         $data['Credit']['url_portal']="";
+        //Respuesta analizate cliente
+        $data['AnalizateCliente']=array();
+        $data['AnalizateCliente']['estado']="";
+        $data['AnalizateCliente']['fecha']="";
+        $data['AnalizateCliente']['documento']="";
+        $data['AnalizateCliente']['fecha_documento']="";
+        $data['AnalizateCliente']['url_documento']="";
+        $data['AnalizateCliente']['url_portal']="";
 
         //Cargar toda la informacion del bean, en este caso de la cuenta
         $beanCuenta = BeanFactory::getBean("Accounts", $idCuenta);
@@ -65,61 +73,92 @@ class Analizate extends SugarApi
         $relatedBeans = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
         //Se iteran las n tandas de registros
         foreach ($relatedBeans as $estados) {
-
-            if ($estados->empresa==1){
+            if($estados->tipo_registro_cuenta_c == '3'){
+                //Agrega información a sección cliente
                 if ($estados->tipo==1){
                     //En los siguientes 2 if, se valida que el valor de la fecha sea el mas reciente en cada iteracion
                     //Para así obtener el registro más reciente y asignarle los valores de fecha y estado
-                    if ($data['Financiera']['fecha']==""){
-                        $data['Financiera']['fecha']=$estados->fecha_actualizacion;
-                        $data['Financiera']['estado']=$estados->estado;
-                        $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
+                    if ($data['AnalizateCliente']['fecha']==""){
+                        $data['AnalizateCliente']['fecha']=$estados->fecha_actualizacion;
+                        $data['AnalizateCliente']['estado']=$estados->estado;
+                        $data['AnalizateCliente']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
                     }
-                    if($estados->fecha_actualizacion>$data['Financiera']['fecha']){
-                        $data['Financiera']['fecha']=$estados->fecha_actualizacion;
-                        $data['Financiera']['estado']=$estados->estado;
-                        $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
+                    if($estados->fecha_actualizacion>$data['AnalizateCliente']['fecha']){
+                        $data['AnalizateCliente']['fecha']=$estados->fecha_actualizacion;
+                        $data['AnalizateCliente']['estado']=$estados->estado;
+                        $data['AnalizateCliente']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
                     }
 
                 }else{
                     //Recuperar registro mas reciente (Url del documento)
-                    if ($data['Financiera']['fecha_documento']==""){
-                        $data['Financiera']['documento']=$estados->documento;
-                        $data['Financiera']['fecha_documento']=$estados->fecha_actualizacion;
-                        $data['Financiera']['url_documento']=$estados->url_documento;
+                    if ($data['AnalizateCliente']['fecha_documento']==""){
+                        $data['AnalizateCliente']['documento']=$estados->documento;
+                        $data['AnalizateCliente']['fecha_documento']=$estados->fecha_actualizacion;
+                        $data['AnalizateCliente']['url_documento']=$estados->url_documento;
                     }
-                    if($estados->fecha_actualizacion>$data['Financiera']['fecha_documento']){
-                        $data['Financiera']['fecha_documento']=$estados->fecha_actualizacion;
-                        $data['Financiera']['documento']=$estados->documento;
-                        $data['Financiera']['url_documento']=$estados->url_documento;
+                    if($estados->fecha_actualizacion>$data['AnalizateCliente']['fecha_documento']){
+                        $data['AnalizateCliente']['fecha_documento']=$estados->fecha_actualizacion;
+                        $data['AnalizateCliente']['documento']=$estados->documento;
+                        $data['AnalizateCliente']['url_documento']=$estados->url_documento;
                     }
                 }
-            }else{
-                //Validacion de fechas para empresa 2 (Credit)
-                if ($estados->tipo==1){
-                    //En los siguientes 2 if, se valida que el valor de la fecha sea el mas reciente en cada iteracion
-                    //Para así obtener el registro más reciente y asignarle los valores de fecha y estado
-                    if ($data['Credit']['fecha']==""){
-                        $data['Credit']['fecha']=$estados->fecha_actualizacion;
-                        $data['Credit']['estado']=$estados->estado;
-                        $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
-                    }
-                    if($estados->fecha_actualizacion>$data['Credit']['fecha']){
-                        $data['Credit']['fecha']=$estados->fecha_actualizacion;
-                        $data['Credit']['estado']=$estados->estado;
-                        $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
+            }else {
+                //Agrega información a sección proveedor
+                if ($estados->empresa==1){
+                    if ($estados->tipo==1){
+                        //En los siguientes 2 if, se valida que el valor de la fecha sea el mas reciente en cada iteracion
+                        //Para así obtener el registro más reciente y asignarle los valores de fecha y estado
+                        if ($data['Financiera']['fecha']==""){
+                            $data['Financiera']['fecha']=$estados->fecha_actualizacion;
+                            $data['Financiera']['estado']=$estados->estado;
+                            $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
+                        }
+                        if($estados->fecha_actualizacion>$data['Financiera']['fecha']){
+                            $data['Financiera']['fecha']=$estados->fecha_actualizacion;
+                            $data['Financiera']['estado']=$estados->estado;
+                            $data['Financiera']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
+                        }
+
+                    }else{
+                        //Recuperar registro mas reciente (Url del documento)
+                        if ($data['Financiera']['fecha_documento']==""){
+                            $data['Financiera']['documento']=$estados->documento;
+                            $data['Financiera']['fecha_documento']=$estados->fecha_actualizacion;
+                            $data['Financiera']['url_documento']=$estados->url_documento;
+                        }
+                        if($estados->fecha_actualizacion>$data['Financiera']['fecha_documento']){
+                            $data['Financiera']['fecha_documento']=$estados->fecha_actualizacion;
+                            $data['Financiera']['documento']=$estados->documento;
+                            $data['Financiera']['url_documento']=$estados->url_documento;
+                        }
                     }
                 }else{
-                    //Recuperar registro mas reciente (Url del documento)
-                    if ($data['Credit']['fecha_documento']==""){
-                        $data['Credit']['documento']=$estados->documento;
-                        $data['Credit']['fecha_documento']=$estados->fecha_actualizacion;
-                        $data['Credit']['url_documento']=$estados->url_documento;
-                    }
-                    if($estados->fecha_actualizacion>$data['Credit']['fecha_documento']){
-                        $data['Credit']['fecha_documento']=$estados->fecha_actualizacion;
-                        $data['Credit']['documento']=$estados->documento;
-                        $data['Credit']['url_documento']=$estados->url_documento;
+                    //Validacion de fechas para empresa 2 (Credit)
+                    if ($estados->tipo==1){
+                        //En los siguientes 2 if, se valida que el valor de la fecha sea el mas reciente en cada iteracion
+                        //Para así obtener el registro más reciente y asignarle los valores de fecha y estado
+                        if ($data['Credit']['fecha']==""){
+                            $data['Credit']['fecha']=$estados->fecha_actualizacion;
+                            $data['Credit']['estado']=$estados->estado;
+                            $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
+                        }
+                        if($estados->fecha_actualizacion>$data['Credit']['fecha']){
+                            $data['Credit']['fecha']=$estados->fecha_actualizacion;
+                            $data['Credit']['estado']=$estados->estado;
+                            $data['Credit']['url_portal']='&UUID='.base64_encode($beanCuenta->id).'&RFC_CIEC='.base64_encode($beanCuenta->rfc).'&MAIL='.base64_encode($beanCuenta->email1);
+                        }
+                    }else{
+                        //Recuperar registro mas reciente (Url del documento)
+                        if ($data['Credit']['fecha_documento']==""){
+                            $data['Credit']['documento']=$estados->documento;
+                            $data['Credit']['fecha_documento']=$estados->fecha_actualizacion;
+                            $data['Credit']['url_documento']=$estados->url_documento;
+                        }
+                        if($estados->fecha_actualizacion>$data['Credit']['fecha_documento']){
+                            $data['Credit']['fecha_documento']=$estados->fecha_actualizacion;
+                            $data['Credit']['documento']=$estados->documento;
+                            $data['Credit']['url_documento']=$estados->url_documento;
+                        }
                     }
                 }
             }
@@ -135,6 +174,12 @@ class Analizate extends SugarApi
             $fecha1 = new DateTime($data['Credit']['fecha'], new DateTimeZone ('UTC'));
             $fecha1->setTimezone(new DateTimeZone('CST'));
             $data['Credit']['fecha'] = $fecha1->format('Y-m-d H:i:s');
+        }
+        if ($data['AnalizateCliente']['fecha']!="") {
+            //Variable para convertir la hora
+            $fecha1 = new DateTime($data['AnalizateCliente']['fecha'], new DateTimeZone ('UTC'));
+            $fecha1->setTimezone(new DateTimeZone('CST'));
+            $data['AnalizateCliente']['fecha'] = $fecha1->format('Y-m-d H:i:s');
         }
 
         //Termina iteracion

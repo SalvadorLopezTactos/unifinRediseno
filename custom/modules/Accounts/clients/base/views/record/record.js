@@ -321,7 +321,7 @@
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
         this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
-        
+
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
@@ -1178,7 +1178,7 @@
                 self.noEditFields.push('tipo_proveedor_compras_c');
             }
         }
-		
+
 		//Campos Denominación y Régimen Fiscal SAT
 		var listaUsuarios = [];
         Object.entries(App.lang.getAppListStrings('actualiza_sat_list')).forEach(([key, value]) => {
@@ -8191,16 +8191,21 @@ validaReqUniclickInfo: function () {
                     cont_nlzt.Analizate=[];
                     cont_nlzt.Analizate.Financiera=[];
                     cont_nlzt.Analizate.Credit=[];
+                    cont_nlzt.Analizate.Cliente=[];
                     cont_nlzt.Analizate.Financiera = data[4].contents.Financiera;
                     cont_nlzt.Analizate.Credit = data[4].contents.Credit;
+                    cont_nlzt.Analizate.Cliente = data[4].contents.AnalizateCliente;
                     cont_nlzt.render();
                     analizate_cl.Analizate=[];
                     analizate_cl.Analizate.Financiera=[];
                     analizate_cl.Analizate.Credit=[];
+                    analizate_cl.Analizate.Cliente=[];
                     analizate_cl.Analizate.Financiera = data[4].contents.Financiera;
                     analizate_cl.Analizate.Credit = data[4].contents.Credit;
+                    analizate_cl.Analizate.Cliente = data[4].contents.AnalizateCliente;
+                    analizate_cl.cargapipelineCliente();
                     analizate_cl.render();
-                   
+
 
                 }
                 //PLD
@@ -8439,7 +8444,7 @@ validaPropRealCR: function (fields, errors, callback) {
         var creditauto= App.user.attributes.id== contexto_cuenta.ResumenProductos.credito_auto.assigned_user_id && contexto_cuenta.ResumenProductos.credito_auto.tipo_cuenta=='3' ? true : false;;
         var fleet = App.user.attributes.id== contexto_cuenta.ResumenProductos.fleet.assigned_user_id && contexto_cuenta.ResumenProductos.fleet.tipo_cuenta=='3'? true : false;;
         var uniclick = App.user.attributes.id==contexto_cuenta.ResumenProductos.uniclick.assigned_user_id && contexto_cuenta.ResumenProductos.uniclick.tipo_cuenta=='3'? true : false;;
-    
+
         if(leasing==true || factoring==true||creditauto==true||fleet==true||uniclick==true){
             $('[name="solicitar_ciec"]').show();
        }else{
