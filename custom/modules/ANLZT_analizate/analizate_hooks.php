@@ -22,14 +22,32 @@ class analizate_hooks  {
                 $full_name = $cuenta->name;
                 $rfc = $cuenta->rfc_c;
                 $idCuenta = $cuenta->id;
+                 //Conversion de tipo de persona (regimen fiscal)
+                $regimen=$cuenta->tipodepersona_c;
+                $tipopersona='';
 
-                $mailHTML = '
-                  <font face="verdana" color="#635f5f">
-                    Estimado cliente <b>' . $full_name . ' :</b>
-                    <p>
-                      <br>Para UNIFIN FINANCIERA SAB DE CV es importante llevar a cabo el proceso de alta como proveedor con total seguridad y transparencia, por lo cual solicitamos proporcionar tus datos en el siguiente link:
-                      <br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc). '&MAIL=' .base64_encode($correo).'">Da Click Aquí</a>
-                      <br><br>Por favor para cualquier comentario dirígete al comprador que te contacto.
+                switch($regimen){
+                  case 'Persona Fisica':
+                    $tipopersona='PF';
+                    break;
+                  case 'Persona Fisica con Actividad Empresarial':
+                    $tipopersona='PFAE';
+                    break;
+                  case 'Persona Moral':
+                    $tipopersona='PM';
+                    break;  
+                }
+
+            //$GLOBALS['log']->fatal('Envio de correo a' . $full_name . '');
+            //$GLOBALS['log']->fatal('>>>>' . $url . '<<<<');
+
+            $mailHTML = '
+              <font face="verdana" color="#635f5f">
+                Estimado proveedor <b>' . $full_name . ' :</b>
+                <p>
+                  <br>Para UNIFIN FINANCIERA SAB DE CV es importante llevar a cabo el proceso de alta como proveedor con total seguridad y transparencia, por lo cual solicitamos proporcionar tus datos en el siguiente link:
+                  <br><a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc). '&MAIL=' .base64_encode($correo).'&TP='.base64_encode($tipopersona).'">Da Click Aquí</a>
+                  <br><br>Por favor para cualquier comentario dirígete al comprador que te contacto.
                     </p>
                     <br>Atentamente
                   </font>
