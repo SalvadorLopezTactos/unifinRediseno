@@ -2066,14 +2066,14 @@
         var prod_financiero=this.model.get('producto_financiero_c');
         var etapa = this.model.get('tct_etapa_ddw_c');
 
-        if (((producto== 1 && negocio == 5 /*(negocio == 5 || negocio == 3)*/ && (prod_financiero == "" || prod_financiero == "0")) || (producto=="2" && (negocio!="2" || negocio!="10"))) && etapa == "SI" && $.isEmptyObject(errors)) {
+        if (((producto== 1 && negocio == 5 /*(negocio == 5 || negocio == 3) && (prod_financiero == "" || prod_financiero == "0")*/) || (producto=="2" && (negocio!="2" || negocio!="10"))) && etapa == "SI" && $.isEmptyObject(errors)) {
             var operacion = this.model.get('tipo_de_operacion_c');
             var status = this.model.get('estatus_c');
             var cuenta = this.model.get('account_id');
 
             if (operacion == 'LINEA_NUEVA' && etapa == "SI" && status != 'K') {
                 //se manda el producto 1 constante ya que no se tiene producto CS como producto en la cuenta
-                app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/1"), null, {
+                app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/1/" + negocio + "/" + prod_financiero), null, {
                     success: _.bind(function (data) {
                         if (data == '1') {
                             console.log('Recupera check excluye');
@@ -2165,6 +2165,8 @@
         ) {
             var cliente = this.model.get('account_id');
             var tipo = this.model.get('tipo_producto_c');
+			var negocio = this.model.get('negocio_c');
+			var producto_financiero = this.model.get('producto_financiero_c');
             var edobenefe = this.model.get('estado_benef_c') == undefined ? '' : this.model.get('estado_benef_c');
             var munibenefe = this.model.get('municipio_benef_c') == undefined ? '' : this.model.get('municipio_benef_c');
             var entibenefe = this.model.get('ent_gob_benef_c') == undefined ? '' : this.model.get('ent_gob_benef_c');
@@ -2176,7 +2178,9 @@
             var args = {
                 'account_id': cliente,
                 'tipo_producto_c': tipo,
-                'concatenado': concatenado
+                'concatenado': concatenado,
+				'negocio_c': negocio,
+				'producto_financiero_c': producto_financiero
             };
             app.alert.show('duplicado_BenefSuby', {
                 level: 'process',
@@ -2336,6 +2340,9 @@
                     if (data != "") {
                         for (var i = 0; i < data.length; i++) {
                             if (data[i].disponible_seleccion == 1 && data[i].negocio == tipo_negocio) {
+                                temp_array.push(data[i].producto_financiero);
+                            }
+                            if (data[i].disponible_seleccion != 1 && data[i].negocio == tipo_negocio && data[i].excluir_precalifica_c == 1 && app.user.attributes.excluye_valida_c == 1) {
                                 temp_array.push(data[i].producto_financiero);
                             }
                         }

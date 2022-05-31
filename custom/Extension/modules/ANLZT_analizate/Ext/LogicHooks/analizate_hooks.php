@@ -13,3 +13,11 @@ $hook_array['after_save'][] = Array(
     'analizate_hooks',
     'EnvioMail'
 );
+
+$hook_array['after_save'][] = Array(
+    2,
+    'Actualiza información en cuenta a partir de JSON ROBINA',
+    'custom/modules/ANLZT_analizate/analizate_hooks.php',
+    'analizate_hooks',
+    'ActualizaRobina'
+);

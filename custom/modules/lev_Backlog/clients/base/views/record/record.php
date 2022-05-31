@@ -450,6 +450,20 @@ array (
               ),
               51 => 
               array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'readonly' => false,
+                'name' => 'monto_devuelta_c',
+                'label' => 'LBL_MONTO_DEVUELTA',
+              ),
+              52 => 
+              array (
+              ),
+              53 => 
+              array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
                 'type' => 'fieldset',
@@ -471,7 +485,7 @@ array (
                   ),
                 ),
               ),
-              52 => 
+              54 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -494,17 +508,17 @@ array (
                   ),
                 ),
               ),
-              53 => 
+              55 => 
               array (
                 'name' => 'tag',
                 'span' => 12,
               ),
-              54 => 
+              56 => 
               array (
                 'name' => 'tct_carga_masiva_chk_c',
                 'label' => 'LBL_TCT_CARGA_MASIVA_CHK',
               ),
-              55 => 
+              57 => 
               array (
                 'name' => 'tct_bloqueo_txf_c',
                 'label' => 'LBL_TCT_BLOQUEO_TXF',

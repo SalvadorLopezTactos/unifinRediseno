@@ -68,7 +68,7 @@
          * */
         this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
 
-        this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
+        //this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
 
         /* F. Javier G. Solar
          OBS299 Validar que las Direcciones no se repitan 21/11/2018
@@ -306,7 +306,7 @@
 
 
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
-		this.context.on('button:proveedor_quantico:click', this.proveedor_quantico, this);
+        this.context.on('button:proveedor_quantico:click', this.proveedor_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
@@ -318,17 +318,21 @@
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
         this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
-		//Funcion para que se pueda o no editar el check de Alianza SOC
+	      //Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
 
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
         this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
-        
+
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
+        //Clic solicitar CIEC
+        this.context.on('button:solicitar_ciec:click', this.solicitar_ciec_function, this);
+        //Oculta Menú Solicitar CIEC
+        this.model.on('sync', this.ocultaSolicitarCIEC, this);
 
     },
 
@@ -1181,10 +1185,17 @@
             if(Banderita!=1){
                 self.noEditFields.push('tipo_proveedor_compras_c');
             }
-
-
-
         }
+
+		//Campos Denominación y Régimen Fiscal SAT
+		var listaUsuarios = [];
+        Object.entries(App.lang.getAppListStrings('actualiza_sat_list')).forEach(([key, value]) => {
+            listaUsuarios.push(value);
+        });
+        if(!listaUsuarios.includes(app.user.attributes.id)) {
+			self.noEditFields.push('denominacion_c');
+			self.noEditFields.push('regimen_fiscal_sat_c');
+		}
         this._super('_renderHtml');
     },
 
@@ -4828,19 +4839,19 @@
                         var valColonia = data.records[i].dire_direccion_dire_colonia_name;
                         var idColonia = data.records[i].dire_direccion_dire_coloniadire_colonia_ida;
                         */
-                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline | 
+                        //Se obtiene campo description para obtener los id (recordar que el description guarda los id separados por pipeline |
                         //ejemplo: "{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}"
-                        
+
                         var description=data.records[i].description;
-                        
+
                         var ids=description.split('|');
-                        
+
                         var identificadorPais=ids[0];
                         var identificadorEstado=ids[1];
                         var identificadorCiudad=ids[2];
                         var identificadorMunicipio=ids[3];
                         var identificadorColonia=ids[4];
-                        
+
                         var valCodigoPostal = data.records[i].codigo_postal_c;
                         var idCodigoPostal=data.records[i].dir_sepomex_dire_direcciondir_sepomex_ida;
                         var valPais = data.records[i].pais_c;
@@ -7201,7 +7212,7 @@
                                         for (var t = 0; t < data[2].contents.records.length; t++) {
                                             //Itera telefono casa y celular
                                             if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
-                                                telCyC++;
+                                                telO++;
                                             }
                                             //Itera para telefono de trabajo y celular trabajo
                                             if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
@@ -7527,7 +7538,7 @@ validaReqUniclickInfo: function () {
                                 for (var t = 0; t < data[2].contents.records.length; t++) {
                                     //Itera telefono casa y celular
                                     if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
-                                        telCyC++;
+                                        telO++;
                                     }
                                     //Itera para telefono de trabajo y celular trabajo
                                     if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
@@ -8188,17 +8199,21 @@ validaReqUniclickInfo: function () {
                     cont_nlzt.Analizate=[];
                     cont_nlzt.Analizate.Financiera=[];
                     cont_nlzt.Analizate.Credit=[];
+                    cont_nlzt.Analizate.Cliente=[];
                     cont_nlzt.Analizate.Financiera = data[4].contents.Financiera;
                     cont_nlzt.Analizate.Credit = data[4].contents.Credit;
+                    cont_nlzt.Analizate.Cliente = data[4].contents.AnalizateCliente;
                     cont_nlzt.render();
                     analizate_cl.Analizate=[];
                     analizate_cl.Analizate.Financiera=[];
                     analizate_cl.Analizate.Credit=[];
+                    analizate_cl.Analizate.Cliente=[];
                     analizate_cl.Analizate.Financiera = data[4].contents.Financiera;
                     analizate_cl.Analizate.Credit = data[4].contents.Credit;
-                    analizate_cl.render();
+                    analizate_cl.Analizate.Cliente = data[4].contents.AnalizateCliente;
                     analizate_cl.cargapipelineCliente();
-                   
+                    analizate_cl.render();
+
 
                 }
                 //PLD
@@ -8380,7 +8395,7 @@ validaReqUniclickInfo: function () {
             }, this),
         });
     },
-validaPropRealCR: function (fields, errors, callback) {
+    validaPropRealCR: function (fields, errors, callback) {
         var esPropietario=false;
        var esCLiente=false;
        var esTercero=false;
@@ -8437,7 +8452,7 @@ validaPropRealCR: function (fields, errors, callback) {
         var creditauto= App.user.attributes.id== contexto_cuenta.ResumenProductos.credito_auto.assigned_user_id && contexto_cuenta.ResumenProductos.credito_auto.tipo_cuenta=='3' ? true : false;;
         var fleet = App.user.attributes.id== contexto_cuenta.ResumenProductos.fleet.assigned_user_id && contexto_cuenta.ResumenProductos.fleet.tipo_cuenta=='3'? true : false;;
         var uniclick = App.user.attributes.id==contexto_cuenta.ResumenProductos.uniclick.assigned_user_id && contexto_cuenta.ResumenProductos.uniclick.tipo_cuenta=='3'? true : false;;
-    
+
         if(leasing==true || factoring==true||creditauto==true||fleet==true||uniclick==true){
             $('[name="solicitar_ciec"]').show();
        }else{
@@ -8447,20 +8462,83 @@ validaPropRealCR: function (fields, errors, callback) {
 
    _panel_anlzt_proveedor: function () {
         if (this.model.get('tipo_registro_cuenta_c') == '5') {
-                //Muestra subpanel Proveedor De Analizate
-                this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").show();
-
+            //Muestra subpanel Proveedor De Analizate
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").show();
         }else{
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
         }
-    }, 
+    },
     _panel_anlzt_cliente: function () {
         if (this.model.get('tipo_registro_cuenta_c') == '3') {
-                //Muestra subpanel Cliente De Analizate
-                this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").show();
-
+            //Muestra subpanel Cliente De Analizate
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").show();
         }else{
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").hide();
         }
-    }, 
+    },
+
+    ocultaSolicitarCIEC: function () {
+    		var cliente = (this.model.get("tipo_registro_cuenta_c") == 3) ? true : false;
+        var botonSC = this.getField("solicitar_ciec");
+        if (botonSC) {
+            botonSC.listenTo(botonSC, "render", function () {
+                if (cliente) {
+                    botonSC.show();
+                } else {
+                    botonSC.hide();
+                }
+            });
+        }
+    },
+
+    solicitar_ciec_function:function(){
+        //Valida que sea proveedor para reenviar
+        if (this.model.get('tipo_registro_cuenta_c') != "3") {
+            app.alert.show('No_Cliente', {
+                level: 'error',
+                messages: 'Sólo se puede solcitar CIEC para cuentas de tipo Cliente.',
+                autoClose: false
+            });
+            return;
+        }
+
+        if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
+            app.alert.show('No_Envio', {
+                level: 'error',
+                messages: 'La cuenta no contiene un correo electrónico.',
+                autoClose: false
+            });
+            return;
+        }
+        App.alert.show('eventoEnvioMailCliente', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+
+        //enviar elementos de la cuenta
+        var api_params = {
+            "idCuenta": this.model.id,
+            "idUsuario": App.user.id
+        };
+        var url = app.api.buildURL('solicitaCIECCliente/', null, null);
+        app.api.call('create', url, api_params, {
+            success: function (data) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                var levelStatus = (data['status'] == '200') ? 'success' : 'error';
+                app.alert.show('Correo_reenviado', {
+                    level: levelStatus,
+                    messages: data['message'],
+                    autoClose: false
+                });
+            },
+            error: function (e) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                app.alert.show('Correo_no_reenviado', {
+                    level: 'error',
+                    messages: 'No se ha podido generar solicitud CIEC. Intente nuevamente.',
+                    autoClose: false
+                });
+            }
+        });
+    },
 })

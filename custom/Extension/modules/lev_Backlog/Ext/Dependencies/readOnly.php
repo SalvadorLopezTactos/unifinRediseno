@@ -699,3 +699,18 @@ $dependencies['lev_Backlog']['tasa_c_required'] = array(
         ),
     ),
 );
+
+$dependencies['lev_Backlog']['monto_devuelta_c_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'monto_devuelta_c',
+                'label' => 'monto_devuelta_c_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);

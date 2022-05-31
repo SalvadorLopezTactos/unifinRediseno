@@ -2808,7 +2808,7 @@
         var precalif_L=false;
         var precalif_CS=false;
 
-        precalif_L=((check == false || check == undefined) && producto == 1 && negocio == 5 /*(negocio == 5 || negocio == 3)*/ && (producto_financiero == 0 || producto_financiero == "") &&
+        precalif_L=((check == false || check == undefined) && producto == 1 && negocio == 5 /*(negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "")*/ &&
         (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true) ? true : false;
 
         precalif_CS=(producto=="2" && (negocio!="2" && negocio!="10")) && (check == false || check == undefined) && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true ? true : false;
@@ -3120,6 +3120,8 @@
             console.log("duplicados parte uno");
             var cliente = this.model.get('account_id');
             var tipo = this.model.get('tipo_producto_c');
+			var negocio = this.model.get('negocio_c');
+			var producto_financiero = this.model.get('producto_financiero_c');
             var edobenefe = this.model.get('estado_benef_c') == undefined ? '' : this.model.get('estado_benef_c');
             var munibenefe = this.model.get('municipio_benef_c') == undefined ? '' : this.model.get('municipio_benef_c');
             var entibenefe = this.model.get('ent_gob_benef_c') == undefined ? '' : this.model.get('ent_gob_benef_c');
@@ -3133,7 +3135,9 @@
                 'idOportunidad': idOportunidad,
                 'account_id': cliente,
                 'tipo_producto_c': tipo,
-                'concatenado': concatenado
+                'concatenado': concatenado,
+				'negocio_c': negocio,
+				'producto_financiero_c': producto_financiero
             };
 
             var opportunities = app.api.buildURL("duplicateOpp", '', {}, {});
@@ -3249,6 +3253,7 @@
         var status = this.model.get('estatus_c');
         var cuenta = this.model.get('account_id');
         var negocio = this.model.get('negocio_c');
+		var financiero = this.model.get('producto_financiero_c');
 
         //Valida que el producto sea CS
         if (producto=='2' && (negocio!="2" && negocio!="10")){
@@ -3256,7 +3261,7 @@
         }
 
         if (producto == "1" && status != 'K') {
-            app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
+		app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto + "/" + negocio + "/" + financiero), null, {
                 success: _.bind(function (data) {
                     if (data == '1') {
                         banderaExcluye.check.push(1);
@@ -3297,7 +3302,6 @@
     },
 
     controlVistaCamposPrecalificacion: function () {
-
         if (this.model.get('tipo_producto_c') != undefined) {
             var producto = this.model.get('tipo_producto_c');
             var negocio = this.model.get('negocio_c');
@@ -3307,7 +3311,7 @@
             var precalif_L=false;
             var precalif_CS=false;
 
-            precalif_L=(producto == '1' && negocio == '5' && (prod_financiero == '' || prod_financiero == '0') && !banderaExcluye.check.includes(1))? true : false;
+            precalif_L=(producto == '1' && negocio == '5' /*&& (prod_financiero == '' || prod_financiero == '0')*/ && !banderaExcluye.check.includes(1))? true : false;
             precalif_CS=(producto=="2" && (negocio!="2" && negocio!="10") && !banderaExcluye.check.includes(1))? true : false;
 
             if (!precalif_L && !precalif_CS) {
@@ -3321,14 +3325,8 @@
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style', 'pointer-events:none');
                     $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
                 }
-
             }
-
-
         }
-
-
-
     },
 
     reqCredito_Estructurado: function (fields, errors, callback) {

@@ -661,13 +661,11 @@ array (
               ),
               6 => 
               array (
-                'readonly' => true,
                 'name' => 'regimen_fiscal_sat_c',
                 'label' => 'LBL_REGIMEN_FISCAL_SAT',
               ),
               7 => 
               array (
-                'readonly' => true,
                 'name' => 'denominacion_c',
                 'label' => 'LBL_DENOMINACION',
               ),

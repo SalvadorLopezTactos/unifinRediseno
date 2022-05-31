@@ -1111,21 +1111,21 @@
           <table class="dataTable table-striped table-border" style="table-layout: fixed;">
           <thead>
           <tr>
-          <th class="span4">Activo</th>
+          <th class="span4">Activo <em id="orderByActivo" class="fa fa-unsorted"></em></th>
           <th class="span2">Anexo <em id="orderByAnexo" class="fa fa-unsorted"></em></th>
           <th class="span2">Fecha de contrataci&oacute;n <em id="orderByAnexoContrata" class="fa fa-unsorted"></em></th>
           <th class="span2">Fecha de terminaci&oacute;n <em id="orderByAnexoTermino" class="fa fa-unsorted"></em></th>
           <th class="span2">Renta</th>
-          <th class="span2">Pr&oacute;xima Renta</th>
-          <th class="span2">Vigencia del seguro</th>
-          <th class="span3">Monto Renta</th>
+          <th class="span2">Pr&oacute;xima Renta <em id="orderByAnexoProxRenta" class="fa fa-unsorted"></em></th>
+          <th class="span2">Vigencia del seguro <em id="orderByAnexoVigenciaSeguro" class="fa fa-unsorted"></em></th>
+          <th class="span3">Monto Renta <em id="orderByAnexoMontoRenta" class="fa fa-unsorted"></em></th>
           <th class="span3">Monto Activado</th>
           <th class="span3">Valor residual sin IVA</th>
-          <th class="span3">Saldo insoluto</th>
-          <th class="span3">Cartera vencida</th>
-          <th class="span3">Moratorios</th>
-          <th class="span2">D&iacute;as de Mora</th>
-          <th class="span2">Tasa</th>
+          <th class="span3">Saldo insoluto <em id="orderByAnexoSaldoInsoluto" class="fa fa-unsorted"></em></th>
+          <th class="span3">Cartera vencida <em id="orderByAnexoCarteraVencida" class="fa fa-unsorted"></em></th>
+          <th class="span3">Moratorios <em id="orderByAnexoMoratorios" class="fa fa-unsorted"></em></th>
+          <th class="span2">D&iacute;as de Mora <em id="orderByAnexoDiasMora" class="fa fa-unsorted"></em></th>
+          <th class="span2">Tasa <em id="orderByAnexoTasa" class="fa fa-unsorted"></em></th>
           <th class="span2">Estatus Contrato</th>
           </tr>
           </thead>
@@ -1197,7 +1197,7 @@
           <table class="dataTable table-striped table-border" style="table-layout: fixed;">
             <thead>
               <tr>
-                <th class="span4">Unidad</th>
+                <th class="span4">Unidad <i id="orderByUnidad" class="fa fa-unsorted"></i></th>
                 <th class="span2">
                   Contrato
                   <i id="orderByContrato" class="fa fa-unsorted"></i>
@@ -1211,14 +1211,14 @@
                   <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
                 </th>
                 <th class="span2">Mensualidad</th>
-                <th class="span2">Próxima Domiciliación</th>
-                <th class="span2">Vigencia del seguro</th>
-                <th class="span3">Colocación </th>
-                <th class="span3">Saldo Insoluto</th>
-                <th class="span3">Cartera vencida </th>
-                <th class="span3">Moratorios </th>
-                <th class="span2">Días de Mora </th>
-                <th class="span2">Tasa </th>
+                <th class="span2">Próxima Domiciliación <i id="orderByProxDom" class="fa fa-unsorted"></i></th>
+                <th class="span2">Vigencia del seguro <i id="orderByVigenciaSeguro" class="fa fa-unsorted"></i></th>
+                <th class="span3">Colocación <i id="orderByColocacion" class="fa fa-unsorted"></i></th>
+                <th class="span3">Saldo Insoluto <i id="orderBySaldoInsoluto" class="fa fa-unsorted"></i></th>
+                <th class="span3">Cartera vencida <i id="orderByCarteraVencida" class="fa fa-unsorted"></i></th>
+                <th class="span3">Moratorios <i id="orderByMoratorios" class="fa fa-unsorted"></i></th>
+                <th class="span2">Días de Mora <i id="orderByDiasMora" class="fa fa-unsorted"></i></th>
+                <th class="span2">Tasa  <i id="orderByTasa" class="fa fa-unsorted"></i></th>
                 <th class="span2">Estatus Contrato </th>
               </tr>
             </thead>
@@ -1247,21 +1247,21 @@
           <table class="dataTable table-striped table-border" style="table-layout: fixed;">
           <thead>
           <tr>
-          <th class="span4">Activo</th>
-          <th class="span2">Anexo <em id="orderByAnexo" class="fa fa-unsorted"></em></th>
-          <th class="span2">Fecha de contrataci&oacute;n <em id="orderByAnexoContrata" class="fa fa-unsorted"></em></th>
-          <th class="span2">Fecha de terminaci&oacute;n <em id="orderByAnexoTermino" class="fa fa-unsorted"></em></th>
+          <th class="span4">Activo <em id="orderByActivoHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span2">Anexo <em id="orderByAnexoHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span2">Fecha de contrataci&oacute;n <em id="orderByAnexoContrataHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span2">Fecha de terminaci&oacute;n <em id="orderByAnexoTerminoHistorico" class="fa fa-unsorted"></em></th>
           <th class="span2">Renta</th>
-          <th class="span2">Pr&oacute;xima Renta</th>
-          <th class="span2">Vigencia del seguro</th>
-          <th class="span3">Monto Renta</th>
+          <th class="span2">Pr&oacute;xima Renta <em id="orderByAnexoProxRentaHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span2">Vigencia del seguro <em id="orderByAnexoVigenciaSeguroHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span3">Monto Renta <em id="orderByAnexoMontoRentaHistorico" class="fa fa-unsorted"></em></th>
           <th class="span3">Monto Activado</th>
           <th class="span3">Valor residual sin IVA</th>
-          <th class="span3">Saldo insoluto</th>
-          <th class="span3">Cartera vencida</th>
-          <th class="span3">Moratorios</th>
-          <th class="span2">D&iacute;as de Mora</th>
-          <th class="span2">Tasa</th>
+          <th class="span3">Saldo insoluto <em id="orderByAnexoSaldoInsolutoHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span3">Cartera vencida <em id="orderByAnexoCarteraVencidaHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span3">Moratorios <em id="orderByAnexoMoratoriosHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span2">D&iacute;as de Mora <em id="orderByAnexoDiasMoraHistorico" class="fa fa-unsorted"></em></th>
+          <th class="span2">Tasa <em id="orderByAnexoTasaHistorico" class="fa fa-unsorted"></em></th>
           <th class="span2">Estatus Contrato</th>
           </tr>
           </thead>
@@ -1294,20 +1294,20 @@
               <tr>
                 <th class="span2">
                   No. de Cesión
-                  <i id="orderByCesion" class="fa fa-unsorted"></i>
+                  <i id="orderByCesionHistorico" class="fa fa-unsorted"></i>
                 </th>
-                <th class="span4">Deudor(es)</th>
+                <th class="span4">Deudor(es) <i id="orderByDeudoresHistorico" class="fa fa-unsorted"></i></th>
                 <th class="span2">
                   Fecha de Vencimiento
                   <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
                 </th>
-                <th class="span3">Monto por Vencer Financiado</th>
-                <th class="span3">Monto de Descuento</th>
-                <th class="span2">No. de contrato</th>
-                <th class="span2">Fecha de vencimiento contrato</th>
-                <th class="span3">Cartera vencida</th>
-                <th class="span3">Moratorios</th>
-                <th class="span2">Días de Mora</th>
+                <th class="span3">Monto por Vencer Financiado <i id="orderByMontoVencerHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span3">Monto de Descuento <i id="orderByMontoDescuentoHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span2">No. de contrato <i id="orderByNoContratoHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span2">Fecha de vencimiento contrato <i id="orderByFechaVencimientoContratoHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span3">Cartera vencida <i id="orderByCesionCarteraVencidaHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span3">Moratorios <i id="orderByCesionMoratoriosHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span2">Días de Mora <i id="orderByCesionDiasMoraHistorico" class="fa fa-unsorted"></i></th>
                 <th class="span2">Estatus contrato</th>
               </tr>
               <tbody>
@@ -1333,7 +1333,7 @@
           <table class="dataTable table-striped table-border" style="table-layout: fixed;">
             <thead>
               <tr>
-                <th class="span4">Unidad</th>
+                <th class="span4">Unidad <i id="orderByUnidadHistorico" class="fa fa-unsorted"></i></th>
                 <th class="span2">
                   Contrato
                   <i id="orderByContrato" class="fa fa-unsorted"></i>
@@ -1347,14 +1347,14 @@
                   <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
                 </th>
                 <th class="span2">Mensualidad</th>
-                <th class="span2">Próxima Domiciliación</th>
-                <th class="span2">Vigencia del seguro</th>
-                <th class="span3">Colocación </th>
-                <th class="span3">Saldo Insoluto </th>
-                <th class="span3">Cartera vencida </th>
-                <th class="span3">Moratorios </th>
-                <th class="span2">Días de Mora </th>
-                <th class="span2">Tasa </th>
+                <th class="span2">Próxima Domiciliación <i id="orderByProxDomHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span2">Vigencia del seguro <i id="orderByVigenciaSeguroHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span3">Colocación <i id="orderByColocacionHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span3">Saldo Insoluto <i id="orderBySaldoInsolutoHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span3">Cartera vencida <i id="orderByCarteraVencidaHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span3">Moratorios <i id="orderByMoratoriosHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span2">Días de Mora <i id="orderByDiasMoraHistorico" class="fa fa-unsorted"></i></th>
+                <th class="span2">Tasa <i id="orderByTasaHistorico" class="fa fa-unsorted"></i></th>
                 <th class="span2">Estatus Contrato </th>
               </tr>
             </thead>
@@ -1569,8 +1569,8 @@
                         Fecha de Vencimiento
                         <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
                       </th>
-                      <th class="span2">Monto por Vencer Financiado</th>
-                      <th class="span2">Monto de Descuento</th>
+                      <th class="span2">Monto por Vencer Financiado </th>
+                      <th class="span2">Monto de Descuento </th>
                     </tr>
                   </thead>
                   <tbody>

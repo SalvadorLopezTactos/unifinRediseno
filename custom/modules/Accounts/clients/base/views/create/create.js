@@ -340,6 +340,16 @@
 
         //Oculta fecha de bloqueo para saber si el Origen se habilita
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
+		
+		//Campos Denominación y Régimen Fiscal SAT
+		var listaUsuarios = [];
+        Object.entries(App.lang.getAppListStrings('actualiza_sat_list')).forEach(([key, value]) => {
+            listaUsuarios.push(value);
+        });
+        if(!listaUsuarios.includes(app.user.attributes.id)) {
+			this.$('div[data-name=denominacion_c]').css("pointer-events", "none");
+			this.$('div[data-name=regimen_fiscal_sat_c]').css("pointer-events", "none");
+		}
     },
 
     initialize: function (options) {
@@ -412,7 +422,7 @@
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
         //this.model.addValidationTask('tipo_proveedor', _.bind(this.tipoProveedor_check,this));
         //this.model.addValidationTask('check_formato_curp_c', _.bind(this.ValidaFormatoCURP, this));
-        this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
+        //this.model.addValidationTask('camposnumericosPLDFF', _.bind(this.validacantidades, this));
 
 
         /* F. Javier G. Solar

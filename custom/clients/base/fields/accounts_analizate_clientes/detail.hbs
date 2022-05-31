@@ -8,7 +8,7 @@
         cursor: default;
         margin: 0 3px;
         padding: 10px 10px 10px 30px;
-        min-width: 180px;
+        min-width: 150px;
         float: left;
         position: relative;
         background-color: #d9e3f7;
@@ -133,27 +133,37 @@
 </style>
 <script>
 </script>
-
-    <div class="wrapper" >
-        <div class="arrow-steps">
-            <div class="step span3 ocult" id="estado1"><span>&nbsp</span></div>
-            <div class="step span3 ocult" id="estado2"><span>&nbsp</span></div>
-            <div class="step span3 ocult" id="estado3"><span>&nbsp</span></div>
-            <div class="step span3 ocult" id="estado4"><span>&nbsp</span></div>
+<div class="wrapper" >
+    <div class="arrow-steps">
+        <div class="step span2 {{AnalizateCliente.Estado1.Class}}" id="estado1"><span class="ellipsis_inline" data-original-title="{{AnalizateCliente.Estado1.Valor}}">{{AnalizateCliente.Estado1.Valor}}</span></div>
+        <div class="step span2 {{AnalizateCliente.Estado2.Class}}" id="estado2"><span class="ellipsis_inline" data-original-title="{{AnalizateCliente.Estado2.Valor}}">{{AnalizateCliente.Estado2.Valor}}</span></div>
+        <div class="step span2 {{AnalizateCliente.Estado3.Class}}" id="estado3"><span class="ellipsis_inline" data-original-title="{{AnalizateCliente.Estado3.Valor}}">{{AnalizateCliente.Estado3.Valor}}</span></div>
+        <div class="step span2 {{AnalizateCliente.Estado4.Class}}" id="estado4"><span class="ellipsis_inline" data-original-title="{{AnalizateCliente.Estado4.Valor}}">{{AnalizateCliente.Estado4.Valor}}</span></div>
+        <div class="step span2 {{AnalizateCliente.Estado5.Class}}" id="estado5"><span class="ellipsis_inline" data-original-title="{{AnalizateCliente.Estado5.Valor}}">{{AnalizateCliente.Estado5.Valor}}</span></div>
+    </div>
+</div>
+<br>
+<br>
+<div class="wrapper">
+    <div class="arrow-steps">
+        <div class="step span2 {{this.AnalizateCliente.Estado1.FechaClass}}" id="fecha1"><span class="ellipsis_inline">&nbsp{{AnalizateCliente.Estado1.Fecha}}</span></div>
+        <div class="step span2 {{this.AnalizateCliente.Estado2.FechaClass}}" id="fecha2"><span class="ellipsis_inline">&nbsp{{AnalizateCliente.Estado2.Fecha}}</span></div>
+        <div class="step span2 {{this.AnalizateCliente.Estado3.FechaClass}}" id="fecha3"><span class="ellipsis_inline">&nbsp{{AnalizateCliente.Estado3.Fecha}}</span></div>
+        <div class="step span2 {{this.AnalizateCliente.Estado4.FechaClass}}" id="fecha4"><span class="ellipsis_inline">&nbsp{{AnalizateCliente.Estado4.Fecha}}</span></div>
+        <div class="step span2 {{this.AnalizateCliente.Estado5.FechaClass}}" id="fecha5"><span class="ellipsis_inline">&nbsp{{AnalizateCliente.Estado5.Fecha}}</span></div>
+    </div>
+</div>
+<br>
+<br>
+<div class="row-fluid">
+    <div class="span6" align="left">
+        <div class="span6 " align="left">
+            <a class="btn btn-primary  btn-ReenviarCliente" id="btn-Guardar">Reenviar Correo
+            <i class="fa fa-envelope" style="color:white"></i></a>
+        </div>
+        <div class="span6" align="left">
+            <a class="btn btn-success  btn-DescargarCliente" id="btn-Descargar">Descargar Archivo
+            <i class="fa fa-download" style="color:white"></i></a>
         </div>
     </div>
-<br>
-<br>
-    <div class="container2 " >
-        <div class="wrapper">
-            <div class="arrow-steps">
-                <div class="step span3  ocult" id="fecha1"><span>&nbsp</span></div>
-                <div class="step span3  ocult" id="fecha2"><span>&nbsp</span></div>
-                <div class="step span3  ocult" id="fecha3"><span>&nbsp</span></div>
-                <div class="step span3  ocult" id="fecha4"><span>&nbsp</span></div>
-            </div>
-        </div>
-    </div>
-<br>
-<br>
-
+</div>
