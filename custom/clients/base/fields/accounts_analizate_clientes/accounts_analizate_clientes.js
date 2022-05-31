@@ -42,6 +42,10 @@
         this.AnalizateCliente.Estado5.FechaClass='ocult';
     },
 
+    _render: function () {
+        this._super("_render");
+    },
+
     cargapipelineCliente: function () {
         var estado = cont_nlzt.Analizate.Cliente.estado;
         var fecha = cont_nlzt.Analizate.Cliente.fecha;
@@ -96,72 +100,6 @@
             this.AnalizateCliente.Estado1.Valor = 'Pendiente';
             this.AnalizateCliente.Estado1.Class = 'current';
         }
-
-        // if (estado == '' || estado == undefined) {
-        //     $('#estado1').addClass('current');
-        //     $("#estado1").html('Sin enviar');
-        //     $("#fecha1").removeClass('ocult');
-        //     $('#fecha1').addClass('success');
-        //     $("#fecha1").html('-');
-        // }
-        // if (estado == 1) {
-        //     $('#estado1').addClass('current');
-        //     $("#estado1").html(listaEstado[estado]);
-        //     if (fecha !="") {
-        //         $("#fecha1").removeClass('ocult');
-        //         $('#fecha1').addClass('success');
-        //         $("#fecha1").html(fecha);
-        //     }
-        // }
-        //
-        // if (estado == 2) {
-        //     $('#estado2').addClass('current');
-        //     $("#estado2").html(listaEstado[estado]);
-        //     $('#estado1').addClass('done');
-        //     if (fecha != "") {
-        //         $("#fecha2").removeClass('ocult');
-        //         $('#fecha2').addClass('success');
-        //         $("#fecha2").html(fecha);
-        //     }
-        // }
-        //
-        // if (estado == 3) {
-        //     $('#estado3').addClass('current');
-        //     $("#estado3").html(listaEstado[estado]);
-        //     $('#estado2').addClass('done');
-        //     $('#estado1').addClass('done');
-        //     if (fecha != "") {
-        //         $("#fecha3").removeClass('ocult');
-        //         $('#fecha3').addClass('success');
-        //         $("#fecha3").html(fecha);
-        //     }
-        // }
-        // if (estado == 4) {
-        //     $('#estado4').addClass('current');
-        //     $("#estado4").html(listaEstado[estado]);
-        //     $('#estado3').addClass('done');
-        //     $('#estado2').addClass('done');
-        //     $('#estado1').addClass('done');
-        //     if (fecha != "") {
-        //         $("#fecha4").removeClass('ocult');
-        //         $('#fecha4').addClass('success');
-        //         $("#fecha4").html(fecha);
-        //     }
-        // }
-        // if (estado == 5) {
-        //     $('#estado5').addClass('current');
-        //     $("#estado5").html(listaEstado[estado]);
-        //     $('#estado4').addClass('done');
-        //     $('#estado3').addClass('done');
-        //     $('#estado2').addClass('done');
-        //     $('#estado1').addClass('done');
-        //     if (fecha != "") {
-        //         $("#fecha5").removeClass('ocult');
-        //         $('#fecha5').addClass('success');
-        //         $("#fecha5").html(fecha);
-        //     }
-        //
-        // }
     },
 
     _render: function () {
@@ -192,59 +130,21 @@
             level: 'process',
             title: 'Cargando, por favor espere.',
         });
-        //Se declaran variables para armar la url
-        var rfc = btoa(this.model.get('rfc_c'));
-        var id = btoa(this.model.get('id'));
-        var mailAccount = btoa(this.model.get('email1'));
-        var link = '&UUID=' + id + '&RFC_CIEC=' + rfc + '&MAIL=' + mailAccount;
-
-        // FECHA ACTUAL
-        var today = new Date();
-        var yyyy = today.getFullYear();
-        var mm = today.getMonth()+1; //January is 0!
-        var dd = today.getDate();
-        var hour = today.getHours();
-        var min = today.getMinutes();
-        var secs = today.getSeconds();
-        var zona= new Date().getTimezoneOffset()/60;
-
-        if(mm<10) {
-        mm = '0'+mm
-        }
-        if(dd<10) {
-        dd = '0'+dd
-        }
-        if(hour<10){
-        hour='0'+hour
-        }
-        if(min<10){
-        min='0'+min
-        }
-        if(secs<10){
-        secs='0'+secs
-        }
-        var fecha= yyyy + '-' + mm + '-' + dd + 'T'+hour +':'+min+':'+secs+'-0'+zona+':00';
 
         //enviar elementos de la cuenta
         var api_params = {
-            "tipo": "1",
-            "estado": "1",
-            "documento": "",
-            "url_portal": link,
-            "url_documento": "",
-            "empresa": "1",
-            "fecha_actualizacion": fecha,
-            "anlzt_analizate_accountsaccounts_ida": this.model.id,
-            "tipo_registro_cuenta_c":"3" //Cliente
+            "idCuenta": this.model.id,
+            "idUsuario": App.user.id
         };
-        var url = app.api.buildURL('ANLZT_analizate/', null, null);
+        var url = app.api.buildURL('solicitaCIECCliente/', null, null);
         app.api.call('create', url, api_params, {
             success: function (data) {
                 App.alert.dismiss('eventoEnvioMailCliente');
                 $('.btn-ReenviarCliente').unbind('click', false);
+                var levelStatus = (data['status'] == '200') ? 'success' : 'error';
                 app.alert.show('Correo_reenviado', {
-                    level: 'success',
-                    messages: 'Se ha enviado un nuevo correo a la cuenta.',
+                    level: levelStatus,
+                    messages: data['message'],
                     autoClose: false
                 });
             },

@@ -33,6 +33,13 @@ class Analizate extends SugarApi
                 'method' => 'ObtieneCredit',
                 'shortHelp' => 'Obtener registros de la tabla anlzt_analizate para su presentación en Custom Field Analizate',
             ),
+            'SolicitaCIACCliente' => array(
+                'reqType' => 'POST',
+                'path' => array('solicitaCIECCliente'),
+                'pathVars' => array(''),
+                'method' => 'solicitaCIECFunction',
+                'shortHelp' => 'Solicita CIEC para Cliente',
+            ),
 
         );
     }
@@ -207,4 +214,91 @@ class Analizate extends SugarApi
         return $result;
 
     }
+    public function  solicitaCIECFunction($api, $args){
+        //Recupera variables
+        $idCuenta = isset($args['idCuenta']) ? $args['idCuenta'] : '';
+        $idUsuario = isset($args['idUsuario']) ? $args['idUsuario'] : '';
+        $fechaActual = gmdate("Y-m-d H:i:s");
+        $fechaActualString = strtotime($fechaActual);
+        $fechaActualDate = date('Y-m-d',$fechaActualString);
+
+        //Estructura de respuesta default
+        $resultado = [];
+        $resultado['status'] = '200';
+        $resultado['message'] = 'Se ha enviado un nuevo correo a la cuenta.';
+
+        //Aplica validación de usuario asignado
+        $esUsuarioAsignado = false;
+        $beanCuenta = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
+        $beanCuenta->load_relationship('accounts_uni_productos_1');
+        $uniProdAsociados= $beanCuenta->accounts_uni_productos_1->getBeans();
+        foreach ($uniProdAsociados as $uniProducto) {
+            $esUsuarioAsignado = ($uniProducto->assigned_user_id == $idUsuario && $uniProducto->tipo_cuenta=="3") ? true : $esUsuarioAsignado;
+        }
+        $esUsuarioAsignado = true; //Quitar
+        if($esUsuarioAsignado){
+            //Aplica validación de Envíos generados
+            $menorDosHoras = false;
+            $enviosDia = 0;
+            $beanCuenta->load_relationship('anlzt_analizate_accounts');
+            $analizateAsociados = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+            //Itera registros analizate de cliente y estatus enviado
+            foreach ($analizateAsociados as $analizate) {
+                if($analizate->tipo_registro_cuenta_c == '3' && $analizate->estado == '1'){
+                    $diferenciaHoras = round((strtotime($fechaActual) - strtotime($analizate->fecha_actualizacion))/3600, 1);
+                    $fechaActualizacionString = strtotime($analizate->fecha_actualizacion);
+                    $fechaActualizacionDate = date('Y-m-d',$fechaActualizacionString);
+                    if($diferenciaHoras < 2){
+                        $menorDosHoras =  true;
+                    }
+                    if($fechaActualizacionDate == $fechaActualDate){
+                        $enviosDia ++ ;
+                    }
+                }
+            }
+            //Valida que no sea hayan enviado más de 2 notificaciones en el día
+            if($enviosDia<2){
+                //Valida última notificación mayor a 2 horas
+                if(!$menorDosHoras){
+                    try{
+                        //Crea nuevo bean Analizate (registro) y la relacion con acccounts (registro creado).
+                        $url_portalFinanciera = '&UUID=' . base64_encode($beanCuenta->id) . '&RFC_CIEC=' . base64_encode($beanCuenta->rfc_c). '&MAIL=' . base64_encode($beanCuenta->email1);
+                        $relacion = BeanFactory::newBean('ANLZT_analizate');
+                        $relacion->anlzt_analizate_accountsaccounts_ida = $beanCuenta->id;
+                        $relacion->empresa = 1;
+                        $relacion->estado = 1;
+                        $relacion->tipo = 1;
+                        $relacion->fecha_actualizacion = $fechaActual;
+                        $relacion->url_portal = $url_portalFinanciera;
+                        $relacion->assigned_user_id = $idUsuario;
+                        $relacion->tipo_registro_cuenta_c = "3";
+                        $relacion->load_relationship('anlzt_analizate_accounts');
+                        $relacion->anlzt_analizate_accounts->add($beanCuenta->id);
+                        $relacion->save();
+                    } catch (Exception $e) {
+                        //Error en proceso de petición
+                        $resultado['status'] = '500';
+                        $resultado['message'] = 'Error al generar la petición: '.$e->getMessage();
+                    }
+                }else{
+                    //Error de no se pueden generar notificación al menos en 2 horas
+                    $resultado['status'] = '300';
+                    $resultado['message'] = 'Debe esperar 2 horas a partir de la última solicitud generada.';
+                }
+            }else{
+                //Error de no se pueden generar más de dos envíos por día
+                $resultado['status'] = '300';
+                $resultado['message'] = 'Ya se han enviado 2 notificaciones en el día y no se puede detonar una nueva solicitud.';
+            }
+        }else{
+            //Error de usuario no asignado a la cuenta
+            $resultado['status'] = '300';
+            $resultado['message'] = 'Para esta solicitud la cuenta debe ser cliente y estar asignada a ti.';
+        }
+
+        return $resultado;
+
+    }
+
+
 }

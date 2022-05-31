@@ -301,7 +301,7 @@ SQL;
                     $nameMunicipio=$row['municipio'];
                     $idMunicipio=$row['id_municipio'];
                 }
-               
+
                 $direccion_completa = $direccion_row['calle'] . " " . $direccion_row['numext'] . " " . ($direccion_row['numint'] != "" ? "Int: " . $direccion_row['numint'] : "") . ", Colonia " . $nameColonia. ", Municipio " . $nameMunicipio;
                 $direccion->name = $direccion_completa;
 
@@ -324,15 +324,15 @@ SQL;
                 } else {
                     $inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
                     $principal = $direccion->principal == 1 ? $direccion->principal : 0;
-                    
+
                     $direccion->inactivo=$inactivo;
                     $direccion->principal=$principal;
-                    
+
                     /*
                     $query=<<<SQL
                     UPDATE dire_direccion d
 INNER JOIN dire_direccion_cstm dc on d.id=dc.id_c
-SET d.name = '{$direccion->name}', 
+SET d.name = '{$direccion->name}',
                         d.tipodedireccion = '{$direccion->tipodedireccion}',
                         d.indicador = '{$direccion->indicador}',
                         d.calle = '{$direccion->calle}',
@@ -351,7 +351,7 @@ WHERE d.id='{$direccion->id}';
 SQL;
                     //Actualiza también la relación entre la dirección y dir_Sepomex
                     //Query para obtener id de la relación entre dirección y dir_Sepomex
-                    $queryGetIdRelacion="SELECT id FROM dir_sepomex_dire_direccion_c 
+                    $queryGetIdRelacion="SELECT id FROM dir_sepomex_dire_direccion_c
                     WHERE dir_sepomex_dire_direcciondir_sepomex_ida='{$id_sepomex_anterior}' AND dir_sepomex_dire_direcciondire_direccion_idb='{$direccion->id}'";
                     $resultIdRelacion = $db->query($queryGetIdRelacion);
                     $id_relacion="";
@@ -367,7 +367,7 @@ SQL;
                     */
                     try {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Update *784 " . $query);
-                        
+
                         //$resultado = $db->query($query);
                         //$resultadoRelacion=$db->query($queryUpdateRelacion);
 
@@ -1218,6 +1218,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $relacion->fecha_actualizacion = $bean->date_modified; //Cambiar a fecha actual
         $relacion->url_portal = $url_portalFinanciera;
         $relacion->assigned_user_id = $bean->user_id_c;
+        $relacion->tipo_registro_cuenta_c = "5";
         $relacion->load_relationship('anlzt_analizate_accounts');
         $relacion->anlzt_analizate_accounts->add($bean->id);
         $relacion->save();

@@ -233,6 +233,10 @@
         this.model.on('sync', this.checkProveedor, this);
         //Display or Hide Vista360
         this.model.on('sync', this._hideVista360, this);
+        //Display or Hide Proveedor Analizte
+        this.model.on('sync', this._panel_anlzt_proveedor, this);
+         //Display or Hide Analizte Cliente
+         this.model.on('sync', this._panel_anlzt_cliente, this);
         //Solo Lectura campos Origen
         this.model.on('sync', this.readOnlyOrigen, this);
         /* @author F. Javier Garcia S. 10/07/2018
@@ -302,7 +306,7 @@
 
 
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
-		this.context.on('button:proveedor_quantico:click', this.proveedor_quantico, this);
+        this.context.on('button:proveedor_quantico:click', this.proveedor_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
@@ -314,7 +318,7 @@
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
         this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
-		//Funcion para que se pueda o no editar el check de Alianza SOC
+	      //Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
 
@@ -325,6 +329,10 @@
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
+        //Clic solicitar CIEC
+        this.context.on('button:solicitar_ciec:click', this.solicitar_ciec_function, this);
+        //Oculta Menú Solicitar CIEC
+        this.model.on('sync', this.ocultaSolicitarCIEC, this);
 
     },
 
@@ -8387,7 +8395,7 @@ validaReqUniclickInfo: function () {
             }, this),
         });
     },
-validaPropRealCR: function (fields, errors, callback) {
+    validaPropRealCR: function (fields, errors, callback) {
         var esPropietario=false;
        var esCLiente=false;
        var esTercero=false;
@@ -8450,5 +8458,87 @@ validaPropRealCR: function (fields, errors, callback) {
        }else{
             $('[name="solicitar_ciec"]').hide();
        }
-   }
+   },
+
+   _panel_anlzt_proveedor: function () {
+        if (this.model.get('tipo_registro_cuenta_c') == '5') {
+            //Muestra subpanel Proveedor De Analizate
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").show();
+        }else{
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+        }
+    },
+    _panel_anlzt_cliente: function () {
+        if (this.model.get('tipo_registro_cuenta_c') == '3') {
+            //Muestra subpanel Cliente De Analizate
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").show();
+        }else{
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").hide();
+        }
+    },
+
+    ocultaSolicitarCIEC: function () {
+    		var cliente = (this.model.get("tipo_registro_cuenta_c") == 3) ? true : false;
+        var botonSC = this.getField("solicitar_ciec");
+        if (botonSC) {
+            botonSC.listenTo(botonSC, "render", function () {
+                if (cliente) {
+                    botonSC.show();
+                } else {
+                    botonSC.hide();
+                }
+            });
+        }
+    },
+
+    solicitar_ciec_function:function(){
+        //Valida que sea proveedor para reenviar
+        if (this.model.get('tipo_registro_cuenta_c') != "3") {
+            app.alert.show('No_Cliente', {
+                level: 'error',
+                messages: 'Sólo se puede solcitar CIEC para cuentas de tipo Cliente.',
+                autoClose: false
+            });
+            return;
+        }
+
+        if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
+            app.alert.show('No_Envio', {
+                level: 'error',
+                messages: 'La cuenta no contiene un correo electrónico.',
+                autoClose: false
+            });
+            return;
+        }
+        App.alert.show('eventoEnvioMailCliente', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+
+        //enviar elementos de la cuenta
+        var api_params = {
+            "idCuenta": this.model.id,
+            "idUsuario": App.user.id
+        };
+        var url = app.api.buildURL('solicitaCIECCliente/', null, null);
+        app.api.call('create', url, api_params, {
+            success: function (data) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                var levelStatus = (data['status'] == '200') ? 'success' : 'error';
+                app.alert.show('Correo_reenviado', {
+                    level: levelStatus,
+                    messages: data['message'],
+                    autoClose: false
+                });
+            },
+            error: function (e) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                app.alert.show('Correo_no_reenviado', {
+                    level: 'error',
+                    messages: 'No se ha podido generar solicitud CIEC. Intente nuevamente.',
+                    autoClose: false
+                });
+            }
+        });
+    },
 })
