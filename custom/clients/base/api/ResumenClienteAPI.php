@@ -377,7 +377,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['general_cliente']['cliente_desde'] = !empty($beanPersona->fecha_cliente_c) ? $beanPersona->fecha_cliente_c : $arr_principal['general_cliente']['cliente_desde'];
             $arr_principal['general_cliente']['cliente_desde'] = empty($arr_principal['general_cliente']['cliente_desde']) ? 'Sin identificar' : $arr_principal['general_cliente']['cliente_desde'];
             $arr_principal['general_cliente']['segmento'] = $beanPersona->segmento_c;
-            $arr_principal['general_cliente']['cobranza'] = $beanPersona->cobranza_c;
+            //$arr_principal['general_cliente']['cobranza'] = $beanPersona->cobranza_c;
             $arr_principal['general_cliente']['sector_economico'] = isset($app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c]) ? $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c] : '';
             $arr_principal['general_cliente']['grupo_empresarial'] = $beanPersona->parent_name;
             $arr_principal['general_cliente']['situacion_grupo_empresarial'] = $beanPersona->situacion_gpo_empresa_txt_c;
@@ -422,7 +422,7 @@ class ResumenClienteAPI extends SugarApi
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
                 $cobranza = $product->cobranza_c;
-                $cobranzaGeneral = empty($cobranzaGeneral) ? $cobranza : $cobranzaGeneral;
+                $cobranzaGeneral = (empty($cobranzaGeneral) && !empty($cobranza)) ? $cobranza : $cobranzaGeneral;
                 $asignado = $product->assigned_user_name;
                 $asignadoId = $product->assigned_user_id;
                 $vencimiento_anexo_final = $product->vencimiento_anexo_final_c;
