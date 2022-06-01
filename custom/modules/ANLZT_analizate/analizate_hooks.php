@@ -44,7 +44,7 @@ class analizate_hooks  {
             $mailHTML = '
             <font face="verdana" color="#635f5f">
             Estimado cliente <b>' . $full_name . ' :</b>
-            <p>
+            <p style="text-align:justify;">
               <br>Como parte del servicio continuo con nuestros clientes nos acercamos a ti con el objetivo de cumplir con los requerimientos del Sistema de Administración Tributaria (SAT) donde como parte de las medidas que buscan fortalecer las herramientas tecnológicas para “simplificar” el cumplimiento de las normas tributarias, es que el SAT informó que a partir del 1 de enero de este año entró en vigor la nueva versión del CFDI 4.0. estableciendo como límite de convivencia con la versión anterior hasta el 30 de junio de 2022.
               <br>
               
