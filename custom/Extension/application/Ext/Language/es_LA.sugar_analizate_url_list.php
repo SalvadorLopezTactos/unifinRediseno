@@ -4,5 +4,5 @@
 $app_list_strings['analizate_url_list']=array (
   1 => 'https://analisisciec.unifin.com.mx?empresa=RmluYW5jaWVyYQ==',
   2 => 'https://analisisciec.unifin.com.mx?empresa=Q3JlZGl0',
-  3 => 'https://dev-cfdiclientes.unifin.com.mx/?empresa=RmluYW5jaWVyYQ==',
+  3 => 'https://dev-ia-lab.unifin.com.mx/aprov-client?empresa=RmluYW5jaWVyYQ==',
 );
