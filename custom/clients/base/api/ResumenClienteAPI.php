@@ -94,7 +94,7 @@ class ResumenClienteAPI extends SugarApi
         //General
         $arr_principal['general_cliente'] = array(
             "tipo" => "No definido",
-            "cliente_desde"=>"No definido",
+            "cliente_desde"=>"",
             "segmento" => "Sin Segmento",
             "cobranza" => "Sin Clasificar",
             "sector_economico" => "Sin Especificar",
@@ -351,7 +351,31 @@ class ResumenClienteAPI extends SugarApi
             if($beanPersona->tipo_registro_cuenta_c=='2' || $beanPersona->tipo_registro_cuenta_c=='3'){
                 $arr_principal['general_cliente']['muestra_gpo_empresarial']='1';
             }
-            $arr_principal['general_cliente']['cliente_desde'] = $beanPersona->fecha_cliente_c;
+            //Recupera cliente desde
+            $queryClienteDesde = "select date_created
+                        from accounts_audit
+                        where parent_id='008b2470-91f3-4bde-b20e-9ebb0562978e'
+                        and
+                        (
+                        	(
+                        		field_name='tipo_registro_cuenta_c'
+                        		and after_value_string = '3'
+                            )
+                        	or
+                            (
+                        		field_name='subtipo_registro_cuenta_c'
+                        		and after_value_string = '18'
+                            )
+                        )
+                        order by date_created asc
+                        limit 1;";
+            $resultCD = $db->query($queryClienteDesde);
+            $timedateCD = new TimeDate();
+            while ($row = $db->fetchByAssoc($resultCD)) {
+                $arr_principal['general_cliente']['cliente_desde'] = date_format($timedateCD->fromDb($row['date_created']), "d/m/Y");
+            }
+            $arr_principal['general_cliente']['cliente_desde'] = !empty($beanPersona->fecha_cliente_c) ? $beanPersona->fecha_cliente_c : $arr_principal['general_cliente']['cliente_desde'];
+            $arr_principal['general_cliente']['cliente_desde'] = empty($arr_principal['general_cliente']['cliente_desde']) ? 'Sin identificar' : $arr_principal['general_cliente']['cliente_desde'];
             $arr_principal['general_cliente']['segmento'] = $beanPersona->segmento_c;
             $arr_principal['general_cliente']['cobranza'] = $beanPersona->cobranza_c;
             $arr_principal['general_cliente']['sector_economico'] = isset($app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c]) ? $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c] : '';
@@ -390,7 +414,7 @@ class ResumenClienteAPI extends SugarApi
         if ($beanPersona->load_relationship('accounts_uni_productos_1')) {
             //Recupera Productos
             $relateProduct = $beanPersona->accounts_uni_productos_1->getBeans($beanPersona->id,array('disable_row_level_security' => true));
-
+            $cobranzaGeneral = '';
             foreach ($relateProduct as $product) {
                 //Recupera valores por producto
                 $tipoCuenta = $product->tipo_cuenta;
@@ -398,6 +422,7 @@ class ResumenClienteAPI extends SugarApi
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
                 $cobranza = $product->cobranza_c;
+                $cobranzaGeneral = empty($cobranzaGeneral) ? $cobranza : $cobranzaGeneral;
                 $asignado = $product->assigned_user_name;
                 $asignadoId = $product->assigned_user_id;
                 $vencimiento_anexo_final = $product->vencimiento_anexo_final_c;
@@ -540,6 +565,7 @@ class ResumenClienteAPI extends SugarApi
                         break;
                 }
             }
+            $arr_principal['general_cliente']['cobranza'] = $cobranzaGeneral;
         }
 
         ############################

@@ -58,7 +58,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Status Cobranza</strong></td>
-                                    <td>{{ResumenCliente.general_cliente.score_credito}}</td>
+                                    <td>{{ResumenCliente.general_cliente.cobranza}}</td>
                                 </tr>
                             {{/if}}
                             <tr>
@@ -609,6 +609,114 @@
                 </div>
             </div>
         {{/if}}
+        <!-- DIV Producto Crédito Simple-->
+        {{#if ResumenCliente.credito_simple.muestra_producto}}
+            <div class="span4" style="width: 400px; flex-shrink: 0; padding:5px">
+                <!-- Título producto -->
+                <div class="divInline">
+                    <!-- Icono -->
+                    <div class="contenedorIcono">
+                        <img src="{{getUnifinListValue 'iconos_vista360_list' 'credito_simple'}}" style="height: 50px; width: 50px;">
+                    </div>
+                    <!-- Nombre producto -->
+                    <div class="contenedorTitulo">
+                        <div class="formatoTitulo">
+                            CRÉDITO SIMPLE
+                        </div>
+                    </div>
+                </div>
+                <!-- Detalle del producto -->
+                <div class="information-container">
+                    <!-- Detalle -->
+                    <div class="information-general-container">
+                        <table style="font-size:10px;color:#021741;width:100%;white-space: normal;">
+                            <tbody>
+                                <!-- Historial de contactos -->
+                                <tr class="formatoFilaG">
+                                    <td colspan="2"><strong><center>HISTORIAL DE CONTACTO</center></strong></td>
+                                </tr>
+                                <tr class="formatoFilaA"  style="border-bottom-style: solid; border-color: white;">
+                                    <td style="width:40%;"><strong>Última cita</strong></td>
+                                    <td>{{ResumenCliente.credito_simple.ultima_cita}}</td>
+                                </tr>
+                                <tr class="formatoFilaA">
+                                    <td><strong>Última llamada</strong></td>
+                                    <td>{{ResumenCliente.credito_simple.ultima_llamada}}</td>
+                                </tr>
+                                <!-- Nueva solicitud -->
+                                <tr class="formatoFilaG">
+                                    <td colspan="2">
+                                        <center>
+                                            <button class="btn btnNuevaLinea" type="button" data-name="2" style="border-radius: 20%;">
+                                                Nueva línea
+                                            </button>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <!-- Detalle -->
+                                <tr>
+                                    <td><strong>Estatus de atención</strong></td>
+                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</td>
+                                </tr>
+                                {{#if ResumenCliente.credito_simple.tiene_linea_autorizada}}
+                                    <tr>
+                                        <td><strong>Estatus del producto</strong></td>
+                                        <td>{{ResumenCliente.leasing.estatusxproducto}}</td>
+                                    </tr>
+                                {{/if}}
+                                <tr>
+                                    <td><strong>Tipo de cuenta</strong></td>
+                                    <td>
+                                        {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.credito_simple.tipo_cuenta}}
+                                        {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.credito_simple.subtipo_cuenta}}
+                                    </td>
+                                </tr>
+                                {{#if ResumenCliente.credito_simple.tiene_linea_autorizada}}
+                                    <tr class="formatoFilaG">
+                                        <td><strong>Línea autorizada</strong></td>
+                                        <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_autorizada}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fecha de vencimiento de la línea</strong></td>
+                                        <td>{{ResumenCliente.credito_simple.fecha_vencimiento}}</td>
+                                    </tr>
+                                    <tr class="formatoFilaG">
+                                        <td><strong>Línea disponible</strong></td>
+                                        <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_disponible}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Estatus de la línea</strong></td>
+                                        <td>{{ResumenCliente.credito_simple.estatus_linea}}</td>
+                                    </tr>
+                                {{/if}}
+                                {{#if ResumenCliente.credito_simple.tiene_anexo_liberado}}
+                                    <tr>
+                                        <td><strong>Próxima mensualidad</strong></td>
+                                        <td>{{ResumenCliente.leasing.fecha_proximo_pago}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mensualidad activa</strong></td>
+                                        <td>{{ResumenCliente.leasing.mensualidad_activa}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Días de atraso</strong></td>
+                                        <td>{{ResumenCliente.leasing.dias_atraso}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cobranza</strong></td>
+                                        <td>{{ResumenCliente.leasing.cobranza}}</td>
+                                    </tr>
+                                {{/if}}
+                                <tr>
+                                    <td><strong>Asesor</strong></td>
+                                    <td>{{ResumenCliente.leasing.promotor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          {{/if}}
         <!-- DIV Producto Seguros-->
         {{#if ResumenCliente.seguros.muestra_producto}}
             <div class="span4" style="width: 400px; flex-shrink: 0; padding:5px">
@@ -888,114 +996,6 @@
                 </div>
             </div>
         {{/if}}
-        <!-- DIV Producto Crédito Simple-->
-        {{#if ResumenCliente.credito_simple.muestra_producto}}
-            <div class="span4" style="width: 400px; flex-shrink: 0; padding:5px">
-                <!-- Título producto -->
-                <div class="divInline">
-                	  <!-- Icono -->
-                	  <div class="contenedorIcono">
-                		    <img src="{{getUnifinListValue 'iconos_vista360_list' 'credito_simple'}}" style="height: 50px; width: 50px;">
-                    </div>
-                	  <!-- Nombre producto -->
-                  	<div class="contenedorTitulo">
-                     	  <div class="formatoTitulo">
-                      		  CRÉDITO SIMPLE
-                      	</div>
-                  	</div>
-                </div>
-                <!-- Detalle del producto -->
-                <div class="information-container">
-                    <!-- Detalle -->
-                    <div class="information-general-container">
-                        <table style="font-size:10px;color:#021741;width:100%;white-space: normal;">
-                            <tbody>
-                                <!-- Historial de contactos -->
-                                <tr class="formatoFilaG">
-                                    <td colspan="2"><strong><center>HISTORIAL DE CONTACTO</center></strong></td>
-                                </tr>
-                                <tr class="formatoFilaA"  style="border-bottom-style: solid; border-color: white;">
-                                    <td style="width:40%;"><strong>Última cita</strong></td>
-                                    <td>{{ResumenCliente.credito_simple.ultima_cita}}</td>
-                                </tr>
-                                <tr class="formatoFilaA">
-                                    <td><strong>Última llamada</strong></td>
-                                    <td>{{ResumenCliente.credito_simple.ultima_llamada}}</td>
-                                </tr>
-                                <!-- Nueva solicitud -->
-                                <tr class="formatoFilaG">
-                                    <td colspan="2">
-                                        <center>
-                                            <button class="btn btnNuevaLinea" type="button" data-name="2" style="border-radius: 20%;">
-                                                Nueva línea
-                                            </button>
-                                        </center>
-                                    </td>
-                                </tr>
-                                <!-- Detalle -->
-                                <tr>
-                                    <td><strong>Estatus de atención</strong></td>
-                                    <td> {{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</td>
-                                </tr>
-                                {{#if ResumenCliente.credito_simple.tiene_linea_autorizada}}
-                                    <tr>
-                                        <td><strong>Estatus del producto</strong></td>
-                                        <td>{{ResumenCliente.leasing.estatusxproducto}}</td>
-                                    </tr>
-                                {{/if}}
-                                <tr>
-                                    <td><strong>Tipo de cuenta</strong></td>
-                                    <td>
-                                        {{getUnifinListValue 'tipo_registro_cuenta_list' ResumenCliente.credito_simple.tipo_cuenta}}
-                                        {{getUnifinListValue 'subtipo_registro_cuenta_list' ResumenCliente.credito_simple.subtipo_cuenta}}
-                                    </td>
-                                </tr>
-                                {{#if ResumenCliente.credito_simple.tiene_linea_autorizada}}
-                                    <tr class="formatoFilaG">
-                                        <td><strong>Línea autorizada</strong></td>
-                                        <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_autorizada}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Fecha de vencimiento de la línea</strong></td>
-                                        <td>{{ResumenCliente.credito_simple.fecha_vencimiento}}</td>
-                                    </tr>
-                                    <tr class="formatoFilaG">
-                                        <td><strong>Línea disponible</strong></td>
-                                        <td>$ {{customFormatNumber ResumenCliente.credito_simple.linea_disponible}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Estatus de la línea</strong></td>
-                                        <td>{{ResumenCliente.credito_simple.estatus_linea}}</td>
-                                    </tr>
-                                {{/if}}
-                                {{#if ResumenCliente.credito_simple.tiene_anexo_liberado}}
-                                    <tr>
-                                        <td><strong>Próxima mensualidad</strong></td>
-                                        <td>{{ResumenCliente.leasing.fecha_proximo_pago}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Mensualidad activa</strong></td>
-                                        <td>{{ResumenCliente.leasing.mensualidad_activa}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Días de atraso</strong></td>
-                                        <td>{{ResumenCliente.leasing.dias_atraso}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Cobranza</strong></td>
-                                        <td>{{ResumenCliente.leasing.cobranza}}</td>
-                                    </tr>
-                                {{/if}}
-                                <tr>
-                                    <td><strong>Asesor</strong></td>
-                                    <td>{{ResumenCliente.leasing.promotor}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-          {{/if}}
         <!-- DIV Producto Tarjeta de Crédito -->
         {{#if ResumenCliente.tarjeta_credito.muestra_producto}}
             <div class="span4" style="width: 400px; flex-shrink: 0; padding:5px">
