@@ -62,7 +62,7 @@ class analizate_hooks  {
               </font>
               <font face="verdana" color="#133A6E">
 
-                <br><b>UNIFIN FINANCIERA, SA.B. DE C.V.</b>
+               
               </font>
               <br><br><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png">
               <br><span style="font-size:8.5pt;color:#757b80">____________________________________________</span>
