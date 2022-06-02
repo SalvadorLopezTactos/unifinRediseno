@@ -70,6 +70,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['bloqueo_cuentas_c'] = $current_user->bloqueo_cuentas_c;
         $userArray['current_user']['admin_backlog_c'] = $current_user->admin_backlog_c;
         $userArray['current_user']['excluye_valida_c'] = $current_user->excluye_valida_c;
+        $userArray['current_user']['llamada_genesys_c'] = $current_user->llamada_genesys_c;
         return $userArray;
     }
 }
