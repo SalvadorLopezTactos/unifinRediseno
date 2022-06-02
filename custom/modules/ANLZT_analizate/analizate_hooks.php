@@ -45,15 +45,15 @@ class analizate_hooks  {
             <font face="verdana" color="#635f5f">
             Estimado cliente <b>' . $full_name . ' :</b>
             <p style="text-align:justify;">
-              <br>Como parte del servicio continuo con nuestros clientes nos acercamos a ti con el objetivo de cumplir con los requerimientos del Sistema de Administración Tributaria (SAT) donde como parte de las medidas que buscan fortalecer las herramientas tecnológicas para “simplificar” el cumplimiento de las normas tributarias, es que el SAT informó que a partir del 1 de enero de este año entró en vigor la nueva versión del CFDI 4.0. estableciendo como límite de convivencia con la versión anterior hasta el 30 de junio de 2022.
+              <br>Como parte del servicio continuo con nuestros clientes, nos acercamos a ti con el objetivo de cumplir con los requerimientos establecidos por el Servicio de Administración Tributaria (SAT), donde derivado de las medidas que buscan fortalecer las herramientas tecnológicas para “simplificar” el cumplimiento de las normas tributarias, el SAT informó que a partir del 1 de enero de este año entró en vigor la nueva versión del CFDI 4.0. estableciendo como límite de convivencia con la versión anterior hasta el 30 de junio de 2022.
               <br>
 
-              <br>Es por eso por lo que necesitamos actualizar los datos del CFDI de tu empresa, de tal forma que cumplamos con los requerimientos de ley y podamos continuar emitiendo las facturas adecuadamente por los servicios prestados por UNIFIN.
+              <br>Debido a lo anterior, necesitamos actualizar los datos del CFDI de tu empresa, de tal forma que cumplamos con los requerimientos de ley y UNIFIN pueda continuar emitiendo las facturas adecuadamente.
                 </br>
                 <br>
 
                 <br>
-                Como parte del valor agregado a nuestros clientes, UNIFIN FINANCIERA pone a su disposición el siguiente enlace, en el cual a través de la clave CIEC se actualizan los datos solicitados en la normativa tributaria de forma precisa y oportuna:</br>
+                Asimismo, como parte del valor agregado a nuestros clientes, UNIFIN pone a tu disposición el siguiente enlace, mediante el cual, a través de la clave CIEC, podrás actualizar los datos solicitados en la normativa tributaria de forma precisa y oportuna: </br>
                 <br>
               <a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc). '&MAIL=' .base64_encode($correo).'&TP='.base64_encode($tipopersona).'">Da Click Aquí</a>
               <br><br>Para UNIFIN FINANCIERA es importante llevar a cabo este proceso con total seguridad y transparencia. Si tuvieras cualquier duda sobre este proceso no dudes en contactarnos al Centro de Atención al Cliente al 800 211 9000 donde con gusto te podremos acompañar en el proceso y resolver cualquier duda.
