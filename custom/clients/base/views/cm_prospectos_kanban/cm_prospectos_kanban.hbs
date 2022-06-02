@@ -1,0 +1,280 @@
+<style>
+    .kanban{
+        display:flex;
+        padding: 10px;
+        width: 100%;
+        /*background: #697774;*/
+        border-radius: 5px;
+    }
+
+    .kanban *{
+        font-family: sans-serif;
+    }
+
+    .kanban__column{
+        flex: 1;
+         margin-right: 5px;
+    }
+
+    /*
+    .kanban__column:not(:last-child){
+        margin-right: 10px;
+    }
+    */
+
+    .kanban__column-title1{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#BFBEBA;
+        user-select: none;
+    }
+
+    .kanban__column-title2{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#051F40;;
+        user-select: none;
+    }
+
+    .kanban__column-title3{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#fAA43D;
+        user-select: none;
+    }
+
+    .kanban__column-title4{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#34B8CE;
+        user-select: none;
+    }
+
+    .kanban__column-title5{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#EC652D;
+        user-select: none;
+    }
+
+    .kanban__column-title6{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#858586;
+        user-select: none;
+    }
+
+    .kanban__column-title7{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#08A04A;
+        user-select: none;
+    }
+
+    .kanban__column-title8{
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color:#ED2427;
+        user-select: none;
+    }
+
+    .kanban__element_header{
+        width: 100%;
+        display: flex;
+    }
+
+    .kanban__text_header{
+        width:85%;
+        margin:5px;
+    }
+
+    .kanban__icono_header{
+        width: 15%;
+        margin:5px;
+    }
+
+    .kanban__element_header div{
+        
+    }
+
+    .kanban__element_total{
+        width: 100%;
+        margin:5px;
+    }
+
+    .kanban__item-input{
+        padding: 10px 15px;
+        margin:5px;
+        box-sizing: border-box;
+        background: white;
+        border-radius: 5px;
+        border-width:1px;
+        border-style: solid;
+        border-color: black;
+        cursor: pointer;
+    }
+
+
+</style>
+<div class="kanban">
+    <div class="kanban__column">
+        <div class="kanban__column-title1">
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Lead Sin Contactar</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+    <div class="kanban__column">
+        <div class="kanban__column-title2">
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Prospecto Contactado</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+    <div class="kanban__column">
+        <div class="kanban__column-title3">
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Prospecto Interesado</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+    <div class="kanban__column">
+        <div class="kanban__column-title4">
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Prospecto Integración de Expediente</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+    <div class="kanban__column">
+        <div class="kanban__column-title5" >
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Prospecto en Crédito</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+    <div class="kanban__column">
+        <div class="kanban__column-title6">
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Cliente con Línea sin Operar</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+    <div class="kanban__column">
+        <div class="kanban__column-title7">
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Cliente Activo</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+    <div class="kanban__column">
+        <div class="kanban__column-title8">
+            <div class="kanban__element_header">
+                <div class="kanban__text_header">
+                    <p>Cliente Perdido</p>
+                </div>
+                <div class="kanban__icono_header">
+                    <img src="custom/include/images/contacto_nuevo.png" style="height: 20px;">
+                </div>
+            </div>
+            <div class="kanban__element_total">81 registros</div>
+        </div>
+        <div class="kanban__items">
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__item-input">Wash the dishes</div>
+            <div class="kanban__dropzone"></div>
+        </div>
+    </div>
+</div>
