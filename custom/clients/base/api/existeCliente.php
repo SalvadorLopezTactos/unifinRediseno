@@ -92,8 +92,8 @@ class existeCliente extends SugarApi
         $GLOBALS['log']->fatal('qresultLead',$resultLead);
         */
 
-        $sql = "SELECT leads.id, leads.last_name AS name, leads_cstm.clean_name_c as full_name, leads.phone_mobile, leads.phone_home, leads.phone_work , 'Leads' as _module FROM leads LEFT JOIN leads_cstm leads_cstm ON leads_cstm.id_c = leads.id WHERE ((leads.phone_mobile = '{$tel}') OR (leads.phone_home = '{$tel}') OR (leads.phone_work = '{$tel}')) AND (leads.deleted = 0)";
-        //$GLOBALS['log']->fatal($sql);
+        $sql = "SELECT leads.id, leads.last_name AS name, leads_cstm.clean_name_c as full_name, leads.phone_mobile, leads.phone_home, leads.phone_work , 'Leads' as _module FROM leads LEFT JOIN leads_cstm leads_cstm ON leads_cstm.id_c = leads.id WHERE ((leads.phone_mobile = '{$tel}') OR (leads.phone_home = '{$tel}') OR (leads.phone_work = '{$tel}')) AND account_id IS NULL AND (leads.deleted = 0)";
+        $GLOBALS['log']->fatal($sql);
         $result = $GLOBALS['db']->query($sql);
         while($row = $GLOBALS['db']->fetchByAssoc($result) ){
             //$aux[]=$row;
