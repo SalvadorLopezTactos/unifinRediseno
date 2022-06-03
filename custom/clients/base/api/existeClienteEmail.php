@@ -54,11 +54,16 @@ class existeClienteEmail extends SugarApi
             $aux->id = $bean->id;
             $aux->_module = $row['bean_module'];
             $aux->name = ($row['bean_module'] == "Accounts" ) ? $bean->name : ($bean->first_name." ".$bean->last_name) ;
-            if ($row['bean_module']=='Leads'){ $aux->full_name = $bean->clean_name_c; }
+            
             if ($row['bean_module']=='Accounts'){ $aux->full_name = $bean->clean_name; }
+            if ($row['bean_module']=='Leads'){ $aux->full_name = $bean->clean_name_c; }
             if ($row['bean_module']=='Prospects'){ $aux->full_name = ($bean->first_name." ".$bean->last_name); }
             $aux->email = $row['email'];
-            array_push($array_registros,$aux);
+            if ($row['bean_module']=='Leads' && empty($bean->account_id)){
+                array_push($array_registros,$aux);
+            }else if($row['bean_module']=='Accounts' || $row['bean_module']=='Prospects'){
+                array_push($array_registros,$aux);
+            }
         }
         $GLOBALS['log']->fatal('array_registros',$array_registros);
         return $array_registros;
