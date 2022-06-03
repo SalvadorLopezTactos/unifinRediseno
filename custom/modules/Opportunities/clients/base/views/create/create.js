@@ -184,8 +184,8 @@
         //VALIDA SI YA EXISTEN SOLICITUDES CON LÍNEAS DE CREDITO AUTORIZADAS ANTES DE CREAR UNA SOLICITUD CON TIPO PRODUCTO TARJETA DE CREDITO
         this.model.addValidationTask('validaSolCreditCard', _.bind(this.validaSolCreditCard, this));
         this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
-
 		this.model.addValidationTask('SOCInicio', _.bind(this.SOCInicio, this));
+		this.model.addValidationTask('negocio_c', _.bind(this.negocios, this));
     },
 
     /* producto_financiero: function () {
@@ -2598,10 +2598,7 @@
         }
     },
 
-
-
 	SOCInicio: function (fields, errors, callback) {
-
 		var id_cuenta=this.model.get('account_id');
 		if(id_cuenta!='' && id_cuenta != undefined ){
 			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
@@ -2616,4 +2613,16 @@
 		callback(null, fields, errors);
     },
 
+	negocios: function (fields, errors, callback) {
+		if(this.model.get('tipo_producto_c') == 2 && this.model.get('negocio_c') == 7 && !app.user.attributes.excluye_valida_c) {
+            app.alert.show('combinacion', {
+                level: 'error',
+                title: 'No cuenta con el permiso para crear este tipo de solicitud.',
+                autoClose: false
+            });
+            errors['negocio_c'] = errors['negocio_c'] || {};
+            errors['negocio_c'].required = true;
+		}
+		callback(null, fields, errors);
+    },
 })
