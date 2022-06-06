@@ -1,0 +1,94 @@
+<style>
+
+    #datos {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid;
+        margin: 0 auto;
+		/*Lo siguiente es para los bordes*/
+        border-collapse: collapse;
+    }
+
+    #datos td {
+        padding: 10px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    #datos #titulo td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: #E7E9EB;;
+        color: black;
+        font-size: 14px;
+    }
+
+    #datos th {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        background-color: #021741;
+        color: white;
+    }
+
+</style>
+
+<br>
+<table id = "datos"  >
+    <thead id = "titulo">
+        <tr>
+            <td colspan="3"><b>En proceso</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th width = "34%"><b>Prospecto</b></td>
+            <th width = "35%"><b>Crédito</b></td>
+            <th width = "31%"><b>Rechazada</b></td>
+        </tr>
+        {{#each dataEnproceso}}
+        <tr>
+            <td>$ {{customFormatNumber prospecto}}</td>
+            <td>$ {{customFormatNumber credito}}</td>
+            <td>$ {{customFormatNumber rechazada}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<br>
+<table id = "datos" >
+    <thead id = "titulo">
+        <tr>
+            <td colspan="3"><b>Autorizado</b></td>
+        </tr>
+    </thead>
+    <tbody> 
+        <tr>
+            <th width = "34%"><b>Sin SC</b></td>
+            <th width = "35%"><b>Con SC</b></td>
+            <th width = "31%"><b>Total</b></td>
+        </tr>
+        {{#each dataAutorizado}}
+        <tr>
+            <td >$ {{customFormatNumber sinsc}}</td>
+            <td >$ {{customFormatNumber consc}}</a></td>
+            <td >$ {{customFormatNumber total}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<br>
+<table id = datos >
+    <tr colspan="2">
+        <th width = "60%"><b>Total</b></td>
+        <th width = "40%"><b># Clientes</b></td>
+    </tr>
+    {{#each dataTotal}}
+    <tr>
+        <td >$ {{customFormatNumber montoTotal}}</td>
+        <td >{{conteoTotal}}</td>
+    </tr>
+    {{/each}}
+</table>
+<br>
