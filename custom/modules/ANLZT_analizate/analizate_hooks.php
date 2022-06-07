@@ -42,27 +42,28 @@ class analizate_hooks  {
             //$GLOBALS['log']->fatal('>>>>' . $url . '<<<<');
 
             $mailHTML = '
-            <font face="verdana" color="#635f5f">
-            Estimado cliente <b>' . $full_name . ' :</b>
-            <p style="text-align:justify;">
-              <br>Como parte del servicio continuo con nuestros clientes, nos acercamos a ti con el objetivo de cumplir con los requerimientos establecidos por el Servicio de Administración Tributaria (SAT), donde derivado de las medidas que buscan fortalecer las herramientas tecnológicas para “simplificar” el cumplimiento de las normas tributarias, el SAT informó que a partir del 1 de enero de este año entró en vigor la nueva versión del CFDI 4.0. estableciendo como límite de convivencia con la versión anterior hasta el 30 de junio de 2022.
-              <br>
+              <font face="verdana" color="#635f5f">
+                Estimado cliente <b>' . $full_name . ' :</b>
+                <p style="text-align:justify;">
+                  <br>Como parte del servicio continuo a nuestros clientes, nos acercamos a ti con el propósito de <b>cumplir con los requerimientos establecidos por el Servicio de Administración Tributaria (SAT),</b> derivado de las medidas que buscan fortalecer las herramientas tecnológicas para simplificar el cumplimiento de las normas tributarias.
+                  <br>
 
-              <br>Debido a lo anterior, necesitamos actualizar los datos del CFDI de tu empresa, de tal forma que cumplamos con los requerimientos de ley y UNIFIN pueda continuar emitiendo las facturas adecuadamente.
-                </br>
-                <br>
+                  <br>El SAT informó que a partir del 1º de enero del presente año, entró en vigor la <b>nueva versión del CFDI 4.0,</b> estableciendo como <b>fecha límite de convivencia con la versión anterior el 30 de junio de 2022.</b>
+                  <br>
 
-                <br>
-                Asimismo, como parte del valor agregado a nuestros clientes, UNIFIN pone a tu disposición el siguiente enlace, mediante el cual, a través de la clave CIEC, podrás actualizar los datos solicitados en la normativa tributaria de forma precisa y oportuna: </br>
-                <br>
-              <a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc). '&MAIL=' .base64_encode($correo).'&TP='.base64_encode($tipopersona).'">Da Click Aquí</a>
-              <br><br>Para UNIFIN FINANCIERA es importante llevar a cabo este proceso con total seguridad y transparencia. Si tuvieras cualquier duda sobre este proceso no dudes en contactarnos al Centro de Atención al Cliente al 800 211 9000 donde con gusto te podremos acompañar en el proceso y resolver cualquier duda.
+                  <br>Derivado de lo anterior, <b>necesitamos actualizar los datos del CFDI de nuestros clientes,</b> de tal forma que UNIFIN pueda <b>continuar emitiendo facturas con validez fiscal.</b>
+                  <br>
+
+                  <br>UNIFIN pone a tu disposición <b>el siguiente enlace,</b> mediante el cual, a través de tu <b>clave CIEC</b> podrás <b>actualizar de forma precisa y oportuna los datos</b> solicitados en la legislación tributaria.
+                  <br>
+
+                  <center>
+                    <a id="downloadErrors" href="'. $urlFinanciera.'&UUID='. base64_encode($idCuenta). '&RFC_CIEC=' .base64_encode($rfc). '&MAIL=' .base64_encode($correo).'&TP='.base64_encode($tipopersona).'">DAR CLICK AQUÍ</a>
+                  </center>
+
+                  <br><br>Para UNIFIN es importante llevar a cabo este proceso con total <b>seguridad y transparencia;</b> si tuvieras cualquier duda relacionada con el mismo, no dudes en contactarnos al <b>Centro de Atención al Cliente al 800 211 9000</b> donde con gusto te atenderemos.
                 </p>
                 <br>Atentamente
-              </font>
-              <font face="verdana" color="#133A6E">
-
-               
               </font>
               <br><br><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png">
               <br><span style="font-size:8.5pt;color:#757b80">____________________________________________</span>
