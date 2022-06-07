@@ -1184,6 +1184,7 @@
              });
             if(Banderita!=1){
                 self.noEditFields.push('tipo_proveedor_compras_c');
+                self.noEditFields.push('vendor_c');
             }
         }
 
