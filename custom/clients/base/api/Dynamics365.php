@@ -68,7 +68,7 @@ class Dynamics365 extends SugarApi
         // $GLOBALS['log']->fatal('Dynamics request: '. $request);
         // $GLOBALS['log']->fatal('Dynamics token: '. $token);
         $token_format=array("Authorization: Bearer ".$token);
-        
+
         /*
          * Se obtienen datos de la Cuenta para armar cuerpo de la petición
          * */
@@ -178,7 +178,7 @@ class Dynamics365 extends SugarApi
             //Obtener régimen fiscal
             $regimen_fiscal=$beanCuenta->tipodepersona_c;
             //Genera estructura de petición para alta de proveedor
-            
+
             $body_elements=array();
             $body_elements["DataAreaId"]="UFIN";
             $body_elements["VENDORACCOUNTNUMBER"]=$beanCuenta->idcliente_c;
@@ -191,7 +191,7 @@ class Dynamics365 extends SugarApi
             }else{
                 $body_elements["FOREIGNVENDORTAXREGISTRATIONID"]="xexx000000000";
             }
-            
+
             $body_elements["VENDORGROUPID"]="PROV";
             $body_elements["PRIMARYEMAILADDRESS"]=$beanCuenta->email1;
             $body_elements["PRIMARYEMAILADDRESSDESCRIPTION"]="PRINCIPAL";
@@ -258,6 +258,12 @@ class Dynamics365 extends SugarApi
                 }
             }
 
+            //Valida si es proveedor Fleet
+            if($beanCuenta->tipo_proveedor_c == '^7^' || $beanCuenta->tipo_proveedor_c == '7') {
+                $body_elements["OnlyReplyCompany"]="AUTO";
+            }else{
+                $body_elements["OnlyReplyCompany"]="";
+            }
             //Valida total de registros en $records_list
             if (count($records_list)==0) {
                 $records_list[]=$body_elements;
@@ -316,7 +322,7 @@ class Dynamics365 extends SugarApi
             }
 
         }
-        
+
         $GLOBALS['log']->fatal("RESPONSE API DYNAMICS 365 Y CUENTAS POR PAGAR");
         $GLOBALS['log']->fatal(print_r($responseFull,true));
 
@@ -358,7 +364,7 @@ class Dynamics365 extends SugarApi
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => '{"idProveedor" : '.$idProveedor.'}',       
+            CURLOPT_POSTFIELDS => '{"idProveedor" : '.$idProveedor.'}',
             CURLOPT_HTTPHEADER => array(
               'Content-Type: application/json'
             ),
