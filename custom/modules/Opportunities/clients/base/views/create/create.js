@@ -2614,7 +2614,7 @@
     },
 
 	negocios: function (fields, errors, callback) {
-		if(this.model.get('tipo_producto_c') == 2 && this.model.get('negocio_c') == 7 && !app.user.attributes.excluye_valida_c) {
+		if((this.model.get('tipo_producto_c') == 2 && this.model.get('negocio_c') == 7) || (this.model.get('tipo_producto_c') == 1 && this.model.get('negocio_c') == 8) && !app.user.attributes.excluye_valida_c) {
             app.alert.show('combinacion', {
                 level: 'error',
                 title: 'No cuenta con el permiso para crear este tipo de solicitud.',
