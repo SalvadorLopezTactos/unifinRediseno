@@ -211,7 +211,7 @@ class Analizate extends SugarApi
 
         $result = curl_exec($ch);
         //$GLOBALS['log']->fatal("Resultado: ". $result);
-        return $result;
+        return base64_encode($result);
 
     }
     public function  solicitaCIECFunction($api, $args){
