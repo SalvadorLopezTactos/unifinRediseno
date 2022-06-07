@@ -169,7 +169,12 @@ array (
             'fields' => 
             array (
               0 => 'assigned_user_name',
-              1 => 'team_name',
+              1 => 
+              array (
+                'readonly' => false,
+                'name' => 'tipo_registro_cuenta_c',
+                'label' => 'LBL_TIPO_REGISTRO_CUENTA_C',
+              ),
               2 => 
               array (
                 'name' => 'documento',
@@ -209,6 +214,14 @@ array (
                 'name' => 'tipo',
                 'label' => 'LBL_TIPO',
               ),
+              10 => 
+              array (
+                'readonly' => false,
+                'name' => 'json_robina_c',
+                'studio' => 'visible',
+                'label' => 'LBL_JSON_ROBINA_C',
+                'span' => 12,
+              ),
             ),
           ),
           2 => 
@@ -226,9 +239,14 @@ array (
               0 => 
               array (
                 'name' => 'description',
-                'span' => 12,
+                'span' => 6,
               ),
               1 => 
+              array (
+                'name' => 'team_name',
+                'span' => 6,
+              ),
+              2 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -252,7 +270,7 @@ array (
                   ),
                 ),
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,

@@ -88,7 +88,14 @@ array (
             'name' => 'fecha_baja_c',
             'label' => 'LBL_FECHA_BAJA',
           ),
-          1 => '',
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'obj_objetivos_users_name',
+            'label' => 'LBL_OBJ_OBJETIVOS_USERS_FROM_OBJ_OBJETIVOS_TITLE',
+          ),
         ),
       ),
       'lbl_detailview_panel2' => 
@@ -191,7 +198,6 @@ array (
             'name' => 'id_active_directory_c',
             'label' => 'LBL_ID_ACTIVE_DIRECTORY_C',
           ),
-          1 => '',
         ),
       ),
       'lbl_detailview_panel1' => 
@@ -368,7 +374,6 @@ array (
             'name' => 'bloqueo_cuentas_c',
             'label' => 'LBL_BLOQUEO_CUENTAS',
           ),
-          1 => '',
         ),
         14 => 
         array (
@@ -390,7 +395,20 @@ array (
             'name' => 'admin_backlog_c',
             'label' => 'LBL_ADMIN_BACKLOG',
           ),
-          1 => '',
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'llamada_genesys_c',
+            'label' => 'LBL_LLAMADA_GENESYS',
+          ),
+        ),
+        16 => 
+        array (
+          0 => 
+          array (
+            'name' => 'excluye_valida_c',
+            'label' => 'LBL_EXCLUYE_VALIDA',
+          ),
         ),
       ),
     ),

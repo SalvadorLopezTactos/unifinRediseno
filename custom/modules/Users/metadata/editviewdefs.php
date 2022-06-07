@@ -123,7 +123,14 @@ array (
             'name' => 'fecha_baja_c',
             'label' => 'LBL_FECHA_BAJA',
           ),
-          1 => '',
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'obj_objetivos_users_name',
+            'label' => 'LBL_OBJ_OBJETIVOS_USERS_FROM_OBJ_OBJETIVOS_TITLE',
+          ),
         ),
       ),
       'lbl_editview_panel3' => 
@@ -239,7 +246,6 @@ array (
             'name' => 'limite_asignacion_lm_c',
             'label' => 'LBL_LIMITE_ASIGNACION_LM',
           ),
-          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -473,7 +479,20 @@ array (
             'name' => 'admin_backlog_c',
             'label' => 'LBL_ADMIN_BACKLOG',
           ),
-          1 => '',
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'llamada_genesys_c',
+            'label' => 'LBL_LLAMADA_GENESYS',
+          ),
+        ),
+        16 => 
+        array (
+          0 => 
+          array (
+            'name' => 'excluye_valida_c',
+            'label' => 'LBL_EXCLUYE_VALIDA',
+          ),
         ),
       ),
     ),

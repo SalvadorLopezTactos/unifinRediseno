@@ -139,7 +139,8 @@
                 "url_documento": "",
                 "empresa": empresa,
                 "fecha_actualizacion": fecha,
-                "anlzt_analizate_accountsaccounts_ida": this.model.id
+                "anlzt_analizate_accountsaccounts_ida": this.model.id,
+                "tipo_registro_cuenta_c":"5" //Proveedor
             };
             var url = app.api.buildURL('ANLZT_analizate/', null, null);
             app.api.call('create', url, api_params, {
