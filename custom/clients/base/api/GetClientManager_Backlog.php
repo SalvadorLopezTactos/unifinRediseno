@@ -76,7 +76,7 @@ class GetClientManager_Backlog extends SugarApi
         if ($pos != "") { //valida usuario director equipo
             $queryusuarios = "SELECT u.id, u.user_name, uc.puestousuario_c, uc.equipo_c, uc.equipos_c, uc.region_c from users u
             join users_cstm uc on u.id = uc.id_c where uc.equipo_c in ({$tteams})
-            and posicion_operativa_c like '%3%'  and users.status = 'Active'
+            and posicion_operativa_c like '%3%'  and u.status = 'Active'
             and u.status = 'Active' order by equipo_c";
 
             $GLOBALS['log']->fatal('queryusuarios-2-', $queryusuarios);
@@ -133,11 +133,11 @@ class GetClientManager_Backlog extends SugarApi
                 array_push($equipo,$row['equipo_c']);
                 array_push($region,$row['region_c']);
             }
-            $usuarios = substr($usuarios,0,-1);
         }
         
         //$usuario = array_unique($usuario);
         //$usuario = array('usuario' => $usuario);
+        $usuarios = substr($usuarios,0,-1);
         $equipo = array_unique($equipo);
         $equipo = array('equipo' => $equipo);
         $region = array_unique($region);
@@ -151,14 +151,14 @@ class GetClientManager_Backlog extends SugarApi
         SUM(lbc.monto_final_comprometido_c) as suma , count(lb.assigned_user_id) as conteo
         from lev_backlog lb inner join lev_backlog_cstm lbc on lb.id = lbc.id_c 
         where  lb.assigned_user_id in ({$idUsuario}) and 
-        lbc.estatus_operacion_c = '2' group by  lbc.etapa_solicitud_c ,  lbc.etapa_c  , lb.progreso ,lb.assigned_user_id";
+        lbc.estatus_operacion_c = '2' group by  lbc.etapa_solicitud_c ,  lbc.etapa_c  , lb.progreso ";
         $GLOBALS['log']->fatal('queryAgrupado', $queryAgrupado);
         $result = $GLOBALS['db']->query($queryAgrupado);
        
         $queryTotal = "SELECT  SUM(lbc.monto_final_comprometido_c) as suma , count(lb.assigned_user_id) as conteo
         from lev_backlog lb inner join lev_backlog_cstm lbc on lb.id = lbc.id_c 
         where  lb.assigned_user_id in ({$idUsuario}) and 
-        lbc.estatus_operacion_c = '2' group by  lb.assigned_user_id";
+        lbc.estatus_operacion_c = '2' ";
         $GLOBALS['log']->fatal('queryTotal', $queryTotal);
         $result2 = $GLOBALS['db']->query($queryTotal);
         
