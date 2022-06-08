@@ -974,20 +974,3 @@ $dependencies['Accounts']['ClavePizarra_required'] = array(
         ),
     ),
 );
-
-$dependencies['Accounts']['CodigoVendor_required'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('tipo_proveedor_compras_c', 'codigo_vendor_c'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'SetRequired',
-            'params' => array(
-                'target' => 'codigo_vendor_c',
-                'label' => 'codigo_vendor_c_label',
-                'value' => 'equal($tipo_proveedor_compras_c,"6")',
-            ),
-        ),
-    ),
-);
