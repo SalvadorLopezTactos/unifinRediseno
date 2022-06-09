@@ -369,3 +369,4 @@ $mod_strings['LBL_ULTIMO_CAMBIO_EDO'] = 'Fecha del último cambio de estado';
 $mod_strings['LBL_INICIO_REGIMEN'] = 'Fecha inicio del régimen';
 $mod_strings['LBL_FIN_REGIMEN'] = 'Fecha fin del régimen';
 $mod_strings['LBL_RECORDVIEW_PANEL24'] = 'Analízate Clientes';
+$mod_strings['LBL_VENDOR'] = 'Vendor';
