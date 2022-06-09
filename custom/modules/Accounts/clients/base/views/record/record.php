@@ -940,8 +940,8 @@ array (
               1 => 
               array (
                 'readonly' => false,
-                'name' => 'codigo_vendor_c',
-                'label' => 'LBL_CODIGO_VENDOR_C',
+                'name' => 'vendor_c',
+                'label' => 'LBL_VENDOR',
               ),
               2 => 
               array (
@@ -950,15 +950,24 @@ array (
               ),
               3 => 
               array (
+                'readonly' => false,
+                'name' => 'codigo_vendor_c',
+                'label' => 'LBL_CODIGO_VENDOR_C',
+              ),
+              4 => 
+              array (
                 'name' => 'alta_proveedor_c',
                 'label' => 'LBL_ALTA_PROVEEDOR_C',
               ),
-              4 => 
+              5 => 
+              array (
+              ),
+              6 => 
               array (
                 'name' => 'iva_c',
                 'label' => 'LBL_IVA',
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'es_referenciador_c',
                 'label' => 'LBL_ES_REFERENCIADOR_C',
