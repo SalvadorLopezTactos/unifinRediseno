@@ -1,6 +1,5 @@
 <?php
-
- // created: 2022-02-01 18:46:47
+ // created: 2022-06-09 09:24:18
 $platforms[] = 'api';
 $platforms[] = 'unifinAPI';
 $platforms[] = 'efactor';
@@ -33,3 +32,7 @@ $platforms[] = 'uni2Liberacion';
 $platforms[] = 'unionVita';
 $platforms[] = 'dwh';
 $platforms[] = 'portalUniclickV2';
+$platforms[] = 'clarivia';
+$platforms[] = 'landingExpos';
+$platforms[] = 'portalUnileasing';
+$platforms[] = 'lenia';
