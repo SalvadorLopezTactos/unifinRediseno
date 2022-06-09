@@ -233,6 +233,10 @@
         this.model.on('sync', this.checkProveedor, this);
         //Display or Hide Vista360
         this.model.on('sync', this._hideVista360, this);
+        //Display or Hide Proveedor Analizte
+        this.model.on('sync', this._panel_anlzt_proveedor, this);
+         //Display or Hide Analizte Cliente
+         this.model.on('sync', this._panel_anlzt_cliente, this);
         //Solo Lectura campos Origen
         this.model.on('sync', this.readOnlyOrigen, this);
         /* @author F. Javier Garcia S. 10/07/2018
@@ -302,7 +306,7 @@
 
 
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
-		this.context.on('button:proveedor_quantico:click', this.proveedor_quantico, this);
+        this.context.on('button:proveedor_quantico:click', this.proveedor_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
@@ -314,15 +318,21 @@
         this.model.addValidationTask('AlertaCamposRequeridosUniclick', _.bind(this.validaReqUniclick, this));
         this.model.addValidationTask('validaReqPLDPropReal_CS', _.bind(this.validaPropRealCR, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
-		//Funcion para que se pueda o no editar el check de Alianza SOC
+	      //Funcion para que se pueda o no editar el check de Alianza SOC
         this.model.on('sync', this.userAlianzaSoc, this);
         //this.model.on('sync',this.validaReqUniclickInfo,this);
 
         //Se omite llamada a funcion para deshabilitar ya que se opta por habilitar bloqueo via dependencia
         this.model.on('sync', this.deshabilitaOrigenCuenta, this);
 
+
+
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigen();
+        //Clic solicitar CIEC
+        this.context.on('button:solicitar_ciec:click', this.solicitar_ciec_function, this);
+        //Oculta Menú Solicitar CIEC
+        this.model.on('sync', this.ocultaSolicitarCIEC, this);
 
     },
 
@@ -1174,9 +1184,10 @@
              });
             if(Banderita!=1){
                 self.noEditFields.push('tipo_proveedor_compras_c');
+                self.noEditFields.push('vendor_c');
             }
         }
-		
+
 		//Campos Denominación y Régimen Fiscal SAT
 		var listaUsuarios = [];
         Object.entries(App.lang.getAppListStrings('actualiza_sat_list')).forEach(([key, value]) => {
@@ -1209,8 +1220,9 @@
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //Oculta nombre de campo Potencial_Autos
         $("div.record-label[data-name='potencial_autos']").attr('style', 'display:none;');
-        //Oculta etiqueta de Analizate
+        //Oculta etiqueta de Analizate y analizate cliente
         this.$("div.record-label[data-name='accounts_analizate']").attr('style', 'display:none;');
+        this.$("div.record-label[data-name='accounts_analizate_clientes']").attr('style', 'display:none;');
         //Oculta etiqueta de uni_productos
         this.$("div.record-label[data-name='account_uni_productos']").attr('style', 'display:none;');
 
@@ -8188,9 +8200,21 @@ validaReqUniclickInfo: function () {
                     cont_nlzt.Analizate=[];
                     cont_nlzt.Analizate.Financiera=[];
                     cont_nlzt.Analizate.Credit=[];
+                    cont_nlzt.Analizate.Cliente=[];
                     cont_nlzt.Analizate.Financiera = data[4].contents.Financiera;
                     cont_nlzt.Analizate.Credit = data[4].contents.Credit;
+                    cont_nlzt.Analizate.Cliente = data[4].contents.AnalizateCliente;
                     cont_nlzt.render();
+                    analizate_cl.Analizate=[];
+                    analizate_cl.Analizate.Financiera=[];
+                    analizate_cl.Analizate.Credit=[];
+                    analizate_cl.Analizate.Cliente=[];
+                    analizate_cl.Analizate.Financiera = data[4].contents.Financiera;
+                    analizate_cl.Analizate.Credit = data[4].contents.Credit;
+                    analizate_cl.Analizate.Cliente = data[4].contents.AnalizateCliente;
+                    analizate_cl.cargapipelineCliente();
+                    analizate_cl.render();
+
 
                 }
                 //PLD
@@ -8237,6 +8261,10 @@ validaReqUniclickInfo: function () {
                 }
                 //Final de funcion, mandamos ejecutar funcion de requniclick
                 this.validaReqUniclickInfo();
+                //Ejecuta funcion para boton CIEC
+                this.muestraCIEC();
+                //render a campo cstm Clientes analizate
+                analizate_cl.render();
 
             }, this)
         });
@@ -8368,7 +8396,7 @@ validaReqUniclickInfo: function () {
             }, this),
         });
     },
-validaPropRealCR: function (fields, errors, callback) {
+    validaPropRealCR: function (fields, errors, callback) {
         var esPropietario=false;
        var esCLiente=false;
        var esTercero=false;
@@ -8417,4 +8445,101 @@ validaPropRealCR: function (fields, errors, callback) {
            callback(null, fields, errors);
        }
    },
+
+   muestraCIEC: function (){
+       //Validamos que el usuario logueado sea el mismo asignado a alguno de los productos de la cuenta
+        var leasing= App.user.attributes.id== contexto_cuenta.ResumenProductos.leasing.assigned_user_id && contexto_cuenta.ResumenProductos.leasing.tipo_cuenta=='3' ? true : false;;
+        var factoring= App.user.attributes.id==contexto_cuenta.ResumenProductos.factoring.assigned_user_id && contexto_cuenta.ResumenProductos.factoring.tipo_cuenta=='3'? true : false;;
+        var creditauto= App.user.attributes.id== contexto_cuenta.ResumenProductos.credito_auto.assigned_user_id && contexto_cuenta.ResumenProductos.credito_auto.tipo_cuenta=='3' ? true : false;;
+        var fleet = App.user.attributes.id== contexto_cuenta.ResumenProductos.fleet.assigned_user_id && contexto_cuenta.ResumenProductos.fleet.tipo_cuenta=='3'? true : false;;
+        var uniclick = App.user.attributes.id==contexto_cuenta.ResumenProductos.uniclick.assigned_user_id && contexto_cuenta.ResumenProductos.uniclick.tipo_cuenta=='3'? true : false;;
+
+        if(leasing==true || factoring==true||creditauto==true||fleet==true||uniclick==true){
+            $('[name="solicitar_ciec"]').show();
+       }else{
+            $('[name="solicitar_ciec"]').hide();
+       }
+   },
+
+   _panel_anlzt_proveedor: function () {
+        if (this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c')==true) {
+            //Muestra subpanel Proveedor De Analizate
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").show();
+        }else{
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
+        }
+    },
+    _panel_anlzt_cliente: function () {
+        if (this.model.get('tipo_registro_cuenta_c') == '3') {
+            //Muestra subpanel Cliente De Analizate
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").show();
+        }else{
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").hide();
+        }
+    },
+
+    ocultaSolicitarCIEC: function () {
+    		var cliente = (this.model.get("tipo_registro_cuenta_c") == 3) ? true : false;
+        var botonSC = this.getField("solicitar_ciec");
+        if (botonSC) {
+            botonSC.listenTo(botonSC, "render", function () {
+                if (cliente) {
+                    botonSC.show();
+                } else {
+                    botonSC.hide();
+                }
+            });
+        }
+    },
+
+    solicitar_ciec_function:function(){
+        //Valida que sea proveedor para reenviar
+        if (this.model.get('tipo_registro_cuenta_c') != "3") {
+            app.alert.show('No_Cliente', {
+                level: 'error',
+                messages: 'Sólo se puede solcitar CIEC para cuentas de tipo Cliente.',
+                autoClose: false
+            });
+            return;
+        }
+
+        if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
+            app.alert.show('No_Envio', {
+                level: 'error',
+                messages: 'La cuenta no contiene un correo electrónico.',
+                autoClose: false
+            });
+            return;
+        }
+        App.alert.show('eventoEnvioMailCliente', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+
+        //enviar elementos de la cuenta
+        var api_params = {
+            "idCuenta": this.model.id,
+            "idUsuario": App.user.id
+        };
+        var url = app.api.buildURL('solicitaCIECCliente/', null, null);
+        app.api.call('create', url, api_params, {
+            success: function (data) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                var levelStatus = (data['status'] == '200') ? 'success' : 'error';
+                app.alert.show('Correo_reenviado', {
+                    level: levelStatus,
+                    messages: data['message'],
+                    autoClose: false
+                });
+            },
+            error: function (e) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                app.alert.show('Correo_no_reenviado', {
+                    level: 'error',
+                    messages: 'No se ha podido generar solicitud CIEC. Intente nuevamente.',
+                    autoClose: false
+                });
+            }
+        });
+    },
 })
