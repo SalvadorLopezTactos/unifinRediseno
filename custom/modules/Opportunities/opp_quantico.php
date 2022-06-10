@@ -97,7 +97,7 @@ class IntegracionQuantico
                 "RequestTypeId" => $bean->tipo_de_operacion_c,
                 "PersonTypeId" => $tipoPersona,
                 "ProductTypeId" => $bean->tipo_producto_c,
-                "CurrencyTypeId" => "1",
+                "CurrencyTypeId" => (!empty($bean->ce_moneda_c) && $bean->ce_moneda_c!='') ? $bean->ce_moneda_c :  "1",
                 "RequestAmount" => $RequestAmount,
                 "IncreaseAmount" => $IncreaseAmount,
                 "AdviserId" => $idActiveDirectory,
