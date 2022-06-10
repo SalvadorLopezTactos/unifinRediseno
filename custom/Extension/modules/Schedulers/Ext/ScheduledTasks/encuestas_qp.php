@@ -6,6 +6,7 @@
         //ECB 29/04/2022 Recupera respuestas de encuestas de QuestionPro
 		global $sugar_config;
 		require_once 'modules/Configurator/Configurator.php';
+		$GLOBALS['log']->fatal("JOB Question Pro: Inicia Proceso");
 		$beanQuery = BeanFactory::newBean('QPRO_Gestion_Encuestas');
 		$sugarQueryGE = new SugarQuery();
 		$sugarQueryGE->select(array('id', 'encuesta_id', 'ultima_respuesta_c'));
@@ -18,6 +19,7 @@
 				$curl = curl_init();
 				$api = $sugar_config['qp_api'];
 				$url = $sugar_config['qpro'].$resultGE[$current]['encuesta_id'].'/responses/filter?page=1&perPage=100&apiKey='.$api;
+				$GLOBALS['log']->fatal("JOB Question Pro: Obteniendo respuesta de encuesta ". $resultGE[$current]['encuesta_id']);
 				$ini = $resultGE[$current]['ultima_respuesta_c'];
 				$fin = date('Y-m-d');
 				$arreglo = array(
@@ -25,6 +27,8 @@
 					"endDate" => $fin,
 					"resultMode" => 2
 				);
+				$GLOBALS['log']->fatal("JOB Question Pro: Request");
+				$GLOBALS['log']->fatal(print_r($arreglo,true));
 				$content = json_encode($arreglo);
 				curl_setopt_array($curl, array(
 					CURLOPT_URL => $url,
@@ -44,11 +48,19 @@
 				$configuratorObj = new Configurator();
 				$configuratorObj->loadConfig();
 				$configuratorObj->config['qp_peticiones'] = $sugar_config['qp_peticiones'] + 1;
+				$GLOBALS['log']->fatal("JOB Question Pro: Petición número ".$configuratorObj->config['qp_peticiones']);
 				$configuratorObj->saveConfig();
 				if(!$err) {
 					$beanGE = BeanFactory::retrieveBean('QPRO_Gestion_Encuestas', $resultGE[$current]['id'] ,array('disable_row_level_security' => true));
 					$beanGE->ultima_respuesta_c = $fin;
 					$beanGE->save();
+					if(!isset($response['response']['error'])){
+						$numero_respuestas=count($response['response']);
+						$GLOBALS['log']->fatal("JOB Question Pro: Cantidad de respuestas obtenidas ".$numero_respuestas);
+					}else{
+						$GLOBALS['log']->fatal("JOB Question Pro: No se han obtenido respuestas en este periodo de tiempo");
+					}
+					
 					foreach($response['response'] as $respuesta) {
 						if(!empty($respuesta['customVariables']['idencuesta'])) {
 							$fecha = date("Y-m-d", strtotime(str_replace(",","",substr($respuesta['timestamp'], 0, 12))));
@@ -84,7 +96,13 @@
 				}
 				$result = $mailer->send();
 				$GLOBALS['log']->fatal("No se pueden obtener respuestas de encuestas debido a que se ha alcanzado el límite de peticiones a QuestionPro");
+
+				//Se establece nuevo valor a $current para salir del ciclo for
+				$current=$countGE;
 			}
+
 		}
-        return true;
+		$GLOBALS['log']->fatal("JOB Question Pro: Termina Proceso");
+		
+		return true;
     }
