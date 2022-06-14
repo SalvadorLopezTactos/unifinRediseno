@@ -1,5 +1,14 @@
 <?php
-// created: 2021-03-17 00:21:14
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 $searchFields['Meetings'] = array (
   'name' => 
   array (
@@ -140,6 +149,10 @@ $searchFields['Meetings'] = array (
     'is_date_field' => true,
   ),
   'description' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'reunion_participantes' => 
   array (
     'query_type' => 'default',
   ),

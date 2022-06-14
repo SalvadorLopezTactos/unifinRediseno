@@ -216,6 +216,10 @@ array (
               array (
                 'name' => 'minut_minutas_minut_participantes_name',
               ),
+              12 => 
+              array (
+                'name' => 'meetings_minut_participantes_1_name',
+              ),
             ),
           ),
           2 => 
