@@ -1,11 +1,13 @@
 <?php
- // created: 2021-07-12 18:36:28
+ // created: 2022-06-13 14:53:12
 
 $app_list_strings['tipo_venta_list']=array (
   1 => 'Venta tradicional',
   2 => 'Campaña VIP',
   3 => 'Garantía Prendaria',
   4 => 'Coche Seguro',
-  5 => 'Post-arrendamiento',
+  5 => 'Post-Crédito',
   6 => 'Post-Leasing',
+  7 => 'Campaña Seguro por parte del cliente',
+  8 => 'Friends & Family',
 );
