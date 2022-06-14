@@ -57,3 +57,6 @@ $mod_strings['LBL_CREADO_REGION_C'] = 'Región';
 $mod_strings['LBL_CREADO_EQUIPO_PROMOCION_C'] = 'Equipo de promoción';
 $mod_strings['LBL_CREADO_PRODUCTO_C'] = 'Producto';
 $mod_strings['LBL_CREADO_PUESTO_C'] = 'Puesto';
+$mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Participantes';
+$mod_strings[''] = 'reunion_participantes';
+$mod_strings['LBL_LINK_LENIA'] = 'Link Lenia';
