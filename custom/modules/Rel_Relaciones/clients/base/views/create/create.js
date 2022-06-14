@@ -8,7 +8,7 @@
         if(options.context.attributes.from360!=undefined){
             this.desdeVista360=options.context.attributes.from360;
         }
-        
+
         /*
          If you are on 7.2.0, there is a dependency bug that can cause the screen to render an empty form.
          To correct this, uncomment the code below:
@@ -42,14 +42,14 @@
     	//this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
         //this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
         //this.model.on('change:relacion_c', this.validaRelacionesChange, this);
-    
+
     	//Perform check of parent data once parent record finishes loading
     	/*this.model.once('data:sync:complete', this.doRecordCheck, this);*/
     	/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 8/27/2015 Description: When a new relationship is created, the same person is pre-selected in the “Relacion” field.
     	* Modify the out of the box behavior to start with a blank “Relacion”*/
     	this.model.set("relacion_c", "   ");
     	/* END CUSTOMIZATION */
-    
+
     	var valParams = {
     		'modulo': 'Accounts',
     	};
@@ -244,7 +244,7 @@
 					break;
                 case "Contacto":
                     this.$("div[data-name='tipodecontacto']").show();
-                    break;    
+                    break;
 				case "Referencia Personal":
 					this.$("div[data-name='parentesco']").show();
 					this.$("div[data-name='tiempodeconocerloano']").show();
@@ -643,7 +643,7 @@
                                             for(var i=0;i<data.records.length;i++){
                                                 if(data.records[i].inactivo==true){
                                                     flag_inactivo++;
-                                                }   
+                                                }
                                             }
 
                                             if (data.records.length <= flag_inactivo) {
@@ -862,7 +862,7 @@
             errors['faltantescuenta'].required = true;
             callback(null, fields, errors);
         }else{
-            if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') 
+            if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F')
             || this.model.get('relaciones_activas').includes('Proveedor de Recursos CA') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CR') && this.model.get("relacion_c").trim()!= "") {
 
                 app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
@@ -909,7 +909,7 @@
                                                     for(var i=0;i<data.records.length;i++){
                                                         if(data.records[i].inactivo==true){
                                                             flag_inactivo++;
-                                                        }   
+                                                        }
                                                     }
                                                     if (data.records.length <= flag_inactivo) {
                                                         //for (var d = 0; d < data.records.length; d++) {
@@ -956,7 +956,7 @@
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
                                         }
                                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
-                                                success: _.bind(function (data) {                                                    
+                                                success: _.bind(function (data) {
                                                     var flag_inactivo =0;
                                                     for(var i=0;i<data.records.length;i++){
                                                         if(data.records[i].inactivo==true){
@@ -992,7 +992,7 @@
 
     validaProveedorRecursoschange: function (){
         var RequeridosProvRec = "";
-        if ((this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || 
+        if ((this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') ||
             this.model.get('relaciones_activas').includes('Proveedor de Recursos CA')) || this.model.get('relaciones_activas').includes('Proveedor de Recursos CR') && this.model.get("relacion_c").trim()!= "") {
 
             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
@@ -1327,12 +1327,12 @@
                                 }
                                 if (data[0].contents.estado_nacimiento_c == "") {
                                     faltantes.push('Estado de Constitución');
-                                }								
-                            }														
+                                }
+                            }
                             //Pregunta por el telefono
                             /*if (telO== 0) {
                                 faltantes.push('Teléfono de Trabajo o Celular Trabajo');
-                            }*/	
+                            }*/
 							//Pregunta por la direccion fiscal
 							if (direF == 0) {
 								faltantes.push('Dirección Fiscal');
@@ -1525,7 +1525,7 @@
                                   if (data[0].contents.nombre_comercial_c == "") {
                                       faltantes.push('Nombre Comercial');
                                   }
-                                }                                 
+                                }
                             }
                         }
                         //valida relación: Contacto
@@ -1549,7 +1549,7 @@
                                   if (data[0].contents.nombre_comercial_c == "") {
                                       faltantes.push('Nombre Comercial');
                                   }
-                                }                                 
+                                }
                             }
                         }
                         //Valida Relación: Fiador
@@ -1868,7 +1868,7 @@
 								if( (data[3].contents.records[t].description == 'CS' && productuser == '5') ||
 									(data[3].contents.records[t].description == 'CA' && productuser == '3') ||
 									(data[3].contents.records[t].description == 'FF' && productuser == '4') ||
-									(data[3].contents.records[t].description == 'AP' && productuser == '1') 
+									(data[3].contents.records[t].description == 'AP' && productuser == '1')
 								){
 									if (data[3].contents.records[t].tct_pld_campo2_ddw != '' ) {
 										terceros++;
@@ -1887,7 +1887,7 @@
 								}
 								if (data[0].contents.apellidomaterno_c == "") {
 									faltantes.push('Apellido Materno');
-								}                               
+								}
 								if (data[0].contents.fechadenacimiento_c == "") {
 									faltantes.push('Fecha de Nacimiento');
 								}
@@ -1916,7 +1916,7 @@
 									if (data[0].contents.profesion_c == "") {
 										faltantes.push('Profesión');
 									}
-								}else{									
+								}else{
 									//Pregunta por el telefono Trabajo
 									if (telO == 0) {
 										faltantes.push('Teléfono Casa o Trabajo');
@@ -1926,7 +1926,7 @@
 									faltantes.push('PLD-¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?');
 								}
 								if(data[0].contents.ctpldfuncionespublicas_c == "1"){
-									if(data[0].contents.ctpldfuncionespublicascargo_c == "" ||data[0].contents.tct_dependencia_pf_c == "" 
+									if(data[0].contents.ctpldfuncionespublicascargo_c == "" ||data[0].contents.tct_dependencia_pf_c == ""
 									|| data[0].contents.tct_fecha_ini_pf_c == "" || data[0].contents.tct_fecha_fin_pf_c == ""){
 										faltantes.push("PLD Pep's Personal: ");
 									}
@@ -1944,8 +1944,8 @@
 									}
 								}
 								if(data[0].contents.ctpldconyuge_c == "1"){
-									if (data[0].contents.ctpldconyugecargo_c == "" ||data[0].contents.tct_nombre_pf_peps_c == "" 
-									||data[0].contents.tct_cargo2_pf_c == "" ||data[0].contents.tct_dependencia2_pf_c == "" 
+									if (data[0].contents.ctpldconyugecargo_c == "" ||data[0].contents.tct_nombre_pf_peps_c == ""
+									||data[0].contents.tct_cargo2_pf_c == "" ||data[0].contents.tct_dependencia2_pf_c == ""
 									|| data[0].contents.tct_fecha_ini2_pf_c == "" || data[0].contents.tct_fecha_fin2_pf_c == ""){
 										faltantes.push("PLD Pep's Familiar: ");
 									}
@@ -2006,9 +2006,9 @@
 									}
 								}
 								if(data[0].contents.ctpldaccionistasconyuge_c == "1"){
-									if (data[0].contents.tct_socio2_pm_c == "" || data[0].contents.tct_nombre_pm_c == "" 
-									|| data[0].contents.ctpldaccionistasconyugecargo_c == "" || data[0].contents.tct_cargo_pm_c == "" 
-									|| data[0].contents.tct_dependencia2_pm_c == "" || data[0].contents.tct_fecha_ini2_pm_c == "" 
+									if (data[0].contents.tct_socio2_pm_c == "" || data[0].contents.tct_nombre_pm_c == ""
+									|| data[0].contents.ctpldaccionistasconyugecargo_c == "" || data[0].contents.tct_cargo_pm_c == ""
+									|| data[0].contents.tct_dependencia2_pm_c == "" || data[0].contents.tct_fecha_ini2_pm_c == ""
 									|| data[0].contents.tct_fecha_fin2_pm_c == "") {
 										faltantes.push("PLD Pep's Familiar: ");
 									}
@@ -2017,13 +2017,13 @@
 									}
 									if (data[0].contents.tct_nombre_pm_c == "") {
 										faltantes.push(" -Nombre de la persona que ocupa el puesto");
-									}									
+									}
 									if (data[0].contents.tct_cargo_pm_c == "") {
 										faltantes.push(" -Cargo público que tiene o tuvo");
 									}
 									if (data[0].contents.tct_dependencia2_pm_c == "") {
 										faltantes.push(" -Dependencia donde ejerce o ejerció el cargo");
-									}										
+									}
 									if (data[0].contents.tct_fecha_ini2_pm_c == "") {
 										faltantes.push(" -Fecha de inicio del cargo");
 									}
@@ -2031,7 +2031,7 @@
 										faltantes.push(" -Fecha de término del cargo");
 									}
 								}
-								
+
 							}
 							if (data[0].contents.email.length == 0) {
 								faltantes.push('Correo electrónico');
@@ -2047,10 +2047,10 @@
 							}
 							if (data[0].contents.tct_pais_expide_rfc_c == "") {
 								faltantes.push('País que expide el RFC ');
-							}							
+							}
 							if (data[0].contents.ctpldnoseriefiel_c == "") {
 								faltantes.push('PLD-No serie FIEL');
-							}							
+							}
 							if ( recursos == 0) {
 								faltantes.push('PLD-¿Los recursos son propios o los recursos son de un tercero?');
 							}
@@ -2059,7 +2059,7 @@
                         //Valida Relación: Tarjetahabiente
                         if (this.model.get('relaciones_activas').includes('Tarjetahabiente')){
                             relacionesActivas.push("Tarjetahabiente");
-						
+
 							if (data[0].contents.tipodepersona_c != "Persona Moral") {
                                 if (data[0].contents.primernombre_c == "") {
 									faltantes.push('Nombre');
@@ -2072,11 +2072,11 @@
 								}
                                 if (data[0].contents.fechadenacimiento_c == "") {
 									faltantes.push('Fecha de Nacimiento');
-								}                             
+								}
 								if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
                                     faltantes.push('Nacionalidad');
                                 }
-                                
+
                                 if(data[0].contents.tipodepersona_c=="Persona Fisica con Actividad Empresarial"){
                                     if (data[0].contents.rfc_c == "") {
                                         faltantes.push('RFC con homoclave');
@@ -2186,13 +2186,13 @@
                                         });
 
                                     }
-                                }                      
+                                }
 							}else{
-                                faltantes.push('Una persona moral no puede ser Tarjetahabiente'); 
+                                faltantes.push('Una persona moral no puede ser Tarjetahabiente');
                             }
                         }
                     }
-                
+
                     if (faltantes.length >  0) {
                         if(faltantes.includes('Una persona moral no puede ser Tarjetahabiente')){
                             app.alert.show("Campos_faltantes_en_cuenta", {
@@ -2217,7 +2217,7 @@
                             errors['validacionRelacionesActivas'].required = true;
 
                         }
-                        
+
                     }
                     callback(null, fields, errors);
                 }, this)
@@ -2235,7 +2235,7 @@
                         var Cuenta = this.model.get('account_id1_c');
                         var CuentaPadre=this.model.get('rel_relaciones_accounts_1accounts_ida');
                         //Validamos que se tenga alguna de las siguientes relaciones activas
-                    if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Propietario Real') || 
+                    if ( this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Propietario Real') ||
                     this.model.get('relaciones_activas').includes('Proveedor de Recursos CS') ||  this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Obligado solidario')&& Cuenta != "") {
                        //Obtenemos las opps de la cuenta
                        var requestA = app.utils.deepCopy(request);
@@ -2259,7 +2259,7 @@
                             var url = app.api.buildURL("Accounts/" + Cuenta);
                             requestE.url = url.substring(4);
                             requests.push(requestE);
-                           
+
                            app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
                                success: _.bind(function (data) {
                                    //Variables para controlar las direcciones y telefonos
@@ -2269,7 +2269,7 @@
 
                                    if (data[0].contents.records.length > 0){
                                     //Valida direcciones y teléfonos
-                                        
+
                                             for (var d = 0; d < data[1].contents.records.length; d++) {
                                             //Itera direccion Particular
                                                 if (App.lang.getAppListStrings('tipo_dir_map_list')[data[1].contents.records[d].tipodedireccion[0]].includes('1') && data[1].contents.records[d].inactivo == false) {
@@ -2280,7 +2280,7 @@
                                             for (var t = 0; t < data[2].contents.records.length; t++) {
                                                 //Itera telefono casa y celular
                                                 if (data[2].contents.records[t].tipotelefono.includes('1') || data[2].contents.records[t].tipotelefono.includes('3')) {
-                                                    telCyC++;
+                                                    telO++;
                                                 }
                                                 //Itera para telefono de trabajo y celular trabajo
                                                 if (data[2].contents.records[t].tipotelefono.includes('2') || data[2].contents.records[t].tipotelefono.includes('4')) {
@@ -2335,13 +2335,13 @@
                                                     necesarios = necesarios + '<b>Pa\u00EDs que expide el RFC</b><br>';
                                                 }
                                                 if (data[4].contents.nacionalidad_c== "2" && data[4].contents.tipodepersona_c != 'Persona Moral') {
-                                                    
+
                                                     if (data[4].contents.ctpldnoseriefiel_c == "" || data[4].contents.ctpldnoseriefiel_c == null ) {
                                                         necesarios = necesarios + '<b>Número de serie de la Firma Electrónica Avanzada</b><br>';
                                                     }
                                                     if (data[4].contents.curp_c == "" || data[4].contents.curp_c == null) {
                                                         necesarios = necesarios + '<b>CURP</b><br>';
-                                                    }   
+                                                    }
                                                     if (data[4].contents.estado_nacimiento_c == "" || data[4].contents.estado_nacimiento_c == null || data[4].contents.estado_nacimiento_c == "1") {
                                                         necesarios = necesarios + '<b>Estado de Nacimiento<br></b>';
                                                     }
@@ -2370,7 +2370,7 @@
                                                             necesarios =  necesarios +'<br>'+"Sección PEPS Personal:<br>" + banderaPEPSPersonal
                                                         }
                                                     }
-                                                
+
                                                     //Sección PEPS Fisica Familiar
                                                     if (data[4].contents.ctpldconyuge_c == true) {
                                                         var banderaPEPSFamiliar="";
@@ -2400,8 +2400,8 @@
                                                         }
                                                     }
                                             }
-                                            
-                                            
+
+
                                             //Preguntas PLD
                                             /*if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records[0].tct_pld_campo2_ddw == "" || data[3].contents.records[0].tct_pld_campo2_ddw  == null) {
@@ -2475,7 +2475,7 @@
                                                     necesarios = necesarios + '<b>Apellido Materno Apoderado Legal</b><br>';
                                                 }
                                             }
-                                           
+
                                         }
 
                                         if(this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Obligado solidario')){
@@ -2519,7 +2519,7 @@
                                                 }
                                                 if (banderaPEPSMoralFamiliar!=""){
                                                     necesarios = necesarios +'<br>'+ "Sección PEPS Moral Familiar:<br>" + banderaPEPSMoralFamiliar
-                                                } 
+                                                }
                                             }
 
                                             //PEPS Moral Personal
@@ -2548,9 +2548,9 @@
                                                 }
                                             }
                                         }
-                                        
-                                        
-                                            
+
+
+
                                             //Preguntas PLD
                                            /* if (data[3].contents.records.length>0){
                                                 if (data[3].contents.records.tct_pld_campo4_ddw == "" || data[3].contents.records.tct_pld_campo4_ddw == null) {
@@ -2572,7 +2572,7 @@
                                                     necesarios = necesarios + '<b>Pregunta 8 PLD<br></b>';
                                                 }
                                             } */
-                                           
+
 
                                         }
                                             //Evalua si hay campos requeridos y muestra alerta
@@ -2589,13 +2589,13 @@
                                    }
                                    callback(null, fields, errors);
                                }, this)
-                           }); 
+                           });
                 }else{
-                    callback(null, fields, errors);   
-                }                    
+                    callback(null, fields, errors);
+                }
         }else{
-         callback(null, fields, errors);   
-        }    
+         callback(null, fields, errors);
+        }
 },
 
 })
