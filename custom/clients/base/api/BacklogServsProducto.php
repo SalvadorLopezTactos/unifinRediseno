@@ -76,7 +76,7 @@ class BacklogServsProducto extends SugarApi
                     $etapas[]='Rechazada';
                 }
                 if($row['etapa'] == 'devuelta' && $row['total']>0){
-                    $etapas[]='Deveuelta';
+                    $etapas[]='Devuelta';
                 }
                 if($row['etapa'] == 'credito' && $row['total']>0){
                     $etapas[]='Credito';
@@ -93,8 +93,8 @@ class BacklogServsProducto extends SugarApi
             if(in_array("Credito",$etapas)){
                 $etapa = 'Credito';
             }
-            if(in_array("Deveuelta",$etapas)){
-                $etapa = 'Deveuelta';
+            if(in_array("Devuelta",$etapas)){
+                $etapa = 'Devuelta';
             }
             if(in_array("Rechazada",$etapas)){
                 $etapa = 'Rechazada';
