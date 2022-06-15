@@ -55,7 +55,7 @@
 					success: function (data) {
 						var valor1 = data.first_name;
 						var valor2 = data.last_name;
-						var valor3 = 'unifin';
+						var valor3 = '';
 						var valor4 = data.phone_work;
 						var valor5 = app.user.attributes.email[0].email_address;;
 						var item = {

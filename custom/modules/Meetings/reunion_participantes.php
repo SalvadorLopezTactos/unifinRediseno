@@ -187,7 +187,7 @@ class reunion_participantes
 				if($lenia) {
 					// Obtiene Token Lenia
 					global $sugar_config;
-					$url = $sugar_config['lenia'].'token/';
+					$url = $sugar_config['lenia'].'videocall/token/';
 					$usr = $sugar_config['lenia_usr'];
 					$psw = $sugar_config['lenia_psw'];
 					$params = "grant_type=password&username=".$usr."&password=".$psw;
@@ -247,7 +247,7 @@ class reunion_participantes
 								  WHERE a.id = b.id_c and b.id_c = '{$bean->id}'";
 								$queryResult = $db->query($query);
 							}
-							if($response['status'] || $response['status: ']) {
+							if($response['status']) {
 								// Convierte formato de fecha y hora
 								date_default_timezone_set('America/Mexico_City');
 								$verano = date('I');
@@ -262,8 +262,6 @@ class reunion_participantes
 									$usuario = $beanUsr->name;
 								}
 								// Envía correo a los invitados
-								$GLOBALS['log']->fatal("Correos: ");
-								$GLOBALS['log']->fatal($correos);
 								foreach ($correos as $correo) {
 									require_once("include/SugarPHPMailer.php");
 									require_once("modules/EmailTemplates/EmailTemplate.php");
@@ -285,7 +283,27 @@ class reunion_participantes
 									$mailer->setHtmlBody($body);
 									$mailer->clearRecipients();
 									$mailer->addRecipientsTo(new EmailIdentity($correo["mail"], $correo["name"]));
+									// Crea auditoría de correos
+									$userid = $bean->assigned_user_id;
+									$recordid = $correo["id"];
+									$hoy = date("Y-m-d H:i:s");
+									$mail = $correo["mail"];
+									$asunto = $emailtemplate->subject;
+									try {
+										$result = $mailer->send();
+										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
+										VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'OK', 'Correo exitosamente enviado')";
+										$GLOBALS['db']->query($insert);
+									} catch (Exception $e) {
+										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, error_code, description)
+										VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'ERROR', '01', '{$e->getMessage()}')";
+										$GLOBALS['db']->query($insert);
+									}
 								}
+							}
+							else {
+								$GLOBALS['log']->fatal("Error Respuesta Lenia");
+								$GLOBALS['log']->fatal($response);
 							}
 						}
 					}
