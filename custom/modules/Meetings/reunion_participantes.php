@@ -105,8 +105,10 @@ class reunion_participantes
 						  ];
 						  array_push($guest,$participante1);
 					  }
-					  $correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
-					  array_push($correos,$correo);
+					  if($objParticipantes['actualiza']) {
+						  $correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
+						  array_push($correos,$correo);
+					  }
 					}
 					// Busca relación
 					if($objArrParticipnates[$j]['origen'] == "E")
@@ -207,7 +209,6 @@ class reunion_participantes
 						// Invoca servicio para crear sala en Lenia
 						$url = $sugar_config['lenia'].'videocall/room/add/';
 						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c;
-						$GLOBALS['log']->fatal("url: ".$url);
 						$content = json_encode(array(
 						  "crm_id" => $bean->id,
 						  "session_name" => $bean->name,
@@ -221,8 +222,6 @@ class reunion_participantes
 						  "guest_list" => $guest,
 						  "advisor_list" => $advisor
 						));
-						$GLOBALS['log']->fatal("content:");
-						$GLOBALS['log']->fatal($content);
 						$curl = curl_init($url);
 						curl_setopt($curl, CURLOPT_HEADER, false);
 						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -237,20 +236,18 @@ class reunion_participantes
 						$err = curl_error($curl);
 						if ($err) $GLOBALS['log']->fatal("Error: ".$err);
 						else {
+							global $db;
 							curl_close($curl);
-							$GLOBALS['log']->fatal("response:");
-							$GLOBALS['log']->fatal($response);	
 							$response = json_decode($response, true);
-							$GLOBALS['log']->fatal("response:");
-							$GLOBALS['log']->fatal($response);							
 							if($response['status'] && !$bean->link_lenia_c) {
 								// Actualiza ID de Sala en la Reunión
-								global $db;
 								$descripcion = "El enlace que deberás usar para poder conectarte el día de la videoconferencia es: ".$sugar_config['lenia_url'].$response['idSala']."?".$organizador;
 								$query = "UPDATE meetings a, meetings_cstm b
 								  SET a.description = '{$descripcion}', b.link_lenia_c = '{$response['idSala']}'
 								  WHERE a.id = b.id_c and b.id_c = '{$bean->id}'";
 								$queryResult = $db->query($query);
+							}
+							if($response['status'] || $response['status: ']) {
 								// Convierte formato de fecha y hora
 								date_default_timezone_set('America/Mexico_City');
 								$verano = date('I');
@@ -265,6 +262,8 @@ class reunion_participantes
 									$usuario = $beanUsr->name;
 								}
 								// Envía correo a los invitados
+								$GLOBALS['log']->fatal("Correos: ");
+								$GLOBALS['log']->fatal($correos);
 								foreach ($correos as $correo) {
 									require_once("include/SugarPHPMailer.php");
 									require_once("modules/EmailTemplates/EmailTemplate.php");
@@ -286,7 +285,6 @@ class reunion_participantes
 									$mailer->setHtmlBody($body);
 									$mailer->clearRecipients();
 									$mailer->addRecipientsTo(new EmailIdentity($correo["mail"], $correo["name"]));
-									$result = $mailer->send();
 								}
 							}
 						}
