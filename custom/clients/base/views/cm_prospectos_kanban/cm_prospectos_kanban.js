@@ -1,6 +1,10 @@
 ({
     plugins: ['Dashlet'],
 
+    events: {
+        'click .contenedor-item': 'muestraChecklist',
+    },
+
     initialize: function (options) {
         this._super("initialize", [options]);
         self=this;
@@ -30,8 +34,12 @@
 
     _render: function () {
         this._super("_render");
-
+        $('.contenedor-grid').attr('style','grid-template-columns: repeat(8, 1fr)')
     },
+
+    muestraChecklist:function(e){
+        $('.checklist-item').removeClass('hide');
+    }
 
 
 })

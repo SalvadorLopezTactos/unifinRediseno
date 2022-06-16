@@ -11,7 +11,8 @@
 
 .contenedor-grid{
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    /*grid-template-columns: repeat(8, 1fr);*/
+    grid-template-columns: repeat(9, 1fr);
     grid-template-rows: auto;
     border-bottom: 1px solid #d8d8d8 ;
 }
@@ -210,6 +211,23 @@
 .perdido-items{
     grid-column: 8/9;
     grid-row: 2/3;
+}
+
+.checklist-item{
+    grid-column: 9/10;
+    grid-row: span 2;
+    /*
+    display: block;
+    overflow: auto;
+    */
+}
+
+.center-title-checklist{
+    border: 1px solid #000000;
+    text-align: center;
+    /*height: 300px;*/
+    font-size: 15px;
+    padding-bottom: 40px;
 }
 
 .linea{
