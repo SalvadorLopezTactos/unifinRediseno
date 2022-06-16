@@ -191,6 +191,7 @@ class reunion_participantes
 					$usr = $sugar_config['lenia_usr'];
 					$psw = $sugar_config['lenia_psw'];
 					$params = "grant_type=password&username=".$usr."&password=".$psw;
+					$GLOBALS['log']->fatal("URL Lenia: ".$url);
 					$curl = curl_init();
 					curl_setopt($curl, CURLOPT_URL, $url);
 					curl_setopt($curl, CURLOPT_POST, true);
