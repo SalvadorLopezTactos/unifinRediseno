@@ -19,6 +19,10 @@ class reunion_participantes
 				$guest = array();
 				$advisor = array();
 				$correos = array();
+				if($bean->parent_id) {
+					$beanAccount = BeanFactory::getBean('Accounts', $bean->parent_id, array('disable_row_level_security' => true));
+					$cuenta_name = $beanAccount->name;
+				}
 				for ($j = 0; $j < count($objArrParticipnates); $j++) {
 					// Crea cuentas nuevas
 					if ($objArrParticipnates[$j]['origen'] == "N") {
@@ -191,7 +195,6 @@ class reunion_participantes
 					$usr = $sugar_config['lenia_usr'];
 					$psw = $sugar_config['lenia_psw'];
 					$params = "grant_type=password&username=".$usr."&password=".$psw;
-					$GLOBALS['log']->fatal("URL Lenia: ".$url);
 					$curl = curl_init();
 					curl_setopt($curl, CURLOPT_URL, $url);
 					curl_setopt($curl, CURLOPT_POST, true);
@@ -207,7 +210,18 @@ class reunion_participantes
 						$response = json_decode($response, true);
 						curl_close($curl);
 						$token = $response['access_token'];
-						// Invoca servicio para crear sala en Lenia
+						// Convierte formato de fecha y hora
+						date_default_timezone_set('America/Mexico_City');
+						$verano = date('I');
+						$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
+						if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
+						$inicio = strtotime('-6 hours',strtotime($bean->date_start));
+						if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
+						$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+						$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+						$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
+						$hora = date("g:i a",$inicio);
+						// Invoca servicio para crear o actualizar sala en Lenia
 						$url = $sugar_config['lenia'].'videocall/room/add/';
 						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c;
 						$content = json_encode(array(
@@ -218,7 +232,7 @@ class reunion_participantes
 							"day" => date('d',strtotime($bean->date_start)),
 							"month" => date('m',strtotime($bean->date_start)),
 							"year" => date('Y',strtotime($bean->date_start)),
-							"date" => $bean->date_start,
+							"date" => $scheduled,
 						  ),
 						  "guest_list" => $guest,
 						  "advisor_list" => $advisor
@@ -249,15 +263,6 @@ class reunion_participantes
 								$queryResult = $db->query($query);
 							}
 							if($response['status']) {
-								// Convierte formato de fecha y hora
-								date_default_timezone_set('America/Mexico_City');
-								$verano = date('I');
-								$inicio = strtotime('-6 hours',strtotime($bean->date_start));
-								if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
-								$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
-								$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-								$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
-								$hora = date("g:i a",$inicio);
 								if($bean->assigned_user_id) {
 									$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
 									$usuario = $beanUsr->name;
@@ -266,13 +271,19 @@ class reunion_participantes
 								foreach ($correos as $correo) {
 									require_once("include/SugarPHPMailer.php");
 									require_once("modules/EmailTemplates/EmailTemplate.php");
-									require_once("modules/Administration/Administration.php");
-									$url = $response['idSala']."?".$correo["id"];
+									require_once("modules/Administration/Administration.php");									
+									$url = $sugar_config['lenia_url'].$response['idSala']."?".$correo["id"];
 									$emailtemplate = new EmailTemplate();
-									$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia','type'=>'email'));
+									if($organizador == $correo['id']) {
+										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor','type'=>'email'));
+									}
+									else {
+										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente','type'=>'email'));
+									}
 									$emailtemplate->subject = $emailtemplate->subject;
 									$body_html = $emailtemplate->body_html;
 									$body_html = str_replace('participante_name', $correo["name"], $body_html);
+									$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
 									$body_html = str_replace('asesor_name', $usuario, $body_html);
 									$body_html = str_replace('fecha', $fecha, $body_html);
 									$body_html = str_replace('hora', $hora, $body_html);
