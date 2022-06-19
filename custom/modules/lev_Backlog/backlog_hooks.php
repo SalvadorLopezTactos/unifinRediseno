@@ -96,7 +96,7 @@ class backlog_hooks {
             }
 
         }
-        
+
 
         //Elimina valores negativos
         $monto_sin_solicitud_c = ($monto_sin_solicitud_c <= 0) ? 0 : $monto_sin_solicitud_c;
@@ -135,6 +135,7 @@ class backlog_hooks {
             $credito=false;
             $rechazada=false;
             $prospecto=false;
+            $devuelta=false;
             for ($i = 0; $i < $totalC ; $i++){
                 $GLOBALS['log']->fatal('Itera Registros'.$i.'estatus: '.$result[$i]['estatus_c'].' etapa: '.$result[$i]['tct_etapa_ddw_c'].' '.$result[$i]['name']);
                if($result[$i]['tct_etapa_ddw_c']=="C"){
@@ -149,7 +150,10 @@ class backlog_hooks {
                    $GLOBALS['log']->fatal('Itera Etapa');
                    $prospecto=true;
                }
-               if ($credito == false && $rechazada == false &&  $prospecto == false ) {
+               if($result[$i]['estatus_c']=="DP"){
+                   $devuelta=true;
+               }
+               if ($credito == false && $rechazada == false && !$devuelta &&  $prospecto == false ) {
                    $prospecto=true;
                }
             }
@@ -159,7 +163,9 @@ class backlog_hooks {
             $bean->ri_credito_c = 0;
             $bean->monto_rechazado_c = 0;
             $bean->ri_rechazada_c = 0;
-            if($credito==true){
+            if($devuelta){
+                $bean->etapa_c= '5';
+            }elseif ($credito==true){
                 $GLOBALS['log']->fatal('Solcitudes de Credito');
                 $bean->monto_credito_c= $monto_faltante_c;
                 $bean->ri_credito_c = $bean->monto_credito_c * ($bean->porciento_ri/100);

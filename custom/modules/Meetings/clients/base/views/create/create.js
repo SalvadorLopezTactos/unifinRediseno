@@ -436,38 +436,40 @@
 
     saveParticipantes: function (fields, errors, callback) {
         var objParticipantes = selfData.mParticipantes["participantes"];
-        banderaCorreo = 0;
-		banderaAsistencia = 0;
-        for (var i = 0; i < objParticipantes.length; i++) {
-            if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1) {
-                banderaCorreo++;
-            }
-			if (objParticipantes[i].unifin != 1) {
-                banderaAsistencia++;
-            }
-        }
-        // Valida Correos
-        if (banderaCorreo > 0) {
-            app.alert.show("Correo", {
-                level: "error",
-                messages: "Todos los <b>Participantes</b> tipo Cuenta deben contar con <b>correo</b>.",
-                autoClose: false,
-                return: false,
-            });
-            errors['correo'] = errors['correo'] || {};
-            errors['correo'].required = true;
-        }
-        // Valida Asistencias
-        if (banderaAsistencia < 1) {
-            app.alert.show("Asistencia", {
-                level: "error",
-                messages: "Debes seleccionar por lo menos a un <b>Participante</b> de tipo Cuenta.",
-                autoClose: false,
-                return: false,
-            });
-            errors['xd'] = errors['xd'] || {};
-            errors['xd'].required = true;
-        }
+		if (objParticipantes && this.model.get('tct_conferencia_chk_c')) {
+			banderaCorreo = 0;
+			banderaAsistencia = 0;
+			for (var i = 0; i < objParticipantes.length; i++) {
+				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1) {
+					banderaCorreo++;
+				}
+				if (objParticipantes[i].unifin != 1) {
+					banderaAsistencia++;
+				}
+			}
+			// Valida Correos
+			if (banderaCorreo > 0) {
+				app.alert.show("Correo", {
+					level: "error",
+					messages: "Todos los <b>Participantes</b> tipo Cuenta deben contar con <b>correo</b>.",
+					autoClose: false,
+					return: false,
+				});
+				errors['correo'] = errors['correo'] || {};
+				errors['correo'].required = true;
+			}
+			// Valida Asistencias
+			if (banderaAsistencia < 1) {
+				app.alert.show("Asistencia", {
+					level: "error",
+					messages: "Debes seleccionar por lo menos a un <b>Participante</b> de tipo Cuenta.",
+					autoClose: false,
+					return: false,
+				});
+				errors['xd'] = errors['xd'] || {};
+				errors['xd'].required = true;
+			}
+		}
         callback(null, fields, errors);
     },
 })

@@ -375,10 +375,24 @@ array (
                   0 => 'currency_id',
                   1 => 'base_rate',
                 ),
+                'readonly' => false,
+                'name' => 'monto_devuelta_c',
+                'label' => 'LBL_MONTO_DEVUELTA',
+              ),
+              44 => 
+              array (
+              ),
+              45 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
                 'name' => 'monto_credito_c',
                 'label' => 'LBL_MONTO_CREDITO_C',
               ),
-              44 => 
+              46 => 
               array (
                 'related_fields' => 
                 array (
@@ -388,7 +402,7 @@ array (
                 'name' => 'ri_credito_c',
                 'label' => 'LBL_RI_CREDITO_C',
               ),
-              45 => 
+              47 => 
               array (
                 'related_fields' => 
                 array (
@@ -398,7 +412,7 @@ array (
                 'name' => 'monto_rechazado_c',
                 'label' => 'LBL_MONTO_RECHAZADO_C',
               ),
-              46 => 
+              48 => 
               array (
                 'related_fields' => 
                 array (
@@ -408,7 +422,7 @@ array (
                 'name' => 'ri_rechazada_c',
                 'label' => 'LBL_RI_RECHAZADA_C',
               ),
-              47 => 
+              49 => 
               array (
                 'related_fields' => 
                 array (
@@ -418,7 +432,7 @@ array (
                 'name' => 'monto_sin_solicitud_c',
                 'label' => 'LBL_MONTO_SIN_SOLICITUD_C',
               ),
-              48 => 
+              50 => 
               array (
                 'related_fields' => 
                 array (
@@ -428,7 +442,7 @@ array (
                 'name' => 'ri_sin_solicitud_c',
                 'label' => 'LBL_RI_SIN_SOLICITUD_C',
               ),
-              49 => 
+              51 => 
               array (
                 'related_fields' => 
                 array (
@@ -438,7 +452,7 @@ array (
                 'name' => 'monto_con_solicitud_c',
                 'label' => 'LBL_MONTO_CON_SOLICITUD_C',
               ),
-              50 => 
+              52 => 
               array (
                 'related_fields' => 
                 array (
@@ -447,20 +461,6 @@ array (
                 ),
                 'name' => 'ri_con_solicitud_c',
                 'label' => 'LBL_RI_CON_SOLICITUD_C',
-              ),
-              51 => 
-              array (
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'readonly' => false,
-                'name' => 'monto_devuelta_c',
-                'label' => 'LBL_MONTO_DEVUELTA',
-              ),
-              52 => 
-              array (
               ),
               53 => 
               array (

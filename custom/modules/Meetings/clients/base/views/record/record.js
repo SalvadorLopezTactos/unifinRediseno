@@ -910,23 +910,25 @@
 
     saveParticipantes: function (fields, errors, callback) {
         var objParticipantes = selfData.mParticipantes["participantes"];
-        banderaCorreo = 0;
-        for (var i = 0; i < objParticipantes.length; i++) {
-            if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1) {
-                banderaCorreo++;
-            }
-        }
-        // Valida Correos
-        if (banderaCorreo > 0) {
-            app.alert.show("Correo", {
-                level: "error",
-                messages: "Todos los <b>Participantes</b> tipo Cuenta deben contar con <b>correo</b>.",
-                autoClose: false,
-                return: false,
-            });
-            errors['correo'] = errors['correo'] || {};
-            errors['correo'].required = true;
-        }
+		if (objParticipantes && this.model.get('tct_conferencia_chk_c')) {		
+			banderaCorreo = 0;
+			for (var i = 0; i < objParticipantes.length; i++) {
+				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1) {
+					banderaCorreo++;
+				}
+			}
+			// Valida Correos
+			if (banderaCorreo > 0) {
+				app.alert.show("Correo", {
+					level: "error",
+					messages: "Todos los <b>Participantes</b> tipo Cuenta deben contar con <b>correo</b>.",
+					autoClose: false,
+					return: false,
+				});
+				errors['correo'] = errors['correo'] || {};
+				errors['correo'].required = true;
+			}
+		}
         callback(null, fields, errors);
     },
 

@@ -21,7 +21,7 @@
         //Creación
         this.loadData();
         //Registro
-        //this.model.on('sync', this.loadData, this);
+        this.model.on('sync', this.loadData, this);
     },
 
 	loadData: function (options) {
@@ -44,85 +44,86 @@
 				}
 			});
 		} else {
-			//Recupera datos para vista de creación
-			app.alert.show('alert_participants', {
-				level: 'process',
-				title: 'Cargando...'
-			});
-			var idcuenta = this.model.get('parent_id');
-			app.api.call('GET', app.api.buildURL('Infouser/'+app.user.id), null, {
-				success: function (data) {
-					var valor1 = data.first_name;
-					var valor2 = data.last_name;
-					var valor3 = 'unifin';
-					var valor4 = data.phone_work;
-					var valor5 = app.user.attributes.email[0].email_address;;
-					var item = {
-						"id": '',
-						"nombres": valor1,
-						"apaterno": valor2,
-						"amaterno": valor3,
-						"telefono": valor4,
-						"correo": valor5,
-						"origen": "U",
-						"unifin": 1,
-						"tipo_contacto": "Promocion",
-						"asistencia": 0,
-						"activo": 1,
-						"crea": 1,
-						"host": 1
-					};
-					var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_cuenta_c"];
-					app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-					  fields: fields.join(','),
-					  max_num: 5,
-					  "filter": [
-						{
-						  "id": idcuenta,
-						  "tipodepersona_c": {
-							"$not_equals" : "Persona Moral",
-						  }
-						}
-					  ]
-					  }), null, {
-					  success: _.bind(function (data) {
-						if(data.records.length > 0) {
-							var valor1 = data.records[0].primernombre_c;
-							var valor2 = data.records[0].apellidopaterno_c;
-							var valor3 = data.records[0].apellidomaterno_c;
-							var valor4 = data.records[0].email1;
-							var valor5 = data.records[0].phone_office;
-							var cuenta = {
-								"id": '',
-								"nombres": valor1,
-								"apaterno": valor2,
-								"amaterno": valor3,
-								"telefono": valor5,
-								"correo": valor4,
-								"origen": "E",
-								"unifin": 0,
-								"tipo_contacto": "Promocion",
-								"asistencia": 0,
-								"activo": 1,
-								"crea": 1,
-								"host": 0
-							};
-						}
-						selfData.mParticipantes = {actualiza: 0, participantes: [], compromisos: []};
-						selfData.mParticipantes.participantes.push(item);
-						if(data.records.length > 0) selfData.mParticipantes.participantes.push(cuenta);
-						_.extend(this, selfData.mParticipantes);
-						app.alert.dismiss('alert_participants');
-						selfData.render();
-					  }, this)
-					});
-				},
-				error: function (e) {
-					throw e;
-				}
-			});
+			if(this.model.get('parent_id')) {
+				//Recupera datos para vista de creación
+				app.alert.show('alert_participants', {
+					level: 'process',
+					title: 'Cargando...'
+				});
+				var idcuenta = this.model.get('parent_id');
+				app.api.call('GET', app.api.buildURL('Infouser/'+app.user.id), null, {
+					success: function (data) {
+						var valor1 = data.first_name;
+						var valor2 = data.last_name;
+						var valor3 = '';
+						var valor4 = data.phone_work;
+						var valor5 = app.user.attributes.email[0].email_address;;
+						var item = {
+							"id": '',
+							"nombres": valor1,
+							"apaterno": valor2,
+							"amaterno": valor3,
+							"telefono": valor4,
+							"correo": valor5,
+							"origen": "U",
+							"unifin": 1,
+							"tipo_contacto": "Promocion",
+							"asistencia": 0,
+							"activo": 1,
+							"crea": 1,
+							"host": 1
+						};
+						var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_cuenta_c"];
+						app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+						  fields: fields.join(','),
+						  max_num: 5,
+						  "filter": [
+							{
+							  "id": idcuenta,
+							  "tipodepersona_c": {
+								"$not_equals" : "Persona Moral",
+							  }
+							}
+						  ]
+						  }), null, {
+						  success: _.bind(function (data) {
+							if(data.records.length > 0) {
+								var valor1 = data.records[0].primernombre_c;
+								var valor2 = data.records[0].apellidopaterno_c;
+								var valor3 = data.records[0].apellidomaterno_c;
+								var valor4 = data.records[0].email1;
+								var valor5 = data.records[0].phone_office;
+								var cuenta = {
+									"id": '',
+									"nombres": valor1,
+									"apaterno": valor2,
+									"amaterno": valor3,
+									"telefono": valor5,
+									"correo": valor4,
+									"origen": "E",
+									"unifin": 0,
+									"tipo_contacto": "Promocion",
+									"asistencia": 0,
+									"activo": 1,
+									"crea": 1,
+									"host": 0
+								};
+							}
+							selfData.mParticipantes = {actualiza: 0, participantes: [], compromisos: []};
+							selfData.mParticipantes.participantes.push(item);
+							if(data.records.length > 0) selfData.mParticipantes.participantes.push(cuenta);
+							_.extend(this, selfData.mParticipantes);
+							app.alert.dismiss('alert_participants');
+							selfData.render();
+						  }, this)
+						});
+					},
+					error: function (e) {
+						throw e;
+					}
+				});
+			}
 		}
-		this.render();
     },
 
     _render: function () {
