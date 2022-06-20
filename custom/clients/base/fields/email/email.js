@@ -391,6 +391,9 @@
             Object.entries(App.lang.getAppListStrings('puestos_comerciales_list')).forEach(([key, value]) => {
                 arrayPuestosComerciales.push(key);
             });
+            if(this.model!=undefined){
+                self.model=this.model;
+            }
             if(self.model.attributes.email !=undefined){
                 //CORREOS REUS
                 for (var i = 0; i < self.model.attributes.email.length; i++) {
