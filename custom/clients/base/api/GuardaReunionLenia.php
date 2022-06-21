@@ -30,6 +30,8 @@ class GuardaReunionLenia extends SugarApi
         if(empty($result1[0]['id'])) {
 			$respuesta['codigo'] = 400;
 			$respuesta['mensaje'] = "Error con información enviada";
+			$GLOBALS['log']->fatal("Error con información enviada");
+			throw new SugarApiExceptionInvalidParameter("Error con información enviada");
         }
 		else {
 			// Actualiza Reunión
@@ -89,8 +91,12 @@ class GuardaReunionLenia extends SugarApi
         return $respuesta;
       }
 	  catch (Exception $e) {
-		$respuesta['codigo'] = 500;
-		$respuesta['mensaje'] = "Error con servidor";
+		if($respuesta['codigo'] != 400) {
+			$respuesta['codigo'] = 500;
+			$respuesta['mensaje'] = "Error con servidor";
+			$GLOBALS['log']->fatal("Error con servidor");
+			throw new SugarApiExceptionInvalidParameter("Error con servidor");
+		}
 		return $respuesta;
 	  }
     }
