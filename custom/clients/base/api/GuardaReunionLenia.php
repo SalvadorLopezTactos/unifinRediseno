@@ -91,10 +91,12 @@ class GuardaReunionLenia extends SugarApi
         return $respuesta;
       }
 	  catch (Exception $e) {
-		$respuesta['codigo'] = 500;
-		$respuesta['mensaje'] = "Error con servidor";
-		$GLOBALS['log']->fatal("Error con servidor");
-		throw new SugarApiExceptionInvalidParameter("Error con servidor");
+		if($respuesta['codigo'] != 400) {
+			$respuesta['codigo'] = 500;
+			$respuesta['mensaje'] = "Error con servidor";
+			$GLOBALS['log']->fatal("Error con servidor");
+			throw new SugarApiExceptionInvalidParameter("Error con servidor");
+		}
 		return $respuesta;
 	  }
     }
