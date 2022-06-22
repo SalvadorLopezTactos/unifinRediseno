@@ -39,7 +39,7 @@
                     <p>{{registrosKanban.Prospecto_Interesado.Total_Registros}} Registros</p>
                 </div>
                 <div class="cantidad-interesado  contenedor-cantidad">
-                    <p><span>$</span>20,000.00</p>
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Prospecto_Interesado.Total_Monto}}</p>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                     <p>{{registrosKanban.Prospecto_Integracion_Expediente.Total_Registros}} Registros</p>
                 </div>
                 <div class="cantidad-integracion contenedor-cantidad">
-                    <p><span>$</span>20,000.00</p>
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Prospecto_Integracion_Expediente.Total_Monto}}</p>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                     <p>{{registrosKanban.Prospecto_Credito.Total_Registros}} Registros</p>
                 </div>
                 <div class="cantidad-credito contenedor-cantidad">
-                    <p><span>$</span>20,000.00</p>
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Prospecto_Credito.Total_Monto}}</p>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
                     <p>{{registrosKanban.Cliente_Linea_Sin_Operar.Total_Registros}} Registros</p>
                 </div>
                 <div class="cantidad-conLinea contenedor-cantidad">
-                    <p><span>$</span>20,000.00</p>
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Cliente_Linea_Sin_Operar.Total_Monto}}</p>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
                     <p>{{registrosKanban.Cliente_Activo.Total_Registros}} Registros</p>
                 </div>
                 <div class="contenedor-cantidad cantidad-activo">
-                    <p><span>$</span>20,000.00</p>
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Cliente_Activo.Total_Monto}}</p>
                 </div>
             </div>
         </div>
@@ -124,7 +124,7 @@
                     <p>{{registrosKanban.Cliente_Perdido.Total_Registros}} Registros</p>
                 </div>
                 <div class="contenedor-cantidad cantidad-perdido">
-                    <p><span>$</span>20,000.00</p>
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Cliente_Perdido.Total_Monto}}</p>
                 </div>
             </div>
         </div>
@@ -138,8 +138,8 @@
                         <div class="circulo">
                             <p>UA</p>
                         </div>
-                        <div  class="nombre">
-                            <p>{{Nombre}}</p>
+                        <div class="nombre">
+                            <p data-id="{{Id}}">{{Nombre}}</p>
                         </div>
                     </div>
                     <i class="fa fa-star" style="color: #3399FF"></i>
@@ -168,7 +168,7 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p>{{Nombre}}</p>
+                            <p data-id="{{Id}}">{{Nombre}}</p>
                         </div>
                     </div>
                     <i class="fa fa-star"></i>
@@ -197,7 +197,7 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p>{{Nombre}}</p>
+                            <p data-id="{{Id}}">{{Nombre}}</p>
                         </div>
                     </div>
                     <i class="fa fa-star"></i>
@@ -210,7 +210,7 @@
                         <p>{{Date_Modified}}</p>
                     </div>
                     <div>
-                        <p><span>$</span>0</p>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
                     </div>
                 </div>
             </div>
@@ -226,7 +226,7 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p>{{Nombre}}</p>
+                            <p data-id="{{Id}}">{{Nombre}}</p>
                         </div>
                     </div>
                     <i class="fa fa-star"></i>
@@ -239,7 +239,7 @@
                         <p>{{Date_Modified}}</p>
                     </div>
                     <div>
-                        <p><span>$</span>0</p>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
                     </div>
                 </div>
             </div>
@@ -255,7 +255,7 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p>{{Nombre}}</p>
+                            <p data-id="{{Id}}">{{Nombre}}</p>
                         </div>
                     </div>
                     <i class="fa fa-star"></i>
@@ -268,7 +268,7 @@
                         <p>{{Date_Modified}}</p>
                     </div>
                     <div>
-                        <p><span>$</span>0</p>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
                     </div>
                 </div>
             </div>
@@ -287,7 +287,7 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p>{{Nombre}}</p>
+                            <p data-id="{{Id}}">{{Nombre}}</p>
                         </div>
                     </div>
                     <i class="fa fa-star"></i>
@@ -300,7 +300,7 @@
                         <p>{{Date_Modified}}</p>
                     </div>
                     <div>
-                        <p><span>$</span>0</p>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
                     </div>
                 </div>
             </div>
@@ -319,7 +319,7 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p>{{Nombre}}</p>
+                            <p data-id="{{Id}}">{{Nombre}}</p>
                         </div>
                     </div>
                     <i class="fa fa-star"></i>
@@ -332,7 +332,7 @@
                         <p>{{Date_Modified}}</p>
                     </div>
                     <div>
-                        <p><span>$</span>0</p>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
                     </div>
                 </div>
             </div>
@@ -347,52 +347,52 @@
         <div class="center-title-checklist">
             <p style="margin-top: 40px;"><b>Checklist Actividades Pendientes</b></p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> RFC
+                <input type="checkbox" disabled> RFC
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Dirección Fiscal y de Correspondencia
+                <input type="checkbox" disabled> Dirección Fiscal y de Correspondencia
             </p>
              <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Fecha Constitutiva
+                <input type="checkbox" disabled> Fecha Constitutiva
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> País de Constitución
+                <input type="checkbox" disabled> País de Constitución
             </p>
              <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Estado de Constitución
+                <input type="checkbox" disabled> Estado de Constitución
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Ventas Anuales
+                <input type="checkbox" disabled> Ventas Anuales
             </p>
              <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Año de Ventas Anuales
+                <input type="checkbox" disabled> Año de Ventas Anuales
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Activo Fijo
+                <input type="checkbox" disabled> Activo Fijo
             </p>
              <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Marcar una relación de tipo “Propietario Real”
+                <input type="checkbox" disabled> Marcar una relación de tipo “Propietario Real”
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Cuestionario PLD
+                <input type="checkbox" disabled> Cuestionario PLD
             </p>
              <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Condición Financiera
+                <input type="checkbox" disabled> Condición Financiera
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Dirección Administrativa
+                <input type="checkbox" disabled> Dirección Administrativa
             </p>
              <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Pago Mensual
+                <input type="checkbox" disabled> Pago Mensual
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Pago Único
+                <input type="checkbox" disabled> Pago Único
             </p>
              <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> Scoring Comercial
+                <input type="checkbox" disabled> Scoring Comercial
             </p>
             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox"> VoBo del director
+                <input type="checkbox" disabled> VoBo del director
             </p>
         </div>
     </div>
