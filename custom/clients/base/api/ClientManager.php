@@ -119,10 +119,11 @@ SQL;
             //Lead sin Contactar
             if($tipo=='1' && $subtipo=='1'){
                 $total_leads_sin_contactar+=1;
+                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_lead_sin_contactar=array(
                     "Id"=>$id,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
-                    "Dias_Etapa"=>"2",
+                    "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
@@ -134,10 +135,11 @@ SQL;
             //Prospecto Contactado
             if($tipo=='2' && $subtipo=='2'){
                 $total_prospecto_contactado+=1;
+                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_contactado=array(
                     "Id"=>$id,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
-                    "Dias_Etapa"=>"2",
+                    "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
@@ -154,11 +156,12 @@ SQL;
                 //array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta)
                 $montos_prospecto_interesado=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_interesado);
                 $monto_prospecto_interesado=$montos_prospecto_interesado['monto_total'];
+                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_interesado=array(
                     "Id"=>$id,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_prospecto_interesado['monto_cuenta'],
-                    "Dias_Etapa"=>"2",
+                    "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
@@ -174,11 +177,12 @@ SQL;
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                 $montos_int_expediente=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_int_expediente);
                 $monto_int_expediente=$montos_int_expediente['monto_total'];
+                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_int_expediente=array(
                     "Id"=>$id,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_int_expediente['monto_cuenta'],
-                    "Dias_Etapa"=>"2",
+                    "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
@@ -194,11 +198,12 @@ SQL;
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                 $montos_prospecto_credito=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_credito);
                 $monto_prospecto_credito=$montos_prospecto_credito['monto_total'];
+                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_credito=array(
                     "Id"=>$id,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_prospecto_credito['monto_cuenta'],
-                    "Dias_Etapa"=>"2",
+                    "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
@@ -232,11 +237,12 @@ SQL;
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                 $montos_cliente_activo=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_activo);
                 $monto_cliente_activo=$montos_cliente_activo['monto_total'];
+                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_cliente_activo=array(
                     "Id"=>$id,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_cliente_activo['monto_cuenta'],
-                    "Dias_Etapa"=>"2",
+                    "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
@@ -250,11 +256,12 @@ SQL;
                 $total_cliente_perdido+=1;
                 $montos_cliente_perdido=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_perdido);
                 $monto_cliente_perdido=$montos_cliente_perdido['monto_total'];
+                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_cliente_perdido=array(
                     "Id"=>$id,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_cliente_perdido['monto_cuenta'],
-                    "Dias_Etapa"=>"2",
+                    "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
@@ -337,7 +344,7 @@ AND opp.deleted=0 AND ao.deleted=0 AND a.deleted=0
 ORDER BY opp.date_modified DESC;
 SQL;
             $resultSolicitudes = $db->query($querySolicitudes);
-            $GLOBALS['log']->fatal('La cuenta: '.$id_cuenta.' tiene '.$resultSolicitudes->num_rows);
+            //$GLOBALS['log']->fatal('La cuenta: '.$id_cuenta.' tiene '.$resultSolicitudes->num_rows);
             if($resultSolicitudes->num_rows>0){
 
                 while ($fila = $db->fetchByAssoc($resultSolicitudes)) {
@@ -347,9 +354,41 @@ SQL;
             }
         }
 
-        $GLOBALS['log']->fatal(print_r(array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta),true));
+        //$GLOBALS['log']->fatal(print_r(array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta),true));
 
         return array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta);
+    }
+
+    public function getDiasEtapa($modulo,$id_registro,$valor_etapa){
+        global $db;
+        $nombre_campo='subtipo_registro_c';
+        if($modulo=='Accounts'){
+            $nombre_campo='subtipo_registro_cuenta_c';
+        }
+        $dias_etapa=0;
+        $queryGetDiasEtapa=<<<SQL
+SELECT DATEDIFF(curdate(),(SELECT date_created FROM accounts_audit 
+WHERE parent_id='{$id_registro}'
+AND field_name='{$nombre_campo}'
+AND after_value_string='{$valor_etapa}')) AS dias_etapa
+SQL;
+        $resultDiasEtapa = $db->query($queryGetDiasEtapa);
+        if($resultDiasEtapa->num_rows>0){
+
+            while ($row = $db->fetchByAssoc($resultDiasEtapa)) {
+                if($row['dias_etapa']!=null){
+                    $dias_etapa=$row['dias_etapa'];
+                }
+            }   
+        }
+        //Convirtiendo los días en etapa en meses
+        $str_mes_dia='D';
+        if($dias_etapa>=90){
+            $dias_etapa=floor($dias_etapa/30);
+            $str_mes_dia='M';
+        }
+
+        return $dias_etapa.$str_mes_dia;
     }
 
 }
