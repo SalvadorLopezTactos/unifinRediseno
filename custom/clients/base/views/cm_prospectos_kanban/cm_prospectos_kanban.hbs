@@ -132,7 +132,7 @@
 
     <div class="sinContactar-items border-right">
         {{#each registrosKanban.Lead_Sin_Contactar.Registros}}
-            <div class="contenedor-item">
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
                         <div class="circulo">
@@ -161,7 +161,7 @@
 
     <div class="contactado-items border-right">
         {{#each registrosKanban.Prospecto_Contactado.Registros}}
-            <div class="contenedor-item">
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
                         <div class="circulo">
@@ -190,7 +190,7 @@
 
      <div class="interesado-items border-right">
         {{#each registrosKanban.Prospecto_Interesado.Registros}}
-            <div class="contenedor-item">
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
                         <div class="circulo">
@@ -219,7 +219,7 @@
 
      <div class="integracion-items border-right">
         {{#each registrosKanban.Prospecto_Integracion_Expediente.Registros}}
-            <div class="contenedor-item">
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
                         <div class="circulo">
@@ -248,7 +248,7 @@
 
     <div class="credito-items border-right">
         {{#each registrosKanban.Prospecto_Credito.Registros}}
-            <div class="contenedor-item">
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
                         <div class="circulo">
@@ -277,7 +277,7 @@
 
     <div class="conLinea-items border-right">
         {{#each registrosKanban.Cliente_Linea_Sin_Operar.Registros}}
-            <div class="contenedor-item">
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="linea">
                     <p>Linea vigente</p>
                 </div>
@@ -309,7 +309,7 @@
 
     <div class="activo-items border-right">
         {{#each registrosKanban.Cliente_Activo.Registros}}
-            <div class="contenedor-item">
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="anexo">
                     <p>Anexo por vender</p>
                 </div>
@@ -345,55 +345,7 @@
 
     <div class="checklist-item hide">
         <div class="center-title-checklist">
-            <p style="margin-top: 40px;"><b>Checklist Actividades Pendientes</b></p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> RFC
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Dirección Fiscal y de Correspondencia
-            </p>
-             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Fecha Constitutiva
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> País de Constitución
-            </p>
-             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Estado de Constitución
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Ventas Anuales
-            </p>
-             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Año de Ventas Anuales
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Activo Fijo
-            </p>
-             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Marcar una relación de tipo “Propietario Real”
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Cuestionario PLD
-            </p>
-             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Condición Financiera
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Dirección Administrativa
-            </p>
-             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Pago Mensual
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Pago Único
-            </p>
-             <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> Scoring Comercial
-            </p>
-            <p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled> VoBo del director
-            </p>
+            
         </div>
     </div>
 </div>

@@ -122,6 +122,7 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_lead_sin_contactar=array(
                     "Id"=>$id,
+                    "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
@@ -138,6 +139,7 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_contactado=array(
                     "Id"=>$id,
+                    "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Dias_Etapa"=>$dias_etapa,
                     "Favorito"=>1,
@@ -159,6 +161,7 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_interesado=array(
                     "Id"=>$id,
+                    "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_prospecto_interesado['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
@@ -180,6 +183,7 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_int_expediente=array(
                     "Id"=>$id,
+                    "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_int_expediente['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
@@ -201,6 +205,7 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_credito=array(
                     "Id"=>$id,
+                    "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_prospecto_credito['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
@@ -240,6 +245,7 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_cliente_activo=array(
                     "Id"=>$id,
+                    "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_cliente_activo['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
@@ -275,16 +281,19 @@ SQL;
             "Lead_Sin_Contactar"=>array(
                 "Total_Registros"=>$total_leads_sin_contactar,
                 "Total_Monto"=>0,
+                "Subtipo_Registro"=>"1",
                 "Registros"=>$registros_sin_contactar
             ),
             "Prospecto_Contactado"=>array(
                 "Total_Registros"=>$total_prospecto_contactado,
                 "Total_Monto"=>0,
+                "Subtipo_Registro"=>"2",
                 "Registros"=>$registros_contactado
             ),
             "Prospecto_Interesado"=>array(
                 "Total_Registros"=>$total_prospecto_interesado,
                 "Total_Monto"=>$monto_prospecto_interesado,
+                "Subtipo_Registro"=>"7",
                 "Registros"=>$registros_interesado
             ),
             "Prospecto_Integracion_Expediente"=>array(
