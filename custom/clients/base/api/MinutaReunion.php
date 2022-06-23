@@ -46,7 +46,14 @@ class MinutaReunion extends SugarApi
     {
         $idReunion = $args['id_Reunion'];
         $beanReunion = BeanFactory::getBean("Meetings", $idReunion, array('disable_row_level_security' => true));
-        $idCuenta = $beanReunion->parent_id; // id de la cuenta asociada
+		if($beanReunion->id) {
+			$idReunion = $beanReunion->id; // id de la reunión previa
+			$idCuenta = $beanReunion->parent_id; // id de la cuenta asociada
+		}
+		else {
+			$idReunion = ''; // id de la reunión nueva
+			$idCuenta = $args['id_Reunion']; // id de la cuenta asociada
+		}
         global $current_user;
 
         // CREAMOS LA ESTRUCTURA DE LA RESPUESTA
@@ -107,7 +114,8 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
                 "tipo_contacto" => "",
                 "asistencia" => 0,
                 "activo" => 1,
-				"crea" => 0,
+				"crea" => 1,
+				"host" => 0,
                 "tel_previo"=> $beanCuentas->phone_office,
             ];
             array_push($respuestaJson['participantes'], $participantesCuentas);
