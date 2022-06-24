@@ -98,9 +98,9 @@
 									"nombres": valor1,
 									"apaterno": valor2,
 									"amaterno": valor3,
-									"telefono": valor5,
+									"telefono": valor5,	
 									"correo": valor4,
-									"origen": "E",
+									"origen": "C",
 									"unifin": 0,
 									"tipo_contacto": "Promocion",
 									"asistencia": 0,
@@ -116,7 +116,7 @@
 								success: function (data) {
 									if(data.participantes.length > 0) {
 										Object.keys(data.participantes).forEach(function (key) {
-											var valor1 = data.participantes[key].primernombre_c;
+											var valor1 = data.participantes[key].nombres;
 											var valor2 = data.participantes[key].apaterno;
 											var valor3 = data.participantes[key].amaterno;
 											var valor4 = data.participantes[key].correo;
