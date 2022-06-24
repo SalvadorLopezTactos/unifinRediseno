@@ -254,6 +254,8 @@ class reunion_participantes
 							global $db;
 							curl_close($curl);
 							$response = json_decode($response, true);
+							$GLOBALS['log']->fatal("Respuesta Lenia: ");
+							$GLOBALS['log']->fatal($response);
 							if($response['status'] && !$bean->link_lenia_c) {
 								// Actualiza ID de Sala en la Reunión
 								$descripcion = "El enlace que deberás usar para poder conectarte el día de la videoconferencia es: ".$sugar_config['lenia_url'].$response['idSala']."?".$organizador;
