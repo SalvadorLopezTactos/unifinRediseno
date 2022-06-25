@@ -38,7 +38,7 @@ class ClientManager extends SugarApi
     }
 
     public function getInfoKanban($api, $args){
-        global $sugar_config,$db,$current_user;
+        global $db,$current_user;
         $id_usuario=$current_user->id;
         //$id_usuario='cb6dfd0a-257a-5977-db84-599b31c3e22b';
 
@@ -51,13 +51,16 @@ class ClientManager extends SugarApi
         lc.tipo_registro_c tipo_registro,
         lc.subtipo_registro_c subtipo_registro,
         l.assigned_user_id,
-        l.date_modified 
+        l.date_modified,
+        f.id idFav
         FROM leads l INNER JOIN leads_cstm lc
-        ON l.id=lc.id_c 
+        ON l.id=lc.id_c
+        LEFT JOIN sugarfavorites f ON l.id = f.record_id and f.deleted=0
         WHERE lc.tipo_registro_c IN ('1','2','3')
         AND lc.subtipo_registro_c IN('1','2','7')
         AND l.assigned_user_id ='{$id_usuario}'
         AND l.deleted=0
+        -- AND f.deleted=0
         UNION
         SELECT a.id,
         'Accounts' modulo,
@@ -67,13 +70,17 @@ class ClientManager extends SugarApi
         ac.tipo_registro_cuenta_c,
         ac.subtipo_registro_cuenta_c,
         a.assigned_user_id,
-        a.date_modified
+        a.date_modified,
+        f.id idFav
         FROM accounts a INNER JOIN accounts_cstm ac
         ON a.id=ac.id_c
+        LEFT JOIN sugarfavorites f ON a.id = f.record_id and f.deleted=0
         WHERE ac.tipo_registro_cuenta_c IN ('1','2','3')
         AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9','11','17')
         AND a.assigned_user_id ='{$id_usuario}'
-        AND a.deleted=0;
+        AND a.deleted=0
+        -- AND f.deleted=0
+        ORDER BY idFav DESC;;
 SQL;
 
         $result = $db->query($query);
@@ -116,16 +123,18 @@ SQL;
           $nombre=$row['nombre']." ".$row['apellido'];
           $date_modified=$row['date_modified'];
           $nombre_empresa=$row['nombre_empresa'];
+          $idFavorito=$row['idFav'];
             //Lead sin Contactar
             if($tipo=='1' && $subtipo=='1'){
                 $total_leads_sin_contactar+=1;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_lead_sin_contactar=array(
                     "Id"=>$id,
+                    "Modulo"=>$modulo,
                     "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>1,
+                    "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 ); 
@@ -139,10 +148,11 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_contactado=array(
                     "Id"=>$id,
+                    "Modulo"=>$modulo,
                     "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>1,
+                    "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 ); 
@@ -161,11 +171,12 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_interesado=array(
                     "Id"=>$id,
+                    "Modulo"=>$modulo,
                     "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_prospecto_interesado['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>1,
+                    "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 ); 
@@ -183,11 +194,12 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_int_expediente=array(
                     "Id"=>$id,
+                    "Modulo"=>$modulo,
                     "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_int_expediente['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>1,
+                    "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 );
@@ -205,11 +217,12 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_credito=array(
                     "Id"=>$id,
+                    "Modulo"=>$modulo,
                     "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_prospecto_credito['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>1,
+                    "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 );
@@ -245,11 +258,12 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_cliente_activo=array(
                     "Id"=>$id,
+                    "Modulo"=>$modulo,
                     "Subtipo_Registro"=>$subtipo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_cliente_activo['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>1,
+                    "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 );
@@ -265,10 +279,11 @@ SQL;
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_cliente_perdido=array(
                     "Id"=>$id,
+                    "Modulo"=>$modulo,
                     "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
                     "Monto_Cuenta"=>$montos_cliente_perdido['monto_cuenta'],
                     "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>1,
+                    "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 );
