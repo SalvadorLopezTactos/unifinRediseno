@@ -1,4 +1,5 @@
 <?php
- // created: 2020-09-01 08:48:17
+ // created: 2022-06-15 20:40:31
+$dictionary['S_seguros']['fields']['etapa']['hidemassupdate']=false;
 
  ?>
