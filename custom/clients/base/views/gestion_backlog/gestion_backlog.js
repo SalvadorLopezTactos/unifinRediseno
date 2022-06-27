@@ -694,7 +694,7 @@
                         "\"monto_con_solicitud_c\": " + Number(monto_con_solicitud) + "," +
                         "\"monto_devuelta_c\": " + Number(monto_devuelta) + "," +
                         //"\"monto_comprometido\": " + Number(monto) + "," +
-                        "\"comentarios_c\": \"" + comentarios + "\"," +
+                        "\"comentarios_c\": \"" + comentarios +"-adminbl-"+ "\"," +
                         "\"tct_conversion_c\": " + Number(probabilidad) + "," +
                         "\"bl_estimado_c\": " + Number(bl_estimado) + "," +
                         "\"tipo_bl_c\": \"" + tipo + "\"," +
