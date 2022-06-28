@@ -161,12 +161,14 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
 		}
 		else {
 			$queryRecord = "SELECT T3.id,T3.name,T3.description,T3.tct_apellido_paterno_c,T3.tct_apellido_materno_c,T3.tct_nombre_completo_c,
-			T3.tct_correo_c,T3.tct_telefono_c,T3.tct_asistencia_c,T3.tct_tipo_registro_c
+			T3.tct_correo_c,T3.tct_telefono_c,T3.tct_asistencia_c,T3.tct_tipo_registro_c,T4.invitar_c
 			FROM meetings T1
 			INNER JOIN meetings_minut_participantes_1_c T2
 			ON T2.meetings_minut_participantes_1meetings_ida=T1.id
 			INNER JOIN minut_participantes T3
 			ON T3.id=T2.meetings_minut_participantes_1minut_participantes_idb
+			INNER JOIN minut_participantes_cstm T4
+			ON T4.id_c=T3.id
 			WHERE T1.id='{$idMinuta}'
 			AND T1.deleted=0
 			AND T2.deleted=0
@@ -184,6 +186,7 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
 					"unifin" => (int)$row['description'],
 					"tipo_contacto" => $row['tct_tipo_registro_c'],
 					"asistencia" => (int)$row['tct_asistencia_c'],
+					"activo" => (int)$row['invitar_c'],
 					"crea" => 0,
 				];
 				array_push($respuestaJson['participantes'], $participantesMinuta);
