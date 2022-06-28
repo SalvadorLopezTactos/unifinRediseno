@@ -185,10 +185,10 @@
 
         $('.updateAsistencia').click(function(evt) {
           var row = $(this).closest("tr");    // Find the row
-          if (selfData.mParticipantes.participantes[row.index()].asistencia == 1) {
-              selfData.mParticipantes.participantes[row.index()].asistencia = 0;
+          if (selfData.mParticipantes.participantes[row.index()].activo == 1) {
+              selfData.mParticipantes.participantes[row.index()].activo = 0;
           }else{
-              selfData.mParticipantes.participantes[row.index()].asistencia = 1;
+              selfData.mParticipantes.participantes[row.index()].activo = 1;
           }
           selfData.render();
         });
