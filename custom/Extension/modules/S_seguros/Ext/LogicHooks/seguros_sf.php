@@ -15,7 +15,7 @@
 $hook_array['before_save'][] = Array(
     1,
     'Conecta con Dynamics',
-    'custom/modules/S_seguros/seguros_dymamics.php',
+    'custom/modules/S_seguros/seguros_dynamics.php',
     'Seguros_dynamics',
     'getAccount'
 );
