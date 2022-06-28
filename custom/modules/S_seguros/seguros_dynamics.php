@@ -520,11 +520,11 @@ class Seguros_dynamics
       $loginurl = $sugar_config['inter_dynamics_token_url'];
       $usr = $sugar_config['inter_dynamics_usr'];
       $psw = $sugar_config['inter_dynamics_psw'];
-      $params = array(
+      $params = json_encode(array(
           'name'=>$usr,
           'password'=>$psw,
           'int_serv_servicio'=>'Valida Token'
-      );
+      ));
 
       $curl = curl_init($loginurl);
       curl_setopt($curl, CURLOPT_HEADER, false);
