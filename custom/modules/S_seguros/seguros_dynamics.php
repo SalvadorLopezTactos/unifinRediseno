@@ -54,7 +54,7 @@ class Seguros_dynamics
                         $updateExecute = $db->query($update);
                     }else{
                         //Crear creacion de cuenta en Dynamics
-
+                        $GLOBALS['log']->fatal('No existe cuenta, se crea una nueva:');
                         $body_cuenta = array(
                             "int_etapa" => "",
                             "int_duenio" => "CON-0000000002",
