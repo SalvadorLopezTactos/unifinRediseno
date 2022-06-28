@@ -441,7 +441,7 @@
 			banderaAsesor = 0;
 			banderaAsistencia = 0;
 			for (var i = 0; i < objParticipantes.length; i++) {
-				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1) banderaCorreo++;
+				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaCorreo++;
 				if (objParticipantes[i].unifin == 1 && objParticipantes[i].activo) banderaAsesor++;
 				if (objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaAsistencia++;
 			}
