@@ -39,30 +39,61 @@
     },
 
     muestraChecklist:function(e){
-        var subtipo=$(e.currentTarget).attr('data-tipo');
+        this.id_registro=$(e.currentTarget).attr('data-id');
+        this.subtipo=$(e.currentTarget).attr('data-tipo');
+        this.tipo_registro=$(e.currentTarget).attr('data-registro');
 
-        //Obteniendo la lista de valores que contiene el checklist
-        var lista=App.lang.getAppListStrings('cm_checklist_kanban_list');
-        //Checklist unicamente pertenece a los subtipos Sin Contactar, Contactado e Interesado (1,2,7)
-        if(subtipo==1 || subtipo==2 || subtipo==7){
-            var valores_unformat=lista[subtipo];
-            var elementos_checklist=valores_unformat.split(',');
-            var string_elementos_checklist="";
-            for(var i=0;i<elementos_checklist.length;i++){
-                string_elementos_checklist+=`<p style="margin-top: 20px;font-size: 12px;">
-                <input type="checkbox" disabled>  `+elementos_checklist[i]+`
-            </p>`
+        App.alert.show('getChecklistKanban', {
+            level: 'process',
+            title: 'Cargando',
+        });
+
+
+        app.api.call('GET', app.api.buildURL('GetChecklistKanban/'+this.id_registro+'/'+this.tipo_registro), null, {
+            success: function (data) {
+                App.alert.dismiss('getChecklistKanban');
+                //Obteniendo la lista de valores que contiene el checklist
+                var lista=App.lang.getAppListStrings('cm_checklist_kanban_list');
+                var respuesta=data;
+                //Checklist unicamente pertenece a los subtipos Sin Contactar, Contactado e Interesado (1,2,7)
+                if(self.subtipo==1 || self.subtipo==2 || self.subtipo==7){
+
+                    var valores_unformat=lista[self.subtipo];
+                    var elementos_checklist=valores_unformat.split(',');
+                    var string_elementos_checklist="";
+                    for(var i=0;i<elementos_checklist.length;i++){
+                        var elemento=elementos_checklist[i];
+                        var elemento_split=elemento.split('|');
+
+                        if(respuesta.includes(elemento_split[1])){
+                            string_elementos_checklist+=`<p style="margin-top: 20px;font-size: 12px;">
+                        <input type="checkbox" disabled checked>  `+elemento_split[0]+`
+                    </p>`;
+                        }else{
+                            string_elementos_checklist+=`<p style="margin-top: 20px;font-size: 12px;">
+                        <input type="checkbox" disabled>  `+elemento_split[0]+`
+                    </p>`;
+                        }
+                        
+                    }
+
+                    $('.center-title-checklist').empty();
+                    $('.center-title-checklist').append('<p style="margin-top: 40px;"><b>Checklist Actividades Pendientes</b></p>');
+                    $('.center-title-checklist').append(string_elementos_checklist);      
+                    
+                    $('.checklist-item').removeClass('hide');
+
+                }else{
+                    $('.checklist-item').addClass('hide');
+                }
+            },
+            error: function (e) {
+                throw e;
             }
+        });
 
-            $('.center-title-checklist').empty();
-            $('.center-title-checklist').append('<p style="margin-top: 40px;"><b>Checklist Actividades Pendientes</b></p>');
-            $('.center-title-checklist').append(string_elementos_checklist);      
-            
-            $('.checklist-item').removeClass('hide');
 
-        }else{
-            $('.checklist-item').addClass('hide');
-        }
+        
         
     },
 

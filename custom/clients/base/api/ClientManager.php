@@ -32,6 +32,13 @@ class ClientManager extends SugarApi
                 'longHelp' => '',
             ),
 
+            'retrieveGetChecklist' => array(
+                'reqType' => 'GET',
+                'path' => array('GetChecklistKanban','?','?'),
+                'pathVars' => array('','idRegistro','tipoRegistro'),
+                'method' => 'getChecklistKanban',
+                'shortHelp' => 'Obtiene información para checklist de vista kanban',
+            )
 
         );
 
@@ -39,8 +46,8 @@ class ClientManager extends SugarApi
 
     public function getInfoKanban($api, $args){
         global $db,$current_user;
-        $id_usuario=$current_user->id;
-        //$id_usuario='cb6dfd0a-257a-5977-db84-599b31c3e22b';
+        //$id_usuario=$current_user->id;
+        $id_usuario='cb6dfd0a-257a-5977-db84-599b31c3e22b';
 
         $query = <<<SQL
 			SELECT l.id id_registro,
@@ -413,6 +420,131 @@ SQL;
         }
 
         return $dias_etapa.$str_mes_dia;
+    }
+
+    public function getChecklistKanban($api, $args){
+        $idRegistro=$args['idRegistro'];
+        $tipoRegistro=$args['tipoRegistro'];
+        $array_respuesta=array();
+
+        //Lead Sin Contactar: macrosector_c, email1, teléfono, reunión o llamada
+        if($tipoRegistro=='LSC'){
+            $beanLead = BeanFactory::getBean('Leads', $idRegistro, array('disable_row_level_security' => true));
+            $macrosector=$beanLead->macrosector_c;
+            $email=$beanLead->email1;
+            $telefonoMobile=$beanLead->phone_mobile;
+            $telefonoTrabajo=$beanLead->phone_work;
+            $telefonoCasa=$beanLead->phone_home;
+
+            if($macrosector!="" && $macrosector!=null){
+                $GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene macrosector');
+                array_push($array_respuesta,'macrosector');
+            }
+
+            if($email!="" && $email!=null){
+                $GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene email');
+                array_push($array_respuesta,'email');
+            }
+
+            if(($telefonoMobile!="" && $telefonoMobile!=null) || ($telefonoTrabajo!="" && $telefonoTrabajo!=null) || ($telefonoCasa!="" && $telefonoCasa!=null)){
+                $GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene teléfono');
+                array_push($array_respuesta,'telefono');
+            }
+            
+            //Obteniendo reuniones registradas
+            if($beanLead->load_relationship('meetings')){
+                $relatedReuniones = $beanLead->meetings->getBeans();
+                if(count($relatedReuniones)>0){
+                    $GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene reuniones, forma parte de checklist');
+                    array_push($array_respuesta,'reunion');
+                }
+            }
+
+            $array_llamadas_realizadas=array();
+            if($beanLead->load_relationship('calls')){
+                $relatedllamadas = $beanLead->calls->getBeans();
+                if(count($relatedllamadas)>0){
+                    //$GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene llamadas, forma parte de checklist');
+                    foreach($relatedllamadas as $call) {
+                        if($call->status=='Held'){
+                            $GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene llamada realizada');
+                            array_push($array_llamadas_realizadas,'1');
+                        }
+                    }
+                }
+            }
+
+            if(in_array('1',$array_llamadas_realizadas)){
+                array_push($array_respuesta,'llamada');
+            }
+
+        }
+
+        //Prospecto Contactado: 
+        /** 
+         * actividadeconomica_c,
+         * Actividad Económica, Dirección Administrativa,Situación de Grupo Empresarial,Registrar una Presolicitud
+        */
+        if($tipoRegistro=='PC'){
+            $beanPC = BeanFactory::getBean('Accounts', $idRegistro, array('disable_row_level_security' => true));
+            $actividad_economica=$beanPC->actividadeconomica_c;
+            $situacin_grupo=$beanPC->situacion_gpo_empresarial_c;
+
+            if($actividad_economica!="" && $actividad_economica!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene actividad económica');
+                array_push($array_respuesta,'actividadeconomica');
+            }
+
+            if($situacin_grupo!="" && $situacin_grupo!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Situación de Grupo Empresarial');
+                array_push($array_respuesta,'situaciongrupo');
+            }
+
+            //Obteniendo direcciones para saber si tiene administrativa
+            $array_direcciones_admin=array();
+            if($beanPC->load_relationship('accounts_dire_direccion_1')){
+                $relatedDirecciones = $beanPC->accounts_dire_direccion_1->getBeans();
+                if(count($relatedDirecciones)>0){
+                    $tipos_administracion=array('16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63');
+                    //$GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene llamadas, forma parte de checklist');
+                    foreach($relatedDirecciones as $dir) {
+                        if(in_array($dir->indicador,$tipos_administracion)){
+                            $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene direccion de admin');
+                            array_push($array_direcciones_admin,'1');
+                        }
+                    }
+                }
+            }
+
+            if(in_array('1',$array_direcciones_admin)){
+                array_push($array_respuesta,'direccion_admin');
+            }
+
+            //Obteniendo solicitudes para saber si tiene alguna "PRE Solicitud" registrada
+            $array_solicitudes=array();
+            if($beanPC->load_relationship('opportunities')){
+                $relatedOpps = $beanPC->opportunities->getBeans();
+                if(count($relatedOpps)>0){
+                    foreach($relatedOpps as $opp) {
+                        $nombre_opp=$opp->name;
+                        $nombre_opp_array=explode("-", $nombre_opp);
+                        if(trim($nombre_opp_array[0])=='PRE'){
+                            $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene PRE Solicitud');
+                            array_push($array_solicitudes,'1');
+                        }
+                    }
+                }
+            }
+
+            if(in_array('1',$array_solicitudes)){
+                array_push($array_respuesta,'presolicitud');
+            }
+
+        }
+
+
+        return $array_respuesta;
+
     }
 
 }

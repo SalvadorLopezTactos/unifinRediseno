@@ -132,14 +132,16 @@
 
     <div class="sinContactar-items border-right">
         {{#each registrosKanban.Lead_Sin_Contactar.Registros}}
-            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+            <div class="contenedor-item" data-id="{{Id}}" data-tipo="{{Subtipo_Registro}}" data-registro="LSC">
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
                         <div class="circulo">
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p data-id="{{Id}}" title="{{Nombre}}">{{Nombre}}</p>
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
                         </div>
                     </div>
                     <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
@@ -161,14 +163,16 @@
 
     <div class="contactado-items border-right">
         {{#each registrosKanban.Prospecto_Contactado.Registros}}
-            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+            <div class="contenedor-item" data-id="{{Id}}" data-tipo="{{Subtipo_Registro}}" data-registro="PC">
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
                         <div class="circulo">
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p data-id="{{Id}}" title="{{Nombre}}">{{Nombre}}</p>
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
                         </div>
                     </div>
                     <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
