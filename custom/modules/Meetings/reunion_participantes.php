@@ -57,61 +57,73 @@ class reunion_participantes
 					  $beanParticipante->tct_asistencia_c = $objArrParticipnates[$j]['asistencia'];
 					  $beanParticipante->tct_tipo_registro_c = $objArrParticipnates[$j]['tipo_contacto'];
 					  $beanParticipante->tct_id_registro_c = $objArrParticipnates[$j]['id'];
+					  $beanParticipante->invitar_c = $objArrParticipnates[$j]['activo'];
 					  $beanParticipante->meetings_minut_participantes_1meetings_ida = $bean->id;
 					  $beanParticipante->description = $objArrParticipnates[$j]['unifin'];
 					  $beanParticipante->save();
-					  if($objArrParticipnates[$j]['host']) {
-						  $host = [
-							"first_name" => $beanParticipante->name,
-							"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
-							"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
-							"full_name" => $beanParticipante->tct_nombre_completo_c,
-							"email" => $beanParticipante->tct_correo_c,
-							"crm_id" => $beanParticipante->id,
-						  ];
-						  array_push($advisor,$host);
-						  $organizador = $beanParticipante->id;
+					  if($objArrParticipnates[$j]['activo']) {
+						if($objArrParticipnates[$j]['host']) {
+							$host = [
+								"first_name" => $beanParticipante->name,
+								"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
+								"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
+								"full_name" => $beanParticipante->tct_nombre_completo_c,
+								"email" => $beanParticipante->tct_correo_c,
+								"crm_id" => $beanParticipante->id,
+							];
+							array_push($advisor,$host);
+							$organizador = $beanParticipante->id;
+						}
+						else {
+							$participante = [
+								"first_name" => $beanParticipante->name,
+								"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
+								"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
+								"full_name" => $beanParticipante->tct_nombre_completo_c,
+								"email" => $beanParticipante->tct_correo_c,
+								"crm_id" => $beanParticipante->id,
+							];
+							array_push($guest,$participante);
+						}
+						$correo = ["id" => $beanParticipante->id, "name" => $beanParticipante->tct_nombre_completo_c, "mail" => $beanParticipante->tct_correo_c];
+						array_push($correos,$correo);
 					  }
-					  else {
-						  $participante = [
-							"first_name" => $beanParticipante->name,
-							"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
-							"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
-							"full_name" => $beanParticipante->tct_nombre_completo_c,
-							"email" => $beanParticipante->tct_correo_c,
-							"crm_id" => $beanParticipante->id,
-						  ];
-						  array_push($guest,$participante);
-					  }
-					  $correo = ["id" => $beanParticipante->id, "name" => $beanParticipante->tct_nombre_completo_c, "mail" => $beanParticipante->tct_correo_c];
-					  array_push($correos,$correo);
 					}
 					else {
-					  if($objArrParticipnates[$j]['unifin']) {
-						  $host1 = [
-							"first_name" => $objArrParticipnates[$j]['nombres'],
-							"father_last_name" => $objArrParticipnates[$j]['apaterno'],
-							"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
-							"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
-							"email" => $objArrParticipnates[$j]['correo'],
-							"crm_id" => $objArrParticipnates[$j]['id'],
-						  ];
-						  array_push($advisor,$host1);
+					  if($objArrParticipnates[$j]['activo']) {
+						if($objArrParticipnates[$j]['unifin']) {
+						    $host1 = [
+								"first_name" => $objArrParticipnates[$j]['nombres'],
+								"father_last_name" => $objArrParticipnates[$j]['apaterno'],
+								"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
+								"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
+								"email" => $objArrParticipnates[$j]['correo'],
+								"crm_id" => $objArrParticipnates[$j]['id'],
+							];
+							array_push($advisor,$host1);
+							$organizador = $beanParticipante->id;
+						}
+						else {
+							$participante1 = [
+								"first_name" => $objArrParticipnates[$j]['nombres'],
+								"father_last_name" => $objArrParticipnates[$j]['apaterno'],
+								"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
+								"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
+								"email" => $objArrParticipnates[$j]['correo'],
+								"crm_id" => $objArrParticipnates[$j]['id'],
+							];
+							array_push($guest,$participante1);
+						}
+						if($objParticipantes['actualiza']) {
+							$correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
+							array_push($correos,$correo);
+						}
 					  }
 					  else {
-						  $participante1 = [
-							"first_name" => $objArrParticipnates[$j]['nombres'],
-							"father_last_name" => $objArrParticipnates[$j]['apaterno'],
-							"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
-							"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
-							"email" => $objArrParticipnates[$j]['correo'],
-							"crm_id" => $objArrParticipnates[$j]['id'],
-						  ];
-						  array_push($guest,$participante1);
-					  }
-					  if($objParticipantes['actualiza']) {
-						  $correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
-						  array_push($correos,$correo);
+						  //Actualiza Participante
+						  $beanParticipa = BeanFactory::getBean('minut_Participantes', $objArrParticipnates[$j]['id'], array('disable_row_level_security' => true));
+						  $beanParticipa->invitar_c = 0;
+						  $beanParticipa->save();
 					  }
 					}
 					// Busca relación
@@ -222,7 +234,7 @@ class reunion_participantes
 						$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
 						$hora = date("g:i a",$inicio);
 						// Invoca servicio para crear o actualizar sala en Lenia
-						$url = $sugar_config['lenia'].'videocall/room/add/';
+						$url = $sugar_config['lenia'].'videocall/room/add/?meeting_objective_id='.$bean->objetivo_c;
 						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c;
 						$content = json_encode(array(
 						  "crm_id" => $bean->id,

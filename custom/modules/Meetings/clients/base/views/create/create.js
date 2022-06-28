@@ -438,14 +438,12 @@
         var objParticipantes = selfData.mParticipantes["participantes"];
 		if (objParticipantes && this.model.get('tct_conferencia_chk_c')) {
 			banderaCorreo = 0;
+			banderaAsesor = 0;
 			banderaAsistencia = 0;
 			for (var i = 0; i < objParticipantes.length; i++) {
-				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1) {
-					banderaCorreo++;
-				}
-				if (objParticipantes[i].unifin != 1) {
-					banderaAsistencia++;
-				}
+				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1) banderaCorreo++;
+				if (objParticipantes[i].unifin == 1 && objParticipantes[i].activo) banderaAsesor++;
+				if (objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaAsistencia++;
 			}
 			// Valida Correos
 			if (banderaCorreo > 0) {
@@ -457,6 +455,17 @@
 				});
 				errors['correo'] = errors['correo'] || {};
 				errors['correo'].required = true;
+			}
+			// Valida Asesor
+			if (banderaAsesor < 1) {
+				app.alert.show("Asesor", {
+					level: "error",
+					messages: "Debes seleccionar al <b>Asesor</b> como invitado dentro de los participantes.",
+					autoClose: false,
+					return: false,
+				});
+				errors['asesor'] = errors['asesor'] || {};
+				errors['asesor'].required = true;
 			}
 			// Valida Asistencias
 			if (banderaAsistencia < 1) {
