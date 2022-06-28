@@ -59,7 +59,7 @@ class Seguros_dynamics
                             "int_etapa" => "",
                             "int_duenio" => "CON-0000000002",
                             "ownerid" => "",
-                            "int_tipo_persona" => "Persona Fisica",
+                            "int_tipo_persona" => $cuenta->regimen_fiscal_c,
                             "name"=> $cuenta->name,
                             "int_primer_apellido" => $cuenta->apellidopaterno_c,
                             "int_segundo_apellido" => $cuenta->apellidomaterno_c,
