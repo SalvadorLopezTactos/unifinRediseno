@@ -19,63 +19,71 @@ class Seguros_dynamics
         }
         else
         {
-          //Consulta Cuenta        
+          //Consulta Cuenta
           $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
           $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
           $GLOBALS['log']->fatal('Inicia Seguros_Dynamics');
-          global $sugar_config;
-          global $app_list_strings;
-     	  require_once 'include/api/SugarApiException.php';
-          if(!$cuenta->salesforce_id_c)
+          global $sugar_config, $db, $app_list_strings;
+     	    require_once 'include/api/SugarApiException.php';
+          if(!$cuenta->int_id_dynamics_c)
           {
             $token = $this->getToken();
             if($token)
             {
                 if(empty($cuenta->int_id_dynamics_c)){
                     $url = $sugar_config['inter_dynamics_url'].'Account/'.$cuenta->rfc_c;
-                    $content = json_encode(array("nameAccount" => $cuenta->name));
                     $curl = curl_init($url);
+                    curl_setopt($curl, CURLOPT_URL, $url);
                     curl_setopt($curl, CURLOPT_HEADER, false);
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($curl, CURLOPT_HTTPHEADER,
                     array("Authorization: Bearer $token",
                         "Content-type: application/json"));
-                    curl_setopt($curl, CURLOPT_POST, true);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+                    $GLOBALS['log']->fatal('Seguros_Dynamics - Consulta Cuenta: ' . $url);
                     $json_response = curl_exec($curl);
                     curl_close($curl);
                     $response = json_decode($json_response, true);
+                    $GLOBALS['log']->fatal($response);
                     $id_dyn = $response['id_CRM'];
-                    if($id_dyn!="Null" || $id_dyn!=""){
+                    if($id_dyn!="Null" && $id_dyn!=""){
                         global $db;
                         $update = "update accounts_cstm set
                         int_id_dynamics_c='{$id_dyn}'
                         where id_c = '{$cuenta->id}'";
                         $updateExecute = $db->query($update);
+                        $cuenta->int_id_dynamics_c = $id_dyn;
                     }else{
                         //Crear creacion de cuenta en Dynamics
-                        $GLOBALS['log']->fatal('No existe cuenta, se crea una nueva:');
+                        $url = $sugar_config['inter_dynamics_url'].'Account';
+                        $idUsuario = ($bean->tipo_referenciador == 1) ? $bean->user_id1_c : $bean->user_id2_c;
+                        $referenciadorDeLaOportunidadC = $app_list_strings['referenciador_list'][$bean->referenciador_c];
+                        $nombreUsuarioQuery = "Select nombre_completo_c from users_cstm where id_c ='{$idUsuario}'";
+                        $resultUsuario = $db->query($nombreUsuarioQuery);
+                        $referenciador = $db->fetchByAssoc($resultUsuario);
+                        if($bean->tipo_referenciador == 1) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->region;
+                        if($bean->tipo_referenciador == 2) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->departamento_c;
+                        if($bean->tipo_referenciador == 3) $referenciadorCuenta = $app_list_strings['ejecutivo_c_list'][$bean->ejecutivo_c];
                         $body_cuenta = array(
                             "int_etapa" => "",
-                            "int_duenio" => "CON-0000000002",
+                            "int_duenio" => "",
                             "ownerid" => "",
-                            "int_tipo_persona" => $cuenta->regimen_fiscal_c,
-                            "name"=> $cuenta->name,
+                            "int_tipo_persona" => ($cuenta->tipodepersona_c == 'Persona Moral') ? 'Persona Moral' : 'Persona Física',
+                            "name"=> ($cuenta->tipodepersona_c == 'Persona Moral') ? $cuenta->name : $cuenta->primernombre_c,
                             "int_primer_apellido" => $cuenta->apellidopaterno_c,
                             "int_segundo_apellido" => $cuenta->apellidomaterno_c,
                             "int_sexo" => $cuenta->genero_c,
                             "int_tipo_cuenta" => "Cliente",
-                            "int_tipo_documento_id" => "TIPODOC-0000000005",
+                            "int_tipo_documento_id" => "",
                             "int_cliente_autorizado" => "",
-                            "int_fecha_nac_const" => "2000-10-28T00=>00=>00.000",
+                            "int_fecha_nac_const" => ($cuenta->tipodepersona_c == 'Persona Moral') ? $cuenta->fechaconstitutiva_c : $cuenta->fechadenacimiento_c,
                             "int_rfc" => $cuenta->rfc_c,
-                            "int_sector_id" => "SECTOR-0000000005",
-                            "int_subsector_id" => "SUBSECT-0000000003",
-                            "int_rama_id" => "RAMA-0000000004",
+                            "int_sector_id" => "",
+                            "int_subsector_id" => "",
+                            "int_rama_id" => "",
                             "int_subramo_id" => "",
-                            "transactioncurrencyid" => "USD",
-                            "int_tipo_cliente_id" => "TIPOCLI-0000000004",
-                            "int_referenciador_cuenta" => "Prueba",
+                            "transactioncurrencyid" => "",
+                            "int_tipo_cliente_id" => "",
+                            "int_referenciador_cuenta" => $referenciadorCuenta,
                             "telephone1" => $cuenta->phone_office,
                             "emailaddress1" =>$cuenta->email1 ,
                             "int_pais_id" => "",
@@ -91,20 +99,21 @@ class Seguros_dynamics
                         );
 
                         $content = json_encode($body_cuenta);
+                        $GLOBALS['log']->fatal('Seguros_Dynamics - Crea nueva: '. $url);
                         $GLOBALS['log']->fatal($content);
                         $curl = curl_init($url);
-                            curl_setopt($curl, CURLOPT_HEADER, false);
-                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                            curl_setopt($curl, CURLOPT_HTTPHEADER,
-                            array("Authorization: Bearer $token",
-                                "Content-type: application/json"));
-                            curl_setopt($curl, CURLOPT_POST, true);
-                            curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                            $json_response = curl_exec($curl);
-                            curl_close($curl);
-                            $response = json_decode($json_response, true);
+                        curl_setopt($curl, CURLOPT_HEADER, false);
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl, CURLOPT_HTTPHEADER,
+                        array("Authorization: Bearer $token",
+                            "Content-type: application/json"));
+                        curl_setopt($curl, CURLOPT_POST, true);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+                        $json_response = curl_exec($curl);
+                        curl_close($curl);
+                        $response = json_decode($json_response, true);
                         $id_dyn = $response['id_CRM'];
-                        $GLOBALS['log']->fatal('Creacion de Cuenta en Dynamics: ' .$response);
+                        $GLOBALS['log']->fatal($response);
                         //Update del id dynamics de la cuenta
                         global $db;
                         $update = "update accounts_cstm set
@@ -117,11 +126,11 @@ class Seguros_dynamics
             else
             {
               throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
-            } 
+            }
           }
         }
         //Prospecto
-        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 1 && !$bean->int_id_dynamics_c && !$bean->seguro_uni2_c)
+        if($bean->etapa == 1 && !$bean->int_id_dynamics_c && !$bean->seguro_uni2_c)
         {
           global $db;
           $token = $this->getToken();
@@ -147,53 +156,29 @@ class Seguros_dynamics
             $closeDate = $bean->fecha_cierre_c;
             $closeDate = date("d/m/Y", strtotime($closeDate));
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity';
-            if(!$cuenta->int_id_dynamics_c)
-            {
-          		$arreglo = array(
-                "sugarId" => $bean->id,
-                "recordTypeId" => $recordTypeId,
-                "nameAccount" => $cuenta->name,
-                "name" => $bean->name,
-                "type" => $type,
-                "tipoDeRegistroC" => $tipoDeRegistroC,
-                "ramoC" => $ramoC,
-                "currencyIsoCode" => $currencyIsoCode,
-                "oportunidadInternacionalC" => $oportunidadInternacionalC,
-                "oficinaC" => $oficinaC,
-                "kamC" => $kamC,
-                "referenciadorDeLaOportunidadC" => $referenciadorDeLaOportunidadC,
-                "referenciadorCuenta" => $referenciadorCuenta,
-                "stageName" => $stageName,
-                "closeDate" => $closeDate,
-                "primaTotalObjetivoC" => $bean->prima_obj_c, 
-                "ingresoObjetivopC" => $bean->incentivo,     
-                "ingresoObjetivoC" => $bean->ingreso_inc    
-              );
-            }
-            else
-            {
-          		$arreglo = array(
-                "sugarId" => $bean->id,
-                "recordTypeId" => $recordTypeId,
-                "accountId" => $cuenta->int_id_dynamics_c,
-                "name" => $bean->name,
-                "type" => $type,
-                "tipoDeRegistroC" => $tipoDeRegistroC,
-                "ramoC" => $ramoC,
-                "currencyIsoCode" => $currencyIsoCode,
-                "oportunidadInternacionalC" => $oportunidadInternacionalC,
-                "oficinaC" => $oficinaC,
-                "kamC" => $kamC,
-                "referenciadorDeLaOportunidadC" => $referenciadorDeLaOportunidadC,
-                "referenciadorCuenta" => $referenciadorCuenta,
-                "stageName" => $stageName,
-                "closeDate" => $closeDate,
-                "primaTotalObjetivoC" => $bean->prima_obj_c,
-                "ingresoObjetivopC" => $bean->incentivo,
-                "ingresoObjetivoC" => $bean->ingreso_inc
-              );
-            }
+        		$arreglo = array(
+                "int_tipo_opp" => $bean->tipo_registro_sf_c,
+                "parentaccountid" => $cuenta->int_id_dynamics_c,
+                "int_tipo" => $bean->tipo_venta_c,
+                "int_area_responsable_id" => $bean->area,
+                "int_ramo_id" => $bean->tipo,
+                "transactioncurrencyid" => $bean->monedas_c,
+                "int_oportunidad_internacional" => $bean->nacional_c,
+                "int_localidad_id" => $bean->oficina_c,
+                "int_kam_santander_unifin_id" => "",
+                "int_vendedor_id" => $bean->kam_c,
+                "int_etapa" => $bean->etapa,
+                "actualclosedate" => $bean->fecha_cierre_c,
+                "int_prima_total_objetivo" => $bean->prima_obj_c,
+                "int_ing_objetivo_porcentaje" => "",
+                "estimatedvalue" => "",
+                "ownerid" => "",
+                "int_tipo_poliza" => "",
+                "int_id_sugar" => $bean->id,
+                "name" => $bean->name
+            );
             $content = json_encode($arreglo);
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Crea oportunidad - Prospecto: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -233,16 +218,17 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $fechaRequierePropuestaC = $bean->fecha_req;
             $fechaRequierePropuestaC = date("d/m/Y", strtotime($fechaRequierePropuestaC));
-            if($bean->requiere_ayuda_c == 1) $requiereAyudaDeReaTcnica = 0;
-            if($bean->requiere_ayuda_c == 2) $requiereAyudaDeReaTcnica = 1;
+            if($bean->requiere_ayuda_c == 1) $requiereAyudaDeReaTcnica = 'No';
+            if($bean->requiere_ayuda_c == 2) $requiereAyudaDeReaTcnica = 'Si';
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-                "stageName" => $stageName,
-                "requiereAyudaDeReaTcnica" => $requiereAyudaDeReaTcnica,
-                "fechaRequierePropuestaC" => $fechaRequierePropuestaC,
+                "int_etapa" => $bean->etapa,
+                "int_ayuda_area_tecnica" =>  $requiereAyudaDeReaTcnica,
+                "int_fecha_req_propuesta" => $bean->fecha_req,
                 "description" => $bean->description,
-                "serviciosaincluirc" => $serviciosaincluirc              
+                "int_servicio_incluir" => $serviciosaincluirc
             ));
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Cotizando: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -250,7 +236,7 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
         		curl_close($curl);
@@ -271,10 +257,10 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "etapa" => "COTIZADO",
-              "oportinidadId" => $bean->int_id_dynamics_c,
-              "stageName" => $stageName
+              "int_etapa" => "COTIZADO",
+              "int_etapa" => $stageName
             ));
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Cotizado: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -282,16 +268,17 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de Cotizado enviada: ' .$response);
         		curl_close($curl);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
           {
             throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
-          }            
+          }
         }
         //No Cotizado
         if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 5 && $bean->tipo_registro_sf_c == 1 && !$bean->seguro_uni2_c)
@@ -303,11 +290,11 @@ class Seguros_dynamics
             $motivo = $app_list_strings['motivo_no_cotizado_list'][$bean->motivo_no_cotizado_c];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "etapa" => "NOCOTIZADO",
-              "oportinidadId" => $bean->int_id_dynamics_c,
-              "stageName" => $stageName,
-              "motivosNoCotizada" => $motivo
+              "int_etapa" => "NOCOTIZADO",
+              "int_etapa" => $stageName,
+              "int_motivo_no_cotizada" => $motivo
             ));
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Cotizado: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -315,9 +302,10 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de No Cotizado enviada: ' .$response);
         		curl_close($curl);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
@@ -335,10 +323,10 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "etapa" => "PRESENTACION",
-              "oportinidadId" => $bean->int_id_dynamics_c,
-              "stageName" => $stageName
+              "int_etapa" => "PRESENTACION",
+              "int_etapa" => $stageName
             ));
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Presentación: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -346,9 +334,10 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de Presentación enviada: ' .$response);
         		curl_close($curl);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
@@ -366,11 +355,10 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "etapa" => "RENEGOCIADA",
-              "oportinidadId" => $bean->int_id_dynamics_c,
-              "stageName" => $stageName,
-              "motivosRenegociaciNC" => $bean->motivos_c
+              "int_etapa" => "RENEGOCIADA",
+              "int_etapa" => $stageName
             ));
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Re-negociación: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -378,12 +366,12 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
             $GLOBALS['log']->fatal('Informacion de Re-negociacon enviada: ' .$response);
             curl_close($curl);
-            if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);            
+            if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
           {
@@ -407,10 +395,8 @@ class Seguros_dynamics
             $fecha_fin_c = date("d/m/Y", strtotime($fecha_fin_c));
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "etapa" => "GANADA",
-              "oportinidadId" => $bean->int_id_dynamics_c,
-              "stageName" => $stageName,
-              "primaNetaTotalC" => $bean->prima_neta_ganada_c,
+              "int_etapa" => "GANADA",
+              "int_etapa" => $stageName,
               "feeC" => $bean->fee_c,
               "feePC" => $bean->fee_p_c,
               "formaPagoEmitidaC" => $forma_pago,
@@ -420,8 +406,8 @@ class Seguros_dynamics
               "fechaInicioVigencia_ogC" => $fecha_ini_c,
               "fechaFinVigenciaOgC" => $fecha_fin_c,
               "ejecutivoAsignadoNuevoC" => $ejecutivo_c
-              
             ));
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Ganada: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -429,7 +415,7 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
             $GLOBALS['log']->fatal('Informacion de Ganada enviada: ' .$response);
@@ -452,14 +438,14 @@ class Seguros_dynamics
             $no_renovable_c = $app_list_strings['no_renovable_list'][$bean->no_renovable_c];
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$arreglo = array(
-              "etapa" => "PERDIDA",
-              "oportinidadId" => $bean->int_id_dynamics_c,
-              "stageName" => $stageName,
-              "razonPerdida" => $razonPerdida,
-              "comentariosRazonPerdida" => $bean->comentarios_c,
-              "ramoNoRenovablec" => $no_renovable_c
+              "int_etapa" => "PERDIDA",
+              "int_etapa" => $stageName,
+              "int_razon_perdida" => $razonPerdida,
+              "int_comentarios_razon_perdida" => $bean->comentarios_c,
+              "int_ramo_renovable" => $no_renovable_c
             );
             if($bean->tipo_registro_sf_c == 1) unset($arreglo['ramoNoRenovablec']);
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Ganada: '. $url);
             $content = json_encode($arreglo);
         		$curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -467,10 +453,10 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Informacion de Perdida enviada: ' .$response);
+            $GLOBALS['log']->fatal('Informacion de No Ganada enviada: ' .$response);
             curl_close($curl);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
@@ -488,10 +474,10 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
         	$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "etapa" => "SOLICITUDCOTIZACION",
-              "oportinidadId" => $bean->int_id_dynamics_c,
-              "stageName" => $stageName
+              "int_etapa" => "SOLICITUDCOTIZACION",
+              "int_etapa" => $stageName
             ));
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Solicitud cotización: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
@@ -499,9 +485,10 @@ class Seguros_dynamics
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
         		array("Authorization: Bearer $token",
         			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
         		$response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Informacion de Solicitud cotización enviada: ' .$response);
         		curl_close($curl);
             if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
@@ -525,7 +512,7 @@ class Seguros_dynamics
           'password'=>$psw,
           'int_serv_servicio'=>'Valida Token'
       ));
-
+      $GLOBALS['log']->fatal('Petición Token Dynamics INTER: '. $loginurl );
       $curl = curl_init($loginurl);
       curl_setopt($curl, CURLOPT_HEADER, false);
       curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -536,6 +523,7 @@ class Seguros_dynamics
       curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
       $response = curl_exec($curl);
       $response = json_decode($response, true);
+      $GLOBALS['log']->fatal($response);
   		curl_close($curl);
   		return $response['Token'];
     }
