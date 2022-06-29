@@ -542,6 +542,182 @@ SQL;
 
         }
 
+        //Prospecto Interesado:
+        /**RFC: rfc_c
+            Dirección Fiscal y de Correspondencia: ***
+            Fecha Constitutiva:  fechaconstitutiva_c
+            País de Constitución: pais_nacimiento_c
+            Estado de Constitución: zonageografica_c
+            Ventas Anuales: ventas_anuales_c
+            Año de Ventas Anuales: tct_ano_ventas_ddw_c
+            Activo Fijo: activo_fijo_c
+            Marcar una relación de tipo “Propietario Real”: ***
+            Cuestionario PLD: ***
+            Condición Financiera: ***
+            Pago Mensual: ***
+            Pago Único: ***
+            Scoring Comercial: ***
+            VoBo del director: ***
+         * 
+         */
+        if($tipoRegistro=='PI'){
+
+            $beanPI = BeanFactory::getBean('Accounts', $idRegistro, array('disable_row_level_security' => true));
+            $rfc=$beanPI->rfc_c;
+            $fecha_constitutiva=$beanPI->fechaconstitutiva_c;
+            $pais_constitucion=$beanPI->pais_nacimiento_c;
+            $estado_constitucion=$beanPI->zonageografica_c;
+            $ventas_anuales=$beanPI->ventas_anuales_c;
+            $anio_ventas_anuales=$beanPI->tct_ano_ventas_ddw_c;
+            $activo_fijo=$beanPI->activo_fijo_c;
+
+            if($rfc!="" && $rfc!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene rfc');
+                array_push($array_respuesta,'rfc');
+            }
+
+            if($fecha_constitutiva!="" && $fecha_constitutiva!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Fecha Constitutiva');
+                array_push($array_respuesta,'fecha_constitutiva');
+            }
+
+            if($pais_constitucion!="" && $pais_constitucion!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Pais de Constitución');
+                array_push($array_respuesta,'pais_constitucion');
+            }
+
+            if($estado_constitucion!="" && $estado_constitucion!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Estado de Constitución');
+                array_push($array_respuesta,'estado_constitucion');
+            }
+
+            if($ventas_anuales!="" && $ventas_anuales!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Ventas Anuales');
+                array_push($array_respuesta,'ventas_anuales');
+            }
+
+            if($anio_ventas_anuales!="" && $anio_ventas_anuales!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Anio de Ventas Anuales');
+                array_push($array_respuesta,'anio_ventas_anuales');
+            }
+
+            if($activo_fijo!="" && $activo_fijo!=null){
+                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Activo Fijo');
+                array_push($array_respuesta,'activo_fijo');
+            }
+
+            //Obteniendo direcciones para validar direccion fiscal y correspondencia
+            $array_direcciones_fiscal_correspondencia=array();
+            if($beanPI->load_relationship('accounts_dire_direccion_1')){
+                $relatedDirecciones = $beanPI->accounts_dire_direccion_1->getBeans();
+                if(count($relatedDirecciones)>0){
+                    $tipos_direccion=array('1','2','3','5','6','7','9','10','11','13','14','15','17','18','19','21','22','23','25','26','27','29','30','31','33','34','35','37','38','39','41','42','43','45','46','47','49','50','51','53','54','55','57','58','59','61','62','63');
+                    //$GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene llamadas, forma parte de checklist');
+                    foreach($relatedDirecciones as $dir) {
+                        if(in_array($dir->indicador,$tipos_direccion)){
+                            $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene direccion fiscal o correspondencia');
+                            array_push($array_direcciones_fiscal_correspondencia,'1');
+                        }
+                    }
+                }
+            }
+
+            if(in_array('1',$array_direcciones_fiscal_correspondencia)){
+                array_push($array_respuesta,'fiscal_correspondencia');
+            }
+
+            //Obteniendo Relaciones para obtener "Propietario Real"
+            $array_propietario_real=array();
+            if($beanPI->load_relationship('rel_relaciones_accounts_1')){
+                $relatedRelaciones = $beanPI->rel_relaciones_accounts_1->getBeans();
+                if(count($relatedRelaciones)>0){
+                    //$GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene llamadas, forma parte de checklist');
+                    foreach($relatedRelaciones as $rel) {
+                        if(strpos($rel->relaciones_activas,'^Propietario Real^')!=false){
+                            $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Propietario Real');
+                            array_push($array_propietario_real,'1');
+                        }
+                    }
+                }
+            }
+
+            if(in_array('1',$array_propietario_real)){
+                array_push($array_respuesta,'propietario_real');
+            }
+
+            //Obtener Cuestionario PLD
+            $array_pld=array();
+            if($beanPI->load_relationship('accounts_tct_pld_1')){
+                $relatedPLD = $beanPI->accounts_tct_pld_1->getBeans();
+                if(count($relatedPLD)>0){
+                    $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Cuestionario PLD');
+                    array_push($array_pld,'1'); 
+                }
+            }
+
+            if(in_array('1',$array_pld)){
+                array_push($array_respuesta,'pld');
+            }
+
+            //Obteniendo Solicitudes para validar Condición Financiera,Pago Mensual,Pago Único,Scoring Comercial,VoBo del director,
+            $array_condicion_financiera=array();
+            $array_pago_mensual=array();
+            $array_pago_unico=array();
+            $array_scoring=array();
+            $array_vobo_director=array();
+            if($beanPI->load_relationship('opportunities')){
+                $relatedSolicitudes= $beanPI->opportunities->getBeans();
+                if(count($relatedSolicitudes)>0){
+                    foreach($relatedSolicitudes as $sol) {
+                        if($sol->estatus_c !='K' && $sol->estatus_c!='R'){
+                            
+                            if($sol->cf_quantico_c!="" && $sol->cf_quantico_c!=null){
+                                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Condicion Financiera');
+                                array_push($array_condicion_financiera,'1');
+                            }
+
+                            if($sol->ca_pago_mensual_c!="" && $sol->ca_pago_mensual_c!=null){
+                                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Pago Mensual');
+                                array_push($array_pago_mensual,'1');
+                            }
+
+                            if($sol->ca_importe_enganche_c!="" && $sol->ca_importe_enganche_c!=null){
+                                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Pago Único');
+                                array_push($array_pago_unico,'1');
+                            }
+
+                            if($sol->doc_scoring_chk_c==1){
+                                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Scoring Comercial');
+                                array_push($array_scoring,'1');
+                            }
+
+                            if($sol->vobo_dir_c==1){
+                                $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene VoBo Director');
+                                array_push($array_vobo_director,'1');
+                            }
+                            
+                        }
+                    }
+                }
+            }
+
+            if(in_array('1',$array_condicion_financiera)){
+                array_push($array_respuesta,'condicion_financiera');
+            }
+            if(in_array('1',$array_pago_mensual)){
+                array_push($array_respuesta,'pago_mensual');
+            }
+            if(in_array('1',$array_pago_unico)){
+                array_push($array_respuesta,'pago_unico');
+            }
+            if(in_array('1',$array_scoring)){
+                array_push($array_respuesta,'scoring_comercial');
+            }
+            if(in_array('1',$array_vobo_director)){
+                array_push($array_respuesta,'vobo_director');
+            }
+
+        }
 
         return $array_respuesta;
 
