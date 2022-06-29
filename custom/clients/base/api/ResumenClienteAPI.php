@@ -144,7 +144,8 @@ class ResumenClienteAPI extends SugarApi
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
             "tiene_linea_autorizada" => false,
-            "tiene_anexo_liberado" => false
+            "tiene_anexo_liberado" => false,
+            "tiene_anexos" => false
           );
         //Factoraje
         $arr_principal['factoring'] = array("linea_autorizada" => "",
@@ -174,7 +175,8 @@ class ResumenClienteAPI extends SugarApi
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
             "tiene_linea_autorizada" => false,
-            "tiene_cesiones_liberado" => false
+            "tiene_cesiones_liberado" => false,
+            "tiene_cesiones" => false
           );
         //Crédito automotriz
         $arr_principal['credito_auto'] = array("linea_autorizada" => "",
@@ -203,7 +205,8 @@ class ResumenClienteAPI extends SugarApi
             "muestra_producto" => false,
             "es_prospecto_cliente" => false,
             "tiene_linea_autorizada" => false,
-            "tiene_contrato_liberado" => false
+            "tiene_contrato_liberado" => false,
+            "tiene_contratos" => false
           );
         //Fleet
         $arr_principal['fleet'] = array("linea_aproximada" => "",
@@ -456,7 +459,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['leasing']['anexos_historicos'] = $registros_historicos;
                         $arr_principal['leasing']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['leasing']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
-                        $arr_principal['leasing']['tiene_anexo_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['leasing']['tiene_anexo_liberado'] = ($registros_activos > 0 ) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['leasing']['tiene_anexos'] = ($registros_activos > 0 || $registros_historicos > 0 ) ? true : false; //Valida que tenga anexos activos
 
                         break;
                     case '3': //Credito-Automotriz
@@ -476,7 +480,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['credito_auto']['contratos_historicos'] = $registros_historicos;
                         $arr_principal['credito_auto']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['credito_auto']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
-                        $arr_principal['credito_auto']['tiene_contrato_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['credito_auto']['tiene_contrato_liberado'] = ($registros_activos > 0 ) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['credito_auto']['tiene_contratos'] = ($registros_activos > 0 || $registros_historicos > 0 ) ? true : false; //Valida que tenga anexos activos
                         break;
                     case '4': //Factoraje
                         $arr_principal['factoring']['tipo_cuenta'] = $tipoCuenta;
@@ -495,7 +500,8 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['factoring']['cesiones_historicas'] = $registros_historicos;
                         $arr_principal['factoring']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['factoring']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
-                        $arr_principal['factoring']['tiene_cesiones_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['factoring']['tiene_cesiones_liberado'] = ($registros_activos > 0 ) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['factoring']['tiene_cesiones'] = ($registros_activos > 0 || $registros_historicos > 0 ) ? true : false; //Valida que tenga anexos activos
                         break;
                     case '6': //Fleet
                         $arr_principal['fleet']['tipo_cuenta'] = $tipoCuenta;

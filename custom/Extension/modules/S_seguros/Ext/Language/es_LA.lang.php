@@ -80,3 +80,6 @@ $mod_strings['LBL_FECHA_APLICACION'] = 'Fecha de aplicación';
 $mod_strings['LBL_RAZON_CANCEL_GANADA'] = 'Razón de la Cancelación';
 $mod_strings['LBL_COMENTARIOS_GANADA'] = 'Comentarios';
 $mod_strings['LBL_REGISTRO_NO_VALIDO'] = 'Registro no válido';
+$mod_strings['LBL_INT_ID_DYNAMICS_C'] = 'Id Dynamics';
+$mod_strings['LBL_ETAPA'] = 'Estado';
+$mod_strings['LBL_ETAPA_SEGURO'] = 'Etapa';
