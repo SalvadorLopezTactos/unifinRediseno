@@ -101,7 +101,7 @@ class reunion_participantes
 								"crm_id" => $objArrParticipnates[$j]['id'],
 							];
 							array_push($advisor,$host1);
-							$organizador = $beanParticipante->id;
+							$organizador = $objArrParticipnates[$j]['id'];
 						}
 						else {
 							$participante1 = [
@@ -228,14 +228,20 @@ class reunion_participantes
 						$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
 						if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
 						$inicio = strtotime('-6 hours',strtotime($bean->date_start));
+						$fin = strtotime('-6 hours',strtotime($bean->date_end));
 						if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
+						if($verano) $fin = strtotime('-5 hours',strtotime($bean->date_end));
 						$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
 						$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 						$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
 						$hora = date("g:i a",$inicio);
+						$start = date('Ymd',$inicio)."T".date('His',$inicio);
+						$end = date('Ymd',$fin)."T".date('His',$fin);
+						$ini_outlook = date('Y-m-d',$inicio)."T".date('H:i:s',$inicio);
+						$fin_outlook = date('Y-m-d',$fin)."T".date('H:i:s',$fin);
 						// Invoca servicio para crear o actualizar sala en Lenia
 						$url = $sugar_config['lenia'].'videocall/room/add/?meeting_objective_id='.$bean->objetivo_c;
-						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c;
+						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c.'&meeting_objective_id='.$bean->objetivo_c;
 						$content = json_encode(array(
 						  "crm_id" => $bean->id,
 						  "session_name" => $bean->name,
@@ -294,6 +300,9 @@ class reunion_participantes
 									else {
 										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente','type'=>'email'));
 									}
+									$google = "http://www.google.com/calendar/event?action=TEMPLATE&text=".$emailtemplate->subject."&dates=".$start."/".$end."&location=".$url."&trp=false&details=UNIFIN FINANCIERA";
+									$outlook = "https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&startdt=".$ini_outlook."&enddt=".$fin_outlook."&subject=".$emailtemplate->subject."&body=UNIFIN FINANCIERA&location=".$url;
+									$office = "https://outlook.office.com/calendar/0/deeplink/compose?subject=".$emailtemplate->subject."&body=UNIFIN FINANCIERA&startdt=".$ini_outlook."&enddt=".$fin_outlook."&location=".$url."&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent";
 									$emailtemplate->subject = $emailtemplate->subject;
 									$body_html = $emailtemplate->body_html;
 									$body_html = str_replace('participante_name', $correo["name"], $body_html);
@@ -301,6 +310,9 @@ class reunion_participantes
 									$body_html = str_replace('asesor_name', $usuario, $body_html);
 									$body_html = str_replace('fecha', $fecha, $body_html);
 									$body_html = str_replace('hora', $hora, $body_html);
+									$body_html = str_replace('google', $google, $body_html);
+									$body_html = str_replace('outlook', $outlook, $body_html);
+									$body_html = str_replace('office', $office, $body_html);
 									$emailtemplate->body_html = str_replace('url', $url, $body_html);
 									$mailer = MailerFactory::getSystemDefaultMailer();
 									$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
