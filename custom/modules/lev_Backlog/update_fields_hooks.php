@@ -42,6 +42,9 @@ class update_fields_hooks
             case 4:
                 $bean->etapa = "Credito";
                 break;
+            case 5:
+                $bean->etapa = "Devuelta";
+                break;
         }
 
         // Etapa inicio mes

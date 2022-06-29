@@ -46,7 +46,14 @@ class MinutaReunion extends SugarApi
     {
         $idReunion = $args['id_Reunion'];
         $beanReunion = BeanFactory::getBean("Meetings", $idReunion, array('disable_row_level_security' => true));
-        $idCuenta = $beanReunion->parent_id; // id de la cuenta asociada
+		if($beanReunion->id) {
+			$idReunion = $beanReunion->id; // id de la reunión previa
+			$idCuenta = $beanReunion->parent_id; // id de la cuenta asociada
+		}
+		else {
+			$idReunion = ''; // id de la reunión nueva
+			$idCuenta = $args['id_Reunion']; // id de la cuenta asociada
+		}
         global $current_user;
 
         // CREAMOS LA ESTRUCTURA DE LA RESPUESTA
@@ -70,6 +77,7 @@ class MinutaReunion extends SugarApi
                     "tipo_contacto" => "",
                     "asistencia" => $value->id==$current_user->id?1:0,
                     "activo" => $value->id==$current_user->id?"":"1",
+					"crea" => 0,
                     "tel_previo"=>$value->phone_work,
                 ];
                 //$respuestaJson['participantes']['id']=$value->id ;
@@ -105,7 +113,9 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
                 "unifin" => 0,
                 "tipo_contacto" => "",
                 "asistencia" => 0,
-                "activo" => "1",
+                "activo" => 1,
+				"crea" => 1,
+				"host" => 0,
                 "tel_previo"=> $beanCuentas->phone_office,
             ];
             array_push($respuestaJson['participantes'], $participantesCuentas);
@@ -117,12 +127,10 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
     public function getParticipantesReunionRecord($api, $args)
     {
         $idMinuta = $args['id_Minuta'];
-
         // CREAMOS LA ESTRUCTURA DE LA RESPUESTA
-        $respuestaJson = array('participantes' => array(), 'compromisos' => array());
-
+        $respuestaJson = array('actualiza' => 0, 'participantes' => array(), 'compromisos' => array());
         $queryRecord = "SELECT T3.id,T3.name,T3.description,T3.tct_apellido_paterno_c,T3.tct_apellido_materno_c,T3.tct_nombre_completo_c,
-       T3.tct_correo_c,T3.tct_telefono_c,T3.tct_asistencia_c,T3.tct_tipo_registro_c
+		T3.tct_correo_c,T3.tct_telefono_c,T3.tct_asistencia_c,T3.tct_tipo_registro_c
         FROM minut_minutas T1
         INNER JOIN minut_minutas_minut_participantes_c T2
         ON T2.minut_minutas_minut_participantesminut_minutas_ida=T1.id
@@ -132,30 +140,58 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
         AND T1.deleted=0
         AND T2.deleted=0
         AND T3.deleted=0";
-
         $resultado = $bd = $GLOBALS['db']->query($queryRecord);
-
-        while ($row = $GLOBALS['db']->fetchByAssoc($resultado)) {
-
-            $participantesMinuta = [
-
-                "id" => $row['id'],
-                "nombres" => $row['name'],
-                "apaterno" => $row['tct_apellido_paterno_c'],
-                "amaterno" => $row['tct_apellido_materno_c'],
-                "telefono" => $row['tct_telefono_c'],
-                "correo" => $row['tct_correo_c'],
-                "origen" => "",
-                "unifin" => (int)$row['description'],
-                "tipo_contacto" => $row['tct_tipo_registro_c'],
-                "asistencia" => (int)$row['tct_asistencia_c'],
-
-            ];
-
-            array_push($respuestaJson['participantes'], $participantesMinuta);
-        }
+        if($resultado->num_rows > 0) {
+			while ($row = $GLOBALS['db']->fetchByAssoc($resultado)) {
+				$participantesMinuta = [
+					"id" => $row['id'],
+					"nombres" => $row['name'],
+					"apaterno" => $row['tct_apellido_paterno_c'],
+					"amaterno" => $row['tct_apellido_materno_c'],
+					"telefono" => $row['tct_telefono_c'],
+					"correo" => $row['tct_correo_c'],
+					"origen" => "",
+					"unifin" => (int)$row['description'],
+					"tipo_contacto" => $row['tct_tipo_registro_c'],
+					"asistencia" => (int)$row['tct_asistencia_c'],
+					"crea" => 0,
+				];
+				array_push($respuestaJson['participantes'], $participantesMinuta);
+			}
+		}
+		else {
+			$queryRecord = "SELECT T3.id,T3.name,T3.description,T3.tct_apellido_paterno_c,T3.tct_apellido_materno_c,T3.tct_nombre_completo_c,
+			T3.tct_correo_c,T3.tct_telefono_c,T3.tct_asistencia_c,T3.tct_tipo_registro_c,T4.invitar_c
+			FROM meetings T1
+			INNER JOIN meetings_minut_participantes_1_c T2
+			ON T2.meetings_minut_participantes_1meetings_ida=T1.id
+			INNER JOIN minut_participantes T3
+			ON T3.id=T2.meetings_minut_participantes_1minut_participantes_idb
+			INNER JOIN minut_participantes_cstm T4
+			ON T4.id_c=T3.id
+			WHERE T1.id='{$idMinuta}'
+			AND T1.deleted=0
+			AND T2.deleted=0
+			AND T3.deleted=0";
+			$resultado = $bd = $GLOBALS['db']->query($queryRecord);
+			while ($row = $GLOBALS['db']->fetchByAssoc($resultado)) {
+				$participantesMinuta = [
+					"id" => $row['id'],
+					"nombres" => $row['name'],
+					"apaterno" => $row['tct_apellido_paterno_c'],
+					"amaterno" => $row['tct_apellido_materno_c'],
+					"telefono" => $row['tct_telefono_c'],
+					"correo" => $row['tct_correo_c'],
+					"origen" => "",
+					"unifin" => (int)$row['description'],
+					"tipo_contacto" => $row['tct_tipo_registro_c'],
+					"asistencia" => (int)$row['tct_asistencia_c'],
+					"activo" => (int)$row['invitar_c'],
+					"crea" => 0,
+				];
+				array_push($respuestaJson['participantes'], $participantesMinuta);
+			}
+		}
         return $respuestaJson;
     }
-
-
 }

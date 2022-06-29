@@ -1,5 +1,5 @@
 <?php
- // created: 2022-06-09 09:24:18
+ // created: 2022-06-15 19:42:23
 $platforms[] = 'api';
 $platforms[] = 'unifinAPI';
 $platforms[] = 'efactor';
@@ -36,3 +36,4 @@ $platforms[] = 'clarivia';
 $platforms[] = 'landingExpos';
 $platforms[] = 'portalUnileasing';
 $platforms[] = 'lenia';
+$platforms[] = 'clariviaCompranet';

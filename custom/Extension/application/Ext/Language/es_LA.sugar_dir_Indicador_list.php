@@ -1,5 +1,5 @@
 <?php
- // created: 2022-01-24 11:15:47
+ // created: 2022-06-15 14:33:56
 
 $app_list_strings['dir_Indicador_list']=array (
   0 => 'Sin Indicador',
@@ -50,20 +50,20 @@ $app_list_strings['dir_Indicador_list']=array (
   45 => 'Correspondencia, Entrega de Bienes, Operativa y Entrega de Tarjetas',
   46 => 'Fiscal, Entrega de Bienes, Operativa y Entrega de Tarjetas',
   47 => 'Correspondencia, Fiscal, Entrega de Bienes, Operativa y Entrega de Tarjetas',
-  48 => 'Correspondencia, Administración y Entrega de Tarjetas',
-  49 => 'Fiscal, Administración y Entrega de Tarjetas',
-  50 => 'Correspondencia, Fiscal, Administración y Entrega de Tarjetas',
-  51 => 'Entrega de Bienes, Administración y Entrega de Tarjetas',
-  52 => 'Correspondencia, Entrega de Bienes, Administración y Entrega de Tarjetas',
-  53 => 'Fiscal, Entrega de Bienes, Administración y Entrega de Tarjetas',
-  54 => 'Correspondencia, Fiscal, Entrega de Bienes, Administración y Entrega de Tarjetas',
-  55 => 'Operativa, Administración y Entrega de Tarjetas',
-  56 => 'Correspondencia, Operativa, Administración y Entrega de Tarjetas',
-  57 => 'Fiscal, Operativa, Administración y Entrega de Tarjetas',
-  58 => 'Correspondencia, Fiscal, Operativa, Administración y Entrega de Tarjetas',
-  59 => 'Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
-  60 => 'Correspondencia, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
-  61 => 'Fiscal, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
-  62 => 'Correspondencia, Fiscal, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
-  63 => 'Administración y Entrega de Tarjetas',
+  48 => 'Administración y Entrega de Tarjetas',
+  49 => 'Correspondencia, Administración y Entrega de Tarjetas',
+  50 => 'Fiscal, Administración y Entrega de Tarjetas',
+  51 => 'Correspondencia, Fiscal, Administración y Entrega de Tarjetas',
+  52 => 'Entrega de Bienes, Administración y Entrega de Tarjetas',
+  53 => 'Correspondencia, Entrega de Bienes, Administración y Entrega de Tarjetas',
+  54 => 'Fiscal, Entrega de Bienes, Administración y Entrega de Tarjetas',
+  55 => 'Correspondencia, Fiscal, Entrega de Bienes, Administración y Entrega de Tarjetas',
+  56 => 'Operativa, Administración y Entrega de Tarjetas',
+  57 => 'Correspondencia, Operativa, Administración y Entrega de Tarjetas',
+  58 => 'Fiscal, Operativa, Administración y Entrega de Tarjetas',
+  59 => 'Correspondencia, Fiscal, Operativa, Administración y Entrega de Tarjetas',
+  60 => 'Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
+  61 => 'Correspondencia, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
+  62 => 'Fiscal, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
+  63 => 'Correspondencia, Fiscal, Entrega de Bienes, Operativa, Administración y Entrega de Tarjetas',
 );

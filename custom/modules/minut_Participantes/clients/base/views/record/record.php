@@ -205,6 +205,9 @@ array (
               ),
               7 => 
               array (
+                'readonly' => false,
+                'name' => 'invitar_c',
+                'label' => 'LBL_INVITAR',
               ),
               8 => 'assigned_user_name',
               9 => 'team_name',
@@ -215,6 +218,13 @@ array (
               11 => 
               array (
                 'name' => 'minut_minutas_minut_participantes_name',
+              ),
+              12 => 
+              array (
+                'name' => 'meetings_minut_participantes_1_name',
+              ),
+              13 => 
+              array (
               ),
             ),
           ),

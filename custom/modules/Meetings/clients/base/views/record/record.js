@@ -35,6 +35,8 @@
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         this.model.on("change:status",_.bind(this.hidecheck, this));
         this.model.on("change:parent_name",_.bind(this.showCheckin, this));
+		this.model.on("change:tct_conferencia_chk_c", _.bind(this.participantes, this));
+		this.model.on("change:date_start", _.bind(this.actualiza, this));
         //this.model.on('render',this.hidecheck,this);
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
         //this.model.addValidationTask('ValidaCuentaNoVacia',_.bind(this.ValidaCuentaNoVacia, this));
@@ -58,6 +60,7 @@
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
+		this.model.addValidationTask('save_Participantes', _.bind(this.saveParticipantes, this));
         this.model.on('sync',this.enableparentname,this);
         this.model.on('sync', this.campanas, this);
         this.model.on('sync', this.validaRelLeadMeet, this);
@@ -100,7 +103,10 @@
         });
         //Desabilita edición del campo Producto
         $('div[data-name=productos_c]').css("pointer-events", "none");
-        
+		//Oculta panel del Participantes
+		this.$('[data-name=reunion_participantes]').find('.record-label').addClass('hide');
+		this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
+		if(this.model.get('tct_conferencia_chk_c')) this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').removeClass('hide');
     },
 
     /**
@@ -893,4 +899,64 @@
         }
     },
 
+    participantes: function () {
+		if(this.model.get('tct_conferencia_chk_c')) {
+			this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').removeClass('hide');
+		}
+		else {
+			this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
+		}
+    },
+
+    saveParticipantes: function (fields, errors, callback) {
+        var objParticipantes = selfData.mParticipantes["participantes"];
+		if (objParticipantes && this.model.get('tct_conferencia_chk_c')) {
+			banderaCorreo = 0;
+			banderaAsesor = 0;
+			banderaAsistencia = 0;
+			for (var i = 0; i < objParticipantes.length; i++) {
+				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaCorreo++;
+				if (objParticipantes[i].unifin == 1 && objParticipantes[i].activo) banderaAsesor++;
+				if (objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaAsistencia++;
+			}
+			// Valida Correos
+			if (banderaCorreo > 0) {
+				app.alert.show("Correo", {
+					level: "error",
+					messages: "Todos los <b>Participantes</b> tipo Cuenta deben contar con <b>correo</b>.",
+					autoClose: false,
+					return: false,
+				});
+				errors['correo'] = errors['correo'] || {};
+				errors['correo'].required = true;
+			}
+			// Valida Asesor
+			if (banderaAsesor < 1) {
+				app.alert.show("Asesor", {
+					level: "error",
+					messages: "Debes seleccionar al <b>Asesor</b> como invitado dentro de los participantes.",
+					autoClose: false,
+					return: false,
+				});
+				errors['asesor'] = errors['asesor'] || {};
+				errors['asesor'].required = true;
+			}
+			// Valida Asistencias
+			if (banderaAsistencia < 1) {
+				app.alert.show("Asistencia", {
+					level: "error",
+					messages: "Debes seleccionar por lo menos a un <b>Participante</b> de tipo Cuenta.",
+					autoClose: false,
+					return: false,
+				});
+				errors['xd'] = errors['xd'] || {};
+				errors['xd'].required = true;
+			}
+		}
+        callback(null, fields, errors);
+    },
+
+    actualiza: function () {
+		selfData.mParticipantes["actualiza"] = 1;
+    },
 })

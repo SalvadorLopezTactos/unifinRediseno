@@ -381,6 +381,25 @@ array (
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL3',
+            'label' => 'LBL_RECORDVIEW_PANEL3',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'reunion_participantes',
+                'studio' => 'visible',
+                'label' => 'reunion_participantes',
+                'span' => 12,
+              ),
+            ),
+          ),
+          3 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL1',
             'label' => 'LBL_RECORDVIEW_PANEL1',
             'columns' => 2,
@@ -397,7 +416,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          4 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
@@ -510,7 +529,7 @@ array (
               ),
             ),
           ),
-          4 => 
+          5 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
