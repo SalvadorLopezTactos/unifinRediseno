@@ -83,11 +83,18 @@ class ClientManager extends SugarApi
         ON a.id=ac.id_c
         LEFT JOIN sugarfavorites f ON a.id = f.record_id and f.deleted=0
         WHERE ac.tipo_registro_cuenta_c IN ('1','2','3')
-        AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9','11','17')
-        AND a.assigned_user_id ='{$id_usuario}'
+        AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9','17')
+        -- AND a.assigned_user_id ='{$id_usuario}'
+        AND (ac.user_id_c='{$id_usuario}' OR 
+			ac.user_id1_c='{$id_usuario}' OR 
+            ac.user_id2_c='{$id_usuario}' OR 
+            ac.user_id6_c='{$id_usuario}' OR 
+            ac.user_id7_c='{$id_usuario}' OR 
+            ac.user_id8_c='{$id_usuario}'
+		)
         AND a.deleted=0
         -- AND f.deleted=0
-        ORDER BY idFav DESC;;
+        ORDER BY idFav DESC;
 SQL;
 
         $result = $db->query($query);
@@ -238,23 +245,6 @@ SQL;
                 $registros_credito[]=$array_prospecto_credito;
             }
 
-            //Cliente con Línea sin Operar
-            /*ToDo: FALTA SABER ID */
-            /*
-            if($tipo=='2' && $subtipo=='7'){
-                $total_prospecto_interesado+=1;
-                $array_prospecto_interesado=array(
-                    "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
-                    "Dias_Etapa"=>"2",
-                    "Favorito"=>1,
-                    "Date_Modified"=>$date_modified,
-                    "Preview"=>array("Info Preview")
-                ); 
-                
-                $registros_interesado[]=$array_prospecto_interesado;
-            }
-            */
-
             //Cliente Activo
             if($tipo=='2' && $subtipo=='11'){
                 $total_cliente_activo+=1;
@@ -393,12 +383,14 @@ SQL;
     public function getDiasEtapa($modulo,$id_registro,$valor_etapa){
         global $db;
         $nombre_campo='subtipo_registro_c';
+        $nombre_tabla='leads_audit';
         if($modulo=='Accounts'){
             $nombre_campo='subtipo_registro_cuenta_c';
+            $nombre_tabla='accounts_audit';
         }
         $dias_etapa=0;
         $queryGetDiasEtapa=<<<SQL
-SELECT DATEDIFF(curdate(),(SELECT date_created FROM accounts_audit 
+SELECT DATEDIFF(curdate(),(SELECT date_created FROM {$nombre_tabla} 
 WHERE parent_id='{$id_registro}'
 AND field_name='{$nombre_campo}'
 AND after_value_string='{$valor_etapa}')) AS dias_etapa
