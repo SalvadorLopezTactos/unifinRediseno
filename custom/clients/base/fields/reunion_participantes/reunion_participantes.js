@@ -106,7 +106,8 @@
 									"asistencia": 0,
 									"activo": 1,
 									"crea": 1,
-									"host": 0
+									"host": 0,
+									"actualiza": 0
 								};
 							}
 							selfData.mParticipantes = {actualiza: 0, participantes: [], compromisos: []};
@@ -134,7 +135,8 @@
 												"asistencia": 0,
 												"activo": 1,
 												"crea": 1,
-												"host": 0
+												"host": 0,
+												"actualiza": 0
 											};
 											selfData.mParticipantes.participantes.push(relacionado);
 										});
@@ -189,6 +191,7 @@
               selfData.mParticipantes.participantes[row.index()].activo = 0;
           }else{
               selfData.mParticipantes.participantes[row.index()].activo = 1;
+			  selfData.mParticipantes.participantes[row.index()].actualiza = 1;
           }
           selfData.render();
         });

@@ -118,13 +118,18 @@ class reunion_participantes
 							$correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
 							array_push($correos,$correo);
 						}
+						else {
+							if($objArrParticipnates[$j]['actualiza']) {
+								$correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
+								array_push($correos,$correo);
+							}
+						}
 					  }
-					  else {
-						  //Actualiza Participante
-						  $beanParticipa = BeanFactory::getBean('minut_Participantes', $objArrParticipnates[$j]['id'], array('disable_row_level_security' => true));
-						  $beanParticipa->invitar_c = 0;
-						  $beanParticipa->save();
-					  }
+					  //Actualiza Participante
+					  $beanParticipa = BeanFactory::getBean('minut_Participantes', $objArrParticipnates[$j]['id'], array('disable_row_level_security' => true));
+					  $beanParticipa->invitar_c = 1;
+					  if(!$objArrParticipnates[$j]['activo']) $beanParticipa->invitar_c = 0;
+					  $beanParticipa->save();					  
 					}
 					// Busca relación
 					if($objArrParticipnates[$j]['origen'] == "E")
@@ -300,10 +305,12 @@ class reunion_participantes
 									else {
 										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente','type'=>'email'));
 									}
-									$google = "http://www.google.com/calendar/event?action=TEMPLATE&text=".$emailtemplate->subject."&dates=".$start."/".$end."&location=".$url."&trp=false&details=UNIFIN FINANCIERA";
-									$outlook = "https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&startdt=".$ini_outlook."&enddt=".$fin_outlook."&subject=".$emailtemplate->subject."&body=UNIFIN FINANCIERA&location=".$url;
-									$office = "https://outlook.office.com/calendar/0/deeplink/compose?subject=".$emailtemplate->subject."&body=UNIFIN FINANCIERA&startdt=".$ini_outlook."&enddt=".$fin_outlook."&location=".$url."&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent";
-									$emailtemplate->subject = $emailtemplate->subject;
+									$asunto = $emailtemplate->subject;
+									if($objParticipantes['actualiza']) $asunto = "Actualización: ".$emailtemplate->subject;
+									$google = "http://www.google.com/calendar/event?action=TEMPLATE&text=".$asunto."&dates=".$start."/".$end."&location=".$url."&trp=false&details=UNIFIN FINANCIERA";
+									$outlook = "https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&startdt=".$ini_outlook."&enddt=".$fin_outlook."&subject=".$asunto."&body=UNIFIN FINANCIERA&location=".$url;
+									$office = "https://outlook.office.com/calendar/0/deeplink/compose?subject=".$asunto."&body=UNIFIN FINANCIERA&startdt=".$ini_outlook."&enddt=".$fin_outlook."&location=".$url."&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent";
+									$emailtemplate->subject = $asunto;
 									$body_html = $emailtemplate->body_html;
 									$body_html = str_replace('participante_name', $correo["name"], $body_html);
 									$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
@@ -326,7 +333,6 @@ class reunion_participantes
 									$recordid = $correo["id"];
 									$hoy = date("Y-m-d H:i:s");
 									$mail = $correo["mail"];
-									$asunto = $emailtemplate->subject;
 									try {
 										$result = $mailer->send();
 										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
