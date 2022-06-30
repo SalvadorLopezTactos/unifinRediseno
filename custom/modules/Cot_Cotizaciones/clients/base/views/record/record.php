@@ -182,12 +182,13 @@ array (
               ),
               2 => 
               array (
-                'readonly' => false,
                 'name' => 'cot_cotizaciones_s_seguros_name',
-                'label' => 'LBL_COT_COTIZACIONES_S_SEGUROS_FROM_S_SEGUROS_TITLE',
               ),
               3 => 
               array (
+                'readonly' => false,
+                'name' => 'cot_ganada_c',
+                'label' => 'LBL_COT_GANADA_C',
               ),
               4 => 
               array (
