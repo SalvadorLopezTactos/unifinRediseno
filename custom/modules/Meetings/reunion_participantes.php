@@ -292,12 +292,14 @@ class reunion_participantes
 									$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
 									$usuario = $beanUsr->name;
 								}
+								$sala = $response['idSala'];
+								if($bean->link_lenia_c) $sala = $bean->link_lenia_c;
 								// Envía correo a los invitados
 								foreach ($correos as $correo) {
 									require_once("include/SugarPHPMailer.php");
 									require_once("modules/EmailTemplates/EmailTemplate.php");
 									require_once("modules/Administration/Administration.php");									
-									$url = $sugar_config['lenia_url'].$response['idSala']."?".$correo["id"];
+									$url = $sugar_config['lenia_url'].$sala."?".$correo["id"];
 									$emailtemplate = new EmailTemplate();
 									if($organizador == $correo['id']) {
 										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor','type'=>'email'));
@@ -320,6 +322,7 @@ class reunion_participantes
 									$body_html = str_replace('google', $google, $body_html);
 									$body_html = str_replace('outlook', $outlook, $body_html);
 									$body_html = str_replace('office', $office, $body_html);
+									if($objParticipantes['actualiza']) $body_html = str_replace('ha quedado agendada una', 'se ha actualizado la', $body_html);
 									$emailtemplate->body_html = str_replace('url', $url, $body_html);
 									$mailer = MailerFactory::getSystemDefaultMailer();
 									$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
