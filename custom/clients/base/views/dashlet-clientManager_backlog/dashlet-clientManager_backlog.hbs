@@ -1,32 +1,38 @@
 <style>
 
+    table{
+        align : left;
+    }
+
     #datos {
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
-        border: 1px solid;
-        margin: 0 auto;
+        border: 2px solid;
 		/*Lo siguiente es para los bordes*/
         border-collapse: collapse;
+        align : left;
     }
 
     #datos td {
         padding: 10px;
         text-align: center;
-        font-size: 12px;
+        font-size: 10px;
+        border: 1px solid;
+        border-color: gray;
     }
 
     #datos #titulo td {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         text-align: center;
         background-color: #E7E9EB;;
         color: black;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     #datos th {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 8px;
+        padding-bottom: 8px;
         text-align: center;
         background-color: #021741;
         color: white;
@@ -34,61 +40,42 @@
 
 </style>
 
+{{#each dataTotal}}
 <br>
-<table id = "datos"  >
+
+<table id = "datos" align="left"  style="overflow-x: scroll;">
     <thead id = "titulo">
         <tr>
+            <th width = "500px"><b>Equipo : {{equipo}}</b></th>
+        </tr>
+        <tr>
             <td colspan="3"><b>En proceso</b></td>
+            <td colspan="3"><b>Autorizado</b></td>
+            <td colspan="3"> </td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <th width = "34%"><b>Prospecto</b></td>
-            <th width = "35%"><b>Crédito</b></td>
-            <th width = "31%"><b>Rechazada</b></td>
+            <th width = "12%"><b>Prospecto</b></th>
+            <th width = "12%"><b>Crédito</b></th>
+            <th width = "12%"><b>Rechazada</b></th>
+            <th width = "12%"><b>Sin SC</b></th>
+            <th width = "12%"><b>Con SC</b></th>
+            <th width = "12%"><b>Total</b></th>
+            <th width = "14%"><b>Total</b></th>
+            <th width = "14%"><b># Clientes</b></th>
         </tr>
-        {{#each dataEnproceso}}
         <tr>
             <td>$ {{customFormatNumber prospecto}}</td>
             <td>$ {{customFormatNumber credito}}</td>
             <td>$ {{customFormatNumber rechazada}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<br>
-<table id = "datos" >
-    <thead id = "titulo">
-        <tr>
-            <td colspan="3"><b>Autorizado</b></td>
-        </tr>
-    </thead>
-    <tbody> 
-        <tr>
-            <th width = "34%"><b>Sin SC</b></td>
-            <th width = "35%"><b>Con SC</b></td>
-            <th width = "31%"><b>Total</b></td>
-        </tr>
-        {{#each dataAutorizado}}
-        <tr>
             <td >$ {{customFormatNumber sinsc}}</td>
             <td >$ {{customFormatNumber consc}}</a></td>
             <td >$ {{customFormatNumber total}}</td>
+            <td >$ {{customFormatNumber montoTotal}}</td>
+            <td >{{conteoTotal}}</td>
         </tr>
-        {{/each}}
     </tbody>
 </table>
 <br>
-<table id = datos >
-    <tr colspan="2">
-        <th width = "60%"><b>Total</b></td>
-        <th width = "40%"><b># Clientes</b></td>
-    </tr>
-    {{#each dataTotal}}
-    <tr>
-        <td >$ {{customFormatNumber montoTotal}}</td>
-        <td >{{conteoTotal}}</td>
-    </tr>
-    {{/each}}
-</table>
-<br>
+{{/each}}
