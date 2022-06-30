@@ -172,7 +172,8 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
 			WHERE T1.id='{$idMinuta}'
 			AND T1.deleted=0
 			AND T2.deleted=0
-			AND T3.deleted=0";
+			AND T3.deleted=0
+			ORDER BY T3.date_entered";
 			$resultado = $bd = $GLOBALS['db']->query($queryRecord);
 			while ($row = $GLOBALS['db']->fetchByAssoc($resultado)) {
 				$participantesMinuta = [
