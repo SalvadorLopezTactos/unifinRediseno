@@ -9,7 +9,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class getListaResultados extends SugarApi
 {
-
     /**
      * Registro de todas las rutas para consumir los servicios del API
     */
@@ -46,9 +45,7 @@ class getListaResultados extends SugarApi
         //Inicializa variable de resultado
         global $app_list_strings;
         $combinaciones = [];
-        $list_values = [];
-
-
+        $list_values = array();
         //Valida existencia de archivo
         if (!file_exists("custom/Extension/modules/Meetings/Ext/Vardefs/sugarfield_resultado_c.php")) {
             $GLOBALS['log']->fatal("Error con información enviada");
@@ -68,19 +65,17 @@ class getListaResultados extends SugarApi
             // Regresa respuesta
             return $respuesta;
         }
-
         //Recupera valores de dependencia
         $combinaciones = $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']['values'][$args['objetivo']];
         //return $combinaciones;
         foreach ($combinaciones as $resultados) {
             if($resultados != "" && $resultados != '5' && $resultados != '19'){
-                $list_values[$resultados]= $app_list_strings['resultado_list'][$resultados];
+				$valores = ["response_id" => $resultados, "response_description" => $app_list_strings['resultado_list'][$resultados]];
+				array_push($list_values,$valores);
             }
         }
-
         // Regresa respuesta
         return $list_values;
     }
 }
-
 ?>

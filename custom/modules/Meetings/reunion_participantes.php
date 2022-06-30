@@ -260,6 +260,8 @@ class reunion_participantes
 						  "guest_list" => $guest,
 						  "advisor_list" => $advisor
 						));
+						$GLOBALS['log']->fatal("Solicitud Lenia: ");
+						$GLOBALS['log']->fatal($content);
 						$curl = curl_init($url);
 						curl_setopt($curl, CURLOPT_HEADER, false);
 						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
