@@ -225,6 +225,9 @@ array (
               ),
               13 => 
               array (
+                'readonly' => false,
+                'name' => 'cuenta_c',
+                'label' => 'LBL_CUENTA',
               ),
             ),
           ),

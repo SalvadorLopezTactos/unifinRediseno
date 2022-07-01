@@ -913,10 +913,12 @@
 		if (objParticipantes && this.model.get('tct_conferencia_chk_c')) {
 			banderaCorreo = 0;
 			banderaAsesor = 0;
+			banderaCuenta = 0;
 			banderaAsistencia = 0;
 			for (var i = 0; i < objParticipantes.length; i++) {
 				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaCorreo++;
 				if (objParticipantes[i].unifin == 1 && objParticipantes[i].activo) banderaAsesor++;
+				if (objParticipantes[i].cuenta == 1 && objParticipantes[i].activo) banderaCuenta++;
 				if (objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaAsistencia++;
 			}
 			// Valida Correos
@@ -940,6 +942,17 @@
 				});
 				errors['asesor'] = errors['asesor'] || {};
 				errors['asesor'].required = true;
+			}
+			// Valida Cuenta
+			if (banderaCuenta < 1) {
+				app.alert.show("Cuenta", {
+					level: "error",
+					messages: "Debes seleccionar a la <b>Cuenta Principal</b> como invitado dentro de los participantes.",
+					autoClose: false,
+					return: false,
+				});
+				errors['cuenta'] = errors['cuenta'] || {};
+				errors['cuenta'].required = true;
 			}
 			// Valida Asistencias
 			if (banderaAsistencia < 1) {

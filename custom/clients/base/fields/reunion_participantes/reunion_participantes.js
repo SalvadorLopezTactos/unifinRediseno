@@ -71,7 +71,8 @@
 							"asistencia": 0,
 							"activo": 1,
 							"crea": 1,
-							"host": 1
+							"host": 1,
+							"cuenta": 0
 						};
 						var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_cuenta_c"];
 						app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -107,6 +108,7 @@
 									"activo": 1,
 									"crea": 1,
 									"host": 0,
+									"cuenta": 1,
 									"actualiza": 0
 								};
 							}
@@ -136,6 +138,7 @@
 												"activo": 1,
 												"crea": 1,
 												"host": 0,
+												"cuenta": 0,
 												"actualiza": 0
 											};
 											selfData.mParticipantes.participantes.push(relacionado);
