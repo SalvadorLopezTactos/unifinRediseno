@@ -58,6 +58,7 @@ class reunion_participantes
 					  $beanParticipante->tct_tipo_registro_c = $objArrParticipnates[$j]['tipo_contacto'];
 					  $beanParticipante->tct_id_registro_c = $objArrParticipnates[$j]['id'];
 					  $beanParticipante->invitar_c = $objArrParticipnates[$j]['activo'];
+					  $beanParticipante->cuenta_c = $objArrParticipnates[$j]['cuenta'];
 					  $beanParticipante->meetings_minut_participantes_1meetings_ida = $bean->id;
 					  $beanParticipante->description = $objArrParticipnates[$j]['unifin'];
 					  $beanParticipante->save();
