@@ -78,14 +78,29 @@ class analizate_hooks  {
 
                 //$GLOBALS['log']->fatal($mailHTML);
                 //$GLOBALS['log']->fatal($correo);
-                $mailer = MailerFactory::getSystemDefaultMailer();
-                $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                $mailer->setSubject("Actualiza tu información de facturación (CFDI 4.0)");
-                $body = trim($mailHTML);
-                $mailer->setHtmlBody($body);
-                $mailer->clearRecipients();
-                $mailer->addRecipientsTo(new EmailIdentity($correo, $full_name));
-                $result = $mailer->send();
+                try{
+                    $mailer = MailerFactory::getSystemDefaultMailer();
+                    $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+                    $mailer->setSubject("Actualiza tu información de facturación (CFDI 4.0)");
+                    $body = trim($mailHTML);
+                    $mailer->setHtmlBody($body);
+                    $mailer->clearRecipients();
+                    $mailer->addRecipientsTo(new EmailIdentity($correo, $full_name));
+                    //Agrega copia
+                    $urlFinanciera = isset($app_list_strings['analizate_notifica_bcc_list']) ? $app_list_strings['analizate_notifica_bcc_list'] : [];
+                    //$GLOBALS['log']->fatal($urlFinanciera);
+                    foreach ($urlFinanciera as $nombre => $correoBcc) {
+                        if(!empty($correoBcc)){
+                            //Agrega
+                            //$GLOBALS['log']->fatal($nombre. "=>". $correoBcc);
+                            $mailer->addRecipientsBcc(new EmailIdentity($correoBcc, $nombre));
+                        }
+                    }
+                    $result = $mailer->send();
+                }catch (Exception $e){
+                    $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$correo);
+                    $GLOBALS['log']->fatal("Exception ".$e);
+                }
             }
         }else{
             //Notificaciones Proveedor
@@ -132,15 +147,29 @@ class analizate_hooks  {
 
                 //$GLOBALS['log']->fatal($mailHTML);
                 //$GLOBALS['log']->fatal($correo);
-
-                $mailer = MailerFactory::getSystemDefaultMailer();
-                $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                $mailer->setSubject("Información sobre el registro en el Portal de Analízate");
-                $body = trim($mailHTML);
-                $mailer->setHtmlBody($body);
-                $mailer->clearRecipients();
-                $mailer->addRecipientsTo(new EmailIdentity($correo, $full_name));
-                $result = $mailer->send();
+                try{
+                    $mailer = MailerFactory::getSystemDefaultMailer();
+                    $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+                    $mailer->setSubject("Información sobre el registro en el Portal de Analízate");
+                    $body = trim($mailHTML);
+                    $mailer->setHtmlBody($body);
+                    $mailer->clearRecipients();
+                    $mailer->addRecipientsTo(new EmailIdentity($correo, $full_name));
+                    //Agrega copia
+                    $urlFinanciera = isset($app_list_strings['analizate_notifica_bcc_list']) ? $app_list_strings['analizate_notifica_bcc_list'] : [];
+                    //$GLOBALS['log']->fatal($urlFinanciera);
+                    foreach ($urlFinanciera as $nombre => $correoBcc) {
+                        if(!empty($correoBcc)){
+                            //Agrega
+                            //$GLOBALS['log']->fatal($nombre. "=>". $correoBcc);
+                            $mailer->addRecipientsBcc(new EmailIdentity($correoBcc, $nombre));
+                        }
+                    }
+                    $result = $mailer->send();
+                }catch (Exception $e){
+                    $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$correo);
+                    $GLOBALS['log']->fatal("Exception ".$e);
+                }
             }
             //Correo para estado 6 INCORRECTA
             if ($bean->estado==6) {
@@ -187,14 +216,29 @@ class analizate_hooks  {
                 //$GLOBALS['log']->fatal($mailHTML);
                 //$GLOBALS['log']->fatal($correo);
 
-                $mailer = MailerFactory::getSystemDefaultMailer();
-                $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                $mailer->setSubject("Información sobre el registro en el Portal de Analízate");
-                $body = trim($mailHTML);
-                $mailer->setHtmlBody($body);
-                $mailer->clearRecipients();
-                $mailer->addRecipientsTo(new EmailIdentity($correo, $full_name));
-                $result = $mailer->send();
+                try{
+                    $mailer = MailerFactory::getSystemDefaultMailer();
+                    $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+                    $mailer->setSubject("Información sobre el registro en el Portal de Analízate");
+                    $body = trim($mailHTML);
+                    $mailer->setHtmlBody($body);
+                    $mailer->clearRecipients();
+                    $mailer->addRecipientsTo(new EmailIdentity($correo, $full_name));
+                    //Agrega copia
+                    $urlFinanciera = isset($app_list_strings['analizate_notifica_bcc_list']) ? $app_list_strings['analizate_notifica_bcc_list'] : [];
+                    //$GLOBALS['log']->fatal($urlFinanciera);
+                    foreach ($urlFinanciera as $nombre => $correoBcc) {
+                        if(!empty($correoBcc)){
+                            //Agrega
+                            //$GLOBALS['log']->fatal($nombre. "=>". $correoBcc);
+                            $mailer->addRecipientsBcc(new EmailIdentity($correoBcc, $nombre));
+                        }
+                    }
+                    $result = $mailer->send();
+                }catch (Exception $e){
+                    $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$correo);
+                    $GLOBALS['log']->fatal("Exception ".$e);
+                }
             }
         }
     }
