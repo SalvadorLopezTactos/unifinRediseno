@@ -1,8 +1,8 @@
 <?php
- // created: 2021-10-27 13:18:03
+ // created: 2022-07-04 19:04:27
 
 $app_list_strings['motivo_bloqueo_list']=array (
-  1 => 'PLD (En listas restringidas o notas negativas (prensa))',
+  1 => 'PLD( En listas restringidas o notas negativas (prensa))',
   2 => 'No responde correos/llamadas',
   3 => 'Expediente Incompleto',
   4 => 'Está sobre apalancado',
@@ -28,4 +28,16 @@ $app_list_strings['motivo_bloqueo_list']=array (
   24 => 'Cartera Vencida',
   25 => 'Información Apócrifa',
   '' => '',
+  26 => 'Negocio receptor de tarjetas de crédito que ocasionó pérdida al Usuario',
+  27 => 'Persona relacionada con la empresa o con Persona Física con Actividad Empresarial  con clave de prevención',
+  28 => 'Cliente declarado en quiebra, suspensión de pagos o en concurso mercantil',
+  29 => 'Cliente en trámite judicial',
+  30 => 'Cliente que propició pérdida al Otorgante por fraude comprobado, declarado conforme a  sentencia judicial',
+  31 => 'Cliente que solicitó y/o acordó con el Otorgante liquidación del crédito con pago menor a  la deuda total',
+  32 => 'El Usuario no ha podido localizar al Cliente, titular de la cuenta',
+  33 => 'Cliente desvió recursos a fines distintos a los pactados, debidamente comprobado',
+  34 => 'Cliente que dispuso de las garantías que respaldan el crédito sin autorización del  Otorgante',
+  35 => 'Cliente que enajena o cambia régimen de propiedad de sus bienes o permite  gravámenes sobre los mismos',
+  36 => 'Cliente que dispuso de las retenciones de sus trabajadores, no enterando a la Institución  correspondiente',
+  37 => 'Cliente que propició pérdida total al Otorgante',
 );
