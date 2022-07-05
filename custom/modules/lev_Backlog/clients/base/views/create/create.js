@@ -6,7 +6,7 @@
 ({
     extendsFrom: 'CreateView',
 	val : null,
-	
+
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -33,7 +33,7 @@
          * 23-07-2018
          * Valida si el cliente cuenta con al menos una solicitud de los tipos (Linea Nueva o Ratificacion/Incremento
          */
-        this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
+        //this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
         this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
         /************  CAmbiar valores tipo PRoducto LEasing   *****************/
@@ -41,7 +41,7 @@
 		this.model.addValidationTask('tipo_producto_requerido',_.bind(this.tipo_producto_requerido, this));
 		/*********** ---- ***********************/
 		this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-		
+
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
         usuario.fetch({
@@ -91,15 +91,15 @@
 
     _render: function() {
         this._super("_render");
-		
+
         this.$('[data-name=editar]').hide();
         if(this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != null&&
             this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != ""){
             this.model.set("editar", false);
         }
-		
+
 		this.setValores(this.val);
-		
+
         // Oculta campos al crear BL
         this.$('div[data-name=numero_de_backlog]').hide();
         this.$('div[data-name=tipo_c]').hide();
@@ -148,7 +148,7 @@
 						}
 					}
                 }
-				
+
                 var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
@@ -318,7 +318,7 @@
                         ]
                     }), null, {
                         success: _.bind(function (data){
-    
+
                             if (data.records.length<1) {
                                 app.error.errorName2Keys[''] = '';
                                 errors[''] = errors[''] || {};
@@ -331,7 +331,7 @@
                                 });
                             }
                             callback(null, fields, errors);
-    
+
                         }, self)
                     });
                 }else {
@@ -341,7 +341,7 @@
             }else{
                 callback(null, fields, errors);
             }
-            
+
         },
 
     _ValidateExistingBL:function(fields, errors, callback){
@@ -478,13 +478,13 @@
 
         //this.model.set("mes", '');
 		this.val = this.getValores();
-		
+
         if(stage != "loading"){
             this.render();
 			this.setValores(this.val);;
         }
     },
-	
+
 	getValores: function(){
       var valores = {
         tempProducto : this.model.get('producto_c'),
@@ -498,7 +498,7 @@
 		this.model.set("producto_c", valores.tempProducto);
 		this.model.set("num_tipo_op_leasing_c", valores.tempProductoLead);
 		this.model.set("num_tipo_op_credito_c", valores.tempProductoCred);
-		
+
     },
 
     getTipoCliente: function(){
@@ -874,13 +874,13 @@
         }
         callback(null, fields, errors);
     },
-	
+
 	num_tipo_leasing: function(fields, errors, callback) {
 		var tiposnum = app.lang.getAppListStrings('num_tipo_op_leasing_list');
 		var data1 = this.model.get('tct_tipo_op_leasing_mls_c');
 		var producto = this.model.get('producto_c');
 		var salida = [];
-		
+
 		if(producto == "2"){
 			if(this.model.get('comision_c') == undefined){
 				errors['comision_c'] = errors['comision_c'] || {};
@@ -895,13 +895,13 @@
 				});
 			}
 		}
-		callback(null, fields, errors);		
+		callback(null, fields, errors);
     },
-	
+
 	tipo_producto_requerido: function(fields, errors, callback) {
 		var producto = this.model.get('producto_c');
 		var salida = [];
-		
+
 		if(producto == "1"){
 			if(this.model.get('num_tipo_op_leasing_c')=='' || this.model.get('num_tipo_op_leasing_c')==null){
 				errors['num_tipo_op_leasing_c'] = errors['num_tipo_op_leasing_c'] || {};
