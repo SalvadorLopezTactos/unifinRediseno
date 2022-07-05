@@ -46,8 +46,8 @@ class ClientManager extends SugarApi
 
     public function getInfoKanban($api, $args){
         global $db,$current_user;
-        //$id_usuario=$current_user->id;
-        $id_usuario='cb6dfd0a-257a-5977-db84-599b31c3e22b';
+        $id_usuario=$current_user->id;
+        //$id_usuario='cb6dfd0a-257a-5977-db84-599b31c3e22b';
 
         $query = <<<SQL
 			SELECT l.id id_registro,
@@ -83,7 +83,7 @@ class ClientManager extends SugarApi
         ON a.id=ac.id_c
         LEFT JOIN sugarfavorites f ON a.id = f.record_id and f.deleted=0
         WHERE ac.tipo_registro_cuenta_c IN ('1','2','3')
-        AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9','17')
+        AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9')
         -- AND a.assigned_user_id ='{$id_usuario}'
         AND (ac.user_id_c='{$id_usuario}' OR 
 			ac.user_id1_c='{$id_usuario}' OR 
@@ -180,7 +180,7 @@ SQL;
                 //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                 //array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta)
-                $montos_prospecto_interesado=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_interesado);
+                $montos_prospecto_interesado=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_interesado,'');
                 $monto_prospecto_interesado=$montos_prospecto_interesado['monto_total'];
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_interesado=array(
@@ -203,7 +203,7 @@ SQL;
                 $total_int_expediente+=1;
                 //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
-                $montos_int_expediente=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_int_expediente);
+                $montos_int_expediente=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_int_expediente,'');
                 $monto_int_expediente=$montos_int_expediente['monto_total'];
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_int_expediente=array(
@@ -226,7 +226,7 @@ SQL;
                 $total_prospecto_credito+=1;
                 //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
-                $montos_prospecto_credito=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_credito);
+                $montos_prospecto_credito=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_credito,'');
                 $monto_prospecto_credito=$montos_prospecto_credito['monto_total'];
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_credito=array(
@@ -245,50 +245,137 @@ SQL;
                 $registros_credito[]=$array_prospecto_credito;
             }
 
-            //Cliente Activo
-            if($tipo=='2' && $subtipo=='11'){
-                $total_cliente_activo+=1;
-                //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
-                // tct_etapa_ddw_c - R, estatus_c - R, K, CM
-                $montos_cliente_activo=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_activo);
-                $monto_cliente_activo=$montos_cliente_activo['monto_total'];
-                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
-                $array_cliente_activo=array(
-                    "Id"=>$id,
-                    "Modulo"=>$modulo,
-                    "Subtipo_Registro"=>$subtipo,
-                    "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
-                    "Monto_Cuenta"=>$montos_cliente_activo['monto_cuenta'],
-                    "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>$idFavorito,
-                    "Date_Modified"=>$date_modified,
-                    "Preview"=>array("Info Preview")
-                );
-                
-                $registros_cliente_activo[]=$array_cliente_activo;
-            }
+            //Sección de Clientes (Cliente con linea sin operar, Cliente Activo, Cliente Perdido)
+            if($tipo=='3' && $subtipo!='3' && $subtipo!='10' && $subtipo!='15' && $subtipo!='17'){
+                //Subtipo -- 3:Cancelado, 10:Rechazado, 15:Inactivo, 17:Perdido
+                $beanCliente = BeanFactory::getBean('Accounts', $id, array('disable_row_level_security' => true));
+                if($beanCliente->load_relationship('accounts_uni_productos_1')){
 
-            //Cliente Perdido
-            if($tipo=='2' && $subtipo=='17'){
-                $total_cliente_perdido+=1;
-                $montos_cliente_perdido=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_perdido);
-                $monto_cliente_perdido=$montos_cliente_perdido['monto_total'];
-                $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
-                $array_cliente_perdido=array(
-                    "Id"=>$id,
-                    "Modulo"=>$modulo,
-                    "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
-                    "Monto_Cuenta"=>$montos_cliente_perdido['monto_cuenta'],
-                    "Dias_Etapa"=>$dias_etapa,
-                    "Favorito"=>$idFavorito,
-                    "Date_Modified"=>$date_modified,
-                    "Preview"=>array("Info Preview")
-                );
-                
-                $registros_cliente_perdido[]=$array_cliente_perdido;
+                    $producto_usuario=$current_user->tipodeproducto_c;
+                    $array_es_cliente_linea_sin_operar=array();
+                    $array_es_cliente_activo=array();
+                    $array_es_cliente_perdido=array();
+                    
+                    $relatedProductos = $beanCliente->accounts_uni_productos_1->getBeans();
+                    if(count($relatedProductos)>0){
+                        foreach($relatedProductos as $prod) {
+                            //$GLOBALS['log']->fatal('ID CUENTA: '.$id.' ACTIVOS: '.$prod->registros_activos_c.' HISTORICOS: '.$prod->registros_historicos_c);
+                            //Cliente con linea sin operar
+                            if($prod->tipo_producto==$producto_usuario){
+                                if($prod->registros_activos_c=='' && $prod->registros_historicos_c==''){
+                                    array_push($array_es_cliente_linea_sin_operar,'1');
+                                    //$GLOBALS['log']->fatal('ID CUENTA: '.$id.' ENTRA LINEA SIN OPERAR '.$prod->id);
+                                }
+    
+                                //Cliente Activo
+                                if($prod->registros_activos_c!=''){
+                                    array_push($array_es_cliente_activo,'1');
+                                    //$GLOBALS['log']->fatal('ID CUENTA: '.$id.' ENTRA ACTIVO '.$prod->id);
+                                }
+    
+                                //Cliente Perdido
+                                if($prod->registros_activos_c=='' && $prod->registros_historicos_c!='' ){
+                                    array_push($array_es_cliente_perdido,'1');
+                                    //$GLOBALS['log']->fatal('ID CUENTA: '.$id.' ENTRA PERDIDO'.$prod->id);
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                //Cliente con linea sin operar
+                if(in_array('1',$array_es_cliente_linea_sin_operar)){
+                    $total_cliente_linea_sin_operar+=1;
+                    //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
+                    // tct_etapa_ddw_c - R, estatus_c - R, K, CM
+                    $montos_cliente_linea_sin_operar=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_linea_sin_operar,'lineas');
+                    $monto_cliente_linea_sin_operar=$montos_cliente_linea_sin_operar['monto_total'];
+
+                    $diferencia_dias_vigencia=$montos_cliente_linea_sin_operar['diferencia_dias'];
+                    //Si la diferencia es negativa, la linea sigue vigente, si es positiva, la linea ya está vencida
+                    if($diferencia_dias_vigencia<0){
+                        $texto_vigencia_linea='Línea Vigente';
+                        $color="#82b785";
+                    }else{
+                        $texto_vigencia_linea='Línea Vencida';
+                        $color="red";
+                    }
+                    $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
+                    $array_cliente_linea_sin_operar=array(
+                        "Id"=>$id,
+                        "Modulo"=>$modulo,
+                        "Subtipo_Registro"=>$subtipo,
+                        "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
+                        "Monto_Cuenta"=>$montos_cliente_linea_sin_operar['monto_cuenta'],
+                        "Dias_Etapa"=>$dias_etapa,
+                        "Favorito"=>$idFavorito,
+                        "Date_Modified"=>$date_modified,
+                        "Preview"=>array("Info Preview"),
+                        "Vigencia_Linea"=>$texto_vigencia_linea,
+                        "Dias_Vigencia"=>$diferencia_dias_vigencia,
+                        "Color"=>$color
+                    );
+                    
+                    $registros_cliente_linea_sin_operar[]=$array_cliente_linea_sin_operar;
+                }
+
+                //Cliente Activo
+                if(in_array('1',$array_es_cliente_activo)){
+                    $total_cliente_activo+=1;
+                    //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
+                    // tct_etapa_ddw_c - R, estatus_c - R, K, CM
+                    $montos_cliente_activo=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_activo,'');
+                    $monto_cliente_activo=$montos_cliente_activo['monto_total'];
+                    $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
+                    $array_cliente_activo=array(
+                        "Id"=>$id,
+                        "Modulo"=>$modulo,
+                        "Subtipo_Registro"=>$subtipo,
+                        "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
+                        "Monto_Cuenta"=>$montos_cliente_activo['monto_cuenta'],
+                        "Dias_Etapa"=>$dias_etapa,
+                        "Favorito"=>$idFavorito,
+                        "Date_Modified"=>$date_modified,
+                        "Preview"=>array("Info Preview")
+                    );
+                    
+                    $registros_cliente_activo[]=$array_cliente_activo;
+                }
+
+                //Cliente Perdido
+                if(in_array('1',$array_es_cliente_perdido)){
+                    $total_cliente_perdido+=1;
+                    //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
+                    // tct_etapa_ddw_c - R, estatus_c - R, K, CM
+                    $montos_cliente_perdido=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_perdido,'');
+                    $monto_cliente_perdido=$montos_cliente_perdido['monto_total'];
+                    $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
+                    $array_cliente_perdido=array(
+                        "Id"=>$id,
+                        "Modulo"=>$modulo,
+                        "Subtipo_Registro"=>$subtipo,
+                        "Nombre"=>($nombre_empresa=="" || $nombre_empresa==null) ? $nombre:$nombre_empresa,
+                        "Monto_Cuenta"=>$montos_cliente_perdido['monto_cuenta'],
+                        "Dias_Etapa"=>$dias_etapa,
+                        "Favorito"=>$idFavorito,
+                        "Date_Modified"=>$date_modified,
+                        "Preview"=>array("Info Preview")
+                    );
+                    
+                    $registros_cliente_perdido[]=$array_cliente_perdido;
+                }   
             }
         }
 
+        //$GLOBALS['log']->fatal("ANTES:");
+        //$GLOBALS['log']->fatal(print_r($registros_cliente_linea_sin_operar,true));
+        //El arreglo para los registros de Cliente con Línea sin Operar se ordena con base a la vigencia de la linea
+        $Dias_Vigencia = array_column($registros_cliente_linea_sin_operar, 'Dias_Vigencia');
+        array_multisort($Dias_Vigencia, SORT_ASC, $registros_cliente_linea_sin_operar);
+        //$GLOBALS['log']->fatal("DESPUÉS:");
+        //$GLOBALS['log']->fatal(print_r($registros_cliente_linea_sin_operar,true));
+        
         $response=array(
             "Lead_Sin_Contactar"=>array(
                 "Total_Registros"=>$total_leads_sin_contactar,
@@ -339,10 +426,12 @@ SQL;
 
     }
 
-    public function getSolicitudes($modulo,$id_usuario,$id_cuenta,$monto){
-        global $db;
+    public function getSolicitudes($modulo,$id_usuario,$id_cuenta,$monto,$lineas){
+        global $db,$current_user;
+        $producto_usuario=$current_user->tipodeproducto_c;
         $array_montos=array();
         $monto_cuenta=0;
+        $diferencia_dias=0;
 
         if($modulo=='Accounts'){
             $querySolicitudes= <<<SQL
@@ -352,7 +441,9 @@ ac.razonsocial_c,
 opp.name,
 oppc.monto_c,
 oppc.tct_etapa_ddw_c,
-oppc.estatus_c
+oppc.estatus_c,
+oppc.tipo_producto_c,
+oppc.vigencialinea_c
 FROM accounts a
 INNER JOIN accounts_cstm ac ON a.id=ac.id_c
 INNER JOIN accounts_opportunities ao ON a.id=ao.account_id
@@ -371,13 +462,29 @@ SQL;
                 while ($fila = $db->fetchByAssoc($resultSolicitudes)) {
                     $monto_cuenta+=floatval($fila['monto_c']);
                     $monto+=floatval($fila['monto_c']);
+
+                    if($fila['tipo_producto_c']==$producto_usuario){
+                        //Obtener la vigencia de la linea correspondiente al producto del usuario logueado
+                        //Obtener diferencia en días entre fecha actual y la fecha de vigencia de la linea
+                        if($fila['vigencialinea_c']!=''){
+                            $now = time();
+                            $your_date = strtotime($fila['vigencialinea_c']);
+                            $datediff = $now - $your_date;
+                            $diferencia_dias=round($datediff / (60 * 60 * 24));
+                        }
+                        
+                    }
                 }
             }
         }
 
         //$GLOBALS['log']->fatal(print_r(array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta),true));
-
-        return array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta);
+        if($lineas!=''){
+            return array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta,'diferencia_dias'=>$diferencia_dias);
+        }else{
+            return array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta);
+        }
+        
     }
 
     public function getDiasEtapa($modulo,$id_registro,$valor_etapa){

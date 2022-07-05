@@ -31,7 +31,7 @@
     <div class="contenedor-interesado color-white">
         <div class="contenedor-header">
             <div class="header-column">
-                    <h5>Prospecto interesado</h5>
+                    <h5>Prospecto Interesado</h5>
                     <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
             <div class="header-datos">
@@ -48,7 +48,7 @@
     <div class="contenedor-integracion color-white">
         <div class="contenedor-header">
             <div class="header-column">
-                <h5>Prospecto integracion de expediente</h5>
+                <h5>Prospecto Integracion de Expediente</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
             <div class="header-datos">
@@ -65,7 +65,7 @@
     <div class="contenedor-credito color-white">
         <div class="contenedor-header">
             <div class="header-column">
-                <h5>Prospecto en credito</h5>
+                <h5>Prospecto en Crédito</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
             <div class="header-datos">
@@ -82,7 +82,7 @@
     <div class="contenedor-conLinea color-white">
         <div class="contenedor-header">
         <div class="header-column">
-                <h5>Cliente con linea sin operar</h5>
+                <h5>Cliente con Línea sin Operar</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
             <div class="header-datos">
@@ -99,7 +99,7 @@
     <div class="contenedor-activo color-white">
         <div class="contenedor-header">
             <div class="header-column">
-                <h5>Cliente activo</h5>
+                <h5>Cliente Activo</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
             <div class="header-datos">
@@ -116,7 +116,7 @@
     <div class="contenedor-perdido color-white">
         <div class="contenedor-header">
             <div class="header-column">
-                <h5>Cliente perdido</h5>
+                <h5>Cliente Perdido</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
             <div class="header-datos">
@@ -289,7 +289,7 @@
         {{#each registrosKanban.Cliente_Linea_Sin_Operar.Registros}}
             <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="linea">
-                    <p>Linea vigente</p>
+                    <p style="color:{{Color}}">{{Vigencia_Linea}}</p>
                 </div>
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
@@ -297,7 +297,9 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p data-id="{{Id}}" title="{{Nombre}}">{{Nombre}}</p>
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
                         </div>
                     </div>
                     <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
@@ -321,7 +323,7 @@
         {{#each registrosKanban.Cliente_Activo.Registros}}
             <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
                 <div class="anexo">
-                    <p>Anexo por vender</p>
+                    <p>&nbsp;</p>
                 </div>
                 <div class="contenedor-informacion">
                     <div class="contenedor-nombre">
@@ -329,7 +331,9 @@
                             <p>UA</p>
                         </div>
                         <div class="nombre">
-                            <p data-id="{{Id}}" title="{{Nombre}}">{{Nombre}}</p>
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
                         </div>
                     </div>
                     <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
@@ -349,8 +353,38 @@
         {{/each}}
     </div>
 
-    <div class="perdido-items">
-        
+    <div class="perdido-items border-right">
+        {{#each registrosKanban.Cliente_Perdido.Registros}}
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+                <div class="anexo">
+                    <p>&nbsp;</p>
+                </div>
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
     </div>
 
     <div class="checklist-item hide">
