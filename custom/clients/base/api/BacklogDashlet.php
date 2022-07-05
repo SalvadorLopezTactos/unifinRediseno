@@ -293,7 +293,7 @@ when 'PUE' then 16 when 'VER' then 17  when 'CUN' then 18 when 'CAN' then 18 whe
 case blcs.estatus_operacion_c when '2' then 1 when '1' then 2 when '2' then 3
 when 'Enviada a otro mes' then 4 when 'Enviada a otro mes - Autom�tico' then 5 when 'Cancelada por cliente' then 6 else 10 end as ordenEstatus,
 uc.iniciales_c AS iniciales, IFNULL(blcs.monto_activado_anticipado_c,0) AS monto_anticipado, IFNULL(blcs.ri_activada_anticipada_c,0) AS ri_anticipada,
-IFNULL(monto_disp_vencido_c,0) disp_vencido, acc.idcliente_c idcliente, 
+IFNULL(monto_disp_vencido_c,0) disp_vencido, acc.idcliente_c idcliente,
 monto_prospecto_c, monto_credito_c, monto_rechazado_c, monto_sin_solicitud_c, monto_con_solicitud_c, IFNULL(monto_devuelta_c,0) as monto_devuelta_c ,
 ri_prospecto_c, ri_credito_c, ri_rechazada_c, ri_sin_solicitud_c, ri_con_solicitud_c,
 CASE WHEN blcs.estatus_operacion_c = '1' THEN 0 ELSE
@@ -384,7 +384,7 @@ SQL;
             $query .= " ORDER BY  ordenEstatus, ordenEquipo, uc.iniciales_c, lb.monto_comprometido desc";
         }
 
-        $GLOBALS['log']->fatal(">>>>>>>>>sql: ",$query);
+        //$GLOBALS['log']->fatal(">>>>>>>>>sql: ",$query);
         //Recupera listas de valores
         global $app_list_strings;
         $queryResult = $db->query($query);
@@ -466,7 +466,7 @@ SQL;
             $response['linea'][$row['id']]['monto_rechazado'] = $row['monto_rechazado_c'];
             $response['linea'][$row['id']]['monto_sin_solicitud'] = $row['monto_sin_solicitud_c'];
             $response['linea'][$row['id']]['monto_con_solicitud'] = $row['monto_con_solicitud_c'];
-            
+
             $response['linea'][$row['id']]['monto_devuelta'] = $row['monto_devuelta_c'];
 
             //$response['linea'][$row['id']]['ri_prospecto'] = $row['ri_prospecto_c'];
