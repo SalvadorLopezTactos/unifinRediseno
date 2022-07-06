@@ -86,14 +86,14 @@ class Seguros_dynamics
                             "int_referenciador_cuenta" => $referenciadorCuenta,
                             "telephone1" => $cuenta->phone_office,
                             "emailaddress1" =>$cuenta->email1 ,
-                            "int_pais_id" => "",
-                            "int_codigo_postal_id" => "",
-                            "int_estado_id" => "",
-                            "int_ciudad_id" => "",
-                            "int_colonia_id" => "",
-                            "address1_line1" => "",
-                            "address1_line2" => "",
-                            "address1_line3" => "",
+                            "int_pais_id" => "PAIS-0000000152",
+                            "int_codigo_postal_id" => "CODP-0000063899",
+                            "int_estado_id" => "ENTFED-0000000041",
+                            "int_ciudad_id" => "CIUDAD-0000000262",
+                            "int_colonia_id" => "COL-0000016388",
+                            "address1_line1" => "MIGUEL DE CEERVANTES",
+                            "address1_line2" => "301",
+                            "address1_line3" => "1",
                             "statecode" => "",
                             "statuscode" => ""
                         );
@@ -120,6 +120,7 @@ class Seguros_dynamics
                         int_id_dynamics_c='{$id_dyn}'
                         where id_c = '{$cuenta->id}'";
                         $updateExecute = $db->query($update);
+                        $cuenta->int_id_dynamics_c = $id_dyn;
                     }
                 }
             }
@@ -136,7 +137,7 @@ class Seguros_dynamics
           $token = $this->getToken();
           if($token)
           {
-            $recordTypeId = $app_list_strings['tipo_registro_id_list'][$bean->tipo_registro_sf_c];
+            $recordTypeId = $app_list_strings['tipo_registro_sf_list'][$bean->tipo_registro_sf_c];
             $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
             $tipoDeRegistroC = $app_list_strings['area_r_list'][$bean->area];
             $ramoC = $app_list_strings['subramos_list'][$bean->subramos_c];
@@ -157,7 +158,7 @@ class Seguros_dynamics
             $closeDate = date("d/m/Y", strtotime($closeDate));
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity';
         		$arreglo = array(
-                "int_tipo_opp" => $bean->tipo_registro_sf_c,
+                "int_tipo_opp" => $recordTypeId,
                 "parentaccountid" => $cuenta->int_id_dynamics_c,
                 "int_tipo" => $bean->tipo_venta_c,
                 "int_area_responsable_id" => $bean->area,
@@ -167,7 +168,7 @@ class Seguros_dynamics
                 "int_localidad_id" => $bean->oficina_c,
                 "int_kam_santander_unifin_id" => "",
                 "int_vendedor_id" => $bean->kam_c,
-                "int_etapa" => $bean->etapa,
+                "int_etapa" => "Prospectando",
                 "actualclosedate" => $bean->fecha_cierre_c,
                 "int_prima_total_objetivo" => $bean->prima_obj_c,
                 "int_ing_objetivo_porcentaje" => "",
@@ -222,7 +223,7 @@ class Seguros_dynamics
             if($bean->requiere_ayuda_c == 2) $requiereAyudaDeReaTcnica = 'Si';
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-                "int_etapa" => $bean->etapa,
+                "int_etapa" => "Cotizando",
                 "int_ayuda_area_tecnica" =>  $requiereAyudaDeReaTcnica,
                 "int_fecha_req_propuesta" => $bean->fecha_req,
                 "description" => $bean->description,
@@ -290,8 +291,8 @@ class Seguros_dynamics
             $motivo = $app_list_strings['motivo_no_cotizado_list'][$bean->motivo_no_cotizado_c];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "int_etapa" => "NOCOTIZADO",
-              "int_etapa" => $stageName,
+              "int_etapa" => "Cierre",
+              "statuscode" => "No Cotizado",
               "int_motivo_no_cotizada" => $motivo
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Cotizado: '. $url);
@@ -323,8 +324,8 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "int_etapa" => "PRESENTACION",
-              "int_etapa" => $stageName
+              "int_etapa" => "Presentando"
+              
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Presentación: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -355,8 +356,8 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "int_etapa" => "RENEGOCIADA",
-              "int_etapa" => $stageName
+              "int_etapa" => "Cotizando",
+              "statuscode" => "Negociando"
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Re-negociación: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -407,7 +408,7 @@ class Seguros_dynamics
                         $fecha_fin_c = date("d/m/Y", strtotime($fecha_fin_c));
                         $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
                         $content = json_encode(array(
-                          "int_etapa" => "GANADA",
+                          "int_etapa" => "Cierre",
                           "int_etapa" => $stageName,
                           "feeC" => $bean->fee_c,
                           "feePC" => $bean->fee_p_c,
@@ -515,7 +516,7 @@ class Seguros_dynamics
             throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
           }
         }
-        $GLOBALS['log']->fatal('Finaliza Seguros_SalesForce');
+        $GLOBALS['log']->fatal('Finaliza Seguros Dynamics');
     }
 
     public function getToken()
