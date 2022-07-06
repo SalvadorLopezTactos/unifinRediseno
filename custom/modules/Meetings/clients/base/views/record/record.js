@@ -911,62 +911,73 @@
     saveParticipantes: function (fields, errors, callback) {
         var objParticipantes = selfData.mParticipantes["participantes"];
 		if (objParticipantes && this.model.get('tct_conferencia_chk_c')) {
-			banderaCorreo = 0;
-			banderaAsesor = 0;
-			banderaCuenta = 0;
-			banderaAsistencia = 0;
-			for (var i = 0; i < objParticipantes.length; i++) {
-				if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaCorreo++;
-				if (objParticipantes[i].unifin == 1 && objParticipantes[i].activo) banderaAsesor++;
-				if (objParticipantes[i].cuenta == 1 && objParticipantes[i].activo) banderaCuenta++;
-				if (objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaAsistencia++;
-			}
-			// Valida Correos
-			if (banderaCorreo > 0) {
-				app.alert.show("Correo", {
-					level: "error",
-					messages: "Todos los <b>Participantes</b> tipo Cuenta deben contar con <b>correo</b>.",
-					autoClose: false,
-					return: false,
+			if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+				var url = app.api.buildURL('Accounts/' + this.model.get('parent_id'), null, null);
+				app.api.call('read', url, {}, {
+					success: _.bind(function (data) {
+						banderaCorreo = 0;
+						banderaAsesor = 0;
+						banderaCuenta = 0;
+						banderaAsistencia = 0;
+						for (var i = 0; i < objParticipantes.length; i++) {
+							if (!objParticipantes[i].correo && objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaCorreo++;
+							if (objParticipantes[i].unifin == 1 && objParticipantes[i].activo) banderaAsesor++;
+							if (objParticipantes[i].unifin != 1 && objParticipantes[i].activo) banderaAsistencia++;
+							if (objParticipantes[i].cuenta == 1 && objParticipantes[i].activo && data.tipodepersona_c != "Persona Moral") banderaCuenta++;
+						}
+						// Valida Correos
+						if (banderaCorreo > 0) {
+							app.alert.show("Correo", {
+								level: "error",
+								messages: "Todos los <b>Participantes</b> tipo Cuenta deben contar con <b>correo</b>.",
+								autoClose: false,
+								return: false,
+							});
+							errors['correo'] = errors['correo'] || {};
+							errors['correo'].required = true;
+						}
+						// Valida Asesor
+						if (banderaAsesor < 1) {
+							app.alert.show("Asesor", {
+								level: "error",
+								messages: "Debes seleccionar al <b>Asesor</b> como invitado dentro de los participantes.",
+								autoClose: false,
+								return: false,
+							});
+							errors['asesor'] = errors['asesor'] || {};
+							errors['asesor'].required = true;
+						}
+						// Valida Asistencias
+						if (banderaAsistencia < 1) {
+							app.alert.show("Asistencia", {
+								level: "error",
+								messages: "Debes seleccionar por lo menos a un <b>Participante</b> de tipo Cuenta.",
+								autoClose: false,
+								return: false,
+							});
+							errors['xd'] = errors['xd'] || {};
+							errors['xd'].required = true;
+						}
+						// Valida Cuenta
+						if (banderaCuenta < 1 && data.tipodepersona_c != "Persona Moral") {
+							app.alert.show("Cuenta", {
+								level: "error",
+								messages: "Debes seleccionar a la <b>Cuenta Principal</b> como invitado dentro de los participantes.",
+								autoClose: false,
+								return: false,
+							});
+							errors['cuenta'] = errors['cuenta'] || {};
+							errors['cuenta'].required = true;
+						}
+						callback(null, fields, errors);
+					}, this)
 				});
-				errors['correo'] = errors['correo'] || {};
-				errors['correo'].required = true;
+			} else {
+				callback(null, fields, errors);
 			}
-			// Valida Asesor
-			if (banderaAsesor < 1) {
-				app.alert.show("Asesor", {
-					level: "error",
-					messages: "Debes seleccionar al <b>Asesor</b> como invitado dentro de los participantes.",
-					autoClose: false,
-					return: false,
-				});
-				errors['asesor'] = errors['asesor'] || {};
-				errors['asesor'].required = true;
-			}
-			// Valida Cuenta
-			if (banderaCuenta < 1) {
-				app.alert.show("Cuenta", {
-					level: "error",
-					messages: "Debes seleccionar a la <b>Cuenta Principal</b> como invitado dentro de los participantes.",
-					autoClose: false,
-					return: false,
-				});
-				errors['cuenta'] = errors['cuenta'] || {};
-				errors['cuenta'].required = true;
-			}
-			// Valida Asistencias
-			if (banderaAsistencia < 1) {
-				app.alert.show("Asistencia", {
-					level: "error",
-					messages: "Debes seleccionar por lo menos a un <b>Participante</b> de tipo Cuenta.",
-					autoClose: false,
-					return: false,
-				});
-				errors['xd'] = errors['xd'] || {};
-				errors['xd'].required = true;
-			}
+		} else {
+			callback(null, fields, errors);
 		}
-        callback(null, fields, errors);
     },
 
     actualiza: function () {
