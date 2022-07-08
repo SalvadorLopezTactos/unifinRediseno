@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
+    <thead>
+        <tr>
+            <td><b>Usuario</b></td>
+            <td><b>Etapa</b></td>
+            <td><b>Monto</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataResult}}
+        <tr>
+            <td>{{#if usuario}}{{usuario}}{{/if}}</td>
+            <td>{{#if etapa}}{{etapa}}{{/if}}</td>
+            <td>{{#if monto}}{{monto}}{{/if}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<canvas id="top20" width="400" height="400"></canvas>

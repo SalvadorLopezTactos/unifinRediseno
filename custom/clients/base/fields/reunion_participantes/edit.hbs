@@ -42,14 +42,22 @@
                 </td>
                 <td class="campo2SelectP">
                     {{#if crea}}
-					  <input class="campo2P span3" type="text" value="{{correo}}" placeholder="Correo" data-field="tct_correo_c">
+					  {{#if unifin}}
+						{{correo}}
+					  {{else}}
+						<input class="campo2P span3" type="text" value="{{correo}}" placeholder="Correo" data-field="tct_correo_c">
+					  {{/if}}
                     {{else}}
 					  {{correo}}
                     {{/if}}
                 </td>
                 <td class="campo3SelectP">
                     {{#if crea}}
-                      <input class="campo3P span3" type="text" value="{{telefono}}" placeholder="Teléfono" maxlength="13" size="13">
+					  {{#if unifin}}
+						{{telefono}}
+					  {{else}}
+						<input class="campo3P span3" type="text" value="{{telefono}}" placeholder="Teléfono" maxlength="13" size="13">
+					  {{/if}}
                     {{else}}
 					  {{telefono}}
                     {{/if}}
