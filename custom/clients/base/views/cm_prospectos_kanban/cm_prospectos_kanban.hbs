@@ -1,0 +1,395 @@
+<link rel="stylesheet" href="custom/clients/base/views/cm_prospectos_kanban/styles/styles.css">
+<div class="contenedor-grid">
+    <div class="contenedor-sinContactar">
+        <div class="contenedor-header">
+            <div class="header-column">
+                <h5>Lead sin contactar</h5>
+                <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div>
+                <div class="padding">
+                    <p>{{registrosKanban.Lead_Sin_Contactar.Total_Registros}} Registros</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-contactado color-white">
+        <div class="contenedor-header">
+            <div class="header-column">
+                <h5>Prospecto Contactado</h5>
+                <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div class="padding">
+                <div>
+                    <p>{{registrosKanban.Prospecto_Contactado.Total_Registros}} Registros</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-interesado color-white">
+        <div class="contenedor-header">
+            <div class="header-column">
+                    <h5>Prospecto Interesado</h5>
+                    <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div class="header-datos">
+                    <div>
+                    <p>{{registrosKanban.Prospecto_Interesado.Total_Registros}} Registros</p>
+                </div>
+                <div class="cantidad-interesado  contenedor-cantidad">
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Prospecto_Interesado.Total_Monto}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-integracion color-white">
+        <div class="contenedor-header">
+            <div class="header-column">
+                <h5>Prospecto Integracion de Expediente</h5>
+                <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div class="header-datos">
+               <div>
+                    <p>{{registrosKanban.Prospecto_Integracion_Expediente.Total_Registros}} Registros</p>
+                </div>
+                <div class="cantidad-integracion contenedor-cantidad">
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Prospecto_Integracion_Expediente.Total_Monto}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-credito color-white">
+        <div class="contenedor-header">
+            <div class="header-column">
+                <h5>Prospecto en Crédito</h5>
+                <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div class="header-datos">
+                <div>
+                    <p>{{registrosKanban.Prospecto_Credito.Total_Registros}} Registros</p>
+                </div>
+                <div class="cantidad-credito contenedor-cantidad">
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Prospecto_Credito.Total_Monto}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-conLinea color-white">
+        <div class="contenedor-header">
+        <div class="header-column">
+                <h5>Cliente con Línea sin Operar</h5>
+                <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div class="header-datos">
+                <div>
+                    <p>{{registrosKanban.Cliente_Linea_Sin_Operar.Total_Registros}} Registros</p>
+                </div>
+                <div class="cantidad-conLinea contenedor-cantidad">
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Cliente_Linea_Sin_Operar.Total_Monto}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-activo color-white">
+        <div class="contenedor-header">
+            <div class="header-column">
+                <h5>Cliente Activo</h5>
+                <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div class="header-datos">
+               <div>
+                    <p>{{registrosKanban.Cliente_Activo.Total_Registros}} Registros</p>
+                </div>
+                <div class="contenedor-cantidad cantidad-activo">
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Cliente_Activo.Total_Monto}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-perdido color-white">
+        <div class="contenedor-header">
+            <div class="header-column">
+                <h5>Cliente Perdido</h5>
+                <img src="custom/include/images/Contacto_icon.png" alt="">
+            </div>
+            <div class="header-datos">
+                <div>
+                    <p>{{registrosKanban.Cliente_Perdido.Total_Registros}} Registros</p>
+                </div>
+                <div class="contenedor-cantidad cantidad-perdido">
+                    <p><span>$</span>{{customFormatNumber registrosKanban.Cliente_Perdido.Total_Monto}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sinContactar-items border-right">
+        {{#each registrosKanban.Lead_Sin_Contactar.Registros}}
+            <div class="contenedor-item" data-id="{{Id}}" data-link="{{Modulo}}/{{Id}}" data-nombre="{{Nombre}}" data-tipo="{{Subtipo_Registro}}" data-registro="LSC">
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>0</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="contactado-items border-right">
+        {{#each registrosKanban.Prospecto_Contactado.Registros}}
+            <div class="contenedor-item" data-id="{{Id}}" data-link="{{Modulo}}/{{Id}}" data-nombre="{{Nombre}}" data-tipo="{{Subtipo_Registro}}" data-registro="PC">
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>0</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+     <div class="interesado-items border-right">
+        {{#each registrosKanban.Prospecto_Interesado.Registros}}
+            <div class="contenedor-item" data-id="{{Id}}" data-link="{{Modulo}}/{{Id}}" data-nombre="{{Nombre}}" data-tipo="{{Subtipo_Registro}}" data-registro="PI">
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+     <div class="integracion-items border-right">
+        {{#each registrosKanban.Prospecto_Integracion_Expediente.Registros}}
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="credito-items border-right">
+        {{#each registrosKanban.Prospecto_Credito.Registros}}
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="conLinea-items border-right">
+        {{#each registrosKanban.Cliente_Linea_Sin_Operar.Registros}}
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+                <div class="linea">
+                    <p style="color:{{Color}}">{{Vigencia_Linea}}</p>
+                </div>
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="activo-items border-right">
+        {{#each registrosKanban.Cliente_Activo.Registros}}
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+                <div class="anexo">
+                    <p>&nbsp;</p>
+                </div>
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="perdido-items border-right">
+        {{#each registrosKanban.Cliente_Perdido.Registros}}
+            <div class="contenedor-item" data-tipo="{{Subtipo_Registro}}">
+                <div class="anexo">
+                    <p>&nbsp;</p>
+                </div>
+                <div class="contenedor-informacion">
+                    <div class="contenedor-nombre">
+                        <div class="circulo">
+                            <p>UA</p>
+                        </div>
+                        <div class="nombre">
+                            <p data-id="{{Id}}" title="{{Nombre}}">
+                                <a href="#{{Modulo}}/{{Id}}" target="_blank">{{Nombre}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <div class="cuadrado">
+                        <p>{{Dias_Etapa}}</p>
+                    </div>
+                </div>
+                <div class="contenedor-detalles">
+                    <div>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div>
+                        <p><span>$</span>{{customFormatNumber Monto_Cuenta}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="checklist-item hide">
+        <div class="center-title-checklist">
+            
+        </div>
+    </div>
+</div>

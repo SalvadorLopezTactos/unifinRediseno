@@ -1,0 +1,244 @@
+:root{
+    --color-sinContactar: #BDBEC0;
+    --color-contactado: #0B2040;
+    --color-interesado : #F5B233;
+    --color-integracion: #49ACD7;
+    --color-credito: #EC6433;
+    --color-conLinea: #58585A;
+    --color-activo: #51A14B;
+    --color-perdido: #E93F33;
+}
+
+.contenedor-grid{
+    display: grid;
+    /*grid-template-columns: repeat(8, 1fr);*/
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: auto;
+    border-bottom: 1px solid #d8d8d8 ;
+}
+
+.header-column{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.header-column > img{
+    height: 30px;
+}
+
+.padding{
+    padding-bottom: 5px;
+}
+
+.header-datos{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.contenedor-header{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.contenedor-sinContactar{
+    background-color: var(--color-sinContactar);
+}
+
+.contenedor-contactado{
+    background-color: var(--color-contactado);
+}
+
+.contenedor-interesado{
+    background-color: var(--color-interesado);
+}
+
+.contenedor-integracion{
+    background-color: var(--color-integracion);
+}
+
+.contenedor-credito{
+    background-color: var(--color-credito);
+}
+
+.contenedor-conLinea{
+    background-color: var(--color-conLinea);
+}
+
+.contenedor-activo{
+    background-color: var(--color-activo);
+}
+
+.contenedor-perdido{
+    background-color: var(--color-perdido);
+}
+
+.color-white{
+    color: white;
+}
+
+.contenedor-cantidad{
+    background: white;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+
+.cantidad-interesado{
+    color: var(--color-interesado);
+}
+
+.cantidad-integracion{
+    color: var(--color-integracion);
+}
+
+.cantidad-credito{
+    color: var(--color-credito);
+}
+
+.cantidad-conLinea{
+    color: var(--color-conLinea);
+}
+
+.cantidad-activo{
+    color: var(--color-activo);
+}
+
+.cantidad-perdido{
+    color: var(--color-perdido);
+}
+
+.sinContactar-items{
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.contenedor-item{
+    padding: 5px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 5px
+}
+
+.contenedor-item:hover{
+    cursor: pointer;
+    border: 1px solid red;
+}
+
+.contenedor-informacion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px
+}
+
+.contenedor-nombre{
+    display: flex;
+    align-items: center;
+
+}
+
+.circulo {
+    border-radius: 50%;
+    background: #C5E6BC;
+    padding: 3px;
+    margin-right: 3px;
+}
+
+.circulo > p{
+    color: #82b785
+}
+
+.nombre{
+    width: 100px;
+}
+
+.nombre > p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cuadrado{
+    border: 1px solid;
+    padding: 2px;
+}
+
+.cuadrado > p{
+    color: red;
+}
+
+.contenedor-detalles{
+    display: flex;
+    justify-content: space-between;
+}
+
+.contactado-items{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.interesado-items{
+    grid-column: 3/4;
+    grid-row: 2/3;
+}
+
+.integracion-items{
+    grid-column: 4/5;
+    grid-row: 2/3;
+}
+
+.credito-items{
+    grid-column: 5/6;
+    grid-row: 2/3; 
+}
+
+.conLinea-items{
+    grid-column: 6/7;
+    grid-row: 2/3;
+}
+
+.activo-items{
+    grid-column: 7/8;
+    grid-row: 2/3; 
+}
+
+.perdido-items{
+    grid-column: 8/9;
+    grid-row: 2/3;
+}
+
+.checklist-item{
+    grid-column: 9/10;
+    grid-row: span 2;
+    /*
+    display: block;
+    overflow: auto;
+    */
+}
+
+.center-title-checklist{
+    border: 1px solid #000000;
+    text-align: center;
+    /*height: 300px;*/
+    font-size: 15px;
+    padding-bottom: 40px;
+}
+
+.linea{
+    text-align: end;
+    color: #82b785;
+}
+
+.anexo{
+    text-align: end;
+}
+
+.border-right{
+    border-right: 1px solid #d8d8d8;
+}
