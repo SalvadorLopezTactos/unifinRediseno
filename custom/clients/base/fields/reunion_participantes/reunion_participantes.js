@@ -44,7 +44,7 @@
 				}
 			});
 		} else {
-			if(this.model.get('parent_id')) {
+			if(this.model.get('parent_id') != undefined) {
 				//Recupera datos para vista de creación
 				app.alert.show('alert_participants', {
 					level: 'process',
@@ -71,7 +71,8 @@
 							"asistencia": 0,
 							"activo": 1,
 							"crea": 1,
-							"host": 1
+							"host": 1,
+							"cuenta": 0
 						};
 						var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_cuenta_c"];
 						app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -98,23 +99,59 @@
 									"nombres": valor1,
 									"apaterno": valor2,
 									"amaterno": valor3,
-									"telefono": valor5,
+									"telefono": valor5,	
 									"correo": valor4,
-									"origen": "E",
+									"origen": "C",
 									"unifin": 0,
 									"tipo_contacto": "Promocion",
 									"asistencia": 0,
 									"activo": 1,
 									"crea": 1,
-									"host": 0
+									"host": 0,
+									"cuenta": 1,
+									"actualiza": 0
 								};
 							}
 							selfData.mParticipantes = {actualiza: 0, participantes: [], compromisos: []};
 							selfData.mParticipantes.participantes.push(item);
 							if(data.records.length > 0) selfData.mParticipantes.participantes.push(cuenta);
-							_.extend(this, selfData.mParticipantes);
-							app.alert.dismiss('alert_participants');
-							selfData.render();
+							app.api.call('GET', app.api.buildURL('GetParticipantes/'+idcuenta), null, {
+								success: function (data) {
+									if(data.participantes.length > 0) {
+										Object.keys(data.participantes).forEach(function (key) {
+											var valor1 = data.participantes[key].nombres;
+											var valor2 = data.participantes[key].apaterno;
+											var valor3 = data.participantes[key].amaterno;
+											var valor4 = data.participantes[key].correo;
+											var valor5 = data.participantes[key].telefono;
+											var relacionado = {
+												"id": '',
+												"nombres": valor1,
+												"apaterno": valor2,
+												"amaterno": valor3,
+												"telefono": valor5,
+												"correo": valor4,
+												"origen": "C",
+												"unifin": 0,
+												"tipo_contacto": "Promocion",
+												"asistencia": 0,
+												"activo": 1,
+												"crea": 1,
+												"host": 0,
+												"cuenta": 0,
+												"actualiza": 0
+											};
+											selfData.mParticipantes.participantes.push(relacionado);
+										});
+									}
+									_.extend(this, selfData.mParticipantes);
+									app.alert.dismiss('alert_participants');
+									selfData.render();
+								},
+								error: function (e) {
+									throw e;
+								}
+							});
 						  }, this)
 						});
 					},
@@ -153,10 +190,11 @@
 
         $('.updateAsistencia').click(function(evt) {
           var row = $(this).closest("tr");    // Find the row
-          if (selfData.mParticipantes.participantes[row.index()].asistencia == 1) {
-              selfData.mParticipantes.participantes[row.index()].asistencia = 0;
+          if (selfData.mParticipantes.participantes[row.index()].activo == 1) {
+              selfData.mParticipantes.participantes[row.index()].activo = 0;
           }else{
-              selfData.mParticipantes.participantes[row.index()].asistencia = 1;
+              selfData.mParticipantes.participantes[row.index()].activo = 1;
+			  selfData.mParticipantes.participantes[row.index()].actualiza = 1;
           }
           selfData.render();
         });

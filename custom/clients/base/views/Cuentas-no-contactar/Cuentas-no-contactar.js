@@ -79,13 +79,20 @@
 					if(data.records.length > 0) {
 						this.data = data;
 						document.getElementById("condicion").value = this.condicion;
+            var listaRazon = [];
+            var indice = 1;
 						for(var i = 0; i < data.records.length; i++) {
-							document.getElementById("razon").options[i]=new Option(app.lang.getAppListStrings('razon_list')[data.records[i].razon],data.records[i].razon);
+              listaRazon[data.records[i].razon] = App.lang.getAppListStrings('razon_list')[data.records[i].razon];
 						}
-						if(data.records.length > 1) {
-							document.getElementById("razon").options[i]=new Option('','');
+            if(data.records.length > 1) {
+							document.getElementById("razon").options[0]=new Option('','');
 							document.getElementById("razon").value = "";
 						}
+            Object.entries(listaRazon).forEach(([key, value]) => {
+                document.getElementById("razon").options[indice]=new Option(value,key);
+                indice++;
+            });
+
 						document.getElementById("ingesta").options[0]=new Option(app.user.attributes.full_name,app.user.attributes.id);
 						if(data.records.length == 1) this.buscaMotivo();
 					}
@@ -93,7 +100,7 @@
 			});
         }
 	},
-	
+
 	buscarCuentasNoContactar:function () {
         //Inicializar arreglo de cuentas cada que se busca por un filtro, para evitar actualizar cuentas que anteriormente se seleccionaron
         this.ids_cuentas=[];
@@ -259,7 +266,7 @@
 			}
 		}
     },
-	
+
     buscaValida:function (e) {
 		document.getElementById("valida").options.length=0;
 		for(var i = 0; i < this.data.records.length; i++) {
@@ -386,13 +393,19 @@
 				if(limpia) {
 					document.getElementById("condicion").value = this.condicion;
 					document.getElementById("razon").options.length=0;
-					for(var i = 0; i < this.data.records.length; i++) {
-						document.getElementById("razon").options[i]=new Option(app.lang.getAppListStrings('razon_list')[this.data.records[i].razon],this.data.records[i].razon);
-					}
-					if(this.data.records.length > 1) {
-						document.getElementById("razon").options[i]=new Option('','');
-						document.getElementById("razon").value = "";
-					}
+					var listaRazon = [];
+          var indice = 1;
+          for(var i = 0; i < this.data.records.length; i++) {
+            listaRazon[this.data.records[i].razon] = App.lang.getAppListStrings('razon_list')[this.data.records[i].razon];
+          }
+          if(this.data.records.length > 1) {
+            document.getElementById("razon").options[0]=new Option('','');
+            document.getElementById("razon").value = "";
+          }
+          Object.entries(listaRazon).forEach(([key, value]) => {
+              document.getElementById("razon").options[indice]=new Option(value,key);
+              indice++;
+          });
 					document.getElementById("razon").disabled=false;
 					document.getElementById("ingesta").options.length=0;
 					document.getElementById("ingesta").options[0]=new Option(app.user.attributes.full_name,app.user.attributes.id);
@@ -478,7 +491,7 @@
 					 $('.cuentasContainer').hide();
 					 $('#successful').show();
 					 $('#btn_no_contactar').eq(0).removeClass('disabled')
-					 $('#btn_no_contactar').attr('style','');                 
+					 $('#btn_no_contactar').attr('style','');
 				}, this)
 			});
 		}
@@ -502,7 +515,7 @@
               title: 'Cargando...'
             });
             $('.btn_read_csv').addClass('disabled');
-            $('.btn_read_csv').attr('style', 'pointer-events:none;margin:10px');        
+            $('.btn_read_csv').attr('style', 'pointer-events:none;margin:10px');
             var file = fileInput.files[0];
             var nombre = file.name;
             var ext = nombre.toUpperCase();
@@ -510,7 +523,7 @@
             {
                 $('.btn_read_csv').removeClass('disabled');
                 $('.btn_read_csv').attr('style', 'margin:10px');
-                app.alert.dismiss('reasignandoCSV');                    
+                app.alert.dismiss('reasignandoCSV');
                 app.alert.show('nocsv', {
                   level: 'error',
                   messages: 'La extensión del archivo no es correcta. Favor de elegir un archivo .csv',
@@ -533,7 +546,7 @@
                 if(content.trim() == ""){
                   $('.btn_read_csv').removeClass('disabled');
                   $('.btn_read_csv').attr('style', 'margin:10px');
-                  app.alert.dismiss('reasignandoCSV');                    
+                  app.alert.dismiss('reasignandoCSV');
                   app.alert.show('csvVacio', {
                     level: 'error',
                     messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',

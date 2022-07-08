@@ -57,62 +57,80 @@ class reunion_participantes
 					  $beanParticipante->tct_asistencia_c = $objArrParticipnates[$j]['asistencia'];
 					  $beanParticipante->tct_tipo_registro_c = $objArrParticipnates[$j]['tipo_contacto'];
 					  $beanParticipante->tct_id_registro_c = $objArrParticipnates[$j]['id'];
+					  $beanParticipante->invitar_c = $objArrParticipnates[$j]['activo'];
+					  $beanParticipante->cuenta_c = $objArrParticipnates[$j]['cuenta'];
 					  $beanParticipante->meetings_minut_participantes_1meetings_ida = $bean->id;
 					  $beanParticipante->description = $objArrParticipnates[$j]['unifin'];
 					  $beanParticipante->save();
-					  if($objArrParticipnates[$j]['host']) {
-						  $host = [
-							"first_name" => $beanParticipante->name,
-							"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
-							"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
-							"full_name" => $beanParticipante->tct_nombre_completo_c,
-							"email" => $beanParticipante->tct_correo_c,
-							"crm_id" => $beanParticipante->id,
-						  ];
-						  array_push($advisor,$host);
-						  $organizador = $beanParticipante->id;
+					  if($objArrParticipnates[$j]['activo']) {
+						if($objArrParticipnates[$j]['host']) {
+							$host = [
+								"first_name" => $beanParticipante->name,
+								"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
+								"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
+								"full_name" => $beanParticipante->tct_nombre_completo_c,
+								"email" => $beanParticipante->tct_correo_c,
+								"crm_id" => $beanParticipante->id,
+							];
+							array_push($advisor,$host);
+							$organizador = $beanParticipante->id;
+						}
+						else {
+							$participante = [
+								"first_name" => $beanParticipante->name,
+								"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
+								"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
+								"full_name" => $beanParticipante->tct_nombre_completo_c,
+								"email" => $beanParticipante->tct_correo_c,
+								"crm_id" => $beanParticipante->id,
+							];
+							array_push($guest,$participante);
+						}
+						$correo = ["id" => $beanParticipante->id, "name" => $beanParticipante->tct_nombre_completo_c, "mail" => $beanParticipante->tct_correo_c];
+						array_push($correos,$correo);
 					  }
-					  else {
-						  $participante = [
-							"first_name" => $beanParticipante->name,
-							"father_last_name" => $beanParticipante->tct_apellido_paterno_c,
-							"mother_last_name" => $beanParticipante->tct_apellido_materno_c,
-							"full_name" => $beanParticipante->tct_nombre_completo_c,
-							"email" => $beanParticipante->tct_correo_c,
-							"crm_id" => $beanParticipante->id,
-						  ];
-						  array_push($guest,$participante);
-					  }
-					  $correo = ["id" => $beanParticipante->id, "name" => $beanParticipante->tct_nombre_completo_c, "mail" => $beanParticipante->tct_correo_c];
-					  array_push($correos,$correo);
 					}
 					else {
-					  if($objArrParticipnates[$j]['unifin']) {
-						  $host1 = [
-							"first_name" => $objArrParticipnates[$j]['nombres'],
-							"father_last_name" => $objArrParticipnates[$j]['apaterno'],
-							"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
-							"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
-							"email" => $objArrParticipnates[$j]['correo'],
-							"crm_id" => $objArrParticipnates[$j]['id'],
-						  ];
-						  array_push($advisor,$host1);
+					  if($objArrParticipnates[$j]['activo']) {
+						if($objArrParticipnates[$j]['unifin']) {
+						    $host1 = [
+								"first_name" => $objArrParticipnates[$j]['nombres'],
+								"father_last_name" => $objArrParticipnates[$j]['apaterno'],
+								"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
+								"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
+								"email" => $objArrParticipnates[$j]['correo'],
+								"crm_id" => $objArrParticipnates[$j]['id'],
+							];
+							array_push($advisor,$host1);
+							$organizador = $objArrParticipnates[$j]['id'];
+						}
+						else {
+							$participante1 = [
+								"first_name" => $objArrParticipnates[$j]['nombres'],
+								"father_last_name" => $objArrParticipnates[$j]['apaterno'],
+								"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
+								"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
+								"email" => $objArrParticipnates[$j]['correo'],
+								"crm_id" => $objArrParticipnates[$j]['id'],
+							];
+							array_push($guest,$participante1);
+						}
+						if($objParticipantes['actualiza']) {
+							$correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
+							array_push($correos,$correo);
+						}
+						else {
+							if($objArrParticipnates[$j]['actualiza']) {
+								$correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
+								array_push($correos,$correo);
+							}
+						}
 					  }
-					  else {
-						  $participante1 = [
-							"first_name" => $objArrParticipnates[$j]['nombres'],
-							"father_last_name" => $objArrParticipnates[$j]['apaterno'],
-							"mother_last_name" => $objArrParticipnates[$j]['amaterno'],
-							"full_name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'],
-							"email" => $objArrParticipnates[$j]['correo'],
-							"crm_id" => $objArrParticipnates[$j]['id'],
-						  ];
-						  array_push($guest,$participante1);
-					  }
-					  if($objParticipantes['actualiza']) {
-						  $correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
-						  array_push($correos,$correo);
-					  }
+					  //Actualiza Participante
+					  $beanParticipa = BeanFactory::getBean('minut_Participantes', $objArrParticipnates[$j]['id'], array('disable_row_level_security' => true));
+					  $beanParticipa->invitar_c = 1;
+					  if(!$objArrParticipnates[$j]['activo']) $beanParticipa->invitar_c = 0;
+					  $beanParticipa->save();					  
 					}
 					// Busca relación
 					if($objArrParticipnates[$j]['origen'] == "E")
@@ -216,14 +234,20 @@ class reunion_participantes
 						$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
 						if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
 						$inicio = strtotime('-6 hours',strtotime($bean->date_start));
+						$fin = strtotime('-6 hours',strtotime($bean->date_end));
 						if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
+						if($verano) $fin = strtotime('-5 hours',strtotime($bean->date_end));
 						$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
 						$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 						$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
 						$hora = date("g:i a",$inicio);
+						$start = date('Ymd',$inicio)."T".date('His',$inicio);
+						$end = date('Ymd',$fin)."T".date('His',$fin);
+						$ini_outlook = date('Y-m-d',$inicio)."T".date('H:i:s',$inicio);
+						$fin_outlook = date('Y-m-d',$fin)."T".date('H:i:s',$fin);
 						// Invoca servicio para crear o actualizar sala en Lenia
-						$url = $sugar_config['lenia'].'videocall/room/add/';
-						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c;
+						$url = $sugar_config['lenia'].'videocall/room/add/?meeting_objective_id='.$bean->objetivo_c;
+						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c.'&meeting_objective_id='.$bean->objetivo_c;
 						$content = json_encode(array(
 						  "crm_id" => $bean->id,
 						  "session_name" => $bean->name,
@@ -237,6 +261,8 @@ class reunion_participantes
 						  "guest_list" => $guest,
 						  "advisor_list" => $advisor
 						));
+						$GLOBALS['log']->fatal("Solicitud Lenia: ");
+						$GLOBALS['log']->fatal($content);
 						$curl = curl_init($url);
 						curl_setopt($curl, CURLOPT_HEADER, false);
 						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -254,6 +280,8 @@ class reunion_participantes
 							global $db;
 							curl_close($curl);
 							$response = json_decode($response, true);
+							$GLOBALS['log']->fatal("Respuesta Lenia: ");
+							$GLOBALS['log']->fatal($response);
 							if($response['status'] && !$bean->link_lenia_c) {
 								// Actualiza ID de Sala en la Reunión
 								$descripcion = "El enlace que deberás usar para poder conectarte el día de la videoconferencia es: ".$sugar_config['lenia_url'].$response['idSala']."?".$organizador;
@@ -267,12 +295,14 @@ class reunion_participantes
 									$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
 									$usuario = $beanUsr->name;
 								}
+								$sala = $response['idSala'];
+								if($bean->link_lenia_c) $sala = $bean->link_lenia_c;
 								// Envía correo a los invitados
 								foreach ($correos as $correo) {
 									require_once("include/SugarPHPMailer.php");
 									require_once("modules/EmailTemplates/EmailTemplate.php");
 									require_once("modules/Administration/Administration.php");									
-									$url = $sugar_config['lenia_url'].$response['idSala']."?".$correo["id"];
+									$url = $sugar_config['lenia_url'].$sala."?".$correo["id"];
 									$emailtemplate = new EmailTemplate();
 									if($organizador == $correo['id']) {
 										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor','type'=>'email'));
@@ -280,13 +310,22 @@ class reunion_participantes
 									else {
 										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente','type'=>'email'));
 									}
-									$emailtemplate->subject = $emailtemplate->subject;
+									$asunto = $emailtemplate->subject;
+									if($objParticipantes['actualiza']) $asunto = "Actualización: ".$emailtemplate->subject;
+									$google = "http://www.google.com/calendar/event?action=TEMPLATE&text=".$asunto."&dates=".$start."/".$end."&location=".$url."&trp=false&details=UNIFIN FINANCIERA";
+									$outlook = "https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&startdt=".$ini_outlook."&enddt=".$fin_outlook."&subject=".$asunto."&body=UNIFIN FINANCIERA&location=".$url;
+									$office = "https://outlook.office.com/calendar/0/deeplink/compose?subject=".$asunto."&body=UNIFIN FINANCIERA&startdt=".$ini_outlook."&enddt=".$fin_outlook."&location=".$url."&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent";
+									$emailtemplate->subject = $asunto;
 									$body_html = $emailtemplate->body_html;
 									$body_html = str_replace('participante_name', $correo["name"], $body_html);
 									$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
 									$body_html = str_replace('asesor_name', $usuario, $body_html);
 									$body_html = str_replace('fecha', $fecha, $body_html);
 									$body_html = str_replace('hora', $hora, $body_html);
+									$body_html = str_replace('google', $google, $body_html);
+									$body_html = str_replace('outlook', $outlook, $body_html);
+									$body_html = str_replace('office', $office, $body_html);
+									if($objParticipantes['actualiza']) $body_html = str_replace('ha quedado agendada una', 'se ha actualizado la', $body_html);
 									$emailtemplate->body_html = str_replace('url', $url, $body_html);
 									$mailer = MailerFactory::getSystemDefaultMailer();
 									$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
@@ -300,7 +339,6 @@ class reunion_participantes
 									$recordid = $correo["id"];
 									$hoy = date("Y-m-d H:i:s");
 									$mail = $correo["mail"];
-									$asunto = $emailtemplate->subject;
 									try {
 										$result = $mailer->send();
 										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)

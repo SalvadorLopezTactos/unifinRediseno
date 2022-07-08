@@ -1,5 +1,5 @@
 <?php
- // created: 2021-10-27 13:18:47
+ // created: 2022-07-04 19:07:35
 $dictionary['tct4_Condiciones']['fields']['motivo']['visibility_grid']=array (
   'trigger' => 'razon',
   'values' => 
@@ -19,7 +19,20 @@ $dictionary['tct4_Condiciones']['fields']['motivo']['visibility_grid']=array (
     ),
     5 => 
     array (
-      0 => '25',
+      0 => '',
+      1 => '25',
+      2 => '26',
+      3 => '27',
+      4 => '28',
+      5 => '29',
+      6 => '30',
+      7 => '31',
+      8 => '32',
+      9 => '33',
+      10 => '34',
+      11 => '35',
+      12 => '36',
+      13 => '37',
     ),
     6 => 
     array (
@@ -78,10 +91,21 @@ $dictionary['tct4_Condiciones']['fields']['motivo']['visibility_grid']=array (
     16 => 
     array (
     ),
+    17 => 
+    array (
+    ),
+    18 => 
+    array (
+    ),
+    19 => 
+    array (
+    ),
     '' => 
     array (
     ),
   ),
 );
+$dictionary['tct4_Condiciones']['fields']['motivo']['default']='1';
+$dictionary['tct4_Condiciones']['fields']['motivo']['hidemassupdate']=false;
 
  ?>

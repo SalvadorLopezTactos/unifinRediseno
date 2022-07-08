@@ -42,7 +42,9 @@ class backlog_hooks {
     {
         global $current_user;
         $privilegio=$current_user->admin_backlog_c;
-        if($bean->producto_c != "2" && $privilegio==0){
+        $adminBL = (strpos($bean->comentarios_c, '-adminbl-') !== false) ? true: false; //Indica si fue editado desde vista de administración backlog
+
+        if($bean->producto_c != "2" && !$adminBL){
             //Solo se ejecuta al insertar
             if (empty($bean->fetched_row['id'])) {
                 // $GLOBALS['log']->fatal('Es nuevo backlog');
@@ -97,7 +99,7 @@ class backlog_hooks {
 
         }
 
-
+        $bean->comentarios_c = str_replace('-adminbl-','',$bean->comentarios_c);
         //Elimina valores negativos
         $monto_sin_solicitud_c = ($monto_sin_solicitud_c <= 0) ? 0 : $monto_sin_solicitud_c;
         $monto_con_solicitud_c = ($monto_con_solicitud_c <= 0) ? 0: $monto_con_solicitud_c;
