@@ -38,7 +38,17 @@ class ClientManager extends SugarApi
                 'pathVars' => array('','idRegistro','tipoRegistro'),
                 'method' => 'getChecklistKanban',
                 'shortHelp' => 'Obtiene información para checklist de vista kanban',
+            ),
+
+            'retrieveProspectosEstatus' => array(
+                'reqType' => 'GET',
+                'path' => array('GetProspectosEstatus','?'),
+                'pathVars' => array('','equipo'),
+                'method' => 'getProspectosEstatus',
+                'shortHelp' => 'Obtiene conteo de registros agrupados por etapas y por asesor para mostrar en dashlet con gráfica',
             )
+
+
 
         );
 
@@ -819,6 +829,193 @@ SQL;
         }
 
         return $array_respuesta;
+
+    }
+
+    public function getProspectosEstatus($api, $args){
+
+        $equipo=$args['equipo'];
+        global $db,$current_user;
+
+        $array_principal=array();
+        $grandTotal=0;
+
+        //Obtener los ids de los usuarios pertencientes a $equipo
+        $queryUsuarios="SELECT id,concat(u.first_name,' ',u.last_name) nombre_usuario FROM users u
+        INNER JOIN users_cstm uc ON u.id=uc.id_c
+        WHERE uc.equipo_c='{$equipo}' AND u.deleted=0;";
+
+        $resultUsuarios = $db->query($queryUsuarios);
+
+        while ($row = $db->fetchByAssoc($resultUsuarios)) {
+            
+            $id_usuario=$row['id'];
+            $total_leads_sin_contactar=0;
+            $total_prospectos_contactados=0;
+            $total_prospectos_interesados=0;
+            $total_prospectos_int_exp=0;
+            $total_prospectos_credito=0;
+            $total_clientes_linea_sin_operar=0;
+            $total_clientes_activos=0;
+            $total_clientes_perdidos=0;
+
+            $array_usuario=array(
+                "Usuario"=>$row['nombre_usuario']
+            );
+
+
+            $queryRegistros = <<<SQL
+			SELECT l.id id_registro,
+        'Leads' modulo,
+        lc.nombre_c nombre,
+        lc.apellido_paterno_c apellido,
+        lc.nombre_empresa_c nombre_empresa,
+        lc.tipo_registro_c tipo_registro,
+        lc.subtipo_registro_c subtipo_registro,
+        l.assigned_user_id,
+        l.date_modified,
+        f.id idFav
+        FROM leads l INNER JOIN leads_cstm lc
+        ON l.id=lc.id_c
+        LEFT JOIN sugarfavorites f ON l.id = f.record_id and f.deleted=0
+        WHERE lc.tipo_registro_c IN ('1','2','3')
+        AND lc.subtipo_registro_c IN('1','2','7')
+        AND l.assigned_user_id ='{$id_usuario}'
+        AND l.deleted=0
+        -- AND f.deleted=0
+        UNION
+        SELECT a.id,
+        'Accounts' modulo,
+        ac.primernombre_c,
+        ac.apellidopaterno_c,
+        ac.razonsocial_c,
+        ac.tipo_registro_cuenta_c,
+        ac.subtipo_registro_cuenta_c,
+        a.assigned_user_id,
+        a.date_modified,
+        f.id idFav
+        FROM accounts a INNER JOIN accounts_cstm ac
+        ON a.id=ac.id_c
+        LEFT JOIN sugarfavorites f ON a.id = f.record_id and f.deleted=0
+        WHERE ac.tipo_registro_cuenta_c IN ('1','2','3')
+        AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9')
+        -- AND a.assigned_user_id ='{$id_usuario}'
+        AND (ac.user_id_c='{$id_usuario}' OR 
+			ac.user_id1_c='{$id_usuario}' OR 
+            ac.user_id2_c='{$id_usuario}' OR 
+            ac.user_id6_c='{$id_usuario}' OR 
+            ac.user_id7_c='{$id_usuario}' OR 
+            ac.user_id8_c='{$id_usuario}'
+		)
+        AND a.deleted=0
+        -- AND f.deleted=0
+        ORDER BY idFav DESC;
+SQL;
+            $resultRegistros = $db->query($queryRegistros);
+
+            while ($filaRegistros = $db->fetchByAssoc($resultRegistros)) {
+                $id=$filaRegistros['id_registro'];
+                $tipo=$filaRegistros['tipo_registro'];
+                $subtipo=$filaRegistros['subtipo_registro'];
+                
+                $grandTotal++;
+                
+                //Lead sin Contactar
+                if($tipo=='1' && $subtipo=='1'){
+                    $total_leads_sin_contactar++;
+                }
+
+                //Prospecto Contactado
+                if($tipo=='2' && $subtipo=='2'){
+                    $total_prospectos_contactados++;
+                }
+
+                //Prospecto Interesado
+                if($tipo=='2' && $subtipo=='7'){
+                    $total_prospectos_interesados++;
+                }
+
+                //Prospecto Integración de Expediente
+                if($tipo=='2' && $subtipo=='8'){
+                    $total_prospectos_int_exp++;
+                }
+
+                //Prospecto en Crédito
+                if($tipo=='2' && $subtipo=='9'){
+                    $total_prospectos_credito++;
+                }
+
+                 //Sección de Clientes (Cliente con linea sin operar, Cliente Activo, Cliente Perdido)
+                if($tipo=='3' && $subtipo!='3' && $subtipo!='10' && $subtipo!='15' && $subtipo!='17'){
+                    //Subtipo -- 3:Cancelado, 10:Rechazado, 15:Inactivo, 17:Perdido
+                    $beanCliente = BeanFactory::getBean('Accounts', $id, array('disable_row_level_security' => true));
+                    if($beanCliente->load_relationship('accounts_uni_productos_1')){
+                        $producto_usuario=$current_user->tipodeproducto_c;
+                        $array_es_cliente_linea_sin_operar=array();
+                        $array_es_cliente_activo=array();
+                        $array_es_cliente_perdido=array();
+                    
+                        $relatedProductos = $beanCliente->accounts_uni_productos_1->getBeans();
+                        if(count($relatedProductos)>0){
+                            foreach($relatedProductos as $prod) {
+                                if($prod->tipo_producto==$producto_usuario){
+                                    //Cliente con linea sin operar
+                                    if($prod->registros_activos_c=='' && $prod->registros_historicos_c==''){
+                                        array_push($array_es_cliente_linea_sin_operar,'1');
+                                    }
+        
+                                    //Cliente Activo
+                                    if($prod->registros_activos_c!=''){
+                                        array_push($array_es_cliente_activo,'1');
+                                    }
+        
+                                    //Cliente Perdido
+                                    if($prod->registros_activos_c=='' && $prod->registros_historicos_c!='' ){
+                                        array_push($array_es_cliente_perdido,'1');
+                                    }
+                                }
+                            }
+    
+                        }
+
+                        //Cliente con linea sin operar
+                        if(in_array('1',$array_es_cliente_linea_sin_operar)){
+                            $total_clientes_linea_sin_operar++;
+                        }
+
+                        //Cliente Activo
+                        if(in_array('1',$array_es_cliente_activo)){
+                            $total_clientes_activos++;
+                        }
+
+                        //Cliente Perdido
+                        if(in_array('1',$array_es_cliente_perdido)){
+                            $total_clientes_perdidos++;   
+                        }
+                    }
+                }
+
+
+            }//Termina while obtencion de registros por usuario
+
+            $array_usuario["Registros"]=array(
+                $total_leads_sin_contactar,
+                $total_prospectos_contactados,
+                $total_prospectos_interesados,
+                $total_prospectos_int_exp,
+                $total_prospectos_credito,
+                $total_clientes_linea_sin_operar,
+                $total_clientes_activos,
+                $total_clientes_perdidos
+            );
+
+            array_push($array_principal,$array_usuario);
+
+        }//Termina while de obtención de Usuarios
+
+        $array_principal["Total"]=$grandTotal;
+        
+        return $array_principal;
 
     }
 
