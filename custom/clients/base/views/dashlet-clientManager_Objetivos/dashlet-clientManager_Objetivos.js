@@ -208,7 +208,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: "Objetivo Anual: "+ valor2 ,
+                        text: "Objetivo : "+ valor2 ,
                         position: "top"
                     },
                     subtitle: {
