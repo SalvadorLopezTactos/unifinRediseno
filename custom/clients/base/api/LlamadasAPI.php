@@ -46,19 +46,27 @@ class LlamadasAPI extends SugarApi
         $puesto_usuario = isset($args['data']['puesto_usuario']) ? $args['data']['puesto_usuario'] : '';
         $ext_usuario = isset($args['data']['ext_usuario']) ? $args['data']['ext_usuario'] : '';
         $es_CP = isset($app_list_strings['puestos_vicidial_list'][$puesto_usuario]) ? true : false;
+        $id_llamada = isset($args['data']['id_llamada']) ? $args['data']['id_llamada'] : '';
 
         //Genera bean de llamada
-        $bean_call = BeanFactory::newBean('Calls');
-        $bean_call->name ='Llamada a:' .$nombre_cliente ;
-        $bean_call->parent_id = $id_cliente;
-        $bean_call->parent_type = $modulo;
+        $bean_call = null;
+        if($id_llamada !=''){
+          $bean_call = BeanFactory::retrieveBean('Calls', $id_llamada, array('disable_row_level_security' => true));
+        }else{
+          $bean_call = BeanFactory::newBean('Calls');
+          $bean_call->name ='Llamada a:' .$nombre_cliente ;
+          $bean_call->parent_id = $id_cliente;
+          $bean_call->parent_type = $modulo;
+        }
+
         $bean_call->tct_call_issabel_c=1;
         $bean_call->tct_resultado_llamada_ddw_c = 'Llamada_servicio';
         if($posicion == 'Ventas') $bean_call->detalle_resultado_c = 17;
         if($posicion == 'Staff') $bean_call->detalle_resultado_c = 16;
         $bean_call->assigned_user_id = $current_user->id;
         $bean_call->save();
-        if($modulo == 'Leads') {
+
+        if($modulo == 'Leads' && $id_llamada =='') {
           $bean_call->load_relationship('leads');
           $bean_call->leads->add($id_cliente);
         }
