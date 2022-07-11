@@ -470,10 +470,10 @@ SQL;
             if($resultSolicitudes->num_rows>0){
 
                 while ($fila = $db->fetchByAssoc($resultSolicitudes)) {
-                    $monto_cuenta+=floatval($fila['monto_c']);
-                    $monto+=floatval($fila['monto_c']);
 
                     if($fila['tipo_producto_c']==$producto_usuario){
+                        $monto_cuenta+=floatval($fila['monto_c']);
+                        $monto+=floatval($fila['monto_c']);
                         //Obtener la vigencia de la linea correspondiente al producto del usuario logueado
                         //Obtener diferencia en días entre fecha actual y la fecha de vigencia de la linea
                         if($fila['vigencialinea_c']!=''){
@@ -835,6 +835,7 @@ SQL;
     public function getProspectosEstatus($api, $args){
 
         $equipo=$args['equipo'];
+        $equipo_usuario=str_replace("^","'",$equipo);
         global $db,$current_user;
 
         $array_principal=array();
@@ -843,7 +844,7 @@ SQL;
         //Obtener los ids de los usuarios pertencientes a $equipo
         $queryUsuarios="SELECT id,concat(u.first_name,' ',u.last_name) nombre_usuario FROM users u
         INNER JOIN users_cstm uc ON u.id=uc.id_c
-        WHERE uc.equipo_c='{$equipo}' AND u.deleted=0;";
+        WHERE uc.equipo_c IN ({$equipo_usuario}) AND u.status='Active' AND u.deleted=0;";
 
         $resultUsuarios = $db->query($queryUsuarios);
 
