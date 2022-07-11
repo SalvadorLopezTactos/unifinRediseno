@@ -12,13 +12,13 @@
     },
 
     setChart:function(){
-        var equipo=App.user.attributes.equipo_c;
+        var equipos=App.user.attributes.equipos_c;
 
         App.alert.show('getProspectosEstatus', {
             level: 'process',
             title: 'Cargando',
         });
-       app.api.call('GET', app.api.buildURL('GetProspectosEstatus/'+equipo), null, {
+       app.api.call('GET', app.api.buildURL('GetProspectosEstatus/'+equipos), null, {
         success: function (data) {
             App.alert.dismiss('getProspectosEstatus');
             //Generando dataset
@@ -47,14 +47,24 @@
                     "Cliente con Línea sin Operar",
                     "Cliente Activo",
                     "Cliente Perdido"],
-                    datasets: dataset,
-                    
+                    datasets: dataset,  
                 },
                 options: {
                     tooltips: {
                       displayColors: true,
                       callbacks:{
-                        mode: 'x',
+                        title: function(tooltipItem, data) {
+                            console.log("TITLE");
+                            console.log(tooltipItem);
+                            console.log(data);
+                            return data['labels'][tooltipItem[0]['index']];
+                          },
+                          label: function(tooltipItem, data) {
+                            console.log("LABEL");
+                            console.log(tooltipItem);
+                            console.log(data);
+                            return 'Nombre: '+data['datasets'][0]['data'][tooltipItem['index']];
+                          },
                       },
                     },
                     scales: {
