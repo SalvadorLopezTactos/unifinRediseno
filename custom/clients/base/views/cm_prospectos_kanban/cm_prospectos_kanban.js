@@ -13,7 +13,7 @@
     },
 
     getRegistrosKanban: function () {
-
+        contextoKanban=this;
         App.alert.show('getRecordsKanban', {
             level: 'process',
             title: 'Cargando',
@@ -22,9 +22,9 @@
         app.api.call('GET', app.api.buildURL('GetCMInfoKanban'), null, {
             success: function (data) {
                 App.alert.dismiss('getRecordsKanban');
-                self.registrosKanban=data;
+                contextoKanban.registrosKanban=data;
 
-                self.render();
+                contextoKanban.render();
             },
             error: function (e) {
                 throw e;
@@ -39,6 +39,7 @@
     },
 
     muestraChecklist:function(e){
+        contextoKanban=this;
         this.id_registro=$(e.currentTarget).attr('data-id');
         this.subtipo=$(e.currentTarget).attr('data-tipo');
         this.tipo_registro=$(e.currentTarget).attr('data-registro');
@@ -60,9 +61,9 @@
                     var lista=App.lang.getAppListStrings('cm_checklist_kanban_list');
                     var respuesta=data;
                     //Checklist unicamente pertenece a los subtipos Sin Contactar, Contactado e Interesado (1,2,7)
-                    if(self.subtipo==1 || self.subtipo==2 || self.subtipo==7){
+                    if(contextoKanban.subtipo==1 || contextoKanban.subtipo==2 || contextoKanban.subtipo==7){
     
-                        var valores_unformat=lista[self.subtipo];
+                        var valores_unformat=lista[contextoKanban.subtipo];
                         var elementos_checklist=valores_unformat.split(',');
                         var string_elementos_checklist="";
                         for(var i=0;i<elementos_checklist.length;i++){
@@ -82,7 +83,7 @@
                         }
     
                         $('.center-title-checklist').empty();
-                        $('.center-title-checklist').append('<p style="margin-top: 40px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><a href="#'+self.data_link+'" target="_blank">'+self.nombre_link+'</a><br><b>Checklist Actividades Pendientes</b></p>');
+                        $('.center-title-checklist').append('<p style="margin-top: 40px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><a href="#'+contextoKanban.data_link+'" target="_blank">'+contextoKanban.nombre_link+'</a><br><b>Checklist Actividades Pendientes</b></p>');
                         $('.center-title-checklist').append(string_elementos_checklist);      
                         
                         $('.checklist-item').removeClass('hide');
