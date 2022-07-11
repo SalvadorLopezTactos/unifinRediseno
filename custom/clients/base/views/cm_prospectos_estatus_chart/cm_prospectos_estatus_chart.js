@@ -12,6 +12,7 @@
     },
 
     setChart:function(){
+        contextoChart=this;
         var equipos=App.user.attributes.equipos_c;
 
         App.alert.show('getProspectosEstatus', {
@@ -27,7 +28,7 @@
                 for (let index = 0; index < Object.keys(data).length-1; index++) {//El object se recorre hasta una posición antes para no tomar en cuenta el atributo "Total"
                     var registro={
                         label: data[index].Usuario,
-                        backgroundColor: "#"+self.randomColor(),
+                        backgroundColor: "#"+contextoChart.randomColor(),
                         data: data[index].Registros,
                     }
                     dataset[index]=registro;
