@@ -14,6 +14,9 @@
     options = options || {};
     options.def = options.def || {};
     this._super('initialize', [options]);
+    this.c_registro_reus_c = false;
+    this.m_registro_reus_c = false;
+    this.o_registro_reus_c = false;
     this.model.on('sync', this.loadData, this);
     this.c_estatus1 = 1;
     this.m_estatus1 = 1;
