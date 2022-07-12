@@ -14,8 +14,8 @@
 $viewdefs['base']['view']['planned-activities-ctc'] = array(
     'dashlets' => array(
         array(
-            'label' => 'custom actividades planificadas',
-            'description' => 'Custom actividades planeadas',
+            'label' => 'Actividades planificadas',
+            'description' => 'Dashlet con actividades planeadas adicionando el boton de click to call',
             'config' => array(
                 'limit' => '10',
                 'date' => 'today',

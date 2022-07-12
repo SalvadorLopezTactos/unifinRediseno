@@ -38,7 +38,7 @@ class consultaObjetivos extends SugarApi
 
             $pos = strrpos($posicion_operativa, "3");
             $url = $this->getUrl($id_user, $posicion_operativa ,  $equipo, $region, $mes, $anio );
-        
+            $GLOBALS['log']->fatal("URL: " ,$url);
             $records = $this->getTotales($url,  $equipo, $region, $mes, $anio );
         
             //$GLOBALS['log']->fatal('records2-json', json_encode($records));
@@ -92,7 +92,7 @@ class consultaObjetivos extends SugarApi
             $curl_info = curl_getinfo($ch);
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $response1 = json_decode($result, true);
-            $GLOBALS['log']->fatal($host1);
+            $GLOBALS['log']->fatal($url);
             $GLOBALS['log']->fatal("Respuesta primer servicio: " . print_r($response1, true));
         } catch (Exception $exception) {
             $GLOBALS['log']->fatal('Error',$exception);
