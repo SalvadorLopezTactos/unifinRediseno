@@ -158,6 +158,8 @@ class Seguros_dynamics
             $closeDate = date("d/m/Y", strtotime($closeDate));
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity';
         		$arreglo = array(
+                "int_etapa" => "Prospectando",
+                "statuscode" => "Contactado",
                 "int_tipo_opp" => $recordTypeId,
                 "parentaccountid" => $cuenta->int_id_dynamics_c,
                 "int_tipo" => $bean->tipo_venta_c,
@@ -168,7 +170,6 @@ class Seguros_dynamics
                 "int_localidad_id" => $bean->oficina_c,
                 "int_kam_santander_unifin_id" => "",
                 "int_vendedor_id" => $bean->kam_c,
-                "int_etapa" => "Prospectando",
                 "actualclosedate" => $bean->fecha_cierre_c,
                 "int_prima_total_objetivo" => $bean->prima_obj_c,
                 "int_ing_objetivo_porcentaje" => "",
@@ -224,6 +225,7 @@ class Seguros_dynamics
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
                 "int_etapa" => "Cotizando",
+                "statuscode" => "Contactado",
                 "int_ayuda_area_tecnica" =>  $requiereAyudaDeReaTcnica,
                 "int_fecha_req_propuesta" => $bean->fecha_req,
                 "description" => $bean->description,
@@ -258,8 +260,8 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "int_etapa" => "COTIZADO",
-              "int_etapa" => $stageName
+              "int_etapa" => "Cotizando",
+              "statuscode" => "Cotizado"
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Cotizado: '. $url);
             $GLOBALS['log']->fatal($content);
