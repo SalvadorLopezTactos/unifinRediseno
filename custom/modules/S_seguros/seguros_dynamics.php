@@ -324,7 +324,8 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "int_etapa" => "Presentando"
+              "int_etapa" => "Presentando",
+              "statuscode" => "Cotizado"
               
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Presentación: '. $url);
@@ -409,6 +410,7 @@ class Seguros_dynamics
                         $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
                         $content = json_encode(array(
                           "int_etapa" => "Cierre",
+                          "statuscode" => "Ganada",
                           "int_etapa" => $stageName,
                           "feeC" => $bean->fee_c,
                           "feePC" => $bean->fee_p_c,
@@ -457,7 +459,8 @@ class Seguros_dynamics
             $no_renovable_c = $app_list_strings['no_renovable_list'][$bean->no_renovable_c];
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$arreglo = array(
-              "int_etapa" => "PERDIDA",
+              "int_etapa" => "Cierre",
+              "statuscode" => "No Ganada",
               "int_etapa" => $stageName,
               "int_razon_perdida" => $razonPerdida,
               "int_comentarios_razon_perdida" => $bean->comentarios_c,
