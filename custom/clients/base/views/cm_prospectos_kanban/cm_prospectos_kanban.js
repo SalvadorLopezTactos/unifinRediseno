@@ -4,6 +4,7 @@
     events: {
         'click .contenedor-item': 'muestraChecklist',
         'click .fa-star':'setFavorite',
+        'click .closeChecklist':'closeChecklist'
     },
 
     initialize: function (options) {
@@ -83,6 +84,7 @@
                         }
     
                         $('.center-title-checklist').empty();
+                        $('.center-title-checklist').append('<div><span class="close closeChecklist" tabindex="-1" style="margin:5px">X</span></div>');
                         $('.center-title-checklist').append('<p style="margin-top: 40px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><a href="#'+contextoKanban.data_link+'" target="_blank">'+contextoKanban.nombre_link+'</a><br><b>Checklist Actividades Pendientes</b></p>');
                         $('.center-title-checklist').append(string_elementos_checklist);      
                         
@@ -100,6 +102,10 @@
         }else{
             $('.checklist-item').addClass('hide');
         } 
+    },
+
+    closeChecklist:function(){
+        $('.checklist-item').addClass('hide');
     },
 
     setFavorite:function(e){
