@@ -72,7 +72,7 @@ class Seguros_dynamics
                             "int_primer_apellido" => $cuenta->apellidopaterno_c,
                             "int_segundo_apellido" => $cuenta->apellidomaterno_c,
                             "int_sexo" => $cuenta->genero_c,
-                            "int_tipo_cuenta" => "Cliente",
+                            "int_tipo_cuenta" => "Prospecto",
                             "int_tipo_documento_id" => "",
                             "int_cliente_autorizado" => "",
                             "int_fecha_nac_const" => ($cuenta->tipodepersona_c == 'Persona Moral') ? $cuenta->fechaconstitutiva_c : $cuenta->fechadenacimiento_c,
@@ -137,6 +137,7 @@ class Seguros_dynamics
           $token = $this->getToken();
           if($token)
           {
+            $tipoSeguro= $app_list_strings['dynamics_tipo_list'][$bean->tipo_venta_c];
             $recordTypeId = $app_list_strings['tipo_registro_sf_list'][$bean->tipo_registro_sf_c];
             $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
             $tipoDeRegistroC = $app_list_strings['area_r_list'][$bean->area];
@@ -162,7 +163,7 @@ class Seguros_dynamics
                 "statuscode" => "Contactado",
                 "int_tipo_opp" => $recordTypeId,
                 "parentaccountid" => $cuenta->int_id_dynamics_c,
-                "int_tipo" => $bean->tipo_venta_c,
+                "int_tipo" => $tipoSeguro,
                 "int_area_responsable_id" => $bean->area,
                 "int_ramo_id" => $bean->tipo,
                 "transactioncurrencyid" => $bean->monedas_c,
