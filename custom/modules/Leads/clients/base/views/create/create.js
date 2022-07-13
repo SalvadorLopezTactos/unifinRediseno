@@ -758,6 +758,9 @@
 		$('[data-name="phone_work"]').hide();
 		$('[data-name="phone_home"]').hide();
 		$('[data-name="phone_mobile"]').hide();
+        document.getElementById("Telefonom").style.display = '';
+        document.getElementById("Telefonot").style.display = '';
+        document.getElementById("Telefonoc").style.display = '';
     },
 
     fechaAsignacion: function () {
