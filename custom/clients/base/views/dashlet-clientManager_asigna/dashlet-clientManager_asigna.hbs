@@ -1,13 +1,29 @@
 <style>
-    #contenido{
-        /*border: 3px solid rgb(11, 11, 11);*/
-        text-align: center;
-        font-size: 12px;
-        width: 100%;
-        height: 130px;
-        max-width: 600px;
-        min-width: 300px;
+ 
+  .general{
+    overflow-y: scroll;
+  }
+
+  #contenido{
+    /*border: 3px solid rgb(11, 11, 11);*/
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    height: 130px;
+    max-width: 600px;
+    min-width: 300px;
+  }
+
+  #registros{
+    table{
+      min-width: 300px;
     }
+    tbody{
+      td{
+        min-width: 50px;
+      }
+    }
+  }
   /* The Modal (background) */
   .btn-Guardar {
         line-height: 18px;
@@ -109,7 +125,7 @@
   background-color: #f3f3f3;
   tbody{
     height:200px;
-    overflow-y:auto;
+    overflow:auto;
     width: 100%;
     }
   thead,tbody,tr,td,th{
@@ -132,7 +148,7 @@
 }
 </style>
 
-<table>
+<table class="general">
   <tr>
   <td>
   {{#if viewEnable}}
@@ -174,7 +190,7 @@
             <span class="close modalRecordsCancel">&times;</span>
             <h2> &nbsp;&nbsp; Registros Cancelados/Aplazados</h2>
             {{#if registrosAplazados}}
-            <table class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed;">
+            <table id = "registros" class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed;">
               <thead>
                 <tr>
                   <th class="span4">Nombre</th>
@@ -197,11 +213,11 @@
                   <tbody>
                       {{#each registrosAplazados}}
                         <tr class="border_">
-                          <td class="span4"><a href="{{href}}" target="_blank">{{name}}</a></td>
-                          <td class="span2"><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
-                          <td class="span2"><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
-                          <td class="span2"><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
-                          <td class="span2"><button class="btn btnLeadSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
+                          <td class="span4" style = "width: 90px; overflow-x: auto;"><a href="{{href}}" target="_blank">{{name}}</a></td>
+                          <td class="span2" style = "width: 25px; overflow-x: auto;"><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
+                          <td class="span2" style = "width: 25px; overflow-x: auto;"><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
+                          <td class="span2" style = "width: 25px; overflow-x: auto;"><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
+                          <td class="span2" style = "width: 30px; overflow-x: auto;"><button class="btn btnLeadSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
                         </tr>
                     {{/each}}
                     </tbody>
@@ -223,11 +239,11 @@
             <span class="close modalRecordsLost">&times;</span>
             <h2> &nbsp;&nbsp; Registros Perdidos</h2>
             {{#if registrosPerdidos}}
-            <table class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed;">
+            <table id = "registros" class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed; ">
               <thead>
                 <tr>
-                  <th class="span4">Nombre</th>
-                  <th class="span2">
+                  <th class="span4" >Nombre</th>
+                  <th class="span2" >
                     Tipo de registro
                             <!--<i id="orderByAnexo" class="fa fa-unsorted"></i>-->
                         </th>
@@ -235,22 +251,22 @@
                             Subtipo de registro
                             <!--<i id="orderBySubtipo" class="fa fa-unsorted"></i>-->
                         </th>
-                        <th class="span2">
+                        <th class="span2" >
                             Estatus
                             <!--<i id="orderByStatus" class="fa fa-unsorted"></i>-->
                         </th>
-                        <th class="span2">Acción</th>
+                        <th class="span2" >Acción</th>
                     </tr>
                   </thead>
           </div><!-- modal header -->
                   <tbody>
                       {{#each registrosPerdidos}}
                         <tr class="border_">
-                          <td class="span4"><a href="{{href}}" target="_blank">{{name}}</a></td>
-                          <td class="span2"><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
-                          <td class="span2"><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
-                          <td class="span2"><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
-                          <td class="span2"><button class="btn btnLeadLostSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
+                          <td class="span4" style = "width: 90px; overflow-x: auto;"><a href="{{href}}" target="_blank">{{name}}</a></td>
+                          <td class="span2" style = "width: 25px; overflow-x: auto;"><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
+                          <td class="span2" style = "width: 25px; overflow-x: auto;"><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
+                          <td class="span2" style = "width: 25px; overflow-x: auto;"><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
+                          <td class="span2" style = "width: 30px; overflow-x: auto;"><button class="btn btnLeadLostSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
                         </tr>
                     {{/each}}
                     </tbody>
