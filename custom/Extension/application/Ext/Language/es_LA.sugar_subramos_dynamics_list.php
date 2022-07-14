@@ -1,0 +1,29 @@
+<?php
+ // created: 2022-07-14 20:30:58
+
+$app_list_strings['subramos_dynamics_list']=array (
+  '' => '',
+  1 => 'ACCIDENTES PERSONALES',
+  2 => 'AUTOS',
+  3 => 'BICICLETAS Y SCOOTERS',
+  4 => 'CAMIONES',
+  5 => 'DENTAL / VISIÓN',
+  6 => 'DESEMPLEO',
+  7 => 'DIVERSOS MISCELANEOS',
+  8 => 'FIANZAS ADMINISTRATIVA',
+  9 => 'FIANZAS DE CRÉDITO',
+  10 => 'FIANZAS FIDELIDAD',
+  11 => 'FIANZAS JUDICIAL',
+  12 => 'GASTOS MÉDICOS MAYORES',
+  13 => 'GASTOS MÉDICOS MENORES',
+  14 => 'INCENDIO',
+  15 => 'LÍNEAS FINANCIERAS',
+  16 => 'MOTOS',
+  17 => 'MULTIPLE EMPRESARIAL',
+  18 => 'MULTIPLE FAMILIAR',
+  19 => 'PENSIONES',
+  20 => 'RAMOS TÉCNICOS',
+  21 => 'RESPONSABILIDAD CIVIL',
+  22 => 'TRANSPORTES',
+  23 => 'VIDA',
+);

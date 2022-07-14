@@ -83,3 +83,4 @@ $mod_strings['LBL_REGISTRO_NO_VALIDO'] = 'Registro no válido';
 $mod_strings['LBL_INT_ID_DYNAMICS_C'] = 'Id Dynamics';
 $mod_strings['LBL_ETAPA'] = 'Estado';
 $mod_strings['LBL_ETAPA_SEGURO'] = 'Etapa';
+$mod_strings['LBL_SUBRAMO_C'] = 'Subramo';
