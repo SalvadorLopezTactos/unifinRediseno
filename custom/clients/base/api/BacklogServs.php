@@ -142,14 +142,13 @@ class BacklogServs extends SugarApi
 			AND bl.account_id_c = '{$idCliente}'
 
 SQL;
-/**AND ((mes >= MONTH(NOW()) and anio = YEAR(NOW())) or (anio > YEAR(NOW()))) */
         if(isset($mes)){
             $query .= " and mes = '{$mes}'";
         }
         if(isset($mes)){
             $query .= " and anio = '{$anio}'";
         }
-        if($BL > 0){
+        if(isset($BL) && $BL > 0){
             $query .= " and numero_de_backlog = {$BL}";
         }
 
