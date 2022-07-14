@@ -80,19 +80,17 @@
         const chartMensual = new Chart(mensual, {
             type: 'doughnut',
             data: {
-                labels: ['0-35','35-50','50-100','> 100'],
+                labels: ['0 - 50','50 - 100','100 - 200'],
                 datasets: [{
-                    data: [25, 25, 25,25],
+                    data: [33, 34, 33],
                     backgroundColor: [
-                        'rgba(255, 99, 132)',
-                        'rgba(255, 206, 86',
+                        'rgba(255, 206, 86)',
                         'rgba(63, 191, 63)',
                         'rgb(54, 162, 235)',
                     ]
                 },
                 {
                     data: [gr,1, (100-gr)],
-                    labels: ['1','2','3'],
                     backgroundColor: [
                         "rgba(0, 0, 0, 0)",
                         "rgba(0, 0, 0, 0.6)",
@@ -132,7 +130,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: "Objetivo Anual: "+ valor2 ,
+                        text: "Objetivo Mensual: "+ valor2 ,
                         position: "top"
                     },
                     subtitle: {
@@ -153,15 +151,14 @@
         var chartAnual = new Chart(ctx1, {
             type: 'doughnut',
             data: {
-                labels: ['0-35','35-50','50-100','> 100'],
+                labels: ['0 - 50','50 - 100','100 - 200'],
                 datasets: [{
                     label: 'rangos',
-                    data: [25, 25, 25,25],
+                    data: [ 33, 34, 33],
                     needleValue: 27,
                     hoverOffset: 4,
                     backgroundColor: [
-                        'rgba(255, 99, 132)',
-                        'rgba(255, 206, 86',
+                        'rgba(255, 206, 86)',
                         'rgba(63, 191, 63)',
                         'rgb(54, 162, 235)',
                     ]
@@ -208,7 +205,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: "Objetivo : "+ valor2 ,
+                        text: "Objetivo Anual : "+ valor2 ,
                         position: "top"
                     },
                     subtitle: {

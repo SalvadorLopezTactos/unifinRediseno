@@ -138,29 +138,25 @@ class consultaObjetivos extends SugarApi
         //$GLOBALS['log']->fatal('anual', $return1);
         /*$item['presupuesto'] =  500000;
         $item['montocubierto'] =  550000;
-        $item['avance'] = 15;
+        $item['avance'] = 110;
         $item1['presupuesto'] =  1000000;
         $item1['montocubierto'] =  300000;
-        $item1['avance'] = 45;
+        $item1['avance'] = 200;
         */
-        if($item['avance'] > 0 && $item['avance']<=35){
-            $item['avance_gr'] = (($item['avance'] *100)/35) * 0.25;
-        }else if($item['avance'] > 35 && $item['avance']<=50){
-            $item['avance_gr'] = 25+(($item['avance'] - 35) * 1.665);
-        }else if($item['avance'] > 50 && $item['avance']<=100){
-            $item['avance_gr'] =  50+(($item['avance'] - 50) * 0.5);
+        if($item['avance'] > 0 && $item['avance']<=49.9){
+            $item['avance_gr'] = (($item['avance'] *100)/50) * 0.33;
+        }else if($item['avance'] >= 50 && $item['avance']<=100){
+            $item['avance_gr'] =  33+(($item['avance'] - 50) * 0.66);
         }else if($item['avance'] > 100){
-            $item['avance_gr'] = 75 + (($item['avance']-100) * .25);
+            $item['avance_gr'] = 66 + (($item['avance']-100) * .33);
         }
 
-        if($item1['avance'] > 0 && $item1['avance']<=35){
-            $item1['avance_gr'] = (($item1['avance'] *100)/35) * 0.25;
-        }else if($item1['avance'] > 35 && $item1['avance']<=50){
-            $item1['avance_gr'] = 25+(($item1['avance'] - 35) * 1.665);
-        }else if($item1['avance'] > 50 && $item1['avance']<=100){
-            $item1['avance_gr'] =  50+(($item1['avance'] - 50) * 0.5);
+        if($item1['avance'] > 0 && $item1['avance']<=49.9){
+            $item1['avance_gr'] = (($item1['avance'] *100)/50) * 0.33;
+        }else if($item1['avance'] >= 50 && $item1['avance']<=100){
+            $item1['avance_gr'] =  33+(($item1['avance'] - 50) * 0.66);
         }else if($item1['avance'] > 100){
-            $item1['avance_gr'] = 75 + (($item1['avance']-100) * .25);
+            $item1['avance_gr'] = 66 + (($item1['avance']-100) * .33);
         }
 
         $salida = array_merge(
