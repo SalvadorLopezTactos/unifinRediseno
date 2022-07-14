@@ -30,6 +30,7 @@
     },
 
     crearLead: function (evt) {
+        /*
         var objLead = {
             action: 'edit',
             copy: true,
@@ -40,8 +41,8 @@
         };
 
         app.controller.loadView(objLead);
-        // update the browser URL with the proper
-        app.router.navigate('#Leads/create', { trigger: false });
+        */
+        app.router.navigate('#Leads/create', { trigger: true });
     },
 
     asignarPorCancelados: function () {
