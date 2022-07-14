@@ -522,7 +522,8 @@
                     if(data['tel'] == '0'){
                         reus = true;
                     }else{
-                        tel_client = data['tel']; 
+                        tel_client = data['tel'];
+                        name_client = data['nombre']; 
                     }
 
                     if (!reus) {
@@ -536,7 +537,7 @@
                                 autoClose: false,
                                 onConfirm: function () {
                                 //context.createcall(context.resultCallback);
-                                context.createcall(tel_client,idcall);
+                                context.createcall(tel_client,idcall,name_client);
                                 },
                             });
                             } else {
@@ -579,13 +580,13 @@
         });
     },
 
-    createcall: function (tel_client,idcall) {
+    createcall: function (tel_client,idcall,nameClient) {
         //Recupera variables para petición
         self = this;
         var posiciones = App.user.attributes.posicion_operativa_c;
         var gen = App.user.attributes.llamada_genesys_c;
         var posicion = '';
-        var name_client = this.model.get('name');
+        var name_client = nameClient;
         if(posiciones.includes(3)) posicion = 'Ventas';
         if(posiciones.includes(4)) posicion = 'Staff';
         var Params = {

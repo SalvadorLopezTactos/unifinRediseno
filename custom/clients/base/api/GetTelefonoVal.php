@@ -41,13 +41,14 @@ class GetTelefonoVal extends SugarApi
                     $tel = $this->existsIn_Leads($parent_id);
                 }
                 $GLOBALS['log']->fatal('tel', $tel);
-                if($tel == "0"){
+                if($tel['tel'] == "0"){
                     $response_Services["status"] = "210";
                     $response_Services["tel"] = "0";
-                    $response_Services["detalle"] = "reus";
+                    $response_Services["nombre"] = $tel['nombre'];
                 }else{
                     $response_Services["status"] = "200";
-                    $response_Services["tel"] = $tel;
+                    $response_Services["tel"] = $tel['tel'];
+                    $response_Services["nombre"] = $tel['nombre'];
                 }
             }else {
                 $response_Services["status"] = "300";
@@ -89,13 +90,17 @@ class GetTelefonoVal extends SugarApi
         while($row = $GLOBALS['db']->fetchByAssoc($result) ){
             $tel = $row['telefono'];
             $reus = $row['reus'];
+            $name = $row['full_name'];
         }
 
         if($reus == "1"){
             $tel = "0";
         }
-        
-        return $tel;
+
+        $res["nombre"] = $name;
+        $res["tel"] = $tel;
+
+        return $res;
     }
 
     public function existsIn_Accounts($id)
@@ -115,13 +120,17 @@ class GetTelefonoVal extends SugarApi
         while($row = $GLOBALS['db']->fetchByAssoc($result) ){
             $tel = $row['telefono'];
             $reus = $row['registro_reus_c'];
+            $name = $row['full_name'];
         }
 
         if($reus == "1"){
             $tel = "0";
         }
         
-        return $tel;
+        $res["nombre"] = $name;
+        $res["tel"] = $tel;
+
+        return $res;
     }
 
         
