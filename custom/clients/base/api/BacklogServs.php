@@ -127,6 +127,8 @@ class BacklogServs extends SugarApi
         global $db, $current_user;
         $idCliente = $args['id'];
         $BL = $args['bl'];
+        $mes =$args['mes'];
+        $anio =$args['anio'];
 
         $query = <<<SQL
             SELECT bl.id AS GUID, bl.numero_de_backlog AS noBacklog, bl.mes AS mes, bl.anio AS anio, estatus_de_la_operacion AS estatus, tipo AS tipo, IFNULL(monto_final_comprometido_c,0) AS monto, IFNULL(ri_final_comprometida_c,0) AS rentaInicial,
@@ -137,9 +139,16 @@ class BacklogServs extends SugarApi
 			FROM lev_backlog bl
 			INNER JOIN lev_backlog_cstm cs ON bl.id = cs.id_c
 			WHERE deleted = 0 and estatus_de_la_operacion = 'Comprometida' and tipo_de_operacion NOT IN ('Carga General')
-			AND bl.account_id_c = '{$idCliente}' AND ((mes >= MONTH(NOW()) and anio = YEAR(NOW())) or (anio > YEAR(NOW())))
+			AND bl.account_id_c = '{$idCliente}'
 
 SQL;
+/**AND ((mes >= MONTH(NOW()) and anio = YEAR(NOW())) or (anio > YEAR(NOW()))) */
+        if(isset($mes)){
+            $query .= " and mes = '{$mes}'";
+        }
+        if(isset($mes)){
+            $query .= " and anio = '{$anio}'";
+        }
         if($BL > 0){
             $query .= " and numero_de_backlog = {$BL}";
         }
