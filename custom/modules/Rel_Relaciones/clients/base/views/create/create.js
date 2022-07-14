@@ -1550,6 +1550,11 @@
                                       faltantes.push('Nombre Comercial');
                                   }
                                 }
+								if(this.model.get("tipodecontacto") === "Seguros") {
+									if (data[0].contents.genero_c == "") faltantes.push('Género');
+									if (data[0].contents.email1 == "") faltantes.push('Correo electrónico');
+									if (data[2].contents.records.length == 0) faltantes.push('Teléfono');
+								}
                             }
                         }
                         //Valida Relación: Fiador
@@ -2596,6 +2601,5 @@
         }else{
          callback(null, fields, errors);
         }
-},
-
+	},
 })
