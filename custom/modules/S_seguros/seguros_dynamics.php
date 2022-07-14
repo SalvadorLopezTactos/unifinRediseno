@@ -139,11 +139,12 @@ class Seguros_dynamics
           {
             $tipoSeguro= $app_list_strings['dynamics_tipo_list'][$bean->tipo_venta_c];
             $recordTypeId = $app_list_strings['tipo_registro_sf_list'][$bean->tipo_registro_sf_c];
+            $divisa=$app_list_strings['monedas_list'][$bean->monedas_c];
             $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
             $tipoDeRegistroC = $app_list_strings['area_r_list'][$bean->area];
             $ramoC = $app_list_strings['subramos_list'][$bean->subramos_c];
             $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
-            $oportunidadInternacionalC = $app_list_strings['nacional_list'][$bean->nacional_c];
+            $oportunidadInternacionalC = $app_list_strings['nacional_dynamics_list'][$bean->nacional_c];
             $oficinaC = $app_list_strings['oficina_list'][$bean->oficina_c];
             $kamC = $app_list_strings['kam_list'][$bean->kam_c];
             $idUsuario = ($bean->tipo_referenciador == 1) ? $bean->user_id1_c : $bean->user_id2_c;
@@ -164,19 +165,19 @@ class Seguros_dynamics
                 "int_tipo_opp" => $recordTypeId,
                 "parentaccountid" => $cuenta->int_id_dynamics_c,
                 "int_tipo" => $tipoSeguro,
-                "int_area_responsable_id" => $bean->area,
-                "int_ramo_id" => $bean->tipo,
-                "transactioncurrencyid" => $bean->monedas_c,
-                "int_oportunidad_internacional" => $bean->nacional_c,
-                "int_localidad_id" => $bean->oficina_c,
+                "int_area_responsable_id" => "AREA-0000000018",
+                "int_ramo_id" => "RAMO-0000000001",
+                "transactioncurrencyid" => $divisa,
+                "int_oportunidad_internacional" => $oportunidadInternacionalC,
+                "int_localidad_id" => "LOC-0000000003",
                 "int_kam_santander_unifin_id" => "",
-                "int_vendedor_id" => $bean->kam_c,
-                "actualclosedate" => $bean->fecha_cierre_c,
+                "int_vendedor_id" => "CON-0000001052",
+                "actualclosedate" => $closeDate,
                 "int_prima_total_objetivo" => $bean->prima_obj_c,
                 "int_ing_objetivo_porcentaje" => "",
                 "estimatedvalue" => "",
                 "ownerid" => "",
-                "int_tipo_poliza" => "",
+                "int_tipo_poliza" => "TIPOPOL-0000000025",
                 "int_id_sugar" => $bean->id,
                 "name" => $bean->name
             );
@@ -402,7 +403,7 @@ class Seguros_dynamics
                       if($token)
                       {
                         $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
-                        $forma_pago = $app_list_strings['forma_pago_list'][$bean->forma_pago];
+                        $forma_pago = $app_list_strings['forma_pago_dynamics_list'][$bean->forma_pago];
                         $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
                         $aseguradora_c = $app_list_strings['aseguradoras_list'][$bean->aseguradora_c];
                         $ejecutivo_c = $app_list_strings['ejecutivo_list'][$bean->ejecutivo_c];
@@ -414,7 +415,6 @@ class Seguros_dynamics
                         $content = json_encode(array(
                           "int_etapa" => "Cierre",
                           "statuscode" => "Ganada",
-                          "int_etapa" => $stageName,
                           "feeC" => $bean->fee_c,
                           "feePC" => $bean->fee_p_c,
                           "formaPagoEmitidaC" => $forma_pago,
@@ -464,7 +464,6 @@ class Seguros_dynamics
         		$arreglo = array(
               "int_etapa" => "Cierre",
               "statuscode" => "No Ganada",
-              "int_etapa" => $stageName,
               "int_razon_perdida" => $razonPerdida,
               "int_comentarios_razon_perdida" => $bean->comentarios_c,
               "int_ramo_renovable" => $no_renovable_c
@@ -500,7 +499,7 @@ class Seguros_dynamics
         	$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
               "int_etapa" => "SOLICITUDCOTIZACION",
-              "int_etapa" => $stageName
+              "statuscode"=>""
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Solicitud cotización: '. $url);
             $GLOBALS['log']->fatal($content);
