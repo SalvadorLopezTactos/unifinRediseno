@@ -45,6 +45,7 @@ class GetTelefonoVal extends SugarApi
                     $response_Services["status"] = "210";
                     $response_Services["tel"] = "0";
                     $response_Services["nombre"] = $tel['nombre'];
+                    $response_Services["detalle"] = "reus";
                 }else{
                     $response_Services["status"] = "200";
                     $response_Services["tel"] = $tel['tel'];
