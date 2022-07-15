@@ -141,14 +141,15 @@ class Seguros_dynamics
             $recordTypeId = $app_list_strings['tipo_registro_sf_list'][$bean->tipo_registro_sf_c];
             $ramoID = $app_list_strings['negocio_dynamics_list'][$bean->tipo];
             $subRamo = $app_list_strings['subramos_id_dyn_list'][$bean->subramos_c];
-            $areaID= $app_list_strings['area_dyn_map_list'][$bean->ramo."_".$bean->area];
+            $areaID= $app_list_strings['area_dyn_map_list'][$bean->tipo."_".$bean->area];
             $oficinaID= $app_list_strings['oficina_dyn_map_list'][$bean->oficina_c];
+            $tipoPolizaID= $app_list_strings['poliza_dynamics_list'][$bean->tipo_poliza_c];
             $divisa=$app_list_strings['monedas_list'][$bean->monedas_c];
             $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
             $tipoDeRegistroC = $app_list_strings['area_r_list'][$bean->area];
             $ramoC = $app_list_strings['subramos_list'][$bean->subramos_c];
             $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
-            $oportunidadInternacionalC = $app_list_strings['nacional_dynamics_list'][$bean->nacional_c];
+            $oportunidadInternacionalC = ($bean->nacional_c) ? $app_list_strings['nacional_dynamics_list'][$bean->nacional_c]:'Nacional';
             $oficinaC = $app_list_strings['oficina_list'][$bean->oficina_c];
             $kamC = $app_list_strings['kam_list'][$bean->kam_c];
             $idUsuario = ($bean->tipo_referenciador == 1) ? $bean->user_id1_c : $bean->user_id2_c;
@@ -182,7 +183,7 @@ class Seguros_dynamics
                 "int_ing_objetivo_porcentaje" => "",
                 "estimatedvalue" => "",
                 "ownerid" => "",
-                "int_tipo_poliza" => "TIPOPOL-0000000025",
+                "int_tipo_poliza" => $tipoPolizaID,
                 "int_id_sugar" => $bean->id,
                 "name" => $bean->name
             );
