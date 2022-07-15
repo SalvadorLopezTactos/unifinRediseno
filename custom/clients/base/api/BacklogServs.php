@@ -129,6 +129,7 @@ class BacklogServs extends SugarApi
         $BL = $args['bl'];
         $mes =$args['mes'];
         $anio =$args['anio'];
+        $response="Sin resultados. Favor de agregar los parámetros ";
 
         $query = <<<SQL
             SELECT bl.id AS GUID, bl.numero_de_backlog AS noBacklog, bl.mes AS mes, bl.anio AS anio, estatus_de_la_operacion AS estatus, tipo AS tipo, IFNULL(monto_final_comprometido_c,0) AS monto, IFNULL(ri_final_comprometida_c,0) AS rentaInicial,
@@ -142,51 +143,66 @@ class BacklogServs extends SugarApi
 			AND bl.account_id_c = '{$idCliente}'
 
 SQL;
+
+        if(!isset($idCliente)){
+            $response.="{id} ";
+        }
         if(isset($mes)){
             $query .= " and mes = '{$mes}'";
+        }else{
+            $response.="{mes} ";
         }
         if(isset($mes)){
             $query .= " and anio = '{$anio}'";
+        }else{
+            $response.="{anio} ";
         }
         if(isset($BL) && $BL > 0){
             $query .= " and numero_de_backlog = {$BL}";
         }
 
-        $rows = $db->query($query);
+        if($response =="Sin resultados. Favor de agregar los parámetros "){
 
-        if (mysqli_num_rows($rows) == 0){
-            $Backlogs = array();
-        }else {
-            while ($BackLog = $db->fetchByAssoc($rows)) {
-                $Backlogs[] = array(
-                    "GUID" => $BackLog['GUID'],
-                    "noBacklog" => intval($BackLog['noBacklog']),
-                    "mes" => intval($BackLog['mes']),
-                    "anio" => intval($BackLog['anio']),
-                    "estatus" => $BackLog['estatus'],
-                    "tipo" => $BackLog['tipo'],
-                    "monto" => floatval($BackLog['monto']),
-                    "rentaInicial" => floatval($BackLog['rentaInicial']),
-                    "idCliente" => intval($BackLog['idCliente']),
-                    "montoReal" => floatval($BackLog['montoReal']),
-                    "riReal" => floatval($BackLog['riReal']),
-                    "montoOriginal" => floatval($BackLog['montoOriginal']),
-                    "montoDevuelta" => floatval($BackLog['montoDevuelta']),
-                    "etapa" => $BackLog['etapa'],
-                    "prospecto" => floatval($BackLog['prospecto']),
-                    "credito" => floatval($BackLog['credito']),
-                    "rechazada" => floatval($BackLog['rechazada']),
-                    "sinSolicitud" => floatval($BackLog['sinSolicitud']),
-                    "conSolicitud" => floatval($BackLog['conSolicitud']),
-                    "riProspecto" => floatval($BackLog['riProspecto']),
-                    "riCredito" => floatval($BackLog['riCredito']),
-                    "riRechazada" => floatval($BackLog['riRechazada']),
-                    "riSinSolicitud" => floatval($BackLog['riSinSolicitud']),
-                    "riConSolicitud" => floatval($BackLog['riConSolicitud']),
-                    "colocacionPipe" => floatval($BackLog['colocacionPipe'])
-                );
+            $rows = $db->query($query);
+
+            if (mysqli_num_rows($rows) == 0){
+                $Backlogs = array();
+            }else {
+                while ($BackLog = $db->fetchByAssoc($rows)) {
+                    $Backlogs[] = array(
+                        "GUID" => $BackLog['GUID'],
+                        "noBacklog" => intval($BackLog['noBacklog']),
+                        "mes" => intval($BackLog['mes']),
+                        "anio" => intval($BackLog['anio']),
+                        "estatus" => $BackLog['estatus'],
+                        "tipo" => $BackLog['tipo'],
+                        "monto" => floatval($BackLog['monto']),
+                        "rentaInicial" => floatval($BackLog['rentaInicial']),
+                        "idCliente" => intval($BackLog['idCliente']),
+                        "montoReal" => floatval($BackLog['montoReal']),
+                        "riReal" => floatval($BackLog['riReal']),
+                        "montoOriginal" => floatval($BackLog['montoOriginal']),
+                        "montoDevuelta" => floatval($BackLog['montoDevuelta']),
+                        "etapa" => $BackLog['etapa'],
+                        "prospecto" => floatval($BackLog['prospecto']),
+                        "credito" => floatval($BackLog['credito']),
+                        "rechazada" => floatval($BackLog['rechazada']),
+                        "sinSolicitud" => floatval($BackLog['sinSolicitud']),
+                        "conSolicitud" => floatval($BackLog['conSolicitud']),
+                        "riProspecto" => floatval($BackLog['riProspecto']),
+                        "riCredito" => floatval($BackLog['riCredito']),
+                        "riRechazada" => floatval($BackLog['riRechazada']),
+                        "riSinSolicitud" => floatval($BackLog['riSinSolicitud']),
+                        "riConSolicitud" => floatval($BackLog['riConSolicitud']),
+                        "colocacionPipe" => floatval($BackLog['colocacionPipe'])
+                    );
+                }
             }
+
+        }else{
+            $Backlogs=array("Error" =>$response);
         }
+
         return $Backlogs;
     }
 
