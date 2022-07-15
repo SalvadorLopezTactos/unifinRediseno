@@ -84,3 +84,4 @@ $mod_strings['LBL_INT_ID_DYNAMICS_C'] = 'Id Dynamics';
 $mod_strings['LBL_ETAPA'] = 'Estado';
 $mod_strings['LBL_ETAPA_SEGURO'] = 'Etapa';
 $mod_strings['LBL_SUBRAMO_C'] = 'Subramo';
+$mod_strings['LBL_TIPO_POLIZA'] = 'Tipo Póliza';
