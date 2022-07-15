@@ -140,7 +140,9 @@ class Seguros_dynamics
             $tipoSeguro= $app_list_strings['dynamics_tipo_list'][$bean->tipo_venta_c];
             $recordTypeId = $app_list_strings['tipo_registro_sf_list'][$bean->tipo_registro_sf_c];
             $ramoID = $app_list_strings['negocio_dynamics_list'][$bean->tipo];
-            $subRamo = $app_list_strings['subramos_id_dyn_list'][$bean->subramo_c];
+            $subRamo = $app_list_strings['subramos_id_dyn_list'][$bean->subramos_c];
+            $areaID= $app_list_strings['area_dyn_map_list'][$bean->ramo."_".$bean->area];
+            $oficinaID= $app_list_strings['oficina_dyn_map_list'][$bean->oficina_c];
             $divisa=$app_list_strings['monedas_list'][$bean->monedas_c];
             $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
             $tipoDeRegistroC = $app_list_strings['area_r_list'][$bean->area];
@@ -167,12 +169,12 @@ class Seguros_dynamics
                 "int_tipo_opp" => $recordTypeId,
                 "parentaccountid" => $cuenta->int_id_dynamics_c,
                 "int_tipo" => $tipoSeguro,
-                "int_area_responsable_id" => "AREA-0000000018",
+                "int_area_responsable_id" => $areaID,
                 "int_ramo_id" => $ramoID,
                 "int_subramo_id"=>$subRamo,
                 "transactioncurrencyid" => $divisa,
                 "int_oportunidad_internacional" => $oportunidadInternacionalC,
-                "int_localidad_id" => "LOC-0000000003",
+                "int_localidad_id" => $oficinaID,
                 "int_kam_santander_unifin_id" => "",
                 "int_vendedor_id" => "CON-0000001052",
                 "actualclosedate" => $bean->fecha_cierre_c,

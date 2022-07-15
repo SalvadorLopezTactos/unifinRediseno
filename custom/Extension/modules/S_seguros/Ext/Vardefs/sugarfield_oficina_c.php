@@ -1,7 +1,9 @@
 <?php
- // created: 2020-08-19 15:39:07
+ // created: 2022-07-15 00:24:48
 $dictionary['S_seguros']['fields']['oficina_c']['labelValue']='Oficina';
 $dictionary['S_seguros']['fields']['oficina_c']['dependency']='';
+$dictionary['S_seguros']['fields']['oficina_c']['required_formula']='';
+$dictionary['S_seguros']['fields']['oficina_c']['readonly_formula']='';
 $dictionary['S_seguros']['fields']['oficina_c']['visibility_grid']='';
 
  ?>
