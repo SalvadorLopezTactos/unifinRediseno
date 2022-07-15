@@ -152,7 +152,7 @@ SQL;
         }else{
             $response.="{mes} ";
         }
-        if(isset($mes)){
+        if(isset($anio)){
             $query .= " and anio = '{$anio}'";
         }else{
             $response.="{anio} ";
