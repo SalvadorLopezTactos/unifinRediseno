@@ -216,59 +216,70 @@ array (
               ),
               5 => 
               array (
+                'name' => 'subramos_c',
+                'label' => 'LBL_SUBRAMOS',
+              ),
+              6 => 
+              array (
+                'readonly' => false,
+                'name' => 'tipo_poliza_c',
+                'label' => 'LBL_TIPO_POLIZA',
+              ),
+              7 => 
+              array (
                 'name' => 'tipo_venta_c',
                 'label' => 'LBL_TIPO_VENTA',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'tipo_sf_c',
                 'label' => 'LBL_TIPO_SF',
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'ejecutivo_c',
                 'label' => 'LBL_EJECUTIVO',
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'tipo_referenciador',
                 'label' => 'LBL_TIPO_REFERENCIADOR',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'referenciador',
                 'studio' => 'visible',
                 'label' => 'LBL_REFERENCIADOR',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'region',
                 'label' => 'LBL_REGION',
                 'readonly' => true,
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'empleados_c',
                 'studio' => 'visible',
                 'label' => 'LBL_EMPLEADOS',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'departamento_c',
                 'label' => 'LBL_DEPARTAMENTO',
                 'readonly' => true,
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'etapa',
                 'label' => 'LBL_ETAPA',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'area',
                 'label' => 'LBL_AREA',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'prima_objetivo',
                 'label' => 'LBL_PRIMA_OBJ_C',
@@ -286,110 +297,108 @@ array (
                   ),
                 ),
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'tipo_cambio_obj',
                 'label' => 'LBL_TIPO_CAMBIO_OBJ',
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'fecha_req',
                 'label' => 'LBL_FECHA_REQ',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'fecha_cierre_c',
                 'label' => 'LBL_FECHA_CIERRE',
               ),
-              19 => 
+              21 => 
               array (
                 'name' => 'motivos_c',
                 'studio' => 'visible',
                 'label' => 'LBL_MOTIVOS',
               ),
-              20 => 
+              22 => 
               array (
                 'name' => 'motivo_no_cotizado_c',
                 'label' => 'LBL_MOTIVO_NO_COTIZADO',
               ),
-              21 => 
+              23 => 
               array (
                 'name' => 'requiere_ayuda_c',
                 'label' => 'LBL_REQUIERE_AYUDA',
               ),
-              22 => 
+              24 => 
               array (
                 'name' => 'servicios_a_incluir_c',
                 'label' => 'LBL_SERVICIOS_A_INCLUIR',
               ),
-              23 => 
-              array (
-                'name' => 'subramos_c',
-                'label' => 'LBL_SUBRAMOS',
-              ),
-              24 => 
+              25 => 
               array (
                 'name' => 'oficina_c',
                 'label' => 'LBL_OFICINA',
               ),
-              25 => 
+              26 => 
+              array (
+              ),
+              27 => 
               array (
                 'name' => 'kam_c',
                 'label' => 'LBL_KAM',
               ),
-              26 => 
+              28 => 
               array (
                 'name' => 'nacional_c',
                 'label' => 'LBL_NACIONAL',
               ),
-              27 => 
+              29 => 
               array (
                 'name' => 'fee_c',
                 'label' => 'LBL_FEE',
               ),
-              28 => 
+              30 => 
               array (
                 'name' => 'fee_p_c',
                 'label' => 'LBL_FEE_P',
               ),
-              29 => 
+              31 => 
               array (
                 'name' => 'razon_perdida_c',
                 'label' => 'LBL_RAZON_PERDIDA',
               ),
-              30 => 
+              32 => 
               array (
                 'name' => 'comentarios_c',
                 'studio' => 'visible',
                 'label' => 'LBL_COMENTARIOS',
               ),
-              31 => 
+              33 => 
               array (
                 'name' => 'no_renovable_c',
                 'label' => 'LBL_NO_RENOVABLE',
               ),
-              32 => 
+              34 => 
               array (
                 'name' => 'motivos_revision_c',
                 'studio' => 'visible',
                 'label' => 'LBL_MOTIVOS_REVISION',
               ),
-              33 => 
+              35 => 
               array (
                 'name' => 'info_actual',
                 'label' => 'LBL_INFO_ACTUAL',
               ),
-              34 => 
+              36 => 
               array (
                 'name' => 'notifica_kam_c',
                 'label' => 'LBL_NOTIFICA_KAM',
               ),
-              35 => 
+              37 => 
               array (
                 'name' => 'registro_no_valido_c',
                 'label' => 'LBL_REGISTRO_NO_VALIDO',
               ),
-              36 => 
+              38 => 
               array (
               ),
             ),
@@ -549,7 +558,7 @@ array (
               5 => 
               array (
                 'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',			  
+                'label' => 'LBL_BLANK_SPACE',
               ),
               6 => 
               array (
