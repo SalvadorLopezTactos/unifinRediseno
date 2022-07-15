@@ -140,7 +140,7 @@ class Seguros_dynamics
             $tipoSeguro= $app_list_strings['dynamics_tipo_list'][$bean->tipo_venta_c];
             $recordTypeId = $app_list_strings['tipo_registro_sf_list'][$bean->tipo_registro_sf_c];
             $ramoID = $app_list_strings['negocio_dynamics_list'][$bean->tipo];
-            $subRamo = $app_list_strings['subramos_id_dyn_list'][$bean->subramo_c];
+            $subRamo = $app_list_strings['subramos_id_dyn_list'][$bean->subramos_c];
             $divisa=$app_list_strings['monedas_list'][$bean->monedas_c];
             $type = $app_list_strings['tipo_sf_list'][$bean->tipo_sf_c];
             $tipoDeRegistroC = $app_list_strings['area_r_list'][$bean->area];
