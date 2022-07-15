@@ -121,6 +121,7 @@ order by a.date_modified desc";
         $records=array('records'=>array());
 
         //Query para obtener leads 0 pendiente de asignar
+        /*
         $query = "SELECT l.id,
 lc.status_management_c,
 lc.tipo_registro_c,
@@ -143,7 +144,7 @@ order by l.date_modified desc;";
         while($row = $db->fetchByAssoc($result)){
             array_push($records['records'], $row);
         }
-
+*/
         //Query para obtener cuentas 0 pendiente de asignar
         $queryAccs="SELECT * from (
             SELECT a.id as id, ac.tipo_registro_cuenta_c as tipo_registro_c,ac.subtipo_registro_cuenta_c as subtipo_registro_c,
