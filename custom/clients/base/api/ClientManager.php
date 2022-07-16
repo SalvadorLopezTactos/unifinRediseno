@@ -390,36 +390,48 @@ SQL;
         if(count($registros_interesado)>0){
             for ($i=0; $i <count($registros_interesado) ; $i++) { 
                 $monto_prospecto_interesado+=floatval($registros_interesado[$i]['Monto_Cuenta']);
+                //Estableciendo formato a dos decimales
+                $registros_interesado[$i]['Monto_Cuenta']=number_format(floatval($registros_interesado[$i]['Monto_Cuenta']),2);
             }
         }
 
         if(count($registros_int_expediente)>0){
             for ($i=0; $i <count($registros_int_expediente) ; $i++) { 
                 $monto_int_expediente+=floatval($registros_int_expediente[$i]['Monto_Cuenta']);
+                //Estableciendo formato a dos decimales
+                $registros_int_expediente[$i]['Monto_Cuenta']=number_format(floatval($registros_int_expediente[$i]['Monto_Cuenta']),2);
             }
         }
 
         if(count($registros_credito)>0){
             for ($i=0; $i <count($registros_credito) ; $i++) { 
                 $monto_prospecto_credito+=floatval($registros_credito[$i]['Monto_Cuenta']);
+                //Estableciendo formato a dos decimales
+                $registros_credito[$i]['Monto_Cuenta']=number_format(floatval($registros_credito[$i]['Monto_Cuenta']),2);
             }
         }
 
         if(count($registros_cliente_linea_sin_operar)>0){
             for ($i=0; $i <count($registros_cliente_linea_sin_operar) ; $i++) { 
                 $monto_cliente_linea_sin_operar+=floatval($registros_cliente_linea_sin_operar[$i]['Monto_Cuenta']);
+                //Estableciendo formato a dos decimales
+                $registros_cliente_linea_sin_operar[$i]['Monto_Cuenta']=number_format(floatval($registros_cliente_linea_sin_operar[$i]['Monto_Cuenta']),2);
             }
         }
 
         if(count($registros_cliente_activo)>0){
             for ($i=0; $i <count($registros_cliente_activo) ; $i++) { 
                 $monto_cliente_activo+=floatval($registros_cliente_activo[$i]['Monto_Cuenta']);
+                //Estableciendo formato a dos decimales
+                $registros_cliente_activo[$i]['Monto_Cuenta']=number_format(floatval($registros_cliente_activo[$i]['Monto_Cuenta']),2);
             }
         }
 
         if(count($registros_cliente_perdido)>0){
             for ($i=0; $i <count($registros_cliente_perdido) ; $i++) { 
                 $monto_cliente_perdido+=floatval($registros_cliente_perdido[$i]['Monto_Cuenta']);
+                //Estableciendo formato a dos decimales
+                $registros_cliente_perdido[$i]['Monto_Cuenta']=number_format(floatval($registros_cliente_perdido[$i]['Monto_Cuenta']),2);
             }
         }
         
@@ -527,9 +539,9 @@ SQL;
 
         //$GLOBALS['log']->fatal(print_r(array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta),true));
         if($lineas!=''){
-            return array('monto_total'=>number_format($monto, 2),'monto_cuenta'=>number_format($monto_cuenta,2),'diferencia_dias'=>$diferencia_dias);
+            return array('monto_total'=>number_format($monto, 2),'monto_cuenta'=>$monto_cuenta,'diferencia_dias'=>$diferencia_dias);
         }else{
-            return array('monto_total'=>number_format($monto, 2),'monto_cuenta'=>number_format($monto_cuenta,2));
+            return array('monto_total'=>number_format($monto, 2),'monto_cuenta'=>$monto_cuenta);
         }
         
     }
