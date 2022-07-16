@@ -191,7 +191,7 @@ SQL;
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                 //array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta)
                 $montos_prospecto_interesado=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_interesado,'');
-                $monto_prospecto_interesado+=$montos_prospecto_interesado['monto_total'];
+                //$monto_prospecto_interesado+=$montos_prospecto_interesado['monto_total'];
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_interesado=array(
                     "Id"=>$id,
@@ -214,7 +214,7 @@ SQL;
                 //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                 $montos_int_expediente=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_int_expediente,'');
-                $monto_int_expediente+=$montos_int_expediente['monto_total'];
+                //$monto_int_expediente+=$montos_int_expediente['monto_total'];
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_int_expediente=array(
                     "Id"=>$id,
@@ -237,7 +237,7 @@ SQL;
                 //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                 // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                 $montos_prospecto_credito=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_prospecto_credito,'');
-                $monto_prospecto_credito=+$montos_prospecto_credito['monto_total'];
+                //$monto_prospecto_credito=+$montos_prospecto_credito['monto_total'];
                 $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                 $array_prospecto_credito=array(
                     "Id"=>$id,
@@ -300,7 +300,7 @@ SQL;
                     //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                     // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                     $montos_cliente_linea_sin_operar=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_linea_sin_operar,'lineas');
-                    $monto_cliente_linea_sin_operar+=$montos_cliente_linea_sin_operar['monto_total'];
+                    //$monto_cliente_linea_sin_operar+=$montos_cliente_linea_sin_operar['monto_total'];
 
                     $diferencia_dias_vigencia=$montos_cliente_linea_sin_operar['diferencia_dias'];
                     //Si la diferencia es negativa, la linea sigue vigente, si es positiva, la linea ya está vencida
@@ -336,7 +336,7 @@ SQL;
                     //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                     // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                     $montos_cliente_activo=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_activo,'');
-                    $monto_cliente_activo+=$montos_cliente_activo['monto_total'];
+                    //$monto_cliente_activo+=$montos_cliente_activo['monto_total'];
                     $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                     $array_cliente_activo=array(
                         "Id"=>$id,
@@ -359,7 +359,7 @@ SQL;
                     //Obteniendo solicitudes relacionadas al usuario logueado sin tomar en cuenta las canceladas ni rechazadas
                     // tct_etapa_ddw_c - R, estatus_c - R, K, CM
                     $montos_cliente_perdido=$this->getSolicitudes($modulo,$id_usuario,$id,$monto_cliente_perdido,'');
-                    $monto_cliente_perdido+=$montos_cliente_perdido['monto_total'];
+                    //$monto_cliente_perdido+=$montos_cliente_perdido['monto_total'];
                     $dias_etapa=$this->getDiasEtapa($modulo,$id,$subtipo);
                     $array_cliente_perdido=array(
                         "Id"=>$id,
@@ -385,6 +385,43 @@ SQL;
         array_multisort($Dias_Vigencia, SORT_ASC, $registros_cliente_linea_sin_operar);
         //$GLOBALS['log']->fatal("DESPUÉS:");
         //$GLOBALS['log']->fatal(print_r($registros_cliente_linea_sin_operar,true));
+
+        //Calculando monto total de cada sección
+        if(count($registros_interesado)>0){
+            for ($i=0; $i <count($registros_interesado) ; $i++) { 
+                $monto_prospecto_interesado+=floatval($registros_interesado[$i]['Monto_Cuenta']);
+            }
+        }
+
+        if(count($registros_int_expediente)>0){
+            for ($i=0; $i <count($registros_int_expediente) ; $i++) { 
+                $monto_int_expediente+=floatval($registros_int_expediente[$i]['Monto_Cuenta']);
+            }
+        }
+
+        if(count($registros_credito)>0){
+            for ($i=0; $i <count($registros_credito) ; $i++) { 
+                $monto_prospecto_credito+=floatval($registros_credito[$i]['Monto_Cuenta']);
+            }
+        }
+
+        if(count($registros_cliente_linea_sin_operar)>0){
+            for ($i=0; $i <count($registros_cliente_linea_sin_operar) ; $i++) { 
+                $monto_cliente_linea_sin_operar+=floatval($registros_cliente_linea_sin_operar[$i]['Monto_Cuenta']);
+            }
+        }
+
+        if(count($registros_cliente_activo)>0){
+            for ($i=0; $i <count($registros_cliente_activo) ; $i++) { 
+                $monto_cliente_activo+=floatval($registros_cliente_activo[$i]['Monto_Cuenta']);
+            }
+        }
+
+        if(count($registros_cliente_perdido)>0){
+            for ($i=0; $i <count($registros_cliente_perdido) ; $i++) { 
+                $monto_cliente_perdido+=floatval($registros_cliente_perdido[$i]['Monto_Cuenta']);
+            }
+        }
         
         $response=array(
             "Lead_Sin_Contactar"=>array(
