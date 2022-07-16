@@ -16,7 +16,7 @@
          */
         Handlebars.registerHelper("customFormatNumber", function (text) {
             if (text != '' && text != null) {
-                var n = Number(text);
+                var n = Number(text.toFixed(2));
                 if (n != 0 && n != '' && n != null) {
                     var str = n + '';
                     x = str.split('.');
