@@ -490,9 +490,9 @@ SQL;
 
         //$GLOBALS['log']->fatal(print_r(array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta),true));
         if($lineas!=''){
-            return array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta,'diferencia_dias'=>$diferencia_dias);
+            return array('monto_total'=>number_format($monto, 2),'monto_cuenta'=>number_format($monto_cuenta,2),'diferencia_dias'=>$diferencia_dias);
         }else{
-            return array('monto_total'=>$monto,'monto_cuenta'=>$monto_cuenta);
+            return array('monto_total'=>number_format($monto, 2),'monto_cuenta'=>number_format($monto_cuenta,2));
         }
         
     }
