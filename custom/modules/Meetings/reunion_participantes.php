@@ -115,7 +115,7 @@ class reunion_participantes
 							];
 							array_push($guest,$participante1);
 						}
-						if($objParticipantes['actualiza']) {
+						if($objParticipantes['actualiza'] || $bean->status == 'Not Held') {
 							$correo = ["id" => $objArrParticipnates[$j]['id'], "name" => $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'], "mail" => $objArrParticipnates[$j]['correo']];
 							array_push($correos,$correo);
 						}
@@ -355,6 +355,68 @@ class reunion_participantes
 								$GLOBALS['log']->fatal("Error Respuesta Lenia");
 								$GLOBALS['log']->fatal($response);
 							}
+						}
+					}
+				}
+				if ($bean->status == 'Not Held') {
+					// Envía correo a los invitados de cancelación
+					if($bean->assigned_user_id) {
+						$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
+						$usuario = $beanUsr->name;
+					}
+					// Convierte formato de fecha y hora
+					date_default_timezone_set('America/Mexico_City');
+					$verano = date('I');
+					$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
+					if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
+					$inicio = strtotime('-6 hours',strtotime($bean->date_start));
+					$fin = strtotime('-6 hours',strtotime($bean->date_end));
+					if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
+					if($verano) $fin = strtotime('-5 hours',strtotime($bean->date_end));
+					$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+					$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+					$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
+					$hora = date("g:i a",$inicio);
+					foreach ($correos as $correo) {
+						require_once("include/SugarPHPMailer.php");
+						require_once("modules/EmailTemplates/EmailTemplate.php");
+						require_once("modules/Administration/Administration.php");									
+						$emailtemplate = new EmailTemplate();
+						if($organizador == $correo['id']) {
+							$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor Cancela','type'=>'email'));
+						}
+						else {
+							$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente Cancela','type'=>'email'));
+						}
+						$asunto = $emailtemplate->subject;
+						$emailtemplate->subject = $asunto;
+						$body_html = $emailtemplate->body_html;
+						$body_html = str_replace('participante_name', $correo["name"], $body_html);
+						$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
+						$body_html = str_replace('asesor_name', $usuario, $body_html);
+						$body_html = str_replace('fecha', $fecha, $body_html);
+						$emailtemplate->body_html = str_replace('hora', $hora, $body_html);
+						$mailer = MailerFactory::getSystemDefaultMailer();
+						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+						$mailer->setSubject($emailtemplate->subject);
+						$body = trim($emailtemplate->body_html);
+						$mailer->setHtmlBody($body);
+						$mailer->clearRecipients();
+						$mailer->addRecipientsTo(new EmailIdentity($correo["mail"], $correo["name"]));
+						// Crea auditoría de correos
+						$userid = $bean->assigned_user_id;
+						$recordid = $correo["id"];
+						$hoy = date("Y-m-d H:i:s");
+						$mail = $correo["mail"];
+						try {
+							$result = $mailer->send();
+							$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
+							VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'OK', 'Correo exitosamente enviado')";
+							$GLOBALS['db']->query($insert);
+						} catch (Exception $e) {
+							$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, error_code, description)
+							VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'ERROR', '01', '{$e->getMessage()}')";
+							$GLOBALS['db']->query($insert);
 						}
 					}
 				}
