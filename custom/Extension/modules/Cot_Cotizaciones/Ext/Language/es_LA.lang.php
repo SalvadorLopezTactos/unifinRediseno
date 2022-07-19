@@ -12,3 +12,4 @@ $mod_strings['LNK_IMPORT_COT_COTIZACIONES'] = 'Importar Cotización Seguros';
 $mod_strings['LNK_IMPORT_VCARD'] = 'Importar Cotización Seguros vCard';
 $mod_strings['LNK_LIST'] = 'Vista Cotización Seguros';
 $mod_strings['LNK_NEW_RECORD'] = 'Crear Cotización Seguros';
+$mod_strings['LBL_COT_GANADA_C'] = 'Cotización Ganada';
