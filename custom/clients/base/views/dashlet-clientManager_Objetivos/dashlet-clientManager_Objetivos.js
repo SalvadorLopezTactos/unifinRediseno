@@ -46,13 +46,14 @@
                 obj.Omensual = data['Mensual'].presupuesto ;
                 obj.Mcubierto = data['Mensual'].montocubierto;
                 obj.porcubierto = data['Mensual'].avance;
-                obj.setChart(data['Mensual'].montocubierto, data['Mensual'].presupuesto, data['Mensual'].avance,data['Mensual'].avance_gr);
-
                 obj.Amensual =  data['Anual'].presupuesto;
                 obj.Acubierto = data['Anual'].montocubierto;
                 obj.porcubiertoAn = data['Anual'].avance;
+                obj.render();
+                
+                obj.setChart(data['Mensual'].montocubierto, data['Mensual'].presupuesto, data['Mensual'].avance,data['Mensual'].avance_gr);              
                 obj.setChart1(data['Anual'].montocubierto, data['Anual'].presupuesto, data['Anual'].avance, data['Anual'].avance_gr);
-                //obj.render();
+                
             },
             error: function (e) {
                 throw e;
