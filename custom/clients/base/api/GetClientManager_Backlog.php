@@ -398,7 +398,7 @@ class GetClientManager_Backlog extends SugarApi
                     if($key['progreso'] == '2'){ $sinsc += $key['monto_final_comprometido_c']; }
                     if($key['progreso'] == '1'){ $consc += $key['monto_final_comprometido_c'] ; }
                 }else{
-                    if($key['etapa_c'] == '3'){ $prospecto += $key['monto_final_comprometido_c'] ;}
+                    if($key['etapa_c'] == '3' || $key['etapa_c'] == ''){ $prospecto += $key['monto_final_comprometido_c'] ;}
                     if($key['etapa_c'] == '4'){ $credito += $key['monto_final_comprometido_c'];   }
                     if($key['etapa_c'] == '2'){ $rechazada += $key['monto_final_comprometido_c']; }
                 }
