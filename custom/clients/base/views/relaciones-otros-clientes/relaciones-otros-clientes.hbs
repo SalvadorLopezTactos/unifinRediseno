@@ -1,0 +1,47 @@
+<style>
+
+</style>
+
+<div class="thumbnail dashlet" data-type="dashlet" data-action="droppable">
+  <h4 data-toggle="dashlet" class="dashlet-title">Relaciones con otros Clientes</h4>
+  <div data-dashlet="dashlet" class="dashlet-content">
+    <div class="list-view">
+      <table class="table table-striped dataTable">
+        <thead>
+          <tr>
+            <th data-fieldname="name" data-orderby="" tabindex="-1">
+              <span>Nombre</span>
+            </th>
+            <th data-fieldname="name" data-orderby="" tabindex="-1">
+              <span>Relaciones Activas</span>
+            </th>
+            <th data-fieldname="name" data-orderby="" tabindex="-1">
+              <span>Cuenta Relacionada</span>
+            </th>
+            <th data-fieldname="name" data-orderby="" tabindex="-1">
+              <span>Última Modificación</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each dataRelaciones}}
+            <tr class="single" data-id="el_id">
+              <td>
+                <span><a href="#Rel_Relaciones/{{id}}">{{name}}</a></span>
+              </td>
+              <td>
+                <span>{{relaciones_activas}}</span>
+              </td>
+              <td>
+                <span><a href="#Accounts/{{account_id1_c}}">{{name}}</a></span>
+              </td>
+              <td>
+                <span>{{date_modified}}</span>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
