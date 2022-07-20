@@ -59,7 +59,7 @@ class consultaObjetivos extends SugarApi
         
         $pos = strrpos($posicion_operativa, "3");
         if($pos != ""){
-            $host1=$sugar_config['dwh_objetivos'].'?mes=&anio='.$anio.'&usuario='.$idUsuario;
+            $host1=$sugar_config['dwh_objetivos'].'?mes=&anio='.$anio.'&usuario='.$idUsuario.'&idequipo=null&idregion=null';
         }else{
             $pos = strrpos($posicion_operativa, "1");
             if($pos != "" ){
