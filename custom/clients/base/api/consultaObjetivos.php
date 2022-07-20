@@ -159,6 +159,9 @@ class consultaObjetivos extends SugarApi
             $item1['avance_gr'] = 66 + (($item1['avance']-100) * .33);
         }
 
+        $item['avance_gr'] = ($item['avance_gr'] > 100 )? 100 : $item['avance_gr'];
+        $item1['avance_gr'] = ($item1['avance_gr'] > 100 )? 100 : $item1['avance_gr'];
+
         $salida = array_merge(
             array('Mensual' => $item),
             array('Anual' => $item1)
