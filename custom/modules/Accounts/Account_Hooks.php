@@ -1349,62 +1349,41 @@ where rfc_c = '{$bean->rfc_c}' and
     {
         //Se escribe en archivo csv únicamente cuando se ha cambiado el Tipo y Subtipo de Cuenta a Cliente Con Linea Vigente
         //Esta función se dispara a través de Proccess Author "Cliente con Línea" ****** Tipo-Cuenta: 2-Prospecto, 3-Cliente **** SubTipo-Cuenta: 18-Con linea vigente, 8-Integracion de expediente
-        if (($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '18' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c == '8' && $bean->tipo_registro_cuenta_c == '2' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '8' && !$bean->conversion_gclid_c)) {
-            $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE DISPARA DESDE PROCCESS AUTHOR------------');
-            $gclid = ''; //este campo se obtiene del lead relacionado campo gclid
+        if(($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '18' && !$bean->conversion_gclid_c) || ($bean->subtipo_registro_cuenta_c == '10' && $bean->fetched_row['subtipo_registro_cuenta_c'] != '10' && !$bean->conversion_gclid_c)) {
+            $GLOBALS['log']->fatal('------------ENTRA CONDICIÓN CLIENTE CON LINEA VIGENTE O RECHAZADO DISPARA DESDE PROCCESS AUTHOR------------');
             $conversion_name = 'Conv CRM';
-            $tipo_producto_solicitud = '';
-            //Obteniendo gclid de lead relacionado
-            if ($bean->load_relationship('leads')) {
-                $params = array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
+			$email = $bean->email1;
+			if ($bean->load_relationship('accounts_tel_telefonos_1')) {
+				$tel_telefonos = $bean->accounts_tel_telefonos_1->getBeans();
+                if (!empty($tel_telefonos)) {
+                    foreach ($tel_telefonos as $tel) {
+						if (!empty($tel->id) && $tel->principal) $telefono = $tel->telefono;
+                    }
+                }
+			}
+            if ($bean->load_relationship('opportunities')) {
+                $parametros = array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
                 //Fetch related beans
-                $leads = $bean->leads->getBeans($bean->id, $params);
+                $opps_relacionadas = $bean->opportunities->getBeans($bean->id, $parametros);
                 //Ordenarlas por fecha de modificación para obtener el valor de la línea de la solicitud que actuaalizó esta cuenta
-                if (!empty($leads)) {
-                    foreach ($leads as $lead) {
-                        if ($lead->detalle_plataforma_c != "" && $lead->detalle_plataforma_c != null) {
-                            $gclid = $lead->detalle_plataforma_c;
-                        }
+                if (!empty($opps_relacionadas)) {
+                    foreach ($opps_relacionadas as $opp) {
+                        $conversion_value = $opp->monto_c;
+						$conversion_time = date('H:i:s',strtotime($opp->date_modified));
                     }
                 }
             }
-
-            //Únicamente se controlan Clientes que cuentan con valor en su campo gclid en su respectivo Lead relacionado
-            if ($gclid != '' && $gclid != null) {
-                $GLOBALS['log']->fatal('------------LEAD SI CUENTA CON GCLID------------');
-                //Monto de línea= Campo Opps= monto_c
-                $conversion_value = '0';
-                if ($bean->load_relationship('opportunities')) {
-                    $parametros = array('limit' => 1, 'orderby' => 'date_modified DESC', 'disable_row_level_security' => true);
-                    //Fetch related beans
-                    $opps_relacionadas = $bean->opportunities->getBeans($bean->id, $parametros);
-                    //Ordenarlas por fecha de modificación para obtener el valor de la línea de la solicitud que actuaalizó esta cuenta
-                    if (!empty($opps_relacionadas)) {
-                        foreach ($opps_relacionadas as $opp) {
-                            $conversion_value = $opp->monto_c;
-                            $tipo_producto_solicitud = $opp->tipo_producto_c;
-                        }
-                    }
-                }
-
-                //Se escribe en csv cuando trae tipo de producto
-                if ($tipo_producto_solicitud != '') {
-                    $GLOBALS['log']->fatal('------------SE ESCRIBE EN CSV PARA SUBIR SFTP------------');
-                    //Estableciendo la hora en formato "24/03/2020 19:00:00"
-                    date_default_timezone_set('America/Mexico_City');
-                    $conversion_time = date('d/m/Y H:i:s');
-                    //Limpiando el monto, ya que en el csv espera solo cantidades enteras, sin decimales
-                    $conv_entero = explode('.', $conversion_value);
-                    $ruta_archivo = "custom/plantillaCSV/clientes_lv.csv";
-                    if (file_exists($ruta_archivo)) {
-                        $file = fopen($ruta_archivo, "a");
-                        fwrite($file, $gclid . ',' . $conversion_name . ',' . $conversion_time . ',' . $conv_entero[0] . ',' . PHP_EOL);
-                        fclose($file);
-                    }
-                    //Actualiza Cuenta a conversión GCLID
-                    $bean->conversion_gclid_c = 1;
-                }
+            $GLOBALS['log']->fatal('------------SE ESCRIBE EN CSV PARA SUBIR SFTP------------');
+            date_default_timezone_set('America/Mexico_City');
+            $ruta_archivo = "custom/plantillaCSV/leads_calidad.csv";
+			if ($bean->subtipo_registro_cuenta_c == '10') $ruta_archivo = "custom/plantillaCSV/leads_no_calidad.csv";
+            if (file_exists($ruta_archivo)) {
+                $file = fopen($ruta_archivo, "a");
+                fwrite($file, $email . ',' . $telefono . ',' . $conversion_name . ',' . $conversion_time . ',' . $conversion_value . ',' . PHP_EOL);
+                fclose($file);
             }
+            //Actualiza Cuenta a conversión GCLID
+            $bean->conversion_gclid_c = 1;
         }
     }
 
