@@ -23,45 +23,43 @@ function upload_file_googleads(){
     $port = $sugar_config['host_port'];
     $username = $sugar_config['host_user'];
     $password = $sugar_config['host_pwd'];
-    $file = "custom/plantillaCSV/clientes_lv.csv";
+    $leads_calidad = "custom/plantillaCSV/leads_calidad.csv";
+	$leads_no_calidad = "custom/plantillaCSV/leads_no_calidad.csv";
     date_default_timezone_set('America/Mexico_City');
     $fecha= date('Y').date('m').date('d').date('h').date('m').date('s');
 
     //Path en donde se guardará el archivo por sftp
     $path_unifin=$sugar_config['path_unifin'];
-    $path_historicos=$sugar_config['path_historicos'];
 
-
-    if (file_exists($file)) {
+    if (file_exists($leads_calidad) || file_exists($leads_no_calidad)) {
         $sftp = new Net_SFTP($host, $port);
-
+		$GLOBALS['log']->fatal('------------ENTRA SFTP------------');
         if ( $sftp->login($username, $password) ) {
             $GLOBALS['log']->fatal('------------CONEXIÓN SFTP EXITOSA------------');
             $success = $sftp->put(
-                $path_unifin.'/conversiones_unifin.csv',
-                $file,
+                $path_unifin.'/leads_calidad.csv',
+                $leads_calidad,
                 NET_SFTP_LOCAL_FILE
             );
-
             $success = $sftp->put(
-                $path_historicos.'/conversiones_unifin_'.$fecha.'.csv',
-                $file,
+                $path_unifin.'/leads_no_calidad.csv',
+                $leads_no_calidad,
                 NET_SFTP_LOCAL_FILE
             );
-
             //Limpiando el archivo plantilla y dejando únicamente las cabeceras
-            $file = fopen("custom/plantillaCSV/clientes_lv.csv","w");
-            fwrite($file, 'Parameters:TimeZone=America/Mexico_City,,,,'.PHP_EOL);
-            fwrite($file, 'Google Click ID,Conversion Name,Conversion Time,Conversion Value,Conversion Currency'.PHP_EOL);
-            fclose($file);
-
+            $leads_calidad = fopen("custom/plantillaCSV/leads_calidad.csv","w");
+            fwrite($leads_calidad, 'Parameters:TimeZone=America/Mexico_City,,,,'.PHP_EOL);
+            fwrite($leads_calidad, 'Email,Phone Number,Conversion Name,Conversion Time,Conversion Value,Conversion Currency'.PHP_EOL);
+            fclose($leads_calidad);
+            $leads_no_calidad = fopen("custom/plantillaCSV/leads_no_calidad.csv","w");
+            fwrite($leads_no_calidad, 'Parameters:TimeZone=America/Mexico_City,,,,'.PHP_EOL);
+            fwrite($leads_no_calidad, 'Email,Phone Number,Conversion Name,Conversion Time,Conversion Value,Conversion Currency'.PHP_EOL);
+            fclose($leads_no_calidad);
         } else {
             $GLOBALS['log']->fatal('Conexión SFTP fallida:');//------------------------------------
         }
-
     }
 
     $GLOBALS['log']->fatal('-----------Termina subida de csv por SFTP-----------');
     return true;
-
 }
