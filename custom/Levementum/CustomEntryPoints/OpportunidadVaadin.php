@@ -18,7 +18,8 @@ $UNI2_URL = $sugar_config['uni2_url'];
 $logg = $UNI2_URL . "cotizador?idClient=$clientId&userName=$current_user->user_name&id=$current_user->id&token=$token&tipoProducto=LEASING";
 $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : LOG cotizador: " . $logg);
 $email = $current_user->fetched_row['email1'];
-$tipodeproducto_c = $current_user->fetched_row['tipodeproducto_c'];
+$tipodeproducto_c = $current_user->fetched_row['productos_c'];
+$showAlert = (strpos($tipodeproducto_c,'^1^') === false && strpos($tipodeproducto_c,'^8^') === false && strpos($tipodeproducto_c,'^9^') === false ) ? false : true;
 
 $frame = <<<HTML
 <div class="cotizador">
@@ -94,7 +95,7 @@ if ($AccountId != null && $AccountId != '') {
     <script type="text/javascript">
         function factoraje(tipo){
             var empleado = '<?=$AccountId;?>';
-            if(tipo != 1 && tipo != 9 && tipo != 8){
+            if(!tipo){
                 if(empleado!=""){
                     console.log("Cerrar");
                     alert("Esta opci\u00F3n no est\u00E1 habilitada para Factoraje");
@@ -144,7 +145,7 @@ if ($AccountId != null && $AccountId != '') {
             cargaCompleta = function () {
                 obtieneParametros(parametros);
             }
-            factoraje(<?php echo $current_user->fetched_row['tipodeproducto_c']; ?>);
+            factoraje(<?php echo $showAlert; ?>);
         };
 
 
