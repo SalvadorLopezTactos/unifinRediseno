@@ -1,5 +1,5 @@
 <?php
-// created: 2022-07-18 19:12:02
+// created: 2022-07-21 11:18:25
 $viewdefs['Rel_Relaciones']['base']['view']['subpanel-for-accounts-accounts_rel_relaciones_1'] = array (
   'panels' => 
   array (
@@ -26,11 +26,10 @@ $viewdefs['Rel_Relaciones']['base']['view']['subpanel-for-accounts-accounts_rel_
         ),
         2 => 
         array (
-          'name' => 'relacion_c',
-          'label' => 'LBL_RELACION',
+          'name' => 'rel_relaciones_accounts_1_name',
+          'label' => 'LBL_REL_RELACIONES_ACCOUNTS_1_FROM_ACCOUNTS_TITLE',
           'enabled' => true,
-          'readonly' => false,
-          'id' => 'ACCOUNT_ID1_C',
+          'id' => 'REL_RELACIONES_ACCOUNTS_1ACCOUNTS_IDA',
           'link' => true,
           'sortable' => false,
           'default' => true,

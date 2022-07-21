@@ -1,5 +1,5 @@
 <?php
-// created: 2022-07-18 19:12:01
+// created: 2022-07-21 11:18:24
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -16,20 +16,17 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_RELACIONES_ACTIVAS',
     'width' => 10,
   ),
-  'relacion_c' => 
+  'rel_relaciones_accounts_1_name' => 
   array (
-    'readonly_formula' => '',
-    'readonly' => false,
     'type' => 'relate',
-    'studio' => 'visible',
-    'vname' => 'LBL_RELACION',
-    'id' => 'ACCOUNT_ID1_C',
     'link' => true,
+    'vname' => 'LBL_REL_RELACIONES_ACCOUNTS_1_FROM_ACCOUNTS_TITLE',
+    'id' => 'REL_RELACIONES_ACCOUNTS_1ACCOUNTS_IDA',
     'width' => 10,
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'Accounts',
-    'target_record_key' => 'account_id1_c',
+    'target_record_key' => 'rel_relaciones_accounts_1accounts_ida',
   ),
   'date_modified' => 
   array (

@@ -143,12 +143,12 @@ SQL;
 
 	public function SetRelacionesOtrosClientes($bean=null,$event=null,$args=null){
 		
-		$cuentaPrincipal=$bean->rel_relaciones_accounts_1accounts_ida;
+		$cuentaRelacionada=$bean->account_id1_c;
 		
-		if($cuentaPrincipal!=null && $cuentaPrincipal!=""){
-			$bean->accounts_rel_relaciones_1accounts_ida=$cuentaPrincipal;
+		if($cuentaRelacionada!=null && $cuentaRelacionada!=""){
+			$bean->accounts_rel_relaciones_1accounts_ida=$cuentaRelacionada;
 			$bean->load_relationship('accounts_rel_relaciones_1');
-			$bean->accounts_rel_relaciones_1->add($cuentaPrincipal);  
+			$bean->accounts_rel_relaciones_1->add($cuentaRelacionada);  
 		}
 
 	}
