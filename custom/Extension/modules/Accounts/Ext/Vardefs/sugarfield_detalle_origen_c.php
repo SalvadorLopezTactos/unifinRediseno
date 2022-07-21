@@ -1,5 +1,5 @@
 <?php
- // created: 2022-05-18 13:47:54
+ // created: 2022-07-20 16:44:31
 $dictionary['Account']['fields']['detalle_origen_c']['labelValue']=' Detalle Origen';
 $dictionary['Account']['fields']['detalle_origen_c']['dependency']='';
 $dictionary['Account']['fields']['detalle_origen_c']['required_formula']='';
@@ -174,6 +174,10 @@ $dictionary['Account']['fields']['detalle_origen_c']['visibility_grid']=array (
     ),
     18 => 
     array (
+    ),
+    19 => 
+    array (
+      0 => '112',
     ),
     '' => 
     array (
