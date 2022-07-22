@@ -193,10 +193,19 @@ array (
               4 => 
               array (
                 'readonly' => false,
+                'name' => 'int_aseguradora_id_c',
+                'label' => 'LBL_INT_ASEGURADORA_ID',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
+                'readonly' => false,
                 'name' => 'int_indicativo',
                 'label' => 'LBL_INT_INDICATIVO',
               ),
-              5 => 
+              7 => 
               array (
                 'readonly' => false,
                 'name' => 'int_prima_neta',
@@ -207,13 +216,13 @@ array (
                 ),
                 'label' => 'LBL_INT_PRIMA_NETA',
               ),
-              6 => 
+              8 => 
               array (
                 'readonly' => false,
                 'name' => 'int_comision_porcentaje',
                 'label' => 'LBL_INT_COMISION_PORCENTAJE',
               ),
-              7 => 
+              9 => 
               array (
                 'readonly' => false,
                 'name' => 'int_comision',
@@ -224,25 +233,25 @@ array (
                 ),
                 'label' => 'LBL_INT_COMISION',
               ),
-              8 => 
+              10 => 
               array (
                 'readonly' => false,
                 'name' => 'int_porcentaje_comision_total',
                 'label' => 'LBL_INT_PORCENTAJE_COMISION_TOTAL',
               ),
-              9 => 
+              11 => 
               array (
                 'readonly' => false,
                 'name' => 'int_porcentaje_sobrecomision',
                 'label' => 'LBL_INT_PORCENTAJE_SOBRECOMISION',
               ),
-              10 => 
+              12 => 
               array (
                 'readonly' => false,
                 'name' => 'int_comision_documento',
                 'label' => 'LBL_INT_COMISION_DOCUMENTO',
               ),
-              11 => 
+              13 => 
               array (
                 'readonly' => false,
                 'name' => 'int_honorarios_fee',
@@ -253,39 +262,36 @@ array (
                 ),
                 'label' => 'LBL_INT_HONORARIOS_FEE',
               ),
-              12 => 
+              14 => 
               array (
                 'readonly' => false,
                 'name' => 'int_honorarios_fee_porcentaje',
                 'label' => 'LBL_INT_HONORARIOS_FEE_PORCENTAJE',
               ),
-              13 => 
+              15 => 
               array (
                 'readonly' => false,
                 'name' => 'int_udi',
                 'label' => 'LBL_INT_UDI',
               ),
-              14 => 
+              16 => 
               array (
                 'readonly' => false,
                 'name' => 'int_reaseguro',
                 'label' => 'LBL_INT_REASEGURO',
               ),
-              15 => 
+              17 => 
               array (
                 'readonly' => false,
                 'name' => 'int_coaseguro',
                 'label' => 'LBL_INT_COASEGURO',
               ),
-              16 => 'assigned_user_name',
-              17 => 'team_name',
               18 => 
               array (
-                'name' => 'tag',
+                'name' => 'assigned_user_name',
               ),
               19 => 
               array (
-                'name' => 'cot_cotizaciones_s_seguros_name',
               ),
             ),
           ),
@@ -353,6 +359,11 @@ array (
                   ),
                 ),
               ),
+              3 => 
+              array (
+                'name' => 'tag',
+              ),
+              4 => 'team_name',
             ),
           ),
         ),

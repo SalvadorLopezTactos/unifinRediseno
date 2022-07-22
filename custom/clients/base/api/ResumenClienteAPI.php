@@ -357,7 +357,7 @@ class ResumenClienteAPI extends SugarApi
             //Recupera cliente desde
             $queryClienteDesde = "select date_created
                         from accounts_audit
-                        where parent_id='008b2470-91f3-4bde-b20e-9ebb0562978e'
+                        where parent_id='{$id_cliente}'
                         and
                         (
                         	(

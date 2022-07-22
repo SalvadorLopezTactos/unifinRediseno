@@ -1,5 +1,5 @@
 <?php
- // created: 2020-05-05 12:52:19
+ // created: 2022-07-20 17:10:49
 
 $app_list_strings['puestos_list']=array (
   '' => '',
@@ -14,4 +14,5 @@ $app_list_strings['puestos_list']=array (
   9 => 'Gerente',
   10 => 'Administrativo',
   11 => 'Otro',
+  12 => 'Funcionario',
 );

@@ -1,7 +1,19 @@
+<style>
 
+p {
+font-size: 12px;
+  text-align: center;
+}
+</style>
 <br>
 <h4 style="display: block; background-color:#021741; color: white;"><b>Objetivo Mensual</b></h4>
+<p><b>Objetivo Mensual:  $ {{customFormatNumber Omensual}}</b></p>
+<p>Monto cubierto: $ {{customFormatNumber Mcubierto}} - {{porcubierto}} %</p>
+<br>
 <canvas id="chartMensual" width="400" height="400"></canvas>
 <h4 style="display: block; background-color:#021741; color: white;"><b>Objetivo Anual</b></h4>
+<p><b>Objetivo Mensual:  $ {{customFormatNumber Amensual}}</b></p>
+<p>Monto cubierto: $ {{customFormatNumber Acubierto}} - {{porcubiertoAn}} %</p>
+<br>
 <canvas id="chartAnual" width="400" height="400"></canvas>
 <br>

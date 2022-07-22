@@ -30,6 +30,7 @@ array (
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
+                'width' => '9',
               ),
               2 => 
               array (
@@ -47,18 +48,42 @@ array (
               ),
               4 => 
               array (
+                'name' => 'mes',
+                'label' => 'LBL_MES',
+                'enabled' => true,
+                'default' => true,
+              ),
+              5 => 
+              array (
+                'name' => 'producto_c',
+                'label' => 'LBL_PRODUCTO_C',
+                'enabled' => true,
+                'readonly' => false,
+                'default' => true,
+              ),
+              6 => 
+              array (
+                'name' => 'rango_bl_c',
+                'label' => 'LBL_RANGO_BL',
+                'enabled' => true,
+                'readonly' => false,
+                'default' => true,
+              ),
+              7 => 
+              array (
                 'label' => 'LBL_DATE_MODIFIED',
                 'enabled' => true,
                 'default' => true,
                 'name' => 'date_modified',
                 'readonly' => true,
               ),
-              5 => 
+              8 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
                 'default' => false,
                 'enabled' => true,
+                'width' => '9',
               ),
             ),
           ),

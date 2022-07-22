@@ -1,8 +1,12 @@
 ({
     plugins: ['Dashlet'],
-    dataMensual:[],
-    dataAnual:[],
-    
+    Omensual:0,
+    Mcubierto:0,
+    porcubierto:0,
+    Amensual:0,
+    Acubierto:0,
+    porcubiertoAn:0,
+
     initialize: function (options) {
         this._super('initialize', [options]);
 
@@ -38,9 +42,18 @@
         app.api.call('GET', app.api.buildURL('getObjetivos/'+ Params), null, {
             success: function (data) {
 				console.log(data);
-                obj.setChart(data['Mensual'].montocubierto, data['Mensual'].presupuesto, data['Mensual'].avance,data['Mensual'].avance_gr);
+
+                obj.Omensual = data['Mensual'].presupuesto ;
+                obj.Mcubierto = data['Mensual'].montocubierto;
+                obj.porcubierto = data['Mensual'].avance;
+                obj.Amensual =  data['Anual'].presupuesto;
+                obj.Acubierto = data['Anual'].montocubierto;
+                obj.porcubiertoAn = data['Anual'].avance;
+                obj.render();
+                
+                obj.setChart(data['Mensual'].montocubierto, data['Mensual'].presupuesto, data['Mensual'].avance,data['Mensual'].avance_gr);              
                 obj.setChart1(data['Anual'].montocubierto, data['Anual'].presupuesto, data['Anual'].avance, data['Anual'].avance_gr);
-                //obj.render();
+                
             },
             error: function (e) {
                 throw e;
@@ -128,15 +141,6 @@
                     enabled: true
                 },
                 plugins: {
-                    title: {
-                        display: true,
-                        text: "Objetivo Mensual: "+ valor2 ,
-                        position: "top"
-                    },
-                    subtitle: {
-                        display: true,
-                        text: "Monto Cubierto: "+valor1+ "  -    "+ porcentaje+" %",
-                    },
                     tooltip: {
                         enabled : false,
                     },
@@ -203,15 +207,6 @@
                     enabled: true
                 },
                 plugins: {
-                    title: {
-                        display: true,
-                        text: "Objetivo Anual : "+ valor2 ,
-                        position: "top"
-                    },
-                    subtitle: {
-                        display: true,
-                        text: "Monto Cubierto: "+valor1+ "  -    "+ porcentaje+" %",
-                    },
                     tooltip: {
                         enabled : false,
                     },
