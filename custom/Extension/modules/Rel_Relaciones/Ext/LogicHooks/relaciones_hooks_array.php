@@ -40,3 +40,10 @@ $hook_array['before_save'][] = Array(
     'Relacion_platform_user',
     'set_audit_user_platform'
 );
+$hook_array['before_save'][] = Array(
+    3,
+    'Establece valor en el campo que relaciona el registro de la Relación con su Cuenta padre del subpanel Relaciones con otros Clientes',
+    'custom/modules/Rel_Relaciones/Rel_Relaciones_Hooks.php',
+    'Rel_Relaciones_Hooks',
+    'SetRelacionesOtrosClientes'
+);

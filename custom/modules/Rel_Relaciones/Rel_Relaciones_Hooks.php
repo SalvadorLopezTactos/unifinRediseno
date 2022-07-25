@@ -140,4 +140,16 @@ SQL;
 			$queryResult = $db->query($query);
 		}
 	}
+
+	public function SetRelacionesOtrosClientes($bean=null,$event=null,$args=null){
+		
+		$cuentaRelacionada=$bean->account_id1_c;
+		
+		if($cuentaRelacionada!=null && $cuentaRelacionada!=""){
+			$bean->accounts_rel_relaciones_1accounts_ida=$cuentaRelacionada;
+			$bean->load_relationship('accounts_rel_relaciones_1');
+			$bean->accounts_rel_relaciones_1->add($cuentaRelacionada);  
+		}
+
+	}
 }
