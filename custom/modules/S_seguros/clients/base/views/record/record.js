@@ -17,7 +17,9 @@
         this.model.addValidationTask('comision_c', _.bind(this.comision, this));
         this.model.addValidationTask('validaDoc', _.bind(this.validaDoc, this));
         this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
-		this.model.addValidationTask('fecha_aplicacion_c', _.bind(this.validAplica, this));
+        this.model.addValidationTask('fecha_aplicacion_c', _.bind(this.validAplica, this));
+        this.model.on('sync', this._disableActionsSubpanel, this);
+        this._disableActionsSubpanel();
     },
 
     _render: function() {
@@ -30,8 +32,9 @@
         this.noEditFields.push('seguro_pipeline');
         //Oculta campo UNI2
         this.$('[data-name=seguro_uni2_c]').hide();
-		//Oculta espacio en blanco
-		this.$(".record-cell[data-name='blank_space']").hide();
+        //Oculta espacio en blanco
+        this.$(".record-cell[data-name='blank_space']").hide();
+        this._disableActionsSubpanel();
     },
 
     setTipo: function() {
@@ -278,4 +281,8 @@
         }
         callback(null, fields, errors);
     },
+
+    _disableActionsSubpanel: function () {
+      $('[data-subpanel-link="cot_cotizaciones_s_seguros"]').find(".subpanel-controls").hide();
+      }
 })
