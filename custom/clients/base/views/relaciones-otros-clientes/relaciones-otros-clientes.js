@@ -12,7 +12,12 @@
 
     setRelacionesOtrosClientes:function(){
 
-        var id_cuenta=this.model.get('id');
+        var id_cuenta="";
+        if(_.isEmpty(this.model.attributes)){
+            id_cuenta=self.model.get('id');
+        }else{
+            id_cuenta=this.model.get('id');
+        }
 
         contextoRelaciones=this;
         App.alert.show('getRelacionesOtrosClientes', {
