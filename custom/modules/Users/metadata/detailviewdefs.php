@@ -409,6 +409,12 @@ array (
             'name' => 'excluye_valida_c',
             'label' => 'LBL_EXCLUYE_VALIDA',
           ),
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'lenia_c',
+            'label' => 'LBL_LENIA',
+          ),
         ),
       ),
     ),

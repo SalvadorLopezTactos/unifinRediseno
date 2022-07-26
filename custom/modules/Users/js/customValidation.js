@@ -217,6 +217,7 @@ $(window).load(function(){
     $('#gestion_lm_c').attr('disabled','disabled');
     $('#editar_backlog_chk_c').attr('disabled','disabled');
 	$('#excluye_valida_c').attr('disabled','disabled');
+	$('#lenia_c').attr('disabled','disabled');
    }
   }catch(error){
       console.log(error.message);
@@ -264,6 +265,7 @@ $(window).load(function(){
       $('#gestion_lm_c').attr('disabled','disabled');
       $('#editar_backlog_chk_c').attr('disabled','disabled');
 	  $('#excluye_valida_c').attr('disabled','disabled');
+	  $('#lenia_c').attr('disabled','disabled');
     }
   }
   catch(error){
