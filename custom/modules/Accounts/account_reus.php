@@ -127,25 +127,32 @@ class class_account_reus
         $phones = [];
         if ($bean->load_relationship('accounts_tel_telefonos_1')) {
             $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
-
             foreach ($relatedTelefonos as $telefono) {
-
                 if ($telefono->telefono != "") {
                     //$host .= $telefono->telefono . ",";
                     $phones[] = preg_replace('/\s+/', '', $telefono->telefono);
                 }
             }
         }
-
         if (count($phones) > 0) {
-
             $host .=  implode(',',$phones);
             $GLOBALS['log']->fatal($host);
             $resultado = $callApi->getDWHREUS($host);
-            //$resultado = '[{"valor":"5518504488","existe":"SI"},{"valor":"5569783395","existe":"NO"}]';
-            //$resultado = json_decode($resultado);
-            $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ' . json_encode($resultado));
-
+            $GLOBALS['log']->fatal('Resultado DWH REUS TELEFONOS - CUENTAS: ');
+			$GLOBALS['log']->fatal($resultado);
+/*			$resultado = array 
+			(
+				0 => array
+					(
+						"valor" => "5518504488",
+						"existe" => "SI"
+					),
+				1 => array
+					(
+						"valor" => "5569783395",
+						"existe" => "NO"
+					)
+			);*/
             if ($resultado != "" && $resultado != null) {
                 //RESULTADO DEL SERVICIO DWH REUS
                 foreach ($resultado as $key => $val) {
@@ -153,20 +160,14 @@ class class_account_reus
                     // Y ACTIVA EL CHECK DEL REGISTRO REUS EN CRM
                     if ($bean->load_relationship('accounts_tel_telefonos_1')) {
                         $relatedTelefonos = $bean->accounts_tel_telefonos_1->getBeans();
-
                         foreach ($relatedTelefonos as $telefono) {
-
                             if ($telefono->telefono == $val['valor']) {
-
                                 $telprevio = $telefono->registro_reus_c;
-                                $beantel = BeanFactory::retrieveBean('Tel_Telefonos', $telefono->id);
+                                $beantel = BeanFactory::retrieveBean('Tel_Telefonos', $telefono->id, array('disable_row_level_security' => true));
                                 if ($val['existe'] == 'SI') {
-
-                                    $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = 1 WHERE id_c = '{$telefono->id}';";
+                                    $queryC = "UPDATE tel_telefonos_cstm SET registro_reus_c = '1' WHERE id_c = '{$telefono->id}'";
                                     $db->query($queryC);
-                                    // $beantel->registro_reus_c = 1;
-                                    // $beantel->save();
-                                    // $GLOBALS['log']->fatal("TELEFONO REUS");
+                                    $beantel->registro_reus_c = 1;
                                     //Establece nuevo registro en tabla de auditoria
                                     $id_u_audit = create_guid();
                                     if ($telprevio != 1 || $telprevio != '1') {
@@ -176,12 +177,9 @@ class class_account_reus
                                     }
                                 }
                                 if ($val['existe'] == 'NO') {
-                                    // $beantel->registro_reus_c = 0;
-                                    // $beantel->save();
                                     $queryD = "UPDATE tel_telefonos_cstm SET registro_reus_c = 0 WHERE id_c = '{$telefono->id}';";
                                     $db->query($queryD);
-                                    // $GLOBALS['log']->fatal("TELEFONO NORMAL");
-                                    // $beantel->registro_reus_c = 0;
+                                    $beantel->registro_reus_c = 0;
                                     $id_u_audit = create_guid();
                                     if ($telprevio != 0 || $telprevio != '0') {
                                         $sqlInsert = "INSERT INTO tel_telefonos_audit (id,parent_id,date_created,created_by,field_name,data_type,before_value_string,after_value_string,before_value_text,after_value_text,event_id,date_updated)
@@ -189,6 +187,7 @@ class class_account_reus
                                         $db->query($sqlInsert);
                                     }
                                 }
+								$beantel->save();
                             }
                         }
                     }
