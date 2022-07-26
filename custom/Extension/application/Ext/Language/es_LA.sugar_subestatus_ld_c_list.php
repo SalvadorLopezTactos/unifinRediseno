@@ -1,5 +1,5 @@
 <?php
- // created: 2022-04-26 21:50:17
+ // created: 2022-07-26 17:36:27
 
 $app_list_strings['subestatus_ld_c_list']=array (
   '' => '',
@@ -7,4 +7,8 @@ $app_list_strings['subestatus_ld_c_list']=array (
   2 => 'Registro Terminado',
   3 => 'Traslado a Cita',
   4 => 'Cita',
+  5 => 'Primer Contacto',
+  6 => 'Pitch',
+  7 => 'Envío de Liga',
+  8 => 'En Proceso',
 );
