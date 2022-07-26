@@ -1,4 +1,3 @@
-<div style="overflow-x: scroll;">
 
 <style>
 
@@ -44,8 +43,8 @@
 
 {{#each dataTotal}}
 <br>
-
-<table id = "datos" align="left"  style="overflow-x: scroll;">
+<div data-dashlet="dashlet" class="dashlet-content">
+<table class="table table-striped" id = "datos" align="left"  style="overflow-x: scroll;">
     <thead id = "titulo">
         <tr>
             <th width = "500px"><b>Equipo : {{equipo}}</b></th>
@@ -81,5 +80,4 @@
 </table>
 <br>
 {{/each}}
-
 </div>
