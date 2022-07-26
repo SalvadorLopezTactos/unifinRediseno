@@ -7,7 +7,8 @@ class reunion_participantes
 {
 	public function reunion_participantes($bean = null, $event = null, $args = null)
     {
-		if($bean->tct_conferencia_chk_c) {
+		global $current_user;
+		if($bean->tct_conferencia_chk_c && $current_user->lenia_c) {
 			$objParticipantes = $bean->reunion_participantes;
 			$objArrParticipnates = $objParticipantes['participantes'];
 			// Crea la Relación entre Reunión y Participantes

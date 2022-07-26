@@ -106,7 +106,7 @@
 		//Oculta panel del Participantes
 		this.$('[data-name=reunion_participantes]').find('.record-label').addClass('hide');
 		this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
-		if(this.model.get('tct_conferencia_chk_c')) this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').removeClass('hide');
+		if(this.model.get('tct_conferencia_chk_c') && app.user.attributes.lenia_c) this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').removeClass('hide');
     },
 
     /**
@@ -900,7 +900,7 @@
     },
 
     participantes: function () {
-		if(this.model.get('tct_conferencia_chk_c')) {
+		if(this.model.get('tct_conferencia_chk_c') && app.user.attributes.lenia_c) {
 			this.$('[data-panelname="LBL_RECORDVIEW_PANEL3"]').removeClass('hide');
 		}
 		else {
@@ -910,7 +910,7 @@
 
     saveParticipantes: function (fields, errors, callback) {
         var objParticipantes = selfData.mParticipantes["participantes"];
-		if (objParticipantes && this.model.get('tct_conferencia_chk_c')) {
+		if (objParticipantes && this.model.get('tct_conferencia_chk_c') && app.user.attributes.lenia_c) {
 			if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
 				var url = app.api.buildURL('Accounts/' + this.model.get('parent_id'), null, null);
 				app.api.call('read', url, {}, {

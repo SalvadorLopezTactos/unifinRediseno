@@ -72,6 +72,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['excluye_valida_c'] = $current_user->excluye_valida_c;
         $userArray['current_user']['llamada_genesys_c'] = $current_user->llamada_genesys_c;
         $userArray['current_user']['equipos_c'] = $current_user->equipos_c;
+		$userArray['current_user']['lenia_c'] = $current_user->lenia_c;
         return $userArray;
     }
 }

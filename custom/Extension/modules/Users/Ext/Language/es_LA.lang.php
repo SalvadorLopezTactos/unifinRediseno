@@ -75,3 +75,4 @@ $mod_strings['LBL_ADMIN_BACKLOG'] = 'Administración de Backlog';
 $mod_strings['LBL_FECHA_BAJA'] = ' Fecha de Baja';
 $mod_strings['LBL_EXCLUYE_VALIDA'] = 'Alta sol. Op - No negocio';
 $mod_strings['LBL_LLAMADA_GENESYS'] = 'Llamada Genesys';
+$mod_strings['LBL_LENIA'] = 'Videoconferencia Lenia';
