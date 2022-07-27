@@ -1379,7 +1379,7 @@ where rfc_c = '{$bean->rfc_c}' and
 			if ($bean->subtipo_registro_cuenta_c == '10') $ruta_archivo = "custom/plantillaCSV/leads_no_calidad.csv";
             if (file_exists($ruta_archivo)) {
                 $file = fopen($ruta_archivo, "a");
-                fwrite($file, $email . ',' . $telefono . ',' . $conversion_name . ',' . $conversion_time . ',' . $conversion_value . ',' . PHP_EOL);
+                fwrite($file, $email . ',' . $telefono . ',' . $conversion_name . ',' . $conversion_time . ',' . $conversion_value . ',MXN' . PHP_EOL);
                 fclose($file);
             }
             //Actualiza Cuenta a conversión GCLID
