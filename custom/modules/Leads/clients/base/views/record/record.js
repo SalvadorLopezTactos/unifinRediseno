@@ -46,6 +46,7 @@
         this.model.on("change:origen_c", _.bind(this.cambios_origen_SOC, this));
         this.model.on('sync', this.userAlianzaSoc, this);
         this.cmbio_soc = 0;
+        this.model.on('sync', this.muestrasubestatus, this);
 
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigenLeads();
@@ -759,6 +760,8 @@
 
         //Oculta fecha de bloqueo
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
+        //Oculta campo subestatus
+        $('[data-name="subestatus_ld_c"]').hide();
 
     },
 
@@ -1523,5 +1526,14 @@
             }
         }
     },
+
+    muestrasubestatus: function (){
+        if (App.user.attributes.puestousuario_c=='27' || App.user.attributes.puestousuario_c=='31'){
+            $('[data-name="subestatus_ld_c"]').show();
+        }else{
+            $('[data-name="subestatus_ld_c"]').hide();
+    
+        }
+    },	
 
 })
