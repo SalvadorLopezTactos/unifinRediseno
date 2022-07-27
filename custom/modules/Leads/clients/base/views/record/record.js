@@ -760,8 +760,6 @@
 
         //Oculta fecha de bloqueo
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
-        //Oculta campo subestatus
-        $('[data-name="subestatus_ld_c"]').hide();
 
     },
 
