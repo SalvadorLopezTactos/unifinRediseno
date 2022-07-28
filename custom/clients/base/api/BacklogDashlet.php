@@ -462,13 +462,11 @@ SQL;
                 $response['linea'][$row['id']]['mass_checked'] = "disabled";
             }
             $response['linea'][$row['id']]['monto_prospecto'] = $row['monto_prospecto_c'];
+            $response['linea'][$row['id']]['monto_devuelta'] = $row['monto_devuelta_c'];
             $response['linea'][$row['id']]['monto_credito'] = $row['monto_credito_c'];
             $response['linea'][$row['id']]['monto_rechazado'] = $row['monto_rechazado_c'];
             $response['linea'][$row['id']]['monto_sin_solicitud'] = $row['monto_sin_solicitud_c'];
             $response['linea'][$row['id']]['monto_con_solicitud'] = $row['monto_con_solicitud_c'];
-
-            $response['linea'][$row['id']]['monto_devuelta'] = $row['monto_devuelta_c'];
-
             //$response['linea'][$row['id']]['ri_prospecto'] = $row['ri_prospecto_c'];
             //$response['linea'][$row['id']]['ri_credito'] = $row['ri_credito_c'];
             //$response['linea'][$row['id']]['ri_rechazada'] = $row['ri_rechazada_c'];
@@ -518,11 +516,11 @@ SQL;
                 $total['total_bl_actual'] += $value['bl_actual'];
                 $total['total_pipeline_posterior'] += $value['pipeline_posterior'];
                 $total['total_monto_prospecto'] += $value['monto_prospecto'];
+                $total['total_monto_devuelta'] += $value['monto_devuelta'];
                 $total['total_monto_credito'] += $value['monto_credito'];
                 $total['total_monto_rechazado'] += $value['monto_rechazado'];
                 $total['total_sin_solicitud'] += $value['monto_sin_solicitud'];
                 $total['total_con_solicitud'] += $value['monto_con_solicitud'];
-                $total['total_monto_devuelta'] += $value['monto_devuelta'];
             }
         }
 
@@ -544,11 +542,11 @@ SQL;
                         $total['total_bl_actual'] += $amount['bl_actual'];
                         $total['total_pipeline_posterior'] += $amount['pipeline_posterior'];
                         $total['total_monto_prospecto'] += $amount['monto_prospecto'];
+                        $total['total_monto_devuelta'] += $amount['monto_devuelta'];
                         $total['total_monto_credito'] += $amount['monto_credito'];
                         $total['total_monto_rechazado'] += $amount['monto_rechazado'];
                         $total['total_sin_solicitud'] += $amount['monto_sin_solicitud'];
                         $total['total_con_solicitud'] += $amount['monto_con_solicitud'];
-                        $total['total_monto_devuelta'] += $amount['monto_devuelta'];
                     }
                 }
             }
@@ -573,11 +571,11 @@ SQL;
                             $total['total_bl_actual'] += $children_amount['bl_actual'];
                             $total['total_pipeline_posterior'] += $children_amount['pipeline_posterior'];
                             $total['total_monto_prospecto'] += $children_amount['monto_prospecto'];
+                            $total['total_monto_devuelta'] += $children_amount['monto_devuelta'];
                             $total['total_monto_credito'] += $children_amount['monto_credito'];
                             $total['total_monto_rechazado'] += $children_amount['monto_rechazado'];
                             $total['total_sin_solicitud'] += $children_amount['monto_sin_solicitud'];
                             $total['total_con_solicitud'] += $children_amount['monto_con_solicitud'];
-                            $total['total_monto_devuelta'] += $children_amount['monto_devuelta'];
                         }
                     }
                 }
@@ -598,12 +596,11 @@ SQL;
         $total['total_bl_actual'] = round($total['total_bl_actual'],0);
         $total['total_pipeline_posterior'] = round($total['total_pipeline_posterior'],0);
         $total['total_monto_prospecto'] = $total['total_monto_prospecto'];
+        $total['total_monto_devuelta'] = round($total['total_monto_devuelta'],0);
         $total['total_monto_credito'] = $total['total_monto_credito'];
         $total['total_monto_rechazado'] = $total['total_monto_rechazado'];
         $total['total_sin_solicitud'] = $total['total_sin_solicitud'];
         $total['total_con_solicitud'] = $total['total_con_solicitud'];
-        $total['total_monto_devuelta'] = round($total['total_monto_devuelta'],0);
-
         return $total;
     }
 
@@ -1036,9 +1033,7 @@ SQL;
         $new_backlog->lev_backlog_opportunitiesopportunities_ida = $original_backlog->lev_backlog_opportunitiesopportunities_ida;
         $new_backlog->monto_final_comprometido_c = $original_backlog->monto_final_comprometido_c;
         $new_backlog->ri_final_comprometida_c = $original_backlog->ri_final_comprometida_c;
-
         $new_backlog->monto_devuelta_c = $original_backlog->monto_devuelta_c;
-
         $new_backlog->save();
 
     }
@@ -1061,7 +1056,7 @@ SQL;
 	*/
 		fputcsv($fp, array('PRODUCTO','TIPO OPERACION PRODUCTO','ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
             'BACKLOG','ETAPA INICIO MES', 'ETAPA',
-            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','DEVUELTA','TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
+            'PROSPECTO','DEVUELTA','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
             foreach ($values as $index => $linea) {

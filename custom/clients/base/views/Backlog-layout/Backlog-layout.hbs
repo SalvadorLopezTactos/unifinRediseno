@@ -621,6 +621,13 @@
                             </tr>
                         </table>
                     </th>
+					<th width="15%" class="hide_devuelta">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Devuelta</td>
+                            </tr>
+                        </table>
+                    </th>
 					<th width="15%" class="hide_monto_credito">
                         <table width="100%">
                             <tr>
@@ -646,13 +653,6 @@
                         <table width="100%">
                             <tr>
                                 <td class="innerTableTd">Con solicitud</td>
-                            </tr>
-                        </table>
-                    </th>
-					<th width="15%" class="hide_devuelta">
-                        <table width="100%">
-                            <tr>
-                                <td class="innerTableTd">Devuelta</td>
                             </tr>
                         </table>
                     </th>
@@ -693,11 +693,11 @@
                         <!--<th class="totales hide_conversion"></th>-->
                         <!--<th class="totales hide_motivo_rechazo"></th>-->
 						<th class="totales hide_monto_prospecto">{{customFormatNumber totales.total_monto_prospecto}}</th>
+						<th class="totales hide_monto_devuelta">{{customFormatNumber totales.total_monto_devuelta}}</th>
 						<th class="totales hide_monto_credito">{{customFormatNumber totales.total_monto_credito}}</th>
 						<th class="totales hide_monto_rechazado">{{customFormatNumber totales.total_monto_rechazado}}</th>
 						<th class="totales hide_sin_solicitud">{{customFormatNumber totales.total_sin_solicitud}}</th>
 						<th class="totales hide_con_solicitud">{{customFormatNumber totales.total_con_solicitud}}</th>
-                        <th class="totales hide_monto_devuelta">{{customFormatNumber totales.total_monto_devuelta}}</th>
                     </tr>
                 {{/each}}
 
@@ -754,11 +754,11 @@
                             <!--<td class="hide_conversion">{{conversion}}</td>-->
                             <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
 							<td class="hide_monto_prospecto">{{customFormatNumber monto_prospecto}}</td>
+                            <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
 							<td class="hide_monto_credito">{{customFormatNumber monto_credito}}</td>
 							<td class="hide_monto_rechazado">{{customFormatNumber monto_rechazado}}</td>
 							<td class="hide_sin_solicitud">{{customFormatNumber monto_sin_solicitud}}</td>
 							<td class="hide_con_solicitud">{{customFormatNumber monto_con_solicitud}}</td>
-                            <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
                             <!--<td>-->
                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                             <!--</td>-->
@@ -817,11 +817,11 @@
                                 <!--<td class="hide_conversion">{{conversion}}</td>-->
                                 <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
                                 <td class="hide_monto_prospecto">{{customFormatNumber monto_prospecto}}</td>
+                                <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
 								<td class="hide_monto_credito">{{customFormatNumber monto_credito}}</td>
 								<td class="hide_monto_rechazado">{{customFormatNumber monto_rechazado}}</td>
 								<td class="hide_sin_solicitud">{{customFormatNumber monto_sin_solicitud}}</td>
 								<td class="hide_con_solicitud">{{customFormatNumber monto_con_solicitud}}</td>
-                                <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
 								<!--<td>-->
                                 <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                 <!--</td>-->
@@ -885,11 +885,11 @@
                                             <!--<td class="hide_conversion">{{conversion}}</td>-->
                                             <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
                                             <td class="hide_monto_prospecto">{{customFormatNumber monto_prospecto}}</td>
+                                            <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
 											<td class="hide_monto_credito">{{customFormatNumber monto_credito}}</td>
 											<td class="hide_monto_rechazado">{{customFormatNumber monto_rechazado}}</td>
 											<td class="hide_sin_solicitud">{{customFormatNumber monto_sin_solicitud}}</td>
 											<td class="hide_con_solicitud">{{customFormatNumber monto_con_solicitud}}</td>
-                                            <td class="hide_monto_devuelta">{{customFormatNumber monto_devuelta}}</td>
 											<!--<td>-->
                                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                             <!--</td>-->
@@ -952,11 +952,11 @@
                                         <!--<option value="hide_conversion">Probabilidad de Conversión %</option>-->
                                         <!--<option value="hide_motivo_rechazo">Motivo de Rechazo</option>-->
 										<option value="hide_monto_prospecto">Prospecto</option>
+                                        <option value="hide_monto_devuelta">Devuelta</option>
 										<option value="hide_monto_credito">Crédito</option>
 										<option value="hide_monto_rechazado">Rechazado</option>
 										<option value="hide_sin_solicitud">Sin solicitud</option>
 										<option value="hide_con_solicitud">Con solicitud</option>
-                                        <option value="hide_monto_devuelta">Devuelta</option>
 									</select>
                                 </div>
                                 <div class="span1" style="margin-top: 20px;">
