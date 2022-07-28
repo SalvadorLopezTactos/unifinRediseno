@@ -23,6 +23,7 @@ $viewdefs['Rel_Relaciones']['base']['view']['panel-top'] = array(
                   'label' => ' ',
                   'acl_action' => 'create',
                   'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
+                  'css_class' => 'disabled',
               ),
               array(
                   'type' => 'link-action',
