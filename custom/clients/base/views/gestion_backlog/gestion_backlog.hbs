@@ -216,11 +216,11 @@
                         <option value="">&nbsp;</option>
                         <option value="probabilidad">Probabilidad</option>
                         <option value="monto_prospecto">Prospecto</option>
+                        <option value="devuelta">Devuelta</option>
                         <option value="monto_credito">Crédito</option>
                         <option value="monto_rechazado">Rechazada</option>
                         <option value="monto_sin_solicitud">Sin Solicitud</option>
                         <option value="monto_con_solicitud">Con Solicitud</option>
-                        <option value="devuelta">Devuelta</option>
                     </select>
                     <p class="help-block"></p>
                 </span>
@@ -271,6 +271,9 @@
                         <span class="record-label" style="font-weight:bold; text-align:center">Prospecto</span>
                     </th>
                     <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Devuelta</span>
+                    </th>
+                    <th class="sorting ">
                         <span class="record-label" style="font-weight:bold; text-align:center">Crédito</span>
                     </th>
                     <th class="sorting ">
@@ -281,9 +284,6 @@
                     </th>
                     <th class="sorting ">
                         <span class="record-label" style="font-weight:bold; text-align:center">Con Solicitud</span>
-                    </th>
-                    <th class="sorting ">
-                        <span class="record-label" style="font-weight:bold; text-align:center">Devuelta</span>
                     </th>
                     <th class="no-sort">
                         <span class="record-label" style="font-weight:bold; text-align:center">Monto</span>
@@ -342,6 +342,13 @@
                     </td>
                     <td class="">
                         <div align="middle">
+                            <input type="text" class="montos monto_devuelta" data-field="monto_devuelta" value="{{monto_devuelta_c}}" />
+                            <span data-field="span_monto_devuelta" style="display: none;">{{monto_devuelta_c}}</span>
+                            <p class="help-block"></p>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div align="middle">
                             <input type="text" class="montos monto_credito" data-field="monto_credito" value="{{monto_credito_c}}" />
                             <span data-field="span_monto_credito" style="display: none;">{{monto_credito_c}}</span>
                             <p class="help-block"></p>
@@ -365,13 +372,6 @@
                         <div align="middle">
                             <input type="text" class="montos monto_con_solicitud" data-field="monto_con_solicitud" value="{{monto_con_solicitud_c}}" />
                             <span data-field="span_monto_con_solicitud" style="display: none;">{{monto_con_solicitud_c}}</span>
-                            <p class="help-block"></p>
-                        </div>
-                    </td>
-                    <td class="">
-                        <div align="middle">
-                            <input type="text" class="montos monto_devuelta" data-field="monto_devuelta" value="{{monto_devuelta_c}}" />
-                            <span data-field="span_monto_devuelta" style="display: none;">{{monto_devuelta_c}}</span>
                             <p class="help-block"></p>
                         </div>
                     </td>

@@ -505,26 +505,25 @@
 
         //FORMATO MONEDA DE LOS CAMPOS DE MONTO
         var formatoMontoProspecto = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",", "")).toLocaleString('es-MX');
+        var formatoMontoDevuelta = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_devuelta"]').val().replaceAll(",", "")).toLocaleString('es-MX');
         var formatoMontoCredito = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",", "")).toLocaleString('es-MX');
         var formatoMontoRechazado = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",", "")).toLocaleString('es-MX');
         var formatoMontoSinSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",", "")).toLocaleString('es-MX');
         var formatoMontoConSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",", "")).toLocaleString('es-MX');
-        var formatoMontoDevuelta = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_devuelta"]').val().replaceAll(",", "")).toLocaleString('es-MX');
         //SETEA EL MONTO CON EL FORMATO DE MONEDA
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val(formatoMontoProspecto);
+        $(e.currentTarget).parent().parent().parent().find('[data-field="monto_devuelta"]').val(formatoMontoDevuelta);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val(formatoMontoCredito);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val(formatoMontoRechazado);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val(formatoMontoSinSolicitud);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val(formatoMontoConSolicitud);
-        $(e.currentTarget).parent().parent().parent().find('[data-field="monto_devuelta"]').val(formatoMontoDevuelta);
         //SETEA LOS VALORES DE LOS MONTOS A NIVEL SPAN
         $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_prospecto"]').text(formatoMontoProspecto);
+        $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_devuelta"]').text(formatoMontoDevuelta);
         $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_credito"]').text(formatoMontoCredito);
         $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_rechazado"]').text(formatoMontoRechazado);
         $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_sin_solicitud"]').text(formatoMontoSinSolicitud);
         $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_con_solicitud"]').text(formatoMontoConSolicitud);
-        $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_devuelta"]').text(formatoMontoDevuelta);
-
         //Obtiene valor y se lo suma al monto
         //var valorActual=$(e.currentTarget).val();
         var suma = 0;
@@ -542,11 +541,11 @@
 
             var etapa = $(e.currentTarget).parent().parent().parent().find('[data-field="etapa_c"]').val();
             var monto_prospecto = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",", "");
+            var monto_devuelta = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_devuelta"]').val().replaceAll(",", "");
             var monto_credito = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",", "");
             var monto_rechazado = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",", "");
             var monto_sin_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",", "");
             var monto_con_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",", "");
-            var monto_devuelta = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_devuelta"]').val().replaceAll(",", "");
             var comentarios = $(e.currentTarget).parent().parent().parent().find('[data-field="comentarios"]').val();
             var probabilidad = $(e.currentTarget).parent().parent().parent().find('[data-field="probabilidad"]').val();
             var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + monto_devuelta + comentarios + probabilidad;
@@ -665,11 +664,11 @@
             var id_bl = $(this).attr("data-id");
             var etapa = $(this).find("select.etapa_c").val();
             var monto_prospecto = $(this).find(".monto_prospecto").val().replaceAll(",", "");
+			var monto_devuelta = $(this).find(".monto_devuelta").val().replaceAll(",", "");
             var monto_credito = $(this).find(".monto_credito").val().replaceAll(",", "");
             var monto_rechazado = $(this).find(".monto_rechazado").val().replaceAll(",", "");
             var monto_sin_solicitud = $(this).find(".monto_sin_solicitud").val().replaceAll(",", "");
             var monto_con_solicitud = $(this).find(".monto_con_solicitud").val().replaceAll(",", "");
-            var monto_devuelta = $(this).find(".monto_devuelta").val().replaceAll(",", "");
             var monto = $(this).find(".montoTotal").val().replaceAll(",", "");
             var comentarios = $(this).find(".comentarios").val();
             var probabilidad = $(this).find(".probabilidad").val();
@@ -688,11 +687,11 @@
                 peticion["requests"][contador] = {
                     "url": "/v11_8/lev_Backlog/" + id_bl, "method": "PUT", "data": "{\"etapa_c\": \"" + etapa + "\"," +
                         "\"monto_prospecto_c\":" + Number(monto_prospecto) + "," +
+						"\"monto_devuelta_c\": " + Number(monto_devuelta) + "," +
                         "\"monto_credito_c\": " + Number(monto_credito) + "," +
                         "\"monto_rechazado_c\":" + Number(monto_rechazado) + "," +
                         "\"monto_sin_solicitud_c\": " + Number(monto_sin_solicitud) + "," +
                         "\"monto_con_solicitud_c\": " + Number(monto_con_solicitud) + "," +
-                        "\"monto_devuelta_c\": " + Number(monto_devuelta) + "," +
                         //"\"monto_comprometido\": " + Number(monto) + "," +
                         "\"comentarios_c\": \"" + comentarios +"-adminbl-"+ "\"," +
                         "\"tct_conversion_c\": " + Number(probabilidad) + "," +
@@ -829,6 +828,10 @@
             $(".monto_prospecto").val(valorCampo);
             $(".monto_prospecto").trigger('change');
         }
+        if (campo == 'devuelta' && valorCampo != "") {
+            $(".monto_devuelta").val(valorCampo);
+            $(".monto_devuelta").trigger('change');
+        }
         if (campo == 'monto_credito' && valorCampo != "") {
             $(".monto_credito").val(valorCampo);
             $(".monto_credito").trigger('change');
@@ -844,10 +847,6 @@
         if (campo == 'monto_con_solicitud' && valorCampo != "") {
             $(".monto_con_solicitud").val(valorCampo);
             $(".monto_con_solicitud").trigger('change');
-        }
-        if (campo == 'devuelta' && valorCampo != "") {
-            $(".monto_devuelta").val(valorCampo);
-            $(".monto_devuelta").trigger('change');
         }
     },
 })
