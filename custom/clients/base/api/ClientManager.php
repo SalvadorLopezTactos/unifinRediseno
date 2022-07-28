@@ -893,7 +893,7 @@ SQL;
         //Obtener los ids de los usuarios pertencientes a $equipo
         $queryUsuarios="SELECT id,concat(u.first_name,' ',u.last_name) nombre_usuario FROM users u
         INNER JOIN users_cstm uc ON u.id=uc.id_c
-        WHERE uc.equipo_c IN ({$equipo_usuario}) AND u.status='Active' AND u.deleted=0;";
+        WHERE uc.equipo_c IN ({$equipo_usuario}) AND u.status='Active' AND u.deleted=0 ORDER BY nombre_usuario ASC;";
 
         $resultUsuarios = $db->query($queryUsuarios);
 

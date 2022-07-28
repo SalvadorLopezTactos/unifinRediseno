@@ -89,7 +89,10 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'El total es '+data['Total'],
+                            text: ['El total es '+data['Total'],'Para filtrar información, dar click sobre el nombre del asesor'],
+                            font:{
+                                size:14
+                            },
                             padding: {
                                 top: 10,
                                 bottom: 30

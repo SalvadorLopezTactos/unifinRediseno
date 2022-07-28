@@ -64,7 +64,7 @@
         if (this.registrosPerdidos.length == 0) {
             app.alert.show('sinPerdidos', {
                 level: 'warning',
-                messages: 'No existen registros de Leads Perdidos',
+                messages: 'No existen registros de Cuentas Perdidos',
                 autoClose: true
             });
         }else {

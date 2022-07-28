@@ -760,8 +760,6 @@
 
         //Oculta fecha de bloqueo
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
-        //Oculta campo subestatus
-        $('[data-name="subestatus_ld_c"]').hide();
 
     },
 
@@ -1528,10 +1526,10 @@
     },
 
     muestrasubestatus: function (){
-        if (App.user.attributes.puestousuario_c=='27' || App.user.attributes.puestousuario_c=='31'){
-            $('[data-name="subestatus_ld_c"]').show();
-        }else{
+        if (App.user.attributes.puestousuario_c!='27' && App.user.attributes.puestousuario_c!='31'){
             $('[data-name="subestatus_ld_c"]').hide();
+        }else{
+            $('[data-name="subestatus_ld_c"]').show();
     
         }
     },	
