@@ -85,7 +85,7 @@ class GetClientManager_Backlog extends SugarApi
             $item['equipo'] = $val['equipo'];
             //$GLOBALS['log']->fatal('item', $item);
             foreach ($dataaux as $key){
-                $montoTotal += (floatval($key['monto_final_comprometido_c']) * floatval($key['record_count']));
+                $montoTotal += (round(floatval($key['monto_final_comprometido_c']), 2) * round(floatval($key['record_count']) ));
                 $conteoTotal += intval($key['record_count']) ;
             }
             $item['montoTotal'] = $montoTotal;
@@ -127,21 +127,21 @@ class GetClientManager_Backlog extends SugarApi
                 //$GLOBALS['log']->fatal('record_count',parseInt( $key['record_count']));
                 //for ($z = 0; $z < parseInt($key['record_count']) ; $z++) {
                     if($key['etapa_c'] == '1'){
-                        if($key['progreso'] == '2'){ $sinsc += (floatval($key['monto_final_comprometido_c']) * floatval($key['record_count'])) ; }
-                        if($key['progreso'] == '1'){ $consc += (floatval($key['monto_final_comprometido_c']) * floatval($key['record_count'])) ; }
+                        if($key['progreso'] == '2'){ $sinsc += (round(floatval($key['monto_final_comprometido_c']), 2) * round(floatval($key['record_count']))) ; }
+                        if($key['progreso'] == '1'){ $consc += (round(floatval($key['monto_final_comprometido_c']), 2) * round(floatval($key['record_count']))) ; }
                     }else{
-                        if($key['etapa_c'] == '3' || $key['etapa_c'] == ''){ $prospecto += (floatval($key['monto_final_comprometido_c']) * floatval($key['record_count'])) ;}
-                        if($key['etapa_c'] == '4'){ $credito += (floatval($key['monto_final_comprometido_c']) * floatval($key['record_count']));   }
-                        if($key['etapa_c'] == '2'){ $rechazada += (floatval($key['monto_final_comprometido_c']) * floatval($key['record_count'])); }
+                        if($key['etapa_c'] == '3' || $key['etapa_c'] == ''){ $prospecto += (round(floatval($key['monto_final_comprometido_c']), 2) * round(floatval($key['record_count']))) ;}
+                        if($key['etapa_c'] == '4'){ $credito += (round(floatval($key['monto_final_comprometido_c']), 2) * round(floatval($key['record_count'])));   }
+                        if($key['etapa_c'] == '2'){ $rechazada += (round(floatval($key['monto_final_comprometido_c']), 2) * round(floatval($key['record_count']))); }
                     }
                 //}
             }
-            $newitem['total'] = $sinsc + $consc; 
-            $newitem['prospecto'] =  $prospecto;
-            $newitem['credito'] =  $credito; 
-            $newitem['rechazada'] =  $rechazada; 
-            $newitem['sinsc'] = $sinsc; 
-            $newitem['consc'] = $consc; 
+            $newitem['total'] = round($sinsc,2) + round($consc,2); 
+            $newitem['prospecto'] =  round($prospecto,2);
+            $newitem['credito'] =  round($credito,2); 
+            $newitem['rechazada'] =  round($rechazada,2); 
+            $newitem['sinsc'] = round($sinsc,2); 
+            $newitem['consc'] = round($consc,2); 
     
             $return1[$j]=$newitem;
             $j++;
