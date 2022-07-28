@@ -64,9 +64,11 @@ class GetClientManager_Backlog extends SugarApi
         $sugarQuery = new SugarQuery();
         $sugarQuery->select(array('equipo','monto_final_comprometido_c'));
         $sugarQuery->from(BeanFactory::newBean('lev_Backlog'));
-        $sugarQuery->where()->equals('estatus_operacion_c', '2');
+        //$sugarQuery->where()->equals('estatus_operacion_c', '2');
+        $sugarQuery->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
+
         $sugarQuery->select()->setCountQuery();
-        $sugarQuery->groupByRaw('lev_Backlog.equipo');
+        $sugarQuery->groupByRaw('lev_Backlog.equipo','lev_Backlog.etapa_solicitud_c');
         $result = $sugarQuery->execute();
         $d0 = $this->groupArray($result,'equipo', 'equipo');
         //$GLOBALS['log']->fatal('result', $d0);
@@ -83,8 +85,8 @@ class GetClientManager_Backlog extends SugarApi
             $item['equipo'] = $val['equipo'];
             //$GLOBALS['log']->fatal('item', $item);
             foreach ($dataaux as $key){
-                $montoTotal += floatval($key['monto_final_comprometido_c']);
-                $conteoTotal += intval($key['record_count']);
+                $montoTotal += (floatval($key['monto_final_comprometido_c']) * floatval($key['record_count']));
+                $conteoTotal += intval($key['record_count']) ;
             }
             $item['montoTotal'] = $montoTotal;
             $item['conteoTotal'] = $conteoTotal;
@@ -96,7 +98,8 @@ class GetClientManager_Backlog extends SugarApi
         $sugarQuery = new SugarQuery();
         $sugarQuery->select(array('equipo','cliente','etapa_solicitud_c','etapa_c','progreso','monto_final_comprometido_c'));
         $sugarQuery->from(BeanFactory::newBean('lev_Backlog'));
-        $sugarQuery->where()->equals('estatus_operacion_c', '2');
+        //$sugarQuery->where()->equals('estatus_operacion_c', '2');
+        $sugarQuery->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
         $sugarQuery->select()->setCountQuery();
         $sugarQuery->groupByRaw('lev_Backlog.equipo','lev_Backlog.etapa_solicitud_c');
         $result = $sugarQuery->execute();
