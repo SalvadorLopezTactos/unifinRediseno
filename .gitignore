@@ -28,3 +28,5 @@
 /custom/Extension/modules/*/Ext/WirelessLayoutdefs/orderMapping.php
 /custom/Extension/modules/*/Ext/Administration/orderMapping.php
 /custom/Extension/modules/*/Ext/ScheduledTasks/orderMapping.php
+/custom/plantillaCSV/leads_calidad.csv
+/custom/plantillaCSV/leads_no_calidad.csv
