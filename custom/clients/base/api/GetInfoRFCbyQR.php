@@ -106,11 +106,13 @@ class GetInfoRFCbyQR extends SugarApi
      * @return String $cFile, Archivo codificado para enviar como parámetro a servicio
      * */
     public function prepareImageToParameter($file_name_with_full_path){
+        $basePath = str_replace("custom/clients/base/api","",__DIR__);
+        //$GLOBALS['log']->fatal($basePath.$file_name_with_full_path);
 
         if (function_exists('curl_file_create')) { // php 5.5+
-            $cFile = curl_file_create($file_name_with_full_path);
+            $cFile = curl_file_create($basePath . $file_name_with_full_path);
         } else { //
-            $cFile = '@' . realpath($file_name_with_full_path);
+            $cFile = realpath($basePath . $file_name_with_full_path);
         }
 
         return $cFile;
@@ -122,15 +124,16 @@ class GetInfoRFCbyQR extends SugarApi
      * @return array $body, Arreglo con la definición de los parámetros que recibe el endpoint
      * */
     public function callScanQR($url,$body){
+        $GLOBALS['log']->fatal($url);
+        $GLOBALS['log']->fatal($body);
         $ch = curl_init();
-
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POST,1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
         $result=curl_exec ($ch);
-
+        $GLOBALS['log']->fatal($result);
         curl_close ($ch);
 
         return json_decode($result, true);
