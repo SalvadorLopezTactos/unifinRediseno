@@ -118,8 +118,8 @@ class consultaObjetivos extends SugarApi
 
         $item['tipo'] = 'mensual';
         $item['mes'] = $mes;
-        $item['presupuesto'] =  $presupuestoMensual;
-        $item['montocubierto'] =  $cubiertoMensual;
+        $item['presupuesto'] =  number_format(floatval($presupuestoMensual),2) ;
+        $item['montocubierto'] =  number_format(floatval($cubiertoMensual),2);
         if($presupuestoMensual != 0 && $cubiertoMensual != 0){
             $item['avance'] = round( (($cubiertoMensual /  $presupuestoMensual) * 100) , 2);
         }else{
@@ -128,8 +128,8 @@ class consultaObjetivos extends SugarApi
         
         $item1['tipo'] = 'anual';
         $item1['anio'] = $anio;
-        $item1['presupuesto'] =  $presupuestoTotal;
-        $item1['montocubierto'] =  $cubiertoTotal;
+        $item1['presupuesto'] =  number_format(floatval($presupuestoTotal),2);
+        $item1['montocubierto'] =  number_format(floatval($cubiertoTotal),2);
         if($presupuestoTotal != 0 && $cubiertoTotal != 0){
             $item1['avance'] = round( (($cubiertoTotal / $presupuestoTotal) * 100) ,2 );     
         }else{
@@ -138,13 +138,13 @@ class consultaObjetivos extends SugarApi
         
         //$GLOBALS['log']->fatal('mensual', $return);
         //$GLOBALS['log']->fatal('anual', $return1);
-        /*$item['presupuesto'] =  500000;
-        $item['montocubierto'] =  550000;
-        $item['avance'] = 99;
-        $item1['presupuesto'] =  1000000;
-        $item1['montocubierto'] =  300000;
-        $item1['avance'] = 102;*/
-        
+        /*$item['presupuesto'] =  number_format(floatval(500000.50),2);
+        $item['montocubierto'] = number_format(floatval(550000.55),2) ;
+        $item['avance'] = 99.20;
+        $item1['presupuesto'] = number_format(floatval(1000000.3),2) ;
+        $item1['montocubierto'] = number_format(floatval(300000.14),2) ;
+        $item1['avance'] = 102.5;
+        */
         if($item['avance'] > 0 && $item['avance']<=49.9){
             $item['avance_gr'] = (($item['avance'] *100)/50) * 0.33;
         }else if($item['avance'] >= 50 && $item['avance']< 100){
