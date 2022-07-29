@@ -88,7 +88,7 @@ class GetClientManager_Backlog extends SugarApi
                 $montoTotal += (round(floatval($key['monto_final_comprometido_c']), 2) * round(floatval($key['record_count']) ));
                 $conteoTotal += intval($key['record_count']) ;
             }
-            $item['montoTotal'] = $montoTotal;
+            $item['montoTotal'] = round($montoTotal,2);
             $item['conteoTotal'] = $conteoTotal;
             $return[$x]=$item;
             $x++;
