@@ -146,8 +146,7 @@ order by l.date_modified desc;";
         }
 */
         //Query para obtener cuentas 0 pendiente de asignar
-        $queryAccs="SELECT * FROM (  
-            SELECT * from (
+        $queryAccs="SELECT * from (
                 SELECT a.id as id, ac.tipo_registro_cuenta_c as tipo_registro_c,IFNULL(ac.subtipo_registro_cuenta_c,'') as subtipo_registro_c,
                     ac.tipodepersona_c, ac.razonsocial_c,ac.primernombre_c,ac.apellidopaterno_c, ac.apellidomaterno_c, 'cuenta' as record,
                     concat('#Accounts/',a.id) as href,
@@ -156,7 +155,7 @@ order by l.date_modified desc;";
                     END as name
                     FROM accounts a INNER JOIN accounts_cstm ac on ac.id_c = a.id
                     WHERE ac.tipo_registro_cuenta_c not in ('4','5') AND 
-                    ac.subtipo_registro_cuenta_c = '17' -- OR ac.user_id_c = '569246c7-da62-4664-ef2a-5628f649537e'
+                    ac.subtipo_registro_cuenta_c = '17' AND ac.user_id_c = '569246c7-da62-4664-ef2a-5628f649537e'
                     and a.deleted = 0 order by a.date_modified desc
                     ) as cuentas inner join (
                     SELECT up.id as idProducto ,upc.status_management_c as status_management_c, up.tipo_producto as tipo_producto,
@@ -166,29 +165,7 @@ order by l.date_modified desc;";
                     INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
                     WHERE up.tipo_producto = '1' and 
                     up.assigned_user_id ='569246c7-da62-4664-ef2a-5628f649537e' and up.deleted = 0
-                    ) as produ on produ.accounts_uni_productos_1accounts_ida = cuentas.id
-        ) AS ES_INACTIVO UNION
-        SELECT * FROM ( SELECT * from (
-            SELECT a.id as id, ac.tipo_registro_cuenta_c as tipo_registro_c, IFNULL(ac.subtipo_registro_cuenta_c,'') as subtipo_registro_c,
-                    ac.tipodepersona_c, ac.razonsocial_c,ac.primernombre_c,ac.apellidopaterno_c, ac.apellidomaterno_c, 'cuenta' as record,
-                    concat('#Accounts/',a.id) as href,
-                    case WHEN ac.tipodepersona_c='Persona Moral' THEN ac.razonsocial_c
-                    ELSE concat(IFNULL(ac.primernombre_c,''),' ',IFNULL(ac.apellidopaterno_c,''),' ',IFNULL(ac.apellidomaterno_c, ''))
-                    END as name
-                    FROM accounts a INNER JOIN accounts_cstm ac on ac.id_c = a.id
-                    WHERE ac.tipo_registro_cuenta_c not in ('4','5') OR ac.user_id_c = '569246c7-da62-4664-ef2a-5628f649537e'
-                    and a.deleted = 0 order by a.date_modified desc
-                    ) as cuentas inner join (
-                    SELECT up.id as idProducto ,upc.status_management_c as status_management_c, up.tipo_producto as tipo_producto,
-                    up.assigned_user_id, aup.accounts_uni_productos_1accounts_ida
-                    from accounts_uni_productos_1_c aup 
-                    INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
-                    INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
-                    WHERE up.tipo_producto = '1' and 
-                    up.assigned_user_id ='569246c7-da62-4664-ef2a-5628f649537e' and up.deleted = 0
-                ) as produ on produ.accounts_uni_productos_1accounts_ida = cuentas.id
-                limit 50
-        ) AS USER_INACTIVO";
+                    ) as produ on produ.accounts_uni_productos_1accounts_ida = cuentas.id ";
     
         $resultAccs = $db->query($queryAccs);
         while($row = $db->fetchByAssoc($resultAccs)){
