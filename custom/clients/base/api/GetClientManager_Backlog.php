@@ -154,7 +154,11 @@ class GetClientManager_Backlog extends SugarApi
             $itemf=null;
             foreach($return as $value){
                 if($value['equipo'] == $value1['equipo']){
-                    $itemf['equipo'] = $value1['equipo'];
+                    if($value['equipo'] == "0" || $value['equipo'] == ""){
+                        $itemf['equipo'] = "Sin valor";
+                    }else{
+                        $itemf['equipo'] = $value1['equipo'];
+                    }
                     $itemf['total'] = $value1['total'];
                     $itemf['prospecto'] = $value1['prospecto'];
                     $itemf['credito'] = $value1['credito'];
@@ -168,6 +172,7 @@ class GetClientManager_Backlog extends SugarApi
                 }
             }
         }
+
         //$GLOBALS['log']->fatal('final', $return2);
         return $return2;
     }
