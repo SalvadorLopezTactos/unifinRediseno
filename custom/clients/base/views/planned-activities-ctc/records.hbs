@@ -27,8 +27,12 @@
                             {{/with}}
                         {{/if}}
                         {{#if attributes.llamada}}
-                            <button id="{{attributes.id}}" class="mcall fa fa-phone btn-success btn btn-mini action-call" style="padding: 3px 11px; color: white;" data-action="success" data-original-title="Click-to-call"> 
-                            </button>
+                            <span class="edit">
+                                <button id="{{attributes.id}}" class="mcall  btn-success btn btn-mini action-call" style=" color: white;" 
+                                data-action="success" data-original-title="Click-to-call"> 
+                                    <i class = "fa fa-phone"></i>
+                                </button>
+                            </span>
                         {{/if}}
                     </div>
                     {{#if ../overdueBadge}}
