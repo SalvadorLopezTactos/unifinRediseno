@@ -235,6 +235,7 @@ class Seguros_dynamics
                 "int_etapa" => "Cotizando",
                 "statuscode" => "Contactado",
                 "int_ayuda_area_tecnica" =>  $requiereAyudaDeReaTcnica,
+                "int_fecha_comp_comercial" => "2022-10-28T00:00:00.000",
                 "int_fecha_req_propuesta" => $bean->fecha_req,
                 "description" => $bean->description,
                 "int_servicio_incluir" => $serviciosaincluirc
@@ -301,9 +302,14 @@ class Seguros_dynamics
             $motivo = $app_list_strings['motivo_no_cotizado_list'][$bean->motivo_no_cotizado_c];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "int_etapa" => "Cierre",
-              "statuscode" => "No Cotizado",
-              "int_motivo_no_cotizada" => $motivo
+              "int_etapa" => "Cotizando",
+              "statuscode" => "Contactado",
+              "int_motivo_no_cotizada" => $motivo,
+              "int_razon_perdida"=>"No se pudo colocar",
+"int_comentarios_razon_perdida"=>"Prueba comentarios razón perdida",
+"int_fecha_inicio_vigencia_op"=>"2022-06-28T00:00:00.000",
+"int_fecha_fin_vigencia_op"=>"2023-06-28T00:00:00.000",
+"int_motivo_no_cotizada"=>"No se pudo colocar"
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Cotizado: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -469,7 +475,7 @@ class Seguros_dynamics
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$arreglo = array(
               "int_etapa" => "Cierre",
-              "statuscode" => "No Ganada",
+              "statuscode" => "Perdida",
               "int_razon_perdida" => $razonPerdida,
               "int_comentarios_razon_perdida" => $bean->comentarios_c,
               "int_ramo_renovable" => $no_renovable_c

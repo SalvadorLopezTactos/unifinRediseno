@@ -50,4 +50,20 @@ $viewdefs['Rel_Relaciones']['base']['view']['subpanel-for-accounts-accounts_rel_
     'direction' => 'desc',
   ),
   'type' => 'subpanel-list',
+  'rowactions' => 
+  array (
+    'actions' => 
+    array (
+      0 => 
+      array (
+        'type' => 'rowaction',
+        'css_class' => 'btn',
+        'tooltip' => 'LBL_PREVIEW',
+        'event' => 'list:preview:fire',
+        'icon' => 'fa-eye',
+        'acl_action' => 'view',
+        'allow_bwc' => false,
+      ),
+    ),
+  ),
 );
