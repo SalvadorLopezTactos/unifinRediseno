@@ -40,7 +40,7 @@ class DisposicionesUni2 extends SugarApi
         $callApi = new UnifinAPI();
 
         if($id == 1){
-            $url = $host."/QuanticoBacklog_API/rest/QuanticoRestApi/GetDispositions?Backlog=".$num."&Mes=".$mes."&Anio=".$anio;
+            $url = $host."/QuanticoBacklog_API/rest/BacklogApi/GetDispositions?Backlog=".$num."&Mes=".$mes."&Anio=".$anio;
             $response = $callApi->getQuanticoCF($url, $auth_encode);
         }
 		if($id == 2) {
