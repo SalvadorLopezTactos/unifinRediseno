@@ -6,13 +6,11 @@
 	_addDefaultMenus: function() {
 		var moduleList = app.metadata.getModuleNames({filter: 'display_tab', access: 'read'});
 		
-		moduleList.push('Cotizador');
+		
         moduleList.push('Expediente');
         moduleList.push('ExpedienteUniclick');
         moduleList.splice(8, 0, 'Quantico');
         moduleList.push('CotizadorProspectos');
-        moduleList.push('BuscaDisposicion');
-        moduleList.push('RefinanciamientosMasivos');
         //moduleList.push('Quantico');
         _.each(moduleList, function(module) {
             this._addMenu(module, true);
@@ -25,11 +23,6 @@
         var alias = false;
         
         switch(module) {
-        	case 'Cotizador':
-        		filter = 'all_records';
-        		alias = true;
-        		break;
-            
             case 'Expediente':
                 filter = 'all_records';
                 alias = true;
@@ -38,16 +31,6 @@
             case 'CotizadorProspectos':
                 filter = 'all_records';
                 alias = false;
-                break;
-
-            case 'BuscaDisposicion':
-                filter = 'all_records';
-                alias = true;
-                break;
-
-             case 'RefinanciamientosMasivos':
-                filter = 'all_records';
-                alias = true;
                 break;
 
             case 'Quantico':

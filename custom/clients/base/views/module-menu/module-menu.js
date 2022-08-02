@@ -41,12 +41,7 @@
             route = $currentTarget.data('route');
 
         switch (route) {
-        	case '#Cotizador':
-        		route = '#bwc/index.php?entryPoint=OpportunidadVaadin';
-        		//app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
-        		break;
-
-
+        	
             case '#Expediente':
                 route = '#bwc/index.php?entryPoint=ExpedienteMod';
                 break;
@@ -59,15 +54,6 @@
             case '#CotizadorProspectos':
                 route = '#bwc/index.php?entryPoint=CotizadorProspectos';
                 //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
-                break;
-
-            case '#BuscaDisposicion':
-                route = '#bwc/index.php?entryPoint=BuscaDisposicion';
-                //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
-                break;
-
-            case '#RefinanciamientosMasivos':
-                route = '#bwc/index.php?entryPoint=RefinanciamientosMasivos';
                 break;
 
             case '#Quantico':
