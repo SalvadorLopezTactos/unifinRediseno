@@ -33,9 +33,32 @@
 					options: {
 					  scales: {
 						y: {
-						  beginAtZero: false
+						  beginAtZero: false,
+						  ticks: {
+							// Include a dollar sign in the ticks
+							callback: function(value, index, ticks) {
+								return Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(value);
+							}
+						  },
+						  
 						}
-					  }
+					  },
+					  	plugins: {
+							tooltip: {
+								callbacks: {
+									label: function(context) {
+										let label = context.dataset.label || '';
+										if (label) {
+											label += ': ';
+										}
+										if (context.parsed.y !== null) {
+											label += new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MEX' }).format(context.parsed.y);
+										}
+										return label;
+									}
+								}
+							}
+					  	}
 					},
 				});
             },
