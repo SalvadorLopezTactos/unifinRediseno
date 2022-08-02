@@ -455,6 +455,25 @@ array (
           5 => 
           array (
             'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL25',
+            'label' => 'LBL_RECORDVIEW_PANEL25',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'account_disposiciones',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT_DISPOSICIONES',
+                'span' => 12,
+              ),
+            ),
+          ),
+          6 => 
+          array (
+            'newTab' => false,
             'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL16',
             'label' => 'LBL_RECORDVIEW_PANEL16',
@@ -617,7 +636,7 @@ array (
               ),
             ),
           ),
-          6 => 
+          7 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -886,7 +905,7 @@ array (
               ),
             ),
           ),
-          7 => 
+          8 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -922,7 +941,7 @@ array (
               ),
             ),
           ),
-          8 => 
+          9 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -974,7 +993,7 @@ array (
               ),
             ),
           ),
-          9 => 
+          10 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1016,7 +1035,7 @@ array (
               ),
             ),
           ),
-          10 => 
+          11 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1122,7 +1141,7 @@ array (
               ),
             ),
           ),
-          11 => 
+          12 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1201,7 +1220,7 @@ array (
               ),
             ),
           ),
-          12 => 
+          13 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1265,7 +1284,7 @@ array (
               ),
             ),
           ),
-          13 => 
+          14 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1285,7 +1304,7 @@ array (
               ),
             ),
           ),
-          14 => 
+          15 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1305,7 +1324,7 @@ array (
               ),
             ),
           ),
-          15 => 
+          16 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1325,7 +1344,7 @@ array (
               ),
             ),
           ),
-          16 => 
+          17 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
@@ -1344,7 +1363,7 @@ array (
               ),
             ),
           ),
-          17 => 
+          18 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
@@ -1411,7 +1430,7 @@ array (
               ),
             ),
           ),
-          18 => 
+          19 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1454,7 +1473,7 @@ array (
               ),
             ),
           ),
-          19 => 
+          20 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1507,7 +1526,7 @@ array (
               ),
             ),
           ),
-          20 => 
+          21 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1570,7 +1589,7 @@ array (
               ),
             ),
           ),
-          21 => 
+          22 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1623,7 +1642,7 @@ array (
               ),
             ),
           ),
-          22 => 
+          23 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',

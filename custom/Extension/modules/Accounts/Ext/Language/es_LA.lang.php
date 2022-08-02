@@ -371,3 +371,4 @@ $mod_strings['LBL_FIN_REGIMEN'] = 'Fecha fin del régimen';
 $mod_strings['LBL_RECORDVIEW_PANEL24'] = 'Analízate Clientes';
 $mod_strings['LBL_VENDOR'] = 'Vendor';
 $mod_strings['LBL_INT_ID_DYNAMICS'] = 'int id dynamics';
+$mod_strings['LBL_RECORDVIEW_PANEL25'] = 'Disposiciones en proceso';
