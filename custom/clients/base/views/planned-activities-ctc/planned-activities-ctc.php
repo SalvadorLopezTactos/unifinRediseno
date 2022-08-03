@@ -139,7 +139,7 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
             ),
             'link' => 'meetings',
             'module' => 'Meetings',
-            'order_by' => 'date_start:asc',
+            'order_by' => 'date_start:desc',
             'record_date' => 'date_start',
             'row_actions' => array(
                 /*array(
@@ -185,7 +185,7 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
             ),
             'link' => 'calls',
             'module' => 'Calls',
-            'order_by' => 'date_start:asc',
+            'order_by' => 'date_start:desc',
             'record_date' => 'date_start',
             'row_actions' => array(
                /* array(
