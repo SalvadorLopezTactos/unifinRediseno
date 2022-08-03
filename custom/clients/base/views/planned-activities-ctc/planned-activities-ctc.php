@@ -188,7 +188,7 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
             'order_by' => 'date_start:asc',
             'record_date' => 'date_start',
             'row_actions' => array(
-                array(
+               /* array(
                     'type' => 'rowaction',
                     'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
@@ -196,7 +196,7 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
                     'acl_action' => 'edit',
-                ),
+                ),*/
                 array(
                     'type' => 'unlink-action',
                     'icon' => 'fa-chain-broken',
