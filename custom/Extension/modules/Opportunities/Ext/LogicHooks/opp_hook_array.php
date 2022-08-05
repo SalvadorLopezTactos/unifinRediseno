@@ -103,7 +103,6 @@ $hook_array['after_save'][] = Array(
     'setUnicsUnilease'
 );
 
-/*
 $hook_array['after_save'][] = Array(
     10,
     'Crea linea de credito para producto Uniclick solamente',
@@ -111,7 +110,6 @@ $hook_array['after_save'][] = Array(
     'MambuLogic', // name of the class
     'create_LC'
 );
-*/
 
 $hook_array['after_save'][] = Array(
     11,
