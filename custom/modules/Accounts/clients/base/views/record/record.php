@@ -166,28 +166,13 @@ array (
               8 => 
               array (
                 'type' => 'rowaction',
-                'event' => 'button:Historial_cotizaciones_button:click',
-                'name' => 'HistorialCotizaciones',
-                'label' => 'Historial de Cotizaciones',
-                'acl_action' => 'view',
-              ),
-              9 => 
-              array (
-                'type' => 'rowaction',
                 'event' => 'button:expediente_button:click',
                 'name' => 'expediente',
                 'label' => 'Expediente',
                 'acl_action' => 'view',
               ),
-              10 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:negociacion:click',
-                'name' => 'negociacion',
-                'label' => 'Generar Disposicion',
-                'acl_action' => 'view',
-              ),
-              11 => 
+              
+              9 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:convierte_lead:click',
@@ -196,7 +181,7 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              12 => 
+              10 => 
               array (
                 'name' => 'send_survey',
                 'type' => 'rowaction',
@@ -204,7 +189,7 @@ array (
                 'acl_action' => 'send_survey',
                 'event' => 'button:send_survey:click',
               ),
-              13 => 
+              11 => 
               array (
                 'name' => 'send_poll',
                 'type' => 'rowaction',
@@ -212,42 +197,42 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
-              14 => 
+              12 => 
               array (
                 'name' => 'get_account_asesor',
                 'type' => 'rowaction',
                 'label' => 'Quiero esta Cuenta',
                 'event' => 'button:get_account_asesor:click',
               ),
-              15 => 
+              13 => 
               array (
                 'name' => 'send_account_asesor',
                 'type' => 'rowaction',
                 'label' => 'Enviar Cuenta a',
                 'event' => 'button:send_account_asesor:click',
               ),
-              16 => 
+              14 => 
               array (
                 'name' => 'negociador_quantico',
                 'type' => 'rowaction',
                 'label' => 'Negociador Quantico',
                 'event' => 'button:open_negociador_quantico:click',
               ),
-              17 => 
+              15 => 
               array (
                 'name' => 'portal_proveedores',
                 'type' => 'rowaction',
                 'label' => 'Enviar al portal de proveedor',
                 'event' => 'button:enviar_portal_proveedores:click',
               ),
-              18 => 
+              16 => 
               array (
                 'name' => 'proveedor_quantico',
                 'type' => 'rowaction',
                 'label' => 'Tarea IE Proveedor Quantico',
                 'event' => 'button:proveedor_quantico:click',
               ),
-              19 => 
+              17 => 
               array (
                 'name' => 'solicitar_ciec',
                 'type' => 'rowaction',
