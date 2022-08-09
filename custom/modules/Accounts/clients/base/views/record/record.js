@@ -8458,7 +8458,7 @@ validaReqUniclickInfo: function () {
         }
     },
     _panel_anlzt_cliente: function () {
-        if (this.model.get('tipo_registro_cuenta_c') == '3') {
+        if (this.model.get("tipo_registro_cuenta_c") == '3' || this.model.get("tipo_registro_cuenta_c") == '2' || this.model.get("tipo_registro_cuenta_c") == '4') {
             //Muestra subpanel Cliente De Analizate
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL24']").show();
         }else{
@@ -8467,7 +8467,7 @@ validaReqUniclickInfo: function () {
     },
 
     ocultaSolicitarCIEC: function () {
-    		var cliente = (this.model.get("tipo_registro_cuenta_c") == 3) ? true : false;
+    		var cliente = (this.model.get("tipo_registro_cuenta_c") == 3 || this.model.get("tipo_registro_cuenta_c") == 2 || this.model.get("tipo_registro_cuenta_c") == 4) ? true : false;
         var botonSC = this.getField("solicitar_ciec");
         if (botonSC) {
             botonSC.listenTo(botonSC, "render", function () {
@@ -8482,10 +8482,10 @@ validaReqUniclickInfo: function () {
 
     solicitar_ciec_function:function(){
         //Valida que sea proveedor para reenviar
-        if (this.model.get('tipo_registro_cuenta_c') != "3") {
+        if (this.model.get('tipo_registro_cuenta_c') == "1" || this.model.get("tipo_registro_cuenta_c") == 5) {
             app.alert.show('No_Cliente', {
                 level: 'error',
-                messages: 'Sólo se puede solcitar CIEC para cuentas de tipo Cliente.',
+                messages: 'Sólo se puede solcitar CIEC para cuentas de tipo Cliente, Persona o Proveedor.',
                 autoClose: false
             });
             return;
