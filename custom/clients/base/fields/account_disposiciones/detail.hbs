@@ -21,7 +21,7 @@
   display: block;
   /* border: 1px solid #ddd; */
   padding: 12px 50px 8px 50px; 
-  width: 180px;
+  width: 15%;
   height: 40px;
 }
 
@@ -81,6 +81,96 @@
     border-bottom-color: white;
   }
 }
+
+.card-item {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  margin:15px;
+}
+
+.list-items {
+  list-style: none;
+  width:90%;
+}
+
+.items{
+    display: inline-flex;
+    width: 23%;
+    margin-left: 15px;
+}
+
+/* ESTILOS NUEVOS*/
+
+/*Recuadros*/
+    .arrow-steps .step {
+        font-size: 12px;
+        text-align: center;
+        color: #666;
+        cursor: default;
+        margin: 0 3px;
+        padding: 10px 10px 10px 30px;
+        min-width: 180px;
+        float: left;
+        position: relative;
+        background-color: #d9e3f7;
+    }
+    /*Punta triángulos*/
+    .arrow-steps .step:after,
+    .arrow-steps .step:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: -17px;
+        width: 0;
+        height: 0;
+        border-top: 19px solid transparent;
+        border-bottom: 19px solid transparent;
+        border-left: 17px solid #d9e3f7;
+        z-index: 2;
+    }
+    /*Triángulo blanco*/
+    .arrow-steps .step:before {
+        right: auto;
+        left: 0;
+        border-left: 17px solid #fff;
+        z-index: 0;
+    }
+    /*Borde primer recuadro*/
+    .arrow-steps .step:first-child:before {
+        border: 0px solid #369;
+    }
+    .arrow-steps .step:first-child {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    /*Formato Palomita*/
+    .arrow-steps .step span:before {
+        opacity: 0;
+        content: "✔";
+        position: absolute;
+        top: -2px;
+        left: -20px;
+    }
+    /*Estilo Palomita*/
+    .arrow-steps .step.done span:before {
+        opacity: 1;
+        -webkit-transition: opacity 0.3s ease 0.5s;
+        -moz-transition: opacity 0.3s ease 0.5s;
+        -ms-transition: opacity 0.3s ease 0.5s;
+        transition: opacity 0.3s ease 0.5s;
+    }
+
+    /*Posición Palomas*/
+    .arrow-steps .step span {
+        position: relative;
+    }
+
+    .elementos-div{
+        margin-left: 1px;
+    }
+
 </style>
 <div class="row-fluid record-panel">
     <div class="row-fluid record-panel-header panel-active" style="background: #ffff;color:#717171" tabindex="-1">
@@ -120,5 +210,114 @@
                 </li>
             </ul>
         </div>
+        <div class="container">
+            <div class="span3">
+                <ul class="list-items">
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span3">
+                <ul class="list-items">
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span3">
+                <ul class="list-items">
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span3">
+                <ul class="list-items">
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                    <li class="card-item">
+                        <span>
+                        <strong>01. Negociación</strong>
+                        Blah blah blah.
+                        </span><i></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+         <!-- Nueva sección -->
+   <div class="wrapper" >
+        <div class="arrow-steps">
+            <div class="step span3"><span><strong>01. Negociación</strong></span></div>
+            <div class="step span3"><span><strong>02. En proceso compras</strong></span></div>
+            <div class="step span3"><span><strong>03. Enviadas a contratar</strong></span></div>
+            <div class="step span3"><span><strong>04. Activadas y liberadas</strong></span></div>
+        </div>
     </div>
+
+    <div style="width:95%">
+            <div class="span3 elementos-div">
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+            </div>
+             <div class="span3 elementos-div">
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+            </div>
+             <div class="span3 elementos-div">
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+            </div>
+             <div class="span3 elementos-div">
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+                <div class="card-item"> UN DIV</div>
+            </div>
+    </div>
+    </div>
+
+   
+
 </div>
