@@ -2097,8 +2097,6 @@
         this._super("delegateButtonEvents");
         this.context.on('button:cotizador_button:click', this.cotizadorClicked, this);
         this.context.on('button:expediente_button:click', this.expedienteClicked, this);
-        this.context.on('button:negociacion:click', this.negociacionClicked, this);
-        this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
         // this.context.on('button:conversion_cliente_uniclick:click', this.clienteuniclickClicked, this);
@@ -2217,17 +2215,7 @@
         var Accountid = this.model.get('id');
         window.open("#bwc/index.php?entryPoint=ExpedienteVaadin&Accountid=" + Accountid);
     },
-
-    negociacionClicked: function () {
-        var Accountid = this.model.get('id');
-        window.open("#bwc/index.php?entryPoint=ArranqueNegociador&Accountid=" + Accountid);
-    },
-
-    historialCotizacionesClicked: function () {
-        var Accountid = this.model.get('id');
-        var name = this.model.get('name');
-        window.open("#bwc/index.php?entryPoint=HistorialCotizaciones&Accountid=" + Accountid + "&name=" + name);
-    },
+    
 
     /* @Jesus Carrillo
      Metodo para verificar  las llamadas de la cuenta
