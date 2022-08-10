@@ -1,19 +1,48 @@
-<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-    <thead>
-        <tr>
-            <td><b>Usuario</b></td>
-            <td><b>Etapa</b></td>
-            <td><b>Monto</b></td>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each dataResult}}
-        <tr>
-            <td>{{#if usuario}}{{usuario}}{{/if}}</td>
-            <td>{{#if etapa}}{{etapa}}{{/if}}</td>
-            <td>{{#if text_monto}}{{text_monto}}{{/if}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
+<style>
+#contenedor{
+    text-align:center
+}
+
+#left{
+    float: left;
+    width : 40%;
+}
+
+#right{
+    float: right;
+    width : 60%;
+}
+
+</style>
+
+<table class="content" >
+    <th>
+    <td width="35%">
+        <table class="table table-bordered table-striped" style=" width:100%;">
+            <thead>
+                <tr>
+                    <td width = "40%"><b>Backlog</b></td>
+                    <td width = "20%"><b>Usuario</b></td>
+                    <td width = "20%"><b>Etapa</b></td>
+                    <td width = "20%"><b>Monto</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each dataResult}}
+                <tr>
+                    <td class="nombre">{{#if backlog}}<p><a href="{{href}}" target="_blank">{{backlog}}</a></p>{{/if}}</td>
+                    <td>{{#if usuario}}{{usuario}}{{/if}}</td>
+                    <td>{{#if etapa}}{{etapa}}{{/if}}</td>
+                    <td>{{#if text_monto}}{{text_monto}}{{/if}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </td>
+    <td >
+        <div class="chart-container" style="position: relative; height:30vh; width:30vw">
+            <canvas id="top20" ></canvas>
+        </div>
+    </td>
+    </th>
 </table>
-<canvas id="top20" width="400" height="400"></canvas>
