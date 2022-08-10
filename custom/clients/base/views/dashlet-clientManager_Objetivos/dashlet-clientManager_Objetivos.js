@@ -114,24 +114,22 @@
                         "rgba(0, 0, 0, 0.4)",
                         "rgba(0, 0, 0, 0.4)"
                     ],
-                    borderWidth: 1,
                     hoverBackgroundColor: [
                         "rgba(0, 0, 0, 0)",
                         "rgba(0, 0, 0, 0.6)",
                         "rgba(0, 0, 0, 0)"
                     ],
-                    hoverBorderWidth: 0
                 }
                 ],
             },
             options: {
-                responsive:true,
+                responsive:false,
                 rotation: -90.0,
                 circumference: -180,
                 cutoutPercentage: 0,
                 legend: {
                     position: 'top',
-                    display: true
+                    display: false
                 },
                 animation: {
                     animateRotate: false,
@@ -180,18 +178,16 @@
                         "rgba(0, 0, 0, 0.4)",
                         "rgba(0, 0, 0, 0.4)"
                     ],
-                    borderWidth: 1,
                     hoverBackgroundColor: [
                         "rgba(0, 0, 0, 0)",
                         "rgba(0, 0, 0, 0.6)",
                         "rgba(0, 0, 0, 0)"
                     ],
-                    hoverBorderWidth: 0
                 }
                 ],
             },
             options: {
-                responsive:true,
+                responsive:false,
                 rotation: -90.0,
                 circumference: -180,
                 cutoutPercentage: 0,

@@ -228,17 +228,17 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $fechaRequierePropuestaC = $bean->fecha_req;
             $fechaRequierePropuestaC = date("d/m/Y", strtotime($fechaRequierePropuestaC));
-            if($bean->requiere_ayuda_c == 1) $requiereAyudaDeReaTcnica = 'No';
-            if($bean->requiere_ayuda_c == 2) $requiereAyudaDeReaTcnica = 'Si';
+            $requiereAyudaDeReaTcnica = ($bean->requiere_ayuda_c == 2) ? 'Si' : 'No';
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
                 "int_etapa" => "Cotizando",
                 "statuscode" => "Contactado",
                 "int_ayuda_area_tecnica" =>  $requiereAyudaDeReaTcnica,
-                "int_fecha_comp_comercial" => "2022-10-28T00:00:00.000",
+                "int_fecha_comp_comercial" => $bean->fecha_cierre_c,
                 "int_fecha_req_propuesta" => $bean->fecha_req,
                 "description" => $bean->description,
-                "int_servicio_incluir" => $serviciosaincluirc
+                "int_servicio_incluir" => $serviciosaincluirc,
+                "int_ing_objetivo_porcentaje"=>"1"
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Cotizando: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -306,10 +306,10 @@ class Seguros_dynamics
               "statuscode" => "Contactado",
               "int_motivo_no_cotizada" => $motivo,
               "int_razon_perdida"=>"No se pudo colocar",
-"int_comentarios_razon_perdida"=>"Prueba comentarios razón perdida",
-"int_fecha_inicio_vigencia_op"=>"2022-06-28T00:00:00.000",
-"int_fecha_fin_vigencia_op"=>"2023-06-28T00:00:00.000",
-"int_motivo_no_cotizada"=>"No se pudo colocar"
+              "int_comentarios_razon_perdida"=>"Prueba comentarios razón perdida",
+              "int_fecha_inicio_vigencia_op"=>"2022-06-28T00:00:00.000",
+              "int_fecha_fin_vigencia_op"=>"2023-06-28T00:00:00.000",
+              "int_motivo_no_cotizada"=>"No se pudo colocar"
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Cotizado: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -342,7 +342,7 @@ class Seguros_dynamics
         		$content = json_encode(array(
               "int_etapa" => "Presentando",
               "statuscode" => "Cotizado"
-              
+
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Presentación: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -403,11 +403,12 @@ class Seguros_dynamics
             $existsCot=false;
             if($bean->load_relationship('cot_cotizaciones_s_seguros')){
               $beansCotizaciones = $bean->cot_cotizaciones_s_seguros->getBeans();
+              $idCotizacion = "";
               if (!empty($beansCotizaciones)) {
                   foreach($beansCotizaciones as $cotizacion){
                       if($cotizacion->cot_ganada_c==true){
                         $existsCot=true;
-                       
+                        $idCotizacion = $cotizacion->int_id_dynamics;
                       }
                     }
                     if($existsCot==true){
@@ -426,16 +427,17 @@ class Seguros_dynamics
                         $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
                         $content = json_encode(array(
                           "int_etapa" => "Cierre",
-                          "statuscode" => "Ganada",
-                          "feeC" => $bean->fee_c,
-                          "feePC" => $bean->fee_p_c,
-                          "formaPagoEmitidaC" => $forma_pago,
-                          "comisiNC" => $bean->comision_c,
-                          "currencyIsoCode" => $currencyIsoCode,
-                          "aseguradoraGanadoraC" => $aseguradora_c,
-                          "fechaInicioVigencia_ogC" => $fecha_ini_c,
-                          "fechaFinVigenciaOgC" => $fecha_fin_c,
-                          "ejecutivoAsignadoNuevoC" => $ejecutivo_c
+                          "statuscode" => "Cotizado",
+                          "int_ganada_perdida" => "Sí",
+                          "int_fee_emitir" => $bean->fee_c,
+                          "int_fee_emitir_porcentaje" => $bean->fee_p_c,
+                          "int_forma_pago_emitida" => $forma_pago,
+                          "int_cotizacion_ganadora_id" => $idCotizacion, //Cotización ganadora
+                          "int_fecha_inicio_vigencia_op" => $bean->fecha_ini_c,
+                          "int_fecha_fin_vigencia_op" => $bean->fecha_fin_c,
+                          "int_ganada_cambio_conducto" => "Sí",
+                          "int_equipo_servicio_id" => "",
+                          "int_ejecutivo_servicio_id" => "" // $ejecutivo_c
                         ));
                         $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Ganada: '. $url);
                         $GLOBALS['log']->fatal($content);
@@ -458,10 +460,10 @@ class Seguros_dynamics
                       }
                     }else{
                       throw new SugarApiExceptionInvalidParameter("Debes seleccionar una cotización como Ganada.");
-                    }  
+                    }
                 }
 
-            }  
+            }
         }
         //No Ganada
         if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 10 && !$bean->seguro_uni2_c)
@@ -475,15 +477,18 @@ class Seguros_dynamics
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$arreglo = array(
               "int_etapa" => "Cierre",
-              "statuscode" => "Perdida",
+              "statuscode" => "Cotizado",
+              "int_ganada_perdida" => "No",
               "int_razon_perdida" => $razonPerdida,
               "int_comentarios_razon_perdida" => $bean->comentarios_c,
-              "int_ramo_renovable" => $no_renovable_c
+              "int_fecha_inicio_vigencia_op" => $bean->fecha_ini_c,
+              "int_fecha_fin_vigencia_op" => $bean->fecha_fin_c
             );
             if($bean->tipo_registro_sf_c == 1) unset($arreglo['ramoNoRenovablec']);
-            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Ganada: '. $url);
             $content = json_encode($arreglo);
-        		$curl = curl_init($url);
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Ganada: '. $url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
         		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         		curl_setopt($curl, CURLOPT_HTTPHEADER,

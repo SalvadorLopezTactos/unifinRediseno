@@ -80,7 +80,7 @@ class Analizate extends SugarApi
         $relatedBeans = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
         //Se iteran las n tandas de registros
         foreach ($relatedBeans as $estados) {
-            if($estados->tipo_registro_cuenta_c == '3'){
+            if($estados->tipo_registro_cuenta_c == '2' || $estados->tipo_registro_cuenta_c == '3' || $estados->tipo_registro_cuenta_c == '4'){
                 //Agrega información a sección cliente
                 if ($estados->tipo==1){
                     //En los siguientes 2 if, se valida que el valor de la fecha sea el mas reciente en cada iteracion
@@ -244,7 +244,7 @@ class Analizate extends SugarApi
             $analizateAsociados = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
             //Itera registros analizate de cliente y estatus enviado
             foreach ($analizateAsociados as $analizate) {
-                if($analizate->tipo_registro_cuenta_c == '3' && $analizate->estado == '1'){
+                if(($analizate->tipo_registro_cuenta_c == '2' || $analizate->tipo_registro_cuenta_c == '3'|| $analizate->tipo_registro_cuenta_c == '4') && $analizate->estado == '1'){
                     $diferenciaHoras = round((strtotime($fechaActual) - strtotime($analizate->fecha_actualizacion))/3600, 1);
                     $fechaActualizacionString = strtotime($analizate->fecha_actualizacion);
                     $fechaActualizacionDate = date('Y-m-d',$fechaActualizacionString);

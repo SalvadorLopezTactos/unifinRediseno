@@ -11,19 +11,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['planned-activities-ctc'] = array(
+$viewdefs['base']['view']['active-tasks'] = array(
     'dashlets' => array(
         array(
-            'label' => 'Actividades planificadas',
-            'description' => 'Dashlet con actividades planeadas adicionando el boton de click to call',
+            'label' => 'LBL_ACTIVE_TASKS_DASHLET',
+            'description' => 'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION',
             'config' => array(
-                'limit' => '10',
-                'date' => 'today',
+                'limit' => 10,
                 'visibility' => 'user',
             ),
             'preview' => array(
-                'limit' => '10',
-                'date' => 'today',
+                'limit' => 10,
                 'visibility' => 'user',
             ),
             'filter' => array(
@@ -53,25 +51,13 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
                         'type' => 'dashletaction',
                         'action' => 'createRecord',
                         'params' => array(
-                            'link' => 'meetings',
-                            'module' => 'Meetings',
+                            'module' => 'Tasks',
+                            'link' => 'tasks',
                         ),
-                        'label' => 'LBL_SCHEDULE_MEETING',
+                        'label' => 'LBL_CREATE_TASK',
                         'acl_action' => 'create',
-                        'acl_module' => 'Meetings',
-                        'name' => 'schedule_meeting',
-                    ),
-                    array(
-                        'type' => 'dashletaction',
-                        'action' => 'createRecord',
-                        'params' => array(
-                            'link' => 'calls',
-                            'module' => 'Calls',
-                        ),
-                        'label' => 'LBL_SCHEDULE_CALL',
-                        'acl_action' => 'create',
-                        'acl_module' => 'Calls',
-                        'name' => 'log_call',
+                        'acl_module' => 'Tasks',
+                        'name' => 'create_task',
                     ),
                 ),
             ),
@@ -110,47 +96,42 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
             'placeholders' => true,
             'fields' => array(
                 array(
-                    'name' => 'date',
-                    'label' => 'LBL_DASHLET_CONFIGURE_FILTERS',
-                    'type' => 'enum',
-                    'options' => 'planned_activities_filter_options',
-                ),
-                array(
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
-                    'options' => 'planned_activities_visibility_options',
+                    'options' => 'tasks_visibility_options',
                 ),
                 array(
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                     'type' => 'enum',
-                    'options' => 'planned_activities_limit_options',
-                )
+                    'options' => 'tasks_limit_options',
+                ),
             ),
         ),
     ),
     'tabs' => array(
         array(
             'active' => true,
-            'filter_applied_to' => 'date_start',
             'filters' => array(
-                'status' => array('$not_in' => array('Held', 'Not Held')),
+                'status' => array('$not_in' => array('Completed', 'Deferred')),
+                'date_due' => array('$lte' => 'today'),
             ),
-            'link' => 'meetings',
-            'module' => 'Meetings',
-            'order_by' => 'date_start:desc',
-            'record_date' => 'date_start',
+            'label' => 'LBL_ACTIVE_TASKS_DASHLET_DUE_NOW',
+            'link' => 'tasks',
+            'module' => 'Tasks',
+            'order_by' => 'date_due:desc',
+            'record_date' => 'date_due',
             'row_actions' => array(
-                /*array(
+                array(
                     'type' => 'rowaction',
                     'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
-                    'event' => 'planned-activities:close-record:fire',
+                    'event' => 'active-tasks:close-task:fire',
                     'target' => 'view',
-                    'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
+                    'tooltip' => 'LBL_ACTIVE_TASKS_DASHLET_COMPLETE_TASK',
                     'acl_action' => 'edit',
-                ),*/
+                ),
                 array(
                     'type' => 'unlink-action',
                     'icon' => 'fa-chain-broken',
@@ -161,13 +142,8 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
                     'acl_action' => 'edit',
                 ),
             ),
-            'include_child_items' => true,
-            'invitation_actions' => array(
-                'name' => 'accept_status_users',
-                'type' => 'invitation-actions',
-            ),
             'overdue_badge' => array(
-                'name' => 'date_start',
+                'name' => 'date_due',
                 'type' => 'overdue-badge',
                 'css_class' => 'pull-right',
             ),
@@ -175,28 +151,29 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
-                'date_start',
+                'date_due',
             ),
         ),
         array(
-            'filter_applied_to' => 'date_start',
             'filters' => array(
-                'status' => array('$not_in' => array('Held', 'Not Held')),
+                'status' => array('$not_in' => array('Completed', 'Deferred')),
+                'date_due' => array('$gt' => 'today'),
             ),
-            'link' => 'calls',
-            'module' => 'Calls',
-            'order_by' => 'date_start:desc',
-            'record_date' => 'date_start',
+            'label' => 'LBL_ACTIVE_TASKS_DASHLET_UPCOMING',
+            'link' => 'tasks',
+            'module' => 'Tasks',
+            'order_by' => 'date_due:asc',
+            'record_date' => 'date_due',
             'row_actions' => array(
-               /* array(
+                array(
                     'type' => 'rowaction',
                     'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
-                    'event' => 'planned-activities:close-record:fire',
+                    'event' => 'active-tasks:close-task:fire',
                     'target' => 'view',
-                    'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
+                    'tooltip' => 'LBL_ACTIVE_TASKS_DASHLET_COMPLETE_TASK',
                     'acl_action' => 'edit',
-                ),*/
+                ),
                 array(
                     'type' => 'unlink-action',
                     'icon' => 'fa-chain-broken',
@@ -207,21 +184,52 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
                     'acl_action' => 'edit',
                 ),
             ),
-            'include_child_items' => true,
-            'invitation_actions' => array(
-                'name' => 'accept_status_users',
-                'type' => 'invitation-actions',
+            'fields' => array(
+                'name',
+                'assigned_user_name',
+                'assigned_user_id',
+                'date_due',
             ),
-            'overdue_badge' => array(
-                'name' => 'date_start',
-                'type' => 'overdue-badge',
+        ),
+        array(
+            'filters' => array(
+                'status' => array('$not_in' => array('Completed', 'Deferred')),
+                'date_due' => array('$is_null' => ''),
+            ),
+            'label' => 'LBL_ACTIVE_TASKS_DASHLET_TODO',
+            'link' => 'tasks',
+            'module' => 'Tasks',
+            'order_by' => 'date_entered:asc',
+            'row_actions' => array(
+                array(
+                    'type' => 'rowaction',
+                    'icon' => 'fa-times-circle',
+                    'css_class' => 'btn btn-mini',
+                    'event' => 'active-tasks:close-task:fire',
+                    'target' => 'view',
+                    'tooltip' => 'LBL_ACTIVE_TASKS_DASHLET_COMPLETE_TASK',
+                    'acl_action' => 'edit',
+                ),
+                array(
+                    'type' => 'unlink-action',
+                    'icon' => 'fa-chain-broken',
+                    'css_class' => 'btn btn-mini',
+                    'event' => 'tabbed-dashlet:unlink-record:fire',
+                    'target' => 'view',
+                    'tooltip' => 'LBL_UNLINK_BUTTON',
+                    'acl_action' => 'edit',
+                ),
             ),
             'fields' => array(
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
-                'date_start',
+                'date_entered',
             ),
         ),
+    ),
+    'visibility_labels' => array(
+        'user' => 'LBL_ACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL',
+        'group' => 'LBL_ACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL',
     ),
 );

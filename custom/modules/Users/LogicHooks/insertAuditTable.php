@@ -79,6 +79,32 @@ class AuditTable
 
             }
         
+            //Valida cambio en el campo Tipo Producto
+            if($bean->fetched_row['tipodeproducto_c'] != $bean->tipodeproducto_c){
+
+                $id_u_audit=create_guid();
+                $tipo=$this->getFieldType($bean,'tipodeproducto_c');
+                $anterior=$bean->fetched_row["tipodeproducto_c"];
+                $actual=$bean->tipodeproducto_c;
+                $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'tipodeproducto_c', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                $GLOBALS['db']->query($sqlInsert);
+
+            }
+
+            //Valida cambio en el campo Fecha de Baja
+            if($bean->fetched_row['fecha_baja_c'] != $bean->fecha_baja_c){
+
+                $id_u_audit=create_guid();
+                $tipo=$this->getFieldType($bean,'fecha_baja_c');
+                $anterior=$bean->fetched_row["fecha_baja_c"];
+                $actual=$bean->fecha_baja_c;
+                $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'fecha_baja_c', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                $GLOBALS['db']->query($sqlInsert);
+
+            }
+
         }
 
     }
