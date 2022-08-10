@@ -12,7 +12,7 @@
 .contenedor-grid{
     display: grid;
     /*grid-template-columns: repeat(8, 1fr);*/
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     border-bottom: 1px solid #d8d8d8 ;
     overflow-x: auto;
@@ -46,24 +46,16 @@
     padding: 0 5px;
 }
 
-.contenedor-sinContactar{
-    background-color: var(--color-sinContactar);
+.contenedor-conLinea{
+    background-color: var(--color-conLinea);
 }
 
-.contenedor-contactado{
-    background-color: var(--color-contactado);
+.contenedor-activo{
+    background-color: var(--color-activo);
 }
 
-.contenedor-interesado{
-    background-color: var(--color-interesado);
-}
-
-.contenedor-integracion{
-    background-color: var(--color-integracion);
-}
-
-.contenedor-credito{
-    background-color: var(--color-credito);
+.contenedor-perdido{
+    background-color: var(--color-perdido);
 }
 
 .color-white{
@@ -76,16 +68,16 @@
     padding: 0 5px;
 }
 
-.cantidad-interesado{
-    color: var(--color-interesado);
+.cantidad-conLinea{
+    color: var(--color-conLinea);
 }
 
-.cantidad-integracion{
-    color: var(--color-integracion);
+.cantidad-activo{
+    color: var(--color-activo);
 }
 
-.cantidad-credito{
-    color: var(--color-credito);
+.cantidad-perdido{
+    color: var(--color-perdido);
 }
 
 .contenedor-item{
@@ -150,33 +142,23 @@
     justify-content: space-between;
 }
 
-.sinContactar-items{
+.conLinea-items{
     grid-column: 1/2;
     grid-row: 2/3;
 }
 
-.contactado-items{
+.activo-items{
     grid-column: 2/3;
     grid-row: 2/3;
 }
 
-.interesado-items{
+.perdido-items{
     grid-column: 3/4;
     grid-row: 2/3;
 }
 
-.integracion-items{
-    grid-column: 4/5;
-    grid-row: 2/3;
-}
-
-.credito-items{
-    grid-column: 5/6;
-    grid-row: 2/3; 
-}
-
 .checklist-item{
-    grid-column: 6/7;
+    grid-column: 9/10;
     grid-row: span 2;
     /*
     display: block;
