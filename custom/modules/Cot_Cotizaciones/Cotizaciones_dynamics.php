@@ -92,6 +92,18 @@ class Cotizaciones_dynamics
             throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
           }
         }
+        //Actualizar ids aseguradoras
+        if($bean->fetched_row['int_aseguradora_id_c'] != $bean->int_aseguradora_id_c && !empty($bean->int_aseguradora_id_c)){
+            $listaSugar = $app_list_strings['aseguradoras_list'];
+            $idSugar = '';
+            foreach ($listaSugar as $key => $value) {
+            if($bean->int_aseguradora_id_c == $value){
+                $idSugar = $key;
+            }
+            }
+            $bean->aseguradora_c = $idSugar;
+        }
+
     }
 
     public function getToken()
