@@ -5,10 +5,46 @@ class Cotizaciones_dynamics
 {
     public function envioDynamics($bean = null, $event = null, $args = null)
     {
+        global $db,$sugar_config, $app_list_strings;
+        //Actualizacion
+        if($_SESSION['platform'] == 'base' && $args['isUpdate'] && !empty($bean->int_id_dynamics) && !empty($bean->int_id_dynamics)  && ($bean->fetched_row['int_prima_neta'] != $bean->int_prima_neta || $bean->fetched_row['int_comision'] != $bean->int_comision || $bean->fetched_row['int_comision_porcentaje'] != $bean->int_comision_porcentaje
+            ||$bean->fetched_row['aseguradora_c'] != $bean->aseguradora_c))
+        {
+          $token = $this->getToken();
+          if($token)
+          {
+            $aseguradora = $app_list_strings['aseguradoras_list'][$bean->aseguradora_c];
+            $url = $sugar_config['inter_dynamics_url'].'Cotizacion/'.$bean->int_id_dynamics;
+        		$arreglo = array(
+                    "int_prima_neta" => $bean->int_prima_neta,
+                    "int_comision" => $bean->int_comision,
+                    "int_comision_porcentaje" => $bean->int_comision_porcentaje,
+                    "int_aseguradora_id" => $aseguradora
+                );
+            $content = json_encode($arreglo);
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza Cotizacion: '. $url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
+        		curl_setopt($curl, CURLOPT_HEADER, false);
+        		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        		curl_setopt($curl, CURLOPT_HTTPHEADER,
+        		array("Authorization: Bearer $token",
+        			"Content-type: application/json"));
+        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+        		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+        		$response = curl_exec($curl);
+            $GLOBALS['log']->fatal('Cotizacion Actualizada: ' .$response);
+            curl_close($curl);
+            if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+          }
+          else
+          {
+            throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
+          }
+        }
         //Creacion de Cotizacion y envio a Dynamics
         if(empty($bean->int_id_dynamics))
         {
-          global $db,$sugar_config, $app_list_strings;
           $Seguro = BeanFactory::getBean('S_seguros', $bean->cot_cotizaciones_s_seguross_seguros_ida, array('disable_row_level_security' => true));
           $cuenta = BeanFactory::getBean('Accounts', $Seguro->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
           $token = $this->getToken();
@@ -23,7 +59,8 @@ class Cotizaciones_dynamics
                 "int_prima_neta" => $bean->int_prima_neta,
                 "int_comision" => $bean->int_comision,
                 "int_comision_porcentaje" => $bean->int_comision_porcentaje,
-                "int_aseguradora_id" => $aseguradora
+                "int_aseguradora_id" => $aseguradora,
+                "int_creacion_unifin" => "si"
             );
             $content = json_encode($arreglo);
             $GLOBALS['log']->fatal('Seguros_Dynamics - Crea cotizacion - Dynamics: '. $url);
@@ -50,42 +87,6 @@ class Cotizaciones_dynamics
             {
               if($response) throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response[errores][0]['describeError']);
             }
-          }
-          else
-          {
-            throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
-          }
-        }
-        //Actualizacion
-        if(!empty($bean->int_id_dynamics)  && ($bean->fetched_row['int_prima_neta'] != $bean->int_prima_neta || $bean->fetched_row['int_comision'] != $bean->int_comision || $bean->fetched_row['int_comision_porcentaje'] != $bean->int_comision_porcentaje
-            ||$bean->fetched_row['aseguradora_c'] != $bean->aseguradora_c))
-        {
-          $token = $this->getToken();
-          if($token)
-          {
-           
-            $url = $sugar_config['inter_dynamics_url'].'Cotizacion/'.$bean->int_id_dynamics;
-        		$arreglo = array(
-                    "int_prima_neta" => $bean->int_prima_neta,
-                    "int_comision" => $bean->int_comision,
-                    "int_comision_porcentaje" => $bean->int_comision_porcentaje,
-                    "int_aseguradora_id" => $aseguradora
-                );
-            $content = json_encode($arreglo);
-            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza Cotizacion: '. $url);
-            $GLOBALS['log']->fatal($content);
-            $curl = curl_init($url);
-        		curl_setopt($curl, CURLOPT_HEADER, false);
-        		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        		curl_setopt($curl, CURLOPT_HTTPHEADER,
-        		array("Authorization: Bearer $token",
-        			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-        		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-        		$response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Cotizacion Actualizada: ' .$response);
-            curl_close($curl);
-            if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
           }
           else
           {
