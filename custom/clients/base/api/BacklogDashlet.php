@@ -1487,13 +1487,13 @@ SQL;
         //$url='http://'.$GLOBALS['esb_url'].'/uni2/rest/unics/actualizaFechasBacklog';
         $url=$host."/QuanticoBacklog_API/rest/BacklogApi/MoveDateBacklog";
         $fields = array(
-            "backlogRequest" => array(
+            //"backlogRequest" => array(
                 "bl" => $args['data']['bl'],
                 "mesActual" => $args['data']['mesActual'],
                 "anioActual" => $args['data']['anioActual'],
                 "mesNuevo" => $args['data']['mesNuevo'],
                 "anioNuevo" => $args['data']['anioNuevo']
-            )
+            //)
         );
 
         $callApi = new UnifinAPI();
