@@ -8,7 +8,7 @@ class Cotizaciones_dynamics
         //Creacion de Cotizacion y envio a Dynamics
         if(empty($bean->int_id_dynamics))
         {
-          global $db;
+          global $db,$sugar_config, $app_list_strings;
           $Seguro = BeanFactory::getBean('S_seguros', $bean->cot_cotizaciones_s_seguross_seguros_ida, array('disable_row_level_security' => true));
           $cuenta = BeanFactory::getBean('Accounts', $Seguro->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
           $token = $this->getToken();
@@ -40,7 +40,7 @@ class Cotizaciones_dynamics
         		curl_close($curl);
         		$response = json_decode($json_response, true);
             $id_op = $response['id_CRM'];
-            $GLOBALS['log']->fatal('Creacion de Cotizacion en Dyncamics: ' .$response);
+            $GLOBALS['log']->fatal('Creacion de Cotizacion en Dynamics: ' .$response);
             $GLOBALS['log']->fatal(json_encode(print_r($response,true)));
             if($id_op)
             {
