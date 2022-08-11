@@ -276,7 +276,7 @@ class Seguros_dynamics
           }
         }
         //Cotizado
-        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 4 && $bean->tipo_registro_sf_c == 1 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 4 && $bean->tipo_registro_sf_c == 1 && !$bean->seguro_uni2_c && $bean->tipo_registro_sf_c!='1')
         {
           $token = $this->getToken();
           if($token)
@@ -358,7 +358,7 @@ class Seguros_dynamics
               $content = json_encode(array(
                 "int_etapa" => "Presentando",
                 "statuscode" => "Contactado"
-  
+
               ));
             }else{
               $content = json_encode(array(
@@ -439,7 +439,7 @@ class Seguros_dynamics
             if(empty($idCotizacion)){
               throw new SugarApiExceptionInvalidParameter("Se requiere una cotización marcada como ganada para poder avanzar.");
             }
-            
+
             $token = $this->getToken();
             if($token)
             {
@@ -448,6 +448,7 @@ class Seguros_dynamics
               $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
               $ejecutivo_c = $app_list_strings['ejecutivo_list'][$bean->ejecutivo_c];
               $ejecutivoDynamics= $app_list_strings['int_ejecutivo_id_list'][1];
+              $equipoServicioDynamics= $app_list_strings['int_ejecutivo_id_list'][2];
               $fecha_ini_c = $bean->fecha_ini_c;
               $fecha_ini_c = date("d/m/Y", strtotime($fecha_ini_c));
               $fecha_fin_c = $bean->fecha_fin_c;
@@ -464,7 +465,7 @@ class Seguros_dynamics
                 "int_fecha_inicio_vigencia_op" => $bean->fecha_ini_c,
                 "int_fecha_fin_vigencia_op" => $bean->fecha_fin_c,
                 "int_ganada_cambio_conducto" => "Sí",
-                "int_equipo_servicio_id" => "",
+                "int_equipo_servicio_id" => $equipoServicioDynamics,
                 "int_ejecutivo_servicio_id" => $ejecutivoDynamics // $ejecutivo_c
               ));
               $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Ganada: '. $url);
