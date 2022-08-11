@@ -60,3 +60,4 @@ $mod_strings['LBL_CREADO_PUESTO_C'] = 'Puesto';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Participantes';
 $mod_strings[''] = 'reunion_participantes';
 $mod_strings['LBL_LINK_LENIA'] = 'Link Lenia';
+$mod_strings['LBL_ERROR_LENIA'] = 'Error Lenia';
