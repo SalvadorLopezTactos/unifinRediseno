@@ -283,6 +283,8 @@
     },
 
     _disableActionsSubpanel: function () {
-      $('[data-subpanel-link="cot_cotizaciones_s_seguros"]').find(".subpanel-controls").hide();
+      if (this.model.get('tipo_registro_sf_c')=='2' &&  this.model.get('requiere_ayuda_c')=='2'){
+        $('[data-subpanel-link="cot_cotizaciones_s_seguros"]').find(".subpanel-controls").hide();
       }
+    }
 })
