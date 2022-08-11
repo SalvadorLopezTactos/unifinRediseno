@@ -2,9 +2,9 @@
  // created: 2021-04-14 13:46:41
 
 $app_list_strings['ejecutivo_list']=array (
-  1 => 'a0Q2G00000HMvaiUAD',
-  2 => 'a0QA000000F6JypMAF',
-  3 => 'a0Q2F000003wFIiUAM',
+  1 => 'CON-0000000004',
+  2 => 'CON-0000000152',
+  3 => 'CON-0000000589',
   4 => 'N/A',
-  5 => 'a0Q3m00000rh0rnEAA',
+  5 => 'CON-0000000589',
 );

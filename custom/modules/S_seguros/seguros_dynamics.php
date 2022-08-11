@@ -160,6 +160,9 @@ class Seguros_dynamics
             if($bean->tipo_referenciador == 1) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->region;
             if($bean->tipo_referenciador == 2) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->departamento_c;
             if($bean->tipo_referenciador == 3) $referenciadorCuenta = $app_list_strings['ejecutivo_c_list'][$bean->ejecutivo_c];
+
+            $ejecutivo_c = $app_list_strings['ejecutivo_list'][$bean->ejecutivo_c];
+            $vendedorID= $app_list_strings['int_vendedor_id_list'][1];
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $closeDate = $bean->fecha_cierre_c;
             $closeDate = date("d/m/Y", strtotime($closeDate));
@@ -176,8 +179,8 @@ class Seguros_dynamics
                 "transactioncurrencyid" => $divisa,
                 "int_oportunidad_internacional" => $oportunidadInternacionalC,
                 "int_localidad_id" => $oficinaID,
-                "int_kam_santander_unifin_id" => "",
-                "int_vendedor_id" => "CON-0000001052",
+                "int_kam_santander_unifin_id" => $ejecutivo_c,
+                "int_vendedor_id" => $vendedorID,  //Unifin-Unifin
                 "actualclosedate" => $bean->fecha_cierre_c,
                 "int_prima_total_objetivo" => $bean->prima_obj_c,
                 "int_ing_objetivo_porcentaje" => "",
@@ -228,17 +231,30 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $fechaRequierePropuestaC = $bean->fecha_req;
             $fechaRequierePropuestaC = date("d/m/Y", strtotime($fechaRequierePropuestaC));
-            if($bean->requiere_ayuda_c == 1) $requiereAyudaDeReaTcnica = 'No';
-            if($bean->requiere_ayuda_c == 2) $requiereAyudaDeReaTcnica = 'Si';
+            $requiereAyudaDeReaTcnica = ($bean->requiere_ayuda_c == 2) ? 'Si' : 'No';
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
-        		$content = json_encode(array(
-                "int_etapa" => "Cotizando",
-                "statuscode" => "Contactado",
-                "int_ayuda_area_tecnica" =>  $requiereAyudaDeReaTcnica,
-                "int_fecha_req_propuesta" => $bean->fecha_req,
-                "description" => $bean->description,
-                "int_servicio_incluir" => $serviciosaincluirc
-            ));
+            //Valida etapa previa
+            if($bean->fetched_row['etapa'] == 3)
+            {
+                //Etapa previa es revisión; sólo manda 3 valores
+                $content = json_encode(array(
+                  "int_etapa"=>"Cotizando",
+                  "statuscode"=>"Contactado",
+                  "int_datos_completos" =>"Sí"
+                ));
+            }else{
+                // Flujo normal, envía toda la información
+                $content = json_encode(array(
+                    "int_etapa" => "Cotizando",
+                    "statuscode" => "Contactado",
+                    "int_ayuda_area_tecnica" =>  $requiereAyudaDeReaTcnica,
+                    "int_fecha_comp_comercial" => $bean->fecha_cierre_c,
+                    "int_fecha_req_propuesta" => $bean->fecha_req,
+                    "description" => $bean->description,
+                    "int_servicio_incluir" => $serviciosaincluirc,
+                    "int_ing_objetivo_porcentaje"=>"1"
+                ));
+            }
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Cotizando: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
@@ -301,9 +317,14 @@ class Seguros_dynamics
             $motivo = $app_list_strings['motivo_no_cotizado_list'][$bean->motivo_no_cotizado_c];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
-              "int_etapa" => "Cierre",
-              "statuscode" => "No Cotizado",
-              "int_motivo_no_cotizada" => $motivo
+              "int_etapa" => "Cotizando",
+              "statuscode" => "Contactado",
+              "int_motivo_no_cotizada" => $motivo,
+              "int_razon_perdida"=>"No se pudo colocar",
+              "int_comentarios_razon_perdida"=>"Prueba comentarios razón perdida",
+              "int_fecha_inicio_vigencia_op"=>"2022-06-28T00:00:00.000",
+              "int_fecha_fin_vigencia_op"=>"2023-06-28T00:00:00.000",
+              "int_motivo_no_cotizada"=>"No se pudo colocar"
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Cotizado: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -333,11 +354,19 @@ class Seguros_dynamics
           {
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
         		$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
-        		$content = json_encode(array(
-              "int_etapa" => "Presentando",
-              "statuscode" => "Cotizado"
-              
-            ));
+            if($bean->tipo_registro_sf_c=='1'){
+              $content = json_encode(array(
+                "int_etapa" => "Presentando",
+                "statuscode" => "Contactado"
+  
+              ));
+            }else{
+              $content = json_encode(array(
+                "int_etapa" => "Presentando",
+                "statuscode" => "Cotizado"
+
+              ));
+            }
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Presentación: '. $url);
             $GLOBALS['log']->fatal($content);
             $curl = curl_init($url);
@@ -368,7 +397,8 @@ class Seguros_dynamics
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$content = json_encode(array(
               "int_etapa" => "Cotizando",
-              "statuscode" => "Negociando"
+              "statuscode" => "Recotizar",
+              "qualificationcomments" => $bean->motivos_c
             ));
             $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Re-negociación: '. $url);
             $GLOBALS['log']->fatal($content);
@@ -394,68 +424,69 @@ class Seguros_dynamics
         if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 9 && !$bean->seguro_uni2_c)
         {
             //Validamos que se tenga una Cotizacion como Ganada para continuar el proceso
-            $existsCot=false;
+            $idCotizacion = "";
             if($bean->load_relationship('cot_cotizaciones_s_seguros')){
               $beansCotizaciones = $bean->cot_cotizaciones_s_seguros->getBeans();
               if (!empty($beansCotizaciones)) {
                   foreach($beansCotizaciones as $cotizacion){
                       if($cotizacion->cot_ganada_c==true){
-                        $existsCot=true;
-                       
+                        $idCotizacion = $cotizacion->int_id_dynamics;
                       }
-                    }
-                    if($existsCot==true){
-                      $token = $this->getToken();
-                      if($token)
-                      {
-                        $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
-                        $forma_pago = $app_list_strings['forma_pago_dynamics_list'][$bean->forma_pago];
-                        $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
-                        $aseguradora_c = $app_list_strings['aseguradoras_list'][$bean->aseguradora_c];
-                        $ejecutivo_c = $app_list_strings['ejecutivo_list'][$bean->ejecutivo_c];
-                        $fecha_ini_c = $bean->fecha_ini_c;
-                        $fecha_ini_c = date("d/m/Y", strtotime($fecha_ini_c));
-                        $fecha_fin_c = $bean->fecha_fin_c;
-                        $fecha_fin_c = date("d/m/Y", strtotime($fecha_fin_c));
-                        $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
-                        $content = json_encode(array(
-                          "int_etapa" => "Cierre",
-                          "statuscode" => "Ganada",
-                          "feeC" => $bean->fee_c,
-                          "feePC" => $bean->fee_p_c,
-                          "formaPagoEmitidaC" => $forma_pago,
-                          "comisiNC" => $bean->comision_c,
-                          "currencyIsoCode" => $currencyIsoCode,
-                          "aseguradoraGanadoraC" => $aseguradora_c,
-                          "fechaInicioVigencia_ogC" => $fecha_ini_c,
-                          "fechaFinVigenciaOgC" => $fecha_fin_c,
-                          "ejecutivoAsignadoNuevoC" => $ejecutivo_c
-                        ));
-                        $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Ganada: '. $url);
-                        $GLOBALS['log']->fatal($content);
-                        $curl = curl_init($url);
-                        curl_setopt($curl, CURLOPT_HEADER, false);
-                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($curl, CURLOPT_HTTPHEADER,
-                        array("Authorization: Bearer $token",
-                          "Content-type: application/json"));
-                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-                        curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                        $response = curl_exec($curl);
-                        $GLOBALS['log']->fatal('Informacion de Ganada enviada: ' .$response);
-                        curl_close($curl);
-                        if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
-                      }
-                      else
-                      {
-                        throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
-                      }
-                    }else{
-                      throw new SugarApiExceptionInvalidParameter("Debes seleccionar una cotización como Ganada.");
-                    }  
-                }
+                  }
+              }
+            }
 
-            }  
+            if(empty($idCotizacion)){
+              throw new SugarApiExceptionInvalidParameter("Se requiere una cotización marcada como ganada para poder avanzar.");
+            }
+            
+            $token = $this->getToken();
+            if($token)
+            {
+              $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
+              $forma_pago = $app_list_strings['forma_pago_dynamics_list'][$bean->forma_pago];
+              $currencyIsoCode = $app_list_strings['monedas_list'][$bean->monedas_c];
+              $aseguradora_c = $app_list_strings['aseguradoras_list'][$bean->aseguradora_c];
+              $ejecutivo_c = $app_list_strings['ejecutivo_list'][$bean->ejecutivo_c];
+              $ejecutivoDynamics= $app_list_strings['int_ejecutivo_id_list'][1];
+              $fecha_ini_c = $bean->fecha_ini_c;
+              $fecha_ini_c = date("d/m/Y", strtotime($fecha_ini_c));
+              $fecha_fin_c = $bean->fecha_fin_c;
+              $fecha_fin_c = date("d/m/Y", strtotime($fecha_fin_c));
+              $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
+              $content = json_encode(array(
+                "int_etapa" => "Cierre",
+                "statuscode" => "Cotizado",
+                "int_ganada_perdida" => "Sí",
+                "int_fee_emitir" => $bean->fee_c,
+                "int_fee_emitir_porcentaje" => $bean->fee_p_c,
+                "int_forma_pago_emitida" => $forma_pago,
+                "int_cotizacion_ganadora_id" => $idCotizacion, //Cotización ganadora
+                "int_fecha_inicio_vigencia_op" => $bean->fecha_ini_c,
+                "int_fecha_fin_vigencia_op" => $bean->fecha_fin_c,
+                "int_ganada_cambio_conducto" => "Sí",
+                "int_equipo_servicio_id" => "",
+                "int_ejecutivo_servicio_id" => $ejecutivoDynamics // $ejecutivo_c
+              ));
+              $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Ganada: '. $url);
+              $GLOBALS['log']->fatal($content);
+              $curl = curl_init($url);
+              curl_setopt($curl, CURLOPT_HEADER, false);
+              curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+              curl_setopt($curl, CURLOPT_HTTPHEADER,
+              array("Authorization: Bearer $token",
+                "Content-type: application/json"));
+              curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+              curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+              $response = curl_exec($curl);
+              $GLOBALS['log']->fatal('Informacion de Ganada enviada: ' .$response);
+              curl_close($curl);
+              if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
+            }
+            else
+            {
+              throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
+            }
         }
         //No Ganada
         if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 10 && !$bean->seguro_uni2_c)
@@ -469,15 +500,18 @@ class Seguros_dynamics
             $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
         		$arreglo = array(
               "int_etapa" => "Cierre",
-              "statuscode" => "No Ganada",
+              "statuscode" => "Cotizado",
+              "int_ganada_perdida" => "No",
               "int_razon_perdida" => $razonPerdida,
               "int_comentarios_razon_perdida" => $bean->comentarios_c,
-              "int_ramo_renovable" => $no_renovable_c
+              "int_fecha_inicio_vigencia_op" => $bean->fecha_ini_c,
+              "int_fecha_fin_vigencia_op" => $bean->fecha_fin_c
             );
             if($bean->tipo_registro_sf_c == 1) unset($arreglo['ramoNoRenovablec']);
-            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Ganada: '. $url);
             $content = json_encode($arreglo);
-        		$curl = curl_init($url);
+            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - No Ganada: '. $url);
+            $GLOBALS['log']->fatal($content);
+            $curl = curl_init($url);
         		curl_setopt($curl, CURLOPT_HEADER, false);
         		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         		curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -495,39 +529,6 @@ class Seguros_dynamics
             throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
           }
         }
-        //Solicitud de Cotización
-        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 11 && !$bean->seguro_uni2_c)
-        {
-          $token = $this->getToken();
-          if($token)
-          {
-            $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
-        	$url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
-        		$content = json_encode(array(
-              "int_etapa" => "SOLICITUDCOTIZACION",
-              "statuscode"=>""
-            ));
-            $GLOBALS['log']->fatal('Seguros_Dynamics - Actualiza oportunidad - Solicitud cotización: '. $url);
-            $GLOBALS['log']->fatal($content);
-            $curl = curl_init($url);
-        		curl_setopt($curl, CURLOPT_HEADER, false);
-        		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        		curl_setopt($curl, CURLOPT_HTTPHEADER,
-        		array("Authorization: Bearer $token",
-        			"Content-type: application/json"));
-        		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-        		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-        		$response = curl_exec($curl);
-            $GLOBALS['log']->fatal('Informacion de Solicitud cotización enviada: ' .$response);
-        		curl_close($curl);
-            if($response['critical'] == 'true') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
-          }
-          else
-          {
-            throw new SugarApiExceptionInvalidParameter("Servicio de Dynamics no disponible");
-          }
-        }
-        $GLOBALS['log']->fatal('Finaliza Seguros Dynamics');
     }
 
     public function getToken()

@@ -194,10 +194,13 @@ array (
               array (
                 'readonly' => false,
                 'name' => 'aseguradora_c',
-                'label' => 'LBL_ASEGURADORA_C',
+                'label' => 'LBL_ASEGURADORA',
               ),
               5 => 
               array (
+                'readonly' => false,
+                'name' => 'int_aseguradora_id_c',
+                'label' => 'LBL_INT_ASEGURADORA_ID',
               ),
               6 => 
               array (
