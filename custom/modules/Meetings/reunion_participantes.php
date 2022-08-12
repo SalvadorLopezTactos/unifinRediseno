@@ -273,146 +273,154 @@ class reunion_participantes
 				$response = curl_exec($curl);
 				$err = curl_error($curl);
 				if ($err) {
-					$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}'";
-					$queryResult = $db->query($query);						
+					$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}';";
+					$queryResult = $db->query($query);
 					$GLOBALS['log']->fatal("Error: ".$err);
 				}
 				else {
-					$response = json_decode($response, true);
 					curl_close($curl);
+					$response = json_decode($response, true);
 					$token = $response['access_token'];
-					// Convierte formato de fecha y hora
-					date_default_timezone_set('America/Mexico_City');
-					$verano = date('I');
-					$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
-					if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
-					$inicio = strtotime('-6 hours',strtotime($bean->date_start));
-					$fin = strtotime('-6 hours',strtotime($bean->date_end));
-					if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
-					if($verano) $fin = strtotime('-5 hours',strtotime($bean->date_end));
-					$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
-					$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-					$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
-					$hora = date("g:i a",$inicio);
-					$start = date('Ymd',$inicio)."T".date('His',$inicio);
-					$end = date('Ymd',$fin)."T".date('His',$fin);
-					$ini_outlook = date('Y-m-d',$inicio)."T".date('H:i:s',$inicio);
-					$fin_outlook = date('Y-m-d',$fin)."T".date('H:i:s',$fin);
-					// Invoca servicio para crear o actualizar sala en Lenia
-					$url = $sugar_config['lenia'].'videocall/room/add/?meeting_objective_id='.$bean->objetivo_c;
-					if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c.'&meeting_objective_id='.$bean->objetivo_c;
-					$content = json_encode(array(
-					  "crm_id" => $bean->id,
-					  "session_name" => $bean->name,
-					  "room_status" => true,
-					  "scheduled_date" => array(
-					  "day" => date('d',strtotime($bean->date_start)),
-					  "month" => date('m',strtotime($bean->date_start)),
-					  "year" => date('Y',strtotime($bean->date_start)),
-					  "date" => $scheduled,
-					),
-					  "guest_list" => $guest,
-					  "advisor_list" => $advisor
-					));
-					$GLOBALS['log']->fatal("Solicitud Lenia: ");
-					$GLOBALS['log']->fatal($content);
-					$curl = curl_init($url);
-					curl_setopt($curl, CURLOPT_HEADER, false);
-					curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($curl, CURLOPT_HTTPHEADER,
-					array("Authorization: Bearer $token",
-						"Content-type: application/json"));
-					curl_setopt($curl, CURLOPT_POST, true);
-					curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-					curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-					$response = curl_exec($curl);
-					$err = curl_error($curl);
-					if ($err) {
-						$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}'";
-						$queryResult = $db->query($query);
-						$GLOBALS['log']->fatal("Error: ".$err);
-					}
-					else {
-						curl_close($curl);
-						$response = json_decode($response, true);
-						$GLOBALS['log']->fatal("Respuesta Lenia: ");
-						$GLOBALS['log']->fatal($response);
-						if($response['status'] && !$bean->link_lenia_c) {
-							// Actualiza ID de Sala en la Reunión
-							$descripcion = "El enlace que deberás usar para poder conectarte el día de la videoconferencia es: ".$sugar_config['lenia_url'].$response['idSala']."?".$organizador;
-							$query = "UPDATE meetings a, meetings_cstm b
-							  SET a.description = '{$descripcion}', b.link_lenia_c = '{$response['idSala']}'
-							  WHERE a.id = b.id_c and b.id_c = '{$bean->id}'";
+					if ($token) {
+						// Convierte formato de fecha y hora
+						date_default_timezone_set('America/Mexico_City');
+						$verano = date('I');
+						$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
+						if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
+						$inicio = strtotime('-6 hours',strtotime($bean->date_start));
+						$fin = strtotime('-6 hours',strtotime($bean->date_end));
+						if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
+						if($verano) $fin = strtotime('-5 hours',strtotime($bean->date_end));
+						$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+						$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+						$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
+						$hora = date("g:i a",$inicio);
+						$start = date('Ymd',$inicio)."T".date('His',$inicio);
+						$end = date('Ymd',$fin)."T".date('His',$fin);
+						$ini_outlook = date('Y-m-d',$inicio)."T".date('H:i:s',$inicio);
+						$fin_outlook = date('Y-m-d',$fin)."T".date('H:i:s',$fin);
+						// Invoca servicio para crear o actualizar sala en Lenia
+						$url = $sugar_config['lenia'].'videocall/room/add/?meeting_objective_id='.$bean->objetivo_c;
+						if($bean->link_lenia_c) $url = $sugar_config['lenia'].'videocall/room/update/?crm_id='.$bean->id.'&room_id='.$bean->link_lenia_c.'&meeting_objective_id='.$bean->objetivo_c;
+						$content = json_encode(array(
+						  "crm_id" => $bean->id,
+						  "session_name" => $bean->name,
+						  "room_status" => true,
+						  "scheduled_date" => array(
+						  "day" => date('d',strtotime($bean->date_start)),
+						  "month" => date('m',strtotime($bean->date_start)),
+						  "year" => date('Y',strtotime($bean->date_start)),
+						  "date" => $scheduled,
+						),
+						  "guest_list" => $guest,
+						  "advisor_list" => $advisor
+						));
+						$GLOBALS['log']->fatal("Solicitud Lenia: ");
+						$GLOBALS['log']->fatal($content);
+						$curl = curl_init($url);
+						curl_setopt($curl, CURLOPT_HEADER, false);
+						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+						curl_setopt($curl, CURLOPT_HTTPHEADER,
+						array("Authorization: Bearer $token",
+							"Content-type: application/json"));
+						curl_setopt($curl, CURLOPT_POST, true);
+						curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+						curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+						curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+						$response = curl_exec($curl);
+						$err = curl_error($curl);
+						if ($err) {
+							$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}'";
 							$queryResult = $db->query($query);
-						}
-						if($response['status']) {
-							$query = "UPDATE meetings_cstm SET error_lenia_c = null WHERE id_c = '{$bean->id}'";
-							$queryResult = $db->query($query);
-							if($bean->assigned_user_id) {
-								$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
-								$usuario = $beanUsr->name;
-							}
-							$sala = $response['idSala'];
-							if($bean->link_lenia_c) $sala = $bean->link_lenia_c;
-							// Envía correo a los invitados
-							foreach ($correos as $correo) {
-								require_once("include/SugarPHPMailer.php");
-								require_once("modules/EmailTemplates/EmailTemplate.php");
-								require_once("modules/Administration/Administration.php");									
-								$url = $sugar_config['lenia_url'].$sala."?".$correo["id"];
-								$emailtemplate = new EmailTemplate();
-								if($organizador == $correo['id']) {
-									$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor','type'=>'email'));
-								}
-								else {
-									$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente','type'=>'email'));
-								}
-								$asunto = $emailtemplate->subject;
-								if($objParticipantes['actualiza']) $asunto = "Actualización: ".$emailtemplate->subject;
-								$google = "http://www.google.com/calendar/event?action=TEMPLATE&text=".$asunto."&dates=".$start."/".$end."&location=".$url."&trp=false&details=UNIFIN FINANCIERA";
-								$outlook = "https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&startdt=".$ini_outlook."&enddt=".$fin_outlook."&subject=".$asunto."&body=UNIFIN FINANCIERA&location=".$url;
-								$office = "https://outlook.office.com/calendar/0/deeplink/compose?subject=".$asunto."&body=UNIFIN FINANCIERA&startdt=".$ini_outlook."&enddt=".$fin_outlook."&location=".$url."&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent";
-								$emailtemplate->subject = $asunto;
-								$body_html = $emailtemplate->body_html;
-								$body_html = str_replace('participante_name', $correo["name"], $body_html);
-								$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
-								$body_html = str_replace('asesor_name', $usuario, $body_html);
-								$body_html = str_replace('fecha', $fecha, $body_html);
-								$body_html = str_replace('hora', $hora, $body_html);
-								$body_html = str_replace('google', $google, $body_html);
-								$body_html = str_replace('outlook', $outlook, $body_html);
-								$body_html = str_replace('office', $office, $body_html);
-								if($objParticipantes['actualiza']) $body_html = str_replace('ha quedado agendada una', 'se ha actualizado la', $body_html);
-								$emailtemplate->body_html = str_replace('url', $url, $body_html);
-								$mailer = MailerFactory::getSystemDefaultMailer();
-								$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-								$mailer->setSubject($emailtemplate->subject);
-								$body = trim($emailtemplate->body_html);
-								$mailer->setHtmlBody($body);
-								$mailer->clearRecipients();
-								$mailer->addRecipientsTo(new EmailIdentity($correo["mail"], $correo["name"]));
-								// Crea auditoría de correos
-								$userid = $bean->assigned_user_id;
-								$recordid = $correo["id"];
-								$hoy = date("Y-m-d H:i:s");
-								$mail = $correo["mail"];
-								try {
-									$result = $mailer->send();
-									$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
-										VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'OK', 'Correo exitosamente enviado')";
-									$GLOBALS['db']->query($insert);
-								} catch (Exception $e) {
-									$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, error_code, description)
-										VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'ERROR', '01', '{$e->getMessage()}')";
-									$GLOBALS['db']->query($insert);
-								}
-							}
+							$GLOBALS['log']->fatal("Error: ".$err);
 						}
 						else {
-							$GLOBALS['log']->fatal("Error Respuesta Lenia");
+							curl_close($curl);
+							$response = json_decode($response, true);
+							$GLOBALS['log']->fatal("Respuesta Lenia: ");
 							$GLOBALS['log']->fatal($response);
+							if($response['status'] && !$bean->link_lenia_c) {
+								// Actualiza ID de Sala en la Reunión
+								$descripcion = "El enlace que deberás usar para poder conectarte el día de la videoconferencia es: ".$sugar_config['lenia_url'].$response['idSala']."?".$organizador;
+								$query = "UPDATE meetings a, meetings_cstm b
+								  SET a.description = '{$descripcion}', b.link_lenia_c = '{$response['idSala']}'
+								  WHERE a.id = b.id_c and b.id_c = '{$bean->id}'";
+								$queryResult = $db->query($query);
+							}
+							if($response['status']) {
+								$query = "UPDATE meetings_cstm SET error_lenia_c = null WHERE id_c = '{$bean->id}'";
+								$queryResult = $db->query($query);
+								if($bean->assigned_user_id) {
+									$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
+									$usuario = $beanUsr->name;
+								}
+								$sala = $response['idSala'];
+								if($bean->link_lenia_c) $sala = $bean->link_lenia_c;
+								// Envía correo a los invitados
+								foreach ($correos as $correo) {
+									require_once("include/SugarPHPMailer.php");
+									require_once("modules/EmailTemplates/EmailTemplate.php");
+									require_once("modules/Administration/Administration.php");									
+									$url = $sugar_config['lenia_url'].$sala."?".$correo["id"];
+									$emailtemplate = new EmailTemplate();
+									if($organizador == $correo['id']) {
+										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor','type'=>'email'));
+									}
+									else {
+										$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente','type'=>'email'));
+									}
+									$asunto = $emailtemplate->subject;
+									if($objParticipantes['actualiza']) $asunto = "Actualización: ".$emailtemplate->subject;
+									$google = "http://www.google.com/calendar/event?action=TEMPLATE&text=".$asunto."&dates=".$start."/".$end."&location=".$url."&trp=false&details=UNIFIN FINANCIERA";
+									$outlook = "https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&startdt=".$ini_outlook."&enddt=".$fin_outlook."&subject=".$asunto."&body=UNIFIN FINANCIERA&location=".$url;
+									$office = "https://outlook.office.com/calendar/0/deeplink/compose?subject=".$asunto."&body=UNIFIN FINANCIERA&startdt=".$ini_outlook."&enddt=".$fin_outlook."&location=".$url."&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent";
+									$emailtemplate->subject = $asunto;
+									$body_html = $emailtemplate->body_html;
+									$body_html = str_replace('participante_name', $correo["name"], $body_html);
+									$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
+									$body_html = str_replace('asesor_name', $usuario, $body_html);
+									$body_html = str_replace('fecha', $fecha, $body_html);
+									$body_html = str_replace('hora', $hora, $body_html);
+									$body_html = str_replace('google', $google, $body_html);
+									$body_html = str_replace('outlook', $outlook, $body_html);
+									$body_html = str_replace('office', $office, $body_html);
+									if($objParticipantes['actualiza']) $body_html = str_replace('ha quedado agendada una', 'se ha actualizado la', $body_html);
+									$emailtemplate->body_html = str_replace('url', $url, $body_html);
+									$mailer = MailerFactory::getSystemDefaultMailer();
+									$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+									$mailer->setSubject($emailtemplate->subject);
+									$body = trim($emailtemplate->body_html);
+									$mailer->setHtmlBody($body);
+									$mailer->clearRecipients();
+									$mailer->addRecipientsTo(new EmailIdentity($correo["mail"], $correo["name"]));
+									// Crea auditoría de correos
+									$userid = $bean->assigned_user_id;
+									$recordid = $correo["id"];
+									$hoy = date("Y-m-d H:i:s");
+									$mail = $correo["mail"];
+									try {
+										$result = $mailer->send();
+										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
+											VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'OK', 'Correo exitosamente enviado')";
+										$GLOBALS['db']->query($insert);
+									} catch (Exception $e) {
+										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, error_code, description)
+											VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'ERROR', '01', '{$e->getMessage()}')";
+										$GLOBALS['db']->query($insert);
+									}
+								}
+							}
+							else {
+								$GLOBALS['log']->fatal("Error Respuesta Lenia");
+								$GLOBALS['log']->fatal($response);
+							}
 						}
+					}
+					else {
+						$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}';";
+						$queryResult = $db->query($query);
+						$GLOBALS['log']->fatal("Error Lenia");
+						$GLOBALS['log']->fatal($response);
 					}
 				}
 			}
