@@ -176,7 +176,7 @@ array (
               ),
               1 => 
               array (
-                'readonly' => false,
+                'readonly' => true,
                 'name' => 'int_id_dynamics',
                 'label' => 'LBL_INT_ID_DYNAMICS',
               ),
@@ -194,7 +194,7 @@ array (
               array (
                 'readonly' => false,
                 'name' => 'aseguradora_c',
-                'label' => 'LBL_ASEGURADORA_C',
+                'label' => 'LBL_ASEGURADORA',
               ),
               5 => 
               array (
