@@ -411,6 +411,8 @@ class reunion_participantes
 								}
 							}
 							else {
+								$query = "UPDATE meetings_cstm SET error_lenia_c = null WHERE id_c = '{$bean->id}'";
+								$queryResult = $db->query($query);								
 								$GLOBALS['log']->fatal("Error Respuesta Lenia");
 								$GLOBALS['log']->fatal($response);
 							}
