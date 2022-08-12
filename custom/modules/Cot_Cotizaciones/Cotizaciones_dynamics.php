@@ -104,7 +104,22 @@ class Cotizaciones_dynamics
             }
             $bean->aseguradora_c = $idSugar;
         }
-
+        if($bean->cot_ganada_c){
+            $Seguro = BeanFactory::getBean('S_seguros', $bean->cot_cotizaciones_s_seguross_seguros_ida, array('disable_row_level_security' => true));
+            //Seteo de campos de cotizacion en subpanel Oportunidad Ganada (seguro)
+            $Seguro->prima_neta_ganada_c=$bean->int_prima_neta;
+            $Seguro->aseguradora_c=$bean->aseguradora_c;
+            $Seguro->comision_c=$bean->int_comision_porcentaje; 
+            $Seguro->save();
+            //Actualizar a nivel db el resto de cot ganada diferentes a la aprobada.
+            $query = "UPDATE cot_cotizaciones_cstm as cotizacion 
+            inner join cot_cotizaciones_s_seguros_c as intermedia
+            on cotizacion.id_c=intermedia.cot_cotizaciones_s_seguroscot_cotizaciones_idb
+            set cot_ganada_c = '0' 
+            where intermedia.cot_cotizaciones_s_seguross_seguros_ida='{$Seguro->id}'
+            AND cotizacion.id_c!='{$bean->id}';";
+            $queryResult = $db->query($query);
+        }  
     }
 
     public function getToken()
