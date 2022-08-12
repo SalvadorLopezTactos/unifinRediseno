@@ -283,7 +283,7 @@
     },
 
     _disableActionsSubpanel: function () {
-      if (this.model.get('tipo_registro_sf_c')=='2' &&  this.model.get('requiere_ayuda_c')=='2'){
+      if (this.model.get('tipo_registro_sf_c')=='2' &&  (this.model.get('requiere_ayuda_c')=='2' || this.model.get('requiere_ayuda_c')=='')){
         $('[data-subpanel-link="cot_cotizaciones_s_seguros"]').find(".subpanel-controls").hide();
       }
     }
