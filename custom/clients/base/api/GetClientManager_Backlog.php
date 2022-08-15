@@ -123,9 +123,25 @@ class GetClientManager_Backlog extends SugarApi
         $sugarQuery->from(BeanFactory::newBean('lev_Backlog'));
         //$sugarQuery->where()->equals('estatus_operacion_c', '2');
         $sugarQuery->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
+        $sugarQuery->where()->queryAnd()->equals('anio',$year)->in('mes',$values);
         $sugarQuery->select()->setCountQuery();
         $sugarQuery->groupByRaw('lev_Backlog.equipo','lev_Backlog.etapa_solicitud_c');
-        $result = $sugarQuery->execute();
+        
+        $sugarQuery1 = new SugarQuery();
+        $sugarQuery1->select(array('equipo','cliente','etapa_solicitud_c','etapa_c','progreso','monto_final_comprometido_c'));
+        $sugarQuery1->from(BeanFactory::newBean('lev_Backlog'));
+        //$sugarQuery->where()->equals('estatus_operacion_c', '2');
+        $sugarQuery1->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
+        $sugarQuery1->where()->equals('anio', ($year+1));
+        $sugarQuery1->select()->setCountQuery();
+        $sugarQuery1->groupByRaw('lev_Backlog.equipo','lev_Backlog.etapa_solicitud_c');
+
+        $sqUnion = new SugarQuery();
+        $sqUnion->union($sugarQuery);
+        $sqUnion->union($sugarQuery1);
+
+        $result = $sqUnion->execute();
+       
         //$GLOBALS['log']->fatal('result', $result);
 
         $d0 = $this->groupArray($result,'equipo', 'equipo');
