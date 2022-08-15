@@ -1,48 +1,29 @@
 ({
-    plugins: ['Dashlet'],
+    className: 'client_manager_asigna-cancelados',
     registros:0,
     registrosAplazados: [],
-    registrosPerdidos: [],
+    viewEnableCancel:false,
 
     events: {
-        'click #crear_lead': 'crearLead',
         'click #asignaCancelados': 'asignarPorCancelados',
-        'click #clientePerdido': 'asignarPorPerdido',
         'click .modalRecordsCancel': 'closeModal',
-        'click .modalRecordsLost': 'closeModal_L',
         'click .btnLeadSelect': 'activarLead',
-        'click .btnLeadLostSelect': 'reactivarLead',
     },
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        self_asigna = this;
-        self_asigna.registros = 0;
+        self_cancel = this;
+        self_cancel.registrosAplazados=this.context.get('myData');
+        //self_asigna = this;
+        self_cancel.registros = self_asigna.registros;
 
         var posicion_operativa = App.user.attributes.posicion_operativa_c;
-        self_asigna.viewEnable = posicion_operativa.indexOf("3")>=0 ? true:false;
-        this.getRegistrosAsignados();
+        this.viewEnableCancel = posicion_operativa.indexOf("3")>=0 ? true:false;
+        //this.getRegistrosAsignados();
     },
 
     _render: function () {
         this._super("_render");
-
-    },
-
-    crearLead: function (evt) {
-        /*
-        var objLead = {
-            action: 'edit',
-            copy: true,
-            create: true,
-            layout: 'create',
-            module: 'Leads',
-            dataFromProtocolo: '1'
-        };
-
-        app.controller.loadView(objLead);
-        */
-        app.router.navigate('#Leads/create', { trigger: true });
     },
 
     asignarPorCancelados: function () {
@@ -53,39 +34,10 @@
                 autoClose: true
             });
         }else {
-            /*var modal = $('#modalRecordsCancel');
+            var modal = $('#modalRecordsCancel');
             if (modal) {
                 modal.show();
-            }*/
-            app.drawer.open({
-                layout: 'client_manager_asigna-cancelados',
-                context: {
-                    myData: this.registrosAplazados
-                },
-            },function() {
-            });
-        }
-    },
-
-    asignarPorPerdido: function () {
-        if (this.registrosPerdidos.length == 0) {
-            app.alert.show('sinPerdidos', {
-                level: 'warning',
-                messages: 'No existen registros de Cuentas Perdidos',
-                autoClose: true
-            });
-        }else {
-            /*var modal_L = $('#modalRecordsLost');
-            if (modal_L) {
-                modal_L.show();
-            }*/
-            app.drawer.open({
-                layout: 'client_manager_asigna-perdidos',
-                context: {
-                    myData: this.registrosPerdidos
-                },
-            },function() {
-            });
+            }
         }
     },
 
@@ -107,8 +59,8 @@
                 self_asigna.limite_asignacion = maximo_registros;
                 if (data.total_asignados < maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
                     self_asigna.viewEnable = true;
-                    self_asigna.getLeadsAplazadosCancelados();
-                    self_asigna.getLeadsPerdidos();
+                    //self_asigna.getLeadsAplazadosCancelados();
+                    //self_asigna.getLeadsPerdidos();
                 } else {
                     self_asigna.viewEnable = false;
                     self_asigna.render();
@@ -120,59 +72,12 @@
         });
     },
 
-    getLeadsAplazadosCancelados: function () {
-        var id_user = App.user.attributes.id;
-        App.alert.show('getLeadsCancelados', {
-            level: 'process'
-        });
-
-        //subtipo_registro_c=3, LEAD CANCELADO
-        app.api.call('GET', app.api.buildURL('GetLeadsAccountsAplazadosCancelados/' + id_user), null, {
-            success: function (data) {
-                App.alert.dismiss('getLeadsCancelados');
-                self_asigna.registrosAplazados = data.records;
-                self_asigna.render();
-            },
-            error: function (e) {
-                App.alert.dismiss('getLeadsCancelados');
-                throw e;
-            }
-        });
-    },
-
-    getLeadsPerdidos: function () {
-        var id_user = App.user.attributes.id;
-        App.alert.show('getLeadsPerdidos', {
-            level: 'process'
-        });
-
-        app.api.call('GET', app.api.buildURL('GetLeadsAccountsPerdidos/' + id_user), null, {
-            success: function (data) {
-                App.alert.dismiss('getLeadsPerdidos');
-                self_asigna.registrosPerdidos = data.records;
-                self_asigna.render();
-            },
-            error: function (e) {
-                App.alert.dismiss('getLeadsPerdidos');
-                throw e;
-            }
-        });
-    },
-
     closeModal: function () {
-
-        var modal = $('#modalRecordsCancel');
+        app.drawer.close();
+        /*var modal = $('#modalRecordsCancel');
         if (modal) {
             modal.hide();
-        }
-    },
-
-    closeModal_L: function () {
-
-        var modal_L = $('#modalRecordsLost');
-        if (modal_L) {
-            modal_L.hide();
-        }
+        }*/
     },
 
     searchIndex: function (arreglo, id) {
@@ -237,12 +142,12 @@
                                 messages: mensaje,
                             });
 
-                            var indice = self_asigna.searchIndex(self_asigna.registros, id);
-                            self_asigna.registros.splice(indice, 1);
-                            self_asigna.numero_registros++
-                            self_asigna.viewEnable = (self_asigna.numero_registros >= self_asigna.limite_asignacion) ? 0 : self_asigna.viewEnable;
-                            self_asigna.render();
-                        })
+                            var indice = self_cancel.searchIndex(self_cancel.registrosAplazados, id);
+                            self_cancel.registrosAplazados.splice(indice, 1);
+                            self.numero_registros++
+                            self.viewEnable = (self.numero_registros >= self.limite_asignacion) ? 0 : self.viewEnable;
+                            self_cancel.render();
+                        }, self_cancel)
                     });
                 } else {
                     //Activar cuenta
@@ -277,11 +182,11 @@
                                 messages: mensaje,
                             });
 
-                            var indice = self_asigna.searchIndex(self_asigna.registros, id);
-                            self_asigna.registros.splice(indice, 1);
-                            self_asigna.numero_registros++
-                            self_asigna.viewEnable = (self_asigna.numero_registros >= self_asigna.limite_asignacion) ? 0 : self_asigna.viewEnable;
-                            self_asigna.render();
+                            var indice = this.searchIndex(this.registrosAplazados, id);
+                            this.registrosAplazados.splice(indice, 1);
+                            this.numero_registros++
+                            this.viewEnable = (this.numero_registros >= this.limite_asignacion) ? 0 : this.viewEnable;
+                            this.render();
                         })
                     });
 
@@ -315,9 +220,9 @@
             autoClose: false,
             onConfirm: function () {
                 if (tipo == 'lead') {
-                    self_asigna.modulo = "Lead";
+                    this.modulo = "Lead";
                 }else{
-                    self_asigna.modulo = "Cuenta";
+                    this.modulo = "Cuenta";
                 }
                 
                 App.alert.show('activaLead', {
@@ -333,10 +238,10 @@
                 api_params['metodo_asignacion_lm_c'] = "4"; //Metodo de Asignación LM - 4.- Reactivación Cancelado / Aplazado
                 api_params['fecha_asignacion_c'] = FechaAsignacion;
                 
-                app.api.call("read", app.api.buildURL("UpdateLeadFromProtocolo/" + id + "/" + id_user + "/" + self_asigna.modulo, null, null, null), null, {
+                app.api.call("read", app.api.buildURL("UpdateLeadFromProtocolo/" + id + "/" + id_user + "/" + this.modulo, null, null, null), null, {
                     success: _.bind(function (data) {
                         var moduleLink = "";
-                        if (self_asigna.modulo == "Cuenta") {
+                        if (this.modulo == "Cuenta") {
                             moduleLink = "Accounts"
                         } else {
                             moduleLink = "Leads"
@@ -348,9 +253,9 @@
                             level: 'success',
                             messages: mensaje,
                         });
-                        self_asigna.numero_registros++
-                        self_asigna.viewEnable = (self_asigna.numero_registros >= self_asigna.limite_asignacion) ? 0 : self_asigna.viewEnable;
-                        self_asigna.render();
+                        this.numero_registros++
+                        this.viewEnable = (this.numero_registros >= this.limite_asignacion) ? 0 : this.viewEnable;
+                        this.render();
 
                     }, this)
                 });

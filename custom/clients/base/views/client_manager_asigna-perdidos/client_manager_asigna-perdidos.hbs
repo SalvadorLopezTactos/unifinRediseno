@@ -1,16 +1,23 @@
 
 <style>
- 
-  div.ex1 {
+
+   .client_manager_asigna-perdidos{
+      overflow: scroll;
+  }
+
+  .ex1 {
     margin: auto;
+    overflow-y: auto;
+    display: block;
+    width: 80%;
   }
 
   #contenido{
     /*border: 3px solid rgb(11, 11, 11);*/
     text-align: center;
     font-size: 12px;
-    width: 100%;
-    }
+    width: 80%;
+  }
 
   #intercont{
     padding: 5px;
@@ -153,89 +160,17 @@
 }
 </style>
 
-<div class="ex1">
   <table>
-    {{#if viewEnable}}
-    <tr>
-      <td>  
-        <div id="contenido" data-dashlet="dashlet" class="dashlet-content">
-          <div class="bs-docs-example dashlet-container">
-            <div id="intercont">
-              <button class="btn" style="background:#f7f8f9;width:90%; align:left;" id="crear_lead" type="submit" >Crear Lead</button>
-            </div>
-            <div id="intercont">
-              <button class="btn" style="background:#f7f8f9;width:90%; align:center;" id="asignaCancelados" type="submit" >Asignación a través de cancelados o aplazados</button>
-            </div>
-            <div id="intercont">
-              <button class="btn" style="background:#f7f8f9;width:90%; align:right;" id="clientePerdido" type="submit" >Asignación de cliente perdido</button>
-            </div>
-            <div class="row-fluid span12" id="intercont" style="background-color:rgb(236, 236, 236); " >
-                &nbsp;&nbsp;
-                <span class="label label-info" style="background-color:rgb(236, 236, 236);border:1px black ;color:#29388c">
-                  Tienes {{registros}} registros activos
-                </span>
-                </p>
-            </div>
-          </div>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <!-- Comienza modal-->
-        <div id="modalRecordsCancel" class="row-fluid" style="display:none">
-          <div class="modalDashlet span12" style="width:95%">
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close modalRecordsCancel">&times;</span>
-              <h2> &nbsp;&nbsp; Registros Cancelados/Aplazados</h2>
-              {{#if registrosAplazados}}
-              <table id = "registros" class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed;">
-                <thead>
-                  <tr>
-                    <th class="span4" style = "width: 400px;">Nombre</th>
-                    <th class="span2" style = "width: 10%;">
-                      Tipo de registro
-                      <!--<i id="orderByAnexo" class="fa fa-unsorted"></i>-->
-                    </th>
-                    <th class="span2" style = "width: 20%;">
-                        Subtipo de registro
-                        <!--<i id="orderBySubtipo" class="fa fa-unsorted"></i>-->
-                    </th>
-                    <th class="span2" style = "width: 10%;">
-                        Estatus
-                        <!--<i id="orderByStatus" class="fa fa-unsorted"></i>-->
-                    </th>
-                    <th class="span2" style = "width: 15%;">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {{#each registrosAplazados}}
-                  <tr class="row_fluid">
-                    <td  class = "nombre" ><p><a href="{{href}}" target="_blank">{{name}}</a></p></td>
-                    <td  class="span2" ><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
-                    <td  class="span2" ><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
-                    <td  class="span2" ><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
-                    <td  class="span2" ><button class="btn btnLeadSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
-                  </tr>
-                {{/each}}
-                </tbody>
-              </table>
-              {{/if}}
-            </div><!-- modal content-->
-          </div>
-        </div><!-- Termina modal-->
-      </td>
-    </tr>
+    {{#if viewEnableLost}}
     <tr>
       <td>
         <!-- Comienza modal Perdido -->
-        <div id="modalRecordsLost" class="row-fluid" style="display:none">
+        <div id="modalRecordsLost" class="row-fluid" >
           <div class="modalDashlet span12" style="width:95%">
             <!-- Modal content -->
             <div class="modal-content">
-              <span class="close modalRecordsLost">&times;</span>
-              <h2> &nbsp;&nbsp; Registros Perdidos</h2>
+              <span class="close modalRecordsLost modal-header" style="width:20px; height:20px; padding: 3px; margin: 10px; font-color:white; border: 5px solid white; ">&times;</span>
+              <h2 class="modal-header"> &nbsp;&nbsp; Registros Perdidos</h2>
               {{#if registrosPerdidos}}
               <table id = "registros" class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed; ">
                 <thead>
@@ -302,4 +237,3 @@
     </tr>
     {{/if}}
   </table>
-</div>
