@@ -108,7 +108,6 @@ class Top20Backlog extends SugarApi
             foreach($usrres as $u){
                 if($val['assigned_user_id'] == $u['id']){
                     $auxuser = $u['nombre_completo_c'];
-                    array_push($labels,$u['nombre_completo_c']);
                 }
             }
             $etapa = ($val['progreso'] == '1') ? "Con Solicitud": "Sin solicitud" ;
@@ -134,12 +133,16 @@ class Top20Backlog extends SugarApi
         if(count($datas) > 20){
             $datas = array_slice($datas, 0, 20);
         }
-        $GLOBALS['log']->fatal("datas: " , $datas);
-
+        
         $this->array_sort_by_column($records, 'monto');
+        
         if(count($records) > 20){
             $records = array_slice($records, 0, 20);
         }
+        foreach($records as $lbl){
+            array_push($labels,$lbl['usuario']);
+        }
+
         $records_in = array(
             'labels' => $labels,
             'datas' => $datas,
