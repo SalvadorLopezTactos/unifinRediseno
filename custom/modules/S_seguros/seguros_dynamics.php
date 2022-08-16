@@ -231,7 +231,7 @@ class Seguros_dynamics
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $fechaRequierePropuestaC = $bean->fecha_req;
             $fechaRequierePropuestaC = date("d/m/Y", strtotime($fechaRequierePropuestaC));
-            $requiereAyudaDeReaTcnica = ($bean->requiere_ayuda_c == 2) ? 'Si' : 'No';
+            $requiereAyudaDeReaTcnica = ($bean->requiere_ayuda_c == 2) ? 'Sí' : 'No';
                 $url = $sugar_config['inter_dynamics_url'].'Opportunity/'.$bean->int_id_dynamics_c;
             //Valida etapa previa
             if($bean->fetched_row['etapa'] == 3)
