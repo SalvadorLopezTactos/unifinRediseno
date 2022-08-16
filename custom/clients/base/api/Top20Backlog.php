@@ -39,6 +39,14 @@ class Top20Backlog extends SugarApi
     }
 
     public function dataBacklog($id_user){
+
+        $year = date("Y");
+        $month = intval(date("m"));
+        $values = [];
+        while($month<13){
+            array_push($values,strval($month));
+            $month ++;
+        }
         
         $year =date("Y");
         $month = intval(date("m"));
@@ -47,7 +55,7 @@ class Top20Backlog extends SugarApi
         $sq1->select(array('id','name','mes','anio','progreso','monto_con_solicitud_c','monto_sin_solicitud_c','assigned_user_id','equipo'));
         $sq1->from(BeanFactory::newBean('lev_Backlog'));
         $sq1->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
-        $sq1->where()->queryAnd()->equals('anio',$year)->gte('mes',$month);
+        $sq1->where()->queryAnd()->equals('anio',$year)->in('mes',$values);
         $sq1->where()->queryOr()->gt('monto_con_solicitud_c',0)->gt('monto_sin_solicitud_c',0);
         //$sugarQuery->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
         //$sugarQuery->orderByRaw("lev_Backlog.monto_con_solicitud_c DESC");
