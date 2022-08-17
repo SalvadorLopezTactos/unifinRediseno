@@ -1,16 +1,19 @@
 <style>
 
-  .container {
-      overflow-y: auto;
+  .client_manager_asigna-cancelados{
+      margin: auto;
+      overflow: auto;
       display: block;
-      width: 100%;
+      height:80%; 
+      width:80%;
   }
  
   .ex1 {
     margin: auto;
-    overflow-y: auto;
+    overflow: auto;
     display: block;
-    width: 80%;
+    height:80%;
+    width: 90%;
   }
 
   #contenido{
@@ -160,57 +163,44 @@
   }
 }
 </style>
-<div class="container">
-  <table>
+  <table class="table table-striped dataTable"  >
     {{#if viewEnableCancel}}
     <tr>
-      <td>
+      <td colspan="5">
         <!-- Comienza modal-->
-        <div id="modalRecordsCancel" class="row-fluid" >
-          <div class="modalDashlet span12" style="width:95%">
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close modalRecordsCancel modal-header" style="width:20px; height:20px; padding: 3px; margin: 10px; font-color:white; border: 5px solid white; ">&times;</span>
-              <h2 class="modal-header"> &nbsp;&nbsp; Registros Cancelados/Aplazados</h2>
-              {{#if registrosAplazados}}
-              <table id = "registros" class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed;">
-                <thead>
-                  <tr>
-                    <th class="span4" style = "width: 400px;">Nombre</th>
-                    <th class="span2" style = "width: 10%;">
-                      Tipo de registro
-                      <!--<i id="orderByAnexo" class="fa fa-unsorted"></i>-->
-                    </th>
-                    <th class="span2" style = "width: 20%;">
-                        Subtipo de registro
-                        <!--<i id="orderBySubtipo" class="fa fa-unsorted"></i>-->
-                    </th>
-                    <th class="span2" style = "width: 10%;">
-                        Estatus
-                        <!--<i id="orderByStatus" class="fa fa-unsorted"></i>-->
-                    </th>
-                    <th class="span2" style = "width: 15%;">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {{#each registrosAplazados}}
-                  <tr class="row_fluid">
-                    <td  class = "nombre" ><p><a href="{{href}}" target="_blank">{{name}}</a></p></td>
-                    <td  class="span2" ><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
-                    <td  class="span2" ><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
-                    <td  class="span2" ><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
-                    <td  class="span2" ><button class="btn btnLeadSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
-                  </tr>
-                {{/each}}
-                </tbody>
-              </table>
-              {{/if}}
-              <span class="scrollbar-landmark"></span>
-            </div><!-- modal content-->
-          </div>
-        </div><!-- Termina modal-->
+        <div  class="row-fluid" >
+          <!-- Modal content -->
+          <span class="close modalRecordsCancel modal-header" style="width:20px; height:20px; padding: 3px; margin: 10px; font-color:white; border: 5px solid white; ">&times;</span>
+          <h2 class="modal-header"> &nbsp;&nbsp; Registros Cancelados/Aplazados</h2>
+        </div>
       </td>
     </tr>
+    <tr>
+      <th class="span4" style = "width: 400px;">Nombre</th>
+      <th class="span2" style = "width: 10%;">
+        Tipo de registro
+      </th>
+      <th class="span2" style = "width: 20%;">
+        Subtipo de registro
+        <!--<i id="orderBySubtipo" class="fa fa-unsorted"></i>-->
+      </th>
+      <th class="span2" style = "width: 10%;">
+        Estatus
+        <!--<i id="orderByStatus" class="fa fa-unsorted"></i>-->
+      </th>
+      <th class="span2" style = "width: 15%;">Acción</th>
+    </tr>
+    {{#if registrosAplazados}}
+      {{#each registrosAplazados}}
+        <tr class="row_fluid">
+          <td  class = "nombre" ><p><a href="{{href}}" target="_blank">{{name}}</a></p></td>
+          <td  class="span2" ><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
+          <td  class="span2" ><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
+          <td  class="span2" ><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
+          <td  class="span2" ><button class="btn btnLeadSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
+        </tr>
+      {{/each}}
+    {{/if}}
     {{else}}
     <tr>
       <td>
@@ -239,4 +229,3 @@
     </tr>
     {{/if}}
   </table>
-</div>
