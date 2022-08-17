@@ -7,5 +7,5 @@ $dictionary['Account']['fields']['account_disposiciones'] = array (
 'source' => 'non-db',
 'dbType' => 'non-db',
 'studio' => 'visible',
-'label' => ''
+'label' => ' '
 );
