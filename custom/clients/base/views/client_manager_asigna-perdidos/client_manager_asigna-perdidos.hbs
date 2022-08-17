@@ -1,15 +1,20 @@
 
 <style>
 
-   .client_manager_asigna-perdidos{
-      overflow: scroll;
+  .client_manager_asigna-perdidos{
+      margin: auto;
+      overflow: auto;
+      display: block;
+      height:80%; 
+      width:80%;
   }
-
+ 
   .ex1 {
     margin: auto;
-    overflow-y: auto;
+    overflow: auto;
     display: block;
-    width: 80%;
+    height:80%;
+    width: 90%;
   }
 
   #contenido{
@@ -160,7 +165,7 @@
 }
 </style>
 
-  <table>
+  <table class="table table-striped dataTable"  >
     {{#if viewEnableLost}}
     <tr>
       <td>
