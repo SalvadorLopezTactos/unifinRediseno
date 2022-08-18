@@ -59,6 +59,13 @@ array (
                 'label' => 'Eliminar todas las relaciones',
                 'acl_action' => 'delete',
               ),
+              3 => 
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:emailbtn:click',
+                'name' => 'emailbtn',
+                'label' => 'Re-enviar password para App',
+              ),
             ),
           ),
           3 => 

@@ -3,18 +3,18 @@ extendsFrom: 'RecordView',
 	previas: null,
 	initialize: function (options) {
         relContext = this;
-	      this._super('initialize', [options]);
-		    this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
-		    this.model.on('change:relaciones_activas', this.doRelationFields, this);
-		    this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
+	    this._super('initialize', [options]);
+		this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
+		this.model.on('change:relaciones_activas', this.doRelationFields, this);
+		this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
         //this.model.addValidationTask('check_custom_validations', _.bind(this.checarValidacionesonSave, this));
         this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
-		    this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
-		    this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
+		this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
+		this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
         this.model.addValidationTask('validarequeridosPropReal',_.bind(this.validaPropietarioReal, this));
         this.model.addValidationTask('validarequeridosProvRec',_.bind(this.validaProveedorRecursos, this));
         this.model.addValidationTask('validarequeridosRelActivas',_.bind(this.validaRelacionesValidation, this));
-
+		
         this.model.on('sync', this._render, this);
         this.model.on('sync', this.validajuridico, this);
         this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
@@ -27,7 +27,8 @@ extendsFrom: 'RecordView',
         this.model.on('change:relaciones_activas',this.changejuridico, this);
         //this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
         //this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
-				//this.model.on('change:relacion_c',this.validaRelacionesChange, this);
+		//this.model.on('change:relacion_c',this.validaRelacionesChange, this);
+		this.context.on('button:emailbtn:click', this.emailbtn, this);
 
         var valParams = {
             'modulo': 'Accounts',
@@ -2375,5 +2376,47 @@ extendsFrom: 'RecordView',
         }
 },
 
-
+    emailbtn: function(model) {
+    	if(model.attributes.relaciones_activas.includes('Tarjetahabiente') && app.user.attributes.habilita_envio_tc_c)
+		{
+			app.alert.show('procesando', {
+				level: 'process',
+				title: 'Procesando...'
+			});
+			var api_params = {
+				"idCuenta": this.model.get("rel_relaciones_accounts_1accounts_ida"),
+				"idRelacion": model.attributes.account_id1_c,
+				"relaciones": model.attributes.relaciones_activas
+			};
+			var url = app.api.buildURL('email_TDC/', null, null);
+			app.api.call('create', url, api_params, {
+				success: function (data) {
+					var result = 'success';
+					if(data['status'] != 200) result = 'error'; 
+					app.alert.dismiss('procesando');
+					app.alert.show('Correo_reenviado', {
+						level: result,
+						messages: data['message'],
+						autoClose: false
+					});
+				},
+				error: function (e) {
+					app.alert.dismiss('procesando');
+					app.alert.show('Correo_no_reenviado', {
+						level: 'error',
+						messages: 'No se ha podido generar la contraseña. Intente nuevamente.',
+						autoClose: false
+					});
+				}
+			});
+		}
+		else
+		{
+			app.alert.show("Tarjetahabiente", {
+                level: "error",
+                title: "No tiene los permisos para ejecutar esta acción o el registro no tiene una relación activa de Tarjetahabiente",
+                autoClose: false
+            });
+		}
+    },
 })
