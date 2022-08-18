@@ -416,6 +416,16 @@ array (
             'label' => 'LBL_LENIA',
           ),
         ),
+        17 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'habilita_envio_tc_c',
+            'label' => 'LBL_HABILITA_ENVIO_TC',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
