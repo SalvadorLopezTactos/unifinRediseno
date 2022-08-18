@@ -218,6 +218,7 @@ $(window).load(function(){
     $('#editar_backlog_chk_c').attr('disabled','disabled');
 	$('#excluye_valida_c').attr('disabled','disabled');
 	$('#lenia_c').attr('disabled','disabled');
+	$('#habilita_envio_tc_c').attr('disabled','disabled');
    }
   }catch(error){
       console.log(error.message);
@@ -266,6 +267,7 @@ $(window).load(function(){
       $('#editar_backlog_chk_c').attr('disabled','disabled');
 	  $('#excluye_valida_c').attr('disabled','disabled');
 	  $('#lenia_c').attr('disabled','disabled');
+	  $('#habilita_envio_tc_c').attr('disabled','disabled');
     }
   }
   catch(error){

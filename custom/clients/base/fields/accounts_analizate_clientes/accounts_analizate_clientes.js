@@ -108,10 +108,10 @@
 
     ReenviaCorreoCliente: function () {
         //Valida que sea proveedor para reenviar
-        if (this.model.get('tipo_registro_cuenta_c') != "3") {
+        if (this.model.get('tipo_registro_cuenta_c') == "1" ||this.model.get('tipo_registro_cuenta_c') == "5") {
             app.alert.show('No_Cliente', {
                 level: 'error',
-                messages: 'Sólo se puede reenviar el correo a cuentas de tipo Cliente.',
+                messages: 'Sólo se puede reenviar el correo a cuentas de tipo Cliente, Persona o Prospecto.',
                 autoClose: false
             });
             return;

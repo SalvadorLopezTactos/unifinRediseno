@@ -64,6 +64,14 @@ $viewdefs['Rel_Relaciones']['base']['view']['subpanel-for-accounts-rel_relacione
         'acl_action' => 'view',
         'allow_bwc' => false,
       ),
+      1 => 
+      array (
+        'type' => 'rowaction',
+        'css_class' => 'btn',
+        'label' => 'Re-enviar password para App',
+        'event' => 'list:emailbtn:fire',
+        'allow_bwc' => false,
+      ),
     ),
   ),
 );

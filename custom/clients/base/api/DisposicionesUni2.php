@@ -6,7 +6,7 @@
  */
 
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
+require_once("custom/Levementum/UnifinAPI.php");
 class DisposicionesUni2 extends SugarApi
 {
     public function registerApiRest()
@@ -30,12 +30,21 @@ class DisposicionesUni2 extends SugarApi
 		$id=$args['id'];
         $num=$args['num'];
 		$mes=$args['mes'];
-		$anio=$args['anio'];
-        $host=$sugar_config['bpm_url'];
-		$ch = curl_init();
-        if($id == 1) $url = "http://".$host."/uni2/rest/backlog/disposiciones?backlog=".$num."&mes=".$mes."&anio=".$anio;
+        $anio=$args['anio'];
+
+        $user = $sugar_config['quantico_usr'];
+        $pwd = $sugar_config['quantico_psw'];
+        $auth_encode = base64_encode($user . ':' . $pwd);
+        $host=$sugar_config['quantico_url_base'];
+
+        $callApi = new UnifinAPI();
+
+        if($id == 1){
+            $url = $host."/QuanticoBacklog_API/rest/BacklogApi/GetDispositions?Backlog=".$num."&Mes=".$mes."&Anio=".$anio;
+            $response = $callApi->getQuanticoCF($url, $auth_encode);
+        }
 		if($id == 2) {
-			$url = "http://".$host."/uni2/rest/backlog/cancelacion";
+			$url = $host."/QuanticoBacklog_API/rest/BacklogApi/Cancelation";
 			$motivo = $args['motivo'];
 			$comentarios = $args['comentarios'];
 			$usuario = $args['usuario'];
@@ -47,22 +56,13 @@ class DisposicionesUni2 extends SugarApi
                 "comentarioCancelacion" => $comentarios,
 				"usuario" => $usuario
             );
-            $content = json_encode($arreglo);
-        	curl_setopt($ch, CURLOPT_HEADER, false);
-        	curl_setopt($ch, CURLOPT_HTTPHEADER,
-				array("Content-type: application/json")
-			);
-        	curl_setopt($ch, CURLOPT_POST, true);
-        	curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
-		}
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 4000);
-        $result = curl_exec($ch);
-        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response = json_decode($result, true);
-		curl_close($ch);
+
+            $response = $callApi->postQuantico($url,$arreglo,$auth_encode);
+
+        }
+        
         return $response;
     }
+
 }
 ?>

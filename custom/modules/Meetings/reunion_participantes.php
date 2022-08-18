@@ -9,23 +9,20 @@ class reunion_participantes
     {
 		global $current_user;
 		if($bean->tct_conferencia_chk_c && $current_user->lenia_c) {
+			$nueva = 0;
+			$lenia = 0;
+			$guest = array();
+			$advisor = array();
+			$correos = array();
+			if($bean->parent_id) {
+				$beanAccount = BeanFactory::getBean('Accounts', $bean->parent_id, array('disable_row_level_security' => true));
+				$cuenta_name = $beanAccount->name;
+			}
 			$objParticipantes = $bean->reunion_participantes;
 			$objArrParticipnates = $objParticipantes['participantes'];
-			// Crea la Relación entre Reunión y Participantes
 			if ($objArrParticipnates != "" && isset($objArrParticipnates))
 			{
-				// Crea la Relación entre cuentas y nuevos participantes
-				$nueva = 0;
-				$lenia = 0;
-				$guest = array();
-				$advisor = array();
-				$correos = array();
-				if($bean->parent_id) {
-					$beanAccount = BeanFactory::getBean('Accounts', $bean->parent_id, array('disable_row_level_security' => true));
-					$cuenta_name = $beanAccount->name;
-				}
 				for ($j = 0; $j < count($objArrParticipnates); $j++) {
-					// Crea cuentas nuevas
 					if ($objArrParticipnates[$j]['origen'] == "N") {
 					  // Crea cuenta
 					  $beanCuentas = BeanFactory::newBean("Accounts");
@@ -207,28 +204,84 @@ class reunion_participantes
 					}
 				}
 				if($objParticipantes['actualiza']) $lenia = 1;
-				if($lenia) {
-					// Obtiene Token Lenia
-					global $sugar_config;
-					$url = $sugar_config['lenia'].'videocall/token/';
-					$usr = $sugar_config['lenia_usr'];
-					$psw = $sugar_config['lenia_psw'];
-					$params = "grant_type=password&username=".$usr."&password=".$psw;
-					$curl = curl_init();
-					curl_setopt($curl, CURLOPT_URL, $url);
-					curl_setopt($curl, CURLOPT_POST, true);
-					curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-					curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-					curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-					$response = curl_exec($curl);
-					$err = curl_error($curl);
-					if ($err) $GLOBALS['log']->fatal("Error: ".$err);
-					else {
-						$response = json_decode($response, true);
-						curl_close($curl);
-						$token = $response['access_token'];
+			}
+			else
+			{
+				// Entra cuando se ejectua el trabajo de error lenia
+				$queryRecord = "SELECT T3.id,T3.name,T3.description,T3.tct_apellido_paterno_c,T3.tct_apellido_materno_c,T3.tct_nombre_completo_c,
+				T3.tct_correo_c,T3.tct_telefono_c,T3.tct_asistencia_c,T3.tct_tipo_registro_c,T4.invitar_c,T4.cuenta_c
+				FROM meetings T1
+				INNER JOIN meetings_minut_participantes_1_c T2
+				ON T2.meetings_minut_participantes_1meetings_ida=T1.id
+				INNER JOIN minut_participantes T3
+				ON T3.id=T2.meetings_minut_participantes_1minut_participantes_idb
+				INNER JOIN minut_participantes_cstm T4
+				ON T4.id_c=T3.id
+				WHERE T1.id='{$bean->id}'
+				AND T1.deleted=0
+				AND T2.deleted=0
+				AND T3.deleted=0
+				ORDER BY T3.date_entered";
+				$resultado = $bd = $GLOBALS['db']->query($queryRecord);
+				while ($row = $GLOBALS['db']->fetchByAssoc($resultado)) {
+					if($row['invitar_c']) {
+						if($row['description']) {
+						    $host1 = [
+								"first_name" => $row['name'],
+								"father_last_name" => $row['tct_apellido_paterno_c'],
+								"mother_last_name" => $row['tct_apellido_materno_c'],
+								"full_name" => $row['name'] . " " . $row['tct_apellido_paterno_c'] . " " . $row['tct_apellido_materno_c'],
+								"email" => $row['tct_correo_c'],
+								"crm_id" => $row['id'],
+							];
+							array_push($advisor,$host1);
+							$organizador = $row['id'];
+						}
+						else {
+							$participante1 = [
+								"first_name" => $row['name'],
+								"father_last_name" => $row['tct_apellido_paterno_c'],
+								"mother_last_name" => $row['tct_apellido_materno_c'],
+								"full_name" => $row['name'] . " " . $row['tct_apellido_paterno_c'] . " " . $row['tct_apellido_materno_c'],
+								"email" => $row['tct_correo_c'],
+								"crm_id" => $row['id'],
+							];
+							array_push($guest,$participante1);
+						}
+						$correo = ["id" => $row['id'], "name" => $row['name'] . " " . $row['tct_apellido_paterno_c'] . " " . $row['tct_apellido_materno_c'], "mail" => $row['tct_correo_c']];
+						array_push($correos,$correo);
+					}
+				}
+			}
+			if($bean->error_lenia_c) $lenia = 1;
+			if($lenia) {
+				// Obtiene Token Lenia
+				global $db;
+				global $sugar_config;
+				$url = $sugar_config['lenia'].'videocall/token/';
+				$usr = $sugar_config['lenia_usr'];
+				$psw = $sugar_config['lenia_psw'];
+				$params = "grant_type=password&username=".$usr."&password=".$psw;
+				$curl = curl_init();
+				curl_setopt($curl, CURLOPT_URL, $url);
+				curl_setopt($curl, CURLOPT_POST, true);
+				curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+				curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+				$response = curl_exec($curl);
+				$err = curl_error($curl);
+				if ($err) {
+					$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}';";
+					$queryResult = $db->query($query);
+					$GLOBALS['log']->fatal("Error: ".$err);
+				}
+				else {
+					curl_close($curl);
+					$response = json_decode($response, true);
+					$token = $response['access_token'];
+					if ($token) {
 						// Convierte formato de fecha y hora
 						date_default_timezone_set('America/Mexico_City');
 						$verano = date('I');
@@ -254,11 +307,11 @@ class reunion_participantes
 						  "session_name" => $bean->name,
 						  "room_status" => true,
 						  "scheduled_date" => array(
-							"day" => date('d',strtotime($bean->date_start)),
-							"month" => date('m',strtotime($bean->date_start)),
-							"year" => date('Y',strtotime($bean->date_start)),
-							"date" => $scheduled,
-						  ),
+						  "day" => date('d',strtotime($bean->date_start)),
+						  "month" => date('m',strtotime($bean->date_start)),
+						  "year" => date('Y',strtotime($bean->date_start)),
+						  "date" => $scheduled,
+						),
 						  "guest_list" => $guest,
 						  "advisor_list" => $advisor
 						));
@@ -276,9 +329,12 @@ class reunion_participantes
 						curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 						$response = curl_exec($curl);
 						$err = curl_error($curl);
-						if ($err) $GLOBALS['log']->fatal("Error: ".$err);
+						if ($err) {
+							$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}'";
+							$queryResult = $db->query($query);
+							$GLOBALS['log']->fatal("Error: ".$err);
+						}
 						else {
-							global $db;
 							curl_close($curl);
 							$response = json_decode($response, true);
 							$GLOBALS['log']->fatal("Respuesta Lenia: ");
@@ -292,6 +348,8 @@ class reunion_participantes
 								$queryResult = $db->query($query);
 							}
 							if($response['status']) {
+								$query = "UPDATE meetings_cstm SET error_lenia_c = null WHERE id_c = '{$bean->id}'";
+								$queryResult = $db->query($query);
 								if($bean->assigned_user_id) {
 									$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
 									$usuario = $beanUsr->name;
@@ -343,82 +401,90 @@ class reunion_participantes
 									try {
 										$result = $mailer->send();
 										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
-										VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'OK', 'Correo exitosamente enviado')";
+											VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'OK', 'Correo exitosamente enviado')";
 										$GLOBALS['db']->query($insert);
 									} catch (Exception $e) {
 										$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, error_code, description)
-										VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'ERROR', '01', '{$e->getMessage()}')";
+											VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'ERROR', '01', '{$e->getMessage()}')";
 										$GLOBALS['db']->query($insert);
 									}
 								}
 							}
 							else {
+								$query = "UPDATE meetings_cstm SET error_lenia_c = null WHERE id_c = '{$bean->id}'";
+								$queryResult = $db->query($query);								
 								$GLOBALS['log']->fatal("Error Respuesta Lenia");
 								$GLOBALS['log']->fatal($response);
 							}
 						}
 					}
-				}
-				if ($bean->status == 'Not Held') {
-					// Envía correo a los invitados de cancelación
-					if($bean->assigned_user_id) {
-						$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
-						$usuario = $beanUsr->name;
+					else {
+						$query = "UPDATE meetings_cstm SET error_lenia_c = 1 WHERE id_c = '{$bean->id}';";
+						$queryResult = $db->query($query);
+						$GLOBALS['log']->fatal("Error Lenia");
+						$GLOBALS['log']->fatal($response);
 					}
-					// Convierte formato de fecha y hora
-					date_default_timezone_set('America/Mexico_City');
-					$verano = date('I');
-					$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
-					if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
-					$inicio = strtotime('-6 hours',strtotime($bean->date_start));
-					$fin = strtotime('-6 hours',strtotime($bean->date_end));
-					if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
-					if($verano) $fin = strtotime('-5 hours',strtotime($bean->date_end));
-					$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
-					$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-					$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
-					$hora = date("g:i a",$inicio);
-					foreach ($correos as $correo) {
-						require_once("include/SugarPHPMailer.php");
-						require_once("modules/EmailTemplates/EmailTemplate.php");
-						require_once("modules/Administration/Administration.php");									
-						$emailtemplate = new EmailTemplate();
-						if($organizador == $correo['id']) {
-							$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor Cancela','type'=>'email'));
-						}
-						else {
-							$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente Cancela','type'=>'email'));
-						}
-						$asunto = $emailtemplate->subject;
-						$emailtemplate->subject = $asunto;
-						$body_html = $emailtemplate->body_html;
-						$body_html = str_replace('participante_name', $correo["name"], $body_html);
-						$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
-						$body_html = str_replace('asesor_name', $usuario, $body_html);
-						$body_html = str_replace('fecha', $fecha, $body_html);
-						$emailtemplate->body_html = str_replace('hora', $hora, $body_html);
-						$mailer = MailerFactory::getSystemDefaultMailer();
-						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-						$mailer->setSubject($emailtemplate->subject);
-						$body = trim($emailtemplate->body_html);
-						$mailer->setHtmlBody($body);
-						$mailer->clearRecipients();
-						$mailer->addRecipientsTo(new EmailIdentity($correo["mail"], $correo["name"]));
-						// Crea auditoría de correos
-						$userid = $bean->assigned_user_id;
-						$recordid = $correo["id"];
-						$hoy = date("Y-m-d H:i:s");
-						$mail = $correo["mail"];
-						try {
-							$result = $mailer->send();
-							$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
+				}
+			}
+			if ($bean->status == 'Not Held') {
+				// Envía correo a los invitados de cancelación
+				if($bean->assigned_user_id) {
+					$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
+					$usuario = $beanUsr->name;
+				}
+				// Convierte formato de fecha y hora
+				date_default_timezone_set('America/Mexico_City');
+				$verano = date('I');
+				$scheduled = date('Y-m-d H:i:s', strtotime('-6 hours', strtotime($bean->date_start)));
+				if($verano) $scheduled = date('Y-m-d H:i:s', strtotime('-5 hours', strtotime($bean->date_start)));
+				$inicio = strtotime('-6 hours',strtotime($bean->date_start));
+				$fin = strtotime('-6 hours',strtotime($bean->date_end));
+				if($verano) $inicio = strtotime('-5 hours',strtotime($bean->date_start));
+				if($verano) $fin = strtotime('-5 hours',strtotime($bean->date_end));
+				$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+				$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+				$fecha = $dias[date('w',$inicio)]." ".date('j',$inicio)." de ".$meses[date('n',$inicio)-1]." de ".date('Y',$inicio);
+				$hora = date("g:i a",$inicio);
+				foreach ($correos as $correo) {
+					require_once("include/SugarPHPMailer.php");
+					require_once("modules/EmailTemplates/EmailTemplate.php");
+					require_once("modules/Administration/Administration.php");									
+					$emailtemplate = new EmailTemplate();
+					if($organizador == $correo['id']) {
+						$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor Cancela','type'=>'email'));
+					}
+					else {
+						$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Cliente Cancela','type'=>'email'));
+					}
+					$asunto = $emailtemplate->subject;
+					$emailtemplate->subject = $asunto;
+					$body_html = $emailtemplate->body_html;
+					$body_html = str_replace('participante_name', $correo["name"], $body_html);
+					$body_html = str_replace('cliente_name', $cuenta_name, $body_html);
+					$body_html = str_replace('asesor_name', $usuario, $body_html);
+					$body_html = str_replace('fecha', $fecha, $body_html);
+					$emailtemplate->body_html = str_replace('hora', $hora, $body_html);
+					$mailer = MailerFactory::getSystemDefaultMailer();
+					$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+					$mailer->setSubject($emailtemplate->subject);
+					$body = trim($emailtemplate->body_html);
+					$mailer->setHtmlBody($body);
+					$mailer->clearRecipients();
+					$mailer->addRecipientsTo(new EmailIdentity($correo["mail"], $correo["name"]));
+					// Crea auditoría de correos
+					$userid = $bean->assigned_user_id;
+					$recordid = $correo["id"];
+					$hoy = date("Y-m-d H:i:s");
+					$mail = $correo["mail"];
+					try {
+						$result = $mailer->send();
+						$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, description)
 							VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'OK', 'Correo exitosamente enviado')";
-							$GLOBALS['db']->query($insert);
-						} catch (Exception $e) {
-							$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, error_code, description)
+						$GLOBALS['db']->query($insert);
+					} catch (Exception $e) {
+						$insert = "INSERT INTO user_email_log (id, user_id, related_id, date_entered, name_email, subject, type, related_type, status, error_code, description)
 							VALUES (uuid(), '{$userid}', '{$recordid}', '{$hoy}', '{$mail}', '{$asunto}', 'TO', 'Reuniones', 'ERROR', '01', '{$e->getMessage()}')";
-							$GLOBALS['db']->query($insert);
-						}
+						$GLOBALS['db']->query($insert);
 					}
 				}
 			}
