@@ -887,16 +887,21 @@ SQL;
         $equipo_usuario=str_replace("^","'",$equipo);
         global $db,$current_user;
 
+        $posicion_operativa=isset($current_user->posicion_operativa_c) ? $current_user->posicion_operativa_c:'';
+
+        $esRegional= strpos($posicion_operativa, '^2^') !== false ? true:false;
+
         $array_principal=array();
         $grandTotal=0;
 
         //Obtener los ids de los usuarios pertencientes a $equipo
-        $queryUsuarios="SELECT id,concat(u.first_name,' ',u.last_name) nombre_usuario FROM users u
+        $queryUsuarios="SELECT id,concat(u.first_name,' ',u.last_name) nombre_usuario, uc.equipo_c FROM users u
         INNER JOIN users_cstm uc ON u.id=uc.id_c
         WHERE uc.equipo_c IN ({$equipo_usuario}) AND u.status='Active' AND u.deleted=0 ORDER BY nombre_usuario ASC;";
 
         $resultUsuarios = $db->query($queryUsuarios);
 
+        $array_equipo=array();
         while ($row = $db->fetchByAssoc($resultUsuarios)) {
             
             $id_usuario=$row['id'];
@@ -913,6 +918,11 @@ SQL;
                 "Usuario"=>$row['nombre_usuario']
             );
 
+            
+            if(!isset($array_equipo[$row['equipo_c']])){
+                $array_equipo[$row['equipo_c']]=array(0,0,0,0,0,0,0,0);   
+            }
+            
 
             $queryRegistros = <<<SQL
 			SELECT l.id id_registro,
@@ -924,10 +934,12 @@ SQL;
         lc.subtipo_registro_c subtipo_registro,
         l.assigned_user_id,
         l.date_modified,
-        f.id idFav
+        f.id idFav,
+        uc.equipo_c
         FROM leads l INNER JOIN leads_cstm lc
         ON l.id=lc.id_c
         LEFT JOIN sugarfavorites f ON l.id = f.record_id and f.deleted=0
+        LEFT JOIN users_cstm uc ON uc.id_c='{$id_usuario}'
         WHERE lc.tipo_registro_c IN ('1','2','3')
         AND lc.subtipo_registro_c IN('1','2','7')
         AND l.assigned_user_id ='{$id_usuario}'
@@ -943,10 +955,12 @@ SQL;
         ac.subtipo_registro_cuenta_c,
         a.assigned_user_id,
         a.date_modified,
-        f.id idFav
+        f.id idFav,
+        uc.equipo_c
         FROM accounts a INNER JOIN accounts_cstm ac
         ON a.id=ac.id_c
         LEFT JOIN sugarfavorites f ON a.id = f.record_id and f.deleted=0
+        LEFT JOIN users_cstm uc ON uc.id_c='{$id_usuario}'
         WHERE ac.tipo_registro_cuenta_c IN ('1','2','3')
         AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9')
         -- AND a.assigned_user_id ='{$id_usuario}'
@@ -972,26 +986,31 @@ SQL;
                 
                 //Lead sin Contactar
                 if($tipo=='1' && $subtipo=='1'){
+                    $array_equipo[$filaRegistros['equipo_c']][0]++;
                     $total_leads_sin_contactar++;
                 }
 
                 //Prospecto Contactado
                 if($tipo=='2' && $subtipo=='2'){
+                    $array_equipo[$filaRegistros['equipo_c']][1]++;
                     $total_prospectos_contactados++;
                 }
 
                 //Prospecto Interesado
                 if($tipo=='2' && $subtipo=='7'){
+                    $array_equipo[$filaRegistros['equipo_c']][2]++;
                     $total_prospectos_interesados++;
                 }
 
                 //Prospecto Integración de Expediente
                 if($tipo=='2' && $subtipo=='8'){
+                    $array_equipo[$filaRegistros['equipo_c']][3]++;
                     $total_prospectos_int_exp++;
                 }
 
                 //Prospecto en Crédito
                 if($tipo=='2' && $subtipo=='9'){
+                    $array_equipo[$filaRegistros['equipo_c']][4]++;
                     $total_prospectos_credito++;
                 }
 
@@ -1030,16 +1049,19 @@ SQL;
 
                         //Cliente con linea sin operar
                         if(in_array('1',$array_es_cliente_linea_sin_operar)){
+                            $array_equipo[$filaRegistros['equipo_c']][5]++;
                             $total_clientes_linea_sin_operar++;
                         }
 
                         //Cliente Activo
                         if(in_array('1',$array_es_cliente_activo)){
+                            $array_equipo[$filaRegistros['equipo_c']][6]++;
                             $total_clientes_activos++;
                         }
 
                         //Cliente Perdido
                         if(in_array('1',$array_es_cliente_perdido)){
+                            $array_equipo[$filaRegistros['equipo_c']][7]++;
                             $total_clientes_perdidos++;   
                         }
                     }
@@ -1062,6 +1084,13 @@ SQL;
             array_push($array_principal,$array_usuario);
 
         }//Termina while de obtención de Usuarios
+
+        if($esRegional){
+            $array_principal=array();
+            foreach ($array_equipo as $key => $value) {
+                $array_principal[]=array("Registros"=>$value,"Usuario"=>$key);
+            }
+        }
 
         $array_principal["Total"]=$grandTotal;
         
