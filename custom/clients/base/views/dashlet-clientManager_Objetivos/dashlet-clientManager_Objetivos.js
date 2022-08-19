@@ -93,7 +93,7 @@
         const chartMensual = new Chart(mensual, {
             type: 'doughnut',
             data: {
-                labels: ['0 - 50','50 - 100','100 - 200'],
+                labels: ['0% - 50%','50% - 100%','100% - 200%'],
                 datasets: [{
                     data: [33, 34, 33],
                     backgroundColor: [
@@ -153,7 +153,7 @@
         var chartAnual = new Chart(ctx1, {
             type: 'doughnut',
             data: {
-                labels: ['0 - 50','50 - 100','100 - 200'],
+                labels: ['0% - 50% ','50% - 100%','100% - 200%'],
                 datasets: [{
                     label: 'rangos',
                     data: [ 33, 34, 33],
