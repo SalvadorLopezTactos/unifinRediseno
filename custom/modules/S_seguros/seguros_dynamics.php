@@ -112,15 +112,19 @@ class Seguros_dynamics
                         $json_response = curl_exec($curl);
                         curl_close($curl);
                         $response = json_decode($json_response, true);
-                        $id_dyn = $response['id_CRM'];
                         $GLOBALS['log']->fatal($response);
-                        //Update del id dynamics de la cuenta
-                        global $db;
-                        $update = "update accounts_cstm set
-                        int_id_dynamics_c='{$id_dyn}'
-                        where id_c = '{$cuenta->id}'";
-                        $updateExecute = $db->query($update);
-                        $cuenta->int_id_dynamics_c = $id_dyn;
+                        if($response['id_CRM']!='' && $response['id_CRM']!='Null'){
+                            $id_dyn = $response['id_CRM'];
+                            //Update del id dynamics de la cuenta
+                            global $db;
+                            $update = "update accounts_cstm set
+                            int_id_dynamics_c='{$id_dyn}'
+                            where id_c = '{$cuenta->id}'";
+                            $updateExecute = $db->query($update);
+                            $cuenta->int_id_dynamics_c = $id_dyn;
+                        }else{
+                            throw new SugarApiExceptionInvalidParameter("No se puede guardar información en Dynamics. Error al procesar cuenta: ".$response['description']);
+                        }
                     }
                 }
             }
@@ -203,17 +207,16 @@ class Seguros_dynamics
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
                 $json_response = curl_exec($curl);
                 curl_close($curl);
-                $response = json_decode($json_response, true);
-            $id_op = $response['id_CRM'];
+            $response = json_decode($json_response, true);
             $GLOBALS['log']->fatal('Creacion de Prospecto (Cliente- Dynamics) enviada: ' .$response);
             $GLOBALS['log']->fatal(json_encode(print_r($response,true)));
-            if($id_op)
-            {
-              $bean->int_id_dynamics_c = $id_op;
+            if($response['id_CRM']!='' && $response['id_CRM']!='Null'){
+                $id_op = $response['id_CRM'];
+                $bean->int_id_dynamics_c = $id_op;
             }
             else
             {
-              if($response) throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response[errores][0]['describeError']);
+              throw new SugarApiExceptionInvalidParameter("No se puede guardar información en Dynamics. ".$response['description']);
             }
           }
           else
