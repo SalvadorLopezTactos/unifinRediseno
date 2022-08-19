@@ -24,8 +24,11 @@
             success: function (data) {
                 App.alert.dismiss('getRecordsKanban');
                 contextoKanban.registrosKanban=data;
+                contextoKanbanClientes.registrosKanbanClientes=data;
 
                 contextoKanban.render();
+                contextoKanbanClientes.render();
+
             },
             error: function (e) {
                 throw e;
@@ -36,7 +39,7 @@
 
     _render: function () {
         this._super("_render");
-        $('.contenedor-grid').attr('style','grid-template-columns: repeat(8, 1fr)')
+        $('.contenedor-grid').attr('style','grid-template-columns: repeat(5, 1fr)')
     },
 
     muestraChecklist:function(e){

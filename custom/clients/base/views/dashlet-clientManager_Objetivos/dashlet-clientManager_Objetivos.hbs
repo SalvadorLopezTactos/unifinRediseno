@@ -1,19 +1,31 @@
 <style>
+.contenedor{
+    text-align:center
+}
+
+.left{
+    float: left;
+    width : 50%;
+}
 
 p {
 font-size: 12px;
   text-align: center;
 }
 </style>
-<br>
-<h4 style="display: block; background-color:#021741; color: white;"><b>Objetivo Mensual</b></h4>
-<p><b>Objetivo Mensual:  $ {{Omensual}}</b></p>
-<p>Monto cubierto: $ {{ Mcubierto}} - {{porcubierto}} %</p>
-<br>
-<canvas id="chartMensual" width="400" height="400"></canvas>
-<h4 style="display: block; background-color:#021741; color: white;"><b>Objetivo Anual</b></h4>
-<p><b>Objetivo Anual:  $ {{Amensual}}</b></p>
-<p>Monto cubierto: $ {{Acubierto}} - {{porcubiertoAn}} %</p>
-<br>
-<canvas id="chartAnual" width="400" height="400"></canvas>
-<br>
+<div class ="contenedor">
+  <div class="left">
+    <h3 style="display: block; background-color:#021741; color: white;"><b>Mensual</b></h3>
+      <p><b>Monto Mensual : </b> $ {{Omensual}} &nbsp;&nbsp;&nbsp;&nbsp;<b> Monto cubierto:</b> $ {{ Mcubierto}} - {{porcubierto}} %</p>
+      <div height="20px" width="20px">
+        <canvas id="chartMensual" style="position: center; height:35vh; width:35vw;"></canvas>
+      </div>
+  </div>
+  <div class="left">
+    <h3 style="display: block; background-color:#021741; color: white;"><b>Anual</b></h3>
+    <p><b>Monto Anual:</b>  $ {{Amensual}} &nbsp;&nbsp;&nbsp;&nbsp;<b> Monto cubierto: </b>$ {{Acubierto}} - {{porcubiertoAn}} % </p>
+      <div height="20px" width="20px" >
+      <canvas id="chartAnual" style="position: center; height:35vh; width:35vw;"></canvas>
+    </div>
+  </div>
+</div>

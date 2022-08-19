@@ -53,10 +53,17 @@
                 autoClose: true
             });
         }else {
-            var modal = $('#modalRecordsCancel');
+            /*var modal = $('#modalRecordsCancel');
             if (modal) {
                 modal.show();
-            }
+            }*/
+            app.drawer.open({
+                layout: 'client_manager_asigna-cancelados',
+                context: {
+                    myData: this.registrosAplazados
+                },
+            },function() {
+            });
         }
     },
 
@@ -68,10 +75,17 @@
                 autoClose: true
             });
         }else {
-            var modal_L = $('#modalRecordsLost');
+            /*var modal_L = $('#modalRecordsLost');
             if (modal_L) {
                 modal_L.show();
-            }
+            }*/
+            app.drawer.open({
+                layout: 'client_manager_asigna-perdidos',
+                context: {
+                    myData: this.registrosPerdidos
+                },
+            },function() {
+            });
         }
     },
 

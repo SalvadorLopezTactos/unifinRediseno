@@ -24,17 +24,142 @@ class Top20Backlog extends SugarApi
             $id_user = $current_user->id;
             $posicion_operativa = $current_user->posicion_operativa_c;
 
-            if($posicion_operativa == '^2^'){
+            /*if($posicion_operativa == '^2^'){
                 $users = $this->getusuarios($id_user, $posicion_operativa);
                 $records = $this->dir_regional($users[0],$users[1]);
             }else{
                 $records = $this->dir_equipo($id_user);
-            }
-           $GLOBALS['log']->fatal("records: " , $records);
+            }*/
+            $records = $this->dataBacklog($id_user);
+           //$GLOBALS['log']->fatal("records: " , $records);
             return $records;
         } catch (Exception $e) {
             $GLOBALS['log']->fatal("Error: " . $e->getMessage());
         }
+    }
+
+    public function dataBacklog($id_user){
+
+        $year = date("Y");
+        $month = intval(date("m"));
+        $values = [];
+        while($month<13){
+            array_push($values,strval($month));
+            $month ++;
+        }
+        
+        $year =date("Y");
+        $month = intval(date("m"));
+       
+        $sq1 = new SugarQuery();
+        $sq1->select(array('id','name','mes','anio','progreso','monto_con_solicitud_c','monto_sin_solicitud_c','assigned_user_id','equipo'));
+        $sq1->from(BeanFactory::newBean('lev_Backlog'));
+        $sq1->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
+        $sq1->where()->queryAnd()->equals('anio',$year)->in('mes',$values);
+        $sq1->where()->queryOr()->gt('monto_con_solicitud_c',0)->gt('monto_sin_solicitud_c',0);
+        //$sugarQuery->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
+        //$sugarQuery->orderByRaw("lev_Backlog.monto_con_solicitud_c DESC");
+
+        $sq2 = new SugarQuery();
+        $sq2->select(array('id','name','mes','anio','progreso','monto_con_solicitud_c','monto_sin_solicitud_c','assigned_user_id','equipo'));
+        $sq2->from(BeanFactory::newBean('lev_Backlog'));
+        $sq2->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
+        $sq2->where()->equals('anio', ($year+1));
+        $sq2->where()->queryOr()->gt('monto_con_solicitud_c',0)->gt('monto_sin_solicitud_c',0);
+
+        $sqUnion = new SugarQuery();
+        $sqUnion->union($sq1);
+        $sqUnion->union($sq2);
+        
+        $result = $sqUnion->execute();
+        $GLOBALS['log']->fatal('result', $result);
+        
+        $records_in = [];
+        $data = [];
+        $d1 = [];
+        $users = [];
+
+        $labels = [];
+        $datas = [];
+        $records = [];
+        $colors = [];
+
+        $arrusers = [];
+
+        foreach($result as $val){
+            array_push($users,$val['assigned_user_id']);
+        }
+
+        $txtusers = "'".implode("','", $users)."'";
+        $queryusuarios = "SELECT id, user_name, nombre_completo_c from users join users_cstm on users.id = users_cstm.id_c where id in ({$txtusers})";
+        $usrres = $GLOBALS['db']->query($queryusuarios);
+        while ($row = $GLOBALS['db']->fetchByAssoc($usrres)) {
+            $v1 = array (
+                'id' => $row['id'],
+                'nombre' => $row['nombre_completo_c']
+            );
+            array_push($arrusers,$v1);
+        }
+
+        //$GLOBALS['log']->fatal("arrusers: " , $arrusers);
+
+        foreach($result as $val){
+            
+            foreach($usrres as $u){
+                if($val['assigned_user_id'] == $u['id']){
+                    $auxuser = $u['nombre_completo_c'];
+                }
+            }
+            $etapa = ($val['progreso'] == '1') ? "Con Solicitud": "Sin solicitud" ;
+            $monto = ($val['progreso'] == '1')? $val['monto_con_solicitud_c'] : $val['monto_sin_solicitud_c'] ;
+            array_push($datas, $monto );
+            
+            if($val['progreso'] == '1') array_push($colors, 'rgba(63, 191, 191)' ) ;
+            if($val['progreso'] != '1') array_push($colors, 'rgba(63, 101, 191)' ) ; 
+            
+            $texto_monto = '$ '.number_format( $monto , 2);
+
+            $tabaux = array(
+                'href' => '#lev_Backlog/'. $val['id'],
+                'backlog' => $val['name'],
+                'usuario' => $auxuser,
+                'etapa' => $etapa,
+                'monto' => $monto,
+                'text_monto' => $texto_monto,
+            );
+            array_push($records,$tabaux);
+        }
+        rsort($datas);
+        if(count($datas) > 20){
+            $datas = array_slice($datas, 0, 20);
+        }
+        
+        $this->array_sort_by_column($records, 'monto');
+        
+        if(count($records) > 20){
+            $records = array_slice($records, 0, 20);
+        }
+        foreach($records as $lbl){
+            array_push($labels,$lbl['usuario']);
+        }
+
+        $records_in = array(
+            'labels' => $labels,
+            'datas' => $datas,
+            'colors' => $colors,
+            'records' => $records
+        );
+        $GLOBALS['log']->fatal("records_in: " , $records_in);
+        return $records_in;
+    }
+
+    public function array_sort_by_column(&$arr, $col, $dir = SORT_DESC) {
+        $sort_col = array();
+        foreach ($arr as $key => $row) {
+            $sort_col[$key] = $row[$col];
+        }
+    
+        array_multisort($sort_col, $dir, $arr);
     }
 
     public function dir_equipo($id_user){
@@ -115,7 +240,7 @@ class Top20Backlog extends SugarApi
                 array_push($records,$aux1);
             }
         }
-        
+
         $salida = array(
             'labels' => $labels,
             'datas' => $datas,

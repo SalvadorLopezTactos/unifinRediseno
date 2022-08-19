@@ -31,19 +31,19 @@
 					type: 'bar',
 					data: datas,
 					options: {
-					  scales: {
-						y: {
-						  beginAtZero: false,
-						  ticks: {
-							// Include a dollar sign in the ticks
-							callback: function(value, index, ticks) {
-								return Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(value);
-							}
-						  },
-						  
-						}
-					  },
-					  	plugins: {
+						scales: {
+						  y: {
+							beginAtZero: false,
+							ticks: {
+							  // Include a dollar sign in the ticks
+							  callback: function(value, index, ticks) {
+								  return Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(value);
+							  }
+							},
+							
+						  }
+						},
+						plugins: {
 							tooltip: {
 								callbacks: {
 									label: function(context) {
@@ -58,7 +58,7 @@
 									}
 								}
 							}
-					  	}
+						}
 					},
 				});
             },

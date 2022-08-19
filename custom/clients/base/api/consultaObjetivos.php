@@ -107,6 +107,7 @@ class consultaObjetivos extends SugarApi
         $GLOBALS['log']->fatal("mes:" . $mes);
         $GLOBALS['log']->fatal("presupuestoTotal:" . $presupuestoTotal);
         foreach($response1 as $val){
+            if($val['IdProducto'] == '1'){
                 $presupuestoTotal = $presupuestoTotal + floatval($val['Presupuesto']);
                 $cubiertoTotal = $cubiertoTotal + floatval($val['MontoCubierto']);
                 if($val['mes'] == $mes){
@@ -114,6 +115,7 @@ class consultaObjetivos extends SugarApi
                     $presupuestoMensual = $presupuestoMensual + floatval($val['Presupuesto']);
                     $cubiertoMensual = $cubiertoMensual + floatval($val['MontoCubierto']);
                 }
+            }
         }
 
         $item['tipo'] = 'mensual';

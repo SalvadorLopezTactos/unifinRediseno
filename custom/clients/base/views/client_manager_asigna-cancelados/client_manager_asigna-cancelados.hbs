@@ -1,0 +1,231 @@
+<style>
+
+  .client_manager_asigna-cancelados{
+      margin: auto;
+      overflow: auto;
+      display: block;
+      height:80%; 
+      width:80%;
+  }
+ 
+  .ex1 {
+    margin: auto;
+    overflow: auto;
+    display: block;
+    height:80%;
+    width: 90%;
+  }
+
+  #contenido{
+    /*border: 3px solid rgb(11, 11, 11);*/
+    text-align: center;
+    font-size: 12px;
+    width: 80%;
+    }
+
+  #intercont{
+    padding: 5px;
+  }
+
+  #registros table{
+    min-width: 850px;
+    border: 1px solid #e9e9e9;
+  }
+
+  #registros td { 
+      padding: 5px 10px;
+      text-align: left;
+      border: 1px solid #e9e9e9;
+  }
+
+  td.nombre{
+    overflow-x:auto; 
+    width:400px;
+  }
+  /* The Modal (background) */
+  .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+
+  .sinborde { /*Table without border*/
+  border: 0;
+  }
+
+  .modalDashlet {
+      /*position: absolute;*/
+      padding-top: 30px; /* Location of the box */
+      padding-bottom: 30px;
+      top: 0;
+      left:0;
+      /* width: 100%; /* Full width */
+      /*height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      min-width: 350px;
+  }
+
+  /* Modal Content */
+  .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 1px;
+      border: 1px solid #888;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s;
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  /* The Close Button */
+  .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  .modal-header {
+      padding: .5px 0px;
+      background-color: #21618C;
+      color: white;
+  }
+
+  .modal-body {
+    padding: .5px 0px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .modal-footer {
+      padding: 2px 16px;
+      background-color: #21618C;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+  }
+
+  .pointer {cursor: pointer;}
+
+  tr.border_ td {
+  	border: 1px solid #e9e9e9;
+}
+
+.table-fixed{
+  width: 100%;
+  min-width: 300px;
+  background-color: #f3f3f3;
+  tbody{
+    height:200px;
+    overflow:auto;
+    width: 100%;
+    }
+  thead,tbody,tr,td,th{
+    display:block;
+  }
+  tbody{
+    td{
+      float:left;
+    }
+  }
+  thead {
+    tr{
+      th{
+        float:left;
+       background-color: #f39c12;
+       border-color:#e67e22;
+      }
+    }
+  }
+}
+</style>
+  <table class="table table-striped dataTable"  >
+    {{#if viewEnableCancel}}
+    <tr>
+      <td colspan="5">
+        <!-- Comienza modal-->
+        <div  class="row-fluid" >
+          <!-- Modal content -->
+          <span class="close modalRecordsCancel modal-header" style="width:20px; height:20px; padding: 3px; margin: 10px; font-color:white; border: 5px solid white; ">&times;</span>
+          <h2 class="modal-header"> &nbsp;&nbsp; Registros Cancelados/Aplazados</h2>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th class="span4" style = "width: 400px;">Nombre</th>
+      <th class="span2" style = "width: 10%;">
+        Tipo de registro
+      </th>
+      <th class="span2" style = "width: 20%;">
+        Subtipo de registro
+        <!--<i id="orderBySubtipo" class="fa fa-unsorted"></i>-->
+      </th>
+      <th class="span2" style = "width: 10%;">
+        Estatus
+        <!--<i id="orderByStatus" class="fa fa-unsorted"></i>-->
+      </th>
+      <th class="span2" style = "width: 15%;">Acción</th>
+    </tr>
+    {{#if registrosAplazados}}
+      {{#each registrosAplazados}}
+        <tr class="row_fluid">
+          <td  class = "nombre" ><p><a href="{{href}}" target="_blank">{{name}}</a></p></td>
+          <td  class="span2" ><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
+          <td  class="span2" ><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
+          <td  class="span2" ><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
+          <td  class="span2" ><button class="btn btnLeadSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
+        </tr>
+      {{/each}}
+    {{/if}}
+    {{else}}
+    <tr>
+      <td>
+        <div data-dashlet="dashlet" class="dashlet-content" style="padding:20px;">
+          <div class="bs-docs-example dashlet-container">
+            <div class="row-fluid">
+              <div class="span12">
+                <p style="text-align:center">
+                  Tu perfil no cumple con las condiciones para habilitar Protocolo de Asignación de Leads
+                </p>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
+                <p style="text-align:center">
+                  &nbsp;&nbsp;
+                  <span class="span12 label label-info" style="background-color:white;border:1px #c6ddff;color:#29388c">
+                    Tienes un total de {{numero_registros}} registros activos
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {{/if}}
+  </table>

@@ -93,7 +93,7 @@
         const chartMensual = new Chart(mensual, {
             type: 'doughnut',
             data: {
-                labels: ['0 - 50','50 - 100','100 - 200'],
+                labels: ['0% - 50%','50% - 100%','100% - 200%'],
                 datasets: [{
                     data: [33, 34, 33],
                     backgroundColor: [
@@ -114,24 +114,22 @@
                         "rgba(0, 0, 0, 0.4)",
                         "rgba(0, 0, 0, 0.4)"
                     ],
-                    borderWidth: 1,
                     hoverBackgroundColor: [
                         "rgba(0, 0, 0, 0)",
                         "rgba(0, 0, 0, 0.6)",
                         "rgba(0, 0, 0, 0)"
                     ],
-                    hoverBorderWidth: 0
                 }
                 ],
             },
             options: {
-                responsive:true,
+                responsive:false,
                 rotation: -90.0,
                 circumference: -180,
                 cutoutPercentage: 0,
                 legend: {
                     position: 'top',
-                    display: true
+                    display: false
                 },
                 animation: {
                     animateRotate: false,
@@ -155,7 +153,7 @@
         var chartAnual = new Chart(ctx1, {
             type: 'doughnut',
             data: {
-                labels: ['0 - 50','50 - 100','100 - 200'],
+                labels: ['0% - 50% ','50% - 100%','100% - 200%'],
                 datasets: [{
                     label: 'rangos',
                     data: [ 33, 34, 33],
@@ -180,18 +178,16 @@
                         "rgba(0, 0, 0, 0.4)",
                         "rgba(0, 0, 0, 0.4)"
                     ],
-                    borderWidth: 1,
                     hoverBackgroundColor: [
                         "rgba(0, 0, 0, 0)",
                         "rgba(0, 0, 0, 0.6)",
                         "rgba(0, 0, 0, 0)"
                     ],
-                    hoverBorderWidth: 0
                 }
                 ],
             },
             options: {
-                responsive:true,
+                responsive:false,
                 rotation: -90.0,
                 circumference: -180,
                 cutoutPercentage: 0,

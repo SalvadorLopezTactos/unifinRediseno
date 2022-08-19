@@ -1478,20 +1478,27 @@ SQL;
         //$GLOBALS['log']->fatal(">>>>>>>>>MoverMes: " . print_r($args,1));
         global $sugar_config;
         $GLOBALS['esb_url'] = $sugar_config['esb_url'];
+        $user = $sugar_config['quantico_usr'];
+        $pwd = $sugar_config['quantico_psw'];
+        $auth_encode = base64_encode($user . ':' . $pwd);
+        $host=$sugar_config['quantico_url_base'];
 
-        $url='http://'.$GLOBALS['esb_url'].'/uni2/rest/unics/actualizaFechasBacklog';
+
+        //$url='http://'.$GLOBALS['esb_url'].'/uni2/rest/unics/actualizaFechasBacklog';
+        $url=$host."/QuanticoBacklog_API/rest/BacklogApi/MoveDateBacklog";
         $fields = array(
-            "backlogRequest" => array(
+            //"backlogRequest" => array(
                 "bl" => $args['data']['bl'],
                 "mesActual" => $args['data']['mesActual'],
                 "anioActual" => $args['data']['anioActual'],
                 "mesNuevo" => $args['data']['mesNuevo'],
                 "anioNuevo" => $args['data']['anioNuevo']
-            )
+            //)
         );
 
         $callApi = new UnifinAPI();
-        $callApi->unifinPostCall($url,$fields);
+        //$callApi->unifinPostCall($url,$fields);
+        $callApi->postQuantico($url,$fields,$auth_encode);
 
     }
 
