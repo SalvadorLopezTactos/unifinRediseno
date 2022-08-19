@@ -17,13 +17,36 @@
 
 <table class="content" >
     <th>
-    <td width="45%">
+    <td width="55%">
         <table class="table table-bordered table-striped" style=" width:100%;">
+            {{#if regional}}
             <thead>
                 <tr>
-                    <td width = "40%"><b>Backlog</b></td>
-                    <td width = "20%"><b>Usuario</b></td>
-                    <td width = "20%"><b>Etapa</b></td>
+                    <td width = "20%"><b>Equipo</b></td>                    
+                    <td width = "25%"><b>Etapa</b></td>
+                    <td width = "20%"><b>Solicitud</b></td>
+                    <td width = "30%"><b>Total Backlog</b></td>
+                    <td width = "25%"><b>Monto</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each dataResult}}
+                <tr>
+                    <td>{{#if nbacklog}}<p><b>{{nbacklog}}</b></p>{{/if}}</td>
+                    <td>{{#if usuario}}{{usuario}}{{/if}}</td>
+                    <td>{{#if etapa}}{{getUnifinListValue 'etapa_c_list' etapa}}{{/if}}</td>
+                    <td>{{#if solicitud}}{{solicitud}}{{/if}}</td>
+                    <td>{{#if text_monto}}{{text_monto}}{{/if}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+            {{else}}
+            <thead>
+                <tr>
+                    <td width = "30%"><b>Backlog</b></td>
+                    <td width = "25%"><b>Usuario</b></td>                    
+                    <td width = "10%"><b>Etapa</b></td>
+                    <td width = "15%"><b>Solicitud</b></td>
                     <td width = "20%"><b>Monto</b></td>
                 </tr>
             </thead>
@@ -32,15 +55,17 @@
                 <tr>
                     <td class="nombre">{{#if backlog}}<p><a href="{{href}}" target="_blank">{{backlog}}</a></p>{{/if}}</td>
                     <td>{{#if usuario}}{{usuario}}{{/if}}</td>
-                    <td>{{#if etapa}}{{etapa}}{{/if}}</td>
+                    <td>{{#if etapa}}{{getUnifinListValue 'etapa_c_list' etapa}}{{/if}}</td>
+                    <td>{{#if solicitud}}{{solicitud}}{{/if}}</td>
                     <td>{{#if text_monto}}{{text_monto}}{{/if}}</td>
                 </tr>
                 {{/each}}
             </tbody>
+            {{/if}}
         </table>
     </td>
     <td >
-        <div class="chart-container" style="position: relative; height:30vh; width:50vw">
+        <div class="chart-container" style="position: relative; height:45vh; width:35vw">
             <canvas id="top20" ></canvas>
         </div>
     </td>
