@@ -2,6 +2,7 @@
     events:{
         'click .gpoEmpresarial': 'openGpoEmpresarial',
         'click .closeModalGpoEmpresarial': 'closeModalGpoEmpresarial',
+        'click .closeModalDisposiciones': 'closeModalDisposiciones',
         'click .btnAddContact':'openDrawerRelacion',
         'click .btnNuevaReunion':'openDrawerReunion',
         'click .addCall':'generatecall',
@@ -10,6 +11,7 @@
 
 
         //Despliegue de detalle
+      'click .openModalDisposiciones': 'getDisposiciones',
       'click .openModalAnexos': 'getAnexos',
       'click .openModalCesiones': 'getCesiones',
       'click .openModalContratos': 'getContratos',
@@ -530,6 +532,13 @@
         });
     },
 
+    getDisposiciones:function(){
+      var modal = $('#modalDisposiciones');
+            if (modal) {
+                modal.show();
+            }
+    },
+
     getAnexos: function () {
         var id = this.model.get('idcliente_c');
         var peticion = "anexos_activos";
@@ -574,6 +583,7 @@
           console.log("getAnexos - clic");
 
           //Bloque botones
+          $("#openDisposiciones").removeClass("openModalDisposiciones");
           $("#openAnexos").removeClass("openModalAnexos");
           $("#openCesiones").removeClass("openModalCesiones");
           $("#openContratos").removeClass("openModalContratos");
@@ -659,6 +669,13 @@
           $("#openContratosH").addClass("openModalContratosH");
 
       },
+
+      closeModalDisposiciones:function(){
+        var modal = $('#modalDisposiciones');
+        if (modal) {
+            modal.hide();
+        }
+    },
 
       orderActivo:function(){
         var orderData = this.anexosdata;
