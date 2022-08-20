@@ -172,48 +172,56 @@
     }
 
 </style>
-{{#each disposicionesDWH}}
-    <div class="row-fluid record-panel">
-    <div class="row-fluid record-panel-header panel-active" style="background: #ffff;color:#717171" tabindex="-1">
-        <div class="pull-left">
-            <button class="btn btn-invisible record-panel-arrow">
-                <i class="fa fa-chevron-right showDisposicion" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
-            </button>
-            Disposición {{Solicitud}}
-        </div>
-    </div>
-    <div class="row-fluid record-panel-content hide">
-        <div class="wrapper">
-            <div class="arrow-steps">
-                <div class="step span3"><span><strong>01. Negociación</strong></span></div>
-                <div class="step span3"><span><strong>02. En proceso compras</strong></span></div>
-                <div class="step span3"><span><strong>03. Enviadas a contratar</strong></span></div>
-                <div class="step span3"><span><strong>04. Activadas y liberadas</strong></span></div>
+{{#if disposicionesDWH}}
+    {{#each disposicionesDWH}}
+        <div class="row-fluid record-panel">
+        <div class="row-fluid record-panel-header panel-active" style="background: #ffff;color:#717171" tabindex="-1">
+            <div class="pull-left">
+                <button class="btn btn-invisible record-panel-arrow">
+                    <i class="fa fa-chevron-right showDisposicion" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
+                </button>
+                Solicitud {{NumeroSolicitud}}
             </div>
         </div>
+        <div class="row-fluid record-panel-content hide">
+            <div class="wrapper">
+                <div class="arrow-steps">
+                    <div class="step span3"><span><strong>01. Negociación</strong></span></div>
+                    <div class="step span3"><span><strong>02. En proceso compras</strong></span></div>
+                    <div class="step span3"><span><strong>03. Enviadas a contratar</strong></span></div>
+                    <div class="step span3"><span><strong>04. Activadas y liberadas</strong></span></div>
+                </div>
+            </div>
 
-        <div style="width:95%">
-            <div class="span3 elementos-div">
-                {{#each Negociacion}}
-                    <div class="card-item"><p>{{this}}</p></div>                
-                {{/each}}
-            </div>
-             <div class="span3 elementos-div">
-                {{#each Compras}}
-                    <div class="card-item"><p>{{this}}</p></div>                
-                {{/each}}
-            </div>
-             <div class="span3 elementos-div">
-                {{#each Contratacion}}
-                    <div class="card-item"><p>{{this}}</p></div>                
-                {{/each}}
-            </div>
-             <div class="span3 elementos-div">
-                {{#each ActivadasLiberadas}}
-                    <div class="card-item"><p>{{this}}</p></div>                
-                {{/each}}
+            <div style="width:95%">
+                <div class="span3 elementos-div">
+                    {{#each Negociacion}}
+                        <div class="card-item"><p>{{this}}</p></div>                
+                    {{/each}}
+                </div>
+                <div class="span3 elementos-div">
+                    {{#each Compras}}
+                        <div class="card-item"><p>{{this}}</p></div>                
+                    {{/each}}
+                </div>
+                <div class="span3 elementos-div">
+                    {{#each Contratacion}}
+                        <div class="card-item"><p>{{this}}</p></div>                
+                    {{/each}}
+                </div>
+                <div class="span3 elementos-div">
+                    {{#each ActivadasLiberadas}}
+                        <div class="card-item"><p>{{this}}</p></div>                
+                    {{/each}}
+                </div>
             </div>
         </div>
+        </div>
+    {{/each}}
+{{else}}
+    <div class="row-fluid">
+        <div class="span6 record-cell">
+            <span> Este Cliente no cuenta con disposiciones </span>
+        </div>
     </div>
-    </div>
-{{/each}}
+{{/if}}

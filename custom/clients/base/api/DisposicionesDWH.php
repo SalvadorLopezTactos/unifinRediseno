@@ -41,7 +41,22 @@ class DisposicionesDWH extends SugarApi
         $callApi = new UnifinAPI();
         
         $response = $callApi->unifingetCall($url_dwh);
-        
+
+        if(count($response)>0){
+            for ($i=0; $i < count($response); $i++) {
+                $response[$i]['numeroSolicitud']="";
+                $id_solicitud=$response[$i]['idSolicitud'];
+                if($id_solicitud != ""){
+                    $beanSolicitud = BeanFactory::getBean("Opportunities", $id_solicitud,array('disable_row_level_security' => true));
+                    
+                    if(!empty($beanSolicitud)){
+                        $numeroSolicitud=$beanSolicitud->idsolicitud_c;
+                        $response[$i]['numeroSolicitud']=$numeroSolicitud;
+                    }
+                }
+            }
+        }
+
         return $response;
     }
 
