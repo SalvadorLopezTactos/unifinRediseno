@@ -13,7 +13,8 @@
 
     getDisposicionesDWH: function (options) {
         
-        var id_cliente='ab1f8a92-9b84-ee36-c20d-56e2cb6f5e5f';
+        //var id_cliente='ab1f8a92-9b84-ee36-c20d-56e2cb6f5e5f';
+        var id_cliente=this.model.get('id');
         app.alert.show('getDisposiciones', {
             level: 'process',
             title: 'Cargando...',
@@ -24,12 +25,14 @@
                 App.alert.dismiss('getDisposiciones');
                 if(data.length>0){
                     var arrDiposiciones=[];
+                    var arrDisposicionesNumero=[];
                     var arrDisposicionesFinal=[];
                     //Recorre objeto para únicamente
                     for (const key in data) {
                         console.log(data.idSolicitud);
                         if(!arrDiposiciones.includes(data[key].idSolicitud) && data[key].idSolicitud!=undefined){
                             arrDiposiciones.push(data[key].idSolicitud);
+                            arrDisposicionesNumero.push(data[key].numeroSolicitud);
                         }
                     }
     
@@ -74,7 +77,8 @@
                             "Negociacion":arrNegociacion,
                             "Compras":arrCompras,
                             "Contratacion":arrContratacion,
-                            "ActivadasLiberadas":arrActivadasLiberadas
+                            "ActivadasLiberadas":arrActivadasLiberadas,
+                            "NumeroSolicitud":arrDisposicionesNumero[index]
                         }
                         arrDisposicionesFinal.push(objDisposicion);
                         
@@ -84,21 +88,6 @@
                     self_disposiciones.render();
 
                 }
-
-                /**
-                 * 
-                Negociacion	Fuera del Flujo de Compras
-                Negociacion	Negociación
-                Negociacion	Cotización Precio
-                Negociacion	Cotizado por Compras
-                Compras	Solicitud Compra
-                Compras	Orden Compra
-                Contratacion Contratación
-                Contratado	Contratadas
-                Activado	Activado
-                Liberado	Liberado
-                 */
-
             },
             error: function (e) {
                 throw e;
