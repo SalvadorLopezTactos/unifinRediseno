@@ -151,3 +151,4 @@ $mod_strings['LBL_ESTATUS_LD_C'] = 'Estatus ';
 $mod_strings['LBL_SUBESTATUS_LD_C'] = 'Subestatus ';
 $mod_strings['LBL_DETALLE_SUBESTATUS_LD'] = 'Detalle Subestatus';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Direcciones';
+$mod_strings['LBL_RECORDVIEW_PANEL4'] = 'Analizate Clientes';
