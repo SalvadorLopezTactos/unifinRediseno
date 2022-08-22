@@ -18,17 +18,23 @@ class analizate_hooks  {
                 //Valor de la lista en posicion 3 corresponde a Cliente
                 $urlFinanciera = $app_list_strings['analizate_url_list'][3];
                 $cuenta = BeanFactory::retrieveBean('Accounts', $bean->anlzt_analizate_accountsaccounts_ida);
+                //$GLOBALS['log']->fatal($bean->anlzt_analizate_accountsaccounts_ida);
                 if(!isset($cuenta->id)){
                   $cuenta = BeanFactory::retrieveBean('Leads', $bean->leads_anlzt_analizate_1leads_ida,array('disable_row_level_security' => true));
+                  //$GLOBALS['log']->fatal('==Valida registro lead, valida reg analizate==');
+                  //$GLOBALS['log']->fatal($bean->leads_anlzt_analizate_1leads_ida);
                 }
                 $correo = $cuenta->email1;
                 $full_name = $cuenta->name;
                 $rfc = $cuenta->rfc_c;
                 $idCuenta = $cuenta->id;
+                //$GLOBALS['log']->fatal($correo);
+                //$GLOBALS['log']->fatal($full_name);
+                //$GLOBALS['log']->fatal($rfc);
                  //Conversion de tipo de persona (regimen fiscal)
                 $regimen=isset($cuenta->tipodepersona_c) ? $cuenta->tipodepersona_c : $cuenta->regimen_fiscal_c ;
                 $tipopersona='';
-
+                //$GLOBALS['log']->fatal('==Valida regimen Fiscal analizate_hooks==');
                 switch($regimen){
                   case 'Persona Fisica':
                     $tipopersona='PF';
