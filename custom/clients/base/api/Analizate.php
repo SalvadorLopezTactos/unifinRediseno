@@ -241,18 +241,33 @@ class Analizate extends SugarApi
         //Aplica validación de usuario asignado
         $esUsuarioAsignado = false;
         $beanCuenta = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
-        $beanCuenta->load_relationship('accounts_uni_productos_1');
-        $uniProdAsociados= $beanCuenta->accounts_uni_productos_1->getBeans();
-        foreach ($uniProdAsociados as $uniProducto) {
-            $esUsuarioAsignado = ($uniProducto->assigned_user_id == $idUsuario && $uniProducto->tipo_cuenta=="3") ? true : $esUsuarioAsignado;
-        }
+        if (!isset($beanCuenta->id)){
+            //Recuperar id LEAD
+            $beanLead = BeanFactory::retrieveBean('Leads', $idCuenta,array('disable_row_level_security' => true));
+            $GLOBALS['log']->fatal('==Valida registro lead, valida assigned_user con usuario enviado al servicio==');
+            $esUsuarioAsignado = ($beanLead->assigned_user_id == $idUsuario) ? true : $esUsuarioAsignado;
+            
+        }else{
+            $beanCuenta->load_relationship('accounts_uni_productos_1');
+            $uniProdAsociados= $beanCuenta->accounts_uni_productos_1->getBeans();
+            foreach ($uniProdAsociados as $uniProducto) {
+                $esUsuarioAsignado = ($uniProducto->assigned_user_id == $idUsuario && $uniProducto->tipo_cuenta=="3") ? true : $esUsuarioAsignado;
+            }
+            $GLOBALS['log']->fatal('==Valida registro Cuenta, valida assigned_user con productos de la cuenta==');
+        }   
         $esUsuarioAsignado = true; //Quitar
         if($esUsuarioAsignado){
             //Aplica validación de Envíos generados
             $menorDosHoras = false;
             $enviosDia = 0;
-            $beanCuenta->load_relationship('anlzt_analizate_accounts');
-            $analizateAsociados = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+            if(isset($beanCuenta->id)){
+                $beanCuenta->load_relationship('anlzt_analizate_accounts');
+                $analizateAsociados = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+            }
+            else{
+                $beanLead->load_relationship('leads_anlzt_analizate_1');
+                $analizateAsociados = $beanLead->leads_anlzt_analizate_1->getBeans($beanLead->id,array('disable_row_level_security' => true));
+            }
             //Itera registros analizate de cliente y estatus enviado
             foreach ($analizateAsociados as $analizate) {
                 if(($analizate->tipo_registro_cuenta_c == '2' || $analizate->tipo_registro_cuenta_c == '3'|| $analizate->tipo_registro_cuenta_c == '4') && $analizate->estado == '1'){
@@ -283,8 +298,14 @@ class Analizate extends SugarApi
                         $relacion->url_portal = $url_portalFinanciera;
                         $relacion->assigned_user_id = $idUsuario;
                         $relacion->tipo_registro_cuenta_c = "3";
-                        $relacion->load_relationship('anlzt_analizate_accounts');
-                        $relacion->anlzt_analizate_accounts->add($beanCuenta->id);
+                        if(isset($beanCuenta->id)){
+                            $relacion->load_relationship('anlzt_analizate_accounts');
+                            $relacion->anlzt_analizate_accounts->add($beanCuenta->id);
+                        }else{
+                            $relacion->load_relationship('leads_anlzt_analizate_1');
+                            $relacion->leads_anlzt_analizate_1->add($beanLead->id);
+                        }
+                        
                         $relacion->save();
                     } catch (Exception $e) {
                         //Error en proceso de petición
