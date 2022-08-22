@@ -260,8 +260,14 @@ class Analizate extends SugarApi
             //Aplica validación de Envíos generados
             $menorDosHoras = false;
             $enviosDia = 0;
-            $beanCuenta->load_relationship('anlzt_analizate_accounts');
-            $analizateAsociados = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+            if(isset($beanCuenta->id)){
+                $beanCuenta->load_relationship('anlzt_analizate_accounts');
+                $analizateAsociados = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+            }
+            else{
+                $beanLead->load_relationship('leads_anlzt_analizate_1');
+                $analizateAsociados = $beanLead->leads_anlzt_analizate_1->getBeans($beanLead->id,array('disable_row_level_security' => true));
+            }
             //Itera registros analizate de cliente y estatus enviado
             foreach ($analizateAsociados as $analizate) {
                 if(($analizate->tipo_registro_cuenta_c == '2' || $analizate->tipo_registro_cuenta_c == '3'|| $analizate->tipo_registro_cuenta_c == '4') && $analizate->estado == '1'){
@@ -292,8 +298,14 @@ class Analizate extends SugarApi
                         $relacion->url_portal = $url_portalFinanciera;
                         $relacion->assigned_user_id = $idUsuario;
                         $relacion->tipo_registro_cuenta_c = "3";
-                        $relacion->load_relationship('anlzt_analizate_accounts');
-                        $relacion->anlzt_analizate_accounts->add($beanCuenta->id);
+                        if(isset($beanCuenta->id)){
+                            $relacion->load_relationship('anlzt_analizate_accounts');
+                            $relacion->anlzt_analizate_accounts->add($beanCuenta->id);
+                        }else{
+                            $relacion->load_relationship('leads_anlzt_analizate_1');
+                            $relacion->leads_anlzt_analizate_1->add($beanLead->id);
+                        }
+                        
                         $relacion->save();
                     } catch (Exception $e) {
                         //Error en proceso de petición
