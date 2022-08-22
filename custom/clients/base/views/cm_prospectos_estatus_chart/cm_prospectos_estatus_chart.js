@@ -35,6 +35,12 @@
                 }
             }
             
+            var textChart="";
+            if(App.user.attributes.posicion_operativa_c.includes('^2^')){
+                textChart="Para filtrar información, dar click sobre el nombre del equipo";
+            }else{
+                textChart="Para filtrar información, dar click sobre el nombre del asesor"
+            }
             const ctx = document.getElementById('myChart').getContext('2d');
 
             const myChart = new Chart(ctx, {
@@ -89,7 +95,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: ['El total es '+data['Total'],'Para filtrar información, dar click sobre el nombre del asesor'],
+                            text: ['El total es '+data['Total'],textChart],
                             font:{
                                 size:14
                             },
