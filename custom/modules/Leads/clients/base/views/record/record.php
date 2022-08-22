@@ -77,7 +77,7 @@ array (
                 'event' => 'button:reset_lead:click',
                 'class' => 'btn_resetLeads',
               ),
-              5 =>
+              5 => 
               array (
                 'name' => 'solicitar_ciec',
                 'type' => 'rowaction',

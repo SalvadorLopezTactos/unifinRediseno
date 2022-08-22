@@ -11,9 +11,8 @@
         analizate_lead=this;
         this._super('initialize', [options]);
         //Carga lista de valores para la creacion de la url portal
-        cont_nlzt.lista_url = App.lang.getAppListStrings('analizate_url_list');
+        analizate_lead.lista_url = App.lang.getAppListStrings('analizate_url_list');
         listaEstado = App.lang.getAppListStrings('anlzt_estado_list');
-        this.cargaPipeline();
         this.AnalizateCliente = [];
         this.AnalizateCliente.Estado1=[];
         this.AnalizateCliente.Estado2=[];
@@ -47,9 +46,9 @@
     },
 
     cargapipeline: function () {
-        var estado = cont_nlzt.Analizate.Cliente.estado;
-        var fecha = cont_nlzt.Analizate.Cliente.fecha;
-        console.log("Inicia campo cstm analizate clientes.");
+        var estado = analizate_lead.Analizate.Cliente.estado;
+        var fecha = analizate_lead.Analizate.Cliente.fecha;
+        console.log("Inicia campo cstm analizate Leads.");
         this.AnalizateCliente.Estado1.Valor = listaEstado[1];
         this.AnalizateCliente.Estado2.Valor = listaEstado[2];
         this.AnalizateCliente.Estado3.Valor = listaEstado[3];
