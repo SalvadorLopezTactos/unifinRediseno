@@ -77,6 +77,13 @@ array (
                 'event' => 'button:reset_lead:click',
                 'class' => 'btn_resetLeads',
               ),
+              5 =>
+              array (
+                'name' => 'solicitar_ciec',
+                'type' => 'rowaction',
+                'label' => 'Solicitar CIEC',
+                'event' => 'button:solicitar_ciec:click',
+              ),
             ),
           ),
           3 => 
@@ -777,6 +784,25 @@ array (
               ),
               25 => 
               array (
+              ),
+            ),
+          ),
+          5 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL4',
+            'label' => 'LBL_RECORDVIEW_PANEL4',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'leads_analizate_clientes',
+                'studio' => 'visible',
+                'label' => 'LBL_LEADS_ANALIZATE_CLIENTES',
+                'span' => 12,
               ),
             ),
           ),

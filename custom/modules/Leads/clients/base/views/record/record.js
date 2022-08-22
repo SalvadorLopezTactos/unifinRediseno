@@ -48,6 +48,7 @@
         this.cmbio_soc = 0;
         this.model.on('sync', this.muestrasubestatus, this);
 
+        this.model.on('sync', this.cargaPipeline, this);
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigenLeads();
     },
@@ -1216,6 +1217,7 @@
                 }
                 /*******************Refresca cambios en Direcciones******************/
                 this.get_addresses();
+                this.cargaPipeline();
 
             }, this);
 
@@ -1530,5 +1532,14 @@
             $('[data-name="subestatus_ld_c"]').hide();
         }
     },	
+
+    cargaPipeline: function () {
+        if(typeof analizate_lead!='undefined'){
+            //Ejecuta funcion para cargar pipeline
+            analizate_lead.cargapipeline();
+            analizate_lead.render();
+        }
+
+    },
 
 })
