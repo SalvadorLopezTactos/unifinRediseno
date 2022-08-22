@@ -32,10 +32,10 @@
             <tbody>
                 {{#each dataResult}}
                 <tr>
-                    <td>{{#if nbacklog}}<p><b>{{nbacklog}}</b></p>{{/if}}</td>
                     <td>{{#if usuario}}{{usuario}}{{/if}}</td>
                     <td>{{#if etapa}}{{getUnifinListValue 'etapa_c_list' etapa}}{{/if}}</td>
                     <td>{{#if solicitud}}{{solicitud}}{{/if}}</td>
+                    <td>{{#if nbacklog}}<p><b>{{nbacklog}}</b></p>{{/if}}</td>
                     <td>{{#if text_monto}}{{text_monto}}{{/if}}</td>
                 </tr>
                 {{/each}}
