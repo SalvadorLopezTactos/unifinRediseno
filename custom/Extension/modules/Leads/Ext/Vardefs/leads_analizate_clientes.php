@@ -5,7 +5,7 @@
  * Time: 11:25 AM
  */
 
-$dictionary['Leads']['fields']['leads_analizate_clientes'] = array (
+$dictionary['Lead']['fields']['leads_analizate_clientes'] = array (
     'name' => 'leads_analizate_clientes',
     'id_name' => 'leads_analizate_clientes',
     'type' => 'leads_analizate_clientes',

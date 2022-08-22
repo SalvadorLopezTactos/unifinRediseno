@@ -1535,9 +1535,30 @@
 
     cargaPipeline: function () {
         if(typeof analizate_lead!='undefined'){
-            //Ejecuta funcion para cargar pipeline
-            analizate_lead.cargapipeline();
-            analizate_lead.render();
+            var id =this.model.get('id');
+            var requests=[];
+            var request={};
+            //Obtenemos las peticiones de los campos cstm: Analizate 4
+            var requestE = app.utils.deepCopy(request);
+            var url = app.api.buildURL('ObtieneFinanciera/' + id);
+            requestE.url = url.substring(4);
+            requests.push(requestE);
+             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
+                        success: _.bind(function (data) {
+                            if(data[0].contents!=""){
+                                analizate_lead.Analizate=[];
+                                analizate_lead.Analizate.Financiera=[];
+                                analizate_lead.Analizate.Credit=[];
+                                analizate_lead.Analizate.Cliente=[];
+                                analizate_lead.Analizate.Financiera = data[0].contents.Financiera;
+                                analizate_lead.Analizate.Credit = data[0].contents.Credit;
+                                analizate_lead.Analizate.Cliente = data[0].contents.AnalizateCliente;
+                                analizate_lead.cargapipeline();
+                                analizate_lead.render();
+                            }
+
+                        }, this)
+            });
         }
 
     },
