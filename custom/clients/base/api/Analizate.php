@@ -244,7 +244,8 @@ class Analizate extends SugarApi
         if (!isset($beanCuenta->id)){
             //Recuperar id LEAD
             $beanLead = BeanFactory::retrieveBean('Leads', $idCuenta,array('disable_row_level_security' => true));
-            $GLOBALS['log']->fatal('==Valida registro lead, valida assigned_user con usuario enviado al servicio==');
+            //$GLOBALS['log']->fatal('==Valida registro lead, valida assigned_user con usuario enviado al servicio==');
+            //$GLOBALS['log']->fatal($beanLead->id);
             $esUsuarioAsignado = ($beanLead->assigned_user_id == $idUsuario) ? true : $esUsuarioAsignado;
             
         }else{
@@ -253,20 +254,24 @@ class Analizate extends SugarApi
             foreach ($uniProdAsociados as $uniProducto) {
                 $esUsuarioAsignado = ($uniProducto->assigned_user_id == $idUsuario && $uniProducto->tipo_cuenta=="3") ? true : $esUsuarioAsignado;
             }
-            $GLOBALS['log']->fatal('==Valida registro Cuenta, valida assigned_user con productos de la cuenta==');
+            //$GLOBALS['log']->fatal('==Valida registro Cuenta, valida assigned_user con productos de la cuenta==');
         }   
         $esUsuarioAsignado = true; //Quitar
         if($esUsuarioAsignado){
             //Aplica validación de Envíos generados
             $menorDosHoras = false;
             $enviosDia = 0;
+            $esCuenta=false;
             if(isset($beanCuenta->id)){
                 $beanCuenta->load_relationship('anlzt_analizate_accounts');
                 $analizateAsociados = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+                //$GLOBALS['log']->fatal('==Identidica CUENTA==');
+                $esCuenta=true;
             }
             else{
                 $beanLead->load_relationship('leads_anlzt_analizate_1');
                 $analizateAsociados = $beanLead->leads_anlzt_analizate_1->getBeans($beanLead->id,array('disable_row_level_security' => true));
+                //$GLOBALS['log']->fatal('==Identidica LEAD==');
             }
             //Itera registros analizate de cliente y estatus enviado
             foreach ($analizateAsociados as $analizate) {
@@ -288,24 +293,26 @@ class Analizate extends SugarApi
                 if(!$menorDosHoras){
                     try{
                         //Crea nuevo bean Analizate (registro) y la relacion con acccounts (registro creado).
-                        $url_portalFinanciera = '&UUID=' . base64_encode($beanCuenta->id) . '&RFC_CIEC=' . base64_encode($beanCuenta->rfc_c). '&MAIL=' . base64_encode($beanCuenta->email1);
                         $relacion = BeanFactory::newBean('ANLZT_analizate');
-                        $relacion->anlzt_analizate_accountsaccounts_ida = $beanCuenta->id;
-                        $relacion->empresa = 1;
-                        $relacion->estado = 1;
-                        $relacion->tipo = 1;
-                        $relacion->fecha_actualizacion = $fechaActual;
-                        $relacion->url_portal = $url_portalFinanciera;
-                        $relacion->assigned_user_id = $idUsuario;
-                        $relacion->tipo_registro_cuenta_c = "3";
                         if(isset($beanCuenta->id)){
+                            $url_portalFinanciera = '&UUID=' . base64_encode($beanCuenta->id) . '&RFC_CIEC=' . base64_encode($beanCuenta->rfc_c). '&MAIL=' . base64_encode($beanCuenta->email1);
+                            $relacion->anlzt_analizate_accountsaccounts_ida = $beanCuenta->id;
                             $relacion->load_relationship('anlzt_analizate_accounts');
                             $relacion->anlzt_analizate_accounts->add($beanCuenta->id);
                         }else{
+                            $url_portalFinanciera = '&UUID=' . base64_encode($beanLead->id) . '&RFC_CIEC=' . base64_encode($beanLead->rfc_c). '&MAIL=' . base64_encode($beanLead->email1);
+                            $relacion->leads_anlzt_analizate_1leads_ida = $beanLead->id;
                             $relacion->load_relationship('leads_anlzt_analizate_1');
                             $relacion->leads_anlzt_analizate_1->add($beanLead->id);
+                            
                         }
-                        
+                        $relacion->url_portal = $url_portalFinanciera;
+                        $relacion->empresa = 1;
+                        $relacion->estado = 1;
+                        $relacion->tipo = 1;
+                        $relacion->fecha_actualizacion = $fechaActual;                        
+                        $relacion->assigned_user_id = $idUsuario;
+                        $relacion->tipo_registro_cuenta_c = "3";
                         $relacion->save();
                     } catch (Exception $e) {
                         //Error en proceso de petición
