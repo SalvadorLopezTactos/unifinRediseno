@@ -244,13 +244,17 @@ class Analizate extends SugarApi
         if (!isset($beanCuenta->id)){
             //Recuperar id LEAD
             $beanLead = BeanFactory::retrieveBean('Leads', $idCuenta,array('disable_row_level_security' => true));
-            $beanCuenta=$beanLead;
-        }
-        $beanCuenta->load_relationship('accounts_uni_productos_1');
-        $uniProdAsociados= $beanCuenta->accounts_uni_productos_1->getBeans();
-        foreach ($uniProdAsociados as $uniProducto) {
-            $esUsuarioAsignado = ($uniProducto->assigned_user_id == $idUsuario && $uniProducto->tipo_cuenta=="3") ? true : $esUsuarioAsignado;
-        }
+            $GLOBALS['log']->fatal('==Valida registro lead, valida assigned_user con usuario enviado al servicio==');
+            $esUsuarioAsignado = ($beanLead->assigned_user_id == $idUsuario) ? true : $esUsuarioAsignado;
+            
+        }else{
+            $beanCuenta->load_relationship('accounts_uni_productos_1');
+            $uniProdAsociados= $beanCuenta->accounts_uni_productos_1->getBeans();
+            foreach ($uniProdAsociados as $uniProducto) {
+                $esUsuarioAsignado = ($uniProducto->assigned_user_id == $idUsuario && $uniProducto->tipo_cuenta=="3") ? true : $esUsuarioAsignado;
+            }
+            $GLOBALS['log']->fatal('==Valida registro Cuenta, valida assigned_user con productos de la cuenta==');
+        }   
         $esUsuarioAsignado = true; //Quitar
         if($esUsuarioAsignado){
             //Aplica validación de Envíos generados
