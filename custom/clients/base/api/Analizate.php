@@ -241,6 +241,11 @@ class Analizate extends SugarApi
         //Aplica validación de usuario asignado
         $esUsuarioAsignado = false;
         $beanCuenta = BeanFactory::retrieveBean('Accounts', $idCuenta, array('disable_row_level_security' => true));
+        if (!isset($beanCuenta->id)){
+            //Recuperar id LEAD
+            $beanLead = BeanFactory::retrieveBean('Leads', $idCuenta,array('disable_row_level_security' => true));
+            $beanCuenta=$beanLead;
+        }
         $beanCuenta->load_relationship('accounts_uni_productos_1');
         $uniProdAsociados= $beanCuenta->accounts_uni_productos_1->getBeans();
         foreach ($uniProdAsociados as $uniProducto) {
