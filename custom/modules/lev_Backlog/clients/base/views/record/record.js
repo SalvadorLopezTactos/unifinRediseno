@@ -723,7 +723,7 @@
     refinanciamientoblock: function (){
             var existe=0;
             var usuario= App.user.attributes.id;
-            var usuarios_refinanciamiento = app.lang.getAppListStrings('refinanciamiento_usrs_list');
+            var usuarios_refinanciamiento = app.lang.getAppListStrings('equipo_central_bl_list');
                             Object.keys(usuarios_refinanciamiento).forEach(function (key) {
                                 if (key == usuario) {
                                     existe++;
