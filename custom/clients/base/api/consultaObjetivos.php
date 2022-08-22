@@ -42,7 +42,7 @@ class consultaObjetivos extends SugarApi
             $records = $this->getTotales($url,  $equipo, $region, $mes, $anio );
         
             //$GLOBALS['log']->fatal('records2-json', json_encode($records));
-            //$GLOBALS['log']->fatal('records', $records);
+            $GLOBALS['log']->fatal('records', $records);
             return $records;
         } catch (Exception $e) {
 
@@ -80,7 +80,7 @@ class consultaObjetivos extends SugarApi
         
         //Ejecuta primer servicio para validar que exista usuario en Proveedores, si no existe ejecuta segundo servicio
         try {
-            $GLOBALS['log']->fatal('Realiza consumo objetivos');
+            //$GLOBALS['log']->fatal('Realiza consumo objetivos');
             
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_ENCODING, '');
@@ -93,7 +93,7 @@ class consultaObjetivos extends SugarApi
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $response1 = json_decode($result, true);
             $GLOBALS['log']->fatal($url);
-            $GLOBALS['log']->fatal("Respuesta primer servicio: " . print_r($response1, true));
+            //$GLOBALS['log']->fatal("Respuesta primer servicio: " . print_r($response1, true));
         } catch (Exception $exception) {
             $GLOBALS['log']->fatal('Error',$exception);
         }
@@ -104,14 +104,14 @@ class consultaObjetivos extends SugarApi
         $cubiertoMensual = 0.0;
         $item=null; 
         $item1=null; 
-        $GLOBALS['log']->fatal("mes:" . $mes);
-        $GLOBALS['log']->fatal("presupuestoTotal:" . $presupuestoTotal);
+        //$GLOBALS['log']->fatal("mes:" . $mes);
+        //$GLOBALS['log']->fatal("presupuestoTotal:" . $presupuestoTotal);
         foreach($response1 as $val){
             if($val['IdProducto'] == '1'){
                 $presupuestoTotal = $presupuestoTotal + floatval($val['Presupuesto']);
                 $cubiertoTotal = $cubiertoTotal + floatval($val['MontoCubierto']);
                 if($val['mes'] == $mes){
-                    $GLOBALS['log']->fatal("mes:" .$val['mes']." - ". $mes);
+                    //$GLOBALS['log']->fatal("mes:" .$val['mes']." - ". $mes);
                     $presupuestoMensual = $presupuestoMensual + floatval($val['Presupuesto']);
                     $cubiertoMensual = $cubiertoMensual + floatval($val['MontoCubierto']);
                 }

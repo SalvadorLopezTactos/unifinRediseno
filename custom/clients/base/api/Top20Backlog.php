@@ -280,7 +280,7 @@ class Top20Backlog extends SugarApi
                 }
                 
                 if($cantautoriz2 > 0){
-                    $groupequi2= array(
+                    $groupequi= array(
                         'usuario' => $letiqueta,
                         'etapa' => '1',
                         'solicitud' => 'Sin Solicitud',
