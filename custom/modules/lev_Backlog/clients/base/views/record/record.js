@@ -52,6 +52,8 @@
         //Se ocultan banderas
         $('[data-name="tct_carga_masiva_chk_c"]').hide();
         $('[data-name="tct_bloqueo_txf_c"]').hide();
+        //Bloqueo campo Refinanciamiento
+        $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:none');
 
 
         if (this.model.dataFetched) {
@@ -717,4 +719,18 @@
 		}
 		callback(null, fields, errors);
     },
+
+    refinanciamientoblock: function (){
+            var existe=0;
+            var usuario= App.user.attributes.id;
+            var usuarios_refinanciamiento = app.lang.getAppListStrings('refinanciamiento_usrs_list');
+                            Object.keys(usuarios_refinanciamiento).forEach(function (key) {
+                                if (key == usuario) {
+                                    existe++;
+                                }
+                            });
+            if (existe>0){                
+            $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:block');
+        }
+    }
 })
