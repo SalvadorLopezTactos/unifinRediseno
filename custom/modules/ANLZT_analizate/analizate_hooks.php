@@ -18,12 +18,15 @@ class analizate_hooks  {
                 //Valor de la lista en posicion 3 corresponde a Cliente
                 $urlFinanciera = $app_list_strings['analizate_url_list'][3];
                 $cuenta = BeanFactory::retrieveBean('Accounts', $bean->anlzt_analizate_accountsaccounts_ida);
+                if(!isset($cuenta->id)){
+                  $cuenta = BeanFactory::retrieveBean('Leads', $bean->leads_anlzt_analizate_1leads_ida,array('disable_row_level_security' => true));
+                }
                 $correo = $cuenta->email1;
                 $full_name = $cuenta->name;
                 $rfc = $cuenta->rfc_c;
                 $idCuenta = $cuenta->id;
                  //Conversion de tipo de persona (regimen fiscal)
-                $regimen=$cuenta->tipodepersona_c;
+                $regimen=isset($cuenta->tipodepersona_c) ? $cuenta->tipodepersona_c : $cuenta->regimen_fiscal_c ;
                 $tipopersona='';
 
                 switch($regimen){
@@ -34,6 +37,15 @@ class analizate_hooks  {
                     $tipopersona='PFAE';
                     break;
                   case 'Persona Moral':
+                    $tipopersona='PM';
+                    break;
+                  case '1':
+                    $tipopersona='PF';
+                    break;
+                  case '2':
+                    $tipopersona='PFAE';
+                    break;
+                  case '3':
                     $tipopersona='PM';
                     break;
                 }
