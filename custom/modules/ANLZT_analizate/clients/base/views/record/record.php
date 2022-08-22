@@ -220,7 +220,10 @@ array (
                 'name' => 'json_robina_c',
                 'studio' => 'visible',
                 'label' => 'LBL_JSON_ROBINA_C',
-                'span' => 12,
+              ),
+              11 => 
+              array (
+                'name' => 'leads_anlzt_analizate_1_name',
               ),
             ),
           ),
