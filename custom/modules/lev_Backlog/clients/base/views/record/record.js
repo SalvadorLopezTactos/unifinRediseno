@@ -43,6 +43,7 @@
         //Se añade evento para establecer registro como Solo Lectura
         this.model.on('sync', this.setNoEditAllFields, this);
         this.model.on('sync', this.probabilidadreq, this);
+        this.model.on('sync', this.refinanciamientoblock, this);
 
     },
 
@@ -732,5 +733,5 @@
             if (existe>0){                
             $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:block');
         }
-    }
+    },
 })
