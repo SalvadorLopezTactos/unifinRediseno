@@ -106,20 +106,11 @@
     },
 
     ReenviaCorreoCliente: function () {
-        //Valida que sea proveedor para reenviar
-        if (this.model.get('tipo_registro_cuenta_c') == "1" ||this.model.get('tipo_registro_cuenta_c') == "5") {
-            app.alert.show('No_Cliente', {
-                level: 'error',
-                messages: 'Sólo se puede reenviar el correo a cuentas de tipo Cliente, Persona o Prospecto.',
-                autoClose: false
-            });
-            return;
-        }
-
+       
         if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
             app.alert.show('No_Envio', {
                 level: 'error',
-                messages: 'La cuenta no contiene un correo electrónico.',
+                messages: 'El Lead no contiene un correo electrónico.',
                 autoClose: false
             });
             return;
@@ -161,8 +152,8 @@
 
     DescargaArchivoCliente: function () {
         //Valida existencia de contexto cliente
-        if (cont_nlzt.Analizate.Cliente != undefined) {
-            var archivo = cont_nlzt.Analizate.Cliente.url_documento;
+        if (analizate_lead.Analizate.Cliente != undefined) {
+            var archivo = analizate_lead.Analizate.Cliente.url_documento;
             if (archivo != null && archivo != "") {
                 $('.btn-DescargarCliente').bind('click', false);
                 App.alert.show('enventoDescargaPDFCliente', {
