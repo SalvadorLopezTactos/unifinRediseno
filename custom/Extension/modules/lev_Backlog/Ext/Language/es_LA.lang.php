@@ -87,3 +87,4 @@ $mod_strings['LBL_RANGO_BL'] = 'Rango';
 $mod_strings['LBL_LUMO_CUENTAS'] = 'Lumo';
 $mod_strings['LBL_MONTO_DEVUELTA'] = 'Monto Devuelta';
 $mod_strings['LBL_ETAPA_SOLICITUD'] = 'Etapa Solicitud';
+$mod_strings['LBL_REFINANCIAMIENTO'] = 'Refinanciamiento';
