@@ -301,7 +301,19 @@
                         <!-- Preview de Anexos -->
                         {{#if ResumenCliente.leasing.tiene_anexos}}
                             <div class="row-fluid">
-                                  <div id="openAnexos" class="span6 openModalAnexos divAnexos">
+                                <div id="openDisposiciones" class="span4 openModalDisposiciones divAnexos">
+                                      <div class="row-fluid" style="background-color: #555">
+                                        <div class="span7" style="text-align:right;" >
+                                          <strong>{{ResumenCliente.leasing.numero_disposiciones}}</strong>
+                                        </div>
+                                        <div class="span5" style="text-align:right;">
+                                          <i class="fa fa-eye" style="color:white"></i>
+                                        </div>
+                                      </div>
+                                          Disposiciones<br>
+                                          mes actual
+                                  </div>
+                                  <div id="openAnexos" class="span4 openModalAnexos divAnexos">
                                       <div class="row-fluid" style="background-color: #555">
                                         <div class="span7" style="text-align:right;" >
                                           <strong>{{ResumenCliente.leasing.anexos_activos}}</strong>
@@ -312,7 +324,7 @@
                                       </div>
                                       Anexos activos
                                   </div>
-                                  <div id="openAnexos" class="span6 openModalAnexosH divAnexos">
+                                  <div id="openAnexos" class="span4 openModalAnexosH divAnexos">
                                       <div class="row-fluid" style="background-color: #555">
                                         <div class="span7" style="text-align:right;" >
                                           <strong>{{ResumenCliente.leasing.anexos_historicos}}</strong>
@@ -1718,4 +1730,45 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="modalDisposiciones" class="row-fluid" style="display:none">
+    <div class="modal span12" style="width:100%">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <span class="close closeModalDisposiciones">&times;</span>
+                <h2> &nbsp;&nbsp; Disposiciones en proceso</h2>
+            </div>
+
+            <div class="modal-body">
+                
+                <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th class="span4">Id Persona</th>
+                            <th class="span4">Disposición</th>
+                            <th class="span2">Monto Liberación </th>
+                            <th class="span2">Etapa </th>
+                            <th class="span2">Subetapa</th>
+                        </tr>
+                    </thead>
+                    {{#if ResumenCliente.leasing.disposiciones}}
+                    <tbody>
+                        {{#each ResumenCliente.leasing.disposiciones}}
+                        <tr>
+                            <td>{{IdPersona}}</td>
+                            <td>{{Disposicion}}</td>
+                            <td>$ {{customFormatNumber montoLiberacion}}</td>
+                            <td>{{etapa}}</td>
+                            <td>{{subetapa}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                    {{/if}}
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

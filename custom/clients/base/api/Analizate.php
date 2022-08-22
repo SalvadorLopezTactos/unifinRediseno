@@ -74,10 +74,21 @@ class Analizate extends SugarApi
 
         //Cargar toda la informacion del bean, en este caso de la cuenta
         $beanCuenta = BeanFactory::getBean("Accounts", $idCuenta);
-        //Cargar lo relacionado de la cuenta, en este caso al name del vardef de anzlt_analizate
-        $beanCuenta->load_relationship('anlzt_analizate_accounts');
-        //Trae todos los registros asociados entre el link de la account y Analizate
-        $relatedBeans = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+        if (!isset($beanCuenta->id)){
+            //Recuperar id LEAD
+            $beanLead = BeanFactory::retrieveBean('Leads', $idCuenta,array('disable_row_level_security' => true));
+            $beanCuenta=$beanLead;
+            //Cargar lo relacionado de la cuenta, en este caso al name del vardef de anzlt_analizate
+            $beanCuenta->load_relationship('leads_anlzt_analizate_1');
+            //Trae todos los registros asociados entre el link de la account y Analizate
+            $relatedBeans = $beanCuenta->leads_anlzt_analizate_1->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+        }else{
+            //Cargar lo relacionado de la cuenta, en este caso al name del vardef de anzlt_analizate
+            $beanCuenta->load_relationship('anlzt_analizate_accounts');
+            //Trae todos los registros asociados entre el link de la account y Analizate
+            $relatedBeans = $beanCuenta->anlzt_analizate_accounts->getBeans($beanCuenta->id,array('disable_row_level_security' => true));
+        }
+        
         //Se iteran las n tandas de registros
         foreach ($relatedBeans as $estados) {
             if($estados->tipo_registro_cuenta_c == '2' || $estados->tipo_registro_cuenta_c == '3' || $estados->tipo_registro_cuenta_c == '4'){

@@ -48,8 +48,11 @@
         this.cmbio_soc = 0;
         this.model.on('sync', this.muestrasubestatus, this);
 
+        this.model.on('sync', this.cargaPipeline, this);
         //Función para eliminar opciones del campo origen
         this.estableceOpcionesOrigenLeads();
+        //Clic solicitar CIEC
+        this.context.on('button:solicitar_ciec:click', this.solicitar_ciec_function, this);
     },
     seteaSubTipoLead: function (){
         //realizamos copia del valor previo en subtipo de lead
@@ -757,6 +760,8 @@
         this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
         //Ocultando campo check de homonimo
         $('[data-name="homonimo_c"]').hide();
+        //Oculta etiqueta del pipeline de Analizate
+        this.$("div.record-label[data-name='leads_analizate_clientes']").attr('style', 'display:none;');
 
         //Oculta fecha de bloqueo
         $('[data-name="fecha_bloqueo_origen_c"]').hide();
@@ -1216,6 +1221,7 @@
                 }
                 /*******************Refresca cambios en Direcciones******************/
                 this.get_addresses();
+                this.cargaPipeline();
 
             }, this);
 
@@ -1530,5 +1536,76 @@
             $('[data-name="subestatus_ld_c"]').hide();
         }
     },	
+
+    cargaPipeline: function () {
+        if(typeof analizate_lead!='undefined'){
+            var id =this.model.get('id');
+            var requests=[];
+            var request={};
+            //Obtenemos las peticiones de los campos cstm: Analizate 4
+            var requestE = app.utils.deepCopy(request);
+            var url = app.api.buildURL('ObtieneFinanciera/' + id);
+            requestE.url = url.substring(4);
+            requests.push(requestE);
+             app.api.call("create", app.api.buildURL("bulk", '', {}, {}), {requests: requests}, {
+                        success: _.bind(function (data) {
+                            if(data[0].contents!=""){
+                                analizate_lead.Analizate=[];
+                                analizate_lead.Analizate.Financiera=[];
+                                analizate_lead.Analizate.Credit=[];
+                                analizate_lead.Analizate.Cliente=[];
+                                analizate_lead.Analizate.Financiera = data[0].contents.Financiera;
+                                analizate_lead.Analizate.Credit = data[0].contents.Credit;
+                                analizate_lead.Analizate.Cliente = data[0].contents.AnalizateCliente;
+                                analizate_lead.cargapipeline();
+                                analizate_lead.render();
+                            }
+
+                        }, this)
+            });
+        }
+
+    },
+    solicitar_ciec_function:function(){
+        
+        if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
+            app.alert.show('No_Envio', {
+                level: 'error',
+                messages: 'El Lead no contiene un correo electrónico.',
+                autoClose: false
+            });
+            return;
+        }
+        App.alert.show('eventoEnvioMailCliente', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+
+        //enviar elementos de la cuenta
+        var api_params = {
+            "idCuenta": this.model.id,
+            "idUsuario": App.user.id
+        };
+        var url = app.api.buildURL('solicitaCIECCliente/', null, null);
+        app.api.call('create', url, api_params, {
+            success: function (data) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                var levelStatus = (data['status'] == '200') ? 'success' : 'error';
+                app.alert.show('Correo_reenviado', {
+                    level: levelStatus,
+                    messages: data['message'],
+                    autoClose: false
+                });
+            },
+            error: function (e) {
+                App.alert.dismiss('eventoEnvioMailCliente');
+                app.alert.show('Correo_no_reenviado', {
+                    level: 'error',
+                    messages: 'No se ha podido generar solicitud CIEC. Intente nuevamente.',
+                    autoClose: false
+                });
+            }
+        });
+    },
 
 })
