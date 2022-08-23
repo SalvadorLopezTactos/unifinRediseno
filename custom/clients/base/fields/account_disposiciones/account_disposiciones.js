@@ -51,22 +51,22 @@
                                     case 'Negociación':
                                     case 'Cotización Precio':
                                     case 'Cotizado por Compras':
-                                        arrNegociacion.push('Disposicion '+data[clave].Disposicion);
+                                        arrNegociacion.push('Disposición '+data[clave].Disposicion);
                                     break;
                                     
                                     case 'Solicitud Compra':
                                     case 'Orden Compra':
-                                        arrCompras.push('Disposicion '+data[clave].Disposicion);
+                                        arrCompras.push('Disposición '+data[clave].Disposicion);
                                     break;
                                     
                                     case 'Contratación':
                                     case 'Contratadas':
-                                        arrContratacion.push('Disposicion '+data[clave].Disposicion);
+                                        arrContratacion.push('Disposición '+data[clave].Disposicion);
                                     break;
 
                                     case 'Activado':
                                     case 'Liberado':
-                                        arrActivadasLiberadas.push('Disposicion '+data[clave].Disposicion);
+                                        arrActivadasLiberadas.push('Disposición '+data[clave].Disposicion);
                                     break;
 
                                 }
