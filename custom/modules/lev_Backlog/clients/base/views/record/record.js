@@ -722,7 +722,7 @@
     },
 
     refinanciamientoblock: function (){
-        $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:none');
+        $('[data-name="refinanciamiento_c"]').hide();
             var existe=0;
             var usuario= App.user.attributes.id;
             var usuarios_refinanciamiento = app.lang.getAppListStrings('equipo_central_bl_list');
@@ -732,7 +732,7 @@
                                 }
                             });
             if (existe>0){                
-            $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:block');
+                $('[data-name="refinanciamiento_c"]').show();
         }
     },
 })
