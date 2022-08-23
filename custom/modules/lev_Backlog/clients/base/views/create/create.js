@@ -87,6 +87,8 @@
         this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
         this.events['keydown [name=tct_conversion_c]'] = 'checkInVentas';
 
+        this.refinanciamientoblock();
+
     },
 
     _render: function() {
@@ -101,8 +103,6 @@
         }
 
 		this.setValores(this.val);
-
-        this.refinanciamientoblock();
 
         // Oculta campos al crear BL
         this.$('div[data-name=numero_de_backlog]').hide();
