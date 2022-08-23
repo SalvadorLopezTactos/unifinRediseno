@@ -56,26 +56,54 @@ class Top20Backlog extends SugarApi
         $sq1 = new SugarQuery();
         $sq1->select(array('id','name','mes','anio','progreso','etapa_c','monto_con_solicitud_c','monto_sin_solicitud_c','assigned_user_id','equipo'));
         $sq1->from(BeanFactory::newBean('lev_Backlog'));
-        $sq1->where()->equals('etapa_c', '1');
-        $sq1->where()->queryAnd()->equals('estatus_operacion_c', '2')->in('etapa_c', $val);
+        $sq1->where()->queryAnd()->equals('estatus_operacion_c', '2')->equals('etapa_c', '1');
+        //$sq1->where()->equals('etapa_c', '1');
+        //$sq1->where()->queryAnd()->equals('estatus_operacion_c', '2')->in('etapa_c', $val);
+        //$sq1->where()->queryAnd()->equals('estatus_operacion_c', '2')->equals('etapa_c', '1');
         $sq1->where()->queryAnd()->equals('anio',$year)->in('mes',$values);
         $sq1->where()->queryOr()->gt('monto_con_solicitud_c',0)->gt('monto_sin_solicitud_c',0);
+        
         //$sugarQuery->where()->queryAnd()->equals('estatus_operacion_c', '2')->notEquals('etapa_c','5');
         //$sugarQuery->orderByRaw("lev_Backlog.monto_con_solicitud_c DESC");
-
+        $sq3 = new SugarQuery();
+        $sq3->select(array('id','name','mes','anio','progreso','etapa_c','monto_con_solicitud_c','monto_sin_solicitud_c','assigned_user_id','equipo'));
+        $sq3->from(BeanFactory::newBean('lev_Backlog'));
+        $sq3->where()->queryAnd()->equals('estatus_operacion_c', '2')->equals('etapa_c', '4');
+        //$sq1->where()->queryAnd()->equals('estatus_operacion_c', '2')->in('etapa_c', $val);
+        //$sq3->where()->equals('estatus_operacion_c', '2');
+        //$sq3->where()->equals('etapa_c', '4')
+        $sq3->where()->queryAnd()->equals('anio',$year)->in('mes',$values);
+        $sq3->where()->queryOr()->gt('monto_sin_solicitud_c',0)->gt('monto_con_solicitud_c',0);
+        /************************************************************************************** */
         $sq2 = new SugarQuery();
         $sq2->select(array('id','name','mes','anio','progreso','etapa_c','monto_con_solicitud_c','monto_sin_solicitud_c','assigned_user_id','equipo'));
         $sq2->from(BeanFactory::newBean('lev_Backlog'));
-        $sq2->where()->equals('etapa_c', '1');
-        $sq2->where()->queryAnd()->equals('estatus_operacion_c', '2')->in('etapa_c', $val);
+        //$sq2->where()->equals('etapa_c', '1');
+        $sq2->where()->queryAnd()->equals('etapa_c', '1')->equals('estatus_operacion_c', '2');
+        //$sq2->where()->queryAnd()->equals('estatus_operacion_c', '2')->in('etapa_c', $val);
+        //$sq2->where()->equals('estatus_operacion_c', '2');
+        //$sq2->where()->queryOr()->equals('etapa_c', '1')->equals('etapa_c', '4');
         $sq2->where()->equals('anio', ($year+1));
         $sq2->where()->queryOr()->gt('monto_con_solicitud_c',0)->gt('monto_sin_solicitud_c',0);
         
+        $sq4 = new SugarQuery();
+        $sq4->select(array('id','name','mes','anio','progreso','etapa_c','monto_con_solicitud_c','monto_sin_solicitud_c','assigned_user_id','equipo'));
+        $sq4->from(BeanFactory::newBean('lev_Backlog'));
+        $sq4->where()->queryAnd()->equals('etapa_c', '4')->equals('estatus_operacion_c', '2');
+        //$sq2->where()->queryAnd()->equals('estatus_operacion_c', '2')->in('etapa_c', $val);
+        //$sq4->where()->equals('etapa_c', '4');
+        $sq4->where()->equals('anio', ($year+1));
+        $sq4->where()->queryOr()->gt('monto_con_solicitud_c',0)->gt('monto_sin_solicitud_c',0);
+        
         $sqUnion = new SugarQuery();
         $sqUnion->union($sq1);
+        $sqUnion->union($sq3);
+        $sqUnion->union($sq4);
         $sqUnion->union($sq2);
         
+        
         $result = $sqUnion->execute();
+        //$GLOBALS['log']->fatal('result', $result);
         
         /*$query = "SELECT bkl.id, bkl.name, bkl.anio, bkl.mes, bk1.etapa_c, IF(bkl.progreso=1,'Con Solicitud','Sin Solicitud') etapa, bk1.estatus_operacion_c,
         IF(bkl.progreso=1, bk1.monto_con_solicitud_c , bk1.monto_sin_solicitud_c ) monto 
@@ -125,9 +153,9 @@ class Top20Backlog extends SugarApi
             );
             array_push($arrusers,$v1);
         }
-        //$GLOBALS['log']->fatal("arrusers: " , $arrusers);
+        $GLOBALS['log']->fatal("arrusers: " , $arrusers);
 
-        $result = array_slice($result, 0, 30);
+        //$result = array_slice($result, 0, 30);
 
         foreach($result as $val){
             if ($pos  != '' ) { //valida usuario director regional
@@ -144,8 +172,8 @@ class Top20Backlog extends SugarApi
             $monto = ($val['progreso'] == '1')? $val['monto_con_solicitud_c'] : $val['monto_sin_solicitud_c'] ;
             array_push($datas, array('usuario'=>$auxuser ,'etapa'=>$etapa ,'monto'=>$monto) );
             
-            if($val['progreso'] == '1') array_push($colors, 'rgba(63, 191, 191)' ) ;
-            if($val['progreso'] != '1') array_push($colors, 'rgba(63, 101, 191)' ) ; 
+            //if($val['progreso'] == '1') array_push($colors, 'rgba(63, 191, 191)' ) ;
+            //if($val['progreso'] != '1') array_push($colors, 'rgba(63, 101, 191)' ) ; 
             
             $texto_monto = '$ '.number_format( $monto , 2);
             if ($pos  != '' ) {
@@ -169,63 +197,86 @@ class Top20Backlog extends SugarApi
             
             array_push($records,$tabaux);
         }
+        
         foreach($records as $lbl){
             array_push($aux_etq,$lbl['usuario']);
         }
         $aux_etq = array_unique($aux_etq);
+        //$GLOBALS['log']->fatal("aux_etq: " , $aux_etq);
         foreach($aux_etq as $l){
             array_push($labels,$l);
         }
 
         $datas = $this->groupArray($datas,'etapa','datos');
-        //$GLOBALS['log']->fatal("datas: " , $datas);
+        
         rsort($datas);
         $auxds = [];
         $dataset = [];
         $conteo = 0;
         $totalesx=0;
         $etiqueta = '';
+
+        $doublefilter = [];
+        $finalfilter = [];
+        $mount_f = 0;
+        $t = 0;
+        
         foreach($datas as $d1){
             if($d1['etapa']==1){$etiqueta = 'Autorizada';}
-            else{$etiqueta = 'Crédito';}
-            $x=$d1['datos'];
+                    else{$etiqueta = 'Crédito';}
+
+            $f1 = $this->groupArray($d1['datos'],'usuario','f1');
+            
+            foreach($f1 as $fuser){
+                $l1 = $fuser['usuario'];
+                $mount_f = 0;
+                foreach($fuser['f1'] as $tot){
+                    $mount_f = $mount_f + $tot['monto'];
+                }
+                $complex=array('etapa'=>$etiqueta,'usuario'=>$l1, 'monto'=>$mount_f , 'cantidad'=>count($fuser['f1']));
+                array_push($finalfilter,$complex);
+            }
+            //$datas[$t]['filter'] = array('usuario'=>$ex['usuario'],'monto_t'=>$mount_f);
+            $datas[$t]['filter'] = $finalfilter;
+            unset($datas[$t]['datos']);
+            $datas[$t]['etapa'] = $etiqueta;
+            //unset($datas[$t]['etapa']);
+            $t++;
+            $finalfilter = [];
+        }
+        
+        $arr_montos =[];
+        $arr_cant =[];
+        
+        //$GLOBALS['log']->fatal("datas: " , $datas);
+        foreach($datas as $d1){
+            $x=$d1['filter'];
+            
+            $monto_x = 0;
+            $cant_x = 0;
+            $ind = 0;
             foreach($labels as $u){
-                
-                foreach($x as $d1){
-                    if($d1['usuario'] == $u){
-                        $conteo ++;
-                        $totalesx = $totalesx + $d1['monto'];
+                foreach($x as $reorder){
+                    if($reorder['usuario'] == $u){
+                        $monto_x = $reorder['monto'];
+                        $cant_x = $reorder['cantidad'];
                     }
                 }
-                $auxds= array(
-                    'etapa' => $etiqueta,
-                    'cantidad' => $conteo,
-                    'monto' => $totalesx,
-                );
-                $conteo = 0;
-                $totalesx = 0;
-                array_push($dataset,$auxds);
-                $auxds = [];
+                array_push($arr_montos,$monto_x);  
+                array_push($arr_cant,$cant_x);
+                $monto_x = 0;
+                $cant_x = 0;
             }
+            $auxds= array(
+                'etapa' => $d1['etapa'],
+                'cantidad' => $arr_cant,
+                'monto' => $arr_montos,
+            );
+            array_push($dataset,$auxds);
+            $arr_montos =[];
+            $arr_cant =[];
         }
-        $count = [];
-        $tot = [];
-        $dt = [];
-        $dataset = $this->groupArray($dataset,'etapa','arr');
         //$GLOBALS['log']->fatal("dataset: " , $dataset);
-        foreach($dataset as $ds1){
-            //$GLOBALS['log']->fatal("ds1: " , $ds1);
-            foreach($ds1['arr'] as $conjunto){
-                array_push($count,$conjunto['cantidad']);
-                array_push($tot,$conjunto['monto']);
-            }
-            array_push($dt,array('etapa' => $ds1['etapa'],'cantidad' => $count, 'monto' => $tot,));
-            
-        }
-        //$GLOBALS['log']->fatal("dataset: " , $dt);
-        /*if(count($datas) > 20){
-            $datas = array_slice($datas, 0, 30);
-        }*/
         
         $this->array_sort_by_column($records, 'monto');
         
@@ -259,10 +310,10 @@ class Top20Backlog extends SugarApi
                         }else{
                             if($r1['solicitud'] == 'Con Solicitud'){
                                 $sumcredi1 = $sumcredi1 + $r1['monto'];
-                                $sumcredi1 ++;
+                                $cantcredi1 ++;
                             }else{
                                 $sumcredi2 = $sumcredi2 + $r1['monto'];
-                                $sumcredi2 ++;
+                                $cantcredi2 ++;
                             }
                         }
                     }
@@ -329,7 +380,7 @@ class Top20Backlog extends SugarApi
       
         $records_in = array(
             'labels' => $labels,
-            'datas' => $dt,
+            'datas' => $dataset,
             'records' => $records
         );
         $GLOBALS['log']->fatal("records_in: " , $records_in);
