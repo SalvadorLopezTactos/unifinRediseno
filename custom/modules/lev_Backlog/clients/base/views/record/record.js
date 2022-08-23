@@ -53,10 +53,7 @@
         //Se ocultan banderas
         $('[data-name="tct_carga_masiva_chk_c"]').hide();
         $('[data-name="tct_bloqueo_txf_c"]').hide();
-        //Bloqueo campo Refinanciamiento
-        $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:none');
-
-
+        
         if (this.model.dataFetched) {
             this.$('[data-name=editar]').hide();
             self.model.set("editar", true);
