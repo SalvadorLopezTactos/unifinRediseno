@@ -87,8 +87,6 @@
         this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
         this.events['keydown [name=tct_conversion_c]'] = 'checkInVentas';
 
-        this.refinanciamientoblock();
-
     },
 
     _render: function() {
@@ -98,8 +96,7 @@
         if(this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != null&&
             this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != ""){
             this.model.set("editar", false);
-        //Bloqueo campo Refinanciamiento
-        $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:none');    
+      
         }
 
 		this.setValores(this.val);
@@ -176,6 +173,20 @@
                 }*/
             },this)
         });
+
+
+        $('[data-name="refinanciamiento_c"]').hide();
+            var existe=0;
+            var usuario= App.user.attributes.id;
+            var usuarios_refinanciamiento = app.lang.getAppListStrings('equipo_central_bl_list');
+                Object.keys(usuarios_refinanciamiento).forEach(function ([key, value]) {
+                    if (value == usuario) {
+                        existe++;
+                    }
+                });
+            if (existe>0){                
+                $('[data-name="refinanciamiento_c"]').show();
+        }
     },
 
 
@@ -920,18 +931,4 @@
 		callback(null, fields, errors);
     },
 
-    refinanciamientoblock: function (){
-        $('[data-name="refinanciamiento_c"]').hide();
-        var existe=0;
-        var usuario= App.user.attributes.id;
-        var usuarios_refinanciamiento = app.lang.getAppListStrings('equipo_central_bl_list');
-                        Object.keys(usuarios_refinanciamiento).forEach(function (key) {
-                            if (key == usuario) {
-                                existe++;
-                            }
-                        });
-        if (existe>0){                
-            $('[data-name="refinanciamiento_c"]').show();
-    }
-},
 })
