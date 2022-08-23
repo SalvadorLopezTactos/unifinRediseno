@@ -106,7 +106,15 @@
     },
 
     ReenviaCorreoCliente: function () {
-       
+
+        if (this.model.get('subtipo_registro_c') == "3" || this.model.get('subtipo_registro_c') == "4") {
+            app.alert.show('No_subtipo', {
+                level: 'error',
+                messages: 'No se puede solicitar CIEC para Leads cancelados o convertidos.',
+                autoClose: false
+            });
+            return;
+        }
         if (this.model.get('email')[0].email_address == "" || this.model.get('email')[0].email_address == undefined) {
             app.alert.show('No_Envio', {
                 level: 'error',
