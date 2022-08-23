@@ -603,6 +603,23 @@ SITE;
             }
         }
 
+         //Recupera ANALIZATE
+         if ($bean_LEad->load_relationship('leads_anlzt_analizate_1')) {
+            $relatedBeans = $bean_LEad->leads_anlzt_analizate_1->getBeans();
+            if (!empty($relatedBeans)) {
+                    global $db;
+                    $insertanalizate = "INSERT IGNORE INTO anlzt_analizate_accounts_c
+                    select id,
+                    NOW() date_modified,
+                    0 deleted,
+                    '{$idCuenTa}' anlzt_analizate_accountsaccounts_ida,
+                    leads_anlzt_analizate_1anlzt_analizate_idb anlzt_analizate_accountsanlzt_analizate_idb 
+                    FROM leads_anlzt_analizate_1_c 
+                    where leads_anlzt_analizate_1leads_ida='{$bean_LEad->id}'";
+                    $insertResult = $db->query($insertanalizate);
+            }
+        }
+
         //Reasigna Licitaciones
         $GLOBALS['log']->fatal("Obtiene Licitaciones y añade a la cuenta.");
         global $db;
