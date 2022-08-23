@@ -174,18 +174,16 @@
             },this)
         });
 
-
-        $('[data-name="refinanciamiento_c"]').hide();
             var existe=0;
             var usuario= App.user.attributes.id;
             var usuarios_refinanciamiento = app.lang.getAppListStrings('equipo_central_bl_list');
-                Object.keys(usuarios_refinanciamiento).forEach(function ([key, value]) {
-                    if (value == usuario) {
+                Object.keys(usuarios_refinanciamiento).forEach(key => {
+                    if (usuarios_refinanciamiento[key] == usuario) {
                         existe++;
                     }
                 });
-            if (existe>0){                
-                $('[data-name="refinanciamiento_c"]').show();
+            if (existe==0){                
+                $('[data-name="refinanciamiento_c"]').hide();
         }
     },
 
