@@ -1568,7 +1568,7 @@
     },
     solicitar_ciec_function:function(){
         
-        if (this.model.get('email1') == "" || this.model.get('email1') == undefined) {
+        if (this.model.get('email')[0].email_address == "" || this.model.get('email')[0].email_address == undefined) {
             app.alert.show('No_Envio', {
                 level: 'error',
                 messages: 'El Lead no contiene un correo electrónico.',
