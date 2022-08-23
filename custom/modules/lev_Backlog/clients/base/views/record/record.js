@@ -722,6 +722,7 @@
     },
 
     refinanciamientoblock: function (){
+        $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:none');
             var existe=0;
             var usuario= App.user.attributes.id;
             var usuarios_refinanciamiento = app.lang.getAppListStrings('equipo_central_bl_list');
