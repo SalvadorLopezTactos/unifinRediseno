@@ -9,3 +9,5 @@ $mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Buscar cuenta bancaria';
 $mod_strings['LNK_IMPORT_VCARD'] = 'Importar cuenta bancaria vCard';
 $mod_strings['LNK_NEW_RECORD'] = 'Crear cuenta bancaria';
 $mod_strings['LBL_IDCORTO_C'] = 'id Corto';
+$mod_strings['LBL_VALIDADA'] = 'Cuenta validada';
+$mod_strings['LBL_VIGENCIA'] = 'Validación vigente';
