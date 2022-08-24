@@ -9,7 +9,7 @@ class generate_cuenta_bancaria extends SugarApi
         return array(
             'generate_cuenta_bancaria' => array(
                 'reqType' => 'POST',
-                'noLoginRequired' => true,
+                'noLoginRequired' => false,
                 'path' => array('cuentaBancaria'),
                 'pathVars' => array('module'),
                 'method' => 'getCuentaBancaria',
