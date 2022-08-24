@@ -275,6 +275,15 @@ array (
                   ),
                 ),
               ),
+              3 => 
+              array (
+                'readonly' => false,
+                'name' => 'validada_c',
+                'label' => 'LBL_VALIDADA',
+              ),
+              4 => 
+              array (
+              ),
             ),
           ),
         ),
