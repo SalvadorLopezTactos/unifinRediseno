@@ -758,9 +758,9 @@
 		$('[data-name="phone_work"]').hide();
 		$('[data-name="phone_home"]').hide();
 		$('[data-name="phone_mobile"]').hide();
-        document.getElementById("Telefonom").style.display = '';
-        document.getElementById("Telefonot").style.display = '';
-        document.getElementById("Telefonoc").style.display = '';
+        (document.getElementById("Telefonom")!=null) ? document.getElementById("Telefonom").style.display = '' : '' ;
+        (document.getElementById("Telefonot")!=null) ? document.getElementById("Telefonot").style.display = '' : '' ;
+        (document.getElementById("Telefonoc")!=null) ? document.getElementById("Telefonoc").style.display = '' : '' ;
         //Oculta subpanel de Analizate
         $('[data-panelname=LBL_RECORDVIEW_PANEL4]').hide();
     },
