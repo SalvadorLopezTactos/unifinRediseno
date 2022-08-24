@@ -15,7 +15,7 @@ function limpieza_cuenta_bancaria()
     from cta_cuentas_bancarias ccb 
     inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c 
       WHERE DATE_FORMAT(ccbc.vigencia_c, '%Y-%m-%d') < DATE_FORMAT(date_add(NOW(), INTERVAL 1 DAY) , '%Y-%m-%d') 
-      AND ccb.estado = 0 ; ";
+      AND ccbc.validada_c = 0 ; ";
     $result = $db->query($sql);
     while ($row = $db->fetchByAssoc($result)) {
         $bean = null;
