@@ -763,6 +763,10 @@
         (document.getElementById("Telefonoc")!=null) ? document.getElementById("Telefonoc").style.display = '' : '' ;
         //Oculta subpanel de Analizate
         $('[data-panelname=LBL_RECORDVIEW_PANEL4]').hide();
+        $('[data-name="fecha_bloqueo_c"]').hide();
+        $('[data-name="c_estatus_telefono_c"]').hide();
+        $('[data-name="m_estatus_telefono_c"]').hide();
+        $('[data-name="o_estatus_telefono_c"]').hide();
     },
 
     fechaAsignacion: function () {
