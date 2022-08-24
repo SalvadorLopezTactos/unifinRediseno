@@ -84,18 +84,21 @@ class generate_cuenta_bancaria extends SugarApi
                 if($id_tarjeta == ""){
                     $nuevo = true;
                 }
-
+                
                 if($nuevo){
                     $id = create_guid();
                     $date = TimeDate::getInstance()->nowDb();
                     
+                    $val = $banco_list[intval($id_banco)];
+
                     $beanBank = BeanFactory::newBean('cta_cuentas_bancarias');
-                    $beanBank->name  = $banco_list[$id_banco] .' '.$cuenta;
+                   // $beanBank->name  = $val;
+                    $beanBank->banco = $id_banco;
                     $beanBank->cuenta = $cuenta;
                     $beanBank->clabe = $clabe;
                     $beanBank->estado = $estado_cuenta;
                     $beanBank->validada_c = $valida;
-                    $beanBank->fecha_vigencia_c = $fecha_vigencia;
+                    $beanBank->vigencia_c = $fecha_vigencia;
     
                     $beanBank->save();
     
