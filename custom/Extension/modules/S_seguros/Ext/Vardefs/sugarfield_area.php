@@ -1,7 +1,7 @@
 <?php
  // created: 2022-07-15 00:17:45
 $dictionary['S_seguros']['fields']['area']['default']='';
-$dictionary['S_seguros']['fields']['area']['options']='area_dynamics_list';
+$dictionary['S_seguros']['fields']['area']['options']='area_list';
 $dictionary['S_seguros']['fields']['area']['hidemassupdate']=false;
 $dictionary['S_seguros']['fields']['area']['visibility_grid']=array (
   'trigger' => 'tipo',
