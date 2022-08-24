@@ -761,6 +761,8 @@
         document.getElementById("Telefonom").style.display = '';
         document.getElementById("Telefonot").style.display = '';
         document.getElementById("Telefonoc").style.display = '';
+        //Oculta subpanel de Analizate
+        $('[data-panelname=LBL_RECORDVIEW_PANEL4]').hide();
     },
 
     fechaAsignacion: function () {

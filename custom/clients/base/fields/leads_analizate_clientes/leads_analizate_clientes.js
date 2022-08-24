@@ -49,6 +49,12 @@
         var estado = analizate_lead.Analizate.Cliente.estado;
         var fecha = analizate_lead.Analizate.Cliente.fecha;
         console.log("Inicia campo cstm analizate Leads.");
+        //Condicion para cargar el subpanel de Analizate
+        if (estado==""){
+            $('[data-panelname=LBL_RECORDVIEW_PANEL4]').hide();
+        }else{
+            $('[data-panelname=LBL_RECORDVIEW_PANEL4]').show();
+        }
         this.AnalizateCliente.Estado1.Valor = listaEstado[1];
         this.AnalizateCliente.Estado2.Valor = listaEstado[2];
         this.AnalizateCliente.Estado3.Valor = listaEstado[3];
