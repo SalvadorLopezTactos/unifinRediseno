@@ -728,7 +728,7 @@
                     }
                 });
             if (existe==0){                
-                $('[data-name="refinanciamiento_c"]').hide();
+                $('[data-name="refinanciamiento_c"]').attr('style', 'pointer-events:none');
         }
     },
 })
