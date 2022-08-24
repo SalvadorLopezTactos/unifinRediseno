@@ -10,7 +10,7 @@ class generate_cuenta_bancaria extends SugarApi
             'generate_cuenta_bancaria' => array(
                 'reqType' => 'POST',
                 'noLoginRequired' => true,
-                'path' => array('generate_cuenta_bancaria'),
+                'path' => array('cuentaBancaria'),
                 'pathVars' => array('module'),
                 'method' => 'getCuentaBancaria',
                 'shortHelp' => 'Obtener cuenta bancaria y validar si existe para actualizar o insertar',
