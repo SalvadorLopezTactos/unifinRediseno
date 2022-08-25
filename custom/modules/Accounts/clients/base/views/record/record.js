@@ -1332,13 +1332,16 @@
 
     editClicked: function () {
         this._super("editClicked");
-
         this.$('[data-name="promotorleasing_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorfactoraje_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorcredit_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorfleet_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorrm_c"]').attr('style', 'pointer-events:none');
-        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+		var seguros = 0;
+        for (var i = 0; i < app.user.attributes.roles.length; i++) {
+            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
+        }
+        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c + seguros;
         if (accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != '4') {
           this.$('div[data-name=rfc_c]').css("pointer-events", "none");
           $('[data-name="generar_rfc_c"]').hide();
@@ -4124,38 +4127,44 @@
     },
 
     valida_requeridos: function (fields, errors, callback) {
-        var campos = "";
-        _.each(errors, function (value, key) {
-            _.each(this.model.fields, function (field) {
-                if (_.isEqual(field.name, key)) {
-                    if (field.vname) {
-                        if (field.vname == 'LBL_PAIS_NACIMIENTO_C' && this.model.get('tipodepersona_c') == 'Persona Moral') {
-                            campos = campos + '<b>País de constitución</b><br>';
-                        }
-                        else {
-                            if (field.vname == 'LBL_ESTADO_NACIMIENTO' && this.model.get('tipodepersona_c') == 'Persona Moral') {
-                                campos = campos + '<b>Estado de constitución</b><br>';
-                            }
-                            else {
-                                campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
-                            }
-                        }
-                    }
-                }
-            }, this);
-        }, this);
-        //Remueve campos custom: Teléfonos, Direcciones, Correo
-        //campos = campos.replace("<b>Telefonos</b><br>", "");
-        campos = campos.replace("<b>Direcciones</b><br>", "");
-        //campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>", "");
-
-        if (campos) {
-            app.alert.show("Campos Requeridos", {
-                level: "error",
-                messages: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>" + campos,
-                autoClose: false
-            });
+		var seguros = 0;
+        for (var i = 0; i < app.user.attributes.roles.length; i++) {
+            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
         }
+		if(!seguros) {
+			var campos = "";
+			_.each(errors, function (value, key) {
+				_.each(this.model.fields, function (field) {
+					if (_.isEqual(field.name, key)) {
+						if (field.vname) {
+							if (field.vname == 'LBL_PAIS_NACIMIENTO_C' && this.model.get('tipodepersona_c') == 'Persona Moral') {
+								campos = campos + '<b>País de constitución</b><br>';
+							}
+							else {
+								if (field.vname == 'LBL_ESTADO_NACIMIENTO' && this.model.get('tipodepersona_c') == 'Persona Moral') {
+									campos = campos + '<b>Estado de constitución</b><br>';
+								}
+								else {
+									campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
+								}
+							}
+						}
+					}
+				}, this);
+			}, this);
+			//Remueve campos custom: Teléfonos, Direcciones, Correo
+			//campos = campos.replace("<b>Telefonos</b><br>", "");
+			campos = campos.replace("<b>Direcciones</b><br>", "");
+			//campos = campos.replace("<b>Dirección de Correo Electrónico</b><br>", "");
+
+			if (campos) {
+				app.alert.show("Campos Requeridos", {
+					level: "error",
+					messages: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>" + campos,
+					autoClose: false
+				});
+			}
+		}
         callback(null, fields, errors);
     },
 
@@ -6386,35 +6395,41 @@
     },
 
     requeridosUniclickCanal: function (fields, errors, callback) {
-
-        var faltantesUniclickCanal = 0;
-        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
-
-
-        if ($('.list_u_canal').select2('val') == "0"  && userprod.includes('8')) {
-            $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
-            faltantesUniclickCanal += 1;
+		var seguros = 0;
+        for (var i = 0; i < app.user.attributes.roles.length; i++) {
+            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
         }
-        else {
-            $('.list_u_canal').find('.select2-choice').css('border-color', 'black');
-        }
+		if(!seguros) {
+			var faltantesUniclickCanal = 0;
+			var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+			if ($('.list_u_canal').select2('val') == "0"  && userprod.includes('8')) {
+				$('.list_u_canal').find('.select2-choice').css('border-color', 'red');
+				faltantesUniclickCanal += 1;
+			}
+			else {
+				$('.list_u_canal').find('.select2-choice').css('border-color', 'black');
+			}
 
-        if (faltantesUniclickCanal > 0) {
-            app.alert.show("Faltante canal Uniclick", {
-                level: "error",
-                title: 'Hace falta seleccionar algún canal para el producto Uniclick',
-                autoClose: false
-            });
-            errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
-            errors['error_UniclickUP'].required = true;
-        }
-
+			if (faltantesUniclickCanal > 0) {
+				app.alert.show("Faltante canal Uniclick", {
+					level: "error",
+					title: 'Hace falta seleccionar algún canal para el producto Uniclick',
+					autoClose: false
+				});
+				errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
+				errors['error_UniclickUP'].required = true;
+			}
+		}
         callback(null, fields, errors);
     },
 
     ocultaGeneraRFC: function () {
         //Oculta Botón Generar RFC
-        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+		var seguros = 0;
+        for (var i = 0; i < app.user.attributes.roles.length; i++) {
+            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
+        }
+        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c + seguros;
         if (accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != '4') {
           this.$('div[data-name=rfc_c]').css("pointer-events", "none");
           this.$('div[data-name="generar_rfc_c"]').hide();
