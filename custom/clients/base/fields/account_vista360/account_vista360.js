@@ -11,7 +11,7 @@
 
 
         //Despliegue de detalle
-      'click .openModalDisposiciones': 'getDisposiciones',
+      'click .openModalDisposiciones': 'getDisposiciones360',
       'click .openModalAnexos': 'getAnexos',
       'click .openModalCesiones': 'getCesiones',
       'click .openModalContratos': 'getContratos',
@@ -532,11 +532,31 @@
         });
     },
 
-    getDisposiciones:function(){
-      var modal = $('#modalDisposiciones');
-            if (modal) {
-                modal.show();
-            }
+    getDisposiciones360:function(){
+      //var id_cliente='ab1f8a92-9b84-ee36-c20d-56e2cb6f5e5f';
+      var id_cliente=this.model.get('id');
+      app.alert.show('getDisposiciones360', {
+          level: 'process',
+          title: 'Cargando...',
+      });
+      
+      app.api.call('GET', app.api.buildURL('GetDisposicionesDWH/'+id_cliente), null, {
+          success: function (data) {
+              App.alert.dismiss('getDisposiciones360');
+              if(data.length>0){
+                vista360.ResumenCliente.leasing.disposiciones=data;
+                vista360.render();
+                var modal = $('#modalDisposiciones');
+                if (modal) {
+                    modal.show();
+                }
+              }
+          },
+          error: function (e) {
+              throw e;
+          }
+      });
+
     },
 
     getAnexos: function () {

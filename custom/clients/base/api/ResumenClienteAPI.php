@@ -412,17 +412,6 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['historial_contactos']['estatus_atencion']=$beanPersona->tct_status_atencion_ddw_c;
         }
 
-        //Recuperar información del servicio DWH para obtener Disposiciones
-        $objDisposicion= new DisposicionesDWH();
-        //$idcliente_dwh='ab1f8a92-9b84-ee36-c20d-56e2cb6f5e5f';
-        $disposiciones=$objDisposicion->getDisposicionesDWH("",array("id_cliente"=>$id_cliente));
-        $numero_disposiciones=0;
-        if(count($disposiciones)>0){
-            $numero_disposiciones=count($disposiciones);
-        }
-
-        $arr_principal['leasing']['disposiciones'] = $disposiciones;
-
         ############################
         ## Recupera y procesa información de Productos
         ############################
@@ -446,6 +435,7 @@ class ResumenClienteAPI extends SugarApi
                 $mensualidad_activa = $product->mensualidad_activa_c;
                 $registros_activos = $product->registros_activos_c;
                 $registros_historicos = $product->registros_historicos_c;
+                $numero_disposiciones=$product->numero_disposiciones_c;
                 $dias_atraso = $product->dias_atraso_c;
                 $estatusxproducto = $app_list_strings['status_management_list'][$product->status_management_c] .' / '.$app_list_strings['razon_list'][$product->razon_c];
                 if ($statusProducto == '' || $statusProducto == null){
@@ -469,16 +459,15 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['leasing']['fecha_proximo_pago'] = $fecha_proximo_pago;
                         $arr_principal['leasing']['anexos_activos'] = $registros_activos;
                         $arr_principal['leasing']['anexos_historicos'] = $registros_historicos;
-                        //$arr_principal['leasing']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
-                        $arr_principal['leasing']['muestra_producto'] = true;
+                        $arr_principal['leasing']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
+                        //$arr_principal['leasing']['muestra_producto'] = true;
                         $arr_principal['leasing']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
                         $arr_principal['leasing']['tiene_anexo_liberado'] = ($registros_activos > 0 ) ? true : false; //Valida que tenga anexos activos
-                        $arr_principal['leasing']['tiene_anexos'] = ($registros_activos > 0 || $registros_historicos > 0 ) ? true : false; //Valida que tenga anexos activos
+                        $arr_principal['leasing']['tiene_anexos'] = ($registros_activos > 0 || $registros_historicos > 0 || $numero_disposiciones > 0 ) ? true : false; //Valida que tenga anexos activos o tiene por lo menos una disposición
                         //$arr_principal['leasing']['tiene_anexos'] = true; //Valida que tenga anexos activos
 
-                        $arr_principal['leasing']['numero_disposiciones'] = $numero_disposiciones; //Valida que tenga anexos activos
-
-
+                        $arr_principal['leasing']['numero_disposiciones'] = $numero_disposiciones;
+                        $arr_principal['leasing']['disposiciones'] = '';
                         break;
                     case '3': //Credito-Automotriz
                         $arr_principal['credito_auto']['tipo_cuenta'] = $tipoCuenta;
