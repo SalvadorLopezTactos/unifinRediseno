@@ -13,7 +13,7 @@
 
     getDisposicionesDWH: function (options) {
         
-        //var id_cliente='ab1f8a92-9b84-ee36-c20d-56e2cb6f5e5f';
+        //var id_cliente='a54b31cc-1296-11e9-bb47-00155d967307';
         var id_cliente=this.model.get('id');
         app.alert.show('getDisposiciones', {
             level: 'process',
@@ -30,7 +30,7 @@
                     //Recorre objeto para únicamente
                     for (const key in data) {
                         console.log(data.idSolicitud);
-                        if(!arrDiposiciones.includes(data[key].idSolicitud) && data[key].idSolicitud!=undefined){
+                        if(!arrDiposiciones.includes(data[key].idSolicitud) && data[key].idSolicitud!==undefined){
                             arrDiposiciones.push(data[key].idSolicitud);
                             arrDisposicionesNumero.push(data[key].numeroSolicitud);
                         }
