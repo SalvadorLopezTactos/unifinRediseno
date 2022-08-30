@@ -303,7 +303,7 @@ CASE WHEN blcs.estatus_operacion_c = '1' THEN 0 ELSE
   + CASE WHEN '{$etapa}' LIKE '%Rechazada%' THEN  monto_rechazado_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaSinSolicitud%'  THEN  monto_sin_solicitud_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaConSolicitud%' THEN  monto_con_solicitud_c  ELSE 0 END  END*/  END AS bl_actual,
-tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c, estado_cancelacion_c
+tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c, estado_cancelacion_c, refinanciamiento_c
 , blcs.producto_c, blcs.num_tipo_op_credito_c, blcs.num_tipo_op_leasing_c
 FROM lev_backlog lb
 INNER JOIN lev_backlog_cstm blcs ON blcs.id_c = lb.id
@@ -451,6 +451,9 @@ SQL;
             //$response['linea'][$row['id']]['tipo_operacion'] = $app_list_strings['tipo_operacion_bkl_list'][$row['tipo_operacion_c']];
             $response['linea'][$row['id']]['etapa_preliminar'] = $app_list_strings['etapa_c_list'][$row['etapa_preliminar_c']];
             $response['linea'][$row['id']]['etapa'] = $app_list_strings['etapa_c_list'][$row['etapa_c']];
+          
+            $response['linea'][$row['id']]['refinanciamiento'] = $app_list_strings['checkbox_dom'][$row['refinanciamiento_c']];
+            $GLOBALS['log']->fatal("refinanciamiento " . $app_list_strings['checkbox_dom'][$row['refinanciamiento_c']]);      
             //$response['linea'][$row['id']]['progreso'] = $this->matchListLabel($row['progreso'], "progreso_list");
 
             if($row['estatus_operacion_c'] == "2"){
@@ -1016,6 +1019,7 @@ SQL;
         $new_backlog->estatus_operacion_c = $estatus;
         $new_backlog->etapa_c = $original_backlog->etapa_c;
         $new_backlog->etapa_preliminar_c = $original_backlog->etapa_preliminar_c;
+        $new_backlog->refinanciamiento_c = $original_backlog->refinanciamiento_c;
         $new_backlog->mes = $mes;
         $new_backlog->monto_comprometido = $original_backlog->monto_comprometido;
         $new_backlog->monto_original = $original_backlog->monto_original;
@@ -1055,7 +1059,7 @@ SQL;
             'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
 	*/
 		fputcsv($fp, array('PRODUCTO','TIPO OPERACION PRODUCTO','ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
-            'BACKLOG','ETAPA INICIO MES', 'ETAPA',
+            'BACKLOG','ETAPA INICIO MES', 'ETAPA', 'REFINANCIAMIENTO',
             'PROSPECTO','DEVUELTA','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {

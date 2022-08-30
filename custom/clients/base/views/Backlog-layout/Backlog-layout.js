@@ -76,6 +76,7 @@
     progreso_list_html : null,
     tipo_operacion_list_html : null,
     etapa_list_html : null,
+    refinanciamiento_list_html : null,
     estatus_list_html : null,
 	producto_list_html : null,
     backlogs : null,
@@ -95,6 +96,7 @@
         this.progreso_list_html = app.lang.getAppListStrings('progreso_list');
         this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_operacion_bkl_list');//app.lang.getAppListStrings('tipo_de_operacion_0');
         this.etapa_list_html = app.lang.getAppListStrings('etapa_c_list');//app.lang.getAppListStrings('etapa_backlog');
+        this.refinanciamiento_list_html = app.lang.getAppListStrings('checkbox_dom'); //app.lang.getAppListStrings('etapa_backlog');
         this.estatus_list_html = app.lang.getAppListStrings('estatus_operacion_c_list');
 		this.estatus_list_html["3"] = "En Proceso de Cancelación";
 		
