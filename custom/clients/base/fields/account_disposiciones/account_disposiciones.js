@@ -24,15 +24,20 @@
             success: function (data) {
                 App.alert.dismiss('getDisposiciones');
                 if(data.length>0){
+                    var userLeasing=self_disposiciones.model.get('user_id_c');
+                    //var userLeasing='e33b00c0-7709-3bb4-a79d-5626cda71227';
                     var arrDiposiciones=[];
                     var arrDisposicionesNumero=[];
                     var arrDisposicionesFinal=[];
                     //Recorre objeto para únicamente
                     for (const key in data) {
-                        console.log(data.idSolicitud);
-                        if(!arrDiposiciones.includes(data[key].idSolicitud) && data[key].idSolicitud!==undefined){
-                            arrDiposiciones.push(data[key].idSolicitud);
-                            arrDisposicionesNumero.push(data[key].numeroSolicitud);
+
+                        //Solo se muestran las disposiciones que pertenecen al usuario Leasing de la Cuenta actual
+                        if(data[key].idUsuario==userLeasing){
+                            if(!arrDiposiciones.includes(data[key].idSolicitud) && data[key].idSolicitud!==undefined){
+                                arrDiposiciones.push(data[key].idSolicitud);
+                                arrDisposicionesNumero.push(data[key].numeroSolicitud);
+                            }
                         }
                     }
     
@@ -44,7 +49,7 @@
                         var arrActivadasLiberadas=[];
                         for (const clave in data) {
                             
-                            if(data[clave].idSolicitud==arrDiposiciones[index]){
+                            if(data[clave].idSolicitud==arrDiposiciones[index] && data[clave].idUsuario==userLeasing){
 
                                 switch(data[clave].subetapa){
                                     case 'Fuera del Flujo de Compras':

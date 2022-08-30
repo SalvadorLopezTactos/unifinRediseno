@@ -533,7 +533,7 @@
     },
 
     getDisposiciones360:function(){
-      //var id_cliente='ab1f8a92-9b84-ee36-c20d-56e2cb6f5e5f';
+      //var id_cliente='a54b31cc-1296-11e9-bb47-00155d967307';
       var id_cliente=this.model.get('id');
       app.alert.show('getDisposiciones360', {
           level: 'process',
@@ -544,7 +544,15 @@
           success: function (data) {
               App.alert.dismiss('getDisposiciones360');
               if(data.length>0){
-                vista360.ResumenCliente.leasing.disposiciones=data;
+                var userLeasing=vista360.model.get('user_id_c');
+                var newData=[];
+                for (const key in data) {
+                  //Se muestran únicamente las disposiciones pertenecientes al asesori Leasing de la Cuenta actual 
+                  if(data[key].idUsuario==userLeasing){
+                    newData.push(data[key]);
+                  }
+                }
+                vista360.ResumenCliente.leasing.disposiciones=newData;
                 vista360.render();
                 var modal = $('#modalDisposiciones');
                 if (modal) {
