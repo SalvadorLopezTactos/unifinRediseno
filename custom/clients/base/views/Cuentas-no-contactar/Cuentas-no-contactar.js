@@ -10,10 +10,15 @@
         'click #btn_no_contactar': 'btnNoContactar',
         'click #btn_read_csv': 'procesarCSV',
 		'change #razon': 'buscaMotivo',
-		'change #motivo': 'buscaValida'
+		'change #motivo': 'buscaValida',
+        'click .ConsultarEstado': 'consultarEstado',
+        'click #btn-Cancelar-View': 'cancelConsultarEstado'		
     },
 
     ids_cuentas:[],
+	cartera:'',
+	credito:'',
+	cumplimiento:'',
 
     initialize: function(options){
         this._super("initialize", [options]);
@@ -242,27 +247,26 @@
 		var contador = 0;
 		document.getElementById("motivo").options.length=0;
 		for(var i = 0; i < this.data.records.length; i++) {
-			if($("#razon").val() == this.data.records[i].razon && this.data.records[i].motivo) {
-				document.getElementById("motivo").options[i]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[this.data.records[i].motivo],this.data.records[i].motivo);
+			if($("#razon").val() == this.data.records[i].razon) {
+				document.getElementById("motivo").options[contador]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[this.data.records[i].motivo],this.data.records[i].motivo);
 				this.detalle = this.data.records[i].detalle;
-				contador++;
+				contador = contador + 1;
 			}
 		}
-		if(contador < 2) {
-			document.getElementById("valida").options.length=0;
-			for(var i = 0; i < this.data.records.length; i++) {
-				if($("#razon").val() == this.data.records[i].razon) {
-					this.detalle = this.data.records[i].detalle;
-					app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, {}), null, {
-						success: _.bind(function (data1) {
-							if (data1.records) {
-								for (var j = 0; j < data1.records.length; j++) {
-									document.getElementById("valida").options[j]=new Option(data1.records[j].full_name,data1.records[j].id);
-								}
+		if(contador > 1) document.getElementById("motivo").value="";
+		document.getElementById("valida").options.length=0;
+		for(var i = 0; i < this.data.records.length; i++) {
+			if($("#razon").val() == this.data.records[i].razon) {
+				this.detalle = this.data.records[i].detalle;
+				app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, {}), null, {
+					success: _.bind(function (data1) {
+						if (data1.records) {
+							for (var j = 0; j < data1.records.length; j++) {
+								document.getElementById("valida").options[j]=new Option(data1.records[j].full_name,data1.records[j].id);
 							}
-						}, this)
-					});
-				}
+						}
+					}, this)
+				});
 			}
 		}
     },
@@ -495,6 +499,55 @@
 				}, this)
 			});
 		}
+    },
+
+    consultarEstado: function(e){
+        app.alert.show('uni2-disp-estado', {
+            level: 'process',
+            closeable: false,
+            messages: app.lang.get('LBL_LOADING'),
+        });
+        var id_cuenta=e.currentTarget.getAttribute('data-id');
+		app.api.call("read", app.api.buildURL("Accounts/" + id_cuenta, null, null, {}), null, {
+            success: _.bind(function (account) {
+				if (account) {
+					app.api.call("read", app.api.buildURL("tct02_Resumen/" + id_cuenta, null, null, {}), null, {
+						success: _.bind(function (data) {
+							if(this.disposed) return;
+							this.cartera = "Sin bloqueo";
+							this.credito = "Sin bloqueo";
+							this.cumplimiento = "Sin bloqueo";
+							if(data) {
+								if(account.tct_no_contactar_chk_c && !data.bloqueo_cartera_c) this.cartera = "Pendiente de aprobar bloqueo";
+								if(data.bloqueo_credito_c && !data.bloqueo2_c) this.credito = "Pendiente de aprobar bloqueo";
+								if(data.bloqueo_cumple_c && !data.bloqueo3_c) this.cumplimiento = "Pendiente de aprobar bloqueo";
+								if(account.tct_no_contactar_chk_c && data.bloqueo_cartera_c) this.cartera = "Cuenta bloqueada";
+								if(data.bloqueo_credito_c && data.bloqueo2_c) this.credito = "Cuenta bloqueada";
+								if(data.bloqueo_cumple_c && data.bloqueo3_c) this.cumplimiento = "Cuenta bloqueada";
+								if(!account.tct_no_contactar_chk_c && data.bloqueo_cartera_c) this.cartera = "Pendiente de aprobar desbloqueo";
+								if(!data.bloqueo_credito_c && data.bloqueo2_c) this.credito = "Pendiente de aprobar desbloqueo";
+								if(!data.bloqueo_cumple_c && data.bloqueo3_c) this.cumplimiento = "Pendiente de aprobar desbloqueo";
+							}
+							this.render();
+							app.alert.dismiss('uni2-disp-estado');
+							var modal = $('#consultarEstadoModal');
+							modal.show();
+						},this)
+					});
+				}
+            },this)
+        });
+    },
+
+    cancelConsultarEstado:function(){
+        var modal = $('#consultarEstadoModal');
+        if (modal) {
+            modal.hide();
+            modal.remove();
+        }
+        $('.modal').modal('hide');
+        $('.modal').remove();
+        $('.modal-backdrop').remove();
     },
 
     procesarCSV:function () {

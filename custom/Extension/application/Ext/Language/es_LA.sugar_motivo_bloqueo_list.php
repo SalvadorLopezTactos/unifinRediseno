@@ -1,7 +1,8 @@
 <?php
- // created: 2022-07-04 19:04:27
+ // created: 2022-08-26 10:48:27
 
 $app_list_strings['motivo_bloqueo_list']=array (
+  '' => '',
   1 => 'PLD( En listas restringidas o notas negativas (prensa))',
   2 => 'No responde correos/llamadas',
   3 => 'Expediente Incompleto',
@@ -27,7 +28,6 @@ $app_list_strings['motivo_bloqueo_list']=array (
   23 => 'Banco',
   24 => 'Cartera Vencida',
   25 => 'Información Apócrifa',
-  '' => '',
   26 => 'Negocio receptor de tarjetas de crédito que ocasionó pérdida al Usuario',
   27 => 'Persona relacionada con la empresa o con Persona Física con Actividad Empresarial  con clave de prevención',
   28 => 'Cliente declarado en quiebra, suspensión de pagos o en concurso mercantil',

@@ -1,5 +1,5 @@
 <?php
- // created: 2022-07-04 19:07:35
+ // created: 2022-08-26 10:48:41
 $dictionary['tct4_Condiciones']['fields']['motivo']['visibility_grid']=array (
   'trigger' => 'razon',
   'values' => 
@@ -105,7 +105,7 @@ $dictionary['tct4_Condiciones']['fields']['motivo']['visibility_grid']=array (
     ),
   ),
 );
-$dictionary['tct4_Condiciones']['fields']['motivo']['default']='1';
+$dictionary['tct4_Condiciones']['fields']['motivo']['default']='';
 $dictionary['tct4_Condiciones']['fields']['motivo']['hidemassupdate']=false;
 
  ?>
