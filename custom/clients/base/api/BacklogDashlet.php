@@ -453,7 +453,6 @@ SQL;
             $response['linea'][$row['id']]['etapa'] = $app_list_strings['etapa_c_list'][$row['etapa_c']];
           
             $response['linea'][$row['id']]['refinanciamiento'] = $app_list_strings['checkbox_dom'][$row['refinanciamiento_c']];
-            $GLOBALS['log']->fatal("refinanciamiento " . $app_list_strings['checkbox_dom'][$row['refinanciamiento_c']]);      
             //$response['linea'][$row['id']]['progreso'] = $this->matchListLabel($row['progreso'], "progreso_list");
 
             if($row['estatus_operacion_c'] == "2"){
