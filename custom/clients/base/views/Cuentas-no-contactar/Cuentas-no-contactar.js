@@ -548,6 +548,7 @@
         $('.modal').modal('hide');
         $('.modal').remove();
         $('.modal-backdrop').remove();
+		this.buscarCuentasNoContactar();
     },
 
     procesarCSV:function () {
