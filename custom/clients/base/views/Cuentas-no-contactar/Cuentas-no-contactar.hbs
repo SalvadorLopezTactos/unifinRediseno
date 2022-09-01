@@ -28,6 +28,82 @@
             font-size: 25px;
             color: #33800d;
         }
+
+		.modal {
+			position: fixed; /* Stay in place */
+			padding-top: 100px; /* Location of the box */
+			padding-bottom: 100px;
+			top: 0;
+			left:0;
+			/* width: 100%; /* Full width */
+			/*height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+			position: relative;
+			background-color: #fefefe;
+			margin: auto;
+			padding: 1;
+			border: 1px solid #888;
+			width: 98%;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+			-webkit-animation-name: animatetop;
+			-webkit-animation-duration: 0.4s;
+			animation-name: animatetop;
+			animation-duration: 0.4s
+		}
+
+		/* Add Animation */
+		@-webkit-keyframes animatetop {
+			from {top:-300px; opacity:0}
+			to {top:0; opacity:1}
+		}
+
+		@keyframes animatetop {
+			from {top:-300px; opacity:0}
+			to {top:0; opacity:1}
+		}
+
+		/* The Close Button */
+		.close {
+			color: white;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		.modal-header {
+			padding: .5px 0px;
+			background-color: #21618C;
+			color: white;
+		}
+
+		.modal-body {
+			padding: .5px 0px;
+			font-size: 12px;
+			text-align: center;
+		}
+
+		.modal-footer {
+			padding: 2px 16px;
+			background-color: #21618C;
+			color: #ffffff;
+			font-size: 12px;
+			text-align: center;
+		}
+
+		.pointer {cursor: pointer;}
     </style>
 
     <div class="container" >
@@ -95,15 +171,23 @@
         <div class="cuentasContainer tcenter">
             <table class="cuentas" align="center" border="1">
 				<tr>
+					<th width="10%">CONSULTAR ESTADO</th>
 					<th width="10%">BLOQUEADO CARTERA</th>
 					<th width="10%">BLOQUEADO CRÉDITO</th>
 					<th width="10%">BLOQUEADO CUMPLIMIENTO</th>
 					<th width="10%">TIPO</th>
-					<th width="50%">NOMBRE</th>
+					<th width="40%">NOMBRE</th>
 					<th width="10%">ID</th>
 				</tr>
 				{{#each cuentas}}
                 <tr class='single'>
+                    <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                            <span class="btn ConsultarEstado fa fa-eye" title="Consultar Estado" data-id="{{id}}" value="{{id}}"></span>
+                          </div>
+                    </span>
+                    </td>
                     <td>
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
@@ -246,6 +330,41 @@
 				</tbody>
 			</table>
 		</div>
+		<!-- Modal Visualizar Consultar Estado -->
+		<div id="consultarEstadoModal" style="display:none" class="row-fluid">
+		  <!-- Modal content -->
+		  <div class="modal span12 " style="width:100%;height:100%">
+			<div class="modal-content" style="margin:auto; width:50%">
+				<div class="modal-header">
+				  <center><h2>Consultar Estado</h2></center>
+				</div>
+				<div class="modal-body">
+				<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
+					<thead>
+						<tr>
+							<td><b>Cartera</b></td>
+							<td><b>Crédito</b></td>
+							<td><b>Cumplimiento</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{#if cartera}}{{cartera}}{{/if}}</td>
+							<td>{{#if credito}}{{credito}}{{/if}}</td>
+							<td>{{#if cumplimiento}}{{cumplimiento}}{{/if}}</td>
+						</tr>
+					</tbody>
+				</table>     
+				<br><br><br><br>
+			  </div>
+			  <div class="modal-footer">
+				<div align="right">
+				  <button class="btn btn-danger btn-Model" id="btn-Cancelar-View" type="submit">Aceptar</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>		
     {{/if}}
 	    <!-- Subir CSV -->
         <br>
@@ -268,5 +387,5 @@
 					<input type="button" value="Subir cambios" id="btn_read_csv" class="btn btn-success" align="right" style="margin:5px">
 		        </div>
             </div>
-        </div>
+        </div>		
 {{/if}}
