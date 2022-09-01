@@ -62,6 +62,7 @@ class ClientManager extends SugarApi
         $query = <<<SQL
 			SELECT l.id id_registro,
         'Leads' modulo,
+        trim(l.last_name) name,
         lc.nombre_c nombre,
         lc.apellido_paterno_c apellido,
         lc.nombre_empresa_c nombre_empresa,
@@ -81,6 +82,7 @@ class ClientManager extends SugarApi
         UNION
         SELECT a.id,
         'Accounts' modulo,
+        trim(a.name) name,
         ac.primernombre_c,
         ac.apellidopaterno_c,
         ac.razonsocial_c,
@@ -104,7 +106,7 @@ class ClientManager extends SugarApi
 		)
         AND a.deleted=0
         -- AND f.deleted=0
-        ORDER BY idFav DESC;
+        ORDER BY idFav DESC,name;
 SQL;
 
         $result = $db->query($query);
