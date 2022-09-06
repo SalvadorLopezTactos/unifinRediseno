@@ -94,16 +94,20 @@ class ClientManager extends SugarApi
         FROM accounts a INNER JOIN accounts_cstm ac
         ON a.id=ac.id_c
         LEFT JOIN sugarfavorites f ON a.id = f.record_id and f.deleted=0
-        WHERE ac.tipo_registro_cuenta_c IN ('1','2','3')
-        AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9')
+        WHERE
+        (
+    			(ac.tipo_registro_cuenta_c IN ('1','2','3') AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9'))
+    			OR
+    			ac.tipo_registro_cuenta_c IN ('3')
+        )
         -- AND a.assigned_user_id ='{$id_usuario}'
-        AND (ac.user_id_c='{$id_usuario}' OR 
-			ac.user_id1_c='{$id_usuario}' OR 
-            ac.user_id2_c='{$id_usuario}' OR 
-            ac.user_id6_c='{$id_usuario}' OR 
-            ac.user_id7_c='{$id_usuario}' OR 
-            ac.user_id8_c='{$id_usuario}'
-		)
+        AND (ac.user_id_c='{$id_usuario}' OR
+			       ac.user_id1_c='{$id_usuario}' OR
+             ac.user_id2_c='{$id_usuario}' OR
+             ac.user_id6_c='{$id_usuario}' OR
+             ac.user_id7_c='{$id_usuario}' OR
+             ac.user_id8_c='{$id_usuario}'
+		    )
         AND a.deleted=0
         -- AND f.deleted=0
         ORDER BY idFav DESC,name;
@@ -140,7 +144,7 @@ SQL;
         $registros_cliente_perdido=array();
         $total_cliente_perdido=0;
         $monto_cliente_perdido=0;
-        
+
         while ($row = $db->fetchByAssoc($result)) {
           $id=$row['id_registro'];
           $modulo=$row['modulo'];
@@ -163,8 +167,8 @@ SQL;
                     "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
-                ); 
-                
+                );
+
                 $registros_sin_contactar[]=$array_lead_sin_contactar;
             }
 
@@ -181,8 +185,8 @@ SQL;
                     "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
-                ); 
-                
+                );
+
                 $registros_contactado[]=$array_prospecto_contactado;
             }
 
@@ -205,8 +209,8 @@ SQL;
                     "Favorito"=>$idFavorito,
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
-                ); 
-                
+                );
+
                 $registros_interesado[]=$array_prospecto_interesado;
             }
 
@@ -229,7 +233,7 @@ SQL;
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 );
-                
+
                 $registros_int_expediente[]=$array_prospecto_int_expediente;
             }
 
@@ -252,8 +256,8 @@ SQL;
                     "Date_Modified"=>$date_modified,
                     "Preview"=>array("Info Preview")
                 );
-                
-                
+
+
                 $registros_credito[]=$array_prospecto_credito;
             }
 
@@ -267,7 +271,7 @@ SQL;
                     $array_es_cliente_linea_sin_operar=array();
                     $array_es_cliente_activo=array();
                     $array_es_cliente_perdido=array();
-                    
+
                     $relatedProductos = $beanCliente->accounts_uni_productos_1->getBeans();
                     if(count($relatedProductos)>0){
                         foreach($relatedProductos as $prod) {
@@ -278,13 +282,13 @@ SQL;
                                     array_push($array_es_cliente_linea_sin_operar,'1');
                                     //$GLOBALS['log']->fatal('ID CUENTA: '.$id.' ENTRA LINEA SIN OPERAR '.$prod->id);
                                 }
-    
+
                                 //Cliente Activo
                                 if($prod->registros_activos_c!=''){
                                     array_push($array_es_cliente_activo,'1');
                                     //$GLOBALS['log']->fatal('ID CUENTA: '.$id.' ENTRA ACTIVO '.$prod->id);
                                 }
-    
+
                                 //Cliente Perdido
                                 if($prod->registros_activos_c=='' && $prod->registros_historicos_c!='' ){
                                     array_push($array_es_cliente_perdido,'1');
@@ -328,7 +332,7 @@ SQL;
                         "Dias_Vigencia"=>$diferencia_dias_vigencia,
                         "Color"=>$color
                     );
-                    
+
                     $registros_cliente_linea_sin_operar[]=$array_cliente_linea_sin_operar;
                 }
 
@@ -351,7 +355,7 @@ SQL;
                         "Date_Modified"=>$date_modified,
                         "Preview"=>array("Info Preview")
                     );
-                    
+
                     $registros_cliente_activo[]=$array_cliente_activo;
                 }
 
@@ -374,9 +378,9 @@ SQL;
                         "Date_Modified"=>$date_modified,
                         "Preview"=>array("Info Preview")
                     );
-                    
+
                     $registros_cliente_perdido[]=$array_cliente_perdido;
-                }   
+                }
             }
         }
 
@@ -390,7 +394,7 @@ SQL;
 
         //Calculando monto total de cada sección
         if(count($registros_interesado)>0){
-            for ($i=0; $i <count($registros_interesado) ; $i++) { 
+            for ($i=0; $i <count($registros_interesado) ; $i++) {
                 $monto_prospecto_interesado+=floatval($registros_interesado[$i]['Monto_Cuenta']);
                 //Estableciendo formato a dos decimales
                 $registros_interesado[$i]['Monto_Cuenta']=number_format(floatval($registros_interesado[$i]['Monto_Cuenta']),2);
@@ -398,7 +402,7 @@ SQL;
         }
 
         if(count($registros_int_expediente)>0){
-            for ($i=0; $i <count($registros_int_expediente) ; $i++) { 
+            for ($i=0; $i <count($registros_int_expediente) ; $i++) {
                 $monto_int_expediente+=floatval($registros_int_expediente[$i]['Monto_Cuenta']);
                 //Estableciendo formato a dos decimales
                 $registros_int_expediente[$i]['Monto_Cuenta']=number_format(floatval($registros_int_expediente[$i]['Monto_Cuenta']),2);
@@ -406,7 +410,7 @@ SQL;
         }
 
         if(count($registros_credito)>0){
-            for ($i=0; $i <count($registros_credito) ; $i++) { 
+            for ($i=0; $i <count($registros_credito) ; $i++) {
                 $monto_prospecto_credito+=floatval($registros_credito[$i]['Monto_Cuenta']);
                 //Estableciendo formato a dos decimales
                 $registros_credito[$i]['Monto_Cuenta']=number_format(floatval($registros_credito[$i]['Monto_Cuenta']),2);
@@ -414,7 +418,7 @@ SQL;
         }
 
         if(count($registros_cliente_linea_sin_operar)>0){
-            for ($i=0; $i <count($registros_cliente_linea_sin_operar) ; $i++) { 
+            for ($i=0; $i <count($registros_cliente_linea_sin_operar) ; $i++) {
                 $monto_cliente_linea_sin_operar+=floatval($registros_cliente_linea_sin_operar[$i]['Monto_Cuenta']);
                 //Estableciendo formato a dos decimales
                 $registros_cliente_linea_sin_operar[$i]['Monto_Cuenta']=number_format(floatval($registros_cliente_linea_sin_operar[$i]['Monto_Cuenta']),2);
@@ -422,7 +426,7 @@ SQL;
         }
 
         if(count($registros_cliente_activo)>0){
-            for ($i=0; $i <count($registros_cliente_activo) ; $i++) { 
+            for ($i=0; $i <count($registros_cliente_activo) ; $i++) {
                 $monto_cliente_activo+=floatval($registros_cliente_activo[$i]['Monto_Cuenta']);
                 //Estableciendo formato a dos decimales
                 $registros_cliente_activo[$i]['Monto_Cuenta']=number_format(floatval($registros_cliente_activo[$i]['Monto_Cuenta']),2);
@@ -430,13 +434,13 @@ SQL;
         }
 
         if(count($registros_cliente_perdido)>0){
-            for ($i=0; $i <count($registros_cliente_perdido) ; $i++) { 
+            for ($i=0; $i <count($registros_cliente_perdido) ; $i++) {
                 $monto_cliente_perdido+=floatval($registros_cliente_perdido[$i]['Monto_Cuenta']);
                 //Estableciendo formato a dos decimales
                 $registros_cliente_perdido[$i]['Monto_Cuenta']=number_format(floatval($registros_cliente_perdido[$i]['Monto_Cuenta']),2);
             }
         }
-        
+
         $response=array(
             "Lead_Sin_Contactar"=>array(
                 "Total_Registros"=>$total_leads_sin_contactar,
@@ -496,7 +500,7 @@ SQL;
 
         if($modulo=='Accounts'){
             $querySolicitudes= <<<SQL
-        SELECT ac.primernombre_c, 
+        SELECT ac.primernombre_c,
 ac.apellidopaterno_c,
 ac.razonsocial_c,
 opp.name,
@@ -533,7 +537,7 @@ SQL;
                             $datediff = $now - $your_date;
                             $diferencia_dias=round($datediff / (60 * 60 * 24));
                         }
-                        
+
                     }
                 }
             }
@@ -545,7 +549,7 @@ SQL;
         }else{
             return array('monto_total'=>number_format($monto, 2),'monto_cuenta'=>$monto_cuenta);
         }
-        
+
     }
 
     public function getDiasEtapa($modulo,$id_registro,$valor_etapa){
@@ -558,7 +562,7 @@ SQL;
         }
         $dias_etapa=0;
         $queryGetDiasEtapa=<<<SQL
-SELECT DATEDIFF(curdate(),(SELECT date_created FROM {$nombre_tabla} 
+SELECT DATEDIFF(curdate(),(SELECT date_created FROM {$nombre_tabla}
 WHERE parent_id='{$id_registro}'
 AND field_name='{$nombre_campo}'
 AND after_value_string='{$valor_etapa}')) AS dias_etapa
@@ -570,7 +574,7 @@ SQL;
                 if($row['dias_etapa']!=null){
                     $dias_etapa=$row['dias_etapa'];
                 }
-            }   
+            }
         }
         //Convirtiendo los días en etapa en meses
         $str_mes_dia='D';
@@ -610,7 +614,7 @@ SQL;
                 $GLOBALS['log']->fatal('Lead '.$idRegistro.' Tiene teléfono');
                 array_push($array_respuesta,'telefono');
             }
-            
+
             //Obteniendo reuniones registradas
             if($beanLead->load_relationship('meetings')){
                 $relatedReuniones = $beanLead->meetings->getBeans();
@@ -640,8 +644,8 @@ SQL;
 
         }
 
-        //Prospecto Contactado: 
-        /** 
+        //Prospecto Contactado:
+        /**
          * actividadeconomica_c,
          * Actividad Económica, Dirección Administrativa,Situación de Grupo Empresarial,Registrar una Presolicitud
         */
@@ -718,7 +722,7 @@ SQL;
             Pago Único: ***
             Scoring Comercial: ***
             VoBo del director: ***
-         * 
+         *
          */
         if($tipoRegistro=='PI'){
 
@@ -811,7 +815,7 @@ SQL;
                 $relatedPLD = $beanPI->accounts_tct_pld_1->getBeans();
                 if(count($relatedPLD)>0){
                     $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Cuestionario PLD');
-                    array_push($array_pld,'1'); 
+                    array_push($array_pld,'1');
                 }
             }
 
@@ -830,7 +834,7 @@ SQL;
                 if(count($relatedSolicitudes)>0){
                     foreach($relatedSolicitudes as $sol) {
                         if($sol->estatus_c !='K' && $sol->estatus_c!='R'){
-                            
+
                             if($sol->cf_quantico_c!="" && $sol->cf_quantico_c!=null){
                                 $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene Condicion Financiera');
                                 array_push($array_condicion_financiera,'1');
@@ -855,7 +859,7 @@ SQL;
                                 $GLOBALS['log']->fatal('Cuenta '.$idRegistro.' Tiene VoBo Director');
                                 array_push($array_vobo_director,'1');
                             }
-                            
+
                         }
                     }
                 }
@@ -905,7 +909,7 @@ SQL;
 
         $array_equipo=array();
         while ($row = $db->fetchByAssoc($resultUsuarios)) {
-            
+
             $id_usuario=$row['id'];
             $total_leads_sin_contactar=0;
             $total_prospectos_contactados=0;
@@ -920,11 +924,11 @@ SQL;
                 "Usuario"=>$row['nombre_usuario']
             );
 
-            
+
             if(!isset($array_equipo[$row['equipo_c']])){
-                $array_equipo[$row['equipo_c']]=array(0,0,0,0,0,0,0,0);   
+                $array_equipo[$row['equipo_c']]=array(0,0,0,0,0,0,0,0);
             }
-            
+
 
             $queryRegistros = <<<SQL
 			SELECT l.id id_registro,
@@ -966,11 +970,11 @@ SQL;
         WHERE ac.tipo_registro_cuenta_c IN ('1','2','3')
         AND ac.subtipo_registro_cuenta_c IN('1','2','7','8','9')
         -- AND a.assigned_user_id ='{$id_usuario}'
-        AND (ac.user_id_c='{$id_usuario}' OR 
-			ac.user_id1_c='{$id_usuario}' OR 
-            ac.user_id2_c='{$id_usuario}' OR 
-            ac.user_id6_c='{$id_usuario}' OR 
-            ac.user_id7_c='{$id_usuario}' OR 
+        AND (ac.user_id_c='{$id_usuario}' OR
+			ac.user_id1_c='{$id_usuario}' OR
+            ac.user_id2_c='{$id_usuario}' OR
+            ac.user_id6_c='{$id_usuario}' OR
+            ac.user_id7_c='{$id_usuario}' OR
             ac.user_id8_c='{$id_usuario}'
 		)
         AND a.deleted=0
@@ -983,9 +987,9 @@ SQL;
                 $id=$filaRegistros['id_registro'];
                 $tipo=$filaRegistros['tipo_registro'];
                 $subtipo=$filaRegistros['subtipo_registro'];
-                
+
                 $grandTotal++;
-                
+
                 //Lead sin Contactar
                 if($tipo=='1' && $subtipo=='1'){
                     $array_equipo[$filaRegistros['equipo_c']][0]++;
@@ -1025,7 +1029,7 @@ SQL;
                         $array_es_cliente_linea_sin_operar=array();
                         $array_es_cliente_activo=array();
                         $array_es_cliente_perdido=array();
-                    
+
                         $relatedProductos = $beanCliente->accounts_uni_productos_1->getBeans();
                         if(count($relatedProductos)>0){
                             foreach($relatedProductos as $prod) {
@@ -1034,19 +1038,19 @@ SQL;
                                     if($prod->registros_activos_c=='' && $prod->registros_historicos_c==''){
                                         array_push($array_es_cliente_linea_sin_operar,'1');
                                     }
-        
+
                                     //Cliente Activo
                                     if($prod->registros_activos_c!=''){
                                         array_push($array_es_cliente_activo,'1');
                                     }
-        
+
                                     //Cliente Perdido
                                     if($prod->registros_activos_c=='' && $prod->registros_historicos_c!='' ){
                                         array_push($array_es_cliente_perdido,'1');
                                     }
                                 }
                             }
-    
+
                         }
 
                         //Cliente con linea sin operar
@@ -1064,7 +1068,7 @@ SQL;
                         //Cliente Perdido
                         if(in_array('1',$array_es_cliente_perdido)){
                             $array_equipo[$filaRegistros['equipo_c']][7]++;
-                            $total_clientes_perdidos++;   
+                            $total_clientes_perdidos++;
                         }
                     }
                 }
@@ -1095,7 +1099,7 @@ SQL;
         }
 
         $array_principal["Total"]=$grandTotal;
-        
+
         return $array_principal;
 
     }
