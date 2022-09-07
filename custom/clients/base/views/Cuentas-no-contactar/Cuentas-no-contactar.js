@@ -9,25 +9,23 @@
         'change .selected': 'selectedCheckbox',
         'click #btn_no_contactar': 'btnNoContactar',
         'click #btn_read_csv': 'procesarCSV',
-		'change #razon': 'buscaMotivo',
-		'change #motivo': 'buscaValida',
+    		'change #razon': 'buscaMotivo',
+    		'change #motivo': 'buscaValida',
         'click .ConsultarEstado': 'consultarEstado',
-        'click #btn-Cancelar-View': 'cancelConsultarEstado'		
+        'click #btn-Cancelar-View': 'cancelConsultarEstado'
     },
 
     ids_cuentas:[],
-	cartera:'',
-	credito:'',
-	cumplimiento:'',
+    registroBloqueo: [],
 
     initialize: function(options){
         this._super("initialize", [options]);
         this.tipo_cuenta = app.lang.getAppListStrings('tipo_registro_cuenta_list');
-		this.condicion_list = app.lang.getAppListStrings('condicion_cliente_list');
+		    this.condicion_list = app.lang.getAppListStrings('condicion_cliente_list');
         delete this.tipo_cuenta[1];
         this.loadView = false;
         if(app.user.attributes.tct_no_contactar_chk_c=='1' || app.user.attributes.bloqueo_credito_c=='1' || app.user.attributes.bloqueo_cumple_c=='1'){
-			this.loadView = true;
+			      this.loadView = true;
         }else{
             var route = app.router.buildRoute(this.module, null, '');
             app.router.navigate(route, {trigger: true});
@@ -514,19 +512,57 @@
 					app.api.call("read", app.api.buildURL("tct02_Resumen/" + id_cuenta, null, null, {}), null, {
 						success: _.bind(function (data) {
 							if(this.disposed) return;
-							this.cartera = "Sin bloqueo";
-							this.credito = "Sin bloqueo";
-							this.cumplimiento = "Sin bloqueo";
+              //Declara objeto para control de estado de bloqueo
+              this.registroBloqueo = [];
+              var detalleBloqueo = {
+                "estado":"Sin bloqueo",
+                "condicion":"",
+                "razon":"",
+                "motivo":"",
+                "detalle":"",
+                "responsableIngesta":"",
+                "responsableValidacion":""
+              }
+              this.registroBloqueo['cartera'] = App.utils.deepCopy(detalleBloqueo);
+              this.registroBloqueo['credito'] = App.utils.deepCopy(detalleBloqueo);
+              this.registroBloqueo['cumplimiento'] = App.utils.deepCopy(detalleBloqueo);
+
 							if(data) {
-								if(account.tct_no_contactar_chk_c && !data.bloqueo_cartera_c) this.cartera = "Pendiente de aprobar bloqueo";
-								if(data.bloqueo_credito_c && !data.bloqueo2_c) this.credito = "Pendiente de aprobar bloqueo";
-								if(data.bloqueo_cumple_c && !data.bloqueo3_c) this.cumplimiento = "Pendiente de aprobar bloqueo";
-								if(account.tct_no_contactar_chk_c && data.bloqueo_cartera_c) this.cartera = "Cuenta bloqueada";
-								if(data.bloqueo_credito_c && data.bloqueo2_c) this.credito = "Cuenta bloqueada";
-								if(data.bloqueo_cumple_c && data.bloqueo3_c) this.cumplimiento = "Cuenta bloqueada";
-								if(!account.tct_no_contactar_chk_c && data.bloqueo_cartera_c) this.cartera = "Pendiente de aprobar desbloqueo";
-								if(!data.bloqueo_credito_c && data.bloqueo2_c) this.credito = "Pendiente de aprobar desbloqueo";
-								if(!data.bloqueo_cumple_c && data.bloqueo3_c) this.cumplimiento = "Pendiente de aprobar desbloqueo";
+                //Validaciones para estado
+								if(account.tct_no_contactar_chk_c && !data.bloqueo_cartera_c) this.registroBloqueo.cartera.estado = "Pendiente de aprobar bloqueo";
+								if(data.bloqueo_credito_c && !data.bloqueo2_c) this.registroBloqueo.credito.estado = "Pendiente de aprobar bloqueo";
+								if(data.bloqueo_cumple_c && !data.bloqueo3_c) this.registroBloqueo.cumplimiento.estado = "Pendiente de aprobar bloqueo";
+
+								if(account.tct_no_contactar_chk_c && data.bloqueo_cartera_c) this.registroBloqueo.cartera.estado = "Cuenta bloqueada";
+								if(data.bloqueo_credito_c && data.bloqueo2_c) this.registroBloqueo.credito.estado = "Cuenta bloqueada";
+								if(data.bloqueo_cumple_c && data.bloqueo3_c) this.registroBloqueo.cumplimiento.estado = "Cuenta bloqueada";
+
+								if(!account.tct_no_contactar_chk_c && data.bloqueo_cartera_c) this.registroBloqueo.cartera.estado = "Pendiente de aprobar desbloqueo";
+								if(!data.bloqueo_credito_c && data.bloqueo2_c) this.registroBloqueo.credito.estado = "Pendiente de aprobar desbloqueo";
+								if(!data.bloqueo_cumple_c && data.bloqueo3_c) this.registroBloqueo.cumplimiento.estado = "Pendiente de aprobar desbloqueo";
+                //Obtención de variables con detalle
+                this.registroBloqueo['nombreCuenta'] = account.name;
+                //Cartera
+                this.registroBloqueo.cartera.condicion = data.condicion_cliente_c;
+                this.registroBloqueo.cartera.razon = data.razon_c;
+                this.registroBloqueo.cartera.motivo = data.motivo_c;
+                this.registroBloqueo.cartera.detalle = data.detalle_c;
+                this.registroBloqueo.cartera.responsableIngesta = data.ingesta_c;
+                this.registroBloqueo.cartera.responsableValidacion = data.validacion_c;
+                //Crédito
+                this.registroBloqueo.credito.condicion = data.condicion2_c;
+                this.registroBloqueo.credito.razon = data.razon2_c;
+                this.registroBloqueo.credito.motivo = data.motivo2_c;
+                this.registroBloqueo.credito.detalle = data.detalle2_c;
+                this.registroBloqueo.credito.responsableIngesta = data.ingesta2_c;
+                this.registroBloqueo.credito.responsableValidacion = data.validacion2_c;
+                //Cumplimiento
+                this.registroBloqueo.cumplimiento.condicion = data.condicion3_c;
+                this.registroBloqueo.cumplimiento.razon = data.razon3_c;
+                this.registroBloqueo.cumplimiento.motivo = data.motivo3_c;
+                this.registroBloqueo.cumplimiento.detalle = data.detalle3_c;
+                this.registroBloqueo.cumplimiento.responsableIngesta = data.ingesta3_c;
+                this.registroBloqueo.cumplimiento.responsableValidacion = data.validacion3_c;
 							}
 							this.render();
 							app.alert.dismiss('uni2-disp-estado');
@@ -548,7 +584,6 @@
         $('.modal').modal('hide');
         $('.modal').remove();
         $('.modal-backdrop').remove();
-		this.buscarCuentasNoContactar();
     },
 
     procesarCSV:function () {

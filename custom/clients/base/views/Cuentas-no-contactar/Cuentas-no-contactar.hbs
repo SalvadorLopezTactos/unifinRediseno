@@ -271,12 +271,12 @@
 					<div class="span1 record-cell">
 						<div class="record-label">Motivo:</div>
 					</div>
-					<div class="span4 record-cell">					
+					<div class="span4 record-cell">
 						<select id="motivo" class="span10">
 							{{#each motivo_list}}
 								<option value="{{@key}}" {{ifSelected @key ../motivo}}>{{this}}</option>
 							{{/each}}
-						</select>				
+						</select>
 					</div>
 				</div>
 				<div class="span3 record row-fluid panel_body tleft">
@@ -301,12 +301,12 @@
 					<div class="span1 record-cell">
 						<div class="record-label">Responsable Validación:</div>
 					</div>
-					<div class="span4 record-cell">					
+					<div class="span4 record-cell">
 						<select id="valida" class="span10">
 							{{#each valida_list}}
 								<option value="{{@key}}" {{ifSelected @key ../valida}}>{{this}}</option>
 							{{/each}}
-						</select>				
+						</select>
 					</div>
 				</div>
 			</div>
@@ -336,35 +336,38 @@
 		  <div class="modal span12 " style="width:100%;height:100%">
 			<div class="modal-content" style="margin:auto; width:50%">
 				<div class="modal-header">
-				  <center><h2>Consultar Estado</h2></center>
+				  <center>
+            <h2>Consultar Estado</h2>
+            <h1>{{registroBloqueo.nombreCuenta}}</h1>
+          </center>
 				</div>
 				<div class="modal-body">
 				<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
 					<thead>
 						<tr>
-							<td><b>Cartera</b></td>
-							<td><b>Crédito</b></td>
-							<td><b>Cumplimiento</b></td>
+							<td class="span4"><b>Cartera</b></td>
+							<td class="span4"><b>Crédito</b></td>
+							<td class="span4"><b>Cumplimiento</b></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>{{#if cartera}}{{cartera}}{{/if}}</td>
-							<td>{{#if credito}}{{credito}}{{/if}}</td>
-							<td>{{#if cumplimiento}}{{cumplimiento}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cartera}}{{registroBloqueo.cartera.estado}}{{/if}}</td>
+							<td>{{#if registroBloqueo.credito}}{{registroBloqueo.credito.estado}}{{/if}}</td>
+							<td>{{#if registroBloqueo.cumplimiento}}{{registroBloqueo.cumplimiento.estado}}{{/if}}</td>
 						</tr>
 					</tbody>
-				</table>     
-				<br><br><br><br>
+				</table>
 			  </div>
+				<br>
 			  <div class="modal-footer">
 				<div align="right">
-				  <button class="btn btn-danger btn-Model" id="btn-Cancelar-View" type="submit">Aceptar</button>
+				  <button class="btn btn-danger btn-Model" id="btn-Cancelar-View" type="submit">Cerrar</button>
 				</div>
 			  </div>
 			</div>
 		  </div>
-		</div>		
+		</div>
     {{/if}}
 	    <!-- Subir CSV -->
         <br>
@@ -387,5 +390,5 @@
 					<input type="button" value="Subir cambios" id="btn_read_csv" class="btn btn-success" align="right" style="margin:5px">
 		        </div>
             </div>
-        </div>		
+        </div>
 {{/if}}
