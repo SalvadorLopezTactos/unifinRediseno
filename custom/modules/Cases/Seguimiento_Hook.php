@@ -169,7 +169,7 @@ class Seguimiento_Hook
                 $area_interna='IS NULL';
             }
 
-            if($bean->equipo_soporte_==''){
+            if($bean->equipo_soporte_c==''){
                 $equipo_soporte='IS NULL';
             }
 
