@@ -144,6 +144,7 @@
 
     finalizar_ticket:function(){
         var id_user_creator=this.model.get('created_by');
+        //Si no eres asignado, el creador o el jefe del creador
 
         if(this.model.get('status')=='3'){
             
@@ -167,6 +168,14 @@
                     var user_log=App.user.id;
                     var roles=data.roles;
                     var roles_que_pueden_completar=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+                    if(user_log != self.model.get("assigned_user_id") && user_log != self.model.get('created_by') && user_log != reporta_a){
+                        app.alert.show('error_finaliza', {
+                            level: 'error',
+                            messages: 'No tienes permiso para finalizar este ticket',
+                            autoClose: false
+                        });
+                        return;
+                    }
                     //Los usuarios con Roles Operativo o Directivos, si tienen permiso de establecer como "Completado" el caso
                     var tieneRolComercial=0;
                     for (let index = 0; index < roles.length; index++) {
@@ -216,7 +225,7 @@
                         });
                     }else{
                         self.model.set('assigned_user_id',usuario_creador);
-        
+
                         app.alert.show('finaliza_ticket', {
                             level: 'process',
                             title: 'Guardando'
