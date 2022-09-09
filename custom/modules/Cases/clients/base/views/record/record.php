@@ -193,7 +193,7 @@ array (
             'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL1',
             'label' => 'LBL_RECORDVIEW_PANEL1',
-            'columns' => 3,
+            'columns' => 2,
             'placeholders' => 1,
             'fields' => 
             array (
@@ -201,7 +201,6 @@ array (
               array (
                 'name' => 'case_number',
                 'readonly' => true,
-                'span' => 12,
               ),
               1 => 
               array (
@@ -219,12 +218,18 @@ array (
               array (
                 'name' => 'account_name',
               ),
-              5 => 'primary_contact_name',
+              5 => 
+              array (
+                'name' => 'case_cuenta_relacion',
+                'studio' => 'visible',
+                'label' => 'LBL_CASE_CUENTA_REL',
+              ),
               6 => 
               array (
                 'readonly' => false,
                 'name' => 'vip_c',
                 'label' => 'LBL_VIP',
+                'span' => 12,
               ),
               7 => 
               array (
@@ -239,29 +244,32 @@ array (
                 'name' => 'subtipo_c',
                 'label' => 'LBL_SUBTIPO',
               ),
-              10 => 'priority',
-              11 => 'status',
-              12 => 
+              10 => 
+              array (
+                'readonly' => false,
+                'name' => 'detalle_subtipo_c',
+                'label' => 'LBL_DETALLE_SUBTIPO',
+              ),
+              11 => 'priority',
+              12 => 'status',
+              13 => 
               array (
                 'name' => 'source',
               ),
-              13 => 
+              14 => 
+              array (
+              ),
+              15 => 
               array (
                 'readonly' => false,
                 'name' => 'case_fcr_c',
                 'label' => 'LBL_CASE_FCR',
               ),
-              14 => 
+              16 => 
               array (
                 'readonly' => false,
                 'name' => 'case_hd_c',
                 'label' => 'LBL_CASE_HD',
-              ),
-              15 => 
-              array (
-              ),
-              16 => 
-              array (
               ),
             ),
           ),
@@ -277,26 +285,21 @@ array (
             array (
               0 => 
               array (
-                'name' => 'team_name',
-                'span' => 12,
-              ),
-              1 => 
-              array (
                 'name' => 'assigned_user_name',
               ),
-              2 => 
+              1 => 
               array (
                 'readonly' => false,
                 'name' => 'area_interna_c',
                 'label' => 'LBL_AREA_INTERNA',
               ),
-              3 => 
+              2 => 
               array (
                 'readonly' => false,
                 'name' => 'equipo_soporte_c',
                 'label' => 'LBL_EQUIPO_SOPORTE',
               ),
-              4 => 
+              3 => 
               array (
                 'readonly' => false,
                 'name' => 'responsable_interno_c',
@@ -347,82 +350,10 @@ array (
             array (
               0 => 
               array (
-              ),
-              1 => 
-              array (
-              ),
-              2 => 
-              array (
-              ),
-              3 => 
-              array (
-              ),
-              4 => 
-              array (
-                'name' => 'case_cuenta_relacion',
-                'studio' => 'visible',
-                'label' => 'LBL_CASE_CUENTA_REL',
-              ),
-              5 => 
-              array (
-              ),
-              6 => 
-              array (
-              ),
-              7 => 
-              array (
-              ),
-              8 => 
-              array (
                 'readonly' => false,
                 'name' => 'codigo_producto_c',
                 'label' => 'LBL_CODIGO_PRODUCTO',
                 'span' => 12,
-              ),
-              9 => 
-              array (
-                'readonly' => false,
-                'name' => 'detalle_subtipo_c',
-                'label' => 'LBL_DETALLE_SUBTIPO',
-              ),
-              10 => 
-              array (
-              ),
-              11 => 
-              array (
-              ),
-              12 => 
-              array (
-              ),
-              13 => 
-              array (
-              ),
-              14 => 
-              array (
-              ),
-              15 => 
-              array (
-              ),
-              16 => 
-              array (
-              ),
-              17 => 
-              array (
-              ),
-              18 => 
-              array (
-              ),
-              19 => 
-              array (
-              ),
-              20 => 
-              array (
-              ),
-              21 => 
-              array (
-              ),
-              22 => 
-              array (
               ),
             ),
           ),
@@ -487,19 +418,14 @@ array (
               ),
               2 => 
               array (
+                'name' => 'team_name',
               ),
               3 => 
-              array (
-              ),
-              4 => 
               array (
                 'readonly' => false,
                 'name' => 'contacto_principal_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CONTACTO_PRINCIPAL',
-              ),
-              5 => 
-              array (
               ),
             ),
           ),
