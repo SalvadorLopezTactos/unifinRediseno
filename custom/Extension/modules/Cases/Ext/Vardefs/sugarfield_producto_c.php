@@ -1,5 +1,5 @@
 <?php
- // created: 2022-05-08 22:29:37
+ // created: 2022-09-08 09:43:07
 $dictionary['Case']['fields']['producto_c']['labelValue']='Producto';
 $dictionary['Case']['fields']['producto_c']['dependency']='';
 $dictionary['Case']['fields']['producto_c']['required_formula']='';

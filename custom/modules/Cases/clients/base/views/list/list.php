@@ -16,19 +16,19 @@ array (
             array (
               0 => 
               array (
-                'name' => 'name',
-                'label' => 'LBL_LIST_SUBJECT',
+                'name' => 'case_number',
+                'label' => 'LBL_LIST_NUMBER',
                 'link' => true,
                 'default' => true,
                 'enabled' => true,
+                'readonly' => true,
               ),
               1 => 
               array (
-                'name' => 'case_number',
-                'label' => 'LBL_LIST_NUMBER',
+                'name' => 'name',
+                'label' => 'LBL_LIST_SUBJECT',
                 'default' => true,
                 'enabled' => true,
-                'readonly' => true,
               ),
               2 => 
               array (
