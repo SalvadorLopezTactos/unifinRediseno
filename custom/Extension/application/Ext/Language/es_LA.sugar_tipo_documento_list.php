@@ -1,5 +1,5 @@
 <?php
- // created: 2020-09-02 12:39:51
+ // created: 2022-09-07 01:01:33
 
 $app_list_strings['tipo_documento_list']=array (
   '' => '',

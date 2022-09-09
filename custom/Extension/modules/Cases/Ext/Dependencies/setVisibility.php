@@ -20,6 +20,7 @@ $dependencies['Cases']['contacto_principal_c_Visibility'] = array(
     ),
 );
 
+/* Se omite dependencia para que sea visible en todo momento
 $dependencies['Cases']['vip_c_Visibility'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -35,3 +36,4 @@ $dependencies['Cases']['vip_c_Visibility'] = array(
         ),
     ),
 );
+*/
