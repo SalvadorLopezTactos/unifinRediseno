@@ -112,7 +112,7 @@ class Seguimiento_Hook
 
         $due_date_time = new SugarDateTime($hoy);
         $user_datetime_string = $due_date_time->formatDateTime("datetime", "db", $current_user);
-        
+
         $GLOBALS['log']->fatal("hoy ".$hoy);
         $GLOBALS['log']->fatal("FECHA FORMATEADA PARA BD : ".$user_datetime_string);
         $GLOBALS['log']->fatal("hoy1 ".$dsemana);
@@ -166,6 +166,7 @@ class Seguimiento_Hook
 
     function set_asignado_responsable($bean, $event, $args){
         global $db;
+        global $current_user;
         //Se establece asignado y responsable
         if(($bean->fetched_row['area_interna_c'] != $bean->area_interna_c) || ($bean->fetched_row['equipo_soporte_c'] != $bean->equipo_soporte_c) || !$args['isUpdate']){
 
@@ -230,6 +231,9 @@ class Seguimiento_Hook
                     }
                 }
 
+            }else{
+                $responsable=$current_user->id;
+                $asignado=$current_user->id;
             }
 
             $bean->assigned_user_id=$responsable;
