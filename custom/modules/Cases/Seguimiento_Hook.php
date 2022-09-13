@@ -95,8 +95,9 @@ class Seguimiento_Hook
     }
 
     function dia_seguimiento($add){
+        global $current_user;
         $fecha_actual = date("Y-m-d H:i:s"); 
-        //$GLOBALS['log']->fatal("hpy".$fecha_actual);
+
         $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".$add." days"));
         $dsemana = date('D',strtotime($fecha_actual."+ ".$add." days"));
       
@@ -108,9 +109,15 @@ class Seguimiento_Hook
             $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".($add+1)." days"));
             $dsemana = date('D',strtotime($fecha_actual."+ ".($add+1)." days"));
         }
-        $GLOBALS['log']->fatal("hpy".$hoy);
-        $GLOBALS['log']->fatal("hpy1".$dsemana);
-        return $hoy;
+
+        $due_date_time = new SugarDateTime($hoy);
+        $user_datetime_string = $due_date_time->formatDateTime("datetime", "db", $current_user);
+        
+        $GLOBALS['log']->fatal("hoy ".$hoy);
+        $GLOBALS['log']->fatal("FECHA FORMATEADA PARA BD : ".$user_datetime_string);
+        $GLOBALS['log']->fatal("hoy1 ".$dsemana);
+
+        return $user_datetime_string;
     }
 
     function set_private_team($bean, $event, $args){
