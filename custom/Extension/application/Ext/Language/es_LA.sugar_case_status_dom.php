@@ -1,8 +1,8 @@
 <?php
- // created: 2022-08-31 23:33:43
+ // created: 2022-09-12 21:48:51
 
 $app_list_strings['case_status_dom']=array (
-  1 => 'No iniciada',
+  1 => 'No iniciado',
   2 => 'En curso',
   6 => 'Cierre interno',
   3 => 'Completada',
