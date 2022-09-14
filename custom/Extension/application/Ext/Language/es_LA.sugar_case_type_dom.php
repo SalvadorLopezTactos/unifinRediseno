@@ -1,5 +1,5 @@
 <?php
- // created: 2022-09-08 09:46:02
+ // created: 2022-09-14 12:26:16
 
 $app_list_strings['case_type_dom']=array (
   1 => 'Aclaraciones',
@@ -14,6 +14,6 @@ $app_list_strings['case_type_dom']=array (
   10 => 'Soporte técnico',
   11 => 'Clave de Prevención',
   12 => 'Viabilidad',
-  13 => 'Actualización de Buro',
+  13 => 'Actualización de Buró',
   14 => 'Correo Compromiso',
 );
