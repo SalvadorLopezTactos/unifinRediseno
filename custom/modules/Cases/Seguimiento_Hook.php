@@ -96,28 +96,33 @@ class Seguimiento_Hook
 
     function dia_seguimiento($add){
         global $current_user;
-        $fecha_actual = date("Y-m-d H:i:s"); 
 
-        $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".$add." days"));
-        $dsemana = date('D',strtotime($fecha_actual."+ ".$add." days"));
-      
-        if($dsemana == "Sat"){
-            $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".($add+2)." days"));
-            $dsemana = date('D',strtotime($fecha_actual."+ ".($add+2)." days"));
-        }
-        if($dsemana == "Sun"){
-            $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".($add+1)." days"));
-            $dsemana = date('D',strtotime($fecha_actual."+ ".($add+1)." days"));
-        }
+        $GLOBALS['log']->fatal("Días a sumar: ".$add);
+        $hoy=$this->sumDays($add, 'Y-m-d H:i:s');
 
         $due_date_time = new SugarDateTime($hoy);
         $user_datetime_string = $due_date_time->formatDateTime("datetime", "db", $current_user);
 
-        $GLOBALS['log']->fatal("hoy ".$hoy);
         $GLOBALS['log']->fatal("FECHA FORMATEADA PARA BD : ".$user_datetime_string);
-        $GLOBALS['log']->fatal("hoy1 ".$dsemana);
 
         return $user_datetime_string;
+    }
+
+    function sumDays($days = 0, $format = 'Y-m-d H:i:s') {
+        $incrementing = $days > 0;
+        $days         = abs($days);
+        $actualDate   = date("Y-m-d H:i:s");
+    
+        while ($days > 0) {
+            $tsDate    = strtotime($actualDate . ' ' . ($incrementing ? '+' : '-') . ' 1 days');
+            $actualDate = date('Y-m-d H:i:s', $tsDate);
+    
+            if (date('N', $tsDate) < 6) {
+                $days--;
+            }
+        }
+    
+        return date($format, strtotime($actualDate));
     }
 
     function set_private_team($bean, $event, $args){
