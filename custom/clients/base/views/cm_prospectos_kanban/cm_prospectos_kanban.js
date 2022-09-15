@@ -4,7 +4,9 @@
     events: {
         'click .contenedor-item': 'muestraChecklist',
         'click .fa-star':'setFavorite',
-        'click .closeChecklist':'closeChecklist'
+        'click .closeChecklist':'closeChecklist',
+        'click .sortInteresado':'ordenaInteresado',
+        'click .dropdown-field':'dropdownFieldStyle'
     },
 
     initialize: function (options) {
@@ -113,8 +115,10 @@
 
     setFavorite:function(e){
         var id=$(e.currentTarget).attr('data-id');
+        contextoKanban.idRegistroGlobal=id;
         var estilo=$(e.currentTarget).attr('style');
         var modulo=$(e.currentTarget).attr('data-modulo');
+        contextoKanban.columna=$(e.currentTarget).attr('data-columna');
 
         if(estilo==undefined){//Establece como favorito
             $(e.currentTarget).attr('style','color: #3399FF');
@@ -126,7 +130,16 @@
             app.api.call('update', app.api.buildURL(modulo+'/'+id+'/favorite'), null, {
                 success: function (data) {
                     App.alert.dismiss('setFavorite');    
-                    //self.render();
+                    //Una vez establecido como favorito, se procede a buscar en el arreglo que se pinta para poder ubicar el indice y poder actualizar el valor a la clave "Favorito"
+                    var indice=contextoKanban.searchIndexFavorite(contextoKanban.idRegistroGlobal,contextoKanban.registrosKanban[contextoKanban.columna].Registros);
+                    //Una vez encontrado el índice, se forza a establecer valor a Favorito para que éste se pueda ordenar
+                    contextoKanban.registrosKanban[contextoKanban.columna].Registros[indice].Favorito='1';
+                    var valorColumna=contextoKanban.columna;
+
+                    contextoKanban.registrosKanban[valorColumna].Registros.sort((a, b) => {
+                        return b.Favorito - a.Favorito;
+                    });
+                    contextoKanban.render();
                 },
                 error: function (e) {
                     throw e;
@@ -143,7 +156,17 @@
             app.api.call('update', app.api.buildURL(modulo+'/'+id+'/unfavorite'), null, {
                 success: function (data) {
                     App.alert.dismiss('quitFavorite');
-                    //self.render();
+                    
+                    //Una vez establecido como favorito, se procede a buscar en el arreglo que se pinta para poder ubicar el indice y poder actualizar el valor a la clave "Favorito"
+                    var indice=contextoKanban.searchIndexFavorite(contextoKanban.idRegistroGlobal,contextoKanban.registrosKanban[contextoKanban.columna].Registros);
+                    //Una vez encontrado el índice, se forza a establecer valor a Favorito para que éste se pueda ordenar
+                    contextoKanban.registrosKanban[contextoKanban.columna].Registros[indice].Favorito=null;
+                    var valorColumna=contextoKanban.columna;
+                    //Ordenando por favorito y después por nombre
+                    contextoKanban.registrosKanban[valorColumna].Registros.sort((a, b) => {
+                        return b.Favorito - a.Favorito;
+                    });
+                    contextoKanban.render();
                 },
                 error: function (e) {
                     throw e;
@@ -152,6 +175,50 @@
         }
         
 
+    },
+
+    searchIndexFavorite:function(id,arreglo){
+        var indice=null;
+        for (let index = 0; index < arreglo.length; index++) {
+            if(arreglo[index].Id==id){
+                indice=index;
+                index=arreglo.length;
+            }
+        }
+        return indice;
+
+    },
+    ordenaInteresado:function(e){
+        var modoOrdenamiento=$(e.currentTarget).attr('modo-ordenamiento');
+        var valorOrdenamiento="";
+        if(this.registrosKanban.Prospecto_Interesado.Registros.length>0){
+            if(modoOrdenamiento=='DESC'){
+                valorOrdenamiento="ASC";
+                this.registrosKanban.Prospecto_Interesado.Registros.sort((a, b) => {
+                    return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - Number(b.Monto_Cuenta.replace(/,/g, ''));
+                });
+            
+            }else{
+                valorOrdenamiento="DESC";
+                this.registrosKanban.Prospecto_Interesado.Registros.sort((a, b) => {
+                    return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - Number(a.Monto_Cuenta.replace(/,/g, ''));
+                });
+            }
+
+            this.render();
+            $('.sortInteresado').attr('modo-ordenamiento',valorOrdenamiento)
+        }        
+
+    },
+
+    dropdownFieldStyle:function(e){
+        var $this = $(e.currentTarget);
+        $this.children('ul').slideToggle(100);
+        var $target = $(e.target);
+        if ($target.is('li')) {
+            $this.children('span').html($target.text());
+            $this.find('input[type="hidden"]').val($target.attr('data-value'));
+        }
     }
 
 })

@@ -38,6 +38,21 @@
                     <div>
                     <p>{{registrosKanban.Prospecto_Interesado.Total_Registros}} Registro(s)</p>
                 </div>
+                <div style="width:100%;text-align: right;margin-right:10px">
+                    <span style="background-color:white">
+                        <div class="dropdown-field">
+                            <span><i class="fa fa-solid fa-sort sortInteresado" modo-ordenamiento="DESC"></i></span>
+                            <ul>
+                                <li data-value="MA">Monto Asc</li>
+                                <li data-value="MD">Monto Desc</li>
+                                <li data-value="NA">Nombre Asc</li>
+                                <li data-value="ND">Nombre Desc</li>
+                            </ul>
+                            <input type="hidden" name="myfield" value="">
+                        </div>
+                        
+                    </span>
+                </div>
                 <div class="cantidad-interesado  contenedor-cantidad">
                     <p><span>$</span>{{registrosKanban.Prospecto_Interesado.Total_Monto}}</p>
                 </div>
@@ -54,6 +69,9 @@
             <div class="header-datos">
                <div>
                     <p>{{registrosKanban.Prospecto_Integracion_Expediente.Total_Registros}} Registro(s)</p>
+                </div>
+                <div style="width:100%;text-align: right;margin-right:10px">
+                    <span style="background-color:white"><i class="fa fa-solid fa-sort"></i></span>
                 </div>
                 <div class="cantidad-integracion contenedor-cantidad">
                     <p><span>$</span>{{registrosKanban.Prospecto_Integracion_Expediente.Total_Monto}}</p>
@@ -73,6 +91,9 @@
                     <p>{{registrosKanban.Prospecto_Credito.Total_Registros}} Registro(s)</p>
                 </div>
                 <div class="cantidad-credito contenedor-cantidad">
+                    <div style="width:100%;text-align: right;margin-right:10px">
+                        <span style="background-color:white"><i class="fa fa-solid fa-sort"></i></span>
+                    </div>
                     <p><span>$</span>{{registrosKanban.Prospecto_Credito.Total_Monto}}</p>
                 </div>
             </div>
@@ -93,7 +114,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Lead_Sin_Contactar"  {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
@@ -124,7 +145,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Prospecto_Contactado" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
@@ -155,7 +176,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Prospecto_Interesado" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
@@ -186,7 +207,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Prospecto_Integracion_Expediente" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
@@ -217,7 +238,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Prospecto_Credito" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
