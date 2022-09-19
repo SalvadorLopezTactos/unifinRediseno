@@ -95,22 +95,34 @@ class Seguimiento_Hook
     }
 
     function dia_seguimiento($add){
-        $fecha_actual = date("Y-m-d H:i:s"); 
-        //$GLOBALS['log']->fatal("hpy".$fecha_actual);
-        $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".$add." days"));
-        $dsemana = date('D',strtotime($fecha_actual."+ ".$add." days"));
-      
-        if($dsemana == "Sat"){
-            $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".($add+2)." days"));
-            $dsemana = date('D',strtotime($fecha_actual."+ ".($add+2)." days"));
+        global $current_user;
+
+        $GLOBALS['log']->fatal("Días a sumar: ".$add);
+        $hoy=$this->sumDays($add, 'Y-m-d H:i:s');
+
+        $due_date_time = new SugarDateTime($hoy);
+        $user_datetime_string = $due_date_time->formatDateTime("datetime", "db", $current_user);
+
+        $GLOBALS['log']->fatal("FECHA FORMATEADA PARA BD : ".$user_datetime_string);
+
+        return $user_datetime_string;
+    }
+
+    function sumDays($days = 0, $format = 'Y-m-d H:i:s') {
+        $incrementing = $days > 0;
+        $days         = abs($days);
+        $actualDate   = date("Y-m-d H:i:s");
+    
+        while ($days > 0) {
+            $tsDate    = strtotime($actualDate . ' ' . ($incrementing ? '+' : '-') . ' 1 days');
+            $actualDate = date('Y-m-d H:i:s', $tsDate);
+    
+            if (date('N', $tsDate) < 6) {
+                $days--;
+            }
         }
-        if($dsemana == "Sun"){
-            $hoy =  date("Y-m-d H:i:s",strtotime($fecha_actual."+ ".($add+1)." days"));
-            $dsemana = date('D',strtotime($fecha_actual."+ ".($add+1)." days"));
-        }
-        $GLOBALS['log']->fatal("hpy".$hoy);
-        $GLOBALS['log']->fatal("hpy1".$dsemana);
-        return $hoy;
+    
+        return date($format, strtotime($actualDate));
     }
 
     function set_private_team($bean, $event, $args){
@@ -159,6 +171,7 @@ class Seguimiento_Hook
 
     function set_asignado_responsable($bean, $event, $args){
         global $db;
+        global $current_user;
         //Se establece asignado y responsable
         if(($bean->fetched_row['area_interna_c'] != $bean->area_interna_c) || ($bean->fetched_row['equipo_soporte_c'] != $bean->equipo_soporte_c) || !$args['isUpdate']){
 
@@ -223,6 +236,9 @@ class Seguimiento_Hook
                     }
                 }
 
+            }else{
+                $responsable=$current_user->id;
+                $asignado=$current_user->id;
             }
 
             $bean->assigned_user_id=$responsable;
