@@ -138,7 +138,7 @@ array (
                 'type' => 'rowaction',
                 'event' => 'button:finalizar_ticket:click',
                 'name' => 'finalizar_ticket',
-                'label' => 'Finalizar ticket',
+                'label' => 'Finalizar Caso',
                 'acl_action' => 'view',
               ),
             ),

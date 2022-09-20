@@ -88,10 +88,10 @@
                 //Jefe directo (Reporta a) del usuario creador
                 //El usuario asignado al registro en caso de que el usuario creador tenga algún rol comercial (Operativo, Directivos)
                 var tiene_permiso_guardar=[];
-                if(user_log == self.model.get('created_by')){
+                if(user_log == self.model.get('created_by') && tieneRolComercial==0){
                     tiene_permiso_guardar.push(1);
                 }
-                if(user_log == reporta_a){
+                if(user_log == reporta_a && tieneRolComercial==0){
                     tiene_permiso_guardar.push(1);
                 }
 
@@ -190,10 +190,10 @@
                     //Jefe directo (Reporta a) del usuario creador
                     //El usuario asignado al registro en caso de que el usuario creador tenga algún rol comercial (Operativo, Directivos)
                     var tiene_permiso_guardar=[];
-                    if(user_log == self.model.get('created_by')){
+                    if(user_log == self.model.get('created_by') && tieneRolComercial==0){
                         tiene_permiso_guardar.push(1);
                     }
-                    if(user_log == reporta_a){
+                    if(user_log == reporta_a && tieneRolComercial==0){
                         tiene_permiso_guardar.push(1);
                     }
     
