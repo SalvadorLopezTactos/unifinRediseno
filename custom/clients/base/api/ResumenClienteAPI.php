@@ -459,7 +459,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['leasing']['fecha_proximo_pago'] = $fecha_proximo_pago;
                         $arr_principal['leasing']['anexos_activos'] = $registros_activos;
                         $arr_principal['leasing']['anexos_historicos'] = $registros_historicos;
-                        $arr_principal['leasing']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
+                        $arr_principal['leasing']['muestra_producto'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente. Se remplaza validación: ($this->usuarioValido($asignadoId) || $tipoCuenta == '3')
                         //$arr_principal['leasing']['muestra_producto'] = true;
                         $arr_principal['leasing']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
                         $arr_principal['leasing']['tiene_anexo_liberado'] = ($registros_activos > 0 ) ? true : false; //Valida que tenga anexos activos
@@ -484,7 +484,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['credito_auto']['fecha_proximo_pago'] = $fecha_proximo_pago;
                         $arr_principal['credito_auto']['contratos_activos'] = $registros_activos;
                         $arr_principal['credito_auto']['contratos_historicos'] = $registros_historicos;
-                        $arr_principal['credito_auto']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
+                        $arr_principal['credito_auto']['muestra_producto'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['credito_auto']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
                         $arr_principal['credito_auto']['tiene_contrato_liberado'] = ($registros_activos > 0 ) ? true : false; //Valida que tenga anexos activos
                         $arr_principal['credito_auto']['tiene_contratos'] = ($registros_activos > 0 || $registros_historicos > 0 ) ? true : false; //Valida que tenga anexos activos
@@ -504,7 +504,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['factoring']['fecha_proximo_pago'] = $fecha_proximo_pago;
                         $arr_principal['factoring']['cesiones_activas'] = $registros_activos;
                         $arr_principal['factoring']['cesiones_historicas'] = $registros_historicos;
-                        $arr_principal['factoring']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
+                        $arr_principal['factoring']['muestra_producto'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['factoring']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
                         $arr_principal['factoring']['tiene_cesiones_liberado'] = ($registros_activos > 0 ) ? true : false; //Valida que tenga anexos activos
                         $arr_principal['factoring']['tiene_cesiones'] = ($registros_activos > 0 || $registros_historicos > 0 ) ? true : false; //Valida que tenga anexos activos
@@ -517,7 +517,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['fleet']['estatusxproducto'] = $estatusxproducto;
                         $arr_principal['fleet']['promotor']=$asignado;
                         $arr_principal['fleet']['promotorId']=$product->assigned_user_id;
-                        $arr_principal['fleet']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
+                        $arr_principal['fleet']['muestra_producto'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         break;
                     case '7': //Credito SOS
                         $arr_principal['credito_sos']['estatus_atencion'] = $statusProducto;
@@ -529,7 +529,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['credito_sos']['mensualidad_activa'] = $mensualidad_activa;
                         $arr_principal['credito_sos']['dias_atraso'] = $dias_atraso;
                         $arr_principal['credito_sos']['fecha_proximo_pago'] = $fecha_proximo_pago;
-                        $arr_principal['credito_sos']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
+                        $arr_principal['credito_sos']['muestra_producto'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['credito_sos']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
                         $arr_principal['credito_sos']['tiene_anexo_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
                         break;
@@ -546,7 +546,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['uniclick']['mensualidad_activa'] = $mensualidad_activa;
                         $arr_principal['uniclick']['dias_atraso'] = $dias_atraso;
                         $arr_principal['uniclick']['fecha_proximo_pago'] = $fecha_proximo_pago;
-                        $arr_principal['uniclick']['muestra_producto'] = ($this->usuarioValido($asignadoId) || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
+                        $arr_principal['uniclick']['muestra_producto'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida que sea usuario valido o tipo de cuenta sea Cliente
                         $arr_principal['uniclick']['es_prospecto_cliente'] = ($tipoCuenta == '2' || $tipoCuenta == '3') ? true : false; //Valida tipo de cuenta sea Prospecto o Cliente
                         $arr_principal['uniclick']['tiene_anexo_liberado'] = ($registros_activos > 0) ? true : false; //Valida que tenga anexos activos
                         break;
