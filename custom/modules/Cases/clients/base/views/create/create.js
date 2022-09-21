@@ -9,6 +9,7 @@
 
         this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
+        this.model.addValidationTask('informa_docs_requeridos', _.bind(this.informa_docs_requeridos, this));
         
         this.model.on('sync', this.getPersonas, this);
         this.model.on('change:type', this.setPriority, this);
@@ -18,7 +19,9 @@
 
     _render: function (options) {
         this._super("_render");
-        this.setOpcionesCredito();
+        this.setOpcionesAsesoresComerciales();
+        this.setOpcionesProducto();
+        this.setOpcionesProductoParaCredito();
     },
 
     handleCancel: function () {
@@ -73,6 +76,47 @@
         }
         callback(null, fields, errors);
     },
+
+    informa_docs_requeridos:function(fields, errors, callback){
+        //El mensaje informativo se muestra para asesores comerciales (Rol Operativo y Rol Directivos)
+        var tipo=this.model.get('type');
+        var etiqueta_tipo=App.lang.getAppListStrings('case_type_dom')[tipo];
+
+        var roles=App.user.attributes.roles;
+        //A los roles de esta lista se les muestran valores específicos en las listas desplegables
+        var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+        
+        var tieneRolComercial=0;
+        for (let index = 0; index < roles.length; index++) {
+            if(roles_credito.includes(roles[index])){
+                tieneRolComercial++;
+            }
+        }
+
+        if(tieneRolComercial>0){
+            var mapeo_case_docs=App.lang.getAppListStrings('mapeo_case_docs_list');
+
+            var mensaje_docs="Los documentos requeridos para el tipo "+etiqueta_tipo+" son:<br>";
+            for (const key in mapeo_case_docs) {
+                var elemento=mapeo_case_docs[key];
+                var doc_array=elemento.split("_");
+                if(doc_array[0]==tipo){
+                    mensaje_docs += doc_array[1]+"<br>";
+                }
+            }
+
+            //Para mostrar mensaje, se valida que se encuentre el tipo de documentos
+            if(mensaje_docs !="Los documentos requeridos para el tipo "+etiqueta_tipo+" son:<br>"){
+                app.alert.show('msj_docs', {
+                    level: 'info',
+                    messages: mensaje_docs,
+                    autoClose: false
+                });
+            }
+        }
+
+        callback(null, fields, errors);
+    },
     
     getPersonas: function () {
         nombreSelect="";
@@ -80,9 +124,9 @@
         var parentModule = selfPerson.model.get('parent_type');
         if(idCuenta!=undefined && idCuenta!=""){
             app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
-                success: function (data) {
+                success:  _.bind(function (data) {
                     //console.log(data.records);
-                    var idpersonas = selfPerson.model.get('persona_relacion_c');
+                    //var idpersonas = selfPerson.model.get('persona_relacion_c');
                     var arrayPersonas = [];
                     var isSelect = false;
                     if(data.length > 0){
@@ -121,9 +165,9 @@
                         console.log(filter_arguments);
                         
                         app.api.call('GET', app.api.buildURL('Accounts',null,null,filter_arguments), null, {
-                            success: function (cuentas) {
+                            success:_.bind( function (cuentas) {
                                 console.log(cuentas);
-                                var idpersonas = selfPerson.model.get('case_cuenta_relacion');
+                                var idpersonas = this.options.context.attributes.model.get('case_cuenta_relacion');
                                 for (var i = 0; i < cuentas.records.length; i++) {
                                     if (idpersonas != "" && idpersonas == data[i]['id']) {
                                         isSelect = true;
@@ -144,16 +188,10 @@
                                 {
                                     selfPerson.model.set('case_cuenta_relacion','nombreSelect');
                                 }
-                            },
-                            error: function (e) {
-                                throw e;
-                            }
+                            },this)
                         });
                     }
-                },
-                error: function (e) {
-                    console.log(e);
-                }
+                },this)
             });
         }
     },
@@ -241,7 +279,7 @@
 
     },
 
-    setOpcionesCredito(){
+    setOpcionesAsesoresComerciales(){
 
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
@@ -286,6 +324,50 @@
 
         }
 
+    },
+
+    setOpcionesProducto:function(){
+        //La opción de Clave de Prevención no es visible para asesores del Cac
+        var esCAC=App.user.attributes.cac_c;
+
+        if(esCAC){
+            var lista_productos_cac= app.lang.getAppListStrings('casos_productos_list');
+            //A los usuarios con rol comercial (Operativo y Directivos), solo se les muestra el Producto "Seguimiento Comercial"
+            Object.keys(lista_productos_cac).forEach(function (key) {
+                if(key =="CP5"){
+                    delete lista_productos_cac[key];
+                }
+            });
+            //Estableciendo nuevas opciones en campo de producto
+            var campo_producto=this.getField('producto_c');
+            campo_producto.items=lista_productos_cac;
+            campo_producto.render();
+
+        }
+
+    },
+
+    setOpcionesProductoParaCredito:function(){
+        
+        var roles=App.user.attributes.roles;
+
+        var nombreRol="Rol Crédito";
+
+        if(roles.includes(nombreRol)){
+            var lista_productos_asesores_credito= app.lang.getAppListStrings('casos_productos_list');
+            //A los usuarios con rol comercial (Operativo y Directivos), solo se les muestra el Producto "Seguimiento Comercial"
+            Object.keys(lista_productos_asesores_credito).forEach(function (key) {
+                if(key !="CP5"){
+                    delete lista_productos_asesores_credito[key];
+                }
+            });
+
+            //Estableciendo nuevas opciones en campo de producto
+            var campo_producto=this.getField('producto_c');
+            campo_producto.items=lista_productos_asesores_credito;
+            campo_producto.render();
+            this.model.set('producto_c',"CP5");
+        }
     }
 
 })
