@@ -242,32 +242,18 @@ class Seguimiento_Hook
                     $asignado=$current_user->id;
                 }
     
-                $GLOBALS['log']->fatal('ASSIGNED ANTES: '.$bean->assigned_user_id);
-    
                 $bean->assigned_user_id=$responsable;
-                $GLOBALS['log']->fatal('ASSIGNED DESPUES: '.$bean->assigned_user_id);
-                $GLOBALS['log']->fatal('CURRENT USER: '.$GLOBALS['current_user']->id);
                 $bean->user_id_c=$asignado;
 
                 //ENVIANDO NOTIFICACIÓN
                 $notify_user = BeanFactory::retrieveBean('Users', $bean->assigned_user_id);
                 $admin = Administration::getSettings();
-                //$beanSugarNativo=new SugarBean();
-                //$beanSugarNativo->send_assignment_notifications($notify_user,$admin);
-
-                //$emailConfig = SugarConfig::getInstance()->get('emailTemplate');
-                //$templateID = $emailConfig['AssignmentNotification'] ?? '';
-                //$emailTemplate = BeanFactory::getBean('EmailTemplates', $templateID);
 
                 $xtpl= $this->createNotificationEmailTemplate("Case", $notify_user,$bean);
-                $GLOBALS['log']->fatal("XXXLTPL TEMPLATE");
-                //$GLOBALS['log']->fatal(print_r($xtpl,true));
-
+                
                 $subject      = $xtpl->text("Case" . "_Subject");
                 $textBody     = trim($xtpl->text("Case"));
-                
-                $GLOBALS['log']->fatal($textBody);
-                
+                                
                 $this->enviarNotificacion($notify_user,$admin,$subject,$textBody);
                 
             }
