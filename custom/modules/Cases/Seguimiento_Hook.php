@@ -173,78 +173,231 @@ class Seguimiento_Hook
         global $db;
         global $current_user;
         //Se establece asignado y responsable
-        if(($bean->fetched_row['area_interna_c'] != $bean->area_interna_c) || ($bean->fetched_row['equipo_soporte_c'] != $bean->equipo_soporte_c) || !$args['isUpdate']){
+        if($bean->producto_c != "B621" && $bean->producto_c !="B601"){
+            if(($bean->fetched_row['area_interna_c'] != $bean->area_interna_c) || ($bean->fetched_row['equipo_soporte_c'] != $bean->equipo_soporte_c) || !$args['isUpdate'] ){
 
-            $area_interna="='".$bean->area_interna_c."'";
-            $equipo_soporte="='".$bean->equipo_soporte_c."'";
-
-            if($bean->area_interna_c==''){
-                $area_interna='IS NULL';
-            }
-
-            if($bean->equipo_soporte_c==''){
-                $equipo_soporte='IS NULL';
-            }
-
-            $query="SELECT * FROM unifin_casos_soporte_area WHERE area_interna {$area_interna} AND equipo {$equipo_soporte}";
-
-            $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO");
-            $GLOBALS['log']->fatal($query);
-
-            $responsable="";
-            $asignado="";
-            
-            $result = $GLOBALS['db']->query($query);
-
-            $registros_encontrados=$result->num_rows;
-
-            $GLOBALS['log']->fatal("REGISTROS: ".$registros_encontrados);
-        
-            if($registros_encontrados>0){
-
-                while($row = $GLOBALS['db']->fetchByAssoc($result)){
-                    $id_registro=$row['id'];
-                    $responsable=$row['responsable'];
-                    $asignado=$row['responsable'];
-                    $ultimo_asignado=intval($row['ultimo_asignado_carrusel']);
+                $area_interna="='".$bean->area_interna_c."'";
+                $equipo_soporte="='".$bean->equipo_soporte_c."'";
     
-                    $asignacion_carrusel=($row['asignacion_carrousel']==1) ? true : false;
-                    $responsable_en_carrusel=($row['responsable_carrousel']==1) ? true : false;
-                    //Calculando el asignado, dependiendo si se tiene asignación en carrusel
-                    if($asignacion_carrusel){
-                        $usuarios_carrusel=$this->getUsersReportsTo($responsable);
-                        $GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
-
-                        if($responsable_en_carrusel){
-                            //Se toma en cuenta en el carrusel al usuario responsable, por lo tanto se pone al inicio de la lista de usuarios disponibles
-                            array_unshift($usuarios_carrusel,$responsable);
-                        }
-
-                        //Antes de asignar, se toma en cuenta el valor del último asignado
-                        $asignado=$usuarios_carrusel[$ultimo_asignado];
-                        
-                        $ultimo_asignado+=1;
-
-                        if($ultimo_asignado==count($usuarios_carrusel)){
-                            //En caso de que el contador llegue al mismo número de usuarios disponibles para asignación, se procede a reiniciar dicho contador
-                            $ultimo_asignado=0;
-                        }
-
-                        $queryUpdate="UPDATE unifin_casos_soporte_area SET ultimo_asignado_carrusel='{$ultimo_asignado}' WHERE id='{$id_registro}'";
-
-                        $resultUpdate=$GLOBALS['db']->query($queryUpdate);
-                    }
+                if($bean->area_interna_c==''){
+                    $area_interna='IS NULL';
                 }
+    
+                if($bean->equipo_soporte_c==''){
+                    $equipo_soporte='IS NULL';
+                }
+    
+                $query="SELECT * FROM unifin_casos_soporte_area WHERE area_interna {$area_interna} AND equipo {$equipo_soporte}";
+    
+                $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO");
+                $GLOBALS['log']->fatal($query);
+    
+                $responsable="";
+                $asignado="";
+                
+                $result = $GLOBALS['db']->query($query);
+    
+                $registros_encontrados=$result->num_rows;
+    
+                $GLOBALS['log']->fatal("REGISTROS: ".$registros_encontrados);
+            
+                if($registros_encontrados>0){
+    
+                    while($row = $GLOBALS['db']->fetchByAssoc($result)){
+                        $id_registro=$row['id'];
+                        $responsable=$row['responsable'];
+                        $asignado=$row['responsable'];
+                        $ultimo_asignado=intval($row['ultimo_asignado_carrusel']);
+        
+                        $asignacion_carrusel=($row['asignacion_carrousel']==1) ? true : false;
+                        $responsable_en_carrusel=($row['responsable_carrousel']==1) ? true : false;
+                        //Calculando el asignado, dependiendo si se tiene asignación en carrusel
+                        if($asignacion_carrusel){
+                            $usuarios_carrusel=$this->getUsersReportsTo($responsable);
+                            $GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
+    
+                            if($responsable_en_carrusel){
+                                //Se toma en cuenta en el carrusel al usuario responsable, por lo tanto se pone al inicio de la lista de usuarios disponibles
+                                array_unshift($usuarios_carrusel,$responsable);
+                            }
+    
+                            //Antes de asignar, se toma en cuenta el valor del último asignado
+                            $asignado=$usuarios_carrusel[$ultimo_asignado];
+                            
+                            $ultimo_asignado+=1;
+    
+                            if($ultimo_asignado==count($usuarios_carrusel)){
+                                //En caso de que el contador llegue al mismo número de usuarios disponibles para asignación, se procede a reiniciar dicho contador
+                                $ultimo_asignado=0;
+                            }
+    
+                            $queryUpdate="UPDATE unifin_casos_soporte_area SET ultimo_asignado_carrusel='{$ultimo_asignado}' WHERE id='{$id_registro}'";
+    
+                            $resultUpdate=$GLOBALS['db']->query($queryUpdate);
+                        }
+                    }
+    
+                }else{
+                    $responsable=$current_user->id;
+                    $asignado=$current_user->id;
+                }
+    
+                $bean->assigned_user_id=$responsable;
+                $bean->user_id_c=$asignado;
 
-            }else{
-                $responsable=$current_user->id;
-                $asignado=$current_user->id;
+                //ENVIANDO NOTIFICACIÓN
+                $notify_user = BeanFactory::retrieveBean('Users', $bean->assigned_user_id);
+                $admin = Administration::getSettings();
+
+                $xtpl= $this->createNotificationEmailTemplate("Case", $notify_user,$bean);
+                
+                $subject      = $xtpl->text("Case" . "_Subject");
+                $textBody     = trim($xtpl->text("Case"));
+                                
+                $this->enviarNotificacion($notify_user,$admin,$subject,$textBody);
+                
+            }
+        }
+        
+    }
+
+    public function createNotificationEmailTemplate($templateName, $notify_user = null,$bean)
+    {
+        global $sugar_config,
+               $current_user,
+               $sugar_version,
+            $locale;
+
+        if ($notify_user && !empty($notify_user->preferred_language)) {
+            $currentLanguage = $notify_user->preferred_language;
+        } else {
+            $currentLanguage = $locale->getAuthenticatedUserLanguage();
+        }
+
+        $xtpl = new XTemplate(get_notify_template_file($currentLanguage));
+
+        if (in_array('set_notification_body', get_class_methods($bean))) {
+            $xtpl = $this->set_notification_body($xtpl, $bean);
+            $GLOBALS['log']->fatal("IF DE FUNCIÓN DE ERROR");
+        } else {
+            //Default uses OBJECT key for both subject and body (see en_us.notify_template.html)
+            $singularModuleLabel = $GLOBALS['app_list_strings']['moduleListSingular']["Cases"];
+            $xtpl->assign("OBJECT", $singularModuleLabel);
+        }
+
+        $xtpl->assign("ASSIGNED_USER", $bean->assigned_user_name);
+        $xtpl->assign("ASSIGNER", $current_user->name);
+
+        $parsedSiteUrl = parse_url($sugar_config['site_url']);
+        $host          = $parsedSiteUrl['host'];
+
+        if (!isset($parsedSiteUrl['port'])) {
+            $parsedSiteUrl['port'] = 80;
+        }
+
+        $port		= ($parsedSiteUrl['port'] != 80) ? ":".$parsedSiteUrl['port'] : '';
+        $path       = isset($parsedSiteUrl['path']) ? rtrim($parsedSiteUrl['path'], '/') : '';
+        $cleanUrl	= "{$parsedSiteUrl['scheme']}://{$host}{$port}{$path}";
+
+        if (isModuleBWC("Cases")) {
+            $xtpl->assign("URL", $cleanUrl."/#bwc/index.php?module={$this->module_dir}&action=DetailView&record={$this->id}");
+        } else {
+            $xtpl->assign('URL', $cleanUrl . '/index.php#' . 'Cases' . '/' . $bean->id);
+        }
+
+        $xtpl->assign("SUGAR", "Sugar v{$sugar_version}");
+        $xtpl->parse($templateName);
+        $xtpl->parse($templateName . "_Subject");
+
+        return $xtpl;
+    }
+
+    public function set_notification_body($xtpl, $case)
+    {
+        global $app_list_strings;
+
+        $xtpl->assign("CASE_SUBJECT", $case->name);
+        $xtpl->assign(
+            "CASE_PRIORITY",
+            (isset($case->priority) ? $app_list_strings['case_priority_dom'][$case->priority]:""));
+        $xtpl->assign("CASE_STATUS", (isset($case->status) ? $app_list_strings['case_status_dom'][$case->status]:""));
+        $xtpl->assign("CASE_DESCRIPTION", $case->description);
+
+        return $xtpl;
+    }
+    public function enviarNotificacion($notify_user,$admin,$subject,$textBody){
+
+        try {
+            $mailer                   = $this->create_notification_email($notify_user);
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+
+            // by default, use the following admin settings for the From email header
+            $fromEmail = $admin->settings['notify_fromaddress'];
+            $fromName  = $admin->settings['notify_fromname'];
+
+            if (!empty($admin->settings['notify_send_from_assigning_user'])) {
+                // the "notify_send_from_assigning_user" admin setting is set
+                // use the current user's email address and name for the From email header
+                $usersEmail = $GLOBALS["current_user"]->emailAddress->getReplyToAddress($GLOBALS["current_user"]);
+                $usersName  = $GLOBALS["current_user"]->full_name;
+
+                // only use it if a valid email address is returned for the current user
+                if (!empty($usersEmail)) {
+                    $fromEmail = $usersEmail;
+                    $fromName = $usersName;
+                }
             }
 
-            $bean->assigned_user_id=$responsable;
-            $bean->user_id_c=$asignado;
+            // set the From and Reply-To email headers according to the values determined above (either default
+            // or current user)
+            $from = new EmailIdentity($fromEmail, $fromName);
+            $mailer->setHeader(EmailHeaders::From, $from);
+            $mailer->setHeader(EmailHeaders::ReplyTo, $from);
+
+            // set the subject of the email
+            $mailer->setSubject($subject);
+
+            // set the body of the email... looks to be plain-text only
+            $mailer->setTextBody($textBody);
+
+            // set html text of the email
+            /*
+            if ($htmlBody && !isTruthy($emailTemplate->text_only)) {
+                $mailer->setHtmlBody($htmlBody);
+            }
+            */
+
+            // add the recipient
+            $recipientEmailAddress = $notify_user->emailAddress->getPrimaryAddress($notify_user);
+            $recipientName         = $notify_user->full_name;
+
+            try {
+                $mailer->addRecipientsTo(new EmailIdentity($recipientEmailAddress, $recipientName));
+            } catch (MailerException $me) {
+                $GLOBALS['log']->warn("Notifications: no e-mail address set for user {$notify_user->user_name}, cancelling send");
+            }
+
+            $mailer->send();
+            $GLOBALS['log']->info("Notifications: e-mail successfully sent");
+        } catch (MailerException $me) {
+            $message = $me->getMessage();
+
+            switch ($me->getCode()) {
+                case MailerException::FailedToConnectToRemoteServer:
+                    $GLOBALS['log']->fatal("Notifications: error sending e-mail, smtp server was not found ");
+                    break;
+                default:
+                    $GLOBALS['log']->fatal("Notifications: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
+                    break;
+            }
         }
+
     }
+
+    protected function create_notification_email($notify_user) {
+        return MailerFactory::getSystemDefaultMailer();
+    }
+
 
     public function getUsersReportsTo($responsable){
 

@@ -24,3 +24,4 @@ $mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Detalle';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Comentarios';
 $mod_strings['LBL_RESOLVED_DATETIME'] = 'Fecha de conclusión';
 $mod_strings['LBL_EQUIPO_SOPORTE'] = 'Equipo de Soporte';
+$mod_strings['LBL_IGNORE_UPDATE_ASIGNADO'] = 'Ignora actualización';
