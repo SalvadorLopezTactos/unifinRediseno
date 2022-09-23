@@ -31,11 +31,11 @@ class GetProductosCuentas extends SugarApi
         ,concat(u3.first_name,' ',u3.last_name) as fullname_validacion2_c
         FROM (SELECT
             case
-                when up.tipo_producto = 1 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
-                when up.tipo_producto = 3 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
-                when up.tipo_producto = 4 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
-                when up.tipo_producto = 6 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
-                when up.tipo_producto = 8 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
+                when up.tipo_producto = 1 and (up.tipo_cuenta = 2 or up.tipo_cuenta = 3) then 1
+                when up.tipo_producto = 3 and (up.tipo_cuenta = 2 or up.tipo_cuenta = 3) then 1
+                when up.tipo_producto = 4 and (up.tipo_cuenta = 2 or up.tipo_cuenta = 3) then 1
+                when up.tipo_producto = 6 and (up.tipo_cuenta = 2 or up.tipo_cuenta = 3) then 1
+                when up.tipo_producto = 8 and (up.tipo_cuenta = 2 or up.tipo_cuenta = 3) then 1
                 else 0
             end 'visible_noviable', up.*, upc.*
             FROM accounts a

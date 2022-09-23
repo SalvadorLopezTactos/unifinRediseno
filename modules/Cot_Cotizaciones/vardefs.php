@@ -17,7 +17,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'fields' => array (
-  'statuscode' => 
+  'statuscode' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -44,7 +44,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'options' => 'statuscode_list',
     'dependency' => false,
   ),
-  'int_id_dynamics' => 
+  'int_id_dynamics' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -65,7 +65,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'merge_filter' => 'disabled',
     'pii' => false,
     'default' => '',
-    'full_text_search' => 
+    'full_text_search' =>
     array (
       'enabled' => '0',
       'boost' => '1',
@@ -75,7 +75,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'len' => '50',
     'size' => '20',
   ),
-  'int_indicativo' => 
+  'int_indicativo' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -102,7 +102,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'options' => 'int_indicativo_list',
     'dependency' => false,
   ),
-  'int_prima_neta' => 
+  'int_prima_neta' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -128,13 +128,13 @@ $dictionary['Cot_Cotizaciones'] = array(
     'size' => '20',
     'enable_range_search' => false,
     'precision' => 6,
-    'related_fields' => 
+    'related_fields' =>
     array (
       0 => 'currency_id',
       1 => 'base_rate',
     ),
   ),
-  'currency_id' => 
+  'currency_id' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -162,7 +162,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'function' => 'getCurrencies',
     'function_bean' => 'Currencies',
   ),
-  'base_rate' => 
+  'base_rate' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -190,13 +190,13 @@ $dictionary['Cot_Cotizaciones'] = array(
     'label' => 'LBL_CURRENCY_RATE',
     'studio' => false,
   ),
-  'int_comision_porcentaje' => 
+  'int_comision_porcentaje' =>
   array (
     'required' => false,
     'readonly' => false,
     'name' => 'int_comision_porcentaje',
     'vname' => 'LBL_INT_COMISION_PORCENTAJE',
-    'type' => 'int',
+    'type' => 'decimal',
     'massupdate' => true,
     'hidemassupdate' => false,
     'no_default' => false,
@@ -211,7 +211,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'merge_filter' => 'disabled',
     'pii' => false,
     'default' => '',
-    'full_text_search' => 
+    'full_text_search' =>
     array (
       'enabled' => '0',
       'boost' => '1',
@@ -225,7 +225,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'min' => false,
     'max' => false,
   ),
-  'int_comision' => 
+  'int_comision' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -251,19 +251,19 @@ $dictionary['Cot_Cotizaciones'] = array(
     'size' => '20',
     'enable_range_search' => false,
     'precision' => 6,
-    'related_fields' => 
+    'related_fields' =>
     array (
       0 => 'currency_id',
       1 => 'base_rate',
     ),
   ),
-  'int_porcentaje_comision_total' => 
+  'int_porcentaje_comision_total' =>
   array (
     'required' => false,
     'readonly' => false,
     'name' => 'int_porcentaje_comision_total',
     'vname' => 'LBL_INT_PORCENTAJE_COMISION_TOTAL',
-    'type' => 'int',
+    'type' => 'decimal',
     'massupdate' => true,
     'hidemassupdate' => false,
     'no_default' => false,
@@ -278,7 +278,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'merge_filter' => 'disabled',
     'pii' => false,
     'default' => '',
-    'full_text_search' => 
+    'full_text_search' =>
     array (
       'enabled' => '0',
       'boost' => '1',
@@ -292,13 +292,13 @@ $dictionary['Cot_Cotizaciones'] = array(
     'min' => false,
     'max' => false,
   ),
-  'int_porcentaje_sobrecomision' => 
+  'int_porcentaje_sobrecomision' =>
   array (
     'required' => false,
     'readonly' => false,
     'name' => 'int_porcentaje_sobrecomision',
     'vname' => 'LBL_INT_PORCENTAJE_SOBRECOMISION',
-    'type' => 'int',
+    'type' => 'decimal',
     'massupdate' => true,
     'hidemassupdate' => false,
     'no_default' => false,
@@ -313,7 +313,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'merge_filter' => 'disabled',
     'pii' => false,
     'default' => '',
-    'full_text_search' => 
+    'full_text_search' =>
     array (
       'enabled' => '0',
       'boost' => '1',
@@ -327,13 +327,13 @@ $dictionary['Cot_Cotizaciones'] = array(
     'min' => false,
     'max' => false,
   ),
-  'int_comision_documento' => 
+  'int_comision_documento' =>
   array (
     'required' => false,
     'readonly' => false,
     'name' => 'int_comision_documento',
     'vname' => 'LBL_INT_COMISION_DOCUMENTO',
-    'type' => 'int',
+    'type' => 'decimal',
     'massupdate' => true,
     'hidemassupdate' => false,
     'no_default' => false,
@@ -348,7 +348,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'merge_filter' => 'disabled',
     'pii' => false,
     'default' => '',
-    'full_text_search' => 
+    'full_text_search' =>
     array (
       'enabled' => '0',
       'boost' => '1',
@@ -362,7 +362,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'min' => false,
     'max' => false,
   ),
-  'int_honorarios_fee' => 
+  'int_honorarios_fee' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -388,13 +388,13 @@ $dictionary['Cot_Cotizaciones'] = array(
     'size' => '20',
     'enable_range_search' => false,
     'precision' => 6,
-    'related_fields' => 
+    'related_fields' =>
     array (
       0 => 'currency_id',
       1 => 'base_rate',
     ),
   ),
-  'int_honorarios_fee_porcentaje' => 
+  'int_honorarios_fee_porcentaje' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -415,7 +415,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'merge_filter' => 'disabled',
     'pii' => false,
     'default' => '',
-    'full_text_search' => 
+    'full_text_search' =>
     array (
       'enabled' => '0',
       'boost' => '1',
@@ -429,7 +429,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'min' => false,
     'max' => false,
   ),
-  'int_udi' => 
+  'int_udi' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -450,7 +450,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'merge_filter' => 'disabled',
     'pii' => false,
     'default' => '',
-    'full_text_search' => 
+    'full_text_search' =>
     array (
       'enabled' => '0',
       'boost' => '1',
@@ -464,7 +464,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'min' => false,
     'max' => false,
   ),
-  'int_reaseguro' => 
+  'int_reaseguro' =>
   array (
     'required' => false,
     'readonly' => false,
@@ -491,7 +491,7 @@ $dictionary['Cot_Cotizaciones'] = array(
     'options' => 'int_indicativo_list',
     'dependency' => false,
   ),
-  'int_coaseguro' => 
+  'int_coaseguro' =>
   array (
     'required' => false,
     'readonly' => false,
