@@ -211,7 +211,7 @@
                     var roles=data.roles;
                     var roles_que_pueden_completar=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
 
-                    if(roles.includes('Operativo') || roles.includes('Directivos')){
+                    if(user_log == usuario_creador && roles.includes('Operativo') || roles.includes('Directivos')){
                         app.alert.show('error_finaliza_comercial', {
                             level: 'error',
                             messages: 'No tienes permiso para finalizar este ticket',
