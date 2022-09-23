@@ -210,6 +210,16 @@
                     var user_log=App.user.id;
                     var roles=data.roles;
                     var roles_que_pueden_completar=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+
+                    if(roles.includes('Operativo') || roles.includes('Directivos')){
+                        app.alert.show('error_finaliza_comercial', {
+                            level: 'error',
+                            messages: 'No tienes permiso para finalizar este ticket',
+                            autoClose: false
+                        });
+                        return;
+                    }
+
                     if(user_log != self.model.get("assigned_user_id") && user_log != self.model.get('created_by') && user_log != reporta_a){
                         app.alert.show('error_finaliza', {
                             level: 'error',
