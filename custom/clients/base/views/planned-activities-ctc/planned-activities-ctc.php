@@ -176,6 +176,8 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
+                'parent_id',
+                'parent_name',
             ),
         ),
         array(
@@ -221,6 +223,8 @@ $viewdefs['base']['view']['planned-activities-ctc'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
+                'parent_id',
+                'parent_name',
             ),
         ),
     ),
