@@ -41,16 +41,15 @@
                 <div style="width:100%;text-align: right;margin-right:10px">
                     <span style="background-color:white">
                         <div class="dropdown-field">
-                            <span><i class="fa fa-solid fa-sort sortInteresado" modo-ordenamiento="DESC"></i></span>
-                            <ul>
-                                <li data-value="MA">Monto Asc</li>
-                                <li data-value="MD">Monto Desc</li>
-                                <li data-value="NA">Nombre Asc</li>
-                                <li data-value="ND">Nombre Desc</li>
+                            <ul data-columna="Prospecto_Interesado">
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Interesado" data-value="MA">Monto Asc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Interesado" data-value="MD">Monto Desc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Interesado" data-value="NA">Nombre Asc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Interesado" data-value="ND">Nombre Desc</li>
                             </ul>
                             <input type="hidden" name="myfield" value="">
                         </div>
-                        
+                        <span><i class="fa fa-solid fa-sort sortInteresado" modo-ordenamiento="DESC"></i></span>
                     </span>
                 </div>
                 <div class="cantidad-interesado  contenedor-cantidad">

@@ -6,7 +6,8 @@
         'click .fa-star':'setFavorite',
         'click .closeChecklist':'closeChecklist',
         'click .sortInteresado':'ordenaInteresado',
-        'click .dropdown-field':'dropdownFieldStyle'
+        'click .dropdown-field':'dropdownFieldStyle',
+        'click .ordenamiento_categoria':'ordenamientoPorTipo'
     },
 
     initialize: function (options) {
@@ -161,11 +162,48 @@
                     var indice=contextoKanban.searchIndexFavorite(contextoKanban.idRegistroGlobal,contextoKanban.registrosKanban[contextoKanban.columna].Registros);
                     //Una vez encontrado el índice, se forza a establecer valor a Favorito para que éste se pueda ordenar
                     contextoKanban.registrosKanban[contextoKanban.columna].Registros[indice].Favorito=null;
-                    var valorColumna=contextoKanban.columna;
                     //Ordenando por favorito y después por nombre
-                    contextoKanban.registrosKanban[valorColumna].Registros.sort((a, b) => {
-                        return b.Favorito - a.Favorito;
-                    });
+                    var favoritos=[];
+                    var no_favoritos=[];
+                    for (let index = 0; index < contextoKanban.registrosKanban[contextoKanban.columna].Registros.length; index++) {
+                        if(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index].Favorito != null){
+                            favoritos.push(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index]);
+                        }else{
+                            no_favoritos.push(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index]);
+                        }
+                    }
+
+                    //Ordenando los Favoritos
+                    if(favoritos.length>0){
+                        favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+
+                    if(no_favoritos.length>0){
+                        no_favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+                    
+                    var registros=favoritos.concat(no_favoritos);
+                    contextoKanban.registrosKanban[contextoKanban.columna].Registros=registros;
                     contextoKanban.render();
                 },
                 error: function (e) {
@@ -195,13 +233,13 @@
             if(modoOrdenamiento=='DESC'){
                 valorOrdenamiento="ASC";
                 this.registrosKanban.Prospecto_Interesado.Registros.sort((a, b) => {
-                    return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - Number(b.Monto_Cuenta.replace(/,/g, ''));
+                    return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
                 });
             
             }else{
                 valorOrdenamiento="DESC";
                 this.registrosKanban.Prospecto_Interesado.Registros.sort((a, b) => {
-                    return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - Number(a.Monto_Cuenta.replace(/,/g, ''));
+                    return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
                 });
             }
 
@@ -219,6 +257,68 @@
             $this.children('span').html($target.text());
             $this.find('input[type="hidden"]').val($target.attr('data-value'));
         }
+    },
+
+    ordenamientoPorTipo:function(e){
+        console.log("ordenamientoo");
+        var tipo_ordenamiento=$(e.currentTarget).attr('data-value');
+        var columna=$(e.currentTarget).attr('data-columna');
+        var registros=this.ordenaRegistros(contextoKanban.registrosKanban,columna,tipo_ordenamiento);
+
+        contextoKanban.registrosKanban[columna].Registros=registros;
+        this.render();
+    },
+
+    ordenaRegistros:function(arreglo,columna, tipo){
+        var return_registros=[];
+        //MA : Monto Ascendente, MD: Monto Descendente
+        //NA : Nombre Ascendente, ND: Nombre Descendente
+        switch (tipo) {
+            case 'MA':
+                return_registros=arreglo[columna].Registros.sort((a, b) => {
+                    return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
+                });
+                break;
+            
+            case 'MD':
+                return_registros=arreglo[columna].Registros.sort((a, b) => {
+                    return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
+                });
+                break;
+            
+            case 'NA':
+                return_registros=arreglo[columna].Registros.sort((a,b) =>{
+                    const nameA = a.Nombre.toUpperCase().trim();
+                    const nameB = b.Nombre.toUpperCase().trim();
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                break;
+            case 'ND':
+                return_registros=arreglo[columna].Registros.sort((a, b) => {
+                    const nameA = a.Nombre.toUpperCase().trim();
+                    const nameB = b.Nombre.toUpperCase().trim();
+                    if (nameA < nameB) {
+                        return 1;
+                    }
+                    if (nameA > nameB) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                break;
+            default:
+                return_registros=arreglo[columna].Registros;
+                break;
+        }
+
+        return return_registros;
+
     }
 
 })
