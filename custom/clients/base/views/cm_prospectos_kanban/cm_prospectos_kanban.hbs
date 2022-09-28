@@ -37,7 +37,7 @@
             <div class="header-datos">
                     <div>
                     <p>{{registrosKanban.Prospecto_Interesado.Total_Registros}} Registro(s)</p>
-                </div>
+                    </div>
                 <div style="width:100%;text-align: right;margin-right:10px">
                     <span style="background-color:white">
                         <div class="dropdown-field">
@@ -49,7 +49,7 @@
                             </ul>
                             <input type="hidden" name="myfield" value="">
                         </div>
-                        <span><i class="fa fa-solid fa-sort sortInteresado" modo-ordenamiento="DESC"></i></span>
+                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Prospecto_Interesado"></i></span>
                     </span>
                 </div>
                 <div class="cantidad-interesado  contenedor-cantidad">
@@ -70,7 +70,18 @@
                     <p>{{registrosKanban.Prospecto_Integracion_Expediente.Total_Registros}} Registro(s)</p>
                 </div>
                 <div style="width:100%;text-align: right;margin-right:10px">
-                    <span style="background-color:white"><i class="fa fa-solid fa-sort"></i></span>
+                    <span style="background-color:white">
+                        <div class="dropdown-field">
+                            <ul data-columna="Prospecto_Integracion_Expediente">
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Integracion_Expediente" data-value="MA">Monto Asc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Integracion_Expediente" data-value="MD">Monto Desc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Integracion_Expediente" data-value="NA">Nombre Asc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Integracion_Expediente" data-value="ND">Nombre Desc</li>
+                            </ul>
+                            <input type="hidden" name="myfield" value="">
+                        </div>
+                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Prospecto_Integracion_Expediente"></i></span>
+                    </span>
                 </div>
                 <div class="cantidad-integracion contenedor-cantidad">
                     <p><span>$</span>{{registrosKanban.Prospecto_Integracion_Expediente.Total_Monto}}</p>
@@ -89,10 +100,21 @@
                 <div>
                     <p>{{registrosKanban.Prospecto_Credito.Total_Registros}} Registro(s)</p>
                 </div>
+                <div style="width:100%;text-align: right;margin-right:10px">
+                    <span style="background-color:white">
+                        <div class="dropdown-field">
+                            <ul data-columna="Prospecto_Credito">
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Credito" data-value="MA">Monto Asc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Credito" data-value="MD">Monto Desc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Credito" data-value="NA">Nombre Asc</li>
+                                <li class="ordenamiento_categoria" data-columna="Prospecto_Credito" data-value="ND">Nombre Desc</li>
+                            </ul>
+                            <input type="hidden" name="myfield" value="">
+                        </div>
+                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Prospecto_Credito"></i></span>
+                    </span>
+                </div>
                 <div class="cantidad-credito contenedor-cantidad">
-                    <div style="width:100%;text-align: right;margin-right:10px">
-                        <span style="background-color:white"><i class="fa fa-solid fa-sort"></i></span>
-                    </div>
                     <p><span>$</span>{{registrosKanban.Prospecto_Credito.Total_Monto}}</p>
                 </div>
             </div>

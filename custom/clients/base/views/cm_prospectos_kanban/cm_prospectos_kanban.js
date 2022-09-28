@@ -5,7 +5,7 @@
         'click .contenedor-item': 'muestraChecklist',
         'click .fa-star':'setFavorite',
         'click .closeChecklist':'closeChecklist',
-        'click .sortInteresado':'ordenaInteresado',
+        'click .sortTipo':'ordenaMonto',
         'click .dropdown-field':'dropdownFieldStyle',
         'click .ordenamiento_categoria':'ordenamientoPorTipo'
     },
@@ -226,27 +226,29 @@
         return indice;
 
     },
-    ordenaInteresado:function(e){
+
+    ordenaMonto:function(e){
         var modoOrdenamiento=$(e.currentTarget).attr('modo-ordenamiento');
+        var columna=$(e.currentTarget).attr('data-columna');
         var valorOrdenamiento="";
-        if(this.registrosKanban.Prospecto_Interesado.Registros.length>0){
+        if(this.registrosKanban[columna].Registros.length>0){
             if(modoOrdenamiento=='DESC'){
                 valorOrdenamiento="ASC";
-                this.registrosKanban.Prospecto_Interesado.Registros.sort((a, b) => {
+                this.registrosKanban[columna].Registros.sort((a, b) => {
                     return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
                 });
             
             }else{
                 valorOrdenamiento="DESC";
-                this.registrosKanban.Prospecto_Interesado.Registros.sort((a, b) => {
+                this.registrosKanban[columna].Registros.sort((a, b) => {
                     return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
                 });
             }
 
             this.render();
-            $('.sortInteresado').attr('modo-ordenamiento',valorOrdenamiento)
-        }        
-
+            //$(e.target).attr('modo-ordenamiento',valorOrdenamiento);
+            $('[data-columna="'+columna+'"].sortTipo').attr('modo-ordenamiento',valorOrdenamiento)
+        }      
     },
 
     dropdownFieldStyle:function(e){
