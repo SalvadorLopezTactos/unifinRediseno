@@ -210,6 +210,16 @@
                     var user_log=App.user.id;
                     var roles=data.roles;
                     var roles_que_pueden_completar=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+
+                    if(user_log == usuario_creador && roles.includes('Operativo') || roles.includes('Directivos')){
+                        app.alert.show('error_finaliza_comercial', {
+                            level: 'error',
+                            messages: 'No tienes permiso para finalizar este ticket',
+                            autoClose: false
+                        });
+                        return;
+                    }
+
                     if(user_log != self.model.get("assigned_user_id") && user_log != self.model.get('created_by') && user_log != reporta_a){
                         app.alert.show('error_finaliza', {
                             level: 'error',
@@ -478,9 +488,11 @@
 
         if(tieneRolComercial>0){
             var lista_productos= app.lang.getAppListStrings('casos_productos_list');
+            var producto_actual=this.model.get('producto_c');
+
             //A los usuarios con rol comercial (Operativo y Directivos), solo se les muestra el Producto "Seguimiento Comercial"
             Object.keys(lista_productos).forEach(function (key) {
-                if(key !="SC6"){
+                if(key !="SC6" && key != producto_actual){
                     delete lista_productos[key];
                 }
             });
@@ -489,12 +501,13 @@
             var campo_producto=this.getField('producto_c');
             campo_producto.items=lista_productos;
             //campo_producto.render();
-            this.model.set('producto_c','SC6');
+            this.model.set('producto_c',producto_actual);
 
             //A los usuarios con rol comercial (Operativo y Directivos),en el campo de área interna, se muestra por default el valor "Crédito"
             var area_interna_list= app.lang.getAppListStrings('area_interna_list');
+            var area_interna_actual=this.model.get('area_interna_c');
             Object.keys(area_interna_list).forEach(function (key) {
-                if(key !="Credito"){
+                if(key !="Credito" && key !=area_interna_actual){
                     delete area_interna_list[key];
                 }
             });
@@ -504,7 +517,7 @@
             campo_area_interna.items=area_interna_list;
             //campo_area_interna.render();
             
-            this.model.set('area_interna_c','Credito');
+            this.model.set('area_interna_c',area_interna_actual);
 
             this._render();
         }
@@ -519,9 +532,9 @@
 
         if(esCAC){
             var lista_productos_cac= app.lang.getAppListStrings('casos_productos_list');
-            //A los usuarios con rol comercial (Operativo y Directivos), solo se les muestra el Producto "Seguimiento Comercial"
+            var producto_actual=this.model.get('producto_c');
             Object.keys(lista_productos_cac).forEach(function (key) {
-                if(key =="CP5"){
+                if(key =="CP5" && key != producto_actual){
                     delete lista_productos_cac[key];
                 }
             });
@@ -541,9 +554,10 @@
 
         if(roles.includes(nombreRol)){
             var lista_productos_asesores_credito= app.lang.getAppListStrings('casos_productos_list');
+            var producto_actual=this.model.get('producto_c');
             //A los usuarios con rol comercial (Operativo y Directivos), solo se les muestra el Producto "Seguimiento Comercial"
             Object.keys(lista_productos_asesores_credito).forEach(function (key) {
-                if(key !="CP5"){
+                if(key !="CP5" && key != producto_actual){
                     delete lista_productos_asesores_credito[key];
                 }
             });
@@ -552,7 +566,7 @@
             var campo_producto=this.getField('producto_c');
             campo_producto.items=lista_productos_asesores_credito;
             campo_producto.render();
-            this.model.set('producto_c',"CP5");
+            this.model.set('producto_c',producto_actual);
         }
     }
 

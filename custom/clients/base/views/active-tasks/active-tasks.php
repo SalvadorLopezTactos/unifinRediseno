@@ -152,6 +152,8 @@ $viewdefs['base']['view']['active-tasks'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_due',
+                'parent_id',
+                'parent_name',
             ),
         ),
         array(
@@ -189,6 +191,8 @@ $viewdefs['base']['view']['active-tasks'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_due',
+                'parent_id',
+                'parent_name',
             ),
         ),
         array(
@@ -225,6 +229,8 @@ $viewdefs['base']['view']['active-tasks'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_entered',
+                'parent_id',
+                'parent_name',
             ),
         ),
     ),

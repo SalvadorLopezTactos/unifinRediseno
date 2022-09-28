@@ -212,6 +212,51 @@ array (
           ),
           2 => 
           array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'readonly' => false,
+                'name' => 'divisa_c',
+                'label' => 'LBL_DIVISA',
+              ),
+              1 => 
+              array (
+                'readonly' => false,
+                'name' => 'tipo_clave_c',
+                'label' => 'LBL_TIPO_CLAVE',
+              ),
+              2 => 
+              array (
+                'readonly' => false,
+                'name' => 'forma_pago_c',
+                'label' => 'LBL_FORMA_PAGO',
+              ),
+              3 => 
+              array (
+                'readonly' => false,
+                'name' => 'regimen_cuenta_c',
+                'label' => 'LBL_REGIMEN_CUENTA',
+              ),
+              4 => 
+              array (
+                'readonly' => false,
+                'name' => 'domiciliacion_c',
+                'label' => 'LBL_DOMICILIACION',
+              ),
+              5 => 
+              array (
+              ),
+            ),
+          ),
+          3 => 
+          array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,
