@@ -895,6 +895,14 @@ SQL;
 
         $array_principal=array();
         $grandTotal=0;
+        $totalSinContactar=0;
+        $totalContactado=0;
+        $totalInteresado=0;
+        $totalIntExp=0;
+        $totalCredito=0;
+        $totalSinOperar=0;
+        $totalActivo=0;
+        $totalPerdido=0;
 
         //Obtener los ids de los usuarios pertencientes a $equipo
         $queryUsuarios="SELECT id,concat(u.first_name,' ',u.last_name) nombre_usuario, uc.equipo_c FROM users u
@@ -984,7 +992,7 @@ SQL;
                 $tipo=$filaRegistros['tipo_registro'];
                 $subtipo=$filaRegistros['subtipo_registro'];
                 
-                $grandTotal++;
+                //$grandTotal++;
                 
                 //Lead sin Contactar
                 if($tipo=='1' && $subtipo=='1'){
@@ -1046,7 +1054,6 @@ SQL;
                                     }
                                 }
                             }
-    
                         }
 
                         //Cliente con linea sin operar
@@ -1083,6 +1090,21 @@ SQL;
                 $total_clientes_perdidos
             );
 
+            $total_asignados=$total_leads_sin_contactar + $total_prospectos_contactados + $total_prospectos_interesados + $total_prospectos_int_exp + $total_prospectos_credito + $total_clientes_linea_sin_operar + $total_clientes_activos + $total_clientes_perdidos;
+
+            $array_usuario["TotalAsignados"]=$total_asignados;
+
+            $grandTotal+=$total_asignados;
+
+            $totalSinContactar += $total_leads_sin_contactar;
+            $totalContactado += $total_prospectos_contactados;
+            $totalInteresado += $total_prospectos_interesados;
+            $totalIntExp += $total_prospectos_int_exp;
+            $totalCredito += $total_prospectos_credito;
+            $totalSinOperar += $total_clientes_linea_sin_operar;
+            $totalActivo += $total_clientes_activos;
+            $totalPerdido += $total_clientes_perdidos;
+
             array_push($array_principal,$array_usuario);
 
         }//Termina while de obtención de Usuarios
@@ -1090,11 +1112,19 @@ SQL;
         if($esRegional){
             $array_principal=array();
             foreach ($array_equipo as $key => $value) {
-                $array_principal[]=array("Registros"=>$value,"Usuario"=>$key);
+                $array_principal[]=array("Registros"=>$value,"Usuario"=>$key,"TotalAsignados"=>$total_asignados);
             }
         }
 
         $array_principal["Total"]=$grandTotal;
+        $array_principal["TotalSinContactar"]=$totalSinContactar;
+        $array_principal["TotalContactado"]=$totalContactado;
+        $array_principal["TotalInteresado"]=$totalInteresado;
+        $array_principal["TotalIntExp"]=$totalIntExp;
+        $array_principal["TotalCredito"]=$totalCredito;
+        $array_principal["TotalSinOperar"]=$totalSinOperar;
+        $array_principal["TotalActivo"]=$totalActivo;
+        $array_principal["TotalPerdido"]=$totalPerdido;
         
         return $array_principal;
 

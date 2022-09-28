@@ -4,7 +4,10 @@
     events: {
         'click .contenedor-item': 'muestraChecklist',
         'click .fa-star':'setFavorite',
-        'click .closeChecklist':'closeChecklist'
+        'click .closeChecklist':'closeChecklist',
+        'click .sortTipo':'ordenaMonto',
+        'click .dropdown-field':'dropdownFieldStyle',
+        'click .ordenamiento_categoria':'ordenamientoPorTipo'
     },
 
     initialize: function (options) {
@@ -113,8 +116,10 @@
 
     setFavorite:function(e){
         var id=$(e.currentTarget).attr('data-id');
+        contextoKanban.idRegistroGlobal=id;
         var estilo=$(e.currentTarget).attr('style');
         var modulo=$(e.currentTarget).attr('data-modulo');
+        contextoKanban.columna=$(e.currentTarget).attr('data-columna');
 
         if(estilo==undefined){//Establece como favorito
             $(e.currentTarget).attr('style','color: #3399FF');
@@ -126,7 +131,16 @@
             app.api.call('update', app.api.buildURL(modulo+'/'+id+'/favorite'), null, {
                 success: function (data) {
                     App.alert.dismiss('setFavorite');    
-                    //self.render();
+                    //Una vez establecido como favorito, se procede a buscar en el arreglo que se pinta para poder ubicar el indice y poder actualizar el valor a la clave "Favorito"
+                    var indice=contextoKanban.searchIndexFavorite(contextoKanban.idRegistroGlobal,contextoKanban.registrosKanban[contextoKanban.columna].Registros);
+                    //Una vez encontrado el índice, se forza a establecer valor a Favorito para que éste se pueda ordenar
+                    contextoKanban.registrosKanban[contextoKanban.columna].Registros[indice].Favorito='1';
+                    var valorColumna=contextoKanban.columna;
+
+                    contextoKanban.registrosKanban[valorColumna].Registros.sort((a, b) => {
+                        return b.Favorito - a.Favorito;
+                    });
+                    contextoKanban.render();
                 },
                 error: function (e) {
                     throw e;
@@ -143,7 +157,54 @@
             app.api.call('update', app.api.buildURL(modulo+'/'+id+'/unfavorite'), null, {
                 success: function (data) {
                     App.alert.dismiss('quitFavorite');
-                    //self.render();
+                    
+                    //Una vez establecido como favorito, se procede a buscar en el arreglo que se pinta para poder ubicar el indice y poder actualizar el valor a la clave "Favorito"
+                    var indice=contextoKanban.searchIndexFavorite(contextoKanban.idRegistroGlobal,contextoKanban.registrosKanban[contextoKanban.columna].Registros);
+                    //Una vez encontrado el índice, se forza a establecer valor a Favorito para que éste se pueda ordenar
+                    contextoKanban.registrosKanban[contextoKanban.columna].Registros[indice].Favorito=null;
+                    //Ordenando por favorito y después por nombre
+                    var favoritos=[];
+                    var no_favoritos=[];
+                    for (let index = 0; index < contextoKanban.registrosKanban[contextoKanban.columna].Registros.length; index++) {
+                        if(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index].Favorito != null){
+                            favoritos.push(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index]);
+                        }else{
+                            no_favoritos.push(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index]);
+                        }
+                    }
+
+                    //Ordenando los Favoritos
+                    if(favoritos.length>0){
+                        favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+
+                    if(no_favoritos.length>0){
+                        no_favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+                    
+                    var registros=favoritos.concat(no_favoritos);
+                    contextoKanban.registrosKanban[contextoKanban.columna].Registros=registros;
+                    contextoKanban.render();
                 },
                 error: function (e) {
                     throw e;
@@ -151,6 +212,114 @@
             });
         }
         
+
+    },
+
+    searchIndexFavorite:function(id,arreglo){
+        var indice=null;
+        for (let index = 0; index < arreglo.length; index++) {
+            if(arreglo[index].Id==id){
+                indice=index;
+                index=arreglo.length;
+            }
+        }
+        return indice;
+
+    },
+
+    ordenaMonto:function(e){
+        var modoOrdenamiento=$(e.currentTarget).attr('modo-ordenamiento');
+        var columna=$(e.currentTarget).attr('data-columna');
+        var valorOrdenamiento="";
+        if(this.registrosKanban[columna].Registros.length>0){
+            if(modoOrdenamiento=='DESC'){
+                valorOrdenamiento="ASC";
+                this.registrosKanban[columna].Registros.sort((a, b) => {
+                    return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
+                });
+            
+            }else{
+                valorOrdenamiento="DESC";
+                this.registrosKanban[columna].Registros.sort((a, b) => {
+                    return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
+                });
+            }
+
+            this.render();
+            //$(e.target).attr('modo-ordenamiento',valorOrdenamiento);
+            $('[data-columna="'+columna+'"].sortTipo').attr('modo-ordenamiento',valorOrdenamiento)
+        }      
+    },
+
+    dropdownFieldStyle:function(e){
+        var $this = $(e.currentTarget);
+        $this.children('ul').slideToggle(100);
+        var $target = $(e.target);
+        if ($target.is('li')) {
+            $this.children('span').html($target.text());
+            $this.find('input[type="hidden"]').val($target.attr('data-value'));
+        }
+    },
+
+    ordenamientoPorTipo:function(e){
+        console.log("ordenamientoo");
+        var tipo_ordenamiento=$(e.currentTarget).attr('data-value');
+        var columna=$(e.currentTarget).attr('data-columna');
+        var registros=this.ordenaRegistros(contextoKanban.registrosKanban,columna,tipo_ordenamiento);
+
+        contextoKanban.registrosKanban[columna].Registros=registros;
+        this.render();
+    },
+
+    ordenaRegistros:function(arreglo,columna, tipo){
+        var return_registros=[];
+        //MA : Monto Ascendente, MD: Monto Descendente
+        //NA : Nombre Ascendente, ND: Nombre Descendente
+        switch (tipo) {
+            case 'MA':
+                return_registros=arreglo[columna].Registros.sort((a, b) => {
+                    return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
+                });
+                break;
+            
+            case 'MD':
+                return_registros=arreglo[columna].Registros.sort((a, b) => {
+                    return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
+                });
+                break;
+            
+            case 'NA':
+                return_registros=arreglo[columna].Registros.sort((a,b) =>{
+                    const nameA = a.Nombre.toUpperCase().trim();
+                    const nameB = b.Nombre.toUpperCase().trim();
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                break;
+            case 'ND':
+                return_registros=arreglo[columna].Registros.sort((a, b) => {
+                    const nameA = a.Nombre.toUpperCase().trim();
+                    const nameB = b.Nombre.toUpperCase().trim();
+                    if (nameA < nameB) {
+                        return 1;
+                    }
+                    if (nameA > nameB) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                break;
+            default:
+                return_registros=arreglo[columna].Registros;
+                break;
+        }
+
+        return return_registros;
 
     }
 
