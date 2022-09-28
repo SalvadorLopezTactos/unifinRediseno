@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="custom/clients/base/views/cm_clientes_kanban/styles/styles.css">
-<div class="contenedor-grid">
+<div class="contenedor-grid-clientes">
     <div class="contenedor-conLinea color-white">
         <div class="contenedor-header">
         <div class="header-column">
@@ -9,6 +9,20 @@
             <div class="header-datos">
                 <div>
                     <p>{{registrosKanbanClientes.Cliente_Linea_Sin_Operar.Total_Registros}} Registro(s)</p>
+                </div>
+                <div style="width:100%;display:flex;align-items: center;justify-content: center;">
+                    <div class="dropdown-field-clientes" style="width:70%;">
+                        <ul data-columna="Cliente_Linea_Sin_Operar">
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Linea_Sin_Operar" data-value="MA">Monto Asc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Linea_Sin_Operar" data-value="MD">Monto Desc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Linea_Sin_Operar" data-value="NA">Nombre Asc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Linea_Sin_Operar" data-value="ND">Nombre Desc</li>
+                        </ul>
+                        <input type="hidden" name="myfield" value="">
+                    </div>
+                    <div style="background-color:white;">
+                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Cliente_Linea_Sin_Operar"></i></span>
+                    </div>    
                 </div>
                 <div class="cantidad-conLinea contenedor-cantidad">
                     <p><span>$</span>{{registrosKanbanClientes.Cliente_Linea_Sin_Operar.Total_Monto}}</p>
@@ -27,6 +41,20 @@
                <div>
                     <p>{{registrosKanbanClientes.Cliente_Activo.Total_Registros}} Registro(s)</p>
                 </div>
+                <div style="width:100%;display:flex;align-items: center;justify-content: center;">
+                    <div class="dropdown-field-clientes" style="width:70%;">
+                        <ul data-columna="Cliente_Activo">
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Activo" data-value="MA">Monto Asc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Activo" data-value="MD">Monto Desc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Activo" data-value="NA">Nombre Asc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Activo" data-value="ND">Nombre Desc</li>
+                        </ul>
+                        <input type="hidden" name="myfield" value="">
+                    </div>
+                    <div style="background-color:white;">
+                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Cliente_Activo"></i></span>
+                    </div>
+                </div>
                 <div class="contenedor-cantidad cantidad-activo">
                     <p><span>$</span>{{registrosKanbanClientes.Cliente_Activo.Total_Monto}}</p>
                 </div>
@@ -43,6 +71,20 @@
             <div class="header-datos">
                 <div>
                     <p>{{registrosKanbanClientes.Cliente_Perdido.Total_Registros}} Registro(s)</p>
+                </div>
+                <div style="width:100%;display:flex;align-items: center;justify-content: center;">
+                    <div class="dropdown-field-clientes" style="width:70%;">
+                        <ul data-columna="Cliente_Perdido">
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Perdido" data-value="MA">Monto Asc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Perdido" data-value="MD">Monto Desc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Perdido" data-value="NA">Nombre Asc</li>
+                            <li class="ordenamiento_categoria" data-columna="Cliente_Perdido" data-value="ND">Nombre Desc</li>
+                        </ul>
+                        <input type="hidden" name="myfield" value="">
+                    </div>
+                    <div style="background-color:white;">
+                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Cliente_Perdido"></i></span>
+                    </div>
                 </div>
                 <div class="contenedor-cantidad cantidad-perdido">
                     <p><span>$</span>{{registrosKanbanClientes.Cliente_Perdido.Total_Monto}}</p>
@@ -68,7 +110,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Cliente_Linea_Sin_Operar" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
@@ -102,7 +144,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Cliente_Activo" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
@@ -136,7 +178,7 @@
                             </p>
                         </div>
                     </div>
-                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
+                    <i class="fa fa-star" data-id="{{Id}}" data-modulo="{{Modulo}}" data-columna="Cliente_Perdido" {{#if Favorito}}style="color: #3399FF"{{/if}}></i>
                     <div class="cuadrado">
                         <p>{{Dias_Etapa}}</p>
                     </div>
