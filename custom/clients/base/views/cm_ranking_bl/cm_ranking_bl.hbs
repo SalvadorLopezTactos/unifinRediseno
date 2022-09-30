@@ -1,0 +1,321 @@
+<link rel="stylesheet" href="custom/clients/base/views/cm_ranking_bl/styles/styles.css">
+<div class="contenedor-grid-ranking">
+    <div class="contenedor-tipo color-white border-right-bl">
+        <div class="contenedor-header">
+            <div class="header-column" align="center">
+                <h5>Prospecto</h5>
+            </div>
+            <div class="container-header">
+                <div class="padding">
+                    <p style="color:black">$ {{customFormatNumber registrosRankingBL.Prospecto.SumaBLS}}</p>
+                </div>
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Prospecto" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Prospecto" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
+                    <img src="custom/include/images/sort_icon.svg" width="20" height="20">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-tipo color-white border-right-bl">
+        <div class="contenedor-header">
+            <div class="header-column" align="center">
+                <h5>Devuelta</h5>
+            </div>
+            <div class="container-header">
+                <div class="padding">
+                    <p style="color:black">$ {{customFormatNumber registrosRankingBL.Devuelta.SumaBLS}}</p>
+                </div>
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Devuelta" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Devuelta" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
+                    <img src="custom/include/images/sort_icon.svg" width="20" height="20">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-tipo color-white border-right-bl">
+        <div class="contenedor-header">
+            <div class="header-column" align="center">
+                    <h5>Crédito</h5>
+            </div>
+            <div class="container-header">
+                <div class="padding">
+                    <p style="color:black">$ {{customFormatNumber registrosRankingBL.Credito.SumaBLS}}</p>
+                </div>
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Credito" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Credito" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Credito" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Credito" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
+                    <img src="custom/include/images/sort_icon.svg" width="20" height="20">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-tipo color-white border-right-bl">
+        <div class="contenedor-header">
+            <div class="header-column" align="center">
+                <h5>Rechazada</h5>
+            </div>
+            <div class="container-header">
+                <div class="padding">
+                    <p style="color:black">$ {{customFormatNumber registrosRankingBL.Rechazada.SumaBLS}}</p>
+                </div>
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Rechazada" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Rechazada" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
+                    <img src="custom/include/images/sort_icon.svg" width="20" height="20">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-tipo color-white border-right-bl">
+        <div class="contenedor-header">
+            <div class="header-column" align="center">
+                <h5>Autorizado Sin Solicitud</h5>
+            </div>
+            <div class="container-header">
+                <div class="padding">
+                    <p style="color:black">$ {{customFormatNumber registrosRankingBL.AutorizadaSinSolicitud.SumaBLS}}</p>
+                </div>
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
+                    <img src="custom/include/images/sort_icon.svg" width="20" height="20">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-tipo color-white border-right-bl">
+        <div class="contenedor-header">
+            <div class="header-column" align="center">
+                <h5>Autorizado Con Solicitud</h5>
+            </div>
+            <div class="container-header">
+                <div class="padding">
+                    <p style="color:black">$ {{customFormatNumber registrosRankingBL.AutorizadaConSolicitud.SumaBLS}}</p>
+                </div>
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
+                    <img src="custom/include/images/sort_icon.svg" width="20" height="20">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Comienza sección para items -->
+    <div class="prospecto-items border-right">
+        {{#each registrosRankingBL.Prospecto.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div class="devuelta-items border-right">
+        {{#each registrosRankingBL.Devuelta.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div class="credito-items border-right">
+        {{#each registrosRankingBL.Credito.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div class="rechazada-items border-right">
+        {{#each registrosRankingBL.Rechazada.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div class="autorizada-sin-solicitud-items border-right">
+        {{#each registrosRankingBL.AutorizadaSinSolicitud.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+    <div class="autorizada-con-solicitud-items border-right">
+        {{#each registrosRankingBL.AutorizadaConSolicitud.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+    
+</div>

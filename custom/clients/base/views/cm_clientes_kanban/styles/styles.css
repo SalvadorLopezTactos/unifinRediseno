@@ -32,9 +32,9 @@
     padding-bottom: 5px;
 }
 
-.header-datos{
+.header-datos-kanban-clientes{
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     padding-bottom: 5px;
 }
 
@@ -190,14 +190,13 @@
 .dropdown-field-clientes {
     position: relative;
     padding: 10px;
-    width: 50%;
-    background: #BDBEC0;
     color: black;
     cursor: pointer;
   }
   .dropdown-field-clientes > ul {
     display: none;
     position: absolute;
+    width: 500%;
     top: 100%;
     left: 0;
     right: 0;

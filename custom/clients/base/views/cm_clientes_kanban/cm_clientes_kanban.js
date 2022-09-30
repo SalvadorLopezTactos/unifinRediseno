@@ -41,11 +41,49 @@
                     var indice=contextoKanbanClientes.searchIndexFavorite(contextoKanbanClientes.idRegistroGlobal,contextoKanbanClientes.registrosKanbanClientes[contextoKanbanClientes.columna].Registros);
                     //Una vez encontrado el índice, se forza a establecer valor a Favorito para que éste se pueda ordenar
                     contextoKanbanClientes.registrosKanbanClientes[contextoKanbanClientes.columna].Registros[indice].Favorito='1';
-                    var valorColumna=contextoKanbanClientes.columna;
 
-                    contextoKanbanClientes.registrosKanbanClientes[valorColumna].Registros.sort((a, b) => {
-                        return b.Favorito - a.Favorito;
-                    });
+                    //Ordenando por favorito y después por nombre
+                    var favoritos=[];
+                    var no_favoritos=[];
+                    for (let index = 0; index < contextoKanbanClientes.registrosKanbanClientes[contextoKanbanClientes.columna].Registros.length; index++) {
+                        if(contextoKanbanClientes.registrosKanbanClientes[contextoKanbanClientes.columna].Registros[index].Favorito != null){
+                            favoritos.push(contextoKanbanClientes.registrosKanbanClientes[contextoKanbanClientes.columna].Registros[index]);
+                        }else{
+                            no_favoritos.push(contextoKanbanClientes.registrosKanbanClientes[contextoKanbanClientes.columna].Registros[index]);
+                        }
+                    }
+
+                    //Ordenando los Favoritos
+                    if(favoritos.length>0){
+                        favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+
+                    if(no_favoritos.length>0){
+                        no_favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+                    
+                    var registros=favoritos.concat(no_favoritos);
+                    contextoKanbanClientes.registrosKanbanClientes[contextoKanbanClientes.columna].Registros=registros;
                     contextoKanbanClientes.render();
                 },
                 error: function (e) {

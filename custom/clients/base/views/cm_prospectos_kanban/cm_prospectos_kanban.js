@@ -135,11 +135,49 @@
                     var indice=contextoKanban.searchIndexFavorite(contextoKanban.idRegistroGlobal,contextoKanban.registrosKanban[contextoKanban.columna].Registros);
                     //Una vez encontrado el índice, se forza a establecer valor a Favorito para que éste se pueda ordenar
                     contextoKanban.registrosKanban[contextoKanban.columna].Registros[indice].Favorito='1';
-                    var valorColumna=contextoKanban.columna;
 
-                    contextoKanban.registrosKanban[valorColumna].Registros.sort((a, b) => {
-                        return b.Favorito - a.Favorito;
-                    });
+                    //Ordenando por favorito y después por nombre
+                    var favoritos=[];
+                    var no_favoritos=[];
+                    for (let index = 0; index < contextoKanban.registrosKanban[contextoKanban.columna].Registros.length; index++) {
+                        if(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index].Favorito != null){
+                            favoritos.push(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index]);
+                        }else{
+                            no_favoritos.push(contextoKanban.registrosKanban[contextoKanban.columna].Registros[index]);
+                        }
+                    }
+
+                    //Ordenando los Favoritos
+                    if(favoritos.length>0){
+                        favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+
+                    if(no_favoritos.length>0){
+                        no_favoritos.sort((a, b) => {
+                            const nameA = a.Nombre.toUpperCase().trim();
+                            const nameB = b.Nombre.toUpperCase().trim();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                    }
+                    
+                    var registros=favoritos.concat(no_favoritos);
+                    contextoKanban.registrosKanban[contextoKanban.columna].Registros=registros;
                     contextoKanban.render();
                 },
                 error: function (e) {

@@ -6,12 +6,13 @@
                 <h5>Cliente con Línea sin Operar</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
-            <div class="header-datos">
-                <div>
-                    <p>{{registrosKanbanClientes.Cliente_Linea_Sin_Operar.Total_Registros}} Registro(s)</p>
+            <div class="header-datos-kanban-clientes">
+                <div style="">
+                    
                 </div>
                 <div style="width:100%;display:flex;align-items: center;justify-content: center;">
-                    <div class="dropdown-field-clientes" style="width:70%;">
+                    <p>{{registrosKanbanClientes.Cliente_Linea_Sin_Operar.Total_Registros}} Registro(s)</p>
+                    <div class="dropdown-field-clientes">
                         <ul data-columna="Cliente_Linea_Sin_Operar">
                             <li class="ordenamiento_categoria" data-columna="Cliente_Linea_Sin_Operar" data-value="MA">Monto Asc</li>
                             <li class="ordenamiento_categoria" data-columna="Cliente_Linea_Sin_Operar" data-value="MD">Monto Desc</li>
@@ -19,10 +20,8 @@
                             <li class="ordenamiento_categoria" data-columna="Cliente_Linea_Sin_Operar" data-value="ND">Nombre Desc</li>
                         </ul>
                         <input type="hidden" name="myfield" value="">
-                    </div>
-                    <div style="background-color:white;">
-                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Cliente_Linea_Sin_Operar"></i></span>
-                    </div>    
+                        <img src="custom/include/images/sort_icon.svg" style="background-color:#58585A;" class="fa fa-solid fa-sort" modo-ordenamiento="DESC" data-columna="Cliente_Linea_Sin_Operar" width="20" height="20">
+                    </div>  
                 </div>
                 <div class="cantidad-conLinea contenedor-cantidad">
                     <p><span>$</span>{{registrosKanbanClientes.Cliente_Linea_Sin_Operar.Total_Monto}}</p>
@@ -37,12 +36,13 @@
                 <h5>Cliente Activo</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
-            <div class="header-datos">
-               <div>
-                    <p>{{registrosKanbanClientes.Cliente_Activo.Total_Registros}} Registro(s)</p>
+            <div class="header-datos-kanban-clientes">
+               <div style="">
+                   
                 </div>
                 <div style="width:100%;display:flex;align-items: center;justify-content: center;">
-                    <div class="dropdown-field-clientes" style="width:70%;">
+                     <p>{{registrosKanbanClientes.Cliente_Activo.Total_Registros}} Registro(s)</p>
+                    <div class="dropdown-field-clientes">
                         <ul data-columna="Cliente_Activo">
                             <li class="ordenamiento_categoria" data-columna="Cliente_Activo" data-value="MA">Monto Asc</li>
                             <li class="ordenamiento_categoria" data-columna="Cliente_Activo" data-value="MD">Monto Desc</li>
@@ -50,9 +50,7 @@
                             <li class="ordenamiento_categoria" data-columna="Cliente_Activo" data-value="ND">Nombre Desc</li>
                         </ul>
                         <input type="hidden" name="myfield" value="">
-                    </div>
-                    <div style="background-color:white;">
-                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Cliente_Activo"></i></span>
+                        <img src="custom/include/images/sort_icon.svg" style="background-color:#51A14B;" class="fa fa-solid fa-sort" modo-ordenamiento="DESC" data-columna="Cliente_Activo" width="20" height="20">
                     </div>
                 </div>
                 <div class="contenedor-cantidad cantidad-activo">
@@ -68,12 +66,13 @@
                 <h5>Cliente Perdido</h5>
                 <img src="custom/include/images/Contacto_icon.png" alt="">
             </div>
-            <div class="header-datos">
-                <div>
-                    <p>{{registrosKanbanClientes.Cliente_Perdido.Total_Registros}} Registro(s)</p>
+            <div class="header-datos-kanban-clientes">
+                <div style="">
+                    
                 </div>
                 <div style="width:100%;display:flex;align-items: center;justify-content: center;">
-                    <div class="dropdown-field-clientes" style="width:70%;">
+                    <p>{{registrosKanbanClientes.Cliente_Perdido.Total_Registros}} Registro(s)</p>
+                    <div class="dropdown-field-clientes">
                         <ul data-columna="Cliente_Perdido">
                             <li class="ordenamiento_categoria" data-columna="Cliente_Perdido" data-value="MA">Monto Asc</li>
                             <li class="ordenamiento_categoria" data-columna="Cliente_Perdido" data-value="MD">Monto Desc</li>
@@ -81,9 +80,7 @@
                             <li class="ordenamiento_categoria" data-columna="Cliente_Perdido" data-value="ND">Nombre Desc</li>
                         </ul>
                         <input type="hidden" name="myfield" value="">
-                    </div>
-                    <div style="background-color:white;">
-                        <span><i class="fa fa-solid fa-sort sortTipo" modo-ordenamiento="DESC" data-columna="Cliente_Perdido"></i></span>
+                        <img src="custom/include/images/sort_icon.svg" style="background-color:#E93F33;" class="fa fa-solid fa-sort" modo-ordenamiento="DESC" data-columna="Cliente_Perdido" width="20" height="20">
                     </div>
                 </div>
                 <div class="contenedor-cantidad cantidad-perdido">
