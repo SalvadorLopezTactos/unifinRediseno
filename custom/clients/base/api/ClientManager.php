@@ -1112,7 +1112,7 @@ SQL;
         if($esRegional){
             $array_principal=array();
             foreach ($array_equipo as $key => $value) {
-                $array_principal[]=array("Registros"=>$value,"Usuario"=>$key,"TotalAsignados"=>$total_asignados);
+                $array_principal[]=array("Registros"=>$value,"Usuario"=>$key,"TotalAsignados"=>array_sum($array_equipo[$key]));
             }
         }
 
