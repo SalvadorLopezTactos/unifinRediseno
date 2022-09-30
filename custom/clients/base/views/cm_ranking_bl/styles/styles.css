@@ -147,14 +147,14 @@
 .dropdown-field {
     position: relative;
     padding: 10px;
-    width: 50%;
-    background: #BDBEC0;
+    background: #2FA1E2;
     color: black;
     cursor: pointer;
   }
   .dropdown-field > ul {
     display: none;
     position: absolute;
+    width: 300%;
     top: 100%;
     left: 0;
     right: 0;

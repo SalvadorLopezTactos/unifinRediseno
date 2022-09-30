@@ -9,7 +9,18 @@
                 <div class="padding">
                     <p style="color:black">$ {{customFormatNumber registrosRankingBL.Prospecto.SumaBLS}}</p>
                 </div>
-                <div class="padding sortIcon">
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Prospecto" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Prospecto" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Prospecto" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
                     <img src="custom/include/images/sort_icon.svg" width="20" height="20">
                 </div>
             </div>
@@ -25,7 +36,18 @@
                 <div class="padding">
                     <p style="color:black">$ {{customFormatNumber registrosRankingBL.Devuelta.SumaBLS}}</p>
                 </div>
-                <div class="padding sortIcon">
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Devuelta" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Devuelta" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Devuelta" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
                     <img src="custom/include/images/sort_icon.svg" width="20" height="20">
                 </div>
             </div>
@@ -41,7 +63,18 @@
                 <div class="padding">
                     <p style="color:black">$ {{customFormatNumber registrosRankingBL.Credito.SumaBLS}}</p>
                 </div>
-                <div class="padding sortIcon">
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Credito" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Credito" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Credito" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Credito" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Credito" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
                     <img src="custom/include/images/sort_icon.svg" width="20" height="20">
                 </div>
             </div>
@@ -57,7 +90,18 @@
                 <div class="padding">
                     <p style="color:black">$ {{customFormatNumber registrosRankingBL.Rechazada.SumaBLS}}</p>
                 </div>
-                <div class="padding sortIcon">
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="Rechazada" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="Rechazada" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="Rechazada" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
                     <img src="custom/include/images/sort_icon.svg" width="20" height="20">
                 </div>
             </div>
@@ -73,7 +117,18 @@
                 <div class="padding">
                     <p style="color:black">$ {{customFormatNumber registrosRankingBL.AutorizadaSinSolicitud.SumaBLS}}</p>
                 </div>
-                <div class="padding sortIcon">
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaSinSolicitud" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
                     <img src="custom/include/images/sort_icon.svg" width="20" height="20">
                 </div>
             </div>
@@ -89,7 +144,18 @@
                 <div class="padding">
                     <p style="color:black">$ {{customFormatNumber registrosRankingBL.AutorizadaConSolicitud.SumaBLS}}</p>
                 </div>
-                <div class="padding sortIcon">
+                <div class="padding sortIcon dropdown-field">
+                    <ul>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="BA">No. Backlog ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="BD">No. Backlog DESC</li>{{/if}}
+                        <li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="MA">Monto ASC</li>
+                        <li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="MD">Monto DESC</li>
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="CA">Cliente ASC</li>{{/if}}
+                        {{#if directorEquipo}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="CD">Cliente DESC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="EA">Equipo ASC</li>{{/if}}
+                        {{#if directorRegional}}<li class="ordenamiento_bl" data-columna="AutorizadaConSolicitud" data-value="ED">Equipo DESC</li>{{/if}}
+                    </ul>
+                    <input type="hidden" name="myfield" value="">
                     <img src="custom/include/images/sort_icon.svg" width="20" height="20">
                 </div>
             </div>
