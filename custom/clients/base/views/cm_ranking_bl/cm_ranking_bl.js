@@ -26,6 +26,13 @@
             success: function (data) {
                 App.alert.dismiss('getRankingBL');
                 contextoRanking.registrosRankingBL=data;
+                contextoRanking.posicion_operativa=App.user.attributes.posicion_operativa_c;
+
+                contextoRanking.directorEquipo=null;
+                contextoRanking.directorRegional=null;
+
+                contextoRanking.posicion_operativa.includes('^1^') ? contextoRanking.directorEquipo=true : contextoRanking.directorEquipo=null;
+                contextoRanking.posicion_operativa.includes('^2^') ? contextoRanking.directorRegional=true : contextoRanking.directorRegional=null;
 
                 contextoRanking.render();
             },

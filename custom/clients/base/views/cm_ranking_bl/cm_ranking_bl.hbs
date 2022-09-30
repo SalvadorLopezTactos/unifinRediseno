@@ -97,105 +97,159 @@
     </div>
     <!-- Comienza sección para items -->
     <div class="prospecto-items border-right">
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
+        {{#each registrosRankingBL.Prospecto.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
     </div>
 
     <div class="devuelta-items border-right">
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
+        {{#each registrosRankingBL.Devuelta.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
     </div>
 
     <div class="credito-items border-right">
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
+        {{#each registrosRankingBL.Credito.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
     </div>
 
     <div class="rechazada-items border-right">
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
+        {{#each registrosRankingBL.Rechazada.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
     </div>
 
     <div class="autorizada-sin-solicitud-items border-right">
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
+        {{#each registrosRankingBL.AutorizadaSinSolicitud.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
     </div>
 
     <div class="autorizada-con-solicitud-items border-right">
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
-        <div class="card-item">
-            <p>No. Backlog: </p>
-            <p>Cliente:</p>
-            <p>Asesor:</p>
-            <p>Monto:</p>
-            <p>Producto:</p>
-        </div>
+        {{#each registrosRankingBL.AutorizadaConSolicitud.Registros}}
+            {{#if ../directorEquipo}}
+                <div class="card-item">
+                    <div class="contenido-registro">
+                        <p>No. Backlog: {{NoBacklog}} </p>
+                        <p>Cliente: {{Cliente}}</p>
+                        <p>Asesor: {{Asesor}}</p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{producto_c}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if ../directorRegional}}
+                <div class="card-item" style="height:60px">
+                    <div class="contenido-registro">
+                        <p>Equipo: {{Equipo}} </p>
+                        <p>Monto:$ {{customFormatNumber Monto}}</p>
+                        <p>Producto: {{Producto}}</p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
     </div>
     
 </div>

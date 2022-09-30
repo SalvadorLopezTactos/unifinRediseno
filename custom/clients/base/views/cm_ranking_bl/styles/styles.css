@@ -74,6 +74,7 @@
 }
 
 .card-item{
+    height: 100px;
     padding: 10px;
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -87,66 +88,14 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
   }
 
-.contenedor-item{
-    padding: 5px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin: 5px
+.contenido-registro{
+    width:250px
 }
 
-.contenedor-item:hover{
-    cursor: pointer;
-    border: 1px solid red;
-}
-
-.contenedor-informacion{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3px
-}
-
-.contenedor-nombre{
-    display: flex;
-    align-items: center;
-
-}
-
-.circulo {
-    border-radius: 50%;
-    background: #C5E6BC;
-    padding: 3px;
-    margin-right: 3px;
-}
-
-.circulo > p{
-    color: #82b785
-}
-
-.nombre{
-    width: 150px;
-}
-
-.nombre > p{
+.contenido-registro > p{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.cuadrado{
-    border: 1px solid;
-    padding: 2px;
-}
-
-.cuadrado > p{
-    color: red;
-}
-
-.contenedor-detalles{
-    display: flex;
-    justify-content: space-between;
 }
 
 .prospecto-items{
@@ -189,23 +138,6 @@
     grid-row: 2/3;
     border-right: 1px solid #d8d8d8;
     border-left: 1px solid #d8d8d8;
-}
-
-.center-title-checklist{
-    border: 1px solid #000000;
-    text-align: center;
-    /*height: 300px;*/
-    font-size: 15px;
-    padding-bottom: 40px;
-}
-
-.linea{
-    text-align: end;
-    color: #82b785;
-}
-
-.anexo{
-    text-align: end;
 }
 
 .border-right-bl{
