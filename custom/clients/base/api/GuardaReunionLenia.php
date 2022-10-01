@@ -40,7 +40,7 @@ class GuardaReunionLenia extends SugarApi
 			$Meeting->date_start = $args['horaInicio'];
 			$Meeting->date_end = $args['horaFin'];
 			$Meeting->duration_minutes = $args['duracion'];
-			$Meeting->description = $Meeting->description." ".$args['comentarios'];
+			$Meeting->description = $Meeting->description. "\n\n----------------------\n Comentarios de la sesión realizada \n----------------------\n" .$args['comentarios'];
 			$Meeting->resultado_c = $args['resultado'];
 			$Meeting->status = "Held";
             $Meeting->save();
