@@ -128,7 +128,7 @@ class reunion_participantes
 					  $beanParticipa = BeanFactory::getBean('minut_Participantes', $objArrParticipnates[$j]['id'], array('disable_row_level_security' => true));
 					  $beanParticipa->invitar_c = 1;
 					  if(!$objArrParticipnates[$j]['activo']) $beanParticipa->invitar_c = 0;
-					  $beanParticipa->save();					  
+					  $beanParticipa->save();
 					}
 					// Busca relación
 					if($objArrParticipnates[$j]['origen'] == "E")
@@ -343,7 +343,8 @@ class reunion_participantes
 								// Actualiza ID de Sala en la Reunión
 								$descripcion = "El enlace que deberás usar para poder conectarte el día de la videoconferencia es: ".$sugar_config['lenia_url'].$response['idSala']."?".$organizador;
 								$query = "UPDATE meetings a, meetings_cstm b
-								  SET a.description = '{$descripcion}', b.link_lenia_c = '{$response['idSala']}'
+								  SET a.description = concat(' ----------------------\r Acceso para la sesión \r----------------------\r' ,'{$descripcion}', '\r\r----------------------\r Detalle de reunión planificada \r----------------------\r' , a.description), b.link_lenia_c = '{$response['idSala']}'
+									-- Comentarios registrados durante la llamada
 								  WHERE a.id = b.id_c and b.id_c = '{$bean->id}'";
 								$queryResult = $db->query($query);
 							}
@@ -360,7 +361,7 @@ class reunion_participantes
 								foreach ($correos as $correo) {
 									require_once("include/SugarPHPMailer.php");
 									require_once("modules/EmailTemplates/EmailTemplate.php");
-									require_once("modules/Administration/Administration.php");									
+									require_once("modules/Administration/Administration.php");
 									$url = $sugar_config['lenia_url'].$sala."?".$correo["id"];
 									$emailtemplate = new EmailTemplate();
 									if($organizador == $correo['id']) {
@@ -412,7 +413,7 @@ class reunion_participantes
 							}
 							else {
 								$query = "UPDATE meetings_cstm SET error_lenia_c = null WHERE id_c = '{$bean->id}'";
-								$queryResult = $db->query($query);								
+								$queryResult = $db->query($query);
 								$GLOBALS['log']->fatal("Error Respuesta Lenia");
 								$GLOBALS['log']->fatal($response);
 							}
@@ -448,7 +449,7 @@ class reunion_participantes
 				foreach ($correos as $correo) {
 					require_once("include/SugarPHPMailer.php");
 					require_once("modules/EmailTemplates/EmailTemplate.php");
-					require_once("modules/Administration/Administration.php");									
+					require_once("modules/Administration/Administration.php");
 					$emailtemplate = new EmailTemplate();
 					if($organizador == $correo['id']) {
 						$emailtemplate->retrieve_by_string_fields(array('name'=>'Lenia Asesor Cancela','type'=>'email'));
