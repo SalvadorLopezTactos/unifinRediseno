@@ -3,20 +3,20 @@
     seleccionado:null,
 
     initialize: function (options) {
-      	
+
         self = this;
         this._super("initialize", [options]);
-        
+
         this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
         this.model.addValidationTask('valida_concluido', _.bind(this.valida_concluido, this));
         this.model.addValidationTask('informa_docs_requeridos', _.bind(this.informa_docs_requeridos, this));
-        
-        this.model.on('sync', this.getPersonas, this);
+
+        //this.model.on('sync', this.getPersonas, this);
         this.model.on('sync', this.setOpcionesAsesoresComerciales, this);
         this.model.on('change:account_name', this.getPersonas, this);
         this.model.on('change:type', this.setPriority, this);
-        this.model.on('change:subtipo_c', this.setPriority, this);  
+        this.model.on('change:subtipo_c', this.setPriority, this);
     },
 
     delegateButtonEvents: function () {
@@ -36,6 +36,7 @@
         {
             self.model.set('case_cuenta_relacion','Muestra');
         }
+        selfPerson.seleccionado = self.model.get('contacto_principal_c');
     },
 
     valida_fcr_hd:function(fields, errors, callback){
@@ -115,9 +116,9 @@
             },
             error: function (e) {
                 throw e;
-            }    
+            }
         });
-        
+
     },
 
     informa_docs_requeridos:function(fields, errors, callback){
@@ -128,7 +129,7 @@
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
         var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
-        
+
         var tieneRolComercial=0;
         for (let index = 0; index < roles.length; index++) {
             if(roles_credito.includes(roles[index])){
@@ -189,7 +190,7 @@
         //Si no eres asignado, el creador o el jefe del creador
 
         if(this.model.get('status')=='3'){
-            
+
             app.alert.show('finaliza_ticket_success', {
                 level: 'warning',
                 messages: 'El ticket ya se encuentra <b>Completado</b>',
@@ -202,7 +203,7 @@
                 level: 'process',
                 title: 'Validando, por favor espere'
             });
-    
+
             app.api.call('GET', app.api.buildURL('UserRolesReportsToId/' + id_user_creator), null, {
                 success: function (data) {
                     app.alert.dismiss('validar_concluido');
@@ -236,7 +237,7 @@
                         }
                     }
                     var reporta_a=data.reports_to_id;
-    
+
                     //Los usuarios que pueden "Completar" Casos son:
                     //El usuario creador
                     //Jefe directo (Reporta a) del usuario creador
@@ -248,11 +249,11 @@
                     if(user_log == reporta_a && tieneRolComercial==0){
                         tiene_permiso_guardar.push(1);
                     }
-    
+
                     if(user_log == self.model.get("assigned_user_id") && tieneRolComercial>0){
                         tiene_permiso_guardar.push(1);
                     }
-                    
+
                     //Cuando se cumplen las condiciones para Completar, se establece el valor de "Completado"
                     //En otro caso, solo se reasigna al usuario creador
                     if(tiene_permiso_guardar.includes(1)){
@@ -263,16 +264,16 @@
                         self.model.set('status','3');
                         self.model.save(null, {
                             success: function (model, response) {
-                                
+
                                 app.alert.dismiss('finaliza_ticket');
                                 app.alert.show('finaliza_ticket_success', {
                                     level: 'success',
                                     messages: 'El ticket se ha establecido como <b>Completado</b>',
                                     autoClose: false
                                 });
-                                    
+
                             }, error: function (model, response) {
-                                
+
                             }
                         });
                     }else{
@@ -282,38 +283,43 @@
                             level: 'process',
                             title: 'Guardando'
                         });
-                        
+
                         self.model.save(null, {
                             success: function (model, response) {
-                                
+
                                 app.alert.dismiss('finaliza_ticket');
                                 app.alert.show('finaliza_ticket_success', {
                                     level: 'success',
                                     messages: 'El ticket se ha reasignado al usuario creador para que éste lo pueda cerrar',
                                     autoClose: false
                                 });
-                                    
+
                             }, error: function (model, response) {
-                                
+
                             }
                         });
                     }
                 },
                 error: function (e) {
                     throw e;
-                }    
+                }
             });
-        }  
+        }
     },
 
     getPersonas: function () {
         nombreSelect="";
-        var idCuenta = selfPerson.model.get('account_id');
+        var idCuenta = this.model.get('account_id');
         var parentModule = selfPerson.model.get('parent_type');
         if(idCuenta!=undefined && idCuenta!=""){
+            App.alert.show('get_contacto_principal', {
+                level: 'process',
+                title: 'Cargando',
+            });
             app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
                 success: function (data) {
                     //console.log(data.records);
+                    App.alert.dismiss('get_contacto_principal');
                     var idpersonas = selfPerson.model.get('persona_relacion_c');
                     var arrayPersonas = [];
                     var isSelect = false;
@@ -341,7 +347,7 @@
                                 ]
                             }
                         ];
-                        
+
                         var or_arr = [];
                         var json_arr = {};
                         for (var i = 0; i < data.length; i++) {
@@ -351,13 +357,13 @@
                         }
                         filter_arguments.filter[0]["$and"][1]["id"]["$in"]=or_arr;
                         console.log(filter_arguments);
-                        
+
                         app.api.call('GET', app.api.buildURL('Accounts',null,null,filter_arguments), null, {
                             success: function (cuentas) {
-                                console.log(cuentas);
+                                //console.log(cuentas);
                                 var idpersonas = selfPerson.model.get('account_id_c');;
                                 for (var i = 0; i < cuentas.records.length; i++) {
-                                    if (idpersonas != "" && idpersonas == data[i]['id']) {
+                                    if (idpersonas != "" && idpersonas == cuentas.records[i]['id']) {
                                         isSelect = true;
                                         nombreSelect=cuentas.records[i]['name'];
                                     }else{ isSelect = false;  }
@@ -467,7 +473,7 @@
                 this.model.set('priority','P4');
             break;
 
-            default: 
+            default:
                 this.model.set('priority','P1');
         }
 
@@ -478,7 +484,7 @@
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
         var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
-        
+
         var tieneRolComercial=0;
         for (let index = 0; index < roles.length; index++) {
             if(roles_credito.includes(roles[index])){
@@ -516,7 +522,7 @@
             var campo_area_interna=this.getField('area_interna_c');
             campo_area_interna.items=area_interna_list;
             //campo_area_interna.render();
-            
+
             this.model.set('area_interna_c',area_interna_actual);
 
             this._render();
@@ -548,7 +554,7 @@
     },
 
     setOpcionesProductoParaCredito:function(){
-        
+
         var roles=App.user.attributes.roles;
         var nombreRol="Rol Crédito";
 
