@@ -6,7 +6,7 @@
  * Time: 1:31 PM
  */
 $hook_array['before_save'][] = Array(
-    1,
+    2,
 
     'get the last sequencia number (MAX) related to the person, and adds 1',//Just a quick comment about the logic of it
 
@@ -20,7 +20,7 @@ $hook_array['before_save'][] = Array(
 
 // bdekoning@levementum.com 6/9/15
 $hook_array['before_save'][] = array(
-    2,
+    3,
     'Sanitize phone number',
     'custom/modules/Tel_Telefonos/Tel_Hooks.php',
     'Tel_Hooks',
@@ -28,7 +28,7 @@ $hook_array['before_save'][] = array(
 );
 
 $hook_array['before_save'][] = array(
-    3,
+    4,
     'detecta si estamos insertando o actualizando un servicio',
     'custom/modules/Tel_Telefonos/Tel_Hooks.php',
     'Tel_Hooks',
@@ -43,10 +43,10 @@ $hook_array['after_save'][] = array(
     'insertaComunicaciónUNICS'
 );
 
-/*$hook_array['before_save'][] = array(
-    5,
+$hook_array['before_save'][] = array(
+    1,
     'Valida Telefonos duplicado y marcados como principal ',
     'custom/modules/Tel_Telefonos/TelDuplicados_Hooks.php',
     'TelDuplicados_Hooks',
     'validaTelDuplicados'
-);*/
+);

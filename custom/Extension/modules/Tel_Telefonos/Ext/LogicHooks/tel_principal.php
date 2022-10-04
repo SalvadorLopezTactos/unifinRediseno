@@ -13,7 +13,7 @@ Definición de LH para actualizar teléfono principal en Persona relacionada(tel
 1.- Al guardar Teléfono;
 */
 $hook_array['before_save'][] = Array(
-    4,
+    5,
     'Actualiza teléfono marcado como principal en Persona asociada',
     'custom/modules/Tel_Telefonos/lh_tel_principal.php', //path to the logic hook
     'principal_class', // name of the class
