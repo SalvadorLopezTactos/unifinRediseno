@@ -3,15 +3,17 @@
     seleccionado:null,
 
     initialize: function (options) {
-      	
+
         self = this;
         this._super("initialize", [options]);
 
         this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
         this.model.addValidationTask('informa_docs_requeridos', _.bind(this.informa_docs_requeridos, this));
-        
-        this.model.on('sync', this.getPersonas, this);
+
+        //this.model.on('sync', this.getPersonas, this);
+        this.getPersonas();
+        this.model.on('change:account_name', this.getPersonas, this);
         this.model.on('change:type', this.setPriority, this);
         this.model.on('change:subtipo_c', this.setPriority, this);
 
@@ -85,7 +87,7 @@
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
         var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
-        
+
         var tieneRolComercial=0;
         for (let index = 0; index < roles.length; index++) {
             if(roles_credito.includes(roles[index])){
@@ -117,14 +119,19 @@
 
         callback(null, fields, errors);
     },
-    
+
     getPersonas: function () {
         nombreSelect="";
-        var idCuenta = selfPerson.model.get('account_id');
-        var parentModule = selfPerson.model.get('parent_type');
+        selfPerson = (typeof selfPerson !== 'undefined') ? selfPerson : this;
+        var idCuenta = this.model.get('account_id');
         if(idCuenta!=undefined && idCuenta!=""){
+            App.alert.show('get_contacto_principal', {
+                level: 'process',
+                title: 'Cargando',
+            });
             app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
                 success:  _.bind(function (data) {
+                    App.alert.dismiss('get_contacto_principal');
                     //console.log(data.records);
                     //var idpersonas = selfPerson.model.get('persona_relacion_c');
                     var arrayPersonas = [];
@@ -153,7 +160,7 @@
                                 ]
                             }
                         ];
-                        
+
                         var or_arr = [];
                         var json_arr = {};
                         for (var i = 0; i < data.length; i++) {
@@ -163,13 +170,13 @@
                         }
                         filter_arguments.filter[0]["$and"][1]["id"]["$in"]=or_arr;
                         console.log(filter_arguments);
-                        
+
                         app.api.call('GET', app.api.buildURL('Accounts',null,null,filter_arguments), null, {
                             success:_.bind( function (cuentas) {
                                 console.log(cuentas);
                                 var idpersonas = this.options.context.attributes.model.get('case_cuenta_relacion');
                                 for (var i = 0; i < cuentas.records.length; i++) {
-                                    if (idpersonas != "" && idpersonas == data[i]['id']) {
+                                    if (idpersonas != "" && idpersonas == cuentas.records[i]['id']) {
                                         isSelect = true;
                                         nombreSelect=cuentas.records[i]['name'];
                                     }else{ isSelect = false;  }
@@ -273,7 +280,7 @@
                 this.model.set('priority','P4');
             break;
 
-            default: 
+            default:
                 this.model.set('priority','P1');
         }
 
@@ -284,7 +291,7 @@
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
         var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
-        
+
         var tieneRolComercial=0;
         for (let index = 0; index < roles.length; index++) {
             if(roles_credito.includes(roles[index])){
@@ -319,7 +326,7 @@
             var campo_area_interna=this.getField('area_interna_c');
             campo_area_interna.items=area_interna_list;
             campo_area_interna.render();
-            
+
             this.model.set('area_interna_c','Credito');
 
         }
@@ -348,7 +355,7 @@
     },
 
     setOpcionesProductoParaCredito:function(){
-        
+
         var roles=App.user.attributes.roles;
 
         var nombreRol="Rol Crédito";
