@@ -315,43 +315,155 @@
         //NA : Nombre Ascendente, ND: Nombre Descendente
         switch (tipo) {
             case 'MA':
-                return_registros=arreglo[columna].Registros.sort((a, b) => {
-                    return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
-                });
+                var favoritos=[];
+                var no_favoritos=[];
+
+                for (let index = 0; index < arreglo[columna].Registros.length; index++) {
+                    if(arreglo[columna].Registros[index].Favorito != null){
+                        favoritos.push(arreglo[columna].Registros[index]);
+                    }else{
+                        no_favoritos.push(arreglo[columna].Registros[index]);
+                    }
+                }
+
+                //Ordena Favoritos
+                if(favoritos.length>0){
+                    favoritos=favoritos.sort((a, b) => {
+                        return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
+                    });
+                }
+
+                //Ordena No Favoritos
+                if(no_favoritos.length>0){
+                    no_favoritos=no_favoritos.sort((a, b) => {
+                        return parseFloat(a.Monto_Cuenta.replace(/,/g, '')) - parseFloat(b.Monto_Cuenta.replace(/,/g, ''));
+                    });
+                }
+
+                return_registros=favoritos.concat(no_favoritos);
                 break;
             
             case 'MD':
-                return_registros=arreglo[columna].Registros.sort((a, b) => {
-                    return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
-                });
+                var favoritos=[];
+                var no_favoritos=[];
+
+                for (let index = 0; index < arreglo[columna].Registros.length; index++) {
+                    if(arreglo[columna].Registros[index].Favorito != null){
+                        favoritos.push(arreglo[columna].Registros[index]);
+                    }else{
+                        no_favoritos.push(arreglo[columna].Registros[index]);
+                    }
+                }
+
+                //Ordena Favoritos
+                if(favoritos.length>0){
+                    favoritos=favoritos.sort((a, b) => {
+                        return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
+                    });
+                }
+
+                //Ordena No Favoritos
+                if(no_favoritos.length>0){
+                    no_favoritos=no_favoritos.sort((a, b) => {
+                        return parseFloat(b.Monto_Cuenta.replace(/,/g, '')) - parseFloat(a.Monto_Cuenta.replace(/,/g, ''));
+                    });
+                }
+
+                return_registros=favoritos.concat(no_favoritos);
                 break;
             
             case 'NA':
-                return_registros=arreglo[columna].Registros.sort((a,b) =>{
-                    const nameA = a.Nombre.toUpperCase().trim();
-                    const nameB = b.Nombre.toUpperCase().trim();
-                    if (nameA < nameB) {
-                        return -1;
+
+                var favoritos=[];
+                var no_favoritos=[];
+
+                for (let index = 0; index < arreglo[columna].Registros.length; index++) {
+                    if(arreglo[columna].Registros[index].Favorito != null){
+                        favoritos.push(arreglo[columna].Registros[index]);
+                    }else{
+                        no_favoritos.push(arreglo[columna].Registros[index]);
                     }
-                    if (nameA > nameB) {
-                        return 1;
-                    }
-                    return 0;
-                });
+                }
+
+                //Ordena Favoritos
+                if(favoritos.length>0){
+                    favoritos=favoritos.sort((a, b) => {
+                        const nameA = a.Nombre.toUpperCase().trim();
+                        const nameB = b.Nombre.toUpperCase().trim();
+                        if (nameA < nameB) {
+                            return -1;
+                        }
+                        if (nameA > nameB) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+                }
+
+                //Ordena No Favoritos
+                if(no_favoritos.length>0){
+                    no_favoritos=no_favoritos.sort((a, b) => {
+                        const nameA = a.Nombre.toUpperCase().trim();
+                        const nameB = b.Nombre.toUpperCase().trim();
+                        if (nameA < nameB) {
+                            return -1;
+                        }
+                        if (nameA > nameB) {
+                            return 1;
+                        }
+                        return 0;  
+                    });
+                }
+
+                return_registros=favoritos.concat(no_favoritos);    
                 break;
+
             case 'ND':
-                return_registros=arreglo[columna].Registros.sort((a, b) => {
-                    const nameA = a.Nombre.toUpperCase().trim();
-                    const nameB = b.Nombre.toUpperCase().trim();
-                    if (nameA < nameB) {
-                        return 1;
+
+                var favoritos=[];
+                var no_favoritos=[];
+
+                for (let index = 0; index < arreglo[columna].Registros.length; index++) {
+                    if(arreglo[columna].Registros[index].Favorito != null){
+                        favoritos.push(arreglo[columna].Registros[index]);
+                    }else{
+                        no_favoritos.push(arreglo[columna].Registros[index]);
                     }
-                    if (nameA > nameB) {
-                        return -1;
-                    }
-                    return 0;
-                });
+                }
+
+                //Ordena Favoritos
+                if(favoritos.length>0){
+                    favoritos=favoritos.sort((a, b) => {
+                        const nameA = a.Nombre.toUpperCase().trim();
+                        const nameB = b.Nombre.toUpperCase().trim();
+                        if (nameA < nameB) {
+                            return 1;
+                        }
+                        if (nameA > nameB) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
+
+                //Ordena No Favoritos
+                if(no_favoritos.length>0){
+                    no_favoritos=no_favoritos.sort((a, b) => {
+                        const nameA = a.Nombre.toUpperCase().trim();
+                        const nameB = b.Nombre.toUpperCase().trim();
+                        if (nameA < nameB) {
+                            return 1;
+                        }
+                        if (nameA > nameB) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
+
+                return_registros=favoritos.concat(no_favoritos); 
                 break;
+
             default:
                 return_registros=arreglo[columna].Registros;
                 break;
@@ -360,5 +472,4 @@
         return return_registros;
 
     }
-
 })
