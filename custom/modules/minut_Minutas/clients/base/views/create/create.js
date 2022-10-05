@@ -22,7 +22,7 @@
 
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
-        this.model.addValidationTask('validaEncuesta', _.bind(this.validaEncuesta, this));
+        //this.model.addValidationTask('validaEncuesta', _.bind(this.validaEncuesta, this));
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
         this.model.addValidationTask('save_Referencias', _.bind(this.saveReferencias, this));
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
@@ -32,9 +32,9 @@
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
         //Evento para contestar encuesta
-        this.context.on('button:survey_minuta:click', this.open_survey_minuta, this);
+        //this.context.on('button:survey_minuta:click', this.open_survey_minuta, this);
 
-        this.model.on("change:resultado_c", this.changeColorSurveyButton, this);
+        //this.model.on("change:resultado_c", this.changeColorSurveyButton, this);
 
 
         this.puesto_usuario=App.user.attributes.puestousuario_c;
@@ -1158,7 +1158,7 @@
                             if (encuesta.records.length > 0 && !window.encuesta) {
 								//Guarda registro en Encuestas
 								var qpencuesta = app.data.createBean('QPRO_Encuestas');
-								qpencuesta.set("name", app.user.attributes.full_name);	
+								qpencuesta.set("name", app.user.attributes.full_name);
 								qpencuesta.set("related_module", "Users");
 								qpencuesta.set("user_id_c", app.user.id);
 								qpencuesta.set("assigned_user_id", app.user.id);
@@ -1297,7 +1297,7 @@
 
     /*
     * Función habilitada para prevenir que la clase del botón Contestar Minuta se cambie al dar click en el botón Guardar
-    * */
+    * *
     enableButtons: function () {
         this._super("enableButtons");
         if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25" && this.model.get('resultado_c') != ""){
@@ -1305,6 +1305,6 @@
         }else{
             $('[name="survey_minuta"]').removeClass('btn-success');
         }
-    },
+    },*/
 
 })
