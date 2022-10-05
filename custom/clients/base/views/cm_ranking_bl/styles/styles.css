@@ -4,10 +4,11 @@
 
 .contenedor-grid-ranking{
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    /* Se ajusta el porcentaje de las columnas (16.6 * 6 columnas) para que solo utilice el ancho de la pantalla y de esta manera se evite el scroll horizontal */
+    grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
     grid-template-rows: auto;
     border-bottom: 1px solid #d8d8d8 ;
-    overflow-x: auto;
+    /*overflow-x: auto;  Se  omite scroll horizontal ya que se ajustó el ancho de las columnas*/
 }
 
 .header-column{
