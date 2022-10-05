@@ -28,7 +28,8 @@ class encuestas
 				if($beanGestion->tipo_envio == 1)
 				{
 					// Envía Correo vía Servicio de Sugar
-					if($bean->assigned_user_id) 
+          $GLOBALS['log']->fatal('QuestionPro: Envío de encuesta por SugarCRM');
+					if($bean->assigned_user_id)
 					{
 						$beanUsr = BeanFactory::getBean('Users', $bean->assigned_user_id, array('disable_row_level_security' => true));
 						$usuario = $beanUsr->name;
@@ -62,6 +63,7 @@ class encuestas
 				if($beanGestion->tipo_envio == 2)
 				{
 					// Envía Correo vía Servicio de QP
+          $GLOBALS['log']->fatal('QuestionPro: Envío de encuesta por API');
 					global $sugar_config;
 					require_once 'modules/Configurator/Configurator.php';
 					if($sugar_config['qp_peticiones'] <= $sugar_config['qp_max_peticiones'])
@@ -88,13 +90,16 @@ class encuestas
 						));
 						$response = curl_exec($curl);
 						$response = json_decode($response);
+            $GLOBALS['log']->fatal('QuestionPro - Endpoint: '. $url);
+            $GLOBALS['log']->fatal('QuestionPro - Request: '. $content);
+            $GLOBALS['log']->fatal('QuestionPro - Response: '. $response);
 						curl_close($curl);
 						$configuratorObj = new Configurator();
 						$configuratorObj->loadConfig();
 						$configuratorObj->config['qp_peticiones'] = $sugar_config['qp_peticiones'] + 1;
 						$configuratorObj->saveConfig();
 					}
-					else 
+					else
 					{
 						// Envía Correo de notificación del límite de peticiones
 						global $app_list_strings;
@@ -103,7 +108,7 @@ class encuestas
 						$correos = $app_list_strings['correos_list'];
 						$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se ha alcanzado el límite máximo de peticiones hacia QuestionPro
 							<br><br>Atentamente Unifin</font></p>
-							<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+							<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 							<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
 							Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
 							Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
