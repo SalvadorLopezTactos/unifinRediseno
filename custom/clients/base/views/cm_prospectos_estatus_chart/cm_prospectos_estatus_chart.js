@@ -22,27 +22,26 @@
        app.api.call('GET', app.api.buildURL('GetProspectosEstatus/'+equipos), null, {
         success: function (data) {
             App.alert.dismiss('getProspectosEstatus');
-            //contextoChart.registrosUsuarios=data;
-            contextoChart.registrosUsuarios=[];
+            contextoDetalleGrafica.registrosUsuarios=[];
             
             //Estableciendo variables para los totales
-            contextoChart.GranTotal=data['Total'];
-            contextoChart.TotalSinContactar=data['TotalSinContactar'];
-            contextoChart.TotalContactado=data['TotalContactado'];
-            contextoChart.TotalInteresado=data['TotalInteresado'];
-            contextoChart.TotalIntExp=data['TotalIntExp'];
-            contextoChart.TotalCredito=data['TotalCredito'];
-            contextoChart.TotalSinOperar=data['TotalSinOperar'];
-            contextoChart.TotalActivo=data['TotalActivo'];
-            contextoChart.TotalPerdido=data['TotalPerdido'];
-
+            contextoDetalleGrafica.GranTotal=data['Total'];
+            contextoDetalleGrafica.TotalSinContactar=data['TotalSinContactar'];
+            contextoDetalleGrafica.TotalContactado=data['TotalContactado'];
+            contextoDetalleGrafica.TotalInteresado=data['TotalInteresado'];
+            contextoDetalleGrafica.TotalIntExp=data['TotalIntExp'];
+            contextoDetalleGrafica.TotalCredito=data['TotalCredito'];
+            contextoDetalleGrafica.TotalSinOperar=data['TotalSinOperar'];
+            contextoDetalleGrafica.TotalActivo=data['TotalActivo'];
+            contextoDetalleGrafica.TotalPerdido=data['TotalPerdido'];
+            
             //Generando dataset
             var dataset=[];
             if(Object.keys(data).length>0){
                 for (let index = 0; index < Object.keys(data).length-9; index++) {//El object se recorre hasta 9 posiciones antes para no tomar en cuenta los atributos con Totales
 
                     //Seteo de arreglo para evitar tomar los últimos 9 atributos (Que son los totales), los cuales no cuentan para mostrarlos en la tabla
-                    contextoChart.registrosUsuarios.push(data[index]);
+                    contextoDetalleGrafica.registrosUsuarios.push(data[index]);
                     var registro={
                         label: data[index].Usuario,
                         backgroundColor: "#"+contextoChart.randomColor(),
@@ -51,7 +50,8 @@
                     dataset[index]=registro;
                 }
 
-                contextoChart.render();
+                //contextoChart.render();
+                contextoDetalleGrafica.render();
             }
             
             var textChart="";
