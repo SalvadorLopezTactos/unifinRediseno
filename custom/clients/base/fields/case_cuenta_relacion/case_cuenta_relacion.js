@@ -10,6 +10,7 @@
         options = options || {};
         options.def = options.def || {};
         selfPerson = this;
+        //selfPerson.seleccionado = (this.model.attributes.contacto_principal_c != '') ? this.model.attributes.contacto_principal_c : '';
         this._super('initialize', [options]);
 
     },
@@ -29,9 +30,11 @@
 
     getidPersona: function () {
         var idUserRel = $('#personasRel').val();
-        this.model.set('contacto_principal_c', idUserRel);
+        var nameUserRel = $("#personasRel option:selected").text();
         this.model.set('account_id_c', idUserRel);
-        this.model.set('contacto_principal_c', selfPerson.seleccionado);
+        this.model.set('contacto_principal_c', nameUserRel);
+        selfPerson.seleccionado = nameUserRel;
+        //this.model.set('contacto_principal_c', selfPerson.seleccionado);
     },
 
 })
