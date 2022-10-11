@@ -379,7 +379,69 @@
         //v360
         this.ResumenCliente = [];
         //PLD
-        this.ProductosPLD = [];
+        //this.ProductosPLD = [];
+        this.ProductosPLD = {
+            'arrendamientoPuro': {
+                'campo2' : '',
+                'campo3' : '',
+                'campo3_id' : '',
+                'campo4' : '',
+                'campo6' : '',
+                'campo11' : '',
+                'campo14' : '',
+                'campo16' : '',
+                'campo17' : '',
+                'campo25' : '',
+                'campo26' : ''
+            },
+            'factorajeFinanciero': {
+                'campo2' : '',
+                'campo3' : '',
+                'campo3_id' : '',
+                'campo4' : '',
+                'campo6' : '',
+                'campo21' : '',
+                'campo22' : '',
+                'campo23' : '',
+                'campo16' : '',
+                'campo17' : '',
+                'campo14' : '',
+                'campo24' : ''
+            },
+            'creditoAutomotriz': {
+                'campo2' : '',
+                'campo3' : '',
+                'campo3_id' : '',
+                'campo4' : '',
+                'campo6' : '',
+            },
+            'creditoSimple': {
+                'campo2' : '',
+                'campo3' : '',
+                'campo3_id' : '',
+                'campo4' : '',
+                'campo18' : '',
+                'campo19' : '',
+                'campo14' : '',
+                'campo20' : '',
+                'campo6' : ''
+            },
+            'creditoRevolvente': {
+                'campo1' : '',
+                'campo2' : '',
+                'campo3' : '',
+                'campo5' : '',
+                'campo6' : '',
+                'campo7' : '',
+                'campo8' : '',
+                'campo9' : '',
+                'campo9_id' : '',
+                'campo10' : '',
+                'campo11' : '',
+                'campo11_id' : ''
+            },
+            'id_cuenta':''
+        };
         this.prev_ProductosPLD = [];
         //Potencial Autos
         this.Pautos = [];

@@ -48,6 +48,7 @@
         this.ListasDetail();
         console.log(this.model.get('id'));
 
+        /*
         this.ProductosPLD = {
             'arrendamientoPuro': {
                 'campo2' : '',
@@ -109,7 +110,8 @@
                 'campo11_id' : ''
             },
             'id_cuenta':''
-        };    
+        };
+        */
 
         //Validación para activar las listas desplegables
         //  pld.GeneraListas();
@@ -127,7 +129,7 @@
         // if (this.options.def.view==""){
         //     this.render();
         // }
-        this.loadData();
+        //this.loadData();
     },
 
     loadData: function (options) {
@@ -157,7 +159,7 @@
                         pld.ProductosPLD.creditoAutomotriz.visible = 'block';
                     }
                     //Agrega data a vardef
-                    self.model.set('accounts_tct_pld_1', pld.ProductosPLD);
+                    self.model.set('accounts_tct_pld', pld.ProductosPLD);
                     _.extend(this, pld.ProductosPLD);
                     pld.render();
                 },
