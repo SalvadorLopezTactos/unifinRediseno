@@ -322,12 +322,20 @@ array (
               ),
               3 => 
               array (
+                'name' => 'cta_cuentas_bancarias_accounts_name',
+                'span' => 12,
+              ),
+              4 => 
+              array (
                 'readonly' => false,
                 'name' => 'validada_c',
                 'label' => 'LBL_VALIDADA',
               ),
-              4 => 
+              5 => 
               array (
+                'readonly' => false,
+                'name' => 'vigencia_c',
+                'label' => 'LBL_VIGENCIA',
               ),
             ),
           ),

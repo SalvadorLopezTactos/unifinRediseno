@@ -54,7 +54,9 @@ class altaLeadServices extends SugarApi
                 $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
                 $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
                 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "1", $compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero,$idAsignadoAlta);
+                if($idAsignadoAlta == '0'){
+                  $this->get_asignado($response_Services, "1", $compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero,$idAsignadoAlta);
+                }
             } else {
                 /** PErsona Moral */
 
@@ -84,7 +86,9 @@ class altaLeadServices extends SugarApi
                     }
                 }*/
                 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "3", $compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero,$idAsignadoAlta);
+                if($idAsignadoAlta == '0'){
+                  $this->get_asignado($response_Services, "3", $compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero,$idAsignadoAlta);
+                }
                 /*  } else {
 
                       $GLOBALS['log']->fatal(print_r($obj_leads, true));

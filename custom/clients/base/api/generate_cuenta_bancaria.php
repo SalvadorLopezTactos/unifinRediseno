@@ -20,7 +20,7 @@ class generate_cuenta_bancaria extends SugarApi
     public function getCuentaBancaria($api, $args)
     {
         try {
-            //Recupera parámetros 
+            //Recupera parámetros
             $GLOBALS['log']->fatal('Petición para API:Genera/Actualiza cuenta bancaria');
 
             $id_cliente = isset($args['idCuenta']) ? $args['idCuenta'] : '';
@@ -32,7 +32,7 @@ class generate_cuenta_bancaria extends SugarApi
             $fecha_vigencia = isset($args['vigencia']) ? $args['vigencia'] : '';
 
             $exit = $this->consulta_cuenta($id_cliente , $cuenta , $clabe , $id_banco , $estado_cuenta , $valida , $fecha_vigencia);
-            
+
             return $exit;
         } catch (Exception $e) {
             $GLOBALS['log']->fatal("Error: " . $e->getMessage());
@@ -41,10 +41,20 @@ class generate_cuenta_bancaria extends SugarApi
     }
 
     public function consulta_cuenta($id_cliente , $cuenta , $clabe , $id_banco , $estado_cuenta , $valida , $fecha_vigencia){
-                    
+
         global $current_user, $app_list_strings, $sugar_config, $db;
 
         $banco_list = $app_list_strings['banco_list'];
+        //Transforma Id de banco Dynamics a CRM
+        $banco_mapeo_list = $app_list_strings['dynamics365_mapeo_bancos_list'];
+        $id_banco_tmp = $id_banco;
+        foreach ($banco_mapeo_list as $idCRM => $idDynamics) {
+            //$GLOBALS['log']->fatal("Value: ".$idDynamics . " - banco: ".$id_banco_tmp);
+            if($idDynamics == $id_banco_tmp){
+                $id_banco = $idCRM;
+            }
+        }
+        //$GLOBALS['log']->fatal("Banco: ".$id_banco);
 
         $id_accounts = '';
         $id_tarjeta = '';
@@ -64,7 +74,7 @@ class generate_cuenta_bancaria extends SugarApi
                     ccbc.idcorto_c, ccb.banco, ccb.cuenta, ccb.estado, ccb.clabe , ccbc.validada_c , ccbc.vigencia_c
                     from accounts_cstm ac left join cta_cuentas_bancarias_accounts_c ccbca on ac.id_c = ccbca.cta_cuentas_bancarias_accountsaccounts_ida
                     left join cta_cuentas_bancarias ccb on ccbca.cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb  =  ccb.id
-                    inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c 
+                    inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c
                     WHERE ac.idcliente_c = '{$id_cliente}' ";
 
                 if( $cuenta != "" && $clabe != "" ){
@@ -75,20 +85,20 @@ class generate_cuenta_bancaria extends SugarApi
                     $query2 = $query2 . " and ccb.clabe = '{$clabe}' ";
                 }
                 $query2 = $query2 . ' limit 1';
-                
+
                 $result = $db->query($query2);
                 while ($row = $db->fetchByAssoc($result)) {
                     $id_tarjeta = $row['id_tarjeta'];
                 }
-                
+
                 if($id_tarjeta == ""){
                     $nuevo = true;
                 }
-                
+
                 if($nuevo){
                     $id = create_guid();
                     $date = TimeDate::getInstance()->nowDb();
-                    
+
                     $val = $banco_list[intval($id_banco)];
 
                     $beanBank = BeanFactory::newBean('cta_cuentas_bancarias');
@@ -99,17 +109,17 @@ class generate_cuenta_bancaria extends SugarApi
                     $beanBank->estado = $estado_cuenta;
                     $beanBank->validada_c = $valida;
                     $beanBank->vigencia_c = $fecha_vigencia;
-    
+
                     $beanBank->save();
-    
+
                     $bankid = $beanBank->id;
-    
+
                     $account = BeanFactory::getBean('Accounts', $id_accounts, array('disable_row_level_security' => true));
                     $account->load_relationship('cta_cuentas_bancarias_accounts');
                     $account->cta_cuentas_bancarias_accounts->add($bankid);
-                    
+
                 }else{
-                    $update = "UPDATE cta_cuentas_bancarias ccb inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c 
+                    $update = "UPDATE cta_cuentas_bancarias ccb inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c
                     set ccb.banco = '{$id_banco}' , ccb.estado = '{$estado_cuenta}' , ccbc.validada_c = $valida , ccbc.vigencia_c = '{$fecha_vigencia}'
                     where ccb.id = '{$id_tarjeta}'; ";
                     $db->query($update);
@@ -118,7 +128,7 @@ class generate_cuenta_bancaria extends SugarApi
             }else{
                 $salida = array( "status"=>'400', "messageDetail" => "Error en Datos");
             }
-            
+
             return $salida;
 
         } catch (Exception $e) {
