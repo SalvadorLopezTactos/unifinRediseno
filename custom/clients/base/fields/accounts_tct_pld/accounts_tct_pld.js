@@ -127,14 +127,14 @@
         // if (this.options.def.view==""){
         //     this.render();
         // }
-
+        this.loadData();
     },
 
     loadData: function (options) {
         //Recupera data existente
         // if (pld.action == 'detail') {
         //Recupera datos para vista de detalle
-        if (this.context== null || this.context== undefined) {
+        
             var idCuenta = pld.model.get('id');
             if (idCuenta == "" || idCuenta == undefined) {
                 idCuenta = '1';
@@ -168,7 +168,7 @@
             // }
 
             this.render();
-        }
+        
     },
 
     formatDetailPLD: function (dataPLD) {
