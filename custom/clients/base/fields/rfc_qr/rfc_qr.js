@@ -389,6 +389,7 @@
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
 												cont_tel.render();
+												pipeacc.tipoSubtipo_vista();
 												pld.render();
 												var nada = 0;
 												var secuencia = 0;
