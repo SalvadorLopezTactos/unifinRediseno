@@ -3,7 +3,7 @@
  * Created by Erick de jesus
  * Date: 24/08/2022
  */
-$dependencies['cta_cuentas_bancarias']['validada_c'] = array(
+/*$dependencies['cta_cuentas_bancarias']['validada_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     'triggerFields' => array('id','validada_c'),
@@ -18,4 +18,5 @@ $dependencies['cta_cuentas_bancarias']['validada_c'] = array(
         ),
     ),
 );
+*/
 
