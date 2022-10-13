@@ -14,13 +14,12 @@
                 </div>
                 <div class="campoSSE span6">
                     <label class="record-label" style="margin-left:0px">Sub Sector Económico</label>
-                    <input type="text" class="list_sse" data-field="list_sse" value="{{ActividadEconomica.label_subsector}}" />
-                    <!-- <select class="row-fluid select2 list_sse" data-field="list_sse">
-                        {{#each subsector_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ActividadEconomica.sse.id}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_sse" data-field="list_sse" 
+                    {{#if ActividadEconomica.sse.id}}
+                        value="{{getUnifinListValue 'subsector_cnbv_list' ActividadEconomica.sse.id}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_subsector}}" />
+                    {{/if}}
                 </div>
             </div>
         </tr>
@@ -28,23 +27,21 @@
             <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
                 <div class="campoSE span6">
                     <label class="record-label" style="margin-left:0px">Sector Económico</label>
-                    <input type="text" class="list_se" data-field="list_se" value="{{ActividadEconomica.label_sector}}" />
-                    <!-- <select class="row-fluid select2 list_se" data-field="list_se">
-                        {{#each sector_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ActividadEconomica.se.id}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_se" data-field="list_se" 
+                    {{#if ActividadEconomica.se.id}}
+                        value="{{getUnifinListValue 'sector_cnbv_list' ActividadEconomica.se.id}}" />
+                    {{else}}
+                       value="{{ActividadEconomica.label_sector}}" />
+                    {{/if}}
                 </div>
                 <div class="campoMS span6">
                     <label class="record-label" style="margin-left:0px">Macro Sector</label>
-                    <input type="text" class="list_ms" data-field="list_ms" value="{{ActividadEconomica.label_macro}}" />
-                    <!-- <select class="row-fluid select2 list_ms" data-field="list_ms">
-                        {{#each macro_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ActividadEconomica.ms.id}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_ms" data-field="list_ms"
+                    {{#if ActividadEconomica.ms.id}}
+                        value="{{getUnifinListValue 'macro_cnbv_list' ActividadEconomica.ms.id}}" />
+                    {{else}}
+                       value="{{ActividadEconomica.label_macro}}" />
+                    {{/if}}
                 </div>
             </div>
         </tr>
@@ -53,23 +50,21 @@
             <div class="row-fluid">
                 <div class="campoIC span6">
                     <label class="record-label" style="margin-left:0px">Clase</label>
-                    <input type="text" class="list_clase" data-field="list_clase" value="{{ActividadEconomica.label_clase}}" />
-                    <!-- <select class="row-fluid select2 list_clase" data-field="list_clase">
-                        {{#each clase_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_clase}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_clase" data-field="list_clase" 
+                    {{#if ResumenCliente.inegi.inegi_clase}}
+                        value="{{getUnifinListValue 'clase_list' ResumenCliente.inegi.inegi_clase}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_clase}}"/>
+                    {{/if}}
                 </div>
                 <div class="campoISR span6">
                     <label class="record-label" style="margin-left:0px">Subrama</label>
-                    <input type="text" class="list_subrama" data-field="list_subrama" value="{{ActividadEconomica.label_subrama}}" />
-                    <!-- <select class="row-fluid select2 list_subrama" data-field="list_subrama">
-                        {{#each subrama_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_subrama}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_subrama" data-field="list_subrama"
+                    {{#if ResumenCliente.inegi.inegi_subrama}}
+                        value="{{getUnifinListValue 'subrama_list' ResumenCliente.inegi.inegi_subrama}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_subrama}}" />
+                    {{/if}}
                 </div>
             </div>
         </tr>
@@ -77,23 +72,21 @@
             <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
                 <div class="campoIR span6">
                     <label class="record-label" style="margin-left:0px">Rama</label>
-                    <input type="text" class="list_rama" data-field="list_rama" value="{{ActividadEconomica.label_rama}}" />
-                    <!-- <select class="row-fluid select2 list_rama" data-field="list_rama">
-                        {{#each rama_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_rama}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_rama" data-field="list_rama" 
+                    {{#if ResumenCliente.inegi.inegi_rama}}
+                        value="{{getUnifinListValue 'rama_list' ResumenCliente.inegi.inegi_rama}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_rama}}" />
+                    {{/if}}
                 </div>
                 <div class="campoISS span6">
                     <label class="record-label" style="margin-left:0px">Subsector</label>
-                    <input type="text" class="list_ssector" data-field="list_ssector" value="{{ActividadEconomica.label_isubsector}}" />
-                    <!-- <select class="row-fluid select2 list_ssector" data-field="list_ssector">
-                        {{#each subsector_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_subsector}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_ssector" data-field="list_ssector"
+                    {{#if ResumenCliente.inegi.inegi_subsector}}
+                        value="{{getUnifinListValue 'subsector_list' ResumenCliente.inegi.inegi_subsector}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_isubsector}}" />
+                    {{/if}}
                 </div>
             </div>
         </tr>
@@ -101,23 +94,21 @@
             <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
                 <div class="campoIS span6">
                     <label class="record-label" style="margin-left:0px">Sector</label>
-                    <input type="text" class="list_sector" data-field="list_sector" value="{{ActividadEconomica.label_isector}}" />
-                    <!-- <select class="row-fluid select2 list_sector" data-field="list_sector">
-                        {{#each sector_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_sector}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_sector" data-field="list_sector"
+                    {{#if ResumenCliente.inegi.inegi_sector}}
+                        value="{{getUnifinListValue 'sector_list' ResumenCliente.inegi.inegi_sector}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_isector}}" />
+                    {{/if}}
                 </div>
                 <div class="campoIMS span6">
                     <label class="record-label" style="margin-left:0px">Macro</label>
-                    <input type="text" class="list_imacro" data-field="list_imacro" value="{{ActividadEconomica.label_imacro}}" />
-                    <!-- <select class="row-fluid select2 list_imacro" data-field="list_imacro">
-                        {{#each macro_list}}
-                        <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_macro}}>{{this}}</option>
-                        {{/each}}
-                    </select> -->
+                    <input type="text" class="list_imacro" data-field="list_imacro" 
+                    {{#if ResumenCliente.inegi.inegi_macro}}
+                        value="{{getUnifinListValue 'macro_list' ResumenCliente.inegi.inegi_macro}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_imacro}}" />
+                    {{/if}}
                 </div>
             </div>
         </tr>
@@ -126,11 +117,21 @@
             <div class="row-fluid">
                 <div class="campodiv span6">
                     <label class="record-label" style="margin-left:0px">División</label>
-					<input type="text" class="list_div" data-field="list_div" value="{{ActividadEconomica.label_div}}" />
+					<input type="text" class="list_div" data-field="list_div"
+                    {{#if ResumenCliente.pb.pb_division}}
+                        value="{{getUnifinListValue 'pb_division_list' ResumenCliente.pb.pb_division}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_div}}" />
+                    {{/if}}
                 </div>
                 <div class="campogrp span6">
                     <label class="record-label" style="margin-left:0px">Grupo</label>
-					<input type="text" class="list_grp" data-field="list_grp" value="{{ActividadEconomica.label_grp}}" />
+					<input type="text" class="list_grp" data-field="list_grp" 
+                    {{#if ResumenCliente.pb.pb_grupo}}
+                        value="{{getUnifinListValue 'pb_grupo_list' ResumenCliente.pb.pb_grupo}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_grp}}" />
+                    {{/if}}
                 </div>
             </div>
         </tr>
@@ -138,7 +139,12 @@
             <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
                 <div class="campocls span6">
                     <label class="record-label" style="margin-left:0px">Clase</label>
-					<input type="text" class="list_cls" data-field="list_cls" value="{{ActividadEconomica.label_cls}}" />
+					<input type="text" class="list_cls" data-field="list_cls"
+                    {{#if ResumenCliente.pb.pb_clase}}
+                        value="{{getUnifinListValue 'pb_clase_list' ResumenCliente.pb.pb_clase}}" />
+                    {{else}}
+                        value="{{ActividadEconomica.label_cls}}" />
+                    {{/if}}
                 </div>
             </div>
         </tr>
