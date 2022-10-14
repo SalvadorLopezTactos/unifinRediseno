@@ -58,7 +58,7 @@ array (
         'type' => 'enum',
         'default' => true,
         'label' => 'LBL_SUBPUESTO',
-        'width' => 10,
+        'width' => '10',
         'name' => 'subpuesto_c',
       ),
       'title' => 
@@ -134,6 +134,24 @@ array (
         'type' => 'name',
         'default' => true,
         'width' => '10',
+      ),
+      'cac_c' => 
+      array (
+        'readonly' => false,
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_CAC',
+        'width' => 10,
+        'name' => 'cac_c',
+      ),
+      'posicion_operativa_c' => 
+      array (
+        'readonly' => false,
+        'type' => 'multienum',
+        'default' => true,
+        'label' => 'LBL_POSICION_OPERATIVA',
+        'width' => 10,
+        'name' => 'posicion_operativa_c',
       ),
     ),
   ),

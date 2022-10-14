@@ -1,5 +1,5 @@
 <?php
-// created: 2021-07-05 16:09:10
+// created: 2022-10-14 08:46:34
 $searchFields['Users'] = array (
   'user_name' => 
   array (
@@ -69,5 +69,23 @@ $searchFields['Users'] = array (
     array (
       0 => 'id',
     ),
+  ),
+  'range_cookie_consent_received_on' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'start_range_cookie_consent_received_on' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'end_range_cookie_consent_received_on' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
   ),
 );

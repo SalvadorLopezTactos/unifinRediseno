@@ -21,3 +21,10 @@ $hook_array['after_save'][] = Array(
     'set_field_to_notification' // name of the function.
 );
 */
+$hook_array['before_save'][] = Array(
+    1,
+    'Asociación de equipos CAC',//Just a quick comment about the logic of it
+    'custom/modules/Documents/Docs_hooks.php', //path to the logic hook
+    'upload_documents', // name of the class
+    'set_team_cac' // name of the function.
+);

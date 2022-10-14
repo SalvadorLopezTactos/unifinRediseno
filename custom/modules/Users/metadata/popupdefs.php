@@ -21,6 +21,8 @@ $popupMeta = array (
   'address_state' => 'users.address_state',
   'address_postalcode' => 'users.address_postalcode',
   'address_country' => 'users.address_country',
+  'cac_c' => 'users_cstm.cac_c',
+  'posicion_operativa_c' => 'users_cstm.posicion_operativa_c',
 ),
     'searchInputs' => array (
   0 => 'first_name',
@@ -40,6 +42,8 @@ $popupMeta = array (
   14 => 'address_state',
   15 => 'address_postalcode',
   16 => 'address_country',
+  17 => 'cac_c',
+  18 => 'posicion_operativa_c',
 ),
     'searchdefs' => array (
   'first_name' => 
@@ -78,7 +82,7 @@ $popupMeta = array (
   array (
     'type' => 'enum',
     'label' => 'LBL_SUBPUESTO',
-    'width' => 10,
+    'width' => '10',
     'name' => 'subpuesto_c',
   ),
   'title' => 
@@ -144,6 +148,22 @@ $popupMeta = array (
     'label' => 'LBL_COUNTRY',
     'type' => 'name',
     'width' => '10',
+  ),
+  'cac_c' => 
+  array (
+    'readonly' => false,
+    'type' => 'bool',
+    'label' => 'LBL_CAC',
+    'width' => '10',
+    'name' => 'cac_c',
+  ),
+  'posicion_operativa_c' => 
+  array (
+    'readonly' => false,
+    'type' => 'multienum',
+    'label' => 'LBL_POSICION_OPERATIVA',
+    'width' => '10',
+    'name' => 'posicion_operativa_c',
   ),
 ),
     'listviewdefs' => array (

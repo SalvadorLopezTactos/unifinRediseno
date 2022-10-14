@@ -1,83 +1,96 @@
 <?php
-// created: 2021-11-10 14:19:09
-$viewdefs['Documents']['DetailView'] = array (
-  'templateMeta' => 
+$viewdefs['Documents'] = 
+array (
+  'DetailView' => 
   array (
-    'maxColumns' => '2',
-    'form' => 
+    'templateMeta' => 
     array (
-      'hidden' => 
+      'maxColumns' => '2',
+      'form' => 
       array (
-        0 => '<input type="hidden" name="old_id" value="{$fields.document_revision_id.value}">',
+        'hidden' => 
+        array (
+          0 => '<input type="hidden" name="old_id" value="{$fields.document_revision_id.value}">',
+        ),
       ),
-    ),
-    'widths' => 
-    array (
-      0 => 
-      array (
-        'label' => '10',
-        'field' => '30',
-      ),
-      1 => 
-      array (
-        'label' => '10',
-        'field' => '30',
-      ),
-    ),
-    'useTabs' => false,
-    'tabDefs' => 
-    array (
-      'LBL_DOCUMENT_INFORMATION' => 
-      array (
-        'newTab' => false,
-        'panelDefault' => 'expanded',
-      ),
-    ),
-    'syncDetailEditViews' => true,
-  ),
-  'panels' => 
-  array (
-    'lbl_document_information' => 
-    array (
-      0 => 
+      'widths' => 
       array (
         0 => 
         array (
-          'name' => 'filename',
-          'displayParams' => 
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'useTabs' => false,
+      'tabDefs' => 
+      array (
+        'LBL_DOCUMENT_INFORMATION' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+      ),
+      'syncDetailEditViews' => true,
+    ),
+    'panels' => 
+    array (
+      'lbl_document_information' => 
+      array (
+        0 => 
+        array (
+          0 => 
           array (
-            'link' => 'filename',
-            'id' => 'document_revision_id',
+            'name' => 'filename',
+            'displayParams' => 
+            array (
+              'link' => 'filename',
+              'id' => 'document_revision_id',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'document_name',
+            'label' => 'LBL_DOC_NAME',
           ),
         ),
         1 => 
         array (
-          'name' => 'document_name',
-          'label' => 'LBL_DOC_NAME',
+          0 => 
+          array (
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO_NAME',
+          ),
+          1 => 
+          array (
+            'name' => 'tipo_documento_c',
+            'label' => 'LBL_TIPO_DOCUMENTO',
+          ),
         ),
-      ),
-      1 => 
-      array (
-        0 => 
+        2 => 
         array (
-          'name' => 'assigned_user_name',
-          'label' => 'LBL_ASSIGNED_TO_NAME',
+          0 => 
+          array (
+            'name' => 's_seguros_documents_1_name',
+          ),
+          1 => 
+          array (
+            'name' => 'opportunities_documents_1_name',
+          ),
         ),
-        1 => 
+        3 => 
         array (
-          'name' => 'tipo_documento_c',
-          'label' => 'LBL_TIPO_DOCUMENTO',
-        ),
-      ),
-      3 => 
-      array (
-        0 => 
-        array (
-          'name' => 's_seguros_documents_1_name',
-        ),
-        1 => 
-        array (
-          'name' => 'opportunities_documents_1_name',
+          0 => 
+          array (
+            'name' => 'team_name',
+            'label' => 'LBL_TEAM',
+            'customCode' => '{$fields.team_name.value|escape}',
+          ),
+          1 => '',
         ),
       ),
     ),
