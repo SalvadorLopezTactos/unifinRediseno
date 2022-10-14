@@ -1,5 +1,5 @@
 <?php
-// created: 2020-01-20 18:10:13
+// created: 2022-10-14 08:46:34
 $viewdefs['Users']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -40,7 +40,7 @@ $viewdefs['Users']['base']['filter']['default'] = array (
     array (
       'type' => 'enum',
       'default' => true,
-      'width' => 10,
+      'width' => '10',
       'name' => 'subpuesto_c',
       'vname' => 'LBL_SUBPUESTO',
     ),
@@ -67,6 +67,24 @@ $viewdefs['Users']['base']['filter']['default'] = array (
     ),
     'address_country' => 
     array (
+    ),
+    'cac_c' => 
+    array (
+      'readonly' => false,
+      'type' => 'bool',
+      'default' => true,
+      'width' => 10,
+      'name' => 'cac_c',
+      'vname' => 'LBL_CAC',
+    ),
+    'posicion_operativa_c' => 
+    array (
+      'readonly' => false,
+      'type' => 'multienum',
+      'default' => true,
+      'width' => 10,
+      'name' => 'posicion_operativa_c',
+      'vname' => 'LBL_POSICION_OPERATIVA',
     ),
     '$owner' => 
     array (

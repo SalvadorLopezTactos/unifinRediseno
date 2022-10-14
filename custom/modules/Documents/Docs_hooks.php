@@ -140,4 +140,27 @@ class Upload_documents
         }
 
     }
+
+    function set_team_cac($bean = null, $event = null, $args = null)
+    {
+        global $current_user,$db;
+        $equipos = array();
+        if($current_user->cac_c){
+          //Agregar equipo CAC
+          $query = "select id from teams where name = 'CAC';";
+          $queryResult = $db->query($query);
+          while ($row = $db->fetchByAssoc($queryResult)) {
+              $equipos[] = $row['id'];
+          }
+        }else{
+          //Agrega equipo Global
+          $equipos[] = '1';
+        }
+        $GLOBALS['log']->fatal("Equipos". print_r($equipos,true));
+        //Agrega equipos
+        $bean->load_relationship('teams');
+        $bean->teams->add(
+          $equipos
+        );
+    }
 }
