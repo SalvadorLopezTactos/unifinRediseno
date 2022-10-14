@@ -24,6 +24,7 @@
         clasf_sectorial.renderlista = 0;
         clasf_sectorial.check_uni2 = 0;
 
+        /*
         this.ActividadEconomica = {
             // 'combinaciones': '',
             'ae': {
@@ -107,6 +108,7 @@
                 'pb_clase': ''
             },			
         };
+        */
     },
 
     loadData: function () {

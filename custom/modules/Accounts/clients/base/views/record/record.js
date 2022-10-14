@@ -8087,6 +8087,8 @@ validaReqUniclickInfo: function () {
                     clasf_sectorial.ActividadEconomica.label_cls = app.lang.getAppListStrings('pb_clase_list')[clasf_sectorial.ResumenCliente.pb.pb_clase];
                     clasf_sectorial.check_uni2 = clasf_sectorial.ResumenCliente.inegi.inegi_acualiza_uni2;
                     _.extend(this, clasf_sectorial.ResumenCliente);
+                    contexto_cuenta.ActividadEconomica=clasf_sectorial.ActividadEconomica;
+                    contexto_cuenta.ResumenCliente=clasf_sectorial.ResumenCliente;
                     clasf_sectorial.render();
 
                 }

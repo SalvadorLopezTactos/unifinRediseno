@@ -389,6 +389,12 @@
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
 												cont_tel.render();
+												pipeacc.tipoSubtipo_vista();
+												clasf_sectorial.ActividadEconomica=contexto_cuenta.ActividadEconomica;
+												clasf_sectorial.ResumenCliente=contexto_cuenta.ResumenCliente;
+												clasf_sectorial.render();
+												pld.ProductosPLD=contexto_cuenta.ProductosPLD;
+												pld.render();
 												var nada = 0;
 												var secuencia = 0;
 												var principal = 0;
