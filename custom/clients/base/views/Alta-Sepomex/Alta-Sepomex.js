@@ -1,14 +1,10 @@
-/**
- * Created by Jorge on 7/17/2015.
- */
-/**
- * Created by Jorge on 6/1/2015.
- */
 ({
 
     className: 'Alta-Sepomex',
 
     events: {
+        'click .openModalCheckCP': 'openModalCheckCP',
+        'click .closemodalCheckCP': 'closeModalCheckCP',
     },
 
     initialize: function(options){
@@ -18,6 +14,22 @@
 
     _render: function () {
         this._super("_render");
+        $(".openModalCheckCP").trigger('click');
     },
+
+    openModalCheckCP:function(){
+        var modal = $('#modalCheckCP');
+        if (modal) {
+            modal.show();
+        }
+    },
+
+    closeModalCheckCP:function(){
+        var modal = $('#modalCheckCP');
+        if (modal) {
+            modal.hide();
+        }
+    }
+
 
 })
