@@ -7,17 +7,22 @@
         'click .closemodalCheckCP': 'closeModalCheckCP',
         'click .cancelCheckCP': 'cancelCheckCP',
         'click .checkNacExt':'setCheckNacionalExt',
-        'click .continueCheckCP':'continueCheckCP'
+        'click .continueCheckCP':'continueCheckCP',
+        'click .cancelSaveRecord':'cancelSaveRecord'
     },
+
+    flagClickModal:null,
 
     initialize: function(options){
         this._super("initialize", [options]);
-
+        this.paises_list=App.lang.getAppListStrings('paises_list');
     },
 
     _render: function () {
         this._super("_render");
-        $(".openModalCheckCP").trigger('click');
+        if(this.flagClickModal===null){
+            $(".openModalCheckCP").trigger('click');
+        }
     },
 
     openModalCheckCP:function(){
@@ -52,6 +57,13 @@
         App.router.navigate('#dir_Sepomex', {trigger:true});
     },
 
+    cancelSaveRecord:function(){
+        // ToDO: Antes de mostrar el modal previo, mostrar advertencia en caso de que algún campo contenga valor
+        this.closeModalRecordCP();
+        this.openModalCheckCP();
+    },
+
+    /* Función para establecer valor a solo un checkbox */
     setCheckNacionalExt:function(e){
         var checked=$(e.currentTarget).is(":checked");
         if(checked){
@@ -63,6 +75,10 @@
     continueCheckCP:function(e){
         var cpValue=$('#codigoPostal').val();
         this.e=e;
+        this.cpValue=cpValue;
+        //Obteniendo valores de checkbox para saber si es una dirección Nacional o Extranjera
+        var valueChkNac=$('#checkNacional').is(':checked');
+        this.nacionalidad= (valueChkNac) ? 'nacional':'extranjero';
         self=this;
         if(cpValue==""){
             app.alert.show('errorCP', {
@@ -92,16 +108,51 @@
 
                 app.api.call('GET', app.api.buildURL(strUrl), null, {
                     success: _.bind(function (data) {
-                        console.log("CPP");
+                        if(data.paises.length>0){
+                            console.log(self.nacionalidad);
+                            self.isNational=(self.nacionalidad=='nacional') ? true:false;
 
-                        $(self.e.currentTarget).removeClass('disabled');
-                        app.alert.dismiss('loadingCheckCP');
-                        $('#processingCheckCP').hide();
-                        $('#codigoPostal').attr('style','');
+                            if(self.isNational){
+                                self.estados_list={};
+                                self.ciudades_list={};
+                                self.municipios_list={};
+                                self.paisId=data.paises[0].idPais;
+                                self.paisName=data.paises[0].namePais;
+                                
+                                for (let index = 0; index < data.estados.length; index++) {
+                                    self.estados_list[data.estados[index].idEstado]=data.estados[index].nameEstado;
+                                }
 
-                        self.closeModalCheckCP();
-                        self.openModalRecordCP();
+                                for (let index = 0; index < data.ciudades.length; index++) {
+                                    self.ciudades_list[data.ciudades[index].idCiudad]=data.ciudades[index].nameCiudad;
+                                }
 
+                                for (let index = 0; index < data.municipios.length; index++) {
+                                    self.municipios_list[data.municipios[index].idMunicipio]=data.municipios[index].nameMunicipio;
+                                }
+                            }
+
+                            $(self.e.currentTarget).removeClass('disabled');
+                            app.alert.dismiss('loadingCheckCP');
+                            $('#processingCheckCP').hide();
+                            $('#codigoPostal').attr('style','');
+
+                            self.flagClickModal=true;
+                            self.render();
+                            self.closeModalCheckCP();
+                            self.openModalRecordCP();
+                        }else{
+                            $(self.e.currentTarget).removeClass('disabled');
+                            app.alert.dismiss('loadingCheckCP');
+                            $('#processingCheckCP').hide();
+
+                            app.alert.show('invalid_cp', {
+                                level: 'error',
+                                autoClose: true,
+                                messages: 'El C\u00F3digo Postal ingresado no existe'
+                            });
+                        }
+                    
                     }, self)
                 });
                 
