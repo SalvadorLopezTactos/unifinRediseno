@@ -1337,9 +1337,14 @@
         this.$('[data-name="promotorcredit_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorfleet_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorrm_c"]').attr('style', 'pointer-events:none');
-		var seguros = 0;
-        for (var i = 0; i < app.user.attributes.roles.length; i++) {
-            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
+        var roles=App.user.attributes.roles;
+        var roles_seguros=App.lang.getAppListStrings('roles_edicion_ctas_seguros_list');
+
+        var seguros=0;
+        for (const [key, value] of Object.entries(roles_seguros)) {
+            if(roles.includes(value)){
+                seguros = 1;
+            }
         }
         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c + seguros;
         if (accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != '4') {
@@ -2218,7 +2223,7 @@
         var Accountid = this.model.get('id');
         window.open("#bwc/index.php?entryPoint=ExpedienteVaadin&Accountid=" + Accountid);
     },
-    
+
 
     /* @Jesus Carrillo
      Metodo para verificar  las llamadas de la cuenta
@@ -4127,10 +4132,15 @@
     },
 
     valida_requeridos: function (fields, errors, callback) {
-		var seguros = 0;
-        for (var i = 0; i < app.user.attributes.roles.length; i++) {
-            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
-        }
+      var roles=App.user.attributes.roles;
+      var roles_seguros=App.lang.getAppListStrings('roles_edicion_ctas_seguros_list');
+
+      var seguros=0;
+      for (const [key, value] of Object.entries(roles_seguros)) {
+          if(roles.includes(value)){
+              seguros = 1;
+          }
+      }
 		if(!seguros) {
 			var campos = "";
 			_.each(errors, function (value, key) {
@@ -6395,10 +6405,15 @@
     },
 
     requeridosUniclickCanal: function (fields, errors, callback) {
-		var seguros = 0;
-        for (var i = 0; i < app.user.attributes.roles.length; i++) {
-            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
-        }
+      var roles=App.user.attributes.roles;
+      var roles_seguros=App.lang.getAppListStrings('roles_edicion_ctas_seguros_list');
+
+      var seguros=0;
+      for (const [key, value] of Object.entries(roles_seguros)) {
+          if(roles.includes(value)){
+              seguros = 1;
+          }
+      }
 		if(!seguros) {
 			var faltantesUniclickCanal = 0;
 			var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
@@ -6425,9 +6440,14 @@
 
     ocultaGeneraRFC: function () {
         //Oculta Botón Generar RFC
-		var seguros = 0;
-        for (var i = 0; i < app.user.attributes.roles.length; i++) {
-            if (app.user.attributes.roles[i] == "Seguros") seguros = 1;
+        var roles=App.user.attributes.roles;
+        var roles_seguros=App.lang.getAppListStrings('roles_edicion_ctas_seguros_list');
+
+        var seguros=0;
+        for (const [key, value] of Object.entries(roles_seguros)) {
+            if(roles.includes(value)){
+                seguros = 1;
+            }
         }
         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c + seguros;
         if (accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != '4') {
