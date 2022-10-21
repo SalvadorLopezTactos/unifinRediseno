@@ -86,11 +86,11 @@
 
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
-        var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+        var roles_credito=App.lang.getAppListStrings('roles_seguimiento_comercial_list');
 
         var tieneRolComercial=0;
-        for (let index = 0; index < roles.length; index++) {
-            if(roles_credito.includes(roles[index])){
+        for (const [key, value] of Object.entries(roles_credito)) {
+            if(roles.includes(value)){
                 tieneRolComercial++;
             }
         }
@@ -290,11 +290,11 @@
 
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
-        var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+        var roles_credito=App.lang.getAppListStrings('roles_seguimiento_comercial_list');
 
         var tieneRolComercial=0;
-        for (let index = 0; index < roles.length; index++) {
-            if(roles_credito.includes(roles[index])){
+        for (const [key, value] of Object.entries(roles_credito)) {
+            if(roles.includes(value)){
                 tieneRolComercial++;
             }
         }
@@ -358,9 +358,16 @@
 
         var roles=App.user.attributes.roles;
 
-        var nombreRol="Rol Crédito";
+        var roles_credito=App.lang.getAppListStrings('roles_productos_credito_casos_list');
 
-        if(roles.includes(nombreRol)){
+        var tieneRolCredito=0;
+        for (const [key, value] of Object.entries(roles_credito)) {
+            if(roles.includes(value)){
+                tieneRolCredito++;
+            }
+        }
+
+        if(tieneRolCredito){
             var lista_productos_asesores_credito= app.lang.getAppListStrings('casos_productos_list');
             //A los usuarios con rol comercial (Operativo y Directivos), solo se les muestra el Producto "Seguimiento Comercial"
             Object.keys(lista_productos_asesores_credito).forEach(function (key) {

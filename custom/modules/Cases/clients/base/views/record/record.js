@@ -75,11 +75,11 @@
                 app.alert.dismiss('validar_concluido')
                 var user_log=App.user.id;
                 var roles=data.roles;
-                var roles_que_pueden_completar=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+                var roles_que_pueden_completar=App.lang.getAppListStrings('roles_seguimiento_comercial_list');
                 //Los usuarios con Roles Operativo o Directivos, si tienen permiso de establecer como "Completado" el caso
                 var tieneRolComercial=0;
-                for (let index = 0; index < roles.length; index++) {
-                    if(roles_que_pueden_completar.includes(roles[index])){
+                for (const [key, value] of Object.entries(roles_que_pueden_completar)) {
+                    if(roles.includes(value)){
                         tieneRolComercial++;
                     }
                 }
@@ -128,11 +128,11 @@
 
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
-        var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+        var roles_credito=App.lang.getAppListStrings('roles_seguimiento_comercial_list');
 
         var tieneRolComercial=0;
-        for (let index = 0; index < roles.length; index++) {
-            if(roles_credito.includes(roles[index])){
+        for (const [key, value] of Object.entries(roles_credito)) {
+            if(roles.includes(value)){
                 tieneRolComercial++;
             }
         }
@@ -210,7 +210,7 @@
                     var usuario_creador=self.model.get('created_by');
                     var user_log=App.user.id;
                     var roles=data.roles;
-                    var roles_que_pueden_completar=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+                    var roles_que_pueden_completar=App.lang.getAppListStrings('roles_seguimiento_comercial_list');
 
                     if(user_log == usuario_creador && roles.includes('Operativo') || roles.includes('Directivos')){
                         app.alert.show('error_finaliza_comercial', {
@@ -231,8 +231,8 @@
                     }
                     //Los usuarios con Roles Operativo o Directivos, si tienen permiso de establecer como "Completado" el caso
                     var tieneRolComercial=0;
-                    for (let index = 0; index < roles.length; index++) {
-                        if(roles_que_pueden_completar.includes(roles[index])){
+                    for (const [key, value] of Object.entries(roles_que_pueden_completar)) {
+                        if(roles.includes(value)){
                             tieneRolComercial++;
                         }
                     }
@@ -483,11 +483,11 @@
 
         var roles=App.user.attributes.roles;
         //A los roles de esta lista se les muestran valores específicos en las listas desplegables
-        var roles_credito=Object.keys(App.lang.getAppListStrings('roles_seguimiento_comercial_list'));
+        var roles_credito=App.lang.getAppListStrings('roles_seguimiento_comercial_list');
 
         var tieneRolComercial=0;
-        for (let index = 0; index < roles.length; index++) {
-            if(roles_credito.includes(roles[index])){
+        for (const [key, value] of Object.entries(roles_credito)) {
+            if(roles.includes(value)){
                 tieneRolComercial++;
             }
         }
@@ -556,9 +556,16 @@
     setOpcionesProductoParaCredito:function(){
 
         var roles=App.user.attributes.roles;
-        var nombreRol="Rol Crédito";
+        var roles_credito=App.lang.getAppListStrings('roles_productos_credito_casos_list');
 
-        if(roles.includes(nombreRol)){
+        var tieneRolCredito=0;
+        for (const [key, value] of Object.entries(roles_credito)) {
+            if(roles.includes(value)){
+                tieneRolCredito++;
+            }
+        }
+
+        if(tieneRolCredito){
             var lista_productos_asesores_credito= app.lang.getAppListStrings('casos_productos_list');
             var producto_actual=this.model.get('producto_c');
             //A los usuarios con rol comercial (Operativo y Directivos), solo se les muestra el Producto "Seguimiento Comercial"
