@@ -1,5 +1,5 @@
 <?php
- // created: 2022-08-26 10:48:27
+ // created: 2022-10-21 10:38:34
 
 $app_list_strings['motivo_bloqueo_list']=array (
   '' => '',
@@ -28,16 +28,16 @@ $app_list_strings['motivo_bloqueo_list']=array (
   23 => 'Banco',
   24 => 'Cartera Vencida',
   25 => 'Información Apócrifa',
-  26 => 'Negocio receptor de tarjetas de crédito que ocasionó pérdida al Usuario',
-  27 => 'Persona relacionada con la empresa o con Persona Física con Actividad Empresarial  con clave de prevención',
-  28 => 'Cliente declarado en quiebra, suspensión de pagos o en concurso mercantil',
-  29 => 'Cliente en trámite judicial',
-  30 => 'Cliente que propició pérdida al Otorgante por fraude comprobado, declarado conforme a  sentencia judicial',
-  31 => 'Cliente que solicitó y/o acordó con el Otorgante liquidación del crédito con pago menor a  la deuda total',
-  32 => 'El Usuario no ha podido localizar al Cliente, titular de la cuenta',
-  33 => 'Cliente desvió recursos a fines distintos a los pactados, debidamente comprobado',
-  34 => 'Cliente que dispuso de las garantías que respaldan el crédito sin autorización del  Otorgante',
-  35 => 'Cliente que enajena o cambia régimen de propiedad de sus bienes o permite  gravámenes sobre los mismos',
-  36 => 'Cliente que dispuso de las retenciones de sus trabajadores, no enterando a la Institución  correspondiente',
-  37 => 'Cliente que propició pérdida total al Otorgante',
+  26 => '78 = Negocio receptor de tarjetas de crédito que ocasionó pérdida al Usuario',
+  27 => '79 = Persona relacionada con la empresa o con Persona Física con Actividad Empresarial  con clave de prevención',
+  28 => '80 = Cliente declarado en quiebra, suspensión de pagos o en concurso mercantil',
+  29 => '81 = Cliente en trámite judicial',
+  30 => '82 = Cliente que propició pérdida al Otorgante por fraude comprobado, declarado conforme a  sentencia judicial',
+  31 => '83 = Cliente que solicitó y/o acordó con el Otorgante liquidación del crédito con pago menor a  la deuda total',
+  32 => '84 = El Usuario no ha podido localizar al Cliente, titular de la cuenta',
+  33 => '85 = Cliente desvió recursos a fines distintos a los pactados, debidamente comprobado',
+  34 => '86 = Cliente que dispuso de las garantías que respaldan el crédito sin autorización del  Otorgante',
+  35 => '87 = Cliente que enajena o cambia régimen de propiedad de sus bienes o permite  gravámenes sobre los mismos',
+  36 => '88 = Cliente que dispuso de las retenciones de sus trabajadores, no enterando a la Institución  correspondiente',
+  37 => '92 = Cliente que propició pérdida total al Otorgante',
 );

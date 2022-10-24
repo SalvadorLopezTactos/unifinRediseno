@@ -171,7 +171,8 @@
                     title: 'Generando descarga, por favor espere.',
                 });
                 //Peticion de servicio para obtener el documento con el id en url_documento
-                var host = App.config.analizate;
+                //var host = App.config.analizate;
+                var host = App.lang.getAppListStrings('analizate_hosts_documentos_list')['cliente'];
                 var direccion = host + archivo;
                 direccion = btoa(direccion);
                 /*Realiza api call para obtener el documento en base 64 para añadirle cabecera

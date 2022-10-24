@@ -1,5 +1,5 @@
 <?php
- // created: 2022-08-25 10:56:05
+ // created: 2022-10-21 12:38:43
 
 $app_list_strings['full_access_accounts_list']=array (
   '' => '',
@@ -10,4 +10,6 @@ $app_list_strings['full_access_accounts_list']=array (
   5 => 'Centro Prospección',
   6 => 'Centro Prospección - Total',
   7 => 'Seguros',
+  8 => 'Rol Crédito Casos',
+  9 => 'Centro Prospección - Casos',
 );
