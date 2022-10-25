@@ -8,14 +8,23 @@
         'click .cancelCheckCP': 'cancelCheckCP',
         'click .checkNacExt':'setCheckNacionalExt',
         'click .continueCheckCP':'continueCheckCP',
-        'click .cancelSaveRecord':'cancelSaveRecord'
+        'click .cancelSaveRecord':'cancelSaveRecord',
+        'click .saveRecordCP':'saveRecordCP',
     },
 
     flagClickModal:null,
 
     initialize: function(options){
         this._super("initialize", [options]);
+        self=this;
         this.paises_list=App.lang.getAppListStrings('paises_list');
+        //Eliminando la opción de México, ya que es un registro extranjero
+        Object.keys(this.paises_list).forEach(function (key) {
+            if (key == "2") {
+                delete self.paises_list[key];
+            }
+        });
+
     },
 
     _render: function () {
@@ -58,7 +67,7 @@
     },
 
     cancelSaveRecord:function(){
-        // ToDO: Antes de mostrar el modal previo, mostrar advertencia en caso de que algún campo contenga valor
+        // ToDO: Antes de mostrar el modal previo, mostrar advertencia en caso de que algún campo contenga valor y no se han guardado los cambios
         this.closeModalRecordCP();
         this.openModalCheckCP();
     },
@@ -79,7 +88,7 @@
         //Obteniendo valores de checkbox para saber si es una dirección Nacional o Extranjera
         var valueChkNac=$('#checkNacional').is(':checked');
         this.nacionalidad= (valueChkNac) ? 'nacional':'extranjero';
-        self=this;
+        //self=this;
         if(cpValue==""){
             app.alert.show('errorCP', {
                 level: 'error',
@@ -89,85 +98,177 @@
             $('#codigoPostal').attr('style','border:1px solid red;');
             return;
         }else{
-            $(e.currentTarget).addClass('disabled');
-            $('#processingCheckCP').show();
+            if(this.nacionalidad=="nacional"){
+                $(e.currentTarget).addClass('disabled');
+                $('#processingCheckCP').show();
 
-            var str_length = cpValue.length;
-            //Valida formato
-            var pattern = /^\d+$/;
-            var isNumber = pattern.test(cpValue);
-            if (str_length >= 5 && isNumber){
+                var str_length = cpValue.length;
+                //Valida formato
+                var pattern = /^\d+$/;
+                var isNumber = pattern.test(cpValue);
+                if (str_length >= 5 && isNumber){
 
-                //LLamada a api custom
-                app.alert.show('loadingCheckCP', {
-                    level: 'process',
-                    title: 'Cargando información de Código Postal ...',
-                });
+                    //LLamada a api custom
+                    app.alert.show('loadingCheckCP', {
+                        level: 'process',
+                        title: 'Cargando información de Código Postal ...',
+                    });
 
-                var strUrl = 'DireccionesCP/' + cpValue + '/0';
+                    var strUrl = 'DireccionesCP/' + cpValue + '/0';
 
-                app.api.call('GET', app.api.buildURL(strUrl), null, {
-                    success: _.bind(function (data) {
-                        if(data.paises.length>0){
-                            console.log(self.nacionalidad);
-                            self.isNational=(self.nacionalidad=='nacional') ? true:false;
+                    app.api.call('GET', app.api.buildURL(strUrl), null, {
+                        success: _.bind(function (data) {
+                            if(data.paises.length>0){
+                                console.log(self.nacionalidad);
+                                self.isNational=(self.nacionalidad=='nacional') ? true:false;
 
-                            if(self.isNational){
-                                self.estados_list={};
-                                self.ciudades_list={};
-                                self.municipios_list={};
-                                self.paisId=data.paises[0].idPais;
-                                self.paisName=data.paises[0].namePais;
-                                
-                                for (let index = 0; index < data.estados.length; index++) {
-                                    self.estados_list[data.estados[index].idEstado]=data.estados[index].nameEstado;
+                                if(self.isNational){
+                                    self.estados_list={};
+                                    self.ciudades_list={};
+                                    self.municipios_list={};
+                                    self.paisId=data.paises[0].idPais;
+                                    self.paisName=data.paises[0].namePais;
+                                    
+                                    for (let index = 0; index < data.estados.length; index++) {
+                                        self.estados_list[data.estados[index].idEstado]=data.estados[index].nameEstado;
+                                    }
+
+                                    for (let index = 0; index < data.ciudades.length; index++) {
+                                        self.ciudades_list[data.ciudades[index].idCiudad]=data.ciudades[index].nameCiudad;
+                                    }
+
+                                    for (let index = 0; index < data.municipios.length; index++) {
+                                        self.municipios_list[data.municipios[index].idMunicipio]=data.municipios[index].nameMunicipio;
+                                    }
                                 }
 
-                                for (let index = 0; index < data.ciudades.length; index++) {
-                                    self.ciudades_list[data.ciudades[index].idCiudad]=data.ciudades[index].nameCiudad;
-                                }
+                                $(self.e.currentTarget).removeClass('disabled');
+                                app.alert.dismiss('loadingCheckCP');
+                                $('#processingCheckCP').hide();
+                                $('#codigoPostal').attr('style','');
 
-                                for (let index = 0; index < data.municipios.length; index++) {
-                                    self.municipios_list[data.municipios[index].idMunicipio]=data.municipios[index].nameMunicipio;
-                                }
+                                self.flagClickModal=true;
+                                self.render();
+                                self.closeModalCheckCP();
+                                self.openModalRecordCP();
+                            }else{
+                                $(self.e.currentTarget).removeClass('disabled');
+                                app.alert.dismiss('loadingCheckCP');
+                                $('#processingCheckCP').hide();
+
+                                app.alert.show('invalid_cp', {
+                                    level: 'error',
+                                    autoClose: true,
+                                    messages: 'El C\u00F3digo Postal ingresado no existe'
+                                });
                             }
-
-                            $(self.e.currentTarget).removeClass('disabled');
-                            app.alert.dismiss('loadingCheckCP');
-                            $('#processingCheckCP').hide();
-                            $('#codigoPostal').attr('style','');
-
-                            self.flagClickModal=true;
-                            self.render();
-                            self.closeModalCheckCP();
-                            self.openModalRecordCP();
-                        }else{
-                            $(self.e.currentTarget).removeClass('disabled');
-                            app.alert.dismiss('loadingCheckCP');
-                            $('#processingCheckCP').hide();
-
-                            app.alert.show('invalid_cp', {
-                                level: 'error',
-                                autoClose: true,
-                                messages: 'El C\u00F3digo Postal ingresado no existe'
-                            });
-                        }
+                        
+                        }, self)
+                    });
                     
-                    }, self)
-                });
-                
-            }else{
-                $(e.currentTarget).removeClass('disabled');
-                $('#processingCheckCP').hide();
-                $('#codigoPostal').attr('style','border:1px solid red;');
-                
-                app.alert.show('invalid_cp', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'C\u00F3digo Postal inv\u00E1lido'
-                });
+                }else{
+                    $(e.currentTarget).removeClass('disabled');
+                    $('#processingCheckCP').hide();
+                    $('#codigoPostal').attr('style','border:1px solid red;');
+                    
+                    app.alert.show('invalid_cp', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'C\u00F3digo Postal inv\u00E1lido'
+                    });
 
-            } 
+                } 
+
+            }else{//else para dirección extranjera
+                self.flagClickModal=true;
+                self.render();
+                self.closeModalCheckCP();
+                self.openModalRecordCP();
+            }
         }
+    },
+
+    saveRecordCP:function(e){
+
+        //Se valida si el CP es nacional, ya que los registros nacionales se obtienen a través de "selects" y las extranjeras son "inputs"
+        if(this.isNational){
+            var cp=$('#codigoPostalSave').val();
+            var pais=$('#paisRecord').attr('data-id');
+            var labelPais=$('#paisRecord').val();
+            var estado=$('#estado').val();
+            var labelEstado=$('#estado option:selected').text();
+            var ciudad=$('#ciudad').val();
+            var labelCiudad=$('#ciudad option:selected').text();
+            var municipio=$('#municipio').val();
+            var labelMunicipio=$('#municipio option:selected').text();
+            var colonia=$('#colonia').val().trim();
+        }else{
+            var cp=$('#codigoPostalSave').val();
+            var pais=$('#paisRecord').attr('data-id');
+            var labelPais=$('#paisRecord').val();
+            var estado=$('#estado').val();
+            var labelEstado=$('#estado option:selected').text();
+            var ciudad=$('#ciudad').val();
+            var labelCiudad=$('#ciudad option:selected').text();
+            var municipio=$('#municipio').val();
+            var labelMunicipio=$('#municipio option:selected').text();
+            var colonia=$('#colonia').val().trim();
+        }
+        
+
+        var body={
+            "cp":cp,
+            "pais":pais,
+            "labelPais":labelPais,
+            "estado":estado,
+            "labelEstado":labelEstado,
+            "ciudad":ciudad,
+            "labelCiudad":labelCiudad,
+            "municipio":municipio,
+            "labelMunicipio":labelMunicipio,
+            //"colonia":colonia, únicamente se inserta la etiqueta, ya que el id no se conoce
+            "labelColonia":colonia
+        }
+
+        var url=app.api.buildURL("CheckSaveSepomex", '', {}, {});
+
+        if(colonia !=""){
+            $('#processingSaveCheckCP').show();
+            $(e.currentTarget).addClass('disabled');
+
+            app.api.call('create', url, body,{
+                success: function (data){
+                    if(data.result=='error'){
+                        app.alert.show('errorSaveSepomex', {
+                            level: 'error',
+                            messages: data.msg,
+                            autoClose: true
+                        });
+                    }else{
+                        app.alert.show('successSaveSepomex', {
+                            level: 'success',
+                            messages: data.msg,
+                            autoClose: true
+                        });
+
+                        App.router.navigate('#dir_Sepomex', {trigger:true});
+                    }
+
+                    $('#processingSaveCheckCP').hide();
+                    $(e.currentTarget).removeClass('disabled');
+
+                }
+            });
+
+        }else{
+
+            app.alert.show('errorColonia', {
+                level: 'error',
+                messages: 'Favor de ingresar Colonia',
+                autoClose: true
+            });
+            $('#colonia').attr('style','border:1px solid red;');
+        }
+
     }
 })
