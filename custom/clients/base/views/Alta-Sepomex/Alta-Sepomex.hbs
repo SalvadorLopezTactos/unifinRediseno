@@ -158,7 +158,7 @@
                   <input id="paisRecord" class="formField" type="text" disabled data-id="{{paisId}}" value="{{paisName}}">
                   <p class="help-block"></p>
                   {{else}}
-                  <select class="row-fluid select2 selectPais" id="pais" data-field="pais">
+                  <select class="row-fluid select2 selectPais" id="paisRecord" data-field="pais">
                       {{#each paises_list}}
                       <option value="{{@key}}">{{this}}</option>
                       {{/each}}

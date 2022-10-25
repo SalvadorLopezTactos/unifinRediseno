@@ -180,6 +180,7 @@
                 } 
 
             }else{//else para dirección extranjera
+                self.isNational=false;
                 self.flagClickModal=true;
                 self.render();
                 self.closeModalCheckCP();
@@ -204,15 +205,15 @@
             var colonia=$('#colonia').val().trim();
         }else{
             var cp=$('#codigoPostalSave').val();
-            var pais=$('#paisRecord').attr('data-id');
-            var labelPais=$('#paisRecord').val();
-            var estado=$('#estado').val();
-            var labelEstado=$('#estado option:selected').text();
-            var ciudad=$('#ciudad').val();
-            var labelCiudad=$('#ciudad option:selected').text();
-            var municipio=$('#municipio').val();
-            var labelMunicipio=$('#municipio option:selected').text();
-            var colonia=$('#colonia').val().trim();
+            var pais=$('#paisRecord option:selected').val();
+            var labelPais=$('#paisRecord option:selected').text();
+            var estado='';
+            var labelEstado=$('#estado').val().trim();
+            var ciudad='';
+            var labelCiudad=$('#ciudad').val().trim();
+            var municipio='';
+            var labelMunicipio=$('#municipio').val().trim();
+            var colonia=$('#colonia').val().trim().trim();
         }
         
 
@@ -232,42 +233,110 @@
 
         var url=app.api.buildURL("CheckSaveSepomex", '', {}, {});
 
-        if(colonia !=""){
-            $('#processingSaveCheckCP').show();
-            $(e.currentTarget).addClass('disabled');
-
-            app.api.call('create', url, body,{
-                success: function (data){
-                    if(data.result=='error'){
-                        app.alert.show('errorSaveSepomex', {
-                            level: 'error',
-                            messages: data.msg,
-                            autoClose: true
-                        });
-                    }else{
-                        app.alert.show('successSaveSepomex', {
-                            level: 'success',
-                            messages: data.msg,
-                            autoClose: true
-                        });
-
-                        App.router.navigate('#dir_Sepomex', {trigger:true});
+        //Al ser nacional solo se valida la Colonia, ya que los otros campos vienen pre llenos
+        if(this.isNational){
+            if(colonia !=""){
+                $('#processingSaveCheckCP').show();
+                $(e.currentTarget).addClass('disabled');
+    
+                app.api.call('create', url, body,{
+                    success: function (data){
+                        if(data.result=='error'){
+                            app.alert.show('errorSaveSepomex', {
+                                level: 'error',
+                                messages: data.msg,
+                                autoClose: true
+                            });
+                        }else{
+                            app.alert.show('successSaveSepomex', {
+                                level: 'success',
+                                messages: data.msg,
+                                autoClose: true
+                            });
+    
+                            App.router.navigate('#dir_Sepomex', {trigger:true});
+                        }
+    
+                        $('#processingSaveCheckCP').hide();
+                        $(e.currentTarget).removeClass('disabled');
+    
                     }
+                });
+    
+            }else{
+                app.alert.show('errorColonia', {
+                    level: 'error',
+                    messages: 'Favor de ingresar Colonia',
+                    autoClose: true
+                });
+                $('#colonia').attr('style','border:1px solid red;');
+            }
+        }else{//Else para extranjero y validar todos los campos vacíos
+            var inputs=$('.formField');
+            var fieldsNoFill=[];
+            for (let index = 0; index < inputs.length; index++) {
+                if(index==0 && inputs.eq(index).val() != ""){//El primer índice corresponde al código postal
+                    var cp_value=inputs.eq(index).val();
+                    var str_length = cp_value.length;
+                    //Valida formato
+                    var pattern = /^\d+$/;
+                    var isNumber = pattern.test(cp_value);
+                    if (str_length == 5 && isNumber){
 
-                    $('#processingSaveCheckCP').hide();
-                    $(e.currentTarget).removeClass('disabled');
-
+                    }else{
+                        app.alert.show('invalid_cp', {
+                            level: 'error',
+                            autoClose: true,
+                            messages: 'C\u00F3digo Postal inv\u00E1lido'
+                        });
+                    }
                 }
-            });
 
-        }else{
+                if(inputs.eq(index).val() ==""){
+                    fieldsNoFill.push('1');
+                }else{
+                    fieldsNoFill.push('0');
+                }
+            }
 
-            app.alert.show('errorColonia', {
-                level: 'error',
-                messages: 'Favor de ingresar Colonia',
-                autoClose: true
-            });
-            $('#colonia').attr('style','border:1px solid red;');
+            if(fieldsNoFill.includes('1')){
+                app.alert.show('invalid_cp', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Favor de llenar todos los campos'
+                });
+                
+
+            }else{
+                //Guardar dirección
+                $('#processingSaveCheckCP').show();
+                $(e.currentTarget).addClass('disabled');
+                app.api.call('create', url, body,{
+                    success: function (data){
+                        if(data.result=='error'){
+                            app.alert.show('errorSaveSepomex', {
+                                level: 'error',
+                                messages: data.msg,
+                                autoClose: true
+                            });
+                        }else{
+                            app.alert.show('successSaveSepomex', {
+                                level: 'success',
+                                messages: data.msg,
+                                autoClose: true
+                            });
+    
+                            App.router.navigate('#dir_Sepomex', {trigger:true});
+                        }
+    
+                        $('#processingSaveCheckCP').hide();
+                        $(e.currentTarget).removeClass('disabled');
+    
+                    }
+                });
+
+            }
+
         }
 
     }
