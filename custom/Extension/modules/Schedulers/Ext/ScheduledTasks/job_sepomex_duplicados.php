@@ -14,6 +14,7 @@ function job_sepomex_duplicados()
         //Se obtienen registros duplicados a través de un contador
         $qDuplicados="SELECT CONCAT(codigo_postal,estado,ciudad,municipio,colonia) name_direccion, COUNT(*) total
         FROM dir_sepomex
+        WHERE deleted=0
         group by name_direccion
         HAVING total>1;";
 
@@ -37,7 +38,8 @@ function job_sepomex_duplicados()
             $id_prevaleciente="";
             for ($i=0; $i<count($names_dup) ; $i++) {
                 $nombre_concatenado=$names_dup[$i];
-                $qRegistrosRepetidos="SELECT * FROM dir_sepomex WHERE CONCAT(codigo_postal,estado,ciudad,municipio,colonia)='{$nombre_concatenado}';";    
+                $qRegistrosRepetidos="SELECT * FROM dir_sepomex WHERE CONCAT(codigo_postal,estado,ciudad,municipio,colonia)='{$nombre_concatenado}' AND deleted=0;";
+
                 $rRegistrosRepetidos=$GLOBALS['db']->query($qRegistrosRepetidos);
 
                 while($row = $GLOBALS['db']->fetchByAssoc($rRegistrosRepetidos)){
@@ -64,6 +66,7 @@ function job_sepomex_duplicados()
                     $rDireccionesAactualizar=$GLOBALS['db']->query($qDireccionesAactualizar);
 
                     if($rDireccionesAactualizar->num_rows > 0){
+                        
                         while($row = $GLOBALS['db']->fetchByAssoc($rDireccionesAactualizar)){
                             $qUpdateDirSepomex="UPDATE dir_sepomex_dire_direccion_c SET dir_sepomex_dire_direcciondir_sepomex_ida = '{$id_prevaleciente}' WHERE id = '{$row['id']}'";
                             $rUpdateDirSepomex=$GLOBALS['db']->query($qUpdateDirSepomex);
