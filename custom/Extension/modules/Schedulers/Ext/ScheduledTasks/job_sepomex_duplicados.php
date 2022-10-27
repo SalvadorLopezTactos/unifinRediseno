@@ -68,7 +68,8 @@ function job_sepomex_duplicados()
                     if($rDireccionesAactualizar->num_rows > 0){
                         
                         while($row = $GLOBALS['db']->fetchByAssoc($rDireccionesAactualizar)){
-                            $qUpdateDirSepomex="UPDATE dir_sepomex_dire_direccion_c SET dir_sepomex_dire_direcciondir_sepomex_ida = '{$id_prevaleciente}' WHERE id = '{$row['id']}'";
+                            $current_date=TimeDate::getInstance()->nowDb();
+                            $qUpdateDirSepomex="UPDATE dir_sepomex_dire_direccion_c SET dir_sepomex_dire_direcciondir_sepomex_ida = '{$id_prevaleciente}', date_modified='{$current_date}' WHERE id = '{$row['id']}'";
                             $rUpdateDirSepomex=$GLOBALS['db']->query($qUpdateDirSepomex);
                             $GLOBALS['log']->fatal("Se ha actualizado la direccion: ".$row['dir_sepomex_dire_direcciondire_direccion_idb']);
                         }
