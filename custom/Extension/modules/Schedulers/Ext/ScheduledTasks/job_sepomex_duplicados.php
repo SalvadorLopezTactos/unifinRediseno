@@ -47,7 +47,8 @@ function job_sepomex_duplicados()
                     $lenID=strlen($id_registro_repetido);
                     //Cuando la longitud del id es de 36 dígitos, quiere decir que dicho registro fue dado de alta manualmente, se procede a marcarlo deleted
                     if($lenID==36){
-                        $qUpdateSepomexDeleted="UPDATE dir_sepomex SET deleted = '1' WHERE id = '{$id_registro_repetido}'";
+                        $current_date=TimeDate::getInstance()->nowDb();
+                        $qUpdateSepomexDeleted="UPDATE dir_sepomex SET deleted = '1', date_modified = '{$current_date}' WHERE id = '{$id_registro_repetido}'";
                         $rUpdateSepomexDeleted=$GLOBALS['db']->query($qUpdateSepomexDeleted);
                         array_push($array_ids_deleted,$id_registro_repetido);
                         $GLOBALS['log']->fatal("Se marca deleted el registro sepomex: ".$id_registro_repetido);

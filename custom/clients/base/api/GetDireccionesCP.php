@@ -110,7 +110,8 @@ WHERE cp.name = '{$cp}'";
         id_colonia as idColonia,
         colonia as nameColonia
         FROM dir_sepomex
-        WHERE codigo_postal='{$cp}'";
+        WHERE codigo_postal='{$cp}'
+        AND deleted=0";
 
         $result = $GLOBALS['db']->query($query);
 
