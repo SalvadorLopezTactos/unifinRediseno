@@ -466,7 +466,7 @@
 														if(data.idCP) {
 															var list_paises = data.paises;
 															var list_municipios = data.municipios;
-															var city_list = App.metadata.getCities();
+															var city_list = data.ciudades;
 															var list_estados = data.estados;
 															var list_colonias = data.colonias;
 															//País
@@ -494,15 +494,21 @@
 															var listColonia = {};
 															var auxColonia = '';
 															for (var i = 0; i < list_colonias.length; i++) {
-																listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
+																listColonia[i]={};
+																listColonia[i]['idColonia']=list_colonias[i].idColonia;
+																listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
+																listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
 																if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
 															}
 															//Ciudad
 															var listCiudad = {};
-															var ciudades = Object.values(city_list);
+															for (var i = 0; i < city_list.length; i++) {
+																listCiudad[city_list[i].idCiudad] = city_list[i].nameCiudad;
+															}
 															var auxCiudad = '';
 															var estadociudadaux = '';
 															//nuevaDireccion.estado = (Object.keys(nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(nuevaDireccion.listEstado)[0] : "";
+															/*
 															estadociudadaux = (Object.keys(listEstado)[0] != undefined) ? Object.keys(listEstado)[0] : "" ;
 															for (var [key, value] of Object.entries(listEstado)) {
 																for (var i = 0; i < ciudades.length; i++) {
@@ -512,6 +518,7 @@
 																	}
 																}
 															}
+															*/
 															if(cDireccionFiscal >= 1) {
 															  if(direccion[indice_indicador].indicador == 2) {
   																direccion[indice_indicador].valCodigoPostal = CP;
