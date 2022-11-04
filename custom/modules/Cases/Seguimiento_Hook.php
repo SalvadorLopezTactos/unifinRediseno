@@ -5,26 +5,26 @@ require_once 'modules/Teams/TeamSet.php';
 class Seguimiento_Hook
 {
     function Fecha_Seguimiento($bean, $event, $args)
-    {  
+    {
         //Eventos para establecer fecha de seguimiento:
         if(!$args['isUpdate']){//Es creación, evento disparador número 1
-            $fecha_s = ""; 
-            $GLOBALS['log']->fatal("********** Prioridad **********");
+            $fecha_s = "";
+            //$GLOBALS['log']->fatal("********** Prioridad **********");
             /* ******************** Prioridad *****************+
             Prioridad Baja: Usuario y contraseña del portal , Error para visualizar información ,Error en la carga de archivos ,Error para descarga de archivos
             Prioridad Media: Cantidad cobrada no coincide, Cargos duplicados,Cargos cancelados,Reporte por daño
             Prioridad Alta: Cargos no reconocidos,Bloqueos preventivos por fraude, Reporte por robo,Reporte por extravío,Caída completa de plataformas
             */
             if($bean->subtipo_c == '9' || $bean->subtipo_c == '10' || $bean->subtipo_c == '11' || $bean->subtipo_c == '12'){
-                $bean->priority = 'P3'; 
+                $bean->priority = 'P3';
             }
             if($bean->subtipo_c == '1' || $bean->subtipo_c == '2' || $bean->subtipo_c == '3' || $bean->subtipo_c == '8'){
-                $bean->priority = 'P2'; 
+                $bean->priority = 'P2';
             }
             if($bean->subtipo_c == '4' || $bean->subtipo_c == '5' || $bean->subtipo_c == '6'|| $bean->subtipo_c == '7'|| $bean->subtipo_c == '13'){
-                $bean->priority = 'P1'; 
+                $bean->priority = 'P1';
             }
-            
+
             /*La fecha de seguimiento se establece deacuerdo a:
             |Subtipo de caso|Prioridad|Fecha de seguimiento|
             |Cargos no reconocidos|Alta|1 día|
@@ -41,8 +41,8 @@ class Seguimiento_Hook
             |Error para descarga de archivos|Baja|4 días|
             |Usuario y contraseña del portal|Baja|1 día|
             */
-            $GLOBALS['log']->fatal("********** Fecha de seguimiento **********");
-             
+            //$GLOBALS['log']->fatal("********** Fecha de seguimiento **********");
+
             if($bean->priority == 'P1' ){
                 if($bean->subtipo_c == '4' || $bean->subtipo_c == '5' || $bean->subtipo_c == '6'|| $bean->subtipo_c == '7'|| $bean->subtipo_c == '13'){
                     $fecha_s = $this->dia_seguimiento(1);   //1 dia
@@ -91,19 +91,19 @@ class Seguimiento_Hook
                 $bean->resolved_datetime = $bean->date_modified;
             }
         }
-        
+
     }
 
     function dia_seguimiento($add){
         global $current_user;
 
-        $GLOBALS['log']->fatal("Días a sumar: ".$add);
+        //$GLOBALS['log']->fatal("Días a sumar: ".$add);
         $hoy=$this->sumDays($add, 'Y-m-d H:i:s');
 
         $due_date_time = new SugarDateTime($hoy);
         $user_datetime_string = $due_date_time->formatDateTime("datetime", "db", $current_user);
 
-        $GLOBALS['log']->fatal("FECHA FORMATEADA PARA BD : ".$user_datetime_string);
+        //$GLOBALS['log']->fatal("FECHA FORMATEADA PARA BD : ".$user_datetime_string);
 
         return $user_datetime_string;
     }
@@ -112,16 +112,16 @@ class Seguimiento_Hook
         $incrementing = $days > 0;
         $days         = abs($days);
         $actualDate   = date("Y-m-d H:i:s");
-    
+
         while ($days > 0) {
             $tsDate    = strtotime($actualDate . ' ' . ($incrementing ? '+' : '-') . ' 1 days');
             $actualDate = date('Y-m-d H:i:s', $tsDate);
-    
+
             if (date('N', $tsDate) < 6) {
                 $days--;
             }
         }
-    
+
         return date($format, strtotime($actualDate));
     }
 
@@ -132,35 +132,35 @@ class Seguimiento_Hook
         $usuario_asignado=$bean->assigned_user_id;
 
         if($bean->fetched_row['assigned_user_id'] != $bean->assigned_user_id){
-            
+
             //$usuario_creador="c57e811e-b81a-cde4-d6b4-5626c9961772";
             //Obtiene equipo privado del usuario creador y del usuario asignado
             $beanUserCreador = BeanFactory::getBean('Users', $usuario_creador, array('disable_row_level_security' => true));
             $teamSetBean = new TeamSet();
             //Retrieve the teams from the team_set_id
             $teams = $teamSetBean->getTeamIds($beanUserCreador->team_set_id);
-            
-            $GLOBALS['log']->fatal(print_r($teams,true));
 
-            
+            //$GLOBALS['log']->fatal(print_r($teams,true));
+
+
             $User = new User();
             $User->retrieve($usuario_creador);
             $equipoPrivadoCreador=$User->getPrivateTeamID();
-            
-            $GLOBALS['log']->fatal("PRIVADO CREADOR: ".$equipoPrivadoCreador);
+
+            //$GLOBALS['log']->fatal("PRIVADO CREADOR: ".$equipoPrivadoCreador);
 
             $UserAsignado = new User();
             $UserAsignado->retrieve($usuario_asignado);
             $equipoPrivadoAsignado=$UserAsignado->getPrivateTeamID();
 
-            $GLOBALS['log']->fatal("PRIVADO ASIGNADO: ".$equipoPrivadoAsignado);
+            //$GLOBALS['log']->fatal("PRIVADO ASIGNADO: ".$equipoPrivadoAsignado);
 
             $bean->load_relationship('teams');
 
             //Add the teams
             $bean->teams->add(
                 array(
-                    $equipoPrivadoCreador, 
+                    $equipoPrivadoCreador,
                     $equipoPrivadoAsignado
                 )
             );
@@ -173,92 +173,107 @@ class Seguimiento_Hook
         global $db;
         global $current_user;
         //Se establece asignado y responsable
+        // $GLOBALS['log']->fatal("Creado por: ". $bean->created_by);
+        // $GLOBALS['log']->fatal("Asignado a: ".$bean->assigned_user_id);
+        // $GLOBALS['log']->fatal("Logueado: ".$current_user->id);
         if($bean->producto_c != "B621" && $bean->producto_c !="B601"){
             if(($bean->fetched_row['area_interna_c'] != $bean->area_interna_c) || ($bean->fetched_row['equipo_soporte_c'] != $bean->equipo_soporte_c) || !$args['isUpdate'] ){
 
                 $area_interna="='".$bean->area_interna_c."'";
                 $equipo_soporte="='".$bean->equipo_soporte_c."'";
-    
+                $esCAC = isset($current_user->cac_c) ? $current_user->cac_c : false;
+                //$GLOBALS['log']->fatal("Es CAC: ".$esCAC);
                 if($bean->area_interna_c==''){
                     $area_interna='IS NULL';
                 }
-    
+
                 if($bean->equipo_soporte_c==''){
                     $equipo_soporte='IS NULL';
                 }
-    
+
                 $query="SELECT * FROM unifin_casos_soporte_area WHERE area_interna {$area_interna} AND equipo {$equipo_soporte}";
-    
-                $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO");
-                $GLOBALS['log']->fatal($query);
-    
+
+                // $GLOBALS['log']->fatal("QUERY PARA OBTENER RESPONSABLE Y ASIGNADO");
+                // $GLOBALS['log']->fatal($query);
+
                 $responsable="";
                 $asignado="";
-                
+
                 $result = $GLOBALS['db']->query($query);
-    
+
                 $registros_encontrados=$result->num_rows;
-    
-                $GLOBALS['log']->fatal("REGISTROS: ".$registros_encontrados);
-            
+
+                //$GLOBALS['log']->fatal("REGISTROS: ".$registros_encontrados);
+
                 if($registros_encontrados>0){
-    
+
                     while($row = $GLOBALS['db']->fetchByAssoc($result)){
                         $id_registro=$row['id'];
                         $responsable=$row['responsable'];
-                        $asignado=$row['responsable'];
+                        $asignado= (!$esCAC || ($esCAC && $bean->created_by == $bean->assigned_user_id) ) ? $row['responsable'] : $bean->assigned_user_id;
                         $ultimo_asignado=intval($row['ultimo_asignado_carrusel']);
-        
+
                         $asignacion_carrusel=($row['asignacion_carrousel']==1) ? true : false;
                         $responsable_en_carrusel=($row['responsable_carrousel']==1) ? true : false;
                         //Calculando el asignado, dependiendo si se tiene asignación en carrusel
                         if($asignacion_carrusel){
                             $usuarios_carrusel=$this->getUsersReportsTo($responsable);
-                            $GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
-    
+                            //$GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
+
                             if($responsable_en_carrusel){
                                 //Se toma en cuenta en el carrusel al usuario responsable, por lo tanto se pone al inicio de la lista de usuarios disponibles
                                 array_unshift($usuarios_carrusel,$responsable);
                             }
-    
-                            //Antes de asignar, se toma en cuenta el valor del último asignado
-                            $asignado=$usuarios_carrusel[$ultimo_asignado];
-                            
-                            $ultimo_asignado+=1;
-    
-                            if($ultimo_asignado==count($usuarios_carrusel)){
-                                //En caso de que el contador llegue al mismo número de usuarios disponibles para asignación, se procede a reiniciar dicho contador
-                                $ultimo_asignado=0;
+
+                            //Sólo procesa asgnado si: 1) No es caso creado por CAC o 2) Es CAC, pero establece asignado manualmente
+                            if(!$esCAC || ($esCAC && $bean->created_by == $bean->assigned_user_id ) )
+                            {
+                                //Antes de asignar, se toma en cuenta el valor del último asignado
+                                $asignado=$usuarios_carrusel[$ultimo_asignado];
+
+                                $ultimo_asignado+=1;
+
+                                if($ultimo_asignado==count($usuarios_carrusel)){
+                                    //En caso de que el contador llegue al mismo número de usuarios disponibles para asignación, se procede a reiniciar dicho contador
+                                    $ultimo_asignado=0;
+                                }
+
+                                $queryUpdate="UPDATE unifin_casos_soporte_area SET ultimo_asignado_carrusel='{$ultimo_asignado}' WHERE id='{$id_registro}'";
+
+                                $resultUpdate=$GLOBALS['db']->query($queryUpdate);
+                            }else{
+                                $asignado=$bean->assigned_user_id;
                             }
-    
-                            $queryUpdate="UPDATE unifin_casos_soporte_area SET ultimo_asignado_carrusel='{$ultimo_asignado}' WHERE id='{$id_registro}'";
-    
-                            $resultUpdate=$GLOBALS['db']->query($queryUpdate);
                         }
                     }
-    
+
                 }else{
-                    $responsable=$current_user->id;
-                    $asignado=$current_user->id;
+                    if($esCAC){
+                        $responsable=$bean->user_id_c;
+                        $asignado=$bean->assigned_user_id;
+                    }else{
+                        $responsable=$current_user->id;
+                        $asignado=$current_user->id;
+                    }
                 }
-    
-                $bean->assigned_user_id=$responsable;
-                $bean->user_id_c=$asignado;
+
+                $bean->assigned_user_id=$asignado;
+                $bean->user_id_c=$responsable;
 
                 //ENVIANDO NOTIFICACIÓN
                 $notify_user = BeanFactory::retrieveBean('Users', $bean->assigned_user_id);
                 $admin = Administration::getSettings();
 
                 $xtpl= $this->createNotificationEmailTemplate("Case", $notify_user,$bean);
-                
+
                 $subject      = $xtpl->text("Case" . "_Subject");
                 $textBody     = trim($xtpl->text("Case"));
-                                
+
                 $this->enviarNotificacion($notify_user,$admin,$subject,$textBody);
-                
+
             }
         }
-        
+
     }
 
     public function createNotificationEmailTemplate($templateName, $notify_user = null,$bean)
@@ -403,7 +418,7 @@ class Seguimiento_Hook
 
         $array_usuarios=array();
 
-        $queryUsersReports="SELECT id FROM users 
+        $queryUsersReports="SELECT id FROM users
         WHERE reports_to_id='{$responsable}'
         AND status='Active' and deleted=0 ORDER BY user_name";
 
@@ -423,5 +438,5 @@ class Seguimiento_Hook
 
 
 
-    
+
 }

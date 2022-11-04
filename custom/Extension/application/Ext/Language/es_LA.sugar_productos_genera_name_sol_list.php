@@ -3,7 +3,6 @@
 
 $app_list_strings['productos_genera_name_sol_list']=array (
   39 => 'UNICREDIT',
-  41 => 'UNILEASING',
   48 => 'UNICARD',
   49 => 'UNIPREMIUM',
   50 => 'UNIFACTOR',

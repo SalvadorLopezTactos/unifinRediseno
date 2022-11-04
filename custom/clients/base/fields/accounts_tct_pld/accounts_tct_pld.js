@@ -34,7 +34,7 @@
         'change .changePLD-CA':'updatemodelPLDCA',
         'change .changePLD-CS':'updatemodelPLDCS',
         'change .changePLD-CR':'updatemodelPLDCR',
-        
+
 
 
     },
@@ -136,7 +136,7 @@
         //Recupera data existente
         // if (pld.action == 'detail') {
         //Recupera datos para vista de detalle
-        
+
             var idCuenta = pld.model.get('id');
             if (idCuenta == "" || idCuenta == undefined) {
                 idCuenta = '1';
@@ -170,7 +170,7 @@
             // }
 
             this.render();
-        
+
     },
 
     formatDetailPLD: function (dataPLD) {
@@ -1265,8 +1265,17 @@
             || (typeof $('.campo4ddw-ff').select2('val') == "string")
             || (typeof $('.campo4ddw-ca').select2('val') == "string")
             || (typeof $('.campo4ddw-ap').select2('val') == "string")
-            )||(self.createMode)
-        )) {
+            )||(self.createMode) ) )
+        {
+            if(this.ProductosPLD.length==0){
+                this.ProductosPLD = {
+                    'arrendamientoPuro': {},
+                    'factorajeFinanciero': {},
+                    'creditoAutomotriz': {},
+                    'creditoSimple': {},
+                    'creditoRevolvente': {}
+                };
+            }
 
                     this.ProductosPLD.arrendamientoPuro.campo2 = this.$('.campo2ddw-ap').select2('val');
                     this.ProductosPLD.arrendamientoPuro.campo3 = this.$('.campo3rel-ap')[0]['innerText'];
@@ -1335,14 +1344,12 @@
                     this.ProductosPLD.creditoRevolvente.campo11=this.$('.campo11rel-ce').select2('val');
                     this.ProductosPLD.creditoRevolvente.campo11_id=this.$('.campo11rel-ce').select2('val');
 
-            
             //this.model.set('ProductosPLD', ProductosPLD);
             pld.ProductosPLD  = this.ProductosPLD;
             contexto_cuenta.ProductosPLD = this.ProductosPLD;
             this.model.set('ProductosPLD', this.ProductosPLD);
             this.model.set('accounts_tct_pld', this.ProductosPLD);
             callback(null, fields, errors);
-            
         } else {
             // contexto_cuenta.ProductosPLD = pld.formatDetailPLD(contexto_cuenta.ProductosPLD);
             // pld.ProductosPLD = contexto_cuenta.ProductosPLD;
@@ -1374,7 +1381,7 @@
         this.ProductosPLD.arrendamientoPuro.campo26 = this.$('.campo26txt-ap').val();
 
         contexto_cuenta.ProductosPLD.arrendamientoPuro=this.ProductosPLD.arrendamientoPuro;
-    
+
     },
 
     updatemodelPLDFF: function (){
@@ -1443,6 +1450,6 @@
         this.ProductosPLD.creditoRevolvente.campo11_id=this.$('.campo11rel-ce').select2('val');
 
         contexto_cuenta.ProductosPLD.creditoRevolvente=this.ProductosPLD.creditoRevolvente;
-    
+
     },
 })
