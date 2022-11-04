@@ -498,7 +498,7 @@
 																listColonia[i]['idColonia']=list_colonias[i].idColonia;
 																listColonia[i]['nameColonia']=list_colonias[i].nameColonia;
 																listColonia[i]['idCodigoPostal']=list_colonias[i].idCodigoPostal;
-																if(list_colonias[i].nameColonia == Colonia) auxColonia = list_colonias[i].idColonia;
+																if(list_colonias[i].nameColonia.toUpperCase().trim() == Colonia.toUpperCase().trim()) auxColonia = list_colonias[i].idColonia;
 															}
 															//Ciudad
 															var listCiudad = {};
