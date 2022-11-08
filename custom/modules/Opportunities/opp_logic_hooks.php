@@ -128,6 +128,8 @@ SQL;
             }
         } elseif ($bean->tct_etapa_ddw_c != 'SI') {
             $bean->name = str_replace("PRE - ", "", $bean->name);
+        } elseif (!empty($bean->idsolicitud_c) && $bean->tct_etapa_ddw_c == 'SI' && empty($bean->name)) {
+            $bean->name = "PRE - SOLICITUD " . $bean->idsolicitud_c . " - " . $beanCuenta->name;
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
         global $app_list_strings;
