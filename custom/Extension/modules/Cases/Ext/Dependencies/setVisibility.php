@@ -104,3 +104,35 @@ $dependencies['Cases']['source'] = array(
         ),
     ),
 );
+
+$dependencies['Cases']['account_name'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','name','type'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'account_name',
+                'value' => 'not(equal($type,"12"))',
+            ),
+        ),
+    ),
+);
+
+$dependencies['Cases']['case_cuenta_relacion'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','name','type'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'case_cuenta_relacion',
+                'value' => 'not(equal($type,"12"))',
+            ),
+        ),
+    ),
+);
