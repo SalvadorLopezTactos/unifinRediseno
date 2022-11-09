@@ -226,54 +226,57 @@ array (
               ),
               6 => 
               array (
+                'name' => 'leads_cases_1_name',
+              ),
+              7 => 
+              array (
+              ),
+              8 => 
+              array (
                 'readonly' => false,
                 'name' => 'vip_c',
                 'label' => 'LBL_VIP',
                 'span' => 12,
               ),
-              7 => 
+              9 => 
               array (
                 'readonly' => false,
                 'name' => 'producto_c',
                 'label' => 'LBL_PRODUCTO',
               ),
-              8 => 'type',
-              9 => 
+              10 => 'type',
+              11 => 
               array (
                 'readonly' => false,
                 'name' => 'subtipo_c',
                 'label' => 'LBL_SUBTIPO',
               ),
-              10 => 
+              12 => 
               array (
                 'readonly' => false,
                 'name' => 'detalle_subtipo_c',
                 'label' => 'LBL_DETALLE_SUBTIPO',
               ),
-              11 => 'priority',
-              12 => 'status',
-              13 => 
+              13 => 'priority',
+              14 => 'status',
+              15 => 
               array (
                 'name' => 'source',
               ),
-              14 => 
+              16 => 
               array (
               ),
-              15 => 
+              17 => 
               array (
                 'readonly' => false,
                 'name' => 'case_fcr_c',
                 'label' => 'LBL_CASE_FCR',
               ),
-              16 => 
+              18 => 
               array (
                 'readonly' => false,
                 'name' => 'case_hd_c',
                 'label' => 'LBL_CASE_HD',
-              ),
-              17 => 
-              array (
-                'name' => 'leads_cases_1_name',
               ),
             ),
           ),
