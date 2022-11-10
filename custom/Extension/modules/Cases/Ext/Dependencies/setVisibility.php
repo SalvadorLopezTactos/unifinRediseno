@@ -57,7 +57,7 @@ $dependencies['Cases']['area_interna_c'] = array(
     ),
 );
 
-$dependencies['Cases']['equipo_soporte_c'] = array(
+/*$dependencies['Cases']['equipo_soporte_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     'triggerFields' => array('id','producto_c'),
@@ -71,7 +71,7 @@ $dependencies['Cases']['equipo_soporte_c'] = array(
             ),
         ),
     ),
-);
+);*/
 
 $dependencies['Cases']['responsable_interno_c'] = array(
     'hooks' => array("all"),

@@ -1,28 +1,28 @@
 <?php
 $module_name = 'cta_cuentas_bancarias';
-$viewdefs[$module_name] =
+$viewdefs[$module_name] = 
 array (
-  'base' =>
+  'base' => 
   array (
-    'view' =>
+    'view' => 
     array (
-      'record' =>
+      'record' => 
       array (
-        'buttons' =>
+        'buttons' => 
         array (
-          0 =>
+          0 => 
           array (
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
-            'events' =>
+            'events' => 
             array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 =>
+          1 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -32,15 +32,15 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 =>
+          2 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'buttons' =>
+            'buttons' => 
             array (
-              0 =>
+              0 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:edit_button:click',
@@ -48,51 +48,7 @@ array (
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 'acl_action' => 'edit',
               ),
-              /*1 => 
-              array (
-                'type' => 'shareaction',
-                'name' => 'share',
-                'label' => 'LBL_RECORD_SHARE_BUTTON',
-                'acl_action' => 'view',
-              ),
-              2 =>
-              array (
-                'type' => 'pdfaction',
-                'name' => 'download-pdf',
-                'label' => 'LBL_PDF_VIEW',
-                'action' => 'download',
-                'acl_action' => 'view',
-              ),
-              3 =>
-              array (
-                'type' => 'pdfaction',
-                'name' => 'email-pdf',
-                'label' => 'LBL_PDF_EMAIL',
-                'action' => 'email',
-                'acl_action' => 'view',
-              ),
-              4 =>
-              array (
-                'type' => 'divider',
-              ),
-              5 =>
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:find_duplicates_button:click',
-                'name' => 'find_duplicates_button',
-                'label' => 'LBL_DUP_MERGE',
-                'acl_action' => 'edit',
-              ),
-              6 =>
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:duplicate_button:click',
-                'name' => 'duplicate_button',
-                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'cta_cuentas_bancarias',
-                'acl_action' => 'create',
-              ),*/
-              7 =>
+              7 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:audit_button:click',
@@ -100,36 +56,24 @@ array (
                 'label' => 'LNK_VIEW_CHANGE_LOG',
                 'acl_action' => 'view',
               ),
-              /*8 =>
-              array (
-                'type' => 'divider',
-              ),
-              9 =>
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:delete_button:click',
-                'name' => 'delete_button',
-                'label' => 'LBL_DELETE_BUTTON_LABEL',
-                'acl_action' => 'delete',
-              ),*/
             ),
           ),
-          3 =>
+          3 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
           ),
         ),
-        'panels' =>
+        'panels' => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'panel_header',
             'label' => 'LBL_RECORD_HEADER',
             'header' => true,
-            'fields' =>
+            'fields' => 
             array (
-              0 =>
+              0 => 
               array (
                 'name' => 'picture',
                 'type' => 'avatar',
@@ -139,7 +83,7 @@ array (
                 'readonly' => true,
               ),
               1 => 'name',
-              2 =>
+              2 => 
               array (
                 'name' => 'favorite',
                 'label' => 'LBL_FAVORITE',
@@ -147,7 +91,7 @@ array (
                 'readonly' => true,
                 'dismiss_label' => true,
               ),
-              3 =>
+              3 => 
               array (
                 'name' => 'follow',
                 'label' => 'LBL_FOLLOW',
@@ -157,7 +101,7 @@ array (
               ),
             ),
           ),
-          1 =>
+          1 => 
           array (
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
@@ -166,51 +110,51 @@ array (
             'placeholders' => true,
             'newTab' => false,
             'panelDefault' => 'expanded',
-            'fields' =>
+            'fields' => 
             array (
-              0 =>
+              0 => 
               array (
                 'name' => 'banco',
                 'label' => 'LBL_BANCO',
               ),
-              1 =>
+              1 => 
               array (
                 'name' => 'estado',
                 'label' => 'LBL_ESTADO',
               ),
-              2 =>
+              2 => 
               array (
                 'name' => 'cuenta',
                 'label' => 'LBL_CUENTA',
               ),
-              3 =>
+              3 => 
               array (
                 'name' => 'clabe',
                 'label' => 'LBL_CLABE',
               ),
-              4 =>
+              4 => 
               array (
                 'name' => 'plaza',
                 'label' => 'LBL_PLAZA',
               ),
-              5 =>
+              5 => 
               array (
                 'name' => 'sucursal',
                 'label' => 'LBL_SUCURSAL',
               ),
-              6 =>
+              6 => 
               array (
                 'name' => 'usos',
                 'label' => 'LBL_USOS',
               ),
-              7 =>
+              7 => 
               array (
                 'name' => 'idcorto_c',
                 'label' => 'LBL_IDCORTO_C',
               ),
             ),
           ),
-          2 =>
+          2 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
@@ -218,44 +162,44 @@ array (
             'label' => 'LBL_RECORDVIEW_PANEL1',
             'columns' => 2,
             'placeholders' => 1,
-            'fields' =>
+            'fields' => 
             array (
-              0 =>
+              0 => 
               array (
                 'readonly' => false,
                 'name' => 'divisa_c',
                 'label' => 'LBL_DIVISA',
               ),
-              1 =>
+              1 => 
               array (
                 'readonly' => false,
                 'name' => 'tipo_clave_c',
                 'label' => 'LBL_TIPO_CLAVE',
               ),
-              2 =>
+              2 => 
               array (
                 'readonly' => false,
                 'name' => 'forma_pago_c',
                 'label' => 'LBL_FORMA_PAGO',
               ),
-              3 =>
+              3 => 
               array (
                 'readonly' => false,
                 'name' => 'regimen_cuenta_c',
                 'label' => 'LBL_REGIMEN_CUENTA',
               ),
-              4 =>
+              4 => 
               array (
                 'readonly' => false,
                 'name' => 'domiciliacion_c',
                 'label' => 'LBL_DOMICILIACION',
               ),
-              5 =>
+              5 => 
               array (
               ),
             ),
           ),
-          3 =>
+          3 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
@@ -265,82 +209,82 @@ array (
             'placeholders' => true,
             'newTab' => false,
             'panelDefault' => 'expanded',
-            'fields' =>
+            'fields' => 
             array (
-              0 =>
+              0 => 
+              array (
+                'name' => 'cta_cuentas_bancarias_accounts_name',
+                'span' => 12,
+              ),
+              1 => 
+              array (
+                'readonly' => false,
+                'name' => 'validada_c',
+                'label' => 'LBL_VALIDADA',
+              ),
+              2 => 
+              array (
+                'readonly' => false,
+                'name' => 'vigencia_c',
+                'label' => 'LBL_VIGENCIA',
+              ),
+              3 => 
               array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              1 =>
+              4 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
                 'inline' => true,
                 'type' => 'fieldset',
                 'label' => 'LBL_DATE_MODIFIED',
-                'fields' =>
+                'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'date_modified',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'type' => 'label',
                     'default_value' => 'LBL_BY',
                   ),
-                  2 =>
+                  2 => 
                   array (
                     'name' => 'modified_by_name',
                   ),
                 ),
               ),
-              2 =>
+              5 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
                 'inline' => true,
                 'type' => 'fieldset',
                 'label' => 'LBL_DATE_ENTERED',
-                'fields' =>
+                'fields' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'name' => 'date_entered',
                   ),
-                  1 =>
+                  1 => 
                   array (
                     'type' => 'label',
                     'default_value' => 'LBL_BY',
                   ),
-                  2 =>
+                  2 => 
                   array (
                     'name' => 'created_by_name',
                   ),
                 ),
               ),
-              3 =>
-              array (
-                'name' => 'cta_cuentas_bancarias_accounts_name',
-                'span' => 12,
-              ),
-              4 =>
-              array (
-                'readonly' => false,
-                'name' => 'validada_c',
-                'label' => 'LBL_VALIDADA',
-              ),
-              5 =>
-              array (
-                'readonly' => false,
-                'name' => 'vigencia_c',
-                'label' => 'LBL_VIGENCIA',
-              ),
             ),
           ),
         ),
-        'templateMeta' =>
+        'templateMeta' => 
         array (
           'useTabs' => false,
         ),

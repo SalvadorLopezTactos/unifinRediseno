@@ -45,6 +45,7 @@ class Dynamics365 extends SugarApi
         global $db;
         //Obtiene parámetros, el id de cuenta
         $idCuenta=$args['accion'];
+        $idCuentaBancaria = isset($args['idCuentaBancaria']) ? $args['idCuentaBancaria'] : '';
         $host=$sugar_config['dynamics_token_host'];
         $client_id=$sugar_config['dynamics_token_client_id'];
         $client_secret=$sugar_config['dynamics_token_client_secret'];
@@ -139,13 +140,31 @@ class Dynamics365 extends SugarApi
             $body_elements["DEFAULTVENDORPAYMENTMETHODNAME"]="TRANSFER";
 
             //Recupera cuentas bancarias
-            $beanCuenta->load_relationship('cta_cuentas_bancarias_accounts');
-            $GLOBALS['log']->fatal('Recupera cuenta bancaria');
-            foreach ($beanCuenta->cta_cuentas_bancarias_accounts->getBeans() as $ctaBancaria) {
-                //Valida Cuenta bancaria
-                $GLOBALS['log']->fatal('Itera cuenta bancaria');
-                if (strlen($ctaBancaria->cuenta)>=8 || strlen($ctaBancaria->clabe)>=8 ) {
-                    $GLOBALS['log']->fatal('Entra cuenta bancaria: '. $ctaBancaria->name);
+            if(empty($idCuentaBancaria)) {
+                //Acción ejecutada para rpocesar todas las cuentas bancarias asociadas
+                $beanCuenta->load_relationship('cta_cuentas_bancarias_accounts');
+                $GLOBALS['log']->fatal('Recupera cuenta bancaria');
+                foreach ($beanCuenta->cta_cuentas_bancarias_accounts->getBeans() as $ctaBancaria) {
+                    //Valida Cuenta bancaria: Sólo procesa cuentas bancarias con clabe interbancaria
+                    //$GLOBALS['log']->fatal('Itera cuenta bancaria');
+                    if (strlen($ctaBancaria->clabe)>=8 ) {
+                        //$GLOBALS['log']->fatal('Entra cuenta bancaria: '. $ctaBancaria->name);
+                        //Arma petición para enviar cuenta bancaria
+                        global $app_list_strings;
+                        $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
+                        $rutaBancaria = $app_list_strings['dynamics365_ruta_bancaria_list'];
+                        $idBancoDynamics = $mapeoBancos[$ctaBancaria->banco];
+                        $body_elements["BANKGROUPID"]=$idBancoDynamics;
+                        $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
+                        $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
+                        $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
+                        $records_list[]=$body_elements;
+                    }
+                }
+            } else {
+                // Acción ejecutada desde cuenta bancaria
+                $ctaBancaria = BeanFactory::retrieveBean('cta_cuentas_bancarias', $idCuentaBancaria, array('disable_row_level_security' => true));
+                if (strlen($ctaBancaria->clabe)>=8 ) {
                     //Arma petición para enviar cuenta bancaria
                     global $app_list_strings;
                     $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
@@ -153,18 +172,9 @@ class Dynamics365 extends SugarApi
                     $idBancoDynamics = $mapeoBancos[$ctaBancaria->banco];
                     $body_elements["BANKGROUPID"]=$idBancoDynamics;
                     $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
-                    //Valida Cuenta bancaria
-                    if (strlen($ctaBancaria->cuenta)>=8) {
-                        $body_elements["VENDORBANKACCOUNTID"]="T-".substr($ctaBancaria->cuenta, -8);
-                        $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->cuenta;
-                        $records_list[]=$body_elements;
-                    }
-                    //Valida CLABE
-                    if (strlen($ctaBancaria->clabe)>=8 ) {
-                        $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
-                        $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
-                        $records_list[]=$body_elements;
-                    }
+                    $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
+                    $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
+                    $records_list[]=$body_elements;
                 }
             }
 
@@ -229,13 +239,30 @@ class Dynamics365 extends SugarApi
             }
 
             //Recupera cuentas bancarias
-            $beanCuenta->load_relationship('cta_cuentas_bancarias_accounts');
-            $GLOBALS['log']->fatal('Recupera cuenta bancaria');
-            foreach ($beanCuenta->cta_cuentas_bancarias_accounts->getBeans() as $ctaBancaria) {
-                //Valida Cuenta bancaria
-                $GLOBALS['log']->fatal('Itera cuenta bancaria');
-                if (strlen($ctaBancaria->cuenta)>=8 || strlen($ctaBancaria->clabe)>=8 ) {
-                    $GLOBALS['log']->fatal('Entra cuenta bancaria: '. $ctaBancaria->name);
+            if(empty($idCuentaBancaria)) {
+                $beanCuenta->load_relationship('cta_cuentas_bancarias_accounts');
+                //$GLOBALS['log']->fatal('Recupera cuenta bancaria');
+                foreach ($beanCuenta->cta_cuentas_bancarias_accounts->getBeans() as $ctaBancaria) {
+                    //Valida Cuenta bancaria
+                    //$GLOBALS['log']->fatal('Itera cuenta bancaria');
+                    if (strlen($ctaBancaria->clabe)>=8 ) {
+                        $GLOBALS['log']->fatal('Entra cuenta bancaria: '. $ctaBancaria->name);
+                        //Arma petición para enviar cuenta bancaria
+                        global $app_list_strings;
+                        $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
+                        $rutaBancaria = $app_list_strings['dynamics365_ruta_bancaria_list'];
+                        $idBancoDynamics = $mapeoBancos[$ctaBancaria->banco];
+                        $body_elements["BANKGROUPID"]=$idBancoDynamics;
+                        $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
+                        $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
+                        $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
+                        $records_list[]=$body_elements;
+                    }
+                }
+            }else{
+                // Acción ejecutada desde cuenta bancaria
+                $ctaBancaria = BeanFactory::retrieveBean('cta_cuentas_bancarias', $idCuentaBancaria, array('disable_row_level_security' => true));
+                if (strlen($ctaBancaria->clabe)>=8 ) {
                     //Arma petición para enviar cuenta bancaria
                     global $app_list_strings;
                     $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
@@ -243,18 +270,9 @@ class Dynamics365 extends SugarApi
                     $idBancoDynamics = $mapeoBancos[$ctaBancaria->banco];
                     $body_elements["BANKGROUPID"]=$idBancoDynamics;
                     $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
-                    //Valida Cuenta bancaria
-                    if (strlen($ctaBancaria->cuenta)>=8) {
-                        $body_elements["VENDORBANKACCOUNTID"]="T-".substr($ctaBancaria->cuenta, -8);
-                        $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->cuenta;
-                        $records_list[]=$body_elements;
-                    }
-                    //Valida CLABE
-                    if (strlen($ctaBancaria->clabe)>=8 ) {
-                        $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
-                        $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
-                        $records_list[]=$body_elements;
-                    }
+                    $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
+                    $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
+                    $records_list[]=$body_elements;
                 }
             }
 
@@ -292,7 +310,7 @@ class Dynamics365 extends SugarApi
         array_push($responseFull, $responseDynamics);
 
         //Llamada a api para Cuentas por pagar, solo se ejecuta la primera vez
-        $GLOBALS['log']->fatal("VALOR DE BANDERA CPP: ".$beanCuenta->control_cpp_chk_c);
+        //$GLOBALS['log']->fatal("VALOR DE BANDERA CPP: ".$beanCuenta->control_cpp_chk_c);
         if(!$beanCuenta->control_cpp_chk_c){
             $GLOBALS['log']->fatal("Request cuentas por pagar: url: ".$urlCPP." idProveedor: ".$beanCuenta->idcliente_c);
             //$responseCPP=$this->postCPP("http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365",$beanCuenta->idcliente_c);
