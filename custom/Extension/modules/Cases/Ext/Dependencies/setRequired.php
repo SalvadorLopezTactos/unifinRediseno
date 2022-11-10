@@ -19,3 +19,19 @@ $dependencies['Cases']['area_interna_c_required'] = array(
         ),
     ),
 );
+
+$dependencies['Cases']['leads_cases_1_name_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','name','type'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'leads_cases_1_name',
+                'value' => 'equal($type,"12")',
+            ),
+        ),
+    ),
+);

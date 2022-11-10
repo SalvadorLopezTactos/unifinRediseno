@@ -11,6 +11,7 @@
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
         this.model.addValidationTask('valida_concluido', _.bind(this.valida_concluido, this));
         this.model.addValidationTask('informa_docs_requeridos', _.bind(this.informa_docs_requeridos, this));
+        this.model.addValidationTask('valida_lead_cancelado', _.bind(this.valida_lead_cancelado, this));
 
         //this.model.on('sync', this.getPersonas, this);
         this.model.on('sync', this.setOpcionesAsesoresComerciales, this);
@@ -160,6 +161,35 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    valida_lead_cancelado:function(fields, errors, callback){
+        var id_lead=this.model.get('leads_cases_1leads_ida');
+
+        if(id_lead != ""){
+            var url_lead = app.api.buildURL('Leads/' + id_lead, null, null);
+            app.api.call('read', url_lead, {}, {
+                success: _.bind(function (data) {
+                    var subtipo=data.subtipo_registro_c;
+                    //Validación de lead cancelado
+                    if(subtipo=='3'){
+                        app.alert.show("lead_cancelado", {
+                            level: "error",
+                            title: "No es posible relacionar una Lead Cancelado",
+                            autoClose: false
+                        });
+
+                        errors['leads_cases_1_name'] = errors['leads_cases_1_name'] || {};
+                        errors['leads_cases_1_name'].required = true;
+
+                    }
+
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else{
+            callback(null, fields, errors);
+        }
     },
 
     valida_requeridos_min: function (fields, errors, callback) {
