@@ -4,11 +4,11 @@
 
     function insertSepomex()
     {
-        global $db,$current_user;
+        global $db,$current_user,$sugar_config;
     	// Busca las llamadas vencidas en status "planificada" y les cambia el estado a "no realizada"
         $GLOBALS['log']->fatal('>>>>>>COMIENZA PROCESO DE OBTENCIÓN CP - SEPOMEX:');//------------------------------------
         //Declara variables
-			$path = 'https://www.correosdemexico.gob.mx/datosabiertos/cp/cpdescarga.txt'; //Ubicación pública de archivo sepomex
+			$path = $sugar_config['url_sepomex']; //Ubicación pública de archivo sepomex
 			//Inicia
 			//Lee archivo
 			$fila = 0;
