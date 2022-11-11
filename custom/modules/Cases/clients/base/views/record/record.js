@@ -560,6 +560,7 @@
 
         this.setOpcionesProducto();
         this.setOpcionesProductoParaCredito();
+        this.disableTipo();
     },
 
     setOpcionesProducto:function(){
@@ -611,6 +612,10 @@
             campo_producto.render();
             this.model.set('producto_c',producto_actual);
         }
+    },
+
+    disableTipo:function(){
+        this.noEditFields.push('type');
     }
 
 })
