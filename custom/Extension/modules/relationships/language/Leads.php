@@ -14,3 +14,5 @@ $mod_strings['LBL_LEADS_CALLS_1_FROM_CALLS_TITLE'] = 'Llamadas Relacionadas';
 $mod_strings['LBL_LEADS_CALLS_1_FROM_LEADS_TITLE'] = 'Llamadas Relacionadas';
 $mod_strings['LBL_LEADS_ANLZT_ANALIZATE_1_FROM_ANLZT_ANALIZATE_TITLE'] = 'Analizate';
 $mod_strings['LBL_LEADS_ANLZT_ANALIZATE_1_FROM_LEADS_TITLE'] = 'Analizate';
+$mod_strings['LBL_LEADS_CASES_1_FROM_CASES_TITLE'] = 'Casos';
+$mod_strings['LBL_LEADS_CASES_1_FROM_LEADS_TITLE'] = 'Casos';

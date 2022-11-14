@@ -90,8 +90,8 @@ class check_duplicateAccounts extends SugarApi
 
                         $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
                     } else {
-
-                        $bean_account = $this->createAccount($bean, $responsMeeting, false);
+                        $arr_cases=$this->getLeadCasos($bean);
+                        $bean_account = $this->createAccount($bean, $responsMeeting, false,$arr_cases);
 
                         if (!empty($bean_account->id)) {
                             $resultadoRelaciones = $this->getContactAssoc($bean, $bean_account);
@@ -158,7 +158,7 @@ SITE;
         return $finish;
     }
 
-    public function createAccount($bean_Leads, $idMeetings, $rel)
+    public function createAccount($bean_Leads, $idMeetings, $rel,$cases)
     {
         $bean_account = BeanFactory::newBean('Accounts');
         if ($rel) {
@@ -252,6 +252,14 @@ SITE;
         }
         //Guarda cuenta
         $bean_account->save();
+
+        /* Se agregan los casos del Lead hacia la Cuenta */
+        if(count($cases)>0){
+            for ($i=0; $i <count($cases) ; $i++) {
+                $bean_account->load_relationship('cases');
+                $bean_account->cases->add($cases[$i]);
+            }
+        }
 
         // creamos las relaciones en telefono
         $principal = 1;
@@ -506,7 +514,7 @@ SITE;
                         array_push($resultado['data'], $result[0]['id']);
                     } else {
                         // $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
-                        $cuenta = $this->createAccount($lead, null, true);
+                        $cuenta = $this->createAccount($lead, null, true,array());
                         if (!empty($cuenta->id)) {
                             $this->re_asign_meetings($lead, $cuenta->id);
                             $this->create_relationship($bean_account, $cuenta->id);
@@ -525,6 +533,19 @@ SITE;
         }
         // $GLOBALS['log']->fatal("Resultado de Relaciones " . print_r($resultado, true));
         return $resultado;
+    }
+
+    public function getLeadCasos($beanLead){
+        $arr_casos=array();
+        if ($beanLead->load_relationship('leads_cases_1')) {
+            $relatedCases = $beanLead->leads_cases_1->getBeans();
+            if (!empty($relatedCases)) {
+                foreach ($relatedCases as $case) {
+                    array_push($arr_casos,$case->id);
+                }
+            }
+        }
+        return $arr_casos;
     }
 
     public function create_relationship($id_parent, $idAccount)
