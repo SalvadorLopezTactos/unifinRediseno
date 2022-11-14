@@ -246,6 +246,11 @@ SITE;
             $bean_account->subsectoreconomico_c = $bean_Leads->subsector_c;
             $bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
         }
+        //Valida si es homonimo
+        if($bean_Leads->homonimo_c){
+            $bean_account->tct_homonimo_chk_c = 1;
+        }
+        //Guarda cuenta
         $bean_account->save();
 
         /* Se agregan los casos del Lead hacia la Cuenta */
@@ -302,8 +307,12 @@ SITE;
         $sql->from($accounts_bean);
         $sql->where()->equals('clean_name', $bean_lead->clean_name_c);
         $sql->where()->notEquals('id', $bean_lead->id);
-
-        $result = $sql->execute();
+        if($bean_lead->homonimo_c){
+            $result = array();
+        }else{
+            $result = $sql->execute();
+        }
+        
         return $result;
     }
 

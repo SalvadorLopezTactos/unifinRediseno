@@ -124,7 +124,7 @@
     valida_lead_cancelado:function(fields, errors, callback){
         var id_lead=this.model.get('leads_cases_1leads_ida');
 
-        if(id_lead != ""){
+        if (id_lead != "" && id_lead != undefined) {
             var url_lead = app.api.buildURL('Leads/' + id_lead, null, null);
             app.api.call('read', url_lead, {}, {
                 success: _.bind(function (data) {
