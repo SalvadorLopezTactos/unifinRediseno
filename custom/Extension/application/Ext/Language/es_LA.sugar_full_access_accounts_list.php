@@ -12,4 +12,5 @@ $app_list_strings['full_access_accounts_list']=array (
   7 => 'Seguros',
   8 => 'Rol Crédito Casos',
   9 => 'Centro Prospección - Casos',
+  10 => 'Acceso Total Casos',
 );
