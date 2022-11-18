@@ -159,7 +159,7 @@ class Dynamics365 extends SugarApi
                         $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
                         $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                         $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
-                        $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$idBancoDynamics];
+                        $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
                         $body_elements["CURRENCYCODEACCOUNT"]="MXN";
                         $records_list[]=$body_elements;
                     }
@@ -178,7 +178,7 @@ class Dynamics365 extends SugarApi
                     $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
                     $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                     $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
-                    $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$idBancoDynamics];
+                    $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
                     $body_elements["CURRENCYCODEACCOUNT"]="MXN";
                     $records_list[]=$body_elements;
                 }
@@ -257,11 +257,14 @@ class Dynamics365 extends SugarApi
                         global $app_list_strings;
                         $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
                         $rutaBancaria = $app_list_strings['dynamics365_ruta_bancaria_list'];
+                        $nombreBanco = $app_list_strings['banco_list'];
                         $idBancoDynamics = $mapeoBancos[$ctaBancaria->banco];
                         $body_elements["BANKGROUPID"]=$idBancoDynamics;
                         $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
                         $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                         $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
+                        $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
+                        $body_elements["CURRENCYCODEACCOUNT"]="MXN";
                         $records_list[]=$body_elements;
                     }
                 }
@@ -273,11 +276,14 @@ class Dynamics365 extends SugarApi
                     global $app_list_strings;
                     $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
                     $rutaBancaria = $app_list_strings['dynamics365_ruta_bancaria_list'];
+                    $nombreBanco = $app_list_strings['banco_list'];
                     $idBancoDynamics = $mapeoBancos[$ctaBancaria->banco];
                     $body_elements["BANKGROUPID"]=$idBancoDynamics;
                     $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
                     $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
                     $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
+                    $body_elements["BANKACCOUNTNAME"]=$nombreBanco[$ctaBancaria->banco];
+                    $body_elements["CURRENCYCODEACCOUNT"]="MXN";
                     $records_list[]=$body_elements;
                 }
             }
