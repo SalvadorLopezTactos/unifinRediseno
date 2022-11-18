@@ -4,4 +4,5 @@
 $app_list_strings['filterAccounts_RolesUsr_list']=array (
   1 => 'Acceso Total',
   2 => 'Acceso Total Consulta',
+  3 => 'Acceso Total Casos',
 );
