@@ -17,13 +17,21 @@ function limpieza_cuenta_bancaria()
       WHERE DATE_FORMAT(ccbc.vigencia_c, '%Y-%m-%d') < DATE_FORMAT(date_add(NOW(), INTERVAL 1 DAY) , '%Y-%m-%d')
       AND ccbc.validada_c = 1 ; ";
     $result = $db->query($sql);
-    while ($row = $db->fetchByAssoc($result)) {
-        $bean = null;
-        //$GLOBALS['log']->fatal('Cuenta bancaria -atrasada: '. $row['id_tarjeta']);
-        $bean = BeanFactory::retrieveBean('cta_cuentas_bancarias', $row['id_tarjeta'] ,array('disable_row_level_security' => true));
-        $bean->validada_c = 0;
-        $bean->save();
-    }
+    // while ($row = $db->fetchByAssoc($result)) {
+    //     $bean = null;
+    //     //$GLOBALS['log']->fatal('Cuenta bancaria -atrasada: '. $row['id_tarjeta']);
+    //     $bean = BeanFactory::retrieveBean('cta_cuentas_bancarias', $row['id_tarjeta'] ,array('disable_row_level_security' => true));
+    //     $bean->validada_c = 0;
+    //     $bean->save();
+    // }
+    $sqlU = "UPDATE cta_cuentas_bancarias ccb
+      inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c
+      SET
+       ccb.date_modified = utc_timestamp(),
+       ccbc.validada_c = 0
+      WHERE DATE_FORMAT(ccbc.vigencia_c, '%Y-%m-%d') < DATE_FORMAT(date_add(NOW(), INTERVAL 1 DAY) , '%Y-%m-%d')
+      AND ccbc.validada_c = 1 ; ";
+    $resultU = $db->query($sqlU);
 
     $GLOBALS['log']->fatal('Job limpieza_cuenta_bancaria: Fin');
     return true;
