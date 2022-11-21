@@ -105,7 +105,6 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 			global $db, $current_user;
 			$cuentas = $args['data']['cuentas'];
 			$parame = $args['data']['parame'];
-			$GLOBALS['log']->fatal(print_r($parame,true));
 			$selected = $args['data']['selected'];
 			$cuentas_resumen['actualizados']=array();
 			$cuentas_resumen['no_actualizados']=array();
@@ -184,7 +183,7 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 							//$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
 							$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$idcuenta;
 							$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">
-							Se le informa que el asesor '.$ingesta->nombre_completo_c.' ha solicitado el bloqueo de la cuenta'.$cuenta.' en CRM.<br>
+							Se le informa que el asesor '.$ingesta->nombre_completo_c.' ha solicitado el bloqueo de la cuenta '.$cuenta.' en CRM.<br>
 							Para autorizar el bloqueo dé click en el siguiente enlace <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b>
 							<br><br>Saludos.
 							<br><br>Atentamente Unifin</font></p>

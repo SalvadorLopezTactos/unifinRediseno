@@ -115,9 +115,22 @@ SQL;
 			$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$bean->id;
 			//Notifica Bloqueo
 			if($bloqueo && !$bean->grupo_c) {
-				$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$bean->name.'</a></b> ha sido bloqueada por el equipo de <b>'.$equipo.'</b>
-				<br><br>La razón de bloqueo es: <b>'.$razon.'</b>
-				<br><br>y el detalle: <b>'.$detalle.'</b>
+				//Nombre del usuario que confirmó el bloqueo
+				$id_usuario="";
+				if($bean->tct_no_contactar_chk_c==1){
+					$id_usuario=$bean->user_id1_c;
+				}
+				if($bean->bloqueo_credito_c){
+					$id_usuario=$bean->user_id3_c;
+				}
+				if($bean->bloqueo_cumple_c){
+					$id_usuario=$bean->user_id5_c;
+				}
+
+				$beanUser = BeanFactory::retrieveBean('Users', $id_usuario, array('disable_row_level_security' => true));
+				$nombre_usuario=$beanUser->nombre_completo_c;
+
+				$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que '.$nombre_usuario.' ha confirmado el bloqueo de la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$bean->name.'</a></b> en CRM y ha sido indicado como responsable de validación.
 				<br><br>Atentamente Unifin</font></p>
 				<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
 				<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
@@ -127,14 +140,20 @@ SQL;
 				Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
 				$mailer = MailerFactory::getSystemDefaultMailer();
 				$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-				$mailer->setSubject('Cuenta '.$bean->name.' bloqueada por el equipo de '.$equipo);
+				$mailer->setSubject('Confirmación de bloqueo de Cuenta');
 				$body = trim($mailHTML);
 				$mailer->setHtmlBody($body);
 				$mailer->clearRecipients();
 				for ($i=0; $i < count($correos); $i++) {
 					$mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombres[$i]));
 				}
-				$result = $mailer->send();
+				try {
+					$result = $mailer->send();
+				} catch
+				(Exception $e) {
+					$GLOBALS['log']->fatal('Error mail cartera bloqueo: '. $e->getMessage());
+				}
+				
 			}
 			//Notifica Desbloqueo
 			if(!$bloqueo || $bean->grupo_c) {
@@ -156,7 +175,12 @@ SQL;
 				for ($i=0; $i < count($correos); $i++) {
 					$mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombres[$i]));
 				}
-				$result = $mailer->send();
+				try {
+					$result = $mailer->send();
+				} catch
+				(Exception $e) {
+					$GLOBALS['log']->fatal('Error mail cartera desbloqueo: '. $e->getMessage());
+				}
 			}
 			$bean->grupo_c = 0;
 		}
