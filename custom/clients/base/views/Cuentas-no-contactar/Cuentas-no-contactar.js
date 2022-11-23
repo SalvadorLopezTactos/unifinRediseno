@@ -435,11 +435,9 @@
             this.ids_cuentas.push($(e.currentTarget).val());
         }
         if(this.ids_cuentas.length>0){
-            $('#btn_no_contactar').eq(0).removeClass('disabled');
-            $('#btn_no_contactar').attr('style','');
+            $('#btn_no_contactar').removeAttr('disabled');
         }else{
-            $('#btn_no_contactar').eq(0).addClass('disabled');
-            $('#btn_no_contactar').attr('style','pointer-events:none');
+            $("#btn_no_contactar").attr('disabled',true)
         }
     },
 
@@ -477,8 +475,7 @@
                 messages: errorMsg
             });
         } else {
-			$('#btn_no_contactar').eq(0).addClass('disabled')
-            $('#btn_no_contactar').attr('style','pointer-events:none');
+			$('#btn_no_contactar').attr('disabled',true)
             
             var valida_users=[];
             $("#valida option").each(function(){
@@ -503,16 +500,15 @@
 				'selected':this.selected
 			};
 			$('#successful').hide();
-			$('#processing').show();
+			$('#processingSave').show();
 			var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
 			app.api.call("create", urlNoContactar, {data: Params}, {
 				success: _.bind(function (data) {
-					 $('#processing').hide();
+					 $('#processingSave').hide();
 					 this.render();
 					 $('.cuentasContainer').hide();
 					 $('#successful').show();
-					 $('#btn_no_contactar').eq(0).removeClass('disabled')
-					 $('#btn_no_contactar').attr('style','');
+					 $('#btn_no_contactar').removeAttr('disabled');
 				}, this)
 			});
 		}
