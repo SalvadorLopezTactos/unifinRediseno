@@ -145,6 +145,7 @@
             this.seleccionados = [];
             $('#successful').hide();
             $('#processing').show();
+            $('#btn_Cuentas').attr('disabled',true);
             app.api.call("read", app.api.buildURL("CuentasNoContactar/" + assigneUsr, null, null, {}), null, {
                 success: _.bind(function (data) {
                     if (data.total <= 0) {
@@ -155,9 +156,11 @@
                         };
                         app.alert.show('validation', alertOptions);
                         $('#processing').hide();
+                        $('#btn_Cuentas').attr('disabled',false);
                         return;
                     }
                     $('#processing').hide();
+                    $('#btn_Cuentas').attr('disabled',false);
                     this.cuentas = typeof data=="string"?null:data.cuentas;
                     /*Bloque de código únicamente utilizado para mostrar correctamente el valor de los checkbox en archivo hbs, basado directamente en la consulta a la bd*/
                     if(this.cuentas.length>0){
@@ -260,7 +263,11 @@
 					success: _.bind(function (data1) {
 						if (data1.records) {
 							for (var j = 0; j < data1.records.length; j++) {
-								document.getElementById("valida").options[j]=new Option(data1.records[j].full_name,data1.records[j].id);
+                                //Se agrega una opción vacía para que el campo de Responsable de Validación parezca como que no se llena
+                                if(j==0){
+                                    document.getElementById("valida").options[j]=new Option("","");
+                                }
+								document.getElementById("valida").options[j+1]=new Option(data1.records[j].full_name,data1.records[j].id);
 							}
 						}
 					}, this)
@@ -417,7 +424,7 @@
 					document.getElementById("detalle").value = "";
 					document.getElementById("motivo").disabled=false;
 					document.getElementById("detalle").disabled=false;
-					document.getElementById("valida").disabled=false;
+					//document.getElementById("valida").disabled=false;
 				}
 			}, this)
 		});
@@ -446,6 +453,7 @@
         } else {
             $('#razon').css('border-color', '');
         }
+        /*
         if($("#valida").val() == "" || $("#valida").val() == null) {
 			contador++;
             errorMsg += '<br><b>Responsable Validación</b>';
@@ -453,6 +461,7 @@
         } else {
             $('#valida').css('border-color', '');
         }
+        */
         if($("#detalle").val() == "" && this.detalle) {
 			contador++;
             errorMsg += '<br><b>Detalle</b>';
@@ -469,14 +478,24 @@
             });
         } else {
 			$('#btn_no_contactar').eq(0).addClass('disabled')
-			$('#btn_no_contactar').attr('style','pointer-events:none');
+            $('#btn_no_contactar').attr('style','pointer-events:none');
+            
+            var valida_users=[];
+            $("#valida option").each(function(){
+                //console.log($(this).val()+" "+$(this).html());
+                if($(this).val()!=""){
+                    valida_users.push($(this).val());
+                }
+            });
+            
 			this.Parame = {
 				"condicion":$("#condicion").val(),
 				"razon":$("#razon").val(),
 				"motivo":$("#motivo").val(),
 				"detalle":$("#detalle").val(),
 				"ingesta":$("#ingesta").val(),
-				"valida":$("#valida").val()
+                "valida":$("#valida").val(),
+                "valida_users":valida_users
 			};
 			var Params = {
 				'cuentas':this.ids_cuentas,
