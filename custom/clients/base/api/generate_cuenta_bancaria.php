@@ -75,7 +75,7 @@ class generate_cuenta_bancaria extends SugarApi
                     from accounts_cstm ac left join cta_cuentas_bancarias_accounts_c ccbca on ac.id_c = ccbca.cta_cuentas_bancarias_accountsaccounts_ida
                     left join cta_cuentas_bancarias ccb on ccbca.cta_cuentas_bancarias_accountscta_cuentas_bancarias_idb  =  ccb.id
                     inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c
-                    WHERE ac.idcliente_c = '{$id_cliente}' ";
+                    WHERE ac.idcliente_c = '{$id_cliente}' and ccb.deleted=0";
 
                 if( $cuenta != "" && $clabe != "" ){
                     $query2 = $query2 . " and (ccb.cuenta = '{$cuenta}'  or ccb.clabe = '{$clabe}')";
@@ -119,10 +119,20 @@ class generate_cuenta_bancaria extends SugarApi
                     $account->cta_cuentas_bancarias_accounts->add($bankid);
 
                 }else{
-                    $update = "UPDATE cta_cuentas_bancarias ccb inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c
+                    $beanBank = BeanFactory::getBean('cta_cuentas_bancarias', $id_tarjeta, array('disable_row_level_security' => true));
+                   // $beanBank->name  = $val;
+                    $beanBank->banco = $id_banco;
+                    //$beanBank->cuenta = $cuenta;
+                    $beanBank->clabe = $clabe;
+                    $beanBank->estado = $estado_cuenta;
+                    $beanBank->validada_c = $valida;
+                    $beanBank->vigencia_c = $fecha_vigencia;
+                    $beanBank->save();
+                    
+                    /*$update = "UPDATE cta_cuentas_bancarias ccb inner join cta_cuentas_bancarias_cstm ccbc on ccb.id = ccbc.id_c
                     set ccb.banco = '{$id_banco}' , ccb.estado = '{$estado_cuenta}' , ccbc.validada_c = $valida , ccbc.vigencia_c = '{$fecha_vigencia}'
                     where ccb.id = '{$id_tarjeta}'; ";
-                    $db->query($update);
+                    $db->query($update);*/
                 }
                 $salida = array( "status"=>'200', "messageDetail" => "Exitoso");
             }else{
