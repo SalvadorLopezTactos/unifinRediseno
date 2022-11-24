@@ -158,7 +158,9 @@
                 <div class="record-label">&nbsp;</div>
                 <span>
                     <span>
-                        <input type="button" value="Buscar" id="btn_Cuentas" class="btn btn-primary" />
+						<button class="btn btn-primary" id="btn_Cuentas" type="button">Buscar<img
+                                        id='processing' style="display: none;" width="15" height="5"
+                                        src="custom/Levementum/images/icon_processing.gif"></button>
                     </span>
                 </span>
             </div>
@@ -302,7 +304,7 @@
 						<div class="record-label">Responsable Validación:</div>
 					</div>
 					<div class="span4 record-cell">
-						<select id="valida" class="span10">
+						<select id="valida" class="span10" disabled>
 							{{#each valida_list}}
 								<option value="{{@key}}" {{ifSelected @key ../valida}}>{{this}}</option>
 							{{/each}}
@@ -324,7 +326,8 @@
 				<tr>
 					<td colspan="5"></td>
 					<td>
-						<input type="button" value="Guardar cambios" id="btn_no_contactar" class="btn btn-success disabled" style="pointer-events:none;">
+						<!-- <input type="button" value="Guardar cambios" id="btn_no_contactar" class="btn btn-success disabled" style="pointer-events:none;">-->
+						<button class="btn btn-success" id="btn_no_contactar" disabled type="button">Guardar cambios<img id="processingSave" style="display: none;" width="15" height="5" src="custom/Levementum/images/icon_processing.gif"></button>
 					</td>
 				</tr>
 				</tbody>

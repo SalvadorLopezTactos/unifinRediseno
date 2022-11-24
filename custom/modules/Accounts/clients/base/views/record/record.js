@@ -6607,16 +6607,33 @@
 
     bloquea_cuenta: function () {
         var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+
+        app.alert.show('loadingBloqueo', {
+            level: 'process',
+            title: 'Cargando',
+        });
+
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
-                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c)) {
+                if((this.model.get('tct_no_contactar_chk_c')) || data.bloqueo_credito_c || data.bloqueo_cumple_c) {
 					var params = {};
-					if(data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) params["bloqueo_cartera_c"] = 1;
-					if(data.user_id3_c == app.user.id && data.bloqueo_credito_c) params["bloqueo2_c"] = 1;
-					if(data.user_id5_c == app.user.id && data.bloqueo_cumple_c) params["bloqueo3_c"] = 1;
+					if(this.model.get('tct_no_contactar_chk_c')){
+                        params["bloqueo_cartera_c"] = 1;
+                        params["user_id1_c"]=App.user.id;
+                    }
+					if(data.bloqueo_credito_c){
+                        params["bloqueo2_c"] = 1;
+                        params["user_id3_c"]=App.user.id;
+                    }
+                    if(data.bloqueo_cumple_c){
+                        params["bloqueo3_c"] = 1;
+                        params["user_id5_c"]=App.user.id;
+                    }
+                    
 					var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
 					app.api.call('update', actualiza, params, {
 						success: _.bind(function (data) {
+                            app.alert.dismiss('loadingBloqueo');
 							app.alert.show('alert_change_success', {
 								level: 'success',
 								messages: 'Cuenta Bloqueada',
@@ -6625,7 +6642,8 @@
 							location.reload();
 						}, this)
 					});
-				}
+                }
+                app.alert.dismiss('loadingBloqueo');
             }, this)
         });
     },
@@ -6915,19 +6933,104 @@
         });
     },
 
+    /*
+    Función para controlar la visualización de los botones para bloquear o desbloquear cuentas
+    */
     bloqueo: function () {
-		// Cuentas No Contactar
-        var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
-        app.api.call('read', consulta, {}, {
-            success: _.bind(function (data) {
-                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo3_c)) {
-					$('[name="bloquea_cuenta"]').removeClass('hidden');
-				}
-				if((data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) || (data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) || (data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c))) {
-					$('[name="desbloquea_cuenta"]').removeClass('hidden');
-				}
-            }, this)
-        });
+
+        if(app.user.attributes.tct_no_contactar_chk_c=='1' || app.user.attributes.bloqueo_credito_c=='1' || app.user.attributes.bloqueo_cumple_c=='1'){
+            if(app.user.attributes.tct_no_contactar_chk_c=='1') {
+				this.condicion_permiso=1;
+			}
+            if(app.user.attributes.bloqueo_credito_c=='1') {
+				this.condicion_permiso=2;
+			}
+            if(app.user.attributes.bloqueo_cumple_c=='1') {
+				this.condicion_permiso=3;
+            }
+            this.ids_responsables=[];
+            App.alert.show('loadingShowHideBotonesBloqueo', {
+                level: 'process',
+                title: 'Cargando',
+            });
+			var url_condiciones = 'tct4_Condiciones?filter[][condicion]='+this.condicion_permiso;
+			app.api.call("GET", app.api.buildURL(url_condiciones), null, {
+				success: _.bind(function (data) {
+                    if(data.records.length > 0) {
+                        //Obtiene el identificador del equipo de responsables para poder obtener a sus respectivos miembros para que esos tengan el acceso para bloquear/desbloquear
+                        //Se asume que el equipo de responsables será el MISMO en caso de que sea la misma condición
+                        var id_equipo_responsables="";
+                        for (var i=0; i<data.records.length;i++) {
+
+                            if(data.records[i].user_id_c != ""){
+                                id_equipo_responsables=data.records[i].user_id_c;
+                            }
+                        }
+
+                        if(id_equipo_responsables != ""){
+                            app.api.call("read", app.api.buildURL("Teams/" + id_equipo_responsables + "/link/users", null, null, {}), null, {
+                                success: _.bind(function (data_members) {
+                                    if (data_members.records) {
+                                        for (var j = 0; j < data_members.records.length; j++) {
+                                            self.ids_responsables.push(data_members.records[j].id);
+                                        }
+                                        // Cuentas No Contactar
+                                        var consulta = app.api.buildURL('tct02_Resumen/' + self.model.get('id'), null, null);
+                                        app.api.call('read', consulta, {}, {
+                                            success: _.bind(function (dataResumen) {
+                                                app.alert.dismiss('loadingShowHideBotonesBloqueo');
+                                                //Obtener los usuarios del equipo de responsables de validación correspondientes a la condición del usuario logueado
+                                                //En caso de que la cuenta ya haya sido bloqueada de manera definitiva, mostrar la alerta, en otro caso se muestra el botón
+                                                if(self.ids_responsables.includes(app.user.id)){
+                                                    //Control para mostrar botón de bloqueo
+                                                    if(
+                                                        (self.model.get('tct_no_contactar_chk_c') && !dataResumen.bloqueo_cartera_c) ||
+                                                        (dataResumen.bloqueo_credito_c && !dataResumen.bloqueo2_c) ||
+                                                        (dataResumen.bloqueo_cumple_c && !dataResumen.bloqueo3_c)
+                                                    ){
+                                                        $('[name="bloquea_cuenta"]').removeClass('hidden');
+                                                    }
+                                                    if(
+                                                        (self.model.get('tct_no_contactar_chk_c') && dataResumen.bloqueo_cartera_c) ||
+                                                        (dataResumen.bloqueo_credito_c && dataResumen.bloqueo2_c) ||
+                                                        (dataResumen.bloqueo_cumple_c && dataResumen.bloqueo3_c)
+                                                    ){
+                                                        var nombre_usuario="";
+                                                        if(this.model.get('tct_no_contactar_chk_c')){
+                                                            nombre_usuario=dataResumen.validacion_c;
+                                                        }
+                                                        if(dataResumen.bloqueo_credito_c){
+                                                            nombre_usuario=dataResumen.validacion2_c;
+                                                        }
+                                                        if(dataResumen.bloqueo_cumple_c){
+                                                            nombre_usuario=dataResumen.validacion3_c;
+                                                        }
+
+                                                        app.alert.show('Cuenta bloqueada', {
+                                                            level: 'error',
+                                                            messages: 'Esta cuenta ya ha sido validada y bloqueada por <b>'+nombre_usuario+'</b>',
+                                                         });
+                                                    }
+                                                    //Control para mostrar botón de desbloqueo
+                                                    if(
+                                                        (self.model.get('tct_no_contactar_chk_c') || dataResumen.bloqueo_cartera_c) ||
+                                                        (dataResumen.bloqueo_credito_c || dataResumen.bloqueo2_c) ||
+                                                        (dataResumen.bloqueo_cumple_c || dataResumen.bloqueo3_c)
+                                                    ){
+                                                        $('[name="desbloquea_cuenta"]').removeClass('hidden');
+                                                    }
+                                                }
+                                            }, this)
+                                        });   
+                                    }
+                                }, this)
+                            });
+                        }
+					}
+				}, this)
+			});
+        }
+
 		// No viable
         var Productos = [];
         var reactivacion = false;
