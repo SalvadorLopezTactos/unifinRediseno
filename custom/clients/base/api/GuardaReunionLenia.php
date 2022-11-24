@@ -20,6 +20,8 @@ class GuardaReunionLenia extends SugarApi
 
     public function ActualizaReunionLenia($api, $args)
     {
+    $GLOBALS['log']->fatal("GuardaReunionLenia request:");
+    $GLOBALS['log']->fatal(print_r($args,true));     
 	  try {
         // Busca Reunión
         $Reunion = new SugarQuery();
@@ -39,7 +41,12 @@ class GuardaReunionLenia extends SugarApi
             $Meeting->link_lenia_c = $args['IdSala'];
 			$Meeting->date_start = $args['horaInicio'];
 			$Meeting->date_end = $args['horaFin'];
-			$Meeting->duration_minutes = $args['duracion'];
+      //Calcula duración
+      $fechaFin = strtotime($args['horaFin']);
+      $fechaInicio = strtotime($args['horaInicio']);
+      $duracion = ceil(($fechaFin - $fechaInicio)/60);
+      $GLOBALS['log']->fatal("Duración:" . $duracion);
+      $Meeting->duration_minutes = $duracion; //$args['duracion'];
 			$Meeting->description = $Meeting->description. "\n\n----------------------\n Comentarios de la sesión realizada \n----------------------\n" .$args['comentarios'];
 			$Meeting->resultado_c = $args['resultado'];
 			$Meeting->status = "Held";
