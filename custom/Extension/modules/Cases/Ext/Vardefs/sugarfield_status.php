@@ -1,5 +1,5 @@
 <?php
- // created: 2022-09-08 18:49:24
+ // created: 2022-11-24 11:59:22
 $dictionary['Case']['fields']['status']['default']='1';
 $dictionary['Case']['fields']['status']['required']=true;
 $dictionary['Case']['fields']['status']['massupdate']=true;
@@ -42,6 +42,15 @@ $dictionary['Case']['fields']['status']['visibility_grid']=array (
       5 => '5',
     ),
     4 => 
+    array (
+      0 => '1',
+      1 => '2',
+      2 => '6',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+    ),
+    8 => 
     array (
       0 => '1',
       1 => '2',
