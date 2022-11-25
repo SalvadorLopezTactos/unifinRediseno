@@ -6657,7 +6657,8 @@
 		var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
-                if((this.model.get('tct_no_contactar_chk_c')) || data.bloqueo_credito_c || data.bloqueo_cumple_c) {
+                app.alert.dismiss('loadingDesbloqueo');
+                if((this.model.get('tct_no_contactar_chk_c')) || data.bloqueo_credito_c || data.bloqueo_cumple_c || data.bloqueo2_c || data.bloqueo3_c || bloqueo_cartera_c) {
 					var params = {};
                     var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
                     
