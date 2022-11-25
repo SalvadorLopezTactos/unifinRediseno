@@ -322,15 +322,19 @@
 								}
 							}, this)
 						});
-						app.api.call("read", app.api.buildURL("Users/" + data.user_id1_c, null, null, {}), null, {
-							success: _.bind(function (data2) {
-								if (data2.full_name) {
-									document.getElementById("valida").options[0]=new Option(data2.full_name,data2.id);
-									document.getElementById("valida").value = data2.id;
-									document.getElementById("valida").disabled=true;
-								}
-							}, this)
-						});
+						app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, {}), null, {
+                            success: _.bind(function (data1) {
+                                if (data1.records) {
+                                    for (var j = 0; j < data1.records.length; j++) {
+                                        //Se agrega una opción vacía para que el campo de Responsable de Validación parezca como que no se llena
+                                        if(j==0){
+                                            document.getElementById("valida").options[j]=new Option("","");
+                                        }
+                                        document.getElementById("valida").options[j+1]=new Option(data1.records[j].full_name,data1.records[j].id);
+                                    }
+                                }
+                            }, this)
+                        });
 					} else {
 						limpia = true;
 					}
@@ -345,7 +349,22 @@
 						document.getElementById("motivo").value=data.motivo2_c;
 						document.getElementById("motivo").disabled=true;
 						document.getElementById("detalle").value = data.detalle2_c;
-						document.getElementById("detalle").disabled=true;
+                        document.getElementById("detalle").disabled=true;
+
+                        app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, {}), null, {
+                            success: _.bind(function (data1) {
+                                if (data1.records) {
+                                    for (var j = 0; j < data1.records.length; j++) {
+                                        //Se agrega una opción vacía para que el campo de Responsable de Validación parezca como que no se llena
+                                        if(j==0){
+                                            document.getElementById("valida").options[j]=new Option("","");
+                                        }
+                                        document.getElementById("valida").options[j+1]=new Option(data1.records[j].full_name,data1.records[j].id);
+                                    }
+                                }
+                            }, this)
+                        });
+
 						app.api.call("read", app.api.buildURL("Users/" + data.user_id2_c, null, null, {}), null, {
 							success: _.bind(function (data3) {
 								if (data3.full_name) {
@@ -353,16 +372,8 @@
 									document.getElementById("ingesta").value = data3.id;
 								}
 							}, this)
-						});
-						app.api.call("read", app.api.buildURL("Users/" + data.user_id3_c, null, null, {}), null, {
-							success: _.bind(function (data4) {
-								if (data4.full_name) {
-									document.getElementById("valida").options[0]=new Option(data4.full_name,data4.id);
-									document.getElementById("valida").value = data4.id;
-									document.getElementById("valida").disabled=true;
-								}
-							}, this)
-						});
+                        });
+
 					} else {
 						limpia = true;
 					}
@@ -386,15 +397,19 @@
 								}
 							}, this)
 						});
-						app.api.call("read", app.api.buildURL("Users/" + data.user_id5_c, null, null, {}), null, {
-							success: _.bind(function (data6) {
-								if (data6.full_name) {
-									document.getElementById("valida").options[0]=new Option(data6.full_name,data6.id);
-									document.getElementById("valida").value = data6.id;
-									document.getElementById("valida").disabled=true;
-								}
-							}, this)
-						});
+						app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, {}), null, {
+                            success: _.bind(function (data1) {
+                                if (data1.records) {
+                                    for (var j = 0; j < data1.records.length; j++) {
+                                        //Se agrega una opción vacía para que el campo de Responsable de Validación parezca como que no se llena
+                                        if(j==0){
+                                            document.getElementById("valida").options[j]=new Option("","");
+                                        }
+                                        document.getElementById("valida").options[j+1]=new Option(data1.records[j].full_name,data1.records[j].id);
+                                    }
+                                }
+                            }, this)
+                        });
 					} else {
 						limpia = true;
 					}
