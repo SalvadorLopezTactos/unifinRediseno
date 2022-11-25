@@ -4,6 +4,7 @@
  * User: salvador.lopez
  */
 
+ /*
 $dependencies['Cases']['area_interna_c_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -19,6 +20,7 @@ $dependencies['Cases']['area_interna_c_required'] = array(
         ),
     ),
 );
+*/
 
 $dependencies['Cases']['leads_cases_1_name_required'] = array(
     'hooks' => array("all"),
