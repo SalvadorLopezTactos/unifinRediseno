@@ -80,6 +80,8 @@
             }, this);
         }, this);
 
+        campos = campos.replace("<b>FCR</b><br><b>HD</b>", "<b>FCR</b> ó <b>HD</b>");
+
         if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
