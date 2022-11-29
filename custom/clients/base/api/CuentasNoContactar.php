@@ -213,14 +213,16 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 						}else{
 							//Notifica desbloqueo al Resposable de validación
 							global $app_list_strings;
+							global $current_user;
 							require_once 'include/SugarPHPMailer.php';
 							require_once 'modules/Administration/Administration.php';
 							$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
+							$user_solicitud = BeanFactory::retrieveBean('Users', $current_user->id, array('disable_row_level_security' => true));
 							//$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
 							$lista_usuarios=$parame["valida_users"];
 							$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$idcuenta;
 							$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">
-							Se le informa que el asesor '.$ingesta->nombre_completo_c.' ha solicitado el desbloqueo de la cuenta '.$cuenta.' en CRM.<br>
+							Se le informa que el asesor '.$user_solicitud->nombre_completo_c.' ha solicitado el desbloqueo de la cuenta '.$cuenta.' en CRM.<br>
 							Se requiere de su aprobación para desbloquear definitivamente la cuenta.<br>
 							Para autorizar el desbloqueo dé click en el siguiente enlace <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b>
 							<br><br>Saludos.
