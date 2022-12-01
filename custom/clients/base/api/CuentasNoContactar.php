@@ -213,14 +213,18 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 						}else{
 							//Notifica desbloqueo al Resposable de validación
 							global $app_list_strings;
+							global $current_user;
 							require_once 'include/SugarPHPMailer.php';
 							require_once 'modules/Administration/Administration.php';
 							$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
-							$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+							$user_solicitud = BeanFactory::retrieveBean('Users', $current_user->id, array('disable_row_level_security' => true));
+							//$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+							$lista_usuarios=$parame["valida_users"];
 							$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$idcuenta;
-							$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$valida->nombre_completo_c.'</b>
-							<br><br>Se le informa que la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b> ha sido desbloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
-							<br><br>Se requiere de su aprobación para desbloquear definitivamente la cuenta.
+							$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">
+							Se le informa que el asesor '.$user_solicitud->nombre_completo_c.' ha solicitado el desbloqueo de la cuenta '.$cuenta.' en CRM.<br>
+							Se requiere de su aprobación para desbloquear definitivamente la cuenta.<br>
+							Para autorizar el desbloqueo dé click en el siguiente enlace <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b>
 							<br><br>Saludos.
 							<br><br>Atentamente Unifin</font></p>
 							<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
@@ -231,11 +235,16 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 							Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
 							$mailer = MailerFactory::getSystemDefaultMailer();
 							$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-							$mailer->setSubject('Cuenta '.$cuenta.' desbloqueada por '.$ingesta->nombre_completo_c);
+							$mailer->setSubject('Solicitud de desbloqueo de Cuenta en CRM');
 							$body = trim($mailHTML);
 							$mailer->setHtmlBody($body);
 							$mailer->clearRecipients();
-							$mailer->addRecipientsTo(new EmailIdentity($valida->email1, $valida->first_name . ' ' . $valida->last_name));
+							if(count($lista_usuarios)>0){
+								for ($i=0; $i < count($lista_usuarios); $i++) { 
+									$usuario_desbloqueo = BeanFactory::retrieveBean('Users', $lista_usuarios[$i]);
+									$mailer->addRecipientsTo(new EmailIdentity($usuario_desbloqueo->email1, $usuario_desbloqueo->first_name . ' ' . $usuario_desbloqueo->last_name));
+								}
+							}
 							$result = $mailer->send();
 						} //else
 						$resumen->save();

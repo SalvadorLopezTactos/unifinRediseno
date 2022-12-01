@@ -6649,16 +6649,24 @@
     },
 
     desbloquea_cuenta: function () {
+
+        app.alert.show('loadingDesbloqueo', {
+            level: 'process',
+            title: 'Cargando',
+        });
 		var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
-                if((data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) || (data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) || (data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c))) {
+                app.alert.dismiss('loadingDesbloqueo');
+                if((this.model.get('tct_no_contactar_chk_c')) || data.bloqueo_credito_c || data.bloqueo_cumple_c || data.bloqueo2_c || data.bloqueo3_c || bloqueo_cartera_c) {
 					var params = {};
-					var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
-					if(data.user_id1_c == app.user.id && data.bloqueo_cartera_c) params["bloqueo_cartera_c"] = 0;
-					if(data.user_id3_c == app.user.id && data.bloqueo2_c) params["bloqueo2_c"] = 0;
-					if(data.user_id5_c == app.user.id && data.bloqueo3_c) params["bloqueo3_c"] = 0;
-					if(data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) {
+                    var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+                    
+                    if(data.bloqueo_cartera_c) params["bloqueo_cartera_c"] = 0;
+                    if(data.bloqueo2_c) params["bloqueo2_c"] = 0;
+					if(data.bloqueo3_c) params["bloqueo3_c"] = 0;
+
+					if(this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c) {
 						this.model.set("tct_no_contactar_chk_c", false);
 						this.model.save();
 						params["condicion_cliente_c"] = "";
@@ -6668,7 +6676,7 @@
 						params["user_id_c"] = "";
 						params["user_id1_c"] = "";
 					}
-					if(data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) {
+					if(data.bloqueo_credito_c || data.bloqueo2_c) {
 						params["bloqueo_credito_c"] = 0;
 						params["condicion2_c"] = "";
 						params["razon2_c"] = "";
@@ -6677,7 +6685,7 @@
 						params["user_id2_c"] = "";
 						params["user_id3_c"] = "";
 					}
-					if(data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c)) {
+					if(data.bloqueo_cumple_c || data.bloqueo3_c) {
 						params["bloqueo_cumple_c"] = 0;
 						params["condicion3_c"] = "";
 						params["razon3_c"] = "";

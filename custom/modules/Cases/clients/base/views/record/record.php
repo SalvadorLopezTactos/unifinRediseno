@@ -213,6 +213,7 @@ array (
               3 => 
               array (
                 'name' => 'resolved_datetime',
+                'readonly' => true,
               ),
               4 => 
               array (

@@ -8,6 +8,7 @@
         this._super("initialize", [options]);
 
         this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
+        this.model.addValidationTask('valida_area_interna', _.bind(this.valida_area_interna, this));
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
         this.model.addValidationTask('valida_concluido', _.bind(this.valida_concluido, this));
         this.model.addValidationTask('informa_docs_requeridos', _.bind(this.informa_docs_requeridos, this));
@@ -62,6 +63,15 @@
         callback(null, fields, errors);
     },
 
+    valida_area_interna:function(fields, errors, callback){
+
+        if(this.model.get('case_hd_c') && !$('[data-name="case_hd_c"]').hasClass('vis_action_hidden') && _.isEmpty(this.model.get('area_interna_c'))){
+            errors['area_interna_c'] = errors['area_interna_c'] || {};
+            errors['area_interna_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
+
     valida_concluido:function(fields, errors, callback){
         //Únicamente el usuario creador y su jefe tienen la capacidad de establecer "Completada" el caso
         var id_user_creator=this.model.get('created_by');
@@ -90,6 +100,8 @@
                 //El usuario creador
                 //Jefe directo (Reporta a) del usuario creador
                 //El usuario asignado al registro en caso de que el usuario creador tenga algún rol comercial (Operativo, Directivos)
+                //Usuario asignado
+                //Responsable interno
                 var tiene_permiso_guardar=[];
                 if(user_log == self.model.get('created_by') && tieneRolComercial==0){
                     tiene_permiso_guardar.push(1);
@@ -99,6 +111,14 @@
                 }
 
                 if(user_log == self.model.get("assigned_user_id") && tieneRolComercial>0){
+                    tiene_permiso_guardar.push(1);
+                }
+
+                if(user_log == self.model.get("assigned_user_id") ){
+                    tiene_permiso_guardar.push(1);
+                }
+
+                if(self.model.get('user_id_c') != "" && user_log == self.model.get('user_id_c')){//Responsable interno user_id_c
                     tiene_permiso_guardar.push(1);
                 }
 
@@ -205,6 +225,8 @@
             }, this);
         }, this);
 
+        campos = campos.replace("<b>FCR</b><br><b>HD</b>", "<b>FCR</b> ó <b>HD</b>");
+
         if (campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
@@ -272,6 +294,8 @@
                     //El usuario creador
                     //Jefe directo (Reporta a) del usuario creador
                     //El usuario asignado al registro en caso de que el usuario creador tenga algún rol comercial (Operativo, Directivos)
+                    //Usuario asignado
+                    //Usuario Responsable Interno
                     var tiene_permiso_guardar=[];
                     if(user_log == self.model.get('created_by') && tieneRolComercial==0){
                         tiene_permiso_guardar.push(1);
@@ -281,6 +305,14 @@
                     }
 
                     if(user_log == self.model.get("assigned_user_id") && tieneRolComercial>0){
+                        tiene_permiso_guardar.push(1);
+                    }
+
+                    if(user_log == self.model.get("assigned_user_id") ){
+                        tiene_permiso_guardar.push(1);
+                    }
+    
+                    if(self.model.get('user_id_c') != "" && user_log == self.model.get('user_id_c')){//Responsable interno user_id_c
                         tiene_permiso_guardar.push(1);
                     }
 

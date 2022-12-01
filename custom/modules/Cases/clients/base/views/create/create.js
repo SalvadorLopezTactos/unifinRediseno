@@ -8,6 +8,7 @@
         this._super("initialize", [options]);
 
         this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
+        this.model.addValidationTask('valida_area_interna', _.bind(this.valida_area_interna, this));
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
         this.model.addValidationTask('informa_docs_requeridos', _.bind(this.informa_docs_requeridos, this));
         this.model.addValidationTask('valida_lead_cancelado', _.bind(this.valida_lead_cancelado, this));
@@ -57,6 +58,15 @@
         callback(null, fields, errors);
     },
 
+    valida_area_interna:function(fields, errors, callback){
+
+        if(this.model.get('case_hd_c') && !$('[data-name="case_hd_c"]').hasClass('vis_action_hidden') && _.isEmpty(this.model.get('area_interna_c'))){
+            errors['area_interna_c'] = errors['area_interna_c'] || {};
+            errors['area_interna_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
+
     valida_requeridos_min: function (fields, errors, callback) {
         var campos = "";
 
@@ -69,6 +79,8 @@
                 }
             }, this);
         }, this);
+
+        campos = campos.replace("<b>FCR</b><br><b>HD</b>", "<b>FCR</b> ó <b>HD</b>");
 
         if (campos) {
             app.alert.show("Campos Requeridos", {
