@@ -6976,7 +6976,16 @@
                         }
 
                         if(id_equipo_responsables != ""){
-                            app.api.call("read", app.api.buildURL("Teams/" + id_equipo_responsables + "/link/users", null, null, {}), null, {
+                            var paramsUser={
+                                "filter": [
+                                    {
+                                      "status": {
+                                        "$in" : ["Active"],
+                                      }
+                                    }
+                                  ]
+                            };
+                            app.api.call("read", app.api.buildURL("Teams/" + id_equipo_responsables + "/link/users", null, null, paramsUser), null, {
                                 success: _.bind(function (data_members) {
                                     if (data_members.records) {
                                         for (var j = 0; j < data_members.records.length; j++) {
