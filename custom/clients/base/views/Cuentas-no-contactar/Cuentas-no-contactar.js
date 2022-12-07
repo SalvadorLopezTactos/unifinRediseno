@@ -258,8 +258,17 @@
 		document.getElementById("valida").options.length=0;
 		for(var i = 0; i < this.data.records.length; i++) {
 			if($("#razon").val() == this.data.records[i].razon) {
-				this.detalle = this.data.records[i].detalle;
-				app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, {}), null, {
+                this.detalle = this.data.records[i].detalle;
+                var paramsUser={
+                    "filter": [
+                        {
+                          "status": {
+                            "$in" : ["Active"],
+                          }
+                        }
+                      ]
+                };
+				app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, paramsUser), null, {
 					success: _.bind(function (data1) {
 						if (data1.records) {
 							for (var j = 0; j < data1.records.length; j++) {
@@ -280,8 +289,17 @@
 		document.getElementById("valida").options.length=0;
 		for(var i = 0; i < this.data.records.length; i++) {
 			if($("#motivo").val() == this.data.records[i].motivo) {
-				this.detalle = this.data.records[i].detalle;
-				app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, {}), null, {
+                this.detalle = this.data.records[i].detalle;
+                var paramsUser={
+                    "filter": [
+                        {
+                          "status": {
+                            "$in" : ["Active"],
+                          }
+                        }
+                      ]
+                };
+				app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, paramsUser), null, {
 					success: _.bind(function (data1) {
 						if (data1.records) {
 							for (var j = 0; j < data1.records.length; j++) {
@@ -321,8 +339,17 @@
 									document.getElementById("ingesta").value = data1.id;
 								}
 							}, this)
-						});
-						app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, {}), null, {
+                        });
+                        var paramsUser={
+                            "filter": [
+                                {
+                                  "status": {
+                                    "$in" : ["Active"],
+                                  }
+                                }
+                              ]
+                        };
+						app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, paramsUser), null, {
                             success: _.bind(function (data1) {
                                 if (data1.records) {
                                     for (var j = 0; j < data1.records.length; j++) {
@@ -351,7 +378,16 @@
 						document.getElementById("detalle").value = data.detalle2_c;
                         document.getElementById("detalle").disabled=true;
 
-                        app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, {}), null, {
+                        var paramsUser={
+                            "filter": [
+                                {
+                                  "status": {
+                                    "$in" : ["Active"],
+                                  }
+                                }
+                              ]
+                        };
+                        app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, paramsUser), null, {
                             success: _.bind(function (data1) {
                                 if (data1.records) {
                                     for (var j = 0; j < data1.records.length; j++) {
@@ -396,8 +432,18 @@
 									document.getElementById("ingesta").value = data5.id;
 								}
 							}, this)
-						});
-						app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, {}), null, {
+                        });
+                        
+                        var paramsUser={
+                            "filter": [
+                                {
+                                  "status": {
+                                    "$in" : ["Active"],
+                                  }
+                                }
+                              ]
+                        };
+						app.api.call("read", app.api.buildURL("Teams/" + this.data.records[0].user_id_c + "/link/users", null, null, paramsUser), null, {
                             success: _.bind(function (data1) {
                                 if (data1.records) {
                                     for (var j = 0; j < data1.records.length; j++) {
