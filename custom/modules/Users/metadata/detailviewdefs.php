@@ -47,6 +47,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_DETAILVIEW_PANEL4' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
     ),
     'panels' => 
@@ -423,6 +428,35 @@ array (
             'readonly' => false,
             'name' => 'habilita_envio_tc_c',
             'label' => 'LBL_HABILITA_ENVIO_TC',
+          ),
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel4' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'vacaciones_inicio_c',
+            'label' => 'LBL_VACACIONES_INICIO',
+          ),
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'vacaciones_fin_c',
+            'label' => 'LBL_VACACIONES_FIN',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'vacaciones_detalle_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VACACIONES_DETALLE',
           ),
           1 => '',
         ),
