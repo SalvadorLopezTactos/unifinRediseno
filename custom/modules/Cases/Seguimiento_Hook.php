@@ -301,6 +301,8 @@ class Seguimiento_Hook
                                             //ya se llegó al conteo total del ciclo, se procede a asignar al usuario responsable
                                             $index=$conteoArregloUsuariosCompleto;
                                             $GLOBALS['log']->fatal("No se encontró usuario disponible, se procede a asignar al responsable");
+                                            array_unshift($usuarios_carrusel,$responsable);
+                                            $ultimo_asignado=0;
                                         }
                                     }else{
                                         //Rompe el ciclo ya que si no se encuentra la fecha, quiere decir que el usuario se encuentra disponible y se puede asignar
