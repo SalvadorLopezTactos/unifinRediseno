@@ -62,3 +62,6 @@ $mod_strings['LBL_EXCLUYE_VALIDA'] = 'Alta sol. Op - No negocio';
 $mod_strings['LBL_LLAMADA_GENESYS'] = 'Llamada Genesys';
 $mod_strings['LBL_LENIA'] = 'Videoconferencia Lenia';
 $mod_strings['LBL_HABILITA_ENVIO_TC'] = 'Habilitar Reenvío TC';
+$mod_strings['LBL_VACACIONES_INICIO'] = 'Inicio';
+$mod_strings['LBL_VACACIONES_FIN'] = 'Fin';
+$mod_strings['LBL_VACACIONES_DETALLE'] = 'Descripción';

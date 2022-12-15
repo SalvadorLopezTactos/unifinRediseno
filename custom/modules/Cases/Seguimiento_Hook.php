@@ -218,7 +218,8 @@ class Seguimiento_Hook
                         //Calculando el asignado, dependiendo si se tiene asignación en carrusel
                         if($asignacion_carrusel){
                             $usuarios_carrusel=$this->getUsersReportsTo($responsable);
-                            //$GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
+
+                            $GLOBALS['log']->fatal(print_r($usuarios_carrusel,true));
 
                             if($responsable_en_carrusel){
                                 //Se toma en cuenta en el carrusel al usuario responsable, por lo tanto se pone al inicio de la lista de usuarios disponibles
@@ -228,6 +229,90 @@ class Seguimiento_Hook
                             //Sólo procesa asgnado si: 1) No es caso creado por CAC o 2) Es CAC, pero establece asignado manualmente
                             if(!$esCAC || ($esCAC && $bean->created_by == $bean->assigned_user_id ) )
                             {
+                                $usersVacaciones=array();
+                                //Se arma arreglo para buscar el usuario que se va a asignar, el arreglo armado es del estlo:
+                                /**
+                                 * (
+                                 * 0:( 
+                                 *  id_usuario1=>(
+                                 *      fecha_vacacion1,
+                                 *      fecha_vacacion2)
+                                 *  ),
+                                 * 1:(
+                                 *  id_usuario2=>(
+                                 *      fecha_vacacion1,
+                                 *      fecha_vacacion2)
+                                 *  ),....
+                                 * )
+                                 **/
+                                for($i=0;$i<count($usuarios_carrusel);$i++){
+                                    $queryHoliday="SELECT holiday_date from holidays WHERE person_id='{$usuarios_carrusel[$i]}'";
+                                    $resultHoliday = $GLOBALS['db']->query($queryHoliday);
+                                    $arrUsersVacaciones=array();
+                                    $arrHolidays=array();
+                                    if($resultHoliday->num_rows > 0){
+                                        
+                                        while ($row = $db->fetchByAssoc($resultHoliday)){
+                                            $hoy=date('Y-m-d');
+                                            $holidayDate = $row['holiday_date'];
+                                            array_push($arrHolidays,$holidayDate);
+                                        }
+                                        //array_push($arrUsersVacaciones,$arrHolidays);
+                                        //$arrUsersVacaciones[$usuarios_carrusel[$i]]=$arrHolidays;
+
+                                    }else{
+                                        array_push($arrHolidays,'');
+                                    }
+                                    array_push($usersVacaciones,$arrHolidays);
+                                    //$usersVacaciones[$usuarios_carrusel[$i]]=$arrUsersVacaciones;
+                                }
+
+                                $GLOBALS['log']->fatal("ARREGLO USERS VACACIONES");
+                                $GLOBALS['log']->fatal(print_r($usersVacaciones,true));
+                                
+                                $conteoArregloUsuariosCompleto=count($usersVacaciones);
+                                $conteo=0;
+                                //for ($i=$aux_ultimo_asignado; $i < $conteoArregloUsuariosCompleto; $i++) {
+                                $index=$ultimo_asignado;
+                                while($index < $conteoArregloUsuariosCompleto){
+                                    $hoy=date('Y-m-d');
+                                    $GLOBALS['log']->fatal("Buscando en el indice: ".$index." la fecha actual ".$hoy);
+                                    $arregloFechas=$usersVacaciones[$index];
+                                    
+                                    if(in_array($hoy,$arregloFechas)){
+                                        $GLOBALS['log']->fatal("Usuario no disponible, tiene vacaciones");
+                                        $conteo+=1;
+
+                                        $GLOBALS['log']->fatal("index: ".$index);
+                                        //$GLOBALS['log']->fatal("count(usersVacaciones): ".count($usersVacaciones));
+                                        //$GLOBALS['log']->fatal("conteo: ".$conteo);
+                                        //Si no se ha encontrado el usuario disponible,
+                                        //Se aplican 2 validaciones:
+                                        //Si no se han recorrido todos los usuarios disponibles y ya se llegó al final del arreglo
+                                        if($index==count($usersVacaciones)-1 && $conteo < count($usersVacaciones)){
+                                            $index=-1;
+                                            $conteoArregloUsuariosCompleto=$conteoArregloUsuariosCompleto-$conteo;
+                                            $GLOBALS['log']->fatal("conteo: ".$conteo);
+                                            $GLOBALS['log']->fatal("conteoArregloUsuariosCompleto: ".$conteoArregloUsuariosCompleto);
+                                            $GLOBALS['log']->fatal("No se encontró usuario disponible, se reinicia el ciclo for");
+                                        }
+                                        if($conteo == count($usersVacaciones)){
+                                            //En este caso, ya se recorrieron todos los usuarios que reportan, pero ninguno está disponible para asignación
+                                            //ya se llegó al conteo total del ciclo, se procede a asignar al usuario responsable
+                                            $index=$conteoArregloUsuariosCompleto;
+                                            $GLOBALS['log']->fatal("No se encontró usuario disponible, se procede a asignar al responsable");
+                                            array_unshift($usuarios_carrusel,$responsable);
+                                            $ultimo_asignado=0;
+                                        }
+                                    }else{
+                                        //Rompe el ciclo ya que si no se encuentra la fecha, quiere decir que el usuario se encuentra disponible y se puede asignar
+                                        $ultimo_asignado=$index;
+                                        $index=$conteoArregloUsuariosCompleto;
+                                        $GLOBALS['log']->fatal("Indice asignar: ".$ultimo_asignado);
+                                        $GLOBALS['log']->fatal("Se rompe ciclo, el usuario se encuentra disponible ".$usuarios_carrusel[$ultimo_asignado]);
+                                    }
+                                    $index++;
+                                }
                                 //Antes de asignar, se toma en cuenta el valor del último asignado
                                 $asignado=$usuarios_carrusel[$ultimo_asignado];
 
