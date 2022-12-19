@@ -6,6 +6,7 @@ class Seguimiento_Hook
 {
     function Fecha_Seguimiento($bean, $event, $args)
     {
+        global $current_user;
         //Eventos para establecer fecha de seguimiento:
         if(!$args['isUpdate']){//Es creación, evento disparador número 1
             $fecha_s = "";
@@ -43,6 +44,7 @@ class Seguimiento_Hook
             */
             //$GLOBALS['log']->fatal("********** Fecha de seguimiento **********");
 
+            /*
             if($bean->priority == 'P1' ){
                 if($bean->subtipo_c == '4' || $bean->subtipo_c == '5' || $bean->subtipo_c == '6'|| $bean->subtipo_c == '7'|| $bean->subtipo_c == '13'){
                     $fecha_s = $this->dia_seguimiento(1);   //1 dia
@@ -84,6 +86,156 @@ class Seguimiento_Hook
             if($bean->subtipo_c== '19'){
                 $fecha_s = $this->dia_seguimiento(30);
             }
+            */
+
+            if($bean->type=='12' || $bean->type=='13' || $bean->type=='14'){
+                //El seguimiento se establece en Horas
+                $horas_seguimiento=$this->get_tiempo_seguimiento($bean->type,'Horas',$bean->subtipo_c);
+
+                //ToDo: Comprobar Shifts
+                $days_of_week =['monday','tuesday','wednesday','thursday','friday'];
+                $days_of_week_map=['monday'=>'1','tuesday'=>'2','wednesday'=>'3','thursday'=>'4','friday'=>'5'];
+                $days_of_week_map_invert=['1'=>'monday','2'=>'tuesday','3'=>'wednesday','4'=>'thursday','5'=>'friday'];
+                $GLOBALS['log']->fatal('SE ESTABLECEN '.$horas_seguimiento.' Horas DE SEGUIMIENTO');
+
+                $queryShifts="SELECT is_open_monday,
+                concat(monday_open_hour,':',monday_open_minutes) open_time_monday,
+                concat(monday_close_hour,':',monday_close_minutes) close_time_monday,
+                is_open_tuesday,
+                concat(tuesday_open_hour,':',tuesday_open_minutes) open_time_tuesday,
+                concat(tuesday_close_hour,':',tuesday_close_minutes) close_time_tuesday,
+                is_open_wednesday,
+                concat(wednesday_open_hour,':',wednesday_open_minutes) open_time_wednesday,
+                concat(wednesday_close_hour,':',wednesday_close_minutes) close_time_wednesday,
+                is_open_thursday,
+                concat(thursday_open_hour,':',thursday_open_minutes) open_time_thursday,
+                concat(thursday_close_hour,':',thursday_close_minutes) close_time_thursday,
+                is_open_friday,
+                concat(friday_open_hour,':',friday_open_minutes) open_time_friday,
+                concat(friday_close_hour,':',friday_close_minutes) close_time_friday
+                FROM shifts
+                ORDER BY date_modified ASC;";
+
+                $queryShiftsResult = $GLOBALS['db']->query($queryShifts);
+                $current_day = strtolower(date('l', strtotime("this week")));
+                //$current_day="friday";
+
+                //$current_day_number = date('w');
+                //$current_day_number ='1';
+                
+                $horarios=[];
+                $matriz_semana=array();
+                //Recorriendo query para armar horarios de disponibilidad
+                $matriz_semana=[];
+                $array_dia=[];
+                while ($row = $GLOBALS['db']->fetchByAssoc($queryShiftsResult)) {
+                    
+                    for ($i=0; $i <count($days_of_week) ; $i++) { 
+                        $open_hour=$row['open_time_'.$days_of_week[$i]];
+                        $close_hour=$row['close_time_'.$days_of_week[$i]];
+                        $horario=$open_hour."-".$close_hour;
+
+                        //Se obtiene el número de día con base al nombre del día
+                        $key_dia=array_search($days_of_week_map_invert[$i+1], $days_of_week_map_invert);
+                        $array_dia[$key_dia][]=$horario;
+                    }
+                    array_push($matriz_semana,$array_dia);
+                }
+                $matriz_semana=$matriz_semana[1];
+                
+                $dia_actual=$days_of_week_map[strtolower(date('l'))];
+                //$dia_actual='5';
+            
+                $hora_actual=date('H:i');
+                //$hora_actual="12:00";
+                $dia_suma=0;
+
+                $horario_matutino=$matriz_semana[$dia_actual][0];
+                $horario_vespertino=$matriz_semana[$dia_actual][1];
+
+                $limite_inferior_matutino=explode("-",$horario_matutino)[0];
+                $limite_superior_matutino=explode("-",$horario_matutino)[1];
+
+                $limite_inferior_vespertino=explode("-",$horario_vespertino)[0];
+                $limite_superior_vespertino=explode("-",$horario_vespertino)[1];
+
+                $dia_inicio=$this->get_dia_inicio($hora_actual,$dia_actual,$limite_superior_vespertino);
+                //$GLOBALS['log']->fatal("Dia inicio: ".$dia_inicio);
+                
+                $indice_turno=$this->get_indice_turno($dia_inicio,$dia_actual,$hora_actual,$limite_superior_matutino);
+                //$GLOBALS['log']->fatal("Indice turno: ".$indice_turno);
+
+                $intervalo=$matriz_semana[$dia_inicio][$indice_turno];
+                //$GLOBALS['log']->fatal("El intervalo para tomar en cuenta es: ".$intervalo);
+                $limite_inferior_intervalo=explode("-",$intervalo)[0];
+                $limite_superior_intervalo=explode("-",$intervalo)[1];
+
+                $hora_inicio=$this->get_hora_inicio($hora_actual,$dia_inicio,$dia_actual,$limite_inferior_intervalo,$limite_superior_intervalo,$limite_inferior_matutino,$limite_superior_matutino,$limite_inferior_vespertino);
+                //$GLOBALS['log']->fatal("La hora inicio es: ".$hora_inicio);
+                
+                $diferencia_horas=$horas_seguimiento;
+                
+                while($diferencia_horas > 0){
+                    $intervalo=$matriz_semana[$dia_inicio][$indice_turno];
+                    //$GLOBALS['log']->fatal("El intervalo para tomar en cuenta es: ".$intervalo);
+                    $limite_inferior_intervalo=explode("-",$intervalo)[0];
+                    $limite_superior_intervalo=explode("-",$intervalo)[1];
+                    $date1 = new DateTime($hora_inicio);
+                    $date2 = new DateTime($limite_superior_intervalo);
+                    //$GLOBALS['log']->fatal("RESTANDO : ".$hora_inicio. " - ".$limite_superior_intervalo);
+                    $diff = $date1->diff($date2);
+                    $diferencia_en_horas=$diff->format("%h");
+                    $diferencia_en_minutos=$diff->format("%i");
+
+                    $diferencia_horas_result=$this->convert_hours_to_decimal($diferencia_en_horas,$diferencia_en_minutos);
+                    $diferencia_horas=$diferencia_horas - $diferencia_horas_result;
+                    //$GLOBALS['log']->fatal("Restan ".$diferencia_horas." horas");
+                    $hora_establecer="";
+                    if($diferencia_horas <=0){
+                        $interval=$matriz_semana[$dia_inicio][$indice_turno];
+                        $limite_inferior_interval=explode("-",$interval)[0];
+                        $limite_superior_interval=explode("-",$interval)[1];
+
+                        $hora_original=date_create($limite_superior_interval);
+                        date_add($hora_original, date_interval_create_from_date_string(($diferencia_horas*3600).' seconds'));
+
+                        $hora_establecer=date_format($hora_original, 'H:i:s');
+                        $GLOBALS['log']->fatal("La hora a establecer es: ".$hora_establecer);
+                    }else{
+                        if($indice_turno==1){
+                            $indice_turno=0;
+                            if($dia_inicio==5){
+                                $dia_inicio=1;
+                                $dia_suma=$dia_suma+3;
+                            }else{
+                                $dia_inicio+=1;
+                                $dia_suma+=1;
+                            }
+                        }else{
+                            $indice_turno=1;
+                        }
+                        
+                        $intervalo_nuevo=$matriz_semana[$dia_inicio][$indice_turno];
+                        $limite_inferior_intervalo_nuevo=explode("-",$intervalo_nuevo)[0];
+                        $limite_superior_intervalo_nuevo=explode("-",$intervalo_nuevo)[1];
+
+                        $hora_inicio=$limite_inferior_intervalo_nuevo;
+                    }
+                }
+                
+                //Estableciendo la fecha de seguimiento->  DiaActual + DiaSuma : HoraEstablecer
+                $fecha=date('Y-m-d '.$hora_establecer);
+
+                $fecha_seguimiento= date('Y-m-d H:i:s', strtotime($fecha. ' + '.$dia_suma.' days'));
+                $sugar_date_time = new SugarDateTime($fecha_seguimiento);
+                $fecha_s = $sugar_date_time->formatDateTime("datetime", "db", $current_user);
+
+            }else{
+                $tiempo=$this->get_tiempo_seguimiento("",'Dias',$bean->subtipo_c);
+                $fecha_s = $this->dia_seguimiento($tiempo);
+                $GLOBALS['log']->fatal('SE ESTABLECEN '.$tiempo.' DIAS DE SEGUIMIENTO');
+
+            }
 
             $bean->follow_up_datetime = $fecha_s;
         }else{
@@ -92,6 +244,77 @@ class Seguimiento_Hook
             }
         }
 
+    }
+
+    function get_dia_inicio($hora_actual,$dia_actual,$limite_superior_vespertino){
+        $dia_inicio="";
+        if(strtotime($hora_actual) < strtotime($limite_superior_vespertino)){
+            $dia_inicio=$dia_actual;
+        }
+
+        if(strtotime($hora_actual) >= strtotime($limite_superior_vespertino)){
+            $dia_inicio=intval($dia_actual) +1;
+        }
+
+        if(strtotime($hora_actual) >= strtotime($limite_superior_vespertino) && $dia_actual=='5'){
+            $dia_inicio=1;
+        }
+
+        return $dia_inicio;
+    }
+
+    function get_indice_turno($dia_inicio,$dia_actual,$hora_actual,$limite_superior_matutino){
+        $indice_turno=0;
+        
+        if($dia_inicio != $dia_actual || ($dia_inicio==$dia_actual && strtotime($hora_actual) < strtotime($limite_superior_matutino))){
+            $indice_turno=0;
+        }
+        if($dia_inicio == $dia_actual && strtotime($hora_actual)>= strtotime($limite_superior_matutino)){
+            $indice_turno=1;
+        }
+
+        return $indice_turno;
+    }
+
+    function get_hora_inicio($hora_actual,$dia_inicio,$dia_actual,$limite_inferior_intervalo,$limite_superior_intervalo,$limite_inferior_matutino,$limite_superior_matutino,$limite_inferior_vespertino){
+        if(strtotime($hora_actual) >= strtotime($limite_inferior_intervalo) && strtotime($hora_actual)<=strtotime($limite_superior_intervalo)){
+            $hora_inicio=$hora_actual;
+        }
+
+        if(strtotime($hora_actual) <= strtotime($limite_inferior_matutino)){
+            $hora_inicio=$limite_inferior_matutino;
+        }
+
+        if($dia_inicio != $dia_actual){
+            $hora_inicio=$limite_inferior_intervalo;
+        }
+
+        if(strtotime($hora_actual) >= strtotime($limite_superior_matutino) && strtotime($hora_actual) < strtotime($limite_inferior_vespertino)){
+            $hora_inicio=$limite_inferior_vespertino;
+        }
+
+        return $hora_inicio;
+    }
+
+    function convert_hours_to_decimal($hours,$minutes){
+        return $hours + round($minutes / 60, 2);
+    }
+
+    function get_tiempo_seguimiento($tipo,$unidad_medida,$subtipo){
+        if($tipo != ""){
+            $tipo="AND tipo= {$tipo}";
+        }
+        $subtipo=($subtipo=="") ? " IS NULL" : "= '{$subtipo}'"; 
+        
+        $query = "SELECT * FROM unifin_casos_control_seguimiento WHERE unidad_medida='{$unidad_medida}' AND subtipo{$subtipo} {$tipo}";
+        $GLOBALS['log']->fatal($query);
+        $seguimiento='';
+        $queryResult = $GLOBALS['db']->query($query);
+        while ($row = $GLOBALS['db']->fetchByAssoc($queryResult)) {
+            $seguimiento=$row['cantidad'];
+        }
+
+        return $seguimiento;
     }
 
     function dia_seguimiento($add){
