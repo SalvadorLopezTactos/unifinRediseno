@@ -3169,60 +3169,49 @@
 
     showfieldBenef2: function () {
         var optionBenef = self.model.get('area_benef_c');
-
-        $('[data-name="estado_benef_c"]').hide();
-        $('[data-name="municipio_benef_c"]').hide();
-        $('[data-name="ent_gob_benef_c"]').hide();
-        $('[data-name="cuenta_benef_c"]').hide();
-        $('[data-name="emp_no_reg_benef_c"]').hide();
+        $('div[data-name=estado_benef_c]').hide();
+        $('div[data-name=municipio_benef_c]').hide();
+        $('div[data-name=ent_gob_benef_c]').hide();
+        $('div[data-name=cuenta_benef_c]').hide();
+        $('div[data-name=emp_no_reg_benef_c]').hide();
 
         if (optionBenef === "1" || optionBenef === "2") {
-            self.$(".record-cell[data-name='estado_benef_c']").show();
-            self.$(".record-label[data-name='estado_benef_c']").show();
+            $('div[data-name=estado_benef_c]').show();
         }
         if (optionBenef === "2") {
-            self.$(".record-cell[data-name='municipio_benef_c']").show();
-            self.$(".record-label[data-name='municipio_benef_c']").show();
+            $('div[data-name=municipio_benef_c]').show();
         }
         if (optionBenef === "3") {
-            self.$(".record-cell[data-name='ent_gob_benef_c']").show();
-            self.$(".record-label[data-name='ent_gob_benef_c']").show();
+            $('div[data-name=ent_gob_benef_c]').show();
         }
         if (optionBenef === "4") {
-            self.$(".record-cell[data-name='cuenta_benef_c']").show();
-            self.$(".record-label[data-name='cuenta_benef_c']").show();
+            $('div[data-name=cuenta_benef_c]').show();
         }
         if (optionBenef === "5") {
-            self.$(".record-cell[data-name='emp_no_reg_benef_c']").show();
-            self.$(".record-label[data-name='emp_no_reg_benef_c']").show();
-            }
-
+            $('div[data-name=emp_no_reg_benef_c]').show();
+        }
+        
     },
 
     showfieldSuby2: function () {
 
         var optionSuby = this.model.get('subyacente_c');
-
-        $('[data-name="estado_suby_c"]').hide();
-        $('[data-name="municipio_suby_c"]').hide();
-        $('[data-name="ent_gob_suby_c"]').hide();
-        $('[data-name="otro_suby_c"]').hide();
-
+        $('div[data-name=estado_suby_c]').hide();
+        $('div[data-name=municipio_suby_c]').hide();
+        $('div[data-name=ent_gob_suby_c]').hide();
+        $('div[data-name=otro_suby_c]').hide();
+        
         if (optionSuby == 1 || optionSuby == 2) {
-            self.$(".record-cell[data-name='estado_suby_c']").show();
-            self.$(".record-label[data-name='estado_suby_c']").show();
+            $('div[data-name=estado_suby_c]').show();
         }
         if (optionSuby == 2) {
-            self.$(".record-cell[data-name='municipio_suby_c']").show();
-            self.$(".record-label[data-name='municipio_suby_c']").show();
+            $('div[data-name=municipio_suby_c]').show();
         }
         if (optionSuby == 3) {
-            self.$(".record-cell[data-name='ent_gob_suby_c']").show();
-            self.$(".record-label[data-name='ent_gob_suby_c']").show();
+            $('div[data-name=ent_gob_suby_c]').show();
         }
         if (optionSuby == 4) {
-            self.$(".record-cell[data-name='otro_suby_c']").show();
-            self.$(".record-label[data-name='otro_suby_c']").show();
+            $('div[data-name=otro_suby_c]').show();
         }
 
     },
