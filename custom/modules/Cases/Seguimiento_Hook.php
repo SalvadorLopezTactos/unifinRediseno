@@ -472,7 +472,7 @@ class Seguimiento_Hook
                                  * )
                                  **/
                                 for($i=0;$i<count($usuarios_carrusel);$i++){
-                                    $queryHoliday="SELECT holiday_date from holidays WHERE person_id='{$usuarios_carrusel[$i]}'";
+                                    $queryHoliday="SELECT holiday_date from holidays WHERE person_id='{$usuarios_carrusel[$i]}' AND deleted=0";
                                     $resultHoliday = $GLOBALS['db']->query($queryHoliday);
                                     $arrUsersVacaciones=array();
                                     $arrHolidays=array();
