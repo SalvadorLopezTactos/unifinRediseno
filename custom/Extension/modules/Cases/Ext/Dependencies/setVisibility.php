@@ -51,7 +51,7 @@ $dependencies['Cases']['area_interna_c'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'area_interna_c',
-                'value' => 'and(not(equal($producto_c,"B621")),not(equal($producto_c,"B601")),equal($case_hd_c,1))',
+                'value' => 'and(not(equal($producto_c,"B621")),not(equal($producto_c,"B601")))',
             ),
         ),
     ),
