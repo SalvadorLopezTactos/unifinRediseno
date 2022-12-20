@@ -147,7 +147,7 @@ class Seguimiento_Hook
                 //$dia_actual='5';
             
                 $hora_actual=date('H:i');
-                //$hora_actual="12:00";
+                //$hora_actual="14:00";
                 $dia_suma=0;
 
                 $horario_matutino=$matriz_semana[$dia_actual][0];
@@ -172,6 +172,10 @@ class Seguimiento_Hook
 
                 $hora_inicio=$this->get_hora_inicio($hora_actual,$dia_inicio,$dia_actual,$limite_inferior_intervalo,$limite_superior_intervalo,$limite_inferior_matutino,$limite_superior_matutino,$limite_inferior_vespertino);
                 //$GLOBALS['log']->fatal("La hora inicio es: ".$hora_inicio);
+                //Cuando la hora actual supera el intervalo encontrado, quiere decir que se debe establecer el día siguiente
+                if(strtotime($hora_actual)>strtotime($limite_superior_intervalo)){
+                    $dia_suma++;
+                }
                 
                 $diferencia_horas=$horas_seguimiento;
                 
@@ -189,7 +193,6 @@ class Seguimiento_Hook
 
                     $diferencia_horas_result=$this->convert_hours_to_decimal($diferencia_en_horas,$diferencia_en_minutos);
                     $diferencia_horas=$diferencia_horas - $diferencia_horas_result;
-                    //$GLOBALS['log']->fatal("Restan ".$diferencia_horas." horas");
                     $hora_establecer="";
                     if($diferencia_horas <=0){
                         $interval=$matriz_semana[$dia_inicio][$indice_turno];
@@ -601,7 +604,7 @@ class Seguimiento_Hook
 
         if (in_array('set_notification_body', get_class_methods($bean))) {
             $xtpl = $this->set_notification_body($xtpl, $bean);
-            $GLOBALS['log']->fatal("IF DE FUNCIÓN DE ERROR");
+            //$GLOBALS['log']->fatal("IF DE FUNCIÓN DE ERROR");
         } else {
             //Default uses OBJECT key for both subject and body (see en_us.notify_template.html)
             $singularModuleLabel = $GLOBALS['app_list_strings']['moduleListSingular']["Cases"];
