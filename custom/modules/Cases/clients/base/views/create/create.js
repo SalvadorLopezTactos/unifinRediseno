@@ -7,6 +7,7 @@
         self = this;
         this._super("initialize", [options]);
 
+        this.model.addValidationTask('valida_user_holidays', _.bind(this.valida_user_holidays, this));
         this.model.addValidationTask('valida_fcr_hd', _.bind(this.valida_fcr_hd, this));
         this.model.addValidationTask('valida_area_interna', _.bind(this.valida_area_interna, this));
         this.model.addValidationTask('valida_requeridos_min', _.bind(this.valida_requeridos_min, this));
@@ -34,6 +35,34 @@
         {
             self.model.set('case_cuenta_relacion','Muestra');
         }
+    },
+
+    valida_user_holidays:function(fields, errors, callback){
+        var id_user=this.model.get('assigned_user_id');
+        app.api.call("read", app.api.buildURL("Users/" + id_user + "/link/holidays", null, null, {}), null, {
+            success: _.bind(function (data) {
+                var holiday_dates=[];
+                if (data.records.length >0) {
+                    for (let index = 0; index < data.records.length; index++) {
+                        holiday_dates[index]=data.records[index].holiday_date;
+                    }
+                    var fecha = new Date();
+                    var current_year=fecha.getFullYear();
+                    var current_month=fecha.getMonth();
+                    var current_day=fecha.getDate();
+                    var current_date=current_year + "-" + (current_month+1) + "-" + current_day;
+
+                    if(holiday_dates.includes(current_date)){
+                        app.alert.show('user_holiday', {
+                            level: 'warning',
+                            messages: 'El usuario '+self.model.get("assigned_user_name")+' se encuentra de vacaciones',
+                            autoClose: false
+                        });
+                    }
+                }
+                callback(null, fields, errors);
+            }, this)
+        });
     },
 
     valida_fcr_hd:function(fields, errors, callback){
