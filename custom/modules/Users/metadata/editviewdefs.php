@@ -484,12 +484,7 @@ array (
             'name' => 'admin_backlog_c',
             'label' => 'LBL_ADMIN_BACKLOG',
           ),
-          1 => 
-          array (
-            'readonly' => false,
-            'name' => 'llamada_genesys_c',
-            'label' => 'LBL_LLAMADA_GENESYS',
-          ),
+          1 => '',
         ),
         16 => 
         array (

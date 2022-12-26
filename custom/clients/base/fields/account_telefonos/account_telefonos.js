@@ -372,25 +372,10 @@
         }
     },
 
-    createcallGen: function (tel_client) {
-      
-      var posiciones = App.user.attributes.posicion_operativa_c;
-      var posicion = '';
-      var name_client = this.model.get('name');
-
-        iwscommand.clickToDialPEF({
-            number: tel_client,
-            type: "call",
-            autoPlace: true,
-            attributes: {}
-        });
-    },
-
     createcall: function (tel_client) {
         //Recupera variables para petición
         self = this;
         var posiciones = App.user.attributes.posicion_operativa_c;
-        var gen = App.user.attributes.llamada_genesys_c;
         var posicion = '';
         var name_client = this.model.get('name');
         if(posiciones.includes(3)) posicion = 'Ventas';
@@ -404,23 +389,19 @@
             'puesto_usuario': App.user.attributes.puestousuario_c,
             'ext_usuario': App.user.attributes.ext_c
         };
-        if(gen){
-            self.createcallGen(tel_client);
-        }else{
-            //Ejecuta petición para generar llamada
-            app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
-              success: _.bind(function (data) {
-                id_call = data;
-                console.log('Llamada creada, id: ' + id_call);
-                app.alert.show('message-to', {
-                  level: 'info',
-                  messages: 'Usted está llamando a ' + name_client,
-                  autoClose: true
-                });
-                //callback(id_call, self);
-              }, this),
+        //Ejecuta petición para generar llamada
+        app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
+          success: _.bind(function (data) {
+            id_call = data;
+            console.log('Llamada creada, id: ' + id_call);
+            app.alert.show('message-to', {
+              level: 'info',
+              messages: 'Usted está llamando a ' + name_client,
+              autoClose: true
             });
-        }
+            //callback(id_call, self);
+          }, this),
+        });
     },
 
     resultCallback: function (id_call, context) {
