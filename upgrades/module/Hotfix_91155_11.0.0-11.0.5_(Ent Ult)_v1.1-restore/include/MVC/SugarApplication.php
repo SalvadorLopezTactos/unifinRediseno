@@ -435,15 +435,6 @@ EOF;
             exit ();
         }
 
-        //If there was a login error, we should not allow the further code execution and destroy the session
-        if (isset($_SESSION['login_error'])) {
-            if ($sess->getId()) {
-                $sess->destroy();
-            };
-            header('Location: ' . $this->getUnauthenticatedHomeUrl(true));
-            exit();
-        }
-
 		$authController = AuthenticationController::getInstance();
 		$GLOBALS['current_user'] = BeanFactory::newBean('Users');
 		if(isset($_SESSION['authenticated_user_id'])){
