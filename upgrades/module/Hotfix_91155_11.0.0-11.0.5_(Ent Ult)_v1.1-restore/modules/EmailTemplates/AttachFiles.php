@@ -13,7 +13,6 @@
  //		Module: module name, this module should have a file called TreeData.php
  //		Function: name of the function to be called in TreeData.php, the function will be called statically.
  //		PARAM prefixed properties: array of these property/values will be passed to the function as parameter.
-trigger_error("access temporarily denied", E_USER_ERROR);
 
 
 

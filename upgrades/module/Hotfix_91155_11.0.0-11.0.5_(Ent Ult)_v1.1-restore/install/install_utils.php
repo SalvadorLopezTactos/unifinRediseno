@@ -547,14 +547,6 @@ function handleSugarConfig() {
         }
     }
 
-    $sugar_config['security']['private_ips'] = [
-        '10.0.0.0|10.255.255.255',
-        '172.16.0.0|172.31.255.255',
-        '192.168.0.0|192.168.255.255',
-        '169.254.0.0|169.254.255.255',
-        '127.0.0.0|127.255.255.255',
-    ];
-
     ksort($sugar_config);
     $sugar_config_string = "<?php\n" .
         '// created: ' . date('Y-m-d H:i:s') . "\n" .
@@ -660,7 +652,7 @@ function getForbiddenPaths()
         '^upgrades/',
         '^vendor/(?!ytree.*\.(css|gif|js|png)$)',
 // @codingStandardsIgnoreStart
-        '^(cache|clients|data|examples|include|install|jssource|metadata|ModuleInstall|modules|soap|xtemplate)/.*\.(php|tpl|phar)$',
+        '^(cache|clients|data|examples|include|install|jssource|metadata|ModuleInstall|modules|soap|xtemplate)/.*\.(php|tpl)$',
 // @codingStandardsIgnoreEnd
     ];
 }
@@ -1305,9 +1297,7 @@ function print_debug_array( $name, $debug_array ){
 
 function print_debug_comment(){
     if( !empty($_REQUEST['debug']) ){
-        if (in_array($_REQUEST['debug'], ['true', 'false'], true)) {
-            $_SESSION['debug'] = $_REQUEST['debug'];
-        }
+        $_SESSION['debug'] = $_REQUEST['debug'];
     }
 
     if( !empty($_SESSION['debug']) && ($_SESSION['debug'] == 'true') ){
@@ -1999,9 +1989,11 @@ function create_db_user_creds($numChars=10){
 $numChars = 7; // number of chars in the password
 //chars to select from
 $charBKT = "abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNPQRSTUVWXYZ";
+// seed the random number generator
+srand((double)microtime()*1000000);
 $password="";
 for ($i=0;$i<$numChars;$i++)  // loop and create password
-            $password = $password . substr($charBKT, random_int(0, getrandmax()) % strlen($charBKT), 1);
+            $password = $password . substr ($charBKT, rand() % strlen($charBKT), 1);
 
 return $password;
 
