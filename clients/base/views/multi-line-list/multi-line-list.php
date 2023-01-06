@@ -17,7 +17,7 @@ $viewdefs['base']['view']['multi-line-list'] = array(
                 'label' => 'LBL_EDIT_IN_NEW_TAB',
                 'tooltip' => 'LBL_EDIT_IN_NEW_TAB',
                 'event' => 'list:editrow:fire',
-                'icon' => 'fa-edit',
+                'icon' => 'sicon-edit',
                 'acl_action' => 'edit',
             ),
             array(
@@ -25,7 +25,7 @@ $viewdefs['base']['view']['multi-line-list'] = array(
                 'label' => 'LBL_COPY_RECORD_URL',
                 'tooltip' => 'LBL_COPY_RECORD_URL',
                 'event' => 'list:copyrow:fire',
-                'icon' => 'fa-copy',
+                'icon' => 'sicon-copy',
                 'acl_action' => 'view',
             ),
             array(
@@ -33,7 +33,7 @@ $viewdefs['base']['view']['multi-line-list'] = array(
                 'label' => 'LBL_OPEN_IN_NEW_TAB',
                 'tooltip' => 'LBL_OPEN_IN_NEW_TAB',
                 'event' => 'list:openrow:fire',
-                'icon' => 'fa-external-link',
+                'icon' => 'sicon-launch',
                 'acl_action' => 'view',
             ),
         ),

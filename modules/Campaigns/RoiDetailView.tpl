@@ -52,20 +52,20 @@
 	<td width="30%"><slot>{$ASSIGNED_TO|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%"><slot>{$MOD.LBL_CAMPAIGN_STATUS}</slot></td>
-	<td width="30%"><slot>{$STATUS}</slot></td>
+	<td width="30%"><slot>{$STATUS|escape:'html':'UTF-8'}</slot></td>
 
 	<td width="20%"><slot>{$MOD.LBL_TEAM}</slot></td>
-	<td width="30%"><slot>{$TEAM_NAME}</slot></td>
+	<td width="30%"><slot>{$TEAM_NAME|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%"><slot>{$MOD.LBL_CAMPAIGN_START_DATE}</slot></td>
-	<td width="30%"><slot>{$START_DATE}</slot></td>
+	<td width="30%"><slot>{$START_DATE|escape:'html':'UTF-8'}</slot></td>
 	<td ><slot>{$APP.LBL_DATE_MODIFIED}&nbsp;</slot></td>
-	<td ><slot>{$DATE_MODIFIED} {$APP.LBL_BY} {$MODIFIED_BY|escape:'html':'UTF-8'}</slot></td>
+	<td ><slot>{$DATE_MODIFIED|escape:'html':'UTF-8'} {$APP.LBL_BY} {$MODIFIED_BY|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%"><slot>{$MOD.LBL_CAMPAIGN_END_DATE}</slot></td>
-	<td width="30%"><slot>{$END_DATE}</slot></td>
+	<td width="30%"><slot>{$END_DATE|escape:'html':'UTF-8'}</slot></td>
 	<td ><slot>{$APP.LBL_DATE_ENTERED}&nbsp;</slot></td>
-	<td ><slot>{$DATE_ENTERED} {$APP.LBL_BY} {$CREATED_BY|escape:'html':'UTF-8'}</slot></td>
+	<td ><slot>{$DATE_ENTERED|escape:'html':'UTF-8'} {$APP.LBL_BY} {$CREATED_BY|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%"><slot>{$MOD.LBL_CAMPAIGN_TYPE}</slot></td>
 	<td width="30%"><slot>{$TYPE}</slot></td>
@@ -77,26 +77,26 @@
 	<td width="20%"><slot>&nbsp;</slot></td>
 	<td width="30%"><slot>&nbsp;</slot></td>
 	</tr><tr>
-	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_BUDGET} ({$CURRENCY})</slot></td>
-	<td width="30%"><slot>{$BUDGET}</slot></td>
+	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_BUDGET} ({$CURRENCY|escape:'html':'UTF-8'})</slot></td>
+	<td width="30%"><slot>{$BUDGET|escape:'html':'UTF-8'}</slot></td>
 	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_IMPRESSIONS}</slot></td>
-	<td width="30%" nowrap><slot>{$IMPRESSIONS}</slot></td>
+	<td width="30%" nowrap><slot>{$IMPRESSIONS|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
-	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_EXPECTED_COST} ({$CURRENCY})</slot></td>
-	<td width="30%"><slot>{$EXPECTED_COST}</slot></td>
+	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_EXPECTED_COST} ({$CURRENCY|escape:'html':'UTF-8'})</slot></td>
+	<td width="30%"><slot>{$EXPECTED_COST|escape:'html':'UTF-8'}</slot></td>
 		<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_OPPORTUNITIES_WON}</slot></td>
-	<td width="30%"><slot>{$OPPORTUNITIES_WON}</slot></td>
+	<td width="30%"><slot>{$OPPORTUNITIES_WON|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	</tr><tr>
-	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_ACTUAL_COST} ({$CURRENCY})</slot></td>
-	<td width="30%"><slot>{$ACTUAL_COST}</slot></td>
-	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_COST_PER_IMPRESSION} ({$CURRENCY})</slot></td>
-	<td width="30%" nowrap><slot>{$COST_PER_IMPRESSION}</slot></td>
+	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_ACTUAL_COST} ({$CURRENCY|escape:'html':'UTF-8'})</slot></td>
+	<td width="30%"><slot>{$ACTUAL_COST|escape:'html':'UTF-8'}</slot></td>
+	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_COST_PER_IMPRESSION} ({$CURRENCY|escape:'html':'UTF-8'})</slot></td>
+	<td width="30%" nowrap><slot>{$COST_PER_IMPRESSION|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
-	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_EXPECTED_REVENUE} ({$CURRENCY})</slot></td>
-	<td width="30%" nowrap><slot>{$EXPECTED_REVENUE}</slot></td>
-	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_COST_PER_CLICK_THROUGH} ({$CURRENCY})</slot></td>
-	<td width="30%"><slot>{$COST_PER_CLICK_THROUGH}</slot></td>
+	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_EXPECTED_REVENUE} ({$CURRENCY|escape:'html':'UTF-8'})</slot></td>
+	<td width="30%" nowrap><slot>{$EXPECTED_REVENUE|escape:'html':'UTF-8'}</slot></td>
+	<td width="20%" nowrap><slot>{$MOD.LBL_CAMPAIGN_COST_PER_CLICK_THROUGH} ({$CURRENCY|escape:'html':'UTF-8'})</slot></td>
+	<td width="30%"><slot>{$COST_PER_CLICK_THROUGH|escape:'html':'UTF-8'}</slot></td>
 	</tr><tr>
 	<td width="20%"><slot>&nbsp;</slot></td>
 	<td width="30%"><slot>&nbsp;</slot></td>

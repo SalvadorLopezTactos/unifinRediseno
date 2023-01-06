@@ -26,11 +26,7 @@ class OpportunityViews
      *
      * @var array
      */
-    public $mobileReadOnlyFields = [
-        'service_start_date',
-        'date_closed',
-        'sales_stage',
-    ];
+    public $mobileReadOnlyFields = [];
 
     /**
      * Array of fields that get added back to the views after a switch between Opps only and Opps+RLI modes

@@ -10,17 +10,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-/**
- * This is a soap entry point for soap version 4
- */
-chdir('../..');
+chdir(dirname(__FILE__).'/../../');
 require 'include/entryPoint.php';
-require_once('SugarWebServiceImplv4.php');
-$webservice_class = 'SugarSoapService2';
-$webservice_path = 'service/v2/SugarSoapService2.php';
-$registry_class = 'registry_v4';
-$registry_path = 'service/v4/registry.php';
-$webservice_impl_class = 'SugarWebServiceImplv4';
-$location = '/service/v4/soap.php';
-require_once 'service/core/webservice.php';
+require 'soap/SoapErrorDefinitions.php';
+require 'service/core/SugarSoapService.php';
+define('ENTRY_POINT_TYPE', 'api');
+
+$style = $_GET['style'] ?? null;
+$use = $_GET['use'] ?? null;
+$wsdl = isset($_GET['wsdl']) ? 'wsdl' : '';
+$method = $_REQUEST['method'] ?? "";
+
+Webservice::soap('4', $style, $use, $wsdl)->run($method);

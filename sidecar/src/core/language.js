@@ -301,6 +301,13 @@ module.exports = {
         User.setPreference('language', language);
         this.setCurrentLanguage(language);
         SUGAR.App.trigger('app:locale:change', language);
+
+        // Add the current language for improved screen reader accessibility
+        if (document && document.documentElement) {
+            var currentLanguageForDom = _.first(language.split('_'));
+            // Use the simple language code as per HTML qualifications
+            document.documentElement.lang = currentLanguageForDom;
+        }
     },
 
     /**

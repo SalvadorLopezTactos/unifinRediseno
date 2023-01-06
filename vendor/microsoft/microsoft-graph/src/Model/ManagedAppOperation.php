@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class ManagedAppOperation extends Entity
 {
@@ -30,7 +28,7 @@ class ManagedAppOperation extends Entity
     * Gets the displayName
     * The operation name.
     *
-    * @return string The displayName
+    * @return string|null The displayName
     */
     public function getDisplayName()
     {
@@ -59,12 +57,12 @@ class ManagedAppOperation extends Entity
     * Gets the lastModifiedDateTime
     * The last time the app operation was modified.
     *
-    * @return \DateTime The lastModifiedDateTime
+    * @return \DateTime|null The lastModifiedDateTime
     */
     public function getLastModifiedDateTime()
     {
         if (array_key_exists("lastModifiedDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["lastModifiedDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["lastModifiedDateTime"], "\DateTime") || is_null($this->_propDict["lastModifiedDateTime"])) {
                 return $this->_propDict["lastModifiedDateTime"];
             } else {
                 $this->_propDict["lastModifiedDateTime"] = new \DateTime($this->_propDict["lastModifiedDateTime"]);
@@ -92,7 +90,7 @@ class ManagedAppOperation extends Entity
     * Gets the state
     * The current state of the operation
     *
-    * @return string The state
+    * @return string|null The state
     */
     public function getState()
     {
@@ -121,7 +119,7 @@ class ManagedAppOperation extends Entity
     * Gets the version
     * Version of the entity.
     *
-    * @return string The version
+    * @return string|null The version
     */
     public function getVersion()
     {

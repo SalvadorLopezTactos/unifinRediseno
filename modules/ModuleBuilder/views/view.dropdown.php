@@ -48,6 +48,7 @@ class ViewDropdown extends SugarView
             'view_package' => $this->request->getValidInputRequest('view_package', 'Assert\ComponentName'),
             'view_module' => $this->request->getValidInputRequest('view_module', 'Assert\ComponentName'),
             'dropdown_lang' => $this->request->getValidInputRequest('dropdown_lang', 'Assert\Language'),
+            'comparison_lang' => $this->request->getValidInputRequest('comparison_lang', 'Assert\Language'),
             'dropdown_name' => $this->request->getValidInputRequest('dropdown_name', 'Assert\ComponentName'),
             'dropdown_role' => $this->request->getValidInputRequest('dropdown_role', 'Assert\Guid'),
             'field' => $this->request->getValidInputRequest('field'),
@@ -87,9 +88,37 @@ class ViewDropdown extends SugarView
 
     function generateSmarty($params)
     {
+        global $sugar_config;
+
         $vardef = array();
         $package_name = 'studio';
         $my_list_strings = return_app_list_strings_language($params['dropdown_lang']);
+
+        // Initialize comparison language data
+        $comparisonLang = $params['comparison_lang'] ?? null;
+        $comparisonListStrings = [];
+        $availableComparisonLanguages = array_diff_key(get_languages(), [$params['dropdown_lang'] => '']) ?? [];
+        $allowLanguageComparison = !empty($availableComparisonLanguages) &&
+            $params['dropdown_lang'] !== $sugar_config['default_language'];
+        if ($allowLanguageComparison) {
+            $comparisonLang = !empty($availableComparisonLanguages[$comparisonLang]) ?
+                $comparisonLang : array_key_first($availableComparisonLanguages);
+            $comparisonListStrings = return_app_list_strings_language($comparisonLang);
+        }
+
+        // Intialize sales stage classification
+        $forecastSettings = Forecast::getSettings();
+        $closedWonStages = $forecastSettings['sales_stage_won'];
+        $closedLostStages = $forecastSettings['sales_stage_lost'];
+        $open = translate('LBL_OPEN');
+        $closedWonValue = translate('LBL_CLOSED_WON');
+        $closedLostValue = translate('LBL_CLOSED_LOST');
+        $allowSalesStageClassification = $params['dropdown_name'] === 'sales_stage_dom';
+        $salesStageClassificationStrings = [
+            $open => $open,
+            $closedWonValue => $closedWonValue,
+            $closedLostValue => $closedLostValue,
+        ];
 
         $smarty = new Sugar_Smarty();
 
@@ -106,6 +135,13 @@ class ViewDropdown extends SugarView
                 $my_list_strings,
                 $module->mblanguage->appListStrings[$params['dropdown_lang'] . '.lang.php']
             );
+            if ($allowLanguageComparison) {
+                $comparisonListStrings = array_merge(
+                    $comparisonListStrings,
+                    $module->mblanguage->appListStrings[$comparisonLang . '.lang.php']
+                );
+            }
+
             $smarty->assign('module_name', $module->name);
         }
 
@@ -136,14 +172,22 @@ class ViewDropdown extends SugarView
             // Handle required elements of a drop down
             $required_items = getRequiredDropdownListItemsByDDL($name);
 
-            $selected_dropdown = (!empty($vardef['options']) && !empty($my_list_strings[$vardef['options']])) ? $my_list_strings[$vardef['options']] : $my_list_strings[$name];
-            $smarty->assign('ul_list', 'list = ' . $json->encode(array_keys($selected_dropdown)));
+            $selectedOptions = (!empty($vardef['options']) && !empty($my_list_strings[$vardef['options']])) ?
+                $my_list_strings[$vardef['options']] : $my_list_strings[$name];
+            $smarty->assign('ul_list', 'list = ' . $json->encode(array_keys($selectedOptions)));
             $smarty->assign(
                 'dropdown_name',
                 (!empty($vardef['options']) ? $vardef['options'] : $params['dropdown_name'])
             );
             $smarty->assign('name', $params['dropdown_name']);
-            $smarty->assign('options', $selected_dropdown);
+            $smarty->assign('options', $selectedOptions);
+
+            if ($allowLanguageComparison) {
+                $comparisonOptions = (!empty($vardef['options']) &&
+                    !empty($comparisonListStrings[$vardef['options']])) ?
+                    $comparisonListStrings[$vardef['options']] : $comparisonListStrings[$name];
+            }
+            $smarty->assign('comparisonOptions', $comparisonOptions ?? []);
         } else {
             $smarty->assign('ul_list', 'list = {}');
 
@@ -164,8 +208,27 @@ class ViewDropdown extends SugarView
 
         $smarty->assign('required_items', json_encode($required_items));
         $smarty->assign('module_name', $module_name);
+
+        // Assign information related to the selectable primary languages
         $smarty->assign('selected_lang', $params['dropdown_lang']);
         $smarty->assign('available_languages', get_languages());
+
+        // Assign information related to the selectable comparison languages
+        $smarty->assign('allow_language_comparison', $allowLanguageComparison);
+        $smarty->assign('comparison_lang', $comparisonLang);
+        $smarty->assign('available_comparison_languages', $availableComparisonLanguages);
+        $smarty->assign('matchingLabelHelp', generateBwcHelpIcon(translate('LBL_LABEL_NOT_TRANSLATED')));
+
+        // Assign information related to the sales stage classification dropdown
+        $smarty->assign('allow_sales_stage_classification', $allowSalesStageClassification);
+        $smarty->assign('sales_stage_open', $open);
+        $smarty->assign('sales_stage_closed_won', $closedWonValue);
+        $smarty->assign('sales_stage_closed_lost', $closedLostValue);
+        $smarty->assign('sales_stage_classification_options', $salesStageClassificationStrings);
+        $smarty->assign('sales_stage_classification_options_encoded', json_encode($salesStageClassificationStrings));
+        $smarty->assign('sales_stage_won_options', $closedWonStages);
+        $smarty->assign('sales_stage_lost_options', $closedLostStages);
+
         $smarty->assign('roles', $this->getAvailableRoleList($params['dropdown_name']));
         $smarty->assign('package_name', $package_name);
         $smarty->assign('new', !empty($params['new']));

@@ -11,9 +11,11 @@
  */
 --}}
 <section id="list-basic">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <p>Here are some <a href="#Styleguide/docs/layouts-list">instructions</a> for how to style list views using Bootstrap classes. By default only the <code>.table-striped</code> styling is applied.</p>
 

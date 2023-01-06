@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => '流程记录仪表板',
 
     'LBL_CAS_ID' => '流程编号',
+    'LBL_CAS_STATUS' => '流程状态',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "未知（按照 UserId：'%s'）",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "美属维尔京群岛",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "任务 ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "已通过 %s 操作 %s 为 %s %s 号流程分配了 %s 记录",
     'LBL_PMSE_HISTORY_LOG_ON'  => "于",
     'LBL_PMSE_HISTORY_LOG_AND'  => "和",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => '已将记录链接或取消链接至',
 
     'LBL_PMSE_LABEL_APPROVE' => '批准',
     'LBL_PMSE_LABEL_REJECT' => '拒绝',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => '进行中的流程',
     'LBL_STATUS_CANCELLED' => '已取消的流程',
     'LBL_STATUS_ERROR' => '流程出错',
+    'LBL_STATUS_COMPLETED_ENUM' => '已完成',
+    'LBL_STATUS_TERMINATED_ENUM' => '已终止',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => '正在进行',
+    'LBL_STATUS_CANCELLED_ENUM' => '已取消',
+    'LBL_STATUS_ERROR_ENUM' => '错误',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => '流程列表',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => '无人看管的流程',

@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Филтър',
     'LBL_CONSOLE_FILTER_RULES' => 'Правила за филтър',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Замрази първа колона',
+
     'LBL_CONSOLE_COLUMNS' => 'Колони',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Колона с много полета',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Първично сортиране',

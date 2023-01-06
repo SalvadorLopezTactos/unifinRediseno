@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Formato de horário padrão',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Mostrar o tempo de resposta do servidor',
+    'FREEZE_FIRST_COLUMN' => 'Permitir congelamento de coluna',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Habilite esta configuração para permitir aos usuários congelar a primeira coluna em uma variedade de ' .
+        'visualizações de lista, incluindo visualizações de lista de módulos, subpainéis, dashlets e consoles.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Registrar consultas lentas',
     'LOCK_HOMEPAGE_HELP'=>'Esta configuração destina-se a prever<BR> 1) a adição de novas páginas principais e dashlets no módulo Página Principal, <BR>2) a personalização do posicionamento do dashlet nas páginas com arrastar e soltar.',
     'CURRENT_LOGO'=>'Logotipo atual:',
+    'CURRENT_LOGO_DARK' => 'Logótipo de modo escuro atual:',
     'CURRENT_LOGO_HELP'=>'Este logotipo é exibido no canto esquerdo do rodapé do aplicativo Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Este logótipo é exibido no canto esquerdo do rodapé quando o aplicativo Sugar está no modo escuro, de acordo com a preferência de Aparência do usuário.",
     'NEW_LOGO'=>'Selecionar logotipo:',
     'NEW_LOGO_HELP' => 'O formato do arquivo de imagem pode ser .png ou .jpg. A altura máxima recomendada é 24 px, e a largura máxima é 180 px. Qualquer imagem carregada que seja maior em qualquer uma das dimensões será ajustada para esses valores máximos.',
+    'NEW_LOGO_DARK' => 'Selecione o logótipo do modo escuro:',
     'NEW_LOGO_HELP_NO_SPACE' => 'O formato de arquivo de imagem pode ser .png ou .jpg. A altura máxima recomendada é 24 px, e a largura máxima é 450 px. Qualquer imagem carregada que seja maior em qualquer uma das dimensões será ajustada para esses valores máximos. O nome da imagem não pode conter caractere de espaço.',
     'NEW_QUOTE_LOGO'=>'Carregar um novo logotipo de Cotações',
     'NEW_QUOTE_LOGO_HELP'=>'O formato do arquivo de imagem deve ser .jpg.<BR>O tamanho recomendado é 867x74 px.',
@@ -412,7 +418,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Continuar',
     'LBL_WIZARD_FINISH_TAB' => 'Concluir',
     'LBL_WIZARD_FINISH_TITLE' => 'A configuração básica do sistema foi concluída',
-    'LBL_WIZARD_FINISH' => 'Clique em <b>Continuar</b> para definir as configurações de Usuário.<br/><br />Para definir configurações adicionais do sistema, clique <a href="index.php?module=Administration&action=index" target="_blank">aqui</a>.',
+    'LBL_WIZARD_FINISH' => 'Clique em <b>Continuar</b> para definir as configurações de Usuário.<br/><br />Para definir configurações adicionais do sistema, clique <a href="#Administration" target="_blank">aqui</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Marca',
     'LBL_WIZARD_SYSTEM_DESC' => 'Insira o nome de sua organização e o logotipo para aplicar a marca no seu Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Especifique o fuso horário e a forma como deseja que datas apareçam no Sugar, com base na sua localização geográfica. As configurações que você fornecer serão as configurações padrão. Usuários poderão definir suas próprias preferências.',
@@ -423,7 +429,8 @@ BSOFR
 	'LBL_LOADING' => 'Carregando...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Excluir' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Bem-vindo' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logotipo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logotipo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logótipo do modo escuro',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* O módulo de Relatórios apenas está disponível para os clientes SugarCRM e Sugar Mobile',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => 'O módulo de Relatórios não está disponível para a visualização na versão navegador mobile.',
 
@@ -462,5 +469,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

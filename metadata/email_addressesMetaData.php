@@ -215,6 +215,9 @@ $dictionary['emails_email_addr_rel'] = array(
             'relationship_type' => 'one-to-many',
         ),
     ),
+    'portal_visibility' => [
+        'class' => 'EmailParticipants',
+    ],
 );
 
 $dictionary['email_addr_bean_rel'] = array(
@@ -271,13 +274,6 @@ $dictionary['email_addr_bean_rel'] = array(
             'type' => 'primary',
             'fields' => array(
                 'id',
-            ),
-        ),
-        array(
-            'name' => 'idx_email_address_id',
-            'type' => 'index',
-            'fields' => array(
-                'email_address_id',
             ),
         ),
         array(

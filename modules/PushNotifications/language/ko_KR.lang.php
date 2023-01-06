@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => '상위 유형',
     'LBL_PARENT_ID' => '상위 ID',
     'LBL_EXTRA_DATA' => '추가 데이터',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - {{module_name_singular}}에서 언급됨',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} 님이 {{module_name_singular}} {{record_name}}에서 나를 멘션했습니다.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - {{module_name_singular}} 할당됨',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} 님이 {{module_name_singular}} {{record_name}}을 나에게 할당했습니다.',
 ];

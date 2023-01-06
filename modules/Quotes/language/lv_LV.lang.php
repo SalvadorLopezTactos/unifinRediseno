@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Piedāvājumu konfigurācija',
 
     'LBL_RENEWAL' => 'Atjaunošana',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Piedāvājuma mijiedarbības',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Piedāvājuma laika josla',
 );

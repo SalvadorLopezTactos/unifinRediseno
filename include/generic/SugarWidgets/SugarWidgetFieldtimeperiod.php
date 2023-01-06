@@ -18,7 +18,7 @@ class SugarWidgetFieldTimeperiod extends SugarWidgetFieldEnum
         if($input_name0 == 'current') {
             $name = array_keys(TimePeriod::getCurrentName());
             $name = !empty($name) ? $name[0] : '';
-            return SugarWidgetFieldId::_get_column_select($layout_def)." = '". $name ."'\n";
+            return parent::_get_column_select($layout_def)." = '". $name ."'\n";
         }
 
 		return parent::queryFilteris($layout_def);
@@ -30,7 +30,7 @@ class SugarWidgetFieldTimeperiod extends SugarWidgetFieldEnum
         if($input_name0 == 'current') {
             $name = array_keys(TimePeriod::getCurrentName());
             $name = !empty($name) ? $name[0] : '';
-            return SugarWidgetFieldId::_get_column_select($layout_def)." NOT IN ('" . $name . "')\n";
+            return parent::_get_column_select($layout_def)." NOT IN ('" . $name . "')\n";
         }
 
 		return parent::queryFilteris_not($layout_def);

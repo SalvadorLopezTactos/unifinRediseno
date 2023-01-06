@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Format kohe i çaktivizuar',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Tregon kohët e reagimit të serverit',
+    'FREEZE_FIRST_COLUMN' => 'Lejo ngrirjen e kolonave',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Aktivizo këtë cilësim për t&#39;i lejuar përdoruesit që të ngrijnë kolonën e parë në një sërë ' .
+        'pamjesh në formë liste, duke përfshirë pamjet në formë liste të modulit, nënpanelet, panelet dhe konsolat.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Regjistro pyetjet e ngadalta',
     'LOCK_HOMEPAGE_HELP'=>'Kjo vendosje është për parandalim<br />1) shtimi i faqeve në shtëpi të reja dhe dashlets në modulin e ballinës,<br />2) përshtatja e vendosjes dashlet në faqët hyrëse nga tërheqja dhe lëshimi.',
     'CURRENT_LOGO'=>'Logoja aktuale',
+    'CURRENT_LOGO_DARK' => 'Logoja aktuale e modalitetit të errët:',
     'CURRENT_LOGO_HELP'=>'Kjo logo është shfaqur në këndin e majtë të fundfaqës së aplikimit Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Logoja shfaqet në këndin e majtë të fundit të faqes kur aplikacioni Sugar është në modalitetin e errët, sipas preferencës së përdoruesit për paraqitjen.",
     'NEW_LOGO'=>'Selekto logon:',
     'NEW_LOGO_HELP' => 'Dosja e  formatit të imazhit mund të jetë .png ose. .jpg. Lartësia maksimale është 17px, dhe gjerësia maksimale është 450px. Çdo imazh i ngarkuar që është më i madhë në çdo drejtim do të jetë i shkallëzuar me këto dimensione maksimale.',
+    'NEW_LOGO_DARK' => 'Zgjidh logon e modalitetit të errët:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Formati i fotografisë  mund të jetë. png ose .jpg.Lartesia maksimale është 17px, dhe gjerësia maksimale është 450px. Çdo fotografi e ngarkuar që është e madhe në çdo drejtim do të jetë me luspa në këto dimensione maksimale.Emri i fajllit të fotografisë nuk duhet të përmbajë një karakter hapësirë.',
     'NEW_QUOTE_LOGO'=>'Ngarko logo të re të kuotës',
     'NEW_QUOTE_LOGO_HELP'=>'Kërkimi i dosjes së formatit të imazhit është .jpg.<br />Madhësia e rekomanduar është 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Vazhdoni',
     'LBL_WIZARD_FINISH_TAB' => 'Mbaro',
     'LBL_WIZARD_FINISH_TITLE' => 'Konfigurimi i sistemit bazik ka përfunduar',
-    'LBL_WIZARD_FINISH' => 'Klikoni Vazhdo për të konfiguruar parametrat tuaj përdorues.<br /><br />Për të konfiguruar parametrat plotësuese të sistemit, klikoni këtu.',
+    'LBL_WIZARD_FINISH' => 'Kliko <b>Vazhdo</b> për të konfiguruar cilësimet e përdoruesit.<br/><br />
+Për të konfiguruar cilësimet shtesë të sistemit, kliko <a href="#Administration" target="_blank">këtu</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Brendim',
     'LBL_WIZARD_SYSTEM_DESC' => 'Ofroni emrin e organizatës dhe logon tuaj në mënyrë që të brendoni Sugarin tuaj.',
     'LBL_WIZARD_LOCALE_DESC' => 'Specifikoni se si dëshironi të shfaqen të dhënat në Sugar, bazuar në vendndodhjen tuaj gjeografike. Parametrat tuaja që ju ofroni këtu do të jenë parametrat e parazgjedhura. Përdoruesit do të jenë në gjendje për të vendosur preferencat e tyre.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Ngarkimi...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Fshi' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Mirësevini' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'logoja' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'logoja' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logoja e modalitetit të errët',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Raportet e modulit janë në dispozicion vetëm për klientët amtarë të Sugar Mobile.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '*Moduli i raportimit nuk është në disponim për pamje nga shfletuesi i bazuar në mobil.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

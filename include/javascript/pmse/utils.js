@@ -92,3 +92,14 @@ var setDatetimeFieldsBCOptions = function(options) {
 
     return fields;
 };
+
+/**
+ * Removes html entities like &quot from a string
+ * @param str
+ * @return {string}
+ */
+var decodeHtmlEntities = function(str) {
+    var txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    return txt.value;
+};

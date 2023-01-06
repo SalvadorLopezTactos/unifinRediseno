@@ -212,7 +212,7 @@ class EmailParticipant extends SugarBean
      * @see Email::getDirection()
      * @uses SugarEmailAddress::getEmployeesWithEmailAddress()
      * @return bool
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function isAnEmployee()
     {

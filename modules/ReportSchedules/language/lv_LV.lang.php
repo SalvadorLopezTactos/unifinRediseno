@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Šis pārskata grafiks',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Pārskatu grafiku ierakstu instrumentu panelis',
+    'LBL_FILE_TYPE' => 'Faila veids(i)',
 );

@@ -138,8 +138,8 @@ dd {
 hr {
   margin: @baseLineHeight 0;
   border: 0;
-  border-top: 1px solid @hrBorder;
-  border-bottom: 1px solid @white;
+  border-top: @borderWidget;
+  border-bottom: @borderWidget;
   clear: both;
 }
 
@@ -197,7 +197,7 @@ blockquote {
 // Quotes
 q:before,
 q:after,
-blockquote:before, 
+blockquote:before,
 blockquote:after {
   content: "";
 }

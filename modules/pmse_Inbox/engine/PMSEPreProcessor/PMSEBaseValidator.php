@@ -56,6 +56,30 @@ class PMSEBaseValidator
     ];
 
     /**
+     * Arguments passed from the logic hook trigger
+     * @var array
+     */
+    public static $logicHookArgs = [];
+
+    /**
+     * Set arguments that are coming from the logichook to use in getRelatedBean function.
+     * These arguments have the information of the record due the which the process was triggered
+     * @param array $args
+     */
+    public static function setLogicHookArgs($args)
+    {
+        self::$logicHookArgs = $args;
+    }
+
+    /**
+     * get arguments from the logichooks that are stored in setLogicHookArgs()
+     * @return array
+     */
+    public static function getLogicHookArgs()
+    {
+        return self::$logicHookArgs;
+    }
+    /**
      *
      * @return PMSEEvaluator
      * @codeCoverageIgnore

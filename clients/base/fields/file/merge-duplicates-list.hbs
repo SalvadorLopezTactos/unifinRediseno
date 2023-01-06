@@ -10,13 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{#if value}}
-    {{#with value}}
+{{#if value.length}}
+    {{#each value}}
         <div class="ellipsis_inline"
              data-placement="bottom"
              data-container="body"
              data-original-title="{{name}}">
             {{name}}
         </div>
-    {{/with}}
+    {{/each}}
 {{/if}}

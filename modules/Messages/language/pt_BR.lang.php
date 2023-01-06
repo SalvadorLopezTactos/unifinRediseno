@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Ver relatórios de mensagens',
     'LNK_IMPORT_MESSAGES' => 'Importar mensagens',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'ID do potencial',
+    'LBL_LEAD_NAME' => 'Potencial',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Chat do lado do cliente',
+    'LBL_ACTIVITY_CUSTOMER' => 'Cliente',
+    'LBL_ACTIVITY_FINISHED' => 'terminou',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'em andamento',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em mensagens',
 ];

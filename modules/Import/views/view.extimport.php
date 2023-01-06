@@ -34,8 +34,9 @@ class ImportViewExtimport extends ImportView
         $this->recordsPerImport = !empty($_REQUEST['records_per_import']) ? $_REQUEST['records_per_import'] : $this->recordsPerImport;
         $this->importSource = $this->getExternalSourceAdapter();
         $this->importSource->setCurrentOffset($this->offset);
-        $GLOBALS['log']->fatal("Initiating external source import- source:{$this->externalSource}, offset: {$this->offset}, recordsPerImport: {$this->recordsPerImport}");
+        $GLOBALS['log']->info("Initiating external source import- source:{$this->externalSource}, offset: {$this->offset}, recordsPerImport: {$this->recordsPerImport}");
     }
+
  	/**
      * @see SugarView::display()
      */
@@ -111,7 +112,7 @@ class ImportViewExtimport extends ImportView
 
         if( class_exists($externalSourceClassName) )
         {
-            $GLOBALS['log']->fatal("Returning external source: $externalSourceClassName");
+            $GLOBALS['log']->info("Returning external source: $externalSourceClassName");
             return new $externalSourceClassName();
         }
         else

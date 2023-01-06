@@ -33,7 +33,6 @@
 		  <input type='hidden' name='customTypeValidate' id='customTypeValidate' value='{$vardef.len|default:25}' 
 		      onchange="if (document.getElementById('field_len').value < document.getElementById('orig_len').value) return confirm(SUGAR.language.get('ModuleBuilder', 'LBL_CONFIRM_LOWER_LENGTH')); return true;" > 
 		{/if}
-		{literal}
 		<script>
 		function forceRange(field, min, max){
 			field.value = parseInt(field.value);
@@ -45,7 +44,6 @@
 			field.maxLength = parseInt(length);
 			field.value = field.value.substr(0, field.maxLength);
 		}
-		{/literal}		
 		changeMaxLength(document.getElementById("field_name_id"), {if isset($package->name) && $package->name != "studio"}19{else}17{/if})
 		</script>
 		

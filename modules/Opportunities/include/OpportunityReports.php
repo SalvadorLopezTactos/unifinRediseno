@@ -184,7 +184,7 @@ class OpportunityReports
         $stmt = $conn->executeQuery($query, array('Opportunities', '%"name":"sales_stage"%'));
 
         $reports = array();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $reports[$row['id']] = json_decode($row['content'], true);
         }
 

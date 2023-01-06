@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'Dispositius mòbils',
     'LBL_MODULE_NAME_SINGULAR' => 'Dispositiu mòbil',
     'LBL_DEVICE_ID' => 'ID del dispositiu',
-    'LBL_DEVICE_PLATFORM' => 'Plataforma',
+    'LBL_DEVICE_PLATFORM' => 'Plataforma del dispositiu',
 ];

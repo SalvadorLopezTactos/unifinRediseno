@@ -1,0 +1,38 @@
+{
+    "name": "sugarcrm/identity-provider",
+    "version": "2.0.0",
+    "description": "SugarCRM Identity Provider library",
+    "type": "project",
+    "license": "proprietary",
+    "homepage": "http://www.sugarcrm.com",
+    "support": {
+        "wiki": "http://support.sugarcrm.com",
+        "forum": "https://community.sugarcrm.com/sugarcrm",
+        "irc": "irc://irc.freenode.org/sugarcrm"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sugarcrm\\IdentityProvider\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sugarcrm\\IdentityProvider\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "symfony/http-foundation": "^4.4",
+        "symfony/security-core": "^3.1",
+        "symfony/ldap": "^4.2",
+        "psr/log": "^1.1",
+        "onelogin/php-saml": "~3.1.0",
+        "league/oauth2-client": "2.2.1",
+        "spomky-labs/jose": "7.0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.5",
+        "friendsofphp/php-cs-fixer": "^2.1"
+    },
+    "minimum-stability": "stable"
+}

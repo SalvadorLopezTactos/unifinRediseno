@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Google\Client;
+use Google\Service\Gmail;
+
 /**
  * ExtAPIGoogleEmail
  */
@@ -23,7 +26,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
     public $requireAuth = true;
 
     protected $scopes = array(
-        Google_Service_Gmail::MAIL_GOOGLE_COM,
+        Gmail::MAIL_GOOGLE_COM,
     );
 
     public $needsUrl = false;
@@ -35,7 +38,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
      * Returns the Google Client object used to access Google servers, with
      * configurations set as we need
      *
-     * @return Google_Client
+     * @return Google\Client
      */
     public function getClient()
     {
@@ -46,13 +49,13 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
      * Creates a new instance of the Google client used to talk to Google
      * servers and configures it with the proper settings
      *
-     * @return Google_Client
+     * @return Google\Client
      */
     protected function getGoogleClient()
     {
         $config = $this->getGoogleOauth2Config();
 
-        $client = new Google_Client();
+        $client = new Client();
         $client->setClientId($config['properties']['oauth2_client_id']);
         $client->setClientSecret($config['properties']['oauth2_client_secret']);
         $client->setRedirectUri($config['redirect_uri']);
@@ -93,8 +96,8 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
         // Authenticate the authorization code with Google servers
         try {
             $client = $this->getClient();
-            $client->authenticate($code);
-        } catch (Google_Auth_Exception $e) {
+            $client->fetchAccessTokenWithAuthCode($code);
+        } catch (\Exception $e) {
             $GLOBALS['log']->error($e->getMessage());
             return false;
         }
@@ -109,7 +112,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
         // Return the token and account information
         $emailAddress = $this->getEmailAddress($eapmId);
         return array(
-            'token' => $token,
+            'token' => json_encode($token),
             'eapmId' => $eapmId,
             'emailAddress' => $emailAddress,
             'userName' => $emailAddress,
@@ -137,8 +140,10 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
                 if ($client->isAccessTokenExpired()) {
                     return $this->refreshToken($eapmId);
                 } else {
-                    $token = json_decode($client->getAccessToken(), true);
-                    return $token['access_token'];
+                    $token = $client->getAccessToken();
+                    if (isset($token['access_token'])) {
+                        return $token['access_token'];
+                    }
                 }
             } catch (Exception $e) {
                 $GLOBALS['log']->error($e->getMessage());
@@ -172,8 +177,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
             // access_token portion of it
             if (!empty($token)) {
                 $this->saveToken($token, $eapmId);
-                $tokenProperties = json_decode($token, true);
-                return $tokenProperties['access_token'];
+                return $token['access_token'];
             }
         }
         return false;
@@ -183,7 +187,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
      * Saves a token in the EAPM table. If an EAPM bean ID is provided (and it
      * exists), that row will be updated. Otherwise, will create a new row
      *
-     * @param string $accessToken the token information to store
+     * @param array $accessToken the token information to store
      * @param string|null $eapmId optional: ID of the EAPM record to resave
      * @return string the ID of the EAPM bean saved
      */
@@ -195,7 +199,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
             $bean->application = 'Google';
             $bean->validated = true;
         }
-        $bean->api_data = $accessToken;
+        $bean->api_data = json_encode($accessToken);
         $bean->skipReassignment = true;
         return $bean->save();
     }
@@ -215,7 +219,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
                 $client = $this->getClient();
                 $client->setAccessToken($eapmBean->api_data);
                 $client->revokeToken();
-            } catch (Google_Auth_Exception $e) {
+            } catch (\Exception $e) {
                 return false;
             }
 
@@ -252,9 +256,9 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
             try {
                 $client = $this->getClient();
                 $client->setAccessToken($eapmBean->api_data);
-                $gmailClient = new Google_Service_Gmail($client);
+                $gmailClient = new Gmail($client);
                 return $gmailClient->users->getProfile('me')->emailAddress;
-            } catch (Google_Service_Exception $e) {
+            } catch (Google\Service\Exception $e) {
                 $GLOBALS['log']->error($e->getMessage());
             }
         }

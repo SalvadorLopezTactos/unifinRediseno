@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Sähköpostiosoite:',
     'LBL_EMAIL_ATTACHMENT' => 'Sähköpostin liite',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Sähköpostin liite',
+    'LBL_NOTE_ATTACHMENT' => 'Muistion liitteet',
+    'LBL_KB_ATTACHMENT' => 'KBDocument-liitteet',
+    'LBL_CASE_ATTACHMENT' => 'Tapauksen liitteet',
     'LBL_FILE_MIME_TYPE' => 'Mime-tyyppi',
     'LBL_FILE_EXTENSION' => 'Tiedostotunniste',
     'LBL_FILE_SOURCE' => 'Lähdetiedosto',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Huomautuksen alkuperä',
     'LBL_SOURCE_EXTERNAL' => 'Ulkoinen',
     'LBL_SOURCE_INTERNAL' => 'Sisäinen',
+    'LBL_PORTAL' => 'Portaali',
 
     // Help Text
     // List View Help Text

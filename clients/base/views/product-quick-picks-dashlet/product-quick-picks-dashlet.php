@@ -35,7 +35,7 @@ $viewdefs['base']['view']['product-quick-picks-dashlet'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'unlink-action',
-                    'icon' => 'fa-chain-broken',
+                    'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
                     'event' => 'tabbed-dashlet:unlink-record:fire',
                     'target' => 'view',
@@ -56,7 +56,7 @@ $viewdefs['base']['view']['product-quick-picks-dashlet'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'unlink-action',
-                    'icon' => 'fa-chain-broken',
+                    'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
                     'event' => 'tabbed-dashlet:unlink-record:fire',
                     'target' => 'view',

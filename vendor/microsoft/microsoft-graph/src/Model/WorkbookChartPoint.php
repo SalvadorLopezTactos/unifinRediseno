@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WorkbookChartPoint extends Entity
 {
@@ -30,7 +28,7 @@ class WorkbookChartPoint extends Entity
     * Gets the value
     * Returns the value of a chart point. Read-only.
     *
-    * @return string The value
+    * @return string|null The value
     */
     public function getValue()
     {
@@ -59,12 +57,12 @@ class WorkbookChartPoint extends Entity
     * Gets the format
     * Encapsulates the format properties chart point. Read-only.
     *
-    * @return WorkbookChartPointFormat The format
+    * @return WorkbookChartPointFormat|null The format
     */
     public function getFormat()
     {
         if (array_key_exists("format", $this->_propDict)) {
-            if (is_a($this->_propDict["format"], "Microsoft\Graph\Model\WorkbookChartPointFormat")) {
+            if (is_a($this->_propDict["format"], "\Microsoft\Graph\Model\WorkbookChartPointFormat") || is_null($this->_propDict["format"])) {
                 return $this->_propDict["format"];
             } else {
                 $this->_propDict["format"] = new WorkbookChartPointFormat($this->_propDict["format"]);

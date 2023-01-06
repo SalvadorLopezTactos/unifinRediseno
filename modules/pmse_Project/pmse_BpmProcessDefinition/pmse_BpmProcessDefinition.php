@@ -62,29 +62,18 @@ class pmse_BpmProcessDefinition extends pmse_BpmProcessDefinition_sugar
 
         $alias = $this->db->getValidDBName($focus->table_name . '_id', false, 'alias');
 
-        $sql = <<<SQL
-SELECT
-    pd.pro_locked_variables def,
-    lfbr.bean_id as {$alias}
-FROM
-    {$this->table_name} pd
-    INNER JOIN locked_field_bean_rel lfbr
-    ON pd.id=lfbr.pd_id
-WHERE
-    lfbr.bean_module = ? AND
-    lfbr.bean_id IN (?) AND
-    lfbr.deleted = 0
-SQL;
+        $q = new SugarQuery($this->db);
+        $q->from($this, ['alias' => 'pd']);
+        $q->joinTable('locked_field_bean_rel', ['alias' => 'lfbr'])->on()
+            ->equalsField('pd.id', 'lfbr.pd_id');
+        $q->where()
+            ->equals('lfbr.bean_module', $focus->module_name)
+            ->in('lfbr.id', $ids)
+            ->equals('lfbr.deleted', 0);
+        $q->select([['pd.pro_locked_variables', 'def'], ['lfbr.bean_id', $alias]]);
 
-        $stmt = $this->db->getConnection()
-            ->executeQuery(
-                $sql,
-                [$focus->module_name, $ids],
-                [null, Connection::PARAM_STR_ARRAY]
-            );
         $rows = [];
-
-        foreach ($stmt as $row) {
+        foreach ($q->execute() as $row) {
             // In the case of empty locked field defs we need to make an array
             // since the json_decode will result in null
             $def = json_decode($row['def']);

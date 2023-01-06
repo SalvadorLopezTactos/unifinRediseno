@@ -163,7 +163,7 @@
                     </td>
                     <td width='60%' style="vertical-align:middle;">
                         {if !$IS_PORTALONLY}
-                            {sugar_password_requirements_box width='300px' class='x-sqs-list' style='background-color:white; padding:5px !important;'}
+                            {sugar_password_requirements_box width='300px' class='x-sqs-list' style='padding:5px !important;'}
                         {/if}
                     </td>
                 </tr>
@@ -244,8 +244,17 @@
                             <td width="20%" scope="row"><slot>{$MOD.LBL_DEFAULT_TEAM}:</slot>&nbsp;{sugar_help text=$MOD.LBL_DEFAULT_TEAM_TEXT }</td>
                             <td ><slot>{$DEFAULT_TEAM_OPTIONS}</slot></td>
                             {/if}
-                            <td scope="row"></td>
-                            <td></td>
+                            <td scope="row">
+                                <slot>{$MOD.LBL_APPEARANCE|strip_semicolon}:</slot>
+                                {sugar_help text=$MOD.LBL_APPEARANCE_DESC}
+                            </td>
+                            <td>
+                                <slot>
+                                    <select tabindex="12" name="appearance">
+                                        {$APPEARANCE}
+                                    </select>
+                                </slot>
+                            </td>
                         </tr>
                         <!--{if !empty($EXTERNAL_AUTH_CLASS) && !empty($IS_ADMIN)}-->
                             <tr>
@@ -452,12 +461,12 @@
 
 var mail_smtpport = '{$MAIL_SMTPPORT}';
 var mail_smtpssl = '{$MAIL_SMTPSSL}';
-{literal}
-EmailMan = {};
+
+EmailMan = { };
 
 function Admin_check(){
-	if (('{/literal}{$IS_FOCUS_ADMIN}{literal}') && document.getElementById('is_admin').value=='0'){
-		r=confirm('{/literal}{$MOD.LBL_CONFIRM_REGULAR_USER}{literal}');
+	if (('{$IS_FOCUS_ADMIN}') && document.getElementById('is_admin').value=='0'){
+		r=confirm('{$MOD.LBL_CONFIRM_REGULAR_USER}');
 		return r;
 		}
 	else
@@ -486,24 +495,24 @@ $(document).ready(function() {
     });
     checkKey($('#calendar_publish_key').val());
 
-    {/literal}
+
     {if $mail_haspass}
-    {literal}
+
     if(window.addEventListener){
-        window.addEventListener("load", function() { SUGAR.util.setEmailPasswordDisplay('mail_smtppass', {/literal}{$mail_haspass}{literal}); }, false);
+        window.addEventListener("load", function() { SUGAR.util.setEmailPasswordDisplay('mail_smtppass', {$mail_haspass}); }, false);
     }else{
-        window.attachEvent("onload", function() { SUGAR.util.setEmailPasswordDisplay('mail_smtppass', {/literal}{$mail_haspass}{literal}); });
+        window.attachEvent("onload", function() { SUGAR.util.setEmailPasswordDisplay('mail_smtppass', {$mail_haspass}); });
     }
-    {/literal}
+
     {/if}
-    {literal}
+
 });
-{/literal}
+
 </script>
 {$JAVASCRIPT}
-{literal}
+
 <script type="text/javascript" language="Javascript">
-{/literal}
+
 {$getNameJs}
 {$getNumberJs}
 currencies = {$currencySymbolJSON};
@@ -542,14 +551,12 @@ onUserEditView();
 		</form>
 	</div>
 </div>
-{literal}
 <style>
     .actionsContainer.footer td {
         height:120px;
         vertical-align: top;
     }
 </style>
-{/literal}
 <table width="100%" cellpadding="0" cellspacing="0" border="0" class="actionsContainer footer">
     <tr>
         <td>

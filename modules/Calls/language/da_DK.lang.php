@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kontakt Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Beskrivelsesoplysninger',
     'LBL_DESCRIPTION' => 'Beskrivelse:',
+    'LBL_INTERNAL_NOTES' => 'Interne Noter:',
     'LBL_STATUS' => 'Status:',
     'LBL_DIRECTION' => 'Retning:',
     'LBL_DATE' => 'Startdato:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Varigheden skal være større end 0',
     'LBL_CALL_INFORMATION' => 'Opkaldsoversigt',
     'LBL_REMOVE' => 'fjern',
-    'LBL_ACCEPT_STATUS' => 'Acceptér status',
     'LBL_ACCEPT_LINK' => 'Acceptér link',
     //For export labels
     'LBL_PARENT_ID' => 'Overordnet ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Opkald:',
     'LBL_CALL_RECORDING_URL' => 'URL for optagelse',
     'LBL_CALL_RECORDING' => 'Optager',
+
+    'LBL_LEAD_ID' => 'Kundeemne-id',
+    'LBL_LEAD_NAME' => 'Kundeemne',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Du planlagde {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> til den {{formatDate date_start}}.',

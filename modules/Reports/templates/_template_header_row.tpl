@@ -24,15 +24,15 @@
 {/if}
 {php}
 	$count = 0;
-	$this->assign('count', $count);
+	$_smarty_tpl->assign('count', $count);
 {/php}
 {foreach from=$header_row key=module item=cell}
 	{if (($args.group_column_is_invisible != "") && ($args.group_pos eq $count))}
 {php}	
 	$count = $count + 1;
-	$this->assign('count', $count);
+	$_smarty_tpl->assign('count', $count);
 {/php}
-	{ else }
+	{else}
 	<td scope="col" align='center'  valign=middle nowrap>	
 	
 	{$cell}

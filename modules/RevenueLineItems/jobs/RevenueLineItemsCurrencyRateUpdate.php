@@ -11,7 +11,7 @@
  */
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 
 /**
  * OpportunitiesCurrencyRateUpdate
@@ -67,7 +67,7 @@ class RevenueLineItemsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             ->executeQuery(
                 'SELECT conversion_rate FROM currencies WHERE id = ?',
                 [$currencyId]
-            )->fetchColumn();
+            )->fetchOne();
 
         $stages = $this->getClosedStages();
 
@@ -127,32 +127,47 @@ SQL;
     {
         $oppConfig = $this->getOpportunityConfig();
         if ($oppConfig['opps_view_by'] === 'RevenueLineItems') {
-            $sql = "SELECT opportunity_id               AS opp_id,
-                              Sum(likely_case)             AS likely,
-                              Sum(worst_case)              AS worst,
-                              Sum(best_case)               AS best
-                       FROM   (SELECT rli.opportunity_id,
-                                      (rli.likely_case/rli.base_rate) AS likely_case,
-                                      (rli.worst_case/rli.base_rate) AS worst_case,
-                                      (rli.best_case/rli.base_rate) AS best_case
-                               FROM   revenue_line_items rli
-                               WHERE  rli.deleted = 0) T
-                       GROUP  BY opp_id";
-            $results = $this->db->query($sql);
-
             $stages = $this->getClosedStages();
 
+            $conn = $this->db->getConnection();
+            $selectQuery = <<<SQL
+SELECT T1.opportunity_id,
+    Sum(T1.likely_case) AS likely,
+    Sum(T1.worst_case) AS worst,
+    Sum(T1.best_case) AS best
+FROM (
+    SELECT rli.opportunity_id,
+        (rli.likely_case / rli.base_rate) AS likely_case,
+        (rli.worst_case / rli.base_rate) AS worst_case,
+        (rli.best_case / rli.base_rate) AS best_case
+    FROM revenue_line_items rli
+    WHERE rli.deleted = 0) T1
+INNER JOIN (
+        SELECT DISTINCT opportunity_id
+        FROM revenue_line_items
+        WHERE currency_id = ?
+        AND sales_stage NOT IN (?)) T2
+    ON T2.opportunity_id = T1.opportunity_id
+GROUP BY T1.opportunity_id
+SQL;
+
+            $stmt = $conn->executeQuery(
+                $selectQuery,
+                [$this->currencyId, $stages],
+                [null, Connection::PARAM_STR_ARRAY],
+            );
+
             $queryParams = [];
-            // skip closed opps
-            while ($row = $this->db->fetchrow($results)) {
+            foreach ($stmt as $row) {
                 $queryParams[] = [
                     $row['likely'],
                     $row['best'],
                     $row['worst'],
-                    $row['opp_id'],
+                    $row['opportunity_id'],
                     $stages,
                 ];
             }
+
             if (count($queryParams) < self::CHUNK_SIZE) {
                 $sql = <<<SQL
 UPDATE opportunities
@@ -163,7 +178,6 @@ WHERE id = ?
   AND sales_status NOT IN (?)
 SQL;
 
-                $conn = $this->db->getConnection();
                 // do queries in this process
                 foreach ($queryParams as $params) {
                     $conn->executeUpdate(

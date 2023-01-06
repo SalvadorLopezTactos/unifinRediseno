@@ -10,4 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="alert {{alertClass}}"><strong>{{loading title}}</strong></div>
+<div class="alert {{alertClass}} rounded-md shadow-lg bg-alert-background mb-2">
+    <strong>{{loading title}}</strong>
+    {{#if isLoadingAlert}}
+        <button class="close btn btn-invisible" data-action="close"><i class="sicon sicon-close"></i></button>
+    {{/if}}
+</div>

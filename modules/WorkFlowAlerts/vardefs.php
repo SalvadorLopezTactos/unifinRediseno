@@ -201,7 +201,6 @@ $dictionary['WorkFlowAlert'] = array('table' => 'workflow_alerts'
 'acls' => array('SugarACLDeveloperOrAdmin' => true),
 'indices' => array (
        array('name' =>'workflowalerts_k', 'type' =>'primary', 'fields'=>array('id')),
-       array('name' =>'idx_workflowalerts', 'type'=>'index', 'fields'=>array('deleted')),
                                                       )
 
 , 'relationships' => array (

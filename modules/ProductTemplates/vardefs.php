@@ -14,6 +14,13 @@ $dictionary['ProductTemplate'] = array(
     'comment' => 'The Admin view of a Product in Product Catalog; used as template for a product instance',
     'audited' => true,
     'full_text_search' => true,
+    'default_relate_filter' => [
+        'initial_filter' => 'product_template_status',
+        'initial_filter_label' => 'LBL_FILTER_ACTIVE_STATUS',
+        'filter_populate' => [
+            'active_status' => ['Active'],
+        ],
+    ],
     'fields' => array(
         'type_id' => array(
             'name' => 'type_id',
@@ -122,8 +129,6 @@ $dictionary['ProductTemplate'] = array(
                 'currency_id',
                 'base_rate'
             ),
-            'convertToBase' => true,
-            'showTransactionalAmount' => true,
         ),
         'discount_price' => array(
             'name' => 'discount_price',
@@ -137,8 +142,6 @@ $dictionary['ProductTemplate'] = array(
                 'currency_id',
                 'base_rate'
             ),
-            'convertToBase' => true,
-            'showTransactionalAmount' => true,
         ),
         'list_price' => array(
             'name' => 'list_price',
@@ -152,8 +155,6 @@ $dictionary['ProductTemplate'] = array(
                 'currency_id',
                 'base_rate'
             ),
-            'convertToBase' => true,
-            'showTransactionalAmount' => true,
         ),
         'cost_usdollar' => array(
             'name' => 'cost_usdollar',
@@ -231,6 +232,24 @@ $dictionary['ProductTemplate'] = array(
             'len' => 100,
             'comment' => 'Tax classification (ex: Taxable, Non-taxable)',
         ),
+        'active_status' => [
+            'name' => 'active_status',
+            'vname' => 'LBL_ACTIVE_STATUS',
+            'type' => 'enum',
+            'options' => 'active_status_dom',
+            'default' => 'Active',
+            'len' => 100,
+            'comment' => 'Active status (ex: Active, Inactive or Retired)',
+            'studio' => [
+                'wirelesslistview' => false,
+                'wirelesseditview' => false,
+                'wirelessdetailview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+                'mobile' => false,
+            ],
+            'massupdate' => true,
+        ],
         'date_available' => array(
             'name' => 'date_available',
             'vname' => 'LBL_DATE_AVAILABLE',
@@ -425,9 +444,16 @@ $dictionary['ProductTemplate'] = array(
         ),
     ),
     'indices' => array (
-        array('name' => 'idx_producttemplate_status', 'type' => 'index', 'fields' => array('status')),
         array('name' => 'idx_producttemplate_qty_in_stock', 'type' => 'index', 'fields' => array('qty_in_stock')),
-        array('name' => 'idx_producttemplate_category', 'type' => 'index', 'fields' => array('category_id')),
+        array('name' => 'idx_producttemplate_category', 'type' => 'index', 'fields' => array('category_id', 'active_status', 'deleted')),
+        [
+            'name' => 'idx_id_name',
+            'type' => 'index',
+            'fields' => [
+                'id',
+                'name',
+            ],
+        ],
     ),
 );
 

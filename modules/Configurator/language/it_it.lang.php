@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Formato ora predefinito',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Mostra i tempi di risposta del server',
+    'FREEZE_FIRST_COLUMN' => 'Consenti blocco colonne',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Abilita questa impostazione per consentire agli utenti di bloccare la prima colonna in una varietà di ' .
+        'viste elenco, incluse le viste moduli, i pannelli secondari, i dashlets e le console.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Registra query lente',
     'LOCK_HOMEPAGE_HELP'=>'Questa impostazione è per impedire<BR> 1) l´aggiunta di nuove pagine nella Home <BR>2) personalizzazione nel collocamento delle dashlet nella home page con la funzione drag & drop.',
     'CURRENT_LOGO'=>'Attuale logo in uso',
+    'CURRENT_LOGO_DARK' => 'Logo modalità scura corrente:',
     'CURRENT_LOGO_HELP'=>'Questo logo appare nell´angolo in alto a sinistra dell´applicazione Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Questo logo viene visualizzato nell'angolo sinistro del piè di pagina quando l'applicazione Sugar è in modalità oscura, in base alle preferenze di aspetto dell'utente.",
     'NEW_LOGO'=>'Carica nuovo logo',
     'NEW_LOGO_HELP' => 'Il formato dell´immagine dovrebbe essere .png o .jpg.<BR>La dimensione consigliata è 212x40 px.',
+    'NEW_LOGO_DARK' => 'Seleziona logo modalità scura:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Il formato dell´immagine può essere .png o .jpg. L´altezza massima è 17px, la larghezza massima è 450px. Qualsiasi immagine caricata che supera queste dimensioni sarà ridimensionata a questa dimensione. Il nome del file dell´immagine non deve contenere spazi.',
     'NEW_QUOTE_LOGO'=>'Carica nuovo logo per le offerte',
     'NEW_QUOTE_LOGO_HELP'=>'Il formato richiesto dell´immagine è .jpg.<BR>La dimensione consigliata è 867x74 px.',
@@ -413,7 +419,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Continua',
     'LBL_WIZARD_FINISH_TAB' => 'Termina',
     'LBL_WIZARD_FINISH_TITLE' => 'Configurazione base del sistema completata',
-    'LBL_WIZARD_FINISH' => 'Clicca <b>Continua</b> per configurare le impostazioni utente.<br/><br /><br />Per configurare impostazioni aggiuntive del sistema, clicca <a href="index.php?module=Administration&action=index" target="_blank">qui</a>.',
+    'LBL_WIZARD_FINISH' => 'Clicca <b>Continua</b> per configurare le impostazioni utente.<br/><br /><br />Per configurare impostazioni aggiuntive del sistema, clicca <a href="#Administration" target="_blank">qui</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Branding',
     'LBL_WIZARD_SYSTEM_DESC' => 'Fornisci il nome e il logo della tua azienda per personalizzare il tuo Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Specifica come vuoi visualizzare i dati in Sugar, in base alla tua posizione geografica. Le impostazioni che configuri qui saranno le impostazioni di default. Gli utenti potranno impostare le proprie preferenze.',
@@ -424,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Caricamento...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Cancella' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Benvenuto' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo modalità scura',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Il modulo Reports è disponibile solamente per il client iPhone Sugar Mobile .',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '*Il modulo Report non è disponibile in modalità mobile via browser.',
 
@@ -463,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

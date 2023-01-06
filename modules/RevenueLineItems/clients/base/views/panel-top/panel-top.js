@@ -19,8 +19,12 @@
 
         this._super('initialize', [options]);
 
-        if (this.parentModule === 'Accounts') {
+        if (['Accounts', 'Documents'].includes(this.parentModule)) {
             this.context.parent.on('editablelist:save', this._reloadOpportunities, this);
+            this.on('linked-model:create', this._reloadOpportunities, this);
+        }
+
+        if (this.parentModule === 'Accounts') {
             this.meta.buttons = _.filter(this.meta.buttons, function(item) {
                 return item.type !== 'actiondropdown';
             });

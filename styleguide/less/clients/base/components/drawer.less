@@ -17,8 +17,7 @@
     height: 100%;
     width: 100%;
     z-index: (@zindexFixedNavbar - 2);
-    background-color: @black;
-    border-top: 4px solid lighten(@gray, 20%);
+    border-top: 4px solid @gray60;
     opacity: 0.5;
     .user-select(none);
   }
@@ -139,7 +138,7 @@ body.noscroll {
 
 .selection-context {
   padding: 5px 8px;
-  background: @grayLighter;
+  background: @contentBackground;
 
   .reset-block {
     margin-right: 5px;
@@ -174,10 +173,6 @@ body.noscroll {
 
   .drawer.active {
     overflow: auto;
-
-    .main-pane {
-      background: @white;
-    }
   }
 
   .drawer.inactive {

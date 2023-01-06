@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => '工作表',
     'LBL_PURCHASED_LINE_ITEMS' => '購買項目',
 
+    'LBL_FORECASTED_LIKELY' => '預測可能性',
     'LBL_RENEWAL' => '續訂',
     'LBL_RENEWAL_OPPORTUNITIES' => '續訂商機',
     'LBL_RENEWAL_PARENT' => '父級商機',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '「總營收項目」中的 #',
     'LBL_CLOSED_RLIS' => '「總營收項目」中的 #',
+    'LBL_CLOSED_WON_RLIS' => '已結算獲得的營收單項數額',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '開放服務彈性持續時間營收單項 #',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => '您無法刪除包含結束「營收項目」的「商機」',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => '一個或多個所選記錄包含結束「營收項目」，無法刪除。',
     'LBL_INCLUDED_RLIS' => '「所包含營收項目」中的 #',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => '更新未處理',
+    'LBL_CASCADE_RLI_EDIT' => '更新未結算收入單項',
+    'LBL_CASCADE_RLI_CREATE' => '設置跨營收單項',
     'LBL_SERVICE_START_DATE_INVALID' => '任何開放附加營收單項的服務開始日期不能設置於服務結束日期之後。',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '報價',
@@ -207,21 +211,21 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您開始此變更后，會在後台建立各現有 {{module_name}} 的「營收項目」記錄。在「營收項目」完成且可用后，會向您使用者設定檔上的電子郵件地址傳送通知。請注意，實例必須設定為透過「管理」>「電子郵件設定」傳送電子郵件，以便能夠傳送通知。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售。每個 {{module_name}} 紀錄都代表一次預期銷售，包括相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關。一個 {{module_name}} 通常會經過幾個銷售階段，直到它被標記為“Closed Won”或“Closed Lost”。通過使用 Sugar 的 {{forecasts_singular_module}}ing 模組可以進一步利用 {{plural_module_name}}，以了解和預測銷售趨勢以及集中精力實現銷售配額。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}模塊允許您從開始到結束跟踪個別銷售。每個{{module_name}}記錄代表預期銷售，包括相關銷售數據以及與其他重要記錄相關的數據，如{{quotes_module}}、{{contacts_module}}等。 {{module_name}}通常會經過幾個銷售階段，直到它被標記為“已結算獲得”或“已結算損失”。 {{plural_module_name}}可以通過使用 Sugar 的{{forecasts_singular_module}}模塊來了解和預測銷售趨勢，並專注於實現銷售配額的工作，從而進一步發揮作用。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包括相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 模塊允許您全程追踪個人銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包括相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關。
 
-- 通過點擊單個欄位或“編輯”按鈕，編輯此記錄的欄位。 
-- 通過將左下角窗格切換至“數據視圖”，查看或修改子面板中其他記錄的連結。 
-- 通過將左下角窗格切換至“活動流”，在 {{activitystream_singular_module}} 中撰寫和查看用戶註釋以及記錄更改歷史。 
-- 使用記錄名稱右側的圖標關註此記錄或將其新增至收藏夾。 
-- “編輯”按鈕右側的下拉“操作”選單提供其他操作選項。',
+- 通過點擊單個字段或“編輯”按鈕，編輯此記錄的字段。
+- 通過將左下角窗格切換至“數據視圖”，查看或修改子麵板中其他記錄的鏈接。
+- 通過將左下角窗格切換至“活動流”，在 {{activitystream_singular_module}} 中撰寫和查看用戶註釋以及記錄更改歷史。
+- 使用記錄名稱右側的圖標關注此記錄或將其新增至收藏夾。
+- “編輯”按鈕右側的下拉“操作”菜單提供其他操作選項。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包含相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模塊允許您全程追踪個人銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包含相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關
 
-若要建立 {{module_name}}：
+若要創建 {{module_name}}：
 1. 按需提供字段值。
  - 標記為“必填”的字段在保存前必須先填寫完整。
  - 如有需要，點擊“顯示更多”以顯示其他字段。
@@ -239,7 +243,10 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "我的小組的商機",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => '無法更改{{fieldName}}，因為此{{moduleSingular}} 沒有未處理項目。',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '機會通訊',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '商機時間軸',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' 不能設置這些營收單項中的任何一個，因為它們不是服務。你想繼續創建嗎？',
+    'LBL_CASCADE_DURATION_WARNING' => ' 不能設置這些營收單項中的任何一個，因為它們的持續時間已鎖定。你想繼續創建嗎？',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => '商機關閉預測',

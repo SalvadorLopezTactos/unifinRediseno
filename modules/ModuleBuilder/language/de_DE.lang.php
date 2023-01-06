@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Löschen' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Powered By SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Rolle',
+    'LBL_BASE_LAYOUT' => 'Einfaches Layout',
+    'LBL_FIELD_NAME' => 'Feldname',
+    'LBL_FIELD_VALUE' => 'Wert',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Layout bestimmt von:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standardlayout',
+        'role' => 'Rolle',
+        'dropdown' => 'Dropdown-Feld',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Alle benutzerdefinierten Layouts werden entfernt. Möchten Sie wirklich Ihre aktuellen Layoutdefinitionen ändern?',
 'help'=>array(
     'package'=>array(
             'create'=>'Bitte dem Paket einen <b>Name geben>/b>. Der Name muss alphanumerisch sein und darf keine Leerzeichen haben (z. B. HR_Management).<br/><br/>Sie können einen <b>Autor</b> und eine <b>Beschreibung</b> für dieses Paket definieren.<br/><br/><b>Speichern</b> auswählen, um das Paket zu erstellen.',
@@ -457,8 +467,6 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
 'LBL_VISIBILITY_EDITOR' => 'Sichtbarkeits-Editor',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'Verknüptes Feld',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL zum benutzerdefinierten Bild der Logomarke. Die empfohlenen Abmessungen der Logomarke sind 22 x 22 Pixel. Jedes hochgeladene Bild, das größer als diese Abmessungen ist, wird auf diese maximalen Abmessungen skaliert.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL zum benutzerdefinierten Bild des Logos. Die empfohlene Breite des Logos ist 200 Pixel. Jedes hochgeladene Bild, das größer als diese Abmessungen ist, wird auf diese maximalen Abmessungen skaliert. Dieses Logo wird auf dem Anmeldebildschirm verwendet. Wird kein Bild hochgeladen, wird die Logomarke verwendet.',
 'LBL_PORTAL_ROLE_DESC' => 'Löschen Sie diese Rolle nicht. Die Kunden-Selbstbedienungsportal-Rolle ist eine vom System beim Sugar-Portal-Aktivierungsprozess generierte Rolle. Verwenden Sie Zugriffskontrollen in dieser Rolle, um Fehlermeldungen, Tickets und Wissensdatenbank-Module im Portal zu aktivieren oder deaktivieren. Ändern Sie keine anderen Kontrollen für diese Rolle, um ein unvorhersehbares Systemverhalten zu vermeiden. Falls diese Rolle zufälig gelöscht wurde, können Sie sie durch Deaktivieren und erneutes Aktivieren von Sugar-Portal erneut erstellen.',
 
 //RELATIONSHIPS
@@ -581,6 +589,7 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
 'LBL_BTN_ADD_RELATIONSHIP'=>'Beziehung hinzufügen',
 'LBL_BTN_RENAME_MODULE' => 'Modulname ändern',
 'LBL_BTN_INSERT'=>'Einfügen',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Einfaches Layout wiederherstellen',
 //TABS
 
 //ERRORS
@@ -591,6 +600,7 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
 'ERROR_GENERIC_TITLE' => 'Ein Fehler ist aufgetreten',
 'ERROR_REQUIRED_FIELDS' => 'Möchten Sie fortfahren? Es fehlen folgende Pflichtfelder im Layout:  ',
 'ERROR_ARE_YOU_SURE' => 'Möchten Sie fortfahren?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Das Feld kann nicht erstellt werden. Sie haben die maximal zulässige Zeilengröße dieser Tabelle in Ihrer Datenbank erreicht. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Erfahren Sie mehr darüber</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Die folgenden Felder sind berechnete Werte und werden nicht in der mobilen Bearbeitungsansicht von SugarCRM erneut berechnet:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Die folgenden Felder sind berechnete Werte und werden nicht in der Bearbeitungsansicht des SugarCRM-Portals erneut berechnet:',
@@ -600,16 +610,15 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
     'LBL_PORTAL_ENABLE_MODULES' => 'Falls Sie diese für das Portal aktivieren möchten, klicken Sie <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">hier</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Portal konfigurieren',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Portal aktivieren',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivieren Sie die Suche, bevor Sie ein Ticket öffnen',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Notizen im Wissensdatenbankmodul aktivieren',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Den Benutzern des Portals erlauben, den Fall zu schließen',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => '
+Neuen Benutzern die Registrierung erlauben',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Benutzerberechtigungen',
     'LBL_PORTAL_THEME' => 'Design-Portal',
     'LBL_PORTAL_ENABLE' => 'Aktivieren',
     'LBL_PORTAL_SITE_URL' => 'Ihre Portal-Seite ist verfügbar unter:',
     'LBL_PORTAL_APP_NAME' => 'Anwendungsname',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL der Logomarke',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Vorschau der Logomarke',
-    'LBL_PORTAL_LOGO_URL' => 'Logo-URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Vorschau des Logos ',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefon',
     'LBL_PORTAL_CONTACT_EMAIL' => 'E-Mail',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Sie müssen eine gültige E-Mail-Adresse eingeben',
@@ -625,6 +634,23 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Verschieben Sie die Namen der Portal-Module mithilfe der Drag-and Drop-Funktion, um sie in der oberen Navigationsleiste des Portals anzuzeigen oder auszublenden. Um den Zugriff der Benutzer auf das Portal zu konfigurieren, verwenden Sie das <a href="?module=ACLRoles&action=index">Rollen-Management.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Angezeigte Module',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Ausgeblendete Module',
+    'LBL_CONFIG_VISIBILITY' => 'Sichtbarkeit',
+    'LBL_CASE_VISIBILITY_HELP' => 'Definieren Sie, welche Portalbenutzer ein Ticket sehen können.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Definieren Sie, welche Portalbenutzer E-Mails eines Tickets sehen können. Teilnehmende Kontakte stehen in den Feldern „An“, „Von“, „CC“ und „BCC“.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Definieren Sie, welche Portalbenutzer Nachrichten dieses Tickets sehen können. Teilnehmende Kontakte stehen im Feld „Gäste“.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Alle mit dem Konto verknüpften Kontakte',
+        'related_contacts' => 'Nur Hauptansprechpartner und mit dem Ticket verknüpfte Kontakte',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Nur teilnehmende Kontakte',
+        'all' => 'Alle Kontakte, die das Ticket sehen können',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Nur teilnehmende Kontakte',
+        'all' => 'Alle Kontakte, die das Ticket sehen können',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Portal-Layouts',
@@ -797,11 +823,11 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
     . "Erforderliche Felder folgen zwar der Formel in der browserbasierten mobilen Ansicht, <br/>"
     . "jedoch nicht der Formel in nativen Anwendungen wie Sugar Mobile für iPhone. <br/>"
     . "Sie folgen nicht der Formel im Sugar Self-Service Portal.",
-'LBL_POPHELP_READONLY'=>"Erstellen Sie eine Formel, um zu bestimmen, ob dieses Feld in Layouts schreibgeschützt ist.<br/>"
-        . "Schreibgeschützte Felder folgen zwar der Formel in der browserbasierten mobilen Ansicht, <br/>"
-        . "jedoch nicht der Formel in nativen Anwendungen wie Sugar Mobile für iPhone. <br/>"
+'LBL_POPHELP_READONLY'=>"Erstellen Sie eine Formel, um festzustellen, ob dieses Feld in Layouts nur Lesezugriff hat.<br/> "
+        . "Felder mit nur Lesezugriff folgen der Formel in der browserbasierten mobilen Ansicht,<br/>"
+        . "jedoch nicht der Formel in nativen Anwendungen wie such Mobile für iPhone. <br/>"
         . "Sie folgen nicht der Formel im Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Wählen Sie diese Option, um dieses Feld bei der Suche nach Datensätzen mit der globalen Suche in diesem Modul zu verwenden.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Wählen Sie diese Option, um dieses Feld bei der Suche nach Datensätzen über Global Search in diesem Modul zu verwenden.',
 //Revert Module labels
 'LBL_RESET' => 'Zurücksetzen',
 'LBL_RESET_MODULE' => 'Modul zurücksetzen',
@@ -837,6 +863,7 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
                 'datetimecombo' =>'Datum/Zeit',
                 'decimal'=>'Dezimalzahl',
                 'autoincrement' => 'Automatisch erhöhen',
+                'actionbutton' => 'Aktionsschaltfläche',
 ),
 'labelTypes' => array(
     "" => "Häufig verwendete Bezeichnungen",
@@ -855,4 +882,8 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (verwandte {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Von Layout kopieren',
 'LBL_RELATIONSHIP_TYPE' => 'Beziehung',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Vergleichssprache',
+'LBL_LABEL_NOT_TRANSLATED' => 'Diese Bezeichnung könnte nicht übersetzt sein.',
 );

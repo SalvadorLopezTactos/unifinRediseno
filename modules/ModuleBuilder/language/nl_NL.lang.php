@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Verwijderen' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Aangedreven door SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Role',
+    'LBL_BASE_LAYOUT' => 'Basislay-out',
+    'LBL_FIELD_NAME' => 'Veldnaam',
+    'LBL_FIELD_VALUE' => 'Waarde',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Lay-out bepaald door:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standaard lay-out',
+        'role' => 'Rol',
+        'dropdown' => 'Vervolgkeuzeveld',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Alle aangepaste lay-outs worden verwijderd. Weet u zeker dat u de huidige lay-outdefinities wilt wijzigen?',
 'help'=>array(
     'package'=>array(
             'create'=>'Provide a <b>Name</b> for the package.  The name you enter must be alphanumeric and contain no spaces. (Example: HR_Management)<br/><br/> You can provide <b>Author</b> and <b>Description</b> information for package. <br/><br/>Click <b>Save</b> to create the package.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Zichtbaarheidseditor',
 'LBL_ROLLUP' => 'Samenstellen',
 'LBL_RELATED_FIELD' => 'Soortgelijk veld',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL van aangepaste logomerkafbeelding. De aanbevolen afmetingen van het logomerk zijn 22 x 22 pixels. Eventuele afbeeldingen die geüpload worden en groter zijn in beide richtingen, worden tot deze max. afmetingen geschaald.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL naar aangepaste logo-afbeelding. De aanbevolen breedte van het logo is 200 pixels. Eventuele geüploade afbeeldingen die in beide richtingen groter zijn, worden geschaald tot deze max. afmetingen. Dit logo wordt gebruikt op het aanmeldscherm. Het logomerk wordt gebruikt als er geen afbeelding is geüpload.',
 'LBL_PORTAL_ROLE_DESC' => 'Verwijder deze rol niet. De rol zelfbedieningsportaal van de klant is een door het systeem gegenereerde rol die tijdens het activatieproces van Sugar Portaal is aangemaakt. Gebruik de toegangsbediening binnen deze rol om bugs, casussen of modules in de kennisbasis van het Sugar Portaal in of uit te schakelen. Wijzig geen andere toegangsbediening voor deze rol om onbekend en onvoorspelbaar gedrag van het systeem te voorkomen. Indien deze rol per ongeluk wordt verwijderd probeert u deze opnieuw aan te maken door Sugar Portaal in en uit te schakelen.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Relatie toevoegen',
 'LBL_BTN_RENAME_MODULE' => 'Modulenaam wijzigen',
 'LBL_BTN_INSERT'=>'Insert',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Basislay-out herstellen',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Er heeft zich een fout voorgedaan',
 'ERROR_REQUIRED_FIELDS' => 'Are you sure you wish to continue? The following required fields are missing from the layout:',
 'ERROR_ARE_YOU_SURE' => 'Weet u zeker dat u wilt doorgaan?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Veld kon niet worden aangemaakt. U hebt de rij-omvanglimiet van deze tabel in uw database bereikt. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Lees meer</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'De volgende veld(en) bevatten berekende waarden die niet real-time opnieuw zullen worden berekend in de mobiele bewerkingsweergave van SugarCRM:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'De volgende veld(en) bevatten berekende waarden die niet real-time herberekend zullen worden in de bewerkingsweergave van het portaal in SugarCRM:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Als u deze in het portaal wilt inschakelen kunt u ze <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">hier</a> inschakelen.',
     'LBL_PORTAL_CONFIGURE' => 'Portaal configureren',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Portaal inschakelen',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Schakel zoeken in voordat u een case opent',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Schakel notities in de module Knowledge Base in',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Portaalgebruikers toestaan om de zaak te sluiten',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Laat nieuwe gebruikers zich aanmelden',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Gebruikersrechten',
     'LBL_PORTAL_THEME' => 'Thema portaal',
     'LBL_PORTAL_ENABLE' => 'Inschakelen',
     'LBL_PORTAL_SITE_URL' => 'Uw portaalsite is beschikbaar op:',
     'LBL_PORTAL_APP_NAME' => 'Naam toepassing',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL logomerk',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Voorvertoning logomerk',
-    'LBL_PORTAL_LOGO_URL' => 'URL logo',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Voorvertoning logo',
     'LBL_PORTAL_CONTACT_PHONE' => 'Tel',
     'LBL_PORTAL_CONTACT_EMAIL' => 'E-mailadres',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Moet een geldig e-mailadres invoeren',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Versleep de namen van de portaalmodules die u wilt weergeven of verbergen (in de navigatiebalk of subpanelen) naar de desbetreffende gebieden. Om toegang tot de portaalmodules te beheren, maak gebruik van <a href="?module=ACLRoles&action=index">rollen & rechten.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Weergegeven modules',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Verborgen modules',
+    'LBL_CONFIG_VISIBILITY' => 'Zichtbaarheid',
+    'LBL_CASE_VISIBILITY_HELP' => 'Definieer welke portaalgebruikers een case kunnen zien.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Definieer welke portaalgenruikers e-mails m. b. t. een case kunnen zien. Deelnemende contactpersonen zijn die in de velden Aan, CC en BCC staan.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Definieer welke portaalgenruikers berichten m. b. t. een case kunnen zien. Deelnemende contactpersonen zijn die in het veld Gasten staan.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Alle contactpersonen m. b. t. het account',
+        'related_contacts' => 'Alleen primaire contactpersonen en contactpersonen m. b. t. de case',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Alleen deelnemende contactpersonen',
+        'all' => 'Alle contactpersonen die de case kunnen zien',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Alleen deelnemende contactpersonen',
+        'all' => 'Alle contactpersonen die de case kunnen zien',
+    ],
+
 
 'LBL_PORTAL'=>'Portaal',
 'LBL_PORTAL_LAYOUTS'=>'Portaallayouts',
@@ -787,11 +812,11 @@ $mod_strings = array(
     . "Verplichte velden volgen de formule in de op de browser gebaseerde mobiele weergave,<br/>"
     . "maar volgen niet de formulie in de oorspronkelijke applicaties, zoals Sugar Mobile voor de iPhone. <br/>"
     . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
-'LBL_POPHELP_READONLY'=>"Maak een formule om te bepalen of dit veld alleen-lezen is in layouts.<br/>"
-        . "Alleen-lezen velden volgen de formule in de op de browser gebaseerde mobiele weergave,<br/>"
-        . "maar volgen niet de formulie in de oorspronkelijke applicaties, zoals Sugar Mobile voor de iPhone. <br/>"
-        . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecteer om dit veld te gebruiken als u naar records zoekt via algemeen zoeken in deze module.',
+'LBL_POPHELP_READONLY'=>"Maak een formule om te bepalen of dit veld alleen-lezen is in lay-outs.<br/>"
+        . "Alleen-lezen velden volgen de formule in de op de browser gebaseerde mobiele weergave, <br/>"
+        . "maar volgen niet de formule in de originele toepassingen, zoals Sugar Mobile voor de iPhone. <br/>"
+        . "Ze volgen niet de formule in het Sugar Self-Service Portal.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecteer om dit veld te gebruiken als u naar records zoekt via Algemeen Zoeken in deze module.',
 //Revert Module labels
 'LBL_RESET' => 'Resetten',
 'LBL_RESET_MODULE' => 'Module resetten',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Datum tijd',
                 'decimal'=>'Decimaal',
                 'autoincrement' => 'Automatisch verhogen',
+                'actionbutton' => 'Actieknop',
 ),
 'labelTypes' => array(
     "" => "Veel gebruikte labels",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (gerelateerd {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopiëren uit layout',
 'LBL_RELATIONSHIP_TYPE' => 'Relatie',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Taal vergelijking',
+'LBL_LABEL_NOT_TRANSLATED' => 'Dit label mag niet vertaald worden',
 );

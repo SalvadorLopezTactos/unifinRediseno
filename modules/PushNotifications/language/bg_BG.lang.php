@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Тип на родител',
     'LBL_PARENT_ID' => 'Родителски ИД',
     'LBL_EXTRA_DATA' => 'Излишни данни',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - Споменат на {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} Ви спомена на {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Възложен {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} възложи {{module_name_singular}} {{record_name}} на Вас.',
 ];

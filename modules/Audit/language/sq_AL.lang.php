@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Fushat e kontrolluara në këtë modulë',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Nuk ka fusha të kontrolluara në këtë modulë',
     'LBL_CHANGE_LOG' => 'Evidencë auditimi',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kur fushat e monedhës së audituar ruhen në një monedhë të paparacaktuar nga sistemi, evidenca e ndryshimit do të shfaqë vlerat e vjetra dhe të reja në monedhën e konvertuar të paracaktuar nga sistemi.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kur fushat e monedhës së audituar ruhen në një monedhë të paparacaktuar nga sistemi, evidenca e ndryshimit do të shfaqë vlerat e vjetra dhe të reja në monedhën e konvertuar të paracaktuar nga sistemi.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Përditëso në',
+    'LBL_BLANK' => '-bosh-',
 );

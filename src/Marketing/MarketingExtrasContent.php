@@ -178,7 +178,10 @@ class MarketingExtrasContent
         curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $timeoutInMs);
 
         $response = curl_exec($curlHandle);
-        $headers = substr($response, 0, curl_getinfo($curlHandle, CURLINFO_HEADER_SIZE));
+        $headers = '';
+        if ($response !== false) {
+            $headers = substr($response, 0, curl_getinfo($curlHandle, CURLINFO_HEADER_SIZE));
+        }
         $httpCode = curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $curlError = curl_error($curlHandle);
 

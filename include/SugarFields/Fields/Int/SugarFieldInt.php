@@ -137,8 +137,13 @@ class SugarFieldInt extends SugarFieldBase
     {
         if (isset($params[$field])) {
             $fieldRange = $this->getFieldRange($properties);
-            return ((!is_numeric($fieldRange['min_value']) || $params[$field] >= $fieldRange['min_value']) &&
-                (!is_numeric($fieldRange['max_value']) || $params[$field] <= $fieldRange['max_value']));
+            $min_value = $fieldRange['min_value'];
+            $max_value = $fieldRange['max_value'];
+            // If PHP encounters a number beyond the bounds of the int type, it will be interpreted as a float instead
+            // https://www.php.net/manual/en/language.types.integer.php#language.types.integer.overflow
+            // In order to ensure consistency on a 32 bit system we convert all values to float and then compare
+            return ((!is_numeric($min_value) || floatval($params[$field]) >= floatval($min_value)) &&
+                (!is_numeric($max_value) || floatval($params[$field]) <= floatval($max_value)));
         }
 
         return parent::apiValidate($bean, $params, $field, $properties);

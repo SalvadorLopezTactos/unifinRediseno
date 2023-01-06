@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Töövoog'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tüüp',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Märkus.</strong> Sugari töövoo ja töövoo halduse funktsioon on hooldusrežiimis. Väljaande Sugar Enterprise kliendid peaksid kasutama SugarBPM<sup class="trademark">TM</sup>-i funktsioone.',
 );
 

@@ -10,17 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}
+
 <script type='text/javascript'>
 <!--
-var ERR_RULES_NOT_MET = '{/literal}{$MOD.ERR_RULES_NOT_MET}{literal}';
-var ERR_ENTER_OLD_PASSWORD = '{/literal}{$MOD.ERR_ENTER_OLD_PASSWORD}{literal}';
-var ERR_ENTER_NEW_PASSWORD = '{/literal}{$MOD.ERR_ENTER_NEW_PASSWORD}{literal}';
-var ERR_ENTER_CONFIRMATION_PASSWORD = '{/literal}{$MOD.ERR_ENTER_CONFIRMATION_PASSWORD}{literal}';
-var ERR_REENTER_PASSWORDS = '{/literal}{$MOD.ERR_REENTER_PASSWORDS}{literal}';
+var ERR_RULES_NOT_MET = '{$MOD.ERR_RULES_NOT_MET}';
+var ERR_ENTER_OLD_PASSWORD = '{$MOD.ERR_ENTER_OLD_PASSWORD}';
+var ERR_ENTER_NEW_PASSWORD = '{$MOD.ERR_ENTER_NEW_PASSWORD}';
+var ERR_ENTER_CONFIRMATION_PASSWORD = '{$MOD.ERR_ENTER_CONFIRMATION_PASSWORD}';
+var ERR_REENTER_PASSWORDS = '{$MOD.ERR_REENTER_PASSWORDS}';
 -->
 </script>
-<script type='text/javascript' src='{/literal}{sugar_getjspath file="modules/Users/PasswordRequirementBox.js"}{literal}'></script>
+<script type='text/javascript' src='{sugar_getjspath file="modules/Users/PasswordRequirementBox.js"}'></script>
 <style type="text/css">
 <!--
 
@@ -56,7 +56,7 @@ form
 }
 -->
 </style>
-{/literal}
+
 
 <form action="index.php" method="post" name="ChangePasswordForm" id="ChangePasswordForm" onsubmit="return document.getElementById('cant_login').value == ''" autocomplete="off">
 {sugar_csrf_form_token}

@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => '此模組中稽核的欄位：',
     'LBL_NO_AUDITED_FIELDS_TEXT' => '此模組中無稽核欄位',
     'LBL_CHANGE_LOG' => '稽核記錄',
-    'LBL_CURRENCY_CONVERSION_TEXT' => '以非系統預設貨幣儲存經稽核的貨幣欄位后，變更記錄將以轉換的系統定義預設貨幣顯示舊值和新值。'
+    'LBL_CURRENCY_CONVERSION_TEXT' => '以非系統預設貨幣儲存經稽核的貨幣欄位后，變更記錄將以轉換的系統定義預設貨幣顯示舊值和新值。',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => '更新為',
+    'LBL_BLANK' => '-空白-',
 );

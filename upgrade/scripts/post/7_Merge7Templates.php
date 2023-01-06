@@ -228,6 +228,8 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
             if ($this->checkComboFields($field, $data, $custom_fields)) {
                 continue;
             }
+
+            // Add the new field to the panel in the view metadata
             $this->addField($custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'], $data['pindex'], $data['pname'], $data['data']);
             $this->needSave = true;
         }
@@ -241,15 +243,15 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
 
             $pindex = $custom_fields[$field]['pindex'];
             $findex = $custom_fields[$field]['findex'];
-            // Remove field from panel
+
+            // Remove the field from the panel in the view metadata
             unset($custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'][$pindex]['fields'][$findex]);
-            // Re-index the fields
-            $custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'][$pindex]['fields'] = array_values($custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'][$pindex]['fields']);
+
             $this->needSave = true;
         }
 
         if (!empty($changed_fields)) {
-            $this->log("Fields changed: " . var_export($added_fields, true));
+            $this->log("Fields changed: " . var_export($changed_fields, true));
             foreach ($changed_fields as $field => $data) {
                 if (empty($custom_fields[$field]) || empty($old_fields[$field]) || empty($new_fields[$field])) {
                     // Custom has no such field - ignore it
@@ -264,6 +266,11 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
                     $this->needSave = true;
                 }
             }
+        }
+
+        // Re-index the fields in the view metadata
+        foreach ($custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'] as $pindex => $panel) {
+            $custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'][$pindex]['fields'] = array_values($custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'][$pindex]['fields']);
         }
 
         return $custom_viewdefs;

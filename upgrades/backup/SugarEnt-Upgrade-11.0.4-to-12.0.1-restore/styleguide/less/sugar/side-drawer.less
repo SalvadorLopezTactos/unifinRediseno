@@ -1,0 +1,58 @@
+/* SIDE DRAWER
+  ----------------*/
+
+.side-drawer {
+  position: fixed;
+  left: 25%;
+  right: 0;
+  display: none;
+  z-index: @zindexSidebarContent + 1;
+
+  .drawer-content {
+    background-color: @grayLighter;
+    border-radius: 3px;
+    border-left: 1px solid fade(@black, 10%);
+    height: 100%;
+  }
+
+  > .disabled .btn {
+    > .fa {
+      color: @btnDisabledIconColor;
+    }
+
+    &.btn-primary > .fa {
+      color: inherit;
+    }
+
+    &:not(.disabled):hover {
+      box-shadow: inset 0 0 10px @transparent;
+    }
+  }
+
+  .close-drawer,
+  .dashlet-drawer {
+    width: 30px;
+    left: -25px;
+    position: absolute;
+
+    .btn {
+      background: @grayLighter;
+      border-right: none;
+      margin-left: 0;
+    }
+  }
+
+  .close-drawer {
+    top: 10px;
+  }
+
+  .dashlet-drawer {
+    top: 40px;
+  }
+
+  .dashboard {
+    border-left: none;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+}

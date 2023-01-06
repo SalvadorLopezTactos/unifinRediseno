@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'اسم الدعم:',
   'LBL_SUPPORT_TERM' => 'مدة الدعم:',
   'LBL_TAX_CLASS' => 'فئة الضريبة:',
+  'LBL_ACTIVE_STATUS' => 'الحالة',
   'LBL_TYPE_NAME'=>'اسم النوع',
   'LBL_TYPE' => 'النوع',
   'LBL_PRODUCT_TYPE' => 'نوع المنتج',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'لوحة معلومات كتالوج المنتج',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'لوحة معلومات سجل كتالوج المنتج',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم كتالوج المنتج',
+    'LBL_FILTER_ACTIVE_STATUS' => 'الحالة هي نشطة',
 );

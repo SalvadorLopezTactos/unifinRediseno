@@ -42,7 +42,6 @@
   display: none; // none by default, but block on "open" of the menu
   float: left;
   min-width: 160px;
-  margin: 2px 0 0; // override default ul
   list-style: none;
   background-color: @dropdownBackground;
   background-clip: padding-box;
@@ -59,13 +58,23 @@
   }
 
   // Links within the dropdown menu
-  li > a {
-    display: block;
-    clear: both;
-    font-weight: normal;
-    line-height: @baseLineHeight;
-    color: @dropdownLinkColor;
-    white-space: nowrap;
+  li {
+    & > a {
+      display: block;
+      clear: both;
+      font-weight: normal;
+      line-height: @baseLineHeight;
+      white-space: nowrap;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+
+      .sicon {
+        margin-right: 8px;
+      }
+    }
   }
 }
 
@@ -76,7 +85,7 @@
 .dropdown-submenu:hover > a {
   text-decoration: none;
   color: @dropdownLinkColorHover;
-  #gradient > .vertical(@dropdownLinkBackgroundHover, darken(@dropdownLinkBackgroundHover, 5%));
+  background-color: @dropdownLinkBackgroundHover;
 }
 
 // Active state
@@ -84,7 +93,7 @@
 .dropdown-menu .active > a,
 .dropdown-menu .active > a:hover {
   outline: 0;
-  #gradient > .vertical(@dropdownLinkBackgroundActive, darken(@dropdownLinkBackgroundActive, 5%));
+  background-color: @dropdownLinkBackgroundActive;
 }
 
 // Disabled state
@@ -92,7 +101,7 @@
 // Gray out text and ensure the hover state remains gray
 .dropdown-menu .disabled > a,
 .dropdown-menu .disabled > a:hover {
-  color: @grayLight;
+  color: @dropdownDisabledLinkColor;
 }
 // Nuke hover effects
 .dropdown-menu .disabled > a:hover {
@@ -173,7 +182,7 @@
   border-color: transparent;
   border-style: solid;
   border-width: 5px 0 5px 5px;
-  border-left-color: darken(@dropdownBackground, 20%);
+  border-left-color: @dropdownSubmenuBackground;
   margin-top: 5px;
   margin-right: -10px;
 }
@@ -209,16 +218,18 @@
 .typeahead {
   z-index: 1051;
   margin-top: 2px; // give it some space to breathe
-  border-radius: @baseBorderRadius;
 }
 
 /* twitter-bootstrap import END */
 
 .dropdown-menu {
-  top: 34px;
+  .shadow-xl();
+  .rounded-md();
+  .border-dropdown-widget();
+
+  top: 100%;
   padding: 0;
-  border: @borderWidget;
-  border-radius: @baseBorderRadius;
+  overflow: hidden;
 
   &.left {
     left: auto;
@@ -239,8 +250,6 @@
     text-shadow: none;
     font-size: @baseFontSize;
     color: @white !important;
-    #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
-
     border-radius: 3px 3px 0 0;
   }
 
@@ -254,7 +263,7 @@
       border: 0 none;
 
       &.primary {
-        border-top: 1px solid @grayLight;
+        border-top: 1px solid @gray70;
       }
 
       label {
@@ -267,48 +276,61 @@
     border-top: none;
   }
 
+  li.divider:last-child,
   li:last-child a {
     border-bottom: none;
-    border-radius: 0 0 2px 2px;
   }
 
   li > a {
     padding: 8px 10px;
   }
+
   //replicate bootstrap styles from li > a
   .menu-item,
   a,
+  .menuitem-config > span,
   button {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 8px 10px;
     clear: both;
     font-weight: normal;
     line-height: 18px;
-    color: @gray;
+    color: @textColor;
+    background-color: @dropdownBackground;
     white-space: nowrap;
     margin: 0;
-    border-top: 1px solid @grayLighter;
     width: -moz-available !important;
+
+    > .sicon {
+      margin-right: 8px;
+    }
 
     label {
       padding-left: 0;
     }
   }
+
+  .menuitem-config input {
+    margin-left: auto;
+  }
+
   // Gray out text and ensure the hover state remains gray
   a.disabled,
   a.disabled:hover {
-    color: @grayLight;
-    background-color: @grayLighter;
+    color: @dropdownDisabledLinkColor;
+    background-color: @dropdownDisabledBackground;
   }
   // Nuke hover effects
   a.disabled:hover {
     text-decoration: none;
     background-image: none; // Remove CSS gradient
     cursor: default;
-    color: @grayLight;
+    color: @dropdownDisabledLinkColor;
 
+    & .sicon,
     & .fa {
-      color: @grayLight !important;
+      color: @dropdownDisabledLinkColor;
     }
   }
 
@@ -328,21 +350,25 @@
   .active > a:focus,
   .active > span > a:hover,
   .active > span > a:focus {
-    color: @dropdownLinkColorHover;
+    color: @dropdownLinkColor;
     text-decoration: none;
     //this causes sharp corners on dropdown-menu
     //fixed by setting border radius on li > a
     background: @dropdownLinkBackgroundHover;
     filter: none;
+
+    .sicon {
+      color: @sicon-active-color;
+    }
   }
 
   label.radio {
-    color: lighten(@gray, 20%);
+    color: @gray60;
     padding-left: 0;
   }
 
   label.radio.checked {
-    color: @gray;
+    color: @gray80;
     font-weight: bold;
   }
 
@@ -351,7 +377,7 @@
   }
 
   label.radio.checked i {
-    color: @gray;
+    color: @gray80;
   }
 
   li.divider {
@@ -397,39 +423,41 @@
 }
 
 .dropdown-toggle {
+  line-height: 12px;
+  padding: 7px;
+
   .mystuff {
     margin-left: -10px;
   }
 }
 
+// todo: Need to update this to use sugaricons
+.omni-button {
+  .dropdown-toggle {
+    padding: 0;
+  }
+}
+
 .dropdown-inset {
   max-height: none;
-  background-color: @grayLighter;
+  background-color: @dropdownSubmenuBackground;
   background-image: none;
   outline: 0;
-  box-shadow: inset 0 3px 1px fade(@black, 20%);
   position: relative;
   margin: 0;
   padding-right: 0;
-  padding-top: 3px;
 
   a {
-    border-bottom: @borderWidget;
-    color: @gray;
+    color: @textColor;
   }
 
   li:first-child a {
     border-radius: 0;
   }
 
-  li:last-child a {
-    border-bottom: @borderWidget;
-    border-radius: 0;
-  }
-
   li > a {
     padding: 9px 20px;
-    color: @gray;
+    color: @textColor;
     margin-right: 0;
   }
 }
@@ -458,8 +486,9 @@
     &.open {
       .btn {
         box-shadow: none;
-        background-color: @gray;
+        background-color: @gray80;
 
+        > .sicon,
         > .fa {
           color: @white;
         }
@@ -472,13 +501,9 @@
   }
 
   .dropdown-menu {
-    margin-top: 7px;
-    right: 20px;
-
     button {
       background: none;
       border: none;
-      padding-left: 30px;
       width: 100%;
       text-align: left;
       margin-left: 0;
@@ -489,16 +514,11 @@
 
       .fa {
         margin-right: 5px;
-        margin-left: -22px;
       }
     }
 
-    li {
-      border-bottom: 1px solid @grayLighter;
-    }
-
     li.divider + li {
-      border-top: 1px solid #ddd;
+      border-top: @borderWidget;
     }
   }
 }
@@ -536,8 +556,8 @@
 
       a.selected {
         text-decoration: none;
-        color: #262626;
-        background-color: #999;
+        color: @gray90;
+        background-color: @gray60;
       }
     }
   }

@@ -52,7 +52,6 @@
 </div>
 <div class="ft"><div class="bl"></div><div class="ft-center"></div><div class="br"></div></div>
 </div>
-{literal}
 <script type="text/javascript" language="JavaScript">
 <!--
 lookupTimezone = function() {
@@ -69,9 +68,8 @@ lookupTimezone = function() {
     var nowGMT = new Date(nowGMTString.substring(0, nowGMTString.lastIndexOf(' ')));
     offset = ((now - nowGMT) / (1000 * 60));
     url = 'index.php?module=Users&action=SetTimezone&to_pdf=1&userOffset=' + offset;
-    var cObj = YAHOO.util.Connect.asyncRequest('GET', url, {success: success, failure: success});
+    var cObj = YAHOO.util.Connect.asyncRequest('GET', url, { success: success, failure: success });
 }
 YAHOO.util.Event.addListener(window, 'load', lookupTimezone);
 -->
 </script>
-{/literal}

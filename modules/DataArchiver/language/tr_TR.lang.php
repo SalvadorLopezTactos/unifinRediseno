@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arşivle',
     'LBL_PROCESS_TYPE_DELETE' => 'Zor Silme',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arşiv Çalışır',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Uyarı',
+    'LBL_ARCHIVER_WARNING' => 'Sistem performansını etkileyebileceği için düşük kullanım veya çalışma dışı saatler esnasında bu işlemin '
+        . 'gerçekleştirilmesi önerilir. Bu işlemi şimdi yapmak istediğinizden emin misiniz?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}} modülü arşivleyicisi, filtre olarak ayarlı {{fieldName}} sahip olmalıdır',
 );

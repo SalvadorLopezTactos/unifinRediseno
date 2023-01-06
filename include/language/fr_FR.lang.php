@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Prévisions',
     'ForecastWorksheets' => 'Tableau des Prévisions',
     'ForecastManagerWorksheets' => 'Tableaux de gestion des prévisions',
-    'MergeRecords'=>'Fusions Enregistrements',
       'VisualPipeline'=>'Portefeuille visuel',
       'ConsoleConfiguration' => 'Configuration de la console',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Rôles',
     'Notifications'=>'Notifications',
     'Sync'=>'Sync',
+    'HintAccountsets' => 'GroupesdecomptesHint',
+    'HintNotificationTargets' => 'CiblesdenotificationHint',
+    'HintNewsNotifications' => 'Notificationsd&#39;actualitésHint',
+    'HintEnrichFieldConfigs' => 'ConfigurationsdechampsenrichisHint',
     'ReportMaker' => 'Rapports Enterprise',
     'DataSets' => 'Formats de données',
     'CustomQueries' => 'Requêtes personnalisées',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Ligne d&#39;achats',
     'MobileDevices' => 'Appareils mobiles',
     'PushNotifications' => 'Notifications Push',
+    'Escalations' => 'Escalades',
+    'DocumentTemplates' => 'Modèles de documents',
+    'DocumentMerges' => 'Fusions de documents',
     'WorkFlow' => 'Définitions du Workflow :',
     'EAPM' => 'Liens externes',
     'Worksheet' => 'Feuille de travail',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Congés',
     'ChangeTimers' => 'Modifier les minuteries',
     'Messages' => 'Messages',
+    'Audit' => 'Audit',
+    'RevenueLineItems' => 'Lignes de revenu',
+    'DocuSignEnvelopes' => 'Enveloppes DocuSign',
+    'Geocode' => 'Géocode',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Ta',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'CA',
         'PurchasedLineItems' => 'LA',
+        'DocumentTemplates' => 'MD',
+        'DocumentMerges' => 'FD',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Tableau des prévisions',
     'ForecastManagerWorksheets' => 'Tableau de gestion des prévisions',
     'Quotas' => 'Objectif',
-    'MergeRecords'=>'Fusion Enregistrements',
     'Teams' => 'Équipe',
     'TeamNotices' => 'Notification aux équipes',
     'Activities' => 'Activité',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Achat',
     'PurchasedLineItems' => 'Ligne d&#39;achats',
     'PushNotifications' => 'Notification Push',
+    'Escalations' => 'Escalade',
+    'DocumentTemplates' => 'Modèle de document',
+    'DocumentMerges' => 'Fusion de documents',
     'WorkFlow' => 'WorkFlow',
     'EAPM' => 'Lien externe',
     'Worksheet' => 'Feuille de travail',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Congé',
     'ChangeTimers' => 'Modifier les minuteries',
     'Messages' => 'Message',
+    'Audit' => 'Auditer',
+    'DocuSignEnvelopes' => 'EnveloppeDocuSign',
+    'HintAccountsets' => 'GroupesdecomptesHint',
+    'HintNotificationTargets' => 'CiblesdenotificationHint',
+    'HintNewsNotifications' => 'Notificationsd&#39;actualitésHint',
+    'HintEnrichFieldConfigs' => 'ConfigurationsdechampsenrichisHint',
+    'Geocode' => 'Géocode',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Services',
     'Other' => 'Autre',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF et CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'En cours',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Base de connaissances',
       'PurchasedLineItems' => 'Ligne d&#39;achats',
       'Purchases' => 'Achat',
+      'Escalations' => 'Escalade',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Compte',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Note',
     'PurchasedLineItems' => 'Ligne d&#39;achats',
     'Purchases' => 'Achat',
+    'Escalations' => 'Escalade',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Commandé',
       'Ship' => 'Livré',
   ),
+    'active_status_dom' => [
+        'Active' => 'Actif',
+        'Inactive' => 'Inactif',
+        'Retired' => 'Mis hors service',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Utiliser les paramètres du système',
+        'light' => 'Clair',
+        'dark' => 'Sombre',
+    ],
 
 
   'pricing_formula_default_key' => 'Fixe',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Télévision',
         'NewsLetter' => 'Newsletter',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,11 +2049,13 @@ $app_list_strings = array (
         'print'       => 'Imprimer',
         'pieWedgeName'      => 'sections',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Graphique en camembert',
+        'donut chart' => 'Graphique en anneau',
+        'treemap chart' => 'Graphique de compartimentage',
         'bar chart' => 'Graphique à barres verticales',
         'group by chart' => 'Graphique groupé à barres verticales',
-        'horizontal bar chart' => 'Diagramme horizontal',
+        'horizontal bar chart' => 'Graphique à barres horizontales',
         'horizontal group by chart' => 'Graphique groupé à barres horizontales',
         'line chart' => 'Graphique courbe',
         'funnel chart' => 'Graphique en entonnoir',
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Prix (total le plus élevé)',
             'total_revenue:asc' => 'Prix (total le plus bas)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Centre des calendriers',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Jour',
+          'week' => 'Semaine',
+          'workWeek' => 'Semaine de travail',
+          'expandedMonth' => 'Mois',
+          'agenda' => 'Agenda',
+          'timeline' => 'Chronologie',
+          'monthSchedule' => 'Planificateur',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Créé',
+          'completed' => 'Terminé',
+          'declined' => 'Décliné',
+          'delivered' => 'Livré',
+          'sent' => 'Envoyé',
+          'signed' => 'Signé',
+          'voided' => 'Annulé',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Par défaut',
+            'color' => 'Couleur',
+            'image' => 'Image',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Nouveau',
+            'In Progress' => 'En cours',
+            'Closed' => 'Fermé',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Inactif',
+            'Lack of Progress' => 'Absence de progrès',
+            'Customer-Imposed Deadline' => 'Délai imposé par le client',
+            'Account at Risk' => 'Compte à risque',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Demandé par le client',
+            'Internally Requested' => 'Demandé en interne',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Ticket',
+            'Bugs' => 'Bug',
+            'Accounts' => 'Compte',
+            'Opportunities' => 'Affaire',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Positif',
+            'Negative' => 'Négatif',
+            'Neutral' => 'Neutre',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Peu susceptible',
+            '02_less_likely' => 'Moins susceptible',
+            '03_neutral' => 'Neutre',
+            '04_more_likely' => 'Plus susceptible',
+            '05_very_likely' => 'Très susceptible',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Ne correspond pas aux clients',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Correspond à des clients',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Lien de suivis',
   'LBL_TOGGLE_VISIBILITY' => 'Changer la visibilité', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activités',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar et le Cube 3-D sont des marques déposées de SugarCRM Inc. '.
         'Tous les autres noms de sociétés et de produits utilisés dans ce produit peuvent être des marques déposées des '.
         'SugarCRM ®, Sugar Enterprise™ et Sugar™ sont des marques de SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Ajouter' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logo société' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Calendrier' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Une valeur de liste déroulante que vous avez sélectionnée a modifié la mise en page de la vue de votre enregistrement. ' .
+        'Les champs masqués dans cette nouvelle mise en page voient leurs valeurs effacées. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'navigation dans le module principal',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Fermer',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} marqué comme {{status}}.',
 
+    'LBL_FOCUS' => 'Mise au point',
+
     'LBL_QUERY_VALID'=>'Valide',
     'LBL_QUERY_ERROR'=>'Erreur !',
     'LBL_QUERY_CHILD'=>'Sous requête valide',
@@ -3066,6 +3183,10 @@ $app_strings = array (
     'LBL_CASES'=>'Tickets',
     'LBL_MESSAGE'=>'Message',
     'LBL_MESSAGES'=>'Messages',
+    'LBL_ESCALATIONS' => 'Escalades',
+    'LBL_ESCALATION' => 'Escalade',
+    'LBL_DOCUSIGN_ENVELOPES' => 'Enveloppes DocuSign',
+    'LBL_DOCUSIGN_ENVELOPE' => 'Enveloppe DocuSign',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Changer le mot de passe',
     'LBL_CHANGE_BUTTON_LABEL' => 'Sélectionner',
@@ -3091,6 +3212,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Non clos :',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Envoyer un Email',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'Email',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Envoyer un Email [Alt+E]',
     'LBL_SEARCH_DROPDOWN_YES'=>'Oui',
     'LBL_SEARCH_DROPDOWN_NO'=>'Non',
@@ -3116,6 +3238,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Documents',
     'LBL_DATE_ENTERED' => 'Date de création :',
     'LBL_DATE_MODIFIED' => 'Date de modification :',
+    'LBL_ACTIVITY_MODIFIED' => 'Modifié',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Modifier l&#39;onglet Aperçu',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Modifier les onglets du module',
     'LBL_EDIT_BUTTON' => 'Éditer',
@@ -3138,6 +3261,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Sélectionner un champ...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Sélectionner un opérateur...',
     'LBL_FILTER_CREATE_NEW' => 'Créer un filtre',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Filtre de construction (non sauvegardé)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(non sauvegardé)',
     'LBL_FILTER_CREATE_FILTER' => 'Créer un nouveau filtre',
     'LBL_FILTER_CLOSE_FILTER' => 'Fermer le filtre',
     'LBL_FILTER_EDIT_FILTER' => 'Modifier le filtre',
@@ -3200,6 +3325,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Afficher plus de {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Activités du jour',
     'LBL_LEADS'=>'Leads',
+    'LBL_LEAD'=>'Lead',
+    'LBL_QUOTES_BILL_TO' => 'Devis (facturé à)',
     'LBL_LESS' => 'moins',
     'LBL_CAMPAIGN' => 'Campagne :',
     'LBL_CAMPAIGNS' => 'Campagnes',
@@ -3227,19 +3354,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Veuillez sélectionner au moins 2 enregistrements pour continuer.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Veuillez sélectionner moins de 10 enregistrements pour continuer.',
     'LBL_LISTVIEW_ALL' => 'Tous',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Figer la colonne 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Tous les doublons',
     'LBL_LISTVIEW_NONE' => 'Désélectionner tout',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Sélectionner la page courante',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Sélectionner tout',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Enregistrements Sélectionnés',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Sélectionné(s) : ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Vider la sélection.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Vider toutes les sélections.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Sélectionner tous les enregistrements',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Il y a plus de {{num}} enregistrements dans le résultat. Vous avez sélectionné seulement les {{num}} premiers enregistrements.',
     'TPL_LISTVIEW_SELECTED' => 'Vous avez sélectionné {{num}} enregistrements dans le jeu de résultats.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Vous avez sélectionné 1 enregistrement dans le jeu de résultats.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Vous avez sélectionné l&#39;ensemble des {{num}} enregistrements du résultat.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Vous avez sélectionné l&#39;ensemble des {{num}} enregistrements de cette vue. {{link}} du résultat.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Mise à jour {{num}} sur {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Mise à jour {{num}} sur {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(environ {{time}} {{unit}} restant(es))',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'La mise à jour a échouée. Essayer à nouveau ({{num}} sur {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Mise à jour incomplète. {{num}} enregistrements sont restés inchangés.',
@@ -3247,7 +3376,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} enregistrement(s) ont été ignorés en raison de permissions ou d&#39;erreurs.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} enregistrements ont été mis à jour avec succès.',
     'TPL_MASSUPDATE_TITLE' => 'Mise à jour globale : {{module}}',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Suppression {{num}} sur {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Suppression {{num}} sur {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(environ {{time}} {{unit}} restant(es))',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'La suppression en masse a échoué. Essayer à nouveau ({{num}} sur {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'La suppression en masse est incomplète. {{num}} enregistrements n&#39;ont pas été supprimé.',
@@ -3272,10 +3401,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Sélectionner et éditer',
     'LBL_LISTVIEW_ACTIONS' => 'Actions',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Sélectionner tous les enregistrements de cette page',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Désélectionner tous les enregistrements de cette page',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} sur {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} de chargements...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Cliquez ici pour obtenir le total',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'sur',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Obtenir le nombre de pages',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Antoine',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Dupont',
@@ -3283,10 +3419,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Code Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'Veuillez vous identifier pour accéder à cette zone.',
     'LBL_LOGOUT' => 'Déconnexion',
+    'LBL_FINISH_IMPERSONATING' => 'Terminer l&#39;usurpation d&#39;identité',
+    'LBL_RESET_MFA' => 'Réinitialiser l&#39;authentification multifacteur',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, vous vous faites passer pour {{user}}.',
     'LBL_PROFILE' => 'Profil',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Publipostage',
     'LBL_MASS_UPDATE' => 'Mise à jour globale',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Sélectionner tous les enregistrements pour la mise à jour globale',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Inclure l&#39;enregistrement dans la mise à jour globale',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Ajouter un champ',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Supprimer ce champ',
     'LBL_GENERATE_QUOTE' => 'Générer un devis',
@@ -3341,6 +3482,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Plus d&#39;Informations',
     'LBL_PANEL_BODY' => 'Informations',
     'LBL_PARENT_TYPE' => 'Type de Parent',
+    'LBL_RELATED_TYPE' => 'Type de relation',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Phase',
     'LBL_PICTURE_FILE' => 'Photo',
@@ -3414,7 +3556,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Rattaché',
     'LBL_RELATED_INFORMATION' => 'Information rattachée',
-    'LBL_RELATED_RECORDS' => 'Enregistrements rattachés',
+    'LBL_RELATED_RECORDS' => 'Relatif au module {{module}}',
     'LBL_REPORTS_TO' => 'Rend compte à',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Indique les champs obligatoires',
@@ -3533,7 +3675,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Tous droits réservés.<br />SugarCRM, Sugar et le Cube 3-D sont des marques déposées de SugarCRM Inc. '.
         'Tous les autres noms de sociétés et de produits utilisés dans ce produit peuvent être des marques déposées des '.
         'sociétés respectives auxquelles ils sont associés.',
@@ -3602,6 +3744,7 @@ Cordialement, SugarCRM',
     'LBL_UNDELETE' => 'Restaurer',
     'LBL_UNSYNC' => 'Désynchroniser',
     'LBL_UPDATE' => 'Enregistrer',
+    'LBL_UPDATES' => 'Mises à jour',
     'LBL_USER_LIST' => 'Liste des Utilisateurs',
     'LBL_USER_MENU' => 'Menu utilisateur',
     'LBL_USERS_SYNC'=>'Synchro utilisateur',
@@ -3668,6 +3811,8 @@ Cordialement, SugarCRM',
     'NTC_DELETE_SUCCESS' => 'Vous avez supprimé {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cette liaison ?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Êtes-vous sur de vouloir détacher l&#39;enregistrement {0} ?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Êtes-vous sur de vouloir détacher l&#39;enregistrement {0} ? Cela les supprimera également du champ Contact principal du ticket.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'L&#39;enregistrement {0} ne peut pas être détaché car car il est le contact principal de ce ticket. Mettez à jour le champ Contact principal avant de détacher cet enregistrement.',
     'NTC_UNLINK_SUCCESS' => 'Vous avez supprimé la relation avec {0}.',
     'NTC_LOGIN_MESSAGE' => 'Merci de vous authentifier.',
     'NTC_NO_ITEMS_DISPLAY' => 'Aucun',
@@ -3699,6 +3844,8 @@ Cordialement, SugarCRM',
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Le rafraîchissement du navigateur fermera automatiquement toutes les sessions d&#39;appel ou de chat SugarLive que vous avez ouvertes et les modifications non sauvegardées seront perdues. Souhaitez-vous continuer ?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Vous n&#39;avez pas sauvegardé vos changements. Êtes-vous sur de vouloir quitter cette page et perdre ainsi vos modifications ?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Êtes-vous sûr de vouloir réinitialiser votre <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">authentification mutlifacteur</a> ? Cette action vous déconnectera immédiatement, et vous devrez vous réauthentifier à l&#39;aide de l&#39;application d&#39;authentification lors de votre prochaine connexion.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Confirmer et se déconnecter',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Un ou plusieurs dashlets ont des changements non sauvegardés. Êtes-vous sûr de vouloir fermer le tiroir ?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Vous allez vous déplacer vers le module de rapports. Vos changements sur le dashlet ne seront pas sauvegardées. Souhaitez-vous continuer ?',
     'ERROR_NO_RECORD' => 'Erreur de récupération de l&#39;enregistrement. Cet enregistrement est peut être supprimé ou vous n&#39;avez pas le droit de le visualiser.',
@@ -3794,6 +3941,11 @@ Cordialement, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Vous n'avez aucun enregistrement <item1> de sauvegardé. <item2> maintenant.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Vous pouvez créer <item1> depuis la liste <item2>. <item3> <item2>.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Positif',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutre',
+    'LBL_SENTIMENT_NEGATIVE' => 'Négatif',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Cliquer ici",
     // contextMenu strings
@@ -3803,11 +3955,16 @@ Cordialement, SugarCRM',
     'LBL_CREATE_NOTE' => 'Créer une Note',
     'LBL_CREATE_OPPORTUNITY' => 'Créer une Affaire',
     'LBL_SCHEDULE_CALL' => 'Planifier un Appel',
+    'LBL_SCHEDULE_CALL2' => 'Appel',
     'LBL_SCHEDULE_MEETING' => 'Planifier une Réunion',
+    'LBL_SCHEDULE_MEETING2' => 'Réunion',
     'LBL_CREATE_MESSAGE' => 'Créer un message',
+    'LBL_CREATE_MESSAGE2' => 'Message',
     'LBL_CREATE_TASK' => 'Créer une Tache',
+    'LBL_CREATE_TASK2' => 'Tâche',
     'LBL_REMOVE_FROM_FAVORITES' => 'Supprimer de mes Favoris',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Note',
     'LBL_DOWNLOAD_ALL' => 'Tout télécharger',
     'LBL_DOWNLOAD_ONE' => 'Télécharger',
     'LBL_ATTACHMENTS' => 'Pièces Jointes',
@@ -3847,13 +4004,14 @@ Cordialement, SugarCRM',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Afficher les lignes',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relatif à l&#39;enregistrement courant',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Champ lié',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Figer la première colonne',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Êtes-vous sûr(e) de vouloir supprimer le Dashlet ?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Êtes-vous sur de vouloir supprimer cette ligne ?',
     'LBL_MAXIMUM_OF' => 'Maximum de ',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' colonnes peuvent etre affichées',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Tableau de bord',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mon tableau de bord',
     'LBL_COLLAPSE_ALL' => 'Tout réduire',
@@ -3870,12 +4028,15 @@ Cordialement, SugarCRM',
     'LBL_DASHLET_CONFIGURE' => 'Configurer',
     'LBL_DASHLET_TOGGLE' => 'Ouvrir/Fermer',
     'LBL_SIDEPANE_TOGGLE' => 'Ouvrir/fermer le panneau latéral',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Rétablir les dashlets par défaut',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Aucun tableau de bord configuré',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Créer un tableau de bord',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Aide',
     'LBL_HELPLET_TOGGLE' => 'Ouvrir/fermer',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Modules',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modifié par moi',
     'LBL_FACET_CREATED_BY_ME' => 'Créé par moi',
@@ -3892,6 +4053,7 @@ Cordialement, SugarCRM',
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Enregistrement',
+    'LBL_RELATED_RECORDS' => '{{module}} associé',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Affiche un enregistrement et, le cas échéant, les enregistrements associés dans des onglets.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Type d&#39;enregistrement de base',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Ce {{moduleSingular}}',
@@ -3941,7 +4103,7 @@ Cordialement, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'Aucun enregistrements trouvé à ce jour.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Indicateurs sur les tickets',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interactions',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Chronologie',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notes et pièces jointes',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notes et pièces jointes appartenant à l&#39;enregistrement',
     'LBL_DASHLET_PIPLINE_NAME' => 'Portefeuille',
@@ -4212,6 +4374,8 @@ Cordialement, SugarCRM',
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Uploader depuis votre ordinateur',
     'LBL_SEARCH_EXTERNAL_API' => 'Fichier dans la source externe',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Charger vers une source externe',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Lier à partir d&#39;une source externe',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Sécurité',
     'LBL_SHARE_PRIVATE' => 'Privée',
     'LBL_SHARE_COMPANY' => 'Société',
@@ -4337,6 +4501,9 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Raccourcis clavier',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Fonctionnement du formulaire - Alt+</strong><br/> I = ed<b>I</b>ter (detailview)<br/> U = d<b>U</b>pliquer (detailview)<br/> D = supprimer(<b>D</b>) (detailview)<br/> A = s<b>A</b>uvegarder (editview)<br/> L = annu<b>L</b>ler (editview) <br/><br/></p><p><strong>Recherche et Navigation - Alt+</strong><br/> 7 = Première zone sur le formulaire Édition<br/> 8 = Lien recherche avancée<br/> 9 = Première zone de recherche<br/> 0 = Recherche globale (dite unifiée)<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Escalader',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Partager',
     'TPL_RECORD_SHARE_SUBJECT' => 'Partager l&#39;enregistrement {{module}} {{name}} depuis {{appId}}',
@@ -4409,7 +4576,7 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Vous allez changer d&#39;enregistrement principal sans sauvegarder les modifications effectuées. Les modifications vont être perdues. Êtes-vous sûr de vouloir continuer ?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Fusionner les enregistrements liés',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Fusionnés: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Fusionnés: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Échec de fusion du module {{objectName}} lié. Nouvelle tentative ({{num}} sur {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4463,14 +4630,14 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_LANGUAGE' => 'Langue',
     'LBL_LOADING_LANGUAGE' => 'Chargement du pack de langue',
     'LBL_UPLOADING' => 'Télécharger',
+    'LBL_UPLOADING_DOTS' => 'Téléchargement...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Êtes-vous sur de vouloir supprimer cette image ?',
     'LBL_FILE_DELETE_CONFIRM' => "Êtes-vous sur de vouloir supprimer cette image ? Cela est irréversible.",
     'LBL_FILE_DELETED' => 'Le fichier a été supprimé avec succès',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Thème du portail',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Configurer le thème du portail',
-    'LBL_THEME_PREVIEW' => 'Prévisualisation du thème',
+    'LBL_THEME_PREVIEW' => 'Aperçu du thème du portail',
     'LBL_LOADING_PREVIEW' => 'Chargement de la prévisualisation',
     'LBL_RESET' => 'Réinitialiser',
     'LBL_COLORS' => 'Couleurs',
@@ -4621,10 +4788,18 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Réunions',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Tâches',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Appels',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Comptes',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contacts',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Emails',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Périodes de travail',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Lignes de devis',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Exceptions de période de travail',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
+    'LBL_ESCALATIONS' => 'Escalades',
+    'LBL_ESCALATED' => 'Escaladé',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Escalades',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Autres escalades apparentées',
+    'LBL_ESCALATIONS' => 'Escalades',
     'LNK_SETTINGS' => 'Paramètres',
     'LBL_MOBILE_SUPPORT' => 'Support',
     'LBL_MOBILE_SHOW_MORE' => 'Afficher plus...',
@@ -4832,6 +5007,55 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Impossible d&#39;obtenir l&#39;heure du serveur',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Impossible d&#39;activer le mode hors connexion. Impossible d&#39;atteindre le serveur.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Apparence',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Utiliser les paramètres du système',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Clair',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Sombre',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Nouveau nom de fichier',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Renommer le fichier',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Créé par moi',
+    'LBL_OPERATOR_CONTAINS' => 'fait partie de',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'ne fait pas partie de',
+    'LBL_OPERATOR_EMPTY' => 'est vide',
+    'LBL_OPERATOR_NOT_EMPTY' => 'n&#39;est pas vide',
+    'LBL_OPERATOR_MATCHES' => 'correspond exactement à',
+    'LBL_OPERATOR_STARTS_WITH' => 'commence par',
+    'LBL_OPERATOR_EQUALS' => 'est égal à',
+    'LBL_OPERATOR_NOT_EQUALS' => 'n&#39;est pas égal à',
+    'LBL_OPERATOR_GREATER_THAN' => 'est supérieur à',
+    'LBL_OPERATOR_LESS_THAN' => 'est inférieur à',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'est supérieur ou égal à',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'est inférieur ou égal à',
+    'LBL_OPERATOR_BETWEEN' => 'est entre',
+    'LBL_OPERATOR_BEFORE' => 'avant',
+    'LBL_OPERATOR_AFTER' => 'après',
+    'LBL_OPERATOR_YESTERDAY' => 'hier',
+    'LBL_OPERATOR_TODAY' => 'aujourd&#39;hui',
+    'LBL_OPERATOR_TOMORROW' => 'demain',
+    'LBL_OPERATOR_LAST_7_DAYS' => '7 derniers jours',
+    'LBL_OPERATOR_NEXT_7_DAYS' => '7 prochains jours',
+    'LBL_OPERATOR_LAST_30_DAYS' => '30 derniers jours',
+    'LBL_OPERATOR_NEXT_30_DAYS' => '30 prochains jours',
+    'LBL_OPERATOR_LAST_MONTH' => 'mois dernier',
+    'LBL_OPERATOR_THIS_MONTH' => 'ce mois-ci',
+    'LBL_OPERATOR_NEXT_MONTH' => 'mois prochain',
+    'LBL_OPERATOR_LAST_YEAR' => 'année Dernière',
+    'LBL_OPERATOR_THIS_YEAR' => 'cette année',
+    'LBL_OPERATOR_NEXT_YEAR' => 'année prochaine',
+    'LBL_OPERATOR_IS' => 'est',
+    'LBL_OPERATOR_IS_NOT' => 'n&#39;est pas',
+    'LBL_ERROR_FILTER_EMPTY' => 'Veuillez ajouter des critères de filtrage.',
+    'LBL_ADD_FILTER' => 'Ajouter un critère',
+    'LBL_FILTER_NAME' => 'Nom de filtre',
+    'LBL_FILTER_FIELD' => 'Champ',
+    'LBL_FILTER_OPERATOR' => 'Opérateur',
+    'LBL_FILTER_VALUE' => 'Valeur',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Enregistrer sur l&#39;application de bureau',
+    'LBL_FILTER_LOCAL' => 'Filtre local',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Bienvenue sur {{{brandName}}}.<br/><br/> Permettez-nous de présenter quelques fonctionnalités...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Menu de navigation principal.',
@@ -4877,6 +5101,7 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_COMMENT_ADD' => 'Ajouter un commentaire',
     'LBL_REQUIRED' => 'Obligatoire',
     'LBL_MORE_BUTTON' => 'Plus',
+    'LBL_NO_OPTIONS' => 'Aucune option disponible',
     'LBL_TRY_AGAIN' => 'Essayer de nouveau',
     'LBL_NEW_RECORDS' => 'Créations récentes',
     'LBL_ASSIGNED_TO_ME' => 'Mon {{{module}}}',
@@ -5102,11 +5327,15 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Êtes-vous sur de vouloir fermer ce chat ?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Créer une note ou ajouter une pièce jointe',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Ajouter une note',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Votre connexion n&#39;a pas réussi. Veuillez réessayer.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Identifiants invalides.',
-    'LBL_PORTAL_INVALID_GRANT' => 'Votre token est invalide ou il a expiré. Veuillez essayer de nouveau.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Le token a expiré',
+    'LBL_PORTAL_INVALID_GRANT' => 'Votre session a expiré. Veuillez vous reconnecter.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Session expirée',
     'LBL_PORTAL_AUTH_FAILED' => 'L&#39;authentification client a échoué.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Client invalide',
     'LBL_PORTAL_INVALID_REQUEST' => 'La requête effectuée est invalide ou mal-formée. Veuillez contacter le support technique.',
@@ -5140,6 +5369,8 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Rétablir tableau de bord par défaut',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Console de renouvellement',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Aperçu',
@@ -5159,6 +5390,7 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Résumé du message',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Résumé de l&#39;appel',
     'LBL_OMNICHANNEL_LINK_TO' => 'Lier {{fromModule}} à {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Lier à {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Lié',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Votre navigateur n&#39;est pas pris en charge par le chat. Veuillez utiliser Google Chrome ou Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Veuillez contacter votre administrateur Sugar pour obtenir de l&#39;aide.',
@@ -5166,6 +5398,8 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Veuillez terminer la configuration de SugarLive avant de passer un appel sortant.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Veuillez terminer la configuration de la mise en page de SugarLive avant d&#39;ouvrir SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Passez en mode "Déconnecté" dans SugarLive avant de configurer la mise en page de SugarLive.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Affichage compact',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Plein écran',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Restaurer l&#39;onglet par défaut',
@@ -5578,9 +5812,12 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_BEST' => 'Meilleur',
     'LBL_WORST' => 'Pire',
     'LBL_LIKELY' => 'Réaliste',
-    'LBL_BEST_ADJUSTED' => 'Meilleur (Ajusté)',
-    'LBL_WORST_ADJUSTED' => 'Pire (ajusté)',
-    'LBL_LIKELY_ADJUSTED' => 'Probable (ajusté)',
+    'LBL_BEST_FORECAST' => 'Soumission (meilleure)',
+    'LBL_WORST_FORECAST' => 'Soumission (pire)',
+    'LBL_LIKELY_FORECAST' => 'Soumission (réaliste)',
+    'LBL_BEST_ADJUSTED' => 'Soumission ajustée (meilleure)',
+    'LBL_WORST_ADJUSTED' => 'Soumission ajustée (pire)',
+    'LBL_LIKELY_ADJUSTED' => 'Soumission ajustée (réaliste)',
     'LBL_AMOUNT_USDOLLAR' => 'Montant',
     'LBL_OVERDUE' => 'Échue',
 
@@ -5601,6 +5838,8 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Pour plus d&#39;information, veuillez vous référer à la documentation du {{{more_info_url}}} module {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Aucune donnée disponible',
+    'LBL_NEED_HELP' => 'Vous avez besoin d&#39;aide avec quelque chose de nouveau ?',
+    'LBL_NEW_CASE' => 'Nouveau Ticket',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Le dashlet d&#39;aide fournit des informations spécifiques et pertinentes pour le module qui est en train d&#39;être utilisé et fournit des liens vers la documentation éditeur correspondante.',
@@ -5747,9 +5986,19 @@ Pour créer un nouvel enregistrement en utilisant les valeurs que vous venez d&#
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Aucune réponse',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Planification impossible',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Affichages disponibles',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Planificateur de calendrier',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Vue par défaut',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Mes calendriers',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Calendriers de l&#39;utilisateur et de l&#39;équipe',
+    'LBL_CALENDAR' => 'Calendrier',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Une erreur est survenu lors de la récupération des disponibilités.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Sauvegarder et envoyer les invitations',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Accepter le statut',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Processus',
@@ -5866,15 +6115,21 @@ Pour créer un nouvel enregistrement en utilisant les valeurs que vous venez d&#
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Copier le lien de confirmation',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interactions',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Interactions',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie',
+    'LBL_NO_ACTIVITY' => 'Aucune activité',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Plus',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Moins',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'La chronologie affiche les appels, les emails, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Afficher plus...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Afficher moins...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Aucune donnée disponible',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Module sans licence.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Abonnements actifs',
@@ -5923,8 +6178,10 @@ Pour créer un nouvel enregistrement en utilisant les valeurs que vous venez d&#
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Tiroir de rangement Clôture',
     'LBL_EXTERNAL_GUESTS' => 'Invités extérieurs',
     'LBL_MY_FAVORITE_TASKS' => 'Mes tâches favorites',
+
     'LBL_MY_TASKS' => 'Mes Tâches',
 
     // Sugar Integrate
@@ -5941,7 +6198,368 @@ Pour créer un nouvel enregistrement en utilisant les valeurs que vous venez d&#
     'LBL_TIME_AWARE_TYPE' => 'Type',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean (ID)',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Afficher le libellé',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Ouvrir l&#39;affichage de l&#39;enregistrement',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Ajouter',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Aucune aide n&#39;est disponible',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Fonctions',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Champs',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Sélectionner un champ...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Consolider',
+    'LBL_ACTIONBUTTON_RELATED' => 'Lié à',
+    'LBL_ACTIONBUTTON_SAVE' => 'Sauvegarder',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Annuler',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Module lié',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Champs relatifs',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Module cumulatif',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Champs cumulatifs',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Fonction cumulative',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Max',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Moyenne',
+    'LBL_ACTIONBUTTON_SUM' => 'Somme',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Attribuer un enregistrement',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Rédiger un email',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Créer un enregistrement',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Fusion de documents',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Ouvrir l&#39;url',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Lancer l&#39;enregistrement',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Mettre à jour l&#39;enregistrement',
+    'LBL_ACTIONBUTTON_ACTION' => 'Action',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Assigné à',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Destinataire',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Utiliser PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Modèle',
+    'LBL_ACTIONBUTTON_MODULE' => 'Module',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Paramètres d&#39;affichage',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Type',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Liste déroulante',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Bouton',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Groupe de boutons',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Afficher l&#39;étiquette sur l&#39;enregistrement',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Affichage dans l&#39;en-tête',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Masquer lors de l&#39;édition',
+    'LBL_ACTIONBUTTON_SIZE' => 'Taille',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Par défaut',
+    'LBL_ACTIONBUTTON_SMALL' => 'Petite',
+    'LBL_ACTIONBUTTON_LARGE' => 'Large',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Calculé',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Convertir au format PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Fusion de documents',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Aperçu',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Propriétés',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Libellé',
+    'LBL_ACTIONBUTTON_DESC' => 'Info-bulle',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Afficher le libellé',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Afficher l&#39;icône',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Modèle de couleurs',
+    'LBL_ACTIONBUTTON_ICON' => 'Icône',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Dépendant',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Configuration de la mise en page',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Arrêter sur erreur',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Sauvegarde automatique',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Configuration',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Veuillez configurer votre Bouton Action avant de sauvegarder.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Boutons de configuration',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Création automatique',
+    'LBL_ACTIONBUTTON_LINK' => 'Lier',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Copier les valeurs parentes',
+    'LBL_ACTIONBUTTON_PRESET' => 'Prédéfinir',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Prédéfini à partir du parent',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Sélectionner...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'À parti du champ parent ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Êtes-vous sûr de vouloir supprimer ce bouton ?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Êtes-vous sûr de vouloir supprimer cette action ?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Données du bouton d&#39;action non valides',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Veuillez sélectionner un module avant de sauvegarder.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Veuillez sélectionner un lien avant de sauvegarder. Si aucun lien n&#39;est disponible, veuillez décocher l&#39;option de lien.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Veuillez sélectionner un enregistrement avant de sauvegarder.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Veuillez sélectionner un modèle avant de sauvegarder.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Principal',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Secondaire',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'Haute visibilité',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Océan',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Rose',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Armée',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Bleu sarcelle',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Pacific',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Vert',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Jaune',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Orange',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Rouge',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Corail',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Violet',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Formule',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Actions',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Erreur de validation des données du bouton.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Les boutons doivent avoir au moins une étiquette ou un jeu d&#39;icônes.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Veuillez saisir une étiquette de bouton valide.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'L&#39;enregistrement n&#39;a pas pu être créé en raison de valeurs obligatoires manquantes. Veuillez contacter votre administrateur.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Vous devez avoir au moins deux boutons actifs pour ce type de bouton.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Enregistrements',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Menus des actions',
+    'LBL_ACTIONBUTTON_ORDER' => 'Ordre',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Vue Liste',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Enregistrement',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Dashlet de vue d&#39;enregistrement',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Sous-panels',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Le moteur d&#39;exécution de la séquence de tâches n&#39;a pas réussi à exécuter les actions suivantes : ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Ajouter une action',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Supprimer cette action',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Fusion de documents',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Fusionner des documents au format PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Taille de la Société',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Activité',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Balises d&#39;activité',
+    'LBL_HINT_COMPANY_LOCATION' => 'Emplacement de société',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Description de la société',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Année de création',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Facebook de la société',
+    'LBL_HINT_COMPANY_TWITTER' => 'Twitter de la société',
+    'LBL_HINT_COMPANY_PIC' => 'Logo de la société',
+    'LBL_HINT_CONTACT_PIC' => 'Photo du contact',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Site Web de la société',
+    'LBL_HINT_PHOTO' => 'Lien de la photo',
+    'LBL_HINT_JOB_2' => 'Emplois précédents',
+    'LBL_HINT_EDUCATION' => 'Éducation',
+    'LBL_HINT_EDUCATION_2' => 'Éducation supplémentaire',
+    'LBL_HINT_TWITTER' => 'Lien Twitter',
+    'LBL_HINT_FACEBOOK' => 'Lien Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'Code NAICS',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'Code SIC',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Fin de l&#39;exercice financier',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'CA',
+    'LBL_HINT_PHONE_1' => 'Téléphone 1',
+    'LBL_HINT_PHONE_2' => 'Téléphone 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Joindre la table',
+    'LBL_HINT_FULL_NAME' => 'Nom complet',
+    'LBL_HINT_JOB_TITLE' => 'Fonction',
+    'LBL_HINT_OFFICE_PHONE' => 'Téléphone professionnel',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobile',
+    'LBL_HINT_OTHER_PHONE' => 'Téléphone autre',
+    'LBL_HINT_WEBSITE' => 'Site Web',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Voulez-vous écraser toutes les données existantes pour cet enregistrement avec les nouvelles données trouvées dans Hint ?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Voulez-vous remplacer le {{fieldName}} existant pour cet enregistrement par le nouveau {{fieldName}} trouvé dans Hint ?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Toutes les données relatives au compte seront supprimées. Êtes-vous sûr de vouloir continuer ?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logo',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Photo',
+    'LBL_HINT_ACCOUNTSETS' => 'Balises de groupes de comptes Hint',
+
+    'LBL_HINT_LOADING' => 'Chargement ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Désinstallation de Hint, veuillez patienter',
+    'LBL_HINT_VALUE_ERASED' => ' Valeur effacée ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Ces informations ont été effacées par une demande de confidentialité de données',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Veuillez choisir l&#39;une des options de désinstallation ci-dessous :',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Désinstaller uniquement le paquet Hint',
+    'LBL_HINT_UNINSTALL_FULL' => 'Désinstaller complètement Hint',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Cette option supprimera le MLP de Hint et désactivera tous les abonnements actifs à Hint Insights.
+    La réinstallation de Hint réactivera automatiquement les abonnements.
+',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Cette option effectuera une désinstallation complète de Hint, y compris la suppression du MLP et de toutes les informations de configuration et d&#39;abonnement.',
+    'LBL_HINT_UNINSTALL' => 'Désinstaller',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Désintaller Hint',
+    'LBL_HINT_CANCEL' => 'Annuler',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'AVERTISSEMENT : Choisissez cette option uniquement si vous n&#39;avez pas l&#39;intention d&#39;utiliser à nouveau Hint dans le futur.
+    Avant de procéder à la désinstallation, effectuez une sauvegarde complète de votre base de données Sugar et mettez Sugar en mode maintenance. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Consultez le ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Guide d&#39;administration de Hint ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'pour obtenir des détails sur le processus de désinstallation.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Êtes-vous sûr de vouloir désinstaller uniquement le paquet Hint ?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Êtes-vous sûr de vouloir désinstaller complètement Hint ?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(REMARQUE : CETTE ACTION EST IRRÉVERSIBLE).',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Champs Hint',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Aucun résultat n&#39;a été trouvé.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Disposition de base du panneau Hint',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Comptes',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Contacts',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Leads',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Disposition élargie du panneau Hint',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Réorganisez les champs en les faisant glisser et en les déposant dans les sections de mise en page du panneau Hint ci-dessus.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Pour des instructions détaillées et une liste des champs par défaut, consultez la ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' pour restaurer les paramètres par défaut du ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'module.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Êtes-vous sûr de vouloir rétablir les valeurs par défaut du module {{module}} ?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Cliquer ici',
+    'LBL_HINT_CONFIG_NAME' => 'Guide d&#39;administration de Hint.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Champs',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Champs enrichis',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Cette section répertorie tous les champs Hint et les champs Sugar qui sont enrichis par Hint. Les champs Hint sont marqués d&#39;un astérisque (*) et ne peuvent être affichés dans le panneau Hint que s&#39;ils sont enrichis.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Nom du champ',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Champ enrichi',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Afficher dans Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Afficher dans le panneau Hint',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Champs Sugar supplémentaires',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Cette section énumère tous les champs Sugar qui ne sont pas enrichis par Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Attention',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Attention : Vous êtes sur le point de vous synchroniser avec le service Hint Insights. Toutes les histoires en attente d&#39;e-mail seront perdues, et les nouvelles existantes seront effacées du dashlet Insights. Les notifications de tous types reprendront dès que la synchronisation sera terminée.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Les entreprises suggérées en rapport avec votre {{_moduleSingular}} sont listées ci-dessous. Sélectionnez les données de l&#39;entreprise à afficher.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Aucun compte n&#39;est sélectionné',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Plusieurs e-mails ont été trouvés, sélectionnez ceux que vous souhaitez importer : ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Sur la base des données saisies, Hint n&#39;a pas pu trouver de correspondance dans le système.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Pour obtenir les meilleurs résultats dans Hint, il convient d&#39;indiquer le nom et l&#39;adresse e-mail d&#39;une personne.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Pour obtenir les meilleurs résultats dans Hint, il convient d&#39;utiliser l&#39;url du site Web de l&#39;entreprise.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Saisissez le nom de la société ou le site Web de votre {{_moduleSingular}} et Hint recherchera des données supplémentaires.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Saisissez l'adresse e-mail de votre {{currentModule}} et Hint recherchera des données supplémentaires.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Aucune donnée disponible pour la vue de l&#39;historique',
+    'LBL_HINT_HISTORY_TITLE' => 'Historique des activités',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Enrichissement des données',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'La licence de votre service SugarCRM Hint a expiré. Contactez votre administrateur SugarCRM pour renouveler votre licence.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Vous voulez voir ce que SugarCRM Hint peut faire pour vous et votre entreprise ? Contactez votre administrateur SugarCRM pour ajouter Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Informations sur le compte introuvables',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Données enrichies trouvées - cliquez pour enregistrer toutes les données enrichies dans votre enregistrement.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Cliquez pour enregistrer les données enrichies dans votre enregistrement.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Contacts en relation',
+    'LBL_HINT_CONTACTS_NONE' => 'Aucun contact en relation',
+
+    'LBL_HINT_NEWS' => 'Actualités',
+    'LBL_HINT_GENERAL' => 'Générales',
+    'LBL_HINT_ALL_NEWS' => 'Toutes les actualités',
+    'LBL_HINT_FILTER_NEWS' => 'Filtrer les actualités',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Financières',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personnel',
+    'LBL_HINT_PRESS_RELEASES' => 'Communiqués de presse',
+    'LBL_HINT_OTHER_NEWS' => 'Autre',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Rechercher des articles d&#39;actualité',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Aucune actualité disponible',
+    'LBL_NEW_NOTIFICATIONS' => 'Nouvelles Notifications',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Vous devez disposer d&#39;une licence Hint pour afficher le dashlet Hint Insights.
+    Demandez à votre administrateur comment obtenir une licence Hint.',
+
+    'LBL_HINT_FOR' => 'Pour',
+    'LBL_HINT_WITH' => 'avec',
+    'LBL_HINT_SHOW_ME' => 'Me montrer : ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Me notifier par : ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Centre des préférences Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Touche d&#39;option de préférences',
+    'LBL_HINT_PREFERENCES' => 'Préférences',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Supprimez "désactivé", au moins une déclaration de préférence est nécessaire',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Ajoutez "désactivé", vous avez atteint le maximum de déclarations de préférence',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Inclure dans le dashlet Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Pop-up comme notification de bureau',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Les notifications doivent être activées sur tous les navigateurs et sur tous les ordinateurs de bureau pour recevoir systématiquement les notifications.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Certains navigateurs, comme Internet Explorer, ne prennent pas en charge les notifications. Les notifications ne peuvent pas être activées lorsque vous utilisez un navigateur qui ne prend pas en charge les notifications.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Envoyer une alerte par e-mail pour chaque notification',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Envoyer un résumé quotidien par e-mail',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Envoyer un résumé hebdomadaire par e-mail',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Les préférences n&#39;ont pas pu être enregistrées. Vérifiez la connexion de votre système et réessayez.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Il manque une valeur dans certains champs obligatoires. Veuillez vérifier vos préférences et vous assurer que tous les champs obligatoires sont remplis.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Vous êtes sur le point d&#39;activer les notifications du navigateur pour Hint Insights. Cliquez sur Confirmer pour continuer. Votre navigateur vous demandera alors la permission d&#39;autoriser la réception d&#39;événements de notification.',
+    'LBL_HINT_PUSH_ERROR' => 'Le plugin de notifications push a été enregistré pour {{options.type}} sans ses dépendances. Le plugin ne fonctionnera pas comme prévu. Veillez à fournir un chemin d&#39;accès au fichier worker et une méthode pour enregistrer l&#39;abonnement sur le serveur.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Activer les notifications Hint pour tous les utilisateurs',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Désactiver les notifications Hint pour tous les utilisateurs',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'AVERTISSEMENT : échec de la désactivation des notifications lors de la désinstallation de Sugar Hint. Pour désactiver les notifications, installez Hint 5.4.0 ou une version plus récente et effectuez une désinstallation complète à l&#39;aide du désinstalleur de Hint qui se trouve dans la section Administration de Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Configuration de Maps',
+    'LBL_MAP_MAP' => 'Carte',
+    'LBL_MAP_MAPS' => 'Maps',
+    'LBL_MAP_GEOCODING_RECORD' => 'Géocode',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'L&#39;enregistrement a été géocodé avec succès.',
+    'LBL_MAP_LATITUDE' => 'Latitude',
+    'LBL_MAP_LONGITUDE' => 'Longitude',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Recherche par adresse...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'L&#39;enregistrement actuel est déjà géocodé. Êtes-vous sûr de vouloir écraser le géocodage de cet enregistrement ?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Géocodage manuel',
+    'LBL_MAP_POINT_COORDINATES' => 'Coordonnées des points de la carte',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Calcul de l&#39;itinéraire optimal...',
+    'LBL_MAP_DIRECTIONS' => 'Itinéraire',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Itinéraire à partir de l&#39;utilisateur actuel',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Itinéraire à partir de cet enregistrement',
+    'LBL_MAPS_RADIUS_INPUT' => 'Rayon (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'dans un rayon du code postal',
+    'LBL_MAPS_DISTANCE' => 'Distance',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Code postal',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Configuration non valide : ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => 'Les correspondances de champs de <strong>{{module}}</strong> ne sont pas valides.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Type de carte',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Niveau de zoom',
+    'LBL_MAPS_DASHLET' => 'Maps',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Affiche le(s) enregistrement(s) géocodé(s) sur la carte.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Maps n&#39;est pas disponible pour ce module. Veuillez l&#39;activer dans la console d&#39;administration.',
+    'LBL_MAP_MODULES' => 'Module',
+    'LBL_MAP_FILTER_BY' => 'Filtrer par',
+    'LBL_MAP_UNIT_TYPE' => 'Type d&#39;unité',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Miles',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilomètres',
+    'LBL_MAP_ADDRESS' => 'Adresse',
+    'LBL_MAP_NO_STARTING_POINT' => 'Le point de départ n&#39;est pas géocodé.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'L&#39;enregistrement du point de départ n&#39;est pas géocodé.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Certains des enregistrements sélectionnés ne sont pas géocodés et ne seront pas affichés sur la carte.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Le ou les enregistrements ne sont pas géocodés.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Champs du module',
+    'LBL_MAPS_SELECT_FIELD' => 'Sélectionner un champ',
+    'LBL_MAPS_RELATE_RECORD' => 'Enregistrement lié',
+    'LBL_MAPS_MAPPING_TYPE' => 'Type de correspondance',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Aucun enregistrement géocodé',
+    'LBL_MAPS_ADDRESS' => 'Adresse',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Utilisateur assigné',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'La vue latérale de la rue n&#39;est pas disponible pour le point donné',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> enregistrements ne sont pas valides pour la correspondance. Veuillez retirer le module de la liste.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Fermer',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Étendre',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Sauvegarder en PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'Lien e-mail',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Vous devez avoir au moins un enregistrement géocodé.',
+    'LBL_MAPS_GENERATING' => 'Génération de la carte...',
+    'LBL_MAPS_POINTS' => 'Points de la carte',
+    'LBL_MAPS_POINT' => 'Point',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Détails du voyage',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Distance totale',
+    'LBL_MAPS_TOTAL_DURATION' => 'Durée totale',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Durée totale sans circulation',
+    'LBL_MAPS_ITINERARY' => 'Itiniraire',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Distance du trajet',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Durée du trajet',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Étapes',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Avertissements',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps prend en charge un maximum de 10 points sur une carte partagée. Veuillez revoir votre sélection.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Licence Maps nécessaire',
+
+    'LBL_INVALID_FORMULA' => 'Formule invalide',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Le type de retour de la fonction ne correspond pas',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Prédiction',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Profil du client idéal',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Dernière région',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Envoyer à DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Ouvert',
+    'LBL_CLOSED_WON' => 'Gagné fermé',
+    'LBL_CLOSED_LOST' => 'Perdu fermé',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6778,8 +7396,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google Docs',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Contacts',
@@ -7119,6 +7737,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fichier incorporé';
     'YER' => 'Rials',
     'ZWD' => 'Dollars du Zimbabwe',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Très élevé',
+        '4' => 'Élevé',
+        '3' => 'Neutre',
+        '2' => 'Faible',
+        '1' => 'Très faible',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Aucun',
         'future' => 'Valeur actuelle',
@@ -7128,3 +7754,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fichier incorporé';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Une seule fois',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'En cours...',
+        'error' => 'Erreur',
+        'success' => 'Terminé',
+        'canceled' => 'Annulé',
+        'document_load' => 'Chargement du template',
+        'tags_extract' => 'Extraction des balises',
+        'tags_validate' => 'Validation des balises',
+        'data_retrieving' => 'Récupération des données',
+        'serialize_document' => 'Remise en forme du document',
+        'send_document' => 'Envoi du document à vous',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Fusionner',
+        'convert' => 'Fusion eu format PDF',
+        'multimerge' => 'Multimerge',
+        'multimerge_convert' => 'Multimerge au format PDF',
+        'labelsgenerate' => 'Générer des étiquettes',
+        'labelsgenerate_convert' => 'Générer des étiquettes au format PDF',
+        'excel' => 'Fusion Excel',
+        'excel_convert' => 'Conversion de la fusion Excel',
+        'presentation' => 'Fusion PowerPoint',
+        'presentation_convert' => 'Fusion PowerPoint au format PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Mes Comptes',
+      'favorites' => 'Comptes favoris',
+      'tags' => 'Comptes marqués',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Toutes les actualités',
+      'General' => 'Générales',
+      'Finance' => 'Financières',
+      'People' => 'Personnel',
+      'Press Releases' => 'Communiqués de presse',
+      'Other' => 'Autre',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Propriétaires';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Lecteur Cloud';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Dashlet d&#39;intégration du lecteur Cloud';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Copier le lien';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Télécharger';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Créer un Document Sugar';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Synchroniser avec Google Drive';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Synchroniser tout avec Google Drive';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Impossible de télécharger ce fichier';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Le dashlet du Cloud n&#39;est pas présent';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Document Sugar créé';
+
+    $app_string['LBL_MY_FILES'] = 'Mes fichiers';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Partagé avec moi';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Fournisseur de services en nuage';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Partagé avec moi';
+    $app_strings['LBL_MY_FILES'] = 'Mes fichiers';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Charger le fichier';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Dossier introuvable';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Créer un dossier';
+    $app_strings['LBL_LOAD_MORE'] = 'Charger plus...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Connexion avec Google introuvable...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Connexion avec Microsoft introuvable...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-vide-',
+      'Exact' => 'Exactement',
+      'Null_address_components' => 'Un ou plusieurs composants d&#39;adresse vides',
+      'Invalid_address' => 'Adresse non valide, le serveur a renvoyé Faux',
+      'Invalid_server_response_not_XML' => 'Réponse du serveur non valide, pas XML',
+      'Invalid_address_no_location' => 'Adresse non valide, le serveur n&#39;a pas renvoyé d&#39;emplacement',
+      'Ambiguous_address' => 'Adresse ambiguë, correspondances multiples',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Rue',
+      'a' => 'Aérienne',
+      'be' => 'D&#39;en haut',
+      'rd' => 'Rue sombre',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

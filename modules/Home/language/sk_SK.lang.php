@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar dashlet pridaný',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashlety budú znova usporiadané. Naozaj chcete zmeniť rozloženie stĺpcov?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Naozaj chcete odstrániť tento Sugar dashlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nie je nakonfigurovaný žiadny informačný panel',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Nie sú nakonfigurované žiadne dashlety',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Vytvoriť informačný panel',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Webová stránka',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Webová stránka',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Zdrojový kód',
   'LBL_SOURCE_SUGAR' => 'Sugar – svetovo najznámejší automatizovaný systém predaja od spoločnosti SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate – Nástroj na šablóna pre PHP vytvorený Barnabášom Debrecénim',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP – Súbor tried PHP umožňujúci vývojárom vytvárať a využívať webové služby vytvorené spoločnosťou NuSphere Corporation a Dietrichom Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – Kalendár na vkladanie údajov, ktorý vytvoril Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – Knižnica na vytváranie PDF dokumentov, ktorú vytvoril Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server – Implementácia WebDAV servera v PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Pomocník zobrazuje špecifické informácie o module, ktorý prezeráte, poskytuje podrobné kroky na vykonanie niektorých akcií v module a poskytuje informácie o tom, kde možno získať podrobnejšie informácie a podporu.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filter',
+
+    'LBL_ABOUT_VERSION' => 'Používate verziu {{version}} s nasledujúcimi licenciami:',
 );

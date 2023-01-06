@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Налаштування комерційних пропозицій',
 
     'LBL_RENEWAL' => 'Поновлення',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаємодія з комерційною пропозицією',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала комерційної пропозиції',
 );

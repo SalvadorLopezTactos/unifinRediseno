@@ -43,6 +43,11 @@ class ParserDropDown extends ModuleBuilderParser
 
         $dropdown = $this->formatDropdown($params['list_value']);
 
+        if (!empty($params['sales_stage_classification'])) {
+            $updatedSalesStages = $this->updateSalesStageClassifications($params['sales_stage_classification']);
+            $this->saveUpdatedSalesStageClassifications($updatedSalesStages);
+        }
+
         if ($type != 'studio') {
             $mb = new ModuleBuilder();
             $module = $mb->getPackageModule($params['view_package'], $params['view_module']);
@@ -86,10 +91,10 @@ class ParserDropDown extends ModuleBuilderParser
                 if (!empty($app_list_strings[$dropdown_name])) {
                     $contents = "<?php\n //created: " . date('Y-m-d H:i:s') . "\n";
                     foreach($app_list_strings[$dropdown_name] as $key => $value) {
-                        $edropdownName = var_export($dropdown_name, 1);
-                        $ekey = var_export($key, 1);
+                        $edropdownName = var_export($dropdown_name, true);
+                        $ekey = var_export($key, true);
                         $contents .= "\n\$app_list_strings[$edropdownName][$ekey]="
-                            . var_export($value, 1) . ";";
+                            . var_export($value, true) . ";";
                     }
                     $this->saveContents($dropdown_name, $contents, $selected_lang);
                 }
@@ -125,17 +130,7 @@ class ParserDropDown extends ModuleBuilderParser
             $listValue
         );
 
-        //Bug 21362 ENT_QUOTES- convert single quotes to escaped single quotes.
-        $temp = json_decode(html_entity_decode(rawurldecode($listValue), ENT_QUOTES));
-        $dropdown = [];
-        // dropdown is received as an array of (name,value) pairs - now extract to name=>value format preserving order
-        // we rely here on PHP to preserve the order of the received name=>value pairs - associative arrays in PHP are ordered
-        if (is_array($temp)) {
-            foreach ($temp as $item) {
-                $key = SugarCleaner::stripTags(from_html($item[0]), false);
-                $dropdown[$key] = strlen($key) ? SugarCleaner::stripTags(from_html($item[1]), false) : '';
-            }
-        }
+        $dropdown = $this->sanitizeDropdown($listValue);
 
         if (array_key_exists($emptyMarker, $dropdown)) {
             $output = [];
@@ -164,6 +159,10 @@ class ParserDropDown extends ModuleBuilderParser
     {
         $fileName = $this->getExtensionFilePath($dropdownName, $lang);
         if ($fileName) {
+            if (!check_file_name($fileName)) {
+                return false;
+            }
+
             if (file_put_contents($fileName, $contents) !== false) {
                 return true;
             }
@@ -315,8 +314,8 @@ class ParserDropDown extends ModuleBuilderParser
         $contents = str_replace("?>", '', $contents);
         if (empty($contents)) $contents = "<?php";
         $contents = preg_replace($this->getPatternMatch($dropdown_name), "\n\n", $contents);
-        $edropdownName = var_export($dropdown_name, 1);
-        $contents .= "\n\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, 1) . ";";
+        $edropdownName = var_export($dropdown_name, true);
+        $contents .= "\n\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, true) . ";";
         return $contents;
     }
 
@@ -329,9 +328,9 @@ class ParserDropDown extends ModuleBuilderParser
      */
     protected function getExtensionContents($dropdown_name, $dropdown)
     {
-        $edropdownName = var_export($dropdown_name, 1);
+        $edropdownName = var_export($dropdown_name, true);
         $contents = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
-        $contents .= "\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, 1) . ";";
+        $contents .= "\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, true) . ";";
 
         return $contents;
     }
@@ -372,6 +371,68 @@ class ParserDropDown extends ModuleBuilderParser
                         }
                     }
                 }
+            }
+        }
+
+        return $dropdown;
+    }
+
+    /**
+     * Gathers the updated sales stages to be Closed Won/Closed Lost
+     *
+     * @param $salesStages - Dropdown data provided via form to this parser
+     *
+     */
+    public function updateSalesStageClassifications($salesStages)
+    {
+        $dropdown = $this->sanitizeDropdown($salesStages);
+        $forecastSettings = Forecast::getSettings();
+        $closedWonValue = translate('LBL_CLOSED_WON');
+        $closedLostValue = translate('LBL_CLOSED_LOST');
+        $newClosedWonSalesStages = [];
+        $newClosedLostSalesStages = [];
+
+        // Iterate through each sales stage, [0] being stage, [1] being classification
+        // ex.
+        foreach ($dropdown as $key => $value) {
+            if ($value === $dropdown[$closedWonValue]) {
+                array_push($newClosedWonSalesStages, $key);
+            }
+
+            if ($value === $dropdown[$closedLostValue]) {
+                array_push($newClosedLostSalesStages, $key);
+            }
+        }
+
+        return [
+            'new_closed_won_sales_stages' => $newClosedWonSalesStages,
+            'new_closed_lost_sales_stages' => $newClosedLostSalesStages,
+        ];
+    }
+
+    // Saves the Closed Won/Closed Lost sales stage settings
+    private function saveUpdatedSalesStageClassifications($updatedSalesStages)
+    {
+        $newClosedWonSalesStages = $updatedSalesStages['new_closed_won_sales_stages'];
+        $newClosedLostSalesStages = $updatedSalesStages['new_closed_lost_sales_stages'];
+
+        // Persist new sales stages to config table
+        $admin = BeanFactory::newBean('Administration');
+        $admin->saveSetting('Forecasts', 'sales_stage_won', $newClosedWonSalesStages, 'base');
+        $admin->saveSetting('Forecasts', 'sales_stage_lost', $newClosedLostSalesStages, 'base');
+    }
+
+    public function sanitizeDropdown($updatedDropdown)
+    {
+        //Bug 21362 ENT_QUOTES- convert single quotes to escaped single quotes.
+        $temp = json_decode(html_entity_decode(rawurldecode($updatedDropdown), ENT_QUOTES));
+        $dropdown = [];
+        // dropdown is received as an array of (name,value) pairs - now extract to name=>value format preserving order
+        // we rely here on PHP to preserve the order of the received name=>value pairs - associative arrays in PHP are ordered
+        if (is_array($temp)) {
+            foreach ($temp as $item) {
+                $key = SugarCleaner::stripTags(from_html($item[0]), false);
+                $dropdown[$key] = strlen($key) ? SugarCleaner::stripTags(from_html($item[1]), false) : '';
             }
         }
 

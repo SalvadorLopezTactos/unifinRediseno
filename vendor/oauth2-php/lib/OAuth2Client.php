@@ -164,7 +164,7 @@ abstract class OAuth2Client {
 		
 		// Try loading session from $_REQUEST.
 		if (!$session && isset($_REQUEST['session'])) {
-			$session = json_decode(get_magic_quotes_gpc() ? stripslashes($_REQUEST['session']) : $_REQUEST['session'], TRUE);
+			$session = json_decode($_REQUEST['session'], TRUE);
 		}
 		
 		return $session;
@@ -301,7 +301,7 @@ abstract class OAuth2Client {
 				$cookie_name = $this->getSessionCookieName();
 				if (isset($_COOKIE[$cookie_name])) {
 					$session = array();
-					parse_str(trim(get_magic_quotes_gpc() ? stripslashes($_COOKIE[$cookie_name]) : $_COOKIE[$cookie_name], '"'), $session);
+					parse_str(trim($_COOKIE[$cookie_name], '"'), $session);
 					$session = $this->validateSessionObject($session);
 					// Write only if we need to delete a invalid session cookie.
 					$write_cookie = empty($session);

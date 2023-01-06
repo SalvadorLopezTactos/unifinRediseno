@@ -201,19 +201,25 @@ class DataSet extends SugarBean {
 	}
 
 
-	function get_report_name(){
-        $query = "SELECT $this->report_table.id, $this->report_table.name from $this->table_name" .
-            " LEFT JOIN $this->report_table ON $this->report_table.id = " . $this->db->quoted($this->report_id) .
-            " WHERE $this->table_name.deleted=0 AND $this->report_table.deleted=0";
-		$result = $this->db->query($query,true," Error filling in report name information: ");
+    public function get_report_name()
+    {
+        $connection = $this->db->getConnection();
+        $tableName = $this->db->getValidDBName($this->table_name, false, 'table');
+        $reportTableName = $this->db->getValidDBName($this->report_table, false, 'table');
+        $sql = <<<SQL
+SELECT {$reportTableName}.id, {$reportTableName}.name FROM {$tableName}
+LEFT JOIN {$reportTableName} ON {$reportTableName}.id = ?
+WHERE {$tableName}.deleted=0 AND {$reportTableName}.deleted=0
+SQL;
+
+        $result = $connection->executeQuery($sql, [$this->report_id]);
 
 		// Get the id and the name.
-		$row = $this->db->fetchByAssoc($result);
+        $row = $result->fetchAssociative();
 
-		if($row != null)
-		{
-			$this->report_name = $row['name'];
-			$this->report_id = $row['id'];
+        if (false !== $row) {
+            $this->report_name = $row['name'];
+            $this->report_id = $row['id'];
 		}
 		else
 		{
@@ -494,11 +500,11 @@ class DataSet extends SugarBean {
 				}
 			//end foreach loop
 			}
-
+            $content = "\xEF\xBB\xBF"; // utf-8 BOM
 			$header = implode("\",\"",array_values($fields_array));
 			$header = "\"" .$header;
 			$header .= "\"\r\n";
-			$content = $header;
+            $content .= $header;
 
 			$column_list = implode(",",array_values($fields_array));
 
@@ -517,7 +523,6 @@ class DataSet extends SugarBean {
 				$content .= $line;
 			//end while statement
 			}
-
 			return $content;
 
 

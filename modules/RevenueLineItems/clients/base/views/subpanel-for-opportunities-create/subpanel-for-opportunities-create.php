@@ -15,13 +15,13 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
             array(
                 'type' => 'rowaction',
                 'css_class' => 'btn deleteBtn',
-                'icon' => 'fa-minus',
+                'icon' => 'sicon-minus',
                 'event' => 'list:deleterow:fire',
             ),
             array(
                 'type' => 'rowaction',
                 'css_class' => 'btn addBtn',
-                'icon' => 'fa-plus',
+                'icon' => 'sicon-plus',
                 'event' => 'list:addrow:fire',
             ),
         ),
@@ -102,7 +102,12 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                 array(
                     'name' => 'product_template_name',
                     'enabled' => true,
-                    'default' => true
+                    'default' => true,
+                    'related_fields' => [
+                        'lock_duration',
+                        'catalog_service_duration_unit',
+                        'catalog_service_duration_value',
+                    ],
                 ),
                 array(
                     'name' => 'category_name',
@@ -182,6 +187,9 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                     'name' => 'add_on_to_name',
                     'type' => 'add-on-to',
                     'default' => false,
+                    'related_fields' => [
+                        'add_on_to_id',
+                    ],
                 ],
             ),
         ),

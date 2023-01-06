@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID stavke prihoda obnove',
     'LBL_PARENT_RLIS' => 'Nadređene stavke prihoda',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Nadređene stavke prihoda',
+    'LBL_FORECASTED_LIKELY' => 'Predviđeno kao verovatno',
     'LBL_EXPERT_ID' => 'Ekspert za proizvod',
     'LBL_FORECAST' => 'Uključi u Prognozu',
     'LBL_SUBTOTAL' => 'Međuzbir',

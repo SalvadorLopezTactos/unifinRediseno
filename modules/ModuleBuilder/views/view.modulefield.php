@@ -181,7 +181,7 @@ class ViewModulefield extends SugarView
             $this->fv->ss->assign('allowAutoInc', $allowAutoInc);
 
             $GLOBALS['log']->warn(
-                'view.modulefield: hidelevel '.$this->fv->ss->get_template_vars('hideLevel')." ".print_r($vardef, true)
+                'view.modulefield: hidelevel '.$this->fv->ss->getTemplateVars('hideLevel')." ".print_r($vardef, true)
             );
             if(!empty($vardef['vname'])){
                 $this->fv->ss->assign(
@@ -319,6 +319,18 @@ class ViewModulefield extends SugarView
             $field_types = array_diff_key($field_types, ['autoincrement' => '']);
         }
 
+        // ActionButtons are not supported on BWC modules, therefore we need to check for that condition and
+        // remove it as an available option if that is the case.
+        // Same for ModuleBuilder, we don't currently support creating ActionButtons from Module Builder on
+        // account that the AB configuration screens are dependend on already deployed metadata, therefore
+        // actions such as update field / create field will run into issues with metadata not being available
+        $isModuleBwc = in_array($moduleName, $GLOBALS['bwcModules']);
+        $isMB = !empty($_REQUEST['view_package']);
+
+        if ($isModuleBwc || $isMB) {
+            $field_types = array_diff_key($field_types, ['actionbutton' => '']);
+        }
+
         ksort($field_types);
         $this->fv->ss->assign('field_types', $field_types);
 
@@ -332,6 +344,11 @@ class ViewModulefield extends SugarView
             $this->fv->ss->assign('display_type', translate('LBL_RELATIONSHIP_TYPE', 'ModuleBuilder'));
             $this->fv->ss->assign('is_relationship_field', true);
             $this->fv->ss->assign('is_custom_relationship', ViewModulefields::isCustomRelationshipField(
+                $vardef['name'],
+                $moduleName,
+                $module->mbvardefs->vardefs['fields'],
+            ));
+            $this->fv->ss->assign('is_one_to_one_field', ViewModulefields::isOneToOneRelationshipField(
                 $vardef['name'],
                 $moduleName,
                 $module->mbvardefs->vardefs['fields'],

@@ -21,7 +21,7 @@ $viewdefs['Quotes']['base']['view']['panel-top-for-accounts'] = array(
             'buttons' => array(
                 array(
                     'type' => 'sticky-rowaction',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_button',
                     'dismiss_label' => true,
                     'label' => '',

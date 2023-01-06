@@ -21,14 +21,6 @@
     plugins: ['LinkedModel'],
 
     /**
-     * The modules that can use quickcreateModelData to pre-populate the drawer
-     */
-    qcModelDataModuleAllowList: [
-        'Cases',
-        'Contacts',
-    ],
-
-    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -134,18 +126,17 @@
      * @param {String} module Module name.
      */
     openCreateDrawer: function(module) {
-        var relatedContext = this.getRelatedContext(module),
-            model = null;
+        var relatedContext = this.getRelatedContext(module);
+        var model = null;
 
-        var quickcreateModelData = this.context.get('quickcreateModelData');
-        var setCreatedModelInContext = false;
-
-        if (_.contains(this.qcModelDataModuleAllowList, module) && !_.isEmpty(quickcreateModelData)) {
-            setCreatedModelInContext = true;
-
-            model = app.data.createBean(module, quickcreateModelData);
-
-            this.context.unset('quickcreateModelData');
+        // If the Omnichannel console is open, get model pre-populated data from
+        // that. Otherwise, check whether the current context's module defines
+        // a link for the quick create drawer
+        if (app.omniConsole && app.omniConsole.isOpen()) {
+            var prepopulateData = app.omniConsole.getModelPrepopulateData(module);
+            if (!_.isEmpty(prepopulateData)) {
+                model = app.data.createBean(module, prepopulateData);
+            }
         } else if (relatedContext) {
             model = this.createLinkModel(this.context.get('model'), relatedContext.link);
         }
@@ -179,11 +170,7 @@
                     }, this);
                 }
 
-                if (setCreatedModelInContext && model) {
-                    this.context.set('quickcreateCreatedModel', model);
-                }
-
-                this.context.trigger('quickcreate-drawer:closed');
+                this.context.trigger('quickcreate-drawer:closed', model);
             }
         }, this));
     },

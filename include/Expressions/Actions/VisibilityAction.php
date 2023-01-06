@@ -45,7 +45,7 @@ class VisibilityAction extends AbstractAction
 
             if (!SUGAR.forms.SetVisibilityAction.initialized) {
                 var head = document.getElementsByTagName('head')[0];
-                var cssdef = 'span.vis_action_hidden, .vis_action_hidden * { visibility: hidden; }'
+                var cssdef = 'span.vis_action_hidden, .vis_action_hidden * { display: none; }'
                 var newStyle = document.createElement('style');
                 newStyle.setAttribute('type', 'text/css');
                 if (newStyle.styleSheet)
@@ -193,9 +193,12 @@ class VisibilityAction extends AbstractAction
                 });
 
                 // Check if all the elements in the row we're looking at have
-                // the hidden class.
+                // the hidden class or are filler cells.
                 var shouldRowBeHidden = _.chain(hideableFields)
-                    .map(function(e) { return $(e).hasClass(inv_class); })
+                    .map(element => {
+                        let e = $(element);
+                        return e.hasClass(inv_class) || e.hasClass('filler-cell');
+                    })
                     .reduce(function(a, c) { return a && c; })
                     .value();
 

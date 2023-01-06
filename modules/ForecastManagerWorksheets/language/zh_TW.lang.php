@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => '基底匯率',
 
     'LBL_QUOTA' => '配額',
-    'LBL_QUOTA_ADJUSTED' => '配額（已調整）',
+    'LBL_QUOTA_ADJUSTED' => '調整後的配額',
 
     'LBL_FORECAST' => '預測',
     'LBL_COMMIT_STAGE' => '提交階段',

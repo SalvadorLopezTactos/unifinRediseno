@@ -163,7 +163,7 @@ class Currency extends SugarBean
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($symbol, 0));
 
-        $row = $stmt->fetchColumn();
+        $row = $stmt->fetchOne();
         if ($row) {
             return $row;
         }
@@ -191,7 +191,7 @@ class Currency extends SugarBean
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($iso, 0));
 
-        $row = $stmt->fetchColumn();
+        $row = $stmt->fetchOne();
         if ($row) {
             return $row;
         }
@@ -236,7 +236,7 @@ class Currency extends SugarBean
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($name, 0));
 
-        $row = $stmt->fetchColumn();
+        $row = $stmt->fetchOne();
         if ($row) {
             return $row;
         }
@@ -502,6 +502,7 @@ function format_number($amount, $round = null, $decimals = null, $params = array
     static $override_currency_id = null;
     static $currency;
 
+    $amount = (float)$amount;
     $seps = get_number_seperators();
     $num_grp_sep = $seps[0];
     $dec_sep = $seps[1];

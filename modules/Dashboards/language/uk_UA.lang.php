@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Усі інформаційні панелі для модуля {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Усі інформаційні панелі для перегляду {{view}} модуля {{module}}',
     'LBL_COPY_OF' => 'Копія {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Інформаційні панелі фокусної панелі неможливо видалити.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Створити інформаційну панель',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Справді відновити макет за замовчуванням для інформаційної панелі?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Справді відновити макет за замовчуванням для інформаційної панелі?',
+    'LBL_FILTER_UTILS_SELECT' => 'Призначено',
 );

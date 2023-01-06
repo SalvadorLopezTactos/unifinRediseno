@@ -77,17 +77,36 @@ $focus = BeanFactory::newBean('WorkFlowActionShells');
 		$action_object->value = $_REQUEST['adv_value'];
 	}
 
+$temp_module = BeanFactory::newBean($_REQUEST['target_module']);
+global $mod_strings, $current_language;
 
-$output_array = $action_object->build_field_selector($_REQUEST['field_num'], $_REQUEST['target_module'], $seed_object->type, $_REQUEST['action_type']);
+if ($temp_module === null) {
+    sugar_die("Target_module required");
+}
 
-		$form->assign('PREFIX', "field_".$_REQUEST['field_num']."__");
+if (isset($_REQUEST['field_num'])) {
+    $field_num = intval($_REQUEST['field_num']);
+} else {
+    sugar_die("field_num is not set in request");
+}
+
+$allowed_action_types = ['update', 'update_rel', 'new', 'new_rel'];
+if (isset($_REQUEST['action_type']) && in_array($_REQUEST['action_type'], $allowed_action_types)) {
+    $action_type = $_REQUEST['action_type'];
+} else {
+    sugar_die("action_type is invalid or not set in request");
+}
+
+$output_array = $action_object->build_field_selector($field_num, $_REQUEST['target_module'], $seed_object->type, $action_type);
+
+    $form->assign('PREFIX', "field_".$field_num."__");
 		$form->assign('VALUE', $output_array['value_select']['display']);
 		$form->assign('FIELD_NAME', $output_array['name']);
-	    $form->assign('MOD', $GLOBALS['mod_strings']);
+    $form->assign('MOD', $GLOBALS['mod_strings']);
 		$form->assign('TITLE', $GLOBALS['mod_strings']['LBL_TITLE']);
 
-		$form->assign('FIELD_NUM', "field_".$_REQUEST['field_num']);
-		$form->assign('FIELD_NUMBER', $_REQUEST['field_num']);
+    $form->assign('FIELD_NUM', "field_".$field_num);
+    $form->assign('FIELD_NUMBER', $field_num);
 		$form->assign('ADV_TYPE', $output_array['adv_type']['display']);
 		$form->assign('ADV_VALUE', $output_array['adv_value']['display']);
 		$form->assign('EXT1', $output_array['ext1']['display']);
@@ -118,20 +137,6 @@ $form->out("embeded");
 
 $form->parse("main");
 $form->out("main");
-
-//rsmith
-$temp_module = BeanFactory::newBean($_REQUEST['target_module']);
-global $mod_strings, $current_language;
-
-if ($temp_module === null) {
-    sugar_die("Target_module required");
-}
-
-if (isset($_REQUEST['field_num'])) {
-    $field_num = intval($_REQUEST['field_num']);
-} else {
-    sugar_die("field_num is not set in request");
-}
 
 	$mod_strings = return_module_language($current_language, $temp_module->module_dir);
 	//now build toggle js

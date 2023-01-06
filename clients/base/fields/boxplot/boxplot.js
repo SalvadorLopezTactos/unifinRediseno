@@ -110,7 +110,7 @@
     _boxPlotCalculator: function(bestCase, worstCase) {
         var userDecPrecision = +app.user.getPreference('decimal_precision');
 
-        this.overallCaseDifference = parseFloat(bestCase - worstCase).toFixed(userDecPrecision);
+        this.overallCaseDifference = parseFloat((bestCase - worstCase).toFixed(userDecPrecision));
 
         this.worstCase = parseFloat(this.model.get('worst_case')).toFixed(userDecPrecision);
         this.likely =  parseFloat(this.model.get('amount')).toFixed(userDecPrecision);
@@ -120,10 +120,11 @@
         this.bestCase = parseFloat(this.model.get('best_case')).toFixed(userDecPrecision);
 
         this.likelyMarginFromWorstCase = this.likely - worstCase;
+
         this.likelyPercent = this.overallCaseDifference !== 0 ?
-            (this.likelyMarginFromWorstCase / this.overallCaseDifference).toFixed(userDecPrecision) * 100 : 0;
+          parseFloat((this.likelyMarginFromWorstCase / this.overallCaseDifference).toFixed(userDecPrecision)) * 100 : 0;
         this.likelyPercent = this.likelyPercent === 100 ? this.likelyPercent - 1 : this.likelyPercent;
-        this.caretPos =  this.likelyPercent - 0.9;
+        this.caretPos =  this.likelyPercent - 2.7;
         this.amountPos = this.likelyPercent - (this.likelyRound.length + 3);
         this.amountPos = (this.amountPos <= 0) ? 0 : this.amountPos;
 

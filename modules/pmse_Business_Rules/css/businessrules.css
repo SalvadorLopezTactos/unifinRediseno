@@ -288,7 +288,6 @@ div.decision-table-conclusions-header span.decision-table-return {
 .decision-table-add-row {
   background: none;
   display: block;
-  width: 100%;
 }
 
 .decision-table-container {
@@ -438,10 +437,10 @@ table.decision-table-index span {
 }
 
 .adam.item-container {
-  border: 1px solid #dcdcdc;
+  border: 1px solid var(--border-color);
   position: relative;
   margin-left: 0;
-  background-color: #fff;
+  background-color: var(--content-background);
   margin-bottom: 0;
   overflow: hidden;
   height: 26px;
@@ -518,7 +517,7 @@ table.decision-table-index span {
 }
 
 .adam.field-panel-button-group {
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   padding: 2px 1px;
   border-radius: 3px;
   text-align: center;
@@ -541,10 +540,10 @@ table.decision-table-index span {
 .adam.list-item {
   list-style-type: none;
   cursor: pointer;
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 1px solid var(--border-color);
   padding: 5px;
   margin: 0px;
-  background: #FFF;
+  background: var(--primary-content-background);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -557,12 +556,13 @@ table.decision-table-index span {
 }
 
 .adam.list-panel > .list-item:nth-child(odd) {
-  background-color: #f8f8f8;
+  background-color: var(--primary-content-background);
 }
 
 .adam.list-panel > .list-item:nth-child(odd):hover,
 .adam.list-item:hover {
-  background: #eaeaea;
+  background: var(--primary-content-hover);
+  color: var(--text-color-hover);
 }
 
 .adam.list-panel-message {
@@ -757,7 +757,7 @@ table.decision-table-index span {
 .adam.group-list .list-item-content {
   padding: 5px 1.9em 5px 5px;
   display: block;
-  color: #777;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   /* width: 100%;
@@ -846,8 +846,8 @@ table.decision-table-index span {
 }
 
 .adam.multiple-panel-contentheader {
-  background: #ccc;
-  color: #666;
+  background: var(--content-background);
+  color: var(--text-color);
   padding: 0.1em 0.5em;
   font-weight: bold;
 }

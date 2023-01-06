@@ -58,13 +58,6 @@ $dictionary['quotes_contacts'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_qte_opp',
-            'type' => 'index',
-            'fields' => array(
-                'quote_id',
-            ),
-        ),
-        array(
             'name' => 'idx_quote_contact_role',
             'type' => 'alternate_key',
             'fields' => array(

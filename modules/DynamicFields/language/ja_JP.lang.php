@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'フィールド名は既に存在します',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'フィールド名には以下の文字だけを使用してください　: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'モジュールは保存されませんでした',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'ドロップダウン名はすでに存在します',
     'LBL_BTN_ADD' => '追加',
     'LBL_BTN_EDIT' => '編集',
     'LBL_GENERATE_URL' => 'URLを生成',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'カラム{0}を追加しています',
     'LBL_DONE' => '完了',
     'LBL_EXE_NON_SIM_MODE' => '非シミュレーションモードを実行します',
+    'LBL_CALCULATION_VISIBLE' => '計算用に閲覧可能にする',
 );
-
-
-?>

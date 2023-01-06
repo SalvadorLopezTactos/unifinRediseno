@@ -18,7 +18,9 @@
                     <span class="label label-module label-module-sm label-{{module}}">{{moduleIconLabel module}}</span>
                     <p class="ellipsis_inline"><a href="#{{buildRoute module=module id=id}}">{{attributes.name}}</a></p>
                     <div class="actions">
-                       <a href="javascript:void(0);" rel="tooltip" title="{{str "LBL_PREVIEW"}}"><i class="fa fa-eye"></i></a>
+                        <a href="javascript:void(0);" rel="tooltip" title="{{str "LBL_PREVIEW"}}">
+                            <i class="sicon sicon-preview"></i>
+                        </a>
                     </div>
                 </li>
                 {{/each}}

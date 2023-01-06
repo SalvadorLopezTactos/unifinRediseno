@@ -29,14 +29,59 @@ class Subscription
      * license keys or types
      */
     const SUGAR_SELL_KEY = 'SUGAR_SELL';
+    const SUGAR_SELL_ESSENTIALS_KEY = 'SUGAR_SELL_ESSENTIALS';
+    const SUGAR_SELL_BUNDLE_KEY = 'SUGAR_SELL_BUNDLE';
+    const SUGAR_SELL_PREMIER_BUNDLE_KEY = 'SUGAR_SELL_PREMIER_BUNDLE';
+    const SUGAR_SELL_ADVANCED_BUNDLE_KEY = 'SUGAR_SELL_ADVANCED_BUNDLE';
     const SUGAR_SERVE_KEY = 'SUGAR_SERVE';
     const SUGAR_BASIC_KEY = 'CURRENT';
     const SUGAR_HINT_KEY = 'HINT';
+    const SUGAR_PREDICT_ADVANCED_KEY = 'PREDICT_ADVANCED';
+    const SUGAR_PREDICT_PREMIER_KEY = 'PREDICT_PREMIER';
+    const SUGAR_CONNECT_KEY = 'CONNECT';
+    const SUGAR_DISCOVER_KEY = 'DISCOVER';
+    const SUGAR_MAPS_KEY = 'MAPS';
+    const SUGAR_ADVANCEDFORECAST_KEY = 'ADVANCEDFORECAST';
 
     /**
      * unknown type
      */
     const UNKNOWN_TYPE = 'UNKNOWN';
+
+    /**
+     * Mango CRM keys,
+     * please keep the order of this list, the order of this list will be used in displaying user's license type
+     */
+    const MANGO_KEYS = [
+        Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+        Subscription::SUGAR_SELL_ESSENTIALS_KEY,
+        Subscription::SUGAR_SELL_BUNDLE_KEY,
+        Subscription::SUGAR_SELL_KEY,
+        Subscription::SUGAR_SERVE_KEY,
+        Subscription::SUGAR_BASIC_KEY,
+    ];
+
+    /**
+     * Bundle keys, the bundle will contain other products
+     */
+    const BUNDLE_KEYS = [
+        Subscription::SUGAR_SELL_ESSENTIALS_KEY,
+        Subscription::SUGAR_SELL_BUNDLE_KEY,
+        Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+    ];
+
+    /**
+     * current supported keys
+     */
+    const SELL_KEYS = [
+        self::SUGAR_SELL_KEY,
+        self::SUGAR_SELL_ESSENTIALS_KEY,
+        self::SUGAR_SELL_BUNDLE_KEY,
+        self::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        self::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+    ];
 
     /**
      * current supported keys
@@ -46,6 +91,17 @@ class Subscription
         self::SUGAR_SELL_KEY,
         self::SUGAR_SERVE_KEY,
         self::SUGAR_HINT_KEY,
+        // new in Mango 12.0
+        self::SUGAR_SELL_ESSENTIALS_KEY,
+        self::SUGAR_SELL_BUNDLE_KEY,
+        self::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        self::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+        self::SUGAR_PREDICT_ADVANCED_KEY,
+        self::SUGAR_PREDICT_PREMIER_KEY,
+        self::SUGAR_CONNECT_KEY,
+        self::SUGAR_DISCOVER_KEY,
+        self::SUGAR_MAPS_KEY,
+        self::SUGAR_ADVANCEDFORECAST_KEY,
     ];
 
     /**
@@ -58,6 +114,30 @@ class Subscription
         'SELL' => self::SUGAR_SELL_KEY,
         'SERVE' => self::SUGAR_SERVE_KEY,
         'HINT' => self::SUGAR_HINT_KEY,
+        'PREDICT_ADVANCED' => self::SUGAR_PREDICT_ADVANCED_KEY,
+        'PREDICT_PREMIER' => self::SUGAR_PREDICT_PREMIER_KEY,
+        'CONNECT' => self::SUGAR_CONNECT_KEY,
+        'DISCOVER' => self::SUGAR_DISCOVER_KEY,
+        'MAPS' => self::SUGAR_MAPS_KEY,
+        'ADVANCED_FORECAST' => self::SUGAR_ADVANCEDFORECAST_KEY,
+    ];
+
+    /**
+     * mapping for edition
+     */
+    const SELL_EDITIONS_MAPPING = [
+        'SELL_PREMIER' => self::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        'SELL_ADVANCED' => self::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+        'SELL_ESSENTIALS' => self::SUGAR_SELL_ESSENTIALS_KEY,
+        'OTHERS' => self::SUGAR_SELL_BUNDLE_KEY,
+    ];
+
+    /**
+     * visible Non CRM products in user's licese types' list
+     */
+    const VISIBLE_NONCRM_PRODUCTS = [
+        Subscription::SUGAR_HINT_KEY,
+        Subscription::SUGAR_MAPS_KEY,
     ];
 
     /**
@@ -71,6 +151,7 @@ class Subscription
      * @var array
      */
     protected $subscriptions = [];
+    protected $expiredSubscriptions = [];
 
     /**
      * @var array of Addons
@@ -150,10 +231,124 @@ class Subscription
      */
     public function getSubscriptions() : array
     {
-        if ($this->subscriptions || $this->useDefault) {
+        if (!empty($this->subscriptions) || $this->useDefault) {
             return $this->subscriptions;
         }
 
+        if (empty($this->data)) {
+            return [];
+        }
+
+        if (!empty($this->error)) {
+            $GLOBALS['log']->fatal("there is an error in license server response: " . $this->error);
+            return [];
+        }
+
+        $subscriptions = $this->getSubscriptionFromAddons($this->addons);
+        $this->subscriptions = $subscriptions;
+
+        return $subscriptions;
+    }
+
+    /**
+     * parse the list of addons.
+     * @param array $addons
+     * @param bool $isTopLevel
+     * @return array
+     */
+    protected function getSubscriptionFromAddons(array $addons, bool $isTopLevel = true, $expDate = '', $sttDate = '') : array
+    {
+        $subscriptions = [];
+        // will skip top level of the subscription
+        // initiate quantity count
+        foreach (self::SUPPORTED_KEYS as $type) {
+            $subscriptions[$type]['quantity'] = 0;
+        }
+
+        // check addons, only interested in 'SELL', 'SERVE' and Legacy product codes such as 'ENT', 'PRO' and 'ULT'.
+        // also need to check bundles
+        // ignore any other addons for now
+        foreach ($addons as $addon) {
+            $quantity = (int)$addon->quantity;
+            $expirationDate = $addon->expiration_date;
+            if (empty($expirationDate)) {
+                $expirationDate = $expDate;
+            }
+
+            $startDate = $addon->start_date_c;
+            if (empty($startDate)) {
+                $startDate = $sttDate;
+            }
+            if (($quantity > 0)
+                && ((empty($expirationDate) && !$isTopLevel) || (!empty($expirationDate) && is_numeric($expirationDate) && $expirationDate > time()))
+                && (empty($startDate) || !empty($startDate) && is_numeric($startDate) && $startDate < time())) {
+                // using product code to find out subscription types
+                $productCode = $addon->product_code_c;
+                if (!empty($productCode) && !empty(self::PRODUCT_CODE_MAPPING[strtoupper($productCode)])) {
+                    $key = self::PRODUCT_CODE_MAPPING[strtoupper($productCode)];
+                    $bundlesSubscriptions = [];
+                    if ($key === self::SUGAR_SELL_KEY) {
+                        // reassign to bundle key based on edition
+                        $edition = $addon->product_edition_c;
+                        if (!empty($edition) && isset(self::SELL_EDITIONS_MAPPING[strtoupper($edition)])) {
+                            $key = self::SELL_EDITIONS_MAPPING[strtoupper($edition)];
+                        }
+                        if ($addon->hasBundledProducts()) {
+                            if (!empty($edition)) {
+                                $key = self::SELL_EDITIONS_MAPPING[strtoupper($edition)] ?? self::SUGAR_SELL_BUNDLE_KEY;
+                            } else {
+                                $key = self::SUGAR_SELL_BUNDLE_KEY;
+                            }
+                            // get bundles
+                            $bundles = $addon->getBundledProducts();
+                            $bundlesSubscriptions = $this->getSubscriptionFromAddons($bundles, false, $expirationDate, $startDate);
+                        }
+                    }
+                    // calculate the expiration date, using the min date as expiration date
+                    if (!empty($subscriptions[$key]['expiration_date'])
+                        && $expirationDate > $subscriptions[$key]['expiration_date']
+                    ) {
+                        $expirationDate = $subscriptions[$key]['expiration_date'];
+                    }
+
+                    $customerProductName = $addon->customer_product_name_c;
+                    $subscriptions[$key] = [
+                        'quantity' => $subscriptions[$key]['quantity'] + $quantity,
+                        'expiration_date' => $expirationDate,
+                        'start_date' => $startDate,
+                        'customer_product_name' => $customerProductName,
+                        // this may not be needed since PM has promised 1 bundle product for a license key
+                        Addon::BUNDLED_PRODUCTS_KEY => array_merge($subscriptions[$key][Addon::BUNDLED_PRODUCTS_KEY] ?? [], $bundlesSubscriptions),
+                    ];
+                }
+            }
+        }
+
+        // remove 0 quantity keys
+        foreach ($subscriptions as $key => $value) {
+            if ($subscriptions[$key]['quantity'] === 0) {
+                unset($subscriptions[$key]);
+            }
+        }
+
+        return $subscriptions;
+    }
+    /**
+     * to get all subscriptions, including expired and not yet started
+     *
+     * return in array format
+     * [
+     *      'quantity' => ...,
+     *      'expiration_date' => ...,
+     * ];
+     *
+     * @return array
+     */
+    public function getExpiredSubscriptions() : array
+    {
+        if (!empty($this->expiredSubscriptions)) {
+            return $this->expiredSubscriptions;
+        }
         $subscriptions = [];
         if (empty($this->data)) {
             return [];
@@ -170,47 +365,46 @@ class Subscription
             $subscriptions[$type]['quantity'] = 0;
         }
 
-        // check addons, only interested in 'SELL', 'SERVE' and Legacy product codes such as 'ENT', 'PRO' and 'ULT'.
+        // check addons, only interested in 'SELL', 'SELL' BUNDLES, 'SERVE' and Legacy product codes such as 'ENT', 'PRO' and 'ULT'.
         // ignore any other addons for now
-        foreach ($this->addons as $addonId => $addon) {
+        foreach ($this->addons as $addon) {
             $quantity = (int)$addon->quantity;
             $expirationDate = $addon->expiration_date;
-            if (isset($quantity) && $quantity > 0 && isset($expirationDate) && $expirationDate - time() > 0) {
-                // using product code to find out subscription types
-                $productCode = $addon->product_code_c;
-                if (!empty($productCode) && !empty(self::PRODUCT_CODE_MAPPING[strtoupper($productCode)])) {
-                    $key = self::PRODUCT_CODE_MAPPING[strtoupper($productCode)];
-                    // calculate the expiration date, using the min date as expiration date
-                    if (!empty($subscriptions[$key]['expiration_date'])
-                        && $expirationDate > $subscriptions[$key]['expiration_date']
-                    ) {
-                        $expirationDate = $subscriptions[$key]['expiration_date'];
-                    }
-                    $subscriptions[$key] = [
-                        'quantity' => $subscriptions[$key]['quantity'] + $quantity,
-                        'expiration_date' => $expirationDate,
-                    ];
-                }
+            $startDate = $addon->start_date_c;
+
+            if ($quantity === 0 || !isset($expirationDate) || $expirationDate >= time()) {
+                continue;
+            }
+
+            $customerProductName = $addon->customer_product_name_c;
+            // using product code to find out subscription types
+            $productCode = $addon->product_code_c;
+            if (!empty($productCode) && !empty(self::PRODUCT_CODE_MAPPING[strtoupper($productCode)])) {
+                $key = self::PRODUCT_CODE_MAPPING[strtoupper($productCode)];
+                $subscriptions[$key] = [
+                    'quantity' => $subscriptions[$key]['quantity'] + $quantity,
+                    'expiration_date' => $expirationDate,
+                    'start_date' => $startDate,
+                    'customer_product_name' => $customerProductName,
+                ];
             }
         }
 
         // remove 0 quantity keys
-        foreach ($subscriptions as $key => $value) {
-            if ($subscriptions[$key]['quantity'] === 0) {
-                unset($subscriptions[$key]);
-            }
-        }
-        $this->subscriptions = $subscriptions;
+        $this->expiredSubscriptions = array_filter($subscriptions, static function (array $item) {
+            return $item['quantity'] !== 0;
+        });
 
-        return $subscriptions;
+        return $this->expiredSubscriptions;
     }
 
     /**
      * get keys for subscriptions
      *
+     * @param bool $getAll to get all subscription keys if it is true
      * need to take care of ENT, PRO, etc
      */
-    public function getSubscriptionKeys() : array
+    public function getSubscriptionKeys(bool $getAll = true) : array
     {
         $subscriptions = $this->getSubscriptions();
         if (empty($subscriptions)) {
@@ -223,13 +417,66 @@ class Subscription
                 $keys[self::SUGAR_BASIC_KEY] = true;
             } else {
                 $keys[$key] = true;
+                if ($getAll && self::isBundleKey($key) && !empty($value[Addon::BUNDLED_PRODUCTS_KEY]) && is_array($value[Addon::BUNDLED_PRODUCTS_KEY])) {
+                    foreach ($value[Addon::BUNDLED_PRODUCTS_KEY] as $bundledKey => $bundledItem) {
+                        if (!empty($bundledItem)) {
+                            $keys[$bundledKey] = true;
+                        }
+                    }
+                }
             }
         }
         return $keys;
     }
 
     /**
-     * get current addon products,
+     * get all subscription keys
+     * @return array
+     */
+    public function getAllSubscriptionKeys() : array
+    {
+        return $this->getSubscriptionKeys(true);
+    }
+
+    /**
+     * get top level subscription keys only
+     * @return array
+     */
+    public function getTopLevelSubscriptionKeys() : array
+    {
+        return $this->getSubscriptionKeys(false);
+    }
+    /**
+     * get subscription(s) for a key
+     *
+     * @param string $key key to search
+     * need to take care of ENT, PRO, etc
+     */
+    public function getSubscriptionByKey(?string $key) : array
+    {
+        $subscriptions = $this->getSubscriptions();
+        if (empty($subscriptions)) {
+            return [];
+        }
+
+        if (!empty($subscriptions[$key])) {
+            return $subscriptions[$key];
+        }
+
+        foreach ($subscriptions as $subKey => $value) {
+            if (self::isBundleKey($subKey) && !empty($value[Addon::BUNDLED_PRODUCTS_KEY]) && is_array($value[Addon::BUNDLED_PRODUCTS_KEY])) {
+                foreach ($value[Addon::BUNDLED_PRODUCTS_KEY] as $bundledKey => $bundledItem) {
+                    if ($bundledKey === $key && !empty($bundledItem)) {
+                        return $bundledItem;
+                    }
+                }
+            }
+        }
+        return [];
+    }
+
+    /**
+     * get current supported addon products,
      * @return array
      */
     public function getAddonProducts() : array
@@ -238,8 +485,19 @@ class Subscription
             Subscription::SUGAR_SELL_KEY,
             Subscription::SUGAR_SERVE_KEY,
             Subscription::SUGAR_HINT_KEY,
+            Subscription::SUGAR_PREDICT_ADVANCED_KEY,
+            Subscription::SUGAR_PREDICT_PREMIER_KEY,
+            Subscription::SUGAR_CONNECT_KEY,
+            Subscription::SUGAR_DISCOVER_KEY,
+            Subscription::SUGAR_MAPS_KEY,
+            Subscription::SUGAR_ADVANCEDFORECAST_KEY,
+            Subscription::SUGAR_SELL_ESSENTIALS_KEY,
+            Subscription::SUGAR_SELL_BUNDLE_KEY,
+            Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
+            Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
         ];
     }
+
 
     /**
      * check if a key is Mango key
@@ -247,14 +505,52 @@ class Subscription
      */
     public static function isMangoKey(?string $key) : bool
     {
-        $mangoKeys = [
-            Subscription::SUGAR_BASIC_KEY,
-            Subscription::SUGAR_SELL_KEY,
-            Subscription::SUGAR_SERVE_KEY,
-        ];
-        return in_array($key, $mangoKeys);
+        return in_array($key, self::MANGO_KEYS);
     }
 
+    /**
+     * check is bundle key
+     * @param string|null $key
+     * @return bool
+     */
+    public static function isBundleKey(?string $key) : bool
+    {
+        return in_array($key, self::BUNDLE_KEYS);
+    }
+
+    /**
+     * get all CRM keys for a bundle, for instance SUGAR_SELL_BUNDLE_KEY will return [SUGAR_SELL_KEY, SUGAR_SELL_BUNDLE_KEY]
+     *
+     * @param string $key
+     * @return string[]
+     */
+    public static function getBundledKeys(string $key) : array
+    {
+        switch ($key) {
+            case (self::SUGAR_SELL_ESSENTIALS_KEY):
+            case (self::SUGAR_SELL_BUNDLE_KEY):
+            case (self::SUGAR_SELL_PREMIER_BUNDLE_KEY):
+            case (self::SUGAR_SELL_ADVANCED_BUNDLE_KEY):
+                return [self::SUGAR_SELL_KEY, $key];
+            default:
+                return [];
+        }
+    }
+
+    /**
+     * get the first SELL key from a license types array
+     * @param array $licenseTypes license types array
+     * @return string
+     */
+    public static function getSellKey(array $licenseTypes) : string
+    {
+        foreach (Subscription::SELL_KEYS as $key) {
+            if (in_array($key, $licenseTypes)) {
+                return $key;
+            }
+        }
+        return '';
+    }
     /**
      * get default subscription in case of offline, client is not able to download from license server
      * @return array
@@ -273,6 +569,9 @@ class Subscription
         return [
             'quantity' => $this->getLicenseSettingByKey('license_users', 1),
             'expiration_date' => strtotime($expiredDate),
+            'start_date' => null,
+            'customer_product_name' => 'SugarCRM',
+            Addon::BUNDLED_PRODUCTS_KEY => [],
         ];
     }
 
@@ -295,6 +594,29 @@ class Subscription
             return $GLOBALS['license']->settings[$key];
         }
         return $defaultValue;
+    }
+
+    /**
+     * order license type
+     * @param array|null $licTypes user's license type
+     * @return array
+     */
+    public static function getOrderedLicenseTypes(?array $licTypes) : array
+    {
+        if (empty($licTypes)) {
+            return [];
+        }
+
+        $retLicenseTypes = [];
+        // order by Mango keys first, tehn non-crm keys
+        foreach ([Subscription::MANGO_KEYS, self::VISIBLE_NONCRM_PRODUCTS] as $keys) {
+            foreach ($keys as $key) {
+                if (in_array($key, $licTypes)) {
+                    $retLicenseTypes[] = $key;
+                }
+            }
+        }
+        return $retLicenseTypes;
     }
 }
 //END REQUIRED CODE DO NOT MODIFY

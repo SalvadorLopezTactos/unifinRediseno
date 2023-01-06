@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Názov poľa už existuje',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Field name should contain only the following characters: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Neobsahuje modul, nemožno uložiť',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Názov rozbaľovacieho zoznamu už existuje',
     'LBL_BTN_ADD' => 'Pridať',
     'LBL_BTN_EDIT' => 'Upraviť',
     'LBL_GENERATE_URL' => 'Generovať URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Pridanie stĺpca {0} až',
     'LBL_DONE' => 'Dokončené',
     'LBL_EXE_NON_SIM_MODE' => 'Vykonať nesimulačný režim',
+    'LBL_CALCULATION_VISIBLE' => 'Zviditeľniť na výpočty',
 );
-
-
-?>

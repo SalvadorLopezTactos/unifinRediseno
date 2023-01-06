@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'メッセージレポートを見る',
     'LNK_IMPORT_MESSAGES' => 'メッセージをインポートする',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'リードID',
+    'LBL_LEAD_NAME' => 'リード',
+    'LBL_ACTIVITY_STATUS_TEXT' => '顧客側チャット',
+    'LBL_ACTIVITY_CUSTOMER' => '顧客',
+    'LBL_ACTIVITY_FINISHED' => '終了',
+    'LBL_ACTIVITY_IN_PROGRESS' => '進行中',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'メッセージのフォーカスドロワ',
 ];

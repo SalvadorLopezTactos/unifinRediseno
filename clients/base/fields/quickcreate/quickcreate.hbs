@@ -10,4 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<a class="actionLink" data-module="{{def.module}}" data-layout="{{def.layout}}" {{#if def.href}}href="{{def.href}}"{{else}}data-event="true" href="javascript:void(0);"{{/if}} track="click:quickCreate-{{def.module}}" tabindex="-1">{{#if def.icon}}<i class="fa {{def.icon}}"></i>{{/if}}{{label}}</a>
+<a class="actionLink megamenu-dropdown-item" data-module="{{def.module}}" data-layout="{{def.layout}}"
+   {{#if def.href}}href="{{def.href}}"{{else}}data-event="true" href="javascript:void(0);"{{/if}}
+   track="click:quickCreate-{{def.module}}" tabindex="-1"
+>
+    {{#if def.icon}}
+        <i class="{{buildIcon def.icon}}"></i>
+    {{/if}}
+    {{label}}
+</a>

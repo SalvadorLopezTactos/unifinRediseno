@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Popis',
     'LBL_OW_TYPE'=>'Typ',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Prognóza týmu pro <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Přímy report',
     'LBL_FDR_OPPORTUNITIES'=>'Příležitosti v předpovědi',
     'LBL_FDR_WEIGH'=>'Vážená částka příležitostí',
     'LBL_FDR_COMMIT'=>'Schválená částka',
     'LBL_FDR_DATE_COMMIT'=>'Datum schválení',
+    'LBL_FDR_FORECAST_HEADER' => 'Prognóza prodejce pro <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Předpovědi: list',
     'LBL_DV_MY_FORECASTS' => 'Moje předpověďi',
-    'LBL_DV_MY_TEAM' => "Předpovědi mého týmu" ,
+    'LBL_DV_MY_TEAM' => "Předpovědi mého týmu",
     'LBL_DV_TIMEPERIODS' => 'Časová období:',
     'LBL_DV_FORECAST_PERIOD' => 'Časové období předpovědi',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Předpověď příležitostí',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Základní kurz',
 
     'LBL_QUOTA' => 'Kvóta',
-    'LBL_QUOTA_ADJUSTED' => 'Kvóta (upravená)',
+    'LBL_QUOTA_ADJUSTED' => 'Upravená kvóta',
 
     'LBL_FORECAST_FOR'=>'List prognózy pro:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Kumulativní)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kvóta vs. závazné vs. aktuální',
 
     'LBL_FORECAST' => 'Předpověď',
+    'LBL_COMMITMENT' => 'Závazek',
+    'LBL_TEAM_COMMITMENT' => 'Týmový závazek',
+    'LBL_FORECASTED' => 'Prognózováno',
+    'LBL_ADJUSTED_TOTAL' => 'Upravená celková hodnota',
     'LBL_COMMIT_STAGE' => 'Fáze schválení',
     'LBL_SALES_STAGE' => 'Fáze',
     'LBL_AMOUNT' => 'Částka',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, a {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'nejspíše {{{direction}}} {{{from}}} až {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'nejlépe {{{direction}}} {{{from}}} až {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'nejhůře {{{direction}}} {{{from}}} až {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'nejspíše stejné',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'nejlépe stejné',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'nejhůře stejné',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Potvrzené (pravděpodobné) {{{direction}}} {{{from}}} až {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Potvrzené (nejlepší) {{{direction}}} {{{from}}} až {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Potvrzené (nejhorší) {{{direction}}} {{{from}}} až {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Potvrzené (pravděpodobné) zůstaly stejné',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Potvrzené (nejlepší) zůstaly stejné',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Potvrzené (nejhorší) zůstaly stejné',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Tento měsíc: {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Zobrazeno vše',
     'LBL_TOTAL' => 'Celkem',
     'LBL_OVERALL_TOTAL' => 'Celkový součet',
-    'LBL_EDITABLE_INVALID' => 'Neplatná hodnota pro {0}',
+    'LBL_EDITABLE_INVALID' => 'Neplatná hodnota pro {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'hodnota musí být mezi {0} a {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Máte neuložené změny ve vašem sešitu.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Berte prosím na vědomí, že pouze uložená nebo potvrzená data mohou být exportována. Klikněte na tlačítko OK pro pokračování exportu nebo Storno pro návrat do sešitu.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Včetně',
     'LBL_CHART_NOT_INCLUDED' => 'Kromě',
     'LBL_CHART_ADJUSTED' => '(Upravena)',
-    'LBL_SAVE_DRAFT' => 'Uložit návrh',
+    'LBL_SAVE_DRAFT' => 'Uložit',
     'LBL_CHANGES_BY' => 'Změněno {0}',
     'LBL_FORECAST_SETTINGS' => 'Nastavení',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Datum začátku fiskálního roku:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Nastavte časové období, které bude použité v modulu předpovědí.<br /><br />Začněte výběrem počátečního data vašeho fiskálního roku. Pak vyberte typ časového období, přes které chcete předpovídat. Rozpětí data časových období bude automaticky vypočítáno na základě vašeho výběru. Sub-časové období je základem pro předpovědní list.<br /><br />Zobrazitelná budoucnost a minulá časová období určí počet viditelných sub-období v modulu předpovědí. Uživatelé mohou zobrazit a upravit čísla předpovědí ve viditelných sub-obdobích.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Proveďte konfiguraci, jak chcete kategorizovat {{forecastByModule}}. <br><br>Vezměte prosím na vědomí, že nastavení rozsahu nelze po prvním potvrzení změnit. U upgradovaných instancí je nastavení rozsahu uzamčeno s existujícími údaji o předpovědi.<br><br>Můžete vybrat dvě nebo více kategorií na základě rozsahů pravděpodobnosti, nebo vytvořit kategorie, které nejsou založeny na pravděpodobnosti.<br><br>Vlevo od vašich vlastních kategorií jsou zaškrtávací políčka. Použijte je k tomu, abyste rozhodli, které rozsahy budou zahrnuty do schválené částky předpovědi a oznámeny manažerům.<br><br>Uživatel může změnit stav zařadit/vyloučit a kategorii {{forecastByModule}} ručně ze svého listu.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Proveďte konfiguraci, jak chcete kategorizovat {{forecastByModule}}. <br><br>Vezměte prosím na vědomí, že nastavení rozsahu nelze po prvním potvrzení změnit. U upgradovaných instancí je nastavení rozsahu uzamčeno s existujícími údaji o prognóze.<br><br>Můžete vybrat dvě nebo více kategorií na základě rozsahů pravděpodobnosti, nebo vytvořit kategorie, které nejsou založeny na pravděpodobnosti. <br><br>Vlevo od vašich vlastních kategorií jsou zaškrtávací políčka. Použijte je k tomu, abyste rozhodli, které rozsahy budou zahrnuty do schválené částky předpovědi a oznámeny manažerům. <br><br>Uživatel může změnit stav zařadit/vyloučit a kategorii {{forecastByModule}} ručně ze svého listu.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Vyberte sloupce, které chcete, aby uživatelé vyplnili pro jejich předpovědi každého {{forecastByModuleSingular}}. Prosím mějte na paměti, že pravděpodobná částka je svázaná s částkou zobrazenou v {{forecastByModule}}; z toho důvodu nemůže být sloupec Pravděpodobná částka skryt.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Vyberte, které sloupce byste chtěli zobrazit v modulu předpovědí. Seznam polí bude kombinovat list a umožní uživateli vybrat, jak nakonfigurovat jeho pohled.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jsem zástupným textem pro text Předpověď podle how-to!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Překročit o',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Žádná data',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Kvóta jednání',
+    'LBL_OPEN_LIKELY' => 'Otevřít pravděpodobné',
+    'LBL_OPEN_BEST' => 'Otevřít nejlepší',
+    'LBL_OPEN_WORST' => 'Otevřít nejhorší',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Přiřadit kvótu',
     'LBL_ASSIGNING_QUOTA' => 'Přiřazuji kvótu',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Předpověď mého týmu",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Neuložili jste změny. Jste si jisti, že chcete seřadit list a zrušit změny?',
+
+    'LBL_SAVE_TOOLTIP' => 'Uložit změny provedené v řádcích listu',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Uložit změny v záznamech a odeslat prognózu manažerovi',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Odeslat prognózu manažerovi a přidit kvótu',
+
+    'LBL_SAVE_LABEL_REP' => 'Uložit ',
+    'LBL_SAVE_LABEL_MGR' => 'Uložit upravené hodnoty',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} využívá záznamy {{forecastby_singular_module}} k sestavení {{forecastworksheets_module}} a předpovídání prodejů. Uživatelé mohou pracovat ve vztahu k prodejům {{quotas_module}} na úrovni jednotlivce, týmu nebo prodejní organizace. Než budou mít uživatelé přístup do modulu {{plural_module_name}}, správce musí vybrat požadované položky Časové období, Rozsah, Scénář pro organizaci.

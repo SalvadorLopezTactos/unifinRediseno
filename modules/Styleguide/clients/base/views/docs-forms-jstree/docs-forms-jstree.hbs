@@ -13,15 +13,17 @@
 <!-- jstree
 ================================================== -->
 <section id="jstree">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span3 columns">
       <h3>About</h3>
       <p>jsTree is a javascript based, cross browser tree component.</p>
-      <p>The jquery.jstree.js plugin is included in the default build of SugarCRM. [<a href="http://www.jstree.com/documentation" target="_blank" rel="nofollow noopener noreferrer"><i class="fa fa-book"></i> Docs</a>]</p>
+      <p>The jquery.jstree.js plugin is included in the default build of SugarCRM. [<a href="http://www.jstree.com/documentation" target="_blank" rel="nofollow noopener noreferrer"><i class="sicon sicon-document"></i> Docs</a>]</p>
     </div>
     <div class="span9 columns">
       <h2>Example</h2>

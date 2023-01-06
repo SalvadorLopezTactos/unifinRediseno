@@ -297,7 +297,7 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'archive' => fal
             'relationship_type' => 'one-to-many',
         ),
 	), /* end relationships */
-    'acls' => ['SugarACLAdminOnly' => true],
+    'acls' => ['SugarACLAdminOnly' => ['allowUserRead' => true]],
 );
 
 

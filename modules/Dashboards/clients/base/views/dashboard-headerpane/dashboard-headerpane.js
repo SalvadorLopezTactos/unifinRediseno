@@ -30,6 +30,16 @@
         'click [name=edit_overview_tab_button]': 'editOverviewTabClicked',
     },
 
+    /**
+     * IDs for console dashboards
+     *
+     * @property {Object}
+     */
+    consoleDashboards: {
+        'da438c86-df5e-11e9-9801-3c15c2c53980': 'renewal-console',
+        'c108bb4a-775a-11e9-b570-f218983a1c3e': 'agent-dashboard'
+    },
+
     initialize: function(options) {
         if (options.context.parent) {
             options.meta = app.metadata.getView(options.context.parent.get('module'), options.type, options.loadModule);
@@ -274,10 +284,21 @@
     _renderHeader: function() {
         app.view.View.prototype._render.call(this);
 
+        let id = this.model.get('id');
+        if (id && Object.keys(this.consoleDashboards).includes(id)) {
+            let headerpane = this.el.querySelector('.headerpane');
+            headerpane.classList.add('console-headerpane');
+        }
+
         this._setButtons();
         this.setButtonStates(this.context.get('create') ? 'create' : 'view');
         this.setEditableFields();
         this._enableEditButton(false);
+
+        // Give focus to the dashboard name input
+        if (this.action === 'edit') {
+            this.$('span[data-type="dashboardtitle"] .edit input').focus();
+        }
     },
 
     handleCancel: function() {

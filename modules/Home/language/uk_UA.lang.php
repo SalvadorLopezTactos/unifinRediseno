@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Розділ Sugar доданий',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Дашлети будуть перекомпоніровани, ви точно хочете змінити зовнішній вигляд колонки?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Ви дійсно бажаєте видалити розділ Sugar?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Інформаційну панель не налаштовано',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Розділи не налаштовано',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Створити інформаційну панель',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Веб-сторінка',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Веб-сторінка',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Вихідний код',
   'LBL_SOURCE_SUGAR' => 'SugarCRM - найпопулярніший у світі додаток з автоматизації процесу продажів, створений компанією SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - шаблонний двигун для PHP створений Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Набір PHP класів, які дають можливість розробникам створювати і користуватися веб-сервісами, створеними корпораціями NuSphere і Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calenda - Календар для введення дат, автор:  Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - бібліотека для створення PDF-документів, автор: Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - Реалізація сервера WebDAV в PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Довідка містить інформацію про модуль, який ви переглядаєте, надає детальні інструкції щодо виконання певних дій у модулі, а також указівки для отримання більш повної інформації та підтримки.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Фільтр',
+
+    'LBL_ABOUT_VERSION' => 'Ви використовуєте версію {{version}} з такими ліцензіями:',
 );

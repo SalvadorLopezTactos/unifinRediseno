@@ -269,7 +269,7 @@ class RestResponse extends Zend_Http_Response
         $cache_age = is_null($cache_age) ? SugarConfig::getInstance()->get('rest_response_etag_cache_age', 10) : $cache_age;
 
         if (is_null($etag)) {
-            if (is_array($this->body)) {
+            if (is_array($this->body) || is_object($this->body)) {
                 $etag = md5(json_encode($this->body));
             } else {
                 $etag = md5($this->body);

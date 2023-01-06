@@ -22,7 +22,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_USERS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Users&action=index',
     ),
     // Role Management
@@ -30,7 +30,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_ROLES_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=ACLRoles&action=index',
     ),
     // Team Management
@@ -38,7 +38,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_TEAMS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Teams&action=index',
     ),
 
@@ -47,7 +47,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_TBA_CONFIGURATION',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Teams&action=tba',
     ),
     
@@ -56,7 +56,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_PASSWORD_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'PasswordManager',
         'idm_mode_link' =>
             $idpConfig->isIDMModeEnabled() ? $idpConfig->buildCloudConsoleUrl('passwordManagement') : null,
@@ -68,7 +68,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_LICENSE_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'LicenseSettings',
     ),
     // Sugar Updates
@@ -76,7 +76,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_SUGAR_UPDATE_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'Updater',
     ),
 
@@ -86,7 +86,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_CONFIGURE_SETTINGS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Configurator&action=EditView',
     ),
     // Import Wizard
@@ -94,7 +94,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_IMPORT_WIZARD',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Import&action=step1&import_module=Administration',
     ),
 
@@ -103,7 +103,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_LOCALE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'Locale&view=default',
     ),
 
@@ -112,7 +112,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_CURRENCIES',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#Currencies',
     ),
 
@@ -121,7 +121,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_LANGUAGES',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'Languages&view=default',
     ),
     // Repair
@@ -129,7 +129,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_UPGRADE_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'Upgrade',
     ),
     // -- Quick Repair and Rebuild
@@ -137,7 +137,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_QUICK_REPAIR_AND_REBUILD',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'repair',
     ),
 
@@ -146,7 +146,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_GLOBAL_SEARCH_SETTINGS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'GlobalSearchSettings',
     ),
     // Diagnostic Tool
@@ -154,7 +154,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_DIAGNOSTIC_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'Diagnostic',
     ),
 
@@ -163,7 +163,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_CONNECTOR_SETTINGS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Connectors&action=ConnectorSettings',
     ),
     // Tracker
@@ -171,7 +171,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_TRACKER_SETTINGS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Trackers&action=TrackerSettings',
     ),
 
@@ -180,7 +180,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_REBUILD_SCHEDULERS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Schedulers&action=index',
     ),
     // PDF Manager
@@ -188,7 +188,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_PDFMANAGER_SETTINGS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=PdfManager&action=index',
     ),
     // Mobile
@@ -196,7 +196,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_WIRELESS_MODULES_ENABLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'EnableWirelessModules',
     ),
     // Web Logic Hooks
@@ -204,7 +204,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_WEB_LOGIC_HOOKS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#WebLogicHooks',
     ),
     // OAuth Keys
@@ -212,7 +212,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_OAUTH_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=OAuthKeys&action=index',
     ),
 
@@ -222,7 +222,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MASS_EMAIL_CONFIG_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=EmailMan&action=config',
     ),
     // Imbound Email
@@ -230,7 +230,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_INBOUND_EMAIL_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=InboundEmail&action=index',
     ),
 
@@ -239,7 +239,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_HISTORY_CONTACTS_EMAILS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Configurator&action=historyContactsEmails',
     ),
     // Campaign Email Settings
@@ -247,7 +247,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_CAMPAIGN_CONFIG_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=EmailMan&action=campaignconfig',
     ),
 
@@ -256,7 +256,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MASS_EMAIL_MANAGER_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=EmailMan&action=index',
     ),
     // Email Archiving
@@ -264,7 +264,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_CONFIGURE_SNIP',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=SNIP&action=ConfigureSnip',
     ),
 
@@ -274,7 +274,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_STUDIO',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=ModuleBuilder&action=index&type=studio',
     ),
     // Rename modules
@@ -282,7 +282,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_RENAME_TABS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?action=wizard&module=Studio&wizard=StudioWizard&option=RenameTabs',
     ),
 
@@ -291,7 +291,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MODULEBUILDER',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=ModuleBuilder&action=index&type=mb',
     ),
     // Display Modules and Subpanels
@@ -299,7 +299,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_CONFIG_TABS',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'ConfigureTabs',
     ),
 
@@ -308,7 +308,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MODULE_LOADER_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'UpgradeWizard&view=module',
     ),
     // Configure Navigation Bar Quick Create
@@ -316,7 +316,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_CONFIGURE_SHORTCUT_BAR',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => $adminRoute . 'ConfigureShortcutBar',
     ),
     // Sugar Portal
@@ -324,7 +324,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_SUGARPORTAL',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=ModuleBuilder&action=index&type=sugarportal',
     ),
     // Styleguide
@@ -332,7 +332,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_STYLEGUIDE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#Styleguide',
     ),
 
@@ -341,7 +341,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_DROPDOWN_EDITOR',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=ModuleBuilder&action=index&type=dropdowns',
     ),
     // Workflow Management
@@ -349,7 +349,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_WORKFLOW_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=WorkFlow&action=ListView',
     ),
 
@@ -358,7 +358,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_PRODUCTS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#ProductTemplates',
     ),
     // Manufacturers
@@ -366,7 +366,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANUFACTURERS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#Manufacturers',
     ),
 
@@ -375,7 +375,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_PRODUCT_CATEGORIES_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#ProductCategories',
     ),
     // Shipping Providers
@@ -383,7 +383,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_SHIPPERS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#Shippers',
     ),
 
@@ -392,7 +392,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_PRODUCT_TYPES_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#ProductTypes',
     ),
     // Tax Rates
@@ -400,7 +400,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_TAXRATES_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#TaxRates',
     ),
 
@@ -409,7 +409,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_RELEASES',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Releases&action=index',
     ),
 
@@ -418,7 +418,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_MANAGE_CONTRACTEMPLATES_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#ContractTypes',
     ),
 
@@ -427,7 +427,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'label' => 'LBL_PMSE_ADMIN_TITLE_CASESLIST',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'route' => '#pmse_Inbox/layout/casesList',
     ),
 );
@@ -439,7 +439,7 @@ if ($idpConfig->isIDMModeEnabled()) {
         'label' => 'LBL_SUGAR_CLOUD_SETTINGS_TITLE',
         'acl_action' => 'studio',
         'module' => $moduleName,
-        'icon' => 'fa-cogs',
+        'icon' => 'sicon-settings',
         'idm_mode_link' => $idpConfig->buildCloudConsoleUrl('/', [], $userId),
     ];
 }

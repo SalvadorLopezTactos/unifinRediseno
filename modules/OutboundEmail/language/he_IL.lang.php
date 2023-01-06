@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'מזהה כתובת דוא"ל "השב-אל"',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'כתובת דוא"ל "השב-אל"',
     'LBL_PRIMARY_TEAM' => 'צוות ראשי',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'חשבון שליחה מועדף',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הגדרות דוא"ל',
 );

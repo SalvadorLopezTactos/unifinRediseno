@@ -9,6 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 ({
+    className: 'container-fluid',
+
     // forms datetime
     _renderHtml: function () {
         var self = this;
@@ -51,8 +53,10 @@
             model: this.model,
         },
         datetimecomboField = app.view.createField(fieldSettingsCombo);
-        this.$('#sugar7_datetimecombo').append(datetimecomboField.el);
+        this.$('#datetimecombo').append(datetimecomboField.el);
         datetimecomboField.render();
+
+
 
         // static examples
         this.$('#dp1').datepicker();

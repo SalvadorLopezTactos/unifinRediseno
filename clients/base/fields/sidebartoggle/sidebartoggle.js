@@ -65,7 +65,7 @@
         *
         * @property {string}
         */
-        this.iconClass = 'fa-angle-double-' + (this._state === 'open' ? 'right' : 'left');
+        this.iconClass = `sicon-arrow-${this._state === 'open' ? 'right' : 'left'}-double`;
 
         /**
         * Stores tooltips placement value according to the direction of
@@ -112,6 +112,9 @@
             state = (this._state === 'open') ? 'close' : 'open';
         }
         this._state = state;
+
+        $('#content').toggleClass('sidebar-visible', this._state === 'open');
+
         if (!this.disposed) {
             this.render();
         }

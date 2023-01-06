@@ -20,14 +20,12 @@
 {$SUGAR_CSS}
 {$CSS}
 </head>
-{literal}
 <script type='text/javascript'>
 function disableReturnSubmission(e) {
    var key = window.event ? window.event.keyCode : e.which;
    return (key != 13);
 }
 </script>
-{/literal}
 <body class="yui-skin-sam">
 <div id="main">
     <div id="content">
@@ -380,7 +378,6 @@ addToValidate('ConfigureSettings', 'system_name', 'varchar', true,'System Name' 
     </div>
 </div>
 
-{literal}
 <script type='text/javascript'>
 <!--
 var SugarWizard = new function()
@@ -426,20 +423,20 @@ var SugarWizard = new function()
                        
                         if ( document.getElementById('mail_smtpserver').value == '' ) {
                             add_error_style('AdminWizard',form.mail_smtpserver.name,
-                                '{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_MAIL_SMTPSERVER}{literal}' );
+                                '{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_MAIL_SMTPSERVER}' );
                             isError = true;
                         }
                         if ( document.getElementById('mail_smtpauth_req').checked 
                                 && document.getElementById('mail_smtpuser').value == '' ) {
                             add_error_style('AdminWizard',form.mail_smtpuser.name,
-                                '{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_MAIL_SMTPUSER}{literal}' );
+                                '{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_MAIL_SMTPUSER}' );
                             isError = true;
                         }
                         
                         if ( document.getElementById('mail_smtpauth_req').checked 
                                 && document.getElementById('mail_smtppass').value == '' ) {
                             add_error_style('AdminWizard',form.mail_smtppass.name,
-                                '{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_MAIL_SMTPPASS}{literal}' );
+                                '{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_MAIL_SMTPPASS}' );
                             isError = true;
                         }                       
                 }
@@ -461,7 +458,7 @@ var SugarWizard = new function()
             document.getElementById('upload_panel').style.display="inline";
             document.getElementById('upload_panel').style.position="absolute";
             YAHOO.util.Dom.setX('upload_panel', YAHOO.util.Dom.getX('container_upload'));
-            YAHOO.util.Dom.setY('upload_panel', YAHOO.util.Dom.getY('container_upload')-10);
+            YAHOO.util.Dom.setY('upload_panel', YAHOO.util.Dom.getY('container_upload') - 1);
             break;
         case 'smtp':
             if ( !SUGAR.smtpButtonGroup ) {
@@ -480,7 +477,7 @@ var SugarWizard = new function()
         }
     }
 } 
-SugarWizard.changeScreen('{/literal}{$START_PAGE|escape:'html':'UTF-8'}{literal}');
+SugarWizard.changeScreen("{$START_PAGE|escape:'html':'UTF-8'}");
 document.onkeypress = SugarWizard.handleKeyStroke;
 
 function adjustEmailSettings(){
@@ -531,10 +528,10 @@ function changeEmailScreenDisplay(smtptype)
     document.getElementById("mail_smtpauth_req").checked = true;
     document.getElementById("mailsettings1").style.display = '';
     document.getElementById("mailsettings2").style.display = '';
-    document.getElementById("mail_smtppass_label").innerHTML = '{/literal}{$MOD.LBL_MAIL_SMTPPASS}{literal}';
-    document.getElementById("mail_smtpport_label").innerHTML = '{/literal}{$MOD.LBL_MAIL_SMTPPORT}{literal}';
-    document.getElementById("mail_smtpserver_label").innerHTML = '{/literal}{$MOD.LBL_MAIL_SMTPSERVER}{literal}';
-    document.getElementById("mail_smtpuser_label").innerHTML = '{/literal}{$MOD.LBL_MAIL_SMTPUSER}{literal}';
+    document.getElementById("mail_smtppass_label").innerHTML = '{$MOD.LBL_MAIL_SMTPPASS}';
+    document.getElementById("mail_smtpport_label").innerHTML = '{$MOD.LBL_MAIL_SMTPPORT}';
+    document.getElementById("mail_smtpserver_label").innerHTML = '{$MOD.LBL_MAIL_SMTPSERVER}';
+    document.getElementById("mail_smtpuser_label").innerHTML = '{$MOD.LBL_MAIL_SMTPUSER}';
     
     switch (smtptype) {
     case "yahoomail":
@@ -550,8 +547,8 @@ function changeEmailScreenDisplay(smtptype)
         }
         document.getElementById("mailsettings1").style.display = 'none';
         document.getElementById("mailsettings2").style.display = 'none';
-        document.getElementById("mail_smtppass_label").innerHTML = '{/literal}{$MOD.LBL_YAHOOMAIL_SMTPPASS}{literal}';
-        document.getElementById("mail_smtpuser_label").innerHTML = '{/literal}{$MOD.LBL_YAHOOMAIL_SMTPUSER}{literal}';
+        document.getElementById("mail_smtppass_label").innerHTML = '{$MOD.LBL_YAHOOMAIL_SMTPPASS}';
+        document.getElementById("mail_smtpuser_label").innerHTML = '{$MOD.LBL_YAHOOMAIL_SMTPUSER}';
         break;
     case "gmail":
         if(document.getElementById("mail_smtpserver").value == "" || document.getElementById("mail_smtpserver").value == 'plus.smtp.mail.yahoo.com') {    
@@ -566,10 +563,8 @@ function changeEmailScreenDisplay(smtptype)
                 }
             }
         }
-        //document.getElementById("mailsettings1").style.display = 'none';
-        //document.getElementById("mailsettings2").style.display = 'none';
-        document.getElementById("mail_smtppass_label").innerHTML = '{/literal}{$MOD.LBL_GMAIL_SMTPPASS}{literal}';
-        document.getElementById("mail_smtpuser_label").innerHTML = '{/literal}{$MOD.LBL_GMAIL_SMTPUSER}{literal}';
+        document.getElementById("mail_smtppass_label").innerHTML = '{$MOD.LBL_GMAIL_SMTPPASS}';
+        document.getElementById("mail_smtpuser_label").innerHTML = '{$MOD.LBL_GMAIL_SMTPUSER}';
         break;
     case "exchange":
         document.getElementById("mail_smtpserver").value = '';
@@ -577,16 +572,15 @@ function changeEmailScreenDisplay(smtptype)
         document.getElementById("mail_smtpauth_req").checked = true;
         document.getElementById("mailsettings1").style.display = '';
         document.getElementById("mailsettings2").style.display = '';
-        document.getElementById("mail_smtppass_label").innerHTML = '{/literal}{$MOD.LBL_EXCHANGE_SMTPPASS}{literal}';
-        document.getElementById("mail_smtpport_label").innerHTML = '{/literal}{$MOD.LBL_EXCHANGE_SMTPPORT}{literal}';
-        document.getElementById("mail_smtpserver_label").innerHTML = '{/literal}{$MOD.LBL_EXCHANGE_SMTPSERVER}{literal}';
-        document.getElementById("mail_smtpuser_label").innerHTML = '{/literal}{$MOD.LBL_EXCHANGE_SMTPUSER}{literal}';
+        document.getElementById("mail_smtppass_label").innerHTML = '{$MOD.LBL_EXCHANGE_SMTPPASS}';
+        document.getElementById("mail_smtpport_label").innerHTML = '{$MOD.LBL_EXCHANGE_SMTPPORT}';
+        document.getElementById("mail_smtpserver_label").innerHTML = '{$MOD.LBL_EXCHANGE_SMTPSERVER}';
+        document.getElementById("mail_smtpuser_label").innerHTML = '{$MOD.LBL_EXCHANGE_SMTPUSER}';
         break;
     }
     notify_setrequired();
     setDefaultSMTPPort();
 }
-//changeEmailScreenDisplay("{/literal}{$mail_smtptype}{literal}");
 
 function uploadCheck(){
     //AJAX call for checking the file size and comparing with php.ini settings.
@@ -654,24 +648,24 @@ function testOutboundSettings() {
     var mailsmtpauthreq = document.getElementById('mail_smtpauth_req');
     if(trim(smtpServer) == '') {
         isError = true;
-        errorMessage += "{/literal}{$APP.LBL_EMAIL_ACCOUNTS_SMTPSERVER}{literal}" + "<br/>";
+        errorMessage += "{$APP.LBL_EMAIL_ACCOUNTS_SMTPSERVER}" + "<br/>";
     }
     if(trim(smtpPort) == '') {
         isError = true;
-        errorMessage += "{/literal}{$APP.LBL_EMAIL_ACCOUNTS_SMTPPORT}{literal}" + "<br/>";
+        errorMessage += "{$APP.LBL_EMAIL_ACCOUNTS_SMTPPORT}" + "<br/>";
     }
     if(mailsmtpauthreq.checked) {
         if(trim(document.getElementById('mail_smtpuser').value) == '') {
             isError = true;
-            errorMessage += "{/literal}{$APP.LBL_EMAIL_ACCOUNTS_SMTPUSER}{literal}" + "<br/>";
+            errorMessage += "{$APP.LBL_EMAIL_ACCOUNTS_SMTPUSER}" + "<br/>";
         }
         if(trim(document.getElementById('mail_smtppass').value) == '') {
             isError = true;
-            errorMessage += "{/literal}{$APP.LBL_EMAIL_ACCOUNTS_SMTPPASS}{literal}" + "<br/>";
+            errorMessage += "{$APP.LBL_EMAIL_ACCOUNTS_SMTPPASS}" + "<br/>";
         }                
     }
     if(isError) {
-        overlay("{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS}{literal}", errorMessage, 'alert');
+        overlay("{$APP.ERR_MISSING_REQUIRED_FIELDS}", errorMessage, 'alert');
         return false;    
     } 
     
@@ -685,22 +679,22 @@ function sendTestEmail()
     
     if (trim(fromAddress) == "") 
     {
-        overlay("{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS}{literal}", "{/literal}{$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}{literal}", 'alert');
+        overlay("{$APP.ERR_MISSING_REQUIRED_FIELDS}", "{$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}", 'alert');
         return;
     }
     else if (!isValidEmail(fromAddress)) {
-        overlay("{/literal}{$APP.ERR_INVALID_REQUIRED_FIELDS}{literal}", "{/literal}{$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}{literal}", 'alert');
+        overlay("{$APP.ERR_INVALID_REQUIRED_FIELDS}", "{$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}", 'alert');
         return;
     }
     
     //Hide the email address window and show a message notifying the user that the test email is being sent.
     EmailMan.testOutboundDialog.hide();
-    overlay("{/literal}{$APP.LBL_EMAIL_PERFORMING_TASK}{literal}", "{/literal}{$APP.LBL_EMAIL_ONE_MOMENT}{literal}", 'alert');
+    overlay("{$APP.LBL_EMAIL_PERFORMING_TASK}", "{$APP.LBL_EMAIL_ONE_MOMENT}", 'alert');
     
     var callbackOutboundTest = {
         success : function(o) {
             hideOverlay();
-            overlay("{/literal}{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}{literal}", "{/literal}{$APP.LBL_EMAIL_TEST_NOTIFICATION_SENT}{literal}", 'alert');
+            overlay("{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}", "{$APP.LBL_EMAIL_TEST_NOTIFICATION_SENT}", 'alert');
         }
     };    
     var smtpServer = document.getElementById('mail_smtpserver').value;
@@ -723,7 +717,7 @@ function testOutboundSettingsDialog() {
                 width   : 600,
                 shadow  : false
             });
-            EmailMan.testOutboundDialog.setHeader("{/literal}{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}{literal}");
+            EmailMan.testOutboundDialog.setHeader("{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}");
             YAHOO.util.Dom.removeClass("testOutboundDialog", "yui-hidden");
         } // end lazy load
         
@@ -764,7 +758,7 @@ function setDefaultSMTPPort()
     }
         
 }
-{/literal}
+
 {$getNameJs}
 -->
 </script>

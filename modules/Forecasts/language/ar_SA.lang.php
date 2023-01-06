@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'الوصف',
     'LBL_OW_TYPE'=>'النوع',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'تنبؤ الفريق لـ <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'تقرير مباشر',
     'LBL_FDR_OPPORTUNITIES'=>'الفرص في التوقع:',
     'LBL_FDR_WEIGH'=>'المبلغ المقدر للفرص:',
     'LBL_FDR_COMMIT'=>'المبلغ المؤكد',
     'LBL_FDR_DATE_COMMIT'=>'تاريخ التأكيد',
+    'LBL_FDR_FORECAST_HEADER' => 'تنبؤ البائع لـ <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'التوقعات: ورقة العمل',
     'LBL_DV_MY_FORECASTS' => 'التوقعات الخاصة بي',
-    'LBL_DV_MY_TEAM' => "توقعات فريقي" ,
+    'LBL_DV_MY_TEAM' => "توقعات فريقي",
     'LBL_DV_TIMEPERIODS' => 'الفترات الزمنية:',
     'LBL_DV_FORECAST_PERIOD' => 'فترة التوقع الزمنية',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'فرص التوقع',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'سعر الأساس',
 
     'LBL_QUOTA' => 'الحصة النسبية',
-    'LBL_QUOTA_ADJUSTED' => 'الحصة النسبية (معدلة)',
+    'LBL_QUOTA_ADJUSTED' => 'الحصة المعدلة',
 
     'LBL_FORECAST_FOR'=>'قائمه التوقعات التي تخص: ',
     'LBL_FMT_ROLLUP_FORECAST'=>'(قيمة محتسبة)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'الحصة النسبية ضد. المؤكد ضد. الفعلي',
 
     'LBL_FORECAST' => 'التوقع',
+    'LBL_COMMITMENT' => 'الالتزام',
+    'LBL_TEAM_COMMITMENT' => 'التزام الفريق',
+    'LBL_FORECASTED' => 'المتوقع',
+    'LBL_ADJUSTED_TOTAL' => 'الإجمالي المعدل',
     'LBL_COMMIT_STAGE' => 'تأكيد المرحلة',
     'LBL_SALES_STAGE' => 'مرحلة',
     'LBL_AMOUNT' => 'المبلغ',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}، {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}، {{{second}}}، و {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'محتمل {{{direction}}} {{{from}}} لـ {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'أفضل {{{direction}}} {{{from}}} لـ {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'أسوأ {{{direction}}} {{{from}}} لـ {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'بقاء المحتمل على ما هو عليه',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'بقاء الأفضل على ما هو عليه',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'بقاء الأسوأ على ما هو عليه',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'الالتزام المؤكد (الأرجح) {{{direction}}} {{{from}}} إلى {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'الالتزام المؤكد (الأفضل) {{{direction}}} {{{from}}} إلى {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'الالتزام المؤكد (الأسوأ) {{{direction}}} {{{from}}} إلى {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'بقى الالتزام المؤكد (الأرجح) على ما هو عليه',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'بقى الالتزام المؤكد (الأفضل) على ما هو عليه',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'بقى الالتزام المؤكد (الأسوأ) على ما هو عليه',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'هذا الشهر في {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'الإجمالي الذي تم عرضه',
     'LBL_TOTAL' => 'الإجمالي',
     'LBL_OVERALL_TOTAL' => 'الإجمالي العام',
-    'LBL_EDITABLE_INVALID' => 'قيمة غير صالحة لـ {0}',
+    'LBL_EDITABLE_INVALID' => 'قيمة غير صالحة لـ {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'يجب أن تكون القيمة بين {0} و {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'لم تقم بحفظ التغييرات في ورقة العمل الخاصة بك.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'سوف يتم توريد البيانات التي تم حفظها أو تأكيدها فقط. إيقاف قبل الاكتمال تأكيد لتوريد البيانات التي تم حفظها.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'متضمن',
     'LBL_CHART_NOT_INCLUDED' => 'غير متضمن',
     'LBL_CHART_ADJUSTED' => ' (معدَّل)',
-    'LBL_SAVE_DRAFT' => 'حفظ المسودة',
+    'LBL_SAVE_DRAFT' => 'حفظ',
     'LBL_CHANGES_BY' => 'تغير بواسطة {0}',
     'LBL_FORECAST_SETTINGS' => 'الإعدادات',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'تاريخ بدء السنة المالية:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'تكوين الفترة الزمنية التي سوف تستخدم في وحدة التوقعات. <br><br>يُرجى ملاحظة أنه لا يمكن تغيير إعدادات الفترة الزمنية بعد الإعداد الأولي.<br><br>ابدأ باختيار تاريخ بدء السنة المالية الخاصة بك. ثم اختيار نوع الفترة الزمنية الخاصة بالتوقع. سوف يتم حساب نطاق تاريخ الفترات الزمنية تلقائيًا استنادًا إلى تحديداتك. الفترة الزمنية الفرعية هي أساس قائمه التوقعات. <br><br>سوف تحدد الفترات الزمنية الفرعية الماضية والمستقبلية القابلة للعرض عدد الفترات الفرعية المرئية في وحدة التوقعات. لدى المستخدمين إمكانية عرض عدد التوقعات وتعديلها في الفترات الفرعية المرئية.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'قم بتهيئة الطريقة التي ترغب بتصنيف {{forecastByModule}} بها. <br><br>الرجاء ملاحظة أن إعدادات "النطاق" لا يمكن تغييرها بعد تقديم أول تعهد. بالنسبة إلى الأمثلة المحدثة، يتم قفل إعداد "النطاق" على بيانات التوقع الحالية.<br><br>يمكنك تحديد فئتين أو أكثر استنادًا إلى نطاقات الاحتمالية أو إنشاء فئات غير مستندة إلى الاحتمالية. <br><br>توجد خانات اختيار على يسار الفئات المخصصة؛ استخدمها لتحديد النطاقات التي سيتم تضمينها داخل مبلغ التوقع المتعهد به والمُبلغ إلى المديرين. <br><br>يمكن لمستخدم تغيير حالة التضمين/الاستبعاد وفئة {{forecastByModule}} يدويًا من داخل ورقة العمل الخاصة به.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'قم بتكوين الطريقة التي ترغب بتصنيف {{forecastByModule}} بها. <br><br>الرجاء ملاحظة أن إعدادات "النطاق" لا يمكن تغييرها بعد تقديم أول التزام. بالنسبة إلى الأمثلة المحدثة، يتم قفل إعداد "النطاق" على بيانات التوقع الحالية. <br><br>يمكنك تحديد فئتين أو أكثر استنادًا إلى نطاقات الاحتمالية أو إنشاء فئات غير مستندة إلى الاحتمالية. <br><br>توجد خانات اختيار على يسار الفئات المخصصة؛ استخدمها لتحديد النطاقات التي سيتم تضمينها داخل مبلغ التوقع الملتزم به والمُبلغ إلى المديرين. <br><br>يمكن لمستخدم تغيير حالة التضمين/الاستبعاد وفئة {{forecastByModule}} يدويًا من داخل ورقة العمل الخاصة به.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'قم بتحديد الأعمدة التي ترغب في أن يقوم المستخدم بتعبئتها التوقعات الخاصة بها لكل {{forecastByModuleSingular}}. يُرجى ملاحظة أن المبلغ المحتمل مرتبط بالمبلغ الظاهر في {{forecastByModule}}؛ ولهذا السبب لا يمكن إخفاء عمود المحتمل.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'قم بتحديد الأعمدة التي ترغب في إظهارها في وحدة التوقع. سوف يتم دمج ورقة العمل والسماح للمستخدم باختيار كيفية تكوين طريقة عرضها.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'أنا عنصر نائب للتوقع من خلال تعليمات النص!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'التجاوز بحسب',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'لا توجد بيانات',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'حصة الاجتماع النسبية',
+    'LBL_OPEN_LIKELY' => 'الفرص المفتوحة المرجحة',
+    'LBL_OPEN_BEST' => 'الفرص المفتوحة الأفضل',
+    'LBL_OPEN_WORST' => 'الفرص المفتوحة الأسوأ',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'تعيين الحصة النسبية',
     'LBL_ASSIGNING_QUOTA' => 'جارٍ تعيين الحصة النسبية',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "توقعات فريقي",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'لم يتم حفظ التغييرات. هل أنت متأكد من رغبتك في فرز ورقة العمل وتجاهل التغييرات؟',
+
+    'LBL_SAVE_TOOLTIP' => 'حفظ التغييرات التي تمت على صفوف ورقة العمل',
+    'LBL_COMMIT_TOOLTIP_REP' => 'حفظ التغييرات على السجلات وإرسال التوقع إلى المدير',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'إرسال التوقع إلى المدير وتخصيص حصة',
+
+    'LBL_SAVE_LABEL_REP' => 'حفظ ',
+    'LBL_SAVE_LABEL_MGR' => 'حفظ القيم المعدلة',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'تشتمل الوحدة {{plural_module_name}} على سجلات {{opportunities_singular_module}} لبناء {{module_name}}ing {{worksheet_module}} وتوقع المبيعات. يمكن أن يعمل المستخدمين من أجل تحقيق حصص المبيعات على مستوى الفرد وفريق العمل ومؤسسة المبيعات. قبل أن يتمكن المستخدمون من الوصول إلى وحدة {{plural_module_name}} للبدء في بناء {{module_name}}ing {{worksheet_module}}، يجب أن يقوم مستخدم يمتلك حق الموصول كمسؤول بتكوين الوحدة {{plural_module_name}} مع الفترات الزمية ووالنطاقات والسيناريوهات التي تريدها المؤسسة. يستخدم مندوبو المبيعات الوحدة {{plural_module_name}} للتعامل مع الوحدة {{opportunities_module}} المعينة لهم مع تقدم الفترة الزمنية الحالية. ويقوم هؤلاء المستخدمون بتثبيت إجمالي التوقعات للمبيعات الشخصية الخاصة بهم اعتمادًا على {{opportunities_module}} التي يتوقعون إغلاقها. يعمل مديرو المبيعات مع سجلات {{opportunities_singular_module}} الخاصة بهم بشكل يشبه مندوبي المبيعات الآخرين. وبالإضافة إلى ذلك، فإنهم يقومون بتجميع مبالغ {{module_name}} التي يثبتها من يعملون تحت إمرتهم لتوقيع المبيعات الإجمالية للفريق وأعمالهم فيما يخص تحقيق حصة الفريق لكل فترة زمنية. يتم توفير المزيد من الرؤى من خلال عناصر لوحة الذكاء القابلة للتوسيع بما في ذلك تحليل ورقة عمل {{opportunities_module}} لفرد وتحليل أوراق عمل فريق عمل المدير.'

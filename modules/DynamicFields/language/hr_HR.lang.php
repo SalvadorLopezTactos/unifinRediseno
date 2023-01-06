@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Naziv polja već postoji',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Naziv polja trebao bi sadržavati samo sljedeće znakove: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Nema uključenog modula, nije moguće spremiti',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Naziv padajućeg izbornika već postoji',
     'LBL_BTN_ADD' => 'Dodaj',
     'LBL_BTN_EDIT' => 'Uredi',
     'LBL_GENERATE_URL' => 'Generiraj URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Dodavanje stupca {0} u',
     'LBL_DONE' => 'Dovršeno',
     'LBL_EXE_NON_SIM_MODE' => 'Izvrši način nesimulacije',
+    'LBL_CALCULATION_VISIBLE' => 'Učini vidljivim za izračune',
 );
-
-
-?>

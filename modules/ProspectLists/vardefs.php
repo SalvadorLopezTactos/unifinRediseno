@@ -27,7 +27,7 @@ $dictionary['ProspectList'] = array(
             'vname'            => 'LBL_NAME',
             'type'             => 'name',
             'dbType' => 'varchar',
-            'len'              => '50',
+            'len'              => '255',
             'importable'       => 'required',
             'unified_search'   => true,
             'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.33),

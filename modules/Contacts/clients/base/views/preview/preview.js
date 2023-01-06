@@ -8,9 +8,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+/**
+ * @class View.Views.Base.Contacts.PreviewView
+ * @alias SUGAR.App.view.views.BaseContactsPreviewView
+ * @extends View.Views.Base.PreviewView
+ */
 ({
     extendsFrom: 'PreviewView',
-
 
     initialize: function(options) {
         //Plugin is registered by the Contact record view

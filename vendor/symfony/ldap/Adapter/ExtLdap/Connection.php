@@ -25,15 +25,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class Connection extends AbstractConnection
 {
-    private const LDAP_INVALID_CREDENTIALS = '0x31';
-    private const LDAP_TIMEOUT = '0x55';
-    private const LDAP_ALREADY_EXISTS = '0x44';
+    private const LDAP_INVALID_CREDENTIALS = 0x31;
+    private const LDAP_TIMEOUT = 0x55;
+    private const LDAP_ALREADY_EXISTS = 0x44;
 
     /** @var bool */
     private $bound = false;
 
     /** @var resource */
     private $connection;
+
+    /**
+     * @return array
+     */
+    public function __sleep()
+    {
+        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+    }
+
+    public function __wakeup()
+    {
+        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
+    }
 
     public function __destruct()
     {
@@ -50,6 +63,8 @@ class Connection extends AbstractConnection
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $password WARNING: When the LDAP server allows unauthenticated binds, a blank $password will always be valid
      */
     public function bind($dn = null, $password = null)
     {

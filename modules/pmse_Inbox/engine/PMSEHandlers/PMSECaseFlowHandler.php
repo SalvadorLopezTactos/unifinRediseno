@@ -294,7 +294,7 @@ class PMSECaseFlowHandler
                 $bpmnElement = $this->retrieveFlowElement($flowData['bpmn_id']);
                 break;
             default:
-                $bpmnElement = $this->retrievePMSEElement();
+                $bpmnElement = $this->retrievePMSEElement('');
                 break;
         }
 
@@ -333,6 +333,9 @@ class PMSECaseFlowHandler
                         break;
                     case 'ADD_RELATED_RECORD':
                         $bpmElement = $this->retrievePMSEElement('PMSEAddRelatedRecord');
+                        break;
+                    case 'DOCUMENT_MERGE':
+                        $bpmElement = $this->retrievePMSEElement('PMSEDocumentMerge');
                         break;
                 }
                 break;
@@ -688,6 +691,7 @@ class PMSECaseFlowHandler
         $preparedFlow['rel_element_module'] = isset($flowData['rel_element_module']) ? $flowData['rel_element_module'] : '';
         //Set these attributes if a start event is being evaluated
         $preparedFlow['evn_criteria'] = isset($flowData['evn_criteria']) ? $flowData['evn_criteria'] : '';
+        $preparedFlow['evn_params'] = isset($flowData['evn_params']) ? $flowData['evn_params'] : '';
 
         return $preparedFlow;
     }

@@ -31,9 +31,9 @@ class AdministrationViewEnablewirelessmodules extends SugarView
 	    global $mod_strings;
 
     	return array(
-    	   "<a href='index.php?module=Administration&action=index'>".$mod_strings['LBL_MODULE_NAME']."</a>",
-    	   translate('LBL_WIRELESS_MODULES_ENABLE')
-    	   );
+            "<a href='#Administration'>".$mod_strings['LBL_MODULE_NAME']."</a>",
+            translate('LBL_WIRELESS_MODULES_ENABLE'),
+        );
     }
 
     /**
@@ -67,6 +67,7 @@ class AdministrationViewEnablewirelessmodules extends SugarView
             'ProductBundles',
             'ProductTemplates',
             'Project',
+            'DocuSignEnvelopes',
         );
 
         // replicate the essential part of the behavior of the private loadMapping() method in SugarController
@@ -146,7 +147,7 @@ class AdministrationViewEnablewirelessmodules extends SugarView
         echo getClassicModuleTitle(
                 "Administration",
                 array(
-                    "<a href='index.php?module=Administration&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>",
+                    "<a href='#Administration'>{$mod_strings['LBL_MODULE_NAME']}</a>",
                    translate('LBL_WIRELESS_MODULES_ENABLE')
                    ),
                 false

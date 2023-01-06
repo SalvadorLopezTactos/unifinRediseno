@@ -58,24 +58,9 @@ $dictionary['meetings_users'] = array(
             ),
         ),
         array(
-            'name' => 'idx_usr_mtg_mtg',
-            'type' => 'index',
-            'fields' => array(
-                'meeting_id',
-            ),
-        ),
-        array(
             'name' => 'idx_usr_mtg_usr',
             'type' => 'index',
             'fields' => array(
-                'user_id',
-            ),
-        ),
-        array(
-            'name' => 'idx_meeting_users',
-            'type' => 'alternate_key',
-            'fields' => array(
-                'meeting_id',
                 'user_id',
             ),
         ),

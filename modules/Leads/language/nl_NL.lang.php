@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Aanbevolen door',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Titel',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Voorspelling marktinteresse',
+    'LBL_MARKET_SCORE' => 'Marktscore',
     'LBL_MOBILE_PHONE' => 'Mobiel:',
     'LBL_MODULE_NAME' => 'Leads',
     'LBL_MODULE_NAME_SINGULAR' => 'Lead',
@@ -330,4 +332,9 @@ Na het bevestigen van elke vereiste en gewenste module, klikt u op de "Opslaan e
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Voorspelling leadsconversie',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Voorspellingsgegevens bekijken voor een specifieke lead',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Omzetregelitems inschakelen',
+    'LBL_REQUIRE_RLIS' => 'Vereist omzetregelitems als een nieuwe opportunity wordt aangemaakt',
+    'LBL_COPY_DATA_RLIS' => 'Kopieer leadgegevens naar de omzetregelitems als u een nieuwe opportunity aanmaakt',
 );

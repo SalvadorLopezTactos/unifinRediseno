@@ -37,7 +37,7 @@ class FragmentHandler
      * @param FragmentRendererInterface[] $renderers    An array of FragmentRendererInterface instances
      * @param bool                        $debug        Whether the debug mode is enabled or not
      */
-    public function __construct(RequestStack $requestStack, array $renderers = [], bool $debug = false)
+    public function __construct(RequestStack $requestStack, array $renderers = [], $debug = false)
     {
         $this->requestStack = $requestStack;
         foreach ($renderers as $renderer) {
@@ -100,7 +100,7 @@ class FragmentHandler
     protected function deliver(Response $response)
     {
         if (!$response->isSuccessful()) {
-            throw new \RuntimeException(sprintf('Error when rendering "%s" (Status code is %s).', $this->requestStack->getCurrentRequest()->getUri(), $response->getStatusCode()));
+            throw new \RuntimeException(sprintf('Error when rendering "%s" (Status code is %d).', $this->requestStack->getCurrentRequest()->getUri(), $response->getStatusCode()));
         }
 
         if (!$response instanceof StreamedResponse) {
@@ -108,5 +108,7 @@ class FragmentHandler
         }
 
         $response->sendContent();
+
+        return null;
     }
 }

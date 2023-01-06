@@ -69,9 +69,12 @@ class SugarUpgradeFixDashboardDisplayName extends UpgradeScript
             }
 
             if ($updated) {
-                $query = "UPDATE dashboards SET metadata = '" . json_encode($metadata) .
-                    "' WHERE id = '" . $row['id'] . "'";
-                $this->db->query($query);
+                $query = 'UPDATE dashboards SET metadata = ? WHERE id = ?';
+                $this->db->getConnection()->executeUpdate(
+                    $query,
+                    [json_encode($metadata), $row['id']],
+                    [\Doctrine\DBAL\ParameterType::STRING, \Doctrine\DBAL\ParameterType::STRING]
+                );
                 $this->log('"full_name" of ' . $row['name'] . ' has been replaced by "name"');
             }
         }

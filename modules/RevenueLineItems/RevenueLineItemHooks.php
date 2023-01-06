@@ -106,4 +106,29 @@ class RevenueLineItemHooks
         RevenueLineItem::schedulePurchaseGenerationJob($data);
         return true;
     }
+    /**
+     * Generate Renewal for parent opportunity for a new RLI if
+     * 1. The new Revenue Line Item is 'Closed Won'
+     * 2. The Opportunity is already 'Closed Won'
+     *
+     * @param $bean SugarBean
+     * @param $event string
+     * @param $args array
+     */
+    public static function generateRenewalOpportunity($bean, $event, $args)
+    {
+        if (!$args['isUpdate']) {
+            $opportunityBean = BeanFactory::retrieveBean('Opportunities', $bean->opportunity_id);
+            if ($bean->service == 1 &&
+                $bean->renewable == 1 &&
+                $opportunityBean &&
+                $opportunityBean->sales_status === Opportunity::STATUS_CLOSED_WON &&
+                in_array($bean->sales_stage, $opportunityBean->getRliClosedWonStages())) {
+                // Spoof that sales status has changed in the Opportunity to
+                // trigger renewal opportunity update
+                $args['dataChanges']['sales_status']['after'] = Opportunity::STATUS_CLOSED_WON;
+                OpportunityHooks::generateRenewalOpportunity($opportunityBean, $event, $args);
+            }
+        }
+    }
 }

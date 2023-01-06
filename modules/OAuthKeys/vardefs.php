@@ -73,7 +73,6 @@ $dictionary['OAuthKey'] = array('table' => 'oauth_consumer',
     'acls' => array('SugarACLAdminOnly' => true, 'SugarACLOAuthKeys' => true),
     'indices' => array (
        array('name' =>'ckey', 'type' =>'unique', 'fields'=>array('c_key')),
-       array('name' => 'idx_oauthkey_name', 'type' => 'index', 'fields' => array('name')),
        array('name' => 'idx_oauthkey_client_type', 'type' => 'index', 'fields' => array('client_type')),
     )
 );

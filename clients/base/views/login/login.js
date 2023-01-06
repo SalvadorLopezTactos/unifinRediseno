@@ -208,7 +208,7 @@
      */
     getLogoImage: function() {
         // Fallback to Sugar logo for portal
-        return app.metadata.getLogoUrl();
+        return app.metadata.getLogoUrl(app.utils.isDarkMode());
     },
 
     /**

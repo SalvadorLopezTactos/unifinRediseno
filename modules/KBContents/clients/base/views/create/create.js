@@ -8,19 +8,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
+/**
+ * @class View.Views.Base.KBContents.CreateView
+ * @alias SUGAR.App.view.views.BaseKBContentsCreateView
+ * @extends View.Views.Base.CreateView
+ */
 ({
     extendsFrom: 'CreateView',
+
+    className: 'kb-contents-create',
 
     /**
      * @inheritdoc
      *
-     * Add KBContent plugin for view.
+     * Add 'KBContent', 'KBNotify' and 'TinymceHtmlEditor' plugins for view.
      */
     initialize: function(options) {
         this.plugins = _.union(this.plugins || [], [
             'KBContent',
-            'KBNotify'
+            'KBNotify',
+            'Tinymce'
         ]);
         this._super('initialize', [options]);
     },

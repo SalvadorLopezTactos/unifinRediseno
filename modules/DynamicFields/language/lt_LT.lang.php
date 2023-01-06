@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Toks lauko pavadinimas jau egzistuoja',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Field name should contain only the following characters: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'No Module Included Could Not Save',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Išskleidžiamojo meniu pavadinimas jau egzistuoja',
     'LBL_BTN_ADD' => 'Pridėti',
     'LBL_BTN_EDIT' => 'Redaguoti',
     'LBL_GENERATE_URL' => 'Generuoti adresą',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Adding Column {0} to',
     'LBL_DONE' => 'Baigti',
     'LBL_EXE_NON_SIM_MODE' => 'Execute non-simulation mode',
+    'LBL_CALCULATION_VISIBLE' => 'Padaryti matomas, kad būtų galima apskaičiuoti',
 );
-
-
-?>

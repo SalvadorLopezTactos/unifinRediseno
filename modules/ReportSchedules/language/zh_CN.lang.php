@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => '此报表计划',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => '报表计划记录仪表板',
+    'LBL_FILE_TYPE' => '文件类型',
 );

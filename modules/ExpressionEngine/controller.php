@@ -109,6 +109,14 @@ class ExpressionEngineController extends SugarController
     }
 
     /**
+     * Validate that the provided string matches a valid User module field
+     */
+    public function action_validateUserField()
+    {
+        $this->view = 'validateUserField';
+    }
+
+    /**
      * Used by the dependency manager to pre-load all the related fields required
      * to load an entire view.
      */

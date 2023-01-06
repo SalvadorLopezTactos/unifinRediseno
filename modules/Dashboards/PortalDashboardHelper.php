@@ -50,7 +50,8 @@ class PortalDashboardHelper
     }
 
     /**
-     * Checks if it's a portal dashboard.
+     * Checks if it's a portal dashboard. Do not throw exceptions if current user
+     * is admin.
      * @param SugarBean $bean
      * @param string $event
      * @param array $args
@@ -58,9 +59,21 @@ class PortalDashboardHelper
      */
     public function checkPortalDashboard(SugarBean $bean, string $event, array $args)
     {
+        if ($this->isAdminUser()) {
+            return;
+        }
         $platform = $_SESSION['platform'] ?? 'base';
         if ($platform !== 'portal' && !empty($args['id']) && in_array($args['id'], self::$portalDashboards)) {
             throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED', ['view']);
         }
+    }
+
+    /**
+     * Util to check if current user is admin
+     * @return boolean True if user is admin, else false
+     */
+    protected function isAdminUser() {
+        global $current_user;
+        return $current_user->isAdmin();
     }
 }

@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Brugere',
     'LBL_EMAILS_PRODUCTS_REL' => 'Angivne linjeprodukter',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Indtægt linjeelementer',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskaleringer',
     'LBL_EMAILS_MESSAGES_REL' => 'Meddelelser',
     'LBL_EMAILS_PURCHASES_REL' => 'Køb',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Købte linjeprodukter',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Send e-mail',
     'LBL_MAILBOX' => 'Indgående konto',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurer en udgående e-mail-konto via <a href="#OutboundEmail"> E-mail-indstillinger </a> for at sende e-mails.',
 );

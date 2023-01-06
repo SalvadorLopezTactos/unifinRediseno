@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Archyvas',
     'LBL_PROCESS_TYPE_DELETE' => 'Visiškas ištrynimas',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Archyvas veikia',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Įspėjimas',
+    'LBL_ARCHIVER_WARNING' => 'Šį veiksmą rekomenduojama atlikti, kai nedaug vartotojų, arba ne darbo metu, '
+        . 'nes tai gali turėti įtakos sistemos veikimui. Ar tikrai norite atlikti šį veiksmą dabar?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Modulio {{moduleName}} archyvatorius turi būti nustatytas {{fieldName}} kaip filtras',
 );

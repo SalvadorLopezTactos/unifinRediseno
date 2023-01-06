@@ -118,7 +118,10 @@ function mk_temp_dir( $base_dir, $prefix="" )
 
 function remove_file_extension( $filename )
 {
-    return( substr( $filename, 0, strrpos($filename, ".") ) );
+    if (strrpos($filename, '.') === false) {
+        return $filename;
+    }
+    return substr($filename, 0, strrpos($filename, '.'));
 }
 
 function write_array_to_file( $the_name, $the_array, $the_file, $mode="w", $header='' )
@@ -160,37 +163,6 @@ function write_array_to_file_as_key_value_pair($the_name, $the_array, $the_file,
     }
 
     return sugar_file_put_contents_atomic($the_file, $the_string);
-}
-
-function write_encoded_file( $soap_result, $write_to_dir, $write_to_file="" )
-{
-    // this function dies when encountering an error -- use with caution!
-    // the path/file is returned upon success
-
-
-
-    if( $write_to_file == "" )
-    {
-        $write_to_file = $write_to_dir . "/" . $soap_result['filename'];
-    }
-
-    $file = $soap_result['data'];
-    $write_to_file = str_replace( "\\", "/", $write_to_file );
-
-    $dir_to_make = dirname( $write_to_file );
-    if( !is_dir( $dir_to_make ) )
-    {
-        mkdir_recursive( $dir_to_make );
-    }
-    $fh = sugar_fopen( $write_to_file, "wb" );
-    fwrite( $fh, base64_decode( $file ) );
-    fclose( $fh );
-
-    if( md5_file( $write_to_file ) != $soap_result['md5'] )
-    {
-        die( "MD5 error after writing file $write_to_file" );
-    }
-    return( $write_to_file );
 }
 
 function create_custom_directory($file)
@@ -527,4 +499,35 @@ function mime_is_detectable()
 function mime_is_detectable_by_finfo()
 {
     return function_exists('finfo_open') && function_exists('finfo_file') && function_exists('finfo_close');
+}
+
+/**
+ * Check file name for null bytes, directory traversal, absolute path and stream wrappers
+ * @param string filename
+ * @return bool
+ */
+function check_file_name($filename)
+{
+
+    if (strpos($filename, chr(0)) !== false) {
+        $GLOBALS['log']->fatal('Null byte detected in filename ' . $filename);
+        return false;
+    }
+
+    if (strpos($filename, '..') !== false) {
+        $GLOBALS['log']->fatal('Directory traversal detected in filename ' . $filename);
+        return false;
+    }
+
+    if (strpos($filename, '/') === 0) {
+        $GLOBALS['log']->fatal('Absolute path detected in filename ' . $filename);
+        return false;
+    }
+
+    if (strpos($filename, '://') !== false) {
+        $GLOBALS['log']->fatal('Stream wrapper detected in filename ' . $filename);
+        return false;
+    }
+
+    return true;
 }

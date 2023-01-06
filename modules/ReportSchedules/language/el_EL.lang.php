@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Αυτό το Πρόγραμμα Αναφοράς',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Προγραμμάτων Αναφοράς',
+    'LBL_FILE_TYPE' => 'Τύπος (τύποι) αρχείου (αρχείων)',
 );

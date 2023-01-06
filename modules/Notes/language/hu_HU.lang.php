@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Email melléklet',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'E-mail melléklet a következő számára:',
+    'LBL_NOTE_ATTACHMENT' => 'Megjegyzés mellékletek',
+    'LBL_KB_ATTACHMENT' => 'KDBDoukmentummellékletek',
+    'LBL_CASE_ATTACHMENT' => 'Ügy mellékletek',
     'LBL_FILE_MIME_TYPE' => 'Mime típus',
     'LBL_FILE_EXTENSION' => 'Fájl kiterjesztése',
     'LBL_FILE_SOURCE' => 'Fájl forrása',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Megjegyzés forrása',
     'LBL_SOURCE_EXTERNAL' => 'Külső',
     'LBL_SOURCE_INTERNAL' => 'Belső',
+    'LBL_PORTAL' => 'Portál',
 
     // Help Text
     // List View Help Text

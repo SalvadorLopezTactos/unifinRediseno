@@ -319,7 +319,7 @@ class QuickSearchQuery
                         continue;
                     }
 
-                    $data['fields'][$i][$col] = html_entity_decode($dataIn, ENT_QUOTES, 'UTF-8');
+                    $data['fields'][$i][$col] = html_entity_decode(strval($dataIn), ENT_QUOTES, 'UTF-8');
                 }
             }
         }

@@ -122,6 +122,8 @@ $viewdefs['ProductTemplates']['base']['view']['product-catalog-dashlet-drawer-re
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
                 'cost_usdollar',
                 'date_cost_price',
@@ -137,6 +139,8 @@ $viewdefs['ProductTemplates']['base']['view']['product-catalog-dashlet-drawer-re
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
                 'discount_usdollar',
                 array(
@@ -151,6 +155,8 @@ $viewdefs['ProductTemplates']['base']['view']['product-catalog-dashlet-drawer-re
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
                 'list_usdollar',
                 array(

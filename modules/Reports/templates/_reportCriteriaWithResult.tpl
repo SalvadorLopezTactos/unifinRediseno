@@ -62,8 +62,8 @@
 <script language="javascript">
 var form_submit = "{$form_submit}";
 LBL_RELATED = '{$mod_strings.LBL_RELATED}';
-{literal}
-{/literal}
+
+
 ACLAllowedModules = {$ACLAllowedModules};
 </script>
 <BR>
@@ -210,12 +210,11 @@ var lbl_related_table_blank = "{$mod_strings.LBL_RELATED_TABLE_BLANK}";
 var lbl_optional_help = "{$mod_strings.LBL_OPTIONAL_HELP}";
 </script>
 <script type="text/javascript" src="{sugar_getjspath file='include/javascript/reportCriteria.js'}"></script>
-<script type="text/javascript" src="{sugar_getjspath file='include/javascript/reportsInlineEdit.js'}"></script>
 <script language="javascript">
 visible_modules = {$allowed_modules_js};
 report_def = {$reporter_report_def_str1};
 goto_anchor = {$goto_anchor};
-{literal}
+
 function report_onload() {
 	if (goto_anchor != '') {
 		var anch = document.getElementById(goto_anchor);
@@ -284,13 +283,13 @@ function performFavAction(actionToPerfrom) {
 
 	var favButton = document.getElementById('favButton');
 	if (actionToPerfrom == 'addtofavorites') {
-		favButton.title = {/literal}"{$app_strings.LBL_REMOVE_FROM_FAVORITES}";
+		favButton.title = "{$app_strings.LBL_REMOVE_FROM_FAVORITES}";
 		favButton.value = "{$app_strings.LBL_REMOVE_FROM_FAVORITES}";
-		{literal}favButton.onclick = function() {performFavAction('removefromfavorites')};
+		favButton.onclick = function() { performFavAction('removefromfavorites') };
 	} else {
-		favButton.title = {/literal}"{$app_strings.LBL_ADD_TO_FAVORITES}";
+		favButton.title = "{$app_strings.LBL_ADD_TO_FAVORITES}";
 		favButton.value = "{$app_strings.LBL_ADD_TO_FAVORITES}";
-		{literal}favButton.onclick = function() {performFavAction('addtofavorites')};
+		favButton.onclick = function() { performFavAction('addtofavorites') };
 	} // else
 } // fn
 
@@ -300,19 +299,19 @@ function showHideReportDetailsButton() {
 	if (reportDetailsTable.style.display == "none") {
 		saveReportOptionsState("showDetails", "1");
 		reportDetailsTable.style.display = "";
-		showHideReportDetailsButton.title = {/literal}"{$mod_strings.LBL_REPORT_HIDE_DETAILS}";
-		{literal}showHideReportDetailsButton.value = {/literal}"{$mod_strings.LBL_REPORT_HIDE_DETAILS}";{literal}
+		showHideReportDetailsButton.title = "{$mod_strings.LBL_REPORT_HIDE_DETAILS}";
+		showHideReportDetailsButton.value = "{$mod_strings.LBL_REPORT_HIDE_DETAILS}";
 	} else {
 		saveReportOptionsState("showDetails", "0");
 		reportDetailsTable.style.display = "none";
-		showHideReportDetailsButton.title = {/literal}"{$mod_strings.LBL_REPORT_SHOW_DETAILS}";
-		{literal}showHideReportDetailsButton.value = {/literal}"{$mod_strings.LBL_REPORT_SHOW_DETAILS}";{literal}
+		showHideReportDetailsButton.title = "{$mod_strings.LBL_REPORT_SHOW_DETAILS}";
+		showHideReportDetailsButton.value = "{$mod_strings.LBL_REPORT_SHOW_DETAILS}";
 	} // else
 } // fn
 function saveReportOptionsState(name, value) {
 	var callback = {
-        success:function(o){},
-        failure:function(o){}
+        success:function(o){ },
+        failure:function(o){ }
     };
 	var postDataString = 'to_pdf=true&report_options=1&report_id=' + document.getElementById('record').value + "&" + name + "=" + value;
 	YAHOO.util.Connect.asyncRequest("POST", "index.php?action=ReportCriteriaResults&module=Reports&page=report", callback, postDataString);
@@ -321,9 +320,9 @@ function saveReportOptionsState(name, value) {
 window.onload = report_onload;
 current_module = report_def.module;
 field_defs = module_defs[current_module].field_defs;
-{/literal}
+
 current_report_type = "{$report_type}";
-{literal}
+
 for(var i in report_def.display_columns) {
 	visible_fields.push(getFieldKey(report_def.display_columns[i]));
     visible_fields_map[getFieldKey(report_def.display_columns[i])] = report_def.display_columns[i];
@@ -344,6 +343,8 @@ for(var i in report_def.links_def) {
 } // for
 
 function load_page() {
+	var abortLoad = openEditMode();
+	if (abortLoad) return;
 	displayGroupCount();
 	reload_joins();
     //current_module = document.EditView.self.options[document.EditView.self.options.selectedIndex].value;
@@ -384,13 +385,28 @@ function setSchuleTime(scheduleDateTime) {
 function displayGroupCount() {
 	// no op
 } // fn
-{/literal}
+
 var current_user_id = '{$current_user_id}';
-users_array[0]={literal}{text{/literal}:'{$mod_strings.LBL_CURRENT_USER}',value:'Current User'{literal}}{/literal};
+users_array[0]={ text:'{$mod_strings.LBL_CURRENT_USER}',value:'Current User' };
 {foreach from=$user_array key=user_id item=user_name}
-{literal}users_array[users_array.length] = {text:{/literal}'{$user_name|escape}',value:'{$user_id}'};
+users_array[users_array.length] = { text:'{$user_name|escape}',value:'{$user_id}' };
 {/foreach}
 </script>
 <script language="javascript">
 if(typeof YAHOO != 'undefined') YAHOO.util.Event.addListener(window, 'load', load_page);
+</script>
+
+<script>
+function openEditMode() {
+	var abortLoadPage = false;
+	var forminput = document.getElementById('editReportButton_old');
+	if (forminput && (typeof(viewMode) != 'undefined') && (viewMode === 'edit')) {
+		forminput.form.to_pdf.value='';
+		forminput.form.to_csv.value='';
+		forminput.form.action.value='ReportsWizard';
+		forminput.form.submit();
+		abortLoadPage = true;
+	}
+	return abortLoadPage;
+}
 </script>

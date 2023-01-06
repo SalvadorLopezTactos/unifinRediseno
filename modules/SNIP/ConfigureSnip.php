@@ -28,8 +28,8 @@ $disable_snip = '';
 
 $snip = SugarSNIP::getInstance();
 $title = getClassicModuleTitle('Administration', array(
-	"<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
-	translate('LBL_CONFIGURE_SNIP')), false);
+    "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
+    translate('LBL_CONFIGURE_SNIP')), false);
 $sugar_smarty = new Sugar_Smarty();
 
 $sugar_smarty->assign('APP', $GLOBALS['app_strings']);

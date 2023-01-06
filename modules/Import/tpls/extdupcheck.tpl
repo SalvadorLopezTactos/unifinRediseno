@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}
 <style>
 <!--
 textarea { width: 20em }
@@ -22,7 +21,6 @@ textarea { width: 20em }
 }
 -->
 </style>
-{/literal}
 <script type="text/javascript" src="{sugar_getjspath file='cache/include/javascript/sugar_grp_yui_widgets.js'}"></script>
 <form enctype="multipart/form-data" real_id="importstepdup" id="importstepdup" name="importstepdup" method="POST" action="index.php">
 {sugar_csrf_form_token}
@@ -80,15 +78,11 @@ textarea { width: 20em }
 </table>
 
 </form>
-{literal}
-{/literal}
 {$JAVASCRIPT}
-{literal}
 <script type="text/javascript" language="Javascript">
 enableQS(false);
-{/literal}{$getNameJs}{literal}
-{/literal}{$getNumberJs}{literal}
-{/literal}{$currencySymbolJs}{literal}
-{/literal}{$confirmReassignJs}{literal}
+{$getNameJs}
+{$getNumberJs}
+{$currencySymbolJs}
+{$confirmReassignJs}
 </script>
-{/literal}

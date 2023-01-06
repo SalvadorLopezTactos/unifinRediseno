@@ -14,16 +14,17 @@ h4.merge-interface-header {
     margin-right: 12px;
 
     &.on {
-      color: @white !important;
+      color: @white;
       text-shadow: none;
-      background: @gray !important;
+      background: @gray80;
 
+      > .sicon,
       > .fa {
-        color: @grayLighter !important;
+        color: @gray20;
       }
 
       &:focus {
-        background: @grayDark !important;
+        background: @gray90;
       }
     }
   }
@@ -101,12 +102,11 @@ h4.merge-interface-header {
       span {
         display: block;
         margin: 0 0 5px;
-        border: 1px solid @grayLighter;
+        border: @borderWidget;
         border-radius: 4px;
-        background: @white;
+        background: @contentBackground;
         text-align: center;
         font-size: 11px;
-        text-shadow: -1px -1px 1px @white;
       }
 
       span.primary-lbl-placeholder-span {
@@ -114,7 +114,7 @@ h4.merge-interface-header {
         display: block;
         border-radius: 1px;
         margin: -18px 0 5px 0;
-        background: darken(@grayLighter, 5%);
+        background: @gray20;
         min-height: 20px;
       }
 
@@ -146,8 +146,7 @@ h4.merge-interface-header {
 
     .box {
       border-radius: 3px;
-      border: 1px solid darken(@grayLighter, 10%);
-      box-shadow: 0 2px 4px darken(@grayLighter, 5%);
+      border: @borderWidget;
       overflow: hidden;
 
       .merge-edit {
@@ -167,7 +166,7 @@ h4.merge-interface-header {
 
   .col.primary-edit-mode { /* PRIMARY */
     .box {
-      background: @grayLighter;
+      background: @contentBackground;
 
       .merge-row {
         &.even,
@@ -235,11 +234,11 @@ h4.merge-interface-header {
     white-space: nowrap;
 
     &.odd {
-      background: @grayLighter;
+      background: @gray20;
     }
 
     &.even {
-      background: @grayLighter;
+      background: @gray20;
     }
 
     .ellipsis_inline {
@@ -259,7 +258,6 @@ h4.merge-interface-header {
 
     .controls {
       width: 100%;
-      height: @mergeFieldHeight;
       padding: 2px 0;
       margin: 0;
       position: relative;
@@ -394,6 +392,8 @@ h4.merge-interface-header {
 
         .btn {
           margin-left: 0;
+          line-height: 12px;
+          padding: 7px;
         }
       }
     }
@@ -411,7 +411,7 @@ h4.merge-interface-header {
       position: relative;
 
       .merge-row:nth-child(odd) {
-        background-color: lighten(@grayLighter, 1%);
+        background-color: @contentBackground;
       }
     }
   }

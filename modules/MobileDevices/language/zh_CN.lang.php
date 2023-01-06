@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => '移动设备',
     'LBL_MODULE_NAME_SINGULAR' => '移动设备',
     'LBL_DEVICE_ID' => '设备 ID',
-    'LBL_DEVICE_PLATFORM' => '平台',
+    'LBL_DEVICE_PLATFORM' => '设备平台',
 ];

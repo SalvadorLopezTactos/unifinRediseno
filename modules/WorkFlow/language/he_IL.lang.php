@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'זרימת עבודה'),
   'LBL_EMAILTEMPLATES_TYPE' => 'סוג:',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>לתשומת לבך:</strong> הפונקציונליות של &#39;זרימת העבודה של Sugar&#39; ושל &#39;ניהול זרימת עבודה&#39; נמצאת במצב תחזוקה. לקוחות של גרסת Sugar לארגונים מתבקשים להתחיל להשתמש בפונקציונליות שמספק SugarBPM<sup class="trademark">TM</sup>‎.',
 );
 

@@ -41,10 +41,10 @@ class SugarFieldAddress extends SugarFieldBase {
     function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         global $app_strings;
-        if(!isset($displayParams['key'])) {
-           $GLOBALS['log']->debug($app_strings['ERR_ADDRESS_KEY_NOT_SPECIFIED']);	
-           $this->ss->trigger_error($app_strings['ERR_ADDRESS_KEY_NOT_SPECIFIED']);
-           return;
+        if (!isset($displayParams['key'])) {
+            $GLOBALS['log']->debug($app_strings['ERR_ADDRESS_KEY_NOT_SPECIFIED']);
+            trigger_error("Smarty error: {$app_strings['ERR_ADDRESS_KEY_NOT_SPECIFIED']}", E_USER_WARNING);
+            return;
         }
         
         //Allow for overrides.  You can specify a Smarty template file location in the language file.
@@ -61,7 +61,7 @@ class SugarFieldAddress extends SugarFieldBase {
         global $app_strings;
         if(!isset($displayParams['key'])) {
            $GLOBALS['log']->debug($app_strings['ERR_ADDRESS_KEY_NOT_SPECIFIED']);	
-           $this->ss->trigger_error($app_strings['ERR_ADDRESS_KEY_NOT_SPECIFIED']);
+            trigger_error("Smarty error: {$app_strings['ERR_ADDRESS_KEY_NOT_SPECIFIED']}", E_USER_WARNING);
            return;
         }
         

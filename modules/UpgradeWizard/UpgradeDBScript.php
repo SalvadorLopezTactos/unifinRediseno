@@ -31,7 +31,7 @@ abstract class UpgradeDBScript extends UpgradeScript
         try {
             $rows = $this->db->getConnection()->executeUpdate($sql, $params, $types);
             $this->log("Number of affected rows: {$rows}");
-        } catch (\Doctrine\DBAL\DBALException $error) {
+        } catch (\Doctrine\DBAL\Exception $error) {
             $this->log("Error: {$error}");
         }
 

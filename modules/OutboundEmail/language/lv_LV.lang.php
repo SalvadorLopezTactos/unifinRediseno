@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Atbildes saņēmēja e-pasta adreses ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Atbildes saņēmēja e-pasta adrese',
     'LBL_PRIMARY_TEAM' => 'Primārā darba grupa',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Vēlamais sūtīšanas uzņēmums',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-pasta iestatījumu fokusa panelis',
 );

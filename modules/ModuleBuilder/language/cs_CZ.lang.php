@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Smazat' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Vytvořeno společností SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Role',
+    'LBL_BASE_LAYOUT' => 'Základní rozložení',
+    'LBL_FIELD_NAME' => 'Název pole',
+    'LBL_FIELD_VALUE' => 'Hodnota',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Rozložení určené:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standardní rozložení',
+        'role' => 'Role',
+        'dropdown' => 'Rozevírací pole',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Všechna vlastní rozložení budou odstraněna. Opravdu chcete změnit své aktuální definice rozložení?',
 'help'=>array(
     'package'=>array(
             'create'=>'Můžete poskytnout Tvůrce a Popis balíčku.',
@@ -457,8 +467,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Viditelnost editoru',
 'LBL_ROLLUP' => 'Kumulativní',
 'LBL_RELATED_FIELD' => 'Související pole',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'Adresa URL k vlastnímu obrázku loga se značkou. Doporučené rozměry loga se značkou jsou 22 x 22 pixelů. Každý nahraný obrázek, který má větší rozměry, bude zmenšen na tyto maximální rozměry.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'Adresa URL k vlastnímu obrázku loga. Doporučená šířka loga je 200 pixelů. Každý nahraný obrázek, který má větší rozměry, bude zmenšen na tyto maximální rozměry. Toto logo bude použito na přihlašovací obrazovce. Pokud není nahrán žádný obrázek, použije se logo se značkou.',
 'LBL_PORTAL_ROLE_DESC' => 'Tuto roli neodstraňujte. Role samoobslužného portálu zákazníka je role vygenerovaná systémem v průběhu aktivace portálu Sugar. Pomocí ovládacích prvků přístupu v rámci této role můžete v portálu Sugar povolit nebo zakázat moduly Chyby, Případy nebo Znalostní báze. Neupravujte žádné jiné ovládací prvky přístupu pro tuto roli, aby se zabránilo neznámému a nepředvídatelnému chování systému. V případě náhodného vymazání této role ji znovuvytvořte vypnutím a zapnutím portálu Sugar.',
 
 //RELATIONSHIPS
@@ -581,6 +589,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Přidat vztah',
 'LBL_BTN_RENAME_MODULE' => 'Přejmenovat modul',
 'LBL_BTN_INSERT'=>'Vložit',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Obnovit základní rozložení',
 //TABS
 
 //ERRORS
@@ -591,6 +600,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Došlo k chybě',
 'ERROR_REQUIRED_FIELDS' => 'Jste si jisti, že chcete pokračovat? Následující povinná pole rozvržení chybí:',
 'ERROR_ARE_YOU_SURE' => 'Jsi si jist(a), že chcete pokračovat?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Pole nelze vytvořit. Dosáhli jste limitu velikosti řádků této tabulky ve vaší databázi. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Další informace</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Následujíc položka(y) obsahuje vypočtenou hodnotu, která nebude přepočítána při zobrazení v editačním pohledu v SugarCRM Mobile.',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Následujíc položka(y) obsahuje vypočtenou hodnotu, která nebude přepočítána při zobrazení v editačním pohledu v SugarCRM Portal.',
@@ -600,16 +610,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Pokud byste chtěliaktivaci v rámci portálu povolte ji zde.',
     'LBL_PORTAL_CONFIGURE' => 'Konfigurovat portál',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Povolit portál',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Povolit hledání před otevřením případu',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Povolit poznámky v modulu Znalostní báze',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Povolit uživatelům portálu uzavřít případ',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Povolit novým uživatelům se přihlásit',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Oprávnění uživatele',
     'LBL_PORTAL_THEME' => 'Motiv portálu',
     'LBL_PORTAL_ENABLE' => 'povoleno',
     'LBL_PORTAL_SITE_URL' => 'Váš portál je k dispozici na adrese:',
     'LBL_PORTAL_APP_NAME' => 'Jméno aplikace',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Adresa URL loga se značkou',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Náhled loga se značkou',
-    'LBL_PORTAL_LOGO_URL' => 'Adresa URL loga',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Náhled loga',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefon',
     'LBL_PORTAL_CONTACT_EMAIL' => 'E-mail',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Musíte zadat platnou e-mailovou adresu',
@@ -625,6 +633,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Přetáhněte názvy modulů portálu a nastavte je tak, aby se zobrazovaly nebo skryly v horní navigační liště portálu. Chcete-li řídit přístup uživatelů portálu k modulům, použijte modul <a href="?module=ACLRoles&action=index">Správa rolí.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Zobrazené moduly',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Skryté moduly',
+    'LBL_CONFIG_VISIBILITY' => 'Viditelnost',
+    'LBL_CASE_VISIBILITY_HELP' => 'Definujte, kteří uživatelé portálu mohou vidět případ.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Definujte, kteří uživatelé portálu mohou vidět e-maily související s případem. Zúčastněné kontakty jsou kontakty v polích Komu, Od, Kopie a Skrytá kopie.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Definujte, kteří uživatelé portálu mohou zobrazit zprávy související s případem. Zúčastněné kontakty jsou kontakty v poli Hosté.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Všechny kontakty související se společností',
+        'related_contacts' => 'Pouze primární kontakt a kontakty související s případem',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Pouze zúčastněné kontakty',
+        'all' => 'Všechny kontakty, které mohou vidět případ',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Pouze zúčastněné kontakty',
+        'all' => 'Všechny kontakty, které mohou vidět případ',
+    ],
+
 
 'LBL_PORTAL'=>'Portál',
 'LBL_PORTAL_LAYOUTS'=>'Rozložení pro portál',
@@ -797,11 +822,11 @@ $mod_strings = array(
     . "Povinná pole se budou řídit vzorcem v mobilním zobrazení s využitím prohlížeče, <br/>"
     . "nebudou se ale řídit vzorcem v nativních aplikacích, jako je Sugar Mobile pro iPhone. <br/>"
     . "Nebudou se řídit vzorcem v samoobslužném portálu Sugar.",
-'LBL_POPHELP_READONLY'=>"Vytvořte vzorec, který určí, zda je toto pole v rozloženích jen pro čtení.<br/>"
-        . "Pole pouze pro čtení se budou řídit vzorcem v mobilním zobrazení s využitím prohlížeče, <br/>"
-        . "ale nebudou se řídit podle vzorce v nativních aplikacích, jako je Sugar Mobile pro iPhone. <br/>"
+'LBL_POPHELP_READONLY'=>"Vytvořte vzorec a určete, zda je toto pole v rozvržení pouze pro čtení.<br/>"
+        . "Pole určená pouze pro čtení se budou řídit vzorcem v mobilním zobrazení s využitím prohlížeče, <br/>"
+        . "nebudou se ale řídit vzorcem v nativních aplikacích, jako je Sugar Mobile pro iPhone. <br/>"
         . "Nebudou se řídit vzorcem v samoobslužném portálu Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Vyberte, pokud chcete toto pole použít při vyhledávání záznamů pomocí globálního vyhledávání v tomto modulu.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Zvolte, zda chcete toto pole použít při vyhledávání záznamů pomocí globálního vyhledávání v tomto modulu.',
 //Revert Module labels
 'LBL_RESET' => 'Resetovat',
 'LBL_RESET_MODULE' => 'Zrušit modul',
@@ -837,6 +862,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Datum a čas',
                 'decimal'=>'Desetinný',
                 'autoincrement' => 'Automatický přírůstek',
+                'actionbutton' => 'Tlačítko akce',
 ),
 'labelTypes' => array(
     "" => "Často používané popisky",
@@ -855,4 +881,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (související ID {1})',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopírovat z layoutu',
 'LBL_RELATIONSHIP_TYPE' => 'Vztah',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Jazyk srovnávání',
+'LBL_LABEL_NOT_TRANSLATED' => 'Tento popisek nelze přeložit',
 );

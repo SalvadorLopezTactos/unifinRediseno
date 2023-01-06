@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Osutatud',
     'LBL_LIST_STATUS' => 'Olek',
     'LBL_LIST_TITLE' => 'Tiitel',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Turuhuviprognoos',
+    'LBL_MARKET_SCORE' => 'Turuskoor',
     'LBL_MOBILE_PHONE' => 'Mobiil:',
     'LBL_MODULE_NAME' => 'Müügivihjed',
     'LBL_MODULE_NAME_SINGULAR' => 'Müügivihje',
@@ -330,4 +332,9 @@ After confirming each required and desired module, click the Save and Convert bu
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Müügivihjete teisendamise prognoos',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Kuva konkreetse müügivihje prognoosi üksikasjad',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Luba tuluartiklid',
+    'LBL_REQUIRE_RLIS' => 'Muuda uue müügivõimaluse loomisel tuluartiklid nõutavaks',
+    'LBL_COPY_DATA_RLIS' => 'Kopeeri uue müügivõimaluse loomisel müügivihje andmed tuluartiklitesse',
 );

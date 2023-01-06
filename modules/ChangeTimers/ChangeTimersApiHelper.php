@@ -58,7 +58,7 @@ class ChangeTimersApiHelper extends SugarBeanApiHelper
      * @param array $field_arr
      * @param string $fieldValue
      * @return string
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     private function runRelateFieldQuery(array $field_arr, string $fieldValue)
     {
@@ -77,7 +77,7 @@ SQL;
                         implode(',', $field_arr['select_field_name']) : $field_arr['select_field_name']
                 ),
                 [$fieldValue]
-            )->fetch();
+            )->fetchAssociative();
 
         if (is_array($field_arr['select_field_name'])) {
             $returnVal = '';

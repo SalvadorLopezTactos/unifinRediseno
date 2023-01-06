@@ -1,5 +1,10 @@
 {{!
 /*
+ * View.Fields.Base.KBContents.TemplateButtonField
+ * has been deprecated since 11.3.0 and will be removed in a future release.
+ * The template button has been moved to TinyMCE editor toolbar
+ */
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
@@ -30,6 +35,6 @@
     {{/if}}
 >
     {{#if def.icon}}
-        <i class="fa {{def.icon}}"></i>
+        <i class="{{buildIcon def.icon}}"></i>
     {{/if}}{{label}}
 </a>

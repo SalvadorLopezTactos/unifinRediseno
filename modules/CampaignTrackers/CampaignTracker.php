@@ -114,7 +114,7 @@ class CampaignTracker extends SugarBean {
         $query = 'SELECT name from campaigns where id = ?';
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($this->campaign_id));
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if($row != null) {
             $this->campaign_name=$row['name'];

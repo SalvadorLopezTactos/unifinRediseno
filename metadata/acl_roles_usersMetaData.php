@@ -45,13 +45,6 @@ $dictionary['acl_roles_users'] = array(
             ),
         ),
         array(
-            'name' => 'idx_aclrole_id',
-            'type' => 'index',
-            'fields' => array(
-                'role_id',
-            ),
-        ),
-        array(
             'name' => 'idx_acluser_id',
             'type' => 'index',
             'fields' => array(

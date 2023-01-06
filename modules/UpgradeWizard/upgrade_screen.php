@@ -18,6 +18,7 @@ $step = isset($_REQUEST['confirm_id']) ? 2 : 0;
 <meta name="viewport" content="initial-scale=1.0">
 <meta name="viewport" content="user-scalable=no, width=device-width">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="shortcut icon" type="image/png" href="include/images/sugar-favicon.png">
 <link rel="stylesheet" href="styleguide/assets/css/upgrade.css?v=<?php echo time();?>"/>
 <script src='include/javascript/jquery/jquery-min.js'></script>
 <script src='include/javascript/jquery/jquery-migrate.min.js'></script>
@@ -30,7 +31,6 @@ if (top !== self) {
 }
 
 $(window).bind("load", function () {
-
         var uploader = {token: "<?php echo $token ?>"};
         uploader.hideError = function () {
             $('.alert-danger').hide();
@@ -45,10 +45,8 @@ $(window).bind("load", function () {
                 .removeClass('color_green')
                 .addClass('color_red')
                 .find('i')
-                .removeClass('fa-cog color_yellow fa-spin')
-                .removeClass('color_green')
-                .addClass('fa-exclamation-circle')
-                .addClass('color_red');
+                .removeClass('sicon-settings-lg sicon-is-spinning color_green')
+                .addClass('sicon-error-lg color_red')
             $('#upload-indicator').hide();
             uploader.clearStatusUpdate();
         };
@@ -72,14 +70,19 @@ $(window).bind("load", function () {
                     .removeClass('color_red')
                     .addClass('color_green')
                     .find('i')
-                    .removeClass('fa-cog color_yellow')
-                    .removeClass('fa-spin')
-                    .addClass('fa-check-circle')
-                    .removeClass('color_red')
-                    .addClass('color_green');
+                    .removeClass('sicon-settings-lg sicon-is-spinning color_red')
+                    .addClass('sicon-check-circle-lg color_green')
             } else {
                 $bar.addClass('in-progress');
-                $('#' + $.escapeSelector(bar) + ' h1 i').addClass('fa-spin');
+                $stepTitle = $('#' + $.escapeSelector(bar) + ' h1 i');
+                // If the error icon is still hanging around from previous error. Without this, there is sometimes a
+                // spinning error icon.
+                if ($stepTitle.hasClass('sicon-error-lg')) {
+                    $stepTitle
+                        .removeClass('sicon-error-lg color_red')
+                        .addClass('sicon-settings-lg');
+                }
+                $stepTitle.addClass('sicon-is-spinning');
             }
             $bar.width(percent + '%');
         };
@@ -207,14 +210,14 @@ $(window).bind("load", function () {
             $('[data-step="2"] a[name="export_button"]').show();
 
             var hcResult = $("#hc-result-data");
-            var flagToIcon = [, 'fa-check-circle color_green', 'fa-ellipsis-h color_yellow', 'fa-exclamation-circle color_red'];
+            var flagToIcon = [, 'sicon-check-circle-lg color_green', 'sicon-warning-lg color_yellow', 'sicon-error-lg color_red'];
             var flag = -1;
 
             hcResult.html("");
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
                 var displayNumber = typeof item.displayNumber == 'undefined' ? true : item.displayNumber;
-                var html = ["<h1><i class='fa ", flagToIcon[parseInt(item.flag)], "'></i> "];
+                var html = ["<h1><i class='sicon sicon-lg ", flagToIcon[parseInt(item.flag)], "'></i> "];
                 if (displayNumber) {
                     html.push(i + 1, ". ");
                 }
@@ -378,7 +381,7 @@ $(window).bind("load", function () {
 </script>
 
 </head>
-<body>
+<body class="<?php echo $appearanceClass ?>">
 
 <div class="upgrade">
     <div id="alerts" class="alert-top">
@@ -391,7 +394,7 @@ $(window).bind("load", function () {
             </div>
             <div class="alert alert-success alert-block" data-send="ok">
                 <button class="btn btn-link btn-invisible close" data-action="close">
-                    <i class="fa fa-times"></i>
+                    <i class="sicon sicon-close"></i>
                 </button>
                 <strong>Success</strong>
                 <span></span>
@@ -409,7 +412,7 @@ $(window).bind("load", function () {
                 <span>Upload the upgrade package</span>
             </div>
             <div class="progress-section span4 pull-right">
-                <span><img src="themes/default/images/company_logo.png" alt="SugarCRM" class="logo"></span>
+                <span><img src="themes/default/images/<?php echo $logoFileName ?>" alt="SugarCRM" class="logo"></span>
 
                 <div class="progress progress-success">
                     <div class="bar in-progress" style="width: 33%;"></div>
@@ -418,7 +421,7 @@ $(window).bind("load", function () {
         </div>
         <div class="modal-body record">
             <div id="unpack" class="row-fluid ">
-                <h1><i class="fa fa-cog color_yellow"></i>Upload the upgrade package</h1>
+                <h1><i class="sicon sicon-lg sicon-settings-lg"></i>Upload the upgrade package</h1>
 
                 <p>Please provide the upgrade package files. <a target="_blank" href="http://support.sugarcrm.com/03_Training/06_Upgrade_Training/" target="_blank">Learn more...</a></p>
                 <form id="uploadForm">
@@ -427,10 +430,10 @@ $(window).bind("load", function () {
                 <p>
                     <span class="upload-file">
                         <span class="upload-field-custom btn btn-primary" style="width: 84px;">
-                          <label class="file-upload focus">
+                          <label class="file-upload focus btn-primary">
                               <span style="width: 84px;"><strong>Choose File</strong></span>
 
-                              <input type="file" name="zip" style="width: 0px;">
+                              <input type="file" name="zip" style="width: 0px; height: 0px;">
                           </label>
                         </span>
                         <span>No file chosen...</span>
@@ -440,9 +443,9 @@ $(window).bind("load", function () {
             </div>
         </div>
         <div class="modal-footer">
-          <span class="version">Upgrader version <?php echo $upgraderVesion?></span>
+          <span class="version">Upgrader version <?php echo $upgraderVersion?></span>
           <span sfuuid="25" class="detail">
-            <a class="btn btn-invisible btn-link" href="index.php#bwc/index.php?module=Administration&action=index">Cancel</a>
+            <a class="btn btn-invisible btn-link" href="./#Administration">Cancel</a>
             <a class="btn btn-primary" href="javascript:void(0);" name="next_button">Upload</a>
           </span>
         </div>
@@ -468,11 +471,11 @@ $(window).bind("load", function () {
         </div>
         <div class="modal-body record">
             <div class="row-fluid" id="hc-result-data">
-                <h1><i class="fa fa-cog fa-spin color_yellow"></i>Performing health check. Please wait...</h1>
+                <h1><i class="sicon sicon-lg sicon-settings-lg sicon-is-spinning"></i>Performing health check. Please wait...</h1>
             </div>
         </div>
         <div class="modal-footer">
-          <span class="version">Upgrader version <?php echo $upgraderVesion?></span>
+          <span class="version">Upgrader version <?php echo $upgraderVersion?></span>
           <span sfuuid="25" class="detail">
             <a class="btn btn-invisible btn-link" href="javascript:void(0);" name="export_button">Export Log</a>
             <a class="btn btn-primary" href="index.php" data-action="gohome">Go to Home Page</a>
@@ -501,7 +504,7 @@ $(window).bind("load", function () {
         </div>
         <div class="modal-body record">
             <div id="unpack" class="row-fluid">
-                <h1 class="color_green"><i class="fa fa-check-circle color_green"></i>Upload the upgrade package</h1>
+                <h1 class="color_green"><i class="sicon sicon-lg sicon-check-circle-lg color_green"></i>Upload the upgrade package</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -510,7 +513,7 @@ $(window).bind("load", function () {
                 </div>
             </div>
             <div id="healthcheck" class="row-fluid">
-                <h1><i class="fa fa-cog color_yellow"></i>Healthcheck</h1>
+                <h1><i class="sicon sicon-lg sicon-settings-lg"></i>Healthcheck</h1>
 
                 <div class="healthcheck-check">
                     <div class="progress progress-success ">
@@ -520,7 +523,7 @@ $(window).bind("load", function () {
             </div>
             <div id="hc-result-data" class="row-fluid"></div>
             <div id="pre" class="row-fluid">
-                <h1><i class="fa fa-cog color_yellow fa-spin"></i>Pre-upgrade</h1>
+                <h1><i class="sicon sicon-lg sicon-settings-lg sicon-is-spinning"></i>Pre-upgrade</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -529,7 +532,7 @@ $(window).bind("load", function () {
                 </div>
             </div>
             <div id="commit" class="row-fluid ">
-                <h1><i class="fa fa-cog color_yellow"></i>Upgrade</h1>
+                <h1><i class="sicon sicon-lg sicon-settings-lg"></i>Upgrade</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -538,7 +541,7 @@ $(window).bind("load", function () {
                 </div>
             </div>
             <div id="post" class="row-fluid ">
-                <h1><i class="fa fa-cog color_yellow"></i>Post-upgrade</h1>
+                <h1><i class="sicon sicon-lg sicon-settings-lg"></i>Post-upgrade</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -547,7 +550,7 @@ $(window).bind("load", function () {
                 </div>
             </div>
             <div id="cleanup" class="row-fluid ">
-                <h1><i class="fa fa-cog color_yellow"></i>Cleanup</h1>
+                <h1><i class="sicon sicon-lg sicon-settings-lg"></i>Cleanup</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -561,7 +564,7 @@ $(window).bind("load", function () {
                 <input type="hidden" name="action" value="exportlog">
                 <input type="hidden" name="token" value="<?php echo $token ?>">
           </form>
-          <span class="version">Upgrader version <?php echo $upgraderVesion?></span>
+          <span class="version">Upgrader version <?php echo $upgraderVersion?></span>
           <span sfuuid="25" class="detail">
             <a class="btn btn-invisible" href="javascript:void(0);" name="export_button">Export Log</a>
             <a class="btn btn-primary disabled" href="index.php" data-action="gohome">Go to Home Page</a>

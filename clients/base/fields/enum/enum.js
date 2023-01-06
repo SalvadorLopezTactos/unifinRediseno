@@ -334,7 +334,7 @@
                             error(e);
                         }
 
-                        // Continue to use Sugar7's default error handler.
+                        // Continue to use SugarCRM's default error handler.
                         if (_.isFunction(app.api.defaultErrorHandler)) {
                             app.api.defaultErrorHandler(e);
                         }
@@ -726,10 +726,16 @@
     bindDataChange: function() {
         if (this.model) {
             this.model.on('change:' + this.name, function() {
-                if (_.isEmpty(this.$(this.fieldTag).data('select2'))) {
-                    this.render();
-                } else {
-                    this.$(this.fieldTag).select2('val', this.format(this.model.get(this.name)));
+                let ele = this.$el;
+                if (ele) {
+                    let field = this.$(this.fieldTag);
+                    if (field) {
+                        if (_.isEmpty(field.data('select2'))) {
+                            this.render();
+                        } else {
+                            field.select2('val', this.format(this.model.get(this.name)));
+                        }
+                    }
                 }
             }, this);
         }

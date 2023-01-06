@@ -12,7 +12,6 @@
 *}
 
 {include file="modules/DynamicFields/templates/Fields/Forms/coreTop.tpl"}
-{literal}
 <script language="Javascript">
 	function timeValueUpdate(){
 		var fieldname = 'defaultTime';
@@ -34,7 +33,6 @@
 		
 	}
 </script>
-{/literal}
 <tr>
 	<td class='mbLBL'>{sugar_translate module="DynamicFields" label="COLUMN_TITLE_DEFAULT_VALUE"}:</td>
 	<td>

@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Gelir Kalemleri',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Satın Alımlar',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Satın Alınan Kalemler',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Belgeler Kaydı Panosu',
+    'LBL_MY_DOCUMENTS' => 'Belgelerim',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSign&#39;a gönder',
 );

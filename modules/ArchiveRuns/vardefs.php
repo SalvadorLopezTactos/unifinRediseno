@@ -16,6 +16,7 @@ $dictionary['ArchiveRuns'] = array(
     'unified_search' => true,
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
+    'full_text_search' => false,
     'duplicate_merge' => true,
     'fields' => array(
         'archiver_id' => array(

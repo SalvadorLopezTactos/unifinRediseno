@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Mehanizam za izraze',
-  'LBL_MODULE_NAME_SINGULAR' => 'Mehanizam za izraze',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Prethodni' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Sledeći' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Proširi' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Mehanizam za izraze',
+    'LBL_MODULE_NAME_SINGULAR' => 'Mehanizam za izraze',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Prethodni' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Sledeći' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Proširi' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Nepoznato polje',
+];

@@ -108,7 +108,7 @@ class SugarMinifyUtils
         }
 
         // Minifying the group files takes a long time sometimes.
-        @ini_set('max_execution_time', 0);
+        @ini_set('max_execution_time', '0');
         $js_groupings = $this->getJSGroupings();
 
         // Get the files that are not meant to be minified

@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Bāzes valūtas kurss',
 
     'LBL_QUOTA' => 'Kvota',
-    'LBL_QUOTA_ADJUSTED' => 'Kvota (precizēta)',
+    'LBL_QUOTA_ADJUSTED' => 'Koriģēta kvota',
 
     'LBL_FORECAST' => 'Prognoze',
     'LBL_COMMIT_STAGE' => 'Iesniegt posmu',

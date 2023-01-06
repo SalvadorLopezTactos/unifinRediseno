@@ -33,8 +33,8 @@
                     <img src="{$sugar_md}" alt="SugarCRM" border="0">
                 </p>
                 {$MOD.LBL_CONFIRM_TITLE}</th>
-            <th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank"><IMG
-                            src="{$loginImage}" alt="SugarCRM" border="0"></a>
+            <th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank"><img
+                            src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a>
             </th>
         </tr>
         <tr>

@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Používatelia',
     'LBL_EMAILS_PRODUCTS_REL' => 'Riadkové položky ponuky',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Riadkové položky výnosov',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskalácie',
     'LBL_EMAILS_MESSAGES_REL' => 'Správy',
     'LBL_EMAILS_PURCHASES_REL' => 'Nákupy',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Riadkové položky nákupov',
@@ -473,4 +474,5 @@ Prostredníctvom tlačidla Šablóna môžete použiť preddefinovanú šablónu
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Odoslať e-mail',
     'LBL_MAILBOX' => 'Prichádzajúca pošta',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Aby ste mohli odosielať e-maily, nakonfigurujte účet odchádzajúcich e-mailov pomocou <a href="#OutboundEmail">Nastavenia e-mailu</a>.',
 );

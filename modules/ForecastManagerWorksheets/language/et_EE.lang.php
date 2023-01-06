@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Baasmäär',
 
     'LBL_QUOTA' => 'Kvoot',
-    'LBL_QUOTA_ADJUSTED' => 'Kvoot (kohandatud)',
+    'LBL_QUOTA_ADJUSTED' => 'Kohandatud kvoot',
 
     'LBL_FORECAST' => 'Prognoos',
     'LBL_COMMIT_STAGE' => 'Sooritusetapp',

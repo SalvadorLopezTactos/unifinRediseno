@@ -12,9 +12,9 @@
 *}
 {php}
 	require_once('modules/Reports/templates/templates_reports.php');
-	$reporter = $this->get_template_vars('reporter');
-	$args = $this->get_template_vars('args');
-	$header_row = $this->get_template_vars('header_row');
+	$reporter = $_smarty_tpl->getTemplateVars('reporter');
+	$args = $_smarty_tpl->getTemplateVars('args');
+	$header_row = $_smarty_tpl->getTemplateVars('header_row');
 	$got_row = 0;
 	$maximumCellSize = 0;
 	$rowsAndColumnsData = array();
@@ -24,36 +24,36 @@
 	$headerColumnNameArray = getHeaderColumnNamesForMatrix($reporter, $header_row, $columnDataFor2ndGroup);
 	$columnNameArray = getColumnNamesForMatrix($reporter, $header_row, $columnDataFor2ndGroup);
 	$totalColumns = count($headerColumnNameArray) + count($columnDataFor2ndGroup) - 1;
-	$this->assign('legend', $legend);
+	$_smarty_tpl->assign('legend', $legend);
 	$maximumCellSize = $maximumCellSize - $reporter->addedColumns;
-	$this->assign('legend', implode(",", $legend));
+	$_smarty_tpl->assign('legend', implode(",", $legend));
 {/php}
 
-<B>{$mod_strings.LBL_REPORT_DATA_COLUMN_ORDERS}</B> {$legend}
+<B>{$mod_strings.LBL_REPORT_DATA_COLUMN_ORDERS}</B> {$legend|escape:'html':'UTF-8'}
 <br/>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="reportlistView">
 <tr height="20">
 {php}
 	for ($i = 0 ; $i < count($headerColumnNameArray) ; $i++) {
-		$this->assign('headerColumnName', $headerColumnNameArray[$i]);
+		$_smarty_tpl->assign('headerColumnName', $headerColumnNameArray[$i]);
 		$headerColumnClassName = "reportlistViewMatrixThS1";
 		if ($i == (count($headerColumnNameArray) - 1)) {
 			$headerColumnClassName = "reportlistViewMatrixThS2";
 		} // if
-		$this->assign('headerColumnClassName', $headerColumnClassName);
+		$_smarty_tpl->assign('headerColumnClassName', $headerColumnClassName);
 		if ($i == 1) {
-		$this->assign('topLevelColSpan', count($columnDataFor2ndGroup));
+		$_smarty_tpl->assign('topLevelColSpan', count($columnDataFor2ndGroup));
 {/php}
-	<th scope="col" align='center' colspan="{$topLevelColSpan}" class="{$headerColumnClassName}" valign=middle wrap>{$headerColumnName}</td>
+	<th scope="col" align='center' colspan="{$topLevelColSpan|escape:'html':'UTF-8'}" class="{$headerColumnClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$headerColumnName|escape:'html':'UTF-8'}</td>
 {php}
 		} else {
 		$rowSpan = 2;
 		if (count($columnDataFor2ndGroup) == 0) {
 			$rowSpan = 1;
 		} // if
-		$this->assign('topLevelRowSpan', $rowSpan);
+		$_smarty_tpl->assign('topLevelRowSpan', $rowSpan);
 {/php}
-	<th scope="col" align='center' rowspan="{$topLevelRowSpan}" class="{$headerColumnClassName}" valign=middle wrap>{$headerColumnName}</td>
+	<th scope="col" align='center' rowspan="{$topLevelRowSpan|escape:'html':'UTF-8'}" class="{$headerColumnClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$headerColumnName|escape:'html':'UTF-8'}</td>
 
 {php}
 		} // else
@@ -71,15 +71,15 @@
 			continue;
 		}  else {
 		$headerColumn2ClassName = "reportlistViewMatrixThS1";
-		$this->assign('headerColumn2ClassName', $headerColumn2ClassName);
+		$_smarty_tpl->assign('headerColumn2ClassName', $headerColumn2ClassName);
 		$cellData = $columnDataFor2ndGroup[$count];
 		if (empty($cellData)) {
-			$cellData = "&nbsp;";
+			$cellData = " ";
 		} // if
-		$this->assign('columnDataFor2ndGroup', $cellData);
+		$_smarty_tpl->assign('columnDataFor2ndGroup', $cellData);
 		$count++;
 {/php}
-	<th scope="col" align='center' class="{$headerColumn2ClassName}" valign=middle wrap>{$columnDataFor2ndGroup}</td>
+	<th scope="col" align='center' class="{$headerColumn2ClassName|escape:'html':'UTF-8'}" valign=middle wrap>{$columnDataFor2ndGroup}</td>
 {php}
 		} // else
 	} // for
@@ -97,7 +97,7 @@
 		<tr height="20">
 {php}
 		for ($j = 0 ; $j < count($columnNameArray) ; $j++) {
-			$cellData = "&nbsp;";
+			$cellData = " ";
 			if ($j == 0 ) {
 				if ($k != 0) {
 					continue;
@@ -106,20 +106,20 @@
 					$cellData = $rowData[$columnNameArray[$j]];
 				} // if
 				if (empty($cellData)) {
-					$cellData = "&nbsp;";
+					$cellData = " ";
 				} // if
-				$this->assign('cellData', $cellData);
-				$this->assign('rowSpanForData', $maximumCellSize);
+				$_smarty_tpl->assign('cellData', $cellData);
+				$_smarty_tpl->assign('rowSpanForData', $maximumCellSize);
 				$dataCellClass = "reportlistViewMatrixRightEmptyData";
 				if ($i == (count($rowsAndColumnsData)-1)) {
 					$dataCellClass = "reportlistViewMatrixRightEmptyData1";
 				} // if
-				$this->assign('dataCellClass', $dataCellClass);
+				$_smarty_tpl->assign('dataCellClass', $dataCellClass);
 {/php}
-	<th scope="col" ROWSPAN='{$rowSpanForData}' align='center' class="{$dataCellClass}" valign=middle wrap>{$cellData}</td>
+	<th scope="col" ROWSPAN='{$rowSpanForData|escape:'html':'UTF-8'}' align='center' class="{$dataCellClass|escape:'html':'UTF-8'}" valign=middle wrap>{$cellData}</td>
 {php}
 			} else {
-				$cellData = "&nbsp;";
+				$cellData = " ";
 				if (isset($rowData[$columnNameArray[$j]])) {
 					$cellDataArray = $rowData[$columnNameArray[$j]];
 					if (is_array($cellDataArray)) {
@@ -128,12 +128,12 @@
 						if ($j == 1) {
 							//$cellData = $arrayKeys[$k] . " = " . $cellData;
 						} // if
-						//$cellData = "&nbsp;";
+						//$cellData = " ";
 					} else {
-						$cellData = "&nbsp;";
+						$cellData = " ";
 					} // else
 				} // if
-				$this->assign('cellData', $cellData);
+				$_smarty_tpl->assign('cellData', $cellData);
 				$dataCellClass = "reportGroupByDataMatrixEvenListRowS1";
 				if ($j == (count($columnNameArray)-1)) {
 					$dataCellClass = "reportGroupByDataMatrixEvenListRowS2";
@@ -147,9 +147,9 @@
 					} // if
 				} // if
 
-				$this->assign('dataCellClass', $dataCellClass);
+				$_smarty_tpl->assign('dataCellClass', $dataCellClass);
 {/php}
-	<td scope="col" align='center' class="{$dataCellClass}" valign=middle wrap>{$cellData}</td>
+	<td scope="col" align='center' class="{$dataCellClass|escape:'html':'UTF-8'}" valign=middle wrap>{$cellData}</td>
 {php}
 			} // else
 		} // for

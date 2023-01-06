@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'อ้างอิงโดย',
     'LBL_LIST_STATUS' => 'สถานะ',
     'LBL_LIST_TITLE' => 'ชื่อเรื่อง',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'การพยากรณ์กำไรทางการตลาด',
+    'LBL_MARKET_SCORE' => 'คะแนนการตลาด',
     'LBL_MOBILE_PHONE' => 'อุปกรณ์เคลื่อนที่:',
     'LBL_MODULE_NAME' => 'ผู้สนใจ',
     'LBL_MODULE_NAME_SINGULAR' => 'ผู้สนใจ',
@@ -330,4 +332,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'การพยากรณ์การแปลงผู้สนใจ',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'ดูรายละเอียดการพยากรณ์ผู้สนใจเฉพาะราย',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'เปิดใช้งานสินค้าไลน์ที่ทำรายได้',
+    'LBL_REQUIRE_RLIS' => 'ต้องใช้สินค้าที่ทำรายได้ในการสร้างโอกาสการขายใหม่',
+    'LBL_COPY_DATA_RLIS' => 'คัดลอกข้อมูลผู้สนใจไปยังสินค้าที่ทำรายได้เมื่อสร้างโอกาสการขายใหม่',
 );

@@ -78,7 +78,7 @@
 	</table>
 	<p>
 
-	{literal}
+	
 	<script type="text/javascript" >
 	//this function will toggle the popup forms to be read only if "Default" is selected,
 	//and enable the pop up select if "Custom" is selected
@@ -86,24 +86,24 @@
 	var def_value ='';
 		if(list == 'subs'){
 			list_name = 'wiz_step3_subscription_name';
-			{/literal}
+			
 			def_id ='{$SUBSCRIPTION_ID}';
 			def_value ='{$SUBSCRIPTION_NAME}'
-			{literal}
+			
 		}
 		if(list == 'unsubs'){
 			list_name = 'wiz_step3_unsubscription_name';
-			{/literal}
+			
 			def_id ='{$UNSUBSCRIPTION_ID}';
 			def_value ='{$UNSUBSCRIPTION_NAME}'
-			{literal}
+			
 		}
 		if(list == 'test'){
 			list_name = 'wiz_step3_test_name';
-			{/literal}
+			
 			def_id ='{$TEST_ID}';
 			def_value ='{$TEST_NAME}'
-			{literal}
+			
 		}		
 			//default selected, set inputs to read only
 			if (radiobutton.value == '1') {
@@ -126,7 +126,7 @@
 	function change_target_list_names(list,def_value)	{
 		//id was passed in, create the listname and inputname variables
 		if(list != ''){
-	       switch (list){{/literal}
+	       switch (list){
 	            case 'subs':
 	            listname = '{$MOD.LBL_SUBSCRIPTION_LIST}';               
 	            inputname = 'subscription_name';
@@ -141,7 +141,7 @@
 	            break;                              
 	            default: 
 	            inputname = '';
-	            {literal}
+	            
 			}		
 		}
 
@@ -152,4 +152,4 @@
 	}
 	
 	</script>	
-	{/literal}
+	

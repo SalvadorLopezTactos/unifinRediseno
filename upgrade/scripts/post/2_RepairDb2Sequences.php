@@ -32,7 +32,9 @@ class SugarUpgradeRepairDb2Sequences extends UpgradeScript
         $res = $this->db->query($sql);
         while ($row = $this->db->fetchByAssoc($res)) {
             $this->log("Altering sequence {$row['seqname']} using NO CACHE");
-            $alter = "ALTER SEQUENCE {$row['seqname']} NO CACHE";
+            $tableNameQuoted = $this->db->getValidDBName($row['seqname'], false, 'table');
+            $alter = 'ALTER SEQUENCE '.$tableNameQuoted.' NO CACHE';
+
             $this->db->query($alter, false, "Error altering sequence {$row['seqname']} using NO CACHE");
         }
     }

@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => '削除' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'SugarCRM 搭載' /*for 508 compliance fix*/,
     'LBL_ROLE' => '役割',
+    'LBL_BASE_LAYOUT' => '基本レイアウト',
+    'LBL_FIELD_NAME' => 'フィールド名',
+    'LBL_FIELD_VALUE' => '値',
+    'LBL_LAYOUT_DETERMINED_BY' => 'レイアウト決定者：',
+    'layoutDeterminedBy' => [
+        'std' => '標準レイアウト',
+        'role' => '役割',
+        'dropdown' => 'ドロップダウンフィールド',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'すべてのカスタムレイアウトが削除されます。現在のレイアウト定義を変更してもよろしいですか？',
 'help'=>array(
     'package'=>array(
             'create'=>'パッケージの<b>名称</b>を入力してください。パッケージ名では空白を含まないアルファベットと英数字のみが利用可能です（例: HR_Management）。<br/><br/>パッケージの情報として<b>作成者</b>と<b>詳細</b>を設定することができます。<br/><br/>パッケージを作成するには<b>保存</b>をクリックします。',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => '表示エディタ',
 'LBL_ROLLUP' => 'ロールアップ',
 'LBL_RELATED_FIELD' => '関連フィールド',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'カスタムロゴマーク画像のURL。おすすめのロゴマークの解像度は22x22ピクセルです。このサイズより大きい画像をアップロードした場合は、最大値にあわせて画像の大きさが変更されます。',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'カスタムロゴ画像のURL。おすすめのロゴの幅は200ピクセルです。このサイズより大きい画像をアップロードした場合は、最大値にあわせて画像の大きさが変更されます。この画像はログイン画面で使用されます。画像がアップロードされていない場合は、ロゴマークが使用されます。',
 'LBL_PORTAL_ROLE_DESC' => 'この役割を削除しないでください。カスタマーセルフサービスポータル役割は、Sugarポータルのアクティベーション中にシステムによって自動生成された役割です。Sugarポータルで不具合、ケース、ナレッジベースを有効/無効にするには、この役割の中でアクセス権限を設定してください。システムが正しく動作しなくなる場合があるため、他のモジュールについてのアクセス権をここでは設定しないでください。誤ってこの役割を削除してしまった場合は、Sugarポータルを無効にした後で有効にすることで再度作成されます。',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'関連の追加',
 'LBL_BTN_RENAME_MODULE' => 'モジュール名の変更',
 'LBL_BTN_INSERT'=>'挿入',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => '基本レイアウトを元に戻す',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'エラーが発生しました',
 'ERROR_REQUIRED_FIELDS' => '継続しますか？ 以下の必須フィールドがレイアウトに不足しています:',
 'ERROR_ARE_YOU_SURE' => '本当に継続してよいですか？',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'フィールドを作成できません。データベース内のこのテーブルの行サイズ制限に達しました。<a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">詳細はこちらです</a>。',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => '以下のフィールドは計算結果を保持していますが、モバイル編集画面ではリアルタイムに再計算されません:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => '以下のフィールドは計算結果を保持していますが、Sugarポータル編集画面ではリアルタイムに再計算されません:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'ポータルで有効にしたい場合は<a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">こちら</a>にて設定してください。',
     'LBL_PORTAL_CONFIGURE' => 'ポータルを設定',
     'LBL_PORTAL_ENABLE_PORTAL' => 'ポータルを有効化',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'ケースを開く前に検索を有効にします',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'ナレッジベース モジュールのメモを有効にする',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'ポータルユーザーによるケースのクローズを許可する',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => '新規ユーザーによる登録を許可する',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'ユーザー権限',
     'LBL_PORTAL_THEME' => 'テーマポータル',
     'LBL_PORTAL_ENABLE' => '有効にする',
     'LBL_PORTAL_SITE_URL' => 'ポータルのURLは:',
     'LBL_PORTAL_APP_NAME' => 'アプリケーション名',
-    'LBL_PORTAL_LOGOMARK_URL' => 'ロゴマークのURL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'ロゴマークのプレビュー',
-    'LBL_PORTAL_LOGO_URL' => 'ロゴのURL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'ロゴのプレビュー',
     'LBL_PORTAL_CONTACT_PHONE' => '電話',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Eメール',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => '有効なEメールアドレスを入力する必要があります',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'ポータルモジュールの名前をドラッグ＆ドロップして、ポータルのトップナビゲーションバーで表示または非表示に設定してください。モジュールへのポータルユーザのアクセスを制御するには、<a href="?module=ACLRoles&action=index">役割管理</a>を使用します。',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => '表示されるタブ',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => '非表示のタブ',
+    'LBL_CONFIG_VISIBILITY' => '可視性',
+    'LBL_CASE_VISIBILITY_HELP' => 'どのポータルユーザーが案件を閲覧できるかを定義します。',
+    'LBL_EMAIL_VISIBILITY_HELP' => '案件に関連するメールを表示できるポータルユーザーを定義します。 参加している連絡先は、To、From、CC、および BCC フィールドの連絡先です。',
+    'LBL_MESSAGE_VISIBILITY_HELP' => '案件に関連するメッセージを表示できるポータルユーザーを定義します。 参加している連絡先は、[ゲスト] フィールドの連絡先です。',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'アカウントに関連するすべての連絡先',
+        'related_contacts' => '第一連絡先と案件に関連する連絡先のみ',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => '参加する連絡先のみ',
+        'all' => '案件を閲覧可能なすべての連絡先',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => '参加する連絡先のみ',
+        'all' => '案件を閲覧可能なすべての連絡先',
+    ],
+
 
 'LBL_PORTAL'=>'ポータル',
 'LBL_PORTAL_LAYOUTS'=>'ポータルレイアウト',
@@ -787,11 +812,11 @@ $mod_strings = array(
     . "必須フィールドは、ブラウザベースのモバイルビューの数式に従いますが、<br/>"
     . "sugar Mobile for iPhoneなどのネイティブアプリケーション内の数式に従いません。<br/>"
     . "これはSugarセルフサービスポータル内の数式を継承しません。",
-'LBL_POPHELP_READONLY'=>"このフィールドがレイアウトで読み取り専用かどうかを判断する式を作成します。<br/>"
+'LBL_POPHELP_READONLY'=>"このフィールドがレイアウトで読み取り専用かどうかを決定する数式を作成します。<br/>"
         . "読み取り専用フィールドは、ブラウザベースのモバイルビューの数式に従いますが、<br/>"
-        . "Sugar Mobile for iPhoneなどのネイティブアプリケーションの式には従いません。 <br/>"
-        . "これらは、 Sugarセルフサービスポータルの式には従いません。",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'このモジュールでグローバル検索を使用してレコードを検索する時にこのフィールドを使用する場合に選択します。',
+        . "Sugar Mobile for iPhoneなどのネイティブアプリケーション内の数式に従いません。<br/>"
+        . "これはSugarセルフサービスポータル内の数式を継承しません。",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'このモジュールのグローバル検索を使用してレコードを検索するときに、このフィールドを使用するように選択します。',
 //Revert Module labels
 'LBL_RESET' => 'リセット',
 'LBL_RESET_MODULE' => 'モジュールをリセット',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'日時',
                 'decimal'=>'小数点',
                 'autoincrement' => '自動インクレメント',
+                'actionbutton' => 'ActionButton',
 ),
 'labelTypes' => array(
     "" => "よく利用されるラベル",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} ({1}に関連するID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'レイアウトからのコピー',
 'LBL_RELATIONSHIP_TYPE' => '関連',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => '比較言語',
+'LBL_LABEL_NOT_TRANSLATED' => 'このラベルは翻訳されない場合があります',
 );

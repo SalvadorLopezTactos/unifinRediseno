@@ -41,6 +41,11 @@ class Link2 {
     protected $relationship_fields = array();
 
     /**
+     * @var array stores fetched related beans for use in SugarLogic expressions
+     */
+    protected $sugarLogicCache = null;
+
+    /**
      * @param  $linkName String name of a link field in the module's vardefs
      * @param  $bean SugarBean focus bean for this link (one half of a relationship)
      * @param  $linkDef Array Optional vardef for the link in case it can't be found in the passed in bean for the global dictionary
@@ -148,7 +153,10 @@ class Link2 {
     public function resetLoaded()
     {
         $this->loaded = false;
-        $this->rows = []; // free memory
+
+        // Free memory
+        $this->rows = [];
+        $this->sugarLogicCache = null;
     }
 
     /**
@@ -383,8 +391,6 @@ class Link2 {
      * @param array $params optional parameters. Possible Values;
      * 'return_as_array': returns the query broken into
      * @return String/Array query to grab just ids for this relationship
-     *
-     * @deprecated Use Link2::query() instead
      */
     function getQuery($params = array())
     {
@@ -491,6 +497,68 @@ class Link2 {
             $result = $this->beans;
         }
 
+        return $result;
+    }
+
+    /**
+     * Returns the full set of beans related through this link for use in SugarLogic calculations. Uses
+     * {@link SugarBean::fetchFromQuery} to provide better performance than {@link getBeans}. Caches the
+     * results separately from {@link $beans} as the beans are loaded in a different manner, and team
+     * security is ignored
+     *
+     * @return array the array of beans related through this link
+     * @throws SugarQueryException
+     */
+    public function getBeansForSugarLogic() : array
+    {
+        if ($this->sugarLogicCache !== null) {
+            return $this->sugarLogicCache;
+        }
+        $this->sugarLogicCache = [];
+        $result = [];
+
+        // Get the IDs of the related rows. To keep calculation results consistent between users,
+        // SugarLogic should not use team security
+        $data = $this->query([
+            'enforce_teams' => false,
+        ]);
+        $rows = $data['rows'];
+        $ids = array_column($rows, 'id');
+
+        // If there are no related records, return the empty result now
+        if (empty($ids)) {
+            return $result;
+        }
+
+        // For each of the IDs, use cached beans for any that are available. Otherwise,
+        // add the ID to the list of IDs to fetch
+        $idsToFetch = [];
+        foreach ($ids as $id) {
+            if (!empty($this->sugarLogicCache[$id])) {
+                $result[$id] = $this->sugarLogicCache[$id];
+            } else {
+                $idsToFetch[] = $id;
+            }
+        }
+
+        // If there are no records we need to fetch, return what we got from the cache
+        if (empty($idsToFetch)) {
+            return $result;
+        }
+
+        // Fetch the related beans from the rows
+        $seed = BeanFactory::newBean($this->getRelatedModuleName());
+        $query = new SugarQuery();
+        $query->from($seed, [
+            'team_security' => false,
+        ]);
+        $query->where()->in('id', $idsToFetch);
+        $fetchedBeans = $seed->fetchFromQuery($query, [], ['skipSecondaryQuery' => true]);
+
+        // Combine the fetched results with the cached ones. Re-cache the result for the
+        // next time and return it
+        $result = array_replace($result, $fetchedBeans);
+        $this->sugarLogicCache = $result;
         return $result;
     }
 

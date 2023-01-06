@@ -6,9 +6,7 @@
     width: calc(~"34.042553198%");
     position: fixed;
     right: 0;
-    border-bottom: @borderWidget;
     border-left: @borderWidget;
-    background: @white;
     z-index: 1002;
 
     h1 {
@@ -20,6 +18,7 @@
 
     .preview-edit-btn {
       margin: 12px 0 0;
+      padding: 7px;
     }
 
     .btn-toolbar {
@@ -39,7 +38,7 @@
 
     .field-label {
       font-size: 11px;
-      color: @gray;
+      color: @labelColor;
     }
 
     .field-value {
@@ -63,7 +62,7 @@
       }
 
       label {
-        color: @gray;
+        color: @labelColor;
       }
     }
 
@@ -80,6 +79,10 @@
       > .nodata {
         padding: 5px 7px;
         display: block;
+      }
+
+      &[data-type="badge"] {
+        margin-top: 7px;
       }
     }
 
@@ -216,7 +219,6 @@
     /* override */
     top: 45px;
     height: 51px;
-    background: @previewHeaderBackground;
 
     h1 {
       /* override */
@@ -233,12 +235,21 @@
   }
 }
 
+.banner-shifted {
+  .preview-pane {
+    .preview-headerbar {
+      /* override */
+      top: 45px + @bannerHeight;
+    }
+  }
+}
+
 .preview-data {
   /* override */
   padding: 60px 12px 10px;
 
   &.block {
-    background: @previewDataBackground;
+    background: @primaryContentBackground;
   }
 
   .process-design + div + div {
@@ -251,7 +262,7 @@
 
     /* additive */
     &:not(:first-child) {
-      border-top: 1px solid @previewFieldSeparator;
+      border-top: @borderWidget;
     }
 
     .field-label {
@@ -265,6 +276,12 @@
 
       /* override */
       font-size: @previewLabelFontSize;
+
+      .sicon-sugar-predict {
+        margin-right: 3px;
+        margin-bottom: 2px;
+        color: @purple;
+      }
     }
 
     .field-label.hide {
@@ -287,21 +304,6 @@
 
         .htmleditable {
           float: none;
-        }
-      }
-
-      &[data-type="email"] {
-        .opt-out::before {
-          content: @fa-var-ban;
-          font-family: 'FontAwesome';
-          position: absolute;
-          left: 1px;
-          top: 1px;
-        }
-
-        .opt-out {
-          position: relative;
-          padding-left: 16px;
         }
       }
     }

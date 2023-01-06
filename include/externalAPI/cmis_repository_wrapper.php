@@ -755,7 +755,7 @@ class CMISService extends CMISRepositoryWrapper
         return $this->workspace;
     }
 
-    function getTypeDescendants($typeId=null, $depth, $options = array ())
+    public function getTypeDescendants(string $typeId, int $depth, array $options = []): stdClass
     {
     	// TODO: Refactor Type Entries Caching
         $varmap = $options;

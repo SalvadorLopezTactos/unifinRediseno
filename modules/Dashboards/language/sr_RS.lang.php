@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Sve kontrolne table za modul {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Sve kontrolne table za prikaz {{view}} modula {{module}}',
     'LBL_COPY_OF' => 'Kopija {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Kontrolna tabla fioke fokusa ne može da se izbriše.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Kreiraj kontrolnu tablu',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Želite li stvarno da vratite podrazumevani izgled kontrolne table?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Želite li stvarno da vratite panel ove kontrolne table na podrazumevani raspored?',
+    'LBL_FILTER_UTILS_SELECT' => 'Dodeljeno',
 );

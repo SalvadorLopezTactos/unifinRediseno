@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Ten harmonogram raportów',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Pulpit rekordów harmonogramów raportów',
+    'LBL_FILE_TYPE' => 'Typy pliku',
 );

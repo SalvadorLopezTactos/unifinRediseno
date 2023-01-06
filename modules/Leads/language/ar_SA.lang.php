@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'تمت الإحالة من خلال',
     'LBL_LIST_STATUS' => 'الحالة',
     'LBL_LIST_TITLE' => 'العنوان',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'توقع فائدة السوق',
+    'LBL_MARKET_SCORE' => 'درجات السوق',
     'LBL_MOBILE_PHONE' => 'الهاتف المحمول:',
     'LBL_MODULE_NAME' => 'المتوقعون',
     'LBL_MODULE_NAME_SINGULAR' => 'العميل المتوقع',
@@ -330,4 +332,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'التنبؤ بتحول العملاء المتوقعين',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'عرض تفاصيل التنبؤ لعميل متوقع معين',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'تمكين بنود العائدات',
+    'LBL_REQUIRE_RLIS' => 'يجب توافر بنود العائدات عند إنشاء فرصة جديدة',
+    'LBL_COPY_DATA_RLIS' => 'نسخ بيانات العميل المتوقع إلى بنود العائدات عند إنشاء فرصة جديدة',
 );

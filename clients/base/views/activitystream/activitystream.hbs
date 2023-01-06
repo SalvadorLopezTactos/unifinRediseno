@@ -15,7 +15,7 @@
         {{#if model.attributes.picture_url}}
             <img src="{{model.attributes.picture_url}}" alt="{{model.attributes.created_by_name}}">
         {{else}}
-            <i class="fa fa-user fa-2x" alt="{{model.attributes.created_by_name}}"></i>
+            <i class="sicon sicon-lg sicon-user" alt="{{model.attributes.created_by_name}}"></i>
         {{/if}}
     </a>
 {{else}}
@@ -49,9 +49,19 @@
 </span>
 {{#unless readonly}}
     <div class="actions btn-group">
-        <button class="btn comment-btn" rel="tooltip" title="{{str 'LBL_COMMENT'}}" tabindex="0" aria-label="{{str 'LBL_COMMENT'}}" aria-pressed="false"><i class="fa fa-comment"></i></button>
+        <button class="btn comment-btn" rel="tooltip" title="{{str 'LBL_COMMENT'}}" tabindex="0"
+                aria-label="{{str 'LBL_COMMENT'}}" aria-pressed="false"
+        >
+            <i class="sicon sicon-message"></i>
+        </button>
     {{#unless nopreview}}
-        <button class="btn preview-btn {{#unless preview.enabled}}disabled{{/unless}}" rel="tooltip" title="{{str preview.label}}" data-module="{{model.attributes.display_parent_type}}" data-id="{{model.attributes.display_parent_id}}" tabindex="{{#if preview.enabled}}0{{else}}-1{{/if}}" aria-label="{{str preview.label}}" aria-pressed="false"><i class="fa fa-eye"></i></button>
+        <button class="btn preview-btn {{#unless preview.enabled}}disabled{{/unless}}" rel="tooltip"
+                title="{{str preview.label}}" data-module="{{model.attributes.display_parent_type}}"
+                data-id="{{model.attributes.display_parent_id}}" tabindex="{{#if preview.enabled}}0{{else}}-1{{/if}}"
+                aria-label="{{str preview.label}}" aria-pressed="false"
+        >
+            <i class="sicon sicon-preview"></i>
+        </button>
     {{/unless}}
     </div>
 {{/unless}}

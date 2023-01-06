@@ -77,12 +77,19 @@
         var options = {};
         options.success = _.bind(function() {
             this.layout.trigger('list:paginate:success');
+
+            // Tell the side drawer that there are new records to look at
+            if (app.sideDrawer) {
+                app.sideDrawer.trigger('sidedrawer:collection:change', this.collection);
+            }
+
             // FIXME: This should trigger on `this.collection` instead of
             // `this.context`. Will be fixed as part of SC-2605.
             this.context.trigger('paginate');
             this.render();
         }, this);
-
+        // collection offset is not properly set before Pagination fetch.
+        this.collection.offset = this.collection.length;
         this.paginationComponent.getNextPagination(options);
         this.render();
     },
@@ -138,6 +145,8 @@
      */
     _renderHtml: function() {
         this.setShowMoreLabel();
+
+        this.moreClassToggle();
         this._super('_renderHtml');
     },
 
@@ -151,6 +160,24 @@
     bindDataChange: function() {
         this.context.on('change:collection', this.onCollectionChange, this);
         this.collection.on('add remove reset', this.render, this);
+    },
+
+    /**
+    * Toggle CSS class to show if pagination button is available.
+    */
+    moreClassToggle: function() {
+        if (!this.paginationComponent.layout) {
+            return;
+        }
+
+        let layout = this.paginationComponent.layout.$el;
+
+        layout.removeClass('more-active');
+        let collectionDataFetched = _.has(this.collection, 'dataFetched') && this.collection.dataFetched;
+        let isLastOffset = _.has(this.collection, 'next_offset') && this.collection.next_offset !== -1;
+        if (collectionDataFetched && isLastOffset) {
+            layout.addClass('more-active');
+        }
     },
 
     /**

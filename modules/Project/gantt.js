@@ -142,7 +142,7 @@ SUGAR.gantt = function() {
 	        			dateText = SUGAR.grid.getDisplayDate(nextDate);
 	        		}
 
-			        ganttDate.innerHTML = dateText;
+                    ganttDate.textContent = dateText;
 	        		ganttDates.appendChild(ganttDate);
 	        	}
 	    	}
@@ -159,7 +159,7 @@ SUGAR.gantt = function() {
 	        		else{
 			    		dateText = SUGAR.grid.getDisplayDate(nextDate);
 	        		}
-			        ganttDate.innerHTML = dateText;
+                    ganttDate.textContent = dateText;
 	        		ganttDates.appendChild(ganttDate);
 	        	}
 	    	}
@@ -170,7 +170,7 @@ SUGAR.gantt = function() {
 	    		nextDate = new Date(date.getTime());
 	    		dateText = SUGAR.grid.getDisplayDate(nextDate);
 
-		        ganttDate.innerHTML = dateText;
+                ganttDate.textContent = dateText;
 	    		ganttDates.appendChild(ganttDate);
 	    	}
 

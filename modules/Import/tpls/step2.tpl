@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}
+
 
 <style>
 
@@ -18,7 +18,7 @@
     text-decoration:underline
 }
 </style>
-{/literal}
+
 
 {if !$idm_update_mode_only}
     {$INSTRUCTION}
@@ -142,7 +142,7 @@
                     onclick="publishMapping(this, 'yes','{$item.IMPORT_ID}');">
                 {/if}
                 <input type="button" name="delete" value="{$MOD.LBL_DELETE}" class="button"
-					onclick="if(confirm('{$MOD.LBL_DELETE_MAP_CONFIRMATION}')){literal}{{/literal} deleteMapping('custom_import_{$smarty.foreach.saved.index}', '{$item.IMPORT_ID}' );{literal}}{/literal}">
+					onclick="if(confirm('{$MOD.LBL_DELETE_MAP_CONFIRMATION}')){ deleteMapping('custom_import_{$smarty.foreach.saved.index}', '{$item.IMPORT_ID}' );}">
             </td>
           </tr>
           {/foreach}
@@ -158,7 +158,7 @@
                 <input type="button" name="publish" value="{$MOD.LBL_UNPUBLISH}" class="button" publish="no"
                     onclick="publishMapping(this, 'no','{$item.IMPORT_ID}');">
                 <input type="button" name="delete" value="{$MOD.LBL_DELETE}" class="button"
-                    onclick="if(confirm('{$MOD.LBL_DELETE_MAP_CONFIRMATION}')){literal}{{/literal}deleteMapping('published_import_{$smarty.foreach.published.index}','{$item.IMPORT_ID}' );{literal}}{/literal}">
+                    onclick="if(confirm('{$MOD.LBL_DELETE_MAP_CONFIRMATION}')){ deleteMapping('published_import_{$smarty.foreach.published.index}','{$item.IMPORT_ID}' ); }">
                 {/if}
             </td>
           </tr>

@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Procesu ierakstu instrumentu panelis',
 
     'LBL_CAS_ID' => 'Procesa numurs',
+    'LBL_CAS_STATUS' => 'Procesa statuss',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Nezināms (attiecībā uz UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "uzdevums ir",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "uzdevums tika ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "tika piešķirts process #%s %s %s ieraksts ar %s darbību %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "uz",
     'LBL_PMSE_HISTORY_LOG_AND'  => "un",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'pievienoja vai atvienoja ierakstu pie',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Apstiprināt',
     'LBL_PMSE_LABEL_REJECT' => 'Noraidīt',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Procesi procesā',
     'LBL_STATUS_CANCELLED' => 'Procesi atcelti',
     'LBL_STATUS_ERROR' => 'Procesu kļūda',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Pabeigts',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Pārtraukts',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Procesā',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Atcelts',
+    'LBL_STATUS_ERROR_ENUM' => 'Kļūda',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Procesu pārvaldība',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Procesi bez uzraudzības',

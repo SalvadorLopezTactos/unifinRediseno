@@ -157,12 +157,26 @@ $dictionary['KBContent'] = array(
         ),
         'attachment_list' => array(
             'name' => 'attachment_list',
-            'type' => 'file',
+            'links' => [
+                'attachments',
+            ],
+            'order_by' => 'name:asc',
             'source' => 'non-db',
-            'vname' => 'LBL_RATING',
-            'duplicate_on_record_copy' => 'no',
-            'studio' => false,
-            'group' => 'attachments',
+            'studio' => [
+                'recordview' => true,
+                'previewview' => true,
+                'recorddashletview' => true,
+                'visible' => false,
+            ],
+            'type' => 'collection',
+            'vname' => 'LBL_ATTACHMENTS',
+            'reportable' => false,
+            'hideacl' => true,
+            'filter' => [
+                [
+                    'attachment_flag' => '1',
+                ],
+            ],
         ),
         'notes' => array(
             'name' => 'notes',
@@ -256,6 +270,9 @@ $dictionary['KBContent'] = array(
             'name' => 'is_external',
             'vname' => 'LBL_IS_EXTERNAL',
             'type' => 'tinyint',
+            'displayParams' => [
+                'reports_type' => 'bool',
+            ],
             'isnull' => 'true',
             'comment' => 'External article flag',
             'default' => 0,
@@ -311,7 +328,6 @@ $dictionary['KBContent'] = array(
         'localizations' => array(
             'name' => 'localizations',
             'type' => 'link',
-            'link_file' => 'modules/KBContents/LocalizationsLink.php',
             'link_class' => 'LocalizationsLink',
             'source' => 'non-db',
             'vname' => 'LBL_KBSLOCALIZATIONS',
@@ -323,7 +339,6 @@ $dictionary['KBContent'] = array(
         'revisions' => array(
             'name' => 'revisions',
             'type' => 'link',
-            'link_file' => 'modules/KBContents/RevisionsLink.php',
             'link_class' => 'RevisionsLink',
             'source' => 'non-db',
             'vname' => 'LBL_KBSREVISIONS',
@@ -456,7 +471,6 @@ $dictionary['KBContent'] = array(
             'type' => 'link',
             'module' => 'Users',
             'bean_name' => 'User',
-            'link_file' => 'modules/KBContents/UsefulnessLink.php',
             'link_class' => 'UsefulnessLink',
             'source' => 'non-db',
             'vname' => 'LBL_USEFULNESS',
@@ -532,6 +546,8 @@ $dictionary['KBContent'] = array(
             'rhs_table' => 'notes',
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
+            'relationship_class' => 'AttachmentRelationship',
+            'relationship_file' => 'data/Relationships/AttachmentRelationship.php',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'KBContents',
         ),
@@ -630,11 +646,6 @@ $dictionary['KBContent'] = array(
         ),
     ),
     'indices' => array(
-        array(
-            'name' => 'idx_kbcontent_name',
-            'type' => 'index',
-            'fields' => array('name'),
-        ),
         array(
             'name' => 'idx_kbcontent_del_doc_id',
             'type' => 'index',

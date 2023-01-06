@@ -57,6 +57,12 @@ class pmse_Inbox_sugar extends Basic
     var $cas_pin;
     var $cas_assigned_status;
 
+    const CAS_STATUS_COMPLETED = 'COMPLETED';
+    const CAS_STATUS_TERMINATED = 'TERMINATED';
+    const CAS_STATUS_IN_PROGRESS = 'IN PROGRESS';
+    const CAS_STATUS_CANCELLED = 'CANCELLED';
+    const CAS_STATUS_ERROR = 'ERROR';
+
 
     public function __construct()
     {
@@ -72,6 +78,19 @@ class pmse_Inbox_sugar extends Basic
         return false;
     }
 
+    /**
+     * Populate the cas_status enum field. Marked as final so that these values can never be overwritten by extending
+     * the class
+     * @return array
+     */
+    final public function getCasStatusTypes(): array
+    {
+        return [
+            static::CAS_STATUS_COMPLETED => translate('LBL_STATUS_COMPLETED_ENUM', 'pmse_Inbox'),
+            static::CAS_STATUS_TERMINATED => translate('LBL_STATUS_TERMINATED_ENUM', 'pmse_Inbox'),
+            static::CAS_STATUS_IN_PROGRESS => translate('LBL_STATUS_IN_PROGRESS_ENUM', 'pmse_Inbox'),
+            static::CAS_STATUS_CANCELLED => translate('LBL_STATUS_CANCELLED_ENUM', 'pmse_Inbox'),
+            static::CAS_STATUS_ERROR => translate('LBL_STATUS_ERROR_ENUM', 'pmse_Inbox'),
+        ];
+    }
 }
-
-?>

@@ -55,14 +55,15 @@ function smarty_function_sugar_fetch($params, &$smarty)
 	    $smarty->trigger_error("sugar_fetch: missing 'object' parameter");
 	    return;        
     }
-    
     $theKey = $params['key'];
     if(is_object($params['object'])) {
         $theData = $params['object']->$theKey;
     } else {
         $theData = $params['object'][$theKey];
     }
-
+    if (!empty($params['escape']) && $params['escape'] === 'html') {
+        $theData = htmlspecialchars($theData);
+    }
     if(!empty($params['assign'])) {
         $smarty->assign($params['assign'],$theData);
     } else {

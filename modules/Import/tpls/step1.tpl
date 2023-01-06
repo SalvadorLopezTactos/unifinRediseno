@@ -11,7 +11,6 @@
  */
 *}
 
-{literal}
 <style>
 #smtpButtonGroup .yui-button {
     padding-top: 10px;
@@ -23,7 +22,6 @@
 }
 
 
-{/literal}
 </style>
 {if $ERROR != ''}
 <span class="error">{$ERROR}</span>

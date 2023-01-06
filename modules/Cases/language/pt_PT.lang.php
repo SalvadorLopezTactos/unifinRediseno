@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Por exemplo, poderá usar isto para encontrar um pedido que tenha sido enviado anteriormente.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Se tem uma nova Ocorrência de suporte que gostaria de enviar, poderá clicar aqui para enviar uma nova Ocorrência.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Se clicar aqui irá regressar a esta visualização em qualquer altura.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacções de casos',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Timeline da Ocorrência',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notas',
 

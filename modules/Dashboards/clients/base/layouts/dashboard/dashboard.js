@@ -30,6 +30,16 @@
         'search': 'search-dashboard'
     },
 
+    /**
+     * Mapping of metadata files based on the dashboard names
+     *
+     * @property {Object}
+     */
+    metaFileNames: {
+        'da438c86-df5e-11e9-9801-3c15c2c53980': 'renewal-console',
+        'c108bb4a-775a-11e9-b570-f218983a1c3e': 'agent-dashboard'
+    },
+
     events: {
         'click [data-action=create]': 'createClicked'
     },
@@ -100,7 +110,12 @@
             if (_.contains(['multi-line', 'focus'], context.get('layout'))) {
                 // On the multi-line list and focus view, side drawer/focus drawer, the dashlets need
                 // the correct model context, which is set here.
-                model = options.layout.layout.model;
+                var layout = options && options.layout && options.layout.layout;
+                if (layout) {
+                    model = layout.model;
+                    model.set('view_name', layout.context.get('layout'));
+                    model.dashboardModule = layout.context.get('module');
+                }
             } else {
                 model = this._getNewDashboardObject('model', context);
             }
@@ -292,7 +307,7 @@
             });
             this.$el.append(
                 $('<div></div>')
-                    .addClass('dashboard' + css)
+                    .addClass('dashboard bg-secondary-content-background w-full absolute' + css)
                     .attr({'data-dashboard': 'true'})
                     .append(dashboardEl)
             );
@@ -317,6 +332,7 @@
             // collection nor do we need to call `setDefaultDashboard`.
             this.collection.on('reset', this.setDefaultDashboard, this);
         }
+        this.context.on('dashboard:restore-dashboard:clicked', this.restoreConsoleDashlets, this);
     },
 
     /**
@@ -387,6 +403,39 @@
     },
 
     /**
+     * Restore tab metadata for console Dashboards (Service and Renewals)
+     *
+     * @param tabIndex {number} index of the tab for which metadata needs to be reset
+     */
+    restoreConsoleDashlets: function(tabIndex) {
+        var dashboardId = this.model.get('id');
+        var metaFileName = this.metaFileNames[dashboardId];
+
+        if (metaFileName) {
+            var attributes = {
+                id: dashboardId
+            };
+            var params = {
+                dashboard: metaFileName,
+                tab_index: tabIndex,
+                dashboard_module: 'Home',
+            };
+
+            var url = app.api.buildURL('Dashboards', 'restore-tab-metadata', attributes, params);
+            app.api.call('update', url, null, {
+                success: _.bind(function(response) {
+                    var dashboard = this.layout.getComponent('dashboard');
+                    if (dashboard) {
+                        var tabbedDash = dashboard.getComponent('tabbed-dashboard');
+                        tabbedDash.model.set(response);
+                        tabbedDash.model.setSyncedAttributes({});
+                    }
+                }, this)
+            });
+        }
+    },
+
+    /**
      * Gets initial dashboard metadata
      *
      * @return {Object} dashboard metadata
@@ -414,7 +463,20 @@
         var module = model.dashboardModule;
         var key = module + '.' + view;
 
-        this._lastStateKey = app.user.lastState.key(key, this);
+        // For side drawers using the row-model-data layout, we need to mock the
+        // component being a "Home" module component so the last state key is
+        // built correctly
+        var sideDrawerLayouts = ['multi-line', 'focus'];
+        if (this.layout && this.layout.context && this.layout.context.parent &&
+            _.contains(sideDrawerLayouts, this.layout.context.parent.get('layout'))) {
+            this._lastStateKey = app.user.lastState.key(key, {
+                module: 'Home',
+                meta: this.meta
+            });
+        } else {
+            this._lastStateKey = app.user.lastState.key(key, this);
+        }
+
         return this._lastStateKey;
     },
 
@@ -525,11 +587,12 @@
         } else if (layout.context && layout.context.parent &&
             _.contains(sideDrawerHeaderLayouts, layout.context.parent.get('layout'))) {
             headerPane = {
-                view: 'side-drawer-header'
+                view: 'side-drawer-headerpane',
+                loadModule: 'Dashboards'
             };
             actionButtons = {
                 view: 'dashboard-fab',
-                loadModule: ''
+                loadModule: 'Dashboards'
             };
         } else {
             headerPane = {
@@ -766,31 +829,51 @@
     },
 
     /**
-     * Gets the empty dashboard layout template
+     * Gets the empty dashboard view template from dashboards/clients/base/views
      * and renders it to <pre><code>this.$el</code></pre>
      *
      * @private
      */
     _renderEmptyTemplate: function() {
+        var headerPane = {};
+        var layout = this.layout;
+        if (layout) {
+            var isSideDrawer = layout.$el.closest('#side-drawer').length > 0;
 
-        // Grab new dashboard-empty view
-        var template = app.template.getLayout('dashboard.dashboard-empty', 'Dashboards');
+            if (isSideDrawer) {
+                headerPane = {
+                    view: 'side-drawer-headerpane',
+                    loadModule: 'Dashboards'
+                };
+            }
+            var component = {
+                layout: {
+                    type: 'dashboard',
+                    components: [
+                        headerPane,
+                        {
+                            view: 'dashboard-empty',
+                            loadModule: 'Dashboards'
+                        },
+                    ],
+                    last_state: {
+                        id: 'last-visit'
+                    }
+                },
+                context: {
+                    module: 'Home',
+                    forceNew: true,
+                    create: true,
+                    emptyDashboard: true
+                },
+                loadModule: 'Dashboards'
+            };
+            layout.initComponents([component]);
 
-        // Replace html on the layout with the empty dashboard view
-        this.$el.html(template(this));
-    },
-
-    /**
-     * @inheritdoc
-     */
-    _dispose: function() {
-        var defaultLayout = this.closestComponent('sidebar');
-        if (defaultLayout) {
-            this.stopListening(defaultLayout);
+            layout.removeComponent(0);
+            layout.loadData({});
+            layout.render();
         }
-
-        this.dashboardLayouts = null;
-        this._super('_dispose');
     },
 
     /**
@@ -837,5 +920,19 @@
                 });
             }
         });
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        var defaultLayout = this.closestComponent('sidebar');
+        if (defaultLayout) {
+            this.stopListening(defaultLayout);
+        }
+
+        this.dashboardLayouts = null;
+        this.context.off('dashboard:restore-dashboard:clicked', this.restoreConsoleDashlets, this);
+        this._super('_dispose');
     }
 })

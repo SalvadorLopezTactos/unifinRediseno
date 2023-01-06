@@ -26,7 +26,8 @@ interface OnlineOperations
         string $denormalizedFieldName,
         string $primaryTableName,
         string $primaryKey,
-        $value
+        $value,
+        $relatedId = null
     ): void;
 
     public function updateBeanWithLinkId(
@@ -39,14 +40,17 @@ interface OnlineOperations
         string $linkId
     ): void;
 
-    public function updateTemporaryTableWithValue(SugarBean $bean, $value): void;
+    public function updateTemporaryTableWithValue(SugarBean $bean, $value, ?string $temporaryTableName): void;
 
     public function updateTemporaryTable(
         SugarBean $bean,
         string $linkedFieldName,
         string $linkedTableName,
-        string $linkedKey
+        string $linkedKey,
+        ?string $temporaryTableName
     ): void;
 
     public function fetchValue(string $tableName, string $fieldName, string $id);
+
+    public function setTmpTableName(string $name): void;
 }

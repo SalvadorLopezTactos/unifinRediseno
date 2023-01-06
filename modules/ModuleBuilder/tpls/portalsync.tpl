@@ -37,7 +37,6 @@
 </table>
 </form>
 
-{literal}
 <script>
 ModuleBuilder.helpSetup('portalSync','default');
 </script>
@@ -92,4 +91,3 @@ document.getElementById('portalURL').onkeydown = handleKeyDown;
 document.getElementById('gobutton').onclick = retrieve_portal_page;
 load_portal_url();
 </script>
-{/literal}

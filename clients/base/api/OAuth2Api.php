@@ -52,6 +52,17 @@ class OAuth2Api extends SugarApi
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
             ),
+            'oauth_bwc_logout' => array(
+                'reqType' => 'POST',
+                'path' => array('oauth2','bwc', 'logout'),
+                'pathVars' => array('','',''),
+                'method' => 'bwcLogout',
+                'shortHelp' => 'Bwc logout for bwc modules. Internal usage only.',
+                'longHelp' => 'include/api/help/oauth2_bwc_logout_post_help.html',
+                'keepSession' => true,
+                'ignoreMetaHash' => true,
+                'ignoreSystemStatusError' => true,
+            ),
             'oauth_sudo' => array(
                 'reqType' => 'POST',
                 'path' => array('oauth2','sudo','?'),
@@ -202,6 +213,11 @@ class OAuth2Api extends SugarApi
             $oauth2Server->unsetRefreshToken($args['refresh_token']);
         } else {
             $oauth2Server->unsetAccessToken($api->grabToken());
+
+            //Also, unset refresh token to prevent using it after logout (BR-8752).
+            if (isset($_SESSION['oauth2']['refresh_token'])) {
+                $oauth2Server->unsetRefreshToken($_SESSION['oauth2']['refresh_token']);
+            }
         }
 
         setcookie(
@@ -262,7 +278,7 @@ class OAuth2Api extends SugarApi
             session_write_close();
 
             // grab BWC session
-            ini_set('session.use_cookies', false);
+            ini_set('session.use_cookies', '0');
             session_id($_COOKIE[$sessionName]);
             session_start();
 
@@ -286,6 +302,19 @@ class OAuth2Api extends SugarApi
         // like studio, module builder, etc when sessions expire outside of the
         // ajax calls
         return array('name' => $sessionName);
+    }
+
+    /**
+     * @param ServiceBase $api
+     * @param array $args
+     *
+     * @return array
+     */
+    public function bwcLogout(ServiceBase $api, array $args): array
+    {
+        SugarApplication::endSession();
+        $this->killSessionCookie();
+        return [];
     }
 
     /**
@@ -317,9 +346,12 @@ class OAuth2Api extends SugarApi
 
         $api->validatePlatform($platform);
 
+        $allowInactive = $args['allowInactive'] ?? false;
+        $needRefresh = $args['needRefresh'] ?? false;
+
         $oauth2Server = $this->getOAuth2Server($args);
 
-        $token = $oauth2Server->getSudoToken($args['user_name'], $clientId, $platform);
+        $token = $oauth2Server->getSudoToken($args['user_name'], $clientId, $platform, $allowInactive, $needRefresh);
 
         if (!$token) {
             throw new SugarApiExceptionRequestMethodFailure("Could not setup a token for the requested user");
@@ -370,7 +402,7 @@ class OAuth2Api extends SugarApi
         session_write_close();
 
         // Start new BWC session and populate it from token session
-        ini_set('session.use_cookies', false);
+        ini_set('session.use_cookies', '0');
         session_id($sessionId);
         session_start();
         $_SESSION = $sessionData;
@@ -408,8 +440,17 @@ class OAuth2Api extends SugarApi
      */
     protected function killSessionCookie()
     {
+        $sessionName = session_name();
+        $sessionId = $_COOKIE[$sessionName]?? null;
+        if ($sessionId !== null) {
+            session_id($sessionId);
+            session_start();
+            $_SESSION = [];
+            session_destroy();
+        }
+
         setcookie(
-            session_name(),
+            $sessionName,
             '',
             [
                 'expires' => time() - 3600,

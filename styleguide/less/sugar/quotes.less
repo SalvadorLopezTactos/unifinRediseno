@@ -2,8 +2,8 @@
   ----------------*/
 .quote-data-container {
   .quote-data-grand-totals-header-wrapper {
-    border-bottom: 2px @grayDark solid;
-    border-top: 2px @grayDark solid;
+    border-bottom: @borderWidget;
+    border-top: @borderWidget;
     width: 100%;
     display: table;
     position: relative;
@@ -13,7 +13,7 @@
       margin-left: 71px;
       display: flex;
       justify-content: space-around;
-      border-left: @tableBorder;
+      border-left: @borderWidget;
     }
 
     &:last-child {
@@ -66,6 +66,21 @@
       width: 71px;
       height: 100%;
 
+      .sicon {
+        vertical-align: middle;
+      }
+
+      .dropdown-menu {
+        a {
+          display: flex;
+          align-items: center;
+
+          .sicon {
+            margin-right: 8px;
+          }
+        }
+      }
+
       a.btn {
         padding: 5px 0;
         margin: 0;
@@ -76,7 +91,11 @@
 
       .btn-group.open {
         a.btn.dropdown-toggle {
-          background: @gray;
+          background: @gray90;
+
+          .sicon {
+            color: @white;
+          }
         }
       }
 
@@ -134,11 +153,11 @@
     }
 
     tbody.quote-data-group {
-      border-top: 1px @grayDark solid;
+      border-top: @borderWidget;
 
       tr.quote-data-group-header td,
       tr.quote-data-group-footer td {
-        background: @grayLighter;
+        background: @contentBackground;
       }
 
       tr.quote-data-group-header {
@@ -183,10 +202,8 @@
             .btn-group.open {
               .dropdown-menu {
                 .btn {
-                  background-image: none;
-                  background-color: @white;
                   border: none;
-                  border-top: 1px solid @grayLighter;
+                  border-top: @borderWidget;
                 }
 
                 li > span a:hover,
@@ -214,7 +231,7 @@
               display: inline-block;
               width: 71px;
               height: 36px;
-              background: @grayLighter;
+              background: @gray20;
 
               &.higher {
                 padding: 0;
@@ -269,7 +286,11 @@
           }
 
           &.open .btn.dropdown-toggle {
-            background: @gray;
+            background: @gray90;
+
+            .sicon {
+              color: @white;
+            }
           }
 
           .btn {
@@ -288,18 +309,16 @@
             z-index: 11;
 
             .btn {
-              .fa {
-                font-size: 16px;
-              }
-
-              &.inline-save .fa {
-                color: @PrimaryButton;
-              }
+              padding: 7px;
             }
           }
         }
 
         .left-column-buttons {
+          .checkall > input {
+            margin: 0;
+          }
+
           .dropdown-menu {
             left: 26px;
           }
@@ -354,8 +373,8 @@
           padding: 4px 12px;
           margin-top: -14px;
           text-align: left;
-          color: darken(@grayLight, 10%);
-          border: 1px dashed darken(@grayLight, 10%);
+          color: @placeholderText;
+          border: 1px dashed @borderColorLight;
           overflow: hidden;
           text-overflow: ellipsis;
         }
@@ -387,7 +406,7 @@
         .quote-footer-item {
           margin-top: 6px;
           padding-top: 8px;
-          border-top: 2px @grayDark solid;
+          border-top: 2px @gray90 solid;
         }
       }
 
@@ -543,8 +562,8 @@
   .empty-config-footer-row-field {
     margin: 8px 0;
     padding: 4px 12px;
-    color: darken(@grayLight, 10%);
-    border: 1px dashed darken(@grayLight, 10%);
+    color: @gray60;
+    border: 1px dashed @gray60;
   }
 
   .grand-totals {
@@ -557,7 +576,7 @@
 .quote-data-config-container,
 tbody.quote-data-group {
   .ui-state-highlight {
-    border: 1px dashed darken(@grayLight, 10%);
+    border: 1px dashed @gray60;
     z-index: 1001;
   }
 
@@ -570,8 +589,8 @@ tbody.quote-data-group {
 
     &.ui-sortable-placeholder {
       visibility: visible !important;
-      background: @grayLight;
-      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.1), inset 2px 2px 0 rgba(0, 0, 0, 0.05), inset -2px -2px 0 rgba(0, 0, 0, 0.05);
+      background: @gray70;
+      box-shadow: inset 0 3px 5px @gray40, inset 2px 2px 0 @gray40, inset -2px -2px 0 @gray40;
     }
   }
 }
@@ -652,6 +671,10 @@ tbody.quote-data-group {
   bottom: initial;
 
   .dashlet {
+    &:not(.collapsed):not(.empty) {
+      min-height: 260px;
+    }
+
     h4 {
       cursor: initial;
     }
@@ -665,17 +688,20 @@ tbody.quote-data-group {
   }
 }
 
-.product-catalog-container {
-  padding: 15px 0 0 15px;
-}
-
 .quotes-config {
   h4 {
     font-weight: bold;
+    padding: 0 20px;
+  }
+
+  .accordion-inner {
+    padding: 0;
   }
 
   .worksheet-columns-directions {
-    margin: 25px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0 20px;
   }
 
   &.howto {
@@ -717,10 +743,9 @@ tbody.quote-data-group {
 
   .quote-summary-data-list-table a.btn {
     border: none;
-  }
-
-  .worksheet-columns-directions {
-    margin-top: 75px;
+    line-height: 12px;
+    padding: 7px;
+    margin-left: 0;
   }
 
   .flex-list-view {

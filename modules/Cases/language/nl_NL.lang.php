@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Bijvoorbeeld, u kunt dit gebruiken om een eerder gemeld probleem terug te vinden.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Wanneer u een nieuwe case heeft die u wilt melden, klik hier om een nieuwe case aan te maken.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Door hier te klikken, keert u terug naar deze weergave.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactie zaak',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn case',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notities',
 

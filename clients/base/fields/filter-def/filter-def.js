@@ -29,6 +29,14 @@
     fieldList: {},
 
     /**
+     * Modules that are marked as needing the field list API call in order to get a more full field list for filtering
+     * Normally we only use the call for non-visible modules since we dont store their filterable fields in metadata.
+     */
+    needForcedAPICall: [
+        'pmse_Inbox',
+    ],
+
+    /**
      * Array of filter definitions in readble format
      */
     readableFilterDef: [],
@@ -80,7 +88,7 @@
         var _module = this.module;
         var _fieldsKey = 'cache:' + _module + ':fieldDefs';
 
-        if (!_.isUndefined(app.metadata.getModule(_module))) {
+        if (!_.isUndefined(app.metadata.getModule(_module)) && !this.needForcedAPICall.includes(_module)) {
             this.fieldList = app.data.getBeanClass('Filters').prototype.getFilterableFields(_module);
             if (_.isUndefined(this.fieldList.deleted)) {
                 this.fieldList.deleted = app.metadata.getField({module: _module, name: 'deleted'});

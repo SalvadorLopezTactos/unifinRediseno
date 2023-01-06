@@ -31,6 +31,18 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    bindDataChange: function() {
+        this.on('emailclient:close', function() {
+            // propagate this event to the context if it occurred in the activity card
+            if (this.action === 'activity-card-emailaction') {
+                this.context.trigger('emailclient:close');
+            }
+        }, this);
+    },
+
+    /**
      * Set up email options, listening for parent model changes to update the
      * email options on change.
      *

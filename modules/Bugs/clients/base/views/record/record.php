@@ -47,6 +47,13 @@ $viewdefs['Bugs']['base']['view']['record'] = array(
                     'primary' => true,
                     'acl_action' => 'edit',
                 ),
+                [
+                    'type' => 'escalate-action',
+                    'event' => 'button:escalate_button:click',
+                    'name' => 'escalate_button',
+                    'label' => 'LBL_ESCALATE_BUTTON_LABEL',
+                    'acl_action' => 'create',
+                ],
                 array(
                     'type' => 'shareaction',
                     'name' => 'share',
@@ -153,6 +160,13 @@ $viewdefs['Bugs']['base']['view']['record'] = array(
                     'readonly' => true,
                     'dismiss_label' => true,
                 ),
+                [
+                    'name' => 'is_escalated',
+                    'type' => 'badge',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'dismiss_label' => true,
+                ],
             ),
         ),
         array(

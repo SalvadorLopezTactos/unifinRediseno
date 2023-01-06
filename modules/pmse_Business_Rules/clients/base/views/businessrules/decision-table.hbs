@@ -31,7 +31,9 @@
     <tr id="business-rules-footer">
         <td></td>
         <td>
-            <span id="add-decision-row-button" class="btn fa fa-plus decision-table-add-row"></span>
+            <span id="add-decision-row-button" class="btn decision-table-add-row">
+                <span class="sicon sicon-plus"></span>
+            </span>
         </td>
         <td id="decision-table-conditions-footer" class="table-split" colspan="{{conditionsSpan}}"></td>
         <td id="decision-table-conclusions-footer" colspan="{{conclusionsSpan}}"></td>
@@ -42,26 +44,26 @@
         <td></td>
         <td>
             <button class="btn btn-block btn-primary decision-table-btn-hidden" id="trash-button">
-                <span class="fa fa-trash-o"></span>
+                <span class="sicon sicon-remove"></span>
             </button>
         </td>
         <td class="decision-table-condition-column">
             <div class="decision-table-conditions-header"></div>
             <div style="float; right;">
                 <button class="btn decision-table-close-element" title="{{removeConditionTitle}}">
-                    <span class="fa fa-minus"></span>
+                    <span class="sicon sicon-minus"></span>
                 </button>
             </div>
         </td>
         <td class="table-split">
             <button id="add-condition-button" title="{{addConditionTitle}}" class="btn decision-table-add-button">
-                <span class="fa fa-plus"></span>
+                <span class="sicon sicon-plus"></span>
             </button>
         </td>
         <td class="decision-table-conclusion-column">{{returnTitle}}</td>
         <td>
             <button id="add-conclusion-button" title="{{addConclusionTitle}}" class="btn decision-table-add-button">
-                <span class="fa fa-plus"></span>
+                <span class="sicon sicon-plus"></span>
             </button>
         </td>
     </tr>

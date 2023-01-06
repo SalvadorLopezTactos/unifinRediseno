@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'ID ที่อยู่ติดต่อ',
     'LBL_DESCRIPTION_INFORMATION' => 'ข้อมูลคำอธิบาย',
     'LBL_DESCRIPTION' => 'คำอธิบาย:',
+    'LBL_INTERNAL_NOTES' => 'บันทึกสำหรับใช้ภายใน:',
     'LBL_STATUS' => 'สถานะ:',
     'LBL_DIRECTION' => 'ทิศทาง:',
     'LBL_DATE' => 'วันที่เริ่มต้น:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'ระยะเวลาต้องมากกว่า 0',
     'LBL_CALL_INFORMATION' => 'ภาพรวม',
     'LBL_REMOVE' => 'นำออก',
-    'LBL_ACCEPT_STATUS' => 'สถานะยอมรับ',
     'LBL_ACCEPT_LINK' => 'ลิงก์ยอมรับ',
     //For export labels
     'LBL_PARENT_ID' => 'ID หลัก',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'การโทร:',
     'LBL_CALL_RECORDING_URL' => 'กำลังบันทึก URL',
     'LBL_CALL_RECORDING' => 'กำลังบันทึก',
+
+    'LBL_LEAD_ID' => 'ID ผู้สนใจ',
+    'LBL_LEAD_NAME' => 'ผู้สนใจ',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'คุณได้วางกำหนดการ {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> สำหรับ {{formatDate date_start}}',

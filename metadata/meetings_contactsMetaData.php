@@ -58,13 +58,6 @@ $dictionary['meetings_contacts'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_mtg_mtg',
-            'type' => 'index',
-            'fields' => array(
-                'meeting_id',
-            ),
-        ),
-        array(
             'name' => 'idx_con_mtg_con',
             'type' => 'index',
             'fields' => array(

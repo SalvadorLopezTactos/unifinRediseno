@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filtrs',
     'LBL_CONSOLE_FILTER_RULES' => 'Filtrēšanas noteikumi',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Iesaldēt pirmo kolonnu',
+
     'LBL_CONSOLE_COLUMNS' => 'Kolonnas',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Vairāku lauku kolonna',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Primārā šķirošana',

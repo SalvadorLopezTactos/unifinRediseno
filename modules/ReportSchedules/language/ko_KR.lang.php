@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => '이 기록 일정',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => '기록 일정 기록 대시보드',
+    'LBL_FILE_TYPE' => '파일 형식',
 );

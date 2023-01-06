@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Rispondi a ID indirizzo e-mail',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Rispondi a indirizzo e-mail',
     'LBL_PRIMARY_TEAM' => 'Gruppo Primario',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Account di invio preferito',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Impostazioni e-mail Focus Drawer',
 );

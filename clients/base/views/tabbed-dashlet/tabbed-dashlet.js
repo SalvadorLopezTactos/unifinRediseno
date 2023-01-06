@@ -78,8 +78,13 @@
      */
     initialize: function(options) {
         if (options.context) {
-            this.baseModule = options.context.get('module');
-            this.module = this.baseModule;
+            if (options.context && options.context.parent && options.context.parent.get('layout') === 'omnichannel') {
+                this.baseModule = options.context.parent.get('rowModel').get('_module');
+                this.module = this.baseModule;
+            } else {
+                this.baseModule = options.context.get('module');
+                this.module = this.baseModule;
+            }
             this.baseRecord = this._getBaseModel(options);
         }
 
@@ -170,9 +175,53 @@
             this.tabs[index].relate = _.isObject(collection.link);
             this.tabs[index].record_date = tab.record_date || 'date_entered';
             this.tabs[index].include_child_items = tab.include_child_items || false;
+            this.tabs[index].tabFieldDefs = this._getTabFieldDefs(tab);
+            this.tabs[index].row_actions = this._getTabRowActions(tab);
         }, this);
 
         return this;
+    },
+
+    /**
+     * Gets the field defs for the fields defined on the given tab metadata
+     *
+     * @param {Object} tab the tab metadata
+     * @return {Object} the field definitions for the fields on the tab
+     * @private
+     */
+    _getTabFieldDefs: function(tab) {
+        var moduleFields = app.metadata.getModule(tab.module, 'fields');
+        var tabFieldDefs = {};
+        _.each(tab.fields, function(field) {
+            if (moduleFields[field]) {
+                tabFieldDefs[field] = moduleFields[field];
+
+                // For name fields, we want to set link to true so that we can
+                // create a hyperlink and add the focus icon if available
+                if (field === 'name') {
+                    tabFieldDefs[field].link = true;
+                }
+            }
+        }, this);
+        return tabFieldDefs;
+    },
+
+    /**
+     * Gets the row actions defined on the metadata for the tab. Filters out row
+     * actions that are not valid for the given tab
+     *
+     * @param {Object} tab the tab metadata
+     * @private
+     */
+    _getTabRowActions: function(tab) {
+        return _.filter(tab.row_actions, function(rowAction) {
+            // UI link/unlink actions are not supported for Emails
+            if (_.contains(['link-action', 'unlink-action'], rowAction.type) &&
+                _.contains(['Emails'], tab.module)) {
+                return false;
+            }
+            return true;
+        }, this);
     },
 
     /**
@@ -231,12 +280,12 @@
      */
     _getBaseModel: function(options) {
         var model;
-        var baseModule = options.context.get('module');
+
         var currContext = options.context;
         while (currContext) {
             var contextModel = currContext.get('rowModel') || currContext.get('model');
 
-            if (contextModel && contextModel.get('_module') === baseModule) {
+            if (contextModel && contextModel.get('_module') === this.baseModule) {
                 model = contextModel;
 
                 var parentHasRowModel = currContext.parent && currContext.parent.has('rowModel');
@@ -361,7 +410,11 @@
      */
     _createCollection: function(tab) {
         if (this.context.parent) {
-            var module = this.context.parent.get('module');
+            if (this.context.parent.parent) {
+                var module = this.context.parent.parent.get('module');
+            } else {
+                var module = this.context.parent.get('module');
+            }
         } else {
             var module = this.module;
         }
@@ -519,6 +572,13 @@
                     self._getCollectionFilters(index),
                     self._getFilters(index)
                 );
+                if (self.context.parent && self.context.parent.parent &&
+                    self.context.parent.parent.get('layout') === 'omnichannel' &&
+                    tab.collection.link &&
+                    self.context.parent.parent.get('rowModel')
+                ) {
+                    tab.collection.link.bean = self.context.parent.parent.get('rowModel');
+                }
                 tab.collection.fetch({
                     relate: tab.relate,
                     complete: function() {
@@ -651,9 +711,13 @@
 
         this.toolbarHtml = this._toolbarTpl(this);
         this.tabsHtml = this._tabsTpl(this);
-        this.recordsHtml = recordsTpl(this);
 
+        // Get the HTML for the list of records in the tab. In order to build
+        // certain fields correctly, make sure we use the right field defs for
+        // the fields defined in the tabs
+        this.tabFieldDefs = tab.tabFieldDefs;
         this.row_actions = tab.row_actions;
+        this.recordsHtml = recordsTpl(this);
 
         this._super('_renderHtml');
     },

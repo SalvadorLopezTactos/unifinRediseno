@@ -13,9 +13,11 @@
 <!-- Navbar
 ================================================== -->
 <section id="navbar">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span8">

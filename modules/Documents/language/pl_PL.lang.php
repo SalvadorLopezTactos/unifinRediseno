@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Pozycje szansy',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Zakupy',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Zakupione pozycje',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Pulpit rekordów dokumentów',
+    'LBL_MY_DOCUMENTS' => 'Moje dokumenty',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Wyślij do DocuSign',
 );

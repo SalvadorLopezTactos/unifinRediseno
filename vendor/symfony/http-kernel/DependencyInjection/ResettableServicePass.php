@@ -25,7 +25,7 @@ class ResettableServicePass implements CompilerPassInterface
 {
     private $tagName;
 
-    public function __construct(string $tagName = 'kernel.reset')
+    public function __construct($tagName = 'kernel.reset')
     {
         $this->tagName = $tagName;
     }
@@ -46,7 +46,7 @@ class ResettableServicePass implements CompilerPassInterface
             $attributes = $tags[0];
 
             if (!isset($attributes['method'])) {
-                throw new RuntimeException(sprintf('Tag %s requires the "method" attribute to be set.', $this->tagName));
+                throw new RuntimeException(sprintf('Tag "%s" requires the "method" attribute to be set.', $this->tagName));
             }
 
             $methods[$id] = $attributes['method'];

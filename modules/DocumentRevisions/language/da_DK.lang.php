@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Opret dokument',
 	'LNK_DOCUMENT_LIST'=> 'Dokumentliste',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Revisioner til relateret dokument',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Du har med succes oprettet {{moduleSingularLower}} <a href="#{{buildRoute model=this}}"> {{revision}} </a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Revisionsnummer',
 	'LBL_FILENAME' => 'Filnavn',
 	'LBL_MIME' => 'Mime-type',

@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Доход по продуктам',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Покупки',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Приобретенные продукты',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Информационная панель записей документов',
+    'LBL_MY_DOCUMENTS' => 'Мои документы',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Отправить в DocuSign',
 );

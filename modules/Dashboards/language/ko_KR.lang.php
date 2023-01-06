@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => '{{module}} 모듈의 모든 대시보드',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} 모듈 {{view}} 보기에 대한 모든 대시보드',
     'LBL_COPY_OF' => '{{{name}}} 사본',
-    'LBL_DELETE_FOCUS_DRAWER' => '포커스 서랍 대시보드는 삭제할 수 없습니다.',
     'LBL_CREATE_DASHBOARD_BUTTON' => '대시보드 만들기',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "이 대시보드를 기본 레이아웃으로 복원하시겠습니까?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => '대시보드 패널을 기본 레이아웃으로 복원하시겠습니까?',
+    'LBL_FILTER_UTILS_SELECT' => '배정',
 );

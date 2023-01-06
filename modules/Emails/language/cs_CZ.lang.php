@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Uživatelé',
     'LBL_EMAILS_PRODUCTS_REL' => 'Řádkové položky nabídky',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Řádkové položky výnosů',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Eskalace',
     'LBL_EMAILS_MESSAGES_REL' => 'Zprávy',
     'LBL_EMAILS_PURCHASES_REL' => 'Nákupy',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Řádkové položky nákupů',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Odeslat e-mail',
     'LBL_MAILBOX' => 'Příchozí účet',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Chcete-li odesílat e-maily, nakonfigurujte odchozí e-mailový účet pomocí <a href="#OutboundEmail">Nastavení e-mailu</a>.',
 );

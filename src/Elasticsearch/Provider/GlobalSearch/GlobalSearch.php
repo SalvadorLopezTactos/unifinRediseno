@@ -716,7 +716,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         $this->handleSearchAggregations($builder);
 
         // Add the filters
-        $this->handleSearchFilters($builder, $this->filters);
+        $this->handleSearchFilters($builder);
 
 
         return $builder->executeSearch();

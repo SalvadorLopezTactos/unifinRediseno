@@ -25,6 +25,11 @@ $viewdefs['base']['view']['rssfeed'] = array(
                 'auto_refresh' => 0,
                 'feed_url' => 'http://blog.sugarcrm.com/feed/',
             ),
+            'filter' => [
+                'blacklist' => [
+                    'module' => 'Administration',
+                ],
+            ],
         ),
     ),
     'panels' => array(

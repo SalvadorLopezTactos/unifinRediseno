@@ -124,7 +124,7 @@ class SugarDateTime extends DateTime
 		if(!$d) {
 			return false;
 		}
-		$sd = new self($d->format(DateTime::ISO8601));
+        $sd = new self($d->format(DateTimeInterface::ISO8601));
 		$sd->setTimezone($d->getTimezone());
 		return $sd;
 	}
@@ -695,9 +695,16 @@ class SugarDateTime extends DateTime
         } else {
             // This will turn into (int)-1 or +1, useful for multiplying out the seconds
             $plusMinus = (int)(substr($isoOffset,0,1)."1");
-            
-            $calcOffset = $plusMinus*((substr($isoOffset,1,2)*3600)+(substr($isoOffset,3,2)*60));
-            
+
+            $hours = substr($isoOffset, 1, 2);
+            if (!is_numeric($hours)) {
+                $hours = 0;
+            }
+            $minutes = substr($isoOffset, 3, 2);
+            if (!is_numeric($minutes)) {
+                $minutes = 0;
+            }
+            $calcOffset = $plusMinus * (($hours * 3600) + ($minutes * 60));
         }
         return $this->modify((-$calcOffset)." seconds");
     }

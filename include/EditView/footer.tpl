@@ -12,12 +12,10 @@
 *}
 <script language="javascript">
     var _form_id = '{$form_id}';
-    {literal}
     SUGAR.util.doWhen(function(){
         _form_id = (_form_id == '') ? 'EditView' : _form_id;
         return document.getElementById(_form_id) != null;
     }, SUGAR.themes.actionMenu);
-    {/literal}
 </script>
 {assign var='place' value="_FOOTER"} <!-- to be used for id for buttons with custom code in def files-->
 {{if empty($form.button_location) || $form.button_location == 'bottom'}}

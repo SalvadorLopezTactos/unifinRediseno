@@ -13,6 +13,7 @@
 $dictionary['pmse_BpmFlow'] = array(
     'table' => 'pmse_bpm_flow',
     'audited' => false,
+    'archive' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
@@ -35,7 +36,6 @@ $dictionary['pmse_BpmFlow'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'calculated' => false,
-            'len' => '4',
             'size' => '20',
             'enable_range_search' => false,
             'disable_num_format' => '',
@@ -60,7 +60,6 @@ $dictionary['pmse_BpmFlow'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'calculated' => false,
-            'len' => '4',
             'size' => '20',
             'enable_range_search' => false,
             'disable_num_format' => '',
@@ -663,35 +662,6 @@ $dictionary['pmse_BpmFlow'] = array(
             'fields' => array(
                 'bpmn_id',
                 'cas_flow_status',
-            ),
-        ),
-        array(
-            'name' => 'idx_pmse_bpm_flow_status',
-            'type' => 'index',
-            'fields' => array(
-                'cas_flow_status',
-            ),
-        ),
-        array(
-            'name' => 'idx_pmse_bpm_flow_cas_sugar_object_id',
-            'type' => 'index',
-            'fields' => array(
-                'cas_sugar_object_id',
-            ),
-        ),
-        array(
-            'name' => 'idx_pmse_bpm_flow_parent',
-            'type' => 'index',
-            'fields' => array(
-                'cas_sugar_object_id',
-                'cas_sugar_module',
-            ),
-        ),
-        array(
-            'name' => 'idx_pmse_bpm_flow_cas_id',
-            'type' => 'index',
-            'fields' => array(
-                'cas_id',
             ),
         ),
         array(

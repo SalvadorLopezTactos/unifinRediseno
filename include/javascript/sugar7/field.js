@@ -43,7 +43,9 @@
              * Template for the exclamation mark icon added when decorating errors
              */
             exclamationMarkTemplate: Handlebars.compile(
-                '<span class="error-tooltip add-on" data-container="body" rel="tooltip" title="{{arrayJoin this ", "}}"><i class="fa fa-exclamation-circle"></i></span>'
+                `<span class="error-tooltip add-on" data-container="body" rel="tooltip" title="{{arrayJoin this ", "}}">
+                 <i class="sicon sicon-warning-circle"></i>
+                 </span>`
             ),
 
             /**

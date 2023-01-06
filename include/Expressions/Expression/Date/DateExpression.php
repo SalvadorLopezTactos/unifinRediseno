@@ -68,20 +68,28 @@ abstract class DateExpression extends AbstractExpression
     }
 
     /**
+     * Rounds a DateTime object to the nearest 15 minute interval
+     *
      * @static  
-     * @param DateTime $date
-     * @return DateTime $date rounded to the nearest 15 minute interval.
+     * @param DateTime $date the DateTime object to perform rounding on
+     * @param string $direction the direction in which to round. Options are 'down' or 'up', default is 'up'
+     * @return DateTime $date rounded to the nearest 15 minute interval in the given direction
      */
-    public static function roundTime($date)
+    public static function roundTime($date, $direction = 'up')
     {
-        if (!($date instanceof DateTime))
+        if (!($date instanceof DateTime)) {
             return false;
+        }
 
         $min = $date->format("i");
         $remainder = $min % 15;
         if ($remainder != 0) {
-            $offset = 15 - $remainder;
-            $date->modify("+$offset minutes");
+            if ($direction === 'down') {
+                $date->modify("-$remainder minutes");
+            } else {
+                $offset = 15 - $remainder;
+                $date->modify("+$offset minutes");
+            }
         }
 
         return $date;

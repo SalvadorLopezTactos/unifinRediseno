@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'محرك التعبير',
-  'LBL_MODULE_NAME_SINGULAR' => 'محرك التعبير',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'السابق' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'التالي' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'توسيع' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'محرك التعبير',
+    'LBL_MODULE_NAME_SINGULAR' => 'محرك التعبير',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'السابق' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'التالي' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'توسيع' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'حقل غير معروف',
+];

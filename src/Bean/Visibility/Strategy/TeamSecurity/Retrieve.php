@@ -52,7 +52,7 @@ final class Retrieve implements Strategy
         $prefetchQuery->from($emptyBean);
         $prefetchQuery->select(['team_set_id']);
         $prefetchQuery->where()->equals('id', $this->beanId);
-        $teamSetId = $prefetchQuery->compile()->execute()->fetchColumn();
+        $teamSetId = $prefetchQuery->compile()->execute()->fetchOne();
         if (!empty($teamSetId)) {
             $team_table_alias = 'team_memberships';
             $table_alias = $query->from->table_name;
@@ -67,7 +67,7 @@ final class Retrieve implements Strategy
                     'tst',
                     'team_memberships',
                     $team_table_alias,
-                    $subQuery->expr()->andX(
+                    $subQuery->expr()->and(
                         $team_table_alias . '.team_id = tst.team_id',
                         $team_table_alias . '.user_id = ' . $subQuery->createPositionalParameter($this->user->id),
                         $team_table_alias . '.deleted = 0'

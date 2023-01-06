@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Quotes Configuration',
 
     'LBL_RENEWAL' => 'Renewal',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Quote Interactions',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Quote Timeline',
 );

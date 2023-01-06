@@ -28,6 +28,11 @@ global $current_user;
 
 $json = getJSONobj();
 $pass = '';
+
+if (!is_admin($current_user)) {
+    sugar_die($app_strings['ERR_NOT_ADMIN']);
+}
+
 if(!empty($_REQUEST['mail_smtppass'])) {
     $pass = $_REQUEST['mail_smtppass'];
 } else if (!empty($_REQUEST['mail_type']) && $_REQUEST['mail_type'] == 'system') {

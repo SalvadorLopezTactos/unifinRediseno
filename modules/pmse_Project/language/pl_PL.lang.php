@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Utworzono przez',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Ostatnio zmodyfikowane przez:',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mail systemu',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Szablon dokumentu',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Scalanie dokumentów',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Wybierz...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Scalanie dokumentów do pliku PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Scalanie dokumentów',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Zasada biznesowa',
     'LBL_PMSE_LABEL_RULE' => 'Zasada',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Tylko zaktualizowane rekordy (Wszystkie aktualizacje — patrz tekst pomocy)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nowe rekordy lub pierwsza aktualizacja',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nowe rekordy i wszystkie aktualizacje',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Zmiana relacji',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Wybierz moment rozpoczęcia wydarzenia.<br><br>Nowe: uruchom proces po utworzeniu nowego rekordu.<br><br>Pierwsza aktualizacja: proces jest uruchamiany tylko pierwszy raz, gdy kryteria są spełnione dla bieżącego rekordu.<br><br>Wszystkie aktualizacje: proces jest uruchomiany za każdym razem, gdy kryteria są spełnione dla bieżącego rekordu.<br><br>Nowe rekordy lub pierwsza aktualizacja: proces jest uruchamiany tylko pierwszy raz, gdy kryteria są spełnione dla rekordu w trakcie tworzenia lub aktualizacji rekordu.<br><br>Nowe rekordy i wszystkie aktualizacje: proces jest uruchamiany za każdym razem dla wszystkich nowych i istniejących rekordów.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Wybierz moment rozpoczęcia wydarzenia.<br><br>Nowe: uruchom proces po utworzeniu nowego rekordu.<br><br>Pierwsza aktualizacja: proces jest uruchamiany tylko pierwszy raz, gdy kryteria są spełnione dla bieżącego rekordu.<br><br>Wszystkie aktualizacje: proces jest uruchomiany za każdym razem, gdy kryteria są spełnione dla bieżącego rekordu.<br><br>Nowe rekordy lub pierwsza aktualizacja: proces jest uruchamiany tylko pierwszy raz, gdy kryteria są spełnione dla rekordu w trakcie tworzenia lub aktualizacji rekordu.<br><br>Nowe rekordy i wszystkie aktualizacje: proces jest uruchamiany za każdym razem dla wszystkich nowych i istniejących rekordów.<br><br>Zmiany relacji: proces jest uruchamiany po każdej zmianie relacji.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Wybierz moduł SugarCRM, aby zastosować wywołanie wydarzenia',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Stała data',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Błąd',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Ocena zmiany relacji',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Pola',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Ocena pola modułu',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moduł',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Wszystkie powiązane rekordy',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Dowolne powiązane rekordy',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Dodano',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Usunięto',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Dodano lub usunięto',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Dowolna relacja',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Czas uruchomienia',
 

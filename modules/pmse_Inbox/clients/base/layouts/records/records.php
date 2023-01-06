@@ -11,18 +11,22 @@
  */
 
 $viewdefs['pmse_Inbox']['base']['layout']['records'] = array(
+    'css_class'=> 'flex-list-layout flex flex-column h-full',
     'components' => array(
         array(
             'layout' => array(
+                'css_class' => 'h-full',
                 'components' => array(
                     array(
                         'layout' => array(
+                            'css_class' => 'main-pane span8 flex flex-column',
                             'components' => array(
                                 array(
                                     'view' => 'list-headerpane',
                                 ),
                                 array(
                                     'layout' => array(
+                                        'css_class' => 'flex flex-column h-full',
                                         'type' => 'filterpanel',
                                         'span' => 12,
                                         'last_state' => array(
@@ -35,12 +39,12 @@ $viewdefs['pmse_Inbox']['base']['layout']['records'] = array(
                                         'availableToggles' => array(
                                             array(
                                                 'name' => 'list',
-                                                'icon' => 'fa-table',
+                                                'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
                                             ),
                                             array(
                                                 'name' => 'activitystream',
-                                                'icon' => 'fa-clock-o',
+                                                'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
                                             ),
                                         ),
@@ -74,7 +78,6 @@ $viewdefs['pmse_Inbox']['base']['layout']['records'] = array(
                             ),
                             'type' => 'simple',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
                         ),
                     ),
                     array(

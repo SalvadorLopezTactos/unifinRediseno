@@ -72,7 +72,7 @@ class ContentSecurityPolicy
         $new = clone $this;
         $defaults = self::getDefaults();
         foreach ($defaults as $directiveName => $directiveSource) {
-            if (isset($this->directives[$directiveName]) || 'default-src' === $directiveName) {
+            if (isset($this->directives[$directiveName]) || in_array($directiveName, ['default-src', 'connect-src'])) {
                 $directive = Directive::create($directiveName, $directiveSource);
                 $new->appendDirective($directive);
             }
@@ -82,8 +82,15 @@ class ContentSecurityPolicy
         $new->appendDirective($imgSrcDirective);
         $objectSrcDirective = Directive::create('object-src', "'self'");
         $new->appendDirective($objectSrcDirective);
-        $frameAncestorsDirective = Directive::create('frame-ancestors', "'self'");
-        $new->appendDirective($frameAncestorsDirective);
+        if (!isset($this->directives['frame-ancestors'])) {
+            $frameAncestorsDirective = Directive::create('frame-ancestors', "'self'");
+            $new->appendDirective($frameAncestorsDirective);
+        }
+
+        if (isset($defaults['font-src']) && !isset($this->directives['font-src'])) {
+            $fontSrcDirective = Directive::create('font-src', $defaults['font-src']);
+            $new->appendDirective($fontSrcDirective);
+        }
 
         return $new;
     }
@@ -183,18 +190,20 @@ class ContentSecurityPolicy
 
     private static function getDefaults(): array
     {
+        $sugarDomains = '*.sugarcrm.com *.salesfusion.com *.salesfusion360.com *.sugarapps.com *.sugarapps.eu sugarcrm-release-archive.s3.amazonaws.com';
+        $pendoDomains = 'https://*.pendo.io pendo-io-static.storage.googleapis.com pendo-static-5197307572387840.storage.googleapis.com pendo-eu-static.storage.googleapis.com pendo-eu-static-5197307572387840.storage.googleapis.com';
+        $bingDomains = '*.bing.com *.virtualearth.net';
+        $trustedDomains = $sugarDomains . ' ' . $pendoDomains . ' ' . $bingDomains;
         return [
-            'default-src' => "'self' 'unsafe-inline' 'unsafe-eval' sugarcrm-release-archive.s3.amazonaws.com https://*.pendo.io pendo-io-static.storage.googleapis.com pendo-static-5197307572387840.storage.googleapis.com pendo-eu-static.storage.googleapis.com pendo-eu-static-5197307572387840.storage.googleapis.com *.sugarcrm.com *.salesfusion.com *.salesfusion360.com *.sugarapps.com *.sugarapps.eu",
+            'default-src' => "'self' 'unsafe-inline' 'unsafe-eval'  " . $trustedDomains,
             //Advanced form defaults
-            'style-src' => "'self' 'unsafe-inline'",
-            'script-src' => "'self' 'unsafe-inline' 'unsafe-eval' sugarcrm-release-archive.s3.amazonaws.com https://*.pendo.io pendo-io-static.storage.googleapis.com pendo-static-5197307572387840.storage.googleapis.com pendo-eu-static.storage.googleapis.com pendo-eu-static-5197307572387840.storage.googleapis.com",
-            'base-uri' => "'self'",
-            'form-action' => "'self'",
-            'frame-src' => "'self'",
-            'connect-src' => "'self' sugarcrm-release-archive.s3.amazonaws.com https://*.pendo.io pendo-static-5197307572387840.storage.googleapis.com pendo-eu-static-5197307572387840.storage.googleapis.com",
-            'font-src' => "'self'",
-            'frame-ancestors' => "'self'",
+            'style-src' => "'self' 'unsafe-inline' " . $trustedDomains,
+            'script-src' => "'self' 'unsafe-inline' 'unsafe-eval' " . $trustedDomains,
+            'form-action' => "'self' " . $trustedDomains,
+            'frame-src' => "'self' " . $trustedDomains,
+            'connect-src' => "'self' wss://*.sugarapps.com wss://*.sugarapps.com.au wss://*.sugarapps.eu " . $trustedDomains,
+            'font-src' => "'self' data: " . $trustedDomains,
+            'frame-ancestors' => "'self' " . $sugarDomains,
         ];
     }
-
 }

@@ -2,12 +2,15 @@
   right: 20px;
   bottom: 7px;
   position: fixed;
+  z-index: 1;
 
   .btn-primary {
     border-radius: 50px;
     border: 0 none;
     height: 50px;
+    width: 50px;
     display: flex;
+    justify-content: center;
     align-items: center;
     padding: 0;
 
@@ -15,36 +18,36 @@
     .continue {
       display: none;
       flex: auto;
-      line-height: 15px;
-      margin-left: 20px;
+      line-height: 14px;
+      margin-left: 18px;
+      font-size: 12px;
       text-align: left;
     }
 
-    .fa {
+    .sicon {
       width: 50px;
+      font-size: 16px;
 
       &::before {
         color: @white;
       }
-
-      .fa-comment {
-        display: none;
-        font-size: 34px;
-      }
-
-      .fa-angle-down {
-        font-size: 39px;
-        font-weight: bold;
-      }
     }
 
     &.chat-collapsed {
-      .fa {
-        .fa-comment {
+      .sicon {
+        &.sicon-message {
           display: inline-block;
         }
 
-        .fa-angle-down {
+        &.sicon-chevron-down {
+          display: none;
+        }
+      }
+    }
+
+    &:not(.chat-collapsed) {
+      .sicon {
+        &.sicon-message {
           display: none;
         }
       }
@@ -82,17 +85,17 @@
 .portal-chat-interface {
   position: fixed;
   right: 20px;
-  bottom: 44px;
+  bottom: 75px;
   overflow: hidden;
   border-radius: 3px 3px 0 0;
-  background-color: @grayLighter;
+  background-color: @gray20;
   transition: height 0.6s, opacity 0.4s;
   width: @amazonCcpWidth;
 
   &.expanded {
     opacity: 1;
     height: 650px;
-    box-shadow: -1px -1px 2px fade(@black, 15%), 1px 1px 2px fade(@black, 15%);
+    box-shadow: -1px -1px 2px @gray40, 1px 1px 2px @gray40;
     z-index: 1;
   }
 

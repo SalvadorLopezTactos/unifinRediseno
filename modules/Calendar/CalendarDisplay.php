@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
 class CalendarDisplay {
 
 	/**
@@ -35,10 +33,11 @@ class CalendarDisplay {
 
 	/**
 	 * constructor
-	 * @param Calendar $cal
+     * @param CalendarBWC $cal
 	 * @param string $dashlet_id for dashlet mode
 	 */
-	public function __construct(Calendar $cal,$dashlet_id = ""){
+    public function __construct(CalendarBWC $cal, $dashlet_id = "")
+    {
 		$this->cal = $cal;
 		$this->dashlet_id = $dashlet_id;
 	}

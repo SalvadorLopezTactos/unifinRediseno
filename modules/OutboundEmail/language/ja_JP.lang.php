@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '返信先 (Reply-To) の Eメールアドレス ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => '返信先 (Reply-To) の Eメールアドレス',
     'LBL_PRIMARY_TEAM' => '主チーム',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => '優先送信アカウント',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Eメール設定 フォーカス ドロワ―',
 );

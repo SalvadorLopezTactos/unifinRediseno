@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionPrefetcher;
+
 class NotificationsFilterApi extends FilterApi {
 
 
@@ -28,6 +31,24 @@ class NotificationsFilterApi extends FilterApi {
         }
 
         return array();
+    }
+
+    /**
+     * Returns the records for the module and filter provided.
+     *
+     * @param ServiceBase $api The REST API object.
+     * @param array $args REST API arguments.
+     * @param string $acl Which type of ACL to check.
+     * @return array The REST response as a PHP array.
+     * @throws SugarApiExceptionError If retrieving a predefined filter failed.
+     * @throws SugarApiExceptionInvalidParameter If any arguments are invalid.
+     * @throws SugarApiExceptionNotAuthorized If we lack ACL access.
+     */
+    public function filterList(ServiceBase $api, array $args, $acl = 'list')
+    {
+        $result = parent::filterList($api, $args, $acl);
+        Container::getInstance()->get(SubscriptionPrefetcher::class)->register();
+        return $result;
     }
 
 }

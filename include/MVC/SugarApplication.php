@@ -48,6 +48,8 @@ class SugarApplication
      */
     public function __construct()
     {
+        global $sugar_config;
+
         $this->request = InputValidation::getService();
 
         // Safe $_GET['bwcFrame']
@@ -56,6 +58,10 @@ class SugarApplication
             'Assert\Range' => array('min' => 0, 'max' => 1),
         );
         $this->inBwc = (bool) $this->request->getValidInputGet('bwcFrame', $bwcFrame, 0);
+
+        if (isset($sugar_config['allowed_actions']) && is_array($sugar_config['allowed_actions'])) {
+            $this->whiteListActions = array_unique(array_merge($this->whiteListActions, $sugar_config['allowed_actions']));
+        }
     }
 
     /**
@@ -405,7 +411,7 @@ EOF;
         if(!empty($this->controller->allowed_actions)) {
             $allowed_actions =  $this->controller->allowed_actions;
         } else {
-            $allowed_actions = ['Authenticate', 'Login', 'Logout', 'LoggedOut', 'OAuth2CodeExchange'];
+            $allowed_actions = ['Authenticate', 'Login', 'Logout', 'LoggedOut', 'OAuth2CodeExchange', 'impersonation'];
         }
 
         if (($user_unique_key != $server_unique_key) && (!in_array($this->controller->action, $allowed_actions))
@@ -753,6 +759,7 @@ EOF;
         'Languages',
         'Locale',
         'Upgrade',
+        'Upgrader',
         'repair',
         'GlobalSearchSettings',
         'Diagnostic',
@@ -765,7 +772,14 @@ EOF;
         'GoogleOauth2Redirect',
         'MicrosoftOauth2Redirect',
         'OAuth2CodeExchange',
+        'impersonation',
         'TrackerSettings',
+        'historyContactsEmailsSave',
+        'Save',
+        'DiagnosticDownload',
+        'DiagnosticDelete',
+        'apiplatforms',
+        'CloudInsights',
     );
 
     /**
@@ -828,6 +842,10 @@ EOF;
         }
         if (!empty($sugar_config['http_referer']['list'])) {
             $whiteListReferers = array_merge($whiteListReferers, $sugar_config['http_referer']['list']);
+        }
+        // Bug CA-803 - make sure DocuSign login is always a valid referer
+        if (!empty($sugar_config['additional_http_referer'])) {
+            $whiteListReferers = array_merge($whiteListReferers, $sugar_config['additional_http_referer']);
         }
 
         // for BWC iframe, matching referer is not enough
@@ -902,7 +920,7 @@ EOF;
     {
         $trackerManager = TrackerManager::getInstance();
         if ($monitor = $trackerManager->getMonitor('tracker_sessions')) {
-            //$monitor->closeSession();
+            $monitor->closeSession();
             $trackerManager->saveMonitor($monitor);
         }
         $sess = SessionStorage::getInstance();

@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WorkbookChartAreaFormat extends Entity
 {
@@ -30,12 +28,12 @@ class WorkbookChartAreaFormat extends Entity
     * Gets the fill
     * Represents the fill format of an object, which includes background formatting information. Read-only.
     *
-    * @return WorkbookChartFill The fill
+    * @return WorkbookChartFill|null The fill
     */
     public function getFill()
     {
         if (array_key_exists("fill", $this->_propDict)) {
-            if (is_a($this->_propDict["fill"], "Microsoft\Graph\Model\WorkbookChartFill")) {
+            if (is_a($this->_propDict["fill"], "\Microsoft\Graph\Model\WorkbookChartFill") || is_null($this->_propDict["fill"])) {
                 return $this->_propDict["fill"];
             } else {
                 $this->_propDict["fill"] = new WorkbookChartFill($this->_propDict["fill"]);
@@ -63,12 +61,12 @@ class WorkbookChartAreaFormat extends Entity
     * Gets the font
     * Represents the font attributes (font name, font size, color, etc.) for the current object. Read-only.
     *
-    * @return WorkbookChartFont The font
+    * @return WorkbookChartFont|null The font
     */
     public function getFont()
     {
         if (array_key_exists("font", $this->_propDict)) {
-            if (is_a($this->_propDict["font"], "Microsoft\Graph\Model\WorkbookChartFont")) {
+            if (is_a($this->_propDict["font"], "\Microsoft\Graph\Model\WorkbookChartFont") || is_null($this->_propDict["font"])) {
                 return $this->_propDict["font"];
             } else {
                 $this->_propDict["font"] = new WorkbookChartFont($this->_propDict["font"]);

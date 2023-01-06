@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => '사용자',
     'LBL_EMAILS_PRODUCTS_REL' => '견적 라인아이템',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => '매출 품목',
+    'LBL_EMAILS_ESCALATIONS_REL' => '에스컬레이션',
     'LBL_EMAILS_MESSAGES_REL' => '메시지',
     'LBL_EMAILS_PURCHASES_REL' => '구매',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => '구매한 라인아이템',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => '이메일 전송',
     'LBL_MAILBOX' => '인바운드 계정',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => '이메일을 보내시려면 <a href="#OutboundEmail">이메일 설정</a>을 통해 아웃바운드 이메일 계정을 설정하십시오.',
 );

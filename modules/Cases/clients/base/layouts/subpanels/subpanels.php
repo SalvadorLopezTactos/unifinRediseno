@@ -106,5 +106,12 @@ $viewdefs['Cases']['base']['layout']['subpanels'] = array (
                 'link' => 'messages',
             ],
         ],
+      [
+          'layout' => 'subpanel',
+          'label' => 'LBL_ESCALATIONS_SUBPANEL_TITLE',
+          'context' => [
+              'link' => 'escalations',
+          ],
+      ],
   ),
 );

@@ -12,4 +12,4 @@
 --}}
 <a href="{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}
 {{else}}javascript:void(0){{/if}}" name="{{def.name}}" class="{{def.class}} {{#eq name "show_more_button_forward"}}{{#eq ../collection.next_offset "-1"}}hide{{/eq}}{{/eq}}{{#eq name "show_more_button_back"}}{{#eq ../collection.page "1"}}hide{{/eq}}{{/eq}}">
-{{#if def.icon}}<i class="fa {{def.icon}}"></i>{{/if}}{{label}}</a>
+{{#if def.icon}}<i class="{{buildIcon def.icon}}"></i>{{/if}}{{label}}</a>

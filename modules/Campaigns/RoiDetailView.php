@@ -110,7 +110,7 @@ $wonOpportunities = $focus->db->getConnection()
     ->executeQuery(
         $query,
         [Opportunity::STAGE_CLOSED_WON, $campaign_id]
-    )->fetch();
+    )->fetchAssociative();
 
 if (empty($wonOpportunities['opp_count'])) {
     $wonOpportunities['opp_count'] = 0;
@@ -129,7 +129,7 @@ $campaignsData = $focus->db->getConnection()
     ->executeQuery(
         $query,
         [$campaign_id]
-    )->fetch();
+    )->fetchAssociative();
             
    if(unformat_number($focus->impressions) > 0){         
     $cost_per_impression= unformat_number($focus->actual_cost)/unformat_number($focus->impressions);
@@ -168,11 +168,6 @@ $click_thru_links = $campaignsData['click_thru_link'];
     global $current_user;
     $request = InputValidation::getService();
     $request_module = $request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
-    if (is_admin($current_user) && $request_module != 'DynamicLayout' && !empty($_SESSION['editinplace'])) {
-        $request_action = $request->getValidInputRequest('action');
-        $request_record = $request->getValidInputRequest('record', 'Assert\Guid');
-        $smarty->assign("ADMIN_EDIT","<a href='index.php?action=index&module=DynamicLayout&from_action=". urlencode($request_action) ."&from_module=". urlencode($request_module) ."&record=". urlencode($request_record) . "'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDIT_LAYOUT'])."</a>");
-    }
 
     $smarty->assign('HAS_EDIT_ACCESS', $focus->ACLAccess('edit'));
 
@@ -191,7 +186,8 @@ $click_thru_links = $campaignsData['click_thru_link'];
     $dateFileNameSafe	= str_replace($seps, "_", $dates);
     $cache_file_name_roi	= $current_user->getUserPrivGuid()."_campaign_response_by_roi_".$dateFileNameSafe[0]."_".$dateFileNameSafe[1].".xml";
     $chart= new campaign_charts();
-    $smarty->assign("MY_CHART_ROI", $chart->campaign_response_roi($app_list_strings['roi_type_dom'],$app_list_strings['roi_type_dom'],$focus->id,true,true));    
+    // TBD, "error - InvalidScalarArgument: Argument 4 of campaign_charts::campaign_response_roi expects string, true provided". don't know what to set
+    $smarty->assign("MY_CHART_ROI", $chart->campaign_response_roi($app_list_strings['roi_type_dom'], $app_list_strings['roi_type_dom'], $focus->id, 'a_file', true));
     //end chart
     //custom chart code
     $sugarChart = SugarChartFactory::getInstance();

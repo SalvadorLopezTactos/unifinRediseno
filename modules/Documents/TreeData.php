@@ -103,7 +103,7 @@ function get_documents($cat_id, $subcat_id,$href=true) {
 
     $nodes=array();
     $href_string = "javascript:select_document('doctree')";
-    while ($row = $stmt->fetch()) {
+    while ($row = $stmt->fetchAssociative()) {
         $node = new Node($row['id'], $row['document_name']);
         if ($href) {
             $node->set_property("href", $href_string);

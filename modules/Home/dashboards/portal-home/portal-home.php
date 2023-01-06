@@ -21,20 +21,30 @@ return [
                     [
                         [
                             'view' => [
-                                'type' => 'contentsearchdashlet',
-                                'label' => 'LBL_CONTENT_SEARCH_DASHLET',
-                            ],
-                            'width' => 12,
-                        ],
-                    ],
-                    [
-                        [
-                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES',
                                 'filter_id' => 'open_issues',
                                 'limit' => 15,
-                                'custom_toolbar' => ['buttons' => []],
+                                'custom_toolbar' => [
+                                    'buttons' => [
+                                        [
+                                            'dropdown_buttons' => [
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'editClicked',
+                                                    'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                                                    'name' => 'edit_button',
+                                                ],
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'removeClicked',
+                                                    'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                                                    'name' => 'remove_button',
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
                             'context' => [
                                 'module' => 'Cases',
@@ -47,7 +57,26 @@ return [
                                 'label' => 'LBL_PORTAL_DASHBOARD_RECENT_CASES',
                                 'filter_id' => 'recently_resolved',
                                 'limit' => 15,
-                                'custom_toolbar' => ['buttons' => []],
+                                'custom_toolbar' => [
+                                    'buttons' => [
+                                        [
+                                            'dropdown_buttons' => [
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'editClicked',
+                                                    'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                                                    'name' => 'edit_button',
+                                                ],
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'removeClicked',
+                                                    'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                                                    'name' => 'remove_button',
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
                             'context' => [
                                 'module' => 'Cases',
@@ -65,7 +94,26 @@ return [
                                     'module' => 'KBContents',
                                     'field' => 'category_id',
                                 ],
-                                'custom_toolbar' => ['buttons' => []],
+                                'custom_toolbar' => [
+                                    'buttons' => [
+                                        [
+                                            'dropdown_buttons' => [
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'editClicked',
+                                                    'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                                                    'name' => 'edit_button',
+                                                ],
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'removeClicked',
+                                                    'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                                                    'name' => 'remove_button',
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
                             'context' => [
                                 'module' => 'KBContents',

@@ -50,12 +50,14 @@
             <div class="tab-pane fade" id="{{name}}{{../../../view.cid}}">
         {{else}}
             <div class="row-fluid record-panel" data-panelName="{{name}}">
-                <div class="row-fluid record-panel-header {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
-                    <span class="pull-left">
+                <div class="row-fluid record-panel-header-container {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
+                    <span class="record-panel-header">
                         <button class="btn btn-invisible record-panel-arrow">
-                            <i class="fa fa-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
+                            <i class="sicon sicon-chevron-{{#eq panelState "collapsed"}}right{{/eq}}{{#notEq panelState "collapsed"}}down{{/notEq}}"
+                               rel="tooltip" data-container="body" data-title="Toggle Visibility"
+                            ></i>
                         </button>
-                        {{str label ../../../view.module}}
+                        <span>{{str label ../../../view.module}}</span>
                     </span>
                 </div>
             <div class="row-fluid record-panel-content {{#eq panelState "collapsed"}}hide{{/eq}}">

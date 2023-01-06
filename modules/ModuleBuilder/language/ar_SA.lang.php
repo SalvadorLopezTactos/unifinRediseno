@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'حذف' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'بدعم SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'الدور',
+    'LBL_BASE_LAYOUT' => 'التخطيط الأساسي',
+    'LBL_FIELD_NAME' => 'اسم الحقل',
+    'LBL_FIELD_VALUE' => 'القيمة',
+    'LBL_LAYOUT_DETERMINED_BY' => 'التخطيط يُحدد بواسطة:',
+    'layoutDeterminedBy' => [
+        'std' => 'التخطيط القياسي',
+        'role' => 'الدور',
+        'dropdown' => 'حقل القائمة المنسدلة',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'ستتم إزالة كل التخطيطات المخصصة. هل تريد بالتأكيد تغيير تعريفات التخطيط الحالية؟',
 'help'=>array(
     'package'=>array(
             'create'=>'قم بتوفير <b>اسم</b> للحزمة.  يجب أن يحتوي الاسم الذي تدخله على الحروف والأرقام، كما يجب ألا يحتوي على أي مسافات. (على سبيل المثال: HR_Management)<br/><br/> يمكنك توفير معلومات <b>المؤلف</b> و<b>الوصف</b> للحزمة. <br/><br/>انقر على <b>حفظ</b> لإنشاء الحزمة.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'محرر الرؤية',
 'LBL_ROLLUP' => 'القيمة المحتسبة',
 'LBL_RELATED_FIELD' => 'الحقل ذو الصلة',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'عنوان URL إلى صورة علامة الشعار المخصصة. أبعاد علامة الشعار الموصى بها هي 22 × 22 بكسل. سيتم ضبط مقاس أي صورة محملة أكبر من أي من الاتجاهين إلى هذه الأبعاد القصوى.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'عنوان URL إلى صورة الشعار المخصصة. عرض الشعار الموصى به هو 200 بكسل. سيتم ضبط مقاس أي صورة محملة أكبر من أي من الاتجاهين إلى هذه الأبعاد القصوى. سيتم استخدام هذا الشعار على شاشة تسجيل الدخول. سيتم استخدام علامة الشعار في حال لم يتم تحميل صور.',
 'LBL_PORTAL_ROLE_DESC' => 'لا تقم بحذف هذا الدور. دور الموقع المدخلي للخدمة الذاتية للعميل عبارة عن دور يتم إنشاؤه من خلال النظام أثناء عملية تنشيط موقع Sugar المدخلي. استخدم عناصر التحكم في الوصول في هذا الدور من أجل تمكين و / أو تعطيل وحدات الأخطاء، أو الحالات، أو قاعدة المعارف في موقع Sugar المدخلي. لا تقم بتعديل أي عناصر تحكم أخرى في الوصول لهذا الدور من أجل تجنب السلوك غير المعروف وغير المتوقع للنظام. في حالة الحذف غير المقصود لهذا الدور، قم بإعادة إنشائه من خلال تعطيل وتمكين موقع Sugar المدخلي.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'إضافة علاقة',
 'LBL_BTN_RENAME_MODULE' => 'تغيير اسم الوحدة',
 'LBL_BTN_INSERT'=>'إدراج',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'استعادة التخطيط الأساسي',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'حدث خطأ',
 'ERROR_REQUIRED_FIELDS' => 'هل أنت متأكد من رغبتك في المتابعة؟ الحقول الضرورية المطلوبة مفقودة من التصميم:  ',
 'ERROR_ARE_YOU_SURE' => 'هل أنت متأكد من رغبتك في المتابعة؟',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'لا يمكن إنشاء الحقل. لقد وصلت إلى حد حجم الصف لهذا الجدول في قاعدة بياناتك. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">اعرف المزيد</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'الحقل (الحقول) التالي يحتوي على قيم محسوبة لن يتم إعادة احتسابها في الوقت الفعلي في طريقة عرض تحرير SugarCRM المتنقلة:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'الحقل (الحقول) التالي يحتوي على قيم محسوبة لن يتم إعادة احتسابها في الوقت الفعلي في طريقة عرض تحرير SugarCRM للموقع المدخلي:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'إذا كنت ترغب في تمكينها في الموقع المدخلي، فيرجى تمكينها من <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">هنا</a>.',
     'LBL_PORTAL_CONFIGURE' => 'تكوين الموقع المدخلي',
     'LBL_PORTAL_ENABLE_PORTAL' => 'تمكين المدخل',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'تمكين البحث قبل فتح حالة',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'تمكين الملاحظات على وحدة قاعدة المعارف',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'السماح لمستخدمي البوابة بإغلاق الحالة',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'السماح للمستخدمين الجدد بالتسجيل',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'أذونات العميل',
     'LBL_PORTAL_THEME' => 'الموقع المدخلي للموضوعات',
     'LBL_PORTAL_ENABLE' => 'تمكين',
     'LBL_PORTAL_SITE_URL' => 'الموقع المدخلي الخاص بك متاح في:',
     'LBL_PORTAL_APP_NAME' => 'اسم التطبيق',
-    'LBL_PORTAL_LOGOMARK_URL' => 'عنوان URL علامة الشعار',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'معاينة علامة الشعار',
-    'LBL_PORTAL_LOGO_URL' => 'عنوان URL الشعار',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'معاينة الشعار',
     'LBL_PORTAL_CONTACT_PHONE' => 'الهاتف',
     'LBL_PORTAL_CONTACT_EMAIL' => 'البريد الإلكتروني',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'يجب إدخال عنوان بريد إلكتروني صحيح',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'اسحب أسماء وحدات المدخل وأسقطها لعرضها أو إخفاؤها في شريط التنقل العلوي للمدخل. للتحكم في وصول مستخدم المدخل إلى الوحدات، استخدم <a href="?module=ACLRoles&action=index">إدارة الأدوار.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'الوحدات المعروضة',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'الوحدات المخفية',
+    'LBL_CONFIG_VISIBILITY' => 'الرؤية',
+    'LBL_CASE_VISIBILITY_HELP' => 'قم بتعريف مستخدمي المدخل الذي يمكنهم رؤية حالة.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'قم بتعريف مستخدمي المدخل الذين يمكنهم رؤية رسائل البريد الإلكتروني المرتبطة بحالة. جهات الاتصال المشاركة هي الجهات المذكورة في حقول "إلى" و"من" و"نسخة" و"نسخة مخفية".',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'قم بتعريف مستخدمي البوابة الذين يمكنهم رؤية الرسائل المرتبطة بحالة. جهات الاتصال المشاركة هي الجهات المذكورة في حقل "الضيوف".',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'كل جهات الاتصال المرتبطة بالحساب',
+        'related_contacts' => 'فقط جهة الاتصال الأساسية وجهات الاتصال المرتبطة بالحالة',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'فقط جهات الاتصال المشاركة',
+        'all' => 'كل جهات الاتصال التي يمكنها رؤية الحالة',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'فقط جهات الاتصال المشاركة',
+        'all' => 'كل جهات الاتصال التي يمكنها رؤية الحالة',
+    ],
+
 
 'LBL_PORTAL'=>'الموقع المدخلي',
 'LBL_PORTAL_LAYOUTS'=>'مخططات الموقع المدخلي',
@@ -788,10 +813,10 @@ $mod_strings = array(
     . "لكن لن تتبع الصيغة في التطبيقات الأصلية، مثل Sugar Mobile لهواتف iPhone. <br/>"
     . "لن تتبع الحقول الصيغة في بوابة Sugar Self-Service Portal.",
 'LBL_POPHELP_READONLY'=>"أنشئ صيغة لتحديد ما إذا كان هذا الحقل للقراءة فقط في التخطيطات أم لا.<br/>"
-        . "سوف تتبع حقول القراءة فقط الصيغة في طريقة عرض الهواتف المحمولة المستندة إلى المستعرض، <br/>"
+        . "ستتبع حقول القراءة فقط الصيغة في طريقة عرض الهواتف المحمولة المستندة إلى المتصفح، <br/>"
         . "لكن لن تتبع الصيغة في التطبيقات الأصلية، مثل Sugar Mobile لهواتف iPhone. <br/>"
         . "لن تتبع الحقول الصيغة في بوابة Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'حدد لاستخدام هذا الحقل عند البحث عن سجلات باستخدام "البحث العام" في هذه الوحدة.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'حدد لاستخدام هذا الحقل عند البحث عن سجلات باستخدام "البحث العام" على هذه الوحدة.',
 //Revert Module labels
 'LBL_RESET' => 'إعادة تعيين',
 'LBL_RESET_MODULE' => 'إعادة تعيين الوحدة',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'التاريخ والوقت',
                 'decimal'=>'عشري',
                 'autoincrement' => 'زيادة تلقائية',
+                'actionbutton' => 'زر الإجراء',
 ),
 'labelTypes' => array(
     "" => "التسميات شائعة الاستخدام",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (المعرّف {1} المرتبط)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'نسخ من التصميم',
 'LBL_RELATIONSHIP_TYPE' => 'العلاقة',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'لغة المقارنة',
+'LBL_LABEL_NOT_TRANSLATED' => 'لا يجب ترجمة هذه التسمية',
 );

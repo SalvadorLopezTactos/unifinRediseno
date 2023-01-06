@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arhiviraj',
     'LBL_PROCESS_TYPE_DELETE' => 'Trajno brisanje',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arhiviraj pokretanja',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Upozorenje',
+    'LBL_ARCHIVER_WARNING' => 'Preporučuje se da provedete tu radnju u slučaju slabe uporabe ili tijekom razdoblja neaktivnosti '
+        . 'jer u protivnom ona dovesti do smetnji u radu sustava. Jeste li sigurni da sad želite provesti tu radnju?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'U alatu za arhiviranje modula {{moduleName}} potrebno je postaviti {{fieldName}} kao filter',
 );

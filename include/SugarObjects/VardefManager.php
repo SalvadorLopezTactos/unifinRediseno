@@ -1126,6 +1126,12 @@ class VardefManager{
             $GLOBALS['dictionary'][$object] = $cache->get(static::getCacheKey($module, $object));
         } else {
             $cachedfile = sugar_cached(self::getCacheFileName($module, $object));
+
+            if (!check_file_name($cachedfile)) {
+                $GLOBALS['log']->fatal("Path traversal attack vector detected: '$cachedfile'");
+                throw new \Exception('Path traversal attack vector detected');
+            }
+
             if (file_exists($cachedfile)) {
                 include $cachedfile;
             }

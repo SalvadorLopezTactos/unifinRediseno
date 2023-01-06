@@ -59,6 +59,24 @@ $sugar_smarty->assign('ACTION_NAMES', $names);
 $return= array('module'=>'ACLRoles', 'action'=>'DetailView', 'record'=>$role->id);
 $sugar_smarty->assign('RETURN', $return);
 
+$buttons = [
+    <<<EOD
+    <input id="ACLROLE_EDIT_BUTTON" title="{$app_strings['LBL_EDIT_BUTTON_TITLE']}" accessKey="{$app_strings['LBL_EDIT_BUTTON_KEY']}" class="button" onclick="var _form = $('#form')[0]; _form.action.value='EditView'; _form.submit();" type="submit" name="button" value="{$app_strings['LBL_EDIT_BUTTON']}" />
+EOD
+    ,
+    <<<EOD
+    <input id="ACLROLE_DUPLICATE_BUTTON" title="{$app_strings['LBL_DUPLICATE_BUTTON_TITLE']}" accessKey="{$app_strings['LBL_DUPLICATE_BUTTON_KEY']}" class="button" onclick="this.form.isDuplicate.value='1'; this.form.action.value='EditView'" type="submit" name="button" value=" {$app_strings['LBL_DUPLICATE_BUTTON']} " />
+EOD
+    ,
+    <<<EOD
+    <input id="ACLROLE_DELETE_BUTTON" title="{$app_strings['LBL_DELETE_BUTTON_TITLE']}" accessKey="{$app_strings['LBL_DELETE_BUTTON_KEY']}" class="button" onclick="this.form.return_module.value='ACLRoles'; this.form.return_action.value='index'; this.form.action.value='Delete'; return confirm('{$app_strings['NTC_DELETE_CONFIRMATION']}')" type="submit" name="button" value=" {$app_strings['LBL_DELETE_BUTTON']} " />
+EOD
+    ,
+];
+foreach ($buttons as $button) {
+    $sugar_smarty->append('buttons', $button);
+}
+
 echo getClassicModuleTitle("ACLRoles", [
     sprintf('<a href="index.php?module=ACLRoles&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'])),
     htmlspecialchars($role->get_summary_text()),

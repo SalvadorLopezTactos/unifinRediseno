@@ -295,7 +295,7 @@
                 label: '',
                 tooltip: 'LBL_CANCEL_BUTTON_LABEL',
                 name: 'inline-cancel',
-                icon: 'fa-close',
+                icon: 'sicon-close',
                 css_class: 'btn-link btn-invisible inline-cancel ellipsis_inline'
             }]
         });
@@ -307,19 +307,19 @@
                 label: '',
                 tooltip: 'LBL_SAVE_BUTTON_LABEL',
                 name: 'create-dropdown-editmode',
-                icon: 'fa-plus',
+                icon: 'sicon-plus',
                 css_class: 'ellipsis_inline',
                 no_default_action: true,
                 buttons: [{
                     type: 'button',
-                    icon: 'fa-plus',
+                    icon: 'sicon-plus',
                     name: 'create_qli_button',
                     label: 'LBL_CREATE_QLI_BUTTON_LABEL',
                     acl_action: 'create',
                     tooltip: 'LBL_CREATE_QLI_BUTTON_TOOLTIP'
                 }, {
                     type: 'button',
-                    icon: 'fa-plus',
+                    icon: 'sicon-plus',
                     name: 'create_comment_button',
                     label: 'LBL_CREATE_COMMENT_BUTTON_LABEL',
                     acl_action: 'create',
@@ -332,7 +332,7 @@
                 label: '',
                 tooltip: 'LBL_SAVE_BUTTON_LABEL',
                 name: 'inline-save',
-                icon: 'fa-check-circle',
+                icon: 'sicon-check-circle',
                 css_class: 'btn-link btn-invisible inline-save ellipsis_inline'
             });
         }

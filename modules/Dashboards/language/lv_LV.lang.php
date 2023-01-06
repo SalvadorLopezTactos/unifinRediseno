@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Visi instrumentu paneļi modulim {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Visi instrumentu paneļi moduļa {{module}} skatījumam {{view}}',
     'LBL_COPY_OF' => '{{{name}}} kopija',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Fokusa paneļa informācijas paneļus nevar izdzēst.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Izveidot instrumentu paneli',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Vai tiešām vēlaties atjaunot šo informācijas paneli uz noklusējuma izkārtojumu?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Vai tiešām vēlaties atjaunot informācijas paneli uz tā noklusējuma izkārtojumu?',
+    'LBL_FILTER_UTILS_SELECT' => 'Piešķirts',
 );

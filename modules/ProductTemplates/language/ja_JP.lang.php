@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'サポート名:',
   'LBL_SUPPORT_TERM' => 'サポート期間:',
   'LBL_TAX_CLASS' => '税区分:',
+  'LBL_ACTIVE_STATUS' => 'ステータス',
   'LBL_TYPE_NAME'=>'タイプ名',
   'LBL_TYPE' => 'タイプ',
   'LBL_PRODUCT_TYPE' => '製品のタイプ',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '製品カタログリストのダッシュボード',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '製品カタログ記録ダッシュボード',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '製品カタログフォーカス ドロワ',
+    'LBL_FILTER_ACTIVE_STATUS' => 'ステータスはアクティブです',
 );

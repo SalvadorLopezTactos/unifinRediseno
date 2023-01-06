@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'ชื่อการสนับสนุน:',
   'LBL_SUPPORT_TERM' => 'เงื่อนไขการสนับสนุน:',
   'LBL_TAX_CLASS' => 'ชั้นภาษี:',
+  'LBL_ACTIVE_STATUS' => 'สถานะ',
   'LBL_TYPE_NAME'=>'ชื่อประเภท',
   'LBL_TYPE' => 'ประเภท',
   'LBL_PRODUCT_TYPE' => 'ประเภทผลิตภัณฑ์',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'แดชบอร์ดรายการแคตตาล็อกผลิตภัณฑ์',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนแคตตาล็อกผลิตภัณฑ์',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'แคตตาล็อกผลิตภัณฑ์ระบบลิ้นชัก',
+    'LBL_FILTER_ACTIVE_STATUS' => 'สถานะคือทำงานอยู่',
 );

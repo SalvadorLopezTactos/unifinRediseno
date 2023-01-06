@@ -15,7 +15,7 @@
         {{#if collection.dataFetched}}
             {{#if facetItems}}
                 {{#each facetItems}}
-                    <li class="facet-item{{#if selected}} selected{{/if}}" data-facet-criteria="{{key}}"><i class="fa fa-check"></i><span>{{label}} ({{count}})</span></li>
+                    <li class="facet-item{{#if selected}} selected{{/if}}" data-facet-criteria="{{key}}"><i class="sicon sicon-check"></i><span>{{label}} ({{count}})</span></li>
                 {{/each}}
             {{else}}
                 <li class="facet-item"><span>{{str 'LBL_FACET_NO_DATA' }}</span></li>

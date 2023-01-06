@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WindowsMobileMSI extends MobileLobApp
 {
@@ -30,7 +28,7 @@ class WindowsMobileMSI extends MobileLobApp
     * Gets the commandLine
     * The command line.
     *
-    * @return string The commandLine
+    * @return string|null The commandLine
     */
     public function getCommandLine()
     {
@@ -56,10 +54,39 @@ class WindowsMobileMSI extends MobileLobApp
     }
     
     /**
+    * Gets the ignoreVersionDetection
+    * A boolean to control whether the app's version will be used to detect the app after it is installed on a device. Set this to true for Windows Mobile MSI Line of Business (LoB) apps that use a self update feature.
+    *
+    * @return bool|null The ignoreVersionDetection
+    */
+    public function getIgnoreVersionDetection()
+    {
+        if (array_key_exists("ignoreVersionDetection", $this->_propDict)) {
+            return $this->_propDict["ignoreVersionDetection"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the ignoreVersionDetection
+    * A boolean to control whether the app's version will be used to detect the app after it is installed on a device. Set this to true for Windows Mobile MSI Line of Business (LoB) apps that use a self update feature.
+    *
+    * @param bool $val The ignoreVersionDetection
+    *
+    * @return WindowsMobileMSI
+    */
+    public function setIgnoreVersionDetection($val)
+    {
+        $this->_propDict["ignoreVersionDetection"] = boolval($val);
+        return $this;
+    }
+    
+    /**
     * Gets the productCode
     * The product code.
     *
-    * @return string The productCode
+    * @return string|null The productCode
     */
     public function getProductCode()
     {
@@ -88,7 +115,7 @@ class WindowsMobileMSI extends MobileLobApp
     * Gets the productVersion
     * The product version of Windows Mobile MSI Line of Business (LoB) app.
     *
-    * @return string The productVersion
+    * @return string|null The productVersion
     */
     public function getProductVersion()
     {
@@ -110,35 +137,6 @@ class WindowsMobileMSI extends MobileLobApp
     public function setProductVersion($val)
     {
         $this->_propDict["productVersion"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the ignoreVersionDetection
-    * A boolean to control whether the app's version will be used to detect the app after it is installed on a device. Set this to true for Windows Mobile MSI Line of Business (LoB) apps that use a self update feature.
-    *
-    * @return bool The ignoreVersionDetection
-    */
-    public function getIgnoreVersionDetection()
-    {
-        if (array_key_exists("ignoreVersionDetection", $this->_propDict)) {
-            return $this->_propDict["ignoreVersionDetection"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the ignoreVersionDetection
-    * A boolean to control whether the app's version will be used to detect the app after it is installed on a device. Set this to true for Windows Mobile MSI Line of Business (LoB) apps that use a self update feature.
-    *
-    * @param bool $val The ignoreVersionDetection
-    *
-    * @return WindowsMobileMSI
-    */
-    public function setIgnoreVersionDetection($val)
-    {
-        $this->_propDict["ignoreVersionDetection"] = boolval($val);
         return $this;
     }
     

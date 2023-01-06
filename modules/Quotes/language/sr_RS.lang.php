@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfiguracija ponuda',
 
     'LBL_RENEWAL' => 'Obnova',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcija ponuda',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija ponude',
 );

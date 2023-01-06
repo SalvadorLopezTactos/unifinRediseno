@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Contact Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Informacijos aprašymas',
     'LBL_DESCRIPTION' => 'Aprašymas:',
+    'LBL_INTERNAL_NOTES' => 'Vidinės pastabos:',
     'LBL_STATUS' => 'Statusas:',
     'LBL_DIRECTION' => 'Kryptis:',
     'LBL_DATE' => 'Pradžios data:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Trukmės periodas turi būti daugiau už 0',
     'LBL_CALL_INFORMATION' => 'Skambučio informacija',
     'LBL_REMOVE' => 'trinti',
-    'LBL_ACCEPT_STATUS' => 'Patvirtinimo statusas',
     'LBL_ACCEPT_LINK' => 'Patvirtinimo nuoroda',
     //For export labels
     'LBL_PARENT_ID' => 'Pagrindinis ID:',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Skambutis:',
     'LBL_CALL_RECORDING_URL' => 'Įrašymo URL',
     'LBL_CALL_RECORDING' => 'Įrašymas',
+
+    'LBL_LEAD_ID' => 'Potencialaus kontakto ID',
+    'LBL_LEAD_NAME' => 'Potencialus kontaktas',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'You scheduled the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> for {{formatDate date_start}}.',

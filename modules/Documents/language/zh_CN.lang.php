@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => '营收单项',
     'LBL_PURCHASES_SUBPANEL_TITLE' => '购买',
     'LBL_PLIS_SUBPANEL_TITLE' => '已购买单项',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => '文档记录仪表板',
+    'LBL_MY_DOCUMENTS' => '我的文档',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => '发送到 DocuSign',
 );

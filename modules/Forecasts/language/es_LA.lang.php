@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Descripción',
     'LBL_OW_TYPE'=>'Tipo',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Previsión del equipo para <span class="sicon sicon-user-group mx-1"></span>{{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Reporte Directo',
     'LBL_FDR_OPPORTUNITIES'=>'Oportunidades en Pronóstico:',
     'LBL_FDR_WEIGH'=>'Cantidad Ponderada de Oportunidades:',
     'LBL_FDR_COMMIT'=>'Cantidad Indicada',
     'LBL_FDR_DATE_COMMIT'=>'Fecha Indicada',
+    'LBL_FDR_FORECAST_HEADER' => 'Previsión del vendedor para <span class="sicon sicon-user mx-1"></span>{{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Pronósticos: Hoja de Trabajo',
     'LBL_DV_MY_FORECASTS' => 'Mis Pronósticos',
-    'LBL_DV_MY_TEAM' => "Pronósticos de mi Equipo" ,
+    'LBL_DV_MY_TEAM' => "Pronósticos de mi Equipo",
     'LBL_DV_TIMEPERIODS' => 'Períodos de Tiempo:',
     'LBL_DV_FORECAST_PERIOD' => 'Período de Tiempo del Pronóstico',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Oportunidades del Pronóstico',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Tasa de Base',
 
     'LBL_QUOTA' => 'Cuota',
-    'LBL_QUOTA_ADJUSTED' => 'Cotización (Ajustada)',
+    'LBL_QUOTA_ADJUSTED' => 'Cuota ajustada',
 
     'LBL_FORECAST_FOR'=>'Hoja de Trabajo de Pronóstico para:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Dinámica)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Cuota vs. Indicación vs. Real',
 
     'LBL_FORECAST' => 'Pronóstico',
+    'LBL_COMMITMENT' => 'Compromiso',
+    'LBL_TEAM_COMMITMENT' => 'Compromiso del equipo',
+    'LBL_FORECASTED' => 'Previsto',
+    'LBL_ADJUSTED_TOTAL' => 'Total ajustado',
     'LBL_COMMIT_STAGE' => 'Etapa de Compromiso',
     'LBL_SALES_STAGE' => 'Etapa',
     'LBL_AMOUNT' => 'Cantidad',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, y {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Probable {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Mejor {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Peor {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'probablemente se mantuvo igual',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'mejor mantenido igual',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'peor mantenido igual',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Compromiso (probable) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Compromiso (mejor) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Compromiso (peor) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'El compromiso (probable) se ha quedado igual',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'El compromiso (mejor) se ha quedado igual',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'El compromiso (peor) se ha quedado igual',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Este mes en {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Total Mostrado',
     'LBL_TOTAL' => 'Total',
     'LBL_OVERALL_TOTAL' => 'Total General',
-    'LBL_EDITABLE_INVALID' => 'Número inválido para {0}',
+    'LBL_EDITABLE_INVALID' => 'Valor no válido para {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'El valor debe ser entre {0} y {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Hay cambios sin guardar en su Hoja de Trabajo.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Tenga en cuenta que solo los datos guardados o comprometidos se exportarán. Haga clic en Cancelar para abortar. Confirmar para exportar los datos guardados.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Incluido',
     'LBL_CHART_NOT_INCLUDED' => 'No Incluido',
     'LBL_CHART_ADJUSTED' => '(Ajustado)',
-    'LBL_SAVE_DRAFT' => 'Guardar Borrador',
+    'LBL_SAVE_DRAFT' => 'Guardar',
     'LBL_CHANGES_BY' => 'Cambios por {0}',
     'LBL_FORECAST_SETTINGS' => 'Ajustes',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Fecha de inicio del ejercicio:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configurar el Período de Tiempo que se usará en el módulo de Pronósticos. <br><br>Por favor tenga en cuenta que la configuración de Período de Tiempo no podrá modificarse luego de la configuración inicial.<br><br>Comience eligiendo la fecha de inicio de su ejercicio. A continuación, seleccione el tipo de Período de Tiempo que desea para el Pronóstico. El rango de fechas para los Períodos de Tiempo será automáticamente calculado en base a sus selecciones. El Sub-Período de Tiempo es la base para la hoja de trabajo de Pronóstico.<br><br>Los Períodos de Tiempo futuro y Períodos de Tiempo pasados visibles determinarán el número de sub-períodos visibles en el módulo de Pronósticos. Los usuarios pueden ver y editar los números de Pronósticos en los sub-períodos visibles.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure de qué manera desea categorizar {{forecastByModule}}. <br><br>Tenga en cuenta que la configuración de Rango no puede cambiarse después de la primera realización. Para instancias actualizadas, la configuración de Rango está bloqueada con datos existentes de Pronóstico.<br><br>Puede seleccionar dos o más categorías con base en los rangos de probabilidad o crear categorías que no se basan en probabilidad. <br><br>Existen casillas de verificación a la izquierda de sus categorías personalizadas; úselas para decidir qué rangos se incluirán en la cantidad de Pronóstico indicada y se informarán a los administradores. <br><br>Un usuario puede cambiar manualmente el estado de incluir/excluir y la categoría de {{forecastByModule}} en su hoja de trabajo.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure de qué manera desea categorizar {{forecastByModule}}. <br><br>configuración de Rango no puede cambiarse después de la primera realización. Para instancias actualizadas, la configuración de Rango está bloqueada con datos existentes de Pronóstico.<br><br>Puede seleccionar dos o más categorías con base en los rangos de probabilidad o crear categorías que no se basan en probabilidad. <br><br>Existen casillas de verificación a la izquierda de sus categorías personalizadas; úselas para decidir qué rangos se incluirán en la cantidad de Pronóstico indicada e informada a los administradores. <br><br>Un usuario puede cambiar manualmente el estado de incluir/excluir y la categoría de {{forecastByModule}} en su hoja de trabajo.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleccione las columnas que desea que el usuario complete para sus Pronósticos de cada {{forecastByModuleSingular}}. Por favor, tenga en cuenta que la cantidad probable está ligada a la cantidad indicada en {{forecastByModule}}; por esta razón la columna Probable no se puede esconder.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleccione las columnas que desee ver en el módulo de Pronósticos. La lista de campos combinará  la hoja de trabajo y permitirá al usuario elegir cómo configurar su vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Soy un marcador de posición para Pronósticos de How-to text!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Excedido por',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Sin Datos',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Igualar Cotización',
+    'LBL_OPEN_LIKELY' => 'Abrir probable',
+    'LBL_OPEN_BEST' => 'Abrir mejor',
+    'LBL_OPEN_WORST' => 'Abrir peor',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Asignar Cotización',
     'LBL_ASSIGNING_QUOTA' => 'Asignando Cotización',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Pronóstico de Mi Equipo",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Usted tiene cambios sin guardar. ¿Está seguro de que desea clasificar la hoja de trabajo y descartar los cambios?',
+
+    'LBL_SAVE_TOOLTIP' => 'Guardar los cambios que se han hecho en las filas de la hoja de cálculo',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Guardar los cambios de los registros y confirmar la previsión al administrador',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Confirmar la previsión al administrador y asignar la cuota',
+
+    'LBL_SAVE_LABEL_REP' => 'Guardar ',
+    'LBL_SAVE_LABEL_MGR' => 'Guardar los valores ajustados',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} incorpora registros {{forecastby_singular_module}} para construir {{forecastworksheets_module}} y predecir ventas. Los usuarios pueden trabajar en pro de las {{quotas_module}} de ventas a nivel individual, equipo y organización de ventas. Antes de que los usuarios puedan acceder al módulo {{plural_module_name}} un administrador debe seleccionar los Períodos de Tiempo, Rangos y Escenarios deseados por la organización.

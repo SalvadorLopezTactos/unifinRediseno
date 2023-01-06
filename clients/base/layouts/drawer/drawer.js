@@ -20,7 +20,8 @@
 
     scrollTopPositions: [], //stores scroll positions for main and side pane
 
-    pixelsFromFooter: 69, //how many pixels from the footer the drawer will drop down to
+    // Do not show focus drawer icons in the top drawer
+    disableFocusDrawer: true,
 
     initialize: function(options) {
         var self = this;
@@ -109,6 +110,16 @@
 
         //scroll both main and sidebar to the top
         this._scrollToTop();
+
+        // Close omnichannel-console when opening drawer if it is open and not in compact mode
+        if (app.omniConsole && app.omniConsole.isOpen() && app.omniConsole.getMode() !== 'compact') {
+            app.omniConsole.close();
+        }
+
+        // Close the side drawer when the top drawer is open
+        if (app.sideDrawer && app.sideDrawer.isOpen()) {
+            app.sideDrawer.slideOut();
+        }
 
         //open the drawer
         this._animateOpenDrawer(_.bind(function() {
@@ -209,6 +220,11 @@
             this._removeBackdrop(drawers.$bottom);
             this._cleanUpAfterClose(drawers);
             this._afterCloseActions(args);
+
+            // If the side drawer was open before this drawer was open, restore the side drawer
+            if (app.sideDrawer && app.sideDrawer.isHidden()) {
+                app.sideDrawer.slideIn();
+            }
         }
     },
 
@@ -249,6 +265,9 @@
         comp.loadData();
         comp.render();
 
+        if (app.omniConsole && app.omniConsole.isOpen()) {
+            app.omniConsole._setSize(app.omniConsole.isExpanded());
+        }
         this._enterState(this.STATES.IDLE);
     },
 
@@ -339,6 +358,7 @@
      */
     _initializeComponentsFromDefinition: function(def) {
         var parentContext;
+        def = def || {};
 
         if (_.isUndefined(def.context)) {
             def.context = {};
@@ -535,7 +555,7 @@
             headerHeight = $('#header .navbar').outerHeight(),
             footerHeight = $('footer').outerHeight();
 
-        return windowHeight - headerHeight - footerHeight - this.pixelsFromFooter;
+        return windowHeight - headerHeight - footerHeight;
     },
 
     /**
@@ -576,7 +596,7 @@
 
         //add expand/collapse tab behavior
         $drawerTab.on('click', _.bind(function(event) {
-            if ($('i', event.currentTarget).hasClass('fa-chevron-up')) {
+            if ($('i', event.currentTarget).hasClass('sicon-chevron-up')) {
                 this._collapseDrawer($top, $bottom);
             } else {
                 this._expandDrawer($top, $bottom);
@@ -702,6 +722,19 @@
         } else { //we've returned to base layout
             app.trigger('app:view:change', app.controller.context.get('layout'),
                 _.extend(app.controller.context.attributes, {drawer: true}));
+
+            // If the side drawer was open before this drawer was open, restore the side drawer
+            if (app.sideDrawer && app.sideDrawer.isHidden()) {
+                app.sideDrawer.slideIn();
+            }
+
+            // Reopen the omnichannel after all drawers are closed, as long as the omnichannel was closed automatically
+            // and omnichannel config is not open either
+            if (app.omniConsole && app.omniConsole.canBeAutomaticallyReopened() &&
+                !(app.omniConsoleConfig && (app.omniConsoleConfig.isMinimized || app.omniConsoleConfig.isOpen()))
+            ) {
+                app.omniConsole.open();
+            }
         }
 
         this._enterState(this.STATES.IDLE);
@@ -732,8 +765,8 @@
 
         $bottom
             .find('.drawer-tab i')
-            .removeClass('fa-chevron-down')
-            .addClass('fa-chevron-up');
+            .removeClass('sicon-chevron-down')
+            .addClass('sicon-chevron-up');
 
         this.trigger('drawer:resize', expandHeight);
     },
@@ -756,8 +789,8 @@
 
         $bottom
             .find('.drawer-tab i')
-            .removeClass('fa-chevron-up')
-            .addClass('fa-chevron-down');
+            .removeClass('sicon-chevron-up')
+            .addClass('sicon-chevron-down');
 
         this.trigger('drawer:resize', collapseHeight);
     },

@@ -8,7 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Zend_' => array($vendorDir . ''),
     'UltraLite\\Container\\' => array($vendorDir . '/ultra-lite/container/src'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Moontoast\\Math' => array($vendorDir . '/moontoast/math/src'),
     'Less' => array($vendorDir . '/wikimedia/less.php/lib'),
     'JShrink' => array($vendorDir . '/tedivm/jshrink/src'),

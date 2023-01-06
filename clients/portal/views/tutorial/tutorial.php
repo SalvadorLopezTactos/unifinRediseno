@@ -35,7 +35,7 @@ $viewdefs['portal']['view']['tutorial'] = array(
                 'full' => true,
             ),
             array(
-                'name' => 'i.fa-eye',
+                'name' => 'i.sicon-preview',
                 'text' => 'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE',
                 'full' => true,
             ),

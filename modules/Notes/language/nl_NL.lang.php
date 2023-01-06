@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'E-mailadres:',
     'LBL_EMAIL_ATTACHMENT' => 'E-mailbijlage',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'E-mailbijlage voor',
+    'LBL_NOTE_ATTACHMENT' => 'Bijlagen notitie',
+    'LBL_KB_ATTACHMENT' => 'Bijlagen KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'Bijlagen zaak',
     'LBL_FILE_MIME_TYPE' => 'Mime type',
     'LBL_FILE_EXTENSION' => 'Bestandsextensie',
     'LBL_FILE_SOURCE' => 'Bron bestand',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Bron notitie',
     'LBL_SOURCE_EXTERNAL' => 'Extern',
     'LBL_SOURCE_INTERNAL' => 'Intern',
+    'LBL_PORTAL' => 'Portaal',
 
     // Help Text
     // List View Help Text

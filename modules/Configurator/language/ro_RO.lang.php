@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'timp format implicit',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Raspuns server',
+    'FREEZE_FIRST_COLUMN' => 'Permiteți înghețarea coloanei',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Activați această setare pentru a le permite utilizatorilor să înghețe prima coloană dintr-o varietate de ' .
+        'vizualizări de tip listă, inclusiv vizualizări de tip listă a unui modul, panouri secundare, tablouri, și console.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Log interogări lente',
     'LOCK_HOMEPAGE_HELP'=>'Această setare este pentru a preveni<br />1) adăugarea de pagini noi acasă şi dashlets în modulul Home,<br />2) personalizarea dashlet de plasare în paginile de pornire de glisare şi fixare.',
     'CURRENT_LOGO'=>'Logo-ul actual:',
+    'CURRENT_LOGO_DARK' => 'Logo actual pentru mod întunecat:',
     'CURRENT_LOGO_HELP'=>'Acest logo este afişat în colţul din stânga-sus al aplicatiei Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Acest logo este afișat în colțul din stânga al subsolului când aplicația Sugar este în modul întunecat, conform preferințelor de afișare ale utilizatorului.",
     'NEW_LOGO'=>'Selectati logo',
     'NEW_LOGO_HELP' => 'Formatul de fişier imagine poate fi png sau.. Jpg.<br />Dimensiunea recomandată este de 212x40 px.',
+    'NEW_LOGO_DARK' => 'Selectare logo pentru modul întunecat:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Formatul de fișier imagine poate fi fie png sau.. Jpg.Înălțimea maximă este de 17px, iar lățimea maximă este de 450px. Orice imagine încărcat, care este mai mare în orice direcție va fi redimensionat pentru aceste dimensiuni max. Numele de fișier imagine nu trebuie să conțină un caracter spațiu.',
     'NEW_QUOTE_LOGO'=>'Încărcaţi logo-ul nou al ofertelor',
     'NEW_QUOTE_LOGO_HELP'=>'Formatul necesar  imaginii este .jpg<br />Dimensiunea recomandată este de 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'continua',
     'LBL_WIZARD_FINISH_TAB' => 'Sfarsit',
     'LBL_WIZARD_FINISH_TITLE' => 'Configuraţia de bază sistemului  este completă',
-    'LBL_WIZARD_FINISH' => 'Faceţi clic pe Continuaţi pentru a configura setările de utilizator.<br /><br />Pentru a configura setări suplimentare de sistem, faceţi clic aici.',
+    'LBL_WIZARD_FINISH' => 'Faceţi clic pe <b>Continuați</b> pentru a configura setările de utilizator.<br/><br />
+Pentru a configura setări suplimentare de sistem, faceți clic <a href="#Administration" target="_blank">aici</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Inregistrare ca si marca',
     'LBL_WIZARD_SYSTEM_DESC' => 'Furnizaţi numele organizaţiei dvs. şi logo-ul pentru a marca Sugar dumneavoastră.',
     'LBL_WIZARD_LOCALE_DESC' => 'Specificaţi cum doriţi date în Sugar pentru a fi afişate, în funcţie de locaţia dvs. geografică. Setările pe care le furnizaţi aici vor fi setările implicite. Utilizatorii vor putea stabili propriile lor de pre',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Incarcare...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Ștergere' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Bun venit' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Siglă' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Siglă' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo pentru modul întunecat',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => 'Modulul Rapoarte este disponibil numai pentru client iPhone Sugar Mobile.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modulul Rapoarte nu este disponibil pentru vizualizare bazate pe browser mobil.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

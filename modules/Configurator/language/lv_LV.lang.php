@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Noklusējuma laika formāts',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Rādīt servera atbildes laikus',
+    'FREEZE_FIRST_COLUMN' => 'Atļaut kolonnu iesaldēšanu',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Iespējojiet šo iestatījumu, lai lietotāji varētu iesaldēt pirmo kolonnu dažādos ' .
+        'saraksta skatos, tostarp moduļu saraksta skatos, apakšpaneļos, informācijas blokos un konsolēs.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Lēnu vaicājumu reģistrēšana',
     'LOCK_HOMEPAGE_HELP'=>'Šis uzstādījums neļauj<BR> 1) jaunu lapu un dašletu pievienošanu sākumlapā, <BR>2) dašletu novietojuma maiņu tos pārvelkot sākumlapā.',
     'CURRENT_LOGO'=>'Esošais logo:',
+    'CURRENT_LOGO_DARK' => 'Pašreizējais tumšā režīma logo:',
     'CURRENT_LOGO_HELP'=>'Šis logotips ir attēlots Sugar programmas kreisajā apakšējā stūrī.',
+    'CURRENT_LOGO_DARK_HELP' => "Šis logotips tiek parādīts kājenes kreisajā stūrī, kad lietotne Sugar ir tumšā režīmā, atbilstoši lietotāja izskata preferencēm.",
     'NEW_LOGO'=>'Norādiet logotipu:',
     'NEW_LOGO_HELP' => 'Attēls var būt  .png vai .jpg formātā. Maksimālais augstums 17px, un maksimālais platums 450px. Jebkuram ielādētajam attēlam, kurš būs lielāks, tiks izmainīts mērogs līdz maksimāli atļautajam malas izmēram.',
+    'NEW_LOGO_DARK' => 'Atlasīt tumšā režīma logo:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Attēla faila tips var būt .png vai .jpg. Maksimālais augstums ir 17 punkti, un maksimālais platums ir 450 punktu. Jebkurš ielādētais attēls, kas ir lielāks par šiem izmēriem tiks mērogots līdz atļautajam izmēram. Attēla faila nosaukumā nedrīkst būt tukšumi.',
     'NEW_QUOTE_LOGO'=>'Ielādēt jaunu logotipu piedāvājumiem',
     'NEW_QUOTE_LOGO_HELP'=>'Nepieciešamais attēla faila formāts ir .jpg.</br>. Ieteicamais izmērs ir 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Turpināt',
     'LBL_WIZARD_FINISH_TAB' => 'Pabeigt',
     'LBL_WIZARD_FINISH_TITLE' => 'Sistēmas pamata konfigurācija ir pabeigta',
-    'LBL_WIZARD_FINISH' => 'Spiediet <b>Pabeigt</b> lai saglabātu uzstādījumus un sāktu lietot Sugar. Papildus informācijai lietotjiet Sugar:<br /><br /><br /><table cellpadding=0 cellspacing=0><br /><tr><td><!--not_in_theme!--><img src=include/images/university.png style="margin-right: 5px;"></td><td><a href="http://www.sugarcrm.com/university" target="_blank"><b>Sugar University</b></a><br>Gala lietotāja un sistēmas administratora mācību resursi</td></tr><br /><tr><td colspan=2><hr style="margin: 5px 0px;"></td></tr><br /><tr><td><!--not_in_theme!--><img src=include/images/docs.png style="margin-right: 5px;"></td><td><a href="http://docs.sugarcrm.com/" target="_blank"><b>Dokumentācija</b></a><br>Lietošanas instrukcijas un laidienu piezīmes</td></tr><br /><tr><td colspan=2><hr style="margin: 5px 0px;"></td></tr><br /><tr><td><!--not_in_theme!--><img src=include/images/kb.png style="margin-right: 5px;"></td><td><a href="http://kb.sugarcrm.com/" target="_blank"><b>Knowledge Base</b></a><br>Ieteikumi no  SugarCRM atbalsta ikdienas darbu un procesu veikšanai Sugar sistēmā</td></tr><br /><tr><td colspan=2><hr style="margin: 5px 0px;"></td></tr><br /><tr><td><!--not_in_theme!--><img src=include/images/forums.png style="margin-right: 5px;"></td><td><a href="http://www.sugarcrm.com/forums" target="_blank"><b>Forums</b></a><br>Sugar brālībai domāti forumi lai par interesējošiem jautājumiem diskutētu savā starpā un ar SugarCRM izstrādātājiem</td></tr><br /></table>',
+    'LBL_WIZARD_FINISH' => 'Klikšķiniet uz <b>Turpināt</b>, lai konfigurētu savus lietotāja iestatījumus.<br/><br />
+Lai konfigurētu papildu sistēmas iestatījumus, klikšķiniet uz <a href="#Administration" target="_blank">šeit</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Personificēšana',
     'LBL_WIZARD_SYSTEM_DESC' => 'Norādiet organizācijas nosaukumu un logotipu lai personificētu Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Norādiet kā atkarībā no ģeogrāfiskās atrašanās vietas būtu jāattēlo datu Sugar sistēmā.Norādītie uzstādījumu būs noklusējuma uzstādījumi. Lietotāji vārēs norādīt savus uzstādījumus.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Notiek ielāde ...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Dzēst' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Sveiki' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logotips' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logotips' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Tumšā režīma logo',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Atskaišu modulis ir pieejams tikai Sugar Mobile oriģinālajam klientam',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Atskaišu modulis nav pieejams interneta pārlūkam veidotajā mobilajā skatā.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

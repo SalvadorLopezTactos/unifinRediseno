@@ -82,7 +82,8 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         if ($originalMeta && !empty($originalMeta[$this->_moduleName]['base']['filter']['default']['fields']) && is_array($originalMeta[$this->_moduleName]['base']['filter']['default']['fields'])) {
             foreach ($originalMeta[$this->_moduleName]['base']['filter']['default']['fields'] as $key => $val) {
                 // FIXME This is a temporary fix, will have a more generic solution in TY-228
-                if ((!isset($this->_fielddefs[$key]) && isset($val['dbFields'])) || $key === '$favorite') {
+                if ((!isset($this->_fielddefs[$key]) && isset($val['dbFields']))
+                    || $key === '$favorite' || (hasMapsLicense() && $key === '$distance')) {
                     // if this field is not already in _fielddefs, add it
                     $this->_comboFieldDefs[$key] = $val;
                 }
@@ -116,9 +117,12 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
     public function getDefsFromArray($defs, $client)
     {
         if (isset($defs[$this->_moduleName][$client]['filter']['default'])) {
-            return $defs[$this->_moduleName][$client]['filter']['default'];
+            $meta = $defs[$this->_moduleName][$client]['filter']['default'];
+            $meta = $this->sanitizeFieldsDefs($meta);
+
+            return $meta;
         }
-        
+
         return $this->getEmptyDefs();
     }
 
@@ -395,5 +399,21 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         }
 
         return $this->getEmptyDefs();
+    }
+
+    /**
+     * Sanitize fields
+     *
+     * @param array $meta
+     *
+     * @return array
+     */
+    public function sanitizeFieldsDefs(array $meta): array
+    {
+        if (!hasMapsLicense() && array_key_exists('fields', $meta) && array_key_exists('$distance', $meta['fields'])) {
+            unset($meta['fields']['$distance']);
+        }
+
+        return $meta;
     }
 }

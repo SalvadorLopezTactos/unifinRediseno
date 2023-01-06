@@ -256,10 +256,12 @@ const Router = Backbone.Router.extend({
      * starts the router again.
      */
     reset: function() {
+        var old = this._previousFragment;
         SUGAR.App.router.stop();
         Backbone.history.handlers = [];
         SUGAR.App.router.init();
         SUGAR.App.router.start();
+        this._previousFragment = old;
     },
 
     /**

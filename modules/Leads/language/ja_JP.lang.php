@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => '紹介元',
     'LBL_LIST_STATUS' => 'ステータス',
     'LBL_LIST_TITLE' => '職位',
+    'LBL_MARKET_INTEREST_PREDICTION' => '市場金利予測',
+    'LBL_MARKET_SCORE' => '市場スコア',
     'LBL_MOBILE_PHONE' => 'モバイル:',
     'LBL_MODULE_NAME' => 'リード',
     'LBL_MODULE_NAME_SINGULAR' => 'リード',
@@ -324,4 +326,9 @@ Sugarがあなたの{{module_name}}の情報と一致する既存のレコード
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'リード変換予測',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => '特定のリードの予測詳細を表示',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => '商談品目を有効にする',
+    'LBL_REQUIRE_RLIS' => '新しい商談を作成する場合、商談品目を必須にする',
+    'LBL_COPY_DATA_RLIS' => '新しい商談を作成する場合、リードのデータを商談品目にコピーする',
 );

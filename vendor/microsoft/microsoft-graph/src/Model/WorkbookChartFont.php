@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WorkbookChartFont extends Entity
 {
@@ -30,7 +28,7 @@ class WorkbookChartFont extends Entity
     * Gets the bold
     * Represents the bold status of font.
     *
-    * @return bool The bold
+    * @return bool|null The bold
     */
     public function getBold()
     {
@@ -59,7 +57,7 @@ class WorkbookChartFont extends Entity
     * Gets the color
     * HTML color code representation of the text color. E.g. #FF0000 represents Red.
     *
-    * @return string The color
+    * @return string|null The color
     */
     public function getColor()
     {
@@ -88,7 +86,7 @@ class WorkbookChartFont extends Entity
     * Gets the italic
     * Represents the italic status of the font.
     *
-    * @return bool The italic
+    * @return bool|null The italic
     */
     public function getItalic()
     {
@@ -117,7 +115,7 @@ class WorkbookChartFont extends Entity
     * Gets the name
     * Font name (e.g. 'Calibri')
     *
-    * @return string The name
+    * @return string|null The name
     */
     public function getName()
     {
@@ -146,7 +144,7 @@ class WorkbookChartFont extends Entity
     * Gets the size
     * Size of the font (e.g. 11)
     *
-    * @return float The size
+    * @return float|null The size
     */
     public function getSize()
     {
@@ -167,7 +165,7 @@ class WorkbookChartFont extends Entity
     */
     public function setSize($val)
     {
-        $this->_propDict["size"] = $val;
+        $this->_propDict["size"] = floatval($val);
         return $this;
     }
     
@@ -175,7 +173,7 @@ class WorkbookChartFont extends Entity
     * Gets the underline
     * Type of underline applied to the font. The possible values are: None, Single.
     *
-    * @return string The underline
+    * @return string|null The underline
     */
     public function getUnderline()
     {

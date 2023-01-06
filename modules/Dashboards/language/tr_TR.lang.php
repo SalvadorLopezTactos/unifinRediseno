@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => '{{module}} modülü için tüm panolar',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} modülü {{view}} görünümü için tüm panolar',
     'LBL_COPY_OF' => '{{{name}}} kopyası',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Odak Bölmesi panoları silinemez.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Dashboard Oluştur',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Bu gösterge panosunu, varsayılan düzene geri yüklemek istediğinizden emin misiniz?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Pano panelini varsayılan düzenine geri yüklemeyi istediğinizden emin misiniz?',
+    'LBL_FILTER_UTILS_SELECT' => 'Atanmış',
 );

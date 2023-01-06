@@ -117,6 +117,7 @@ $viewdefs['ReportSchedules']['base']['view']['record'] = array(
                     'nl2br' => true,
                     'span' => 12,
                 ),
+                'file_type',
             ),
         ),
         array(

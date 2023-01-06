@@ -9,10 +9,13 @@
     height: 100%;
 
     .thumbnail.dashlet {
-      height: calc(~"100% - 40px");
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
+
+      > div[data-dashlet="toolbar"] {
+        padding: 10px 5px;
+      }
 
       .dashlet-content {
         height: 100%;
@@ -47,6 +50,14 @@
   .dashboard-grid {
     .empty-grid {
       display: none;
+    }
+  }
+
+  .dashboard {
+    > .cols {
+      > .preview-headerbar {
+        display: none;
+      }
     }
   }
 }

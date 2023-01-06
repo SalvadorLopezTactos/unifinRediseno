@@ -24,7 +24,10 @@
         'Editable',
         'MergeDuplicates',
         'Pagination',
-        'MassCollection'
+        'MassCollection',
+        'ActionButton',
+        'DocumentMerge',
+        'MappableList',
     ],
 
     /**
@@ -43,6 +46,13 @@
     },
 
     /**
+     * Name of the row edit event.
+     *
+     * @property {string}
+     */
+    editEventName: 'list:editrow:fire',
+
+    /**
      * @override
      * @param {Object} options
      */
@@ -58,7 +68,8 @@
         //Extend the prototype's events object to setup additional events for this controller
         this.events = _.extend({}, this.events, {
             'click [name=inline-cancel]' : 'resize',
-            'keydown': '_setScrollPosition'
+            'keydown': '_setScrollPosition',
+            'dblclick tr.single': 'doubleClickEdit'
         });
 
         this.toggledModels = {};
@@ -66,6 +77,9 @@
         this._addAdditionalFields();
 
         this._currentUrl = Backbone.history.getFragment();
+
+        // allow selected records to persist across pages with list-pagination component
+        this.setIndependentMassCollection(this.context.get('isUsingListPagination'));
 
         this._bindEvents();
     },
@@ -639,7 +653,7 @@
             this._showLockedFieldWarning(model);
             return;
         }
-        if (field.def.full_form) {
+        if (field && field.def && field.def.full_form) {
             var parentModel = this.context.parent.get('model');
             var link = this.context.get('link');
 
@@ -654,6 +668,80 @@
         if (!_.isEqual(model.attributes, model._syncedAttributes)) {
             model.setSyncedAttributes(model.attributes);
         }
+    },
+
+    /**
+     * Handle switching a row to edit mode when double clicked
+     * @param event
+     */
+    doubleClickEdit: function(event) {
+        // Do not continue if the row cannot be edited or if the clicked element has some other
+        // action associated with it
+        if (!this.isRowEditable() || this.isClickableElement(event.target)) {
+            return;
+        }
+        event.stopPropagation();
+
+        // Get the ID of the model from the row
+        let row = this.$(event.target).parents('tr');
+        let rowNameComponents = row.attr('name') ? row.attr('name').split('_') : [];
+        if (rowNameComponents.length < 2) {
+            return;
+        }
+
+        let modelId = rowNameComponents.pop();
+
+        // Check if the row is already in edit mode
+        if (!_.isEmpty(this.toggledModels[modelId])) {
+            return;
+        }
+
+        let model = this.collection.get(modelId);
+        if (_.isEmpty(model)) {
+            return;
+        }
+
+        if (app.acl.hasAccessToModel('edit', model)) {
+            this.context.trigger(this.editEventName, model);
+
+            // Safari will also highlight the text around where the user double clicked - clear that
+            if (window.getSelection) {
+                window.getSelection().empty();
+            }
+        }
+    },
+
+    /**
+     * Checks if list rows are editable. Check the rowactions to see if the action associated with
+     * starting a row edit is used.
+     * @return {boolean}
+     */
+    isRowEditable: function() {
+        let meta = this.options.meta;
+        if (_.isEmpty(meta) || _.isEmpty(meta.rowactions) || _.isEmpty(meta.rowactions.actions)) {
+            return false;
+        }
+
+        return meta.rowactions.actions.some(action => action.event === this.editEventName);
+    },
+
+    /**
+     * Checks if the given element is "clickable" - that is, if it is an element that always
+     * performs some action, if it is a focus icon, or if it has an event associated in another way
+     * @param element
+     * @return {boolean}
+     */
+    isClickableElement: function(element) {
+        let tagNames = [element.tagName, element.parentElement.tagName].map(tag => tag.toLowerCase());
+        if (['a', 'button', 'input'].some(tag => tagNames.includes(tag))) {
+            return true;
+        }
+        if (element.classList.contains('focus-icon')) {
+            return true;
+        }
+        return ['data-action', 'data-clipboard', 'data-event'].some(attr => {
+            return element.getAttribute(attr) || element.parentElement.getAttribute(attr);
+        });
     },
 
     /**
@@ -708,7 +796,17 @@
             delete this.toggledModels[modelId];
         }
         this.$('tr[name=' + this.module + '_' + modelId + ']').toggleClass('tr-inline-edit', isEdit);
-        this.toggleFields(this.rowFields[modelId], isEdit);
+        this.toggleFields(this.getModelRowFields(modelId), isEdit);
+    },
+
+    /**
+     * Get row fields of particular model
+     *
+     * @param {string} modelId ID of model
+     * @return {Array} list of fields objects
+     */
+    getModelRowFields: function(modelId) {
+        return this.rowFields[modelId];
     },
 
     /**
@@ -828,7 +926,7 @@
             component: this,
             description: 'LBL_SHORTCUT_FAVORITE_RECORD',
             handler: function() {
-                this.$('.selected .fa-favorite:visible').click();
+                this.$('.selected .sicon-star-outline:visible').click();
             }
         });
 
@@ -900,4 +998,26 @@
     combineMeta: function(recordListMeta, subViewMeta) {
         return _.extend({}, recordListMeta, subViewMeta || {});
     },
+
+    /**
+     * Set the independentMassCollection property for the MassCollection plugin
+     *
+     * @param isIndependent
+     */
+    setIndependentMassCollection: function(isIndependent) {
+        this.independentMassCollection = !_.isUndefined(isIndependent) ? isIndependent : false;
+    },
+
+    /**
+     * Handles pagination events from the list-pagination component
+     *
+     * @param callback
+     */
+    handleListPaginationEvents: function(callback) {
+        if (_.isFunction(callback)) {
+            callback();
+        }
+
+        this.toggledModels = {};
+    }
 })

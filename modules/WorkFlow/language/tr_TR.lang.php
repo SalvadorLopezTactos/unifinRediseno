@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'İş Akışı'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipi',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Not:</strong> Sugar İş Akışı ve İş Akışı Yönetimi işlevi bakım modundadır. Sugar Enterprise sürümü müşterileri, SugarBPM<sup class="trademark">TM</sup> tarafından sağlanan işlevselliği kullanmalıdır.',
 );
 

@@ -21,7 +21,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 
     function filter_fields($value, $fields)
     {
-        $GLOBALS['log']->info('Begin: SoapHelperWebServices->filter_fields');
+        $this->getLogger()->info('Begin: SoapHelperWebServices->filter_fields');
         global $invalid_contact_fields;
         $filterFields = array();
         foreach($fields as $field)
@@ -58,12 +58,12 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
             }
             $filterFields[] = $field;
         }
-        $GLOBALS['log']->info('End: SoapHelperWebServices->filter_fields');
+        $this->getLogger()->info('End: SoapHelperWebServices->filter_fields');
         return $filterFields;
     }
 
     function getRelationshipResults($bean, $link_field_name, $link_module_fields, $optional_where = '', $order_by = '') {
-		$GLOBALS['log']->info('Begin: SoapHelperWebServices->getRelationshipResults');
+        $this->getLogger()->info('Begin: SoapHelperWebServices->getRelationshipResults');
 		global  $beanList, $beanFiles, $current_user;
 		global $disable_date_format, $timedate;
 
@@ -110,10 +110,10 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
                 $row = clean_sensitive_data($bean->field_defs, $row);
                 $list[] = $row;
             }
-            $GLOBALS['log']->info('End: SoapHelperWebServices->getRelationshipResults');
+            $this->getLogger()->info('End: SoapHelperWebServices->getRelationshipResults');
             return array('rows' => $list, 'fields_set_on_rows' => $filterFields);
 		} else {
-			$GLOBALS['log']->info('End: SoapHelperWebServices->getRelationshipResults - ' . $link_field_name . ' relationship does not exists');
+            $this->getLogger()->info('End: SoapHelperWebServices->getRelationshipResults - ' . $link_field_name . ' relationship does not exists');
 			return false;
 		} // else
 
@@ -121,7 +121,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 
 	function get_field_list($value, $fields, $translate=true) {
 
-	    $GLOBALS['log']->info('Begin: SoapHelperWebServices->get_field_list');
+        $this->getLogger()->info('Begin: SoapHelperWebServices->get_field_list');
 		$module_fields = array();
 		$link_fields = array();
 		if(!empty($value->field_defs)){
@@ -218,7 +218,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 			$module_fields['created_by_name']['name'] = 'created_by_name';
 		}
 
-		$GLOBALS['log']->info('End: SoapHelperWebServices->get_field_list');
+        $this->getLogger()->info('End: SoapHelperWebServices->get_field_list');
 		return array('module_fields' => $module_fields, 'link_fields' => $link_fields);
 	}
 
@@ -352,7 +352,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
         {
             if(!self::check_modules_access($GLOBALS['current_user'], $module, 'read'))
             {
-                $GLOBALS['log']->debug("SugarWebServiceImpl->get_last_viewed: NO ACCESS to $module");
+                $this->getLogger()->debug("SugarWebServiceImpl->get_last_viewed: NO ACCESS to $module");
                 continue;
             }
 
@@ -385,13 +385,13 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
         $query_date = TimeDate::getInstance()->nowDb();
         $query[] = " {$seed->table_name}.{$meta['date_field']} > '$query_date'"; //Add date filter
         $query[] = "{$seed->table_name}.assigned_user_id = '{$GLOBALS['current_user']->id}' "; //Add assigned user filter
-        if(is_array($meta['status_field']))
-        {
-            foreach ($meta['status'] as $field)
-                $query[] = "{$seed->table_name}.{$meta['status_field']} {$meta['status_opp']} '".$GLOBALS['db']->quote($field)."' ";
+        if (is_array($meta['status'])) {
+            foreach ($meta['status'] as $field) {
+                $query[] = "{$seed->table_name}.{$meta['status_field']} {$meta['status_opp']} '" . $GLOBALS['db']->quote($field) . "' ";
+            }
+        } else {
+            $query[] = "{$seed->table_name}.{$meta['status_field']} {$meta['status_opp']} '" . $GLOBALS['db']->quote($meta['status']) . "' ";
         }
-        else
-            $query[] = "{$seed->table_name}.{$meta['status_field']} {$meta['status_opp']} '".$GLOBALS['db']->quote($meta['status'])."' ";
 
         return implode(" AND ",$query);
     }

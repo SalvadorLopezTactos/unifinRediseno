@@ -222,7 +222,7 @@ class UserPreference extends SugarBean
                 $category,
             )
         );
-        $contents = $stmt->fetchColumn();
+        $contents = $stmt->fetchOne();
 
         $value = array();
         if ($contents) {

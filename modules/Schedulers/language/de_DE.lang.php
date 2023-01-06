@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Zeitpläne für Prozessdauerbenachrichtigung',
 'LBL_OOTB_DATA_ARCHIVER' => 'Aktive Datenarchive/Löschungen ausführen',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokodier-Datensätze',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Geocoder Resolver',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
 'LBL_LIST_LIST_ORDER' => 'Geplante Aufgaben:',
@@ -137,7 +141,7 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Konfiguration eines crontab-Eintrags',
 'LBL_CRON_LINUX_DESC' => 'Fügen Sie diese Zeile Ihrem Crontab hinzu:',
 'LBL_CRON_WINDOWS_DESC' => 'Erstellen Sie eine Batch-Datei mt den folgenden Befehlen:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Aktive Aufgaben',
 'LBL_EXECUTE_TIME'			=> 'Ausführungszeit',
@@ -153,6 +157,8 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_SUGARJOBREMOVETMPFILES' => 'Temporäre Dateien entfernen',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Denormalisierte Team-Sicherheitsdaten neu erstellen',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Produktdefinition aktualisieren',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Geocoder Maps',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Geocoder Resolver',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Run Nightly Mass Email Campaigns',
 'LBL_ASYNCMASSUPDATE' => 'Asynchrone Massen-Updates durchführen',
@@ -169,6 +175,7 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_CLEANOLDRECORDLISTS' => 'Alte Datensatzlisten bereinigen',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktivitäten-Stream: Reiniger',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Zeitpläne für Prozessdauerbenachrichtigung',
+'LBL_SUGARJOBDATAARCHIVER' => 'Aktive Datenarchive/Löschungen ausführen',
 'LBL_PMSEENGINECRON' => 'SugarBPM-Zeitplaner',
 );
 

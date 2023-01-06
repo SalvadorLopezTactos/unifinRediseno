@@ -15,6 +15,6 @@
             class="btn third {{#if selected}}active{{/if}}" name="select-team"
             data-rname="select-team" data-index="{{index}}" rel="tooltip"
             title="{{#if selected}}{{str "LBL_TEAM_SET_DISABLE"}}{{else}}{{str "LBL_TEAM_SET_ENABLE"}}{{/if}}">
-        <i class="fa {{#if selected}}fa-unlock-alt{{else}}fa-lock{{/if}}"></i>
+        <i class="sicon sicon-{{#if selected}}unlock{{else}}lock{{/if}}"></i>
     </button>
 {{/if}}

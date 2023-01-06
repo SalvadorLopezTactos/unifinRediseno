@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet Eklendi',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Pencereler yeniden düzenlenecek, kolon düzenini değiştirmek istediğinizden emin misiniz?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Bu Sugar Dashlet kaldırmak istediğinizden emin misiniz?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Pano Yapılandırılmadı',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Dashlet&#39;ler Yapılandırılmadı',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Pano Oluştur',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web Sayfası',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Web Sayfası',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Kaynak Kod',
   'LBL_SOURCE_SUGAR' => 'Sugar - Dünyanın en popüler Satış Gücü Otomasyonu uygulaması olup SugarCRM Inc. tarafından oluşturulmuştur.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Barnabás Debreceni tarafından oluşturulan PHP şablon motoru',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - NuSphere Corporation ve Dietrich Ayala tarafından, web service oluşturmak ve kullanmak için oluşturulmuş PHP nesneleri',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Mihai Bazon tarafından tarihleri girmek için oluşturulmuş takvim',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Wayne Munro tarafından PDF dokümanları oluşturabilmek için oluşturulmuş kod kütüphanesi',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - PHP ile WebDAV Server Uyarlaması.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Yardım, görmekte olduğunuz modül hakkındaki özel bilgileri görüntüler, modülde bazı işlemler gerçekleştirmeniz için ayrıntılı adımlar sunar ve sizi daha kapsamlı bilgi ve destek için gitmeniz gereken yere yönlendirir.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtre',
+
+    'LBL_ABOUT_VERSION' => '{{version}} sürümünü şu lisansla/lisanslarla kullanıyorsunuz:',
 );

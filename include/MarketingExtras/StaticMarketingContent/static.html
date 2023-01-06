@@ -24,11 +24,20 @@
 </head>
 <body>
 <div class="owl-carousel owl-theme">
-  <div class="owl-slide d-flex align-items-center cover" style="background-image: url('./images/generic-banner.png');">
+  <div class="owl-slide d-flex align-items-center cover" style="background-image: url('./images/sugar-generic-banner.svg');">
     <div class="container">
       <div class="row justify-content-center justify-content-md-start"> </div>
     </div>
   </div>
 </div>
+<script>
+  window.onload = function() {
+    // Remove the element that's hiding the marketing content iframe after it's finished loading
+    let hideMarketingContentDiv = window.parent.document.getElementById('hide-marketing-content-loading');
+    if (hideMarketingContentDiv) {
+      hideMarketingContentDiv.parentNode.removeChild(hideMarketingContentDiv);
+    }
+  };
+</script>
 </body>
 </html>

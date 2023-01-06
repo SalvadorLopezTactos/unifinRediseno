@@ -16,7 +16,7 @@ $viewdefs["base"]["view"]["dashletselect-headerpane"] = array(
             'name' => 'title',
             'type' => 'sugar-dashlet-label',
             'module' => 'Home',
-            'label' => 'LBL_DASHLET_ADD',
+            'label' => 'LBL_ADD',
         ),
     ),
     "buttons" => array(

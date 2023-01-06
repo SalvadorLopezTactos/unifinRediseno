@@ -36,12 +36,16 @@
     /**
      * @inheritdoc
      */
+    shouldInitDefaultValue: true,
+
+    /**
+     * @inheritdoc
+     */
     initialize: function(options) {
         // FIXME SC-1692: Remove this when SC-1692 gets in
         this._initPlugins();
         this._super('initialize', [options]);
         this._initEvents();
-        this._initDefaultValue();
         this._initPlaceholderAttribute();
 
         /**
@@ -82,7 +86,8 @@
      * supplied (e.g.: `next friday`) we'll use it as a date instead.
      *
      * @chainable
-     * @protected
+     * @inheritdoc
+     * @override
      */
     _initDefaultValue: function() {
         if (!this.model.isNew() || this.model.get(this.name) || !this.def.display_default) {
@@ -239,7 +244,7 @@
         if (this._inDetailMode()) {
             return;
         }
-        
+
         if (this.action === 'edit') {
             var $field = this.$(this.fieldTag);
 
@@ -386,6 +391,29 @@
         return value.formatServer(true);
     },
 
+
+    /**
+     * Removes fieldTag input[data-type=date] added in class name.
+     *
+     * @param {jQuery} childComponent.
+     */
+    _clearFieldTagClassDecoration: function(childComponent) {
+        if (childComponent.hasClass(this.fieldTag)) {
+            childComponent.removeClass(this.fieldTag);
+        }
+        if (childComponent.children().length) {
+            this._clearFieldTagClassDecoration(childComponent.children());
+        }
+    },
+
+    /**
+     * @override
+     */
+    decorateError: function(errors) {
+        this._super('decorateError', [errors]);
+        this._clearFieldTagClassDecoration(this.$el);
+    },
+
     /**
      * @inheritdoc
      */
@@ -418,8 +446,9 @@
         // FIXME: new date picker versions have support for plugin removal/destroy
         // we should do the upgrade in order to prevent memory leaks
 
-        if (this._hasDatePicker) {
-            $(window).off('resize', this.$(this.fieldTag).data('datepicker').place);
+        let field = this.$(this.fieldTag);
+        if (field && field.length > 0 && this._hasDatePicker) {
+            $(window).off('resize', field.data('datepicker').place);
         }
 
         this._super('_dispose');

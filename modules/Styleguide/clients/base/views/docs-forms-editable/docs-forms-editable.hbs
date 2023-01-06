@@ -15,9 +15,11 @@
 <!-- Editable
 ================================================== -->
 <section id="editable">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span6">
@@ -30,7 +32,7 @@
         <div class="span10 urleditable-wrap inline-editable-wrap">
           <span sfuuid="1">
             <a class="btn-mini btn inline-editable urleditable text-editable-trigger pull-left">
-              <i class="fa fa-pencil fa-sm"></i>
+              <i class="sicon sicon-sm sicon-edit"></i>
             </a>
             <span class="urleditable-field editable-field">Some content</span>
           </span>
@@ -46,7 +48,7 @@
         <div class="span10 urleditable-wrap inline-editable-wrap ">
           <span sfuuid="1">
             <a class="btn-mini btn inline-editable urleditable text-editable-trigger pull-left">
-              <i class="fa fa-pencil fa-sm"></i>
+              <i class="sicon sicon-sm sicon-edit"></i>
             </a>
             <span class="urleditable-field editable-field">Lots of content lots of content lots of contentlots of content lots of content</span>
           </span>
@@ -62,7 +64,7 @@
         <div class="span10 urleditable-wrap inline-editable-wrap">
           <span sfuuid="1">
             <a class="btn-mini btn inline-editable urleditable text-editable-trigger pull-left">
-              <i class="fa fa-pencil fa-sm"></i>
+              <i class="sicon sicon-sm sicon-edit"></i>
             </a>
             <span class="editable-field">Lots of content lots of content lots of contentlots of content lots of content</span>
           </span>
@@ -83,7 +85,7 @@
         <div class="span10 urleditable-wrap inline-editable-wrap ">
           <span sfuuid="1">
             <a class="btn-mini btn inline-editable urleditable editable-trigger url-editable-trigger pull-left">
-              <i class="fa fa-pencil fa-sm"></i>
+              <i class="sicon sicon-sm sicon-edit"></i>
             </a>
             <span class="urleditable-field editable-field"><a href=""><span>http://google.com</span></a></span>
           </span>
@@ -99,7 +101,7 @@
         <div class="span10 urleditable-wrap inline-editable-wrap ">
           <span sfuuid="1">
             <a class="btn-mini btn inline-editable urleditable editable-trigger url-editable-trigger pull-left">
-              <i class="fa fa-pencil fa-sm"></i>
+              <i class="sicon sicon-sm sicon-edit"></i>
             </a>
             <span class="urleditable-field editable-field"><a href=""><span>https://sugarcrm.atlassian.net/secure/IssueNavigator.jspa&64;dasdsd</span></a></span>
           </span>
@@ -115,7 +117,7 @@
         <div class="span10 urleditable-wrap inline-editable-wrap ">
           <span sfuuid="1">
             <a class="btn-mini btn inline-editable urleditable editable-trigger url-editable-trigger pull-left">
-              <i class="fa fa-pencil fa-sm"></i>
+              <i class="sicon sicon-sm sicon-edit"></i>
             </a>
             <span class="urleditable-field editable-field"><a href=""><span>https://sugarcrm.atlassian.net/secure/IssueNavigator.jspa&64;dasdsd</span></a></span>
           </span>

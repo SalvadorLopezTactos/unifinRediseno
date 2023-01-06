@@ -21,7 +21,7 @@ final class MsSql extends Db
         int $limit
     ): int {
         $offsetEnd = $offset + $limit + 1;
-        $tmpTableName = self::TMP_TABLE_NAME;
+        $tmpTableName = $this->getTmpTableName();
 
         $sql = "
           UPDATE TARGET

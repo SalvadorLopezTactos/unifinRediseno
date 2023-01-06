@@ -75,6 +75,12 @@ $dictionary['Filters'] = array(
             'merge_filter' => 'disabled',
             'calculated' => false,
         ),
+        'app' => [
+            'name' => 'app',
+            'type' => 'varchar',
+            'len' => 36,
+            'default' => 'base',
+        ],
     ),
     'relationships' => array(),
     'acls' => array('SugarACLFilters' => true, 'SugarACLStatic' => false),
@@ -92,6 +98,9 @@ $dictionary['Filters'] = array(
         'taggable',
         'commentlog',
     ),
+    'portal_visibility' => [
+        'class' => 'Filters',
+    ],
 );
 
 if (!class_exists('VardefManager')) {

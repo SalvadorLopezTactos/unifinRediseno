@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Shiko raportet e mesazheve',
     'LNK_IMPORT_MESSAGES' => 'Importo mesazhe',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'ID-ja e klientit potencial',
+    'LBL_LEAD_NAME' => 'Klienti potencial',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Biseda në anën e klientit',
+    'LBL_ACTIVITY_CUSTOMER' => 'Klienti',
+    'LBL_ACTIVITY_FINISHED' => 'përfundoi',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'në progres',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te mesazhet',
 ];

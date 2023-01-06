@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Електронна поща:',
     'LBL_EMAIL_ATTACHMENT' => 'Приложения',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Прикачен файл към писмото за',
+    'LBL_NOTE_ATTACHMENT' => 'Прикачени файлове с бележки',
+    'LBL_KB_ATTACHMENT' => 'Прикачени файлове с KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'Прикачени файлове със случаи',
     'LBL_FILE_MIME_TYPE' => 'Mime тип',
     'LBL_FILE_EXTENSION' => 'Разширение на файла',
     'LBL_FILE_SOURCE' => 'Източник на файла',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Източник на бележки',
     'LBL_SOURCE_EXTERNAL' => 'Външен',
     'LBL_SOURCE_INTERNAL' => 'Вътрешен',
+    'LBL_PORTAL' => 'Портал',
 
     // Help Text
     // List View Help Text

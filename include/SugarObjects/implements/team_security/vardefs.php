@@ -166,7 +166,6 @@ $vardefs = array(
         'source' => 'non-db',
 		'vname' => 'LBL_TEAMS',
 		'link_class' => 'TeamSetLink',
-		'link_file' => 'modules/Teams/TeamSetLink.php',
 		'studio' => 'false',
 		'reportable'=>false,
             'side' => 'left',

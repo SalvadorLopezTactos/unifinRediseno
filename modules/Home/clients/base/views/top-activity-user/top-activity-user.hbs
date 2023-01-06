@@ -27,7 +27,7 @@
             <img src="{{fieldValue this "pictureUrl"}}" class="avatar"> <a href="#{{buildRoute module='Employees' id=this.attributes.user_id}}">{{fieldValue this "name"}}</a>
         </p>
         <span class="details">
-            <icon class="fa {{fieldValue this "icon"}}"></icon> {{fieldValue this "label"}}
+            <icon class="{{buildIcon ({{fieldValue this "icon"}})}"></icon> {{fieldValue this "label"}}
         </span>
     </div>
 {{/each}}

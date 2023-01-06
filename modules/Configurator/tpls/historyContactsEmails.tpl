@@ -23,7 +23,7 @@
         <tr>
             <td width="100%" colspan="2">
                 <input type="submit" id="configuratorHistoryContactsEmails_admin_save"  class="button primary" title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" value="{$APP.LBL_SAVE_BUTTON_LABEL}">
-                <input type="button" id="configuratorHistoryContactsEmails_admin_cancel" onclick="location.href='index.php?module=Administration&amp;action=index';" class="button" title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+                <input type="button" id="configuratorHistoryContactsEmails_admin_cancel" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} class="button" title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
             </td>
         </tr>
     </table>

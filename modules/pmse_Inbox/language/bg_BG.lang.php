@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Електронно табло със запис на процесите',
 
     'LBL_CAS_ID' => 'Номер на процеса',
+    'LBL_CAS_STATUS' => 'Статус на процес',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Неизвестна (според потребителски идентификатор:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "задачата е била",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "задачата беше",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "му беше зададен Процеса #%s %s %s записа от %s Действието %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "на",
     'LBL_PMSE_HISTORY_LOG_AND'  => "и",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'свърза или прекрати връзката на запис с',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Одобри',
     'LBL_PMSE_LABEL_REJECT' => 'Отхвърли',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Процеси в процес на изпълнение',
     'LBL_STATUS_CANCELLED' => 'Отказани процеси',
     'LBL_STATUS_ERROR' => 'Грешки при изпълнение на процеси',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Приключен',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Прекратен',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'В процес на изпълнение',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Отменен',
+    'LBL_STATUS_ERROR_ENUM' => 'Грешка',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Управление на процеси',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Процеси оставени без надзор',

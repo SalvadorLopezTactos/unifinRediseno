@@ -59,13 +59,6 @@ $dictionary['quotes_accounts'] = array(
             ),
         ),
         array(
-            'name' => 'idx_acc_qte_opp',
-            'type' => 'index',
-            'fields' => array(
-                'quote_id',
-            ),
-        ),
-        array(
             'name' => 'idx_quote_account_role',
             'type' => 'alternate_key',
             'fields' => array(

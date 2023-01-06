@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'เอ็นจินของเอ็กซ์เพรสชัน',
-  'LBL_MODULE_NAME_SINGULAR' => 'เอ็นจินของเอ็กซ์เพรสชัน',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'ก่อนหน้า' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'ถัดไป' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'ขยาย' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'เอ็นจินของเอ็กซ์เพรสชัน',
+    'LBL_MODULE_NAME_SINGULAR' => 'เอ็นจินของเอ็กซ์เพรสชัน',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'ก่อนหน้า' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'ถัดไป' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'ขยาย' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'ฟิลด์ที่ไม่รู้จัก',
+];

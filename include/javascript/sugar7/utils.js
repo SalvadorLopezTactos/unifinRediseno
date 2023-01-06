@@ -394,8 +394,8 @@
              * @return {String}
              */
             getArrowDirectionSpan: function(directionClass) {
-                return directionClass == 'LBL_UP' ? '&nbsp;<i class="fa fa-arrow-up font-green"></i>' :
-                    directionClass == 'LBL_DOWN' ? '&nbsp;<i class="fa fa-arrow-down font-red"></i>' : '';
+                return directionClass == 'LBL_UP' ? '&nbsp;<i class="sicon sicon-arrow-up font-green"></i>' :
+                    directionClass == 'LBL_DOWN' ? '&nbsp;<i class="sicon sicon-arrow-down font-red"></i>' : '';
             },
 
             /**
@@ -1383,6 +1383,65 @@
             },
 
             /**
+             * Converts kebab-case to camelCase
+             *
+             * @param {string} str String to format
+             */
+            kebabToCamelCase: function(str) {
+                str = str.split('-')
+                    .map(_.bind(function(a, i) {
+                        return i === 0 ? a : this.capitalize(a);
+                    }, this)).join('');
+
+                return str;
+            },
+
+            /**
+             * Utils for map
+             */
+            maps: {
+                /**
+                 * Transforms an array of objects into a simple key-value object
+                 *
+                 * @param {Array} array
+                 * @return {Object}
+                 */
+                arrayToObject: function(array) {
+                    if (!_.isArray(array) || _.isEmpty(array)) {
+                        return {};
+                    }
+
+                    return array.reduce(function reduceArray(obj, item) {
+                        const fieldName = Object.keys(item).pop();
+
+                        obj[fieldName] = item[fieldName];
+
+                        return obj;
+                    });
+                },
+
+                /**
+                 * Check if maps is enabled for the given module
+                 *
+                 * @param {string} module
+                 * @return {bool}
+                 */
+                isMapsModuleEnabled: function(module) {
+                    if (!_.has(app.config, 'maps')) {
+                        return false;
+                    }
+
+                    if (!_.has(app.config.maps, 'enabled_modules')) {
+                        return false;
+                    }
+
+                    const allowedModules = app.config.maps.enabled_modules;
+
+                    return _.contains(allowedModules, module);
+                }
+            },
+
+            /**
              * Check if field is always readonly
              * @param {Object} fieldDef field definition
              * @param {Object} viewDef (optional) view defintion of the field
@@ -1415,6 +1474,30 @@
                     visitor: updatedVisitorObject,
                     account: updatedAccountObject
                 });
+            },
+
+            /**
+             * Open the focus drawer if it's not already oepned with the same context.
+             * @param {Object} focusDrawer - the focus drawer object
+             * @param {string} module - module name
+             * @param {string} modelId - bean id
+             */
+            openFocusDrawer: function(focusDrawer, module, modelId) {
+                if (focusDrawer && module && modelId) {
+                    var context = {
+                        layout: 'row-model-data',
+                        context: {
+                            layout: 'focus',
+                            module: module,
+                            modelId: modelId
+                        }
+                    };
+                    // If the drawer is already open to the same context, don't reload it unnecessarily
+                    if (focusDrawer.isOpen() && _.isEqual(context, focusDrawer.currentContextDef)) {
+                        return;
+                    }
+                    focusDrawer.open(context, null, focusDrawer.isOpen());
+                }
             },
 
             /**
@@ -1451,7 +1534,538 @@
                     }
                 };
                 app.api.file('delete', data, null, callbacks, {htmlJsonFormat: false});
+            },
+
+
+            /**
+             * Checks if the given field can be cascaded to the RLI model on create
+             * @param model RLI model
+             * @param fieldName name of the cascadable field
+             * @param attrs (optional) extra attributes to check
+             * @return {boolean}
+             */
+            isRliFieldValidForCascade: function(model, fieldName, attrs) {
+                const getValue = fieldName => {
+                    if (attrs && attrs[fieldName]) {
+                        return attrs[fieldName];
+                    }
+                    return model.get(fieldName);
+                };
+
+                // Service start date is valid to cascade as long as the RLI is a service
+                if (fieldName === 'service_start_date') {
+                    return app.utils.isTruthy(getValue('service'));
+                }
+
+                // Service duration is valid to cascade if the RLI is a service and not an add on or linked
+                // to a product with a locked duration
+                if (['service_duration_value', 'service_duration_unit'].includes(fieldName)) {
+                    return app.utils.isTruthy(getValue('service')) &&
+                        _.isEmpty(getValue('add_on_to_id')) &&
+                        !app.utils.isTruthy(getValue('lock_duration'));
+                }
+
+                // Forecast is valid to cascade if the RLI is not in a closed sales stage
+                if (fieldName === 'commit_stage') {
+                    let forecastConfig = app.metadata.getModule('Forecasts', 'config');
+                    let closedSalesStages = [...forecastConfig.sales_stage_won, ...forecastConfig.sales_stage_lost];
+                    return !closedSalesStages.includes(getValue('sales_stage'));
+                }
+
+                // For other fields, cascading is fine on create
+                return true;
+            },
+            DocumentMerge: {
+                /**
+                 * Function that will get you to the Doc Merge documentation
+                 *
+                 * @param {string} module
+                 */
+                openHelpDocumentation: function(module) {
+                    const serverInfo = app.metadata.getServerInfo();
+                    const version = encodeURIComponent(serverInfo.version);
+                    const edition = encodeURIComponent(serverInfo.flavor);
+                    const lang = encodeURIComponent(app.lang.getLanguage());
+                    const products = app.user.getProductCodes().join(',');
+                    const key = encodeURIComponent(App.metadata.getConfig().uniqueKey);
+                    const devStatus = encodeURIComponent(this.getVersionStatus(version));
+
+                    const url = `http://www.sugarcrm.com/crm/product_doc.php?edition=${edition}&
+                    version=${version}&lang=${lang}&module=${module}&products=${products}
+                    &status=${devStatus}&key=${key}&help_action=`;
+
+                    window.open(url);
+                },
+
+                /**
+                 * Given a version such as 5.5.0RC1 return RC. If we have a version such as: 5.5 then return GA
+                 *
+                 * @param string $version
+                 * @return string RC, BETA, GA
+                 */
+                getVersionStatus: function(version) {
+                    const matches = version.match('/^[\d\.]+?([a-zA-Z]+?)[\d]*?$/si');
+                    if (_.isArray(matches) && !_.isEmpty(matches)) {
+                        return (matches[1]).toUpperCase();
+                    } else {
+                        return 'GA';
+                    }
+                },
+
+                /**
+                 * @param {string} type
+                 * @param {string} name
+                 * @param {Array} attributes
+                 */
+                TagBuilderFactory: function(type, name, attributes) {
+                    this.type = type;
+                    this.name = name;
+                    this.attributes = attributes;
+
+                    /**
+                     * base, collection, directive, conditional
+                     * @param {string} type
+                     */
+                    this.getTagBuilder = function getTagBuilder(type) {
+                        this.type = type || this.type;
+                        let tagBuilder = null;
+
+                        switch (this.type) {
+                            case 'base':
+                                tagBuilder = new BaseTagBuilder();
+                                break;
+                            case 'collection':
+                                tagBuilder = new CollectionTagBuilder();
+                                break;
+                            case 'directive':
+                                tagBuilder = new DirectiveTagBuilder();
+                                break;
+                            case 'conditional':
+                                tagBuilder = new ConditionalTagBuilder();
+                                break;
+                        }
+                        return tagBuilder;
+                    };
+
+                    /**
+                     * Factory for creating a specific tag.
+                     */
+                    function TagFactory() {
+
+                        /**
+                         * Gets the specific tag.
+                         * @param {string} type
+                         */
+                        this.getTag = function getTag(type) {
+                            let tag = null;
+
+                            switch (type) {
+                                case 'base':
+                                    tag = new Tag();
+                                    break;
+                                case 'directive':
+                                    tag = new DirectiveTag();
+                                    break;
+                                case 'conditional':
+                                    tag = new ConditionalTag();
+                                    break;
+                                case 'collection':
+                                    tag = new CollectionTag();
+                                    break;
+                            }
+
+                            return tag;
+                        };
+                    };
+
+                    /**
+                     * Base tag class.
+                     */
+                    function Tag() {
+                        this.type = null;
+                        this.name = null;
+                        this.attributes = [];
+                        this.tagValue = '';
+
+                        /**
+                         * Sets the tag name.
+                         * @param {string} baseName
+                         * @param {string} relateName
+                         */
+                        this.setName = function setName(baseName, relateName) {
+                            this.name = baseName;
+
+                            if (relateName) {
+                                this.name += '.' + relateName;
+                            }
+
+                            return this;
+                        };
+
+                        /**
+                         * Sets multiple attributes to the tag.
+                         * @param {Object} attributes
+                         */
+                        this.setAttributes = function setAttributes(attributes) {
+                            this.attributes = attributes;
+
+                            return this;
+                        };
+
+                        /**
+                         * Sets a single attribute to the tag.
+                         * @param {Object} attribute
+                         */
+                        this.setAttribute = function setAttribute(attribute) {
+                            _.extend(this.attributes, attribute);
+
+                            return this;
+                        };
+
+                        /**
+                         * Sets the value of the tag.
+                         * @param {string} tagValue
+                         */
+                        this.setTagValue = function(tagValue) {
+                            this.tagValue = tagValue;
+
+                            return this;
+                        };
+
+                        /**
+                         * Gets the value of the tag.
+                         */
+                        this.getTagValue = function() {
+                            return this.tagValue;
+                        };
+
+                        /**
+                         * Gets the tag name.
+                         */
+                        this.getName = function() {
+                            return this.name;
+                        };
+
+                        /**
+                         * Gets the tag attributes.
+                         */
+                        this.getAttributes = function() {
+                            return this.attributes;
+                        };
+
+                        /**
+                         * Removes a tag attribute.
+                         * @param {string} attrName
+                         */
+                        this.removeAttribute = function(attrName) {
+                            delete this.attributes[attrName];
+                        };
+
+                        /**
+                         * Compiles the tag attributes and sets the tag value.
+                         */
+                        this.compile = function compile() {
+                            let attributes = this.getAttributes();
+                            let name = this.getName();
+                            let eachAttributes = '';
+
+                            for (let attributeIndex in attributes) {
+                                let attributeValue = attributes[attributeIndex];
+                                eachAttributes += ' ' + attributeIndex + '=\'' + attributeValue + '\'';
+                            }
+
+                            this.setTagValue('{' + name + eachAttributes + '}');
+
+                            return this;
+                        };
+                    };
+
+                    /**
+                     * Collection tag class.
+                     */
+                    function CollectionTag() {
+                        Tag.call(this);
+
+                        /**
+                         * Compiles the tag attributes and sets the tag value.
+                         */
+                        this.compile = function compile() {
+                            let attributes = this.getAttributes();
+                            let name = this.getName();
+                            let eachAttributes = '';
+                            let fieldTags = this.getFields() || '';
+
+                            for (let attributeIndex in attributes) {
+                                let attributeValue = attributes[attributeIndex];
+                                eachAttributes += ' ' + attributeIndex + '=\'' + attributeValue + '\'';
+                            }
+
+                            let startingCollectionTag = `{#${name} ${eachAttributes}}`;
+                            let endingCollectionTag = `{/${name}}`;
+
+                            this.setCollectionTags(startingCollectionTag, endingCollectionTag);
+                            this.setTagValue(startingCollectionTag + fieldTags + endingCollectionTag);
+
+                            return this;
+                        };
+
+                        /**
+                         * Sets the collection table fields
+                         *1
+                         * @param {string} fieldName
+                         * @param {string} fieldLabel
+                         */
+                        this.setCollectionTableFields = function(fieldName, fieldLabel) {
+                            let field = {
+                                name: `{${fieldName}}`,
+                                label: fieldLabel,
+                            };
+
+                            this.collectionTags.fields = this.collectionTags.fields || [];
+                            this.collectionTags.fields.push(field);
+
+                            return this;
+                        };
+
+                        /**
+                         * Sets the collection tags.
+                         *
+                         * @param {string} startingCollectionTag
+                         * @param {string} endingCollectionTag
+                         */
+                        this.setCollectionTags = function(startingCollectionTag, endingCollectionTag) {
+                            this.fieldTags = {};
+
+                            this.collectionTags = {
+                                startingCollectionTag: startingCollectionTag,
+                                endingCollectionTag: endingCollectionTag,
+                            };
+
+                            return this;
+                        };
+
+                        /**
+                         * Gets the collection tags.
+                         */
+                        this.getCollectionTags = function() {
+                            return this.collectionTags;
+                        };
+
+                        /**
+                         * Sets the fields inside the collection tag.
+                         * @param {Array} fields
+                         */
+                        this.setFields = function setFields(fields) {
+                            this.fieldTags = '';
+
+                            for (let field of fields) {
+                                this.fieldTags = this.fieldTags + '{' + field + '}';
+                            }
+
+                            return this;
+                        };
+
+                        /**
+                         * Gets the fields inside the collection.
+                         */
+                        this.getFields = function getFields() {
+                            return this.fieldTags;
+                        };
+                    };
+
+                    /**
+                     * Directive tag class.
+                     */
+                    function DirectiveTag() {
+                        Tag.call(this);
+
+                        /**
+                         * Compiles the tag attributes and sets the tag value.
+                         */
+                        this.compile = function compile() {
+                            let attributes = this.getAttributes();
+                            let name = this.getName();
+                            let eachAttributes = '';
+
+                            for (let attributeIndex in attributes) {
+                                let attributeValue = attributes[attributeIndex];
+                                eachAttributes += ' ' + attributeIndex + '=\'' + attributeValue + '\'';
+                            }
+
+                            this.setTagValue('{!' + name + eachAttributes + '}');
+
+                            return this;
+                        };
+                    };
+
+                    /**
+                     * Conditional tag class.
+                     */
+                    function ConditionalTag() {
+                        Tag.call(this);
+
+                        /**
+                         * Compiles the tag attributes and sets the tag value.
+                         */
+                        this.compile = function compile() {
+                            let attributes = this.getAttributes();
+                            let tag = '';
+
+                            for (let key in attributes) {
+                                if (key === 'if' || key === 'else') {
+                                    let data = attributes[key];
+                                    tag += '{' + key + ' ' + data.condition + '}' + data.result;
+                                }
+                                if (key === 'elseifs') {
+                                    for (let elseif of attributes[key]) {
+                                        tag += '{elseif ' + elseif.condition + '}' + elseif.result;
+                                    }
+                                }
+                            }
+
+                            this.setTagValue(tag + '{endif}');
+
+                            return this;
+                        };
+                    };
+
+                    /**
+                     * Builder for the base tag.
+                     * @param {strig} name
+                     * @param {Object} attributes
+                     */
+                    function BaseTagBuilder(name, attributes) {
+                        this.name = name;
+                        this.attributes = attributes || {};
+                        this.tag = null;
+                        this.type = this.type || 'base';
+
+                        /**
+                         * Creates a new tag based on the type.
+                         */
+                        this.newTag = function newTag() {
+                            let tagFactory = new TagFactory();
+                            this.tag = tagFactory.getTag(this.type);
+                            return this;
+                        };
+
+                        /**
+                         * Sets the tag name.
+                         * @param {string} name
+                         */
+                        this.setName = function setName(name) {
+                            this.tag.setName(name);
+                            return this;
+                        };
+
+                        /**
+                         * Sets a single attribute to the tag.
+                         * @param {Object} attribute
+                         */
+                        this.setAttribute = function setAttribute(attribute) {
+                            this.tag.setAttribute(attribute);
+                            return this;
+                        };
+
+                        /**
+                         * Sets multiple attributes to the tag.
+                         * @param {Object} attributes
+                         */
+                        this.setAttributes = function setAttributes(attributes) {
+                            this.tag.setAttributes(attributes);
+                            return this;
+                        };
+
+                        /**
+                         * Gets the tag.
+                         */
+                        this.get = function get() {
+                            return this.tag;
+                        };
+                    };
+
+                    /**
+                     * Builder for the collection tag.
+                     *
+                     * @param {string} name
+                     * @param {Object} attributes
+                     */
+                    function CollectionTagBuilder(name, attributes) {
+                        BaseTagBuilder.call(this, name, attributes);
+
+                        this.type = 'collection';
+                        this.collectionTags = {
+                            startingCollectionTag: '',
+                            endingCollectionTag: '',
+                            fields: []
+                        };
+
+                        /**
+                         * Sets the tag name.
+                         * @param {string} name
+                         */
+                        this.setName = function(name) {
+                            this.tag.setName('#' + name);
+
+                            return this;
+                        };
+                    };
+
+                    /**
+                     * Builder for the directive tag.
+                     *
+                     * @param {string} name
+                     * @param {Object} attributes
+                     */
+                    function DirectiveTagBuilder(name, attributes) {
+                        this.type = 'directive';
+
+                        /**
+                         * Sets the tag name.
+                         * @param {string} name
+                         */
+                        this.setName = function(name) {
+                            this.tag.setName('!' + name);
+
+                            return this;
+                        };
+
+                        BaseTagBuilder.call(this, name, attributes);
+                    };
+
+                    /**
+                     * Builder for the conditional tag.
+                     *
+                     * @param {string} name
+                     * @param {Object} attributes
+                     */
+                    function ConditionalTagBuilder(name, attributes) {
+                        BaseTagBuilder.call(this, name, attributes);
+
+                        this.type = 'conditional';
+                    };
+                },
+            },
+
+            /**
+             * Returns True if Dark Mode is active
+             *
+             * @param parent (optional) boolean value for looking at window.parent instead of current window.
+             * Used in areas that are loaded in an iframe.
+             * @return {boolean} True if Dark Mode is active
+             */
+            isDarkMode: function(parent = false) {
+                let bodyHasDarkModeClass = null;
+
+                if (app.utils.isTruthy(parent)) {
+                    bodyHasDarkModeClass = window.parent.document.body.classList.contains('sugar-dark-theme');
+                } else {
+                    bodyHasDarkModeClass = document.body.classList.contains('sugar-dark-theme');
+                }
+
+                return bodyHasDarkModeClass || localStorage.getItem('last_appearance_preference') === 'dark';
             }
+
         });
     });
 })(SUGAR.App);

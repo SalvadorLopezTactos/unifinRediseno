@@ -1,12 +1,12 @@
 /* ERROR PAGE
   ----------------*/
 
-@topFace: lighten(@grayLight, 23%);
-@leftFace: lighten(@grayLight, 24%);
-@rightFace: lighten(@grayLight, 22%);
+@topFace: @gray60;
+@leftFace: @gray50;
+@rightFace: @gray40;
 
 div.error-page {
-  color: @gray;
+  color: @gray80;
   background-color: @rightFace;
   background-image:
     linear-gradient(30deg, @topFace 12%, transparent 12.5%, transparent 87%, @topFace 87.5%, @topFace),
@@ -27,11 +27,11 @@ div.error-page {
     top: 7%;
 
     h1 {
-      color: @gray;
+      color: @gray80;
     }
 
     p {
-      color: @gray;
+      color: @gray80;
       font-size: @fontSizeLarge;
     }
   }
@@ -46,7 +46,7 @@ div.error-page {
     width: 42px;
     height: 42px;
     display: inline;
-    fill: lighten(@grayLight, 15%);
+    fill: @gray50;
   }
 
   .fa-spin {

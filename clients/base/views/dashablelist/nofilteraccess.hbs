@@ -14,7 +14,9 @@
     <span>
         <p>
             {{str 'LBL_ALERT_NO_ACCESS'}}
-            <a target="_blank" href="{{noFilterAccessSupportUrl}}">{{str 'LBL_ALERT_NO_ACCESS_SUPPORT'}}</a>
+            {{#if noFilterAccessSupportUrl}}
+                <a target="_blank" href="{{noFilterAccessSupportUrl}}">{{str 'LBL_ALERT_NO_ACCESS_SUPPORT'}}</a>
+            {{/if}}
         <p>
     </span>
 </div>

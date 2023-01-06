@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Ez hasznos lehet, ha például egy korábban bejegyzett ügyet keres.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Új eset, vagy ügy hozzáadásához, kattintson ide!',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Ide kattintva bármikor visszatérhet ehhez a nézethez.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Eset interakciók',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Eset idővonala',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Feljegyzések',
 

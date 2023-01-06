@@ -34,5 +34,5 @@ $viewdefs['KBContents']['portal']['layout']['rhs-pane'] = array(
                     ),
             ),
         ),
-    'css_class' => 'thumbnail dashlet'
+    'css_class' => 'thumbnail dashlet h-full flex flex-column',
 );

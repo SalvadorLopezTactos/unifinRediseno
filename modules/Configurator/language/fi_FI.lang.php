@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Oletusaikamuoto',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Näytä palvelimen vasteajat',
+    'FREEZE_FIRST_COLUMN' => 'Salli sarakkeen kiinnitys',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Ottamalla tämän asetuksen käyttöön käyttäjät voivat kiinnittää ensimmäisen sarakkeen erilaisissa ' .
+        'luettelonäkymissä, kuten moduuliluettelonäkymissä, alipaneeleissa, pienohjelmissa ja konsoleissa.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Kirjaa hitaat kyselyt',
     'LOCK_HOMEPAGE_HELP'=>'Tällä asetuksella ehkäistään<ol><li>dashletien lisäämisen etusivulle,</li><li>dashletien sijoittelun räätälöinnin etusivulla vetämällä ja pudottamalla.</li></ol>',
     'CURRENT_LOGO'=>'Nykyinen logo:',
+    'CURRENT_LOGO_DARK' => 'Nykyinen tumman tilan logo:',
     'CURRENT_LOGO_HELP'=>'Tämä logo näkyy Sugarin alapalkin vasemmassa reunassa.',
+    'CURRENT_LOGO_DARK_HELP' => "Tämä logo näytetään alatunnisteen vasemmassa laidassa, kun Sugar-sovellus on tummassa tilassa käyttäjän ulkoasuvalinnan mukaisesti.",
     'NEW_LOGO'=>'Valitse logo:',
     'NEW_LOGO_HELP' => 'Kuvan tiedostomuoto voi olla PNG tai JPG. Maksimikorkeus on 24 pikseliä, maksimileveys 180 pikseliä. Tätä suuremmat kuvat pienennetään maksimimittoihin.',
+    'NEW_LOGO_DARK' => 'Valitse tumman tilan logo:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Kuvan tiedostomuoto voi olla joko PNG tai JPG. Maksimikorkeus on 24 pikseliä, maksimileveys 450 pikseliä. Tätä suuremmat kuvat pienennetään maksimimittoihin. Kuvatiedoston nimessä ei saa olla välilyöntejä.',
     'NEW_QUOTE_LOGO'=>'Lataa uusi logo tarjouksille',
     'NEW_QUOTE_LOGO_HELP'=>'Kuvan tiedostomuoton on oltava .jpg.<br />Suositeltu koko on 867&mult;74 pikseliä.',
@@ -412,7 +418,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Jatka',
     'LBL_WIZARD_FINISH_TAB' => 'Valmis',
     'LBL_WIZARD_FINISH_TITLE' => 'Järjestelmän perusasennus on valmis',
-    'LBL_WIZARD_FINISH' => 'Napsauta <b>Jatka</b> viimeistelläksesi käyttäjäasetuksesi.<br /><br />Määrittääksesi järjestelmän lisäasetukset, napsauta <a href=&#39;index.php?module=Administration&action=index&#39; target=&#39;_blank&#39;>tätä</a>.',
+    'LBL_WIZARD_FINISH' => 'Napsauta <b>Jatka</b> viimeistelläksesi käyttäjäasetuksesi.<br /><br /> Määrittääksesi järjestelmän lisäasetukset, napsauta <a href="#Administration" target="_blank">tätä</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Brändäys',
     'LBL_WIZARD_SYSTEM_DESC' => 'Anna organisaatiosi nimi ja logo brändätäksesi Sugarisi.',
     'LBL_WIZARD_LOCALE_DESC' => 'Määritä, miten haluat että tiedot näkyvät Sugarissa perustuen omaan maantieteelliseen sijaintiisi. Täällä antamistasi asetuksista tulee oletusasetukset. Käyttäjät voivat asettaa omia asetuksiaan.',
@@ -423,7 +429,8 @@ BSOFR
 	'LBL_LOADING' => 'Ladataan...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Poista' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Tervetuloa' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Tumman tilan logo',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Raportit -moduuli on käytettävissä vain Sugar Mobile native -asiakasohjelmille',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Raportit-moduuli ei ole saatavilla selainpohjaisessa mobiilinäkymässä.',
 
@@ -462,5 +469,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

@@ -77,6 +77,11 @@ class Call extends SugarBean {
     public $aws_contact_id;
     public $call_recording_url;
     public $call_recording;
+    public $sentiment_score_agent;
+    public $sentiment_score_customer;
+    public $sentiment_score_agent_string;
+    public $sentiment_score_customer_string;
+
 
 	// This is used to retrieve related fields from form posts.
 	var $additional_column_fields = array('assigned_user_name', 'assigned_user_id', 'contact_id', 'user_id', 'contact_name');

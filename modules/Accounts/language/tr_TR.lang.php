@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Hesap Adı/Endüstri',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Yer',
     'LBL_PURCHASES' => 'Satın Alımlar',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Hesap Etkileşimleri',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Hesap Zaman Çizelgesi',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikler',

@@ -501,6 +501,49 @@ ExpressionControl.prototype.setVariablePanel = function (settings) {
     return this;
 };
 
+ExpressionControl.prototype.checkDefaults = function (settings, defaults) {
+    if (settings === false) {
+        defaults = false;
+    } else {
+        jQuery.extend(true, defaults, settings);
+    }
+
+    if (defaults) {
+        if (typeof defaults.dataURL !== "string") {
+            throw new Error("The \"dataURL\" property must be a string.");
+        }
+        if (!(typeof defaults.dataRoot === "string" || defaults.dataRoot === null)) {
+            throw new Error("The \"dataRoot\" property must be a string or null.");
+        }
+        if (typeof defaults.textField !== "string") {
+            throw new Error("The \"textField\" property must be a string.");
+        }
+        if (typeof defaults.valueField !== "string") {
+            throw new Error("The \"valueField\" property must be a string.");
+        }
+        if (typeof defaults.fieldDataURL !== "string") {
+            throw new Error("The \"fieldDataURL\" property must be a string.");
+        }
+        if (defaults.fieldDataURLAttr !== null && typeof defaults.fieldDataURLAttr !== "object") {
+            throw new Error("The \"fieldDataURLAttr\" property must be an object or null.");
+        }
+        if (!(typeof defaults.fieldDataRoot === "string" || defaults.fieldDataRoot === null)) {
+            throw new Error("The \"fieldDataRoot\" property must be a string.");
+        }
+        if (typeof defaults.fieldTextField !== "string") {
+            throw new Error("The \"fieldTextField\" property must be a string.");
+        }
+        if (typeof defaults.fieldValueField !== "string") {
+            throw new Error("The \"fieldValueField\" property must be a string.");
+        }
+        if (typeof defaults.fieldTypeField !== "string") {
+            throw new Error("The \"fieldTypeField\" property must be a string.");
+        }
+    }
+
+    return defaults;
+};
+
 ExpressionControl.prototype.setModuleEvaluation = function (settings) {
     var defaults = {
         dataURL: null,
@@ -515,44 +558,7 @@ ExpressionControl.prototype.setModuleEvaluation = function (settings) {
         fieldTypeField: "type"
     }, that = this, moduleField;
 
-    if (settings === false) {
-        defaults = false;
-    } else {
-        jQuery.extend(true, defaults, settings);
-    }
-
-    if (defaults) {
-        if (typeof defaults.dataURL !== "string") {
-            throw new Error("setModuleEvaluation(): The \"dataURL\" property must be a string.");
-        }
-        if (!(typeof defaults.dataRoot === "string" || defaults.dataRoot === null)) {
-            throw new Error("setModuleEvaluation(): The \"dataRoot\" property must be a string or null.");
-        }
-        if (typeof defaults.textField !== "string") {
-            throw new Error("setModuleEvaluation(): The \"textField\" property must be a string.");
-        }
-        if (typeof defaults.valueField !== "string") {
-            throw new Error("setModuleEvaluation(): The \"valueField\" property must be a string.");
-        }
-        if (typeof defaults.fieldDataURL !== "string") {
-            throw new Error("setModuleEvaluation(): The \"fieldDataURL\" property must be a string.");
-        }
-        if (defaults.fieldDataURLAttr !== null && typeof defaults.fieldDataURLAttr !== "object") {
-            throw new Error("setModuleEvaluation(): The \"fieldDataURLAttr\" property must be an object or null.");
-        }
-        if (!(typeof defaults.fieldDataRoot === "string" || defaults.fieldDataRoot === null)) {
-            throw new Error("setModuleEvaluation(): The \"fieldDataRoot\" property must be a string.");
-        }
-        if (typeof defaults.fieldTextField !== "string") {
-            throw new Error("setModuleEvaluation(): The \"fieldTextField\" property must be a string.");
-        }
-        if (typeof defaults.fieldValueField !== "string") {
-            throw new Error("setModuleEvaluation(): The \"fieldValueField\" property must be a string.");
-        }
-        if (typeof defaults.fieldTypeField !== "string") {
-            throw new Error("setModuleEvaluation(): The \"fieldTypeField\" property must be a string.");
-        }
-    }
+    defaults = this.checkDefaults(settings, defaults);
 
     if (!this._evaluationSettings) {
         this._evaluationSettings = {};
@@ -560,6 +566,33 @@ ExpressionControl.prototype.setModuleEvaluation = function (settings) {
     this._evaluationSettings.module = defaults;
     if (this._evaluationPanel) {
         this._createModulePanel();
+    }
+    return this;
+};
+
+ExpressionControl.prototype.setRelationshipEvaluation = function (settings) {
+    var defaults = {
+        dataURL: null,
+        dataRoot: null,
+        textField: 'text',
+        valueField: 'value',
+        fieldDataURL: null,
+        fieldDataURLAttr: null,
+        fieldDataRoot: null,
+        fieldTextField: 'text',
+        fieldValueField: 'value',
+        fieldTypeField: 'type',
+        evn_params: null
+    }, that = this, moduleField;
+
+    defaults = this.checkDefaults(settings, defaults);
+
+    if (!this._evaluationSettings) {
+        this._evaluationSettings = {};
+    }
+    this._evaluationSettings.relationship = defaults;
+    if (this._evaluationPanel) {
+        this._createRelationshipPanel();
     }
     return this;
 };
@@ -699,7 +732,7 @@ ExpressionControl.prototype.setUserEvaluation = function (settings) {
 };
 
 ExpressionControl.prototype.setEvaluations = function (evaluations) {
-    var panels = ["module", "form", "business_rule", "user"], i, currentEval, _evaluationSettings = {};
+    var panels = ["module", "form", "business_rule", "user", 'relationship'], i, currentEval, _evaluationSettings = {};
 
     if (evaluations === false) {
         this._evaluationSettings = false;// this._evaluationSettings.form = this._evaluationSettings.business_rule = this._evaluationSettings.user = false;
@@ -718,6 +751,9 @@ ExpressionControl.prototype.setEvaluations = function (evaluations) {
                     break;
                 case "user":
                     this.setUserEvaluation(currentEval);
+                    break;
+                case 'relationship':
+                    this.setRelationshipEvaluation(currentEval);
             }
         }
     }
@@ -850,6 +886,9 @@ ExpressionControl.prototype._onPanelValueGeneration = function () {
                     break;
                 case "form-module-field-evaluation":
                     itemData = that.helper.moduleFieldEvalGeneration(panel, subpanel, data, false);
+                    break;
+                case 'form-relationship-evaluation':
+                    itemData = that.helper.relationshipChangeEvalGeneration(panel, subpanel, data, false)
                     break;
                 case 'form-business-rule-evaluation':
                     value = that.helper._getStringOrNumber(data.response);
@@ -1234,7 +1273,9 @@ ExpressionControl.prototype._createModulePanel = function () {
                     dataRoot: 'result',
                     labelField: "text",
                     valueField: function (field, data) {
-                        return data["value"] + that.helper._auxSeparator + data["type"];
+                        // if the data is of type Relate then set id_name as the data value for the field
+                        var dataValue = data['type'] === 'Relate' && data['id_name'] ? data['id_name'] : data['value'];
+                        return dataValue + that.helper._auxSeparator + data["type"];
                     },
                     dependantFields: ['value'],
                     dependencyHandler: _.bind(this.helper.fieldDependencyHandler, this.helper)
@@ -1290,6 +1331,152 @@ ExpressionControl.prototype._createModulePanel = function () {
         this._evaluationPanel.disable();
     }
     return this._evaluationPanels.module;
+};
+
+ExpressionControl.prototype._createRelationshipPanel = function () {
+    var moduleField, that = this, settings = this._evaluationSettings.relationship;
+    if (!this._evaluationPanels.relationship) {
+        this._evaluationPanels.relationship = new FormPanel({
+            expressionControl: this,
+            id: 'form-relationship-evaluation',
+            title: translate('LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE'),
+            foregroundAppendTo: this._panel._getUsableAppendTo(),
+            items: [
+                {
+                    type: 'dropdown',
+                    name: 'module',
+                    label: translate('LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE'),
+                    width: '100%',
+                    required: true,
+                    dependantFields: ['field',]
+                },
+                {
+                    type: 'radiobutton',
+                    name: 'rel',
+                    label: 'HIDE_THIS',
+                    width: '100%',
+                    required: true,
+                    options: [
+                        {
+                            label: translate('LBL_PMSE_EXPCONTROL_RELATION_ADDED'),
+                            value: 'Added'
+                        },
+                        {
+                            label: translate('LBL_PMSE_EXPCONTROL_RELATION_REMOVED'),
+                            value: 'Removed'
+                        },
+                        {
+                            label: translate('LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED'),
+                            value: 'AddedOrRemoved'
+                        }
+                    ],
+                },
+                {
+                    type: 'dropdown',
+                    name: 'field',
+                    label: translate('LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE'),
+                    width: '25%',
+                    className: 'field-evaluation-container',
+                    dataRoot: 'result',
+                    labelField: 'text',
+                    disabled: true,
+                    valueField: function (field, data) {
+                        // if the data is of type Relate then set id_name as the data value for the field
+                        var dataValue = data['type'] === 'Relate' && data['id_name'] ? data['id_name'] : data['value'];
+                        return dataValue + that.helper._auxSeparator + data['type'];
+                    },
+                    dependantFields: ['operator', 'value'],
+                    dependencyHandler: _.bind(function(dependantField, field, value) {
+                        try {
+                            var module = field.getSelectedData();
+                            if (module && module.text && module.text !== translate('LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP')) {
+                                this.helper.fieldDependencyHandler(dependantField, field, value);
+                                dependantField.enable();
+                            } else {
+                                dependantField.setValue(null);
+                                dependantField.disable();
+                            }
+                        } catch (e) {
+                            app.logger.warn(e);
+                        }
+                    }, this)
+                },
+                {
+                    type: 'dropdown',
+                    name: 'operator',
+                    label: '',
+                    width: '20%',
+                    className: 'field-evaluation-container',
+                    labelField: 'text',
+                    valueField: 'value',
+                    options: this.helper.OPERATORS.comparison,
+                    dependencyHandler: function (dependantField, field, value) {
+                        var module = field.getSelectedData();
+                        if (module && module.value) {
+                            dependantField.enable();
+                        } else {
+                            dependantField.disable();
+                        }
+                        dependantField.setValue('');
+                    }
+                },
+                {
+                    type: 'text',
+                    name: 'value',
+                    label: translate('LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE'),
+                    width: '55%',
+                    className: 'field-evaluation-container',
+                    dependencyHandler: _.bind(function(dependantField, field, value) {
+                        try {
+                            var module = field.getSelectedData();
+                            if (module && module.value) {
+                                this.valueDependencyHandler(dependantField, field, value);
+                                dependantField.enable();
+                            } else {
+                                dependantField.setValue('');
+                                dependantField.disable();
+                            }
+                        } catch (e) {
+                            app.logger.warn(e);
+                        }
+                    }, this.helper)
+                }
+            ],
+            onCollapse: function (formPanel) {
+                var valueField = formPanel.getItem('value');
+
+                if (valueField instanceof FormPanelDate) {
+                    valueField.close();
+                }
+            },
+            bodyClassName: 'relationship-field-evaluation'
+        });
+        this._evaluationPanel.addItem(this._evaluationPanels.relationship);
+    }
+    if (settings) {
+        moduleField = this._evaluationPanels.relationship.getItem('module');
+        moduleField._attributes = moduleField._attributes || {};
+        var callType = this.getCallType(settings);
+        if (callType !== null) {
+            moduleField._attributes = _.extend(moduleField._attributes, {call_type: callType});
+        }
+        moduleField.setDataURL(settings.dataURL)
+            .setDataRoot(settings.dataRoot)
+            .setLabelField(settings.textField)
+            .setValueField(settings.valueField)
+            .load();
+        this._evaluationPanel.enable();
+        // Skip disabling for Receive Message (RM) callType.
+        // We want to display this always else only when the start event with Applies To === 'Relationship Change'
+        if (settings.evn_params === 'relationshipchange' || callType === 'RM') {
+            this._evaluationPanels.relationship.enable();
+        } else {
+            this._evaluationPanels.relationship.disable();
+        }
+    } else {
+        this._evaluationPanels.relationship.disable();
+    }
+    return this._evaluationPanels.relationship;
 };
 
 /**
@@ -2005,6 +2192,7 @@ ExpressionControl.prototype._createMainPanel = function () {
             this._createFormResponsePanel();
             this._createBusinessRulePanel();
             this._createUserPanel();
+            this._createRelationshipPanel();
         }
         items.push(this._evaluationPanel);
         this._evaluationPanel.setVisible(!!this._evaluationPanel.getItems().length);

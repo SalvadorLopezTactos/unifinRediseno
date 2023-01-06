@@ -19,6 +19,11 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
  */
 class SugarOAuth2Server extends OAuth2
 {
+    /**
+     * @var string
+     */
+    protected $sudoFor = '';
+
     // Maximum length of the session after which new login if required
     // and refresh tokens are not allowed
     const CONFIG_MAX_SESSION = 'max_session_lifetime';
@@ -167,18 +172,25 @@ class SugarOAuth2Server extends OAuth2
      * @param string $userName The user name (or email address for portal sudo)
      * @param string $clientId The client id for the access token
      * @param string $platform Which platform to log this user in as
+     * @param bool $allowInactive Allow sudo for inactive user
+     * @param bool $needRefresh Need refresh token
      *
      * @return string The token
      */
-    public function getSudoToken($userName, $clientId, $platform)
-    {
+    public function getSudoToken(
+        $userName,
+        $clientId,
+        $platform,
+        bool $allowInactive = false,
+        bool $needRefresh = false
+    ) {
         $sudoUserId = $GLOBALS['current_user']->id;
 
         $this->setPlatform($platform);
 
         $user = null;
         try {
-            $user = $this->storage->loadUserFromName($userName);
+            $user = $this->storage->loadUserFromName($userName, $allowInactive);
         } catch (\SugarApiExceptionNeedLogin $e) {
         }
 
@@ -191,8 +203,10 @@ class SugarOAuth2Server extends OAuth2
 
         // It's a bit silly to create and then destroy a refresh token,
         // But the oauth2 library doesn't let us pass enough through to skip that part.
-        $this->storage->unsetRefreshToken($token['refresh_token']);
-        unset($token['refresh_token']);
+        if (!$needRefresh) {
+            $this->storage->unsetRefreshToken($token['refresh_token']);
+            unset($token['refresh_token'], $token['refresh_expires_in']);
+        }
 
         return $token;
     }
@@ -210,7 +224,7 @@ class SugarOAuth2Server extends OAuth2
      * Revoke access token
      * @param string $token
      */
-    public function unsetAccessToken(string $token): void
+    public function unsetAccessToken($token)
     {
     }
 }

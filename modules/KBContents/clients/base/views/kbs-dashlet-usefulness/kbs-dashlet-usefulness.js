@@ -22,6 +22,13 @@
     refresh: null,
 
     /**
+     * Flag to store if we're already making a request. Use this to avoid obvious and unnecessary
+     * chart re-renders from both `useful` and `notuseful` getting updated at once.
+     * @property {boolean}
+     */
+    isFetching: false,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -40,6 +47,11 @@
             model = currModel.clone(),
             opts = options || {},
             self = this;
+
+        if (this.isFetching) {
+            return;
+        }
+        this.isFetching = true;
 
         model.fetch({
             success: function(model) {
@@ -62,41 +74,40 @@
                     self.chartData.set({rawChartData: {values: []}});
                     return;
                 }
-                var chartData = {
-                        properties: [
-                            {
-                                labels: 'value',
-                                type: 'pie chart'
-                            }
-                        ],
-                        values: [
-                            {
-                                label: [app.lang.get('LBL_USEFUL', 'KBContents')],
-                                values: [useful],
-                                classes: 'nv-fill-green'
-                            },
-                            {
-                                label: [app.lang.get('LBL_NOT_USEFUL', 'KBContents')],
-                                values: [notuseful],
-                                classes: 'nv-fill-red'
-                            }
-                        ]
-                    },
-                    chartParams = {
-                        donut: true,
-                        donutRatio: 0.45,
-                        hole: parseInt(useful * 100 / (notuseful + useful)) + '%',
-                        donutLabelsOutside: true,
-                        colorData: 'data',
-                        chart_type: 'pie chart',
-                        show_legend: false,
-                        show_title: false
-                    };
+                let chartData = {
+                    properties: [{
+                        labels: 'value',
+                        type: 'donut chart'
+                    }],
+                    values: [
+                        {
+                            label: [app.lang.get('LBL_USEFUL', 'KBContents')],
+                            values: [useful],
+                        },
+                        {
+                            label: [app.lang.get('LBL_NOT_USEFUL', 'KBContents')],
+                            values: [notuseful],
+                        },
+                    ],
+                };
+
+                let chartParams = {
+                    hole: `${parseInt(useful * 100 / (notuseful + useful))}%`,
+                    donutLabelsOutside: true,
+                    chartType: 'donutChart',
+                    show_legend: false,
+                    show_title: false,
+                    colorOverrideList: [
+                        '#00ba83', // @green
+                        '#fa374f', // @red
+                    ],
+                };
                 _.defer(_.bind(function() {
                     self.chartData.set({rawChartData: chartData, rawChartParams: chartParams});
                 }, this));
             },
-            complete: function() {
+            complete: () => {
+                this.isFetching = false;
                 if (opts && _.isFunction(opts.complete)) {
                     opts.complete();
                 }

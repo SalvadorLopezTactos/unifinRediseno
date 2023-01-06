@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Nadređena vrsta',
     'LBL_PARENT_ID' => 'Nadređeni ID',
     'LBL_EXTRA_DATA' => 'Dodatni podaci',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM – Pomenuto na {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} vas je pomenuo/la na {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM – Dodelio/la {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} vam je dodalio/la {{module_name_singular}} {{record_name}}.',
 ];

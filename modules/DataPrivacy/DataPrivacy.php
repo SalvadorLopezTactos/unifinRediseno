@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\FieldList;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\Context;

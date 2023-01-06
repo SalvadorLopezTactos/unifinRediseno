@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Zeitplan für diesen Bericht',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Berichtzeitplanberichts-Dashboard',
+    'LBL_FILE_TYPE' => 'Dateityp(en)',
 );

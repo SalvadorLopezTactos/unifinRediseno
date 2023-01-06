@@ -133,7 +133,7 @@
         this._super('_renderHtml');
 
         if (!this.meta.short) {
-            this.$el.addClass('btn-group');
+            this.$el.addClass('btn-group p-2');
         }
     },
 

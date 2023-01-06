@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Skatīt ziņojuma atskaites',
     'LNK_IMPORT_MESSAGES' => 'Importēt ziņojumus',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Interesenta ID',
+    'LBL_LEAD_NAME' => 'Interesents',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Tērzēšana klienta pusē',
+    'LBL_ACTIVITY_CUSTOMER' => 'Klients',
+    'LBL_ACTIVITY_FINISHED' => 'pabeigts',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'procesā',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Ziņojumu fokusa panelis',
 ];

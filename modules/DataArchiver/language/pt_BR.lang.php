@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arquivar',
     'LBL_PROCESS_TYPE_DELETE' => 'Excluir permanentemente',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arquivar execuções',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Aviso',
+    'LBL_ARCHIVER_WARNING' => 'É recomendável realizar esta ação durante horas de baixo uso ou fora de horas, '
+        . 'pois ela pode afetar o desempenho. Tem certeza de que deseja executar esta ação agora?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'O arquivador de {{moduleName}} deve ter {{fieldName}} definido como filtro',
 );

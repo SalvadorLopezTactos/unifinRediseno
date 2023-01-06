@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'נוספה תאסופית בהצלחה',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'החלוניות יסודרו מחדש, האם אתה בטוח שברצונך לשנות את תצורת העמודות?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'אתה בטוח שברצונך להסיר תאסופית זו?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'אין לוח מחוונים מוגדר',
   'LBL_NO_DASHLETS_CONFIGURED' => 'אין חלונית מוגדרת',
-  'LBL_CREATE_DASHBOARD_LINK' => 'צור לוח מחוונים',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'דף אינטרנט',
   'LBL_DASHLET_WEBPAGE_DESC' => 'דף אינטרנט',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'קוד מקור',
   'LBL_SOURCE_SUGAR' => 'Sugar - The world&#39;s most popular sales force automation application created by SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - A template engine for PHP created by Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - חבילת קלאסים של PHP שמאפשרת למפתחים ליצור ולצרוך שירותי אינטרנט נוצר על ידי NuSphere Coporation ו-Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - לוח שנה להזנת תאריכים נוצר על ידי Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - ספרייה ליצירת מסמכי PDF נוצר על ידי Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - הטמעת שרת WebDAV ב-PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'העזרה מציגה מידע ספציפי אודות המודול המוצג, מספקת שלבים מפורטים לביצוע חלק מן הפעולות במודול ומכוונת אותך לאן לעבור על מנת לקבל מידע מקיף נוסף ותמיכה.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'פילטר',
+
+    'LBL_ABOUT_VERSION' => 'אתה משתמש בגרסה {{version}} עם הרישיונות הבאים:',
 );

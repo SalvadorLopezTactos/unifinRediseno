@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Dashlet lisätty',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashletit järjestetään uudelleen, haluatko varmasti muuttaa sarakkeiden asettelua?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Haluatko varmasti poistaa Dashletin?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Ei konfiguroituja työpöytiä',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Ei konfiguroituja dashleteja',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Luo työpöytä',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web-sivu',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Web-sivu',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Lähdekoodi',
   'LBL_SOURCE_SUGAR' => 'Sugar – The world’s most popular sales force automation application created by SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate – mallimoottori PHP:lle. Tehnyt Barnabais Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP – joukko PHP-luokkia, joiden avulla kehittäjät voivat luoda ja kuluttaa web service -verkkopalveluja. Tehnyt NuSphere Corporation ja Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – Kalenteri päivämäärien syöttöön. Tehnyt Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – kirjasto PDF-asiakirjojen luontiin. Tehnyt Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server – WebDAV-palvelimen toteutus PHP:lle.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Ohje näyttää tarkastelemasi moduulin tarkat tiedot, antaa yksityiskohtaiset ohjeet moduulin joidenkin toimintojen suorittamiseksi ja ohjaa sinut kattavampiin tietoihin ja tukeen.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Suodatin',
+
+    'LBL_ABOUT_VERSION' => 'Käytät versiota {{version}} seuraavilla lisensseillä:',
 );

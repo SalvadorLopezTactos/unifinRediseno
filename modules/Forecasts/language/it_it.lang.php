@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Descrizione',
     'LBL_OW_TYPE'=>'Tipo',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Previsione gruppo per <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Report Diretto',
     'LBL_FDR_OPPORTUNITIES'=>'Opportunità nella previsione:',
     'LBL_FDR_WEIGH'=>'Importo Pesato delle opportunità:',
     'LBL_FDR_COMMIT'=>'Importo Confermato',
     'LBL_FDR_DATE_COMMIT'=>'Data di Conferma',
+    'LBL_FDR_FORECAST_HEADER' => 'Previsione mittente per <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Previsioni: Matrice',
     'LBL_DV_MY_FORECASTS' => 'Le mie Previsioni',
-    'LBL_DV_MY_TEAM' => "Le Previsioni del mio Gruppo" ,
+    'LBL_DV_MY_TEAM' => "Le Previsioni del mio Gruppo",
     'LBL_DV_TIMEPERIODS' => 'Archi Temporali:',
     'LBL_DV_FORECAST_PERIOD' => 'Arco Temporale della Previsione',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Opportunità delle Previsioni',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Tariffa Base',
 
     'LBL_QUOTA' => 'Budget',
-    'LBL_QUOTA_ADJUSTED' => 'Budget (Modificato)',
+    'LBL_QUOTA_ADJUSTED' => 'Quota modificata',
 
     'LBL_FORECAST_FOR'=>'Matrice Previsioni per:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Rollup)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Budget vs. Confermato vs. Effettivo',
 
     'LBL_FORECAST' => 'Previsione',
+    'LBL_COMMITMENT' => 'Conferma',
+    'LBL_TEAM_COMMITMENT' => 'Conferma gruppo',
+    'LBL_FORECASTED' => 'Previsto',
+    'LBL_ADJUSTED_TOTAL' => 'Totale modificati',
     'LBL_COMMIT_STAGE' => 'Fase di Conferma',
     'LBL_SALES_STAGE' => 'Fase',
     'LBL_AMOUNT' => 'Importo',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, e {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'probabile {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'migliore {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'peggiore {{{direction}}} {{{from}}} a {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Caso probabile è rimasto invariato',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Caso migliore è rimasto invariato',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Caso peggiore è rimasto invariato',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Confermato (probabile) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Confermato (migliore) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Confermato (peggiore) {{{direction}}} {{{from}}} a {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Confermato (probabile) rimasto lo stesso',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Confermato (migliore) rimasto lo stesso',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Confermato (peggiore) rimasto lo stesso',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Questo mese su {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Totale Visibile',
     'LBL_TOTAL' => 'Totale',
     'LBL_OVERALL_TOTAL' => 'Totale Complessivo',
-    'LBL_EDITABLE_INVALID' => 'Valore non valido per {0}',
+    'LBL_EDITABLE_INVALID' => 'Valore non valido per {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Il valore deve essere tra {0} e {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Ci sono modifiche non salvate nella tua Matrice.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Si prega di notare che solo i dati salvati o approvati possono essere esportati. Cliccare OK per continuare l´esportazione, o cliccare Annulla per ritornare alla matrice.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Incluso',
     'LBL_CHART_NOT_INCLUDED' => 'Non incluso',
     'LBL_CHART_ADJUSTED' => '(Adeguato)',
-    'LBL_SAVE_DRAFT' => 'Salva Bozza',
+    'LBL_SAVE_DRAFT' => 'Salva',
     'LBL_CHANGES_BY' => 'Modifiche da {0}',
     'LBL_FORECAST_SETTINGS' => 'Impostazioni',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data inizio anno fiscale:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configura l´arco temporale che verrà utilizzato nel modulo Previsioni.<br><br>Inizia selezionando la Data Inizio del tuo anno fiscale. Poi seleziona il tipo di arco temporale per il quale vuoi fare la previsione. L´intervallo di tempo per l´arco temporale verrà calcolato automaticamente in base alle tue selezioni. Il Sotto-Arco temporale è la base della matrice della Previsione.<br><br>Gli archi temporali visibili futuri e passati determineranno il numero di sotto-periodi visibili nel modulo Previsioni. Gli utenti possono visualizzare e modificare i numeri previsti nei sotto-periodi visibili.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurare il modo in cui si desidera classificare {{forecastByModule}}. <br><br>Tenere presente che le impostazioni dell&#39;intervallo non possono essere modificate dopo il primo commit. Per le istanze aggiornate, l&#39;impostazione Intervallo è bloccata con i dati di previsione esistenti.<br><br>È possibile selezionare due o più categorie in base a intervalli di probabilità o creare categorie non basate su probabilità. <br><br>A sinistra delle categorie personalizzate sono presenti caselle di controllo; utilizzarle per decidere quali intervalli saranno inclusi nell&#39;importo di previsione inviato e riportato ai manager. <br><br>Un utente può modificare lo stato di inclusione/esclusione e la categoria di {{forecastByModule}} manualmente dal proprio foglio di lavoro.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configura come desideri classificare {{forecastByModule}}. <br><br>Tieni presente che le impostazioni dell&#39;intervallo non possono essere modificate dopo la prima conferma. Per le istanze aggiornate, l&#39;impostazione Intervallo è bloccata con i dati di Previsione esistenti.<br><br>Puoi selezionare due o più categorie in base a intervalli di probabilità o creare categorie che non sono basate sulla probabilità. <br><br>Ci sono caselle di controllo a sinistra delle tue categorie personalizzate; utilizzarle per decidere quali intervalli saranno inclusi nell&#39;importo previsto confermato e segnalato ai gestori. <br><br>Un utente può modificare manualmente lo stato di inclusione/esclusione e la categoria di {{forecastByModule}} dal proprio foglio di lavoro.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleziona le colonne che vuoi che gli utenti possano compilare per le loro previsioni di ciascuna {{forecastByModuleSingular}}.Si prega di notare che l´importo Probabile è legato all´importo mostrato in {{forecastByModule}}; per questo motivo la colonna Probabile non può essere nascosta.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleziona le colonne da visualizzare nel modulo Previsioni. L´elenco di campi costituirà la matrice e consentirà all´utente di scegliere come configurare la sua vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sono un segnaposto per il testo Forecast By how-to!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'In Eccesso per',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Nessun Dato',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Budget Riunione',
+    'LBL_OPEN_LIKELY' => 'Aperto probabile',
+    'LBL_OPEN_BEST' => 'Aperto migliore',
+    'LBL_OPEN_WORST' => 'Aperto peggiore',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Assegna Budget',
     'LBL_ASSIGNING_QUOTA' => 'Assegnazione Budget',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "La Previsione del mio Gruppo",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Ci sono delle modifiche non salvate. Si è sicuri di voler riordinare la matrice e perdere le modifiche?',
+
+    'LBL_SAVE_TOOLTIP' => 'Salva le modifiche apportate nelle righe del foglio di lavoro',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Salva le modifiche ai record e invia le previsioni al manager',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Invia la previsione al manager e assegna la quota',
+
+    'LBL_SAVE_LABEL_REP' => 'Save ',
+    'LBL_SAVE_LABEL_MGR' => 'Salva valori modificati',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} incorpora {{forecastby_singular_module}} i record da realizzare {{forecastworksheets_module}} e prevede le vendite. Gli utenti possono lavorare verso le vendite {{quotas_module}} a livello individuale, di team, e di organizzazione di vendite. Prima che gli utenti possano accedere al modulo {{plural_module_name}}, un amministratore deve selezionare i Periodi di Tempo, le Gamme e gli scenari desiderati dell&#39;Organizzazione.

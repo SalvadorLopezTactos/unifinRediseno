@@ -13,6 +13,7 @@
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Srn;
 
 use Sugarcrm\IdentityProvider\Srn\Converter;
+use Sugarcrm\IdentityProvider\Srn\Manager;
 use Sugarcrm\IdentityProvider\Srn\Srn;
 
 /**
@@ -197,7 +198,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
             ->setService('idp')
             ->setRegion('')
             ->setTenantId('1234567890')
-            ->setResource(['user', 'e9b578dc-b5ae-41b6-a680-195cfc018f30']);
+            ->setResource([Manager::RESOURCE_TYPE_USER, 'e9b578dc-b5ae-41b6-a680-195cfc018f30']);
 
         $this->assertEquals(
             'srn:cloud:idp::1234567890:user:e9b578dc-b5ae-41b6-a680-195cfc018f30',

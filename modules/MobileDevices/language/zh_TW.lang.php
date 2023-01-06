@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => '移動設備',
     'LBL_MODULE_NAME_SINGULAR' => '移動設備',
     'LBL_DEVICE_ID' => '設備 ID',
-    'LBL_DEVICE_PLATFORM' => '平台',
+    'LBL_DEVICE_PLATFORM' => '設備平台',
 ];

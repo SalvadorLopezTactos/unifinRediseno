@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Arbetsflöde'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Typ',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Obs:</strong> Sugar Workflow och Workflow Management-funktionaliteten är i underhållsläge. Sugar Enterprise-utgåvans kunder ska använda funktionen som tillhandahålls av SugarBPM<sup class="trademark">TM</sup>.',
 );
 

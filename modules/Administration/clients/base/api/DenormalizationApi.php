@@ -92,6 +92,7 @@ final class DenormalizationApi extends SugarApi
 
     public function getConfiguration(ServiceBase $api, array $args): array
     {
+        $this->ensureDeveloperUser();
         $tabContoller = new TabController();
         $configList = array_fill_keys($tabContoller->get_system_tabs(), []);
         foreach ((new FieldConfig())->getList() as $moduleName => $moduleConfig) {
@@ -105,6 +106,7 @@ final class DenormalizationApi extends SugarApi
 
     public function getStatus(ServiceBase $api, array $args)
     {
+        $this->ensureDeveloperUser();
         $syncJob = new SynchronizationManager();
         $job = $syncJob->getJob();
 
@@ -113,6 +115,7 @@ final class DenormalizationApi extends SugarApi
 
     public function abortProcess(ServiceBase $api, array $args)
     {
+        $this->ensureDeveloperUser();
         $syncJob = new SynchronizationManager();
         $syncJob->removeJobIfExists();
 
@@ -121,6 +124,7 @@ final class DenormalizationApi extends SugarApi
 
     public function preCheck(ServiceBase $api, array $args)
     {
+        $this->ensureDeveloperUser();
         list($bean, $fieldNameToProcess, $isDenormalization) = $this->parseArguments($args);
 
         if (!$bean || !$fieldNameToProcess) {
@@ -169,6 +173,7 @@ final class DenormalizationApi extends SugarApi
 
     public function runProcess(ServiceBase $api, array $args)
     {
+        $this->ensureDeveloperUser();
         $preCheckResult = $this->preCheck($api, $args);
         if (empty($preCheckResult['overall_possibility'])) {
             return [
@@ -231,5 +236,18 @@ final class DenormalizationApi extends SugarApi
         }
 
         return [$bean, $fieldNameToProcess, $isDenormalization];
+    }
+
+    /**
+     * Ensure current user has admin permissions, or he is developer for any module
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    protected function ensureDeveloperUser()
+    {
+        if (empty($GLOBALS['current_user']) || !$GLOBALS['current_user']->isDeveloperForAnyModule()) {
+            throw new SugarApiExceptionNotAuthorized(
+                $GLOBALS['app_strings']['EXCEPTION_NOT_AUTHORIZED']
+            );
+        }
     }
 }

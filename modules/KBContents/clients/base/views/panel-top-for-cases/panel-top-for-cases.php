@@ -22,7 +22,7 @@ $viewdefs['KBContents']['base']['view']['panel-top-for-cases'] = array(
                 array(
                     'name' => 'create_button',
                     'type' => 'sticky-rowaction',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'label' => ' ',
                     'acl_module' => 'KBContents',
                     'acl_action' => 'create',

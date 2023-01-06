@@ -14,10 +14,13 @@
 
 class ViewEditConvert extends SugarView
 {
+    // @codingStandardsIgnoreStart
     protected $_viewdefs = array();
+    // @codingStandardsIgnoreEnd
+
     protected $jsonHelper;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         global $current_user;
@@ -72,6 +75,7 @@ class ViewEditConvert extends SugarView
         $smarty->assign('title', 'Convert Layout');
         $modules = $this->getModulesFromDefs();
         $smarty->assign('modules', $this->jsonHelper->encode($modules));
+        $smarty->assign('usingOppsAndRlis', Opportunity::usingRevenueLineItems() ? 'true' : 'false');
 
         $relatableModules = DeployedRelationships::findRelatableModules();
 
@@ -90,6 +94,10 @@ class ViewEditConvert extends SugarView
                 $moduleDefaults[$mod] = $this->parser->getDefaultDefForModule($mod);
             }
         }
+        foreach ($modules as $moduleDef) {
+            $moduleName = $moduleDef['module'];
+            $moduleDefaults[$moduleName] = $this->parser->getDefaultDefForModule($moduleName);
+        }
 
         asort($displayModules);
         $smarty->assign('availableModules', $displayModules);
@@ -107,13 +115,25 @@ class ViewEditConvert extends SugarView
             $this->defs = $this->parser->getDefForModules();
         }
         foreach ($this->defs as $def) {
-            $modules[] = array(
+            $moduleDefs = [
                 "module" => $def['module'],
                 "moduleName" => $app_list_strings['moduleList'][$def['module']],
                 "required" => isset($def['required']) ? $def['required'] : false,
                 "copyData" => isset($def['copyData']) ? $def['copyData'] : false,
                 "duplicateCheckOnStart" => isset($def['duplicateCheckOnStart']) ? $def['duplicateCheckOnStart'] : false,
-            );
+            ];
+
+            if ($def['module'] === 'Opportunities') {
+                $additionalDefs = [
+                    'enableRlis' => isset($def['enableRlis']) ? $def['enableRlis'] : false,
+                    'requireRlis' => isset($def['requireRlis']) ? $def['requireRlis'] : false,
+                    'copyDataToRlis' => isset($def['copyDataToRlis']) ? $def['copyDataToRlis'] : false,
+                ];
+
+                $moduleDefs = array_merge($moduleDefs, $additionalDefs);
+            }
+
+            $modules[] = $moduleDefs;
         }
         return $modules;
     }

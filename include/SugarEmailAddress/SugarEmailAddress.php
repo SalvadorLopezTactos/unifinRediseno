@@ -17,6 +17,7 @@ use Sugarcrm\IdentityProvider\Srn;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 use Psr\SimpleCache\CacheInterface;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class SugarEmailAddress extends SugarBean
 {
@@ -85,7 +86,7 @@ class SugarEmailAddress extends SugarBean
             return idn_to_ascii($part, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
         }, explode('@', $emailAddress)));
 
-        return PHPMailer::validateAddress($emailAddress);
+        return PHPMailer::validateAddress($emailAddress, 'pcre8');
     }
 
     /**
@@ -95,7 +96,7 @@ class SugarEmailAddress extends SugarBean
      *
      * @param string $emailAddressId
      * @return array
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public static function getEmployeesWithEmailAddress(string $emailAddressId)
     {
@@ -118,7 +119,7 @@ class SugarEmailAddress extends SugarBean
         ];
         $stmt = $conn->executeQuery($sql, $args);
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $ids[] = $row['id'];
         }
 
@@ -363,7 +364,7 @@ class SugarEmailAddress extends SugarBean
         $q2 = 'SELECT * FROM email_addr_bean_rel WHERE bean_id = ? AND bean_module = ? AND deleted = 0';
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($q2, array($id, $module));
-        while ($row2 = $stmt->fetch()) {
+        while ($row2 = $stmt->fetchAssociative()) {
             $current_links[$row2['email_address_id']] = $row2;
         }
         $this->cache->delete(self::EMAIL_CACHE_PREFIX . $module . $id);
@@ -488,7 +489,7 @@ class SugarEmailAddress extends SugarBean
         $stmt = $conn->executeQuery($q, array($emailCaps, $bean->module_dir, $addresstype));
 
         // do it this way to make the count accurate in oracle
-        return count($stmt->fetchAll());
+        return count($stmt->fetchFirstColumn());
     }
 
     /**
@@ -507,7 +508,7 @@ class SugarEmailAddress extends SugarBean
         $stmt = $conn->executeQuery($q, array($module, $email));
 
         $retArr = array();
-        while ($a = $stmt->fetch()) {
+        while ($a = $stmt->fetchAssociative()) {
             $retArr[] = $a['bean_id'];
         }
         if (count($retArr) > 0) {
@@ -540,7 +541,7 @@ class SugarEmailAddress extends SugarBean
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($q, array(sugarStrToUpper($email)));
 
-        while ($a = $stmt->fetch()) {
+        while ($a = $stmt->fetchAssociative()) {
             if(empty($a['bean_module'])) continue;
             $bean = BeanFactory::retrieveBean($a['bean_module'], $a['bean_id']);
             if(empty($bean)) continue;
@@ -568,7 +569,7 @@ class SugarEmailAddress extends SugarBean
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, [$emailId]);
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             if (empty($row['bean_module'])) {
                 continue;
             }
@@ -699,7 +700,7 @@ class SugarEmailAddress extends SugarBean
 
                         $conn = $this->db->getConnection();
                         $stmt = $conn->executeQuery($query, array(sugarStrToUpper($email)));
-                        $row = $stmt->fetch();
+                        $row = $stmt->fetchAssociative();
                         if (!empty($row['opt_out'])) {
                             $optOutValues[$k] = "emailAddress$count";
                         }
@@ -987,7 +988,7 @@ class SugarEmailAddress extends SugarBean
         $q = "SELECT id FROM " . $this->table_name . " WHERE email_address_caps = ?";
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($q, array($addressCaps));
-        $id = $stmt->fetchColumn();
+        $id = $stmt->fetchOne();
 
         return empty($id) ? '' : $id;
     }
@@ -1099,7 +1100,7 @@ class SugarEmailAddress extends SugarBean
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($q, array($parent_type, $parent_id));
         //expect one column only
-        $address = $stmt->fetchColumn();
+        $address = $stmt->fetchOne();
         return $address;
     }
 
@@ -1138,7 +1139,7 @@ class SugarEmailAddress extends SugarBean
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($q, array($focus->module_dir, $focus->id));
         //expect one column only
-        $address = $stmt->fetchColumn();
+        $address = $stmt->fetchOne();
         return $address;
     }
 
@@ -1169,10 +1170,9 @@ class SugarEmailAddress extends SugarBean
                 AND ear.deleted = 0
                 ORDER BY ear.reply_to_address, ear.primary_address DESC";
         $conn = $this->db->getConnection();
-        $stmt = $conn->prepare($q);
-        $stmt->execute(array($module, $id));
 
-        $data = $stmt->fetchAll();
+        $result = $conn->executeQuery($q, array($module, $id));
+        $data = $result->fetchAllAssociative();
         $this->cache->set(self::EMAIL_CACHE_PREFIX . $module . $id, $data);
         return $data;
     }

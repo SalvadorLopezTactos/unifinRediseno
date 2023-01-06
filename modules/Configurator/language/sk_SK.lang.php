@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Predvolený formát času',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Zobraziť časy odozvy servera',
+    'FREEZE_FIRST_COLUMN' => 'Povoliť ukotvenie stĺpca',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Povoľte toto nastavenie, aby ste používateľom umožnili ukotviť prvý stĺpec v celom rade ' .
+        'zobrazení zoznamov vrátane zobrazení zoznamov modulov, podpanelov, dashletov a konzol.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Zaznamenať pomalé otázky',
     'LOCK_HOMEPAGE_HELP'=>'Toto nastavenie slúži na to, aby sa zabránilo<BR>1) pridaniu nových domovských stránok a dashletov do modulu Domov<BR>2) prispôsobeniu umiestnenia dashletov na domovských stránkach pretiahnutím.',
     'CURRENT_LOGO'=>'Aktuálne logo:',
+    'CURRENT_LOGO_DARK' => 'Aktuálne logo tmavého režimu:',
     'CURRENT_LOGO_HELP'=>'Toto logo sa zobrazí v ľavom rohu päty aplikácie Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Toto logo sa zobrazí v ľavom rohu päty podľa predvoľby vzhľadu používateľa, keď je aplikácia Sugar v tmavom režime.",
     'NEW_LOGO'=>'Vybrať logo:',
     'NEW_LOGO_HELP' => 'Formát súboru obrázka môže byť buď .png, alebo. jpg. Maximálna výška je 24px a maximálna šírka je 180px. Nahraté obrázky, ktoré sú v niektorom smere väčšie, sa zmenšia na tieto maximálne rozmery.',
+    'NEW_LOGO_DARK' => 'Vybrať logo tmavého režimu:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Formát súboru obrázka môže byť buď .png, alebo. jpg. Maximálna výška je 24px a maximálna šírka je 450px. Nahraté obrázky, ktoré sú v niektorom smere väčšie, sa zmenšia na tieto maximálne rozmery. Názov súboru obrázku nesmie obsahovať medzery.',
     'NEW_QUOTE_LOGO'=>'Nahrať nové logo pre modul Ponuky',
     'NEW_QUOTE_LOGO_HELP'=>'Požadovaný formát súboru obrázka je .jpg.<BR>Odporúčaná veľkosť je 867 x 74 px.',
@@ -413,7 +419,7 @@ BSOFR
     'LBL_WIZARD_FINISH_TAB' => 'Dokončiť',
     'LBL_WIZARD_FINISH_TITLE' => 'Základná konfigurácia systému bola dokončená',
     'LBL_WIZARD_FINISH' => 'Ak chcete konfigurovať svoje používateľské nastavenia, kliknite na možnosť <b>Pokračovať</b>.<br/><br />
-Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.php?module=Administration&action=index" target="_blank">tu</a>.',
+Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="#Administration" target="_blank">tu</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Použitie značky',
     'LBL_WIZARD_SYSTEM_DESC' => 'Zadajte názov a logo vašej organizácie, aby ste v aplikácii Sugar použili značky.',
     'LBL_WIZARD_LOCALE_DESC' => 'Zadajte, ako chcete na základe vašej geografickej polohy zobrazovať údaje v aplikácii Sugar. Nastavenia, ktoré tu zadáte, sa stanú predvolenými nastaveniami. Používatelia budú môcť nastaviť svoje vlastné predvoľby.',
@@ -424,7 +430,8 @@ Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.ph
 	'LBL_LOADING' => 'Nahrávanie...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Vymazať' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Vitajte' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo tmavého režimu',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Modul Hlásenia je dostupný iba pre natívnych klientov aplikácie SugarCRM a Sugar Mobile',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modul Hlásenia nie je k dispozícii pre zobrazenie v prehliadači v mobilných zariadeniach.',
 
@@ -463,5 +470,3 @@ Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.ph
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

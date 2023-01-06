@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'שורות פרטי הכנסה',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'רכישות',
     'LBL_PLIS_SUBPANEL_TITLE' => 'פריטי שורה - רכישות',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסמכים',
+    'LBL_MY_DOCUMENTS' => 'המסמכים שלי',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'שלח ל-DocuSign',
 );

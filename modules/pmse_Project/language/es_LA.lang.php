@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Creado por Usuario',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Última Modificación Realizada por Usuario',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Correo electrónico del sistema',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Plantilla de Documento',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Combinación de Documentos',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Seleccionar...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Combinación de Documentos en PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Combinación de Documentos',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Regla Empresarial',
     'LBL_PMSE_LABEL_RULE' => 'Regla',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Sólo Registros Actualizados (Todas las Actualizaciones - Vea el Texto de Ayuda)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nuevos Registros o Primera Actualización',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nuevos Registros y Todas las Actualizaciones',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Cambio de Relación',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleccione cuándo comenzará el proceso.<br><br>Nuevo: ejecute el proceso cuando se cree el nuevo registro.<br><br>Primera actualización: el proceso se ejecuta solo la primera vez que se cumplen los criterios para un registro existente.<br><br>Todas las actualizaciones: el proceso se ejecuta cada vez que se cumplen criterios para un registro existente.<br><br>Nuevos registros o Primera actualización: el proceso se ejecuta solo la primera vez que se cumplen criterios para un registro, durante la creación del registro o la actualización del registro.<br><br>Nuevos registros y Todas las actualizaciones: el proceso se ejecuta todas las veces para todos los registros nuevos y existentes.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleccione cuándo comenzará el proceso.<br><br>Nuevo: ejecute el proceso cuando se cree el nuevo registro.<br><br>Primera actualización: el proceso se ejecuta solo la primera vez que se cumplen los criterios para un registro existente.<br><br>Todas las actualizaciones: el proceso se ejecuta todas las veces que se cumplen criterios para un registro existente.<br><br>Nuevos registros o Primera actualización: el proceso se ejecuta solo la primera vez que se cumplen criterios para un registro, durante la creación del registro o la actualización del registro.<br><br>Nuevos registros y Todas las actualizaciones: el proceso se ejecuta todas las veces para todos los registros nuevos y existentes.<br><br>Cambios de relación: el proceso se ejecuta todas las veces que hay un cambio de relación.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Seleccionar el módulo de SugarCRM para aplicar al evento activado',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fecha corregida',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Error',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Evaluación de Cambio de Relación',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Campos',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluación de Campo de Módulos',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Módulo',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Todos los registros relacionados',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Cualquier registro relacionado',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Agregado',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Eliminado',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Agregado o Eliminado',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Cualquier Relación',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Tiempo de ejecución',
 

@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Архивирай',
     'LBL_PROCESS_TYPE_DELETE' => 'Твърдо изтриване',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Изпълнява се архивиране',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Предупреждение',
+    'LBL_ARCHIVER_WARNING' => 'Препоръчва се за извършите това действие по време на слабо използване или неработни часове '
+        . 'тъй като може да се отрази на производителността на системата. Сигурни ли сте, че искате да извършите това действие сега?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Архиваторът за модул {{moduleName}} трябва да има зададено {{fieldName}} като филтър',
 );

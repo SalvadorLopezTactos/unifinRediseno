@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Henvist av',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Tittel',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Prognose av markedsinteresse',
+    'LBL_MARKET_SCORE' => 'Markedsrating',
     'LBL_MOBILE_PHONE' => 'Mobiltelefonnummer:',
     'LBL_MODULE_NAME' => 'Emner',
     'LBL_MODULE_NAME_SINGULAR' => 'Lead',
@@ -318,4 +320,9 @@ For å opprette {{module_name}}:
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Emnekonverteringsprediksjon',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Se prediskjonsdetaljer for et bestemt emne',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Aktiver omsetningsposter',
+    'LBL_REQUIRE_RLIS' => 'Krev omsetningsposter ved opprettelse av ny mulighet',
+    'LBL_COPY_DATA_RLIS' => 'Kopier kundeemnes data til omsetningsposter ved opprettelse av ny mulighet',
 );

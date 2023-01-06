@@ -768,9 +768,15 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			document.location.href = 'index.php?module=ModuleBuilder&action=index&type=' + type;
 		},
 		failed: function(o){
-            if(!ModuleBuilder.state.hideFailedMesage){
-                ajaxStatus.flashStatus(SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_FAILED_DATA'), 2000);
-            }
+                ajaxStatus.hideStatus();
+                if (!ModuleBuilder.state.hideFailedMesage) {
+                    const errorText = o.responseText || SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_FAILED_DATA');
+                    YAHOO.SUGAR.MessageBox.show({
+                        title: SUGAR.language.get('ModuleBuilder', 'ERROR_GENERIC_TITLE'),
+                        msg: errorText,
+                        width: 500
+                    });
+                }
 		},
 		//Wizard Functions
 		buttonDown: function(button, name, list){
@@ -1653,24 +1659,48 @@ if (typeof(ModuleBuilder) == 'undefined') {
                 }
             }
         }
-        ,switchLayoutRole: function(element) {
-            var $select = $(element);
-            var $input = $('input[name="role"]');
-            var previousRole = $input.val();
-            var role = $select.val();
-            var params = ModuleBuilder.urlToParams(ModuleBuilder.contentURL);
-            params.role = role;
-            var url = ModuleBuilder.paramsToUrl(params);
-            ModuleBuilder.getContent(
-                url,
-                function(r) {
-                    $input.val(role);
-                    ModuleBuilder.updateContent(r);
-                }, function() {
-                    $select.val(previousRole);
+            ,
+            /**
+             * Function call when the type of the layout is switched
+             *
+             * @param {HTMLElement} element
+             * @param {string} dropdown
+             */
+            switchLayout: function(element, dropdown) {
+                var $select = $(element);
+                var $input = $('input[name=' + dropdown + ']');
+                var previousValue = $input.val();
+                var value = $select.val();
+                var params = ModuleBuilder.urlToParams(ModuleBuilder.contentURL);
+                params[dropdown] = value;
+                if (params.resetToBase) {
+                    delete params.resetToBase;
                 }
-            );
-        },
+                if (dropdown === 'dropdownField' && previousValue !== value && params.dropdownValue) {
+                    delete params.dropdownValue;
+                }
+                var url = ModuleBuilder.paramsToUrl(params);
+                ModuleBuilder.getContent(
+                    url,
+                    function(r) {
+                        $input.val(value);
+                        ModuleBuilder.updateContent(r);
+                    }, function() {
+                        $select.val(previousValue);
+                    }
+                );
+            },
+            resetToBase: function() {
+                var params = ModuleBuilder.urlToParams(ModuleBuilder.contentURL);
+                params.resetToBase = true;
+                var url = ModuleBuilder.paramsToUrl(params);
+                ModuleBuilder.getContent(
+                    url,
+                    function(r) {
+                        ModuleBuilder.updateContent(r);
+                    }
+                );
+            },
         copyLayoutFromRole: function() {
             var dialog = ModuleBuilder.getCopyLayoutDialog();
             dialog.show();

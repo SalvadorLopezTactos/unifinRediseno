@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'E-pasta adrese:',
     'LBL_EMAIL_ATTACHMENT' => 'E-pasta pielikums',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'E-pasta pielikums, kas paredzēts',
+    'LBL_NOTE_ATTACHMENT' => 'Piezīmes pielikumi',
+    'LBL_KB_ATTACHMENT' => 'KBDocument pielikumi',
+    'LBL_CASE_ATTACHMENT' => 'Pieteikuma pielikumi',
     'LBL_FILE_MIME_TYPE' => 'Mime veids',
     'LBL_FILE_EXTENSION' => 'Faila paplašinājums',
     'LBL_FILE_SOURCE' => 'Faila avots',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Piezīmes avots',
     'LBL_SOURCE_EXTERNAL' => 'Ārējais',
     'LBL_SOURCE_INTERNAL' => 'Iekšējais',
+    'LBL_PORTAL' => 'Portāls',
 
     // Help Text
     // List View Help Text

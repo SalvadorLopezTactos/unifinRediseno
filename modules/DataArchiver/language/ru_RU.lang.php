@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Архив',
     'LBL_PROCESS_TYPE_DELETE' => 'Необратимое удаление',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Архив запущен',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Предупреждение',
+    'LBL_ARCHIVER_WARNING' => 'Рекомендуется выполнять это действие при низкой загрузке или в нерабочее время '
+        . 'поскольку это может повлиять на производительность системы. Выполнить это действие сейчас?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'В архиваторе для модуля {{moduleName}} необходимо задать поле {{fieldName}} в качестве фильтра',
 );

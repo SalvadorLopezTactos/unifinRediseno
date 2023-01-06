@@ -21,10 +21,6 @@
 }
 
 // Comment log dashlet
-@commentLogDashletTimeColor: @grayLightish;
-@commentLogDashletNoCommentsAvailable: @grayLightish;
-@commentLogDashletItemHeaderColor: @grayDark;
-
 .commentlog-dashlet {
   > span {
     display: block;
@@ -78,7 +74,7 @@
   ul > em {
     text-align: center;
     display: block;
-    color: @commentLogDashletNoCommentsAvailable;
+    color: @labelColor;
   }
 
   li {
@@ -92,7 +88,7 @@
       flex: 0 0 100%;
 
       time {
-        color: @commentLogDashletTimeColor;
+        color: @labelColor;
 
         span {
           color: initial;
@@ -102,7 +98,7 @@
       > a,
       > time.relative {
         font-weight: 600;
-        color: @commentLogDashletItemHeaderColor;
+        color: @labelColor;
       }
     }
 

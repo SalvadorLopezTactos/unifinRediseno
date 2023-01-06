@@ -18,6 +18,7 @@ private $metadata = array();
 private $monitors = array();
 private $disabledMonitors = array();
 private static $paused = false;
+    protected $moduleConfig;
 
     /**
      * Constructor for TrackerManager.  Declared private for singleton pattern.
@@ -28,6 +29,7 @@ private static $paused = false;
         require('modules/Trackers/config.php');
         $this->metadata = $tracker_config;
         self::$monitor_id = create_guid();
+        $this->moduleConfig = SugarConfig::getInstance()->get('tracker_module_config');
     }
 
 /**
@@ -158,26 +160,25 @@ public function save() {
     }
 }
 
-/**
- * saveMonitor
- * Saves the monitor instance and then clears it
- * If ignoreDisabled is set the ignore the fact of this monitor being disabled
- */
-public function saveMonitor($monitor, $flush=true, $ignoreDisabled = false) {
+    /**
+     * saveMonitor
+     * Saves the monitor instance and then clears it
+     * If ignoreDisabled is set the ignore the fact of this monitor being disabled
+     */
+    public function saveMonitor($monitor, $flush = true, $ignoreDisabled = false)
+    {
+        if (!$this->isPaused() && !empty($monitor)) {
+            if (($ignoreDisabled || $this->isMonitorEnabled($monitor)) && $monitor instanceof Trackable
+                && $this->isModuleEnabled($monitor)) {
+                $monitor->save($flush);
 
-	if(!$this->isPaused() && !empty($monitor)){
-
-		if(($ignoreDisabled || $this->isMonitorEnabled($monitor)) && $monitor instanceof Trackable) {
-
-		   $monitor->save($flush);
-
-		   if($flush) {
-			   $monitor->clear();
-			   unset($this->monitors[strtolower($monitor->name)]);
-		   }
-	    }
-	}
-}
+                if ($flush) {
+                    $monitor->clear();
+                    unset($this->monitors[strtolower($monitor->name)]);
+                }
+            }
+        }
+    }
 
     /**
      * Check if the monitor is enabled
@@ -188,6 +189,26 @@ public function saveMonitor($monitor, $flush=true, $ignoreDisabled = false) {
     public function isMonitorEnabled($monitor)
     {
         return empty($this->disabledMonitors[$monitor->name]);
+    }
+
+    /**
+     * Check if the module is enabled
+     */
+    public function isModuleEnabled(Trackable $monitor): bool
+    {
+        $moduleName = $monitor->module_name ?? null;
+
+        if ($moduleName === null) {
+            return true;
+        }
+
+        $enabledModules = $this->getModuleConfig('enable_only');
+        if (!empty($enabledModules)) {
+            return isset($enabledModules[$moduleName]);
+        }
+
+        $disabledModules = $this->getModuleConfig('disable');
+        return !isset($disabledModules[$moduleName]);
     }
 
 /**
@@ -267,5 +288,13 @@ public function unsetMonitors() {
 	}
 }
 
+    protected function getModuleConfig(string $key): array
+    {
+        if (!empty($this->moduleConfig[$key])) {
+            return array_flip($this->moduleConfig[$key]);
+        }
+
+        return [];
+    }
 }
 

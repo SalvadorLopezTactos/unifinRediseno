@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Előrejelzések',
     'ForecastWorksheets' => 'Előrejelzés munkalapok',
     'ForecastManagerWorksheets' => 'Előrejelzés-kezelő munkalap',
-    'MergeRecords'=>'Rekordok egyesítése',
       'VisualPipeline'=>'Vizuális adatcsatorna',
       'ConsoleConfiguration' => 'Konzol konfiguráció',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Szerepek',
     'Notifications'=>'Értesítések',
     'Sync'=>'Szinkronizálás',
+    'HintAccountsets' => 'TippFiókbeállítás',
+    'HintNotificationTargets' => 'TibbÉrtesítésekCélpontok',
+    'HintNewsNotifications' => 'TippHírekÉrtesítések',
+    'HintEnrichFieldConfigs' => 'TippMezőkitöltésBeállítások',
     'ReportMaker' => 'Összetett jelentések',
     'DataSets' => 'Adatformátumok',
     'CustomQueries' => 'Egyéni lekérdezések',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Megvásárolt tételsorok',
     'MobileDevices' => 'Mobileszközök',
     'PushNotifications' => 'Értesítések',
+    'Escalations' => 'Eszkalálások',
+    'DocumentTemplates' => 'Dokumentumsablonok',
+    'DocumentMerges' => 'Dokumentumösszeolvadások',
     'WorkFlow' => 'Munkafolyamat meghatározások',
     'EAPM' => 'Külső kliensek',
     'Worksheet' => 'Munkalap',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Szabadság',
     'ChangeTimers' => 'Időzítők módosítása',
     'Messages' => 'Üzenetek',
+    'Audit' => 'Ellenőrzés',
+    'RevenueLineItems' => 'Bevételi sor tételei',
+    'DocuSignEnvelopes' => 'DocuSign borítékok',
+    'Geocode' => 'Geokód',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Fe',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'AV',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'ÜK',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DS',
+        'DocumentMerges' => 'DÖ',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Előrejelzési munkalap',
     'ForecastManagerWorksheets' => 'Előrejelzés-kezelő munkalap',
     'Quotas' => 'Előírás',
-    'MergeRecords'=>'Rekordok egyesítése',
     'Teams' => 'Csoport',
     'TeamNotices' => 'Csoport közlemény',
     'Activities' => 'Tevékenység',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Vásárlás',
     'PurchasedLineItems' => 'Megvásárolt tételsor',
     'PushNotifications' => 'Értesítések',
+    'Escalations' => 'Eszkalálás',
+    'DocumentTemplates' => 'Dokumentumsablon',
+    'DocumentMerges' => 'Dokumentumösszeolvadás',
     'WorkFlow' => 'Munkafolyamat',
     'EAPM' => 'Külső kliens',
     'Worksheet' => 'Munkalap',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Szabadság',
     'ChangeTimers' => 'Időzítő módosítása',
     'Messages' => 'Üzenet',
+    'Audit' => 'Ellenőrzés',
+    'DocuSignEnvelopes' => 'DocuSignBoríték',
+    'HintAccountsets' => 'TippFiókbeállítás',
+    'HintNotificationTargets' => 'TippÉrtesítésekCélpontok',
+    'HintNewsNotifications' => 'TippHírekÉrtesítések',
+    'HintEnrichFieldConfigs' => 'TippMezőkitöltésBeállítások',
+    'Geocode' => 'Geokód',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Hasznosítás',
     'Other' => 'Egyéb',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF és CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Folyamatban',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Tudásbázis',
       'PurchasedLineItems' => 'Megvásárolt tételsor',
       'Purchases' => 'Vásárlás',
+      'Escalations' => 'Eszkalálás',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Kliens',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Megjegyzés',
     'PurchasedLineItems' => 'Megvásárolt tételsor',
     'Purchases' => 'Vásárlás',
+    'Escalations' => 'Eszkalálás',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Megrendelve',
       'Ship' => 'Kiszállítva',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktív',
+        'Inactive' => 'Inaktív',
+        'Retired' => 'Visszavonult',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Rendszerbeállítás használata',
+        'light' => 'Világos',
+        'dark' => 'Sötét',
+    ],
 
 
   'pricing_formula_default_key' => 'Javítva',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televizió',
         'NewsLetter' => 'Hírlevél',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'KAP',
+      'POST' => 'KÖZZÉTESZ',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,14 +2049,16 @@ $app_list_strings = array (
         'print'       => 'Nyomtatás',
         'pieWedgeName'      => 'szekciók',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Kördiagram',
-        'bar chart' => 'Függőleges Oszlopdiagram',
-        'group by chart' => 'Függőleges Csoportos Oszlopdiagram',
-        'horizontal bar chart' => 'Vízszintes hasábdiagram',
-        'horizontal group by chart' => 'Vízszintes  Csoportos Hasábdiagram',
+        'donut chart' => 'Kördiagram',
+        'treemap chart' => 'Treemap diagram',
+        'bar chart' => 'Függőleges sordiagram',
+        'group by chart' => 'Függőleges, csoportosított sordiagram',
+        'horizontal bar chart' => 'Vízszintes sordiagram',
+        'horizontal group by chart' => 'Vízszintes, csoportosított sordiagram',
         'line chart' => 'Vonal diagram',
-        'funnel chart' => 'Tölcsérdiagram',
+        'funnel chart' => 'Csatornadiagram',
     ),
     'd3_value_placement' => array (
         '0'            => 'Egyik sem',
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Ár (a legmagasabb összeg)',
             'total_revenue:asc' => 'Ár (a legalacsonyabb összeg)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Naptárközpont',
+        ],
+        'calendar_views_options' => [
+          'day' => 'nap',
+          'week' => 'hét',
+          'workWeek' => 'Munkahét',
+          'expandedMonth' => 'hónap',
+          'agenda' => 'Napirend',
+          'timeline' => 'Idővonal',
+          'monthSchedule' => 'Ütemező',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Létrehozva',
+          'completed' => 'Befejezve',
+          'declined' => 'Elutasított',
+          'delivered' => 'Kézbesített',
+          'sent' => 'Elküldve',
+          'signed' => 'Aláírt',
+          'voided' => 'Érvénytelenített',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Alapértelmezett',
+            'color' => 'Szín',
+            'image' => 'Kép',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Új',
+            'In Progress' => 'Folyamatban',
+            'Closed' => 'Lezárt',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Inaktivitás',
+            'Lack of Progress' => 'Előrelépés hiánya',
+            'Customer-Imposed Deadline' => 'Ügyfél által kijelölt határidő',
+            'Account at Risk' => 'Veszélyben lévő kliens',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Ügyfél által kért',
+            'Internally Requested' => 'Belülről kért',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Eset',
+            'Bugs' => 'Hiba',
+            'Accounts' => 'Kliens',
+            'Opportunities' => 'Lehetőség',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Pozitív',
+            'Negative' => 'Negatív',
+            'Neutral' => 'Semleges',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Valószínűtlen',
+            '02_less_likely' => 'Kevésbé valószínű',
+            '03_neutral' => 'Semleges',
+            '04_more_likely' => 'Valószínűbb',
+            '05_very_likely' => 'Nagyon valószínű',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Nem egyezik az ügyféllel',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Egyezik az ügyféllel',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Követő link',
   'LBL_TOGGLE_VISIBILITY' => 'Láthatóság szabályozása', // Record view header panel element
   'LBL_ACTIVITIES' => 'Tevékenységek',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'A SugarCRM, a Sugar és a 3-D kocka a SugarCRM Inc. bejegyzett védjegyei. '.
         'A termékben használt vagy abban megjelenő minden más cég- és terméknév az adott, '.
         'A SugarCRM ®, a Sugar Enterprise™ és a  Sugar™ SugarCRM Inc. védjegyek.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Hozzáadás' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Cég logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Naptár' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Az Ön által kiválasztott legördülő menő megváltoztatta a bejegyzésnézet elrendezését. ' .
+        'Az új elrendezésben elrejtett mezők értékei törlésre kerültek. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'fő menü navigáció',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Bezár',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} megjelölve {{status}}-ként.',
 
+    'LBL_FOCUS' => 'Fókusz',
+
     'LBL_QUERY_VALID'=>'Érvényes',
     'LBL_QUERY_ERROR'=>'Hiba!',
     'LBL_QUERY_CHILD'=>'Érvényes lekérdezés',
@@ -3068,8 +3185,12 @@ $app_strings = array (
     'LBL_CASES'=>'Esetek',
     'LBL_MESSAGE'=>'Üzenet',
     'LBL_MESSAGES'=>'Üzenetek',
+    'LBL_ESCALATIONS' => 'Eszkalálások',
+    'LBL_ESCALATION' => 'Eszkalálás',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSign borítékok',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSign boríték',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
-    'LBL_CHANGE_PASSWORD' => 'Jelszó módosítása',
+    'LBL_CHANGE_PASSWORD' => 'Jelszó megváltoztatása',
     'LBL_CHANGE_BUTTON_LABEL' => 'Módosítás',
     'LBL_CHANGE_BUTTON_TITLE' => 'Módosítás',
     'LBL_CHARSET' => 'UTF-8',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Nyitott tételek:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Email írása',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'E-mail',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Email írása',
     'LBL_SEARCH_DROPDOWN_YES'=>'Igen',
     'LBL_SEARCH_DROPDOWN_NO'=>'Nem',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumentumok',
     'LBL_DATE_ENTERED' => 'Létrehozás dátuma:',
     'LBL_DATE_MODIFIED' => 'Módosítás dátuma:',
+    'LBL_ACTIVITY_MODIFIED' => 'Módosítva',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Áttekintés fül szerkesztése',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Modul fülek szerkesztése',
     'LBL_EDIT_BUTTON' => 'Szerkesztés',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Válasszon mezőt...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Válasszon kiszolgálót...',
     'LBL_FILTER_CREATE_NEW' => 'Új létrehozása',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Szűrő készítése (mentetlen)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Mentetlen)',
     'LBL_FILTER_CREATE_FILTER' => 'Új szűrő létrehozása',
     'LBL_FILTER_CLOSE_FILTER' => 'Szűrő bezárára',
     'LBL_FILTER_EDIT_FILTER' => 'Szűrő módosítása',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Több {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Mai tevékenységek',
     'LBL_LEADS'=>'Ajánlások',
+    'LBL_LEAD'=>'Ajánlás',
+    'LBL_QUOTES_BILL_TO' => 'Árajánlatok (Számlázási cím)',
     'LBL_LESS' => 'kevesebb',
     'LBL_CAMPAIGN' => 'Kampány:',
     'LBL_CAMPAIGNS' => 'Kampányok',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Kérem, válasszon legalább 2 rekordot a folytatáshoz!',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Kérem, válasszon kevesebb, mint 10 rekordot a folytatáshoz!',
     'LBL_LISTVIEW_ALL' => 'Mind',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => '1. oszlop fagyasztása',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Minden másolat',
     'LBL_LISTVIEW_NONE' => 'Kijelölések megszüntetése',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Aktuális oldal kijelölése',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Mindent kijelöl',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Kijelölt Rekordok',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Kiválasztva: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Kijelölések megszüntetése.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Minden kijelölés megszüntetése.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Az összes rekord kijelölése',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Több mint {{num}} rekord szerepel a keresési eredmények között. Ön kiválasztotta az első {{num}} rekordot.',
     'TPL_LISTVIEW_SELECTED' => 'Kiválasztott {{num}} rekordok a keresési eredmények közül.',
+    'TPL_LISTVIEW_SELECTED_ONE' => '1 bejegyzést választott ki az eredmények közül.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Ön kiválasztotta az összes rekordot ({{num}}) a keresési eredmények közül.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Ön kiválasztotta az összes rekordot ({{num}}) ebben a nézetben. ({{link}} - link a keresési eredményekhez.)',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Frissítés {{num}} / {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Frissítés {{num}} / {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(körülbelül {{time}} {{unit}} van hátra)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Sikertelen tömeges frissítés. Ismételt próbálkozás ({{num}} / {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Befejezetlen tömeges frissítés. {{num}} rekord változatlan maradt.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} rekord figyelmen kívül hagyva engedélyek vagy hibák miatt.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} sikeresen frissítve.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} modul tömeges frissítése',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Törlés {{num}} / {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Törlés {{num}} / {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(körülbelül {{time}} {{unit}} van hátra)',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Tömeges törlés sikertelen. Ismételt próbálkozás ({{num}} / {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Tömeges törlés sikertelen. {{num}} rekord megmaradt.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Kiválasztás és szerkesztés',
     'LBL_LISTVIEW_ACTIONS' => 'Műveletek',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Az oldalon található összes bejegyzés kijelölése',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Az oldalon található összes bejegyzés kijelölésének törlése',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} / {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}}/Betöltés...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Kattintson az összeghez',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'a',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Oldalak számának lekérése',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'David',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Livingstone',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Speciális kód',
     'LBL_LOGIN_TO_ACCESS' => 'A hozzáféréshez kérem, jelentkezzen be!',
     'LBL_LOGOUT' => 'Kijelentkezés',
+    'LBL_FINISH_IMPERSONATING' => 'Megszemélyesítés befejezése',
+    'LBL_RESET_MFA' => 'Többlépcsős hitelesítés alaphelyzetbe állítása',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, Ön jelenleg {{user}} nevében cselekszik.',
     'LBL_PROFILE' => 'Profil',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Körlevél',
     'LBL_MASS_UPDATE' => 'Tömeges frissítés',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Minden bejegyzés kijelölése csoportos frissítésre',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Bejegyzés hozzáadása a csoportos frissítéshez',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Mező hozzáadása',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Mező törlése',
     'LBL_GENERATE_QUOTE' => 'Árajánlat összeállítása',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'További információ',
     'LBL_PANEL_BODY' => 'Áttekintés',
     'LBL_PARENT_TYPE' => 'Szülő típus',
+    'LBL_RELATED_TYPE' => 'Kapcsolódó típus',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Tartomány',
     'LBL_PICTURE_FILE' => 'Kép',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Kapcsolódó',
     'LBL_RELATED_INFORMATION' => 'Kapcsolódó információ',
-    'LBL_RELATED_RECORDS' => 'Kapcsolódó rekordok',
+    'LBL_RELATED_RECORDS' => 'Kapcsolódó {{module}}',
     'LBL_REPORTS_TO' => 'Jelentést tesz',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Kötelező mezőt jelöl',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Minden jog fenntartva.<br />A SugarCRM, a Sugar és a 3-D kocka a SugarCRM Inc. bejegyzett védjegyei. '.
         'A termékben használt vagy abban megjelenő minden más cég- és terméknév az adott, '.
         'hozzá kapcsolódó vállalat védjegye lehet.',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'Törlés visszavonása',
     'LBL_UNSYNC' => 'Szinkronizálás megszüntetése',
     'LBL_UPDATE' => 'Frissítés',
+    'LBL_UPDATES' => 'Frissítések',
     'LBL_USER_LIST' => 'Felhasználó lista',
     'LBL_USER_MENU' => 'Felhasználó Menű',
     'LBL_USERS_SYNC'=>'Felhasználók szinkronizálása',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'Ön törölte a(z)',
     'NTC_UNLINK_CONFIRMATION' => 'Biztos benne, hogy le szeretné választani ezt a rekordot?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Biztos benne, hogy el akarja távolítani ezt: {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Biztos benne, hogy szeretné leválasztani a következőt: {0}? Ezzel eltávolítja ezt az ügy Elsődleges kapcsolatmezőjéből is.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'A következőt nem lehet leválasztani: {0}, mert ez az ügy elsődleges kapcsolattartója. Frissítse az Elsődleges kapcsolatmezőt a bejegyzés leválasztása előtt.',
     'NTC_UNLINK_SUCCESS' => 'Ön leválasztotta a(z)',
     'NTC_LOGIN_MESSAGE' => 'Kérjük, adja meg felhasználói nevét és jelszavát!',
     'NTC_NO_ITEMS_DISPLAY' => 'egyik sem',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'A böngésző frissítésével automatikusan bezár minden megnyitott SugarLive hívást vagy szöveges üzenetváltást és az el nem mentett módosítások elvesznek. Biztos, hogy folytatni szeretné?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Nem mentett változások szerepelnek az oldalon. Biztos benne, hogy elhagyja az oldalt mentés nélkül?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Biztos benne, hogy szeretné alaphelyzetbe állítani a <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">többlépcsős bejelentkezést</a>? 
+Ha végrehajtja, akkor a rendszer azonnal kilépteti Önt és újra meg kell adnia a hitelesítő adatait a hitelesítő alkalmazáson keresztül, amikor legközelebb be szeretne jelentkezni.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Megerősítés és kijelentkezés',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'A műszerfal egy vagy két elemében el nem mentett módosítások vannak. Biztosan be akarja zárni a fiókot?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Ön áttér a Jelentések modulba; a dashlet változásai nem kerülnek mentésre. Folytatja?',
     'ERROR_NO_RECORD' => 'Nem sikerült lekérni a rekordot. A rekordot törölték, vagy nincs jogosultsága a megtekintésre.',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Önnek jelenleg nincsenek mentett rekordjai.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Ezt egy .list listából tudja létrehozni.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Pozitív',
+    'LBL_SENTIMENT_NEUTRAL' => 'Semleges',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negatív',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Kattintson ide",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'Új jegyzet létrehozása',
     'LBL_CREATE_OPPORTUNITY' => 'Lehetőség létrehozása',
     'LBL_SCHEDULE_CALL' => 'Hívások naplózása',
+    'LBL_SCHEDULE_CALL2' => 'Hívás',
     'LBL_SCHEDULE_MEETING' => 'Találkozó ütemezése',
+    'LBL_SCHEDULE_MEETING2' => 'Találkozó',
     'LBL_CREATE_MESSAGE' => 'Üzenet létrehozása',
+    'LBL_CREATE_MESSAGE2' => 'Üzenet',
     'LBL_CREATE_TASK' => 'Feladat létrehozása',
+    'LBL_CREATE_TASK2' => 'Feladat',
     'LBL_REMOVE_FROM_FAVORITES' => 'Eltávolítás a Kedvencek közül',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Megjegyzés',
     'LBL_DOWNLOAD_ALL' => 'Összes letöltése',
     'LBL_DOWNLOAD_ONE' => 'Letöltés',
     'LBL_ATTACHMENTS' => 'Csatolmányok',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Sorok megjelenítése',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Hozzákapcsolás az aktuális rekordhoz',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Linkelt mező',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Első oszlop fagyasztása',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Biztosan el akarja távolítani a Sugar Dashlet-et?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Biztos benne, hogy törli a sort?',
     'LBL_MAXIMUM_OF' => 'Maximálisan',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'oszlop jeleníthető meg.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Műszerfal',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Műszerfalam',
     'LBL_COLLAPSE_ALL' => 'Az összes bezárása',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'Beállít',
     'LBL_DASHLET_TOGGLE' => 'Dashboard láthatóság beállítása',
     'LBL_SIDEPANE_TOGGLE' => 'Oldalsó panel megnyitása/lezárása',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Alapértelmezett Dashletek visszaállítása',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Nincsenek műszerfalak beállítva',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Műszerfal létrehozása',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Súgó',
     'LBL_HELPLET_TOGGLE' => 'Megnyitás/lezárás',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Modulok',
     'LBL_FACET_MODIFIED_BY_ME' => 'Módosítva általam',
     'LBL_FACET_CREATED_BY_ME' => 'Általam létrehozva',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Rekord nézet',
+    'LBL_RELATED_RECORDS' => 'Kapcsolódó {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Megjelenít egy rekordot, illetve opcionálisan a kapcsolódó rekordokat füleken.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Alap rekord típusa',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Ez a(z) {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Jelenleg nem található rekord.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Ügyek összegzése',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interakciók',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Idővonal',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Mellékletek',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Jegyzetek & mellékletek, amelyek a rekordhoz tartoznak',
     'LBL_DASHLET_PIPLINE_NAME' => 'Adatcsatorna',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Feltöltés a számítógépéről',
     'LBL_SEARCH_EXTERNAL_API' => 'Külső forrásból származó fájl',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Feltöltés külső forrásra',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Hivatkozás külső forrásról',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Biztonság',
     'LBL_SHARE_PRIVATE' => 'Magán',
     'LBL_SHARE_COMPANY' => 'Cég',
@@ -4316,6 +4481,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Gyorsbillentyűk',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Sablonkezelő gombok - Alt+</strong><br/> I = szerkesztés (detailview)<br/> U = kettőzés (detailview)<br/> D = törlés (detailview)<br/> A = mentés (editview)<br/> L = visszavonás (editview) <br/><br/></p><p><strong>Keresés és navigáció - Alt+</strong><br/> 7 = az első adat szerkesztése<br/> 8 = összetett keresés<br/> 9 = első keresési bejegyzés<br/> 0 = egyesített keresés<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Eszkalál',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Megosztás',
     'TPL_RECORD_SHARE_SUBJECT' => 'Megosztott {{module}} {{name}} innen: {{appId}}',
@@ -4388,7 +4556,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Ön épp az elsődleges rekord cseréjére készül anélkül, hogy a változtatásokat mentette volna. Minden változás el fog veszni. Biztos benne, hogy folytatni kívánja?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Kapcsolódó rekordok összevonása',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Összevonva: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Összevonva: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'A kapcsolódó {{objectName}} összevonása sikertelen. Ismételt próbálkozás: {{num}} / {{total}}.',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4442,14 +4610,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'Nyelv',
     'LBL_LOADING_LANGUAGE' => 'Nyelvi csomag betöltése',
     'LBL_UPLOADING' => 'Feltöltés',
+    'LBL_UPLOADING_DOTS' => 'Feltöltés...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Biztos benne, hogy törölni kívánja ezt a képet?',
     'LBL_FILE_DELETE_CONFIRM' => "Biztos benne, hogy törölni kívánja ezt a fájlt? Később nem lehet visszavonni.",
     'LBL_FILE_DELETED' => 'Fájl sikeresen törölve',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Portál téma',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Portál téma beállítása',
-    'LBL_THEME_PREVIEW' => 'Téma előnézet',
+    'LBL_THEME_PREVIEW' => 'Portálstílus előnézete',
     'LBL_LOADING_PREVIEW' => 'Előnézet betöltése',
     'LBL_RESET' => 'Visszaállít',
     'LBL_COLORS' => 'Színek',
@@ -4600,10 +4768,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Találkozók',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Feladatok',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Hívások',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Kliensek',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kapcsolatok',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Emailek',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Műszakok',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Megajánlott Tételek',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Műszakra vonatkozó kivételek',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentumok',
+    'LBL_ESCALATIONS' => 'Eszkalálások',
+    'LBL_ESCALATED' => 'Eszkalált',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Eszkalálások',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Egyéb kapcsolódó eszkalálások',
+    'LBL_ESCALATIONS' => 'Eszkalálások',
     'LNK_SETTINGS' => 'Beállítások',
     'LBL_MOBILE_SUPPORT' => 'Támogatás',
     'LBL_MOBILE_SHOW_MORE' => 'Több mutatása...',
@@ -4811,6 +4987,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Szerveridő lekérése sikertelen',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'A kapcsolat nélküli mód engedélyezése sikertelen. A szerver nem elérhető.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Külső',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Rendszerbeállítás használata',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Világos',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Sötét',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Új fájlnév',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Fájl átnevezése',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Általam létrehozva',
+    'LBL_OPERATOR_CONTAINS' => 'eleme ennek:',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'nem eleme ennek:',
+    'LBL_OPERATOR_EMPTY' => 'üres',
+    'LBL_OPERATOR_NOT_EMPTY' => 'nem üres',
+    'LBL_OPERATOR_MATCHES' => 'pontosan megegyezik',
+    'LBL_OPERATOR_STARTS_WITH' => 'ezzel kezdődik:',
+    'LBL_OPERATOR_EQUALS' => 'egyenlő ezzel:',
+    'LBL_OPERATOR_NOT_EQUALS' => 'nem egyenlő ezzel:',
+    'LBL_OPERATOR_GREATER_THAN' => 'több, mint',
+    'LBL_OPERATOR_LESS_THAN' => 'kevesebb, mint',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'nagyobb, vagy egyenlő ezzel:',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'kevesebb, vagy egyenlő ezzel:',
+    'LBL_OPERATOR_BETWEEN' => 'közéjük esik:',
+    'LBL_OPERATOR_BEFORE' => 'korábban',
+    'LBL_OPERATOR_AFTER' => 'később',
+    'LBL_OPERATOR_YESTERDAY' => 'tegnap',
+    'LBL_OPERATOR_TODAY' => 'ma',
+    'LBL_OPERATOR_TOMORROW' => 'holnap',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'előző 7 nap',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'következő 7 nap',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'elmúlt 30 nap',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'következő 30 nap',
+    'LBL_OPERATOR_LAST_MONTH' => 'előző hónap',
+    'LBL_OPERATOR_THIS_MONTH' => 'ez a hónap',
+    'LBL_OPERATOR_NEXT_MONTH' => 'következő hónap',
+    'LBL_OPERATOR_LAST_YEAR' => 'előző év',
+    'LBL_OPERATOR_THIS_YEAR' => 'aktuális év',
+    'LBL_OPERATOR_NEXT_YEAR' => 'következő év',
+    'LBL_OPERATOR_IS' => 'ez:',
+    'LBL_OPERATOR_IS_NOT' => 'nem ez:',
+    'LBL_ERROR_FILTER_EMPTY' => 'Kérjük, adjon hozzá szűrési feltételt.',
+    'LBL_ADD_FILTER' => 'Feltétel hozzáadása',
+    'LBL_FILTER_NAME' => 'Szűrő neve',
+    'LBL_FILTER_FIELD' => 'Mező',
+    'LBL_FILTER_OPERATOR' => 'Kezelő',
+    'LBL_FILTER_VALUE' => 'Érték',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Mentés az asztali alkalmazásba',
+    'LBL_FILTER_LOCAL' => 'Helyi szűrő',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Üdvözli a SugarCRM!<br /><br />Hadd ismertessük meg néhány új funkcióval...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Főmenü navigáció.',
@@ -4856,6 +5081,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'Megjegyzés hozzáadása',
     'LBL_REQUIRED' => 'Szükséges',
     'LBL_MORE_BUTTON' => 'További',
+    'LBL_NO_OPTIONS' => 'Nincsenek elérhető lehetőségek',
     'LBL_TRY_AGAIN' => 'Próbálja újra',
     'LBL_NEW_RECORDS' => 'Utoljára létrehozott',
     'LBL_ASSIGNED_TO_ME' => 'Saját {{{module}}}',
@@ -5081,11 +5307,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Biztos benne, hogy be szeretné zárni ezt a csevegőablakot?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Feljegyzés létrehozása vagy melléklet csatolása',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Feljegyzés hozzáadása',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Sikertelen bejelentkezés. Kérjük, próbálja meg újra.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Érvénytelen azonosító',
-    'LBL_PORTAL_INVALID_GRANT' => 'A token lejárt vagy érvénytelen. Kérjük, jelentkezzen be újra!',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Lejárt token',
+    'LBL_PORTAL_INVALID_GRANT' => 'A munkamenet lejárt. Kérjük, jelentkezzen be újra.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'A munkamenet lejárt',
     'LBL_PORTAL_AUTH_FAILED' => 'Az azonosítás sikertelen.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Érvénytelen kliens',
     'LBL_PORTAL_INVALID_REQUEST' => 'Érvénytelen parancs. Kérjük, lépjen kapcsolatba a technikai segítségnyújtással!',
@@ -5119,6 +5349,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Alapértelmezett műszerfal visszaállítása',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Megújítások konzol',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Áttekintés',
@@ -5138,6 +5370,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Az üzenet összefoglalása',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'A hívás összefoglalása',
     'LBL_OMNICHANNEL_LINK_TO' => 'Hivatkozás innen: {{fromModule}} ide: {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Hivatkozás a következőhöz: {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Csatlakoztatott',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Az Ön böngészője nem támogatja a csevegés szolgáltatást. Kérjük, használjon Google Chrome vagy Mozilla Firefox böngészőt.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Kérjük, lépjen kapcsolatba a Sugar Adminisztrátorával segítségért.',
@@ -5145,6 +5378,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Kérjük, fejezze be a SugarLive rendszer beállítását a kimenő hívás indítása előtt.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Kérjük, fejezze be a SugarLive rendszer elrendezésének beállítását a SugarLive megnyitása előtt.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'A SugarLive elrendezésének beállítása előtt állítsa az állapotát az "Offline" lehetőségre.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Kompakt nézet',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Teljes nézet',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'A fül alaphelyzetbe állítása',
@@ -5556,9 +5791,12 @@ $app_strings = array (
     'LBL_BEST' => 'Legjobb',
     'LBL_WORST' => 'Legrosszabb',
     'LBL_LIKELY' => 'Valószínű',
-    'LBL_BEST_ADJUSTED' => 'Legjobb (korrigált)',
-    'LBL_WORST_ADJUSTED' => 'Legrosszabb (korrigált)',
-    'LBL_LIKELY_ADJUSTED' => 'Valószínű (korrigált)',
+    'LBL_BEST_FORECAST' => 'Elkötelezett (legjobb)',
+    'LBL_WORST_FORECAST' => 'Elkötelezett (legrosszabb)',
+    'LBL_LIKELY_FORECAST' => 'Elkötelezett (valószínű)',
+    'LBL_BEST_ADJUSTED' => 'Beállított elkötelezett (legjobb)',
+    'LBL_WORST_ADJUSTED' => 'Beállított elkötelezett (legrosszabb)',
+    'LBL_LIKELY_ADJUSTED' => 'Beállított elkötelezett (valószínű)',
     'LBL_AMOUNT_USDOLLAR' => 'Összeg',
     'LBL_OVERDUE' => 'Idejétmúlt',
 
@@ -5579,6 +5817,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'További információ itt: {{{more_info_url}}} {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Nincs elérhető adat',
+    'LBL_NEED_HELP' => 'Segítségre van szüksége valami újdonsággal kapcsolatban?',
+    'LBL_NEW_CASE' => 'Új eset',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'A Segítség dashlet az aktuálisan megnyitott modullal kapcsolatban tartalmaz információkat, linkeket a modul dokumentációjára vonatkozóan.',
@@ -5714,9 +5954,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Nincs válasz',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Az ütemezés nem érhető el',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Elérhető nézetek',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Naptárütemező',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Alapértelmezett nézet',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Naptáraim',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Felhasználói és Csapatnaptárak',
+    'LBL_CALENDAR' => 'Naptár',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Hiba történt az ütemezés visszaállítása során.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Mentés és Meghívók elküldése',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Státusz elfogadás',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Folyamatok',
@@ -5833,15 +6083,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Másolás megerősítési hivatkozás',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interakciók',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Interakciók',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Idővonal',
+    'LBL_NO_ACTIVITY' => 'Nincs tevékenység',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} idővonal',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Több',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Kevesebb',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Az idővonal megmutatja a hívásokat, e-maileket, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Több mutatása...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Kevesebb mutatása...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Nincs elérhető adat',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'A modul nem rendelkezik licenccel.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktív előfizetések',
@@ -5890,8 +6146,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Figyelemfelhívás bezárása',
     'LBL_EXTERNAL_GUESTS' => 'Külső vendégek',
     'LBL_MY_FAVORITE_TASKS' => 'Kedvenc feladataim',
+
     'LBL_MY_TASKS' => 'Feladataim',
 
     // Sugar Integrate
@@ -5908,7 +6166,367 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'Típus',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean azonosító',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Címke megjelenítése',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Bejegyzésnézőke megnyitása',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Hozzáadás',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Súgó nem elérhető',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funkciók',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Mezők',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Mező kiválasztása...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Felgöngyölít',
+    'LBL_ACTIONBUTTON_RELATED' => 'Kapcsolódó',
+    'LBL_ACTIONBUTTON_SAVE' => 'Mentés',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Mégsem',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Kapcsolódó modul',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Kapcsolódó mezők',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Fölgöngyölítő modul',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Felgöngyölítő mezők',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Felgöngyölítés funkciója',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Minimum',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Maximum',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Átlag',
+    'LBL_ACTIONBUTTON_SUM' => 'Összesen',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Bejegyzések hozzárendelése',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'E-mail írása',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Bejegyzés létrehozása',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentumok egyesítése',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'URL megnyitása',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Jelentés futtatása',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Bejegyzés frissítése',
+    'LBL_ACTIONBUTTON_ACTION' => 'Művelet',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Hozzárendel',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'E-mail ide:',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'PMSE használata',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Sablon',
+    'LBL_ACTIONBUTTON_MODULE' => 'Modul',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Megjelenítés beállítása',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Típus',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Legördülő',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Gomb',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Gombcsoport',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'A jelentésben található címke megjelenítése',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Megjelenítés a fejlécben',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Módosítás esetén elrejtés',
+    'LBL_ACTIONBUTTON_SIZE' => 'Méret',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Alapértelmezett',
+    'LBL_ACTIONBUTTON_SMALL' => 'Kicsi',
+    'LBL_ACTIONBUTTON_LARGE' => 'Nagy',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Kiszámított',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Konvertálás PDF formátumba',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentumok egyesítése',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Előnézet',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Tulajdonságok',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Címke',
+    'LBL_ACTIONBUTTON_DESC' => 'Eszköztipp',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Címke megjelenítése',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Ikon megjelenítése',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Színséma',
+    'LBL_ACTIONBUTTON_ICON' => 'Ikon',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Függő',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Elrendezés beállítása',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Megáll hiba esetén',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Automatikus mentés',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfiguráció',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Kérjük, állítsa be az ActionButton kofigurációját mentés előtt.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfigurációs gombok',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Automatikus létrehozás',
+    'LBL_ACTIONBUTTON_LINK' => 'Hivatkozás',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Felsőbb értékek másolása',
+    'LBL_ACTIONBUTTON_PRESET' => 'Előbeállítás',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Előbeállítás szülőtől',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Kiválaszt...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'A szülő mezőből ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Biztosan törölni akarja ezt a gombot?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Biztosan törölni akarja ezt a tevékenységet?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Érvénytelen tevékenységgomb-adat',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Kérjük, mentés előtt válasszon ki egy modult.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Kérjük, mentés előtt válasszon ki egy hivatkozást. Ha nincs elérhető hivatkozás, kérjük, vegye ki a pipát a hivatkozás jelölőnégyzetből.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Kérjük, mentés előtt válasszon ki egy bejegyzést.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Kérjük, mentés előtt válasszon ki egy sablont.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Elsődleges',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Másodlagos',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Oceán',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Rózsaszín',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Terepszín',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Kékeszöld',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Tengerszín',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Zöld',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Sárga',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Narancssárga',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Piros',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Coral',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Lila',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Szabály',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Műveletek',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Hiba a gombadatok hitelesítése közben.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'A gombokhoz legalább egy ikont vagy egy címkét kell rendelnie.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Kérjük, adjon meg egy érvényes gombcímkét.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'A bejegyzést nem lehetett létrehozni, mert szükséges értékek hiányoznak. Kérjük, vegye fel a kapcsolatot a rendszergazdájával.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Legalább két, ebbe a típusba tartozó aktív gombbal kell rendelkeznie.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Nézetek rögzítése',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Tevékenység menük',
+    'LBL_ACTIONBUTTON_ORDER' => 'Sorrend',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Listanézet',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Rekord nézet',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Rekord nézet Dashlet',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Alpanelek',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'A feladat sorrendjének végrehajtásáért felelős motornak nem sikerült végrehajtania a következő tevékenységeket: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Tevékenység hozzáadása',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Tevékenység eltávolítása',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Dokumentumok egyesítése',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Dokumentumok összevonása PDF formátumba',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Cég mérete',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Ágazat',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Ágazat címkéi',
+    'LBL_HINT_COMPANY_LOCATION' => 'Cég elhelyezkedése',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Cég leírása',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Alapítás éve',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Cég Facebook-oldala',
+    'LBL_HINT_COMPANY_TWITTER' => 'Cég Twitter-oldala',
+    'LBL_HINT_COMPANY_PIC' => 'Cég logo',
+    'LBL_HINT_CONTACT_PIC' => 'Cég fényképe',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Cég weboldala',
+    'LBL_HINT_PHOTO' => 'Fényképhivatkozás',
+    'LBL_HINT_JOB_2' => 'Korábbi munkák',
+    'LBL_HINT_EDUCATION' => 'Képzés',
+    'LBL_HINT_EDUCATION_2' => 'További képzés',
+    'LBL_HINT_TWITTER' => 'Twitter-hivatkozás',
+    'LBL_HINT_FACEBOOK' => 'Facebook-hivatkozás',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS kód',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SIC kód',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Pénzügyi év vége',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Éves bevétel',
+    'LBL_HINT_PHONE_1' => '1. telefonszám',
+    'LBL_HINT_PHONE_2' => '2. telefonszám',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Csatlakozás az asztalhoz',
+    'LBL_HINT_FULL_NAME' => 'Teljes név',
+    'LBL_HINT_JOB_TITLE' => 'Munkahelyi titulus',
+    'LBL_HINT_OFFICE_PHONE' => 'Irodai telefon',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobil',
+    'LBL_HINT_OTHER_PHONE' => 'További telefon',
+    'LBL_HINT_WEBSITE' => 'Honlap',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Szeretné felülírni a létező adatokat ennél a bejegyzésnél a Hintben talált új adatokkal?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Szeretné felülírni a létező {{fieldName}}-t ennél a bejegyzésnél a Hintben talált új {{fieldName}}-val?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Minden vonatkozó fiókadat törlésre kerül. Biztosan folytatni akarja?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logó',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Fénykép',
+    'LBL_HINT_ACCOUNTSETS' => 'Hint Fiókbeállítások Címkék',
+
+    'LBL_HINT_LOADING' => 'Betöltés ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Hint eltávolítása, kérem, várjon',
+    'LBL_HINT_VALUE_ERASED' => ' Érték törölve ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Az információt töröltük adatvédelmi kérés nyomán',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Kérjük, válasszon egyet az alábbi eltávolítási lehetőségek közül:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Csak a Hint csomag törlése',
+    'LBL_HINT_UNINSTALL_FULL' => 'A Hint teljes törlése',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Ez a lehetőség eltávolítja a Hint MLP-t és kikapcsolja az összes aktív Hint Insights előfizetést.
+    A Hint MLP visszatelepítése újraaktiválja az előfizetéseket.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Ez a lehetőség teljesen eltávolítja a Hintet, beleértve az MLP-t és a beállításokat, valamint előfizetésadatokat is.',
+    'LBL_HINT_UNINSTALL' => 'Eltávolítás',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Hint eltávolítása',
+    'LBL_HINT_CANCEL' => 'Mégsem',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'FIGYELMEZTETÉS: csak akkor válassza ezt a lehetőséget, ha nem akarja használni a Hintet a jövőben.
+    Az eltávolítás végrehajtása előtt készítsen egy teljes biztonsági mentést a Sugar adatbázisáról és állítsa a Sugart karbantartási módba. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Lásd a következőt: ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hind rendszergazdai útmutató ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'az eltávolítási folyamattal kapcsolatos részletekért.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Biztos benne, hogy csak a Hint-csomagot szeretné eltávolítani?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Biztos benne, hogy szeretné teljesen eltávolítani a Hintet?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(MEGJEGYZÉS: EZ A LÉPÉS NEM VISSZAVONHATÓ)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hint mezők',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Nincs találat.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Alapvető Hint Panel elrendezése',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Kliensek',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kapcsolatok',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Ajánlások',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Kiterjesztett Hint Panel elrendezése',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Átrendezheti a mezőket ha a fenti Hint Panel elrendezés szakaszon belül más helyre húzza őket.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Részletes utasítások és alapértelmezett mezők listája ügyében hivatkozzon a ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' az alapértelmezett beállítások visszaállítása ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'modulra.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Biztos benne, hogy vissza akarja állítani a(z) {{module}} modult az alapértelmezett helyzetbe?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Kattintson ide',
+    'LBL_HINT_CONFIG_NAME' => 'Hind rendszergazdai útmutató.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Mezők',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Kitöltött mezők',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Ez a szakasz listázza az összes olyan Hint és Sugar mezőt, amelyet a Hint töltött ki. A Hint mezők csillaggal (*) vannak jelölve és csak akkor láthatóak a Hint panelen, ha ki vannak töltve.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Mező neve',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Mező kitöltése',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Megjelenítés a Hintben',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Megjelenítés a Hint panelen',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'További Sugar mezők',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Ez a szakasz listázza az összes olyan Sugar mezőt, amit a Hint nem töltött ki.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Figyelmeztetés',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Figyelmeztetés: szinkronizálni készül a Hint Insight szolgáltatást. Minden függőben lévő e-mail kvionat elveszik és az új hírek törlődnek az Insight dashletről. Minden értesítéstípus újra működni fog a szinkronizációt követően.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'A(z) {{_moduleSingular}} modulhoz javasolt vállalatok alább vannak listázva. Válassza ki a cégadatokat a megjelenítéshez.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Nincs kiválasztott fiók',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Több e-mail cím található, válassza ki az importálandó e-maileket: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'A megadott adatok alapján a Hint nem talált egyezést a rendszerben.',
+    'LBL_HINT_HELP_MESSAGE2' => 'A Hinten belül a legjöbb eredmények egy személy neve és e-mail címe.',
+    'LBL_HINT_HELP_MESSAGE3' => 'A Hinten belül a legjöbb eredmények a vállalat weboldalának hivatkozása.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Adja meg a(z) {{_moduleSingular}} vállalat nevét vagy weboldalát és a Hint további adatokat fog keresni.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Adja meg a(z) {{currentModule}} e-mail címét és a Hint további adatokat fog keresni.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Nincsenek elérhető adatok az előzmények áttekintéséhez',
+    'LBL_HINT_HISTORY_TITLE' => 'Tevékenységelőzmények',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Adatkitöltés',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'A SugarCRM Hint szolgálatásának licence lejárt. Vegye fel a kapcsolatot a SugarCRM rendszergazdájával a licent megújításához.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Szeretné tudni, hogy mit tehet a SugarCRM Hint a vállalatáért? Vegye fel a kapcsolatot a SugarCRM adminisztátorával és adja hozzá a Hintet.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Fiókadatok nem találhatóak',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Részletesebb adatok elérhetőek - kattintson ide, ha menteni szeretné a részletes adatokat a rekordjai közé.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Kattintson ide, ha menteni szeretné a részletes adatokat a rekordjai közé.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Kapcsolatai',
+    'LBL_HINT_CONTACTS_NONE' => 'Nincsenek kapcsolatai',
+
+    'LBL_HINT_NEWS' => 'Hírek',
+    'LBL_HINT_GENERAL' => 'Általános',
+    'LBL_HINT_ALL_NEWS' => 'Összes hír',
+    'LBL_HINT_FILTER_NEWS' => 'Hírek szűrése',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Pénzügyi',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Személyzet',
+    'LBL_HINT_PRESS_RELEASES' => 'Sajtótájékoztatók',
+    'LBL_HINT_OTHER_NEWS' => 'Egyéb',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Hírek keresése',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Nincsenek elérhető hírek',
+    'LBL_NEW_NOTIFICATIONS' => 'Új értesítések',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Rendelkeznie kell egy Hint-licenccel a Hint Insights dashlet megtekintéséhez.
+    Érdeklődjön rendszergazdájánál a Hint-licenc beszerzéséről.',
+
+    'LBL_HINT_FOR' => 'Ennek:',
+    'LBL_HINT_WITH' => 'ezzel:',
+    'LBL_HINT_SHOW_ME' => 'Mutasd a következőt: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Értesíts eddig: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Hint Insights Beállításközpont',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Beállítás lehetőség kulcs',
+    'LBL_HINT_PREFERENCES' => 'Tulajdonságok',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Kikapcsoltak törlése, legalább egy beállításnyilatkozatra szükség van',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Kikapcsoltak hozzáadása, elérte a maximum beállításnyilatkozatok számát',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Hozzáadás a Hint Insights dashlethez',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Felugró ablak asztali értesítésként',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Az értesítéseket minden böngészőben és asztali számítógépen engedélyezni kell az értesítések konzisztens megjelenítéséhez.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Néhány böngésző, mint például az Internet Explorer, nem támogatja az értesítéseket. Az értesítéseket nem lehet engedélyezni, ha olyan böngészőt használ, ami nem támogatja az értesítéseket.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Azonnali e-mail figyelmeztetés küldése minden értesítéssel',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Napi e-mail kivonat küldése',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Heti e-mail kivonat küldése',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'A beállítások mentése sikertelen. Ellenőrizze rendszere kapcsolatát és próbálja újra.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Néhány kötelezően kitöltendő mező nem tartalmaz értéket. Kérjük, ellenőrizze e beállításait és győződjön meg róla, hogy minden mező ki van töltve.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Most engedélyezni fogja az értesítések küldését a böngészőjén keresztül a Hint Insights számára. Kattintson a Megerősítés gombra a folytatáshoz. A böngészője ezt követően engedélyt fog kérni az értesítések kézbesítésére.',
+    'LBL_HINT_PUSH_ERROR' => 'A felugró értesítések beépülő modul a hozzá tartozó {{options.type}} nélkül lett regisztrálva. A beépülő modul nem fog rendeltetésszerűen működni; kérjük, ügyeljen a munkafájlhoz vezető útvonal és az előfizetés szerverre történő mentésének módjának megadására.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Hint értesítések BEkapcsolása minden felhasználó számára',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Hint értesítések KIkapcsolása minden felhasználó számára',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'FIGYELMEZTETÉS: az értesítések kikapcsolása meghiúsult a Sugar Hint eltávolítása közben. Az értesítések kikapcsolásához telepítse a Hint 5.4.0 vagy annél újabb verziót és hajtson végre egy teljes eltávolítást a Sugar rendszergazdai felületén található Hint Uninstaller segítségével.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Térképbeállítások',
+    'LBL_MAP_MAP' => 'Térkép',
+    'LBL_MAP_MAPS' => 'Térképek',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geokód',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'A bejegyzés sikeresen geokódolva.',
+    'LBL_MAP_LATITUDE' => 'Szélesség',
+    'LBL_MAP_LONGITUDE' => 'Hosszúság',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Keresés cím szerint...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'A jelenlegi rekord már geokódolva van. Biztosan szeretné felülírni a rekord geokódolását?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Kézi geokódolás',
+    'LBL_MAP_POINT_COORDINATES' => 'Térképpont koordinátái',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Optimális útvonal kiszámítása...',
+    'LBL_MAP_DIRECTIONS' => 'Útvonal',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Útvonal a jelenlegi felhasználótól kezdve',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Útvonal a jelenlegi rekordtól kezdve',
+    'LBL_MAPS_RADIUS_INPUT' => 'Hatósugár (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'hatósugárban az irányítószámtól',
+    'LBL_MAPS_DISTANCE' => 'Távolság',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Irányítószám',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Érvénytelen beállítás: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> mezők feltérképezése érvénytelen.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Térképtípus',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Nagyítás szintje',
+    'LBL_MAPS_DASHLET' => 'Térképek',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Megmutatja a geokódolt helyszín(eke)t a térképen.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'A térkép nem elérhető ehhez a modulhoz. Kérjük, engedélyezze a rendszergazdai parancssorban.',
+    'LBL_MAP_MODULES' => 'Modul',
+    'LBL_MAP_FILTER_BY' => 'Szűrés ... szerint:',
+    'LBL_MAP_UNIT_TYPE' => 'Egységtípus',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Mérföld',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilométer',
+    'LBL_MAP_ADDRESS' => 'Cím',
+    'LBL_MAP_NO_STARTING_POINT' => 'A kezdőpont nincs geokódolva.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'A kezdőpont rekord nincs geokódolva.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Néhány kijelölt rekord nincs geokódolva és nem fog megjelenni a térképen.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'A rekord(ok) nincs(enek) geokódolva.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Modul mezők',
+    'LBL_MAPS_SELECT_FIELD' => 'Mező kiválasztása',
+    'LBL_MAPS_RELATE_RECORD' => 'Kapcsolódó rekordok',
+    'LBL_MAPS_MAPPING_TYPE' => 'Térképezés típusa',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Nincsenek geokódolt rekordok',
+    'LBL_MAPS_ADDRESS' => 'Cím',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Hozzárendelt felhasználó',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Az utcakép-nézet nem elérhető a megadott ponton',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> rekordok érvénytelenek a térképezéshez. Kérjük, távolítsa el a modult a listáról.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Bezár',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Kibővít',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Mentés PDF-be',
+    'LBL_MAPS_EMAIL_LINK' => 'E-mail hivatkozás',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Legalább egy geokódolt rekorddal rendelkeznie kell.',
+    'LBL_MAPS_GENERATING' => 'Térkép létrehozása...',
+    'LBL_MAPS_POINTS' => 'Térképpontok',
+    'LBL_MAPS_POINT' => 'Pont',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Utazás részletei',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Teljes távolság',
+    'LBL_MAPS_TOTAL_DURATION' => 'Teljes időtartam',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Teljes időtartam forgalom nélkül',
+    'LBL_MAPS_ITINERARY' => 'Útvonal',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Utazási távolság',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Utazás időtartama',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Lépések',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Figyelmeztetések',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'A Bing Maps maximum 10 jelölőt támogat a megosztott térképeken. Kérjük, vizsgálja felül a kijelölést.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Térképlicenc szükséges',
+
+    'LBL_INVALID_FORMULA' => 'Érvénytelen képlet',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'A funkció visszaigazolásának típusa nem egyezik meg',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Előrejelzés',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Ideális ügyfélprofil',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Utolsó állapot',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Küldés a DocuSignnak',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Megnyitás',
+    'LBL_CLOSED_WON' => 'Lezárt, megnyert',
+    'LBL_CLOSED_LOST' => 'Lezárt, elvesztett',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6745,8 +7363,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google kapcsolatok',
@@ -7086,6 +7704,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Beágyazott fájl';
     'YER' => 'Riál',
     'ZWD' => 'Zimbabwei dollár',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Nagyon magas',
+        '4' => 'Magas',
+        '3' => 'Semleges',
+        '2' => 'Alacsony',
+        '1' => 'Nagyon alacsony',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Egyik sem',
         'future' => 'Aktuális érték',
@@ -7095,3 +7721,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Beágyazott fájl';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Egyedüli-Nyerő',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Feldolgozás',
+        'error' => 'Hiba',
+        'success' => 'Sikeres',
+        'canceled' => 'Törölt',
+        'document_load' => 'Sablon betöltése',
+        'tags_extract' => 'Címkék kibontása',
+        'tags_validate' => 'Címkék hitelesítése',
+        'data_retrieving' => 'Adatok lekérése',
+        'serialize_document' => 'A dokumentum újraösszeállítása',
+        'send_document' => 'A dokumentum küldése Önnek',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Összefűzés',
+        'convert' => 'PDF összefűzés',
+        'multimerge' => 'Több összefűzése',
+        'multimerge_convert' => 'Több PDF összefűzése',
+        'labelsgenerate' => 'Címkék létrehozása',
+        'labelsgenerate_convert' => 'Címkék létrehozása PDF formátumban',
+        'excel' => 'Excel összevonása',
+        'excel_convert' => 'Excel összevonás és konvertálás',
+        'presentation' => 'PowerPoint összevonása',
+        'presentation_convert' => 'PowerPoint összevonása PDF formátumba',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Klienseim',
+      'favorites' => 'Kedvenc klienseim',
+      'tags' => 'Megjelölt klienseim',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Összes hír',
+      'General' => 'Általános',
+      'Finance' => 'Pénzügyi',
+      'People' => 'Személyzet',
+      'Press Releases' => 'Sajtótájékoztatók',
+      'Other' => 'További telefon',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Tulajdonosok';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Cloud Drive';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Cloud Drive integrálás dashlet';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Hivatkozás másolása';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Letöltés';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Sugar dokumentum létrehozása';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Szinkronizálás Google Drive-ra';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Mind szinkronizálása Google Drive-ra';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'E fájl letöltése nem lehetséges';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'A Cloud dashlet nem elérhető';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugar dokumentum létrehozva';
+
+    $app_string['LBL_MY_FILES'] = 'Fájljaim';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Velem megosztva';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Felhőszolgáltató';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft OneDrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Velem megosztva';
+    $app_strings['LBL_MY_FILES'] = 'Fájljaim';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Fájl feltöltése';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Mappa nem található';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Mappa létrehozása';
+    $app_strings['LBL_LOAD_MORE'] = 'Több betöltése...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Nem található Google-kapcsolat...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Nem található Microsoft-kapcsolat...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-üres-',
+      'Exact' => 'Pontos',
+      'Null_address_components' => 'Egy vagy több címösszetevő üres',
+      'Invalid_address' => 'Érvénytelen cím, a szerver hibát jelez',
+      'Invalid_server_response_not_XML' => 'Érvényvelen válasz a szervertől, nem XML',
+      'Invalid_address_no_location' => 'Érvénytelen cím, a szerver nem küldött vissza helyadatot',
+      'Ambiguous_address' => 'Félreérthető cím, több találat',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Út',
+      'a' => 'Légi',
+      'be' => 'Madárszem',
+      'rd' => 'Sötét út',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

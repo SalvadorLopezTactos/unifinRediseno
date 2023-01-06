@@ -14,8 +14,12 @@
     <div class="modal">
         <div class="modal-header modal-header-firstlogin row-fluid">
             <span class="step-circle">
-                {{#if wizardCompleted}}<i class="fa fa-check-circle"></i>{{/if}}
-                {{#unless wizardCompleted}}<span>{{progress.page}}</span>{{/unless}}
+                {{#if wizardCompleted}}
+                    <i class="sicon sicon-lg sicon-check-circle-lg"></i>
+                {{/if}}
+                {{#unless wizardCompleted}}
+                    <span>{{progress.page}}</span>
+                {{/unless}}
             </span>
             <div class="firstlogin-title span7">
                 <h3>{{str meta.title module}}</h3>

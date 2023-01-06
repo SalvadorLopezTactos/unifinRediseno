@@ -121,7 +121,6 @@
 	</table>
 </form>
 <script type="text/javascript" language="javascript">
-{literal}
 function re_draw_chart(x){
 alert(x.value);
 }
@@ -137,7 +136,6 @@ var toggle = 0;
 			elem.style.display = 'none';			
 		}
 	}
-{/literal}
 </script>
 
 <!-- END: main -->

@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Kliento pavadinimas / pramonės šaka',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Vieta',
     'LBL_PURCHASES' => 'Pirkimai',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Paskyros sąveikos',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kliento laiko juosta',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikai',

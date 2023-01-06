@@ -15,9 +15,11 @@
 <!-- Switch
 ================================================== -->
 <section id="slider">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span3 columns">
@@ -61,7 +63,7 @@
           </tr>
           <tr>
             <td>HTML text</td>
-            <td>&lt;div class="switch" data-on-label="&lt;i class='fa fa-check fa-white'>&lt;/i&gt;" data-off-label="&lt;i class='fa fa-times'&gt;&lt;/i&gt;"&gt;</td>
+            <td>&lt;div class="switch" data-on-label="&lt;i class='sicon sicon-check'>&lt;/i&gt;" data-off-label="&lt;i class='sicon sicon-close'&gt;&lt;/i&gt;"&gt;</td>
             <td>replaces default text with HTML</td>
           </tr>
         </tbody>

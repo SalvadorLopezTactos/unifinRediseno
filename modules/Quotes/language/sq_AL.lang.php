@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfigurimi i kuotave',
 
     'LBL_RENEWAL' => 'Rnovimi',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ndërveprimet e kuotës',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e kuotës',
 );

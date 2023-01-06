@@ -35,20 +35,20 @@ em { font-style: italic; }
 cite { font-style: normal; }
 
 // Utility classes
-.muted { color: @grayLight; }
-a.muted:hover { color: darken(@grayLight, 10%); }
+.muted { color: @gray70; }
+a.muted:hover { color: @gray80; }
 
 .text-warning { color: @warningText; }
-a.text-warning:hover { color: darken(@warningText, 10%); }
+a.text-warning:hover { color: @warningTextHover; }
 
 .text-error { color: @errorText; }
-a.text-error:hover { color: darken(@errorText, 10%); }
+a.text-error:hover { color: @errorTextHover; }
 
 .text-info { color: @infoText; }
-a.text-info:hover { color: darken(@infoText, 10%); }
+a.text-info:hover { color: @infoTextHover; }
 
 .text-success { color: @successText; }
-a.text-success:hover { color: darken(@successText, 10%); }
+a.text-success:hover { color: @successTextHover; }
 
 // Headings
 // -------------------------
@@ -67,7 +67,7 @@ h6 {
   small {
     font-weight: normal;
     line-height: 1;
-    color: @grayLight;
+    color: @gray70;
   }
 }
 
@@ -92,7 +92,7 @@ h4 small { font-size: @baseFontSize; }
 .page-header {
   padding-bottom: (@baseLineHeight / 2) - 1;
   margin: @baseLineHeight 0 (@baseLineHeight * 1.5);
-  border-bottom: 1px solid @grayLighter;
+  border-bottom: @borderWidget;
 }
 
 // Lists
@@ -176,8 +176,8 @@ dd {
 hr {
   margin: @baseLineHeight 0;
   border: 0;
-  border-top: 1px solid @hrBorder;
-  border-bottom: 1px solid @white;
+  border-top: @borderWidget;
+  border-bottom: @borderWidget;
 }
 
 // Abbreviations and acronyms
@@ -185,7 +185,7 @@ abbr[title],
 // Added data-* attribute to help out our tooltip plugin, per https://github.com/twitter/bootstrap/issues/5257
 abbr[data-original-title] {
   cursor: help;
-  border-bottom: 1px dotted @grayLight;
+  border-bottom: 1px dotted @borderColor;
 }
 
 abbr.initialism {
@@ -197,7 +197,7 @@ abbr.initialism {
 blockquote {
   padding: 0 0 0 15px;
   margin: 0 0 @baseLineHeight;
-  border-left: 5px solid @grayLighter;
+  border-left: 5px solid @borderColor;
 
   p {
     margin-bottom: 0;
@@ -207,7 +207,7 @@ blockquote {
   small {
     display: block;
     line-height: @baseLineHeight;
-    color: @grayLight;
+    color: @gray70;
 
     &::before {
       content: '\2014 \00A0';
@@ -219,7 +219,7 @@ blockquote {
     float: right;
     padding-right: 15px;
     padding-left: 0;
-    border-right: 5px solid @grayLighter;
+    border-right: 5px solid @borderColor;
     border-left: 0;
 
     p,
@@ -263,10 +263,11 @@ h1 {
 }
 
 h4 i {
-  color: @grayLight;
+  color: @gray70;
 }
 
-.ellipsis_inline {
+.ellipsis_inline,
+.ellipsis_inline > .text-overflow {
   display: block;
   white-space: nowrap;
   overflow: hidden;

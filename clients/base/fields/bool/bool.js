@@ -23,6 +23,11 @@
 
     /**
      * @inheritdoc
+     */
+    shouldInitDefaultValue: true,
+
+    /**
+     * @inheritdoc
      *
      * Renders both checkbox and dropdown
      */

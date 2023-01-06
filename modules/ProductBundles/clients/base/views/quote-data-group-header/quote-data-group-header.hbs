@@ -26,7 +26,9 @@
     {{#each _fields}}
         <td{{#if align}} class="{{align}}"{{/if}} data-type="{{type}}" colspan="{{../listColSpan}}">
             <div class="quote-data-group-title">
-                <span class="group-loading-icon"><i class="fa fa-refresh fa-spin"></i></span>
+                <span class="group-loading-icon">
+                    <i class="sicon sicon-refresh sicon-is-spinning"></i>
+                </span>
                 {{field ../this model=../model template=../viewName}}
             </div>
         </td>

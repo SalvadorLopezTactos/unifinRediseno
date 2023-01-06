@@ -11,7 +11,6 @@
  */
 *}
 
-{literal}
 <style>
     #tabListContainer ul.subpanelTablist li a.current
     {
@@ -24,7 +23,6 @@ div.resultsTable {
     position: relative;
 }
 </style>
-{/literal}
 
 <h2>
 	<p>{$MOD.LBL_SUMMARY}</p>

@@ -72,11 +72,10 @@
 	</table>
 	</form>
 <script>
-{literal}
 	Calendar.setup ({
 		inputField : "start_date",
-		ifFormat : "{/literal}{$CALENDAR_DATEFORMAT}{literal}",
-		daFormat : "{/literal}{$CALENDAR_DATEFORMAT}{literal}",
+		ifFormat : "{$CALENDAR_DATEFORMAT}",
+		daFormat : "{$CALENDAR_DATEFORMAT}",
 		showsTime : false,
 		button : "start_date_trigger",
 		singleClick : true,
@@ -86,7 +85,7 @@
 	
 	Calendar.setup ({
 		inputField : "end_date",
-		ifFormat : "{/literal}{$CALENDAR_DATEFORMAT}{literal}",
+		ifFormat : "{$CALENDAR_DATEFORMAT}",
 		showsTime : false,
 		button : "end_date_trigger",
 		singleClick : true,
@@ -94,7 +93,6 @@
 		weekNumbers:false
 	});
 
-{/literal}
 
 	{$additionalScripts}
 </script>

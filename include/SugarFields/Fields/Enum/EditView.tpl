@@ -58,20 +58,17 @@
 	        onclick="SUGAR.clearRelateField(this.form, '{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}-input', '{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}');sync_{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}()"><img src="{sugar_getimagepath file="id-ff-clear.png"}"></button>
 	</span>
 
-	{literal}
 	<script>
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
-	{/literal}
+	SUGAR.AutoComplete.{$ac_key} = [];
 
 	{{if empty($vardef.autocomplete_ajax)}}
-		{literal}
 		(function (){
-			var selectElem = document.getElementById("{/literal}{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{literal}");
+			var selectElem = document.getElementById("{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}");
 			
 			if (typeof select_defaults =="undefined")
 				select_defaults = [];
 			
-			select_defaults[selectElem.id] = {key:selectElem.value,text:''};
+			select_defaults[selectElem.id] = { key:selectElem.value, text:''};
 
 			//get default
 			for (i=0;i<selectElem.options.length;i++){
@@ -84,27 +81,25 @@
 			var options = SUGAR.AutoComplete.getOptionsArray("{{$vardef.autocomplete_options}}");
 
 			YUI().use('datasource', 'datasource-jsonschema',function (Y) {
-				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
+				SUGAR.AutoComplete.{$ac_key}.ds = new Y.DataSource.Function({
 				    source: function (request) {
 				    	var ret = [];
 				    	for (i=0;i<selectElem.options.length;i++)
 				    		if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
-				    			ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
+				    			{literal}ret.push({ 'key': selectElem.options[i].value, 'text': selectElem.options[i].innerHTML });{/literal}
 				    	return ret;
 				    }
 				});
 			});
 		})();
-		{/literal}
 	{{else}}
-		{literal}
 		// Create a new YUI instance and populate it with the required modules.
 		YUI().use('datasource', 'datasource-jsonschema',function (Y) {
 			// DataSource is available and ready for use.
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Get({
+			SUGAR.AutoComplete.{$ac_key}.ds = new Y.DataSource.Get({
 				source: 'index.php?module=Accounts&action=ajaxautocomplete&to_pdf=1'
 			});
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds.plug(Y.Plugin.DataSourceJSONSchema, {
+			SUGAR.AutoComplete.{$ac_key}.ds.plug(Y.Plugin.DataSourceJSONSchema, {
 				schema: {
 					resultListLocator: "option_items",
 					resultFields: ["text", "key"],
@@ -112,21 +107,16 @@
 				}
 			});
 		});
-		{/literal}
 	{{/if}}
-
-	{literal}
 		YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
-	{/literal}
-			
+
 	SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}-input');
 	SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}-image');
 	SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}');
 	
 	{{if empty($vardef.autocomplete_ajax)}}
-		{literal}
 			function SyncToHidden(selectme){
-				var selectElem = document.getElementById("{/literal}{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{literal}");
+				var selectElem = document.getElementById("{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}");
 				var doSimulateChange = false;
 				
 				if (selectElem.value!=selectme)
@@ -141,69 +131,58 @@
 				}
 
 				if (doSimulateChange)
-					SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
+					SUGAR.AutoComplete.{$ac_key}.inputHidden.simulate('change');
 			}
 
 			//global variable 
-			sync_{/literal}{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{literal} = function(){
+			sync_{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}} = function(){
 				SyncToHidden();
 			}
 			function syncFromHiddenToWidget(){
 
-				var selectElem = document.getElementById("{/literal}{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{literal}");
+				var selectElem = document.getElementById("{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}");
 
 				//if select no longer on page, kill timer
 				if (selectElem==null || selectElem.options == null)
 					return;
 
-				var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
+				var currentvalue = SUGAR.AutoComplete.{$ac_key}.inputNode.get('value');
 
-				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
+				SUGAR.AutoComplete.{$ac_key}.inputNode.simulate('keyup');
 
 				for (i=0;i<selectElem.options.length;i++){
 
-					if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}-input{literal}'))
-						SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
+					if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}-input'))
+						SUGAR.AutoComplete.{$ac_key}.inputNode.set('value',selectElem.options[i].innerHTML);
 				}
 			}
 
-            YAHOO.util.Event.onAvailable("{/literal}{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{literal}", syncFromHiddenToWidget);
-		{/literal}
+            YAHOO.util.Event.onAvailable("{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}", syncFromHiddenToWidget);
 
 		SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
 		SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
 		SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
-		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
-			{/literal}
+		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {
 			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
 			SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
-			{literal}
 		}
-		{/literal}
-		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
-			{/literal}
+		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {
 			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
 			SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
-			{literal}
 		}
-		{/literal}
 	{{else}}
-		{literal}
 		function SyncToHidden(e){
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', e);
+			SUGAR.AutoComplete.{$ac_key}.inputHidden.set('value', e);
 		}
-		{/literal}
-		
+
 		SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
 		SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
 	{{/if}}
 	
 	SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
 	
-	{literal}
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
+	SUGAR.AutoComplete.{$ac_key}.inputNode.plug(Y.Plugin.AutoComplete, {
 		activateFirstItem: true,
-		{/literal}
 		minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
 		queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
 		zIndex: 99999,
@@ -212,15 +191,14 @@
 				requestTemplate: '&options={{$vardef.autocomplete_options}}&q={literal}{query}{/literal}',
 		{{/if}}
 		
-		{literal}
-		source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
+		source: SUGAR.AutoComplete.{$ac_key}.ds,
 		
 		resultTextLocator: 'text',
 		resultHighlighter: 'phraseMatch',
 		resultFilters: 'phraseMatch',
 	});
 
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
+	SUGAR.AutoComplete.{$ac_key}.expandHover = function(ex){
 		var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
 		if(hover[0] != null){
 			if (ex) {
@@ -233,87 +211,87 @@
 		}
 	}
 		
-	if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
+	if(SUGAR.AutoComplete.{$ac_key}.minQLen == 0){
 		// expand the dropdown options upon focus
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('focus', function () {
+			SUGAR.AutoComplete.{$ac_key}.inputNode.ac.sendRequest('');
+			SUGAR.AutoComplete.{$ac_key}.optionsVisible = true;
 		});
 	}
 
 	{{if empty($vardef.autocomplete_ajax)}}
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('click', function(e) {
+			SUGAR.AutoComplete.{$ac_key}.inputHidden.simulate('click');
 		});
 		
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('dblclick', function(e) {
+			SUGAR.AutoComplete.{$ac_key}.inputHidden.simulate('dblclick');
 		});
 
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('focus', function(e) {
+			SUGAR.AutoComplete.{$ac_key}.inputHidden.simulate('focus');
 		});
 
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('mouseup', function(e) {
+			SUGAR.AutoComplete.{$ac_key}.inputHidden.simulate('mouseup');
 		});
 
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('mousedown', function(e) {
+			SUGAR.AutoComplete.{$ac_key}.inputHidden.simulate('mousedown');
 		});
 
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
-			var selectElem = document.getElementById("{/literal}{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{literal}");
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('blur', function(e) {
+			SUGAR.AutoComplete.{$ac_key}.inputHidden.simulate('blur');
+			SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
+			var selectElem = document.getElementById("{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}");
 			//if typed value is a valid option, do nothing
 			for (i=0;i<selectElem.options.length;i++)
-				if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
+				if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{$ac_key}.inputNode.get('value'))
 					return;
 			
 			//typed value is invalid, so set the text and the hidden to blank
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
+			SUGAR.AutoComplete.{$ac_key}.inputNode.set('value', select_defaults[selectElem.id].text);
 			SyncToHidden(select_defaults[selectElem.id].key);
 		});
 	{{else}}		
 		// when they focus away from the field...
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
-			if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value') != '') { // value entered
-				if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.get('value') == '') { // none selected, we clear their text and hide
-					SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', '');
+		SUGAR.AutoComplete.{$ac_key}.inputNode.on('blur', function(e) {
+			if (SUGAR.AutoComplete.{$ac_key}.inputNode.get('value') != '') { // value entered
+				if (SUGAR.AutoComplete.{$ac_key}.inputHidden.get('value') == '') { // none selected, we clear their text and hide
+					SUGAR.AutoComplete.{$ac_key}.inputNode.set('value', '');
 				}
 				else{ // they have something selected, we accept their selection and contract
 				}
 			}
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
+			SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
 		});
 	{{/if}}
 
 	// when they click on the arrow image, toggle the visibility of the options
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
-		if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
+	SUGAR.AutoComplete.{$ac_key}.inputImage.ancestor().on('click', function () {
+		if (SUGAR.AutoComplete.{$ac_key}.optionsVisible) {
+			SUGAR.AutoComplete.{$ac_key}.inputNode.blur();
 		} else {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
+			SUGAR.AutoComplete.{$ac_key}.inputNode.focus();
 		}
 	});
 
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
+	SUGAR.AutoComplete.{$ac_key}.inputNode.ac.on('query', function () {
+		SUGAR.AutoComplete.{$ac_key}.inputHidden.set('value', '');
 	});
 
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
+	SUGAR.AutoComplete.{$ac_key}.inputNode.ac.on('visibleChange', function (e) {
+		SUGAR.AutoComplete.{$ac_key}.expandHover(e.newVal); // expand
 	});
 
 	// when they select an option, set the hidden input with the KEY, to be saved
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
+	SUGAR.AutoComplete.{$ac_key}.inputNode.ac.on('select', function(e) {
 		SyncToHidden(e.result.raw.key);
 	});
  
 });
 </script> 
 
-{/literal}
+
 
 {/if}

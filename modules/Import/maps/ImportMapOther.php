@@ -122,7 +122,6 @@ class ImportMapOther
                     "List"=>"list_price",
                     "Purchase Price"=>"discount_price",
                     "Pricing Formula"=>"pricing_formula",
-                    "Availability"=>"status",
                     "Date Available"=>"date_available",
                     "Quantity in Stock"=>"qty_in_stock",
                     "Weight"=>"weight",

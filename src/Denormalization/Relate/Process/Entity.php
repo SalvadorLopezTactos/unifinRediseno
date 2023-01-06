@@ -121,6 +121,11 @@ final class Entity
         return $this->targetBean->getFieldDefinition($name) ?: null;
     }
 
+    public function getRelationshipName(): string
+    {
+        return (string) $this->relationship->name;
+    }
+
     protected function extractFieldDef(SugarBean $bean, string $fieldName): ?array
     {
         $result = $bean->getFieldDefinition($fieldName);
@@ -144,7 +149,13 @@ final class Entity
         $dataToCopy['name'] = $this->targetFieldName;
         $dataToCopy['vname'] = $this->fieldDef['vname'];
         $dataToCopy['denorm_from_module'] = $this->sourceBean->getModuleName();
-        $dataToCopy['type'] = $this->fieldDef['type'];
+        if (isset($dataToCopy['source']) && $dataToCopy['source'] == 'non-db') {
+            $dataToCopy['type'] = 'varchar';
+            $dataToCopy['len'] = 510;
+        }
+        $dataToCopy['type'] = $dataToCopy['dbType'] ?? $dataToCopy['type'];
+        $dataToCopy['required'] = false;
+        $dataToCopy['studio'] = false;
 
         $this->fieldDefExt[$this->targetFieldName] = $dataToCopy;
     }

@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Esta planificación de informes',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Cuadro de mando de registros de planificación de informes',
+    'LBL_FILE_TYPE' => 'Tipos de archivo',
 );

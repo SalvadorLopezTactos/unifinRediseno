@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Γονικός Τύπος',
     'LBL_PARENT_ID' => 'Γονική Ταυτότητα',
     'LBL_EXTRA_DATA' => 'Επιπλέον δεδομένα',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - Αναφέρεται στο {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} σας ανέφερε στο {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Ανατέθηκε {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} ανατέθηκε {{module_name_singular}} {{record_name}} to you.',
 ];

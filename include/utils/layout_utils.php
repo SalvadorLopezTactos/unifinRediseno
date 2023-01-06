@@ -291,11 +291,15 @@ EOHTML;
         echo $sugar_config['meta_tags']['IE_COMPAT_MODE'];
     }
 
-    echo "<title>{$app_strings['LBL_BROWSER_TITLE']}</title>" . $themeCSS;
+    echo '<title>'.htmlspecialchars($app_strings['LBL_BROWSER_TITLE'], ENT_QUOTES, 'UTF-8').'</title>' . $themeCSS;
+
+    // Add our theme variables to enable proper theme styling
+    echo '<link rel="stylesheet" href="styleguide/assets/css/sugar-theme-variables.css">';
+
     if ($includeJS)
     {
         $charset = isset($app_strings['LBL_CHARSET']) ? $app_strings['LBL_CHARSET'] : $sugar_config['default_charset'];
-        echo '<meta http-equiv="Content-Type" content="text/html; charset="{$charset}">';
+        echo '<meta http-equiv="Content-Type" content="text/html; charset="{' . $charset . '}">';
         echo '<script type="text/javascript" src="' . getJSPath('include/javascript/jquery/jquery-min.js') . '"></script>';
         echo '<script type="text/javascript" src="'
             . getJSPath('include/javascript/jquery/jquery-migrate.min.js') . '"></script>';
@@ -303,7 +307,11 @@ EOHTML;
         echo '<script type="text/javascript" src="' . getJSPath('cache/include/javascript/sugar_grp1.js') . '"></script>';
         echo '</head>';
     }
-    echo  '<body class="popupBody">';
+    $appearanceClass = '';
+    if (isset($_COOKIE['appearance'])) {
+        $appearanceClass = htmlspecialchars('sugar-' . $_COOKIE['appearance'] . '-theme', ENT_QUOTES, 'UTF-8');
+    }
+    echo  '<body class="popupBody ' . $appearanceClass . '">';
 }
 
 /**

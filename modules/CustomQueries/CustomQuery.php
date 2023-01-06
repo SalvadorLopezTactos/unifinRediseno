@@ -483,7 +483,7 @@ SQL;
                 ->executeQuery(
                     $query,
                     [$this->id]
-                )->fetchColumn();
+                )->fetchOne();
             if (false === $dataSetId) {
                 $check_bind = false;
             }

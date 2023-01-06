@@ -41,6 +41,7 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                         'state',
                     ),
                 ),
+                'state',
                 array(
                     'name' => 'from_collection',
                     'type' => 'from',
@@ -153,6 +154,25 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                     'name' => 'tag',
                     'span' => 12,
                 ),
+                [
+                    'name' => 'date_entered_by',
+                    'readonly' => true,
+                    'inline' => true,
+                    'type' => 'fieldset',
+                    'label' => 'LBL_DATE_ENTERED',
+                    'fields' => [
+                        [
+                            'name' => 'date_entered',
+                        ],
+                        [
+                            'type' => 'label',
+                            'default_value' => 'LBL_BY',
+                        ],
+                        [
+                            'name' => 'created_by_name',
+                        ],
+                    ],
+                ],
             ),
         ),
     ),

@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'عامل التصفية',
     'LBL_CONSOLE_FILTER_RULES' => 'قواعد التصفية',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'تجميد العمود الأول',
+
     'LBL_CONSOLE_COLUMNS' => 'الأعمدة',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'عمود متعدد الحقول',
     'LBL_CONSOLE_PRIMARY_SORT' => 'الفرز الرئيسي',

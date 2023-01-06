@@ -39,9 +39,6 @@ class SearchFormReports extends SearchForm
         $header_text = '';
         $module = $this->request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
         $action = $this->request->getValidInputRequest('action');
-        if(is_admin($current_user) && $module != 'DynamicLayout' && !empty($_SESSION['editinplace'])){
-            $header_text = "<a href='index.php?action=index&module=DynamicLayout&from_action=SearchForm&from_module=".$module ."'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>";
-        }
 
         echo "<form name='search_form' class='search_form'>" .
              "<input type='hidden' name='searchFormTab' value='{$view}'/>" .

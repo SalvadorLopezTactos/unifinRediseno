@@ -12,15 +12,28 @@
  */
 
 $viewdefs['Home']['base']['layout']['about'] = array(
-    'css_class' => 'row-fluid',
+    'css_class' => 'row-fluid w-full h-full bg-primary-content-background about-page',
     'components' => array(
         array(
             'layout' => array(
-                'css_class' => 'main-pane span12',
+                'css_class' => 'main-pane span12 bg-transparent',
                 'components' => array(
                     array(
                         'view' => 'about-headerpane',
                     ),
+                    [
+                        'layout' => [
+                            'type' => 'fluid',
+                            'components' => [
+                                [
+                                    'view' => [
+                                        'type' => 'about-version',
+                                        'span' => 12,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                     array(
                         'layout' => array(
                             'type' => 'fluid',

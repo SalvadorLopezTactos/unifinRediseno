@@ -13,9 +13,43 @@
 
 namespace Sugarcrm\Sugarcrm\Portal;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Administration;
 
 class Settings
 {
+    protected $settings = [];
+
+    /**
+     * Get value of a setting from the portal configuration
+     *
+     * @param string $param
+     * @return string
+     */
+    public function getParamValue($param)
+    {
+        if (!$this->settings) {
+            $this->settings = Administration::getSettings()
+                ->getConfigForModule('portal', 'support', true);
+        }
+
+        return $this->settings[$param] ?? null;
+    }
+
+    /**
+     * Get Case visibility value
+     *
+     * @return string
+     */
+    public function getCaseVisibility()
+    {
+        return $this->getModuleVisibility('case', 'all');
+    }
+
+    public function getModuleVisibility(string $module, string $default = 'related_contacts')
+    {
+        return $this->getParamValue($module . 'Visibility') ?? $default;
+    }
+
     /**
      * @return array
      */

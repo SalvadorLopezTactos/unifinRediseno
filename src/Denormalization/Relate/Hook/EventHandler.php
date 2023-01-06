@@ -18,7 +18,7 @@ interface EventHandler
 {
     public function handleAddRelationship(string $fieldName, SugarBean $bean, array $options): void;
 
-    public function handleAddRelationshipWithValue(SugarBean $bean, array $options, $value): void;
+    public function handleAddRelationshipWithValue(SugarBean $bean, array $options, $value, $relatedId): void;
 
     public function handleDeleteRelationship(SugarBean $bean, array $options): void;
 

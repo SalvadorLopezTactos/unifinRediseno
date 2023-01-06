@@ -11,7 +11,7 @@
  */
 --}}
 {{#each meta.panels}}
-    <table class="table table-striped dataTable multi-line-table">
+    <table class="table table-striped dataTable multi-line-table{{#if ../hasFrozenColumn}} sticky-first-column{{/if}}">
         <thead>
             <tr>
                 {{#each ../leftColumns}}

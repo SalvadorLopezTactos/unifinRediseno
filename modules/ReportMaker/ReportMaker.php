@@ -116,7 +116,7 @@ EOT;
         $result = $this->db->getConnection()->executeQuery($query, [$this->id]);
 
         // Get the id and the name.
-        $row = $result->fetch();
+        $row = $result->fetchAssociative();
         if (false !== $row) {
             $this->schedule_id = $row['schedule_id'];
             $this->active = $row['active'];

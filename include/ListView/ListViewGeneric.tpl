@@ -15,7 +15,6 @@
 
 
 <script>
-{literal}
 	$(document).ready(function(){
 	    $("ul.clickMenu").each(function(index, node){
 	  		$(node).sugarActionMenu();
@@ -30,7 +29,6 @@
         	sugarListView.prototype.toggleSelected();
         }
 	});
-{/literal}	
 </script>
 {assign var="currentModule" value = $pageData.bean.moduleDir}
 {assign var="singularModule" value = $moduleListSingular.$currentModule}
@@ -243,35 +241,32 @@
 	</table>
 {/if}
 {if $contextMenus}
-<script type="text/javascript">
-{$contextMenuScript}
-{literal}
-function lvg_nav(m,id,act,offset,t){
-    if(t.href.search(/#/) < 0){return;}
-    else{
-        if(act=='pte'){
-            act='ProjectTemplatesEditView';
+    <script type="text/javascript">
+        {$contextMenuScript}
+        function lvg_nav(m, id, act, offset, t) {
+            if (t.href.search(/#/) < 0) {
+                return;
+            } else {
+                if (act === 'pte') {
+                    act = 'ProjectTemplatesEditView';
+                } else if (act === 'd') {
+                    act = 'DetailView';
+                } else if (act === 'ReportsWizard') {
+                    act = 'ReportsWizard';
+                } else {
+                    act = 'EditView';
+                }
+                url = 'index.php?module=' + m + '&offset=' + offset + '&stamp={$pageData.stamp}&return_module=' + m + '&action=' + act + '&record=' + id;
+                t.href = url;
+            }
         }
-        else if(act=='d'){
-            act='DetailView';
-        }else if( act =='ReportsWizard'){
-            act = 'ReportsWizard';
-        }else{
-            act='EditView';
+
+        function lvg_dtails(id) {
+            return SUGAR.util.getAdditionalDetails('{$pageData.bean.moduleDir|default:$params.module}', id, 'adspan_' + id);
         }
-    {/literal}
-        url = 'index.php?module='+m+'&offset=' + offset + '&stamp={$pageData.stamp}&return_module='+m+'&action='+act+'&record='+id;
-        t.href=url;
-    {literal}
-    }
-}{/literal}
-{literal}
-    function lvg_dtails(id){{/literal}
-        return SUGAR.util.getAdditionalDetails( '{$pageData.bean.moduleDir|default:$params.module}',id, 'adspan_'+id);{literal}}{/literal}
-{literal}
-    if(typeof(qe_init) != 'undefined'){
-        qe_init(); //qe_init is defined in footer.tpl
-    }
-{/literal}
-</script>
+
+        if (typeof (qe_init) != 'undefined') {
+            qe_init(); //qe_init is defined in footer.tpl
+        }
+    </script>
 {/if}

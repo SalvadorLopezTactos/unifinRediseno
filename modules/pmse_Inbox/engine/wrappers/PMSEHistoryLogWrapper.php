@@ -287,6 +287,9 @@ class PMSEHistoryLogWrapper
                             case 'CHANGE_FIELD':
                                 $type = translate('LBL_PMSE_CONTEXT_MENU_CHANGE_FIELD', 'pmse_Project');
                                 break;
+                            case 'DOCUMENT_MERGE':
+                                $type = translate('LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE', 'pmse_Project');
+                                break;
                             default:
                                 $type = $activityBean->act_script_type;
                         }
@@ -356,6 +359,8 @@ class PMSEHistoryLogWrapper
                             $eventBean = BeanFactory::getBean('pmse_BpmEventDefinition', $caseData['bpmn_id']);
                             if ($eventBean->evn_params == 'new') {
                                 $action = translate('LBL_PMSE_HISTORY_LOG_CREATED', 'pmse_Inbox');
+                            } elseif ($eventBean->evn_params == 'relationshipchange') {
+                                $action = translate('LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE', 'pmse_Inbox');
                             } else {
                                 $action = translate('LBL_PMSE_HISTORY_LOG_MODIFIED', 'pmse_Inbox');
                             }

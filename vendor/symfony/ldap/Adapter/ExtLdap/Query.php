@@ -22,7 +22,7 @@ use Symfony\Component\Ldap\Exception\NotBoundException;
 class Query extends AbstractQuery
 {
     // As of PHP 7.2, we can use LDAP_CONTROL_PAGEDRESULTS instead of this
-    const PAGINATION_OID = '1.2.840.113556.1.4.319';
+    public const PAGINATION_OID = '1.2.840.113556.1.4.319';
 
     /** @var Connection */
     protected $connection;
@@ -30,9 +30,25 @@ class Query extends AbstractQuery
     /** @var resource[] */
     private $results;
 
+    /** @var array */
+    private $serverctrls = [];
+
     public function __construct(Connection $connection, string $dn, string $query, array $options = [])
     {
         parent::__construct($connection, $dn, $query, $options);
+    }
+
+    /**
+     * @return array
+     */
+    public function __sleep()
+    {
+        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+    }
+
+    public function __wakeup()
+    {
+        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
     }
 
     public function __destruct()
@@ -97,22 +113,13 @@ class Query extends AbstractQuery
             $cookie = '';
             do {
                 if ($pageControl) {
-                    ldap_control_paged_result($con, $pageSize, true, $cookie);
+                    $this->controlPagedResult($con, $pageSize, true, $cookie);
                 }
                 $sizeLimit = $itemsLeft;
                 if ($pageSize > 0 && $sizeLimit >= $pageSize) {
                     $sizeLimit = 0;
                 }
-                $search = @$func(
-                    $con,
-                    $this->dn,
-                    $this->query,
-                    $this->options['filter'],
-                    $this->options['attrsOnly'],
-                    $sizeLimit,
-                    $this->options['timeout'],
-                    $this->options['deref']
-                );
+                $search = $this->callSearchFunction($con, $func, $sizeLimit);
 
                 if (false === $search) {
                     $ldapError = '';
@@ -133,7 +140,7 @@ class Query extends AbstractQuery
                     break;
                 }
                 if ($pageControl) {
-                    ldap_control_paged_result_response($con, $search, $cookie);
+                    $cookie = $this->controlPagedResultResponse($con, $search, $cookie);
                 }
             } while (null !== $cookie && '' !== $cookie);
 
@@ -146,7 +153,7 @@ class Query extends AbstractQuery
     }
 
     /**
-     * Returns a LDAP search resource. If this query resulted in multiple searches, only the first
+     * Returns an LDAP search resource. If this query resulted in multiple searches, only the first
      * page will be returned.
      *
      * @return resource
@@ -180,7 +187,8 @@ class Query extends AbstractQuery
     private function resetPagination()
     {
         $con = $this->connection->getResource();
-        ldap_control_paged_result($con, 0);
+        $this->controlPagedResult($con, 0, false, '');
+        $this->serverctrls = [];
 
         // This is a workaround for a bit of a bug in the above invocation
         // of ldap_control_paged_result. Instead of indicating to extldap that
@@ -193,14 +201,72 @@ class Query extends AbstractQuery
         //
         // This is not supported in PHP < 7.2, so these versions will remain broken.
         $ctl = [];
-        ldap_get_option($con, LDAP_OPT_SERVER_CONTROLS, $ctl);
+        ldap_get_option($con, \LDAP_OPT_SERVER_CONTROLS, $ctl);
         if (!empty($ctl)) {
             foreach ($ctl as $idx => $info) {
                 if (static::PAGINATION_OID == $info['oid']) {
                     unset($ctl[$idx]);
                 }
             }
-            ldap_set_option($con, LDAP_OPT_SERVER_CONTROLS, $ctl);
+            ldap_set_option($con, \LDAP_OPT_SERVER_CONTROLS, $ctl);
         }
+    }
+
+    /**
+     * Sets LDAP pagination controls.
+     *
+     * @param resource $con
+     */
+    private function controlPagedResult($con, int $pageSize, bool $critical, string $cookie): bool
+    {
+        if (\PHP_VERSION_ID < 70300) {
+            return ldap_control_paged_result($con, $pageSize, $critical, $cookie);
+        }
+        $this->serverctrls = [
+            [
+                'oid' => \LDAP_CONTROL_PAGEDRESULTS,
+                'isCritical' => $critical,
+                'value' => [
+                    'size' => $pageSize,
+                    'cookie' => $cookie,
+                ],
+            ],
+        ];
+
+        return true;
+    }
+
+    /**
+     * Retrieve LDAP pagination cookie.
+     *
+     * @param resource $con
+     * @param resource $result
+     */
+    private function controlPagedResultResponse($con, $result, string $cookie = ''): string
+    {
+        if (\PHP_VERSION_ID < 70300) {
+            ldap_control_paged_result_response($con, $result, $cookie);
+
+            return $cookie;
+        }
+        ldap_parse_result($con, $result, $errcode, $matcheddn, $errmsg, $referrals, $controls);
+
+        return $controls[\LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'] ?? '';
+    }
+
+    /**
+     * Calls actual LDAP search function with the prepared options and parameters.
+     *
+     * @param resource $con
+     *
+     * @return resource
+     */
+    private function callSearchFunction($con, string $func, int $sizeLimit)
+    {
+        if (\PHP_VERSION_ID < 70300) {
+            return @$func($con, $this->dn, $this->query, $this->options['filter'], $this->options['attrsOnly'], $sizeLimit, $this->options['timeout'], $this->options['deref']);
+        }
+
+        return @$func($con, $this->dn, $this->query, $this->options['filter'], $this->options['attrsOnly'], $sizeLimit, $this->options['timeout'], $this->options['deref'], $this->serverctrls);
     }
 }

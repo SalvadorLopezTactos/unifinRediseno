@@ -24,20 +24,20 @@
             <p class="wide">
                 <a class="btn btn-link btn-invisible" name="login_form_button" title="{{str "LBL_LOGIN_FORM_LABEL"}}">{{str "LBL_LOGIN_FORM_LABEL"}}</a>
             </p>
-        {{else}}  
+        {{else}}
             {{#each meta.panels}}
                 {{#each fields}}
-                <div class="control-group">{{field ../../this model=../../model}}</div>
+                    <div class="control-group">{{field ../../this model=../../model}}</div>
                 {{/each}}
-                <p class="help-block">
+                <div class="help-block">
                     {{#if ../showPasswordReset}}
                         <a href="#forgotpassword" class="btn btn-link btn-invisible">{{str "LBL_LOGIN_FORGOT_PASSWORD"}}</a>
                     {{/if}}
-                </p>
+                </div>
             {{/each}}
             <div class="login-footer">
                 {{#each meta.buttons}}
-                {{field ../this model=../model}}
+                    {{field ../this model=../model}}
                 {{/each}}
             </div>
         {{/if}}

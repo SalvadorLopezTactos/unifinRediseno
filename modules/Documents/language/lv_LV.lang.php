@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Ieņēmumu posteņi',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Pirkumi',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Iegādātie produkti',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Daokumentu ierakstu instrumentu panelis',
+    'LBL_MY_DOCUMENTS' => 'Mani dokumenti',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Nosūtīt uz DocuSign',
 );

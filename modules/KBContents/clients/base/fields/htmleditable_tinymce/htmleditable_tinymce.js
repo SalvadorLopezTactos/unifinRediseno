@@ -126,16 +126,6 @@
 
         config = _.extend(config, this._tinyMCEConfig);
 
-        _.each(document.styleSheets, function(style) {
-            if (style.href) {
-                content_css.push(style.href);
-            }
-        });
-        config.content_css = content_css;
-        config.body_class = 'kbdocument-body';
-
-        config.file_browser_callback = _.bind(this.tinyMCEFileBrowseCallback, this);
-
         return config;
     },
 
@@ -229,7 +219,7 @@
      */
     updateBodyHeight: function($element) {
         var windowHeight = $(window).height();
-        this.maxBodyHeight = 0.6 * windowHeight;
+        this.maxBodyHeight = 6 * windowHeight / 10;
         var contentHeight = this._getContentHeight();
 
         // do nothing if the content height is less than the default iframe height
@@ -244,6 +234,23 @@
             $element.height(contentHeight);
         } else {
             $element.height(this.maxBodyHeight);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Adds a button for selecting and applying a template.
+     */
+    addCustomButtons: function(editor) {
+        // if the user has access to KB Templates then add the template button
+        if (app.acl.hasAccess('view', 'KBContentTemplates')) {
+            editor.addButton('kbtemplate', {
+                tooltip: app.lang.get('LBL_TEMPLATE', this.module),
+                icon: 'file-o',
+                name: 'template',
+                classes: 'btnKBTemplate', // this gets added as mce-btnKBTemplate
+            });
         }
     },
 

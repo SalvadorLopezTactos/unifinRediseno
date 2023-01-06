@@ -41,5 +41,13 @@
         }
 
         this.view.layout.trigger('list:massquote:fire');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    isAllowedDropdownButton: function() {
+        // Filter logic for when it's on a dashlet
+        return this.view.name !== 'dashlet-toolbar';
     }
 })

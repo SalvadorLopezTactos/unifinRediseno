@@ -23,10 +23,11 @@
         'click [name=collapse_button]': 'collapseClicked',
         'click [name=expand_button]': 'expandClicked',
         'click [name=edit_module_tabs_button]': 'editModuleTabsClicked',
+        'click [name=restore_dashboard_button]': 'restoreDashboardClicked',
 
         'click .dfab-content .dfab-icon, .dfab-content .dfab-label': 'closeFABs',
         'click .dfab-pin': 'togglePinPosition',
-        'click .dfab-title': 'toggleFAB'
+        'click .dfab-title .dfab-icon': 'toggleFAB'
     },
 
     /**
@@ -53,7 +54,7 @@
     /**
      * The icon used when the button is expanded.
      */
-    defaultCloseIcon: 'close-icon',
+    defaultCloseIcon: 'sicon-close-lg',
 
     /**
      * Floating action buttons by default will load the metadata described in the Home module.
@@ -171,7 +172,7 @@
         });
 
         contentWrapper.removeClass('expanded');
-        var mainIcon = this.$el.find('.dfab-title .dfab-icon');
+        var mainIcon = this.$el.find('.dfab-title .dfab-icon.sicon');
         mainIcon.removeClass(this.defaultCloseIcon).addClass(this.meta.icon);
     },
 
@@ -196,7 +197,7 @@
         }, this);
 
         contentWrapper.addClass('expanded');
-        var mainIcon = this.$el.find('.dfab-title .dfab-icon');
+        var mainIcon = this.$el.find('.dfab-title .dfab-icon.sicon');
         mainIcon.removeClass(this.meta.icon).addClass(this.defaultCloseIcon);
     },
 
@@ -411,35 +412,76 @@
     },
 
     /**
-     * Show/hide add dashlet button.
+     * Util to get the current active dashboard tab.
+     * @return {number}
+     * @private
+     */
+    _getActiveDashboardTab: function() {
+        return this.context.get('activeTab');
+    },
+
+    /**
+     * Show/hide fab buttons provided in the list as input.
      *
+     * @param {Array} btnNameList array of button names to be shown/hidden
      * @param {bool} state True to show, false to hide
      */
-    toggleAddDashletButton: function(state) {
-        var button = _.find(this.fields, function(field) {
-            return field.name === 'add_dashlet_button';
-        });
-        if (button) {
-            button.setDisabled(!state);
-            button.isHidden = !state;
-        }
+    toggleFabButton: function(btnNameList, state) {
+        _.each(btnNameList, function(btnName) {
+            var button = _.find(this.fields, function(field) {
+                return field.name === btnName;
+            });
+            if (button) {
+                button.setDisabled(!state);
+                button.isHidden = !state;
+            }
+        }, this);
     },
 
     /**
      * Trigger the logic responsible for the visibility of certain inner buttons.
      */
     updateButtonVisibilities: function() {
-        this.toggleAddDashletButton(this.isDashboard());
+        var isDashboard = this.isDashboard();
+        var btnList = ['add_dashlet_button', 'restore_dashboard_button'];
+        this.toggleFabButton(btnList, isDashboard);
     },
 
     /**
-     * Detach window event handler.
-     *
-     * @inheritdoc
+     * Handle restore tab button click
      */
-    dispose: function() {
-        $(window).off('mousedown', this.fabCloseHandler);
-        this._super('dispose');
+    restoreDashboardClicked: function() {
+        app.alert.show('restore_tab_confirmation', {
+            level: 'confirmation',
+            messages: app.lang.get('LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM', 'Dashboards'),
+            onConfirm: _.bind(function() {
+                this.restoreDashboardDashlets(this._getActiveDashboardTab());
+            }, this)
+        });
+    },
+
+    /**
+     * Gets the bean id for the dashboard
+     *
+     * @param component {Object} dashboard component for which id is required
+     * @return {string} dashboard bean id
+     * @private
+     */
+    _getDashboardBeanId: function(component) {
+        var model = component ? component.model : null;
+        return model ? model.get('id') : '';
+    },
+
+    /**
+     * Restores dashlets on the active tab for tabbed dashboards
+     *
+     * @param tabIndex {number} index of the tab for which metadata needs to be reset
+     */
+    restoreDashboardDashlets: function(tabIndex) {
+        var component = this.closestComponent('dashboard');
+        if (component) {
+            component.context.trigger('dashboard:restore-dashboard:clicked', tabIndex);
+        }
     },
 
     /**
@@ -472,6 +514,16 @@
         cache[dashboardModelName] = value;
 
         app.cache.set('dashboardsMenuPinnedTo', JSON.stringify(cache));
-    }
+    },
+
+    /**
+     * Detach window event handler.
+     *
+     * @inheritdoc
+     */
+    dispose: function() {
+        $(window).off('mousedown', this.fabCloseHandler);
+        this._super('dispose');
+    },
 
 });

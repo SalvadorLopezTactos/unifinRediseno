@@ -1,8 +1,8 @@
 /* side pane */
 .config-side-pane {
   display: flex;
-  border-bottom: 1px solid @gray40;
-  background-color: @grayLighter;
+  border-bottom: @borderWidget;
+  background-color: @contentBackground;
   overflow-x: scroll;
 }
 
@@ -13,19 +13,19 @@
 }
 
 .config-side-pane .border-right {
-  border-right: 1px solid @gray40;
+  border-right: @borderWidget;
 }
 
 .config-side-pane nav ul.field-list {
   width: auto;
   overflow: hidden;
   overflow-y: scroll;
-  border: 1px solid @btnSecondaryBorder;
+  border: @borderWidget;
   list-style-type: none;
   padding-inline-start: 5px;
   margin: 0;
   padding-top: 8px;
-  background-color: @white;
+  background-color: @primaryContentBackground;
 }
 
 .config-side-pane .columns nav ul.multi-field {
@@ -34,19 +34,19 @@
   list-style-type: none;
   padding-inline-start: 3px;
   margin-left: 0;
-  background-color: @gray10;
+  background-color: @configMultifieldBackground;
   cursor: move;
   padding: 0;
 }
 
 .config-side-pane .fields nav ul.field-list {
   width: auto;
-  border: 1px solid @btnSecondaryBorder;
+  border: @borderWidget;
   list-style-type: none;
   padding-inline-start: 3px;
   padding-top: 5px;
   padding-bottom: 5px;
-  background-color: @white;
+  background-color: @primaryContentBackground;
 }
 
 .config-side-pane .columns nav ul.field-list {
@@ -79,7 +79,7 @@
   }
 
   &:hover {
-    color: @darkBlue;
+    color: @textColorHover;
   }
 
   &.multi-line-field-cursor-over {
@@ -89,8 +89,8 @@
 
 .config-side-pane .columns nav .pill {
   border-radius: 3px;
-  background-color: @lightBlue;
-  color: @darkBlue;
+  background-color: @configPillBackground;
+  color: @configPillText;
   margin: 3px 8px;
   margin-bottom: 5px;
   cursor: move;
@@ -100,10 +100,10 @@
   }
 
   &.multi-field-block {
-    background-color: @gray10;
-    border: 1px solid @gray30;
+    background-color: @configMultifieldBackground;
+    border: @borderWidget;
     box-sizing: border-box;
-    box-shadow: 0 1px 1px rgba(94, 99, 103, 0.3);
+    box-shadow: @shadowWidget;
     border-radius: 3px;
   }
 
@@ -112,12 +112,12 @@
   }
 
   &.multi-field-block-highlight {
-    border: 1px solid @blue;
+    border: 1px solid @borderColorFocus;
   }
 }
 
 .config-side-pane .columns nav .pill .list-header {
-  color: @black;
+  color: @textColor;
   position: relative;
   font-weight: bold;
 }
@@ -136,12 +136,11 @@
 .config-side-pane .columns {
   .console-field-remove {
     right: 3px;
-    color: @white;
   }
 
   .multi-field-column-remove {
     right: 6px;
-    color: @black;
+    color: @sicon-color;
   }
 
   .console-field-remove,

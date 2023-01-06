@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Για παράδειγμα, μπορείτε να χρησιμοποιήσετε αυτό, για να βρείτε ένα ζήτημα το οποίο υποβλήθηκε προηγουμένως.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Εάν έχετε μια νέα Υπόθεση υποστήριξης που θα επιθυμούσατε να υποβάλετε, μπορείτε να πατήσετε εδώ για να υποβάλει μια νέα Υπόθεση.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Κάνοντας κλικ εδώ, θα σας επιστρέψει σε αυτήν την προβολή ανά πάσα στιγμή.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Αλληλεπιδράσεις υπόθεσης',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο υπόθεσης',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Σημειώσεις',
 

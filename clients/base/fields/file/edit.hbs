@@ -10,21 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{#if value.length}}
-    {{#each value}}
-        <div class="file-field">
-            <div class="square-pill">
-            {{#eq mimeType 'image'}}
-                <a data-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">{{name}}</a>
-            {{/eq}}
-            {{#notEq mimeType 'image'}}
-                <a data-placement="bottom" title="{{name}}" href="javascript:void(0);" data-url="{{url}}" data-action="download">{{name}}</a>
-            {{/notEq}}
-                <span class="fa fa-times" data-action="delete"></span>
-            </div>
-        </div>
-    {{/each}}
-{{else}}
-    <input type="file" name="{{name}}"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} />
-{{/if}}
+{{!-- File selector --}}
+<div class="file-select{{#if value.length}} hidden{{/if}}">
+    <label class="btn file-selector">
+        <input type="file" name="{{name}}" class="hidden" data-action="selectFile">
+        <span class="file-selector-label">
+            {{str 'LBL_ADD_ATTACHMENT' module}}
+        </span>
+    </label>
+    {{str 'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' module}}
+    <div class="external-api-direction-selector">
+        {{partial 'edit-api-direction-selector' this this}}
+    </div>
+</div>
+
+{{!-- File name display --}}
+<div class="file-name">
+    {{partial 'edit-filename' this this}}
+</div>
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

@@ -69,5 +69,12 @@ $viewdefs['Cases']['mobile']['layout']['subpanels'] = array(
                 'link' => 'purchases',
             ],
         ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_ESCALATIONS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'escalations',
+            ],
+        ],
     ),
 );

@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Temel Oran',
 
     'LBL_QUOTA' => 'Kota',
-    'LBL_QUOTA_ADJUSTED' => 'Kota (Düzeltilmiş)',
+    'LBL_QUOTA_ADJUSTED' => 'Ayarlanmış Kota',
 
     'LBL_FORECAST' => 'Tahmin',
     'LBL_COMMIT_STAGE' => 'Onay Aşaması',

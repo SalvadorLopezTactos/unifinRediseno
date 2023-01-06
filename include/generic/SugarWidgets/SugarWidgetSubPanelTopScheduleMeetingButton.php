@@ -77,7 +77,7 @@ class SugarWidgetSubPanelTopScheduleMeetingButton extends SugarWidgetSubPanelTop
 		$button .= '<input type="hidden" name="to_pdf" value="true" />';
         $button .= '<input type="hidden" name="tpl" value="QuickCreate.tpl" />';
 		$button .= '<input type="hidden" name="return_module" value="' . $currentModule . "\" />\n";
-		$button .= '<input type="hidden" name="return_action" value="' . $defines['action'] . "\" />\n";
+        $button .= '<input type="hidden" name="return_action" value="' . htmlspecialchars($defines['action'], ENT_QUOTES, "UTF-8") . "\" />\n";
 		$button .= '<input type="hidden" name="return_id" value="' . $defines['focus']->id . "\" />\n";
 		$button .= '<input type="hidden" name="record" value="" />';
 

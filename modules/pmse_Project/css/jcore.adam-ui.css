@@ -12,11 +12,10 @@
 .adam-menu {
   margin: 0;
   padding: 0;
-  background-color: #F0F0F0;
-  background-image: url("../img/menu.gif");
+  background-color: var(--dropdown-background);
   background-repeat: repeat-y;
   border: 1px solid;
-  border-color: #a0a0a0;
+  border-color: var(--border-color);
   font: 11px arial,tahoma,sans-serif;
 }
 
@@ -45,7 +44,7 @@
   position: relative;
   text-decoration: none;
   white-space: nowrap;
-  color: #222222;
+  color: var(--text-color);
   text-decoration: none !important;
 }
 
@@ -65,8 +64,8 @@
   line-height: 1px;
   overflow: hidden;
   white-space: nowrap;
-  background-color: #E0E0E0;
-  border-bottom-color: #FFFFFF;
+  background-color: var(--border-color-light);
+  border-bottom-color: var(--border-color);
   height: 1px;
 }
 
@@ -123,15 +122,14 @@
 }
 
 .adam-item-active {
-  background-color: #F1F1F1;
-  background-image: url("../img/item-over.gif");
+  background-color: var(--dropdown-link-background-active);
   background-position: left bottom;
   background-repeat: repeat-x;
   border-style: solid;
   border-width: 1px 0;
   margin: 0 1px;
   padding: 0;
-  border-color: #ACACAC;
+  border-color: var(--border-color);
 }
 .adam-item-active a {
   border-style: solid;
@@ -152,10 +150,10 @@
 
 .adam-selected {
   cursor: default;
-  background-color: lightgray !important;
+  background-color: var(--primary-content-accent);
 }
 .adam-selected a {
-  color: black !important;
+  color: var(--text-color-hover);
 }
 .adam-selected * {
   cursor: default !important;
@@ -174,7 +172,7 @@
 }
 
 .adam-window {
-  background-color: #f0f0f0;
+  background-color: var(--secondary-content-background);
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -193,13 +191,13 @@
   font-family: FontAwesome;
   font-size: 14px;
   line-height: 13px;
-  color: #aaa;
+  color: var(--sicon-color);
 }
 .adam-window-close:before {
   content: "\f00d";
 }
 .adam-window-close:hover {
-  color: #555;
+  color: var(--sicon-hover-color);
 }
 
 .adam-window-title {
@@ -210,13 +208,13 @@
   white-space: nowrap;
   overflow: hidden;
   display: block;
-  color: #555;
+  color: var(--text-color);
 }
 
 .adam-window-body {
   width: auto;
   height: auto;
-  background-color: #FFFFFF;
+  background-color: var(--primary-content-background);
 }
 
 .adam-panel {
@@ -224,7 +222,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  color: #444;
+  color: var(--label-color);
 }
 
 .adam-panel-body {
@@ -232,11 +230,11 @@
   overflow: auto;
   right: 8px;
   top: 30px;
-  border: 1px solid #c0c0c0;
+  border: 1px solid var(--border-color);
 }
 
 .adam-panel-footer {
-  background-color: #f0f0f0;
+  background-color: var(--secondary-content-background);
 }
 .adam-panel-footer .adam-button {
   margin-right: 0;
@@ -250,6 +248,7 @@
   box-shadow: none;
   float: right;
 }
+
 .adam-panel-footer .adam-button.btn-primary {
   color: white;
 }
@@ -257,6 +256,7 @@
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  border: none;
   /*background-color: #176de5;*/
 }
 
@@ -306,7 +306,7 @@ a.adam-button:hover {
 }
 
 .hovered {
-  background-color: rgba(50, 168, 236, 0.1);
+  background-color: var(--primary-content-hover);
 }
 
 .adam-field .control-object-container {
@@ -315,10 +315,10 @@ a.adam-button:hover {
 
 .adam-field .adam-field-control:focus,
 .adam-field .adam-field-control.focused {
-  border-color: rgba(82, 168, 236, 0.8);
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+  border-color: var(--link-color);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--link-color);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--link-color);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--link-color);
   outline: 0 none;
 }
 
@@ -410,8 +410,8 @@ input[type="number"].required {
     outline: 0 none;
 } */
 .adam-item-matrix {
-  background-color: #FFFFFF;
-  border: 1px solid #CCCCCC;
+  background-color: var(--primary-content-background);
+  border: 1px solid var(--border-color);
   border-radius: 2px 2px 2px 2px;
 }
 
@@ -437,8 +437,8 @@ input[type="number"].required {
 }
 
 .adam-item-updater {
-  background-color: #FFFFFF;
-  border: 1px solid #CCCCCC;
+  background-color: var(--primary-content-background);
+  border: 1px solid var(--border-color);
   border-radius: 2px 2px 2px 2px;
 }
 
@@ -552,18 +552,16 @@ input[type="number"].required {
 }
 
 .adam-tab {
-  background: #f0f0f0;
-  color: #222;
-  border: 1px solid #c0c0c0;
+  background-color: var(--btn-background);
+  border: 1px solid var(--border-color);
   border-bottom: none;
   padding: 4px 9px 2px;
   -moz-border-radius: 2px 2px 0em 0em;
   -webkit-border-radius: 2px 2px 0em 0em;
   border-radius: 2px 2px 0em 0em;
-  margin: 0px;
   cursor: pointer;
   display: inline-block;
-  margin-right: 2px;
+  margin: 0 2px 0 0;
 }
 .adam-tab a {
   text-decoration: none;
@@ -580,10 +578,17 @@ input[type="number"].required {
   bottom: 0;
   left: 0;
 }
+
 .adam-tab.active, .adam-tab:hover {
-  background: white;
-  color: #555;
   position: relative;
+}
+
+.adam-tab.active {
+  background-color: var(--primary-content-active);
+}
+
+.adam-tab:hover {
+  border-color: var(--border-color-focus);
 }
 
 .ui-datepicker {
@@ -629,11 +634,11 @@ input[type="number"].required {
 }
 
 .adam-message-panel-footer {
-  background-color: #f0f0f0;
+  background-color: var(--secondary-content-background);
 }
 
 .adam-message-panel {
-  background-color: #f0f0f0;
+  background-color: var(--secondary-content-background);
   -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
@@ -743,10 +748,10 @@ input[type="number"].required {
 }
 
 .adam.item-container {
-  border: 1px solid #dcdcdc;
+  border: 1px solid var(--border-color);
   position: relative;
   margin-left: 0;
-  background-color: #fff;
+  background-color: var(--input-background);
   margin-bottom: 0;
   overflow: hidden;
   height: 26px;
@@ -844,7 +849,8 @@ input[type="number"].required {
 }
 
 .adam.field-panel-button-group {
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
+  background-color: var(--content-background);
   padding: 2px 1px;
   border-radius: 3px;
   text-align: center;
@@ -883,10 +889,10 @@ input[type="number"].required {
 .adam.list-item {
   list-style-type: none;
   cursor: pointer;
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 1px solid var(--border-color);
   padding: 5px;
   margin: 0px;
-  background: #FFF;
+  background: var(--primary-content-background);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -894,12 +900,12 @@ input[type="number"].required {
 }
 
 .adam.list-panel > .list-item:nth-child(odd) {
-  background-color: #f8f8f8;
+  background-color: var(--primary-content-background);
 }
 
 .adam.list-panel > .list-item:nth-child(odd):hover,
 .adam.list-item:hover {
-  background: #eaeaea;
+  background: var(--primary-content-hover);
 }
 
 .adam.list-panel-message {
@@ -953,6 +959,7 @@ input[type="number"].required {
   border-width: 0 1px 1px 1px;
   width: 100%;
   box-sizing: border-box;
+  background-color: var(--content-background);
 }
 
 .adam.form-panel-field,
@@ -1057,6 +1064,7 @@ input[type="checkbox"].adam.form-panel-field-control {
 .adam.collapsible-panel-body.form-panel-body {
   margin: 0;
   padding: 3px;
+  background-color: var(--content-background);
 }
 
 .adam-formpaneldatetime .edit input {
@@ -1128,7 +1136,7 @@ input[type="checkbox"].adam.form-panel-field-control {
 .adam.group-list .list-item-content {
   padding: 5px 1.9em 5px 5px;
   display: block;
-  color: #777;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   /* width: 100%;
@@ -1217,8 +1225,8 @@ input[type="checkbox"].adam.form-panel-field-control {
 }
 
 .adam.multiple-panel-contentheader {
-  background: #ccc;
-  color: #666;
+  background: var(--content-background);
+  color: var(--text-color);
   padding: 0.1em 0.5em;
   font-weight: bold;
 }

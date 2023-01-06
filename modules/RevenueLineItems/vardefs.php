@@ -65,12 +65,11 @@ $dictionary['RevenueLineItem'] = array(
                 'manufacturer_name' => 'manufacturer_name',
                 'type_id' => 'type_id',
                 'type_name' => 'type_name',
-                'service_start_date' => 'service_start_date',
-                'service_end_date' => 'service_end_date',
                 'service_duration_value' => ['service_duration_value', 'catalog_service_duration_value'],
                 'service_duration_unit' => ['service_duration_unit', 'catalog_service_duration_unit'],
                 'renewable' => 'renewable',
                 'service' => 'service',
+                'lock_duration' => 'lock_duration',
             ),
         ),
         'lock_duration' => [
@@ -767,6 +766,30 @@ $dictionary['RevenueLineItem'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
         ),
+        'forecasted_likely' => [
+            'name' => 'forecasted_likely',
+            'vname' => 'LBL_FORECASTED_LIKELY',
+            'type' => 'currency',
+            'dbType' => 'currency',
+            'comment' => 'Rollup of included RLIs on the Opportunity',
+            'readonly' => true,
+            'massupdate' => false,
+            'importable' => false,
+            'duplicate_merge' => false,
+            'required' => false,
+            'studio' => true,
+            'options' => 'numeric_range_search_dom',
+            'audited' => false,
+            'formula' => 'ifElse(not(equal(indexOf($commit_stage, forecastIncludedCommitStages()), -1)), $likely_case, 0)',
+            'calculated' => true,
+            'enforced' => true,
+            'related_fields' => [
+                'currency_id',
+                'base_rate',
+            ],
+            'convertToBase' => true,
+            'showTransactionalAmount' => true,
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -784,7 +807,6 @@ $dictionary['RevenueLineItem'] = array(
         'archived_emails' => array(
             'name' => 'archived_emails',
             'type' => 'link',
-            'link_file' => 'modules/Emails/ArchivedEmailsLink.php',
             'link_class' => 'ArchivedEmailsLink',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
@@ -1122,15 +1144,7 @@ $dictionary['RevenueLineItem'] = array(
         ],
     ),
     'indices' => array(
-        array(
-            'name' => 'idx_rli_user_dc_timestamp',
-            'type' => 'index',
-            'fields' => array('id', 'assigned_user_id', 'date_closed_timestamp')
-        ),
         array('name' => 'idx_revenuelineitem_sales_stage', 'type' => 'index', 'fields' => array('sales_stage')),
-        array('name' => 'idx_revenuelineitem_probability', 'type' => 'index', 'fields' => array('probability')),
-        array('name' => 'idx_revenuelineitem_commit_stage', 'type' => 'index', 'fields' => array('commit_stage')),
-        array('name' => 'idx_revenuelineitem_quantity', 'type' => 'index', 'fields' => array('quantity')),
         array('name' => 'idx_revenuelineitem_oppid', 'type' => 'index', 'fields' => array('opportunity_id')),
         array(
             'name' => 'idx_rli_account_id_del',
@@ -1185,6 +1199,14 @@ $dictionary['RevenueLineItem'] = array(
                 'deleted',
                 'renewal_rli_id',
                 'id',
+            ],
+        ],
+        [
+            'name' => 'idx_del_addontoid',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'add_on_to_id',
             ],
         ],
     ),

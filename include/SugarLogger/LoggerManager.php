@@ -181,7 +181,7 @@ class LoggerManager
                 continue;
             }
             require_once $location;
-            if ( class_exists($loggerClass) && class_implements($loggerClass,'LoggerTemplate') ) {
+            if (class_exists($loggerClass) && is_subclass_of($loggerClass, 'LoggerTemplate', true)) {
                 self::$_loggers[$loggerClass] = new $loggerClass();
             }
         }

@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'krijo dokumentacion',
 	'LNK_DOCUMENT_LIST'=> 'shiko dokumentacionet',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Rishikime për dokumente të ngjashme',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Ke krijuar me sukses {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'numri i rishikimit',
 	'LBL_FILENAME' => 'dosje',
 	'LBL_MIME' => 'Lloji pantomime',

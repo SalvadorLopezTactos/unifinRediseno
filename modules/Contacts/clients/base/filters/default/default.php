@@ -96,5 +96,13 @@ $viewdefs['Contacts']['base']['filter']['default'] = array(
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
         ),
+        '$distance' => [
+            'name' => '$distance',
+            'vname' => 'LBL_MAPS_DISTANCE',
+            'type' => 'maps-distance',
+            'source' => 'non-db',
+            'merge_filter' => 'enabled',
+            'licenseFilter' => ['MAPS'],
+        ],
     ),
 );

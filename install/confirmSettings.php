@@ -22,6 +22,7 @@ if (!isset($install_script) || !$install_script) {
 }
 
 $db = getDbConnection();
+
 if (isset($_SESSION['licenseKey_submitted']) && ($_SESSION['licenseKey_submitted']) && isset($_SESSION['setup_db_type'])) {
     if (isset($GLOBALS['license']) && isset($GLOBALS['license']->settings)) {
         if (isset($GLOBALS['license']->settings['license_users'])) {
@@ -32,6 +33,7 @@ if (isset($_SESSION['licenseKey_submitted']) && ($_SESSION['licenseKey_submitted
         }
     }
 }
+
 $dbCreate = "({$mod_strings['LBL_CONFIRM_WILL']} ";
 if (empty($_SESSION['setup_db_create_database'])) {
 	$dbCreate .= $mod_strings['LBL_CONFIRM_NOT'];
@@ -88,7 +90,8 @@ $out =<<<EOQ
 		<img src="{$sugar_md}" alt="SugarCRM" border="0">
 		</p>
 		{$mod_strings['LBL_CONFIRM_TITLE']}</th>
-        <th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank"><IMG src="$loginImage" alt="SugarCRM" border="0"></a>
+        <th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank">
+            <img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a>
         </th>
     </tr>
     <tr>

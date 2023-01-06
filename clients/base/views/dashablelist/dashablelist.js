@@ -66,7 +66,7 @@
     /**
      * The plugins used by this view.
      */
-    plugins: ['Dashlet', 'Pagination'],
+    plugins: ['Dashlet', 'Pagination', 'ConfigDrivenList'],
 
     /**
      * We want to load field `list` templates
@@ -80,6 +80,7 @@
      */
     _defaultSettings: {
         limit: 5,
+        freeze_first_column: true,
         filter_id: 'assigned_to_me',
         intelligent: '0'
     },
@@ -97,7 +98,8 @@
         'ProductTemplates',
         'ProductTypes',
         'UserSignatures',
-        'OutboundEmail'
+        'OutboundEmail',
+        'Administration'
     ],
 
     /**
@@ -155,6 +157,11 @@
     filterIsAccessible: true,
 
     /**
+     * Defines the scroll container jQuery element
+     */
+    scrollContainer: null,
+
+    /**
      * @inheritdoc
      *
      * Append lastStateID on metadata in order to active user cache.
@@ -168,6 +175,10 @@
         this.checkIntelligence();
         this._super('initialize', [options]);
         this._noAccessTemplate = app.template.get(this.name + '.noaccess');
+
+        this.context.set('isUsingListPagination', true);
+
+        this.scrollContainer = this.$el;
     },
 
     /**
@@ -348,7 +359,10 @@
      */
     _displayNoFilterAccess: function() {
         var template = app.template.get(this.name + '.nofilteraccess');
-        var noFilterAccessSupportUrl = app.help.getMoreInfoHelpURL('nofilter', 'listviewdashlet');
+        var noFilterAccessSupportUrl = null;
+        if (!_.isUndefined(app.help) && _.isFunction(app.help.getMoreInfoHelpURL)) {
+            noFilterAccessSupportUrl = app.help.getMoreInfoHelpURL('nofilter', 'listviewdashlet');
+        }
         this.$el.html(template({noFilterAccessSupportUrl: noFilterAccessSupportUrl}));
         var listBottom = this.layout.getComponent('list-bottom');
         if (listBottom) {
@@ -476,6 +490,9 @@
         if (!this.settings.get('filter_id')) {
             this.settings.set('filter_id', this._defaultSettings.filter_id);
         }
+        if (_.isUndefined(this.settings.get('freeze_first_column'))) {
+            this.settings.set('freeze_first_column', this._defaultSettings.freeze_first_column);
+        }
         this._setDefaultModule();
         if (!this.settings.get('label')) {
             this.settings.set('label', 'LBL_MODULE_NAME');
@@ -590,6 +607,52 @@
     },
 
     /**
+     * Gets the fields metadata from a particular view's metadata.
+     *
+     * @param {Object} meta The view's metadata.
+     * @return {Object[]} The fields metadata or an empty array.
+     */
+    getFieldMetaForView: function(meta) {
+        meta = _.isObject(meta) ? meta : {};
+        return !_.isUndefined(meta.panels) ? _.flatten(_.pluck(meta.panels, 'fields')) : [];
+    },
+
+    /**
+     * @inheritdoc
+     */
+    getRowDomForModelId: function(id) {
+        return this.$(`tr[data-id="${id}"]`);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    makeRowVisible: function($selected) {
+        if (!$selected) {
+            this.$el.scrollTop();
+            return;
+        }
+
+        let rowTop = $selected.position().top;
+        let rowHeight = $selected.height();
+        let rowBottom = rowTop + rowHeight;
+        let dashletTop = this.$el.scrollTop();
+        let dashletHeight = this.$el.height();
+        let dashletBottom = dashletTop + dashletHeight;
+
+        if (rowBottom >= dashletBottom || rowTop <= dashletTop) {
+            this.$el.scrollTop(rowTop);
+        }
+    },
+
+    /**
+     * ListView sort will close previews, but this is not needed for dashablelists
+     * In fact, closing preview causes problem when previewing this list dashlet
+     * from dashlet-select
+     */
+    sort: $.noop,
+
+    /**
      * Perform any necessary setup before the user can configure the dashlet.
      *
      * Modifies the dashlet configuration panel metadata to allow it to be
@@ -616,6 +679,9 @@
                     break;
             }
         });
+
+        // From ConfigDrivenList Plugin
+        this.filterConfigFieldsForDashlet();
     },
 
     /**
@@ -634,6 +700,20 @@
     },
 
     /**
+     * This function get Displayed Portal Modules
+     *
+     * @private
+     */
+    _portalModulesDelimitation: function() {
+        var url = app.api.buildURL('Administration/portalmodules');
+        app.api.call('read', url, null, {
+            success: _.bind(function(data) {
+                app.metadata.portalModules = _.difference(data, this.moduleBlacklist);
+            }, this)
+        });
+    },
+
+    /**
      * Gets all of the modules the current user can see.
      *
      * This is used for populating the module select and list view columns
@@ -647,6 +727,15 @@
             this._availableModules = {};
             var visibleModules = app.metadata.getModuleNames({filter: 'visible', access: 'read'});
             var allowedModules = _.difference(visibleModules, this.moduleBlacklist);
+
+            var contextModule = app.controller.context.get('module');
+            var contextLayout = app.controller.context.get('layout');
+            if (contextModule == 'Administration' && contextLayout == 'portaltheme-config') {
+                this._portalModulesDelimitation();
+                if (app.metadata.portalModules) {
+                    allowedModules = _.intersection(allowedModules, app.metadata.portalModules);
+                }
+            }
 
             _.each(this.additionalModules, function(extraModules, module) {
                 if (_.contains(allowedModules, module)) {
@@ -788,6 +877,11 @@
             var field = _.find(fields, function(field) {
                 return field.name === name;
             }, this);
+            // If we don't have metadata for a field, skip it to avoid
+            // adding an empty column to the dashlet
+            if (_.isUndefined(field)) {
+                return;
+            }
             // It's possible that a column is on the dashlet and not on the
             // main list view (thus was never patched by metadata-manager).
             // We need to fix up the columns in that case.
@@ -868,23 +962,5 @@
     _dispose: function() {
         this._stopAutoRefresh();
         this._super('_dispose');
-    },
-
-    /**
-     * Gets the fields metadata from a particular view's metadata.
-     *
-     * @param {Object} meta The view's metadata.
-     * @return {Object[]} The fields metadata or an empty array.
-     */
-    getFieldMetaForView: function(meta) {
-        meta = _.isObject(meta) ? meta : {};
-        return !_.isUndefined(meta.panels) ? _.flatten(_.pluck(meta.panels, 'fields')) : [];
-    },
-
-    /**
-     * ListView sort will close previews, but this is not needed for dashablelists
-     * In fact, closing preview causes problem when previewing this list dashlet
-     * from dashlet-select
-     */
-    sort: $.noop
+    }
 })

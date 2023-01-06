@@ -17,7 +17,7 @@
 
 <br/>
 
-<input type="hidden" name="expandAllState" id="expandAllState" value="{$expandAll}">
+<input type="hidden" name="expandAllState" id="expandAllState" value="{$expandAll|escape:'html':'UTF-8'}">
 <input class="button" name="expandCollapse" id="expandCollapse" title="{$mod_strings.LBL_REPORT_COLLAPSE_ALL}"
     type="button"
     value="{$mod_strings.LBL_REPORT_COLLAPSE_ALL}" 
@@ -25,11 +25,11 @@
 <br/><br/>
 {php}
 require_once('modules/Reports/templates/templates_reports.php');
-$reporter = $this->get_template_vars('reporter');
-$args = $this->get_template_vars('args');
-$header_row = $this->get_template_vars('header_row');
-$columns_row = $this->get_template_vars('columns_row');
-$countKeyIndex = $this->get_template_vars('countKeyIndex');
+$reporter = $_smarty_tpl->getTemplateVars('reporter');
+$args = $_smarty_tpl->getTemplateVars('args');
+$header_row = $_smarty_tpl->getTemplateVars('header_row');
+$columns_row = $_smarty_tpl->getTemplateVars('columns_row');
+$countKeyIndex = $_smarty_tpl->getTemplateVars('countKeyIndex');
 $count = 0;
 $totalGroupByCount = 0;
 $topLevelGroupByCount = 0;
@@ -49,7 +49,7 @@ while (( $row = $reporter->get_summary_next_row()) != 0 ) {
 		$startTable = false;
 	} // if
 	$previousRow = $row;
-	template_header_row($header_row, $args, true);
+	template_header_row($header_row, $args, true, $_smarty_tpl);
 {/php}
 {php}
 if ($count != 0 && $startTable) {
@@ -78,19 +78,19 @@ if ($startTable) {
 	if (count($reporter->report_def['group_defs']) > 1) {
 		$topLevelGroupClass = "reportGroup1ByTable";
 	} // if
-	$this->assign('topLevelGroupClass', $topLevelGroupClass);
-	$this->assign('groupByColumnName', $groupByColumnName);
-	$this->assign('rowId', $rowId);
-	$this->assign('spanId', $spanId);
-	$this->assign('divId', $divId);
+	$_smarty_tpl->assign('topLevelGroupClass', $topLevelGroupClass);
+	$_smarty_tpl->assign('groupByColumnName', $groupByColumnName);
+	$_smarty_tpl->assign('rowId', $rowId);
+	$_smarty_tpl->assign('spanId', $spanId);
+	$_smarty_tpl->assign('divId', $divId);
 	$topLevelGroupByCount++;
 {/php}
-<table id="{$divId}" width="100%" border="0" cellpadding="0" cellspacing="0" class="reportGroupViewTable">
+<table id="{$divId|escape:'html':'UTF-8'}" width="100%" border="0" cellpadding="0" cellspacing="0" class="reportGroupViewTable">
 	<tr>
 		<td>
-			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="{$topLevelGroupClass}">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="{$topLevelGroupClass|escape:'html':'UTF-8'}">
 				<tr height="20" >				
-				  <th align='left' id = "{$rowId}" name= "{$rowId}" class="reportGroup1ByTableEvenListRowS1" valign=middle nowrap><span id="{$spanId}"><a href="javascript:expandCollapseComboSummaryDivTable('{$divId}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_ALT_SHOW}" src="{sugar_getimagepath file='basic_search.gif'}"/></a></span>&nbsp;{$groupByColumnName}
+				  <th align='left' id = "{$rowId|escape:'html':'UTF-8'}" name= "{$rowId|escape:'html':'UTF-8'}" class="reportGroup1ByTableEvenListRowS1" valign=middle nowrap><span id="{$spanId|escape:'html':'UTF-8'}"><a href="javascript:expandCollapseComboSummaryDivTable('{$divId|escape:javascript}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_ALT_SHOW}" src="{sugar_getimagepath file='basic_search.gif'}"/></a></span>&nbsp;{$groupByColumnName}
 				  </th>
 				</tr>
 			</table>
@@ -128,17 +128,17 @@ for ($forLoopIndexForGroupBy = $indexOfGroupByStart ; $forLoopIndexForGroupBy < 
 			$newRowId = "";
 		} // if
 	} // if
-	$this->assign('reportGroupByClass', $reportGroupByClass);
-	$this->assign('spaces', $spaces);
+	$_smarty_tpl->assign('reportGroupByClass', $reportGroupByClass);
+	$_smarty_tpl->assign('spaces', $spaces);
 	$indexOfGroupByStart++;
-	$this->assign('groupByColumnName', $groupByColumnName);
-	$this->assign('rowId', $newRowId);	
+	$_smarty_tpl->assign('groupByColumnName', $groupByColumnName);
+	$_smarty_tpl->assign('rowId', $newRowId);
 {/php}
 	<tr>
 		<td>
-			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="{$reportGroupByClass}">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="{$reportGroupByClass|escape:'html':'UTF-8'}">
 				<tr height="20" class="reportGroupNByTableEvenListRowS1">
-				  <td align='left' id = "{$rowId}" name= "{$rowId}" width="30%" nowrap class="reportGroupNByTableEvenListRowS1">{$spaces}{$groupByColumnName}</td>
+				  <td align='left' id = "{$rowId|escape:'html':'UTF-8'}" name= "{$rowId|escape:'html':'UTF-8'}" width="30%" nowrap class="reportGroupNByTableEvenListRowS1">{$spaces}{$groupByColumnName}</td>
 				</tr>
 			</table>
 		</td>
@@ -148,15 +148,9 @@ for ($forLoopIndexForGroupBy = $indexOfGroupByStart ; $forLoopIndexForGroupBy < 
 {/php}
 
 {php}
-	//$divId = "combo_summary_div_". $count;
-	//template_list_row($row, false, true, $divId);
-
-{/php}
-
-{php}
 	//echo template_end_table($args);
 	//echo "<div id='". $divId ."' style='padding-left: 30px;display:none'>";
-	template_header_row($columns_row, $args);
+	template_header_row($columns_row, $args, false, $_smarty_tpl);
 {/php}
 
 	<tr>
@@ -175,19 +169,19 @@ for ($forLoopIndexForGroupBy = $indexOfGroupByStart ; $forLoopIndexForGroupBy < 
 
 {php}
 	$count1 = 0;
-	$this->assign('count1', $count1);
+	$_smarty_tpl->assign('count1', $count1);
 {/php}
 {foreach from=$header_row key=module item=cell}
 	{if (($args.group_column_is_invisible != "") && ($args.group_pos eq $count1))}
 {php}	
 	$count1 = $count1 + 1;
-	$this->assign('count1', $count1);
+	$_smarty_tpl->assign('count1', $count1);
 {/php}
-	{ else }
+	{else}
 	{if $cell eq ""}
 {php}	
 	$cell = "&nbsp;";
-	$this->assign('cell', $cell);
+	$_smarty_tpl->assign('cell', $cell);
 {/php}
 	{/if}	
 								<th scope="col" align='center' class="reportGroupByDataChildTablelistViewThS1" valign=middle nowrap>	
@@ -202,30 +196,30 @@ for ($forLoopIndexForGroupBy = $indexOfGroupByStart ; $forLoopIndexForGroupBy < 
             setCountForRowId($rowIdToCountArray, $rowId, $row, $countKeyIndex);
   			for($i=0; $i < $reporter->current_summary_row_count; $i++ ) {
 				if (($column_row = $reporter->get_next_row() ) != 0 ) {
-					template_list_row($column_row, true);
+					template_list_row($column_row, true, false, '', $_smarty_tpl);
 {/php}
-<tr height=20 class="{$row_class}">
+<tr height=20>
 {if ($isSummaryComboHeader)}
 
 {/if}
 {php}
 	$count1 = 0;
-	$this->assign('count1', $count1);
+	$_smarty_tpl->assign('count1', $count1);
 {/php}
 {foreach from=$column_row.cells key=module item=cell}
 	{if (($column_row.group_column_is_invisible != "") && ($count1|in_array:$column_row.group_pos)) }
 {php}	
 	$count1 = $count1 + 1;
-	$this->assign('count1', $count1);
+	$_smarty_tpl->assign('count1', $count1);
 {/php}
-	{ else }
+	{else}
 	{if $cell eq ""}
 {php}	
 	$cell = "&nbsp;";
-	$this->assign('cell', $cell);
+	$_smarty_tpl->assign('cell', $cell);
 {/php}
 	{/if}	
-									<td width="{$width}%" valign=TOP class="{$row_class[$module]}" bgcolor="{$bg_color}" scope="row">
+									<td width="{$width|escape:'html':'UTF-8'}%" valign=TOP class="{$row_class[$module]|escape:'html':'UTF-8'}" bgcolor="{$bg_color|escape:'html':'UTF-8'}" scope="row">
 	
 	{$cell}
 									</td>
@@ -260,17 +254,17 @@ if (!$got_row) {
 	echo template_summary_combo_view_no_results($args);
 	echo template_end_table($args);
 } // if	
-$this->assign('divCounter', $divCounter);
+$_smarty_tpl->assign('divCounter', $divCounter);
 global $global_json;
 if (count($reporter->report_def['group_defs']) > 1) {
-	$this->assign('totalGroupCountArrayString', $global_json->encode($rowIdToCountArray));
+	$_smarty_tpl->assign('totalGroupCountArrayString', $global_json->encode($rowIdToCountArray));
 }
 {/php}
 <script language="javascript">
-var totalGroupCountArrayString = '{$totalGroupCountArrayString}';
-var totalDivCounter = {$divCounter};
+var totalGroupCountArrayString = '{$totalGroupCountArrayString|escape:javascript}';
+var totalDivCounter = {$divCounter|escape:javascript};
 var groupCountObject = new Object();
-{literal}
+
 if (totalGroupCountArrayString != '') {
 	groupCountObject = YAHOO.lang.JSON.parse(totalGroupCountArrayString);
 } // if
@@ -301,16 +295,16 @@ function expandCollapseAll(expandAll, makeAjaxCall) {
 		if (makeAjaxCall == null) {
 			saveReportOptionsState("expandAll", "0");
 		}
-		expandCollapseButton.title = {/literal}"{$mod_strings.LBL_REPORT_EXPAND_ALL}";
-		{literal}expandCollapseButton.value = {/literal}"{$mod_strings.LBL_REPORT_EXPAND_ALL}";
-		{literal}expandCollapseButton.onclick = function() {expandCollapseAll('true')};
+		expandCollapseButton.title = "{$mod_strings.LBL_REPORT_EXPAND_ALL}";
+		expandCollapseButton.value = "{$mod_strings.LBL_REPORT_EXPAND_ALL}";
+		expandCollapseButton.onclick = function() { expandCollapseAll('true') };
 	} else {
 		if (makeAjaxCall == null) {
 			saveReportOptionsState("expandAll", "1");
 		} // if
-		expandCollapseButton.title = {/literal}"{$mod_strings.LBL_REPORT_COLLAPSE_ALL}";
-		{literal}expandCollapseButton.value = {/literal}"{$mod_strings.LBL_REPORT_COLLAPSE_ALL}";
-		{literal}expandCollapseButton.onclick = function() {expandCollapseAll('false')};
+		expandCollapseButton.title = "{$mod_strings.LBL_REPORT_COLLAPSE_ALL}";
+		expandCollapseButton.value = "{$mod_strings.LBL_REPORT_COLLAPSE_ALL}";
+		expandCollapseButton.onclick = function() { expandCollapseAll('false') };
 	} // else
 	for (var i = 0 ; i < totalDivCounter ; i++) {
 		expandCollapseComboSummaryDivTable(("combo_summary_div_" + i), expandAll);
@@ -357,7 +351,7 @@ function expandCollapseComboSummaryDivTable(divId, expandAll) {
 	}
 }
 
-{/literal}
+
 </script>
 {php}
 if ( ! isset($header_row[0]['norows'])) {
@@ -376,7 +370,7 @@ if ( $reporter->has_summary_columns()) {
 	} // if
  	$reporter->layout_manager->setAttribute('no_sort',1);
   	echo get_form_header( $mod_strings['LBL_GRAND_TOTAL'],"", false); 
-  	template_header_row($total_header_row,$args);
+  	template_header_row($total_header_row, $args, false, $_smarty_tpl);
 {/php}
 	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list view">
 	{if ($show_pagination neq "")}
@@ -387,23 +381,23 @@ if ( $reporter->has_summary_columns()) {
 	<th scope="col" align='left'  valign=middle nowrap>&nbsp;</th>
 	{/if}
 	{if ($isSummaryComboHeader)}
-	<th><span id="img_{$divId}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_ALT_SHOW}" src="{$image_path}advanced_search.gif"/></a></span></th>
+	<th><span id="img_{$divId|escape:'html':'UTF-8'}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId|escape:javascript}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_ALT_SHOW}" src="{$image_path}advanced_search.gif"/></a></span></th>
 	{/if}
 	{php}
 		$count = 0;
-		$this->assign('count', $count);
+		$_smarty_tpl->assign('count', $count);
 	{/php}
 	{foreach from=$header_row key=module item=cell}
 		{if (($args.group_column_is_invisible != "") && ($args.group_pos eq $count))}
 	{php}	
 		$count = $count + 1;
-		$this->assign('count', $count);
+		$_smarty_tpl->assign('count', $count);
 	{/php}
-		{ else }
+		{else}
 		{if $cell eq ""}
 	{php}	
 		$cell = "&nbsp;";
-		$this->assign('cell', $cell);
+		$_smarty_tpl->assign('cell', $cell);
 	{/php}
 		{/if}		
 		<td scope="col" align='left'  valign=middle nowrap>	
@@ -413,32 +407,32 @@ if ( $reporter->has_summary_columns()) {
 	{/foreach}
 	</tr>
 {php}
-  	if (! empty($total_row)) {
-    	template_list_row($total_row);
+  	if (!empty($total_row)) {
+    	template_list_row($total_row, false, false, '', $_smarty_tpl);
 {/php}
-		<tr height=20 class="{$row_class}" onmouseover="setPointer(this, '{$rownum}', 'over', '{$bg_color}', '{$hilite_bg}', '{$click_bg}');" onmouseout="setPointer(this, '{$rownum}', 'out', '{$bg_color}', '{$hilite_bg}', '{$click_bg}');" onmousedown="setPointer(this, '{$rownum}', 'click', '{$bg_color}', '{$hilite_bg}', '{$click_bg}');">
+		<tr height=20 class="{$row_class}" onmouseover="setPointer(this, '{$rownum|escape:javascript}', 'over', '{$bg_color|escape:javascript}', '{$hilite_bg|escape:javascript}', '{$click_bg|escape:javascript}');" onmouseout="setPointer(this, '{$rownum|escape:javascript}', 'out', '{$bg_color|escape:javascript}', '{$hilite_bg|escape:javascript}', '{$click_bg|escape:javascript}');" onmousedown="setPointer(this, '{$rownum|escape:javascript}', 'click', '{$bg_color|escape:javascript}', '{$hilite_bg|escape:javascript}', '{$click_bg|escape:javascript}');">
 		{if ($isSummaryComboHeader)}
-		<td><span id="img_{$divId}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_ALT_SHOW}" src="{$image_path}advanced_search.gif"/></a></span></td>
+		<td><span id="img_{$divId|escape:'html':'UTF-8'}"><a href="javascript:expandCollapseComboSummaryDiv('{$divId|escape:javascript}')"><img width="8" height="8" border="0" absmiddle="" alt="{$mod_strings.LBL_ALT_SHOW}" src="{$image_path}advanced_search.gif"/></a></span></td>
 		{/if}
 		{php}
 			$count = 0;
-			$this->assign('count', $count);
+			$_smarty_tpl->assign('count', $count);
 		{/php}
 		{foreach from=$column_row.cells key=module item=cell}
 			{if (($column_row.group_column_is_invisible != "") && ($count|in_array:$column_row.group_pos)) }
 		{php}	
 			$count = $count + 1;
-			$this->assign('count', $count);
+			$_smarty_tpl->assign('count', $count);
 		{/php}
-			{ else }
+			{else}
 			{if $cell eq ""}
 		{php}	
 			$cell = "&nbsp;";
-			$this->assign('cell', $cell);
+			$_smarty_tpl->assign('cell', $cell);
 		{/php}
 			{/if}
 			
-			<td width="{$width}%" align="left" valign=TOP class="{$row_class}" bgcolor="{$bg_color}" scope="row">
+			<td width="{$width|escape:'html':'UTF-8'}%" align="left" valign=TOP class="{$row_class}" bgcolor="{$bg_color|escape:'html':'UTF-8'}" scope="row">
 			
 			{$cell}
 			{/if}

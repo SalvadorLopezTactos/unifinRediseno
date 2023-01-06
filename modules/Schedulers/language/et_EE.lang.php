@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Protsessi ajateadlikud ajakavad',
 'LBL_OOTB_DATA_ARCHIVER' => 'Käita aktiivsete andmete arhiivimis-/kustutamistoiminguid',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Kirjete geokooder',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Geokoodri lahendaja',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
 'LBL_LIST_LIST_ORDER' => 'Planeerijad:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Crontabi seadistamine',
 'LBL_CRON_LINUX_DESC' => 'Märkus: Sugari planeerijate käitamiseks lisage crontabi faili järgmine rida: ',
 'LBL_CRON_WINDOWS_DESC' => 'Märkus: Sugari planeerijate käitamiseks looge käitatav pakkfail, kasutades Windowsi ajastatud ülesandeid. Pakkfail peaks sisaldama järgmisi käske: ',
-'LBL_NO_PHP_CLI' => 'Kui teie hosti PHP kahendandmed pole saadavalb, saate oma tööde käivitamiseks kasutada suvandeid wget või curl.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'Kui teie hosti PHP kahendandmed pole saadavalb, saate oma tööde käivitamiseks kasutada suvandeid wget või curl.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>koolutamiseks: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;lokk - vaikne '.$sugar_config['site_url'].'/cron.php> /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Tööde logi',
 'LBL_EXECUTE_TIME'			=> 'Täitmisaeg',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eemalda ajutised failid',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Taasta meeskonna denormaliseeritud turbeandmed',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Värskenda toote määratlust',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Geokoodri kaardid',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Geokoodri lahendaja',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Käivita igaõhtused hulgimeili kampaaniad',
 'LBL_ASYNCMASSUPDATE' => 'Tee asünkroonne hulgivärskendus',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Puhasta vanade kirjete loendid',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Tegevuste voo puhastaja',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Protsessi ajateadlikud ajakavad',
+'LBL_SUGARJOBDATAARCHIVER' => 'Käita aktiivsete andmete arhiivimis-/kustutamistoiminguid',
 'LBL_PMSEENGINECRON' => 'SugarBPM-i planeerija',
 );
 

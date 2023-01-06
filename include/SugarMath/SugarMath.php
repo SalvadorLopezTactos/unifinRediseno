@@ -162,7 +162,8 @@ class SugarMath
                 return bcdiv($params[0], $params[1], $this->scale);
                 break;
             case 'pow':
-                return bcpow($params[0], $params[1], $this->scale);
+                // bcpow anyway truncates exponent, at least it does not raise warning if we do it explicitly
+                return bcpow($params[0], (int)$params[1], $this->scale);
                 break;
             case 'mod':
                 return bcmod($params[0], $params[1]);
@@ -305,7 +306,7 @@ class SugarMath
             $zeros = str_repeat("0", $scale);
             return bcadd($value, (($value < 0) ? '-' : '') . "0.{$zeros}5", $scale);
         } else {
-            return bcadd($value, 0, $scale);
+            return bcadd($value, '0', $scale);
         }
     }
 

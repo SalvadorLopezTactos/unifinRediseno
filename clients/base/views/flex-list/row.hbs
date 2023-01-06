@@ -17,7 +17,7 @@
         </td>
     {{/each}}
     {{#each view._fields.visible}}
-        <td{{#if align}} class="{{align}}"{{/if}} data-type="{{type}}" data-column="{{name}}">
+        <td class="{{#if align}}{{align}}{{/if}}{{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky-column stick-first no-border{{#eq ../../../view.leftColumns.length 0}} no-left-column{{/eq}}{{/if}}{{/if}}" data-type="{{type}}" data-column="{{name}}">
             {{field ../view model=../model template=../view.viewName}}
         </td>
     {{/each}}

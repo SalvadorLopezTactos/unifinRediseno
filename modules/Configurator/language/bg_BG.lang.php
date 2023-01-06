@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Формат на часа по подразбиране',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Покажи времето за реакция на сървъра',
+    'FREEZE_FIRST_COLUMN' => 'Позволи замразяване на колона',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Дава възможност тази настройка да позволи на потребителите да заразят първата колона в разнообразие от ' .
+        'списъчни изгледи, включително изгледи на списъци на модули, подпанели, панели и конзоли.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Отчитане на заявките със забавяне в изпълнението',
     'LOCK_HOMEPAGE_HELP'=>'This setting is to prevent<BR> 1) the addition of new home pages in the Home module, and <BR>2) customization of dashlet placement in the home pages by dragging and dropping.',
     'CURRENT_LOGO'=>'Текущо лого в употреба',
+    'CURRENT_LOGO_DARK' => 'Текущо лого Тъмен режим:',
     'CURRENT_LOGO_HELP'=>'Логото се визуализира в горния ляв ъгъл на прозорците на програмата.',
+    'CURRENT_LOGO_DARK_HELP' => "Логото се показва в долния ляв ъгъл, когато приложението Sugar е в тъмен режим съгласно предпочитанията на потребителя.",
     'NEW_LOGO'=>'Зареждане на ново лого (212x40)',
     'NEW_LOGO_HELP' => 'Форматът на файла може да бъде .png или .jpg. Максималният размер е: 180x24 точки.',
+    'NEW_LOGO_DARK' => 'Избор на лого Тъмен режим:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Форматът на файла може да бъде .png или .jpg. Максималната височина е 17px, а максималната ширина 450px. Всеки зареден имидж ще бъде преобразуван до тези размери, в случай че ги превишава. Името на зареждания файл не трябва да съдържа интервали.',
     'NEW_QUOTE_LOGO'=>'Зареждане на ново лого за оферти (867x74)',
     'NEW_QUOTE_LOGO_HELP'=>'Форматът на файла следва да е .jpg.<BR>Препоръчителният размер: 867x74 px.',
@@ -412,8 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Продължи',
     'LBL_WIZARD_FINISH_TAB' => 'Край',
     'LBL_WIZARD_FINISH_TITLE' => 'Базовата конфигурация на системата е завършена',
-    'LBL_WIZARD_FINISH' => 'Натиснете бутона <b>Продължи</b>, за да конфигурирате потребитеските настройки.<br/><br />
-За конфигурация на допълнителни системни настройки натиснете <a href="index.php?module=Administration&action=index" target="_blank">here</a>.',
+    'LBL_WIZARD_FINISH' => 'Щракнете върху <b>Продължи</b>, за да конфигурирате потребитеските настройки.<br/><br />
+За конфигурация на допълнителни системни настройки щракнете върху <a href="#Administration" target="_blank">here</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Фирмена идентичност',
     'LBL_WIZARD_SYSTEM_DESC' => 'Въведете име на организация и изберете фирмено лого, които да бъдат използвани в SugarCRM.',
     'LBL_WIZARD_LOCALE_DESC' => 'Дефинирайте как данните в SugarCRM да бъдат визуализирани в зависимост от Вашия географски регион. Въведените настройки ще бъдат използвани по подразбиране за създаваните потребители в системата. Всеки потребител може да задава различни настройки за себе си в последствие.',
@@ -424,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Зарежда се ...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Изтрий' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Начало' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Лого' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Лого' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Лого Тъмен режим',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* The Reports module is only available for the Sugar Mobile iPhone client.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Модулът Справки не е наличен за мобилния изглед в интернет браузър.',
 
@@ -463,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

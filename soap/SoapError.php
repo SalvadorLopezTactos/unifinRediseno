@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+require_once 'soap/SoapErrorDefinitions.php';
+
 class SoapError{
 	var $name;
 	var $number;
@@ -20,7 +23,7 @@ class SoapError{
 	}
 
 	function set_error($error_name){
-		global $error_defs;
+        global $error_defs;
 		if(!isset($error_defs[$error_name])){
 			$this->name = 'An Undefined Error - ' . $error_name . ' occurred';
 			$this->number = '-1';
@@ -51,5 +54,40 @@ class SoapError{
 		return $this->description;
 	} // fn
 
-
+    /**
+     * serialize a fault
+     *
+     * @param SoapFault $fault
+     * @return string The serialization of the fault instance.
+     * @access public
+     */
+    public function serialize(SoapFault $fault): string
+    {
+        return <<<EOT
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="{$GLOBALS['sugar_config']['site_url']}/service/soap-envelope.xsd"
+      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+      xmlns:ns1="http://www.sugarcrm.com/sugarcrm">
+<soapenv:Body>
+    <soapenv:Fault>
+        <faultcode>$fault->faultcode</faultcode>
+        <faultstring>
+            {$fault->getMessage()}
+        </faultstring>
+        <detail>
+            <ns1:FaultResponse xmlns:ns1="http://www.sugarcrm.com/sugarcrm">
+                <errorCode>
+                    {$fault->getCode()}
+                </errorCode>
+                <errorDetail>
+                    {$fault->getTraceAsString()}
+                </errorDetail>
+            </ns1:FaultResponse>
+        </detail>
+    </soapenv:Fault>
+</soapenv:Body>
+</soapenv:Envelope>
+EOT;
+    }
 }

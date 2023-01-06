@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Kreiraj dokument',
 	'LNK_DOCUMENT_LIST'=> 'Prikaži dokumente',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Revizija za povezani dokument',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Uspešno ste kreirali {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Broj revizije',
 	'LBL_FILENAME' => 'Fajl:',
 	'LBL_MIME' => 'MIME tip',

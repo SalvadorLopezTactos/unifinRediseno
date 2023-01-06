@@ -19,6 +19,51 @@
     /**
      * @inheritdoc
      */
+    initialize: function(options) {
+        this._super('initialize', [options]);
+
+        // If the field is on the Quotes create view, try to get a default tax rate
+        if (options.view.name === 'create') {
+            this.getDefaultTaxRate();
+        }
+    },
+
+    /**
+     * Get the lowest order active tax rate the user can access
+     */
+    getDefaultTaxRate: function() {
+        let taxRateCollection = app.data.createBeanCollection('TaxRates');
+        taxRateCollection.fetch({
+            fields: ['id', 'name', 'status', 'list_order', 'value'],
+            filter: [
+                {'status': {'$in': ['Active']}}
+            ],
+            params: {
+                order_by: 'list_order:asc',
+            },
+            limit: 1,
+            success: data => {
+                if (data.models.length === 0 || !this.model) {
+                    return;
+                }
+                let taxRate = data.models[0];
+                this.setValue({
+                    id: taxRate.get('id'),
+                    name: taxRate.get('name'),
+                    value: taxRate.get('value')
+                });
+                this.view.defaultTaxRateValues = {
+                    taxrate_id: taxRate.get('id'),
+                    taxrate_name: taxRate.get('name'),
+                    taxrate_value: taxRate.get('value')
+                };
+            }
+        });
+    },
+
+    /**
+     * @inheritdoc
+     */
     bindDataChange: function() {
         this._super('bindDataChange');
 

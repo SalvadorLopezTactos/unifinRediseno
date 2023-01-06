@@ -28,6 +28,7 @@ $viewdefs['KBContents']['base']['filter']['basic'] = array(
                 '$owner' => '',
             ),
             'editable' => false,
+            'app' => 'base',
         ),
         array(
             'id' => 'favorites',
@@ -36,6 +37,7 @@ $viewdefs['KBContents']['base']['filter']['basic'] = array(
                 '$favorite' => '',
             ),
             'editable' => false,
+            'app' => 'base',
         ),
         array(
             'id' => 'recently_created',
@@ -62,6 +64,7 @@ $viewdefs['KBContents']['base']['filter']['basic'] = array(
                 '$tracker' => '-7 day',
             ),
             'editable' => false,
+            'app' => 'base',
         ),
     ),
 );

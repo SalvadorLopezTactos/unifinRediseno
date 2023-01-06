@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DomainDnsRecord extends Entity
 {
@@ -30,7 +28,7 @@ class DomainDnsRecord extends Entity
     * Gets the isOptional
     * If false, this record must be configured by the customer at the DNS host for Microsoft Online Services to operate correctly with the domain.
     *
-    * @return bool The isOptional
+    * @return bool|null The isOptional
     */
     public function getIsOptional()
     {
@@ -59,7 +57,7 @@ class DomainDnsRecord extends Entity
     * Gets the label
     * Value used when configuring the name of the DNS record at the DNS host.
     *
-    * @return string The label
+    * @return string|null The label
     */
     public function getLabel()
     {
@@ -88,7 +86,7 @@ class DomainDnsRecord extends Entity
     * Gets the recordType
     * Indicates what type of DNS record this entity represents.The value can be one of the following: CName, Mx, Srv, TxtKey
     *
-    * @return string The recordType
+    * @return string|null The recordType
     */
     public function getRecordType()
     {
@@ -117,7 +115,7 @@ class DomainDnsRecord extends Entity
     * Gets the supportedService
     * Microsoft Online Service or feature that has a dependency on this DNS record.Can be one of the following values: null, Email, Sharepoint, EmailInternalRelayOnly, OfficeCommunicationsOnline, SharePointDefaultDomain, FullRedelegation, SharePointPublic, OrgIdAuthentication, Yammer, Intune
     *
-    * @return string The supportedService
+    * @return string|null The supportedService
     */
     public function getSupportedService()
     {
@@ -146,7 +144,7 @@ class DomainDnsRecord extends Entity
     * Gets the ttl
     * Value to use when configuring the time-to-live (ttl) property of the DNS record at the DNS host. Not nullable
     *
-    * @return int The ttl
+    * @return int|null The ttl
     */
     public function getTtl()
     {

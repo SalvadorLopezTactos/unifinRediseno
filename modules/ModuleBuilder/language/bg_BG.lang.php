@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Изтрий' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Разработено от SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Роля',
+    'LBL_BASE_LAYOUT' => 'Основна подредба',
+    'LBL_FIELD_NAME' => 'Име на полето',
+    'LBL_FIELD_VALUE' => 'Стойност',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Подредбата е определена от:',
+    'layoutDeterminedBy' => [
+        'std' => 'Стандартна подредба',
+        'role' => 'Роля',
+        'dropdown' => 'Падащо поле',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Всички персонализирани подредби ще бъдат премахнати. Сигурни ли сте, че желаете да промените дефинициите на настоящата подредба?',
 'help'=>array(
     'package'=>array(
             'create'=>'Въведете <b>Име</b> на пакета. Въвежданото име трябва да е последователност от букви и цифри и не трябва да съдържа интервали. (Пример: HR_Management)<br/><br/> Можете допълнително да въведете информация за <b>Автора</b> и <b>Описание</b> на пакета. <br/><br/>Натиснете <b>Запази</b>, за да създадете пакета.',
@@ -456,8 +466,6 @@ If Opportunities is included, Accounts must either be required or removed from t
 'LBL_VISIBILITY_EDITOR' => 'Редактор на видимостта',
 'LBL_ROLLUP' => 'С натрупване',
 'LBL_RELATED_FIELD' => 'Свързано поле',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL към персонализирано изображение на графичното лого. Препоръчаните размери на графичното лого са 22x22 точки. Всяко качено изображение, което е по-голямо в коя да е от двете посоки ще бъде мащабирано до тези максимални рамери.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL към персонализирано изображение на лого. Препоръчаната ширина на логото е 200 точки. Всяко качено изображение, което е по-голямо в коя да е посока, ще бъде преобразувано до тези максимални размери. Това лого ще се използва на екрана за влизане. Ако не е качено изображение, ще се използва графичното лого.',
 'LBL_PORTAL_ROLE_DESC' => 'Не изтривайте тази потребителска роля. Тази роля на Потребителския портал е системно генерирана в процеса на активиране на Sugar портал. Използвайте контролите в ролята, за да разрешите/забраните модулите Проблеми, Казуси или База от знания в Sugar портал. Не модифицирайте никоя от останалите контроли за тази роля, за да избегнете потенциално некоректно поведение на системата. В случай че случайно изтриете тази роля, създайте я отново като забраните и след това отново разрешите Sugar портал.',
 
 //RELATIONSHIPS
@@ -580,6 +588,7 @@ If Opportunities is included, Accounts must either be required or removed from t
 'LBL_BTN_ADD_RELATIONSHIP'=>'Добави връзка с друг модул',
 'LBL_BTN_RENAME_MODULE' => 'Промяна на име на модул',
 'LBL_BTN_INSERT'=>'Вмъкни',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Възстановяване на основната подредба',
 //TABS
 
 //ERRORS
@@ -590,6 +599,7 @@ If Opportunities is included, Accounts must either be required or removed from t
 'ERROR_GENERIC_TITLE' => 'Грешка',
 'ERROR_REQUIRED_FIELDS' => 'Сигурни ли сте, че искате да продължите? Следните задължителни полета липсват в текущата подредба',
 'ERROR_ARE_YOU_SURE' => 'Сигурни ли сте, че искате да продължите?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Полето не може да бъде създадено. Достигнали сте лимита на размер на реда на тази таблица във вашата база данни. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Научете още</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Следните полета се изчисляват по формула и няма да бъдат преизчислени в реално време при отваряне на формата за редактиране в SugarCRM Mobile:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Следните полета се изчисляват по формула и няма да бъдат преизчислени в реално време при отваряне на формата за редактиране в SugarCRM Portal:',
@@ -599,16 +609,14 @@ If Opportunities is included, Accounts must either be required or removed from t
     'LBL_PORTAL_ENABLE_MODULES' => 'Ако искате да ги разрешите в портала, можете да го направите <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">тук</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Конфигурация на Портал',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Разрешаване на портал',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Разрешаване на търсене преди отваряне на казус',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Активирайте бележки на модула База със знания',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Разрешете на потребители на портала да затворят случая',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Позволяване на нови потребители да се регистрират',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Права на достъп на потребителя',
     'LBL_PORTAL_THEME' => 'Портал теми',
     'LBL_PORTAL_ENABLE' => 'Активирай',
     'LBL_PORTAL_SITE_URL' => 'Порталният сайт се намира на адрес:',
     'LBL_PORTAL_APP_NAME' => 'Име на приложението',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL адрес на графичното лого',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Преглед на графичното лого',
-    'LBL_PORTAL_LOGO_URL' => 'URL адрес на логото',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Преглед на логото',
     'LBL_PORTAL_CONTACT_PHONE' => 'Телефон',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Електронна поща',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Трябва да се въведе валиден адрес на електронна поща',
@@ -624,6 +632,23 @@ If Opportunities is included, Accounts must either be required or removed from t
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Влачете и пускайте имената на модулите на портала, за да ги настроите да бъдат видими или скрити в горната лента за навигация в портала. За контролиране на достъпа на потребители до модулите използвайте <a href="?module=ACLRoles&action=index">Потребителски роли.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Показвани модули',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Скрити модули',
+    'LBL_CONFIG_VISIBILITY' => 'Видимост',
+    'LBL_CASE_VISIBILITY_HELP' => 'Определете кои потребители на портала да могат да видят казус.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Определете кои потребители на портала да могат да видят имейли, свързани с казуса. Участващи контакти са онези в полетата До, От, Видимо копие (СС) и Скрито копие (ВСС).',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Определете кои потребители на портала да могат да видят съобщения, свързани с казус. Участващи контакти са онези в полето Гости.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Всички контакти, свързани с профила',
+        'related_contacts' => 'Само основен контакт и контакти, свързани с казуса',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Всички участващи контакти',
+        'all' => 'Всички контакти, които могат да видят казуса',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Само участващи контакти',
+        'all' => 'Всички контакти, които могат да видят казуса',
+    ],
+
 
 'LBL_PORTAL'=>'Портал',
 'LBL_PORTAL_LAYOUTS'=>'Подредби в Портал',
@@ -796,11 +821,11 @@ If Opportunities is included, Accounts must either be required or removed from t
     . "Задължителните полета ще бъдат след формулата в мобилния изглед, базиран на браузър,<br/>"
     . "но няма да бъдат след формулата в основните приложения като Sugar Mobile за iPhone. <br/>"
     . "Те няма да бъдат след формулата в портала за самообслужване на Sugar.",
-'LBL_POPHELP_READONLY'=>"Създайте формула, за да определите дали това поле е задължително в оформления.<br/>"
+'LBL_POPHELP_READONLY'=>"Създайте формула, за да определите дали това поле е само за четене в оформления.<br/>"
         . "Полетата само за четене ще бъдат след формулата в мобилния изглед, базиран на браузър,<br/>"
         . "но няма да бъдат след формулата в основните приложения като Sugar Mobile за iPhone. <br/>"
         . "Те няма да бъдат след формулата в портала за самообслужване на Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Изберете да използвате това поле, когато търсите записи с пощта на глобалното търсене в този модул.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Изберете да използвате това поле, когато търсите записи с помощта на „Глобално търсене" в този модул.',
 //Revert Module labels
 'LBL_RESET' => 'Изпълни',
 'LBL_RESET_MODULE' => 'Първоначални настройки',
@@ -836,6 +861,7 @@ If Opportunities is included, Accounts must either be required or removed from t
                 'datetimecombo' =>'Дата и Час',
                 'decimal'=>'Десетично число',
                 'autoincrement' => 'Автоматично нарастване',
+                'actionbutton' => 'ActionButton',
 ),
 'labelTypes' => array(
     "" => "Често използвани етикети",
@@ -854,4 +880,8 @@ If Opportunities is included, Accounts must either be required or removed from t
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Копирай от подредба',
 'LBL_RELATIONSHIP_TYPE' => 'Връзка',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Език за сравнение',
+'LBL_LABEL_NOT_TRANSLATED' => 'Този етикет може да не се превежда',
 );

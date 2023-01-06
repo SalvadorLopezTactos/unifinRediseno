@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => '与时间相关的流程安排',
 'LBL_OOTB_DATA_ARCHIVER' => '运行活动数据存档/删除',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => '记录地理编码',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => '地理编码解析器',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '间隔：',
 'LBL_LIST_LIST_ORDER' => '计划任务：',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => '设置 Crontab',
 'LBL_CRON_LINUX_DESC' => '注意：为运行 Sugar 计划任务，请在您的 crontab 文件中增加这一行：',
 'LBL_CRON_WINDOWS_DESC' => '注意：为运行 Sugar 计划任务，请使用 Windows 已安排的任务来创建要运行的批处理文件。批处理文件应包含以下命令：',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> '任务日志',
 'LBL_EXECUTE_TIME'			=> '执行时间',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => '移除临时文件',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => '重建非规范化团队安全性数据',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => '更新产品描述',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => '地理编码映射',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => '地理编码解析器',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '运行每晚批量运行邮件市场活动',
 'LBL_ASYNCMASSUPDATE' => '执行异步大规模更新',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => '清除旧记录列表',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => '活动流清除程序',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => '与时间相关的流程安排',
+'LBL_SUGARJOBDATAARCHIVER' => '运行活动数据存档/删除',
 'LBL_PMSEENGINECRON' => 'SugarBPM 工作计划',
 );
 

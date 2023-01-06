@@ -67,23 +67,23 @@ class SavedReport extends Basic
 	var $list_fields = array('id', 'name', 'module', 'report_type', 'schedule_id', 'active', 'next_run', 'last_run_date');
 
     function save_report(
-        $id,
-        $owner_id,
-        $name,
-        $module,
-        $report_type,
-        $content,
-        $is_published = 0,
-        $team_id,
-        $chart_type = 'none',
-        $teamSetSelectedId = null,
-        $description = '',
-        $default_guid_id = null
-    ) {
+        ?string $id,
+        string $owner_id,
+        string $name,
+        string $module,
+        string $report_type,
+        string $content,
+        string $is_published,
+        string $team_id,
+        string $chart_type = 'none',
+        ?string $teamSetSelectedId = null,
+        string $description = '',
+        ?string $default_guid_id = null
+    ): int {
 		global $json;
 		global $current_user;
 
-		if ( $id != -1) {
+        if ($id != null) {
 			$query_arr = array( 'id'=>$id);
 			$this->retrieve_by_string_fields($query_arr, false);
 
@@ -471,13 +471,13 @@ function getACLAllowedModules()
 
      $report_modules = getAllowedReportModules($modListHeader);
 
-     foreach($report_modules as $module=>$class_name) {
-         $seed = BeanFactory::newBean($module);
+    foreach ($report_modules as $module => $class_name) {
+        $seed = BeanFactory::newBean($module);
 
-         if(empty($seed) || !$seed->ACLAccess('DetailView')) {
-                unset($report_modules[$module]);
+        if (empty($seed) || !SugarACL::checkAccess($module, 'access')) {
+            unset($report_modules[$module]);
         }
-     }
+    }
 
      return $report_modules;
   }
@@ -513,12 +513,9 @@ function getACLAllowedModules()
  */
 function getModulesDropdown()
 {
-    require_once 'modules/Reports/config.php';
-    global $app_list_strings, $report_modules;
-
-    $allowed_modules = array();
-
-    foreach ($report_modules as $module => $value) {
+    global $app_list_strings;
+    $modules = getACLAllowedModules();
+    foreach ($modules as $module => $value) {
         $allowed_modules[$module] = $app_list_strings['moduleList'][$module];
     }
     asort($allowed_modules);

@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'סינון',
     'LBL_CONSOLE_FILTER_RULES' => 'כללי סינון',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'הקפאת עמודה ראשונה',
+
     'LBL_CONSOLE_COLUMNS' => 'עמודות',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'עמודה מרובת-שדות',
     'LBL_CONSOLE_PRIMARY_SORT' => 'מיון ראשי',

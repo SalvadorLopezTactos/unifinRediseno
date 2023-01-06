@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Tulude rea üksused',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Ostud',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Ostetud reaüksused',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Dokumentide kirjete töölaud',
+    'LBL_MY_DOCUMENTS' => 'Minu dokumendid',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Saada DocuSigni',
 );

@@ -131,8 +131,7 @@ class Discovery
         }
 
         $this->logger->error(
-            'Service can not be found in Discovery',
-            ['service' => $name, 'region' => $srn->getRegion()]
+            sprintf('Service %s can not be found in Discovery for region %s', $name, $srn->getRegion())
         );
 
         return null;

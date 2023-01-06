@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Kam atsakyti: el. pašto adreso ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Kam atsakyti: el. pašto adresas',
     'LBL_PRIMARY_TEAM' => 'Pagrindinė komanda',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Pageidaujama siuntimo paskyra',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ el. pašto nustatymai',
 );

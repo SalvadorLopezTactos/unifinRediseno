@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filtri',
     'LBL_CONSOLE_FILTER_RULES' => 'Filtrimisreeglid',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Külmuta esimene veerg',
+
     'LBL_CONSOLE_COLUMNS' => 'Veerud',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Mitmeväljaline veerg',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Esmane sortimine',

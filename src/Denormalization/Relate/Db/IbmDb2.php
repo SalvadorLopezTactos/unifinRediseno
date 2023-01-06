@@ -21,7 +21,7 @@ final class IbmDb2 extends Db
         int $limit
     ): int {
         $offsetEnd = $offset + $limit + 1;
-        $TemporaryTableName = self::TMP_TABLE_NAME;
+        $TemporaryTableName = $this->getTmpTableName();
 
         $sql = "
             UPDATE $targetTableName

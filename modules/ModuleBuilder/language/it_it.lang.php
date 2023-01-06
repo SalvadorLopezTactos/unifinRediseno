@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Cancella' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Powered By SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Ruolo',
+    'LBL_BASE_LAYOUT' => 'Layout di base',
+    'LBL_FIELD_NAME' => 'Nome Campo',
+    'LBL_FIELD_VALUE' => 'Valore',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Layout determinato da:',
+    'layoutDeterminedBy' => [
+        'std' => 'Layout standard',
+        'role' => 'Ruolo',
+        'dropdown' => 'Campo a discesa',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Tutti i layout personalizzati verranno rimossi. Sei sicuro di voler cambiare le tue attuali definizioni di layout?',
 'help'=>array(
     'package'=>array(
             'create'=>'Dai un <b>Nome</b> al pacchetto. Il nome deve essere alfanumerico e non contenere spazi. (Esempio: HR_Management)<br /><br />Puoi fornire un Autore e una Descrizione per pacchetto. <br /><br />Clicca Salva per creare il pacchetto.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Editor di Visibilità',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'Campi Relazionati',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL per la personalizzazione dell&#39;immagine del logo del marchio. Le dimensioni del logo del marchio consigliate sono 22 x 22 pixel. Le immagini caricate di dimensioni maggiori in qualsiasi direzione saranno scalate in base a queste dimensioni massime.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL per la personalizzazione dell&#39;immagine del logo. La larghezza del logo consigliata è di 200 pixel. Le immagini caricate di dimensioni maggiori in qualsiasi direzione saranno scalate in base a queste dimensioni massime. Questo logo verrà utilizzato sulla schermata di accesso. Se non viene caricata un&#39;immagine, sarà utilizzato il logo del marchio.',
 'LBL_PORTAL_ROLE_DESC' => 'Non eliminare questo ruolo. Il ruolo Customer Self-Service Portal è un ruolo creato automaticamente dal sistema durante l´attivazione del Portale di Sugar. Utilizzare i controlli di accesso all´interno di questo Ruolo per abilitare e/o disabilitare i moduli Bugs, Reclami o KnowledgeBase nel Portale di Sugar. Non modificare nessun altro controllo di accesso per questo ruolo al fine di evitare comportamenti anomali e sconosciuti del sistema. Nel caso di cancellazione accidentale di questo ruolo, ricrearlo disabilitando e attivando il portale di Sugar.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Aggiungi Relazione',
 'LBL_BTN_RENAME_MODULE' => 'Modifica Nome Modulo',
 'LBL_BTN_INSERT'=>'Inserisci',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Ripristina layout di base',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Si è verificato un errore',
 'ERROR_REQUIRED_FIELDS' => 'Sei sicuro di voler continuare? Nel layout mancano i seguenti campi richiesti:',
 'ERROR_ARE_YOU_SURE' => 'Sei sicuro di voler continuare?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Impossibile creare il campo. Hai raggiunto il limite di dimensione delle righe di questa tabella nel tuo database. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Ulteriori informazioni</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'I seguenti campi hanno valori calcolati che non saranno ri-calcolati in tempo reale nella maschera di modifica dello SugarCRM Mobile:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'I seguenti campi hanno valori calcolati che non saranno ri-calcolati in tempo reale nella maschera di modifica del portale di SugarCRM:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Se si desidera abilitarli nel portale si prega di attivarli qui.',
     'LBL_PORTAL_CONFIGURE' => 'Configurazione Portale',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Abilita portale',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Abilita ricerca prima di aprire un reclamo',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Abilita note sul modulo Knowledge Base',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Consenti agli utenti del portale di chiudere il reclamo',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Consenti registrazione nuovi utenti',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Autorizzazioni utente',
     'LBL_PORTAL_THEME' => 'Tema Portale',
     'LBL_PORTAL_ENABLE' => 'Abilitare',
     'LBL_PORTAL_SITE_URL' => 'Il sito del portale è disponibile all´indirizzo:',
     'LBL_PORTAL_APP_NAME' => 'Nome Applicazione',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL logo del marchio',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Anteprima logo del marchio',
-    'LBL_PORTAL_LOGO_URL' => 'URL Logo',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Anteprima logo',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefono',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Email',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Inserire un indirizzo email valido',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Trascinare i nomi dei moduli del Portale per impostarli in modo che vengano visualizzati o nascosti nella barra di navigazione superiore del Portale. Per controllare l&#39;accesso dell&#39;utente del Portale ai moduli, utilizzare <a href="?module=ACLRoles&action=index">Gestione ruoli.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Moduli visualizzati',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Moduli nascosti',
+    'LBL_CONFIG_VISIBILITY' => 'Visibilità',
+    'LBL_CASE_VISIBILITY_HELP' => 'Definisci sul quale portale gli utenti possono visualizzare il reclamo.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Definisci quali utenti del portale possono visualizzare le email relative a un reclamo. I contatti partecipanti sono quelli nei campi A, Da, CC e Ccn.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Definisci quali utenti del portale possono visualizzare i messaggi relativi a un reclamo. I contatti partecipanti sono quelli nel campo Ospiti.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Tutti i contatti correlati all&#39;account',
+        'related_contacts' => 'Solo contatto principale e contatti relativi al reclamo',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Solo i contatti partecipanti',
+        'all' => 'Tutti i contatti che possono visualizzare il reclamo',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Solo i contatti partecipanti',
+        'all' => 'Tutti i contatti che possono visualizzare il reclamo',
+    ],
+
 
 'LBL_PORTAL'=>'Portale',
 'LBL_PORTAL_LAYOUTS'=>'Layout Portale',
@@ -791,7 +816,7 @@ $mod_strings = array(
         . "I campi di sola lettura seguiranno la formula nella vista mobile basata su browser,<br/>"
         . "ma non seguiranno la formula nelle applicazioni native, come Sugar Mobile per iPhone.<br/>"
         . "Non seguiranno la formula nel portale Sugar Self-Service.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selezionare per utilizzare questo campo durante la ricerca di record utilizzando la ricerca globale in questo modulo.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleziona per utilizzare questo campo durante la ricerca di record utilizzando la Ricerca globale su questo modulo.',
 //Revert Module labels
 'LBL_RESET' => 'Reimposta',
 'LBL_RESET_MODULE' => 'Reimposta Modulo',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Data/ora',
                 'decimal'=>'Decimale',
                 'autoincrement' => 'Incremento automatico',
+                'actionbutton' => 'ActionButton',
 ),
 'labelTypes' => array(
     "" => "Etichette utilizzate di frequente",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (correlato {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copia da layout',
 'LBL_RELATIONSHIP_TYPE' => 'Relazione',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Lingua di confronto',
+'LBL_LABEL_NOT_TRANSLATED' => 'Questa etichetta non può essere tradotta',
 );

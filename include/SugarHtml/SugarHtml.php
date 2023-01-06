@@ -209,7 +209,9 @@ class SugarHtml {
         $code = ltrim($code);
         $start_pos = strpos($code, ' ') ? strpos($code, ' ') : strpos($code, self::HTML_TAG_END);
         $output = array();
-        if(substr($code, 0, 1) != self::HTML_TAG_BEGIN || $start_pos === false) {
+        if ($code === '') {
+            // empty code, just pass
+        } elseif (substr($code, 0, 1) !== self::HTML_TAG_BEGIN || $start_pos === false) {
             $offset = 0;
             self::parseSmartyTag($code, $output, $offset);
             $remainder = ltrim(substr($code, $offset));
@@ -476,5 +478,4 @@ class SugarHtml {
         }
         return $options;
     }
-
 }

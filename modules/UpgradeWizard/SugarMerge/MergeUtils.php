@@ -232,7 +232,7 @@ class MergeUtils
         }
 
         if ($preserveOrder) {
-            sasort($order);
+            stable_asort($order);
             $ret = array();
             foreach ($order as $t => $o) {
                 $ret[] = $values[$t];

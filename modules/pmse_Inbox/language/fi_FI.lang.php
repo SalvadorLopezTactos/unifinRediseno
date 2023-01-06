@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Prosessitietueiden koontinäyttö',
 
     'LBL_CAS_ID' => 'Prosessinumero',
+    'LBL_CAS_STATUS' => 'Prosessin tila',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Tuntematon (according UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "tehtävä on",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "tehtävä oli",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "%s Toiminto %s määritti kohteelle prosessin #%s %s %s tietueen",
     'LBL_PMSE_HISTORY_LOG_ON'  => "ajankohtana",
     'LBL_PMSE_HISTORY_LOG_AND'  => "ja",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'linkitetty tai ei linkitetty merkintä kohteeseen',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Hyväksy',
     'LBL_PMSE_LABEL_REJECT' => 'Hylkää',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Prosessit suorittumassa',
     'LBL_STATUS_CANCELLED' => 'Prosessit peruutettu',
     'LBL_STATUS_ERROR' => 'Virhe prosesseissa',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Valmis',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Lopetettu',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Käynnissä',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Peruutettu',
+    'LBL_STATUS_ERROR_ENUM' => 'Virhe',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Prosessinhallinta',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Valvomattomat prosessit',

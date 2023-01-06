@@ -74,6 +74,13 @@
             isHiding: false,
 
             /**
+             * Stores which field type validation rules should be followed for other types
+             */
+            fieldTypeValidationMap: {
+                datapoint: 'currency'
+            },
+
+            /**
              * @inheritdoc
              */
             onAttach: function(component, plugin) {
@@ -121,6 +128,11 @@
                     if (this._fieldCheckIfCanEdit()) {
                         this._fieldBindPluginEvents();
                     }
+                    this.listenTo(this, 'render', () => {
+                        if (this.options.highlightChangedValues) {
+                            this._highlightChanges();
+                        }
+                    });
                 }, this));
             },
 
@@ -281,16 +293,23 @@
 
                 this.on('render', function() {
                     var cteClass = 'clickToEdit';
+                    let el = this.$el;
+                    // Check if there is a specific element we need to wrap
+                    // the editability around
+                    if (this.cteTag) {
+                        el = this.$el.find(this.cteTag);
+                    }
+
                     if (this.action === 'edit') {
                         cteClass += ' active';
-                        this.$el.addClass('active');
+                        el.addClass('active');
                     } else {
-                        this.$el.removeClass('active');
+                        el.removeClass('active');
                     }
                     // only add isEditable if the field is not disabled
-                    if (!this.$el.hasClass('disabled')) {
-                        this.$el.addClass('isEditable');
-                        this.$el.wrapInner('<div class="' + cteClass + '" data-cid="' + this.cid + '" />');
+                    if (!el.hasClass('disabled') && !this.disableCTE) {
+                        el.addClass('isEditable');
+                        el.wrapInner('<div class="' + cteClass + '" data-cid="' + this.cid + '" />');
                     }
                 }, this);
 
@@ -416,8 +435,8 @@
              */
             _fieldShowClickToEdit: function(event) {
                 if (this._fieldCanEdit && !this._fieldIsInEdit) {
-                    var target = $(event.currentTarget),
-                        icon = '<span class="edit-icon"><i class="fa fa-pencil fa-sm"></i></span>';
+                    let target = $(event.currentTarget);
+                    let icon = '<span class="edit-icon"><i class="sicon sicon-sm sicon-edit"></i></span>';
 
                     // use case for currency field that show transactional value + the converted to base currency
                     if (target.has('label.original').length) {
@@ -606,7 +625,8 @@
              * @protected
              */
             _fieldDoValidate: function(field, newValue) {
-                var fieldType = field.type || field.data('type');
+                let fieldType = field.type || field.data('type');
+                fieldType = this.fieldTypeValidationMap[fieldType] || fieldType;
 
                 if (_.isUndefined(newValue) || _.isEmpty(newValue)) {
                     // try to get the value again
@@ -881,6 +901,38 @@
 
                 if (this.action !== 'edit' && this.type === 'date') {
                     this.$el.closest('td').removeClass('td-inline-edit');
+                }
+            },
+
+            /**
+             * Highlight values that have changed from the original model
+             * @private
+             */
+            _highlightChanges: function() {
+                let tableCell = this.$el.closest('td');
+                if (this.action === 'edit') {
+                    tableCell.removeClass('changed-value-highlight');
+                } else {
+                    tableCell.toggleClass('changed-value-highlight', this._hasModelValueChanged());
+                }
+            },
+
+            /**
+             * Checks if the field value has changed from the synced model. Uses a similar method of comparison
+             * as this._fieldValueChanged() above
+             * @return {boolean}
+             * @private
+             */
+            _hasModelValueChanged: function() {
+                let currentValue = this.model.get(this.name);
+                let syncedValue = this.model.getSynced()[this.name];
+                if (this.type === 'currency') {
+                    let diff = Math.abs(this.unformat(currentValue) - this.unformat(syncedValue));
+                    return Math.round(diff * 100) !== 0;
+                } else if (this.type === 'date') {
+                    return currentValue !== syncedValue;
+                } else {
+                    return !_.isEqual(this.unformat(currentValue), this.unformat(syncedValue));
                 }
             }
         });

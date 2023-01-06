@@ -12,22 +12,32 @@
 --}}
 <div class="dropdown">
     {{partial 'dashboardtitle' this value=value dir=dir hasEditAccess=hasEditAccess name=name type=type}}
-    <a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);">
-        <i class="fa fa-caret-down"></i>
+    <a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);" role="button"
+       aria-haspopup="true" aria-expanded="false" tabindex="0" aria-label="{{str 'LBL_DASHBOARD_CONFIG'}}"
+    >
+        <i class="sicon sicon-chevron-down"></i>
     </a>
-<ul class="dropdown-menu">
+<ul class="dropdown-menu" role="menu">
     {{!
         FIXME TY-1464: Don't hardcode the "Dashboards" module.
     }}
-    <li><a href="javascript:void(0);" data-action="manager"><i class="fa fa-bars"></i> {{str "LBL_MANAGE_DASHBOARDS" "Dashboards"}}</a></li>
+    <li>
+        <a href="javascript:void(0);" data-action="manager" role="menuitem">
+            <i class="sicon sicon-dashboard"></i> {{str "LBL_MANAGE_DASHBOARDS" "Dashboards"}}
+        </a>
+    </li>
     <li class="divider"></li>
     {{#if dashboards}}
         {{#each this.dashboards.models}}
-            <li><a href="javascript:void(0);" data-id="{{fieldValue this "id"}}">{{fieldValue this "name"}}</a></li>
+            <li>
+                <a href="javascript:void(0);" data-id="{{fieldValue this "id"}}" role="menuitem">
+                    {{fieldValue this "name"}}
+                </a>
+            </li>
         {{/each}}
     {{else}}
         <li>
-            <div class="alert-process">
+            <div class="alert-process" role="menuitem">
                 <strong>{{loading 'LBL_ALERT_TITLE_LOADING'}}</strong>
             </div>
         </li>

@@ -60,18 +60,24 @@ class AuthMiddleware
     public function __invoke(callable $handler) : \Closure
     {
         return function (RequestInterface $request, array $options) use ($handler) {
+            if (empty($options['authorize_as_application'])) {
+                $token = $this->getUserAccessToken();
+            } else {
+                $token = $this->getApplicationAccessToken();
+            }
+
             return $handler(
-                $this->addAuthorizationHeader($request),
+                $this->addAuthorizationHeader($request, $token),
                 $options
             )->then(
                 function (ResponseInterface $response) use ($request, $options, $handler) {
-                    if ($response->getStatusCode() == 401 &&
-                        $request->getRequestTarget() === '/notification') {
+                    if ($response->getStatusCode() == 401 && !empty($options['authorize_as_application'])) {
                         // Force a new access token to be retrieved.
                         $this->cache->delete('sugar_push_access_token');
+                        $token = $this->getApplicationAccessToken();
 
                         return $handler(
-                            $this->addAuthorizationHeader($request),
+                            $this->addAuthorizationHeader($request, $token),
                             $options
                         );
                     }
@@ -99,46 +105,45 @@ class AuthMiddleware
      *
      * @param RequestInterface $request Add the token to this request.
      *
+     * @param string $token
      * @return RequestInterface
      */
-    private function addAuthorizationHeader(RequestInterface $request) : RequestInterface
+    private function addAuthorizationHeader(RequestInterface $request, string $token) : RequestInterface
     {
         return $request->withAddedHeader(
             'Authorization',
-            'Bearer ' . $this->getAccessToken($request)
+            'Bearer ' . $token
         );
     }
 
     /**
-     * Returns current user's token or obtains an access token using a client credentials grant.
-     *
-     * @param RequestInterface $request Get the token for this request.
-     * @return AccessToken|string
+     * Returns current user's token
      */
-    protected function getAccessToken(RequestInterface $request)
+    protected function getUserAccessToken(): string
     {
-        $target = $request->getRequestTarget();
+        $restService = new \RestService();
+        $token = $restService->grabToken();
 
-        if ($target === '/device') {
-            $restService = new \RestService();
-            $token = $restService->grabToken();
-        } else {
-            $token = $this->cache->get('sugar_push_access_token');
+        return (string) $token;
+    }
 
-            // Reuse the existing token.
-            if ($token instanceof AccessToken && !$token->hasExpired()) {
-                return $token;
-            }
+    /**
+     * Returns the application level access token
+     */
+    protected function getApplicationAccessToken(): string
+    {
+        $token = $this->cache->get('sugar_push_access_token');
 
-            // Get a new access token.
-            $token = $this->provider->getAccessToken(
-                'client_credentials',
-                []
-            );
-
-            $this->cache->set('sugar_push_access_token', $token);
+        // Reuse the existing token.
+        if ($token instanceof AccessToken && !$token->hasExpired()) {
+            return (string) $token;
         }
 
-        return $token;
+        // Get a new access token.
+        $token = $this->provider->getAccessToken('client_credentials');
+
+        $this->cache->set('sugar_push_access_token', $token);
+
+        return (string) $token;
     }
 }

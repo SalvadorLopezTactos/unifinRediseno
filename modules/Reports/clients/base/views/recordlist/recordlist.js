@@ -35,7 +35,11 @@
      * @param {RowActionField} field
      */
     editReport: function(model, field) {
-        var route = app.bwc.buildRoute('Reports', model.id, 'ReportsWizard');
+        var route = app.bwc.buildRoute('Reports', null, 'ReportCriteriaResults', {
+            id: model.id,
+            page: 'report',
+            mode: 'edit'
+        });
         app.router.navigate(route, {trigger: true});
     },
 

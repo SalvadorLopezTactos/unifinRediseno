@@ -27,6 +27,14 @@
 	{/if}
     </tr>
 </table>
+<table id='layoutEditorRoleButtons' cellspacing='2'>
+    {$layoutButtons}
+    {if $view == 'editview'}
+        <td><input type="checkbox" {if $syncDetailEditViews}checked="true"{/if} id="syncCheckbox" onclick="document.forms.prepareForSave.sync_detail_and_edit.value=this.checked">
+            {sugar_translate label="LBL_SYNC_TO_DETAILVIEW" module="ModuleBuilder"}&nbsp;{sugar_help text=$mod.LBL_SYNC_TO_DETAILVIEW_HELP}
+            </input></td>
+    {/if}
+</table>
 <div id='layoutEditor' style="width:675px;">
 <input type='hidden' id='fieldwidth' value='{$fieldwidth}'>
 <input type='hidden' id='maxColumns' value='{$maxColumns}'>
@@ -160,7 +168,7 @@
         <span id="le_panelcollapse_{$idCount}" style="float:right;{if isset($tabDefs[$panel_upper].newTab) && $tabDefs[$panel_upper].newTab == true}display:none;{/if}">
         &nbsp;{sugar_translate label="LBL_TABDEF_COLLAPSE" module="ModuleBuilder"}{sugar_translate label="LBL_QUESTION_MARK"}
         <input type="checkbox" title="{sugar_translate label="LBL_TABDEF_COLLAPSE_HELP" module="ModuleBuilder"}" {if $tabDefs[$panel_upper].panelDefault == "collapsed"}checked="checked"{/if}
-          onclick="{literal}if(this.checked) { document.forms.prepareForSave.tabDefs_{/literal}{$panelid}{literal}_panelDefault.value='collapsed'; } else { document.forms.prepareForSave.tabDefs_{/literal}{$panelid}{literal}_panelDefault.value='expanded';}{/literal}" />
+          onclick="if(this.checked) { document.forms.prepareForSave.tabDefs_{$panelid}_panelDefault.value='collapsed'; } else { document.forms.prepareForSave.tabDefs_{$panelid}_panelDefault.value='expanded';}" />
         </span>
         {/if}
         {counter name='idCount' assign='idCount' print=false}
@@ -260,12 +268,15 @@
     <input type='hidden' name='view_package' value='{$view_package}'>
 {/if}
 <input type='hidden' name='role' value='{$selected_role}'>
+    <input type='hidden' name='layoutOption' value='{$selected_layoutOption}'>
+    <input type='hidden' name='dropdownField' value='{$selected_dropdownField}'>
+    <input type='hidden' name='dropdownValue' value='{$selected_dropdownValue}'>
 <input type='hidden' name='to_pdf' value='1'>
 </form>
 <script>
-{literal}
 
-Studio2.calcFieldList = {/literal}{$calc_field_list}{literal};
+
+Studio2.calcFieldList = {$calc_field_list};
 
 
 var editPanelProperties = function (panelId, view) {
@@ -306,7 +317,7 @@ var showHideBox = function (newTab, idCount, panelId, firstPanelId, firstPanelId
     }
 };
 
-{/literal}
+
 var editFieldProperties = function (idCount, label) {ldelim}
 	var value_label = document.getElementById('le_label_' + idCount).innerHTML.replace(/^\s+|\s+$/g,''); 
 	var value_tabindex = document.getElementById('le_tabindex_' + idCount).innerHTML.replace(/^\s+|\s+$/g,'');
@@ -335,7 +346,7 @@ if('{$from_mb}')
 ModuleBuilder.MBpackage = "{$view_package}";
 
 Studio2.requiredFields = [{$required_fields}];
-{literal}
+
 //rrs: this is for IE 7 which only supports javascript 1.6 and does not have indexOf support.
 if (typeof new Array().indexOf == "undefined") {
   Array.prototype.indexOf = function (obj, start) {
@@ -347,7 +358,7 @@ if (typeof new Array().indexOf == "undefined") {
     return -1;
   }
 }
-{/literal}
+
 ModuleBuilder.module = "{$view_module}";
 ModuleBuilder.package={if $fromModuleBuilder}"{$view_package}"{else}false{/if};
 

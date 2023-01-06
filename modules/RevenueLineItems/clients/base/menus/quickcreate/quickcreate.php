@@ -16,7 +16,7 @@ $viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
     'label' => 'LNK_NEW_REVENUELINEITEM',
     'visible' => true,
     'order' => 11,
-    'icon' => 'fa-plus',
+    'icon' => 'sicon-plus',
     'related' => array(
         array(
             'module' => 'Accounts',

@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Visa mallar',
     'LNK_LIST_KBCATEGORIES' => 'Visa kategorier',
     'LBL_TEMPLATES' => 'Mallar',
+    'LBL_TEMPLATE' => 'Mall',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Mallen kommer att skriva över allt innehåll.' .
         ' Är du säker på att du vill använda den här mallen?',
     'LNK_IMPORT_KBCONTENTS' => 'Importera artiklar',

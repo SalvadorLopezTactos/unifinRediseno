@@ -14,12 +14,15 @@ require_once 'modules/Administration/updater_utils.php';
 
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionPrefetcher;
 use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 use \Sugarcrm\Sugarcrm\Security\Password\Hash;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
+use Sugarcrm\Sugarcrm\PushNotification\ServiceFactory as PushNotificationService;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdpConfig;
 
 /**
  * User is used to store customer information.
@@ -67,6 +70,7 @@ class User extends Person {
 	var $accept_status; // to support Meetings
 	//adding a property called team_id so we can populate it for use in the team widget
 	var $team_id;
+    public $sudoer = null;
 
     public $receive_notifications;
     public $send_email_on_mention;
@@ -703,9 +707,19 @@ class User extends Person {
 		// this will cause the logged in admin to have the licensed user count refreshed
 		if (isset($_SESSION)) unset($_SESSION['license_seats_needed']);
 
+        // fill up license type info for single license type for active user only
+        if (!isset($this->license_type)
+            && $this->status == 'Active'
+            && SubscriptionManager::instance()->isSingleMangoTypeEntitlement()) {
+            $defaultLicenseType = SubscriptionManager::instance()->getUserDefaultLicenseType();
+            if (!empty($defaultLicenseType)) {
+                $this->license_type = json_encode([$defaultLicenseType]);
+            }
+        }
+
         // validate license type
         if (isset($this->license_type)) {
-            $licenseTypes = $this->getLicenseTypes();
+            $licenseTypes = $this->getTopLevelLicenseTypes();
             if ($this->isLicenseTypeModified($licenseTypes)) {
                 if (!$this->validateLicenseTypes($licenseTypes)) {
                     throw new SugarApiExceptionInvalidParameter('Invalid license_type in module: Users');
@@ -879,7 +893,9 @@ class User extends Person {
         }
 
         // In case this new/updated user changes the system status, reload it here
-        apiLoadSystemStatus(true);
+        if (!SubscriptionManager::instance()->getFixLicenseProcessState()) {
+            apiLoadSystemStatus(true);
+        }
 
         return $this->id;
 	}
@@ -890,7 +906,7 @@ class User extends Person {
      */
     public function getSystemLicenseTypesSelections() : array
     {
-        $subscriptions = SubscriptionManager::instance()->getSystemSubscriptionKeys();
+        $subscriptions = SubscriptionManager::instance()->getTopLevelSystemSubscriptionKeys();
         $selections = [];
         foreach (array_keys($subscriptions) as $type) {
             $selections[$type] = self::getLicenseTypeDescription($type);
@@ -906,6 +922,11 @@ class User extends Person {
      */
     public static function getLicenseTypeDescription(string $type) : string
     {
+        // trying to use customer product name from
+        $customerProductName = SubscriptionManager::instance()->getCustomerProductNameByKey($type);
+        if (!empty($customerProductName)) {
+            return $customerProductName;
+        }
         global $current_language;
         $mod_strings = return_module_language($current_language, 'Users');
         if ($type === Subscription::SUGAR_SERVE_KEY) {
@@ -914,6 +935,14 @@ class User extends Person {
             return $mod_strings['LBL_LICENSE_SUGAR_SELL'];
         } elseif ($type === Subscription::SUGAR_HINT_KEY) {
             return $mod_strings['LBL_LICENSE_SUGAR_HINT'];
+        } elseif ($type === Subscription::SUGAR_SELL_BUNDLE_KEY) {
+            return 'Sugar SELL';
+        } elseif ($type === Subscription::SUGAR_SELL_ESSENTIALS_KEY) {
+            return 'Sugar SELL Essentials';
+        } elseif ($type === Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY) {
+            return 'Sugar SELL Advanced';
+        } elseif ($type === Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY) {
+            return 'Sugar SELL Premier';
         } elseif ($type === Subscription::SUGAR_BASIC_KEY) {
             global $sugar_flavor;
             $mod_strings = return_module_language($current_language, 'Home');
@@ -927,10 +956,16 @@ class User extends Person {
                 if ($sugar_flavor === 'ULT') {
                     return $mod_strings['LBL_SUGAR_ULTIMATE'];
                 }
-                return $mod_strings['LBL_LICENSE_INVALID_PRODUCT'];
+            }
+            return $mod_strings['LBL_LICENSE_INVALID_PRODUCT'];
+        } else {
+            // new non CRM types, such as CONNECT, MAPS, DISCOVERY etc
+            if (in_array($type, SubscriptionManager::instance()->getAllSupportedProducts())) {
+                return $type;
             }
         }
 
+        $mod_strings = return_module_language($current_language, 'Home');
         return $mod_strings['LBL_LICENSE_TYPE_INVALID'];
     }
 
@@ -1059,7 +1094,7 @@ class User extends Person {
             $query,
             [sugarStrToUpper($email), $this->module_name]
         );
-        $id = $stmt->fetchColumn();
+        $id = $stmt->fetchOne();
         // retrieve returns User or null so keep null instead of FALSE for compatibility
         return $id ? $this->retrieve($id) : null;
 	}
@@ -1070,52 +1105,6 @@ class User extends Person {
         }
         return false;
     }
-
-
-	/**
-	 * Load a user based on the user_name in $this
-	 * @param string $user_password Password
-	 * @param bool $password_encoded Is password md5-encoded or plain text?
-	 * @return -- this if load was successul and null if load failed.
-	 */
-	function load_user($user_password, $password_encoded = false)
-	{
-		global $login_error;
-		unset($GLOBALS['login_error']);
-		if(isset ($_SESSION['loginattempts'])) {
-			$_SESSION['loginattempts'] += 1;
-		} else {
-			$_SESSION['loginattempts'] = 1;
-		}
-		if($_SESSION['loginattempts'] > 5) {
-			$GLOBALS['log']->fatal('SECURITY: '.$this->user_name.' has attempted to login '.$_SESSION['loginattempts'].' times from IP address: '.$_SERVER['REMOTE_ADDR'].'.');
-			return null;
-		}
-
-		$GLOBALS['log']->debug("Starting user load for $this->user_name");
-
-		if (!isset ($this->user_name) || $this->user_name == "" || !isset ($user_password) || $user_password == "")
-			return null;
-
-	    if(!$password_encoded) {
-	        $user_password = md5($user_password);
-	    }
-        $row = self::getUserDataByNameAndPassword($this->user_name, $user_password);
-        if (empty($row) || !empty($GLOBALS['login_error'])) {
-			$GLOBALS['log']->fatal('SECURITY: User authentication for '.$this->user_name.' failed - could not Load User from Database');
-			return null;
-		}
-
-		// now fill in the fields.
-		$this->loadFromRow($row);
-		$this->loadPreferences();
-
-		if ($this->status != "Inactive")
-			$this->authenticated = true;
-
-		unset ($_SESSION['loginattempts']);
-		return $this;
-	}
 
     /**
      * Generate a new hash from plaintext password
@@ -1189,7 +1178,7 @@ class User extends Person {
             ->andWhere($qb->expr()->eq('status', "'Active'"))
             ->setMaxResults(1);
 
-        $data = $qb->execute()->fetch();
+        $data = $qb->execute()->fetchAssociative();
         if ($data && self::checkPasswordMD5($password, $data['user_hash'])) {
             return $data;
         } else {
@@ -1387,7 +1376,7 @@ class User extends Person {
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarApiExceptionMissingParameter
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Doctrine\DBAL\Exception
 	 */
 	function verify_data($ieVerified=true) {
 		global $mod_strings, $current_user;
@@ -1403,7 +1392,6 @@ class User extends Person {
                 $query = 'SELECT reports_to_id
                     FROM users
                     WHERE id = ?';
-                $stmt = $conn->prepare($query);
                 while (!empty($check_user)) {
                     if (isset($already_seen_list[$check_user])) {
                         // This user doesn't actually report to themselves
@@ -1416,12 +1404,9 @@ class User extends Person {
                         break;
                     }
                     $already_seen_list[$check_user] = 1;
-                    $stmt->bindValue(1, $check_user);
-                    $stmt->execute();
-
-                    $check_user = $stmt->fetchColumn();
+                    $result = $conn->executeQuery($query, [$check_user]);
+                    $check_user = $result->fetchOne();
                 }
-                $stmt->closeCursor();
             }
 
 			if ($reports_to_self == 1) {
@@ -1444,7 +1429,7 @@ class User extends Person {
             $query->andWhere($qb->expr()->neq('id', $qb->createPositionalParameter($this->id)));
         }
         $stmt = $query->execute();
-        $dup_users = $stmt->fetch();
+        $dup_users = $stmt->fetchAssociative();
 
 		if (!empty($dup_users)) {
             // Due to the amount of legacy code and no clear separation between logic and presentation layers, this is
@@ -1458,7 +1443,7 @@ class User extends Person {
             $verified = false;
 		}
         // license type check
-        $licenseType = $this->processLicenseTypes($this->license_type);
+        $licenseType = $this->processLicenseTypes($this->license_type, false);
         if (!empty($licenseType)
             && $this->validateLicenseTypes($licenseType)
             && !$this->hasMangoLicenseTypes($this->license_type)) {
@@ -1470,7 +1455,7 @@ class User extends Person {
         }
 		if (is_admin($current_user)) {
             $query = 'SELECT COUNT(*) AS c FROM users WHERE is_admin = 1 AND deleted = 0';
-            $remaining_admins = $conn->fetchColumn($query);
+            $remaining_admins = $conn->fetchOne($query);
 
 			if (($remaining_admins <= 1) && ($this->is_admin != '1') && ($this->id == $current_user->id)) {
 				$GLOBALS['log']->debug("Number of remaining administrator accounts: {$remaining_admins}");
@@ -1519,7 +1504,7 @@ class User extends Person {
             $query = "SELECT COUNT(*) c FROM team_memberships WHERE deleted=0 AND user_id = ? AND team_id = ? AND explicit_assign = 1";
             $conn = $this->db->getConnection();
             $stmt = $conn->executeQuery($query, array($this->id, $_REQUEST['record']));
-            $a = $stmt->fetch();
+            $a = $stmt->fetchAssociative();
 
 			$user_fields['UPLINE'] = translate('LBL_TEAM_UPLINE','Users');
 
@@ -1564,7 +1549,7 @@ class User extends Person {
 
         $out = [];
         $x = 0;
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
 			if ($return_obj) {
 				$out[$x] = BeanFactory::newBean('Teams');
 				$out[$x]->retrieve($row['team_id']);
@@ -1923,7 +1908,7 @@ class User extends Person {
             'SELECT id FROM teams WHERE associated_user_id = ? AND deleted = 0',
             1
         );
-        return $conn->executeQuery($query, [$user_id])->fetchColumn() ?: null;
+        return $conn->executeQuery($query, [$user_id])->fetchOne() ?: null;
 	}
     /*
      *
@@ -2312,50 +2297,50 @@ class User extends Person {
         // Create random characters for the ones that doesnt have requirements
         for ($i=0; $i < $length - $condition; $i ++)  // loop and create password
         {
-            $password = $password . substr ($charBKT, rand() % strlen($charBKT), 1);
+            $password = $password . substr($charBKT, random_int(0, getrandmax()) % strlen($charBKT), 1);
         }
         if ($res['onelower'] == '1') // If a lower caracter is required, i add one in the password
         {
             if (strlen($password) != '0') // If there is other characters in the password, I insert one in a random position
             {
-                $password = substr_replace($password, substr($LOWERCASE, rand() % strlen($LOWERCASE), 1), rand() % strlen($password), 0);
+                $password = substr_replace($password, substr($LOWERCASE, random_int(0, getrandmax()) % strlen($LOWERCASE), 1), random_int(0, getrandmax()) % strlen($password), 0);
             }
             else // otherwise i put one in first position
             {
-                $password = $password . substr($LOWERCASE, rand() % strlen($LOWERCASE), 1);
+                $password = $password . substr($LOWERCASE, random_int(0, getrandmax()) % strlen($LOWERCASE), 1);
             }
         }
         if ($res['onenumber'] == '1')
         {
             if (strlen($password) != '0')
             {
-                $password = substr_replace($password, substr($NUMBER, rand() % strlen($NUMBER), 1), rand() % strlen($password), 0);
+                $password = substr_replace($password, substr($NUMBER, random_int(0, getrandmax()) % strlen($NUMBER), 1), random_int(0, getrandmax()) % strlen($password), 0);
             }
             else
             {
-                $password = $password . substr ($NUMBER, rand() % strlen($NUMBER), 1);
+                $password = $password . substr($NUMBER, random_int(0, getrandmax()) % strlen($NUMBER), 1);
             }
         }
         if ($res['oneupper'] == '1')
         {
             if (strlen($password) != '0')
             {
-                $password = substr_replace($password, substr($UPPERCASE, rand() % strlen($UPPERCASE), 1), rand() % strlen($password), 0);
+                $password = substr_replace($password, substr($UPPERCASE, random_int(0, getrandmax()) % strlen($UPPERCASE), 1), random_int(0, getrandmax()) % strlen($password), 0);
             }
             else
             {
-                $password = $password . substr($UPPERCASE, rand() % strlen($UPPERCASE), 1);
+                $password = $password . substr($UPPERCASE, random_int(0, getrandmax()) % strlen($UPPERCASE), 1);
             }
         }
         if ($res['onespecial'] == '1')
         {
             if (strlen($password) != '0')
             {
-                $password = substr_replace($password, substr($SPECIAL, rand() % strlen($SPECIAL), 1), rand() % strlen($password), 0);
+                $password = substr_replace($password, substr($SPECIAL, random_int(0, getrandmax()) % strlen($SPECIAL), 1), random_int(0, getrandmax()) % strlen($password), 0);
             }
             else
             {
-                $password = $password . substr ($SPECIAL, rand() % strlen($SPECIAL), 1);
+                $password = $password . substr($SPECIAL, random_int(0, getrandmax()) % strlen($SPECIAL), 1);
             }
         }
 
@@ -2494,13 +2479,14 @@ class User extends Person {
     {
         $qb = DBManagerFactory::getConnection()->createQueryBuilder();
         $expr = $qb->expr();
-        $where = $expr->andX()
-            ->add($expr->eq('reports_to_id', $qb->createPositionalParameter($user_id)))
-            ->add($expr->eq('status', $qb->createPositionalParameter('Active')));
+        $where = $expr->and(
+            $expr->eq('reports_to_id', $qb->createPositionalParameter($user_id)),
+            $expr->eq('status', $qb->createPositionalParameter('Active'))
+        );
         if (!$include_deleted) {
-            $where->add($expr->eq('deleted', 0));
+            $where = $where->with($expr->eq('deleted', 0));
         }
-        $count = $qb->select('count(id)')->from('users')->where($where)->execute()->fetchColumn();
+        $count = $qb->select('count(id)')->from('users')->where($where)->execute()->fetchOne();
         return $count > 0;
     }
 
@@ -2520,19 +2506,17 @@ class User extends Person {
         $qb = DBManagerFactory::getConnection()->createQueryBuilder();
 
         $whereNonDeleted = $qb->expr()
-            ->andX()
-            ->add("u.status = 'Active'")
-            ->add("u.deleted = 0");
+            ->and(
+                "u.status = 'Active'",
+                "u.deleted = 0"
+            );
         if (!$includeDeleted) {
             $whereCondition = $whereNonDeleted;
         } else {
             $whereDeleted = $qb->expr()
-                ->andX()
-                ->add("u.deleted = 1");
+                ->and("u.deleted = 1");
             $whereCondition =  $qb->expr()
-                ->orX()
-                ->add($whereNonDeleted)
-                ->add($whereDeleted);
+                ->or($whereNonDeleted, $whereDeleted);
         }
 
         $qb->select(['u.id', 'sum(CASE WHEN u2.id IS NULL THEN 0 ELSE 1 END) total'])
@@ -2542,25 +2526,22 @@ class User extends Person {
             ->groupBy('u.id');
 
         $joinWhereNonDeleted = $qb->expr()
-            ->andX()
-            ->add("u2.status = 'Active'")
-            ->add("u2.deleted = 0");
+            ->and(
+                "u2.status = 'Active'",
+                "u2.deleted = 0"
+            );
 
         if (!$includeDeleted) {
             $joinWhereCondition = $joinWhereNonDeleted;
         } else {
-            $joinWhereDeleted = $qb->expr()
-                ->andX()
-                ->add("u2.deleted = 1");
-            $joinWhereCondition =  $qb->expr()
-                ->orX()
-                ->add($joinWhereNonDeleted)
-                ->add($joinWhereDeleted);
+            $joinWhereDeleted = $qb->expr()->and("u2.deleted = 1");
+            $joinWhereCondition =  $qb->expr()->or($joinWhereNonDeleted, $joinWhereDeleted);
         }
 
-        $joinWhere = $qb->expr()->andX()
-            ->add('u.id = u2.reports_to_id')
-            ->add($joinWhereCondition);
+        $joinWhere = $qb->expr()->and(
+            'u.id = u2.reports_to_id',
+            $joinWhereCondition
+        );
 
         $qb->leftJoin('u', 'users', 'u2', $joinWhere);
 
@@ -2572,7 +2553,7 @@ class User extends Person {
         $stmt = $qb->execute();
 
         $result = [];
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $result[$row["id"]] = empty($additionalFields) ? $row["total"] : $row;
         }
 
@@ -2638,7 +2619,7 @@ class User extends Person {
                 'SELECT reports_to_id FROM users WHERE id = ?',
                 [$user_id]
             );
-            $reports_to_id = $stmt->fetchColumn();
+            $reports_to_id = $stmt->fetchOne();
             return empty($reports_to_id);
         }
         return false;
@@ -2848,7 +2829,7 @@ class User extends Person {
             $stmt = $db->getConnection()->executeQuery($query, $params);
 
             // Get the id and the name.
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetchAssociative()) {
                 if ($use_real_name == true || showFullName()) {
                     // We will ALWAYS have both first_name and last_name (empty value if blank in db)
                     if (isset($row['last_name'])) {
@@ -2930,19 +2911,20 @@ class User extends Person {
     }
 
     /**
-     * set license types, it stored in json-encoded string
-     * @param array $types, array of types to pass in
+     * set license types in json-encoded string format
+     * @param array $types array of types to pass in
+     * @param bool $buildCache flag to rebuild metadata cache
      */
-    public function setLicenseType(array $types = [])
+    public function setLicenseType(array $types = [], bool $buildCache = true)
     {
         global $current_user;
-        if (is_admin($current_user)) {
+        if (is_admin($current_user) || $this->id == '1') {
             if (empty($types)) {
                 $this->license_type = null;
             } else {
-                $this->license_type = json_encode($types);
+                $this->license_type = json_encode(array_values($types));
             }
-            if ($this->isLicenseTypeModified($types)) {
+            if ($this->isLicenseTypeModified($types) && !($GLOBALS['installing'] ?? false) && $buildCache) {
                 // need to refresh this user's metatdata cache
                 $this->update_date_modified = true;
                 // need to reset access control
@@ -2953,33 +2935,42 @@ class User extends Person {
                 $default_language = SugarConfig::getInstance()->get('default_language') ?? 'en_us';
                 $current_language = !empty($current_user->preferred_language) ?
                     $current_user->preferred_language : $default_language;
-                $cacheFile = sugar_cached('modules/modules_def_' . $current_language . '_' .
-                    md5($current_user->id) . '.js');
-                if (file_exists($cacheFile)) {
-                    unlink($cacheFile);
+                foreach (array_unique([$this->id, $current_user->id]) as $id) {
+                    foreach (['modules/modules_def_', 'modules/modules_def_fiscal_'] as $prefix) {
+                        $cacheFile = sugar_cached($prefix . $current_language . '_' . md5($id) . '.js');
+                        if (file_exists($cacheFile)) {
+                            unlink($cacheFile);
+                        }
+                    }
                 }
             }
         }
     }
 
     /**
+     * assign all system license types to this user
+     */
+    public function assignAllLicenseTypes() : void
+    {
+        $syslicenseTypes = $this->getTopLevelSystemSubscriptionKeys();
+        $this->setLicenseType($syslicenseTypes);
+    }
+
+    /**
      * check if license type has been modified
-     * @param array $newType
+     * @param array $newTypes new type
      * @return bool
      */
-    protected function isLicenseTypeModified(array $newTypes) : bool
+    public function isLicenseTypeModified(array $newTypes) : bool
     {
-        if (empty($this->oldLicenseType)) {
-            $oldType = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
-        } else {
-            $oldType = json_decode($this->oldLicenseType, true);
+        if (empty($this->oldLicenseType) && empty($newTypes)) {
+            return false;
         }
+        $oldType = $this->getOldTypes();
 
-        if (empty($newTypes)) {
-            $newTypes = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
-        }
+        $newTypes = $this->getNewTypes($newTypes);
 
-        if (!empty(array_diff($newTypes, $oldType))) {
+        if (!empty(array_diff($oldType, $newTypes)) || !empty(array_diff($newTypes, $oldType))) {
             return true;
         }
 
@@ -2987,20 +2978,57 @@ class User extends Person {
     }
 
     /**
+     * check if need to update license type
+     * @param array $newTypes
+     * @return bool
+     */
+    public function needToUpdateLicenseType(array $newTypes) : bool
+    {
+        if (empty($this->oldLicenseType)) {
+            return true;
+        }
+
+        return $this->isLicenseTypeModified($newTypes);
+    }
+
+    /**
      * get license type. json-decoded to array
+     * @param bool $getAll
+     * @return array
+     */
+    protected function getLicenseTypes(bool $getAll = true) : array
+    {
+        // support user has the full privilidge to access all flavors
+        if (in_array($this->user_name, [self::SUPPORT_USER_NAME, self::SUPPORT_PORTAL_USER])) {
+            if ($getAll) {
+                return $this->getAllSystemSubscriptionKeys();
+            }
+            return $this->getTopLevelSystemSubscriptionKeys();
+        }
+
+        return $this->processLicenseTypes($this->license_type, $getAll);
+    }
+
+    /**
+     * get all license types
      *
      * @return array
      */
-    public function getLicenseTypes() : array
+    public function getAllLicenseTypes() : array
     {
-        // support user has the full privilidge to access all flavors
-        if (strcmp($this->user_name, self::SUPPORT_USER_NAME) === 0) {
-            return $this->getSystemSubscriptionKeys();
-        }
-
-        return $this->processLicenseTypes($this->license_type);
+        return $this->getLicenseTypes(true);
     }
-
+    
+    /**
+     * get top level license types
+     *
+     * @return array
+     */
+    public function getTopLevelLicenseTypes() : array
+    {
+        return $this->getLicenseTypes(false);
+    }
+    
     /**
      * get license types' description in string
      *
@@ -3008,13 +3036,14 @@ class User extends Person {
      */
     protected function getLicenseTypesDescriptionString() : string
     {
-        $userSubscriptions = SubscriptionManager::instance()->getUserSubscriptions($this);
-        $desc = '';
-        foreach ($userSubscriptions as $type) {
-            if (!empty($desc)) {
-                $desc .= '<BR>';
-            }
-            $desc .= self::getLicenseTypeDescription($type);
+        if ($this->status !== 'Active' && empty($this->getTopLevelLicenseTypes())) {
+            // inactive user with empty license type
+            $desc = 'No License Assigned';
+        } else {
+            $userSubscriptions = Subscription::getOrderedLicenseTypes(SubscriptionManager::instance()->getTopLevelUserSubscriptions($this));
+            $desc = implode('<br>', array_map(function (string $type): string {
+                return htmlspecialchars(self::getLicenseTypeDescription($type));
+            }, $userSubscriptions));
         }
         return $desc;
     }
@@ -3024,7 +3053,7 @@ class User extends Person {
      * @param mixed $licenseTypes
      * @return array
      */
-    public function processLicenseTypes($licenseTypes) : array
+    public function processLicenseTypes($licenseTypes, $getAll = true) : array
     {
         if (empty($licenseTypes)) {
             return [];
@@ -3040,9 +3069,15 @@ class User extends Person {
             foreach ($licenseTypes as $type) {
                 if (!empty($type)) {
                     $types[] = $type;
+                    if ($getAll && Subscription::isBundleKey($type)) {
+                        $foundBundles = SubscriptionManager::instance()->getBundledSubscriptionsByKey($type);
+                        if (!empty($foundSubs)) {
+                            $types = array_merge($types, array_key($foundBundles));
+                        }
+                    }
                 }
             }
-            return $types;
+            return array_unique(array_values($types));
         }
 
         // remove '&quot;', in listview retrieveal, it does encode automatically
@@ -3051,7 +3086,7 @@ class User extends Person {
         $value = json_decode($licenseTypes, true);
 
         if (is_array($value)) {
-            return $value;
+            return array_values($value);
         }
 
         throw new SugarApiExceptionInvalidParameter('Invalid license_type in processLicenseTypes');
@@ -3072,7 +3107,7 @@ class User extends Person {
         }
 
         foreach ($licenseTypes as $type) {
-            if (!in_array($type, $this->getSystemSubscriptionKeys())) {
+            if (!in_array($type, $this->getTopLevelSystemSubscriptionKeys())) {
                 return false;
             }
         }
@@ -3081,12 +3116,22 @@ class User extends Person {
     }
 
     /**
-     * get system subscriptions
+     * get system subscription keys
+     * @param bool $getAll to get All subscription keys, not only top level if it is true
      * @return array
      */
-    protected function getSystemSubscriptionKeys() : array
+    protected function getAllSystemSubscriptionKeys(bool $getAll = true) : array
     {
-        return array_keys(SubscriptionManager::instance()->getSystemSubscriptionKeys());
+        return array_keys(SubscriptionManager::instance()->getAllSystemSubscriptionKeys());
+    }
+
+    /**
+     * get top level system subscription keys
+     * @return array
+     */
+    protected function getTopLevelSystemSubscriptionKeys() : array
+    {
+        return array_keys(SubscriptionManager::instance()->getTopLevelSystemSubscriptionKeys());
     }
 
     /**
@@ -3105,13 +3150,38 @@ class User extends Person {
      * @param bool $prepend Whether to add the SUGAR_ prefix
      * @return boolean
      */
-    final public function hasLicense(string $license, $prepend = true) : bool
+    final public function hasLicense(string $licenseKey, $prepend = true) : bool
     {
-        if ($prepend && stripos($license, 'sugar_') === false) {
-            $license = 'SUGAR_' . strtoupper($license);
+        if ($prepend && stripos($licenseKey, 'sugar_') === false) {
+            $license = 'SUGAR_' . strtoupper($licenseKey);
         }
 
-        return in_array($license, $this->getLicenseTypes());
+        $allKeys = SubscriptionManager::instance()->getSubscriptionKeysContains($licenseKey);
+        foreach ($allKeys as $key) {
+            if (in_array($key, $this->getAllLicenseTypes())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if the user has all the required licenses
+     *
+     * @param array $requiredLicenses
+     *
+     * @return bool
+     */
+    final public function hasLicenses(array $requiredLicenses): bool
+    {
+        if (empty($this) || empty($this->id)) {
+            return false;
+        }
+
+        $sm = SubscriptionManager::instance();
+        $licenses = $sm->getAllImpliedSubscriptions($sm->getAllUserSubscriptions($this));
+
+        return !array_diff($requiredLicenses, $licenses);
     }
 
     protected function getDeleteUpdateParams(string $date = null, string $userId = null)
@@ -3143,5 +3213,422 @@ class User extends Person {
             }
         }
         return false;
+    }
+
+    /**
+     * Get user lists for batch update
+     * @param bool $emptyLicenseTypeOnly only for empty value
+     * @return array
+     * @throws SugarQueryException
+     */
+    public function retrieveUsersUsingLicenseTypes(bool $emptyLicenseTypeOnly = false) : array
+    {
+        if (!$this->isAdmin()) {
+            if ($GLOBALS['log']) {
+                $GLOBALS['log']->fatal("non-admin user is not allow to do retrieve users");
+            }
+            return [];
+        }
+        $query = new SugarQuery();
+        $query->from($this);
+        $query->select([
+            'id',
+            'license_type',
+        ]);
+
+        $query->where()
+            ->in('status', ['Active', 'Inactive'])
+            ->equals('deleted', 0);
+
+        if ($emptyLicenseTypeOnly) {
+            $query->where()->isNull('license_type');
+        }
+
+        return $query->execute();
+    }
+
+    /**
+     * update all users to the same license types, this is only for single license type case
+     * @param array $licenseTypes
+     * @param bool $buildCache
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarQueryException
+     */
+    public function updateUsersLicenseTypes(array $licenseTypes = [], bool $buildCache = true)
+    {
+        if (empty($licenseTypes)) {
+            $licenseTypes = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
+        }
+        // get top level system keys
+        $systemEntitlements = $this->getTopLevelSystemSubscriptionKeys();
+        $users = $this->retrieveUsersUsingLicenseTypes();
+        foreach ($users as $userData) {
+            $userBean = BeanFactory::getBean('Users', $userData['id']);
+            if ($userBean && $userBean->needToUpdateLicenseType($licenseTypes)) {
+                $existLicenseTypes = $userBean->getTopLevelLicenseTypes();
+                // retain all products, such as discover, connect, hint, etc if those are also in new system entitlements
+                $retainedTypes = array_intersect($existLicenseTypes, $systemEntitlements);
+                $newLicenseTypes = array_unique(array_merge($retainedTypes, $licenseTypes));
+                $userBean->setLicenseType($newLicenseTypes, $buildCache);
+                $userBean->save();
+            }
+        }
+    }
+
+    /**
+     * Gets the list of product codes in use by the User
+     *
+     * @return array
+     */
+    public function getProductCodes()
+    {
+        $productCodes = [];
+        $productsData = $this->getProductsData();
+        foreach ($productsData as $productsDatum) {
+            if (!empty($productsDatum['product_code'])) {
+                $productCodes[] = $productsDatum['product_code'];
+            }
+        }
+        return array_unique($productCodes);
+    }
+
+    /**
+     * Gets the array of data for the top-level products the User has active
+     *
+     * @return array the array of products data for the user
+     */
+    public function getProductsData()
+    {
+        global $sugar_flavor;
+        $subscriptionManager = $this->getSubscriptionManager();
+        $productKeys = $subscriptionManager->getTopLevelUserSubscriptions($this);
+
+        $products = [];
+        foreach ($productKeys as $productKey) {
+            $productCode = $productKey;
+            if ($productKey === Subscription::SUGAR_BASIC_KEY) {
+                // The basic key corresponds to the instance flavor, which
+                // should be ENT, PRO, or ULT. If it is not one of those,
+                // we fall back to ENT
+                $productCode = in_array($sugar_flavor, ['ENT', 'PRO', 'ULT']) ? $sugar_flavor : 'ENT';
+            }
+            $products[$productKey] = [
+                'product_code' => $productCode,
+                'product_name' => User::getLicenseTypeDescription($productKey),
+            ];
+        }
+
+        return $products;
+    }
+
+    /**
+     * Returns the SubscriptionManager instance
+     *
+     * @return SubscriptionManager
+     */
+    protected function getSubscriptionManager()
+    {
+        return SubscriptionManager::instance();
+    }
+
+    /**
+     * update all users with empty license type to new license types
+     * @param array $licenseTypes
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarQueryException
+     */
+    public function updateUsersEmptyLicenseTypes(array $licenseTypes = [])
+    {
+        if (empty($licenseTypes)) {
+            $licenseTypes = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
+        }
+        $users = $this->retrieveUsersUsingLicenseTypes(true);
+        foreach ($users as $userData) {
+            $userBean = BeanFactory::getBean('Users', $userData['id']);
+            if ($userBean && $userBean->status !== 'Active') {
+                $userBean->setLicenseType($licenseTypes);
+                $userBean->save();
+            }
+        }
+    }
+
+    /**
+     * update license type after license entitlement changes
+     * @param array $newAddedKeys new added keys
+     * @param array $removedKeys  removed keys
+     * @param bool $forceToUpdate force to update
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarQueryException
+     */
+    public function updateUsersLicenseTypesAfterSubscriptionChanges(array $newAddedKeys = [], array $removedKeys = [], bool $forceToUpdate = false): void
+    {
+        global $current_user;
+        if (empty($current_user) || !is_admin($current_user)) {
+            return;
+        }
+
+        $oldKeys = SubscriptionManager::instance()->getOldSystemSubscriptionKeys();
+        $currentKeys = SubscriptionManager::instance()->getTopLevelSystemSubscriptionKeys();
+        $newAddedKeys = array_diff_key($currentKeys, $oldKeys);
+        $removedKeys = array_diff_key($oldKeys, $currentKeys);
+        if (empty($newAddedKeys) && empty($removedKeys) && !$forceToUpdate) {
+            return;
+        }
+
+
+        // update empty license type first if the entitlement only has Single Mango type
+        if (SubscriptionManager::instance()->isSingleMangoTypeEntitlement()) {
+            $current_user->updateUsersLicenseTypes();
+        } elseif (!empty($removedKeys) || $forceToUpdate) {
+            $this->massUpdateLicenseTypes();
+        }
+    }
+
+    /**
+     * mass update license types using current entitlement
+     * @param bool $rebuildCache
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarQueryException
+     */
+    protected function massUpdateLicenseTypes(bool $rebuildCache = true) : void
+    {
+        $defaultLicenseType = SubscriptionManager::instance()->getUserDefaultLicenseType();
+        $systemLicenseTypes = $this->getTopLevelSystemSubscriptionKeys();
+        $users = $this->retrieveUsersUsingLicenseTypes(false);
+        foreach ($users as $userData) {
+            $userBean = BeanFactory::getBean('Users', $userData['id']);
+            if ($userBean && $userBean->needToUpdateLicenseType([$defaultLicenseType])) {
+                $licenseTypes = $userBean->getTopLevelLicenseTypes();
+                // find out new valid license types
+                $newLicenseTypes = array_values(array_unique(array_intersect($licenseTypes, $systemLicenseTypes)));
+                // migrate to SELL subscription
+                if (empty(Subscription::getSellKey($newLicenseTypes)) && !empty(Subscription::getSellKey($licenseTypes))) {
+                    $nextSellKey = Subscription::getSellKey($systemLicenseTypes);
+                    if (!empty($nextSellKey)) {
+                        $newLicenseTypes[] = $nextSellKey;
+                    }
+                }
+                if (empty($newLicenseTypes) && SubscriptionManager::instance()->isSingleMangoTypeEntitlement()) {
+                    // assigning default license type for single mango instance
+                    $newLicenseTypes = [$defaultLicenseType];
+                }
+                if (!empty(array_diff($licenseTypes, $newLicenseTypes)) || !empty(array_diff($licenseTypes, $newLicenseTypes))) {
+                    $userBean->setLicenseType($newLicenseTypes, $rebuildCache);
+                    $userBean->save();
+                }
+            }
+        }
+    }
+    /**
+     * migrate sell license type
+     *
+     * @param bool $rebuildCache to rebuild metadata cache
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarQueryException
+     */
+    public function migrateUsersLicenseTypes(bool $rebuildCache = true): void
+    {
+        global $current_user;
+        if (empty($current_user) || !is_admin($current_user)) {
+            return;
+        }
+
+        // update license type first if the entitlement has only Single Mango type
+        if (SubscriptionManager::instance()->isSingleMangoTypeEntitlement()) {
+            $this->updateUsersLicenseTypes([], $rebuildCache);
+        } else {
+            $this->massUpdateLicenseTypes($rebuildCache);
+        }
+    }
+
+    /**
+     * Fix users' license types mismatching with system subscriptions
+     * if IDM license feature is disabled and we have never tried or after long period of time
+     * @return bool
+     */
+    public function fixLicenseTypeMismatch(): bool
+    {
+        if (SubscriptionManager::instance()->getFixLicenseProcessState()) {
+            return false;
+        }
+        global $current_user;
+        if (empty($current_user) || !$current_user->isLicenseTypeFixable()) {
+            return false;
+        }
+
+        $admin = Administration::getSettings('license');
+        $currentTime = time();
+        if (!empty($admin->settings['license_last_fix_mismatch'])) {
+            $lastTimeFix = $admin->settings['license_last_fix_mismatch'];
+            if ($currentTime - $lastTimeFix < 600) {
+                // lock the action for 10 minutes
+                return false;
+            }
+        }
+
+        // check IDM license feature
+        global $current_user;
+        $idpConfig = new IdpConfig(\SugarConfig::getInstance());
+        if ($idpConfig->isIDMModeEnabled() && $idpConfig->getUserLicenseTypeIdmModeLock()) {
+            return false;
+        }
+
+        SubscriptionManager::instance()->setFixLicenseProcessState(true);
+        $admin->saveSetting('license', 'last_fix_mismatch', "$currentTime");
+
+        $existUser = $current_user;
+        if (!is_admin($current_user)) {
+            $current_user = $this->getSystemUser();
+        }
+        // download data and apply them
+
+        Container::getInstance()->get(SubscriptionPrefetcher::class)->run();
+        SubscriptionManager::instance()->applyDownloadedLicense(true);
+        $current_user = $existUser;
+        SubscriptionManager::instance()->setFixLicenseProcessState(false);
+        return true;
+    }
+
+    /**
+     * only Active and non support user are fixable
+     * @return bool
+     */
+    public function isLicenseTypeFixable() : bool
+    {
+        return !empty($this->id) && $this->deleted == 0 && $this->status === 'Active' && !self::isSupportUser($this);
+    }
+
+
+    /**
+     * Checks if the user can receive push notifications. If a an optional preference is provided, also check
+     * that the preference is turned on.
+     * @param string $preference
+     * @return bool
+     * @throws SugarQueryException
+     */
+    public function canReceivePushNotifications($preference = '')
+    {
+        $service = PushNotificationService::getService();
+        $pushEnabledForUser = $service && $this->hasRegisteredDevices();
+
+        if (!empty($preference)) {
+            $pushEnabledForUser = $pushEnabledForUser && isTruthy($this->getPreference($preference));
+        }
+
+        return $pushEnabledForUser;
+    }
+
+
+    /**
+     * Gets the language to use for localizing strings for the user. First preference is the user's
+     * preferred language, with a fallback to the instance's default language.
+     * @return string
+     */
+    public function getUserLanguageWithFallback()
+    {
+        return !empty($this->preferred_language) ? $this->preferred_language : getValueFromConfig('default_language');
+    }
+
+    /**
+     * Gets the User's appearance preference; light, dark or null. If it's not set (null), fallback to 'system_default'.
+     * @return string
+     */
+    public function getUserPrefAppearanceDefault()
+    {
+        return $this->getPreference('appearance') ?? 'system_default';
+    }
+
+    /**
+     * Retrieves the User's last state data from the database
+     *
+     * @param string $platform platform, or base if not specified
+     * @return array|null the last state data if found; null otherwise
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function retrieveLastStates($platform = 'base')
+    {
+        // Get the last state data from the DB
+        $qb = DBManagerFactory::getInstance()->getConnection()->createQueryBuilder();
+        $qb->from('users_last_states')
+            ->select('last_state')
+            ->where($qb->expr()->eq('user_id', $qb->createPositionalParameter($this->id)))
+            ->andWhere($qb->expr()->eq('platform', $qb->createPositionalParameter($platform)));
+        $result = $qb->execute()->fetch();
+
+        // Unpack the result and return it
+        if (!empty($result)) {
+            return unserialize(base64_decode($result['last_state']), ['allowed_classes' => false]);
+        }
+        return null;
+    }
+
+    /**
+     * Updates key/value pairs in the User's last state data
+     *
+     * @param $changes array the key/value pairs to update in the User's last state data
+     * @param string $platform platform, or base if not specified
+     * @return array the updated last state data for the User
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function updateLastStates($changes, $platform = 'base')
+    {
+        // Get the last state data currently stored in the DB for the user
+        $lastStates = $this->retrieveLastStates();
+        $dataExists = $lastStates !== null;
+        if (!$dataExists) {
+            $lastStates = [];
+        }
+
+        // Make the key/value changes to the last state data
+        foreach ($changes as $key => $value) {
+            $lastStates[$key] = $value;
+        }
+
+        // Save the updated last state data to the DB
+        $qb = DBManagerFactory::getInstance()->getConnection()->createQueryBuilder();
+        if (!$dataExists) {
+            $qb->insert('users_last_states')
+                ->values([
+                    'id' => $qb->createPositionalParameter(\Sugarcrm\Sugarcrm\Util\Uuid::uuid1()),
+                    'user_id' => $qb->createPositionalParameter($this->id),
+                    'last_state' => $qb->createPositionalParameter(base64_encode(serialize($lastStates))),
+                    'platform' => $qb->createPositionalParameter($platform),
+                ])
+                ->execute();
+        } else {
+            $qb->update('users_last_states')
+                ->set('last_state', $qb->createPositionalParameter(base64_encode(serialize($lastStates))))
+                ->where($qb->expr()->eq('user_id', $qb->createPositionalParameter($this->id)))
+                ->andWhere($qb->expr()->eq('platform', $qb->createPositionalParameter($platform)))
+                ->execute();
+        }
+
+        // Return the updated last state data
+        return $lastStates;
+    }
+
+    /**
+     * @return array|mixed
+     */
+    protected function getOldTypes()
+    {
+        if (empty($this->oldLicenseType)) {
+            $oldType = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
+        } else {
+            $oldType = json_decode($this->oldLicenseType, true);
+        }
+        return $oldType;
+    }
+
+    /**
+     * @param array $newTypes
+     * @return array
+     */
+    protected function getNewTypes(array $newTypes): array
+    {
+        if (empty($newTypes) && $this->status === 'Active') {
+            $newTypes = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
+        }
+        return $newTypes;
     }
 }

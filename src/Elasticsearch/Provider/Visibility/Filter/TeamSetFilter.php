@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Filter;
 
+use Doctrine\DBAL\Result;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 use Sugarcrm\Sugarcrm\Elasticsearch\Queue\QueueManager;
 use TeamSet;
@@ -84,8 +85,9 @@ class TeamSetFilter implements FilterInterface
             AND team_memberships.user_id = ? AND team_memberships.deleted=0
             WHERE NOT EXISTS(SELECT NULL FROM team_sets_teams tst1 WHERE tst1.id = tst.id AND tst1.team_id = 1)
             group by tst.team_set_id';
+            /** @var Result $stmt */
             $stmt = $GLOBALS['db']->getConnection()->executeQuery($sql, [$user->id]);
-            $results = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+            $results = $stmt->fetchFirstColumn();
             //Initialize with Global team set id by default
             $newResults = array('1');
             foreach ($results as $result) {

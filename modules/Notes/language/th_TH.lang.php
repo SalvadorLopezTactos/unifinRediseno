@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'ที่อยู่อีเมล:',
     'LBL_EMAIL_ATTACHMENT' => 'ไฟล์แนบของอีเมล',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'การแนบอีเมลสำหรับ',
+    'LBL_NOTE_ATTACHMENT' => 'ไฟล์แนบบันทึก',
+    'LBL_KB_ATTACHMENT' => 'ไฟล์แนบ KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'ไฟล์แนบเคส',
     'LBL_FILE_MIME_TYPE' => 'ประเภท Mime',
     'LBL_FILE_EXTENSION' => 'การขยายไฟล์',
     'LBL_FILE_SOURCE' => 'แหล่งของไฟล์',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'แหล่งที่มาของบันทึก',
     'LBL_SOURCE_EXTERNAL' => 'ภายนอก',
     'LBL_SOURCE_INTERNAL' => 'ภายใน',
+    'LBL_PORTAL' => 'พอร์ทัล',
 
     // Help Text
     // List View Help Text

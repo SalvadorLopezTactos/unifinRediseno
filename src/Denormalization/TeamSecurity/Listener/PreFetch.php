@@ -13,7 +13,6 @@
 namespace Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\FetchMode;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 
 /**
@@ -64,9 +63,8 @@ SQL
         ;
 
         $stmt = $this->conn->executeQuery($query, [$teamIds], [Connection::PARAM_STR_ARRAY]);
-        $stmt->setFetchMode(FetchMode::COLUMN);
 
-        foreach ($stmt as $userId) {
+        foreach ($stmt->iterateColumn() as $userId) {
             $this->clearCache($userId);
         }
     }

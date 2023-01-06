@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Názov účtu/odvetvia',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Poloha',
     'LBL_PURCHASES' => 'Nákupy',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcie s účtom',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os účtu',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafy',

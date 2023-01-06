@@ -16,7 +16,7 @@
 <!-- Below Div must exist in order for IE7/8 to read the inline style declaration. Line should be removed for IE9+ -->
 <div display="none">&nbsp;</div>
 <style>
-{literal}
+
 #visGridWindow .yui-dt table, #visGridWindow .yui-dt td, .yui-dt tr th, #visGridWindow .yui-dt-liner {
 	padding: 1px 0px 1px 0 !important
 }
@@ -33,18 +33,18 @@
 #visGridWindow ul.ddd_table{
     padding: 5px;
     margin: 0px 10px 10px 10px;
-    border: solid 1px grey;
-    background-color: #F8F8F8;
+    border: solid 1px var(--border-color);
+    background-color: var(--content-background);
     min-width: 120px;
     min-height: 20px;
 }
 
 #visGridWindow ul.ddd_parent_option.valid {
-    background-color: #E0F8E0;
+    background-color: #e4fbb4;
 }
 
 #visGridWindow ul.ddd_parent_option.invalid {
-    background-color: #F8E0E0;
+    background-color: #ffd4d0;
 }
 
 #visGridWindow ul li {
@@ -52,9 +52,10 @@
     margin: 3px;
     padding: 2px;
     text-align: center;
-    background: white;
+    background: var(--primary-content-background);
     border-radius: 3px;
-    color: black;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
 }
 
 #visGridWindow ul li.title {
@@ -107,7 +108,7 @@
     border-color: gray;
 }
 
-{/literal}
+
 </style>
 <div class="left_list">
     <div class="dd_title">
@@ -162,7 +163,7 @@
     {sugar_translate label="LBL_BTN_SAVE" module="ModuleBuilder"}
     </button>
 </div>
-{literal}
+
 <script type="text/javascript">
 SUGAR.ddd = {};
 SUGAR.util.doWhen("typeof($) != 'undefined'", function()
@@ -176,13 +177,13 @@ SUGAR.util.doWhen("typeof($) != 'undefined'", function()
     }).appendTo('head');
 
     var mapping = { };
-    {/literal}
+
     var parentOptions = {$parentOptions};
     var childOptions = {$childOptions};
     //Load from the field if its on the page
     var targetId = "{$smarty.request.targetId}";
     var idFilterChars = {$id_filter_chars}g; // regex for keeping troublesome chars out of our id.
-    {literal}
+
     if ($("#" + targetId).length > 0)
     {
         var val = $("#" + targetId).val();
@@ -363,4 +364,3 @@ SUGAR.util.doWhen("typeof($) != 'undefined'", function()
     }
 });
 </script>
-{/literal}

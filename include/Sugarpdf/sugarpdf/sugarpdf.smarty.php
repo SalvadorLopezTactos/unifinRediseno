@@ -71,15 +71,28 @@ class SugarpdfSmarty extends Sugarpdf{
      */
     private function initSmartyInstance()
     {
-        if (!($this->ss instanceof Restricted_Sugar_Smarty)) {
-            $this->ss = new Restricted_Sugar_Smarty();
-            // TODO: Remove after MAR-1064 is merged.
-            // Enable enhanced security for user-provided templates. This
-            // includes disabling the {php} Smarty tag.
-            $this->ss->security = true;
+        if (!($this->ss instanceof Sugar_Smarty)) {
+            $this->ss = new Sugar_Smarty();
+            $securityPolicy = new Smarty_Security($this->ss);
+            // explicitly allow list of PHP functions (equals to defaults):
+            $securityPolicy->php_functions = ['isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time',];
+            // remove PHP tags
+            $securityPolicy->php_handling = Smarty::PHP_REMOVE;
+            $securityPolicy->allow_super_globals = false;
+            $securityPolicy->allow_constants = false;
+            // disable all stream wrappers
+            $securityPolicy->streams = null;
+            // 'math' internally uses eval()
+            $securityPolicy->disabled_tags = ['eval', 'fetch', 'include_php', 'math', ];
+            /**
+             * Disable 'template_object' to prevent tricks like:  {$name=$smarty.template_object->disableSecurity()} {include "file://etc/passwd"}
+             * Disable 'current_dir' to prevent filesystem info leakage
+             */
+            $securityPolicy->disabled_special_smarty_vars = ['template_object', 'current_dir',];
             if (defined('SUGAR_SHADOW_PATH')) {
-                $this->ss->secure_dir[] = SUGAR_SHADOW_PATH;
+                $securityPolicy->secure_dir[] = SUGAR_SHADOW_PATH;
             }
+            $this->ss->enableSecurity($securityPolicy);
 
             $this->ss->assign('MOD', $GLOBALS['mod_strings']);
             $this->ss->assign('APP', $GLOBALS['app_strings']);

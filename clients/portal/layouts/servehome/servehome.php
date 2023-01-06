@@ -21,6 +21,9 @@ $viewdefs['portal']['layout']['servehome'] = [
                 'type' => 'dashboard',
                 'components' => [
                     [
+                        'view' => 'contentsearchdashlet',
+                    ],
+                    [
                         'layout' => 'dashlet-main',
                     ],
                 ],

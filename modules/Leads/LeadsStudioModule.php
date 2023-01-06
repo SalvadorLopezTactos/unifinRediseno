@@ -21,22 +21,22 @@
 
 class LeadsStudioModule extends StudioModule
 {
-     function __construct ($module)
+    public function __construct($module)
     {
-         parent::__construct ($module);
+        parent::__construct($module);
     }
 
-    function getLayouts()
+    public function getLayouts()
     {
         $layouts = parent::getLayouts();
 
         $layouts = array_merge(array( translate("LBL_CONVERTLEAD", "Leads") => array (
-                'name' => translate("LBL_CONVERTLEAD", "Leads") ,
-                'action' => "module=Leads&action=Editconvert&to_pdf=1" ,
-                'imageTitle' => 'icon_ConvertLead' ,
-                'help' => 'layoutsBtn' ,
-                'size' => '48')), $layouts);
+            'name' => translate("LBL_CONVERTLEAD", "Leads") ,
+            'action' => "module=Leads&action=Editconvert&to_pdf=1" ,
+            'imageTitle' => 'icon_ConvertLead' ,
+            'help' => 'layoutsBtn' ,
+            'size' => '48')), $layouts);
 
-        return $layouts ;
+        return $layouts;
     }
 }

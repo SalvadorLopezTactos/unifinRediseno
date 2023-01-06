@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Opprettet av bruker',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Sist endret av bruker',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'System-e-post',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Dokumentmal',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentfletting',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Velg ...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentfletting til PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentfletting',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'ForretningsRegel',
     'LBL_PMSE_LABEL_RULE' => 'Regel',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Bare oppdaterte poster (alle oppdateringer – se hjelpetekst)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nye oppføringer eller første oppdatering',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nye oppføringer og alle oppdateringer',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Forholdsendring',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Velg når prosessen skal starte.<br><br>Ny: Kjør prosess når ny oppføring opprettes.<br><br>Første oppdatering: Prosess kjører bare den første gangen kriterier er oppfylt for en eksisterende oppføring.<br><br>Alle oppdateringer: Prosess kjører hver gang kriterier er oppfylt for en eksisterende oppføring.<br><br>Nye oppføringer eller første oppdatering: Prosess kjører bare den første gangen kriterier er oppfylt for en oppføring, enten under oppføringsopprettelse eller oppføringsoppdatering.<br><br>Nye oppføringer og alle oppdateringer: Prosesser kjører hver gang for alle nye og eksisterende oppføringer.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Velg når prosessen skal starte.<br> <br>Ny: Kjør prosessen når ny post blir opprettet.<br> <br>Første oppdatering: Prosessen kjører bare første gang kriteriene er oppfylt for et eksisterende innlegg.<br><br>Alle oppdateringer: Prosessen kjøres hver gang kriteriene blir oppfylt for et eksisterende innlegg.<br> <br>Nye poster eller første oppdatering: Prosessen kjører bare første gang kriteriene blir oppfylt for et innlegg, enten under opprettelse av innlegg eller oppdatering av inlegg.<br> <br>Nye innlegg og alle oppdateringer: Prosessen kjøres hver gang for alle nye og eksisterende innlegg.<br> <br>Forholdsendringer: Prosessen kjører hver gang det er en endring i forholdet.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Velg SugarCRM module for å starte trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fast dato',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Fejl',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Evaluering av forholdsendring',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Felt',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluering av modulfelt',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Alle beslektede poster',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Eventuelle beslektede poster',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Lagt til',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Fjernet',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Lagt til eller fjernet',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Ethvert forhold',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Kjøretid',
 

@@ -16,6 +16,14 @@ class UsersApi extends ModuleApi
     public function registerApiRest()
     {
         return array(
+            'retrieve' => array(
+                'reqType' => 'GET',
+                'path' => array('Users', '?'),
+                'pathVars' => array('module','record'),
+                'method' => 'retrieveRecord',
+                'shortHelp' => 'Returns a single record',
+                'longHelp' => 'include/api/help/module_record_get_help.html',
+            ),
             'create' => array(
                 'reqType' => 'POST',
                 'path' => array('Users'),
@@ -54,6 +62,20 @@ class UsersApi extends ModuleApi
                 'longHelp' => 'include/api/help/user_get_freebusy_help.html',
             ),
         );
+    }
+
+    /**
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function retrieveRecord(ServiceBase $api, array $args)
+    {
+        if (!($api->user->isAdminForModule('Users') || $api->user->isDeveloperForModule('Users') || $api->user->id === $args['record'])) {
+            throw new SugarApiExceptionNotAuthorized();
+        }
+        return parent::retrieveRecord($api, $args);
     }
 
     /**

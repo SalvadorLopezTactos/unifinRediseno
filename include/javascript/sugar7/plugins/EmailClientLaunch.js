@@ -64,6 +64,7 @@
              * @param event
              */
             launchEmailClient: function(event) {
+                event.stopPropagation();
                 var $link = $(event.currentTarget);
 
                 if (this.useSugarEmailClient()) {
@@ -393,6 +394,20 @@
             },
 
             /**
+             * Gets the model from appropriate context
+             *
+             * @return {Object} model from the context
+             */
+            getContextModel: function() {
+                if (this.view && _.isFunction(this.view.getContextModel)) {
+                    return this.view.getContextModel();
+                } else {
+                    var context = this.context.parent || this.context || {};
+                    return context ? context.get('model') : {};
+                }
+            },
+
+            /**
              * @inheritdoc
              *
              * On render, set each email link's href attribute to a mailto for
@@ -495,8 +510,7 @@
 
                 this.on('init', function() {
                     var self = this;
-                    var context = this.context.parent || this.context;
-                    var model = context.get('model');
+                    var model = this.getContextModel();
                     var events = [
                         'change',
                         'change:from_collection',

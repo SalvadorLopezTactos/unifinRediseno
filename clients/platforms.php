@@ -18,3 +18,4 @@ $platforms[] = 'lpi';
 $platforms[] = 'collabspot';
 $platforms[] = 'collabspotbackend';
 $platforms[] = 'discover';
+$platforms[] = 'dms';

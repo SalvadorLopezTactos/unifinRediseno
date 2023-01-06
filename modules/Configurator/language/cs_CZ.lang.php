@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Výchozí formát času',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Zobrazovat časy odpovědi serveru',
+    'FREEZE_FIRST_COLUMN' => 'Povolit ukotvení sloupce',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Povolte toto nastavení, abyste uživatelům umožnili ukotvit první sloupec v různých ' .
+        'zobrazeních seznamu, včetně zobrazení seznamu modulů, podpanelů, dashletů a konzolí.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Protokolovat pomalé dotazy',
     'LOCK_HOMEPAGE_HELP'=>'Toto nastavení zabraňuje <br /> 1) přidání nových dashletů a domácích stránek na Úvodní stránku, <br /> 2) přetažením dashletu na úvodní stránce',
     'CURRENT_LOGO'=>'Aktuánlí používané logo',
+    'CURRENT_LOGO_DARK' => 'Aktuální logo tmavého režimu:',
     'CURRENT_LOGO_HELP'=>'Toto logo se zobrazí v levém horním rohu aplikace SugarCRM',
+    'CURRENT_LOGO_DARK_HELP' => "Toto logo se zobrazí v levém rohu zápatí podle preferencí vzhledu uživatele, když je aplikace Sugar v tmavém režimu.",
     'NEW_LOGO'=>'Nahrát nové logo (212x40)',
     'NEW_LOGO_HELP' => 'Formát obrázku může být png nebo jpg.<br />Doporučená velikost je 212x40 px.',
+    'NEW_LOGO_DARK' => 'Vyberte logo tmavého režimu:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Formát souboru obrázku může být buď. Png nebo. Jpg.Maximální výška je 17px, a maximální šířka je 450px. Jakékoliv nahraný obrázek, který je větší v jakémkoliv směru bude zmenšen na tyto max. rozměry. název souboru nesmí obsahovat mezery.',
     'NEW_QUOTE_LOGO'=>'Nahrát nové logo pro Nabíkdu (867x74)',
     'NEW_QUOTE_LOGO_HELP'=>'Požadovaný formát souboru je jpg.<br />Doporučená velikost je 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Pokračovat',
     'LBL_WIZARD_FINISH_TAB' => 'Dokončit',
     'LBL_WIZARD_FINISH_TITLE' => 'Základní nastavení systému je kompletní.',
-    'LBL_WIZARD_FINISH' => 'Klikněte na tlačítko <b>Pokračovat</b> pro konfiguraci uživatelských nastavení.<br/><br /><br />Chcete-li nakonfigurovat další nastavení systému, klikněte <a href="index.php?module=Administration&action=index" target="_blank">zde</a>.',
+    'LBL_WIZARD_FINISH' => 'Kliknutím na <b>Pokračovat</b> nakonfigurujte svá uživatelská nastavení.<br/><br />
+Chcete-li nakonfigurovat další nastavení systému, klikněte <a href="#Administration" target="_blank">zde</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Průvodce',
     'LBL_WIZARD_SYSTEM_DESC' => 'Vyplňte název firmy a vložte logo.',
     'LBL_WIZARD_LOCALE_DESC' => 'Vyberte Vaší geografickou polohu pro zobrazování dat v SugarCRM. Nastavení bude jako výchozí. Uživatelé si jej mohou změnit.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Nahrávám...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Smazat' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Vítejte' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo tmavého režimu',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Modul Reporty je dostupny pouze pro nativní Sugar Mobile Plus klienty.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modul Reporty není k dispozici pro zobrazení v mobilním prohlížeči.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

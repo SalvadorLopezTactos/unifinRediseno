@@ -9,72 +9,75 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 ({
-  // components dropdowns
-  _renderHtml: function () {
-    this._super('_renderHtml');
+    className: 'container-fluid',
 
-    /* Custom file upload overrides and avatar widget */
-    var uobj = [],
-        onUploadChange = function (e) {
-          var status = $(this),
-              opts = 'show';
-          if (this.value) {
-            var this_container = $(this).parent('.file-upload').parent('.upload-field-custom'),
-              value_explode = this.value.split('\\'),
-              value = value_explode[value_explode.length-1];
+    // components dropdowns
+    _renderHtml: function() {
+        this._super('_renderHtml');
 
-            if ($(this).closest('.upload-field-custom').hasClass('avatar')===true) { /* hide status for avatars */
-              opts = "hide";
+        /* Custom file upload overrides and avatar widget */
+        var uobj = [];
+        var onUploadChange = function(e) {
+            var status = $(this);
+            var opts = 'show';
+            if (this.value) {
+                var thisContainer = $(this).parent('.file-upload').parent('.upload-field-custom');
+                var valueExplode = this.value.split('\\');
+                var value = valueExplode[valueExplode.length - 1];
+
+                if ($(this).closest('.upload-field-custom').hasClass('avatar') === true) { /* hide status for avatars */
+                    opts = 'hide';
+                }
+
+                if (thisContainer.next('.file-upload-status').length > 0) {
+                    thisContainer.next('.file-upload-status').remove();
+                }
+                this.$('<span class="file-upload-status ' + opts + ' ">' + value + '</span>')
+                    .insertAfter(thisContainer);
             }
-
-            if (this_container.next('.file-upload-status').length > 0) {
-              this_container.next('.file-upload-status').remove();
-            }
-            this.$('<span class="file-upload-status ' + opts + ' ">' + value + '</span>').insertAfter(this_container);
-          }
-        },
-        onUploadFocus = function () {
-          $(this).parent().addClass('focus');
-        },
-        onUploadBlur = function () {
-          $(this).parent().addClass('focus');
+        };
+        var onUploadFocus = function() {
+            $(this).parent().addClass('focus');
+        };
+        var onUploadBlur = function() {
+            $(this).parent().addClass('focus');
         };
 
-    this.$('.upload-field-custom input[type=file]').each(function() {
-      // Bind events
-      $(this)
-        .bind('focus', onUploadFocus)
-        .bind('blur', onUploadBlur)
-        .bind('change', onUploadChange);
+        this.$('.upload-field-custom input[type=file]').each(function() {
+            // Bind events
+            $(this)
+                .bind('focus', onUploadFocus)
+                .bind('blur', onUploadBlur)
+                .bind('change', onUploadChange);
 
-      // Get label width so we can make button fluid, 12px default left/right padding
-      var lbl_width = $(this).parent().find('span strong').width() + 24;
-      $(this)
-        .parent().find('span').css('width',lbl_width)
-        .closest('.upload-field-custom').css('width',lbl_width);
+            // Get label width so we can make button fluid, 12px default left/right padding
+            var lblWidth = $(this).parent().find('span strong').width() + 24;
+            $(this)
+                .parent().find('span').css('width', lblWidth)
+                .closest('.upload-field-custom').css('width', lblWidth);
 
-      // Set current state
-      onUploadChange.call(this);
+            // Set current state
+            onUploadChange.call(this);
 
-      // Minimizes the text input part in IE
-      $(this).css('width', '0');
-    });
+            // Minimizes the text input part in IE
+            $(this).css('width', '0');
+        });
 
-    this.$('#photoimg').on('change', function() {
-      $("#preview1").html('');
-      $("#preview1").html('<span class="loading">Loading...</span>');
-      $("#imageform").ajaxForm({
-        target: '#preview1'
-      }).submit();
-    });
+        this.$('#photoimg').on('change', function() {
+            $('#preview1').html('');
+            $('#preview1').html('<span class="loading">Loading...</span>');
+            $('#imageform').ajaxForm({
+                target: '#preview1'
+            }).submit();
+        });
 
-    this.$('.preview.avatar').on('click.styleguide', function(e){
-        $(this).closest('.span10').find('label.file-upload span strong').trigger('click');
-    });
-  },
+        this.$('.preview.avatar').on('click.styleguide', function(e) {
+            $(this).closest('.span10').find('label.file-upload span strong').trigger('click');
+        });
+    },
 
-  _dispose: function(view) {
-      this.$('#photoimg').off('change');
-      this.$('.preview.avatar').off('click.styleguide');
-  }
+    _dispose: function(view) {
+        this.$('#photoimg').off('change');
+        this.$('.preview.avatar').off('click.styleguide');
+    }
 })

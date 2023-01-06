@@ -42,8 +42,6 @@ $dictionary['FieldsMetaData'] = array (
 	),
 	'indices' => array (
 		array('name' =>'fields_meta_datapk', 'type' =>'primary', 'fields' => array('id')),
-		array('name' =>'idx_meta_id_del', 'type' =>'index', 'fields'=>array('id','deleted')),
-		array('name' => 'idx_meta_cm_del', 'type' => 'index', 'fields' => array('custom_module', 'deleted')),
         [
             'name' => 'idx_fields_meta_data_custom_module_name',
             'type' => 'unique',

@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'说明',
     'LBL_OW_TYPE'=>'类型',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => '<span class="sicon sicon-user-group mx-1"></span> 团队预测{{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'直接报告',
     'LBL_FDR_OPPORTUNITIES'=>'预测中的商业机会：',
     'LBL_FDR_WEIGH'=>'加权商业机会金额：',
     'LBL_FDR_COMMIT'=>'已提交的金额',
     'LBL_FDR_DATE_COMMIT'=>'承诺日期',
+    'LBL_FDR_FORECAST_HEADER' => '<span class="sicon sicon-user mx-1"></span> 的卖方预测{{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => '预测：工作表',
     'LBL_DV_MY_FORECASTS' => '我的预测：',
-    'LBL_DV_MY_TEAM' => "我的团队的预测" ,
+    'LBL_DV_MY_TEAM' => "我的团队的预测",
     'LBL_DV_TIMEPERIODS' => '时段：',
     'LBL_DV_FORECAST_PERIOD' => '预测时段',
     'LBL_DV_FORECAST_OPPORTUNITY' => '预测商业机会',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => '基本利率',
 
     'LBL_QUOTA' => '定额',
-    'LBL_QUOTA_ADJUSTED' => '定额（调整后的）',
+    'LBL_QUOTA_ADJUSTED' => '调整后的配额',
 
     'LBL_FORECAST_FOR'=>'预测工作表为：',
     'LBL_FMT_ROLLUP_FORECAST'=>'（汇总）',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'定额 vs. 承诺 vs. 实际',
 
     'LBL_FORECAST' => '销售预测',
+    'LBL_COMMITMENT' => '提交',
+    'LBL_TEAM_COMMITMENT' => '团队提交',
+    'LBL_FORECASTED' => '预测',
+    'LBL_ADJUSTED_TOTAL' => '调整后的总额',
     'LBL_COMMIT_STAGE' => '提交阶段',
     'LBL_SALES_STAGE' => '销售阶段：',
     'LBL_AMOUNT' => '数量',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, 和{{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => '可能 {{{direction}}} {{{from}}} 到 {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => '最佳的{{{direction}}} {{{from}}} 到 {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => '最坏的{{{direction}}} {{{from}}} 到 {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => '可能保持不变',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => '最好保持不变',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => '最差保持不变',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => '提交（可能）{{{direction}}{{{from}}}}}到{{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => '提交（最佳） {{{direction}}} {{{from}}} 到 {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => '提交（最差） {{{direction}}} {{{from}}} 到 {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => '提交（可能）保持不变',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => '提交（最佳）保持不变',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => '提交（最差）保持不变',
 
 
     'LBL_COMMITTED_THIS_MONTH' => '本月在 {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => '显示全部',
     'LBL_TOTAL' => '总计',
     'LBL_OVERALL_TOTAL' => '总和',
-    'LBL_EDITABLE_INVALID' => ' {0} 无效值',
+    'LBL_EDITABLE_INVALID' => '{{field_name}} 无效值',
     'LBL_EDITABLE_INVALID_RANGE' => '值必须在 {0} 和 {1} 之间',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => '在您的工作表中有未保存的更改。',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => '仅导出保存或提交的数据。单击取消中止，确认导出保存的数据。',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => '包括',
     'LBL_CHART_NOT_INCLUDED' => '不包括',
     'LBL_CHART_ADJUSTED' => '（调整后的）',
-    'LBL_SAVE_DRAFT' => '保存草稿',
+    'LBL_SAVE_DRAFT' => '保存',
     'LBL_CHANGES_BY' => '按 {0}改变',
     'LBL_FORECAST_SETTINGS' => '设置',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '财政年度开始日期：',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '配置将在预测模块在使用的时间段。<br><br>请注意，初始设置后无法更改时间段设置。<br><br>首先，通过选择会计年度的开始日期。然后选择要预测时间段的类型。日期范围会根据您的选择自动计算时间期间。子时间周期是预测工作表的基础。<br><br>在可见的未来和过去的时间段将决定可见分时段预测模块的数量。用户能够查看和编辑在可见子期间的预测数字。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置想要对 {{forecastByModule}} 进行分类的方式。<br><br>请注意，第一次提交后便无法更改范围设置。对于升级的实例，范围设置与现有预测数据锁定在一起。<br><br>您可以根据概率范围选择两个或更多类别，也可以创建不基于概率的类别。<br><br>自定义类别左侧有复选框，使用这些复选框确定哪些范围将包含在已提交并报告给经理的预测金额中。<br><br>用户可以从工作表中手动更改 {{forecastByModule}} 的“包含/排除”状态和类别。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置对{{forecastByModule}}进行分类的方式。<br><br>请注意，首次提交后无法更改范围设置。对于升级的实例，范围设置与现有预测数据锁定在一起。<br><br>您可以根据概率范围选择两个或多个类别，也可以创建不基于概率的类别。<br><br>在自定义类别的左侧有复选框；使用这些来决定哪些范围将包括在提交的预测金额中，并向经理报告。 <br><br>用户可以从工作表中手动更改{{forecastByModule}}的包含/排除状态和类别。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '选择您想让用户填写的每个 {{forecastByModuleSingular}} 预测列。请注意可能的金额会绑定{{forecastByModule}}中显示的金额，原因是不能隐藏这个可能列。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '选择您想在预测模块中查看哪些列。将结合工作表字段列表，并允许用户选择如何配置其视图。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '我是预测帮助文本的一个占位符',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => '超过于',
     'LBL_FORECAST_DETAILS_NO_DATA' => '无数据',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => '会议配额',
+    'LBL_OPEN_LIKELY' => '打开可能',
+    'LBL_OPEN_BEST' => '打开最佳',
+    'LBL_OPEN_WORST' => '打开最差',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => '分配定额',
     'LBL_ASSIGNING_QUOTA' => '正分配定额',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "我团队的预测",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => '您未保存更改。您确定您想对工作表进行排序和放弃更改吗？',
+
+    'LBL_SAVE_TOOLTIP' => '保存在工作表行中所做的更改',
+    'LBL_COMMIT_TOOLTIP_REP' => '保存对记录的更改并将预测提交给经理',
+    'LBL_COMMIT_TOOLTIP_MGR' => '向经理提交预测并分配配额',
+
+    'LBL_SAVE_LABEL_REP' => '保存 ',
+    'LBL_SAVE_LABEL_MGR' => '保存调整后的值',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块内含{{opportunities_singular_module}}记录，用于建立{{forecastworksheets_module}} 和预测销售。用户可以从个人、团队、销售组织三个层面争取销售业绩{{quotas_module}} 。在用户开始访问{{plural_module_name}}模块之前，一位管理员必须选择本组织所需的时间段、范围、方案等。

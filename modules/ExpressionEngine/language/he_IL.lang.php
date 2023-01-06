@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'מנוע ביטויים',
-  'LBL_MODULE_NAME_SINGULAR' => 'מנוע ביטויים',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'הקודם' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'הבא' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'הרחב' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'מנוע ביטויים',
+    'LBL_MODULE_NAME_SINGULAR' => 'מנוע ביטויים',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'הקודם' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'הבא' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'הרחב' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'שדה לא ידוע',
+];

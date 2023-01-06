@@ -45,6 +45,18 @@
                 route: "logout"
             },
             {
+                name: 'finishImpersonation',
+                route: 'finishImpersonation',
+                callback: function() {
+                    app.controller.loadView({
+                        module: 'Logout',
+                        layout: 'finish-impersonation',
+                        skipFetch: true,
+                        create: true,
+                    });
+                }
+            },
+            {
                 name: "forgotpassword",
                 route: "forgotpassword",
                 callback: function() {
@@ -642,6 +654,10 @@
                     ) {
                         showConsent = false;
                     }
+                    // If the admin logged in as impersonated user, don't show the cookie consent
+                    if (app.cache && app.cache.has('ImpersonationFor')) {
+                        showConsent = false;
+                    }
                 }
             }
             if (showConsent) {
@@ -680,6 +696,10 @@
                         system_config.system_status.level &&
                         system_config.system_status.level === 'admin_only'
                     ) {
+                        showWizard = false;
+                    }
+                    // If the admin logged in as impersonated user, don't show the wizard
+                    if (app.cache && app.cache.has('ImpersonationFor')) {
                         showWizard = false;
                     }
                 }

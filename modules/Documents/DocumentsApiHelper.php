@@ -24,29 +24,32 @@ class DocumentsApiHelper extends SugarBeanApiHelper
      */
     public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
     {
-        // If there was a field list requested and document_revision_id was not
-        // a requested field we will have problems. Set the revision id so that 
-        // additional fields like filename get picked up.
-        if (!empty($fieldList) && !in_array('document_revision_id', $fieldList)) {
-            $db = DBManagerFactory::getInstance();
-            
-            // Get the revision ID so that it can be set into the bean
-            $query = sprintf(
-                'SELECT document_revision_id FROM %s WHERE id = %s',
-                $bean->table_name,
-                $db->quoted($bean->id)
-            );
-            
-            $rs = $db->query($query);
-            $row = $db->fetchByAssoc($rs);
-            if (isset($row['document_revision_id'])) {
+        // Set the revision id so that additional fields like filename get picked up.
+        if (!empty($fieldList)) {
+            $document_revision_id = $this->getDocumentRevisionId($bean->table_name, $bean->id);
+            if (false !== $document_revision_id) {
                 // Set the revision and setup everything else for a document that
                 // depends on a revision id, like filename, revision, etc
-                $bean->document_revision_id = $row['document_revision_id'];
+                $bean->document_revision_id = $document_revision_id;
                 $bean->fill_in_additional_detail_fields();
             }
         }
         
         return parent::formatForApi($bean, $fieldList, $options);
+    }
+
+    /**
+     * @param string $tableName
+     * @param string $id
+     * @return false|mixed
+     * @throws \Doctrine\DBAL\Exception
+     */
+    protected function getDocumentRevisionId(string $tableName, string $id)
+    {
+        $db = DBManagerFactory::getInstance();
+        $connection = $db->getConnection();
+        $tableNameQuoted = $db->getValidDBName($tableName, false, 'table');
+        $sql = "SELECT document_revision_id FROM {$tableNameQuoted} WHERE id = ?";
+        return $connection->fetchOne($sql, [$id]);
     }
 }

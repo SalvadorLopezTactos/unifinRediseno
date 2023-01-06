@@ -74,6 +74,15 @@ $viewdefs['Accounts']['base']['view']['list'] = array(
                     'default' => true,
                     'readonly' => true,
                 ),
+                [
+                    'name' => 'is_escalated',
+                    'label' => 'LBL_ESCALATED',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'type' => 'badge',
+                    'enabled' => true,
+                    'default' => false,
+                ],
             ),
 
         ),

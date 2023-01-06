@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,47 +18,17 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class GroupSettingTemplate extends DirectoryObject
 {
     /**
-    * Gets the displayName
-    * Display name of the template.
-    *
-    * @return string The displayName
-    */
-    public function getDisplayName()
-    {
-        if (array_key_exists("displayName", $this->_propDict)) {
-            return $this->_propDict["displayName"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the displayName
-    * Display name of the template.
-    *
-    * @param string $val The displayName
-    *
-    * @return GroupSettingTemplate
-    */
-    public function setDisplayName($val)
-    {
-        $this->_propDict["displayName"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the description
     * Description of the template.
     *
-    * @return string The description
+    * @return string|null The description
     */
     public function getDescription()
     {
@@ -84,12 +53,41 @@ class GroupSettingTemplate extends DirectoryObject
         return $this;
     }
     
+    /**
+    * Gets the displayName
+    * Display name of the template.
+    *
+    * @return string|null The displayName
+    */
+    public function getDisplayName()
+    {
+        if (array_key_exists("displayName", $this->_propDict)) {
+            return $this->_propDict["displayName"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the displayName
+    * Display name of the template.
+    *
+    * @param string $val The displayName
+    *
+    * @return GroupSettingTemplate
+    */
+    public function setDisplayName($val)
+    {
+        $this->_propDict["displayName"] = $val;
+        return $this;
+    }
+    
 
      /** 
      * Gets the values
     * Collection of settingTemplateValues that list the set of available settings, defaults and types that make up this template.
      *
-     * @return array The values
+     * @return array|null The values
      */
     public function getValues()
     {
@@ -110,7 +108,7 @@ class GroupSettingTemplate extends DirectoryObject
     */
     public function setValues($val)
     {
-		$this->_propDict["values"] = $val;
+        $this->_propDict["values"] = $val;
         return $this;
     }
     

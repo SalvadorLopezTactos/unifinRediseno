@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Procesų įrašų ataskaitų sritis',
 
     'LBL_CAS_ID' => 'Process Number',
+    'LBL_CAS_STATUS' => 'Tvarkyti statusą',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "task has been",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "task was ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "buvo priskirtas #%s %s procesas, %s įrašas pagal %s veiksmą %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "yra",
     'LBL_PMSE_HISTORY_LOG_AND'  => "ir",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'susieti ar nesusieti įrašo su',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Approve',
     'LBL_PMSE_LABEL_REJECT' => 'Reject',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Processes In Progress',
     'LBL_STATUS_CANCELLED' => 'Processes Cancelled',
     'LBL_STATUS_ERROR' => 'Processes Error',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Užbaigtas',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Nutrauktas',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Vykdomas',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Atšaukta',
+    'LBL_STATUS_ERROR_ENUM' => 'Klaida',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Process Management',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Unattended Processes',

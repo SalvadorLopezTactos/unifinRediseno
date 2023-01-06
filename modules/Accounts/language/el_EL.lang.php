@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Όνομα/Βιομηχανία Λογαριασμού',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Τοποθεσία',
     'LBL_PURCHASES' => 'Αγορές',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Αλληλεπιδράσεις λογαριασμού',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο λογαριασμού',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Γραφήματα',

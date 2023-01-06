@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Podrazumevani format vremena',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Prikaži vremena odziva servera',
+    'FREEZE_FIRST_COLUMN' => 'Dozvoli zamrzavanje kolone',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Omogućite ovo podešavanje kako biste korisnicima omogućili zamrzavanje prve kolone na različite ' .
+        'prikaze liste, uključujući prikaze liste modula, podtabli, dašleta i konzola.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Evidentiraj spore upite',
     'LOCK_HOMEPAGE_HELP'=>'Ovo podešavanje je da onemogući<BR> 1) dodavanje novih početnih strana i dašleta unutar modula Početna, <BR>2) kastomizaciju položaja dashleta na početnim stranama prevlačenjem i spuštanjem.',
     'CURRENT_LOGO'=>'Trenutni logo:',
+    'CURRENT_LOGO_DARK' => 'Trenutni logo za tamni režim:',
     'CURRENT_LOGO_HELP'=>'Ovaj logo je prikazan u gornjem levom uglu Sugar aplikacije.',
+    'CURRENT_LOGO_DARK_HELP' => "Ovaj logo je prikazan u gornjem levom uglu podnožja stranice kada je aplikacija Sugar u tamnom režimu, u skladu sa podešavanjima izgleda korisnika.",
     'NEW_LOGO'=>'Odaberite logo:',
     'NEW_LOGO_HELP' => 'Slika može biti ili .png ili .jpg. formata.<BR>Preporučena veličina je 212x40 px.',
+    'NEW_LOGO_DARK' => 'Izaberite logo za tamni režim:',
     'NEW_LOGO_HELP_NO_SPACE' => 'Dozvoljeni format slike je .png ili .jpg. Maksimalna visina je 17px, a maksimalna širina 450px. Sve postavljene slike koje su veće od zadatih dimenzija biće skalirane na zadate dimenzije. Naziv fajla slike ne sme sadržati blanko karakter.',
     'NEW_QUOTE_LOGO'=>'Uvezi logo novih ponuda',
     'NEW_QUOTE_LOGO_HELP'=>'Obavezni format slike je .jpg.<BR>Preporučena veličina je 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Nastavi',
     'LBL_WIZARD_FINISH_TAB' => 'Završi',
     'LBL_WIZARD_FINISH_TITLE' => 'Osnovno sistemsko konfigurisanje je završeno',
-    'LBL_WIZARD_FINISH' => 'Kliknite <b>Nastavi</b> da konfigurišete vaša korisnička podešavanja.<br/><br />Za konfigurisanje dodatnih sistemskih podešavanja, kliknite <a href="index.php?module=Administration&action=index" target="_blank">ovde</a>.',
+    'LBL_WIZARD_FINISH' => 'Kliknite na <b>Nastavi</b> kako biste konfigurisali korisnička podešavanja.<br/><br />
+Da biste konfigurisali dodatna podešavanja sistema, kliknite <a href="#Administration" target="_blank">ovde</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Brendiranje',
     'LBL_WIZARD_SYSTEM_DESC' => 'Obezbedite ime vaše organizacije i logo kako bi ste brendovali vaš Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Navedite kako bi ste želeli da vidite podatke u Sugar-u, na osnovu vaše geografske pozicije. Podešavanja koja navedete ovde će biti podrazumevana podešavanja. Korisnici će biti u mogućnosti da postave njihova podešavanja.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Učitavanje...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Obriši' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Dobrodošli' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo za tamni režim',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Modul Izveštaji je dostupan samo za nativne Sugar Mobile klijenate',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modul Izveštaji nije dostupan za pregledač mobilnog uređaja.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Prognoosid',
     'ForecastWorksheets' => 'Prognoosi töölehed',
     'ForecastManagerWorksheets' => 'Prognoosi haldamise töölehed',
-    'MergeRecords'=>'Mesti kirjed',
       'VisualPipeline'=>'Visuaalne müügitoru',
       'ConsoleConfiguration' => 'Konsooli konfiguratsioon',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Rollid',
     'Notifications'=>'Teavitused',
     'Sync'=>'Sünkroonimine',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'Täiustatud aruanded',
     'DataSets' => 'Andmeformaadid',
     'CustomQueries' => 'Kohandatud päringud',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Ostetud reaüksused',
     'MobileDevices' => 'Mobiiliseadmed',
     'PushNotifications' => 'Tõuketeatised',
+    'Escalations' => 'Eskalatsioonid',
+    'DocumentTemplates' => 'Dokumendimallid',
+    'DocumentMerges' => 'Dokumendi mestimised',
     'WorkFlow' => 'Töövoo definitsioonid',
     'EAPM' => 'Väliskontod',
     'Worksheet' => 'Tööleht',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Puhkused',
     'ChangeTimers' => 'Muuda taimereid',
     'Messages' => 'Sõnumid',
+    'Audit' => 'Audit',
+    'RevenueLineItems' => 'Tuluartiklid',
+    'DocuSignEnvelopes' => 'DocuSigni ümbrikud',
+    'Geocode' => 'Geokood',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Ts',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'AP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'ÄK',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Prognoosi tööleht',
     'ForecastManagerWorksheets' => 'Prognoosi haldamise tööleht',
     'Quotas' => 'Kvoot',
-    'MergeRecords'=>'Mesti kirje',
     'Teams' => 'Meeskond',
     'TeamNotices' => 'Meeskonna teade',
     'Activities' => 'Tegevus',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Ost',
     'PurchasedLineItems' => 'Ostetud reaüksus',
     'PushNotifications' => 'Tõuketeatis',
+    'Escalations' => 'Eskalatsioon',
+    'DocumentTemplates' => 'Dokumendimall',
+    'DocumentMerges' => 'Dokumendi mestimine',
     'WorkFlow' => 'Töövoog',
     'EAPM' => 'Väliskonto',
     'Worksheet' => 'Tööleht',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Puhkus',
     'ChangeTimers' => 'Muuda taimerit',
     'Messages' => 'Sõnum',
+    'Audit' => 'Audit',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'Geokood',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Utiliidid',
     'Other' => 'Muud',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF ja CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Pooleli',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Teadmusbaas',
       'PurchasedLineItems' => 'Ostetud reaüksus',
       'Purchases' => 'Ost',
+      'Escalations' => 'Eskalatsioon',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Konto',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Märkus',
     'PurchasedLineItems' => 'Ostetud reaüksus',
     'Purchases' => 'Ost',
+    'Escalations' => 'Eskalatsioon',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Tellitud',
       'Ship' => 'Tarnitud',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktiivne',
+        'Inactive' => 'Passiivne',
+        'Retired' => 'Aegunud',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Süsteemisätte kasutamine',
+        'light' => 'Hele',
+        'dark' => 'Tume',
+    ],
 
 
   'pricing_formula_default_key' => 'Fikseeritud',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televisioon',
         'NewsLetter' => 'Uudiskiri',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,14 +2049,16 @@ $app_list_strings = array (
         'print'       => 'Prindi',
         'pieWedgeName'      => 'sektsioonid',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Sektordiagramm',
-        'bar chart' => 'Vertical Bar Chart',
-        'group by chart' => 'Vertical Bar Grouped Chart',
-        'horizontal bar chart' => 'Bar Chart',
-        'horizontal group by chart' => 'Horizontal Bar Grouped Chart',
-        'line chart' => 'Line Chart',
-        'funnel chart' => 'Funnel Chart',
+        'donut chart' => 'Rõngasdiagramm',
+        'treemap chart' => 'Puukaartdiagramm',
+        'bar chart' => 'Tulpdiagramm',
+        'group by chart' => 'Kobartulpdiagramm',
+        'horizontal bar chart' => 'Lintdiagramm',
+        'horizontal group by chart' => 'Kobarlintdiagramm',
+        'line chart' => 'Joondiagramm',
+        'funnel chart' => 'Lehterdiagramm',
     ),
     'd3_value_placement' => array (
         '0'            => 'None',
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Hind (suurim kogusumma)',
             'total_revenue:asc' => 'Hind (väikseim kogusumma)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Kalendrikeskus',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Päev',
+          'week' => 'Nädal',
+          'workWeek' => 'Töönädal',
+          'expandedMonth' => 'Kuu',
+          'agenda' => 'Tegevuskava',
+          'timeline' => 'Ajaskaala',
+          'monthSchedule' => 'Planeerija',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Loodud',
+          'completed' => 'Lõpetatud',
+          'declined' => 'Tagasi lükatud',
+          'delivered' => 'Kohale toimetatud',
+          'sent' => 'Saadetud',
+          'signed' => 'Allakirjastatud',
+          'voided' => 'Annulleeritud',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Vaikesäte',
+            'color' => 'Värv',
+            'image' => 'Pilt',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Uus',
+            'In Progress' => 'Pooleli',
+            'Closed' => 'Suletud',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Passiivsus',
+            'Lack of Progress' => 'Edenemine puudub',
+            'Customer-Imposed Deadline' => 'Kliendi seatud tähtaeg',
+            'Account at Risk' => 'Konto on ohus',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Päring kliendilt',
+            'Internally Requested' => 'Sisepäring',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Juhtum',
+            'Bugs' => 'Viga',
+            'Accounts' => 'Konto',
+            'Opportunities' => 'Võimalus',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Positiivne',
+            'Negative' => 'Negatiivne',
+            'Neutral' => 'Neutraalne',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Vähetõenäoline',
+            '02_less_likely' => 'Vähem tõenäoline',
+            '03_neutral' => 'Neutraalne',
+            '04_more_likely' => 'Tõenäolisem',
+            '05_very_likely' => 'Väga tõenäoline',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Ei vasta klientidele',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Vastab klientidele',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Toggle Visibility', // Record view header panel element
   'LBL_ACTIVITIES' => 'Tegevused',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar ja 3-D Kuup on ettevõtte SugarCRM Inc. registreeritud kaubamärgid. '.
         'Kõik muud tootes kasutatavad või esinevad ettevõtte ja tootenimed võivad olla '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Lisa [Alt+C]' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Company logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalender' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Teie valitud rippmenüü väärtus muutis teie kirjevaate paigutust. ' .
+        'Selles uues paigutuses peidetud väljade väärtused on kustutatud. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'peamooduli navigeerimine',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Sulge',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} marked as {{status}}.',
 
+    'LBL_FOCUS' => 'Fookus',
+
     'LBL_QUERY_VALID'=>'Kehtiv',
     'LBL_QUERY_ERROR'=>'Viga!',
     'LBL_QUERY_CHILD'=>'Kehtiv alampäring',
@@ -3068,8 +3185,12 @@ $app_strings = array (
     'LBL_CASES'=>'Juhtumid',
     'LBL_MESSAGE'=>'Sõnum',
     'LBL_MESSAGES'=>'Sõnumid',
+    'LBL_ESCALATIONS' => 'Eskalatsioonid',
+    'LBL_ESCALATION' => 'Eskalatsioon',
+    'LBL_DOCUSIGN_ENVELOPES' => 'DocuSigni ümbrikud',
+    'LBL_DOCUSIGN_ENVELOPE' => 'DocuSigni ümbrik',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
-    'LBL_CHANGE_PASSWORD' => 'Change password',
+    'LBL_CHANGE_PASSWORD' => 'Muuda parooli',
     'LBL_CHANGE_BUTTON_LABEL' => 'Muuda',
     'LBL_CHANGE_BUTTON_TITLE' => 'Muuda [Alt+G]',
     'LBL_CHARSET' => 'UTF-8',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Open Items:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Koosta e-kiri',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'Meil',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Koosta e-kiri [Alt+L]',
     'LBL_SEARCH_DROPDOWN_YES'=>'Jah',
     'LBL_SEARCH_DROPDOWN_NO'=>'Ei',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumendid',
     'LBL_DATE_ENTERED' => 'Loomiskuupäev',
     'LBL_DATE_MODIFIED' => 'Muutmiskuupäev',
+    'LBL_ACTIVITY_MODIFIED' => 'Muudetud',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Ülevaate redigeerimise vaheleht',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Moodulite redigeerimise vahelehed',
     'LBL_EDIT_BUTTON' => 'Redigeeri',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Select field...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Select operator...',
     'LBL_FILTER_CREATE_NEW' => 'Loo',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Loo filter (salvestamata)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Salvestamata)',
     'LBL_FILTER_CREATE_FILTER' => 'Loo uus filter',
     'LBL_FILTER_CLOSE_FILTER' => 'Sulge filter',
     'LBL_FILTER_EDIT_FILTER' => 'Redigeeri filtrit',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Rohkem {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Tänased tegevused',
     'LBL_LEADS'=>'Müügivihjed',
+    'LBL_LEAD'=>'Müügivihje',
+    'LBL_QUOTES_BILL_TO' => 'Hinnapakkumised (arve saaja)',
     'LBL_LESS' => 'vähem',
     'LBL_CAMPAIGN' => 'Kampaania:',
     'LBL_CAMPAIGNS' => 'Kampaaniad',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Palun vali jätkamiseks vähemalt 2 kirjet.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Palun vali jätkamiseks vähemalt 10 kirjet.',
     'LBL_LISTVIEW_ALL' => 'Kõik',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Külmuta veerg 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'All duplicates',
     'LBL_LISTVIEW_NONE' => 'Ära vali kõike',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Vali see leht',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Vali kõik',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Vali kirjed',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Valitud',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Clear selections.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Tühistage kõik valikud.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Select all records',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'There are more than {{num}} records in the result set. You have selected the first {{num}} records.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Olete valinud tulemuste hulgast ühe kirje.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'You have selected all {{num}} records in the result set.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'You have selected all {{num}} records in this view. {{link}} in the result set.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Updating {{num}} of {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => '{{num}}/{{total}} värskendamisel',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(about {{time}} {{unit}} left)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Mass Update failed. Initiating new attempt ({{num}} of {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Mass Update incomplete. {{num}} record(s) remain unchanged.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} kirjet ei arvestata õiguste või tõrgete tõttu.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} record(s) were updated successfully.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Mass Update',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Deleting {{num}} of {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => '{{num}}/{{total}} kustutamisel',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(about {{time}} {{unit}} left)',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Mass Delete failed. Initiating new attempt ({{num}} of {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Mass Delete incomplete. {{num}} record(s) remain.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Valitud',
     'LBL_LISTVIEW_ACTIONS' => 'Tegevused',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Vali kõik kirjed sellel lehel',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Tühista kõikide kirjete valik sellel lehel',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} of {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} laadimisest...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Click for total',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => '/',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Hangi lehtede arv',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'David',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Livingstone',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Code Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'Palun logi sisse siia alasse sisenemiseks',
     'LBL_LOGOUT' => 'Logi välja',
+    'LBL_FINISH_IMPERSONATING' => 'Lõpeta teise kasutajana esinemine',
+    'LBL_RESET_MFA' => 'Lähtesta mitmeastmeline autentimine',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, esinete praegu kasutajana {{user}}.',
     'LBL_PROFILE' => 'Profile',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Kirja mestimine',
     'LBL_MASS_UPDATE' => 'Mass Update',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Valige hulgivärskendamiseks kõik kirjed',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Kaasa kirje hulgivärskendamisse',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Add Field',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Eemalda väli',
     'LBL_GENERATE_QUOTE' => 'Generate Quote',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Rohkem infot',
     'LBL_PANEL_BODY' => 'Ülesande ülevaade',
     'LBL_PARENT_TYPE' => 'Parent Type',
+    'LBL_RELATED_TYPE' => 'Seotud tüüp',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Vahemik',
     'LBL_PICTURE_FILE' => 'Pilt',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Seotud',
     'LBL_RELATED_INFORMATION' => 'Seotud info',
-    'LBL_RELATED_RECORDS' => 'Seotud kirjed',
+    'LBL_RELATED_RECORDS' => 'Seotud {{module}}',
     'LBL_REPORTS_TO' => 'Juhataja',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Tähistab nõutud välja',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Kõik õigused kaitstud.<br />SugarCRM, Sugar ja 3-D Kuup on ettevõtte SugarCRM Inc. registreeritud kaubamärgid. '.
         'Kõik muud tootes kasutatavad või esinevad ettevõtte ja tootenimed võivad olla '.
         'vastavate ettevõtete kaubamärgid, millega need on seotud.',
@@ -3604,6 +3746,7 @@ Sincerely, SugarCRM',
     'LBL_UNDELETE' => 'Taasta',
     'LBL_UNSYNC' => 'Desüngi',
     'LBL_UPDATE' => 'Uuenda',
+    'LBL_UPDATES' => 'Uuendused',
     'LBL_USER_LIST' => 'Kasutajaloend',
     'LBL_USER_MENU' => 'User Menu',
     'LBL_USERS_SYNC'=>'Kasutajate sünkimine',
@@ -3670,6 +3813,8 @@ Sincerely, SugarCRM',
     'NTC_DELETE_SUCCESS' => 'You deleted the {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'Are you sure you want to unlink this record?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Are you sure you want to unlink the {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Kas soovite kindlasti kontakti {0} linkimise tühistada? See eemaldab ta juhtumi väljalt Peamine kontakt.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'Kontakti {0} linkimist ei saa tühistada, kuna ta on selle juhtumi peamine kontakt. Enne kirje linkimise tühistamist värskendage välja Peamine kontakt.',
     'NTC_UNLINK_SUCCESS' => 'You unlinked the {0}.',
     'NTC_LOGIN_MESSAGE' => 'Palun sisesta oma kasutajanimi ja parool.',
     'NTC_NO_ITEMS_DISPLAY' => 'ühtegi',
@@ -3701,6 +3846,9 @@ Sincerely, SugarCRM',
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Brauseri värskendamine sulgeb kõik avatud SugarLive’i kõnede või tekstvestluste seansid ja kõik salvestamata muudatused lähevad kaduma. Kas soovite jätkata?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'You have unsaved changes. Are you sure you want to leave page and discard changes?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Kas soovite kindlasti <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">mitmeastmelise autentimise lähtestada</a>?
+See toiming logib teid kohe välja ja teil tuleb järgmisel sisselogimisel autentimisrakendusega autentida.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Kinnita ja logi välja',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Ühel või enamal dashletil on salvestamata muudatusi. Kas soovite kindlasti sahtli sulgeda?',
     'LBL_NAVIGATE_TO_REPORTS' => 'You are moving to the Reports module. Your changes to dashlet will not be saved. Continue?',
     'ERROR_NO_RECORD' => 'Viga kirje leidmisel. See kirje võib olla kustutatud või sul pole selle vaatamiseks ligipääsu.',
@@ -3796,6 +3944,11 @@ Sincerely, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Teil pole praegu ühtegi <item1> salvestatud kirjet. <item2> või kirje.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Positiivne',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutraalne',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negatiivne',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Click here",
     // contextMenu strings
@@ -3805,11 +3958,16 @@ Sincerely, SugarCRM',
     'LBL_CREATE_NOTE' => 'Loo märkus',
     'LBL_CREATE_OPPORTUNITY' => 'Uus müügivõimalus',
     'LBL_SCHEDULE_CALL' => 'Kõne logi',
+    'LBL_SCHEDULE_CALL2' => 'Kõne',
     'LBL_SCHEDULE_MEETING' => 'Planeeri kohtumine',
+    'LBL_SCHEDULE_MEETING2' => 'Kohtumine',
     'LBL_CREATE_MESSAGE' => 'Loo sõnum',
+    'LBL_CREATE_MESSAGE2' => 'Sõnum',
     'LBL_CREATE_TASK' => 'Loo ülesanne',
+    'LBL_CREATE_TASK2' => 'Ülesanne',
     'LBL_REMOVE_FROM_FAVORITES' => 'Eemalda Minu lemmikutest',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Märkus',
     'LBL_DOWNLOAD_ALL' => 'Laadi kõik alla',
     'LBL_DOWNLOAD_ONE' => 'Laadi alla',
     'LBL_ATTACHMENTS' => 'Manused',
@@ -3849,13 +4007,14 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Kuva ridu',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relate to current record',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Linked field',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Külmuta esimene veerg',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Oled kindel, et soovid Sugari dashleti eemaldada?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Are you sure you want to remove the row?',
     'LBL_MAXIMUM_OF' => 'Maximum of ',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' columns can be displayed.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Töölaud',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'My Dashboard',
     'LBL_COLLAPSE_ALL' => 'Ahenda kõik',
@@ -3872,12 +4031,15 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_CONFIGURE' => 'Configure',
     'LBL_DASHLET_TOGGLE' => 'Open/Close',
     'LBL_SIDEPANE_TOGGLE' => 'Ava/sule külgpaan',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Taasta vaikimisi kasutatavad dashletid',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Töölaud pole konfigureeritud',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Loo töölaud',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Spikker',
     'LBL_HELPLET_TOGGLE' => 'Ava/sule',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Moodulid',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modified by Me',
     'LBL_FACET_CREATED_BY_ME' => 'Created by Me',
@@ -3894,6 +4056,7 @@ Sincerely, SugarCRM',
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Kirje vaade',
+    'LBL_RELATED_RECORDS' => 'Seotud {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Kuvab vahekaartidel kirje ja valikuliselt seotud kirjed.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Kirje baastüüp',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Moodul {{moduleSingular}}',
@@ -3943,7 +4106,7 @@ Sincerely, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'Praegu ei leitud ühtegi kirjet.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case Summary',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interactions',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Ajaskaala',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Manused',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notes & Attachments belongs to the record',
     'LBL_DASHLET_PIPLINE_NAME' => 'Pipeline',
@@ -4214,6 +4377,8 @@ Sincerely, SugarCRM',
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Lae oma arvutist',
     'LBL_SEARCH_EXTERNAL_API' => 'Välise allika fail',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Välisesse allikasse üles laadima',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Välise allika link',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Turvalisus',
     'LBL_SHARE_PRIVATE' => 'Privaatne',
     'LBL_SHARE_COMPANY' => 'Ettevõte',
@@ -4339,6 +4504,9 @@ Sincerely, SugarCRM',
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Keyboard Shortcuts',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Form Functionality - Alt+</strong><br/> I = ed<b>I</b>t (detailview)<br/> U = d<b>U</b>plicate (detailview)<br/> D = <b>D</b>elete (detailview)<br/> R = Sha<b>R</b>e (detailview)<br/> A = s<b>A</b>ve (editview)<br/> L = cance<b>L</b> (editview) <br/><br/></p><p><strong>Search and Navigation  - Alt+</strong><br/> 7 = first input on Edit form<br/> 8 = Advanced Search link<br/> 9 = First Search Form input<br/> 0 = Unified search input<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Eskaleeri',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Share',
     'TPL_RECORD_SHARE_SUBJECT' => 'Shared {{module}} {{name}} from {{appId}}',
@@ -4411,7 +4579,7 @@ Sincerely, SugarCRM',
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'All changes will be discarded when you switch to a new primary record. Are you sure you want to switch?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Merge Related Records',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Merged: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Mestitud: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Merge Related {{objectName}} failed. Initiating new attempt ({{num}} of {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4465,14 +4633,14 @@ Sincerely, SugarCRM',
     'LBL_LANGUAGE' => 'Language / Sprache / Idioma',
     'LBL_LOADING_LANGUAGE' => 'Loading language pack',
     'LBL_UPLOADING' => 'Uploading',
+    'LBL_UPLOADING_DOTS' => 'Üleslaadimine...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Are you sure you want to delete this image?',
     'LBL_FILE_DELETE_CONFIRM' => "Are you sure you want to delete this file? This cannot be undone.",
     'LBL_FILE_DELETED' => 'File was successfully deleted',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Portal Theme',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Configure Portal Theme',
-    'LBL_THEME_PREVIEW' => 'Theme Preview',
+    'LBL_THEME_PREVIEW' => 'Portaali teema eelvaade',
     'LBL_LOADING_PREVIEW' => 'Loading Preview',
     'LBL_RESET' => 'Lähtesta',
     'LBL_COLORS' => 'Colors',
@@ -4623,10 +4791,18 @@ Sincerely, SugarCRM',
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Kohtumised',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Ülesanded',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Telefonikõned',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Kontod',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontaktid',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Emails',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Vahetused',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Pakkumuse artiklid',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Vahetuse erandid',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumendid',
+    'LBL_ESCALATIONS' => 'Eskalatsioonid',
+    'LBL_ESCALATED' => 'Eskaleeritud',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Eskalatsioonid',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Muud seotud eskalatsioonid',
+    'LBL_ESCALATIONS' => 'Eskalatsioonid',
     'LNK_SETTINGS' => 'Settings',
     'LBL_MOBILE_SUPPORT' => 'Tugi',
     'LBL_MOBILE_SHOW_MORE' => 'Näita rohkem...',
@@ -4834,6 +5010,55 @@ Sincerely, SugarCRM',
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Failed to get server time',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Failed to enable offline mode. Unable to reach the server.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Välimus',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Kasuta süsteemi sätet',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Hele',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Tume',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Uus failinimi',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Nimeta fail ümber',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Minu loodud',
+    'LBL_OPERATOR_CONTAINS' => 'on mis tahes',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'ei ole ükski järgmistest',
+    'LBL_OPERATOR_EMPTY' => 'on tühi',
+    'LBL_OPERATOR_NOT_EMPTY' => 'ei ole tühi',
+    'LBL_OPERATOR_MATCHES' => 'kattub täpselt',
+    'LBL_OPERATOR_STARTS_WITH' => 'algab',
+    'LBL_OPERATOR_EQUALS' => 'on võrdne',
+    'LBL_OPERATOR_NOT_EQUALS' => 'ei ole võrdne',
+    'LBL_OPERATOR_GREATER_THAN' => 'on suurem kui',
+    'LBL_OPERATOR_LESS_THAN' => 'on väiksem kui',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'on suurem või võrdne',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'on väiksem või võrdne',
+    'LBL_OPERATOR_BETWEEN' => 'on vahemikus',
+    'LBL_OPERATOR_BEFORE' => 'enne',
+    'LBL_OPERATOR_AFTER' => 'pärast',
+    'LBL_OPERATOR_YESTERDAY' => 'eile',
+    'LBL_OPERATOR_TODAY' => 'täna',
+    'LBL_OPERATOR_TOMORROW' => 'homme',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'viimased 7 päeva',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'järgmised 7 päeva',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'viimased 30 päeva',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'järgmised 30 päeva',
+    'LBL_OPERATOR_LAST_MONTH' => 'eelmisel kuul',
+    'LBL_OPERATOR_THIS_MONTH' => 'sel kuul',
+    'LBL_OPERATOR_NEXT_MONTH' => 'järgmisel kuul',
+    'LBL_OPERATOR_LAST_YEAR' => 'eelmisel aastal',
+    'LBL_OPERATOR_THIS_YEAR' => 'sel aastal',
+    'LBL_OPERATOR_NEXT_YEAR' => 'järgmisel aastal',
+    'LBL_OPERATOR_IS' => 'on',
+    'LBL_OPERATOR_IS_NOT' => 'ei ole',
+    'LBL_ERROR_FILTER_EMPTY' => 'Lisage filtreerimiskriteeriumid.',
+    'LBL_ADD_FILTER' => 'Lisa kriteeriumid',
+    'LBL_FILTER_NAME' => 'Filtri nimi',
+    'LBL_FILTER_FIELD' => 'Väli',
+    'LBL_FILTER_OPERATOR' => 'Operaator',
+    'LBL_FILTER_VALUE' => 'Väärtus',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Salvesta töölauarakendusse',
+    'LBL_FILTER_LOCAL' => 'Kohalik filter',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Welcome to {{{brandName}}}.<br/><br/> Allow us to highlight some new features...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Main menu navigation.',
@@ -4879,6 +5104,7 @@ Sincerely, SugarCRM',
     'LBL_COMMENT_ADD' => 'Lisa kommentaar',
     'LBL_REQUIRED' => 'Kohustuslik',
     'LBL_MORE_BUTTON' => 'Rohkem',
+    'LBL_NO_OPTIONS' => 'Suvandeid pole saadaval',
     'LBL_TRY_AGAIN' => 'Proovige uuesti',
     'LBL_NEW_RECORDS' => 'Hiljuti loodud',
     'LBL_ASSIGNED_TO_ME' => 'Minu {{{module}}}',
@@ -5104,11 +5330,15 @@ Sincerely, SugarCRM',
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Kas olete kindel, et soovite vestluse sulgeda?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Loo märkus või lisa manus',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Lisa märkus',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Sisselogimine ei õnnestunud. Proovige uuesti.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Invalid Credentials',
-    'LBL_PORTAL_INVALID_GRANT' => 'Your token is invalid or has expired. Please login again.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Token Expired',
+    'LBL_PORTAL_INVALID_GRANT' => 'Teie seanss on aegunud. Palun logige uuesti sisse.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Seanss on aegunud',
     'LBL_PORTAL_AUTH_FAILED' => 'Client authentication failed.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Invalid Client',
     'LBL_PORTAL_INVALID_REQUEST' => 'The request made is invalid or malformed. Please contact technical support.',
@@ -5142,6 +5372,8 @@ Sincerely, SugarCRM',
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Taasta vaiketöölauad',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Uuenduste konsool',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Ülevaade',
@@ -5161,6 +5393,7 @@ Sincerely, SugarCRM',
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Sõnumi kokkuvõte',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Kõne kokkuvõte',
     'LBL_OMNICHANNEL_LINK_TO' => 'Lingi moodulid {{fromModule}} ja {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Lingi mooduliga {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Lingitud',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Teie brauser ei toeta vestlust. Kasutage Google Chrome’i või Mozilla Firefoxi.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Võtke abi saamiseks ühendust oma Sugari administraatoriga.',
@@ -5168,6 +5401,8 @@ Sincerely, SugarCRM',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Lõpetage SugarLive’i konfigureerimine enne väljuva kõne tegemist.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Lõpetage SugarLive’i paigutuse konfigureerimine enne SugarLive’i avamist.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Enne SugarLive’i paigutuse konfigureerimist seadke SugarLive’is oma olekuks Ühenduseta.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Kompaktne vaade',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Täisvaade',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Taasta vahekaardi vaikesätted',
@@ -5579,9 +5814,12 @@ Sincerely, SugarCRM',
     'LBL_BEST' => 'Best',
     'LBL_WORST' => 'Worst',
     'LBL_LIKELY' => 'Müügivõimaluse summa',
-    'LBL_BEST_ADJUSTED' => 'Best (Adjusted)',
-    'LBL_WORST_ADJUSTED' => 'Worst (Adjusted)',
-    'LBL_LIKELY_ADJUSTED' => 'Likely (Adjusted)',
+    'LBL_BEST_FORECAST' => 'Kohustus (parim)',
+    'LBL_WORST_FORECAST' => 'Kohustus (halvim)',
+    'LBL_LIKELY_FORECAST' => 'Kohustus (tõenäoline)',
+    'LBL_BEST_ADJUSTED' => 'Kohandatud kohustus (parim)',
+    'LBL_WORST_ADJUSTED' => 'Kohandatud kohustus (halvim)',
+    'LBL_LIKELY_ADJUSTED' => 'Kohandatud kohustus (tõenäoline)',
     'LBL_AMOUNT_USDOLLAR' => 'Summa kokku',
     'LBL_OVERDUE' => 'Overdue',
 
@@ -5602,6 +5840,8 @@ Sincerely, SugarCRM',
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Rohkem teavet vt mooduli {{{more_info_url}}} {{plural_module_name}} dokumentatsioonist.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'No Data Available',
+    'LBL_NEED_HELP' => 'Kas vajate millegi uuega abi?',
+    'LBL_NEW_CASE' => 'Uus juhtum',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'The help dashlet provides specific information pertaining to the module you are currently viewing along with a link to the corresponding documentation (e.g. Leads documentation) in the Application guide for more information.',
@@ -5749,9 +5989,19 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Vastuseta',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Schedule Unavailable',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Olemasolevad vaated',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Kalendri planeerija',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Vaikevaade',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Minu kalendrid',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Kasutaja ja meeskonna kalendrid',
+    'LBL_CALENDAR' => 'Kalender',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Error occurred while retrieving schedule.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Save and Send Invites',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Aktsepteeri olek',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Protsessid',
@@ -5868,15 +6118,21 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopeeri kinnituslink',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interaktsioonid',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Mooduli {{moduleSingular}} interaktsioonid',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Ajaskaala',
+    'LBL_NO_ACTIVITY' => 'Tegevus puudub',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Mooduli {{moduleSingular}} ajaskaala',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Rohkem',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Vähem',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Ajajoonel kuvatakse kõned, meilid, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Näita rohkem...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Näita vähem...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Andmed puuduvad',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Moodul ei ole litsentsitud.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktiivsed tellimused',
@@ -5925,8 +6181,10 @@ To create a new record using the values you have entered, click "Ignore Duplicat
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Fookuse sahtel',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Sulge fookuse sahtel',
     'LBL_EXTERNAL_GUESTS' => 'Välised külalised',
     'LBL_MY_FAVORITE_TASKS' => 'Minu lemmikülesanded',
+
     'LBL_MY_TASKS' => 'Minu ülesanded',
 
     // Sugar Integrate
@@ -5943,7 +6201,367 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_TIME_AWARE_TYPE' => 'Tüüp',
     'LBL_TIME_AWARE_BEAN_ID' => 'Oa ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Kuva silt',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Ava kirje vaade',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Lisa',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Abi ei ole saadaval',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funktsioonid',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Väljad',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Valige väli ...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Ühenda',
+    'LBL_ACTIONBUTTON_RELATED' => 'Seotud',
+    'LBL_ACTIONBUTTON_SAVE' => 'Salvesta',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Tühista',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Seotud moodul',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Seotud väljad',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Ühenda moodul',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Ühenda väljad',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Ühenda funktsioon',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Min',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Max',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Keskmine',
+    'LBL_ACTIONBUTTON_SUM' => 'Summa',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Määra kirje',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Koosta meil',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Loo kirje',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentide mestimine',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Ava URL',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Käita aruannet',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Värskenda kirjet',
+    'LBL_ACTIONBUTTON_ACTION' => 'Toiming',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Määra kasutajale',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Saada meil kasutajale',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Kasuta PMSE-d',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Mall',
+    'LBL_ACTIONBUTTON_MODULE' => 'Moodul',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Kuvasätted',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Tüüp',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Rippmenüü',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Nupp',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Nupu grupp',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Kuva kirjel silt',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Kuva päises',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Peida muutmisel',
+    'LBL_ACTIONBUTTON_SIZE' => 'Suurus',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Vaikesäte',
+    'LBL_ACTIONBUTTON_SMALL' => 'Väike',
+    'LBL_ACTIONBUTTON_LARGE' => 'Suur',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Arvutatud',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Konverdi PDF-vormingusse',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Dokumentide mestimine',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Eelvaade',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Atribuudid',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Silt',
+    'LBL_ACTIONBUTTON_DESC' => 'Kohtspikker',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Kuva silt',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Kuva ikoon',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Värviskeem',
+    'LBL_ACTIONBUTTON_ICON' => 'Ikoon',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Sõltuv',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Paigutuse konfiguratsioon',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Lõpeta vea ilmnedes',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Automaatne salvestamine',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfigureeri',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Palun seadista nupp ActionButton enne salvestamist.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfigureeri nupud',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Automaatne loomine',
+    'LBL_ACTIONBUTTON_LINK' => 'Link',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Kopeeri emaüksuse väärtused',
+    'LBL_ACTIONBUTTON_PRESET' => 'Eelsäte',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Eelsäte emaüksusest',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Vali ...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Emaväljalt ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Kas soovite kindlasti selle nupu kustutada?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Kas soovite kindlasti selle toimingu kustutada?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Sobimatud toimingunupu andmed',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Valige enne salvestamist moodul.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Enne salvestamist valige link. Kui link ei ole saadaval, eemaldage märge suvandilt Link.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Valige enne salvestamist kirje.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Valige enne salvestamist mall.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Peamine',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Teisene',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Ookean',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Roosa',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Sõjavägi',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Sinakasroheline',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Vaikne ookean',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Roheline',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Kollane',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Oranž',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Punane',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Korallpunane',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Lilla',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Valem',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Toimingud',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Tõrge nupu andmete valideerimisel.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Nuppudel peab olema määratud vähemalt nimetus või ikoon.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Sisestage kehtiv nupu nimetus.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Kirje loomine nurjus vajalike väärtuste puudumise tõttu. Võtke ühendust administraatoriga.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Selle nuputüübi puhul peab teil olema vähemalt kaks aktiivset nuppu.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Kirjevaated',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Tegevusmenüüd',
+    'LBL_ACTIONBUTTON_ORDER' => 'Järjestus',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Loendivaade',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Kirjevaade',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Kirjevaate dashlet',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Alampaneelid',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Ülesannete jada täitmismehhanism ei suutnud täita järgmisi toiminguid: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Lisa tegevus',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Eemalda see tegevus',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Dokumentide mestimine',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Dokumendi mestimine PDF-vormingusse',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Ettevõtte suurus',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Tööstusharu',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Tööstusharu sildid',
+    'LBL_HINT_COMPANY_LOCATION' => 'Ettevõtte asukoht',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Ettevõtte kirjeldus',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Asutamisaasta',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Ettevõtte Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => 'Ettevõtte Twitter',
+    'LBL_HINT_COMPANY_PIC' => 'Ettevõtte logo',
+    'LBL_HINT_CONTACT_PIC' => 'Ettevõtte foto',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Ettevõtte veebisait',
+    'LBL_HINT_PHOTO' => 'Foto link',
+    'LBL_HINT_JOB_2' => 'Eelmised tööd',
+    'LBL_HINT_EDUCATION' => 'Haridus',
+    'LBL_HINT_EDUCATION_2' => 'Täiendharidus',
+    'LBL_HINT_TWITTER' => 'Twitteri link',
+    'LBL_HINT_FACEBOOK' => 'Facebooki link',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'NAICS-kood',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'SIC-kood',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Majandusaasta lõpp',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Aastatulu',
+    'LBL_HINT_PHONE_1' => 'Telefon 1',
+    'LBL_HINT_PHONE_2' => 'Telefon 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Ühenda tabel',
+    'LBL_HINT_FULL_NAME' => 'Täisnimi',
+    'LBL_HINT_JOB_TITLE' => 'Ametinimetus',
+    'LBL_HINT_OFFICE_PHONE' => 'Telefoninumber kontoris',
+    'LBL_HINT_MOBILE_PHONE' => 'Mobiiltelefoni number',
+    'LBL_HINT_OTHER_PHONE' => 'Muu telefoninumber',
+    'LBL_HINT_WEBSITE' => 'Veebisait',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Kas soovite selle kirje kogu olemasoleva teabe Hintis leiduva uue teabega üle kirjutada?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Kas soovite selle kirje olemasoleva välja {{fieldName}} Hintis leiduva uue väljaga {{fieldName}} üle kirjutada?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Kogu kontoga seotud teave eemaldatakse. Kas soovite kindlasti jätkata?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logo',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Foto',
+    'LBL_HINT_ACCOUNTSETS' => 'Hinti kontorühmade sildid',
+
+    'LBL_HINT_LOADING' => 'Laadimine...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Toimub Hinti desinstallimine, palun oodake',
+    'LBL_HINT_VALUE_ERASED' => ' Väärtus on kustutatud ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'See teave kustutati andmete privaatsuse taotluse kaudu',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Valige üks alljärgnevatest desinstallivalikutest:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Desinstalli ainult Hinti pakett',
+    'LBL_HINT_UNINSTALL_FULL' => 'Desinstalli Hint täielikult',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'See valik eemaldab Hinti MLP ja keelab kõik teenuse Hint Insights aktiivsed tellimused.
+    Hinti uuesti installimine taasaktiveerib tellimused automaatselt.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'See valik desinstallib Hinti täielikult, sealhulgas eemaldab MLP ja kustutab kogu konfiguratsiooni ja tellimusi puudutava teabe.',
+    'LBL_HINT_UNINSTALL' => 'Desinstalli',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Desinstalli Hint',
+    'LBL_HINT_CANCEL' => 'Tühista',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'HOIATUS: valige see võimalus ainult siis, kui te ei plaani Hinti tulevikus enam kasutada.
+    Enne desinstallimist varundage oma Sugari andmebaas täielikult ja lülitage Sugar hooldusrežiimile. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Vt ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Hinti haldusjuhend ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'desinstallimisprotsessi üksikasjadega.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Kas olete kindel, et soovite desinstallida ainult Hinti paketi?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Kas olete kindel, et soovite Hinti täielikult desinstallida?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(MÄRKUS: SEDA TOIMINGUT EI SAA TAGASI VÕTTA)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Hinti väljad',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Tulemusi ei leitud.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Hinti paneeli tavapaigutus',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Kontod',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kontaktid',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Müügivihjed',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Hinti paneeli laiendatud paigutus',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Korraldage välju ümber, pukseerides neid ülalasuvates Hinti paneeli paigutussektsioonides.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Nägemaks üksikasjalikke juhiseid ja vaikeväljade loendit, vt ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' vaikesätete taastamiseks ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'moodul.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Kas olete kindel, et soovite mooduli {{module}} vaikesätted taastada?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Klõpsake siia',
+    'LBL_HINT_CONFIG_NAME' => 'Hinti haldusjuhend.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Väljad',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Täiendatud väljad',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Selles sektsioonis on loetletud kõik Hinti väljad ja Sugari väljad, mida Hint on täiendanud. Hinti väljad on märgitud tärniga (*) ja neid on võimalik kuvada Hinti paneelil ainult siis, kui neid on täiendatud.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Välja nimi',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Täiendatud väli',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Kuva Hintis',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Kuva Hinti paneelil',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Täiendavad Sugari väljad',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Selles sektsioonis on loetletud kõik Sugari väljad, mida Hint pole täiendanud.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Hoiatus',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Hoiatus: sünkroonite kohe teenusega Hint Insights. Kõik ootel olevad koondmeilid lähevad kaotsi ning olemasolevad uudised kustutatakse Insightsi paneelikult. Kõiki tüüpi teavituste edastamist jätkatakse pärast sünkroonimise lõppemist.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Alljärgnevalt on loetletud teie mooduliga {{_moduleSingular}} seotud soovitatud ettevõtted. Valige ettevõtteteave, mida kuvada.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Ühtegi kontot pole valitud',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Leiti mitu meili, valige meilid, mida importida: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Hint ei suutnud sisestatud andmete põhjal süsteemist vastet leida.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Parimad otsingutulemused saab Hintis isiku nime ja e-posti aadressi kasutades.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Parimad otsingutulemused saab Hintis ettevõtte veebisaidi URL-i kasutades.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Sisestage oma mooduli {{_moduleSingular}} ettevõtte nimi või veebisait ja Hint otsib täiendavaid andmeid.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Sisestage oma mooduli {{currentModule}} e-posti aadress ja Hint otsib täiendavaid andmeid.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Ajaloolise vaate jaoks pole andmeid saadaval',
+    'LBL_HINT_HISTORY_TITLE' => 'Tegevuste ajalugu',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Andmete täiendamine',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Teie litsents teenuse SugarCRM Hint kasutamiseks on aegunud. Oma litsentsi pikendamiseks võtke ühendust oma SugarCRM-i administraatoriga.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Kas soovite näha, mida SugarCRM Hint teie ja teie ettevõtte jaoks teha saab? Võtke ühendust oma SugarCRM-i administraatoriga, et Hint lisada.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Kontoteavet ei leitud',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Leiti täiendatud andmeid – klõpsake, et kõik täiendatud andmed oma kirjesse salvestada.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Klõpsake, et täiendatud andmed oma kirjesse salvestada.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Seotud kontaktid',
+    'LBL_HINT_CONTACTS_NONE' => 'Seotud kontaktid puuduvad',
+
+    'LBL_HINT_NEWS' => 'Uudised',
+    'LBL_HINT_GENERAL' => 'Üldised',
+    'LBL_HINT_ALL_NEWS' => 'Kõik uudised',
+    'LBL_HINT_FILTER_NEWS' => 'Filtreeri uudiseid',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Finantsalased',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personali puudutavad',
+    'LBL_HINT_PRESS_RELEASES' => 'Pressiteated',
+    'LBL_HINT_OTHER_NEWS' => 'Muu',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Otsi uudisteartikleid',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Ühtegi uudist pole saadaval',
+    'LBL_NEW_NOTIFICATIONS' => 'Uued teavitused',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Hint Insightsi paneeliku nägemiseks peab teil olema Hinti litsents.
+    Küsige Hinti litsentsi hankimise kohta oma administraatorilt.',
+
+    'LBL_HINT_FOR' => 'Saaja:',
+    'LBL_HINT_WITH' => 'koos',
+    'LBL_HINT_SHOW_ME' => 'Näita mulle: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Teavita mind: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Hint Insightsi eelistuskeskus',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Eelistuste valiku võti',
+    'LBL_HINT_PREFERENCES' => 'Eelistused',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Kustuta keelatud, nõutav vähemalt üks eelistusavaldus',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Lisa keelatud, olete jõudnud eelistusavalduste maksimumarvuni',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Lisa Hint Insightsi paneelikusse',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Hüpikaken töölauateavitusena',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Teavituste järjepidevaks saamiseks peavad teavitused olema lubatud kõigis brauserites ja kõikides lauaarvutites.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Mõned brauserid (nt Internet Explorer) ei toeta teavitusi. Teavitusi ei saa lubada, kui kasutate brauserit, mis teavitusi ei toeta.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Saada iga teavituse kohta kohe e-postiga teatis',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Saada igapäevane koondmeil',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Saada iganädalane koondmeil',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Eelistusi polnud võimalik salvestada. Kontrollige oma süsteemi ühendust ja proovige uuesti.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Mõnel nõutaval väljal puudub väärtus. Kontrollige oma eelistusi ja veenduge, et kõik nõutavad väljad oleks täidetud.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Olete lubamas brauseriteavitusi teenuse Hint Insights jaoks. Jätkamiseks klõpsake nuppu „Kinnita“. Teie brauser küsib teilt seejärel teavitussündmuste vastuvõtmise luba.',
+    'LBL_HINT_PUSH_ERROR' => 'Tõuketeavituste lisandmoodul on valiku {{options.type}} jaoks registreeritud ilma selle sõltuvusteta. Lisandmoodul ei toimi eesmärgipäraselt, veenduge, et oleksite lisanud töötajafaili asukoha ja tellimuse serverisse salvestamise viisi.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Lülitage Hinti teavitused kõigi kasutajate jaoks sisse',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Lülitage Hinti teavitused kõigi kasutajate jaoks välja',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'HOIATUS: teavituste keelamine Sugar Hinti desinstallimise ajal ebaõnnestus. Teavituste keelamiseks installige Hint 5.4.0 või selle uuem versioon ja tehke täielik desinstallimine, kasutades Sugari halduse sektsioonis olevat Hinti desinstallijat.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Kaartide konfiguratsioon',
+    'LBL_MAP_MAP' => 'Kaart',
+    'LBL_MAP_MAPS' => 'Kaardid',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geokood',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Kirje on edukalt geokodeeritud.',
+    'LBL_MAP_LATITUDE' => 'Laiuskraad',
+    'LBL_MAP_LONGITUDE' => 'Pikkuskraad',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Otsing aadressi järgi...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Praegune kirje on juba geokodeeritud. Kas olete kindel, et soovite selle kirje geokodeeringu üle kirjutada?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Käsitsigeokodeerimine',
+    'LBL_MAP_POINT_COORDINATES' => 'Kaardipunkti koordinaadid',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Optimaalse marsruudi arvutamine...',
+    'LBL_MAP_DIRECTIONS' => 'Juhised',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Praeguse kasutaja juurest algavad juhised',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Selle kirje juurest algavad juhised',
+    'LBL_MAPS_RADIUS_INPUT' => 'Raadius (0–250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'sihtnumbri raadiuses',
+    'LBL_MAPS_DISTANCE' => 'Vahemaa',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Sihtnumber',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Kehtetu konfiguratsioon: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => 'Mooduli <strong>{{module}}</strong> välja vastendamine on kehtetu.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Kaardi tüüp',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Suumi tase',
+    'LBL_MAPS_DASHLET' => 'Kaardid',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Kuvab kaardil geokodeeritud kirje(d).',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Kaardid ei ole selle mooduli jaoks saadaval. Lubage need administaatori konsoolis.',
+    'LBL_MAP_MODULES' => 'Moodul',
+    'LBL_MAP_FILTER_BY' => 'Filtreerimisalus',
+    'LBL_MAP_UNIT_TYPE' => 'Ühiku tüüp',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Miilid',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilomeetrid',
+    'LBL_MAP_ADDRESS' => 'Aadress',
+    'LBL_MAP_NO_STARTING_POINT' => 'Alguspunkt pole geokodeeritud.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Alguspunkti kirje pole geokodeeritud.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Mõned valitud kirjetest pole geokodeeritud ja neid ei kuvata kaardil.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Kirje(d) pole geokodeeritud.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Mooduli väljad',
+    'LBL_MAPS_SELECT_FIELD' => 'Vali väli',
+    'LBL_MAPS_RELATE_RECORD' => 'Seotud kirje',
+    'LBL_MAPS_MAPPING_TYPE' => 'Kaardistamise tüüp',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Geokodeeritud kirjed puuduvad',
+    'LBL_MAPS_ADDRESS' => 'Aadress',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Määratud kasutaja',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Tänava külgvaade pole selle punkti jaoks saadaval',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> kirjet pole kaardistamise jaoks sobivad. Eemaldage moodul loendist.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Sulge',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Laienda',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Salvesta PDF-vormingus',
+    'LBL_MAPS_EMAIL_LINK' => 'Saada link e-kirjaga',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Teil peab olema vähemalt üks geokodeeritud kirje.',
+    'LBL_MAPS_GENERATING' => 'Kaardi loomine...',
+    'LBL_MAPS_POINTS' => 'Kaardi punktid',
+    'LBL_MAPS_POINT' => 'Punkt',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Reisi üksikasjad',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Vahemaa kokku',
+    'LBL_MAPS_TOTAL_DURATION' => 'Kestus kokku',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Kestus kokku ilma liikluseta',
+    'LBL_MAPS_ITINERARY' => 'Marsruut',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Reisi pikkus',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Reisi kestus',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Sammud',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Hoiatused',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Teenus Bing Maps toetab jagatud kaardil kuni 10 nööpnõela. Vaadake oma valik üle.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Kaartide litsents on nõutav',
+
+    'LBL_INVALID_FORMULA' => 'Sobimatu valem',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Funktsiooni tagastuse tüüp ei kattu',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Prognoos',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Ideaalne kliendiprofiil',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Viimane olek',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Saada DocuSigni',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Ava',
+    'LBL_CLOSED_WON' => 'Lõpetatud võidetud',
+    'LBL_CLOSED_LOST' => 'Lõpetatud kaotatud',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6780,8 +7398,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google Docs',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Contacts',
@@ -7121,6 +7739,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     'YER' => 'Riaalid',
     'ZWD' => 'Zimbabwe dollarid',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Väga suur',
+        '4' => 'Suur',
+        '3' => 'Neutraalne',
+        '2' => 'Väike',
+        '1' => 'Väga väike',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Puudub',
         'future' => 'Praegune väärtus',
@@ -7130,3 +7756,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Single-Hit',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Töötlemine',
+        'error' => 'Tõrge',
+        'success' => 'Õnnestus',
+        'canceled' => 'Tühistatud',
+        'document_load' => 'Malli laadimine',
+        'tags_extract' => 'Siltide lahtipakkimine',
+        'tags_validate' => 'Siltide valideerimine',
+        'data_retrieving' => 'Siltide hankimine',
+        'serialize_document' => 'Dokumendi uuesti kokkupanek',
+        'send_document' => 'Dokumendi teile saatmine',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Mestimine',
+        'convert' => 'PDF-iks mestimine',
+        'multimerge' => 'Mitme üksuse mestimine',
+        'multimerge_convert' => 'Mitme üksuse mestimine PDF-iks',
+        'labelsgenerate' => 'Siltide loomine',
+        'labelsgenerate_convert' => 'Siltide loomine PDF-vormingus',
+        'excel' => 'Exceli mestimine',
+        'excel_convert' => 'Exceli mestimise konvertimine',
+        'presentation' => 'PowerPointi mestimine',
+        'presentation_convert' => 'PowerPointi mestimine PDF-iks',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Minu kontod',
+      'favorites' => 'Lemmikkontod',
+      'tags' => 'Märgitud kontod',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Kõik uudised',
+      'General' => 'Üldised',
+      'Finance' => 'Finantsalased',
+      'People' => 'Personali puudutavad',
+      'Press Releases' => 'Pressiteated',
+      'Other' => 'Muud',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Omanikud';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Pilvketas';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Pilvketta integreerimise paneelik';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Kopeeri link';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Laadi alla';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Loo Sugari dokument';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Sünkrooni Google Drive&#39;i';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Sünkrooni kõik Google Drive&#39;i';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Selle faili allalaadimine ebaõnnestus';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Pilve paneelik puudub';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Sugari dokument on loodud';
+
+    $app_string['LBL_MY_FILES'] = 'Minu failid';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Minuga jagatud';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Pilveteenuse pakkuja';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Minuga jagatud';
+    $app_strings['LBL_MY_FILES'] = 'Minu failid';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Laadi fail üles';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Kausta ei leitud';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Loo kaust';
+    $app_strings['LBL_LOAD_MORE'] = 'Laadi rohkem...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Ühendust Google&#39;iga ei leitud...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Ühendust Microsoftiga ei leitud...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-tühi-',
+      'Exact' => 'Täpne',
+      'Null_address_components' => 'Vähemalt üks tühi aadressikomponent',
+      'Invalid_address' => 'Kehtetu aadress, server tagastas veateate',
+      'Invalid_server_response_not_XML' => 'Serveri kehtetu reaktsioon, mitte XML',
+      'Invalid_address_no_location' => 'Kehtetu aadress, server ei tagastanud asukohta',
+      'Ambiguous_address' => 'Ebaselge aadress, mitu vastet',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Tee',
+      'a' => 'Õhukaudne',
+      'be' => 'Linnulennult',
+      'rd' => 'Tume tee',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

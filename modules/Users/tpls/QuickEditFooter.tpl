@@ -25,7 +25,6 @@
     </tr>
 </table>
 <script type='text/javascript'>
-{literal}
 
 function quickEditSave()
 {
@@ -55,5 +54,4 @@ function quickEditconfirmReassignRecords() {
         }
         return true;
 }
-{/literal}
 </script>

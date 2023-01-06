@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'المستخدمون',
     'LBL_EMAILS_PRODUCTS_REL' => 'البنود المسعرة',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'بنود العائدات',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'عمليات التصعيد',
     'LBL_EMAILS_MESSAGES_REL' => 'الرسائل',
     'LBL_EMAILS_PURCHASES_REL' => 'المشتريات',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'البنود المشتراة',
@@ -473,4 +474,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'إرسال البريد الإلكتروني',
     'LBL_MAILBOX' => 'حساب وارد',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'الرجاء تكوين حساب بريد إلكتروني صادر عبر <a href="#OutboundEmail">إعدادات البريد الإلكتروني</a> من أجل إرسال رسائل البريد الإلكتروني.',
 );

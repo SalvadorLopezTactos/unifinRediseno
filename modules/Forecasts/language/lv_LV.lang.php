@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Apraksts',
     'LBL_OW_TYPE'=>'Veids',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Darba grupas prognoze priekš <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Atskaite',
     'LBL_FDR_OPPORTUNITIES'=>'Darījuma prognozē:',
     'LBL_FDR_WEIGH'=>'Iespēju summa ar koeficientu:',
     'LBL_FDR_COMMIT'=>'Iekļauta summa',
     'LBL_FDR_DATE_COMMIT'=>'Datums',
+    'LBL_FDR_FORECAST_HEADER' => 'Pārdevēja prognoze priekš <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognozes: Darblapa',
     'LBL_DV_MY_FORECASTS' => 'manas prognozes',
-    'LBL_DV_MY_TEAM' => "Nodaļas prognozes" ,
+    'LBL_DV_MY_TEAM' => "Nodaļas prognozes",
     'LBL_DV_TIMEPERIODS' => 'Laika posmi:',
     'LBL_DV_FORECAST_PERIOD' => 'Prognozes laika posms',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognozes iespējas',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Bāzes valūtas kurss',
 
     'LBL_QUOTA' => 'Kvota',
-    'LBL_QUOTA_ADJUSTED' => 'Kvota (precizēta)',
+    'LBL_QUOTA_ADJUSTED' => 'Koriģēta kvota',
 
     'LBL_FORECAST_FOR'=>'Prognozes darblapa priekš:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Konsolidēts)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kvota vs. Nodotas prognozēs vs. Reālas summas',
 
     'LBL_FORECAST' => 'Prognoze',
+    'LBL_COMMITMENT' => 'Iesniegšana',
+    'LBL_TEAM_COMMITMENT' => 'Darba grupas iesniegšana',
+    'LBL_FORECASTED' => 'Prognozēts',
+    'LBL_ADJUSTED_TOTAL' => 'Koriģēta kopsumma',
     'LBL_COMMIT_STAGE' => 'Iesniegt posmu',
     'LBL_SALES_STAGE' => 'Posms',
     'LBL_AMOUNT' => 'Summa',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, un {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'visticamāk {{{direction}}} {{{from}}} uz {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'labākā {{{direction}}} {{{from}}} uz {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'sliktākā {{{direction}}} {{{from}}} uz {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'ticamākā bez izmaiņām',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'labākā bez izmaiņām',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'sliktākā bez izmaiņām',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Iesniegts (ticamākais) {{{direction}}} no {{{from}}} līdz {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Iesniegts (labākais) {{{direction}}} no {{{from}}} līdz {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Iesniegts (sliktākais) {{{direction}}} no {{{from}}} līdz {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Iesniegtais (ticamākais) palika tāds pats',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Iesniegtais (labākais) palika tāds pats',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Iesniegtais (sliktākais) palika tāds pats',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Šis mēnesis uz {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Attēlotā kopsumma',
     'LBL_TOTAL' => 'Kopā',
     'LBL_OVERALL_TOTAL' => 'Kopējā summa',
-    'LBL_EDITABLE_INVALID' => 'Nederīga vērtība priekš {0}',
+    'LBL_EDITABLE_INVALID' => 'Nederīga vērtība priekš {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Vērtībai jābūt starp {0} un {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Jums ir nesaglabātas izmaiņas darba lapā',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Lūdzu ņemiet vērā, ka tikai saglabātus un iesniegtus datus var eksportēt. Spiediet Labi lai turpinātu eksportu, vai Atcelt lai atceltu un atgriestos darba lapā.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Iekļauts',
     'LBL_CHART_NOT_INCLUDED' => 'Nav iekļauts',
     'LBL_CHART_ADJUSTED' => '(Precizēts)',
-    'LBL_SAVE_DRAFT' => 'Saglabāt uzmetumu',
+    'LBL_SAVE_DRAFT' => 'Saglabāt',
     'LBL_CHANGES_BY' => 'Izmaiņas no {0}',
     'LBL_FORECAST_SETTINGS' => 'Uzstādījumi',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Pārsniedz par',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Nav datu',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Tikšanos kvota',
+    'LBL_OPEN_LIKELY' => 'Atvērt ticamāko',
+    'LBL_OPEN_BEST' => 'Atvērt labāko',
+    'LBL_OPEN_WORST' => 'Atvērt sliktāko',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Piešķirt Kvotu',
     'LBL_ASSIGNING_QUOTA' => 'Kvotas piešķiršana',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Manas grupas progrnozes",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Nav saglabātas izmaiņas. Vai tiešām vēlaties pārkārtot sarakstu un atcelt izmaiņas?',
+
+    'LBL_SAVE_TOOLTIP' => 'Saglabāt darblapas rindās veiktās izmaiņas',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Saglabāt izmaiņas ierakstos un iesniegt prognozi vadītājam',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Iesniegt prognozi vadītājam un piešķirt kvotu',
+
+    'LBL_SAVE_LABEL_REP' => 'Saglabāt ',
+    'LBL_SAVE_LABEL_MGR' => 'Saglabāt pielāgotās vērtības',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Modulis „{{plural_module_name}}” ietver moduļa „{{forecastby_singular_module}}” ierakstus, kas paredzēti moduļa „{{forecastworksheets_module}}” veidošanai un pārdošanas apjomu prognozēšanai. Lietotāji var strādāt pie moduļa pārdošanas „{{quotas_module}}” individuālā, komandas un tirdzniecības organizācijas līmenī. Lai lietotāji varētu piekļūt modulim „{{plural_module_name}}”, administratoram ir jāatlasa organizācijai vēlamie laika periodi, diapazoni un scenāriji. 

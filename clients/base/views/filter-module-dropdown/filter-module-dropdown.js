@@ -135,7 +135,9 @@
 
         // It is important to reset the `currentFilterId` in order to retrieve
         // the last filter from cache later.
-        this.context.set('currentFilterId', null);
+        if (this.context) {
+            this.context.set('currentFilterId', null);
+        }
 
         if (this.filterNode) {
             this.filterNode.select2("val", linkName || linkModuleName);
@@ -241,10 +243,10 @@
     getSelectionLabel: function() {
         var selectionLabel;
 
-        if (this.layout.layoutType !== "record" || this.layout.showingActivities) {
+        if (this.shouldDisableFilter()) {
             selectionLabel = app.lang.get("LBL_MODULE");
         } else {
-            selectionLabel = app.lang.get("LBL_RELATED") + '<i class="fa fa-caret-down"></i>';
+            selectionLabel = app.lang.get('LBL_RELATED') + '<i class="sicon sicon-chevron-down"></i>';
         }
 
         return selectionLabel;

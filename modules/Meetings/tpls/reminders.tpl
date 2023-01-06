@@ -40,8 +40,6 @@
         {/if}
 
 {if $view == "EditView" || $view == "QuickCreate" || $view == "QuickEdit" || $view == "wirelessedit"}
-
-
 		<div>
 		    	   	
 		    	<input name="reminder_checked" type="hidden" value="0">
@@ -65,7 +63,6 @@
 		    	</div>
 		</div>
             	<script type="text/javascript">
-            		{literal} 
 			function toggleReminder(el,field){
 				if(el.checked){
 					document.getElementById(field + "_list").style.display = "inline";
@@ -73,7 +70,6 @@
 					document.getElementById(field + "_list").style.display = "none";
 				}
 			}
-			{/literal}
             	</script>
 	{else}
 		<div>			

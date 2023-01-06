@@ -343,7 +343,7 @@ WHERE TABSCHEMA = ?
             ));
 
 		$columns = array();
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
 			$name = strtolower($row['colname']);
 			$columns[$name]['name']=$name;
 			$columns[$name]['type']=strtolower($row['typename']);
@@ -360,11 +360,12 @@ WHERE TABSCHEMA = ?
 				case 'character': $columns[$name]['type'] = 'char';
 				default: $columns[$name]['len'] = $row['length'];
 			}
-			if ( !empty($row['default']) ) {
-				$matches = array();
-				if ( preg_match("/^'(.*)'$/i",$row['default'],$matches) )
-					$columns[$name]['default'] = $matches[1];
-			}
+            if (!empty($row['default'])) {
+                $matches = [];
+                if (preg_match("/^'(.*)'$/i", $row['default'], $matches) && $matches[1] != '') {
+                    $columns[$name]['default'] = $matches[1];
+                }
+            }
 			// TODO add logic to make this generated when there is a sequence being used
 			if($row['generated'] == 'A' || $row['generated'] == 'D')
 				$columns[$name]['auto_increment'] = '1';
@@ -845,11 +846,14 @@ public function convert($string, $type, array $additional_parameters = array())
 	 */
     protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
 	{
-		if(isset($fieldDef['name'])){
-			if(stristr($this->getFieldType($fieldDef), 'decimal') && isset($fieldDef['len'])) {
-				$fieldDef['len'] = min($fieldDef['len'],31); // DB2 max precision is 31 for LUW, may be different for other OSs
-			}
-		}
+        if (isset($fieldDef['name'])) {
+            if (stristr($this->getFieldType($fieldDef), 'decimal') && isset($fieldDef['len'])) {
+                // PHP8 compares non-numeric strings with numbers as strings, so cast to int explicitly
+                if ((int)$fieldDef['len'] > 31) {
+                    $fieldDef['len'] = 31; // DB2 max precision is 31 for LUW, may be different for other OSs
+                }
+            }
+        }
 		//May need to add primary key and sequence stuff here
         $ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true, $action);
 
@@ -1214,7 +1218,7 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
             ->getConnection()
             ->executeQuery($query, $params);
 
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             if (!$filterByTable) {
                 $table_name = strtolower($row['table_name']);
             }
@@ -1409,10 +1413,13 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
 	 * @see DBManager::renameColumnSQL()
 	 * Only supported
 	 */
-	public function renameColumnSQL($tablename, $column, $newname)
-	{
-        return "ALTER TABLE $tablename RENAME COLUMN $column TO $newname";
-	}
+    public function renameColumnSQL($tablename, $column, $newname)
+    {
+        return
+            'ALTER TABLE '.$this->getValidDBName($tablename, false, 'table').' '.
+            'RENAME COLUMN '.$this->getValidDBName($column).' '.
+            'TO '.$this->getValidDBName($newname);
+    }
 
     /**
      * {@inheritDoc}
@@ -1827,13 +1834,28 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
      * Perform REORG query for a table.
      * @param string $table
      */
-    protected function reorgTable($table)
+    protected function reorgTable(string $table): void
     {
-        $sql = "CALL ADMIN_CMD('REORG TABLE {$table} ALLOW READ ACCESS')";
+        $validTableName = $this->getValidDBName($table, false, 'table');
+        $sql = "CALL ADMIN_CMD('REORG TABLE {$validTableName} ALLOW READ ACCESS')";
         $this->query($sql, false, "REORG problem");
     }
 
 	/// END REORG QUEUE FUNCTIONALITY
+
+    protected function runstatsTable(string $table): void
+    {
+        $sql = "CALL ADMIN_CMD('RUNSTATS ON TABLE {$table} ON ALL COLUMNS and INDEXES ALL ALLOW READ ACCESS')";
+        $this->query($sql, false, "RUNSTATS problem");
+    }
+
+    public function optimizeTable(string $table): void
+    {
+        if (!SugarConfig::getInstance()->get('disable_optimize_table', false)) {
+            $this->reorgTable($table);
+            $this->runstatsTable($table);
+        }
+    }
 
 	/**
 	 * Check if this DB name is valid

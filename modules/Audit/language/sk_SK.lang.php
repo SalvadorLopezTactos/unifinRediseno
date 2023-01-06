@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Overené polia v tomto module:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'V tomto module nie sú žiadne overené polia',
     'LBL_CHANGE_LOG' => 'Denník auditu',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Keď sú kontrolované polia meny uložené v mene, ktorá ni je predvolenou menou v systéme, v denníku zmien sa zobrazia staré a nové hodnoty v prevedenej systémom definovanej predvolenej mene.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Keď sú kontrolované polia meny uložené v mene, ktorá ni je predvolenou menou v systéme, v denníku zmien sa zobrazia staré a nové hodnoty v prevedenej systémom definovanej predvolenej mene.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Aktualizovať na',
+    'LBL_BLANK' => '-prázdne-',
 );

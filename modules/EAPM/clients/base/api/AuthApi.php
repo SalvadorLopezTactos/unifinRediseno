@@ -62,12 +62,13 @@ class AuthApi extends SugarApi
      */
     public function getAuthWarning(string $application): string
     {
+        global $current_user;
+
         $docUrl = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
             $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Email&route=Outgoing';
-        $readableProductNames =
-            getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
-        $readableProductNames = urlencode(implode(',', $readableProductNames));
-        $docUrl .= '&products=' . $readableProductNames;
+        $productCodes = $current_user->getProductCodes();
+        $productCodes = urlencode(implode(',', $productCodes));
+        $docUrl .= '&products=' . $productCodes;
         $docLink = '<a href="' . $docUrl . '" target="_blank" rel="nofollow noopener noreferrer">' . translate('LBL_EMAILS') . '</a>';
         $connectorName = translate(self::CONNECTOR_LABELS[$application] ?? '');
         return string_format(translate('LBL_EMAIL_AUTH_WARNING'), [$connectorName, $docLink]);

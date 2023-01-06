@@ -214,15 +214,23 @@ class SavedSearch extends SugarBean {
         header("Location: $location");
     }
 
-	function handleSave($prefix, $redirect = true, $useRequired = false, $id = null, $searchModuleBean) {
-
+    /**
+     * @param $prefix
+     * @param bool $redirect default true
+     * @param false $useRequired default false
+     * @param null $id default null
+     * @param $searchModuleBean
+     * @return void
+     */
+    public function handleSave(string $prefix, bool $redirect, bool $useRequired, ?string $id, SugarBean $searchModuleBean): void
+    {
 		global $current_user, $timedate;
 
 		$focus = BeanFactory::newBean('SavedSearch');
 		if($id) $focus->retrieve($id);
 
 		if($useRequired && !checkRequired($prefix, array_keys($focus->required_fields))) {
-			return null;
+            return;
 		}
 
 		$ignored_inputs = array('PHPSESSID', 'module', 'action', 'saved_search_name', 'saved_search_select', 'advanced', 'Calls_divs', 'ACLRoles_divs');

@@ -21,7 +21,7 @@ $viewdefs['PurchasedLineItems']['base']['view']['panel-top-for-accounts'] = [
             'buttons' => [
                 [
                     'type' => 'sticky-rowaction',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_button',
                     'dismiss_label' => true,
                     'label' => '',

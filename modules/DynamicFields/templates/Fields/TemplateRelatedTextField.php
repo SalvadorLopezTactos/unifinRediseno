@@ -205,10 +205,33 @@ class TemplateRelatedTextField extends TemplateText{
         $def['quicksearch'] = 'enabled';
         $def['studio'] = 'visible';
         $def['source'] = 'non-db';
+
+        // For relationship fields, make sure we keep the related_fields accurate
+        if ($this->is_relationship_field) {
+            $relatedFields = $this->getRelatedFields();
+            if (!empty($relatedFields)) {
+                $def['related_fields'] = $relatedFields;
+            }
+        }
+
         return $def;
     }
 
-
+    /**
+     * Gets the related fields for this field
+     * @return array
+     */
+    private function getRelatedFields()
+    {
+        $moduleName = $this->getModuleNameFromModule($this->module);
+        $bean = BeanFactory::newBean($moduleName);
+        $field_def = $bean->getFieldDefinition($this->name);
+        if (!empty($field_def) && !empty($field_def['related_fields'])) {
+            return $field_def['related_fields'];
+        } else {
+            return [];
+        }
+    }
     
     /**
      * Delete field
@@ -266,7 +289,7 @@ class TemplateRelatedTextField extends TemplateText{
         // this field must have a unique name as the name is used when constructing quicksearches and when saving the field
         //Check if we have not saved this field so we don't create two ID fields.
         //Users should not be able to switch the module after having saved it once.
-        if (!$df->fieldExists($this->name)) {
+        if (!$df->fieldExists($this->name) && !$this->is_relationship_field) {
 	    	$id = new TemplateId();
 	        $id->len = 36;
             $id->label = strtoupper("LBL_{$this->name}_".BeanFactory::getBeanClass($this->ext2)."_ID");
@@ -291,29 +314,26 @@ class TemplateRelatedTextField extends TemplateText{
         }
 
         if ($this->is_relationship_field) {
-            // For OOTB relate fields, set the `audited` flag to false on the ID
-            // so we don't have two entries in the audit logs.
             $bean = BeanFactory::newBean($df->getModuleName());
             $field_defs = $bean->field_defs;
 
+            // For OOTB relate fields, set the audited flag to false on the ID
+            // so we don't have two entries in the audit logs.
             $idName = $field_defs[$this->name]['id_name'];
             $idVardef = $field_defs[$idName];
             $idVardef['audited'] = false;
+
+            // Also keep the importable option in sync with the ID field
+            $idVardef['importable'] = $this->importable;
 
             $modifiedId = new TemplateId();
             $modifiedId->name = $idName;
             $df->writeVardefExtension(BeanFactory::getObjectName($df->getModuleName()), $modifiedId, $idVardef);
 
-            // We also only want to allow changes to a subset of these attributes for now.
-            // If we don't do this then the save will overwrite with default values.
-            // This can do not nice things, like turning off mass update or required.
-            $vardef = $field_defs[$this->name];
-            $allowedChanges = ['labelValue', 'label', 'help', 'comments', 'audited'];
-            foreach ($this->vardef_map as $vardefKey => $field) {
-                if (!in_array($vardefKey, $allowedChanges)) {
-                    $this->$field = $vardef[$vardefKey];
-                }
-            }
+            // For these type of relate fields in particular, we do not want to allow them to be
+            // set as reportable - relationships are already reportable. Overwrite the flag here
+            // since otherwise it defaults to on.
+            $this->reportable = false;
 
             // If this is a relate field tied to a custom relationship, make sure the language key
             // used for the field is different from the language key used for the relationship. Custom
@@ -450,6 +470,39 @@ class TemplateRelatedTextField extends TemplateText{
         parent::populateFromPost($request);
         $this->is_relationship_field = !empty($_REQUEST['is_relationship_field']);
         $this->is_custom_relationship = !empty($_REQUEST['is_custom_relationship']);
+    }
+
+    /**
+     * @param DynamicField $dynamicField
+     * @return array
+     */
+    public function getContainedDefs(DynamicField $dynamicField): array
+    {
+        $result = [];
+        // create the new ID field associated with this relate field - this will hold the id of the related record
+        // this field must have a unique name as the name is used when constructing quicksearches and when saving the field
+        //Check if we have not saved this field so we don't create two ID fields.
+        //Users should not be able to switch the module after having saved it once.
+        if (!$dynamicField->fieldExists($this->name) && !$this->is_relationship_field) {
+            $id = new TemplateId();
+            $id->len = 36;
+            $id->label = strtoupper("LBL_{$this->name}_" . BeanFactory::getBeanClass($this->ext2) . "_ID");
+            $id->vname = $id->label;
+
+            $count = 0;
+            $basename = strtolower(get_singular_bean_name($this->ext2)) . '_id';
+            $idName = $basename . '_c';
+
+            while ($dynamicField->fieldExists($idName, 'id')) {
+                $count++;
+                $idName = $basename . $count . '_c';
+            }
+            $id->name = $idName;
+            $id->reportable = false;
+
+            $result[] = $id->get_field_def();
+        }
+        return $result;
     }
 }
 

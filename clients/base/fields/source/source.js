@@ -20,9 +20,15 @@
      */
     format: function(value) {
         var subject = value ? value.subject : null;
+        var attributes = value ? value.attributes : null;
 
         if (!subject) {
             return '';
+        }
+
+        if (subject.impersonated) {
+            this.buildImpersonatedRoute(subject.impersonated._module, subject.impersonated.id);
+            this.impersonatedValue = subject.impersonated.name;
         }
 
         // Try to create a link for the source field
@@ -48,6 +54,13 @@
             return subject.name;
         }
 
+        // No subject module and name found, this is likely an external source
+        // If identityAwareDataSource is set in attributes (via API), we want to display it
+        if (attributes && attributes.identityAwareDataSource &&
+            !_.isEmpty(attributes.identityAwareDataSource)) {
+            return attributes.identityAwareDataSource;
+        }
+
         // Worst case scenario: try to display the id of the source or empty string
         return subject.id ? subject.id : '';
     },
@@ -71,6 +84,28 @@
             this.href = '#' + app.router.buildRoute(module, id);
         } else {
             this.href = undefined;
+        }
+    },
+
+    /**
+     * Builds the route for the impersonated source.
+     * @param {string} module The module to link to.
+     * @param {string} id The record id to link to.
+     */
+    buildImpersonatedRoute: function(module, id) {
+        if (_.isUndefined(module) || _.isUndefined(id) || _.isEmpty(module)) {
+            return;
+        }
+
+        var oldModule = module;
+        if (module === 'Users') {
+            module = 'Employees';
+        }
+
+        if (app.acl.hasAccess('view', oldModule)) {
+            this.impersonatedHref = '#' + app.router.buildRoute(module, id);
+        } else {
+            this.impersonatedHref = undefined;
         }
     },
 

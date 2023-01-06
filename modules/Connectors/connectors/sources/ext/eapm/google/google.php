@@ -32,18 +32,19 @@ class ext_eapm_google extends source
     /** {@inheritdoc} */
     public function getList($args = array(), $module = null)
     {
-        /** @var Google_Client $client */
+        /** @var Google\Client $client */
         $client = $this->_eapm->getClient();
 
         try {
+            $httpClient = $client->authorize();
             $http_request = $this->create_http_request($args);
-            $request = $client->getAuth()->authenticatedRequest($http_request);
-        } catch (Google_Auth_Exception $e) {
+            $response = $httpClient->send($http_request);
+        } catch (\Exception $e) {
             $GLOBALS['log']->fatal('Unable to retrieve item list for google contact connector: ' . $e->getMessage());
             return false;
         }
 
-        if ($request->getResponseHttpCode() != 200) {
+        if ($response->getStatusCode() != 200) {
             return false;
         }
 
@@ -51,7 +52,7 @@ class ext_eapm_google extends source
         list($major, $minor) = explode('.', self::GDATA_VERSION);
         $feed->setMajorProtocolVersion($major);
         $feed->setMinorProtocolVersion($minor);
-        $xml = $request->getResponseBody();
+        $xml = $response->getBody()->getContents();
 
         try {
             $feed->transferFromXML($xml);
@@ -72,7 +73,7 @@ class ext_eapm_google extends source
 
     /**
      * @param array $args
-     * @return Google_Http_Request
+     * @return \Psr\Http\Message\RequestInterface
      */
     private function create_http_request(array $args)
     {
@@ -88,12 +89,10 @@ class ext_eapm_google extends source
             $params['start-index'] = 1;
         }
 
-        return new Google_Http_Request(
-            self::CONTACTS_FEED . '?' . http_build_query($params),
+        return new \GuzzleHttp\Psr7\Request(
             'GET',
-            array(
-                'GData-Version' => self::GDATA_VERSION,
-            )
+            self::CONTACTS_FEED . '?' . http_build_query($params),
+            ['GData-Version' => self::GDATA_VERSION]
         );
     }
 }

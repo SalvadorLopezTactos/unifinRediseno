@@ -16,7 +16,7 @@ $viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
     'label' => 'LNK_NEW_NOTE',
     'visible' => true,
     'order' => 10,
-    'icon' => 'fa-plus',
+    'icon' => 'sicon-plus',
     'related' => array(
         array(
             'module' => 'Contacts',

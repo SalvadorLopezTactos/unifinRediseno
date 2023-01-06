@@ -41,7 +41,6 @@ class SugarSpot
 	    return SugarAutoLoader::loadSearchFields($moduleName);
 	}
 
-
     /**
      * Get count from query
      * @param SugarBean $seed
@@ -629,6 +628,7 @@ class SugarSpot
 
             $results[$moduleName] = array("data" => $data, "pageData" => $pageData);
         }
+
         return $results;
     }
 
@@ -653,7 +653,6 @@ class SugarSpot
 
         return null;
     }
-
 
     /**
      * Function used to walk the array and find keys that map the queried string.

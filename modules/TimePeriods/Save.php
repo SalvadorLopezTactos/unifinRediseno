@@ -59,8 +59,14 @@ if ($end_date >= $start_date) {
 	$return_action = (!empty($_POST['return_action'])) ? $_POST['return_action'] : "DetailView";
 	
 	$GLOBALS['log']->debug("Saved record with id of {$return_id}");
-	
-	header("Location: index.php?action={$return_action}&module={$return_module}&record={$return_id}");	
+
+    $uri = 'index.php?'.http_build_query([
+            'action' => $return_action,
+            'module' => $return_module,
+            'record' => $return_id,
+        ]);
+
+    header('Location: '.$uri);
 	}
 else {
 	header("Location: index.php?action=Error&module=TimePeriods&error_string=ERR_TIME_PERIOD_DATE_RANGE");

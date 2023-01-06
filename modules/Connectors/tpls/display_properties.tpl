@@ -49,7 +49,6 @@
 </table>
 
 <script type="text/javascript">
-{literal}
 
 var Dom = YAHOO.util.Dom;
 var Event = YAHOO.util.Event;
@@ -59,7 +58,6 @@ var DDM = YAHOO.util.DragDropMgr;
 
 YAHOO.example.DDApp = {
 init: function() {
-{/literal}
 	new YAHOO.util.DDTarget("{$source_id}:enabled_ul");
 	new YAHOO.util.DDTarget("{$source_id}:disabled_ul");
 
@@ -70,7 +68,6 @@ init: function() {
 	{foreach from=$disabled_modules item=module}
 	     new YAHOO.example.DDList("{$source_id}:{$module}");
 	{/foreach}
-{literal}
 }
 };
 
@@ -183,7 +180,6 @@ Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
 
 
 })();
-{/literal}
 </script>
 {else}
 <table id="{$source_id}" class="sources_table" border="0" cellspacing="1" cellpadding="1" style="display: none"></table>

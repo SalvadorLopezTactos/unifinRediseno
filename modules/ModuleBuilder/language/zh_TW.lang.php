@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => '刪除' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => '由 SugarCRM 提供技術支援' /*for 508 compliance fix*/,
     'LBL_ROLE' => '角色',
+    'LBL_BASE_LAYOUT' => '基礎佈局',
+    'LBL_FIELD_NAME' => '欄位名稱',
+    'LBL_FIELD_VALUE' => '值',
+    'LBL_LAYOUT_DETERMINED_BY' => '佈局由以下因素確定：',
+    'layoutDeterminedBy' => [
+        'std' => '標準佈局',
+        'role' => '角色',
+        'dropdown' => '下拉字段',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => '將刪除所有自定義佈局。是否確實要更改當前佈局定義？',
 'help'=>array(
     'package'=>array(
             'create'=>'為封裝提供<b>名稱</b>。名稱必須以字母開頭，且只能包含字母、數字和底線。不得使用空格或其他特殊字元。（例如：HR_Management）<br/><br/>您可為此封裝提供<b>作者</b>和<b>描述</b>資訊。<br/><br/>按一下 <b>儲存</b>以建立封裝。',
@@ -457,8 +467,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => '可見度編輯器',
 'LBL_ROLLUP' => '彙總',
 'LBL_RELATED_FIELD' => '相關欄位',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> '用於自定義企業標誌圖片的URL。推薦的企業標誌大小為22X22像素。上傳的任何圖片如果在任何一個方向過大，都將被裁剪致這個最大的大小。',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> '用於自定義標誌圖片的URL。推薦的標誌寬度為200像素。上傳的任何圖片如果在任何方向過大，都將被裁剪致這個最大的大小。此標誌將用於登入螢幕。如果沒有上傳任何圖片，將使用企業標誌。',
 'LBL_PORTAL_ROLE_DESC' => '切勿刪除此角色。自訂自助入口網站角色是 Sugar 入口網站激活流程中建立的系統產生角色。在該角色內使用存取控制可在 Sugar 入口網站啟用和/或停用錯誤、實例或知識庫模組。切勿修改此角色的任何其他存取控制，以避免未知和不可預測的系統行為。如意外刪除此角色，請透過停用並啟用 Sugar 入口網站，重新建立此角色。',
 
 //RELATIONSHIPS
@@ -581,6 +589,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'新增關係',
 'LBL_BTN_RENAME_MODULE' => '變更模組名稱',
 'LBL_BTN_INSERT'=>'插入',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => '恢復基礎佈局',
 //TABS
 
 //ERRORS
@@ -591,6 +600,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => '出錯',
 'ERROR_REQUIRED_FIELDS' => '您確定要繼續嗎？版面配置缺乏下列必要欄位：',
 'ERROR_ARE_YOU_SURE' => '您確定要繼續嗎？',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => '無法創建字段。您已達到數據庫中此表的行大小限制。 <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">了解詳情</a>。',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => '下列欄位含有已計算的值，這些值將不會在 SugarCRM Mobile 編輯檢視表中進行實時重算：',
 'ERROR_CALCULATED_PORTAL_FIELDS' => '下列欄位含有已計算的值，這些值將不會在 SugarCRM 入口網站編輯檢視表中實時重算：',
@@ -600,16 +610,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => '若想在入口網站啟用它們，請在<a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">此處</a>啟用。',
     'LBL_PORTAL_CONFIGURE' => '設定入口網站',
     'LBL_PORTAL_ENABLE_PORTAL' => '啟用門戶',
-    'LBL_PORTAL_ENABLE_SEARCH' => '打開客戶反饋前啟用搜索',
+    'LBL_PORTAL_SHOW_KB_NOTES' => '在知識庫模塊上啟用註釋',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => '允許門戶用戶關閉客戶回饋',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => '允許新用戶註冊',
+    'LBL_PORTAL_USER_PERMISSIONS' => '用戶權限',
     'LBL_PORTAL_THEME' => '主題入口網站',
     'LBL_PORTAL_ENABLE' => '啟用',
     'LBL_PORTAL_SITE_URL' => '您的入口網站：',
     'LBL_PORTAL_APP_NAME' => '應用程式名稱',
-    'LBL_PORTAL_LOGOMARK_URL' => '企業標誌URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => '企業標誌預覽',
-    'LBL_PORTAL_LOGO_URL' => '標誌 URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => '標誌預覽',
     'LBL_PORTAL_CONTACT_PHONE' => '電話',
     'LBL_PORTAL_CONTACT_EMAIL' => '電子郵件',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => '必須輸入有效的電子郵件地址',
@@ -625,6 +633,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => '拖放門戶模塊的名稱，已設置其顯示在門戶的頂部導航欄上還是隱藏。如要控制門戶用戶對模塊的存取，請使用<a href="?module=ACLRoles&action=index">角色管理。</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => '已顯示模塊',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => '隱藏模塊',
+    'LBL_CONFIG_VISIBILITY' => '能見度',
+    'LBL_CASE_VISIBILITY_HELP' => '定義哪些門戶用戶可以查看案例。',
+    'LBL_EMAIL_VISIBILITY_HELP' => '定義哪些門戶用戶可以查看與案例相關的電子郵件。參與聯繫人是“收件人”、“發件人”、“抄送”和“密件抄送”字段中的聯繫人。',
+    'LBL_MESSAGE_VISIBILITY_HELP' => '定義哪些門戶用戶可以查看與案例相關的消息。參與聯繫人是“來賓”字段中的聯繫人。',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => '與帳戶相關的所有聯繫人',
+        'related_contacts' => '僅主要聯繫人和與案例相關的聯繫人',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => '僅參與聯繫人',
+        'all' => '所有可以查看案例的聯繫人',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => '僅參與聯繫人',
+        'all' => '所有可以查看案例的聯繫人',
+    ],
+
 
 'LBL_PORTAL'=>'入口網站',
 'LBL_PORTAL_LAYOUTS'=>'入口網站版面配置',
@@ -801,7 +826,7 @@ $mod_strings = array(
         . "唯讀字段將遵循基於瀏覽器移動視圖中的公式，<br/>"
         . "但不會遵循本地應用程式中的公式，比如用於 iPhone 的 Sugar Mobile。 <br/>"
         . "他們不會遵循 Sugar 自助服務門戶中的公式。",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'使用此模組上的“全局搜索”搜索記錄時，選擇使用此字段。',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'選擇此選項可在使用此模塊上的全局搜索來搜索記錄時使用此字段。',
 //Revert Module labels
 'LBL_RESET' => '重設',
 'LBL_RESET_MODULE' => '重設模組',
@@ -837,6 +862,7 @@ $mod_strings = array(
                 'datetimecombo' =>'日期時間',
                 'decimal'=>'小數點',
                 'autoincrement' => '自動遞增',
+                'actionbutton' => '操作按鈕',
 ),
 'labelTypes' => array(
     "" => "最常使用標籤",
@@ -855,4 +881,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0}（相關 {1} ID）',
 'LBL_HEADER_COPY_FROM_LAYOUT' => '複製版面配置',
 'LBL_RELATIONSHIP_TYPE' => '關係',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => '比較語言',
+'LBL_LABEL_NOT_TRANSLATED' => '此標籤可能無法翻譯',
 );

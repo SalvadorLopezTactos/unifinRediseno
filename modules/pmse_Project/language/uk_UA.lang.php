@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Створенено користувачем',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Востаннє змінено користувачем',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Електронна пошта системи',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Шаблон документа',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Об&#39;єднання документів',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Вибрати…',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Об&#39;єднання документів у PDF-файл',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Об&#39;єднання документів',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Бізнес-правило',
     'LBL_PMSE_LABEL_RULE' => 'Правило',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Updated Records Only (All Updates - See Help Text)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Нові записи або перше оновлення',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Нові записи або всі оновлення',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Зміна взаємозв&#39;язку',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Виберіть, коли процес буде запущено.<br><br>Новий: запуск процесу в разі створення нового запису.<br><br>Перше оновлення: запуск процесу лише під час першого виконання критеріїв для існуючого запису.<br><br>Усі оновлення: запуск процесу щоразу, коли існуючий запис відповідає критеріям.<br><br>Нові записи або перше оновлення: запуск процесу лише під час першого виконання критеріїв для запису, під час створення або оновлення запису.<br><br>Нові записи або всі оновлення: запуск процесу щоразу для всіх нових і наявних записів.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Виберіть, коли процес буде запущено.<br><br>Новий: запуск процесу в разі створення нового запису.<br><br>Перше оновлення: запуск процесу лише під час першого виконання критеріїв для наявного запису.<br><br>Усі оновлення: запуск процесу щоразу, коли наявний запис відповідає критеріям.<br><br>Нові записи або перше оновлення: запуск процесу лише під час першого виконання критеріїв для запису, створення або оновлення запису.<br><br>Нові записи або всі оновлення: запуск процесу щоразу для всіх нових і наявних записів.<br><br>Зміна взаємозв&#39;язку: процес запускається щоразу, коли змінюються взаємозв&#39;язки.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Оберіть модуль SugarCRM для застосування тригеру події',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Встановлена дата',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Помилка',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Оцінка зміни взаємозв&#39;язку',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Поля',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Оцінка поля модуля',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Модуль',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Усі пов&#39;язані записи',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Будь-які пов&#39;язані записи',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Додано',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Видалено',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Додано або видалено',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Будь-які взаємозв&#39;язки',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Час запуску',
 

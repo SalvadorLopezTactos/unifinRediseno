@@ -733,7 +733,6 @@ $dictionary['Product'] = array(
             'name' => 'account_link',
             'type' => 'link',
             'relationship' => 'products_accounts',
-            'link_file' => 'modules/Products/AccountLink.php',
             'link_class' => 'AccountLink',
             'vname' => 'LBL_ACCOUNT',
             'link_type' => 'one',

@@ -472,6 +472,7 @@ $viewdefs['RevenueLineItems']['base']['view']['record'] = array(
                     'type' => 'divider',
                 ),
                 array(
+                    'module' => 'RevenueLineItems',
                     'type' => 'convert-to-quote',
                     'event' => 'button:convert_to_quote:click',
                     'name' => 'convert_to_quote_button',

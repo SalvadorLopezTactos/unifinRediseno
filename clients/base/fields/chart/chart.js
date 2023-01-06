@@ -15,15 +15,30 @@
  */
 ({
     /**
+     * Direction for the user's language - ltr or rtl
+     */
+    langDirection: 'ltr',
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+        this._registerEvents();
 
         this.chart = null;
         this.chart_loaded = false;
         this.chartType = '';
         this.locale = SUGAR.charts.getSystemLocale();
+
+        this.langDirection = app.lang.direction;
+    },
+
+    /**
+     * Register events
+     */
+    _registerEvents: function() {
+        this.listenTo(this.view, 'chart-container:size:changed', this.preserveAspectRatio, this);
     },
 
     /**
@@ -46,6 +61,43 @@
         }, this);
     },
 
+    /**
+     * Update chart size according to container size and x/y axes
+     */
+    preserveAspectRatio: function() {
+        const chartData = this.model.get('rawChartData');
+        const params = this.getChartParams(chartData);
+        const config = this.getChartConfig(chartData, params);
+
+        if (!config.maintainAspectRatio) {
+            return;
+        }
+
+        const chartEl = this.$(`#chart_${this.cid}_wrapper`);
+        const marginOffset = 0.1;
+        const ratio = config.aspectRatio - marginOffset;
+
+        chartEl.css({
+            height: '',
+            width: '',
+            marginLeft: '',
+        });
+
+        const size = {
+            width: chartEl.innerWidth(),
+            height: chartEl.innerHeight()
+        };
+
+        if (size.height * ratio < size.width) {
+            const width = size.height * ratio;
+
+            chartEl.css({
+                width: width,
+                marginLeft: (size.width - width) / 2,
+            });
+        }
+    },
+
     overflowHandler: function(distance) {
         var b = this.view.$el.parents().filter(function() {
             return $(this).css('overflow-y') === 'auto' || $(this).css('overflow-y') === 'scroll';
@@ -62,6 +114,7 @@
      * @param {Object} data report data with properties and data array
      */
     chartComplete: function(chart, params, reportData, chartData) {
+        app.logger.warn('chartComplete has been deprecated. Chart click event is now handled by onClickHander');
         this.chart = chart;
         this.chart_loaded = _.isFunction(chart.update);
 
@@ -77,48 +130,43 @@
      */
     generateD3Chart: function() {
         var id = this.cid;
-        var reportData = this.model.get('rawReportData');
         var chartData = this.model.get('rawChartData');
         var params = this.getChartParams(chartData); //NOTE: This is where groupType comes from
         var config = this.getChartConfig(chartData, params);
 
-        var sugarChart = new loadSugarChart(id, chartData, [], config, params, _.bind(function(chart) {
-            this.chartComplete(chart, params, reportData, chartData);
-        }, this));
+        if (this.view.layout && this.view.layout.layout && this.view.layout.layout.name === 'drillthrough-pane') {
+            params.isOnDrillthrough = true;
+        }
+        // make sure we destroy and unlisten to events before creating a new chart el
+        if (this.chart) {
+            this.chart.chart.unbindEvents();
+            this.chart.destroyChart();
+        }
 
-        // This event fires when a preview is closed.
-        // We listen to this event to call the chart resize method
-        // in case the window was resized while the preview was open.
-        app.events.on('preview:close', function() {
-            if (_.isUndefined(app.drawer) || app.drawer.isActive(this.$el)) {
-                this.resize();
+        this.preserveAspectRatio();
+
+        loadSugarChart(id, chartData, [], config, params, chart => {
+            this.chart = chart;
+            if (this.chart && this.chart.wrapperProperties) {
+                this.updateChartWrapperCss(this.chart.wrapperProperties);
             }
-        }, this);
-        // This event fires when the dashlet is collapsed or opened.
-        // We listen to this event to call the chart resize method
-        // in case the window was resized while the dashlet was closed.
-        this.view.layout.on('dashlet:collapse', function(collapse) {
-            if (!collapse) {
-                this.resize();
-            }
-        }, this);
-        // This event fires when the dashlet is dragged and dropped.
-        // We listen to this event to call the chart resize method
-        // because the size of the dashlet can change in the dashboard.
-        this.view.layout.context.on('dashlet:draggable:stop', function() {
-            this.resize();
-        }, this);
-        // Resize chart on window resize.
-        // This event also fires when the sidebar is collapsed or opened.
-        // We listen to this event to call the chart resize method
-        // in case the window was resized while the sidebar was closed.
-        $(window).on('resize.' + this.sfId, _.debounce(_.bind(this.resize, this), 100));
+        });
+
         // Resize chart on print.
         this.handlePrinting('on');
-        // This on click event is required to dismiss the dropdown legend
-        this.$('.sc-chart').on('click', _.bind(function() {
-            this.chart.dispatch.call('chartClick', this);
-        }, this));
+    },
+
+    /**
+     * Given a set of key/value CSS properties, applies them to the wrapper
+     * element around the chart canvas
+     *
+     * @param {Object} properties the key/value CSS property pairs to set
+     */
+    updateChartWrapperCss: function(properties) {
+        let chartWrapper = document.getElementById(`chart_${this.cid}_wrapper`);
+        if (chartWrapper) {
+            Object.assign(chartWrapper.style, properties);
+        }
     },
 
     getChartParams: function(chartData) {
@@ -146,7 +194,22 @@
             params.state = state;
         }
 
+        params.onClick = this.onClickHandler();
+        delete params.chartElementId;
+
         return params;
+    },
+
+    /**
+     * Tells parent view to handle chart click
+     */
+    onClickHandler: function() {
+        let self = this;
+        return function(event, activeElements, chart) {
+            let reportData = self.model.get('rawReportData');
+            // `this` is of type BaseChart
+            self.view.trigger('chart:clicked', event, activeElements, chart, this, reportData);
+        };
     },
 
     /**
@@ -172,6 +235,20 @@
                 };
                 break;
 
+            case 'donut chart':
+                chartConfig = {
+                    pieType: 'basic',
+                    chartType: 'donutChart',
+                };
+                break;
+
+            case 'treemap chart':
+                chartConfig = {
+                    treemapType: 'basic',
+                    chartType: 'treemapChart',
+                };
+                break;
+
             case 'line chart':
                 chartConfig = {
                     lineType: 'grouped',
@@ -183,7 +260,9 @@
             case 'funnel chart 3D':
                 chartConfig = {
                     funnelType: 'basic',
-                    chartType: 'funnelChart'
+                    chartType: 'funnelChart',
+                    maintainAspectRatio: true,
+                    aspectRatio: 1,
                 };
                 break;
 
@@ -259,12 +338,19 @@
                 break;
         }
 
+        // Not all the charts config has barType key, before we are checking agains barType value
+        // we have to ensure that this key exists
+        if (params.stacked && _.has(chartConfig, 'barType') && chartConfig.barType !== 'basic') {
+            chartConfig.barType = 'stacked';
+        }
+
         chartConfig.direction = app.lang.direction;
 
         // chartParams artifact
         chartGroupType = chartConfig.barType ||
             chartConfig.lineType ||
             chartConfig.pieType ||
+            chartConfig.treemapType ||
             chartConfig.funnelType ||
             'basic';
         chartParams.dataType = chartGroupType === 'stacked' ? 'grouped' : chartGroupType;
@@ -272,28 +358,6 @@
         this.chartType = chartConfig.chartType;
 
         return chartConfig;
-    },
-
-    /**
-     * Checks to see if the chart is available and is displayed before resizing
-     */
-    resize: function() {
-        // If (this.chart_loaded && !this.sidebar_closed && !this.preview_open && !this.dashlet_collapsed) {
-        if (!this.chart_loaded) {
-            return;
-        }
-        // This handles the case of preview open and dashlet collapsed.
-        // We don't need to handle the case of collapsed sidepane
-        // because charts can resize when inside an invisible container.
-        // It is being inside a display:none container that causes problems.
-        if (!this.view.$el || !this.view.$el.is(':visible')) {
-            return;
-        }
-        if (this.chart.render) {
-            this.chart.render();
-        } else {
-            this.chart.update();
-        }
     },
 
     /**
@@ -365,16 +429,10 @@
      * @inheritdoc
      */
     _dispose: function() {
-        if (this.view && this.view.layout) {
-            this.view.layout.off(null, null, this);
-        }
-        if (this.view && this.view.layout) {
-            this.view.layout.context.off(null, null, this);
-        }
-        this.$('.sc-chart').off('click');
-        $(window).off('resize.' + this.sfId);
         this.handlePrinting('off');
-
-        app.view.Field.prototype._dispose.call(this);
-    }
+        if (this.chart) {
+            this.chart.destroyChart();
+        }
+        this._super('_dispose');
+    },
 })

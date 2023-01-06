@@ -11,9 +11,11 @@
  */
 --}}
 <section id="dashboards_home">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span3">
@@ -85,7 +87,7 @@
 
 <div id="dashboards_homepage_2" class="modal hide fade" style="width:90%;margin-left:-45%;">
   <div class="modal-header">
-    <a class="close btn btn-invisible" data-dismiss="modal"><i class="fa fa-times"></i></a>
+    <a class="close btn btn-invisible" data-dismiss="modal"><i class="sicon sicon-close"></i></a>
     <h4>Edit Dashboard Layout</h4>
   </div>
   <div class="modal-body" style="padding:12px;max-height:90%;text-align:center;">
@@ -95,7 +97,7 @@
 
 <div id="dashboards_homepage_2" class="modal hide fade" style="width:90%;margin-left:-45%;">
   <div class="modal-header">
-    <a class="close btn btn-invisible" data-dismiss="modal"><i class="fa fa-times"></i></a>
+    <a class="close btn btn-invisible" data-dismiss="modal"><i class="sicon sicon-close"></i></a>
     <h4>Example Home Dashboard Layout</h4>
   </div>
   <div class="modal-body" style="padding:12px;max-height:90%;text-align:center;">

@@ -58,7 +58,7 @@
         this.initOptions = options;
         this._super('initialize', [options]);
         this.syncInitData();
-
+        this.context.set('nextCommitModel', app.data.createBean('Forecasts'));
     },
 
     /**
@@ -91,6 +91,7 @@
                     commitDate = lastCommit.get('date_modified');
                 }
                 this.context.set({'currentForecastCommitDate': commitDate});
+                this._setCommitModelsOnContext();
             }, this);
             // since the selected user change on the context, update the model
             this.context.on('change:selectedUser', function(model, changed) {
@@ -175,6 +176,23 @@
                 }
             }, this);
         }
+    },
+
+    /**
+     * When the previous commits are loaded, sets the last commit model on the
+     * context. Also creates a fresh model to store data for the next commit
+     *
+     * @private
+     */
+    _setCommitModelsOnContext: function() {
+        this.context.set('lastCommitModel', _.first(this.collection.models) || null);
+
+        // The worksheet is reloading, so clear the attributes on the model
+        let nextCommitModel = this.context.get('nextCommitModel');
+        nextCommitModel.setSyncedAttributes({});
+        nextCommitModel.clear();
+
+        this.context.trigger('forecasts:commit-models:loaded');
     },
 
     /**
@@ -290,13 +308,28 @@
                 data.defaultSelections.timeperiod_id.start,
                 data.defaultSelections.timeperiod_id.end,
                 true
-            )
+            ),
+            _isInvalidModel: _.bind(this._isInvalidModel, this)
         }, {silent: true});
 
         ctx.get('model').set({'selectedTimePeriod': data.defaultSelections.timeperiod_id.id}, {silent: true});
 
         // set the selected user to the context
         app.utils.getSelectedUsersReportees(app.user.toJSON(), ctx);
+    },
+
+    /**
+     * Check if the model is in the selected range (included/excluded)
+     * @param model
+     * @return {boolean}
+     * @private
+     */
+    _isInvalidModel: function(model) {
+        let range = this.context.get('selectedRanges');
+        if (_.isArray(range) && range.length > 0) {
+            return !range.includes(model.get('commit_stage'));
+        }
+        return false;
     },
 
     /**
@@ -401,6 +434,18 @@
         forecastData.commit_type = worksheet_type;
         forecastData.timeperiod_id = forecast_totals.timeperiod_id || this.context.get('selectedTimePeriod');
         forecastData.forecast_type = forecastType;
+
+        // For Forecast-level editable fields, include their values in the data
+        let forecastFields = ['likely_case', 'best_case', 'worst_case'];
+        let nextCommitModel = this.context.get('nextCommitModel');
+        if (nextCommitModel instanceof Backbone.Model) {
+            _.each(forecastFields, function(forecastField) {
+                let forecastValue = parseFloat(nextCommitModel.get(forecastField));
+                if (!_.isNaN(forecastValue)) {
+                    forecastData[forecastField] = forecastValue;
+                }
+            }, this);
+        }
 
         forecast.save(forecastData, { success: _.bind(function(model, response) {
             // we need to make sure we are not disposed, this handles any errors that could come from the router and window

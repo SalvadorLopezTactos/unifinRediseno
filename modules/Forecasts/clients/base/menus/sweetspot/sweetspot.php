@@ -14,7 +14,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
     array(
         'label' => 'LBL_MODULE_NAME',
         'module' => $moduleName,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list',
         'route' => '#Forecasts',
     ),
 );

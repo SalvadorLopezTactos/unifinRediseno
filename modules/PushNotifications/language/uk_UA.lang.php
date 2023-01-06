@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Тип батьківського запису',
     'LBL_PARENT_ID' => 'Ідентифікатор початкового запису',
     'LBL_EXTRA_DATA' => 'Додаткові дані',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM — згадано в модулі {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} згадав(-ла) вас у модулі {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM — призначено модуль {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} призначив(-ла) вам модуль {{module_name_singular}} {{record_name}}.',
 ];

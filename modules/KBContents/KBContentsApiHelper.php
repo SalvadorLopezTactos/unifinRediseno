@@ -16,7 +16,7 @@ use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\SearchFields;
 use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\MultiFieldHandler;
 
 
-class KBContentsApiHelper extends AttachmentsApiHelper
+class KBContentsApiHelper extends SugarBeanApiHelper
 {
 
     public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())

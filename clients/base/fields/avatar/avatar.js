@@ -35,7 +35,9 @@
         var template,
             className;
         this._super("_render");
-        if (this.action !== 'edit' || this.view.name === 'merge-duplicates') {
+        if (this.action !== 'edit' ||
+            this.view.name === 'merge-duplicates' ||
+            this.view.name === 'side-drawer-headerpane') {
             if (_.isEmpty(this.value)) {
                 className = _.isUndefined(this.MAPSIZECLASS[this.def.size]) ? this.MAPSIZECLASS['large'] : this.MAPSIZECLASS[this.def.size];
                 // replace the image field with the module icon when there is no avatar to display

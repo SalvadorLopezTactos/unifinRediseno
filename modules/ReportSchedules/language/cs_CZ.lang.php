@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Tento plán sestav',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Řídicí panel záznamů plánů sestav',
+    'LBL_FILE_TYPE' => 'Typ(y) souboru',
 );

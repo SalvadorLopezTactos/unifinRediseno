@@ -92,13 +92,13 @@
 <input type='hidden' id='product_count' name='product_count' value='0'>
 
 <script type="text/javascript">
-Calendar.setup ({literal} { {/literal}
+Calendar.setup ( { 
 	inputField : "jscal_field", daFormat : "{$CALENDAR_DATEFORMAT}", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "jscal_trigger", singleClick : true, step : 1, weekNumbers:false
-{literal} } {/literal});
+ } );
 
-Calendar.setup ({literal} { {/literal}
+Calendar.setup ( { 
 	inputField : "jscal_field_original_po_date", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "jscal_trigger_original_po_date", singleClick : true, step : 1, weekNumbers:false
-{literal} } {/literal});
+ } );
 </script>
 
 {$TAXRATE_JAVASCRIPT}
@@ -110,7 +110,7 @@ Calendar.setup ({literal} { {/literal}
 <script type="text/javascript" src="{sugar_getjspath file='modules/Quotes/quotes.js'}"></script>
 <script type="text/javascript" src="{sugar_getjspath file='modules/Quotes/EditView.js'}"></script>
 <script type="text/javascript">
-{literal}
+
 var QUOTE_Y = YUI({comboBase:'index.php?entryPoint=getYUIComboFile&'}).use('node', function(Y){
     return Y;
 });
@@ -118,7 +118,7 @@ quotesManager = new QuotesEditManager(QUOTE_Y);
 if(!document.getElementById('calc_grand_total').checked){
 	document.getElementById('grand_tally').style.display = 'none';
 }
-{/literal}
+
 
 precision = "{$PRECISION}";
 quotesManager.default_product_status = "{$DEFAULT_PRODUCT_STATUS}";
@@ -160,12 +160,12 @@ quotesManager.deleteCommentConfirm = "{$MOD.NTC_REMOVE_COMMENT_CONFIRMATION}";
 
 <script type="text/javascript" language="Javascript">
 {$SETUP_SCRIPT}
-{literal}
+
 YAHOO.util.Event.onDOMReady(function()
 {
     sqs_objects['EditView_billing_account_name']['post_onblur_function'] = 'set_shipping_account_name';
 });
-{/literal}
+
 </script>
 
 {$CALCULATE_FUNCTION}

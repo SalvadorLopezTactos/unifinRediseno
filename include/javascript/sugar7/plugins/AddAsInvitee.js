@@ -13,8 +13,8 @@
     app.events.on('app:init', function() {
         /**
          * Add As Invitee plugin manages listening for changes to the parent
-         * and assigned user fields on event type records (Calls & Meetings)
-         * and adds the person record as an invitee on the call/meeting.
+         * and assigned user fields on event type records (Calls, Meetings, and Messages)
+         * and adds the person record as an invitee on the call/meeting/message.
          *
          * This plugin listens for changes to the parent and assigned user
          * fields, but waits to do this until render to accommodate create

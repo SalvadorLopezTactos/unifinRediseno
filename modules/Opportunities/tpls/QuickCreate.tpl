@@ -67,17 +67,15 @@
 </slot></td></tr></table>
 	</form>
 <script>
-{literal}
 	Calendar.setup ({
-		inputField : "jscal_field", ifFormat : "{/literal}{$CALENDAR_DATEFORMAT}{literal}", showsTime : false, button : "jscal_trigger", singleClick : true, step : 1, weekNumbers:false
+		inputField : "jscal_field", ifFormat : "{$CALENDAR_DATEFORMAT}", showsTime : false, button : "jscal_trigger", singleClick : true, step : 1, weekNumbers:false
 	});
-	prob_array = {/literal}{$prob_array}{literal}
+	prob_array = {$prob_array}
 	document.getElementById('opportunities_sales_stage').onchange = function() {
 			if(typeof(document.getElementById('opportunities_sales_stage').value) != "undefined" && prob_array[document.getElementById('opportunities_sales_stage').value]) {
 				document.getElementById('opportunities_probability').value = prob_array[document.getElementById('opportunities_sales_stage').value];
 			} 
 		};
-{/literal}
 
 	{$additionalScripts}
 </script>

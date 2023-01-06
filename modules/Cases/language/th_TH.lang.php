@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'ตัวอย่างเช่น คุณอาจใช้ข้อมูลนี้เพื่อค้นหาปัญหาที่ส่งก่อนหน้านี้',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'ถ้าคุณมีเคสการสนับสนุนใหม่ที่ต้องการส่ง คุณสามารถคลิกเพื่อส่งเคสใหม่',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'การคลิกที่นี่จะนำคุณกลับมาที่มุมมองนี้ทุกเมื่อ',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'การโต้ตอบเคส',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์เคส',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'บันทึก',
 

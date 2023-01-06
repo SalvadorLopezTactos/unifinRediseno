@@ -94,6 +94,9 @@ $viewdefs['Leads']['base']['layout']['convert-main'] = array(
             array(
                 'account_name' => 'Accounts',
             ),
+            'enableRlis' => true,
+            'requireRlis' => true,
+            'copyDataToRlis' => true,
         ),
     ),
 );

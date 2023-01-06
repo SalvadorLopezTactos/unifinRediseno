@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Esborrar' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Desenvolupat per SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Funció',
+    'LBL_BASE_LAYOUT' => 'Disseny base',
+    'LBL_FIELD_NAME' => 'Nom del camp',
+    'LBL_FIELD_VALUE' => 'Valor',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Disseny determinat per:',
+    'layoutDeterminedBy' => [
+        'std' => 'Disseny estàndard',
+        'role' => 'Funció',
+        'dropdown' => 'Camp desplegable',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Se suprimiran tots els dissenys personalitzats. Segur que voleu canviar les definicions del vostre disseny actual?',
 'help'=>array(
     'package'=>array(
             'create'=>'Proporcioni un <b>Nom</b> per el paquet. El nom que introdueixi ha de ser alfanumèric i no ha de contenir espais. (Exemple: HR_Management)<br/><br/> Pot proporcionar la informació de l&#39; <b>Autor</b> i la <b>Descripció</b> del paquet. <br/><br/>Faci clic a <b>Guardar</b> per crear el paquet.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Visibilitat editor',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'Camp relacionat',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL a la imatge de la logomarca personalitzada. Les dimensions recomanades de la logomarca són 22 x 22 píxels. Qualsevol imatge carregada que és més gran en qualsevol direcció es modificarà perquè aquestes dimensions siguin les màximes.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL a la imatge del logo personalitzat. L&#39;amplària recomanada del logo és 200 píxels. Qualsevol imatge carregada que és més gran en qualsevol direcció es modificarà perquè aquestes dimensions siguin les màximes. Aquest logo s&#39;utilitzarà a la pantalla d&#39;inici de sessió. Si no es carrega cap imatge, s&#39;utilitzarà la logomarca.',
 'LBL_PORTAL_ROLE_DESC' => 'No esborreu aquest rol. Customer Self-Service Portal Rol és un rol generat pel sistema creat durant el procés d&#39;activació Sugar Portal. Utilitzeu els controls d&#39;accés a l&#39;interior d&#39;aquesta funció per activar i/o desactivar els errors, casos o mòduls de la base de coneixements al Portal de Sugar. No modifiqueu els controls d&#39;accés per a altres aquesta funció per evitar el comportament del sistema desconegut i imprevisible. En cas d&#39;eliminació accidental d&#39;aquesta funció, torni a crear-lo per desactivació i activació Sugar Portal.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Afegir Relació',
 'LBL_BTN_RENAME_MODULE' => 'Canvi de nom del mòdul',
 'LBL_BTN_INSERT'=>'Insertar',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Restableix el disseny base',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Hi ha hagut un error',
 'ERROR_REQUIRED_FIELDS' => 'Està segur que desitja continuar? Els següents camps requerits no es troben en el disseny:',
 'ERROR_ARE_YOU_SURE' => 'Esteu segur que voleu continuar?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'No es pot crear el camp. Heu arribat al límit de mida de la fila d&#39;aquesta taula a la base de dades. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Obteniu-ne més informació</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'El camp següent(s) han calculat els valors que no es tornarà a calcular en temps real en el SugarCRM Portal Edició:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'El camp següent(s) han calculat els valors que no es tornarà a calcular en temps real en el SugarCRM Portal Edició:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Si desitja activar per veure en el portal, si us plau aneu <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">aquí</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Configuració de Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Habilita portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Habilita la cerca abans d&#39;obrir un cas',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Permet notes al mòdul de Base de Coneixement',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permet que els usuaris del portal tanquin el cas',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Permet que els nous usuaris inicien la sessió',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Permisos d&#39;usuari',
     'LBL_PORTAL_THEME' => 'Portal temàtic',
     'LBL_PORTAL_ENABLE' => 'Habilitar',
     'LBL_PORTAL_SITE_URL' => 'El seu portal està disponible a:',
     'LBL_PORTAL_APP_NAME' => 'Nom de l&#39;aplicació',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL de la logomarca',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Previsualització de la logomarca',
-    'LBL_PORTAL_LOGO_URL' => 'Logotip URL',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Previsualització del logo',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telèfon',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Correu electrònic',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'S&#39;ha d&#39;introduir una adreça de correu electrònic vàlida',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Arrossegueu i deixeu anar els noms dels mòduls del Portal per configurarles i que es mostren o s&#39;oculten a la barra de navegació superior del Portal. Per controlar l&#39;accés dels usuaris del Portal als mòduls, utilitzeu <a href="?module=ACLRoles&action=index">Administració de rols.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Mòduls visibles',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Mòduls ocults',
+    'LBL_CONFIG_VISIBILITY' => 'Visibilitat',
+    'LBL_CASE_VISIBILITY_HELP' => 'Defineix quins usuaris del portal poden veure un cas.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Defineix quins usuaris del portal poden veure els correus electrònics relacionats amb un cas. Els contactes que hi participen són els dels camps A, De, CC i BCC.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Defineix quins usuaris del portal poden veure els missatges relacionats amb un cas. Els contactes que hi participen són els dels camps Convidats.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Tots els contactes relacionats amb el compte',
+        'related_contacts' => 'Només els contactes principals i els contactes relacionats amb el cas',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Només els contactes participants',
+        'all' => 'Tots els contactes que poden veure el cas',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Només els contactes participants',
+        'all' => 'Tots els contactes que poden veure el cas',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Dissenys de portal',
@@ -787,11 +812,11 @@ $mod_strings = array(
     . "Els camps obligatoris seguiran la fórmula a la vista mòbil basada en navegador, <br/>"
     . "però no seguiran la fórmula a les aplicacions natives, com ara Sugar Mobile per a iPhone.<br/>"
     . "No seguiran la fórmula al Portal autoservei de Sugar.",
-'LBL_POPHELP_READONLY'=>"Creeu una fórmula per determinar si aquest camp és només de lectura als dissenys.<br/>"
-        . "Els camps només de lectura seguiran la fórmula a la visualització mòbil basada en el navegador, <br/>"
-        . "però no seguirà la fórmula a les aplicacions natives, com Sugar Mobile per a iPhone. <br/>"
+'LBL_POPHELP_READONLY'=>"Crea una fórmula per determinar si aquest camp és només de lectura al disseny.<br/>"
+        . "Els camps de només lectura seguiran la fórmula a la vista mòbil basada en navegador, <br/>"
+        . "però no seguiran la fórmula a les aplicacions natives, com ara Sugar Mobile per a iPhone.<br/>"
         . "No seguiran la fórmula al Portal autoservei de Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccioneu utilitzar aquest camp quan cerqueu registres mitjançant la Cerca global d&#39;aquest mòdul.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccioneu-ho per utilitzar aquest camp quan cerqueu registres amb la Cerca global a aquest mòdul.',
 //Revert Module labels
 'LBL_RESET' => 'Restablir',
 'LBL_RESET_MODULE' => 'Restablir Mòdul',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Data i hora',
                 'decimal'=>'Decimal',
                 'autoincrement' => 'AutoIncrementa',
+                'actionbutton' => 'Botó d&#39;acció',
 ),
 'labelTypes' => array(
     "" => "Les etiquetes d&#39;ús freqüent",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relacionat {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copia del disseny',
 'LBL_RELATIONSHIP_TYPE' => 'Relació',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Idioma de comparació',
+'LBL_LABEL_NOT_TRANSLATED' => 'Potser aquesta etiqueta no estigui traduïda',
 );

@@ -16,12 +16,12 @@
 ({
     extendsFrom: 'FieldsetField',
 
+    /**
+     * @inheritdoc
+     */
     initialize: function(options) {
         this.plugins = _.union(this.plugins || [], ['Cascade']);
         this._super('initialize', [options]);
-        this.def.lblString = app.lang.get('LBL_UPDATE_OPPORTUNITIES_RLIS', 'Opportunities') +
-            ' ' +
-            app.lang.getModuleName('RevenueLineItems', {plural: true});
     },
 
     /**
@@ -34,18 +34,10 @@
             this.type = 'fieldset';
         }
 
-        // Make sure that when the cascade plugin sets the field to be disabled
-        // or not, that stays consistent on both base field and subfields.
-        if (!_.isEmpty(this.fields)) {
-            if (_.every(this.fields, function(field) {
-                return field.action === 'detail';
-            })) {
-                this.type = 'fieldset';
-                this.action = 'detail';
-            }
-            if (this.action === 'disabled') {
-                this.setDisabled(true);
-            }
+        // If this field is disabled, setDisabled will cascade that down
+        // to the subfields
+        if (this.action === 'disabled') {
+            this.setDisabled(true);
         }
 
         this._super('_loadTemplate');

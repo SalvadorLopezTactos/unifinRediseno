@@ -28,12 +28,22 @@ class FieldViewer{
         'text',
     ];
 
+    public static $calculationVisibleLimitedModules = ['Users'];
+    public static $calculationVisibleLimitedTypes = [
+        'int', 'float', 'decimal', 'discount', 'currency', 'bool', 'varchar', 'name',
+        'phone', 'text', 'url', 'encrypt', 'enum', 'radioenum', 'fullname', 'date',
+        'datetime', 'datetimecombo', 'service-enddate', 'multienum',
+    ];
+    public static $calculationVisibleDisallowedFields = [
+        'deleted', 'email1',
+    ];
 
     public function __construct() {
 		$this->ss = new Sugar_Smarty();
 	}
-	function getLayout($vardef){
 
+    public function getLayout($vardef)
+    {
 		if(empty($vardef['type']))$vardef['type'] = 'varchar';
 		$mod = return_module_language($GLOBALS['current_language'], 'DynamicFields');
 		$this->ss->assign('vardef', $vardef);
@@ -61,13 +71,32 @@ class FieldViewer{
         $this->ss->assign('hideMassUpdate', !in_array($vardef['type'], self::$massUpdateWhitelist));
 
         if ($this->ss->get_template_vars('is_relationship_field')) {
-            $this->ss->assign('hideDuplicatable', true);
-            $this->ss->assign('hideRequired', true);
-            $this->ss->assign('hideMassUpdate', true);
-            $this->ss->assign('hideImportable', true);
             $this->ss->assign('hideReportable', true);
-            $this->ss->assign('hideDependent', true);
             $this->ss->assign('hideReadOnly', true);
+
+            if ($this->ss->get_template_vars('is_one_to_one_field')) {
+                $this->ss->assign('hideMassUpdate', true);
+            }
+
+            // For Account Name fields, the required option is controlled by the require_accounts config.
+            if (isset($GLOBALS['sugar_config']['require_accounts']) && $vardef['name'] === 'account_name') {
+                $this->ss->assign('hideRequired', true);
+            }
+        }
+
+        $module = $this->ss->get_template_vars('module');
+        $hasStudio = isset($vardef['studio']) && is_array($vardef['studio']);
+        $hideForFormula = $hasStudio && isset($vardef['studio']['formula']) && isFalsy($vardef['studio']['formula']);
+        $hideForRelated = $hasStudio && isset($vardef['studio']['related']) && isFalsy($vardef['studio']['related']);
+        if (!empty($module) && !empty($module->name) &&
+            in_array($module->name, self::$calculationVisibleLimitedModules) &&
+            in_array($vardef['type'], self::$calculationVisibleLimitedTypes) &&
+            !in_array($vardef['name'], self::$calculationVisibleDisallowedFields) &&
+            !$hideForFormula && !$hideForRelated
+        ) {
+            $this->ss->assign('showCalculationVisible', true);
+        } else {
+            $this->ss->assign('showCalculationVisible', false);
         }
 
 		$GLOBALS['log']->debug('FieldViewer.php->getLayout() = '.$vardef['type']);

@@ -29,6 +29,8 @@
         pieF: 'LBL_PIE',
         funnelF: 'LBL_FUNNEL',
         lineF: 'LBL_LINE',
+        donutF: 'LBL_DONUT',
+        treemapF: 'LBL_TREEMAP',
     },
 
     /**

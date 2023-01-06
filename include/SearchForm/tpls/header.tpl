@@ -15,11 +15,8 @@
 <script type="text/javascript" src="{sugar_getjspath file='include/javascript/popup_parent_helper.js'}"></script>
 {$TABS}
 {{if $displayView == 'saved_views'}}
-{literal}
 <script>SUGAR.savedViews.handleForm();</script>
-{/literal}
 {{/if}}
-{literal}
 <script>
 function submitOnEnter(e)
 {
@@ -33,7 +30,6 @@ function submitOnEnter(e)
     }
 }
 </script>
-{/literal}
 <form name='search_form' id='search_form' class='search_form' method='post' action='index.php?module={$module}&action={$action}' onkeydown='submitOnEnter(event);'>
 {sugar_csrf_form_token}
 <input type='hidden' name='searchFormTab' value='{$displayView}'/>

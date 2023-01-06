@@ -139,11 +139,10 @@ class ForecastsConfigApi extends ConfigModuleApi
         // this is being upgraded or the forecast was not setup before.
         if ($upgraded || empty($prior_forecasts_settings['is_setup'])) {
             if ($args['forecast_by'] === 'Opportunities') {
-                SugarAutoLoader::load('include/SugarQueue/jobs/SugarJobUpdateOpportunities.php');
                 SugarJobUpdateOpportunities::updateOpportunitiesForForecasting();
             } else {
-                SugarAutoLoader::load('include/SugarQueue/jobs/SugarJobUpdateRevenueLineItems.php');
                 SugarJobUpdateRevenueLineItems::scheduleRevenueLineItemUpdateJobs();
+                SugarJobUpdateOpportunities::updateRliOppsForForecasting();
             }
         }
 
@@ -174,7 +173,7 @@ class ForecastsConfigApi extends ConfigModuleApi
     public function refreshForecastByMetadata($forecast_by)
     {
         $convert = $this->getOpportunityConfigObject($forecast_by);
-        $convert->doMetadataConvert();
+        $convert->fixForecastFields();
     }
 
     /**

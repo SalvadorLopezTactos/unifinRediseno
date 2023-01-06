@@ -137,18 +137,18 @@ if(isset($_REQUEST['root_directory'])){
         }elseif($argv[2] == '-m'){
             //replace the scripts, and then minify the scripts again
             $minifyUtils->reverseScripts("$from/jssource/src_files",$from);
-            $minifyUtils->BackUpAndCompressScriptFiles($from,"",false,true);
+            $minifyUtils->BackUpAndCompressScriptFiles($from, '', false);
         }elseif($argv[2] == '-c'){
             //replace the scripts, concatenate the files, and then minify the scripts again
             $minifyUtils->reverseScripts("$from/jssource/src_files",$from);
-            $minifyUtils->BackUpAndCompressScriptFiles($from,"",false,true);
-            $minifyUtils->ConcatenateFiles($from,true);
+            $minifyUtils->BackUpAndCompressScriptFiles($from, '', false);
+            $minifyUtils->ConcatenateFiles($from);
         }elseif($argv[2] == '-mo'){
             //do not replace the scriptsjust minify the existing scripts again
-            $minifyUtils->BackUpAndCompressScriptFiles($from,"",false,true);
+            $minifyUtils->BackUpAndCompressScriptFiles($from, '', false);
         }elseif($argv[2] == '-co'){
             //concatenate the files only
-            $minifyUtils->ConcatenateFiles($from,true);
+            $minifyUtils->ConcatenateFiles($from);
         }elseif($argv[2] == '-?'){
             die("
     Usage : minify <root path> [[-r]|[-m]|[-c]]
@@ -182,8 +182,8 @@ if(isset($_REQUEST['root_directory'])){
         if(empty($from)){
             echo("directory root to process was not specified");
         }
-        $minifyUtils->BackUpAndCompressScriptFiles($from, '', true, true);
-        $minifyUtils->ConcatenateFiles($from,true);
+        $minifyUtils->BackUpAndCompressScriptFiles($from, '', true);
+        $minifyUtils->ConcatenateFiles($from);
     }
 }
 

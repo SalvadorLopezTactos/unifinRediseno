@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Lloji mëmë',
     'LBL_PARENT_ID' => 'ID-ja kryesore',
     'LBL_EXTRA_DATA' => 'Të dhëna shtesë',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - Përmendi në {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} të përmendi në {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Caktoi {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} të caktoi {{module_name_singular}} {{record_name}}.',
 ];

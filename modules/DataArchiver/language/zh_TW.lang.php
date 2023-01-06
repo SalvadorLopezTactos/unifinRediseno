@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => '封存',
     'LBL_PROCESS_TYPE_DELETE' => '硬刪除',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => '存檔運行',
+    'LBL_ARCHIVER_WARNING_TITLE' => '警告',
+    'LBL_ARCHIVER_WARNING' => '建議在低使用率或非工作時間執行此操作 '
+        . '因為它會影響系統性能。您確定要立即執行此操作嗎？',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}} 模塊的存檔程序必須將 {{fieldName}} 設置為篩選器',
 );

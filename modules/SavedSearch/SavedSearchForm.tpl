@@ -47,7 +47,6 @@
 	selectedOrderBy = "{$selectedOrderBy|escape:javascript}";
 
 
-{literal}
 	//this populates the label that shows the name of the current saved view
 	//The label is located under the update/delete buttons
 	function fillInLabels(){
@@ -74,7 +73,6 @@
 		SUGAR.savedViews.handleForm();
 	}
 
-{/literal}
 </script>
 
 

@@ -18,7 +18,7 @@ $viewdefs['ChangeTimers']['base']['view']['panel-top'] = [
             'buttons' => [
                 [
                     'type' => 'sticky-rowaction',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_button',
                     'label' => ' ',
                     'acl_action' => 'create',
@@ -29,7 +29,7 @@ $viewdefs['ChangeTimers']['base']['view']['panel-top'] = [
                     'type' => 'sticky-rowaction',
                     'name' => 'select_button',
                     'label' => 'LBL_ASSOC_RELATED_RECORD',
-                    'icon' => 'fa-pencil',
+                    'icon' => 'sicon-edit',
                     'css_class' => 'disabled',
                 ],
             ],

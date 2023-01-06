@@ -29,7 +29,7 @@ class ViewModulefields extends SugarView
     /**
      * @inheritdoc
      */
-    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    public function __construct($bean = null, $view_object_map = array(), ?Request $request = null)
     {
         $this->idpConfig = new Authentication\Config(\SugarConfig::getInstance());
         parent::__construct($bean, $view_object_map, $request);
@@ -267,7 +267,11 @@ class ViewModulefields extends SugarView
         $def
         )
 	{
-        if ($this->idpConfig->isIDMModeEnabled() && !empty($def['idm_mode_disabled'])) {
+        if ($this->idpConfig->isIDMModeEnabled() &&
+            (!empty($def['idm_mode_disabled']) &&
+                ($def['name'] !== 'license_type' ||
+                    ($def['name'] === 'license_type' && $this->idpConfig->getUserLicenseTypeIdmModeLock())))
+        ) {
             return false;
         }
 
@@ -335,8 +339,33 @@ class ViewModulefields extends SugarView
     }
 
     /**
+     * Gets the relationship metadata for the provided relate field
+     * @param $fieldName
+     * @param $moduleName
+     * @param $fieldDefs
+     * @return array|null
+     */
+    private static function getRelationshipMetadataForField($fieldName, $moduleName, $fieldDefs)
+    {
+        $relationships = new DeployedRelationships($moduleName);
+        $relationshipList = $relationships->getRelationshipList();
+
+        if (empty($fieldDefs[$fieldName]['link'])) {
+            return null;
+        }
+
+        $linkFieldName = $fieldDefs[$fieldName]['link'];
+        $relationshipName = $fieldDefs[$linkFieldName]['relationship'];
+
+        if (in_array($relationshipName, $relationshipList)) {
+            return $relationships->get($relationshipName)->getDefinition();
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Checks if the provided field name is tied to a custom relationship
-     *
      * @param $fieldName
      * @param $moduleName
      * @param $fieldDefs
@@ -344,16 +373,26 @@ class ViewModulefields extends SugarView
      */
     public static function isCustomRelationshipField($fieldName, $moduleName, $fieldDefs)
     {
-        $relationships = new DeployedRelationships($moduleName);
-        $relationshipList = $relationships->getRelationshipList();
-        $linkFieldName = $fieldDefs[$fieldName]['link'];
-        $relationshipName = $fieldDefs[$linkFieldName]['relationship'];
-
-        if (in_array($relationshipName, $relationshipList)) {
-            $relationship = $relationships->get($relationshipName)->getDefinition();
-            return $relationship['is_custom'] && isset($relationship['from_studio']) && $relationship['from_studio'];
-        } else {
+        $relationship = self::getRelationshipMetadataForField($fieldName, $moduleName, $fieldDefs);
+        if (empty($relationship)) {
             return false;
         }
+        return $relationship['is_custom'] && isset($relationship['from_studio']) && $relationship['from_studio'];
+    }
+
+    /**
+     * Checks if the provided field name is tied to a one to one relationship
+     * @param $fieldName
+     * @param $moduleName
+     * @param $fieldDefs
+     * @return bool
+     */
+    public static function isOneToOneRelationshipField($fieldName, $moduleName, $fieldDefs)
+    {
+        $relationship = self::getRelationshipMetadataForField($fieldName, $moduleName, $fieldDefs);
+        if (empty($relationship)) {
+            return false;
+        }
+        return $relationship['relationship_type'] === 'one-to-one';
     }
 }

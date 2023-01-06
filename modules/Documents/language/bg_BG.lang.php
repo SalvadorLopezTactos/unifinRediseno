@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Приходни позиции',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Покупки',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Закупени позиции',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Електронно табло на записа на документите',
+    'LBL_MY_DOCUMENTS' => 'Моите документи',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Изпращане към DocuSign',
 );

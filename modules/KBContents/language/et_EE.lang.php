@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vaata malle',
     'LNK_LIST_KBCATEGORIES' => 'Vaata kategooriaid',
     'LBL_TEMPLATES' => 'Mallid',
+    'LBL_TEMPLATE' => 'Mall',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Mall kirjutab üle kogu sisu.' .
         ' Kas olete kindel, et soovite seda malli kasutada?',
     'LNK_IMPORT_KBCONTENTS' => 'Impordi artiklid',

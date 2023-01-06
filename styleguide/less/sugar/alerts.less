@@ -4,23 +4,22 @@
 // Base alert styles
 
 div.alert { /* rules here do not apply to alert in a list view (<table>) header */
-  display: flex;
   box-sizing: border-box;
+  border: 1px solid @alertBorderColor;
 
   .indicator {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    flex: none;
     height: inherit;
-    width: 59px;
-    text-align: center;
+    width: 48px;
 
     i {
-      position: absolute;
       display: block;
-      text-align: center;
-      width: 100%;
       top: calc(~"50% - 15px");
-      font-size: 30px;
     }
   }
 }
@@ -31,11 +30,26 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   min-height: 58px;
   text-shadow: none;
   padding: 0;
-  margin: 0 0 4px;
-  background-color: @white;
-  border: 1px solid darken(@grayLighter, 15%);
-  box-shadow: @shadowWidget;
   font-size: @alertFontSize;
+  z-index: 0;
+
+  &:not(.alert-process) {
+    &::before {
+      content: "";
+      position: absolute;
+      background-image: @stackBackground;
+      background-repeat: no-repeat;
+      background-size: 150px;
+      background-position: right top;
+      z-index: -1;
+      .w-full();
+      .h-full();
+    }
+
+    > * {
+      z-index: 1;
+    }
+  }
 
   &.closeable {
     padding-right: 40px;
@@ -43,36 +57,25 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
 
   .text {
     height: inherit;
-    padding: 20px 0 20px 18px;
     box-sizing: border-box;
     word-wrap: break-word;
     overflow-x: hidden;
   }
-
-  .fa {
-    color: inherit;
-  }
-}
-
-.alert,
-.alert-heading {
-  color: @gray;
 }
 
 // Adjust close link position
 .alert .close {
   right: 10px;
-  top: 5px;
-  font-size: 14px;
+  top: 10px;
+  font-size: 12px;
+  line-height: 12px;
   font-weight: normal;
-  opacity: 0.2;
   text-shadow: none;
-  color: @black;
+  color: @sicon-color;
   position: absolute;
 
   &:hover {
     color: inherit;
-    opacity: 1;
   }
 }
 
@@ -89,14 +92,9 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
 
 .alert-success,
 .alert-success .alert-heading {
-  border-color: @alertSuccess;
-
   .indicator {
-    background-color: @alertSuccessBackground;
-    color: @alertSuccessText;
-
     i {
-      color: inherit;
+      color: @alertSuccess;
     }
   }
 }
@@ -105,14 +103,9 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
 .alert-error,
 .alert-danger .alert-heading,
 .alert-error .alert-heading {
-  border-color: @alertError;
-
   .indicator {
-    background: @alertErrorBackground;
-    color: @alertErrorText;
-
     i {
-      color: inherit;
+      color: @alertError;
     }
   }
 }
@@ -130,28 +123,18 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
 
 .alert-warning,
 .alert-warning .alert-heading {
-  border-color: @alertWarning;
-
   .indicator {
-    background-color: @alertWarningBackground;
-    color: @alertWarningText;
-
     i {
-      color: inherit;
+      color: @alertWarning;
     }
   }
 }
 
 .alert-info,
 .alert-info .alert-heading {
-  border-color: @alertInfo;
-
   .indicator {
-    background-color: @alertInfoBackground;
-    color: @alertInfoText;
-
     i {
-      color: inherit;
+      color: @alertInfo;
     }
   }
 }
@@ -201,82 +184,15 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
 
 // Alert itself
 .alert-confirmation {
-  width: auto;
-  height: auto;
   position: fixed;
   top: 36px;
   left: 0;
   right: 0;
   z-index: 1080;
 
-  > div {
-    display: inline-block;
-  }
-
   .alert {
-    padding: 0;
-    min-width: 280px;
-    width: auto;
-    max-width: 430px;
-    background: @alertConfirmationBackground;
-
-    .indicator {
-      display: block;
-      width: 100%;
-      height: 48px;
-      line-height: 48px;
-
-      .fa {
-        font-size: @alertIconFontSize;
-        position: relative;
-        display: inline-block;
-        width: auto;
-        top: auto;
-      }
-
-      strong {
-        display: inline;
-      }
-    }
-
-    strong {
-      padding: 0;
-    }
-
-    .alert-messages {
-      text-align: center;
-      display: block;
-      padding: 18px 40px 16px;
-      max-height: 320px;
-      overflow: auto;
-    }
-    //Alert buttons
-    .row-fluid {
-      border-top: 1px solid @warningBorder;
-
-      .alert-btn-cancel {
-        border-right: 1px solid @warningBorder;
-      }
-
-      .alert-btn-confirm {
-        font-weight: bold;
-      }
-
-      .alert-btn-cancel,
-      .alert-btn-confirm {
-        text-align: center;
-        display: inline-block !important;
-        padding: 10px 15px;
-        color: inherit;
-        margin: 0;
-        width: 50%;
-
-        &:hover {
-          background-color: @warningBackground;
-          text-decoration: none;
-          color: @black;
-        }
-      }
+    .text {
+      .pr-4();
     }
   }
 }
@@ -288,6 +204,7 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   height: 48px;
   line-height: 46px;
   padding: 0 40px;
+  color: @textColorLight;
   border-color: @loadingBorder;
   background-color: @loadingBackground;
 }
@@ -304,13 +221,6 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   font-size: 0;
   line-height: 0;
   vertical-align: middle;
-
-  .fa {
-    font-size: 11px;
-    margin-left: 1px;
-    width: auto;
-    height: auto;
-  }
 }
 
 /* NEW SKIN START */

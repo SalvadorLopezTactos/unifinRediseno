@@ -26,7 +26,7 @@ $out = <<<EOQ
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <title>{$mod_strings['LBL_WIZARD_TITLE']} {$mod_strings['LBL_TITLE_ARE_YOU_READY']}</title>
-<link REL="SHORTCUT ICON" HREF="include/images/sugar_icon.ico">
+<link REL="SHORTCUT ICON" type="image/png" HREF="include/images/sugar-favicon.png">
 <link rel="stylesheet" href="install/install.css" type="text/css">
 </head>
 
@@ -41,7 +41,7 @@ $out = <<<EOQ
 				</p>
 				</th>
 				<th width="200" height="30" style="text-align: right;"><a href="http://www.sugarcrm.com" target=
-				"_blank"><IMG src="include/images/sugarcrm_login.png" alt="SugarCRM" border="0"></a>
+				"_blank"><img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a>
 				</th>
 			</tr>
 			<tr>
@@ -109,7 +109,7 @@ $out = <<<EOQ
 						    <td>
 								<input class="acceptButton" type="button" name="goto" value="{$mod_strings['LBL_BACK']}" id="button_back_ready" onclick="document.getElementById('form').submit();" />
 							</td>
-                            <td>	
+                            <td>
                                 <input class="button" type="submit" name="goto" value="{$mod_strings['LBL_NEXT']}" id="button_next2" />
 					        </td>
 				        </tr>

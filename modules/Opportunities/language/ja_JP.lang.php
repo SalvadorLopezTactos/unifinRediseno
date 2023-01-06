@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'ワークシート',
     'LBL_PURCHASED_LINE_ITEMS' => '購入商品',
 
+    'LBL_FORECASTED_LIKELY' => '予想される可能性が高い',
     'LBL_RENEWAL' => '更新',
     'LBL_RENEWAL_OPPORTUNITIES' => '商談の更新',
     'LBL_RENEWAL_PARENT' => '親商談',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '商談品目総数',
     'LBL_CLOSED_RLIS' => 'クローズされた商談品目総数',
+    'LBL_CLOSED_WON_RLIS' => '商談成立の商談品目総数',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# 個のオープンサービスのフレックス期間の収益商品',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'クローズされた商談品目を含む商談を削除することはできません',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => '選択されたレコードがクローズされた商談品目を含んでいるため削除できません。',
     'LBL_INCLUDED_RLIS' => '含まれている商品数',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => '未処理を更新',
+    'LBL_CASCADE_RLI_EDIT' => '開いている収益項目の更新',
+    'LBL_CASCADE_RLI_CREATE' => '商談品目間での設定',
     'LBL_SERVICE_START_DATE_INVALID' => '開いている商談品目アドオンのサービス開始日をサービス終了日より前の日付に設定することはできません。',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '見積',
@@ -207,21 +211,21 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'この変更を開始した後、既存の{{module_name}} の商談品目のレコードが作成されます。商談品目が完了し使用可能の場合、通知がユーザプロファイルのEメールアドレスに送信されます。インスタンスは通知が送信されるために　管理＞Eメール設定　でEメールを送信するように設定する必要がありますのでご注意ください。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールを使用すると、最初から最後まで個々の売上を追跡できます。各 {{module_name}} レコードは、見込み販売を表し、関連する販売データと、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するものが含まれます。{{module_name}} は通常、「クローズドウォン」または「クローズドロスト」のいずれかとしてマークされるまで、いくつかの営業ステージを進みます。{{plural_module_name}} は、Sugar の {{forecasts_singular_module}} モジュールを使用して販売傾向を理解および予測し、営業ノルマを達成するための作業に集中することで、さらに活用できます。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールにより、個々の販売を最初から最後まで追跡することができます。各{{module_name}} レコードは販売見込みを表し、また関連する売上データや、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータを含みます。{{module_name}}は、通常、複数の販売ステージを経て、「商談成立」または「成約不成立」のいずれかになります。{{plural_module_name}}は、Sugar の{{forecasts_singular_module}}モジュールを使用して、さらに活用して販売傾向を理解・予測するだけでなく、販売ノルマを達成する作業に重点を置くことができます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}により、個別の商談とそれらの商談に関わる商品の品目を最初から最後まで追跡することが可能になります。各{{module_name}}レコードは見込み売上を表し、また関連販売データや、{{quotes_module}}、{{contacts_module}}などの他の重要なレコードに関連するデータを含むことができます。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} により、個別の商談とそれらの商談に関わる商品の品目を最初から最後まで追跡することが可能になります。各{{module_name}} レコードは販売見込みを表し、また関連する売上データや、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータを含みます。
 
 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。
-- 左下のペインを「データビュー」をトグルすることによって、サブパネル内の他のレコードへのリンクを表示または変更します。
-- 左下のペインを「アクティビティストリーム」をトグルすることによって、{{activitystream_singular_module}}でユーザのコメントやレコード変更履歴を作成および表示します。
+- 左下のペインを「データビュー」にトグルすることによって、サブパネル内のリンクや他のレコードへのリンクを表示または変更します。
+- 左下のペインを「アクティビティストリーム」をトグルすることによって、{{activitystream_singular_module}}にあるユーザのコメントやレコード変更履歴を作成および表示します。
 - レコード名の右にあるアイコンを使用して、このレコードをフォローするか、お気に入りにします。
 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの操作メニューで利用できます。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}}モジュールにより、個別の商談を最初から最後まで追跡することが可能になります。各{{module_name}}レコードは見込み売上を表し、また、関連販売データ、および{{quotes_module}}、{{contacts_module}}などの他の重要なレコードに関する商談データを含むことができます。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールにより、個別の商談を最初から最後まで追跡することが可能になります。各{{module_name}} レコードは販売見込みを表し、また関連する売上データや、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータを含みます。
 
-{{module_name}}を作成するには:
+{{module_name}} を作成するには:
 1. 必要に応じてフィールドに値を入力します。
  - 「必須」フィールドは保存前に入力完了してください。
  - 必要に応じて、追加のフィールドを展開する「さらに表示」をクリックします。
@@ -239,7 +243,10 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "チームの商談",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'この{{moduleSingular}}に未処理品目がないため、{{fieldName}}を変更できません。',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '機会の対話',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '商談のタイムライン',
+
+    'LBL_CASCADE_SERVICE_WARNING' => '商談品目はサービスではないため、これらの商談品目のいずれかには設定できません。作成を続行しますか？',
+    'LBL_CASCADE_DURATION_WARNING' => 'これらの商談品目の期間がロックされているため、これらの商談品目のいずれかに設定できません。作成を続行しますか？',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => '商談クローズ予測',

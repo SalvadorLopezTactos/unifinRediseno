@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Werkblad',
     'LBL_PURCHASED_LINE_ITEMS' => 'Aangeschafte regelitems',
 
+    'LBL_FORECASTED_LIKELY' => 'Voorspeld hoogstwaarschijnlijk',
     'LBL_RENEWAL' => 'Verlenging',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Opportunities verlenging',
     'LBL_RENEWAL_PARENT' => 'Bovenliggende opportunity',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# aantal opportunityregels',
     'LBL_CLOSED_RLIS' => '# aantal gesloten opportunityregels',
+    'LBL_CLOSED_WON_RLIS' => '# aantal gesloten gewonnen omzetregelitems',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Aantal open service flexibele duur opportunityregels',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'U kunt geen Opportunities verwijderen die afgesloten opportunityregels bevatten',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Één of meer van de geselecteerde gegevens bevat gesloten opportunityregels en kan daarom niet worden verwijderd.',
     'LBL_INCLUDED_RLIS' => '# inbegrepen onderdelen van de Omzetregel',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update geopend',
+    'LBL_CASCADE_RLI_EDIT' => 'Open opportunityregels bijgewerken',
+    'LBL_CASCADE_RLI_CREATE' => 'Instellen binnen Revenue Line Items',
     'LBL_SERVICE_START_DATE_INVALID' => 'De startdatum van de service kan niet na de einddatum van de service liggen voor eventuele geopende add-on omzetregelitems.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Offertes',
@@ -207,7 +211,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Nadat u deze wijziging heeft doorgevoerd zullen de records van het onderdeel Omzetregel op de achtergrond worden aangemaakt voor elke huidige {{module_name}}. Zodra de onderdelen van de Omzetregel voltooid en beschikbaar zijn zal een bericht naar het e-mailadres van uw gebruikersprofiel worden gestuurd. Houd er rekening mee dat uw exemplaar zo moet zijn geconfigureerd dat er een e-mail wordt gestuurd. Dit kunt u doen via Beheer > E-mailinstellingen om het bericht te verzenden.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Met de module {{plural_module_name}} kunt u een individuele verkoop van begin tot eind volgen. Elke record van de {{module_name}} vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens, evenals gegevens met betrekking tot andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt doorgaans meerdere verkoopfases tot deze als "Gesloten, gewonnen" of "Gesloten, verloren" wordt gemarkeerd. {{plural_module_name}} kan nog verder worden ingezet door de module {{forecasts_singular_module}} van Sugar te gebruiken om trends te begrijpen en te voorspellen en om werk zo in te richten dat verkoopquota&#39;s worden behaald.',
+    'LBL_HELP_RECORDS' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop volgen van begin tot eind. Elke record {{module_name}} vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens, evenals gegevens m.b.t. andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt regelmatig meerdere verkoopfases tot deze als "Gesloten, gewonnen" of "Gesloten, verloren" gemarkeerd wordt. {{plural_module_name}} kan verder worden ingezet door de module {{forecasts_singular_module}} van Sugar te gebruiken om verkooptrends te begrijpen en voorspellen en door werp zo in te richten dat verkoopquota&#39;s worden behaald.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop en regelitems die betrekking hebben op die verkoop van begin tot eind volgen. Elk {{module_name}} record vertegenwoordigt een mogelijke verkoop en bevat relevante verkoopgegevens, evenals gegevens met betrekking tot andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
@@ -239,7 +243,10 @@ Een {{module_name}} aanmaken:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mijn Team Opportunities",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Kan {{fieldName}} niet wijzigen gezien {{moduleSingular}} geen open regelitems bevat.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactie opportunity',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn opportunity',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' kan niet worden ingesteld in een van deze Revenue Line Items omdat dit geen diensten zijn. Wilt u het aanmaken vervolgen?',
+    'LBL_CASCADE_DURATION_WARNING' => ' kan niet worden ingesteld in een van deze Revenue Line Items omdat de duur is vergendeld. Wilt u het aanmaken vervolgen?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Voorspelling sluiting opportunity',

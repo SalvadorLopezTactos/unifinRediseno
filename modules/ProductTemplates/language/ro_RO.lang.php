@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Nume suport:',
   'LBL_SUPPORT_TERM' => 'Suport term:',
   'LBL_TAX_CLASS' => 'Clasa de taxe:',
+  'LBL_ACTIVE_STATUS' => 'Stare',
   'LBL_TYPE_NAME'=>'Tastati numele',
   'LBL_TYPE' => 'Tip',
   'LBL_PRODUCT_TYPE' => 'Tip produs',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Tablou de bord cu lista cataloagelor de produse',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Tablou de bord cu înregistrarea cataloagelor de produse',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare catalogul produselor',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Starea este activă',
 );

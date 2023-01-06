@@ -56,7 +56,7 @@ class SugarACLTeamBased extends SugarACLStrategy
         $action = $this->fixUpActionName($action);
         // Field level.
         if ($action == 'field') {
-            return $this->fieldACL($bean, $user, $context, $isOwner);
+            return $this->fieldACL($bean, $user, $context);
         }
 
         // Module level.
@@ -173,8 +173,10 @@ class SugarACLTeamBased extends SugarACLStrategy
      */
     protected function getModuleAccess($user, $module, $action, $aclType)
     {
-        $actions = ACLAction::getUserActions($user->id, false, $module, $aclType);
-        return !empty($actions[$action]['aclaccess']) ? $actions[$action]['aclaccess'] : null;
+        $acls = ACLAction::getUserActions($user->id);
+        return !empty($acls[$module][$aclType][$action]['aclaccess'])
+            ? $acls[$module][$aclType][$action]['aclaccess']
+            : null;
     }
 
     /**

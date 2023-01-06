@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Kullanıcılar',
     'LBL_EMAILS_PRODUCTS_REL' => 'Teklif Kalemleri',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Gelir Kalemleri',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Artışlar',
     'LBL_EMAILS_MESSAGES_REL' => 'Mesajlar',
     'LBL_EMAILS_PURCHASES_REL' => 'Satın Alımlar',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Satın Alınan Kalemler',
@@ -472,4 +473,5 @@ Daha önceden tanımlanmış bir şablonu "Şablon" tuşuna basarak uygulayabili
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-posta gönder',
     'LBL_MAILBOX' => 'Gelen Hesap',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'E-postalar göndermek için lütfen <a href="#OutboundEmail">E-posta Ayarları</a> vasıtasıyla bir giden e-posta hesabı yapılandırın.',
 );

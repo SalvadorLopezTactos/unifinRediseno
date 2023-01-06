@@ -155,7 +155,7 @@ class Scheduler extends SugarBean {
 	 */
 	public function checkPendingJobs($queue)
 	{
-		$allSchedulers = $this->get_full_list('', "schedulers.status='Active' AND NOT EXISTS(SELECT id FROM {$this->job_queue_table} WHERE scheduler_id=schedulers.id AND status!='".SchedulersJob::JOB_STATUS_DONE."')");
+        $allSchedulers = $this->get_full_list('', "schedulers.status='Active' AND NOT EXISTS(SELECT id FROM {$this->job_queue_table} WHERE scheduler_id=schedulers.id AND status!='" . SchedulersJob::JOB_STATUS_DONE . "')") ?: [];
 
 		$GLOBALS['log']->info('-----> Scheduler found [ '.count($allSchedulers).' ] ACTIVE jobs');
 
@@ -635,15 +635,15 @@ class Scheduler extends SugarBean {
 		global $app_list_strings; // using from month _dom list
 
 		$suffArr = array('','st','nd','rd');
-		for($i=1; $i<32; $i++) {
-			if($i > 3 && $i < 21) {
-				$this->suffixArray[$i] = $i."th";
-			} elseif (substr($i,-1,1) < 4 && substr($i,-1,1) > 0) {
-				$this->suffixArray[$i] = $i.$suffArr[substr($i,-1,1)];
-			} else {
-				$this->suffixArray[$i] = $i."th";
-			}
-			$this->datesArray[$i] = $i;
+        for ($i=1; $i<32; $i++) {
+            if ($i > 3 && $i < 21) {
+                $this->suffixArray[$i] = $i . "th";
+            } elseif (substr(strval($i), -1, 1) < 4 && substr(strval($i), -1, 1) > 0) {
+                $this->suffixArray[$i] = $i . $suffArr[substr(strval($i), -1, 1)];
+            } else {
+                $this->suffixArray[$i] = $i . "th";
+            }
+            $this->datesArray[$i] = $i;
 		}
 
 		$this->dayInt = array('*',1,2,3,4,5,6,0);
@@ -819,7 +819,7 @@ class Scheduler extends SugarBean {
         $scheduler->job = 'function::trimTracker';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
         $scheduler->date_time_end = null;
-        $scheduler->job_interval = '0::2::1::*::*';
+        $scheduler->job_interval = '0::2::*::*::*';
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
         $scheduler->modified_user_id = '1';
@@ -1031,7 +1031,7 @@ class Scheduler extends SugarBean {
         $scheduler->job = 'class::SugarJobActivityStreamPurger';
         $scheduler->date_time_start = create_date(2019, 4, 1) . ' ' . create_time(0, 0, 1);
         $scheduler->date_time_end = null;
-        $scheduler->job_interval = '0::*/1::*::*::*';
+        $scheduler->job_interval = '0::4::*::*::0';
         $scheduler->status = 'Inactive';
         $scheduler->created_by = '1';
         $scheduler->modified_user_id = '1';
@@ -1075,6 +1075,20 @@ class Scheduler extends SugarBean {
         $scheduler->status = 'Active';
         $scheduler->created_by = '1';
         $scheduler->modified_user_id = '1';
+        $scheduler->catch_up = '1';
+        $schedulers[$scheduler->job] = $scheduler;
+
+        // Sugar License Installer
+        $scheduler = BeanFactory::newBean('Schedulers');
+        $scheduler->name = $mod_strings['LBL_OOTB_LICENSE_INSTALLER'];
+        $scheduler->job = 'class::SugarJobLicenseInstaller';
+        $scheduler->date_time_start = create_date(2022, 2, 22) . ' ' . create_time(0, 0, 1);
+        $scheduler->date_time_end = null;
+        $scheduler->job_interval = '*/5::*::*::*::*';
+        $scheduler->status = 'Active';
+        $scheduler->created_by = '1';
+        $scheduler->modified_user_id = '1';
+        $scheduler->system_job = '1';
         $scheduler->catch_up = '1';
         $schedulers[$scheduler->job] = $scheduler;
 

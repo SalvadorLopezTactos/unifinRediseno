@@ -136,8 +136,13 @@ class SugarFieldParent extends SugarFieldRelate {
         return false;
     }
 
-    function createQuickSearchCode($formName = 'EditView', $vardef){
-
+    /**
+     * @param string $formName default 'EditView'
+     * @param $vardef
+     * @return string
+     */
+    public function createQuickSearchCode(string $formName, array $vardef): string
+    {
         $json = getJSONobj();
 
         $dynamicParentTypePlaceHolder = "**@**"; //Placeholder for dynamic parent so smarty tags are not escaped in json encoding.
@@ -150,11 +155,11 @@ class SugarFieldParent extends SugarFieldRelate {
         $qsFieldName = $formName . "_" . $vardef['name'];
 
         //Build the javascript
-        $quicksearch_js = '<script language="javascript">';
+        $quicksearch_js = '<script language="javascript">{literal}';
         $quicksearch_js.= "if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}";
         $quicksearch_js .= "sqs_objects['$qsFieldName']=" . str_replace($dynamicParentTypePlaceHolder, $dynamicParentType,$json->encode($sqsFieldArray)) .';';
 
-        return $quicksearch_js .= '</script>';
+        return $quicksearch_js .= '{/literal}</script>';
     }
 
     /**

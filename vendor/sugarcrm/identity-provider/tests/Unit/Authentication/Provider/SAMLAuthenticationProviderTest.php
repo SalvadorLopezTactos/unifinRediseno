@@ -82,7 +82,7 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
         $this->response = $this->createMock(Response::class);
         $this->userMapping = $this->getMockBuilder(SAMLUserMapping::class)
             ->disableOriginalConstructor()
-            ->setMethods(['map'])
+            ->setMethods(['map', 'mapIdentity'])
             ->getMock();
         $this->userMapping->method('map')->willReturn([]);
     }
@@ -382,7 +382,18 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $user = $this->getMockBuilder(User::class)->disableOriginalConstructor()->getMock();
 
-        $this->samlUserProvider->expects($this->once())->method('loadUserByUsername')->willReturn($user);
+        $this->userMapping->expects($this->once())
+            ->method('mapIdentity')
+            ->willReturn(
+                [
+                    'value' => 'identityValue',
+                    'field' => 'identityField',
+                ]
+            );
+        $this->samlUserProvider->expects($this->once())
+            ->method('loadUserByUsername')
+            ->with('identityValue')
+            ->willReturn($user);
 
         $result = $samlProvider->authenticate($token);
 

@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Опис',
     'LBL_OW_TYPE'=>'Тип',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Прогноз команди для <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Прямий звіт',
     'LBL_FDR_OPPORTUNITIES'=>'Продажі в прогнозі:',
     'LBL_FDR_WEIGH'=>'Середнє значення в Продажах:',
     'LBL_FDR_COMMIT'=>'Підтверджене значення',
     'LBL_FDR_DATE_COMMIT'=>'Підтвердити дату',
+    'LBL_FDR_FORECAST_HEADER' => 'Прогноз продавця для <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Прогнози:Таблиця',
     'LBL_DV_MY_FORECASTS' => 'Мої прогнози',
-    'LBL_DV_MY_TEAM' => "Прогнози моєї команди" ,
+    'LBL_DV_MY_TEAM' => "Прогнози моєї команди",
     'LBL_DV_TIMEPERIODS' => 'Проміжки часу:',
     'LBL_DV_FORECAST_PERIOD' => 'Проміжок часу прогнозу',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Угоди прогнозу',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Базова процентна ставка',
 
     'LBL_QUOTA' => 'Квота',
-    'LBL_QUOTA_ADJUSTED' => 'Встановлений обсяг продажів',
+    'LBL_QUOTA_ADJUSTED' => 'Скоригована квота',
 
     'LBL_FORECAST_FOR'=>'Лист прогнозу для:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Зсув)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Квота vs. Підтрерджені vs. Дійсні',
 
     'LBL_FORECAST' => 'Прогноз',
+    'LBL_COMMITMENT' => 'Підтвердження',
+    'LBL_TEAM_COMMITMENT' => 'Підтвердження команди',
+    'LBL_FORECASTED' => 'Прогнозовано',
+    'LBL_ADJUSTED_TOTAL' => 'Усього скориговано',
     'LBL_COMMIT_STAGE' => 'Підтвердити стадію',
     'LBL_SALES_STAGE' => 'Стадія',
     'LBL_AMOUNT' => 'Сума',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, та {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'ймовірний {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'оптимістичний {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'песимістичний {{{direction}}} {{{from}}} до {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Ймовірно залишиться колишнім',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Залишиться колишнім при оптимістичних прогнозах',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Залишиться колишнім при песимістичних прогнозах',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Підтверджено (імовірний сценарій) {{{direction}}} {{{from}}}–{{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Підтверджено (оптимістичний сценарій) {{{direction}}} {{{from}}}–{{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Підтверджено (песимістичний сценарій) {{{direction}}} {{{from}}}–{{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Підтверджений (імовірний сценарій) не змінився',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Підтверджений (оптимістичний сценарій) не змінився',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Підтверджений (песимістичний сценарій) не змінився',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'У цьому місяці на {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Відображена загальна сума',
     'LBL_TOTAL' => 'Всього',
     'LBL_OVERALL_TOTAL' => 'Всього',
-    'LBL_EDITABLE_INVALID' => 'Неприпустиме значення для {0}',
+    'LBL_EDITABLE_INVALID' => 'Неприпустиме значення для {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Значення має бути від {0} до {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Ви не зберегли зміни в таблиці.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Зауважте, що тільки збережені і застосовні дані можуть бути експортовані. Натисніть Ок, щоб продовжити екпортірованіе, або натисніть Відхилити, щоб повернутися до аркуша',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Включаючи',
     'LBL_CHART_NOT_INCLUDED' => 'Не включаючи',
     'LBL_CHART_ADJUSTED' => '(З урахуванням)',
-    'LBL_SAVE_DRAFT' => 'Зберегти чернетку',
+    'LBL_SAVE_DRAFT' => 'Зберегти',
     'LBL_CHANGES_BY' => 'Змінюється  {0}',
     'LBL_FORECAST_SETTINGS' => 'Налаштування',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Дата початку фінансового року',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgure the Time Period that will be used in the Forecasts module. <br><br>Please note that Time Period settings cannot be changed after initial setup.<br><br>Start by choosing the Start Date of your ﬁscal year. Then choose the type of Time Period for the Forecast. The date range for the Time Periods will be automatically calculated based on your selections. The Sub Time Period is the base for the Forecast worksheet. <br><br>The viewable future and past Time Periods will determine the number of visible sub-periods in the Forecasts module. The users are able to view and edit the Forecast numbers in the visible sub-periods.<br /><br /><br /><br />Налаштуйте часовий діапазон, який буде використовуватися в модулі Прогнозів.<br><br>Будь ласка, зверніть увагу, що параметри  не можуть бути змінені після початкового налаштування.<br><br> Почніть з вибору Дати початку Вашого фінансового року. Потім виберіть тип діапазону, в рамках якого хочете робити прогноз. Діапазон дат для тимчасового діапазону автоматично вирахується на підставі обраного вибору. Додатковий часовий діапазон використовується в якості основи для роботи з листом прогнозів. Можливість перегляду майбутнього і минулого тимчасового діапазону визначить кількість видимих ​​додаткових діапазонів в модулі Прогнозів. Користувачам буде доступний перегляд і редагування даних прогнозу в рамках відомого тимчасового діапазону',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Налаштуйте бажаний спосіб категоризації {{forecastByModule}}. <br><br>Візьміть до уваги, що налаштування параметра «Діапазон» неможливо змінити в разі першого їх підтвердження. В оновлених системах параметр «Діапазон» заблокований у наявних даних у пункті «Прогноз».<br><br>Ви можете вибрати дві або більше категорій на основі діапазонів ймовірностей або створити категорії, які не ґрунтуються на ймовірності.<br><br>Ліворуч від ваших користувацьких категорій є поля з прапорцями; використовуючи їх, виберіть діапазони, які буде включено в підтверджену прогнозовану кількість та про які буде повідомлено керівникам.<br><br>Користувач може змінити статус включення/виключення та категорію {{forecastByModule}} вручну у своїх таблицях.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Налаштуйте бажаний спосіб категоризації {{forecastByModule}}. <br><br>Візьміть до уваги, що налаштування параметра "Діапазон" неможливо змінити після їх підтвердження. В оновлених екземплярах параметр "Діапазон" заблоковано в наявних даних у розділі "Прогноз".<br><br>Ви можете вибрати дві або більше категорій на основі діапазонів імовірностей або створити категорії, які не ґрунтуються на ймовірності.<br><br>Ліворуч від ваших користувацьких категорій є поля з прапорцями. Використовуючи їх, виберіть діапазони, які буде включено в підтверджену прогнозовану кількість і про які буде повідомлено керівникам.<br><br>Користувач може змінити статус включення/виключення та категорію {{forecastByModule}} вручну у своїх таблицях.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Виберіть колонки, які будуть потрібні користувачеві для заповнення при складанні прогнозів {{forecastByModuleSingular}}. Зауважте, ймовірна сума прив&#39;язана до суми, показаної в {{forecastByModule}}; з цієї причини колонка зі значенням ймовірної суми не може бути прихована.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Виберіть колонки для перегляду в модулі прогнозів. Перелік полів буде містити лист прогнозів і дозволить користувачеві вибрати те, яким чином налаштувати його вид / перегляд.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Вказівник місця заповнення в модулі Прогнозів для тексту пошуку довідки',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Перевищення',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Немає даних',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Досягти обсягів продажів',
+    'LBL_OPEN_LIKELY' => 'Відкрити ймовірний сценарій',
+    'LBL_OPEN_BEST' => 'Відкрити оптимістичний сценарій',
+    'LBL_OPEN_WORST' => 'Відкрити песимістичний сценарій',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Встановити обсяг продажів',
     'LBL_ASSIGNING_QUOTA' => 'Встановлення квоти',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Прогноз моєї команди",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'У Вас є не збережені зміни. Ви точно хочете зробити сортування робочого листа і скасувати внесені зміни?',
+
+    'LBL_SAVE_TOOLTIP' => 'Збережіть зміни, внесені в рядки таблиці',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Зберегти зміни записів і надіслати прогноз менеджеру',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Надіслати прогноз менеджеру та призначити квоту',
+
+    'LBL_SAVE_LABEL_REP' => 'Зберегти ',
+    'LBL_SAVE_LABEL_MGR' => 'Зберегти скориговані значення',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} включає {{opportunities_singular_module}} записів для побудови {{module_name}} {{worksheet_module}} і прогнозування продажу. Користувачі можуть працювати в напрямку досягнення квот продаж на індивідуальному, командному та організаційному рівнях продажів. Для отримання доступу до модуля користувачам {{plural_module_name}} для початку будівництва {{module_name}} {{worksheet_module}} , користувач з правами адміністратора повинен налаштувати {plural_module_name }} модуль із заданими періодами часу організації, діапазонами, і сценаріями. Торгові представники використовуючи модуль {{plural_module_name}} можуть працювати з присвоєними їм {{opportunities_module}} як з прогресами поточного періоду. Ці користувачі будуть прогнозувати свої особисті продажі, засновані на {{opportunities_module}} які вони очікують  закрити. Менеджери з продажу працюють зі своїми власними {{opportunities_singular_module}} записами так  як і  інші торгові представники. Крім того, вони складають  звіти по проведеним угодах  {{module_name}} щоб прогнозувати продажі їх команди і працювати в напрямку виконання квоти команди для кожного періоду часу. Додаткові функції пропонуються різними елементами розширеної панелі, включаючи індивідуальний  аналіз {{opportunities_module}} та аналізу  для команди.'

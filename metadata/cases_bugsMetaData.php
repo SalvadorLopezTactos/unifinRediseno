@@ -46,13 +46,6 @@ $dictionary['cases_bugs'] = array(
             ),
         ),
         array(
-            'name' => 'idx_cas_bug_cas',
-            'type' => 'index',
-            'fields' => array(
-                'case_id',
-            ),
-        ),
-        array(
             'name' => 'idx_cas_bug_bug',
             'type' => 'index',
             'fields' => array(

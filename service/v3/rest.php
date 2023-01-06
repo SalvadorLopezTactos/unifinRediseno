@@ -10,17 +10,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-/**
- * This is a rest entry point for rest version 3.1
- */
-chdir('../..');
+chdir(dirname(__FILE__).'/../../');
 require 'include/entryPoint.php';
-require_once 'service/v3/SugarWebServiceImplv3.php';
-$webservice_class = 'SugarRestService';
-$webservice_path = 'service/core/SugarRestService.php';
-$webservice_impl_class = 'SugarWebServiceImplv3';
-$registry_class = 'registry';
-$location = '/service/v3/rest.php';
-$registry_path = 'service/v3/registry.php';
-require_once('service/core/webservice.php');
+require 'soap/SoapErrorDefinitions.php';
+require 'service/core/SugarSoapService.php';
+define('ENTRY_POINT_TYPE', 'api');
+
+$style = $_GET['style'] ?? null;
+$use = $_GET['use'] ?? null;
+$wsdl = isset($_GET['wsdl']) ? 'wsdl' : '';
+$method = $_REQUEST['method'] ?? "";
+
+Webservice::rest('3', $style, $use, $wsdl)->run($method);

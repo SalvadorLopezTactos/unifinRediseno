@@ -18,13 +18,13 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_NEW_TEAM',
         'acl_action' => 'create',
         'acl_module' => $moduleName,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route' => "#$moduleName",
         'label' => 'LNK_LIST_TEAM',
         'acl_action' => 'list',
         'acl_module' => $moduleName,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
 );

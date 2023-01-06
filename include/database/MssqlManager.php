@@ -847,7 +847,7 @@ WHERE TABLE_NAME = ?
                 ->executeQuery($query, array(
                     $tableName,
                     'BASE TABLE',
-                ))->fetchColumn();
+                ))->fetchOne();
 
             return !empty($result);
         }
@@ -962,7 +962,7 @@ WHERE TABLE_NAME = ?
                 }
                 return "ISNULL($string$additional_parameters_string)";
             case 'concat':
-                return "CONCAT(" . implode(",", $all_parameters) . ")";
+                return count($all_parameters) === 1 ? $all_parameters[0] : "CONCAT(" . implode(",", $all_parameters) . ")";
             case 'text2char':
                 return "CAST($string AS varchar(8000))";
             case 'quarter':
@@ -1070,7 +1070,9 @@ WHERE TABLE_NAME = ?
 
     public function renameColumnSQL($tablename, $column, $newname)
     {
-        return "SP_RENAME '$tablename.$column', '$newname', 'COLUMN'";
+        $from = $this->getValidDBName("$tablename.$column");
+        $to = $this->getValidDBName($newname);
+        return "SP_RENAME '$from', '$to', 'COLUMN'";
     }
 
     /**
@@ -1135,7 +1137,7 @@ WHERE TABLE_NAME = ?
                         unset($def['auto_increment']);
                     }
                     $columns[] = (count($columns) == 0 ? 'ADD ' : '')
-                        . $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, false);
+                        . $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, false, $action);
                     break;
 
                 case 'drop':
@@ -1390,7 +1392,7 @@ INNER JOIN sys.columns c
             ->executeQuery($query, $params);
 
         $data = array();
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             if (!$filterByTable) {
                 $table_name = $row['table_name'];
             }
@@ -1590,16 +1592,19 @@ EOQ;
         }
 
         //Bug 25814
-		if(isset($fieldDef['name'])){
-		    $colType = $this->getFieldType($fieldDef);
-        	if(stristr($this->getFieldType($fieldDef), 'decimal') && isset($fieldDef['len'])){
-				$fieldDef['len'] = min($fieldDef['len'],38);
-			}
-		    //bug: 39690 float(8) is interpreted as real and this generates a diff when doing repair
-			if(stristr($colType, 'float') && isset($fieldDef['len']) && $fieldDef['len'] == 8){
-				unset($fieldDef['len']);
-			}
-		}
+        if (isset($fieldDef['name'])) {
+            $colType = $this->getFieldType($fieldDef);
+            if (stristr($this->getFieldType($fieldDef), 'decimal') && isset($fieldDef['len'])) {
+                //PHP8 compares non-numeric strings with numbers as strings, so cast to int explicitly
+                if ((int)$fieldDef['len'] > 38) {
+                    $fieldDef['len'] = 38;
+                }
+            }
+            //bug: 39690 float(8) is interpreted as real and this generates a diff when doing repair
+            if (stristr($colType, 'float') && isset($fieldDef['len']) && (int)$fieldDef['len'] === 8) {
+                unset($fieldDef['len']);
+            }
+        }
 
 		// always return as array for post-processing
         $ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true, $action);
@@ -1608,11 +1613,21 @@ EOQ;
 		if ( stristr($ref['colType'],'float') )
 			$ref['colType'] = preg_replace('/(,\d+)/','',$ref['colType']);
 
-        if ( $return_as_array )
+        // If a field has a default value defined, it is expected when the column is added to the table that
+        // the default value will be populated for existing rows. MSSQL only does that automatically if the
+        // column requires a value, i.e. the column is defined as NOT NULL. Rather than forcing that constraint,
+        // we can add a "WITH VALUES" flag to allow the default value to be set without affecting the column's
+        // requiredness
+        if ($action === 'add' && !empty($ref['default'])) {
+            $ref['default'] .= ' WITH VALUES';
+        }
+
+        if ($return_as_array) {
             return $ref;
-        else
+        } else {
             return "{$ref['name']} {$ref['colType']} {$ref['default']} {$ref['required']} {$ref['auto_increment']}";
-	}
+        }
+    }
 
     /**
      * Saves changes to module's audit table

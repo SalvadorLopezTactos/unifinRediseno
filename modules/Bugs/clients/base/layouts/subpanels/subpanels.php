@@ -81,5 +81,12 @@ $viewdefs['Bugs']['base']['layout']['subpanels'] = array (
                 'link' => 'emails',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_ESCALATIONS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'escalations',
+            ],
+        ],
     ),
 );

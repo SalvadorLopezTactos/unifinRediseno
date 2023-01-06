@@ -37,24 +37,14 @@
      * @private
      */
     _fetchTemplateAttachments: function(template) {
-        var def;
-        var notes = app.data.createBeanCollection('Notes');
+        var notes = app.data.createRelatedCollection(template, 'attachments');
         var request;
 
         if (this.disposed === true) {
             return;
         }
 
-        def = [{
-            //FIXME: email_type should be EmailTemplates
-            email_id: {
-                '$equals': template.get('id')
-            }
-        }];
         request = notes.fetch({
-            filter: {
-                filter: def
-            },
             success: _.bind(this._handleTemplateAttachmentsFetchSuccess, this),
             complete: _.bind(function(request) {
                 if (request && request.uid) {

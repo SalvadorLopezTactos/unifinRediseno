@@ -162,13 +162,16 @@
      * @private
      */
     _toggleVisibility: function(visible) {
+        var state = visible ? 'open' : 'close';
         this.$('.main-pane').toggleClass('span12', !visible).toggleClass('span8', visible);
 
         this.$('.side').toggleClass('side-collapsed', !visible);
 
         $(window).trigger('resize');
 
-        this.trigger('sidebar:state:changed', visible ? 'open' : 'close');
+        // let the rest of the app know if the sidebar changed state
+        app.events.trigger('sidebar:state:changed', state);
+        this.trigger('sidebar:state:changed', state);
     },
 
     /**

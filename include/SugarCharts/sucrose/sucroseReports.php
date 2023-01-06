@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * @deprecated Since 11.3.0 - use chart.js instead
+ */
 class sucroseReports extends sucrose
 {
 
@@ -23,6 +26,7 @@ class sucroseReports extends sucrose
 
     function __construct()
     {
+        $GLOBALS['log']->deprecated('Sucrose has been deprecated since 11.3.0 - use chart.js instead');
         parent::__construct();
     }
 

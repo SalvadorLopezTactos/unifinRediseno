@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'For example, you might use this to find an issue that has been previously submitted.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'If you have a new support Case you would like to submit, you can click here to submit a new Case.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Clicking here will return you to this view at any time.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Bylų sąveikos',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Atvejo laiko juosta',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Užrašai',
 

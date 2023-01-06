@@ -10,4 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<input data-check="one" type="checkbox" name="check" {{#if selected}}checked{{/if}}>
+<input data-check="one" type="checkbox" name="check" class="actionmenu-checkbox" {{#if selected}}checked{{/if}}
+    aria-label="{{str 'LBL_MASS_UPDATE_SINGLE_RECORD'}}"
+>

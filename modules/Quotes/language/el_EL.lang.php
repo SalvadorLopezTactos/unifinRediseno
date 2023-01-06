@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Ρύθμιση προσφορών',
 
     'LBL_RENEWAL' => 'Ανανέωση',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Αλληλεπιδράσεις Προσφοράς',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο Προσφοράς',
 );

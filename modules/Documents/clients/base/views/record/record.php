@@ -17,9 +17,84 @@
  ********************************************************************************/
 
 $viewdefs['Documents']['base']['view']['record'] = array(
+    'buttons' => [
+        [
+            'type' => 'button',
+            'name' => 'cancel_button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'css_class' => 'btn-invisible btn-link',
+            'showOn' => 'edit',
+            'events' => [
+                'click' => 'button:cancel_button:click',
+            ],
+        ],
+        [
+            'type' => 'rowaction',
+            'event' => 'button:save_button:click',
+            'name' => 'save_button',
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
+            'css_class' => 'btn btn-primary',
+            'showOn' => 'edit',
+            'acl_action' => 'edit',
+        ],
+        [
+            'type' => 'actiondropdown',
+            'name' => 'main_dropdown',
+            'primary' => true,
+            'showOn' => 'view',
+            'buttons' => [
+                [
+                    'type' => 'rowaction',
+                    'event' => 'button:edit_button:click',
+                    'name' => 'edit_button',
+                    'label' => 'LBL_EDIT_BUTTON_LABEL',
+                    'acl_action' => 'edit',
+                ],
+                [
+                    'type' => 'shareaction',
+                    'name' => 'share',
+                    'label' => 'LBL_RECORD_SHARE_BUTTON',
+                    'acl_action' => 'view',
+                ],
+                [
+                    'type' => 'divider',
+                ],
+                [
+                    'type' => 'rowaction',
+                    'event' => 'button:duplicate_button:click',
+                    'name' => 'duplicate_button',
+                    'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
+                    'acl_module' => 'EmailTemplates',
+                    'acl_action' => 'create',
+                ],
+                [
+                    'type' => 'rowaction',
+                    'event' => 'button:find_duplicates_button:click',
+                    'name' => 'find_duplicates_button',
+                    'label' => 'LBL_DUP_MERGE',
+                    'acl_action' => 'edit',
+                ],
+                [
+                    'type' => 'divider',
+                ],
+                [
+                    'name' => 'delete_button',
+                    'type' => 'rowaction',
+                    'event' => 'button:delete_button:click',
+                    'label' => 'LBL_DELETE_BUTTON',
+                    'acl_action' => 'delete',
+                ],
+            ],
+        ],
+        [
+            'name' => 'sidebar_toggle',
+            'type' => 'sidebartoggle',
+        ],
+    ],
     'panels' => array(
         array(
             'name' => 'panel_header',
+            'label' => 'LBL_PANEL_HEADER',
             'header' => true,
             'fields' => array(
                 array(
@@ -29,17 +104,11 @@ $viewdefs['Documents']['base']['view']['record'] = array(
                     'dismiss_label' => true,
                     'readonly'      => true,
                 ),
-                array (
-                    'name' => 'filename',
-                    'displayParams' =>
-                    array (
-                      'link' => 'filename',
-                      'id' => 'document_revision_id',
-                    ),
-                    'readonly' => true,
-                    'span' => 12,
-                    'label' => '',
-                ),
+                [
+                    'name' => 'document_name',
+                    'type' => 'name',
+                    'label' => 'LBL_NAME',
+                ],
                 array(
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
@@ -61,8 +130,13 @@ $viewdefs['Documents']['base']['view']['record'] = array(
             'columns' => 2,
             'placeholders' => true,
             'fields' => array(
-                'document_name',
-                'status',
+                'filename',
+                'doc_type',
+                array(
+                    'name' => 'tag',
+                    'span' => 12,
+                ),
+                'status_id',
                 'revision',
                 'template_type',
                 'is_template',
@@ -70,23 +144,43 @@ $viewdefs['Documents']['base']['view']['record'] = array(
                 'category_id',
                 'exp_date',
                 'subcategory_id',
-                'description',
+                array(
+                    'name' => 'description',
+                    'span' => 12,
+                ),
+                'assigned_user_name',
                 'related_doc_name',
                 'related_doc_rev_number',
-                'assigned_user_name',
                 'team_name',
             ),
         ),
-        array(
+        [
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
             'columns' => 2,
             'hide' => true,
             'placeholders' => true,
-            'fields' => array(
-                'last_rev_created_name',
-                'last_rev_create_date',
-            )
-        )
+            'fields' => [
+                [
+                    'name' => 'date_modified_by',
+                    'readonly' => true,
+                    'inline' => true,
+                    'type' => 'fieldset',
+                    'label' => 'LBL_LAST_REV_CREATE_DATE',
+                    'fields' => [
+                        [
+                            'name' => 'last_rev_create_date',
+                        ],
+                        [
+                            'type' => 'label',
+                            'default_value' => 'LBL_BY',
+                        ],
+                        [
+                            'name' => 'last_rev_created_name',
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ),
 );

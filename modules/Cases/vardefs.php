@@ -13,6 +13,7 @@
 $dictionary['Case'] = array(
     'table' => 'cases',
     'audited' => true,
+    'escalatable' => true,
     'activity_enabled' => true,
     'unified_search' => true,
     'full_text_search' => true,
@@ -226,6 +227,15 @@ $dictionary['Case'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
         ],
+        'escalations' => [
+            'name' => 'escalations',
+            'type' => 'link',
+            'relationship' => 'case_escalations',
+            'module' => 'Escalations',
+            'bean_name' => 'Escalation',
+            'source' => 'non-db',
+            'vname' => 'LBL_ESCALATIONS',
+        ],
         'tasks' => array(
             'name' => 'tasks',
             'type' => 'link',
@@ -258,7 +268,6 @@ $dictionary['Case'] = array(
         'archived_emails' => array(
             'name' => 'archived_emails',
             'type' => 'link',
-            'link_file' => 'modules/Cases/CaseEmailsLink.php',
             'link_class' => 'CaseEmailsLink',
             'link' => 'contacts',
             'module' => 'Emails',
@@ -343,8 +352,13 @@ $dictionary['Case'] = array(
             'module' => 'Contacts',
             'link' => 'case_contact',
             'table' => 'contacts',
-            'studio' => 'visible',
             'audited' => true,
+            'studio' => [
+                'portal' => [
+                    'portalrecordview' => true,
+                    'portallistview' => false,
+                ],
+            ],
         ],
         'primary_contact_id' => [
             'name' => 'primary_contact_id',
@@ -369,6 +383,38 @@ $dictionary['Case'] = array(
             'populate_list' => [
                 'account_id',
                 'account_name',
+            ],
+        ],
+        'attachments' => [
+            'name' => 'attachments',
+            'vname' => 'LBL_ATTACHMENTS',
+            'type' => 'link',
+            'relationship' => 'case_attachments',
+            'module' => 'Notes',
+            'bean_name' => 'Note',
+            'source' => 'non-db',
+        ],
+        'attachment_list' => [
+            'name' => 'attachment_list',
+            'links' => [
+                'attachments',
+            ],
+            'order_by' => 'name:asc',
+            'source' => 'non-db',
+            'studio' => [
+                'recordview' => true,
+                'previewview' => true,
+                'recorddashletview' => true,
+                'visible' => false,
+            ],
+            'type' => 'collection',
+            'vname' => 'LBL_ATTACHMENTS',
+            'reportable' => false,
+            'hideacl' => true,
+            'filter' => [
+                [
+                    'attachment_flag' => '1',
+                ],
             ],
         ],
     ),
@@ -409,6 +455,14 @@ $dictionary['Case'] = array(
                 'deleted',
             ),
         ),
+        array(
+            'name' => 'idx_cases_del_businesscenter',
+            'type' => 'index',
+            'fields' => array(
+                'deleted',
+                'business_center_id',
+            ),
+        ),
     ),
     'relationships' => array(
         'case_calls' => array(
@@ -441,8 +495,10 @@ $dictionary['Case'] = array(
             'rhs_table' => 'notes',
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
-            'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Cases',
+            'relationship_role_columns' => [
+                'parent_type' => 'Cases',
+                'attachment_flag' => 0,
+            ],
         ),
         'case_messages' => [
             'lhs_module' => 'Cases',
@@ -450,6 +506,17 @@ $dictionary['Case'] = array(
             'lhs_key' => 'id',
             'rhs_module' => 'Messages',
             'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Cases',
+        ],
+        'case_escalations' => [
+            'lhs_module' => 'Cases',
+            'lhs_table' => 'cases',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Escalations',
+            'rhs_table' => 'escalations',
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
@@ -513,6 +580,21 @@ $dictionary['Case'] = array(
             'rhs_key' => 'primary_contact_id',
             'relationship_type' => 'one-to-many',
         ],
+        'case_attachments' => [
+            'lhs_module' => 'Cases',
+            'lhs_table' => 'cases',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Notes',
+            'rhs_table' => 'notes',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_class' => 'AttachmentRelationship',
+            'relationship_file' => 'data/Relationships/AttachmentRelationship.php',
+            'relationship_role_columns' => [
+                'parent_type' => 'Cases',
+                'attachment_flag' => 1,
+            ],
+        ],
     ),
     'acls' => array(
         'SugarACLStatic' => true,
@@ -570,7 +652,9 @@ VardefManager::createVardef('Cases', 'Case', array(
     'assignable',
     'team_security',
     'issue',
+    'audit',
     'sla_fields',
+    'escalatable',
 ), 'case');
 
 //jc - adding for refactor for import to not use the required_fields array

@@ -882,6 +882,7 @@ UpdaterItem.prototype.setLabel = function (label) {
     if (typeof label !== 'string') {
         throw new Error("setLabel(): The parameter must be a string.");
     }
+    label = decodeHtmlEntities(label);
     this._label = label;
     if (this._dom.labelText) {
         this._dom.labelText.textContent = label;

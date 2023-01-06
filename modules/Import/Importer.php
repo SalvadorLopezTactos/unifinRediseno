@@ -93,7 +93,7 @@ class Importer
         set_error_handler(array('Importer','handleImportErrors'), E_ALL & ~E_STRICT & ~E_DEPRECATED);
 
          // Increase the max_execution_time since this step can take awhile
-        ini_set("max_execution_time", max($sugar_config['import_max_execution_time'],3600));
+        ini_set("max_execution_time", strval(max($sugar_config['import_max_execution_time'], 3600)));
 
         // stop the tracker
         TrackerManager::getInstance()->pause();
@@ -1131,7 +1131,7 @@ class Importer
     public static function handleImportErrors($errno, $errstr, $errfile, $errline)
     {
         // Error was suppressed with the @-operator.
-        if (error_reporting() === 0) {
+        if (!(error_reporting() & $errno)) {
             return false;
         }
 

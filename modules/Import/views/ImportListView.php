@@ -65,7 +65,7 @@ class ImportListView
         $this->tableID = $tableIdentifier;
 
         $this->dataSource = $dataSource;
-        $this->headerColumns = $this->dataSource->getHeaderColumns();
+        $this->headerColumns = $this->dataSource->getHeaderColumns() ?: [];
 
         if( !isset($params['offset']) )
             throw new Exception("Missing required parameter offset for ImportListView");

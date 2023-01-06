@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfiguration tilbud',
 
     'LBL_RENEWAL' => 'Fornyelse',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tilbuds-interaktioner',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sagens Tidslinje',
 );

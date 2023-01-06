@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,39 +18,38 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class MailSearchFolder extends MailFolder
 {
     /**
-    * Gets the isSupported
-    * Indicates whether a search folder is editable using REST APIs.
+    * Gets the filterQuery
+    * The OData query to filter the messages.
     *
-    * @return bool The isSupported
+    * @return string|null The filterQuery
     */
-    public function getIsSupported()
+    public function getFilterQuery()
     {
-        if (array_key_exists("isSupported", $this->_propDict)) {
-            return $this->_propDict["isSupported"];
+        if (array_key_exists("filterQuery", $this->_propDict)) {
+            return $this->_propDict["filterQuery"];
         } else {
             return null;
         }
     }
     
     /**
-    * Sets the isSupported
-    * Indicates whether a search folder is editable using REST APIs.
+    * Sets the filterQuery
+    * The OData query to filter the messages.
     *
-    * @param bool $val The isSupported
+    * @param string $val The filterQuery
     *
     * @return MailSearchFolder
     */
-    public function setIsSupported($val)
+    public function setFilterQuery($val)
     {
-        $this->_propDict["isSupported"] = boolval($val);
+        $this->_propDict["filterQuery"] = $val;
         return $this;
     }
     
@@ -59,7 +57,7 @@ class MailSearchFolder extends MailFolder
     * Gets the includeNestedFolders
     * Indicates how the mailbox folder hierarchy should be traversed in the search. true means that a deep search should be done to include child folders in the hierarchy of each folder explicitly specified in sourceFolderIds. false means a shallow search of only each of the folders explicitly specified in sourceFolderIds.
     *
-    * @return bool The includeNestedFolders
+    * @return bool|null The includeNestedFolders
     */
     public function getIncludeNestedFolders()
     {
@@ -85,10 +83,39 @@ class MailSearchFolder extends MailFolder
     }
     
     /**
+    * Gets the isSupported
+    * Indicates whether a search folder is editable using REST APIs.
+    *
+    * @return bool|null The isSupported
+    */
+    public function getIsSupported()
+    {
+        if (array_key_exists("isSupported", $this->_propDict)) {
+            return $this->_propDict["isSupported"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the isSupported
+    * Indicates whether a search folder is editable using REST APIs.
+    *
+    * @param bool $val The isSupported
+    *
+    * @return MailSearchFolder
+    */
+    public function setIsSupported($val)
+    {
+        $this->_propDict["isSupported"] = boolval($val);
+        return $this;
+    }
+    
+    /**
     * Gets the sourceFolderIds
     * The mailbox folders that should be mined.
     *
-    * @return string The sourceFolderIds
+    * @return string|null The sourceFolderIds
     */
     public function getSourceFolderIds()
     {
@@ -110,35 +137,6 @@ class MailSearchFolder extends MailFolder
     public function setSourceFolderIds($val)
     {
         $this->_propDict["sourceFolderIds"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the filterQuery
-    * The OData query to filter the messages.
-    *
-    * @return string The filterQuery
-    */
-    public function getFilterQuery()
-    {
-        if (array_key_exists("filterQuery", $this->_propDict)) {
-            return $this->_propDict["filterQuery"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the filterQuery
-    * The OData query to filter the messages.
-    *
-    * @param string $val The filterQuery
-    *
-    * @return MailSearchFolder
-    */
-    public function setFilterQuery($val)
-    {
-        $this->_propDict["filterQuery"] = $val;
         return $this;
     }
     

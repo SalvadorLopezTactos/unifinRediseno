@@ -45,7 +45,7 @@ class SugarUpgradeUpdateOutboundEmailAccountTeams extends UpgradeDBScript
 
         $query->select(array(['oe.id', 'oe_id'], ['oe.type','oe_type'], ['t.id', 'team_id'], ['ts.id', 'team_set_id']));
 
-        $rows = $query->execute('array', true);
+        $rows = $query->execute();
 
         foreach ($rows as $row) {
             // for system accounts, team should be Global

@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Alan İsmi zaten var',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Alan ismi yalnızca şu karakterleri içermelidir: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Herhangi bir modül dahil edilmedi, Kaydedilemez',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Açılır liste zaten var',
     'LBL_BTN_ADD' => 'Ekle',
     'LBL_BTN_EDIT' => 'Değiştir',
     'LBL_GENERATE_URL' => 'URL oluştur',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Sütun {0} ekleniyor:',
     'LBL_DONE' => 'Tamam',
     'LBL_EXE_NON_SIM_MODE' => 'Simülasyon-olmayan modda çalıştır',
+    'LBL_CALCULATION_VISIBLE' => 'Hesaplamalar için görünür yap',
 );
-
-
-?>

@@ -10,5 +10,6 @@
  */
 ({
     plugins: ['Prettify'],
-    extendsFrom: 'StyleguideDocsIndexView'
+    extendsFrom: 'StyleguideDocsIndexView',
+    className: 'container-fluid',
 })

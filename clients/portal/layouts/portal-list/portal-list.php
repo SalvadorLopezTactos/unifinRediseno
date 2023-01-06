@@ -33,9 +33,6 @@ $viewdefs['portal']['layout']['portal-list'] = [
                     [
                         'view' => 'filter-rows',
                     ],
-                    [
-                        'view' => 'filter-actions',
-                    ],
                 ],
             ],
         ],

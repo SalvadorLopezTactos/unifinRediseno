@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => '템플릿 보기',
     'LNK_LIST_KBCATEGORIES' => '카테고리 보기',
     'LBL_TEMPLATES' => '템플릿',
+    'LBL_TEMPLATE' => '템플릿',
     'LBL_TEMPATE_LOAD_MESSAGE' => '템플릿이 모든 내용을 덮어씁니다.' .
         ' 정말 이 템플릿을 사용하시겠습니까?',
     'LNK_IMPORT_KBCONTENTS' => '기사 가져오기',

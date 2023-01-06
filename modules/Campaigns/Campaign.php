@@ -72,23 +72,6 @@ class Campaign extends SugarBean {
     }
 
 
-	function list_view_parse_additional_sections(&$listTmpl) {
-		global $locale;
-
-		// take $assigned_user_id and get the Username value to assign
-		$assId = $this->getFieldValue('assigned_user_id');
-
-		$query = "SELECT first_name, last_name FROM users WHERE id = '".$assId."'";
-		$result = $this->db->query($query);
-		$user = $this->db->fetchByAssoc($result);
-
-		if(!empty($user)) {
-            $fullName = $locale->formatName($user);
-			$listTmpl->assign('ASSIGNED_USER_NAME', $fullName);
-		}
-	}
-
-
 	function get_summary_text()
 	{
 		return $this->name;
@@ -220,9 +203,11 @@ class Campaign extends SugarBean {
 			$type[0]='targeted';
 
 		$query_array['select'] ="SELECT campaign_log.* ";
-		$query_array['where'] = $query_array['where']. " AND activity_type='{$type[0]}' AND archived=0 AND target_id IS NOT NULL";
+        $query_array['where'] = $query_array['where'] . " AND activity_type=" . $this->db->quoted($type[0]) . " AND archived=0 AND target_id IS NOT NULL";
         //add filtering by marketing id, if it exists
-        if (!empty($mkt_id)) $query_array['where'] = $query_array['where']. " AND marketing_id ='$mkt_id' ";
+        if (!empty($mkt_id)) {
+            $query_array['where'] = $query_array['where'] . " AND marketing_id = " . $this->db->quoted($mkt_id);
+        }
 
         //B.F. #37943
         if( isset($query_array['group_by']))
@@ -267,7 +252,7 @@ class Campaign extends SugarBean {
 
         //add filtering by marketing id, if it exists, and if where key is not empty
         if (!empty($mkt_id) && !empty($query_array['where'])){
-             $query_array['where'] = $query_array['where']. " AND marketing_id ='$mkt_id' ";
+             $query_array['where'] = $query_array['where']. " AND marketing_id = " . $this->db->quoted($mkt_id);
         }
 
 		//get select query from email man
@@ -320,10 +305,15 @@ class Campaign extends SugarBean {
      */
     function getDeletedCampaignLogLeadsCount()
     {
-        $query = "SELECT COUNT(*) AS count FROM campaign_log WHERE campaign_id = '" . $this->getFieldValue('id') . "' AND target_id IS NULL AND activity_type = 'lead'";
-        $result = $this->db->fetchOne($query);
-
-        return (int)$result['count'];
+        $query = <<<'SQL'
+SELECT COUNT(*) AS count 
+FROM campaign_log 
+WHERE campaign_id = ? AND target_id IS NULL AND activity_type = 'lead'
+SQL;
+        $stmt = $this->db->getConnection()->executeQuery(
+            $query,
+            [$this->getFieldValue('id')]
+        );
+        return (int) $stmt->fetchOne();
     }
 }
-?>

@@ -11,12 +11,13 @@
  */
 *}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html {$langHeader}>
+<html {$langHeader} style="color-scheme: {$appearance|escape:'htmlall'};">
 <head>
 <link rel="SHORTCUT ICON" href="{$FAVICON_URL}">
 <meta http-equiv="Content-Type" content="text/html; charset={$APP.LBL_CHARSET}">
 <title>{$SYSTEM_NAME}</title>
 {$SUGAR_CSS}
+<link rel='stylesheet' href='{sugar_getjspath file="styleguide/assets/css/sugar-theme-variables.css"}'/>
 {if $AUTHENTICATED}
 <link rel='stylesheet' href='{sugar_getjspath file="vendor/ytree/TreeView/css/folders/tree.css"}'/>
 <link rel='stylesheet' href='{sugar_getjspath file="styleguide/assets/css/sucrose.css"}'/>
@@ -25,22 +26,29 @@
 
 {sugar_getscript file="include/javascript/mousetrap/mousetrap.min.js"}
 
-{literal}
 <script type="text/javascript">
 <!--
-SUGAR.themes.theme_name      = '{/literal}{$THEME}{literal}';
-SUGAR.themes.hide_image      = '{/literal}{sugar_getimagepath file="hide.gif"}{literal}';
-SUGAR.themes.show_image      = '{/literal}{sugar_getimagepath file="show.gif"}{literal}';
-SUGAR.themes.loading_image      = '{/literal}{sugar_getimagepath file="img_loading.gif"}{literal}';
+SUGAR.themes.theme_name      = '{$THEME}';
+SUGAR.themes.hide_image      = '{sugar_getimagepath file="hide.gif"}';
+SUGAR.themes.show_image      = '{sugar_getimagepath file="show.gif"}';
+SUGAR.themes.loading_image      = '{sugar_getimagepath file="img_loading.gif"}';
 if ( YAHOO.env.ua )
     UA = YAHOO.env.ua;
 -->
 
 
 </script>
-
-
     <script type="text/javascript">
+        function showBwcIframe() {
+            // Remove the element hiding the BWC iframe upon iframe content load
+            let helperDiv = window.parent.document.getElementById('hide-bwc-iframe-loading');
+            if (helperDiv) {
+                helperDiv.parentNode.removeChild(helperDiv);
+            }
+        }
+
+        window.onload = showBwcIframe();
+
         if (window.parent && typeof(window.parent.SUGAR) !== 'undefined' && typeof(window.parent.SUGAR.App) !== 'undefined') {
             // update bwc context
             var app = window.parent.SUGAR.App;
@@ -55,6 +63,10 @@ if ( YAHOO.env.ua )
                 });
             }
         }
+
+        // Manually fire this in case an onload event is not present (in the case of Reports)
+        if (document.readyState === 'complete') {
+            showBwcIframe();
+        }
     </script>
-{/literal}
 </head>

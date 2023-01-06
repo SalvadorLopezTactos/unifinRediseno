@@ -42,7 +42,7 @@ final class PreChecker
      * Check if a field is able to be dernomalized
      *
      * @return array with empty 'validation_error' key if success, otherwise the key will contain a message
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public function validateDenormalization(Entity $entity): array
     {

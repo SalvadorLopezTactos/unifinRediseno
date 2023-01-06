@@ -12,18 +12,18 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\OAuth2\Client\Provider;
 
+use GuzzleHttp\ClientInterface;
 use League\OAuth2\Client\Provider\GenericProvider as BasicGenericProvider;
 use League\OAuth2\Client\Token\AccessToken;
-use GuzzleHttp;
-use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
-use Sugarcrm\Sugarcrm\League\OAuth2\Client\Grant\JwtBearer;
+
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use Sugarcrm\Sugarcrm\League\OAuth2\Client\Grant\JwtBearer;
+use Sugarcrm\IdentityProvider\Utils\RetryHttpClientBuilder;
+
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Psr\SimpleCache\CacheInterface;
 
 class IdmProvider extends BasicGenericProvider
 {
@@ -239,6 +239,12 @@ class IdmProvider extends BasicGenericProvider
      */
     public function remoteIdpAuthenticate($username, $password, $tenant)
     {
+        $cacheKey = 'remote_idp_auth_'
+            . hash('sha512', $username . $password . $tenant);
+        $parsedResponse = $this->getCache($cacheKey);
+        if (!empty($parsedResponse)) {
+            return $parsedResponse;
+        }
         $accessToken = $this->getAccessToken(
             'client_credentials',
             ['scope' => 'https://apis.sugarcrm.com/auth/iam.password']
@@ -256,7 +262,9 @@ class IdmProvider extends BasicGenericProvider
             $this->idpUrl . '/authenticate',
             $options
         );
-        return $this->getParsedResponse($request);
+        $parsedResponse = $this->getParsedResponse($request);
+        $this->setCache($cacheKey, $parsedResponse, 'remoteIdpResponseParsed');
+        return $parsedResponse;
     }
 
 
@@ -310,93 +318,20 @@ class IdmProvider extends BasicGenericProvider
     }
 
     /**
-     * Specifies conditions of how should retry of sending the request should be performed.
-     *
-     * @param int $maxRetries Maximum number of retries to get the response.
-     * @return \Closure
-     */
-    public function retryDecider($maxRetries)
-    {
-        return function (
-            $retries,
-            Request $request,
-            Response $response = null,
-            RequestException $exception = null
-        ) use ($maxRetries) {
-            if ($retries >= $maxRetries) {
-                return false;
-            }
-
-            if ($response && $response->getStatusCode() >= 500) {
-                return true;
-            }
-
-            return false;
-        };
-    }
-
-    /**
-     * Get retry delay strategy based on config value.
-     *
-     * @param array $config IDM-mode http_client config.
-     * @return \Closure
-     */
-    public function getDelayStrategy($config)
-    {
-        $value = (isset($config['http_client']['delay_strategy'])) ?
-            $config['http_client']['delay_strategy'] : 'linear';
-
-        switch ($value) {
-            case 'exponential':
-                return $this->retryDelayExponential();
-
-            case 'linear':
-            default:
-                return $this->retryDelayLinear();
-        }
-    }
-
-    /**
-     * Increases delay time between http request retries by 1 second.
-     *
-     * @return \Closure that returns milliseconds of delay.
-     */
-    public function retryDelayLinear()
-    {
-        return function ($retries) {
-            return 1000 * $retries;
-        };
-    }
-
-    /**
-     * Increases delay time between http request retries by 2^n-1 where n is the retry attempt counter.
-     *
-     * @return \Closure that returns milliseconds of delay.
-     */
-    public function retryDelayExponential()
-    {
-        return function ($retries) {
-            return (int) pow(2, $retries - 1) * 1000;
-        };
-    }
-
-    /**
      * Creates HttpClient with retry policy.
      *
      * @param array $config
-     * @return HttpClient
+     * @return ClientInterface
      */
-    protected function createHttpClient(array $config)
+    protected function createHttpClient(array $config): ClientInterface
     {
-        $retryCount = (isset($config['http_client']['retry_count'])) ? (int) $config['http_client']['retry_count'] : 0;
+        if (isset($config['http_client']['retry_count'])) {
+            $options['retry_count'] = (int) $config['http_client']['retry_count'];
+        }
+        $options['delay_strategy'] = isset($config['http_client']['delay_strategy'])
+            ? $config['http_client']['delay_strategy']
+            : RetryHttpClientBuilder::DELAY_STRATEGY_LINEAR;
 
-        $handlerStack = HandlerStack::create(GuzzleHttp\choose_handler());
-        $handlerStack->push(
-            Middleware::retry($this->retryDecider($retryCount), $this->getDelayStrategy($config)),
-            'retryDecider'
-        );
-
-        $options['handler'] = $handlerStack;
         $proxyConfig = $this->getHTTPClientProxy();
         if (!empty($proxyConfig)) {
             $options['proxy'] = $proxyConfig;
@@ -406,7 +341,7 @@ class IdmProvider extends BasicGenericProvider
             $options['verify'] = $config['http_client']['verify'];
         }
 
-        return new HttpClient(
+        return RetryHttpClientBuilder::getClient(
             array_intersect_key($options, array_flip($this->getAllowedClientOptions($options)))
         );
     }
@@ -434,7 +369,7 @@ class IdmProvider extends BasicGenericProvider
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
-        if (!is_array($data) && !empty($response->getBody())) {
+        if (!is_array($data) && (string)$response->getBody() !== '') {
             throw new IdentityProviderException(
                 'Invalid STS response ' . var_export($data, true),
                 $response->getStatusCode(),
@@ -454,11 +389,11 @@ class IdmProvider extends BasicGenericProvider
     /**
      * Get SugarCache instance.
      *
-     * @return \SugarCacheAbstract
+     * @return CacheInterface
      */
-    protected function getSugarCache()
+    protected function getSugarCache() : CacheInterface
     {
-        return \SugarCache::instance();
+        return Container::getInstance()->get(CacheInterface::class);
     }
 
     /**

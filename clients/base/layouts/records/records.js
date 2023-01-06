@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 ({
-    plugins: ['ShortcutSession'],
+    plugins: ['ShortcutSession', 'MappableList', 'ConfigDrivenList'],
 
     shortcuts: [
         'Sidebar:Toggle',
@@ -33,29 +33,5 @@
         'Filter:Create',
         'Filter:Edit',
         'Filter:Show'
-    ],
-
-    /**
-     * @inheritdoc
-     */
-    initialize: function(options) {
-        this.initFocusDrawerComponent(options);
-        this._super('initialize', [options]);
-    },
-
-    /**
-     * Add the focus drawer component
-     *
-     * @param options
-     */
-    initFocusDrawerComponent: function(options) {
-        if (options && options.meta && options.meta.components) {
-            options.meta.components.push({
-                layout: {
-                    name: 'focus-drawer',
-                    type: 'focus-drawer'
-                }
-            });
-        }
-    }
+    ]
 })

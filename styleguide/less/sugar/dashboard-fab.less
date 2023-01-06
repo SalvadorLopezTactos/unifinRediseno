@@ -11,7 +11,7 @@
 }
 
 .dfab-base() {
-  z-index: 91;
+  z-index: 200;
 
   a {
     text-decoration: none !important;
@@ -40,7 +40,7 @@
 }
 
 .dfab-components(@width: 40px, @height: 40px) {
-  @shadow: 0 0 4px 0 rgba(0, 0, 0, 0.75);
+  @shadow: 0 0 4px 0 @gray80;
 
   .dfab-label {
     z-index: 1;
@@ -60,6 +60,9 @@
   }
 
   .dfab-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: @width;
     height: @height;
     cursor: pointer;
@@ -68,12 +71,11 @@
     background-size: 16px 16px;
     background-position: center;
     background-repeat: no-repeat;
+    color: @white;
 
     &:only-child {
       box-shadow: @shadow;
     }
-
-    .dfab-predefined-icons();
   }
 
   .dfab-title,
@@ -175,54 +177,6 @@
         max-width: 0;
       }
     }
-  }
-}
-
-.dfab-predefined-icons() {
-  &.add-dashlet-icon {
-    background-image: url('@{baseUrl}/img/dashboards/add-dashlet-icon.svg');
-  }
-
-  &.close-icon {
-    background-image: url('@{baseUrl}/img/dashboards/close-icon.svg');
-  }
-
-  &.collapse-dashlets {
-    background-size: 22px 22px;
-    background-image: url('@{baseUrl}/img/dashboards/collapse-dashlets.svg');
-  }
-
-  &.delete-dashboard {
-    background-image: url('@{baseUrl}/img/dashboards/delete-dashboard.svg');
-  }
-
-  &.duplicate-dashboard-icon {
-    background-image: url('@{baseUrl}/img/dashboards/duplicate-dashboard-icon.svg');
-  }
-
-  &.edit-icon {
-    background-image: url('@{baseUrl}/img/dashboards/edit-icon.svg');
-  }
-
-  &.expand-dashlets {
-    background-size: 22px 22px;
-    background-image: url('@{baseUrl}/img/dashboards/expand-dashlets.svg');
-  }
-
-  &.fab-icon {
-    background-image: url('@{baseUrl}/img/dashboards/fab-icon.svg');
-  }
-
-  &.new-dashboard-icon {
-    background-image: url('@{baseUrl}/img/dashboards/new-dashboard-icon.svg');
-  }
-
-  &.pin-to-top-bottom {
-    background-image: url('@{baseUrl}/img/dashboards/pin-to-top-bottom.svg');
-  }
-
-  &.restore-icon {
-    background-image: url('@{baseUrl}/img/dashboards/restore-icon.svg');
   }
 }
 

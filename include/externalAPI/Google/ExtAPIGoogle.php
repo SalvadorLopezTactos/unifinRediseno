@@ -10,6 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\Driver\Exception;
+use Google\Client;
+use Google\Exception as Google_Exception;
+use Google\Service\Drive;
+use Google\Service\Drive\DriveFile;
+use GuzzleHttp\Psr7\Request;
+
 require_once 'vendor/Zend/Gdata/Contacts.php';
 
 /**
@@ -26,8 +33,11 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
 
     protected $scopes = array(
         'https://www.googleapis.com/auth/contacts.readonly',
-        Google_Service_Drive::DRIVE_READONLY,
-        Google_Service_Drive::DRIVE_FILE,
+        Drive::DRIVE_READONLY,
+        Drive::DRIVE_FILE,
+        Drive::DRIVE,
+        Drive::DRIVE_APPDATA,
+        Drive::DRIVE_METADATA,
     );
 
     public $docSearch = true;
@@ -50,15 +60,13 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
         return $client;
     }
 
-    protected function refreshToken(Google_Client $client)
+    protected function refreshToken(Client $client)
     {
-        /** @var Google_Auth_OAuth2 $auth */
-        $auth = $client->getAuth();
-        $refreshToken = $auth->getRefreshToken();
+        $refreshToken = $client->getRefreshToken();
         if ($refreshToken) {
             try {
                 $client->refreshToken($refreshToken);
-            } catch (Google_Auth_Exception $e) {
+            } catch (\Exception $e) {
                 $GLOBALS['log']->error($e->getMessage());
 
                 return;
@@ -80,7 +88,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
             $bean->validated = true;
         }
 
-        $bean->api_data = $accessToken;
+        $bean->api_data = json_encode($accessToken);
         $bean->save();
     }
 
@@ -90,7 +98,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
 
         try {
             $client->revokeToken();
-        } catch (Google_Auth_Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
 
@@ -106,7 +114,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
     {
         $config = $this->getGoogleOauth2Config();
 
-        $client = new Google_Client();
+        $client = new Client();
         $client->setClientId($config['properties']['oauth2_client_id']);
         $client->setClientSecret($config['properties']['oauth2_client_secret']);
         $client->setRedirectUri($config['redirect_uri']);
@@ -131,8 +139,8 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
     {
         $client = $this->getClient();
         try {
-            $client->authenticate($code);
-        } catch (Google_Auth_Exception $e) {
+            $client->fetchAccessTokenWithAuthCode($code);
+        } catch (\Exception $e) {
             $GLOBALS['log']->error($e->getMessage());
 
             return false;
@@ -143,23 +151,24 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
             $this->saveToken($token);
         }
 
-        return $token;
+        return $token === null ? null : json_encode($token);
     }
 
     public function uploadDoc($bean, $fileToUpload, $docName, $mimeType)
     {
         $client = $this->getClient();
-        $service = new Google_Service_Drive($client);
+        $service = new Drive($client);
 
-        $file = new Google_Service_Drive_DriveFile($client);
-        $file->setTitle($docName);
+        $file = new DriveFile();
+        $file->setName($docName);
         $file->setDescription($bean->description);
 
         try {
-            $createdFile = $service->files->insert($file, array(
+            $createdFile = $service->files->create($file, [
                 'data' => file_get_contents($fileToUpload),
-                'uploadType' => 'multipart'
-            ));
+                'uploadType' => 'multipart',
+                'fields' => 'id,webViewLink',
+            ]);
         } catch (Google_Exception $e) {
             return array(
                 'success' => false,
@@ -168,19 +177,152 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
         }
 
         $bean->doc_id = $createdFile->id;
-        $bean->doc_url = $createdFile->alternateLink;
+        $bean->doc_url = $createdFile->webViewLink;
 
-        return array(
+        return [
             'success' => true,
-        );
+        ];
     }
 
+    /**
+     * Uploads a file to a certain folder
+     *
+     * @param mixed $bean
+     * @param mixed $fileToUpload
+     * @param mixed $folderId
+     * @return array
+     */
+    public function uploadDocToFolder($bean, $fileToUpload, $folderId)
+    {
+        $client = $this->getClient();
+        $service = new Drive($client);
+
+        $file = new DriveFile();
+        $file->setName($bean->filename);
+        $file->setDescription($bean->description);
+        $file->setParents([$folderId]);
+
+        try {
+            $createdFile = $service->files->create($file, [
+                'data' => sugar_file_get_contents($fileToUpload),
+                'uploadType' => 'multipart',
+                'fields' => 'id,webViewLink',
+            ]);
+        } catch (Google_Exception $e) {
+            $GLOBALS['log']->fatal($e->getMessage());
+            return array(
+                'success' => false,
+                'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'],
+            );
+        }
+
+        $bean->doc_id = $createdFile->id;
+        $bean->doc_url = $createdFile->webViewLink;
+
+        return [
+            'success' => true,
+        ];
+    }
+
+    /**
+     * Uploads a file to drive
+     *
+     * @param string $fileName
+     * @param string $parentId
+     * @param mixed $data
+     * @return array
+     */
+    public function uploadFileToFolder($fileName, $parentId, $data): array
+    {
+        $client = $this->getClient();
+        $service = new Drive($client);
+
+        $file = new DriveFile();
+        $file->setName($fileName);
+        $file->setParents([$parentId]);
+
+        try {
+            $service->files->create($file, [
+                'data' => sugar_file_get_contents($data['tmp_name']),
+                'uploadType' => 'multipart',
+                'fields' => 'id,webViewLink',
+            ]);
+        } catch (Google_Exception $e) {
+            $GLOBALS['log']->fatal($e->getMessage());
+            return array(
+                'success' => false,
+                'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'],
+            );
+        }
+
+        return [
+            'success' => true,
+        ];
+    }
+
+    /**
+     * Used to download a file
+     *
+     * @param mixed $documentId
+     * @param mixed $documentFormat
+     * @return (true|string)[]
+     */
     public function downloadDoc($documentId, $documentFormat)
     {
+        $client = $this->getClient();
+        $service = new Drive($client);
+
+        $exportableTypes = [
+            'application/vnd.google-apps.spreadsheet' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.google-apps.document' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.google-apps.presentation' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        ];
+
+        try {
+            if (in_array($documentFormat, array_keys($exportableTypes))) {
+                $response = $service->files->export($documentId, $exportableTypes[$documentFormat], ['alt' => 'media']);
+                $content = $response->getBody()->getContents();
+            } else {
+                $response = $service->files->get($documentId, ['alt' => 'media',]);
+                $content = $response->getBody()->getContents();
+            }
+        } catch (Google_Exception $e) {
+            // we should be trying again with "get".
+            // it might have failed from the export and work with get
+            try {
+                $response = $service->files->get($documentId, ['alt' => 'media',]);
+                $content = $response->getBody()->getContents();
+            } catch (Google_Exception $ex) {
+                throw $ex;
+            }
+        }
+
+        return [
+            'success' => true,
+            'message' => base64_encode($content),
+        ];
     }
 
+    /**
+     * Delete document from drive
+     *
+     * @param string $documentId
+     * @return array
+     */
     public function deleteDoc($documentId)
     {
+        $client = $this->getClient();
+        $service = new Drive($client);
+        try {
+            $response = $service->files->delete($documentId);
+        } catch (Google_Exception $e) {
+            throw $e;
+        }
+
+        return [
+            'success' => true,
+            'message' => $response,
+        ];
     }
 
     public function shareDoc($documentId, $emails)
@@ -192,15 +334,16 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
         global $sugar_config;
 
         $client = $this->getClient();
-        $drive = new Google_Service_Drive($client);
+        $drive = new Drive($client);
 
-        $options = array(
-            'maxResults' => $sugar_config['list_max_entries_per_page']
-        );
+        $options = [
+            'pageSize' => $sugar_config['list_max_entries_per_page'],
+            'fields' => 'files(id,name,webViewLink,modifiedTime)',
+        ];
 
         $queryString = "trashed = false ";
         if (!empty($keywords)) {
-             $queryString .= "and title contains '{$keywords}'";
+             $queryString .= "and name contains '{$keywords}'";
         }
         $options['q'] = $queryString;
 
@@ -211,16 +354,59 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
             return false;
         }
 
-        $results = array();
+        $results = [];
         foreach ($files as $file) {
-            $results[] = array(
-                'url' => $file->alternateLink,
-                'name' => $file->title,
-                'date_modified' => $file->modifiedDate,
+            $results[] = [
+                'url' => $file->webViewLink,
+                'name' => $file->name,
+                'date_modified' => $file->modifiedTime,
                 'id' => $file->id
-            );
+            ];
         }
 
         return $results;
+    }
+
+    /**
+     * Retrieve data about a file
+     *
+     * @param string $fileId
+     */
+    public function retrieveFileInfo($fileId)
+    {
+        $client = $this->getClient();
+        $service = new Drive($client);
+        $file = $service->files->get($fileId, ['fields' => '*']);
+        return $file;
+    }
+
+    /**
+     * Create a folder on drive
+     *
+     * @param string $name
+     * @param string $parentId
+     * @return DriveFile|null
+     */
+    public function createFolder(string $name, string $parentId): ?DriveFile
+    {
+        $client = $this->getClient();
+        $service = new Drive($client);
+        $file = new DriveFile();
+        $file->setName($name);
+        $file->setMimeType('application/vnd.google-apps.folder');
+        $file->setParents([$parentId]);
+
+        try {
+            $createdFile = $service->files->create($file);
+            return $createdFile;
+        } catch (Google_Exception $e) {
+            $GLOBALS['log']->fatal($e->getMessage());
+            return array(
+                'success' => false,
+                'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'],
+            );
+        }
+
+        return null;
     }
 }

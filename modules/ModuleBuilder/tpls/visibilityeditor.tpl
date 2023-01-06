@@ -12,11 +12,9 @@
  */
 *}
 
-{literal}
 <style type="text/css">
-	.x-grid3-dirty-cell {background: none;}
+	.x-grid3-dirty-cell { background: none; }
 </style>
-{/literal}
 <form id='visibility_editor' name='visibility_editor'  onsubmit='return false;'>
 {sugar_csrf_form_token}
 </form>

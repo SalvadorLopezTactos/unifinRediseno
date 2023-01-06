@@ -32,7 +32,7 @@
          * this.model.changed, so it doesn't warn the user.
          */
         var changedAttributes = this.model.changedAttributes(this.model.getSynced());
-        this.model.set(changedAttributes, { revert: true });
+        this.model.set(changedAttributes, {revert: true, hideDbvWarning: true});
         this._super('cancelClicked');
     },
 
@@ -85,6 +85,13 @@
      * @inheritdoc
      */
     setupDuplicateFields: function(prefill) {
+        // Clear sugar predict fields
+        const predictFields = [
+            'ai_opp_conv_score_enum',
+            'ai_opp_conv_score_enum_c'
+        ];
+        predictFields.forEach(fieldName => prefill.unset(fieldName));
+
         if (app.metadata.getModule('Opportunities', 'config').opps_view_by === 'RevenueLineItems') {
             var calcFields = this.getCalculatedFields();
             if (calcFields) {

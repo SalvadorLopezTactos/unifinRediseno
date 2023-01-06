@@ -229,8 +229,8 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
                 if (!empty($this->_viewdefs['fields'][$fieldname])) {
                     $newPaneldefs[$fieldname] = $this->_viewdefs['fields'][$fieldname];
                 } elseif ((!empty($comboFieldDefs[$fieldname]) &&
-                        isset($comboFieldDefs[$fieldname]['dbFields'])) ||
-                    $fieldname === '$favorite'
+                        isset($comboFieldDefs[$fieldname]['dbFields']))
+                        || $fieldname === '$favorite' || (hasMapsLicense() && $fieldName === '$distance')
                 ) {
                     // combo fields such as address_street
                     // Or condition is for special field found that should be added too
@@ -255,6 +255,16 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
      */
     public function isValidField($key, array $def)
     {
+        /**
+         * Since this class is extending 'SidecarListLayoutMetaDataParser' and is not calling
+         * the parent constructor at all(view name should be propagated in the hierarchy),
+         * which seems like a bug, we are forced to implement using this approach so
+         * that we can have our field displayed in Administration.
+         */
+        if (hasMapsLicense() && $key === '$distance') {
+            return true;
+        }
+
         if (parent::isValidField($key, $def)) {
             // Predefined filters are valid 'fields'
             if (!empty($def['predefined_filter'])) {

@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,23 +18,51 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class LocalizedNotificationMessage extends Entity
 {
     /**
+    * Gets the isDefault
+    * Flag to indicate whether or not this is the default locale for language fallback. This flag can only be set. To unset, set this property to true on another Localized Notification Message.
+    *
+    * @return bool|null The isDefault
+    */
+    public function getIsDefault()
+    {
+        if (array_key_exists("isDefault", $this->_propDict)) {
+            return $this->_propDict["isDefault"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the isDefault
+    * Flag to indicate whether or not this is the default locale for language fallback. This flag can only be set. To unset, set this property to true on another Localized Notification Message.
+    *
+    * @param bool $val The isDefault
+    *
+    * @return LocalizedNotificationMessage
+    */
+    public function setIsDefault($val)
+    {
+        $this->_propDict["isDefault"] = boolval($val);
+        return $this;
+    }
+    
+    /**
     * Gets the lastModifiedDateTime
     * DateTime the object was last modified.
     *
-    * @return \DateTime The lastModifiedDateTime
+    * @return \DateTime|null The lastModifiedDateTime
     */
     public function getLastModifiedDateTime()
     {
         if (array_key_exists("lastModifiedDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["lastModifiedDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["lastModifiedDateTime"], "\DateTime") || is_null($this->_propDict["lastModifiedDateTime"])) {
                 return $this->_propDict["lastModifiedDateTime"];
             } else {
                 $this->_propDict["lastModifiedDateTime"] = new \DateTime($this->_propDict["lastModifiedDateTime"]);
@@ -63,7 +90,7 @@ class LocalizedNotificationMessage extends Entity
     * Gets the locale
     * The Locale for which this message is destined.
     *
-    * @return string The locale
+    * @return string|null The locale
     */
     public function getLocale()
     {
@@ -89,39 +116,10 @@ class LocalizedNotificationMessage extends Entity
     }
     
     /**
-    * Gets the subject
-    * The Message Template Subject.
-    *
-    * @return string The subject
-    */
-    public function getSubject()
-    {
-        if (array_key_exists("subject", $this->_propDict)) {
-            return $this->_propDict["subject"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the subject
-    * The Message Template Subject.
-    *
-    * @param string $val The subject
-    *
-    * @return LocalizedNotificationMessage
-    */
-    public function setSubject($val)
-    {
-        $this->_propDict["subject"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the messageTemplate
     * The Message Template content.
     *
-    * @return string The messageTemplate
+    * @return string|null The messageTemplate
     */
     public function getMessageTemplate()
     {
@@ -147,31 +145,31 @@ class LocalizedNotificationMessage extends Entity
     }
     
     /**
-    * Gets the isDefault
-    * Flag to indicate whether or not this is the default locale for language fallback. This flag can only be set. To unset, set this property to true on another Localized Notification Message.
+    * Gets the subject
+    * The Message Template Subject.
     *
-    * @return bool The isDefault
+    * @return string|null The subject
     */
-    public function getIsDefault()
+    public function getSubject()
     {
-        if (array_key_exists("isDefault", $this->_propDict)) {
-            return $this->_propDict["isDefault"];
+        if (array_key_exists("subject", $this->_propDict)) {
+            return $this->_propDict["subject"];
         } else {
             return null;
         }
     }
     
     /**
-    * Sets the isDefault
-    * Flag to indicate whether or not this is the default locale for language fallback. This flag can only be set. To unset, set this property to true on another Localized Notification Message.
+    * Sets the subject
+    * The Message Template Subject.
     *
-    * @param bool $val The isDefault
+    * @param string $val The subject
     *
     * @return LocalizedNotificationMessage
     */
-    public function setIsDefault($val)
+    public function setSubject($val)
     {
-        $this->_propDict["isDefault"] = boolval($val);
+        $this->_propDict["subject"] = $val;
         return $this;
     }
     

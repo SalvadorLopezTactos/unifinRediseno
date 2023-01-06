@@ -51,6 +51,7 @@ class Opportunity extends SugarBean
     public $team_id;
     public $quote_id;
     public $service_start_date;
+    public $forecasted_likely;
     public $service_duration_value;
     public $service_duration_unit;
     public $service_open_flex_duration_rlis;
@@ -85,7 +86,7 @@ class Opportunity extends SugarBean
      * ]
      *
      * These will cascade the given opportunity field down to related RLIs when the method returns true.
-     * Methods should be non-static, defined here in Opportunity.php, and take one RLI a a parameter,
+     * Methods should be non-static, defined here in Opportunity.php, and take one RLI parameter,
      * and return a boolean indicating whether or not values should cascade to that RLI.
      */
     public const CASCADE_FIELD_CONDITIONS = [
@@ -93,6 +94,7 @@ class Opportunity extends SugarBean
         'service_start_date' => 'cascadeWhenServiceOpen',
         'service_duration_value' => 'cascadeWhenDurationEditableServiceOpen',
         'service_duration_unit' => 'cascadeWhenDurationEditableServiceOpen',
+        'commit_stage' => 'cascadeWhenOpen',
         'sales_stage' => 'cascadeWhenOpen',
     ];
     private const OPERATION_CASCADE = 'cascading_opportunity_';
@@ -642,8 +644,8 @@ class Opportunity extends SugarBean
      */
     public function canRenew(): bool
     {
-        // Renewals are only supported for Sell instances using RLIs
-        return static::usingRevenueLineItems() && $this->isLicensedForSell();
+        // Renewals are only supported for instances using RLIs
+        return static::usingRevenueLineItems();
     }
 
     /**
@@ -729,11 +731,6 @@ class Opportunity extends SugarBean
      */
     public function getGeneratePurchaseRliIds()
     {
-        global $current_user;
-        if (!$current_user->hasLicense(Subscription::SUGAR_SELL_KEY)) {
-            return [];
-        }
-
         $q = new SugarQuery();
         $q->from(BeanFactory::newBean('RevenueLineItems'));
         $q->select(['id']);
@@ -788,56 +785,115 @@ class Opportunity extends SugarBean
     public function updateRenewalRLIs(array $rliBeans)
     {
         $rlisUpdated = [];
+        $newRenewalRLIProperties = [];
+
+        // Loop through all RLIs from closed won opportunity
         foreach ($rliBeans as $rliBean) {
-            if (!empty($rliBean->add_on_to_id)) {
+            if (empty($rliBean->add_on_to_id) && !empty($rliBean->renewal_rli_id)) {
+                // Initialize the array in case it hasn't been initialized yet
+                if (empty($newRenewalRLIProperties[$rliBean->renewal_rli_id])) {
+                    $newRenewalRLIProperties[$rliBean->renewal_rli_id] = [
+                        'quantity' => 0,
+                        'likely_case' => 0,
+                    ];
+                }
+
+                // Save non add-on RLI properties for renewal RLI (RLI from original closed-won opp)
+                $newRenewalRLIProperties[$rliBean->renewal_rli_id]['quantity'] += $rliBean->quantity;
+                $newRenewalRLIProperties[$rliBean->renewal_rli_id]['likely_case'] += $rliBean->likely_case;
+            } else {
+                // Fetch PLI if RLI is addon and get renewal opp
                 $pli = BeanFactory::retrieveBean('PurchasedLineItems', $rliBean->add_on_to_id);
+
                 if ($pli && !empty($pli->renewal_opp_id)) {
                     $renewalOpp = BeanFactory::retrieveBean('Opportunities', $pli->renewal_opp_id);
-                    // checks if this is a renewal open Opportunity and gets its related RLIs
+
+                    // checks if this is a renewal open Opportunity and gets its related renewal RLIs
                     if ($renewalOpp->isOpenRenewalOpportunity() &&
                         $renewalOpp->load_relationship('revenuelineitems')) {
-                        $rlis = $renewalOpp->revenuelineitems->getBeans();
-                        $rliProcessed = false;
-                        foreach ($rlis as $rli) {
-                            // checks if there is an open RLI whose Product matches the Closed Won renewable RLI
-                            if ($rli->isOpenRenewalRLI() &&
+                        $renewalRLIs = $renewalOpp->revenuelineitems->getBeans();
+
+                        // Match current bean to renewal RLI
+                        $filteredRLIs = array_filter($renewalRLIs, function ($renewalRLI) use ($rliBean) {
+                            if ($renewalRLI->isOpenRenewalRLI() &&
                                 !empty($rliBean->product_template_id) &&
-                                !empty($rli->product_template_id) &&
-                                $rliBean->product_template_id === $rli->product_template_id) {
-                                // #2 update the existing renewal RLI in existing renewal Opp
-                                $rli->quantity += $rliBean->quantity;
-                                // we need to convert the amount to the existing renewal RLI's currency
-                                // when $rliBean & $rli have different currency_id
-                                if ($rliBean->currency_id !== $rli->currency_id) {
-                                    $rli->likely_case +=
-                                        SugarCurrency::convertAmount(
-                                            (float)$rliBean->likely_case,
-                                            $rliBean->currency_id,
-                                            $rli->currency_id
-                                        );
-                                } else {
-                                    $rli->likely_case += $rliBean->likely_case;
-                                }
-                                $rli->save();
-                                $rliProcessed = true;
-                                break;
+                                !empty($renewalRLI->product_template_id) &&
+                                $rliBean->product_template_id === $renewalRLI->product_template_id) {
+                                // Also set the renewal rli
+                                $rliBean->renewal_rli_id = $renewalRLI->id;
+                                $rliBean->save();
+                                return true;
                             }
-                        }
-                        if (!$rliProcessed) {
-                            // #1 create a new renewal RLI in existing renewal Opp
-                            $newRliBean = $renewalOpp->createNewRenewalRLI($rliBean);
+                            return false;
+                        });
+                        $matchingRenewalRLI = current($filteredRLIs);
+
+                        // Case 2: store updates for an existing renewal RLI
+                        if (!empty($matchingRenewalRLI)) {
+                            // Initialize this part of the array so we don't have an errors as far as the compiler is concerned
+                            if (empty($newRenewalRLIProperties[$matchingRenewalRLI->id])) {
+                                $newRenewalRLIProperties[$rliBean->renewal_rli_id] = [
+                                    'quantity' => $matchingRenewalRLI->quantity,
+                                    'likely_case' => $matchingRenewalRLI->likely_case,
+                                ];
+                            }
+
+                            // Update the quantity
+                            $newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'] += $rliBean->quantity;
+
+                            // we need to convert the amount to the existing renewal RLI's currency
+                            // when $rliBean & $rli have different currency_id
+                            if ($rliBean->currency_id !== $matchingRenewalRLI->currency_id) {
+                                $newRenewalRLIProperties[$matchingRenewalRLI->id]['likely_case'] += SugarCurrency::convertAmount(
+                                    (float)$rliBean->likely_case,
+                                    $rliBean->currency_id,
+                                    $matchingRenewalRLI->currency_id
+                                );
+                            } else {
+                                $newRenewalRLIProperties[$matchingRenewalRLI->id]['likely_case'] += $rliBean->likely_case;
+                            }
+                        } else {
+                            // Case 1 create a new renewal RLI since one doesn't match our RLI
+                            $newRLIBean = $renewalOpp->createNewRenewalRLI($rliBean);
 
                             // Link the renewal RLI to the RLI it is generating
-                            $rliBean->renewal_rli_id = $newRliBean->id;
+                            $rliBean->renewal_rli_id = $newRLIBean->id;
                             $rliBean->save();
+
+                            // Add ID to save for updating
+                            $newRenewalRLIProperties[$newRLIBean->id] = [
+                                'quantity' => $newRLIBean->quantity,
+                                'likely_case' => $newRLIBean->likely_case,
+                            ];
                         }
+
                         $rlisUpdated[] = $rliBean->id;
                     }
                 }
             }
         }
 
+        // Update renewal RLIs that have values stored for them
+        foreach ($newRenewalRLIProperties as $renewalRLIId => $properties) {
+            $renewalRLI = $this->retrieveRliBean($renewalRLIId);
+
+            $renewalRLI->quantity = $properties['quantity'];
+            $renewalRLI->likely_case = $properties['likely_case'];
+            $renewalRLI->save();
+        }
+
         return $rlisUpdated;
+    }
+
+    /**
+     * Retrieves an RLI bean from the DB
+     *
+     * @param string $rliId the ID of the RLI bean
+     * @return SugarBean|null
+     */
+    public function retrieveRliBean($rliId)
+    {
+        return BeanFactory::retrieveBean('RevenueLineItems', $rliId);
     }
 
     /**
@@ -989,6 +1045,9 @@ class Opportunity extends SugarBean
                 'service_open_flex_duration_rlis' => sizeof($this->getEditableDurationServiceRLIs()),
             ];
             $rollupFields = array_merge($rollupFields, $this->calculateServiceDuration());
+            if (Forecast::isSetup()) {
+                $rollupFields['commit_stage'] = $this->calculateOpportunityCommitStage();
+            }
 
             // Update the Opportunity with the calculated rollup values. If any
             // values have changed on the Opportunity, then save it afterward
@@ -1197,6 +1256,86 @@ class Opportunity extends SugarBean
             ->notIn('sales_stage', $closedStages);
 
         return sizeof($q->execute());
+    }
+
+    /**
+     * Using the Opp's RLIs, calculates the new commit stage for the Opp
+     *
+     * @return string the calculated commit stage for the Opportunity
+     * @throws SugarQueryException
+     */
+    public function calculateOpportunityCommitStage()
+    {
+        $ranges = $this->getSortedForecastRangeKeys();
+
+        // If we can't get the configured forecast ranges, or if something else goes wrong,
+        // leave the commit_stage as-is
+        if (empty($ranges)) {
+            return $this->commit_stage;
+        }
+
+        $q = new SugarQuery();
+        $q->from(BeanFactory::newBean('RevenueLineItems'));
+        $select = $q->select();
+        foreach ($ranges as $range) {
+            $select->fieldRaw(
+                'SUM(CASE WHEN commit_stage = ' . $this->db->quoted($range) . ' THEN 1 ELSE 0 END)',
+                $range,
+            );
+        }
+        $q->where()->equals('opportunity_id', $this->id);
+
+        $result = $q->execute();
+        if (!empty($result) && !empty($result[0])) {
+            $result = $result[0];
+        } else {
+            return $this->commit_stage;
+        }
+
+        // Look through the ranges and find the highest probability one in use
+        foreach ($ranges as $range) {
+            if (!empty($result[$range])) {
+                return $range;
+            }
+        }
+
+        return $this->commit_stage;
+    }
+
+    /**
+     * Gets the forecast range keys, in descending order
+     * @return array|null
+     */
+    public function getSortedForecastRangeKeys()
+    {
+        if (!Forecast::isSetup()) {
+            return null;
+        }
+
+        $forecastSettings = Forecast::getSettings();
+        $forecastRangeSetting = $forecastSettings['forecast_ranges'];
+        if (empty($forecastRangeSetting)) {
+            return null;
+        }
+        $ranges = $forecastSettings[$forecastRangeSetting . '_ranges'];
+        if (empty($ranges)) {
+            return null;
+        }
+
+        // First separate the probability and non-probability ranges
+        $probabilityRanges = array_filter($ranges, function ($range) {
+            return $range['max'] !== 0;
+        });
+
+        // Next sort the probability ranges in descending order
+        $sortKey = array_column($probabilityRanges, 'max');
+        array_multisort($probabilityRanges, SORT_DESC, $sortKey);
+
+        // Finally take all the keys and merge them back together
+        $probabilityRangeKeys = array_keys($probabilityRanges);
+        $nonProbabilityRangeKeys = array_diff(array_keys($ranges), $probabilityRangeKeys);
+
+        return array_merge($probabilityRangeKeys, $nonProbabilityRangeKeys);
     }
 
     /**

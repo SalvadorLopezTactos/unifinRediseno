@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="{$url}"/>
 {/foreach}
 <style>
-    h2{literal}{line-height: 100%;}{/literal}
-    body{literal}{padding-top: 0px;}{/literal}
+    h2{ line-height: 100%; }
+    body{ padding-top: 0px; }
 </style>
 <div id="portal_themeroller" style="">
     <div id="alerts" class="alert-top">
@@ -37,13 +37,13 @@
 
 
 
-{literal}
+
 
 <script language="javascript">
 SUGAR.App.config.platform = 'portal';
 
 // set our auth Token
-SUGAR.App.sugarAuthStore.set('AuthAccessToken', {/literal}'{$token}'{literal});
+SUGAR.App.sugarAuthStore.set('AuthAccessToken', '{$token}');
 
 // bootstrap token
 (function (app) {
@@ -64,7 +64,7 @@ if (App){
     App.destroy();
 }
 // Call initTheme with the session id as token
-var App = SUGAR.App.theme.initTheme({/literal}'{$token}'{literal});
+var App = SUGAR.App.theme.initTheme('{$token}');
 
 // should already be logged in to sugar, don't need to log in to sidecar.
 App.api.isAuthenticated = function () {
@@ -90,4 +90,4 @@ App.sync(
 );
 
 </script>
-{/literal}
+

@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'E-Posta Adresi:',
     'LBL_EMAIL_ATTACHMENT' => 'E-Posta Eki',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Şunun için E-posta Eki',
+    'LBL_NOTE_ATTACHMENT' => 'Not Ekleri',
+    'LBL_KB_ATTACHMENT' => 'KBDocument Ekleri',
+    'LBL_CASE_ATTACHMENT' => 'Durum Ekleri',
     'LBL_FILE_MIME_TYPE' => 'Mime Tipi',
     'LBL_FILE_EXTENSION' => 'Dosya Uzantısı',
     'LBL_FILE_SOURCE' => 'Dosya Kaynağı',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Not Kaynağı',
     'LBL_SOURCE_EXTERNAL' => 'Harici',
     'LBL_SOURCE_INTERNAL' => 'Dahili',
+    'LBL_PORTAL' => 'Portal',
 
     // Help Text
     // List View Help Text

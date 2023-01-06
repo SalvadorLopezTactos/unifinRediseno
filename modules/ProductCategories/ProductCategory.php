@@ -141,7 +141,7 @@ class ProductCategory extends SugarBean
                 ->executeQuery(
                     'SELECT name FROM product_categories WHERE id = ?',
                     [$this->parent_id]
-                )->fetchColumn();
+                )->fetchOne();
             if (false !== $productCategoryName) {
                 $this->parent_name = $productCategoryName;
             }
@@ -371,65 +371,6 @@ class ProductCategory extends SugarBean
         return $row['node_id'];
 
         //end function get_node_id
-    }
-
-
-    //used to get the parent category id for saving purposes
-    /**
-     * used for retrieving based on a node id
-     * @deprecated
-     */
-    public function get_branch_id()
-    {
-
-        if ($this->parent_node_id != "0") {
-            $query = "SELECT $this->category_tree_table.self_id AS self_id, $this->table_name.name AS name
-			FROM product_categories LEFT JOIN $this->category_tree_table ON $this->category_tree_table.self_id = $this->table_name.id
-			WHERE $this->category_tree_table.node_id = '$this->parent_node_id'";
-
-            $result = $this->db->query($query, true, "Error running query");
-            $row = $this->db->fetchByAssoc($result);
-
-            if (isset($row['self_id'])) {
-                $this->parent_id = $row['self_id'];
-            }
-            if (isset($row['name']) && $row['name'] != '') {
-                $this->parent_name = stripslashes($row['name']);
-            }
-        }
-
-        //end function get_branch_id
-    }
-
-    /**
-     * used for retrieving based on a normal id
-     * @deprecated
-     */
-    public function get_category_tree_info()
-    {
-        $query = "SELECT * from $this->category_tree_table where self_id = '$this->id'";
-        $result = $this->db->query($query, true, "Error running query ProductCategories - get_category_info");
-
-        // Get the id and the name.
-
-        $row = $this->db->fetchByAssoc($result);
-
-
-        if ($row != null) {
-            if ($row['parent_node_id'] != '') {
-                $this->parent_node_id = stripslashes($row['parent_node_id']);
-            }
-            if ($row['node_id'] != '') {
-                $this->node_id = stripslashes($row['node_id']);
-            }
-            if ($row['type'] != '') {
-                $this->type = stripslashes($row['type']);
-            }
-        }
-
-        $this->get_branch_id();
-
-        //end function get_category_tree_info
     }
 
 

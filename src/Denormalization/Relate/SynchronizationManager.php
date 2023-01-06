@@ -22,6 +22,7 @@ use SugarQuery;
 class SynchronizationManager
 {
     private const JOB_NAME = self::class;
+    private const TMP_TABLE_NAME = 'denorm_tmp_admin';
 
     public function setUpJob(Entity $entity): void
     {
@@ -30,6 +31,7 @@ class SynchronizationManager
         $options = [
             'module_name' => $entity->getTargetModuleName(),
             'field_name' => $entity->fieldName,
+            'tmp_table_name' => self::TMP_TABLE_NAME,
         ];
 
         /* @var $job SchedulersJob */

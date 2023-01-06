@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'تنسيق الوقت الافتراضي',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'عرض أوقات استجابة الخادم',
+    'FREEZE_FIRST_COLUMN' => 'السماج بتجميد العمود',
+    'FREEZE_FIRST_COLUMN_HELP' => 'تمكين هذا الإعداد للسماح للمستخدمين بتجميد العمود الأول في مجموعة من ' .
+        'طرق عرض القوائم، بما في ذلك طرق عرض قوائم الوحدات واللوحات الفرعية ولوحات المعلومات ووحدات التحكم.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'تسجيل الاستعلامات البطيئة',
     'LOCK_HOMEPAGE_HELP'=>'تهدف هذه الإعدادات إلى منع<BR> 1) إضافة لوحه معلومات في الصفحات الرئيسية الجديدة ولوحه معلومات في الصفحة الرئيسية للوحدة، <BR>2) تخصيص مكان للوحه معلومات في الصفحات الرئيسية من خلال السحب والإفلات.',
     'CURRENT_LOGO'=>'الشعار الحالي:',
+    'CURRENT_LOGO_DARK' => 'شعار الوضع الداكن الحالي:',
     'CURRENT_LOGO_HELP'=>'يظهر هذا الشعار في الجانب الأيسر من تذييل تطبيق Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "يتم عرض هذا الشعار في الركن الأيسر من التذييل عندما يكون تطبيق Sugar في الوضع الداكن، وفقًا لتفضيل المظهر للمستخدم.",
     'NEW_LOGO'=>'تحديد شعار:',
     'NEW_LOGO_HELP' => 'يمكن أن يكون تنسيق ملف الصورة .png أو .jpg. أقصى طول هو 24 بكسل، وأقصى اتساع هو 180 بكسل. سوف يتم تحديد حجم أي صورة تم تحميلها أكبر في أي اتجاه إلى هذه الأبعاد القياسية.',
+    'NEW_LOGO_DARK' => 'اختر شعار الوضع الداكن:',
     'NEW_LOGO_HELP_NO_SPACE' => 'يمكن أن يكون تنسيق ملف الصورة .png أو .jpg. أقصى طول هو 24 بكسل، وأقصى اتساع هو 450 بكسل. سوف يتم تحديد حجم أي صورة تم تحميلها أكبر في أي اتجاه إلى هذه الأبعاد القياسية. يجب ألا يحتوي اسم الملف الصورة على حرف المسافة.',
     'NEW_QUOTE_LOGO'=>'تحميل شعار عروض أسعار جديد',
     'NEW_QUOTE_LOGO_HELP'=>'تنسيق ملف الصورة المطلوب هو .jpg.<BR>والحجم الموصى به هو 867x74 بكسل.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'استمرار',
     'LBL_WIZARD_FINISH_TAB' => 'إنهاء',
     'LBL_WIZARD_FINISH_TITLE' => 'تم الانتهاء من نظام التكوين الأساسي',
-    'LBL_WIZARD_FINISH' => 'انقر فوق <b>استمرار</b> لتكوين إعدادات المستخدم الخاصة بك.<br/><br /><br />لتكوين نظام إعدادات إضافي، انقر <a href="index.php?module=Administration&action=index" target="_blank">هنا</a>.',
+    'LBL_WIZARD_FINISH' => 'انقر فوق <b>استمرار</b> لتكوين إعدادات المستخدم الخاصة بك.<br/><br />
+لتكوين إعدادات نظام إضافية، انقر <a href="#Administration" target="_blank">هنا</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'إدراج علامة تجارية',
     'LBL_WIZARD_SYSTEM_DESC' => 'قم بتوفير اسم المنظمة\ الخاصة بك وشعارها لإدراج علامة تجارية لـ Sugar خاصة بك.',
     'LBL_WIZARD_LOCALE_DESC' => 'قم بتحديد طريقة ظهور البيانات في Sugare، اعتمادًا على موقعك الجغرافي. الإعدادات التي توفرها هنا سوف تكون الإعدادات الافتراضية. سوف يكون لدى المستخدمين القدرة على تعيين التفضيلات الخاصة بهم.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'يتم الآن التحميل...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'حذف' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'مرحبًا' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'الشعار' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'الشعار' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'شعار الوضع الداكن',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* وحدة التقارير متاحة فقط لعملاء SugarCRM وSugar Mobile الأصليين.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* وحدة التقارير غير متاحة لطريقة العرض المتنقلة التي تستند إلى مستعرض.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

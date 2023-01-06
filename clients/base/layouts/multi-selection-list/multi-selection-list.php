@@ -11,33 +11,36 @@
  */
 
 $viewdefs['base']['layout']['multi-selection-list'] = array(
+    'css_class'=> 'flex-list-layout flex flex-column h-full',
     'type' => 'selection-list',
     'components' => array(
         array(
             'layout' => array(
                 'type' => 'default',
                 'name' => 'sidebar',
+                'css_class' => 'h-full',
                 'components' => array(
                     array(
                         'layout' => array(
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane span8 flex flex-column',
                             'components' => array(
                                 array(
                                     'view' => 'selection-headerpane',
                                 ),
                                 array(
-                                    'view' => 'selection-list-context',
-                                ),
-                                array(
                                     'layout' => array(
+                                        'css_class' => 'flex flex-column h-full',
                                         'type' => 'filterpanel',
                                         'availableToggles' => array(),
                                         'filter_options' => array(
                                             'stickiness' => false,
                                         ),
                                         'components' => array(
+                                            [
+                                                'view' => 'selection-list-context',
+                                            ],
                                             array(
                                                 'layout' => 'filter',
                                                 'loadModule' => 'Filters',
@@ -48,12 +51,23 @@ $viewdefs['base']['layout']['multi-selection-list'] = array(
                                             array(
                                                 'view' => 'filter-actions',
                                             ),
-                                            array(
-                                                'view' => 'multi-selection-list',
-                                            ),
-                                            array(
-                                                'view' => 'list-bottom',
-                                            ),
+                                            [
+                                                'layout' => [
+                                                    'css_class' => 'paginated-flex-list',
+                                                    'components' => [
+                                                        [
+                                                            'view' => 'multi-selection-list',
+                                                            'primary' => true,
+                                                        ],
+                                                        [
+                                                            'view' => [
+                                                                'name' => 'list-pagination',
+                                                                'css_class' => 'flex-table-pagination',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
                                         ),
                                     ),
                                 ),

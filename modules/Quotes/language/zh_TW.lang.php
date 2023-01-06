@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '報價設定',
 
     'LBL_RENEWAL' => '續訂',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '報價回饋互動',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '報價時間軸',
 );

@@ -47,7 +47,7 @@
             if (subView && subView.meta && subView.meta.rowactions && subView.meta.rowactions.actions) {
                 subView.meta.rowactions.actions.push({
                     'type': 'dataprivacyerase',
-                    'icon': 'fa-eye',
+                    'icon': 'sicon-preview',
                     'name': 'dataprivacy-erase',
                     'label': 'LBL_DATAPRIVACY_MARKFORERASE'
                 });

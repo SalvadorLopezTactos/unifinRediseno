@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Прогнози',
     'ForecastWorksheets' => 'Таблиці прогнозів',
     'ForecastManagerWorksheets' => 'Таблиці менеджеру прогнозів',
-    'MergeRecords'=>'Об&#39;єднання записів',
       'VisualPipeline'=>'Візуальна воронка продажів',
       'ConsoleConfiguration' => 'Налаштування консолі',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Ролі',
     'Notifications'=>'Повідомлення',
     'Sync'=>'Синхронізація',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'Розширені звіти',
     'DataSets' => 'Формат даних',
     'CustomQueries' => 'Кастомні запити',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Куплені продукти',
     'MobileDevices' => 'Мобільні пристрої',
     'PushNotifications' => 'Примусові сповіщення',
+    'Escalations' => 'Ескалації',
+    'DocumentTemplates' => 'Шаблони документа',
+    'DocumentMerges' => 'Об’єднання документів',
     'WorkFlow' => 'Визначення бізнес-процесів',
     'EAPM' => 'Зовнішні облікові записи',
     'Worksheet' => 'Таблиця',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Відпустки та відгули',
     'ChangeTimers' => 'Змінити таймери',
     'Messages' => 'Повідомлення',
+    'Audit' => 'Аудит',
+    'RevenueLineItems' => 'Доходи по продуктам',
+    'DocuSignEnvelopes' => 'Конверти DocuSign',
+    'Geocode' => 'Геокод',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Задачі',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'ЗД',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'БЦ',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'ШД',
+        'DocumentMerges' => 'ОД',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Лист прогнозів',
     'ForecastManagerWorksheets' => 'Таблиця менеджеру прогнозів',
     'Quotas' => 'Квота',
-    'MergeRecords'=>'Об&#39;єднати запис',
     'Teams' => 'Команда',
     'TeamNotices' => 'Повідомлення для команди',
     'Activities' => 'Активність',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Покупка',
     'PurchasedLineItems' => 'Куплений продукт',
     'PushNotifications' => 'Примусове сповіщення',
+    'Escalations' => 'Ескалація',
+    'DocumentTemplates' => 'Шаблон документа',
+    'DocumentMerges' => 'Об’єднання документів',
     'WorkFlow' => 'Бізнес-процес',
     'EAPM' => 'Зовнішній обліковий запис',
     'Worksheet' => 'Таблиця',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Відпустка/відгул',
     'ChangeTimers' => 'Змінити таймер',
     'Messages' => 'Повідомлення',
+    'Audit' => 'Аудит',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'Геокод',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Комунальні підприємства (послуги)',
     'Other' => 'Інше',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF і CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Виконується',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'База знань',
       'PurchasedLineItems' => 'Куплений продукт',
       'Purchases' => 'Покупка',
+      'Escalations' => 'Ескалація',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Контрагент',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Примітка',
     'PurchasedLineItems' => 'Куплений продукт',
     'Purchases' => 'Покупка',
+    'Escalations' => 'Ескалація',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Впорядковано',
       'Ship' => 'Відвантажено',
   ),
+    'active_status_dom' => [
+        'Active' => 'Активно',
+        'Inactive' => 'Неактивно',
+        'Retired' => 'Застаріло',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Використовувати системний параметр',
+        'light' => 'Світлий',
+        'dark' => 'Темний',
+    ],
 
 
   'pricing_formula_default_key' => 'Фіксований',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Телебачення',
         'NewsLetter' => 'Інформаційна розсилка',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,14 +2049,16 @@ $app_list_strings = array (
         'print'       => 'Друк',
         'pieWedgeName'      => 'секції',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Кругова діаграма',
+        'donut chart' => 'Кільцева діаграма',
+        'treemap chart' => 'Деревоподібна діаграма',
         'bar chart' => 'Вертикальна гістограма',
         'group by chart' => 'Вертикальна згрупована гістограма',
         'horizontal bar chart' => 'Горизонтальна гістограма',
         'horizontal group by chart' => 'Горизонтальна згрупована гістограма',
         'line chart' => 'Лінійчата діаграма',
-        'funnel chart' => 'Діаграма-вирва',
+        'funnel chart' => 'Воронкоподібна діаграма',
     ),
     'd3_value_placement' => array (
         '0'            => 'Не визначено',
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Ціна (найвища загальна)',
             'total_revenue:asc' => 'Ціна (найнижча загальна)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Центр календарів',
+        ],
+        'calendar_views_options' => [
+          'day' => 'День',
+          'week' => 'Тиждень',
+          'workWeek' => 'Робочий тиждень',
+          'expandedMonth' => 'Місяць',
+          'agenda' => 'Порядок денний',
+          'timeline' => 'Часова шкала',
+          'monthSchedule' => 'Планувальник',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Створено',
+          'completed' => 'Заповнено',
+          'declined' => 'Відхилено',
+          'delivered' => 'Доставлено',
+          'sent' => 'Надіслано',
+          'signed' => 'Підписано',
+          'voided' => 'Анульовано',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'За замовчуванням',
+            'color' => 'Колір',
+            'image' => 'Зображення',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Новий',
+            'In Progress' => 'Виконується',
+            'Closed' => 'Закрито',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Бездіяльність',
+            'Lack of Progress' => 'Відсутність прогресу',
+            'Customer-Imposed Deadline' => 'Кінцевий термін, установлений клієнтом',
+            'Account at Risk' => 'Контрагент у групі ризику',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Запит клієнта',
+            'Internally Requested' => 'Внутрішній запит',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Звернення',
+            'Bugs' => 'Помилка',
+            'Accounts' => 'Контрагент',
+            'Opportunities' => 'Угода',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Позитивний',
+            'Negative' => 'Негативний',
+            'Neutral' => 'Нейтральний',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Навряд',
+            '02_less_likely' => 'Малоймовірно',
+            '03_neutral' => 'Нейтрально',
+            '04_more_likely' => 'Імовірніше',
+            '05_very_likely' => 'Дуже ймовірно',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Не збігається з клієнтами',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Збігається з клієнтами',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Перейти за посиланням',
   'LBL_TOGGLE_VISIBILITY' => 'Вкл / викл видимість', // Record view header panel element
   'LBL_ACTIVITIES' => 'Стрічка активностей',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar і 3-D куб є зареєстрованими торговими марками компанії SugarCRM Inc. '.
         'Усі інші назви компаній і продуктів, які використовуються або зустрічаються в цьому продукті, можуть бути зареєстрованими торговими марками '.
         'SugarCRM ®, Sugar Enterprise™ та Sugar™ є торговими марками SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Додати' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Логотип компанії' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Календар' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Вибране значення поля випадного списку призвело до зміни макета перегляду запису. ' .
+        'Значення полів, прихованих у новому макеті, очищено. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'навігація по основному модулю',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Закрити',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} відзначений як {{status}}.',
 
+    'LBL_FOCUS' => 'Фокус',
+
     'LBL_QUERY_VALID'=>'Дійсний',
     'LBL_QUERY_ERROR'=>'Полилка!',
     'LBL_QUERY_CHILD'=>'Дійсний підзапит',
@@ -3066,6 +3183,10 @@ $app_strings = array (
     'LBL_CASES'=>'Звернення',
     'LBL_MESSAGE'=>'Повідомлення',
     'LBL_MESSAGES'=>'Повідомлення',
+    'LBL_ESCALATIONS' => 'Ескалації',
+    'LBL_ESCALATION' => 'Ескалація',
+    'LBL_DOCUSIGN_ENVELOPES' => 'Конверти DocuSign',
+    'LBL_DOCUSIGN_ENVELOPE' => 'Конверт DocuSign',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Змінити пароль',
     'LBL_CHANGE_BUTTON_LABEL' => 'Змінити',
@@ -3091,6 +3212,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Відкриті об&#39;єкти:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Написати Email-повідомлення',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'Адреса електронної пошти',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Написати Email-повідомлення',
     'LBL_SEARCH_DROPDOWN_YES'=>'Так',
     'LBL_SEARCH_DROPDOWN_NO'=>'Ні',
@@ -3116,6 +3238,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Документи',
     'LBL_DATE_ENTERED' => 'Дата створення:',
     'LBL_DATE_MODIFIED' => 'Дата змінення:',
+    'LBL_ACTIVITY_MODIFIED' => 'Змінено',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Редагувати вкладку огляду',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Редагувати вкладки модулів',
     'LBL_EDIT_BUTTON' => 'Редагувати',
@@ -3138,6 +3261,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Виберіть поле ...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Виберіть оператор ...',
     'LBL_FILTER_CREATE_NEW' => 'Створити',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Фільтр збірки (незбережений)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(Незбережений)',
     'LBL_FILTER_CREATE_FILTER' => 'Створити новий фільтр',
     'LBL_FILTER_CLOSE_FILTER' => 'Закрити фільтр',
     'LBL_FILTER_EDIT_FILTER' => 'Редагувати фільтр',
@@ -3200,6 +3325,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Більше {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Сьогоднішня діяльність',
     'LBL_LEADS'=>'Інтереси',
+    'LBL_LEAD'=>'Попередній контакт',
+    'LBL_QUOTES_BILL_TO' => 'Комерційні пропозиції (юридична адреса)',
     'LBL_LESS' => 'Менше',
     'LBL_CAMPAIGN' => 'Маркетингова кампанія:',
     'LBL_CAMPAIGNS' => 'Маркетингові кампанії',
@@ -3227,19 +3354,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Будь ласка, виберіть хоча б 2 записи, щоб продовжити.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Будь ласка, виберіть менше 10 записів, щоб продовжити.',
     'LBL_LISTVIEW_ALL' => 'Всі',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Закріпити стовпець 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Всі дублікати',
     'LBL_LISTVIEW_NONE' => 'Скасувати виділення',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Вибрати поточну сторінку',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Вибрати все',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Обрані записи',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Вибрано: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Скасувати виділення',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Очистити всі вибрані параметри.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Вибрати всі записи',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'У наборі даних більш ніж {{num}} записів. Ви вибрали перші {{num}} записів.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Ви вибрали 1 запис у наборі результатів.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Ви вибрали все {{num}} записів в наборі даних.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Ви вибрали все {{num}} записи в цьому перегляді. {{link}} в набір даних.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Оновлення {{num}} з {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Оновлення {{num}} з {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '({{time}} {{unit}} залишилося)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Масове оновлення не відбулось. Нова спроба запустити ({{num}} {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Масове оновлення не завершено. {{num}} записа(ів) залишилося незміненим.',
@@ -3247,7 +3376,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => 'У зв&#39;язку з обмеженням прав або помилками проігноровано записи: {{remain}}.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} записа (ів) були успішно оновлені.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} масове оновлення',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Видалення {{num}} of {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Видалення {{num}} з {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '({{time}} {{unit}} залишилося)',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Масове видалення не відбулося. Нова спроба запустити ({{num}} з {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Масове видалення не завершено. {{num}} записа (ів) залишилося.',
@@ -3272,10 +3401,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Вибрати',
     'LBL_LISTVIEW_ACTIONS' => 'Дії',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Виберіть усі записи на цій сторінці',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Скасуйте вибір усіх записів на цій сторінці',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} з {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => 'Завантаження ({{num}})…',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Клацніть, щоб відобразити все',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'з',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Отримати кількість сторінок',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Іван',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Петренко',
@@ -3283,10 +3419,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Код Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'Будь ласка, увійдіть в систему, щоб отримати доступ до цього розділу.',
     'LBL_LOGOUT' => 'Вийти',
+    'LBL_FINISH_IMPERSONATING' => 'Завершити імітування',
+    'LBL_RESET_MFA' => 'Скинути багатофакторну автентифікацію',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, на даний момент ви працюєте від імені користувача {{user}}.',
     'LBL_PROFILE' => 'Профіль',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Злиття пошти',
     'LBL_MASS_UPDATE' => 'Масове оновлення',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Виберіть усі записи для масового оновлення',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Включити запис у масове оновлення',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Додати поле',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Видалити поле',
     'LBL_GENERATE_QUOTE' => 'Сформувати комерційну пропозицію',
@@ -3341,6 +3482,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Більше інформації',
     'LBL_PANEL_BODY' => 'Огляд',
     'LBL_PARENT_TYPE' => 'Тип батьківського запису',
+    'LBL_RELATED_TYPE' => 'Пов’язаний тип',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Порядок:',
     'LBL_PICTURE_FILE' => 'Аватар',
@@ -3414,7 +3556,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Пов&#39;язаний з',
     'LBL_RELATED_INFORMATION' => 'Пов&#39;язана інформація',
-    'LBL_RELATED_RECORDS' => 'Пов&#39;язані записи',
+    'LBL_RELATED_RECORDS' => 'Пов&#39;язаний {{module}}',
     'LBL_REPORTS_TO' => 'Керівник',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Вказує необхідні поля',
@@ -3533,7 +3675,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Усі права захищено.<br />SugarCRM, Sugar і 3-D куб є зареєстрованими торговими марками компанії SugarCRM Inc. '.
         'Усі інші назви компаній і продуктів, які використовуються або зустрічаються в цьому продукті, можуть бути зареєстрованими торговими марками '.
         'відповідних компаній, з якими вони пов&#39;язані.',
@@ -3596,6 +3738,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'Відмінити видалення',
     'LBL_UNSYNC' => 'Скасувати синхронізацію',
     'LBL_UPDATE' => 'Оновлення',
+    'LBL_UPDATES' => 'Оновлення',
     'LBL_USER_LIST' => 'Список користувачів',
     'LBL_USER_MENU' => 'Меню користувача',
     'LBL_USERS_SYNC'=>'Синхронізація користувачів',
@@ -3662,6 +3805,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'Ви видалили {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'Ви впевнені, що хочете видалити зв&#39;язок з цим записом?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Ви впевнені, що хочете видалити зв&#39;язок з  {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Справді скасувати зв&#39;язок із {0}? Його також буде вилучено з поля звернення "Основний контакт".',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'Неможливо скасувати зв&#39;язок із {0}, оскільки користувач є основним контактом у цьому зверненні. Оновіть поле "Основний контакт", перш ніж скасовувати зв&#39;язок із цим записом.',
     'NTC_UNLINK_SUCCESS' => 'Ви видалили зв&#39;язок з {0}.',
     'NTC_LOGIN_MESSAGE' => 'Введіть, будь ласка, ім&#39;я користувача та пароль:',
     'NTC_NO_ITEMS_DISPLAY' => 'не визначено',
@@ -3693,6 +3838,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Оновлення браузера призведе до автоматичного закриття всіх відкритих сеансів дзвінків або чатів SugarLive, усі незбережені зміни буде втрачено. Продовжити?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Ви не зберегли зміни. Ви впевнені, що хочете залишити сторінку і відмінити зміни?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Справді скинути <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">багатофакторну автентифікацію</a>? 
+Виконання цієї дії призведе до миттєвого виходу із системи, і вам потрібно буде пройти перевірку за допомогою додатка для автентифікації під час наступного входу в систему.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Підтвердити та вийти',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'В одному або кількох дашлетах є незбережені зміни. Ви впевнені, що хочете закрити укладач документів?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Ви переходите в модуль Звіти. Зміни, внесені Вами в дашлет не зберігатимуться. Продовжити?',
     'ERROR_NO_RECORD' => 'Помилка при отриманні запису. Запис міг бути вилучений або у Вас немає прав для перегляду.',
@@ -3788,6 +3936,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "На даний момент у вас немає збережених записів. або один зараз.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Вы можете создать <item1> из <item2>. <item3> <item2> списка.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Позитивні',
+    'LBL_SENTIMENT_NEUTRAL' => 'Нейтральні',
+    'LBL_SENTIMENT_NEGATIVE' => 'Негативні',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Нитисніть тут",
     // contextMenu strings
@@ -3797,11 +3950,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'Створити примітку',
     'LBL_CREATE_OPPORTUNITY' => 'Створити угоду',
     'LBL_SCHEDULE_CALL' => 'Зареєструвати дзвінок',
+    'LBL_SCHEDULE_CALL2' => 'Дзвінок',
     'LBL_SCHEDULE_MEETING' => 'Запланувати зустріч',
+    'LBL_SCHEDULE_MEETING2' => 'Зустріч',
     'LBL_CREATE_MESSAGE' => 'Створити повідомлення',
+    'LBL_CREATE_MESSAGE2' => 'Повідомлення',
     'LBL_CREATE_TASK' => 'Створити задачу',
+    'LBL_CREATE_TASK2' => 'Завдання',
     'LBL_REMOVE_FROM_FAVORITES' => 'Видалити з Обраного',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Примітка',
     'LBL_DOWNLOAD_ALL' => 'Завантажити все',
     'LBL_DOWNLOAD_ONE' => 'Завантажити',
     'LBL_ATTACHMENTS' => 'Вкладення',
@@ -3841,13 +3999,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Відобразити ряди',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Пов&#39;язати з поточним записом',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Зв&#39;язане поле',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Закріпити перший стовпець',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Ви дійсно бажаєте видалити розділ Sugar?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Ви впевнені, що хочете видалити рядок?',
     'LBL_MAXIMUM_OF' => 'Максимум',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'стовпці можуть бути відображені.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Інформаційна панель',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Моя інф. панель',
     'LBL_COLLAPSE_ALL' => 'Згорнути все',
@@ -3864,12 +4023,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'Налаштувати',
     'LBL_DASHLET_TOGGLE' => 'Відкрити/Закрити',
     'LBL_SIDEPANE_TOGGLE' => 'Відкрити/закрити бокову панель',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Відновити розділи за замовчуванням',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Інформаційну панель не налаштовано',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Створити інформаційну панель',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Довідка',
     'LBL_HELPLET_TOGGLE' => 'Відкрити/закрити',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Модулі',
     'LBL_FACET_MODIFIED_BY_ME' => 'Змінено мною',
     'LBL_FACET_CREATED_BY_ME' => 'Створено мною',
@@ -3886,6 +4048,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Перегляд запису',
+    'LBL_RELATED_RECORDS' => 'Пов’язаний {{module}}',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Відображає запис і вибірково пов&#39;язані записи на вкладках.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Основний тип запису',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Цей {{moduleSingular}}',
@@ -3935,7 +4098,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Записів не знайдено.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Опис випадку',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Взаємодія',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Часова шкала',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Примітки та вкладення',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Примітки та Вкладення належать запису',
     'LBL_DASHLET_PIPLINE_NAME' => 'Трубопровід',
@@ -4206,6 +4369,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Завантажити з комп&#39;ютера',
     'LBL_SEARCH_EXTERNAL_API' => 'Файл на зовнішньому джерелі',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Завантажити в зовнішнє джерело',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Посилання із зовнішнього джерела',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Безпека',
     'LBL_SHARE_PRIVATE' => 'Приватна',
     'LBL_SHARE_COMPANY' => 'Компанія',
@@ -4314,6 +4479,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Ярлики клавіатури',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Форма функціональності - Alt+</strong><br/> I = Редагувати (детальний вигляд)<br/> U = Дублікувати (детальний вигляд)<br/> D = Видалити (детальний вигляд)<br/> R = Поділитися (детальний вигляд)<br/> A = Зберегти (вигляд редагування)<br/> L = Відмінити</b> (вигляд редагування) <br/><br/></p><p><strong>Пошук та навігація - Alt+</strong><br/> 7 = Перший введення в форму редагування<br/> 8 = Посилання розширеного пошуку<br/> 9 = Перше введення у форму пошуку<br/> 0 = Єдине введення пошукуt<br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Виконати ескалацію',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Поділитись',
     'TPL_RECORD_SHARE_SUBJECT' => 'Загальний для використання {{module}} {{name}} {{appId}}',
@@ -4386,7 +4554,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Всі зміни будуть втрачені при перемиканні на новий первинний запис. Ви впевнені, що хочете перемкнути?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Об’єднати пов’язані записи',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Об’єднано: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Об’єднано: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Об’єднати пов’язаного {{objectName}} не вдалося. Ініцієються нова спроба ({{num}} з {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4440,14 +4608,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'Мова',
     'LBL_LOADING_LANGUAGE' => 'Завантаження мовного пакета',
     'LBL_UPLOADING' => 'Завантаження',
+    'LBL_UPLOADING_DOTS' => 'Завантаження…',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Ви впевнені, що хочете видалити це зображення?',
     'LBL_FILE_DELETE_CONFIRM' => "Ви впевнені, що хочете видалити цей файл? Це не може бути скасовано.",
     'LBL_FILE_DELETED' => 'Файл було успішно видалений',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Тема порталу',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Налаштувати тему порталу',
-    'LBL_THEME_PREVIEW' => 'Попередній перегляд теми',
+    'LBL_THEME_PREVIEW' => 'Попередній перегляд теми порталу',
     'LBL_LOADING_PREVIEW' => 'Завантаження попереднього перегляду',
     'LBL_RESET' => 'Скинути',
     'LBL_COLORS' => 'Кольори',
@@ -4598,10 +4766,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Зустрічі',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Задачі',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Дзвінки',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Контрагенти',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Контакти',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Повідомлення',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Зміни',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Продукти комерційної пропозиції',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Виключення зміни',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
+    'LBL_ESCALATIONS' => 'Ескалації',
+    'LBL_ESCALATED' => 'Виконано ескалацію',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Ескалації',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Інші пов’язані ескалації',
+    'LBL_ESCALATIONS' => 'Ескалації',
     'LNK_SETTINGS' => 'Налаштування',
     'LBL_MOBILE_SUPPORT' => 'Підтримка',
     'LBL_MOBILE_SHOW_MORE' => 'Показати більше...',
@@ -4809,6 +4985,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Не вдалося отримати час сервера',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Не вдалося увімкнути автономний режим. Не вдалося підключитися до сервера.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Оформлення',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Використовувати системний параметр',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Світлий',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Темний',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Ім’я нового файлу',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Перейменувати файл',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Створено мною',
+    'LBL_OPERATOR_CONTAINS' => 'є одним із',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'не є одним із',
+    'LBL_OPERATOR_EMPTY' => 'пустий',
+    'LBL_OPERATOR_NOT_EMPTY' => 'не пустий',
+    'LBL_OPERATOR_MATCHES' => 'точно збігається',
+    'LBL_OPERATOR_STARTS_WITH' => 'починається з',
+    'LBL_OPERATOR_EQUALS' => 'дорівнює',
+    'LBL_OPERATOR_NOT_EQUALS' => 'не дорівнює',
+    'LBL_OPERATOR_GREATER_THAN' => 'більше, ніж',
+    'LBL_OPERATOR_LESS_THAN' => 'менше, ніж',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'більше або дорівнює',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'менше або дорівнює',
+    'LBL_OPERATOR_BETWEEN' => 'між',
+    'LBL_OPERATOR_BEFORE' => 'до',
+    'LBL_OPERATOR_AFTER' => 'після',
+    'LBL_OPERATOR_YESTERDAY' => 'учора',
+    'LBL_OPERATOR_TODAY' => 'сьогодні',
+    'LBL_OPERATOR_TOMORROW' => 'завтра',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'останні 7 днів',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'наступні 7 днів',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'останні 30 днів',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'наступні 30 днів',
+    'LBL_OPERATOR_LAST_MONTH' => 'минулого місяця',
+    'LBL_OPERATOR_THIS_MONTH' => 'цього місяця',
+    'LBL_OPERATOR_NEXT_MONTH' => 'наступного місяця',
+    'LBL_OPERATOR_LAST_YEAR' => 'минулого року',
+    'LBL_OPERATOR_THIS_YEAR' => 'цього року',
+    'LBL_OPERATOR_NEXT_YEAR' => 'наступного року',
+    'LBL_OPERATOR_IS' => 'є',
+    'LBL_OPERATOR_IS_NOT' => 'не є',
+    'LBL_ERROR_FILTER_EMPTY' => 'Додайте критерії фільтра.',
+    'LBL_ADD_FILTER' => 'Додати критерії',
+    'LBL_FILTER_NAME' => 'Назва фільтра',
+    'LBL_FILTER_FIELD' => 'Поле',
+    'LBL_FILTER_OPERATOR' => 'Оператор',
+    'LBL_FILTER_VALUE' => 'Значення',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Зберегти в додатку на робочому столі',
+    'LBL_FILTER_LOCAL' => 'Локальний фільтр',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Ласкаво просимо в {{{brandName}}}.<br/><br/> Дозвольте нам звернути увагу на деякі нові можливості...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Навігація головного меню.',
@@ -4854,6 +5079,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'Додати коментар',
     'LBL_REQUIRED' => 'Обов&#39;язково',
     'LBL_MORE_BUTTON' => 'Більше',
+    'LBL_NO_OPTIONS' => 'Немає доступних варіантів',
     'LBL_TRY_AGAIN' => 'Повторити спробу',
     'LBL_NEW_RECORDS' => 'Нещодавно створено',
     'LBL_ASSIGNED_TO_ME' => 'Мій модуль {{{module}}}',
@@ -5079,11 +5305,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Справді закрити чат?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Створити примітку або додати вкладення',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Додати примітку',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Неправильне ім&#39;я для входу. Повторіть спробу.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Невірні дані',
-    'LBL_PORTAL_INVALID_GRANT' => 'Ваш маркер доступу є недійсним або закінчився термін його дії. Будь ласка, увійдіть знову.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Закінчився термін дії маркера доступу',
+    'LBL_PORTAL_INVALID_GRANT' => 'Термін дії вашого сеансу минув. Увійдіть у систему повторно.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Термін дії сеансу минув',
     'LBL_PORTAL_AUTH_FAILED' => 'Помилка аутентифікації клієнта.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Невірний клієнт',
     'LBL_PORTAL_INVALID_REQUEST' => 'Запит є недійсним або неправильно складений. Будь ласка, зверніться до служби технічної підтримки.',
@@ -5117,6 +5347,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Відновити інформаційну панель за замовчуванням',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Консоль поновлень',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Огляд',
@@ -5136,6 +5368,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Підсумок повідомлення',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Підсумок дзвінка',
     'LBL_OMNICHANNEL_LINK_TO' => 'Пов&#39;язати {{fromModule}} з {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Зв’язати з модулем {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Пов’язано',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Ваш браузер не підтримує функцію чату. Використовуйте Google Chrome або Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Зверніться по допомогу до свого адміністратора Sugar.',
@@ -5143,6 +5376,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Перш ніж здійснювати вихідний дзвінок, потрібно завершити налаштування SugarLive.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Перш ніж відкрити SugarLive, потрібно завершити налаштування макета SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Перш ніж налаштовувати макет SugarLive, увімкніть у SugarLive режим «Поза мережею».',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Компактне подання',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Повноформатне подання',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Відновити стандартну вкладку',
@@ -5554,9 +5789,12 @@ $app_strings = array (
     'LBL_BEST' => 'Оптимістичний сценарій',
     'LBL_WORST' => 'Песимістичний сценарій',
     'LBL_LIKELY' => 'Ймовірний сценарій',
-    'LBL_BEST_ADJUSTED' => 'Оптимістичний (скоригований)',
-    'LBL_WORST_ADJUSTED' => 'Песимістичний (скоригований)',
-    'LBL_LIKELY_ADJUSTED' => 'Ймовірний (скоригований)',
+    'LBL_BEST_FORECAST' => 'Підтвердження (оптимістичний сценарій)',
+    'LBL_WORST_FORECAST' => 'Підтвердження (песимістичний сценарій)',
+    'LBL_LIKELY_FORECAST' => 'Підтвердження (імовірний сценарій)',
+    'LBL_BEST_ADJUSTED' => 'Скориговане підтвердження (оптимістичний сценарій)',
+    'LBL_WORST_ADJUSTED' => 'Скориговане підтвердження (песимістичний сценарій)',
+    'LBL_LIKELY_ADJUSTED' => 'Скориговане підтвердження (імовірний сценарій)',
     'LBL_AMOUNT_USDOLLAR' => 'Підсумкова сума',
     'LBL_OVERDUE' => 'Прострочено',
 
@@ -5577,6 +5815,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Для отримання більш детальної інформації, зверніться до документації модуля {{{more_info_url}}} {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Немає доступних даних',
+    'LBL_NEED_HELP' => 'Потрібна допомога з чимось новим?',
+    'LBL_NEW_CASE' => 'Нове звернення',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Dashlet допомоги надає інформацію, що відноситься до модуля, який Ви в даний момент переглядаєте разом із посиланням на відповідну документацію (наприклад, веде документацію) в керівництві додатка для отримання додаткової інформації.',
@@ -5724,9 +5964,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Немає відповіді',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Розклад недоступний',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Доступні подання',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Планувальник календаря',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Подання за замовчуванням',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Мої календарі',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Календарі користувачів і команд',
+    'LBL_CALENDAR' => 'Календар',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Помилка при отриманні розкладу.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Зберегти та Відправити запрошення',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Прийняти статус',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Процеси',
@@ -5843,15 +6093,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Скопіювати посилання для підтвердження',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Взаємодії',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаємодії {{moduleSingular}}',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала',
+    'LBL_NO_ACTIVITY' => 'Немає активності',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Більше',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Менше',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Часова шкала відображає дзвінки, електронні листи, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Показати більше...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Показати менше...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Немає доступних даних',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Модуль не ліцензовано.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Активні підписки',
@@ -5900,8 +6156,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Закрити фокусну панель',
     'LBL_EXTERNAL_GUESTS' => 'Зовнішні гості-користувачі',
     'LBL_MY_FAVORITE_TASKS' => 'Мої вибрані задачі',
+
     'LBL_MY_TASKS' => 'Мої задачі',
 
     // Sugar Integrate
@@ -5918,7 +6176,367 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'Тип',
     'LBL_TIME_AWARE_BEAN_ID' => 'Ідентифікатор компонента',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Відобразити мітку',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Відкрити режим перегляду записів',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Додати',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Довідка недоступна',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Функції',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Поля',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Виберіть поле...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Зведення',
+    'LBL_ACTIONBUTTON_RELATED' => 'Пов’язано',
+    'LBL_ACTIONBUTTON_SAVE' => 'Зберегти',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Скасувати',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Пов’язаний модуль',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Пов’язане поле',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Модуль зведення',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Поля зведення',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Функція зведення',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Мін.',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Макс.',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Середнє',
+    'LBL_ACTIONBUTTON_SUM' => 'Сума',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Призначити запис',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Написати електронне повідомлення',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Створити запис',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Об&#39;єднання документів',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Відкрити URL-адресу',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Запустити звіт',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Оновити запис',
+    'LBL_ACTIONBUTTON_ACTION' => 'Дія',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Призначити користувачу',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Надіслати електронне повідомлення',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Використовувати PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Шаблон',
+    'LBL_ACTIONBUTTON_MODULE' => 'Модуль',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Параметри відображення',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Тип',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Розкривне меню',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Кнопка',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Група кнопок',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Відображати мітку в записі',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Відображати в заголовку',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Сховати в редагуванні',
+    'LBL_ACTIONBUTTON_SIZE' => 'Розмір',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'За замовчуванням',
+    'LBL_ACTIONBUTTON_SMALL' => 'Малий',
+    'LBL_ACTIONBUTTON_LARGE' => 'Великий',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Обчислено',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Перетворити в PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Об’єднання документів',
+    'LBL_ACTIONBUTTON_URL' => 'URL-адреса',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Попередній перегляд',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Властивості',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Позначка',
+    'LBL_ACTIONBUTTON_DESC' => 'Підказка',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Показати ярлик',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Показати значок',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Колірна схема',
+    'LBL_ACTIONBUTTON_ICON' => 'Піктограма',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Залежний',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Конфігурація макета',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Зупинити в разі помилки',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Автоматичне збереження',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Конфігурація',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Перш ніж зберігати, налаштуйте кнопку дії.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Налаштувати кнопки',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Автоматичне створення',
+    'LBL_ACTIONBUTTON_LINK' => 'Посилання',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Копіювати батьківські значення',
+    'LBL_ACTIONBUTTON_PRESET' => 'Попереднє налаштування',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Попереднє налаштування з батьківського запису',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Вибрати...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'З батьківського поля ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Справді видалити цю кнопку?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Справді видалити цю дію?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Недійсні дані кнопки дії',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Виберіть модуль перед збереженням.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Виберіть посилання перед збереженням. Якщо посилання недоступне, зніміть позначку біля посилання.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Виберіть запис перед збереженням.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Виберіть шаблон перед збереженням.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Основна',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Додаткова',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Океан',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Рожевий',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Армія',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Синьо-зелений',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Тихий океан',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Зелений',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Жовтий',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Помаранчевий',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Червоний',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Кораловий',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Фіолетовий',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Формула',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Дії',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Помилка перевірки даних кнопки.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Кнопки повинні мати принаймні підпис або набір піктограм.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Введіть дійсний підпис кнопки.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Не вдалося створити запис через відсутність необхідних значень. Зверніться до свого адміністратора.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Для цього типу кнопки потрібно як мінімум дві активні кнопки.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Перегляди запису',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Меню дій',
+    'LBL_ACTIONBUTTON_ORDER' => 'Порядок',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Подання списку',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Подання запису',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Міні-панель подання запису',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Субпанелі',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Системі виконання послідовності завдань не вдалося виконати такі дії: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Додати дію',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Видалити цю дію',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Об&#39;єднання документів',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Об&#39;єднання документів у PDF-файл',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Розмір компанії',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Галузь',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Галузеві теги',
+    'LBL_HINT_COMPANY_LOCATION' => 'Місцезнаходження компанії',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Опис компанії',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Рік заснування',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Сторінка компанії у Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => 'Профіль компанії у Twitter',
+    'LBL_HINT_COMPANY_PIC' => 'Логотип компанії',
+    'LBL_HINT_CONTACT_PIC' => 'Фото контактної особи',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Вебсайт компанії',
+    'LBL_HINT_PHOTO' => 'Посилання на фото',
+    'LBL_HINT_JOB_2' => 'Попередні посади',
+    'LBL_HINT_EDUCATION' => 'Освіта',
+    'LBL_HINT_EDUCATION_2' => 'Додаткова освіта',
+    'LBL_HINT_TWITTER' => 'Посилання на профіль у Twitter',
+    'LBL_HINT_FACEBOOK' => 'Посилання на сторінку у Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'Код NAICS',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'Код SIC',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Кінець фінансового року',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Щорічний прибуток',
+    'LBL_HINT_PHONE_1' => 'Телефон 1',
+    'LBL_HINT_PHONE_2' => 'Телефон 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Об’єднати таблицю',
+    'LBL_HINT_FULL_NAME' => 'Повне ім’я',
+    'LBL_HINT_JOB_TITLE' => 'Назва посади',
+    'LBL_HINT_OFFICE_PHONE' => 'Телефон (роб.)',
+    'LBL_HINT_MOBILE_PHONE' => 'Телефон (моб.)',
+    'LBL_HINT_OTHER_PHONE' => 'Інший телефон',
+    'LBL_HINT_WEBSITE' => 'Вебсайт',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Перезаписати всі наявні дані для цього запису новими, знайденими в Hint?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Перезаписати наявне поле {{fieldName}} цього запису новим полем {{fieldName}}, знайденим в Hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Усі дані, пов’язані з обліковим записом, буде видалено. Справді продовжити?',
+    'LBL_HINT_COMPANY_LOGO' => 'Логотип',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Фото',
+    'LBL_HINT_ACCOUNTSETS' => 'Теги наборів рахунків Hint',
+
+    'LBL_HINT_LOADING' => 'Завантаження…',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Триває деінсталяція Hint. Зачекайте',
+    'LBL_HINT_VALUE_ERASED' => ' Значення видалено ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Ці дані було видалено за запитом на дотримання політики захисту даних',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Виберіть одну з опцій деінсталяції нижче.',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Деінсталювати лише пакет Hint',
+    'LBL_HINT_UNINSTALL_FULL' => 'Деінсталювати Hint повністю',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Ця опція видалить Hint MLP і вимкне всі активні підписки Hint Insights.
+     Перевстановлення Hint автоматично активує підписки.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Ця опція виконає повне видалення Hint, зокрема вилучить MLP і видалить усю інформацію про конфігурацію та підписку.',
+    'LBL_HINT_UNINSTALL' => 'Деінсталювати',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Деінсталювати Hint',
+    'LBL_HINT_CANCEL' => 'Скасувати',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'ПОПЕРЕДЖЕННЯ. Виберіть цей параметр, лише якщо ви не збираєтеся використовувати Hint у майбутньому.
+     Перш ніж виконувати деінсталяцію, створіть повну резервну копію вашої бази даних Sugar і переведіть Sugar у режим обслуговування. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Див. ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Посібник з адміністрування Hint ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'для отримання інформації про процес деінсталяції.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Справді хочете видалити лише пакет Hint?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Справді хочете повністю видалити Hint?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(ПРИМІТКА. ЦЮ ДІЮ НЕМОЖЛИВО СКАСУВАТИ)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Поля Hint',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Нічого не знайдено.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Базовий макет панелі Hint',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Контрагенти',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Контакти',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Потенційні клієнти',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Розгорнутий макет панелі Hint',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Змініть порядок полів, перетягнувши їх у межах розділів "Макет панелі Hint" вище.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Детальні вказівки та перелік полів за замовчуванням шукайте в ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' для відновлення налаштувань за замовчуванням для ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'модуля.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Справді хочете відновити налаштування за замовчуванням для модуля {{module}}?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Натисніть тут',
+    'LBL_HINT_CONFIG_NAME' => 'Посібник з адміністрування Hint.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Поля',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Збагачені поля',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'У цьому розділі перелічено всі поля Hint і поля Sugar, збагачені Hint. Поля Hint позначені зірочкою (*); вони можуть з’являтися на панелі Hint, лише якщо збагачені.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Назва поля',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Збагачене поле',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Показати в Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Показати на панелі Hint',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Додаткові поля Sugar',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'У цьому розділі перелічено всі поля Sugar, які незбагачені Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Попередження',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Увага! Ви збираєтеся синхронізуватися із сервісом Hint Insights. Усі розсилки дайджестів електронною поштою, що очікують на розгляд, буде втрачено, а наявні новини будуть видалено з дашлету Insights. Сповіщення всіх типів будуть відновлені після завершення синхронізації.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Пропоновані компанії, пов’язані з {{_moduleSingular}}, перераховано нижче. Виберіть дані для показу.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Контрагента не обрано',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Знайдено кілька повідомлень електронної пошти. Виберіть потрібні повідомлення для імпорту. ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'На основі введених даних Hint не вдалося знайти збіги в системі.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Найкращі результати в Hint можна знайти за іменем та адресою електронної пошти фізичної особи.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Найкращі результати в Hint можна знайти за URL-адресою вебсайту компанії.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Введіть назву компанії або вебсайт вашого {{_moduleSingular}}, і Hint здійснить пошук додаткових даних.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Введіть адресу електронної пошти вашого {{currentModule}}, і Hint здійснить пошук додаткових даних.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Немає даних для перегляду історії',
+    'LBL_HINT_HISTORY_TITLE' => 'Історія активності',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Збагачення даних',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Термін дії ліцензії на ваш сервіс SugarCRM Hint закінчився. Зверніться до адміністратора SugarCRM, щоб поновити ліцензію.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Хочете дізнатися про можливості SugarCRM Hint для вас і вашої компанії? Зверніться до адміністратора SugarCRM, щоб додати Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Інформацію про обліковий запис не знайдено',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'Знайдено збагачені дані. Натисніть, щоб зберегти всі збагачені дані у своєму записі.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Натисніть, щоб зберегти збагачені дані у своєму записі.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Пов’язані контакти',
+    'LBL_HINT_CONTACTS_NONE' => 'Немає пов’язаних контактів',
+
+    'LBL_HINT_NEWS' => 'Новини',
+    'LBL_HINT_GENERAL' => 'Загальні',
+    'LBL_HINT_ALL_NEWS' => 'Усі новини',
+    'LBL_HINT_FILTER_NEWS' => 'Фільтрувати новини',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Фінансові',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Кадрові',
+    'LBL_HINT_PRESS_RELEASES' => 'Пресрелізи',
+    'LBL_HINT_OTHER_NEWS' => 'Інші',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Пошук статей серед новин',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Немає доступних новин',
+    'LBL_NEW_NOTIFICATIONS' => 'Нові сповіщення',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Щоб переглядати дашлет Hint Insights, потрібно мати ліцензію Hint.
+     Попросіть свого адміністратора надати ліцензію Hint.',
+
+    'LBL_HINT_FOR' => 'Для',
+    'LBL_HINT_WITH' => 'з',
+    'LBL_HINT_SHOW_ME' => 'Показати мені: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Повідомити мене: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Центр налаштувань Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Клавіша вибору налаштувань',
+    'LBL_HINT_PREFERENCES' => 'Налаштування користувача',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Видалити вимкнені, потрібен принаймні один оператор налаштувань',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Додати вимкнені, досягнуто максимуму операторів налаштувань',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Включити в дашлет Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Спливне вікно як сповіщення на робочому столі',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Щоб постійно отримувати сповіщення, потрібно ввімкнути сповіщення у всіх браузерах і на всіх настільних комп’ютерах.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Деякі браузери, як-от Internet Explorer, не підтримують сповіщення. Не можна ввімкнути сповіщення, якщо використовується браузер, який їх не підтримує.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Надсилати миттєві оповіщення електронною поштою для кожного сповіщення',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Надсилати щоденний дайджест електронною поштою',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Надсилати щотижневий дайджест електронною поштою',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Не вдалося зберегти налаштування. Перевірте підключення до системи та повторіть спробу.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'У деяких обов’язкових полях відсутнє значення. Перевірте свої налаштування й упевніться, що всі обов’язкові поля заповнено.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Ви збираєтеся ввімкнути сповіщення браузера для Hint Insights. Натисніть "Підтвердити", щоб продовжити. Після цього ваш браузер запитає у вас дозвіл на отримання сповіщень.',
+    'LBL_HINT_PUSH_ERROR' => 'Плагін push-сповіщень зареєстровано для {{options.type}} без його залежностей. Він не працюватиме належним чином. Упевніться, що ви вказали шлях до робочого файлу та спосіб збереження підписки на сервері.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'Увімкнути сповіщення Hint для всіх користувачів',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'Вимкнути сповіщення Hint для всіх користувачів',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'ПОПЕРЕДЖЕННЯ. Не вдалося вимкнути сповіщення під час видалення Sugar Hint. Щоб вимкнути сповіщення, установіть версію не ранішу ніж Hint 5.4.0 і виконайте повне видалення за допомогою програми Hint Uninstaller (можна знайти в розділі адміністрування Sugar).',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Конфігурація Карт',
+    'LBL_MAP_MAP' => 'Карта',
+    'LBL_MAP_MAPS' => 'Карти',
+    'LBL_MAP_GEOCODING_RECORD' => 'Геокод',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'До запису додано геокод.',
+    'LBL_MAP_LATITUDE' => 'Широта',
+    'LBL_MAP_LONGITUDE' => 'Довгота',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Пошук за адресою…',
+    'LBL_MAP_ALREADY_GEOCODED' => 'До поточного запису вже додано геокод. Справді хочете перезаписати геокодування для цього запису?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Геокодування вручну',
+    'LBL_MAP_POINT_COORDINATES' => 'Координати точки на карті',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Обчислення оптимального маршруту…',
+    'LBL_MAP_DIRECTIONS' => 'Напрямки',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Вказівки, починаючи з цього користувача',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Вказівки, починаючи з цього запису',
+    'LBL_MAPS_RADIUS_INPUT' => 'Радіус (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'у радіусі від поштового індексу',
+    'LBL_MAPS_DISTANCE' => 'Відстань',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Поштовий індекс',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Недійсна конфігурація: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => 'Зіставлення полів <strong>{{module}}</strong> недійсне.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Тип карти',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Рівень масштабування',
+    'LBL_MAPS_DASHLET' => 'Карти',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Візуалізує геокодовані записи на карті.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Карти недоступні для цього модуля. Увімкніть їх на консолі адміністратора.',
+    'LBL_MAP_MODULES' => 'Модуль',
+    'LBL_MAP_FILTER_BY' => 'Фільтрувати за',
+    'LBL_MAP_UNIT_TYPE' => 'Тип одиниці',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Милі',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Кілометри',
+    'LBL_MAP_ADDRESS' => 'Адреса',
+    'LBL_MAP_NO_STARTING_POINT' => 'Початкова точка не має геокоду.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Запис початкової точки не має геокоду.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Деякі з вибраних записів не мають геокодів і не з’являтимуться на карті.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Записи не мають геокодів.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Поля модуля',
+    'LBL_MAPS_SELECT_FIELD' => 'Вибрати поле',
+    'LBL_MAPS_RELATE_RECORD' => 'Пов’язаний запис',
+    'LBL_MAPS_MAPPING_TYPE' => 'Тип зіставлення',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Немає записів із геокодами',
+    'LBL_MAPS_ADDRESS' => 'Адреса',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Відповідальний користувач',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Вид збоку вулиці недоступний для даної точки',
+    'LBL_MAPS_INVALID_MODULE' => 'Записи <strong>{0}</strong> непридатні для зіставлення. Видаліть модуль зі списку.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Закрити',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Розгорнути',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Зберегти у форматі PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'Посилання на адресу електронної пошти',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'У вас має бути принаймні один запис із геокодами.',
+    'LBL_MAPS_GENERATING' => 'Створення карти…',
+    'LBL_MAPS_POINTS' => 'Точки на карті',
+    'LBL_MAPS_POINT' => 'Точка',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Деталі поїздки',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Загальна відстань',
+    'LBL_MAPS_TOTAL_DURATION' => 'Загальна тривалість',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Загальна тривалість без урахування трафіку',
+    'LBL_MAPS_ITINERARY' => 'Маршрут',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Пройдена відстань',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Тривалість поїздки',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Кроки',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Попередження',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Карти Bing підтримують щонайбільше 10 точок на спільній карті. Перегляньте свій вибір.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Потрібна ліцензія на Карти',
+
+    'LBL_INVALID_FORMULA' => 'Недійсна формула',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Тип повернення функції не збігається',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Прогноз',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Ідеальний профіль клієнта',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Останній статус',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Надіслати в DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Відкрити',
+    'LBL_CLOSED_WON' => 'Успішно закритий',
+    'LBL_CLOSED_LOST' => 'Втрачений',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6755,8 +7373,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Контакти Contacts',
@@ -7096,6 +7714,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Вбудований
     'YER' => 'Ріали',
     'ZWD' => 'Долари Зімбабве',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Дуже високий',
+        '4' => 'Високий',
+        '3' => 'Нейтральний',
+        '2' => 'Низький',
+        '1' => 'Дуже низький',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Немає',
         'future' => 'Поточне значення',
@@ -7105,3 +7731,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Вбудований
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'одиночна обробка',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Обробка',
+        'error' => 'Помилка',
+        'success' => 'Успішно виконано',
+        'canceled' => 'Скасовано',
+        'document_load' => 'Завантаження шаблону',
+        'tags_extract' => 'Отримання тегів',
+        'tags_validate' => 'Перевірка тегів',
+        'data_retrieving' => 'Отримання даних',
+        'serialize_document' => 'Зворотне об’єднання документа',
+        'send_document' => 'Надсилання документа вам',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Об’єднати',
+        'convert' => 'Об’єднання PDF-файлів',
+        'multimerge' => 'Масове об’єднання',
+        'multimerge_convert' => 'Масове об’єднання PDF-файлів',
+        'labelsgenerate' => 'Створити мітки',
+        'labelsgenerate_convert' => 'Створити мітки у форматі PDF',
+        'excel' => 'Об’єднання файлів Excel',
+        'excel_convert' => 'Перетворення об’єднання файлів Excel',
+        'presentation' => 'Об’єднання файлів PowerPoint',
+        'presentation_convert' => 'Об’єднання PDF-файлів у PowerPoint',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Мої контрагенти',
+      'favorites' => 'Контрагенти, додані у Вибране',
+      'tags' => 'Контрагенти, позначені тегами',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Усі новини',
+      'General' => 'Загальні',
+      'Finance' => 'Фінансові',
+      'People' => 'Кадрові',
+      'Press Releases' => 'Пресрелізи',
+      'Other' => 'Інші',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Власники';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Хмарне сховище';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Дашлет інтеграції із хмарним сховищем';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Копіювати посилання';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Завантажити';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Створити документ Sugar';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Синхронізувати з Google Диском';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Синхронізувати все з Google Диском';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Не вдалося завантажити цей файл';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Хмарний дашлет відсутній';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Створено документ Sugar';
+
+    $app_string['LBL_MY_FILES'] = 'Мої файли';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Мені надано доступ';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Постачальник хмарних послуг';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Диск',
+      'onedrive' => 'Microsoft OneDrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Мені надано доступ';
+    $app_strings['LBL_MY_FILES'] = 'Мої файли';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Завантажити файл';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Папку не знайдено';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Створити папку';
+    $app_strings['LBL_LOAD_MORE'] = 'Завантажити ще…';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'З’єднання з Google не знайдено…';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'З’єднання з Microsoft не знайдено…';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-порожній-',
+      'Exact' => 'Точно',
+      'Null_address_components' => 'Один або кілька компонентів адреси порожні',
+      'Invalid_address' => 'Недійсна адрес. Сервер повернув значення "Невірно"',
+      'Invalid_server_response_not_XML' => 'Недійсна відповідь сервера (не XML)',
+      'Invalid_address_no_location' => 'Недійсна адреса. Сервер не повернув розташування',
+      'Ambiguous_address' => 'Неоднозначна адреса, кілька збігів',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Дорога',
+      'a' => 'Аерофотознімок',
+      'be' => 'З висоти пташиного польоту',
+      'rd' => 'Темна дорога',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

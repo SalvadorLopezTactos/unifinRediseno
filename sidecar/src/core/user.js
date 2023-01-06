@@ -76,12 +76,22 @@ function makeLastState() {
          *
          * @param {string} key The local storage key.
          * @param {string} value The value to associate with `key`.
+         * @param {boolean} updateDbValue (optional) if true, updates the key in the DB as well
          * @memberOf Core/User.LastState
          */
-        set: function(key, value) {
+        set: function(key, value, updateDbValue = true) {
             if (!_.isUndefined(key) && !_.isUndefined(value)) {
                 var storedKey = buildLastStateKeyForStorage(key);
                 SUGAR.App.cache.set(storedKey, value);
+
+                if (updateDbValue &&
+                    SUGAR.App.api.isAuthenticated() &&
+                    SUGAR.App.user.get('type') !== 'support_portal'
+                ) {
+                    this.changesToSync = this.changesToSync || {};
+                    this.changesToSync[key] = value;
+                    this._syncDb();
+                }
             }
         },
 
@@ -181,6 +191,32 @@ function makeLastState() {
         },
 
         /**
+         * Fetch the user's last state from the DB
+         *
+         * @param callback
+         */
+        load: function(callback) {
+            SUGAR.App.api.call('read', SUGAR.App.api.buildURL('me/last_states'), null, {
+                success: (data) => {
+                    if (!_.isEmpty(data)) {
+                        Object.entries(data).forEach(([key, value]) => {
+                            this.set(key, value, false);
+                        });
+                    }
+                    if (_.isFunction(callback)) {
+                        callback();
+                    }
+                },
+                error: (err) => {
+                    SUGAR.App.error.handleHttpError(err);
+                    if (_.isFunction(callback)) {
+                        callback(err);
+                    }
+                }
+            });
+        },
+
+        /**
          * Retrieves a list of important last value keys in the cache.
          *
          * @return {Array} List of high value keys in cache.
@@ -193,7 +229,44 @@ function makeLastState() {
                 ret.push(buildLastStateKeyForStorage(key));
             });
             return ret;
-        }
+        },
+
+        /**
+         * Syncs the current lastState data for the user with the DB
+         */
+        _syncDb: _.debounce(function() {
+            if (!this.isUpdating) {
+                // Allow one DB update at a time to prevent issues with concurrent saves
+                this.isUpdating = true;
+
+                // Get the changed lastStates since the last sync
+                let args = {
+                    values: Object.assign({}, this.changesToSync)
+                };
+                this.changesToSync = {};
+
+                // On success, check to see if we need to save again (if another
+                // change was made since the last save call was triggered)
+                let callbacks = {
+                    success: () => {
+                        this.isUpdating = false;
+                        if (this.resave) {
+                            this.resave = false;
+                            this._syncDb();
+                        }
+                    },
+                    error: (err) => {
+                        SUGAR.App.error.handleHttpError(err);
+                    }
+                };
+
+                SUGAR.App.api.call('update', SUGAR.App.api.buildURL('me/last_states'), args, callbacks);
+            } else {
+                // A save is already in progress. Since another change has been made,
+                // mark this to trigger another save after the current one is complete
+                this.resave = true;
+            }
+        }, 500),
     };
 }
 
@@ -239,6 +312,7 @@ var User = Backbone.Model.extend({
     load: function(callback) {
         SUGAR.App.api.me('read', null, null, {
             success: _.bind(function(data) {
+                let useCallback = true;
                 if (data && data.current_user) {
                     // Set the user pref hash into the cache for use in
                     // checking user pref state change
@@ -253,8 +327,17 @@ var User = Backbone.Model.extend({
                             noSync: SUGAR.App.isSynced || SUGAR.App.metadata.isSyncing()
                         });
                     }
+
+                    // After the user object is fetched, load the user's last state as well.
+                    if (data.current_user.type !== 'support_portal') {
+                        useCallback = false;
+                        this.lastState.load(callback);
+                    }
                 }
-                if (callback) callback();
+
+                if (callback && useCallback) {
+                    callback();
+                }
             }, this),
             error: function(err) {
                 SUGAR.App.error.handleHttpError(err);
@@ -450,6 +533,142 @@ var User = Backbone.Model.extend({
         }
 
         return currencyObj;
+    },
+
+    /**
+     * Checks if the user has one or more licenses.
+     * @param {string|Array} licenseType one or more licenses to check
+     * @param {boolean} hasAll if true, the user must have all the provided licenses
+     * @return {boolean} true if the user's licenses match the criteria, false otherwise
+     */
+    hasLicense: function(licenseType, hasAll = false) {
+        let userLicenses = this.get('licenses');
+        if (!_.isArray(userLicenses)) {
+            return false;
+        }
+
+        if (_.isString(licenseType)) {
+            licenseType = [licenseType];
+        }
+
+        let licenseMatcher = license => userLicenses.includes(license);
+        return hasAll ? licenseType.every(licenseMatcher) : licenseType.some(licenseMatcher);
+    },
+
+    /**
+     * Gets a list of all the product codes of products in use by the user
+     *
+     * @return {Array} the unique list of product codes
+     */
+    getProductCodes: function() {
+        return _.uniq(_.pluck(this.get('products'), 'product_code'));
+    },
+
+    /**
+     * Gets a list of all the readable names of products in use by the user
+     *
+     * @return {Array} the unique list of product names
+     */
+    getProductNames: function() {
+        return _.uniq(_.pluck(this.get('products'), 'product_name'));
+    },
+
+    /**
+     * Checks if the user has a Sell license.
+     * @return {boolean}
+     */
+    hasSellLicense: function() {
+        return this.hasLicense('SUGAR_SELL');
+    },
+
+    /**
+     * Checks if the user has a Serve license.
+     * @return {boolean}
+     */
+    hasServeLicense: function() {
+        return this.hasLicense('SUGAR_SERVE');
+    },
+
+    /**
+     * Checks if the user has a Sell/Serve license. If hasBoth is true, then the user must
+     * have both licenses. If hasBoth is false (default), then having at least one license is enough.
+     * @param {boolean} hasBoth
+     * @return {boolean}
+     */
+    hasSellServeLicense: function(hasBoth = false) {
+        return this.hasLicense(['SUGAR_SELL', 'SUGAR_SERVE'], hasBoth);
+    },
+
+    /**
+     * Checks if the user has a Connect license.
+     * @return {boolean}
+     */
+    hasConnectLicense: function() {
+        return this.hasLicense('CONNECT');
+    },
+
+    /**
+     * Checks if the user has a Discover license.
+     * @return {boolean}
+     */
+    hasDiscoverLicense: function() {
+        return this.hasLicense('DISCOVER');
+    },
+
+    /**
+     * Checks if the user has a Hint license.
+     * @return {boolean}
+     */
+    hasHintLicense: function() {
+        return this.hasLicense('HINT');
+    },
+
+    /**
+     * Checks if the user has a Maps license.
+     * @return {boolean}
+     */
+    hasMapsLicense: function() {
+        return this.hasLicense('MAPS');
+    },
+
+    /**
+     * Checks if the user has an Advanced Forecasting license.
+     * @return {boolean}
+     */
+    hasAdvancedForecastingLicense: function() {
+        return this.hasLicense('ADVANCEDFORECAST');
+    },
+
+    /**
+     * Checks if the user has a Predict Advanced or Predict Premier license.
+     * @return {boolean}
+     */
+    hasPredictLicense: function() {
+        return this.hasPredictAdvancedLicense() || this.hasPredictPremierLicense();
+    },
+
+    /**
+     * Checks if the user has a Predict Advanced license.
+     * @return {boolean}
+     */
+    hasPredictAdvancedLicense: function() {
+        return this.hasLicense('PREDICT_ADVANCED');
+    },
+
+    /**
+     * Checks if the user has a Predict Premier license.
+     * @return {boolean}
+     */
+    hasPredictPremierLicense: function() {
+        return this.hasLicense('PREDICT_PREMIER');
+    },
+
+    /**
+     * Checks if the user has completed their set up steps
+     * @return {boolean}
+     */
+    isSetupCompleted: function() {
+        return this.get('cookie_consent') && !this.get('show_wizard');
     },
 
     lastState: makeLastState()

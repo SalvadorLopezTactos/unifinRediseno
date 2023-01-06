@@ -233,33 +233,6 @@ $xtpl->assign("LBL_CONTACT", $app_list_strings['moduleList']['Contacts']);
 global $current_user;
 $request = InputValidation::getService();
 $module = $request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
-if ($module !== 'DynamicLayout' && !empty($_SESSION['editinplace']) && is_admin($current_user)) {
-    $record = $request->getValidInputRequest('record', null, '');
-    $action = $request->getValidInputRequest('action');
-
-    $href = 'index.php?' . http_build_query([
-            'action' => 'index',
-            'module' => 'DynamicLayout',
-            'from_action' => $action,
-            'from_module' => $module,
-            'record' => $record,
-        ]);
-    $xtpl->assign(
-        'ADMIN_EDIT',
-        sprintf(
-            '<a href="%s">%s</a>',
-            htmlspecialchars($href),
-            SugarThemeRegistry::current()->getImage(
-                'EditLayout',
-                'border="0" align="bottom"',
-                null,
-                null,
-                '.gif',
-                $mod_strings['LBL_EDIT_LAYOUT']
-            )
-        )
-    );
-}
 
 $escapedHTML = static function ($html): string {
     return htmlspecialchars($html, ENT_QUOTES);

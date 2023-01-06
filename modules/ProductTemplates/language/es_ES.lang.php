@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Nombre del Servicio de Asistencia:',
   'LBL_SUPPORT_TERM' => 'Término de Asistencia:',
   'LBL_TAX_CLASS' => 'Tipo de Impuesto:',
+  'LBL_ACTIVE_STATUS' => 'Estado',
   'LBL_TYPE_NAME'=>'Nombre de Tipo',
   'LBL_TYPE' => 'Tipo',
   'LBL_PRODUCT_TYPE' => 'Tipo de producto',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Cuadro de mandos de la lista de catálogos de productos',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Cuadro de mandos del regisro de catálogos de productos',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en el catálogo de productos',
+    'LBL_FILTER_ACTIVE_STATUS' => 'El Estado es Activo',
 );

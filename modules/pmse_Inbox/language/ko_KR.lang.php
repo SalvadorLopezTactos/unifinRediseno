@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => '프로세스 기록 대시보드',
 
     'LBL_CAS_ID' => '프로세스 번호',
+    'LBL_CAS_STATUS' => '진행 상태',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "알 수없는 (사용자 아이디:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "작업이 완수됨",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "작업이",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "%s 작업 %s에 의해 %s 레코드 %s 프로세스 #%s 가 할당되었습니다",
     'LBL_PMSE_HISTORY_LOG_ON'  => "온",
     'LBL_PMSE_HISTORY_LOG_AND'  => "및",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => '기록을 다음과 연결 또는 해제',
 
     'LBL_PMSE_LABEL_APPROVE' => '승인',
     'LBL_PMSE_LABEL_REJECT' => '거부',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => '진행 중 프로세스',
     'LBL_STATUS_CANCELLED' => '프로세스는 취소',
     'LBL_STATUS_ERROR' => '프로세스 오류',
+    'LBL_STATUS_COMPLETED_ENUM' => '완료',
+    'LBL_STATUS_TERMINATED_ENUM' => '중단',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => '진행 중',
+    'LBL_STATUS_CANCELLED_ENUM' => '취소',
+    'LBL_STATUS_ERROR_ENUM' => '오류',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => '프로세스 관리',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => '무인 프로세스',

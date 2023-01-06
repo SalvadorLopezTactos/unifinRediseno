@@ -67,14 +67,17 @@ class OpportunityHooks extends AbstractForecastHooks
                     $renewalBean = $bean->createNewRenewalOpportunity();
                 }
 
-                // create new renewal RLIs in a new or existing renewal Opp
+                // Create new renewal RLIs, if they don't exist, in a new or existing renewal Opp
                 foreach ($rliBeans as $rliBean) {
                     if (!in_array($rliBean->id, $rlisUpdated)) {
-                        $newRliBean = $renewalBean->createNewRenewalRLI($rliBean);
+                        // If there is was no previous renewal RLI created, link a newly generated renewal RLI
+                        // to our parent RLI
+                        if (empty($rliBean->renewal_rli_id)) {
+                            $newRliBean = $renewalBean->createNewRenewalRLI($rliBean);
 
-                        // Link the renewal RLI to the RLI it is generating
-                        $rliBean->renewal_rli_id = $newRliBean->id;
-                        $rliBean->save();
+                            $rliBean->renewal_rli_id = $newRliBean->id;
+                            $rliBean->save();
+                        }
                     }
                 }
 
@@ -100,11 +103,6 @@ class OpportunityHooks extends AbstractForecastHooks
      */
     public static function queueRLItoPurchaseJob(Opportunity $bean, string $event, array $args): bool
     {
-        global $current_user;
-        if (!$current_user->hasLicense(Subscription::SUGAR_SELL_KEY)) {
-            return false;
-        }
-
         if (!static::useRevenueLineItems()) {
             return false;
         }

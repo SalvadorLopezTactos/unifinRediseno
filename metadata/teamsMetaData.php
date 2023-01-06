@@ -24,7 +24,6 @@ $dictionary['teams'] = array ( 'table' => 'teams'
       , array('name' =>'deleted', 'type' =>'bool', 'len'=>'1', 'default'=>'0')
                                                       )                                  , 'indices' => array (
        array('name' =>'teamspk', 'type' =>'primary', 'fields'=>array('id'))
-      , array('name' =>'idx_team_del', 'type' =>'index', 'fields'=>array('name'))
                                                       )
                                   )
 ?>

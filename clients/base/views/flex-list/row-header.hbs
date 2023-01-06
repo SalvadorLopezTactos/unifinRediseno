@@ -19,57 +19,80 @@
         </th>
     {{/each}}
     {{#each view._fields.visible}}
-        <th class="{{#isSortable ../view.module this}}sorting{{#eq ../../view.orderBy.field name}}_{{../../../view.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+        <th class="{{#isSortable ../view.module this}}sorting{{#eq ../../view.orderBy.field name}}_{{../../../view.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}
+            {{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky-column stick-first no-border{{#eq ../../../view.leftColumns.length 0}} no-left-column{{/eq}}{{/if}}{{/if}}"
             {{#if styles}} style="{{styles}}"{{/if}}
             {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
 
-            {{#has "ReorderableColumns" ../view.plugins}}
-            {{! Insert a <div> around all the inner element of the column.
-                This is a fix for firefox because the <th> does not support
-                a relative positioning.}}
-            <div>
-                <div class="th-droppable-placeholder" data-droppableindex="{{@index}}"></div>
-                {{! Insert a <div> around the <span> containing the field label.
-                    That <div> is the draggable element.
-                    This is a fix for firefox because dragging a <th> is not
-                    supported.}}
-            <div{{#has "ReorderableColumns" ../../view.plugins}} data-draggable="true"{{/has}}>
-            {{/has}}
-            <span>
-                {{str label ../view.module}}
-            </span>
-            {{#has "ReorderableColumns" ../view.plugins}}
+            <div class="sortable-row-header-container">
+                {{#has "ReorderableColumns" ../view.plugins}}
+                    {{! Insert a <div> around all the inner element of the column.
+                    This is a fix for firefox because the <th> does not support
+                    a relative positioning.}}
+
+                    <div class="th-droppable-placeholder" data-droppableindex="{{@index}}"></div>
+                    {{! Insert a <div> around the <span> containing the field label.
+                        That <div> is the draggable element.
+                        This is a fix for firefox because dragging a <th> is not
+                        supported.}}
+                    <div{{#has "ReorderableColumns" ../../view.plugins}} data-draggable="true"{{/has}}>
+                {{/has}}
+                <span class="sortable-row-header-column-name">
+                     {{#if icon}}
+                         <i class="{{buildIcon icon.type}}" rel="tooltip"  title="{{str icon.tooltip ../../view.module}} "></i>
+                     {{/if}}
+                    {{str label ../view.module}}
+                </span>
+                {{#has "ReorderableColumns" ../view.plugins}}
+                    </div>
+                    {{#if @last}}
+                        <div class="th-droppable-placeholder th-droppable-placeholder-last"
+                             data-droppableindex="{{../../../view._fields.visible.length}}">
+                        </div>
+                    {{/if}}
+                    <span class="sortable-row-header-arrows">
+                        <i class="sicon sicon-arrow-up"></i>
+                        <i class="sicon sicon-arrow-down"></i>
+                    </span>
+                {{/has}}
             </div>
-                {{#if @last}}
-                    <div class="th-droppable-placeholder th-droppable-placeholder-last" data-droppableindex="{{../../../view._fields.visible.length}}"></div>
-                {{/if}}
-            </div>
-            {{/has}}
         </th>
     {{/each}}
     {{#each view.rightColumns}}
         {{#if isColumnDropdown}}
             <th class="nosort morecol sticky-column stick-right">
                 <div class="dropdown">
-                    <button class="btn btn-invisible dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="{{str 'LBL_COLUMNS'}}" data-placement="bottom" data-action="fields-toggle" track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
-                    <ul class="dropdown-menu left">
+                    <button class="btn btn-invisible dropdown-toggle" data-toggle="dropdown" rel="tooltip"
+                        title="{{str 'LBL_COLUMNS'}}" data-placement="bottom" data-action="fields-toggle"
+                        track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true"
+                        aria-expanded="false" role="button"
+                    >
+                        <i class="sicon sicon-kebab"></i>
+                    </button>
+                    <ul class="dropdown-menu left" role="menu">
+                        {{#if ../../view.allowFreezeFirstColumn}}
+                            <li role="menuitem" class="menuitem-config">
+                                <span>{{str 'LBL_LISTVIEW_FREEZE_COLUMN_1'}} <input type="checkbox" {{#if ../../../view.isFirstColumnFreezed}} checked{{/if}} data-action="freeze-first-column"></span>
+                            </li>
+                            <li class="divider" data-settings-li="widths" aria-hidden="true"></li>
+                        {{/if}}
                         {{#each ../../view._fields.all}}
-                            <li>
+                            <li role="menuitem">
                                 <button class="{{#if selected}}active{{/if}}" data-field-toggle="{{name}}" track="click:{{name}}">
-                                    {{#if selected}}<i class="fa fa-check"></i> {{/if}}{{str label ../../../view.module}}
+                                    {{#if selected}}<i class="sicon sicon-check"></i> {{/if}}{{str label ../../../view.module}}
                                 </button>
                             </li>
                         {{/each}}
-                        <li class="divider" data-settings-li="order"></li>
-                        <li data-settings-li="order">
+                        <li class="divider" data-settings-li="order" aria-hidden="true"></li>
+                        <li data-settings-li="order" role="menuitem">
                             <button data-columns-order="reset">
-                                <i class="icon fa fa-exchange"></i> {{str 'LBL_RESET_DEFAULT_VIEW' ../../view.module}}
+                                <i class="icon sicon sicon-reset"></i> {{str 'LBL_RESET_DEFAULT_VIEW' ../../view.module}}
                             </button>
                         </li>
-                        <li class="divider" data-settings-li="widths"></li>
-                        <li data-settings-li="widths">
+                        <li class="divider" data-settings-li="widths" aria-hidden="true"></li>
+                        <li data-settings-li="widths" role="menuitem">
                             <button data-widths="reset">
-                                <i class="icon fa fa-arrows-h"></i> {{str 'LBL_RESET_DEFAULT_WIDTHS' ../../view.module}}
+                                <i class="icon sicon sicon-reset"></i> {{str 'LBL_RESET_DEFAULT_WIDTHS' ../../view.module}}
                             </button>
                         </li>
                     </ul>
@@ -85,8 +108,8 @@
     {{/each}}
 </tr>
 <tr>
-    <th data-target="alert-container" class="alert alert-warning hide"{{#if view.colSpan}} colspan="{{../view.colSpan}}"{{/if}}>
-        <div data-target="alert">
+    <th data-target="alert-container" class="alert alert-warning hide"{{#if view.colSpan}} colspan="{{../view.colSpan}}"{{else}} colspan="100%"{{/if}}>
+        <div class="alert-list-contents" data-target="alert">
         </div>
     </th>
 </tr>

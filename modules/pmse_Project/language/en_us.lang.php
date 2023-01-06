@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Created by User',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Last Modified by User',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'System Email',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Document Template',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Doc Merge',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Select...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Doc Merge to PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Doc Merge',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Business Rule',
     'LBL_PMSE_LABEL_RULE' => 'Rule',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Updated Records Only (All Updates - See Help Text)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'New Records or First Update',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'New Records and All Updates',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Relationship Change',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Select when the process will start.<br><br>New: Run process when new record is created.<br><br>First Update: Process runs only the first time criteria is met for an existing record.<br><br>All Updates: Process runs every time criteria is met for an existing record.<br><br>New Records or First Update: Process runs only the first time criteria is met for a record, during either record creation or record update.<br><br>New Records and All Updates: Process runs every time for all new and existing record.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Select when the process will start.<br><br>New: Run process when new record is created.<br><br>First Update: Process runs only the first time criteria is met for an existing record.<br><br>All Updates: Process runs every time criteria is met for an existing record.<br><br>New Records or First Update: Process runs only the first time criteria is met for a record, during either record creation or record update.<br><br>New Records and All Updates: Process runs every time for all new and existing record.<br><br>Relationship Changes: Process runs every time there is a relationship change.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Select the SugarCRM module to apply the event trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fixed Date',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Error',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Relationship Change Evaluation',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Fields',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Module Field Evaluation',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Module',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'All Related Records',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Any Related Records',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Added',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Removed',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Added or Removed',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Any Relationship',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Run Time',
 

@@ -26,20 +26,46 @@ class Subject implements Formatter
     public function formatRows(array &$rows)
     {
         $subjects = array();
+        $impersonations = [];
         // gather all subjects
         foreach ($rows as $k => $v) {
             if (!empty($v['source']['subject'])) {
                 $subjects[$k] = $v['source']['subject'];
+                if ($this->isImpersonated($v)) {
+                    $impersonations[$k] = [
+                        '_module' => $v['source']['subject']['_module'],
+                        'id' => $v['impersonated_by'],
+                    ];
+                }
             }
         }
 
         $formattedSubjects = $this->formatter->formatBatch($subjects);
+        if (count($impersonations) > 0) {
+            $formattedImpersonations = $this->formatter->formatBatch($impersonations);
+        }
 
         // merge formatted subjects into rows
         foreach ($formattedSubjects as $k => $v) {
             $rows[$k]['source']['subject'] = $v;
+            if (isset($formattedImpersonations[$k])) {
+                $rows[$k]['source']['subject']['impersonated'] = $formattedImpersonations[$k];
+            }
         }
 
         return $rows;
+    }
+
+    /**
+     * @param array $row
+     * @return bool
+     */
+    private function isImpersonated(array $row): bool
+    {
+        return isset($row['impersonated_by'])
+            && $row['source']['subject']['_module'] === 'Users'
+            && isset($row['source']['attributes']['platform'])
+            // Should not display integrations impersonations (SugarConnect for example)
+            && $row['source']['attributes']['platform'] === 'base';
     }
 }

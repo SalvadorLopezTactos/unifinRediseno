@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => '商談品目総数IDの更新',
     'LBL_PARENT_RLIS' => '親商談品目',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => '親商談品目',
+    'LBL_FORECASTED_LIKELY' => '予想される可能性が高い',
     'LBL_EXPERT_ID' => '製品エキスパート',
     'LBL_FORECAST' => '売上予測',
     'LBL_SUBTOTAL' => '小計',

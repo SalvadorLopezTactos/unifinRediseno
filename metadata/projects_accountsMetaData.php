@@ -46,13 +46,6 @@ $dictionary['projects_accounts'] = array(
             ),
         ),
         array(
-            'name' => 'idx_proj_acct_proj',
-            'type' => 'index',
-            'fields' => array(
-                'project_id',
-            ),
-        ),
-        array(
             'name' => 'idx_proj_acct_acct',
             'type' => 'index',
             'fields' => array(

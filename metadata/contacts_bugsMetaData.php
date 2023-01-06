@@ -51,13 +51,6 @@ $dictionary['contacts_bugs'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_bug_con',
-            'type' => 'index',
-            'fields' => array(
-                'contact_id',
-            ),
-        ),
-        array(
             'name' => 'idx_con_bug_bug',
             'type' => 'index',
             'fields' => array(

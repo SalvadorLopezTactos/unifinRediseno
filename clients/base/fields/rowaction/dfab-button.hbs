@@ -12,11 +12,12 @@
 --}}
 
 <a role='button' name='{{name}}' track='{{track}}' href='{{href}}'
-    {{#if def.event}} data-event='{{def.event}}'{{/if}}{{#if ariaLabel}} aria-label='{{ariaLabel}}'{{/if}}>
-        {{#if label}}
-            <div class='dfab-label'>{{str label}}</div>
-        {{/if}}
-        {{#if def.icon}}
-            <div class='dfab-icon {{def.icon}}'></div>
-        {{/if}}
+   {{#if def.event}} data-event='{{def.event}}'{{/if}}{{#if ariaLabel}} aria-label='{{ariaLabel}}'{{/if}}
+>
+    {{#if label}}
+        <div class='dfab-label'>{{str label}}</div>
+    {{/if}}
+    {{#if def.icon}}
+        <div class='dfab-icon sicon sicon-lg {{def.icon}}'></div>
+    {{/if}}
 </a>

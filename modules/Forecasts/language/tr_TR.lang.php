@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Tanım',
     'LBL_OW_TYPE'=>'Tipi',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => '<span class="sicon sicon-user-group mx-1"></span> {{name}} için Takım Tahmini',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Doğrudan Rapor',
     'LBL_FDR_OPPORTUNITIES'=>'Tahmindeki olasılıklar:',
     'LBL_FDR_WEIGH'=>'Fırsatların ağırlıklı miktarı:',
     'LBL_FDR_COMMIT'=>'Onaylanmış Miktar',
     'LBL_FDR_DATE_COMMIT'=>'Onay Tarihi',
+    'LBL_FDR_FORECAST_HEADER' => '<span class="sicon sicon-user mx-1"></span> {{name}} için Satıcı Tahmini',
 
     //detail view.
     'LBL_DV_HEADER' => 'Tahminler: Çalışma Sayfası',
     'LBL_DV_MY_FORECASTS' => 'Tahminlerim',
-    'LBL_DV_MY_TEAM' => "Takımımın Tahminleri" ,
+    'LBL_DV_MY_TEAM' => "Takımımın Tahminleri",
     'LBL_DV_TIMEPERIODS' => 'Zaman Aralıkları:',
     'LBL_DV_FORECAST_PERIOD' => 'Zaman Aralığı Tahmini',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Tahmin Fırsatları',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Temel Oran',
 
     'LBL_QUOTA' => 'Kota',
-    'LBL_QUOTA_ADJUSTED' => 'Kota (Düzeltilmiş)',
+    'LBL_QUOTA_ADJUSTED' => 'Ayarlanmış Kota',
 
     'LBL_FORECAST_FOR'=>'Tahmin Çalışma Sayfası:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Topla)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kota - Onaylanan - Gerçekleşen Karşılaştırması',
 
     'LBL_FORECAST' => 'Tahmin',
+    'LBL_COMMITMENT' => 'Onay',
+    'LBL_TEAM_COMMITMENT' => 'Takım Onayı',
+    'LBL_FORECASTED' => 'Tahmin edildi',
+    'LBL_ADJUSTED_TOTAL' => 'Ayarlanmış Toplam',
     'LBL_COMMIT_STAGE' => 'Onay Aşaması',
     'LBL_SALES_STAGE' => 'Aşama',
     'LBL_AMOUNT' => 'Tutar',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, ve {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'olası {{{direction}}} {{{from}}} - {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'en iyi {{{direction}}} {{{from}}} - {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'en kötü {{{direction}}} {{{from}}} - {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'değişmemiş görünüyor',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'en iyi aynı kaldı',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'en kötü aynı kaldı',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Onaylandı (Olası) {{{direction}}} {{{from}}} - {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Onaylandı (En iyi) {{{direction}}} {{{from}}} - {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Onaylandı (En kötü) {{{direction}}} {{{from}}} - {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Onaylanan (Olası) aynı kaldı',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Onaylanan (En iyi) aynı kaldı',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Onaylanan (En kötü) aynı kaldı',
 
 
     'LBL_COMMITTED_THIS_MONTH' => '{0} içindeki bu ay',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Görüntülenen Toplam',
     'LBL_TOTAL' => 'Toplam',
     'LBL_OVERALL_TOTAL' => 'Genel Toplam',
-    'LBL_EDITABLE_INVALID' => '{0} için geçersiz değer',
+    'LBL_EDITABLE_INVALID' => '{{field_name}} için geçersiz değer',
     'LBL_EDITABLE_INVALID_RANGE' => 'Değer {0} ve {1} arasında olmalıdır',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Çalışma sayfanızda kaydedilmemiş değişiklikler var.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Sadece kaydedilmiş veya onaylanmış veri dışarı aktarılabilir olduğunu lütfen unutmayınız. Dışarı aktarmaya devam etmek için Tamam butonuna basın veya çalışma sayfasına dönmek için İptal butonuna basın.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Dahil',
     'LBL_CHART_NOT_INCLUDED' => 'Dahil Değil',
     'LBL_CHART_ADJUSTED' => '(Düzeltilmiş)',
-    'LBL_SAVE_DRAFT' => 'Taslak Olarak Kaydet',
+    'LBL_SAVE_DRAFT' => 'Kaydet',
     'LBL_CHANGES_BY' => '{0} tarafından yapılan değişiklikler',
     'LBL_FORECAST_SETTINGS' => 'Ayarlar',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Mali yıl başlangıç ​​tarihi:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Satış Tahmini modülü tarafından kullanılacak zaman aralığını tanımlayın.<br><br>Finansal yıl için Başlangıç Tarihi seçerek başlayın. Ardından satış tahmini için kullanacağınız zaman aralığının tipini seçin. Zaman aralıkları için tarihler seçiminize uygun olarak otomatik şekilde hesaplanacak. Alt Zaman Aralığı, Satış Tahminleri için temel oluşturmaktadır.<br><br>Görülebilir gelecek ve geçmiş zaman aralıkları, Tahminler modülünde görülebilecek alt zaman aralıklarının sayısını belirleyecektir. Kullanıcılar görülebilir alt zaman aralıkları için tahmin değerlerini görebilir ve değiştirebilir.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} modülünü nasıl sınıflandırmak istediğinizi yapılandırın. <br><br>Lütfen Aralık ayarlarının ilk onaydan sonra değiştirilemeyeceğini unutmayın. Yükseltilmiş kurulumlar için Aralık ayarı, mevcut Tahmin verileriyle kilitlenir.<br><br>Olasılık aralıklarına göre iki veya daha fazla kategori seçebilir veya olasılığa dayalı olmayan kategoriler oluşturabilirsiniz. <br><br>Özel kategorilerinizin solunda onay kutuları vardır; hangi aralıkların yöneticilere taahhüt edilen ve raporlanan Tahmin tutarına dahil edileceğine karar vermek için bunları kullanın. <br><br>Kullanıcı, {{forecastByModule}} modülünün dahili/harici durumunu ve kategorisini çalışma sayfalarından manuel olarak değiştirebilir.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} modülünü nasıl sınıflandırmak istediğinizi yapılandırın. <br><br>Lütfen Aralık ayarlarının ilk onaydan sonra değiştirilemeyeceğini unutmayın. Yükseltilmiş kurulumlar için Aralık ayarı, mevcut Tahmin verileriyle kilitlenir.<br><br>Olasılık aralıklarına bağlı olarak iki veya daha fazla kategori seçebilir veya olasılığa dayalı olmayan kategoriler oluşturabilirsiniz. <br><br>Özel kategorilerinizin sol tarafında işaret kutucukları mevcuttur; hangi aralıkların, yöneticilere taahhüt edilen ve bildirilen Tahmin miktarının içerisine dahil edileceğine karar vermek için bunları kullanın. <br><br>Kullanıcı, {{forecastByModule}} modülünün dahili/harici durumunu ve kategorisini çalışma sayfalarından manuel olarak değiştirebilir.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Kullanıcının her {{forecastByModuleSingular}} tahmini için doldurmalarını istediğiniz kolonları seçin. Olası kolonu {{forecastByModule}} içinde gösterilen miktar olduğu için gizlenemez.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Tahmin modülünde görmek istediğiniz kolonları seçin. Alanların listesi, çalışma sayfası ile bir araya gelerek kullanıcıların nasıl görüntülemek istediklerini tanımlamada kullanılacak.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Tahmin Yönteminin nasıl yapılacağını belirten metin için yer doldurucuyum.',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Aşılma miktarı:',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Veri Yok',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Kota Toplantısı',
+    'LBL_OPEN_LIKELY' => 'Açık Olası',
+    'LBL_OPEN_BEST' => 'Açık En İyi',
+    'LBL_OPEN_WORST' => 'Açık En Kötü',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Kota Atama',
     'LBL_ASSIGNING_QUOTA' => 'Kota Atanıyor',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Takımımın Satış Tahminleri",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Kaydedilmemiş değişiklikler var. Çalışma sayfasını sıralamak ve değişiklikleri silmek istediğinizden emin misiniz?',
+
+    'LBL_SAVE_TOOLTIP' => 'Çalışma sayfası satırlarında yapılan değişiklikleri kaydet',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Değişiklikleri kayıtlara kaydedin ve tahmini, yöneticiye gönderin',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Tahmini, yöneticiye gönderin ve kota atayın',
+
+    'LBL_SAVE_LABEL_REP' => 'Kaydet ',
+    'LBL_SAVE_LABEL_MGR' => 'Ayarlanan Değerleri Kaydet',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, {{forecastby_singular_module}} kayıtlarını içererek {{forecastworksheets_module}} modülünü oluşturur ve satışları tahmin eder. Kullanıcılar kişisel, takım ve satış organizasyonu düzeyinde satış {{quotas_module}} modülüne doğru çalışabilir. Kullanıcılar, {{plural_module_name}} modülüne erişmeden önce bir yönetici organizasyonun istediği Zaman Dilimini, Aralıkları ve Senaryoları seçmelidir.

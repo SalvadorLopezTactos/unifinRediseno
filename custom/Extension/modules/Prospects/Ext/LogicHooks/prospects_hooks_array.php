@@ -69,7 +69,7 @@ $hook_array['after_save'][] = Array(
 $hook_array['before_save'][] = Array(
     9,
     'Actualiza a los usuario a quien les reporta',
-    'custom/modules/Users/filterPO.php',
+    'custom/modules/Prospects/clients/filterPO.php',
     'filterPO',
     'AssignFilterAccounts_ByUsr'
 );

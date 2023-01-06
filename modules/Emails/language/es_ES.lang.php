@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Usuarios',
     'LBL_EMAILS_PRODUCTS_REL' => 'Elementos presupuestados',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Líneas de ingreso',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escaladas',
     'LBL_EMAILS_MESSAGES_REL' => 'Mensajes',
     'LBL_EMAILS_PURCHASES_REL' => 'Compras',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Elementos comprados',
@@ -473,4 +474,5 @@ Puede aplicar una plantilla predefinida mediante el botón Plantilla o incluir u
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Enviar correo electrónico',
     'LBL_MAILBOX' => 'Cuenta de entrada',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configure una cuenta de correo electrónico saliente a través de <a href="#OutboundEmail">Configuración de correo electrónico</a> para enviar correos electrónicos.',
 );

@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Arbeitsblatt',
     'LBL_PURCHASED_LINE_ITEMS' => 'Gekaufte Produkte',
 
+    'LBL_FORECASTED_LIKELY' => 'Wahrscheinlich prognostiziert',
     'LBL_RENEWAL' => 'Erneuerung',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Erneuerung der Verkaufschancen',
     'LBL_RENEWAL_PARENT' => 'Übergeordnete Verkaufschance',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# von allen Umsatzposten',
     'LBL_CLOSED_RLIS' => '# von abgeschlossenen Umsatzposten',
+    'LBL_CLOSED_WON_RLIS' => '# von abgeschlossenen Gewinn-/Umsatzposten',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Anzahl der Umsatzposten mit flexibler Open Service-Dauer',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Sie können keine Verkaufschancen löschen, die abgeschlossene Umsatzposten beinhalten',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Einer oder mehrere Eintrage beinhalten abgeschlossene Umsatzposten und können nicht gelöscht werden.',
     'LBL_INCLUDED_RLIS' => '# der enthaltenen Umsatz-Einzelposten',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Aktualisierung der Öffnung',
+    'LBL_CASCADE_RLI_EDIT' => 'Offene Umsatzposten aktualisieren',
+    'LBL_CASCADE_RLI_CREATE' => 'Für alle Umsatzposten festlegen',
     'LBL_SERVICE_START_DATE_INVALID' => 'Das Service-Startdatum darf nicht nach dem Service-Enddatum eines abgeschlossenen zusätzlichen Umsatzpostens liegen.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Angebote',
@@ -207,24 +211,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Nachdem Sie diese Änderung initialisiert haben, werden für jedes bestehende {{module_name}} im Hintergrund Umsatzposten-Berichte erstellt. Wenn die Umsatzposten vollständig und verfügbar sind, wird eine Benachrichtigung an die E-Mail-Adresse in Ihrem Benutzerprofil gesendet. Bitte beachten Sie, dass Ihre Instanz so konfiguriert sein muss, dass E-Mails über Admin > E-Mail-Einstellungen gesendet werden, damit die Benachrichtigung versendet werden kann.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Mit dem Modul {{plural_module_name}} können Sie die einzelnen Verkäufe von Anfang bis Ende nachverfolgen. Jeder {{module_name}}-Datensatz stellt einen potentiellen Verkauf dar und schließt relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen, wie z. B. {{quotes_module}}, {{contacts_module}} usw. ein. Ein {{module_name}} durchläuft normalerweise verschiedene Verkaufsphasen, bis er entweder die Markierung „Abgeschlossen“ oder „Geschlossen/Verloren“ erhält. {{plural_module_name}} kann mithilfe des Moduls {{forecasts_singular_module}}ing von Sugar des Weiteren auch noch dazu genutzt werden, Trends bei Verkäufen besser zu verstehen und vorherzusagen und um die Arbeit stärker auf das Erreichen der Verkaufsquoten zu konzentrieren.',
+    'LBL_HELP_RECORDS' => 'Das {{plural_module_name}}-Modul ermöglicht Ihnen, einzelne Verkäufe von Anfang bis Ende zu verfolgen. Jeder {{module_name}}-Datensatz stellt einen potentiellen Verkauf dar und enthält relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen wie {{quotes_module}}, {{contacts_module}} usw. Ein {{module_name}} durchläuft in der Regel mehrere Verkaufsphasen, bis es entweder mit „Gewonnen/Geschlossen“ oder „Verloren/Geschlossen“ markiert wird. {{plural_module_name}} können außerdem genutzt werden, um mithilfe des {{forecasts_singular_module}}ing-Moduls von Sugar die Verkaufstrends zu verstehen und vorherzusagen sowie die Arbeit auf das Erreichen von Absatzkontingenten auszurichten.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Mit dem Modul {{plural_module_name}} können Sie einzelne Verkäufe und die zu diesen Verkäufen gehörenden Produkte von Anfang bis Ende nachverfolgen. Jeder {{module_name}}-Datensatz stellt einen potentiellen Verkauf dar und schließt relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen, wie z. B. {{quotes_module}}, {{contacts_module}} usw. ein. 
+    'LBL_HELP_RECORD' => 'Mit dem {{plural_module_name}}-Modul können Sie einzelne Verkäufe und die zu diesen Verkäufen gehörenden Produkte von Anfang bis Ende verfolgen. Jeder {{module_name}}-Datensatz stellt einen potentiellen Verkauf dar und enthält relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen wie {{quotes_module}}, {{contacts_module}} usw.
 
-- Bearbeiten Sie die Felder dieses Datensatzes, indem Sie auf ein einzelnes Feld oder auf die Schaltfläche „Bearbeiten“ klicken. 
-- Zeigen Sie Links zu anderen Datensätzen in den Sub-Panels an oder ändern Sie diese, indem Sie das Fenster links unten auf „Datenansicht“ einstellen. 
-- Erstellen Sie Benutzerkommentare und zeigen Sie diese und den Änderungsverlauf von Datensätzen in {{activitystream_singular_module}} an, indem Sie das Fenster links unten auf „Activity Stream" einstellen. 
-- Folgen Sie diesem Datensatz oder markieren Sie ihn als Favoriten, indem Sie die Symbole rechts neben dem Datensatznamen verwenden. 
-- Weitere Aktionen stehen Ihnen im Dropdown-Menü „Aktionen“ rechts neben der Schaltfläche „Bearbeiten“ zur Verfügung.',
+- Bearbeiten Sie die Felder des Datensatzes, indem Sie auf ein einzelnes Feld oder die Schaltfläche "Bearbeiten" klicken.
+- Zeigen Sie Links zu anderen Datensätzen in Unterbereichen an oder ändern Sie sie, indem Sie im unteren linken Bereich in die „Datenansicht“ wechseln.
+- Erstellen und zeigen Sie Benutzerkommentare und den Änderungsverlauf eines Datensatzes in {{activitystream_singular_module}} an, indem Sie im unteren linken Bereich zu „Activity Stream“ wechseln.
+- Folgen Sie diesem Datensatz oder legen Sie ihn als Favoriten fest, indem Sie die Symbole rechts neben dem Datensatznamen nutzen.
+- Zusätzliche Aktionen stehen im Dropdown-Menü "Aktionen" rechts neben der Schaltfläche „Bearbeiten“ zur Verfügung.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Mit dem Modul {{plural_module_name}} können Sie einzelne Verkäufe und die zu diesen Verkäufen gehörenden Produkte von Anfang bis Ende nachverfolgen. Jeder {{module_name}}-Datensatz stellt einen potentiellen Verkauf dar und schließt relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen, wie z. B. {{quotes_module}}, {{contacts_module}} usw. ein. 
+    'LBL_HELP_CREATE' => 'Mit dem {{plural_module_name}}-Modul können Sie einzelne Verkäufe und die zu diesen Verkäufen gehörenden Produkte von Anfang bis Ende nachverfolgen. Jeder {{module_name}}-Datensatz stellt einen potentiellen Verkauf dar und enthält relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen, wie z. B. {{quotes_module}}, {{contacts_module}} usw. 
 
 So erstellen sie einen {{module_name}}:
-1. Geben Sie die gewünschten Werte für die Felder ein.
+1. Geben Sie die gewünschten Werte in die Felder ein.
  - Felder, die als „Erforderlich“ markiert sind, müssen vor dem Speichern ausgefüllt werden.
- - Klicken Sie auf „Mehr anzeigen“, um weitere Felder zu erfassen.
+ - Klicken Sie auf „Mehr anzeigen“, um ggf. weitere Felder zu erfassen.
 2. Klicken Sie auf „Speichern“, um den Datensatz fertigzustellen und zur vorherigen Seite zurückzukehren.',
 
 // END ENT/ULT
@@ -239,7 +243,10 @@ So erstellen sie einen {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Verkaufschancen in meinem Team",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => '{{fieldName}} kann nicht geändert werden, da dieser {{moduleSingular}} keine Produkte hat.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interaktionen der Verkaufschance',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Verkaufschancen-Zeitleiste',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' kann nicht über diese Umsatzposten hinweg festgelegt werden, da sie keine Services sind. Möchten Sie mit der Erstellung fortfahren?',
+    'LBL_CASCADE_DURATION_WARNING' => ' kann nicht über diese Umsatzposten hinweg festgelegt werden, da ihre Dauer gesperrt ist. Möchten Sie mit der Erstellung fortfahren?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Vorhersage des Verkaufschancenabschlusses',

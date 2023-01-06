@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Esimerkiksi voisit käyttää tätä löytääksesi asian, joka on ennestään jätetty.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Jos sinulla on uusi ylläpitopalvelupyyntö jonka haluat jättää, klikkaa tästä lähettääksesi uuden palvelupyynnön.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Tämän klikkaaminen palauttaa sinut tähän näkymään milloin vain.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Palvelupyynnön yhteydet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tapauksen aikajana',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Muistiot',
 

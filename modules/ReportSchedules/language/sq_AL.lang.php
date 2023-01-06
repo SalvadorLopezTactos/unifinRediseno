@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Ky plan raporti',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të planeve të raportit',
+    'LBL_FILE_TYPE' => 'Lloji(et) e skedarëve',
 );

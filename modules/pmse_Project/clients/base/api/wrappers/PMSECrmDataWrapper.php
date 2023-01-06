@@ -13,6 +13,7 @@
 require_once 'modules/ACLRoles/ACLRole.php';
 
 use Sugarcrm\Sugarcrm\ProcessManager;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 /**
  * Class PMSEWrapperCrmData
@@ -1302,7 +1303,7 @@ SQL;
      * @param $filter
      * @return object
      */
-    public function retrieveRelatedBeans($filter, $relationship = 'all', $removeTarget = false)
+    public function retrieveRelatedBeans(string $filter, $relationship = 'all', $removeTarget = false): array
     {
         return $this->pmseRelatedModule->getRelatedBeans($filter, $relationship, $removeTarget);
     }
@@ -1481,13 +1482,13 @@ SQL;
                 ->executeQuery(
                     'SELECT id FROM pmse_project WHERE id=?',
                     [$res->targetProcess]
-                )->fetchColumn();
+                )->fetchOne();
 
             $proId = $db->getConnection()
                 ->executeQuery(
                     'SELECT id FROM pmse_bpmn_process WHERE prj_id=?',
                     [$projId]
-                )->fetchColumn();
+                )->fetchOne();
 
             $actIdsStmt = $db->getConnection()
                 ->executeQuery(
@@ -1496,7 +1497,7 @@ SQL;
                 );
 
             $activity = [];
-            while (false !== ($actId = $actIdsStmt->fetchColumn())) {
+            while (false !== ($actId = $actIdsStmt->fetchOne())) {
                 $activity[$actId] = '';
             }
 
@@ -1625,6 +1626,7 @@ SQL;
         foreach ($fieldsData as $field) {
             $tmpField = array();
             if (isset($field['vname']) && (PMSEEngineUtils::isValidField($field, $type)) &&
+                AccessControlManager::instance()->allowFieldAccess($newModuleFilter, $field['name']) &&
                 PMSEEngineUtils::isSupportedField($moduleBean->object_name, $field['name'], $type)) {
                 // If this is a locked field list AND this field is part of a group
                 if ($type === 'RR' && !empty($field['group'])) {
@@ -1651,6 +1653,13 @@ SQL;
                     }
                     $groupFieldsMap[$field['name']] = $field['group'];
                 } else {
+                    // If the field is relate type then get its id_name as well. This needs to be done before
+                    // the replaceItemsValues() call, which changes the type property, below
+                    // since some relate type fields are also special fields
+                    if ($field['type'] === 'relate' && isset($field['id_name'])) {
+                        $tmpField['id_name'] = $field['id_name'];
+                    }
+
                     if (PMSEEngineUtils::specialFields($field, $type)) {
                         $field = array_merge($field, $this->replaceItemsValues($field));
                     }
@@ -2350,9 +2359,13 @@ SQL;
 
     /**
      * @param $filter
+     * @param ModuleApi $moduleApi
+     * @param string $relationship default 'all'
+     * @param $baseModule
+     * @param string $type
      * @return array
      */
-    private function getAllRelated($filter, ModuleApi $moduleApi, $relationship = 'all', $baseModule, $type = '')
+    private function getAllRelated($filter, ModuleApi $moduleApi, string $relationship, string $baseModule, $type = '')
     {
         $result = array();
         $result['success'] = true;

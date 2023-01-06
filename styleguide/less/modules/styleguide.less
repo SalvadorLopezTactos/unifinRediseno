@@ -22,7 +22,7 @@
 }
 
 .show-grid:hover [class*="span"] {
-  background: darken(@grayLighter, 10%);
+  background: @gray30;
 }
 
 .show-grid .show-grid {
@@ -30,7 +30,7 @@
   margin-bottom: 0;
 }
 .show-grid .show-grid [class*="span"] {
-  background-color: @grayLighter;
+  background-color: @gray20;
 }
 
 /* Popover docs
@@ -66,7 +66,7 @@
 
 .swatch {
   display: inline-block;
-  width: 30px;
+  width: 100%;
   height: 20px;
   margin: -6px 0;
   border-radius: 3px;
@@ -76,14 +76,14 @@
 .swatch-bordered {
   width: 28px;
   height: 18px;
-  border: 1px solid @grayLighter;
+  border: @borderWidget;
 }
 
 .cell-swatch {
   display: block;
   padding: 8px;
   background-color: @green;
-  border-bottom: 1px solid @grayLighter;
+  border-bottom: @borderWidget;
 
   span {
     display: inline-block;
@@ -147,12 +147,16 @@ td {
   }
 
   .container-fluid {
-    padding-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
   }
 
   .page-header {
     padding-bottom: 0;
-    margin: 0 0 14px;
+    margin-left: 8px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 
     h1 {
       padding-bottom: 0;
@@ -163,6 +167,10 @@ td {
     small {
       font-size: 18px;
     }
+  }
+
+  .topic-header {
+    margin-left: 8px;
   }
 
   .headerpane .record-cell:not(:last-child) {
@@ -205,7 +213,7 @@ table.accordion td.accordion-body {
 }
 
 table.accordion {
-  border-left: 1px solid @grayLighter;
+  border-left: @borderWidget;
 
   h3 {
     font-size: 16px;
@@ -225,6 +233,7 @@ table.accordion {
   .accordion-inner {
     border: none;
     overflow: hidden;
+    padding: 0;
 
     &.in {
       overflow: hidden;
@@ -363,7 +372,7 @@ ul.sg-main a {
   padding: 39px 19px 14px;
   *padding-top: 19px;
   background-color: @white;
-  border: 1px solid darken(@grayLighter, 10%);
+  border: @borderWidget;
   border-radius: 4px;
 }
 
@@ -376,9 +385,9 @@ ul.sg-main a {
   padding: 3px 7px;
   font-size: 12px;
   font-weight: bold;
-  background-color: @grayLighter;
-  border: 1px solid darken(@grayLighter, 10%);
-  color: @grayLightish;
+  background-color: @gray20;
+  border: @borderWidget;
+  color: @gray60;
   border-radius: 4px 0;
 }
 
@@ -391,12 +400,12 @@ ul.sg-main a {
 /* Google Pretty Print
 -------------------------------------------------- */
 
-.com { color: @grayLightish; }
+.com { color: @gray60; }
 .lit { color: @darkBlue; }
 
 .pun,
 .opn,
-.clo { color: @grayLightish; }
+.clo { color: @gray60; }
 .fun { color: @red; }
 
 .str,
@@ -409,12 +418,12 @@ ul.sg-main a {
 .atn,
 .dec,
 .var { color: @darkTeal; }
-.pln { color: @gray; }
+.pln { color: @gray80; }
 
 .prettyprint {
   padding: 8px;
   background-color: @white;
-  border: 1px solid @grayLighter;
+  border: @borderWidget;
 }
 
 .prettyprint.linenums {
@@ -430,35 +439,50 @@ ol.linenums {
 
 ol.linenums li {
   padding-left: 12px;
-  color: @grayLightish;
+  color: @gray60;
   line-height: 18px;
   text-shadow: 0 1px 0 @white;
 }
 
-/* Font Awesome icons
+p {
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 16px;
+}
+
+.alert-info {
+  .sicon {
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+  }
+}
+
+/* SugarIcons styling
 -------------------------------------------------- */
 .the-icons {
-  margin-left: 0;
   list-style: none;
   font-size: 14px;
-}
 
-.the-icons i {
-  font-size: 16px;
-  padding: 4px;
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-}
+  li {
+    display: flex;
+    align-items: center;
+  }
 
-.the-icons i:hover {
-  background-color: @grayLighter;
-  border-radius: 3px;
-  font-size: 18px;
-  color: @gray;
-  padding: 5px 4px 3px;
+  i {
+    padding: 4px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    text-align: center;
+
+    &:hover {
+      background-color: @gray20;
+      border-radius: 3px;
+      color: @gray90;
+    }
+  }
 }
 
 .chart-icon-container {
@@ -472,111 +496,6 @@ ol.linenums li {
   float: left;
 }
 
-.sugar-cube svg {
-  width: 80px;
-  height: 80px;
-  display: inline-block;
-}
-
-.sugar-cube.sc-small svg {
-  width: 20px;
-  height: 20px;
-}
-
-.sugar-cube.sc-large svg {
-  width: 512px;
-  height: 512px;
-}
-
-.sugar-cube .sc-left,
-.sugar-cube .sc-right,
-.sugar-cube .sc-top {
-  fill: @grayLighter;
-  stroke-width: 0;
-
-  /*stroke-linecap: butt;
-  stroke: @black;
-  stroke-linejoin: miter;
-  stroke-opacity: 1*/
-}
-
-.sugar-cube .sc-top {
-  fill: @red;
-}
-
-.sugar-cube .sc-right {
-  fill: @grayLighter;
-}
-
-.sugar-cube .sc-left {
-  fill: @grayDarkish;
-}
-
-.sugar-cube.sc-white path {
-  fill: @white;
-}
-
-.sugar-cube.sc-white path.sc-top {
-  opacity: 1;
-}
-
-.sugar-cube.sc-white path.sc-right {
-  opacity: 0.8;
-}
-
-.sugar-cube.sc-white path.sc-left {
-  opacity: 0.6;
-}
-
-.sugar-cube {
-  .sc-top-layer,
-  .sc-top-layer-shadow,
-  .sc-mid-layer,
-  .sc-mid-layer-shadow,
-  .sc-bot-layer,
-  .sc-bot-layer-shadow {
-    stroke-width: 0;
-  }
-
-  .sc-top-layer {
-    fill: @blue;
-  }
-
-  .sc-top-layer-shadow {
-    fill: @ocean;
-  }
-
-  .sc-mid-layer {
-    fill: @darkOrange;
-  }
-
-  .sc-mid-layer-shadow {
-    fill: @orange;
-  }
-
-  .sc-bot-layer {
-    fill: @army;
-  }
-
-  .sc-bot-layer-shadow {
-    fill: @green;
-  }
-
-  &.sc-white {
-    polygon.sc-top-layer,
-    polygon.sc-mid-layer,
-    polygon.sc-bot-layer {
-      fill: @grayLighter;
-    }
-
-    polygon.sc-top-layer-shadow,
-    polygon.sc-mid-layer-shadow,
-    polygon.sc-bot-layer-shadow {
-      fill: @grayLighter;
-    }
-  }
-}
-
 .PrimaryButton {
   background-color: @PrimaryButton;
 }
@@ -587,6 +506,46 @@ ol.linenums li {
 
 .BorderColor {
   background-color: @BorderColor;
+}
+
+// Fix base date error field
+#date_error_base {
+  .error-tooltip.add-on {
+    left: -56px;
+  }
+}
+
+#bool_error_record {
+  .error-tooltip {
+    top: 5px;
+  }
+}
+
+#datetimecombo_error_base,
+#datetimecombo_error_record,
+#datetimecombo_error_list {
+  input[name="date_start_time"] {
+    margin-left: -31px;
+  }
+}
+
+#date_edit_list,
+#date_error_list {
+  .edit {
+    .input-append {
+      .date-wrapper {
+        .add-on {
+          position: absolute;
+          right: 5px;
+
+          &.error-tooltip {
+            left: unset;
+            right: 24px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* Responsive

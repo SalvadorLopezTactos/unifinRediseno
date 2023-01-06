@@ -63,8 +63,10 @@
 
         this._cleanComponents();
 
+        var omniConfig = this.closestComponent('omnichannel-dashboard-config');
+        // if the omnichannel-dashboard-config exists and config-layout is set, use tab 1
+        var tabIndex = omniConfig && omniConfig.context.get('config-layout') ? 1 : 0;
         var metadata = app.utils.deepCopy(this.model.get('metadata'));
-        var tabIndex = 0;
         if (options && !_.isUndefined(options.tabIndex)) {
             tabIndex = options.tabIndex;
         } else {

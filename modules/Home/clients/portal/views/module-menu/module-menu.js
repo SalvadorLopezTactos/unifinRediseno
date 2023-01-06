@@ -24,7 +24,7 @@
      * @private
      */
     _setLogoImage: function() {
-        var defaultSugarLogoMark = 'styleguide/assets/img/logo.svg';
+        var defaultSugarLogoMark = 'styleguide/assets/img/sugar-cube-black.svg';
         var logoUrl = app.config.logomarkURL || app.utils.buildUrl(defaultSugarLogoMark);
         this.logoImage = '<img src="' + logoUrl + '">';
     }

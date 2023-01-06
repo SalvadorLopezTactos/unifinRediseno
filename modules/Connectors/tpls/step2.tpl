@@ -90,7 +90,6 @@
 	</table>
 </form>
 
-{literal}
 <script type="text/javascript">
 function copy_value(field_name, field_value_id, color)
 {
@@ -128,5 +127,3 @@ function smart_copy(){
 	}
 }
 </script>
-
-{/literal}

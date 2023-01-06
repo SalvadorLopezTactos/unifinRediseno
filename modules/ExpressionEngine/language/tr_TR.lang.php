@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'İfade Motoru',
-  'LBL_MODULE_NAME_SINGULAR' => 'İfade Motoru',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Önceki' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Sonraki' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Genişlet' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'İfade Motoru',
+    'LBL_MODULE_NAME_SINGULAR' => 'İfade Motoru',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Önceki' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Sonraki' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Genişlet' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Tanımsız Alan',
+];

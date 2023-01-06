@@ -66,7 +66,7 @@ class iCal extends vCal {
         $hrs = floor(abs($minutes) / 60);
         $remainderMinutes = abs($minutes) - ($hrs * 60);
         $sign = (($minutes < 0) ? "-" : "+");
-        return $sign . str_pad($hrs, 2, "0", STR_PAD_LEFT) . str_pad($remainderMinutes, 2, "0", STR_PAD_LEFT);
+        return $sign . str_pad(strval($hrs), 2, "0", STR_PAD_LEFT) . str_pad(strval($remainderMinutes), 2, "0", STR_PAD_LEFT);
     }
 
     /**

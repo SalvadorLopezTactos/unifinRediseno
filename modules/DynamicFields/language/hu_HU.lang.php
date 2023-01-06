@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Mezőnév már létezik',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'A mező neve csak az alábbi karaktereket tartalmazhatja: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Nincs beleértett modul - mentés sikertelen',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'A legördülő lista neve már használatban',
     'LBL_BTN_ADD' => 'Hozzáadás',
     'LBL_BTN_EDIT' => 'Szerkesztés',
     'LBL_GENERATE_URL' => 'URL létrehozása',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => '{0} oszlop hozzáadása ehhez:',
     'LBL_DONE' => 'Kész',
     'LBL_EXE_NON_SIM_MODE' => 'Szimulációs üzemmód elhagyása',
+    'LBL_CALCULATION_VISIBLE' => 'Láthatóvá tétel számítások számára',
 );
-
-
-?>

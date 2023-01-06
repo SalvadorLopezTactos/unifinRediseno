@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Parashikimet',
     'ForecastWorksheets' => 'Tabelat e parashikimeve',
     'ForecastManagerWorksheets' => 'Tabela për menaxhimin e parashikimeve',
-    'MergeRecords'=>']regjistrimet e bashkuara',
       'VisualPipeline'=>'Visual Pipeline',
       'ConsoleConfiguration' => 'Konfigurimi i panelit',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Rolet',
     'Notifications'=>'Njoftimet',
     'Sync'=>'Sinkronizim',
+    'HintAccountsets' => 'Grupet e llogarive Hint',
+    'HintNotificationTargets' => 'Marrësit e njoftimit Hint',
+    'HintNewsNotifications' => 'Njoftimet e lajmeve Hint',
+    'HintEnrichFieldConfigs' => 'Konfigurimet e fushës së plotësuar Hint',
     'ReportMaker' => 'Raporte të avancuara',
     'DataSets' => 'Formatimi i të dhënave',
     'CustomQueries' => 'Pyetje të rëndomta',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Artikujt e blerë të linjës',
     'MobileDevices' => 'Pajisjet celulare',
     'PushNotifications' => 'Njoftimet me shtytje',
+    'Escalations' => 'Përshkallëzimet',
+    'DocumentTemplates' => 'Shabllonet e dokumentit',
+    'DocumentMerges' => 'Bashkimet e dokumenteve',
     'WorkFlow' => 'Definicionet e rrjedhës së punës',
     'EAPM' => 'Llogaritë e jashme',
     'Worksheet' => 'Fletë pune',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Pushimet',
     'ChangeTimers' => 'Ndrysho kohëmatësit',
     'Messages' => 'Mesazhe',
+    'Audit' => 'Auditimi',
+    'RevenueLineItems' => 'Artikujt e rreshtave të të ardhurave',
+    'DocuSignEnvelopes' => 'Zarfet e DocuSign',
+    'Geocode' => 'Gjeokodimi',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Ts',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Tabela e parashikimeve',
     'ForecastManagerWorksheets' => 'Tabela për menaxhimin e parashikimeve',
     'Quotas' => 'Oferte',
-    'MergeRecords'=>'bashko të dhëna',
     'Teams' => 'Grupi',
     'TeamNotices' => 'njoftim grupi',
     'Activities' => 'Aktivitetet',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Blerje',
     'PurchasedLineItems' => 'Artikull i blerë i linjës',
     'PushNotifications' => 'Njoftimi me shtytje',
+    'Escalations' => 'Përshkallëzim',
+    'DocumentTemplates' => 'Shablloni i dokumentit',
+    'DocumentMerges' => 'Bashkimi i dokumentit',
     'WorkFlow' => 'Rrjedha e punës',
     'EAPM' => 'Llogaria e jashtme',
     'Worksheet' => 'Fletë pune',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Pushim',
     'ChangeTimers' => 'Ndrysho kohëmatësin',
     'Messages' => 'Mesazh',
+    'Audit' => 'Auditimi',
+    'DocuSignEnvelopes' => 'Zarf DocuSign',
+    'HintAccountsets' => 'Grupet e llogarive Hint',
+    'HintNotificationTargets' => 'Marrësit e njoftimit Hint',
+    'HintNewsNotifications' => 'Njoftimet e lajmeve Hint',
+    'HintEnrichFieldConfigs' => 'Konfigurimet e fushës së plotësuar Hint',
+    'Geocode' => 'Gjeokodimi',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Shërbimet',
     'Other' => 'Tjetër',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF dhe CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'Në progres',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'baza e njohurisë',
       'PurchasedLineItems' => 'Artikull i blerë i linjës',
       'Purchases' => 'Blerje',
+      'Escalations' => 'Përshkallëzim',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Llogaria',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Shënim',
     'PurchasedLineItems' => 'Artikull i blerë i linjës',
     'Purchases' => 'Blerje',
+    'Escalations' => 'Përshkallëzim',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Porosia',
       'Ship' => 'Transportuar',
   ),
+    'active_status_dom' => [
+        'Active' => 'Aktiv',
+        'Inactive' => 'Joaktiv',
+        'Retired' => 'Tërhequr',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Përdor cilësimin e sistemit',
+        'light' => 'I ndriçuar',
+        'dark' => 'I errët',
+    ],
 
 
   'pricing_formula_default_key' => 'I caktuar',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televizion',
         'NewsLetter' => 'Buletinat',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'MERR',
+      'POST' => 'POSTO',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,13 +2049,15 @@ $app_list_strings = array (
         'print'       => 'Shtyp',
         'pieWedgeName'      => 'pjesët',
     ),
-    'd3_chart_types' => array (
-        'pie chart' => 'Grafiku në formë torte',
-        'bar chart' => 'Diagrami i linjave vertikale',
-        'group by chart' => 'Diagrami grupor i linjave vertikale',
-        'horizontal bar chart' => 'Grafiku në formë shtylle horizontale',
-        'horizontal group by chart' => 'Diagrami grupor i linjave horizontale',
-        'line chart' => 'Grafiku në fomrë drejtëze',
+    'chart_types' => array (
+        'pie chart' => 'Grafik rrethor',
+        'donut chart' => 'Grafik unazor',
+        'treemap chart' => 'Grafik hierarkik',
+        'bar chart' => 'Grafik me shufra vertikale',
+        'group by chart' => 'Grafik me shufra vertikale të grupuara',
+        'horizontal bar chart' => 'Grafik me shufra horizontale',
+        'horizontal group by chart' => 'Grafik me shufra horizontale të grupuara',
+        'line chart' => 'Grafik me vija',
         'funnel chart' => 'Grafik hinkë',
     ),
     'd3_value_placement' => array (
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Çmimi (Totali i çmimit më të lartë)',
             'total_revenue:asc' => 'Çmimi (Totali i çmimit më të ulët)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Qendra e kalendarit',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Ditë',
+          'week' => 'Javë',
+          'workWeek' => 'Javë pune',
+          'expandedMonth' => 'Muaj',
+          'agenda' => 'Axhendë',
+          'timeline' => 'Kronologji',
+          'monthSchedule' => 'Planifikuesi',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Krijuar',
+          'completed' => 'Përfunduar',
+          'declined' => 'Refuzuar',
+          'delivered' => 'Dorëzuar',
+          'sent' => 'Dërguar',
+          'signed' => 'Nënshkruar',
+          'voided' => 'Anuluar',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Parazgjedhja',
+            'color' => 'Ngjyra',
+            'image' => 'Imazhi',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'I ri',
+            'In Progress' => 'Në progres',
+            'Closed' => 'Mbyllur',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Joaktiv',
+            'Lack of Progress' => 'Mungesë progresi',
+            'Customer-Imposed Deadline' => 'Afat kohor i imponuar nga klienti',
+            'Account at Risk' => 'Llogaria në rrezik',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Kërkuar nga klienti',
+            'Internally Requested' => 'Kërkuar së brendshmi',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Rasti',
+            'Bugs' => 'Defekt',
+            'Accounts' => 'Llogaria',
+            'Opportunities' => 'Mundësi',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Pozitive',
+            'Negative' => 'Negative',
+            'Neutral' => 'Neutrale',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'Nuk ka gjasa',
+            '02_less_likely' => 'Më pak gjasa',
+            '03_neutral' => 'Neutral',
+            '04_more_likely' => 'Më shumë gjasa',
+            '05_very_likely' => 'Shumë gjasa',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'Nuk përputhet me klientët',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Përputhet me klientët',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Ndiq linkun',
   'LBL_TOGGLE_VISIBILITY' => 'Njyjëzo shfaqjen', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetet',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar dhe kubi 3-D janë marka të regjistruara tregtare të SugarCRM Inc. '.
         'Të gjithë emrat e kompanive dhe produkteve të tjera që përdoren ose shfaqen në këtë produkt mund të jenë marka tregtare të '.
         'SugarCRM ®, Sugar Enterprise™ dhe Sugar™ janë marka tregtare të SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'shto' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logoja e Kompanisë' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalendari' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Një vlerë me lëshim poshtë që zgjodhe e ndryshoi strukturën tënde të pamjes së regjistrimit. ' .
+        'Fushat e fshehura në këtë strukturë të re kanë vlerat e tyre të pastruara. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'navigim në modulin kryesor',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Mbyll:',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} shënuar si {{status}}.',
 
+    'LBL_FOCUS' => 'Fokusi',
+
     'LBL_QUERY_VALID'=>'Valide',
     'LBL_QUERY_ERROR'=>'Gabim!',
     'LBL_QUERY_CHILD'=>'Nën-pyetja valide',
@@ -3068,6 +3185,10 @@ $app_strings = array (
     'LBL_CASES'=>'rastet',
     'LBL_MESSAGE'=>'Mesazh',
     'LBL_MESSAGES'=>'Mesazhe',
+    'LBL_ESCALATIONS' => 'Përshkallëzimet',
+    'LBL_ESCALATION' => 'Përshkallëzim',
+    'LBL_DOCUSIGN_ENVELOPES' => 'Zarfet e DocuSign',
+    'LBL_DOCUSIGN_ENVELOPE' => 'Zarfi i DocuSign',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Ndrysho fjalëkalimin',
     'LBL_CHANGE_BUTTON_LABEL' => 'ndrysho',
@@ -3093,6 +3214,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Artikujtë e hapur:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Ndërto email',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'Email-i',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Ndërto email [Alt+L]',
     'LBL_SEARCH_DROPDOWN_YES'=>'Po',
     'LBL_SEARCH_DROPDOWN_NO'=>'Jo',
@@ -3118,6 +3240,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumentacionet',
     'LBL_DATE_ENTERED' => 'Data e krijimit:',
     'LBL_DATE_MODIFIED' => 'Data e modifikuar',
+    'LBL_ACTIVITY_MODIFIED' => 'Modifikuar',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Skeda "Modifiko pasqyrën"',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Skedat "Modifiko modulin"',
     'LBL_EDIT_BUTTON' => 'Ndrysho',
@@ -3140,6 +3263,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Selekto fushën...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Selekto operatotin...',
     'LBL_FILTER_CREATE_NEW' => 'Krijo',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Filtri i krijimit (i paruajtur)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(I paruajtur)',
     'LBL_FILTER_CREATE_FILTER' => 'Krijo filtër të ri',
     'LBL_FILTER_CLOSE_FILTER' => 'Mbyll filtrin',
     'LBL_FILTER_EDIT_FILTER' => 'Ndrysho filtër',
@@ -3202,6 +3327,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Më shumë {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Aktivitet e sotshme',
     'LBL_LEADS'=>'Udhëheqjet',
+    'LBL_LEAD'=>'Klienti potencial',
+    'LBL_QUOTES_BILL_TO' => 'Kuotat (Faturo te)',
     'LBL_LESS' => 'më pak',
     'LBL_CAMPAIGN' => 'Fushata:',
     'LBL_CAMPAIGNS' => 'Fushatat',
@@ -3229,19 +3356,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Ju lutemi selektoni të paktën 2 regjistrime për të vazhduar.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Ju lutemi selektoni më pak se 10 regjistrime për të vazhduar.',
     'LBL_LISTVIEW_ALL' => 'Të gjitha',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Ngri kolonën 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Të gjitha kopje identike',
     'LBL_LISTVIEW_NONE' => 'Çzgjidh të gjitha',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Zgjidh faqen',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Zgjidh të gjitha',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Regjistrimet e selektuara',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Të zgjedhura: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Pastro zgjedhjet.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Pastro të gjitha zgjedhjet.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Selekto të gjitha regjistrimet',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Ka më shumë se {{num}} të dhënave në setin e rezultatit. Ju keni zgjedhur {{num}} të dhënat e para.',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Ke zgjedhur 1 regjistër në grupin e rezultateve.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Ju keni zgjedhur të gjitha {{num}} të dhënat në setin e rezultatit.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Ju keni zgjedhur të gjitha {{num}} të dhënat në këtë pikëpamje. {{link}} në setin e rezultatit.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Përditësimi {{num}} nga {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Duke përditësuar {{num}} nga {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(për {{time}} {{unit}} majtas)',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Mass përditësimi dështoi. Inicimi i përpjekjes të re ({{num}} nga {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Mass përditësimi jo i kompletuar. {{num}} regjistrimet ngelin të pandryshuara.',
@@ -3249,7 +3378,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} regjistrime u shpërfillën për shkak të lejeve ose gabimeve.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} të dhënat u përditësuan me sukses.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Mass përditësim',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Fshirja e {{num}} nga {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Duke fshirë {{num}} nga {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(për {{time}} {{unit}} majtas)',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'Mass fshirja dështoi. Inicimi i përpjekjes së re ({{num}} nga {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Mass fshirja jo e kompletuar. {{num}}  regjistrimi ngeli.',
@@ -3274,10 +3403,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Selekto dhe edito',
     'LBL_LISTVIEW_ACTIONS' => 'Veprimet',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Zgjidh të gjitha regjistrat në këtë faqe',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Anulo zgjedhjen e të gjitha regjistrave në këtë faqe',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} nga {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} i ngarkimit...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Kliko për totalin',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'nga',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Merr numrin e faqeve',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'David',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Livingstone',
@@ -3285,10 +3421,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Kodi monkey i shtesës ordinare',
     'LBL_LOGIN_TO_ACCESS' => 'Ju lutemi hyni që të keni qasje në këtë hapsirë.',
     'LBL_LOGOUT' => 'Dalje',
+    'LBL_FINISH_IMPERSONATING' => 'Përfundo imitimin',
+    'LBL_RESET_MFA' => 'Rivendos vërtetimin me shumë faktorë',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, aktualisht je duke imituar {{user}}.',
     'LBL_PROFILE' => 'Profili',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Bashkim i  maileve',
     'LBL_MASS_UPDATE' => 'Masa e rinovuar',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Zgjidh të gjitha regjistrimet për përditësim në masë',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Përfshi regjistrimin në përditësimin në masë',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Shto fushë',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Largo fushën',
     'LBL_GENERATE_QUOTE' => 'Gjeneroni kuotë',
@@ -3343,6 +3484,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Më tepër informacione',
     'LBL_PANEL_BODY' => 'Pasqyra',
     'LBL_PARENT_TYPE' => 'Lloji mëmë',
+    'LBL_RELATED_TYPE' => 'Lloji i ngjashëm',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Gama:',
     'LBL_PICTURE_FILE' => 'Fotografia',
@@ -3416,7 +3558,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Në lidhje me',
     'LBL_RELATED_INFORMATION' => 'Informacioni e lidhura',
-    'LBL_RELATED_RECORDS' => 'Regjistrimet e lidhura',
+    'LBL_RELATED_RECORDS' => '{{module}} të ngjashme',
     'LBL_REPORTS_TO' => 'I reporton',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Fushat e nevojshme të indikuara',
@@ -3535,7 +3677,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Të gjitha të drejtat të rezervuara.<br />SugarCRM, Sugar dhe kubi 3-D janë marka të regjistruara tregtare të SugarCRM Inc. '.
         'Të gjithë emrat e kompanive dhe produkteve të tjera që përdoren ose shfaqen në këtë produkt mund të jenë marka tregtare të '.
         'kompanive përkatëse me të cilat lidhen.',
@@ -3598,6 +3740,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'Mos fshi',
     'LBL_UNSYNC' => 'Mos sinkronizo',
     'LBL_UPDATE' => 'Rifresko',
+    'LBL_UPDATES' => 'Përditësimet',
     'LBL_USER_LIST' => 'Lista e përdoruesve',
     'LBL_USER_MENU' => 'Menyja e përdouesit',
     'LBL_USERS_SYNC'=>'Sinkronizimi i përdoruesve',
@@ -3664,6 +3807,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'Ju fshitë {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'A jeni të sigurtë që doni të hiqni linkun këtij regjistrimi?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Jeni të sigurtë që doni fshirjen e {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Je i sigurt që dëshiron të shkëputësh {0}? Ky veprim do ta heqë atë nga fusha e "Kontaktit kryesor" e rastit.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => '{0} nuk mund të shkëputet, pasi është kontakti kryesor në këtë rast. Përditëso fushën e "Kontaktit kryesor" përpara se ta shkëputësh këtë regjistrim.',
     'NTC_UNLINK_SUCCESS' => 'Ju fshitë {0}.',
     'NTC_LOGIN_MESSAGE' => 'Ju lutemi shtypni emrin e përdoruesit dhe fjalëkalimin',
     'NTC_NO_ITEMS_DISPLAY' => 'asnjë',
@@ -3695,6 +3840,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Rifreskimi i shfletuesit do të mbyllë automatikisht të gjitha sesionet e thirrjeve ose bisedave SugarLive që ke hapur dhe çdo ndryshim i paruajtur do të humbasë. Dëshironi të vazhdosh?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Ju nuk i keni ruajtur ndryshimet. Jeni të sigurtë që doni të largoheni nga faqja dhe të hidhni ndryshimet?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Je i sigurt që dëshiron ta rivendosësh <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">vërtetimin me shumë faktorë</a>? 
+Kryerja e këtij veprimi do të të nxjerrë menjëherë dhe do të të duhet të vërtetosh sërish që je ti duke përdorur një aplikacion vërtetimi herën tjetër që do të identifikohesh.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Konfirmo dhe dil',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Një ose më shumë lidhje nuk i kanë ruajtur ndryshimet. Jeni të sigurt që dëshironi ta mbyllni sirtarin?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Ju jeni duke lëvizur në modulin e raportet. Ndryshimet e tua për panelet nuk do të ruhen. Vazhdo?',
     'ERROR_NO_RECORD' => 'Gabim në marrje të rekordit. Ky proces mund të fshihet ose ju mund të mos jetë i autorizuar për të parë atë.',
@@ -3790,6 +3938,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Ju aktualisht nuk keni shënime të ruajtura. një tani.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Ju mund të krijoni nga a. lista",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Pozitiv',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutral',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negativ',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Shtyp këtu",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'Krijo shënim',
     'LBL_CREATE_OPPORTUNITY' => 'Krijo Mundësi',
     'LBL_SCHEDULE_CALL' => 'Thirrje identifikuese',
+    'LBL_SCHEDULE_CALL2' => 'Telefonatë',
     'LBL_SCHEDULE_MEETING' => 'Cakto mbledhje',
+    'LBL_SCHEDULE_MEETING2' => 'Mbledhje',
     'LBL_CREATE_MESSAGE' => 'Krijo mesazh',
+    'LBL_CREATE_MESSAGE2' => 'Mesazh',
     'LBL_CREATE_TASK' => 'Krijo detyrë',
+    'LBL_CREATE_TASK2' => 'Detyrë',
     'LBL_REMOVE_FROM_FAVORITES' => 'Largo nga favoritet e mia',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Shënim',
     'LBL_DOWNLOAD_ALL' => 'Shkarkoji të gjitha',
     'LBL_DOWNLOAD_ONE' => 'Shkarko',
     'LBL_ATTACHMENTS' => 'Bashkëngjitje',
@@ -3843,13 +4001,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Shfaq reshtat',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Lidh me regjistrimin aktual',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Lidhja dështoi',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Ngri kolonën e parë',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'A jeni të sigurt që dëshironi të largoni nënvizimin e Sugar?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Jeni të sigurtë që doni të hiqni rreshtin?',
     'LBL_MAXIMUM_OF' => 'Maksimumi i',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolonat mund të shfaqen.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Paneli',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Paneli im',
     'LBL_COLLAPSE_ALL' => 'shemb të gjitha',
@@ -3866,12 +4025,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'Konfiguro',
     'LBL_DASHLET_TOGGLE' => 'Hap/Mbyll',
     'LBL_SIDEPANE_TOGGLE' => 'Hap/mbyll panelin anësor',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Rikthe nënvizimet e parazgjedhura',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'Nuk është konfiguruar asnjë panel',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Krijo panel',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Ndihmë',
     'LBL_HELPLET_TOGGLE' => 'Hap/mbyll',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Modulet',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modifikuar nga unë',
     'LBL_FACET_CREATED_BY_ME' => 'Krijuar nga unë',
@@ -3888,6 +4050,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Pamja e regjistrimeve',
+    'LBL_RELATED_RECORDS' => '{{module}} i lidhur',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Shfaq një regjistrim dhe regjistrimet opsionale të lidhura me të në skeda.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Lloji i regjistrimeve bazë',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Ky {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Ska regjistrime të gjatura në këtë kohë.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Përmbledhje shembull',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaksione',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Vija kohore',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Shënime & bashkëngjitje',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Shënime dhe bashkangjitjet i përkasin regjistrimit',
     'LBL_DASHLET_PIPLINE_NAME' => 'Tubacion',
@@ -4208,6 +4371,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Ngarko nga kompjuteri im',
     'LBL_SEARCH_EXTERNAL_API' => 'Dosja në Burimin e jashtëm',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Ngarko në burimin e jashtëm',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Lidhje për burimin e jashtëm',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Sigurimi',
     'LBL_SHARE_PRIVATE' => 'Privat',
     'LBL_SHARE_COMPANY' => 'PuKompania',
@@ -4316,6 +4481,9 @@ $app_strings = array (
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Shkurtesat e tastierës',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => 'Funksionaliteti i formës - Alt +<br />I =  ndryshim (shikoni detajin)<br />U = dublikatë (shikoni detajin)<br />D = Fshije (shikim i detajuar)<br />A = Ruaj = (shikim i detajuar)<br />L = Anulo (ndrysho pamje)<br /><br />Kërkimi dhe Navigacionit - Alt +<br />7 = input i parë në formën e Ndryshimit<br />8 = Linku i kërkimit të avancuar <br />9 = Kërkim i parë i Formularit input<br />0 = Unifikimi i kërkimit të inputit' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Përshkallëzo',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Ndaj',
     'TPL_RECORD_SHARE_SUBJECT' => '{{module}} {{name}} i ndarë nga {{appId}}',
@@ -4388,7 +4556,7 @@ $app_strings = array (
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Të gjitha ndryshimet do të largohen kur ju të kaloni në një rekord të ri primar. Jeni te sigurtë që doni të kaloni?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Bashko regjistrimet e lidhura',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Bashkuar: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Bashkuar: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'Bashkimi i të ngjajshmeve {{objectName}} dështoi. Nisja e një përpjekje të re ({{num}} nga {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4442,14 +4610,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'Gjuha',
     'LBL_LOADING_LANGUAGE' => 'Ngarko paketen e gjuheve',
     'LBL_UPLOADING' => 'Ngarkimi',
+    'LBL_UPLOADING_DOTS' => 'Duke ngarkuar...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Jeni të sigurtë që doni të fshini këtë imazh?',
     'LBL_FILE_DELETE_CONFIRM' => "Jeni të sigurtë që doni të fshini këtë fotografi? Kjo nuk mund të zhbëhet.",
     'LBL_FILE_DELETED' => 'Fajli u fshi me sukses',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Tema e portalit',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Konfiguro temën e portalit',
-    'LBL_THEME_PREVIEW' => 'Shikimi i temës',
+    'LBL_THEME_PREVIEW' => 'Pamja paraprake e temës së portalit',
     'LBL_LOADING_PREVIEW' => 'Ngarkimi i shikimit',
     'LBL_RESET' => 'Rivendos',
     'LBL_COLORS' => 'Ngjyra',
@@ -4600,10 +4768,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Mbledhjet',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Detyrat',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Thirrjet',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Llogaritë',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontaktet',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Emailet',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Turnet',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të cituar',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Përjashtimet nga turni',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentet',
+    'LBL_ESCALATIONS' => 'Përshkallëzimet',
+    'LBL_ESCALATED' => 'Përshkallëzuar',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Përshkallëzimet',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Përshkallëzime të tjera të ngjashme',
+    'LBL_ESCALATIONS' => 'Përshkallëzimet',
     'LNK_SETTINGS' => 'Parametra',
     'LBL_MOBILE_SUPPORT' => 'Mbështetje',
     'LBL_MOBILE_SHOW_MORE' => 'Shih më shumë...',
@@ -4811,6 +4987,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Dështoi për të marrë kohën e serverit',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'Nuk mund të aktivizojë modalitetin jashtë linje. Nuk mund të arrijë serverin.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Paraqitja',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Përdor cilësimet e sistemit',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'E ndriçuar',
+    'LBL_MOBILE_APP_THEME_DARK' => 'E errët',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Emri i ri i skedarit',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Riemërto skedarin',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Krijuar nga unë',
+    'LBL_OPERATOR_CONTAINS' => 'është një prej',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'nuk është një prej',
+    'LBL_OPERATOR_EMPTY' => 'është bosh',
+    'LBL_OPERATOR_NOT_EMPTY' => 'nuk është bosh',
+    'LBL_OPERATOR_MATCHES' => 'përputhet saktësisht',
+    'LBL_OPERATOR_STARTS_WITH' => 'fillon me',
+    'LBL_OPERATOR_EQUALS' => 'është i barabartë me',
+    'LBL_OPERATOR_NOT_EQUALS' => 'nuk është i barabartë me',
+    'LBL_OPERATOR_GREATER_THAN' => 'është më i madh se',
+    'LBL_OPERATOR_LESS_THAN' => 'është më i vogël se',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'është më i madh se ose i barabartë me',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'më është më i vogël se ose i barabartë me',
+    'LBL_OPERATOR_BETWEEN' => 'është ndërmjet',
+    'LBL_OPERATOR_BEFORE' => 'përpara',
+    'LBL_OPERATOR_AFTER' => 'pas',
+    'LBL_OPERATOR_YESTERDAY' => 'dje',
+    'LBL_OPERATOR_TODAY' => 'sot',
+    'LBL_OPERATOR_TOMORROW' => 'nesër',
+    'LBL_OPERATOR_LAST_7_DAYS' => '7 ditët e fundit',
+    'LBL_OPERATOR_NEXT_7_DAYS' => '7 ditët e ardhshme',
+    'LBL_OPERATOR_LAST_30_DAYS' => '30 ditët e fundit',
+    'LBL_OPERATOR_NEXT_30_DAYS' => '30 ditët e ardhshme',
+    'LBL_OPERATOR_LAST_MONTH' => 'muajin e kaluar',
+    'LBL_OPERATOR_THIS_MONTH' => 'këtë muaj',
+    'LBL_OPERATOR_NEXT_MONTH' => 'muajin e ardhshëm',
+    'LBL_OPERATOR_LAST_YEAR' => 'vitin e kaluar',
+    'LBL_OPERATOR_THIS_YEAR' => 'këtë vit',
+    'LBL_OPERATOR_NEXT_YEAR' => 'vitin e ardhshëm',
+    'LBL_OPERATOR_IS' => 'është',
+    'LBL_OPERATOR_IS_NOT' => 'nuk është',
+    'LBL_ERROR_FILTER_EMPTY' => 'Shto kriteret e filtrit.',
+    'LBL_ADD_FILTER' => 'Shto kriteret',
+    'LBL_FILTER_NAME' => 'Emri i filtrit',
+    'LBL_FILTER_FIELD' => 'Fusha',
+    'LBL_FILTER_OPERATOR' => 'Operatori',
+    'LBL_FILTER_VALUE' => 'Vlera',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Ruaj në aplikacionin në desktop',
+    'LBL_FILTER_LOCAL' => 'Filtri lokal',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Mirë se vini në SugarCRM.<br /><br />Na lejoni që të nxjerrim në pah disa karakteristika të reja ...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Navigacion i menus kryesore',
@@ -4856,6 +5081,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'Shto koment',
     'LBL_REQUIRED' => 'E nevojshme',
     'LBL_MORE_BUTTON' => 'Të tjera',
+    'LBL_NO_OPTIONS' => 'Nuk ka asnjë opsion në dispozicion',
     'LBL_TRY_AGAIN' => 'Provo sërish',
     'LBL_NEW_RECORDS' => 'Krijuar së fundi',
     'LBL_ASSIGNED_TO_ME' => '{{{module}}} e mia',
@@ -5081,11 +5307,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Je i sigurt që dëshiron të mbyllësh bisedën?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Krijo shënim ose shto bashkëngjitje',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Shto një shënim',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Identifikimi juaj nuk u krye me sukses. Ju lutemi provoni përsëri.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Kredencialet pavlefshme',
-    'LBL_PORTAL_INVALID_GRANT' => 'Shenja juaj është jovalid ose ka skaduar. Ju lutemi logoheni edhe njëherë.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Shenja e skaduar',
+    'LBL_PORTAL_INVALID_GRANT' => 'Sesioni yt ka skaduar. Identifikohu sërish.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Sesioni ka skaduar',
     'LBL_PORTAL_AUTH_FAILED' => 'Vërtetimi i klientit dështoi.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Klienti pavlefshme',
     'LBL_PORTAL_INVALID_REQUEST' => 'Kërkesa e bërë nuk është valide ose e shformuar. Ju lutemi kontaktoni mbështetjen teknike.',
@@ -5119,6 +5349,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Rivendos panelin e parazgjedhur',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Paneli i rinovimit',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Pasqyra',
@@ -5138,6 +5370,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Përmbledhja e mesazhit',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Përmbledhja e thirrjes',
     'LBL_OMNICHANNEL_LINK_TO' => 'Lidh {{fromModule}} me {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Lidh me {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Lidhur',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Shfletuesi juaj nuk mbështetet për bisedë. Ju lutemi përdorni Google Chrome ose Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Kontaktoni për ndihmë administratorin e Sugar.',
@@ -5145,6 +5378,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Përfundo konfigurimin e SugarLive përpara se të kryesh një thirrje dalëse.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Përfundo konfigurimin e strukturës SugarLive përpara se të hapësh SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Caktoje veten në "Jashtë linje" në SugarLive përpara se të konfigurosh strukturën e SugarLive.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Pamje kompakte',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Pamje e plotë',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Rikthe skedën në të paracaktuar',
@@ -5556,9 +5791,12 @@ $app_strings = array (
     'LBL_BEST' => 'Më i miri',
     'LBL_WORST' => 'Më i keq',
     'LBL_LIKELY' => 'E mundshme',
-    'LBL_BEST_ADJUSTED' => 'Më mirë (e rregulluar)',
-    'LBL_WORST_ADJUSTED' => 'Më keq (e rregulluar)',
-    'LBL_LIKELY_ADJUSTED' => 'Gjasa (e rregulluar)',
+    'LBL_BEST_FORECAST' => 'Konfirmimi (më i mirë)',
+    'LBL_WORST_FORECAST' => 'Konfirmimi (më i dobët)',
+    'LBL_LIKELY_FORECAST' => 'Konfirmimi (me gjasa)',
+    'LBL_BEST_ADJUSTED' => 'Konfirmimi i rregulluar (më i miri)',
+    'LBL_WORST_ADJUSTED' => 'Konfirmimi i rregulluar (më i dobëti)',
+    'LBL_LIKELY_ADJUSTED' => 'Konfirmimi i rregulluar (me gjasa)',
     'LBL_AMOUNT_USDOLLAR' => 'Vlera e konvertuar',
     'LBL_OVERDUE' => 'I/E vonuar',
 
@@ -5579,6 +5817,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Për më shumë informacion, referoju dokumentacionit {{{more_info_url}}} {{plural_module_name}}. {{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Nuk disponohen të dhëna',
+    'LBL_NEED_HELP' => 'Të nevojitet ndihmë me diçka të re?',
+    'LBL_NEW_CASE' => 'Rast i ri',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'Paneli ndihmues përmbanë informata specifike që lidhet me modulin që ju jeni duke shfletuar së bashku një lidhje me dokumentacionin përkatës (p.sh. dokumentacionin kryesor) në udhëzuesin e aplikimit për më shumë informacion.',
@@ -5720,9 +5960,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'S&#39;ka përgjigje',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Skedulo të padisponuara',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Pamjet e disponueshme',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Planifikuesi i kalendarit',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Pamja e parazgjedhur',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Kalendarët e mi',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Kalendarët e përdoruesit dhe të ekipit',
+    'LBL_CALENDAR' => 'Kalendari',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Gabim gjatë kthimit të orarit.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Ruaj dhe dërgo ftesat',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Prano statusin',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Proceset',
@@ -5839,15 +6089,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopjo lidhjen e konformimit',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Ndërveprime',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Ndërveprime',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore',
+    'LBL_NO_ACTIVITY' => 'Asnjë aktivitet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Më shumë',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Më pak',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Vija kohore shfaq telefonatat, email-et ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Shfaq më shumë...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Shfaq më pak...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Nuk disponohen të dhëna',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Moduli nuk është i licencuar.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Abonimet aktive',
@@ -5896,8 +6152,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Mbyll përqendruesin e fokusit',
     'LBL_EXTERNAL_GUESTS' => 'Të ftuar të huaj',
     'LBL_MY_FAVORITE_TASKS' => 'Detyrat e mia të preferuara',
+
     'LBL_MY_TASKS' => 'Detyrat e mia',
 
     // Sugar Integrate
@@ -5914,7 +6172,367 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'Lloji',
     'LBL_TIME_AWARE_BEAN_ID' => 'ID-ja e Bean',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Shfaq etiketën',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Hap pamjen e regjistrimit',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Shto',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Ndihma nuk ofrohet',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funksionet',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Fushat',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Zgjidh fushën...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Grumbullim',
+    'LBL_ACTIONBUTTON_RELATED' => 'E ngjashme',
+    'LBL_ACTIONBUTTON_SAVE' => 'Ruaj',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Anulo',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Modul i ngjashëm',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Fusha të ngjashme',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Moduli i grumbullimit',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Fushat e grumbullimit',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Funksioni i grumbullimit',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Minimumi',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Maksimumi',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Mesatarja',
+    'LBL_ACTIONBUTTON_SUM' => 'Shuma',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Cakto regjistrimin',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Harto email',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Krijo regjistrim',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Bashkim i dokumentit',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Hap URL-në',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Ekzekuto raportin',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Përditëso regjistrimin',
+    'LBL_ACTIONBUTTON_ACTION' => 'Veprim',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Cakto te',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Dërgo email te',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Përdor PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Shabllon',
+    'LBL_ACTIONBUTTON_MODULE' => 'Modul',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Shfaq cilësimet',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Lloji',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Me lëshim poshtë',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Buton',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Grupi i butonave',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Shfaq etiketën në regjistër',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Shfaq në krye',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Fshih në "Modifikim"',
+    'LBL_ACTIONBUTTON_SIZE' => 'Madhësia',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Parazgjedhja',
+    'LBL_ACTIONBUTTON_SMALL' => 'E vogël',
+    'LBL_ACTIONBUTTON_LARGE' => 'E madhe',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'E lloguaritur',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Konverto në PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Bashkimi i dokumentit',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Pamja paraprake',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Karakteristikat',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Etiketa',
+    'LBL_ACTIONBUTTON_DESC' => 'Këshilla për veglën',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Shfaq etiketën',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Shfaq ikonën',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Skema e ngjyrave',
+    'LBL_ACTIONBUTTON_ICON' => 'Ikona',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'I varur',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Konfigurimi i formatit',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Ndalo kur has gabim',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Ruajtje automatike',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Konfigurimi',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Konfiguro Butonin e veprimit përpara se ta ruani.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Konfiguro butonat',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Krijo automatikisht',
+    'LBL_ACTIONBUTTON_LINK' => 'Lidhje',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Kopjo vlerat kryesore',
+    'LBL_ACTIONBUTTON_PRESET' => 'Paracakto',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Paracakto nga vlerat kryesore',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Zgjidh...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Nga fusha kryesore ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Je i sigurt që dëshiron ta fshish këtë buton?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Je i sigurt që dëshiron ta fshish këtë veprim?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Të dhëna të pavlefshme të butonit të veprimit',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Zgjidh një modul përpara ruajtjes.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Zgjidh një lidhje përpara ruajtjes. Nëse nuk ofrohet asnjë lidhje, çzgjidh opsionin e lidhjes.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Zgjidh një regjistrim përpara ruajtjes.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Zgjidh një shabllon përpara ruajtjes.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Kryesor',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Dytësor',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Oqean',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Rozë',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Ushtri',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Gurkali',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Paqësor',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'E gjelbër',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'E verdhë',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Portokalli',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'E kuqe',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Korali',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Vjollcë',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Formula',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Veprimet',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Gabim gjatë vlerësimit të të dhënave të butonit.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Butonat duhet të kenë të vendosur të paktën një etiketë ose një ikonë.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Fut një etiketë të vlefshme butoni.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'Regjistrimi nuk mund të krijohej për shkak se mungojnë vlerat e kërkuara. Kontakto me administratorin.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Duhet të kesh të paktën dy butona aktivë për këtë lloj butoni.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Pamjet e regjistrit',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Menytë e veprimeve',
+    'LBL_ACTIONBUTTON_ORDER' => 'Rendi',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Pamja e listës',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Pamja e regjistrit',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Nënpaneli i pamjes së regjistrit',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Nënpanelet',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'Motori i ekzekutimit të sekuencës së detyrave nuk i ekzekutoi veprimet e mëposhtme: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Shto një veprim',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Hiq këtë veprim',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Bashkim i dokumentit',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Bashko dokumentin në PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Madhësia e kompanisë',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Industria',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Etiketat e industrisë',
+    'LBL_HINT_COMPANY_LOCATION' => 'Vendndodhja e kompanisë',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Përshkrimi i kompanisë',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Viti i themelimit',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Faqja e kompanisë në Facebook',
+    'LBL_HINT_COMPANY_TWITTER' => 'Faqja e kompanisë në Twitter',
+    'LBL_HINT_COMPANY_PIC' => 'Logoja e kompanisë',
+    'LBL_HINT_CONTACT_PIC' => 'Fotografia e personit të kontaktit',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Faqja e internetit e kompanisë',
+    'LBL_HINT_PHOTO' => 'Lidhja e fotos',
+    'LBL_HINT_JOB_2' => 'Punët e mëparshme',
+    'LBL_HINT_EDUCATION' => 'Arsimi',
+    'LBL_HINT_EDUCATION_2' => 'Arsimi shtesë',
+    'LBL_HINT_TWITTER' => 'Lidhja e faqes në Twitter',
+    'LBL_HINT_FACEBOOK' => 'Lidhja e faqes në Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'Kodi NAICS',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'Kodi SIC',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Fundi i vitit fiskal',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Të ardhurat vjetore',
+    'LBL_HINT_PHONE_1' => 'Telefoni 1',
+    'LBL_HINT_PHONE_2' => 'Telefoni 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Bashko tabelën',
+    'LBL_HINT_FULL_NAME' => 'Emri i plotë',
+    'LBL_HINT_JOB_TITLE' => 'Profesioni',
+    'LBL_HINT_OFFICE_PHONE' => 'Telefoni i zyrës',
+    'LBL_HINT_MOBILE_PHONE' => 'Celulari',
+    'LBL_HINT_OTHER_PHONE' => 'Telefon tjetër',
+    'LBL_HINT_WEBSITE' => 'Faqja e internetit',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'A dëshiron të mbishkruash të gjitha të dhënat ekzistuese për këtë regjistër me të dhënat e reja të zbuluara në Hint?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'A dëshiron të mbishkruash {{fieldName}} ekzistues për këtë regjistër me {{fieldName}} të ri të zbuluar në Hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Të gjitha të dhënat e lidhura me llogarinë do të fshihen. Je i sigurt që dëshiron të vazhdosh?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logoja',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Fotografia',
+    'LBL_HINT_ACCOUNTSETS' => 'Etiketat e grupeve të llogarive të Hint',
+
+    'LBL_HINT_LOADING' => 'Duke ngarkuar ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'Duke çinstaluar Hint, qëndro në pritje',
+    'LBL_HINT_VALUE_ERASED' => ' Vlera u fshi ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Ky informacion u fshi përmes kërkesës për privatësinë e të dhënave',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Zgjidh një nga opsionet e çinstalimit si më poshtë:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Çinstalo vetëm paketën Hint',
+    'LBL_HINT_UNINSTALL_FULL' => 'Çinstalo Hint plotësisht',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Ky opsion do të fshijë Hint MLP dhe do të çaktivizojë të gjitha abonimet aktive në Hint Insights.                                 
+    Instalimi sërish i Hint do të riaktivizojë automatikisht abonimet.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Ky opsion do të çaktivizojë Hint plotësisht, duke përfshirë heqjen e MLP dhe fshirjen e të gjitha informacioneve të konfigurimeve dhe abonimeve.',
+    'LBL_HINT_UNINSTALL' => 'Çinstalo',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Çinstalo Hint',
+    'LBL_HINT_CANCEL' => 'Anulo',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'PARALAJMËRIM: Zgjidh këtë opsion vetëm nëse nuk ke për qëllim që ta përdorësh Hint sërish në të ardhmen.
+    Përpara çinstalimit, kryej një arkivim të plotë të bazës tënde të të dhënave në Sugar dhe vendose Sugar në modalitetin e mirëmbajtjes. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Shih ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Udhëzuesin e administrimit të Hint ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'për detaje lidhur me procesin e çinstalimit.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Je i sigurt që dëshiron të çinstalosh vetëm paketën Hint?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Je i sigurt që dëshiron të çinstalosh Hint plotësisht?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(SHËNIM: KY VEPRIM NUK MUND TË ZHBËHET)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Fushat Hint',
+    'LBL_HINT_NO_RESULTS_MSG' => 'Nuk janë gjetur rezultate.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Dizajni bazë i panelit të Hint',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Llogaritë',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Kontaktet',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Klientët e mundshëm',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Dizajni i zmadhuar i panelit të Hint',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Riorganizo fushat duke tërhequr dhe lëshuar brenda seksioneve të dizajnit të paneleve të Hint më sipër.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Për udhëzime të hollësishme dhe një listë të fushave të parazgjedhura, shko te ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' për të rivendosur cilësimet e parazgjedhura për ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'modulin.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Je i sigurt që dëshiron të rivendosësh konfigurimet e parazgjedhura për modulin {{module}}?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Kliko këtu',
+    'LBL_HINT_CONFIG_NAME' => 'Udhëzuesi i administrimit të Hint.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Fushat',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Fushat e plotësuara',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Në këtë seksion renditen të gjitha fushat Hint dhe Sugar që janë plotësuar nga Hint. Fushat Hint janë shënuar me një yll (*) dhe mund të shfaqen vetëm në panelin e Hint nëse plotësohen.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Emri i fushës',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Plotëso fushën',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Shfaq në Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Shfaq në panelin e Hint',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Fushat shtesë të Sugar',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Në këtë seksion renditen të gjitha fushat që nuk janë plotësuar nga Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Paralajmërim',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Kujdes: Je në prag sinkronizimi me shërbimin Hint Insights. Të gjitha përmbledhjet e emailit të mbetura pezull do të humbasin dhe lajmet ekzistuese do të fshihen nga paneli i Insights. Njoftimet e të gjitha llojeve do të rinisin pas përfundimit të sinkronizimit.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Kompanitë e sugjeruara lidhur me {{_moduleSingular}} janë të renditura më poshtë. Zgjidh të dhënat e kompanisë që do të afishohen.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Nuk është zgjedhur asnjë llogari',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'Janë gjetur disa emaile, zgjidh emailet që do të importohen: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'Në bazë të të dhënave të vendosura, Hint nuk mundi të gjente një element të përputhshëm në sistem.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Rezultatet më të mira në Hint mund të gjenden përmes emrit dhe adresës së emailit të një personi.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Rezultatet më të mira në Hint mund të gjenden përmes url-së së faqes së internetit të kompanisë.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Vendos emrin e kompanisë ose faqen e internetit të {{_moduleSingular}} dhe Hint do të kërkojë për të dhëna shtesë.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Vendos adresën aktuale të emailit të {{currentModule}} dhe Hint do të kërkojë për të dhëna shtesë.",
+
+    'LBL_HINT_HISTORY_NONE' => 'Nuk ka të dhëna të disponueshme për pamjen historike',
+    'LBL_HINT_HISTORY_TITLE' => 'Historiku i aktivitetit',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Plotësimi i të dhënave',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'Licenca jote për shërbimin SugarCRM Hint ka skaduar. Kontakto me administratorin tënd të SugarCRM për të rinovuar licencën.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Dëshiron të shohësh se çfarë mund të bëjë SugarCRM Hint për ty dhe kompaninë tënde. Kontakto me administratorin tënd të SugarCRM për të shtuar Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'Informacioni i llogarisë nuk u gjet',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'U gjetën të dhënat e plotësuara - kliko për të ruajtur të gjitha të dhënat e plotësuara në regjistrin tënd.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Kliko për të ruajtur të dhënat e plotësuara në regjistrin tënd.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Kontaktet e lidhura',
+    'LBL_HINT_CONTACTS_NONE' => 'Nuk ka kontakte të lidhura',
+
+    'LBL_HINT_NEWS' => 'Lajmet',
+    'LBL_HINT_GENERAL' => 'Të përgjithshme',
+    'LBL_HINT_ALL_NEWS' => 'Të gjitha lajmet',
+    'LBL_HINT_FILTER_NEWS' => 'Filtro lajmet',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Financiare',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personel',
+    'LBL_HINT_PRESS_RELEASES' => 'Deklarata shtypi',
+    'LBL_HINT_OTHER_NEWS' => 'Të tjera',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Kërko artikuj lajmesh',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'Nuk disponohen lajme',
+    'LBL_NEW_NOTIFICATIONS' => 'Njoftime të reja',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Duhet të kesh një licencë të Hint për të shikuar panelin e Hint Insights.                                                                                                                                
+   Pyet administratorin tënd për të marrë një licencë të Hint.',
+
+    'LBL_HINT_FOR' => 'Për',
+    'LBL_HINT_WITH' => 'me',
+    'LBL_HINT_SHOW_ME' => 'Shfaq: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Më njofto përmes: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Qendra e preferencave të Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Çelësi i opsioneve të preferencave',
+    'LBL_HINT_PREFERENCES' => 'Preferencat',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Fshij të çaktivizuarat, nevojitet minimalisht një deklaratë preference',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Shto të çaktivizuarat, ke arritur maksimumin e deklaratave të preferencave',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Përfshi në panelin e Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Shfaq dritaren kërcyese si njoftim në desktop',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Njoftimet duhet të jenë të aktivizuara në të gjithë shfletuesit dhe në të gjithë kompjuterët për të marrë vazhdimisht njoftime.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Disa shfletues të tillë si Internet Explorer, nuk i mbështesin njoftimet. Njoftimet nuk mund të aktivizohen nëse përdorni një shfletues që nuk i mbështet ato.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Dërgo lajmërim të menjëhershëm me email për secilin njoftim',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Dërgo një përmbledhje të përditshme me email',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Dërgo një përmbledhje të përjavshme me email',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'Preferencat nuk u ruajtën. Kontrollo lidhjen e sistemit dhe provo përsëri.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Mungon një vlerë për disa nga fushat e kërkuara. Kontrollo preferencat dhe sigurohu që të jenë plotësuar të gjitha fushat e kërkuara.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Je në prag të aktivizimit të njoftimeve për Hint Insights. Kliko "Konfirmo" për të vazhduar. Më pas shfletuesi yt do të të kërkojë autorizim për të lejuar marrjen e njoftimeve.',
+    'LBL_HINT_PUSH_ERROR' => 'Shtesa e njoftimeve automatike është regjistruar për {{options.type}} pa pajisjet e varura prej saj. Shtesa nuk do të funksionojë siç është parashikuar, prandaj sigurohu që të ofrosh një shteg për te skedari i punës dhe një metodë për ruajtjen e abonimit në server.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'AKTIVIZO njoftimet e Hint për të gjithë përdoruesit',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'ÇAKTIVIZO njoftimet e Hint për të gjithë përdoruesit',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'PARALAJMËRIM: Çaktivizimi i njoftimeve nuk u krye gjatë çinstalimit të Sugar Hint. Për të çaktivizuar njoftimet, instalo versionin Hint 5.4.0 ose më të lartë dhe kryej çinstalimin e plotë duke përdorur çinstaluesin e Hint, që gjendet në seksion "Administrimi" të Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Konfigurimi i hartave',
+    'LBL_MAP_MAP' => 'Harta',
+    'LBL_MAP_MAPS' => 'Hartat',
+    'LBL_MAP_GEOCODING_RECORD' => 'Gjeokodimi',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'Regjistri është gjeokoduar me sukses.',
+    'LBL_MAP_LATITUDE' => 'Gjerësia gjeografike',
+    'LBL_MAP_LONGITUDE' => 'Gjatësia gjeografike',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Kërko sipas adresës...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'Regjistri aktual është i gjeokoduar ndërkohë. Je i sigurt që dëshiron të mbishkruash gjeokodimin për këtë regjistër?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Gjeokodimi manual',
+    'LBL_MAP_POINT_COORDINATES' => 'Koordinatat e pikës në hartë',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Duke llogaritur rrugën optimale...',
+    'LBL_MAP_DIRECTIONS' => 'Drejtimet',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Drejtimet duke nisur nga përdoruesi aktual',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Drejtimet duke nisur nga ky regjistër',
+    'LBL_MAPS_RADIUS_INPUT' => 'Rrezja (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'brenda një rrezeje nga kodi postar',
+    'LBL_MAPS_DISTANCE' => 'Distanca',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Kodi postar',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Konfigurim i pavlefshëm: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> hartëzimi i fushave është i pavlefshëm.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Lloji i hartës',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Niveli i zmadhimit',
+    'LBL_MAPS_DASHLET' => 'Hartat',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Shfaq regjistrin(at) e gjeokoduar në hartë.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Hartat nuk disponohen për këtë modul. Aktivizoji ato në panelin "Administrimi".',
+    'LBL_MAP_MODULES' => 'Moduli',
+    'LBL_MAP_FILTER_BY' => 'Filtro sipas',
+    'LBL_MAP_UNIT_TYPE' => 'Lloji i njësisë',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Milje',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilometra',
+    'LBL_MAP_ADDRESS' => 'Adresa',
+    'LBL_MAP_NO_STARTING_POINT' => 'Pika e nisjes nuk është gjeokoduar.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'Regjistri i pikës së nisjes nuk është gjeokoduar.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Disa nga regjistrat e zgjedhur nuk janë gjeokoduar dhe nuk do të shfaqen në hartë.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Gjeokodimi nuk është kryer për regjistrin(at).',
+    'LBL_MAPS_MODULE_FIELDS' => 'Fushat e moduleve',
+    'LBL_MAPS_SELECT_FIELD' => 'Zgjidh fushën',
+    'LBL_MAPS_RELATE_RECORD' => 'Regjistri i lidhur',
+    'LBL_MAPS_MAPPING_TYPE' => 'Lloji i hartëzimit',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'Nuk ka regjistra të gjeokoduara',
+    'LBL_MAPS_ADDRESS' => 'Adresa',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Përdoruesi i caktuar',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'Pamja anësore e rrugës nuk disponohet për pikën e dhënë',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> regjistrat nuk janë të vlefshëm për hartëzim. Hiq modulin nga lista.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Mbyll',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Zgjero',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Ruaj si PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'Lidhja e emailit',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Duhet të kesh të paktën një regjistër të gjeokoduar.',
+    'LBL_MAPS_GENERATING' => 'Duke gjeneruar hartën...',
+    'LBL_MAPS_POINTS' => 'Pikat e hartës',
+    'LBL_MAPS_POINT' => 'Pika',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Detajet e udhëtimit',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Distanca totale',
+    'LBL_MAPS_TOTAL_DURATION' => 'Kohëzgjatja totale',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Kohëzgjatja totale pa trafik',
+    'LBL_MAPS_ITINERARY' => 'Itinerari',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Distanca e udhëtimit',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Kohëzgjatja e udhëtimit',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Hapat',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Paralajmërimet',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps mbështet deri në 10 pika vendndodhjeje në një hartë të përbashkët. Rishiko përzgjedhjen.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Kërkohet licenca e hartave',
+
+    'LBL_INVALID_FORMULA' => 'Formulë e pavlefshme',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'Lloji i kthimit të funksionit nuk përputhet',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Parashikimi',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Profili i klientit ideal',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Gjendja e fundit',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Dërgo te DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Hap',
+    'LBL_CLOSED_WON' => 'Mbyllur me fitim',
+    'LBL_CLOSED_LOST' => 'Mbyllur me humbje',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6751,8 +7369,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Kontakte',
@@ -7092,6 +7710,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Skedar i integruar';
     'YER' => 'Rial',
     'ZWD' => 'Dollarë zimbabvian',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Shumë i lartë',
+        '4' => 'I lartë',
+        '3' => 'Neutral',
+        '2' => 'I ulët',
+        '1' => 'Shumë i ulët',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Asnjë',
         'future' => 'Vlera aktuale',
@@ -7101,3 +7727,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Skedar i integruar';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Gjuajtje e vetme',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'Duke përpunuar',
+        'error' => 'Gabim',
+        'success' => 'Me sukses',
+        'canceled' => 'U anulua',
+        'document_load' => 'Duke ngarkuar shabllonin',
+        'tags_extract' => 'Duke nxjerrë etiketat',
+        'tags_validate' => 'Duke vlerësuar etiketat',
+        'data_retrieving' => 'Duke marrë të dhënat',
+        'serialize_document' => 'Duke i vendosur dokumentet të gjitha bashkë',
+        'send_document' => 'Duke të të dërguar dokumentin',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Bashko',
+        'convert' => 'Bashkimi në PDF',
+        'multimerge' => 'Bashko disa',
+        'multimerge_convert' => 'Bashko disa në PDF',
+        'labelsgenerate' => 'Gjenero etiketa',
+        'labelsgenerate_convert' => 'Gjenero etiketa PDF',
+        'excel' => 'Bashkimi në Excel',
+        'excel_convert' => 'Konvertimi i bashktimit në Excel',
+        'presentation' => 'Bashkimi në PowerPoint',
+        'presentation_convert' => 'PDF e bashkimit në PowePoint',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Llogaritë e mia',
+      'favorites' => 'Llogaritë e preferuara',
+      'tags' => 'Llogaritë e etiketuara',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Të gjitha lajmet',
+      'General' => 'Të përgjithshme',
+      'Finance' => 'Financiare',
+      'People' => 'Personel',
+      'Press Releases' => 'Deklarata shtypi',
+      'Other' => 'Të tjera',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Zotëruesit';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Njësia e diskut të resë kompjuterike';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Paneli i integrimit të njësisë së diskut të resë kompjuterike';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Kopjo lidhjen';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Shkarko';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Krijo dokument në Sugar';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Sinkronizo me Google Drive';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Sinkronizo të gjitha me Google Drive';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'Ky skedar nuk mund të shkarkohet';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'Paneli i resë kompjuterike nuk është i disponueshëm';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'U krijua dokumenti në Sugar';
+
+    $app_string['LBL_MY_FILES'] = 'Skedarët e mi';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Ndarë me mua';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Ofruesi i resë kompjuterike';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Ndarë me mua';
+    $app_strings['LBL_MY_FILES'] = 'Skedarët e mi';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Ngarko skedarin';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'Skedari nuk u gjet';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Krijo dosjen';
+    $app_strings['LBL_LOAD_MORE'] = 'Ngarko më shumë...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'Nuk u gjet lidhja me Google...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'Nuk u gjet lidhja me Microsoft...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-bosh-',
+      'Exact' => 'Saktë',
+      'Null_address_components' => 'Një ose disa komponentë të adresës janë bosh',
+      'Invalid_address' => 'Adresë e pavlefshme, serveri u kthye i pasaktë',
+      'Invalid_server_response_not_XML' => 'Përgjigje e pavlefshme e serverit, jo XML',
+      'Invalid_address_no_location' => 'Adresë e pavlefshme, serveri nuk ktheu asnjë vendndodhje',
+      'Ambiguous_address' => 'Adresë e paqartë, përputhen disa rezultate',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Rruga',
+      'a' => 'Ajrore',
+      'be' => 'Pamje nga lart',
+      'rd' => 'Rrugë e errët',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

@@ -26,10 +26,7 @@ $viewdefs['Bugs']['portal']['layout']['record'] = array(
                                     'view' => 'record',
                                 ),
                                 array(
-                                    'view' => 'activity',
-                                    'context' => array(
-                                        'link' => 'notes',
-                                    ),
+                                    'view' => 'activity-timeline-base',
                                 ),
                                 array(
                                     'view' => 'editmodal',

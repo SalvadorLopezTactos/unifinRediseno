@@ -17,6 +17,7 @@ $dictionary['OutboundEmail'] = [
     'acls' => [
         'SugarACLOutboundEmail' => true,
     ],
+    'favorites' => true,
     'fields' => [
         'id' => [
             'name' => 'id',
@@ -224,6 +225,12 @@ $dictionary['OutboundEmail'] = [
             'default' => 1,
             'reportable' => false,
         ],
+        'preferred_sending_account' => [
+            'name' => 'preferred_sending_account',
+            'vname' => 'LBL_PREFERRED_SENDING_ACCOUNT',
+            'type' => 'bool',
+            'default' => 0,
+        ],
         'deleted' => [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
@@ -238,11 +245,6 @@ $dictionary['OutboundEmail'] = [
             'name' => 'outbound_email_pk',
             'type' => 'primary',
             'fields' => ['id'],
-        ],
-        [
-            'name' => 'oe_user_id_idx',
-            'type' => 'index',
-            'fields' => ['id', 'user_id'],
         ],
         [
             'name' => 'oe_type_idx',
@@ -272,6 +274,7 @@ $dictionary['OutboundEmail'] = [
     ],
     'uses' => [
         'team_security',
+        'favorite',
     ],
     'ignore_templates' => [
         'default',

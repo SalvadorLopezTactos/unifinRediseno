@@ -1,0 +1,107 @@
+// Setting widths for filter row fields
+.console-config .row-fluid div {
+  width: 28%;
+  display: inline-block;
+}
+
+.console-config .row-fluid .filter-selector div {
+  width: 100%;
+}
+
+// Hiding filter row fields
+.console-config .row-fluid .hide {
+  display: none;
+}
+
+// Hides "From/To" labels of values from "between" operators to save space
+.console-config .row-fluid .add-on {
+  display: none;
+}
+
+// Fixes issue with select2 fields automatically opening a search dropdown on creation
+.console-config .filter-selector .select2-drop {
+  display: none;
+}
+
+// Setting proper alignments of filter row fields
+.console-config .row-fluid .filter-actions.btn-group {
+  width: auto;
+  vertical-align: top;
+}
+
+.console-config .row-fluid .span4 {
+  margin-left: 0;
+  float: none;
+  vertical-align: top;
+}
+
+.console-config-fields .bordered {
+  border: 1px solid @grayLightish;
+  cursor: pointer;
+  padding: 5px;
+  color: #176de5;
+  border-radius: 5px;
+}
+
+.console-config-fields {
+  & * .fieldset-field {
+    width: 50%;
+  }
+}
+
+.multi-line-list-view {
+  height: 100%;
+  overflow: auto;
+
+  &.console-preview {
+    .multi-line-table {
+      border: 1px solid @tableTheadRowBorderColor;
+      width: 30%;
+
+      th,
+      td {
+        vertical-align: middle;
+        font-weight: normal;
+        line-height: 16px;
+        padding: 6px 4px 6px 14px;
+      }
+
+      tbody tr:not(:last-child) {
+        border-bottom: 1px solid @tableTheadRowBorderColor;
+      }
+
+      .cell-bar--long,
+      .cell-bar--short {
+        border-radius: 4px;
+        height: 10px;
+        margin: 6px 0;
+        background-color: @grayMid;
+      }
+
+      .cell-bar--long {
+        width: 120px;
+      }
+
+      .cell-bar--short {
+        width: 80px;
+      }
+    }
+  }
+}
+
+.console-config-instructions {
+  background-color: fade(@lightPacific, 20%);
+  color: @darkTeal;
+  padding: 20px;
+
+  ul {
+    margin-left: 15px;
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: @darkTeal;
+  }
+}

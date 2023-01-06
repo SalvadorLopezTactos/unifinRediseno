@@ -11,7 +11,6 @@
  */
 *}
 <script type="text/javascript">
-{literal}
 function submitListViewDCMenu(submitElem) {
 var callback = {
 success: function(o) {
@@ -27,11 +26,24 @@ failure: function(o) {
 window.history.go(0);
 }
 };
-{/literal}
-window.opener.YAHOO.util.Connect.asyncRequest('POST', 'index.php', callback, "module=Documents&action=extdoc&isPopup={$isPopup}&elemBaseName={$elemBaseName}&apiName={$apiName}&button=Search&name_basic="+document.getElementById('dcSearch').value);
-{literal}
+
+    var params = '?module=Documents' +
+        '&action=extdoc' +
+        '&isPopup={$isPopup}' +
+        '&apiName={$apiName}' +
+        '&button=Search' +
+        '&name_basic=' + document.getElementById('dcSearch').value;
+
+    {if $sidecarCid}
+        var baseUrl = window.opener.App.utils.getSiteUrl();
+        params += '&sidecarCid={$sidecarCid}';
+    {else}
+        var baseUrl = window.opener.app.utils.getSiteUrl();
+        params += '&elemBaseName={$elemBaseName}';
+    {/if}
+
+    window.location.href = baseUrl + params;
 }
-{/literal}
 </script>
 <div id="dcSearchFormDiv" style="left:20px;">
 <form id="dcSearchForm">

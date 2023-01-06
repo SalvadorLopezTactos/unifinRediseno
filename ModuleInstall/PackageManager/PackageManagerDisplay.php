@@ -54,11 +54,11 @@ class PackageManagerDisplay{
         $mi_errors = $mi->getErrors();
         $error_html = "";
         if (!empty($mi_errors)) {
-            $error_html = "<div style='margin:0px 10px 10px 10px;'>";
+            $error_html = '<div style="margin:0 10px 10px 10px;">';
             foreach ($mi_errors as $error) {
-                $error_html .= "<font color='red'>" . $error . "</font><br>";
+                $error_html .= '<p style="color: red">' . htmlspecialchars($error) . '</p>';
             }
-            $error_html .= "</div>";
+            $error_html .= '</div>';
         }
 
         $tree = PackageManagerDisplay::buildTreeView('treeview', $isAlive);
@@ -78,17 +78,16 @@ class PackageManagerDisplay{
         }
         else
         {
+            $ss->assign('ERR_SUHOSIN', false);
             $ss->assign('scripts', PackageManagerDisplay::getDisplayScript($install));
         }
         $show_login = false; //hiding install from sugar
 		$ss->assign('MODULE_SELECTOR', PackageManagerDisplay::buildGridOutput($tree, $mod_strings, $isAlive, $show_login));
         $ss->assign('INSTALL_ERRORS', $error_html);
         $ss->assign('MOD', $mod_strings);
-        $descItemsInstalled = $mod_strings['LBL_UW_DESC_MODULES_INSTALLED'];
         $ss->assign('INSTALLED_PACKAGES_HOLDER', PackageManagerDisplay::buildInstalledGrid($mod_strings, $types));
 
-   $str = $ss->fetch('ModuleInstall/PackageManager/tpls/PackageForm.tpl');
-      return $str;
+        return $ss->fetch('ModuleInstall/PackageManager/tpls/PackageForm.tpl');
     }
 
     protected static function buildInstalledGrid($mod_strings, $types = array('modules'))
@@ -215,11 +214,11 @@ class PackageManagerDisplay{
         $ss->assign('sugar_version', $sugar_version);
         $ss->assign('js_custom_version', $sugar_config['js_custom_version']);
          $ss->assign('IS_ALIVE', $isAlive);
+        $ss->assign('GRID_TYPE', implode(',', $types));
         if($type == 'patch'){
             $ss->assign('module_load', 'false');
             $patches = PackageManagerDisplay::createJavascriptPackageArray($releases);
             $ss->assign('PATCHES', $patches);
-             $ss->assign('GRID_TYPE', implode(',', $types));
         }else{
            	$pm = new PackageManager();
            	$releases = $pm->getPackagesInStaging();
@@ -233,6 +232,9 @@ class PackageManagerDisplay{
         }
         if(!empty($GLOBALS['ML_STATUS_MESSAGE']))
         	$ss->assign('ML_STATUS_MESSAGE',$GLOBALS['ML_STATUS_MESSAGE']);
+        else {
+            $ss->assign('ML_STATUS_MESSAGE', '');
+        }
 
         //Bug 24064. Checking and Defining labels since these might not be cached during Upgrade
         if(!isset($mod_strings['LBL_ML_INSTALL']) || empty($mod_strings['LBL_ML_INSTALL'])){
@@ -278,47 +280,45 @@ class PackageManagerDisplay{
         return $str;
     }
 
-    function createJavascriptPackageArray($releases){
-        $output = "var mti_data = [";
-        $count = count($releases);
-        $index = 1;
-        if(!empty($releases['packages'])){
-	        foreach($releases['packages'] as $release){
-	            $release = PackageManager::fromNameValueList($release);
-	            $output .= "[";
-	            $output .= "'".$release['description']."', '".$release['version']."', '".$release['build_number']."', '".$release['id']."'";
-	            $output .= "]";
-	            if($index < $count)
-	                $output .= ",";
-	            $index++;
-	        }
+    public static function createJavascriptPackageArray(?array $releases): string
+    {
+        $variableValue = [];
+        if (!empty($releases['packages'])) {
+            foreach ($releases['packages'] as $release) {
+                $release = PackageManager::fromNameValueList($release);
+                $outputData = [
+                    $release['description'],
+                    $release['version'],
+                    $release['build_number'],
+                    $release['id'],
+                ];
+                $variableValue[] = $outputData;
+            }
         }
-        $output .= "]\n;";
-        return $output;
+        return 'var mti_data = ' . json_encode($variableValue, JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_TAG) . ';';
     }
 
-    protected static function createJavascriptModuleArray($modules, $variable_name = 'mti_data')
+    protected static function createJavascriptModuleArray(?array $modules, string $variable_name = 'mti_data'): string
     {
-        $output = "var ".$variable_name." = [";
-        $count = count($modules);
-        $index = 1;
-        if(!empty($modules)){
-	        foreach($modules as $module){
-	            $output .= "[";
-	            $output .= "'".$module['name']."', '".$module['file_install']."', '".$module['file']."', '";
-	            if(!empty($module['enabled']))
-	            	$output .= $module['enabled'].'_'.$module['file']."', '";
-
- 				$description = js_escape($module['description']);
-	            $output .= $module['type']."', '".$module['version']."', '".$module['published_date']."', '".$module['uninstallable']."', '".$description."'".(isset($module['upload_file'])?" , '".$module['upload_file']."']":"]");
-	            if($index < $count)
-	                $output .= ",";
-	            $index++;
-	        }
-
+        $variableValue = [];
+        if (!empty($modules)) {
+            foreach ($modules as $module) {
+                $outputData = [$module['name'], $module['file_install'], $module['file']];
+                if (!empty($module['enabled'])) {
+                    $outputData[] = $module['enabled'] . '_' . $module['file'];
+                }
+                $outputData[] = $module['type'];
+                $outputData[] = $module['version'];
+                $outputData[] = $module['published_date'];
+                $outputData[] = $module['uninstallable'];
+                $outputData[] = $module['description'];
+                if (isset($module['upload_file'])) {
+                    $outputData[] = $module['upload_file'];
+                }
+                $variableValue[] = $outputData;
+            }
         }
-        $output .= "]\n;";
-        return $output;
+        return 'var ' . $variable_name . ' = ' . json_encode($variableValue, JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_TAG) . ';';
     }
 
     public static function getHeader()

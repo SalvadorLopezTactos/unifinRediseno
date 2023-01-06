@@ -44,6 +44,8 @@
         'ToggleMoreLess',
         'Dashlet',
         'Pagination',
+        'ConfigDrivenList',
+        'ActionButton',
     ],
 
     /**
@@ -61,9 +63,6 @@
         'Campaigns',
         'Home',
         'Forecasts',
-        'ProductCategories',
-        'ProductTemplates',
-        'ProductTypes',
         'Project',
         'ProjectTask',
         'UserSignatures',
@@ -71,12 +70,17 @@
     ],
 
     /**
-     * Modules to show 'Link' FAB.
+     * Extra modules that we need to check for user access
+     *
      * @property {string[]}
      */
-    linkModules: [
-        'Contacts',
-        'Cases'
+    extraModules: [
+        'ProductCategories',
+        'ProductTypes',
+        'Manufacturers',
+        'ContractTypes',
+        'Shippers',
+        'ShiftExceptions',
     ],
 
     /**
@@ -112,6 +116,7 @@
      * @property {Object}
      */
     _defaultSettings: {
+        freeze_first_column: true,
         limit: 5, // for tabs with list view
     },
 
@@ -162,7 +167,7 @@
     tabs: [],
 
     /**
-     * The pseudo dashlet component that is the live prevew on the config view
+     * The pseudo dashlet component that is the live preview on the config view
      *
      * @property {View}
      */
@@ -174,6 +179,16 @@
      * Are we in a config drawer layout?
      */
     configLayout: false,
+
+    /**
+     * Turn off headerpane
+     */
+    enableHeaderPane: true,
+
+    /**
+     * Defines the scroll container jQuery element
+     */
+    scrollContainer: null,
 
     /**
      * @inheritdoc
@@ -209,10 +224,50 @@
         this._toolbarContextEvents = {
             'button:edit_button:click': this.editRecord,
             'button:save_button:click': this.saveClicked,
-            'button:cancel_button:click': this.cancelClicked
+            'button:cancel_button:click': this.cancelClicked,
         };
 
         this.configLayout = this._inConfigLayout();
+        this.context.on('focusRow', this.focusRow, this);
+        this.context.on('unfocusRow', this.unhighlightRows, this);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    saveClicked: function() {
+        // Disable the action buttons.
+        this.toggleButtons(false);
+        var allFields = this.getFields(this.module, this.model);
+        var fieldsToValidate = {};
+        var erasedFields = this.model.get('_erased_fields');
+        for (var fieldKey in allFields) {
+            if (app.acl.hasAccessToModel('edit', this.model, fieldKey) &&
+                (!_.contains(erasedFields, fieldKey) || this.model.get(fieldKey) || allFields[fieldKey].id_name)) {
+                _.extend(fieldsToValidate, _.pick(allFields, fieldKey));
+            }
+        }
+
+        // name field is not defined in metadata, inject it here to be validated
+        var $recordCells = this._getRecordCells();
+        var nameField = this._getNameFieldFromRecordCells($recordCells);
+        var nameFieldName = $(nameField).find('.index').attr('data-fieldname');
+        var nameFieldDef = app.metadata.getField({module: this.module, name: nameFieldName});
+        if (!_.isEmpty(nameFieldDef)) {
+            if (!_.contains(fieldsToValidate, nameFieldName)) {
+                fieldsToValidate[nameFieldName] = nameFieldDef;
+            }
+            // field group such as fullname
+            if (fieldsToValidate[nameFieldName].fields) {
+                _.each(fieldsToValidate[nameFieldName].fields, function(field) {
+                    var fieldDef = app.metadata.getField({module: this.module, name: field});
+                    if (!_.isEmpty(fieldDef) && fieldDef.required && !_.contains(fieldsToValidate, field)) {
+                        fieldsToValidate[field] = fieldDef;
+                    }
+                }, this);
+            }
+        }
+        this.model.doValidate(fieldsToValidate, _.bind(this.validationComplete, this));
     },
 
     /**
@@ -238,10 +293,14 @@
             tab.meta
         );
 
+        // Make sure we start with all the buttons. These get filtered out next,
+        // but we need the full list and not the already filtered ones.
+        newMeta.buttons = desiredMeta.buttons;
+
         // split out the headerpane if necessary, and remove unwanted fields
         // we need to inject these into the toolbar
         if (newMeta.panels) {
-            this._prepareHeader(newMeta.panels, newMeta.buttons);
+            this._prepareHeader(newMeta.panels, newMeta.buttons, tab);
         }
 
         return newMeta;
@@ -309,15 +368,13 @@
                 return;
             }
 
-            if (activeTab.type === 'record') {
-                if (
-                    this._mode === 'main' &&
-                    this.model &&
-                    this.model.module === this.module
-                ) {
-                    // ensure the header is populated with the relevant data if we already have it
-                    this._injectRecordHeader(this.model);
-                }
+            if (
+                this._mode === 'main' &&
+                this.model &&
+                this.model.module === this.module
+            ) {
+                // ensure the header is populated with the relevant data if we already have it
+                this._prepareHeader(this.meta.panels, this.meta.buttons, activeTab);
             }
         });
     },
@@ -648,13 +705,16 @@
         this.module = tab.module;
         this.context.set('module', this.module);
         this.meta = this._extendMeta(tab);
+        this._initDropdownBasedViews();
         this.modulePlural = app.lang.getAppListStrings('moduleList')[this.module] || this.module;
         this.moduleSingular = app.lang.getAppListStrings('moduleListSingular')[this.module] || this.modulePlural;
         this.action = tab.type === 'list' ? 'list' : 'detail';
+        // From ConfigDrivenList Plugin
+        this.filterConfigFieldsForDashlet();
         this._buildGridsFromPanelsMetadata();
         this.collection = tab.collection || null;
         this.context.set('model', this.model, {silent: true});
-        this._prepareHeader(this.meta.panels, this.meta.buttons);
+        this._prepareHeader(this.meta.panels, this.meta.buttons, tab);
     },
 
     /**
@@ -745,7 +805,25 @@
         } else if (this._hasRowModel()) {
             contextModel = this._cloneModel(this._getRowModel());
         } else {
-            contextModel = this._cloneModel(app.controller.context.get('model'));
+            var context = this.context;
+
+            // search upward for the first context that has the correct record model
+            while (context) {
+                var model = context.get('model');
+
+                if (model && model.has('id')) {
+                    var module = context.get('module');
+
+                    if (module === this._baseModule) {
+                        contextModel = model;
+                        break;
+                    }
+                }
+
+                context = context.parent;
+            }
+
+            contextModel = this._cloneModel(contextModel || app.controller.context.get('model'));
         }
 
         return this._contextModel = contextModel;
@@ -877,6 +955,26 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _renderField: function(field, $fieldEl) {
+        // Make sure that we render the subfields of the non-editable fieldsets in 'detail' mode
+        if (!_.contains(this.editableFields, field) && field.fields && _.isArray(field.fields)) {
+            field.setElement($fieldEl || this.$(`span[sfuuid=${field.sfId}]`));
+            field.setMode('detail');
+        } else {
+            this._super('_renderField', [field, $fieldEl]);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _getDropdownBasedViewName: function() {
+        return this._mode === 'main' ? 'recorddashlet' : null;
+    },
+
+    /**
      * Load data for passed set of tabs.
      *
      * @param {Object[]} tabs Set of tabs to update.
@@ -929,6 +1027,13 @@
                         showAlerts: true,
                         success: _.bind(function(model) {
                             if (self._isActiveTab(tab)) {
+
+                                // Check the metadata again. On the first switch to the tab,
+                                // some of the fields we need for the header buttons might
+                                // not be available
+                                self.meta = self._extendMeta(tab);
+                                self._initDropdownBasedViews();
+
                                 self.render();
                                 // init SugarLogic only after fields have been rendered
                                 self.initTabSugarLogic();
@@ -1066,91 +1171,53 @@
 
         this._super('_renderHtml');
 
-        if (tabType === 'record' && this.closestComponent('omnichannel-dashboard') &&
-            this.model && this.model.get('id') && _.contains(this.linkModules, this.module)) {
-            this._showLinkFAB();
-        } else if (this.linkFAB) {
-            this.linkFAB.dispose();
-            this.linkFAB = null;
+        // Only show the SugarLive record link button if we're on an record tab that has an actual record in it
+        if (tabType === 'record' && this.model.get('id')) {
+            this.createSugarLiveLinkButton();
+        } else if (this.sugarLiveLinkButton) {
+            this._destroySugarLiveLinkButton();
         }
     },
 
     /**
-     * Show 'Link' FAB for linking this record to current AWS connection, or
-     * 'Linked' FAB if this record has already been linked.
-     * @private
+     * Ensure at most one button exists at a time for the dashlet, for the current
+     * active record view tab only
+     * @inheritdoc
      */
-    _showLinkFAB: function() {
-        if (this.linkFAB) {
-            return;
+    createSugarLiveLinkButton: function() {
+        if (this.sugarLiveLinkButton) {
+            this._destroySugarLiveLinkButton();
         }
-        var detail = app.omniConsole.getComponent('omnichannel-detail');
-        var caseModel = detail.getCaseModel();
-        var contactModel = detail.getContactModel();
-        var linked = false;
-        if ((contactModel && contactModel.get('id') === this.model.get('id')) ||
-            (caseModel && caseModel.get('id') === this.model.get('id'))) {
-            linked = true;
-        }
-        var icon = linked ? 'fa-check' : 'fa-link';
-        var label = linked ? 'LBL_OMNICHANNEL_LINKED' : this._getLinkFABLabel();
-        var style = linked ? 'linked' : 'link-to';
-        var action = linked ? '' : this.cid + '-link';
-        var linkFAB = this._createLinkFAB(icon, label, style, action);
-        if (!linked) {
-            var model = this.model;
-            linkFAB.context.on(this.cid + '-link:clicked', function() {
-                var detailPanel = app.omniConsole.getComponent('omnichannel-detail');
-                detailPanel.setModel(model);
-                linkFAB.setOptions({
-                    icon: 'fa-check',
-                    label: 'LBL_OMNICHANNEL_LINKED',
-                    style: 'linked',
-                    action: ''
-                });
-                linkFAB.render();
-            });
-        }
-        this.linkFAB = linkFAB;
+
+        this._getCurrentSugarLiveContact();
+        this._super('createSugarLiveLinkButton');
     },
 
     /**
-     * Get label for the 'Link' FAB.
-     * @return {string}
-     * @private
+     * @inheritdoc
      */
-    _getLinkFABLabel: function() {
-        var ccp = app.omniConsole.getComponent('omnichannel-ccp');
-        var activeContact = ccp.getActiveContact();
-        var contactType = activeContact.getType();
-        var toModule = contactType === 'voice' ? 'Calls' : 'Messages';
-        return app.lang.get('LBL_OMNICHANNEL_LINK_TO', null, {
-            fromModule: app.lang.getModuleName(this.module).toLowerCase(),
-            toModule: app.lang.getModuleName(toModule).toLowerCase()
-        });
+    _toggleSugarLiveButtonVisibility: function(isEdit) {
+        let toolbar = this._getToolbar();
+        if (toolbar && toolbar.$) {
+            if (this.showSugarLiveLinkButton && !isEdit && this.model.get('id')) {
+                toolbar.$('.omni-record-link').removeClass('hide');
+            } else {
+                toolbar.$('.omni-record-link').addClass('hide');
+            }
+
+            toolbar.adjustHeaderPaneTitle();
+        }
     },
 
     /**
-     * Create a 'Link' FAB.
-     * @param {string} icon
-     * @param {string} label
-     * @param {string} style
-     * @param {string} action
-     * @return {View.View}
-     * @private
+     * @inheritdoc
      */
-    _createLinkFAB: function(icon, label, style, action) {
-        var fab = app.view.createView({
-            type: 'extended-fab',
-            icon: icon,
-            label: label,
-            style: style,
-            action: action
-        });
-        fab.render();
-        var $dashlet = this.$el.closest('.dashlet');
-        $dashlet.append(fab.$el);
-        return fab;
+    _insertSugarLiveButton: function(linkButton) {
+        let toolbar = this._getToolbar();
+        if (toolbar && toolbar.$) {
+            let actionButtons = toolbar.$('.fieldset.actions.dashlet-toolbar').first();
+            actionButtons.before(linkButton.$el);
+        }
     },
 
     /**
@@ -1311,6 +1378,7 @@
         if (this.module !== this.model.module) {
             this.module = this.model.module;
             this.meta = this._extendMeta({type: 'record', module: this.module});
+            this._initDropdownBasedViews();
         }
         this._initTabs();
     },
@@ -1337,6 +1405,15 @@
         if (!this.settings.has('tabs') && this.meta.tabs) {
             this.settings.set('tabs', this.meta.tabs);
         }
+    },
+
+    /**
+     * Filters the list of extra modules to return only those the user has access to
+     * @return {string[]}
+     * @private
+     */
+    _getVisibleExtraModules: function() {
+        return this.extraModules.filter(moduleName => app.acl.hasAccess('view', moduleName));
     },
 
     /**
@@ -1406,6 +1483,7 @@
             var configTabs = this._generateConfigTabs(initialTabs);
             this.settings.set('tabs', configTabs);
         }
+        this.settings.set('templateEdit', 'detail');
         this.settings.set('tab_list', initialTabs);
         this.settings.set('label', 'LBL_DASHLET_RECORDVIEW_NAME');
 
@@ -1426,6 +1504,7 @@
         if (_.isEmpty(this._availableModules) || !_.isObject(this._availableModules)) {
             this._availableModules = {};
             var visibleModules = app.metadata.getModuleNames({filter: 'visible', access: 'read'});
+            visibleModules = visibleModules.concat(this._getVisibleExtraModules());
             var allowedModules = _.difference(visibleModules, this.moduleBlacklist);
 
             _.each(allowedModules, function(module) {
@@ -1489,11 +1568,14 @@
      *
      * @param {Object[]} panels Record view panel metadata.
      * @param {Object[]} buttons Record view button metadata.
+     * @param {Object[]} activeTab Active/current tab.
      * @private
      */
-    _prepareHeader: function(panels, buttons) {
+    _prepareHeader: function(panels, buttons, activeTab) {
         this._headerFields = this._headerFields || [];
         this._headerButtons = this._headerButtons || [];
+        var model = activeTab ? activeTab.model : null;
+        var tabType = activeTab ? activeTab.type : null;
 
         // find which (if any) of the panels is for the header
         var headerIndex = _.findIndex(panels, function(panel) {
@@ -1502,7 +1584,7 @@
 
         if (headerIndex !== -1) {
             // get all the fields we want to show in the header and shrink them down if necessary
-            var header = panels.splice(headerIndex, 1)[0];
+            var header = panels[headerIndex];
             var fields = _.filter(header.fields, _.bind(function(field) {
                 return !field.type || !_.includes(this._noshowFields, field.type);
             }, this));
@@ -1519,12 +1601,19 @@
             }, this);
 
             // tweak the buttons as necessary
-            var desiredButtons = this._getHeaderButtons(buttons);
+            var desiredButtons = this._getHeaderButtons(buttons, activeTab);
+        } else if (tabType === 'list') {
+            this._headerFields = this._getHeaderFieldsForListTab();
         }
         this._headerFields = fields || this._headerFields;
         this._headerButtons = desiredButtons || this._headerButtons;
 
-        this._injectRecordHeader();
+        this._initButtons();
+        this._injectRecordHeader(model);
+
+        if (_.isFunction(this.insertActionButtonsRows)) {
+            this.insertActionButtonsRows();
+        }
     },
 
     /**
@@ -1532,40 +1621,73 @@
      * toolbar.
      *
      * @param {Object[]} buttons List of button fielddefs from metadata.
+     * @param {Object[]} tab Current tab
      * @return {Object[]} The list of button definitions tweaked for the
      *   dashlet toolbar.
      * @private
      */
-    _getHeaderButtons: function(buttons) {
+    _getHeaderButtons: function(buttons, tab) {
         var desiredButtons = [];
         // If we're rendering this dashlet in a console config layout, we do NOT
         // want edit, save, or cancel buttons on our empty dashlet
-        if (this.configLayout) {
+        // Also don't display the buttons if there's no related record
+        if (this.configLayout || !this.model || !this.model.get('id')) {
             return desiredButtons;
         }
-        _.each(buttons, function(button) {
-            var buttonToCheck = button;
 
+        var self = this;
+        _.each(buttons, function(button) {
             if (button.buttons) { // dropdown
+                // remove all dividers
                 button.buttons = _.filter(button.buttons, function(subButton) {
-                    return subButton.name === 'edit_button';
+                    return subButton.type !== 'divider';
                 });
 
-                if (!button.buttons.length) {
-                    return;
-                }
-
-                buttonToCheck = button.buttons[0];
+                // Mark dropdowns as needing to be filtered
+                _.each(button.buttons, function(button) {
+                    button.filterForRecordDashlet = true;
+                });
             }
-
-            var desiredButtonNames = ['save_button', 'cancel_button', 'edit_button'];
+            var desiredButtonNames = [
+                'save_button',
+                'cancel_button',
+                'edit_button',
+                'dashlet_save_button',
+                'dashlet_cancel_button',
+                'dashlet_edit_button',
+            ];
             if (_.includes(desiredButtonNames, button.name) || button.type === 'actiondropdown') {
-                button.name = 'dashlet_' + button.name;
+                if (!button.name.includes('dashlet_')) {
+                    button.name = 'dashlet_' + button.name;
+                }
                 desiredButtons.push(button); // note, save the original button, not the subbutton
             }
         });
 
         return desiredButtons;
+    },
+
+    /**
+     * Re-fetch the model and update the metadata after an action has finished
+     * @private
+     */
+    _updateAllowedButtons: function() {
+        var tab = this.settings.get('activeTab');
+
+        if (!tab) {
+            return;
+        }
+
+        var self = this;
+        tab.model.fetch({
+            showAlerts: true,
+            success: function(model) {
+                if (self._isActiveTab(tab)) {
+                    self.meta = self._extendMeta(tab);
+                    self.render();
+                }
+            }
+        });
     },
 
     /**
@@ -1592,6 +1714,151 @@
             var toolbarCtx = dashletToolbar.context;
             toolbarCtx.trigger('dashlet:toolbar:change', this._headerFields, buttonsToSend, model, this);
             this.delegateButtonEvents();
+        }
+    },
+
+    /**
+     * Build the header fields array object for list type tab
+     *
+     * @return {Array}
+     * @private
+     */
+    _getHeaderFieldsForListTab: function() {
+        var labelValue = app.lang.get('LBL_RELATED_RECORDS', null, {
+            module: app.lang.getModuleName(this.module, {plural: true})
+        });
+        return [
+            {
+                dismiss_label: true,
+                height: this._avatarSize,
+                label: 'LBL_PICTURE_FILE',
+                name: 'picture',
+                size: 'button',
+                type: 'avatar',
+                width: this._avatarSize,
+                readonly: true,
+            },
+            {
+                type: 'label',
+                formatted_value: labelValue,
+                readonly: true,
+            },
+        ];
+    },
+
+    /**
+     * Set the proper widths of the dashlet-toolbar fields
+     */
+    adjustHeaderpaneFields: function() {
+        this._super('adjustHeaderpaneFields');
+        var toolbar = this._getToolbar();
+        if (!toolbar) {
+            return;
+        }
+        var $recordCells = this._getRecordCells();
+        var nameField = this._getNameFieldFromRecordCells($recordCells);
+        var $nameField = $(nameField);
+        if ($nameField.hasClass('edit')) {
+            // We need to calculate how much available space there is for the name field
+            var fieldsWidth = 0;
+            var toolbarWidth = toolbar.$el.outerWidth();
+            var btnsWidth = toolbar.$('.btn-toolbar').outerWidth();
+            _.each(toolbar.$('.table-cell-wrapper'), function(cell) {
+                var $cell = $(cell);
+                var parentType = $cell.parent().data('type');
+                // ignore the name field since we are going to change its width anyways
+                if (parentType === 'name' || parentType === 'fullname') {
+                    return;
+                }
+                fieldsWidth += $cell.outerWidth();
+            });
+
+            // subtracting additional 20px to avoid the name field overlapping button
+            var nameFieldWidth = toolbarWidth - btnsWidth - fieldsWidth - 20;
+            $nameField.find('.table-cell-wrapper').css({width: nameFieldWidth + 'px'});
+        } else {
+            $nameField.find('.table-cell-wrapper').css({width: ''});
+        }
+
+        // Make sure the header fields use the correct templates
+        if (this.action === 'detail') {
+            let nameFields = _.filter(this.editableFields, function(field) {
+                return _.contains(['name', 'fullname'], field.type);
+            });
+            _.each(nameFields, function(field) {
+                if (field.$el) {
+                    field.setMode('dashlet-header');
+                }
+            });
+        }
+
+        toolbar.adjustHeaderPaneTitle();
+    },
+
+    /**
+     * Get the name field a list of record-cells
+     * @param {Array} $cells Array of jQuery elements
+     * @return {jQuery}
+     * @private
+     */
+    _getNameFieldFromRecordCells: function($cells) {
+        var nameFields = ['name', 'fullname'];
+        return _.find($cells, function(cell) {
+            return _.contains(nameFields, $(cell).data('type'));
+        });
+    },
+
+    /**
+     * dashablerecord has fields on this view and on the dashlet-toolbar view. We need both
+     * @inheritdoc
+     */
+    _getNonButtonFields: function() {
+        var viewFields = this._filterButtonsFromFields(this.fields);
+        var toolbarFields = [];
+        var toolbar = this._getToolbar();
+        if (toolbar) {
+            toolbarFields = this._filterButtonsFromFields(toolbar.fields);
+        }
+
+        return _.union(toolbarFields, viewFields);
+    },
+
+    /**
+     * Filter out dashletaction fields
+     * @inheritdoc
+     */
+    _filterButtonsFromFields: function(fields) {
+        fields = this._super('_filterButtonsFromFields', [fields]);
+        return _.filter(fields, function(field) {
+            if (field.type === 'dashletaction') {
+                return false;
+            }
+            return true;
+        });
+    },
+
+    /**
+     * Set up buttons from the header instead of from record meta. Assume this._headerButtons is set up already
+     * @override
+     */
+    _initButtons: function() {
+        this.buttons = [];
+        _.each(this._headerButtons, function(button) {
+            this.registerFieldAsButton(button.name);
+        }, this);
+    },
+
+    /**
+     * Get button field instances from the toolbar instead of from this view.
+     * @override
+     */
+    registerFieldAsButton: function(buttonName) {
+        var toolbar = this._getToolbar();
+        if (toolbar) {
+            var button = toolbar.getField(buttonName);
+            if (button) {
+                this.buttons[buttonName] = button;
+            }
         }
     },
 
@@ -1658,6 +1925,9 @@
                 }
                 if (tab.auto_refresh) {
                     tab.model.set('auto_refresh', tab.auto_refresh, {silent: true});
+                }
+                if (!_.isUndefined(tab.freeze_first_column)) {
+                    tab.model.set('freeze_first_column', tab.freeze_first_column, {silent: true});
                 }
                 tab.collection = collection;
                 tab.relate = _.isObject(collection.link);
@@ -1776,6 +2046,7 @@
             if (tabType === 'list') {
                 baseOptions.fields = _.pluck(app.metadata.getView(relatedModule, 'list').panels[0].fields, 'name');
                 baseOptions.limit = this._defaultSettings.limit;
+                baseOptions.freeze_first_column = this._defaultSettings.freeze_first_column;
                 baseOptions.skipFetch = true;
             }
 
@@ -1969,6 +2240,7 @@
                     fields: tab.model.get('fields') || [],
                     limit: tab.model.get('limit'),
                     auto_refresh: tab.model.get('auto_refresh'),
+                    freeze_first_column: tab.model.get('freeze_first_column'),
                 };
                 tabToSave = _.extend(tabToSave, listOptions);
             }
@@ -2106,14 +2378,16 @@
         var defaultRecommendedWidth = 230;
         var btnBar = this.layout.$el.find('.btn-toolbar');
         var titleBar = this.layout.$el.find('.dashlet-title');
+        // we need to use header bar as we are subtracting other widths from this to get title width
+        var headerBar = this.layout.$el.find('.dashlet-header');
 
-        if (titleBar.length) {
+        if (titleBar.length && headerBar) {
             var titleBarChildMargins = 0;
             _.each(titleBar.children(), function(child) {
                 titleBarChildMargins += parseInt($(child).css('marginLeft'), 10) || 0;
                 titleBarChildMargins += parseInt($(child).css('marginRight'), 10) || 0;
             });
-            containerWidth = titleBar.width() - titleBarChildMargins - titleRightIndent;
+            containerWidth = headerBar.width() - titleBarChildMargins - titleRightIndent;
 
             if (btnBar.length) {
                 var buttonsWidth = 0;
@@ -2124,9 +2398,9 @@
                     }
                 });
 
-                var titleBarRightPadding = parseInt(titleBar.css('paddingRight'), 10) || 0;
-                if (buttonsWidth > titleBarRightPadding) {
-                    containerWidth -= (buttonsWidth - titleBarRightPadding);
+                var btnBarLeftMargin = parseInt(btnBar.css('marginLeft'), 10) || 0;
+                if (buttonsWidth > btnBarLeftMargin) {
+                    containerWidth -= (buttonsWidth - btnBarLeftMargin);
                 }
             }
         }
@@ -2177,16 +2451,74 @@
     },
 
     /**
-     * @inheritdoc
+     * Focus a row in the list
+     * @param {string} id The id of the record to focus on
      */
-    _dispose: function() {
-        if (this.linkFAB) {
-            if (this.linkFAB.context) {
-                this.linkFAB.context.off('link:clicked');
-            }
-            this.linkFAB.dispose();
-            this.linkFAB = null;
+    focusRow: function(id) {
+        var $row = this.getRowDomForModelId(id);
+        this.highlightRow($row);
+        this.makeRowVisible($row);
+    },
+
+    /**
+     * Highlights a row by making the row blue. Also removes the highlight from
+     * any other row.
+     * @param {jQuery} $el The element for the row to highlight
+     */
+    highlightRow: function($el) {
+        this.unhighlightRows();
+        if ($el.length) {
+            $el.addClass('current highlighted');
         }
-        this._super('_dispose');
-    }
+    },
+
+    /**
+     * Un-highlight all currently selected rows.
+     */
+    unhighlightRows: function() {
+        let highlightedRows = this.$('tr.current.highlighted');
+        if (highlightedRows.length) {
+            highlightedRows.removeClass('current highlighted');
+        }
+    },
+
+    /**
+     * Get the DOM for the row that represents a model.
+     * @param {string} id The model id
+     * @return {jQuery}
+     */
+    getRowDomForModelId: function(id) {
+        return this.$(`tr[data-id="${id}"]`);
+    },
+
+    /**
+     * Scroll the list so the selected row is visible
+     * @param $selected
+     */
+    makeRowVisible: function($selected) {
+        if (!$selected) {
+            this.$el.scrollTop();
+            return;
+        }
+
+        let rowTop = $selected.position().top;
+        let rowHeight = $selected.height();
+        let rowBottom = rowTop + rowHeight;
+        let dashletTop = this.$el.scrollTop();
+        let dashletHeight = this.$el.height();
+        let dashletBottom = dashletTop + dashletHeight;
+
+        if (rowBottom >= dashletBottom || rowTop <= dashletTop) {
+            this.$el.scrollTop(rowTop);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     * @private
+     */
+    _render: function() {
+        this._super('_render');
+        this.scrollContainer = this.$el.find('.dashablerecord .tab-content');
+    },
 })

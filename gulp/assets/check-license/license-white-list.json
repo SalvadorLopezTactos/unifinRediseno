@@ -26,6 +26,7 @@
     "include/javascript/d3-sugar/",
     "include/javascript/gridstack/",
     "include/javascript/sucrose/",
+    "include/javascript/chartjs/",
     "include/javascript/phpjs/",
     "include/javascript/pmse/lib/jquery.layout-latest.js",
     "include/javascript/rgbcolor.js",
@@ -36,13 +37,14 @@
     "include/javascript/yui/",
     "include/javascript/yui3/",
     "include/javascript/clipboardjs/clipboard.min.js",
-    "include/javascript/amazon-connect/amazon-connect-1.4.9-1-gf9242a0.js",
+    "include/javascript/amazon-connect/amazon-connect-streams-1.6.9.js",
     "include/javascript/amazon-connect/amazon-connect-chat.js",
     "include/javascript/amazon-connect/amazon-connect-chat.js.map",
     "include/javascript/amazon-connect/amazon-connect-chat-interface.js",
     "include/javascript/dom-purify/purify.min.js",
     "include/javascript/single-spa/",
     "include/javascript/systemjs/system.js",
+    "include/javascript/kendo/kendo.min.js",
     "include/php-sql-parser.php",
     "include/SugarTheme/cssmin.php",
     "jssource/Minifier.php",
@@ -113,5 +115,8 @@
     "themes/SugarIE6/js/pngbehavior.htc",
     "upload/",
     "vendor/",
-    "dist/"
+    "dist/",
+    "service/soap-encoding.xsd",
+    "service/soap-envelope.xsd",
+    "service/wsdl.xsd"
 ]

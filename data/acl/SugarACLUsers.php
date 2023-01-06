@@ -288,7 +288,7 @@ class SugarACLUsers extends SugarACLStrategy
         $query->limit(1);
         $stmt = $query->compile()->execute();
 
-        return $stmt->fetchColumn() !== false;
+        return $stmt->fetchOne() !== false;
     }
 
     /**

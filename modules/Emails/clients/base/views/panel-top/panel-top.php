@@ -18,7 +18,7 @@ $viewdefs['Emails']['base']['view']['panel-top'] = array(
             'buttons' => array(
                 array(
                     'type' => 'emailaction-paneltop',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'email_compose_button',
                     'label' => ' ',
                     'acl_action' => 'create',

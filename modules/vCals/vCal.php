@@ -90,9 +90,12 @@ class vCal extends SugarBean {
             return ''; // VCal FreeBusy Cache Is Not Enabled - No Data will be returned from vcals table
         }
 
-		// First, get the list of IDs.
-		$query = "SELECT id from vcals where user_id='{$user_bean->id}' AND type='vfb' AND deleted=0";
-		$vcal_arr = $this->build_related_list($query, BeanFactory::newBean('vCals'));
+        // First, get the list of IDs.
+        $query = sprintf(
+            'SELECT id from vcals where user_id=%s AND type="vfb" AND deleted=0',
+            $this->db->quoted($user_bean->id)
+        );
+        $vcal_arr = $this->build_related_list($query, BeanFactory::newBean('vCals'));
 
 		foreach ($vcal_arr as $focus)
 		{

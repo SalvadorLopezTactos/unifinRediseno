@@ -140,5 +140,20 @@ $viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
             ],
             'linkable' => false,
         ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_ESCALATIONS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'escalations',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'override_paneltop_view' => 'panel-top-for-other-escalations',
+            'label' => 'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'accounts_escalations',
+            ],
+        ],
     ),
 );

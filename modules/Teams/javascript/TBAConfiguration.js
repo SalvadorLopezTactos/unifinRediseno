@@ -14,7 +14,7 @@ $(document).ready(function() {
     var cid = 'tba';
     // use this variable to prevent unsaved changes warnings while saving
     var savingConfiguration = false;
-    var backUrl = "#bwc/index.php?module=Administration&action=index";
+    var backUrl = '#Administration';
     var getEnabledModules = function() {
             var moduleList = [];
             $.each($('input[data-group=tba_em]:checked'), function(index, item) {

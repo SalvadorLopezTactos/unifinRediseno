@@ -68,13 +68,19 @@ class SugarUpgradeRenameModules extends UpgradeScript
                     empty($app_list_strings['moduleListSingular'][$moduleId])
                     && isset($strings['moduleListSingular'][$moduleId])
                     && isset($default['moduleListSingular'][$moduleId])
-                    && $strings['moduleListSingular'][$moduleId] != $default['moduleListSingular'][$moduleId]
+                    && !$this->quotedEquals(
+                        $strings['moduleListSingular'][$moduleId],
+                        $default['moduleListSingular'][$moduleId]
+                    )
                 ) {
                     $shouldUpdateSingular = true;
                 } elseif (
                     !empty($app_list_strings['moduleListSingular'][$moduleId])
                     && isset($strings['moduleListSingular'][$moduleId])
-                    && $strings['moduleListSingular'][$moduleId] != $app_list_strings['moduleListSingular'][$moduleId]
+                    && !$this->quotedEquals(
+                        $strings['moduleListSingular'][$moduleId],
+                        $app_list_strings['moduleListSingular'][$moduleId]
+                    )
                 ) {
                     $shouldUpdateSingular = true;
                 }
@@ -82,13 +88,15 @@ class SugarUpgradeRenameModules extends UpgradeScript
                 $shouldUpdatePlural = false;
                 if (
                     empty($app_list_strings['moduleList'][$moduleId])
-                    && isset($default['moduleListSingular'][$moduleId])
-                    && $strings['moduleList'][$moduleId] != $default['moduleList'][$moduleId]
+                    && isset($strings['moduleList'][$moduleId])
+                    && isset($default['moduleList'][$moduleId])
+                    && !$this->quotedEquals($strings['moduleList'][$moduleId], $default['moduleList'][$moduleId])
                 ) {
                     $shouldUpdatePlural = true;
                 } elseif (
                     !empty($app_list_strings['moduleList'][$moduleId])
-                    && $strings['moduleList'][$moduleId] != $app_list_strings['moduleList'][$moduleId]
+                    && isset($strings['moduleList'][$moduleId])
+                    && !$this->quotedEquals($strings['moduleList'][$moduleId], $app_list_strings['moduleList'][$moduleId])
                 ) {
                     $shouldUpdatePlural = true;
                 }
@@ -96,9 +104,6 @@ class SugarUpgradeRenameModules extends UpgradeScript
                 $shouldUpdate = $shouldUpdate && ($shouldUpdateSingular || $shouldUpdatePlural);
 
                 if ($shouldUpdate) {
-                    if(empty($app_list_strings['moduleList'][$moduleId])) {
-                        $app_list_strings['moduleList'][$moduleId] = $app_list_strings['moduleListSingular'][$moduleId];
-                    }
                     $klass->selectedLanguage = $langKey;
                     if(empty($strings['moduleListSingular'][$moduleId])) {
                         $strings['moduleListSingular'][$moduleId] = $app_list_strings['moduleListSingular'][$moduleId];
@@ -109,8 +114,8 @@ class SugarUpgradeRenameModules extends UpgradeScript
                     $replacementLabels = array(
                         'singular' => $strings['moduleListSingular'][$moduleId],
                         'plural' => $strings['moduleList'][$moduleId],
-                        'prev_singular' => $app_list_strings['moduleListSingular'][$moduleId],
-                        'prev_plural' => $app_list_strings['moduleList'][$moduleId],
+                        'prev_singular' => $app_list_strings['moduleListSingular'][$moduleId] ?? null,
+                        'prev_plural' => $app_list_strings['moduleList'][$moduleId] ?? null,
                         'key_plural' => $moduleId,
                         'key_singular' => $klass->getModuleSingularKey($moduleId)
                     );
@@ -128,6 +133,15 @@ class SugarUpgradeRenameModules extends UpgradeScript
         }
 
         return($renamedList);
+    }
+
+    /**
+     * Some labels contain apostrophe quoted differently (with backslash or html entity)
+     */
+    private function quotedEquals(string $first, string $second): bool
+    {
+        return $first === $second
+            || str_replace('&#39;', "'", $first) === str_replace('&#39;', "'", $second);
     }
 
     /**

@@ -31,8 +31,20 @@
             });
         }
 
+        this.collection.trigger('list:page-total:fetching');
+
+        this.isLoadingCount = true;
+        this.updateCount();
+
+        var successCallback = _.bind(function(total) {
+            this.isLoadingCount = false;
+            var options = {
+                total: total
+            };
+            this.updateCount(options);
+        }, this);
         this.collection.fetchTotal({
-            success: _.bind(this.updateCount, this),
+            success: successCallback,
             complete: function() {
                 app.alert.dismiss('fetch_count');
             }
@@ -46,12 +58,17 @@
      *   and `hasMore` properties. Use this if you want to customize what this
      *   field should display.
      * @param {number} [options.length] The length of values.
+     * @param {number} [options.total] Total number of records.
      * @param {boolean} [options.hasMore] `true` if there are more values to be
      *   fetched or paginated, `false` if we've fetched everything.
      */
     updateCount: function(options) {
         if (!this.disposed) {
             this._setCountLabel(options);
+
+            if (!_.isUndefined(options) && !_.isUndefined(options.total)) {
+                this.collection.trigger('list:page-total:fetched', options.total);
+            }
             this.render();
         }
     },
@@ -93,49 +110,125 @@
     _setCountLabel: function(options) {
         // Default properties.
         options = options || {};
-        var length = this.collection.length;
-        var fullyFetched = this.collection.next_offset < 0;
 
-        // Override default properties with passed-in values.
-        length = !_.isUndefined(options.length) ? options.length : length;
-        if (length === 0 && this.collection.total > this.collection.getOption('limit')) {
-            // Having a total greater than 0 means that the length of records shall not be 0
-            length = this.collection.getOption('limit');
+        if (_.isUndefined(options.hasMore) && this.collection.next_offset) {
+            options.hasMore = this.collection.next_offset >= 0;
         }
-        fullyFetched = !_.isUndefined(options.hasMore) ? !options.hasMore : fullyFetched;
 
-        if (!length && !this.collection.dataFetched && !this.collection.total) {
+        const recordsNum = this.getRecordsNum(options);
+
+        if (!recordsNum.current) {
             return this.countLabel = '';
         }
 
         var tplKey = 'TPL_LIST_HEADER_COUNT_TOTAL';
         var context = {
-            num: length,
-            total: this.cachedCount
+            num: recordsNum.current,
+            total: this.cachedCount,
         };
 
-        if (fullyFetched) {
+        if (recordsNum.current === recordsNum.total) {
             tplKey = 'TPL_LIST_HEADER_COUNT';
         } else if (!_.isNull(this.collection.total)) {
             // Save the total on the field - this is the primary save point.
             this.cachedCount = this.collection.total;
             // Since we have a total we display it through the context.
             context.total = this.collection.total;
+        } else if (this.isLoadingCount) {
+            context.total =  app.lang.get('LBL_LOADING');
         } else if (!this.cachedCount) {
             // Initial load case - we did not have a total for the current collection before.
             var tooltipLabel = app.lang.get('TPL_LIST_HEADER_COUNT_TOOLTIP', this.module);
             // FIXME: When SC-3681 is ready, we will no longer have the need for
             // this link, since the total will be displayed by default.
             context.total = new Handlebars.SafeString(
-                '<a href="javascript:void(0);" data-action="count" rel="tooltip" data-placement="right" title="' + tooltipLabel + '" role="button" tabindex="0">' +
-                Handlebars.Utils.escapeExpression(
-                    app.lang.get('TPL_LIST_HEADER_COUNT_PARTIAL', this.module, {num: context.num + 1})
-                ) + '</a>'
+                `<a href="javascript:void(0);" data-action="count" rel="tooltip" data-placement="right"
+title="${tooltipLabel}" role="button" tabindex="0" aria-label="${tooltipLabel}">
+                ${Handlebars.Utils.escapeExpression(
+                    app.lang.get('TPL_LIST_HEADER_COUNT_PARTIAL', this.module, {num: recordsNum.total})
+                )}</a>`
             );
         }
 
         // FIXME: When SC-3681 is ready, remove the SafeString call.
         return this.countLabel = new Handlebars.SafeString(app.lang.get(tplKey, this.module, context));
+    },
+
+    /**
+     * Prepare current and total count of pages
+     * @param {Object} options
+     * @return {Object}
+     */
+    getRecordsNum: function(options) {
+        const collect = this.collection;
+        const limit = collect.getOption('limit') || app.config.maxQueryResult || 0;
+        const length = options.length || collect.length;
+        const start = ((collect.page || 1) - 1) * limit + 1;
+
+        return {
+            current: this.getRecordsNumCurrent(start, length, options),
+            total: this.getRecordsNumTotal(start, length, options),
+        };
+    },
+
+    /**
+     * Get current numeration of records
+     * @param {int} start
+     * @param {int} length
+     * @param {Object} options
+     * @return {int}
+     */
+    getRecordsNumCurrent: function(start, length, options) {
+        let isNumRange = options.hasMore || this.collection.page > 1;
+        let layout = this.context.get('layout');
+
+        // if it is not the list layout, check if it is using list-pagination
+        if (layout !== 'records') {
+            let isUsingListPagination = this.context.get('isUsingListPagination') || this.checkListPagination();
+            // use range format only if list-pagination is used
+            isNumRange = isNumRange && isUsingListPagination;
+        }
+
+        if (isNumRange) {
+            return start + '-'  + (start + length - 1);
+        } else {
+            return length;
+        }
+    },
+
+    /**
+     * Checks if the layout is using the list-pagination component
+     *
+     * @return {boolean}
+     */
+    checkListPagination: function() {
+        if (_.isEmpty(this.view) || _.isEmpty(this.view.layout)) {
+            return false;
+        }
+
+        let paginationComponent = this.view.layout.getComponent('list-pagination') || {};
+
+        return !_.isEmpty(paginationComponent);
+    },
+
+    /**
+     * Get total number of records
+     * @param {int} start
+     * @param {int} length
+     * @param {Object} options
+     * @return {int}
+     */
+    getRecordsNumTotal: function(start, length, options) {
+        const collect = this.collection;
+
+        if (collect.total) {
+            return collect.total;
+        } else if (options.hasMore) {
+            return start + length;
+        } else {
+            collect.total = start + length - 1;
+            return collect.total;
+        }
     },
 
     /**
@@ -156,12 +249,15 @@
 
         this.listenTo(this.collection, 'reset', function() {
             if (!this.disposed && this.cachedCount) {
-                var successFn = _.bind(function(total) {
-                    // Update the cached total on reset action.
-                    this.cachedCount = total;
-                    this.updateCount();
-                }, this);
-                this.collection.fetchTotal({success: successFn});
+                // check if collection is reset because of record creation
+                let isCreate = !_.isUndefined(this.context.get('isCreate')) ? this.context.get('isCreate') : false;
+                if (this.context.get('isUsingListPagination') &&
+                    this.context.get('paginationAction') === 'PAGINATE' &&
+                    !isCreate && !this.context.get('isLink')) {
+                    return;
+                }
+
+                this.fetchCollectionTotal();
             } else {
                 this.updateCount();
             }
@@ -176,5 +272,24 @@
         this.listenTo(this.context, 'refresh:count', function(hasAmount, properties) {
             this.updateCount(properties);
         });
+
+        this.listenTo(this.context, 'list:paginate', this.updateCount);
+
+        this.listenTo(app.events, 'list:create:success', function() {
+            this.context.set('isCreate', true);
+        }, this);
+    },
+
+    fetchCollectionTotal: function() {
+        var successFn = _.bind(function(total) {
+            // Update the cached total on reset action.
+            this.cachedCount = total;
+            this.updateCount({
+                total: total,
+            });
+            this.context.unset('isCreate');
+            this.context.unset('isLink');
+        }, this);
+        this.collection.fetchTotal({success: successFn});
     }
 })

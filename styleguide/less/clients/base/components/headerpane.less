@@ -3,14 +3,36 @@
   left: 0;
 }
 
+.dashboard {
+  .cols {
+    .preview-headerbar {
+      background-color: @secondaryContentBackground;
+      top: 45px;
+      width: 100%;
+      z-index: 1002;
+    }
+  }
+}
+
 .headerpane {
   width: 100%;
   z-index: @zindexHeaderpane;
-  background: @grayLighter;
-  border-bottom: @borderWidget;
   box-sizing: border-box;
   display: table;
   position: fixed;
+  .bg-primary-content-background();
+
+  .preview-headerbar & {
+    background-color: @secondaryContentBackground;
+  }
+
+  .about-headerpane & {
+    .bg-transparent();
+  }
+
+  &.console-headerpane {
+    background-color: @primaryContentBackground;
+  }
 
   .list-headerpane.headerpane {
     position: relative;
@@ -29,7 +51,7 @@
     display: table-row;
     margin: 0;
     vertical-align: top;
-    color: @black;
+    color: @textColor;
     font-size: @fontSizeHeaderTitle;
     font-weight: 600;
 
@@ -108,6 +130,10 @@
   .count {
     white-space: nowrap;
     min-width: 103px;
+
+    a {
+      color: @linkColor;
+    }
   }
 
   .drillthrough-headerpane .count {
@@ -129,19 +155,23 @@
     .record-lock-link {
       margin-left: 0;
 
+      .sicon-edit,
+      .sicon-lock,
       .fa-pencil,
       .fa-lock {
         left: -16px !important;
-        top: 4px !important;
+        top: 8px !important;
       }
     }
   }
 
-  .record-label {
-    font-size: @fontSizeSmall;
-    color: @grayLight;
-    line-height: @fontSizeSmall + 2;
-    display: none;
+  .record-cell {
+    .record-label {
+      font-size: @fontSizeSmall;
+      color: @gray70;
+      line-height: @fontSizeSmall + 2;
+      display: none;
+    }
   }
 
   .record-cell.edit {
@@ -247,6 +277,7 @@
 
   span[data-type="follow"],
   span[data-type="badge"],
+  span[data-type="renewal"],
   span[data-type="badge-select"],
   span[data-type="event-status"],
   span[data-type="status"] {
@@ -260,6 +291,10 @@
       min-width: 50px;
       padding: 3px 6px 5px;
       margin-top: 0;
+
+      &.base-badge {
+        font-weight: 600;
+      }
     }
   }
 
@@ -289,10 +324,13 @@
 
   span[data-type="favorite"] {
     font-size: @baseFontSize;
-    padding: 15px 16px 0 0;
+    padding-top: 12px;
+    padding-left: 20px;
 
-    .btn.active {
-      background-color: transparent !important;
+    .btn {
+      &.active {
+        background-color: transparent !important;
+      }
     }
   }
 
@@ -362,6 +400,13 @@
       }
     }
 
+    .shortcuts-help-headerpane {
+      .btn:not(.btn-primary) {
+        line-height: 12px;
+        padding: 7px;
+      }
+    }
+
     .btn-group-previous-next {
       padding-left: 0;
 
@@ -372,18 +417,12 @@
       }
     }
 
-    .btn:not(.btn-invisible):not(.btn-primary):not(.btn-secondary) {
-      border-color: @grayMid;
-    }
-
     .drillthrough-headerpane .btn {
       margin-left: 20px;
     }
   }
 
   .btn.sidebar-toggle {
-    color: @grayLight;
-
     &:hover {
       text-decoration: none;
     }
@@ -429,11 +468,11 @@
 
 .headerpane {
   /* override */
-  min-height: 52px;
-  height: 52px;
+  min-height: 50px;
+  height: 50px;
 
   /* override */
-  top: 45px;
+  top: 44px;
 
   /* structure */
   .list-headerpane {
@@ -478,6 +517,7 @@
 
     span[data-type="follow"]:not(.edit) .label,
     span[data-type="badge"]:not(.edit) .label,
+    span[data-type="renewal"]:not(.edit) .label,
     span[data-type="badge-select"]:not(.edit) .label,
     span[data-type="event-status"]:not(.edit) .label,
     span[data-type="status"]:not(.edit) .label {
@@ -488,6 +528,7 @@
 
   span[data-type="follow"],
   span[data-type="badge"],
+  span[data-type="renewal"],
   span[data-type="badge-select"],
   span[data-type="event-status"],
   span[data-type="status"] {
@@ -497,13 +538,18 @@
 
   span[data-type="favorite"] {
     /* override */
-    font-size: @fontSizeLarge + 1;
-    padding: 11px 16px 0 0;
+    font-size: @baseFontSize;
+    padding-top: 12px;
 
     /* additive */
-    .btn.active {
-      .fa {
-        color: @black !important;
+    .btn {
+      margin-left: 0;
+
+      &.active {
+        > .sicon,
+        > .fa {
+          color: @gray70;
+        }
       }
     }
   }
@@ -524,23 +570,30 @@
 
   .btn.sidebar-toggle {
     /* additive */
-    background: @headerpaneSideToggleBackground;
     border-radius: 0;
     position: absolute;
     top: 0;
-    right: -1px;
-    height: 51px;
-    width: 15px;
+    height: 50px;
+    width: 8px;
     padding: 0;
-
-    .fa {
-      /* override */
-      font-size: @fontSizeHeader - 8;
-
-      /* additive */
-      color: @headerpaneSideToggleColor;
-    }
   }
 }
 
 /* NEW SKIN END */
+
+.omniconsole-visible {
+  .main-pane {
+    .headerpane {
+      // full width - open omnichannel 320px
+      // covers the case where omniconsole is open, page has navigated
+      // but headerpane hasn't rendered yet once it renders it picks up this width
+      width: calc(~"100% - 320px");
+    }
+  }
+}
+
+.banner-shifted {
+  .headerpane {
+    top: 45px + @bannerHeight;
+  }
+}

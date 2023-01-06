@@ -1,0 +1,203 @@
+
+.dashlet-content {
+  .kbcontents {
+    li h4 {
+      border: 0;
+      background-color: @transparent;
+      padding-left: 0;
+      padding-bottom: 2px;
+      padding-top: 0;
+
+      a {
+        color: @linkColor;
+      }
+    }
+
+    div.details {
+      padding-left: 0;
+
+      span {
+        &.kbs-dashlet-most-useful,
+        &.related-documents {
+          a.ellipsis_inline {
+            display: inherit !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.record-cell {
+  .record-label {
+    &[data-name="kbdocument_body_set"] {
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+  }
+
+  &.edit {
+    &[data-name='kbdocument_body_set'] {
+      .labels-on-side {
+        margin-top: 33px;
+      }
+    }
+  }
+}
+
+[data-type="template-button"] {
+  .btn {
+    position: absolute;
+    right: 0;
+    top: -33px;
+  }
+}
+
+[data-type="usefulness"] {
+  .btn {
+    padding-right: 10px;
+    padding-left: 10px;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  span.record-edit-link-wrapper {
+    display: none !important;
+  }
+}
+
+.usefulness {
+  margin-top: -3px !important;
+  min-height: 28px !important;
+}
+
+[data-name="kbdocument_body_set"] {
+  span.record-edit-link-wrapper {
+    display: none !important;
+  }
+}
+
+[data-name="body_set"]&[data-type="fieldset"] {
+  span.record-edit-link-wrapper {
+    display: none !important;
+  }
+}
+
+.load-template {
+  margin-bottom: 8px;
+}
+
+.select2field-tags {
+  .select2-choices {
+    .select2-search-choice {
+      background: @dropdownLinkBackgroundHover !important;
+    }
+  }
+}
+
+body.kbdocument-body {
+  margin: 8px;
+  background-color: @bodyBackground;
+}
+
+.kbdocument-body {
+  font-size: @baseFontSize;
+  font-family: @baseFontFamily;
+  line-height: @baseLineHeight;
+  line-height: @baseLineHeight;
+  color: @textColor;
+  font-weight: normal;
+  width: 100%;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 36px;
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: @baseFontSize + 12;
+    line-height: @baseLineHeight + 12;
+  }
+
+  h2 {
+    font-size: @baseFontSize + 10;
+    line-height: @baseLineHeight + 10;
+  }
+
+  h3 {
+    font-size: @baseFontSize + 8;
+    line-height: @baseLineHeight + 8;
+  }
+
+  h4 {
+    font-size: @baseFontSize + 6;
+    line-height: @baseLineHeight + 6;
+  }
+
+  h5 {
+    font-size: @baseFontSize + 4;
+    line-height: @baseLineHeight + 4;
+  }
+
+  h6 {
+    font-size: @baseFontSize + 2;
+    line-height: @baseLineHeight + 2;
+  }
+
+  .fontSizeNormal {
+    font-size: @baseFontSize;
+  }
+
+  .fontSizeHeader {
+    font-size: @fontSizeHeader;
+  }
+
+  .fontSizeLarge {
+    font-size: @fontSizeLarge;
+  }
+
+  .fontSizeMedium {
+    font-size: @fontSizeMedium;
+  }
+
+  .fontSizeSmall {
+    font-size: @fontSizeSmall;
+  }
+
+  .fontSizeMini {
+    font-size: @fontSizeMini;
+  }
+}
+
+[data-name="languages_languages"] {
+  .first-row {
+    .btn {
+      top: auto;
+    }
+  }
+}
+
+html.rtl {
+  .record .record-cell {
+    .record-label {
+      &[data-name="kbdocument_body_set"] {
+        margin-top: 12px;
+        margin-bottom: 6px;
+      }
+    }
+
+    [data-type="template-button"] {
+      .btn {
+        right: auto;
+        left: 0;
+      }
+    }
+  }
+}

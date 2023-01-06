@@ -8,16 +8,17 @@
   }
 
   .preview-list-item {
-    width: 14px;
+    line-height: 12px;
+    padding: 7px;
   }
 }
 
 // ACCORDION
 // ---------
-.accordion {
+#convert-accordion {
   // Header
   .accordion-heading {
-    background-color: @white;
+    background-color: @primaryContentBackground;
     border-bottom: 0;
     position: relative;
     padding: 8px 13px;
@@ -45,7 +46,7 @@
     }
 
     &.active {
-      background-color: @white;
+      background-color: @primaryContentBackground;
 
       .subview-toggle-indicator .fa-caret-down::before {
         content: "\f0d8";
@@ -70,12 +71,12 @@
 
     &.enabled.active {
       &:hover {
-        background-color: @white;
+        background-color: @primaryContentHover;
       }
     }
 
     &:not(.enabled) {
-      color: @grayLight;
+      color: @gray70;
     }
 
     .subview-toggle {
@@ -97,7 +98,7 @@
   }
 
   .convert-options {
-    border-bottom: 1px solid @grayLighter;
+    border-bottom: @borderWidget;
     padding-top: 14px;
     padding-left: 24px;
 
@@ -190,14 +191,16 @@
 // Want Filter for Duplist
 div.want_filter {
   line-height: 20px;
-  border-bottom: 1px solid @warningBorder;
 
   &.highlight {
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid @warningBorder;
-    background-color: @warningBackground;
+    background-color: @duplicateTableRowBackground;
     font-size: @fontSizeLarge;
-    color: @warningText;
+    color: @duplicateTableRowColor;
   }
+}
+
+.accordion-heading .dupecheck-results {
+  color: @duplicateTableRowColor;
 }

@@ -12,7 +12,7 @@
 *}
 
 
-{literal}
+
 <style type='text/css'>
     .slot
     {
@@ -28,7 +28,6 @@
         margin-bottom: 5px;
     }
 </style>
-{/literal}
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -42,7 +41,7 @@
     <tr>
         <td colspan="3">
             <input type="button" class="button primary" value="{$MOD.LBL_BTN_SAVE}" id="renameSaveBttn" onclick='validateForm();'name="{$MOD.LBL_BTN_SAVE}" />
-            <input type="button" class="button" value="{$MOD.LBL_BTN_CANCEL}"  id="renameCancelBttn" name="{$MOD.LBL_BTN_CANCEL}" onclick="document.editdropdown.action.value='index'; document.editdropdown.module.value='Administration';document.editdropdown.submit()" />
+            <input type="button" class="button" value="{$MOD.LBL_BTN_CANCEL}"  id="renameCancelBttn" name="{$MOD.LBL_BTN_CANCEL}" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} />
         </td>
     </tr>
 </table>
@@ -118,7 +117,6 @@
 </table>
 </table>
 
-{literal}
 <script>
     // Ping app in parent frame to check for metadata updates
     // this will cause module renames to be reflected on save
@@ -239,7 +237,7 @@
         setSingularDropDownValue(rowCount);
     }
 
-    var slotCount = {/literal}{$rowCounter}{literal};
+    var slotCount = {$rowCounter};
     var yahooSlots = [];
 
     function validateForm()
@@ -261,7 +259,6 @@
 
     }
 </script>
-{/literal}
 
 
 <div id='logDiv' style='display:none'>

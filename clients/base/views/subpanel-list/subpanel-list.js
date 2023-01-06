@@ -26,7 +26,9 @@
         'ErrorDecoration',
         'Editable',
         'Pagination',
-        'MassCollection'
+        'MassCollection',
+        'ActionButton',
+        'DocumentMerge',
     ],
 
     contextEvents: {
@@ -116,6 +118,7 @@
 
                 // We trigger reset after removing the model so that
                 // panel-top will re-render and update the count.
+                self.collection.offset--;
                 self.collection.trigger('reset', self.collection, options);
                 self.render();
             }
@@ -145,12 +148,23 @@
      */
     getUnlinkMessages: function(model) {
         var messages = {};
-        var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
+        var context = this.getMessageContext(model);
 
         messages.confirmation = app.utils.formatString(app.lang.get('NTC_UNLINK_CONFIRMATION_FORMATTED'), [context]);
         messages.success = app.utils.formatString(app.lang.get('NTC_UNLINK_SUCCESS'), [context]);
         return messages;
+    },
+
+    /**
+     * Get part of the message related to the Record Name
+     *
+     * @override
+     * @param {Data.Bean} model The model concerned.
+     * @return {string}
+     */
+    getMessageContext: function(model) {
+        var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
+        return app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
     },
 
     /**
@@ -167,6 +181,17 @@
         if (self._targetUrl !== self._currentUrl) {
             app.router.navigate(this._currentUrl, {trigger: false, replace: true});
         }
+
+        this.showUnlinkMessage(model);
+    },
+
+    /**
+     * Show the alert in the time of unlinking a record.
+     *
+     * @param {Data.Bean} model The model concerned.
+     */
+    showUnlinkMessage: function(model) {
+        var self = this;
 
         app.alert.show('unlink_confirmation', {
             level: 'confirmation',

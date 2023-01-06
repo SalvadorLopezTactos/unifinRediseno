@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Ver plantillas',
     'LNK_LIST_KBCATEGORIES' => 'Ver categorías',
     'LBL_TEMPLATES' => 'Plantillas',
+    'LBL_TEMPLATE' => 'Plantilla',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'La plantilla sobrescribirá todos los contenidos.' .
         ' Está seguro de que desea utilizar esta plantilla?',
     'LNK_IMPORT_KBCONTENTS' => 'Importar artículos',

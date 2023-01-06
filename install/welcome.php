@@ -28,7 +28,7 @@ $out = <<<EOQ
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <meta http-equiv="Content-Style-Type" content="text/css">
    <title>{$mod_strings['LBL_WIZARD_TITLE']} {$mod_strings['LBL_TITLE_WELCOME']} {$setup_sugar_version} {$mod_strings['LBL_WELCOME_SETUP_WIZARD']}</title>
-   <link REL="SHORTCUT ICON" HREF="include/images/sugar_icon.ico">
+   <link REL="SHORTCUT ICON" type="image/png" HREF="include/images/sugar-favicon.png">
    <link rel="stylesheet" href="install/install.css" type="text/css">
 </head>
 
@@ -44,7 +44,7 @@ $out = <<<EOQ
 		{$mod_strings['LBL_TITLE_WELCOME']} {$setup_sugar_version} {$mod_strings['LBL_WELCOME_SETUP_WIZARD']}</th>
 
       <th width="200" height="30" style="text-align: right;"><a href="http://www.sugarcrm.com" target=
-          "_blank"><IMG src="include/images/sugarcrm_login.png" alt="SugarCRM" border="0"></a>
+          "_blank"><img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo" style="max-height: 1.25rem;"></a>
       </th>
     </tr>
    <tr>

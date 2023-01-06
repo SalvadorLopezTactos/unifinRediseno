@@ -83,7 +83,6 @@
 
 		<script>
 		var image_path = '{$IMAGE_PATH}';
-		{literal}
 
 			//create variables that will be used to monitor the number of target url
 			var targets_added = 0;
@@ -115,19 +114,16 @@
 //					var selInd = trgt_type.selectedIndex;
 //                    trgt_type_text_value = trgt_type.options[selInd].text
 					var trgt_type_text = trgt_type.value ;
-					{/literal}
 					//display the selected display text, not the value
 					{$PL_DOM_STMT}
-					{literal}
 					//construct html to display chosen tracker
-					var trgt_name_html = "<input id='target_name"+targets_added +"' type='hidden' size='20' maxlength='255' name='added_target_name"+targets_added+"' value='"+trgt_name.value+"' >"+trgt_name.value;
-					var trgt_id_html = "<input type='hidden' name='added_target_id"+trackers_added+"' id='added_target_id"+trackers_added+"' value='"+trgt_id.value+"' >";
-					var trgt_type_html = "<input name='added_target_type"+trackers_added+"' id='added_target_type"+trackers_added+"' type='hidden' value='"+trgt_type.value+"'/>"+trgt_type_text;
+					var trgt_name_html = "<input id='target_name"+targets_added +"' type='hidden' size='20' maxlength='255' name='added_target_name"+targets_added+"' value='"+_.escape(trgt_name.value)+"' >"+_.escape(trgt_name.value);
+					var trgt_id_html = "<input type='hidden' name='added_target_id"+trackers_added+"' id='added_target_id"+trackers_added+"' value='"+_.escape(trgt_id.value)+"' >";
+					var trgt_type_html = "<input name='added_target_type"+trackers_added+"' id='added_target_type"+trackers_added+"' type='hidden' value='"+_.escape(trgt_type.value)+"'/>"+_.escape(trgt_type_text);
 
-					{/literal}
 					//display the html
 					{capture assign='alt_remove' }{sugar_translate label='LBL_DELETE' module='CAMPAIGNS'}{/capture}
-                    var trgt_html = "<div id='trgt_added_"+targets_added+"'> <table width='100%' class='tabDetailViewDL2'><tr class='tabDetailViewDL2' ><td width='25%'>"+trgt_name_html+"</td><td width='25%'>"+trgt_type_html+"</td><td>"+trgt_id_html+"<a href='#' onclick=\"remove_target('trgt_added_"+targets_added+"','"+targets_added+"'); \" >  "+'{sugar_getimage name="delete_inline" ext=".gif" width="12" height="12" alt=$alt_remove other_attributes='align="absmiddle" border="0" '}'+"{$MOD.LBL_REMOVE}</a></td></tr></table></div>";
+                    var trgt_html = "<div id='trgt_added_"+targets_added+"'> <table width='100%' class='tabDetailViewDL2'><tr class='tabDetailViewDL2' ><td width='25%'>"+trgt_name_html+"</td><td width='25%'>"+trgt_type_html+"</td><td>"+trgt_id_html+"<a href='#' onclick=\"remove_target('trgt_added_"+targets_added+"','"+targets_added+"'); \" >  "+'{sugar_getimage name="delete_inline" ext=".gif" width="12" height="12" alt=$alt_remove other_attributes='align="absmiddle" border="0" '}'+"{$MOD.LBL_REMOVE|escape:'html':'UTF-8'}</a></td></tr></table></div>";
 					document.getElementById('added_targets').innerHTML = document.getElementById('added_targets').innerHTML + trgt_html;
 
 					//add values to array in string, separated by "@@" characters
@@ -140,7 +136,6 @@
 					trgt_id.value = '';
 					trgt_type.value = 'default';
 
-					{literal}
 					if(targets_added ==1){
 						document.getElementById('no_targets').style.display='none';
 					}
@@ -224,7 +219,7 @@
 					if( document.getElementById('target_name'+i)  &&  document.getElementById('is_optout'+i)  &&  document.getElementById('target_url'+i) ){
 						//make sure the check box value is int (0/1)
 						var opt_val = '0';
-						if(document.getElementById('is_optout'+i).checked){opt_val =1;}
+						if(document.getElementById('is_optout'+i).checked){ opt_val =1; }
 						//add values for this target entry into array of target entries
 						final_list_of_targets_array[i] = document.getElementById('target_name'+i).value+"@@"+opt_val+"@@"+document.getElementById('target_url'+i).value;
 					}
@@ -241,7 +236,7 @@
 					if( document.getElementById('existing_target_name'+i)  &&  document.getElementById('existing_is_optout'+i)  &&  document.getElementById('existing_target_url'+i) ){
 						//make sure the check box value is int (0/1)
 						var opt_val = '0';
-						if(document.getElementById('existing_is_optout'+i).checked){opt_val =1;}
+						if(document.getElementById('existing_is_optout'+i).checked){ opt_val =1; }
 						//add values for this target entry into array of target entries
 						final_list_of_existing_targets_array[i] = document.getElementById('existing_target_id'+i).value+"@@"+document.getElementById('existing_target_name'+i).value+"@@"+opt_val+"@@"+document.getElementById('existing_target_url'+i).value;
 					}
@@ -278,4 +273,3 @@
 
 
 			</script>
-			{/literal}

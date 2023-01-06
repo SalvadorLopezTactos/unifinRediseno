@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Създаване на документ',
 	'LNK_DOCUMENT_LIST'=> 'Списък с документи',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Ревизии за свързан документ',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Успешно създадохте {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Номер на ревизията',
 	'LBL_FILENAME' => 'Име на файла',
 	'LBL_MIME' => 'Mime тип',

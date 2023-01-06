@@ -50,7 +50,7 @@ class SugarUpgradeUpdateOutboundEmailAccountReplyTo extends UpgradeDBScript
             ['ear.email_address_id', 'reply_to_email_address_id'],
         ));
 
-        $rows = $query->execute('array', true);
+        $rows = $query->execute();
 
         foreach ($rows as $row) {
             if (!empty($row['reply_to_email_address_id'])) {

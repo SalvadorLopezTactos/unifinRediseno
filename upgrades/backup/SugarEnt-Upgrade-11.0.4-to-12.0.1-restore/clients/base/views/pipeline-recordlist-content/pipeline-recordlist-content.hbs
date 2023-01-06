@@ -1,0 +1,100 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+
+<div id='my-pipeline-content'>
+    <div class='table-responsive'>
+        <table class='table'>
+            <thead>
+            <tr>
+                {{#eq model.attributes.pipeline_type 'date_closed'}}
+                    <th class='arrowholder left'>
+                        <a class='nav-arrow-left' name='arrow-left' tabindex='-1'>
+                            <i class='fa fa-caret-left arrow'></i>
+                        </a>
+                    </th>
+                {{/eq}}
+                {{#each recordsToDisplay}}
+                    <th>
+                        <div class='header-column type-cell pipeline-bg-color-{{colorIndex}}'>
+                            <div class='header-span'>
+                                <div class='text header-text ellipsis_inline' data-placement='bottom' title=''
+                                     data-original-title='{{headerName}}'>{{headerName}}</div>
+                                <div class='total-amount'>{{formatCurrency headerTotal}}</div>
+                            </div>
+                        </div>
+                    </th>
+                {{/each}}
+                {{#eq model.attributes.pipeline_type 'date_closed'}}
+                    <th class='arrowholder right'>
+                        <a class='nav-arrow-right' name='arrow-right' tabindex='-1'>
+                            <i class='fa fa-caret-right arrow'></i>
+                        </a>
+                    </th>
+                {{/eq}}
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {{#if hasAccessToView}}
+                    {{#if dataFetched}}
+                        {{#if totalRecords}}
+                            {{#eq model.attributes.pipeline_type 'date_closed'}}
+                                <td class='arrowholder left'></td>
+                            {{/eq}}
+                        {{/if}}
+                    {{/if}}
+                    {{#if totalRecords}}
+                        {{#each recordsToDisplay}}
+                            <td>
+                                <ul class='column' data-column-name='{{headerKey}}'>
+                                    {{#if records.length}}
+                                        {{#each records.models}}
+                                            {{#if id}}
+                                                <li data-modelId='{{id}}'>
+                                                    {{partial 'pipeline-record-tile' ../../../../this fields=fields model=this meta=../../../../meta view=../../../../this}}
+                                                </li>
+                                            {{/if}}
+                                        {{/each}}
+                                    {{/if}}
+                                </ul>
+                            </td>
+                        {{/each}}
+                    {{/if}}
+                    {{#if dataFetched}}
+                        {{#if totalRecords}}
+                            {{#eq model.attributes.pipeline_type 'date_closed'}}
+                                <td class='arrowholder right'></td>
+                            {{/eq}}
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+            </tr>
+            </tbody>
+        </table>
+        {{#if dataFetched}}
+            {{#unless totalRecords}}
+                <div class='block-footer'>
+                    {{str "LBL_NO_DATA_AVAILABLE" this.module}}
+                </div>
+            {{/unless}}
+        {{/if}}
+        {{#unless hasAccessToView}}
+            <div id='noData'>
+                <div class='block-footer'>
+                    <p>{{str 'ERR_NO_VIEW_ACCESS_TITLE'}}</p>
+                    <p>{{str 'ERR_NO_VIEW_ACCESS_REASON'}}. {{str 'ERR_NO_VIEW_ACCESS_ACTION'}}</p>
+                </div>
+            </div>
+        {{/unless}}
+    </div>
+</div>

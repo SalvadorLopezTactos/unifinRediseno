@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Uusitun tuoterivin tunnus',
     'LBL_PARENT_RLIS' => 'Päätason tuoterivit',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Päätason tuoterivit',
+    'LBL_FORECASTED_LIKELY' => 'Ennuste: todennäköinen',
     'LBL_EXPERT_ID' => 'Tuote-ekspertti',
     'LBL_FORECAST' => 'Sisällytä ennusteeseen',
     'LBL_SUBTOTAL' => 'Välisumma',

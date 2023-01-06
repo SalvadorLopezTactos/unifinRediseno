@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Kannan tyyppi',
     'LBL_PARENT_ID' => 'Päätason tunnus',
     'LBL_EXTRA_DATA' => 'Lisätiedot',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - Mainittu moduulissa {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} mainitsi sinut moduulissa {{module_name_singular}}{{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Osoitettu vastuuhenkilöksi moduulille {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} osoitti moduulin {{module_name_singular}}{{record_name}} sinulle.',
 ];

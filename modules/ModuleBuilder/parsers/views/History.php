@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class History implements HistoryInterface
@@ -138,11 +142,10 @@ class History implements HistoryInterface
 
         $now = TimeDate::getInstance()->getNow();
         $new_file = null;
-        for($retries = 0; !file_exists($new_file) && $retries < 5; $retries ++)
-        {
+        for ($retries = 0; ($new_file == null || !file_exists($new_file)) && $retries < 5; $retries ++) {
             $now->modify("+1 second");
             $time = $now->__get('ts');
-            $new_file = $this->getFileByTimestamp( $time );
+            $new_file = $this->getFileByTimestamp($time);
         }
         // now we have a unique filename, copy the file into the history
         copy ( $path, $new_file ) ;
@@ -199,6 +202,11 @@ class History implements HistoryInterface
      */
     public function savePreview($filename)
     {
+        $fileConstraint = new File();
+        $violations = Validator::getService()->validate(UploadFile::realpath($this->_dirname), $fileConstraint);
+        if ($violations->count()) {
+            throw new ViolationException('Invalid file path', $violations);
+        }
         copy($filename, $this->_previewFilename);
     }
 

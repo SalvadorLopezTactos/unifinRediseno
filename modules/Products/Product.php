@@ -573,7 +573,7 @@ class Product extends SugarBean
         if ($this->service) {
             $datetime = new SugarDateTime($this->service_start_date, new DateTimeZone('UTC'));
             $endDate = $datetime->modify($this->service_duration_value . ' ' . $this->service_duration_unit);
-            $rli->service_end_date = $datetime->asDbDate($endDate, false);
+            $rli->service_end_date = $endDate->asDbDate(false);
         }
         // copy the add on to relationship
         if (!empty($this->add_on_to_id)) {

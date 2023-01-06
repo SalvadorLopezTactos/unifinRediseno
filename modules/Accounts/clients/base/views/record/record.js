@@ -13,7 +13,7 @@
  * @alias SUGAR.App.view.views.BaseAccountsRecordView
  * @extends View.Views.Base.RecordView
  */
-({
+ ({
     extendsFrom: 'RecordView',
 
     /**

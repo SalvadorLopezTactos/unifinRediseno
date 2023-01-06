@@ -26,8 +26,8 @@ class TraceableAccessDecisionManager implements AccessDecisionManagerInterface
 {
     private $manager;
     private $strategy;
-    private $voters = array();
-    private $decisionLog = array();
+    private $voters = [];
+    private $decisionLog = [];
 
     public function __construct(AccessDecisionManagerInterface $manager)
     {
@@ -51,11 +51,11 @@ class TraceableAccessDecisionManager implements AccessDecisionManagerInterface
     {
         $result = $this->manager->decide($token, $attributes, $object);
 
-        $this->decisionLog[] = array(
+        $this->decisionLog[] = [
             'attributes' => $attributes,
             'object' => $object,
             'result' => $result,
-        );
+        ];
 
         return $result;
     }
@@ -67,7 +67,7 @@ class TraceableAccessDecisionManager implements AccessDecisionManagerInterface
      */
     public function setVoters(array $voters)
     {
-        @trigger_error(sprintf('The %s() method is deprecated since Symfony 3.3 and will be removed in 4.0. Pass voters to the decorated AccessDecisionManager instead.', __METHOD__), E_USER_DEPRECATED);
+        @trigger_error(sprintf('The %s() method is deprecated since Symfony 3.3 and will be removed in 4.0. Pass voters to the decorated AccessDecisionManager instead.', __METHOD__), \E_USER_DEPRECATED);
 
         if (!method_exists($this->manager, 'setVoters')) {
             return;

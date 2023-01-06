@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'Pajisjet portative',
     'LBL_MODULE_NAME_SINGULAR' => 'Pajisja portative',
     'LBL_DEVICE_ID' => 'ID-ja e pajisjes',
-    'LBL_DEVICE_PLATFORM' => 'Platforma',
+    'LBL_DEVICE_PLATFORM' => 'Platforma e pajisjes',
 ];

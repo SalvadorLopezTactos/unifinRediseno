@@ -15,9 +15,14 @@ $viewdefs['portal']['layout']['header'] = [
     'components' => [
         [
             'layout' => 'module-list',
-        ], [
+        ],
+        [
+            'view' => 'header-help',
+        ],
+        [
             'view' => 'profileactions',
-        ], [
+        ],
+        [
             'view' => 'portal-chat-button',
         ],
     ],

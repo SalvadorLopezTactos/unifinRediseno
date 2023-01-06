@@ -120,10 +120,62 @@
 					id="chk_edit_url" name="chk_edit_url" onclick="editUrl();" class='checkbox' type='checkbox'> <class ="dataLabel" width="10%">{MOD.LBL_EDIT_LEAD_POST_URL}
 			</tr>
 			</tr>
+
+			<!--Option to choose redirect URL-->
 			<tr>
-				<td scope="row"><slot>{MOD.LBL_DEFINE_LEAD_REDIRECT_URL}</slot></td>
-				<td ><slot><input id="redirect_url" name="redirect_url" size="60"
-					 value="{REDIRECT_URL_DEFAULT}" type="text"></slot></td>
+				<td scope="row">
+					<slot>
+						{MOD.LBL_DEFINE_LEAD_REDIRECT_URL}
+					</slot>
+				</td>
+				<td >
+					<slot>
+						<input id="redirect_url"
+							   name="redirect_url"
+							   size="60"
+							   type="text"
+							   onchange="redirectUrlChanged()"
+						>
+					</slot>
+				</td>
+			</tr>
+
+			<!--Option to choose redirect request type-->
+			<tr>
+				<td scope="row">
+					<slot>
+						{MOD.LBL_LEAD_REDIRECT_REQUEST_TYPE}: {REDIRECT_REQUEST_TYPE_HELP_BUTTON}
+					</slot>
+				</td>
+				<td>
+					<slot>
+						<select id="redirect_request_type"
+								name="redirect_request_type"
+								disabled
+						>
+							{REDIRECT_REQUEST_TYPE_OPTIONS}
+						</select>
+					</slot>
+				</td>
+			</tr>
+
+			<!--Option to choose whether form parameters will be sent in the redirect request-->
+			<tr>
+				<td scope="row">
+					<slot>
+						{MOD.LBL_LEAD_REDIRECT_REQUEST_PARAMS_INCLUDE}: {REDIRECT_REQUEST_PARAMS_INCLUDE_HELP_BUTTON}
+					</slot>
+				</td>
+				<td>
+					<slot>
+						<input type="checkbox"
+							   id="redirect_include_params"
+							   name="redirect_include_params"
+							   disabled
+							   checked
+						>
+					</slot>
+				</td>
 			</tr>
 
 			<tr>

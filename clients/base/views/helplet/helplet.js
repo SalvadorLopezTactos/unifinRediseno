@@ -135,7 +135,7 @@
         var lang = app.lang.getLanguage();
         var module = app.controller.context.get('module');
         var route = app.controller.context.get('layout');
-        var products = app.user.get('products').join(',');
+        var products = app.user.getProductCodes().join(',');
 
         var params = {
             edition: serverInfo.flavor,

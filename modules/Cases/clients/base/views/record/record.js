@@ -11,11 +11,44 @@
 ({
     extendsFrom: 'RecordView',
 
+    contactsSubpanel: null,
+
     /**
      * @inheritdoc
      */
     initialize: function(options) {
         this.plugins = _.union(this.plugins || [], ['HistoricalSummary', 'KBContent']);
         this._super('initialize', [options]);
-    }
+
+        this._bindEvents();
+    },
+
+    /**
+     * Initiates listening to application events.
+     */
+    _bindEvents: function() {
+        this.context.on('context:child:add', this.addChildHandler, this);
+    },
+
+    /**
+     * Bind events on Contacts subpanel
+     */
+    addChildHandler: function(childModel) {
+        if (childModel.get('link') === 'contacts') {
+            this.contactsSubpanel = childModel;
+
+            this.contactsSubpanel.on('reload', _.bind(function() {
+                this.context.reloadData();
+            }, this));
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.context.off('context:child:add', this.addChildHandler, this);
+
+        this._super('_dispose');
+    },
 })

@@ -1,7 +1,13 @@
 .navbar {
   .module-list {
     .megamenu > .dropdown[data-module="Home"] .btn-group {
-      padding: 5px 16px;
+      display: flex;
+      padding: 0 16px;
+
+      &.home {
+        width: auto;
+        max-width: 208px;
+      }
 
       /*img*/
       .cube {
@@ -17,8 +23,10 @@
         }
 
         img {
-          height: 22px;
-          width: 22px;
+          max-width: 200px;
+          width: auto;
+          height: auto;
+          max-height: 22px;
         }
       }
     }
@@ -34,7 +42,7 @@
         margin: 0;
 
         .btn .fa-search {
-          color: @grayLight;
+          color: @gray70;
         }
       }
     }
@@ -65,8 +73,16 @@
       background: none;
 
       .fa-search {
-        color: @grayLight;
+        color: @gray70;
       }
+    }
+  }
+
+  #userActions {
+    margin-left: 10px;
+
+    > .btn-group > button[data-toggle="dropdown"] {
+      height: 28px;
     }
   }
 }

@@ -46,16 +46,12 @@ $return_action = empty($_REQUEST['return_action']) ? 'index'
 $return_id = empty($_REQUEST['return_id']) ? ''
 	: $_REQUEST['return_id'];
 
-$return_location = "index.php?module=$return_module&action=$return_action";
-
+$data = [];
+$data['module'] = $return_module;
+$data['action'] = $return_action;
 // append the return_id if given
-if(!empty($return_id))
-{
-	$return_location .= "&record=$return_id";
+if (!empty($return_id)) {
+    $data['record'] = $return_id;
 }
-
 // now that the delete has been performed, return to given location
-
-header("Location: $return_location");
-
-?>
+header('Location: index.php?' . http_build_query($data));

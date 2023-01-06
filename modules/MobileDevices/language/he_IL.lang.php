@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'מכשירים ניידים',
     'LBL_MODULE_NAME_SINGULAR' => 'מכשיר נייד',
     'LBL_DEVICE_ID' => 'מזהה מכשיר',
-    'LBL_DEVICE_PLATFORM' => 'פלטפורמה',
+    'LBL_DEVICE_PLATFORM' => 'פלטפורמת המכשיר',
 ];

@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Registerdashbord for prosesser',
 
     'LBL_CAS_ID' => 'Prosessnummer',
+    'LBL_CAS_STATUS' => 'Prosesstatus',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Ukjent",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "oppgaven er",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "Oppgave var",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "ble tilordnet prosessen #%s %s posten %s av %s handlingen %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "på",
     'LBL_PMSE_HISTORY_LOG_AND'  => "av",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'koblet eller fjernet en oppføring til',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Godkjen',
     'LBL_PMSE_LABEL_REJECT' => 'Avslå',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Prosesses i Progress',
     'LBL_STATUS_CANCELLED' => 'Prosesses Avbrutt',
     'LBL_STATUS_ERROR' => 'Prosessfeil',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Fullført',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Avsluttet',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Under utførelse',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Kansellert',
+    'LBL_STATUS_ERROR_ENUM' => 'Feil',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Prosessadministrasjon',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Ubetjente Prosesser',

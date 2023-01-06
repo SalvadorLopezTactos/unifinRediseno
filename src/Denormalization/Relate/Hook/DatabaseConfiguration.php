@@ -28,9 +28,27 @@ final class DatabaseConfiguration implements Configuration
         $this->administration = BeanFactory::newBean('Administration');
     }
 
-    public function setFieldConfiguration(string $moduleName, string $fieldName, array $value): void
+    public function setFieldConfiguration(
+        string $moduleName,
+        string $fieldName,
+        string $relationshipName,
+        array $value
+    ): void {
+        if (!isset($this->administration->settings[self::CATEGORY])) {
+            $this->administration->retrieveSettings(self::CATEGORY);
+        }
+        $key = self::CATEGORY . '_' . self::NAME;
+        $this->administration->settings[$key][$moduleName][$fieldName][$relationshipName] = $value;
+        $this->save();
+    }
+
+    public function unsetFieldConfiguration(string $moduleName, string $fieldName, string $relationshipName): void
     {
-        $this->administration->settings[self::CATEGORY . '_' . self::NAME][$moduleName][$fieldName] = $value;
+        if (!isset($this->administration->settings[self::CATEGORY])) {
+            $this->administration->retrieveSettings(self::CATEGORY);
+        }
+        $key = self::CATEGORY . '_' . self::NAME;
+        unset($this->administration->settings[$key][$moduleName][$fieldName][$relationshipName]);
         $this->save();
     }
 

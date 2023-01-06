@@ -25,13 +25,9 @@
 <span id='uploadLabel' class='error'>&nbsp;</span>
 <br>
 <h3>{$mod.LBL_SP_PREVIEW}</h3>
-{literal}
 <iframe name="style_preview" id="style_preview" width='90%' height=600 src='index.php?module=ModuleBuilder&action=portalpreview' title='index.php?module=ModuleBuilder&action=portalpreview'>
 </iframe>
-{/literal}
-{literal}
 <script>
 ModuleBuilder.helpRegister('StudioWizard');
 ModuleBuilder.helpSetup('portalStyle','default');
 </script>
-{/literal}

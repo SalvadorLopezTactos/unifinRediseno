@@ -11,7 +11,6 @@
  */
 *}
 <style>
-{literal}
 .searchHighlight{
     background-color: #FFFF00;
 }
@@ -32,7 +31,6 @@ div.sec .odd a, div.sec .even a {
 #gsdetail_div {
     overflow-x:auto;
 }
-{/literal}
 </style>
 <!-- Global Search Detail View -->
 <div id="gsdetail_div">

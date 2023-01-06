@@ -219,7 +219,7 @@ SQL;
             $paramTypes
         );
 
-        $results = $stmt->fetchAll();
+        $results = $stmt->fetchAllAssociative();
         return $results;
     }
 }

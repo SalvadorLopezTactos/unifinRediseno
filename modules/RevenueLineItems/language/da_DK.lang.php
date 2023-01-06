@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Fornyelse af linjeprodukt-id',
     'LBL_PARENT_RLIS' => 'Overordnede linjeprodukter (Revenue Line Items)',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Overordnede linjeprodukter (Revenue Line Items)',
+    'LBL_FORECASTED_LIKELY' => 'Forudset som Sandsynlig',
     'LBL_EXPERT_ID' => 'Ekspert ID',
     'LBL_FORECAST' => 'Prognose',
     'LBL_SUBTOTAL' => 'Subtotal',

@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Udtryksgenerator',
-  'LBL_MODULE_NAME_SINGULAR' => 'Udtryksgenerator',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Foregående' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Næste' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Udvid' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Udtryksgenerator',
+    'LBL_MODULE_NAME_SINGULAR' => 'Udtryksgenerator',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Foregående' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Næste' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Udvid' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Ukendt felt',
+];

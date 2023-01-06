@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '見積設定',
 
     'LBL_RENEWAL' => '更新',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '見積連絡',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '見積りタイムライン',
 );

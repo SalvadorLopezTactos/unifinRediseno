@@ -78,6 +78,11 @@
                 }
             }, this);
         }
+
+        // If any settings have been specified for the subpanel, set them on the context
+        if (options.def.settings) {
+            this.context.set('settings', options.def.settings);
+        }
     },
 
     /**

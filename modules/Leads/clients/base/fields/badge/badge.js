@@ -11,7 +11,7 @@
 /**
  * @class View.Fields.Base.Leads.BadgeField
  * @alias SUGAR.App.view.fields.BaseLeadsBadgeField
- * @extends View.Fields.Base.BaseField
+ * @extends View.Fields.Base.BadgeField
  */
 ({
     /**
@@ -33,6 +33,13 @@
     initialize: function(options) {
         options.def.readonly = true;
         app.view.Field.prototype.initialize.call(this, options);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    isHidden: function() {
+        return false;
     },
 
     /**

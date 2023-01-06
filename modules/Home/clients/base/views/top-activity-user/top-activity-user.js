@@ -31,19 +31,19 @@
     },
     _mapping: {
         meetings: {
-            icon: 'fa-comments',
+            icon: 'sicon-message',
             label: 'LBL_MOST_MEETING_HELD'
         },
         inbound_emails: {
-            icon: 'fa-envelope',
+            icon: 'sicon-email',
             label: 'LBL_MOST_EMAILS_RECEIVED'
         },
         outbound_emails: {
-            icon: 'fa-envelope-o',
+            icon: 'sicon-email',
             label: 'LBL_MOST_EMAILS_SENT'
         },
         calls: {
-            icon: 'fa-phone',
+            icon: 'sicon-phone',
             label: 'LBL_MOST_CALLS_MADE'
         }
     },

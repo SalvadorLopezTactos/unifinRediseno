@@ -19,7 +19,7 @@ global $sugar_version, $sugar_config;
 global $urlPrefix;
 global $currentModule;
 
-$log = LoggerManager::getLogger('workflow_alerts');
+$log = LoggerManager::getLogger();
 
 if(!empty($_REQUEST['workflow_id'])) {
     $workflow_object = BeanFactory::retrieveBean('WorkFlow', $_REQUEST['workflow_id']);

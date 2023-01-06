@@ -150,7 +150,7 @@ $viewdefs['base']['view']['tutorial'] = array(
                 'vertAdj' => 5,
             ),
             array(
-                'name' => '.dashlet-cell .fa-cog',
+                'name' => '.dashlet-cell .sicon-settings',
                 'text' => 'LBL_TOUR_RECORD_DASHLETCOG',
                 'full' => true,
                 'horizAdj' =>-18,

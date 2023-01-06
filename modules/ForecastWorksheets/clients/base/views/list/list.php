@@ -106,22 +106,6 @@ $viewdefs['ForecastWorksheets']['base']['view']['list'] = array(
                         'worst_case'
                     ),
                 ),
-                array(
-                    'name' => 'best_case',
-                    'label' => 'LBL_BEST',
-                    'type' => 'currency',
-                    'default' => true,
-                    'enabled' => true,
-                    'convertToBase'=> true,
-                    'showTransactionalAmount'=>true,
-                    'skip_preferred_conversion' => true,
-                    'align' => 'right',
-                    'click_to_edit' => true,
-                    'related_fields' => array(
-                        'base_rate',
-                        'currency_id'
-                    ),
-                )
             )
         )
     )

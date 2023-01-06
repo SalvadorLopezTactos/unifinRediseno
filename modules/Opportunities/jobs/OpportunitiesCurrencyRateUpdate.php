@@ -54,7 +54,7 @@ class OpportunitiesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             ->executeQuery(
                 'SELECT conversion_rate FROM currencies WHERE id = ?',
                 [$currencyId]
-            )->fetchColumn();
+            )->fetchOne();
 
         $stages = $this->getClosedStages();
 
@@ -123,6 +123,4 @@ SQL;
         }
         return $opp->getClosedStages();
     }
-
-
 }

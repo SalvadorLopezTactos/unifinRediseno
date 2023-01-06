@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Ieteica',
     'LBL_LIST_STATUS' => 'Statuss',
     'LBL_LIST_TITLE' => 'Virsraksts',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Tirgus intereses prognoze',
+    'LBL_MARKET_SCORE' => 'Tirgus novērtējums',
     'LBL_MOBILE_PHONE' => 'Mobilais tālrunis:',
     'LBL_MODULE_NAME' => 'Interesenti',
     'LBL_MODULE_NAME_SINGULAR' => 'Interesents',
@@ -330,4 +332,9 @@ Pēc katras prasītās moduļa apstiprināšanas spiediet "Saglabāt un Konvert�
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Interesenta konvertēšanas prognoze',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Apskatīt prognozes informāciju par konkrētu interesentu',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Iespējot ieņēmumu posteņus',
+    'LBL_REQUIRE_RLIS' => 'Pieprasīt ieņēmumu posteņus, kad tiek izveidots jauns darījums',
+    'LBL_COPY_DATA_RLIS' => 'Kopēt interesenta datus uz ieņēmumu posteņiem, kad tiek izveidots jauns darījums',
 );

@@ -15,6 +15,14 @@
  * @class View.Views.Base.ThemerollerpreviewView
  * @alias SUGAR.App.view.views.BaseThemerollerpreviewView
  * @extends View.View
+ *
+ * @deprecated Since 11.1.0
+ * Please use {@link View.Views.Base.AdministrationPortalThemeConfigView} instead
+ *
+ * This component was used in the Administration > Studio Portal > Theme Portal side
+ * pane to display a preview of Portal within an iFrame. Starting in 11.1.0, the side pane
+ * will be replaced with AdministrationPortalThemeConfigView. The new component is a
+ * metadata driven record view that allows the user to configure the Portal theme
  */
 ({
     /**

@@ -10,4 +10,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-SugarApplication::redirect("index.php?module=Administration&action=index");
+SugarApplication::redirect(buildRedirectURL('', 'Administration'));

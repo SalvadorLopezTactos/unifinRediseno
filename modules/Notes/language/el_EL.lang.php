@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Διεύθυνση Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Επισύναψη Email',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Συνημμένο email για',
+    'LBL_NOTE_ATTACHMENT' => 'Συνημμένα Σημείωσης',
+    'LBL_KB_ATTACHMENT' => 'KBΣυνημμένα Εγγράφου',
+    'LBL_CASE_ATTACHMENT' => 'Συνημμένα Υπόθεσης',
     'LBL_FILE_MIME_TYPE' => 'Τύπος Mime',
     'LBL_FILE_EXTENSION' => 'Επέκταση Αρχείου',
     'LBL_FILE_SOURCE' => 'Προέλευση Αρχείου',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Πηγή σημείωσης',
     'LBL_SOURCE_EXTERNAL' => 'Εξωτερικά',
     'LBL_SOURCE_INTERNAL' => 'Εσωτερικά',
+    'LBL_PORTAL' => 'Portal',
 
     // Help Text
     // List View Help Text

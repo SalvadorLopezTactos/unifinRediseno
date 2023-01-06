@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID-ja e artikullit të rreshtit të të ardhurave të rinovimit',
     'LBL_PARENT_RLIS' => 'Artikujt e rreshtit të të ardhurave kryesore',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Artikujt e rreshtit të të ardhurave kryesore',
+    'LBL_FORECASTED_LIKELY' => 'Parashikuar si të mundshme',
     'LBL_EXPERT_ID' => 'Eksperti i Produkteve',
     'LBL_FORECAST' => 'Përfshijë në parashikimin',
     'LBL_SUBTOTAL' => 'Nëntotali',

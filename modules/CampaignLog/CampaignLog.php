@@ -63,7 +63,7 @@ class CampaignLog extends SugarBean {
 
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($temp_array['TARGET_ID']));
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row) {
             if($temp_array['TARGET_TYPE']=='Accounts'){
@@ -78,7 +78,7 @@ class CampaignLog extends SugarBean {
         $query = "select name from email_marketing where id = ? ";
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($temp_array['MARKETING_ID']));
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row)
         {
@@ -101,7 +101,7 @@ class CampaignLog extends SugarBean {
 
             $conn = $this->db->getConnection();
             $stmt = $conn->executeQuery($qry, array($trgt_id));
-            $row = $stmt->fetch();
+            $row = $stmt->fetchAssociative();
 
             if (!empty($row['email_address'])){
                 $return_str = $row['email_address'];
@@ -122,7 +122,7 @@ class CampaignLog extends SugarBean {
             $query="SELECT name from emails where id = ? ";
             $conn = $db->getConnection();
             $stmt = $conn->executeQuery($query, array($related_id));
-            $name = $stmt->fetchColumn();
+            $name = $stmt->fetchOne();
             if ($name != null) {
                 return $name;
             }
@@ -131,7 +131,7 @@ class CampaignLog extends SugarBean {
             $query="SELECT first_name, last_name from contacts where id = ? ";
             $conn = $db->getConnection();
             $stmt = $conn->executeQuery($query, array($related_id));
-            $row = $stmt->fetch();
+            $row = $stmt->fetchAssociative();
             if ($row != null) {
                 return $full_name = $locale->formatName('Contacts', $row);
             }
@@ -140,7 +140,7 @@ class CampaignLog extends SugarBean {
             $query="SELECT first_name, last_name from leads where id = ? ";
             $conn = $db->getConnection();
             $stmt = $conn->executeQuery($query, array($related_id));
-            $row = $stmt->fetch();
+            $row = $stmt->fetchAssociative();
             if ($row != null) {
                 return $full_name = $locale->formatName('Leads', $row);
             }
@@ -149,7 +149,7 @@ class CampaignLog extends SugarBean {
             $query="SELECT first_name, last_name from prospects where id = ? ";
             $conn = $db->getConnection();
             $stmt = $conn->executeQuery($query, array($related_id));
-            $row = $stmt->fetch();
+            $row = $stmt->fetchAssociative();
             if ($row != null) {
                 return $full_name = $locale->formatName('Prospects', $row);
             }
@@ -158,7 +158,7 @@ class CampaignLog extends SugarBean {
             $query="SELECT tracker_url from campaign_trkrs where id = ? ";
             $conn = $db->getConnection();
             $stmt = $conn->executeQuery($query, array($related_id));
-            $col = $stmt->fetchColumn();
+            $col = $stmt->fetchOne();
             if ($col != null) {
                 return $col;
             }
@@ -167,7 +167,7 @@ class CampaignLog extends SugarBean {
             $query="SELECT name from accounts where id= ? ";
             $conn = $db->getConnection();
             $stmt = $conn->executeQuery($query, array($related_id));
-            $name = $stmt->fetchColumn();
+            $name = $stmt->fetchOne();
             if ($name != null) {
                 return $name;
             }

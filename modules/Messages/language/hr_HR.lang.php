@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Prikaži izvješća o porukama',
     'LNK_IMPORT_MESSAGES' => 'Uvezi poruke',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'ID pot. klij.',
+    'LBL_LEAD_NAME' => 'Pot. kl.',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Čavrljanje s klijentove strane',
+    'LBL_ACTIVITY_CUSTOMER' => 'Klijent',
+    'LBL_ACTIVITY_FINISHED' => 'završeno',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'u tijeku',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za poruke',
 ];

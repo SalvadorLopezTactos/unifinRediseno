@@ -10,7 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="drawer-content"></div>
+<div class="drawer-content bg-secondary-content-background"></div>
 <div class="close-drawer">
-    <button type="button" class="btn" data-action="close"><i class="fa fa-times"></i></button>
+    <button type="button" class="btn bg-secondary-content-background" data-action="drawerClose" rel="tooltip" title="{{str 'LBL_CLOSE_FOCUS_DRAWER'}}" data-placement="left">
+        <i class="sicon sicon-close"></i>
+    </button>
+</div>
+<div class="scroll-drawer">
+    <button type="button" class="btn btn-prev bg-secondary-content-background" data-action="scroll" data-action-type="prev" disabled rel="tooltip" title="{{str 'LNK_LIST_PREVIOUS'}}" data-placement="left">
+        <i class="sicon sicon-chevron-up"></i>
+    </button>
+    <button type="button" class="btn btn-next bg-secondary-content-background" data-action="scroll" data-action-type="next" disabled rel="tooltip" title="{{str 'LNK_LIST_NEXT'}}" data-placement="left">
+        <i class="sicon sicon-chevron-down"></i>
+    </button>
 </div>

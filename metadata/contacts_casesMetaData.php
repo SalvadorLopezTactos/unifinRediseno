@@ -51,13 +51,6 @@ $dictionary['contacts_cases'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_case_con',
-            'type' => 'index',
-            'fields' => array(
-                'contact_id',
-            ),
-        ),
-        array(
             'name' => 'idx_con_case_case',
             'type' => 'index',
             'fields' => array(

@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Description',
     'LBL_OW_TYPE'=>'Type',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Team Forecast for <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Direct Report',
     'LBL_FDR_OPPORTUNITIES'=>'Opportunities in Forecast:',
     'LBL_FDR_WEIGH'=>'Weighted Amount of Opportunities:',
     'LBL_FDR_COMMIT'=>'Committed Amount',
     'LBL_FDR_DATE_COMMIT'=>'Commit Date',
+    'LBL_FDR_FORECAST_HEADER' => 'Seller Forecast for <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Forecasts:Worksheet',
     'LBL_DV_MY_FORECASTS' => 'My Forecasts',
-    'LBL_DV_MY_TEAM' => "My Team's Forecasts" ,
+    'LBL_DV_MY_TEAM' => "My Team's Forecasts",
     'LBL_DV_TIMEPERIODS' => 'Time Periods:',
     'LBL_DV_FORECAST_PERIOD' => 'Forecast Time Period',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Forecast Opportunities',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Base Rate',
 
     'LBL_QUOTA' => 'Quota',
-    'LBL_QUOTA_ADJUSTED' => 'Quota (Adjusted)',
+    'LBL_QUOTA_ADJUSTED' => 'Adjusted Quota',
 
     'LBL_FORECAST_FOR'=>'Forecast Worksheet for: ',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Rollup)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Quota vs. Committed vs. Actual',
 
     'LBL_FORECAST' => 'Forecast',
+    'LBL_COMMITMENT' => 'Commitment',
+    'LBL_TEAM_COMMITMENT' => 'Team Commitment',
+    'LBL_FORECASTED' => 'Forecasted',
+    'LBL_ADJUSTED_TOTAL' => 'Adjusted Total',
     'LBL_COMMIT_STAGE' => 'Commit Stage',
     'LBL_SALES_STAGE' => 'Stage',
     'LBL_AMOUNT' => 'Amount',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, and {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'likely {{{direction}}} {{{from}}} to {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'best {{{direction}}} {{{from}}} to {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'worst {{{direction}}} {{{from}}} to {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'likely stayed the same',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'best stayed the same',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'worst stayed the same',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Committed (Likely) {{{direction}}} {{{from}}} to {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Committed (Best) {{{direction}}} {{{from}}} to {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Committed (Worst) {{{direction}}} {{{from}}} to {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Committed (Likely) stayed the same',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Committed (Best) stayed the same',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Committed (Worst) stayed the same',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'This month on {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Displayed Total',
     'LBL_TOTAL' => 'Total',
     'LBL_OVERALL_TOTAL' => 'Overall Total',
-    'LBL_EDITABLE_INVALID' => 'Invalid Value for {0}',
+    'LBL_EDITABLE_INVALID' => 'Invalid Value for {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Value must be between {0} and {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'You have unsaved changes in your Worksheet.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Only saved or committed data will be exported. Cancel to abort. Confirm to export saved data.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Included',
     'LBL_CHART_NOT_INCLUDED' => 'Not Included',
     'LBL_CHART_ADJUSTED' => ' (Adjusted)',
-    'LBL_SAVE_DRAFT' => 'Save Draft',
+    'LBL_SAVE_DRAFT' => 'Save',
     'LBL_CHANGES_BY' => 'Changes by {0}',
     'LBL_FORECAST_SETTINGS' => 'Settings',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Exceed by',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'No Data',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Meeting Quota',
+    'LBL_OPEN_LIKELY' => 'Open Likely',
+    'LBL_OPEN_BEST' => 'Open Best',
+    'LBL_OPEN_WORST' => 'Open Worst',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Assign Quota',
     'LBL_ASSIGNING_QUOTA' => 'Assigning Quota',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "My Team's Forecast",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'You have unsaved changes. Are you sure you want to sort the worksheet and discard changes?',
+
+    'LBL_SAVE_TOOLTIP' => 'Save changes made in worksheet rows',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Save changes to records and submit forecast to manager',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Submit forecast to manager and assign quota',
+
+    'LBL_SAVE_LABEL_REP' => 'Save ',
+    'LBL_SAVE_LABEL_MGR' => 'Save Adjusted Values',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module incorporates {{forecastby_singular_module}} records to build {{forecastworksheets_module}} and predict sales. Users can work towards sales {{quotas_module}} at the individual, team, and sales organization level. Before users can access the {{plural_module_name}} module, an administrator must select the organization\'s desired Time Periods, Ranges, and Scenarios.

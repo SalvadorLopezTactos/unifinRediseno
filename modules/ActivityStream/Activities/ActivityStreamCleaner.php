@@ -72,7 +72,7 @@ class ActivityStreamCleaner
 
     /**
      * Get Database instance
-     * @return mixed
+     * @return DBManager
      */
     protected function db()
     {
@@ -211,7 +211,7 @@ class ActivityStreamCleaner
             // if the limit is > 0 it means we need to execute the delete in chunks/subchunks
             $ids = [];
 
-            while ($row = $res->fetch()) {
+            while ($row = $res->fetchAssociative()) {
                 $ids[] = $row['id'];
 
                 if (count($ids) == $in_condition_limit) {

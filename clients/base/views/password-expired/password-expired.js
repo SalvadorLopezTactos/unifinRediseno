@@ -46,7 +46,7 @@
 
         //Hack: Gets rid of leftover loading...
         app.alert.dismissAll();
-        this.logoUrl = app.metadata.getLogoUrl();
+        this.logoUrl = app.metadata.getLogoUrl(app.utils.isDarkMode());
 
         // Check if we have any password requirements messages and if so
         // push in to our passwordRequirements so hbs displays 'em

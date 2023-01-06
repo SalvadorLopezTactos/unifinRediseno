@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 /**
@@ -18,10 +17,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class GroupAssignmentTarget extends DeviceAndAppManagementAssignmentTarget
 {
@@ -38,7 +36,7 @@ class GroupAssignmentTarget extends DeviceAndAppManagementAssignmentTarget
     * Gets the groupId
     * The group Id that is the target of the assignment.
     *
-    * @return string The groupId
+    * @return string|null The groupId
     */
     public function getGroupId()
     {

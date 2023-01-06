@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Luonut käyttäjä',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Muokattu viimeksi käyttäjä',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Järjestelmäsähköposti',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Asiakirjamalli',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Asiakirjojen yhdistäminen',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Valitse...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Asiakirjan yhdistäminen PDF-asiakirjaan',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Asiakirjojen yhdistäminen',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Yrityssääntö',
     'LBL_PMSE_LABEL_RULE' => 'Sääntö',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Vain päivitetyt tietueet (Kaikki päivitykset - katso ohje)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Uudet tietueet tai ensimmäinen päivitys',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Uudet tietueet ja kaikki päivitykset',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Suhteen muutos',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Valitse, milloin prosessi käynnistyy.<br><br>Uusi: suorita prosessit, kun uusi tietue luodaan.<br><br>Ensimmäinen päivitys: prosessi suoritetaan vain, kun ensimmäisen kerran kriteerit täyttyvät olemassa olevalle tietueelle.<br><br>Kaikki päivitykset: prosessi suoritetaan joka kerralla kun kriteerit täyttyvät olemassa olevalle tietueelle.<br><br>Uudet tietueet tai ensimmäinen päivitys: prosessi suoritetaan vain, kun tietueen ensimmäistä kertaa koskevat kriteerit täyttyvät, joko tietueen luonnin tai päivityksen aikana.<br><br>Uudet tietueet ja kaikki päivitykset: prosessi suoritetaan joka kerta kaikille uusille ja olemassaoleville tietueille.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Valitse, milloin prosessi käynnistyy.<br><br>Uusi: suorita prosessit, kun uusi tietue luodaan.<br><br>Ensimmäinen päivitys: prosessi suoritetaan vain, kun ensimmäisen kerran kriteerit täyttyvät olemassa olevalle tietueelle.<br><br>Kaikki päivitykset: prosessi suoritetaan joka kerralla, kun kriteerit täyttyvät olemassa olevalle tietueelle.<br><br>Uudet tietueet tai ensimmäinen päivitys: prosessi suoritetaan vain, kun tietueen ensimmäistä kertaa koskevat kriteerit täyttyvät, joko tietueen luonnin tai päivityksen aikana.<br><br>Uudet tietueet ja kaikki päivitykset: prosessi suoritetaan joka kerta kaikille uusille ja olemassaoleville tietueille.<br><br>Suhdemuutokset: prosessi suoritetaan joka kerta, kun suhteessa tapahtuu muutoksia.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Valitse Sugar-moduuli joka soveltaa tapahtuman laukaisijan',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Määritettynä päivänä',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Virhe',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Suhteen muutoksen arviointi',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Kentät',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Moduulikenttäevaluaatio',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moduuli',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Kaikki liittyvät tietueet',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Mitkään liittyvät tietueet',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Lisätty',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Poistettu',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Lisätty tai Poistettu',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Mikä tahansa suhde',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Ajonaikainen',
 

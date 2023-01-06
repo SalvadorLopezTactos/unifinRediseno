@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Utilisateurs',
     'LBL_EMAILS_PRODUCTS_REL' => 'Produits',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Lignes de revenu',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escalades',
     'LBL_EMAILS_MESSAGES_REL' => 'Messages',
     'LBL_EMAILS_PURCHASES_REL' => 'Achats',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Lignes d&#39;achats',
@@ -476,4 +477,5 @@ Vous pouvez utiliser un modèle d&#39;email via le bouton "Modèles" ou inclure 
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Envoyer l&#39;e-mail',
     'LBL_MAILBOX' => 'Compte d&#39;e-mails entrants',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Veuillez configurer un compte emails sortants via <a href="#OutboundEmail">Paramètres emails</a> afin d&#39;envoyer des emails.',
 );

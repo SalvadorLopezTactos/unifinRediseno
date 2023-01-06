@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Format de l&#39;heure par défaut',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Afficher les temps de réponse serveur',
+    'FREEZE_FIRST_COLUMN' => 'Autoriser le gel des colonnes',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Activez ce paramètre pour permettre aux utilisateurs de figer la première colonne dans une variété de ' .
+        'vues de liste, y compris les vues de liste de modules, les sous-panneaux, les dashlets et les consoles.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Logger les requêtes lentes',
     'LOCK_HOMEPAGE_HELP'=>'Cochez cette case afin d&#39;empêcher les utilisateurs :<br /> 1) d&#39;ajouter de nouveaux onglets et dashlets sur la page d&#39;accueil (Pro et Entreprise).<br />2) de modifier la disposition des Dashlets par glisser-déposer.<br />',
     'CURRENT_LOGO'=>'Logo actuel',
+    'CURRENT_LOGO_DARK' => 'Logo actuel du mode sombre :',
     'CURRENT_LOGO_HELP'=>'Ce logo est affiché dans le coin en haut à gauche de votre application SugarCRM.',
+    'CURRENT_LOGO_DARK_HELP' => "Ce logo est affiché dans le coin gauche du pied de page lorsque l'application Sugar est en mode sombre, selon les préférences de l'utilisateur en matière d'apparence.",
     'NEW_LOGO'=>'Choisissez logo (450x17)',
     'NEW_LOGO_HELP' => 'Le format des images doit être .png ou .jpg.<br />La taille maximum est 450x17 px. Les images plus large ou haute seront redimensionnées à ces dimensions maximum.',
+    'NEW_LOGO_DARK' => 'Sélectionner le logo du mode sombre :',
     'NEW_LOGO_HELP_NO_SPACE' => 'Le format de l&#39;image doit être .png ou .jpg. La hauteur maximale est de 17px, et la largeur maximale est de 450px. Toutes images ayant une résolution supérieure à ces valeurs sera redimensionnée. Le nom du fiche ne peut pas contenir de caractère espace.',
     'NEW_QUOTE_LOGO'=>'Utiliser un autre logo pour les Devis (867x74)',
     'NEW_QUOTE_LOGO_HELP'=>'Le format image requis est .jpg.<br />La taille recommandé est 867x74 px.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Continuer',
     'LBL_WIZARD_FINISH_TAB' => 'Terminer',
     'LBL_WIZARD_FINISH_TITLE' => 'La configuration de base de votre application est terminée',
-    'LBL_WIZARD_FINISH' => 'Cliquez <b>Continuer</b> pour configurer vos paramètres personnels.<br/><br />Pour configurer les paramètres système supplémentaires, cliquez <a href="index.php?module=Administration&action=index" target="_blank">ici</a>.',
+    'LBL_WIZARD_FINISH' => 'Cliquez sur <b>Continuer</b> pour configurer vos paramètres utilisateur.<br/><br />
+Pour configurer des paramètres système supplémentaires, cliquez sur <a href="#Administration" target="_blank">ici</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Identité visuelle',
     'LBL_WIZARD_SYSTEM_DESC' => 'Fournissez le nom et le logo de votre organisation afin de personnaliser votre SugarCRM.',
     'LBL_WIZARD_LOCALE_DESC' => 'Précisez comment vous souhaitez afficher vos données dans SugarCRM, basé sur votre situation géographique. Les paramètres que vous fournissez ici seront les paramètres par défaut. Les utilisateurs pourront définir leurs propres préférences dans Mon compte.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => 'Chargement...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Supprimer' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Bienvenue' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo du mode sombre',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Le module Rapports n&#39;est disponible que pour l&#39;application spécifique aux téléphones portables type iPhone.',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Le module de Rapports est indisponible pour la vue navigateur mobile.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

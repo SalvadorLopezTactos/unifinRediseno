@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'ダッシュレットが追加されました。',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => '本当にレイアウトを変更しますか?　レイアウトは解除することができます。',
   'LBL_REMOVE_DASHLET_CONFIRM' => '本当にダッシュレットをはずしてよいですか？',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'ダッシュボードは設定されていません',
   'LBL_NO_DASHLETS_CONFIGURED' => 'ダッシュレットは設定されていません',
-  'LBL_CREATE_DASHBOARD_LINK' => 'ダッシュボードを作成',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'ウェブページ',
   'LBL_DASHLET_WEBPAGE_DESC' => 'ウェブページ',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'ソースコード',
   'LBL_SOURCE_SUGAR' => 'Sugar - SugarCRM社が開発した世界で最も有名な営業支援システム。',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Barnabás Debreceniによって開発されたPHPテンプレートエンジン。',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - NuSphere CorporationとDietrich Ayalaによって開発されたWebサービス用PHPクラス。',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Mihai Bazonによって開発された日付入力用カレンダー。',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Wayne Munroによって開発されたPDFドキュメント作成用ライブラリ。',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - WebDAVサーバのPHP実装。',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'ヘルプは、現在閲覧中のモジュールに関する特定の情報の表示、モジュール内でいくつかのアクションを実行するための詳細な手順の提供、より包括的な情報とサポートを得られる参照先の指示をします。',
 
     'LBL_FACETS_DASHBOARD_TITLE' => '絞り込み',
+
+    'LBL_ABOUT_VERSION' => '次のライセンスでバージョン {{version}} を使用しています。',
 );

@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Descriere',
     'LBL_OW_TYPE'=>'Tip',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Previziunea echipei pentru <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Raport direct',
     'LBL_FDR_OPPORTUNITIES'=>'Oportunitati in previziune:',
     'LBL_FDR_WEIGH'=>'Suma ponderata a oportunitatilor:',
     'LBL_FDR_COMMIT'=>'Suma asumata',
     'LBL_FDR_DATE_COMMIT'=>'Data asumarii',
+    'LBL_FDR_FORECAST_HEADER' => 'Previziunea vânzătorului pentru <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Previziuni:Tabel',
     'LBL_DV_MY_FORECASTS' => 'Previziunile mele',
-    'LBL_DV_MY_TEAM' => "Previziunile echipei mele" ,
+    'LBL_DV_MY_TEAM' => "Previziunile echipei mele",
     'LBL_DV_TIMEPERIODS' => 'Perioade de timp:',
     'LBL_DV_FORECAST_PERIOD' => 'Perioada de timp previziuni',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Oportunitati in previziune',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Rata de baza',
 
     'LBL_QUOTA' => 'Obiectiv',
-    'LBL_QUOTA_ADJUSTED' => 'Obiectiv (ajustat)',
+    'LBL_QUOTA_ADJUSTED' => 'Cotă ajustată',
 
     'LBL_FORECAST_FOR'=>'Tabel previziuni pentru:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Adunare)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Obiectiv vs. Asumat vs. Real',
 
     'LBL_FORECAST' => 'Previziune',
+    'LBL_COMMITMENT' => 'Confirmare',
+    'LBL_TEAM_COMMITMENT' => 'Confirmare echipă',
+    'LBL_FORECASTED' => 'Prognozat',
+    'LBL_ADJUSTED_TOTAL' => 'Total ajustat',
     'LBL_COMMIT_STAGE' => 'Stadiu asumare',
     'LBL_SALES_STAGE' => 'Stadiu',
     'LBL_AMOUNT' => 'Suma',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, si {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'previzibil {{{direction}}} {{{from}}} la {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'ideal {{{direction}}} {{{from}}} la {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'pesimist {{{direction}}} {{{from}}} la {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'previzibil a ramas la fel',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'ideal a ramas la fel',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'pesimist a ramas la fel',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Confirmat (previzibil) {{{direction}}} {{{from}}} la {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Confirmat (ideal) {{{direction}}} {{{from}}} la {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Confirmat (pesimist) {{{direction}}} {{{from}}} la {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Confirmat (previzibil) a rămas la fel',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Confirmat (ideal) a rămas la fel',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Confirmat (pesimist) a rămas la fel',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Luna aceasta in {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Afisat total',
     'LBL_TOTAL' => 'Total',
     'LBL_OVERALL_TOTAL' => 'Total global',
-    'LBL_EDITABLE_INVALID' => 'Valoare invalida pentru {0}',
+    'LBL_EDITABLE_INVALID' => 'Valoare nevalidă pentru {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Valoarea trebuie sa fie intre {0} si {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Exista modificari nesalvte in tabelul tau.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Doar datele salvate sau asumate vor fi exportate. Apasa Anulare pentru a renunta. Apasa Confirma pentru a exporta datele salvate.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Inclus',
     'LBL_CHART_NOT_INCLUDED' => 'Neinclus',
     'LBL_CHART_ADJUSTED' => ' (Ajustat)',
-    'LBL_SAVE_DRAFT' => 'Salveaza versiune preliminara',
+    'LBL_SAVE_DRAFT' => 'Salvare',
     'LBL_CHANGES_BY' => 'Schimbari efectuate de {0}',
     'LBL_FORECAST_SETTINGS' => 'Setari',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data de incepere a anului fiscal:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configureaza perioada de timp care va fi folosita in modulul Previziuni. <br><br>Atentie: Setarile pentru perioada de timp nu pot fi schimbate dupa setarea initiala.<br><br>Incepe prin a alege data de start a anului fiscal. Apoi alege tipul de perioada de timp pentru previziuni. Marja datelor pentru perioadele de timp va fi calculata automat pe baza selectiilor tale. Perioada de timp secundara este baza pentru tabelul de previziuni. <br><br>Perioada viitoare ce poate fi vizualizata si perioadele de timp trecute vor determina numarul de perioade secundare din modulul Previziuni. Utilizatorii pot vedea si modifica cifrele din previziuni in perioadele secundare vizibile.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurați modul în care doriți să clasificați {{forecastByModule}}. <br><br>Vă rugăm să rețineți că setările Range nu pot fi modificate după prima confirmare. Pentru instanțe actualizate, setarea Range este blocată cu datele de Previziuni existente.<br><br>Puteți selecta două sau mai multe categorii bazate pe intervalele de probabilitate sau să creați categorii care nu sunt bazate pe probabilitate. <br><br>În partea stânga a categoriilor dvs. personalizate sunt căsuțe de selectare; folosiți-le pentru a decide ce intervale vor fi incluse în cadrul cantitate Previziuni angajate și raportate managerilor. <br><br>Un utilizator poate schimba status-ul include/exclude și categoria {{forecastByModule}} în mod manual din foaia sa de lucru.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurați modul în care doriți să clasificați {{forecastByModule}}. <br><br>Vă rugăm să rețineți că setările pentru interval nu pot fi modificate după prima confirmare. Pentru instanțe actualizate, setarea pentru interval este blocată cu datele de previziuni existente.<br><br>Puteți selecta două sau mai multe categorii bazate pe intervalele de probabilitate sau puteți crea categorii care nu sunt bazate pe probabilitate. <br><br>În stânga lângă categoriile dumneavoastră personalizate sunt căsuțe de selectare; folosiți-le pentru a decide ce intervale vor fi incluse în cantitatea de previziuni confirmate și raportate managerilor. <br><br>Un utilizator poate schimba starea de inclus/exclus și categoria {{forecastByModule}} în mod manual din foaia sa de lucru.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Selecteaza coloana pe care vrei ca utilizatorul sa o completeze pentru previziunile fiecarei {{forecastByModuleSingular}}. Atentie: Suma Previzibila este legata de suma afisata in {{forecastByModule}}; din acest motiv coloana Previzibil nu poate fi ascunsa.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Selecteaza coloanele pe care vrei sa le vizualizezi in modulul Previziuni. Lista campurilor va combina tabelul si va permite utilizatorilor sa aleaga felul in care vor sa isi configureze forma.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sunt un substituent pentru Previziune după cum se trimit mesaje text!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Mai mare cu',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Lipsă date',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Obiectiv atins',
+    'LBL_OPEN_LIKELY' => 'Previzibil deschis',
+    'LBL_OPEN_BEST' => 'Ideal deschis',
+    'LBL_OPEN_WORST' => 'Pesimist deschis',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Aloca obiectiv',
     'LBL_ASSIGNING_QUOTA' => 'Se aloca obiectiv',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Previziunea echipei mele",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Ai efectuat modificari care nu au fost salvate. Esti sigur ca vrei sa sortezi tabelul si sa renunti la aceste modificari?',
+
+    'LBL_SAVE_TOOLTIP' => 'Salvați modificările efectuate în rândurile din foaia de lucru',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Salvați modificările aduse înregistrărilor și trimiteți previziunea managerului',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Trimiteți previziunea managerului și atribuiți cota',
+
+    'LBL_SAVE_LABEL_REP' => 'Salvare ',
+    'LBL_SAVE_LABEL_MGR' => 'Salvați valorile ajustate',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} este format din înregistrări {{opportunities_singular_module}} pentru a crea {{module_name}} {{worksheet_module}} şi previziona vânzările. Utilizatorii pot colabora pentru atingerea cotei de vânzări la nivel individual, de echipă sau de organizaţie de vânzări. Înainte ca utilizatorii să poate accesa modulul {{plural_module_name}} pentru a începe crearea de {{module_name}} {{worksheet_module}}, un utilizator cu acces de administrator trebuie să configureze modulul {{plural_module_name}} cu Perioadele de timp, Limitele şi Scenariile dorite de organizaţie.

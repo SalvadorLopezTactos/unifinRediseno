@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Indirizzo Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Allegato Email',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Allegato e-mail per',
+    'LBL_NOTE_ATTACHMENT' => 'Allegati note',
+    'LBL_KB_ATTACHMENT' => 'Allegati KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'Allegati caso',
     'LBL_FILE_MIME_TYPE' => 'Tipo Mime',
     'LBL_FILE_EXTENSION' => 'Estensione file',
     'LBL_FILE_SOURCE' => 'Origine file',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Origine nota',
     'LBL_SOURCE_EXTERNAL' => 'Esterno',
     'LBL_SOURCE_INTERNAL' => 'Interno',
+    'LBL_PORTAL' => 'Portale',
 
     // Help Text
     // List View Help Text

@@ -515,7 +515,9 @@ const BeanCollection = Backbone.Collection.extend({
         // fix page number since our offset is already at the end of the collection subset
         options.page--;
 
-        if (maxSize && _.isNumber(this.offset)) {
+        if (!_.isUndefined(options.strictOffset) && options.strictOffset === true) {
+            options.offset = options.page * maxSize;
+        } else if (maxSize && _.isNumber(this.offset)) {
             options.offset = this.offset + (options.page * maxSize);
         }
 

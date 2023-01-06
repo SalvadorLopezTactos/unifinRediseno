@@ -30,8 +30,7 @@
 		{$vardef.name}
 	{/if}
         <script>
-            {literal}
-            addToValidateCallback("popup_form", "name", "callback", true, "{/literal}{sugar_translate module="DynamicFields" label="COLUMN_TITLE_NAME"}{literal}", (function(nameExceptions, existingFields) {
+            addToValidateCallback("popup_form", "name", "callback", true, "{sugar_translate module="DynamicFields" label="COLUMN_TITLE_NAME"}", (function(nameExceptions, existingFields) {
                 return function(formName, fieldName, index) {
                     var el = document.forms[formName].elements[fieldName],
                         value = el.value, i, arrValue;
@@ -42,7 +41,7 @@
                     }
 
                     if (!isDBName(value)) {
-                        validate[formName][index][msgIndex] = "{/literal}{sugar_translate module="DynamicFields" label="ERR_FIELD_NAME_NON_DB_CHARS"}{literal}";
+                        validate[formName][index][msgIndex] = "{sugar_translate module="DynamicFields" label="ERR_FIELD_NAME_NON_DB_CHARS"}";
                         return false;
                     }
 
@@ -52,25 +51,25 @@
                     for (i = 0; i < nameExceptions.length; i++) {
                         arrValue = nameExceptions[i];
                         if (arrValue == value) {
-                            validate[formName][index][msgIndex] = "{/literal}{sugar_translate module="DynamicFields" label="ERR_RESERVED_FIELD_NAME"}{literal}";
+                            validate[formName][index][msgIndex] = "{sugar_translate module="DynamicFields" label="ERR_RESERVED_FIELD_NAME"}";
                             return false;
                         }
                     }
 
-                    {/literal}{if $hideLevel == 0}{literal}
+                    {if $hideLevel == 0}
                     // check where field name is in the list of existing fields
                     for (i = 0; i < existingFields.length; i++) {
                         arrValue = existingFields[i];
                         if (arrValue == value) {
-                            validate[formName][index][msgIndex] = "{/literal}{sugar_translate module="DynamicFields" label="ERR_FIELD_NAME_ALREADY_EXISTS"}{literal}";
+                            validate[formName][index][msgIndex] = "{sugar_translate module="DynamicFields" label="ERR_FIELD_NAME_ALREADY_EXISTS"}";
                             return false;
                         }
                     }
-                    {/literal}{/if}{literal}
+                    {/if}
 
                     return true;
                 }
-            })({/literal}{$field_name_exceptions}, {$existing_field_names}));
+            })({$field_name_exceptions}, {$existing_field_names}));
         </script>
 	</td>
 </tr>

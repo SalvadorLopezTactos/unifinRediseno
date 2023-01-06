@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Просмотр шаблонов',
     'LNK_LIST_KBCATEGORIES' => 'Просмотр категорий',
     'LBL_TEMPLATES' => 'Шаблоны',
+    'LBL_TEMPLATE' => 'Шаблон',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Все содержимое будет перезаписано данными из шаблона.' .
         ' Вы действительно хотите использовать этот шаблон?',
     'LNK_IMPORT_KBCONTENTS' => 'Импорт статей',

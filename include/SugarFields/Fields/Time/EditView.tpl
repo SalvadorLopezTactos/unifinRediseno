@@ -39,15 +39,13 @@ var timeclosure_{{$idname}} = function(){ldelim}
 	var tabIndex = "{{$tabindex}}";
 	var callback = "{{$displayParams.updateCallback}}";
 	
-	{literal}
-	
+
 	SUGAR.util.doWhen(typeof(Time) != "undefined", function(){
 		var combo = new Time(timeField, idname, timeFormat, tabIndex);
 		//Render the remaining widget fields
 		var text = combo.html(callback);
 		document.getElementById(idname + "_time").innerHTML = text;	
 	});
-	{/literal}
 {rdelim}
 timeclosure_{{$idname}}();
 </script>

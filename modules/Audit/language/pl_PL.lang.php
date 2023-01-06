@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Pola śledzone w tym module:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Nie ma żadnych pól śledzonych w tym module',
     'LBL_CHANGE_LOG' => 'Dziennik inspekcji',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Po kontroli pola waluty są zapisywane w walucie niedomyślnej dla systemu. W dzienniku zmian stare i nowe wartości będą wyświetlane przeliczone do domyślnej waluty systemowej.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Po kontroli pola waluty są zapisywane w walucie niedomyślnej dla systemu. W dzienniku zmian stare i nowe wartości będą wyświetlane przeliczone do domyślnej waluty systemowej.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Aktualizuj do',
+    'LBL_BLANK' => '-brak-',
 );

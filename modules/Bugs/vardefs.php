@@ -12,6 +12,7 @@
 $dictionary['Bug'] = array(
     'table' => 'bugs',
     'audited' => true,
+    'escalatable' => true,
     'activity_enabled' => true,
     'comment' => 'Bugs are defects in products and services',
     'duplicate_merge' => true,
@@ -157,6 +158,15 @@ $dictionary['Bug'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
         ],
+        'escalations' => [
+            'name' => 'escalations',
+            'type' => 'link',
+            'relationship' => 'bug_escalations',
+            'module' => 'Escalations',
+            'bean_name' => 'Escalation',
+            'source' => 'non-db',
+            'vname' => 'LBL_ESCALATIONS',
+        ],
         'tasks' => array(
             'name' => 'tasks',
             'type' => 'link',
@@ -251,20 +261,7 @@ $dictionary['Bug'] = array(
         ),
     ),
     'indices' => array(
-        array(
-            'name' => 'idx_bug_name',
-            'type' => 'index',
-            'fields' => array(
-                'name',
-            ),
-        ),
-        array(
-            'name' => 'idx_bugs_assigned_user',
-            'type' => 'index',
-            'fields' => array(
-                'assigned_user_id',
-            ),
-        ),
+
     ),
     'relationships' => array(
         'bug_tasks' => array(
@@ -328,6 +325,17 @@ $dictionary['Bug'] = array(
             'lhs_key' => 'id',
             'rhs_module' => 'Messages',
             'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Bugs',
+        ],
+        'bug_escalations' => [
+            'lhs_module' => 'Bugs',
+            'lhs_table' => 'bugs',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Escalations',
+            'rhs_table' => 'escalations',
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
@@ -423,6 +431,7 @@ VardefManager::createVardef('Bugs', 'Bug', array(
     'assignable',
     'team_security',
     'issue',
+    'escalatable',
 ));
 
 //jc - adding for refactor for import to not use the required_fields array

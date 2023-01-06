@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'ดำเนินการกำหนดการตามเวลา',
 'LBL_OOTB_DATA_ARCHIVER' => 'ดำเนินการจัดเก็บ/ลบข้อมูลที่ใช้งานอยู่ถาวร',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'ตัวแปลงจีโอโค้ดระเบียน',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'ตัวไขจีโอโค้ด',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'ช่วงเวลา:',
 'LBL_LIST_LIST_ORDER' => 'เครื่องมือวางกำหนดการ:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'ในการตั้งค่า Crontab',
 'LBL_CRON_LINUX_DESC' => 'หมายเหตุ: ในการเรียกใช้เครื่องมือวางกำหนดการ Sugar ให้เพิ่มบรรทัดต่อไปนี้ในไฟล์ crontab: ',
 'LBL_CRON_WINDOWS_DESC' => 'หมายเหตุ: ในการเรียกใช้เครื่องมือวางกำหนดการ Sugar ให้สร้างไฟล์แบทช์เพื่อเรียกใช้ผ่าน Windows Scheduled Tasks ไฟล์แบทช์นี้ควรมีคำสั่งต่อไปนี้: ',
-'LBL_NO_PHP_CLI' => 'ถ้าโฮสต์ของคุณไม่มีไบนารี PHP ที่ใช้ได้ คุณสามารถใช้ wget หรือ curl เพื่อเริ่มต้นงานของคุณ<br>สำหรับ wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>สำหรับ curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'ถ้าโฮสต์ของคุณไม่มีไบนารี PHP ที่ใช้ได้ คุณสามารถใช้ wget หรือ curl เพื่อเริ่มต้นงานของคุณ<br>สำหรับ wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>สำหรับ curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'ล็อกของงาน',
 'LBL_EXECUTE_TIME'			=> 'เวลาเรียกใช้',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'นำไฟล์ชั่วคราวออก',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'สร้างข้อมูลความปลอดภัยของทีมที่ถูกดีนอร์มัลไลซ์ใหม่',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'อัปเดตคำอธิบายผลิตภัณฑ์',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'แผนที่ตัวแปลงจีโอโค้ด',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'ตัวไขจีโอโค้ด',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'เรียกใช้แคมเปญของอีเมลเป็นกลุ่มในช่วงกลางคืน',
 'LBL_ASYNCMASSUPDATE' => 'ดำเนินการอัปเดตเป็นกลุ่มแบบอะซิงโครนัส',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'ล้างข้อมูลรายการระเบียนเก่า',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'ตัวล้างสตรีมกิจกรรม',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'ดำเนินการกำหนดการตามเวลา',
+'LBL_SUGARJOBDATAARCHIVER' => 'ดำเนินการจัดเก็บ/ลบข้อมูลที่ใช้งานอยู่ถาวร',
 'LBL_PMSEENGINECRON' => 'เครื่องมือวางกำหนดการ SugarBPM',
 );
 

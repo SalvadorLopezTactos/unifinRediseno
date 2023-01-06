@@ -14,15 +14,14 @@ namespace Sugarcrm\Sugarcrm\Audit;
 
 use DBManagerFactory;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
-use InvalidArgumentException;
+use Doctrine\DBAL\Exception as DBALException;
 use JsonSerializable;
 use SugarBean;
-use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\FieldList as ErasureFieldList;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Subject;
 use Sugarcrm\Sugarcrm\Util\Uuid;
 use TimeDate;
+use Sugarcrm\IdentityProvider\Srn\Converter;
 
 class EventRepository
 {
@@ -100,16 +99,30 @@ class EventRepository
      */
     private function save(SugarBean $bean, string $eventType, $source)
     {
+        /* @var User $current_user */
+        global $current_user;
         $id =  Uuid::uuid1();
+
+        $impersonated_by = null;
+        if (isset($current_user->id) && null !== $current_user->sudoer) {
+            $srn = Converter::fromString($current_user->sudoer);
+            $srnResource = $srn->getResource();
+            if ('user' === $srnResource[0]) {
+                $impersonated_by = $srnResource[1];
+            }
+        }
 
         $this->conn->insert(
             'audit_events',
-            ['id' => $id,
-            'type' => $eventType,
-            'parent_id' => $bean->id,
-            'module_name' => $bean->module_name,
-            'source' => json_encode($source),
-            'date_created' => TimeDate::getInstance()->nowDb(),]
+            [
+                'id' => $id,
+                'type' => $eventType,
+                'parent_id' => $bean->id,
+                'module_name' => $bean->module_name,
+                'source' => json_encode($source),
+                'date_created' => TimeDate::getInstance()->nowDb(),
+                'impersonated_by' => $impersonated_by,
+            ]
         );
 
         return $id;
@@ -142,7 +155,8 @@ class EventRepository
 
         $auditTable = $bean->get_audit_table_name();
 
-        $selectWithLJoin = "SELECT  atab.field_name, atab.date_created, atab.after_value_string, ae.source, ae.type
+        $selectWithLJoin = "SELECT  atab.field_name, atab.date_created, atab.after_value_string, 
+                                    ae.source, ae.type, ae.impersonated_by
                             FROM {$auditTable} atab
                             LEFT JOIN audit_events ae ON (ae.id = atab.event_id) 
                             LEFT JOIN {$auditTable} atab2 ON";
@@ -190,7 +204,7 @@ class EventRepository
         $db = DBManagerFactory::getInstance();
 
         $return = [];
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $row['source'] = json_decode($row['source'], true);
             //convert date
             $row['date_created'] = $db->fromConvert($row['date_created'], 'datetime');

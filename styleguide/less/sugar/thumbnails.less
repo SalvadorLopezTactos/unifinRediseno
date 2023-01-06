@@ -28,9 +28,9 @@
   display: block;
   padding: 4px;
   line-height: @baseLineHeight;
-  border: 1px solid @grayLighter;
+  border: @borderWidget;
   border-radius: @baseBorderRadius;
-  box-shadow: 0 1px 3px fade(@black, 5.5%);
+  box-shadow: 0 1px 3px @borderColorLight;
   transition: all 0.2s ease-in-out;
 }
 // Add a hover state for linked versions only
@@ -49,7 +49,7 @@ a.thumbnail:hover {
 
 .thumbnail .caption {
   padding: 9px;
-  color: @gray;
+  color: @gray80;
 }
 
 /* twitter-bootstrap import END */
@@ -66,7 +66,7 @@ span.filetype-thumbnail {
 
 span.filetype-thumbnail {
   .ft-ribbon {
-    fill: @gray;
+    fill: @gray80;
   }
 
   &::before {
@@ -79,7 +79,7 @@ span.filetype-thumbnail {
     font-size: 10px;
     line-height: 15px;
     text-align: center;
-    background-color: @gray;
+    background-color: @gray80;
     content: attr(data-filetype);
   }
 }

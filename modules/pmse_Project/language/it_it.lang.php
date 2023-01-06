@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Creato dall&#39;utente',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Utente ultima modifica',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mail di sistema',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Modello documento',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Unione documenti',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Seleziona...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Unisci documento a PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Unione documenti',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Regola',
     'LBL_PMSE_LABEL_RULE' => 'Regola',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Aggiorna solo i record (Tutti gli aggiornamenti - Cfr- testo di aiuto)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nuovi record di primo aggiornamento',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nuovi record di tutti gli aggiornamenti',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Modifica relazione',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selezionare quando inizierà il flusso.<br><br>Nuovo: Eseguire il flusso quandi viene creato un nuovo record.<br><br>Primo aggiornamento: Il flusso viene eseguito solo la prima volta che vengono soddisfatti i criteri per un record esistente.<br><br>Tutti gli aggiornamento: Il flusso viene eseguito ogni volta che vengono soddisfatti i criteri per un record esistente.<br><br>Nuovi record o Primo aggiornamento: Il flusso viene eseguito solo la prima colta che viene soddisfatto il criterio per un record, durante la creazione del record o l&#39;aggiornamento del record.<br><br>Nuovi records e Tutti gli aggiornamento: Il flusso viene eseguito ogni volta per tutti i record nuovi ed esistenti.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selezionare quando inizierà il flusso.<br><br>Nuovo: Eseguire il flusso quando viene creato un nuovo record.<br><br>Primo aggiornamento: Il flusso viene eseguito solo la prima volta che vengono soddisfatti i criteri per un record esistente.<br><br>Tutti gli aggiornamento: Il flusso viene eseguito ogni volta che vengono soddisfatti i criteri per un record esistente.<br><br>Nuovi record o Primo aggiornamento: Il flusso viene eseguito solo la prima colta che viene soddisfatto il criterio per un record, durante la creazione del record o l&#39;aggiornamento del record.<br><br>Nuovi record e Tutti gli aggiornamento: Il flusso viene eseguito ogni volta per tutti i record nuovi ed esistenti.<br><br>Modifiche relazioni: Il flusso viene eseguito ogni volta che una relazione cambia.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Seleziona il modulo SugaCRM a cui applicare il trigger dell´evento',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Data Fissata',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Errore',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Valutazione modifica relazione',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Campi',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Valutazione Campo del Modulo',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modulo',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Tutti i record correlati',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Qualsiasi record correlato',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Aggiunto',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Cancellato',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Aggiunto o Cancellato',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Qualsiasi Relazione',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Tempo di esecuzione',
 

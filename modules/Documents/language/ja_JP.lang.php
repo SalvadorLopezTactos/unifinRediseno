@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => '商談品目',
     'LBL_PURCHASES_SUBPANEL_TITLE' => '購入',
     'LBL_PLIS_SUBPANEL_TITLE' => '購入商品',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'ドキュメント記録ダッシュボード',
+    'LBL_MY_DOCUMENTS' => 'マイドキュメント',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSignに送信',
 );

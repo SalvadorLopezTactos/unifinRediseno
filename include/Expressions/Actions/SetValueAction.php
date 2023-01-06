@@ -136,12 +136,17 @@ JS;
         }
         if ($result instanceof DateTime) {
             global $timedate;
+
+            // Sugar by default allows 15-minute intervals for DateTime fields, so here we round DateTime results to
+            // a 15-minute mark. Since we want to keep the date component of DateTime and Date results consistent with
+            // one another, we round DateTimes to the most recent 15-minute mark rather than the next 15-minute
+            // mark. This avoids DateTime results being pushed into the next day when they are evaluated between
+            // 23:45 and 0:00 UTC
             if (isset($def['type']) && ($def['type'] == 'datetime' || $def['type'] == 'datetimecombo')) {
-                $result = DateExpression::roundTime($result);
+                $result = DateExpression::roundTime($result, 'down');
                 $target->$field = $timedate->asDb($result);
             } else {
                 if (isset($def['type']) && $def['type'] == 'date') {
-                    $result = DateExpression::roundTime($result);
                     $target->$field = $timedate->asDbDate($result);
                 } else {
                     //If the target field isn't a date, convert it to a user formated string

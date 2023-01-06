@@ -34,6 +34,13 @@ $dictionary['Tag'] = array(
             'studio' => false,
             'exportable' => false,
         ),
+        'hint_accountsets_link' => array(
+            'name' => 'hint_accountsets_link',
+            'vname' => 'LBL_HINT_ACCOUNTSETS',
+            'type' => 'link',
+            'relationship' => 'hintaccountsets_tags',
+            'source' => 'non-db',
+        ),
     ),
     'relationships' => array(),
     'indices' => array(

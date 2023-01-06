@@ -13,7 +13,7 @@
 table#editor-content{
 	width: 100%;
 	/* hack for scrolling problems in IE6/7 */
-	#table-layout: fixed; 
+	#table-layout: fixed;
 }
 #editor-content ul {
 	/* hack for scrolling problems in IE6/7 other browsers should ignor these */
@@ -55,7 +55,7 @@ li {
 }
 
 li.deleted {
-    background-color: #AAA;
+    background-color: var(--primary-content-background-accent);
 }
 
 .deleted td.first {

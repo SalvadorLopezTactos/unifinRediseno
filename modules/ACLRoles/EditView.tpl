@@ -11,13 +11,10 @@
  */
 *}
 
-
 <script>
-{literal}
 function set_focus(){
 	document.getElementById('name').focus();
 }
-{/literal}
 </script>
 
 <form method='POST' name='EditView' action='index.php'>

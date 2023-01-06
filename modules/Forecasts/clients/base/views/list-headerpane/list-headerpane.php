@@ -18,14 +18,25 @@ $viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
         )
     ),
     'buttons' => array(
+        [
+            'name' => 'cancel_button',
+            'events' => [
+                'click' => 'button:cancel_button:click',
+            ],
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'css_class' => 'btn-invisible btn-link',
+            'acl_action' => 'current_user',
+        ],
         array(
             'name' => 'save_draft_button',
             'events' => array(
                 'click' => 'button:save_draft_button:click',
             ),
+            'tooltip' => 'LBL_SAVE_TOOLTIP',
             'type' => 'button',
             'label' => 'LBL_SAVE_DRAFT',
-            'css_class' => 'btn-group save-draft-button',
+            'css_class' => 'btn-secondary save-draft-button',
             'acl_action' => 'current_user',
         ),
         array(
@@ -40,9 +51,8 @@ $viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
                     'events' => array(
                         'click' => 'button:commit_button:click',
                     ),
-                    'tooltip' => 'LBL_COMMIT_TOOLTIP',
+                    'tooltip' => 'LBL_COMMIT_TOOLTIP_REP',
                     'css_class' => 'btn-primary disabled commit-button',
-                    'icon' => 'fa-arrow-circle-o-up',
                     'acl_action' => 'current_user',
                     'primary' => true
                 ),

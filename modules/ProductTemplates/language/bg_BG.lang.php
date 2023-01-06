@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Екип по поддръжка:',
   'LBL_SUPPORT_TERM' => 'Период на поддръжка:',
   'LBL_TAX_CLASS' => 'Форма на данъчно облагане:',
+  'LBL_ACTIVE_STATUS' => 'Статус',
   'LBL_TYPE_NAME'=>'Име',
   'LBL_TYPE' => 'Категория:',
   'LBL_PRODUCT_TYPE' => 'Тип на продукт',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Електронно табло със списък на продуктови каталози',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Електронно табло със записи на продуктови каталози',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на продуктови каталози',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Статусът е Активен',
 );

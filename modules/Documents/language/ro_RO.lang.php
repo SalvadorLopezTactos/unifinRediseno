@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Elemente venit',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Achiziții',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Articole achiziționate',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare documente',
+    'LBL_MY_DOCUMENTS' => 'Documentele mele',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Trimitere către DocuSign',
 );

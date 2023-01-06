@@ -16,12 +16,12 @@
 ({
     extendsFrom: 'EnumField',
 
+    /**
+     * @inheritdoc
+     */
     initialize: function(options) {
         this.plugins = _.union(this.plugins || [], ['Cascade']);
         this._super('initialize', [options]);
-        this.def.lblString = app.lang.get('LBL_UPDATE_OPPORTUNITIES_RLIS', 'Opportunities') +
-            ' ' +
-            app.lang.getModuleName('RevenueLineItems', {plural: true});
     },
 
     /**

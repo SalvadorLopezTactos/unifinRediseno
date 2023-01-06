@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class InferenceClassification extends Entity
 {
@@ -31,7 +29,7 @@ class InferenceClassification extends Entity
      * Gets the overrides
     * A set of overrides for a user to always classify messages from specific senders in certain ways: focused, or other. Read-only. Nullable.
      *
-     * @return array The overrides
+     * @return array|null The overrides
      */
     public function getOverrides()
     {
@@ -52,7 +50,7 @@ class InferenceClassification extends Entity
     */
     public function setOverrides($val)
     {
-		$this->_propDict["overrides"] = $val;
+        $this->_propDict["overrides"] = $val;
         return $this;
     }
     

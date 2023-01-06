@@ -136,8 +136,8 @@ class InboundEmail extends SugarBean {
 	var $ssl;
 	var $protocol;
 	var $keyForUsersDefaultIEAccount = 'defaultIEAccount';
-	// prefix to use when importing inlinge images in emails
-	public $imagePrefix;
+    // URL template to use when importing inline images in emails
+    public $imageUrlTemplate;
 	protected $module_key = 'InboundEmail';
 
 	/**
@@ -160,7 +160,9 @@ class InboundEmail extends SugarBean {
 
 		$this->smarty = new Sugar_Smarty();
 		$this->overview = new Overview();
-		$this->imagePrefix = "{$GLOBALS['sugar_config']['site_url']}/cache/images/";
+        $settings = new ApiSettings();
+        $this->imageUrlTemplate = rtrim(SugarConfig::getInstance()->get("site_url", false), '/')
+            . "/rest/" . $settings->formatVersionForUrl() . "/Notes/%s/file/filename?force_download=0&platform=base";
 	}
 
     public function __set($name, $value)
@@ -464,9 +466,10 @@ class InboundEmail extends SugarBean {
 	 * sets the cache timestamp
 	 * @param string mbox
 	 */
-	function setCacheTimestamp($mbox) {
+    public function setCacheTimestamp($mbox): void
+    {
 		$key = $this->db->quote("{$this->id}_{$mbox}");
-		$ts = mktime();
+        $ts = time();
 		$tsOld = $this->getCacheTimestamp($mbox);
 
 		if($tsOld < 0) {
@@ -1768,7 +1771,7 @@ class InboundEmail extends SugarBean {
 			$user = $current_user;
 		}
 
-		$routing = new SugarRouting($this);
+        $routing = new SugarRouting($this, $user);
 		if (!isset($routing->rules) || empty($routing->rules)) {
 		    // No point of going through results if there is no rule defined.
 		    return $searchResults;
@@ -2354,7 +2357,7 @@ class InboundEmail extends SugarBean {
 			$mailerId = (isset($_REQUEST['outbound_email'])) ? $_REQUEST['outbound_email'] : "";
 
 			$oe = new OutboundEmail();
-			$oe->getSystemMailerSettings($focusUser, $mailerId);
+            $oe->getSystemMailerSettings();
 
 			$stored_options = array();
 			$stored_options['from_name'] = trim($_REQUEST['from_name']);
@@ -2497,8 +2500,9 @@ class InboundEmail extends SugarBean {
                 $delimiter = $boxProperties['delim'];
             }
         }
-        $this->setSessionInboundDelimiterString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol, $delimiter);
-
+        if (!empty($this->remoteSystemName)) {
+            $this->setSessionInboundDelimiterString($this->remoteSystemName, $this->email_user, $this->port, $this->protocol, $delimiter);
+        }
 
         $connectionOptions = '{' . $this->remoteSystemName->value() . ':' . $this->port
             . '/service=' . $this->protocol . $servicesList . '}';
@@ -2914,6 +2918,11 @@ class InboundEmail extends SugarBean {
 		}
 	}
 
+    /**
+     * @deprecated since 11.1 This is now handled in Emails::handleCaseAssignment
+     * @param $email
+     * @return bool
+     */
 	function handleCaseAssignment($email) {
 		$c = BeanFactory::newBean('Cases');
 		if($caseId = $this->getCaseIdFromCaseNumber($email->name, $c)) {
@@ -2944,7 +2953,6 @@ class InboundEmail extends SugarBean {
 	function handleMailboxType(&$email, &$header) {
 		switch($this->mailbox_type) {
 			case 'support':
-				$this->handleCaseAssignment($email);
 				break;
 			case 'bug':
 
@@ -2963,9 +2971,7 @@ class InboundEmail extends SugarBean {
 				require_once('modules/Campaigns/ProcessBouncedEmails.php');
 				campaign_process_bounced_emails($email, $header);
 				break;
-			case 'pick': // do all except bounce handling
-				$GLOBALS['log']->debug('looking for a case for '.$email->name);
-				$this->handleCaseAssignment($email);
+            case 'pick':
 				break;
 		}
 	}
@@ -2986,18 +2992,30 @@ class InboundEmail extends SugarBean {
 			$GLOBALS['log']->debug('retrieveing email');
 			$email->retrieve($email->id);
 			$c = BeanFactory::newBean('Cases');
-			$c->description = $email->description;
-			if (empty($c->description) && !empty($email->description_html)) {
-			    $c->description = $email->description_html;
-			}
-			$c->assigned_user_id = $userId;
-			$c->name = $email->name;
-			$c->status = 'New';
-			$c->priority = 'P1';
-			$c->team_id = $_REQUEST['team_id'];
-			$c->team_set_id = $_REQUEST['team_set_id'];
-            $c->acl_team_set_id = $_REQUEST['acl_team_set_id'];
-            $c->pending_processing = true;
+
+            //set the default values for the new case bean
+            $description = $email->description ?: $email->description_html;
+            $description = htmlspecialchars_decode($description);
+            $caseDefaultValues = [
+                'description' => $description,
+                'assigned_user_id' => $userId,
+                'name' => $email->name,
+                'status' => 'New',
+                'priority' => 'P1',
+                'team_id' => $_REQUEST['team_id'],
+                'team_set_id' => $_REQUEST['team_set_id'],
+                'acl_team_set_id' => $_REQUEST['acl_team_set_id'],
+                'pending_processing' => true,
+            ];
+
+            //assign default case values but check for empty state first in case some logic hook,
+            //or custom studio default has already been assigned
+            foreach ($caseDefaultValues as $field => $default) {
+                if (empty($c->$field)) {
+                    $c->$field = $default;
+                }
+            }
+
 			if(!empty($email->reply_to_email)) {
 				$contactAddr = $email->reply_to_email;
 			} else {
@@ -3342,10 +3360,11 @@ class InboundEmail extends SugarBean {
 							if(empty($part) || empty($part->id)) continue;
 							$partid = substr($part->id, 1, -1); // strip <> around
 							if(isset($this->inlineImages[$partid])) {
-								$imageName = $this->inlineImages[$partid];
-								$newImagePath = "class=\"image\" src=\"{$this->imagePrefix}{$imageName}\"";
-								$preImagePath = "src=\"cid:$partid\"";
-								$msgPartRaw = str_replace($preImagePath, $newImagePath, $msgPartRaw);
+                                $imageName = $this->inlineImages[$partid];
+                                $imageUrl = sprintf($this->imageUrlTemplate, $imageName);
+                                $newImagePath = "class=\"image\" src=\"{$imageUrl}\"";
+                                $preImagePath = "src=\"cid:$partid\"";
+                                $msgPartRaw = str_replace($preImagePath, $newImagePath, $msgPartRaw);
 							}
 						}
 					}
@@ -3639,7 +3658,8 @@ class InboundEmail extends SugarBean {
 	 * @param array $breadcrumb Default 0, build up of the parts mapping
 	 * @param bool $forDisplay Default false
 	 */
-	function saveAttachments($msgNo, $parts, $emailId, $breadcrumb='0', $forDisplay) {
+    public function saveAttachments(int $msgNo, array $parts, string $emailId, int $breadcrumb, bool $forDisplay): void
+    {
 		global $sugar_config;
 		/*
 			Primary body types for a part of a mail structure (imap_fetchstructure returned object)
@@ -3847,12 +3867,8 @@ class InboundEmail extends SugarBean {
 		// if all was successful, feel for inline and cache Note ID for display:
 		if((strtolower($part->disposition) == 'inline' && in_array($part->subtype, $this->imageTypes))
 		    || ($part->type == 5)) {
-		    if(copy($uploadDir.$fileName, sugar_cached("images/{$fileName}.").strtolower($part->subtype))) {
-			    $id = substr($part->id, 1, -1); //strip <> around
-			    $this->inlineImages[$id] = $attach->id.".".strtolower($part->subtype);
-			} else {
-				$GLOBALS['log']->debug('InboundEmail could not copy '.$uploadDir.$fileName.' to cache');
-			}
+            $id = substr($part->id, 1, -1); //strip <> around
+            $this->inlineImages[$id] = $attach->id . "." . strtolower($part->subtype);
 		}
 	}
 
@@ -4317,17 +4333,17 @@ class InboundEmail extends SugarBean {
             // save uid to have ability to remove message from imap/pop
             $email->message_uid     = $uid;
 
-			$oldPrefix = $this->imagePrefix;
+            $oldUrlTemplate = $this->imageUrlTemplate;
 			if(!$forDisplay) {
 				// Store CIDs in imported messages, convert on display
-				$this->imagePrefix = "cid:";
+                $this->imageUrlTemplate = "cid:%s";
 			}
 			// handle multi-part email bodies
             // runs through handleTranserEncoding() already
             $email->description_html = $this->getMessageText($msgNo, 'HTML', $structure, $fullHeader, $clean_email);
             // runs through handleTranserEncoding() already
             $email->description = $this->getMessageText($msgNo, 'PLAIN', $structure, $fullHeader, $clean_email);
-			$this->imagePrefix = $oldPrefix;
+            $this->imageUrlTemplate = $oldUrlTemplate;
             if (empty($email->description)) {
                 $email->description = strip_tags($email->description_html);
             }
@@ -4487,7 +4503,7 @@ class InboundEmail extends SugarBean {
      * Import an email into Sugar
      * @param $uid
      * @return bool
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     public function importEmailFromUid($uid)
@@ -4776,13 +4792,9 @@ class InboundEmail extends SugarBean {
         if (($attachment['contentDisposition'] === 'inline' || $attachment['randomFileName']) &&
             in_array(strtoupper($subType), $this->imageTypes)
         ) {
-            if (copy($uploadDir . $fileName, sugar_cached('images/' . $fileName . '.') . strtolower($subType))) {
-                // Strip the <> around the Content-Id
-                $imageId = substr($attachment['contentId'], 1, -1);
-                $this->inlineImages[$imageId] = $noteBean->id . '.' . strtolower($subType);
-            } else {
-                $GLOBALS['log']->debug('InboundEmail could not copy ' . $uploadDir . $fileName . ' to cache');
-            }
+            // Strip the <> around the Content-Id
+            $imageId = substr($attachment['contentId'], 1, -1);
+            $this->inlineImages[$imageId] = $noteBean->id . '.' . strtolower($subType);
         }
     }
 
@@ -5147,6 +5159,8 @@ eoq;
 	}
 
     /**
+     * @deprecated since 11.1 This is now handled in Emails::getCaseIdFromCaseNumber
+     *
      * For mailboxes of type "Support" parse for '[CASE:%1]'
      *
      * @param string $emailName The subject line of the email
@@ -5456,7 +5470,7 @@ eoq;
 
 
 	function checkImap() {
-		global $mod_strings;
+        $mod_strings = return_module_language('en_us', 'InboundEmail');
 
         if (!extension_loaded('imap')) {
 			echo '
@@ -5518,9 +5532,13 @@ eoq;
      */
     protected function getImapMailer(Mailbox $mailbox)
     {
-        $mailer = new ImapMailer($mailbox, $this->email_user, $this->email_password, $this->eapm_id);
-
-        return $mailer->testSettings() ? $mailer : null;
+        try {
+            $mailer = new ImapMailer($mailbox, $this->email_user, $this->email_password, $this->eapm_id);
+            return $mailer->testSettings() ? $mailer : null;
+        } catch (\Exception $e) {
+            LoggerManager::getLogger()->error($e->getMessage());
+            return null;
+        }
     }
 
 	/**
@@ -6647,7 +6665,8 @@ eoq;
 	 * @param string mbox Name of mailbox using dot notation paths to display
 	 * @param string $forceRefresh Flag to use cache or not
 	 */
-	function displayFolderContents($mbox, $forceRefresh='false', $page) {
+    public function displayFolderContents($mbox, $forceRefresh = 'false', $page = 1)
+    {
 		global $current_user;
 
 		$delimiter = $this->get_stored_options('folderDelimiter');

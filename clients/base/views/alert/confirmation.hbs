@@ -12,12 +12,21 @@
 --}}
 <div class="alert-page-overlay"></div>
 <div class="alert-confirmation">
-    <div class="alert {{alertClass}} alert-block">
-        {{#if title}}<div class="indicator"><i class="fa {{alertIcon}}"></i> <strong>{{title}}</strong></div>{{/if}}
-        <div class="alert-messages{{#if hasBigMessage}} tleft{{/if}}">{{#each messages}}{{./this}} {{/each}}</div>
-        <div class="row-fluid">
-            <a class="span6 alert-btn-cancel" data-action="cancel">{{str alert.cancelLabel}}</a>
-            <a class="span6 alert-btn-confirm" data-action="confirm">{{str alert.confirmLabel}}</a>
+    <div class="alert {{alertClass}} alert-block rounded-md shadow-lg bg-alert-background block m-auto">
+        <div class="flex">
+            <div class="indicator pt-5 px-4">
+                <i class="sicon sicon-32 {{alertIcon}}"></i>
+            </div>
+            <span class="text pt-5 pr-4">
+                {{#if title}}
+                    <strong>{{title}}:</strong>
+                {{/if}}
+                {{#each messages}}{{./this}}{{/each}}
+            </span>
+        </div>
+        <div class="row-fluid flex justify-end">
+            <a class="alert-btn-cancel px-4 py-4 tbold uppercase" data-action="cancel">{{str alert.cancelLabel}}</a>
+            <a class="alert-btn-confirm px-4 py-4 tbold uppercase" data-action="confirm">{{str alert.confirmLabel}}</a>
         </div>
     </div>
 </div>

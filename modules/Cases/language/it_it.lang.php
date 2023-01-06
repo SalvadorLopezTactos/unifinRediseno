@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Per esempio, potresti usarlo per trovare un compito che è stato creato in precedenza',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Se hai un nuovo reclamo che vuoi segnalare, puoi cliccare quì e segnalare un nuovo Reclamo.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Cliccando quì verrai ricondotto a questa vista ogni volta.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interazioni reclamo',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tempistica reclamo',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
 

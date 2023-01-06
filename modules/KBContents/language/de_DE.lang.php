@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vorlagen anzeigen',
     'LNK_LIST_KBCATEGORIES' => 'Kategorien anzeigen',
     'LBL_TEMPLATES' => 'Vorlagen',
+    'LBL_TEMPLATE' => 'Vorlage',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Die Vorlage überschreibt alle Inhalte.' .
         ' Sind Sie sicher, dass Sie diese Vorlage verwenden möchten?',
     'LNK_IMPORT_KBCONTENTS' => 'Artikel importieren',

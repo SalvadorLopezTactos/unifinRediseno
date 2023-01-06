@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Përshkrim',
     'LBL_OW_TYPE'=>'Lloji',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Parashikimi i ekipit për <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Raport direkt',
     'LBL_FDR_OPPORTUNITIES'=>'Mundësitë në parashikim',
     'LBL_FDR_WEIGH'=>'Vlerat e matura të mundësive',
     'LBL_FDR_COMMIT'=>'Vlera e angazhimit',
     'LBL_FDR_DATE_COMMIT'=>'Data e angazhimit',
+    'LBL_FDR_FORECAST_HEADER' => 'Parashikimi i shitësit për <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Parashikimet: Tabela',
     'LBL_DV_MY_FORECASTS' => 'Parashikimet e mia',
-    'LBL_DV_MY_TEAM' => "Parashikimet e grupit tim" ,
+    'LBL_DV_MY_TEAM' => "Parashikimet e grupit tim",
     'LBL_DV_TIMEPERIODS' => 'Kohëzgjatja',
     'LBL_DV_FORECAST_PERIOD' => 'Kohëzgjatja e parashikimit',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Mundësitë e parashikimit',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Bazë të normës',
 
     'LBL_QUOTA' => 'Oferte',
-    'LBL_QUOTA_ADJUSTED' => 'Kuota (e rregulluar)',
+    'LBL_QUOTA_ADJUSTED' => 'Kuota e rregulluar',
 
     'LBL_FORECAST_FOR'=>'Fletë pune e parashikime për:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Mbledhje)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kuota kund. Kryerjes kundr. Aktuales',
 
     'LBL_FORECAST' => 'Parashikim',
+    'LBL_COMMITMENT' => 'Konfirmimi',
+    'LBL_TEAM_COMMITMENT' => 'Konfirmimi i ekipit',
+    'LBL_FORECASTED' => 'Parashikuar',
+    'LBL_ADJUSTED_TOTAL' => 'Totali i rregulluar',
     'LBL_COMMIT_STAGE' => 'Faza e perkushtimit',
     'LBL_SALES_STAGE' => 'Faza',
     'LBL_AMOUNT' => 'Vlerë',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, dhe {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'ka gjasa {{{direction}}} {{{from}}} deri në {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Më e mira {{{direction}}} {{{from}}} deri tek {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'më e keqja {{{direction}}} {{{from}}} deri tek {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Ka gjasa të ketë qëndruar e njejtë',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Më e mira të ketë qëndruar e njejtë',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Më e keqja të ketë qëndruar e njejtë',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Konfirmuar (me gjasa) {{{direction}}} {{{from}}} në {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Konfirmuar (më i miri) {{{direction}}} {{{from}}} në {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Konfirmuar (Më i dobëti) {{{direction}}} {{{from}}} në {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Konfirmuar (me gjasa) ka qëndruar njësoj',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Konfirmuar (më i miri) ka qëndruar njësoj',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Konfirmuar (më i dobëti) ka qëndruar njësoj',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'kjo muaj ne {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Totali i shfaqur',
     'LBL_TOTAL' => 'Totali:',
     'LBL_OVERALL_TOTAL' => 'Totali i përgjithshëm',
-    'LBL_EDITABLE_INVALID' => 'Vlerë e pavlefshme për {0}',
+    'LBL_EDITABLE_INVALID' => 'Vlerë e pavlefshme për {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Vlera duhet të jetë ndërmjet {0} dhe {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Ju keni ndryshime që nuk i keni ruajtur në fletën e punës.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Ju lutem vini re se vetëm të dhënat e ruajtura ose të kryera mund të eksportohen. Kliko OK për të vazhduar eksportimin, ose klikoni Anuloje që të kthehëni në fletën e punës.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'përfshirë',
     'LBL_CHART_NOT_INCLUDED' => 'Nuk përfshihen',
     'LBL_CHART_ADJUSTED' => 'I rregulluar',
-    'LBL_SAVE_DRAFT' => 'Ruaj Skicën',
+    'LBL_SAVE_DRAFT' => 'Ruaj',
     'LBL_CHANGES_BY' => 'Ndryshimet prej {0}',
     'LBL_FORECAST_SETTINGS' => 'Parametra',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data e fillimit të vitit fiskal',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfiguro periudhën kohore që do të përdoret në modulin e parashikimeve. <br /><br />Ju lutem vini re se parametrat e periudhës kohore nuk mund të ndryshohen pas instalimit fillestar. <br /><br />Filloni duke zgjedhur data e fillimit e vitit tuaj fiskal. Pastaj zgjidhni llojin e afatit të parashikimit. Gama e datave për afatet do të llogaritet automatikisht bazuar në zgjedhjen tuaj. Periudha nën kohaa është baza për fletën e punës së parashikimit. <br /><br />E ardhmja mund të shikohet dhe periudhat e kaluara kohore do të përcaktojë numrin e nën-periudhave të dukshme në modulin e parashikimeve. Përdoruesit janë në gjendje për të parë dhe të redaktuar numrat e parashikimit të nën-periudhave të dukshme.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfiguro si dëshiron të kategorizosh {{forecastByModule}}. <br><br>Ki parasysh që cilësimet e "Gama" nuk mund të ndryshohen pas paraqitjes së parë. Për instanca të përmirësuara, cilësimi "Gama" është i kyçur me të dhënat ekzistuese të "Parashikimi".<br><br>Mund të zgjedhësh dy a më shumë kategori bazuar në gamat e probabilitetit ose të krijosh kategori që nuk bazohen në probabilitet. <br><br>Ka kuti zgjedhjeje në të majtë të kategorive të personalizuara; përdori këto për të vendosur se cilat gama do të përfshihen në shumën e "Parashikimi" që u jepet dhe raportohet menaxherëve. <br><br>Përdoruesi mund ta ndryshojë manualisht statusin e përfshirjes/përjashtimit dhe kategorinë e {{forecastByModule}} nga fleta e punës.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfiguro mënyrën se si dëshiron të kategorizosh {{forecastByModule}}. <br><br>Ki parasysh se cilësimet e "Intervali" nuk mund të ndryshohen pas konfirmimit të parë. Për rastet e përditësimit, cilësimi i "Intervali" është i kyçur me të dhënat ekzistuese të "Parashikimi".<br><br>Mund të zgjedhësh dy ose më shumë kategori në bazë të intervaleve të probabilitetit ose të krijosh kategori të cilat nuk bazohen te probabiliteti. <br><br>Në të majtë të kategorive të personalizuara gjenden kutitë e verifikimit; përdori për të vendosur se cilat intervale do të përfshihen në vlerën e "Parashikimi" të konfirmuar dhe të raportuar te menaxherët. <br><br>Një përdorues mund të ndryshojë kategorinë e përfshirjes/përjashtimit të statusit të {{forecastByModule}} manualisht nga fleta e punës.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Zgjidhni kolonat ju do të donit që përdoruesit të plotësojnë për parashikimet e tyre të çdo {{forecastByModuleSingular}}. Ju lutem vini re shuma me gjasa është e lidhur me shumën e treguar në {{forecastByModule}}; për këtë arsye kolona të ngjarë nuk mund të fshihet.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Zgjidh cilat kolona që ju do të donit për të parë në modulin parashikimi. Lista e fushave do të kombinohet me fletën e punës dhe do të lejojë përdoruesit për të zgjedhur se si të konfiguroni pamjen e saj.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Unë jam një placeholder për parashikim se si të tekstoj!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Ka kaluar më',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Ska data',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Plotëson kuotën',
+    'LBL_OPEN_LIKELY' => 'Hap me gjasa',
+    'LBL_OPEN_BEST' => 'Hap më të mirin',
+    'LBL_OPEN_WORST' => 'Hap më të dobëtin',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Cakto kuota',
     'LBL_ASSIGNING_QUOTA' => 'Vlerësimi i kuotës',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Parashikimi i ekipit tim",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Ju nuk i keni ruajtur ndryshimet. Jeni të sigurt që dëshironi të sortoni fletën e punës dhe të hiqni dorë nga ndryshimet?',
+
+    'LBL_SAVE_TOOLTIP' => 'Ruaj ndryshimet e bëra në rreshtat e fletës së punës',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Ruaj ndryshimet te regjistrat dhe dërgo parashikimin te menaxheri',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Dërgo parashikimin te menaxheri dhe cakto kuotat',
+
+    'LBL_SAVE_LABEL_REP' => 'Ruaj ',
+    'LBL_SAVE_LABEL_MGR' => 'Ruaj vlerat e rregulluara',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => '{{plural_module_name}} moduli inkorporon regjistrime {{opportunities_singular_module}} për të ndërtuar {{module_name}} {{worksheet_module}} dhe për të parashikuar shitjet. Përdoruesit mund të punojnë përballë kuotave të shitjeve në nivel individual, ekipor dhe nivel shitjesh organizacionale. Përpara se përdoruesit të qasen në modulin {{plural_module_name}} për të filluar të ndërtojnë {{module_name}} {worksheet_module}}, një përdorues me qasje administratori duhet të konfigurojë modulin {{plural_module_name}} me Periudhat Kohore, Rangjet dhe Senariot e dëshiruara të kompanisë. Reprezantuesit e kompanisë përdorin modulin {{plural_module_name}} për të punuar me {{opportunities_module}} të caktuara si dhe me progresin e periudhës aktuale kohore. Këto përdorues do të kryejnë parashikime totale për shitjet e tyre personale  të bazuara në {{opportunities_module}} që ato presin ti mbyllin. Menaxherët e shitjes punojnë me {{opportunities_singular_module}} regjistrime të tyre ngjajshëm si reprezentuesit e shitjeve. Si shtesë, ato përmbledhin raportin e tyre i kryer nga shumat e {{module_name}} për të parashikuar shitjet totale të ekipit të tyre dhe punën përgjatë kuotës ekipore për çdo periudhë kohore. Raporte shtesë janë të ofruara nga elemente të inteligjencës së shteruar përfshirë analizat për fletë pune individuale {{opportunities_module}} dhe analiza për fletë pune të ekipit të menaxherit.'

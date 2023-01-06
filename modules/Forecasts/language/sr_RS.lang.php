@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Opis',
     'LBL_OW_TYPE'=>'Tip',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Prognoza tima za <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Direktni izveštaj',
     'LBL_FDR_OPPORTUNITIES'=>'Prodajne prilike u prognozi:',
     'LBL_FDR_WEIGH'=>'Ponderisan iznos prodajnih prilika:',
     'LBL_FDR_COMMIT'=>'Prihvaćen iznos',
     'LBL_FDR_DATE_COMMIT'=>'Datum prihvatanja',
+    'LBL_FDR_FORECAST_HEADER' => 'Prognoza prodavca za <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognoze: Tabela',
     'LBL_DV_MY_FORECASTS' => 'Moje Prognoze',
-    'LBL_DV_MY_TEAM' => "Prognoze mog tima" ,
+    'LBL_DV_MY_TEAM' => "Prognoze mog tima",
     'LBL_DV_TIMEPERIODS' => 'Vremenski periodi:',
     'LBL_DV_FORECAST_PERIOD' => 'Prognoziran vremenski period',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognoza prodajnih prilika',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Osnovna Stopa',
 
     'LBL_QUOTA' => 'Kvota',
-    'LBL_QUOTA_ADJUSTED' => 'Kvota (Prilagođeno)',
+    'LBL_QUOTA_ADJUSTED' => 'Prilagođena kvota',
 
     'LBL_FORECAST_FOR'=>'Tabela prognoza za:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Proširi)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kvota vs. Prihvaćeno vs. Stvarno',
 
     'LBL_FORECAST' => 'Prognoza',
+    'LBL_COMMITMENT' => 'Obaveza',
+    'LBL_TEAM_COMMITMENT' => 'Obaveza tima',
+    'LBL_FORECASTED' => 'Predviđeno',
+    'LBL_ADJUSTED_TOTAL' => 'Prilagođeno ukupno',
     'LBL_COMMIT_STAGE' => 'Faza Izvršenja',
     'LBL_SALES_STAGE' => 'Faza',
     'LBL_AMOUNT' => 'Iznos',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, i {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'verovatno {{{direction}}} {{{from}}} u {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'najbolje {{{direction}}} {{{from}}} u {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'najgore {{{direction}}} {{{from}}} u {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'verovatno je ostalo isto',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'najbolje je ostalo isto',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'najgore je ostalo isto',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Potvrđeno (verovatno) {{{direction}}} {{{from}}} do {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Potvrđeno (najbolje) {{{direction}}} {{{from}}} do {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Potvrđeno (najgore) {{{direction}}} {{{from}}} do {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Potvrđeno (verovatno) ostalo je isto',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Potvrđeno (najbolje) ostalo je isto',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Potvrđeno (najgore) ostalo je isto',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Ovog meseca na {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Prikazan total',
     'LBL_TOTAL' => 'Ukupno',
     'LBL_OVERALL_TOTAL' => 'Sveukupan Iznos',
-    'LBL_EDITABLE_INVALID' => 'Pogrešna Vrednost za {0}',
+    'LBL_EDITABLE_INVALID' => 'Neispravna vrednost za {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Vrednost mora da bude izmedju {0} i {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Imate nesačuvane promene u vašoj Radnoj listi.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Molim vas obratite pažnju da samo sačuvani ili namenjeni podaci mogu biti izvezeni. Kliknite OK da bi nastavili izvoz, ili kliknite Otkaži da bi ste se vratili na Radni list.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Uključeno',
     'LBL_CHART_NOT_INCLUDED' => 'Nije uključeno',
     'LBL_CHART_ADJUSTED' => '(Prilagodjen)',
-    'LBL_SAVE_DRAFT' => 'Sačuvaj nacrt',
+    'LBL_SAVE_DRAFT' => 'Sačuvaj',
     'LBL_CHANGES_BY' => 'Promene po {0}',
     'LBL_FORECAST_SETTINGS' => 'Podešavanja',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Premašuje za',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Nema podataka',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Ispunjava kvotu',
+    'LBL_OPEN_LIKELY' => 'Otvori Verovatno',
+    'LBL_OPEN_BEST' => 'Otvori Najbolje',
+    'LBL_OPEN_WORST' => 'Otvori Najgore',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Dodeli kvotu',
     'LBL_ASSIGNING_QUOTA' => 'Dodeljivanje kvote',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Prognoze mog tima",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Imate nesačuvane izmene. Da li ste sigurni da želite da uredite radni list i odbacite izmene?',
+
+    'LBL_SAVE_TOOLTIP' => 'Sačuvaj promene napravljene u redovima radnog lista',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Sačuvaj promene zapisa i prosledi prognozu menadžeru',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Prosledi prognozu menadžeru i dodeli kvotu',
+
+    'LBL_SAVE_LABEL_REP' => 'Sačuvaj ',
+    'LBL_SAVE_LABEL_MGR' => 'Sačuvaj prilagođene vrednosti',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => '{{plural_module_name}} modul sadrži {{forecastby_singular_module}} zapise za izgradnju {{forecastworksheets_module}} i predviđanje prodaje. Korisnici mogu da deluju {{quotas_module}} na individualnom, timskom i prodajnom nivou organizacije. Pre nego što korisnici pristupe {{plural_module_name}} modulu, administrator mora da odabere željene periode vremena, opsege i scenarije organizacije.

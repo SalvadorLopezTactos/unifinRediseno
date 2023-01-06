@@ -17,7 +17,7 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' =>'LNK_NEW_TAG',
         'acl_action'=>'create',
         'acl_module'=>$moduleName,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
         'route'=>'#'.$moduleName.'/create',
     ),
     array(
@@ -25,7 +25,7 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' =>'LNK_TAG_LIST',
         'acl_action'=>'list',
         'acl_module'=>$moduleName,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
     array(
         'route' => '#bwc/index.php?' . http_build_query(
@@ -38,6 +38,6 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' =>'LNK_IMPORT_TAGS',
         'acl_action'=>'import',
         'acl_module'=>$moduleName,
-        'icon' => 'fa-arrow-circle-o-up',
+        'icon' => 'sicon-upload',
     ),
 );

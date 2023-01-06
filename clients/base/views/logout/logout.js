@@ -23,7 +23,7 @@
      * @private
      */
     _render: function() {
-        this.logoUrl = app.metadata.getLogoUrl();
+        this.logoUrl = app.metadata.getLogoUrl(app.utils.isDarkMode());
         app.view.View.prototype._render.call(this);
         this.refreshAddtionalComponents();
         return this;

@@ -58,13 +58,6 @@ $dictionary['calls_contacts'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_call_call',
-            'type' => 'index',
-            'fields' => array(
-                'call_id',
-            ),
-        ),
-        array(
             'name' => 'idx_con_call_con',
             'type' => 'index',
             'fields' => array(

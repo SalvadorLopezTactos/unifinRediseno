@@ -50,7 +50,7 @@ class SugarUpgradeUpdateRelateFieldFilters extends UpgradeScript
 
         // For each row, investigate whether we need to update the data and, if so,
         // get it updated
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetchAssociative()) {
             // Run the row through the converter. If something changed then
             // handle saving that change
             $row = $this->convertRow($row);

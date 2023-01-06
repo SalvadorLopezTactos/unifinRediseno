@@ -62,8 +62,6 @@ class KBContentsFilterApi extends FilterApi
     {
         list($args, $q, $options, $seed) = parent::filterListSetup($api, $args, $acl);
 
-        $q->where()->equals('active_rev', '1');
-
         if (!empty($args['mostUseful'])) {
             $q->select()->fieldRaw('(kbcontents.useful - kbcontents.notuseful)', 'mu');
             $orderBy = new SugarQuery_Builder_Orderby($q, 'DESC');
@@ -104,6 +102,8 @@ class KBContentsFilterApi extends FilterApi
             $ids = !empty($ids) ? $ids : array('');
             $args['filter'][] = array('id' => array('$in' => $ids));
         }
+        $args['filter'][] = ['active_rev' => 1];
+
         return parent::filterList($api, $args, $acl);
     }
 

@@ -42,6 +42,17 @@
     },
 
     /**
+     * Disable double click to edit for the base currency
+     * @inheritdoc
+     */
+    doubleClickEdit: function(event) {
+        let row = this.$(event.target).parents('tr');
+        if (row.attr('name') !== 'Currencies_-99') {
+            this._super('doubleClickEdit', [event]);
+        }
+    },
+
+    /**
      * @inheritdoc
      **/
     _render: function() {

@@ -129,7 +129,7 @@
             this.render();
         } else {
             this.context.set(attrs);
-            this.context.reloadData({resetCollection: false});
+            this.context.reloadData({resetCollection: false, hideDbvWarning: true});
         }
 
         this.showPreviewPanel();

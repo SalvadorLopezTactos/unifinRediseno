@@ -12,60 +12,16 @@
  * @class View.Layouts.Base.FocusDrawerLayout
  * @alias SUGAR.App.view.layouts.BaseFocusDrawerLayout
  * @extends View.Layouts.Base.SideDrawerLayout
+ * @deprecated FocusDrawerLayout controller is deprecated as of 11.2.0. Use SideDrawerLayout instead.
  */
 ({
     extendsFrom: 'SideDrawerLayout',
 
     /**
      * @inheritdoc
-     * Add actions.
-     */
-    events: {
-        'click [data-action=close]': 'close',
-    },
-
-    /**
-     * Flag indicating if close and edit actions may be performed or not at the moment.
-     * @property {boolean}
-     */
-    areActionsEnabled: true,
-
-    /**
-     * Stores the context loaded in the drawer
-     */
-    currentContextDef: null,
-
-    /**
-     * {@inheritdoc}
      */
     initialize: function(options) {
+        app.logger.warn('FocusDrawerLayout controller is deprecated as of 11.2.0. Use SideDrawerLayout instead.');
         this._super('initialize', [options]);
-        this.bindEvents();
-    },
-
-    /**
-     * Initiates listening to application events.
-     */
-    bindEvents: function() {
-        app.events.on('drawer:enable:actions', this.enableButtonActions, this);
-    },
-
-    /**
-     * @inheritdoc
-     *
-     */
-    open: function(def, onClose) {
-        this._super('open', [def, onClose]);
-        this.currentContextDef = def;
-    },
-
-    /**
-     * Close only if the action is enabled.
-     */
-    close: function() {
-        if (this.areActionsEnabled) {
-            this._super('close');
-            this.currentContextDef = null;
-        }
-    },
+    }
 })

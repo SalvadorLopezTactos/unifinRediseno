@@ -12,6 +12,8 @@
 --}}
 <div class="controls btn-fit controls-one">
     <input type="hidden" name="{{name}}" class="select2{{#if def.css_class}} {{def.css_class}}{{/if}}{{#if def.placeholder}} placeholder="{{str def.placeholder this.model.module}}"{{/if}}"/>
-    <button class="btn address-book" data-name="{{name}}"><i class="fa {{#if def.icon}}{{def.icon}}{{else}}fa-book{{/if}}"></i></button>
+    <button class="btn address-book" data-name="{{name}}">
+        <i class="{{#if def.icon}}{{buildIcon def.icon}}{{else}}sicon sicon-user-group{{/if}}"></i>
+    </button>
     {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
 </div>

@@ -17,8 +17,11 @@ $GLOBALS['displayListView'] = true;
 require_once('modules/Reports/templates/templates_reports.php');
 require_once('modules/Reports/templates/templates_pdf.php');
 require_once('modules/Reports/templates/templates_export.php');
-
 require_once('modules/Reports/config.php');
+require_once 'src/Security/InputValidation/InputValidation.php';
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 global $current_language, $report_modules, $modules_report, $mod_strings;
 
 $args = array();
@@ -95,22 +98,7 @@ control($args);
 // show report interface
     if (isset($_REQUEST['page']) && $_REQUEST['page'] === 'report') {
         checkSavedReportACL($args['reporter'], $args);
-        if (!empty($_REQUEST['run_query'])) {
-            template_reports_report($args['reporter'], $args);
-            if (!empty($_REQUEST['expanded_combo_summary_divs'])) {
-                $expandDivs = explode(" ", $_REQUEST['expanded_combo_summary_divs']);
-                foreach ($expandDivs as $divId) {
-                    str_replace(" ", "", $divId);
-                    if ($divId !== '') {
-                        echo '<script>expandCollapseComboSummaryDiv(' . json_encode($divId, JSON_HEX_TAG) . ')
-                        </script>';
-                    }
-                }
-            }
-        } else {
-            include 'modules/Reports/ReportsWizard.php';
-        }
-
+        include 'modules/Reports/ReportsWizard.php';
     } else { // show report lists
         if (empty($_REQUEST['search_form_only'])) {
             $params = array();
@@ -125,7 +113,10 @@ control($args);
             echo getClassicModuleTitle("Reports", $params, true, '', $createURL) . '<div class="clear"></div>';
         }
 
-        include SugarAutoLoader::existingCustomOne("modules/Reports/ListView.php");
+        $fileToLoad = "modules/Reports/ListView.php";
+        if (file_exists($fileToLoad)) {
+            include SugarAutoLoader::existingCustomOne($fileToLoad);
+        }
     }
 
 }
@@ -290,12 +281,19 @@ function control(&$args)
 				}
 			}
 
-        $args['save_result'] = $args['reporter']->save($_REQUEST['save_report_as']);
-      header("location: index.php?module=Reports&action=index&page=report&id=".$args['reporter']->saved_report->id);
+        $reporterName = InputValidation::getService()->getValidInputRequest('save_report_as');
+        $args['save_result'] = $args['reporter']->save($reporterName);
+        header('location: index.php?'.
+          http_build_query(
+              [
+                  'module' => 'Reports',
+                  'action' => 'index',
+                  'page' => 'report',
+                  'id' => $args['reporter']->saved_report->id,
+              ]
+          ));
       exit;
-
   }
-
 
   if (isset($_REQUEST['delete_report_id']))
   {

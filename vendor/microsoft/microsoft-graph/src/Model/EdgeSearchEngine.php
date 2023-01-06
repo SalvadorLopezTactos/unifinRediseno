@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 /**
@@ -18,10 +17,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class EdgeSearchEngine extends EdgeSearchEngineBase
 {
@@ -39,12 +37,12 @@ class EdgeSearchEngine extends EdgeSearchEngineBase
     * Gets the edgeSearchEngineType
     * Allows IT admins to set a predefined default search engine for MDM-Controlled devices. Possible values are: default, bing.
     *
-    * @return EdgeSearchEngineType The edgeSearchEngineType
+    * @return EdgeSearchEngineType|null The edgeSearchEngineType
     */
     public function getEdgeSearchEngineType()
     {
         if (array_key_exists("edgeSearchEngineType", $this->_propDict)) {
-            if (is_a($this->_propDict["edgeSearchEngineType"], "Microsoft\Graph\Model\EdgeSearchEngineType")) {
+            if (is_a($this->_propDict["edgeSearchEngineType"], "\Microsoft\Graph\Model\EdgeSearchEngineType") || is_null($this->_propDict["edgeSearchEngineType"])) {
                 return $this->_propDict["edgeSearchEngineType"];
             } else {
                 $this->_propDict["edgeSearchEngineType"] = new EdgeSearchEngineType($this->_propDict["edgeSearchEngineType"]);

@@ -214,7 +214,7 @@
             this.$el.append(comp.el);
         } else if(this.meta.preview) {
             //preview mode
-            this.$el.addClass('preview-data');
+            this.$el.addClass('dashlet-preview pt-4 px-2');
             this.$('[data-dashlet=dashlet]').append(comp.el);
         } else if (_.isUndefined(def)) {
             this.$('[data-dashlet=dashlet]').after(comp.el);
@@ -481,8 +481,8 @@
         }
         this.isCollapsed = collapsed;
 
-        this.$(".dashlet-toggle > i").toggleClass("fa-chevron-down", collapsed);
-        this.$(".dashlet-toggle > i").toggleClass("fa-chevron-up", !collapsed);
+        this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-down', collapsed);
+        this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-up', !collapsed);
         this.$(".thumbnail").toggleClass("collapsed", collapsed);
         this.$("[data-dashlet=dashlet]").toggleClass("hide", collapsed);
 

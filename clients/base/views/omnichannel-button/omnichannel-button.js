@@ -16,7 +16,7 @@
  * @extends View.View
  */
 ({
-    className: 'omni-button',
+    className: 'omni-button flex items-center',
 
     events: {
         'click [data-action=omnichannel]': 'openConsole',
@@ -76,11 +76,11 @@
             console = this._getConfigConsole();
             if (console) {
                 console.$el.attr('data-config', true);
+                this.$('.config-menu').attr('data-mode', 'open');
+                console.isConfigPaneExpanded = true;
                 console.open();
             }
         }
-        this.$('.config-menu').attr('data-mode', 'open');
-        console.isConfigPaneExpanded = true;
     },
 
     /**
@@ -100,13 +100,33 @@
      * @inheritdoc
      */
     _renderHtml: function() {
-        this.isAvailable = app.api.isAuthenticated() && // user has logged in
-            !!app.config.awsConnectInstanceName && // aws connect is configured
-            _.indexOf(app.user.get('licenses'), 'SUGAR_SERVE') !== -1; // user has serve license
-
-        this.isSysAdmin = (app.user.get('type') === 'admin');
+        this.isAvailable = this._isAvailable();
+        this.configAvailable = this._configAvailable();
 
         this._super('_renderHtml');
+    },
+
+    /**
+     * Util to determine if SugarLive is available for this user
+     *
+     * @return {boolean} True if SugarLive should be available
+     * @private
+     */
+    _isAvailable: function() {
+        return app.api.isAuthenticated() &&
+            app.user.hasSellServeLicense() &&
+            app.user.isSetupCompleted() &&
+            !!app.config.awsConnectInstanceName; // aws connect is configured
+    },
+
+    /**
+     * Util to determine if SugarLive config should be available for the current user.
+     *
+     * @return {boolean} True if the user should be able to open SugarLive Config
+     * @private
+     */
+    _configAvailable: function() {
+        return app.user.get('type') === 'admin' && app.user.hasSellServeLicense();
     },
 
     /**
@@ -180,7 +200,6 @@
         });
         console.initComponents();
         console.loadData();
-        console.$el.hide();
         console.render();
         this._bindConsoleListeners(console);
         $('#sidecar').append(console.$el);

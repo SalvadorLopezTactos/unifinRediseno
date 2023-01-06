@@ -241,7 +241,7 @@ class CalendarController extends SugarController
             ACLController::displayNoAccess(true);
         }
 
-        $cal = new Calendar($_REQUEST['view']);
+        $cal = new CalendarBWC($_REQUEST['view']);
 
         if (in_array($cal->view, array('day', 'week', 'month'))){
             $cal->add_activities($GLOBALS['current_user']);

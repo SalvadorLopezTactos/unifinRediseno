@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Champ(s) audité(s) :',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Aucun champ n&#39;est audité dans ce module',
     'LBL_CHANGE_LOG' => 'Log d&#39;audit',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Lorsque les champs devises audités sont enregistrés dans une devise autre que les devises par défaut du système, le journal des modifications affiche les valeurs anciennes et nouvelles dans la devise par défaut reconvertie, définie par le système.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Lorsque les champs devises audités sont enregistrés dans une devise autre que les devises par défaut du système, le journal des modifications affiche les valeurs anciennes et nouvelles dans la devise par défaut reconvertie, définie par le système.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Mettre à jour vers',
+    'LBL_BLANK' => '-vide-',
 );

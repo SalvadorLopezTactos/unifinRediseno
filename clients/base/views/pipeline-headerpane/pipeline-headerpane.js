@@ -15,7 +15,7 @@
  */
 ({
     events: {
-        'click button[name=pipelineBtn]': 'changePipeline'
+        'click .tab-badgeable > a[name=pipelineBtn]': 'changePipeline',
     },
 
     /**
@@ -49,12 +49,12 @@
      */
     changePipeline: function(event) {
         var $currentTarget = this.$(event.currentTarget);
-        if ($currentTarget.hasClass('selected')) {
+        if ($currentTarget.hasClass('active')) {
             return;
         }
 
-        this.$('button[name=pipelineBtn]').removeClass('selected');
-        $currentTarget.addClass('selected');
+        this.$('.tab.active').removeClass('active');
+        $currentTarget.addClass('active');
         var pipelineType = $currentTarget.data('pipeline');
 
         // set the new last state

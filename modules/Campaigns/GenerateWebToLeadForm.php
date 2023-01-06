@@ -58,6 +58,12 @@ if(!empty($_REQUEST['post_url'])){
 if(!empty($_REQUEST['redirect_url']) && $_REQUEST['redirect_url'] !="http://"){
     $web_redirect_url= $_REQUEST['redirect_url'];
 }
+if (!empty($_REQUEST['redirect_request_type'])) {
+    $redirectRequestType = $_REQUEST['redirect_request_type'];
+}
+
+$redirectIncludeParams = !empty($_REQUEST['redirect_include_params']) ? 1 : 0;
+
 if(!empty($_REQUEST['notify_campaign'])){
     $web_notify_campaign = $_REQUEST['notify_campaign'];
 }
@@ -70,9 +76,6 @@ if(!empty($_REQUEST['campaign_id'])){
 if(!empty($_REQUEST['assigned_user_id'])){
     $web_assigned_user = $_REQUEST['assigned_user_id'];
 }
-
-
-
 if(isset($_REQUEST['team_name']) && !empty($_REQUEST['team_name'])){
 	$sfh = new SugarFieldHandler();
 	$sf = $sfh->getSugarField('Teamset', true);
@@ -508,6 +511,14 @@ if(!empty($web_form_campaign)){
 if(!empty($web_redirect_url)){
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='redirect_url' name='redirect_url' value='$web_redirect_url'></td></tr>";
 }
+if (!empty($redirectRequestType)) {
+    $redirectRequestType = htmlspecialchars($redirectRequestType);
+    $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='redirectRequestType' name='redirectRequestType' value='$redirectRequestType'></td></tr>";
+}
+
+$redirectIncludeParams = htmlspecialchars($redirectIncludeParams);
+$Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='redirectIncludeParams' name='redirectIncludeParams' value='$redirectIncludeParams'></td></tr>";
+
 if(!empty($web_assigned_user)){
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='assigned_user_id' name='assigned_user_id' value='$web_assigned_user'></td></tr>";
 }

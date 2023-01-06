@@ -49,7 +49,7 @@
 				<img border="0" src="index.php?entryPoint=getImage&imageName=jscalendar.gif" alt="{$APP.LBL_ENTER_DATE|escape:'html':'UTF-8'}" id="repeat_until_trigger" align="absmiddle" style="display: none;">
 							
 				<script type="text/javascript">
-						Calendar.setup ({literal}{{/literal}
+						Calendar.setup ({
 							inputField : "repeat_until_input",
 							ifFormat : "{$CALENDAR_FORMAT|escape:'javascript':'UTF-8'}",
 							daFormat : "{$CALENDAR_FORMAT|escape:'javascript':'UTF-8'}",
@@ -59,7 +59,7 @@
 							step : 1,
 							startWeekday: {$CALENDAR_FDOW|default:'0'},
 							weekNumbers:false
-						{literal}}{/literal});
+						});
 				</script>														
 			</div>
 		</td>
@@ -79,7 +79,7 @@
 </div>
 
 <script type="text/javascript">	
-{literal}
+
 	function toggle_repeat_type(){
 		
 		if(typeof validate != "undefined" && typeof validate['CalendarRepeatForm'] != "undefined")
@@ -116,7 +116,7 @@
 			if(typeof validate != "undefined" && typeof validate['CalendarRepeatForm'] != "undefined"){
 				removeFromValidate('CalendarRepeatForm', 'repeat_until');
 			}
-			addToValidateMoreThan('CalendarRepeatForm', 'repeat_count', 'int', true,'{/literal}{$MOD.LBL_REPEAT_COUNT|escape:'javascript':'UTF-8'}{literal}', 1);			
+			addToValidateMoreThan('CalendarRepeatForm', 'repeat_count', 'int', true,'{$MOD.LBL_REPEAT_COUNT|escape:'javascript':'UTF-8'}', 1);
 		}else{
 			document.forms['CalendarRepeatForm'].repeat_count.setAttribute("disabled","disabled");			
 			document.forms['CalendarRepeatForm'].repeat_until.removeAttribute("disabled");
@@ -125,7 +125,7 @@
 			if(typeof validate != "undefined" && typeof validate['CalendarRepeatForm'] != "undefined"){
 				removeFromValidate('CalendarRepeatForm', 'repeat_count');
 			}
-			addToValidate('CalendarRepeatForm', 'repeat_until', 'date', true,'{/literal}{$MOD.LBL_REPEAT_UNTIL|escape:'javascript':'UTF-8'}{literal}'); 		
+			addToValidate('CalendarRepeatForm', 'repeat_until', 'date', true,'{$MOD.LBL_REPEAT_UNTIL|escape:'javascript':'UTF-8'}');
 		}
 		
 		// prevent an issue when a calendar date picker is hidden under a dialog
@@ -137,6 +137,6 @@
 			}
 		}		
 	}
-{/literal}
+
 </script>
 

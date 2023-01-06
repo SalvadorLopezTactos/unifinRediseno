@@ -196,6 +196,9 @@ $createURL = 'index.php?module=Reports&report_module=&action=index&page=report&C
 echo getClassicModuleTitle("Reports", $params, true, '', $createURL);
 
 // show report interface
+$viewMode = (($_REQUEST['mode'] ?? '') == 'edit') ? 'edit' : '';
+echo '<script>var viewMode = "' . $viewMode . '";</script>';
+
 if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'report') {
     checkSavedReportACL($args['reporter'], $args);
 

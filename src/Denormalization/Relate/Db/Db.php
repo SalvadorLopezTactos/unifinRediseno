@@ -22,7 +22,7 @@ use UnexpectedValueException;
 abstract class Db implements OfflineOperations, OnlineOperations
 {
     /** @var string */
-    protected const TMP_TABLE_NAME = "denorm_tmp";
+    protected const DEFAULT_TMP_TABLE_NAME = "denorm_tmp";
 
     /** @var string */
     protected const TMP_PRIMARY_INDEX_NAME = 'denorm_tmp_idx';
@@ -35,6 +35,9 @@ abstract class Db implements OfflineOperations, OnlineOperations
 
     /** @var Connection */
     protected $connection;
+
+    /** @var string */
+    protected $tmpTableName;
 
     public function __construct()
     {
@@ -70,7 +73,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
 
     public function createTemporaryTable(array $fieldDefForValue): void
     {
-        if ($this->db->tableExists(self::TMP_TABLE_NAME)) {
+        if ($this->db->tableExists($this->getTmpTableName())) {
             $this->dropTemporaryTable();
         }
 
@@ -78,6 +81,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
             'name' => 'value',
             'type' => $fieldDefForValue['type'],
             'len' => $fieldDefForValue['len'] ?? null,
+            'dbType' => $fieldDefForValue['dbType'] ?? null,
         ];
 
         $fieldDefs = [
@@ -97,26 +101,26 @@ abstract class Db implements OfflineOperations, OnlineOperations
         ];
         $index = [
             'type' => 'primary',
-            'name' => self::TMP_PRIMARY_INDEX_NAME,
+            'name' => $this->getPrimaryIndexName(),
             'fields' => ['id'],
         ];
 
-        $this->db->createTableParams(self::TMP_TABLE_NAME, $fieldDefs, $index);
+        $this->db->createTableParams($this->getTmpTableName(), $fieldDefs, $index);
     }
 
     public function dropTemporaryTable(): void
     {
-        $this->db->dropTableName(self::TMP_TABLE_NAME);
+        $this->db->dropTableName($this->getTmpTableName());
     }
 
     public function getTemporaryTableCount(): int
     {
-        return $this->getTableRowCount(self::TMP_TABLE_NAME);
+        return $this->getTableRowCount($this->getTmpTableName());
     }
 
     public function getTableRowCount(string $tableName): int
     {
-        $result = $this->connection->fetchColumn("SELECT COUNT(*) FROM $tableName");
+        $result = $this->connection->fetchOne("SELECT COUNT(*) FROM $tableName");
 
         return (int) $result;
     }
@@ -136,8 +140,8 @@ abstract class Db implements OfflineOperations, OnlineOperations
 
     public function ensureTemporaryTableIndex(): void
     {
-        $tmpTableName = self::TMP_TABLE_NAME;
-        $tmpTargetIdIndexName = self::TMP_TARGET_ID_INDEX_NAME;
+        $tmpTableName = $this->getTmpTableName();
+        $tmpTargetIdIndexName = $this->getTargetIdIndexName();
 
         $index = $this->db->get_index($tmpTableName, $tmpTargetIdIndexName);
 
@@ -147,7 +151,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
                 ['name' => 'id'],
             ];
             $sql = $this->db->createIndexSQL($tmpTableName, $fields, $tmpTargetIdIndexName);
-            $this->connection->exec($sql);
+            $this->connection->executeStatement($sql);
         }
     }
 
@@ -161,7 +165,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
     {
         $sql = $this->getAlterSql($tableName, $fieldDef);
         if ($sql) { // otherwise the table is in sync
-            $this->connection->exec($sql);
+            $this->connection->executeStatement($sql);
         }
     }
 
@@ -196,7 +200,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
             )
             ->where("t.deleted = 0");
 
-        $tmpTableName = self::TMP_TABLE_NAME;
+        $tmpTableName = $this->getTmpTableName();
 
         $insertFieldList = ['target_id', 'value'];
 
@@ -237,8 +241,22 @@ abstract class Db implements OfflineOperations, OnlineOperations
         string $denormalizedFieldName,
         string $primaryTableName,
         string $primaryKey,
-        $value
+        $value,
+        $relatedId = null
     ): void {
+        $update = $this->connection->createQueryBuilder();
+
+        if ($relatedId) {
+            $update->update($primaryTableName)
+                ->set($denormalizedFieldName, ':value')
+                ->where("$primaryKey = :id")
+                ->setParameter('value', $value)
+                ->setParameter('id', $relatedId);
+
+            $update->execute();
+            return;
+        }
+
         if (!empty($joinTableName)) {
             $where = $this->connection->createQueryBuilder();
             $where->select($joinPrimaryKey)
@@ -249,7 +267,6 @@ abstract class Db implements OfflineOperations, OnlineOperations
             $whereSql = ":link_id";
         }
 
-        $update = $this->connection->createQueryBuilder();
         $update->update($primaryTableName)
             ->set($denormalizedFieldName, ':value')
             ->where($update->expr()->in($primaryKey, $whereSql))
@@ -283,10 +300,10 @@ abstract class Db implements OfflineOperations, OnlineOperations
         $update->execute();
     }
 
-    public function updateTemporaryTableWithValue(SugarBean $bean, $value): void
+    public function updateTemporaryTableWithValue(SugarBean $bean, $value, ?string $temporaryTableName): void
     {
         $builder = $this->connection->createQueryBuilder();
-        $builder->update(self::TMP_TABLE_NAME);
+        $builder->update($temporaryTableName ?? $this->getTmpTableName());
 
         $builder->set('value', ':value')
             ->where('target_id = :target_id')
@@ -300,7 +317,8 @@ abstract class Db implements OfflineOperations, OnlineOperations
         SugarBean $bean,
         string $relatedFieldName,
         string $relatedTableName,
-        string $relatedKey
+        string $relatedKey,
+        ?string $temporaryTableName
     ): void {
         $subQuery = $this->connection->createQueryBuilder();
         $subQuery->select($relatedFieldName)
@@ -308,7 +326,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
             ->where("$relatedKey = :target_id");
 
         $builder = $this->connection->createQueryBuilder();
-        $builder->update(self::TMP_TABLE_NAME);
+        $builder->update($temporaryTableName ?? $this->getTmpTableName());
 
         $builder->set('value', '(' . $subQuery->getSql() . ')')
             ->where('target_id = :target_id')
@@ -328,6 +346,26 @@ abstract class Db implements OfflineOperations, OnlineOperations
             ->where("id = :link_id")
             ->setParameter('link_id', $id)
             ->execute()
-            ->fetchColumn();
+            ->fetchOne();
+    }
+
+    public function setTmpTableName(string $name): void
+    {
+        $this->tmpTableName = $name;
+    }
+
+    public function getTmpTableName(): string
+    {
+        return $this->tmpTableName ?: self::DEFAULT_TMP_TABLE_NAME;
+    }
+
+    protected function getPrimaryIndexName(): string
+    {
+        return $this->getTmpTableName() . '_idx';
+    }
+
+    protected function getTargetIdIndexName(): string
+    {
+        return $this->getTmpTableName() . '_target_id_idx';
     }
 }

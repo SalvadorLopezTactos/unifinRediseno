@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Nume camp există deja',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Numele câmpului trebuie să conţină doar unul dintre următoarele caractere: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Niciun modul inclus Nu s-a putut salva',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Numele listei verticale există deja',
     'LBL_BTN_ADD' => 'Adauga',
     'LBL_BTN_EDIT' => 'Editeaza',
     'LBL_GENERATE_URL' => 'Geneareaza URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Adăugare coloană {0} la',
     'LBL_DONE' => 'Finalizat',
     'LBL_EXE_NON_SIM_MODE' => 'Executare mod non-simulare',
+    'LBL_CALCULATION_VISIBLE' => 'Faceți vizibil pentru calcule',
 );
-
-
-?>

@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Yanıtlanacak E-Posta Adresi Kimliği',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Yanıtlanacak E-Posta Adresi',
     'LBL_PRIMARY_TEAM' => 'Birincil Takım',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Tercih Edilen Gönderen Hesap',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-posta Ayarları Odak Bölmesi',
 );

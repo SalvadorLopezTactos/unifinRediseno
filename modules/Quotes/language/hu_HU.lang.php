@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Árajánlatok konfiguráció',
 
     'LBL_RENEWAL' => 'Megújítás',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Árajánlat interakciók',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Árajánlat idővonala',
 );

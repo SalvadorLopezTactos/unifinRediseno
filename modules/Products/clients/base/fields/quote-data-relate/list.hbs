@@ -12,13 +12,11 @@
 --}}
 <div class="ellipsis_inline relate-field-container" data-placement="bottom" data-container="body"
      title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}">
-    {{# if href}}
+    {{#if href}}
         <span class="ellipsis_inline">
             <a href="{{href}}">{{value}}</a>
         </span>
-        <span class="focus-icon-container hide">
-            <span class="focus-icon"></span>
-        </span>
+        {{partial 'focus-icon' this this}}
     {{else}}
         {{value}}
     {{/if}}

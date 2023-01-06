@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Megújítás bevételi tételsor azonosító',
     'LBL_PARENT_RLIS' => 'Szülő bevételi tételsorok',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Szülő bevételi tételsorok',
+    'LBL_FORECASTED_LIKELY' => 'Előrejelzés valószínű',
     'LBL_EXPERT_ID' => 'Termék szakértő',
     'LBL_FORECAST' => 'Belefoglal az előjelzésbe',
     'LBL_SUBTOTAL' => 'Részösszeg',

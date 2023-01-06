@@ -10,6 +10,7 @@
  */
 ({
     plugins: ['Prettify'],
+    className: 'container-fluid',
 
     initialize: function(options) {
         this._super('initialize', [options]);

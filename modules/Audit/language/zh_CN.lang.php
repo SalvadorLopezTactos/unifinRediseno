@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => '模块内审计的字段:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => '模块内无审计字段',
     'LBL_CHANGE_LOG' => '审计日志',
-    'LBL_CURRENCY_CONVERSION_TEXT' => '当已审计的货币字段是以非系统预设货币储存时，更改日志中将以系统预设货币显示旧值和新值。'
+    'LBL_CURRENCY_CONVERSION_TEXT' => '当已审计的货币字段是以非系统预设货币储存时，更改日志中将以系统预设货币显示旧值和新值。',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => '更新为',
+    'LBL_BLANK' => '-空-',
 );

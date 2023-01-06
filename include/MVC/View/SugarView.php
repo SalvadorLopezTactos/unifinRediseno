@@ -92,7 +92,7 @@ class SugarView
      * @param array $view_object_map
      * @param Request $request
      */
-    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    public function __construct($bean = null, $view_object_map = array(), ?Request $request = null)
     {
         $this->base_menu = SugarAutoLoader::loadExtension("menus", "application");
         $this->request = $request ?: InputValidation::getService();
@@ -126,7 +126,7 @@ class SugarView
         $this->_checkModule();
 
         //trackView has to be here in order to track for breadcrumbs
-        //$this->_trackView();
+        $this->_trackView();
 
         //For the ajaxUI, we need to use output buffering to return the page in an ajax friendly format
         // FIXME review this code (no more ajax load)
@@ -149,9 +149,9 @@ class SugarView
         }
 
         $this->_buildModuleList();
-        $this->preDisplay($params);
+        $this->preDisplay();
         $this->displayErrors($params);
-        $this->display($params);
+        $this->display();
         // add analytics to html pages
         if ($this->_getOption('show_javascript')) {
             $this->addAnalytics();
@@ -208,7 +208,7 @@ class SugarView
 
             $licenses = Subscription::SUGAR_BASIC_KEY;
             try {
-                $lt = $current_user->getLicenseTypes();
+                $lt = $current_user->getTopLevelLicenseTypes();
                 if (is_array($lt) && !empty($lt)) {
                     $licenses = implode(',', $lt);
                 }
@@ -440,14 +440,53 @@ class SugarView
 
             // Let's cache the results
             sugar_cache_put('company_logo_attributes',
-                            array(
-                                $ss->get_template_vars("COMPANY_LOGO_MD5"),
-                                $ss->get_template_vars("COMPANY_LOGO_WIDTH"),
-                                $ss->get_template_vars("COMPANY_LOGO_HEIGHT")
-                                )
+                array(
+                    $ss->getTemplateVars("COMPANY_LOGO_MD5"),
+                    $ss->getTemplateVars("COMPANY_LOGO_WIDTH"),
+                    $ss->getTemplateVars("COMPANY_LOGO_HEIGHT"),
+                )
             );
         }
-        $ss->assign("COMPANY_LOGO_URL",getJSPath($companyLogoURL)."&logo_md5=".$ss->get_template_vars("COMPANY_LOGO_MD5"));
+        $ss->assign("COMPANY_LOGO_URL", getJSPath($companyLogoURL) . "&logo_md5=" . $ss->getTemplateVars("COMPANY_LOGO_MD5"));
+
+        // handle resizing of the DARK MODE company logo correctly on the fly
+        $companyLogoDarkURL = $themeObject->getImageURL('company_logo_dark.png', true, true);
+        $companyLogoDarkURL_arr = explode('?', $companyLogoDarkURL);
+        $companyLogoDarkURL = $companyLogoDarkURL_arr[0];
+
+        $company_logo_attributes_dark = sugar_cache_retrieve('company_logo_attributes_dark');
+        if (!empty($company_logo_attributes_dark)) {
+            $ss->assign("COMPANY_LOGO_MD5_DARK", $company_logo_attributes_dark[0]);
+            $ss->assign("COMPANY_LOGO_WIDTH_DARK", $company_logo_attributes_dark[1]);
+            $ss->assign("COMPANY_LOGO_HEIGHT_DARK", $company_logo_attributes_dark[2]);
+        } else {
+            // Always need to md5 the file
+            $ss->assign("COMPANY_LOGO_MD5_DARK", md5_file($companyLogoDarkURL));
+
+            list($width,$height) = getimagesize($companyLogoDarkURL);
+            if ($width > 212 || $height > 40) {
+                $resizePctWidth  = ($width - 212) / 212;
+                $resizePctHeight = ($height - 40) / 40;
+                if ($resizePctWidth > $resizePctHeight) {
+                    $resizeAmount = $width / 212;
+                } else {
+                    $resizeAmount = $height / 40;
+                }
+                $ss->assign("COMPANY_LOGO_WIDTH_DARK", round($width * (1 / $resizeAmount)));
+                $ss->assign("COMPANY_LOGO_HEIGHT_DARK", round($height * (1 / $resizeAmount)));
+            } else {
+                $ss->assign("COMPANY_LOGO_WIDTH_DARK", $width);
+                $ss->assign("COMPANY_LOGO_HEIGHT_DARK", $height);
+            }
+
+            // Let's cache the results
+            sugar_cache_put('company_logo_attributes_dark', [
+                $ss->getTemplateVars("COMPANY_LOGO_MD5_DARK"),
+                $ss->getTemplateVars("COMPANY_LOGO_WIDTH_DARK"),
+                $ss->getTemplateVars("COMPANY_LOGO_HEIGHT_DARK"),
+            ]);
+        }
+        $ss->assign("COMPANY_LOGO_URL_DARK", getJSPath($companyLogoDarkURL) . "&logo_md5=" . $ss->getTemplateVars("COMPANY_LOGO_MD5_DARK"));
 
         // get the global links (Currently not used, since we hardcoded the metadata for profileactions
         // and upon upgrade, we convert global link in metadataconverter to create custom metadata
@@ -507,6 +546,14 @@ class SugarView
                 ? $current_user->user_name : $current_user->full_name );
             $ss->assign("CURRENT_USER_ID", $current_user->id);
 
+            // Fetches the user's appearance settings and makes it available in the template, so we can style BWC
+            // to match the rest of the application's appearance.
+            $appearance = $current_user->getUserPrefAppearanceDefault();
+            if ($appearance === 'system_default' && isset($_COOKIE['appearance'])) {
+                $appearance = $_COOKIE['appearance'];
+            }
+
+            $ss->assign('appearance', $appearance);
         }
 
         $bakModStrings = $mod_strings;
@@ -518,7 +565,7 @@ class SugarView
         $mod_strings = $bakModStrings;
         $headerTpl = $themeObject->getTemplate('header.tpl');
         if (inDeveloperMode() )
-            $ss->clear_compiled_tpl($headerTpl);
+            $ss->clearCompiledTemplate($headerTpl);
             $ss->display($headerTpl);
             $this->includeClassicFile('modules/Administration/DisplayWarnings.php');
 
@@ -850,37 +897,6 @@ EOHTML;
         $this->responseTime = number_format(round($deltaTime, 2), 2);
         // Print out the resources used in constructing the page.
         $this->fileResources = count(get_included_files());
-    }
-
-    protected function _getStatistics()
-    {
-        $endTime = microtime(true);
-        $deltaTime = $endTime - $GLOBALS['startTime'];
-        $response_time_string = $GLOBALS['app_strings']['LBL_SERVER_RESPONSE_TIME'] . ' ' . number_format(round($deltaTime, 2), 2) . ' ' . $GLOBALS['app_strings']['LBL_SERVER_RESPONSE_TIME_SECONDS'];
-        $return = $response_time_string;
-        if (!empty($GLOBALS['sugar_config']['show_page_resources'])) {
-            // Print out the resources used in constructing the page.
-            $included_files = get_included_files();
-
-            // take all of the included files and make a list that does not allow for duplicates based on case
-            // I believe the full get_include_files result set appears to have one entry for each file in real
-            // case, and one entry in all lower case.
-            $list_of_files_case_insensitive = array();
-            foreach($included_files as $key => $name) {
-                // preserve the first capitalization encountered.
-                $list_of_files_case_insensitive[mb_strtolower($name) ] = $name;
-            }
-            $return .= $GLOBALS['app_strings']['LBL_SERVER_RESPONSE_RESOURCES'] . '(' . DBManager::getQueryCount() . ',' . sizeof($list_of_files_case_insensitive) . ')<br>';
-            // Display performance of the internal and external caches....
-            $cacheStats = SugarCache::instance()->getCacheStats();
-            $return .= "External cache (hits/total=ratio) local ({$cacheStats['localHits']}/{$cacheStats['requests']}=" . round($cacheStats['localHits']*100/$cacheStats['requests'], 0) . "%)";
-            $return .= " external ({$cacheStats['externalHits']}/{$cacheStats['requests']}=" . round($cacheStats['externalHits']*100/$cacheStats['requests'], 0) . "%)<br />";
-            $return .= " misses ({$cacheStats['misses']}/{$cacheStats['requests']}=" . round($cacheStats['misses']*100/$cacheStats['requests'], 0) . "%)<br />";
-        }
-
-        $return .= $this->logMemoryStatistics();
-
-        return $return;
     }
 
     /**
@@ -1326,7 +1342,7 @@ EOHTML;
         if ( $module_favicon )
             $favicon = $themeObject->getImageURL($this->module.'_favico.png',false);
         if ( !sugar_is_file($favicon) || !$module_favicon )
-            $favicon = $themeObject->getImageURL('sugar_icon.ico',false);
+            $favicon = $themeObject->getImageURL('sugar-favicon.png', false);
 
         $extension = pathinfo($favicon, PATHINFO_EXTENSION);
         switch ($extension)

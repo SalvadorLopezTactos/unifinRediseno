@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Pasiūlymų konfigūravimas',
 
     'LBL_RENEWAL' => 'Atnaujinimas',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Įvykdyto pirkimo sąveikos',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pasiūlymo laiko juosta',
 );

@@ -21,7 +21,7 @@
     events: {
         'keyup .search-name': 'throttledSearch',
         'paste .search-name': 'throttledSearch',
-        'click .add-on.fa-times': 'clearInput'
+        'click .add-on.sicon-close': 'clearInput'
     },
 
     /**
@@ -141,10 +141,10 @@
      */
     formatModuleSelection: function(item) {
         // update the text for the selected module
-        this.getModuleFilter().html(item.text);
+        this.getModuleFilter().text(item.text);
         return '<span class="select2-choice-type">' +
             app.lang.get('LBL_MODULE') +
-            '<i class="fa fa-caret-down"></i></span>';
+            '<i class="sicon sicon-chevron-down"></i></span>';
     },
 
     /**
@@ -193,10 +193,10 @@
      * @param {Boolean} addIt TRUE if you want to add it, FALSE to remove
      */
     _toggleClearQuickSearchIcon: function(addIt) {
-        if (addIt && !this.$('.add-on.fa-times')[0]) {
-            this.$('.filter-view.search').append('<i class="add-on fa fa-times"></i>');
+        if (addIt && !this.$('.add-on.sicon-close')[0]) {
+            this.$('.filter-view.search').append('<i class="add-on sicon sicon-close"></i>');
         } else if (!addIt) {
-            this.$('.add-on.fa-times').remove();
+            this.$('.add-on.sicon-close').remove();
         }
     },
 

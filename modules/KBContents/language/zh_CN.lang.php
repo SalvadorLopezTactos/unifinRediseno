@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => '查看模板',
     'LNK_LIST_KBCATEGORIES' => '查看分类',
     'LBL_TEMPLATES' => '模板',
+    'LBL_TEMPLATE' => '模板',
     'LBL_TEMPATE_LOAD_MESSAGE' => '模板将覆写覆盖所有内容。' .
         '确定要使用此模板吗？',
     'LNK_IMPORT_KBCONTENTS' => '导入文章',

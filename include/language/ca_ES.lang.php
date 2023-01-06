@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'Previsions',
     'ForecastWorksheets' => 'Fulls de càlcul de previsió',
     'ForecastManagerWorksheets' => 'Fulls de càlcul del gestor de previsions',
-    'MergeRecords'=>'Combinació de registres',
       'VisualPipeline'=>'Objectiu visual',
       'ConsoleConfiguration' => 'Configuració de la consola',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'Rols',
     'Notifications'=>'Notificacions',
     'Sync'=>'Sincronització',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'Informes avançats',
     'DataSets' => 'Formats de dades',
     'CustomQueries' => 'Consultes personalitzades',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'Elements de línia comprats',
     'MobileDevices' => 'Dispositiusmòbils',
     'PushNotifications' => 'Notificacionsd&#39;inserció',
+    'Escalations' => 'Escalades',
+    'DocumentTemplates' => 'Plantilles de documents',
+    'DocumentMerges' => 'Fusions de documents',
     'WorkFlow' => 'Definicions del flux de treball',
     'EAPM' => 'Comptes externes',
     'Worksheet' => 'Full de càlcul',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'Festius',
     'ChangeTimers' => 'Canvia els temporitzadors',
     'Messages' => 'Missatges',
+    'Audit' => 'Auditoria',
+    'RevenueLineItems' => 'Elements de línies d&#39;ingressos',
+    'DocuSignEnvelopes' => 'Sobres de DocuSign',
+    'Geocode' => 'Geocodificar',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Ts',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'PD',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'EL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Full de càlcul de previsions',
     'ForecastManagerWorksheets' => 'Full de càlcul del gestor de previsions',
     'Quotas' => 'Quota',
-    'MergeRecords'=>'Combinació de registres',
     'Teams' => 'Equip',
     'TeamNotices' => 'Avís de l&#39;equip',
     'Activities' => 'Activitat',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'Compra',
     'PurchasedLineItems' => 'Element de línia comprat',
     'PushNotifications' => 'Notificaciód&#39;inserció',
+    'Escalations' => 'Escalada',
+    'DocumentTemplates' => 'Plantilla de document',
+    'DocumentMerges' => 'Fusió de documents',
     'WorkFlow' => 'Flux de treball',
     'EAPM' => 'Compte extern',
     'Worksheet' => 'Full de càlcul',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'Festiu',
     'ChangeTimers' => 'Canvia el temporitzador',
     'Messages' => 'Missatge',
+    'Audit' => 'Auditoria',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'Geocodificar',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'Serveis',
     'Other' => 'Un altre',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF i CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'En curs',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'Knowledge Base',
       'PurchasedLineItems' => 'Element de línia comprat',
       'Purchases' => 'Compra',
+      'Escalations' => 'Escalada',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Compte',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'Nota',
     'PurchasedLineItems' => 'Element de línia comprat',
     'Purchases' => 'Compra',
+    'Escalations' => 'Escalada',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'Comanda',
       'Ship' => 'Enviat',
   ),
+    'active_status_dom' => [
+        'Active' => 'Actiu',
+        'Inactive' => 'Inactiu',
+        'Retired' => 'Retirat',
+    ],
+    'appearance_options' => [
+        'system_default' => 'Utilitza la configuració del sistema',
+        'light' => 'Clar',
+        'dark' => 'Fosc',
+    ],
 
 
   'pricing_formula_default_key' => 'Fix',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'Televisió',
         'NewsLetter' => 'Butlletí de Notícies',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,12 +2049,14 @@ $app_list_strings = array (
         'print'       => 'Imprimir',
         'pieWedgeName'      => 'seccions',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'Gràfic circular',
+        'donut chart' => 'Gràfic de dònut',
+        'treemap chart' => 'Gràfic de mapa d&#39;arbre',
         'bar chart' => 'Gràfic de barres verticals',
-        'group by chart' => 'Gràfic de barres verticals agrupat',
+        'group by chart' => 'Gràfic de barres verticals agrupades',
         'horizontal bar chart' => 'Gràfic de barres horitzontals',
-        'horizontal group by chart' => 'Gràfic de barres horitzontals agrupat',
+        'horizontal group by chart' => 'Gràfic de barres horitzontals agrupades',
         'line chart' => 'Gràfic de línies',
         'funnel chart' => 'Gràfic d&#39;embut',
     ),
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'Preu (total més alt)',
             'total_revenue:asc' => 'Preu (total més baix)',
         ],
+        'calendar_type_list' => [
+          'main' => 'Centre del calendari',
+        ],
+        'calendar_views_options' => [
+          'day' => 'Dia',
+          'week' => 'Setmana',
+          'workWeek' => 'Setmana laboral',
+          'expandedMonth' => 'Mes',
+          'agenda' => 'Agenda',
+          'timeline' => 'Cronologia',
+          'monthSchedule' => 'Planificador',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'Creat',
+          'completed' => 'Completat',
+          'declined' => 'Refusat',
+          'delivered' => 'Entregat',
+          'sent' => 'Enviat',
+          'signed' => 'Signat',
+          'voided' => 'Anul·lat',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'Per defecte',
+            'color' => 'Color',
+            'image' => 'Imatge',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'Nou',
+            'In Progress' => 'En curs',
+            'Closed' => 'Tancat',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'Inactivitat',
+            'Lack of Progress' => 'Sense progrés',
+            'Customer-Imposed Deadline' => 'Data límit imposada pel client',
+            'Account at Risk' => 'Compte en risc',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'Sol·licitat pel client',
+            'Internally Requested' => 'Sol·licitat internament',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'Cas',
+            'Bugs' => 'Incidència',
+            'Accounts' => 'Compte',
+            'Opportunities' => 'Oportunitat',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'Positiu',
+            'Negative' => 'Negatiu',
+            'Neutral' => 'Neutral',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'No probable',
+            '02_less_likely' => 'Menys probable',
+            '03_neutral' => 'Neutral',
+            '04_more_likely' => 'Més probable',
+            '05_very_likely' => 'Molt probable',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'No coincideix amb cap client',
+            '02_no_match' => '',
+            '01_matches_customers' => 'Coincideix amb clients',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Seguir l&#39;enllaç',
   'LBL_TOGGLE_VISIBILITY' => 'Alternar la vista', // Record view header panel element
   'LBL_ACTIVITIES' => 'Seqüència d&#39;activitats',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar i el cub 3-D són marques comercials registrades de SugarCRM Inc. '.
         'La resta de noms d&#39;empreses i productes que es fan servir o que surten en aquest producte poden ser marques registrades de '.
         'SugarCRM ®, Sugar Enterprise™ i Sugar™ són marques registrades de SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'Afegir' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logotip de l&#39;empresa' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Calendari' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'Un valor desplegable que heu seleccionat ha canviat el disseny de la visualització de registres. ' .
+        'S&#39;esborren els valors dels camps amagats en aquest nou disseny. ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'navegació pel mòdul principal',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'Tancar',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} s&#39;ha marcat com {{status}}.',
 
+    'LBL_FOCUS' => 'Focus',
+
     'LBL_QUERY_VALID'=>'Vàlida',
     'LBL_QUERY_ERROR'=>'Error!',
     'LBL_QUERY_CHILD'=>'Subconsulta vàlida',
@@ -3066,8 +3183,12 @@ $app_strings = array (
     'LBL_CASES'=>'Casos',
     'LBL_MESSAGE'=>'Missatge',
     'LBL_MESSAGES'=>'Missatges',
+    'LBL_ESCALATIONS' => 'Escalades',
+    'LBL_ESCALATION' => 'Escalada',
+    'LBL_DOCUSIGN_ENVELOPES' => 'Sobres de DocuSign',
+    'LBL_DOCUSIGN_ENVELOPE' => 'Sobre de DocuSign',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
-    'LBL_CHANGE_PASSWORD' => 'Canviar contrasenya',
+    'LBL_CHANGE_PASSWORD' => 'Canvia la contrasenya',
     'LBL_CHANGE_BUTTON_LABEL' => 'Camviar',
     'LBL_CHANGE_BUTTON_TITLE' => 'Camviar [Alt+G]',
     'LBL_CHARSET' => 'UTF-8',
@@ -3091,6 +3212,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'Registres oberts:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Redactar Correu',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'Correu electrònic',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Redactar Correu [Alt+L]',
     'LBL_SEARCH_DROPDOWN_YES'=>'Si',
     'LBL_SEARCH_DROPDOWN_NO'=>'No',
@@ -3116,6 +3238,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Documents',
     'LBL_DATE_ENTERED' => 'Data de creació:',
     'LBL_DATE_MODIFIED' => 'Data de modificació:',
+    'LBL_ACTIVITY_MODIFIED' => 'Modificat',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Editeu la pestanya de resum',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'Editeu les pestanyes de mòdul',
     'LBL_EDIT_BUTTON' => 'Edita',
@@ -3138,6 +3261,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Seleccioni camp...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Seleccioni operador...',
     'LBL_FILTER_CREATE_NEW' => 'Crea',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'Crea un filtre (sense desar)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(sense desar)',
     'LBL_FILTER_CREATE_FILTER' => 'Crear Filtre',
     'LBL_FILTER_CLOSE_FILTER' => 'Tanca filtre',
     'LBL_FILTER_EDIT_FILTER' => 'Editar filtre',
@@ -3200,6 +3325,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => 'Més {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Activitats d´Avui',
     'LBL_LEADS'=>'Clients potencials',
+    'LBL_LEAD'=>'Client potencial',
+    'LBL_QUOTES_BILL_TO' => 'Pressupostos (Facturat a)',
     'LBL_LESS' => 'menys',
     'LBL_CAMPAIGN' => 'Campanya:',
     'LBL_CAMPAIGNS' => 'Campanyes',
@@ -3227,19 +3354,21 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'Si us plau, seleccioni almenys 2 registres per procedir.',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'Si us plau, seleccioni menys de 10 registres per procedir.',
     'LBL_LISTVIEW_ALL' => 'Tot',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'Congela la columna 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'Tots els duplicats',
     'LBL_LISTVIEW_NONE' => 'Res',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'Pàgina Actual',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Tots els Registres',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Registres Seleccionats',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Seleccionat: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Netejar seleccions.',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'Esborra totes les seleccions.',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'Seleccionar tots els registres',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'Hi ha més de {{num}} registres en el resultat. Ha seleccionat els primers {{num}} registres.',
     'TPL_LISTVIEW_SELECTED' => 'Heu seleccionat {{num}} registres del grup de resultats.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'Heu seleccionat 1 registre al grup de resultats.',
     'TPL_LISTVIEW_SELECTED_ALL' => 'Ha seleccionat tots els {{num}} registres del resultat.',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'Ha seleccionat tots els {{num}} registres en aquesta vista. {{link}} en el resultat.',
-    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Actualitzant {{num}} de {{total}}.',
+    'TPL_MASSUPDATE_PROGRESS_STATUS' => 'Actualitzant {{num}} de {{total}}',
     'TPL_MASSUPDATE_DURATION_FORMAT' => '(queden uns {{time}} {{unit}})',
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Error de l&#39;actualització massiva. Inicialitzant nou intent ({{num}} de {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Actualització Massiva incompleta. {{num}} registre(s) han quedat sense canviar.',
@@ -3247,7 +3376,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_WARNING_PERMISSION' => 'S&#39;ha(n) ignorat {{remain}} registre(s) per falta de permisos o per errors.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} registre(s) s&#39;ha(n) actualitzat correctament.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Actualització Massiva',
-    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Eliminant {{num}} de {{total}}.',
+    'TPL_MASSDELETE_PROGRESS_STATUS' => 'Eliminant {{num}} de {{total}}',
     'TPL_MASSDELETE_DURATION_FORMAT' => '(queden uns {{time}} {{unit}})',
     'TPL_MASSDELETE_FAIL_TO_ATTEMPT' => 'L&#39;eliminació massiva ha fallat. Iniciant nou intent ({{num}} de {{total}}).',
     'TPL_MASSDELETE_WARNING_CLOSE' => 'Eliminació massiva incompleta. {{num}} registre(s) pendent(s).',
@@ -3272,10 +3401,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Selecciona',
     'LBL_LISTVIEW_ACTIONS' => 'Accions',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'Selecciona tots els registres d&#39;aquesta pàgina',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'Elimina la selecció de tots els registres d&#39;aquesta pàgina',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} de {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} de Carregant...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Feu clic per total',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'de',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'Obté el nombre de pàgines',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Joan',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Pérez',
@@ -3283,10 +3419,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Codi mico extraordinari',
     'LBL_LOGIN_TO_ACCESS' => 'Si us plau, iniciï la sessió per accedir a aquest àrea.',
     'LBL_LOGOUT' => 'Sortir',
+    'LBL_FINISH_IMPERSONATING' => 'Finalitza la suplantació',
+    'LBL_RESET_MFA' => 'Restaura l&#39;autentificació de diversos factors',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}}, actualment esteu suplantant a {{user}}.',
     'LBL_PROFILE' => 'Perfil',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Combinar Correspondència',
     'LBL_MASS_UPDATE' => 'Actualització Massiva',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'Selecciona tots els registres per a l&#39;actualització massiva',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'Inclou el registre a l&#39;actualització massiva',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Afegir camp',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Treure Camp',
     'LBL_GENERATE_QUOTE' => 'Generar Pressupost',
@@ -3341,6 +3482,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'Més informació',
     'LBL_PANEL_BODY' => 'Visió general',
     'LBL_PARENT_TYPE' => 'Tipus d&#39;element principal',
+    'LBL_RELATED_TYPE' => 'Tipus relacionat',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'Fase',
     'LBL_PICTURE_FILE' => 'Avatar',
@@ -3414,7 +3556,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'Relacionats',
     'LBL_RELATED_INFORMATION' => 'Informació Relacionada',
-    'LBL_RELATED_RECORDS' => 'Registres Relacionats',
+    'LBL_RELATED_RECORDS' => '{{module}} relacionat',
     'LBL_REPORTS_TO' => 'Informa a',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'Indica camp obligatori',
@@ -3533,7 +3675,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Tots els drets reservats.<br />SugarCRM, Sugar i el cub 3-D són marques comercials registrades de SugarCRM Inc. '.
         'La resta de noms d&#39;empreses i productes que es fan servir o que surten en aquest producte poden ser marques registrades de '.
         'les empreses corresponents amb les quals estan associats.',
@@ -3598,6 +3740,7 @@ Atentament, SugarCRM',
     'LBL_UNDELETE' => 'Restaurar',
     'LBL_UNSYNC' => 'Desincronitzar',
     'LBL_UPDATE' => 'Actualitza',
+    'LBL_UPDATES' => 'Actualitzacions',
     'LBL_USER_LIST' => 'Llista d&#39;Usuaris',
     'LBL_USER_MENU' => 'Menú d&#39;usuari',
     'LBL_USERS_SYNC'=>'Sincronització d&#39;usuaris',
@@ -3664,6 +3807,8 @@ Atentament, SugarCRM',
     'NTC_DELETE_SUCCESS' => 'Ha eliminat el {0}.',
     'NTC_UNLINK_CONFIRMATION' => 'Està segur que vol desenllaçar aquest registre?',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'Esteu segur que voleu desvincular el {0}?',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'Segur que voleu desvincular el {0}? Això també ho suprimirà del camp Contacte principal del cas.',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'No es pot desvincular el {0} perquè és el contacte principal d&#39;aquest cas. Actualitzeu el camp Contacte principal abans de desvincular aquest registre.',
     'NTC_UNLINK_SUCCESS' => 'Ha desvinculat el {0}?',
     'NTC_LOGIN_MESSAGE' => 'Si us plau, introdueixi el seu nom d´usuari i la contrassenya.',
     'NTC_NO_ITEMS_DISPLAY' => 'Cap',
@@ -3695,6 +3840,9 @@ Atentament, SugarCRM',
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Actualitzar el navegador tancarà automàticament totes les sessions de trucada o de xat de SugarLive que heu obert i es perdran tots els canvis no desats. Voleu continuar?',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Teniu canvis que no s&#39;han desat. Estes segur que voleu abandonar la pàgina i descartar els canvis?',
+    'LBL_MFA_RESET_CONFIRMATION' => 'Segur que voleu restablir la vostra <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">autenticació de diversos factors</a>? 
+Aquesta acció tancarà d&#39;immediat la vostra sessió, i us haureu d&#39;autenticar amb l&#39;aplicació d&#39;autenticació la següent vegada que inicieu la sessió.',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'Confirma i tanca la sessió',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Un o més dashlets tenen canvis no desats. Esteu segur que voleu tancar el calaix?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Aneu cap al mòdul d&#39;informes. Els canvis fets al dashlet no es desaran. Voleu continuar?',
     'ERROR_NO_RECORD' => 'Error en recuperar el registre. Aquest registre s&#39;ha d&#39;eliminar o pot ser que no estigui autoritzat per veure&#39;l.',
@@ -3790,6 +3938,11 @@ Atentament, SugarCRM',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Actualment no te cap registre <item1> guardat. <item2> un ara.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Podeu crear <item1> des de <item2>. Llista <item3> <item2>.",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'Positiu',
+    'LBL_SENTIMENT_NEUTRAL' => 'Neutral',
+    'LBL_SENTIMENT_NEGATIVE' => 'Negatiu',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "Feu clic aquí",
     // contextMenu strings
@@ -3799,11 +3952,16 @@ Atentament, SugarCRM',
     'LBL_CREATE_NOTE' => 'Crear nota',
     'LBL_CREATE_OPPORTUNITY' => 'Crear oportunitat',
     'LBL_SCHEDULE_CALL' => 'Programa una trucada',
+    'LBL_SCHEDULE_CALL2' => 'Trucada',
     'LBL_SCHEDULE_MEETING' => 'Programa una reunió',
+    'LBL_SCHEDULE_MEETING2' => 'Reunió',
     'LBL_CREATE_MESSAGE' => 'Crea missatge',
+    'LBL_CREATE_MESSAGE2' => 'Missatge',
     'LBL_CREATE_TASK' => 'Crea una tasca',
+    'LBL_CREATE_TASK2' => 'Tasca',
     'LBL_REMOVE_FROM_FAVORITES' => 'Treure dels Meus Favorits',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'Nota',
     'LBL_DOWNLOAD_ALL' => 'Baixa-ho tot',
     'LBL_DOWNLOAD_ONE' => 'Baixa',
     'LBL_ATTACHMENTS' => 'Adjunts',
@@ -3843,13 +4001,14 @@ Atentament, SugarCRM',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Mostrar Files',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Es relacionen amb el registre actual',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Camp relacionat',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'Congela la primera columna',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Està segur que vol treure el Dashlet?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Esteu segur que voleu suprimir la fila?',
     'LBL_MAXIMUM_OF' => 'Un màxim de',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'columnes es poden mostrar.',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'Quadre de comandament',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'El meu Dashboard',
     'LBL_COLLAPSE_ALL' => 'Contraure Tot',
@@ -3866,12 +4025,15 @@ Atentament, SugarCRM',
     'LBL_DASHLET_CONFIGURE' => 'Configuració',
     'LBL_DASHLET_TOGGLE' => 'Obre/tanca',
     'LBL_SIDEPANE_TOGGLE' => 'Obre/tanca panell lateral',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'Restableix el disseny per defecte',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'No s&#39;ha configurat cap quadre de comandament',
+    'LBL_CREATE_DASHBOARD_LINK' => 'Crea quadre de comandament',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'Ajuda',
     'LBL_HELPLET_TOGGLE' => 'Obre/tanca',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'Mòduls',
     'LBL_FACET_MODIFIED_BY_ME' => 'Modificat per mi',
     'LBL_FACET_CREATED_BY_ME' => 'Creat per mi',
@@ -3888,6 +4050,7 @@ Atentament, SugarCRM',
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Vista del Registre',
+    'LBL_RELATED_RECORDS' => '{{module}} relacionat',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Mostra un registre i, opcionalment, registres relacionats en pestanyes.',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Tipus de registre base',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Aquest {{moduleSingular}}',
@@ -3937,7 +4100,7 @@ Atentament, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'No s&#39;ha trobat cap registre en aquest moment.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Resum de cas',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaccions',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'Línia temporal',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notes i adjunts',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notes i adjunts que pertanyen al registre',
     'LBL_DASHLET_PIPLINE_NAME' => 'Pipeline',
@@ -4208,6 +4371,8 @@ Atentament, SugarCRM',
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Pujar des del teu ordinador',
     'LBL_SEARCH_EXTERNAL_API' => 'Arxiu de font externa',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'Puja-ho a una font externa',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'Enllaç des d&#39;una font externa',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'Seguretat',
     'LBL_SHARE_PRIVATE' => 'Privat',
     'LBL_SHARE_COMPANY' => 'Companyia',
@@ -4317,6 +4482,9 @@ Atentament, SugarCRM',
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Dreceres de teclat',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong> Formulari de Funcionalitat - Alt+</strong><br/> I = ed<b>I</b>ta (detailview)<br/> U = d<b>U</b>plicat (detailview)<br/>  <b>D </b> =  esborrar (detailview)<br/> A = des<b>A</b>r (editview)<br/> L = cance<b>L</b>·lar (editview) <br/><br/></p><p><strong>Cerca i navegació  - Alt+</strong><br/> 7 = primera entrada en el formulari d&#39;edició<br/> 8 = Enllaç de cerca avançada <br/> 9 = Cerca per formulari d&#39;entrada <br/> 0 = Entrada de cerca unificada <br></p>' ,
 
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'Escala',
+
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'Comparteix',
     'TPL_RECORD_SHARE_SUBJECT' => 'Compartida {{module}} {{name}} de {{appId}}',
@@ -4389,7 +4557,7 @@ Atentament, SugarCRM',
     'LBL_MERGE_UNSAVED_CHANGES'=>
         'Tots els canvis es descartaran quan canvieu a un registre primari. Esteu segur que voleu canviar?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'Combina registres relacionats',
-    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Combinat: {{percent}}%.',
+    'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Combinat: {{percent}}%',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
         'No s&#39;ha completat correctament la combinació de {{objectName}} relacionats. Iniciant un nou intent: ({{num}} de {{total}}).',
     'TPL_MERGE_DUPLICATES_FAIL' =>
@@ -4443,14 +4611,14 @@ Atentament, SugarCRM',
     'LBL_LANGUAGE' => 'Language / Sprache / Idioma',
     'LBL_LOADING_LANGUAGE' => 'Carregant paquet d&#39;idiomes',
     'LBL_UPLOADING' => 'Carregant',
+    'LBL_UPLOADING_DOTS' => 'Carregant...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Esteu segur que voleu suprimir aquesta imatge?',
     'LBL_FILE_DELETE_CONFIRM' => "Esteu segur que voleu suprimir aquest arxiu? Açò no es pot desfer.",
     'LBL_FILE_DELETED' => 'L&#39;arxiu s&#39;ha suprimit correctament',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'Tema del portal',
-    'LBL_COFIGURE_PORTAL_THEME' => 'Configura el tema del portal',
-    'LBL_THEME_PREVIEW' => 'Vista prèvia del tema',
+    'LBL_THEME_PREVIEW' => 'Previsualització del tema del portal',
     'LBL_LOADING_PREVIEW' => 'Carregant vista prèvia',
     'LBL_RESET' => 'Restableix',
     'LBL_COLORS' => 'Colors',
@@ -4601,10 +4769,18 @@ Atentament, SugarCRM',
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Reunions',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Tasques',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Trucades',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Comptes',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contactes',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Missatges de correu electrònic',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'Torns',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Elements de línies d&#39;oferta',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Excepcions dels torns',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
+    'LBL_ESCALATIONS' => 'Escalades',
+    'LBL_ESCALATED' => 'Escalat',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'Escalades',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'Altres escalades relacionades',
+    'LBL_ESCALATIONS' => 'Escalades',
     'LNK_SETTINGS' => 'Configuració',
     'LBL_MOBILE_SUPPORT' => 'Suport',
     'LBL_MOBILE_SHOW_MORE' => 'Veure més ...',
@@ -4812,6 +4988,55 @@ Atentament, SugarCRM',
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'Error en aconseguir l&#39;hora del servidor',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'No s&#39;ha pogut activar el mode fora de línia. No es pot arribar al servidor.',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'Aspecte',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'Utilitza la configuració del sistema',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'Clar',
+    'LBL_MOBILE_APP_THEME_DARK' => 'Fosc',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'Nou nom del fitxer',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'Canvia el nom del fitxer',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'Creat per mi',
+    'LBL_OPERATOR_CONTAINS' => 'és algún de',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'no és cap de',
+    'LBL_OPERATOR_EMPTY' => 'és buit',
+    'LBL_OPERATOR_NOT_EMPTY' => 'no és buit',
+    'LBL_OPERATOR_MATCHES' => 'coincideix exactament',
+    'LBL_OPERATOR_STARTS_WITH' => 'comença amb',
+    'LBL_OPERATOR_EQUALS' => 'és igual a',
+    'LBL_OPERATOR_NOT_EQUALS' => 'no és igual a',
+    'LBL_OPERATOR_GREATER_THAN' => 'és major que',
+    'LBL_OPERATOR_LESS_THAN' => 'és menor que',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'és major o igual a',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'és menor o igual a',
+    'LBL_OPERATOR_BETWEEN' => 'està entre',
+    'LBL_OPERATOR_BEFORE' => 'abans',
+    'LBL_OPERATOR_AFTER' => 'desprès',
+    'LBL_OPERATOR_YESTERDAY' => 'ahir',
+    'LBL_OPERATOR_TODAY' => 'avui',
+    'LBL_OPERATOR_TOMORROW' => 'demà',
+    'LBL_OPERATOR_LAST_7_DAYS' => 'últims 7 dies',
+    'LBL_OPERATOR_NEXT_7_DAYS' => 'pròxims 7 dies',
+    'LBL_OPERATOR_LAST_30_DAYS' => 'últims 30 dies',
+    'LBL_OPERATOR_NEXT_30_DAYS' => 'pròxims 30 dies',
+    'LBL_OPERATOR_LAST_MONTH' => 'últim mes',
+    'LBL_OPERATOR_THIS_MONTH' => 'aquest mes',
+    'LBL_OPERATOR_NEXT_MONTH' => 'el mes vinent',
+    'LBL_OPERATOR_LAST_YEAR' => 'últim any',
+    'LBL_OPERATOR_THIS_YEAR' => 'aquest any',
+    'LBL_OPERATOR_NEXT_YEAR' => 'any següent',
+    'LBL_OPERATOR_IS' => 'és',
+    'LBL_OPERATOR_IS_NOT' => 'no és',
+    'LBL_ERROR_FILTER_EMPTY' => 'Afegiu criteris de filtre.',
+    'LBL_ADD_FILTER' => 'Afegiu criteris',
+    'LBL_FILTER_NAME' => 'Nom de filtre',
+    'LBL_FILTER_FIELD' => 'Camp',
+    'LBL_FILTER_OPERATOR' => 'Operador',
+    'LBL_FILTER_VALUE' => 'Valor',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Desa a l&#39;aplicació d&#39;escriptori',
+    'LBL_FILTER_LOCAL' => 'Filtre local',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'Benvingut a SugarCRM.<br/><br/> Ens permeten destacar algunes novetats...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'Navegació pel menú principal.',
@@ -4857,6 +5082,7 @@ Atentament, SugarCRM',
     'LBL_COMMENT_ADD' => 'Afegeix un comentari',
     'LBL_REQUIRED' => 'Obligatori',
     'LBL_MORE_BUTTON' => 'Més',
+    'LBL_NO_OPTIONS' => 'No hi ha opcions disponibles',
     'LBL_TRY_AGAIN' => 'Torneu a provar-ho',
     'LBL_NEW_RECORDS' => 'Creats recentment',
     'LBL_ASSIGNED_TO_ME' => 'El meu {{{module}}}',
@@ -5082,11 +5308,15 @@ Atentament, SugarCRM',
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Esteu segur que voleu tancar el xat?',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'Crea una nota o afegeix un adjunt',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'Afegeix una nota',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'No heu introduït un usuari correcte. Torneu-ho a provar.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Credencials no vàlides',
-    'LBL_PORTAL_INVALID_GRANT' => 'El token no és vàlid o ha caducat. Si us plau ingressi de nou.',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Token caducat',
+    'LBL_PORTAL_INVALID_GRANT' => 'La vostra sessió ha caducat. Torneu a iniciar la vostra sessió.',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Sessió caducada',
     'LBL_PORTAL_AUTH_FAILED' => 'L&#39;autenticació del client va fallar.',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'Client no vàlid',
     'LBL_PORTAL_INVALID_REQUEST' => 'La sol·licitud presentada no és vàlida o incorrecte. Si us plau, poseu-vos en contacte amb suport tècnic.',
@@ -5120,6 +5350,8 @@ Atentament, SugarCRM',
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'Restableix el disseny per defecte',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'Consola de renovacions',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Resum',
@@ -5139,6 +5371,7 @@ Atentament, SugarCRM',
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Resum del missatge',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Resum de la trucada',
     'LBL_OMNICHANNEL_LINK_TO' => 'S&#39;ha vinculat {{fromModule}} a {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'Enllaç a {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'Vinculat',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'El vostre navegador no és compatible amb el xat. Utilitzeu Google Chrome o Mozilla Firefox.',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Contacteu amb l&#39;administrador de Sugar per obtenir ajuda.',
@@ -5146,6 +5379,8 @@ Atentament, SugarCRM',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Acabeu de configurar SugarLive abans de fer una trucada sortint.',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Acabeu de configurar el disseny de SugarLive abans d&#39;obrir SugarLive.',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Configureu-vos a "Fora de línia" a SugarLive abans de configurar el disseny de SugarLive.',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'Vista compacta',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'Vista completa',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'Restableix la pestanya a predeterminada',
@@ -5558,9 +5793,12 @@ Atentament, SugarCRM',
     'LBL_BEST' => 'Millor',
     'LBL_WORST' => 'Pitjor',
     'LBL_LIKELY' => 'Probable',
-    'LBL_BEST_ADJUSTED' => 'Millor (ajustat)',
-    'LBL_WORST_ADJUSTED' => 'Pitjor (ajustat)',
-    'LBL_LIKELY_ADJUSTED' => 'Probable (ajustat)',
+    'LBL_BEST_FORECAST' => 'Confirmació (millor)',
+    'LBL_WORST_FORECAST' => 'Confirmació (pitjor)',
+    'LBL_LIKELY_FORECAST' => 'Confirmació (probable)',
+    'LBL_BEST_ADJUSTED' => 'Confirmació ajustada (millor)',
+    'LBL_WORST_ADJUSTED' => 'Confirmació ajustada (pitjor)',
+    'LBL_LIKELY_ADJUSTED' => 'Confirmació ajustada (probable)',
     'LBL_AMOUNT_USDOLLAR' => 'Quantitat Total',
     'LBL_OVERDUE' => 'Endarrerit',
 
@@ -5581,6 +5819,8 @@ Atentament, SugarCRM',
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'Per obtenir més informació consulteu la documentació de {{{more_info_url}}} {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'No hi ha dades disponibles',
+    'LBL_NEED_HELP' => 'Necessiteu ajuda amb alguna novetat?',
+    'LBL_NEW_CASE' => 'Nou cas',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'El dashlet d&#39;ajuda proporciona informació específica que pertany al mòdul que esteu veient ara, junt amb un enllaç a la documentació corresponent (per exemple, documentació de clients potencials) en la guia de l&#39;aplicació.',
@@ -5728,9 +5968,19 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Sense resposta',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Programació no disponible',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'Visualitzacions disponibles',
+    'LBL_CALENDAR_DASHLET_NAME' => 'Planificador de calendari',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'Visualització predeterminada',
+    'LBL_CALENDAR_MY_CALENDARS' => 'Els meus calendaris',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'Calendaris de l&#39;usuari i l&#39;equip',
+    'LBL_CALENDAR' => 'Calendari',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'S&#39;ha produït un error mentre es recuperava la programació.',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'Desa i envia invitacions',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'Accepta l&#39;estat',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'Processos',
@@ -5847,15 +6097,21 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Copia l&#39;enllaç de confirmació',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interaccions',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interaccions de {{moduleSingular}}',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Línia temporal',
+    'LBL_NO_ACTIVITY' => 'Cap activitat',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línia temporal de {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'Més',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'Menys',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'La línia temporal mostra Trucades, Correus electrònics, ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Mostra&#39;n més...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Mostra&#39;n menys...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'No hi ha dades disponibles',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'Mòdul sense llicència.',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Subscripcions actives',
@@ -5904,8 +6160,10 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'Tanca el calaix de concentració',
     'LBL_EXTERNAL_GUESTS' => 'Convidats externs',
     'LBL_MY_FAVORITE_TASKS' => 'Les meves tasques preferides',
+
     'LBL_MY_TASKS' => 'Les meves tasques',
 
     // Sugar Integrate
@@ -5922,7 +6180,367 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_TIME_AWARE_TYPE' => 'Tipus',
     'LBL_TIME_AWARE_BEAN_ID' => 'ID de Bean',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'Etiqueta de visualizació',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'Obre la vista de registre',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'Afegeix',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'Ajuda no disponible',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'Funcions',
+    'LBL_ACTIONBUTTON_FIELDS' => 'Camps',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'Seleccioneu camp...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'Dinàmica',
+    'LBL_ACTIONBUTTON_RELATED' => 'Relacionats',
+    'LBL_ACTIONBUTTON_SAVE' => 'Desa',
+    'LBL_ACTIONBUTTON_CANCEL' => 'Cancel·la',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'Mòdul relacionat',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'Camps relacionats',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'Mòdul de la dinàmica',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'Camps de la dinàmica',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'Funció de la dinàmica',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'Mín',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'Màx',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'Mitjana',
+    'LBL_ACTIONBUTTON_SUM' => 'Suma',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'Assigna registres',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'Redacta un correu',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'Crea un registre',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Combinació de documents',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'Obre Url',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'Executa l&#39;informe',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'Actualitza el registre',
+    'LBL_ACTIONBUTTON_ACTION' => 'Acció',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'Assigna a',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'Envia correu electrònic a',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'Utilitza PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'Plantilla',
+    'LBL_ACTIONBUTTON_MODULE' => 'Mòdul',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'Configuració de visualització',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'Tipus',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'Llista desplegable',
+    'LBL_ACTIONBUTTON_BUTTON' => 'Botó',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'Grup de botons',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'Mostra l&#39;etiqueta al registre',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'Mostra a la capçalera',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'Oculta-ho en Edició',
+    'LBL_ACTIONBUTTON_SIZE' => 'Mida',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'Per defecte',
+    'LBL_ACTIONBUTTON_SMALL' => 'Petita',
+    'LBL_ACTIONBUTTON_LARGE' => 'Gran',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'Calculada',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'Converteix a PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'Combinació de documents',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'Vista preliminar',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'Propietats',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'Etiqueta',
+    'LBL_ACTIONBUTTON_DESC' => 'Informació de les eines',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'Mostra l&#39;etiqueta',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'Mostra la icona',
+    'LBL_ACTIONBUTTON_SCHEME' => 'Esquema de color',
+    'LBL_ACTIONBUTTON_ICON' => 'Icona',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'Dependent',
+    'LBL_ACTIONBUTTON_DESIGN' => 'Configuració del disseny',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'Atura a l&#39;error',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'Desa automàticament',
+    'LBL_ACTIONBUTTON_CONFIG' => 'Configuració',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'Configureu el vostre Botó d&#39;Acció abans de desar.',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'Configura els botons',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'Crea automàticament',
+    'LBL_ACTIONBUTTON_LINK' => 'Enllaç',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'Còpia els valors principals',
+    'LBL_ACTIONBUTTON_PRESET' => 'Predefineix',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'Predefineix des de principal',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'Selecciona...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'Des del camp principal ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'Segur que voleu suprimir aquest botó?',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'Segur que voleu suprimir aquesta acció?',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'Dades del botó d&#39;acció no vàlides',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'Seleccioneu un mòdul abans de desar.',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'Seleccioneu un enllaç abans de desar. Si no hi ha cap enllaç disponible, desmarqueu l&#39;opció d&#39;enllaç.',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'Seleccioneu un registre abans de desar.',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'Seleccioneu una plantilla abans de desar.',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'Principal',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'Secundari',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'Oceà',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'Rosa',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'Militar',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'Verd blavós',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'Pacífic',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'Verd',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'Groc',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'Taronja',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'Vermell',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'Coral',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'Porpra',
+    'LBL_ACTIONBUTTON_FORMULA' => 'Fórmula',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'Accions',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'Error en validar les dades del botó.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'Els botons han de tindre com a mínim una etiqueta o un conjunt d&#39;icones.',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'Introduïu una etiqueta vàlida per al botó.',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'No s&#39;ha pogut crear el registre perquè hi falten valors obligatoris. Contacteu amb el vostre administrador.',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'Heu de tenir com a mínim dos botons actius per a aquest tipus de botó.',
+    'LBL_ACTIONBUTTON_RECORD' => 'Vistes de registres',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'Menús d&#39;acció',
+    'LBL_ACTIONBUTTON_ORDER' => 'Ordre',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'Vista de llista',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'Vista de registre',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'Dashlet de visualització de registres',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'Subpanells',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'El motor d&#39;execució de la seqüència de tasques no ha pogut executar les accions següents: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'Afegeix una acció',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'Suprimeix aquesta acció',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'Combinació de documents',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'Combinació de documents en PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'Mida de l&#39;empresa',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'Indústria',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'Etiquetes de la indústria',
+    'LBL_HINT_COMPANY_LOCATION' => 'Ubicació de l&#39;empresa',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'Descripció de l&#39;empresa',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'Any de fundació',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Facebook de l&#39;empresa',
+    'LBL_HINT_COMPANY_TWITTER' => 'Twitter de l&#39;empresa',
+    'LBL_HINT_COMPANY_PIC' => 'Logotip de l&#39;empresa',
+    'LBL_HINT_CONTACT_PIC' => 'Foto de contacte',
+    'LBL_HINT_COMPANY_WEBSITE' => 'Lloc web de l&#39;empresa',
+    'LBL_HINT_PHOTO' => 'Enllaç de la foto',
+    'LBL_HINT_JOB_2' => 'Treballs anteriors',
+    'LBL_HINT_EDUCATION' => 'Educació',
+    'LBL_HINT_EDUCATION_2' => 'Educació addicional',
+    'LBL_HINT_TWITTER' => 'Enllaç de Twitter',
+    'LBL_HINT_FACEBOOK' => 'Enllaç de Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'Codi NAICS',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'Codi SIC',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'Fi de l&#39;any fiscal',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'Ingressos anuals',
+    'LBL_HINT_PHONE_1' => 'Telèfon 1',
+    'LBL_HINT_PHONE_2' => 'Telèfon 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'Uneix la taula',
+    'LBL_HINT_FULL_NAME' => 'Nom i cognoms',
+    'LBL_HINT_JOB_TITLE' => 'Càrrec',
+    'LBL_HINT_OFFICE_PHONE' => 'Telèfon de l&#39;oficina',
+    'LBL_HINT_MOBILE_PHONE' => 'Mòbil',
+    'LBL_HINT_OTHER_PHONE' => 'Telèfon alternatiu',
+    'LBL_HINT_WEBSITE' => 'Lloc web',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'Voleu sobreescriure totes les dades existents d&#39;aquest registre amb les noves dades que s&#39;han trobat a Hint?',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'Voleu sobreescriure el {{fieldName}} existent per a aquest registre amb el nou {{fieldName}} que s&#39;ha trobat a Hint?',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'Totes les dades relacionades amb el compte s&#39;esborraran. Segur que voleu continuar?',
+    'LBL_HINT_COMPANY_LOGO' => 'Logotip',
+    'LBL_HINT_CONTACTS_AVATAR' => 'Foto',
+    'LBL_HINT_ACCOUNTSETS' => 'Etiquetes del grup de comptes de Hint',
+
+    'LBL_HINT_LOADING' => 'Carregant...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'S&#39;està desinsta·lant Hint, espereu',
+    'LBL_HINT_VALUE_ERASED' => ' Valor esborrat ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'Aquesta informació s&#39;ha esborrat mitjançant una sol·licitud de privacitat de dades',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'Seleccioneu una de les opcions de desinstal·lació següents:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'Desinstal·la només el paquet de Hint',
+    'LBL_HINT_UNINSTALL_FULL' => 'Desinstal·la Hint completament',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'Aquesta opció esborrarà l&#39;MLP de Hint i inhabilitarà totes les subscripcions actives a Hint Insights.
+    En tornar a instal·lar Hint es reactivaran automàticament les subscripcions.',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'Aquesta opció durà a terme una desinstal·lació completa de Hint, incloent-hi suprimir l&#39;MLP i esborrar tota la configuració i informació de subscripcions.',
+    'LBL_HINT_UNINSTALL' => 'Desinstal·la',
+    'LBL_HINT_UNINSTALL_HEADER' => 'Desinstal·la Hint',
+    'LBL_HINT_CANCEL' => 'Cancel·la',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'AVÍS: Escolliu aquesta opció només si no teniu intenció de tornar a utilitzar Hint en el futur.
+    Abans de desinstal·lar, feu una còpia de seguretat completa de la base de dades de Sugar, i poseu Sugar en mode de manteniment. ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'Consulteu la ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'Guia d&#39;administració de Hint ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'per obtenir detalls sobre el procés de desinstal·lació.',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'Segur que voleu desinstal·lar només el paquet de Hint?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'Segur que voleu desinstal·lar Hint completament?',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(NOTA: AQUESTA ACCIÓ NO ES POT DESFER)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'Camps de Hint',
+    'LBL_HINT_NO_RESULTS_MSG' => 'No s&#39;han trobat resultats.',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'Disseny bàsic del panell de Hint',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'Comptes',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'Contactes',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'Clients potencials',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'Disseny ampliat del panell de Hint',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'Per reordenar els camps, arrossegueu i deixeu anar els camps a les seccions del Disseny del panell de Hint més amunt.',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'Per obtenir instruccions detallades i una llista de camps predeterminats, consulteu ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' per restaurar la configuració predeterminada del ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'mòdul.',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'Segur que voleu restablir els valors predeterminats del mòdul {{module}}?',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'Feu clic aquí',
+    'LBL_HINT_CONFIG_NAME' => 'Guia d&#39;administració de Hint.',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'Camps',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'Camps enriquits',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'Aquesta secció ennumera tots els camps de Hint i de Sugar que estan enriquits amb Hint. Els camps de Hint estan marcats amb un asterisc (*) i només es poden mostrar al panell de Hint si estan enriquits.',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'Nom del camp',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'Camp enriquit',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'Mostra a Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'Mostra al panell de Hint',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'Camps addicionals de Sugar',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'Aquesta secció ennumera tots els camps de Sugar que no estan enriquits amb Hint.',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'Avís',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'Precaució: Esteu a punt de sincronitzar amb el servei de Hint Insights. Qualsevol història pendent del resum de correu electrònic es perdrà, i les notícies existents s&#39;esborraran del dashlet d&#39;Insights. Les notificacions de tots els tipus es reprendran després que finalitzi la sincronització.',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'Les empreses suggerides relacionades amb el vostre {{_moduleSingular}} s&#39;ennumeren a continuació. Seleccioneu les dades de les empreses que voleu mostrar.',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'Cap compte seleccionat',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'S&#39;han trobat diversos correus electrònics, seleccioneu els que voleu importar: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'En funció de les dades introduïdes, Hint no ha pogut trobar una coincidència al sistema.',
+    'LBL_HINT_HELP_MESSAGE2' => 'Els millors resultats de Hint es poden trobar amb el nom i el correu electrònic d&#39;una persona.',
+    'LBL_HINT_HELP_MESSAGE3' => 'Els millors resultats de Hint es poden trobar amb l&#39;url del lloc web d&#39;una empresa.',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "Introduïu el nom d'empresa o el lloc web del vostre {{_moduleSingular}} i Hint cercarà dades addicionals.",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "Introduïu el lloc web del vostre {{currentModule}} i Hint cercarà dades addicionals.",
+
+    'LBL_HINT_HISTORY_NONE' => 'No hi ha dades disponibles per a la visualització històrica',
+    'LBL_HINT_HISTORY_TITLE' => 'Historial d&#39;activitat',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'Enriquiment de dades',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'La llicència del vostre servei de SugarCRM Hint ha caducat. Contacteu amb el vostre administrador de SugarCRM per renovar la vostra llicència.',
+    'LBL_HINT_PREVIEW_QUESTION' => 'Voleu veure què pot fer SugarCRM Hint per vós i la vostra empresa? Contacteu amb el vostre administrador de SugarCRM per afegir Hint.',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'No s&#39;ha trobat informació del compte',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'S&#39;han trobat dades enriquides - feu clic per desar totes les dades enriquides al vostre registre.',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'Feu clic per desar dades enriquides al vostre registre.',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'Contactes relacionats',
+    'LBL_HINT_CONTACTS_NONE' => 'Cap contacte relacionat',
+
+    'LBL_HINT_NEWS' => 'Notícies',
+    'LBL_HINT_GENERAL' => 'General',
+    'LBL_HINT_ALL_NEWS' => 'Totes les notícies',
+    'LBL_HINT_FILTER_NEWS' => 'Filtra les notícies',
+    'LBL_HINT_FINANCIAL_NEWS' => 'Financeres',
+    'LBL_HINT_PERSONNEL_NEWS' => 'Personal',
+    'LBL_HINT_PRESS_RELEASES' => 'Notes de premsa',
+    'LBL_HINT_OTHER_NEWS' => 'Altres',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'Cerca articles de notícies',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'No hi ha notícies disponibles',
+    'LBL_NEW_NOTIFICATIONS' => 'Noves notificacions',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'Heu de tenir una llicència de Hint per veure el dashlet de Hint Insights.
+    Consulteu el vostre administrador per obtenir una llicència de Hint.',
+
+    'LBL_HINT_FOR' => 'Per a',
+    'LBL_HINT_WITH' => 'amb',
+    'LBL_HINT_SHOW_ME' => 'Mostra&#39;m: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'Notifica&#39;m per: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'Centre de preferències de Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'Clau d&#39;opció de preferències',
+    'LBL_HINT_PREFERENCES' => 'Preferències',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'Supressió inhabilitada, és obligatori tenir com a mínim una declaració de preferències',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'Addició inhabilitada, heu arribat al màxim de declaracions de preferències',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'Inlou al dashlet de Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'Finestra emergent com a notificació d&#39;escriptori',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'Les notificacions han d&#39;estar habilitades a tots els navegadors i tots els ordinadors per rebre les notificacions de manera consistent.',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'Alguns navegadors, com ara Internet Explorer, no són compatibles amb les notificacions. No es poden habilitar les notificacions quan utilitzeu un navegador que no hi és compatible.',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'Envia una alerta instantània per correu electrònic per a cada notificació',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'Envia un resum diari per correu electrònic',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'Envia un resum setmanal per correu electrònic',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'No s&#39;han pogut desar les preferències. Comproveu la connexió del sistema i torneu-ho a provar.',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'Falta un valor a alguns camps obligatoris. Comproveu les vostres preferències i assegureu-vos que tots els camps obligatoris estan emplenats.',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'Esteu a punt d&#39;habilitar les notificacions del navegador per a Hint Insights. Feu clic a Confirma per continuar. El vostre navegador us demanarà permís per rebre notificacions.',
+    'LBL_HINT_PUSH_ERROR' => 'El complement de Notificacions push s&#39;ha registrat per a {{options.type}} sense les seves dependències. El complement no funcionarà de la manera prevista; assegureu-vos que proporcioneu una ruta al tipus de treballador i un mètode per desar la subscripció al servidor.',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'ACTIVA les notificacions de Hint per a tots els usuaris',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'DESACTIVA les notificacions de Hint per a tots els usuaris',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'AVÍS: No s&#39;ha pogut inhabilitar les notificacions durant la desinstal·lació de Sugar Hint. Per inhabilitar les notificacions, instal·leu 5.4.0 o superior i feu una desinstal·lació completa amb el Desinstal·lador de Hint que es troba a la secció d&#39;Administració de Sugar.',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'Configuració de Mapes',
+    'LBL_MAP_MAP' => 'Mapa',
+    'LBL_MAP_MAPS' => 'Mapes',
+    'LBL_MAP_GEOCODING_RECORD' => 'Geocodificar',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'El registre s&#39;ha geocodificat correctament.',
+    'LBL_MAP_LATITUDE' => 'Latitud',
+    'LBL_MAP_LONGITUDE' => 'Longitud',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'Cerca per adreça...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'El registre actual ja està geocodificat. Segur que voleu sobreescriure la geocodificació d&#39;aquest registre?',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'Geocodificació manual',
+    'LBL_MAP_POINT_COORDINATES' => 'Coordenades del punt del mapa',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'Calculant la ruta òptima...',
+    'LBL_MAP_DIRECTIONS' => 'Indicacions',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'Indicacions començant des de l&#39;usuari actual',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'Indicacions començant des d&#39;aquest registre',
+    'LBL_MAPS_RADIUS_INPUT' => 'Radi (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'en un radi des del codi postal',
+    'LBL_MAPS_DISTANCE' => 'Distància',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'Codi postal',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'Configuració no vàlida: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => 'El mapeig del camp <strong>{{module}}</strong> no és vàlid.',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'Tipus de mapa',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'Nivell d&#39;ampliació',
+    'LBL_MAPS_DASHLET' => 'Mapes',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'Mostra registres geocodificats al mapa.',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'Mapes no està disponible per a aquest mòdul. Habiliteu-ho a la consola d&#39;administració.',
+    'LBL_MAP_MODULES' => 'Mòdul',
+    'LBL_MAP_FILTER_BY' => 'Filtra per',
+    'LBL_MAP_UNIT_TYPE' => 'Tipus d&#39;unitat',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'Milles',
+    'LBL_MAP_UNIT_TYPE_KM' => 'Kilòmetres',
+    'LBL_MAP_ADDRESS' => 'Adreça',
+    'LBL_MAP_NO_STARTING_POINT' => 'El punt d&#39;inici no està geocodificat.',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'El registre del punt d&#39;inici no està geocodificat.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'Alguns dels registres seleccionats no estan geocodificats i no es mostraran al mapa.',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'Els registres no estan geocodificats.',
+    'LBL_MAPS_MODULE_FIELDS' => 'Camps del Mòdul',
+    'LBL_MAPS_SELECT_FIELD' => 'Seleccioneu camp',
+    'LBL_MAPS_RELATE_RECORD' => 'Registre relacionat',
+    'LBL_MAPS_MAPPING_TYPE' => 'Tipus de mapeig',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'No hi ha registres geocodificats',
+    'LBL_MAPS_ADDRESS' => 'Adreça',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'Usuari assignat',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'La visualització del carrer no està disponible per al punt donat',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> registres no són vàlids per al mapeig. Elimineu el mòdul de la llista.',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'Tanca',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'Expandeix',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'Desa com a PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'Enllaç de correu electrònic',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'Heu de tenir com a mínim un registre geocodificat.',
+    'LBL_MAPS_GENERATING' => 'Generant mapa...',
+    'LBL_MAPS_POINTS' => 'Punts del mapa',
+    'LBL_MAPS_POINT' => 'Punt',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'Detalls de viatge',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'Distància total',
+    'LBL_MAPS_TOTAL_DURATION' => 'Durada total',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'Durada total sense trànsit',
+    'LBL_MAPS_ITINERARY' => 'Itinerari',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'Distància de viatge',
+    'LBL_MAPS_TRAVEL_DURATION' => 'Durada del viatge',
+    'LBL_MAPS_TRAVEL_STEPS' => 'Passos',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'Avisos',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps és compatible amb un máxim de 10 xinxetes a un mapa compartit. Reviseu la vostra selecció.',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'Llicència de mapes obligatòria',
+
+    'LBL_INVALID_FORMULA' => 'Fórmula no vàlida',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'El tipus de resultat de la funció no coincideix',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'Predicció',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'Perfil del client ideal',
+
+    // User last state
+    'LBL_LAST_STATE' => 'Últim estat',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'Envia-ho a DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'Obert',
+    'LBL_CLOSED_WON' => 'Tancat guanyat',
+    'LBL_CLOSED_LOST' => 'Tancat perdut',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6759,8 +7377,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Contactes de Google',
@@ -7100,6 +7718,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fitxer integrat';
     'YER' => 'Rials',
     'ZWD' => 'Dòlars de Zimbabwe',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'Molt alta',
+        '4' => 'Alta',
+        '3' => 'Neutral',
+        '2' => 'Baixa',
+        '1' => 'Molt baixa',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'Cap',
         'future' => 'Valor actual',
@@ -7109,3 +7735,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fitxer integrat';
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'Resultat únic',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'En procés',
+        'error' => 'Error',
+        'success' => 'Correcte',
+        'canceled' => 'Cancel·lat',
+        'document_load' => 'Carregant plantilla',
+        'tags_extract' => 'Extraient etiquetes',
+        'tags_validate' => 'Validant etiquetes',
+        'data_retrieving' => 'Recuperant etiquetes',
+        'serialize_document' => 'Tornant a unir el document',
+        'send_document' => 'Enviant-vos el document',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'Fusiona',
+        'convert' => 'Fusiona PDF',
+        'multimerge' => 'Fusió múltiple',
+        'multimerge_convert' => 'Fusió múltiple de PDF',
+        'labelsgenerate' => 'Genera etiquetes',
+        'labelsgenerate_convert' => 'Genera etiquetes en PDF',
+        'excel' => 'Fusiona Excel',
+        'excel_convert' => 'Conversió de la fusió Excel',
+        'presentation' => 'Fusió de PowerPoint',
+        'presentation_convert' => 'Fusió de PowerPoint en PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'Els meus comptes',
+      'favorites' => 'Comptes favorits',
+      'tags' => 'Comptes etiquetats',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'Totes les notícies',
+      'General' => 'General',
+      'Finance' => 'Financeres',
+      'People' => 'Personal',
+      'Press Releases' => 'Notes de premsa',
+      'Other' => 'Altres',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'Propietaris';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Cloud Drive';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'Quadre de comandament d&#39;integració de Cloud Drive';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'Còpia l&#39;enllaç';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'Baixa';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'Crea un document de Sugar';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'Sincronitza amb Google Drive';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'Sincronitza-ho tot amb Google Drive';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'No s&#39;ha pogut baixar aquest fitxer';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'El quadre de comandament del núvol no està present';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'Document de Sugar Creat';
+
+    $app_string['LBL_MY_FILES'] = 'Els meus fitxers';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Compartit amb mi';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'Proveïdor del núvol';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google Drive',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'Compartit amb mi';
+    $app_strings['LBL_MY_FILES'] = 'Els meus fitxers';
+    $app_strings['LBL_UPLOAD_FILE'] = 'Puja el fitxer';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'No s&#39;ha trobat la carpeta';
+    $app_strings['LBL_CREATE_FOLDER'] = 'Crea una carpeta';
+    $app_strings['LBL_LOAD_MORE'] = 'Carrega més...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'No s&#39;ha trobat la connexió amb Google...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'No s&#39;ha trobat la connexió amb Microsoft...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-buit-',
+      'Exact' => 'Exacte',
+      'Null_address_components' => 'Un o més dels components de l&#39;adreça estan buits',
+      'Invalid_address' => 'Adreça no vàlida, el servidor ha tornat el resultat Fals',
+      'Invalid_server_response_not_XML' => 'Resposta del servidor no vàlida, no és XML',
+      'Invalid_address_no_location' => 'Adreça no vàlida, el servidor no ha tornat cap ubicació',
+      'Ambiguous_address' => 'Adreça ambigua, múltiples coincidències',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'Carretera',
+      'a' => 'Aèria',
+      'be' => 'A ull d&#39;ocell',
+      'rd' => 'Carretera fosca',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

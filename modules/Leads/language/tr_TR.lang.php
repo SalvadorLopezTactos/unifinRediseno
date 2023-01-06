@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Tavsiye Eden',
     'LBL_LIST_STATUS' => 'Durum',
     'LBL_LIST_TITLE' => 'Başlık',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Piyasa Faiz Tahmini',
+    'LBL_MARKET_SCORE' => 'Piyasa Puanı',
     'LBL_MOBILE_PHONE' => 'Cep Telefonu:',
     'LBL_MODULE_NAME' => 'Potansiyeller',
     'LBL_MODULE_NAME_SINGULAR' => 'Potansiyel',
@@ -330,4 +332,9 @@ Her zorunlu ve istenen modülü onayladıktan sonra, üstteki Kaydet ve Dönüş
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Potansiyelleri Dönüştürme Tahmini',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Belirli bir Potansiyelin tahmin ayrıntılarını görüntüleyin',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Gelir Kalemlerini Etkinleştir',
+    'LBL_REQUIRE_RLIS' => 'Yeni Fırsat oluşturulurken Gelir Kalemi Ögeleri gereklidir',
+    'LBL_COPY_DATA_RLIS' => 'Yeni Fırsat oluşturulurken Potansiyel verilerini Gelir Kalemi Ögelerine kopyalayın',
 );

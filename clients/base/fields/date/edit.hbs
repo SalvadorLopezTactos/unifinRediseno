@@ -13,8 +13,9 @@
 <div class="input-append date">
     <div class="date-wrapper">
         <input type="text" data-type="date" name="{{name}}" class="datepicker" value="{{value}}"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} placeholder="{{fieldPlaceholder}}">
-        <span class="add-on" data-icon="calendar"><i class="fa fa-calendar"></i></span>
+        <span class="add-on" data-icon="calendar">
+            <i class="sicon sicon-calendar"></i>
+        </span>
     </div>
     {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
 </div>
-

@@ -171,21 +171,6 @@
     /**
      * @inheritdoc
      */
-    _dispose: function() {
-        if (!_.isUndefined(this.context.parent) && !_.isNull(this.context.parent)) {
-            this.context.parent.off(null, null, this);
-            if (this.context.parent.has('collection')) {
-                this.context.parent.get('collection').off(null, null, this);
-            }
-        }
-        app.routing.offBefore('route', this.beforeRouteHandler, this);
-        $(window).off("beforeunload." + this.worksheetType);
-        this._super("_dispose");
-    },
-
-    /**
-     * @inheritdoc
-     */
     bindDataChange: function() {
         // these are handlers that we only want to run when the parent module is forecasts
         if (!_.isUndefined(this.context.parent) && !_.isUndefined(this.context.parent.get('model'))) {
@@ -232,6 +217,15 @@
                         this.saveWorksheet(false);
                     }
                 }, this);
+
+                // On cancel click, revert any unsaved changes to rep rollup lines
+                this.listenTo(this.context.parent, 'button:cancel_button:click', () => {
+                    if (this.layout.isVisible()) {
+                        this.collection.models.forEach(model => model.revertAttributes());
+                        this.cleanUpDirtyModels();
+                        this.setNavigationMessage(false, '', '');
+                    }
+                });
 
                 /**
                  * trigger an event if dirty
@@ -440,12 +434,17 @@
             return true;
         }, this);
 
-        /**
-         * On Collection Reset or Change, calculate the totals
-         */
-        this.collection.on('reset change', function() {
+        // When the collection resets, recalculate the list totals and notify
+        // the context that the totals are being initialized
+        this.listenTo(this.collection, 'reset', function() {
+            this.calculateTotals(true);
+            this.context.parent.trigger('forecasts:worksheet:totals:initialized', this.totals);
+        });
+
+        // When a value in the collection changes, recalculate the list totals
+        this.listenTo(this.collection, 'change', function() {
             this.calculateTotals();
-        }, this);
+        });
 
         this.layout.on('hide', function() {
             this.totals = {};
@@ -882,10 +881,11 @@
     /**
      * Calculates the display totals for the worksheet
      *
+     * @param {boolean} reset true when being called on a reset
      * @fires forecasts:worksheet:totals
      */
-    calculateTotals: function() {
-        if (this.layout.isVisible()) {
+    calculateTotals: function(reset = false) {
+        if (this.layout.isVisible() || reset) {
             this.totals = this.getCommitTotals();
             this.totals['display_total_label_in'] = _.first(this._fields.visible).name;
             _.each(this._fields.visible, function(field) {
@@ -1077,5 +1077,21 @@
                 ctx.trigger('forecasts:worksheet:saved', saveObj.totalToSave, this.worksheetType, saveObj.isDraft);
             }
         }, this), silent: true, alerts: { 'success': false }});
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        if (!_.isUndefined(this.context.parent) && !_.isNull(this.context.parent)) {
+            this.context.parent.off(null, null, this);
+            if (this.context.parent.has('collection')) {
+                this.context.parent.get('collection').off(null, null, this);
+            }
+        }
+        app.routing.offBefore('route', this.beforeRouteHandler, this);
+        $(window).off(`beforeunload.${this.worksheetType}`);
+        this.stopListening();
+        this._super('_dispose');
     }
 })

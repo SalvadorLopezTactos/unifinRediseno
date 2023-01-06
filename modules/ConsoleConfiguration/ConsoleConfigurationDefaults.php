@@ -104,6 +104,18 @@ class ConsoleConfigurationDefaults
                     'Opportunities' => '',
                 ],
             ],
+            'freeze_first_column' => [
+                // Serve console
+                'c108bb4a-775a-11e9-b570-f218983a1c3e' => [
+                    'Cases' => true,
+                ],
+
+                // Renewals console
+                'da438c86-df5e-11e9-9801-3c15c2c53980' => [
+                    'Accounts' => true,
+                    'Opportunities' => true,
+                ],
+            ],
             'filter_def' => [
                 // Serve console
                 'c108bb4a-775a-11e9-b570-f218983a1c3e' => [

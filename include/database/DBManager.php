@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -1756,12 +1757,12 @@ abstract class DBManager implements LoggerAwareInterface
      * @param  SugarBean $bean         the bean from which table we will generate insert stmts
      * @param  string $select_query the query which will give us the set of objects we want to place into our insert statement
      * @param  int    $start        the first row to query
-     * @param  int    $count        the number of rows to query
+     * @param  int    $count        the number of rows to query, -1 for maximum allowed
      * @param  string $table        the table to query from
      * @param bool $is_related_query
-     * @return string SQL insert statement
+     * @return array SQL insert statement
      */
-	public function generateInsertSQL(SugarBean $bean, $select_query, $start, $count = -1, $table, $is_related_query = false)
+    public function generateInsertSQL(SugarBean $bean, string $select_query, int $start, int $count, string $table, bool $is_related_query = false): array
 	{
         $this->logger->info('call to DBManager::generateInsertSQL() is deprecated');
 		global $sugar_config;
@@ -2510,15 +2511,15 @@ abstract class DBManager implements LoggerAwareInterface
     {
         $type = $this->getFieldType($fieldDef);
         if ($this->isBlobType($type)) {
-            return \PDO::PARAM_LOB;
+            return ParameterType::LARGE_OBJECT;
         }
         $typeClass = $this->getTypeClass($type);
         if ($typeClass == 'bool') {
-            return \PDO::PARAM_BOOL;
+            return ParameterType::BOOLEAN;
         } elseif ($typeClass == 'int') {
-            return \PDO::PARAM_INT;
+            return ParameterType::INTEGER;
         }
-        return \PDO::PARAM_STR;
+        return ParameterType::STRING;
     }
 
 	/**
@@ -2668,12 +2669,16 @@ abstract class DBManager implements LoggerAwareInterface
                     }
                     break;
             }
-        } elseif (!empty($val) && !empty($fieldDef['len']) && strlen($val) > $fieldDef['len']) {
+        } elseif (!empty($val) && !empty($fieldDef['len']) && !is_array($val) && strlen($val) > $fieldDef['len']) {
             $val = $this->truncate($val, $fieldDef['len']);
         }
 
         if (is_null($val)) {
             return $this->massageEmptyValue($fieldDef, $forPrepared);
+        }
+
+        if (is_array($val)) {
+            return '';
         }
 
         if ($type == "datetimecombo") {
@@ -3070,11 +3075,11 @@ abstract class DBManager implements LoggerAwareInterface
 	 * Returns SQL defintions for all columns in a table
 	 *
 	 * @param  array  $fieldDefs  Vardef-format field def
-	 * @param  bool   $ignoreRequired Optional, true if we should ignor this being a required field
-	 * @param  string $tablename      Optional, table name
+     * @param  bool   $ignoreRequired True if we should ignor this being a required field
+     * @param  string $tablename      Table name
 	 * @return string SQL column definitions
 	 */
-	protected function columnSQLRep($fieldDefs, $ignoreRequired = false, $tablename)
+    protected function columnSQLRep(array $fieldDefs, bool $ignoreRequired, string $tablename): string
 	{
 		$columns = array();
 
@@ -3473,8 +3478,8 @@ abstract class DBManager implements LoggerAwareInterface
                                 $after_value = trim($after_value);
                             }
 
-							$before_value = empty($before_value)? 0 : $before_value;
-							$after_value = empty($after_value)? 0 : $after_value;
+                            $before_value = empty($before_value) ? 0 : (float)$before_value;
+                            $after_value = empty($after_value) ? 0 : (float)$after_value;
 
                             $numerator = abs(2*($before_value - $after_value));
                             $denominator = abs($before_value + $after_value);
@@ -4793,5 +4798,9 @@ abstract class DBManager implements LoggerAwareInterface
         }
 
         return $indices;
+    }
+
+    public function optimizeTable(string $table): void
+    {
     }
 }

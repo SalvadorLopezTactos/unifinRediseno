@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arhiiv',
     'LBL_PROCESS_TYPE_DELETE' => 'Püsikustutamine',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arhiivi käitamised',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Hoiatus',
+    'LBL_ARCHIVER_WARNING' => 'Seda toimingut on soovitatav teha vähese kasutuse ajal või väljaspool tööaega, '
+        . 'kuna see võib mõjutada süsteemi toimivust. Kas soovite kindlasti kohe toimingu käivitada?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Mooduli {{moduleName}} arhiivijal peab olema filtriks määratud {{fieldName}}',
 );

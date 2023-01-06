@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Szülő típusa',
     'LBL_PARENT_ID' => 'Szülő azonosítója',
     'LBL_EXTRA_DATA' => 'További adatok',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - Megemlítve a következőn: {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} megemlített téged a következőn: {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Hozzárendelve a következőhöz: {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} hozzád rendelte a következőt: {{module_name_singular}}{{record_name}}.',
 ];

@@ -46,7 +46,7 @@ class DbCache implements CacheInterface
             ->from(static::TABLE_NAME)
             ->setMaxResults(1)
             ->execute()
-            ->fetchColumn();
+            ->fetchOne();
 
         return $data === false ? null : $data;
     }

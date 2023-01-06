@@ -36,7 +36,7 @@
          * this.model.changed, so it doesn't warn the user.
          */
         var changedAttributes = this.model.changedAttributes(this.model.getSynced());
-        this.model.set(changedAttributes, { revert: true });
+        this.model.set(changedAttributes, {revert: true, hideDbvWarning: true});
         this._super('cancelClicked');
     },
 

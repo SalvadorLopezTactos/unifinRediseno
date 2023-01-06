@@ -253,10 +253,25 @@ class ImapMailer implements Inbound
      * Gets all headers in array form
      * @param int $uid
      * @return array
+     * @throws MailerException
      */
     public function getHeaders(int $uid)
     {
-        $message = $this->getMessageFromId($uid);
+        try {
+            $message = $this->getMessageFromId($uid);
+        } catch (Exception $e) {
+            $message = "ImapMailer is unable to retrieve message with id: " . $uid . "\n";
+            if ($e instanceof Laminas\Mail\Exception\InvalidArgumentException) {
+                $message .= "The email has invalid argument found in file: " . $e->getFile() . "\n";
+                $message .= "The invalid argument is at line: " . $e->getLine() . "\n";
+                $message .= "The invalid argument causes error message: " . $e->getMessage() . "\n";
+                $message .= "Current email is skipped for the process.\n";
+            }
+            throw new MailerException(
+                $message,
+                MailerException::InvalidHeader
+            );
+        }
         return $message->getHeaders()->toArray();
     }
 
@@ -426,11 +441,51 @@ class ImapMailer implements Inbound
         }
         $header = $message->getHeader($addressType);
         $addresses = [];
-        $list = $header->getAddressList();
+        $list = $this->getHeaderAddressList($header, $addressType);
         foreach ($list as $address) {
             $addresses[] = $address->getEmail();
         }
         return $addresses;
+    }
+
+    /**
+     * Gets the header address list by the address type
+     * @param object $header
+     * @param string $addressType
+     * @return array
+     * @throws MailerException
+     */
+    public function getHeaderAddressList($header, string $addressType)
+    {
+        $list = [];
+        $addressType = $addressType === 'CC' ? 'Cc' : $addressType;
+        $addressType = $addressType === 'BCC' ? 'Bcc' : $addressType;
+        $addressType = $addressType === 'Reply-To' ? 'ReplyTo' : $addressType;
+
+        switch ($addressType) {
+            case 'From':
+            case 'To':
+            case 'Cc':
+            case 'Bcc':
+            case 'ReplyTo':
+                $headerAddressType = "Laminas\\Mail\\Header\\" . $addressType;
+                if ($header instanceof $headerAddressType) {
+                    $list = $header->getAddressList();
+                } else {
+                    $message = "System is unable to get address list for " .  $addressType .
+                        " address(es) from email header.\n";
+                    $message .= "The expected header object " . $headerAddressType . " is not formed properly.\n";
+                    $message .= "Current email is skipped for the process.\n";
+                    throw new MailerException(
+                        $message,
+                        MailerException::InvalidHeader
+                    );
+                }
+                break;
+            default:
+                $list = $header->getAddressList();
+        }
+        return $list;
     }
 
     /**

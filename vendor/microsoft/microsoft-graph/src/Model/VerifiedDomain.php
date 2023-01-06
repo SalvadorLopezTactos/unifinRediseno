@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 /**
@@ -18,10 +17,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class VerifiedDomain extends Entity
 {
@@ -29,7 +27,7 @@ class VerifiedDomain extends Entity
     * Gets the capabilities
     * For example, 'Email', 'OfficeCommunicationsOnline'.
     *
-    * @return string The capabilities
+    * @return string|null The capabilities
     */
     public function getCapabilities()
     {
@@ -57,7 +55,7 @@ class VerifiedDomain extends Entity
     * Gets the isDefault
     * true if this is the default domain associated with the tenant; otherwise, false.
     *
-    * @return bool The isDefault
+    * @return bool|null The isDefault
     */
     public function getIsDefault()
     {
@@ -85,7 +83,7 @@ class VerifiedDomain extends Entity
     * Gets the isInitial
     * true if this is the initial domain associated with the tenant; otherwise, false
     *
-    * @return bool The isInitial
+    * @return bool|null The isInitial
     */
     public function getIsInitial()
     {
@@ -113,7 +111,7 @@ class VerifiedDomain extends Entity
     * Gets the name
     * The domain name; for example, 'contoso.onmicrosoft.com'
     *
-    * @return string The name
+    * @return string|null The name
     */
     public function getName()
     {
@@ -141,7 +139,7 @@ class VerifiedDomain extends Entity
     * Gets the type
     * For example, 'Managed'.
     *
-    * @return string The type
+    * @return string|null The type
     */
     public function getType()
     {

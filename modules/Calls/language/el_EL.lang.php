@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Contact Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Περιγραφή Πληροφορίας',
     'LBL_DESCRIPTION' => 'Περιγραφή:',
+    'LBL_INTERNAL_NOTES' => 'Εσωτερικές Σημειώσεις:',
     'LBL_STATUS' => 'Κατάσταση:',
     'LBL_DIRECTION' => 'Κατεύθυνση:',
     'LBL_DATE' => 'Ημερομηνία Έναρξης:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Η Διάρκεια χρόνου πρέπει να είναι μεγαλύτερη από 0',
     'LBL_CALL_INFORMATION' => 'Επισκόπηση',
     'LBL_REMOVE' => 'αφαίρ.',
-    'LBL_ACCEPT_STATUS' => 'Αποδοχή Κατάστασης',
     'LBL_ACCEPT_LINK' => 'Αποδοχή Συνδέσμου',
     //For export labels
     'LBL_PARENT_ID' => 'Γονική Ταυτότητα',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Κλήση:',
     'LBL_CALL_RECORDING_URL' => 'URL εγγραφής',
     'LBL_CALL_RECORDING' => 'Εγγραφή',
+
+    'LBL_LEAD_ID' => 'Ταυτότητα Δυνητικού Πελάτη',
+    'LBL_LEAD_NAME' => 'Δυνητικός Πελάτης',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Προγραμματίσατε το {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> για {{formatDate date_start}}.',

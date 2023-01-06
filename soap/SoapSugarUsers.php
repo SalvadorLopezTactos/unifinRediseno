@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('soap/SoapHelperFunctions.php');
-require_once('soap/SoapTypes.php');
 
 use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
@@ -22,11 +21,42 @@ THIS IS FOR SUGARCRM USERS
 *************************************************************************************/
 $disable_date_format = true;
 
-$server->register(
+$server->addFunction([
     'is_user_admin',
-    array('session'=>'xsd:string'),
-    array('return'=>'xsd:int'),
-    $NAMESPACE);
+    'login',
+    'is_loopback',
+    'seamless_login',
+    'get_entry_list',
+    'get_entry',
+    'get_entries',
+    'set_entry',
+    'set_entries',
+    'set_note_attachment',
+    'get_note_attachment',
+    'relate_note_to_module',
+    'get_related_notes',
+    'logout',
+    'get_module_fields',
+    'get_available_modules',
+    'update_portal_user',
+    'get_user_id',
+    'get_user_team_id',
+    'get_server_time',
+    'get_gmt_time',
+    'get_sugar_flavor',
+    'get_server_version',
+    'get_relationships',
+    'set_relationship',
+    'set_relationships',
+    'set_document_revision',
+    'search_by_module',
+    'get_mailmerge_document',
+    'get_mailmerge_document2',
+    'get_document_revision',
+    'set_campaign_merge',
+    'get_entries_count',
+    'set_entries_details',
+]);
 
 /**
  * Return if the user is an admin or not
@@ -44,13 +74,6 @@ function is_user_admin($session){
 	}
 }
 
-
-$server->register(
-        'login',
-        array('user_auth'=>'tns:user_auth', 'application_name'=>'xsd:string'),
-        array('return'=>'tns:set_entry_result'),
-        $NAMESPACE);
-
 /**
  * Log the user into the application
  *
@@ -62,6 +85,7 @@ $server->register(
  *      created.  Error is set if there was any error during creation.
  */
 function login($user_auth, $application){
+    $user_auth = object_to_array_deep($user_auth);
     global $sugar_config;
 
 	$error = new SoapError();
@@ -130,11 +154,6 @@ function login($user_auth, $application){
 }
 
 //checks if the soap server and client are running on the same machine
-$server->register(
-        'is_loopback',
-        array(),
-        array('return'=>'xsd:int'),
-        $NAMESPACE);
 
 /**
  * Check to see if the soap server and client are on the same machine.
@@ -222,12 +241,6 @@ function is_valid_ip_address($session_var){
 	return true;
 }
 
-$server->register(
-    'seamless_login',
-    array('session'=>'xsd:string'),
-    array('return'=>'xsd:int'),
-    $NAMESPACE);
-
 /**
  * Perform a seamless login.  This is used internally during the sync process.
  *
@@ -249,12 +262,6 @@ function seamless_login($session, $ip = null)
 
 		return 1;
 }
-
-$server->register(
-    'get_entry_list',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'query'=>'xsd:string', 'order_by'=>'xsd:string','offset'=>'xsd:int', 'select_fields'=>'tns:select_fields', 'max_results'=>'xsd:int', 'deleted'=>'xsd:int'),
-    array('return'=>'tns:get_entry_list_result'),
-    $NAMESPACE);
 
 /**
  * Retrieve a list of beans.  This is the primary method for getting list of SugarBeans from Sugar using the SOAP API.
@@ -279,6 +286,8 @@ $server->register(
  *               'error' -- The SOAP error, if any
  */
 function get_entry_list($session, $module_name, $query, $order_by,$offset, $select_fields, $max_results, $deleted ){
+    $select_fields = object_to_array_deep($select_fields);
+
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -399,12 +408,6 @@ function get_entry_list($session, $module_name, $query, $order_by,$offset, $sele
 	return array('result_count'=>sizeof($output_list), 'next_offset'=>$next_offset,'field_list'=>$field_list, 'entry_list'=>$output_list, 'error'=>$error->get_soap_array());
 }
 
-$server->register(
-    'get_entry',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'id'=>'xsd:string', 'select_fields'=>'tns:select_fields'),
-    array('return'=>'tns:get_entry_result'),
-    $NAMESPACE);
-
 /**
  * Retrieve a single SugarBean based on ID.
  *
@@ -418,12 +421,6 @@ function get_entry($session, $module_name, $id,$select_fields ){
 	return get_entries($session, $module_name, array($id), $select_fields);
 }
 
-$server->register(
-    'get_entries',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'ids'=>'tns:select_fields', 'select_fields'=>'tns:select_fields'),
-    array('return'=>'tns:get_entry_result'),
-    $NAMESPACE);
-
 /**
  * Retrieve a list of SugarBean's based on provided IDs.
  *
@@ -436,6 +433,8 @@ $server->register(
  *               'error' -- The SOAP error, if any
  */
 function get_entries($session, $module_name, $ids,$select_fields ){
+    $ids = object_to_array_deep($ids);
+    $select_fields = object_to_array_deep($select_fields);
 	global  $beanList;
 	$error = new SoapError();
 	$field_list = array();
@@ -508,12 +507,6 @@ function get_entries($session, $module_name, $ids,$select_fields ){
 	return array( 'field_list'=>$field_list, 'entry_list'=>$output_list, 'error'=>$error->get_soap_array());
 }
 
-$server->register(
-    'set_entry',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string',  'name_value_list'=>'tns:name_value_list'),
-    array('return'=>'tns:set_entry_result'),
-    $NAMESPACE);
-
 /**
  * Update or create a single SugarBean.
  *
@@ -524,6 +517,7 @@ $server->register(
  *                  'error' -- The SOAP error if any.
  */
 function set_entry($session,$module_name, $name_value_list){
+    $name_value_list = object_to_array_deep($name_value_list);
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -608,12 +602,6 @@ function set_entry($session,$module_name, $name_value_list){
 
 }
 
-$server->register(
-    'set_entries',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string',  'name_value_lists'=>'tns:name_value_lists'),
-    array('return'=>'tns:set_entries_result'),
-    $NAMESPACE);
-
 /**
  * Update or create a list of SugarBeans
  *
@@ -624,6 +612,7 @@ $server->register(
  *                  'error' -- The SOAP error if any.
  */
 function set_entries($session,$module_name, $name_value_lists){
+    $name_value_lists = object_to_array_deep($name_value_lists);
 	$error = new SoapError();
 
 	if(!validate_authenticated($session)){
@@ -641,11 +630,6 @@ function set_entries($session,$module_name, $name_value_lists){
 /*
 NOTE SPECIFIC CODE
 */
-$server->register(
-        'set_note_attachment',
-        array('session'=>'xsd:string','note'=>'tns:note_attachment'),
-        array('return'=>'tns:set_entry_result'),
-        $NAMESPACE);
 
 /**
  * Add or replace the attachment on a Note.
@@ -657,7 +641,7 @@ $server->register(
  */
 function set_note_attachment($session,$note)
 {
-
+    $note = object_to_array_deep($note);
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -668,12 +652,6 @@ function set_note_attachment($session,$note)
 	return array('id'=>$ns->saveFile($note), 'error'=>$error->get_soap_array());
 
 }
-
-$server->register(
-    'get_note_attachment',
-    array('session'=>'xsd:string', 'id'=>'xsd:string'),
-    array('return'=>'tns:return_note_attachment'),
-    $NAMESPACE);
 
 /**
  * Retrieve an attachment from a note
@@ -715,11 +693,6 @@ function get_note_attachment($session,$id)
 	return array('note_attachment'=>array('id'=>$id, 'filename'=>$note->filename, 'file'=>$file), 'error'=>$error->get_soap_array());
 
 }
-$server->register(
-    'relate_note_to_module',
-    array('session'=>'xsd:string', 'note_id'=>'xsd:string', 'module_name'=>'xsd:string', 'module_id'=>'xsd:string'),
-    array('return'=>'tns:error_value'),
-    $NAMESPACE);
 
 /**
  * Attach a note to another bean.  Once you have created a note to store an
@@ -770,11 +743,6 @@ function relate_note_to_module($session,$note_id, $module_name, $module_id){
 	return $error->get_soap_array();
 
 }
-$server->register(
-    'get_related_notes',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'module_id'=>'xsd:string', 'select_fields'=>'tns:select_fields'),
-    array('return'=>'tns:get_entry_result'),
-    $NAMESPACE);
 
 /**
  * Retrieve the collection of notes that are related to a bean.
@@ -790,6 +758,7 @@ $server->register(
  *                  'error' -- The SOAP error, if any
  */
 function get_related_notes($session,$module_name, $module_id, $select_fields){
+    $select_fields = object_to_array_deep($select_fields);
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -828,12 +797,6 @@ function get_related_notes($session,$module_name, $module_id, $select_fields){
 	return array('result_count'=>sizeof($output_list), 'next_offset'=>0,'field_list'=>$field_list, 'entry_list'=>$output_list, 'error'=>$error->get_soap_array());
 }
 
-$server->register(
-        'logout',
-        array('session'=>'xsd:string'),
-        array('return'=>'tns:error_value'),
-        $NAMESPACE);
-
 /**
  * Log out of the session.  This will destroy the session and prevent other's from using it.
  *
@@ -855,12 +818,6 @@ function logout($session){
 	$GLOBALS['logic_hook']->call_custom_logic('Users', 'after_logout');
 	return $error->get_soap_array();
 }
-
-$server->register(
-    'get_module_fields',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string'),
-    array('return'=>'tns:module_fields'),
-    $NAMESPACE);
 
 /**
  * Retrieve vardef information on the fields of the specified bean.
@@ -906,12 +863,6 @@ function get_module_fields($session, $module_name){
     }
 }
 
-$server->register(
-    'get_available_modules',
-    array('session'=>'xsd:string'),
-    array('return'=>'tns:module_list'),
-    $NAMESPACE);
-
 /**
  * Retrieve the list of available modules on the system available to the currently logged in user.
  *
@@ -931,13 +882,6 @@ function get_available_modules($session){
 	return array('modules'=> $modules, 'error'=>$error->get_soap_array());
 }
 
-
-$server->register(
-    'update_portal_user',
-    array('session'=>'xsd:string', 'portal_name'=>'xsd:string', 'name_value_list'=>'tns:name_value_list'),
-    array('return'=>'tns:error_value'),
-    $NAMESPACE);
-
 /**
  * Update the properties of a contact that is portal user.  Add the portal user name to the user's properties.
  *
@@ -947,6 +891,7 @@ $server->register(
  * @return Empty error on success, Error on failure
  */
 function update_portal_user($session,$portal_name, $name_value_list){
+    $name_value_list = object_to_array_deep($name_value_list);
 	global  $beanList, $beanFiles;
 	$error = new SoapError();
 	if(! validate_authenticated($session)){
@@ -977,12 +922,6 @@ function update_portal_user($session,$portal_name, $name_value_list){
 	return $error->get_soap_array();
 }
 
-$server->register(
-    'get_user_id',
-    array('session'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-
 /**
  * Return the user_id of the user that is logged into the current session.
  *
@@ -999,12 +938,6 @@ function get_user_id($session){
 		return '-1';
 	}
 }
-
-$server->register(
-    'get_user_team_id',
-    array('session'=>'xsd:string'),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
 
 /**
  * Return the ID of the default team for the user that is logged into the current session.
@@ -1023,12 +956,6 @@ function get_user_team_id($session){
 	}
 }
 
-$server->register(
-    'get_server_time',
-    array(),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-
 /**
  * Return the current time on the server in the format 'Y-m-d H:i:s'.  This time is in the server's default timezone.
  *
@@ -1038,12 +965,6 @@ function get_server_time(){
 	return date('Y-m-d H:i:s');
 }
 
-$server->register(
-    'get_gmt_time',
-    array(),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
-
 /**
  * Return the current time on the server in the format 'Y-m-d H:i:s'.  This time is in GMT.
  *
@@ -1052,12 +973,6 @@ $server->register(
 function get_gmt_time(){
 	return TimeDate::getInstance()->nowDb();
 }
-
-$server->register(
-    'get_sugar_flavor',
-    array(),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
 
 /**
  * Retrieve the specific flavor of sugar.
@@ -1070,13 +985,6 @@ function get_sugar_flavor(){
 
  return $sugar_flavor;
 }
-
-
-$server->register(
-    'get_server_version',
-    array(),
-    array('return'=>'xsd:string'),
-    $NAMESPACE);
 
 /**
  * Retrieve the version number of Sugar that the server is running.
@@ -1094,12 +1002,6 @@ function get_server_version(){
 	}
 
 }
-
-$server->register(
-    'get_relationships',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'module_id'=>'xsd:string', 'related_module'=>'xsd:string', 'related_module_query'=>'xsd:string', 'deleted'=>'xsd:int'),
-    array('return'=>'tns:get_relationships_result'),
-    $NAMESPACE);
 
 /**
  * Retrieve a collection of beans tha are related to the specified bean.
@@ -1193,13 +1095,6 @@ function get_relationships($session, $module_name, $module_id, $related_module, 
 	return array('ids' => $return_list, 'error' => $error->get_soap_array());
 }
 
-
-$server->register(
-    'set_relationship',
-    array('session'=>'xsd:string','set_relationship_value'=>'tns:set_relationship_value'),
-    array('return'=>'tns:error_value'),
-    $NAMESPACE);
-
 /**
  * Set a single relationship between two beans.  The items are related by module name and id.
  *
@@ -1212,6 +1107,7 @@ $server->register(
  * @return Empty error on success, Error on failure
  */
 function set_relationship($session, $set_relationship_value){
+    $set_relationship_value = object_to_array_deep($set_relationship_value);
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -1219,12 +1115,6 @@ function set_relationship($session, $set_relationship_value){
 	}
 	return handle_set_relationship($set_relationship_value, $session);
 }
-
-$server->register(
-    'set_relationships',
-    array('session'=>'xsd:string','set_relationship_list'=>'tns:set_relationship_list'),
-    array('return'=>'tns:set_relationship_list_result'),
-    $NAMESPACE);
 
 /**
  * Setup several relationships between pairs of beans.  The items are related by module name and id.
@@ -1238,6 +1128,7 @@ $server->register(
  * @return Empty error on success, Error on failure
  */
 function set_relationships($session, $set_relationship_list){
+    $set_relationship_list = object_to_array_deep($set_relationship_list);
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -1419,13 +1310,6 @@ function handle_set_relationship($set_relationship_value, $session='')
     return $error->get_soap_array();
 }
 
-
-$server->register(
-        'set_document_revision',
-        array('session'=>'xsd:string','note'=>'tns:document_revision'),
-        array('return'=>'tns:set_entry_result'),
-        $NAMESPACE);
-
 /**
  * Enter description here...
  *
@@ -1435,7 +1319,7 @@ $server->register(
  */
 function set_document_revision($session,$document_revision)
 {
-
+    $document_revision = object_to_array_deep($document_revision);
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -1446,12 +1330,6 @@ function set_document_revision($session,$document_revision)
 	return array('id'=>$dr->saveFile($document_revision), 'error'=>$error->get_soap_array());
 
 }
-
-$server->register(
-        'search_by_module',
-        array('user_name'=>'xsd:string','password'=>'xsd:string','search_string'=>'xsd:string', 'modules'=>'tns:select_fields', 'offset'=>'xsd:int', 'max_results'=>'xsd:int'),
-        array('return'=>'tns:get_entry_list_result'),
-        $NAMESPACE);
 
 /**
  * Given a list of modules to search and a search string, return the id, module_name, along with the fields
@@ -1466,6 +1344,7 @@ $server->register(
  * @return get_entry_list_result 	- id, module_name, and list of fields from each record
  */
 function search_by_module($user_name, $password, $search_string, $modules, $offset, $max_results){
+    $modules = object_to_array_deep($modules);
 	$error = new SoapError();
     $hasLoginError = false;
 
@@ -1635,13 +1514,6 @@ function search_by_module($user_name, $password, $search_string, $modules, $offs
 
 }//end function
 
-
-$server->register(
-'get_mailmerge_document',
-array('session'=>'xsd:string','file_name'=>'xsd:string', 'fields' => 'tns:select_fields'),
-array('return'=>'tns:get_sync_result_encoded'),
-$NAMESPACE);
-
 /**
  * Get MailMerge document
  *
@@ -1652,6 +1524,7 @@ $NAMESPACE);
  */
 function get_mailmerge_document($session, $file_name, $fields)
 {
+    $fields = object_to_array_deep($fields);
     global $app_list_strings;
     $error = new SoapError();
     if(!validate_authenticated($session))
@@ -1763,12 +1636,6 @@ function get_mailmerge_document($session, $file_name, $fields)
     return array('result' => $result, 'error' => $error);
 }
 
-$server->register(
-'get_mailmerge_document2',
-array('session'=>'xsd:string','file_name'=>'xsd:string', 'fields' => 'tns:select_fields'),
-array('return'=>'tns:get_mailmerge_document_result'),
-$NAMESPACE);
-
 /**
  * Enter description here...
  *
@@ -1779,6 +1646,7 @@ $NAMESPACE);
  */
 function get_mailmerge_document2($session, $file_name, $fields)
 {
+    $fields = object_to_array_deep($fields);
     global $app_list_strings, $app_strings;
 
     $error = new SoapError();
@@ -1914,12 +1782,6 @@ function get_mailmerge_document2($session, $file_name, $fields)
     return array('html' => $result, 'name_value_list' => $resultIds, 'error' => $error);
 }
 
-$server->register(
-        'get_document_revision',
-        array('session'=>'xsd:string','i'=>'xsd:string'),
-        array('return'=>'tns:return_document_revision'),
-        $NAMESPACE);
-
 /**
  * This method is used as a result of the .htaccess lock down on the cache directory. It will allow a
  * properly authenticated user to download a document that they have proper rights to download.
@@ -1950,11 +1812,7 @@ function get_document_revision($session,$id)
     }
 
 }
-$server->register(
-    'set_campaign_merge',
-    array('session'=>'xsd:string', 'targets'=>'tns:select_fields', 'campaign_id'=>'xsd:string'),
-    array('return'=>'tns:error_value'),
-    $NAMESPACE);
+
 /**
 *   Once we have successfuly done a mail merge on a campaign, we need to notify Sugar of the targets
 *   and the campaign_id for tracking purposes
@@ -1966,6 +1824,7 @@ $server->register(
 * @return error_value
 */
 function set_campaign_merge($session,$targets, $campaign_id){
+    $targets = object_to_array_deep($targets);
     $error = new SoapError();
     if(!validate_authenticated($session)){
         $error->set_error('invalid_login');
@@ -1980,11 +1839,6 @@ function set_campaign_merge($session,$targets, $campaign_id){
 
     return $error->get_soap_array();
 }
-$server->register(
-    'get_entries_count',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'query'=>'xsd:string', 'deleted' => 'xsd:int'),
-    array('return'=>'tns:get_entries_count_result'),
-    $NAMESPACE);
 
 /**
 *   Retrieve number of records in a given module
@@ -2073,12 +1927,6 @@ function get_entries_count($session, $module_name, $query, $deleted) {
 	);
 }
 
-$server->register(
-    'set_entries_details',
-    array('session'=>'xsd:string', 'module_name'=>'xsd:string',  'name_value_lists'=>'tns:name_value_lists', 'select_fields' => 'tns:select_fields'),
-    array('return'=>'tns:set_entries_detail_result'),
-    $NAMESPACE);
-
 /**
  * Update or create a list of SugarBeans, returning details about the records created/updated
  *
@@ -2090,6 +1938,9 @@ $server->register(
  *                  'error' -- The SOAP error if any.
  */
 function set_entries_details($session, $module_name, $name_value_lists, $select_fields) {
+    $name_value_lists = object_to_array_deep($name_value_lists);
+    $select_fields = object_to_array_deep($select_fields);
+
 	$error = new SoapError();
 
 	if(!validate_authenticated($session)){

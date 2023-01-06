@@ -33,11 +33,11 @@ input.empty {
 }
 
 .markItUpHeader {
-    border: 1px solid grey;
+    border: 1px solid var(--border-color);
     height: 24px;
     width: 495px;
     padding: 2px;
-    background: #EEE;
+    background: var(--headerpane-background);
 }
 
 #formulaBuilder .markItUpHeader ul a {
@@ -45,7 +45,8 @@ input.empty {
     height: auto;
     text-indent: 14px;
     padding-top: 2px;
-    background-position-y: 2px
+    background-position-y: 2px;
+    color: var(--text-color);
 }
 
 #formulaBuilder .markItUpHeader ul li {
@@ -94,9 +95,10 @@ input.empty {
 	margin: 0;
 	display:block;
 	float: left;
-    background: rgba(235,235,235, 0.9);
-    border: 1px solid gray;
+    background: var(--dropdown-background);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
+    color: var(--text-color);
 }
 #fb_ac_wrapper .ui-menu .ui-menu {
 	margin-top: -3px;
@@ -155,8 +157,8 @@ ul.ui-autocomplete {
     position: absolute;
     visibility: hidden;
     z-index: 51;
-    background-color: rgba(255, 255, 200, 0.8);
-    border: 1px solid gray;
+    background-color: var(--secondary-content-background);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 3px;
     margin: 0 0 0 2px;
@@ -173,7 +175,11 @@ ul.ui-autocomplete {
 
 #fb_ac_wrapper ul.fb_ac_menu li.ui-state-focus {
     font-weight: bold;
-    background: #dadada url("../../../include/javascript/jquery/themes/base/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50%;
-    border: 1px solid #999;
-    color: #212121;
+    background: var(--secondary-content-background) url("../../../include/javascript/jquery/themes/base/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50%;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+#fb_ac_wrapper ul.fb_ac_menu li.ui-state-active {
+    background: var(--dropdown-link-background-hover);
 }

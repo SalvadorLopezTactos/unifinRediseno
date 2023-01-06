@@ -46,13 +46,6 @@ $dictionary['projects_contacts'] = array(
             ),
         ),
         array(
-            'name' => 'idx_proj_con_proj',
-            'type' => 'index',
-            'fields' => array(
-                'project_id',
-            ),
-        ),
-        array(
             'name' => 'idx_proj_con_con',
             'type' => 'index',
             'fields' => array(

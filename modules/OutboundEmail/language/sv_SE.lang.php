@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Svars-e-postadress-ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Svars-e-postadress',
     'LBL_PRIMARY_TEAM' => 'Förstateam',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Föredraget från-konto',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för e-postinställningar',
 );

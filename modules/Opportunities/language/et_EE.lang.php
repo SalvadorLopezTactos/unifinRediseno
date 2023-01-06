@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Worksheet',
     'LBL_PURCHASED_LINE_ITEMS' => 'Ostetud reaüksused',
 
+    'LBL_FORECASTED_LIKELY' => 'Prognoosi järgi tõenäoline',
     'LBL_RENEWAL' => 'Uuendamine',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Uuendamise võimalused',
     'LBL_RENEWAL_PARENT' => 'Emavõimalus',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# of Total Revenue Line Items',
     'LBL_CLOSED_RLIS' => '# of Closed Revenue Line Items',
+    'LBL_CLOSED_WON_RLIS' => '# lõpetatud võidetud tuluartiklitest',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# avatud teenuse paindliku kestuse tulude rea üksustest',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'You cannot delete Opportunities that contain closed Revenue Line Items',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'One or more of the selected records contains closed Revenue Line Items and cannot be deleted.',
     'LBL_INCLUDED_RLIS' => '# of Included Revenue Line Items',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Värskendus avatud',
+    'LBL_CASCADE_RLI_EDIT' => 'Uuenda avatud tulude rea üksusi',
+    'LBL_CASCADE_RLI_CREATE' => 'Määra tulude rea üksuste ulatuses',
     'LBL_SERVICE_START_DATE_INVALID' => 'Ühegi avatud tulu reaüksuse lisandmooduli teenuse alguskuupäev ei tohi olla teenuse lõppkuupäevast hilisem.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
@@ -207,25 +211,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'After you initiate this change, Revenue Line Item records will be created for each existing {{module_name}} in the background. When the Revenue Line Items are complete and available, a notification will be sent to the email address on your user profile. Please note that your instance must be configured to send email via Admin > Email Settings in order for the notification to be sent.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida üksikuid müüke algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, aga viitab ka teistele olulistele kirjetele, nagu moodulid {{quotes_module}}, {{contacts_module}} jne. Moodul {{module_name}} teeb enamasti läbi mitu müügietappi, enne kui sellele lisatakse kas märge „Lõpetatud – võidetud“ või „Lõpetatud – kaotatud“. Moodulit {{plural_module_name}} on võimalik veelgi enam võimendada, kasutades Sugari moodulit {{forecasts_singular_module}} müügitrendide mõistmiseks ning prognoosimiseks, aga ka müügikvootide täitmisele keskendumiseks.',
+    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida üksikuid müüke algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, aga ka muid olulisi kirjeid, nagu {{quotes_module}}, {{contacts_module}} jne. Moodul {{module_name}} teeb enamasti läbi mitu müügietappi, enne kui sellele lisatakse kas märge „Lõpetatud – võidetud“ või „Lõpetatud – kaotatud“. Moodulit {{plural_module_name}} on võimalik veelgi enam võimendada, kasutades Sugari moodulit {{forecasts_singular_module}} müügitrendide mõistmiseks ning prognoosimiseks, aga ka müügikvootide täitmisele keskendumiseks.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab teil jälgida algusest lõpuni individuaalseid müüke ja müükide juurde kuuluvaid reaüksusi. Mooduli {{module_name}} iga kirje märgib potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, aga ka muid olulisi kirjeid, näiteks {{quotes_module}}, {{contacts_module}} jms.
+    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab teil algusest lõpuni jälgida üksikuid müüke ja müükide juurde kuuluvaid reaüksusi. Mooduli {{module_name}} iga kirje märgib potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, aga ka muid olulisi kirjeid, näiteks {{quotes_module}}, {{contacts_module}} jne.
 
-- Selle kirje väljade redigeerimiseks klõpsake üksikut välja või nuppu Redigeeri.
-- Vaadake või muutke alampaneelil teiste kirjete linke, valides alumisel vasakpoolsel paanil suvandi Andmevaade.
-- Kirjutage ja vaadake kasutajate kommentaare ning salvestage muudatuste ajalugu moodulis {{activitystream_singular_module}}, valides alumisel vasakpoolsel paanil suvandi Tegevusvoog.
+- Selle kirje väljade redigeerimiseks klõpsake üksikut välja või redigeerimise nuppu.
+- Vaadake või muutke alampaneelil teiste kirjete linke, valides alumisel vasakpoolsel paanil suvandi „Andmevaade“.
+- Kirjutage ja vaadake kasutajate kommentaare ning salvestage muudatuste ajalugu moodulis {{activitystream_singular_module}}, valides alumisel vasakpoolsel paanil suvandi „Tegevusvoog“.
 - Jälgige nimetatud kirjet või lisage see lemmikute hulka, kasutades kirje nimest paremal asuvaid ikoone. 
-- Lisategevusi saab valida tegevuste rippmenüüst, mis asub nupust Redigeeri paremal.',
+- Lisategevusi saab valida tegevuste rippmenüüst, mis asub redigeerimise nupust paremal.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab teil jälgida algusest lõpuni individuaalseid müüke ja müükide juurde kuuluvaid reaüksusi. Mooduli {{module_name}} iga kirje märgib potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, nagu ka muid olulisi kirjeid, näiteks {{quotes_module}}, {{contacts_module}} jms.
+    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab teil algusest lõpuni jälgida üksikuid müüke ja müükide juurde kuuluvaid reaüksusi. Mooduli {{module_name}} iga kirje märgib potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, aga ka muid olulisi kirjeid, nagu {{quotes_module}}, {{contacts_module}} jne.
 
 Mooduli {{module_name}} loomiseks tehke järgmist.
 1. Sisestage väljadele soovitud väärtused.
- - Väljad, millel on märge Kohustuslik, tuleb täita enne salvestamist.
- - Lisaväljade avaldamiseks vajaduse korral klõpsake suvandit Kuva rohkem.
-2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
+ - Väljad, millel on märge „Kohustuslik“, tuleb täita enne salvestamist.
+ - Vajadusel lisaväljade avaldamiseks klõpsake suvandit „Kuva rohkem“.
+2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu „Salvesta“.',
 
 // END ENT/ULT
 
@@ -239,7 +243,10 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "My Team's Opportunities",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Moodulit {{fieldName}} ei saa muuta kuna moodulil {{moduleSingular}} ei ole avatud reaüksuseid.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Müügivõimaluse interaktsioonid',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Võimaluse ajaskaala',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' ei saa seadistada ühegi tulude rea üksuse ulatuses, kuna need ei ole teenused. Kas soovite jätkata ilma loomiseta?',
+    'LBL_CASCADE_DURATION_WARNING' => ' ei saa seadistada ühegi tulude rea üksuse ulatuses, kuna nende kestused on lukustatud. Kas soovite jätkata ilma loomiseta?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Müügivõimaluse sulgemise prognoos',

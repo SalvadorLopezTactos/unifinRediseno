@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Rreshti i llojeve të të ardhurave',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Blerjet',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Artikujt e blerë të rreshtit',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Paneli i regjistrimit të dokumenteve',
+    'LBL_MY_DOCUMENTS' => 'Dokumentet e mia',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Dërgo te DocuSign',
 );

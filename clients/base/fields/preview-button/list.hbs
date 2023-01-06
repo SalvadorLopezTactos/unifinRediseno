@@ -22,7 +22,7 @@
    name="{{name}}" track="click:{{#if name}}{{name}}{{else}}{{label}}{{/if}}">
     {{#if tooltip}}
         {{#if def.icon}}
-            <i class="fa {{def.icon}}"></i>
+            <i class="{{buildIcon def.icon}}"></i>
         {{/if}}
     {{/if}}
     {{str label}}

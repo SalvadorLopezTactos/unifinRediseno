@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Emailadress:',
     'LBL_EMAIL_ATTACHMENT' => 'Emailbilaga',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'E-postbilaga för',
+    'LBL_NOTE_ATTACHMENT' => 'Anteckningsbilagor',
+    'LBL_KB_ATTACHMENT' => 'KBDocument-bilagor',
+    'LBL_CASE_ATTACHMENT' => 'Ärende-bilagor',
     'LBL_FILE_MIME_TYPE' => 'Mime typ',
     'LBL_FILE_EXTENSION' => 'Filändelse',
     'LBL_FILE_SOURCE' => 'Filkälla',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Notering källa',
     'LBL_SOURCE_EXTERNAL' => 'Extern',
     'LBL_SOURCE_INTERNAL' => 'Intern',
+    'LBL_PORTAL' => 'Portal',
 
     // Help Text
     // List View Help Text

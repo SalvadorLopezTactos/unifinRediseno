@@ -298,6 +298,15 @@ class KBContent extends SugarBean {
                 $this->updateCategoryExternalVisibility($dataChanges['category_id']['before']);
             }
         }
+
+        if ($this->load_relationship('attachments')) {
+            $attachments = $this->attachments->getBeans();
+
+            foreach ($attachments as $attachment) {
+                $attachment->setAttachmentTeams($this);
+            }
+        }
+
         return $beanId;
     }
 

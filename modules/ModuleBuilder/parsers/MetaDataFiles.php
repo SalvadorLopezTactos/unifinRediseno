@@ -463,7 +463,16 @@ class MetaDataFiles
             } else {
                 $file = new MetaDataFileDeployed($file, $params['location']);
 
-                if (!empty($params['role'])) {
+                if (!empty($params['layoutOption'])
+                    && $params['layoutOption'] === 'dropdown'
+                    && !empty($params['dropdownField'])
+                    && !empty($params['dropdownValue'])
+                ) {
+                    $file = new MetaDataFileDropdownDependent($file, $params['dropdownField'], $params['dropdownValue']);
+                } elseif (!empty($params['layoutOption'])
+                    && $params['layoutOption'] === 'role'
+                    && !empty($params['role'])
+                ) {
                     $file = new MetaDataFileRoleDependent($file, $params['role']);
                 }
             }
@@ -785,22 +794,8 @@ class MetaDataFiles
         if (empty($module)) {
             return null;
         }
-        $sc = SugarConfig::getInstance();
-        //No need to write the module cache for a specific context, we can't load from it anyway.
-        $noCache = !empty($context);
-        $noCache = $noCache || $sc->get('roleBasedViews', false);
-        $clientCache = array();
-        $cacheFile = sugar_cached('modules/' . $module . '/clients/' . $platforms[0] . '/' . $type . '.php');
-        if ($noCache || !file_exists($cacheFile)) {
-            $result = self::buildModuleClientCache($platforms, $type, $module, $context, $noCache);
-            if ($noCache) {
-                return $result;
-            }
-        }
-        $clientCache[$module][$platforms[0]][$type] = array();
-        require $cacheFile;
-
-        return $clientCache[$module][$platforms[0]][$type];
+        $noCache = true;
+        return self::buildModuleClientCache($platforms, $type, $module, $context, $noCache);
     }
 
     /**
@@ -811,6 +806,7 @@ class MetaDataFiles
      * @param string $type     The type of file to create the cache for.
      * @param array $modules   The module to create the cache for.
      * @param MetaDataContextInterface|null $context Metadata context
+     * @param bool $noCache    no cache flag
      */
     public static function buildModuleClientCache(
         $platforms,
@@ -832,7 +828,7 @@ class MetaDataFiles
         foreach ($modules as $module) {
             $seed = BeanFactory::newBean($module);
             $fileList = static::getClientFiles($platforms, $type, $module, $context, $seed);
-            $moduleResults = static::getClientFileContents($fileList, $type, $module, $seed);
+            $moduleResults = static::getClientFileContents($fileList, $type, $module, $seed, $platforms[0]);
 
             if ($type == "view") {
                 foreach ($moduleResults as $view => $defs) {
@@ -896,6 +892,8 @@ class MetaDataFiles
                             $field = ['name' => $field];
                         } elseif (isset($field['name'])) {
                             $name = $field['name'];
+                        } else {
+                            $name = null;
                         }
 
                         // First merge any displayParams from the viewdef, these will still lose to
@@ -942,6 +940,7 @@ class MetaDataFiles
         ?SugarBean $bean = null
     ) {
         $checkPaths = array();
+        $dropdownViews = false;
 
         // First, build a list of paths to check
         if ($module == '') {
@@ -962,22 +961,34 @@ class MetaDataFiles
                     $bean = BeanFactory::newBean($module);
                 }
                 $module_path  = isset($bean->module_dir) ? $bean->module_dir : $module;
-                $checkPaths['custom/modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
-                $checkPaths['modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
-                $baseTemplateDir = 'include/SugarObjects/templates/basic/clients/'.$platform.'/'.$type.'s';
-                $nonBaseTemplateDir = self::getSugarObjectFileDir($module, $platform, $type, $bean);
-                if (!empty($nonBaseTemplateDir) && $nonBaseTemplateDir != $baseTemplateDir ) {
-                    $checkPaths['custom/'.$nonBaseTemplateDir] = array('platform'=>$platform,'template'=>true);
-                    $checkPaths[$nonBaseTemplateDir] = array('platform'=>$platform, 'template'=>true);
+                if ($type === 'dropdownViews') {
+                    $type = 'view';
+                    $dropdownViews = true;
+                    $checkPaths['custom/modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = ['platform'=>$platform,'template'=>false];
+                    $baseTemplateDir = 'include/SugarObjects/templates/basic/clients/'.$platform.'/'.$type.'s';
+                    $nonBaseTemplateDir = self::getSugarObjectFileDir($module, $platform, $type, $bean);
+                    if (!empty($nonBaseTemplateDir) && $nonBaseTemplateDir != $baseTemplateDir) {
+                        $checkPaths['custom/'.$nonBaseTemplateDir] = ['platform'=>$platform,'template'=>true];
+                    }
+                    $checkPaths['custom/'.$baseTemplateDir] = ['platform'=>$platform,'template'=>true];
+                } else {
+                    $checkPaths['custom/modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
+                    $checkPaths['modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
+                    $baseTemplateDir = 'include/SugarObjects/templates/basic/clients/'.$platform.'/'.$type.'s';
+                    $nonBaseTemplateDir = self::getSugarObjectFileDir($module, $platform, $type, $bean);
+                    if (!empty($nonBaseTemplateDir) && $nonBaseTemplateDir != $baseTemplateDir) {
+                        $checkPaths['custom/'.$nonBaseTemplateDir] = array('platform'=>$platform,'template'=>true);
+                        $checkPaths[$nonBaseTemplateDir] = array('platform'=>$platform, 'template'=>true);
+                    }
+                    $checkPaths['custom/'.$baseTemplateDir] = array('platform'=>$platform,'template'=>true);
+                    $checkPaths[$baseTemplateDir] = array('platform'=>$platform,'template'=>true);
+                    $checkPaths[self::getSugarExtensionFileDir($module, $platform, $type)] = array('platform' => $platform, 'template' => false);
                 }
-                $checkPaths['custom/'.$baseTemplateDir] = array('platform'=>$platform,'template'=>true);
-                $checkPaths[$baseTemplateDir] = array('platform'=>$platform,'template'=>true);
-                $checkPaths[self::getSugarExtensionFileDir($module, $platform, $type)] = array('platform' => $platform, 'template' => false);
             }
         }
 
         // Second, get a list of files in those directories, sorted by "relevance"
-        return self::getClientFileList($checkPaths, $context);
+        return self::getClientFileList($checkPaths, $context, $dropdownViews);
     }
 
     /**
@@ -985,10 +996,11 @@ class MetaDataFiles
      *
      * @param array $checkPaths A list of directories to include files.
      * @param MetaDataContextInterface|null $context Metadata context
+     * @param bool $dropdownViews True for dropdown based views
      *
      * @return array<string,array<string,mixed>>
      */
-    public static function getClientFileList($checkPaths, MetaDataContextInterface $context = null)
+    public static function getClientFileList($checkPaths, MetaDataContextInterface $context = null, bool $dropdownViews = false)
     {
         $fileLists = array();
         foreach ($checkPaths as $path => $pathInfo) {
@@ -1024,7 +1036,7 @@ class MetaDataFiles
             }
 
             if ($context) {
-                $fileList = self::filterClientFiles($fileList, $context);
+                $fileList = self::filterClientFiles($fileList, $context, $dropdownViews);
             }
             $fileLists[] = $fileList;
         }
@@ -1046,6 +1058,14 @@ class MetaDataFiles
             return array(
                 'role' => $matches[1],
             );
+        }
+        if (preg_match('/\/dropdowns\/([^\/]+)\//', $path, $dropdownField)) {
+            if (preg_match('/\/'.$dropdownField[1].'\/([^\/]+)\//', $path, $dropdownValue)) {
+                return [
+                    'dropdownField' => $dropdownField[1],
+                    'dropdownValue' => $dropdownValue[1],
+                ];
+            }
         }
 
         return array();
@@ -1089,17 +1109,51 @@ class MetaDataFiles
     }
 
     /**
+     * This function checks whether there is a metadata file exists for the given combination.
+     *
+     * @param $module module name
+     * @param $type view, layout, etc
+     * @param $platform base, portal, etc
+     * @param $subPath record, list, etc
+     * @return bool true if any metadata file exists, false otherwise
+     */
+    protected static function hasPlatformSpecificMetaFile($module, $type, $platform, $subPath) : bool
+    {
+        $metaFiles = [];
+        if (empty($module)) {
+            $metaFiles[] = "clients/$platform/{$type}s/$subPath/$subPath.php";
+            $metaFiles[] = "custom/clients/$platform/{$type}s/$subPath/$subPath.php";
+        } else {
+            $metaFiles[] = "modules/$module/clients/$platform/{$type}s/$subPath/$subPath.php";
+            $metaFiles[] = "custom/modules/$module/clients/$platform/{$type}s/$subPath/$subPath.php";
+        }
+        foreach ($metaFiles as $file) {
+            if (file_exists($file)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Get the content of the given files to build metadata.
      *
      * @param array  $fileList A list of files to retrieve for building metadata.
      * @param string $type     The type of file to retrieve for building metadata.
      * @param string $module   The module to retrieve for building metadata.
+     * @param string $platform The platform to search for the client data (defaults to base)
      *
      * @return array
      */
-    public static function getClientFileContents( $fileList, $type, $module = '', $bean = null)
+    public static function getClientFileContents($fileList, $type, $module = '', $bean = null, $platform = 'base')
     {
         $results = array();
+        $dropdownView = false;
+
+        if ($type === 'dropdownViews') {
+            $type = 'view';
+            $dropdownView = true;
+        }
 
         foreach ($fileList as $fileInfo) {
             $extension = substr($fileInfo['path'],-3);
@@ -1126,7 +1180,10 @@ class MetaDataFiles
                     break;
                 case 'php':
                     $viewdefs = array();
-                    if ( isset($results[$fileInfo['subPath']]['meta']) && !strstr($fileInfo['path'], '.ext.php')) {
+                    $ext = strstr($fileInfo['path'], '.ext.php');
+                    if ((isset($results[$fileInfo['subPath']]['meta']) && !$ext)
+                        || ($platform != $fileInfo['platform'] && $ext
+                            && self::hasPlatformSpecificMetaFile($module, $type, $platform, $fileInfo['subPath']))) {
                         continue 2;
                     }
                     //When an extension file is found and NO corresponding metadata has been found so far
@@ -1183,7 +1240,7 @@ class MetaDataFiles
                             if ($fileInfo['subPath'] == 'header' && $type == 'menu') {
                                 $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']] =
                                     array_values(
-                                        $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']]
+                                        $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']] ?? []
                                     );
                             }
                             if ( !isset($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']]) ) {
@@ -1200,7 +1257,13 @@ class MetaDataFiles
                                     if($fileInfo['subPath'] == 'subpanels') {
                                         $results[$fileInfo['subPath']]['meta'] = self::mergeSubpanels($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']], array('components' => array()));
                                     } else {
-                                        $results[$fileInfo['subPath']]['meta'] = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
+                                        if ($dropdownView) {
+                                            if (isset($fileInfo['params']['dropdownField']) && isset($fileInfo['params']['dropdownValue'])) {
+                                                $results[$fileInfo['subPath']][$fileInfo['params']['dropdownField']][$fileInfo['params']['dropdownValue']]['meta'] = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
+                                            }
+                                        } else {
+                                            $results[$fileInfo['subPath']]['meta'] = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
+                                        }
                                     }
                                 }
                             }
@@ -1373,6 +1436,25 @@ class MetaDataFiles
     }
 
     /**
+     * Gets the top level folder path for custom layouts for the given view
+     * Example: "custom/modules/Accounts/clients/base/views/record/"
+     *
+     * @param string $module the name of the module to check metadata for
+     * @param string $client the name of the client (e.g. 'base', etc)
+     * @param string $view the name of the view (e.g. 'record', etc)
+     * @return string the path of the folder containing the metadata for the custom layout metadata
+     */
+    public static function getCustomLayoutMetadataFolderPath($module, $client, $view)
+    {
+        // Get the folder path for the dependent layout
+        // Example: "custom/modules/Accounts/clients/base/views/record/"
+        $modulePath = self::getModuleFileDir($module, MB_CUSTOMMETADATALOCATION);
+        $clientPath = 'clients/' . self::getClient($client) . '/';
+        $layoutPath = self::$viewsPath . $view . '/';
+        return $modulePath . $clientPath . $layoutPath;
+    }
+
+    /**
      * Used to remove the sugarcrm license header from component files that are going to be rolled into a JSON response
      * @param string $text
      *
@@ -1395,14 +1477,23 @@ class MetaDataFiles
      *
      * @param array $files Files to be filtered
      * @param MetaDataContextInterface $context Metadata context
+     * @param bool $dropdownViews True for dropdown based views
      *
      * @return array Filtered set of files
      */
-    protected static function filterClientFiles(array $files, MetaDataContextInterface $context)
+    protected static function filterClientFiles(array $files, MetaDataContextInterface $context, bool $dropdownViews = false)
     {
-        $files = array_filter($files, function (array $file) use ($context) {
-            return $context->isValid($file);
-        });
+        if ($dropdownViews) {
+            $dropdownViewsContext = new MetaDataContextDropdownViews();
+            $files = array_filter($files, function (array $file) use ($dropdownViewsContext) {
+                return $dropdownViewsContext->isValid($file);
+            });
+        } else {
+            $files = array_filter($files, function (array $file) use ($context) {
+                return $context->isValid($file);
+            });
+        }
+
 
         uasort($files, function ($a, $b) use ($context) {
             return $context->compare($a, $b);

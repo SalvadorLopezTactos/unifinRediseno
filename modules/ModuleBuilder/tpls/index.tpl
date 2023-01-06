@@ -35,7 +35,6 @@
 <script>
 ModuleBuilder.setMode({$TYPE});
 closeMenus();
-{literal}
 //document.getElementById('HideHandle').parentNode.style.display = 'none';
 var MBLoader = new YAHOO.util.YUILoader({
     require : ["layout", "element", "tabview", "treeview", "history", "cookie", "sugarwidgets"],
@@ -48,14 +47,11 @@ var MBLoader = new YAHOO.util.YUILoader({
 MBLoader.addModule({
     name :"sugarwidgets",
     type : "js",
-{/literal}
     fullpath: "{sugar_getjspath file='include/javascript/sugarwidgets/SugarYUIWidgets.js'}",
-{literal}
     varName: "YAHOO.SUGAR",
     requires: ["datatable", "dragdrop", "treeview", "tabview"]
 });
 MBLoader.insert();
-{/literal}
 </script>
 <div id="footerHTML" class="y-hidden">
     <table width="100%" cellpadding="0" cellspacing="0"><tr><td nowrap="nowrap">

@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'This Report Schedule',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Report Schedules Record Dashboard',
+    'LBL_FILE_TYPE' => 'File Type(s)',
 );

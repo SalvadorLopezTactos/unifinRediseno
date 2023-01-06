@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filtri',
     'LBL_CONSOLE_FILTER_RULES' => 'Rregullat e filtrimit',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Ngri kolonën e parë',
+
     'LBL_CONSOLE_COLUMNS' => 'Kolonat',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Kolonë me disa fusha',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Renditja kryesore',

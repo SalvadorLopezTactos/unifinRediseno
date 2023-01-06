@@ -33,7 +33,7 @@ class RecordListFactory
         $row = $conn->executeQuery(
             'SELECT * FROM record_list WHERE id = ? AND assigned_user_id = ?',
             [$id, $user->id]
-        )->fetch();
+        )->fetchAssociative();
 
         if (!empty($row['records'])) {
             $data = $row;

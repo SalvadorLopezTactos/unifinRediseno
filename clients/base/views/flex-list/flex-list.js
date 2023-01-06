@@ -28,6 +28,14 @@
     _isSafariBrowser: null,
 
     /**
+     * Array of view types where frozen columns feature should not be applied
+     */
+    blockFrozenColumnList: [
+        'compose-varbook-list',
+        'history-summary'
+    ],
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -94,14 +102,71 @@
 
         this.events = _.extend(rightColumnsEvents, this.events, {
             'click [data-widths=reset]': 'resetColumnWidths',
-            'click [data-columns-order=reset]': 'resetColumnOrder'
+            'click [data-columns-order=reset]': 'resetColumnOrder',
+            'click [data-action=freeze-first-column]': 'freezeFirstColumn'
         });
+
+        this.allowFreezeFirstColumn = !_.isUndefined(app.config.allowFreezeFirstColumn) ?
+            app.config.allowFreezeFirstColumn : true;
+        if (this.allowFreezeFirstColumn && !this.blockFrozenColumnList.includes(this.type)) {
+            // The last state key that contains the user configs
+            // for this specific view.
+            this._thisListViewUserConfigsKey = app.user.lastState.key('user-configs', this);
+            let userConfigs = app.user.lastState.get(this._thisListViewUserConfigsKey) || {};
+            this.isFirstColumnFreezed = _.isUndefined(userConfigs.freezeFirstColumn) || userConfigs.freezeFirstColumn;
+        } else {
+            this.isFirstColumnFreezed = false;
+        }
+        this.hasFirstColumnBorder = false;
 
         this.on('list:reorder:columns', this.reorderCatalog, this);
         this.on('list:toggle:column', this.saveCurrentState, this);
         this.on('list:save:laststate', this.saveCurrentState, this);
         this.on('list:column:resize:save', this.saveCurrentWidths, this);
         this.on('list:scrollLock', this.scrollLock, this);
+    },
+
+    /**
+     * Freeze/unfreeze first column.
+     * @param {Object} event jquery event object
+     */
+    freezeFirstColumn: function(event) {
+        event.stopPropagation();
+        let freeze = $(event.currentTarget).is(':checked');
+        this.isFirstColumnFreezed = freeze;
+        app.user.lastState.set(this._thisListViewUserConfigsKey, {freezeFirstColumn: freeze});
+        let firstColumnIndex = this.leftColumns.length + 1;
+        let $firstColumns = this.$('table tbody tr td:nth-child(' + firstColumnIndex +
+            '), table thead tr th:nth-child(' + firstColumnIndex + ')');
+        if (freeze) {
+            $firstColumns.addClass('sticky-column stick-first' +
+            (this.leftColumns.length ? '' : ' no-left-column'));
+        } else {
+            $firstColumns.removeClass('sticky-column stick-first no-border' +
+            (this.leftColumns.length ? '' : ' no-left-column'));
+        }
+        this.showFirstColumnBorder();
+    },
+
+    /**
+     * Show a border when scrolling horizontally if the first column is freezed.
+     */
+    showFirstColumnBorder: function() {
+        if (!this.isFirstColumnFreezed) {
+            this.hasFirstColumnBorder = false;
+            return;
+        }
+        let scrollPanel = this.$('.flex-list-view-content')[0];
+        let firstColumnIndex = this.leftColumns.length + 1;
+        let firstColumnSelector = 'table tbody tr td:nth-child(' + firstColumnIndex +
+            '), table thead tr th:nth-child(' + firstColumnIndex + ')';
+        if (scrollPanel.scrollLeft === 0) {
+            this.$(firstColumnSelector).addClass('no-border');
+            this.hasFirstColumnBorder = false;
+        } else if (!this.hasFirstColumnBorder) {
+            this.$(firstColumnSelector).removeClass('no-border');
+            this.hasFirstColumnBorder = true;
+        }
     },
 
     // fn to turn off event listeners and reenable tooltips
@@ -793,20 +858,21 @@
      * Add multi selection field to left column
      */
     addMultiSelectionAction: function() {
-        var _generateMeta = function(buttons, disableSelectAllAlert) {
+        var _generateMeta = _.bind(function(buttons, disableSelectAllAlert) {
             return {
                 'type': 'fieldset',
                 'fields': [
                     {
                         'type': 'actionmenu',
                         'buttons': buttons || [],
-                        'disable_select_all_alert': !!disableSelectAllAlert
+                        'disable_select_all_alert': !!disableSelectAllAlert,
+                        'is_list_pagination': !!this.context.get('isUsingListPagination')
                     }
                 ],
                 'value': false,
                 'sortable': false
             };
-        };
+        }, this);
         var buttons = this.meta.selection.actions;
         var disableSelectAllAlert = !!this.meta.selection.disable_select_all_alert;
         this.leftColumns.push(_generateMeta(buttons, disableSelectAllAlert));
@@ -900,6 +966,9 @@
         // to make unit tests pass.
         if (this.closestComponent('sidebar') && !(app.drawer.count())) {
                 this._setHelperScrollBar();
+        }
+        if (this.allowFreezeFirstColumn) {
+            this.$('.flex-list-view-content').on('scroll', _.bind(this.showFirstColumnBorder, this));
         }
     },
 
@@ -1151,5 +1220,5 @@
             this.$helper.find('div').width(this.$spy.get(0).scrollWidth);
             this._toggleScrollHelper();
         }
-    },
+    }
 })

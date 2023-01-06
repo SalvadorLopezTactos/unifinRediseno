@@ -21,7 +21,12 @@
     {{#if all_selected}}
         {{str 'TPL_LISTVIEW_SELECTED_ALL' this.module this}}
     {{else}}
-        {{str 'TPL_LISTVIEW_SELECTED' this.module this}}
+        {{#eq num 1}}
+            {{str 'TPL_LISTVIEW_SELECTED_ONE' this.module this}}
+        {{/eq}}
+        {{#notEq num 1}}
+            {{str 'TPL_LISTVIEW_SELECTED' this.module this}}
+        {{/notEq}}
     {{/if}}
 {{/if}}
 <button type="button" class="btn btn-link btn-inline" data-action="clear">

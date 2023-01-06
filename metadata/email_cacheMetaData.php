@@ -112,13 +112,6 @@ $dictionary['email_cache'] = array(
 	),
 	'indices' => array(
 		array(
-			'name'			=> 'idx_ie_id',
-			'type'			=> 'index',
-			'fields'		=> array(
-				'ie_id',
-			),
-		),
-		array(
 			'name'			=> 'idx_mail_date',
 			'type'			=> 'index',
 			'fields'		=> array(

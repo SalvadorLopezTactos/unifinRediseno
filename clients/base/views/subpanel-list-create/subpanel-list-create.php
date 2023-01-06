@@ -15,13 +15,13 @@ $viewdefs['base']['view']['subpanel-list-create'] = array(
             array(
                 'type' => 'rowaction',
                 'css_class' => 'btn',
-                'icon' => 'fa-plus',
+                'icon' => 'sicon-plus',
                 'event' => 'list:addrow:fire',
             ),
             array(
                 'type' => 'rowaction',
                 'css_class' => 'btn',
-                'icon' => 'fa-minus',
+                'icon' => 'sicon-minus',
                 'event' => 'list:deleterow:fire',
             ),
         ),

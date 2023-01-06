@@ -99,12 +99,17 @@ class ViewPortalConfig extends SugarView
             'maxSearchQueryResult' => '5',
             'defaultUser' => '',
             'caseDeflection' => $isServe ? 'enabled' : 'disabled',
+            'showKBNotes' => 'enabled',
             'allowCloseCase' => $isServe ? 'allow' : 'disallow',
             'contactInfo' => [
                 'contactPhone' => '',
                 'contactEmail' => '',
                 'contactURL' => '',
             ],
+            'caseVisibility' => 'all',
+            'emailVisibility' => 'related_contacts',
+            'messageVisibility' => 'related_contacts',
+            'enableSelfSignUp' => 'disabled',
         ];
         $userList = BeanFactory::newBean('Users')->getUserArray();
         $userList[''] = '';
@@ -131,6 +136,7 @@ class ViewPortalConfig extends SugarView
         $smarty->assign('userList', $userList);
         $smarty->assign('welcome', $GLOBALS['mod_strings']['LBL_SYNCP_WELCOME']);
         $smarty->assign('mod', $GLOBALS['mod_strings']);
+        $smarty->assign('app', $GLOBALS['app_strings']);
         $smarty->assign('siteURL', $GLOBALS['sugar_config']['site_url']);
         $label = $this->request->getValidInputRequest('label');
         $smarty->assign('isServe', $isServe);

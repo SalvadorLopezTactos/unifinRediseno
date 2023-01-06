@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Full de càlcul',
     'LBL_PURCHASED_LINE_ITEMS' => 'Elements de línia comprats',
 
+    'LBL_FORECASTED_LIKELY' => 'Previst com a Probable',
     'LBL_RENEWAL' => 'Renovació',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Oportunitats de renovació',
     'LBL_RENEWAL_PARENT' => 'Oportunitat principal',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# del Total de Línies d&#39;ingressos per articles',
     'LBL_CLOSED_RLIS' => '# Línies d&#39;ingressos tancades',
+    'LBL_CLOSED_WON_RLIS' => '# d&#39;elements de línies d&#39;ingressos tancades guanyades',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Quantitat d&#39;elements de línia d&#39;ingressos amb durada flexible d&#39;Open Service',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'No pot esborrar oportunitats que continguin línies d&#39;ingressos tancades',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Un o més dels registres seleccionats conté línies d&#39;ingressos tancades, i no es pot esborrar.',
     'LBL_INCLUDED_RLIS' => '# d&#39;articles de línees d&#39;ingressos incloses',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Actualitza obertura',
+    'LBL_CASCADE_RLI_EDIT' => 'Actualitza els elements de línia d&#39;ingressos oberts',
+    'LBL_CASCADE_RLI_CREATE' => 'Estableix-ho entre elements de la línia d&#39;ingressos',
     'LBL_SERVICE_START_DATE_INVALID' => 'La data d&#39;inici del servei no pot establir-se quan ja ha passat la data de final del servei de qualsevol element de la línia d&#39;ingresos adicionals oberta.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Pressupostos',
@@ -223,8 +227,8 @@ $mod_strings = array(
 
 Per crear un {{module_name}}:
 1. Proporcioneu els valors per als camps com desitgeu.
- -Els camps marcats com a "Obligatoris" s&#39;han de completar abans de desar.
- -Feu clic en "Mostra més" per mostrar els camps addicionals si fos necessari.
+ - Els camps marcats com a "Obligatoris" s&#39;han de completar abans de desar.
+ - Feu clic en "Mostra més" per mostrar els camps addicionals si fos necessari.
 2. Feu clic en "Desa" per finalitzar el registre nou i tornar a la pàgina anterior.',
 
 // END ENT/ULT
@@ -239,7 +243,10 @@ Per crear un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Les oportunitats del meu equip",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'No s&#39;ha pogut canviar el {{fieldName}} perquè aquest {{moduleSingular}} no té elements de línia oberts.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interaccions d&#39;oportunitats',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línia temporal de l&#39;oportunitat',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' no es pot establir entre cap d&#39;aquests elements de la línia d&#39;ingressos perquè no són serveis. Voleu continuar amb la creació?',
+    'LBL_CASCADE_DURATION_WARNING' => ' no es pot establir entre cap d&#39;aquests elements de la línia d&#39;ingressos perquè les seves durades estan bloquejades. Voleu continuar amb la creació?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predicció de tancament d&#39;oportunitats',

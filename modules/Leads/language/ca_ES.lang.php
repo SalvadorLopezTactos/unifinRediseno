@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Referit per',
     'LBL_LIST_STATUS' => 'Estat',
     'LBL_LIST_TITLE' => 'Carrèg',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Predicció d&#39;interès del mercat',
+    'LBL_MARKET_SCORE' => 'Puntuació del mercat',
     'LBL_MOBILE_PHONE' => 'Mòbil:',
     'LBL_MODULE_NAME' => 'Clients potencials',
     'LBL_MODULE_NAME_SINGULAR' => 'Client Potencial',
@@ -330,4 +332,9 @@ Després de confirmar cada mòdul necessari i desitjat, feu clic al botó Desa i
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Predicció de conversió de client potencial',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Visualitza els detalls de predicció per a un client potencial específic',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Habilita els elements de línia d&#39;ingressos',
+    'LBL_REQUIRE_RLIS' => 'Requereix elements de la línia d’ingressos quan es crea una nova oportunitat',
+    'LBL_COPY_DATA_RLIS' => 'Copia les dades del client potencial als elements de la línia d’ingressos quan es crea una nova oportunitat',
 );

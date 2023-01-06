@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Se maler',
     'LNK_LIST_KBCATEGORIES' => 'Vis kategorier',
     'LBL_TEMPLATES' => 'Maler',
+    'LBL_TEMPLATE' => 'Mal',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Malen overskriver alt innholdet.' .
         'Er du sikker på at du vil bruke denne malen?',
     'LNK_IMPORT_KBCONTENTS' => 'Importer artikler',

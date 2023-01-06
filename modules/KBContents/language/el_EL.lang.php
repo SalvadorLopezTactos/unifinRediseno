@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Προβολή προτύπων',
     'LNK_LIST_KBCATEGORIES' => 'Εμφάνιση κατηγοριών',
     'LBL_TEMPLATES' => 'Πρότυπα',
+    'LBL_TEMPLATE' => 'Πρότυπο',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Το πρότυπο θα αντικαταστήσει όλα τα περιεχόμενα.' .
         ' Είστε βέβαιοι ότι θέλετε να χρησιμοποιήσετε αυτό το πρότυπο;',
     'LNK_IMPORT_KBCONTENTS' => 'Εισαγάγετε άρθρα',

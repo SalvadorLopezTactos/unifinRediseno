@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'ID Контакта',
     'LBL_DESCRIPTION_INFORMATION' => 'Описание',
     'LBL_DESCRIPTION' => 'Описание:',
+    'LBL_INTERNAL_NOTES' => 'Внутренние примечания:',
     'LBL_STATUS' => 'Статус:',
     'LBL_DIRECTION' => 'Сортировка:',
     'LBL_DATE' => 'Дата:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Продолжительность разговора должна быть больше 0 минут',
     'LBL_CALL_INFORMATION' => 'Описание звонка',
     'LBL_REMOVE' => 'удал.',
-    'LBL_ACCEPT_STATUS' => 'Подтверждение',
     'LBL_ACCEPT_LINK' => 'Принять',
     //For export labels
     'LBL_PARENT_ID' => 'ID изначальной записи',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Звонок:',
     'LBL_CALL_RECORDING_URL' => 'URL-адрес для записи',
     'LBL_CALL_RECORDING' => 'Запись',
+
+    'LBL_LEAD_ID' => 'Идентификатор предварительного контакта',
+    'LBL_LEAD_NAME' => 'Предварительный контакт',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Вы запланировали {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> на {{formatDate date_start}}.',

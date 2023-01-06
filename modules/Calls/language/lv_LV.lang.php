@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Kontaktpersonas Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Apraksta informācija',
     'LBL_DESCRIPTION' => 'Apraksts:',
+    'LBL_INTERNAL_NOTES' => 'Iekšējās piezīmes:',
     'LBL_STATUS' => 'Statuss',
     'LBL_DIRECTION' => 'Virziens',
     'LBL_DATE' => 'Sākuma datums:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Ilgumam jābūt lielākam par 0',
     'LBL_CALL_INFORMATION' => 'Apskats',
     'LBL_REMOVE' => 'noņemt',
-    'LBL_ACCEPT_STATUS' => 'Apstiprināt statusu',
     'LBL_ACCEPT_LINK' => 'Apstiprināt saiti',
     //For export labels
     'LBL_PARENT_ID' => 'Priekšteča ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Zvans:',
     'LBL_CALL_RECORDING_URL' => 'Ieraksta URL',
     'LBL_CALL_RECORDING' => 'Ieraksts',
+
+    'LBL_LEAD_ID' => 'Interesenta ID',
+    'LBL_LEAD_NAME' => 'Interesents',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Jūs ieplānojāt {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> uz {{formatDate date_start}}.',

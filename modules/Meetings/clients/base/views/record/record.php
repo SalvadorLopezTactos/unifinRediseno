@@ -355,6 +355,11 @@ $viewdefs['Meetings']['base']['view']['record'] = array(
                     'name' => 'tag',
                     'span' => 12,
                 ),
+                [
+                    'name' => 'internal_notes',
+                    'span' => 12,
+                    'rows' => 3,
+                ],
             ),
         ),
         array(

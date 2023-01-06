@@ -413,6 +413,11 @@ if (!$focus->is_group && !$focus->portal_only) {
         $focus->setPreference('field_name_placement', $field_name_placement, 0, 'global');
     }
 
+    $appearance = InputValidation::getService()->getValidInputPost('appearance');
+    if (isset($appearance)) {
+        $focus->setPreference('appearance', $appearance, 0, 'global');
+    }
+
     if (isset($_POST['send_email_on_mention'])) {
         $focus->setPreference('send_email_on_mention', $_POST['send_email_on_mention'], 0, 'global');
     } else {

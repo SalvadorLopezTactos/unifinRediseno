@@ -124,12 +124,12 @@ function smarty_function_sugar_evalcolumn($params, &$smarty)
             // sfp == SugarFieldParams
             $sfp = $params;
             $sfp['parentFieldArray'] = 'fields';
-            $vardefs = $smarty->get_template_vars('fields');
+            $vardefs = $smarty->getTemplateVars('fields');
             $sfp['vardef'] = $vardefs[$params['colData']['field']['name']];
             $sfp['displayType'] = 'EditView';
             $sfp['displayParams'] = $params['colData']['field']['displayParams'];
             $sfp['typeOverride'] = $params['colData']['field']['type'];
-            $sfp['formName'] = $smarty->get_template_vars('form_name');
+            $sfp['formName'] = $smarty->getTemplateVars('form_name');
             
             $fieldText = smarty_function_sugar_field($sfp, $smarty);
 
@@ -147,5 +147,3 @@ function smarty_function_sugar_evalcolumn($params, &$smarty)
     
 }
 
-
-?>

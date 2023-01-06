@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Dašlets pievienots',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Vai tiešām vēlies mainīt izkārtojumu? Izkārtojums var tikt dezorganizēts.',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Vai tiešām vēlaties noņemt Sugar dašletu?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Neviens instrumentu panelis nav konfigurēts',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Neviens dašlets nav konfigurēts',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Izveidot instrumentu paneli',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Interneta lapa',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Interneta lapa',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Pirmkods',
   'LBL_SOURCE_SUGAR' => 'Sugar - SugarCRM Inc. izveidota, pasaulē vispopulārākā pārdošanas pārvaldības lietojumprogramma',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Barnabás Debreceni izveidots veidņu dzinējs.',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - NuSphere Corporation and Dietrich Ayala izveidota PHP klašu kopa, kura izstrādātājiem ļauj veidot un lietot web servisus.',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Mihai Bazon izveidots kalendārs datumu ievadīšanai',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Wayne Munro izveidota bibliotēka PDF dokumentu veidošanai',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - A WebDAV servera realizācija PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Palīdzība satur konkrētu informāciju par apskatāmo moduli, precīzus norādījumus dažu darbību veikšanai modulī un informāciju par to, kur var uzzināt plašāku informāciju un saņemt atbalstu.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtrs',
+
+    'LBL_ABOUT_VERSION' => 'Jūs izmantojat versiju {{version}} ar šādu licenci(ēm):',
 );

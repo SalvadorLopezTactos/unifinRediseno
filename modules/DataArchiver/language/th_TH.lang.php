@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'เก็บถาวร',
     'LBL_PROCESS_TYPE_DELETE' => 'ลบถาวร',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'ดำเนินการจัดเก็บถาวร',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'คำเตือน',
+    'LBL_ARCHIVER_WARNING' => 'แนะนำให้กระทำการนี้ในตอนที่มีการใช้งานน้อย หรือในชั่วโมงที่ไม่ทำงาน '
+        . 'เนื่องด้วยมันอาจจะมีผลกระทบต่อประสิทธิภาพระบบ คุณแน่ใจหรือไม่ว่าต้องการดำเนินการตอนนี้',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'ตัวจัดเก็บของโมดูล {{moduleName}} จะต้องมี {{fieldName}} ตั้งค่าไว้ในตัวกรอง',
 );

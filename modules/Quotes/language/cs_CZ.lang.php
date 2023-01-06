@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfigurace nabídek',
 
     'LBL_RENEWAL' => 'Obnovení',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakce nabídek',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa nabídky',
 );

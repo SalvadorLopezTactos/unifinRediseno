@@ -115,7 +115,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
      */
     public function getAuthBean(OAuthToken $token)
     {
-        $portalApiUser = $this->findPortalApiUser($token->consumer_obj->c_key);
+        $portalApiUser = $this->findPortalApiUser();
         if ($portalApiUser == null) {
             return false;
         }
@@ -141,7 +141,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
     public function getIdsForUser($user_id, $client_id)
     {
         $return = array('contact_id' => '', 'user_id' => '');
-        $portalApiUser = $this->findPortalApiUser($client_id);
+        $portalApiUser = $this->findPortalApiUser();
         if ($portalApiUser == null) {
             return $return;
         }
@@ -269,7 +269,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
             return false;
         }
 
-        $portalApiUser = $this->findPortalApiUser($client_id);
+        $portalApiUser = $this->findPortalApiUser();
         if ($portalApiUser == null) {
            // Can't login as a portal user if there is no API user
             throw new SugarApiExceptionPortalNotConfigured();
@@ -309,7 +309,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
      *
      * @return SugarBean The user from the name
      */
-    public function loadUserFromName($username)
+    public function loadUserFromName($username, $allowInactive = false /*ignored*/)
     {
         // It's a portal user, log them in against the Contacts table
         $contact = BeanFactory::newBean('Contacts');

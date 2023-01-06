@@ -17,12 +17,16 @@
             <div class="toggle-actions actions">
                 {{#if meta.refresh_button}}
                     <div class="btn-group refresh {{meta.css_class}}" data-action="refreshList">
-                        <button class="btn" rel="tooltip" title="{{str 'LBL_LIST_REFRESH' module}}" aria-label="{{str 'LBL_LIST_REFRESH' module}}"><i class="fa fa-refresh"></i></button>
+                      <button class="btn filter-refresh-button" rel="tooltip" title="{{str 'LBL_LIST_REFRESH' module}}"
+                        aria-label="{{str 'LBL_LIST_REFRESH' module}}"
+                      >
+                        <i class="sicon sicon-refresh"></i>
+                      </button>
                     </div>
                 {{/if}}
                 <div class="btn-group" data-toggle="buttons-radio">
                     {{#each toggles}}
-                        <button type="button" class="btn {{css_class}} {{#if disabled}} disabled{{/if}}" {{#if disabled}}disabled{{/if}} data-view="{{toggle}}" data-mode="view" data-route="{{route}}" rel="tooltip" title="{{str title}}" aria-label="{{str title}}" track="click:{{toggle}}" aria-pressed="false"><i class="fa {{class}}"></i></button>
+                        <button type="button" class="btn {{css_class}} {{#if disabled}} disabled{{/if}}" {{#if disabled}}disabled{{/if}} data-view="{{toggle}}" data-mode="view" data-route="{{route}}" rel="tooltip" title="{{str title}}" aria-label="{{str title}}" track="click:{{toggle}}" aria-pressed="false"><i class="{{buildIcon class}}"></i></button>
                     {{/each}}
                 </div>
             </div>

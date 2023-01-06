@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'ผู้ใช้',
     'LBL_EMAILS_PRODUCTS_REL' => 'รายการบรรทัดการเสนอราคา',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'รายการบรรทัดรายได้',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'การเพิ่มขึ้น',
     'LBL_EMAILS_MESSAGES_REL' => 'ข้อความ',
     'LBL_EMAILS_PURCHASES_REL' => 'ซื้อ',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'สินค้าในไลน์ที่ซื้อมา',
@@ -473,4 +474,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'สีงอีเมล',
     'LBL_MAILBOX' => 'บัญชีขาเข้า',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'โปรดกำหนดค่าบัญชีอีเมลขาออกผ่าน <a href="#OutboundEmail">การตั้งค่าอีเมล</a> เพื่อให้ส่งอีเมลได้',
 );

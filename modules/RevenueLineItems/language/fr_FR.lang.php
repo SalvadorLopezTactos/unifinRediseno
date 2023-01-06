@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Ligne de revenu de renouvellement (ID)',
     'LBL_PARENT_RLIS' => 'Lignes de revenu parent',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Lignes de revenu parent',
+    'LBL_FORECASTED_LIKELY' => 'Prévisions probables',
     'LBL_EXPERT_ID' => 'Expert produit',
     'LBL_FORECAST' => 'Inclus dans les prévisions',
     'LBL_SUBTOTAL' => 'Sous-total',

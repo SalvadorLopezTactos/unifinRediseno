@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Aprašymas',
     'LBL_OW_TYPE'=>'Tipas',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Komandos prognozė <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Pavaldinys',
     'LBL_FDR_OPPORTUNITIES'=>'Prognozės pardavimai:',
     'LBL_FDR_WEIGH'=>'Pasvertos pardavimų sumos:',
     'LBL_FDR_COMMIT'=>'Pavesta suma',
     'LBL_FDR_DATE_COMMIT'=>'Pavedimo data',
+    'LBL_FDR_FORECAST_HEADER' => 'Pardavėjo prognozė <span class="sicon sicon-user mx-1"></span>{{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognozės: Lentelė',
     'LBL_DV_MY_FORECASTS' => 'Mano prognozės',
-    'LBL_DV_MY_TEAM' => "Mano komandos prognozės" ,
+    'LBL_DV_MY_TEAM' => "Mano komandos prognozės",
     'LBL_DV_TIMEPERIODS' => 'Laiko periodas:',
     'LBL_DV_FORECAST_PERIOD' => 'Prognozės laiko periodas',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Suplanuoti pardavimus',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Bazinis tarifas',
 
     'LBL_QUOTA' => 'Pardavimų planas',
-    'LBL_QUOTA_ADJUSTED' => 'Quota (Adjusted)',
+    'LBL_QUOTA_ADJUSTED' => 'Pakoreguota kvota',
 
     'LBL_FORECAST_FOR'=>'Prognozės lentelė:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Komandos)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Pardavimų planai - Paskyrimai - Faktiniai',
 
     'LBL_FORECAST' => 'Prognozė',
+    'LBL_COMMITMENT' => 'Atsakingas',
+    'LBL_TEAM_COMMITMENT' => 'Komandos įsipareigojimas',
+    'LBL_FORECASTED' => 'Prognozuojama',
+    'LBL_ADJUSTED_TOTAL' => 'Adjusted Total',
     'LBL_COMMIT_STAGE' => 'Įsipareigojimo stadija',
     'LBL_SALES_STAGE' => 'Etapas',
     'LBL_AMOUNT' => 'Suma',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, ir {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'greičiausiai {{{direction}}} {{{from}}} į {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'geriausiai {{{direction}}} {{{from}}} į {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'blogiausiai {{{direction}}} {{{from}}} į {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'likely stayed the same',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'best stayed the same',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'worst stayed the same',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Įsipareigojęs (tikriausiai){{{direction}}}{{{from}}} į {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Įsipareigojęs (geriausiai) {{{direction}}} {{{from}}} į {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Įsipareigojęs (blogiausiai) {{{direction}}} {{{from}}} į {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Įsipareigojo (tikėtina) liko toks pat',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Įvestas (geriausias) liko tas pats',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Įvestas (blogiausias) liko tas pats',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Šį mėnesį {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Displayed Total',
     'LBL_TOTAL' => 'Viso',
     'LBL_OVERALL_TOTAL' => 'Overall Total',
-    'LBL_EDITABLE_INVALID' => 'Invalid Value for {0}',
+    'LBL_EDITABLE_INVALID' => 'Netinkama {{field_name}} vertė',
     'LBL_EDITABLE_INVALID_RANGE' => 'Value must be between {0} and {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'You have unsaved changes in your Worksheet.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Only saved or committed data will be exported. Cancel to abort. Confirm to export saved data.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Included',
     'LBL_CHART_NOT_INCLUDED' => 'Neįtraukta',
     'LBL_CHART_ADJUSTED' => '(Koreguotas)',
-    'LBL_SAVE_DRAFT' => 'Saugoti juodraštį',
+    'LBL_SAVE_DRAFT' => 'Išsaugoti',
     'LBL_CHANGES_BY' => 'Changes by {0}',
     'LBL_FORECAST_SETTINGS' => 'Nustatymai',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Exceed by',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'No Data',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Meeting Quota',
+    'LBL_OPEN_LIKELY' => 'Tikėtina, kad atidarytas',
+    'LBL_OPEN_BEST' => 'Atidaryti geriausią',
+    'LBL_OPEN_WORST' => 'Atidaryti blogiausią',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Assign Quota',
     'LBL_ASSIGNING_QUOTA' => 'Assigning Quota',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "My Team's Forecast",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'You have unsaved changes. Are you sure you want to sort the worksheet and discard changes?',
+
+    'LBL_SAVE_TOOLTIP' => 'Išsaugokite darbalapio eilutėse atliktus pakeitimus',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Išsaugokite įrašų pakeitimus ir pateikite prognozę vadovui',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Pateikite prognozę vadovui ir priskirkite kvotą',
+
+    'LBL_SAVE_LABEL_REP' => 'Saugoti ',
+    'LBL_SAVE_LABEL_MGR' => 'Išsaugokite pakoreguotas reikšmes',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module incorporates {{forecastby_singular_module}} records to build {{forecastworksheets_module}} and predict sales. Users can work towards sales {{quotas_module}} at the individual, team, and sales organization level. Before users can access the {{plural_module_name}} module, an administrator must select the organization&#39;s desired Time Periods, Ranges, and Scenarios.

@@ -23,7 +23,7 @@
     /**
      * Override multi-attachments field for notes
      */
-    extendsFrom: 'MultiAttachmentsField',
+    extendsFrom: 'BaseMultiAttachmentsField',
 
     /**
      * Name of file field on model
@@ -53,6 +53,7 @@
      * Re-render when the file and mimetype fields change
      */
     bindDataChange: function() {
+        this._super('bindDataChange');
         this.model.on('change:' + this.fileFieldName, this.render, this);
         this.model.on('change:' + this.fileMimeTypeFieldName, this.render, this);
     },
@@ -66,7 +67,14 @@
      */
     format: function(value) {
         if (!this._pillAdded(value) && this._modelHasFileAttachment()) {
-            value.push(this._getPillFromFile());
+            var attr = this._getPillFromFile();
+
+            if (value instanceof app.BeanCollection) {
+                var model = app.data.createBean('Notes', attr);
+                value.models.push(model);
+            } else {
+                value.push(attr);
+            }
         }
         value = this._super('format', [value]);
         this.singleImage = this._singleImagePill(value);
@@ -81,7 +89,10 @@
      * @private
      */
     _pillAdded: function(value) {
+        value = value instanceof app.BeanCollection ? value.models : value;
+
         return _.reduce(value, function(base, item) {
+            item = item instanceof Backbone.Model ? item.toJSON() : item;
             return base || item.id === this.model.id;
         }, false, this);
     },
@@ -100,40 +111,15 @@
      * Creates a pill in the format needed by select2 for file stored directly
      * on the note.
      * @returns {Object} {filename: file name,
-     *                    name: file name,
      *                    id: ID of this note for file link,
-     *                    mimeType: file mime type,
-     *                    fileExt: file extension,
-     *                    url: url to open saved file}
+     *                    file_mime_type: file mime type}
      * @private
      */
     _getPillFromFile: function() {
-        var filename = this.model.get(this.fileFieldName);
-        var id = this.model.get('id');
-        var isImage = this._isImage(this.model.get(this.fileMimeTypeFieldName));
-        var mimeType = isImage ? 'image' : 'application/octet-stream';
-        var fileExt = filename.substring(filename.lastIndexOf(".")).toLowerCase();
-        var urlOpts = {
-            module: this.def.module,
-            id: id,
-            field: this.def.modulefield
-        };
-        return {
-            fileExt: fileExt,
-            filename: filename,
-            id: id,
-            mimeType: mimeType,
-            name: filename,
-            url: app.api.buildFileURL(
-                urlOpts,
-                {
-                    htmlJsonFormat: false,
-                    passOAuthToken: false,
-                    cleanCache: true,
-                    forceDownload: false
-                }
-            )
-        };
+        var attr = {id: this.model.get('id')};
+        attr[this.fileFieldName] = this.model.get(this.fileFieldName);
+        attr[this.fileMimeTypeFieldName] = this.model.get(this.fileMimeTypeFieldName);
+        return attr;
     },
 
     /**
@@ -145,6 +131,7 @@
         if (event.val === this.model.get('id')) {
             this._removeLegacyAttachment();
             this.pillAdded = false;
+            this.render();
         } else {
             this._super('removeAttachment', [event]);
         }
@@ -155,14 +142,11 @@
      * @private
      */
     _removeLegacyAttachment: function() {
-        var data = {
-            module: this.module,
-            id: this.model.get('id'),
-            field: this.fileFieldName,
-        }
-        // we don't need to re-render this field, as select2 removes
-        // pill for us without re-render
-        app.utils.deleteFileFromField(this, data);
+        this.model.set(this.fileFieldName, '');
+        var value = this.model.get(this.name).models;
+        this.model.get(this.name).models = _.filter(value, function(model) {
+            return model.get('id') !== this.model.get('id');
+        }, this);
     },
 
     /**
@@ -183,6 +167,6 @@
      * @private
      */
     _singleImagePill: function(value) {
-        return value.length === 1 && value[0].mimeType === 'image';
+        return value && value.length === 1 && value[0].mimeType === 'image';
     }
 })

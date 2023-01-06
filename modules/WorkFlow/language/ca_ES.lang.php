@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Flux de treball'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipus',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> La funcionalitat del flux de treball de Sugar i de la gestió del flux de treball està en mode de manteniment. Clients de l&#39;edició Sugar Enterprise han d&#39;utilitzar la funcionalitat proporcionada per SugarBPM<sup class="trademark">TM</sup>.',
 );
 

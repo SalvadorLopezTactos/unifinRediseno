@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'ID contact',
     'LBL_DESCRIPTION_INFORMATION' => 'Descriere Informatie',
     'LBL_DESCRIPTION' => 'Descriere',
+    'LBL_INTERNAL_NOTES' => 'Note interne:',
     'LBL_STATUS' => 'Status:',
     'LBL_DIRECTION' => 'Directie',
     'LBL_DATE' => 'Data Începerii:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Durata timpului trebuie sa fie mai mare ca 0',
     'LBL_CALL_INFORMATION' => 'Privire de ansamblu apeluri',
     'LBL_REMOVE' => 'elim.',
-    'LBL_ACCEPT_STATUS' => 'Accept Status',
     'LBL_ACCEPT_LINK' => 'Acceptare link',
     //For export labels
     'LBL_PARENT_ID' => 'parent id',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Apel',
     'LBL_CALL_RECORDING_URL' => 'URL înregistrare',
     'LBL_CALL_RECORDING' => 'Înregistrare',
+
+    'LBL_LEAD_ID' => 'ID client potențial',
+    'LBL_LEAD_NAME' => 'Client potențial',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Ai programat {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> pentru {{formatDate date_start}}.',

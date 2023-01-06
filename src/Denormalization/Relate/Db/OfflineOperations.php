@@ -34,6 +34,10 @@ interface OfflineOperations
 
     public function getTemporaryTableCount(): int;
 
+    public function setTmpTableName(string $name): void;
+
+    public function getTmpTableName(): string;
+
     public function getTableRowCount(string $tableName): int;
 
     public function getAlterSql(string $tableName, array $fieldDef): ?string;

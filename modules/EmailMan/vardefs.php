@@ -145,7 +145,6 @@ array( 'table' => 'emailman', 'archive' => false, 'comment' => 'Email campaign q
 					array('name' => 'emailmanpk', 'type' => 'primary', 'fields' => array('id')),
 					array('name' => 'idx_eman_list', 'type' => 'index', 'fields' => array('list_id','user_id','deleted')),
 					array('name' => 'idx_eman_campaign_id', 'type' => 'index', 'fields' => array('campaign_id')),
-					array('name' => 'idx_eman_relid_reltype_id', 'type' => 'index', 'fields'=> array('related_id', 'related_type', 'campaign_id')),
                     array('name' => 'idx_emailman_send_date_time', 'type' => 'index', 'fields' => array('send_date_time')),
                     array('name' => 'idx_emailman_send_attempts', 'type' => 'index', 'fields' => array('send_attempts')),
 					)

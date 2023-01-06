@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Utilizadores',
     'LBL_EMAILS_PRODUCTS_REL' => 'Itens de Linha Cotados',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Itens de Linha de Receita',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escalamentos',
     'LBL_EMAILS_MESSAGES_REL' => 'Mensagens',
     'LBL_EMAILS_PURCHASES_REL' => 'Compras',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Itens de linha comprados',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Enviar e-mail',
     'LBL_MAILBOX' => 'Conta de entrada',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configure uma conta de e-mail de saída através de <a href="#OutboundEmail">Definições de E-mail</a> para enviar e-mails.',
 );

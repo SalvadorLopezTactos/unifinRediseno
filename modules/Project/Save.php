@@ -97,9 +97,15 @@ if(isset($_REQUEST['save_type']) || isset($_REQUEST['duplicateSave']) && $_REQUE
 }
 
 if ($sugarbean->is_template){
-    header("Location: index.php?action=ProjectTemplatesDetailView&module=Project&record=$return_id&return_module=Project&return_action=ProjectTemplatesEditView");
+    $params = array (
+        'action' => 'ProjectTemplatesDetailView',
+        'module' => 'Project',
+        'record' => $return_id,
+        'return_module' => 'Project',
+        'return_action' => 'ProjectTemplatesEditView',
+    );
+    header('Location: index.php?' . http_build_query($params));
 }
 else{
     handleRedirect($return_id,'Project');
 }
-?>

@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Adreça electrònica:',
     'LBL_EMAIL_ATTACHMENT' => 'Fitxer adjunt de correu electrònic',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Fitxer adjunt de correu electrònic per',
+    'LBL_NOTE_ATTACHMENT' => 'Adjunts de les notes',
+    'LBL_KB_ATTACHMENT' => 'Adjunts de KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'Adjunts dels casos',
     'LBL_FILE_MIME_TYPE' => 'Tipus MIME',
     'LBL_FILE_EXTENSION' => 'Extensió d&#39;arxiu',
     'LBL_FILE_SOURCE' => 'Arxiu font',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Origen de la nota',
     'LBL_SOURCE_EXTERNAL' => 'Extern',
     'LBL_SOURCE_INTERNAL' => 'Intern',
+    'LBL_PORTAL' => 'Portal',
 
     // Help Text
     // List View Help Text

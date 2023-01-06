@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Alla instrumentpaneler för {{module}} modul',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Alla instrumentpaneler för {{module}} modul {{view}} visa',
     'LBL_COPY_OF' => 'Kopia av {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Fokuslåda för instrumentpaneler går inte att ta bort.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Skapa Dashboard',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Vill du verkligen återställa panelen till standardlayouten?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Vill du verkligen återställa instrumentpanelen till standardlayouten?',
+    'LBL_FILTER_UTILS_SELECT' => 'Tilldelad',
 );

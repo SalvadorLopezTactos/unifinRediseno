@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,22 +18,22 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class SharedInsight extends Entity
 {
     /**
     * Gets the lastShared
+    * Details about the shared item. Read only.
     *
-    * @return SharingDetail The lastShared
+    * @return SharingDetail|null The lastShared
     */
     public function getLastShared()
     {
         if (array_key_exists("lastShared", $this->_propDict)) {
-            if (is_a($this->_propDict["lastShared"], "Microsoft\Graph\Model\SharingDetail")) {
+            if (is_a($this->_propDict["lastShared"], "\Microsoft\Graph\Model\SharingDetail") || is_null($this->_propDict["lastShared"])) {
                 return $this->_propDict["lastShared"];
             } else {
                 $this->_propDict["lastShared"] = new SharingDetail($this->_propDict["lastShared"]);
@@ -46,6 +45,7 @@ class SharedInsight extends Entity
     
     /**
     * Sets the lastShared
+    * Details about the shared item. Read only.
     *
     * @param SharingDetail $val The lastShared
     *
@@ -57,11 +57,77 @@ class SharedInsight extends Entity
         return $this;
     }
     
+    /**
+    * Gets the resourceReference
+    * Reference properties of the shared document, such as the url and type of the document. Read-only
+    *
+    * @return ResourceReference|null The resourceReference
+    */
+    public function getResourceReference()
+    {
+        if (array_key_exists("resourceReference", $this->_propDict)) {
+            if (is_a($this->_propDict["resourceReference"], "\Microsoft\Graph\Model\ResourceReference") || is_null($this->_propDict["resourceReference"])) {
+                return $this->_propDict["resourceReference"];
+            } else {
+                $this->_propDict["resourceReference"] = new ResourceReference($this->_propDict["resourceReference"]);
+                return $this->_propDict["resourceReference"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the resourceReference
+    * Reference properties of the shared document, such as the url and type of the document. Read-only
+    *
+    * @param ResourceReference $val The resourceReference
+    *
+    * @return SharedInsight
+    */
+    public function setResourceReference($val)
+    {
+        $this->_propDict["resourceReference"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the resourceVisualization
+    * Properties that you can use to visualize the document in your experience. Read-only
+    *
+    * @return ResourceVisualization|null The resourceVisualization
+    */
+    public function getResourceVisualization()
+    {
+        if (array_key_exists("resourceVisualization", $this->_propDict)) {
+            if (is_a($this->_propDict["resourceVisualization"], "\Microsoft\Graph\Model\ResourceVisualization") || is_null($this->_propDict["resourceVisualization"])) {
+                return $this->_propDict["resourceVisualization"];
+            } else {
+                $this->_propDict["resourceVisualization"] = new ResourceVisualization($this->_propDict["resourceVisualization"]);
+                return $this->_propDict["resourceVisualization"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the resourceVisualization
+    * Properties that you can use to visualize the document in your experience. Read-only
+    *
+    * @param ResourceVisualization $val The resourceVisualization
+    *
+    * @return SharedInsight
+    */
+    public function setResourceVisualization($val)
+    {
+        $this->_propDict["resourceVisualization"] = $val;
+        return $this;
+    }
+    
 
      /** 
      * Gets the sharingHistory
      *
-     * @return array The sharingHistory
+     * @return array|null The sharingHistory
      */
     public function getSharingHistory()
     {
@@ -81,81 +147,19 @@ class SharedInsight extends Entity
     */
     public function setSharingHistory($val)
     {
-		$this->_propDict["sharingHistory"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the resourceVisualization
-    *
-    * @return ResourceVisualization The resourceVisualization
-    */
-    public function getResourceVisualization()
-    {
-        if (array_key_exists("resourceVisualization", $this->_propDict)) {
-            if (is_a($this->_propDict["resourceVisualization"], "Microsoft\Graph\Model\ResourceVisualization")) {
-                return $this->_propDict["resourceVisualization"];
-            } else {
-                $this->_propDict["resourceVisualization"] = new ResourceVisualization($this->_propDict["resourceVisualization"]);
-                return $this->_propDict["resourceVisualization"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the resourceVisualization
-    *
-    * @param ResourceVisualization $val The resourceVisualization
-    *
-    * @return SharedInsight
-    */
-    public function setResourceVisualization($val)
-    {
-        $this->_propDict["resourceVisualization"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the resourceReference
-    *
-    * @return ResourceReference The resourceReference
-    */
-    public function getResourceReference()
-    {
-        if (array_key_exists("resourceReference", $this->_propDict)) {
-            if (is_a($this->_propDict["resourceReference"], "Microsoft\Graph\Model\ResourceReference")) {
-                return $this->_propDict["resourceReference"];
-            } else {
-                $this->_propDict["resourceReference"] = new ResourceReference($this->_propDict["resourceReference"]);
-                return $this->_propDict["resourceReference"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the resourceReference
-    *
-    * @param ResourceReference $val The resourceReference
-    *
-    * @return SharedInsight
-    */
-    public function setResourceReference($val)
-    {
-        $this->_propDict["resourceReference"] = $val;
+        $this->_propDict["sharingHistory"] = $val;
         return $this;
     }
     
     /**
     * Gets the lastSharedMethod
     *
-    * @return Entity The lastSharedMethod
+    * @return Entity|null The lastSharedMethod
     */
     public function getLastSharedMethod()
     {
         if (array_key_exists("lastSharedMethod", $this->_propDict)) {
-            if (is_a($this->_propDict["lastSharedMethod"], "Microsoft\Graph\Model\Entity")) {
+            if (is_a($this->_propDict["lastSharedMethod"], "\Microsoft\Graph\Model\Entity") || is_null($this->_propDict["lastSharedMethod"])) {
                 return $this->_propDict["lastSharedMethod"];
             } else {
                 $this->_propDict["lastSharedMethod"] = new Entity($this->_propDict["lastSharedMethod"]);
@@ -180,13 +184,14 @@ class SharedInsight extends Entity
     
     /**
     * Gets the resource
+    * Used for navigating to the item that was shared. For file attachments, the type is fileAttachment. For linked attachments, the type is driveItem.
     *
-    * @return Entity The resource
+    * @return Entity|null The resource
     */
     public function getResource()
     {
         if (array_key_exists("resource", $this->_propDict)) {
-            if (is_a($this->_propDict["resource"], "Microsoft\Graph\Model\Entity")) {
+            if (is_a($this->_propDict["resource"], "\Microsoft\Graph\Model\Entity") || is_null($this->_propDict["resource"])) {
                 return $this->_propDict["resource"];
             } else {
                 $this->_propDict["resource"] = new Entity($this->_propDict["resource"]);
@@ -198,6 +203,7 @@ class SharedInsight extends Entity
     
     /**
     * Sets the resource
+    * Used for navigating to the item that was shared. For file attachments, the type is fileAttachment. For linked attachments, the type is driveItem.
     *
     * @param Entity $val The resource
     *

@@ -51,7 +51,12 @@
 
         this._super('_render');
 
-        this._getHtmlEditableField().attr('name', this.name);
+        this._getHtmlEditableField().attr('data-name', this.name);
+
+        // Hide the field for now. Once the field loads its contents completely, we will show it. This helps to prevent
+        // a momentary white background/flash in the iframe before it finishes loading in dark mode
+        this.hide();
+
         if (this._isEditView()) {
             this._renderEdit(this.def.tinyConfig || null);
         } else {
@@ -71,6 +76,8 @@
                 this.setViewContent(value);
             }
         }, this);
+        // handle embedded images when saved
+        this.model.on('validation:success', this.handleImageSave, this);
     },
 
     /**
@@ -100,11 +107,11 @@
      * Sets the content displayed in the non-editor view
      *
      * @param {String} value Sanitized HTML to be placed in view
+     * @param {string} styleSrc relative path to iframe_sugar.css
      */
-    setViewContent: function(value){
+    setViewContent: function(value, styleSrc = 'styleguide/assets/css/iframe-sugar.css') {
         var editable = this._getHtmlEditableField();
         var styleExists = false;
-        var styleSrc = 'styleguide/assets/css/iframe-sugar.css';
         var css = [];
         css.push(styleSrc);
 
@@ -143,13 +150,40 @@
             });
             if (frame && frame.contentWindow && frame.contentWindow.document && !_.isNull(value)) {
                 frame.contentDocument.body.innerHTML = value;
-                frame.contentDocument.body.style.background = 'white';
+
+                // Set the styling of the view mode based on the current sugar theme
+                this._setViewContentThemeStyling(frame);
+
+                // Show the field now that we have everything loaded (prevents the field flashing white in dark mode)
+                this.show();
             }
         } else {
             // If the element has no body, the iframe hasn't loaded. Wait until it loads
-            editable.on('load', function() {
+            editable.on('load', _.bind(function() {
                 this.setViewContent(value);
-            }, this);
+            }, this));
+        }
+    },
+
+    /**
+     * Sets the styling of the view mode iframe based on the current Sugar light/dark theme
+     *
+     * @param {Object} frame the iframe jQuery object
+     * @private
+     */
+    _setViewContentThemeStyling: function(frame) {
+        try {
+            // Get the style variables of the current theme
+            const themeClass = app.utils.isDarkMode() ? 'sugar-dark-theme' : 'sugar-light-theme';
+            const themeElement = _.first(document.getElementsByClassName(themeClass));
+            const styles = getComputedStyle(themeElement);
+
+            // Apply the proper styles to the background and text color of the iframe
+            frame.contentDocument.body.style.background = styles.getPropertyValue('--primary-content-background');
+            frame.contentDocument.body.style.color = styles.getPropertyValue('--text-color');
+        } catch (e) {
+            frame.contentDocument.body.style.background = '#ffffff';
+            frame.contentDocument.body.style.color = '#000000';
         }
     },
 
@@ -203,7 +237,7 @@
 
             // General options
             theme: 'modern',
-            skin: 'sugar',
+            skin: app.utils.isDarkMode() ? 'sugar-dark' : 'sugar',
             plugins: 'code,help,textcolor,insertdatetime,table,paste,charmap,' +
                 'image,link,anchor,directionality,searchreplace,hr,lists',
             browser_spellcheck: true,
@@ -239,6 +273,9 @@
             relative_urls: false,
             convert_urls: false,
 
+            // Insert image
+            file_browser_callback: _.bind(this.tinyMCEFileBrowseCallback, this),
+
             // Allow image copy&paste
             paste_data_images: true,
             images_upload_handler: _.bind(this.tinyMCEImagePasteCallback, this)
@@ -266,6 +303,9 @@
                     $(event.target.getWin()).blur(function(e){ // Editor window lost focus, update model immediately
                         self._saveEditor(true);
                     });
+
+                    // Show the field now that we have everything loaded (prevents a white flash in dark mode)
+                    self.show();
                 });
                 self._htmleditor.on('deactivate', function(ed){
                     self._saveEditor();
@@ -345,6 +385,8 @@
         if (this._isEditView() && this._htmleditor && this._htmleditor.dom) {
             this._htmleditor.setContent(value);
         }
+        // setup embedded images
+        this.handleEmbeddedImages(value);
     },
 
     /**

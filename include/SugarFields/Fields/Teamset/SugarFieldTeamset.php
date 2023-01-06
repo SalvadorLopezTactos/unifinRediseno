@@ -179,7 +179,7 @@ class SugarFieldTeamset extends SugarFieldBase {
 		$arrow_value = $current_user->getPreference('team_arrow_value');
 		$this->view->displayParams['arrow'] = isset($arrow_value) ? $arrow_value : 'hide';
 		*/
-        $keys = $this->getAccessKey($vardef,'TEAMSET',$vardef['module']);
+        $keys = $this->getAccessKey($this->view->vardef, 'TEAMSET', '');
         $this->view->displayParams['accessKeySelect'] = $keys['accessKeySelect'];
         $this->view->displayParams['accessKeySelectLabel'] = $keys['accessKeySelectLabel'];
         $this->view->displayParams['accessKeySelectTitle'] = $keys['accessKeySelectTitle'];
@@ -865,9 +865,9 @@ class SugarFieldTeamset extends SugarFieldBase {
         $query->from($tsb);
         $query->join('teams', array('alias'=>'teams'));
         $query->select(
-            array('id',
+            array('id', 
                   array('teams.id', 'team_id'),
-                  array('teams.name', 'name'),
+                  array('teams.name', 'name'), 
                   array('teams.name_2', 'name_2'),
             )
         );
@@ -883,12 +883,14 @@ class SugarFieldTeamset extends SugarFieldBase {
             $team['name_2'] = !empty($row['name_2'])?$row['name_2']:'';
             $teamsets[$row['id']][] = $team;
         }
-
+        
         foreach ($teamsetToBean as $teamSetId => $beansWithTeam) {
             foreach ($beansWithTeam as $beanId) {
-                $beans[$beanId]->teamList = isset($teamsets[$teamSetId])? $teamsets[$teamSetId] : '';
+                $beans[$beanId]->teamList = $teamsets[$teamSetId];
             }
         }
 
     }
 }
+
+

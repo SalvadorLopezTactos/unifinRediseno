@@ -34,7 +34,7 @@ $header_text = '';
 global $list_max_entries_per_page;
 global $urlPrefix;
 if(empty($_POST['mass']) && empty($where) && empty($_REQUEST['query'])){$_REQUEST['query']='true'; $_REQUEST['current_user_only']='checked'; };
-$log = LoggerManager::getLogger('process_list');
+$log = LoggerManager::getLogger();
 
 global $currentModule;
 

@@ -57,8 +57,22 @@ $viewdefs['KBContents']['portal']['view']['record'] = array(
                     'module' => 'Notes',
                     'modulefield' => 'filename',
                     'bLable' => 'LBL_ADD_ATTACHMENT',
-                    'bIcon' => 'fa-paperclip',
+                    'bIcon' => 'sicon-attach',
                     'span' => 12,
+                    'max_num' => -1,
+                    'related_fields' => [
+                        'filename',
+                        'file_mime_type',
+                    ],
+                    'fields' => [
+                        'name',
+                        'filename',
+                        'file_size',
+                        'file_source',
+                        'file_mime_type',
+                        'file_ext',
+                        'upload_id',
+                    ],
                 ),
                 'category_name' => array(
                     'name' => 'category_name',

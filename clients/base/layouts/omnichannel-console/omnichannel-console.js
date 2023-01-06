@@ -23,10 +23,43 @@
     className: 'omni-console',
 
     /**
-     * Current state: 'opening', 'idle', 'closing', ''.
+     * The current state of the console: 'opening', 'idle', 'closing', ''.
      * @property {string}
      */
     currentState: '',
+
+    /**
+     * Control omnichannel-console state when drawer closes.
+     */
+    isMinimized: null,
+
+    /**
+     * Stores settings for the omnichannel-console
+     */
+    settings: {
+        inbound: {
+            modeCacheKey: 'inbound-mode',
+            defaultMode: 'full'
+        },
+        outbound: {
+            modeCacheKey: 'outbound-mode',
+            defaultMode: 'compact'
+        }
+    },
+
+    /**
+     * Stores the available modes that the console can be in
+     */
+    modes: {
+        FULL: 'full',
+        COMPACT: 'compact'
+    },
+
+    /**
+     * The current mode of the console
+     * @property {string}
+     */
+    currentMode: 'compact',
 
     /**
      * Size of console with ccp only.
@@ -47,17 +80,14 @@
     headerHeight: 28,
 
     /**
-     * Showing ccp only or all.
-     * @property {boolean}
-     */
-    ccpOnly: true,
-
-    /**
      * Event handlers.
      * @property {Object}
      */
     events: {
-        'click [data-action=close]': 'closeClicked',
+        // Closing the Omnichannel console
+        'click [data-action=omnichannelClose]': 'closeClicked',
+        // Toggling between compact and full modes
+        'click [data-action=toggleMode]': '_toggleModeClicked',
         // Editing dashlet
         'click [data-dashletaction="editClicked"]': '_handleDashletToolbarActions',
         // Adding Interactions
@@ -65,22 +95,30 @@
     },
 
     /**
-     * The omnichannel dashboard switch component
+     * The omnichannel-dashboard-switch component
      */
     omniDashboardSwitch: null,
 
     /**
-     * The CCP component
+     * The omnichannel-ccp component
      */
     ccpComponent: null,
 
     /**
-     * Fields to NOT pre-fill in when quick-creating contacts/cases
+     * Fields from the AWS contact info to NOT pre-fill in when pre-populating models
      */
-    qcBlackListFields: [
+    prepopulateAwsContactDenyList: [
         'last_name',
         'name'
     ],
+
+    /**
+     * Attributes that should always be set in a model that is pre-filled from
+     * the Omnichannel console
+     */
+    prepopulateAttributes: {
+        no_success_label_link: true
+    },
 
     /**
      * Length of drawer open/close animation
@@ -88,22 +126,50 @@
     animationLength: 300,
 
     /**
+     * Is there currently a Call or Message active?
+     */
+    isCallActive: false,
+
+    /**
+     * Is this the config mode or not
+     */
+    isConfig: false,
+
+    /**
+     * Did the user manually click the Close button to hide the console?
+     * Or if false, Live was closed by some other means (drawer opened, etc.)
+     */
+    userManuallyClosedConsole: false,
+
+    /**
+     * Flag to store if the console is closed as the result of the user changing views.
+     *
+     * @property {boolean}
+     */
+    closedAfterRouteChange: false,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
         $(window).on('resize.omniConsole', _.bind(this._resize, this));
-        this.bindRouterEvents();
         this.boundOpen = _.bind(this.open, this);
         this.boundCloseImmediately = _.bind(this.closeImmediately, this);
-        this._setSize();
+
+        // Re-initialize the console's mode when AWS contacts change
+        this.on('contact:view', this._initMode, this);
+        this.on('contact:destroyed', this._initMode, this);
+        app.events.once('app:login', this.closeOnLoginRedirect, this);
+
+        this.bindRouterEvents();
     },
 
     /**
-     * Bind Specific router events for this layout
+     * Bind specific router events for this layout
      */
     bindRouterEvents: function() {
-        app.router.on('route', this.closeImmediately, this);
+        app.router.on('route', this.closeOnRouteChange, this);
     },
 
     /**
@@ -112,13 +178,8 @@
     bindDataChange: function() {
         this._super('bindDataChange');
 
-        // when the quickcreate dropdown is clicked, load the model data to context
-        $('.btn.dropdown-toggle[track="click:quickCreate"]')
-            .click(_.bind(this._addQuickcreateModelDataToContext, this));
-
-        // when the quickcreate drawer is closed, perform the necessary steps
-        var qcContext = this._getTopLevelContext();
-        qcContext.on('quickcreate-drawer:closed', this._handleClosedQuickcreateDrawer, this);
+        // Handle when the quickcreate drawer is closed
+        this._getTopLevelContext().on('quickcreate-drawer:closed', this._handleClosedQuickcreateDrawer, this);
     },
 
     /**
@@ -138,77 +199,49 @@
     },
 
     /**
-     * Add custom quickcreateModelData to the context so the quickcreate drawer can pre-populate
-     * relevant data
+     * Gets the data to pre-populate a model with from the active dashboard
      *
-     * @private
+     * @param {string} targetModule the module to get prepopulate data for
+     * @return {Object} The attributes to pre-populate a model with
      */
-    _addQuickcreateModelDataToContext: function() {
-        if (this.isOpen()) {
-            var ccp = this._getCCPComponent();
-            var context = this._getTopLevelContext();
-            if (ccp.activeContact) {
-                var contactInfo = _.omit(ccp.getContactInfo(ccp.activeContact), this.qcBlackListFields);
-                context.set('quickcreateModelData',
-                    _.extendOwn(
-                        contactInfo,
-                        this.getContactModelDataForQuickcreate(),
-                        {
-                            no_success_label_link: true,
-                        }
-                    )
-                );
-            }
+    getModelPrepopulateData: function(targetModule) {
+        var data = {};
+        var ccp = this._getCCPComponent();
+        var dashboardSwitch = this._getOmnichannelDashboardSwitch();
+        if (ccp.activeContact && dashboardSwitch) {
+            var activeContactInfo = ccp.getContactInfo(ccp.activeContact);
+            data = _.extendOwn(
+                data,
+                _.omit(activeContactInfo, this.prepopulateAwsContactDenyList),
+                dashboardSwitch.getModelPrepopulateData(ccp.getActiveContactId(), targetModule),
+                this.prepopulateAttributes
+            );
         }
+
+        return data;
     },
 
     /**
-     * Handle when the quickcreate drawer is closed, regardless if a new record
-     * was created. If no new record was created, simply re-open the console
+     * Handles when the quick create drawer is closed, regardless of whether or
+     * not a new record was created
      *
+     * @param {Bean|undefined} createdModel the model created in the quick
+     *                      create drawer if it was saved; undefined if the
+     *                      quick create drawer was canceled
      * @private
      */
-    _handleClosedQuickcreateDrawer: function() {
-        var dashboard = this._getOmnichannelDashboard();
-        var context = this._getTopLevelContext();
-        var qcModel = context.get('quickcreateCreatedModel');
-
-        if (dashboard && !_.isEmpty(qcModel)) {
-            var module = qcModel.get('_module');
-            var tabIndex = dashboard.moduleTabIndex[module];
-
-            // if a new Case was created, set the relevant model in the Contacts tab
-            if (module === 'Cases') {
-                var contactId = qcModel.get('primary_contact_id');
-
-                if (contactId) {
-                    var setContactModel = function(data) {
-                        var model = app.data.createBean('Contacts', data);
-
-                        dashboard.setModel(dashboard.moduleTabIndex.Contacts, model);
-                    };
-
-                    this.fetchModelData('Contacts', contactId, setContactModel);
-                }
-            }
-
-            dashboard.setModel(tabIndex, qcModel);
-            dashboard.switchTab(tabIndex);
-
-            // Tabbed dashboard by default do not allow refreshing the active tab,
-            // the console's dashboard is an exception and the event has to be triggered manually.
-            var regularDashboard = dashboard.getComponent('dashboard');
-            if (regularDashboard) {
-                var tabbedDashboard = regularDashboard.getComponent('tabbed-dashboard');
-                if (tabbedDashboard && tabbedDashboard.activeTab === tabIndex) {
-                    tabbedDashboard.context.trigger('tabbed-dashboard:switch-tab', tabIndex);
-                }
-            }
-
-            context.unset('quickcreateCreatedModel');
+    _handleClosedQuickcreateDrawer: function(createdModel) {
+        // Pass the created model to the omnichannel-dashboard-switch layout
+        if (!_.isEmpty(createdModel)) {
+            var ccp = this._getCCPComponent();
+            var activeContactId = ccp.getActiveContactId();
+            var dashboardSwitch = this._getOmnichannelDashboardSwitch();
+            dashboardSwitch.setModel(activeContactId, createdModel, false);
+            dashboardSwitch.postQuickCreate(activeContactId, createdModel);
         }
 
-        this.open(); // re-open the console
+        // Re-open the Omnichannel console
+        this.open();
     },
 
     /**
@@ -256,6 +289,8 @@
      * Get relevant model data from the selected Contact, if there is one selected
      *
      * @return {Object}
+     * @deprecated Since 11.1, the omnichannel-dashboard layout will handle
+     *              gathering prepopulate data from the active dashboard
      */
     getContactModelDataForQuickcreate: function() {
         var dashboard = this._getOmnichannelDashboard();
@@ -299,35 +334,25 @@
     },
 
     /**
-     * Fetch model data for the supplied module/id and call the callback,
-     * if supplied
-     *
-     * @param {string} module
-     * @param {string} id
-     * @param callback
-     */
-    fetchModelData: function(module, id, callback) {
-        var url = app.api.buildURL(module + '/' + id);
-
-        app.api.call('read', url, null, {
-            success: function(data) {
-                if (callback) {
-                    callback(data);
-                }
-            }
-        });
-    },
-
-    /**
      * Open the console.
      */
     open: function() {
         // open the console if not yet
         if (!this.isOpen()) {
-            this._setSize();
+            app.events.on('app:view:change', this._setSize, this);
+            app.events.on('sidebar:state:changed', this._setSize, this);
+
+            $('#content').addClass('omniconsole-visible');
+            this.userManuallyClosedConsole = false;
+            this.closedAfterRouteChange = false;
             this.currentState = 'opening';
-            this.$el.show('slide', {direction: 'down'}, this.animationLength);
+            this._initMode();
+            this.$el.css({
+                left: 0,
+                display: ''
+            });
             this.currentState = 'idle';
+            this.isMinimized = false;
             var $main = app.$contentEl.children().first();
             $main.on('drawer:add.omniConsole', this.boundCloseImmediately);
             this.trigger('omniconsole:open');
@@ -352,39 +377,71 @@
     },
 
     /**
-     * Tell if console is expanded with dashbaord.
+     * Checks if the console can be automatically reopened - used by the top drawer to check if it's correct
+     * to reopen the console after the top drawer closes
+     * @return {boolean}
+     */
+    canBeAutomaticallyReopened: function() {
+        return !this.isOpen() && this.isMinimized && !this.userManuallyClosedConsole && !this.closedAfterRouteChange;
+    },
+
+    /**
+     * Tell if console is expanded with dashboard and/or detail panel.
+     *
      * @return {boolean} True if it's expanded, false otherwise
+     * @deprecated Since 11.1, use getMode instead
      */
     isExpanded: function() {
-        return !this.ccpOnly;
+        return this.getMode() !== this.modes.COMPACT;
     },
 
     /**
      * Close the console immediately.
      */
     closeImmediately: function() {
-        if (!this.$el) {
+        // don't close in compact mode
+        if (!this.$el || this.getMode() === 'compact') {
             return;
         }
-        this.$el.hide();
-        this.currentState = '';
+        this.handleResetOnClose();
+    },
+
+    /**
+     * Utility function to perform required clean up after the console is closed
+     */
+    handleResetOnClose: function() {
+        this._resetPageElementsCssOnClose();
         this._offEvents();
     },
 
     /**
+     * Handles closing the console when redirected to the login page
+     */
+    closeOnLoginRedirect: function() {
+        this.closedAfterRouteChange = true;
+        this.handleResetOnClose();
+    },
+
+    /**
+     * On route change, close the console only if we're in full mode
+     */
+    closeOnRouteChange: function() {
+        if (this.getMode() === this.modes.FULL) {
+            // Opening and closing the top drawer changes the route, but we handle that separately
+            if (!app.drawer.isOpening() && !app.drawer.isClosing()) {
+                this.closedAfterRouteChange = true;
+            }
+            this.closeImmediately();
+        }
+    },
+
+    /**
      * Expand/shrink console.
+     *
+     * @deprecated Since 11.1, use _initMode or setMode instead
      */
     toggle: function() {
-        if (this.isOpen()) {
-            this.ccpOnly = !this.ccpOnly;
-            this.$el.animate({
-                'left': 0,
-                'top': this._determineTop(),
-                'right': this._determineRight(),
-                'bottom': this._determineBottom()
-            });
-            this.trigger('omniconsole:toggle');
-        }
+        this._initMode();
     },
 
     /**
@@ -392,7 +449,37 @@
      * Having this function allows the close() function to accept a callback
      */
     closeClicked: function() {
+        this.isMinimized = true;
+        this.userManuallyClosedConsole = true;
+        this.closedAfterRouteChange = false;
         this.close();
+    },
+
+    /**
+     * Resets page elements that console has touched while open
+     * @private
+     */
+    _resetPageElementsCssOnClose: function() {
+        var leftOffset = this.currentMode === this.modes.COMPACT ?
+            `-${this.ccpSize.width}px` : `-${$(window).width()}px`;
+        $('#content')
+            .removeClass('omniconsole-visible')
+            .css({
+                marginLeft: '',
+                width: ''
+            });
+        $('.main-pane').css({
+            marginLeft: '',
+            width: ''
+        });
+        $('.main-pane .headerpane').css({
+            marginLeft: '',
+            width: ''
+        });
+        this.$el.css('left', leftOffset);
+
+        this.currentState = '';
+        this.isMinimized = true;
     },
 
     /**
@@ -403,11 +490,14 @@
         if (!_.isFunction(onClose)) {
             onClose = null;
         }
+
         if (this.isOpen()) {
             this.currentState = 'closing';
-            this.$el.hide('slide', {direction: 'down'}, this.animationLength, onClose);
-            this.currentState = '';
-            this._offEvents();
+
+            app.events.off('app:view:change', null, this);
+            app.events.off('sidebar:state:changed', null, this);
+
+            this.handleResetOnClose();
         }
     },
 
@@ -421,60 +511,244 @@
     },
 
     /**
-     * Calculate the right of the console.
-     * @return {number}
+     * Initializes the mode of the console based on its current state
+     *
      * @private
      */
-    _determineRight: function() {
-        if (this.ccpOnly) {
-            return $(window).width() - this.ccpSize.width - 6;
+    _initMode: function() {
+        // If there is an active contact, get the correct mode for the direction
+        // of the contact. Otherwise, default to 'compact'
+        var activeContactDirection = this._getActiveContactDirection();
+        var mode = activeContactDirection ? this._getModeForDirection(activeContactDirection) : this.modes.COMPACT;
+
+        this.isCallActive = !!this.getActiveContact();
+
+        // let omnichannel-header know to toggle Compact/Full mode button on/off
+        this.trigger('omniconsole:activeCall', this.isCallActive);
+        // Apply the mode to the console
+        this.setMode(mode);
+    },
+
+    /**
+     * Returns the direction of the current/active contact session if there is
+     * one
+     *
+     * @return {string|null} 'inbound' if the active contact session is an inbound call or a chat;
+     *                       'outbound' if the active contact session is an outbound call;
+     *                       null if there is no active contact session
+     * @private
+     */
+    _getActiveContactDirection: function() {
+        // Default direction is null
+        var direction = null;
+
+        // If we have an active contact session, update direction to reflect it
+        var activeContact = this.getActiveContact();
+
+        if (activeContact) {
+            direction = activeContact.isInbound() ? 'inbound' : 'outbound';
         }
-        return 0;
+
+        return direction;
     },
 
     /**
-     * Calculate the height of the console.
-     * @return {number}
-     * @private
+     * Returns the Active Contact from the CCP Component
+     *
+     * @return {*} False or the active Contact
      */
-    _determineBottom: function() {
-        return $('footer').outerHeight();
+    getActiveContact: function() {
+        var ccp = this._getCCPComponent();
+        return ccp && ccp.getActiveContact();
     },
 
     /**
-     * Calculate the top of the console.
-     * @return {number}
+     * Given a direction of a conversation, returns the correct mode for the
+     * console based on the cached or default mode for that direction
+     *
+     * @param {string} direction, either 'inbound' or 'outbound'
+     * @return {string|null} The correct mode of the console for the direction
+     *                       or null if no mode exists for the directiom
      * @private
      */
-    _determineTop: function() {
-        var top = $('#header .navbar').outerHeight();
-        var footerHeight = $('footer').outerHeight();
-        var windowHeight = $(window).height();
-        if (this.ccpOnly) {
-            var ccpTop = windowHeight - footerHeight - this.ccpSize.height - this.headerHeight;
-            // if ccpTop < top, ccp will be partially covered by megamenu
-            if (ccpTop > top) {
-                top = ccpTop;
+    _getModeForDirection: function(direction) {
+        var mode = null;
+
+        // Get the settings for the given direction
+        var directionSettings = this.settings && this.settings[direction];
+
+        // Try to load the cached mode first
+        if (directionSettings && directionSettings.modeCacheKey) {
+            var modeCacheKey = app.user.lastState.key(directionSettings.modeCacheKey, this);
+            mode = app.user.lastState.get(modeCacheKey);
+        }
+
+        // If no mode was cached, use the default mode
+        if (_.isEmpty(mode) && (directionSettings && directionSettings.defaultMode)) {
+            mode = directionSettings.defaultMode;
+        }
+
+        return mode;
+    },
+
+    /**
+     * Handles when the toggleMode button is clicked to update the mode of the
+     * console
+     */
+    _toggleModeClicked: function() {
+        // Calculate what the new mode should be
+        var newMode = this.getMode() === this.modes.FULL ? this.modes.COMPACT : this.modes.FULL;
+
+        // Set the new mode of the console
+        this.setMode(newMode);
+    },
+
+    /**
+     * Set the current mode of the console
+     *
+     * @param {string} mode the mode of the console to set
+     */
+    setMode: function(mode) {
+        // Set the new mode
+        this.currentMode = mode;
+
+        // Update the size of the console
+        this._setSize(this.isOpen());
+
+        // Update the cached mode value
+        this._updateModeCache();
+
+        // Notify the layout so other components can register the change
+        this.trigger('omniconsole:mode:set', mode);
+    },
+
+    /**
+     * Returns the current mode of the console
+     *
+     * @return {string} the current mode of the console
+     */
+    getMode: function() {
+        return this.currentMode;
+    },
+
+    /**
+     * Caches the current mode of the console for the direction of the active
+     * contact session (inbound or outbound) if one exists
+     *
+     * @private
+     */
+    _updateModeCache: function() {
+        var direction = this._getActiveContactDirection();
+        if (direction) {
+            var cacheKey = this.settings && this.settings[direction] && this.settings[direction].modeCacheKey;
+            if (cacheKey) {
+                app.user.lastState.set(app.user.lastState.key(cacheKey, this), this.currentMode);
             }
         }
-        return top;
     },
 
     /**
      * Set the size of the console.
-     * @param {boolean} ccpOnly true if showing ccp only, false otherwise
+     *
+     * @param {boolean} animate if true, will animate the size change
      * @private
      */
-    _setSize: function(ccpOnly) {
-        if (!_.isUndefined(ccpOnly)) {
-            this.ccpOnly = ccpOnly;
+    _setSize: function(animate) {
+        if (_.isObject(animate) && animate.name === 'bwc') {
+            return;
         }
-        this.$el.css({
-            'left': 0,
-            'top': this._determineTop(),
-            'right': this._determineRight(),
-            'bottom': this._determineBottom()
-        });
+
+        if (this.closedAfterRouteChange) {
+            return;
+        }
+
+        var leftContentOffset = this.ccpSize.width;
+        var $sidebar = $('.side.sidebar-content');
+        var hasSidebar = !!$sidebar.length;
+        var isSidebarCollapsed = $sidebar.hasClass('side-collapsed');
+        var noSidebarOrSidebarIsCollapsed = !hasSidebar || (hasSidebar && isSidebarCollapsed);
+        var areDrawersActive = !!app.drawer.count();
+        var contentProps;
+        var mainPaneProps;
+        var headerpaneProps;
+        var drawerMainPaneProps;
+        var drawerHeaderpaneProps;
+        var inactiveDrawerHeaderpaneProps;
+        var mainPaneWidth;
+        var $drawerSidebar;
+        var hasDrawerSidebar;
+        var $mainPane;
+        var $activeDrawerMainPane;
+        var $activeDrawerHeaderpane;
+        var cssCalc100MinusLeftOffset = `calc(100% - ${leftContentOffset}px)`;
+        var cssCalc100MinusLeftOffsetMinus34vw = `calc(100% - ${leftContentOffset}px - 34vw)`;
+
+        contentProps = {
+            marginLeft: leftContentOffset,
+            width: isSidebarCollapsed ? '100%' : cssCalc100MinusLeftOffset
+        };
+        $('#content').css(contentProps);
+
+        if (hasSidebar && isSidebarCollapsed) {
+            mainPaneWidth = cssCalc100MinusLeftOffset;
+        } else if (noSidebarOrSidebarIsCollapsed) {
+            mainPaneWidth = '100%';
+        } else {
+            mainPaneWidth = `calc(100% - 34vw)`;
+        }
+        mainPaneProps = {
+            marginLeft: '',
+            width: mainPaneWidth
+        };
+        $mainPane = $('#content .main-pane');
+        $mainPane.css(mainPaneProps);
+
+        headerpaneProps = {
+            marginLeft: noSidebarOrSidebarIsCollapsed || areDrawersActive ? 0 : leftContentOffset,
+            width: noSidebarOrSidebarIsCollapsed ? cssCalc100MinusLeftOffset : cssCalc100MinusLeftOffsetMinus34vw
+        };
+        if (areDrawersActive) {
+            headerpaneProps.width = '100%';
+        }
+        $mainPane.find('.headerpane').css(headerpaneProps);
+
+        // Set props for drawer elements if active
+        if (areDrawersActive) {
+            $drawerSidebar = $('.drawer.active .side.sidebar-content');
+            hasDrawerSidebar = $drawerSidebar.length && !$drawerSidebar.hasClass('side-collapsed');
+
+            drawerMainPaneProps = {
+                marginLeft: leftContentOffset,
+                width: hasDrawerSidebar ? cssCalc100MinusLeftOffsetMinus34vw : cssCalc100MinusLeftOffset
+            };
+
+            drawerHeaderpaneProps = {
+                marginLeft: hasDrawerSidebar ? leftContentOffset : 0,
+                width: hasDrawerSidebar ? cssCalc100MinusLeftOffsetMinus34vw : cssCalc100MinusLeftOffset
+            };
+
+            $activeDrawerMainPane = $('#drawers .drawer.active .main-pane');
+            $activeDrawerMainPane.css(drawerMainPaneProps);
+
+            $activeDrawerHeaderpane = $activeDrawerMainPane.find('.headerpane');
+            $activeDrawerHeaderpane.css(drawerHeaderpaneProps);
+
+            // reset the inactive drawer headerpane
+            inactiveDrawerHeaderpaneProps = {
+                marginLeft: this.currentState === 'opening' ? '320px' : '',
+                width: this.currentState === 'opening' ? cssCalc100MinusLeftOffset : ''
+            };
+            $('#drawers .drawer.inactive .main-pane .headerpane').css(inactiveDrawerHeaderpaneProps);
+        }
+
+        if (animate || this.isConfig) {
+            this.$el.css({
+                left: 0,
+                width: this.currentMode === this.modes.COMPACT ? `${this.ccpSize.width}px` : '100%'
+            });
+        } else {
+            this.$el.css('left', '0px');
+        }
     },
 
     /**
@@ -487,19 +761,9 @@
         }
         // resize the console if it is opened
         if (this.currentState === 'idle') {
-            this._setSize();
+            this._setSize(false);
         }
     }, 30),
-
-    /**
-     * @inheritdoc
-     */
-    _dispose: function() {
-        $(window).off('resize.omniConsole');
-        app.router.off('route', null, this);
-        this._getTopLevelContext().off('quickcreate-drawer:closed', this._handleClosedQuickcreateDrawer, this);
-        this._super('_dispose');
-    },
 
     /**
      * Get top-level context for setting Quick Create models
@@ -513,5 +777,16 @@
             context = context.parent;
         }
         return context;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        $(window).off('resize.omniConsole');
+        app.events.off('app:login', this.closeOnLoginRedirect, this);
+        app.router.off('route', null, this);
+        this._getTopLevelContext().off('quickcreate-drawer:closed', this._handleClosedQuickcreateDrawer, this);
+        this._super('_dispose');
     },
 })

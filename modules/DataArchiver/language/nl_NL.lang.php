@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Archiveer',
     'LBL_PROCESS_TYPE_DELETE' => 'Hard verwijderen',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Archief wordt uitgevoerd',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Waarschuwing',
+    'LBL_ARCHIVER_WARNING' => 'Het wordt aanbevolen om deze actie uit te voeren tijdens laag gebruik of lichte tijden '
+        . 'omdat dit invloed kan hebben op de prestaties van het systeem. Weet u zeker dat u deze actie nu wilt uitvoeren?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Voor de archivering van de module {{moduleName}} moet {{fieldName}} zijn ingesteld als filter',
 );

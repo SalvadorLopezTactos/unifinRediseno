@@ -46,13 +46,6 @@ $dictionary['contacts_users'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_users_con',
-            'type' => 'index',
-            'fields' => array(
-                'contact_id',
-            ),
-        ),
-        array(
             'name' => 'idx_con_users_user',
             'type' => 'index',
             'fields' => array(

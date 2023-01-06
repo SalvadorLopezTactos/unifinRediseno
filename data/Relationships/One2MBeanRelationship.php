@@ -192,7 +192,7 @@ class One2MBeanRelationship extends One2MRelationship
     }
 
     /**
-     * @deprecated Use One2MBeanRelationship::load() instead
+     * @inheritdoc
      */
     public function getQuery($link, $params = array())
     {
@@ -202,6 +202,15 @@ class One2MBeanRelationship extends One2MRelationship
         }
 
         if ($link->getSide() != REL_LHS) {
+            // Return rhs id as a query
+            if (!empty($params['returnRHSIdQuery']) && !empty($this->def['rhs_key'])) {
+                $rhsIDName = $this->def['rhs_key'];
+                if (!empty($link->getFocus()->$rhsIDName)) {
+                    $db = DBManagerFactory::getInstance();
+                    $id = $db->quoted($link->getFocus()->$rhsIDName);
+                    return "SELECT $id id ". $db->getFromDummyTable();
+                }
+            }
             return false;
         } else {
             $lhsKey = $this->def['lhs_key'];
@@ -285,6 +294,10 @@ class One2MBeanRelationship extends One2MRelationship
         $rhsTableKey = "{$rhsTable}.{$this->def['rhs_key']}";
         $deleted = !empty($params['deleted']) ? 1 : 0;
         $relatedSeed = BeanFactory::getDefinition($this->getRHSModule());
+
+        if (!$relatedSeed->getTableName() && !$relatedSeed->table_name) {
+            $relatedSeed->table_name = $rhsTable;
+        }
 
         $query = new SugarQuery();
         $query->from(

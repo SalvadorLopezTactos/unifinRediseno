@@ -6,10 +6,13 @@
   height: @sizeDefault;
   width: @sizeDefault;
   border-radius: 100px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatar img {
-  border: 2px solid fade(@black, 40%);
+  border: 2px solid @borderColor;
 }
 
 img.avatar:-moz-broken,
@@ -45,8 +48,4 @@ img.avatar:-moz-broken,
 .avatar-mini img {
   height: @sizeMini;
   width: @sizeMini;
-}
-
-.pull-left .avatar {
-  margin-right: 10px;
 }

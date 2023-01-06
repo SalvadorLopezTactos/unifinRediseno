@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'For eksempel kan du bruge dette til at finde et emne, der tidligere er blevet sendt.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Hvis du har en ny support sag, du ønsker at indsende, kan du klikke her for at sende en ny sag.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Hvis du klikker her, vender du tilbage til denne visning til enhver tid.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sagsinteraktioner',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sagens Tidslinje',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Noter',
 

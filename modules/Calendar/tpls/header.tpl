@@ -31,7 +31,7 @@
 		<img border="0" src="{$cal_img|escape:'html':'UTF-8'}" alt="{$APP.LBL_ENTER_DATE|escape:'html':'UTF-8'}" id="goto_date_trigger" align="absmiddle">
 		<input type="hidden" id="goto_date" name="goto_date" value="{$current_date|escape:'html':'UTF-8'}">
 					<script type="text/javascript">
-					Calendar.setup ({literal}{{/literal}
+					Calendar.setup ({
 						inputField : "goto_date",
 						ifFormat : "%m/%d/%Y",
 						daFormat : "%m/%d/%Y",
@@ -42,15 +42,15 @@
 						onUpdate: goto_date_call,
 						startWeekday: {$start_weekday|escape:'javascript':'UTF-8'},
 						weekNumbers:false
-					{literal}}{/literal});
-					{literal}
+					});
+					
 					YAHOO.util.Event.onDOMReady(function(){
 						YAHOO.util.Event.addListener("goto_date","change",goto_date_call);
 					});
 					function goto_date_call(){
 						CAL.goto_date_call();
 					}
-					{/literal}
+					
 					</script>
 	</span>
 	{/if}

@@ -20,18 +20,18 @@
         <div class="filter controls controls-two btn-group-fit">
             <div class="filter-view search">
                 <span class="table-cell">
-                    <input type="hidden" class="select2 search-filter" data-placeholder="{{str "LBL_MODULE"}}">
+                    <input type="hidden" class="select2 search-filter" data-placeholder="{{str "LBL_MODULE"}}" role="textbox">
                     <div class="choice-filter choice-filter-clickable" style="cursor: pointer;">
                         <span class="choice-filter-label"></span>
                     </div>
                 </span>
                 <span class="table-cell full-width">
-                    <input type="text" size=" " class="search-name" placeholder="{{str "LBL_BASIC_SEARCH"}}&hellip;">
+                    <input type="text" size=" " class="search-name" placeholder="{{str "LBL_BASIC_SEARCH"}}&hellip;" role="textbox">
                 </span>
             </div>
             <div class="toggle-actions actions">
                 <div class="btn-group refresh {{meta.css_class}}" data-action="refreshList">
-                    <button class="btn" rel="tooltip" title="{{str 'LBL_LIST_REFRESH' module}}" aria-label="{{str 'LBL_LIST_REFRESH' module}}"><i class="fa fa-refresh"></i></button>
+                    <button class="btn" rel="tooltip" title="{{str 'LBL_LIST_REFRESH' module}}" aria-label="{{str 'LBL_LIST_REFRESH' module}}"><i class="sicon sicon-refresh"></i></button>
                 </div>
             </div>
         </div>

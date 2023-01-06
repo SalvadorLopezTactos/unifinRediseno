@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'عنوان البريد الإلكتروني:',
     'LBL_EMAIL_ATTACHMENT' => 'مرفق البريد الإلكتروني',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'مرفق البريد الإلكتروني لـ',
+    'LBL_NOTE_ATTACHMENT' => 'مرفقات الملاحظة',
+    'LBL_KB_ATTACHMENT' => 'مرفقات مستند KB',
+    'LBL_CASE_ATTACHMENT' => 'مرفقات الحالة',
     'LBL_FILE_MIME_TYPE' => 'نوع Mime',
     'LBL_FILE_EXTENSION' => 'امتداد الملف',
     'LBL_FILE_SOURCE' => 'مصدر الملف',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'مصدر الملاحظة',
     'LBL_SOURCE_EXTERNAL' => 'خارجي',
     'LBL_SOURCE_INTERNAL' => 'داخلي',
+    'LBL_PORTAL' => 'المدخل',
 
     // Help Text
     // List View Help Text

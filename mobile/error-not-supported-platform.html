@@ -95,8 +95,15 @@
                 return url;
             }
             return "http://" + url;
+        },
+        // check if custom url parameter belongs to the SugarCrm domain 
+        _checkUrl = function(url) {
+            url = url.trim();
+            var origin = window.location.origin;
+            // two conditions required: 1. http(s) url 2. the url is from the current domain
+            return url.indexOf('http') !== 0 || url.indexOf(origin) === 0 ? url : origin;
         };
-        a.href = _normalizeUrl(url);
+        a.href = _checkUrl(_normalizeUrl(url));
 </script>
 
 </body>

@@ -35,6 +35,11 @@ use Psr\Log\LoggerAwareTrait;
  */
 class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInterface
 {
+    /**
+     * @var string
+     */
+    protected $sudoFor = '';
+
     use LoggerAwareTrait;
 
     const PORTAL_PLATFORM = 'portal';
@@ -265,6 +270,12 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
         try {
             $authManager = $this->getAuthProviderApiLoginBuilder($idpConfig)->buildAuthProviders();
             $jwtBearerToken = new JWTBearerToken(Srn\Converter::toString($userSrn), $idmModeConfig['tid']);
+            if (!empty($this->sudoFor)) {
+                $jwtBearerToken->setAttribute(
+                    'sudoer',
+                    Srn\Converter::toString($srnManager->createUserSrn($tenantSrn->getTenantId(), $this->sudoFor))
+                );
+            }
             $jwtBearerToken->setAttribute('platform', $this->platform);
             $accessToken = $authManager->authenticate($jwtBearerToken);
 
@@ -275,21 +286,14 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
                 'scope' => $accessToken->getAttribute('scope'),
             );
 
-            if ($this->storage instanceof IOAuth2RefreshTokens) {
-                $token['refresh_token'] = $this->genAccessToken();
-                $this->storage->setRefreshToken(
-                    $token['refresh_token'],
-                    $client_id,
-                    $user_id,
-                    time() + $this->getVariable(self::CONFIG_REFRESH_LIFETIME),
-                    $token['scope']
-                );
-                $this->storage->refreshToken->download_token = $token['access_token'];
-                $this->storage->refreshToken->save();
-                if ($this->oldRefreshToken) {
-                    $this->storage->unsetRefreshToken($this->oldRefreshToken);
-                    unset($this->oldRefreshToken);
+            if ($this->storage instanceof IOAuth2RefreshTokens && $accessToken->hasAttribute('refresh_token')) {
+                $token['refresh_token'] = $accessToken->getAttribute('refresh_token');
+                $token['refresh_expires_in'] = $this->getVariable(self::CONFIG_REFRESH_LIFETIME);
+                if (is_null($this->storage->refreshToken)) {
+                    $this->storage->refreshToken = BeanFactory::newBean('OAuthTokens');
                 }
+                $this->storage->refreshToken->expire_ts = time() + $token['refresh_expires_in'];
+                $this->storage->refreshToken->download_token = $token['access_token'];
             }
 
             return $token;
@@ -339,9 +343,28 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
     }
 
     /**
-     * @param string $token
+     * @param string $userName
+     * @param string $clientId
+     * @param string $platform
+     * @param bool $allowInactive
+     * @param bool $needRefresh
+     * @return string
+     * @throws SugarApiExceptionNotFound
      */
-    protected function revokeToken(string $token): void
+    public function getSudoToken(
+        $userName,
+        $clientId,
+        $platform,
+        bool $allowInactive = false,
+        bool $needRefresh = false
+    ) {
+        if ($allowInactive) {
+            $this->sudoFor = $GLOBALS['current_user']->id;
+        }
+        return parent::getSudoToken($userName, $clientId, $platform, $allowInactive, $needRefresh);
+    }
+
+    protected function revokeToken(string $token)
     {
         $idpConfig = $this->getIdpConfig();
         try {
@@ -366,8 +389,9 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
      * Revoke access token
      * @param string $token
      */
-    public function unsetAccessToken(string $token): void
+    public function unsetAccessToken($token)
     {
         $this->revokeToken($token);
     }
+
 }

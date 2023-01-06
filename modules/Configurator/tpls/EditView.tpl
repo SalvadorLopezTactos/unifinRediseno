@@ -10,18 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}
 <style>
     .company_logo_image_container {
         height: 24px;
         width: 180px;
     }
-    #company_logo_image {
+    .dark-bg {
+        background-color: #2b2d2e;
+    }
+    .light-bg {
+        background-color: #ffffff;
+    }
+    #company_logo_image,
+    #company_logo_image_dark {
         max-height: 100%;
         max-width: 100%;
     }
 </style>
-{/literal}
 <form name="ConfigureSettings" enctype='multipart/form-data' method="POST" action="index.php" onSubmit="return (add_checks(document.ConfigureSettings) && check_form('ConfigureSettings'));">
 {sugar_csrf_form_token}
 <input type='hidden' name='action' value='SaveConfig'/>
@@ -33,7 +38,7 @@
 	<td>
 		<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" id="ConfigureSettings_save_button" type="submit"  name="save" value="  {$APP.LBL_SAVE_BUTTON_LABEL}  " >
 		<!-- &nbsp;<input title="{$MOD.LBL_SAVE_BUTTON_TITLE}"  id="ConfigureSettings_restore_button"  class="button"  type="submit" name="restore" value="  {$MOD.LBL_RESTORE_BUTTON_LABEL}  " > -->
-		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}" id="ConfigureSettings_cancel_button"   onclick="document.location.href='index.php?module=Administration&action=index'" class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " > </td>
+		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}" id="ConfigureSettings_cancel_button"   onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " > </td>
 	<td align="right" nowrap>
 		<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span> {$APP.NTC_REQUIRED}
 	</td>
@@ -56,6 +61,18 @@
 			<input type='text' size='4' id='ConfigureSettings_list_max_entries_per_subpanel' name='list_max_entries_per_subpanel' value='{$config.list_max_entries_per_subpanel}'>
 		</td>
 	</tr>
+    <tr>
+        <td  scope="row">{$MOD.FREEZE_FIRST_COLUMN}: {sugar_help text={$MOD.FREEZE_FIRST_COLUMN_HELP}}</td>
+        {if !empty($config.allow_freeze_first_column )}
+            {assign var='allow_freeze_first_column_checked' value='CHECKED'}
+        {else}
+            {assign var='allow_freeze_first_column_checked' value=''}
+        {/if}
+        <td >
+            <input type='hidden' name='allow_freeze_first_column' value='false'>
+            <input name='allow_freeze_first_column'  type="checkbox" class="checkbox" value="true" {$allow_freeze_first_column_checked}>
+        </td>
+    </tr>
 	<tr>
 		<td  scope="row">{$MOD.DISPLAY_RESPONSE_TIME}: </td>
 		{if !empty($config.calculate_response_time )}
@@ -98,7 +115,7 @@
         {$MOD.CURRENT_LOGO}&nbsp;{sugar_help text=$MOD.CURRENT_LOGO_HELP}
         </td>
         <td width="35%">
-            <div class="company_logo_image_container">
+            <div class="company_logo_image_container light-bg">
                 <img id="company_logo_image" src="{$company_logo}"
                      alt="{$mod_strings.LBL_LOGO}" />
             </div>
@@ -118,6 +135,25 @@
         <td  width='35%'>
             <div id="container_upload"></div>
             <input type="text" id="commit_company_logo" name="commit_company_logo" style="display:none"/>
+        </td>
+    </tr>
+    <tr>
+        <td scope="row" nowrap>
+            {$MOD.CURRENT_LOGO_DARK}&nbsp;{sugar_help text=$MOD.CURRENT_LOGO_DARK_HELP}
+        </td>
+        <td>
+            <div class="company_logo_image_container dark-bg">
+                <img id="company_logo_image_dark" src="{$company_logo_dark}" alt="{$mod_strings.LBL_LOGO_DARK}" />
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td scope="row">
+            {$MOD.NEW_LOGO_DARK}&nbsp;{sugar_help text=$MOD.NEW_LOGO_HELP_NO_SPACE}
+        </td>
+        <td>
+            <div id="container_upload_dark"></div>
+            <input type="text" id="commit_company_logo_dark" name="commit_company_logo_dark" style="display:none"/>
         </td>
     </tr>
     <tr>
@@ -159,6 +195,7 @@
     </tr>
 </table>
 
+{if $proxy_visible}
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
 
 	<tr>
@@ -211,6 +248,7 @@
   </td>
   </tr>
  </table>
+{/if}
 
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
@@ -383,6 +421,7 @@
 		<td  >
 			<input type='text' size='8' name='system_session_timeout' value='{$SESSION_TIMEOUT}'>&nbsp;{$MOD.SESSION_TIMEOUT_UNITS}
 		</td>
+		{if $developer_mode_visible}
 		<td  scope="row">{$MOD.DEVELOPER_MODE}: </td>
 		{if !empty($config.developerMode)}
 			{assign var='developerModeChecked' value='CHECKED'}
@@ -390,6 +429,7 @@
 			{assign var='developerModeChecked' value=''}
 		{/if}
 		<td ><input type='hidden' name='developerMode' value='false'><input name='developerMode'  type="checkbox" value='true' {$developerModeChecked}></td>
+		{/if}
 	</tr>
 	<tr>
 		<td scope="row">{$MOD.LBL_VCAL_PERIOD} {sugar_help text=$MOD.vCAL_HELP}</td>
@@ -470,80 +510,106 @@
 <div style="padding-top: 2px;">
 <input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary"  type="submit" name="save" value="  {$APP.LBL_SAVE_BUTTON_LABEL}  " class="button primary"/>
 		<!-- &nbsp;<input title="{$MOD.LBL_SAVE_BUTTON_TITLE}"  class="button"  type="submit" name="restore" value="  {$MOD.LBL_RESTORE_BUTTON_LABEL} " /> -->
-		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}"  onclick="document.location.href='index.php?module=Administration&action=index'" class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " />
+		&nbsp;<input title="{$MOD.LBL_CANCEL_BUTTON_TITLE}"  onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} class="button"  type="button" name="cancel" value="  {$APP.LBL_CANCEL_BUTTON_LABEL}  " />
 </div>
 {$JAVASCRIPT}
 
 </form>
 <div id='upload_panel' style="display:none">
     <form id="upload_form" name="upload_form" method="POST" action='index.php' enctype="multipart/form-data">
-{sugar_csrf_form_token}
+        {sugar_csrf_form_token}
         <input type="file" id="my_file_company" name="file_1" size="20" onchange="uploadCheck(false)"/>
         {sugar_getimage name="sqsWait" ext=".gif" alt=$mod_strings.LBL_LOADING other_attributes='id="loading_img_company" style="display:none" '}
     </form>
 </div>
-{literal}
+<div id='upload_panel_dark' style="display:none">
+    <form id="upload_form_dark" name="upload_form_dark" method="POST" action='index.php' enctype="multipart/form-data">
+        {sugar_csrf_form_token}
+        <input type="file" id="my_file_company_dark" name="file_dark" size="20" onchange="uploadCheck(true)"/>
+        {sugar_getimage name="sqsWait" ext=".gif" alt=$mod_strings.LBL_LOADING other_attributes='id="loading_img_company_dark" style="display:none" '}
+    </form>
+</div>
 <script type='text/javascript'>
 function init_logo(){
-    document.getElementById('upload_panel').style.display="inline";
-    document.getElementById('upload_panel').style.position="absolute";
+    var uploadPanel = document.getElementById('upload_panel');
+    var uploadPanelDark = document.getElementById('upload_panel_dark');
+    uploadPanel.style.display = 'inline';
+    uploadPanel.style.position = 'absolute';
+    uploadPanelDark.style.display = 'inline';
+    uploadPanelDark.style.position = 'absolute';
     YAHOO.util.Dom.setX('upload_panel', YAHOO.util.Dom.getX('container_upload'));
-    YAHOO.util.Dom.setY('upload_panel', YAHOO.util.Dom.getY('container_upload')-5);
+    YAHOO.util.Dom.setY('upload_panel', YAHOO.util.Dom.getY('container_upload') - 1);
+    YAHOO.util.Dom.setX('upload_panel_dark', YAHOO.util.Dom.getX('container_upload_dark'));
+    YAHOO.util.Dom.setY('upload_panel_dark', YAHOO.util.Dom.getY('container_upload_dark') - 1);
 }
-$(function() {
-    init_logo();
+
+// Initialize the file upload container placement on page load and resize
+$(window).on('load resize', init_logo);
+$(window).unload(function() {
+    $(window).off('load resize', init_logo);
 });
+
 function toggleDisplay_2(div_string){
     toggleDisplay(div_string);
     init_logo();
 }
- function uploadCheck(){
+ function uploadCheck(isDarkMode){
     //AJAX call for checking the file size and comparing with php.ini settings.
+    var fileElName = isDarkMode ? 'my_file_company_dark' : 'my_file_company';
+    var commitCompanyLogoName = isDarkMode ? 'commit_company_logo_dark' : 'commit_company_logo';
+    var companyLogoImageName = isDarkMode ? 'company_logo_image_dark' : 'company_logo_image';
+    var uploadFormName = isDarkMode ? 'upload_form_dark' : 'upload_form';
+    var loadingImageName = isDarkMode ? 'loading_img_company_dark' : 'loading_img_company';
+
     var callback = {
         upload:function(r) {
             var file_type = JSON.parse(r.responseText);
-            document.getElementById('loading_img_company').style.display = 'none';
             var bad_image = SUGAR.language.get('Configurator', 'LBL_ALERT_TYPE_IMAGE');
+
+            document.getElementById('loading_img_company').style.display = 'none';
+            document.getElementById('loading_img_company_dark').style.display = 'none';
+
             switch (file_type['data']) {
                 case 'other':
                     alert(bad_image);
-                    document.getElementById('my_file_company').value = '';
+                    document.getElementById(fileElName).value = '';
                     break;
                 case 'size':
                     alert(SUGAR.language.get('Configurator', 'LBL_ALERT_SIZE_RATIO'));
-                    document.getElementById('commit_company_logo').value = '1';
-                    document.getElementById('company_logo_image').src = file_type['url'];
+                    document.getElementById(commitCompanyLogoName).value = '1';
+                    document.getElementById(companyLogoImageName).src = file_type['url'];
                     break;
                 case 'file_error':
                     alert(SUGAR.language.get('Configurator', 'ERR_ALERT_FILE_UPLOAD'));
-                    document.getElementById('my_file_company').value = '';
+                    document.getElementById(fileElName).value = '';
                     break;
                 //File good
                 case 'ok':
-                    document.getElementById('commit_company_logo').value = '1';
-                    document.getElementById('company_logo_image').src = file_type['url'];
+                    document.getElementById(commitCompanyLogoName).value = '1';
+                    document.getElementById(companyLogoImageName).src = file_type['url'];
                     break;
                 //error in getimagesize because unsupported type
                 default:
                     alert(bad_image);
-                    document.getElementById('my_file_company').value = '';
+                    document.getElementById(fileElName).value = '';
             }
         },
         failure:function(r){
             alert(SUGAR.language.get('app_strings','LBL_AJAX_FAILURE'));
         }
     }
-    document.getElementById('commit_company_logo').value = '';
-    document.getElementById('loading_img_company').style.display="inline";
-    var file_name = document.getElementById('my_file_company').value;
-    postData = '&entryPoint=UploadFileCheck&csrf_token=' + SUGAR.csrf.form_token;
-    YAHOO.util.Connect.setForm(document.getElementById('upload_form'), true,true);
-    if(file_name){
-        if(postData.substring(0,1) == '&'){
+
+    document.getElementById(commitCompanyLogoName).value = '';
+    document.getElementById(loadingImageName).style.display="inline";
+
+    var file_name = document.getElementById(fileElName).value;
+    var postData = '&entryPoint=UploadFileCheck&csrf_token=' + SUGAR.csrf.form_token;
+    YAHOO.util.Connect.setForm(document.getElementById(uploadFormName), true, true);
+    if (file_name) {
+        if (postData.substring(0,1) == '&') {
             postData=postData.substring(1);
         }
         YAHOO.util.Connect.asyncRequest('POST', 'index.php', callback, postData);
     }
 }
 </script>
-{/literal}

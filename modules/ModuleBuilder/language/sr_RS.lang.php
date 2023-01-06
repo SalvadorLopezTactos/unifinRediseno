@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Obriši' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Pokreće SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Uloga',
+    'LBL_BASE_LAYOUT' => 'Osnovni izgled',
+    'LBL_FIELD_NAME' => 'Naziv polja',
+    'LBL_FIELD_VALUE' => 'Vrednost',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Izgled je određen sledećim stavkama:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standardni izgled',
+        'role' => 'Uloga',
+        'dropdown' => 'Polje padajućeg menija',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Biće uklonjeni svi prilagođeni izgledi. Želite li stvarno da promenite trenutne definicije izgleda?',
 'help'=>array(
     'package'=>array(
             'create'=>'Unesite <b>Naziv</b> paketa.  Naziv koji unesete mora da bude alfanumerički bez razmaka. (Na primer: HR_Menagement)<br><br> Možete da unesete <b>Autora</b> i <b>Opis</b> informacije za paket.<br><br>Kliknite na <b>Sačuvaj</b> da bi ste kreirali paket.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Uređivač vidljivosti',
 'LBL_ROLLUP' => 'Udružen',
 'LBL_RELATED_FIELD' => 'Srodno polje',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL veza za prilagođenu sliku logo znaka. Preporučene dimenzije logo znaka su 22 x 22 piksela. Svaka slika koja je veća od ovih dimenzija će biti proporcionalno smanjena na maksimalne dimenzije.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL veza za prilagođenu sliku logotipa. Preporučene širina logotipa je 200 piksela. Svaka slika koja je veća od ovih dimenzija će biti proporcionalno smanjena na maksimalne dimenzije. Ovaj logotip će biti korišćen na ekranu za prijavu. Ako se slika ne otpremi, koristiće se logo znak.',
 'LBL_PORTAL_ROLE_DESC' => 'Nemojte brisati ovu rolu. Uloga "Customer Self-Service Portal" je sistemski generisana uloga, nastala za vreme aktivacionog procesa Sugar Portala. Koristite kontrole pristupa u okviru ove uloge da omogućite ili onemogućite module za Bagove, Slučajeve i Bazu znanja u okviru Sugar portala. Nemojte modifikovati bilo koje druge kontrole pristupa za ovu ulogu kako biste izbegli nepredviđeno ponašanje sistema. U slučaju nenamernog brisanja ove uloge, ponovo je kreirate onemogućavanjem i ponovnim omogućavanjem Sugar portala.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Dodaj vezu',
 'LBL_BTN_RENAME_MODULE' => 'Promeni ime modula',
 'LBL_BTN_INSERT'=>'Unesi',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Vrati osnovni izgled',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Desila se greška',
 'ERROR_REQUIRED_FIELDS' => 'Da li ste sigurni da želite da nastavite? Sledeća obavezna polja nedostaju iz rasporeda:',
 'ERROR_ARE_YOU_SURE' => 'Da li ste sigurni da želite da nastavite?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Polje ne može da se kreira. Dostigli ste ograničenje veličine reda za ovu tabelu u bazi podataka. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Saznajte više</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Sledeća polja imaju izračunate vrednosti koje neće biti ponovo izračunate u redalnom vremenu u SugarCRM Modile pregledu za izmenu:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Sledeća polja imaju izračunate vrednosti koje neće biti ponovo izračunate u redalnom vremenu u SugarCRM Portal pregledu za izmenu:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Ukoliko želite da ih ponovo omogućite u okviru portala, molimo omogućite ih <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">ovde</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfigurišite portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Omogući portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Omogućite pretragu pre nego što otvorite slučaj',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Omogućite napomene na modulu Baza znanja',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Dozvoli korisnicima portala da zatvore predmet',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Dozvolite korisnicima da se registruju',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Dozvole korisnika',
     'LBL_PORTAL_THEME' => 'Portal sa temama',
     'LBL_PORTAL_ENABLE' => 'Omogući',
     'LBL_PORTAL_SITE_URL' => 'Sajt Vašeg portala je dostupan na adresi:',
     'LBL_PORTAL_APP_NAME' => 'Ime aplikacije',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL veza logo znaka',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Pregled logo znaka',
-    'LBL_PORTAL_LOGO_URL' => 'URL logoa',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Pregled logotipa',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefon',
     'LBL_PORTAL_CONTACT_EMAIL' => 'E-pošta',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Morate da unesete važeću e-adresu',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Prevucite i otpustite nazive modula portala da biste podesili da budu prikazani ili skriveni u gornjoj navigacionoj traci. Da biste kontrolisali pristup modulima korisnika portala koristite <a href="?module=ACLRoles&action=index">Upravljanje ulogama.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Prikazani moduli',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Skriveni moduli',
+    'LBL_CONFIG_VISIBILITY' => 'Vidljivost',
+    'LBL_CASE_VISIBILITY_HELP' => 'Definišite koji korisnici portala mogu da vide slučaj.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Definišite koji korisnici portala mogu da vide e-poruke koje se odnose na slučaj. Kontakti koji učestvuju su oni u poljima „Za”, „Od”, CC i BCC.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Definišite koji korisnici portala mogu da vide poruke koje se odnose na slučaj. Kontakti koji učestvuju su oni u polju Gosti.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Svi kontakti koji su povezani sa ovim nalogom',
+        'related_contacts' => 'Samo primarni kontakti i kontakti povezani sa ovim slučajem',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Samo kontakti koji učestvuju',
+        'all' => 'Svi kontakti koji mogu da vide slučaj',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Samo kontakti koji učestvuju',
+        'all' => 'Svi kontakti koji mogu da vide slučaj',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Izgled portala',
@@ -787,11 +812,11 @@ $mod_strings = array(
     . "Obavezna polja će pratiti formulu u mobilnom prikazu zasnovanom na pregledaču,<br/>"
     . "ali neće pratiti formulu u izvornim aplikacijama, kao što su Sugar Mobile za iPhone.<br/>"
     . "Neće pratiti formulu na Sugar samouslužnom portalu.",
-'LBL_POPHELP_READONLY'=>"Kreirajte formulu kojom se određuje da li je ovo polje u rasporedima dostupno samo za čitanje.<br/>"
-        . "Polja dostupna samo za čitanje će pratiti formulu u mobilnom prikazu u pregledaču, <br/>"
-        . "ali neće pratiti formulu u izvornim aplikacijama, kao što je Sugar Mobile za iPhone. <br/>"
+'LBL_POPHELP_READONLY'=>"Kreirajte formulu kojom se utvrđuje da li je ovo polje samo za čitanje u rasporedima.<br/>"
+        . "Polja samo za čitanje će pratiti formulu u mobilnom prikazu zasnovanom na pregledaču,<br/>"
+        . "ali neće pratiti formulu u izvornim aplikacijama, kao što su Sugar Mobile za iPhone.<br/>"
         . "Neće pratiti formulu na Sugar samouslužnom portalu.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite ovo polje kako biste ga koristili pri globalnom pretraživanju zapisa u ovom modulu.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite kako biste koristili ovo polje pri pretraživanju zapisa pomoću globalnog pretraživanja na ovom modulu.',
 //Revert Module labels
 'LBL_RESET' => 'Resetuj',
 'LBL_RESET_MODULE' => 'Resetuj modul',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Datum i vreme',
                 'decimal'=>'Decimalni',
                 'autoincrement' => 'Samopovećanje',
+                'actionbutton' => 'ActionButton',
 ),
 'labelTypes' => array(
     "" => "Često korišćene labele.",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (povezan {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopirati iz rasporeda',
 'LBL_RELATIONSHIP_TYPE' => 'Odnos',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Jezik za poređenje',
+'LBL_LABEL_NOT_TRANSLATED' => 'Ova oznaka se možda neće prevesti',
 );

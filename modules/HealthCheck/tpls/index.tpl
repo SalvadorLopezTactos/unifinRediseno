@@ -132,14 +132,13 @@
                                                           {else}
 
 
-                  <a class="btn btn-primary" href="index.php?module=Administration&action=index"
+                  <a class="btn btn-primary" href="#Administration"
                      name="next_button">Back to Admin Page</a>
               {/if}
           </span>
         </div>
     </div>
 </div>
-{literal}
     <script>
         (function () {
 
@@ -171,7 +170,7 @@
                             $healthcheck.append(html.join(""));
                         }
                         $healthcheck.parent().scrollTop($healthcheck.height());
-                        var flag = data[data.length - 1].flag;
+                        var flag = parseInt(data[data.length - 1].flag);
                         _displayAlert(flag);
                         if (flag < 3) {
                             $('.btn.btn-primary.disabled').removeClass('disabled');
@@ -237,4 +236,4 @@
             showNextStep();
         })();
     </script>
-{/literal}
+

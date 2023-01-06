@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Näiteks saate seda kasutada vea leidmiseks, millest on varem teatatud.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Kui teil on uus toe juhtum, mille soovite esitada, saate uue juhtumi esitamiseks klõpsata siin.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Siin klõpsamine viib teid igal ajal selle vaate juurde.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Juhtumi interaktsioonid',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Juhtumi ajaskaala',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused',
 

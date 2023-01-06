@@ -116,6 +116,7 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
         }
 
         // Remove any duplicates from email_addr_bean_rel table
+        /** @var \Sugarcrm\Sugarcrm\Dbal\Query\QueryBuilder $qb */
         $qb = $GLOBALS['db']->getConnection()->createQueryBuilder();
         $qb->select('email_address_id', 'bean_module', 'bean_id', 'COUNT(id) AS eabr_count');
         $qb->from('email_addr_bean_rel');
@@ -125,7 +126,7 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
         $res = $qb->execute();
 
         $dups = array();
-        while ($row = $res->fetch()) {
+        while ($row = $res->fetchAssociative()) {
             $dups[] = $row;
         }
 
@@ -133,12 +134,12 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
             foreach ($dups as $dup) {
                 // Preserve one record and delete the rest. The one we will opt to preserve will be the first record
                 // that has the primary_address field set if any, otherwise it will be that last record encountered
-                $qb = $GLOBALS['db']->getConnection()->createQueryBuilder();
+                $qb = DBManagerFactory::getConnection()->createQueryBuilder();
                 $qb->select('id', 'primary_address');
                 $qb->from('email_addr_bean_rel', 'eabr');
                 $qb->add(
                     'where',
-                    $qb->expr()->andX(
+                    $qb->expr()->and(
                         $qb->expr()->eq('eabr.email_address_id', '?'),
                         $qb->expr()->eq('eabr.bean_module', '?'),
                         $qb->expr()->eq('eabr.bean_id', '?'),
@@ -152,7 +153,7 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
 
                 $eabrCount = $dup['eabr_count'];
                 $kept = false;
-                while ($row = $res->fetch()) {
+                while ($row = $res->fetchAssociative()) {
                     if (!$kept && ($row['primary_address'] == 1 || $eabrCount == 1)) {
                         $kept = true;
                     } else {

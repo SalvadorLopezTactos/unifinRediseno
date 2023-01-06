@@ -3,25 +3,21 @@
 
 ul.list {
   list-style: none;
-  border-top: 2px solid @grayLighter;
   padding: 0;
   margin: 0 0 10px;
 
   li {
     list-style: none;
-    border-top: 1px solid @grayLighter;
     padding: 10px 0;
     margin: 0;
   }
 }
 
 dl.list {
-  border-top: 2px solid @grayLighter;
   padding: 0;
   margin: 0 0 10px;
 
   dt {
-    border-top: 1px solid @grayLighter;
     padding: 10px 0 0;
   }
 
@@ -49,14 +45,9 @@ dl.list {
 .less {
   margin-left: 0;
 
-  &.padded {
-    padding: 8px 6px;
-    display: inline-block;
-  }
-
   &:hover {
     box-shadow: none;
-    color: @linkMore;
+    color: @linkColor;
     text-decoration: none;
   }
 
@@ -76,7 +67,7 @@ dl.list {
     border-top: none;
   }
 
-  .more.padded.btn-link {
+  .more.btn-link {
     display: inline-block;
     width: 100%;
     margin-left: 0;
@@ -85,14 +76,8 @@ dl.list {
 
     &:hover {
       text-decoration: none;
-      background: @dropdownLinkBackgroundHover;
+      background: @btnDarkInvisibleBackgroundHover;
     }
-  }
-}
-
-.loading {
-  &.padded {
-    padding: 8px 14px;
   }
 }
 
@@ -140,7 +125,7 @@ img.pull-left {
 }
 
 .titlebar {
-  .buttonBackground(@white, @grayLight);
+  .buttonBackground(@white, @gray70);
 
   border-radius: @baseBorderRadius @baseBorderRadius 0 0;
 }
@@ -159,7 +144,7 @@ h2 + .row {
 
 /* Fake the :focus state to demo it */
 .focused {
-  border-color: fade(@linkColor, 40%) !important;
+  border-color: @lightBlue;
   outline: 0;
 }
 
@@ -178,12 +163,12 @@ h2 + .row {
 hr.soften {
   height: 1px;
   margin: 54px 0;
-  background: darken(@grayLighter, 10%);
+  background: @gray20;
   border: 0;
 }
 
 .filter_init.duplicates {
-  background: darken(@grayLighter, 5%);
+  background: @gray20;
 
   article#search_option_.filter-body {
     padding: 10px 10px 0;
@@ -201,9 +186,6 @@ hr.soften {
 }
 
 .logo {
-  margin-left: 10px;
-  height: 24px;
-
   img {
     height: inherit;
     vertical-align: middle;
@@ -213,7 +195,7 @@ hr.soften {
     .sc-left,
     .sc-right,
     .sc-top {
-      fill: @grayLighter;
+      fill: @gray20;
       stroke-width: 0;
     }
 
@@ -223,12 +205,12 @@ hr.soften {
 
     .sc-right,
     .sc-light {
-      fill: @grayLightish;
+      fill: @gray60;
     }
 
     .sc-left,
     .sc-dark {
-      fill: @grayDark;
+      fill: @gray90;
     }
   }
 }
@@ -355,7 +337,7 @@ hr.soften {
 
     .disabled {
       opacity: 1;
-      background-color: darken(@navbarBackground, 20%);
+      background-color: @navbarBackgroundAccent;
       color: @navbarBackground;
 
       .fa {
@@ -432,7 +414,7 @@ hr.soften {
 }
 
 .relativetime {
-  color: @grayLight;
+  color: @gray70;
   font-size: @fontSizeSmall;
   font-weight: normal;
   display: inline-block;
@@ -502,6 +484,11 @@ hr.soften {
     }
 
     .btn-group {
+      .btn {
+        line-height: 12px;
+        padding: 7px;
+      }
+
       &.refresh {
         right: 60px;
       }
@@ -510,7 +497,7 @@ hr.soften {
 }
 
 .feedback.popover {
-  background: @white;
+  background: @primaryContentBackground;
   width: 370px;
   font-size: small;
 
@@ -519,23 +506,17 @@ hr.soften {
   }
 
   .fa.fa-times.feedback-close {
-    color: @gray !important;
+    color: @gray80;
     position: absolute;
     top: 10px;
     right: 10px;
   }
 
   .fa.fa-times.feedback-close {
-    color: @gray !important;
+    color: @gray80;
     position: absolute;
     top: 10px;
     right: 10px;
-  }
-
-  .popover-title {
-    background: @white;
-    color: @gray;
-    border-bottom-color: lighten(@grayLight, 40%);
   }
 
   .controls.span12 {
@@ -579,7 +560,7 @@ hr.soften {
     line-height: 13px;
     margin-bottom: 5px;
     font-size: 11px;
-    color: @grayLight;
+    color: @gray70;
     text-align: justify;
   }
 }
@@ -606,6 +587,7 @@ hr.soften {
 }
 
 #bwc-frame {
+  background: transparent;
   border-width: 0;
 }
 
@@ -638,7 +620,7 @@ hr.soften {
 
     .disabled {
       /* override */
-      background-color: lighten(@grayLight, 25%);
+      background-color: @gray60;
     }
 
     /* additive */
@@ -656,6 +638,44 @@ hr.soften {
 
   > div {
     line-height: 30px;
+  }
+}
+
+// vertically and horizontally center content
+.center-content {
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-page {
+  &::before {
+    content: "";
+    position: absolute;
+    background-image: @stackBackgroundAbout;
+    background-repeat: no-repeat;
+    background-size: 1000px;
+    background-position: right top;
+    .w-full();
+    .h-full();
+    .bg-primary-content-background();
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    &::before {
+      margin-top: -50px;
+    }
+  }
+}
+
+td.changed-value-highlight {
+  background-color: @lightYellow;
+
+  > span.list {
+    color: @darkYellow;
   }
 }
 

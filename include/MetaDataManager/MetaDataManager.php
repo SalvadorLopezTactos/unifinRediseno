@@ -21,6 +21,7 @@ use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\MetaData\RefreshQueue;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
 
 require_once 'soap/SoapHelperFunctions.php';
 require_once 'include/SugarObjects/LanguageManager.php';
@@ -64,6 +65,7 @@ class MetaDataManager implements LoggerAwareInterface
     const MM_HIDDENSUBPANELS = 'hidden_subpanels';
     const MM_MODULETABMAP   = 'module_tab_map';
     const MM_LOGOURL        = 'logo_url';
+    const MM_LOGOURLDARK    = 'logo_url_dark';
     const MM_OVERRIDEVALUES = '_override_values';
     const MM_FILTERS        = 'filters';
     const MM_EDITDDFILTERS  = 'editable_dropdown_filters';
@@ -166,6 +168,7 @@ class MetaDataManager implements LoggerAwareInterface
         self::MM_HIDDENSUBPANELS => 'getHiddenSubpanels',
         self::MM_MODULETABMAP   => 'getModuleTabMap',
         self::MM_LOGOURL        => 'getLogoUrl',
+        self::MM_LOGOURLDARK    => 'getLogoUrlDark',
         self::MM_FILTERS        => 'getSugarFilters',
         self::MM_EDITDDFILTERS  => 'getEditableDropdownFilters'
     );
@@ -299,6 +302,8 @@ class MetaDataManager implements LoggerAwareInterface
             'enabled_modules' => true,
         ),
         'preview_edit' => true,
+        'allow_freeze_first_column' => true,
+        'freeze_list_headers' => true,
         'commentlog' => array(
             'maxchars' => true,
         ),
@@ -677,6 +682,21 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
+     * This method collects all dropdown based view data for a module
+     *
+     * @param $moduleName The name of the sugar module to collect info about.
+     * @param MetaDataContextInterface|null $context Metadata context
+     *
+     * @return Array A hash of all of the dropdown based view data.
+     */
+    public function getModuleDropdownViews($moduleName, MetaDataContextInterface $context = null)
+    {
+        $data = $this->getModuleClientData('dropdownViews', $moduleName, $context);
+        $data = $this->removeDisabledFields($data);
+        return $data;
+    }
+
+    /**
      * Removes disabled fields from view definition
      *
      * @param array $data
@@ -848,6 +868,7 @@ class MetaDataManager implements LoggerAwareInterface
         $data['fields']['_hash'] = md5(serialize($data['fields']));
         $data['nameFormat'] = isset($vardefs['name_format_map'])?$vardefs['name_format_map']:null;
         $data['views'] = $this->getModuleViews($moduleName, $context);
+        $data['dropdownViews'] = $this->getModuleDropdownViews($moduleName, $context);
         $data['datas'] = $this->getModuleDatas($moduleName);
         $data['layouts'] = $this->getModuleLayouts($moduleName);
         $data['fieldTemplates'] = $this->getModuleFields($moduleName);
@@ -863,6 +884,9 @@ class MetaDataManager implements LoggerAwareInterface
 
         // Archiving is always on unless we explicitly say it isn't
         $data['archiveEnabled'] = !(isset($vardefs['archive']) && $vardefs['archive'] === false);
+
+        // Indicates whether a module is Escalatable
+        $data['isEscalatable'] = isset($vardefs['escalatable']) && $vardefs['escalatable'] === true;
 
         // Indicate whether Module Has duplicate checking enabled --- Rules must exist and Enabled flag must be set
         $data['dupCheckEnabled'] = isset($vardefs['duplicate_check']) && isset($vardefs['duplicate_check']['enabled']) && ($vardefs['duplicate_check']['enabled']===true);
@@ -894,8 +918,10 @@ class MetaDataManager implements LoggerAwareInterface
             }
         }
 
-        // Check if there is a focus dashboard that exists for this module
-        $data['hasFocusDashboard'] = $this->isFocusDashboardEnabled($moduleName);
+        // Check if a default filter for relate fields exists for this module.
+        if (!empty($vardefs['default_relate_filter'])) {
+            $data['defaultRelateFilter'] = $vardefs['default_relate_filter'];
+        }
 
         $data["_hash"] = $this->hashChunk($data);
 
@@ -2158,6 +2184,10 @@ class MetaDataManager implements LoggerAwareInterface
 
         $data['product_name'] = "SugarCRM";
 
+        // Include all available licenses for the instance
+        $sm = SubscriptionManager::instance();
+        $data['licenses'] = $sm->getAllImpliedSubscriptions(array_keys($sm->getAllSystemSubscriptionKeys()));
+
         if (file_exists('custom/version.php')) {
             include 'custom/version.php';
             $data['custom_version'] = $custom_version;
@@ -2264,6 +2294,27 @@ class MetaDataManager implements LoggerAwareInterface
             $configs['uniqueKey'] = $sugarConfig['unique_key'];
         }
 
+        // Maps settings for sidecar modules
+        $mapsSettings = [];
+
+        if (!empty($administration->settings['maps_modulesData'])) {
+            $mapsSettings['modulesData'] = $administration->settings['maps_modulesData'];
+        }
+
+        if (!empty($administration->settings['maps_unitType'])) {
+            $mapsSettings['unitType'] = $administration->settings['maps_unitType'];
+        }
+
+        if (!empty($administration->settings['maps_logLevel'])) {
+            $mapsSettings['logLevel'] = $administration->settings['maps_logLevel'];
+        }
+
+        if (!empty($administration->settings['maps_enabled_modules'])) {
+            $mapsSettings['enabled_modules'] = $administration->settings['maps_enabled_modules'];
+        }
+
+        $configs['maps'] = $mapsSettings;
+
         // Handle connectors
         $connectors = ConnectorUtils::getConnectors();
         $configs['connectors'] = $this->getFilteredConnectorList($connectors);
@@ -2286,6 +2337,18 @@ class MetaDataManager implements LoggerAwareInterface
             );
             $configs['stsUrl'] = $idmModeConfig['stsUrl'];
             $configs['tenant'] = $idmModeConfig['tid'];
+            // Enables catalog and assigns catalog url when in IDM mode
+            if (isset($sugarConfig['catalog_enabled']) &&
+                $sugarConfig['catalog_enabled'] === false &&
+                !empty($idmModeConfig['tid'])) {
+                $idpConfig->toggleCatalog(true);
+                $sugarConfig = $this->getSugarConfig();
+                if ($sugarConfig['catalog_enabled'] &&
+                    !empty($sugarConfig['catalog_url'])) {
+                    $configs['catalog_enabled'] = $sugarConfig['catalog_enabled'];
+                    $configs['catalog_url'] = $sugarConfig['catalog_url'];
+                }
+            }
         }
 
         // SugarBPM settings
@@ -2300,8 +2363,8 @@ class MetaDataManager implements LoggerAwareInterface
         $configs['allowedLinkSchemes'] = isset($sugarConfig['allowed_link_schemes']) ?
             $sugarConfig['allowed_link_schemes'] : ['http', 'https'];
 
-        // Get AWS configs for Serve
-        if ($administration->isLicensedForServe()) {
+        // Get AWS configs for Serve and Sell
+        if ($administration->isLicensedForServe() || $administration->isLicensedForSell()) {
             foreach ($administration->settings as $key => $value) {
                 if (substr($key, 0, 4) === 'aws_') {
                     // Format the key for these configs correctly
@@ -2312,6 +2375,9 @@ class MetaDataManager implements LoggerAwareInterface
         $configs['csp'] = ContentSecurityPolicy::fromAdministrationSettings()
             ->withAddedDefaults()
             ->asString();
+
+        $configs['versionMark'] = getVersionedPath('');
+
         return $configs;
     }
 
@@ -2549,6 +2615,73 @@ class MetaDataManager implements LoggerAwareInterface
         //Internally this hash is not stored with a context cache.
         $data['_hash'] = $this->getMetadataHash(false, $context);
 
+        // Further filter metadata based on licensing
+        $data = $this->applyLicensesFilter($data, true);
+
+        return $data;
+    }
+
+    /**
+     * Recursively parse metadata and filter out the parts
+     * that the current user does not have a valid license for
+     *
+     * @param array $data
+     * @param bool $ignoreLicenseCheck
+     *
+     * @return mixed
+     */
+    public function applyLicensesFilter(array $data, bool $ignoreLicenseCheck = false)
+    {
+        global $current_user;
+
+        // as long we do not have a logged in user all the metadata is returned untouched
+        if (empty($current_user) || empty($current_user->id)) {
+            return $data;
+        }
+
+        if (array_key_exists('licenseFilter', $data) && !$ignoreLicenseCheck) {
+            $requiredLicenses = $data['licenseFilter'];
+
+            if (is_string($requiredLicenses)) {
+                $requiredLicenses = [$requiredLicenses];
+            }
+
+            // if the current user does not have all the required licenses we hide this part of metadata
+            if (is_array($requiredLicenses) && !$current_user->hasLicenses($requiredLicenses)) {
+                return false;
+            }
+        }
+
+        if (array_key_exists('licenseDependency', $data) && !$ignoreLicenseCheck) {
+            $licenseDependency = is_array($data['licenseDependency']) ? $data['licenseDependency'] : [];
+
+            // some parts of meta could have different values taking into account user licenses
+            foreach ($licenseDependency as $licenseType => $meta) {
+                if (is_string($licenseType) && $current_user->hasLicenses([$licenseType], false)) {
+                    foreach ($meta as $category => $value) {
+                        $data[$category] = $value;
+                    }
+                }
+            }
+        }
+
+        // go recursively into the metadata looking for license restricted chunks
+        foreach ($data as $category => $meta) {
+            if (!is_array($meta)) {
+                continue;
+            }
+
+            $filteredMeta = $this->applyLicensesFilter($meta);
+
+            // as long as the current user has all the required licenses we need to keep the filtered data
+            if (is_array($filteredMeta)) {
+                $data[$category] = $filteredMeta;
+            } else {
+                // otherwise just erase this part of metadata for the logged in user
+                unset($data[$category]);
+            }
+        }
+
         return $data;
     }
 
@@ -2595,13 +2728,40 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         $oldHash = !empty($data['_hash']) ? $data['_hash'] : null;
-        //If we failed to load the metadata from cache, load it now the hard way.
-        if (empty($data) || !$this->verifyJSSource($data, $context)) {
+        $metadataRebuildRequired = empty($data) || !$this->verifyJSSource($data, $context);
+
+        if ($metadataRebuildRequired) {
             // Allow more time for private metadata builds since it is much heavier
             if (!$this->public) {
                 ini_set('max_execution_time', 0);
             }
-            $data = $this->loadMetadata($args, $context);
+            $hash = (string) $context->getHash();
+            $systemProcessLock = new SystemProcessLock(__METHOD__, $hash);
+
+            // returned true here will start the rebuild process
+            $cacheCheck = function () use (&$data, $context) {
+                $data = $this->getMetadataCache(false, $context);
+                return empty($data) || !$this->verifyJSSource($data, $context);
+            };
+
+            // the rebuild function
+            $longRunningFunction = function () use (&$data, $args, $context, $oldHash) {
+                $data = $this->loadMetadata($args, $context);
+
+                if ($data['_hash'] != $oldHash) {
+                    $this->putMetadataCache($data, $context);
+                } elseif ($this->getCachedMetadataHash($context, false) != $data['_hash']) {
+                    // ensure that the metadata hashes is up to date
+                    $this->cacheMetadataHash($data['_hash'], $context);
+                }
+            };
+
+            $refuseFunction = $longRunningFunction;
+
+            // the following is designed to prevent process race conditions in a long running process
+            $systemProcessLock->isolatedCall($cacheCheck, $longRunningFunction, $refuseFunction);
+
+            return $data;
         }
 
         // Cache the data so long as the current cache is different from the data
@@ -2739,6 +2899,15 @@ class MetaDataManager implements LoggerAwareInterface
     public function getLogoUrl()
     {
         return SugarThemeRegistry::current()->getImageURL('company_logo.png', true, true);
+    }
+
+    /**
+     * Gets the system dark mode logo url
+     * @return string
+     */
+    public function getLogoUrlDark()
+    {
+        return SugarThemeRegistry::current()->getImageURL('company_logo_dark.png', true, true);
     }
 
     /**
@@ -3166,10 +3335,9 @@ class MetaDataManager implements LoggerAwareInterface
     protected function getModules($filtered = true)
     {
 
-	// Loading a standard module list. Always force a fresh load to prevent inconsistent values based on bad customizations.
-	$als = return_app_list_strings_language($GLOBALS['current_language'], false);
-	$list = $als['moduleList'];
-
+        // Loading a standard module list. Always force a fresh load to prevent inconsistent values based on bad customizations.
+        $als = return_app_list_strings_language($GLOBALS['current_language'], false);
+        $list = $als['moduleList'];
         // Handle filtration if we are supposed to
         if ($filtered) {
             $list = $this->getFilteredModuleList($list);
@@ -3658,6 +3826,8 @@ class MetaDataManager implements LoggerAwareInterface
 
     /**
      * Determines if focus dashboards are available for the given module.
+     *
+     * @deprecated since 11.2.0, this is no longer used
      */
     public function isFocusDashboardEnabled(string $moduleName): bool
     {
@@ -3710,6 +3880,7 @@ class MetaDataManager implements LoggerAwareInterface
             self::MM_CONFIG,
             self::MM_JSSOURCE,
             self::MM_LOGOURL,
+            self::MM_LOGOURLDARK,
             self::MM_OVERRIDEVALUES,
         );
     }
@@ -3737,6 +3908,7 @@ class MetaDataManager implements LoggerAwareInterface
             self::MM_JSSOURCE,
             self::MM_SERVERINFO,
             self::MM_LOGOURL,
+            self::MM_LOGOURLDARK,
             self::MM_LANGUAGES,
             self::MM_OVERRIDEVALUES,
             self::MM_EDITDDFILTERS,
@@ -4038,7 +4210,24 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
+     * Returns any dropdown-based view metadata defined for the given
+     * module and view
      *
+     * @param string $moduleName the name of the module
+     * @param string $view the name of the view (e.g. 'record')
+     * @param MetaDataContextInterface|null $context the metadata context
+     * @return array the set of all dropdown-based metadata for the module/view
+     */
+    public function getModuleDropdownViewsForView($moduleName, $view, $context = null)
+    {
+        $dropdownViews = $this->getModuleDropdownViews($moduleName, $context);
+        if (isset($dropdownViews[$view])) {
+            return $dropdownViews[$view];
+        }
+        return [];
+    }
+
+    /**
      * Return flat list of fields defined for a given module and view
      *
      * @param string $moduleName The name of the module
@@ -4046,19 +4235,18 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $displayParams Associative array of field names and their display params on the given view
      * @return array
      */
-    public function getModuleViewFields($moduleName, $view, &$displayParams = array())
+    public function getModuleViewFields($moduleName, $view, &$displayParams = [])
     {
-        $displayParams = array();
+        $displayParams = [];
+        $fields = [];
+
+        // Get a flattened list of fields from the view metadata
         $viewData = $this->getModuleView($moduleName, $view, $this->getCurrentUserContext());
         if (!isset($viewData['meta']) || !isset($viewData['meta']['panels'])) {
-            return array();
+            return $fields;
         }
-
-        $fields = array();
         $varDefs = $this->getVarDef($moduleName);
         $fieldDefs = $varDefs['fields'];
-
-        // flatten fields
         foreach ($viewData['meta']['panels'] as $panel) {
             if (isset($panel['fields']) && is_array($panel['fields'])) {
                 $fields = array_merge(
@@ -4068,7 +4256,26 @@ class MetaDataManager implements LoggerAwareInterface
             }
         }
 
-        return $fields;
+        // Get a flattened list of fields from all dropdown-based view metadata
+        // defined for the view and merge them into the fields list
+        $viewDropdownData = $this->getModuleDropdownViewsForView($moduleName, $view, $this->getCurrentUserContext());
+        $tempArray = [];
+        foreach ($viewDropdownData as $dropdownValues) {
+            foreach ($dropdownValues as $dropdownValue) {
+                if (!empty($dropdownValue['meta']['panels'])) {
+                    foreach ($dropdownValue['meta']['panels'] as $panel) {
+                        if (!empty($panel['fields']) && is_array($panel['fields'])) {
+                            $fields = array_merge(
+                                $fields,
+                                $this->getFieldNames($moduleName, $panel['fields'], $fieldDefs, $tempArray)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        return array_values(array_unique($fields));
     }
 
     public function hasEditableDropdownFilter($fieldName, $role)

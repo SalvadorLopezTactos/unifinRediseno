@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '運算式引擎',
-  'LBL_MODULE_NAME_SINGULAR' => '運算式引擎',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => '上一步' /*for 508 compliance fix*/,
-	'LBL_NEXT' => '下一步' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => '展開' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => '運算式引擎',
+    'LBL_MODULE_NAME_SINGULAR' => '運算式引擎',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => '上一步' /*for 508 compliance fix*/,
+    'LBL_NEXT' => '下一步' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => '展開' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => '未知欄位',
+];

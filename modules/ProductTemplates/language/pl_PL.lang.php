@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Nazwa gwaranta:',
   'LBL_SUPPORT_TERM' => 'Okres gwarancji:',
   'LBL_TAX_CLASS' => 'Obowiązek podatkowy:',
+  'LBL_ACTIVE_STATUS' => 'Status',
   'LBL_TYPE_NAME'=>'Nazwa typu',
   'LBL_TYPE' => 'Typ',
   'LBL_PRODUCT_TYPE' => 'Typ produktu',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Pulpit listy katalogu produktów',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Pulpit rekordów katalogu produktów',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy katalogu produktów',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Status to Aktywne',
 );

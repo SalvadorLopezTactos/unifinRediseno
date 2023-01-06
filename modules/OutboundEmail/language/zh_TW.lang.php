@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => '收件者電子郵件ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => '收件者電子郵件地址',
     'LBL_PRIMARY_TEAM' => '主要小組',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => '首選發送帳戶',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '電子郵件設置焦點抽屜',
 );

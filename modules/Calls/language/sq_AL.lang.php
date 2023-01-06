@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Contact Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Informacioni përshkrues',
     'LBL_DESCRIPTION' => 'Përshkrim:',
+    'LBL_INTERNAL_NOTES' => 'Shënime të brendshme:',
     'LBL_STATUS' => 'Statusi:',
     'LBL_DIRECTION' => 'Drejtimi:',
     'LBL_DATE' => 'Data e nisjes:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Koha e zgjatjes duhet të jetë më e madhe se 0',
     'LBL_CALL_INFORMATION' => 'Pasqyra',
     'LBL_REMOVE' => 'Largo',
-    'LBL_ACCEPT_STATUS' => 'Prano statusin',
     'LBL_ACCEPT_LINK' => 'Prano lidhjen',
     //For export labels
     'LBL_PARENT_ID' => 'ID mëmë',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Takim:',
     'LBL_CALL_RECORDING_URL' => 'Regjistrimi i URL-së',
     'LBL_CALL_RECORDING' => 'Regjistrimi',
+
+    'LBL_LEAD_ID' => 'ID-ja e klientit potencial',
+    'LBL_LEAD_NAME' => 'Klienti potencial',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Ju keni skeduluar {{moduleSingularLower}} {{name}} për {{formatDate date_start}}.',

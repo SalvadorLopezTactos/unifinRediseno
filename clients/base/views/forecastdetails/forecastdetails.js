@@ -740,7 +740,7 @@
             openPipeline = 0,
             calcValue = 0;
 
-        params.label = app.lang.get('LBL_' + caseStr.toUpperCase(), 'Forecasts');
+        params.label = app.lang.get(`LBL_${caseStr.toUpperCase()}`, 'Forecasts');
         params.spanCSS = this.spanCSS;
         params.case = caseStr;
         params.shortOrExceed = '&nbsp;';

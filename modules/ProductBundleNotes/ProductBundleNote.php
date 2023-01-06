@@ -80,28 +80,6 @@ class ProductBundleNote extends SugarBean
     /**
      * @deprecated
      * @param string $bundle_id
-     * @param string $product_id
-     * @param string $note_id
-     * @param integer $note_index
-     */
-    public function set_product_bundle_product_notes_relationship($bundle_id, $product_id, $note_id = '', $note_index)
-    {
-        if (empty($note_id)) {
-            $note_id = $this->id;
-        }
-
-        $query = "INSERT INTO $this->rel_notes SET id='" . create_guid(
-            ) . "', bundle_id='" . $bundle_id . "', product_id='" . $product_id . "', note_id='" . $note_id . "', note_index='" . $note_index . "'";
-
-        $this->db->query($query, true, "Error setting note to product to product bundle relationship: " . "<BR>$query");
-        $GLOBALS['log']->debug(
-            "Setting note to product to product bundle relationship for bundle_id: $bundle_id, product_id: $product_id, and note_id: $note_id"
-        );
-    }
-
-    /**
-     * @deprecated
-     * @param string $bundle_id
      */
     public function clear_product_bundle_product_notes_relationship($bundle_id)
     {

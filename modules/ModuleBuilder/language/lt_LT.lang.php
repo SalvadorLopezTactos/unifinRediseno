@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Naikinti' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Teikia „SugarCRM“' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Vaidmuo',
+    'LBL_BASE_LAYOUT' => 'Pagrindinis išdėstymas',
+    'LBL_FIELD_NAME' => 'Lauko pavadinimas',
+    'LBL_FIELD_VALUE' => 'Vertė',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Išdėstymas, nustatytas:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standartinis išdėstymas',
+        'role' => 'Vaidmuo',
+        'dropdown' => 'Išskleidžiamasis laukas',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Visi pasirinktiniai išdėstymai bus pašalinti. Ar tikrai norite pakeisti dabartinius išdėstymo apibrėžimus?',
 'help'=>array(
     'package'=>array(
             'create'=>'Suteikite paketui <b>Pavadinimą</b>. Pavadinimas turi prasidėti raide, o jį sudaryti gali tik raidės, skaitmenys ir pabraukimo brūkšniai. Tarpų ar kitų specialiųjų simbolių naudoti negalima. (Pvz.: Personalo_valdymas)<br/><br/> Galite nurodyti paketo <b>Autorių</b> ir <b>Aprašą</b>. <br/><br/>Paketą sukursite spustelėdami <b>Įrašyti</b>.',
@@ -447,8 +457,6 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Matomumo redaktorius',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'Susijęs laukas',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'Pasirinktinio logotipo ženklo vaizdo URL. Rekomenduojami logotipo ženklo matmenys – 22 x 22 pikselių. Bet kokio įkelto vaizdo, kurio ilgis arba plotis yra didesnis, mastelis bus sumažintas iki šių didžiausių matmenų.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'Pasirinktinio logotipo vaizdo URL. Rekomenduojamas logotipo plotis – 200 pikselių. Bet kokio įkelto vaizdo, kurio ilgis arba plotis yra didesnis, mastelis bus sumažintas iki šių didžiausių matmenų. Šis logotipas bus naudojamas prisijungimo ekrane. Neįkėlus jokio vaizdo bus naudojamas logotipo ženklas.',
 'LBL_PORTAL_ROLE_DESC' => 'Prašome neištrinti šios rolės. Customer Self-Service Portal rolė yra sistemos sugeneruota rolė, kai buvo aktyvuotas Sugar portalas. Nustatykite šiai rolei teises prieiti prie klaidų, aptarnavimų ir žinių bazės modulio. Jeigu per klaidą ištrynėte šią rolę, Jums tereikia išjungti ir vėl atgal įjungti Sugar portalą ir rolės vėl susikurs.',
 
 //RELATIONSHIPS
@@ -571,6 +579,7 @@ $mod_strings = array(
 'LBL_BTN_ADD_RELATIONSHIP'=>'Pridėti ryšius',
 'LBL_BTN_RENAME_MODULE' => 'Pakeisti modulio pavadinimą',
 'LBL_BTN_INSERT'=>'Įdėti',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Atkurti pagrindinį išdėstymą',
 //TABS
 
 //ERRORS
@@ -581,6 +590,7 @@ $mod_strings = array(
 'ERROR_GENERIC_TITLE' => 'Klaida',
 'ERROR_REQUIRED_FIELDS' => 'Ar tikrai norite tęsti? Privalomi laukai, kurie yra praleisti:',
 'ERROR_ARE_YOU_SURE' => 'Ar tikrai norite tęsti?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Lauko sukurti negalima. Savo duomenų bazėje pasiekėte šios lentelės eilučių dydžio apribojimą. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Sužinokite daugiau</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Šie laukai turi reikšmes, kurios nebus perskaičiuotos SugarCRM mobilioje redagavimo formos versijoje:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Šie laukai turi reikšmes, kurios nebus perskaičiuotos SugarCRM portalo redagavimo formos versijoje:',
@@ -590,16 +600,14 @@ $mod_strings = array(
     'LBL_PORTAL_ENABLE_MODULES' => 'Jeigu Jūs norite įjungti juos portale, prašome įjungti juos <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">čia</a>',
     'LBL_PORTAL_CONFIGURE' => 'Konfigūruoti portalą',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Įjungti portalą',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Prieš atidarydami atvejį įgalinkite paiešką',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Įgalinkite pastabų rodymą žinių bazės modulyje',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Leisti portalo vartotojams uždaryti registrą',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Leisti prisiregistruoti naujiems vartotojams',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Vartotojo leidimai',
     'LBL_PORTAL_THEME' => 'Portalo tema',
     'LBL_PORTAL_ENABLE' => 'Įjungti',
     'LBL_PORTAL_SITE_URL' => 'Jūsų portalo tinklapis yra prieinamas per:',
     'LBL_PORTAL_APP_NAME' => 'Programos pavadinimas',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Logotipo ženklo URL',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Logotipo ženklo peržiūra',
-    'LBL_PORTAL_LOGO_URL' => 'Logo URL nuoroda',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Logotipo peržiūra',
     'LBL_PORTAL_CONTACT_PHONE' => 'Telefonas',
     'LBL_PORTAL_CONTACT_EMAIL' => 'El. paštas',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Būtina įvesti galiojantį el. pašto adresą',
@@ -615,6 +623,23 @@ $mod_strings = array(
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Nuvilkite portalo modulių pavadinimus, kad nustatytumėte, jog jie būtų rodomi arba paslėpti portalo viršutinėje naršymo juostoje. Norėdami valdyti portalo vartotojo prieigą prie modulių, naudokite <a href="?module=ACLRoles&action=index">vaidmėnų valdymą.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Rodomi moduliai',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Paslėpti moduliai',
+    'LBL_CONFIG_VISIBILITY' => 'Matomumas',
+    'LBL_CASE_VISIBILITY_HELP' => 'Apibrėžkite, kurie portalo vartotojai galės matyti atvejį.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Apibrėžkite, kurie portalo vartotojai galės matyti el. laiškus, susijusius su atveju. Įtraukti kontaktai nurodyti laukuose „Kam“, „Nuo“, CC ir BCC.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Apibrėžkite, kurie portalo vartotojai galės matyti žinutes, susijusias su atveju. Įtraukti kontaktai nurodyti lauke „Svečiai“.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Visi su paskyra susiję kontaktai',
+        'related_contacts' => 'Tik pagrindinis kontaktas ir su atveju susiję kontaktai',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Tik įtraukti kontaktai',
+        'all' => 'Visi kontaktai, galintys matyti atvejį',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Tik įtraukti kontaktai',
+        'all' => 'Visi kontaktai, galintys matyti atvejį',
+    ],
+
 
 'LBL_PORTAL'=>'Portalas',
 'LBL_PORTAL_LAYOUTS'=>'Portalo išdėstymas',
@@ -756,7 +781,7 @@ $mod_strings = array(
         . ' Jei šis laukas bus įtrauktas į formulę skaičiuoti bet kurių laukų vertėms, formulė nebeveiks.'
         . '\n\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti.'
         . '\n\nAr norite tęsti?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite ištrinti šį ryšį?<br>Pastaba: Ši operacija gali būti nebaigta kelias minutes.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite panaikinti šį ryšį? <br> Pastaba: ši operacija gali būti nebaigta kelioms minutėms.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tai padarys šį ryšį pastovų. Ar tikrai norite sukurti šį ryšį?',
 'LBL_CONFIRM_DONT_SAVE' => 'pakeitimai buvo atlikti nuo paskutinio išsaugojimo, ar norėtumėte išsaugoti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Išsaugoti pakeitimus?',
@@ -773,25 +798,25 @@ $mod_strings = array(
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: laukas rodomas dublikatų suliejimo funkcijoje, tačiau jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.<br><b>Disabled</b>: laukas nerodomas dublikatų suliejimo funkcijoje ir jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.'
 . '<br><b>In Filter</b>: laukas rodomas dublikatų suliejimo funkcijoje ir galima jį naudoti dublikatų ieškos funkcijoje.<br><b>Filter Only</b>: laukas neveikia dublikatų suliejimo funkcijoje, tačiau jį galima naudoti dublikatų ieškos funkcijoje.<br><b>Default Selected Filter</b>: laukas pagal numatytuosius parametrus naudojamas filtro sąlygai dublikatų ieškos puslapyje, jis rodomas ir dublikatų suliejimo funkcijoje.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, kad nustatytumėte šio lauko reikšmę.<br>"
-   . "Darbo eigos apibrėžimai, kuriuose yra veiksmas, nustatytas šiam laukui atnaujinti, daugiau veiksmo nebevykdys.<br>"
-   . "Laukai, kuriuose naudojamos formulės, nebus realiuoju laiku "
-   . "apskaičiuojami „Sugar“ savitarnos portalo ar "
-   . "„Mobile EditView“ išdėstymuose.",
+'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, kad nustatytumėte reikšmę šiame lauke.<br>"
+   . "Darbo eigos apibrėžtys, kuriose yra veiksmas, nustatytas šiam laukui atnaujinti, nebevykdys veiksmo. <br>"
+   . "Laukai, kuriuose naudojamos formulės, nebus skaičiuojami realiuoju laiku "
+   . "„Sugar“ savitarnos portalas arba "
+   . "Mobilieji „EditView“ maketai.",
 
-'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas matomas išdėstymuose.<br/>"
-        . "Priklausomi laukai priklausys nuo priklausomybės formulės naršyklės mobiliajame rodinyje, <br/>"
-        . "tačiau nesilaikys formulės savosiose programose, pvz., „Sugar Mobile for iPhone“. <br/>"
-        . "Jie nesilaikys „Sugar“ savitarnos portalo formulės.",
-'LBL_POPHELP_REQUIRED'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas reikalingas išdėstymuose.<br/>"
-    . "Privalomi laukai bus naudojami pagal naršyklės mobiliajame rodinyje pateiktą formulę, <br/>"
-    . "tačiau nebus laikomasi formulės savosiose programose, pvz., „Sugar Mobile for iPhone“. <br/>"
-    . "Jie nesilaikys „Sugar“ savitarnos portalo formulės.",
-'LBL_POPHELP_READONLY'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas tik skaitomas išdėstymuose.<br/>"
-        . "Tik skaitomi laukai bus naudojami pagal naršyklės mobiliajame rodinyje pateiktą formulę, <br/>"
-        . "tačiau nesilaikys formulės savosiose programose, pvz., „Sugar Mobile for iPhone“. <br/>"
-        . "Jie nesilaikys „Sugar“ savitarnos portalo formulės.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite, ar norite naudoti šį lauką, kai ieškosite įrašų naudodami visuotinę paiešką šiame modulyje.',
+'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas matomas maketuose.<br/>"
+        . "Priklausomi laukai naršyklės mobiliajame rodinyje bus rodomi pagal priklausomybės formulę, <br/>"
+        . "bet netaikys formulės vietinėse programose, pvz., „Sugar Mobile“, skirtoje „iPhone“. <br/>"
+        . "Jie nesilaikys „Sugar“ savitarnos portale pateiktos formulės.",
+'LBL_POPHELP_REQUIRED'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas privalomas maketuose.<br/>"
+    . "Reikalingi laukai bus rodomi pagal formulę naršyklės mobiliajame rodinyje, <br/>"
+    . "bet nesilaikys formulės vietinėse programose, pvz., „Sugar Mobile“, skirtoje „iPhone“. <br/>"
+    . "Jie nesilaikys „Sugar“ savitarnos portale pateiktos formulės.",
+'LBL_POPHELP_READONLY'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas paruoštas tik maketuose.<br/>"
+        . "Skaitytini laukai bus rodomi pagal formulę naršyklės mobiliajame rodinyje, <br/>"
+        . "bet netaikys formulės vietinėse programose, pvz., „Sugar Mobile“, skirtoje „iPhone“. <br/>"
+        . "Jie nesilaikys „Sugar“ savitarnos portale pateiktos formulės.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite, kad šis laukas būtų naudojamas ieškant įrašų naudojant šio modulio visuotinę paiešką.',
 //Revert Module labels
 'LBL_RESET' => 'Atstatyti',
 'LBL_RESET_MODULE' => 'Atstatyti modulį',
@@ -827,6 +852,7 @@ $mod_strings = array(
                 'datetimecombo' =>'Data ir laikas',
                 'decimal'=>'Dešimtainis',
                 'autoincrement' => 'Automatinis padidinimas',
+                'actionbutton' => 'Veiksmo mygtukas',
 ),
 'labelTypes' => array(
     "" => "Anksčiau naudoti pavadinimai",
@@ -845,4 +871,8 @@ $mod_strings = array(
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopijuoti iš maketo',
 'LBL_RELATIONSHIP_TYPE' => 'Ryšiai',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Lyginimo kalba',
+'LBL_LABEL_NOT_TRANSLATED' => 'Ši etiketė gali būti neišversta',
 );

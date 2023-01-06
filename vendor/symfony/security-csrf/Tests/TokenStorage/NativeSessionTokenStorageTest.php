@@ -31,7 +31,7 @@ class NativeSessionTokenStorageTest extends TestCase
 
     protected function setUp()
     {
-        $_SESSION = array();
+        $_SESSION = [];
 
         $this->storage = new NativeSessionTokenStorage(self::SESSION_NAMESPACE);
     }
@@ -40,19 +40,19 @@ class NativeSessionTokenStorageTest extends TestCase
     {
         $this->storage->setToken('token_id', 'TOKEN');
 
-        $this->assertSame(array(self::SESSION_NAMESPACE => array('token_id' => 'TOKEN')), $_SESSION);
+        $this->assertSame([self::SESSION_NAMESPACE => ['token_id' => 'TOKEN']], $_SESSION);
     }
 
     public function testStoreTokenInClosedSessionWithExistingSessionId()
     {
         session_id('foobar');
 
-        $this->assertSame(PHP_SESSION_NONE, session_status());
+        $this->assertSame(\PHP_SESSION_NONE, session_status());
 
         $this->storage->setToken('token_id', 'TOKEN');
 
-        $this->assertSame(PHP_SESSION_ACTIVE, session_status());
-        $this->assertSame(array(self::SESSION_NAMESPACE => array('token_id' => 'TOKEN')), $_SESSION);
+        $this->assertSame(\PHP_SESSION_ACTIVE, session_status());
+        $this->assertSame([self::SESSION_NAMESPACE => ['token_id' => 'TOKEN']], $_SESSION);
     }
 
     public function testStoreTokenInActiveSession()
@@ -61,7 +61,7 @@ class NativeSessionTokenStorageTest extends TestCase
 
         $this->storage->setToken('token_id', 'TOKEN');
 
-        $this->assertSame(array(self::SESSION_NAMESPACE => array('token_id' => 'TOKEN')), $_SESSION);
+        $this->assertSame([self::SESSION_NAMESPACE => ['token_id' => 'TOKEN']], $_SESSION);
     }
 
     /**
@@ -86,11 +86,9 @@ class NativeSessionTokenStorageTest extends TestCase
         $this->assertSame('TOKEN', $this->storage->getToken('token_id'));
     }
 
-    /**
-     * @expectedException \Symfony\Component\Security\Csrf\Exception\TokenNotFoundException
-     */
     public function testGetNonExistingToken()
     {
+        $this->expectException('Symfony\Component\Security\Csrf\Exception\TokenNotFoundException');
         $this->storage->getToken('token_id');
     }
 

@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Erneuerung der ID des Umsatzpostens',
     'LBL_PARENT_RLIS' => 'Übergeordnete Umsatzposten',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Übergeordnete Umsatzposten',
+    'LBL_FORECASTED_LIKELY' => 'Wahrscheinlich prognostiziert',
     'LBL_EXPERT_ID' => 'Produktexperte',
     'LBL_FORECAST' => 'In Prognose inkludieren',
     'LBL_SUBTOTAL' => 'Zwischensumme',

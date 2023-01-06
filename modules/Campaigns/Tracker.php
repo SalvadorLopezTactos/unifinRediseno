@@ -26,7 +26,7 @@
 
 require_once('modules/Campaigns/utils.php');
 
-$GLOBALS['log'] = LoggerManager::getLogger('Campaign Tracker v2');
+$GLOBALS['log'] = LoggerManager::getLogger();
 
 $db = DBManagerFactory::getInstance();
 

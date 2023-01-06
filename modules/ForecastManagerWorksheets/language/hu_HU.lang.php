@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Alap árfolyam',
 
     'LBL_QUOTA' => 'Előírás',
-    'LBL_QUOTA_ADJUSTED' => 'Kvóta (módosított)',
+    'LBL_QUOTA_ADJUSTED' => 'Igazított kvóta',
 
     'LBL_FORECAST' => 'Előrejelzés',
     'LBL_COMMIT_STAGE' => 'Elköteleződés szintje',

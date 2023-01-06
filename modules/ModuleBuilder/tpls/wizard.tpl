@@ -23,7 +23,7 @@
 				</tr><tr>
 				{counter start=0 name="buttonCounter" print=false assign="buttonCounter"}
 			{/if}
-			{ if !isset($button.size)}
+			{if !isset($button.size)}
 				{assign var='buttonsize' value=''}
 			{else}
 				{assign var='buttonsize' value=$button.size}
@@ -62,13 +62,11 @@
 	</tr></table>
 <!-- Hidden div for hidden content so IE doesn't ignore it -->
 <div style="float:left; left:-100px; display: hidden;">&nbsp;
-	{literal}
 	<style type='text/css'>
-		.wizard { padding: 5px; text-align:center; font-weight:bold}
-		.title{ color:#990033; font-weight:bold; padding: 0px 5px 0px 0px; font-size: 20pt}
-		.backButton {position:absolute; left:10px; top:35px}
+		.wizard { padding: 5px; text-align:center; font-weight:bold }
+		.title{ color:#990033; font-weight:bold; padding: 0px 5px 0px 0px; font-size: 20pt }
+		.backButton { position:absolute; left:10px; top:35px }
 	</style>
-    {/literal}
 
 	<script>
 	ModuleBuilder.helpRegisterByID('export', 'input');

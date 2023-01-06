@@ -351,7 +351,7 @@ class WebUpgrader extends UpgradeDriver
             return $this->error("Upload failed", true);
         }
         $this->ensureDir("upgrades");
-        $this->context['zip'] = "upgrades/" . basename($_FILES['zip']['name']);
+        $this->context['zip'] = "upgrades/" . uniqid();
         if (move_uploaded_file($_FILES['zip']['tmp_name'], $this->context['zip'])) {
             $this->state['zip'] = $this->context['zip'];
             $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
@@ -372,9 +372,20 @@ class WebUpgrader extends UpgradeDriver
     public function displayUpgradePage()
     {
         global $token;
-        $upgraderVesion = $this->context['versionInfo'][0];
+        $upgraderVersion = $this->context['versionInfo'][0];
         $upgraderBuild = $this->context['versionInfo'][1];
-        $this->log("WebUpgrader v." . $upgraderVesion . " (build " . $upgraderBuild . ") starting");
+        $this->log("WebUpgrader v." . $upgraderVersion . " (build " . $upgraderBuild . ") starting");
+
+        // Using the existing cookie, set a global variable to pass down to upgrade_screen.php for completing the top
+        // level body class.
+        global $appearanceClass;
+        global $logoFileName;
+        if (isset($_COOKIE['appearance'])) {
+            $appearance = $_COOKIE['appearance'];
+            $appearanceClass = htmlspecialchars('sugar-' . $appearance . '-theme', ENT_QUOTES, 'UTF-8');
+            $logoFileName = $appearance === 'dark' ? 'company_logo_dark.png' : 'company_logo.png';
+        }
+
         include dirname(__FILE__) . '/upgrade_screen.php';
     }
 

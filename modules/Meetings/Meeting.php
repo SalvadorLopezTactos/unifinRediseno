@@ -556,7 +556,7 @@ class Meeting extends SugarBean {
 
 		$mailer = parent::create_notification_email($notify_user);
 
-		$path = SugarConfig::getInstance()->get('upload_dir','upload/') . $this->id;
+        $path = 'upload://' . $this->id;
 
         $content = vCal::get_ical_event($this, $GLOBALS['current_user']);
 
@@ -574,7 +574,7 @@ class Meeting extends SugarBean {
 	public function send_assignment_notifications($notify_user, $admin){
 		parent::send_assignment_notifications($notify_user, $admin);
 
-		$path = SugarConfig::getInstance()->get('upload_dir','upload/') . $this->id;
+        $path = 'upload://' . $this->id;
 		if (file_exists($path)) {
 			unlink($path);
 		}

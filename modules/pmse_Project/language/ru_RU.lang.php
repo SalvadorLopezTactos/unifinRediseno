@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Создано пользователем',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Последнее изменение пользователем',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Электронная почта системы',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Шаблон документов',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Объединение документов',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Выбрать…',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Объединение документов в PDF-файл',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Объединение документов',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Бизнес-правило',
     'LBL_PMSE_LABEL_RULE' => 'Правило',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Только обновленные записи (все обновления - см. текст справки)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Новые записи или первое обновление',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Новые записи и все обновления',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Изменение связи',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Выберите время запуска процесса.<br> <br>Новое: запускать процесс при создании новой записи.<br> <br>Первое обновление: процесс запускается только при первом выполнении критериев для существующей записи.<br><br>Все обновления: процесс запускается каждый раз, когда удовлетворяются критерии для существующей записи.<br> <br>Новые записи или первое обновление: процесс запускается только при первом выполнении критериев для записи, во время создания или обновления записи.<br> <br>Новые записи и все обновления: процесс запускается каждый раз для всех новых и существующих записей.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Выберите время запуска процесса.<br><br>Новое: запускать процесс при создании новой записи.<br><br>Первое обновление: процесс запускается только при первом выполнении критериев для существующей записи.<br><br>Все обновления: процесс запускается каждый раз, когда удовлетворяются критерии для существующей записи.<br><br>Новые записи или первое обновление: процесс запускается только при первом выполнении критериев для записи, во время создания или обновления записи.<br><br>Новые записи и все обновления: процесс запускается каждый раз для всех новых и существующих записей.<br><br>Изменение связи: процесс запускается каждый раз, когда происходит изменение связи.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Выберите модуль SugarCRM, чтобы применить триггер события',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Установленная дата',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Ошибка',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Оценка изменения связи',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Поля',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Оценка поля модуля',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Модуль',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Все связанные записи',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Любые связанные записи',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Добавлено',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Удалено',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Добавлено или удалено',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Любая связь',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Время запуска',
 

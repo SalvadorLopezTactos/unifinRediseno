@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Moteur Expressions',
-  'LBL_MODULE_NAME_SINGULAR' => 'Moteur Expression',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Précédent' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Suivant' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Étendre' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Moteur Expressions',
+    'LBL_MODULE_NAME_SINGULAR' => 'Moteur Expression',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Précédent' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Suivant' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Étendre' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Champ inconnu',
+];

@@ -259,9 +259,9 @@ class TimePeriod extends SugarBean
     {
         $leaves = array();
         $db = DBManagerFactory::getInstance();
-        $query = "SELECT id, type FROM timeperiods WHERE parent_id = '{$this->id}' AND deleted = 0 ORDER BY start_date_timestamp ASC";
-        $result = $db->query($query);
-        while ($row = $db->fetchByAssoc($result)) {
+        $sql = 'SELECT id, type FROM timeperiods WHERE parent_id = ? AND deleted = 0 ORDER BY start_date_timestamp ASC';
+        $result = $db->getConnection()->executeQuery($sql, [$this->id]);
+        foreach ($result as $row) {
             $leaves[] = TimePeriod::getByType($row['type'], $row['id']);
         }
         return $leaves;
@@ -416,7 +416,7 @@ class TimePeriod extends SugarBean
             $stmt = DBManagerFactory::getConnection()
                 ->executeQuery($query);
 
-            while (($row = $stmt->fetch())) {
+            while (($row = $stmt->fetchAssociative())) {
                 if (!isset($timeperiods[$row['id']])) {
                     $timeperiods[$row['id']] = $row['name'];
                 }
@@ -466,7 +466,7 @@ AND deleted = 0';
             ->executeQuery($query, array(
                 $queryDate->asDbDate(),
                 $this->type,
-            ))->fetchColumn();
+            ))->fetchOne();
 
         if (!$id) {
             return null;
@@ -497,7 +497,7 @@ AND deleted = 0';
                     $queryDate->asDbDate(),
                     $this->type,
                 )
-            )->fetchColumn();
+            )->fetchOne();
 
         if (!$id) {
             return null;
@@ -525,7 +525,7 @@ AND deleted = 0';
         $query = 'SELECT COUNT(id) FROM timeperiods WHERE parent_id IS NULL AND deleted = 0';
         $count = $this->db->getConnection()
             ->executeQuery($query)
-            ->fetchColumn();
+            ->fetchOne();
 
         $isUpgrade = !empty($currentSettings['is_upgrade']);
 
@@ -551,7 +551,7 @@ AND deleted = 0';
             ->executeQuery($sql);
 
         $updated = 0;
-        while (($id = $stmt->fetchColumn())) {
+        while (($id = $stmt->fetchOne())) {
             $tp = BeanFactory::newBean('TimePeriods');
             $tp->retrieve($id);
             $tp->save();
@@ -1120,7 +1120,7 @@ AND deleted = 0';
         $query = 'SELECT type FROM timeperiods WHERE id = ? AND deleted = 0';
         $type = DBManagerFactory::getConnection()
             ->executeQuery($query, array($id))
-            ->fetchColumn();
+            ->fetchOne();
 
         if (!$type) {
             return null;
@@ -1145,7 +1145,7 @@ AND deleted = 0';
         $query = $platform->modifyLimitQuery($query, 1);
 
         $id = $conn->executeQuery($query, array($type))
-            ->fetchColumn();
+            ->fetchOne();
 
         if (!$id) {
             return null;
@@ -1169,7 +1169,7 @@ AND deleted = 0';
         $query = $platform->modifyLimitQuery($query, 1);
 
         $id = $conn->executeQuery($query, array($type))
-            ->fetchColumn();
+            ->fetchOne();
 
         if (!$id) {
             return null;

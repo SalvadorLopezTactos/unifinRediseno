@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Workflow'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipo',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => 'Nota <strong>:</strong> As funcionalidades Sugar Workflow e Gestão de Workflow encontram-se no modo de manutenção. Os clientes da edição Sugar Enterprise devem começar a usar a funcionalidade fornecida pelo SugarBPM<sup class="trademark">TM</sup>.',
 );
 

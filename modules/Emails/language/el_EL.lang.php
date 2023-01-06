@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Χρήστες',
     'LBL_EMAILS_PRODUCTS_REL' => 'Γραμμή Εισηγμένων Ειδών',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Γραμμή Εσόδων Ειδών',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Κλιμακώσεις',
     'LBL_EMAILS_MESSAGES_REL' => 'Μηνύματα',
     'LBL_EMAILS_PURCHASES_REL' => 'Αγορές',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Γραμμή Στοιχείων που Αγοράστηκαν',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Αποστολή email',
     'LBL_MAILBOX' => 'Λογαριασμός Εισερχόμενων',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Διαμορφώστε έναν λογαριασμό εξερχόμενου email μέσω των <a href="#OutboundEmail">Ρυθμίσεων email</a> για να στείλετε email.',
 );

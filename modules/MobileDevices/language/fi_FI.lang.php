@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'Mobiililaitteet',
     'LBL_MODULE_NAME_SINGULAR' => 'Mobiililaite',
     'LBL_DEVICE_ID' => 'Laitteen tunnus',
-    'LBL_DEVICE_PLATFORM' => 'Alusta',
+    'LBL_DEVICE_PLATFORM' => 'Laitealusta',
 ];

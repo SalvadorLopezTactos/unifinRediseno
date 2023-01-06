@@ -28,23 +28,6 @@
     },
 
     /**
-     * Block focus drawer dashboards from being deleted
-     *
-     * @param model
-     */
-    warnDelete: function(model) {
-        if (model.get('view') === 'focus') {
-            app.alert.show('delete_confirmation', {
-                level: 'warning',
-                messages: app.lang.get('LBL_DELETE_FOCUS_DRAWER', this.module)
-            });
-            return;
-        }
-
-        this._super('warnDelete', [model]);
-    },
-
-    /**
      * @inheritdoc
      * Additionaly it calls the method responsible for sharing the filters used
      * on a list view dashlet with the teams the dashboard is shared with.

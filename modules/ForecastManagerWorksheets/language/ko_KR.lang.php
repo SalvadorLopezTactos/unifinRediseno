@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => '기본율',
 
     'LBL_QUOTA' => '할당',
-    'LBL_QUOTA_ADJUSTED' => '견적(조정된)',
+    'LBL_QUOTA_ADJUSTED' => '조정된 할당량',
 
     'LBL_FORECAST' => '예측',
     'LBL_COMMIT_STAGE' => '약속 단계',

@@ -19,12 +19,12 @@
     /**
      * @inheritdoc
      */
-    save: function() {
+    save: function(forCalcFields) {
         if (!this.isEndDateEditableByStartDate()) {
             this.handleUnEditableEndDateErrorMessage();
             return;
         }
 
-        this._super('save');
+        this._super('save', [forCalcFields]);
     },
 })

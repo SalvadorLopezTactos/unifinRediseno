@@ -18,7 +18,7 @@
     /**
      * @inheritdoc
      */
-    className: 'contentsearch-dropdown',
+    className: 'contentsearch-dropdown shadow-xl border-dropdown-widget rounded-t-none rounded-b-md',
 
     events: {
         'click [data-action="clicklink"]': 'linkClicked'

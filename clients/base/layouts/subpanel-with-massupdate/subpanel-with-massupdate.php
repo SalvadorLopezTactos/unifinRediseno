@@ -22,7 +22,7 @@ $viewdefs['base']['layout']['subpanel-with-massupdate']  = array (
             'view' => 'subpanel-list-with-massupdate',
         ),
         array (
-            'view' => 'list-bottom',
+            'view' => 'list-pagination',
         ),
     ),
     'last_state' => array(

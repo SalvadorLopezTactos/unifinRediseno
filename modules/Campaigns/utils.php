@@ -17,7 +17,7 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 
 /**
  * Returns a list of objects a message can be scoped by, the list contacts the current campaign
@@ -182,28 +182,25 @@ function log_campaign_activity($identifier, $activity, $update=true, $clicked_ur
                 //create new campaign log with minimal info.  Note that we are creating new unique id
                 //as target id, since we do not link banner/web campaigns to any users
 
-                $data['target_id']="'" . create_guid() . "'";
-                $data['target_type']= "'Prospects'";
-                $data['id']="'" . create_guid() . "'";
-                $data['campaign_id']= $db->quoted($row['campaign_id']);
-                $data['target_tracker_key']= $db->quoted($identifier);
-                $data['activity_type'] = $db->quoted($activity);
-                $data['activity_date']="'" . TimeDate::getInstance()->nowDb() . "'";
-                $data['hits']=1;
-                $data['deleted']=0;
-                if (!empty($clicked_url_key)) {
-                    $data['related_id']= $db->quoted($clicked_url_key);
-                    $data['related_type']="'".'CampaignTrackers'."'";
-                }
+            $data['target_id'] = create_guid();
+            $data['target_type'] = 'Prospects';
+            $data['id'] = create_guid();
+            $data['campaign_id'] = $row['campaign_id'];
+            $data['target_tracker_key'] = $identifier;
+            $data['activity_type'] = $activity;
+            $data['activity_date'] = TimeDate::getInstance()->nowDb();
+            $data['hits'] = 1;
+            $data['deleted'] = 0;
+            if (!empty($clicked_url_key)) {
+                $data['related_id'] = $clicked_url_key;
+                $data['related_type'] = 'CampaignTrackers';
+            }
 
-                //values for return array..
-                $return_array['target_id']=$data['target_id'];
-                $return_array['target_type']=$data['target_type'];
+            //values for return array..
+            $return_array['target_id'] = $data['target_id'];
+            $return_array['target_type'] = $data['target_type'];
 
-                //create insert query for new campaign log
-                $insert_query="INSERT into campaign_log (" . implode(",",array_keys($data)) . ")";
-                $insert_query.=" VALUES  (" . implode(",",array_values($data)) . ")";
-                $db->query($insert_query);
+            $db->getConnection()->insert('campaign_log', $data);
             }else{
 
                 //campaign log already exists, so just set the return array and update hits column
@@ -244,20 +241,20 @@ function log_campaign_activity($identifier, $activity, $update=true, $clicked_ur
                 return $return_array;
             }
             elseif ($row){
-                $data['id']="'" . create_guid() . "'";
-                $data['campaign_id'] = $db->quoted($row['campaign_id']);
-                $data['target_tracker_key'] = $db->quoted($identifier);
-                $data['target_id'] = $db->quoted($row['target_id']);
-                $data['target_type'] = $db->quoted($row['target_type']);
-                $data['activity_type'] = $db->quoted($activity);
-                $data['activity_date']="'" . TimeDate::getInstance()->nowDb() . "'";
-                $data['list_id'] = $db->quoted($row['list_id']);
-                $data['marketing_id'] = $db->quoted($row['marketing_id']);
-                $data['hits']=1;
-                $data['deleted']=0;
+                $data['id'] = create_guid();
+                $data['campaign_id'] = $row['campaign_id'];
+                $data['target_tracker_key'] = $identifier;
+                $data['target_id'] = $row['target_id'];
+                $data['target_type'] = $row['target_type'];
+                $data['activity_type'] = $activity;
+                $data['activity_date'] = TimeDate::getInstance()->nowDb();
+                $data['list_id'] = $row['list_id'];
+                $data['marketing_id'] = $row['marketing_id'];
+                $data['hits'] = 1;
+                $data['deleted'] = 0;
                 if (!empty($clicked_url_key)) {
-                    $data['related_id'] = $db->quoted($clicked_url_key);
-                    $data['related_type']="'".'CampaignTrackers'."'";
+                    $data['related_id'] = $clicked_url_key;
+                    $data['related_type'] = 'CampaignTrackers';
                 }
 
                 //populate the primary email address into the more_info field
@@ -265,16 +262,14 @@ function log_campaign_activity($identifier, $activity, $update=true, $clicked_ur
                     $sugarEmailAddress = BeanFactory::newBean('EmailAddresses');
                     $primeEmail = $sugarEmailAddress->getPrimaryAddress(null, $row['target_id'], $row['target_type']);
                     if (!empty($primeEmail)) {
-                        $data['more_information'] =  "'" . $primeEmail . "'";
+                        $data['more_information'] =  $primeEmail;
                     }
                 }
 
                 //values for return array..
                 $return_array['target_id']=$row['target_id'];
                 $return_array['target_type']=$row['target_type'];
-                $insert_query="INSERT into campaign_log (" . implode(",",array_keys($data)) . ")";
-                $insert_query.=" VALUES  (" . implode(",",array_values($data)) . ")";
-                $db->query($insert_query);
+                $db->getConnection()->insert('campaign_log', $data);
             }
         } else {
 
@@ -346,7 +341,7 @@ function get_campaign_urls($campaign_id) {
         $conn = $db->getConnection();
         $stmt = $conn->executeQuery($query, array($campaign_id));
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $return_array['{'.$row['tracker_name'].'}'] = $row['tracker_name'] . ' : ' . $row['tracker_url'];
         }
     }
@@ -594,7 +589,7 @@ SQL;
 
     $prospectsList = $focus->db->getConnection()
         ->executeQuery($prospectListsQuery, [$campaign])
-        ->fetchAll();
+        ->fetchAllAssociative();
 
     //retrieve lists that this user belongs to
     $userProspectsListQuery = <<<SQL
@@ -605,7 +600,7 @@ SQL;
 
     $userProspectsList = $focus->db->getConnection()
         ->executeQuery($userProspectsListQuery, [$focus->id])
-        ->fetchAll();
+        ->fetchAllAssociative();
 
     //search through prospect lists for this campaign and identifiy the "unsubscription list"
     $exempt_id = '';
@@ -697,7 +692,7 @@ SQL;
 
     $prospectsList = $focus->db->getConnection()
         ->executeQuery($prospectListsQuery, [$campaign])
-        ->fetchAll();
+        ->fetchAllAssociative();
 
     //retrieve lists that this user belongs to
     $userProspectsListQuery = <<<SQL
@@ -708,7 +703,7 @@ SQL;
 
     $userProspectsList = $focus->db->getConnection()
         ->executeQuery($userProspectsListQuery, [$focus->id])
-        ->fetchAll();
+        ->fetchAllAssociative();
 
     //check to see if user is already there in prospect list
     $already_here = false;

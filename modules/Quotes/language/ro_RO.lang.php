@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configurare oferte',
 
     'LBL_RENEWAL' => 'Reînnoire',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacțiuni cotate',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologie ofertă',
 );

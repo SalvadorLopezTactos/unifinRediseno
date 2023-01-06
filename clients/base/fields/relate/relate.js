@@ -255,35 +255,41 @@
 
         this._super('_render');
 
-        //FIXME remove check for tplName SC-2608
-        switch(this.tplName) {
-            case 'edit':
-            case 'massupdate':
-                // `searchModule` can be undefined for a parent field when there
-                // is no value set (ie in create mode). In that case, we don't
-                // want to render the dropdown disabled.
-                if (!_.isUndefined(searchModule)) {
-                    if (!app.acl.hasAccess('list', searchModule) ||
-                        !_.contains(app.metadata.getModuleNames(), searchModule)) {
-                        this._renderDisabledDropdown();
-                        break;
+        if (this.customDropdownRender) {
+            this.customDropdownRender();
+        } else {
+            //FIXME remove check for tplName SC-2608
+            switch (this.tplName) {
+                case 'edit':
+                case 'massupdate':
+                    // `searchModule` can be undefined for a parent field when there
+                    // is no value set (ie in create mode). In that case, we don't
+                    // want to render the dropdown disabled.
+                    if (!_.isUndefined(searchModule)) {
+                        if (!app.acl.hasAccess('list', searchModule) ||
+                            !_.contains(app.metadata.getModuleNames(), searchModule)) {
+                            this._renderDisabledDropdown();
+                            break;
+                        }
                     }
-                }
-                if (_.isUndefined(this.filters)) {
-                    this._createFiltersCollection({
-                        success: _.bind(function() {
-                            if (!this.disposed) {
-                                this._renderEditableDropdown();
-                            }
-                        }, this)
-                    });
-                } else {
-                    this._renderEditableDropdown();
-                }
-                break;
-            case 'disabled':
-                this._renderDisabledDropdown();
-                break;
+                    if (_.isUndefined(this.filters) ||
+                        (!_.isEmpty(this.filters.moduleName) && this.filters.moduleName !== searchModule)
+                    ) {
+                        this._createFiltersCollection({
+                            success: _.bind(function() {
+                                if (!this.disposed) {
+                                    this._renderEditableDropdown();
+                                }
+                            }, this)
+                        });
+                    } else {
+                        this._renderEditableDropdown();
+                    }
+                    break;
+                case 'disabled':
+                    this._renderDisabledDropdown();
+                    break;
+            }
         }
         return this;
     },
@@ -302,8 +308,12 @@
         var self = this;
         var $dropdown = this.$(this.fieldTag);
 
+        if ($dropdown.data('select2')) {
+            return;
+        }
         $dropdown.select2(this._getSelect2Options())
             .on('select2-open', _.bind(this._onSelect2Open, this))
+            .off('searchmore')
             .on('searchmore', function() {
                 $(this).select2('close');
                 self.openSelectDrawer();
@@ -915,6 +925,50 @@
     },
 
     /**
+     * Gets the default relate filter metadata for the module, if one exists
+     * @return {null|Object}
+     * @private
+     */
+    _getModuleDefaultFilterMetadata: function() {
+        let moduleMetadata = app.metadata.getModule(this.getSearchModule());
+        if (_.isEmpty(moduleMetadata) ||
+            _.isEmpty(moduleMetadata.defaultRelateFilter) ||
+            this.def.default_relate_filter === false
+        ) {
+            return null;
+        }
+        return moduleMetadata.defaultRelateFilter;
+    },
+
+    /**
+     * Gets the default relate filter for the module, if one exists
+     * @return {null|Object}
+     * @private
+     */
+    _getModuleDefaultFilter: function() {
+        if (!app.metadata.getModule('Filters') || !this.filters || !this.filters.collection) {
+            return null;
+        }
+
+        let filterMetadata = this._getModuleDefaultFilterMetadata();
+        if (_.isEmpty(filterMetadata)) {
+            return null;
+        }
+
+        let filterBeanClass = app.data.getBeanClass('Filters').prototype;
+        let filterOptions = new app.utils.FilterOptions().config(filterMetadata).format();
+        let filter = this.filters.collection.get(filterOptions.initial_filter);
+        let filterDef = null;
+
+        if (filter) {
+            let populate = filter.get('is_template') && filterOptions.filter_populate;
+            filterDef = filterBeanClass.populateFilterDefinition(filter.get('filter_definition') || {}, populate);
+        }
+
+        return filterDef;
+    },
+
+    /**
      * Formats the filter options.
      *
      * @param {Boolean} force `true` to force retrieving the filter options
@@ -925,11 +979,19 @@
         if (this._filterOptions && !force) {
             return this._filterOptions;
         }
-        this._filterOptions = new app.utils.FilterOptions()
-            .config(this.def)
-            .setInitialFilter(this.def.initial_filter || '$relate')
-            .populateRelate(this.model)
-            .format();
+
+        // If the related module has a default filter, apply that only if there is no field-specific default filter
+        let moduleDefaultFilter = this._getModuleDefaultFilterMetadata();
+        if (!_.isEmpty(moduleDefaultFilter) && _.isEmpty(this.def.initial_filter)) {
+            this._filterOptions = new app.utils.FilterOptions().config(moduleDefaultFilter).format();
+        } else {
+            this._filterOptions = new app.utils.FilterOptions()
+                .config(this.def)
+                .setInitialFilter(this.def.initial_filter || '$relate')
+                .populateRelate(this.model)
+                .format();
+        }
+
         return this._filterOptions;
     },
 
@@ -963,6 +1025,12 @@
         }
 
         searchTermFilter = filterBeanClass.buildSearchTermFilter(searchModule || this.getSearchModule(), searchTerm);
+
+        // If the related module has a default filter, apply that as well
+        let moduleDefaultFilter = this._getModuleDefaultFilter();
+        if (!_.isEmpty(moduleDefaultFilter)) {
+            searchTermFilter = filterBeanClass.combineFilterDefinitions(moduleDefaultFilter, searchTermFilter);
+        }
 
         return filterBeanClass.combineFilterDefinitions(filterDef, searchTermFilter);
     },

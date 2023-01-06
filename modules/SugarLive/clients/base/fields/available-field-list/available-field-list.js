@@ -18,12 +18,12 @@
     /**
      * Fields with these names should not be displayed in fields list.
      */
-    ignoredNames: ['deleted', 'mkto_id', 'googleplus', 'team_name', 'auto_invite_parent'],
+    ignoredNames: ['deleted', 'mkto_id', 'googleplus', 'team_name', 'auto_invite_parent', 'contact_name', 'invitees'],
 
     /**
      * Fields with these types should not be displayed in fields list.
      */
-    ignoredTypes: ['id', 'link', 'tag'],
+    ignoredTypes: ['id', 'link', 'tag', 'parent', 'parent_type'],
 
     /**
      * List of fields that are displayed for a given module.

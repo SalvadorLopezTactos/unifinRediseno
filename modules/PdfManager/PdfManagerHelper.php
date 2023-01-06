@@ -522,7 +522,7 @@ class PdfManagerHelper
                 isset($module_instance->field_defs[$name]['type']) &&
                 ($module_instance->field_defs[$name]['type'] == 'image')
                ) {
-                $fields_module[$name] = $GLOBALS['sugar_config']['upload_dir']."/".$value;
+                $fields_module[$name] = "upload://" . $value;
             } elseif (is_string($value)) {
                 $value = nl2br(stripslashes($value));
 

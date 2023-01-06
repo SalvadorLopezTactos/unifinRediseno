@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 use GuzzleHttp\ClientInterface;
 
 /**
- * @coversDefaultClass Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\GenericProvider
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\GenericProvider
  */
 class GenericProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -58,6 +58,16 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
     protected $httpClient;
 
     /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|AccessToken
+     */
+    protected $accessToken;
+
+    /**
+     * @var string
+     */
+    protected $authorization;
+
+    /**
      * GenericProviderTest constructor.
      */
     public function __construct()
@@ -70,19 +80,25 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
         $this->request = $this->createMock(RequestInterface::class);
         $this->response = $this->createMock(ResponseInterface::class);
         $this->httpClient = $this->createMock(ClientInterface::class);
+        $this->accessToken = $this->createMock(AccessToken::class);
 
         $this->options = [
             'clientId' => 'test',
             'clientSecret' => 'testSecret',
             'redirectUri' => '',
-            'urlAuthorize' => 'http://testUrlAuth',
-            'urlAccessToken' => 'http://testUrlAccessToken',
-            'urlResourceOwnerDetails' => 'http://testUrlResourceOwnerDetails',
-            'urlIntrospectToken' => 'http://testUrlIntrospectToken',
+            'urlAuthorize' => 'https://testUrlAuth',
+            'urlAccessToken' => 'https://testUrlAccessToken',
+            'urlResourceOwnerDetails' => 'https://testUrlResourceOwnerDetails',
+            'urlIntrospectToken' => 'https://testUrlIntrospectToken',
+            'urlRevokeToken' => 'https://testUrlRevokeToken',
             'accessTokenFile' => '/tmp/bar.php',
             'accessTokenRefreshUrl' => 'http://some-refresh-url',
             'logger' => $this->logger
         ];
+
+        $this->authorization = 'Basic ' . base64_encode(
+            sprintf('%s:%s', $this->options['clientId'], $this->options['clientSecret'])
+        );
     }
 
     /**
@@ -176,68 +192,97 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::introspectToken
+     * @covers ::revokeToken
      */
-    public function testIntrospectToken()
+    public function testRevokeToken(): void
     {
         $token = '--test--token-value--';
-        $options = [
-            'clientId' => 'test',
-            'clientSecret' => 'testSecret',
-            'redirectUri' => '',
-            'urlAuthorize' => 'http://testUrlAuth',
-            'urlAccessToken' => 'http://testUrlAccessToken',
-            'urlResourceOwnerDetails' => 'http://testUrlResourceOwnerDetails',
-            'urlIntrospectToken' => 'http://testUrlIntrospectToken',
-            'accessTokenFile' => '/tmp/bar.php',
-            'accessTokenRefreshUrl' => 'http://some-refresh-url',
-            'logger' => $this->createMock(LoggerInterface::class)
-        ];
         $expectedResult = ['--', 'expected', '--', 'Result', '--'];
-        $expectedAuthorization = 'Basic ' . base64_encode(
-            sprintf('%s:%s', $options['clientId'], $options['clientSecret'])
-        );
+
         $expectedRequestOptions = [
             'headers' => [
-                'Authorization' => $expectedAuthorization,
+                'Authorization' => $this->authorization,
                 'content-type' => 'application/x-www-form-urlencoded',
                 'Accept' => 'application/json',
             ],
             'body' => http_build_query(['token' => $token]),
         ];
 
-        /** @var \PHPUnit_Framework_MockObject_MockObject|RequestFactory $requestFactory */
-        $requestFactory = $this->createMock(RequestFactory::class);
-        /** @var \PHPUnit_Framework_MockObject_MockObject|RequestInterface $requestFactory */
-        $response = $this->createMock(RequestInterface::class);
         /** @var \PHPUnit_Framework_MockObject_MockObject|GenericProvider $provider */
         $provider = $this->getMockBuilder(GenericProvider::class)
             ->enableOriginalConstructor()
-            ->setConstructorArgs([$options])
+            ->setConstructorArgs([$this->options])
             ->setMethods([
                 'getParsedResponse',
             ])
             ->getMock();
-        $provider->setRequestFactory($requestFactory);
+        $provider->setRequestFactory($this->requestFactory);
 
-        /** @var \PHPUnit_Framework_MockObject_MockObject|AccessToken $accessToken */
-        $accessToken = $this->createMock(AccessToken::class);
-        $accessToken->expects($this->once())->method('getToken')->willReturn($token);
-        $requestFactory->expects($this->once())
+        $this->accessToken->expects($this->once())->method('getToken')->willReturn($token);
+
+        $this->requestFactory->expects($this->once())
             ->method('getRequestWithOptions')
             ->with(
                 GenericProvider::METHOD_POST,
-                $options['urlIntrospectToken'],
+                $this->options['urlRevokeToken'],
                 $expectedRequestOptions
             )
-            ->willReturn($response);
+            ->willReturn($this->request);
         $provider
             ->expects($this->once())
             ->method('getParsedResponse')
-            ->with($response)
+            ->with($this->request)
             ->willReturn($expectedResult);
 
-        $result = $provider->introspectToken($accessToken);
+        $result = $provider->revokeToken($this->accessToken);
+
+        $this->assertEquals($expectedResult, $result);
+    }
+
+    /**
+     * @covers ::introspectToken
+     */
+    public function testIntrospectToken(): void
+    {
+        $token = '--test--token-value--';
+        $expectedResult = ['--', 'expected', '--', 'Result', '--'];
+
+        $expectedRequestOptions = [
+            'headers' => [
+                'Authorization' => $this->authorization,
+                'content-type' => 'application/x-www-form-urlencoded',
+                'Accept' => 'application/json',
+            ],
+            'body' => http_build_query(['token' => $token]),
+        ];
+
+        /** @var \PHPUnit_Framework_MockObject_MockObject|GenericProvider $provider */
+        $provider = $this->getMockBuilder(GenericProvider::class)
+            ->enableOriginalConstructor()
+            ->setConstructorArgs([$this->options])
+            ->setMethods([
+                'getParsedResponse',
+            ])
+            ->getMock();
+        $provider->setRequestFactory($this->requestFactory);
+
+        $this->accessToken->expects($this->once())->method('getToken')->willReturn($token);
+
+        $this->requestFactory->expects($this->once())
+            ->method('getRequestWithOptions')
+            ->with(
+                GenericProvider::METHOD_POST,
+                $this->options['urlIntrospectToken'],
+                $expectedRequestOptions
+            )
+            ->willReturn($this->request);
+        $provider
+            ->expects($this->once())
+            ->method('getParsedResponse')
+            ->with($this->request)
+            ->willReturn($expectedResult);
+
+        $result = $provider->introspectToken($this->accessToken);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -352,5 +397,39 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals('login-service-srn', $provider->getClientID());
+    }
+
+    /**
+     * @covers ::getClientSecret
+     */
+    public function testGetSecretWithClientSecretSet(): void
+    {
+        $options = $this->options;
+        $options['clientSecret'] = 'some-secret';
+        $provider = new GenericProvider($options);
+
+        $this->assertEquals('some-secret', $provider->getClientSecret());
+    }
+
+    /**
+     * @covers ::getClientSecret
+     */
+    public function testGetClientSecretWithTokenFile(): void
+    {
+        $options = $this->options;
+        $options['clientSecret'] = '';
+        # to bypass `is_readable()`
+        $options['accessTokenFile'] = __FILE__;
+
+        $provider = $this->getMockBuilder(GenericProvider::class)
+            ->setConstructorArgs([$options])
+            ->setMethods(['getAccessTokenFileData'])
+            ->getMock();
+
+        $provider->method('getAccessTokenFileData')->willReturn([
+            'client_secret' => 'client-secret',
+        ]);
+
+        $this->assertEquals('client-secret', $provider->getClientSecret());
     }
 }

@@ -13,16 +13,18 @@
 <!-- Tooltips
 ================================================== -->
 <section id="tooltips">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <div class="row-fluid">
     <div class="span3 columns">
       <h3>About Tooltips</h3>
       <p>The Twitter Bootstrap Tooltip plugins doesn't rely on images, but uses css3 for animations, and data-attributes for local title storage.</p>
       <p>The bootsrap-tooltip.js plugin is included in the default build of SugarCRM.</p>
-      <div class="alert alert-info">
+      <div class="alert alert-info span12">
         <strong>Heads up!</strong> For performance reasons, the tooltip and popover data-apis are opt in, meaning <strong>you must initialize them yourself</strong>.
       </div>
     </div>
@@ -67,11 +69,11 @@ $('[rel=tooltip]').tooltip();
           </pre>
 
 
-          <h2>Sugar7 Implementation</h2>
+          <h2>SugarCRM Implementation</h2>
           <p>Markup elements (in .hbs):</p>
           <pre class="prettyprint linenums">
 &lt;a class="btn btn-mini comment" rel="tooltip" data-title="Comment"&gt;
-    &lt;i class="fa fa-comment"&gt;&lt;/i&gt;
+    &lt;i class="sicon sicon-message"&gt;&lt;/i&gt;
 &lt;/a&gt;
           </pre>
 

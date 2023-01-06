@@ -20,21 +20,13 @@
     </div>
 
     <div class="omni-detail-content">
-        <div class="left-column">
-            <div>{{getModuleName 'Contacts'}}</div>
-            <div>{{getModuleName 'Cases'}}</div>
-        </div>
-        <div class="right-column ellipsis_inline">
-            {{#if currentContact}}
-                <a class="ellipsis_inline" href="javascript:void(0)" data-original-title="{{currentContact.name}}" data-action="show-contact" data-module="Contacts" data-id="{{currentContact.id}}">{{currentContact.name}}</a>
-            {{else}}
-                <div>{{str 'LBL_OMNICHANNEL_UNKNOWN'}}</div>
-            {{/if}}
-            {{#if currentCase}}
-                <a class="ellipsis_inline" href="javascript:void(0)" data-original-title="{{currentCase.name}}" data-action="show-case" data-module="Cases" data-id="{{currentCase.id}}">{{currentCase.name}}</a>
-            {{else}}
-                <div>{{str 'LBL_OMNICHANNEL_UNKNOWN'}}</div>
-            {{/if}}
+        <div class="omni-summary-cell">
+        {{#each summaryFields}}
+            <div class="omni-cell">
+                <div class="omni-label">{{str this.label}}</div>
+                {{field ../this model=../model template='edit'}}
+            </div>
+        {{/each}}
         </div>
     </div>
 

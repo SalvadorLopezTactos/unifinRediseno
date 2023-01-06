@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Tuen nimi:',
   'LBL_SUPPORT_TERM' => 'Tuen pituus:',
   'LBL_TAX_CLASS' => 'Veroluokka:',
+  'LBL_ACTIVE_STATUS' => 'Tila',
   'LBL_TYPE_NAME'=>'Tyypin nimi',
   'LBL_TYPE' => 'Tyyppi',
   'LBL_PRODUCT_TYPE' => 'Tuotetyyppi',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Tuotekatalogin luettelon koontinäyttö',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Tuotekatalogin tietueiden koontinäyttö',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Tuoteluettelo-tietolaatikko',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Tila on aktiivinen',
 );

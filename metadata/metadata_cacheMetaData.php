@@ -46,13 +46,6 @@ $dictionary['metadata_cache'] = array(
             ),
         ),
         array(
-            'name' => 'type_indx',
-            'type' => 'index',
-            'fields' => array(
-                'type',
-            ),
-        ),
-        array(
             'name' => 'idx_type_datemodified',
             'type' => 'index',
             'fields' => array(

@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'시간 형식 초기설정',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'서버 응답시간 진열',
+    'FREEZE_FIRST_COLUMN' => '열 고정 허용',
+    'FREEZE_FIRST_COLUMN_HELP' => '이 설정을 활성화하면 사용자가 다양한' .
+        '모듈 목록 보기, 하위패널, 대쉬릿, 콘솔 목록 보기에서 첫 열을 고정할 수 있습니다.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => '문의 일지',
     'LOCK_HOMEPAGE_HELP'=>'이 설정은 1. 새 홈페이지와 홈모듈의 대쉬릿추가 2. 끌어 넣기로 주문형 홈페이지 대쉬릿 배치<br />를 방지합니다.',
     'CURRENT_LOGO'=>'현재 로고',
+    'CURRENT_LOGO_DARK' => '현재 다크 모드 로고:',
     'CURRENT_LOGO_HELP'=>'이 로고는 Sugar어플리케이션의 바닥글 왼쪽 코너에 나타납니다.',
+    'CURRENT_LOGO_DARK_HELP' => "이 로고는 사용자의 외관 설정에 따라 Sugar 애플리케이션이 다크 모드일 때 푸터 왼쪽 모서리에 표시됩니다.",
     'NEW_LOGO'=>'로고 선택',
     'NEW_LOGO_HELP' => '이 이미지 파일 형식은 .png 또는.jpg 입니다. 최대 허용치는 높이17px 너비 450px 입니다. 이를 초과하는 이미지는 최대허용치에 맞게 축소됩니다.',
+    'NEW_LOGO_DARK' => '다크 모드 로고 선택:',
     'NEW_LOGO_HELP_NO_SPACE' => '이미지 파일형식은 png 또는 .jpg. 일수 있습니다. 최대 높이는 17px이며 최대 너비는 450px입니다. 허용치보다 큰 이미지는 최대 허용크기에 맞게 축소됩니다. 이미지 파일명은 빈칸이나 기호를 포함할수 없습니다.',
     'NEW_QUOTE_LOGO'=>'새 견적 로고 업로드',
     'NEW_QUOTE_LOGO_HELP'=>'필요한 이미지 파일 형식은  .jpg. 입니다.  권장 크기는 867x74 px. 입니다.',
@@ -412,7 +418,8 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => '계속합니다.',
     'LBL_WIZARD_FINISH_TAB' => '완료',
     'LBL_WIZARD_FINISH_TITLE' => '기본 시스템 형성이 완료되었습니다.',
-    'LBL_WIZARD_FINISH' => '사용자 설정 형성을 위해 계속 버튼을 클릭하십시오. 추가 시스템 설정을 위해서는 이곳을 클릭하십시오.',
+    'LBL_WIZARD_FINISH' => '사용자 설정 형성을 위해 <b>계속</b> 버튼을 클릭하십시오.<br/><br />
+추가 시스템 설정을 위해서는 <a href="#Administration" target="_blank">이곳</a>을 클릭하십시오.',
     'LBL_WIZARD_SYSTEM_TITLE' => '상표만들기',
     'LBL_WIZARD_SYSTEM_DESC' => '귀하의 Sugar 상표를 위한 조직명과 로고를 입력하십시오.',
     'LBL_WIZARD_LOCALE_DESC' => '귀하의 지리적 위치에 따라 원하는 Sugar에서의 데이타 전시를 지정해 주십시오. 이곳에 입력하신 설정은 초기설정이 됩니다. 사용자는 각자 선호하는 설정을 할수 있습니다.',
@@ -423,7 +430,8 @@ BSOFR
 	'LBL_LOADING' => '로딩중입니다.' /*for 508 compliance fix*/,
 	'LBL_DELETE' => '삭제하기' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => '환영합니다' /*for 508 compliance fix*/,
-	'LBL_LOGO' => '로고' /*for 508 compliance fix*/,
+    'LBL_LOGO' => '로고' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => '다크 모드 로고',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '이',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '이 보고서 모듈은 브라우저 기반의 모바일 창에서는 이용하실수 없습니다.',
 
@@ -462,5 +470,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Garantinio pavadinimas:',
   'LBL_SUPPORT_TERM' => 'Garantinis laikotarpis:',
   'LBL_TAX_CLASS' => 'Apmokestinimas:',
+  'LBL_ACTIVE_STATUS' => 'Būsena',
   'LBL_TYPE_NAME'=>'Tipo pavadinimas',
   'LBL_TYPE' => 'Tipas:',
   'LBL_PRODUCT_TYPE' => 'Produkto tipas',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Produktų katalogo sąrašo ataskaitų sritis',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Produktų katalogo įrašų ataskaitų sritis',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ produktų katalogas',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Būsena yra aktyvi',
 );

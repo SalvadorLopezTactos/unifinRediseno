@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => '매출 라인아이템',
     'LBL_PURCHASES_SUBPANEL_TITLE' => '구매',
     'LBL_PLIS_SUBPANEL_TITLE' => '구매한 라인아이템',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => '문서 기록 대시보드',
+    'LBL_MY_DOCUMENTS' => '내 문서',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSign에 전송',
 );

@@ -14,7 +14,12 @@ namespace Sugarcrm\Sugarcrm\Denormalization\Relate\Hook;
 
 interface Configuration
 {
-    public function setFieldConfiguration(string $moduleName, string $fieldName, array $value): void;
+    public function setFieldConfiguration(
+        string $moduleName,
+        string $fieldName,
+        string $relationshipName,
+        array $value
+    ): void;
 
     public function getModuleConfiguration(string $moduleName): array;
 }

@@ -18,13 +18,13 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' => 'LNK_NEW_RECORD',
         'acl_action' => 'create',
         'acl_module' => $module_name,
-        'icon' => 'fa-plus',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route' => "#bwc/index.php?module=$module_name&action=index",
         'label' => 'LNK_LIST',
         'acl_action' => 'list',
         'acl_module' => $module_name,
-        'icon' => 'fa-bars',
+        'icon' => 'sicon-list-view',
     ),
 );

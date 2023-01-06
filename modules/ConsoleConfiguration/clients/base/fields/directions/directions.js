@@ -69,8 +69,10 @@
         this.detailedInstructionsLink = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' +
             serverInfo.flavor + '&version=' + serverInfo.version + '&lang=' + app.lang.getLanguage() +
             '&module=ConsoleManagement';
-        this.detailedInstructionsLink += app.user.get('products') ?
-            '&products=' + encodeURIComponent(app.user.get('products').join(',')) :
+
+        let products = app.user.getProductCodes();
+        this.detailedInstructionsLink += products ?
+            '&products=' + encodeURIComponent(products.join(',')) :
             '';
 
         // Get the tabContent attribute, which includes a mapping of

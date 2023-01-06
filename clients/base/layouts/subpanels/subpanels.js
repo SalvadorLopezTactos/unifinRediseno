@@ -239,12 +239,35 @@
         // First checks for hidden components, then checks for ACLs on those components.
         var allowedComponents = this._pruneHiddenComponents(components);
         allowedComponents = this._pruneNoAccessComponents(allowedComponents);
+        allowedComponents = this._addMapsSubpanel(allowedComponents);
         allowedComponents = this.reorderSubpanels(allowedComponents);
 
         // Call original Layout with pruned components
         this._super('_addComponentsFromDef', [allowedComponents, context, module]);
         this._markComponentsAsSubpanels();
         this._disableSubpanelToggleButton(allowedComponents);
+    },
+
+    /**
+     * Add maps subpanel if it's enabled for current module
+     *
+     * @param {Object} allowedComponents
+     * @return {Object} allowedComponents;
+     */
+    _addMapsSubpanel: function(allowedComponents) {
+        const fromCreate = this.context.get('create');
+
+        if (app.utils.maps.isMapsModuleEnabled(this.module) && !fromCreate && app.user.hasMapsLicense()) {
+            const subpanelMeta = {
+                layout: 'maps-widget',
+                label: 'LBL_MAP_MAP',
+                context: {link: 'maps'},
+            };
+
+            allowedComponents.push(subpanelMeta);
+        }
+
+        return allowedComponents;
     },
 
     /**

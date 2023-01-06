@@ -28,7 +28,7 @@ $viewdefs['base']['view']['pipeline-recordlist-content'] = array(
                                     'acl_action' => 'delete',
                                     'tooltip' => 'LBL_DELETE',
                                     'css_class' => 'delete',
-                                    'icon'=>'fa-times',
+                                    'icon'=>'sicon-remove',
                                 ),
                             ),
                     ),

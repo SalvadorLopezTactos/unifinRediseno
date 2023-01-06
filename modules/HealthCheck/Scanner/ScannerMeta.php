@@ -52,16 +52,6 @@ class HealthCheckScannerMeta
      */
     protected $meta = array(
 
-        // skeleton
-        // '100' => array(
-        //    'report' => '', // report id
-        //    'bucket' => self::STUDIO_MB,
-        //    'flag' => self::FLAG_YELLOW, // optional, default will be added
-        //    'kb' => false, // optional, default will be added
-        //    'tickets' => array(), // optional, default will be added
-        //    'scripts' => array(), // optional, default will be added
-        //),
-
         // BUCKET B
         101 => array(
             'report' => 'hasStudioHistory',
@@ -107,18 +97,6 @@ class HealthCheckScannerMeta
             'report' => 'isNotMBModule',
             'bucket' => self::STUDIO_MB_BWC,
         ),
-//        305 => array(
-//            'report' => 'badVardefsKey',
-//            'bucket' => self::STUDIO_MB_BWC,
-//        ),
-//        306 => array(
-//            'report' => 'badVardefsRelate',
-//            'bucket' => self::STUDIO_MB_BWC,
-//        ),
-//        307 => array(
-//            'report' => 'badVardefsLink',
-//            'bucket' => self::STUDIO_MB_BWC,
-//        ),
         308 => array(
             'report' => 'vardefHtmlFunction',
             'bucket' => self::STUDIO_MB_BWC,
@@ -155,11 +133,6 @@ class HealthCheckScannerMeta
             'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Extension_Dir/',
             //@codingStandardsIgnoreEnd
         ),
-//        314 => array(
-//            'report' => 'badVardefsMultienum',
-//            'bucket' => self::STUDIO_MB_BWC
-//        ),
-
         // BUCKET E
         401 => array(
             'report' => 'vendorFilesInclusion',
@@ -168,13 +141,16 @@ class HealthCheckScannerMeta
             'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Vendor_Files_Inclusion/',
             //@codingStandardsIgnoreEnd
         ),
-//        402 => array(
-//            'report' => 'badModule',
-//            'bucket' => self::CUSTOM,
-//        ),
         403 => array(
             'report' => 'sugarSpecificFilesInclusion',
             'bucket' => self::CUSTOM,
+        ),
+        409 => array(
+            'report' => 'badVardefsClassAutoloading',
+            'bucket' => self::CUSTOM,
+            //@codingStandardsIgnoreStart
+            'kb'     => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Bad_Vardefs_Module_Has_Invalid_Vardefs_For_Field/',
+            //@codingStandardsIgnoreEnd
         ),
         520 => array(
             'report' => 'logicHookAfterUIFrame',
@@ -191,10 +167,6 @@ class HealthCheckScannerMeta
             //@codingStandardsIgnoreEnd
         ),
         //Moved incompatIntegration to F bucket. Use this code for new reports
-//        405 => array(
-//            'report' => 'incompatIntegration',
-//            'bucket' => self::CUSTOM,
-//        ),
         406 => array(
             'report' => 'hasCustomViews',
             'bucket' => self::CUSTOM,
@@ -227,10 +199,6 @@ class HealthCheckScannerMeta
             'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Found_Custom_Code/',
             //@codingStandardsIgnoreEnd
         ),
-//        410 => array(
-//           'report' => 'maxFieldsView',
-//            'bucket' => self::CUSTOM,
-//        ),
         522 => array(
             'report' => 'subPanelWithFunction',
             'bucket' => self::MANUAL,
@@ -252,10 +220,6 @@ class HealthCheckScannerMeta
             'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Unknown_Widget_Class_Detected/',
             //@codingStandardsIgnoreEnd
         ),
-//        414 => array(
-//            'report' => 'unknownField',
-//            'bucket' => self::CUSTOM,
-//        ),
         415 => array(
             'report' => 'badHookFile',
             'bucket' => self::CUSTOM,
@@ -263,10 +227,6 @@ class HealthCheckScannerMeta
             'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Bad_Hook_File/'
             //@codingStandardsIgnoreEnd
         ),
-//         523 => array(
-//             'report' => 'byRefInHookFile',
-//             'bucket' => self::MANUAL,
-//         ),
         417 => array(
             'report' => 'incompatModule',
             'bucket' => self::CUSTOM,
@@ -356,10 +316,29 @@ class HealthCheckScannerMeta
             'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Found_Var_Dump/',
             //@codingStandardsIgnoreEnd
         ),
-//        430 => array(
-//            'report' => 'foundOutputBufferingCustom',
-//            'bucket' => self::CUSTOM,
-//        ),
+        431 => array(
+            'report' => 'smartyCustomization',
+            'bucket' => self::CUSTOM,
+        ),
+        436 => array(
+            'report' => 'smartyCustomPdf',
+            'bucket' => self::CUSTOM,
+        ),
+        437 => array(
+            'report' => 'smartyOutdatedCustomization',
+            'bucket' => self::MANUAL,
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Smarty_Outdated_Customization/',
+        ),
+        438 => array(
+            'report' => 'smartyOutdatedCustomPdf',
+            'bucket' => self::CUSTOM,
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Smarty_Outdated_Custom_PDF/',
+        ),
+        439 => array(
+            'report' => 'smartyUnsupportedSyntax',
+            'bucket' => self::CUSTOM,
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Smarty_Unsupported_Syntax/',
+        ),
         524 => array(
             'report' => 'vardefHtmlFunctionNameCustom',
             'bucket' => self::MANUAL,
@@ -367,10 +346,6 @@ class HealthCheckScannerMeta
             'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Vardef_HTML_Function_Custom/',
             //@codingStandardsIgnoreEnd
         ),
-//        432 => array(
-//            'report' => 'badVardefsName',
-//            'bucket' => self::CUSTOM
-//        ),
         526 => array(
             'report' => 'badVardefsMultienum',
             'bucket' => self::MANUAL,
@@ -443,7 +418,13 @@ class HealthCheckScannerMeta
             'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Use_of_Removed_Record_View_InitButtons_APIs/',
             //@codingStandardsIgnoreEnd
         ),
-
+        586 => [
+            'report' => 'deprecatedFontAwesomeIcons',
+            'bucket' => self::CUSTOM,
+            //@codingStandardsIgnoreStart
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Deprecated_use_of_FontAwesome_detected/',
+            //@codingStandardsIgnoreEnd
+        ],
         // BUCKET F
         501 => array(
             'report' => 'missingFile',
@@ -500,25 +481,6 @@ class HealthCheckScannerMeta
             'report' => 'missingCustomFile',
             'bucket' => self::MANUAL,
         ),
-        531 => array(
-            'report' => 'deprecatedDbDriver',
-            'bucket' => self::VANILLA,
-            //@codingStandardsIgnoreStart
-            'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Deprecated_DB_Driver/',
-            //@codingStandardsIgnoreEnd
-        ),
-        532 => array(
-            'report' => 'stockPhp4ConstructorCall',
-            'bucket' => self::CUSTOM,
-            // @codingStandardsIgnoreLine
-            'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Core_PHP4_Parent_Constructor_Call'
-        ),
-        533 => array(
-            'report' => 'customPhp4ConstructorCall',
-            'bucket' => self::MANUAL,
-            // @codingStandardsIgnoreLine
-            'kb'     => 'http://support.sugarcrm.com/Knowledge_Base/Administration/Install/Troubleshooting_Health_Check_Output/Health_Check_Error_Unknown_PHP4_Parent_Constructor_Call'
-        ),
         534 => array(
             'report' => 'unsupportedDbDriver',
             'bucket' => self::MANUAL,
@@ -541,30 +503,6 @@ class HealthCheckScannerMeta
             //@codingStandardsIgnoreEnd
         ),
         //Moved foundEcho,foundPrint,foundDieExit,foundPrintR,foundVarDump to E bucket. Use this code for new reports
-//        509 => array(
-//            'report' => 'foundEcho',
-//            'bucket' => self::MANUAL,
-//        ),
-//        510 => array(
-//            'report' => 'foundPrint',
-//            'bucket' => self::MANUAL,
-//        ),
-//        511 => array(
-//            'report' => 'foundDieExit',
-//            'bucket' => self::MANUAL,
-//        ),
-//        512 => array(
-//            'report' => 'foundPrintR',
-//            'bucket' => self::MANUAL,
-//        ),
-//        513 => array(
-//            'report' => 'foundVarDump',
-//            'bucket' => self::MANUAL,
-//        ),
-//        514 => array(
-//            'report' => 'foundOutputBuffering',
-//            'bucket' => self::MANUAL,
-//        ),
         515 => array(
             'report' => 'scriptFailure',
             'bucket' => self::MANUAL,
@@ -632,10 +570,6 @@ class HealthCheckScannerMeta
             'kb' => 'http://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Use_Of_App_View_InvokeParent/',
             //@codingStandardsIgnoreEnd
         ),
-        585 => [
-            'report' => 'forbiddenStatement',
-            'bucket' => self::MANUAL,
-        ],
         // Bucket G
         901 => array(
             'report' => 'alreadyUpgraded',

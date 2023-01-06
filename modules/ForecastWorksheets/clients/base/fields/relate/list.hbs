@@ -15,9 +15,7 @@
         <span class="ellipsis_inline">
             <a href="{{href}}">{{value}}</a>
         </span>
-        <span class="focus-icon-container hide">
-            <span class="focus-icon"></span>
-        </span>
+        {{partial 'focus-icon' this this}}
     {{else}}
         {{value}}
     {{/if}}

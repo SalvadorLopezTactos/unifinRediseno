@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class OutlookUser extends Entity
 {
@@ -31,7 +29,7 @@ class OutlookUser extends Entity
      * Gets the masterCategories
     * A list of categories defined for the user.
      *
-     * @return array The masterCategories
+     * @return array|null The masterCategories
      */
     public function getMasterCategories()
     {
@@ -52,7 +50,7 @@ class OutlookUser extends Entity
     */
     public function setMasterCategories($val)
     {
-		$this->_propDict["masterCategories"] = $val;
+        $this->_propDict["masterCategories"] = $val;
         return $this;
     }
     

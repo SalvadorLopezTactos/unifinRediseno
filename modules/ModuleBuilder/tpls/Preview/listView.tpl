@@ -26,15 +26,15 @@
 {foreach from=$groups key='label' item='list'}
 
 <div style="float: left; border: 1px gray solid; padding:4px; margin-right:4px; margin-top: 8px; width:{$groupWidth}%;">
-<h3 >{$label}</h3>
+<h3>{$label|escape:'html':'UTF-8'}</h3>
 <ul>
 
 {foreach from=$list key='key' item='value'}
 
-<li name="width={$value.width}%" class='draggable' style='cursor:default;'>
+<li name="width={$value.width|escape:'html':'UTF-8'}%" class='draggable' style='cursor:default;'>
     <table width='100%'>
     	<tr>
-    		<td style="font-weight: bold;">{if !empty($value.label)}{sugar_translate label=$value.label module=$language}{else}{$key}{/if}</td>
+    		<td style="font-weight: bold;">{if !empty($value.label)}{sugar_translate label=$value.label module=$language}{else}{$key|escape:'html':'UTF-8'}{/if}</td>
     		<td>
                 {if isset($field_defs.$key.calculated) && $field_defs.$key.calculated}
                     {sugar_getimage name="SugarLogic/icon_calculated" alt=$mod_strings.LBL_CALCULATED ext=".png" other_attributes=''}
@@ -45,8 +45,8 @@
     		</td>
     	</tr>
     	<tr class='fieldValue' style='cursor:default;'>
-    		{if empty($hideKeys)}<td>[{$key}]</td>{/if}
-    		<td align="right" colspan="2"><span>{$value.width}</span><span>%</span></td>
+           {if empty($hideKeys)}<td>[{$key|escape:'html':'UTF-8'}]</td>{/if}
+           <td align="right" colspan="2"><span>{$value.width|escape:'html':'UTF-8'}</span><span>%</span></td>
     	</tr>
     </table>
 </li>

@@ -12,14 +12,16 @@
 --}}
 <div class="filter-box">
     {{#eq tabs.length 1}}
-        <h1>
+        <h1 class="pipeline-header">
             {{tabs.0.tabLabel}}
         </h1>
     {{else}}
         {{#each tabs}}
-            <button class="btn stageButton {{#eq ../value moduleField}}selected{{/eq}}" data-pipeline="{{moduleField}}" name="pipelineBtn">
-                {{tabLabel}}
-            </button>
+            <li class=="tab tab-badgeable {{#eq ../value moduleField}}active{{/eq}}">
+                <a class="tcenter pipeline-stage" data-pipeline="{{moduleField}}" name="pipelineBtn">
+                    <span class="tab-title font-semibold">{{tabLabel}}</span>
+                </a>
+            </li>
         {{/each}}
     {{/eq}}
 </div>

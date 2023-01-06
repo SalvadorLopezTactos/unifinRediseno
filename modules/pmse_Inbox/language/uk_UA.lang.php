@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Інформаційна панель записів процесів',
 
     'LBL_CAS_ID' => 'Процес (Id)',
+    'LBL_CAS_STATUS' => 'Статус обробки',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Невідомий (згідно UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "завдання було",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "задача була",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "було призначено процес #%s %s запису %s за допомогою дії %s %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "на",
     'LBL_PMSE_HISTORY_LOG_AND'  => "і",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'зв’язаний або незв’язаний запис для',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Затвердити',
     'LBL_PMSE_LABEL_REJECT' => 'Відхилити',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Процеси в ході виконання',
     'LBL_STATUS_CANCELLED' => 'Процеси скасовано',
     'LBL_STATUS_ERROR' => 'Помилка',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Завершено',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Припинено',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Виконується',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Скасовано',
+    'LBL_STATUS_ERROR_ENUM' => 'Помилка',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Список процесів',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Автоматичні процеси',

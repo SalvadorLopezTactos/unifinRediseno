@@ -65,14 +65,14 @@
         if (this.searchButtonIcon === searchButtonIcon) {
             return;
         }
-        var iconEl = this.$('[data-action=search_icon] .fa').first();
+        var iconEl = this.$('[data-action=search_icon] .sicon').first();
         this.searchButtonIcon = searchButtonIcon;
         if (searchButtonIcon) {
-            iconEl.removeClass('fa-times');
-            iconEl.addClass('fa-search');
+            iconEl.removeClass('sicon-close');
+            iconEl.addClass('sicon-search');
         } else {
-            iconEl.removeClass('fa-search');
-            iconEl.addClass('fa-times');
+            iconEl.removeClass('sicon-search');
+            iconEl.addClass('sicon-close');
         }
     },
 

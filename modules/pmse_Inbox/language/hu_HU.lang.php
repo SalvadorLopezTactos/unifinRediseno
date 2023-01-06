@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Folyamatok bejegyzés műszerfal',
 
     'LBL_CAS_ID' => 'Folyamat száma',
+    'LBL_CAS_STATUS' => 'Folyamat állapota',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Ismeretlen (a felhasználói azonosító:&#39;%s&#39; szerint)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "feladattal ez történt:",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "feladat...",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "hozzárendelték a(z) #%s folyamathoz: %s a(z) %s rekord a(z) %s művelet %s által",
     'LBL_PMSE_HISTORY_LOG_ON'  => "ekkor",
     'LBL_PMSE_HISTORY_LOG_AND'  => "és",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'jelentés hozzákapcsolva a következőhöz/leválasztva a következőről:',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Jóváhagyás',
     'LBL_PMSE_LABEL_REJECT' => 'Elutasítás',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Folyamatok Folyamatban',
     'LBL_STATUS_CANCELLED' => 'Folyamatok Törölve',
     'LBL_STATUS_ERROR' => 'Folyamatok Hiba',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Befejezett',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Megszűntetett',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Folyamatban',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Törölve',
+    'LBL_STATUS_ERROR_ENUM' => 'Hiba',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Folyamatmenedzsment',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Nem felügyelt folyamatok',

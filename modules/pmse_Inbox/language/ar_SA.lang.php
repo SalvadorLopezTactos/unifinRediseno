@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'لوحة معلومات سجل العمليات',
 
     'LBL_CAS_ID' => 'رقم العملية',
+    'LBL_CAS_STATUS' => 'حالة العملية',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "غير معروف (وفقًا لمعرف المستخدم: \"%s\")",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "المهمة",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "المهمة كانت",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "تم تعيين رقم العملية %s%s له السجل %s بواسطة %s الإجراء %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "على",
     'LBL_PMSE_HISTORY_LOG_AND'  => "و",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'ربط أو إلغاء ارتباط سجل بـ',
 
     'LBL_PMSE_LABEL_APPROVE' => 'موافقة',
     'LBL_PMSE_LABEL_REJECT' => 'رفض',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'العمليات قيد التشغيل',
     'LBL_STATUS_CANCELLED' => 'العمليات التي تم إلغاؤها',
     'LBL_STATUS_ERROR' => 'خطأ في العمليات',
+    'LBL_STATUS_COMPLETED_ENUM' => 'مكتملة',
+    'LBL_STATUS_TERMINATED_ENUM' => 'منتهية',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'قيد التقدم',
+    'LBL_STATUS_CANCELLED_ENUM' => 'ملغاة',
+    'LBL_STATUS_ERROR_ENUM' => 'خطأ',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'إدارة العمليات',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'عمليات غير مراقبة',

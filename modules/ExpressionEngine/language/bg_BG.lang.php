@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Генератор на формули',
-  'LBL_MODULE_NAME_SINGULAR' => 'Генератор на формули',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Предишен' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Следващ' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Покажи повече' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Генератор на формули',
+    'LBL_MODULE_NAME_SINGULAR' => 'Генератор на формули',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Предишен' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Следващ' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Покажи повече' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Неизвестно поле',
+];

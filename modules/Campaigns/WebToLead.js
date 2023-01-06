@@ -196,4 +196,11 @@ function dragDropAllFields(Add_All_Fields, Remove_All_Fields){
       }
  }
 
-
+/**
+ * Handles editability of the redirect fields when the redirect URL is changed
+ */
+function redirectUrlChanged() {
+    let redirectUrl = document.getElementById('redirect_url').value;
+    document.getElementById('redirect_request_type').disabled = _.isEmpty(redirectUrl);
+    document.getElementById('redirect_include_params').disabled = _.isEmpty(redirectUrl);
+}

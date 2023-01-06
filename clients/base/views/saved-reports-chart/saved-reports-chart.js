@@ -64,7 +64,25 @@
         this.reportData = app.data.createBean();
         this.reportOptions = [];
         this._super('initialize', [options]);
+
+        this._registerEvents();
+    },
+
+    /**
+     * Register events
+     */
+    _registerEvents: function() {
         this.on('chart:complete', this.chartComplete, this);
+        this.on('chart:clicked', this.onClickHandler, this);
+
+        this.listenTo(this.layout, 'grid-panel:size:changed', this._updateChartSize, this);
+    },
+
+    /**
+     * Update chart size
+     */
+    _updateChartSize: function() {
+        this.trigger('chart-container:size:changed');
     },
 
     /**
@@ -325,6 +343,8 @@
         switch (config.chart_type) {
             case 'funnel chart':
             case 'pie chart':
+            case 'donut chart':
+            case 'treemap chart':
                 if (reportData.group_defs.length > 1) {
                     var seriesIndex = _.findIndex(chartData.values, function(value) {
                         return value.label === chartLabels.seriesLabel;
@@ -404,8 +424,11 @@
 
         switch (chartType) {
             case 'pie chart':
+            case 'donut chart':
+            case 'treemap chart':
+            case 'gauge chart':
                 chartConfig = {
-                    chartType: 'pie chart'
+                    chartType: chartType,
                 };
                 break;
 
@@ -419,12 +442,6 @@
             case 'funnel chart 3D':
                 chartConfig = {
                     chartType: 'funnel chart'
-                };
-                break;
-
-            case 'gauge chart':
-                chartConfig = {
-                    chartType: 'gauge chart'
                 };
                 break;
 
@@ -504,6 +521,7 @@
      * @param {Object} reportData report data with properties and data array
      */
     chartComplete: function(chart, params, reportData, chartData) {
+        app.logger.warn('chartComplete has been deprecated. Chart click event is now handled by onClickHander');
         if (!_.isFunction(chart.seriesClick) || !params.allow_drillthru) {
             return;
         }
@@ -549,6 +567,75 @@
     },
 
     /**
+     * Click handler to open drilldown drawer
+     * @param event
+     * @param activeElements
+     * @param chart
+     * @param {BaseChart} wrapper
+     * @param reportDef
+     */
+    onClickHandler: function(event, activeElements, chart, wrapper, reportDef) {
+        let groupIndex;
+        let groupLabel;
+        let seriesIndex;
+        let seriesLabel;
+        let element;
+
+        let params = Object.assign({}, wrapper.params);
+
+        // funnel chart uses chartjs v2 which has a different signature
+        if (wrapper.chartType == 'funnel') {
+            if (_.isEmpty(activeElements)) {
+                return;
+            }
+            let internalChart = activeElements[0]._chart;
+            let elementClicked = internalChart.getElementAtEvent(event);
+            groupIndex = elementClicked[0]._index;
+            groupLabel = internalChart.data.labels[groupIndex];
+            seriesIndex = elementClicked[0]._datasetIndex;
+            seriesLabel = internalChart.data.datasets[seriesIndex].label;
+            params.seriesLabel = seriesLabel;
+            params.seriesIndex = seriesIndex;
+            params.groupLabel = groupLabel;
+            params.groupIndex = groupIndex;
+
+            let chartLabels = {
+                groupLabel: groupLabel,
+                seriesLabel: seriesLabel
+            };
+            this.context.set('chartLabels', chartLabels);
+            this._handleFilter(internalChart, params, null, reportDef, wrapper.rawData);
+        } else {
+            element = chart.getElementsAtEventForMode(event, 'nearest', {intersect: true}, false);
+            if (_.isEmpty(element)) {
+                return;
+            }
+            groupIndex = element[0].index;
+            groupLabel = chart.data.labels[groupIndex];
+            seriesIndex = element[0].datasetIndex;
+            seriesLabel = chart.data.datasets[seriesIndex].label;
+
+            if (params.chart_type === 'line chart') {
+                params.groupLabel = seriesLabel;
+                params.groupIndex = seriesIndex;
+                params.seriesLabel = groupLabel;
+                params.seriesIndex = groupIndex;
+            } else {
+                params.seriesLabel = seriesLabel;
+                params.seriesIndex = seriesIndex;
+                params.groupLabel = groupLabel;
+                params.groupIndex = groupIndex;
+            }
+            let chartLabels = {
+                groupLabel: groupLabel,
+                seriesLabel: seriesLabel
+            };
+            this.context.set('chartLabels', chartLabels);
+            this._handleFilter(chart, params, null, reportDef, wrapper.rawData);
+        }
+    },
+
+    /**
      * Handle either navigating to target module or update list view filter.
      *
      * @param {Function} chart sucrose chart instance
@@ -587,10 +674,9 @@
                 reportData: reportData,
                 reportId: reportId,
                 skipFetch: true,
-                useSavedFilters: true
+                useSavedFilters: false
             };
 
-            chart.clearActive();
             this.openDrawer(drawerContext);
         } else {
             this.updateList(params, state);
@@ -630,6 +716,10 @@
         drawer.context.set('dashConfig', params);
         drawer.context.set('chartState', state);
         drawer.updateList();
+
+        if (this.chartField && this.chartField.chart) {
+            this.chartField.chart.updateParams(params);
+        }
     },
 
     /**
@@ -778,24 +868,33 @@
      */
     _toggleChartFields: function() {
         if (this.meta.config) {
+            let xOptionsFieldset = this.getField('x_label_options');
+            let tickDisplayMethods = this.getField('tickDisplayMethods');
+            let yOptionsFieldset = this.getField('y_label_options');
+            let showValuesField = this.getField('showValues');
+            let showLegendField = this.getField('show_legend');
+            let groupDisplayOptions = this.getField('groupDisplayOptions');
+            let stackedField = this.getField('stacked');
 
-            var xOptionsFieldset = this.getField('x_label_options'),
-                tickDisplayMethods = this.getField('tickDisplayMethods'),
-                yOptionsFieldset = this.getField('y_label_options'),
-                showValuesField = this.getField('showValues'),
-                groupDisplayOptions = this.getField('groupDisplayOptions'),
-                stackedField = this.getField('stacked'),
-                showDimensionOptions = false,
-                showBarOptions = false,
-                showTickOptions = false,
-                showStacked = false,
-                xOptionsLabel = app.lang.get('LBL_CHART_CONFIG_SHOW_XAXIS_LABEL'),
-                yOptionsLabel = app.lang.get('LBL_CHART_CONFIG_SHOW_YAXIS_LABEL');
+            let showDimensionOptions = false;
+            let showBarOptions = false;
+            let showTickOptions = false;
+            let showStacked = false;
+            let showLegend = true;
+            let xOptionsLabel = app.lang.get('LBL_CHART_CONFIG_SHOW_XAXIS_LABEL');
+            let yOptionsLabel = app.lang.get('LBL_CHART_CONFIG_SHOW_YAXIS_LABEL');
 
             switch (this.settings.get('chart_type')) {
                 case 'pie chart':
+                case 'donut chart':
                 case 'gauge chart':
                 case 'funnel chart 3D':
+                    showDimensionOptions = false;
+                    showBarOptions = false;
+                    break;
+
+                case 'treemap chart':
+                    showLegend = false;
                     showDimensionOptions = false;
                     showBarOptions = false;
                     break;
@@ -874,6 +973,9 @@
                 }
             }
 
+            if (showLegendField) {
+                showLegendField.$el.closest('.record-cell').toggleClass('hide', !showLegend);
+            }
         }
     },
 
@@ -921,6 +1023,7 @@
         // hang on to a reference to the chart field
         if (_.isUndefined(this.chartField) && field.name === 'chart') {
             this.chartField = field;
+            this.chartField.$('[data-content="chart"]').removeClass('overflow-hidden');
         }
     }
 })

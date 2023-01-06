@@ -23,7 +23,7 @@ if (isset($_REQUEST['send_all']) && $_REQUEST['send_all']== true) {
 else  {
 	$send_all=false; //if set to true email delivery will continue..to run until all email have been delivered.
 }
-$GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
+$GLOBALS['log'] = LoggerManager::getLogger();
 
 $mailer = null;
 

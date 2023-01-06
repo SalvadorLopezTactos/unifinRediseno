@@ -56,14 +56,15 @@ class TabController
 	/**
 	 * Return the list of enabled tabs
 	 * @param bool|true $filter when true, the tabs are filtered by the current user's ACLs
+     * @param bool $requireInModuleList flag to indicate if "in modulelist" is required
 	 *
 	 * @return array
 	 */
-    public function get_system_tabs($filter = true)
+    public function get_system_tabs(bool $filter = true, bool $requireInModuleList = true) : array
     {
         global $moduleList;
 
-        $system_tabs_result = null;
+        $system_tabs_result = [];
 
         $administration = Administration::getSettings('MySettings', true);
         if (isset($administration->settings) && isset($administration->settings['MySettings_tab'])) {
@@ -74,10 +75,13 @@ class TabController
                 // TODO: decode JSON rather than base64
                 $tabs = base64_decode($tabs);
                 $tabs = unserialize($tabs, ['allowed_classes' => false]);
-                //Ensure modules saved in the prefences exist.
-                foreach ($tabs as $id => $tab) {
-					if (!in_array($tab, $moduleList))
-                        unset($tabs[$id]);
+                if ($requireInModuleList && !empty($tabs) && is_array($tabs)) {
+                    //Ensure modules saved in the prefences exist.
+                    foreach ($tabs as $id => $tab) {
+                        if (!in_array($tab, $moduleList)) {
+                            unset($tabs[$id]);
+                        }
+                    }
                 }
                 if ($filter) {
                     $tabs = SugarACL::filterModuleList($tabs, 'access', true);
@@ -158,11 +162,31 @@ class TabController
      */
     public function set_system_tabs($tabs)
     {
+        // only allowed accessed modules can be modified from allow to hide
+        $sysTabs = array_merge($tabs, $this->getNonAccessibleEnabledTabs());
+
         $administration = $this->getAdministration();
         // TODO: encode in JSON rather than base64
-        $serialized = base64_encode(serialize($tabs));
+        $serialized = base64_encode(serialize($sysTabs));
         $administration->saveSetting('MySettings', 'tab', $serialized);
         self::$isCacheValid = false;
+    }
+
+    /**
+     * get list of non-accessible but enabled tabs
+     * @return array
+     */
+    public function getNonAccessibleEnabledTabs() : array
+    {
+        $nonAccessibleTabs = [];
+        // get all current tabs, ignoring module list check
+        $currentSysTabs = $this->get_system_tabs(false, false);
+        foreach ($currentSysTabs as $module) {
+            if (!SugarACL::checkAccess($module, 'access')) {
+                $nonAccessibleTabs[] = $module;
+            }
+        }
+        return $nonAccessibleTabs;
     }
 
     /**
@@ -269,43 +293,15 @@ class TabController
         $system_tabs = $this->get_system_tabs();
 
         // remove access to tabs that roles do not give them permission to
-
         foreach ($system_tabs as $key => $value) {
             if (!isset($display_tabs[$key])) {
                 $display_tabs[$key] = $value;
             }
         }
 
-        ////////////////////////////////////////////////////////////////////
-        // Jenny - Bug 6286: If someone has "old school roles" defined (before 4.0) and upgrades,
-        // then they can't remove those old roles through the UI. Also, when new tabs are added,
-        // users who had any of those "old school roles" defined have no way of being able to see
-        // those roles. We need to disable role checking.
-
-        //$roleCheck = query_user_has_roles($user->id);
-        $roleCheck = 0;
-        ////////////////////////////////////////////////////////////////////
-        if ($roleCheck) {
-            //grabs modules a user has access to via roles
-            $role_tabs = get_user_allowed_modules($user->id);
-
-            // adds modules to display_tabs if existant in roles
-            foreach ($role_tabs as $key => $value) {
-                if (!isset($display_tabs[$key])) {
-                    $display_tabs[$key] = $value;
-                }
-            }
-        }
-
         // removes tabs from display_tabs if not existant in roles
         // or exist in the hidden tabs
         foreach ($display_tabs as $key => $value) {
-            if ($roleCheck) {
-                if (!isset($role_tabs[$key])) {
-                    unset($display_tabs[$key]);
-                }
-            }
-
             if (!isset($system_tabs[$key])) {
                 unset($display_tabs[$key]);
             }
@@ -316,12 +312,6 @@ class TabController
 
         // removes tabs from hide_tabs if not existant in roles
         foreach ($hide_tabs as $key => $value) {
-            if ($roleCheck) {
-                if (!isset($role_tabs[$key])) {
-                    unset($hide_tabs[$key]);
-                }
-            }
-
             if (!isset($system_tabs[$key])) {
                 unset($hide_tabs[$key]);
             }
@@ -338,7 +328,7 @@ class TabController
         }
         $display_tabs = array_intersect($display_tabs, $GLOBALS['moduleList']);
 
-        return array($display_tabs, $hide_tabs, $remove_tabs);
+        return [$display_tabs, $hide_tabs, $remove_tabs];
     }
 
     public function restore_tabs($user)

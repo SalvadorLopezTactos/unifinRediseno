@@ -33,6 +33,11 @@ class UsersController extends SugarController
         $this->view = 'oauth2authenticate';
     }
 
+    protected function action_impersonation()
+    {
+        $this->view = 'impersonation';
+    }
+
 	protected function action_authenticate()
 	{
 	    $this->view = 'authenticate';
@@ -143,12 +148,6 @@ class UsersController extends SugarController
 	    $_REQUEST['return_action'] = 'index';
 		require('modules/Users/Save.php');
 	}
-
-    protected function action_saveftsmodules()
-    {
-        $this->view = 'fts';
-        $GLOBALS['current_user']->setPreference('fts_disabled_modules', $_REQUEST['disabled_modules']);
-    }
 
     /**
      * action "save" (with a lower case S that is for OSX users ;-)

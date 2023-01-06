@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Наприклад, можна застосовувати це для того, щоб знайти помилку, про яку раніше звітували.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Якщо ви знайшли нову помилку, про яку ви хочете звітувати, можете натиснути тут, щоб звітувати про нову помилку.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Натиснувши тут ви повернетесь до цього режиму перегляду в будь-який час.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаємодія зі зверненням',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала звернення',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Примітки',
 

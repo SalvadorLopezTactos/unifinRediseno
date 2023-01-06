@@ -33,7 +33,7 @@ $viewdefs['base']['layout']['activities'] = array(
                                         'availableToggles' => array(
                                             array(
                                                 'name' => 'activitystream',
-                                                'icon' => 'fa-clock-o',
+                                                'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
                                             ),
                                         ),

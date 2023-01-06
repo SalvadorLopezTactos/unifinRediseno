@@ -16,7 +16,7 @@ $viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'label' => 'LNK_NEW_CASE',
     'visible' => true,
     'order' => 2,
-    'icon' => 'fa-plus',
+    'icon' => 'sicon-plus',
     'related' => [
         [
             'module' => 'Contacts',

@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class GroupSetting extends Entity
 {
@@ -30,7 +28,7 @@ class GroupSetting extends Entity
     * Gets the displayName
     * Display name of this group of settings, which comes from the associated template.
     *
-    * @return string The displayName
+    * @return string|null The displayName
     */
     public function getDisplayName()
     {
@@ -59,7 +57,7 @@ class GroupSetting extends Entity
     * Gets the templateId
     * Unique identifier for the template used to create this group of settings. Read-only.
     *
-    * @return string The templateId
+    * @return string|null The templateId
     */
     public function getTemplateId()
     {
@@ -89,7 +87,7 @@ class GroupSetting extends Entity
      * Gets the values
     * Collection of name value pairs. Must contain and set all the settings defined in the template.
      *
-     * @return array The values
+     * @return array|null The values
      */
     public function getValues()
     {
@@ -110,7 +108,7 @@ class GroupSetting extends Entity
     */
     public function setValues($val)
     {
-		$this->_propDict["values"] = $val;
+        $this->_propDict["values"] = $val;
         return $this;
     }
     

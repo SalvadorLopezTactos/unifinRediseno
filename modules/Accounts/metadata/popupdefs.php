@@ -22,12 +22,6 @@ $popupMeta = array(
 		'phone_office' => 'accounts.phone_office'
 	),
 	'searchInputs' => array('name', 'billing_address_city', 'phone_office'),
-	'create' => array(
-		'formBase' => 'AccountFormBase.php',
-		'formBaseClass' => 'AccountFormBase',
-		'getFormBodyParams' => array('','','AccountSave'),
-		'createButton' => 'LNK_NEW_ACCOUNT'
-	),
 	'listviewdefs' => array(
 		'NAME' => array(
 			'width' => '40', 

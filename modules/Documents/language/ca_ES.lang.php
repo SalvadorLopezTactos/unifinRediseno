@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Línia d&#39;impostos articles',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Compres',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Elements de línia comprats',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Quadre de comandament de registre de documents',
+    'LBL_MY_DOCUMENTS' => 'Els meus documents',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Envia-ho a DocuSign',
 );

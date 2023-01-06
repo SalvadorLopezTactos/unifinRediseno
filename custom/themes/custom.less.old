@@ -1,0 +1,124 @@
+.dashletPanel.dc {
+  margin-left: 0%;
+  margin-right: 0%;
+}
+
+/* Login */
+.thumbnail.signup, .thumbnail.login
+{
+  border-radius: 20px;
+  background: #ffffff;
+}
+.welcome .control-group input[type="password"], .welcome .control-group input[type="text"]
+{
+  border-radius: 10px;
+  border: 2px solid #818181;
+}
+.thumbnail.signup .brand img, .thumbnail.login .brand img
+{
+  max-width: 60%;
+  padding-bottom: 10px;
+}
+
+/**Encabezado Name **/
+.headerpane {
+  background: #021741;
+  color: #ffffffeb;
+  border-bottom: 1px solid #014e8c;
+}
+.headerpane h1
+{
+  color: #fdfdfd;
+}
+.list-headerpane > .count a
+{
+  color: #fff620;
+}
+.headerpane .btn.btn-link
+{
+  color: #ffffff;
+}
+.headerpane .btn.btn-link:hover
+{
+  color: #b63230;
+}
+
+.fa-favorite, .btn>.fa-favorite, .btn.active>.fa-favorite
+{
+  color: #fff !important;
+}
+
+.headerpane span[data-type="favorite"] .btn.active .fa
+{
+  color: #f7ff47 !important;
+}
+
+.headerpane .btn-toolbar .btn-group-previous-next .btn .fa {
+  color: #fff620;
+}
+.headerpane .record-cell.edit .record-label
+{
+  color: #ffffff;
+}
+.headerpane h1>.record-cell.edit .select2
+{
+  background: #ffffff;
+}
+
+/** Paneles en Pestaña **/
+.content-tabs .nav.nav-tabs {
+  background-color: #1e588e;
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+  color: #ffffffeb;
+  background-color: #848483;
+}
+
+.nav-tabs > li > a {
+  color: #fff;
+}
+.content-tabs .nav.nav-tabs .tab.active {
+  border: 1px solid #353534;
+  border-bottom: 1px solid #353534;
+  background: #848483;
+}
+
+/** Paneles Contraido **/
+.record-panel .record-panel-header{
+  background: #1e588e;
+  border: 2px solid #cdcdcc;
+  color: #ffffff;
+}
+.record-panel .record-panel-header.panel-inactive:hover
+{
+  /*background: #d9e3f7;*/
+  background-color: #ada9a9;
+
+}
+.record-panel .record-panel-header.panel-active
+{
+  background: #1e588e;
+  color: #ffffff;
+}
+.record-panel .record-panel-header .btn>.fa {
+  color: #ffffff;
+}
+.record-panel .record-panel-header{
+  text-transform: initial;
+}
+
+/**Subpaneles de Relacion */
+.subpanels-layout .subpanel.closed{
+  background-color: #ada9a9;
+}
+.subpanels-layout .subpanel.closed:hover{
+  background-color: rgba(142, 142, 142, 0.31);
+}
+.subpanels-layout .subpanel {
+  background-color: #ada9a9;
+}
+
+.subpanels-layout .subpanel li .fa, .nav li .fa {
+  color: #000000;
+}

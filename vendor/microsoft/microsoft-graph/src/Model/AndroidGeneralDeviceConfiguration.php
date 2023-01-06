@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
 {
@@ -30,7 +28,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the appsBlockClipboardSharing
     * Indicates whether or not to block clipboard sharing to copy and paste between applications.
     *
-    * @return bool The appsBlockClipboardSharing
+    * @return bool|null The appsBlockClipboardSharing
     */
     public function getAppsBlockClipboardSharing()
     {
@@ -59,7 +57,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the appsBlockCopyPaste
     * Indicates whether or not to block copy and paste within applications.
     *
-    * @return bool The appsBlockCopyPaste
+    * @return bool|null The appsBlockCopyPaste
     */
     public function getAppsBlockCopyPaste()
     {
@@ -88,7 +86,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the appsBlockYouTube
     * Indicates whether or not to block the YouTube app.
     *
-    * @return bool The appsBlockYouTube
+    * @return bool|null The appsBlockYouTube
     */
     public function getAppsBlockYouTube()
     {
@@ -113,11 +111,101 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
         return $this;
     }
     
+
+     /** 
+     * Gets the appsHideList
+    * List of apps to be hidden on the KNOX device. This collection can contain a maximum of 500 elements.
+     *
+     * @return array|null The appsHideList
+     */
+    public function getAppsHideList()
+    {
+        if (array_key_exists("appsHideList", $this->_propDict)) {
+           return $this->_propDict["appsHideList"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the appsHideList
+    * List of apps to be hidden on the KNOX device. This collection can contain a maximum of 500 elements.
+    *
+    * @param AppListItem $val The appsHideList
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setAppsHideList($val)
+    {
+        $this->_propDict["appsHideList"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the appsInstallAllowList
+    * List of apps which can be installed on the KNOX device. This collection can contain a maximum of 500 elements.
+     *
+     * @return array|null The appsInstallAllowList
+     */
+    public function getAppsInstallAllowList()
+    {
+        if (array_key_exists("appsInstallAllowList", $this->_propDict)) {
+           return $this->_propDict["appsInstallAllowList"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the appsInstallAllowList
+    * List of apps which can be installed on the KNOX device. This collection can contain a maximum of 500 elements.
+    *
+    * @param AppListItem $val The appsInstallAllowList
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setAppsInstallAllowList($val)
+    {
+        $this->_propDict["appsInstallAllowList"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the appsLaunchBlockList
+    * List of apps which are blocked from being launched on the KNOX device. This collection can contain a maximum of 500 elements.
+     *
+     * @return array|null The appsLaunchBlockList
+     */
+    public function getAppsLaunchBlockList()
+    {
+        if (array_key_exists("appsLaunchBlockList", $this->_propDict)) {
+           return $this->_propDict["appsLaunchBlockList"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the appsLaunchBlockList
+    * List of apps which are blocked from being launched on the KNOX device. This collection can contain a maximum of 500 elements.
+    *
+    * @param AppListItem $val The appsLaunchBlockList
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setAppsLaunchBlockList($val)
+    {
+        $this->_propDict["appsLaunchBlockList"] = $val;
+        return $this;
+    }
+    
     /**
     * Gets the bluetoothBlocked
     * Indicates whether or not to block Bluetooth.
     *
-    * @return bool The bluetoothBlocked
+    * @return bool|null The bluetoothBlocked
     */
     public function getBluetoothBlocked()
     {
@@ -146,7 +234,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the cameraBlocked
     * Indicates whether or not to block the use of the camera.
     *
-    * @return bool The cameraBlocked
+    * @return bool|null The cameraBlocked
     */
     public function getCameraBlocked()
     {
@@ -175,7 +263,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the cellularBlockDataRoaming
     * Indicates whether or not to block data roaming.
     *
-    * @return bool The cellularBlockDataRoaming
+    * @return bool|null The cellularBlockDataRoaming
     */
     public function getCellularBlockDataRoaming()
     {
@@ -204,7 +292,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the cellularBlockMessaging
     * Indicates whether or not to block SMS/MMS messaging.
     *
-    * @return bool The cellularBlockMessaging
+    * @return bool|null The cellularBlockMessaging
     */
     public function getCellularBlockMessaging()
     {
@@ -233,7 +321,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the cellularBlockVoiceRoaming
     * Indicates whether or not to block voice roaming.
     *
-    * @return bool The cellularBlockVoiceRoaming
+    * @return bool|null The cellularBlockVoiceRoaming
     */
     public function getCellularBlockVoiceRoaming()
     {
@@ -262,7 +350,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the cellularBlockWiFiTethering
     * Indicates whether or not to block syncing Wi-Fi tethering.
     *
-    * @return bool The cellularBlockWiFiTethering
+    * @return bool|null The cellularBlockWiFiTethering
     */
     public function getCellularBlockWiFiTethering()
     {
@@ -287,46 +375,16 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
         return $this;
     }
     
-
-     /** 
-     * Gets the compliantAppsList
-    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
-     *
-     * @return array The compliantAppsList
-     */
-    public function getCompliantAppsList()
-    {
-        if (array_key_exists("compliantAppsList", $this->_propDict)) {
-           return $this->_propDict["compliantAppsList"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the compliantAppsList
-    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
-    *
-    * @param AppListItem $val The compliantAppsList
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setCompliantAppsList($val)
-    {
-		$this->_propDict["compliantAppsList"] = $val;
-        return $this;
-    }
-    
     /**
     * Gets the compliantAppListType
     * Type of list that is in the CompliantAppsList. Possible values are: none, appsInListCompliant, appsNotInListCompliant.
     *
-    * @return AppListType The compliantAppListType
+    * @return AppListType|null The compliantAppListType
     */
     public function getCompliantAppListType()
     {
         if (array_key_exists("compliantAppListType", $this->_propDict)) {
-            if (is_a($this->_propDict["compliantAppListType"], "Microsoft\Graph\Model\AppListType")) {
+            if (is_a($this->_propDict["compliantAppListType"], "\Microsoft\Graph\Model\AppListType") || is_null($this->_propDict["compliantAppListType"])) {
                 return $this->_propDict["compliantAppListType"];
             } else {
                 $this->_propDict["compliantAppListType"] = new AppListType($this->_propDict["compliantAppListType"]);
@@ -350,11 +408,70 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
         return $this;
     }
     
+
+     /** 
+     * Gets the compliantAppsList
+    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
+     *
+     * @return array|null The compliantAppsList
+     */
+    public function getCompliantAppsList()
+    {
+        if (array_key_exists("compliantAppsList", $this->_propDict)) {
+           return $this->_propDict["compliantAppsList"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the compliantAppsList
+    * List of apps in the compliance (either allow list or block list, controlled by CompliantAppListType). This collection can contain a maximum of 10000 elements.
+    *
+    * @param AppListItem $val The compliantAppsList
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setCompliantAppsList($val)
+    {
+        $this->_propDict["compliantAppsList"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the deviceSharingAllowed
+    * Indicates whether or not to allow device sharing mode.
+    *
+    * @return bool|null The deviceSharingAllowed
+    */
+    public function getDeviceSharingAllowed()
+    {
+        if (array_key_exists("deviceSharingAllowed", $this->_propDict)) {
+            return $this->_propDict["deviceSharingAllowed"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the deviceSharingAllowed
+    * Indicates whether or not to allow device sharing mode.
+    *
+    * @param bool $val The deviceSharingAllowed
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setDeviceSharingAllowed($val)
+    {
+        $this->_propDict["deviceSharingAllowed"] = boolval($val);
+        return $this;
+    }
+    
     /**
     * Gets the diagnosticDataBlockSubmission
     * Indicates whether or not to block diagnostic data submission.
     *
-    * @return bool The diagnosticDataBlockSubmission
+    * @return bool|null The diagnosticDataBlockSubmission
     */
     public function getDiagnosticDataBlockSubmission()
     {
@@ -380,31 +497,31 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
-    * Gets the locationServicesBlocked
-    * Indicates whether or not to block location services.
+    * Gets the factoryResetBlocked
+    * Indicates whether or not to block user performing a factory reset.
     *
-    * @return bool The locationServicesBlocked
+    * @return bool|null The factoryResetBlocked
     */
-    public function getLocationServicesBlocked()
+    public function getFactoryResetBlocked()
     {
-        if (array_key_exists("locationServicesBlocked", $this->_propDict)) {
-            return $this->_propDict["locationServicesBlocked"];
+        if (array_key_exists("factoryResetBlocked", $this->_propDict)) {
+            return $this->_propDict["factoryResetBlocked"];
         } else {
             return null;
         }
     }
     
     /**
-    * Sets the locationServicesBlocked
-    * Indicates whether or not to block location services.
+    * Sets the factoryResetBlocked
+    * Indicates whether or not to block user performing a factory reset.
     *
-    * @param bool $val The locationServicesBlocked
+    * @param bool $val The factoryResetBlocked
     *
     * @return AndroidGeneralDeviceConfiguration
     */
-    public function setLocationServicesBlocked($val)
+    public function setFactoryResetBlocked($val)
     {
-        $this->_propDict["locationServicesBlocked"] = boolval($val);
+        $this->_propDict["factoryResetBlocked"] = boolval($val);
         return $this;
     }
     
@@ -412,7 +529,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the googleAccountBlockAutoSync
     * Indicates whether or not to block Google account auto sync.
     *
-    * @return bool The googleAccountBlockAutoSync
+    * @return bool|null The googleAccountBlockAutoSync
     */
     public function getGoogleAccountBlockAutoSync()
     {
@@ -441,7 +558,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the googlePlayStoreBlocked
     * Indicates whether or not to block the Google Play store.
     *
-    * @return bool The googlePlayStoreBlocked
+    * @return bool|null The googlePlayStoreBlocked
     */
     public function getGooglePlayStoreBlocked()
     {
@@ -466,11 +583,41 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
         return $this;
     }
     
+
+     /** 
+     * Gets the kioskModeApps
+    * A list of apps that will be allowed to run when the device is in Kiosk Mode. This collection can contain a maximum of 500 elements.
+     *
+     * @return array|null The kioskModeApps
+     */
+    public function getKioskModeApps()
+    {
+        if (array_key_exists("kioskModeApps", $this->_propDict)) {
+           return $this->_propDict["kioskModeApps"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the kioskModeApps
+    * A list of apps that will be allowed to run when the device is in Kiosk Mode. This collection can contain a maximum of 500 elements.
+    *
+    * @param AppListItem $val The kioskModeApps
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setKioskModeApps($val)
+    {
+        $this->_propDict["kioskModeApps"] = $val;
+        return $this;
+    }
+    
     /**
     * Gets the kioskModeBlockSleepButton
     * Indicates whether or not to block the screen sleep button while in Kiosk Mode.
     *
-    * @return bool The kioskModeBlockSleepButton
+    * @return bool|null The kioskModeBlockSleepButton
     */
     public function getKioskModeBlockSleepButton()
     {
@@ -499,7 +646,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the kioskModeBlockVolumeButtons
     * Indicates whether or not to block the volume buttons while in Kiosk Mode.
     *
-    * @return bool The kioskModeBlockVolumeButtons
+    * @return bool|null The kioskModeBlockVolumeButtons
     */
     public function getKioskModeBlockVolumeButtons()
     {
@@ -524,33 +671,32 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
         return $this;
     }
     
-
-     /** 
-     * Gets the kioskModeApps
-    * A list of apps that will be allowed to run when the device is in Kiosk Mode. This collection can contain a maximum of 500 elements.
-     *
-     * @return array The kioskModeApps
-     */
-    public function getKioskModeApps()
+    /**
+    * Gets the locationServicesBlocked
+    * Indicates whether or not to block location services.
+    *
+    * @return bool|null The locationServicesBlocked
+    */
+    public function getLocationServicesBlocked()
     {
-        if (array_key_exists("kioskModeApps", $this->_propDict)) {
-           return $this->_propDict["kioskModeApps"];
+        if (array_key_exists("locationServicesBlocked", $this->_propDict)) {
+            return $this->_propDict["locationServicesBlocked"];
         } else {
             return null;
         }
     }
     
-    /** 
-    * Sets the kioskModeApps
-    * A list of apps that will be allowed to run when the device is in Kiosk Mode. This collection can contain a maximum of 500 elements.
+    /**
+    * Sets the locationServicesBlocked
+    * Indicates whether or not to block location services.
     *
-    * @param AppListItem $val The kioskModeApps
+    * @param bool $val The locationServicesBlocked
     *
     * @return AndroidGeneralDeviceConfiguration
     */
-    public function setKioskModeApps($val)
+    public function setLocationServicesBlocked($val)
     {
-		$this->_propDict["kioskModeApps"] = $val;
+        $this->_propDict["locationServicesBlocked"] = boolval($val);
         return $this;
     }
     
@@ -558,7 +704,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the nfcBlocked
     * Indicates whether or not to block Near-Field Communication.
     *
-    * @return bool The nfcBlocked
+    * @return bool|null The nfcBlocked
     */
     public function getNfcBlocked()
     {
@@ -587,7 +733,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordBlockFingerprintUnlock
     * Indicates whether or not to block fingerprint unlock.
     *
-    * @return bool The passwordBlockFingerprintUnlock
+    * @return bool|null The passwordBlockFingerprintUnlock
     */
     public function getPasswordBlockFingerprintUnlock()
     {
@@ -616,7 +762,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordBlockTrustAgents
     * Indicates whether or not to block Smart Lock and other trust agents.
     *
-    * @return bool The passwordBlockTrustAgents
+    * @return bool|null The passwordBlockTrustAgents
     */
     public function getPasswordBlockTrustAgents()
     {
@@ -645,7 +791,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordExpirationDays
     * Number of days before the password expires. Valid values 1 to 365
     *
-    * @return int The passwordExpirationDays
+    * @return int|null The passwordExpirationDays
     */
     public function getPasswordExpirationDays()
     {
@@ -674,7 +820,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordMinimumLength
     * Minimum length of passwords. Valid values 4 to 16
     *
-    * @return int The passwordMinimumLength
+    * @return int|null The passwordMinimumLength
     */
     public function getPasswordMinimumLength()
     {
@@ -703,7 +849,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordMinutesOfInactivityBeforeScreenTimeout
     * Minutes of inactivity before the screen times out.
     *
-    * @return int The passwordMinutesOfInactivityBeforeScreenTimeout
+    * @return int|null The passwordMinutesOfInactivityBeforeScreenTimeout
     */
     public function getPasswordMinutesOfInactivityBeforeScreenTimeout()
     {
@@ -732,7 +878,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the passwordPreviousPasswordBlockCount
     * Number of previous passwords to block. Valid values 0 to 24
     *
-    * @return int The passwordPreviousPasswordBlockCount
+    * @return int|null The passwordPreviousPasswordBlockCount
     */
     public function getPasswordPreviousPasswordBlockCount()
     {
@@ -758,72 +904,10 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
-    * Gets the passwordSignInFailureCountBeforeFactoryReset
-    * Number of sign in failures allowed before factory reset. Valid values 1 to 16
-    *
-    * @return int The passwordSignInFailureCountBeforeFactoryReset
-    */
-    public function getPasswordSignInFailureCountBeforeFactoryReset()
-    {
-        if (array_key_exists("passwordSignInFailureCountBeforeFactoryReset", $this->_propDict)) {
-            return $this->_propDict["passwordSignInFailureCountBeforeFactoryReset"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the passwordSignInFailureCountBeforeFactoryReset
-    * Number of sign in failures allowed before factory reset. Valid values 1 to 16
-    *
-    * @param int $val The passwordSignInFailureCountBeforeFactoryReset
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setPasswordSignInFailureCountBeforeFactoryReset($val)
-    {
-        $this->_propDict["passwordSignInFailureCountBeforeFactoryReset"] = intval($val);
-        return $this;
-    }
-    
-    /**
-    * Gets the passwordRequiredType
-    * Type of password that is required. Possible values are: deviceDefault, alphabetic, alphanumeric, alphanumericWithSymbols, lowSecurityBiometric, numeric, numericComplex, any.
-    *
-    * @return AndroidRequiredPasswordType The passwordRequiredType
-    */
-    public function getPasswordRequiredType()
-    {
-        if (array_key_exists("passwordRequiredType", $this->_propDict)) {
-            if (is_a($this->_propDict["passwordRequiredType"], "Microsoft\Graph\Model\AndroidRequiredPasswordType")) {
-                return $this->_propDict["passwordRequiredType"];
-            } else {
-                $this->_propDict["passwordRequiredType"] = new AndroidRequiredPasswordType($this->_propDict["passwordRequiredType"]);
-                return $this->_propDict["passwordRequiredType"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the passwordRequiredType
-    * Type of password that is required. Possible values are: deviceDefault, alphabetic, alphanumeric, alphanumericWithSymbols, lowSecurityBiometric, numeric, numericComplex, any.
-    *
-    * @param AndroidRequiredPasswordType $val The passwordRequiredType
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setPasswordRequiredType($val)
-    {
-        $this->_propDict["passwordRequiredType"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the passwordRequired
     * Indicates whether or not to require a password.
     *
-    * @return bool The passwordRequired
+    * @return bool|null The passwordRequired
     */
     public function getPasswordRequired()
     {
@@ -849,10 +933,72 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
+    * Gets the passwordRequiredType
+    * Type of password that is required. Possible values are: deviceDefault, alphabetic, alphanumeric, alphanumericWithSymbols, lowSecurityBiometric, numeric, numericComplex, any.
+    *
+    * @return AndroidRequiredPasswordType|null The passwordRequiredType
+    */
+    public function getPasswordRequiredType()
+    {
+        if (array_key_exists("passwordRequiredType", $this->_propDict)) {
+            if (is_a($this->_propDict["passwordRequiredType"], "\Microsoft\Graph\Model\AndroidRequiredPasswordType") || is_null($this->_propDict["passwordRequiredType"])) {
+                return $this->_propDict["passwordRequiredType"];
+            } else {
+                $this->_propDict["passwordRequiredType"] = new AndroidRequiredPasswordType($this->_propDict["passwordRequiredType"]);
+                return $this->_propDict["passwordRequiredType"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the passwordRequiredType
+    * Type of password that is required. Possible values are: deviceDefault, alphabetic, alphanumeric, alphanumericWithSymbols, lowSecurityBiometric, numeric, numericComplex, any.
+    *
+    * @param AndroidRequiredPasswordType $val The passwordRequiredType
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setPasswordRequiredType($val)
+    {
+        $this->_propDict["passwordRequiredType"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the passwordSignInFailureCountBeforeFactoryReset
+    * Number of sign in failures allowed before factory reset. Valid values 1 to 16
+    *
+    * @return int|null The passwordSignInFailureCountBeforeFactoryReset
+    */
+    public function getPasswordSignInFailureCountBeforeFactoryReset()
+    {
+        if (array_key_exists("passwordSignInFailureCountBeforeFactoryReset", $this->_propDict)) {
+            return $this->_propDict["passwordSignInFailureCountBeforeFactoryReset"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the passwordSignInFailureCountBeforeFactoryReset
+    * Number of sign in failures allowed before factory reset. Valid values 1 to 16
+    *
+    * @param int $val The passwordSignInFailureCountBeforeFactoryReset
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setPasswordSignInFailureCountBeforeFactoryReset($val)
+    {
+        $this->_propDict["passwordSignInFailureCountBeforeFactoryReset"] = intval($val);
+        return $this;
+    }
+    
+    /**
     * Gets the powerOffBlocked
     * Indicates whether or not to block powering off the device.
     *
-    * @return bool The powerOffBlocked
+    * @return bool|null The powerOffBlocked
     */
     public function getPowerOffBlocked()
     {
@@ -878,39 +1024,10 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
-    * Gets the factoryResetBlocked
-    * Indicates whether or not to block user performing a factory reset.
-    *
-    * @return bool The factoryResetBlocked
-    */
-    public function getFactoryResetBlocked()
-    {
-        if (array_key_exists("factoryResetBlocked", $this->_propDict)) {
-            return $this->_propDict["factoryResetBlocked"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the factoryResetBlocked
-    * Indicates whether or not to block user performing a factory reset.
-    *
-    * @param bool $val The factoryResetBlocked
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setFactoryResetBlocked($val)
-    {
-        $this->_propDict["factoryResetBlocked"] = boolval($val);
-        return $this;
-    }
-    
-    /**
     * Gets the screenCaptureBlocked
     * Indicates whether or not to block screenshots.
     *
-    * @return bool The screenCaptureBlocked
+    * @return bool|null The screenCaptureBlocked
     */
     public function getScreenCaptureBlocked()
     {
@@ -936,31 +1053,31 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
-    * Gets the deviceSharingAllowed
-    * Indicates whether or not to allow device sharing mode.
+    * Gets the securityRequireVerifyApps
+    * Require the Android Verify apps feature is turned on.
     *
-    * @return bool The deviceSharingAllowed
+    * @return bool|null The securityRequireVerifyApps
     */
-    public function getDeviceSharingAllowed()
+    public function getSecurityRequireVerifyApps()
     {
-        if (array_key_exists("deviceSharingAllowed", $this->_propDict)) {
-            return $this->_propDict["deviceSharingAllowed"];
+        if (array_key_exists("securityRequireVerifyApps", $this->_propDict)) {
+            return $this->_propDict["securityRequireVerifyApps"];
         } else {
             return null;
         }
     }
     
     /**
-    * Sets the deviceSharingAllowed
-    * Indicates whether or not to allow device sharing mode.
+    * Sets the securityRequireVerifyApps
+    * Require the Android Verify apps feature is turned on.
     *
-    * @param bool $val The deviceSharingAllowed
+    * @param bool $val The securityRequireVerifyApps
     *
     * @return AndroidGeneralDeviceConfiguration
     */
-    public function setDeviceSharingAllowed($val)
+    public function setSecurityRequireVerifyApps($val)
     {
-        $this->_propDict["deviceSharingAllowed"] = boolval($val);
+        $this->_propDict["securityRequireVerifyApps"] = boolval($val);
         return $this;
     }
     
@@ -968,7 +1085,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the storageBlockGoogleBackup
     * Indicates whether or not to block Google Backup.
     *
-    * @return bool The storageBlockGoogleBackup
+    * @return bool|null The storageBlockGoogleBackup
     */
     public function getStorageBlockGoogleBackup()
     {
@@ -997,7 +1114,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the storageBlockRemovableStorage
     * Indicates whether or not to block removable storage usage.
     *
-    * @return bool The storageBlockRemovableStorage
+    * @return bool|null The storageBlockRemovableStorage
     */
     public function getStorageBlockRemovableStorage()
     {
@@ -1026,7 +1143,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the storageRequireDeviceEncryption
     * Indicates whether or not to require device encryption.
     *
-    * @return bool The storageRequireDeviceEncryption
+    * @return bool|null The storageRequireDeviceEncryption
     */
     public function getStorageRequireDeviceEncryption()
     {
@@ -1055,7 +1172,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the storageRequireRemovableStorageEncryption
     * Indicates whether or not to require removable storage encryption.
     *
-    * @return bool The storageRequireRemovableStorageEncryption
+    * @return bool|null The storageRequireRemovableStorageEncryption
     */
     public function getStorageRequireRemovableStorageEncryption()
     {
@@ -1084,7 +1201,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the voiceAssistantBlocked
     * Indicates whether or not to block the use of the Voice Assistant.
     *
-    * @return bool The voiceAssistantBlocked
+    * @return bool|null The voiceAssistantBlocked
     */
     public function getVoiceAssistantBlocked()
     {
@@ -1113,7 +1230,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the voiceDialingBlocked
     * Indicates whether or not to block voice dialing.
     *
-    * @return bool The voiceDialingBlocked
+    * @return bool|null The voiceDialingBlocked
     */
     public function getVoiceDialingBlocked()
     {
@@ -1139,39 +1256,10 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
-    * Gets the webBrowserBlockPopups
-    * Indicates whether or not to block popups within the web browser.
-    *
-    * @return bool The webBrowserBlockPopups
-    */
-    public function getWebBrowserBlockPopups()
-    {
-        if (array_key_exists("webBrowserBlockPopups", $this->_propDict)) {
-            return $this->_propDict["webBrowserBlockPopups"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the webBrowserBlockPopups
-    * Indicates whether or not to block popups within the web browser.
-    *
-    * @param bool $val The webBrowserBlockPopups
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setWebBrowserBlockPopups($val)
-    {
-        $this->_propDict["webBrowserBlockPopups"] = boolval($val);
-        return $this;
-    }
-    
-    /**
     * Gets the webBrowserBlockAutofill
     * Indicates whether or not to block the web browser's auto fill feature.
     *
-    * @return bool The webBrowserBlockAutofill
+    * @return bool|null The webBrowserBlockAutofill
     */
     public function getWebBrowserBlockAutofill()
     {
@@ -1197,39 +1285,10 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
-    * Gets the webBrowserBlockJavaScript
-    * Indicates whether or not to block JavaScript within the web browser.
-    *
-    * @return bool The webBrowserBlockJavaScript
-    */
-    public function getWebBrowserBlockJavaScript()
-    {
-        if (array_key_exists("webBrowserBlockJavaScript", $this->_propDict)) {
-            return $this->_propDict["webBrowserBlockJavaScript"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the webBrowserBlockJavaScript
-    * Indicates whether or not to block JavaScript within the web browser.
-    *
-    * @param bool $val The webBrowserBlockJavaScript
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setWebBrowserBlockJavaScript($val)
-    {
-        $this->_propDict["webBrowserBlockJavaScript"] = boolval($val);
-        return $this;
-    }
-    
-    /**
     * Gets the webBrowserBlocked
     * Indicates whether or not to block the web browser.
     *
-    * @return bool The webBrowserBlocked
+    * @return bool|null The webBrowserBlocked
     */
     public function getWebBrowserBlocked()
     {
@@ -1255,15 +1314,73 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     }
     
     /**
+    * Gets the webBrowserBlockJavaScript
+    * Indicates whether or not to block JavaScript within the web browser.
+    *
+    * @return bool|null The webBrowserBlockJavaScript
+    */
+    public function getWebBrowserBlockJavaScript()
+    {
+        if (array_key_exists("webBrowserBlockJavaScript", $this->_propDict)) {
+            return $this->_propDict["webBrowserBlockJavaScript"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the webBrowserBlockJavaScript
+    * Indicates whether or not to block JavaScript within the web browser.
+    *
+    * @param bool $val The webBrowserBlockJavaScript
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setWebBrowserBlockJavaScript($val)
+    {
+        $this->_propDict["webBrowserBlockJavaScript"] = boolval($val);
+        return $this;
+    }
+    
+    /**
+    * Gets the webBrowserBlockPopups
+    * Indicates whether or not to block popups within the web browser.
+    *
+    * @return bool|null The webBrowserBlockPopups
+    */
+    public function getWebBrowserBlockPopups()
+    {
+        if (array_key_exists("webBrowserBlockPopups", $this->_propDict)) {
+            return $this->_propDict["webBrowserBlockPopups"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the webBrowserBlockPopups
+    * Indicates whether or not to block popups within the web browser.
+    *
+    * @param bool $val The webBrowserBlockPopups
+    *
+    * @return AndroidGeneralDeviceConfiguration
+    */
+    public function setWebBrowserBlockPopups($val)
+    {
+        $this->_propDict["webBrowserBlockPopups"] = boolval($val);
+        return $this;
+    }
+    
+    /**
     * Gets the webBrowserCookieSettings
     * Cookie settings within the web browser. Possible values are: browserDefault, blockAlways, allowCurrentWebSite, allowFromWebsitesVisited, allowAlways.
     *
-    * @return WebBrowserCookieSettings The webBrowserCookieSettings
+    * @return WebBrowserCookieSettings|null The webBrowserCookieSettings
     */
     public function getWebBrowserCookieSettings()
     {
         if (array_key_exists("webBrowserCookieSettings", $this->_propDict)) {
-            if (is_a($this->_propDict["webBrowserCookieSettings"], "Microsoft\Graph\Model\WebBrowserCookieSettings")) {
+            if (is_a($this->_propDict["webBrowserCookieSettings"], "\Microsoft\Graph\Model\WebBrowserCookieSettings") || is_null($this->_propDict["webBrowserCookieSettings"])) {
                 return $this->_propDict["webBrowserCookieSettings"];
             } else {
                 $this->_propDict["webBrowserCookieSettings"] = new WebBrowserCookieSettings($this->_propDict["webBrowserCookieSettings"]);
@@ -1291,7 +1408,7 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     * Gets the wiFiBlocked
     * Indicates whether or not to block syncing Wi-Fi.
     *
-    * @return bool The wiFiBlocked
+    * @return bool|null The wiFiBlocked
     */
     public function getWiFiBlocked()
     {
@@ -1313,125 +1430,6 @@ class AndroidGeneralDeviceConfiguration extends DeviceConfiguration
     public function setWiFiBlocked($val)
     {
         $this->_propDict["wiFiBlocked"] = boolval($val);
-        return $this;
-    }
-    
-
-     /** 
-     * Gets the appsInstallAllowList
-    * List of apps which can be installed on the KNOX device. This collection can contain a maximum of 500 elements.
-     *
-     * @return array The appsInstallAllowList
-     */
-    public function getAppsInstallAllowList()
-    {
-        if (array_key_exists("appsInstallAllowList", $this->_propDict)) {
-           return $this->_propDict["appsInstallAllowList"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the appsInstallAllowList
-    * List of apps which can be installed on the KNOX device. This collection can contain a maximum of 500 elements.
-    *
-    * @param AppListItem $val The appsInstallAllowList
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setAppsInstallAllowList($val)
-    {
-		$this->_propDict["appsInstallAllowList"] = $val;
-        return $this;
-    }
-    
-
-     /** 
-     * Gets the appsLaunchBlockList
-    * List of apps which are blocked from being launched on the KNOX device. This collection can contain a maximum of 500 elements.
-     *
-     * @return array The appsLaunchBlockList
-     */
-    public function getAppsLaunchBlockList()
-    {
-        if (array_key_exists("appsLaunchBlockList", $this->_propDict)) {
-           return $this->_propDict["appsLaunchBlockList"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the appsLaunchBlockList
-    * List of apps which are blocked from being launched on the KNOX device. This collection can contain a maximum of 500 elements.
-    *
-    * @param AppListItem $val The appsLaunchBlockList
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setAppsLaunchBlockList($val)
-    {
-		$this->_propDict["appsLaunchBlockList"] = $val;
-        return $this;
-    }
-    
-
-     /** 
-     * Gets the appsHideList
-    * List of apps to be hidden on the KNOX device. This collection can contain a maximum of 500 elements.
-     *
-     * @return array The appsHideList
-     */
-    public function getAppsHideList()
-    {
-        if (array_key_exists("appsHideList", $this->_propDict)) {
-           return $this->_propDict["appsHideList"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the appsHideList
-    * List of apps to be hidden on the KNOX device. This collection can contain a maximum of 500 elements.
-    *
-    * @param AppListItem $val The appsHideList
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setAppsHideList($val)
-    {
-		$this->_propDict["appsHideList"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the securityRequireVerifyApps
-    * Require the Android Verify apps feature is turned on.
-    *
-    * @return bool The securityRequireVerifyApps
-    */
-    public function getSecurityRequireVerifyApps()
-    {
-        if (array_key_exists("securityRequireVerifyApps", $this->_propDict)) {
-            return $this->_propDict["securityRequireVerifyApps"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the securityRequireVerifyApps
-    * Require the Android Verify apps feature is turned on.
-    *
-    * @param bool $val The securityRequireVerifyApps
-    *
-    * @return AndroidGeneralDeviceConfiguration
-    */
-    public function setSecurityRequireVerifyApps($val)
-    {
-        $this->_propDict["securityRequireVerifyApps"] = boolval($val);
         return $this;
     }
     

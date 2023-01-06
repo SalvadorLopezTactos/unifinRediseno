@@ -34,7 +34,7 @@ $out =<<<EOQ
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <meta http-equiv="Content-Style-Type" content="text/css">
    <title>{$mod_strings['LBL_WIZARD_TITLE']} {$mod_strings['LBL_LICENSE_ACCEPTANCE']}</title>
-   <link REL="SHORTCUT ICON" HREF="include/images/sugar_icon.ico?v={$versionToken}">
+   <link REL="SHORTCUT ICON" type="image/png" HREF="include/images/sugar-favicon.png?v={$versionToken}">
    <link rel="stylesheet" href="install/install.css?v={$versionToken}" type="text/css">
    <script src="cache/include/javascript/sugar_grp1_yui.js?v={$versionToken}"></script>
    <script type="text/javascript">
@@ -60,7 +60,7 @@ $out =<<<EOQ
 		</p>
       {$mod_strings['LBL_LICENSE_ACCEPTANCE']}</th>
       <th width="200" height="30" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank">
-      	<IMG src="include/images/sugarcrm_login.png?v={$versionToken}" alt="SugarCRM" border="0"></a>
+      	<img src="{$loginImage}?v={$versionToken}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a>
       </th>
     </tr>
     <tr>
@@ -88,7 +88,7 @@ $out =<<<EOQ
             <td>
                 <input class="acceptButton" type="button" name="goto" value="{$mod_strings['LBL_BACK']}"  id="button_back_license" onclick="document.getElementById('form').submit();" />
             </td>
-            <td>     
+            <td>
                 <input class="acceptButton" type="button" name="goto" value="{$mod_strings['LBL_NEXT']}" id="button_next" disabled="disabled" onclick="callSysCheck();"/>
                 <input type="hidden" name="goto" id='hidden_goto' value="{$mod_strings['LBL_BACK']}" />
             </td>

@@ -11,9 +11,11 @@
  */
 --}}
 <section id="grid-system">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <h2>Default fluid width grid</h2>
   <div class="row-fluid show-grid">

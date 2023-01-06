@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'جدول هذا التقرير',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'لوحة معلومات سجل جداول التقرير',
+    'LBL_FILE_TYPE' => 'نوع (أنواع) الملفات',
 );

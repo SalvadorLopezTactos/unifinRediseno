@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'อัตราฐาน',
 
     'LBL_QUOTA' => 'โควตา',
-    'LBL_QUOTA_ADJUSTED' => 'โควตา (ปรับค่า)',
+    'LBL_QUOTA_ADJUSTED' => 'ปรับโควตาแล้ว',
 
     'LBL_FORECAST' => 'ประมาณการ',
     'LBL_COMMIT_STAGE' => 'ขั้นตอนที่คอมมิต',

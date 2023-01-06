@@ -59,13 +59,11 @@
         <input type="hidden" id="customTypeValidate" onchange="return ModuleBuilder.validateDD()" />
     </td>
 </tr>
-    {php}$this->_tpl_vars['visibility_grid'] = !is_array($this->_tpl_vars['vardef']['visibility_grid']) ? array() : $this->_tpl_vars['vardef']['visibility_grid'];{/php}
 <tr id='visGridRow' {if empty($vardef.visibility_grid)}style="display:none"{/if} class="toggleDep">
     <td class='mbLBL'>{sugar_translate module="DynamicFields" label="LBL_PARENT_DROPDOWN"}:</td>
 	<td>
         {html_options name="parent_dd" id="parent_dd" selected=$vardef.visibility_grid.trigger options=$module_dd_fields}
-        {php}$this->_tpl_vars['visgridJSON'] = empty($this->_tpl_vars['vardef']['visibility_grid']) ? "" : json_encode($this->_tpl_vars['vardef']['visibility_grid']){/php}
-        <input type="hidden" name="visibility_grid" id="visibility_grid" value='{$visgridJSON}'/>
+         <input type="hidden" name="visibility_grid" id="visibility_grid" value='{$vardef.visibility_grid|@json}'/>
 	{if $hideLevel < 5}
         <button onclick="ModuleBuilder.editVisibilityGrid('visibility_grid', YAHOO.util.Dom.get('parent_dd').value, YAHOO.util.Dom.get('options').value)">
             {sugar_translate module="DynamicFields" label="LBL_EDIT_VIS"}
@@ -76,7 +74,7 @@
 <tr id='visFormulaRow' {if empty($vardef.dependency)}style="display:none"{/if}><td class='mbLBL'>{sugar_translate module="DynamicFields" label="LBL_VISIBLE_IF"}:</td>
     <td>
         <input id="dependency" type="hidden" name="dependency" value="{$vardef.dependency|escape:'html'}" onchange="document.getElementById('dependency_display').value = this.value"/>
-        <input id="dependency_display" type="text" name="dependency_display" value="{$vardef.dependency|escape:'html'}" readonly="1" style="background-color:#eee"/>
+        <input id="dependency_display" type="text" name="dependency_display" value="{$vardef.dependency|escape:'html'}" readonly="1"/>
         <input class="button" type=button name="editFormula" value="{sugar_translate label="LBL_BTN_EDIT_FORMULA"}"
                onclick="ModuleBuilder.moduleLoadFormula(YAHOO.util.Dom.get('dependency').value, 'dependency', 'boolean')"/>
     </td>

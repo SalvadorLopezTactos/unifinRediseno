@@ -23,7 +23,7 @@ function packUpgradeWizardCli($phar, $params, $files = array())
 
     $params = array_merge($defaults, $params);
 
-    file_put_contents(__DIR__ . '/version.json', json_encode($params, true));
+    file_put_contents(__DIR__ . '/version.json', json_encode($params));
 
     $chdir = __DIR__ . "/../..";
 
@@ -41,6 +41,10 @@ function packUpgradeWizardCli($phar, $params, $files = array())
 
     foreach ($files as $file => $inArchive) {
         $phar->addFile($chdir . '/' . $file, $inArchive);
+    }
+    $pathToSmartyPhar = dirname(__DIR__) . '/HealthCheck/smarty.phar';
+    foreach (new RecursiveIteratorIterator(new Phar($pathToSmartyPhar)) as $f) {
+        $phar->addFile($f, str_replace('phar://' . $pathToSmartyPhar . '/', '', $f));
     }
 }
 
@@ -81,6 +85,11 @@ $stub = <<<'STUB'
 <?php
 Phar::mapPhar();
 set_include_path('phar://' . __FILE__ . PATH_SEPARATOR . get_include_path());
+$basePath = 'phar://' . __FILE__ . '/';
+require $basePath . 'vendor/autoload.php';
+require $basePath . 'scanner/convert.php';
+require $basePath . 'converter/Lexer.php';
+require $basePath . 'converter/Service.php';
 require_once "CliUpgrader.php"; $upgrader = new CliUpgrader(); $upgrader->start(); __HALT_COMPILER();
 STUB;
 $phar->setStub($stub);

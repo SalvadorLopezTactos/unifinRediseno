@@ -45,13 +45,6 @@ $dictionary['prospect_list_campaigns'] = array(
             ),
         ),
         array(
-            'name' => 'idx_pro_id',
-            'type' => 'index',
-            'fields' => array(
-                'prospect_list_id',
-            ),
-        ),
-        array(
             'name' => 'idx_cam_id',
             'type' => 'index',
             'fields' => array(

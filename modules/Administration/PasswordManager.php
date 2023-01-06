@@ -17,12 +17,12 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
 if ($idpConfig->isIDMModeEnabled()) {
-    sugar_die(
-        sprintf(
-            $GLOBALS['app_strings']['ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE'],
-            $idpConfig->buildCloudConsoleUrl('passwordManagement', [], $GLOBALS['current_user']->id)
-        )
+    echo sprintf(
+        $GLOBALS['app_strings']['ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE'],
+        $idpConfig->buildCloudConsoleUrl('passwordManagement', [], $GLOBALS['current_user']->id)
     );
+
+    sugar_die(null);
 }
 
 if(!is_admin($current_user)){
@@ -43,7 +43,7 @@ require_once 'include/upload_file.php';
 echo getClassicModuleTitle(
         "Administration",
         array(
-            "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
+            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
            $mod_strings['LBL_MANAGE_PASSWORD_TITLE'],
            ),
         false
@@ -58,8 +58,8 @@ $samlSigningAlgos = [
 ];
 $ldapEncryptionOptions = [
     Authentication\Config::LDAP_ENCRYPTION_NONE => $GLOBALS['app_strings']['LBL_NONE'],
-    Authentication\Config::LDAP_ENCRYPTION_TLS => 'TLS',
-    Authentication\Config::LDAP_ENCRYPTION_SSL => 'SSL',
+    Authentication\Config::LDAP_ENCRYPTION_TLS => 'StartTLS',
+    Authentication\Config::LDAP_ENCRYPTION_SSL => 'LDAPS',
 ];
 if (!empty($_POST['saveConfig'])) {
     do {
@@ -222,7 +222,7 @@ if (!empty($_POST['saveConfig'])) {
                 var app = window.parent.SUGAR.App;
                 app.sync({
                     callback: function() {
-                        app.router.navigate('#bwc/index.php?module=Administration&action=index', {
+                        app.router.navigate('#Administration', {
                             trigger:true, 
                             replace:true
                         });        

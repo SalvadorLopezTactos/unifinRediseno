@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '例如，您可以使用此功能找到之前送出过的问题。',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '如果您想报告新的客户反馈，您可以点击这里举报一个新的反馈。',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => '点击此处将随时返回到此视图。',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '客户反馈互动',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '客户反馈时间线',
 
     'LBL_NOTES_SUBPANEL_TITLE' => '笔记',
 

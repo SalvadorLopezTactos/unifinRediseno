@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Tuoterivit',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Ostot',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Ostetut tuoterivit',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Asiakirjatietueiden työpöytä',
+    'LBL_MY_DOCUMENTS' => 'Omat tiedostot',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Lähetä DocuSign-palveluun',
 );

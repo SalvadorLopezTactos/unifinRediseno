@@ -307,8 +307,8 @@
 
         image.removeClass('hide');
         this.$('.delete').remove();
-        var icon = this.preview === true ? 'times' : 'trash-o';
-        image.closest('label, a').after('<span class="image_btn delete fa fa-' + icon + ' " />');
+        var icon = this.preview === true ? 'close-lg' : 'trash-lg';
+        image.closest('label, a').after('<span class="image_btn delete sicon sicon-lg sicon-' + icon + ' " />');
     },
 
     /**
@@ -327,25 +327,24 @@
      * @param height (in pixels)
      */
     resizeHeight: function(height) {
-        var $image_field = this.$('.image_field'),
-            isEditAndIcon = this.$('.fa-plus').length > 0;
+        var $imageField = this.$('.image_field');
+        var isEditAndIcon = this.$('.sicon-plus-lg').length > 0;
 
         if (isEditAndIcon) {
-            var $image_btn = $image_field.find('.image_btn');
-            var edit_btn_height = parseInt($image_btn.css('height'), 10);
+            var $imageBtn = $imageField.find('.image_btn');
+            var editBtnHeight = parseInt($imageBtn.css('height'), 10);
 
             var previewHeight = parseInt(height, 10);
             //Remove the edit button height in edit view so that the icon is centered.
-            previewHeight -= edit_btn_height ? edit_btn_height : 0;
+            previewHeight -= editBtnHeight ? editBtnHeight : 0;
             previewHeight = this.formatPX(previewHeight);
 
-            $image_field.find('.fa-plus').css({lineHeight: previewHeight});
+            $imageField.find('.sicon-plus-lg').css({lineHeight: previewHeight});
         }
 
 
         var totalHeight = this.formatPX(height);
-        $image_field.css({'height': totalHeight, minHeight: totalHeight, lineHeight: totalHeight});
-        $image_field.find('label').css({lineHeight: totalHeight});
+        $imageField.css({'height': totalHeight, minHeight: totalHeight, lineHeight: totalHeight});
     },
 
     /**
@@ -398,9 +397,9 @@
         }
 
         //Change the preview of the image widget
-        this.$('.image_preview').html('<i class="fa fa-times"></i>');
+        this.$('.image_preview').html('<i class="sicon sicon-close"></i>');
         //Put the cancel icon
-        this.$('label').after('<span class="image_btn delete fa fa-times" />');
+        this.$('label').after('<span class="image_btn delete sicon sicon-close" />');
 
         this.$el.closest('.record-cell').addClass("error");
         this.$el.addClass('input-append error');

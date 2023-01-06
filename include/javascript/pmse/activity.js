@@ -1071,6 +1071,14 @@ AdamActivity.prototype.getContextMenu = function () {
         selected: (this.act_script_type === 'BUSINESS_RULE')
     });
 
+    // Document Merge action
+    documentMergeAction = new PMSE.Action({
+        text: translate('LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE'),
+        cssStyle: 'adam-menu-script-document_merge',
+        handler: self._getScriptTypeActionHandler('DOCUMENT_MERGE'),
+        selected: (this.act_script_type === 'DOCUMENT_MERGE')
+    });
+
     if (this.act_task_type === 'USERTASK') {
         configureAction = this.createConfigurateAction();
         assignUsersAction = this.createAssignUsersAction();
@@ -1143,6 +1151,9 @@ AdamActivity.prototype.getContextMenu = function () {
         actionItems.push(noneAction);
         actionItems.push(businessRuleAction);
         actionItems.push(assignUserAction, assignTeamAction, changeFieldAction, addRelatedRecordAction);
+
+        // Handle docMerge as an action
+        actionItems.push(documentMergeAction);
 
         // For custom actions to appear as PMSE.Action Types in the PMSE.Action menu,
         // create AdamActivity.prototype.customContextMenuActions and make it
@@ -3375,6 +3386,106 @@ AdamActivity.prototype.getAction = function(type, w) {
             };
             break;
 
+        case 'DOCUMENT_MERGE':
+            var searchUrl = 'DocumentTemplates?filter[0][name][$starts]=' +
+            '{%TERM%}&filter[0][template_module][$equals]=' +
+            PROJECT_MODULE + '&fields=id,name&max_num={%PAGESIZE%}&offset={%OFFSET%}';
+            var comboDocumentTemplates = new SearchableCombobox({
+                label: translate('LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE'),
+                name: 'act_document_template',
+                submit: true,
+                searchURL: searchUrl,
+                searchValue: 'id',
+                searchLabel: 'name',
+                required: true,
+                placeholder: translate('LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT')
+            });
+
+            var convertToPdfCheckbox = new CheckboxField({
+                name: 'act_convert_to_pdf',
+                label: translate('LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF'),
+                required: false,
+                value: false,
+                options: {
+                    labelAlign: 'right',
+                    marginLeft: 80
+                }
+            });
+
+            var hiddenModule = new HiddenField({
+                name: 'act_field_module',
+                initialValue: PROJECT_MODULE
+            });
+
+            var actionText = translate('LBL_PMSE_CONTEXT_MENU_SETTINGS');
+            var actionCSS = 'adam-menu-icon-configure';
+
+            // items displayed in action config
+            var items = [comboDocumentTemplates, convertToPdfCheckbox, hiddenModule,];
+
+            var proxy = new SugarProxy({
+                url: 'pmse_Project/ActivityDefinition/' + this.id,
+                uid: this.id,
+                callback: null
+            });
+            var callback = {
+                'loaded': function(data) {
+                    if (data.act_fields) {
+                        try {
+                            var fieldData = JSON.parse(data.act_fields);
+                        } catch (e) {}
+                    }
+
+                    // intialize checkbox value
+                    let nValue = false;
+                    self.canvas.emptyCurrentSelection();
+
+                    // set value for document template
+                    if (fieldData && fieldData.act_document_template) {
+                        comboDocumentTemplates.setValue(fieldData.act_document_template);
+                    }
+
+                    //set value for the checkbox
+                    if (fieldData && fieldData.act_convert_to_pdf && fieldData.act_convert_to_pdf == 1) {
+                        nValue = true;
+                    }
+
+                    convertToPdfCheckbox.setValue(nValue);
+                    $(convertToPdfCheckbox.html).children('input').prop('checked', nValue);
+                    App.alert.dismiss('upload');
+                    w.html.style.display = 'inline';
+
+                    this.submit = function() {
+                        var convert = convertToPdfCheckbox.value;
+
+                        var templateId = comboDocumentTemplates.value;
+                        var templateName = comboDocumentTemplates.getSelectedText();
+
+                        var params = {
+                            act_convert_to_pdf: convert,
+                            act_document_template: {
+                                text: templateName,
+                                value: templateId,
+                            },
+                        };
+
+                        var data = {
+                            act_fields: JSON.stringify(params),
+                        };
+
+                        this.proxy.sendData(data);
+                        this.parent.close();
+                    };
+                },
+            };
+            action = {
+                proxy: proxy,
+                items: items,
+                actionText: actionText,
+                actionCSS: actionCSS,
+                callback: callback,
+            };
+            break;
         default:
             // For custom actions, create a function called AdamActivity.prototype.customGetAction
             // and make it return the properties for the action that is passed in
@@ -3429,6 +3540,12 @@ AdamActivity.prototype.getWindowDef = function(type) {
             wWidth = 500;
             wHeight = 140;
             wTitle = 'LBL_PMSE_FORM_TITLE_BUSINESS_RULE';
+            break;
+
+        case 'DOCUMENT_MERGE':
+            wWidth = 500;
+            wHeight = 160;
+            wTitle = 'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE';
             break;
 
         default:
@@ -3503,7 +3620,11 @@ AdamActivity.prototype.callbackFunctionForActivity = function(data, element, val
     if (data.act_assignment_method === 'static') {
         user = data.act_assign_user;
         if (user !== 'currentuser' && user !== 'owner' && user !== 'supervisor') {
-            validationTools.validateAtom('USER_IDENTITY', null, null, user, element, validationTools);
+            let criteriaComponents = {
+                type: 'USER_IDENTITY',
+                value: user
+            };
+            validationTools.validateAtom(criteriaComponents, element, validationTools);
         }
     }
 };
@@ -3534,8 +3655,12 @@ AdamActivity.prototype.callbackFunctionForBusinessRuleAction = function(data, el
     // Validate the number of incoming and outgoing edges
     validationTools.validateNumberOfEdges(1, null, 1, null, element);
 
+    let criteriaComponents = {
+        type: 'ALL_BUSINESS_RULES',
+        value: data.act_fields
+    };
     // Validate the selected business rule
-    validationTools.validateAtom('ALL_BUSINESS_RULES', null, null, data.act_fields, element, validationTools);
+    validationTools.validateAtom(criteriaComponents, element, validationTools);
 };
 
 /**
@@ -3549,8 +3674,12 @@ AdamActivity.prototype.callbackFunctionForAssignUserAction = function(data, elem
     // Validate the number of incoming and outgoing edges
     validationTools.validateNumberOfEdges(1, null, 1, null, element);
 
+    let criteriaComponents = {
+        type: 'USER_IDENTITY',
+        value: data.act_assign_user
+    };
     // Validate the selected process user
-    validationTools.validateAtom('USER_IDENTITY', null, null, data.act_assign_user, element, validationTools);
+    validationTools.validateAtom(criteriaComponents, element, validationTools);
 };
 
 /**
@@ -3564,8 +3693,12 @@ AdamActivity.prototype.callbackFunctionForRoundRobinAction = function(data, elem
     // Validate the number of incoming and outgoing edges
     validationTools.validateNumberOfEdges(1, null, 1, null, element);
 
+    let criteriaComponents = {
+        type: 'TEAM',
+        value: data.act_assign_team
+    };
     // Validate the selected team
-    validationTools.validateAtom('TEAM', null, null, data.act_assign_team, element, validationTools);
+    validationTools.validateAtom(criteriaComponents, element, validationTools);
 };
 
 /**
@@ -3590,7 +3723,11 @@ AdamActivity.prototype.callbackFunctionForChangeFieldAction = function(data, ele
         criteria = JSON.parse(data.act_fields);
     }
     for (var i = 0; i < criteria.length; i++) {
-        validationTools.validateAtom(actModule, criteria[i].field, null, element, validationTools);
+        let criteriaComponents = {
+            type: actModule,
+            module: criteria[i].field
+        };
+        validationTools.validateAtom(criteriaComponents, element, validationTools);
     }
 };
 

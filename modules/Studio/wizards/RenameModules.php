@@ -106,7 +106,7 @@ class RenameModules
 
         $smarty = new Sugar_Smarty();
         $smarty->assign('MOD', $GLOBALS['mod_strings']);
-        $title=getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array("<a href='index.php?module=Administration&action=index'>".$mod_strings['LBL_MODULE_NAME']."</a>", $mod_strings['LBL_RENAME_TABS']), false);
+        $title=getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array("<a href='#Administration'>".$mod_strings['LBL_MODULE_NAME']."</a>", $mod_strings['LBL_RENAME_TABS']), false);
         $smarty->assign('title', $title);
 
         if (!empty($_REQUEST['dropdown_lang'])) {
@@ -364,7 +364,7 @@ class RenameModules
 
         foreach ($beanList as $moduleName => $beanName) {
             if (class_exists($beanName)) {
-                $this->renameModuleSubpanel($moduleName, $beanName, $this->changedModules);
+                $this->renameModuleSubpanel($moduleName, $beanName);
             } else {
                 $GLOBALS['log']->error("Class $beanName does not exist, unable to rename.");
             }
@@ -742,7 +742,10 @@ class RenameModules
             if (isset($currentModuleStrings[$formattedLanguageKey])) {
                 $oldStringValue = $currentModuleStrings[$formattedLanguageKey];
                 $this->changedModule = $moduleName;
-                $replacedLabels[$formattedLanguageKey] = $this->replaceSingleLabel($oldStringValue, $replacementLabels, $entry);
+                $newStringValue = $this->replaceSingleLabel($oldStringValue, $replacementLabels, $entry);
+                if ($newStringValue !== $oldStringValue) {
+                    $replacedLabels[$formattedLanguageKey] = $newStringValue;
+                }
             }
         }
 
@@ -775,7 +778,8 @@ class RenameModules
      *
      * @return boolean
      */
-    private function checkDefaultsForSubstring($key, $substring) {
+    protected function checkDefaultsForSubstring($key, $substring)
+    {
         // Check for the label in the static defaults file in case we need it later
         if ($this->changedModule &&
             file_exists('modules/'.$this->changedModule.'/language/'.$this->selectedLanguage.'.lang.php'))
@@ -794,7 +798,7 @@ class RenameModules
      * @param  array $replacementMetaData
      * @return string
      */
-    private function replaceSingleLabel($oldStringValue, $replacementLabels, $replacementMetaData, $modifier = '')
+    protected function replaceSingleLabel($oldStringValue, $replacementLabels, $replacementMetaData, $modifier = '')
     {
         $replaceKey = 'prev_' . $replacementMetaData['type'];
         $search = $replacementLabels[$replaceKey];
@@ -805,9 +809,19 @@ class RenameModules
             $replace = call_user_func($modifier, $replace);
         }
 
+        // Search string may be empty from the start or become empty after modification
+        if ($search === null || strlen($search) === 0) {
+            // In this case leave the label unchanged
+            return $oldStringValue;
+        }
+
         // After filtering and modification, the replacement string may appear empty
         if (!strlen($replace)) {
             // In this case leave the label unchanged
+            return $oldStringValue;
+        }
+
+        if ($search === $replace) {
             return $oldStringValue;
         }
 
@@ -826,7 +840,8 @@ class RenameModules
             // include links in their strings.
             $oldStringValue = str_replace("#{$search}/", "____TEMP_ROUTER_HOLDER____", $oldStringValue);
 
-            $result = str_replace($search, $replace, $oldStringValue);
+            $regex = '/(?<=\W|^)(' . preg_quote($search, '/') . ')(?=\W|$)/u';
+            $result = preg_replace($regex, $replace, $oldStringValue);
 
             // Add the route back in if it was found
             $result = str_replace("____TEMP_ROUTER_HOLDER____", "#{$search}/", $result);
@@ -970,6 +985,9 @@ class RenameModules
             if ($key == 'BLANK') {
                 $key = '';
             }
+
+            /* remove all symbols except "safe": letters (including non-latin), numbers, dot, comma, dash, lowdash, and symbols used in html entities (&#;) */
+            list($key, $value, $svalue) = preg_replace('/[^\w\s\.\,\-\_\&\#\;]/u', '', [$key, $value, $svalue]);
 
             $key = trim($key);
             $value = trim($value);

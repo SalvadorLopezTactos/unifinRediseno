@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Programul acestui raport',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare programe raportate',
+    'LBL_FILE_TYPE' => 'Tip de fișier',
 );

@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => '連絡人 ID',
     'LBL_DESCRIPTION_INFORMATION' => '描述資訊',
     'LBL_DESCRIPTION' => '描述：',
+    'LBL_INTERNAL_NOTES' => '內部注意事項：',
     'LBL_STATUS' => '狀態：',
     'LBL_DIRECTION' => '方向：',
     'LBL_DATE' => '開始日期：',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => '持續時間必須大於 0',
     'LBL_CALL_INFORMATION' => '概觀',
     'LBL_REMOVE' => '移除',
-    'LBL_ACCEPT_STATUS' => '接受狀態',
     'LBL_ACCEPT_LINK' => '接受連結',
     //For export labels
     'LBL_PARENT_ID' => '父代 ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => '通話：',
     'LBL_CALL_RECORDING_URL' => '紀錄 URL',
     'LBL_CALL_RECORDING' => '紀錄',
+
+    'LBL_LEAD_ID' => '潛在客戶 ID',
+    'LBL_LEAD_NAME' => '潛在客戶',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => '您為 {formatDate date_start} 預定了 {{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{name}}</a>。',

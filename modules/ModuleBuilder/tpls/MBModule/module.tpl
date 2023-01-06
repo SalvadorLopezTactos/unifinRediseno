@@ -90,19 +90,17 @@
 		<td height='100%'>&nbsp;</td><td>&nbsp;</td>
 	</tr>
 </table>
-{literal}
 <script>
 addForm('CreateModule');
-addToValidate('CreateModule', 'name', 'DBName', true, '{/literal}{$mod_strings.LBL_JS_VALIDATE_NAME}{literal}');
-addToValidate('CreateModule', 'label', 'varchar', true, '{/literal}{$mod_strings.LBL_JS_VALIDATE_LABEL}{literal}');
-addToValidate('CreateModule', 'label_singular', 'varchar', true, '{/literal}{$mod_strings.LBL_JS_VALIDATE_LABEL}{literal}');
-addToValidate('CreateModule', 'type', 'varchar', true, '{/literal}{$mod_strings.LBL_JS_VALIDATE_TYPE}{literal}');
+addToValidate('CreateModule', 'name', 'DBName', true, '{$mod_strings.LBL_JS_VALIDATE_NAME}');
+addToValidate('CreateModule', 'label', 'varchar', true, '{$mod_strings.LBL_JS_VALIDATE_LABEL}');
+addToValidate('CreateModule', 'label_singular', 'varchar', true, '{$mod_strings.LBL_JS_VALIDATE_LABEL}');
+addToValidate('CreateModule', 'type', 'varchar', true, '{$mod_strings.LBL_JS_VALIDATE_TYPE}');
 ModuleBuilder.helpRegister('CreateModule');
 if(document.getElementById('factory_modules'))
 	ModuleBuilder.helpRegisterByID('factory_modules', 'table');
-ModuleBuilder.helpSetup({/literal}'{$module->help.group}','{$module->help.default}'{literal});
-ModuleBuilder.MBpackage = '{/literal}{$module->package}{literal}';
-ModuleBuilder.module = '{/literal}{$module->name}{literal}';	
+ModuleBuilder.helpSetup('{$module->help.group}','{$module->help.default}');
+ModuleBuilder.MBpackage = '{$module->package}';
+ModuleBuilder.module = '{$module->name}';	
 </script>
-{/literal}
 {include file='modules/ModuleBuilder/tpls/assistantJavascript.tpl'}

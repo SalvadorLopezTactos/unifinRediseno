@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Dashet Sugar Adaugat',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Componentele vor fi rearanjate, sigur doriţi modificarea dispunerii coloanelor?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Sigur doriţi să eliminaţi Dashlet-ul Sugar?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Niciun Tablou de bord Configurat',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Niciun Tablou Configurat',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Creare Tablou de bord',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'pagina web',
   'LBL_DASHLET_WEBPAGE_DESC' => 'pagina web',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Cod Sursa',
   'LBL_SOURCE_SUGAR' => 'Sugar - Cea mai populara, la nivel mondial, aplicatie de automatizare a fortei de vanzari, creata de SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XSablon - Un motor sablon pentru PHP creat de Barnabas Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Un set de clase PHP care permit dezvoltatorilor sa creeze si sa consume servicii web, elaborate de NuSphere Corporation si Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'Calendar JS - Un calendar pentru intoducere de date elaborat de Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - O biblioteca pentru crearea de documete PDF elaborata de Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - O implementare WebDAV Server in PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Secțiunea Ajutor afișează informații specifice despre modul pe care îl vizualizați, indică în detaliu pașii pentru efectuarea anumitor acțiuni în modul și vă indică unde trebuie să mergeți pentru informații mai detaliate și asistență.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtru',
+
+    'LBL_ABOUT_VERSION' => 'Utilizați versiunea {{version}} cu următoarele licențe:',
 );

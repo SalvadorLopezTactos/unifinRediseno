@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Formato de hora por defecto',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Mostrar los tiempos de respuesta del servidor',
+    'FREEZE_FIRST_COLUMN' => 'Permitir congelar columna',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Habilite esta configuración para permitir que los usuarios congelen la primera columna en una variedad de ' .
+        'visualizaciones de lista, incluidas las visualizaciones de listas de módulos, subpaneles, dashlets y consolas.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Registrar consultas lentas',
     'LOCK_HOMEPAGE_HELP'=>'Esta opción sirve para prevenir<BR> 1) la creación de nuevas páginas de inicio y dashlets en el módulo Inicio, y <BR>2) la personalización de la ubicación del dashlet en las páginas de inicio usando arrastrar y soltar.',
     'CURRENT_LOGO'=>'Logotipo Actual:',
+    'CURRENT_LOGO_DARK' => 'Logotipo actual del modo oscuro:',
     'CURRENT_LOGO_HELP'=>'Este logotipo se muestra en la esquina superior izquierda del pie de página de la aplicación Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Este logotipo se muestra en la parte izquierda del pie de página cuando la aplicación de Sugar está en modo oscuro, de acuerdo con las preferencias de Apariencia del usuario.",
     'NEW_LOGO'=>'Seleccionar Logotipo:',
     'NEW_LOGO_HELP' => 'El formato de archivo de la imagen puede ser .png o .jpg. La altura máxima son 24px, el ancho máximo es de 180px. Toda imagen cargada que sea mayor a estas dimensiones se escalará hasta ajustarse a estas dimensiones máximas.',
+    'NEW_LOGO_DARK' => 'Seleccionar el logotipo de modo oscuro:',
     'NEW_LOGO_HELP_NO_SPACE' => 'El formato del archivo de imagen puede ser tanto .png como .jpg. La altura máxima es 24px, el ancho máximo es de 450px. Toda imagen cargada que sea mayor a estas dimensiones se escalará hasta ajustarse a estas dimensiones máximas. El nombre del archivo de imagen no puede contener un carácter de espacio.',
     'NEW_QUOTE_LOGO'=>'Cargar nuevo logotipo para Presupuestos',
     'NEW_QUOTE_LOGO_HELP'=>'El formato de archivo de la imagen requerido es .jpg.<BR>El tamaño recomendado es de 867x74px.',
@@ -412,7 +418,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Continuar',
     'LBL_WIZARD_FINISH_TAB' => 'Finalizar',
     'LBL_WIZARD_FINISH_TITLE' => 'La configuración básica del sistema se ha completado',
-    'LBL_WIZARD_FINISH' => 'Haga clic en <b>Continuar</b> para configurar sus opciones de usuario.<br/><br /><br />Para configurar opciones adicionales del sistema, haga clic <a href="index.php?module=Administration&action=index" target="_blank">aquí</a>.',
+    'LBL_WIZARD_FINISH' => 'Haga clic en <b>Continuar</b> para configurar sus parámetros de usuario.<br/><br />Para configurar parámetros adicionales del sistema, haga clic <a href="#Administration" target="_blank">aquí</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Imagen de marca',
     'LBL_WIZARD_SYSTEM_DESC' => 'Proporcione el nombre y logotipo de su organización para establecer la imagen de su marca en Sugar.',
     'LBL_WIZARD_LOCALE_DESC' => 'Especifique cómo desea que los datos se muestren en Sugar, en base a su ubicación geográfica. La configuración que proporcione aquí será la utilizada por defecto. Los usuarios podrán establecer sus propias preferencias.',
@@ -423,7 +429,8 @@ BSOFR
 	'LBL_LOADING' => 'Cargando ...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Eliminar' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Bienvenido' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Logotipo' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Logotipo' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logotipo de modo oscuro',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* El módulo de Informes sólo está disponible para clientes nativos de iPhone Sugar Mobile y SugarCRM',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* El módulo de informes no está disponible para la vista móvil a través del navegador.',
 
@@ -462,5 +469,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

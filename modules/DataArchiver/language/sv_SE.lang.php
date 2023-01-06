@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arkiv',
     'LBL_PROCESS_TYPE_DELETE' => 'Permanent borttagning',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arkivkörningar',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Varning',
+    'LBL_ARCHIVER_WARNING' => 'Vi rekommenderar att du utför den här åtgärden när användningen är låg eller utanför arbetstid '
+        . 'eftersom det kan påverka systemets prestanda. Vill du utföra denna åtgärd nu?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arkiverare för {{moduleName}}-modulen måste ha {{fieldName}} inställt som filter',
 );

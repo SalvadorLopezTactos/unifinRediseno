@@ -46,7 +46,16 @@ $dictionary['Administration'] = array(
     'len' => '32',
     'comment' => 'Which platform to send this back with vai the api'
   ),
-), 'indices'=>array( array('name'=>'idx_config_cat', 'type'=>'index',  'fields'=>array('category')), array('name'=>'idx_config_platform', 'type'=>'index',  'fields'=>array('platform'))),
+),
+    'indices' => array(
+        array(
+            'name' => 'idx_config_cat',
+            'type' => 'index',
+            'fields' => array(
+                'category',
+            ),
+        ),
+    ),
 'acls' => array('SugarACLDeveloperForTarget' => ['allowUserRead' => true], 'SugarACLStatic' => false),
                             );
 
@@ -147,6 +156,11 @@ $dictionary['UpgradeHistory'] = [
             'type' => 'bool',
             'len' => '1',
             'default' => '1',
+        ],
+        'process_status' => [
+            'name' => 'process_status',
+            'type' => 'text',
+            'comment' => 'Package status data in JSON: installation progress and related values',
         ],
         'deleted' => [
             'name' => 'deleted',

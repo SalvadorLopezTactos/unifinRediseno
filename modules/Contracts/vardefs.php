@@ -380,7 +380,6 @@ $dictionary['Contract'] = array(
         ),
     ),
     'indices' => array(
-        array('name' => 'idx_contract_name', 'type' => 'index', 'fields' => array('name')),
         array('name' => 'idx_contract_status', 'type' => 'index', 'fields' => array('status')),
         array('name' => 'idx_contract_start_date', 'type' => 'index', 'fields' => array('start_date')),
         array('name' => 'idx_contract_end_date', 'type' => 'index', 'fields' => array('end_date')),

@@ -34,7 +34,7 @@ final class ArgumentResolver implements ArgumentResolverInterface
      */
     private $argumentValueResolvers;
 
-    public function __construct(ArgumentMetadataFactoryInterface $argumentMetadataFactory = null, iterable $argumentValueResolvers = [])
+    public function __construct(ArgumentMetadataFactoryInterface $argumentMetadataFactory = null, $argumentValueResolvers = [])
     {
         $this->argumentMetadataFactory = $argumentMetadataFactory ?: new ArgumentMetadataFactory();
         $this->argumentValueResolvers = $argumentValueResolvers ?: self::getDefaultArgumentValueResolvers();
@@ -56,7 +56,7 @@ final class ArgumentResolver implements ArgumentResolverInterface
                 $resolved = $resolver->resolve($request, $metadata);
 
                 if (!$resolved instanceof \Generator) {
-                    throw new \InvalidArgumentException(sprintf('%s::resolve() must yield at least one value.', \get_class($resolver)));
+                    throw new \InvalidArgumentException(sprintf('"%s::resolve()" must yield at least one value.', \get_class($resolver)));
                 }
 
                 foreach ($resolved as $append) {
@@ -81,7 +81,7 @@ final class ArgumentResolver implements ArgumentResolverInterface
         return $arguments;
     }
 
-    public static function getDefaultArgumentValueResolvers(): iterable
+    public static function getDefaultArgumentValueResolvers()
     {
         return [
             new RequestAttributeValueResolver(),

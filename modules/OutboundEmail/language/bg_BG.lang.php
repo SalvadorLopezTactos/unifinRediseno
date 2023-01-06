@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ИД на имейл адреса, на който да се изпрати отговор',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Имейл адрес, на който да се изпрати отговор',
     'LBL_PRIMARY_TEAM' => 'Основен екип',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Предпочитан акаунт за изпращане',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на настройки на имейл',
 );

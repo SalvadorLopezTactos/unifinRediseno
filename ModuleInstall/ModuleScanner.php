@@ -188,7 +188,6 @@ class ModuleScanner{
 	'create_cache_directory',
 	'mk_temp_dir',
 	'write_array_to_file',
-	'write_encoded_file',
     'write_array_to_file_as_key_value_pair',
 	'create_custom_directory',
 	'sugar_rename',
@@ -390,7 +389,112 @@ class ModuleScanner{
 
         // sugar vulnerable functions, need to be lower case
         'getfunctionvalue',
-);
+    );
+    private $unsafeHttpClientFunctions = [
+        // curl
+        'curl_copy_handle',
+        'curl_exec',
+        'curl_file_create',
+        'curl_init',
+        'curl_multi_add_handle',
+        'curl_multi_exec',
+        'curl_multi_getcontent',
+        'curl_multi_info_read',
+        'curl_multi_init',
+        'curl_multi_remove_handle',
+        'curl_multi_select',
+        'curl_multi_setopt',
+        'curl_setopt_array',
+        'curl_setopt',
+        'curl_share_init',
+        'curl_share_setopt',
+        'curl_share_strerror',
+        //sockets
+        'socket_accept',
+        'socket_addrinfo_bind',
+        'socket_addrinfo_connect',
+        'socket_addrinfo_explain',
+        'socket_addrinfo_lookup',
+        'socket_bind',
+        'socket_clear_error',
+        'socket_close',
+        'socket_cmsg_space',
+        'socket_connect',
+        'socket_create_listen',
+        'socket_create_pair',
+        'socket_create',
+        'socket_export_stream',
+        'socket_get_option',
+        'socket_getopt',
+        'socket_getpeername',
+        'socket_getsockname',
+        'socket_import_stream',
+        'socket_last_error',
+        'socket_listen',
+        'socket_read',
+        'socket_recv',
+        'socket_recvfrom',
+        'socket_recvmsg',
+        'socket_select',
+        'socket_send',
+        'socket_sendmsg',
+        'socket_sendto',
+        'socket_set_block',
+        'socket_set_nonblock',
+        'socket_set_option',
+        'socket_setopt',
+        'socket_shutdown',
+        'socket_write',
+        'fsockopen',
+        // streams
+        'stream_bucket_append',
+        'stream_bucket_make_writeable',
+        'stream_bucket_new',
+        'stream_bucket_prepend',
+        'stream_context_create',
+        'stream_context_get_default',
+        'stream_context_get_options',
+        'stream_context_get_params',
+        'stream_context_set_default',
+        'stream_context_set_option',
+        'stream_context_set_params',
+        'stream_copy_to_stream',
+        'stream_filter_append',
+        'stream_filter_prepend',
+        'stream_filter_register',
+        'stream_filter_remove',
+        'stream_get_contents',
+        'stream_get_filters',
+        'stream_get_line',
+        'stream_get_meta_data',
+        'stream_get_transports',
+        'stream_get_wrappers',
+        'stream_is_local',
+        'stream_isatty',
+        'stream_notification_callback',
+        'stream_register_wrapper',
+        'stream_resolve_include_path',
+        'stream_select',
+        'stream_set_blocking',
+        'stream_set_chunk_size',
+        'stream_set_read_buffer',
+        'stream_set_timeout',
+        'stream_set_write_buffer',
+        'stream_socket_accept',
+        'stream_socket_client',
+        'stream_socket_enable_crypto',
+        'stream_socket_get_name',
+        'stream_socket_pair',
+        'stream_socket_recvfrom',
+        'stream_socket_sendto',
+        'stream_socket_server',
+        'stream_socket_shutdown',
+        'stream_supports_lock',
+        'stream_wrapper_register',
+        'stream_wrapper_restore',
+        'stream_wrapper_unregister',
+    ];
+
     private $methodsBlackList = array('setlevel', 'put' => array('sugarautoloader'), 'unlink' => array('sugarautoloader'));
 
     /**
@@ -450,6 +554,9 @@ class ModuleScanner{
             }
         }
         $classesBlackList = array_diff($this->classBlackList, $this->classBlackListExempt);
+        if (!empty($GLOBALS['sugar_config']['moduleInstaller']['enableEnhancedModuleChecks'])) {
+            $this->blackList = array_merge($this->blackList, $this->unsafeHttpClientFunctions);
+        }
         $functionsBlackList = array_diff($this->blackList, $this->blackListExempt);
         $this->codeScanner = new CodeScanner($classesBlackList, $functionsBlackList, $this->methodsBlackList);
 	}
@@ -606,6 +713,10 @@ class ModuleScanner{
                     $this->healthCheck->scanFileForDeprecatedJSCode($next, $nextFileContents);
                 }
 
+                if ($this->isSidecarHBSFile($next)) {
+                    $this->healthCheck->scanFileForDeprecatedHBSCode($next, $nextFileContents);
+                }
+
                 if ($this->isExtensionPhpFile($next)) {
                     $this->healthCheck->scanForOutputConstructs($nextFileContents, $next, true);
                 }
@@ -691,6 +802,16 @@ class ModuleScanner{
     protected function isSidecarJSFile(string $file): bool
     {
         return (bool) preg_match('~clients/.*?/(layouts|views|fields)/.*?/.*?\.js$~', $file);
+    }
+
+    /**
+     * Tells whether the filename is a sidecar HBS file
+     * @param string $file Path to the file
+     * @return bool
+     */
+    protected function isSidecarHBSFile(string $file): bool
+    {
+        return (bool) preg_match('~clients/.*?/(layouts|views|fields)/.*?/.*?\.hbs$~', $file);
     }
 
     /**
@@ -939,6 +1060,10 @@ class ModuleScanner{
                     $this->issues['copy'][$copy['from']] = translate('ML_PATH_MAY_NOT_CONTAIN') .' ".." -' . $copy['from'];
                     continue;
                 }
+                if (strpos($from, '<basepath>') !== 0 || !check_file_name($from)) {
+                    $this->issues['copy'][$copy['from']] = 'Incorrect format for copied files was provided.';
+                    continue;
+                }
                 $from = str_replace('<basepath>', $this->pathToModule, $from);
                 $to = $this->normalizePath($copy['to']);
                 if ($to === false) {
@@ -1011,11 +1136,9 @@ class ModuleScanner{
              */
             require $path . '/manifest.php';
             $packageName = $manifest['name']?? 'unknown';
-            $logfile = 'healthcheck_' . preg_replace('~[\W]~is', '_', $packageName). time() . '.log';
             require_once 'modules/HealthCheck/Scanner/Scanner.php';
             $this->healthCheck = new HealthCheckScanner();
             $this->healthCheck->initPackageScan();
-            $this->healthCheck->setLogFile($logfile);
             ob_start();
             $this->scanDir($path, $sugarFileAllowed);
             ob_end_clean();
@@ -1058,16 +1181,16 @@ class ModuleScanner{
 	 **/
 	public function displayIssues($package='Package'){
         global $sugar_version, $sugar_flavor, $current_user;
-        $readableProductNames =
-            getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($current_user));
-        $readableProductNames = urlencode(implode(',', $readableProductNames));
+
+        $productCodes = $current_user->getProductCodes();
+        $productCodes = urlencode(implode(',', $productCodes));
         echo '<h2>' . str_replace('{PACKAGE}', $package, translate('ML_PACKAGE_SCANNING')) .
             '</h2><BR><h2 class="error">' . translate('ML_INSTALLATION_FAILED') . '</h2><br><p>' .
             str_replace('{PACKAGE}', $package, translate('ML_PACKAGE_NOT_CONFIRM')) .
             '</p><ul><li>'. translate('ML_OBTAIN_NEW_PACKAGE') . '<li>' . translate('ML_RELAX_LOCAL') .
             '</ul></p><br>' .
             ' <a href="https://www.sugarcrm.com/crm/product_doc.php?module=FailPackageScan&version=' .
-            $sugar_version . '&edtion=' . $sugar_flavor . '&products=' . $readableProductNames .
+            $sugar_version . '&edtion=' . $sugar_flavor . '&products=' . $productCodes .
             '" target="_blank">' . translate('ML_PKG_SCAN_GUIDE') . '</a>'.'<br><br>';
 
 

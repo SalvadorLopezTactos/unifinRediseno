@@ -45,13 +45,6 @@ $dictionary['accounts_dataprivacy'] = array(
             ),
         ),
         array(
-            'name' => 'idx_acc_dataprivacy_acc',
-            'type' => 'index',
-            'fields' => array(
-                'account_id',
-            ),
-        ),
-        array(
             'name' => 'idx_acc_dataprivacy_dataprivacy',
             'type' => 'index',
             'fields' => array(

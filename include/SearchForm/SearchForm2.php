@@ -79,7 +79,8 @@ class SearchForm
         $this->setOptions($options);
     }
 
- 	function setup($searchdefs, $searchFields = array(), $tpl, $displayView = 'basic_search', $listViewDefs = array()){
+    public function setup(array $searchdefs, array $searchFields, string $tpl, string $displayView = 'basic_search', ?array $listViewDefs = []): void
+    {
 		$this->searchdefs =  $searchdefs[$this->module];
  		$this->tpl = $tpl;
  		//used by advanced search

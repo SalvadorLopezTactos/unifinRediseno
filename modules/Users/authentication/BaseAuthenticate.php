@@ -107,8 +107,10 @@ class BaseAuthenticate
         }
 
         if (!empty($_SESSION['authenticated_user_id']) || !empty($user_id)) {
+            $cu = $GLOBALS['current_user'];
             $GLOBALS['current_user'] = BeanFactory::newBean('Users');
             if ($GLOBALS['current_user']->retrieve($_SESSION['authenticated_user_id'])) {
+                $GLOBALS['current_user']->sudoer = $cu->sudoer;
                 return true;
             }
         }

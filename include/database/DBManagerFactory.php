@@ -183,7 +183,7 @@ class DBManagerFactory
      * @param DBManager $instance Database instance
      * @return Doctrine\DBAL\Connection
      * @throws Exception
-     * @throws Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
     public static function createConnection(DBManager $instance)
     {
@@ -202,7 +202,7 @@ class DBManagerFactory
         if ($instance->variant === 'oci8' || $instance->variant === 'ibm_db2') {
             $params = array_merge($params, array(
                 'portability' => Connection::PORTABILITY_FIX_CASE,
-                'fetch_case' => PDO::CASE_LOWER,
+                'fetch_case' => \Doctrine\DBAL\ColumnCase::LOWER,
             ));
         }
 

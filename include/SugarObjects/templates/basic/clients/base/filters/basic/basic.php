@@ -28,6 +28,7 @@ $viewdefs['<module_name>']['base']['filter']['basic'] = array(
             'filter_definition' => array(
                 '$owner' => '',
             ),
+            'app' => 'base',
             'editable'          => false
         ),
         array(
@@ -36,6 +37,7 @@ $viewdefs['<module_name>']['base']['filter']['basic'] = array(
             'filter_definition' => array(
                 '$favorite' => '',
             ),
+            'app' => 'base',
             'editable'          => false
         ),
         array(
@@ -44,6 +46,7 @@ $viewdefs['<module_name>']['base']['filter']['basic'] = array(
             'filter_definition' => array(
                 '$tracker' => '-7 DAY',
             ),
+            'app' => 'base',
             'editable'          => false
         ),
         array(

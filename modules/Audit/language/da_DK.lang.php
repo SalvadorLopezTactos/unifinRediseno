@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Feltrevisioner i dette modul:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Der er ingen feltrevisioner i dette modul',
     'LBL_CHANGE_LOG' => 'Revisionslog',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Når reviderede valutafelter gemmes i en ikke standard valuta, vil loggen vise de gamle og de nye værdier i den konverterede systemdefinerede standardvaluta.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Når reviderede valutafelter gemmes i en ikke standard valuta, vil loggen vise de gamle og de nye værdier i den konverterede systemdefinerede standardvaluta.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Opdater til',
+    'LBL_BLANK' => '-tom-',
 );

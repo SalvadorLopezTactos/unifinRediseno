@@ -45,23 +45,21 @@
 <script type="text/javascript">
 ModuleBuilder.addToHead("{sugar_getjspath file='modules/ExpressionEngine/tpls/formulaBuilder.css'}", "css");
 ModuleBuilder.addToHead("{sugar_getjspath file='include/javascript/jquery/markitup/skins/simple/style.css'}", "css");
-{literal}
 var FBLoader = new YAHOO.util.YUILoader({
     require : ["formulabuilder"],
     loadOptional: true,
     skin: { base: 'blank', defaultSkin: '' },
-    onSuccess: function(){SUGAR.expressions.initFormulaBuilder()},
+    onSuccess: function(){ SUGAR.expressions.initFormulaBuilder() },
     allowRollup: true,
     base: "include/javascript/yui/build/"
 });
 FBLoader.addModule({
     name :"formulabuilder",
     type : "js",
-    fullpath: "{/literal}{sugar_getjspath file='modules/ExpressionEngine/javascript/formulaBuilder.js'}{literal}",
+    fullpath: "{sugar_getjspath file='modules/ExpressionEngine/javascript/formulaBuilder.js'}",
     varName: "SUGAR.expressions.initFormulaBuilder",
     requires: ["layout", "element"]
 });
-{/literal}
 var fieldsArray = {$Field_Array};
 var returnType = '{$returnType|escape:javascript}';
 FBLoader.insert();

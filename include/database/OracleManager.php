@@ -33,6 +33,8 @@
  */
 class OracleManager extends DBManager
 {
+    public const MAX_EXPRESSION_LIST_SIZE = 1000;
+
     /**
      * @see DBManager::$dbType
      */
@@ -540,7 +542,7 @@ WHERE OWNER = ?
                 ->executeQuery($query, array(
                     strtoupper($this->configOptions['db_schema_name']),
                     strtoupper($tableName),
-                ))->fetchColumn();
+                ))->fetchOne();
 
             return !empty($result);
         }
@@ -899,7 +901,10 @@ WHERE OWNER = ?
 
     public function renameColumnSQL($tablename, $column, $newname)
     {
-        return "ALTER TABLE $tablename RENAME COLUMN $column TO $newname";
+        return
+            'ALTER TABLE '.$this->getValidDBName($tablename, false, 'table').' '.
+            'RENAME COLUMN '.$this->getValidDBName($column).' '.
+            'TO '.$this->getValidDBName($newname);
     }
 
     /**
@@ -1209,7 +1214,17 @@ WHERE OWNER = ?
     public function getColumnFunctionalIndices(string $table, string $column) : array
     {
         return array_filter($this->get_indices($table), function (array $index) use ($column) {
-            return in_array(sprintf('upper(%s)', $column), $index['fields'], true);
+            // case where the $column has and upper function applied to it
+            if (in_array(sprintf('upper(%s)', $column), $index['fields'], true)) {
+                return true;
+            }
+            // case where field other than $column has an upper function applied to it
+            if (in_array($column, $index['fields']) && !empty(array_filter($index['fields'], function ($field) {
+                return strpos($field, 'upper(') !== false;
+            }))) {
+                return true;
+            }
+            return false;
         });
     }
 
@@ -1426,7 +1441,7 @@ LEFT JOIN all_constraints c
             ->executeQuery($query, $params);
 
         $data = array();
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             if (!$filterByTable) {
                 $table_name = strtolower($row['table_name']);
             }
@@ -1494,7 +1509,7 @@ LEFT JOIN all_constraints c
             ));
 
         $columns = array();
-        while (($row = $stmt->fetch())) {
+        while (($row = $stmt->fetchAssociative())) {
             $name = strtolower($row['column_name']);
             $columns[$name]['name']=$name;
             $columns[$name]['type']=strtolower($row['data_type']);

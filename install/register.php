@@ -80,7 +80,7 @@ $out =<<<EOQ
 		<img src="{$sugar_md}" alt="SugarCRM" border="0">
 		</p>
 		{$mod_strings['LBL_REG_TITLE']} <span style="font-size: 9px;"> (Optional)</span></th>
-	<th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank"><IMG src="$loginImage" alt="SugarCRM" border="0"></a></th>
+	<th width="200" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank"><img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo"></a></th>
 </tr>
 <tr>
     <td colspan="2">{$notConfirmed}</td>

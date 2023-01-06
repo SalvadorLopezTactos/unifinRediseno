@@ -37,6 +37,7 @@ $viewdefs['Quotes']['base']['view']['quote-data-grand-totals-footer'] = array(
                     'label' => 'LBL_LIST_GRAND_TOTAL',
                     'type' => 'currency',
                     'css_class' => 'grand-total',
+                    'convertToBase' => false,
                 ),
             ),
         ),

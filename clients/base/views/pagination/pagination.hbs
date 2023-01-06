@@ -17,7 +17,7 @@
             <ul>
                 <li class="pagination-li">
                     <a class="paginate-aria-button nav-previous btn btn-link btn-invisible {{#if this.isPrevDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" data-action="{{#unless this.isPrevDisabled}}page-nav-clicked{{/unless}}" aria-label="Previous">
-                        <span class="previous-fav fa fa-chevron-left {{#if this.isPrevDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
+                        <span class="previous-fav sicon sicon-chevron-left {{#if this.isPrevDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
                     </a>
                 </li>
                 {{#each this.pageNumList}}
@@ -32,7 +32,7 @@
                 {{/each}}
                 <li class="pagination-li">
                     <a class="paginate-aria-button nav-next btn btn-link btn-invisible {{#if this.isNextDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" data-action="{{#unless this.isNextDisabled}}page-nav-clicked{{/unless}}" aria-label="Next">
-                        <span class="next-fav fa fa-chevron-right {{#if this.isNextDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
+                        <span class="next-fav sicon sicon-chevron-right {{#if this.isNextDisabled}}disabled{{/if}}" data-page-id="{{this.pageNumClicked}}" aria-hidden="true"></span>
                     </a>
                 </li>
             </ul>

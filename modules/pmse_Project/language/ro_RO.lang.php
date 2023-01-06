@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Creat de utilizator',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Ultima modificare de către utilizator',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Mesaj e-mail sistem',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Șablon de document',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Îmbinare de documente',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Selectare...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Îmbinare de documente în PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Îmbinare de documente',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Regulă operativă',
     'LBL_PMSE_LABEL_RULE' => 'Regulă',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Doar registre actualizate (Toate actualizările - Consultaţi textul Ajutor)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Înregistrări noi sau prima actualizare',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Înregistrări noi și toate actualizările',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Modificare relație',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selectează când va începe procesul.<br><br>Nou: Rulează procesul atunci când este creată o nouă înregistrare.<br><br>Prima actualizare: Procesul rulează numai prima dată când sunt îndeplinite criteriile pentru o înregistrare existentă.<br><br>Toate actualizările: Procesul rulează de fiecare dată când sunt îndeplinite criteriile pentru o înregistrare existentă.<br><br>Înregistrări noi sau prima actualizare: Procesul rulează numai prima dată când sunt îndeplinite criteriile pentru o înregistrare, fie în timpul creării înregistrării, fie în timpul actualizării înregistrării.<br><br>Înregistrări noi și toate actualizările: Procesul rulează de fiecare dată pentru toate înregistrările noi și existente.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selectați când va începe procesul.<br><br>Nou: Rulați procesul atunci când este creată o nouă înregistrare.<br><br>Prima actualizare: Procesul rulează numai prima dată când sunt îndeplinite criteriile pentru o înregistrare existentă.<br><br>Toate actualizările: Procesul rulează de fiecare dată când sunt îndeplinite criteriile pentru o înregistrare existentă.<br><br>Înregistrări noi sau prima actualizare: Procesul rulează numai prima dată când sunt îndeplinite criteriile pentru o înregistrare, fie în timpul creării înregistrării, fie în timpul actualizării înregistrării.<br><br>Înregistrări noi și toate actualizările: Procesul rulează de fiecare dată pentru toate înregistrările noi și existente.<br><br>Modificări relație: Procesul rulează de fiecare dată când există o modificare a relației.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Selectează modulul SugarCRM pentru a se aplica declanşatorului de evenimente',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Dată fixată',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Eroare',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Evaluare schimbare relație',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Campuri',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Evaluarea câmpului modulului',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Toate înregistrările aferente',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Orice înregistrări aferente',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Adăugat',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Eliminat',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Adăugat sau Eliminat',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Orice relație',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Timp de rulare',
 

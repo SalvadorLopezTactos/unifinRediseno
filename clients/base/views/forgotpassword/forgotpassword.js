@@ -77,7 +77,7 @@
         if (app.config.idmModeEnabled === true) {
             window.location.href = app.config.cloudConsoleForgotPasswordUrl;
         }
-        this.logoUrl = app.metadata.getLogoUrl();
+        this.logoUrl = app.metadata.getLogoUrl(app.utils.isDarkMode());
         app.view.View.prototype._render.call(this);
 
         return this;

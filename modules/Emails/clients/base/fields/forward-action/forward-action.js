@@ -176,6 +176,10 @@
      * @return {undefined|Data.Bean}
      */
     emailOptionRelated: function(model) {
+        if (model.link && model.link.type === 'card-link' && model.link.bean) {
+            return model.link.bean;
+        }
+
         var parent;
 
         if (model.get('parent') && model.get('parent').type && model.get('parent').id) {

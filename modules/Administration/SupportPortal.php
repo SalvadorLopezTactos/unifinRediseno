@@ -31,7 +31,7 @@ switch ($view) {
         echo getClassicModuleTitle(
             "Administration",
             array(
-                "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
+                "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
                 $mod_strings['LBL_SUPPORT_TITLE'],
             ),
             false

@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Tijek rada'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Vrsta',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Napomena:</strong> Funkcije Sugar tijek rada i Upravljanje trenutačno su u načinu održavanja. Korisnici izdanja Sugar Enterprise trebali bi se služiti funkcijom koju pruža SugarBPM<sup class="trademark">TM</sup>.',
 );
 

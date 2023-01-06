@@ -50,25 +50,25 @@
         {{#if isColumnDropdown}}
             <th class="nosort morecol">
                 <div class="dropdown">
-                    <button class="btn btn-invisible" data-toggle="dropdown" rel="tooltip" title="{{str 'LBL_COLUMNS'}}" data-placement="bottom" data-action="fields-toggle" track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-invisible" data-toggle="dropdown" rel="tooltip" title="{{str 'LBL_COLUMNS'}}" data-placement="bottom" data-action="fields-toggle" track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="sicon sicon-settings"></i></button>
                     <ul class="dropdown-menu left">
                         {{#each ../../view._fields.all}}
                             <li>
                                 <button class="{{#if selected}}active{{/if}}" data-field-toggle="{{name}}" track="click:{{name}}">
-                                    {{#if selected}}<i class="fa fa-check"></i> {{/if}}{{str label ../../../view.module}}
+                                    {{#if selected}}<i class="sicon sicon-check"></i> {{/if}}{{str label ../../../view.module}}
                                 </button>
                             </li>
                         {{/each}}
                         <li class="divider" data-settings-li="order"></li>
                         <li data-settings-li="order">
                             <button data-columns-order="reset">
-                                <i class="icon fa fa-exchange"></i> {{str 'LBL_RESET_DEFAULT_VIEW' ../../../view.module}}
+                                <i class="icon sicon sicon-reset"></i> {{str 'LBL_RESET_DEFAULT_VIEW' ../../../view.module}}
                             </button>
                         </li>
                         <li class="divider" data-settings-li="widths"></li>
                         <li data-settings-li="widths">
                             <button data-widths="reset">
-                                <i class="icon fa fa-arrows-h"></i> {{str 'LBL_RESET_DEFAULT_WIDTHS' ../../../view.module}}
+                                <i class="icon sicon sicon-refresh"></i> {{str 'LBL_RESET_DEFAULT_WIDTHS' ../../../view.module}}
                             </button>
                         </li>
                     </ul>

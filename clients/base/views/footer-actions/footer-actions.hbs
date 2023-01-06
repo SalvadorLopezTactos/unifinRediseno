@@ -11,6 +11,18 @@
  */
 --}}
 {{#if isAuthenticated}}
-   {{#if isShortcutsEnabled}}<button data-action="shortcuts" class="btn btn-invisible" aria-label="{{str "LBL_SHORTCUTS"}}" role="link"><i class="fa fa-keyboard-o"></i><span class="action-label">  {{str "LBL_SHORTCUTS"}}</span></button>{{/if}}
-   <button data-action="help" data-modal="help" class="btn btn-invisible" aria-pressed="false" role="link"><i class="fa fa-question-circle"></i><span class="action-label"> {{str "LBL_HELP"}}</span></button>
+    {{#if isShortcutsEnabled}}
+        <button data-action="shortcuts" class="btn btn-invisible" aria-label="{{str "LBL_SHORTCUTS"}}" role="link">
+            <i class="sicon sicon-lg sicon-shortcuts-lg"></i>
+            <span class="action-label">
+                {{str "LBL_SHORTCUTS"}}
+            </span>
+        </button>
+    {{/if}}
+    <button data-action="help" data-modal="help" class="btn btn-invisible" aria-pressed="false" role="link">
+        <i class="sicon sicon-lg sicon-help-lg"></i>
+        <span class="action-label">
+            {{str "LBL_HELP"}}
+        </span>
+    </button>
 {{/if}}

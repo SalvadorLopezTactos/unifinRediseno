@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Alle Dashboards für Modul {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Alle Dashboards für Modul {{module}} Ansicht {{view}}',
     'LBL_COPY_OF' => 'Kopy von {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Fokus-Drawer-Dashboards können nicht gelöscht werden.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Neues Dashboard',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Möchten Sie wirklich dieses Dashboard im Standardlayout wiederherstellen?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Möchten Sie wirklich das Standardlayout des Dashboard-Bereichs wiederherstellen?',
+    'LBL_FILTER_UTILS_SELECT' => 'Zugewiesen',
 );

@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filtru',
     'LBL_CONSOLE_FILTER_RULES' => 'Reguli de filtrare',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'Înghețați prima coloană',
+
     'LBL_CONSOLE_COLUMNS' => 'Coloane',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Coloană cu mai multe câmpuri',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Sortare principală',

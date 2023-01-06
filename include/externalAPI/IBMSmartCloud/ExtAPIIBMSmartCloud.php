@@ -263,7 +263,7 @@ class ExtAPIIBMSmartCloud extends OAuthPluginBase implements WebMeeting,WebDocum
      */
     protected function getClient()
     {
-        $client = $this->getOauth($this)->getClient();
+        $client = $this->getOauth()->getClient();
         return $client;
     }
 

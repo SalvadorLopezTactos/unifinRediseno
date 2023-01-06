@@ -25,6 +25,15 @@
      * @param prefill
      */
     setupDuplicateFields: function(prefill){
+        // Clear sugar predict fields
+        const predictFields = [
+            'ai_icp_fit_score_classification',
+            'ai_icp_fit_score_classification_c',
+            'ai_conv_score_classification',
+            'ai_conv_score_classification_c'
+        ];
+        predictFields.forEach(fieldName => prefill.unset(fieldName));
+
         var duplicateBlackList = ['id', 'status', 'converted', 'account_id', 'opportunity_id', 'contact_id'];
         _.each(duplicateBlackList, function(field){
             if(field && prefill.has(field)){

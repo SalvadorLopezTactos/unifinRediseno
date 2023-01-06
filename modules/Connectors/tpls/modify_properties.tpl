@@ -15,7 +15,6 @@
 <script type="text/javascript" src="{sugar_getjspath file='modules/Connectors/Connector.js'}"></script>
 <link rel="stylesheet" type="text/css" href="{sugar_getjspath file='modules/Connectors/tpls/tabs.css'}"/>
 
-{literal}
 
 <script language="javascript">
  	var _tabView;
@@ -26,16 +25,14 @@ var SourceTabs = {
     init : function() {
          _tabView = new YAHOO.widget.TabView();
 
-    	{/literal}
     		 {counter assign=source_count start=0 print=0}
 	        {foreach name=connectors from=$SOURCES key=name item=source}
 	            {counter assign=source_count}
-		{literal}
 		       	tab = new YAHOO.widget.Tab({
-			        label: '{/literal}{$source.name}{literal} ',
-			        dataSrc: {/literal}'index.php?module=Connectors&action=SourceProperties&source_id={$source.id}&to_pdf=true'{literal},
+			        label: '{$source.name} ',
+			        dataSrc: 'index.php?module=Connectors&action=SourceProperties&source_id={$source.id}&to_pdf=true',
 			        cacheData: true,
-			        {/literal}
+
 			        {if $ACTIVE_TAB}
                         {if $ACTIVE_TAB == $source.id}
                     active: true
@@ -49,16 +46,16 @@ var SourceTabs = {
                     active: false
                         {/if}
                     {/if}
-			        {literal}
+
 			    });
-			    {/literal}
+
 			    _tabView.addTab(tab);			    
 			    tab.id = '{$source.id}';		    
 			    //tab.addListener('beforeContentChange', SourceTabs.tabClicked);
 			    tab.addListener('click', SourceTabs.afterContentChange);
 			    _sourceArray[{$source_count}-1] = '{$source.id}';
 	       {/foreach}
-		  {literal}
+
   		_tabView.appendTo('container');
     },
 
@@ -86,7 +83,6 @@ var SourceTabs = {
 }
 YAHOO.util.Event.onDOMReady(SourceTabs.init);
 </script>
-{/literal}
 <form name="ModifyProperties" method="POST" action="index.php" onsubmit="disable_submit('ModifyProperties');" autocomplete= "off">
 {sugar_csrf_form_token}
 <input type="hidden" name="modify" value="true">
@@ -132,9 +128,9 @@ YAHOO.util.Event.onDOMReady(SourceTabs.init);
 </form>
 
 <script type="text/javascript">
-{literal}
+
 YAHOO.util.Event.onDOMReady(SourceTabs.fitContainer);
-{/literal}
+
 
 {foreach name=required_fields from=$REQUIRED_FIELDS key=id item=fields}
 	{foreach from=$fields key=field_key item=field_label}

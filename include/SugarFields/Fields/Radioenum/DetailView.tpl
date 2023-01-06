@@ -11,7 +11,9 @@
  */
 *}
 <span class="sugar_field" id="{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}">
-{ {{sugarvar  key='options' string=true}}[{{sugarvar key='value' string=true}}]}
+{assign var="field_options" value={{sugarvar key='options' string="true"}} }
+{assign var="field_val" value={{sugarvar key='value' string="true"}} }
+{$field_options[$field_val]}
 </span>
 {{if !empty($displayParams.enableConnectors)}}
 {if !empty({{sugarvar  key='options' string=true}}[{{sugarvar key='value' string=true}}])}

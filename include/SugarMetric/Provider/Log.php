@@ -40,7 +40,7 @@ class SugarMetric_Provider_Log implements SugarMetric_Provider_Interface
     public function __construct($params)
     {
         if (!isset($GLOBALS['log']) && class_exists('SugarObject')) {
-            $this->logger = LoggerManager::getLogger('SugarCRM');
+            $this->logger = LoggerManager::getLogger();
         } elseif (isset($GLOBALS['log'])) {
             $this->logger = $GLOBALS['log'];
         }

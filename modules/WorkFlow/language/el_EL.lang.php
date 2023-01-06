@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Ροή Εργασίας'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Τύπος',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Σημείωση:</strong> Η Ροή Εργασίας Sugar και η λειτουργία Διαχείρισης ροής εργασίας είναι σε λειτουργία συντήρησης. Οι πελάτες έκδοσης Enterprise του Sugar θα πρέπει να χρησιμοποιούν τη λειτουργικότητα που παρέχεται από το SugarBPM<sup class="trademark">TM</sup>.',
 );
 

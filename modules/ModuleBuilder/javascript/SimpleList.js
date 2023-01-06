@@ -32,7 +32,7 @@ if(typeof(SimpleList) == 'undefined'){
         for (var i = 0; Dom.get("ul" + i); i++){
             Studio2.scrollZones["ul" + i] = Studio2.getScrollZones("ul" + i);
         }
-           
+
         for (i=0;i<SimpleList.ul_list.length;i++){
             if ( typeof SimpleList.ul_list[i] != "number" && SimpleList.ul_list[i] == "" ) {
                 SimpleList.ul_list[i] = SUGAR.language.get('ModuleBuilder', 'LBL_BLANK');
@@ -48,12 +48,11 @@ if(typeof(SimpleList) == 'undefined'){
     isValidDropDownKey : function(value){
     	if(value.match(/^[\w\d \.]+$/i) || value == "")
     		return true;
-    	
+
     	return false;
     },
     isBlank : function(value){
-    	return value == SUGAR.language.get('ModuleBuilder', 'LBL_BLANK') 
-    			|| (typeof value != "number" && value == "");
+        return value == SUGAR.language.get('ModuleBuilder', 'LBL_BLANK') || (typeof value != 'number' && value == '');
     },
     addToList : function(event, form){
         var dropName = document.getElementById('drop_name');
@@ -66,7 +65,7 @@ if(typeof(SimpleList) == 'undefined'){
         if (!SimpleList.isValidDropDownKey(YAHOO.lang.escapeHTML(dropName.value))) {
 			addToValidate('dropdown_form', 'drop_name', 'error', false, SUGAR.language.get('ModuleBuilder', 'LBL_JS_VALIDATE_KEY_WITH_SPACE'));
     	}
-    	
+
     	if (!check_form("dropdown_form")) return;
 
         if ((!SimpleList.isBlank(YAHOO.lang.escapeHTML(dropName.value)) &&
@@ -134,20 +133,20 @@ if(typeof(SimpleList) == 'undefined'){
         SimpleList.jstransaction.record('deleteDropDown',{'id': liObj.id });
 
     },
- 
+
     sortAscending: function ()
     {
         // now sort using a Shellsort - do this rather than by using the inbuilt sort function as we need to sort a complex DOM inplace
         var parent = YAHOO.util.Dom.get("ul1");
         var items = parent.getElementsByTagName("li") ;
         var increment = Math.floor ( items.length / 2 ) ;
-        
+
         function swapItems(itemA, itemB) {
         	var placeholder = document.createElement ( "li" ) ;
             Dom.insertAfter(placeholder, itemA);
             Dom.insertBefore(itemA, itemB);
             Dom.insertBefore(itemB, placeholder);
-            
+
             //Cleanup the placeholder element
             parent.removeChild(placeholder);
         }
@@ -194,19 +193,29 @@ if(typeof(SimpleList) == 'undefined'){
         };
         reverse ( YAHOO.util.Dom.get("ul1").getElementsByTagName("li") ) ;
     },
-    handleSave:function(){
-         var parseList = function(ul, title) {
+    handleSave: function() {
+        var parseList = function(ul, title, hasSalesStageClassification) {
             var items = ul.getElementsByTagName("li");
             var out = [];
             for (i=0;i<items.length;i=i+1) {
                 var name = items[i].id;
-                var value = document.getElementById('value_'+name).value;
+
+                var value = null;
+                if (hasSalesStageClassification) {
+                    var element = document.getElementById('span_sales_stage_classification_' + name);
+                    if (element) {
+                        value = element.innerText.replace(/[[\]]/gi, '');
+                    }
+                } else {
+                    value = document.getElementById('value_' + name).value;
+                }
                 out[i] = [ name , unescape(value) ];
             }
             return YAHOO.lang.JSON.stringify(out);
         };
         var ul1=YAHOO.util.Dom.get("ul1");
         var hasDeletedItem = false;
+
         for(j = 0; j < SimpleList.jstransaction.JSTransactions.length; j++){
             if(SimpleList.jstransaction.JSTransactions[j]['transaction'] == 'deleteDropDown') {
                 var liEl = new YAHOO.util.Element(SimpleList.jstransaction.JSTransactions[j]['data']['id']);
@@ -217,9 +226,9 @@ if(typeof(SimpleList) == 'undefined'){
         }
         if(hasDeletedItem) {
         	if(!confirm(SUGAR.language.get('ModuleBuilder', 'LBL_CONFIRM_SAVE_DROPDOWN')))
-        		return false;        	
+                return false;
     	}
-        
+
         for(j = 0; j < SimpleList.jstransaction.JSTransactions.length; j++){
             if(SimpleList.jstransaction.JSTransactions[j]['transaction'] == 'deleteDropDown'){
                 var liEl = new YAHOO.util.Element(SimpleList.jstransaction.JSTransactions[j]['data']['id']);
@@ -228,9 +237,16 @@ if(typeof(SimpleList) == 'undefined'){
             }
         }
         var list = document.getElementById('list_value');
-
-        var out = parseList(ul1, "List 1");
+        var out = parseList(ul1, 'List 1', false);
         list.value = out;
+
+        if (SimpleList.hasSalesStageClassification) {
+            var salesStageDropdown = document.getElementById('sales_stage_classification');
+
+            var out2 = parseList(ul1, 'List 2', true);
+            salesStageDropdown.value = out2;
+        }
+
         ModuleBuilder.refreshDD_name = document.getElementById('dropdown_name').value;
         if (document.forms.popup_form)
         {
@@ -249,7 +265,7 @@ if(typeof(SimpleList) == 'undefined'){
                 break;
             }
         }
-        
+
         return required;
     },
     getDeleteConfirmationMessage: function(id) {
@@ -294,12 +310,18 @@ if(typeof(SimpleList) == 'undefined'){
             }
         }
     },
-    editDropDownValue : function(id, record){
+    editDropDownValue: function(id, record) {
         //Close any other dropdown edits
         if (SimpleList)
             SimpleList.endCurrentDropDownEdit();
-        var dispSpan = document.getElementById('span_'+id);
-        var editSpan = document.getElementById('span_edit_'+id);
+        var dispSpan = document.getElementById('span_' + id);
+        var editSpan = document.getElementById('span_edit_' + id);
+
+        if (SimpleList.hasSalesStageClassification) {
+            var salesStageSpan = document.getElementById('span_sales_stage_classification_' + id);
+            var salesStageEditSpan = document.getElementById('span_edit_sales_stage_classification_' + id);
+        }
+
         dispSpan.style.display = 'none';
 
         if(SimpleList.isIE){
@@ -307,18 +329,27 @@ if(typeof(SimpleList) == 'undefined'){
         }else{
             editSpan.style.display = 'inline';
         }
-        var textbox = document.getElementById('input_'+id);
-        textbox.focus();
+
+        if (SimpleList.hasSalesStageClassification) {
+            salesStageSpan.style.display = 'none';
+            salesStageEditSpan.style.display = 'inline';
+        }
+
+        var textbox = document.getElementById('input_' + id);
+        if (!SimpleList.hasSalesStageClassification) {
+            textbox.focus();
+        }
         SimpleList.lastEdit = id;
     },
     endCurrentDropDownEdit : function() {
         if (SimpleList.lastEdit != null)
         {
-            var valueLastEdit = unescape(document.getElementById('input_'+SimpleList.lastEdit).value);
+            var valueLastEdit = unescape(document.getElementById('input_' + SimpleList.lastEdit).value);
             SimpleList.setDropDownValue(SimpleList.lastEdit,valueLastEdit,true);
         }
     },
     setDropDownValue : function(id, val, record){
+        val = YAHOO.lang.escapeHTML(val);
 
         if(record){
             SimpleList.jstransaction.record('changeDropDownValue', {'id':id, 'new':val, 'old':document.getElementById('value_'+ id).value});
@@ -331,7 +362,27 @@ if(typeof(SimpleList) == 'undefined'){
         editSpan.style.display = 'none';
         dispSpan.innerHTML = "["+val+"]";
         document.getElementById('value_'+ id).value = val;
+
+        textbox.focus();
         SimpleList.lastEdit = null; // Bug 14662 - clear the last edit point behind us
+    },
+    setSalesStageDropDownValue: function(el, val, record) {
+        let salesStageValueElement = el.parentElement.previousElementSibling;
+
+        if (record) {
+            SimpleList.jstransaction.record('changeDropDownValue',
+            {
+                'id': el.parentElement.id,
+                'new': val,
+                'old': salesStageValueElement.innerText.replace(/[\[\]']+/g, '')
+            });
+        }
+
+        salesStageValueElement.style.display = 'inline';
+        el.parentElement.style.display = 'none';
+        salesStageValueElement.innerText = '[' + val + ']';
+
+        SimpleList.lastEdit = null;
     },
     undoDeleteDropDown : function(transaction){
 

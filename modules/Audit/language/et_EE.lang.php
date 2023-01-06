@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Selles moodulis auditeeritud väljad: ',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Selles moodulis auditeeritud väljad puuduvad',
     'LBL_CHANGE_LOG' => 'Auditi logi',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kui auditeeritud valuuta väljad on salvestatud muus kui süsteemi vaikevaluutas, kuvab muudatuste logi uued ja vanad väärtused teisendatud, süsteemi määratletud vaikevaluutas.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kui auditeeritud valuuta väljad on salvestatud muus kui süsteemi vaikevaluutas, kuvab muudatuste logi uued ja vanad väärtused teisendatud, süsteemi määratletud vaikevaluutas.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Värskenda versioonile',
+    'LBL_BLANK' => '-tühi-',
 );

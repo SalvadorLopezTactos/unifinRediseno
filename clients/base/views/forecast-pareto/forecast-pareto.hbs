@@ -37,10 +37,10 @@
         {{#if isManager}}
         <div id="{{cid}}-mgr-toggle" class="btn-group dashlet-group" data-toggle="buttons-radio">
             <button track="click:viewMyUserForecastPareTo" class="btn {{#eq settings.attributes.visibility "user"}}active{{/eq}}" rel="tooltip" value="user" data-action="visibility-switcher" title="{{{str "LBL_DASHLET_MY_FORECAST" 'Forecasts'}}}" data-placement="bottom" aria-label="{{{str "LBL_DASHLET_MY_FORECAST" 'Forecasts'}}}" aria-pressed="{{#eq settings.attributes.visibility "user"}}true{{else}}false{{/eq}}">
-                <i class="fa fa-user"></i>
+                <i class="sicon sicon-user"></i>
             </button>
             <button track="click:viewMyTeamsForecastPareTo" class="btn {{#eq settings.attributes.visibility "group"}}active{{/eq}}" rel="tooltip" value="group" data-action="visibility-switcher" title="{{{str "LBL_DASHLET_MY_TEAMS_FORECAST" 'Forecasts'}}}" data-placement="bottom" aria-label="{{{str "LBL_DASHLET_MY_TEAMS_FORECAST" 'Forecasts'}}}" aria-pressed="{{#eq settings.attributes.visibility "group"}}true{{else}}false{{/eq}}">
-                <i class="fa fa-users"></i>
+                <i class="sicon sicon-user-group"></i>
             </button>
         </div>
         {{/if}}

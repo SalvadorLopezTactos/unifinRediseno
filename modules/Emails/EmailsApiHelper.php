@@ -14,35 +14,31 @@ class EmailsApiHelper extends SugarBeanApiHelper
 {
     /**
      * Convert reference to inline image (stored as Note) to URL link
-     * @param string $note ID of the note
-     * @param string $imagePrefix for image file
-     * @param string $imageFilename
+     * @param $noteId
+     * @param string $imageUrlTemplate for image file
      * @param string $descriptionHtml reference to HTML to modify
      */
-    private function cid2Link($noteId, $imagePrefix, $imageFilename, &$descriptionHtml)
+    private function cid2Link($noteId, $imageUrlTemplate, &$descriptionHtml)
     {
+        $imageUrl = sprintf($imageUrlTemplate, $noteId);
         $descriptionHtml = preg_replace(
             '#class="image" src="cid:' . preg_quote($noteId, '#') . '\.(.+?)"#',
-            'class="image" src="' . $imagePrefix  . $noteId . '.\\1"',
+            'class="image" src="' . $imageUrl . '"',
             $descriptionHtml
         );
-
-        // ensure the image is in the cache
-        $note = BeanFactory::retrieveBean('Notes', $noteId);
-        if ($note) {
-            $src = 'upload://' . $note->getUploadId();
-            if (!file_exists($imageFilename) && file_exists($src)) {
-                copy($src, $imageFilename);
-            }
-        }
     }
 
     /**
      * Convert all cid: links in this email into URLs
+     *
+     * @param SugarBean $email
+     * @param string $descriptionHtml
      */
     private function cids2Links($email, &$descriptionHtml)
     {
-        $imagePrefix = rtrim($GLOBALS['sugar_config']['site_url'], '/').'/cache/images/';
+        $settings = new ApiSettings();
+        $imageUrlTemplate = rtrim(SugarConfig::getInstance()->get("site_url", false), '/')
+            . "/rest/" . $settings->formatVersionForUrl() ."/Notes/%s/file/filename?force_download=0&platform=base";
 
         $stmt = $email->db->getConnection()->executeQuery(
             'SELECT id, file_mime_type FROM notes WHERE email_id = ? AND deleted = 0',
@@ -50,12 +46,11 @@ class EmailsApiHelper extends SugarBeanApiHelper
         );
 
         sugar_mkdir(sugar_cached('images/'));
-        while ($a = $stmt->fetch()) {
-            list($type, $subtype) = explode('/', $a['file_mime_type']);
+        while ($a = $stmt->fetchAssociative()) {
+            list($type) = explode('/', $a['file_mime_type']);
             if (strtolower($type) === 'image') {
                 $noteId = $a['id'];
-                $imageFilename = sugar_cached('images/') . $noteId . '.' . strtolower($subtype);
-                $this->cid2Link($noteId, $imagePrefix, $imageFilename, $descriptionHtml);
+                $this->cid2Link($noteId, $imageUrlTemplate, $descriptionHtml);
             }
         }
     }

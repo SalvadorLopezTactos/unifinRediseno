@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Ідентифікатор адреси електронної пошти для відповіді',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Адреса електронної пошти для відповіді',
     'LBL_PRIMARY_TEAM' => 'Основна команда',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Привілейований контрагент для надсилання',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель «Налаштування електронної пошти»',
 );

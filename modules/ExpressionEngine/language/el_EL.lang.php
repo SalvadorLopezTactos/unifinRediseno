@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Μηχανή Έκφρασης',
-  'LBL_MODULE_NAME_SINGULAR' => 'Μηχανή Έκφρασης',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Προηγούμενο' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Επόμενο' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Επέκταση' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Μηχανή Έκφρασης',
+    'LBL_MODULE_NAME_SINGULAR' => 'Μηχανή Έκφρασης',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Προηγούμενο' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Επόμενο' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Επέκταση' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Άγνωστο πεδίο',
+];

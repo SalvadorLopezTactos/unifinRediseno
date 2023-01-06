@@ -12,8 +12,12 @@
 --}}
 <div class="input-append date datetime">
     <input type="text" data-type="date" name="{{name}}_date" class="datepicker" value="{{value.date}}"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} placeholder="{{fieldPlaceholder}}">
-    <span class="add-on date" data-icon="calendar"><i class="fa fa-calendar"></i></span>
+    <span class="add-on date" data-icon="calendar">
+        <i class="sicon sicon-calendar"></i>
+    </span>
     <input type="text" data-type="time" name="{{name}}_time" value="{{value.time}}" autocomplete="off"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} placeholder="{{secondaryFieldPlaceholder}}">
-    <span class="add-on time" data-action="show-timepicker"><i class="fa fa-clock-o"></i></span>
+    <span class="add-on time" data-action="show-timepicker">
+        <i class="sicon sicon-clock"></i>
+    </span>
     {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
 </div>

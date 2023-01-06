@@ -17,23 +17,6 @@
     extendsFrom: 'RecordlistView',
 
     /**
-     * Block focus drawer dashboards from being deleted
-     *
-     * @param model
-     */
-    warnDelete: function(model) {
-        if (model.get('view') === 'focus') {
-            app.alert.show('delete_confirmation', {
-                level: 'warning',
-                messages: app.lang.get('LBL_DELETE_FOCUS_DRAWER', this.module)
-            });
-            return;
-        }
-
-        this._super('warnDelete', [model]);
-    },
-
-    /**
      * @inheritdoc
      */
     getDeleteMessages: function(model) {

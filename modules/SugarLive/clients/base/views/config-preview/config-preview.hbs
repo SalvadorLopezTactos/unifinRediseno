@@ -32,8 +32,9 @@
 
                                     <div class='omni-detail-content'>
                                         <div class='left-column'>
-                                            <div>{{getModuleName 'Contacts'}}</div>
-                                            <div>{{getModuleName 'Cases'}}</div>
+                                            {{#each ../summaryFields}}
+                                                <div>{{str this}}</div>
+                                            {{/each}}
                                         </div>
                                         <div class='right-column'>
                                             <div></div>

@@ -23,38 +23,38 @@ class ViewAdminwizard extends SugarView
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->options['show_header'] = false;
         $this->options['show_javascript'] = false;
     }
-    
+
         /**
          * @see SugarView::display()
          */
         public function display()
         {
             global $current_user, $mod_strings, $app_list_strings, $sugar_config, $locale, $sugar_version;
-            
+
             if(!is_admin($current_user)){
-            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']); 
+            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
         }
-                
+
                 $themeObject = SugarThemeRegistry::current();
-        
+
         $configurator = new Configurator();
         $sugarConfig = SugarConfig::getInstance();
         $focus = Administration::getSettings();
-        
+
         $ut = $GLOBALS['current_user']->getPreference('ut');
         if(empty($ut))
             $this->ss->assign('SKIP_URL','index.php?module=Users&action=Wizard&skipwelcome=1');
         else
             $this->ss->assign('SKIP_URL','index.php?module=Home&action=index');
-        
+
         // Always mark that we have got past this point
         $focus->saveSetting('system','adminwizard',1);
         $css = $themeObject->getCSS();
-        $favicon = $themeObject->getImageURL('sugar_icon.ico',false);
+        $favicon = $themeObject->getImageURL('sugar-favicon.png', false);
         $this->ss->assign('FAVICON_URL',getJSPath($favicon));
         $this->ss->assign('SUGAR_CSS', $css);
         $this->ss->assign('MOD_USERS',return_module_language($GLOBALS['current_language'], 'Users'));
@@ -76,7 +76,7 @@ class ViewAdminwizard extends SugarView
         $this->ss->assign('mail_smtpauth_req', ($focus->settings['mail_smtpauth_req']) ? "checked='checked'" : '');
         $this->ss->assign('MAIL_SSL_OPTIONS', get_select_options_with_id($app_list_strings['email_settings_for_ssl'], $focus->settings['mail_smtpssl']));
         $this->ss->assign('notify_allow_default_outbound_on', (!empty($focus->settings['notify_allow_default_outbound']) && $focus->settings['notify_allow_default_outbound'] == 2) ? 'CHECKED' : '');
-        $this->ss->assign('THEME', SugarThemeRegistry::current()->__toString());            
+        $this->ss->assign('THEME', SugarThemeRegistry::current()->__toString());
 
         // get javascript
         ob_start();
@@ -90,7 +90,7 @@ class ViewAdminwizard extends SugarView
 
         $page = $this->request->getValidInputRequest('page', null, 'welcome');
         $this->ss->assign('START_PAGE', $page);
-                
+
             $this->ss->display('modules/Configurator/tpls/adminwizard.tpl');
         }
 }

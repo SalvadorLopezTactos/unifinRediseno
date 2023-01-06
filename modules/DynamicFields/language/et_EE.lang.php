@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Välja nimi on juba olemas',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Välja nimi peab sisaldama ainult järgmisi märke: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Ühtegi moodulit pole kaasatud, salvestada pole võimalik',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Rippmenüü nimi on juba olemas',
     'LBL_BTN_ADD' => 'Lisa',
     'LBL_BTN_EDIT' => 'Redigeeri',
     'LBL_GENERATE_URL' => 'Loo URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Veeru {0} lisamine',
     'LBL_DONE' => 'Tehtud',
     'LBL_EXE_NON_SIM_MODE' => 'Täida mittesimuleerimisrežiim',
+    'LBL_CALCULATION_VISIBLE' => 'Muuda arvutuste jaoks nähtavaks',
 );
-
-
-?>

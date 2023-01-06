@@ -23,6 +23,11 @@ $viewdefs['Home']['base']['view']['twitter'] = array(
                 'twitter' => 'sugarcrm',
                 'limit' => '3',
             ),
+            'filter' => [
+                'blacklist' => [
+                    'module' => 'Administration',
+                ],
+            ],
         ),
     ),
     'config' => array(

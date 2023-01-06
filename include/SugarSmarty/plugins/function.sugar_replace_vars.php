@@ -54,7 +54,7 @@ function smarty_function_sugar_replace_vars($params, &$smarty)
 	    $smarty->trigger_error("sugarvar: missing 'subject' parameter");
 	    return;
 	} 
-	$fields = empty($params['fields']) ? $smarty->get_template_vars('fields') : $params['fields'];
+        $fields = empty($params['fields']) ? $smarty->getTemplateVars('fields') : $params['fields'];
     $subject = replace_sugar_vars($params['subject'], $fields, !empty($params['use_curly']));
 	if (!empty($params['assign']))
 	{

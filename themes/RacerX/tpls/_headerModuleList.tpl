@@ -26,16 +26,17 @@ Set_Cookie('sugar_theme_gm_current','{$currentGroupTab}',30,'/','','');
 {assign var='overflowHidden' value='Hidden'}
 {foreach from=$groupTabs item=tabGroup key=tabGroupName name=tabGroups}
 {php}
-$tabGroupName = str_replace(" ", "_", $this->get_template_vars('tabGroupName'));
-$currentGroupTab = str_replace(" ", "_", $this->get_template_vars('currentGroupTab'));
-$this->assign('tabGroupName', $tabGroupName);
-$this->assign('currentGroupTab', $currentGroupTab);
+$tabGroupName = str_replace(" ", "_", $_smarty_tpl->getTemplateVars('tabGroupName'));
+$currentGroupTab = str_replace(" ", "_", $_smarty_tpl->getTemplateVars('currentGroupTab'));
+$_smarty_tpl->assign('tabGroupName', $tabGroupName);
+$_smarty_tpl->assign('currentGroupTab', $currentGroupTab);
+$_smarty_tpl->assign('tabGroupNameWithUnderscore', $tabGroupName . '_');
 {/php}
   {* This is a little hack for Smarty, to make the ID's match up for compatibility *}
   {if $tabGroupName == $APP.LBL_MODULE_ALL}
   {assign var='groupTabId' value=''}
   {else}
-  {assign var='groupTabId' value=$tabGroupName$underscore}
+  {assign var='groupTabId' value=$tabGroupNameWithUnderscore}
   {/if}
 	<ul id="themeTabGroupMenu_{$tabGroupName}" class="sf-menu" style="{if $tabGroupName != $currentGroupTab}display:none;{/if}">
 	{* visible menu items *}
@@ -191,8 +192,8 @@ $this->assign('currentGroupTab', $currentGroupTab);
 								<ul class="sf-menu filter-menu">
 						          {foreach from=$groupTabs item=module key=group name=groupList}
 				                      {php}
-				                          $group = str_replace(" ", "_", $this->get_template_vars('group'));
-				                          $this->assign('group_id', $group);
+				                          $group = str_replace(" ", "_", $_smarty_tpl->getTemplateVars('group'));
+				                          $_smarty_tpl->assign('group_id', $group);
 				                      {/php}
 						          <li {if $tabGroupName eq $group}class="selected"{/if}><a href="javascript:(SUGAR.themes.sugar_theme_gm_switch('{$group}', '{$group_id}') && false)" class="{if $tabGroupName eq $group}selected{/if}">{$group}</a></li>
 						          {/foreach}

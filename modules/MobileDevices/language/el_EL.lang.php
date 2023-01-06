@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'Κινητές συσκευές',
     'LBL_MODULE_NAME_SINGULAR' => 'Κινητή συσκευή',
     'LBL_DEVICE_ID' => 'Αναγνωριστικό συσκευής',
-    'LBL_DEVICE_PLATFORM' => 'Πλατφόρμα',
+    'LBL_DEVICE_PLATFORM' => 'Πλατφόρμα συσκευής',
 ];

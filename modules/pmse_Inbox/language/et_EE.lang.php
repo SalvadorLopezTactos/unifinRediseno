@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Protsesside kirjete töölaud',
 
     'LBL_CAS_ID' => 'Protsessi number',
+    'LBL_CAS_STATUS' => 'Protsessi olek',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Tundmatu (asjakohane kasutaja ID:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "ülesanne on",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "ülesanne oli ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "määrati protsess #%s %s kirje %s %s toiminguga %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "ajal",
     'LBL_PMSE_HISTORY_LOG_AND'  => "ja",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'kirje lingitud või linkimine tühistatud',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Kinnita',
     'LBL_PMSE_LABEL_REJECT' => 'Hülga',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Pooleli protsessid',
     'LBL_STATUS_CANCELLED' => 'Tühistatud protsessid',
     'LBL_STATUS_ERROR' => 'Protsessi tõrge',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Lõpetatud',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Lõpetatud',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Pooleli',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Tühistatud',
+    'LBL_STATUS_ERROR_ENUM' => 'Viga',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Protsessi haldus',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Järelevalveta protsessid',

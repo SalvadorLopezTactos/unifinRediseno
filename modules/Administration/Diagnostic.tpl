@@ -20,7 +20,7 @@
 	<tr>
 	<td>
 	<input title="{$MOD.LBL_DIAG_EXECUTE_BUTTON}" class="button" onclick="this.form.action.value='DiagnosticRun';" type="submit" name="button" value="  {$MOD.LBL_DIAG_EXECUTE_BUTTON}  " >
-	<input title="{$MOD.LBL_DIAG_CANCEL_BUTTON}" class="button" onclick="this.form.action.value='index'; this.form.module.value='Administration'; " type="submit" name="button" value="  {$MOD.LBL_DIAG_CANCEL_BUTTON}  "></td>
+	<input title="{$MOD.LBL_DIAG_CANCEL_BUTTON}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="  {$MOD.LBL_DIAG_CANCEL_BUTTON}  "></td>
 
 	</tr>
 </table>
@@ -71,7 +71,6 @@
 </div>
 </form>
 
-{literal}
 <script type="text/javascript" language="Javascript">
   var md5filesmd5_checked;
   var md5calculated_checked;
@@ -95,4 +94,3 @@
     }
   }
 </script>
-{/literal}

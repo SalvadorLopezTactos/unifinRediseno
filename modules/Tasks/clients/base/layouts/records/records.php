@@ -11,17 +11,19 @@
  */
 
 $viewdefs['Tasks']['base']['layout']['records'] = array(
+    'css_class'=> 'flex-list-layout flex flex-column h-full',
     'components' => array(
         array(
             'layout' => array(
                 'type' => 'default',
                 'name' => 'sidebar',
+                'css_class' => 'h-full',
                 'components' => array(
                     array(
                         'layout' => array(
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane span8 flex flex-column',
                             'components' => array(
                                 array(
                                     'view' => 'list-headerpane',
@@ -36,23 +38,23 @@ $viewdefs['Tasks']['base']['layout']['records'] = array(
                                             ),
                                         ),
                                         'refresh_button' => true,
-                                        'css_class' => 'pipeline-refresh-btn',
+                                        'css_class' => 'pipeline-refresh-btn flex flex-column h-full',
                                         'availableToggles' => array(
                                             array(
                                                 'name' => 'pipeline',
-                                                'icon' => 'fa-align-left',
+                                                'icon' => 'sicon-tile-view',
                                                 'label' => 'LBL_PIPELINE_VIEW_BTN',
                                                 'css_class' => 'pipeline-view-button',
                                                 'route' => 'pipeline',
                                             ),
                                             array(
                                                 'name' => 'list',
-                                                'icon' => 'fa-table',
+                                                'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
                                             ),
                                             array(
                                                 'name' => 'activitystream',
-                                                'icon' => 'fa-clock-o',
+                                                'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
                                             ),
                                         ),

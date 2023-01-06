@@ -36,6 +36,10 @@
             });
             this.configLayout = true;
         }
+
+        this.events = _.extend({}, this.events, {
+            'click [name=restore_dashlets_button]': 'handleRestoreDashletsClick'
+        });
         this._super('initialize', [options]);
     },
 
@@ -83,7 +87,7 @@
         // In config drawer, the Add Dashlet button should be visible everywhere
         // except the search tab
         var activeTab = this._getActiveDashboardTab();
-        this.toggleAddDashletButton(activeTab !== 0);
+        this.toggleFabButton(['add_dashlet_button'], activeTab !== 0);
 
         // Set timeout to allow tab to render before opening buttons
         var self = this;
@@ -98,7 +102,7 @@
      * @private
      */
     _getActiveDashboardTab: function() {
-        return this.context.get('activeTab') || 0;
+        return this.context.get('activeTab');
     },
 
     /**
@@ -142,6 +146,30 @@
             if (component) {
                 component.context.trigger('dashboard:restore-tab:clicked', this._getActiveDashboardTab());
             }
+        }
+    },
+
+    /**
+     * Handle restore dashlets button click
+     */
+    handleRestoreDashletsClick: function() {
+        app.alert.show('restore_dashlet_confirmation', {
+            level: 'confirmation',
+            messages: app.lang.get('LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM', 'Dashboards'),
+            onConfirm: _.bind(function() {
+                this.restoreDashlets();
+            }, this)
+        });
+    },
+
+    /**
+     * Restores dashlets on the dashboard
+     */
+    restoreDashlets: function() {
+        // get the dashboard component
+        var component = this.closestComponent('dashboard');
+        if (component) {
+            component.layout.trigger('dashboard:restore_dashlets_button:click', component.context);
         }
     }
 })

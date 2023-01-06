@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'تاريخ الإنشاء بواسطة المستخدم',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'تاريخ آخر تعديل بواسطة المستخدم',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'البريد الإلكتروني للنظام',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'قالب المستند',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'دمج المستندات',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'تحديد...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'دمج المستندات مع PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'دمج المستندات',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'قاعدة العمل',
     'LBL_PMSE_LABEL_RULE' => 'القاعدة',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'تحديث السجلات فقط (جميع التحديثات - انظر نص التعليمات)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'السجلات الجديدة أو أول تحديث',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'السجلات الجديدة وكل التحديثات',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'تغير العلاقة',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'حدد متى ستبدأ العملية.<br><br>جديد: تشغيل العملية عند إنشاء سجل جديد.<br><br>أول تحديث: تشغيل العملية فقط في أول مرة تتم فيها تلبية معيار لسجل موجود.<br><br>كل التحديثات: تشغيل العملية في كل مرة تتم فيها تلبية معيار لسجل معين.<br><br>السجلات الجديدة أو أول تحديث: تشغيل العملية فقط في أول مرة تتم فيها تلبية معيار لسجل أو أثناء إنشاء السجل أو تحديث السجل.<br><br>السجلات الجديدة وكل التحديثات: تشغيل العملية في كل مرة لكل السجلات الجديدة والحالية.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'حدد متى ستبدأ العملية.<br><br>جديد: تشغيل العملية عند إنشاء سجل جديد.<br><br>أول تحديث: تشغيل العملية فقط في أول مرة تتم فيها تلبية معيار لسجل موجود.<br><br>كل التحديثات: تشغيل العملية في كل مرة تتم فيها تلبية معيار لسجل معين.<br><br>السجلات الجديدة أو أول تحديث: تشغيل العملية فقط في أول مرة تتم فيها تلبية معيار لسجل أو أثناء إنشاء السجل أو تحديث السجل.<br><br>السجلات الجديدة وكل التحديثات: تشغيل العملية في كل مرة لكل السجلات الجديدة والحالية.<br><br>تغير العلاقة: تشغيل العملية في كل مرة تتغير فيها علاقة.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'حدد وحدة SugarCRM المطلوب تطبيق مشغل الحدث عليها',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'تاريخ ثابت',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'خطأ',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'تقييم تغير العلاقة',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'الحقول',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'تقييم حقل الوحدة',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'الوحدة',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'جميع السجلات ذات الصلة',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'أي سجلات ذات صلة',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'مضاف',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'تمت إزالته',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'مضاف أو تمت إزالته',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'أي علاقة',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'وقت التشغيل',
 

@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Všechny řídicí panely pro modul {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Všechny řídicí panely pro modul {{module}} zobrazení {{view}}',
     'LBL_COPY_OF' => 'Kopie {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Řídicí panely zásuvek zaměření nelze odstranit.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Vytvořit řídicí panel',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Opravdu chcete obnovit tento řídicí panel do výchozího rozložení?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Opravdu chcete obnovit výchozí rozložení řídicího panelu?',
+    'LBL_FILTER_UTILS_SELECT' => 'Přiřazeno',
 );

@@ -34,6 +34,7 @@ $moduleList[] = 'Quotes';
 $moduleList[] = 'Products';
 $moduleList[] = 'Forecasts';
 $moduleList[] = 'Contracts';
+$moduleList[] = 'DocuSignEnvelopes';
 $moduleList[] = 'pmse_Project';
 $moduleList[] = 'pmse_Inbox';
 $moduleList[] = 'pmse_Business_Rules';
@@ -43,6 +44,7 @@ $moduleList[] = 'Shifts';
 $moduleList[] = 'Purchases';
 $moduleList[] = 'PurchasedLineItems';
 $moduleList[] = 'Messages';
+$moduleList[] = 'Escalations';
 
 $moduleList[] = 'Documents';
 $moduleList[] = 'Cases';
@@ -105,7 +107,6 @@ $beanList['CustomFields']       = 'CustomFields';
 
 $beanList['Documents']  = 'Document';
 $beanList['DocumentRevisions']  = 'DocumentRevision';
-$beanList['Roles']  = 'Role';
 
 $beanList['Audit']  = 'Audit';
 
@@ -163,6 +164,7 @@ $beanList['Contracts']  = 'Contract';
 $beanList['ContractTypes']  = 'ContractType';
 $beanList['Holidays'] = 'Holiday';
 $beanList['SessionManager'] = 'SessionManager';
+$beanList['DocuSignEnvelopes'] = 'DocuSignEnvelope';
 
 $beanList['CustomQueries']  = 'CustomQuery';
 $beanList['DataSets']  = 'DataSet';
@@ -218,6 +220,7 @@ $beanList['OutboundEmail'] = 'OutboundEmail';
 $beanList['EmailParticipants'] = 'EmailParticipant';
 $beanList['DataPrivacy'] = 'DataPrivacy';
 $beanList['ReportSchedules'] = 'ReportSchedule';
+$beanList['Calendar'] = 'Calendar';
 // this list defines all of the files that contain the SugarBean class definitions from $beanList
 // to create a new module's bean class, add the file definition here
 $beanFiles = array();
@@ -267,10 +270,9 @@ $beanFiles['UsersLastImport']= 'modules/Import/UsersLastImport.php';
 $beanFiles['Administration']= 'modules/Administration/Administration.php';
 $beanFiles['UpgradeHistory']= 'modules/Administration/UpgradeHistory.php';
 $beanFiles['vCal']          = 'modules/vCals/vCal.php';
+$beanFiles['Calendar']      = 'modules/Calendar/Calendar.php';
 
 $beanFiles['Version']           = 'modules/Versions/Version.php';
-
-$beanFiles['Role']          = 'modules/Roles/Role.php';
 
 $beanFiles['Document']  = 'modules/Documents/Document.php';
 $beanFiles['DocumentRevision']  = 'modules/DocumentRevisions/DocumentRevision.php';
@@ -330,6 +332,7 @@ $beanFiles['Expression']  = 'modules/Expressions/Expression.php';
 $beanFiles['SessionManager']      = 'modules/Administration/SessionManager.php';
 $beanFiles['ContractType']  = 'modules/ContractTypes/ContractType.php';
 $beanFiles['Holiday'] = 'modules/Holidays/Holiday.php';
+$beanFiles['DocuSignEnvelope'] = 'modules/DocuSignEnvelopes/DocuSignEnvelope.php';
 $beanFiles['CustomQuery']= 'modules/CustomQueries/CustomQuery.php';
 $beanFiles['DataSet']= 'modules/DataSets/DataSet.php';
 $beanFiles['DataSet_Attribute']= 'modules/DataSets/DataSet_Attribute.php';
@@ -390,13 +393,13 @@ $beanFiles['ReportSchedule'] = 'modules/ReportSchedules/ReportSchedule.php';
 $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'Dropdown', 'Dynamic', 'DynamicFields', 'DynamicLayout', 'EditCustomFields',
     'Help', 'Import',  'MySettings', 'EditCustomFields','FieldsMetaData',
-    'UpgradeWizard', 'Trackers', 'Connectors', 'Employees', 'Calendar',
+    'UpgradeWizard', 'Trackers', 'Connectors', 'Employees',
     'Manufacturers', 'ProductBundles', 'ProductBundleNotes', 'ProductCategories', 'ProductTypes',
     'Shippers', 'TaxRates', 'TeamNotices', 'Teams', 'TimePeriods', 'ForecastOpportunities', 'Quotas',
     'ContractTypes',
     'ACLFields', 'Holidays', 'SNIP', 'ForecastDirectReports',
     'Releases','Sync',
-    'Users',  'Versions','Roles','EmailMarketing'
+    'Users',  'Versions','EmailMarketing'
     ,'OptimisticLock', 'TeamMemberships', 'TeamSets', 'TeamSetModule', 'Audit', 'MailMerge', 'EmailAddresses','EmailText',
     'Schedulers','Schedulers_jobs', /*'Queues',*/ 'EmailTemplates','UserSignature',
     'CampaignTrackers', 'CampaignLog', 'EmailMan', 'Prospects', 'ProspectLists',
@@ -615,9 +618,7 @@ $bwcModules = array(
     'ACLFields',
     'ACLRoles',
     'ACLActions',
-    'Administration',
     'Audit',
-    'Calendar',
     'CampaignLog',
     'Campaigns',
     'CampaignTrackers',
@@ -626,8 +627,6 @@ $bwcModules = array(
     'Connectors',
     'CustomQueries',
     'DataSets',
-    'DocumentRevisions',
-    'Documents',
     'EAPM',
     'EmailAddresses',
     'EmailMarketing',
@@ -654,7 +653,6 @@ $bwcModules = array(
     'Relationships',
     'Releases',
     'ReportMaker',
-    'Roles',
     'SavedSearch',
     'Schedulers',
     'SchedulersJobs',
@@ -716,6 +714,10 @@ $beanList['SugarLive']  = 'SugarLive';
 $beanFiles['SugarLive'] = 'modules/SugarLive/SugarLive.php';
 $modInvisList[] = 'SugarLive';
 
+// module for Escalations
+$beanList['Escalations'] = 'Escalation';
+$beanFiles['Escalation'] = 'modules/Escalations/Escalation.php';
+
 // this module doesn't need a Bean
 $modInvisList[] = 'Feedbacks';
 
@@ -733,6 +735,35 @@ $modInvisList[] = 'DataArchiver';
 $beanList['ArchiveRuns'] = 'ArchiveRuns';
 $beanFiles['ArchiveRuns'] = 'modules/ArchiveRuns/ArchiveRuns.php';
 $modInvisList[] = 'ArchiveRuns';
+
+//modules for Hint
+$beanList['HintEnrichFieldConfigs'] = 'HintEnrichFieldConfig';
+$beanFiles['HintEnrichFieldConfig'] = 'modules/HintEnrichFieldConfigs/HintEnrichFieldConfig.php';
+$beanList['HintAccountsets'] = 'HintAccountset';
+$beanFiles['HintAccountset'] = 'modules/HintAccountsets/HintAccountset.php';
+$beanList['HintNewsNotifications'] = 'HintNewsNotification';
+$beanFiles['HintNewsNotification'] = 'modules/HintNewsNotifications/HintNewsNotification.php';
+$beanList['HintNotificationTargets'] = 'HintNotificationTarget';
+$beanFiles['HintNotificationTarget'] = 'modules/HintNotificationTargets/HintNotificationTarget.php';
+
+// module for Document Templates
+$moduleList[] = 'DocumentTemplates';
+$beanList['DocumentTemplates'] = 'DocumentTemplate';
+$beanFiles['DocumentTemplate'] = 'modules/DocumentTemplates/DocumentTemplate.php';
+$beanList['DocumentMerges'] = 'DocumentMerge';
+$beanFiles['DocumentMerge'] = 'modules/DocumentMerges/DocumentMerge.php';
+$modInvisList[] = 'DocumentMerges';
+
+$moduleList[] = 'CloudDrivePaths';
+$beanList['CloudDrivePaths'] = 'CloudDrivePath';
+$beanFiles['CloudDrivePath'] = 'modules/CloudDrivePaths/CloudDrivePath.php';
+$modInvisList[] = 'CloudDrivePaths';
+
+$beanList['Geocode'] = 'Geocode';
+$beanFiles['Geocode'] = 'modules/Maps/Geocode/Geocode.php';
+
+$beanList['GeocodeJob'] = 'GeocodeJob';
+$beanFiles['GeocodeJob'] = 'modules/Maps/GeocodeJob/GeocodeJob.php';
 
 foreach(SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension("modules")) as $modExtFile) {
     include $modExtFile;

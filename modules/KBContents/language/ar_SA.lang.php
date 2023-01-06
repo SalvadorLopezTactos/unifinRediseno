@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'عرض القوالب',
     'LNK_LIST_KBCATEGORIES' => 'عرض الفئات',
     'LBL_TEMPLATES' => 'قوالب',
+    'LBL_TEMPLATE' => 'القالب',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'سيقوم القالب بالكتابة فوق جميع المحتويات.' .
         ' هل تريد بالتأكيد استخدام هذا القالب؟',
     'LNK_IMPORT_KBCONTENTS' => 'استيراد مقالات',

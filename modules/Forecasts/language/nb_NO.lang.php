@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Beskrivelse',
     'LBL_OW_TYPE'=>'Type',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Teamprognose for <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Direketrapport',
     'LBL_FDR_OPPORTUNITIES'=>'Muligheter i prognose:',
     'LBL_FDR_WEIGH'=>'Vektet mulighetsmengde:',
     'LBL_FDR_COMMIT'=>'Engasjeringsmengde',
     'LBL_FDR_DATE_COMMIT'=>'Engasjeringsdato',
+    'LBL_FDR_FORECAST_HEADER' => 'Selgerprognose for <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognoser: Arbeidsflate',
     'LBL_DV_MY_FORECASTS' => 'Mine prognoser',
-    'LBL_DV_MY_TEAM' => "Min gruppes prognoser" ,
+    'LBL_DV_MY_TEAM' => "Min gruppes prognoser",
     'LBL_DV_TIMEPERIODS' => 'Tidsperioder:',
     'LBL_DV_FORECAST_PERIOD' => 'Tidsperiode for prognose',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognosemuligheter',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Grunnlagsrente',
 
     'LBL_QUOTA' => 'Budsjett',
-    'LBL_QUOTA_ADJUSTED' => 'Budsjett (Justert)',
+    'LBL_QUOTA_ADJUSTED' => 'Justert kvote',
 
     'LBL_FORECAST_FOR'=>'Arbeidsflate for prognose:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Rollup)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Verdi vs. Engasjert vs. Faktisk',
 
     'LBL_FORECAST' => 'Prognose',
+    'LBL_COMMITMENT' => 'Forpliktelse',
+    'LBL_TEAM_COMMITMENT' => 'Teamforpliktelse',
+    'LBL_FORECASTED' => 'Prognostisert',
+    'LBL_ADJUSTED_TOTAL' => 'Justert total',
     'LBL_COMMIT_STAGE' => 'Forpliktet stadie',
     'LBL_SALES_STAGE' => 'Fase',
     'LBL_AMOUNT' => 'Beløp',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, og {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'sannsynlig {{{direction}}} {{{from}}} til {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'best {{{direction}}} {{{from}}} til {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'verst {{{direction}}} {{{from}}} til {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'trolig forble det samme',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'best forble det samme',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'verst forble det samme',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Forpliktet (trolig) {{{direction}}} {{{from}}} til {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Forpliktet (best) {{{direction}}} {{{from}}} til {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Forpliktet (verst) {{{direction}}} {{{from}}} til {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Forpliktet (trolig) forble det samme',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Forpliktet (Best) forble det samme',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Forpliktet (Verst) forble det samme',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Denne måned på {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Visning Totalt',
     'LBL_TOTAL' => 'Total',
     'LBL_OVERALL_TOTAL' => 'Samlet total',
-    'LBL_EDITABLE_INVALID' => 'Ugyldig verdi for {0}',
+    'LBL_EDITABLE_INVALID' => 'Ugyldig verdi for {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Verdien må være mellom {0} og{1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Du har ulagrede endringer i regnearket.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Bare lagret eller forpliktet data vil bli eksportert. Avbryt for å avbryte. Bekreft for å eksportere lagrede data.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Inkludert',
     'LBL_CHART_NOT_INCLUDED' => 'Ikke inkludert',
     'LBL_CHART_ADJUSTED' => '(Justert)',
-    'LBL_SAVE_DRAFT' => 'Lagre utkast',
+    'LBL_SAVE_DRAFT' => 'Lagre',
     'LBL_CHANGES_BY' => 'Endringer ved {0}',
     'LBL_FORECAST_SETTINGS' => 'Innstillinger',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Regnskapsår startdato:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurer tidsperioden som vil bli brukt i Prognose modulen. <br /><br />Vær oppmerksom på at tidsperiode innstillinger ikke kan endres etter første oppsettet. <br /><br />Start med å velge startdatoen for regnskapsåret. Deretter velger du hvilken type tidsperiode for prognosen. Datointervallet for tidsperioden vil bli beregnet automatisk basert på dine valg. Undertidsperioden er base for prognose regnearket. <br /><br />Den synlige fremtid og fortids tidsperioder vil avgjøre antallet synlige underperioder i Prognose modulen. Brukerne er i stand til å se og redigere prognose tallene i de synlige delperiodene.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du ønsker å kategorisere {{forecastByModule}}. <br><br>Vær oppmerksom på at områdeinnstillinger kan ikke endres etter første handling. For oppgraderte instanser, låses områdeinnstillingen med eksisterende prognosedata.<br><br>Du kan velge to eller flere kategorier basert på mulighetsområde eller opprette kategorier som ikke er basert på mulighet.<br><br>Det er avkryssingsruter til venstre av dine tilpassede kategorier, bruk disse for å avgjøre hvilke områder vil bli inkludert i prognosemengden igangsatt og varsle lederne. <br><br>En bruker kan endre inkluder-/ekskluder-statusen og kategorien til {{forecastByModule}} manuelt fra arbeidsskjemaet.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du vil kategorisere {{forecastByModule}}. <br><br>Merk deg at rekkeviddeinnstillingene ikke kan endres etter den første forpliktelsen For oppdaterte hendelser er rekkeviddeinnstillingen låst med eksisterende prognosedata.<br><br>Du kan velge to eller flere kategorier basert på sannsynlighetsrekkevidder eller opprette kategorier som ikke er basert på sannsynlighet. <br><br>Det finnes avmerkingsbokser til venstre for dine standardkategorier; bruk disse til å beslutte hvilke rekkevidder som inkluderes i prognosemengden som forpliktes og rapporteres til ledere. <br><br>En bruker kan endre inkluder/ekskluder status og kategori for {{forecastByModule}} manuelt fra sitt regneark.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Velg kolonnene du ønsker at brukeren kan fylle ut for sine Prognoser for hver {{forecastByModuleSingular}}. Vær oppmerksom på de sannsynlige beløp som er knyttet til det beløpet som vises i {{forecastByModule}}; på grunn av dette kan ikke sannsynlighet kolonnen skjules.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Velg hvilke kolonner du ønsker å se i Prognose modulen. Listen over felt vil kombinere regnearket og tillater brukeren å velge hvordan den konfigurerer sin visning.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jeg er et eksempel for prognosen ved hvordan-tekste!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Overgå med',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Ingen data',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Møte budsjett',
+    'LBL_OPEN_LIKELY' => 'Åpne sannsynlig',
+    'LBL_OPEN_BEST' => 'Åpne beste',
+    'LBL_OPEN_WORST' => 'Åpne verste',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Tildele budsjett',
     'LBL_ASSIGNING_QUOTA' => 'Tildeler budsjett',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Mitt teams prognoser",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Du har ulagrede endringer. Er du sikker på at du vil sortere regnearket og forkaste endringene?',
+
+    'LBL_SAVE_TOOLTIP' => 'Lagre endringer utført i regnearkspalter',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Lagre endringer hos oppføringer og send prognose til lederen',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Send prognose til lederen og tildel kvote',
+
+    'LBL_SAVE_LABEL_REP' => 'Lagre ',
+    'LBL_SAVE_LABEL_MGR' => 'Lagre justerte verdier',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => '{{plural_module_name}}-modulen bygger inn {{forecastby_singular_module}}-poster for å lage {{forecastworksheets_module}} og forutse salg. Brukere kan jobbe mot salg{{quotas_module}} på individ-, gruppe- og salgsorganitorisk nivå. Før brukere får tilgang til {{plural_module_name}}-modulen, må en administrator velge organisasjonens ønskede tidsperioder, intervaller og scenarier.

@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Beschreibung',
     'LBL_OW_TYPE'=>'Typ',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Teamprognose für <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Direktbericht',
     'LBL_FDR_OPPORTUNITIES'=>'Verkaufschancen in Prognose:',
     'LBL_FDR_WEIGH'=>'Gewichteter Betrag der Verkaufschancen:',
     'LBL_FDR_COMMIT'=>'Bestätigter Betrag',
     'LBL_FDR_DATE_COMMIT'=>'Bestätigungsdatum',
+    'LBL_FDR_FORECAST_HEADER' => 'Verkäuferprognose für <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognose: Arbeitsblatt',
     'LBL_DV_MY_FORECASTS' => 'Meine Prognosen',
-    'LBL_DV_MY_TEAM' => "Meine Team-Prognose" ,
+    'LBL_DV_MY_TEAM' => "Meine Team-Prognose",
     'LBL_DV_TIMEPERIODS' => 'Zeitspannen:',
     'LBL_DV_FORECAST_PERIOD' => 'Prognose-Zeitspanne',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognose-Verkaufschancen',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Grundtrarif',
 
     'LBL_QUOTA' => 'Vorgabe',
-    'LBL_QUOTA_ADJUSTED' => 'Sollvorgabe (angepasst)',
+    'LBL_QUOTA_ADJUSTED' => 'Angepasste Quote',
 
     'LBL_FORECAST_FOR'=>'Prognose-Arbeitsblatt für: ',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Rollup)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Vorgabe vs. Bestätigt vs. Tatsächlich',
 
     'LBL_FORECAST' => 'Prognose',
+    'LBL_COMMITMENT' => 'Engagement',
+    'LBL_TEAM_COMMITMENT' => 'Team-Engagement',
+    'LBL_FORECASTED' => 'Vorhergesagt',
+    'LBL_ADJUSTED_TOTAL' => 'Angepasste Summe',
     'LBL_COMMIT_STAGE' => 'Bestätigungsstatus',
     'LBL_SALES_STAGE' => 'Phase',
     'LBL_AMOUNT' => 'Betrag',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}, and {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'wahrscheinlich {{{direction}}} {{{from}}} zu {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Am besten {{{direction}}} {{{from}}} zu {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Am schlechtesten {{{direction}}} {{{from}}} zu {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'wahrscheinlich gleich geblieben',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'bestes ist gleich geblieben',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'schlechtestes ist gleich geblieben',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Festgelegt (Wahrscheinlich) {{{direction}}} {{{from}}} nach {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Festgelegt (Beste) {{{direction}}} {{{from}}} nach {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Festgelegt (Schlechteste) {{{direction}}} {{{from}}} nach {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Festgelegt (Wahrscheinlich) ist gleich geblieben',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Festgelegt (Beste) ist gleich geblieben',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Festgelegt (Schlechteste) ist gleich geblieben',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Dieser Monat auf {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Gesamt',
     'LBL_TOTAL' => 'Gesamt',
     'LBL_OVERALL_TOTAL' => 'Insgesamt',
-    'LBL_EDITABLE_INVALID' => 'Ungültiger Wert für {0}',
+    'LBL_EDITABLE_INVALID' => 'Ungültiger Wert für {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Wert muss zwischen {0} und {1} sein',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'Sie haben ungesicherte Änderungen in Ihrem Arbeitsblatt.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Bitte beachten Sie, dass nur gespeicherte oder bestätigte Daten exportiert werden können. Klicken Sie auf OK, um mit den Datenexport fortfahren oder "Abbrechen", um zum Arbeitsblatt zurückzukehren.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Inkludiert',
     'LBL_CHART_NOT_INCLUDED' => 'nicht inkludiert',
     'LBL_CHART_ADJUSTED' => '(Angepasst)',
-    'LBL_SAVE_DRAFT' => 'Entwurf speichern',
+    'LBL_SAVE_DRAFT' => 'Speichern',
     'LBL_CHANGES_BY' => 'Änderungen von {0}',
     'LBL_FORECAST_SETTINGS' => 'Einstellungen',
 
@@ -314,7 +322,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Startdatum für Geschäftsjahr:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurieren Sie die Zeitspanne, die im Prognosemodul verwedet wird.<br><br>Beachten Sie, dass die Zeitspanne-Einstellungen nach der anfänglichen Einrichtung nicht mehr geändert werden können.<br><br>Für den Anfang wählen Sie das Anfangsdatum des Geschäftsjahres. Dann wählen Sie den Typ der Zeitspanne, über die Sie die Prognose erhalten möchten. Die Datumsabgrenzung wird automatisch kalkuliert, basierend auf Ihrer Auswahl. Die untergeordneten Zeitspannen sind die Basis für das Prognose-Arbeitsblatt.<br><br>Die darstellbaren zukünftigen und vergangenen Zeitspannen bestimmen die Anzahl der sichtbaren untergeordneten Zeitspannen im Prognosemodul.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurieren Sie, wie Sie {{forecastByModule}} kategorisieren möchten. <br><br>Bitte beachten Sie, dass die Bereichseinstellungen nach der ersten Übertragung nicht mehr geändert werden können. Bei aktualisierten Instanzen wird die Einstellung "Bereich" mit den vorhandenen Vorhersagedaten festgelegt.<br><br>Sie können zwei oder mehr Kategorien basierend auf Wahrscheinlichkeitsbereichen auswählen oder Kategorien erstellen, die nicht auf Wahrscheinlichkeiten basieren. <br><br>Links von Ihren benutzerdefinierten Kategorien befinden sich Kontrollkästchen; verwenden Sie diese, um zu entscheiden, welche Bereiche in den Prognosebetrag einbezogen und an die Manager gemeldet werden sollen. <br><br>Ein Benutzer kann den Einschluss/Ausschluss-Status und die Kategorie von {{forecastByModule}} manuell von seinem Arbeitsblatt aus ändern.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Legen Sie fest, wie Sie {{forecastByModule}} kategorisieren möchten. <br><br>Bitte beachten Sie, dass die Bereichseinstellungen nach der ersten Übergabe nicht mehr geändert werden können. Bei aktualisierten Instanzen wird die Einstellung für den Bereich mit den vorhandenen Prognosedaten verknüpft.<br><br>Sie können zwei oder mehr Kategorien auf der Grundlage von Wahrscheinlichkeitsbereichen auswählen oder Kategorien erstellen, die nicht auf Wahrscheinlichkeiten basieren. <br><br>Links von Ihren benutzerdefinierten Kategorien befinden sich Kontrollkästchen, mit denen Sie festlegen können, welche Bereiche in den für die Prognose festgelegten und an die Manager gemeldeten Betrag einbezogen werden. <br><br>Ein Benutzer kann den Einschluss/Ausschluss-Status und die Kategorie von {{forecastByModule}} manuell in seinem Arbeitsblatt ändern.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Wählen Sie die Spalten, welche die Benutzer für Prognosen für jedes {{forecastByModuleSingular}} ausfüllen müssen. Beachten Sie, dass die "wahrscheinliche" Summe mit der unter {{forecastByModule}} angezeigten Summe verbunden ist; deshalb kann diese Spalte nicht ausgeblendet werden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Wahlen Sie die Spalten, die Sie im Prognose-Modul anzeigen möchten. Der Benutzer kann die Sicht des Arbeitsblatts mit der Liste von Feldern konfigurieren.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ich bin ein Platzhalter für Prognosen!',
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Überschreitung von',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Keine Daten',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Sollvorgabe eingehalten',
+    'LBL_OPEN_LIKELY' => 'Wahrscheinliche öffnen',
+    'LBL_OPEN_BEST' => 'Beste öffnen',
+    'LBL_OPEN_WORST' => 'Schlechteste öffnen',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Sollvorgabe zuweisen',
     'LBL_ASSIGNING_QUOTA' => 'Sollvorgabe wird zugewisen',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Meine Team-Prognose",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Sie haben nicht gespeicherte Änderungen. Möchten Sie, dass das Arbeitsblatt sortiert und die Änderungen verworfen werden?',
+
+    'LBL_SAVE_TOOLTIP' => 'Änderungen in Arbeitsblattzeilen speichern',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Änderungen an Datensätzen speichern und Vorhersage an den Manager übermitteln',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Vorhersage an Manager und Quote zuweisen',
+
+    'LBL_SAVE_LABEL_REP' => 'Speichern',
+    'LBL_SAVE_LABEL_MGR' => 'Angepasste Werte speichern',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Das Modul {{plural_module_name}} enthält Datensätze {{forecastby_singular_module}} für den Aufbau von {{forecastworksheets_module}} und die Prognose der Verkaufszahlen. Benutzer können auf Verkaufszahlen {{quotas_module}} auf individueller Ebene, mit einem Team oder auf der Ebene der Verkaufsorganisation hinarbeiten. Bevor Benutzer auf das Modul {{plural_module_name}} zugreifen können, muss ein Administrator die von der Organisation gewünschten Zeitspannen, Bereiche und Szenarios wählen.

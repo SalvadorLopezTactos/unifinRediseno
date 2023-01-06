@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'Standaard tijd formaat',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Toon server responstijd',
+    'FREEZE_FIRST_COLUMN' => 'Bevriezen kolom toestaan',
+    'FREEZE_FIRST_COLUMN_HELP' => 'Door deze instelling in te schakelen, kunnen gebruikers worden bevroren voor de eerste kolom in een variatie van ' .
+        'lijstweergaves, waaronder modulelijstweergaves, subpanelen, dashlets en consoles.',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => 'Langzame query&#39;s log',
     'LOCK_HOMEPAGE_HELP'=>'Deze instelling is om de volgende zaken te verhinderen<BR> 1) de toevoeging van nieuwe homepagina&#39;s en Dashlets in de Home-module, <BR> 2) aanpassing van dashlet plaatsing in de homepages d.m.v. slepen en neerzetten.',
     'CURRENT_LOGO'=>'Huidige Logo',
+    'CURRENT_LOGO_DARK' => 'Logo huidige donkere modus:',
     'CURRENT_LOGO_HELP'=>'Dit logo wordt getoond in de linkerbovenhoek van Sugar.',
+    'CURRENT_LOGO_DARK_HELP' => "Dit logo wordt in de linkerhoek van de voettekst weergegeven als de Sugar-toepassing in de donkere modus staat, volgens de voorkeuren voor het uiterlijk van de gebruiker.",
     'NEW_LOGO'=>'Selecteer nieuw logo (212x40)',
     'NEW_LOGO_HELP' => 'Het afbeeldingsformaat moet .png of .jpg. zijn<BR>De aanbevolen grootte is 212x40 pixels.',
+    'NEW_LOGO_DARK' => 'Logo donkere modus selecteren:',
     'NEW_LOGO_HELP_NO_SPACE' => 'De toegestane bestandsformat kan .png of .jpg zijn. De maximale hoogte is 17 pixels en de maximale breedte is 450 pixels. Bestanden die worden geupload met grotere afmetingen dan hiervoor genoemd, zullen automatisch worden aangepast naar deze maximale afmetingen. De bestandsnaam mag geen spatie bevatten.',
     'NEW_QUOTE_LOGO'=>'Upload nieuw logo (867x74)',
     'NEW_QUOTE_LOGO_HELP'=>'Het aanbevolen afbeeldingsformaat is .jpg.<BR>De aanbevolen grootte is 867x74 pixels.',
@@ -412,7 +418,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => 'Doorgaan',
     'LBL_WIZARD_FINISH_TAB' => 'Afronden',
     'LBL_WIZARD_FINISH_TITLE' => 'Basis Systeem configuratie is nu compleet!',
-    'LBL_WIZARD_FINISH' => 'Klik op <b>Doorgaan</b> om uw gebruikersinstellingen te configureren.<br /><br />Om aanvullende systeemsettings te configureren, klik <a href="index.php?module=Administration&action=index" target="_blank">hier</a>',
+    'LBL_WIZARD_FINISH' => 'Klik op <b>Doorgaan</b> om uw gebruikersinstellingen te configureren.<br /><br />Om aanvullende systeemsettings te configureren, klik <a href="#Administration" target="_blank">hier</a>.',
     'LBL_WIZARD_SYSTEM_TITLE' => 'Branding',
     'LBL_WIZARD_SYSTEM_DESC' => 'Geef naam en logo om Sugar aan uw organisatie aan te passen.',
     'LBL_WIZARD_LOCALE_DESC' => 'Specificeer hier hoe gegevens getoond moeten worden in Sugar, gebaseerd op waar u gevestigd bent. De gegevens die u hier ingeeft zullen de standaard zijn voor iedereen, tenzij de gebruiker zijn eigen voorkeur aanpast in de gebruikersinstellingen.',
@@ -423,7 +429,8 @@ BSOFR
 	'LBL_LOADING' => 'Laden...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Verwijderen' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => 'Welkom' /*for 508 compliance fix*/,
-	'LBL_LOGO' => 'Beeldmerk' /*for 508 compliance fix*/,
+    'LBL_LOGO' => 'Beeldmerk' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => 'Logo donkere modus',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* De Rapportmodule is alleen beschikbaar voor de Sugar Mobile IPhone client',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* De Rapportage module is niet beschikbaar voor de browser gebaseerde mobiele weergave.',
 
@@ -462,5 +469,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

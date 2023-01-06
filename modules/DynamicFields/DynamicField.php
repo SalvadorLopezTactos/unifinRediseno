@@ -11,6 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\ComponentName;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 
 class DynamicField {
 
@@ -86,7 +88,12 @@ class DynamicField {
         }
     }
 
-    function setLabel( $language='en_us' , $key , $value )
+    /**
+     * @param string $language default 'en_us'
+     * @param $key
+     * @param $value
+     */
+    public function setLabel(string $language, string $key, string $value): void
     {
         $params [ "label_" . $key ] = $value;
         $parser = new ParserLabel ( $this->module ) ;
@@ -142,7 +149,7 @@ class DynamicField {
         $stmt = $query->execute();
 
         require_once 'modules/DynamicFields/FieldCases.php';
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $field = get_widget ( $row ['type'] );
 
             foreach ( $row as $key => $value ) {
@@ -185,7 +192,7 @@ class DynamicField {
         $query = "SELECT * FROM fields_meta_data WHERE custom_module=? AND name=? AND deleted = 0";
         $stmt = $db->getConnection()->executeQuery($query, array($module, $fieldName));
         require_once 'modules/DynamicFields/FieldCases.php';
-        if ($row = $stmt->fetch()) {
+        if ($row = $stmt->fetchAssociative()) {
             $field = get_widget ( $row ['type'] );
             $field->populateFromRow($row);
             return $field;
@@ -486,8 +493,6 @@ class DynamicField {
             VardefManager::refreshVardefs($this->module, $object_name);
             MetaDataManager::refreshModulesCache(array($this->module));
         }
-        // @TODO: Is this really necessary?
-        //MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_LABELS));
     }
 
     /**
@@ -812,13 +817,23 @@ class DynamicField {
     function add_existing_custom_field($data, $execute = true)
     {
 
-        $field = get_widget ( $data ['type'] );
+        $field = get_widget($data ['type']);
         $field->populateFromRow($data);
-        $query = "/*MISSING IN DATABASE - {$data['name']} -  ROW*/\n"
-                . $field->get_db_add_alter_table($this->bean->table_name . '_cstm');
-        $out = $query . "\n";
-        if ($execute)
+
+        $constraint = new ComponentName();
+        $violations = Validator::getService()->validate($data['name'], $constraint);
+
+        if (count($violations) > 0) {
+            throw new RuntimeException((string)$violations);
+        }
+
+        $query = $field->get_db_add_alter_table($this->bean->table_name . '_cstm');
+        $out = "/*MISSING IN DATABASE - {$data['name']} -  ROW*/\n"
+            . $query . "\n";
+
+        if ($execute) {
             $GLOBALS['db']->query($query);
+        }
 
         return $out;
     }

@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class CertificateBasedAuthConfiguration extends Entity
 {
@@ -31,7 +29,7 @@ class CertificateBasedAuthConfiguration extends Entity
      * Gets the certificateAuthorities
     * Collection of certificate authorities which creates a trusted certificate chain.
      *
-     * @return array The certificateAuthorities
+     * @return array|null The certificateAuthorities
      */
     public function getCertificateAuthorities()
     {
@@ -52,7 +50,7 @@ class CertificateBasedAuthConfiguration extends Entity
     */
     public function setCertificateAuthorities($val)
     {
-		$this->_propDict["certificateAuthorities"] = $val;
+        $this->_propDict["certificateAuthorities"] = $val;
         return $this;
     }
     

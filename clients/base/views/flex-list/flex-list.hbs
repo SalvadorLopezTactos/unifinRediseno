@@ -11,21 +11,24 @@
  */
 --}}
 {{#each meta.panels}}
-<div class="flex-list-view-content">
-    <table class="table table-striped dataTable{{#has "ReorderableColumns" ../plugins}} reorderable-columns{{/has}}{{#if ../isSearchAndSelectAction}} search-and-select{{/if}}">
-    <thead>
-        {{partial 'row-header' ../this view=../this fields=fields}}
-    </thead>
-    <tbody>
-        {{#each ../collection.models}}
-            {{partial 'row' ../../this view=../../this model=this module=this.module fields=../fields}}
-        {{/each}}
-    </tbody>
-    <tfoot>
-        {{partial 'row-footer' ../this view=../this}}
-    </tfoot>
-    </table>
-    <span class="scrollbar-landmark"></span>
+<div class="flex-list-view-container">
+    <div class="flex-list-view-content">
+        <table class="table table-striped dataTable{{#has "ReorderableColumns" ../plugins}} reorderable-columns{{/has}}{{#if ../isSearchAndSelectAction}} search-and-select{{/if}}">
+        <thead>
+            {{partial 'row-header' ../this view=../this fields=fields}}
+        </thead>
+        <tbody>
+            {{#each ../collection.models}}
+                {{partial 'row' ../../this view=../../this model=this module=this.module fields=../fields}}
+            {{/each}}
+        </tbody>
+        </table>
+
+        <div class="no-data-available hidden">
+            {{str "LBL_NO_DATA_AVAILABLE"}}
+        </div>
+
+        <span class="scrollbar-landmark"></span>
+    </div>
 </div>
-<div class="uxs-scroll-bar" data-scroll-spy="flex-list-view-content"><div>&nbsp;</div></div>
 {{/each}}

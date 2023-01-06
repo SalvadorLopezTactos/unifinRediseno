@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Tāds lauka nosaukums jau ir',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Lauka nosaukumam jābūt tikai no sekojošiem simboliem: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Nav iekļauts modulis, nevar saglabāt',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Nolaižamais nosaukums jau pastāv',
     'LBL_BTN_ADD' => 'Pievienot',
     'LBL_BTN_EDIT' => 'Rediģēt',
     'LBL_GENERATE_URL' => 'Ģenerēt URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Pievieno kolonnu {0}',
     'LBL_DONE' => 'Pabeigts',
     'LBL_EXE_NON_SIM_MODE' => 'Izpilda ne-simulācijas režīmā',
+    'LBL_CALCULATION_VISIBLE' => 'Padarīt redzamu aprēķiniem',
 );
-
-
-?>

@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'O campo Nome já existe',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'O nome do campo deverá conter apenas os seguintes caracteres: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Não pode ser gravado o módulo não incluído',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'O Nome da Lista Dropdown já existe',
     'LBL_BTN_ADD' => 'Adicionar',
     'LBL_BTN_EDIT' => 'Editar',
     'LBL_GENERATE_URL' => 'Gerar URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Adicionar Coluna {0} a',
     'LBL_DONE' => 'Concluído',
     'LBL_EXE_NON_SIM_MODE' => 'Executar modo de não-simulação',
+    'LBL_CALCULATION_VISIBLE' => 'Tornar visível para os cálculos',
 );
-
-
-?>

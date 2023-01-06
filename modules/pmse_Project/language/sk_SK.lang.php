@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Vytvorené používateľom',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Naposledy upravené používateľom',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mail systému',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Šablóna dokumentu',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Zlúčenie dokumentov',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Vyberte...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Zlúčenie dokumentov do PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Zlúčenie dokumentov',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Obchodné pravidlo',
     'LBL_PMSE_LABEL_RULE' => 'Pravidlo',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Len aktualizované záznamy (všetky aktualizácie – pozri text pomocníka)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nové záznamy alebo prvá aktualizácia',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nové záznamy a všetky aktualizácie',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Zmena vzťahu',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Určte, kedy sa proces začne.<br><br>Nové: Spustiť proces pri vytvorení nového záznamu.<br><br>Prvá aktualizácia: Proces prebieha len pri prvom splnení kritéria pre existujúci záznam.<br><br>Všetky aktualizácie: Proces prebieha pri každom splnení kritéria pre existujúci záznam.<br><br>Nové záznamy alebo prvá aktualizácia: Proces prebieha len pri prvom splnení kritéria pre záznam, buď počas vytvorenia záznamu, alebo aktualizácie záznamu.<br><br>Nové záznamy a všetky aktualizácie: Proces prebieha zakaždým pre každý nový a existujúci záznam.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Určte, kedy sa proces začne.<br><br>Nové: Spustiť proces pri vytvorení nového záznamu.<br><br>Prvá aktualizácia: Proces prebieha len pri prvom splnení kritérií pre existujúci záznam.<br><br>Všetky aktualizácie: Proces prebieha pri každom splnení kritérií pre existujúci záznam.<br><br>Nové záznamy alebo prvá aktualizácia: Proces prebieha len pri prvom splnení kritérií pre záznam, buď počas vytvorenia záznamu, alebo aktualizácie záznamu.<br><br>Nové záznamy a všetky aktualizácie: Proces prebieha zakaždým pre každý nový a existujúci záznam.<br><br>Zmeny vzťahu: Proces prebieha pri každej zmene vzťahu.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Vybrať modul SugarCRM, ktorý má využívať spúšťač udalosti',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Pevne stanovený dátum',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Error',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Hodnotenie zmeny vzťahu',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Polia',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Hodnotenie polí modulu',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Všetky súvisiace záznamy',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Akékoľvek súvisiace záznamy',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Pridané',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Odstránené',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Pridané alebo odstránené',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Akýkoľvek vzťah',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Čas spustenia',
 

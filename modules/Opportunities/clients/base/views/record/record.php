@@ -45,6 +45,13 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'label' => 'LBL_EDIT_BUTTON_LABEL',
                     'acl_action' => 'edit',
                 ),
+                [
+                    'type' => 'escalate-action',
+                    'event' => 'button:escalate_button:click',
+                    'name' => 'escalate_button',
+                    'label' => 'LBL_ESCALATE_BUTTON_LABEL',
+                    'acl_action' => 'create',
+                ],
                 array(
                     'type' => 'shareaction',
                     'name' => 'share',
@@ -152,6 +159,13 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'type' => 'renewal',
                     'dismiss_label' => true,
                 ],
+                [
+                    'name' => 'is_escalated',
+                    'type' => 'badge',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'dismiss_label' => true,
+                ],
             ),
         ),
         array(
@@ -211,10 +225,17 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     ),
                 ),
                 'probability',
-                array(
+                [
                     'name' => 'commit_stage',
+                    'type' => 'enum-cascade',
+                    'disable_field' => 'closed_won_revenue_line_items',
+                    'disable_positive' => true,
                     'span' => 6,
-                ),
+                    'related_fields' => [
+                        'probability',
+                        'closed_won_revenue_line_items',
+                    ],
+                ],
                 array(
                     'name' => 'best_case',
                     'type' => 'currency',

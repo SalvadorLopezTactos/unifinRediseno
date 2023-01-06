@@ -81,7 +81,13 @@
         });
         _.each(fields, function(field) {
             field.setElement(fieldElems[field.sfId]);
-            field.render();
+            if (field.view.action !== 'create') {
+                // Ensures the subfield is given the correct action and renders it
+                field.setMode(this.action);
+            } else {
+                field.render();
+            }
+
             this.redecorate(field);
         }, this);
     },
@@ -230,17 +236,6 @@
     },
 
     /**
-     * Dispose the child fields
-     *
-     * @override
-     */
-    _dispose: function() {
-        _.each(this.fields, function(field) {
-            field.dispose();
-        });
-    },
-
-    /**
      * In labelsOnSide view, the pencil icon needs to be moved to the left
      * so it hovers near the text
      */
@@ -255,7 +250,7 @@
             this.toggleRecordCellDisplay(cell);
         }
 
-        var pencil = cell.find('.fa-pencil');
+        var pencil = cell.find('.sicon-edit');
         var wrapper = cell.find('.record-label-wrapper');
         var label = cell.find('.record-label');
         var wrapperWidth = wrapper.outerWidth();
@@ -267,7 +262,6 @@
         }
 
         var offset = wrapperWidth - labelWidth - 6;
-
         let css = {};
 
         // change offset if it's showed children's label instead of label of field
@@ -293,4 +287,16 @@
     toggleRecordCellDisplay: function($cell) {
         $cell.parent().toggleClass('hide');
     },
+
+    /**
+     * Dispose the child fields
+     *
+     * @override
+     */
+    _dispose: function() {
+        _.each(this.fields, function(field) {
+            field.dispose();
+        });
+        this._super('_dispose');
+    }
 })

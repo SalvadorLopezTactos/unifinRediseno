@@ -222,11 +222,15 @@
      * @override
      */
     _loadTemplate: function() {
-        if (this.action === 'edit') {
-            this.type = 'enum';
-        }
         this._super('_loadTemplate');
-        this.type = 'discount-select';
+
+        if (this.action === 'edit') {
+            this.template = app.template.getField(
+                'enum',
+                'edit',
+                this.module
+            );
+        }
     },
 
     /**

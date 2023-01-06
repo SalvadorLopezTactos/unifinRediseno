@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => '存档',
     'LBL_PROCESS_TYPE_DELETE' => '硬删除',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => '存档运行',
+    'LBL_ARCHIVER_WARNING_TITLE' => '警告',
+    'LBL_ARCHIVER_WARNING' => '建议在低使用或非工作时间执行此操作 '
+        . '因为这可能影响系统性能。是否确定要立即执行此操作？',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}} 模块的存档程序必须将 {{fieldName}} 设置为筛选器',
 );

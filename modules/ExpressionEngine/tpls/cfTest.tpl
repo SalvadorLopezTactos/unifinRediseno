@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{literal}<!--<script type=text/javascript>
+<!--<script type=text/javascript>
 Ext.onReady(function() {
 //Register fields individually
 /*SUGAR.forms.AssignmentHandler.registerFields({
@@ -129,7 +129,7 @@ if (!Ext.isIE) console.log("done");
  Member of:
 													</td>
 													<td valign="top" width='37.5%' class='tabEditViewDF' NOWRAP>
-														<input type="text" name="parent_name" class="sqsEnabled" tabindex="p" id="parent_name" size="" value="" title='' autocomplete="off"><input type="hidden" name="parent_id" id="parent_id" value=""><input type="button" name="btn_parent_name" tabindex="p" title="Select" accessKey="T" class="button" value="Select" onclick='open_popup("Accounts", 600, 400, "", true, false, {"call_back_function":"set_return","form_name":"EditView","field_to_name_array":{"id":"parent_id","name":"parent_name"}}, "single", true);'><input type="button" name="btn_clr_parent_name" tabindex="p" title="Clear" accessKey="C" class="button" onclick="this.form.parent_name.value = ''; this.form.parent_id.value = '';" value="Clear">
+														<input type="text" name="parent_name" class="sqsEnabled" tabindex="p" id="parent_name" size="" value="" title='' autocomplete="off"><input type="hidden" name="parent_id" id="parent_id" value=""><input type="button" name="btn_parent_name" tabindex="p" title="Select" accessKey="T" class="button" value="Select" onclick='open_popup("Accounts", 600, 400, "", true, false, { "call_back_function": "set_return","form_name":"EditView","field_to_name_array":{ "id":"parent_id","name":"parent_name" }}, "single", true);'><input type="button" name="btn_clr_parent_name" tabindex="p" title="Clear" accessKey="C" class="button" onclick="this.form.parent_name.value = ''; this.form.parent_id.value = '';" value="Clear">
 														<td valign="top" width='12.5%' scope="row" NOWRAP>
  Employees:
 														</td>
@@ -225,7 +225,7 @@ if (!Ext.isIE) console.log("done");
 																									</span>
 																								</td>
 																								<td valign="top" width='37.5%' class='tabEditViewDF' NOWRAP>
-																									<input type="text" name="team_name" class="sqsEnabled" tabindex="0" id="team_name" size="" value="(admin)" title='' autocomplete="off"><input type="hidden" name="team_id" id="team_id" value="20b44716-ddeb-ba03-84e7-48fcc85755df"><input type="button" name="btn_team_name" tabindex="0" title="Select"  class="button" value="Select" onclick='open_popup("Teams", 600, 400, "", true, false, {"call_back_function":"set_return","form_name":"EditView","field_to_name_array":{"id":"team_id","name":"team_name"}}, "single", true);'><input type="button" name="btn_clr_team_name" tabindex="0" title="Clear" class="button" onclick="this.form.team_name.value = ''; this.form.team_id.value = '';" value="Clear">
+																									<input type="text" name="team_name" class="sqsEnabled" tabindex="0" id="team_name" size="" value="(admin)" title='' autocomplete="off"><input type="hidden" name="team_id" id="team_id" value="20b44716-ddeb-ba03-84e7-48fcc85755df"><input type="button" name="btn_team_name" tabindex="0" title="Select"  class="button" value="Select" onclick='open_popup("Teams", 600, 400, "", true, false, { "call_back_function": "set_return","form_name":"EditView","field_to_name_array":{ "id": "team_id","name":"team_name" }}, "single", true);'><input type="button" name="btn_clr_team_name" tabindex="0" title="Clear" class="button" onclick="this.form.team_name.value = ''; this.form.team_id.value = '';" value="Clear">
 																									<td valign="top" width='12.5%' scope="row" NOWRAP>
 																									</td>
 																									<td valign="top" width='37.5%' class='tabEditViewDF' NOWRAP>
@@ -236,7 +236,7 @@ if (!Ext.isIE) console.log("done");
  Assigned to:
 																										</td>
 																										<td valign="top" width='37.5%' class='tabEditViewDF' colspan='3' NOWRAP>
-																											<input type="text" name="assigned_user_name" class="sqsEnabled" tabindex="a" id="assigned_user_name" size="" value="admin" title='' autocomplete="off"><input type="hidden" name="assigned_user_id" id="assigned_user_id" value="1"><input type="button" name="btn_assigned_user_name" tabindex="a" title="Select" class="button" value="Select" onclick='open_popup("Users", 600, 400, "", true, false, {"call_back_function":"set_return","form_name":"EditView","field_to_name_array":{"id":"assigned_user_id","user_name":"assigned_user_name"}}, "single", true);'><input type="button" name="btn_clr_assigned_user_name" tabindex="a" title="Clear" class="button" onclick="this.form.assigned_user_name.value = ''; this.form.assigned_user_id.value = '';" value="Clear">
+																											<input type="text" name="assigned_user_name" class="sqsEnabled" tabindex="a" id="assigned_user_name" size="" value="admin" title='' autocomplete="off"><input type="hidden" name="assigned_user_id" id="assigned_user_id" value="1"><input type="button" name="btn_assigned_user_name" tabindex="a" title="Select" class="button" value="Select" onclick='open_popup("Users", 600, 400, "", true, false, { "call_back_function": "set_return","form_name":"EditView","field_to_name_array":{ "id": "assigned_user_id","user_name":"assigned_user_name" }}, "single", true);'><input type="button" name="btn_clr_assigned_user_name" tabindex="a" title="Clear" class="button" onclick="this.form.assigned_user_name.value = ''; this.form.assigned_user_id.value = '';" value="Clear">
 																											</tr>
 																										</table>
 																										</div>
@@ -482,5 +482,5 @@ if (!Ext.isIE) console.log("done");
 																																					<div style="padding-top: 2px">
 																																						<input title="Save"  class="button" onclick="this.form.action.value='Save'; return check_form('EditView');" type="submit" name="button" value="Save"><input title="Cancel"  class="button" onclick="this.form.action.value='DetailView'; this.form.module.value='Accounts'; this.form.record.value='ea087e5d-d800-207c-b731-4900d27403a6';" type="submit" name="button" value="Cancel"><input title="View Change Log" class="button" onclick='open_popup("Audit", "600", "400", "&record=ea087e5d-d800-207c-b731-4900d27403a6&module_name=Accounts", true, false,  { "call_back_function":"set_return","form_name":"EditView","field_to_name_array":[] } ); return false;' type="submit" value="View Change Log">
 																																					</div>
-																																					</form>{/literal}
+																																					</form>
 {$dependencies}

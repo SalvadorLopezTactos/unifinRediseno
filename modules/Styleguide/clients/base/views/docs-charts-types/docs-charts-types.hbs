@@ -19,15 +19,17 @@
 </style>
 
 <section id="implementation">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
       <div class="row-fluid">
 
         <div class="span6">
-          <h3>Sugar7 Sucrose Charts</h3>
-          <p>The set of standard chart types currently used in Sugar7 are:</p>
+          <h3>SugarCRM Sucrose Charts</h3>
+          <p>The set of standard chart types currently used in SugarCRM are:</p>
           <ul>
             <li><a href="http://sucrose.io?type=multibar" target="_blank" rel="nofollow noopener noreferrer">Multibar</a> (vertical and horizontal)</li>
             <li><a href="http://sucrose.io?type=line" target="_blank" rel="nofollow noopener noreferrer">Line</a> (for reports detail view and dashlets)</li>

@@ -35,6 +35,7 @@ class SugarVoter implements SugarVoterInterface
     protected $supportedKeys = [
         AccessControlManager::MODULES_KEY,
         AccessControlManager::DASHLETS_KEY,
+        AccessControlManager::WIDGETS_KEY,
     ];
 
     /**
@@ -58,7 +59,8 @@ class SugarVoter implements SugarVoterInterface
         }
 
         // check subscriptions
-        $this->subscriptions = SubscriptionManager::instance()->getUserSubscriptions($current_user);
+        $sm = SubscriptionManager::instance();
+        $this->subscriptions = $sm->getAllImpliedSubscriptions($sm->getAllUserSubscriptions($current_user));
         return $this->subscriptions;
     }
 
@@ -124,14 +126,14 @@ class SugarVoter implements SugarVoterInterface
             return false;
         }
 
-        if ($key === AccessControlManager::DASHLETS_KEY) {
+        if ($key === AccessControlManager::DASHLETS_KEY || $key === AccessControlManager::WIDGETS_KEY) {
             $controlledList = $this->getProtectedList($key);
             if (!isset($controlledList[$subject]) || array_intersect($entitled, $controlledList[$subject])) {
                 return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 }
 //END REQUIRED CODE DO NOT MODIFY

@@ -15,12 +15,7 @@ use Sugarcrm\Sugarcrm\inc\Entitlements\Exception\SubscriptionException;
 
 class UsersViewOAuth2Authenticate extends SidecarView
 {
-
-    /**
-     * current platform
-     * @var string
-     */
-    protected $platform;
+    use IdmModeAuthTrait;
 
     /**
      * @inheritdoc
@@ -74,27 +69,11 @@ class UsersViewOAuth2Authenticate extends SidecarView
 
             $user->call_custom_logic('after_login');
 
-            $loginStatus = apiCheckLoginStatus();
-            if (true !== $loginStatus && !$user->isAdmin()) {
-                if ($loginStatus['level'] == 'maintenance') {
-                    SugarApplication::redirect('./#maintenance');
-                } elseif ($loginStatus['message'] === 'ERROR_LICENSE_SEATS_MAXED') {
-                    SugarApplication::redirect('./#licenseSeats');
-                }
-            }
-            // Adding the setcookie() here instead of calling $api->setHeader() because
-            // manually adding a cookie header will break 3rd party apps that use cookies
-            setcookie(
-                RestService::DOWNLOAD_COOKIE . '_' . $this->platform,
+            $this->ensureLoginStatus($user);
+
+            $this->setupDownloadToken(
                 $this->authorization['download_token'],
-                [
-                    'expires' => time() + $this->authorization['refresh_expires_in'],
-                    'path' => ini_get('session.cookie_path'),
-                    'domain' => ini_get('session.cookie_domain'),
-                    'secure' => ini_get('session.cookie_secure'),
-                    'httponly' => ini_get('session.cookie_httponly'),
-                    'samesite' => ini_get('session.cookie_samesite'),
-                ],
+                $this->authorization['refresh_expires_in']
             );
         } catch (SubscriptionException $e) {
             SugarApplication::redirect('./#licenseSeats');

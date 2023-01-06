@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Referuar nga',
     'LBL_LIST_STATUS' => 'Statusi',
     'LBL_LIST_TITLE' => 'Titulli',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Parashikim i interesit të tregut',
+    'LBL_MARKET_SCORE' => 'Analiza e tregut',
     'LBL_MOBILE_PHONE' => 'Celular:',
     'LBL_MODULE_NAME' => 'Udhëheqjet',
     'LBL_MODULE_NAME_SINGULAR' => 'klient potencial',
@@ -318,4 +320,9 @@ Për të krijuar një {{module_name}}:
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Drejtues i parashikimeve të konvertimit',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Shfaq detajet e parashikimit për një drejtues specifik',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Aktivizo artikujt e linjës së të ardhurave',
+    'LBL_REQUIRE_RLIS' => 'Kërko zëra të linjës së të ardhurave kur krijon mundësi të reja',
+    'LBL_COPY_DATA_RLIS' => 'Kopjo të dhënat e drejtuesit në zërat e linjës së të ardhurave kur krijon mundësi të reja',
 );

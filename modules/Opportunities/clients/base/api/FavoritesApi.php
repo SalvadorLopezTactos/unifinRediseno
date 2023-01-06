@@ -72,8 +72,9 @@ class FavoritesApi extends SugarApi
 
             $productTemplateNamesQuery->select(array('*'));
             $productTemplateNamesQuery->from($productTemplatesBean, array('add_deleted' => true));
-            $productTemplateNamesQuery->where()
-                ->in('id', $productTemplateIds);
+            $productTemplateNamesQuery->where()->queryAnd()
+                ->in('id', $productTemplateIds)
+                ->equals('active_status', 'Active');
             $productTemplateNamesQuery->orderBy('name', 'ASC');
 
             if ($pageNum === -1) {

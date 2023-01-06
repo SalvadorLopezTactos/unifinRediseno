@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'פריט שורה של הכנסה מחידוש',
     'LBL_PARENT_RLIS' => 'פריטי שורה של הכנסת אב',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'פריטי שורה של הכנסת אב',
+    'LBL_FORECASTED_LIKELY' => 'נחזה כסביר',
     'LBL_EXPERT_ID' => 'מומחה מוצר',
     'LBL_FORECAST' => 'כלול בתחזית',
     'LBL_SUBTOTAL' => 'סיכום ביניים',

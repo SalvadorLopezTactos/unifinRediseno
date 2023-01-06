@@ -222,7 +222,19 @@ $xtpl->assign("ASSIGNED_USER_OPTIONS", get_select_options_with_id(get_user_array
 $xtpl->assign("ASSIGNED_USER_NAME", $lead->assigned_user_name);
 $xtpl->assign("ASSIGNED_USER_ID", $lead->assigned_user_id );
 
-$xtpl->assign("REDIRECT_URL_DEFAULT",'http://');
+// Setup values pertaining to the redirect functionality
+$xtpl->assign(
+    'REDIRECT_REQUEST_TYPE_HELP_BUTTON',
+    generateBwcHelpIcon($mod_strings['LBL_LEAD_REDIRECT_REQUEST_TYPE_HELP'])
+);
+$xtpl->assign(
+    'REDIRECT_REQUEST_TYPE_OPTIONS',
+    get_select_options_with_id($app_list_strings['web_to_lead_redirect_type_dom'], 'GET')
+);
+$xtpl->assign(
+    'REDIRECT_REQUEST_PARAMS_INCLUDE_HELP_BUTTON',
+    generateBwcHelpIcon($mod_strings['LBL_LEAD_REDIRECT_REQUEST_PARAMS_INCLUDE_HELP'])
+);
 
 //required fields on Webtolead form
 $campaign = BeanFactory::newBean('Campaigns');

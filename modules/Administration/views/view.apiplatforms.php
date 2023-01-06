@@ -68,7 +68,7 @@ class AdministrationViewApiplatforms extends SugarView
         echo getClassicModuleTitle(
             "Administration",
             [
-                "<a href='index.php?module=Administration&action=index'>" . translate('LBL_MODULE_NAME') . "</a>",
+                "<a href='#Administration'>" . translate('LBL_MODULE_NAME') . "</a>",
                 translate('LBL_CONFIGURE_CUSTOM_API_PLATFORMS'),
             ],
             false

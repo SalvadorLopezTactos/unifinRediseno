@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,51 +18,17 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DeviceAppManagement extends Entity
 {
     /**
-    * Gets the microsoftStoreForBusinessLastSuccessfulSyncDateTime
-    * The last time the apps from the Microsoft Store for Business were synced successfully for the account.
-    *
-    * @return \DateTime The microsoftStoreForBusinessLastSuccessfulSyncDateTime
-    */
-    public function getMicrosoftStoreForBusinessLastSuccessfulSyncDateTime()
-    {
-        if (array_key_exists("microsoftStoreForBusinessLastSuccessfulSyncDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"], "\DateTime")) {
-                return $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"];
-            } else {
-                $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"] = new \DateTime($this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"]);
-                return $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the microsoftStoreForBusinessLastSuccessfulSyncDateTime
-    * The last time the apps from the Microsoft Store for Business were synced successfully for the account.
-    *
-    * @param \DateTime $val The microsoftStoreForBusinessLastSuccessfulSyncDateTime
-    *
-    * @return DeviceAppManagement
-    */
-    public function setMicrosoftStoreForBusinessLastSuccessfulSyncDateTime($val)
-    {
-        $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the isEnabledForMicrosoftStoreForBusiness
     * Whether the account is enabled for syncing applications from the Microsoft Store for Business.
     *
-    * @return bool The isEnabledForMicrosoftStoreForBusiness
+    * @return bool|null The isEnabledForMicrosoftStoreForBusiness
     */
     public function getIsEnabledForMicrosoftStoreForBusiness()
     {
@@ -92,7 +57,7 @@ class DeviceAppManagement extends Entity
     * Gets the microsoftStoreForBusinessLanguage
     * The locale information used to sync applications from the Microsoft Store for Business. Cultures that are specific to a country/region. The names of these cultures follow RFC 4646 (Windows Vista and later). The format is -&amp;lt;country/regioncode2&amp;gt;, where  is a lowercase two-letter code derived from ISO 639-1 and &amp;lt;country/regioncode2&amp;gt; is an uppercase two-letter code derived from ISO 3166. For example, en-US for English (United States) is a specific culture.
     *
-    * @return string The microsoftStoreForBusinessLanguage
+    * @return string|null The microsoftStoreForBusinessLanguage
     */
     public function getMicrosoftStoreForBusinessLanguage()
     {
@@ -121,12 +86,12 @@ class DeviceAppManagement extends Entity
     * Gets the microsoftStoreForBusinessLastCompletedApplicationSyncTime
     * The last time an application sync from the Microsoft Store for Business was completed.
     *
-    * @return \DateTime The microsoftStoreForBusinessLastCompletedApplicationSyncTime
+    * @return \DateTime|null The microsoftStoreForBusinessLastCompletedApplicationSyncTime
     */
     public function getMicrosoftStoreForBusinessLastCompletedApplicationSyncTime()
     {
         if (array_key_exists("microsoftStoreForBusinessLastCompletedApplicationSyncTime", $this->_propDict)) {
-            if (is_a($this->_propDict["microsoftStoreForBusinessLastCompletedApplicationSyncTime"], "\DateTime")) {
+            if (is_a($this->_propDict["microsoftStoreForBusinessLastCompletedApplicationSyncTime"], "\DateTime") || is_null($this->_propDict["microsoftStoreForBusinessLastCompletedApplicationSyncTime"])) {
                 return $this->_propDict["microsoftStoreForBusinessLastCompletedApplicationSyncTime"];
             } else {
                 $this->_propDict["microsoftStoreForBusinessLastCompletedApplicationSyncTime"] = new \DateTime($this->_propDict["microsoftStoreForBusinessLastCompletedApplicationSyncTime"]);
@@ -150,12 +115,45 @@ class DeviceAppManagement extends Entity
         return $this;
     }
     
+    /**
+    * Gets the microsoftStoreForBusinessLastSuccessfulSyncDateTime
+    * The last time the apps from the Microsoft Store for Business were synced successfully for the account.
+    *
+    * @return \DateTime|null The microsoftStoreForBusinessLastSuccessfulSyncDateTime
+    */
+    public function getMicrosoftStoreForBusinessLastSuccessfulSyncDateTime()
+    {
+        if (array_key_exists("microsoftStoreForBusinessLastSuccessfulSyncDateTime", $this->_propDict)) {
+            if (is_a($this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"], "\DateTime") || is_null($this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"])) {
+                return $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"];
+            } else {
+                $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"] = new \DateTime($this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"]);
+                return $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the microsoftStoreForBusinessLastSuccessfulSyncDateTime
+    * The last time the apps from the Microsoft Store for Business were synced successfully for the account.
+    *
+    * @param \DateTime $val The microsoftStoreForBusinessLastSuccessfulSyncDateTime
+    *
+    * @return DeviceAppManagement
+    */
+    public function setMicrosoftStoreForBusinessLastSuccessfulSyncDateTime($val)
+    {
+        $this->_propDict["microsoftStoreForBusinessLastSuccessfulSyncDateTime"] = $val;
+        return $this;
+    }
+    
 
      /** 
      * Gets the managedEBooks
     * The Managed eBook.
      *
-     * @return array The managedEBooks
+     * @return array|null The managedEBooks
      */
     public function getManagedEBooks()
     {
@@ -176,37 +174,7 @@ class DeviceAppManagement extends Entity
     */
     public function setManagedEBooks($val)
     {
-		$this->_propDict["managedEBooks"] = $val;
-        return $this;
-    }
-    
-
-     /** 
-     * Gets the mobileApps
-    * The mobile apps.
-     *
-     * @return array The mobileApps
-     */
-    public function getMobileApps()
-    {
-        if (array_key_exists("mobileApps", $this->_propDict)) {
-           return $this->_propDict["mobileApps"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the mobileApps
-    * The mobile apps.
-    *
-    * @param MobileApp $val The mobileApps
-    *
-    * @return DeviceAppManagement
-    */
-    public function setMobileApps($val)
-    {
-		$this->_propDict["mobileApps"] = $val;
+        $this->_propDict["managedEBooks"] = $val;
         return $this;
     }
     
@@ -215,7 +183,7 @@ class DeviceAppManagement extends Entity
      * Gets the mobileAppCategories
     * The mobile app categories.
      *
-     * @return array The mobileAppCategories
+     * @return array|null The mobileAppCategories
      */
     public function getMobileAppCategories()
     {
@@ -236,7 +204,7 @@ class DeviceAppManagement extends Entity
     */
     public function setMobileAppCategories($val)
     {
-		$this->_propDict["mobileAppCategories"] = $val;
+        $this->_propDict["mobileAppCategories"] = $val;
         return $this;
     }
     
@@ -245,7 +213,7 @@ class DeviceAppManagement extends Entity
      * Gets the mobileAppConfigurations
     * The Managed Device Mobile Application Configurations.
      *
-     * @return array The mobileAppConfigurations
+     * @return array|null The mobileAppConfigurations
      */
     public function getMobileAppConfigurations()
     {
@@ -266,7 +234,37 @@ class DeviceAppManagement extends Entity
     */
     public function setMobileAppConfigurations($val)
     {
-		$this->_propDict["mobileAppConfigurations"] = $val;
+        $this->_propDict["mobileAppConfigurations"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the mobileApps
+    * The mobile apps.
+     *
+     * @return array|null The mobileApps
+     */
+    public function getMobileApps()
+    {
+        if (array_key_exists("mobileApps", $this->_propDict)) {
+           return $this->_propDict["mobileApps"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the mobileApps
+    * The mobile apps.
+    *
+    * @param MobileApp $val The mobileApps
+    *
+    * @return DeviceAppManagement
+    */
+    public function setMobileApps($val)
+    {
+        $this->_propDict["mobileApps"] = $val;
         return $this;
     }
     
@@ -275,7 +273,7 @@ class DeviceAppManagement extends Entity
      * Gets the vppTokens
     * List of Vpp tokens for this organization.
      *
-     * @return array The vppTokens
+     * @return array|null The vppTokens
      */
     public function getVppTokens()
     {
@@ -296,67 +294,7 @@ class DeviceAppManagement extends Entity
     */
     public function setVppTokens($val)
     {
-		$this->_propDict["vppTokens"] = $val;
-        return $this;
-    }
-    
-
-     /** 
-     * Gets the managedAppPolicies
-    * Managed app policies.
-     *
-     * @return array The managedAppPolicies
-     */
-    public function getManagedAppPolicies()
-    {
-        if (array_key_exists("managedAppPolicies", $this->_propDict)) {
-           return $this->_propDict["managedAppPolicies"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the managedAppPolicies
-    * Managed app policies.
-    *
-    * @param ManagedAppPolicy $val The managedAppPolicies
-    *
-    * @return DeviceAppManagement
-    */
-    public function setManagedAppPolicies($val)
-    {
-		$this->_propDict["managedAppPolicies"] = $val;
-        return $this;
-    }
-    
-
-     /** 
-     * Gets the iosManagedAppProtections
-    * iOS managed app policies.
-     *
-     * @return array The iosManagedAppProtections
-     */
-    public function getIosManagedAppProtections()
-    {
-        if (array_key_exists("iosManagedAppProtections", $this->_propDict)) {
-           return $this->_propDict["iosManagedAppProtections"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the iosManagedAppProtections
-    * iOS managed app policies.
-    *
-    * @param IosManagedAppProtection $val The iosManagedAppProtections
-    *
-    * @return DeviceAppManagement
-    */
-    public function setIosManagedAppProtections($val)
-    {
-		$this->_propDict["iosManagedAppProtections"] = $val;
+        $this->_propDict["vppTokens"] = $val;
         return $this;
     }
     
@@ -365,7 +303,7 @@ class DeviceAppManagement extends Entity
      * Gets the androidManagedAppProtections
     * Android managed app policies.
      *
-     * @return array The androidManagedAppProtections
+     * @return array|null The androidManagedAppProtections
      */
     public function getAndroidManagedAppProtections()
     {
@@ -386,7 +324,7 @@ class DeviceAppManagement extends Entity
     */
     public function setAndroidManagedAppProtections($val)
     {
-		$this->_propDict["androidManagedAppProtections"] = $val;
+        $this->_propDict["androidManagedAppProtections"] = $val;
         return $this;
     }
     
@@ -395,7 +333,7 @@ class DeviceAppManagement extends Entity
      * Gets the defaultManagedAppProtections
     * Default managed app policies.
      *
-     * @return array The defaultManagedAppProtections
+     * @return array|null The defaultManagedAppProtections
      */
     public function getDefaultManagedAppProtections()
     {
@@ -416,97 +354,67 @@ class DeviceAppManagement extends Entity
     */
     public function setDefaultManagedAppProtections($val)
     {
-		$this->_propDict["defaultManagedAppProtections"] = $val;
+        $this->_propDict["defaultManagedAppProtections"] = $val;
         return $this;
     }
     
 
      /** 
-     * Gets the targetedManagedAppConfigurations
-    * Targeted managed app configurations.
+     * Gets the iosManagedAppProtections
+    * iOS managed app policies.
      *
-     * @return array The targetedManagedAppConfigurations
+     * @return array|null The iosManagedAppProtections
      */
-    public function getTargetedManagedAppConfigurations()
+    public function getIosManagedAppProtections()
     {
-        if (array_key_exists("targetedManagedAppConfigurations", $this->_propDict)) {
-           return $this->_propDict["targetedManagedAppConfigurations"];
+        if (array_key_exists("iosManagedAppProtections", $this->_propDict)) {
+           return $this->_propDict["iosManagedAppProtections"];
         } else {
             return null;
         }
     }
     
     /** 
-    * Sets the targetedManagedAppConfigurations
-    * Targeted managed app configurations.
+    * Sets the iosManagedAppProtections
+    * iOS managed app policies.
     *
-    * @param TargetedManagedAppConfiguration $val The targetedManagedAppConfigurations
+    * @param IosManagedAppProtection $val The iosManagedAppProtections
     *
     * @return DeviceAppManagement
     */
-    public function setTargetedManagedAppConfigurations($val)
+    public function setIosManagedAppProtections($val)
     {
-		$this->_propDict["targetedManagedAppConfigurations"] = $val;
+        $this->_propDict["iosManagedAppProtections"] = $val;
         return $this;
     }
     
 
      /** 
-     * Gets the mdmWindowsInformationProtectionPolicies
-    * Windows information protection for apps running on devices which are MDM enrolled.
+     * Gets the managedAppPolicies
+    * Managed app policies.
      *
-     * @return array The mdmWindowsInformationProtectionPolicies
+     * @return array|null The managedAppPolicies
      */
-    public function getMdmWindowsInformationProtectionPolicies()
+    public function getManagedAppPolicies()
     {
-        if (array_key_exists("mdmWindowsInformationProtectionPolicies", $this->_propDict)) {
-           return $this->_propDict["mdmWindowsInformationProtectionPolicies"];
+        if (array_key_exists("managedAppPolicies", $this->_propDict)) {
+           return $this->_propDict["managedAppPolicies"];
         } else {
             return null;
         }
     }
     
     /** 
-    * Sets the mdmWindowsInformationProtectionPolicies
-    * Windows information protection for apps running on devices which are MDM enrolled.
+    * Sets the managedAppPolicies
+    * Managed app policies.
     *
-    * @param MdmWindowsInformationProtectionPolicy $val The mdmWindowsInformationProtectionPolicies
-    *
-    * @return DeviceAppManagement
-    */
-    public function setMdmWindowsInformationProtectionPolicies($val)
-    {
-		$this->_propDict["mdmWindowsInformationProtectionPolicies"] = $val;
-        return $this;
-    }
-    
-
-     /** 
-     * Gets the windowsInformationProtectionPolicies
-    * Windows information protection for apps running on devices which are not MDM enrolled.
-     *
-     * @return array The windowsInformationProtectionPolicies
-     */
-    public function getWindowsInformationProtectionPolicies()
-    {
-        if (array_key_exists("windowsInformationProtectionPolicies", $this->_propDict)) {
-           return $this->_propDict["windowsInformationProtectionPolicies"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the windowsInformationProtectionPolicies
-    * Windows information protection for apps running on devices which are not MDM enrolled.
-    *
-    * @param WindowsInformationProtectionPolicy $val The windowsInformationProtectionPolicies
+    * @param ManagedAppPolicy $val The managedAppPolicies
     *
     * @return DeviceAppManagement
     */
-    public function setWindowsInformationProtectionPolicies($val)
+    public function setManagedAppPolicies($val)
     {
-		$this->_propDict["windowsInformationProtectionPolicies"] = $val;
+        $this->_propDict["managedAppPolicies"] = $val;
         return $this;
     }
     
@@ -515,7 +423,7 @@ class DeviceAppManagement extends Entity
      * Gets the managedAppRegistrations
     * The managed app registrations.
      *
-     * @return array The managedAppRegistrations
+     * @return array|null The managedAppRegistrations
      */
     public function getManagedAppRegistrations()
     {
@@ -536,7 +444,7 @@ class DeviceAppManagement extends Entity
     */
     public function setManagedAppRegistrations($val)
     {
-		$this->_propDict["managedAppRegistrations"] = $val;
+        $this->_propDict["managedAppRegistrations"] = $val;
         return $this;
     }
     
@@ -545,7 +453,7 @@ class DeviceAppManagement extends Entity
      * Gets the managedAppStatuses
     * The managed app statuses.
      *
-     * @return array The managedAppStatuses
+     * @return array|null The managedAppStatuses
      */
     public function getManagedAppStatuses()
     {
@@ -566,7 +474,97 @@ class DeviceAppManagement extends Entity
     */
     public function setManagedAppStatuses($val)
     {
-		$this->_propDict["managedAppStatuses"] = $val;
+        $this->_propDict["managedAppStatuses"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the mdmWindowsInformationProtectionPolicies
+    * Windows information protection for apps running on devices which are MDM enrolled.
+     *
+     * @return array|null The mdmWindowsInformationProtectionPolicies
+     */
+    public function getMdmWindowsInformationProtectionPolicies()
+    {
+        if (array_key_exists("mdmWindowsInformationProtectionPolicies", $this->_propDict)) {
+           return $this->_propDict["mdmWindowsInformationProtectionPolicies"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the mdmWindowsInformationProtectionPolicies
+    * Windows information protection for apps running on devices which are MDM enrolled.
+    *
+    * @param MdmWindowsInformationProtectionPolicy $val The mdmWindowsInformationProtectionPolicies
+    *
+    * @return DeviceAppManagement
+    */
+    public function setMdmWindowsInformationProtectionPolicies($val)
+    {
+        $this->_propDict["mdmWindowsInformationProtectionPolicies"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the targetedManagedAppConfigurations
+    * Targeted managed app configurations.
+     *
+     * @return array|null The targetedManagedAppConfigurations
+     */
+    public function getTargetedManagedAppConfigurations()
+    {
+        if (array_key_exists("targetedManagedAppConfigurations", $this->_propDict)) {
+           return $this->_propDict["targetedManagedAppConfigurations"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the targetedManagedAppConfigurations
+    * Targeted managed app configurations.
+    *
+    * @param TargetedManagedAppConfiguration $val The targetedManagedAppConfigurations
+    *
+    * @return DeviceAppManagement
+    */
+    public function setTargetedManagedAppConfigurations($val)
+    {
+        $this->_propDict["targetedManagedAppConfigurations"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the windowsInformationProtectionPolicies
+    * Windows information protection for apps running on devices which are not MDM enrolled.
+     *
+     * @return array|null The windowsInformationProtectionPolicies
+     */
+    public function getWindowsInformationProtectionPolicies()
+    {
+        if (array_key_exists("windowsInformationProtectionPolicies", $this->_propDict)) {
+           return $this->_propDict["windowsInformationProtectionPolicies"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the windowsInformationProtectionPolicies
+    * Windows information protection for apps running on devices which are not MDM enrolled.
+    *
+    * @param WindowsInformationProtectionPolicy $val The windowsInformationProtectionPolicies
+    *
+    * @return DeviceAppManagement
+    */
+    public function setWindowsInformationProtectionPolicies($val)
+    {
+        $this->_propDict["windowsInformationProtectionPolicies"] = $val;
         return $this;
     }
     

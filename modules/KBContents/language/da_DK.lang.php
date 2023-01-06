@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vis skabeloner',
     'LNK_LIST_KBCATEGORIES' => 'Vis kategorier',
     'LBL_TEMPLATES' => 'Skabeloner',
+    'LBL_TEMPLATE' => 'Skabelon',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Denne skabelon vil overskrive alt indhold.' .
         ' Er du sikker på, at du ønsker at anvende denne skabelon?',
     'LNK_IMPORT_KBCONTENTS' => 'Importér artikler',

@@ -14,7 +14,13 @@
     <label>
         <span class="image_input"><input type="file" name="{{name}}"></span>
         <span class="image_btn image_btn_label">{{str "LBL_EDIT_BUTTON"}}</span>
-        <span class="image_preview">{{#if value}}<img src="{{value}}">{{else}}<i class="fa fa-plus"></i>{{/if}}</span>
+        <span class="image_preview">
+            {{#if value}}
+                <img src="{{value}}">
+            {{else}}
+                <i class="sicon sicon-lg sicon-plus-lg"></i>
+            {{/if}}
+        </span>
     </label>
 </div>
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

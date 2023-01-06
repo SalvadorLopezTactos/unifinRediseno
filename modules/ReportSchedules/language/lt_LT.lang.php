@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Šios ataskaitos planas',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Ataskaitų planų įrašų ataskaitų sritis',
+    'LBL_FILE_TYPE' => 'Failo tipas (-ai)',
 );

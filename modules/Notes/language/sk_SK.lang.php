@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Email adresa:',
     'LBL_EMAIL_ATTACHMENT' => 'Email príloha',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Príloha e-mailu pre',
+    'LBL_NOTE_ATTACHMENT' => 'Prílohy poznámky',
+    'LBL_KB_ATTACHMENT' => 'Prílohy KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'Prílohy prípadu',
     'LBL_FILE_MIME_TYPE' => 'Typ MIME',
     'LBL_FILE_EXTENSION' => 'Prípona súboru',
     'LBL_FILE_SOURCE' => 'Zdroj súboru',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Zdroj poznámky',
     'LBL_SOURCE_EXTERNAL' => 'Externé',
     'LBL_SOURCE_INTERNAL' => 'Interné',
+    'LBL_PORTAL' => 'Portál',
 
     // Help Text
     // List View Help Text

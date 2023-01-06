@@ -21,6 +21,8 @@
 ({
     extendsFrom: 'ModuleMenuView',
 
+    plugins: ['Previewable'],
+
     /**
      * The collection used to list dashboards on the dropdown.
      *
@@ -119,13 +121,30 @@
 
     /**
      * Sets the logo for Sugar top left corner
+     * @param imageUrl
      * @protected
      */
-    _setLogoImage: function() {
+    _setLogoImage: function(imageUrl) {
         // let's put Sugar logo here instead of hbs template
-        var logoUrl = app.utils.buildUrl('styleguide/assets/img/logo.svg');
+        var logoUrl = imageUrl ?
+            imageUrl :
+            app.utils.buildUrl('styleguide/assets/img/sugar-cube-black.svg');
+
         var altStr = app.lang.get('str', 'LBL_SUGAR_CUBE_ALT', this.module);
         this.logoImage = '<img src="' + logoUrl + '" alt="' + altStr + '">';
+    },
+
+    /**
+     * Additional 'data:preview' callbacks to be invoked from Previewable
+     *
+     * @param hasChanges
+     * @param data
+     */
+    dataPreviewCallbacks: function(hasChanges, data) {
+        if (_.contains(data.properties, 'logoImage')) {
+            this._setLogoImage(this.logoImage);
+            this.render();
+        }
     },
 
     /**
@@ -157,7 +176,7 @@
         this._super('_renderHtml');
 
         this.$el.attr('title', app.lang.get('LBL_TABGROUP_HOME', this.module));
-        this.$el.addClass('home btn-group');
+        this.$el.addClass('home btn-group py-2 px-5');
     },
 
     /**

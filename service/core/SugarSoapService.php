@@ -15,47 +15,43 @@ require_once('service/core/SugarWebService.php');
 require_once('service/core/SugarWebServiceImpl.php');
 
 /**
- * This ia an abstract class for the soapservice. All the global fun
- *
+ * This is an abstract class for the soap implementation for using SOAP. This class is responsible for making
+ * all SOAP call by passing the client's request to SOAP server and sending response back to client
+ * @api
  */
-abstract class SugarSoapService extends SugarWebService{
-	protected $soap_version = '1.1';
+abstract class SugarSoapService extends SugarWebService
+{
+    use SoapLogTrait;
+
+    /**
+     * @var SoapFault
+     */
+    public $fault;
+    protected $soap_version = SOAP_1_1;
 	protected $namespace = 'http://www.sugarcrm.com/sugarcrm';
 	protected $implementationClass = 'SugarWebServiceImpl';
 	protected $registryClass = "";
 	protected $soapURL = "";
-	
-  	/**
-  	 * This is an abstract method. The implementation method should registers all the functions you want to expose as services.
-  	 *
-  	 * @param String $function - name of the function
-  	 * @param Array $input - assoc array of input values: key = param name, value = param type
-  	 * @param Array $output - assoc array of output values: key = param name, value = param type
-	 * @access public
-  	 */
-	abstract function registerFunction($function, $input, $output);
-	
-	/**
-	 * This is an abstract method. This implementation method should register all the complex type	 
-	 * 
-	 * @param String $name - name of complex type
-	 * @param String $typeClass - (complexType|simpleType|attribute)
-	 * @param String $phpType - array or struct
-	 * @param String $compositor - (all|sequence|choice)
-	 * @param String $restrictionBase - SOAP-ENC:Array or empty
-	 * @param Array $elements - array ( name => array(name=>'',type=>'') )
-	 * @param Array $attrs - array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:string[]'))
-	 * @param String $arrayType - arrayType: namespace:name (xsd:string)
-	 * @access public
-	 */	
-	abstract function registerType($name, $typeClass, $phpType, $compositor, $restrictionBase, $elements, $attrs=array(), $arrayType='');
-	
-	/**
-	 * Constructor
-	 *
-	 */
-	protected function __construct(){
-		$this->setObservers();
+
+    /**
+     * This is the constructor. It creates an instance of SOAP server.
+     *
+     * @param String $url - This is the soap URL
+     * @param String|null $wsdl - WSDL file, or non WSDL mode
+     * @access public
+     */
+    public function __construct($url, $wsdl = null)
+    {
+        $this->getLogger()->info('Begin: SugarSoapService->__construct');
+        $this->setObservers();
+        $this->soapURL = $url;
+        $options = array(
+            'soap_version' => SOAP_1_1,
+            'uri' => $url,
+        );
+        $this->server = new \SoapServer($wsdl, $options);
+        $this->server->setClass($this->getRegisteredImplClass());
+        $this->getLogger()->info('End: SugarSoapService->__construct');
 	}
 	
 	/**
@@ -126,6 +122,92 @@ abstract class SugarSoapService extends SugarWebService{
 	public function getServer() {
 		return $this->server;	
 	} // fn
-	
-	
+
+    /**
+     * Fallback function to catch unexpected failure in SOAP
+     */
+    public function shutdown()
+    {
+        if ($this->in_service) {
+            $out = ob_get_contents();
+            ob_end_clean();
+            $this->getLogger()->fatal('SugarSoapService->shutdown: service died unexpectedly');
+            $this->server->fault('-1', "Unknown error in SOAP call: service died unexpectedly", '', $out);
+        }
+    }
+
+    /**
+     * It passes request data to SOAP server and sends response back to client
+     * @access public
+     */
+    public function serve()
+    {
+        $this->getLogger()->info('Begin: SugarSoapService->serve');
+        ob_clean();
+        $this->in_service = true;
+        register_shutdown_function(array($this, "shutdown"));
+        ob_start();
+        $this->server->handle();
+        $this->in_service = false;
+        ob_end_flush();
+        flush();
+        $this->getLogger()->info('End: SugarSoapService->serve');
+    } // fn
+
+    /**
+     * This function registers implementation class name with SOAP so when SOAP makes a call to a funciton,
+     * it will be made on this class object
+     *
+     * @param String $implementationClass
+     * @access public
+     */
+    public function registerImplClass($implementationClass)
+    {
+        $this->getLogger()->info('Begin: SugarSoapService->registerImplClass');
+        $this->server->setClass($implementationClass);
+        $this->getLogger()->info('End: SugarSoapService->registerImplClass');
+    } // fn
+
+    /**
+     * This function sets the fault object on the SOAP
+     *
+     * @param SoapError $errorObject - This is an object of type SoapError
+     * @access public
+     */
+    public function error($errorObject)
+    {
+        $this->getLogger()->fatal('Begin: SugarSoapService->error');
+
+        // report all failures as caused by client since we don't have the needed attribute
+        // in existing error definitions
+        $this->fault = new SoapFault('soapenv:Client', $errorObject->getFaultCode() . ': ' . $errorObject->getName(), '', $errorObject->getDescription());
+        $this->getLogger()->fatal('End: SugarSoapService->error');
+    }
+
+    /**
+     * This method registers all the functions which you want to be available for SOAP.
+     *
+     * @param String $function - name of the function
+     * @access public
+     */
+    public function registerFunction($function)
+    {
+        if (in_array($function, $this->excludeFunctions)) {
+            return;
+        }
+        $this->server->addFunction($function);
+    }
+
+    /**
+     * Sets the name of the registry class
+     *
+     * @param String $registryClass
+     * @access public
+     */
+    public function registerClass($registryClass)
+    {
+        $this->getLogger()->info('Begin: SugarSoapService->registerClass');
+        $this->registryClass = $registryClass;
+        $this->getLogger()->info('End: SugarSoapService->registerClass');
+    }
 } // class

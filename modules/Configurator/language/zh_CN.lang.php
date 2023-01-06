@@ -33,6 +33,9 @@ $mod_strings = array (
 	'DEFAULT_TIME_FORMAT'=>'默认时间格式',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'显示服务器反应时间',
+    'FREEZE_FIRST_COLUMN' => '允许列冻结',
+    'FREEZE_FIRST_COLUMN_HELP' => '启用此设置允许用户冻结各种列表视图中的第一列，' .
+        '包括模块列表视图、子面板、Dashlet 和控制台。',
 	/*'EXPORT'=>'Export',
 	'EXPORT_CHARSET' => 'Default Export Character Set',
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
@@ -114,9 +117,12 @@ $mod_strings = array (
     'LOG_SLOW_QUERIES' => '慢速查询日志',
     'LOCK_HOMEPAGE_HELP'=>'此设置用来阻止<BR> 1) 在首页模块中添加新的子页与图表 <BR>2) 通过拖拉来定制栏目在首页中的位置。',
     'CURRENT_LOGO'=>'当前使用的标识：',
+    'CURRENT_LOGO_DARK' => '当前夜间模式标志：',
     'CURRENT_LOGO_HELP'=>'本标识将显示在 Sugar 程序脚注的左上角。',
+    'CURRENT_LOGO_DARK_HELP' => "当 Sugar 应用程序处于夜间模式时，此标志将根据用户的外观偏好设置显示在页脚的左上角。",
     'NEW_LOGO'=>'选择标识：',
     'NEW_LOGO_HELP' => '图像文件的格式可以是png或jpg文件。最大高度是24px，最大宽度是180px。如果图片超出这个范围将自动进行调整。',
+    'NEW_LOGO_DARK' => '选择夜间模式标志：',
     'NEW_LOGO_HELP_NO_SPACE' => '图像文件的格式可以是 png 或 jpg 文件。最大高度是 24px，最大宽度是 450px。如果图片超出这个范围将自动进行调整。图片文件名不能包含空格字符。',
     'NEW_QUOTE_LOGO'=>'上传新报价标识',
     'NEW_QUOTE_LOGO_HELP'=>'需要的图象文件格式是.jpg.<BR>推荐尺寸为 867x74 px。',
@@ -412,7 +418,7 @@ BSOFR
     'LBL_WIZARD_CONTINUE_BUTTON' => '继续',
     'LBL_WIZARD_FINISH_TAB' => '完成',
     'LBL_WIZARD_FINISH_TITLE' => '您已经完成基本系统配置',
-    'LBL_WIZARD_FINISH' => '点击<b>继续</b>配置你的用户设置。<br/><br />配置额外的系统配置，请点击<a href="index.php?module=Administration&action=index" target="_blank">这里</a>',
+    'LBL_WIZARD_FINISH' => '点击<b>继续</b>配置你的用户设置。<br/><br />配置额外的系统配置，请点击 <a href="#Administration" target="_blank">这里</a>。',
     'LBL_WIZARD_SYSTEM_TITLE' => '品牌',
     'LBL_WIZARD_SYSTEM_DESC' => '提供你的组织名和组织标志用来在Sugar中表示你的品牌。',
     'LBL_WIZARD_LOCALE_DESC' => '指定您在Sugar中的时区和日期，以及货币和姓名。此设置将作为系统默认设置，用户可以设置自己的偏好设置以替代此设置。',
@@ -423,7 +429,8 @@ BSOFR
 	'LBL_LOADING' => '连载中...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => '删除' /*for 508 compliance fix*/,
 	'LBL_WELCOME' => '欢迎' /*for 508 compliance fix*/,
-	'LBL_LOGO' => '标志' /*for 508 compliance fix*/,
+    'LBL_LOGO' => '标志' /*for 508 compliance fix*/,
+    'LBL_LOGO_DARK' => '夜间模式标志',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* 报表模块只对SugarCRM和Sugar本地移动用户有效',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '*报表模块在移动用户的浏览器视图上无效。',
 
@@ -462,5 +469,3 @@ BSOFR
     'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
     'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
-
-

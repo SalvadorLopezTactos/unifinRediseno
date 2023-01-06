@@ -13,10 +13,12 @@
 
     TOGGLE_DUPECHECK: 'dupecheck',
     TOGGLE_CREATE: 'create',
+    TOGGLE_CREATE_LAYOUT: 'create-layout',
 
     availableToggles: {
         'dupecheck': {},
-        'create': {}
+        'create': {},
+        'create-layout': {}
     },
 
     //selectors
@@ -52,6 +54,7 @@
 
         this._super('initialize', [options]);
 
+        this._initSubpanelsData();
         this.addSubComponents();
 
         this.context.on('lead:convert:populate', this.handlePopulateRecords, this);
@@ -66,6 +69,33 @@
         //open the first module upon the first autocomplete check completion
         if (this.meta.moduleNumber === 1) {
             this.once('lead:autocomplete-check:complete', this.handleOpenRequest, this);
+        }
+    },
+
+    /**
+     * Initializes the metadata that drives which create subpanels are included
+     * on this convert panel
+     *
+     * @private
+     */
+    _initSubpanelsData: function() {
+        this.subpanelsMeta = this.meta.subpanels || [];
+
+        // Check for Opps+RLI subpanel settings and add the RLI create subpanel
+        // to the subpanels meta if needed
+        if (this.meta.module === 'Opportunities' && this.meta.enableRlis) {
+            this.subpanelsMeta.push({
+                layout: 'subpanel-create',
+                label: 'LBL_RLI_SUBPANEL_TITLE',
+                override_subpanel_list_view: 'subpanel-for-opportunities-create',
+                context: {
+                    link: 'revenuelineitems'
+                },
+                settings: {
+                    allowEmpty: !this.meta.requireRlis,
+                    copyData: this.meta.copyDataToRlis
+                }
+            });
         }
     },
 
@@ -153,26 +183,200 @@
     },
 
     /**
-     * Add the create view.
+     * Add the create toggle layout, including the create view and any
+     * applicable create subpanels
      */
     addRecordCreateComponent: function() {
-        var context = this.context.getChildContext({
-            'module': this.meta.module,
+        // Create the context for all the record create components
+        let context = this._buildRecordCreateContext();
+
+        // Create a single layout that will contain all the create subcomponents.
+        // This is done so that both the record create view and create subpanels
+        // will be wrapped into one component that can be toggled
+        this.toggleLayout = this._buildRecordCreateToggleLayout(context);
+
+        // Add the record create view component to the toggle layout
+        this.createView = this._buildRecordCreateView(context);
+        this.toggleLayout.addComponent(this.createView);
+
+        // Add the create subpanels component to the toggle layout if needed
+        if (!_.isEmpty(this.subpanelsMeta)) {
+            this.createSubpanelsLayout = this._buildRecordCreateSubpanelsLayout(context);
+            this.toggleLayout.addComponent(this.createSubpanelsLayout);
+        }
+
+        // Finally, add the toggle-able layout to this toggle layout
+        this.addComponent(this.toggleLayout);
+    },
+
+    /**
+     * Builds the context needed for the create components
+     *
+     * @return {Context} the record create context
+     * @private
+     */
+    _buildRecordCreateContext: function() {
+        let context = this.context.getChildContext({
+            module: this.meta.module,
             forceNew: true,
             create: true
         });
         context.prepare();
+        return context;
+    },
 
-        this.createView = app.view.createView({
+    /**
+     * Builds the layout that will be used as the toggle-able layout
+     * containing all the components related to creating a record
+     *
+     * @param {Context} context the context to use for the toggle-able layout
+     * @return {Layout} the toggle-able layout
+     * @private
+     */
+    _buildRecordCreateToggleLayout: function(context) {
+        return app.view.createLayout({
             context: context,
-            type: this.TOGGLE_CREATE,
-            module: context.module,
+            type: 'base',
+            name: this.TOGGLE_CREATE_LAYOUT,
+            module: context.get('module'),
             layout: this
         });
+    },
 
-        this.createView.meta = this.removeFieldsFromMeta(this.createView.meta, this.meta);
-        this.createView.enableHeaderButtons = false;
-        this.addComponent(this.createView);
+    /**
+     * Builds the create view that will be used to create the panel's record
+     *
+     * @param {Context} context the context to use for the create view
+     * @return {View} the create view
+     * @private
+     */
+    _buildRecordCreateView: function(context) {
+        let createView = app.view.createView({
+            context: context,
+            type: this.TOGGLE_CREATE,
+            module: context.get('module'),
+            layout: this.toggleLayout
+        });
+        createView.meta = this.removeFieldsFromMeta(createView.meta, this.meta);
+        createView.enableHeaderButtons = false;
+
+        return createView;
+    },
+
+    /**
+     * Builds the subpanels layout that will be used to create records related
+     * to the panel's record
+     *
+     * @param {Context} context the context to use for the subpanels layout
+     * @return {Layout} the subpanels layout
+     * @private
+     */
+    _buildRecordCreateSubpanelsLayout: function(context) {
+        let createSubpanelsLayout = app.view.createLayout({
+            context: context,
+            type: 'subpanels-create',
+            layout: this.toggleLayout
+        });
+        createSubpanelsLayout.initComponents(this.subpanelsMeta);
+        this._initSubpanelListeners(createSubpanelsLayout);
+
+        return createSubpanelsLayout;
+    },
+
+    /**
+     * Initializes listeners for any create subpanels as needed
+     *
+     * @private
+     */
+    _initSubpanelListeners: function(subpanelsLayout) {
+        // Add listeners to the subpanels as needed
+        _.each(subpanelsLayout.context.children, function(childContext) {
+            if (childContext.get('isCreateSubpanel')) {
+                // Product Catalog listeners for Revenue Line Items subpanels
+                if (childContext.get('module') === 'RevenueLineItems') {
+                    let convertComponent = this.closestComponent('convert');
+
+                    // When we open the Product Catalog/Quick Picks previews,
+                    // show the "Add" button only if this panel is currently
+                    // enabled and open
+                    convertComponent.before('productcatalog:preview:add:disable', function() {
+                        return !(this.isPanelEnabled() && this.isPanelOpen());
+                    }, this);
+
+                    // When we click a Product on the Product Catalog/Quick Picks
+                    // dashlets, add it to this subpanel only if this panel is
+                    // currently enabled and opened
+                    convertComponent.before('productCatalogDashlet:add:allow', function() {
+                        return this.isPanelEnabled() && this.isPanelOpen();
+                    }, this);
+                }
+
+                // If this subpanel is set to copy data, add listeners to copy
+                // Lead data to new rows
+                let subpanelSettings = childContext.get('settings');
+                if (subpanelSettings && subpanelSettings.copyData) {
+                    // If the subpanel was initialized with any models, make
+                    // sure the Lead data is copied once the Lead is fetched
+                    let leadsModel = this.context.get('leadsModel');
+                    leadsModel.once('sync', function() {
+                        _.each(childContext.get('collection').models, function(subpanelModel) {
+                            this.populateSubpanelRecord(subpanelModel);
+                        }, this);
+                    }, this);
+
+                    // Whenever subsequent subpanel models are created, copy
+                    // data from the Lead as needed
+                    this.listenTo(childContext, 'subpanel-list-create:row:added', this.populateSubpanelRecord);
+                }
+            }
+        }, this);
+    },
+
+    /**
+     * Copies attributes from the Lead model to the newly created subpanel model
+     * @param {Bean} subpanelModel the newly created subpanel model
+     */
+    populateSubpanelRecord(subpanelModel) {
+        // Get the Lead model we are copying from
+        let leadsModel = this.context.get('leadsModel');
+
+        // Get the list of fields that can be safely copied
+        let copyableAttrs = this._getCopyableAttrs(leadsModel, subpanelModel);
+
+        // Copy the fields from the Lead to the subpanel model
+        let attrs = {};
+        _.each(copyableAttrs, function(value, key) {
+            if (leadsModel.has(key) && subpanelModel.get(key) !== value) {
+                subpanelModel.setDefault(key, value);
+                attrs[key] = value;
+            }
+        }, this);
+        subpanelModel.set(attrs);
+    },
+
+    /**
+     * Filters and returns the attributes of the fromModel that are valied to be copied to the toModel
+     * @param {Bean} fromModel the source model to copy attributes from
+     * @param {Bean} toModel the destination model to copy attributes to
+     * @return {Object} the subset of the source model's attributes that can be copied to the destination model
+     * @private
+     */
+    _getCopyableAttrs(fromModel, toModel) {
+        let fromModule = fromModel.module || fromModel.get('_module');
+        let toModule = toModel.module || toModel.get('_module');
+
+        let fromFieldMeta = app.metadata.getModule(fromModule, 'fields');
+        let toFieldMeta = app.metadata.getModule(toModule, 'fields');
+
+        return _.pick(fromModel.attributes, function(value, field) {
+            return app.acl.hasAccessToModel('edit', toModel, field) &&
+                fromFieldMeta[field] &&
+                toFieldMeta[field] &&
+                fromFieldMeta[field].type === toFieldMeta[field].type &&
+                (_.isUndefined(fromFieldMeta[field].duplicate_on_record_copy) ||
+                    fromFieldMeta[field].duplicate_on_record_copy !== 'no') &&
+                this.shouldSourceValueBeCopied(value);
+        }, this);
     },
 
     /**
@@ -205,7 +409,7 @@
                 this.selectFirstDuplicate();
             }
         } else if (!this.toggledOffDupes) {
-            this.showComponent(this.TOGGLE_CREATE);
+            this.showComponent(this.TOGGLE_CREATE_LAYOUT);
         }
 
         this.toggledOffDupes = true; //flag so we only toggle once
@@ -364,7 +568,7 @@
      */
     showComponent: function(name) {
         this._super('showComponent', [name]);
-        if (this.currentToggle === this.TOGGLE_CREATE) {
+        if (this.currentToggle === this.TOGGLE_CREATE_LAYOUT) {
             this.createViewRendered = true;
         }
         this.handleShowComponent();
@@ -374,7 +578,9 @@
      * Render the create view.
      */
     handleShowComponent: function() {
-        if (this.currentToggle === this.TOGGLE_CREATE && this.createView.meta.useTabsAndPanels && !this.createViewRendered) {
+        if (this.currentToggle === this.TOGGLE_CREATE_LAYOUT &&
+            this.createView.meta.useTabsAndPanels &&
+            !this.createViewRendered) {
             this.createView.render();
             this.createViewRendered = true;
         }
@@ -396,7 +602,7 @@
     handleAssociateClick: function(event) {
         //ignore clicks if button is disabled
         if (!$(event.currentTarget).hasClass('disabled')) {
-            if (this.currentToggle === this.TOGGLE_CREATE) {
+            if (this.currentToggle === this.TOGGLE_CREATE_LAYOUT) {
                 this.runCreateValidation({
                     valid: _.bind(this.markPanelComplete, this),
                     invalid: _.bind(this.resetPanel, this)
@@ -420,11 +626,16 @@
         var view = this.createView,
             model = view.model;
 
-        model.doValidate(view.getFields(view.module), _.bind(function(isValid) {
-            if (isValid) {
-                callbacks.valid(model);
-            } else {
+        // Validate both the model and any related models in create subpanels, if they exist
+        async.parallel([
+            _.bind(view.validateModelWaterfall, view),
+            _.bind(view.validateSubpanelModelsWaterfall, view)
+        ], _.bind(function(hasError) {
+            if (hasError) {
+                model.trigger('error:validation');
                 callbacks.invalid(model);
+            } else {
+                callbacks.valid(model);
             }
         }, this));
     },

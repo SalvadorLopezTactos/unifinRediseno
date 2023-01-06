@@ -180,14 +180,14 @@ var $useForSubpanel = true;
 
         //Bug#51609 Replace {php} code block in EditViewHeader.tpl
         $action_button = array();
-        $APP = $this->ss->get_template_vars('APP');
-        $PWDSETTINGS = $this->ss->get_template_vars('PWDSETTINGS');
-        $REGEX = $this->ss->get_template_vars('REGEX');
-        $CHOOSER_SCRIPT = $this->ss->get_template_vars('CHOOSER_SCRIPT');
-        $REASSIGN_JS = $this->ss->get_template_vars('REASSIGN_JS');
-        $RETURN_ACTION = $this->ss->get_template_vars('RETURN_ACTION');
-        $RETURN_MODULE = $this->ss->get_template_vars('RETURN_MODULE');
-        $RETURN_ID = $this->ss->get_template_vars('RETURN_ID');
+        $APP = $this->ss->getTemplateVars('APP');
+        $PWDSETTINGS = $this->ss->getTemplateVars('PWDSETTINGS');
+        $REGEX = $this->ss->getTemplateVars('REGEX');
+        $CHOOSER_SCRIPT = $this->ss->getTemplateVars('CHOOSER_SCRIPT');
+        $REASSIGN_JS = $this->ss->getTemplateVars('REASSIGN_JS');
+        $RETURN_ACTION = $this->ss->getTemplateVars('RETURN_ACTION');
+        $RETURN_MODULE = $this->ss->getTemplateVars('RETURN_MODULE');
+        $RETURN_ID = $this->ss->getTemplateVars('RETURN_ID');
 
         $minpwdlength = !empty($PWDSETTINGS['minpwdlength']) ? $PWDSETTINGS['minpwdlength'] : '';
         $maxpwdlength =  !empty($PWDSETTINGS['maxpwdlength']) ? $PWDSETTINGS['maxpwdlength'] : '';
@@ -203,7 +203,7 @@ EOD
                               type="button" name="button" value="{$APP['LBL_CANCEL_BUTTON_LABEL']}">
 EOD
         ;
-        $action_button_header = array_merge($action_button_header, $this->ss->get_template_vars('BUTTONS_HEADER'));
+        $action_button_header = array_merge($action_button_header, $this->ss->getTemplateVars('BUTTONS_HEADER'));
         $this->ss->assign('ACTION_BUTTON_HEADER', $action_button_header);
 
         $action_button_footer[] = <<<EOD
@@ -218,7 +218,7 @@ EOD
                               type="button" name="button" value="{$APP['LBL_CANCEL_BUTTON_LABEL']}">
 EOD
         ;
-        $action_button_footer = array_merge($action_button_footer, $this->ss->get_template_vars('BUTTONS_FOOTER'));
+        $action_button_footer = array_merge($action_button_footer, $this->ss->getTemplateVars('BUTTONS_FOOTER'));
         $this->ss->assign('ACTION_BUTTON_FOOTER', $action_button_footer);
 
         //if the request object has 'scrolltocal' set, then we are coming here from the tour window box and need to set flag to true

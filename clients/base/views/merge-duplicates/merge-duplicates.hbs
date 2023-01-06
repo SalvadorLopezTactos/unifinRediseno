@@ -14,8 +14,9 @@
     <span class="record-name" data-container="primary-title"></span>
     <button class="btn btn-invisible pull-right"
             rel="tooltip" data-placement="bottom" data-toggle="proto"
-            data-mode="preview" title="{{str 'LBL_PREVIEW'}}">
-        <i class="fa fa-eye"></i>
+            data-mode="preview" title="{{str 'LBL_PREVIEW'}}"
+    >
+        <i class="sicon sicon-preview"></i>
     </button>
 </h4>
 <div class="record record-merge-interface">
@@ -40,7 +41,7 @@
             <div class="row-div-cnt">
                 {{#each collection.models}}
                     <div class="col" data-record-id="{{id}}" data-container="merge-record">
-                        <button class="fa fa-times-circle btn btn-invisible pull-right"
+                        <button class="sicon sicon-remove btn btn-invisible pull-right"
                                 data-action="delete" rel="tooltip" title="{{str "LBL_MERGE_DUPLICATES_REMOVE_TOOLTIP" ../module}}">
                         </button>
                         <div class="primary-lbl {{#if readonly}}disabled{{/if}}" data-container="primary-label">

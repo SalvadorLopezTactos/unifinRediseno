@@ -305,9 +305,7 @@ class MassUpdate
 						    continue;
 						}
                         $this->sugarbean->mark_deleted($id);
-                        // ideally we should use after_delete logic hook
-                        $searchEngine = SugarSearchEngineFactory::getInstance();
-                        $searchEngine->delete($this->sugarbean);
+                        $this->sugarbean->save(false);
                     } else {
                         $retval[] = $id;
                     }
@@ -415,9 +413,11 @@ class MassUpdate
                         Registry\Registry::getInstance()->drop('triggered_starts');
 						$newbean->save($check_notify);
 						if (!empty($email_address_id)) {
-	    					$query = "UPDATE email_addresses SET opt_out = {$optout_flag_value} where id = '{$emailAddressRow['email_address_id']}'";
-	    					$GLOBALS['db']->query($query);
-
+                            $query = "UPDATE email_addresses SET opt_out = ? where id = ?";
+                            DBManagerFactory::getInstance()->getConnection()->executeQuery(
+                                $query,
+                                [$optout_flag_value, $emailAddressRow['email_address_id']]
+                            );
 						} // if
 
 						if(!empty($old_reports_to_id) && method_exists($newbean, 'update_team_memberships')) {
@@ -632,7 +632,8 @@ class MassUpdate
 						case "int":
 							if(!empty($field['massupdate']) && empty($field['auto_increment']))
 							{
-								$even = !$even; $newhtml .=$this->addInputType($displayname, $field);
+                                $even = !$even;
+                                $newhtml .= $this->addInputType($displayname, $field["name"]);
 							}
 							 break;
 						case "contact_id":$even = !$even; $newhtml .=$this->addContactID($displayname, $field["name"]); break;
@@ -937,7 +938,8 @@ EOQ;
 	  * @param id_name name of the id in vardef
 	  * @param mod_type name of the module, either "Contact" or "Releases" currently
 	  */
-	function addUserName($displayname, $varname, $id_name='', $mod_type){
+    public function addUserName(string $displayname, string $varname, string $id_name, string $mod_type)
+    {
 		global $app_strings;
 
 		if(empty($id_name))
@@ -1004,7 +1006,8 @@ EOHTML;
 	  * @param id_name name of the id in vardef
 	  * @param mod_type name of the module, either "Contact" or "Releases" currently
 	  */
-	function addGenericModuleID($displayname, $varname, $id_name='', $mod_type){
+    public function addGenericModuleID(string $displayname, string $varname, string $id_name, string $mod_type): string
+    {
 		global $app_strings;
 
 		if(empty($id_name))
@@ -1425,18 +1428,7 @@ EOQ;
             if(SugarAutoLoader::existing('modules/' . $module . '/metadata/SearchFields.php')) {
                 require_once('include/SearchForm/SearchForm.php');
                 $searchForm = new SearchForm($module, $seed);
-            }
-            elseif(!empty($_SESSION['export_where'])) { //bug 26026, sometimes some module doesn't have a metadata/SearchFields.php, the searchfrom is generated in the ListView.php.
-            //So currently massupdate will not gernerate the where sql. It will use the sql stored in the SESSION. But this will cause bug 24722, and it cannot be avoided now.
-                $where = $_SESSION['export_where'];
-                $whereArr = explode (" ", trim($where));
-                if ($whereArr[0] == trim('where')) {
-                    $whereClean = array_shift($whereArr);
-                }
-                $this->where_clauses = implode(" ", $whereArr);
-                return;
-            }
-            else {
+            } else {
                 $this->where_clauses = '';
                 return;
             }

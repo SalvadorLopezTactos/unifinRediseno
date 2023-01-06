@@ -13,7 +13,6 @@
 <div style="visibility:hidden;" id="{{$source}}_popup_div"></div>
 <script type="text/javascript">
 function show_{{$source}}(event) 
-{literal}
 {
 
 		var callback =	{
@@ -33,9 +32,7 @@ function show_{{$source}}(event)
                         } 
                         count++;
                     }
-                {/literal}
 					cd = new CompanyDetailsDialog("{{$source}}_popup_div", output, event.clientX, event.clientY);
-			    {literal}
 					cd.setHeader("Found " + count + (count == 1 ? " result" : " results"));
 					cd.display();                    
 				} else {
@@ -48,12 +45,8 @@ function show_{{$source}}(event)
 			}		  
 		}
 
-{/literal}
-
 url = 'index.php?module=Connectors&action=DefaultSoapPopup&source_id={{$source}}&module_id={{$module}}&record_id={$fields.id.value}&mapping={{$mapping}}';
 var cObj = YAHOO.util.Connect.asyncRequest('POST', url, callback);
 			   
-{literal}
 }
-{/literal}
 </script>

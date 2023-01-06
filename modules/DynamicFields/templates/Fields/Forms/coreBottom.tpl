@@ -105,6 +105,18 @@
 {/if}
 </td></tr>
 {/if}
+
+{if $showCalculationVisible}
+    <tr>
+        <td class='mbLBL'>
+            {sugar_translate module='DynamicFields' label='LBL_CALCULATION_VISIBLE'}:
+        </td>
+        <td>
+            <input id="calculation_visible" type="checkbox" name="calculation_visible" value="1" {if !empty($vardef.calculation_visible)}checked{/if} />
+        </td>
+    </tr>
+{/if}
+
 </table>
 
 {if !empty($vardef.group)}
@@ -114,7 +126,6 @@
 {if !empty($vardef.options) && !empty($vardef.type) && $vardef.type == 'parent_type'}
     <input type="hidden" name="options" value="{$vardef.options}">
 {/if}
-
 
 <script>
     ModuleBuilder.enforceAuditPii();

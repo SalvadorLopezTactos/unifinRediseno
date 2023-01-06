@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Süreçler Kaydı Panosu',
 
     'LBL_CAS_ID' => 'Süreç Numarası',
+    'LBL_CAS_STATUS' => 'Süreç Durumu',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Bilinmyen (KullanıcıId'sine göre:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "görev",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "görev ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "atandı İşlem #%s %s %s kaydı %s Aksiyon %s ile",
     'LBL_PMSE_HISTORY_LOG_ON'  => "üzerinde",
     'LBL_PMSE_HISTORY_LOG_AND'  => "ve",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'bir kaydın bağlanması veya bağlantısının kaldırılması',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Onayla',
     'LBL_PMSE_LABEL_REJECT' => 'Reddet',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Süreçler Devam Ediyor',
     'LBL_STATUS_CANCELLED' => 'Süreçler İptal Edildi',
     'LBL_STATUS_ERROR' => 'Hatalı Süreçler',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Tamamlandı',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Sonlandırıldı',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Devam Ediyor',
+    'LBL_STATUS_CANCELLED_ENUM' => 'İptal Edildi',
+    'LBL_STATUS_ERROR_ENUM' => 'Hata',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Süreç Yönetimi',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Boş Bırakılmış Süreçler',

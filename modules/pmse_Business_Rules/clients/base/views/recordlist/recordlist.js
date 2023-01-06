@@ -12,6 +12,11 @@
     extendsFrom: 'RecordlistView',
 
     /**
+     * Override the edit event name so that double click to edit works on list views of this module
+     */
+    editEventName: 'list:edit_businessrules:fire',
+
+    /**
      * @override
      * @param {Object} options
      */

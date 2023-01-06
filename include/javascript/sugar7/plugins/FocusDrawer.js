@@ -23,11 +23,6 @@
             focusEnabled: false,
 
             /**
-             * Stores user license types needed for using the focus drawer
-             */
-            validFocusLicenses: ['SUGAR_SELL', 'SUGAR_SERVE'],
-
-            /**
              * When attaching the plugin, listen for the render event and add the icon if the option is set.
              */
             onAttach: function(component) {
@@ -48,11 +43,6 @@
                 // Check that the focus drawer has not been globally disabled in config
                 var focusDrawerIsEnabled = app.utils.isTruthy(app.config.enableLinkToDrawer);
 
-                // Check that the user has a valid license for using the focus drawer
-                var userHasValidFocusLicense = !_.isEmpty(
-                    _.intersection(this.validFocusLicenses, app.user.get('licenses'))
-                );
-
                 // Check that this field type is set up for the Focus Drawer
                 var fieldIsValid = _.isFunction(this.getFocusContextModule) &&
                     _.isFunction(this.getFocusContextModelId);
@@ -60,17 +50,12 @@
                 // Check that the module is set up for the Focus Drawer
                 var module =  app.metadata.getModule(this.getFocusContextModule());
                 var moduleIsNotBwc = !(module && app.utils.isTruthy(module.isBwcEnabled));
-                var moduleHasFocusDashboard = module && app.utils.isTruthy(module.hasFocusDashboard);
-                var moduleIsValid = moduleIsNotBwc && moduleHasFocusDashboard;
-
-                // Check that the focus drawer container is available
-                var focusDrawerComponentExists = this.getFocusDrawer();
 
                 // Check that Focus Drawer icons are allowed on the layout we are on
                 var layoutIsValid = this._checkLayoutFocusDrawerAccess();
 
-                return focusDrawerIsEnabled && userHasValidFocusLicense && fieldIsValid &&
-                    moduleIsValid && focusDrawerComponentExists && layoutIsValid;
+                return focusDrawerIsEnabled && fieldIsValid && moduleIsNotBwc &&
+                    !_.isEmpty(app.sideDrawer) && layoutIsValid;
             },
 
             /**
@@ -86,6 +71,8 @@
                     focusIconContainer.toggleClass('hide');
                     var focusIcon = focusIconContainer.find('.focus-icon');
                     focusIcon.click(_.bind(this.handleFocusClick, this));
+                    // Handle opening the focus drawer with the keyboard 'Enter' key
+                    focusIcon.keyup(_.bind(this.handleKeyboardClick, this));
                 }
             },
 
@@ -95,6 +82,15 @@
             handleFocusClick: function() {
                 if (this.focusEnabled) {
                     this.openFocusDrawer(this.getFocusContext());
+                }
+            },
+
+            /**
+             * Handle the focus icon being clicked via keyboard 'Enter' key
+             */
+            handleKeyboardClick: function(e) {
+                if (e.type === 'keyup' && e.originalEvent.key === 'Enter') {
+                    this.handleFocusClick();
                 }
             },
 
@@ -113,27 +109,40 @@
                     context: {
                         layout: 'focus',
                         module: _.isFunction(this.getFocusContextModule) ? this.getFocusContextModule() : '',
-                        modelId: _.isFunction(this.getFocusContextModelId) ? this.getFocusContextModelId() : ''
+                        modelId: _.isFunction(this.getFocusContextModelId) ? this.getFocusContextModelId() : '',
+                        parentContext: this.context,
+                        fieldDefs: this.fieldDefs,
+                        baseModelId: this.model.get('id'),
+                        disableRecordSwitching: this._getDisableRecordSwitching()
                     }
                 };
             },
 
             /**
+             * Determines whether or not to disable focus drawer record switching for this field
+             * @return {boolean}
+             * @private
+             */
+            _getDisableRecordSwitching: function() {
+                return this.disableFocusDrawerRecordSwitching || this.def.disableFocusDrawerRecordSwitching || false;
+            },
+
+            /**
              * Open the focus drawer with the given context
              *
-             * @param def the context definition to open the focus drawer with
+             * @param context
              */
             openFocusDrawer: function(context) {
-                var focusDrawer = this.getFocusDrawer();
-                if (focusDrawer) {
+                if (app.sideDrawer) {
                     // If the drawer is already open to the same context, don't
                     // reload it unnecessarily
-                    var drawerIsOpen = focusDrawer.isOpen();
-                    var drawerContext = focusDrawer.currentContextDef;
+                    var drawerIsOpen = app.sideDrawer.isOpen();
+                    var drawerContext = app.sideDrawer.currentContextDef;
                     if (drawerIsOpen && _.isEqual(context, drawerContext)) {
                         return;
                     }
-                    focusDrawer.open(context);
+                    var sideDrawerClick = this.$el.closest('#side-drawer').length > 0;
+                    app.sideDrawer.open(context, null, sideDrawerClick);
                 }
             },
 
@@ -142,19 +151,10 @@
              *
              * @return {Object|null} The Focus Drawer component, or null if not found
              * @private
+             * @deprecated since 11.2.0, use app.sideDrawer instead
              */
             getFocusDrawer: function() {
-                if (!this.focusDrawer) {
-                    var currLayout = this.view.layout;
-                    while (currLayout) {
-                        this.focusDrawer = currLayout.getComponent('focus-drawer');
-                        if (!_.isEmpty(this.focusDrawer)) {
-                            break;
-                        }
-                        currLayout = currLayout.layout;
-                    }
-                }
-                return this.focusDrawer;
+                return app.sideDrawer;
             },
 
             /**

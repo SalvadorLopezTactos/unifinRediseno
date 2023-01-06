@@ -106,9 +106,13 @@ function zip_dir($zip_dir, $zip_archive)
     if (!is_dir($zip_dir)) {
         if (!defined('SUGAR_PHPUNIT_RUNNER')) {
             $GLOBALS['log']->fatal(
-                "Specified directory '$zip_dir' for zip file '$zip_archive' extraction does not exist."
+                sprintf(
+                    "Specified directory '%s' for zip file '%s' extraction does not exist.",
+                    $zip_dir,
+                    $zip_archive
+                )
             );
-            die("Specified directory for zip file extraction does not exist.");
+            die('Specified directory for zip file extraction does not exist.');
         }
 
         return false;

@@ -96,6 +96,15 @@ $dictionary['ReportSchedule'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_USERS',
         ),
+        'file_type' => [
+            'name' => 'file_type',
+            'vname' => 'LBL_FILE_TYPE',
+            'type' => 'enum',
+            'options' => 'file_type_dom',
+            'len' => 32,
+            'default' => 'PDF',
+            'comment' => 'File type for scheduled report attachment',
+        ],
     ),
     'relationships' => array(
         'report_reportschedules' => array (
@@ -108,6 +117,17 @@ $dictionary['ReportSchedule'] = array(
             'relationship_type' => 'one-to-many',
         ),
     ),
+    'indices' => [
+        [
+            'name' => 'idx_del_active',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'active',
+            ],
+        ],
+    ],
+
     'ignore_templates' => array(
         'taggable',
         'commentlog',

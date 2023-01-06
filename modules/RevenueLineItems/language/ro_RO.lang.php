@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Înnoire ID articol linie de venit',
     'LBL_PARENT_RLIS' => 'Articole linie de venit părinte',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Articole linie de venit părinte',
+    'LBL_FORECASTED_LIKELY' => 'Prognozat probabil',
     'LBL_EXPERT_ID' => 'Expert produs',
     'LBL_FORECAST' => 'Include in Previziuni',
     'LBL_SUBTOTAL' => 'Sumă parțială',

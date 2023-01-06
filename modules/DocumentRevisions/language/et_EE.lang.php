@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Loo dokument',
 	'LNK_DOCUMENT_LIST'=> 'Vaata dokumente',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Seotud dokumendi versioonid',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Lõite üksuse {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Läbivaatuse number',
 	'LBL_FILENAME' => 'Fail:',
 	'LBL_MIME' => 'MIME tüüp',

@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Dashlet is toegevoegd',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Weet u zeker dat u de lay-out wilt wijzigen? De lay-out kan willekeurig gewijzigd worden.',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Weet u het zeker dat u dit Dashlet wilt verwijderen?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Geen dashboard geconfigureerd',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Geen dashlets geconfigureerd',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Maak dashboard',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Webpagina',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Webpagina',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Broncode',
   'LBL_SOURCE_SUGAR' => 'Sugar - De populairste CRM toepassing ter wereld, gemaakt door SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - Een template engine voor PHP gemaakt door Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - Een set van PHP klassen waarmee ontwikkelaars webservices kunnen creëren en gebruiken gemaakt door NuSphere Corporation en Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Agenda - Een agenda voor het invoeren van data gemaakt door Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Een bibliotheek voor het maken van PDF-documenten die zijn gemaakt door Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - een WebDAV-server Implementatie in PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'De hulp geeft specifieke informatie weer over de module die u bekijkt, geeft gedetailleerde stappen voor uit uitvoeren van bepaalde acties in de module en leidt u naar de goede plaats voor meer informatie en ondersteuning.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filteren',
+
+    'LBL_ABOUT_VERSION' => 'U gebruikt versie {{version}} met de volgende licentie(s):',
 );

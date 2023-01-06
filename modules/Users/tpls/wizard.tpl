@@ -16,14 +16,14 @@
 <link rel="SHORTCUT ICON" href="{$FAVICON_URL}">
 <meta http-equiv="Content-Type" content="text/html; charset={$APP.LBL_CHARSET}">
 <title>{$MOD.LBL_WIZARD_TITLE}</title>
-{literal}
+
 <script type='text/javascript'>
 function disableReturnSubmission(e) {
    var key = window.event ? window.event.keyCode : e.which;
    return (key != 13);
 }
 </script>
-{/literal}
+
 {$SUGAR_JS}
 {$SUGAR_CSS}
 {$CSS}
@@ -365,7 +365,7 @@ function disableReturnSubmission(e) {
 
 </div>
 
-{literal}
+
 <script type='text/javascript'>
 <!--
 var SugarWizard = new function()
@@ -402,21 +402,21 @@ var SugarWizard = new function()
             case 'personalinfo':
                 if ( document.getElementById('last_name').value == '' ) {
                     add_error_style('UserWizard',form.last_name.name,
-                        '{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_LAST_NAME}{literal}' );
+                        '{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_LAST_NAME}' );
                     isError = true;
                 }
-                {/literal}
+                
                 {if $REQUIRED_EMAIL_ADDRESS}
-                {literal}
+                
                 if ( document.getElementById('email1').value == '' ) {
                     document.getElementById('email1').focus();
                     add_error_style('UserWizard',form.email1.name,
-                        '{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_EMAIL}{literal}' );
+                        '{$APP.ERR_MISSING_REQUIRED_FIELDS} {$MOD.LBL_EMAIL}' );
                     isError = true;
                 }
-                {/literal}
+                
                 {/if}
-                {literal}
+                
                 break;
             case 'locale':
                 if (document.getElementById("default_number_grouping_seperator").value == document.getElementById("default_decimal_seperator").value) {
@@ -436,17 +436,17 @@ var SugarWizard = new function()
         this.currentScreen = screen;
     }
 }
-{/literal}
+
 {if $SKIP_WELCOME}
 SugarWizard.changeScreen('personalinfo');
 {else}
 SugarWizard.changeScreen('welcome');
 {/if}
-{literal}
+
 document.onkeypress = SugarWizard.handleKeyStroke;
 
-var mail_smtpport = '{/literal}{$MAIL_SMTPPORT}{literal}';
-var mail_smtpssl = '{/literal}{$MAIL_SMTPSSL}{literal}';
+var mail_smtpport = '{$MAIL_SMTPPORT}';
+var mail_smtpssl = '{$MAIL_SMTPSSL}';
 
 EmailMan = {};
 
@@ -463,9 +463,9 @@ function startOutBoundEmailSettingsTest()
     loader.addModule({
         name :"sugarwidgets",
         type : "js",
-{/literal}
+
         fullpath: "{sugar_getjspath file='include/javascript/sugarwidgets/SugarYUIWidgets.js'}",
-{literal}
+
         varName: "YAHOO.SUGAR",
         requires: ["datatable", "dragdrop", "treeview", "tabview"]
     });
@@ -486,25 +486,25 @@ function testOutboundSettings()
     if(trim(smtpServer) == '' || trim(mail_smtpport) == '')
     {
         isError = true;
-        errorMessage += "{/literal}{$MOD.LBL_MISSING_DEFAULT_OUTBOUND_SMTP_SETTINGS}{literal}" + "<br/>";
-        overlay("{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS}{literal}", errorMessage, 'alert');
+        errorMessage += "{$MOD.LBL_MISSING_DEFAULT_OUTBOUND_SMTP_SETTINGS}" + "<br/>";
+        overlay("{$APP.ERR_MISSING_REQUIRED_FIELDS}", errorMessage, 'alert');
         return false;
     }
     
     if(document.getElementById('mail_smtpuser') && trim(document.getElementById('mail_smtpuser').value) == '') 
     {
         isError = true;
-        errorMessage += "{/literal}{$APP.LBL_EMAIL_ACCOUNTS_SMTPUSER}{literal}" + "<br/>";
+        errorMessage += "{$APP.LBL_EMAIL_ACCOUNTS_SMTPUSER}" + "<br/>";
     }
     
     if(document.getElementById('mail_smtppass') && trim(document.getElementById('mail_smtppass').value) == '') 
     {
         isError = true;
-        errorMessage += "{/literal}{$APP.LBL_EMAIL_ACCOUNTS_SMTPPASS}{literal}" + "<br/>";
+        errorMessage += "{$APP.LBL_EMAIL_ACCOUNTS_SMTPPASS}" + "<br/>";
     }
     
     if(isError) {
-        overlay("{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS}{literal}", errorMessage, 'alert');
+        overlay("{$APP.ERR_MISSING_REQUIRED_FIELDS}", errorMessage, 'alert');
         return false;
     }
 
@@ -517,22 +517,22 @@ function sendTestEmail()
 
     if (trim(fromAddress) == "")
     {
-        overlay("{/literal}{$APP.ERR_MISSING_REQUIRED_FIELDS}{literal}", "{{/literal}$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}{literal}", 'alert');
+        overlay("{$APP.ERR_MISSING_REQUIRED_FIELDS}", "{$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}", 'alert');
         return;
     }
     else if (!isValidEmail(fromAddress)) {
-        overlay("{/literal}{$APP.ERR_INVALID_REQUIRED_FIELDS}{literal}", "{/literal}{$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}{literal}", 'alert');
+        overlay("{$APP.ERR_INVALID_REQUIRED_FIELDS}", "{$APP.LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR}", 'alert');
         return;
     }
 
     //Hide the email address window and show a message notifying the user that the test email is being sent.
     EmailMan.testOutboundDialog.hide();
-    overlay("{/literal}{$APP.LBL_EMAIL_PERFORMING_TASK}{literal}", "{/literal}{$APP.LBL_EMAIL_ONE_MOMENT}{literal}", 'alert');
+    overlay("{$APP.LBL_EMAIL_PERFORMING_TASK}", "{$APP.LBL_EMAIL_ONE_MOMENT}", 'alert');
 
     var callbackOutboundTest = {
     	success	: function(o) {
     		hideOverlay();
-    		overlay("{/literal}{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}{literal}", "{/literal}{$APP.LBL_EMAIL_TEST_NOTIFICATION_SENT}{literal}", 'alert');
+    		overlay("{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}", "{$APP.LBL_EMAIL_TEST_NOTIFICATION_SENT}", 'alert');
     	}
     };
     var smtpServer = document.getElementById('mail_smtpserver').value;
@@ -558,7 +558,7 @@ function testOutboundSettingsDialog() {
                 width	: 600,
                 shadow	: false
             });
-            EmailMan.testOutboundDialog.setHeader("{/literal}{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}{literal}");
+            EmailMan.testOutboundDialog.setHeader("{$APP.LBL_EMAIL_TEST_OUTBOUND_SETTINGS}");
             YAHOO.util.Dom.removeClass("testOutboundDialog", "yui-hidden");
         } // end lazy load
 
@@ -579,11 +579,11 @@ function hideOverlay() {
 }
 -->
 </script>
-{/literal}
+
 {$JAVASCRIPT}
-{literal}
+
 <script type="text/javascript" language="Javascript">
-{/literal}
+
 {$getNameJs}
 {$getNumberJs}
 {$currencySymbolJs}

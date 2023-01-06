@@ -156,14 +156,6 @@ $dictionary['TimePeriod'] = array(
     'acls' => array('SugarACLAdminOnly' => array('adminFor' => 'Forecasts', 'allowUserRead' => true)),
     'indices' => array(
         array('name' => 'timeperiodspk', 'type' => 'primary', 'fields' => array('id'),),
-        array(
-            'name' => 'idx_timestamps',
-            'type' => 'index',
-            'fields' => array('id', 'start_date_timestamp', 'end_date_timestamp')
-        ),
-        array('name' => 'idx_timeperiod_name', 'type' => 'index', 'fields' => array('name')),
-        array('name' => 'idx_timeperiod_start_date', 'type' => 'index', 'fields' => array('start_date')),
-        array('name' => 'idx_timeperiod_end_date', 'type' => 'index', 'fields' => array('end_date')),
     ),
     'relationships' => array(
         'related_timeperiods' => array(

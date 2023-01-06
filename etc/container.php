@@ -38,6 +38,7 @@ use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage\Configuration as C
 use Sugarcrm\Sugarcrm\Cache\Middleware\Replicate;
 use Sugarcrm\Sugarcrm\CSP\AdministrationSettingsCSPStorage;
 use Sugarcrm\Sugarcrm\CSP\CSPStorage;
+use Sugarcrm\Sugarcrm\CSP\RefreshMetaDataCache;
 use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\Repository;
 use Sugarcrm\Sugarcrm\Dbal\Logging\DebugLogger;
 use Sugarcrm\Sugarcrm\Dbal\Logging\Formatter as DbalFormatter;
@@ -54,6 +55,7 @@ use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener\StateAwareListener;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\State;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\State\Storage\AdminSettingsStorage;
 use Sugarcrm\Sugarcrm\DependencyInjection\Exception\ServiceUnavailable;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionPrefetcher;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter as SubjectFormatter;
@@ -239,8 +241,11 @@ return new Container([
         $config = $container->get(SugarConfig::class)->get('external_cache.memcache');
 
         try {
+            if (!extension_loaded('memcached')) {
+                throw new SugarCacheException('The memcached extension is not loaded');
+            }
             return new MemcachedCache($config['host'] ?? null, $config['port'] ?? null);
-        } catch (CacheException $e) {
+        } catch (CacheException | SugarCacheException $e) {
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
     },
@@ -317,6 +322,12 @@ return new Container([
         return $client;
     },
     CSPStorage::class => function (ContainerInterface $container): CSPStorage {
-        return new AdministrationSettingsCSPStorage();
+        return new AdministrationSettingsCSPStorage(new RefreshMetaDataCache());
+    },
+    SubscriptionPrefetcher::class => function (ContainerInterface $container): SubscriptionPrefetcher {
+        return new SubscriptionPrefetcher(
+            \Administration::getSettings('license'),
+            $container->get(LoggerInterface::class)
+        );
     },
 ]);

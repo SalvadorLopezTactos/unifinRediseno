@@ -97,7 +97,7 @@ class SugarQuery_Builder_Join
                 ));
             }
         } else {
-            $this->on = new SugarQuery_Builder_Andwhere($this->query, $this->bean);
+            $this->on = new SugarQuery_Builder_Andwhere($this->query);
         }
 
         return $this->on;
@@ -120,7 +120,7 @@ class SugarQuery_Builder_Join
                 ));
             }
         } else {
-            $this->on = new SugarQuery_Builder_Orwhere($this->query, $this->bean);
+            $this->on = new SugarQuery_Builder_Orwhere($this->query);
         }
 
         return $this->on;

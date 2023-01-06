@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Expression Engine',
-  'LBL_MODULE_NAME_SINGULAR' => 'Expression Engine',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Předchozí' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Další' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Rozšířit' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Expression Engine',
+    'LBL_MODULE_NAME_SINGULAR' => 'Expression Engine',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Předchozí' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Další' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Rozšířit' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Neznámé pole',
+];

@@ -23,6 +23,8 @@
 // Monochrome palette
 // -------------------------
 @black: #000;
+@gray98: #0f1215;
+@gray95: #16191d;
 @gray90: #2b2d2e;
 @gray80: #4d5154;
 @gray70: #6f777b;
@@ -32,36 +34,18 @@
 @gray30: #e5eaed;
 @gray20: #f1f3f4;
 @gray10: #f8fafc;
+@gray6: #0f0f0f;
 @white: #fff;
-
-// Accent colors (auto)
-// For @color values we spin based off the @BorderColor from the theme
-// to keep consistent to a single brand set.
-// You can replace with your own hex colors if you desire.
-// -------------------------------------------------------------
-@color0: @BorderColor;
-@color1: spin(@BorderColor, 20);
-@color2: spin(@BorderColor, 40);
-@color3: spin(@BorderColor, 60);
-@color4: spin(@BorderColor, 80);
-@color5: spin(@BorderColor, 100);
-@color6: spin(@BorderColor, 120);
-@color7: spin(@BorderColor, 160);
-@color8: spin(@BorderColor, -160);
-@color9: spin(@BorderColor, -140);
-@color10: spin(@BorderColor, -120);
-@color11: spin(@BorderColor, -100);
-@color12: spin(@BorderColor, -80);
-@color13: spin(@BorderColor, -60);
-@color14: spin(@BorderColor, -40);
-@color15: spin(@BorderColor, -20);
 
 // Sugar default color palette (defined)
 // -------------------------------------------------------------
 // Primary palette
 @darkBlue: #005d9c;
+@darkBlueHalf: #002e4e;
 @blue: #0679c8;
+@darkModeBlue: #79ade0;
 @lightBlue: #d6eeff;
+@lightBlueHalf: #eaf6ff;
 
 // Dark palette
 @darkArmy: #537600;
@@ -75,6 +59,7 @@
 @darkRed: #bb0e1b;
 @darkTeal: #00636e;
 @darkYellow: #866500;
+@darkModeYellowLight: #4c4a34;
 
 // Secondary palette
 @army: #6cdf46;
@@ -102,6 +87,77 @@
 @lightTeal: #c5fffb;
 @lightYellow: #fff7ad;
 
+// Stylesheet used to create variables for light/dark theme
+@import "./sugar/sugar-theme-variables.less";
+
+// Legacy variables - NOT TO BE USED ANYMORE
+// -------------------------
+@btnBackgroundHighlight: var(--btn-secondary-background);
+@commentLogDashletTimeColor: @gray70;
+@commentLogDashletNoCommentsAvailable: @gray70;
+@commentLogDashletItemHeaderColor: @gray90;
+@dashletTabBorderColor: @borderColor;
+@hrBorder: var(--border-color);
+@linkMore: var(--link-color);
+@loadingColor: var(--text-color-light);
+@navbarInverseBackground: @gray90;
+@navbarInverseBackgroundHighlight: @gray90;
+@navbarInverseBorder: @gray90;
+@navbarInverseText: @gray70;
+@navbarInverseLinkColor: @gray70;
+@navbarInverseLinkColorHover: @white;
+@navbarInverseLinkColorActive: @navbarInverseLinkColorHover;
+@navbarInverseLinkBackgroundHover: transparent;
+@navbarInverseLinkBackgroundActive: @navbarInverseBackground;
+@navbarInverseSearchBackground: @gray40;
+@navbarInverseSearchBackgroundFocus: @white;
+@navbarInverseSearchBorder: @navbarInverseBackground;
+@navbarInverseBrandColor: @navbarInverseLinkColor;
+@panelBorderColor: @borderColor;
+@panelInactiveHoverColor: var(--primary-content-hover);
+@previewDataBackground: var(--content-background);
+@previewFieldSeparator: var(--border-color);
+@previewHeaderBackground: var(--primary-content-background);
+@select2LinkColorHover: @white;
+@tabBackgroundActive: var(--primary-content-hover);
+@tabBackgroundInactive: var(--headerpane-background);
+@tableBorderColor: var(--border-color);
+@tableBorder: 1px solid @tableBorderColor;
+@tableHeader: var(--text-color);
+@tableRowHighlighted: @tableRowHover;
+@tableHeaderHighlighted: @tableRowHover;
+@tableTbodyRowBorderColor: var(--border-color);
+@tableTheadRowBorderColor: var(--border-color);
+@tableFixedColumnsBorderColor: var(--border-color);
+@errorAlertText: var(--text-color);
+@infoAlertText: var(--text-color);
+@pendingAlertText: var(--text-color);
+@successAlertText: var(--text-color);
+@warningAlertText: var(--text-color);
+@wellBackground: var(--input-background);
+
+// Accent colors (auto)
+// For @color values we spin based off the @BorderColor from the theme
+// to keep consistent to a single brand set.
+// You can replace with your own hex colors if you desire.
+// -------------------------------------------------------------
+@color0: @BorderColor;
+@color1: spin(@BorderColor, 20);
+@color2: spin(@BorderColor, 40);
+@color3: spin(@BorderColor, 60);
+@color4: spin(@BorderColor, 80);
+@color5: spin(@BorderColor, 100);
+@color6: spin(@BorderColor, 120);
+@color7: spin(@BorderColor, 160);
+@color8: spin(@BorderColor, -160);
+@color9: spin(@BorderColor, -140);
+@color10: spin(@BorderColor, -120);
+@color11: spin(@BorderColor, -100);
+@color12: spin(@BorderColor, -80);
+@color13: spin(@BorderColor, -60);
+@color14: spin(@BorderColor, -40);
+@color15: spin(@BorderColor, -20);
+
 // Elemental labels colors
 // -------------------------------------------------------------
 @el-accounts-text: @darkGreen;
@@ -126,8 +182,12 @@
 @el-dataprivacy-bg: @lightArmy;
 @el-documents-text: @darkCoral;
 @el-documents-bg: @lightCoral;
+@el-docusignenvelopes-text: @lightOcean;
+@el-docusignenvelopes-bg: @ocean;
 @el-emails-text: @darkOcean;
 @el-emails-bg: @lightOcean;
+@el-escalations-text: @darkRed;
+@el-escalations-bg: @lightRed;
 @el-files-text: @darkOrange;
 @el-files-bg: @lightOrange;
 @el-forecasts-text: @darkArmy;
@@ -146,8 +206,8 @@
 @el-leads-bg: @lightPurple;
 @el-meetings-text: @darkTeal;
 @el-meetings-bg: @lightTeal;
-@el-messages-text: @grayDarkish;
-@el-messages-bg: @grayMid;
+@el-messages-text: @gray80;
+@el-messages-bg: @gray40;
 @el-notes-text: @darkGreen;
 @el-notes-bg: @lightGreen;
 @el-opportunities-text: @darkRed;
@@ -156,8 +216,8 @@
 @el-pc-text: @darkPink;
 @el-pli-bg: @lightArmy;
 @el-pli-text: @darkArmy;
-@el-pmse-text: @grayDarkish;
-@el-pmse-bg: @grayMid;
+@el-pmse-text: @gray80;
+@el-pmse-bg: @gray40;
 @el-products-text: @darkPurple;
 @el-products-bg: @lightPurple;
 @el-prospectlists-text: @darkArmy;
@@ -193,7 +253,7 @@
 @enum-fg4: @darkOcean;
 @enum-fg5: @darkPurple;
 @enum-fg6: @darkCoral;
-@enum-fg7: @grayDark;
+@enum-fg7: @gray90;
 @enum-fg8: @white;
 @enum-fg9: @darkRed;
 @enum-fg10: @darkOrange;
@@ -205,27 +265,38 @@
 @enum-bg4: @lightOcean;
 @enum-bg5: @lightPurple;
 @enum-bg6: @lightCoral;
-@enum-bg7: @grayMid;
+@enum-bg7: @gray40;
 @enum-bg8: @steel;
 @enum-bg9: @lightRed;
 @enum-bg10: @lightOrange;
 @enum-bg11: @lightGreen;
 @enum-bg12: @lightTeal;
 
-// Scaffolding
+// Scaffolding (generic theme variables)
 // -------------------------
-@bodyBackground: @white;
-@textColor: @gray;
+@bodyBackground: var(--content-background);
+@labelColor: var(--label-color);
+@labelBackground: var(--label-background);
+@textColor: var(--text-color);
+@textColorHover: var(--text-color-hover);
+@textColorInverse: var(--text-color-inverse);
+@textColorLight: var(--text-color-light);
+@placeholderText: @gray60;
+@primaryContentBackground: var(--primary-content-background);
+@primaryContentBackgroundAccent: var(--primary-content-background-accent);
+@primaryContentHover: var(--primary-content-hover);
+@primaryContentActive: var(--primary-content-active);
+@primaryContentHoverStriped: var(--primary-content-hover-striped);
+@secondaryContentBackground: var(--secondary-content-background);
 
 // Links
 // -------------------------
-@linkColor: @PrimaryButton;
-@linkColorHover: darken(@linkColor, 10%);
-@linkMore: @PrimaryButton;
+@linkColor: var(--link-color);
+@linkColorHover: var(--link-color-hover);
 
 // Typography
 // -------------------------
-@sansFontFamily: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+@sansFontFamily: "Inter", "Helvetica Neue", Arial, sans-serif;
 @serifFontFamily: Georgia, "Times New Roman", Times, serif;
 @monoFontFamily: Menlo, Monaco, Consolas, "Courier New", monospace;
 @baseFontSize: 12px;
@@ -234,19 +305,40 @@
 @altFontFamily: @serifFontFamily;
 @headingsFontFamily: inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight: bold; // instead of browser default, bold
-@headingsColor: inherit; // empty to use BS default, @textColor
+@headingsColor: inherit; // empty to use BS default, @text-color
+
+// SugarIcons variables
+//--------------------------
+@sicon-color: var(--sicon-color);
+@sicon-hover-color: var(--sicon-hover-color);
+@sicon-active-color: var(--sicon-active-color);
+@sicon-background-color: @white;
+@sicon-color-light: @gray40;
+@sicon-light-hover-color: @white;
+@sicon-li-margin-right:  0.4em;
 
 //Shadows
 //--------------------------
-@shadowWidget: 0 2px 2px 0 fade(@black, 10%);
-@shadowWidgetInset: inset 0 2px 1px fade(@black, 10%);
+@shadowWidget: 0 2px 4px 0 var(--shadow-color);
+@shadowWidgetInset: inset 0 2px 1px var(--shadow-color);
+@boxShadowNone: 0 0 0 var(--shadow-color);
+@boxShadow: 0 2px 2px var(--shadow-color), 0 0 2px var(--shadow-color);
+@boxShadowLg: 0 2px 8px var(--shadow-color);
+@boxShadowLgHover: 0 2px 8px var(--shadow-color-hover);
+@boxShadowXl: 0 2px 9px var(--shadow-color);
 
-@borderWidget: 1px solid darken(@grayLighter, 10%);
-@borderWidgetLight: 1px solid darken(@grayLighter, 5%);
+// Borders
+//--------------------------
+@borderColor: var(--border-color);
+@borderColorLight: var(--border-color-light);
+@borderColorFocus: var(--border-color-focus);
+@borderWidget: 1px solid @borderColor;
+@borderWidgetLight: 1px solid var(--border-color-light);
+@separatorColor: var(--separator-color);
 
 // Component sizing
 // -------------------------
-
+@fontSizeExtraLarge: @baseFontSize + 6px; // 18px
 @fontSizeHeader: @baseFontSize + 3px; // 15px
 @fontSizeLarge: @baseFontSize + 3px; // 15px
 @fontSizeMedium: @baseFontSize + 1px; // 13px
@@ -262,60 +354,91 @@
 
 // Tables
 // -------------------------
-@tableBackground: @transparent; // overall background-color
-@tableBackgroundAccent: lighten(@grayLighter, 1%); // for striping
-@tableBorderColor: darken(@grayLighter, 5%); // table and cell border
-@tableBorder: 1px solid @tableBorderColor;
-@tableHeader: @gray; // table headers
-@tableBackgroundHover: @gray;
+@tableBackground: var(--primary-content-background);
+@tableRowHover: var(--primary-content-hover-background);
+@tableBackgroundAccent: var(--primary-content-background-accent);
+@tableBackgroundHover: var(--primary-content-hover-striped);
+
+// Colors used for duplicate check table rows
+@duplicateTableRowColor:var(--dupelicate-table-content-color);
+@duplicateTableRowBackground:var(--dupelicate-table-background);
 
 // Form states and alerts
 // -------------------------
+@alertFontSize: @baseFontSize + 2px; // 14px
+@alertIconFontSize: @baseFontSize + 3px; // 15px
+@alertError: @red;
+@alertErrorBackground: @lightRed;
+@alertErrorText: @darkRed;
+@alertInfo: @ocean;
+@alertInfoBackground: @lightOcean;
+@alertInfoText: @darkOcean;
+@alertSuccess: @green;
+@alertSuccessBackground: @lightGreen;
+@alertSuccessText: @darkGreen;
+@alertWarning: @yellow;
+@alertWarningBackground: @lightYellow;
+@alertWarningText: @darkYellow;
+@alertConfirmationBackground: var(--alert-background);
+@alertBorderColor: var(--alert-border);
 
-@inform: @ocean;
-@infoText: @darkOcean;
-@infoAlertText: @black;
+@inform: var(--inform-text-color);
+@infoText: var(--info-text-color);
+@infoTextHover: var(--info-text-hover);
 @infoBackground: @lightOcean;
 @infoBorder: @ocean;
 
-@pending: @gray;
-@pendingText: @grayDark;
-@pendingAlertText: @black;
-@pendingBackground: @grayMid;
-@pendingBorder: @gray;
+@pending: @gray80;
+@pendingText: @gray90;
+@pendingTextHover: @gray90;
+@pendingBackground: @gray40;
+@pendingBorder: @gray70;
 
 @success: @army;
 @successText: @darkArmy;
-@successAlertText: @black;
+@successTextHover: @darkArmy;
 @successBackground: @lightArmy;
 @successBorder: @army;
 
 @warning: @yellow;
 @warningText: @darkYellow;
-@warningAlertText: @black;
+@warningTextHover: @darkYellow;
 @warningBackground: @lightYellow;
 @warningBorder: @yellow;
 
 @error: @red;
 @errorText: @darkRed;
-@errorAlertText: @black;
+@errorTextHover: @darkRed;
 @errorBackground: @lightRed;
 @errorBorder: @red;
 
-@warningTableBackground:lighten(@yellow, 47%);
-@confirmationBackground:lighten(@yellow, 47%);
+@warningTableBackground: @lightYellow;
+@confirmationBackground: @lightYellow;
 
-@loadingBackground: darken(@white, 3.4%);
-@loadingBorder: lighten(@black, 44.3%);
+@loadingBackground: var(--content-background);
+@loadingBorder: var(--border-color);
 
 // Buttons
 // -------------------------
-@btnBackground: @grayLighter;
-@btnBackgroundHighlight: @grayLighter;
-@btnBorder: darken(@grayLighter, 10%);
+// Necessary for use in LESS functions
+@btnBackgroundLight: @white;
+@btnBackgroundDark: @black;
 
+// Base button
+@btnBackground: var(--btn-background);
+@btnActiveBackground: var(--btn-active-background);
+
+@btnBorder: var(--border-color);
+@btnDisabledIconColor: var(--btn-disabled-color);
+
+// Primary button
 @btnPrimaryBackground: @PrimaryButton;
 @btnPrimaryBackgroundHighlight: @PrimaryButton;
+@PrimaryButtonBorder: transparent;
+@btnPrimaryActiveBackground: @darkBlue;
+@btnPrimaryActiveBorder: transparent;
+@btnPrimaryHoverBackground: @darkBlue;
+@btnPrimaryHoverBorder: transparent;
 @btnInfoBackground: @infoBackground;
 @btnInfoBackgroundHighlight: @infoBackground;
 @btnSuccessBackground: @successBackground;
@@ -326,40 +449,50 @@
 @btnDangerBackgroundHighlight: @errorBackground;
 @btnInverseBackground: @black;
 @btnInverseBackgroundHighlight: @black;
+@btnNotificationBackground: @blue;
+@btnNotificationBackgroundHighlight: @blue;
 
-@btnSecondaryBackground: #f2f5f9;
-@btnSecondaryBorder: #d3dbe1;
-@btnSecondaryColor: @linkColor;
-@btnSecondaryBackgroundHover: #f2f5f9;
-@btnSecondaryBackgroundActive: #e0e8ed;
-@btnSecondaryBoxShadowActive: inset 0 1px 3px 0 fade(@night, 10%);
-@btnSecondaryBackgroundFocus: @white;
-@btnSecondaryBackgroundDisabled: #f8fafd;
-@btnSecondaryColorDisabled: rgba(6, 121, 200, 0.3);
+// Secondary button
+@btnSecondaryBackground: var(--btn-secondary-background);
+@btnSecondaryBackgroundHover: var(--btn-secondary-background-hover);
+@btnSecondaryBackgroundActive: var(--btn-secondary-background-active);
+@btnSecondaryBackgroundDisabled: var(--btn-secondary-background-disabled);
+@btnSecondaryBackgroundFocus: var(--btn-secondary-background-hover);
+@btnSecondaryColor: var(--btn-secondary-color);
+@btnSecondaryColorHover: var(--btn-secondary-color-hover);
+@btnSecondaryColorDisabled: var(--btn-secondary-color-disabled);
+@btnSecondaryBorder: var(--btn-secondary-border);
+@btnSecondaryBorderHover: var(--btn-secondary-border-hover);
+
+// Invisible button
+@btnDarkInvisibleBackground: var(--btn-dark-invisible-background);
+@btnDarkInvisibleBackgroundHover: var(--btn-dark-invisible-background-hover);
 
 // Forms
 // -------------------------
-@inputBackground: @white;
-@inputBorderColor: darken(@grayLighter, 10%);
+@inputBackground: var(--input-background);
+@inputBorderColor: var(--border-color);
 @inputBorder: 1px solid @inputBorderColor;
 @inputBorderRadius: @baseBorderRadius;
-@inputDisabledBackground: @grayLighter;
-@formActionsBackground: @grayLighter;
+@inputDisabledBackground: var(--input-disabled-background);
+@formActionsBackground: @gray20;
 @inputHeight: @baseLineHeight + 10px;
 
 // Dropdowns
 // -------------------------
-@dropdownBackground: @white;
-@dropdownBorder: @grayLighter;
-@dropdownDividerTop: darken(@grayLighter, 10%);
+@dropdownBackground: var(--dropdown-background);
+@dropdownSubmenuBackground: var(--dropdown-submenu-background);
+@dropdownBorder: var(--border-color);
+@dropdownBorderWidget: var(--dropdown-border-widget);
+@dropdownDividerTop: @gray40;
 @dropdownDividerBottom: @white;
-@dropdownLinkColor: @gray;
-@dropdownLinkColorHover: @linkColor;
-@dropdownLinkColorActive: darken(@linkColor, 10%);
-@dropdownLinkBackgroundHover: lighten(@linkColor, 48%);
-@dropdownLinkBackgroundActive: lighten(@linkColor, 40%);
-@dropdownDisabledBackground: @grayLighter;
-@dropdownDisabledLinkColor: @grayLight;
+@dropdownLinkColor: var(--text-color);
+@dropdownLinkColorHover: var(--dropdown-link-color-hover);
+@dropdownLinkColorActive: var(--link-color-active);
+@dropdownLinkBackgroundHover: var(--dropdown-link-background-hover);
+@dropdownLinkBackgroundActive: var(--dropdown-link-background-active);
+@dropdownDisabledBackground: var(--dropdown-disabled-background);
+@dropdownDisabledLinkColor: var(--text-disabled-color);
 
 // Z-index master list
 // -------------------------
@@ -375,6 +508,7 @@
 @zindexModal: 1050;
 @zindexHeaderpane: 1002;
 @zindexSidebarContent: 1003;
+@zindexImpersonationBanner: (@zindexFixedNavbar + 4);
 
 // Select2
 @zindexSelect2mask: 1051;
@@ -384,68 +518,63 @@
 // -------------------------
 @textureTertiary: "@{baseUrl}/img/texture/texture-noise.png";
 
-// Input placeholder text color
-// -------------------------
-@placeholderText: @grayLight;
-
-// Hr border color
-// -------------------------
-@hrBorder: @grayLighter;
-
 // Horizontal forms & lists
 // -------------------------
 @horizontalComponentOffset: 180px;
 
-// Wells
-// -------------------------
-@wellBackground: @grayLighter;
-
 // Navbar
+// -------------------------
+// Customizable variables:
+// - @BorderColor: navigation bar bottom border
+// - @NavigationBar: navigation bar background color
 // -------------------------
 @navbarCollapseWidth: 979px;
 @navbarCollapseDesktopWidth: @navbarCollapseWidth + 1;
 @navbarHeight: 44px;
 @navbarBackgroundHighlight: @NavigationBar;
-@navbarBackground: @NavigationBar;
-@navbarText: darken(@white, 10%);
-@navbarLinkColor: @white;
-@navbarLinkColorHover: darken(@white, 5%);
+@navbarBackground: var(--navbar-background);
+@navbarBackgroundAccent: var(--primary-content-background-accent);
+@navbarBorderColor: var(--navbar-border-color);
+@navbarText: var(--text-color);
+@navbarLinkColor: var(--link-color);
+@navbarLinkColorHover: var(--link-color-hover);
 @navbarLinkColorActive: @navbarLinkColorHover;
 @navbarLinkBackgroundHover: transparent;
-@navbarLinkBackgroundActive: @navbarBackground;
+@navbarLinkBackgroundActive: var(--primary-content-active);
 @navbarSearchBackground: @white;
 @navbarSearchBackgroundFocus: @white;
-@navbarSearchBorder: darken(@NavigationBar, 10%);
-@navbarButton: darken(@NavigationBar, 10%);
-@navbarSearchPlaceholderColor: @gray;
+@navbarSearchBorder: var(--border-color);
+@navbarSearchPlaceholderColor: @placeholderText;
+@navbarButton: @gray10;
+@navbarSearchPlaceholderColor: @gray70;
 @navbarBrandColor: @navbarLinkColor;
-@navbarBorder: @gray;
+@navbarBorder: var(--border-color);
+
+@navbarDropdownItemHover: @PrimaryButton;
+@navbarDropdownBackgroundHover: var(--dropdown-link-background-hover);
+@navbarDropdownBackgroundActive: @darkBlue;
+@navbarDropdownLinkHover: @white;
+
+// Nav tabs
+@activeTabBorderColor: var(--active-tab-border-color);
+@tabBackgroundHoverColor: var(--tab-background-hover-color);
 
 // Inverted navbar
-@navbarInverseBackground: @grayDarker;
-@navbarInverseBackgroundHighlight: @grayDarker;
-@navbarInverseBorder: @grayDarker;
-@navbarInverseText: @grayLight;
-@navbarInverseLinkColor: @grayLight;
-@navbarInverseLinkColorHover: @white;
-@navbarInverseLinkColorActive: @navbarInverseLinkColorHover;
-@navbarInverseLinkBackgroundHover: transparent;
-@navbarInverseLinkBackgroundActive: @navbarInverseBackground;
-@navbarInverseSearchBackground: lighten(@navbarInverseBackground, 25%);
-@navbarInverseSearchBackgroundFocus: @white;
-@navbarInverseSearchBorder: @navbarInverseBackground;
-@navbarInverseSearchPlaceholderColor: @grayLighter;
-@navbarInverseBrandColor: @navbarInverseLinkColor;
+@navbarInverseSearchPlaceholderColor: @gray20;
 
 // Pagination
 // -------------------------
 @paginationBackground: @white;
-@paginationBorder: darken(@grayLighter, 10%);
-@paginationActiveBackground: @grayLighter;
+@paginationBorder: @gray30;
+@paginationActiveBackground: @gray20;
+
+// Progress bars
+// -------------------------
+@progressBarBackground: var(--progress-bar-background);
 
 // Hero unit
 // -------------------------
-@heroUnitBackground: @grayLighter;
+@heroUnitBackground: @gray20;
 @heroUnitHeadingColor: inherit;
 @heroUnitLeadColor: inherit;
 
@@ -457,12 +586,12 @@
 @tooltipArrowColor: @tooltipBackground;
 @popoverBackground: @white;
 @popoverArrowWidth: 10px;
-@popoverArrowColor: @white;
-@popoverTitleBackground: darken(@popoverBackground, 3%);
+@popoverArrowColor: var(--popover-arrow-color);
+@popoverTitleBackground: var(--content-background);
 
 // Special enhancement for popovers
 @popoverArrowOuterWidth: @popoverArrowWidth + 1;
-@popoverArrowOuterColor: fade(@black, 25%);
+@popoverArrowOuterColor: @borderColor;
 
 // Default 940px grid
 // -------------------------
@@ -517,6 +646,7 @@
 @sizeButton: 28px;
 @sizeDefault: 24px;
 @sizeSmall: 20px;
+@sizeXSmall: 18px;
 @sizeMini: 16px;
 
 // COLUMN WIDTHS
@@ -534,7 +664,7 @@
 // --------------------------------------------------
 
 @chartTextSize: @fontSizeSmall;
-@chartTickColor: @grayLight;
+@chartTickColor: @gray70;
 @chartTickWidth: 1px;
 
 // Default chart fill colors (slightly lighter than stroke colours)
@@ -552,7 +682,7 @@
 @fill10: @orange;
 @fill11: @pacific;
 @fill12: @darkCoral;
-@fill13: @night;
+@fill13: @gray90;
 
 // Default chart stroke colors
 // -------------------------
@@ -569,7 +699,7 @@
 @stroke10: @orange;
 @stroke11: @pacific;
 @stroke12: @darkCoral;
-@stroke13: @night;
+@stroke13: @gray90;
 
 /* NEW SKIN START */
 
@@ -577,133 +707,80 @@
 // -------------------------
 @os-font-path: "../../../../../styleguide/assets/fonts/opensans";
 
+@inter-font-path: "../../../../../styleguide/assets/fonts/inter";
+
 // New Theme Variables
 // -------------------------
 @fontSizeHeader: @baseFontSize + 8px; // 20px
 @fontSizeHeaderEditFields: @baseFontSize + 3px; // 15px
 @fontSizeHeaderTitle: @baseFontSize + 4px; // 16px
 @fontSizeHeaderSubTitle: @baseFontSize + 2px; // 14px
-@contentBackground: #f7f8f9;
-@linkColorHover: @PrimaryButton;
+@contentBackground: var(--content-background);
+@contentLoadingBackground: var(--content-loading-background);
+@contentBackgroundDark: @gray95;
 @labelBorderRadius: 50%;
-
-// Buttons
-// -------------------------
-@PrimaryButtonBorder: #055993;
-@btnPrimaryActiveBackground: #005087;
-@btnPrimaryActiveBorder: #033d64;
-@btnPrimaryHoverBackground: #0463a4;
-@btnPrimaryHoverActiveBgGrad: fade(@night, 10%);
-@btnPrimaryHoverBorder: #033d64;
-@btnBackground: @white;
-@btnBackgroundHighlight: @white;
-@btnActiveBackground: #021e32;
-@btnIconColor: @black;
-@btnDisabledIconColor: @grayLightish;
-@inputBorderColor: @grayLighter;
 
 // Select2
 // -------------------------
 @zindexSelect2mask: 1051;
 @zindexSelect2menu: 1052;
-@select2Background: #f8fafd;
-@select2Border: #d3dbe1;
-@select2BackgroundHover: #f2f5f9;
-@select2BorderHover: #d3dbe1;
-@select2LinkColorHover: @white;
+@select2Background: var(--select2-background);
+@select2Border: var(--border-color);
+@select2BackgroundHover: var(--select2-background-hover);
+@select2BorderHover: var(--border-color-focus);
+@select2RequiredBorderColor: @gray70;
 @select2LinkBackgroundHover: @PrimaryButton;
-@select2LinkBackgroundActive: #005087;
-
-@navbarLinkColorHover: #6b7479;
-@navbarLinkBackgroundActive: @grayActive;
-@navbarSearchBorder: #ebedef;
-@navbarSearchPlaceholderColor: #9aa5ad;
-@navbarBorder: #d3dbe1;
-
-@navbarDropdownItemHover: @PrimaryButton;
-@navbarDropdownBackgroundHover: #f7f8f9;
-@navbarDropdownBackgroundActive: #005087;
-@navbarDropdownLinkHover: @white;
+@select2LinkBackgroundActive: @darkBlue;
+@select2TagBackgroundColor: @gray80;
 
 // Headerpane
 // -------------------------
-@headerBackground: @white;
-@headerpaneSideToggleColor: @slate;
-@headerpaneSideToggleBackground: #ebedef;
+@headerpaneBackground: var(--headerpane-background);
+@headerpaneSideToggleBackground: var(--headerpane-side-toggle-background);
+@headerpaneSideToggleHoverBackground: var(--headerpane-side-toggle-hover-background);
 
 // Footer
 // -------------------------
-@footerButtonColor: @gray;
-@footerBackgroundColor: @grayLighter;
+@footerBackgroundColor: var(--footer-background);
 
 // Subpanels
 // -------------------------
-@subpanelBackground: #ebedef;
-@subpanelClosedBackground: #ebedef;
-@subpanelHoverBackground: #e3e5e8;
-@subpanelDisabledHeaderColor: fade(@black, 30%);
+@subpanelBackground: var(--subpanel-background);
+@subpanelClosedBackground: var(--subpanel-background);
+@subpanelHoverBackground: var(--subpanel-background-hover);
+@subpanelDisabledHeaderColor: var(--text-disabled-color);
+@subpanelShadow: var(--dashlet-background-hover);
 
 // Panel Headers
 // -------------------------
 @fontSizePanelHeader: 14px;
 @panelHeaderHeight: 44px;
-@panelPaddingTop: (@panelHeaderHeight - @fontSizePanelHeader) / 2 - 3;
-@panelPaddingSide: 15px;
-@panelInactiveHoverColor: #f7f8f9;
-@panelBorderColor: #d3dbe1;
-
-// Tables
-// -------------------------
-@tableHeader: @black; // table headers
-@tableBackground: @white; // overall background-color
-@tableTbodyRowBorderColor: #ebedef;
-@tableTheadRowBorderColor: #d3dbe1;
-@tableFixedColumnsBorderColor: @tableTheadRowBorderColor;
-@tableRowHover: #e2f2fe;
-@tableRowHighlighted: @tableRowHover; // i.e. being previewed
 
 // List view preview
 // -------------------------
 @previewLabelFontSize: @baseFontSize;
 @previewValueFontSize: @baseFontSize + 2px;
-@previewFieldSeparator: #ebedef;
-@previewHeaderBackground: #f7f8f9;
-@previewDataBackground: @white;
-
-// Loading
-// -------------------------
-@loadingColor: @grayLight;
-
-// Input placeholder text color
-// -------------------------
-@placeholderText: @slate;
 
 // Record view
 // -------------------------
 @recordViewFieldFontSize: @baseFontSize + 2px;
-@recordLabel: @grayDarkish;
+@recordLabel: @gray70;
+@recordLabelPillBorderColor: @gray50;
+@recordLabelPillHoverColor: @blue;
+@recordLabelPillHoverBackgroundColor: var(--record-pill-hover-background);
+
+// Dashlets
+@dashletTabBackgroundColor: var(--primary-content-background);
+@dashletTabActiveBackground: var(--primary-content-active);
+@dashletBackground: var(--dashlet-background);
+@dashletBackgroundHover: var(--dashlet-background-hover);
+
+// Content Containers
+@contentContainerBackgroundHover: var(--content-container-background-hover);
 
 // Upgrade
 // -------------------------
 @upgradeFontSizeHeader: @baseFontSize + 4px;  // 16px
-
-// Alert
-// -------------------------
-@alertFontSize: @baseFontSize + 2px; // 14px
-@alertIconFontSize: @baseFontSize + 3px; // 15px
-@alertError: @red;
-@alertErrorBackground: @lightRed;
-@alertErrorText: @darkRed;
-@alertInfo: @ocean;
-@alertInfoBackground: @lightOcean;
-@alertInfoText: @darkOcean;
-@alertSuccess: @green;
-@alertSuccessBackground: @lightGreen;
-@alertSuccessText: @darkGreen;
-@alertWarning: @yellow;
-@alertWarningBackground: @lightYellow;
-@alertWarningText: @darkYellow;
-@alertConfirmationBackground: @white;
 
 /* NEW SKIN END */
 
@@ -711,12 +788,31 @@
 @countBadgeHeight: 28px;
 @countBadgeWidth: 28px;
 
-// Tabs
-@tabBackgroundActive: @navbarLinkBackgroundActive;
-@tabBackgroundInactive: @white;
-
 // Agent workbench related
 @workbenchOverviewDashletHeight: 520px;
-@workbenchDrawerDashletHeight: 458px;
+@workbenchDrawerDashletHeight: 100%;
+
+// Dashboard Constants
+@dashboardRowHeight: 34px;
+@dashboardVerticalMargin: 15px;
+@dfabButtonSize: 40px;
 
 @amazonCcpWidth: 320px;
+
+//Impersonation banner height
+@bannerHeight: 34px;
+
+// Console/SugarLive config elements
+@configPillBackground: var(--config-pill-background);
+@configPillText: var(--config-pill-text);
+@configMultifieldBackground: var(--configMultifieldBackground);
+
+// Stack background
+@stackBackground: var(--stack-logo);
+@stackBackgroundAbout: var(--stack-logo-about);
+
+// Freeze first column in list view
+@firstColumnLeft: 71px;
+
+// Freeze first column in multi-line-list view
+@multiLineFirstColumnLeft: 46px;

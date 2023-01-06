@@ -158,7 +158,7 @@ function removeLanguagePack() {
             $errors[] = $mod_strings['ERR_LANG_MISSING_FILE'].$zipFile;
         }
     }
-    if(count($errors > 0)) {
+    if (count($errors) > 0) {
         echo "<p class='error'>";
         foreach($errors as $error) {
             echo "{$error}<br>";
@@ -218,7 +218,7 @@ function getInstalledLangPacks($showButtons=true) {
     $files = findAllFiles(sugar_cached("upload/upgrades"), $files);
 
     if(isset($_SESSION['INSTALLED_LANG_PACKS']) && !empty($_SESSION['INSTALLED_LANG_PACKS'])){
-        if(count($_SESSION['INSTALLED_LANG_PACKS'] > 0)) {
+        if (count($_SESSION['INSTALLED_LANG_PACKS']) > 0) {
             foreach($_SESSION['INSTALLED_LANG_PACKS'] as $file) {
                 // handle manifest.php
                 $target_manifest = remove_file_extension( $file ) . '-manifest.php';
@@ -547,6 +547,14 @@ function handleSugarConfig() {
         }
     }
 
+    $sugar_config['security']['private_ips'] = [
+        '10.0.0.0|10.255.255.255',
+        '172.16.0.0|172.31.255.255',
+        '192.168.0.0|192.168.255.255',
+        '169.254.0.0|169.254.255.255',
+        '127.0.0.0|127.255.255.255',
+    ];
+
     ksort($sugar_config);
     $sugar_config_string = "<?php\n" .
         '// created: ' . date('Y-m-d H:i:s') . "\n" .
@@ -861,7 +869,7 @@ function handleWebConfig($iisCheck = true)
             $xmldoc->startElement('security');
                 $xmldoc->startElement('requestFiltering');
                     $xmldoc->startElement('requestLimits');
-                        $xmldoc->writeAttribute('maxAllowedContentLength', 104857600);
+                        $xmldoc->writeAttribute('maxAllowedContentLength', '104857600');
                     $xmldoc->endElement();
                 $xmldoc->endElement();
             $xmldoc->endElement();
@@ -1025,17 +1033,17 @@ function create_default_users(){
     $user->user_hash = User::getPasswordHash($setup_site_admin_password);
     $user->email = '';
     $user->picture = UserDemoData::_copy_user_image($user->id);
+    if (($GLOBALS['installing'] ?? false)) {
+        //Bug#53793: Keep default current user in the global variable in order to store 'created_by' info as default user
+        //           while installation is proceed.
+        $GLOBALS['current_user'] = $user;
+    }
     $user->save();
 
     if (!empty($setup_site_admin_email)) {
         $user->emailAddress->addAddress($setup_site_admin_email, true);
         $user->emailAddress->save($user->id, $user->module_dir);
     }
-
-    //Bug#53793: Keep default current user in the global variable in order to store 'created_by' info as default user
-    //           while installation is proceed.
-    $GLOBALS['current_user'] = $user;
-
 
     if( $create_default_user ){
         $default_user = new User();
@@ -1495,22 +1503,6 @@ function copyFromArray($input_array, $needles, $output_array){
     }
 }
 
-/**
- * handles language pack uploads - code based off of upload_file->final_move()
- * puts it into the cache/upload dir to be handed off to langPackUnpack();
- *
- * @param object file UploadFile object
- * @return bool true if successful
- */
-function langPackFinalMove($file) {
-    global $sugar_config;
-    $destination = $sugar_config['upload_dir'].$file->stored_file_name;
-    if(!move_uploaded_file($_FILES[$file->field_name]['tmp_name'], $destination)) {
-        die ("ERROR: can't move_uploaded_file to $destination. You should try making the directory writable by the webserver");
-    }
-    return true;
-}
-
 function getLicenseDisplay($type, $manifest, $zipFile, $next_step, $license_file, $clean_file) {
     return PackageManagerDisplay::getLicenseDisplay($license_file, 'install.php', $next_step, $zipFile, $type, $manifest, $clean_file);
 }
@@ -1702,76 +1694,6 @@ if ( !function_exists('extractManifest') ) {
 function extractManifest( $zip_file,$base_tmp_upgrade_dir ) {
     return( extractFile( $zip_file, "manifest.php",$base_tmp_upgrade_dir ) );
 }
-}
-
-if ( !function_exists('unlinkTempFiles') ) {
-function unlinkTempFiles($manifest='', $zipFile='') {
-    global $sugar_config;
-
-    @unlink($_FILES['language_pack']['tmp_name']);
-    if(!empty($manifest))
-        @unlink($manifest);
-    if(!empty($zipFile)) {
-        $tmpZipFile = substr($zipFile, strpos($zipFile, 'langpack/') + 9, strlen($zipFile));
-        @unlink($sugar_config['upload_dir'].$tmpZipFile);
-    }
-
-        rmdir_recursive("upgrades/temp");
-        sugar_mkdir("upgrades/temp");
-}
-}
-
-function langPackUnpack($unpack_type, $full_file)
-{
-    global $sugar_config;
-    global $base_upgrade_dir;
-    global $base_tmp_upgrade_dir;
-
-    $manifest = array();
-    if(!empty($full_file)){
-        $base_filename = pathinfo(urldecode($full_file), PATHINFO_FILENAME );
-    } else {
-        return "Empty filename supplied";
-    }
-    $manifest_file = extractManifest($full_file, $base_tmp_upgrade_dir);
-    if($unpack_type == 'module')
-        $license_file = extractFile($full_file, 'LICENSE', $base_tmp_upgrade_dir);
-
-    if(is_file($manifest_file)) {
-
-        if($unpack_type == 'module' && is_file($license_file)){
-            copy($license_file, $base_upgrade_dir.'/'.$unpack_type.'/'.$base_filename."-license.txt");
-        }
-        copy($manifest_file, $base_upgrade_dir.'/'.$unpack_type.'/'.$base_filename."-manifest.php");
-
-        require_once( $manifest_file );
-        validate_manifest( $manifest );
-        $upgrade_zip_type = $manifest['type'];
-
-        mkdir_recursive( "$base_upgrade_dir/$upgrade_zip_type" );
-        $target_path = "$base_upgrade_dir/$upgrade_zip_type/$base_filename";
-        $target_manifest = $target_path . "-manifest.php";
-
-        if( isset($manifest['icon']) && $manifest['icon'] != "" ) {
-            $icon_location = extractFile( $full_file, $manifest['icon'], $base_tmp_upgrade_dir );
-            $path_parts = pathinfo( $icon_location );
-            copy( $icon_location, $target_path . "-icon." . $path_parts['extension'] );
-        }
-
-        // move file from uploads to cache
-        // FIXME: where should it be?
-        if( copy( $full_file , $target_path.".zip" ) ){
-            copy( $manifest_file, $target_manifest );
-            unlink($full_file); // remove tempFile
-            return "The file $base_filename has been uploaded.<br>\n";
-        } else {
-            unlinkTempFiles($manifest_file, $full_file);
-            return "There was an error uploading the file, please try again!<br>\n";
-        }
-    } else {
-        die("The zip file is missing a manifest.php file.  Cannot proceed.");
-    }
-    unlinkTempFiles($manifest_file, '');
 }
 
 if ( !function_exists('validate_manifest') ) {
@@ -1989,11 +1911,9 @@ function create_db_user_creds($numChars=10){
 $numChars = 7; // number of chars in the password
 //chars to select from
 $charBKT = "abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNPQRSTUVWXYZ";
-// seed the random number generator
-srand((double)microtime()*1000000);
 $password="";
 for ($i=0;$i<$numChars;$i++)  // loop and create password
-            $password = $password . substr ($charBKT, rand() % strlen($charBKT), 1);
+            $password = $password . substr($charBKT, random_int(0, getrandmax()) % strlen($charBKT), 1);
 
 return $password;
 
@@ -2018,7 +1938,7 @@ function addDefaultRoles($defaultRoles = array()) {
                     $queryACL="SELECT id FROM acl_actions where category=? and name=?";
                     $conn = $db->getConnection();
                     $stmt = $conn->executeQuery($queryACL, array($category, $name));
-                    $actionId=$stmt->fetchColumn();
+                    $actionId=$stmt->fetchOne();
                     if (!empty($actionId)) {
                         $role1->setAction($role1_id, $actionId, $access_override);
                     }

@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => '문서 작성',
 	'LNK_DOCUMENT_LIST'=> '문서 보기',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => '관련 문서에 대한 개정',
+
+    'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>을 생성했습니다.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => '개정 번호',
 	'LBL_FILENAME' => '파일',
 	'LBL_MIME' => 'Mime형식',

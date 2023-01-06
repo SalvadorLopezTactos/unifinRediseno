@@ -10,4 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<button type="button" class="btn btn-invisible{{#if value}} active{{/if}}" rel="tooltip" title="{{str 'LBL_FAVORITE' this.module}}" aria-label="{{str 'LBL_FAVORITE' this.module}}" data-placement="bottom" aria-pressed="{{#if value}}true{{else}}false{{/if}}"><i class="fa fa-favorite"></i></button>
+<button type="button" class="favorite-button btn btn-invisible{{#if value}} active{{/if}}" rel="tooltip"
+        title="{{str 'LBL_FAVORITE' this.module}}" aria-label="{{str 'LBL_FAVORITE' this.module}}"
+        data-placement="bottom" aria-pressed="{{#if value}}true{{else}}false{{/if}}"
+>
+    <i class="sicon sicon-star-{{#if value}}fill{{else}}outline{{/if}}"></i>
+</button>

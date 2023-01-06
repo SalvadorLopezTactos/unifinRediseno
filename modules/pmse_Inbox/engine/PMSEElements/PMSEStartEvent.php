@@ -31,14 +31,19 @@ class PMSEStartEvent extends PMSEEvent
         // Get our list of triggered starts
         $triggered = $registry->get($regKey, array());
 
+        if (isset($flowData['evn_params']) && $flowData['evn_params'] === 'relationshipchange') {
+            $beanId = $arguments['related_id'];
+        } else {
+            $beanId = $bean->id;
+        }
         // See if this start event has already been triggered in this request
-        if (isset($flowData['bpmn_id']) && !empty($bean->id)) {
+        if (isset($flowData['bpmn_id']) && !empty($beanId)) {
             // Will need this for writing
             $startEventID = $flowData['bpmn_id'];
 
             // If this start event has been triggered already, stop now to prevent
             // infinite triggers
-            if (!empty($triggered[$startEventID][$bean->id])) {
+            if (!empty($triggered[$startEventID][$beanId])) {
                 // Log a message for this event
                 $msg = "Start Event ID $startEventID has already been triggered" .
                        " for Bean ID {$bean->id} in this request and cannot be triggered again.";
@@ -50,8 +55,8 @@ class PMSEStartEvent extends PMSEEvent
         }
 
         // Set the triggered ID into registry now
-        if (isset($startEventID) && !empty($bean->id)) {
-            $triggered[$startEventID][$bean->id] = true;
+        if (isset($startEventID) && !empty($beanId)) {
+            $triggered[$startEventID][$beanId] = true;
             $registry->set($regKey, $triggered, true);
         }
 

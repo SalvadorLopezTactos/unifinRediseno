@@ -15,40 +15,39 @@
 <script type='text/javascript'>
 var LBL_NEW_USER_PASSWORD = '{$MOD.LBL_NEW_USER_PASSWORD_2}';
 {if !empty($ERRORS)}
-{literal}
 YAHOO.SUGAR.MessageBox.show({
-    title: '{/literal}{$ERROR_MESSAGE|escape:javascript}{literal}',
-    msg: '{/literal}{$ERRORS|escape:javascript}{literal}'
+    title: '{$ERROR_MESSAGE|escape:javascript}',
+    msg: '{$ERRORS|escape:javascript}'
 });
-{/literal}
+
 {/if}
 </script>
 
 <script type="text/javascript">
 var user_detailview_tabs = new YAHOO.widget.TabView("user_detailview_tabs");
 
-{literal}
+
 user_detailview_tabs.on('contentReady', function(e){
-{/literal}
+
 {if $EDIT_SELF && $SHOW_DOWNLOADS_TAB}
-{literal}
+
     user_detailview_tabs.addTab( new YAHOO.widget.Tab({
-        label: '{/literal}{$MOD.LBL_DOWNLOADS}{literal}',
+        label: '{$MOD.LBL_DOWNLOADS}',
         dataSrc: 'index.php?to_pdf=1&module=Home&action=pluginList',
-        content: '<div style="text-align:center; width: 100%">{/literal}{sugar_image name="loading"}{literal}</div>',
+        content: '<div style="text-align:center; width: 100%">{sugar_image name="loading"}</div>',
         cacheData: true
     }));
     user_detailview_tabs.getTab(3).getElementsByTagName('a')[0].id = 'tab4';
-{/literal}
+
 {/if}
 });
-{literal}
+
 $(document).ready(function(){
         $("ul.clickMenu").each(function(index, node){
             $(node).sugarActionMenu();
         });
     });
-{/literal}
+
 </script>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="actionsContainer">

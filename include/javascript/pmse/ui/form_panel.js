@@ -1755,6 +1755,8 @@ FormPanelDropdown.prototype._onLoadDataSuccess = function () {
         var items = that._dataRoot ? data[that._dataRoot] : data;
         if (that._name == 'field' || that._name == 'relField') {
             items.unshift({value: null, text: translate('LBL_PMSE_FORM_OPTION_SELECT'), type: null, optionItem: "none", len: 100});
+        } else if (that.getForm().id === 'form-relationship-evaluation') {
+            items[0].text = items[0].module_label = translate('LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP');
         }
         that._removeLoadingMessage();
         that.setOptions(items);

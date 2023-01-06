@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    className: 'preview-headerbar',
+    className: 'preview-headerbar bg-secondary-content-background',
 
     events: {
         'click [data-direction]': 'triggerPagination',
@@ -35,12 +35,12 @@
      */
     _delegateEvents: function() {
         if (this.layout) {
-            this.layout.on('preview:pagination:update', this.render, this);
+            this.listenTo(this.layout, 'preview:pagination:update', this.render, this);
         }
 
         if (this.layout.previewEdit) {
             _.extend(this.events, {'click [data-action=edit]': 'triggerEdit'});
-            this.layout.on('preview:edit:complete', this.toggleSaveAndCancel, this);
+            this.listenTo(this.layout, 'preview:edit:complete preview:header:edit', this.toggleSaveAndCancel, this);
         }
     },
 
@@ -117,5 +117,13 @@
         } else {
             this.layout.previewEdit = false;
         }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.stopListening(this.layout);
+        this._super('_dispose');
     }
 })

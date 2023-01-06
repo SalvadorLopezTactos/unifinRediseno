@@ -459,6 +459,12 @@ $dictionary['Quote'] = array(
             )',
             'calculated' => true,
             'enforced' => true,
+            'convertToBase' => true,
+            'showTransactionalAmount' => true,
+            'related_fields' => [
+                'currency_id',
+                'base_rate',
+            ],
         ),
         'total_usdollar' => array(
             'name' => 'total_usdollar',
@@ -931,11 +937,6 @@ $dictionary['Quote'] = array(
             ),
         ),
         array(
-            'name' => 'idx_qte_name',
-            'type' => 'index',
-            'fields' => array('name')
-        ),
-        array(
             'name' => 'idx_quote_quote_stage',
             'type' => 'index',
             'fields' => array('quote_stage')
@@ -1077,6 +1078,7 @@ VardefManager::createVardef(
         'assignable',
         'team_security',
         'currency',
+        'audit',
     )
 );
 

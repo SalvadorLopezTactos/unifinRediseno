@@ -431,7 +431,7 @@ class BusinessCenter extends Basic
                 // to the closed time for that day and send the datetime back
                 if ($interval === 0) {
                     $sdt = $this->setCloseTimeOnDate($sdt);
-                    return $sdt->format(DateTime::ATOM);
+                    return $sdt->format(DateTimeInterface::ATOM);
                 }
             } else {
                 // First pass was not open, so mark that we have handled the first
@@ -468,7 +468,7 @@ class BusinessCenter extends Basic
                     $mins = intval(($interval - $hours) * 60);
                     $sdt = $sdt->get("$hours hours $mins minutes");
 
-                    return $sdt->format(DateTime::ATOM);
+                    return $sdt->format(DateTimeInterface::ATOM);
                 }
 
                 // Decrement the interval by time left in the day and recalculate
@@ -519,7 +519,7 @@ class BusinessCenter extends Basic
         // or if this business center does not have business hours setup then send
         // back what was given
         if ($this->canCalculateIncrement($interval, $unit) === false) {
-            return $sdt->format(DateTime::ATOM);
+            return $sdt->format(DateTimeInterface::ATOM);
         }
 
         // Typing is important here

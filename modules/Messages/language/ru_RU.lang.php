@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Посмотреть отчеты об сообщениях',
     'LNK_IMPORT_MESSAGES' => 'Импортировать сообщения',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Идентификатор предварительного контакта',
+    'LBL_LEAD_NAME' => 'Предварительный контакт',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Чат клиента',
+    'LBL_ACTIVITY_CUSTOMER' => 'Клиент',
+    'LBL_ACTIVITY_FINISHED' => 'завершено',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'выполняется',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для сообщений',
 ];

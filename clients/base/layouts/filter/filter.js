@@ -21,7 +21,8 @@
     className: 'filter-view search',
 
     events: {
-        'click .add-on.fa-times': function() { this.trigger('filter:clear:quicksearch'); }
+        'click .add-on.fa-times': function() { this.trigger('filter:clear:quicksearch'); },
+        'click .add-on.sicon-close': function() { this.trigger('filter:clear:quicksearch'); }
     },
 
     /**
@@ -521,9 +522,19 @@
 
         batchId = relevantCtx.fetch && relevantCtx.fetch.length > 1 ? _.uniqueId() : false;
         _.each(relevantCtx.fetch, function(ctx) {
+            ctx.trigger('filter:fetch:start');
+
             var ctxCollection = ctx.get('collection');
             var origFilterDef = dynamicFilterDef || ctxCollection.origFilterDef || [];
-            var filterDef = self.buildFilterDef(origFilterDef, query, ctx);
+
+            // origFilterDef needs to be an array for the concat() operation below
+            origFilterDef = _.isArray(origFilterDef) ? origFilterDef : [origFilterDef];
+
+            // add any default filter to the original filter
+            var updatedFilterDef = ctxCollection.defaultFilterDef ?
+                origFilterDef.concat(ctxCollection.defaultFilterDef) : origFilterDef;
+
+            var filterDef = self.buildFilterDef(updatedFilterDef, query, ctx);
             var options = {
                 //Show alerts for this request
                 showAlerts: true,
@@ -534,6 +545,8 @@
                     // Close the preview pane to ensure that the preview
                     // collection is in sync with the list collection.
                     app.events.trigger('preview:close');
+
+                    ctx.trigger('filter:fetch:success');
                 }
             };
 
@@ -773,10 +786,10 @@
      * @param {Boolean} addIt TRUE if you want to add it, FALSO to remove
      */
     _toggleClearQuickSearchIcon: function(addIt) {
-        if (addIt && !this.$('.fa-times.add-on')[0]) {
-            this.$el.append('<i class="fa fa-times add-on"></i>');
+        if (addIt && !this.$('.sicon-close.add-on')[0]) {
+            this.$el.append('<i class="sicon sicon-close add-on"></i>');
         } else if (!addIt) {
-            this.$('.fa-times.add-on').remove();
+            this.$('.sicon-close.add-on').remove();
         }
     },
 

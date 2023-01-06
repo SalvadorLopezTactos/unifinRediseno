@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arhīvs',
     'LBL_PROCESS_TYPE_DELETE' => 'Neatgriezeniska izdzēšana',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Arhīvs darbojas',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Brīdinājums',
+    'LBL_ARCHIVER_WARNING' => 'Ieteicams veikt šo darbību zemas noslodzes laikā vai ārpus darba laika '
+        . 'jo tā var ietekmēt sistēmas darbību. Vai tiešām vēlaties veikt šo darbību tagad?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Moduļa {{moduleName}} arhivētājam ir jābūt iestatītam {{fieldName}} kā filtram',
 );

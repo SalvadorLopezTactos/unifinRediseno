@@ -18,14 +18,12 @@
         <img src='{$property.path}' id='{$name}_img' style='margin-bottom: 10px;'>
         <input type='hidden' id='{$name}' name='{$name}' value='{$property.value}'>
         <script type='text/javascript'>
-            {literal}
             YAHOO.util.Event.onDOMReady(function() {
-                if(document.getElementById({/literal}"{$name}_img"{literal}).width>document.width/2){
-                    document.getElementById({/literal}"{$name}_img"{literal}).width = document.width/2;
-                    document.getElementById({/literal}"resized_{$name}_img"{literal}).style.display="";
+                if(document.getElementById("{$name}_img").width>document.width/2){
+                    document.getElementById("{$name}_img").width = document.width/2;
+                    document.getElementById("resized_{$name}_img").style.display="";
                 }
             });
-            {/literal}
         </script>
     </td>
 </tr>

@@ -31,7 +31,7 @@
 	 <tr>
 	    <td colspan='2' nowrap>
 			<span class="id-ff multiple ownline">
-            <button title="{$app_strings.LBL_ID_FF_SELECT}" type="button" class="button firstChild" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, {literal}{"call_back_function":"set_return_teams_for_editview","form_name": {/literal} "{$displayParams.formName}","field_name":"{$vardef.name}",{literal}"field_to_name_array":{"id":"team_id","name":"team_name"}}{/literal}, "MULTISELECT", true); if(collection["{$displayParams.formName}_{$vardef.name}"].more_status)collection["{$displayParams.formName}_{$vardef.name}"].js_more();' name="teamSelect">
+            <button title="{$app_strings.LBL_ID_FF_SELECT}" type="button" class="button firstChild" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, { "call_back_function": "set_return_teams_for_editview", "form_name": "{$displayParams.formName}","field_name":"{$vardef.name}","field_to_name_array": { "id": "team_id", "name": "team_name" } }, "MULTISELECT", true); if(collection["{$displayParams.formName}_{$vardef.name}"].more_status)collection["{$displayParams.formName}_{$vardef.name}"].js_more();' name="teamSelect">
             {sugar_getimage name="id-ff-select.png" alt="$alt_selectButton"}
             </button><button title="{$app_strings.LBL_ID_FF_ADD}" type="button" class="button lastChild" value="{sugar_translate label='LBL_ADD_BUTTON'}" onclick="javascript:collection['{$displayParams.formName}_{$vardef.name}'].add(); if(collection['{$displayParams.formName}_{$vardef.name}'].more_status)collection['{$displayParams.formName}_{$vardef.name}'].js_more();"  name="teamAdd">
             {sugar_getimage name="id-ff-add.png" alt="$alt_addButton"}</button>
@@ -112,7 +112,7 @@
 Put this button in here since we have moved the Add and Select buttons above the text fields, the accesskey will skip these. So create this button
 and push it outside the screen.
 -->
- <input style='position:absolute; left:-9999px; width: 0px; height: 0px;' halign='left' type="button" class="button" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, {literal}{"call_back_function":"set_return_teams_for_editview","form_name": {/literal} "{$displayParams.formName}" {literal},"field_name":"team_name","field_to_name_array":{"id":"team_id","name":"team_name"}}{/literal}, "MULTISELECT", true);'>
+ <input style='position:absolute; left:-9999px; width: 0px; height: 0px;' halign='left' type="button" class="button" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup("Teams", 600, 400, "", true, false, { "call_back_function": "set_return_teams_for_editview", "form_name": "{$displayParams.formName}", "field_name": "team_name", "field_to_name_array": { "id": "team_id", "name": "team_name" } }, "MULTISELECT", true);'>
 
 <script type="text/javascript"> 
 (function() {ldelim}

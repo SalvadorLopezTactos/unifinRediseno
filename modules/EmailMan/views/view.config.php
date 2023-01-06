@@ -81,9 +81,9 @@ class ViewConfig extends SugarView
 	    global $mod_strings;
 
     	return array(
-    	   "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
-    	   translate('LBL_MASS_EMAIL_CONFIG_TITLE','Administration'),
-    	   );
+            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
+            translate('LBL_MASS_EMAIL_CONFIG_TITLE', 'Administration'),
+        );
     }
 
     /**

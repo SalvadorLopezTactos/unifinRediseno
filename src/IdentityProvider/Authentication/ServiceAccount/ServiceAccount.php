@@ -35,4 +35,36 @@ class ServiceAccount extends User
     {
         return \BeanFactory::getBean('Users');
     }
+
+    /**
+     * @param string $srn
+     */
+    public function setDataSourceSRN(string $srn): void
+    {
+        $this->setAttribute('dataSourceSRN', $srn);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDataSourceSRN(): ?string
+    {
+        return $this->getAttribute('dataSourceSRN');
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setDataSourceName(string $name): void
+    {
+        $this->setAttribute('dataSourceName', $name);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDataSourceName(): ?string
+    {
+        return $this->getAttribute('dataSourceName');
+    }
 }

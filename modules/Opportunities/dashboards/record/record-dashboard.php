@@ -90,7 +90,7 @@ return [
                             'view' => [
                                 'module' => 'Opportunities',
                                 'type' => 'activity-timeline',
-                                'label' => 'LBL_ACTIVITY_TIMELINE_DASHLET',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
                             ],
                             'context' => [
                                 'module' => 'Opportunities',

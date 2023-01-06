@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Instrumentpanel för processposter',
 
     'LBL_CAS_ID' => 'Processnummer',
+    'LBL_CAS_STATUS' => 'Processtatus',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Okänd (enligt användarid:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "uppgiften har",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "uppgiften var",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "tilldelades process #%s %s posten %s av %s åtgärden %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "på",
     'LBL_PMSE_HISTORY_LOG_AND'  => "och",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'länkade eller avlänkade en post till',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Godkänn',
     'LBL_PMSE_LABEL_REJECT' => 'Avvisa',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Pågående Processer',
     'LBL_STATUS_CANCELLED' => 'Processer avbrutna',
     'LBL_STATUS_ERROR' => 'Processer Felmeddelande',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Klar',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Avslutad',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Pågår',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Avbruten',
+    'LBL_STATUS_ERROR_ENUM' => 'Fel',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Processhantering',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Oövervakade Processer',

@@ -19,5 +19,5 @@ $viewdefs[$module_name]['portal']['menu']['quickcreate'] = array(
     'layout' => 'create',
     'label' => 'LNK_NEW_NOTE',
     'order' => 9,
-    'icon' => 'fa-plus',
+    'icon' => 'sicon-plus',
 );

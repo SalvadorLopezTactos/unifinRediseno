@@ -24,6 +24,11 @@ class GenericProvider extends BasicGenericProvider
     protected $urlIntrospectToken;
 
     /**
+     * @var string
+     */
+    protected $urlRevokeToken;
+
+    /**
      * @var \Psr\Log\LoggerInterface;
      */
     protected $logger;
@@ -119,6 +124,27 @@ class GenericProvider extends BasicGenericProvider
     }
 
     /**
+     * @param AccessToken $token
+     * @return array|mixed|string
+     */
+    public function revokeToken(AccessToken $token)
+    {
+        $options = $this->getAccessTokenOptions([
+            'client_id' => $this->getClientID(),
+            'client_secret' => $this->getClientSecret(),
+        ]);
+        $options['headers']['Accept'] = 'application/json';
+        $options['body'] = $this->buildQueryString(['token' => $token->getToken()]);
+
+        $request = $this->getRequestFactory()->getRequestWithOptions(
+            self::METHOD_POST,
+            $this->urlRevokeToken,
+            $options
+        );
+        return $this->getParsedResponse($request);
+    }
+
+    /**
      * Call token inject refresh token endpoint
      * @return boolean
      */
@@ -165,6 +191,24 @@ class GenericProvider extends BasicGenericProvider
         $accessTokenData = $this->getAccessTokenFileData();
         if (array_key_exists('client_id', $accessTokenData)) {
             return $accessTokenData['client_id'];
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientSecret(): string
+    {
+        // clientSecret from config takes precedence if set
+        if ($this->clientSecret) {
+            return $this->clientSecret;
+        }
+        // then we try to get it from injected access-token aux information
+        $accessTokenData = $this->getAccessTokenFileData();
+        if (array_key_exists('client_secret', $accessTokenData)) {
+            return $accessTokenData['client_secret'];
         }
 
         return '';

@@ -239,13 +239,22 @@ class MBModule
         return $this->mblanguage->getModStrings ( $language ) ;
     }
 
-    function setModStrings ($language = 'en_us' , $mod_strings)
+    /**
+     * @param string $language default 'en_us'
+     * @param $mod_strings
+     */
+    public function setModStrings(string $language, array $mod_strings): void
     {
         $language .= '.lang.php' ;
         $this->mblanguage->strings [ $language ] = $mod_strings ;
     }
 
-	function setLabel ($language = 'en_us' , $key , $value)
+    /**
+     * @param string $language default 'en_us'
+     * @param $key
+     * @param $value
+     */
+    public function setLabel(string $language, string $key, string $value): void
     {
     	$language .= '.lang.php' ;
         $this->mblanguage->strings [ $language ] [ $key ] = $value ;
@@ -257,7 +266,11 @@ class MBModule
         }
     }
 
-    function deleteLabel ($language = 'en_us' , $key)
+    /**
+     * @param string $language default 'en_us'
+     * @param $key
+     */
+    public function deleteLabel(string $language, string $key): void
     {
    		foreach ($this->mblanguage->strings as $lang => $values) {
         	if (!empty($values[$key])) {
@@ -269,13 +282,18 @@ class MBModule
     /**
      * Required for an MB module to work with Dynamic fields
      */
-	function addLabel ( $displayLabel)
+    public function addLabel(string $displayLabel): void
     {
-        $this->setLabel('en_us', $this->getDBName($displayLabel, false), translate($displayLabel));
+        $this->setLabel('en_us', $this->getDBName($displayLabel), translate($displayLabel));
         $this->save();
     }
 
-    function getLabel ($language = 'en_us' , $key)
+    /**
+     * @param string $language default 'en_us'
+     * @param $key
+     * @return mixed|string
+     */
+    public function getLabel(string $language, string $key): string
     {
         $language .= '.lang.php' ;
         if (empty ( $this->mblanguage->strings [ $language ] [ $key ] ))
@@ -287,24 +305,37 @@ class MBModule
 
     }
 
-    function getAppListStrings ($language = 'en_us')
+    public function getAppListStrings(string $language = 'en_us'): array
     {
         return $this->mblanguage->getAppListStrings ( $language ) ;
     }
 
-    function setAppListStrings ($language = 'en_us' , $app_list_strings)
+    /**
+     * @param string $language default 'en_us'
+     * @param $app_list_strings
+     */
+    public function setAppListStrings(string $language, array $app_list_strings): void
     {
         $language .= '.lang.php' ;
         $this->mblanguage->appListStrings [ $language ] = $app_list_strings ;
     }
 
-    function setDropDown ($language = 'en_us' , $key , $value)
+    /**
+     * @param string $language default 'en_us'
+     * @param $key
+     * @param $value
+     */
+    public function setDropDown(string $language, string $key, string $value): void
     {
         $language .= '.lang.php' ;
         $this->mblanguage->appListStrings [ $language ] [ $key ] = $value ;
     }
 
-    function deleteDropDown ($language = 'en_us' , $key)
+    /**
+     * @param string $language default 'en_us'
+     * @param $key
+     */
+    public function deleteDropDown(string $language, string $key): void
     {
         $language .= '.lang.php' ;
         unset ( $this->mblanguage->appListStrings [ $language ] [ $key ] ) ;

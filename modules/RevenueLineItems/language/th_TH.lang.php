@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ต่ออายุ ID รายการบรรทัดรายได้',
     'LBL_PARENT_RLIS' => 'สินค้าไลน์ที่ทำรายได้หลัก',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'สินค้าไลน์ที่ทำรายได้หลัก',
+    'LBL_FORECASTED_LIKELY' => 'แนวโน้มการพยากรณ์',
     'LBL_EXPERT_ID' => 'ผู้เชี่ยวชาญด้านผลิตภัณฑ์',
     'LBL_FORECAST' => 'รวมในประมาณการ',
     'LBL_SUBTOTAL' => 'ผลรวมย่อย',

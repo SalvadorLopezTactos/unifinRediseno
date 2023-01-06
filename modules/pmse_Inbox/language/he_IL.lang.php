@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות תהליכים',
 
     'LBL_CAS_ID' => 'מספר תהליך',
+    'LBL_CAS_STATUS' => 'סטטוס תהליך',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "לא ידוע (לפי ID מתמש s%)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "המשימה",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "המשימה",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "הוקצה תהליך #%s %s רשומת %s באמצעות פעולת %s%s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "על",
     'LBL_PMSE_HISTORY_LOG_AND'  => "וגם",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'קישור או ביטול קישור של רשומה אל',
 
     'LBL_PMSE_LABEL_APPROVE' => 'אישור',
     'LBL_PMSE_LABEL_REJECT' => 'דחיה',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'תהליך בהתקדמות',
     'LBL_STATUS_CANCELLED' => 'תהליך בוטל',
     'LBL_STATUS_ERROR' => 'שגיאה בתהליך',
+    'LBL_STATUS_COMPLETED_ENUM' => 'הושלם',
+    'LBL_STATUS_TERMINATED_ENUM' => 'הופסק',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'בביצוע',
+    'LBL_STATUS_CANCELLED_ENUM' => 'בוטל',
+    'LBL_STATUS_ERROR_ENUM' => 'שגיאה',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'רשימת תהליכים',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'תהליך ללא השגחה',

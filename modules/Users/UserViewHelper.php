@@ -13,6 +13,7 @@
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdpConfig;
 
 /**
  * This helper handles the rest of the fields for the Users Edit and Detail views.
@@ -44,6 +45,12 @@ class UserViewHelper {
      * @var bool
      */
     protected $is_super_admin;
+
+    /**
+     * @var IdpConfig
+     */
+    protected $idpConfig;
+
     /**
      * The current user type
      * One of: REGULAR ADMIN GROUP PORTAL_ONLY
@@ -59,6 +66,7 @@ class UserViewHelper {
         $this->ss = $smarty;
         $this->bean = $bean;
         $this->viewType = $viewType;
+        $this->idpConfig = new IdpConfig(\SugarConfig::getInstance());
     }
 
     /**
@@ -206,8 +214,6 @@ class UserViewHelper {
     public function setupUserTypeDropdown() {
         global $current_user;
 
-        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
-
         //if this is an existing bean and the type is empty, then populate user type
         if(!empty($this->bean->id) && empty($this->bean->user_type))
 	    {
@@ -240,11 +246,11 @@ class UserViewHelper {
         if ( $userType == 'GROUP' || $userType == 'PORTAL_ONLY' ) {
             $availableUserTypes = array($this->usertype);
         } else {
-            if ( $this->ss->get_template_vars('USER_ADMIN') ) {
+            if ($this->ss->getTemplateVars('USER_ADMIN')) {
                 $availableUserTypes = array('RegularUser');
-            } elseif($this->ss->get_template_vars('ADMIN_EDIT_SELF')) {
+            } elseif ($this->ss->getTemplateVars('ADMIN_EDIT_SELF')) {
                 $availableUserTypes = array('Administrator');
-            } elseif($this->ss->get_template_vars('IS_SUPER_ADMIN')) {
+            } elseif ($this->ss->getTemplateVars('IS_SUPER_ADMIN')) {
                 $availableUserTypes = array(
                     'RegularUser',
                     'Administrator',
@@ -276,7 +282,7 @@ class UserViewHelper {
         $this->ss->assign('USER_TYPE_DROPDOWN',$userTypeDropdown);
         $this->ss->assign('USER_TYPE_READONLY',$userTypes[$userType]['label'] . "<input type='hidden' id='UserType' value='{$userType}'><div id='UserTypeDesc'>&nbsp;</div>");
 
-        $this->ss->assign('IDM_MODE_ENABLED', $idpConfig->isIDMModeEnabled());
+        $this->ss->assign('IDM_MODE_ENABLED', $this->idpConfig->isIDMModeEnabled());
     }
 
     /**
@@ -288,10 +294,11 @@ class UserViewHelper {
      */
     public function setupLicenseTypeDropdown()
     {
-        $userLicenseType = SubscriptionManager::instance()->getUserSubscriptions($this->bean);
+        $userLicenseType = SubscriptionManager::instance()->getTopLevelUserSubscriptions($this->bean);
+        $userLicenseType = Subscription::getOrderedLicenseTypes($userLicenseType);
         global $current_user;
         if ($current_user->is_admin) {
-            $availableLicenseTypes = array_keys(SubscriptionManager::instance()->getSystemSubscriptionKeys());
+            $availableLicenseTypes = Subscription::getOrderedLicenseTypes(array_keys(SubscriptionManager::instance()->getTopLevelSystemSubscriptionKeys()));
         } else {
             $availableLicenseTypes = $userLicenseType;
         }
@@ -317,22 +324,26 @@ class UserViewHelper {
         }
         $licenseTypesDropdown .= '</select><div id="LicenseTypeDesc">&nbsp;</div>';
 
-        $licenseTypesInString = '';
-
         // send hidden value for single license type
         if (count($availableLicenseTypes) == 1) {
             $licenseTypesDropdown .= '<input type="hidden" name="LicenseTypes[]" value="' . $availableLicenseTypes[0] . '" />';
         }
 
-        // display invalid license types in red
-        foreach ($userLicenseType as $type) {
-            $licenseTypesInString .= User::getLicenseTypeDescription($type) . '</br>';
+        $licenseTypesInString = '';
+        if ($this->bean->status !== 'Active' && empty($this->bean->getTopLevelLicenseTypes())) {
+            // Inactive user with empty license type
+            $licenseTypesInString = "No License Assigned";
+        } else {
+            // display invalid license types in red
+            foreach ($userLicenseType as $type) {
+                $licenseTypesInString .= htmlspecialchars(User::getLicenseTypeDescription($type)) . '<br />';
+            }
+            $invalidLicenseTypes = SubscriptionManager::instance()->getUserInvalidSubscriptions($this->bean);
+            foreach ($invalidLicenseTypes as $type) {
+                $licenseTypesInString .= '<p class="error">' . htmlspecialchars(User::getLicenseTypeDescription($type)) . '</p>';
+            }
         }
 
-        $invalidLicenseTypes = SubscriptionManager::instance()->getUserInvalidSubscriptions($this->bean);
-        foreach ($invalidLicenseTypes as $type) {
-            $licenseTypesInString .= '<p class="error">' . User::getLicenseTypeDescription($type) . '</p>';
-        }
         $this->ss->assign('LICENSE_TYPE_DROPDOWN', $licenseTypesDropdown);
         $licenseString = json_encode($userLicenseType);
 
@@ -341,6 +352,9 @@ class UserViewHelper {
             $licenseTypesInString
             . "<input type='hidden' id='LicenseType' value='{$licenseString}'><div id='LicenseTypeDesc'>&nbsp;</div>"
         );
+
+        $idmLicenseTypeLock = ($this->idpConfig->isIDMModeEnabled() && $this->idpConfig->getUserLicenseTypeIdmModeLock());
+        $this->ss->assign('IDM_MODE_LC_LOCK', $idmLicenseTypeLock);
     }
 
     protected function setupPasswordTab() {
@@ -368,7 +382,6 @@ class UserViewHelper {
         }
 
         // If my account page or portal only user or regular user without system generated password or a duplicate user
-        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
         if ((($current_user->id == $this->bean->id)
                         || $this->usertype=='PORTAL_ONLY'
                         || (($this->usertype=='REGULAR'
@@ -379,7 +392,7 @@ class UserViewHelper {
                             && !$enable_syst_generate_pwd)
                 )
                 && !$this->bean->external_auth_only
-                && (!$idpConfig->isIDMModeEnabled() || $this->usertype == 'PORTAL_ONLY')) {
+                && (!$this->idpConfig->isIDMModeEnabled() || $this->usertype == 'PORTAL_ONLY')) {
             $this->ss->assign('CHANGE_PWD', '1');
         } else {
             $this->ss->assign('CHANGE_PWD', '0');
@@ -443,6 +456,11 @@ class UserViewHelper {
         $this->ss->assign('EXPORT_CHARSET', get_select_options_with_id($export_charset_options, $export_charset));
         $this->ss->assign('EXPORT_CHARSET_DISPLAY', $export_charset);
         //end:12293
+
+        $appearance = $this->bean->getUserPrefAppearanceDefault();
+        $appearance_options = translate('appearance_options');
+        $this->ss->assign('APPEARANCE', get_select_options_with_id($appearance_options, $appearance));
+        $this->ss->assign('APPEARANCE_DISPLAY', $appearance_options[$appearance]);
 
         if ($this->bean->getPreference('send_email_on_mention') == 'on') {
             $this->ss->assign("SEND_EMAIL_ON_MENTION", 'checked');
@@ -797,7 +815,7 @@ class UserViewHelper {
             $dictionary['User']['fields']['email1']['required'] = false;
         }
         // hack to disable email field being required if it shouldn't be required
-        if ( $this->ss->get_template_vars("REQUIRED_EMAIL_ADDRESS") == '0' ) {
+        if ($this->ss->getTemplateVars("REQUIRED_EMAIL_ADDRESS") == '0') {
             $GLOBALS['dictionary']['User']['fields']['email1']['required'] = false;
         }
         $this->ss->assign('NEW_EMAIL', '<span id="email_span">'
@@ -810,7 +828,7 @@ class UserViewHelper {
             )
             . '</span>');
         // hack to undo that previous hack
-        if ( $this->ss->get_template_vars("REQUIRED_EMAIL_ADDRESS") == '0' ) {
+        if ($this->ss->getTemplateVars("REQUIRED_EMAIL_ADDRESS") == '0') {
             $GLOBALS['dictionary']['User']['fields']['email1']['required'] = true;
         }
         $raw_email_link_type = $this->bean->getPreference('email_link_type');

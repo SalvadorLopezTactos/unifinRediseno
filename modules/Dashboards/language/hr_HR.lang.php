@@ -25,7 +25,9 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Sve nadzorne ploče za modul {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Sve nadzorne ploče za prikaz {{view}} modula {{module}}',
     'LBL_COPY_OF' => 'Kopija {{{name}}}',
-    'LBL_DELETE_FOCUS_DRAWER' => 'Nadzorne ploče za ladice fokusa nije moguće izbrisati.',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Stvori nadzornu ploču',
     'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Jeste li sigurni da želite vratiti zadani izgled nadzorne ploče?",
+    'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Jeste li sigurni da želite vratiti zadani izgled nadzorne ploče?',
+    'LBL_FILTER_UTILS_SELECT' => 'Dodijeljeno',
 );

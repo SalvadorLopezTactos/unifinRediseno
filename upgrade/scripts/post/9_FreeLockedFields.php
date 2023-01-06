@@ -48,7 +48,7 @@ class SugarUpgradeFreeLockedFields extends UpgradeScript
 
         $this->caseFlowHandler = ProcessManager\Factory::getPMSEObject('PMSECaseFlowHandler');
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $beanId = $row['bean_id'];
             $pdId = $row['pd_id'];
             $module = $row['bean_module'];

@@ -57,28 +57,23 @@ var ERR_REENTER_PASSWORDS = '{$MOD.ERR_REENTER_PASSWORDS}';
 
 <script type="text/javascript">
 {if $SHOW_NON_EDITABLE_FIELDS_ALERT}
-    {literal}
         app.alert.show('non_editable_user_fields', {
             level: 'info',
-            messages: '{/literal}{$NON_EDITABLE_FIELDS_MSG}{literal}',
+            messages: '{$NON_EDITABLE_FIELDS_MSG}',
             autoClose: false
         });
-    {/literal}
 {/if}
 
 var EditView_tabs = new YAHOO.widget.TabView("EditView_tabs");
 
-{literal}
 //Override so we do not force submit, just simulate the 'save button' click
 SUGAR.EmailAddressWidget.prototype.forceSubmit = function() { document.getElementById('Save').click();}
 
 EditView_tabs.on('contentReady', function(e){
-{/literal}
 {if $ID}
-{literal}
     var eapmTabIndex = 4;
-    {/literal}{if !$SHOW_THEMES}{literal}eapmTabIndex = 3;{/literal}{/if}{literal}
-    EditView_tabs.getTab(eapmTabIndex).set('dataSrc','index.php?sugar_body_only=1&module=Users&subpanel=eapm&action=SubPanelViewer&inline=1&record={/literal}{$ID}{literal}&layout_def_key=UserEAPM&inline=1&ajaxSubpanel=true');
+    {if !$SHOW_THEMES}eapmTabIndex = 3;{/if}
+    EditView_tabs.getTab(eapmTabIndex).set('dataSrc','index.php?sugar_body_only=1&module=Users&subpanel=eapm&action=SubPanelViewer&inline=1&record={$ID}&layout_def_key=UserEAPM&inline=1&ajaxSubpanel=true');
     EditView_tabs.getTab(eapmTabIndex).set('cacheData',true);
     EditView_tabs.getTab(eapmTabIndex).on('dataLoadedChange',function(){
         //reinit action menus
@@ -90,26 +85,26 @@ EditView_tabs.on('contentReady', function(e){
     if ( document.location.hash == '#tab5' ) {
         EditView_tabs.selectTab(eapmTabIndex);
     }
-{/literal}
+
 {/if}
 {if $EDIT_SELF && $SHOW_DOWNLOADS_TAB}
-{literal}
+
     EditView_tabs.addTab( new YAHOO.widget.Tab({
-        label: '{/literal}{$MOD.LBL_DOWNLOADS}{literal}',
+        label: '{$MOD.LBL_DOWNLOADS}',
         dataSrc: 'index.php?to_pdf=1&module=Home&action=pluginList',
-        content: '<div style="text-align:center; width: 100%">{/literal}{sugar_image name="loading"}{literal}</div>',
+        content: '<div style="text-align:center; width: 100%">{sugar_image name="loading"}</div>',
         cacheData: true
     }));
     EditView_tabs.getTab(5).getElementsByTagName('a')[0].id = 'tab6';
-{/literal}
+
 {/if}
 {if $scroll_to_cal}
-    {literal}
+    
         //we are coming from the tour welcome page, so we need to simulate a click on the 4th tab
         // and scroll to the calendar_options div after the tabs have rendered
         document.getElementById('tab4').click();
         document.getElementById('calendar_options').scrollIntoView();
-    {/literal}
+    
 {/if}
 
 });

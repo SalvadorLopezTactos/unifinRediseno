@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Fields audited in this module:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'אין שדות שעברו ביקורת במודול זה',
     'LBL_CHANGE_LOG' => 'יומן ביקורת',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'כאשר שדות מטבע מבוקרים נשמרים במטבע שאינו מטבע ברירת המחדל של המערכת, יומן רישום השינויים יציג את הערכים הישנים והחדשים במטבע ברירת המחדל שהומר והוגדר במערכת.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'כאשר שדות מטבע מבוקרים נשמרים במטבע שאינו מטבע ברירת המחדל של המערכת, יומן רישום השינויים יציג את הערכים הישנים והחדשים במטבע ברירת המחדל שהומר והוגדר במערכת.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'עדכן ל',
+    'LBL_BLANK' => '-blank-',
 );

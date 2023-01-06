@@ -108,6 +108,9 @@ function get_widget($type)
         case 'autoincrement':
             $local_temp = new TemplateAutoIncrement();
             break;
+        case 'actionbutton':
+            $local_temp = new TemplateActionButton();
+            break;
         default:
             if (SugarAutoLoader::requireWithCustom('modules/DynamicFields/templates/Fields/Template'. ucfirst($type) . '.php')) {
                 $class  = SugarAutoLoader::customClass('Template' . ucfirst($type));

@@ -42,6 +42,8 @@
         if (app.config.smtpServerSet === true) {
             this.showPortalPasswordReset = true;
         }
+
+        this.showPortalSignUp = app.config.enableSelfSignUp === 'enabled';
     },
 
     /**

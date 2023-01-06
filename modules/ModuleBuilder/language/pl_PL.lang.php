@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Usuń' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Oparte na systemie SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Rola',
+    'LBL_BASE_LAYOUT' => 'Podstawowy układ',
+    'LBL_FIELD_NAME' => 'Nazwa pola',
+    'LBL_FIELD_VALUE' => 'Wartość',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Układ określany przez:',
+    'layoutDeterminedBy' => [
+        'std' => 'Standardowy układ',
+        'role' => 'Rola',
+        'dropdown' => 'Pole listy rozwijanej',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Wszystkie układy niestandardowe zostaną usunięte. Czy na pewno chcesz zmienić bieżące definicje układu?',
 'help'=>array(
     'package'=>array(
             'create'=>'Wprowadź <b>Nazwę</b> pakietu. Nazwa pakietu musi zaczynać się od litery i może zawierać wyłącznie znaki alfanumeryczne i podkreślenia. Nie może zawierać spacji ani znaków specjalnych. (Przykład: HR_Zarządzanie)<br/><br/> Możesz podać <b>Autora</b> i <b>Opis</b> pakietu. <br/><br/>Kliknij <b>Zapisz</b>, aby utworzyć pakiet.',
@@ -456,8 +466,6 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_VISIBILITY_EDITOR' => 'Edytor widoczności',
 'LBL_ROLLUP' => 'Rozwinięcie',
 'LBL_RELATED_FIELD' => 'Pole powiązane',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'Adres URL do niestandardowego obrazu znaku logo. Zalecane wymiary znaku logo to 22 x 22 piksele. Każdy przesłany obraz, który będzie większy w dowolnym z kierunków, zostanie zeskalowany do tych wymiarów maksymalnych.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'Adres URL do niestandardowego obrazu logo. Zalecana szerokość logo to 200 pikseli. Każdy przesłany obraz, który będzie większy w dowolnym z kierunków zostanie zeskalowany do tych wymiarów maksymalnych. Logo będzie używane na ekranie logowania. Jeśli żaden obraz nie zostanie przesłany, używany będzie znak logo.',
 'LBL_PORTAL_ROLE_DESC' => 'Nie usuwaj tej roli. Rola klienta Portal samoobsługowy jest rolą generowaną przez system podczas procesu aktywacji portalu Sugar. Użyj kontroli dostępu w tej roli, aby włączyć i/lub wyłączyć Błędy, Zgłoszenia lub Bazę wiedzy w portalu Sugar. Nie modyfikuj innych kontroli dostępu dla tej roli, aby uniknąć nieznanych i nieprzewidzianych zachowań systemu. W razie przypadkowego usunięcia tej roli, odtwórz ją poprzez wyłącznie i włącznie portalu Sugar.',
 
 //RELATIONSHIPS
@@ -580,6 +588,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_BTN_ADD_RELATIONSHIP'=>'Dodaj relacje',
 'LBL_BTN_RENAME_MODULE' => 'Zmień nazwę modułu',
 'LBL_BTN_INSERT'=>'Wstaw',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Przywróć podstawowy układ',
 //TABS
 
 //ERRORS
@@ -590,6 +599,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'ERROR_GENERIC_TITLE' => 'Wystąpił błąd',
 'ERROR_REQUIRED_FIELDS' => 'Czy na pewno chcesz kontynuować? W układzie brakuje wymaganych pól:  ',
 'ERROR_ARE_YOU_SURE' => 'Czy na pewno chcesz kontynuować?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'Nie można utworzyć pola. Osiągnięto limit rozmiaru wiersza tej tabeli z bazy danych.<a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Dowiedz się więcej</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Następujące pola zawierają obliczone wartości, które nie będą ponownie obliczone w czasie rzeczywistym w widoku edycji SugarCRM Mobile:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Następujące pola zawierają obliczone wartości, które nie będą ponownie obliczane w czasie rzeczywistym w widoku edycji Portalu SugarCRM:',
@@ -599,16 +609,14 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
     'LBL_PORTAL_ENABLE_MODULES' => 'Jeśli chcesz je włączyć w portalu, możesz to zrobić <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">tutaj</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfiguracja portalu',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Włącz portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Włącz wyszukiwanie przed otwarciem zgłoszenia',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Włącz uwagi w module Baza wiedzy',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Zezwól użytkownikom portalu na zamykanie zgłoszenia',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Zezwól nowym użytkownikom na rejestrowanie się',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Uprawnienia użytkownika',
     'LBL_PORTAL_THEME' => 'Motyw portalu',
     'LBL_PORTAL_ENABLE' => 'Włącz',
     'LBL_PORTAL_SITE_URL' => 'Strona Twojego portalu jest dostępna pod adresem:',
     'LBL_PORTAL_APP_NAME' => 'Nazwa aplikacji',
-    'LBL_PORTAL_LOGOMARK_URL' => 'Adres URL znaku logo',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Podgląd znaku logo',
-    'LBL_PORTAL_LOGO_URL' => 'URL logo',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Podgląd logo',
     'LBL_PORTAL_CONTACT_PHONE' => 'Nr telefonu',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Adres e-mail',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Musisz wprowadzić prawidłowy adres e-mail',
@@ -624,6 +632,23 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Przeciągnij i upuść nazwy modułów portalu, aby ustawić ich wyświetlanie bądź ukrywanie w górnym pasku nawigacyjnym portalu. Aby kontrolować dostęp użytkowników portalu do modułów, skorzystaj z funkcji <a href="?module=ACLRoles&action=index">Zarządzanie rolami.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Wyświetlane moduły',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Ukryte moduły',
+    'LBL_CONFIG_VISIBILITY' => 'Widoczność',
+    'LBL_CASE_VISIBILITY_HELP' => 'Określ, którzy użytkownicy portalu mogą przeglądać zgłoszenie.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Określ, którzy użytkownicy portalu mogą przeglądać wiadomości e-mail powiązane ze zgłoszeniem. Kontakty biorące udział są umieszczone w polach Do, Od, DW i UDW.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Określ, którzy użytkownicy portalu mogą przeglądać wiadomości powiązane ze zgłoszeniem. Kontakty biorące udział są umieszczone w polu Goście.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Wszystkie kontakty powiązane z kontrahentem',
+        'related_contacts' => 'Tylko kontakt podstawowy i kontakty powiązane ze zgłoszeniem',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Tylko kontakty biorące udział',
+        'all' => 'Wszystkie kontakty, które mogą przeglądać zgłoszenie',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Tylko kontakty biorące udział',
+        'all' => 'Wszystkie kontakty, które mogą przeglądać zgłoszenie',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Układy Portalu',
@@ -765,7 +790,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
         . ' Jeśli to pole jest uwzględnione we wzorze obliczania wartości dla jakichkolwiek pól, wzór tej przestanie działać.'
         . '\n\nTo pole nie będzie już dostępne do użycia w Raportach; ta zmiana będzie obowiązywać od wylogowania i ponownego zalogowania do aplikacji. Wszelkie raporty zawierające to pole należy zaktualizować, aby można je było uruchomić.'
         . '\n\nCzy chcesz kontynuować?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno chcesz usunąć tę relację?<br>Uwaga: Ta operacja może zostać wykonana w ciągu kilku minut.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno chcesz usunąć tę relację?<br>Uwaga: ta operacja może zostać wykonana w ciągu kilku minut.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Spowoduje to ustawienie relacji jako trwałej. Czy na pewno chcesz zamieścić tę relację?',
 'LBL_CONFIRM_DONT_SAVE' => 'Od ostatniego zapisu zostały wprowadzone zmiany. Czy chcesz zapisać je teraz?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Zapisać zmiany?',
@@ -785,19 +810,19 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_POPHELP_CALCULATED'=>"Utwórz formułę, aby określić wartość w tym polu.<br>"
    . "Definicje workflow zawierające czynność aktualizacji tego pola nie będą już wykonywać tej czynności.<br>"
    . "Pola wykorzystujące formuły nie będą obliczane w czasie rzeczywistym w układach "
-   . "portal samoobsługowy Sugar ani "
+   . "portal samoobsługowy Sugar lub "
    . "Mobilny widok edycji.",
 
 'LBL_POPHELP_DEPENDENT'=>"Utwórz formułę służącą do określania, czy to pole jest widoczne w układach.<br/>"
-        . "Pola zależne będą zgodne z formułą zależności w mobilnym widoku przeglądarki,<br/>"
+        . "Pola zależne będą zgodne z formułą zależności w mobilnym widoku przeglądarki, <br/>"
         . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
         . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
 'LBL_POPHELP_REQUIRED'=>"Utwórz formułę służącą do określania, czy to pole jest wymagane w układach.<br/>"
-    . "Pola wymagane będą zgodne z formułą w mobilnym widoku przeglądarki,<br/>"
+    . "Pola wymagane będą zgodne z formułą w mobilnym widoku przeglądarki, <br/>"
     . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
     . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
 'LBL_POPHELP_READONLY'=>"Utwórz formułę służącą do określania, czy to pole jest tylko do odczytu w układach.<br/>"
-        . "Pola tylko do odczytu będą zgodne z formułą w mobilnym widoku przeglądarki,<br/>"
+        . "Pola tylko do odczytu będą zgodne z formułą w mobilnym widoku przeglądarki, <br/>"
         . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
         . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Tego pola używaj podczas wyszukiwania rekordów za pomocą globalnego wyszukiwania w tym module.',
@@ -836,6 +861,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
                 'datetimecombo' =>'Data i czas',
                 'decimal'=>'Dziesiętne',
                 'autoincrement' => 'Automatyczne zwiększanie',
+                'actionbutton' => 'Przycisk czynności',
 ),
 'labelTypes' => array(
     "" => "Często używane etykiety",
@@ -854,4 +880,8 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (powiązane {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopiuj z układu',
 'LBL_RELATIONSHIP_TYPE' => 'Relacja',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Język porównania',
+'LBL_LABEL_NOT_TRANSLATED' => 'Tej etykiety nie można tłumaczyć',
 );

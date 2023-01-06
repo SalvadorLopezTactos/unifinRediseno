@@ -1,17 +1,18 @@
 /* SIDE DRAWER
   ----------------*/
 
-.side-drawer {
+#side-drawer {
   position: fixed;
   left: 25%;
   right: 0;
   display: none;
-  z-index: @zindexSidebarContent + 1;
+  z-index: @zindexSidebarContent + 2;
 
   .drawer-content {
-    background-color: @grayLighter;
     border-radius: 3px;
-    border-left: 1px solid fade(@black, 10%);
+    border-left: @borderWidget;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     height: 100%;
   }
 
@@ -30,20 +31,49 @@
   }
 
   .close-drawer,
+  .scroll-drawer,
   .dashlet-drawer {
     width: 30px;
-    left: -25px;
+    left: -26px;
     position: absolute;
 
     .btn {
-      background: @grayLighter;
       border-right: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       margin-left: 0;
+      line-height: 12px;
+      padding: 7px;
+      opacity: 1;
+
+      &.btn-prev {
+        border-bottom-left-radius: 0;
+        border-bottom: 0;
+      }
+
+      &.btn-next {
+        border-top-left-radius: 0;
+        border-top: 0;
+      }
+
+      &:hover {
+        border-color: @btnBorder;
+      }
+
+      &.disabled {
+        i {
+          color: @btnDisabledIconColor;
+        }
+      }
     }
   }
 
   .close-drawer {
     top: 10px;
+  }
+
+  .scroll-drawer {
+    top: 45px;
   }
 
   .dashlet-drawer {
@@ -54,5 +84,147 @@
     border-left: none;
     overflow-x: hidden;
     overflow-y: visible;
+
+    .empty-dashboard {
+      display: contents;
+    }
+
+    .headerpane {
+      width: 100%;
+      display: flex;
+
+      h1 {
+        font-size: 14px;
+
+        &.breadcrumbs {
+          width: 50%;
+          margin-top: 5px;
+          display: inline-flex;
+          padding: 6px;
+
+          span.sep {
+            padding: 0 5px;
+
+            &:first-child {
+              display: none;
+            }
+
+            i {
+              vertical-align: bottom;
+            }
+          }
+
+          div.bread {
+            max-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &.single {
+              max-width: 375px;
+            }
+
+            .record-cell {
+              @media (min-width: 100px) {
+                max-width: 10px;
+              }
+
+              @media (min-width: 300px) {
+                max-width: 30px;
+              }
+
+              @media (min-width: 700px) {
+                max-width: 50px;
+              }
+
+              @media (min-width: 1100px) {
+                max-width: 80px;
+              }
+
+              @media (min-width: 2000px) {
+                max-width: 90px;
+              }
+
+              @media (min-width: 3000px) {
+                max-width: 100px;
+              }
+
+              max-width: 100px;
+              padding: 2px 5px 0;
+              vertical-align: middle;
+
+              .label-module-btn {
+                height: @sizeDefault;
+                width: @sizeDefault;
+              }
+
+              &.single {
+                max-width: 335px;
+              }
+
+              &:first-child {
+                width: auto;
+                max-width: 25px;
+              }
+
+              &:only-child {
+                max-width: unset;
+              }
+            }
+
+            &:not(:last-child):hover {
+              background-color: @dropdownLinkBackgroundHover;
+              border-radius: 5px;
+              cursor: pointer;
+            }
+          }
+
+          div.dropdown {
+            padding-right: unset;
+
+            &:hover {
+              background-color: @dropdownLinkBackgroundHover;
+              border-radius: 5px;
+            }
+
+            ul.dropdown-menu {
+              display: block;
+            }
+          }
+        }
+
+        &.dashboardtitle {
+          display: flex;
+
+          .record-cell {
+            .w-auto();
+          }
+
+          .record-cell:first-child {
+            .w-full();
+          }
+
+          input {
+            max-width: 350px;
+            float: right;
+          }
+
+          div.dropdown {
+            float: right;
+            max-width: 75%;
+            padding-right: unset;
+
+            ul.dropdown-menu {
+              right: 30px;
+              left: auto;
+
+              li > a {
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

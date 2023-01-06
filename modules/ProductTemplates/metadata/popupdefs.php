@@ -22,10 +22,11 @@ $popupMeta = array (
         'name',
         'category_name',
     ),
-    'searchdefs' => array (
+    'searchdefs' => [
         'name',
-        'category_name'
-    ),
+        'category_name',
+        'active_status',
+    ],
     'listviewdefs' => array (
         'NAME' =>
         array (

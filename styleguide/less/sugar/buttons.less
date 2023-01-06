@@ -14,24 +14,19 @@
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px fade(@white, 75%));
-
   border-radius: @baseBorderRadius;
+  background-color: @btnBackground;
 
   /*sugar mods*/
   padding: 4px 6px;
-  color: @gray;
   font-weight: 600;
-
-  &.down {
-    .buttonBackground(@btnBackgroundHighlight,@btnBackground);
-  }
 
   /*end sugar mods*/
 
   // Hover state
   &:hover {
-    color: @grayDark;
+    color: @textColorHover;
+    border-color: @borderColorFocus;
     text-decoration: none;
     background-position: 0 -15px;
   }
@@ -46,7 +41,11 @@
   &:active {
     background-image: none;
     outline: 0;
-    box-shadow: inset 0 2px 4px fade(@black, 15%), 0 1px 2px fade(@black, 5%);
+    box-shadow: inset 0 2px 4px @gray80, 0 1px 2px @gray90;
+
+    &.no-inset {
+      box-shadow: none;
+    }
   }
 
   // Disabled state
@@ -128,7 +127,7 @@ input[type="button"] {
 .btn-warning.active,
 .btn-info.active,
 .btn-inverse.active {
-  color: fade(@white, 75%);
+  color: @gray10;
 }
 
 .btn-danger.active {
@@ -162,6 +161,10 @@ input[type="button"] {
 .btn-inverse {
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
 }
+// Notification appears as blue
+.btn-notification {
+  .buttonBackground(@btnNotificationBackground, @btnNotificationBackgroundHighlight);
+}
 
 // Link buttons
 // --------------------------------------------------
@@ -187,8 +190,9 @@ input[type="button"] {
   text-decoration: underline;
   background-color: transparent;
 }
+
 .btn-link[disabled]:hover {
-  color: @grayDark;
+  color: @gray90;
   text-decoration: none;
 }
 
@@ -196,40 +200,76 @@ input[type="button"] {
 
 .btn {
   font-size: @fontSizeSmall;
+  line-height: @baseFontSize;
+  padding: 7px;
   box-shadow: none;
   margin-left: 8px;
-  border: 1px solid fade(@black, 10%);
+  border: @borderWidget;
   text-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.icon-and-text {
+    > .sicon {
+      margin-right: 4px;
+    }
+  }
 
   /* keeps button widths with icons the same regardless of icon width */
   > .fa {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     display: inline-block;
-    line-height: 14px;
-    font-size: @baseFontSize + 2;
+    line-height: 12px;
+    font-size: @baseFontSize;
     position: relative;
     top: 1px;
 
     &.icon-create {
       display: inline;
-      color: @blue;
       padding-right: 5px;
       top: 0;
     }
   }
+
+  /**
+   * Preventative measures similar to the above block with FontAwesome. The line height is miscalculated due to our
+   * SugarIcons icons being 12px instead of 14px. We needed to remove the line height on font load and manually set
+   * it here so we have the proper inner height of 12x12px which properly sizes our buttons at 28px tall.
+   */
+  & > .sicon {
+    line-height: 12px;
+  }
+
+  > .sicon {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    line-height: 12px;
+    vertical-align: top;
+
+    &.icon-create {
+      margin-right: 8px;
+    }
+  }
+
+  &.addNote {
+    display: flex;
+    align-items: center;
+
+    > .sicon {
+      margin-right: 4px;
+    }
+  }
+
   // Hover state
   &:not(.disabled):hover,
   &.focus {
     box-shadow: inset 0 0 10px fade(@black, 10%);
-  }
 
-  // Active state
-  &:not(.disabled):active {
-    box-shadow: inset 0 3px 4px fade(@black, 15%), 0 0 10px fade(@black, 5%);
-
-    &.btn-primary:hover {
-      box-shadow: inset 0 3px 4px fade(@black, 25%), 0 0 10px fade(@black, 5%);
+    &.no-inset {
+      box-shadow: none;
     }
   }
 
@@ -238,12 +278,9 @@ input[type="button"] {
     text-shadow: none;
     box-shadow: none;
 
+    > .sicon,
     > .fa {
-      color: @grayLighter;
-    }
-
-    &:focus {
-      background: @grayDark;
+      color: @white;
     }
   }
 
@@ -253,7 +290,10 @@ input[type="button"] {
     }
   }
 
-  &.rowaction {
+  &.rowaction:not(.btn-primary) {
+    line-height: 12px;
+    padding: 7px;
+
     &.active {
       &:focus {
         outline: none;
@@ -275,41 +315,58 @@ input[type="button"] {
   border: 1px solid transparent;
   font-weight: normal;
   font-size: @baseFontSize;
+  line-height: @baseFontSize;
   box-shadow: none;
 
   &:not(.disabled):hover {
     box-shadow: none;
     border-color: transparent;
     background-color: transparent;
+    text-decoration: none;
 
+    > .sicon,
     > .fa {
-      color: @grayDark;
+      color: @sicon-hover-color;
       text-shadow: none;
     }
   }
 
+  &.more,
+  &.less {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   &.active {
-    color: @grayLighter;
+    color: @sicon-active-color;
     box-shadow: none;
-    background: @gray;
+    background: @gray60;
   }
 
   &.disabled {
     text-decoration: none;
-    color: @grayLight;
+    color: @sicon-color;
     opacity: 0.65;
 
     .fa {
       opacity: 0.65;
-      color: @grayLight;
+      color: @sicon-color;
     }
   }
   //a darker version of btn-invisible
   &.btn-dark {
-    background-color: darken(@grayLighter, 5%);
+    background-color: @btnDarkInvisibleBackground;
+    padding: 7px;
+    line-height: 12px;
 
+    &:hover {
+      background-color: @btnDarkInvisibleBackgroundHover;
+    }
+
+    > .sicon,
     > .fa {
-      color: darken(@grayLight, 10%);
+      color: @sicon-hover-color;
     }
   }
 }
@@ -318,11 +375,15 @@ input[type="button"] {
 .btn.btn-link {
   color: @linkColor;
 
-  &:not(.disabled):hover {
+  &:not(.disabled):not(.btn-invisible):hover {
     text-decoration: underline;
     color: @linkColorHover;
     box-shadow: none;
-    background: transparent;
+    background: @btnBackground;
+  }
+
+  &.inline-cancel:hover {
+    background: @tableRowHover;
   }
 
   &.active,
@@ -380,16 +441,9 @@ input[type="button"] {
 .btn-inverse:hover {
   color: @white;
 
+  .sicon,
   .fa {
     color: @white;
-  }
-
-  &:not(.disabled):hover {
-    box-shadow: inset 0 0 10px fade(@black, 20%);
-
-    .fa {
-      color: @white;
-    }
   }
 }
 
@@ -433,23 +487,14 @@ input[type="button"] {
 }
 
 input.required + .btn.btn-input-addon {
-  border-bottom: 1px solid @grayLight;
-  border-top: 1px solid @grayLight;
-  border-right: 1px solid @grayLight;
+  border-bottom: @borderWidget;
+  border-top: @borderWidget;
+  border-right: @borderWidget;
 }
 
 /* NEW SKIN START */
 
 .btn {
-  /* override */
-  > .fa {
-    color: @gray;
-  }
-
-  &:not(.disabled):not(.btn-invisible):active {
-    box-shadow: inset 0 3px 4px fade(@black, 15%), 0 0 10px fade(@black, 5%);
-  }
-
   /* override */
   &.active {
     background: @btnActiveBackground;
@@ -461,11 +506,13 @@ input.required + .btn.btn-input-addon {
   }
 
   &.disabled {
+    > .sicon,
     > .fa {
       color: @btnDisabledIconColor;
     }
 
     &.btn-primary {
+      > .sicon,
       > .fa {
         /* override */
         color: inherit;
@@ -487,7 +534,6 @@ input.required + .btn.btn-input-addon {
 
   &:not(.disabled):not(.btn-invisible):active.btn {
     /* .btn at the end of this selector is necessary to override default theme */
-    box-shadow: inset 0 1px 3px @btnPrimaryHoverActiveBgGrad;
     border: solid 1px @btnPrimaryActiveBorder;
     background-color: @btnPrimaryActiveBackground;
   }
@@ -500,13 +546,14 @@ input.required + .btn.btn-input-addon {
 
   &:hover {
     background-color: @btnSecondaryBackgroundHover;
+    border-color: @btnSecondaryBorderHover;
+    color: @btnSecondaryColorHover;
     box-shadow: none;
     background-image: none;
   }
 
   &:active:not(.disabled):not(.btn-invisible) {
     background: @btnSecondaryBackgroundActive;
-    box-shadow: @btnSecondaryBoxShadowActive;
   }
 
   &:focus {
@@ -523,11 +570,47 @@ input.required + .btn.btn-input-addon {
 .btn-group {
   &,
   &.open {
-    .btn-primary.dropdown-toggle .fa {
-      /* override */
-      color: @white;
+    .btn-primary.dropdown-toggle {
+      background: @btnPrimaryBackground;
+
+      .sicon,
+      .fa {
+        /* override */
+        color: @white;
+      }
     }
   }
 }
 
 /* NEW SKIN END */
+
+.actionmenu-checkbox {
+  height: 12px;
+}
+
+// SugarIcons button behaviour
+.btn {
+  &.sort-order-selector {
+    line-height: 12px;
+    padding: 7px;
+  }
+
+  &.favorite-button {
+    line-height: 12px;
+    padding: 7px;
+
+    &:hover > .sicon,
+    &.active {
+      &:hover > .sicon,
+      > .sicon {
+        color: @sicon-hover-color;
+      }
+    }
+  }
+
+  &:not(.btn-primary):not(.btn-notification):not(.btn-invisible):not(.disabled):not(.active):hover {
+    .sicon {
+      color: @sicon-hover-color;
+    }
+  }
+}

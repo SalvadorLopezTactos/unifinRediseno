@@ -61,7 +61,7 @@ if($focus->private && !empty($focus->associated_user_id)){
 				}
 			}
 			$newTokens = array_slice($tokens, 0, $index);
-			$focus->name = implode($newTokens, ' ');
+            $focus->name = implode(' ', $newTokens);
 	}else{
 		$focus->name_2 = '';
 	}
@@ -120,5 +120,11 @@ $return_action = ($_POST['return_action']!='index') ? $_POST['return_action'] : 
 
 $GLOBALS['log']->debug("Saved record with id of {$return_id}");
 
-header("Location: index.php?action={$return_action}&module={$return_module}&record={$return_id}");
+    $uri = 'index.php?'.http_build_query([
+        'action' => $return_action,
+        'module' => $return_module,
+        'record' => $return_id,
+        ]);
+
+    header('Location: '.$uri);
 }

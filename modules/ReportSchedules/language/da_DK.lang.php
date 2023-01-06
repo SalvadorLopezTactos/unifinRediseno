@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Denne rapporttidsplan',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser for rapporttidsplan',
+    'LBL_FILE_TYPE' => 'Filtyper',
 );

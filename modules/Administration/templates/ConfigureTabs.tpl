@@ -19,8 +19,8 @@
 <input type="hidden" name="action" value="SaveTabs">
 <input type="hidden" id="enabled_tabs" name="enabled_tabs" value="">
 <input type="hidden" id="disabled_tabs" name="disabled_tabs" value="">
-<input type="hidden" name="return_module" value="{$RETURN_MODULE}">
-<input type="hidden" name="return_action" value="{$RETURN_ACTION}">
+<input type="hidden" name="return_module" value="{$RETURN_MODULE|escape:'html':'UTF-8'}">
+<input type="hidden" name="return_action" value="{$RETURN_ACTION|escape:'html':'UTF-8'}">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr><td colspan='100'><h2>{$title}</h2></td></tr>
@@ -31,7 +31,7 @@
 		<tr>
 			<td>
 				<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="SUGAR.saveConfigureTabs();this.form.action.value='SaveTabs'; " type="submit" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" > 
-				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="this.form.action.value='index'; this.form.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
 			</td>
 		</tr>
 	</table>
@@ -75,7 +75,7 @@
 		<tr>
 			<td>
 				<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary" onclick="SUGAR.saveConfigureTabs();this.form.action.value='SaveTabs'; " type="submit" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" >
-				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick="this.form.action.value='index'; this.form.module.value='Administration';" type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
+				<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}">
 			</td>
 		</tr>
 	</table>
@@ -88,16 +88,15 @@
 	var disabled_modules = {$disabled_tabs};
 	var lblEnabled = '{sugar_translate label="LBL_VISIBLE_TABS"}';
 	var lblDisabled = '{sugar_translate label="LBL_HIDDEN_TABS"}';
-	{literal}
-	
+
 	SUGAR.enabledTabsTable = new YAHOO.SUGAR.DragDropTable(
 		"enabled_div",
-		[{key:"label",  label: lblEnabled, width: 200, sortable: false},
-		 {key:"module", label: lblEnabled, hidden:true}],
+		[{ key:"label",  label: lblEnabled, width: 200, sortable: false},
+		 { key:"module", label: lblEnabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(enabled_modules, {
 			responseSchema: {
 			   resultsList : "modules",
-			   fields : [{key : "module"}, {key : "label"}]
+			   fields : [{ key : "module"}, { key : "label"}]
 			}
 		}), 
 		{
@@ -107,12 +106,12 @@
 	);
 	SUGAR.disabledTabsTable = new YAHOO.SUGAR.DragDropTable(
 		"disabled_div",
-		[{key:"label",  label: lblDisabled, width: 200, sortable: false},
-		 {key:"module", label: lblDisabled, hidden:true}],
+		[{ key:"label",  label: lblDisabled, width: 200, sortable: false },
+		 { key:"module", label: lblDisabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(disabled_modules, {
 			responseSchema: {
 			   resultsList : "modules",
-			   fields : [{key : "module"}, {key : "label"}]
+			   fields : [{ key : "module"}, { key : "label"}]
 			}
 		}),
 		{
@@ -122,23 +121,21 @@
 	);
 	SUGAR.enabledTabsTable.disableEmptyRows = true;
     SUGAR.disabledTabsTable.disableEmptyRows = true;
-    SUGAR.enabledTabsTable.addRow({module: "", label: ""});
-    SUGAR.disabledTabsTable.addRow({module: "", label: ""});
+    SUGAR.enabledTabsTable.addRow({ module: "", label: ""});
+    SUGAR.disabledTabsTable.addRow({ module: "", label: ""});
 	SUGAR.enabledTabsTable.render();
 	SUGAR.disabledTabsTable.render();
-	{/literal}
 	var sub_enabled_modules = {$enabled_panels};
 	var sub_disabled_modules = {$disabled_panels};
 	var lblSubEnabled = '{sugar_translate label="LBL_VISIBLE_PANELS"}';
 	var lblSubDisabled = '{sugar_translate label="LBL_HIDDEN_PANELS"}';
-	{literal}
 	SUGAR.subEnabledTable = new YAHOO.SUGAR.DragDropTable(
 		"enabled_subpanels_div",
-		[{key:"label",  label: lblSubEnabled, width: 200, sortable: false},
-		 {key:"module", label: lblSubEnabled, hidden:true}],
+		[{ key:"label",  label: lblSubEnabled, width: 200, sortable: false },
+		 { key:"module", label: lblSubEnabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(sub_enabled_modules, {
 			responseSchema: {
-			   fields : [{key : "module"}, {key : "label"}]
+			   fields : [{ key : "module" }, { key : "label" }]
 			}
 		}),  
 		{
@@ -148,11 +145,11 @@
 	);
 	SUGAR.subDisabledTable = new YAHOO.SUGAR.DragDropTable(
 		"disabled_subpanels_div",
-		[{key:"label",  label: lblSubDisabled, width: 200, sortable: false},
-		 {key:"module", label: lblSubDisabled, hidden:true}],
+		[{ key:"label",  label: lblSubDisabled, width: 200, sortable: false },
+		 { key:"module", label: lblSubDisabled, hidden:true }],
 		new YAHOO.util.LocalDataSource(sub_disabled_modules, {
 			responseSchema: {
-			   fields : [{key : "module"}, {key : "label"}]
+			   fields : [{ key : "module"}, { key : "label"}]
 			}
 		}),
 		{
@@ -162,8 +159,8 @@
 	);
 	SUGAR.subEnabledTable.disableEmptyRows = true;
 	SUGAR.subDisabledTable.disableEmptyRows = true;
-	SUGAR.subEnabledTable.addRow({module: "", label: ""});
-	SUGAR.subDisabledTable.addRow({module: "", label: ""});
+	SUGAR.subEnabledTable.addRow({ module: "", label: "" });
+	SUGAR.subDisabledTable.addRow({ module: "", label: "" });
 	SUGAR.subEnabledTable.render();
 	SUGAR.subDisabledTable.render();
 	
@@ -203,5 +200,4 @@
             }
         }
     });
-{/literal}
 </script>

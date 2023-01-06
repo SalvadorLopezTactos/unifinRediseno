@@ -26,7 +26,7 @@ class ViewSidecar extends SidecarView
         $this->options['show_javascript'] = false;
         $this->options['show_subpanels'] = false;
         $this->options['show_search'] = false;
- 		parent::__construct($bean = null, $view_object_map = array());
+        parent::__construct();
  	}
 
 }

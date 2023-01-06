@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'Atjaunojamā ieņēmumu posteņa ID',
     'LBL_PARENT_RLIS' => 'Sākotnējie ieņēmumu posteņi',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Sākotnējie ieņēmumu posteņi',
+    'LBL_FORECASTED_LIKELY' => 'Iespējamā prognoze',
     'LBL_EXPERT_ID' => 'Produkta eksperts',
     'LBL_FORECAST' => 'Iekļatu prognozē',
     'LBL_SUBTOTAL' => 'Starpsumma',

@@ -13,41 +13,59 @@
 {{#if meta.short}}
     <a class="cube module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube" tabindex="-1">{{{logoImage}}}</a>
 {{else}}
-    <a class="cube btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube" aria-label="{{getModuleName module plural=true}}">{{{logoImage}}}</a>
+    <a class="cube btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}"
+        data-route="#{{buildRoute module=module}}" track="click:cube" aria-label="{{getModuleName module plural=true}}"
+    >
+        {{{logoImage}}}
+    </a>
     {{#if actions}}
-    <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:cube-dropdown" aria-label="{{getModuleName module plural=true}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
-    <div class="dropdown-menu scroll">
-        <ul role="menu">
-            {{#each actions}}
-                {{#eq type 'divider'}}
-                    <li class="divider"></li>
-                {{else}}
-                    <li><a class="ellipsis_inline" tabindex="-1"
-                           data-navbar-menu-item="{{label}}"
-                        {{#if event}}
-                           href="javascript:void(0);"
-                           data-event="{{event}}"
-                           track="click:{{event}}"
-                        {{else}}
-                           href="{{route}}"
-                           data-route="{{route}}"
-                           {{#if openwindow}}
-                           data-openwindow="true"
-                           {{/if}}
-                           track="click:{{route}}"
-                        {{/if}}>{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}
-                        {{#if label_module}}
-                            {{str label label_module}}
-                        {{else}}
-                            {{str label ../../../module}}
-                        {{/if}}
-                        </a>
-                    </li>
-                {{/eq}}
-            {{/each}}
-            <li class="divider" data-container="dashboards"></li>
-            <li class="divider" data-container="recently-viewed"></li>
-        </ul>
-    </div>
+        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown"
+                class="btn btn-invisible dropdown-toggle p-1" track="click:cube-dropdown"
+                aria-label="{{getModuleName module plural=true}} - {{str 'LBL_LINK_MORE' module}}"
+                role="button" aria-haspopup="true" aria-expanded="false"
+        >
+            <i class="sicon sicon-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu rounded-t-none scroll">
+            <ul role="menu">
+                {{#each actions}}
+                    {{#eq type 'divider'}}
+                        <li class="divider"></li>
+                    {{else}}
+                        <li class="megamenu-dropdown-item-container" role="menuitem">
+                            <a class="ellipsis_inline megamenu-dropdown-item" tabindex="-1"
+                            <a class="megamenu-dropdown-item" tabindex="-1"
+                            data-navbar-menu-item="{{label}}"
+                            {{#if event}}
+                            href="javascript:void(0);"
+                            data-event="{{event}}"
+                            track="click:{{event}}"
+                            {{else}}
+                            href="{{route}}"
+                            data-route="{{route}}"
+                            {{#if openwindow}}
+                            data-openwindow="true"
+                            {{/if}}
+                            track="click:{{route}}"
+                            {{/if}}
+                            >
+                            {{#if icon}}
+                                <i class="{{buildIcon icon}}"></i>
+                            {{/if}}
+                            <span class="text-overflow">
+                                {{#if label_module}}
+                                    {{str label label_module}}
+                                {{else}}
+                                    {{str label ../../../module}}
+                                {{/if}}
+                            </span>
+                            </a>
+                        </li>
+                    {{/eq}}
+                {{/each}}
+                <li class="divider" data-container="dashboards"></li>
+                <li class="divider" data-container="recently-viewed"></li>
+            </ul>
+        </div>
     {{/if}}
 {{/if}}

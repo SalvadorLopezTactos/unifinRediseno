@@ -94,7 +94,7 @@ class Elastic extends Search
 
             // add url
             if ($this->platform == 'portal') {
-                $platform = 'portal/index.html';
+                $platform = 'portal/index.php';
             } else {
                 $platform = '';
             }

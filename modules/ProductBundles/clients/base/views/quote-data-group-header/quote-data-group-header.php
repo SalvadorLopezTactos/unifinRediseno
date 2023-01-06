@@ -14,13 +14,13 @@ $viewdefs['ProductBundles']['base']['view']['quote-data-group-header'] = array(
         array(
             'type' => 'quote-data-actiondropdown',
             'name' => 'create-dropdown',
-            'icon' => 'fa-plus',
+            'icon' => 'sicon-plus',
             'no_default_action' => true,
             'buttons' => array(
                 array(
                     'type' => 'rowaction',
                     'css_class' => 'btn-invisible',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_qli_button',
                     'label' => 'LBL_CREATE_QLI_BUTTON_LABEL',
                     'tooltip' => 'LBL_CREATE_QLI_BUTTON_TOOLTIP',
@@ -29,7 +29,7 @@ $viewdefs['ProductBundles']['base']['view']['quote-data-group-header'] = array(
                 array(
                     'type' => 'rowaction',
                     'css_class' => 'btn-invisible',
-                    'icon' => 'fa-plus',
+                    'icon' => 'sicon-plus',
                     'name' => 'create_comment_button',
                     'label' => 'LBL_CREATE_COMMENT_BUTTON_LABEL',
                     'tooltip' => 'LBL_CREATE_COMMENT_BUTTON_TOOLTIP',
@@ -40,7 +40,7 @@ $viewdefs['ProductBundles']['base']['view']['quote-data-group-header'] = array(
         array(
             'type' => 'quote-data-actiondropdown',
             'name' => 'edit-dropdown',
-            'icon' => 'fa-ellipsis-v',
+            'icon' => 'sicon-kebab',
             'no_default_action' => true,
             'buttons' => array(
                 array(

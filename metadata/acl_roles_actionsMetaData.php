@@ -74,14 +74,6 @@ $dictionary['acl_roles_actions'] = array(
                 'access_override',
             ),
         ),
-        array(
-            'name' => 'idx_aclrole_action',
-            'type' => 'alternate_key',
-            'fields' => array(
-                'role_id',
-                'action_id',
-            ),
-        ),
     ),
     'relationships' => array(
         'acl_roles_actions' => array(

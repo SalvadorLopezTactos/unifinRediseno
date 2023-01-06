@@ -16,13 +16,13 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LNK_NEW_SHIPPER',
         'acl_action'=>'',
         'acl_module'=>'',
-        'icon' => '',
+        'icon' => 'sicon-plus',
     ),
     array(
         'route'=>'#TaxRates/create',
         'label' =>'LNK_NEW_TAXRATE',
         'acl_action'=>'',
         'acl_module'=>'',
-        'icon' => '',
+        'icon' => 'sicon-plus',
     ),
 );

@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,18 +18,50 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DeviceComplianceActionItem extends Entity
 {
     /**
+    * Gets the actionType
+    * What action to take. Possible values are: noAction, notification, block, retire, wipe, removeResourceAccessProfiles, pushNotification, remoteLock.
+    *
+    * @return DeviceComplianceActionType|null The actionType
+    */
+    public function getActionType()
+    {
+        if (array_key_exists("actionType", $this->_propDict)) {
+            if (is_a($this->_propDict["actionType"], "\Microsoft\Graph\Model\DeviceComplianceActionType") || is_null($this->_propDict["actionType"])) {
+                return $this->_propDict["actionType"];
+            } else {
+                $this->_propDict["actionType"] = new DeviceComplianceActionType($this->_propDict["actionType"]);
+                return $this->_propDict["actionType"];
+            }
+        }
+        return null;
+    }
+    
+    /**
+    * Sets the actionType
+    * What action to take. Possible values are: noAction, notification, block, retire, wipe, removeResourceAccessProfiles, pushNotification, remoteLock.
+    *
+    * @param DeviceComplianceActionType $val The actionType
+    *
+    * @return DeviceComplianceActionItem
+    */
+    public function setActionType($val)
+    {
+        $this->_propDict["actionType"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the gracePeriodHours
     * Number of hours to wait till the action will be enforced. Valid values 0 to 8760
     *
-    * @return int The gracePeriodHours
+    * @return int|null The gracePeriodHours
     */
     public function getGracePeriodHours()
     {
@@ -56,72 +87,10 @@ class DeviceComplianceActionItem extends Entity
     }
     
     /**
-    * Gets the actionType
-    * What action to take. Possible values are: noAction, notification, block, retire, wipe, removeResourceAccessProfiles, pushNotification.
-    *
-    * @return DeviceComplianceActionType The actionType
-    */
-    public function getActionType()
-    {
-        if (array_key_exists("actionType", $this->_propDict)) {
-            if (is_a($this->_propDict["actionType"], "Microsoft\Graph\Model\DeviceComplianceActionType")) {
-                return $this->_propDict["actionType"];
-            } else {
-                $this->_propDict["actionType"] = new DeviceComplianceActionType($this->_propDict["actionType"]);
-                return $this->_propDict["actionType"];
-            }
-        }
-        return null;
-    }
-    
-    /**
-    * Sets the actionType
-    * What action to take. Possible values are: noAction, notification, block, retire, wipe, removeResourceAccessProfiles, pushNotification.
-    *
-    * @param DeviceComplianceActionType $val The actionType
-    *
-    * @return DeviceComplianceActionItem
-    */
-    public function setActionType($val)
-    {
-        $this->_propDict["actionType"] = $val;
-        return $this;
-    }
-    
-    /**
-    * Gets the notificationTemplateId
-    * What notification Message template to use
-    *
-    * @return string The notificationTemplateId
-    */
-    public function getNotificationTemplateId()
-    {
-        if (array_key_exists("notificationTemplateId", $this->_propDict)) {
-            return $this->_propDict["notificationTemplateId"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the notificationTemplateId
-    * What notification Message template to use
-    *
-    * @param string $val The notificationTemplateId
-    *
-    * @return DeviceComplianceActionItem
-    */
-    public function setNotificationTemplateId($val)
-    {
-        $this->_propDict["notificationTemplateId"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the notificationMessageCCList
     * A list of group IDs to speicify who to CC this notification message to.
     *
-    * @return string The notificationMessageCCList
+    * @return string|null The notificationMessageCCList
     */
     public function getNotificationMessageCCList()
     {
@@ -143,6 +112,35 @@ class DeviceComplianceActionItem extends Entity
     public function setNotificationMessageCCList($val)
     {
         $this->_propDict["notificationMessageCCList"] = $val;
+        return $this;
+    }
+    
+    /**
+    * Gets the notificationTemplateId
+    * What notification Message template to use
+    *
+    * @return string|null The notificationTemplateId
+    */
+    public function getNotificationTemplateId()
+    {
+        if (array_key_exists("notificationTemplateId", $this->_propDict)) {
+            return $this->_propDict["notificationTemplateId"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the notificationTemplateId
+    * What notification Message template to use
+    *
+    * @param string $val The notificationTemplateId
+    *
+    * @return DeviceComplianceActionItem
+    */
+    public function setNotificationTemplateId($val)
+    {
+        $this->_propDict["notificationTemplateId"] = $val;
         return $this;
     }
     

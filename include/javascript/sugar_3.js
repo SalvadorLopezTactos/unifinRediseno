@@ -819,7 +819,7 @@ function add_error_style(formname, input, txt, flash) {
 
     errorTextNode = document.createElement('div');
     errorTextNode.className = REQUIRED_VALIDATION_MESSAGE_CLASS;
-    errorTextNode.innerHTML = txt;
+        errorTextNode.textContent = txt;
     if ( inputHandle.parentNode.className.indexOf('x-form-field-wrap') != -1 ) {
         inputHandle.parentNode.parentNode.appendChild(errorTextNode);
     }
@@ -1556,14 +1556,6 @@ function setPointer(theRow, theRowNum, theAction, theDefaultColor, thePointerCol
 
     return true;
 } // end of the 'setPointer()' function
-
-
-/**
-  * listbox redirection
-  */
-function goToUrl(selObj, goToLocation) {
-    eval("document.location.href = '" + goToLocation + "pos=" + selObj.options[selObj.selectedIndex].value + "'");
-}
 
 
 
@@ -3773,41 +3765,41 @@ SUGAR.tabChooser = function () {
 				}
 			},
 
-			buildSelectHTML: function(info) {
-				var text = "<select";
+        buildSelectHTML: function(info) {
+            let select = document.createElement('select');
+            if (typeof (info.select.size) != 'undefined') {
+                select.size = info.select.size;
+            }
 
-		        if(typeof (info['select']['size']) != 'undefined') {
-		                text +=" size=\""+ info['select']['size'] +"\"";
-		        }
+            if (typeof (info.select.name) != 'undefined') {
+                select.name = info.select.name;
+            }
 
-		        if(typeof (info['select']['name']) != 'undefined') {
-		                text +=" name=\""+ info['select']['name'] +"\"";
-		        }
+            if (typeof (info.select.style) != 'undefined') {
+                select.style = info.select.style;
+            }
 
-		        if(typeof (info['select']['style']) != 'undefined') {
-		                text +=" style=\""+ info['select']['style'] +"\"";
-		        }
+            if (typeof (info.select.onchange) != 'undefined') {
+                select.onchange = info.select.onchange;
+            }
 
-		        if(typeof (info['select']['onchange']) != 'undefined') {
-		                text +=" onChange=\""+ info['select']['onchange'] +"\"";
-		        }
+            if (typeof (info.select.multiple) != 'undefined') {
+                select.multiple = true;
+            }
 
-		        if(typeof (info['select']['multiple']) != 'undefined') {
-		                text +=" multiple";
-		        }
-		        text +=">";
-
-		        for(i=0; i<info['options'].length;i++) {
-		                option = info['options'][i];
-		                text += "<option value=\""+option['value']+"\" ";
-		                if ( typeof (option['selected']) != 'undefined' && option['selected']== true) {
-		                        text += "SELECTED";
-		                }
-		                text += ">"+option['text']+"</option>";
-		        }
-		        text += "</select>";
-		        return text;
-			},
+            for (let i = 0; i < info.options.length; i++) {
+                let option = info.options[i];
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                if (typeof (option.selected) != 'undefined' && option.selected == true) {
+                    opt.selected = true;
+                }
+                const textNode = document.createTextNode(option.text);
+                opt.appendChild(textNode);
+                select.appendChild(opt);
+            }
+            return select.outerHTML;
+        },
 
 			left_to_right: function(left_name, right_name, left_size, right_size) {
 				SUGAR.savedViews.clearColumns = false;

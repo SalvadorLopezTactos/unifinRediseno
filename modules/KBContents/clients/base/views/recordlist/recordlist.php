@@ -19,7 +19,7 @@ $viewdefs['KBContents']['base']['view']['recordlist'] = array(
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
-                'icon' => 'fa-eye',
+                'icon' => 'sicon-preview',
                 'acl_action' => 'view',
             ),
             array(

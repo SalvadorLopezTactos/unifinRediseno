@@ -26,6 +26,7 @@ $viewdefs['ProductTemplates']['base']['filter']['default'] = array(
         'url' => array(),
         'support_term' => array(),
         'tag' => array(),
+        'active_status' => [],
         '$favorite' => array(
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',

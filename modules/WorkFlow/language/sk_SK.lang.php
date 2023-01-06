@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Pracovný postup'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Typ',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Poznámka:</strong> Funkcie Sugar Workflow a Workflow Management sú v režime údržby. Zákazníci s vydaním Sugar Enterprise by mali používať funkcie, ktoré poskytuje SugarBPM<sup class="trademark">TM</sup>.',
 );
 

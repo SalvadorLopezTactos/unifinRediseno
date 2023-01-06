@@ -45,13 +45,6 @@ $dictionary['contacts_dataprivacy'] = array(
             ),
         ),
         array(
-            'name' => 'idx_con_dataprivacy_con',
-            'type' => 'index',
-            'fields' => array(
-                'contact_id',
-            ),
-        ),
-        array(
             'name' => 'idx_con_dataprivacy_dataprivacy',
             'type' => 'index',
             'fields' => array(

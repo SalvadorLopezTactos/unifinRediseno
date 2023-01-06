@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'Contact-Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Beschrijving',
     'LBL_DESCRIPTION' => 'Beschrijving:',
+    'LBL_INTERNAL_NOTES' => 'Interne aantekeningen:',
     'LBL_STATUS' => 'Status:',
     'LBL_DIRECTION' => 'Richting:',
     'LBL_DATE' => 'Begindatum:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Tijdsduur moet groter zijn dan 0',
     'LBL_CALL_INFORMATION' => 'Overzicht',
     'LBL_REMOVE' => 'Verwijderen',
-    'LBL_ACCEPT_STATUS' => 'Acceptatiestatus',
     'LBL_ACCEPT_LINK' => 'Acceptatie Link',
     //For export labels
     'LBL_PARENT_ID' => 'Bovenliggende ID',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Telefoongesprek:',
     'LBL_CALL_RECORDING_URL' => 'URL opname',
     'LBL_CALL_RECORDING' => 'Opname',
+
+    'LBL_LEAD_ID' => 'Lead ID',
+    'LBL_LEAD_NAME' => 'Lead',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'U heeft {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> succesvol aangemaakt.',

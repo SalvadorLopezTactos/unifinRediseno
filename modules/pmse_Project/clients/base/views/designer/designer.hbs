@@ -24,7 +24,7 @@
     /* TODO remove this section and put in the sass file */
     #ProjectTitle {
         font-family: Arial,Verdana,Helvetica,sans-serif;
-        color: #000000;
+        color: var(--text-color);
         font-weight: bold;
         font-size: 15px;
         margin: 2px 0 0 0;
@@ -52,14 +52,15 @@
         width: 28px;
         height: 28px;
         margin: 0 5px 0 0;
-        border: 1px solid #ccc;
+        border: 1px solid var(--border-color);
         border-radius: 3px;
         display: block;
         float: left;
         position: relative;
         text-align: center;
-        background-color: #f6f6f6;
+        background-color: var(--btn-background);
     }
+
     .navbtn.mod {
         color: white;
         font-family: Helvetica;
@@ -69,9 +70,15 @@
         text-align: left;
     }
     .navbtn > [class*="fa-"] {
+        color: var(--sicon-color);
         font-size: 1.35em;
         line-height: 1.75em;
     }
+
+    .navbtn:hover > [class*="fa-"] {
+        color: var(--sicon-hover-color);
+    }
+
     .navbtn .fa-rotate-45 {
         -webkit-transform: rotate(45deg);
         -moz-transform: rotate(45deg);
@@ -110,10 +117,6 @@
     /* Documents */
     .navbtn.documents {
         background-color: #6F1C0B;
-    }
-    /* Undo, Redo, Save */
-    .navbtn i[class*="-off"] {
-        color: #ccc;
     }
 
     .navdiv {
@@ -165,7 +168,7 @@
 <!--RECIPES HTML BEGINNIG-->
 <div id="container">
     <div class="pane ui-layout-center">
-        <div id="jcore_designer" style='background-image: url("modules/pmse_Project/img/grid_20.png");'></div>
+        <div id="jcore_designer" style='background-image: url("{{this.designerBackgroundImage}}");'></div>
     </div>
     <div id="Error-pane" class="pane ui-layout-south">
         <div id="refreshing-errors">{{str "LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST" this.module}}</div>
@@ -180,12 +183,12 @@
             </tbody>
         </table>
     </div>
-    <div class="pane ui-layout-north no-border" style="background-color: #f6f6f6;">
+    <div class="pane ui-layout-north no-border" style="background-color: var(--headerpane-background);">
         <div id="adam_toolbar">
             <div class="pmse-toolbar-buttons">
 
                 <!-- Other Modules -->
-                <span id="AdamEventOtherModule" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT" this.module}}" class="navbtn othermods"><i class="fa fa-cube"></i></span>
+                <span id="AdamEventOtherModule" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT" this.module}}" class="navbtn othermods"><i class="fa fa-play-circle"></i></span>
 
                 <span class="navdiv"></span>
 

@@ -119,7 +119,7 @@ class SugarWidgetReportField extends SugarWidgetField
             $currency = $this->reporter->currency_obj;
             $currency_alias = isset($layout_def['currency_alias'])
                 ? $layout_def['currency_alias'] : $currency->table_name;
-            $query = $this->reporter->db->convert($currency_alias.".conversion_rate", "IFNULL", array(1));
+                $query = $this->getCurrencyRateQuery($layout_def, $currency_alias);
             // We need to use convert() for AVG because of Oracle
             if ($layout_def['group_function'] != 'avg') {
                 $alias = "{$layout_def['group_function']}($alias/{$query})";
@@ -151,6 +151,65 @@ class SugarWidgetReportField extends SugarWidgetField
 	return $this->_get_column_select($layout_def)." \n";
  }
 
+    /**
+     * Checks if base rate exists in report bean, returns def if it exists
+     *
+     * @param array $layoutDef
+     * @return array
+     */
+    protected function getBaseRateDef(array $layoutDef) : array
+    {
+        $baseRateDef = [];
+        if (!empty($layoutDef['table_key'])) {
+            $baseRateDef = $this->reporter->full_bean_list[$layoutDef['table_key']]
+                    ->field_defs['base_rate'] ?? [];
+        }
+        return $baseRateDef;
+    }
+
+    /**
+     * Determines what table the base_rate field for the report bean lives
+     *
+     * @param array $baseRateDef the Report's base_rate field definition
+     * @param array $layoutDef the Report column's definition
+     * @return string
+     */
+    protected function getBaseRateTable(array $baseRateDef, array $layoutDef)
+    {
+        // Check whether the base_rate field is in the base table or the custom
+        // table of the module
+        $baseRateTable = $this->reporter->getTableFromField($layoutDef);
+        if (isset($baseRateDef['source']) && $baseRateDef['source'] === 'custom_fields') {
+            $baseRateTable .= '_cstm';
+        }
+
+        return $baseRateTable;
+    }
+
+    /**
+     * Returns currency conversion rate query
+     *
+     * @param array $layoutDef
+     * @param string $currencyAlias
+     * @return string
+     */
+    protected function getCurrencyRateQuery(array $layoutDef, string $currencyAlias) : string
+    {
+        // By default, use the rate from the currencies table
+        $rate = $currencyAlias . '.conversion_rate';
+
+        // If there is a base rate field in this module, use that instead
+        $baseRateDef = $this->getBaseRateDef($layoutDef);
+        if ($baseRateDef) {
+            $rate = $this->getBaseRateTable($baseRateDef, $layoutDef) . '.base_rate';
+        }
+
+        return $this->reporter->db->convert(
+            $rate,
+            'IFNULL',
+            array(1)
+        );
+    }
 
     /**
      * Returns ORDER BY for given layout_def

@@ -38,16 +38,16 @@ $timedate = TimeDate::getInstance();
 setPhpIniSettings();
 $locale = Localization::getObject();
 
-$GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
+$GLOBALS['log'] = LoggerManager::getLogger();
 $setup_sugar_version = $sugar_version;
 $install_script = true;
 
 ///////////////////////////////////////////////////////////////////////////////
 //// INSTALL RESOURCE SETUP
 $css = 'install/install.css';
-$icon = 'include/images/sugar_icon.ico';
+$icon = 'include/images/sugar_favicon.png';
 $sugar_md = 'include/images/sugar_md_ent.png';
-$loginImage = 'include/images/sugarcrm_login.png';
+$loginImage = 'themes/default/images/company_logo.png';
 $common = 'install/installCommon.js';
 
 //Make sure the TrackerManager is paused on install
@@ -265,7 +265,7 @@ $langHeader = get_language_header();
    <meta http-equiv="Content-Style-Type" content="text/css">
    <meta http-equiv="Refresh" content="1; url=install.php?goto=SilentInstall&cli=true">
    <title>{$mod_strings['LBL_WIZARD_TITLE']} {$mod_strings['LBL_TITLE_WELCOME']} {$setup_sugar_version} {$mod_strings['LBL_WELCOME_SETUP_WIZARD']}</title>
-   <link REL="SHORTCUT ICON" HREF="{$icon}">
+   <link REL="SHORTCUT ICON" type="image/png" HREF="{$icon}">
    <link rel="stylesheet" href="{$css}" type="text/css">
 </head>
 <body>
@@ -279,7 +279,10 @@ $langHeader = get_language_header();
 		</p>
 		{$mod_strings['LBL_TITLE_WELCOME']} {$setup_sugar_version} {$mod_strings['LBL_WELCOME_SETUP_WIZARD']}</th>
 
-      <th width="200" height="30" style="text-align: right;"><a href="http://www.sugarcrm.com" target="_blank"><IMG src="{$loginImage}" alt="SugarCRM" border="0"></a>
+      <th width="200" height="30" style="text-align: right;">
+        <a href="http://www.sugarcrm.com" target="_blank">
+            <img src="{$loginImage}" alt="SugarCRM" border="0" class="sugarcrm-logo" style="max-height: 1.25rem;">
+        </a>
       </th>
     </tr>
     <tr>
@@ -315,114 +318,126 @@ EOQ;
 else{
 $validation_errors = array();
 // process the data posted
-if($next_clicked) {
-	// store the submitted data because the 'Next' button was clicked
-    switch($workflow[trim($_REQUEST['current_step'])]) {
-        case 'welcome.php':
-        	$_SESSION['language'] = $_REQUEST['language'];
-   			$_SESSION['setup_site_admin_user_name'] = 'admin';
-        break;
-      case 'license.php':
-                $_SESSION['setup_license_accept']   = get_boolean_from_request('setup_license_accept');
-                $_SESSION['license_submitted']      = true;
-
-
-           // eventually default all vars here, with overrides from config.php
-            if(is_readable('config.php')) {
-            	global $sugar_config;
-                include_once('config.php');
-            }
-
-            $default_db_type = 'mysql';
-
-            if(!isset($_SESSION['setup_db_type'])) {
-                $_SESSION['setup_db_type'] = empty($sugar_config['dbconfig']['db_type']) ? $default_db_type : $sugar_config['dbconfig']['db_type'];
-            }
-
-            break;
-        case 'installType.php':
-            $_SESSION['install_type']   = $_REQUEST['install_type'];
-            if(isset($_REQUEST['setup_license_key']) && !empty($_REQUEST['setup_license_key'])){
-                $_SESSION['setup_license_key']  = $_REQUEST['setup_license_key'];
-            }
-            $_SESSION['licenseKey_submitted']      = true;
-
-            break;
-
-        case 'systemOptions.php':
-            if(isset($_REQUEST['setup_db_type'])) {
-              $_SESSION['setup_db_type'] = $_REQUEST['setup_db_type'];
-            }
-            $validation_errors = validate_systemOptions();
-            if(count($validation_errors) > 0) {
-                $next_step--;
-            }
-            break;
-
-        case 'dbConfig_a.php':
-            //validation is now done through ajax call to checkDBSettings.php
-            if(isset($_REQUEST['setup_db_drop_tables'])){
-                $_SESSION['setup_db_drop_tables'] = $_REQUEST['setup_db_drop_tables'];
-                if($_SESSION['setup_db_drop_tables']=== true || $_SESSION['setup_db_drop_tables'] == 'true'){
-                    $_SESSION['setup_db_create_database'] = false;
+    if ($next_clicked) {
+        // store the submitted data because the 'Next' button was clicked
+        switch ($workflow[trim($_REQUEST['current_step'])]) {
+            case 'welcome.php':
+                if (!preg_match('~^\w{2,5}$~is', $_REQUEST['language'])) {
+                    throw new \InvalidArgumentException("Invalid language");
                 }
-            }
-            break;
+                $_SESSION['language'] = $_REQUEST['language'];
+                $_SESSION['setup_site_admin_user_name'] = 'admin';
+                break;
+            case 'license.php':
+                $_SESSION['setup_license_accept'] = get_boolean_from_request('setup_license_accept');
+                $_SESSION['license_submitted'] = true;
+                // eventually default all vars here, with overrides from config.php
+                if (is_readable('config.php')) {
+                    global $sugar_config;
+                    include_once 'config.php';
+                }
+                $default_db_type = 'mysql';
+                if (!isset($_SESSION['setup_db_type'])) {
+                    $_SESSION['setup_db_type'] = empty($sugar_config['dbconfig']['db_type']) ? $default_db_type : $sugar_config['dbconfig']['db_type'];
+                }
+                break;
+            case 'installType.php':
+                $validInstallTypes = ['typical', 'custom'];
+                if (!in_array(strtolower($_REQUEST['install_type']), $validInstallTypes)) {
+                    throw new \InvalidArgumentException(sprintf("Only 'typical' and 'custom' are supported install types, '%s' given", $_REQUEST['install_type']));
+                }
+                $_SESSION['install_type'] = $_REQUEST['install_type'];
+                if (!empty($_REQUEST['setup_license_key'])) {
+                    if (!preg_match('~^\w+$~is', $_REQUEST['setup_license_key'])) {
+                        throw new \InvalidArgumentException("The provided license doesn't fit the expected format");
+                    }
+                    $_SESSION['setup_license_key'] = $_REQUEST['setup_license_key'];
+                }
+                $_SESSION['licenseKey_submitted'] = true;
+                break;
 
-        case 'siteConfig_a.php':
-            if(isset($_REQUEST['setup_site_url'])){$_SESSION['setup_site_url']          = $_REQUEST['setup_site_url'];}
-            if(isset($_REQUEST['setup_system_name'])){$_SESSION['setup_system_name']    = $_REQUEST['setup_system_name'];}
-            if(isset($_REQUEST['setup_db_collation'])) {
-                $_SESSION['setup_db_options']['collation'] = $_REQUEST['setup_db_collation'];
-            }
-            $_SESSION['setup_site_admin_user_name']             = $_REQUEST['setup_site_admin_user_name'];
-            $_SESSION['setup_site_admin_password']              = $_REQUEST['setup_site_admin_password'];
-            $_SESSION['setup_site_admin_password_retype']       = $_REQUEST['setup_site_admin_password_retype'];
-            $_SESSION['siteConfig_submitted']               = true;
+            case 'systemOptions.php':
+                if (isset($_REQUEST['setup_db_type'])) {
+                    $validDbTypes = ['mysql', 'mssql', 'db2', 'oci8'];
+                    if (!in_array(strtolower($_REQUEST['setup_db_type']), $validDbTypes)) {
+                        throw new \InvalidArgumentException(sprintf("Only 'mysql', 'mssql', 'db2', 'oci8' are supported db types, '%s' given", $_REQUEST['setup_db_type']));
+                    }
+                    $_SESSION['setup_db_type'] = $_REQUEST['setup_db_type'];
+                }
+                $validation_errors = validate_systemOptions();
+                if (count($validation_errors) > 0) {
+                    $next_step--;
+                }
+                break;
 
-            $validation_errors = array();
-            $validation_errors = validate_siteConfig('a');
-            if(count($validation_errors) > 0) {
-                $next_step--;
-            }
-            break;
-        case 'siteConfig_b.php':
-            $_SESSION['setup_site_sugarbeet_automatic_checks'] = get_boolean_from_request('setup_site_sugarbeet_automatic_checks');
+            case 'dbConfig_a.php':
+                //validation is now done through ajax call to checkDBSettings.php
+                if (isset($_REQUEST['setup_db_drop_tables'])) {
+                    $_SESSION['setup_db_drop_tables'] = $_REQUEST['setup_db_drop_tables'];
+                    if ($_SESSION['setup_db_drop_tables'] === true || $_SESSION['setup_db_drop_tables'] == 'true') {
+                        $_SESSION['setup_db_create_database'] = false;
+                    }
+                }
+                break;
 
-            $_SESSION['setup_site_custom_session_path']     = get_boolean_from_request('setup_site_custom_session_path');
-            if($_SESSION['setup_site_custom_session_path']){
-                $_SESSION['setup_site_session_path']            = $_REQUEST['setup_site_session_path'];
-            }else{
-                $_SESSION['setup_site_session_path'] = '';
-            }
+            case 'siteConfig_a.php':
+                if (isset($_REQUEST['setup_site_url'])) {
+                    $_SESSION['setup_site_url'] = $_REQUEST['setup_site_url'];
+                }
+                if (isset($_REQUEST['setup_system_name'])) {
+                    $_SESSION['setup_system_name'] = $_REQUEST['setup_system_name'];
+                }
+                if (isset($_REQUEST['setup_db_collation'])) {
+                    $_SESSION['setup_db_options']['collation'] = $_REQUEST['setup_db_collation'];
+                }
+                $_SESSION['setup_site_admin_user_name'] = $_REQUEST['setup_site_admin_user_name'];
+                $_SESSION['setup_site_admin_password'] = $_REQUEST['setup_site_admin_password'];
+                $_SESSION['setup_site_admin_password_retype'] = $_REQUEST['setup_site_admin_password_retype'];
+                $_SESSION['siteConfig_submitted'] = true;
 
-            $_SESSION['setup_site_custom_log_dir']          = get_boolean_from_request('setup_site_custom_log_dir');
-            if($_SESSION['setup_site_custom_log_dir']){
-                $_SESSION['setup_site_log_dir']                 = $_REQUEST['setup_site_log_dir'];
-            }else{
-                $_SESSION['setup_site_log_dir'] = '.';
-            }
+                $validation_errors = array();
+                $validation_errors = validate_siteConfig('a');
+                if (count($validation_errors) > 0) {
+                    $next_step--;
+                }
+                break;
+            case 'siteConfig_b.php':
+                $_SESSION['setup_site_sugarbeet_automatic_checks'] = get_boolean_from_request('setup_site_sugarbeet_automatic_checks');
 
-            $_SESSION['setup_site_specify_guid']            = get_boolean_from_request('setup_site_specify_guid');
-            if($_SESSION['setup_site_specify_guid']){
-                $_SESSION['setup_site_guid']                    = $_REQUEST['setup_site_guid'];
-            }else{
-                $_SESSION['setup_site_guid'] = '';
-            }
-            $_SESSION['siteConfig_submitted']               = true;
-            if(isset($_REQUEST['setup_site_sugarbeet_anonymous_stats'])){
-                $_SESSION['setup_site_sugarbeet_anonymous_stats'] = get_boolean_from_request('setup_site_sugarbeet_anonymous_stats');
-            }else{
-                $_SESSION['setup_site_sugarbeet_anonymous_stats'] = 0;
-            }
+                $_SESSION['setup_site_custom_session_path'] = get_boolean_from_request('setup_site_custom_session_path');
+                if ($_SESSION['setup_site_custom_session_path']) {
+                    $_SESSION['setup_site_session_path'] = $_REQUEST['setup_site_session_path'];
+                } else {
+                    $_SESSION['setup_site_session_path'] = '';
+                }
 
-            $validation_errors = array();
-            $validation_errors = validate_siteConfig('b');
-            if(count($validation_errors) > 0) {
-                $next_step--;
-            }
-            break;
-}
+                $_SESSION['setup_site_custom_log_dir'] = get_boolean_from_request('setup_site_custom_log_dir');
+                if ($_SESSION['setup_site_custom_log_dir']) {
+                    $_SESSION['setup_site_log_dir'] = $_REQUEST['setup_site_log_dir'];
+                } else {
+                    $_SESSION['setup_site_log_dir'] = '.';
+                }
+
+                $_SESSION['setup_site_specify_guid'] = get_boolean_from_request('setup_site_specify_guid');
+                if ($_SESSION['setup_site_specify_guid']) {
+                    $_SESSION['setup_site_guid'] = $_REQUEST['setup_site_guid'];
+                } else {
+                    $_SESSION['setup_site_guid'] = '';
+                }
+                $_SESSION['siteConfig_submitted'] = true;
+                if (isset($_REQUEST['setup_site_sugarbeet_anonymous_stats'])) {
+                    $_SESSION['setup_site_sugarbeet_anonymous_stats'] = get_boolean_from_request('setup_site_sugarbeet_anonymous_stats');
+                } else {
+                    $_SESSION['setup_site_sugarbeet_anonymous_stats'] = 0;
+                }
+
+                $validation_errors = array();
+                $validation_errors = validate_siteConfig('b');
+                if (count($validation_errors) > 0) {
+                    $next_step--;
+                }
+                break;
+        }
     }
 
 if($next_step == 9999) {
@@ -495,7 +510,7 @@ EOQ;
             $sugar_config['unique_key'] = get_unique_key();
         }
 
-        $db_errors = validate_dbConfig('a');
+            $db_errors = validate_dbConfig();
         if(count($db_errors) > 0) {
             $the_file = 'dbConfig_a.php';
             $si_errors = true;

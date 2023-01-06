@@ -67,6 +67,7 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
                     'type' => 'divider',
                 ),
                 array(
+                    'module' => 'Quotes',
                     'type' => 'convert-to-opportunity',
                     'event' => 'button:convert_to_opportunity:click',
                     'name' => 'convert_to_opportunity_button',

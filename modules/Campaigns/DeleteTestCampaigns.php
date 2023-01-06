@@ -47,6 +47,11 @@ function deleteTestRecords($focus)
                 $focus->db->query("DELETE FROM emails_text WHERE email_id IN (".$joinedIds.")");
                 $focus->db->query("DELETE FROM folders_rel WHERE polymorphic_module = 'Emails' AND
                 polymorphic_id IN (".$joinedIds.")");
+                        $email_bean = BeanFactory::newBean('Emails');
+                        $email_bean_cstm = $email_bean->get_custom_table_name();
+                        if (DBManagerFactory::getInstance()->tableExists($email_bean_cstm)) {
+                            $focus->db->query("DELETE FROM " . $email_bean_cstm . " WHERE id_c IN (".$joinedIds.")");
+                        }
     }
 
     if(!empty($test_list_ids)) {

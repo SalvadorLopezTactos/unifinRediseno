@@ -16,10 +16,9 @@
         {{#each value}}
         <li class="select2-search-choice">
             <div>
-                <span class="select2-choice-type">
+                <span class="select2-choice-type" rel="tooltip" data-original-title="{{fileName}}{{fileExt}}">
                     <a class="ellipsis_inline multi-attachment-link"
                        data-placement="bottom"
-                       title="{{name}}"
                        href="{{url}}"
                        data-url="{{url}}"
                        target="_blank">{{fileName}}
@@ -35,7 +34,7 @@
         {{#if value}}
         <li>
             <button class="btn-link btn-invisible multi-attach-download-all-btn" data-action="download-all">
-                <i class="fa fa-download"></i>{{str this.download_label this.module}}
+                <i class="sicon sicon-download"></i>{{str this.download_label this.module}}
             </button>
         </li>
         {{/if}}

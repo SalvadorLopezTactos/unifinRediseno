@@ -63,7 +63,14 @@ class CalendarActivity {
 			if(empty($mins)){
 			    $mins = 0;
 			}
-			$this->end_time = $this->start_time->get("+$hours hours $mins minutes");
+
+            // If the duration is blank but we have an end date, then just use that end date
+            // directly without any calculations
+            if (empty($hours) && empty($mins) && !empty($this->sugar_bean->date_end)) {
+                $this->end_time = $timedate->fromDb($this->sugar_bean->date_end);
+            } else {
+                $this->end_time = $this->start_time->get("+$hours hours $mins minutes");
+            }
 		}
 		// Convert it back to database time so we can properly manage it for getting the proper start and end dates
 		$timedate->tzGMT($this->start_time);
@@ -76,18 +83,18 @@ class CalendarActivity {
 	 * @param string $rel_table table for accept status, not used in Tasks
 	 * @param SugarDateTime $start_ts_obj start date
 	 * @param SugarDateTime $end_ts_obj end date
-	 * @param string $field_name date field in table
+     * @param string $field_name date field in table (default: date_start)
 	 * @param string $view view; not used for now, left for compatibility
 	 * @return string
 	 */
     public static function get_occurs_within_where_clause(
-        $table_name,
-        $rel_table,
-        $start_ts_obj,
-        $end_ts_obj,
-        $field_name = 'date_start',
-        $view
-    ) {
+        string $table_name,
+        string $rel_table,
+        SugarDateTime $start_ts_obj,
+        SugarDateTime $end_ts_obj,
+        string $field_name,
+        string $view
+    ): string {
         global $timedate;
 
 		$start = clone $start_ts_obj;
@@ -138,16 +145,18 @@ class CalendarActivity {
 		return $act_list;
 	}
 
-	/**
-	 * Get array of activities
-	 * @param string $user_id
-	 * @param boolean $show_tasks
-	 * @param SugarDateTime $view_start_time start date
-	 * @param SugarDateTime $view_end_time end date
-	 * @param string $view view; not used for now, left for compatibility
-	 * @param boolean $show_calls
-	 * @return array
-	 */
+    /**
+     * Get array of activities
+     * @param string $user_id
+     * @param boolean $show_tasks
+     * @param SugarDateTime $view_start_time start date
+     * @param SugarDateTime $view_end_time end date
+     * @param string $view view; not used for now, left for compatibility
+     * @param boolean $show_calls
+     * @param bool $fill_additional_column_fields
+     * @param bool $show_messages
+     * @return array
+     */
     public static function get_activities(
         $user_id,
         $show_tasks,
@@ -155,7 +164,8 @@ class CalendarActivity {
         $view_end_time,
         $view,
         $show_calls = true,
-		$fill_additional_column_fields = true
+        $fill_additional_column_fields = true,
+        $show_messages = true
     ) {
 		global $current_user;
 		$act_list = array();
@@ -236,6 +246,48 @@ class CalendarActivity {
 				}
 			}
 		}
+
+        if ($show_messages &&
+            ACLController::checkAccess('Messages', 'list', $current_user->id === $user_id)
+        ) {
+            $message_bean = BeanFactory::newBean('Messages');
+
+            if ($current_user->id  == $user_id) {
+                $message_bean->disable_row_level_security = true;
+            }
+
+            $where = CalendarActivity::get_occurs_within_where_clause(
+                $message_bean->table_name,
+                $message_bean->rel_users_table,
+                $view_start_time,
+                $view_end_time,
+                'date_start',
+                $view,
+            );
+            $focus_messages_list = build_related_list_by_user_id(
+                $message_bean,
+                $user_id,
+                $where,
+                $fill_additional_column_fields,
+            );
+
+            foreach ($focus_messages_list as $message) {
+                if (isset($seen_ids[$message->id])) {
+                    continue;
+                }
+
+                $seen_ids[$message->id] = 1;
+                $act = new CalendarActivity($message);
+
+                if (!empty($act)) {
+                    // Use UTC formatted start and end date as key, this makes for easier sorting
+                    $message_key = $act->start_time->format('Ymd\THi00\Z') . '/';
+                    $message_key .= $act->end_time->format('Ymd\THi00\Z') . '/';
+                    $message_key .= $act->sugar_bean->id;
+                    $act_list[$message_key] = $act;
+                }
+            }
+        }
 
         //recreate list of sorted calendar activities to return
         ksort($act_list);

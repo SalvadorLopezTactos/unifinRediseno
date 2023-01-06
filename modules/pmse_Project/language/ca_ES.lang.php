@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Creat per usuari',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Modificat per darrera vegada per usuari',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Correu electrònic del sistema',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Plantilla de document',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Combinació de documents',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Selecciona...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Combinació de documents en PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Combinació de documents',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Norma empresarial',
     'LBL_PMSE_LABEL_RULE' => 'Norma',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Només registres actualitzats (Totes les actualitzacions - Veure text d&#39;Ajuda)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nous registres o primera actualització',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nous registres i totes les actualitzacions',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Canvi de relació',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleccioneu quan començarà el procés.<br><br>Nou: Executa el procés quan es crea un nou registre.<br><br>Primera actualització: Executa el procés només la primera vegada que es compleixen els criteris per a un registre existent.<br><br>Totes les actualitzacions: Executa el procés cada vegada que es compleixen els criteris per a un registre existent<br><br>Nous registres o primera actualització: Executa el procés només la primera vegada que es compleixen els criteris per a un registre, durant la seva creació o actualització.<br><br>Nous registres i totes les actualitzacions: Executa el procés cada vegada per a tots els registres nous i les actualitzacions.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleccioneu quan començarà el procés.<br><br>Nou: Executa el procés quan es crea un nou registre.<br><br>Primera actualització: Executa el procés només la primera vegada que es compleixen els criteris per a un registre existent.<br><br>Totes les actualitzacions: Executa el procés cada vegada que es compleixen els criteris per a un registre existent<br><br>Nous registres o primera actualització: Executa el procés només la primera vegada que es compleixen els criteris per a un registre, durant la seva creació o actualització.<br><br>Nous registres i totes les actualitzacions: Executa el procés cada vegada per a tots els registres nous i les actualitzacions.<br><br>Canvis de relació: Executa el procés cada vegada que hi ha un canvi de relació.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Seleccioneu el mòdul SugarCRM per aplicar l&#39;activador d&#39;esdeveniments',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Data fixa',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'Error',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Avaluació del canvi de relació',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Camps',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Avaluació de camps de mòduls',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Mòdul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Tots els registres relacionats',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Qualsevol registre relacionat',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Afegit',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Suprimit',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Afegit o suprimit',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Qualsevol relació',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Temps d´execució',
 

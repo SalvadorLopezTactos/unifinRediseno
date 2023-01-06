@@ -18,16 +18,20 @@ table.edit.view td.bg-white {
     background-color: #FFFFFF;
 }
 
+table.edit.view td {
+  background-color: var(--primary-content-background);
+}
+
 table.edit.view td.title {
-    background-color: #EFEFEF;
-    color: #343434;
+    background-color: var(--primary-content-background);
+    color: var(--text-color);
     padding: 0 !important;
     margin: 0 !important;
+    border: 1px solid var(--border-color);
 }
 
 table.edit.view td.title.active {
-    background-color: #A0E8FB;
-    color: #1E5563;
+    background-color: var(--primary-content-active);
 }
 
 table.edit.view td.title div.tba-container {

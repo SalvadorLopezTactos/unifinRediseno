@@ -66,14 +66,14 @@
             <td valign="top" scope="row" width="15%" NOWRAP>
                 <slot>{MOD.LBL_EMAIL_PROVIDER}: <span class="required">{APP.LBL_REQUIRED_SYMBOL}</span>&nbsp;</slot></td>
             <td valign="top" colspan="3">
-                <slot><select name='email_provider' id="email_provider" onchange="toggle_email_provider();" {IE_DISABLED}>{EMAIL_PROVIDER}</select></slot></td>
+                <slot><select name='email_provider' id="email_provider" onchange="toggle_email_provider(true);" {IE_DISABLED}>{EMAIL_PROVIDER}</select></slot></td>
         </tr>
         <tr id="prefill">
             <td colspan="4"><br/><a href="javascript:void(0);" id="prefill_gmail_defaults_link" onclick="javascript:prefillGmailDefaults();">{APP.LBL_EMAIL_ACCOUNTS_GMAIL_DEFAULTS}</a>&nbsp;</td>
         </tr>
         <tr id="auth_block" style="display:none">
             <td colspan="4">
-                <div id="auth_warning" style="background-color:rgba(255,212,208,0.4);color:#BA0F1B;font-weight:bold;padding:5px;margin:2px">
+                <div id="auth_warning" style="color:#BA0F1B;font-weight:bold;padding:5px;margin:2px">
                 Placeholder
                 </div>
                 <button type="button" id="auth_button" name="auth_button" style="padding:5px;margin:10px 2px" onclick="authorize();">{APP.LBL_EMAIL_AUTHORIZE}</button>
@@ -291,7 +291,7 @@ function save_form_data() {
     return checkformdata();
 }
 
-function toggle_email_provider() {
+function toggle_email_provider(resetFields) {
     var provider = document.getElementById('EditView').email_provider.value;
     if (authInfo[provider]) {
         document.getElementById('EditView').auth_type.value = 'oauth2';
@@ -334,7 +334,7 @@ function toggle_email_provider() {
         document.getElementById("email_password_label").style.display = 'none';
         document.getElementById("email_user_field").style.display = 'none';
         document.getElementById("email_password_field").style.display = 'none';
-    } else {
+    } else if (resetFields) {
         document.getElementById('EditView').auth_type.value = '';
         document.getElementById('EditView').authorized_account.value = '';
         document.getElementById('EditView').eapm_id.value = '';
@@ -429,7 +429,7 @@ function checkOtherFields() {
 } // fn
 
 
-function checkTrashFolder() 
+function checkTrashFolder()
 {
 	if (document.getElementById('protocol').value == 'imap' && document.getElementById('mailbox_type').value != 'bounce') {
 		var trashFolderValue = document.getElementById("trashFolder").value;
@@ -572,36 +572,7 @@ function edit_email_template_form(templateField) {
 		win.focus();
 	}
 }
-function open_group_folder_form() {
-	URL="index.php?module=InboundEmail&action=EditGroupFolder&target=Popup&to_pdf=1";
-	windowName = 'group_folder_popup_window';
-	windowFeatures = 'width=400' + ',height=300' 	+ ',resizable=1,scrollbars=1';
 
-	win = window.open(URL, windowName, windowFeatures);
-	if(window.focus)
-	{
-		// put the focus on the popup if the browser supports the focus() method
-		win.focus();
-	}
-
-}
-function edit_group_folder_form() {
-	URL="index.php?module=InboundEmail&action=EditGroupFolder&target=Popup&to_pdf=1";
-	var field=document.getElementById('group_folder_id');
-	if (field.options[field.selectedIndex].value != 'undefined') {
-		URL+="&record="+field.options[field.selectedIndex].value;
-	}
-	windowName = 'edit_group_folder_popup_window';
-	windowFeatures = 'width=400' + ',height=300' 	+ ',resizable=1,scrollbars=1';
-
-	win = window.open(URL, windowName, windowFeatures);
-	if(window.focus)
-	{
-		// put the focus on the popup if the browser supports the focus() method
-		win.focus();
-	}
-
-}
 function refresh_group_folder_list(groupFolder_id, groupFolder_name) {
 	var field=document.getElementById('group_folder_id');
 	var bfound=0;
@@ -669,7 +640,7 @@ function showWarningsIfChaningAutoImport() {
     }
 }
 
-toggle_email_provider();
+toggle_email_provider(false);
 toggle_monitored_folder(document.getElementById('protocol'));
 setPortDefault();
 possibleActionChange();

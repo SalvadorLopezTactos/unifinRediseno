@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID ที่อยู่อีเมลสำหรับตอบกลับ',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'ที่อยู่อีเมลสำหรับตอบกลับ',
     'LBL_PRIMARY_TEAM' => 'ทีมหลัก',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'บัญชีส่งที่ต้องการ',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'การตั้งค่าอีเมลระบบลิ้นชัก',
 );

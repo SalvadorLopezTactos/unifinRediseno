@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Loonud kasutaja',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Viimati muutnud kasutaja',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Süsteemi meil',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Dokumendimall',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentide mestimine',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Valimine...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumendi mestimine PDF-vormingusse',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentide mestimine',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Business Rule',
     'LBL_PMSE_LABEL_RULE' => 'Rule',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Updated Records Only (All Updates - See Help Text)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Uued kirjed või esimene värskendus',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Uued kirjed ja kõik värskendused',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Suhte muudatus',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Valige, millal protsess algab.<br><br>Uus: protsessi käitatakse uue kirje loomisel.<br><br>Esimene värskendus: protsessi käitatakse esimesel korral, kui olemasoleva kirje kriteeriumid on täidetud.<br><br>Kõik värskendused: protsessi käitatakse iga kord, kui olemasoleva kirje kriteeriumid on täidetud.<br><br>Uued kirjed või esimene värskendus: protsessi käitatakse kirje loomise või värskendamise ajal ainult esimesel korral, kui kirje kriteeriumid on täidetud.<br><br>Uued kirjed ja kõik värskendused: protsessi käitatakse iga kord kõigi uute ja olemasolevate kirjete puhul.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Valige, millal protsess algab.<br><br>Uus: protsessi käitatakse uue kirje loomisel.<br><br>Esimene värskendus: protsessi käitatakse esimesel korral, kui olemasoleva kirje kriteeriumid on täidetud.<br><br>Kõik värskendused: protsessi käitatakse iga kord, kui olemasoleva kirje kriteeriumid on täidetud.<br><br>Uued kirjed või esimene värskendus: protsessi käitatakse kirje loomise või värskendamise ajal ainult esimesel korral, kui kirje kriteeriumid on täidetud.<br><br>Uued kirjed ja kõik värskendused: protsessi käitatakse iga kord kõigi uute ja olemasolevate kirjete puhul.<br><br>Suhte muudatused: protsessi käitatakse iga suhte muudatuse puhul.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Select the SugarCRM module to apply the event trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fixed Date',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Error',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Suhte muudatuse hindamine',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Fields',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Module Field Evaluation',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Moodul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Kõik seotud kirjed',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Mis tahes seotud kirjed',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Lisatud',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Eemaldatud',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Lisatud või eemaldatud',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Mis tahes suhe',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Käivitusaeg',
 

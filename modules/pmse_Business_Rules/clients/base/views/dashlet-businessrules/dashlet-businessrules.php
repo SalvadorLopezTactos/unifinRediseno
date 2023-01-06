@@ -39,7 +39,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-businessrules'] = array(
             array(
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
-                'icon' => 'fa-plus',
+                'icon' => 'sicon-plus',
                 'buttons' => array(
                     array(
                         'type' => 'dashletaction',
@@ -123,7 +123,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-businessrules'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-pencil',
+                    'icon' => 'sicon-edit',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-businessrules:businessRulesLayout:fire',
                     'target' => 'view',
@@ -132,7 +132,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-businessrules'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-times',
+                    'icon' => 'sicon-close',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-businessrules:delete-record:fire',
                     'target' => 'view',
@@ -141,7 +141,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-businessrules'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa fa-download',
+                    'icon' => 'sicon sicon-download',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-businessrules:download:fire',
                     'target' => 'view',
@@ -150,7 +150,7 @@ $viewdefs[$module_name]['base']['view']['dashlet-businessrules'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'fa-info-circle',
+                    'icon' => 'sicon-info',
                     'css_class' => 'btn btn-mini',
                     'event' => 'dashlet-businessrules:description-record:fire',
                     'target' => 'view',

@@ -34,6 +34,11 @@ class SugarOIDCUserChecker extends UserChecker
     ];
 
     /**
+     * @var bool
+     */
+    protected $allowInactive = false;
+
+    /**
      * @var SugarLocalUserProvider
      */
     protected $localUserProvider;
@@ -44,6 +49,12 @@ class SugarOIDCUserChecker extends UserChecker
     public function __construct(SugarLocalUserProvider $localUserProvider)
     {
         $this->localUserProvider = $localUserProvider;
+    }
+
+    public function setAllowInactive(bool $allowInactive)
+    {
+        $this->allowInactive = $allowInactive;
+        $this->localUserProvider->setAllowInactive($allowInactive);
     }
 
     public function checkPostAuth(UserInterface $user)
@@ -77,7 +88,7 @@ class SugarOIDCUserChecker extends UserChecker
             $sugarUser = $this->localUserProvider->createUser($userAttributes['user_name'], $userAttributes);
         } catch (InactiveUserException $e) {
             $sugarUser = $e->getSugarUser();
-            if (!$sugarUser || $userAttributes['status'] !== User::USER_STATUS_ACTIVE) {
+            if (!$sugarUser || (($userAttributes['status'] !== User::USER_STATUS_ACTIVE) && !$this->allowInactive )) {
                 throw $e;
             }
 
@@ -94,6 +105,11 @@ class SugarOIDCUserChecker extends UserChecker
      */
     protected function setUserData(\User $sugarUser, User $user, array $attributes)
     {
+        $attribute = $user->getAttributes();
+        if (isset($attribute['ext']['sudoer'])) {
+            $sugarUser->sudoer = $attribute['ext']['sudoer'];
+        }
+
         $timeDate = \TimeDate::getInstance();
         $lastLogin = $timeDate->fromDb($sugarUser->last_login);
 

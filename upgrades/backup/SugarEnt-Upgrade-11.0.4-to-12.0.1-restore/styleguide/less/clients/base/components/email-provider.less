@@ -1,0 +1,63 @@
+.record-cell p.email-provider {
+  float: left;
+
+  label {
+    margin-bottom: 0;
+    margin-right: 8px;
+    position: relative;
+  }
+
+  input[type=radio] {
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    &:checked + img,
+    &:checked + span {
+      border-color: @grayLightish;
+      opacity: 1;
+    }
+
+    &:focus + img,
+    &:focus + span {
+      .tab-focus();
+    }
+  }
+
+  img,
+  &.other span {
+    background: @white;
+    border: 1px solid @grayLighter;
+    position: relative;
+    opacity: 0.7;
+  }
+
+  img {
+    height: 30px;
+    padding: 8px;
+    pointer-events: none;
+  }
+
+  &.other span {
+    padding: 14px;
+    font-size: 18px;
+    color: @blue;
+    display: inline-block;
+  }
+}
+
+.record-cell p.warning-block {
+  color: @errorText;
+  background-color: fade(@errorBackground, 40%);
+  padding: 10px;
+  display: block;
+  clear: both;
+}
+
+.record-cell span.auth-block {
+  display: block;
+  padding: 10px 0;
+  clear: both;
+}

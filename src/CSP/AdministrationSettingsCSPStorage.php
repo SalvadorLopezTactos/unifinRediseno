@@ -18,7 +18,13 @@ use BeanFactory;
 
 class AdministrationSettingsCSPStorage implements CSPStorage
 {
+    /** @var callable */
+    private $refreshMetaDataCache;
 
+    public function __construct(callable $refreshMetaDataCache)
+    {
+        $this->refreshMetaDataCache = $refreshMetaDataCache;
+    }
 
     public function save(ContentSecurityPolicy $csp, string $platform = 'base'): void
     {
@@ -35,13 +41,8 @@ class AdministrationSettingsCSPStorage implements CSPStorage
             }
         }
         if (!empty($changes)) {
-            $this->refreshMetaDataCache();
+            ($this->refreshMetaDataCache)();
         }
-    }
-
-    private function refreshMetaDataCache(): void
-    {
-        \MetaDataManager::refreshSectionCache(\MetaDataManager::MM_CONFIG);
     }
 
     public function get(): ContentSecurityPolicy

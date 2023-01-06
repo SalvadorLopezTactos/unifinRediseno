@@ -12,13 +12,14 @@
 --}}
 {{#if isAvailable}}
     <button data-action="omnichannel" class="btn logged-out" aria-label="Omnichannel" role="link" type="button">
-        <span class="omni-circle"></span> <span class="omni-label">{{str 'LBL_OMNICHANNEL'}}</span>
+        <span class="omni-circle inline-block w-3 h-3 rounded-full"></span>
+        <span class="omni-label text-xs ml-1.5">{{str 'LBL_OMNICHANNEL'}}</span>
     </button>
 
-    {{#if isSysAdmin}}
+    {{#if configAvailable}}
         <div class="config-menu dropdown" data-mode="init">
-            <i class="fa fa-ellipsis-v toggle dropdown-toggle" data-toggle="dropdown"></i>
-            <i class="fa fa-ellipsis-v disabled" rel="tooltip" title="{{str 'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING'}}"></i>
+            <i class="sicon sicon-kebab toggle dropdown-toggle" data-toggle="dropdown"></i>
+            <i class="sicon sicon-kebab disabled" rel="tooltip" title="{{str 'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING'}}"></i>
 
             <div class="option-layout-open dropdown-menu">{{str 'LBL_OMNICHANNEL_CONFIG_LAYOUT'}}</div>
         </div>

@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Όνομα Υποστήριξης:',
   'LBL_SUPPORT_TERM' => 'Περίοδος Υποστήριξης:',
   'LBL_TAX_CLASS' => 'Κατηγορία Φόρου:',
+  'LBL_ACTIVE_STATUS' => 'Κατάσταση',
   'LBL_TYPE_NAME'=>'Όνομα Τύπου',
   'LBL_TYPE' => 'Τύπος',
   'LBL_PRODUCT_TYPE' => 'Τύπος Προϊόντος',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Πίνακας ελέγχου λίστας καταλόγων προϊόντων',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Πίνακας ελέγχου εγγραφής καταλόγου προϊόντων',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης καταλόγου προϊόντος',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Η κατάσταση είναι ενεργή',
 );

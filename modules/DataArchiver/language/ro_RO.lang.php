@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arhivă',
     'LBL_PROCESS_TYPE_DELETE' => 'Ștergere fizică',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Rulări arhivă',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Atenție',
+    'LBL_ARCHIVER_WARNING' => 'Se recomandă să efectuați această acțiune în timpul utilizării reduse sau în afara orelor de program '
+        . 'deoarece poate afecta performanța sistemului. Sigur doriți să executați această acțiune acum?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arhivatorul pentru modulul {{moduleName}} trebuie să aibă {{fieldName}} setat ca filtru',
 );

@@ -13,9 +13,11 @@
 <!-- Typography
 ================================================== -->
 <section id="typography">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <h2>Family</h2>
   <div class="row-fluid">
@@ -87,7 +89,7 @@
         <div class="ellipsis_inline" rel="tooltip" data-original-title="div. This is a very long div that need to be truncated">div. This is a very long div that need to be truncated</div>
         <hr>
         <div class="pull-left">
-          <i class="fa fa-warning-sign" style="color:#D14"></i>&nbsp;
+          <i class="sicon sicon-warning-circle" style="color:#D14"></i>&nbsp;
         </div>
         <div class="btn-group pull-right">
           <a class="btn btn-small btn-primary" style="top:-5px">Primary action</a>
@@ -95,7 +97,7 @@
         <div class="ellipsis_inline" rel="tooltip" data-original-title="div. This is a very long div that need to be truncated">div. This is a very long div that need to be truncated</div>
         <hr>
         <div class="pull-left">
-          <i class="fa fa-warning-sign" style="color:#D14"></i> <i class="fa fa-headphones"></i> <i class="fa fa-chevron-right"></i>&nbsp;
+          <i class="sicon sicon-warning-circle" style="color:#D14"></i> <i class="sicon sicon-mask"></i> <i class="sicon sicon-chevron-right"></i>&nbsp;
         </div>
         <div class="btn-group pull-right">
           <a class="btn btn-small btn-primary" style="top:-5px">Primary action</a>

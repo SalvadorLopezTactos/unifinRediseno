@@ -25,6 +25,7 @@ class DependencyManager
         "ListView",
         "Subpanel-listView",
         "PreviewView",
+        "RecorddashletView",
     );
 
     /**
@@ -210,7 +211,7 @@ class DependencyManager
         $deps = [];
 
         foreach ($fields as $field => $def) {
-            if (!empty($def['readonly']) && isset($def['readonly_formula']) && !$def['calculated']) {
+            if (!empty($def['readonly']) && isset($def['readonly_formula']) && empty($def['calculated'])) {
                 $value = !empty($def['readonly_formula']) ? $def['readonly_formula'] : 'true';
                 $triggerFields = !empty($def['readonly_formula']) ? Parser::getFieldsFromExpression($value, $fields) : [];
 

@@ -42,9 +42,9 @@
                         <span class="ellipsis_inline" title="{{name}}">{{name}}</span>
                     {{/if}}
                     {{#unless email}}
-                    <span class="flag error">
-                        <i class="fa fa-times"></i><i class="fa fa-envelope"></i>
-                    </span>
+                        <span class="flag error">
+                            <i class="sicon sicon-close"></i><i class="sicon sicon-email"></i>
+                        </span>
                     {{/unless}}
                 </div>
                 <div class="status">
@@ -124,7 +124,7 @@
         <div class="cell buttons">
             <div class="btn-toolbar pull-right">
                 <button type="button" class="btn{{#unless preview.enabled}} disabled{{/unless}}" rel="tooltip" title="{{str preview.label}}" data-action="previewRow" data-module="{{module}}" data-id="{{id}}">
-                    <i class="fa fa-eye"></i>
+                    <i class="sicon sicon-preview"></i>
                 </button>
             </div>
         </div>

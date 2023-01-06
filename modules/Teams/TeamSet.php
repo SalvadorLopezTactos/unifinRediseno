@@ -91,7 +91,7 @@ class TeamSet extends SugarBean{
         $stmt = $this->db->getConnection()->executeQuery($sql, array($team_set_id));
         $teams = array();
 
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $team = BeanFactory::newBean('Teams');
             $team->populateFromRow($row, true);
             $teams[$team->id] = $team;
@@ -134,14 +134,14 @@ class TeamSet extends SugarBean{
 
         $sql = "SELECT id FROM $this->table_name WHERE team_md5 = ?";
         $stmt = $this->db->getConnection()->executeQuery($sql, [$team_md5]);
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
         if (!$row){
             //we did not find a set with this combination of teams
             //so we should create the set and associate the teams with the set and return the set id.
             if(count($team_ids) == 1) {
                 $this->new_with_id = true;
                 $this->id = $this->db->fromConvert($team_ids[0], 'id');
-                if ($this->db->getConnection()->fetchColumn(
+                if ($this->db->getConnection()->fetchOne(
                     "SELECT id FROM $this->table_name WHERE id = ?",
                     [$this->id]
                 )) {
@@ -273,8 +273,9 @@ class TeamSet extends SugarBean{
         $sql = 'SELECT tst.team_set_id from team_sets_teams tst
             INNER JOIN team_memberships team_memberships ON tst.team_id = team_memberships.team_id
             AND team_memberships.user_id = ? AND team_memberships.deleted=0 group by tst.team_set_id';
+        /** @var \Doctrine\DBAL\Result $stmt */
         $stmt = $GLOBALS['db']->getConnection()->executeQuery($sql, [$user_id]);
-        $results = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+        $results = $stmt->fetchFirstColumn();
 
         $newResults = array();
         foreach ($results as $result) {
@@ -296,7 +297,7 @@ class TeamSet extends SugarBean{
             $sql = 'SELECT team_memberships.id FROM team_memberships
                 INNER JOIN team_sets_teams ON team_sets_teams.team_id = team_memberships.team_id
                 WHERE user_id = ? AND team_sets_teams.team_set_id = ? AND team_memberships.deleted = 0';
-            $result = $this->db->getConnection()->fetchColumn($sql, [$user_id, $team_set_id]);
+            $result = $this->db->getConnection()->fetchOne($sql, [$user_id, $team_set_id]);
         }elseif(!empty($team_ids)){
             $sql = 'SELECT team_memberships.id FROM team_memberships
                 WHERE user_id = ? AND team_id IN (?) AND team_memberships.deleted = 0';
@@ -305,7 +306,7 @@ class TeamSet extends SugarBean{
                 [$user_id, $team_ids],
                 [null, \Doctrine\DBAL\Connection::PARAM_STR_ARRAY]
             );
-            $result = $stmt->fetchColumn();
+            $result = $stmt->fetchOne();
         }else{
             return false;
         }

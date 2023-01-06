@@ -31,7 +31,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'include/Sugar_Smarty.php',
             'XTemplate',
             'Zend',
-            'include/nusoap',
             'include/oauth2-php',
             'include/tcpdf',
             'include/ytree',
@@ -183,6 +182,8 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'modules/pmse_Inbox/engine/PMSEHandlers/PMSECronHandler.php',
             // BR-3766 - Remove unused non-INT flagged file
             'modules/UpgradeWizard/populateColumns.php',
+            // BR-8503 - use portal index.php file instead of index.html
+            'portal2/index.html',
         );
 
         if (version_compare($this->from_version, '7.8.0.0', '<')) {

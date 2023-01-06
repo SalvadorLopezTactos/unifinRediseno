@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'ID kontaktu',
     'LBL_DESCRIPTION_INFORMATION' => 'Informácie popisu',
     'LBL_DESCRIPTION' => 'Popis:',
+    'LBL_INTERNAL_NOTES' => 'Interné poznámky:',
     'LBL_STATUS' => 'Stav:',
     'LBL_DIRECTION' => 'Smer:',
     'LBL_DATE' => 'Dátum začiatku:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'Čas trvania musí byť väčší ako 0',
     'LBL_CALL_INFORMATION' => 'Prehľad',
     'LBL_REMOVE' => 'odstrániť',
-    'LBL_ACCEPT_STATUS' => 'Prijať status',
     'LBL_ACCEPT_LINK' => 'Prijať prepojenie',
     //For export labels
     'LBL_PARENT_ID' => 'ID nadradenej položky',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'Volanie:',
     'LBL_CALL_RECORDING_URL' => 'URL pre nahrávanie',
     'LBL_CALL_RECORDING' => 'Nahrávanie',
+
+    'LBL_LEAD_ID' => 'ID záujemcu',
+    'LBL_LEAD_NAME' => 'Záujemca',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Naplánovali ste {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> pre {{formatDate date_start}}.',

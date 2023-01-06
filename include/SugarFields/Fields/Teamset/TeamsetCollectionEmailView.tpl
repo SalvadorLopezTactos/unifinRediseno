@@ -37,7 +37,7 @@
     <tr id="lineLabel_{$vardef.name}" name="lineLabel_{$vardef.name}">
         <td colspan='2' nowrap>
 			<span class="id-ff multiple ownline">
-            <button type="button" class="button firstChild" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup_for_email_teams("Teams", 600, 400, "", true, false, {literal}{"call_back_function":"set_return_teams_for_editview","form_name": {/literal} "{$displayParams.formName}","field_name":"{$vardef.name}",{literal}"field_to_name_array":{"id":"team_id","name":"team_name"}}{/literal}, "{$CUSTOM_METHOD}", "{$USER_ID}", "MULTISELECT", true); if(collection["{$displayParams.formName}_{$vardef.name}"].more_status)collection["{$displayParams.formName}_{$vardef.name}"].js_more();' title="{sugar_translate label="LBL_ID_FF_SELECT"}">
+            <button type="button" class="button firstChild" value="{sugar_translate label='LBL_SELECT_BUTTON_LABEL'}" onclick='javascript:open_popup_for_email_teams("Teams", 600, 400, "", true, false, { "call_back_function": "set_return_teams_for_editview", "form_name": "{$displayParams.formName}","field_name":"{$vardef.name}", "field_to_name_array": { "id": "team_id", "name": "team_name" } }, "{$CUSTOM_METHOD}", "{$USER_ID}", "MULTISELECT", true); if(collection["{$displayParams.formName}_{$vardef.name}"].more_status)collection["{$displayParams.formName}_{$vardef.name}"].js_more();' title="{sugar_translate label="LBL_ID_FF_SELECT"}">
             {sugar_getimage name="id-ff-select.png" alt="$alt_selectButton"}
             </button><button type="button" class="button lastChild" value="{sugar_translate label='LBL_ADD_BUTTON'}" onclick="javascript:collection['{$displayParams.formName}_{$vardef.name}'].add(); if(collection['{$displayParams.formName}_{$vardef.name}'].more_status)collection['{$displayParams.formName}_{$vardef.name}'].js_more();" title="{sugar_translate label="LBL_ID_FF_ADD"}">
             {sugar_getimage name="id-ff-add.png" alt="$alt_addButton"}</button>
@@ -147,7 +147,6 @@
         setTimeout('call_js_more(collection_field)',1000);
     {/if}
     
-    {literal}
 	function call_js_more(c) {
 	    c.js_more();
 	}    
@@ -211,6 +210,5 @@
 	
 		return win;	
 	}
-	{/literal}
 </script>
 {$quickSearchCode}

@@ -3,7 +3,7 @@ both the SugarCRM web application and Sugar's mobile offerings.
 
 ## Getting Started
 
-Sidecar requires [Node.js][nodejs] version 6.0.0 or higher to be installed.
+Sidecar requires [Node.js][nodejs] version 10 or higher to be installed.
 **Make sure you also have the `npm` package.**
 
 We also recommend using [Yarn][yarn].

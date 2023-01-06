@@ -11,9 +11,17 @@
  */
 --}}
 <div class="ellipsis_inline" data-container="body">
-    {{# if href}}
-        <a href="{{href}}">{{value}}</a>
+    {{#if impersonatedValue}}
+        {{#if impersonatedHref}}
+            <a href="{{impersonatedHref}}"><i class="sicon sicon-mask"></i> {{impersonatedValue}}</a>
+        {{else}}
+            <i class="sicon sicon-mask"></i> {{impersonatedValue}}
+        {{/if}}
     {{else}}
-        <span data-placement="bottom" rel="tooltip" title="{{value}}">{{value}}</span>
+        {{#if href}}
+            <a href="{{href}}">{{value}}</a>
+        {{else}}
+            <span data-placement="bottom" rel="tooltip" title="{{value}}">{{value}}</span>
+        {{/if}}
     {{/if}}
 </div>

@@ -683,8 +683,13 @@ function apiActualLoadSystemStatus()
     if (!empty($admin->settings['license_enforce_user_limit'])) {
         // BEGIN License User Limit Enforcement
         $license_seats_needed = 0;
-        $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($license_seats_needed);
-
+        $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($license_seats_needed, true);
+        // fix the license type issue
+        global $current_user;
+        if (!empty($current_user) && !empty($exceededLicenseTypes) && $current_user->fixLicenseTypeMismatch()) {
+            $license_seats_needed = 0;
+            $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($license_seats_needed, true);
+        }
         if (!empty($exceededLicenseTypes)) {
             $_SESSION['license_seats_needed'] = $license_seats_needed;
             $_SESSION['EXCEEDS_MAX_USERS'] = 1;
@@ -844,19 +849,25 @@ function loginLicense(){
         // check if user has invalid license types
         $invalidLicenseTypes = SubscriptionManager::instance()->getUserInvalidSubscriptions($current_user);
         if (!empty($invalidLicenseTypes)) {
-            if (!is_admin($current_user)) {
-                $msg = '';
-                foreach ($invalidLicenseTypes as $type) {
-                    if (!empty($msg)) {
-                        $msg .= ' and ';
-                    }
-                    $msg .= User::getLicenseTypeDescription($type) . ' ';
-                }
-                $GLOBALS['login_error'] = sprintf(translate('ERROR_LICENSE_TYPE_SEATS_MAXED'), $msg);
-            } else {
-                $GLOBALS['login_error'] = $GLOBALS['app_strings']['ERROR_LICENSE_VALIDATION'];
+            // try to repair license types first
+            if ($current_user->fixLicenseTypeMismatch()) {
+                $invalidLicenseTypes = SubscriptionManager::instance()->getUserInvalidSubscriptions($current_user);
             }
-            $_SESSION['login_error'] =  $GLOBALS['login_error'];
+            if (!empty($invalidLicenseTypes)) {
+                if (!is_admin($current_user)) {
+                    $msg = '';
+                    foreach ($invalidLicenseTypes as $type) {
+                        if (!empty($msg)) {
+                            $msg .= ' and ';
+                        }
+                        $msg .= User::getLicenseTypeDescription($type) . ' ';
+                    }
+                    $GLOBALS['login_error'] = sprintf(translate('ERROR_LICENSE_TYPE_SEATS_MAXED'), $msg);
+                } else {
+                    $GLOBALS['login_error'] = $GLOBALS['app_strings']['ERROR_LICENSE_VALIDATION'];
+                }
+                $_SESSION['login_error'] = $GLOBALS['login_error'];
+            }
         }
     }
 

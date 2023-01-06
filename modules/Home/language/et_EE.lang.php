@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugari dashlet on lisatud',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashletid paigutatakse ümber, kas olete kindel, et soovite veeru paigutust muuta?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Kas olete kindel, et soovite Sugari dashleti eemaldada?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Armatuurlaud pole konfigureeritud',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Dashletis pole konfigureeritud',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Loo töölaud',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Veebileht',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Veebileht',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Lähtekood',
   'LBL_SOURCE_SUGAR' => 'Sugar – maailma populaarseim müügipersonali automatiseerimise rakendus, mille on loonud SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate – mallimootor PHP puhul, mille on loonud Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP – PHP klasside kogum, mis võimaldab arendajatel luua ja tarbida NuSphere Corporationi ja Dietrich Ayala loodud veebiteenuseid',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – kalender kuupäevade sisestamiseks, mille on loonud Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – Wayne Munro loodud teek PDF-dokumentide loomiseks',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server – WebDAV-serveri rakendamine PHP-s.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Spikker kuvab üksikasjaliku teabe mooduli kohta, mida vaatate, annab täpsed juhised moodulis teatud toimingute tegemiseks ja suunab teid, kui vajate täpsemat teavet ja tuge.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtri',
+
+    'LBL_ABOUT_VERSION' => 'Kasutate versiooni {{version}}, millel on on järgnev(ad) litsents(id):',
 );

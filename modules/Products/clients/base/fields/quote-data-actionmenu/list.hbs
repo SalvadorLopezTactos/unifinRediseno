@@ -17,8 +17,10 @@
     <a track="click:listactiondropdown" class="btn btn-invisible dropdown-toggle"
        data-toggle="dropdown" href="javascript:void(0);" data-placement="bottom"
        rel="tooltip" title="{{str 'LBL_LISTVIEW_ACTIONS'}}"
-       role="button" tabindex="{{tabIndex}}" aria-label="{{str 'LBL_LISTVIEW_ACTIONS'}}">
-        <span class="fa fa-ellipsis-v"></span></a>
+       role="button" tabindex="{{tabIndex}}" aria-label="{{str 'LBL_LISTVIEW_ACTIONS'}}"
+    >
+        <span class="sicon sicon-kebab"></span>
+    </a>
     <ul data-menu="dropdown" class="dropdown-menu" role="menu"
         data-row-module="{{../model.module}}" data-row-model-id="{{../model.cid}}"></ul>
 {{/if}}

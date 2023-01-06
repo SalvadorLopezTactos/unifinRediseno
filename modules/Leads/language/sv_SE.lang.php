@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Refererad av',
     'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_TITLE' => 'Titel',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Prognos marknadsränta',
+    'LBL_MARKET_SCORE' => 'Marknadspoäng',
     'LBL_MOBILE_PHONE' => 'Mobil:',
     'LBL_MODULE_NAME' => 'Leads',
     'LBL_MODULE_NAME_SINGULAR' => 'Möjlig kund',
@@ -319,4 +321,9 @@ För att skapa en {{module_name}}:
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Konverteringsförutsägelse möjliga kunder',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Se förutsägelseinformation för en specifik möjlig ny kund',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Aktivera intäktsposter',
+    'LBL_REQUIRE_RLIS' => 'Kräv intäktsposter när en ny möjlighet skapas',
+    'LBL_COPY_DATA_RLIS' => 'Kopiera Leaduppgifter till Intäktsposterna när en ny Möjlighet skapas',
 );

@@ -19,6 +19,9 @@ class TemplateCurrency extends TemplateRange
     public $default = 0;
     public $type = 'currency';
 
+    public $convertToBase = true;
+    public $showTransactionalAmount = true;
+
     public function delete($df)
     {
         parent::delete($df);
@@ -70,9 +73,8 @@ class TemplateCurrency extends TemplateRange
     public function get_field_def()
     {
         $def = parent::get_field_def();
-        if (isset($this->convertToBase) && $this->convertToBase === true) {
-            $def['convertToBase'] = true;
-        }
+        $def['convertToBase'] = $this->convertToBase;
+        $def['showTransactionalAmount'] = $this->convertToBase ? $this->showTransactionalAmount : false;
         $def['precision'] = (!empty($this->precision)) ? $this->precision : 6;
         $def['related_fields'] = array('currency_id', 'base_rate');
         return $def;

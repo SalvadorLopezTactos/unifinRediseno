@@ -87,7 +87,7 @@ class Tracker extends SugarBean
 
             $stmt = $qb->execute();
 
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetchAssociative()) {
 	               $breadCrumb->push($row);
 	        }
         }

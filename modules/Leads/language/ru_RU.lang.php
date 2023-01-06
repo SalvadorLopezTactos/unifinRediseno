@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Рекомендован:',
     'LBL_LIST_STATUS' => 'Статус',
     'LBL_LIST_TITLE' => 'Должность',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Прогноз рыночного интереса',
+    'LBL_MARKET_SCORE' => 'Оценка рынка',
     'LBL_MOBILE_PHONE' => 'Мобильный телефон:',
     'LBL_MODULE_NAME' => 'Предварительные контакты',
     'LBL_MODULE_NAME_SINGULAR' => 'Предварительный контакт',
@@ -330,4 +332,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Прогноз преобразования предварительных контактов',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Просмотр подробных аналитических сведений по конкретному предварительному контакту',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Активировать доходы по продуктам',
+    'LBL_REQUIRE_RLIS' => 'Для создания новой сделки необходимо указать позиции доходов по продуктам',
+    'LBL_COPY_DATA_RLIS' => 'Копировать данные предварительных контактов в позиции доходов по продуктам при создании новой сделки',
 );

@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Obrada rasporeda osjetljivih na vrijeme',
 'LBL_OOTB_DATA_ARCHIVER' => 'Pokreni arhiviranje/brisanje aktivnih podataka',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokoder za zapise',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Alat za rješavanje geokodera',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
 'LBL_LIST_LIST_ORDER' => 'Planeri:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Postavljanje Crontaba',
 'LBL_CRON_LINUX_DESC' => 'Napomena: da biste pokrenuli planere Sugar, dodajte sljedeći red u datoteku crontab: ',
 'LBL_CRON_WINDOWS_DESC' => 'Napomena: da biste pokrenuli planere Sugar, stvorite naredbenu datoteku za pokretanje s pomoću Windows zakazanih zadataka. Naredbena datoteka treba uključivati sljedeće naredbe: ',
-'LBL_NO_PHP_CLI' => 'Ako vaše glavno računalo nema dostupnu binarnu datoteku PHP, možete upotrijebiti wget ili curl za pokretanje poslova.<br>za wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>za curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'Ako vaše glavno računalo nema dostupnu binarnu datoteku PHP, možete upotrijebiti wget ili curl za pokretanje poslova.<br>za wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>za curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Zapisnik poslova',
 'LBL_EXECUTE_TIME'			=> 'Vrijeme izvršavanja',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Ukloni privremene datoteke',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Ponovna izgradnja denormaliziranih sigurnosnih podataka o timovima',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Ažuriraj definiciju proizvoda',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Karte u geokoderu',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Alat za rješavanje geokodera',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Pokreni noćno slanje masovne e-pošte kampanje',
 'LBL_ASYNCMASSUPDATE' => 'Izvrši asinkrona masovna ažuriranja',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Čišćenje popisa starih zapisa',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Brisač pregleda aktivnosti',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Obrada rasporeda osjetljivih na vrijeme',
+'LBL_SUGARJOBDATAARCHIVER' => 'Pokreni arhiviranje/brisanje aktivnih podataka',
 'LBL_PMSEENGINECRON' => 'Planer SugarBPM',
 );
 

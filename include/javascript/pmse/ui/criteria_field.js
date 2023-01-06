@@ -170,6 +170,11 @@ CriteriaField.prototype.setUserEvaluation = function (currentEval) {
     return this;
 };
 
+CriteriaField.prototype.setRelationshipEvaluation = function(currentEval) {
+    this._panel.setRelationshipEvaluation(currentEval);
+    return this;
+};
+
 CriteriaField.prototype.clear = function () {
     this.controlObject.clearItems();
     return this;

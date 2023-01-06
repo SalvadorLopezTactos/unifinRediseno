@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Válasz e-mail cím azonosítója',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Válasz e-mail címe',
     'LBL_PRIMARY_TEAM' => 'Elsődleges csoport',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Előnyben részesített küldő fiók',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-mailbeállítások figyelemfelhívás',
 );

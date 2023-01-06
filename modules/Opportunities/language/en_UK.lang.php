@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Worksheet',
     'LBL_PURCHASED_LINE_ITEMS' => 'Purchased Line Items',
 
+    'LBL_FORECASTED_LIKELY' => 'Forecasted Likely',
     'LBL_RENEWAL' => 'Renewal',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Renewal Opportunities',
     'LBL_RENEWAL_PARENT' => 'Parent Opportunity',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# of Total Revenue Line Items',
     'LBL_CLOSED_RLIS' => '# of Closed Revenue Line Items',
+    'LBL_CLOSED_WON_RLIS' => '# of Closed Won Revenue Line Items',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# of Open Service Flex-duration Revenue Line Items',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'You cannot delete Opportunities that contain closed Revenue Line Items',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'One or more of the selected records contains closed Revenue Line Items and cannot be deleted.',
     'LBL_INCLUDED_RLIS' => '# of Included Revenue Line Items',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_CASCADE_RLI_EDIT' => 'Update Open Revenue Line Items',
+    'LBL_CASCADE_RLI_CREATE' => 'Set Across Revenue Line Items',
     'LBL_SERVICE_START_DATE_INVALID' => 'The Service Start Date cannot be set past the Service End Date of any open add-on Revenue Line Items.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
@@ -267,7 +271,10 @@ To create an {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "My Team's Opportunities",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Opportunity Interactions',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Opportunity Timeline',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' cannot be set across any of these Revenue Line Items because they are not services. Do you want to proceed with creation?',
+    'LBL_CASCADE_DURATION_WARNING' => ' cannot be set across any of these Revenue Line Items because their durations are locked. Do you want to proceed with creation?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Opportunity Close Prediction',

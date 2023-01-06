@@ -227,7 +227,7 @@ class Controller extends SugarBean {
         }
 
         $stmt = $qb->execute();
-        $row = $stmt->fetchColumn();
+        $row = $stmt->fetchOne();
 
         return $row;
     }
@@ -255,7 +255,7 @@ function check_wall($magnitude, $direction, $parent_id){
                 ->andWhere($qb->expr()->eq('deleted', 0));
 
             $stmt = $qb->execute();
-            $row = $stmt->fetch();
+            $row = $stmt->fetchAssociative();
 
 			if($this->focus->controller_def['start_axis']=="x")	{
 				if($row['max_start'] == $this->focus->list_order_x){

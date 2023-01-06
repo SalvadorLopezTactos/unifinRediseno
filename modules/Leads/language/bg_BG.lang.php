@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Пренасочен от',
     'LBL_LIST_STATUS' => 'Статус',
     'LBL_LIST_TITLE' => 'Длъжност',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Прогноза за пазарен интерес',
+    'LBL_MARKET_SCORE' => 'Пазарен резултат',
     'LBL_MOBILE_PHONE' => 'Мобилен номер:',
     'LBL_MODULE_NAME' => 'Потенциални клиенти',
     'LBL_MODULE_NAME_SINGULAR' => 'Потенциален клиент',
@@ -329,4 +331,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Прогноза за преобразуване на Потенциални клиенти',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Вижте подробности на прогноза за конкретен Потенциален клиент',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Активирайте списък с приходни позиции',
+    'LBL_REQUIRE_RLIS' => 'Изисква се списък с приходни позиции при създаване на нова възможност',
+    'LBL_COPY_DATA_RLIS' => 'Копирайте данни от потенциални клиенти в списъка с приходни позиции при създаване на нова възможност',
 );

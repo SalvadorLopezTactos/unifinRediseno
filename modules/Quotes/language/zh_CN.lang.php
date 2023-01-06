@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '报价配置',
 
     'LBL_RENEWAL' => '续订',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '报价互动',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '报价时间线',
 );

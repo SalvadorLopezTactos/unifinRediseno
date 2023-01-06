@@ -336,31 +336,6 @@ return $the_form;
             }
         }
 
-        ///////////////////////////////////////////////////////////////////////////////
-        ////	INBOUND EMAIL HANDLING
-        ///////////////////////////////////////////////////////////////////////////////
-        if(isset($_REQUEST['inbound_email_id']) && !empty($_REQUEST['inbound_email_id'])) {
-            if(!isset($current_user)) {
-                global $current_user;
-            }
-
-            // fake this case like it's already saved.
-
-            $email = BeanFactory::getBean('Emails', $_REQUEST['inbound_email_id']);
-            $email->parent_type = 'Leads';
-            $email->parent_id = $focus->id;
-            $email->assigned_user_id = $current_user->id;
-            $email->status = 'read';
-            $email->save();
-            $email->load_relationship('leads');
-            $email->leads->add($focus->id);
-
-            header("Location: index.php?&module=Emails&action=EditView&type=out&inbound_email_id=".urlencode($_REQUEST['inbound_email_id'])."&parent_id=".$email->parent_id."&parent_type=".$email->parent_type.'&start='.urlencode($_REQUEST['start']));
-            exit();
-        }
-        ////	END INBOUND EMAIL HANDLING
-        ///////////////////////////////////////////////////////////////////////////////
-
         $GLOBALS['log']->debug("Saved record with id of ".$return_id);
         if($redirect){
             handleRedirect($return_id, 'Leads');

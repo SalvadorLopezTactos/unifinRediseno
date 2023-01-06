@@ -21,7 +21,7 @@ $viewdefs[$module_name]['base']['view']['casesList-list'] = [
         'actions' => [
             [
                 'type' => 'rowaction',
-                'icon' => 'fa-eye',
+                'icon' => 'sicon-preview',
                 'event' => 'list:preview:fire',
                 'css_class'=>'overflow-visible',
                 'tooltip'=> 'Status',

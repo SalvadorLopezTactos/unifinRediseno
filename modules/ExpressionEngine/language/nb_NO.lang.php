@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Uttrykksmotor',
-  'LBL_MODULE_NAME_SINGULAR' => 'Uttrykksmotor',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Forrige' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Neste' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Utvid' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Uttrykksmotor',
+    'LBL_MODULE_NAME_SINGULAR' => 'Uttrykksmotor',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Forrige' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Neste' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Utvid' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Ukjent felt',
+];

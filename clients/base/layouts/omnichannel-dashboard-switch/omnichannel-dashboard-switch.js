@@ -11,7 +11,7 @@
 /**
  * The container of Omnichannel console dashboards.
  *
- * @class View.Layouts.Base.OmnichannelDashboardSwicthLayout
+ * @class View.Layouts.Base.OmnichannelDashboardSwitchLayout
  * @alias SUGAR.App.view.layouts.BaseOmnichannelDashboardSwitchLayout
  * @extends View.Layout
  */
@@ -39,6 +39,24 @@
             this.layout.on('ccp:terminated', this.removeAllDashboards, this);
             this.layout.on('contact:view', this.showDashboard, this);
             this.layout.on('contact:destroyed', this.removeDashboard, this);
+            this.layout.on('contact:records:matched', this._handleContactRecordsMatched, this);
+        }
+    },
+
+    /**
+     * Handles when a search of Sugar records matched to a contact is completed
+     *
+     * @param {Object} contact connect-streams Contact object
+     * @param {Array} models the list of beans found by the record match search
+     * @private
+     */
+    _handleContactRecordsMatched: function(contact, models, context) {
+        var contactId = contact && contact.getContactId();
+        if (contactId) {
+            this.setModels(contactId, models, 0);
+            if (context && !_.isEmpty(context.phoneSearchParams)) {
+                this.setSearch(contactId, context.phoneSearchParams, true);
+            }
         }
     },
 
@@ -48,8 +66,8 @@
      */
     showDashboard: function(contact) {
         var contactId = contact.getContactId();
-
         var index = _.indexOf(this.contactIds, contactId);
+
         if (index === -1) {
             this._createDashboard();
             this.contactIds.push(contactId);
@@ -57,10 +75,6 @@
             var dashboard = this._components[index];
             // move to top
             dashboard.$el.css('z-index', this.zIndex++);
-        }
-        var console = this.layout;
-        if (!console.isExpanded()) {
-            console.toggle();
         }
     },
 
@@ -157,12 +171,6 @@
             this._components.splice(index, 1);
             this.contactIds.splice(index, 1);
         }
-        if (this.contactIds.length < 1) {
-            var console = this.layout;
-            if (console.isExpanded()) {
-                console.toggle();
-            }
-        }
     },
 
     /**
@@ -221,18 +229,10 @@
      * @param {string} contactId - connect-streams Contact Id
      * @param {Bean} contactModel contact model
      * @param {boolean} silent if true, do not switch dashboard tab
+     * @deprecated Since 11.1, use setModel() instead
      */
     setContactModel: function(contactId, contactModel, silent) {
-        var index = _.indexOf(this.contactIds, contactId);
-
-        // If we have a dashboard for this contact, set that record on the contact tab of the
-        // appropriate dashboard
-        if (index !== -1) {
-            this._components[index].setModel(1, contactModel);
-            if (!silent) {
-                this._components[index].switchTab(1);
-            }
-        }
+        this.setModel(contactId, contactModel, silent);
     },
 
     /**
@@ -240,15 +240,107 @@
      *
      * @param {string} contactId - connect-streams Contact Id
      * @param {Bean} caseModel case model
+     * @deprecated Since 11.1, use setModel() instead
      */
     setCaseModel: function(contactId, caseModel) {
-        var index = _.indexOf(this.contactIds, contactId);
+        this.setModel(contactId, caseModel, false);
+    },
 
-        // If we have a dashboard for this contact, set that record on the case tab of the
-        // appropriate dashboard
-        if (index !== -1) {
-            this._components[index].setModel(2, caseModel);
-            this._components[index].switchTab(2);
+    /**
+     * Sets the pre-filled search parameters for the search tab of the given
+     * contact's dashboard
+     *
+     * @param {string} contactId connect-streams ID of the contact
+     * @param {Object} params the search parameters to set
+     * @param {string} params.term the search term to set
+     * @param {string} params.module_list the list of modules to search
+     * @param {Object} params.filters the search filters
+     * @param {boolean} silent if true, do not switch dashboard tab
+     */
+    setSearch: function(contactId, params, silent) {
+        var contactDashboard = this.getDashboard(contactId);
+        if (!_.isEmpty(contactDashboard)) {
+            var tabIndex = contactDashboard.getSearchTabIndex();
+            if (_.isNumber(tabIndex)) {
+                contactDashboard.setSearch(params);
+                if (!silent) {
+                    contactDashboard.switchTab(tabIndex);
+                }
+            }
         }
+    },
+
+    /**
+     * Sets a list of models into their appropriate tabs of the given contact's
+     * dashboard
+     *
+     * @param {string} contactId connect-streams ID of the contact
+     * @param {Array} models the list of models to set
+     * @param {number} focusIndex f provided, will switch tab focus to the model
+     *                 at the given index in models
+     */
+    setModels: function(contactId, models, focusIndex) {
+        if (!_.isEmpty(models) && !_.isEmpty(contactId)) {
+            _.each(models, function(model, index) {
+                var focus = _.isNumber(focusIndex) && index === focusIndex;
+                this.setModel(contactId, model, !focus);
+            }, this);
+        }
+    },
+
+    /**
+     * Sets the model for the appropriate tab of the given contact's dashboard
+     *
+     * @param {string} contactId connect-streams ID of the contact
+     * @param {Bean} model the model to set
+     * @param {boolean} silent if true, do not switch dashboard tab
+     */
+    setModel: function(contactId, model, silent) {
+        var contactDashboard = this.getDashboard(contactId);
+        if (!_.isEmpty(contactDashboard) && !_.isEmpty(model)) {
+            var tabIndex = contactDashboard.getTabIndexForModel(model);
+            if (_.isNumber(tabIndex)) {
+                contactDashboard.setModel(tabIndex, model);
+                if (!silent) {
+                    contactDashboard.switchTab(tabIndex);
+                }
+            }
+        }
+    },
+
+    /**
+     * Gets the data to pre-populate a model with from the given contact's
+     * dashboard
+     *
+     * @param {string} targetModule the module to get prepopulate data for
+     * @return {Object} The attributes to pre-populate a model with
+     */
+    getModelPrepopulateData: function(contactId, targetModule) {
+        var contactDashboard = this.getDashboard(contactId);
+        return !_.isEmpty(contactDashboard) ? contactDashboard.getModelPrepopulateData(targetModule) : {};
+    },
+
+    /**
+     * Handles any special functionality that should be run for the given
+     * contact's dashboard after a model is quick-created from the Omnichannel
+     * console
+     *
+     * @param {string} contactId the ID of the contact to set a model for
+     * @param {Bean} model the model to set on the contact's dashboard
+     */
+    postQuickCreate: function(contactId, model) {
+        var contactDashboard = this.getDashboard(contactId);
+        if (!_.isEmpty(contactDashboard) && !_.isEmpty(model)) {
+            contactDashboard.postQuickCreate(model);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.layout.off('ccp:terminated', this.removeAllDashboards, this);
+        this.layout.off('contact:view', this.showDashboard, this);
+        this.layout.off('contact:destroyed', this.removeDashboard, this);
     }
 })

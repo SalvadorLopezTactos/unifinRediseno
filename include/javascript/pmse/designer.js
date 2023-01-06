@@ -1857,16 +1857,25 @@ var validateNumberOfEdges = function(minIncoming, maxIncoming, minOutgoing, maxO
 
 /**
  * Validates that the data the criterion atom refers to exists in the database.
- * @param {string} type is the type attribute of the atom being validated
- * @param {string} module is the module attribute of the atom being validated
- * @param {string} field is the field attribute of the atom being validated
- * @param {string} value is the value attribute of the atom being validated
+ * @param {Object} criteria An object with criteria keys like type, module, field, value and relation
  * @param {Object} element is the element on the canvas that is currently being examined/validated
  * @param {Object} validationTools is a collection of utility functions for validating element data
  */
-var validateAtom = function(type, module, field, value, element, validationTools) {
+var validateAtom = function(criteria, element, validationTools) {
     // Get the information we need for the API call to validate the data
-    var searchInfo = getSearchInfo(type, module, field, value);
+    if (!_.isObject(criteria)) {
+        App.logger.warn('Passing individual criteria pieces is deprecated in validateAtom. ' +
+            'Please pass an object with relevant pieces instead');
+        var deprecatedArgs = {};
+        deprecatedArgs.type = criteria;
+        deprecatedArgs.module = element;
+        deprecatedArgs.field = validationTools;
+        deprecatedArgs.value = arguments[3];
+        element = arguments[4];
+        validationTools = arguments[5];
+        criteria = deprecatedArgs;
+    }
+    var searchInfo = getSearchInfo(criteria);
     if (_.isEmpty(searchInfo) || _.isEmpty(searchInfo.url)) {
         return;
     }
@@ -1897,23 +1906,45 @@ var validateAtom = function(type, module, field, value, element, validationTools
 /**
  * Returns the correct API endpoint URL, key to search for at that endpoint, and a text
  * representation of the endpoint type, based upon the criterion atom attributes
- * @param {string} type is the type attribute of the atom being validated
- * @param {string} module is the module attribute of the atom being validated
- * @param {string} field is the field attribute of the atom being validated
- * @param {string} value is the value attribute of the atom being validated
+ * @param {Object} criteria Criteria pieces like type, module, field, value and relation
  * @return {Object|null} an object containing the correct URL, error type text, and backup
  *          search function if applicable. Returns null if no valid search info exists
  *          for the given data type
  */
-var getSearchInfo = function(type, module, field, value) {
+var getSearchInfo = function(criteria) {
     var data = '';
     var filter = '';
     var text = '';
     var args = {};
     var backupSearchFunction = null;
+    let type;
+    let module;
+    let field;
+    let value;
+    let relation;
 
-    switch (type.toUpperCase()) {
+    if (_.isObject(criteria)) {
+        type = criteria.type;
+        module = criteria.module;
+        field = criteria.field;
+        value = criteria.value;
+        relation = criteria.relation;
+    } else {
+        App.logger.warn('Passing individual criteria pieces is deprecated in getSearchInfo. ' +
+            'Please pass an object with relevant pieces instead');
+        type = criteria;
+        module = arguments[1];
+        field = arguments[2];
+        value = arguments[3];
+    }
+    type = type && type.toUpperCase();
+    switch (type) {
         case 'MODULE':
+            // relationship change events don't need field level criteria
+            if (['Added', 'Removed', 'AddedOrRemoved'].includes(relation) &&
+                (field === 'null' || _.isNull(field) || _.isUndefined(field) || _.isEmpty(field))) {
+                return null;
+            }
             args.key = field;
         case 'VARIABLE':
         case 'RECIPIENT':
@@ -2009,7 +2040,6 @@ var createWarning = function(element, warningLabel, field) {
  * @param {string} field is an optional value representing a specific field that the error refers to
  */
 var createError = function(element, errorLabel, field, warning) {
-
     // Get the information about the error
     var errorName = field ? (translate(errorLabel) + ': ' + field) : translate(errorLabel);
     var errorInfo = translate(errorLabel + '_INFO');

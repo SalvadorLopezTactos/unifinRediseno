@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugardashlet tillagd',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashlets kommer att arrangeras om, är du säker på att du vill ändra kolumnlayouten?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Är du säker på att du vill radera Sugardashleten?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Ingen instrumentpanel konfigurerad',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Ingen dashlet konfigurerad',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Skapa Dashboard',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Webbsida',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Webbsida',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Källkod',
   'LBL_SOURCE_SUGAR' => 'Sugar - The world&#39;s most popular sales force automation application created by SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - En mallmotor för PHP av Barnabás Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - En uppsättning PHP-klasser som låter utvecklare skapa och konsumera webbtjänster av NuSphere Corporation och Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - En kalender för att mata in datum av Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Ett bibliotek för att skapa PDFer av Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - En WebDAV Server-implementation i PHP.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Hjälpen visar specifik information om modulen du använder, ger detaljerade steg för att utföra vissa åtgärder i modulen, och visar dig vart du kan gå för att få mer omfattande information och stöd.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filter',
+
+    'LBL_ABOUT_VERSION' => 'Du använder version {{version}} med följande licens(er):',
 );

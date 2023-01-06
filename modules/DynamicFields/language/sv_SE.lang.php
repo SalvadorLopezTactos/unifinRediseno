@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Fältnamn existerar redan',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Fältnamn ska endast innehålla följande tecken: a-zA-Z_',
     'ERR_NO_MODULE_INCLUDED' => 'Ingen modul inkluderat kunde inte spara',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Rullgardinsnamnet finns redan',
     'LBL_BTN_ADD' => 'Lägg till',
     'LBL_BTN_EDIT' => 'Redigera',
     'LBL_GENERATE_URL' => 'Generera URL',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Lägga till kolumn {0} till',
     'LBL_DONE' => 'Klar',
     'LBL_EXE_NON_SIM_MODE' => 'Utför icke-simuleringsläge',
+    'LBL_CALCULATION_VISIBLE' => 'Gör synligt för beräkningar',
 );
-
-
-?>

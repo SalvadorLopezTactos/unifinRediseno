@@ -16,6 +16,16 @@ $mod_strings = array(
     'LBL_DELETE' => 'Eliminar' /*for 508 compliance fix*/,
     'LBL_POWERED_BY_SUGAR' => 'Desarrollado por SugarCRM' /*for 508 compliance fix*/,
     'LBL_ROLE' => 'Función',
+    'LBL_BASE_LAYOUT' => 'Diseño base',
+    'LBL_FIELD_NAME' => 'Nombre de campo',
+    'LBL_FIELD_VALUE' => 'Valor',
+    'LBL_LAYOUT_DETERMINED_BY' => 'Diseño determinado por:',
+    'layoutDeterminedBy' => [
+        'std' => 'Diseño estándar',
+        'role' => 'Función',
+        'dropdown' => 'Lista desplegable para campos',
+    ],
+    'LBL_DELETE_CUSTOM_LAYOUTS' => 'Se eliminarán todos los diseños personalizados. ¿Seguro que quiere cambiar las definiciones de su diseño actual?',
 'help'=>array(
     'package'=>array(
             'create'=>'Proporcionar un <b> nombre </b> para el paquete. El nombre que introduzca debe comenzar por una letra y solo puede estar formado por letras, números y guiones bajos. No se pueden utilizar espacios ni otros caracteres especiales. (Ejemplo: HR_Management) <br/><br/> Puede proporcionar <b> Autor </b> y <b> Descripción </b> como información para el paquete. <br/><br/> Haga clic en <b>Guardar</b> para crear el paquete.',
@@ -457,8 +467,6 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
 'LBL_VISIBILITY_EDITOR' => 'Editor de visibilidad',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'Campo relacionado',
-'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL a la imagen de la logomarca personalizada. Las dimensiones recomendadas de la logomarca son 22 x 22 píxels. Toda imagen cargada que sea mayor a estas dimensiones se escalará hasta ajustarse a estas dimensiones máximas.',
-'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL a la imagen del logotipo personalizado. La anchura recomendada del logotipo es 200 píxels. Toda imagen cargada que sea mayor a estas dimensiones se escalará hasta ajustarse a estas dimensiones máximas. Este logotipo se utilizará en la pantalla de inicio de sesión. Si no se carga ninguna imagen, se utilizará la logomarca.',
 'LBL_PORTAL_ROLE_DESC' => 'No elimine este rol. El rol del portal de autoservicio para clientes lo genera el mismo sistema durante la activación del Portal de Sugar. Utilice los controles de acceso dentro de este rol para habilitar y/o deshabilitar los módulos de Gestor de Incidencias, Casos o Base de conocimiento en el Portal de Sugar. Para evitar un comportamiento desconocido e imprevisible del sistema, no modifique otros controles de acceso para este rol. En caso de eliminación accidental de este rol, vuelva a crearlo desactivando y activando el Portal de Sugar.',
 
 //RELATIONSHIPS
@@ -581,6 +589,7 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
 'LBL_BTN_ADD_RELATIONSHIP'=>'Agregar Relación',
 'LBL_BTN_RENAME_MODULE' => 'Cambiar el Nombre del Módulo',
 'LBL_BTN_INSERT'=>'Insertar',
+'LBL_BTN_RESTORE_BASE_LAYOUT' => 'Restaurar el diseño base',
 //TABS
 
 //ERRORS
@@ -591,6 +600,7 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
 'ERROR_GENERIC_TITLE' => 'Ha ocurrido un error',
 'ERROR_REQUIRED_FIELDS' => '¿Está seguro de que desea continuar? Los siguientes campos requeridos no se encuentran en el diseño:',
 'ERROR_ARE_YOU_SURE' => '¿Está seguro de que desea continuar?',
+'ERROR_DATABASE_ROW_SIZE_LIMIT' => 'No se puede crear el campo. Ha llegado al límite de tamaño de filas de esta tabla en su base de datos. <a href="https://support.sugarcrm.com/SmartLinks/Custom/MySQL_Row_Size_Limit/" target="_blank">Más información</a>.',
 
 'ERROR_CALCULATED_MOBILE_FIELDS' => 'Los siguientes campos contienen valores calculados que no serán recalculados en tiempo real en la Vista de Edición de SugarCRM Mobile:',
 'ERROR_CALCULATED_PORTAL_FIELDS' => 'Los siguientes campos contienen valores calculados que no se recalcularán en tiempo real en la Vista de Edición del Portal de SugarCRM:',
@@ -600,16 +610,14 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
     'LBL_PORTAL_ENABLE_MODULES' => 'Si desea habilitarlos en el portal, habilítelos <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">aquí</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Configurar el Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Habilitar portal',
-    'LBL_PORTAL_ENABLE_SEARCH' => 'Habilitar la búsqueda antes de abrir un caso',
+    'LBL_PORTAL_SHOW_KB_NOTES' => 'Habilitar notas en el módulo de la base de conocimientos',
     'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Permitir que los usuarios del portal cierren el caso',
+    'LBL_PORTAL_ENABLE_SELF_SIGN_UP' => 'Permitir que se registren nuevos usuarios',
+    'LBL_PORTAL_USER_PERMISSIONS' => 'Permisos del usuario',
     'LBL_PORTAL_THEME' => 'Tema del Portal',
     'LBL_PORTAL_ENABLE' => 'Habilitar',
     'LBL_PORTAL_SITE_URL' => 'Su portal está disponible en:',
     'LBL_PORTAL_APP_NAME' => 'Nombre de la Aplicación',
-    'LBL_PORTAL_LOGOMARK_URL' => 'URL de la logomarca',
-    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Previsualización de la logomarca',
-    'LBL_PORTAL_LOGO_URL' => 'URL del Logotipo',
-    'LBL_PORTAL_LOGO_PREVIEW' => 'Previsualización del logotipo',
     'LBL_PORTAL_CONTACT_PHONE' => 'Teléfono',
     'LBL_PORTAL_CONTACT_EMAIL' => 'Correo electrónico',
     'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Debe introducir una dirección de correo válida',
@@ -625,6 +633,23 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
     'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Arrastre y suelte los nombres de los módulos del Portal para que se muestren o se oculten en la barra de navegación superior del Portal. Para controlar el acceso de los usuarios del Portal a los módulos, utilice <a href="?module=ACLRoles&action=index">Administración de funciones.</a>',
     'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Módulos mostrados',
     'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Módulos Ocultos',
+    'LBL_CONFIG_VISIBILITY' => 'Visibilidad',
+    'LBL_CASE_VISIBILITY_HELP' => 'Defina en qué portal los usuarios pueden ver un caso.',
+    'LBL_EMAIL_VISIBILITY_HELP' => 'Defina en qué portal los usuarios pueden ver correos electrónicos relacionados con el caso. Los contactos participantes son aquellos de los campos Para, De, CC y CCO.',
+    'LBL_MESSAGE_VISIBILITY_HELP' => 'Defina en qué portal los usuarios pueden ver los mensajes relacionados con el caso. Los contactos participantes son aquellos del campo Invitados.',
+    'CASE_VISIBILITY_OPTIONS' => [
+        'all' => 'Todos los contactos relacionados con la cuenta',
+        'related_contacts' => 'Solo contactos principales y contactos relacionados con el caso',
+    ],
+    'EMAIL_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Solo contactos participantes',
+        'all' => 'Todos los contactos que pueden ver el caso',
+    ],
+    'MESSAGE_VISIBILITY_OPTIONS' => [
+        'related_contacts' => 'Solo contactes participantes',
+        'all' => 'Todos los contactos que pueden ver el caso',
+    ],
+
 
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Diseños de Portal',
@@ -798,10 +823,10 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
     . "pero no seguirán la fórmula en las aplicaciones nativas, como Sugar Mobile para iPhone. <br/>"
     . "No seguirán la fórmula en el Portal autoservicio de Sugar.",
 'LBL_POPHELP_READONLY'=>"Crear una fórmula para determinar si este campo es solo de lectura en los diseños.<br/>"
-        . "Los campos de lectura seguirán la fórmula en la vista móvil basada en navegador, <br/>"
+        . "Los campos solo de lectura seguirán la fórmula en la vista móvil basada en navegador, <br/>"
         . "pero no seguirán la fórmula en las aplicaciones nativas, como Sugar Mobile para iPhone. <br/>"
         . "No seguirán la fórmula en el Portal autoservicio de Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione este campo para utilizarlo al buscar registros con la Búsqueda global en este módulo.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione esto para utilizar este campo al buscar registros con la Búsqueda global en este módulo.',
 //Revert Module labels
 'LBL_RESET' => 'Restablecer',
 'LBL_RESET_MODULE' => 'Restablecer Módulo',
@@ -837,6 +862,7 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
                 'datetimecombo' =>'Fecha y hora',
                 'decimal'=>'Decimal',
                 'autoincrement' => 'Autoincrementar',
+                'actionbutton' => 'Botón Acción',
 ),
 'labelTypes' => array(
     "" => "Etiquetas de uso frecuente",
@@ -855,4 +881,8 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relacionado {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copiar del diseño',
 'LBL_RELATIONSHIP_TYPE' => 'Relación',
+
+// Edit Labels
+'LBL_COMPARISON_LANGUAGE' => 'Idioma de comparación',
+'LBL_LABEL_NOT_TRANSLATED' => 'Esta etiqueta puede que no esté traducida',
 );

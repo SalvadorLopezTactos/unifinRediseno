@@ -121,7 +121,7 @@
     loadDependencies: function() {
         var loadInterface = _.partial(this.loadLibrary, 'chat-interface.js', _.bind(this.createChatWidget, this));
         var loadChat = _.partial(this.loadLibrary, 'chat.js', loadInterface);
-        this.loadLibrary('1.4.9-1-gf9242a0.js', loadChat);
+        this.loadLibrary('streams-1.6.9.js', loadChat);
     },
 
     /**

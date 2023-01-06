@@ -73,7 +73,7 @@ $viewdefs['Home']['base']['layout']['search-dashboard'] = array(
                                             array(
                                                 "type" => "dashletaction",
                                                 "css_class" => "dashlet-toggle btn btn-invisible minify",
-                                                "icon" => "fa-chevron-up",
+                                                "icon" => "sicon-chevron-up",
                                                 "action" => "toggleMinify",
                                                 "tooltip" => "LBL_DASHLET_TOGGLE",
                                             ),
@@ -89,6 +89,6 @@ $viewdefs['Home']['base']['layout']['search-dashboard'] = array(
         ),
     ),
     'name' => 'LBL_FACETS_DASHBOARD_TITLE',
-    'css_class' => 'facets-dashboard',
+    'css_class' => 'facets-dashboard pt-4',
     'drag_and_drop' => false,
 );

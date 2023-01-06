@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-{include file="_head.tpl" theme_template=true}
-<body class="yui-skin-sam">
+{include file="file:themes/RacerX/tpls/_head.tpl" theme_template=true}
+<body class="yui-skin-sam sugar-{$appearance|escape:'htmlall'}-theme">
     <a name="top"></a>
     <div style="position:fixed;top:0;left:0;width:1px;height:1px;z-index:21;"></div>
     <div class="clear"></div>

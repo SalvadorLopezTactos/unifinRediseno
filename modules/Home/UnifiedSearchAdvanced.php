@@ -322,7 +322,7 @@ class UnifiedSearchAdvanced {
                     $module_results[$moduleName] .= '<h2>' . $home_mod_strings['LBL_NO_RESULTS_IN_MODULE'] . '</h2>';
                 } else {
                     $has_results = true;
-                    $module_results[$moduleName] .= $lv->display(false, false);
+                    $module_results[$moduleName] .= $lv->display(false);
                 }
 
 			}

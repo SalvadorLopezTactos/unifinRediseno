@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'הופנה על ידי',
     'LBL_LIST_STATUS' => 'מצב',
     'LBL_LIST_TITLE' => 'תואר',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'תחזית ההתעניינות על ידי השוק',
+    'LBL_MARKET_SCORE' => 'הניקוד של השוק',
     'LBL_MOBILE_PHONE' => 'טלפון נייד:',
     'LBL_MODULE_NAME' => 'לידים',
     'LBL_MODULE_NAME_SINGULAR' => 'ליד',
@@ -330,4 +332,9 @@ After confirming each required and desired module, click the Save and Convert bu
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'תחזית המרת לידים',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'הצג פרטי תחזית לגבי ליד ספציפי',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'הפעל פריטי שורה של הכנסות',
+    'LBL_REQUIRE_RLIS' => 'דרוש פריטי שורה של הכנסות בעת יצירת הזדמנות חדשה',
+    'LBL_COPY_DATA_RLIS' => 'העתק את נתוני הליד אל פריטי שורה של הכנסות בעת יצירת הזדמנות חדשה',
 );

@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Fiók neve/ipar',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Hely',
     'LBL_PURCHASES' => 'Vásárlások',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Fiók interakciók',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Fiók idővonal',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagramok',

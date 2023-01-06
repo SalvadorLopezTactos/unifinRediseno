@@ -196,7 +196,7 @@ class SugarACLStatic extends SugarACLStrategy
                     )) {
                         $temp = BeanFactory::newBean($bean->module_dir);
                         $temp->createLocaleFormattedName = false;
-                        $temp->populateFromRow($bean->fetched_row);
+                        $temp->populateFromRow($bean->fetched_row, false, false);
                     }else{
                         if($bean->new_with_id) {
                             $is_owner = true;
@@ -274,7 +274,8 @@ class SugarACLStatic extends SugarACLStrategy
         } else {
             $level = 'module';
         }
-        $actions = ACLAction::getUserActions($user->id, false, $module, $level);
+        $allActs = ACLAction::getUserActions($user->id);
+        $actions = $allActs[$module][$level] ?? [];
         if(empty($actions)) {
             return $access_list;
         }

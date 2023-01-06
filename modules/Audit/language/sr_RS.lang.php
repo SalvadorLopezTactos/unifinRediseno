@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Kontrolisana polja u ovom modulu:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'U ovom modulu nema polja koja su kontrolisana',
     'LBL_CHANGE_LOG' => 'Evidencija nadzora',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kada se snime izmenjena polja sa valutom u valuti koja nije podrazumevana u sistemu, prijava promene će prikazati stare i nove vrednosti u konvertovanoj valuti koja se ne podrazumeva za sistem.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Kada se snime izmenjena polja sa valutom u valuti koja nije podrazumevana u sistemu, prijava promene će prikazati stare i nove vrednosti u konvertovanoj valuti koja se ne podrazumeva za sistem.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Ažurirajte na',
+    'LBL_BLANK' => '-prazno-',
 );

@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Εμφάνιση Αναφορών Μηνύματος',
     'LNK_IMPORT_MESSAGES' => 'Εισαγωγή Μηνυμάτων',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Ταυτότητα Δυνητικού Πελάτη',
+    'LBL_LEAD_NAME' => 'Δυνητικός Πελάτης',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Συνομιλία από την πλευρά του πελάτη',
+    'LBL_ACTIVITY_CUSTOMER' => 'Πελάτης',
+    'LBL_ACTIVITY_FINISHED' => 'ολοκληρώθηκε',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'σε εξέλιξη',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης μηνυμάτων',
 ];

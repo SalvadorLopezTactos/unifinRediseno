@@ -59,6 +59,7 @@
         this.listenTo(this.layout, 'filter:change:module', this.handleModuleChange);
         this.listenTo(this.layout, 'filter:render:filter', this._renderHtml);
         this.listenTo(this.layout, 'filter:create:close', this.formatSelection);
+        this.listenTo(this.context, 'filter:collapse', this.formatSelection);
     },
 
     /**
@@ -134,7 +135,18 @@
             var firstNonEditable = false;
             this.layout.filters.collection.each(function(model) {
                 var creator = model.get('created_by');
-                if (!creator || creator === app.user.get('id')) {
+                var filterApp = model.get('app');
+                var isCreator = !creator || creator === app.user.get('id');
+                var isPortal = app.controller.context.get('layout') === 'portaltheme-config' ||
+                    app.config.platform === 'portal';
+                // if filterApp is empty, show this filter in both portal and main app
+                var isPortalFilter = filterApp === 'portal' || !filterApp;
+                var isMainAppFilter = filterApp === 'base' || !filterApp;
+                var isFilterValid = this._isFilterModelValid(model, false);
+
+                // show only current user's filters in main app
+                // show all portal filters in portal and portal config page
+                if (((!isPortal && isMainAppFilter && isCreator) || (isPortal && isPortalFilter)) && isFilterValid) {
                     var opts = {
                         id: model.id,
                         text: this.layout.filters.collection._getTranslatedFilterName(model)
@@ -149,6 +161,43 @@
         }
 
         return filters;
+    },
+
+    /**
+     * Validation checks against filter model
+     *
+     * @param {Data.Bean} model
+     * @param {boolean} reset
+     *
+     * @private
+     *
+    * @return {boolean}
+     */
+    _isFilterModelValid: function(model, reset) {
+        const hasDistanceFilter = !_.chain(model.get('filter_definition'))
+            .pluck('$distance')
+            .compact()
+            .isEmpty()
+            .value();
+
+        if (!app.user.hasMapsLicense() && hasDistanceFilter) {
+            if (reset) {
+                this._fallbackToDefaultFilters();
+            }
+
+            return false;
+        }
+
+        return true;
+    },
+
+    /**
+     * Reset filters to default
+     *
+     * @private
+     */
+    _fallbackToDefaultFilters: function() {
+        this.layout.clearLastFilter(this.layout.layout.currentModule, this.layout.layoutType);
     },
 
     /**
@@ -265,7 +314,7 @@
             model = this.layout.filters.collection.get(val);
 
             //Fallback to `all_records` filter if not able to retrieve selected filter
-            if (!model) {
+            if (!model || !this._isFilterModelValid(model, true)) {
                 data = {id: 'all_records', text: app.lang.get(this.labelAllRecords)};
 
             } else if (val === 'all_records') {
@@ -337,9 +386,9 @@
      * */
     formatResult: function(option) {
         if (option.id === this.layout.getLastFilter(this.layout.layout.currentModule, this.layout.layoutType)) {
-            option.icon = 'fa-check';
+            option.icon = 'sicon-check';
         } else if (option.id === 'create') {
-            option.icon = 'fa-plus';
+            option.icon = 'sicon-plus';
         } else {
             option.icon = undefined;
         }
@@ -444,6 +493,7 @@
             this.layout.trigger('filter:select:filter', 'create');
             a11yTabindex = 0;
         } else {
+            this.layout.trigger('filter:select:filter', filterId);
             filterModel = this.layout.filters.collection.get(filterId);
             a11yTabindex = -1;
         }

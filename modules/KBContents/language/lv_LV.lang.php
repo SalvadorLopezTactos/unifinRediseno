@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Skatīt sagataves',
     'LNK_LIST_KBCATEGORIES' => 'Skatīt kategorijas',
     'LBL_TEMPLATES' => 'Veidnes',
+    'LBL_TEMPLATE' => 'Veidne',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'Veidne pārrakstīs visu saturu.' .
         ' Vai esat pārliecināti, ka vēlaties izmantot šo veidni?',
     'LNK_IMPORT_KBCONTENTS' => 'Importēt rakstus',

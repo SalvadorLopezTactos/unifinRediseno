@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class PlannerBucket extends Entity
 {
@@ -30,7 +28,7 @@ class PlannerBucket extends Entity
     * Gets the name
     * Name of the bucket.
     *
-    * @return string The name
+    * @return string|null The name
     */
     public function getName()
     {
@@ -56,39 +54,10 @@ class PlannerBucket extends Entity
     }
     
     /**
-    * Gets the planId
-    * Plan ID to which the bucket belongs.
-    *
-    * @return string The planId
-    */
-    public function getPlanId()
-    {
-        if (array_key_exists("planId", $this->_propDict)) {
-            return $this->_propDict["planId"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the planId
-    * Plan ID to which the bucket belongs.
-    *
-    * @param string $val The planId
-    *
-    * @return PlannerBucket
-    */
-    public function setPlanId($val)
-    {
-        $this->_propDict["planId"] = $val;
-        return $this;
-    }
-    
-    /**
     * Gets the orderHint
     * Hint used to order items of this type in a list view. The format is defined as outlined here.
     *
-    * @return string The orderHint
+    * @return string|null The orderHint
     */
     public function getOrderHint()
     {
@@ -113,12 +82,41 @@ class PlannerBucket extends Entity
         return $this;
     }
     
+    /**
+    * Gets the planId
+    * Plan ID to which the bucket belongs.
+    *
+    * @return string|null The planId
+    */
+    public function getPlanId()
+    {
+        if (array_key_exists("planId", $this->_propDict)) {
+            return $this->_propDict["planId"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the planId
+    * Plan ID to which the bucket belongs.
+    *
+    * @param string $val The planId
+    *
+    * @return PlannerBucket
+    */
+    public function setPlanId($val)
+    {
+        $this->_propDict["planId"] = $val;
+        return $this;
+    }
+    
 
      /** 
      * Gets the tasks
     * Read-only. Nullable. The collection of tasks in the bucket.
      *
-     * @return array The tasks
+     * @return array|null The tasks
      */
     public function getTasks()
     {
@@ -139,7 +137,7 @@ class PlannerBucket extends Entity
     */
     public function setTasks($val)
     {
-		$this->_propDict["tasks"] = $val;
+        $this->_propDict["tasks"] = $val;
         return $this;
     }
     

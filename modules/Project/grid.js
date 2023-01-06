@@ -117,7 +117,7 @@ SUGAR.grid = function() {
 			if (document.getElementById(div).style.display != 'none')
 				document.getElementById(input).focus();
 			if (document.getElementById(divlink).style.display != 'none')
-				document.getElementById(divlink).innerHTML = document.getElementById(input).value;
+				document.getElementById(divlink).textContent = document.getElementById(input).value;
 		},
 
 		/**
@@ -133,16 +133,17 @@ SUGAR.grid = function() {
 					if (divlinkVal.search("Minus.gif") != -1) {
 						document.getElementById(divlink).innerHTML =
 						"<img src='" + imagePathProjectMinus + "' onClick='javascript:SUGAR.grid.expandCollapseRow("+ row +")'>&nbsp;" +
-						"<b>" + document.getElementById(input).value + "</b>";
+						'<b>' + _.escape(document.getElementById(input).value) + '</b>';
 					}
 					else if (divlinkVal.search("Plus.gif") != -1) {
 						document.getElementById(divlink).innerHTML =
 						"<img src='" + imagePathProjectPlus + "' onClick='javascript:SUGAR.grid.expandCollapseRow("+ row +")'>&nbsp;" +
-						"<b>" + document.getElementById(input).value + "</b>";
+						'<b>' + _.escape(document.getElementById(input).value) + '</b>';
 					}
 					else {
-						document.getElementById(divlink).innerHTML = document.getElementById(input).value;
-						document.getElementById("description_divlink_input_" + row).value = document.getElementById(input).value;
+                    document.getElementById(divlink).textContent = document.getElementById(input).value;
+                    document.getElementById('description_divlink_input_' + row).value =
+                            _.escape(document.getElementById(input).value);
 					}
 
 				SUGAR.grid.indentRow(row, true);
@@ -201,7 +202,7 @@ SUGAR.grid = function() {
 				document.getElementById("description_" + mappedRow).value =
 					document.getElementById("description_" + copyRows[copyRows.length - 1]).value;
 
-				document.getElementById("description_" + mappedRow + "_divlink").innerHTML =
+                document.getElementById('description_' + mappedRow + '_divlink').textContent =
 					document.getElementById("description_" + copyRows[copyRows.length - 1]).value;
 
 				document.getElementById("description_divlink_input_" + mappedRow).value =
@@ -1127,7 +1128,7 @@ SUGAR.grid = function() {
 
 			// If the parent doesn't have any other children, we should get rid of any expand/collapse images
 			if (!parentHasOtherChildren) {
-				document.getElementById(elementId).innerHTML = document.getElementById(inputId).value;
+                document.getElementById(elementId).textContent = document.getElementById(inputId).value;
 				document.getElementById("description_divlink_input_" + parentRow).value = document.getElementById(inputId).value;
 
 				document.getElementById("date_start_" + parentRow).removeAttribute("readOnly");
@@ -2295,7 +2296,9 @@ SUGAR.grid = function() {
 				return;
 			}
 			document.getElementById("task_detail_area_div").style.display = "";
-            $("#task_detail_area_div").load("index.php?module=ProjectTask&fromGrid=1&show_js=1&action=EditView&record=" + record);
+            $('#task_detail_area_div').load('index.php?' +
+                'module=ProjectTask&fromGrid=1&show_js=1&action=EditView&record=' +
+                encodeURI(record));
             SUGAR.grid.unSelectRow(selectedRows[0]);
 		},
 

@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'סוג הורה',
     'LBL_PARENT_ID' => 'מזהה הורה',
     'LBL_EXTRA_DATA' => 'נתונים נוספים',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM – אזכור ב-{{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} אזכר אותך ב-{{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM – הקצאה ב-{{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} הקצה לך את {{module_name_singular}} {{record_name}}.',
 ];

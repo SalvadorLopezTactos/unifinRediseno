@@ -332,7 +332,6 @@ $dictionary['Purchase'] = [
         'archived_emails' => [
             'name' => 'archived_emails',
             'type' => 'link',
-            'link_file' => 'modules/Emails/ArchivedEmailsLink.php',
             'link_class' => 'ArchivedEmailsLink',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
@@ -429,6 +428,7 @@ $dictionary['Purchase'] = [
         'basic',
         'assignable',
         'team_security',
+        'currency',
     ],
 ];
 VardefManager::createVardef(

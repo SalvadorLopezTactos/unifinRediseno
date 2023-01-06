@@ -87,12 +87,30 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
             $this->job->failJob('Report field definition is invalid');
             return false;
         } else {
+            // default to PDF
+            $fileType = $scheduleInfo['file_type'] ? $scheduleInfo['file_type'] : 'PDF';
+
             $GLOBALS["log"]->debug("-----> Reporter settings attributes");
             $reporter->layout_manager->setAttribute("no_sort", 1);
 
             $GLOBALS["log"]->debug("-----> Reporter Handling PDF output");
-            require_once 'modules/Reports/templates/templates_tcpdf.php';
-            $reportFilename = template_handle_pdf($reporter, false);
+            $filesToUnlink = [];
+            if ($fileType == 'PDF') {
+                require_once 'modules/Reports/templates/templates_tcpdf.php';
+                $reportFilename = template_handle_pdf($reporter, false);
+                $filesToUnlink[] = $reportFilename;
+            } elseif ($fileType == 'CSV') {
+                require_once 'modules/Reports/templates/templates_export.php';
+                $csvFileName = template_handle_export($reporter, false);
+                $filesToUnlink[] = $csvFileName;
+            } else { // both PDF and CSV
+                require_once 'modules/Reports/templates/templates_tcpdf.php';
+                $reportFilename = template_handle_pdf($reporter, false);
+                require_once 'modules/Reports/templates/templates_export.php';
+                $csvFileName = template_handle_export($reporter, false);
+                $filesToUnlink[] = $reportFilename;
+                $filesToUnlink[] = $csvFileName;
+            }
 
             // get the recipient's data...
 
@@ -122,9 +140,14 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 // remove these characters from the attachment name
                 $attachmentName = str_replace($charsToRemove, "", $reportName . ' ' . $reportTime);
                 // replace spaces with the underscores
-                $attachmentName = str_replace(" ", "_", "{$attachmentName}.pdf");
-                $attachment = new Attachment($reportFilename, $attachmentName, Encoding::Base64, "application/pdf");
-                $mailer->addAttachment($attachment);
+                if ($fileType == 'PDF') {
+                    $this->attachFile($fileType, $mailer, $attachmentName, $reportFilename);
+                } elseif ($fileType == 'CSV') {
+                    $this->attachFile($fileType, $mailer, $attachmentName, $csvFileName);
+                } else {
+                    $this->attachFile('PDF', $mailer, $attachmentName, $reportFilename);
+                    $this->attachFile('CSV', $mailer, $attachmentName, $csvFileName);
+                }
 
                 $emailConfig = SugarConfig::getInstance()->get('emailTemplate');
                 $templateID = $emailConfig['‌ReportSchedule'] ?? '';
@@ -191,12 +214,28 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 }
             }
 
-            $GLOBALS["log"]->debug("-----> Removing temporary PDF file");
-            unlink($reportFilename);
+            $GLOBALS["log"]->debug("-----> Removing temporary files");
+            foreach ($filesToUnlink as $file) {
+                unlink($file);
+            }
 
             $this->job->succeedJob();
 
             return true;
         }
+    }
+
+    /**
+     * @param String $type
+     * @param Object $mailer
+     * @param String $attachmentName
+     * @param String $filename
+     */
+    protected function attachFile(String $type, Object $mailer, string $attachmentName, string $filename)
+    {
+        $typeLower = strtolower($type);
+        $attachmentName = str_replace(" ", "_", "{$attachmentName}.{$typeLower}");
+        $attachment = new Attachment($filename, $attachmentName, Encoding::Base64, "application/{$typeLower}");
+        $mailer->addAttachment($attachment);
     }
 }

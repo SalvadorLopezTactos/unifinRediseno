@@ -16,20 +16,20 @@
         rel="tooltip" data-container="body" data-original-title="{{getDDLabel 'accept' def.options}}"
         aria-label="{{getDDLabel 'accept' def.options}}" aria-pressed="{{#eq value 'accept'}}true{{else}}false{{/eq}}"
     >
-        <i class="fa fa-check-circle"></i>
+        <i class="sicon sicon-check-circle"></i>
     </button>
     <button
         type="button" class="{{#eq value 'tentative'}}active {{/eq}}btn btn-mini action-tentative" data-action="tentative"
         rel="tooltip" data-container="body" data-original-title="{{getDDLabel 'tentative' def.options}}"
         aria-label="{{getDDLabel 'tentative' def.options}}" aria-pressed="{{#eq value 'tentative'}}true{{else}}false{{/eq}}"
     >
-        <i class="fa fa-question-circle"></i>
+        <i class="sicon sicon-help"></i>
     </button>
     <button
         type="button" class="{{#eq value 'decline'}}active {{/eq}}btn btn-mini action-decline" data-action="decline"
         rel="tooltip" data-container="body" data-original-title="{{getDDLabel 'decline' def.options}}"
         aria-label="{{getDDLabel 'decline' def.options}}" aria-pressed="{{#eq value 'decline'}}true{{else}}false{{/eq}}"
     >
-        <i class="fa fa-ban"></i>
+        <i class="sicon sicon-ban"></i>
     </button>
 </div>

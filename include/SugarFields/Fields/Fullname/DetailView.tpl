@@ -26,16 +26,12 @@
 {/if}
 {{/if}}
 
-{literal}
 <script type="text/javascript">
     $("#btn_vCardButton").click(function(e){
-        {/literal}
         window.location.assign('index.php?module={$module}&action=vCard&record={$fields.id.value}&to_pdf=true');
-        {literal}
 
         if (e.preventDefault) {
             e.preventDefault();
         }
     });
 </script>
-{/literal}

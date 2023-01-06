@@ -17,16 +17,12 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Kriterijų variklis',
-  'LBL_MODULE_NAME_SINGULAR' => 'Kriterijų variklis',
-  'func_descriptions' => array (
-
-),
-	'LBL_PREVIOUS' => 'Atgal' /*for 508 compliance fix*/,
-	'LBL_NEXT' => 'Toliau' /*for 508 compliance fix*/,
-	'LBL_EXPAND' => 'Išplėsti' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Kriterijų variklis',
+    'LBL_MODULE_NAME_SINGULAR' => 'Kriterijų variklis',
+    'func_descriptions' => [],
+    'LBL_PREVIOUS' => 'Atgal' /*for 508 compliance fix*/,
+    'LBL_NEXT' => 'Toliau' /*for 508 compliance fix*/,
+    'LBL_EXPAND' => 'Išplėsti' /*for 508 compliance fix*/,
+    'LBL_UNKNOWN_FIELD' => 'Nežinomas laukas',
+];

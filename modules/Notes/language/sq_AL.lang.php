@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'Adresa e Emailit',
     'LBL_EMAIL_ATTACHMENT' => 'bashkëngjitje të mailit',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'Bashkëngjitja me email për',
+    'LBL_NOTE_ATTACHMENT' => 'Bashkëngjitjet e shënimeve',
+    'LBL_KB_ATTACHMENT' => 'Bashkëngjitjet e dokumentit KB',
+    'LBL_CASE_ATTACHMENT' => 'Bashkëngjitjet e rastit',
     'LBL_FILE_MIME_TYPE' => 'Lloji pantomime',
     'LBL_FILE_EXTENSION' => 'Mbaresa e skedarit',
     'LBL_FILE_SOURCE' => 'Burimi i skedarit',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'Burimi i shënimeve',
     'LBL_SOURCE_EXTERNAL' => 'I jashtëm',
     'LBL_SOURCE_INTERNAL' => 'I brendshëm',
+    'LBL_PORTAL' => 'Portali',
 
     // Help Text
     // List View Help Text

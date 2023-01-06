@@ -14,5 +14,5 @@ $mod_strings = [
     'LBL_MODULE_NAME' => 'Mobile enheder',
     'LBL_MODULE_NAME_SINGULAR' => 'Mobil enhed',
     'LBL_DEVICE_ID' => 'Enheds-ID',
-    'LBL_DEVICE_PLATFORM' => 'Platform',
+    'LBL_DEVICE_PLATFORM' => 'Enhedsplatform',
 ];

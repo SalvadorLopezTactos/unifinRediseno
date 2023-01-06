@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Vizualizare rapoarte mesaje',
     'LNK_IMPORT_MESSAGES' => 'Importare mesaje',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'ID client potențial',
+    'LBL_LEAD_NAME' => 'Client potențial',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Chat din partea clientului',
+    'LBL_ACTIVITY_CUSTOMER' => 'Client',
+    'LBL_ACTIVITY_FINISHED' => 'încheiat',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'în desfășurare',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare mesaje',
 ];

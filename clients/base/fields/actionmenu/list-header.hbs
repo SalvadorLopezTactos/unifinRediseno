@@ -11,12 +11,21 @@
  */
 --}}
 
-<div class="btn checkall" data-check="all"><input type="checkbox" name="check" class="toggle-all" {{#if selected}}checked{{/if}}></div>
+<div class="btn checkall" data-check="all"
+    {{#if def.is_list_pagination}}
+     rel="tooltip" data-placement="bottom"
+     title="{{#if selected}}{{str 'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE'}}{{else}}{{str 'LBL_LISTVIEW_SELECT_ALL_ON_PAGE'}}{{/if}}"
+    {{/if}}
+>
+    <input type="checkbox" name="check" class="toggle-all" {{#if selected}}checked{{/if}}
+        aria-label="{{str 'LBL_MASS_UPDATE_CHECKBOX'}}"
+    >
+</div>
 {{#if dropdownFields}}
     <a track="click:listactiondropdown"
        class="btn dropdown-toggle{{#unless action_enabled}} disabled{{/unless}}{{#if def.primary}} btn-primary{{/if}}"
        data-toggle="dropdown" href="javascript:void(0);" data-placement="bottom"
        rel="tooltip" title="{{str 'LBL_LISTVIEW_ACTIONS'}}"
-       role="button" tabindex="{{tabIndex}}" aria-label="{{str 'LBL_LISTVIEW_ACTIONS'}}"><span class="fa fa-caret-down"></span></a>
+       role="button" tabindex="{{tabIndex}}" aria-label="{{str 'LBL_LISTVIEW_ACTIONS'}}"><span class="sicon sicon-chevron-down"></span></a>
     <ul data-menu="dropdown" class="dropdown-menu" role="menu"></ul>
 {{/if}}

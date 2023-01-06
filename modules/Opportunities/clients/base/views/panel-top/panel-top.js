@@ -22,7 +22,9 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.on('linked-model:create', this._reloadRevenueLineItems, this);
+        if (['Accounts', 'Documents'].includes(this.parentModule)) {
+            this.on('linked-model:create', this._reloadRevenueLineItems, this);
+        }
     },
 
     /**
@@ -43,7 +45,7 @@
 
                 var cc_field = rliComponent.getComponent('panel-top').getField('collection-count');
 
-                app.api.count('Accounts', {
+                app.api.count(this.parentModule, {
                     id: this.context.parent.get('modelId'),
                     link:'revenuelineitems'
                 }, {

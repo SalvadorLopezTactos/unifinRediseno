@@ -14,12 +14,12 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
-    removeFldIcon: '<i class="fa fa-times-circle console-field-remove"></i>',
-    removeColIcon: '<i class="fa fa-times-circle multi-field-column-remove"></i>',
+    removeFldIcon: '<i class="sicon sicon-remove console-field-remove"></i>',
+    removeColIcon: '<i class="sicon sicon-remove multi-field-column-remove"></i>',
 
     events: {
-        'click .fa.fa-times-circle.console-field-remove': 'removePill',
-        'click .fa.fa-times-circle.multi-field-column-remove': 'removeMultiLineField',
+        'click .sicon.sicon-remove.console-field-remove': 'removePill',
+        'click .sicon.sicon-remove.multi-field-column-remove': 'removeMultiLineField',
     },
 
     /**

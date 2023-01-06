@@ -41,7 +41,7 @@ class SugarUpgradeFixFieldsMetaDataIdLength extends UpgradeScript
         $query->from($fieldsMetaData, ['add_deleted' => false]);
         $query->where()->addRaw($idLengthExpression . '> 36');
         $stmt = $query->compile()->execute();
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $newId = Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
             $oldId = $row['id'];
             $conn->update($fieldsMetaData->getTableName(), ['id' => $newId], ['id' => $oldId]);

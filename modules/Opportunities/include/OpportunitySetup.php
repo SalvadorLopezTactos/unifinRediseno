@@ -104,6 +104,21 @@ abstract class OpportunitySetup
      */
     protected $accModuleExtVardefFile = 'acc_vardef.ext.php';
 
+    /**
+     * Forecast field defs
+     * @var array
+     */
+    protected $commitStageViewDef = [
+        'name' => 'commit_stage',
+        'type' => 'enum-cascade',
+        'disable_field' => 'closed_won_revenue_line_items',
+        'disable_positive' => true,
+        'related_fields' => [
+            'probability',
+            'closed_won_revenue_line_items',
+        ],
+    ];
+
     public function __construct()
     {
         $this->bean = BeanFactory::newBean('Opportunities');
@@ -209,6 +224,8 @@ abstract class OpportunitySetup
         // hide RLI related fields in Account module
         $this->fixAccountModule();
 
+        $this->fixLeadConvertView();
+
         // r&r the opp module
         $this->runRepairAndRebuild(
             array(
@@ -216,6 +233,7 @@ abstract class OpportunitySetup
                 'Products',
                 'Forecasts',
                 'Accounts',
+                'Leads',
             )
         );
 
@@ -316,6 +334,107 @@ abstract class OpportunitySetup
 
         // run repair and rebuild for all the modules that were touched
         $this->runRepairAndRebuild($modules);
+    }
+
+    /**
+     * Ensure forecast-related fields are in the correct state
+     * @param null $enabledOverride if set to true or false, used instead of checking forecast settings
+     *                              to see if fields should be added/removed
+     */
+    public function fixForecastFields($enabledOverride = null)
+    {
+        $recordViews = [
+            'base' => [
+                MB_RECORDVIEW,
+                MB_RECORDDASHLETVIEW,
+                MB_PREVIEWVIEW,
+            ],
+            'mobile' => [
+                MB_WIRELESSDETAILVIEW,
+                MB_WIRELESSEDITVIEW,
+            ],
+        ];
+
+        $listViews = [
+            'base' => [
+                MB_SIDECARPOPUPVIEW,
+                MB_SIDECARDUPECHECKVIEW,
+                MB_LISTVIEW,
+            ],
+            'mobile' => [
+                MB_WIRELESSLISTVIEW,
+            ],
+        ];
+
+        $shouldAddFields = $this->shouldAddForecastFields($enabledOverride);
+
+        foreach ($recordViews as $client => $views) {
+            foreach ($views as $view) {
+                $this->fixRecordForecastFields($shouldAddFields, $view, $client);
+            }
+        }
+        foreach ($listViews as $client => $views) {
+            foreach ($views as $view) {
+                $this->fixListForecastFields($shouldAddFields, $view, $client);
+            }
+        }
+
+        $this->fixFilter([
+            'commit_stage' => $shouldAddFields,
+        ]);
+
+        $this->runRepairAndRebuild(['Opportunities']);
+    }
+
+    /**
+     * Helper function to check if forecast fields need to be fixed
+     * @param $enabledOverride
+     * @return bool
+     */
+    private function shouldAddForecastFields($enabledOverride)
+    {
+        return $enabledOverride !== null ? $enabledOverride : $this->isForecastSetup();
+    }
+
+    /**
+     * Fixes the forecast field for record views
+     * @param $shouldAddFields
+     * @param $view
+     * @param $client
+     */
+    protected function fixRecordForecastFields($shouldAddFields, $view, $client)
+    {
+        $parser = ParserFactory::getParser($view, 'Opportunities', null, null, $client);
+
+        // Check the available fields to ensure we don't add commit_stage more than once.
+        $availableFieldNames = array_column($parser->getAvailableFields(), 'name');
+        if ($shouldAddFields && in_array('commit_stage', $availableFieldNames)) {
+            $parser->additionalFieldDefs['commit_stage'] = $this->commitStageViewDef;
+            $parser->addField($this->commitStageViewDef);
+            $parser->handleSave(false, true);
+        } elseif (!$shouldAddFields) {
+            $parser->removeField('commit_stage');
+            $parser->handleSave(false, true);
+        }
+    }
+
+    /**
+     * Fixes the forecast field for list views
+     * @param $view
+     * @param $client
+     */
+    protected function fixListForecastFields($shouldAddFields, $view, $client)
+    {
+        $parser = ParserFactory::getParser($view, 'Opportunities', null, null, $client);
+
+        // List view parsers only allow one instance of a field to be added at a time, and don't report entirely
+        // accurate results with getAvailableFields() - just skip checking that for these views.
+        if ($shouldAddFields) {
+            $parser->addField('commit_stage', $this->commitStageViewDef);
+        } else {
+            $parser->removeField('commit_stage');
+        }
+        $parser->handleSave(false, true);
     }
 
     /**
@@ -759,11 +878,8 @@ EOL;
                     $value = $default_reports_mapped[$key][2];
                 }
 
-                $db->query('UPDATE saved_reports SET content = ' .
-                    $db->quoted($value) .
-                    ' WHERE name = ' .
-                    $db->quoted($key) .
-                    ' AND date_entered = date_modified');
+                $query = 'UPDATE saved_reports SET content = ? WHERE name = ? AND date_entered = date_modified';
+                $db->getConnection()->executeQuery($query, [$value, $key]);
             }
         }
     }
@@ -815,4 +931,9 @@ EOL;
      * Fix Account module.
      */
     abstract protected function fixAccountModule();
+
+    /**
+     * Fix Lead Convert views
+     */
+    abstract protected function fixLeadConvertView();
 }

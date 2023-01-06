@@ -10,13 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<footer>
-    <div class="table-row">
-        <div class="table-cell">
+<footer class="bg-footer-background w-full h-7.5 min-h-7.5 max-h-7.5 rounded-none fixed">
+    <div class="footer-container flex items-center h-full">
+        <div class="footer-item-container flex flex-grow items-center">
             {{component this 'footer-logos'}}
         </div>
-        <div class="table-cell">
-            <div class="btn-toolbar pull-right">{{component this 'footer-buttons'}}</div>
+        <div class="footer-item-container">
+            <div class="btn-toolbar flex items-center mr-2.5">
+                {{component this 'footer-buttons'}}
+            </div>
         </div>
     </div>
 </footer>

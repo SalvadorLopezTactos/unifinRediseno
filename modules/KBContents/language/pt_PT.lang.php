@@ -86,6 +86,7 @@ $mod_strings = array (
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Ver modelos',
     'LNK_LIST_KBCATEGORIES' => 'Ver Categorias',
     'LBL_TEMPLATES' => 'Modelos',
+    'LBL_TEMPLATE' => 'Modelo',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'O modelo vai substituir todos os conteúdos.' .
         ' Tem a certeza de que pretende utilizar este modelo?',
     'LNK_IMPORT_KBCONTENTS' => 'Importar artigos',

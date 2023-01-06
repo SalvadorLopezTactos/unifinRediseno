@@ -10,26 +10,26 @@
  */
 
 /*
-Change log 
+Change log
 243356 - F6F6F6 //very light gray (Sugar Grey)
 a3a3a3 - d8d8d6
 2647a0 - EEEEE8
-EDF5FF - EEEEE8 
+EDF5FF - EEEEE8
 fff - 000
 */
 
-div.workarea { 
+div.workarea {
 	padding: 5px;
 	float: left;
 	display:block;
-    width: 200px; 
-    height: 100px; 
+    width: 200px;
+    height: 100px;
 }
 
 .yui-skin-sam .yui-navset .yui-content table,
 .yui-skin-sam .yui-navset .yui-content td
 {
-    background: #F6F6F6 !important;
+    background: var(--primary-content-background);
     padding: 2px;
     border: none;
 }
@@ -45,24 +45,24 @@ div.datasource_content {
 
 
 div.add_table {
-    background: #F6F6F6;	
+    background: var(--content-background);
 }
 
 
-ul.draglist { 
+ul.draglist {
     position: relative;
     float: left;
-    width: 200px; 
+    width: 200px;
     height: 100px;
-    border: 1px solid #808080;
+    border: 1px solid var(--border-color);
     margin: 1px;
     padding: 1px;
     overflow: auto;
     cursor: pointer;
     list-style-type: none;
-    vertical-align: top; 
+    vertical-align: top;
     display:block;
-	background: #FFFFFF;
+    background: var(--content-background);
 }
 
 
@@ -71,8 +71,8 @@ li.noBullet2 {
     margin: 0px;
     cursor: pointer;
     padding:0px;
-	background: #FFFFFF;    
-    /* border:1px solid #7EA6B2; */ 
+    background: var(--content-background);
+    /* border:1px solid #7EA6B2; */
 }
 
 
@@ -87,23 +87,23 @@ div.enabled_module_workarea, div.disabled_module_workarea {
 	padding: 5px;
 	float: left;
 	display:block;
-    width: 200px; 
-    height: 200px; 
+    width: 200px;
+    height: 200px;
 }
 
 
 ul.module_draglist {
     position: relative;
     float: left;
-    width: 200px; 
+    width: 200px;
     height: 200px;
-    border: 1px solid #808080;
+    border: 1px solid var(--border-color);
     margin: 1px;
     padding: 1px;
     overflow: auto;
     cursor: pointer;
     list-style-type: none;
-    vertical-align: top; 
+    vertical-align: top;
     display:block;
-	background: #FFFFFF;
+    background: var(--content-background);
 }

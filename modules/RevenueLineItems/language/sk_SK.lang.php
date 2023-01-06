@@ -137,6 +137,7 @@ $mod_strings = array(
     'LBL_RENEWAL_RLI_ID' => 'ID riadkovej položky pre výnosy z obnovenia',
     'LBL_PARENT_RLIS' => 'Nadradené riadkové položky pre výnosy',
     'LBL_PARENT_RLIS_SUBPANEL_TITLE' => 'Nadradené riadkové položky pre výnosy',
+    'LBL_FORECASTED_LIKELY' => 'Prognózované ako pravdepodobné',
     'LBL_EXPERT_ID' => 'Produktový expert',
     'LBL_FORECAST' => 'Zahrnúť do prognózy',
     'LBL_SUBTOTAL' => 'Medzisúčet',

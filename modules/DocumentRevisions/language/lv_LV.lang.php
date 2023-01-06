@@ -25,7 +25,12 @@ $mod_strings = array (
 	'LNK_NEW_DOCUMENT' => 'Izveidot dokumentu',
 	'LNK_DOCUMENT_LIST'=> 'Dokumentu saraksts',
 
-	//vardef labels
+    'LBL_REVISIONS_FOR_DOC' => 'Redakcijas saistītajam dokumentam',
+
+    'LBL_RECORD_SAVED_SUCCESS' => 'Jūs veiksmīgi izveidojāt {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{revision}}</a>.', // use when a model is available
+
+
+    //vardef labels
 	'LBL_REVISION_NAME' => 'Versijas numurs',
 	'LBL_FILENAME' => 'Fails:',
 	'LBL_MIME' => 'MIME tips',

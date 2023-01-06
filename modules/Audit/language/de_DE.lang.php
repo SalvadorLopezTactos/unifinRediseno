@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Geprüfte Felder in diesem Modul: ',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'In diesem Modul sind keine geprüften Felder',
     'LBL_CHANGE_LOG' => 'Audit-Protokoll',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Wenn geprüfte Währungsfelder in einer vom Systemstandard abweichenden Währung gespeichert werden, zeigt das Änderungsprotokoll die alten und neuen Werte in der konvertierten Standardwährung an.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Wenn geprüfte Währungsfelder in einer vom Systemstandard abweichenden Währung gespeichert werden, zeigt das Änderungsprotokoll die alten und neuen Werte in der konvertierten Standardwährung an.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Aktualisieren auf',
+    'LBL_BLANK' => '-leer-',
 );

@@ -75,5 +75,4 @@
  	document.getElementById("id_{$displayParams.formName}_{$vardef.name}_collection_0").value = "{$values.primary.id}";
     document.getElementById("{$displayParams.formName}_{$vardef.name}_collection_0").value = "{$values.primary.name}";
 </script>
-{/literal}
 {$quickSearchCode}

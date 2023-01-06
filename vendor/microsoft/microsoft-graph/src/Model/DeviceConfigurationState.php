@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,46 +18,17 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class DeviceConfigurationState extends Entity
 {
-
-     /** 
-     * Gets the settingStates
-     *
-     * @return array The settingStates
-     */
-    public function getSettingStates()
-    {
-        if (array_key_exists("settingStates", $this->_propDict)) {
-           return $this->_propDict["settingStates"];
-        } else {
-            return null;
-        }
-    }
-    
-    /** 
-    * Sets the settingStates
-    *
-    * @param DeviceConfigurationSettingState $val The settingStates
-    *
-    * @return DeviceConfigurationState
-    */
-    public function setSettingStates($val)
-    {
-		$this->_propDict["settingStates"] = $val;
-        return $this;
-    }
-    
     /**
     * Gets the displayName
     * The name of the policy for this policyBase
     *
-    * @return string The displayName
+    * @return string|null The displayName
     */
     public function getDisplayName()
     {
@@ -84,44 +54,15 @@ class DeviceConfigurationState extends Entity
     }
     
     /**
-    * Gets the version
-    * The version of the policy
-    *
-    * @return int The version
-    */
-    public function getVersion()
-    {
-        if (array_key_exists("version", $this->_propDict)) {
-            return $this->_propDict["version"];
-        } else {
-            return null;
-        }
-    }
-    
-    /**
-    * Sets the version
-    * The version of the policy
-    *
-    * @param int $val The version
-    *
-    * @return DeviceConfigurationState
-    */
-    public function setVersion($val)
-    {
-        $this->_propDict["version"] = intval($val);
-        return $this;
-    }
-    
-    /**
     * Gets the platformType
     * Platform type that the policy applies to
     *
-    * @return PolicyPlatformType The platformType
+    * @return PolicyPlatformType|null The platformType
     */
     public function getPlatformType()
     {
         if (array_key_exists("platformType", $this->_propDict)) {
-            if (is_a($this->_propDict["platformType"], "Microsoft\Graph\Model\PolicyPlatformType")) {
+            if (is_a($this->_propDict["platformType"], "\Microsoft\Graph\Model\PolicyPlatformType") || is_null($this->_propDict["platformType"])) {
                 return $this->_propDict["platformType"];
             } else {
                 $this->_propDict["platformType"] = new PolicyPlatformType($this->_propDict["platformType"]);
@@ -146,15 +87,72 @@ class DeviceConfigurationState extends Entity
     }
     
     /**
+    * Gets the settingCount
+    * Count of how many setting a policy holds
+    *
+    * @return int|null The settingCount
+    */
+    public function getSettingCount()
+    {
+        if (array_key_exists("settingCount", $this->_propDict)) {
+            return $this->_propDict["settingCount"];
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+    * Sets the settingCount
+    * Count of how many setting a policy holds
+    *
+    * @param int $val The settingCount
+    *
+    * @return DeviceConfigurationState
+    */
+    public function setSettingCount($val)
+    {
+        $this->_propDict["settingCount"] = intval($val);
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the settingStates
+     *
+     * @return array|null The settingStates
+     */
+    public function getSettingStates()
+    {
+        if (array_key_exists("settingStates", $this->_propDict)) {
+           return $this->_propDict["settingStates"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the settingStates
+    *
+    * @param DeviceConfigurationSettingState $val The settingStates
+    *
+    * @return DeviceConfigurationState
+    */
+    public function setSettingStates($val)
+    {
+        $this->_propDict["settingStates"] = $val;
+        return $this;
+    }
+    
+    /**
     * Gets the state
     * The compliance state of the policy
     *
-    * @return ComplianceStatus The state
+    * @return ComplianceStatus|null The state
     */
     public function getState()
     {
         if (array_key_exists("state", $this->_propDict)) {
-            if (is_a($this->_propDict["state"], "Microsoft\Graph\Model\ComplianceStatus")) {
+            if (is_a($this->_propDict["state"], "\Microsoft\Graph\Model\ComplianceStatus") || is_null($this->_propDict["state"])) {
                 return $this->_propDict["state"];
             } else {
                 $this->_propDict["state"] = new ComplianceStatus($this->_propDict["state"]);
@@ -179,31 +177,31 @@ class DeviceConfigurationState extends Entity
     }
     
     /**
-    * Gets the settingCount
-    * Count of how many setting a policy holds
+    * Gets the version
+    * The version of the policy
     *
-    * @return int The settingCount
+    * @return int|null The version
     */
-    public function getSettingCount()
+    public function getVersion()
     {
-        if (array_key_exists("settingCount", $this->_propDict)) {
-            return $this->_propDict["settingCount"];
+        if (array_key_exists("version", $this->_propDict)) {
+            return $this->_propDict["version"];
         } else {
             return null;
         }
     }
     
     /**
-    * Sets the settingCount
-    * Count of how many setting a policy holds
+    * Sets the version
+    * The version of the policy
     *
-    * @param int $val The settingCount
+    * @param int $val The version
     *
     * @return DeviceConfigurationState
     */
-    public function setSettingCount($val)
+    public function setVersion($val)
     {
-        $this->_propDict["settingCount"] = intval($val);
+        $this->_propDict["version"] = intval($val);
         return $this;
     }
     

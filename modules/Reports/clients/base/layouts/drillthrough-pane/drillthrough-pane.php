@@ -28,7 +28,7 @@ $viewdefs['Reports']['base']['layout']['drillthrough-pane'] = array(
                 'buttons' => array(
                     array(
                         'type' => 'button',
-                        'icon' => 'fa-refresh',
+                        'icon' => 'sicon-refresh',
                         'css_class' => 'btn',
                         'tooltip' => 'LBL_REFRESH_LIST_AND_CHART',
                         'events' => array(

@@ -12,6 +12,7 @@
  */
 
 $viewdefs['base']['layout']['list'] = array(
+    'css_class' => 'paginated-flex-list',
     'components' => array(
         array(
             'view' => 'massupdate',
@@ -23,8 +24,11 @@ $viewdefs['base']['layout']['list'] = array(
             'view' => 'recordlist',
             'primary' => true,
         ),
-        array(
-            'view' => 'list-bottom',
-        ),
+        [
+            'view' => [
+                'name' => 'list-pagination',
+                'css_class' => 'flex-table-pagination',
+            ],
+        ],
     ),
 );

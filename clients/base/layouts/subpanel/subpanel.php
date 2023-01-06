@@ -20,7 +20,7 @@ $viewdefs['base']['layout']['subpanel']  = array (
             'view' => 'subpanel-list',
         ),
         array (
-            'view' => 'list-bottom',
+            'view' => 'list-pagination',
         ),
     ),
     'last_state' => array(

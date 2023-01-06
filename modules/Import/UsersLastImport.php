@@ -188,7 +188,7 @@ SQL;
                 ->executeQuery(
                     'SELECT NULL FROM email_addr_bean_rel WHERE email_address_id = ?',
                     [$row['email_address_id']]
-                )->fetchColumn();
+                )->fetchOne();
             if ($isEmailAddressIdExists === false) {
                 $this->db->getConnection()
                     ->delete(

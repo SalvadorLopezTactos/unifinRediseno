@@ -13,9 +13,11 @@
 <!-- Nav, Tabs, & Pills
 ================================================== -->
 <section id="nav-tabs-pills">
-  <div class="page-header">
-    <p class="lead">{{{meta.description}}}</p>
-  </div>
+  {{#if meta.description}}
+    <div class="page-header">
+      <p class="lead">{{{meta.description}}}</p>
+    </div>
+  {{/if}}
 
   <h2>Lightweight defaults <small>Same markup, different classes</small></h2>
   <div class="row-fluid">
@@ -111,7 +113,7 @@
         <li class="active"><a>Home</a></li>
         <li><a>Profile</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <i class="fa fa-caret-down"></i></a>
+          <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -128,7 +130,7 @@
        data-toggle="dropdown"
       &gt;
         Dropdown
-        &lt;i class="fa fa-caret-down"&gt;&lt;/i&gt;
+        &lt;i class="sicon sicon-chevron-down"&gt;&lt;/i&gt;
       &lt;/a&gt;
     &lt;ul class="dropdown-menu"&gt;
       &lt;!-- links --&gt;
@@ -143,7 +145,7 @@
         <li class="active"><a>Home</a></li>
         <li><a>Profile</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <i class="fa fa-caret-down"></i></a>
+          <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <i class="sicon sicon-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
@@ -160,7 +162,7 @@
        data-toggle="dropdown"
       &gt;
         Dropdown
-        &lt;i class="fa fa-caret-down"&gt;&lt;/i&gt;
+        &lt;i class="sicon sicon-chevron-down"&gt;&lt;/i&gt;
       &lt;/a&gt;
     &lt;ul class="dropdown-menu"&gt;
       &lt;!-- links --&gt;
@@ -217,13 +219,13 @@
       <div class="well" style="padding: 8px 0;">
         <ul class="nav nav-list">
           <li class="nav-header">List header</li>
-          <li class="active"><a><i class="fa fa-white fa-home"></i> Home</a></li>
-          <li><a><i class="fa fa-book"></i> Library</a></li>
-          <li><a><i class="fa fa-pencil"></i> Applications</a></li>
+          <li class="active"><a><i class="sicon sicon-dashboard"></i> Home</a></li>
+          <li><a><i class="sicon sicon-document"></i> Library</a></li>
+          <li><a><i class="sicon sicon-edit"></i> Applications</a></li>
           <li class="nav-header">Another list header</li>
-          <li><a><i class="fa fa-user"></i> Profile</a></li>
-          <li><a><i class="fa fa-cog"></i> Settings</a></li>
-          <li><a><i class="fa fa-flag"></i> Help</a></li>
+          <li><a><i class="sicon sicon-user"></i> Profile</a></li>
+          <li><a><i class="sicon sicon-settings"></i> Settings</a></li>
+          <li><a><i class="sicon sicon-help"></i> Help</a></li>
         </ul>
       </div> <!-- /well -->
 <pre class="prettyprint linenums">
@@ -231,7 +233,7 @@
   ...
   &lt;li&gt;
     &lt;a&gt;
-      &lt;i class="fa fa-book"&gt;&lt;/i&gt;
+      &lt;i class="sicon sicon-document"&gt;&lt;/i&gt;
       Library
     &lt;/a&gt;
   &lt;/li&gt;

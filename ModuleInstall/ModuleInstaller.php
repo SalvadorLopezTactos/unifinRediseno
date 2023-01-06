@@ -26,6 +26,7 @@
 
 require_once 'include/utils/progress_bar_utils.php';
 require_once 'ModuleInstall/ModuleInstallerException.php';
+require_once 'include/utils/file_utils.php';
 
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\CSP\ContentSecurityPolicy;
@@ -63,20 +64,32 @@ class ModuleInstaller
      *
      * @var array
      */
-    protected $affectedModules = array();
+    protected $affectedModules = [];
+
+    /**
+     * affected directories
+     * @var array
+     */
+    protected $affectedDirectories = [];
 
     /**
      * The specification of the patch that should be applied to the module definition during installation
      *
      * @var array
      */
-    protected $patch = array();
+    protected $patch = [];
 
     /**
      * holder for access control
      * @var \AdminWork
      */
     protected $adminWork;
+
+    /**
+     * Installation is in progress
+     * @var bool
+     */
+    protected $isInstalling = false;
 
     public function __construct()
     {
@@ -120,6 +133,7 @@ class ModuleInstaller
      * Finally it runs over a list of defined tasks; then install_beans, then install_custom_fields, then clear the Vardefs, run a RepairAndClear, then finally call rebuild_relationships.
      */
     function install($base_dir, $is_upgrade = false, $previous_version = ''){
+        $this->setInstallationBegin();
         if(defined('TEMPLATE_URL'))SugarTemplateUtilities::disableCache();
         if ((defined('MODULE_INSTALLER_PACKAGE_SCAN') && MODULE_INSTALLER_PACKAGE_SCAN)
             || !empty($GLOBALS['sugar_config']['moduleInstaller']['packageScan'])) {
@@ -130,6 +144,7 @@ class ModuleInstaller
                     $e->setExtraData('error_description', $this->ms->getFormattedIssues());
                     throw $e;
                 } else {
+                    $this->setInstallationErrorPage();
                     SugarCleaner::cleanHtml($this->ms->displayIssues());
                     sugar_cleanup(true);
                 }
@@ -172,6 +187,7 @@ class ModuleInstaller
         if(file_exists($this->base_dir . '/manifest.php')){
             if(!$this->silent){
                 $current_step++;
+                $this->setInstallationProgress($current_step, $total_steps);
                 display_progress_bar('install', $current_step, $total_steps);
                 echo '<div id ="displayLoglink" ><a href="#" onclick="document.getElementById(\'displayLog\').style.display=\'\'">'
                     .$app_strings['LBL_DISPLAY_LOG'].'</a> </div><div id="displayLog" style="display:none">';
@@ -188,6 +204,7 @@ class ModuleInstaller
                             $installdefs = $upgrade_manifest['upgrade_paths'][$previous_version];
                         }else{
                             $errors[] = 'No Upgrade Path Found in manifest.';
+                            $this->setInstallationError($errors);
                             $this->abort($errors);
                         }//fi
                     }//fi
@@ -197,6 +214,7 @@ class ModuleInstaller
             $this->installdefs = $installdefs;
             if(!$this->silent){
                 $current_step++;
+                $this->setInstallationProgress($current_step, $total_steps);
                 update_progress_bar('install', $current_step, $total_steps);
             }
 
@@ -204,6 +222,7 @@ class ModuleInstaller
                 $this->$task();
                 if(!$this->silent){
                     $current_step++;
+                    $this->setInstallationProgress($current_step, $total_steps);
                     update_progress_bar('install', $current_step, $total_steps);
                 }
             }
@@ -213,6 +232,7 @@ class ModuleInstaller
             $this->install_beans($this->installed_modules);
             if(!$this->silent){
                 $current_step++;
+                $this->setInstallationProgress($current_step, $total_steps);
                 update_progress_bar('install', $total_steps, $total_steps);
             }
             if(isset($installdefs['custom_fields'])){
@@ -221,11 +241,13 @@ class ModuleInstaller
             }
             if(!$this->silent){
                 $current_step++;
+                $this->setInstallationProgress($current_step, $total_steps);
                 update_progress_bar('install', $current_step, $total_steps);
                 echo '</div>';
             }
             if(!$this->silent){
                 $current_step++;
+                $this->setInstallationProgress($current_step, $total_steps);
                 update_progress_bar('install', $current_step, $total_steps);
                 echo '</div>';
             }
@@ -244,7 +266,9 @@ class ModuleInstaller
             {
                 include('custom/application/Ext/Include/modules.ext.php');
             }
+            $this->isInstalling = false;
             $this->rebuild_all(true);
+            $this->isInstalling = true;
             $rac = new RepairAndClear();
             $rac->repairAndClearAll($selectedActions, $this->installed_modules,true, false);
             $rac->repairAndClearAll(
@@ -290,6 +314,7 @@ class ModuleInstaller
             $this->setup_elastic_mapping();
 
             $this->log('<br><b>' . translate('LBL_MI_COMPLETE') . '</b>');
+            $this->setInstallationDone();
         }else{
             throw new ModuleInstallerException("No \$installdefs Defined In $this->base_dir/manifest.php");
         }
@@ -325,7 +350,10 @@ class ModuleInstaller
         }
     }
 
-    function post_uninstall(){
+    protected function post_uninstall()
+    {
+        // remove empty directories
+        $this->removeEmptyDirectories();
         $data = $this->readManifest();
         extract($data);
         if(isset($this->installdefs['post_uninstall']) && is_array($this->installdefs['post_uninstall'])){
@@ -335,6 +363,33 @@ class ModuleInstaller
         }
     }
 
+    /**
+     * Remove affected empty directories
+     */
+    protected function removeEmptyDirectories()
+    {
+        if (empty($this->affectedDirectories)) {
+            return;
+        }
+        // Remove a directory if it became empty after the files/directories removal above.
+        // Repeat the same for all parent directories.
+        foreach ($this->affectedDirectories as $dirName => $_) {
+            // skip if a directory was removed before
+            if (!is_dir($dirName)) {
+                continue;
+            }
+            while ($this->isDirEmpty($dirName)) {
+                $GLOBALS['log']->debug('ModuleInstaller deleting directory ' . $dirName);
+                $rmOk = @rmdir($dirName);
+                if ($rmOk === false) {
+                    $GLOBALS['log']->error('ERROR: Unable to remove directory ' . $dirName);
+                    break;
+                }
+                // assign a parent directory for the next iteration
+                $dirName = dirname($dirName);
+            }
+        }
+    }
     /*
      * ModuleInstaller->install_copy gets the copy section of installdefs in the manifest and calls copy_path to copy each path (file or directory) to its final location
      * (specified as from and to in the manifest), replacing <basepath> by the base_dir value passed in to install.
@@ -355,10 +410,11 @@ class ModuleInstaller
             $this->modules = $this->getModuleDirs();
         }
     }
-    function uninstall_copy(){
-
-        if(!empty($this->installdefs['copy'])){
-            foreach($this->installdefs['copy'] as $cp){
+    protected function uninstall_copy()
+    {
+        if (!empty($this->installdefs['copy'])) {
+            $affectedDirectories = [];
+            foreach ($this->installdefs['copy'] as $cp) {
                 $cp['to'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['to']));
                 $cp['from'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['from']));
                 $GLOBALS['log']->debug('Unlink ' . $cp['to']);
@@ -368,10 +424,16 @@ class ModuleInstaller
                 $this->uninstall_new_files($cp, $backup_path);
                 $this->copy_path($backup_path, $cp['to'], $backup_path, true);
                 /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
+
+                // collect all affected directories
+                $affectedDirectories[dirname($cp['to'])] = true;
             }
             $backup_path = $this->getBackupPath();
-            if(file_exists($backup_path))
+            if (file_exists($backup_path)) {
                 rmdir_recursive($backup_path);
+            }
+
+            $this->affectedDirectories = $affectedDirectories;
         }
         SugarAutoLoader::buildCache();
     }
@@ -1277,7 +1339,9 @@ class ModuleInstaller
         $to = clean_path($to);
 
         if (!isValidCopyPath($to)) {
-            sugar_die('Invalid destination path: ' . $to);
+            $error = 'Invalid destination path: ' . $to;
+            $this->setInstallationError($error);
+            sugar_die($error);
         }
 
         $dir = dirname($to);
@@ -1512,7 +1576,7 @@ class ModuleInstaller
      * @param char $key
      *
      */
-    public static function cleanUpRelationship(&$item, &$key)
+    public static function cleanUpRelationship(&$item, $key)
     {
         global $db;
         if (isset($item['table'])) {
@@ -1785,7 +1849,7 @@ class ModuleInstaller
     {
         // set long time out for long execution.
         $uninstallTimeout = (int) SugarConfig::getInstance()->get('uninstall_timeout', 600);
-        ini_set('max_execution_time', $uninstallTimeout);
+        ini_set('max_execution_time', strval($uninstallTimeout));
 
         global $app_strings;
         $total_steps = 5; //min steps with no tasks
@@ -1904,6 +1968,97 @@ class ModuleInstaller
                 update_progress_bar('install', $total_steps, $total_steps);
             }
         }else{
+            throw new ModuleInstallerException("No manifest.php Defined In $this->base_dir/manifest.php");
+        }
+    }
+
+    /**
+     * Uninstalls a package from the provided directory. Designed as a rollback function for an installed package
+     *
+     * @param string $baseDir Package directory
+     * @param bool $enableHookExecution If false, PRE and POST hooks will be ignored to avoid possible failures
+     * in a package code
+     * @throws ModuleInstallerException
+     * @throws SugarQueryException
+     */
+    public function forceUninstall(string $baseDir, bool $enableHookExecution = true): void
+    {
+        // set long time out for long execution.
+        $uninstallTimeout = (int) SugarConfig::getInstance()->get('uninstall_timeout', 600);
+        ini_set('max_execution_time', strval($uninstallTimeout));
+
+        global $app_strings;
+        $this->base_dir = $baseDir;
+        $tasks = [
+            'pre_uninstall',
+            'uninstall_relationships',
+            'uninstall_copy',
+            'uninstall_connectors',
+            'uninstall_layoutfields',
+            'uninstall_extensions',
+            'uninstall_global_search',
+            'uninstall_filters',
+            'uninstall_dashboards',
+            'disable_manifest_logichooks',
+            'post_uninstall',
+        ];
+        if (!$enableHookExecution) {
+            array_shift($tasks);
+            array_pop($tasks);
+        }
+        if (file_exists($this->base_dir . '/manifest.php')) {
+            global $moduleList;
+            $data = $this->readManifest();
+            extract($data);
+            $this->installdefs = $installdefs;
+            $this->id_name = $this->installdefs['id'];
+            $installed_modules = [];
+            if (isset($this->installdefs['beans'])) {
+                foreach ($this->installdefs['beans'] as $bean) {
+                    $installed_modules[] = $bean['module'];
+                }
+                $this->modulesInPackage = $installed_modules;
+                $this->uninstall_beans($installed_modules);
+                $this->uninstall_customizations($installed_modules);
+                WorkFlow::deleteWorkFlowsByModule($installed_modules);
+            }
+            foreach ($tasks as $task) {
+                $this->$task();
+                $this->reset_file_cache();
+            }
+
+            // if we get here, package files have been removed, change upgradehistory status
+            if (!empty($this->upgradeHistory)) {
+                $this->upgradeHistory->updateStatus(UpgradeHistory::STATUS_STAGED);
+            }
+
+            if (isset($installdefs['custom_fields']) && (isset($GLOBALS['mi_remove_tables']) && $GLOBALS['mi_remove_tables'])) {
+                $this->log(translate('LBL_MI_UN_CUSTOMFIELD'));
+                $this->uninstall_custom_fields($installdefs['custom_fields']);
+            }
+            $this->rebuild_all(true);
+            $rac = new RepairAndClear();
+            $rac->repairAndClearAll(
+                ['rebuildExtensions', 'clearAdditionalCaches'],
+                [translate('LBL_ALL_MODULES')],
+                true,
+                false
+            );
+
+            //#27877, If the request from MB redeploy a custom module , we will not remove the ACL actions for this package.
+            if (!isset($_REQUEST['action']) || $_REQUEST['action'] != 'DeployPackage') {
+                $this->remove_acl_actions();
+            }
+            //end
+
+            $this->updateSystemTabs('Restore', $installed_modules);
+
+            //clear the unified_search_module.php file
+            UnifiedSearchAdvanced::unlinkUnifiedSearchModulesFile();
+
+            $dict = new ServiceDictionaryRest();
+            $dict->buildAllDictionaries();
+        } else {
             throw new ModuleInstallerException("No manifest.php Defined In $this->base_dir/manifest.php");
         }
     }
@@ -2102,17 +2257,22 @@ class ModuleInstaller
      */
     protected function cacheExtensionFiles(array $sourceFiles, string $cacheFile, string $orderMapFile)
     {
-        if (count($sourceFiles) > 0) {
-            $sourceFiles = $this->sortExtensionFiles($sourceFiles, $orderMapFile);
-            $contents = $this->getExtensionFileContents($sourceFiles);
-            $dirName = dirname($cacheFile);
-            if (!file_exists($dirName)) {
-                mkdir_recursive($dirName, true);
-            }
-            file_put_contents($cacheFile, $contents);
+        if (!check_file_name($cacheFile)) {
+            $GLOBALS['log']->fatal("Path traversal attack vector detected: '$cacheFile' in cacheExtensionFiles");
+            throw new \Exception('Path traversal attack vector detected');
         } else {
-            if (file_exists($cacheFile)) {
-                unlink($cacheFile);
+            if (count($sourceFiles) > 0) {
+                $sourceFiles = $this->sortExtensionFiles($sourceFiles, $orderMapFile);
+                $contents = $this->getExtensionFileContents($sourceFiles);
+                $dirName = dirname($cacheFile);
+                if (!file_exists($dirName)) {
+                    mkdir_recursive($dirName, true);
+                }
+                file_put_contents($cacheFile, $contents);
+            } else {
+                if (file_exists($cacheFile)) {
+                    unlink($cacheFile);
+                }
             }
         }
     }
@@ -2126,6 +2286,10 @@ class ModuleInstaller
      */
     protected function sortExtensionFiles(array $files, string $orderMapFile)
     {
+        if (!check_file_name($orderMapFile)) {
+            throw new \Exception('Path traversal attack vector detected');
+        }
+
         $filesSortedByMtime = sortExtensionFiles($files);
         if (count($filesSortedByMtime) < 2) {
             return $filesSortedByMtime;
@@ -2134,40 +2298,38 @@ class ModuleInstaller
         if (file_exists($orderMapFile)) {
             require $orderMapFile;
         }
+        $newExtensionOrderMap = $extensionOrderMap;
         foreach ($filesSortedByMtime as $index => $extFile) {
             $normalizedFilePath = SugarAutoLoader::normalizeFilePath($extFile);
             if (!file_exists($normalizedFilePath)
                 || basename($normalizedFilePath) == basename($orderMapFile)) {
-                unset($extensionOrderMap[$normalizedFilePath]);
+                unset($newExtensionOrderMap[$normalizedFilePath]);
                 continue;
             }
             $md5 = md5_file($normalizedFilePath);
             $mtime = filemtime($normalizedFilePath);
-            if (!isset($extensionOrderMap[$extFile]) || $md5 !== $extensionOrderMap[$extFile]['md5']) {
-                $extensionOrderMap[$extFile] = [
+            if (!isset($newExtensionOrderMap[$extFile]['md5']) || $md5 !== $newExtensionOrderMap[$extFile]['md5']) {
+                $newExtensionOrderMap[$extFile] = [
                     'md5' => $md5,
                     'mtime' => $mtime,
                     'is_override' => substr(basename($extFile), 0, 9) === '_override',
                 ];
             }
         }
-        uasort($extensionOrderMap, function ($a, $b) {
-            if ($a['is_override'] != $b['is_override']) {
-                return $a['is_override'] - $b['is_override'];
-            }
-
-            if ($a['mtime'] != $b['mtime']) {
-                return $a['mtime'] - $b['mtime'];
-            }
-
-            return 0;
+        stable_uasort($newExtensionOrderMap, function (array $a, array $b) : int {
+            return $a['is_override'] <=> $b['is_override'] ?: $a['mtime'] <=> $b['mtime'];
         });
-        $extensionOrderMap = array_filter($extensionOrderMap, function ($file) use ($filesSortedByMtime) {
+        $newExtensionOrderMap = array_filter($newExtensionOrderMap, function (string $file) use ($filesSortedByMtime): bool {
             return in_array($file, $filesSortedByMtime);
         }, ARRAY_FILTER_USE_KEY);
-        sugar_mkdir(dirname($orderMapFile), null, true);
-        write_array_to_file('extensionOrderMap', $extensionOrderMap, $orderMapFile);
-        return array_keys($extensionOrderMap);
+        if (!file_exists($orderMapFile)) {
+            sugar_mkdir(dirname($orderMapFile), null, true);
+        }
+
+        if ($newExtensionOrderMap !== $extensionOrderMap) {
+            write_array_to_file('extensionOrderMap', $newExtensionOrderMap, $orderMapFile);
+        }
+        return array_keys($newExtensionOrderMap);
     }
 
     /**
@@ -2266,8 +2428,9 @@ class ModuleInstaller
                     }
                     $this->installed_modules[] = $module;
                 }else{
-                    $errors[] = 'Bean array not well defined.';
-                    $this->abort($errors);
+                    $error = 'Bean array not well defined.';
+                    $this->setInstallationError($error);
+                    $this->abort([$error]);
                 }
             }
             $str.= "\n?>";
@@ -2344,6 +2507,9 @@ class ModuleInstaller
     }
 
     function log($str){
+        if ($this->isInstalling) {
+            $this->addInstallationMessage(htmlentities($str));
+        }
         $GLOBALS['log']->debug('ModuleInstaller:'. $str);
         if(!$this->silent){
             echo $str . '<br>';
@@ -3032,14 +3198,18 @@ class ModuleInstaller
         $config = SugarConfig::getInstance();
 
         if (empty($GLOBALS['installing'])) {
+            $settings = Administration::getSettings('portal', true)->settings;
+            $showKBNotes = !isset($settings['portal_showKBNotes']) ? 'enabled' : $settings['portal_showKBNotes'];
+            $enableSelfSignUp = !isset($settings['portal_enableSelfSignUp']) ? 'disabled' : $settings['portal_enableSelfSignUp'];
             if (PortalFactory::getInstance('Settings')->isServe() === false) {
                 $caseDeflection = 'disabled';
             } else {
-                $settings = Administration::getSettings('portal', true)->settings;
                 $caseDeflection = !isset($settings['portal_caseDeflection']) ? 'enabled' : $settings['portal_caseDeflection'];
             }
         } else {
+            $showKBNotes = 'enabled';
             $caseDeflection = 'enabled';
+            $enableSelfSignUp = 'disabled';
         }
 
         $portalConfig = array(
@@ -3059,7 +3229,7 @@ class ModuleInstaller
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => $config->get('site_url') . '/rest/v11_12',
+            'serverUrl' => $config->get('site_url') . '/rest/v11_16',
             'siteUrl' => $config->get('site_url'),
             'unsecureRoutes' => [
                 'signup',
@@ -3076,8 +3246,10 @@ class ModuleInstaller
             'serverTimeout' => self::getPortalTimeoutValue(),
             'maxSearchQueryResult'=>'5',
             'caseDeflection' => $caseDeflection,
+            'showKBNotes' => $showKBNotes,
             'analytics' => $config->get('analytics_portal') ?? $config->get('analytics') ?? ['enabled' => false],
             'allowedLinkSchemes' => $config->get('allowed_link_schemes', array()),
+            'enableSelfSignUp' => $enableSelfSignUp,
         );
 
         $jsConfig = $config->get('additional_js_config', array());
@@ -3105,6 +3277,10 @@ class ModuleInstaller
             'env' => 'prod',
             'platform' => 'base',
             'additionalComponents' => array(
+                'impersonation-banner' => array(
+                    'target' => '#impersonation-banner',
+                    'layout' => 'impersonation-banner',
+                ),
                 'header' => array(
                     'target' => '#header',
                     'layout' => 'header'
@@ -3121,10 +3297,14 @@ class ModuleInstaller
                     'target' => '#sweetspot',
                     'layout' => 'sweetspot'
                 ),
+                'side-drawer' => [
+                    'target' => '#side-drawer',
+                    'layout' => 'side-drawer',
+                ],
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => 'rest/v11_12',
+            'serverUrl' => 'rest/v11_16',
             'siteUrl' => '',
             'unsecureRoutes' => array(
                 'login',
@@ -3161,6 +3341,7 @@ class ModuleInstaller
                 "_override_values",
                 "filters",
                 "logo_url",
+                "logo_url_dark",
                 "editable_dropdown_filters",
             ),
             'teamBasedAcl' => $config->get(TeamBasedACLConfigurator::CONFIG_KEY),
@@ -3255,6 +3436,9 @@ class ModuleInstaller
         foreach ($this->installdefs['clientfiles'] as $outer) {
             foreach ($outer as $to => $from) {
                 $violations = Validator::getService()->validate($from, $constraint);
+                foreach ($violations as $violation) {
+                    $this->setInstallationError($violation);
+                }
                 if (count($violations) > 0) {
                     sugar_die($violations);
                 }
@@ -3652,6 +3836,72 @@ class ModuleInstaller
         }
     }
 
+    public function getInstallationProgress(): array
+    {
+        $process_status = $this->upgradeHistory->process_status;
+        $uh = is_string($process_status)
+            ? @json_decode($process_status, true)
+            : [];
+
+        return [
+            'error' => $uh['error'] ?? '',
+            'error_page' => $uh['error_page'] ?? false,
+            'message' => $uh['message'] ?? [],
+            'current_step' => $uh['current_step'] ?? 0,
+            'total_steps' => $uh['total_steps'] ?? 0,
+            'is_done' => $uh['is_done'] ?? false,
+        ];
+    }
+
+    public function setInstallationError(string $error): void
+    {
+        $data = $this->getInstallationProgress();
+        $data['error'] = $error;
+        $this->setInstallationProgressData($data);
+    }
+
+    private function setInstallationBegin(): void
+    {
+        $this->isInstalling = true;
+        $this->upgradeHistory->process_status = [];
+        $this->setInstallationProgressData($this->getInstallationProgress());
+    }
+
+    private function setInstallationErrorPage(): void
+    {
+        $data = $this->getInstallationProgress();
+        $data['error_page'] = true;
+        $this->setInstallationProgressData($data);
+    }
+
+    private function addInstallationMessage(string $message): void
+    {
+        $data = $this->getInstallationProgress();
+        $data['message'][] = $message;
+        $this->setInstallationProgressData($data);
+    }
+
+    private function setInstallationProgress(int $currentStep = 0, int $totalSteps = 0): void
+    {
+        $data = $this->getInstallationProgress();
+        $data['current_step'] = $currentStep;
+        $data['total_steps'] = $totalSteps;
+        $this->setInstallationProgressData($data);
+    }
+
+    private function setInstallationDone(): void
+    {
+        $data = $this->getInstallationProgress();
+        $data['is_done'] = true;
+        $this->setInstallationProgressData($data);
+        $this->isInstalling = false;
+    }
+
+    private function setInstallationProgressData(array $data): void
+    {
+        $this->upgradeHistory->updateProcessStatus($data);
+    }
+
     /*
      * Returns a valid input for the install_file
      * paramete in the $_REQUEST sugperglobal
@@ -3709,5 +3959,24 @@ class ModuleInstaller
             }
         }
         return $installedModules;
+    }
+
+    /**
+     * Returns true if the directory exists and is empty
+     */
+    private function isDirEmpty(string $path): bool
+    {
+        if (!is_dir($path)) {
+            return false;
+        }
+        $handle = opendir($path);
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                closedir($handle);
+                return false;
+            }
+        }
+        closedir($handle);
+        return true;
     }
 }

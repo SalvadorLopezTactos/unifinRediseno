@@ -67,7 +67,7 @@ if ( !is_admin($focus) ) {
     $modules_exempt_from_availability_check=array('Users'=>'Users','ACLRoles'=>'ACLRoles',);
     $subpanel = new SubPanelTiles($focus, 'UserRoles');
     
-    echo $subpanel->display(true,true);
+    echo $subpanel->display(true);
 }
 if ( empty($hideTeams) ) {
     $focus_list =$focus->get_my_teams(TRUE);

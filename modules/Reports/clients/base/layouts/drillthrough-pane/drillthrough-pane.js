@@ -58,7 +58,7 @@
         this.initComponents([{
             layout: {
                 type: 'dashlet',
-                css_class: 'dashlets',
+                css_class: 'dashlets mx-2 my-2',
                 config: false,
                 preview: false,
                 label: metadata.label,

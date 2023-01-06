@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'צפה בדוחות על הודעות',
     'LNK_IMPORT_MESSAGES' => 'ייבא הודעות',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'מזהה ליד',
+    'LBL_LEAD_NAME' => 'ליד',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'צ&#39;אט בצד הלקוח',
+    'LBL_ACTIVITY_CUSTOMER' => 'לקוח',
+    'LBL_ACTIVITY_FINISHED' => 'הסתיים',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'מתבצע',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הודעות',
 ];

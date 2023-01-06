@@ -86,7 +86,7 @@ class Elastic extends Search
             }
 
             // add url
-            $newRecord['url'] = 'portal/index.html#' . $record['_module'] . '/' . $record['id'];
+            $newRecord['url'] = 'portal/index.php#' . $record['_module'] . '/' . $record['id'];
 
             $newData['records'][] = $newRecord;
         }

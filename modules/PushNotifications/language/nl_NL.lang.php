@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Type bovenliggend',
     'LBL_PARENT_ID' => 'Bovenliggend ID',
     'LBL_EXTRA_DATA' => 'Extra data',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM - Vermeld in {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} vermeldde u in {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Wees {{module_name_singular}} toe',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} wees {{module_name_singular}} {{record_name}} toe aan u.',
 ];

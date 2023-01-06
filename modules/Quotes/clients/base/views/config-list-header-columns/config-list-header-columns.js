@@ -82,7 +82,7 @@
                 return {
                     name: '',
                     type: 'button',
-                    icon: 'fa-plus',
+                    icon: 'sicon-plus',
                     value: false,
                     sortable: false
                 };

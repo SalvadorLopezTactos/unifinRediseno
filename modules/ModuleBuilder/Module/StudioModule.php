@@ -11,6 +11,7 @@
  */
 
 require_once 'modules/ModuleBuilder/parsers/constants.php';
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class StudioModule
 {
@@ -545,6 +546,9 @@ class StudioModule
         $ct = 0;
         foreach (SubPanel::getModuleSubpanels($this->module) as $name => $label) {
             if ($name == 'users') {
+                continue;
+            }
+            if (!AccessControlManager::instance()->allowRelationshipAccess($name, $this->module)) {
                 continue;
             }
             $subname = sugar_ucfirst((!empty($label)) ? translate($label, $this->module) : $name);

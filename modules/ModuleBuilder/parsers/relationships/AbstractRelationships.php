@@ -32,7 +32,14 @@ class AbstractRelationships
         'WirelessSubpanelDefinitions' => 'wireless_subpanels',
         'SidecarMobileSubpanelDefinitions' => 'sidecar',
     );
-    static $activities = array ( 'calls' => 'Calls' , 'meetings' => 'Meetings' , 'notes' => 'Notes' , 'tasks' => 'Tasks' , 'emails' => 'Emails' ) ;
+    public static $activities = [
+        'calls' => 'Calls' ,
+        'meetings' => 'Meetings',
+        'notes' => 'Notes',
+        'tasks' => 'Tasks',
+        'emails' => 'Emails',
+        'messages' => 'Messages',
+    ];
 
 
     protected $relationships = array ( ) ; // array containing all the AbstractRelationship objects that are in this set of relationships
@@ -413,7 +420,8 @@ class AbstractRelationships
         foreach ($moduleLabels as $module => $labels) {
             $out = $headerString;
 
-            $filename = "{$basepath}/language/{$module}.php" ;
+            $fileBaseName = $relationshipName ? "{$module}.{$relationshipName}.php" : "{$module}.php";
+            $filename = "{$basepath}/language/{$fileBaseName}" ;
 
             $mod_strings = array();
             $app_list_strings = array();
@@ -445,7 +453,7 @@ class AbstractRelationships
 
             foreach ($sugar_config['languages'] as $lk => $lv) {
                 $installDefs[$module . "_$lk"] = array(
-                    'from' => "{$installDefPrefix}/relationships/language/{$module}.php",
+                    'from' => "{$installDefPrefix}/relationships/language/{$fileBaseName}",
                     'to_module' => $module,
                     'language' => $lk
                 );

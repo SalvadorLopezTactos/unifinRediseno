@@ -18,4 +18,10 @@ $mod_strings = [
     'LBL_PARENT_TYPE' => 'Typ nadradenej položky',
     'LBL_PARENT_ID' => 'ID nadradenej položky',
     'LBL_EXTRA_DATA' => 'Zvláštne údaje',
+
+    // Notification text
+    'LBL_USER_MENTIONED_TITLE' => 'SugarCRM – Uvedené v {{module_name_singular}}',
+    'LBL_USER_MENTIONED' => '{{mentioning_user}} vás uviedol v {{module_name_singular}} {{record_name}}.',
+    'LBL_USER_ASSIGNED_TITLE' => 'SugarCRM - Priradené {{module_name_singular}}',
+    'LBL_USER_ASSIGNED' => '{{assigned_by_user}} vám priradil {{module_name_singular}} {{record_name}}.',
 ];

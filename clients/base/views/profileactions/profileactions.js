@@ -16,6 +16,10 @@
 ({
     plugins: ['Dropdown'],
 
+    events: {
+        'click .profileactions-reset-mfa': 'resetMultifactorAuthentication'
+    },
+
     initialize: function(options) {
         app.view.View.prototype.initialize.call(this, options);
         app.events.on("app:sync:complete", this.render, this);
@@ -46,6 +50,7 @@
      */
     filterAvailableMenu: function(menuMeta){
         var result = [];
+        var impersonationMode = !_.isEmpty(app.cache.get('ImpersonationFor'));
         _.each(menuMeta,function(item) {
             item = this.filterMenuProperties(item);
             if (!_.isEmpty(item.acl_module) &&
@@ -59,6 +64,19 @@
                 !app.acl.hasAccess('admin', 'Administration') &&
                 item.acl_action === 'admin') {
                 return;
+            }
+
+
+            // in impersonation mode default logout replaced by finish impersonation strategy
+            // and also disabled possibility change password
+            if (impersonationMode) {
+                if (item.label === 'LBL_LOGOUT' || item.label === 'LBL_CHANGE_PASSWORD') {
+                    return;
+                }
+            } else {
+                if (item.label === 'LBL_FINISH_IMPERSONATING') {
+                    return;
+                }
             }
 
             result.push(item);
@@ -79,6 +97,7 @@
         }
         return singleItem;
     },
+
     //TODO: Remove once bwc is completely pruned out of the product
     bwcProfileEntered: function() {
         //Refetch latest user data (since bwc updated avatar); reset
@@ -116,5 +135,31 @@
     _dispose: function() {
         if (app.user) app.user.off(null, null, this);
         app.view.View.prototype._dispose.call(this);
+    },
+    resetMultifactorAuthentication: function() {
+        let mfaBlockContent = {
+            linkToDocumentation: app.help.getDocumentationUrl('ResettingMFA')
+        };
+        app.alert.show('mfa_reset_confirmation', {
+            level: 'confirmation',
+            messages: app.lang.get('LBL_MFA_RESET_CONFIRMATION', null, mfaBlockContent),
+            confirm: {
+                label: app.lang.get('LBL_MFA_RESET_CONFIRMATION_BTN'),
+            },
+            onConfirm: function() {
+                app.api.call('update', app.api.buildURL('mfa/reset'), null, {
+                    success: function(data) {
+                        app.router.navigate('#logout/?clear=1', {trigger: true});
+                    },
+                    error: function(err) {
+                        app.alert.show('mfa_reset_error', {
+                            level: 'error',
+                            messages: app.lang.get('EXCEPTION_FATAL_ERROR_DESC'),
+                        });
+                    }
+                });
+            }
+        });
+        return false;
     }
 })

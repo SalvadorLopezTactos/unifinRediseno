@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'PMSEEvalRelations.php';
-
 /**
  * Class criteria that evaluates whether logical, arithmetic, relationship
  * this expression must be of type json content into an array

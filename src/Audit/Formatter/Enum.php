@@ -20,7 +20,7 @@ class Enum implements Formatter
     public function formatRows(array &$rows)
     {
         array_walk($rows, function (&$row) {
-            if (in_array($row['data_type'], ['enum', 'multienum'])) {
+            if (isset($row['data_type']) && in_array($row['data_type'], ['enum', 'multienum'])) {
                 if (!is_null($row['before'])) {
                     $row['before'] = explode(',', str_replace('^', '', $row['before']));
                 }

@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\MetaData\ViewdefManager;
 
 /**
  *  Lead is used to store profile information for people who may become customers.
@@ -385,5 +386,46 @@ class Lead extends Person {
     {
         $this->vardef_handler = new LeadsVarDefHandler($this, $meta_array_type);
     }
-}
 
+    /**
+     * Returns if the Convert view is using Opportunities AND has RLIs enabled
+     *
+     * @return bool
+     */
+    public static function isUsingRLIsInConvert()
+    {
+        $moduleData = self::getConvertViewModulesData();
+
+        return isset($moduleData['Opportunities']) && $moduleData['Opportunities']['enableRlis'];
+    }
+
+    /**
+     * Returns an array of modules found in the Lead Convert view
+     *
+     * @return array
+     */
+    public static function getConvertViewModulesData()
+    {
+        $viewdefManager = new ViewdefManager();
+        $convertViewDefs = $viewdefManager->loadViewdef('base', 'Leads', 'convert-main', false, true);
+        $moduleData = [];
+
+        foreach ($convertViewDefs['modules'] as $module) {
+            $mod = [
+                'module' => $module['module'],
+                'required' => $module['required'],
+                'copyData' => $module['copyData'],
+            ];
+
+            if ($module['module'] === 'Opportunities') {
+                $mod['enableRlis'] = $module['enableRlis'] ?? false;
+                $mod['requireRlis'] = $module['requireRlis'] ?? false;
+                $mod['copyDataToRlis'] = $module['copyDataToRlis'] ?? false;
+            }
+
+            $moduleData[$module['module']] = $mod;
+        }
+
+        return $moduleData;
+    }
+}

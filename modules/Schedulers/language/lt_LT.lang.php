@@ -45,6 +45,10 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Proceso laiko tvarkaraščiai',
 'LBL_OOTB_DATA_ARCHIVER' => 'Vykdyti aktyvių duomenų archyvus / ištrynimus',
 
+//Maps
+'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Įrašų geokoderis',
+'LBL_SUGAR_JOB_RESOLVER_GEOCODING' => 'Geokoderio resolveris',
+
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalas:',
 'LBL_LIST_LIST_ORDER' => 'Planuotojai:',
@@ -134,7 +138,7 @@ $mod_strings = array (
 'LBL_CRON_INSTRUCTIONS_LINUX' => 'Nustatyti crontab',
 'LBL_CRON_LINUX_DESC' => 'Pridėti šią eilutę prie crontab:',
 'LBL_CRON_WINDOWS_DESC' => 'Sukurti batch failą su šiomis komandomis:',
-'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1</b><br>for curl: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;curl --silent '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
+'LBL_NO_PHP_CLI' => 'If your host does not have the PHP binary available, you can use wget or curl to launch your Jobs.<br>for wget: <b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;wget --quiet --non-verbose '.$sugar_config['site_url'] ?? 'site_url' .'/cron.php > /dev/null 2>&1</b><br>iškreipti:<b>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;iškreipti -- tylus '.$sugar_config['site_url'].'/cron.php > /dev/null 2>&1',
 // Subpanels
 'LBL_JOBS_SUBPANEL_TITLE'	=> 'Darbų registratorius',
 'LBL_EXECUTE_TIME'			=> 'Vykdymo laikas',
@@ -150,6 +154,8 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVETMPFILES' => 'Pašalinkite laikinus failus',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Atkurkite sugadintus komandos saugos duomenis',
 'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Atnaujinti produkto apibrėžimą',
+'LBL_SUGARCRM_SUGARCRM_MAPS_QUEUE_GEOCODE_SCHEDULER' => 'Geokoderio žemėlapiai',
+'LBL_SUGARCRM_SUGARCRM_MAPS_RESOLVER' => 'Geokoderio resolveris',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Vykdyti masinių laiškų siuntimą',
 'LBL_ASYNCMASSUPDATE' => 'Perform Asynchronous Mass Updates',
@@ -166,6 +172,7 @@ $mod_strings = array (
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Veiklos srauto valymo priemonė',
 'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Apdoroti laiko tvarkaraščius',
+'LBL_SUGARJOBDATAARCHIVER' => 'Vykdyti aktyvių duomenų archyvus / ištrynimus',
 'LBL_PMSEENGINECRON' => '„SugarBPM“ planuoklė',
 );
 

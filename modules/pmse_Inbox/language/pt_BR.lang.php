@@ -23,6 +23,7 @@ $mod_strings = array (
     'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Painel de registro de processos',
 
     'LBL_CAS_ID' => 'Número do processo',
+    'LBL_CAS_STATUS' => 'Status do processo',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Desconhecido (de acordo com o Id de usuário: '%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "a tarefa foi",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "a tarefa foi ",
@@ -57,6 +58,7 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "foi atribuído ao Processo #%s %s o registro %s pela %s Ação %s",
     'LBL_PMSE_HISTORY_LOG_ON'  => "em",
     'LBL_PMSE_HISTORY_LOG_AND'  => "e",
+    'LBL_PMSE_HISTORY_LOG_RELATIONSHIP_CHANGE' => 'vinculou ou desvinculou um registro a',
 
     'LBL_PMSE_LABEL_APPROVE' => 'Aprovar',
     'LBL_PMSE_LABEL_REJECT' => 'Rejeitar',
@@ -111,6 +113,12 @@ $mod_strings = array (
     'LBL_STATUS_IN_PROGRESS' => 'Processos em andamento',
     'LBL_STATUS_CANCELLED' => 'Processos cancelados',
     'LBL_STATUS_ERROR' => 'Erro de processos',
+    'LBL_STATUS_COMPLETED_ENUM' => 'Concluído',
+    'LBL_STATUS_TERMINATED_ENUM' => 'Terminado',
+    'LBL_STATUS_IN_PROGRESS_ENUM' => 'Em andamento',
+    'LBL_STATUS_CANCELLED_ENUM' => 'Cancelado',
+    'LBL_STATUS_ERROR_ENUM' => 'Erro',
+
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'Gerenciamento de Processos',
     'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'Processos autônomos',

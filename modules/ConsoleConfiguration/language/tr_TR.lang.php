@@ -26,6 +26,9 @@ $mod_strings = array(
     'LBL_CONSOLE_FILTER' => 'Filtre',
     'LBL_CONSOLE_FILTER_RULES' => 'Filtre Kuralları',
 
+    // Freeze first column
+    'LBL_FREEZE_FIRST_COLUMN' => 'İlk Sütunu Dondur',
+
     'LBL_CONSOLE_COLUMNS' => 'Sütunlar',
     'LBL_CONSOLE_MULTI_FIELD_COLUMN' => 'Çok Alanlı Sütun',
     'LBL_CONSOLE_PRIMARY_SORT' => 'Birincil Sıralama',

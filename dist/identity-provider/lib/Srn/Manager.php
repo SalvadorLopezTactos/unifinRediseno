@@ -20,6 +20,9 @@ class Manager
     const USERS_SERVICE = 'iam';
 
     // Resource types
+    const RESOURCE_TYPE_SA = 'sa';
+    const RESOURCE_TYPE_USER = 'user';
+    const RESOURCE_TYPE_TENANT = 'tenant';
     const RESOURCE_TYPE_APPLICATION = 'app';
 
     // Application types
@@ -63,7 +66,7 @@ class Manager
             ->setService(static::USERS_SERVICE)
             ->setRegion('')
             ->setTenantId($tenantId)
-            ->setResource(['user', $userId]);
+            ->setResource([self::RESOURCE_TYPE_USER, $userId]);
     }
 
     /**
@@ -79,7 +82,7 @@ class Manager
             ->setService(static::USERS_SERVICE)
             ->setRegion($this->config['region'])
             ->setTenantId($tenantId)
-            ->setResource(['tenant']);
+            ->setResource([self::RESOURCE_TYPE_TENANT]);
     }
 
     /**
@@ -104,5 +107,38 @@ class Manager
     {
         return $srn->getResource()[0] === self::RESOURCE_TYPE_APPLICATION
             && $srn->getResource()[1] === self::APPLICATION_TYPE_CRM;
+    }
+
+    /**
+     * Checks whether the given srn belong to user.
+     *
+     * @param Srn $srn
+     * @return bool
+     */
+    public static function isUser(Srn $srn): bool
+    {
+        return $srn->getResource()[0] === self::RESOURCE_TYPE_USER;
+    }
+
+    /**
+     * Checks whether the given srn belong to tenant.
+     *
+     * @param Srn $srn
+     * @return bool
+     */
+    public static function isTenant(Srn $srn): bool
+    {
+        return $srn->getResource()[0] === self::RESOURCE_TYPE_TENANT;
+    }
+
+    /**
+     * Checks whether the given srn belong to service account.
+     *
+     * @param Srn $srn
+     * @return bool
+     */
+    public static function isSa(Srn $srn): bool
+    {
+        return $srn->getResource()[0] === self::RESOURCE_TYPE_SA;
     }
 }

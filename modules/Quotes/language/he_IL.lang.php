@@ -295,5 +295,5 @@ $mod_strings = array (
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'תצורת הצעות מחיר',
 
     'LBL_RENEWAL' => 'חידוש',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'אינטראקציות לגבי הצעת מחיר',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של הצעת המחיר',
 );

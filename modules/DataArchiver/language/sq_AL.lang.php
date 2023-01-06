@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Arkivi',
     'LBL_PROCESS_TYPE_DELETE' => 'Fshirje e përhershme',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Ekzekutime të arkivit',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Paralajmërim',
+    'LBL_ARCHIVER_WARNING' => 'Rekomandohet që ta kryeni këtë veprim gjatë kohës kur ka më pak përdorim ose jashtë orarit të punës '
+        . 'pasi ai mund të ndikojë në rendimentin e sistemit. Je i sigurt që dëshiron ta ekzekutosh këtë veprim tani?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arkivuesi për modulin {{moduleName}} duhet të ketë {{fieldName}} të caktuar si filtër',
 );

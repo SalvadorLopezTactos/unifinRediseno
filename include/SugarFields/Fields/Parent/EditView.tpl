@@ -33,7 +33,6 @@ onclick='open_popup(document.{$form_name}.parent_type.value, 600, 400, "", true,
 </span>
 {{/if}}
 
-{literal}
 <script type="text/javascript">
 if (typeof(changeParentQS) == 'undefined'){
 function changeParentQS(field) {
@@ -74,4 +73,3 @@ $(document).ready(function(){
 </script>
 {{$displayParams.disabled_parent_types}}
 {{$quickSearchCode}}
-{/literal}

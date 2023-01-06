@@ -130,7 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Можете да използвате това например, за да намерите конкретен казус, които е бил повдигнат.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Можете да натиснете тук, в случай че желаете да повдигнете нов казус.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Натискайки тук можете да се върнете в този списък по всяко време.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействия на случай',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на казуса',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Бележки',
 

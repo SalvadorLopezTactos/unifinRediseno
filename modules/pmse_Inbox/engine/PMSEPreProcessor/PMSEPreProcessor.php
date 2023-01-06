@@ -11,9 +11,11 @@
  */
 
 
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Sugarcrm\Sugarcrm\ProcessManager;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Doctrine\DBAL\Connection;
 
 class PMSEPreProcessor
 {
@@ -340,8 +342,12 @@ class PMSEPreProcessor
                     if (!(isset($data['evn_type']) && $data['evn_type'] == 'GLOBAL_TERMINATE')) {
                         // if run order is set, cache the event to prevent out of order runs
                         if ($hasRunOrder) {
-                            // append the event to achieve first -> last order
-                            $this->executedFlowIds[$bean->id][] = $eventData;
+                            if (isset($flowData['evn_params']) && $flowData['evn_params'] === 'relationshipchange') {
+                                $this->executedFlowIds[$request->getArguments()['related_id']][] = $eventData;
+                            } else {
+                                // append the event to achieve first -> last order
+                                $this->executedFlowIds[$bean->id][] = $eventData;
+                            }
                         }
 
                         if (!PMSEEngineUtils::isTargetModule($flowData, $validatedRequest->getBean())) {
@@ -515,7 +521,7 @@ class PMSEPreProcessor
                 ->executeQuery($sql, [':module' => $module]);
 
         // Loop and compare
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetchAssociative()) {
             if ($row['rel_element_relationship'] != $module) {
                 $seed = BeanFactory::newBean($row['pro_module']);
                 $linkName = $row['rel_element_relationship'];
@@ -530,10 +536,45 @@ class PMSEPreProcessor
         return $return;
     }
 
+    /**
+     * Builds a query condition to filter on an id field based on a bean and a list of link names.
+     * @param SugarBean $bean The primary bean
+     * @param string $idField The ID field name
+     * @param array $links Array of link names to load for the bean
+     * @return string
+     */
+    protected function buildLinkedObjectIdQuery(SugarBean $bean, string $idField, array $links = array())
+    {
+        // The bean will always be in the list of linked objects
+        $beanId = $bean->db->quoted($bean->id);
+        $query = "$idField = $beanId";
+        $queryList = [];
+
+        // Now loop over the link array
+        foreach ($links as $link) {
+            if ($bean->load_relationship($link)) {
+                $linkQuery = $bean->$link->getQuery(['skipAdditionalFields' => true,
+                    'returnRHSIdQuery' => true]);
+                if (!empty($linkQuery)) {
+                    $queryList[] = $linkQuery;
+                }
+            }
+        }
+
+        if (!empty($queryList)) {
+            // Add the bean id to query
+            $queryList[] = "SELECT $beanId id ". $bean->db->getFromDummyTable();
+            $query = $idField . ' IN (' . implode(' UNION ALL ', $queryList) . ')';
+        }
+
+        return $query;
+    }
 
     /**
      * Gets a list of related object ids based on a bean and a list of link names.
      * Optionally, will wrap the ids in DB quotes when needed
+     *
+     * @deprecated
      * @param SugarBean $bean The primary bean
      * @param array $links Array of link names to load for the bean
      * @param boolean $quoted Whether to DB escape the results
@@ -586,10 +627,11 @@ class PMSEPreProcessor
      * 3. rd.date_entered (Datetime the Process Definition was created) oldest -> newest
      *
      * @param SugarBean $bean
+     * @param string $event The event that triggered the process (after_save/after_relationship_add etc)
      * @return array
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws Doctrine\DBAL\Exception
      */
-    public function getAllEvents(SugarBean $bean)
+    public function getAllEvents(SugarBean $bean, $event = '')
     {
         // If the bean is not a bean at this point, just return an array
         if (empty($bean)) {
@@ -602,17 +644,30 @@ class PMSEPreProcessor
         // Get our list of links to filter our flows by
         $links = $this->getValidLinks($moduleName);
 
-        // Build a list of object ids that will work for our flows
-        $objectIds = $this->buildLinkedObjectIdList($bean, $links, false);
-
-        // Use equality only for new records, otherwise use inequality
-        // Note: this will end up caching two different prepared queries potentially, but that should not be a huge
-        // performance hit in the long run
-        $newOp = $this->isNewBean($bean) ? '=' : '!=';
-
+        // Build the query condition to filter flows by 'cas_sugar_object_id'
+        $objectIdQuery = $this->buildLinkedObjectIdQuery($bean, 'flow.cas_sugar_object_id', $links);
         // This is a DB specific handler for the event params columns. This will not cause variants of this query to be
         // created
         $evnParamsChar = $bean->db->convert('rd.evn_params', 'text2char');
+
+        $db = DBManagerFactory::getInstance();
+
+        if ($event === 'after_relationship_add' || $event === 'after_relationship_delete') {
+            $appliedTo =  $evnParamsChar. ' = '.$db->quoted('relationshipchange');
+        } elseif ($this->isNewBean($bean)) {
+            $appliedTo = $evnParamsChar . ' = '.$db->quoted('new').
+                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newfirstupdated').
+                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newallupdates');
+        } else {
+            $appliedTo = $evnParamsChar . ' = '.$db->quoted('allupdates').
+                ' OR ' . $evnParamsChar . ' = '.$db->quoted('updated').
+                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newfirstupdated').
+                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newallupdates');
+        }
+
+        $mysqlHint = $db->getConnection()->getDatabasePlatform() instanceof MySqlPlatform
+            ? ' force index(idx_pmse_bpm_flow_cas_flow_status_cas_obj_id_del) ' : '';
+
         $sql = "
         SELECT
             rd.evn_id, rd.evn_uid, rd.prj_id, rd.pro_id, rd.evn_type,
@@ -634,14 +689,12 @@ class PMSEPreProcessor
         FROM
             pmse_bpm_related_dependency rd
         LEFT JOIN
-            (SELECT * 
-            FROM 
-                 pmse_bpm_flow flow
-            WHERE 
+            pmse_bpm_flow flow{$mysqlHint}
+            ON
+                rd.rel_element_id = flow.bpmn_id AND
                 flow.cas_flow_status='WAITING' AND
-                flow.cas_sugar_object_id IN (?) AND
+                $objectIdQuery AND
                 flow.deleted = 0
-            ) flow ON rd.rel_element_id = flow.bpmn_id
         LEFT JOIN
             pmse_project prj
             ON
@@ -649,19 +702,19 @@ class PMSEPreProcessor
         WHERE
             rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND (
                 (
-                    (rd.evn_type = 'START' AND rd.evn_module = ? AND 
-                    ($evnParamsChar $newOp 'new' OR $evnParamsChar $newOp 'newfirstupdated' OR $evnParamsChar $newOp 'newallupdates')) OR
+                    (rd.evn_type = 'START' AND rd.evn_module = :module AND 
+                    ($appliedTo)) OR
                     (
                         rd.evn_type = 'GLOBAL_TERMINATE' AND
                         (flow.cas_flow_status IS NULL OR flow.cas_flow_status != 'WAITING') AND
-                        rd.rel_element_module = ?
+                        rd.rel_element_module = :module
                     ) OR
                     (
                         rd.evn_type = 'INTERMEDIATE' AND
                         rd.evn_marker = 'MESSAGE' AND
                         rd.evn_behavior = 'CATCH' AND
                         flow.cas_flow_status = 'WAITING' AND
-                        rd.rel_element_module = ?
+                        rd.rel_element_module = :module
                     )
                 )
             )
@@ -681,14 +734,13 @@ class PMSEPreProcessor
         ";
 
         // Execute the query and get our results
-        $stmt = DBManagerFactory::getInstance()
-                ->getConnection()
-                ->executeQuery(
-                    $sql,
-                    [$objectIds, $moduleName, $moduleName, $moduleName],
-                    [\Doctrine\DBAL\Connection::PARAM_STR_ARRAY]
-                );
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $db->getConnection()
+            ->executeQuery(
+                $sql,
+                [':module' => $moduleName],
+                [':module' => \PDO::PARAM_STR]
+            );
+        return $stmt->fetchAllAssociative();
     }
 
     /**
@@ -766,7 +818,8 @@ class PMSEPreProcessor
 
                 break;
             case 'hook':
-                $flows = $this->getAllEvents($request->getBean());
+                $event = isset($request->getArguments()['event']) ? $request->getArguments()['event'] : '';
+                $flows = $this->getAllEvents($request->getBean(), $event);
                 break;
             case 'queue':
                 $flows = $this->getFlowById($args['id']);

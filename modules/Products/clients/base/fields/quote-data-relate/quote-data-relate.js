@@ -29,6 +29,11 @@
     newQLIId: undefined,
 
     /**
+     * Disable the focus drawer record switching for this field
+     */
+    disableFocusDrawerRecordSwitching: true,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -183,5 +188,19 @@
             id: this.newQLIId,
             text: term + this.createNewLabel
         };
+    },
+
+    /**
+     * @inheritdoc
+     */
+    getFocusContextModelId: function() {
+        return this.model.get('id');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    getFocusContextModule: function() {
+        return 'Products';
     }
 });

@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Користувачі',
     'LBL_EMAILS_PRODUCTS_REL' => 'Продукти комерційної пропозиції',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Доходи за продукти',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Ескалації',
     'LBL_EMAILS_MESSAGES_REL' => 'Повідомлення',
     'LBL_EMAILS_PURCHASES_REL' => 'Покупки',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Куплені продукти',
@@ -473,4 +474,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Надіслати повідомлення електронної пошти',
     'LBL_MAILBOX' => 'Обліковий запис вхідної пошти',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Щоб надсилати електронні листи, налаштуйте обліковий запис вихідної пошти в розділі <a href="#OutboundEmail">Налаштування електронної пошти</a>.',
 );

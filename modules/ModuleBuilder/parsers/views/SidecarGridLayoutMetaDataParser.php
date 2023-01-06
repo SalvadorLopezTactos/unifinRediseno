@@ -251,6 +251,13 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
      */
     public function isValidFieldPortal($key, array $def)
     {
+        if (isset($def['studio']) && is_array($def['studio'])) {
+            // Handle client specific studio setting for a field
+            $clientRules = self::getClientStudioValidation($def['studio'], $this->_view, $this->client);
+            if ($clientRules !== null) {
+                return $clientRules;
+            }
+        }
         if (isset($this->invalidTypes['portal'])) {
             $view = str_replace(array('portal', 'view'), '', $this->_view);
 
@@ -455,6 +462,12 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                         }
                         else {
                             $source = $cell;
+                        }
+
+                        // If there are additional fielddefs provided for the field, combine them with the
+                        // filtered fielddefs
+                        if (!empty($fieldName) && !empty($source) && !empty($this->additionalFieldDefs[$fieldName])) {
+                            $source = array_merge($source, $this->additionalFieldDefs[$fieldName]);
                         }
 
                         // If the field defs is empty it needs to be an array
@@ -960,10 +973,16 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
 
             // Clear out the cache just for the platform we are on
             $client = empty($this->client) ? 'base' : $this->client;
+            $params = [];
+            foreach ($this->implementation->getParams() as $key => $value) {
+                if ($key !== 'layoutOption' && $key !== 'dropdownField' && $key !== 'dropdownValue') {
+                    $params[$key] = $value;
+                }
+            }
             MetaDataManager::refreshModulesCache(
                 array($this->_moduleName),
                 array($client),
-                $this->implementation->getParams()
+                $params
             );
             parent::_clearCaches();
         }

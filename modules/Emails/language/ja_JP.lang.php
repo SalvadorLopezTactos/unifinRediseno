@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'ユーザー',
     'LBL_EMAILS_PRODUCTS_REL' => '見積済商品',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => '商談品目',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'エスカレーション',
     'LBL_EMAILS_MESSAGES_REL' => 'メッセージ',
     'LBL_EMAILS_PURCHASES_REL' => '購入',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => '購入商品',
@@ -471,4 +472,5 @@ $mod_strings = array(
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Eメール送信',
     'LBL_MAILBOX' => 'インバウンドアカウント',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Eメールを送信するために、<a href="#OutboundEmail">Eメール設定</a>経由で発信Eメールアカウントを設定してください。',
 );

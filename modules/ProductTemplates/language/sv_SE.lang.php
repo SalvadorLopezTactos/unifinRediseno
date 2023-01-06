@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_SUPPORT_NAME' => 'Supportnamn:',
   'LBL_SUPPORT_TERM' => 'Supportteam:',
   'LBL_TAX_CLASS' => 'Skatteklass:',
+  'LBL_ACTIVE_STATUS' => 'Status',
   'LBL_TYPE_NAME'=>'Typnamn:',
   'LBL_TYPE' => 'Typ:',
   'LBL_PRODUCT_TYPE' => 'Produkttyp',
@@ -119,4 +120,5 @@ $mod_strings = array (
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Instrumentpanel med produktkataloglista',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Instrumentpanel med produktkatalogpost',
     'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för produktkatalog',
+    'LBL_FILTER_ACTIVE_STATUS' => 'Statusen är aktiv',
 );

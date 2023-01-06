@@ -16,6 +16,8 @@
  * Reserved. Contributor(s): ______________________________________..
  * *******************************************************************************/
 
+require_once 'include/formbase.php';
+
 class TrackersViewTrackersettings extends SugarView 
 {	
     /**
@@ -34,9 +36,9 @@ class TrackersViewTrackersettings extends SugarView
 	    global $mod_strings;
 	    
     	return array(
-    	   "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
-    	   translate('LBL_TRACKER_SETTINGS','Administration'),
-    	   );
+            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
+            translate('LBL_TRACKER_SETTINGS', 'Administration'),
+        );
     }
 
     /**
@@ -82,17 +84,17 @@ class TrackersViewTrackersettings extends SugarView
                $configurator = new Configurator();
                $configurator->saveConfig();
            } //if
-           header('Location: index.php?module=Administration&action=index');
+            SugarApplication::redirect(buildRedirectURL('', 'Administration'));
         }
         
         echo getClassicModuleTitle(
                 "Administration", 
                 array(
-                    "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>",
+                    "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
                     translate('LBL_TRACKER_SETTINGS','Administration'),
-                    ), 
+                ),
                 false
-                );
+        );
         
         $trackerManager = TrackerManager::getInstance();
         $disabledMonitors = $trackerManager->getDisabledMonitors();

@@ -85,7 +85,7 @@ function getAllowedReportModules(&$local_modListHeader, $skipCache = false) {
 
 	// Bug 38864 - Parse the reportmoduledefs.php file for a list of modules we should include or disclude from this list
 	//             Provides contents of $exemptModules and $additionalModules arrays
-	$exemptModules     = array();
+    $exemptModules     = array('CloudDrivePaths');
 	$additionalModules = array();
 
 	foreach(SugarAutoLoader::existingCustom('modules/Reports/metadata/reportmodulesdefs.php') as $file) {

@@ -95,6 +95,7 @@ $mod_strings = array(
     'LBL_EMAILS_USERS_REL' => 'Gebruikers',
     'LBL_EMAILS_PRODUCTS_REL' => 'Geoffreerde regelitems',
     'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Omzetregelitems',
+    'LBL_EMAILS_ESCALATIONS_REL' => 'Escalaties',
     'LBL_EMAILS_MESSAGES_REL' => 'Berichten',
     'LBL_EMAILS_PURCHASES_REL' => 'Aankopen',
     'LBL_EMAILS_PURCHASEDLINEITEMS_REL' => 'Aangeschafte regelitems',
@@ -473,4 +474,5 @@ U kunt een vooraf opgezet sjabloon toepassen met behulp van de sjabloon knop of 
 
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-mail verzenden',
     'LBL_MAILBOX' => 'Inkomend account',
+    'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configureer een uitgaand e-mailaccount via <a href="#OutboundEmail">E-mailinstellingen</a> om e-mails te kunnen sturen.',
 );

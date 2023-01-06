@@ -261,6 +261,24 @@
             return true;
         }
 
+        if (this.view && this.view.name === 'dashlet-toolbar' && app.config.platform === 'portal') {
+            // hide all dashlet toolbar buttons in portal
+            return true;
+        }
+
         return false;
+    },
+
+    /**
+     * Function to be overridden by any button in an action dropdown field that needs to be filtered out
+     * @return {boolean} default return true for all views except on a dashlet where filtering is necessry
+     */
+    isAllowedDropdownButton: function() {
+        // If we are in a dashlet context we need to filter things by default using these rules.
+        if (this.view.name === 'dashlet-toolbar') {
+            return _.contains(['edit_button'], this.name) || _.contains(['divider', 'actionbutton'], this.type);
+        }
+        // Return true for record view, where we do not filter anything out
+        return true;
     }
 })

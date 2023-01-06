@@ -181,36 +181,7 @@ class RelateRecordApi extends SugarApi
 
     public function getRelatedRecord(ServiceBase $api, array $args)
     {
-        $primaryBean = $this->loadBean($api, $args);
-        
-        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
-
-        /** @var Link2 $link */
-        $link = $primaryBean->$linkName;
-
-        $related = array_values($link->getBeans(array(
-            'where' => array(
-                'lhs_field' => 'id',
-                'operator' => '=',
-                'rhs_value' => $args['remote_id'],
-            )
-        ), array(
-            'erased_fields' => !empty($args['erased_fields']),
-        )));
-
-        if (!empty($related[0]->id)) {
-            $relatedBean = $related[0];
-        } else {
-            // fall back to manual retrieval in case if the newly created bean is not related to the primary one
-            if (!$relatedBean->retrieve($args['remote_id'])) {
-                // Retrieve failed, probably doesn't have permissions
-                throw new SugarApiExceptionNotFound('Could not find the related bean');
-            }
-
-        }
-
-        return $this->formatBean($api, $args, $relatedBean);
-        
+        return $this->getRecordByRelation($api, $args);
     }
 
     /**
@@ -228,7 +199,7 @@ class RelateRecordApi extends SugarApi
 
         $args['remote_id'] = $relatedBean->id;
 
-        $relatedArray = $this->getRelatedRecord($api, $args);
+        $relatedArray = $this->getRecordByRelation($api, $args, true);
 
         return $this->formatNearAndFarRecords($api, $args, $primaryBean, $relatedArray);
     }
@@ -450,17 +421,29 @@ class RelateRecordApi extends SugarApi
     {
         $primaryBean = $this->loadBean($api, $args);
 
-        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','view');
+        [$linkName] = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
 
-        $relatedBean->retrieve($args['remote_id']);
-        if ( empty($relatedBean->id) ) {
+        /** @var Link2 $link */
+        $link = $primaryBean->$linkName;
+        $related = $link->getBeans([
+            'where' => [
+                'lhs_field' => 'id',
+                'operator' => '=',
+                'rhs_value' => $args['remote_id'],
+            ],
+        ], [
+            'erased_fields' => !empty($args['erased_fields']),
+        ]);
+
+        $relatedBean = $related[$args['remote_id']] ?? null;
+        if (!$relatedBean) {
             // Retrieve failed, probably doesn't have permissions
             throw new SugarApiExceptionNotFound('Could not find the related bean');
         }
         BeanFactory::registerBean($relatedBean);
 
-        $primaryBean->$linkName->delete($primaryBean->id,$relatedBean);
-        
+        $link->delete($primaryBean->id, $relatedBean);
+
         //Clean up any hanging related records.
         SugarRelationship::resaveRelatedBeans();
 
@@ -578,5 +561,47 @@ class RelateRecordApi extends SugarApi
         unset($args['link_name']);
 
         return $args;
+    }
+
+    /**
+     * @param ServiceBase $api
+     * @param array $args
+     * @param bool $allowUnrelated
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionNotFound
+     */
+    protected function getRecordByRelation(ServiceBase $api, array $args, bool $allowUnrelated = false): array
+    {
+        $primaryBean = $this->loadBean($api, $args);
+
+        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
+
+        /** @var Link2 $link */
+        $link = $primaryBean->$linkName;
+
+        $related = array_values($link->getBeans(array(
+            'where' => array(
+                'lhs_field' => 'id',
+                'operator' => '=',
+                'rhs_value' => $args['remote_id'],
+            ),
+        ), array(
+            'erased_fields' => !empty($args['erased_fields']),
+        )));
+
+        if (!empty($related[0]->id)) {
+            $relatedBean = $related[0];
+        } elseif ($allowUnrelated) {
+            // fall back to manual retrieval in case if the newly created bean is not related to the primary one
+            if (!$relatedBean->retrieve($args['remote_id'])) {
+                // Retrieve failed, probably doesn't have permissions
+                throw new SugarApiExceptionNotFound('Could not find the related bean');
+            }
+        } else {
+            throw new SugarApiExceptionNotFound('Could not find the related bean');
+        }
+
+        return $this->formatBean($api, $args, $relatedBean);
     }
 }

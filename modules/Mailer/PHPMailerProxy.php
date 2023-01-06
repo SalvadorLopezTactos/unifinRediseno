@@ -1,4 +1,7 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class PHPMailerProxy extends PHPMailerOAuth
+class PHPMailerProxy extends PHPMailer
 {
     /**
      * {@inheritDoc}
@@ -96,7 +99,7 @@ class PHPMailerProxy extends PHPMailerOAuth
         if (defined('DISABLE_EMAIL_SEND') && DISABLE_EMAIL_SEND === true) {
             try {
                 return $this->preSend();
-            } catch (phpmailerException $e) {
+            } catch (\PHPMailer\PHPMailer\Exception $e) {
                 $this->mailHeader = '';
                 $this->setError($e->getMessage());
                 throw $e;
@@ -148,5 +151,15 @@ class PHPMailerProxy extends PHPMailerOAuth
     public static function validateAddress($address, $patternselect = null)
     {
         return SugarEmailAddress::isValidEmail($address);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * Overrides PHPMailer's isPermittedPath to allow upload:// scheme in file names
+     */
+    protected static function isPermittedPath($path)
+    {
+        return parent::isPermittedPath($path) || preg_match('#^upload://#i', $path);
     }
 }

@@ -86,6 +86,7 @@ $mod_strings = array (
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Feldname existiert bereit',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Feldnamen dürfen nur Zeichen wie a-zA-Z_ enthalten',
     'ERR_NO_MODULE_INCLUDED' => 'Es ist kein Modul eingefügt. Es kann nicht gespeichert werden.',
+    'ERR_DROPDOWN_NAME_ALREADY_EXISTS' => 'Dropdown-Name existiert bereit',
     'LBL_BTN_ADD' => 'Hinzufügen',
     'LBL_BTN_EDIT' => 'Bearbeiten',
     'LBL_GENERATE_URL' => 'URL generieren',
@@ -118,7 +119,5 @@ $mod_strings = array (
     'LBL_ADDING_COLUMN' => 'Hinzufügen der Spalte {0} zu',
     'LBL_DONE' => 'Fertig',
     'LBL_EXE_NON_SIM_MODE' => 'Realmodus ausführen',
+    'LBL_CALCULATION_VISIBLE' => 'Für Berechnungen einblenden',
 );
-
-
-?>

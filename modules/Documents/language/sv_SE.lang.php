@@ -166,4 +166,11 @@ $mod_strings = array (
     'LBL_RLI_SUBPANEL_TITLE' => 'Intäktsposter',
     'LBL_PURCHASES_SUBPANEL_TITLE' => 'Köp',
     'LBL_PLIS_SUBPANEL_TITLE' => 'Inköpta linjeartiklar',
+
+    // Dashboards
+    'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Instrumentpanel för dokumentposter',
+    'LBL_MY_DOCUMENTS' => 'Mina Dokument',
+
+    // Subpanels
+    'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Skicka till DocuSign',
 );

@@ -126,7 +126,7 @@
   // Update checkboxes for iOS
   input[type="checkbox"],
   input[type="radio"] {
-    border: 1px solid @grayLighter;
+    border: @borderWidget;
   }
 
   // Remove the horizontal form styles
@@ -166,10 +166,10 @@
   }
 
   #stream tbody tr td {
-    #gradient > .vertical(@white, lighten(@grayLighter, 1%));
+    #gradient > .vertical(@white, @gray20);
 
     border-top: 1px solid @white;
-    border-bottom: 1px solid darken(@white, 10%);
+    border-bottom: 1px solid @gray10;
     vertical-align: middle;
   }
 
@@ -356,7 +356,7 @@
   }
 
   // Fix vertical scrollbar not showing up in side drawer when under 768px wide
-  .side-drawer .dashboard {
+  #side-drawer .dashboard {
     position: absolute;
   }
 
@@ -404,7 +404,6 @@
     overflow-x: visible;
     overflow-y: visible;
     width: 100%;
-    border-bottom: @borderWidget;
     z-index: initial;
   }
 
@@ -428,6 +427,12 @@
       top: auto;
       bottom: auto;
       padding-top: 0;
+
+      .dashboard-grid {
+        &.grid-stack-empty {
+          height: auto !important;
+        }
+      }
 
       .headerpane {
         position: relative;
@@ -490,7 +495,7 @@
     height: ~"-moz-calc(100% - 93px) !important";
     height: ~"-webkit-calc(100% - 93px) !important";
     height: ~"calc(100% - 93px) !important";
-    z-index: 1090;
+    z-index: @zindexSidebarContent + 1;
     overflow: scroll;
 
     &.active {
@@ -593,7 +598,7 @@
   .main-pane.span8,
   .main-pane.span12 {
     /* override */
-    margin-top: 52px;
+    margin-top: 50px;
   }
 
   .preview-pane {
@@ -602,12 +607,41 @@
   }
 
   /* additive */
+  .megamenu > .dropdown .btn-group > .dropdown-toggle .sicon-caret-down,
   .megamenu > .dropdown .btn-group > .dropdown-toggle .fa-caret-down,
   th.sorting_asc span::after,
   th.sorting_desc span::after,
   th.sorting span::after,
   .dashlet .btn-toolbar {
     visibility: visible;
+  }
+}
+
+// Specific fix for Forecasts worksheet view
+.responsiveTopline() {
+  .topline {
+    .flex-column();
+
+    .span4 {
+      &::before {
+        height: 7.25rem;
+      }
+
+      .w-full();
+      .ml-8();
+    }
+  }
+}
+
+@media screen and (max-width: 834px) {
+  #content:not(.sidebar-visible) {
+    .responsiveTopline();
+  }
+}
+
+@media screen and (max-width: 1263px) {
+  #content.sidebar-visible {
+    .responsiveTopline();
   }
 }
 

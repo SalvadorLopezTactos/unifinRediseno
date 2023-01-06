@@ -7,10 +7,9 @@
 *
 * @category  Library
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   GIT: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 namespace Microsoft\Graph\Model;
 
@@ -19,10 +18,9 @@ namespace Microsoft\Graph\Model;
 *
 * @category  Model
 * @package   Microsoft.Graph
-* @copyright © Microsoft Corporation. All rights reserved.
+* @copyright (c) Microsoft Corporation. All rights reserved.
 * @license   https://opensource.org/licenses/MIT MIT License
-* @version   Release: 1.4.0
-* @link      https://graph.microsoft.io/
+* @link      https://graph.microsoft.com
 */
 class WorkbookNamedItem extends Entity
 {
@@ -30,7 +28,7 @@ class WorkbookNamedItem extends Entity
     * Gets the comment
     * Represents the comment associated with this name.
     *
-    * @return string The comment
+    * @return string|null The comment
     */
     public function getComment()
     {
@@ -59,7 +57,7 @@ class WorkbookNamedItem extends Entity
     * Gets the name
     * The name of the object. Read-only.
     *
-    * @return string The name
+    * @return string|null The name
     */
     public function getName()
     {
@@ -88,7 +86,7 @@ class WorkbookNamedItem extends Entity
     * Gets the scope
     * Indicates whether the name is scoped to the workbook or to a specific worksheet. Read-only.
     *
-    * @return string The scope
+    * @return string|null The scope
     */
     public function getScope()
     {
@@ -115,9 +113,9 @@ class WorkbookNamedItem extends Entity
     
     /**
     * Gets the type
-    * Indicates what type of reference is associated with the name. The possible values are: String, Integer, Double, Boolean, Range. Read-only.
+    * Indicates what type of reference is associated with the name. Possible values are: String, Integer, Double, Boolean, Range. Read-only.
     *
-    * @return string The type
+    * @return string|null The type
     */
     public function getType()
     {
@@ -130,7 +128,7 @@ class WorkbookNamedItem extends Entity
     
     /**
     * Sets the type
-    * Indicates what type of reference is associated with the name. The possible values are: String, Integer, Double, Boolean, Range. Read-only.
+    * Indicates what type of reference is associated with the name. Possible values are: String, Integer, Double, Boolean, Range. Read-only.
     *
     * @param string $val The type
     *
@@ -146,7 +144,7 @@ class WorkbookNamedItem extends Entity
     * Gets the value
     * Represents the formula that the name is defined to refer to. E.g. =Sheet14!$B$2:$H$12, =4.75, etc. Read-only.
     *
-    * @return string The value
+    * @return string|null The value
     */
     public function getValue()
     {
@@ -175,7 +173,7 @@ class WorkbookNamedItem extends Entity
     * Gets the visible
     * Specifies whether the object is visible or not.
     *
-    * @return bool The visible
+    * @return bool|null The visible
     */
     public function getVisible()
     {
@@ -204,12 +202,12 @@ class WorkbookNamedItem extends Entity
     * Gets the worksheet
     * Returns the worksheet on which the named item is scoped to. Available only if the item is scoped to the worksheet. Read-only.
     *
-    * @return WorkbookWorksheet The worksheet
+    * @return WorkbookWorksheet|null The worksheet
     */
     public function getWorksheet()
     {
         if (array_key_exists("worksheet", $this->_propDict)) {
-            if (is_a($this->_propDict["worksheet"], "Microsoft\Graph\Model\WorkbookWorksheet")) {
+            if (is_a($this->_propDict["worksheet"], "\Microsoft\Graph\Model\WorkbookWorksheet") || is_null($this->_propDict["worksheet"])) {
                 return $this->_propDict["worksheet"];
             } else {
                 $this->_propDict["worksheet"] = new WorkbookWorksheet($this->_propDict["worksheet"]);

@@ -14,19 +14,17 @@
 <script type="text/javascript" src="{sugar_getjspath file='modules/Users/User.js'}"></script>
 <script type="text/javascript">
 <!--
-{literal}
-function change_state(radiobutton) 
+function change_state(radiobutton)
 {
 	if (radiobutton.value == '1') {
 		radiobutton.form['massemailer_tracking_entities_location'].disabled=true;
-		radiobutton.form['massemailer_tracking_entities_location'].value='{/literal}{$MOD.TRACKING_ENTRIES_LOCATION_DEFAULT_VALUE}{literal}';
+		radiobutton.form['massemailer_tracking_entities_location'].value='{$MOD.TRACKING_ENTRIES_LOCATION_DEFAULT_VALUE}';
 	} 
 	else {
 		radiobutton.form['massemailer_tracking_entities_location'].disabled=false;
-		radiobutton.form['massemailer_tracking_entities_location'].value='{/literal}{$SITEURL}{literal}';
+		radiobutton.form['massemailer_tracking_entities_location'].value='{$SITEURL}';
 	}
 }
-{/literal}
 -->
 </script>
 <form name="ConfigureSettings" id="EditView" method="POST" >
@@ -91,7 +89,7 @@ function change_state(radiobutton)
 
 <div style="padding-top:2px;">
     <input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button" onclick="this.form.action.value='Save';return verify_data(this);" type="submit" name="button" value=" {$APP.LBL_SAVE_BUTTON_LABEL} ">
-    <input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick="this.form.action.value='{$RETURN_ACTION}'; this.form.module.value='{$RETURN_MODULE}';" type="submit" name="button" value=" {$APP.LBL_CANCEL_BUTTON_LABEL} ">
+    <input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick={literal}"parent.SUGAR.App.router.navigate('#Administration', {trigger: true})"{/literal} type="submit" name="button" value=" {$APP.LBL_CANCEL_BUTTON_LABEL} ">
 </div>
 
 </form>

@@ -29,6 +29,12 @@ body.popupBody {
     margin: 10px;
 }
 
+body.popupBody a:link,
+body.popupBody a:visited,
+body.popupBody a:hover {
+    text-decoration: underline;
+}
+
 fieldset, table, pre
 {
     margin-bottom:0;
@@ -38,7 +44,7 @@ fieldset
     -moz-border-radius: 6px;
     border-radius: 6px;
     -webkit-border-radius: 6px;
-    border:1px solid #CCC;
+    border:1px solid var(--border-color);
 }
 p
 {
@@ -360,8 +366,8 @@ cursor:pointer;
 
 div#content
 {
-    padding-top: 0px;
-    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -512,7 +518,7 @@ div.moduleTitle
 {
     display: block;
     float: left;
-    color: #666;
+    color: var(--text-color);
     font-size: 18px;
     padding-top: 7px;
     font-weight: normal;
@@ -522,7 +528,7 @@ div.moduleTitle
 
 .moduleTitle h2 a {
 font-size: 18px;
-color: #0e70b8;
+color: var(--link-color);
 text-decoration: none;
 }
 
@@ -686,12 +692,12 @@ div.actionsContainer
     padding: 5px 5px 5px 7px !important;
     text-align: left;
     vertical-align: top;
-    background-color: #eee;
+    background-color: var(--content-background);
 }
 .edit tr th
 {
     padding: 5px 5px 5px 7px !important;
-    background-color: #eee;
+    background-color: var(--headerpane-background);
 }
 table#tabFormPagination td,  #tabFormPagination, #EditView > table#tabFormPagination.detail.view
 {
@@ -722,7 +728,7 @@ margin-top: 0;
 }
 .search td span
 {
-    color:#444444;
+    color:var(--text-color);
 }
 .search td input[type=text],
 .search td input[type=password],
@@ -756,7 +762,7 @@ input#header {
 }
 
 .listViewBody.nosearch .list.view {
-    border-top: 1px solid;
+    border-top: 1px solid var(--border-color);
 }
 
 .listViewBody.nosearch .list {
@@ -905,7 +911,7 @@ input#header {
 }
 .other .edit td
 {
-    background: transparent !important;
+    background: var(--primary-content-background);
 }
 .other .edit
 {
@@ -929,7 +935,7 @@ input#header {
 }
 
 #wizard .detail.view {
-    background-color: #fff;
+    background-color: var(--content-background);
 }
 /* detail view */
 .detail.view {
@@ -1192,43 +1198,23 @@ div.indent_right {
     padding-left:10px !important;
     padding-top:10px !important;
     padding-bottom:10px !important;
-    background-image: -moz-linear-gradient(center top,
-    #ffffff 0%,
-    #eeeeee 1px,
-    #dadada 100%
-    );
-    background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #ffffff),
-    color-stop(.02, #eeeeee),
-    color-stop(1, #eeeeee)
-   );
-   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#dfdfdf');
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    background-color: #cccccc;
-    border-bottom: 1px solid #AFAFAE;
+    background-color: var(--headerpane-background);
+    border-bottom: 1px solid var(--border-color);
     border-radius-bottomleft: 0px;
     border-radius-bottomright: 0px;
     -moz-border-radius-bottomleft: 0px;
     -moz-border-radius-bottomright: 0px;
     -webkit-border-bottom-right-radius: 0px;
     -webkit-border-bottom-left-radius: 0px;
+    color:
     text-shadow: none;
 }
 
 .search_form .view.advanced {
-    background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #ffffff),
-    color-stop(.01, #eeeeee),
-    color-stop(1, #eeeeee)
-   );
+    background-color: var(--secondary-content-background);
 }
 
 .search_form .view.advanced .help {
@@ -1236,7 +1222,7 @@ text-align: right;
 }
 
 .search_form .view a {
-    color: #176de5;
+    color: var(--link-color);
     font-size: 12px;
     text-decoration: none;
     text-shadow: none;
@@ -1869,12 +1855,12 @@ border: 1px solid #444444;
 /** report styles **/
 table.reportlistViewRC{
     /* this definition should be exactly the same as .listViewThS1 */
-    background:Black;
+    background:var(--primary-content-background);
 }
 
 table.reportlistView{
     /* this definition should be exactly the same as .listViewThS1 */
-    background:Black;
+    background:var(--primary-content-background);
 }
 
 .reportlistViewThS1 {
@@ -1886,7 +1872,7 @@ table.reportlistView{
     border-right: none;
     border-top: 1px solid Black;
     border-bottom: 1px solid Black;
-    background:Gainsboro;
+    background:var(--primary-content-background);
 }
 
 .reportevenListRowS1, .reportoddListRowS1 {
@@ -1896,7 +1882,7 @@ table.reportlistView{
     padding-bottom: 5px;
     padding-top: 3px;
     vertical-align: middle;
-    background:white;
+    background:var(--primary-content-background);
 }
 
 .reportlistViewPaginationTdS1 {
@@ -1905,7 +1891,7 @@ table.reportlistView{
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 12px;
-    background:white;
+    background:var(--primary-content-background);
 }
 
 /* These are for summation report */
@@ -1913,7 +1899,7 @@ table.reportlistView{
     border-left: none;
     border-right: none;
     border-top: none;
-    background:White;
+    background:var(--primary-content-background);
 }
 .reportGroupViewTable {
     background:LightGrey;
@@ -1943,12 +1929,12 @@ table.reportlistView{
     border-right: none;
     border-top: none;
     border-bottom: none;
-    background:Black;
+    background:var(--primary-content-background);
     border-collapse: collapse;
 }
 table.reportDataChildtablelistView td {
     border-color: #ccc;
-    background: white;
+    background: var(--primary-content-background);
     padding:4px 5px;
     border: 1px solid;
 }
@@ -1967,7 +1953,7 @@ table.reportDataChildtablelistView td {
     padding-bottom: 5px;
     padding-top: 3px;
     vertical-align: middle;
-    background:white;
+    background:var(--primary-content-background);
 }
 .reportGroup1ByTableEvenListRowS1 {
     font-weight: bold;
@@ -2024,16 +2010,16 @@ table.reportDataChildtablelistView td {
     border-left: 1px solid #000;
     }
 table.reportlistView td, table.reportlistView th {
-    background: #fff;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-    color: #000;
+    background: var(--primary-content-background);
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    color: var(--text-color);
     padding: 4px;
     text-align: center;
     font-size: 11px;
     }
     table.reportlistView th, .reportlistView .reportlistViewMatrixRightEmptyData, .reportlistView .reportlistViewMatrixRightEmptyData1 {
-    background: #dcdcdc;
+    background: var(--primary-content-background);
     font-weight: bold;
     }
 
@@ -2107,7 +2093,7 @@ font-weight: bold;
 }
 .aclOwner
 {
-    color: #000000;
+    color: var(--text-color-light);
     font-weight: bold;
 }
 .aclNone
@@ -2264,8 +2250,8 @@ padding-right: 0px;
 padding-left: 0px;
 }
 .contentBox {
-    border-top: 1px solid #DDD;
-    border-bottom: 1px solid #DDD;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     padding: 0px 10px 0px 0px;
     margin: 10px 0 10px 0;
 }
@@ -2517,12 +2503,6 @@ border-radius: 0px 0px 6px 6px;
     padding-top:0 !important;
 }
 
-/*System Settings*/
-#container_upload
-{
-    margin-top:7px;
-}
-
 /* Subpanel links */
 .subTabs td
 {
@@ -2599,8 +2579,8 @@ iframe.teamNoticeBox
 
 .x-sqs-list
 {
-    border:1px solid #d0d0d0;
-    background:#d0d0d0;
+    border:1px solid var(--border-color);
+    background: var(--secondary-content-background);
     zoom:1;
     overflow:hidden;
 }
@@ -2903,8 +2883,8 @@ embed
     }
 
     .dashletPanelMenu .bd .screen {
-        background-color: #fff;
-        border: 1px solid #999;
+        background-color: var(--primary-content-background);
+        border: 1px solid var(--border-color);
         -moz-border-radius: 6px;
         border-radius: 6px;
         -webkit-border-radius: 6px;
@@ -2964,14 +2944,11 @@ embed
     }
 
     .dashletPanelMenu.wizard, .dashletPanelMenu.wizard.yui-module.yui-overlay.yui-panel  {
-    box-shadow: 0 2px 10px #999999;
-    -moz-box-shadow: 0 2px 10px #999999;
-    -webkit-box-shadow: 0 2px 10px #999999;
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
-    background-color: rgba(0,0,0,.2);
-    border: 1px solid #999;
+    background-color: var(--primary-content-background);
+    border: 1px solid var(--border-color);
     text-shadow: none;
     font-size: 14px;
     clear:both;
@@ -3114,21 +3091,8 @@ embed
 
     .dashletPanelMenu.wizard div.hr {
         height: 5px;
-        border-top: 1px solid #ccc;
-        background-image: -moz-linear-gradient(center top,
-        #eeeeee 0%,
-        #ffffff 100%
-        );
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #eeeeee),
-        color-stop(1, #ffffff)
-    );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff');
-    margin: 15px 0px;
-
+        border-top: 1px solid var(--border-color);
+        margin: 15px 0px;
     }
 
     .dashletPanelMenu.wizard .bd .screen .preset-settings {
@@ -3272,8 +3236,9 @@ div#html_div td {
 }
 #smtpButtonGroup .yui-button button:hover, .yui-button a:hover
 {
-    border: 1px solid #999;
-    color: #999;
+    border: 1px solid var(--border-color-focus);
+    color: var(--text-color-hover);
+    background-color: var(--btn-hover-background);
     font-weight: bold;
     font-size: 16px;
 }
@@ -3283,9 +3248,9 @@ div#html_div td {
 }
 #smtpButtonGroup .yui-radio-button-checked button, .yui-checkbox-button-checked button
 {
-    background-color: #fff;
-    color: #999;
-    background-image: none;
+    background-color: var(--btn-active-background);
+    color: var(--text-color-light);
+    border: 1px solid var(--border-color-focus);
 }
 
 /* UNUSED STYLES */
@@ -3317,7 +3282,7 @@ hr
 }
 a:link, a:visited, a:hover
 {
-    text-decoration: underline;
+    text-decoration: none;
     font-size: 13px;
 }
 input, select, textarea, button, .button
@@ -3398,7 +3363,8 @@ table.detail
 .detail tr th
 {
     border-bottom: 2px solid;
-    background: #fff;
+    background: var(--headerpane-background);
+    color: var(--text-color);
 }
 
 
@@ -3416,7 +3382,7 @@ table.detail
 }
 .list tr.pagination td table td
 {
-    background:#FAFAFA none repeat scroll 0 0;
+    background: var(--primary-content-background);
     color:#666666;
 }
 
@@ -3427,9 +3393,9 @@ table.detail
 {
     border-left: none;
     border-right: none;
-    border-top: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
-    background: #ebebed !important;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    background: var(--secondary-content-background);
 }
 
 .email .list {
@@ -3642,18 +3608,18 @@ ul.subpanelTablist li a.current, ul.subpanelTablist li a.current:hover
 body
 {
 
-    color: #444;
-    background-color: #fff;
+    color: var(--text-color);
+    background-color: var(--content-background);
     /*background-image:url('../../../../index.php?entryPoint=getImage&imageName=bg.png');*/
     background-repeat:no-repeat;
 }
 h1, h2, h3
 {
-    color: #999;
+    color: var(--text-color);
 }
 .formHeader h3 {
     font-size: 14px;
-    color: #666;
+    color: var(--label-color);
 }
 
 .dashletPanel .formHeader  h3 {
@@ -3673,11 +3639,11 @@ h4, h5
 }
 a:link, a:visited
 {
-    color: #176de5;
+    color: var(--link-color);
 }
 a:hover
 {
-    color: #000000;
+    color: var(--link-color-hover);
 }
 button, input[type=submit], input[type=reset], input[type=button], .button, .buttons .button, .yui-button button
 {
@@ -3686,11 +3652,11 @@ button, input[type=submit], input[type=reset], input[type=button], .button, .but
     margin-bottom: 0;
     font-size: 11px;
     line-height: 18px;
-    color: #555;
+    color: var(--text-color);
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    background-color: #f6f6f6;
+    background-color: var(--btn-secondary-background);
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -3707,9 +3673,9 @@ button, input[type=submit], input[type=reset], input[type=button], .button, .but
 
 button:hover, input[type=submit]:hover, input[type=reset]:hover, input[type=button]:hover
 {
-    color: #222;
+    color: var(--text-color-hover);
     text-decoration: none;
-    border: 1px solid rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border-color);
     font-weight: bold;
 }
 button:active, input[type=submit]:active, input[type=reset]:active, input[type=button]:active,
@@ -3808,8 +3774,9 @@ input,select
     padding: 4px;
     font-size: 13px;
     line-height: 18px;
-    color: #58595b;
-    border: 1px solid #ccc;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    background-color: var(--input-background);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -3817,13 +3784,13 @@ input,select
 
 input:focus,textarea:focus, select:focus
 {
-    background-color: #fff;
-    border-color: #aaa;
+    background-color: var(--input-background);
+    border-color: var(--link-color);
 }
 textarea
 {
-    border-color: #ccc;
-    background-color: #fff;
+    border-color: var(--border-color);
+    background-color: var(--input-background);
     -moz-border-radius: 4px;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -4515,17 +4482,16 @@ ul.subpanelTablist li a.activeSubTab:hover
 .list tr td[scope=col] a:visited,
 .list tr.pagination td table td span.pageNumbers
 {
-    color: #666;
     font-size: 13px;
 }
 .list
 {
-    border-color: #AFAFAE !important;
+    border-color: var(--border-color);
 }
 
 .detail.view  tr:last-child td:first-child ,.detail.view  tr:last-child th:first-child,
 .list.view  tr:last-child td:first-child ,.list.view  tr:last-child th:first-child{
-
+    background-color: var(--content-background);
 }
 
 .list.view  tr:last-child td:last-child,.list.view  tr:last-child th:last-child  {
@@ -4550,61 +4516,62 @@ ul.subpanelTablist li a.activeSubTab:hover
 .evenListRowS1 td,
 .oddListRowS1 td
 {
-    color: #222;
-    border-bottom: 1px solid #ddd;
-    background-color: #fff;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--primary-content-background);
 }
 
 .evenListRowS1 td{
-background-color: #f6f6f6;
+background-color: var(--primary-content-background);
 }
 
 .evenListRowS1:hover td,
 .oddListRowS1:hover td
 {
-    background: #f3f8fe;
+    background-color: var(--primary-content-hover);
 }
 
 /* detailviews */
 .detail table,
 table.detail
 {
-    background-color: #ccc;
+    background-color: var(--border-color);
 }
 .detail tr td[scope="row"]
 {
-    color: #888;
-    background-color: #eee;
-    border-color: #ccc;
+    color: var(--label-color);
+    background-color: var(--primary-content-active);
+    border-color: var(--border-color);
 }
 .detail h4 {
-    color: #444444;
+    color: var(--label-color);
+    background-color: var(--primary-content-background);
 }
 .detail tr th
 {
-    border-color: #ccc;
+    border-color: var(--border-color);
 }
 .detail tr td
 {
-    color: #222;
-    border-color: #ccc;
-    background-color: #fff;
+    color: var(--text-color);
+    border-color: var(--border-color);
+    background-color: var(--primary-content-background);
 }
 .detail tr td a:link,
 .detail tr td a:visited,
 .detail tr td a:hover
 {
-    color: #176de5;
+    color: var(--link-color);
 }
 
 /* editviews */
 .edit td[scope=row]
 {
-    color: #444444;
+    color: var(--text-color);
 }
 
 .edit h4 {
-    color: #444444;
+    color: var(--text-color);
 }
 
 #EditView hr{
@@ -4613,7 +4580,7 @@ table.detail
 
 .edit, .detail, .detail > table
 {
-    border: 1px solid #AFAFAE;
+    border: 1px solid var(--border-color);
 }
 
 .detail > table
@@ -4626,13 +4593,13 @@ div.edit.view {
 }
 
 .detail {
-background-color: #fff;
+background-color: var(--content-background);
 }
 
 .edit
 {
-    color: #000000;
-    background-color: #fff;
+    color: var(--text-color);
+    background-color: var(--content-background);
 }
 .search
 {
@@ -4653,26 +4620,26 @@ table#mass_update_table td{
 /* other views */
 .other
 {
-    border: 2px solid #ccc;
+    border: 2px solid var(--border-color);
     -moz-border-radius: 6px;
     border-radius: 6px;
     -webkit-border-radius: 6px;
 }
 .other td
 {
-    color: #444444;
-    background-color: #ffffff;
-    border-left-color: #dfdfdf;
+    color: var(--text-color);
+    background-color: var(--content-background);
+    border-left-color: var(--border-color);
 }
 .other td[scope=row]
 {
-    color: #000000;
-    background-color: #eee;
+    color: var(--text-color);
+    background-color: var(--primary-content-background);
 }
 .other td.edit
 {
-    color: #000000;
-    background-color: #f6f6f6;
+    color: var(--text-color);
+    background-color: var(--primary-content-background);
 }
 
 /* misc links */
@@ -4682,7 +4649,7 @@ a.utilsLink:link, a.utilsLink:visited
 }
 a.tabFormAdvLink:link, a.tabFormAdvLink:visited
 {
-    color: #444444;
+    color: var(--label-color);
 }
 
 /* calendar styles */
@@ -4802,22 +4769,8 @@ h5.calSharedUser
 
 .monthHeader
 {
-    color: #444;
-background-image: -moz-linear-gradient(center top,
-    #ffffff 0%,
-    #eeeeee 1px,
-    #dadada 100%
-    );
-background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #ffffff),
-    color-stop(.02, #eeeeee),
-    color-stop(1, #eeeeee)
-   );
-   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#dfdfdf');
-
+    color: var(--text-color);
+    background: var(--secondary-content-background);
     margin-top: 0px;
     -moz-border-radius-topright: 6px;
     -moz-border-radius-topleft: 6px;
@@ -4829,7 +4782,7 @@ background-image: -webkit-gradient(
 }
 
 .monthHeader h3 {
-color: #444;
+color: var(--text-color);
 text-shadow: none;
 }
 .monthHeader td {
@@ -4928,8 +4881,8 @@ float: left;
 #tabListContainer ul.subpanelTablist li a:link, .tabListContainer  ul.subpanelTablist li a:visited{
  font-size: 14px;
  padding: 6px 10px;
- background-color: #ddd;
- border-color: #ccc;
+ background-color: var(--content-background);
+ border-color: var(--border-color);
  margin-left: 2px;
 position: relative;
 top: 4px;
@@ -4940,22 +4893,7 @@ top: 4px;
 }
 
 #tabListContainer  ul.subpanelTablist li a:hover{
-    background-image: -moz-linear-gradient(center top,
-    #e6e6e6 0%,
-    #f6f6f6 50%,
-    #F0F0F0 50%,
-    #ffffff 100%
-    );
-    background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #e6e6e6),
-    color-stop(.5, #f6f6f6),
-    color-stop(.5, #F0F0F0),
-    color-stop(1, #ffffff)
-   );
-   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6e6', endColorstr='#ffffff');
+background-color: var(--primary-content-hover);
 }
 
 #tabListContainer ul.subpanelTablist li a.current{
@@ -4965,23 +4903,8 @@ padding: 7px 5px 7px 20px;
 border-bottom-color: #fff;
 background-color: none;
 background-image: none;
-background-image: -moz-linear-gradient(center top,
-    #e6e6e6 0%,
-    #f6f6f6 50%,
-    #F0F0F0 50%,
-    #ffffff 100%
-    );
-background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #e6e6e6),
-    color-stop(.5, #f6f6f6),
-    color-stop(.5, #F0F0F0),
-    color-stop(1, #ffffff)
-   );
-background-color: #fff\9;;
-
+background-color: var(--primary-content-background);
+color: var(--text-color);
 }
 
 #tabListContainer.active  ul.subpanelTablist li a:hover,#tabListContainer.active ul.subpanelTablist li a.current{
@@ -5164,7 +5087,7 @@ margin-left: 5px;
 /* for edit view like forms that need a smaller font size */
 .edit.view.small td
 {
-    color: #444;
+    color: var(--text-color);
 }
 
 /* YUI theme */
@@ -5243,19 +5166,19 @@ margin: 2px 4px 0 0;
 
 
 .yui-navset .yui-nav, .yui-navset .yui-navset-top .yui-nav {
-    background:transparent url('../../../../index.php?entryPoint=getImage&themeName=Sugar&imageName=sugar-yui-tab-bg.png');
-    border-color: #c3c3c3;
+    border-color: var(--border-color);
     background-position: center bottom;
     background-repeat: repeat-x;
+    background-color: var(--headerpane-background);
 }
 
 .yui-layout .yui-layout-hd {
-    background:transparent url('../../../../index.php?entryPoint=getImage&themeName=Sugar&imageName=sugar-yui-sprites.png');
-    border-color: #c3c3c3;
+    background: var(--headerpane-background);
+    border-color: var(--border-color);
 }
 
 .yui-layout .yui-layout-unit div.yui-layout-bd, .yui-navset .yui-content, .yui-navset .yui-navset-top .yui-content {
-    border-color:#c3c3c3;
+    border-color: var(--border-color);
 
 }
 
@@ -5264,9 +5187,10 @@ margin: 2px 4px 0 0;
     -moz-border-radius: 0 0 6px 6px;
     border-radius: 0 0 6px 6px;
     -webkit-border-radius: 0 0 6px 6px;
-    border-width: 0 2px 2px 2px;
-    background:url(../../../../index.php?entryPoint=getImage&imageName=dp-bd.png) repeat;
+    border-width: 2px;
+    background: var(--primary-content-background);
     margin-bottom: 10px;
+    color: var(--text-color);
 }
 
 .yuimenuitem-hassubmenu > a{
@@ -5277,7 +5201,8 @@ margin: 2px 4px 0 0;
  .yui-navset .yui-nav li a,.yui-navset-top .yui-nav li a, .yui-navset-bottom .yui-nav li a,
 .yui-navset .yui-nav a, .yui-navset .yui-navset-top .yui-nav a
     {
-    background:#DDD url('../../../../index.php?entryPoint=getImage&themeName=Sugar&imageName=sugar-yui-sprites.png') repeat-x scroll 0 -131px;
+    background: var(--primary-content-background);
+    color: var(--label-color);
     height: 24px;
 
 }
@@ -5294,7 +5219,7 @@ margin: 2px 4px 0 0;
 }
 
 .yui-navset .yui-nav .selected a, .yui-navset .yui-nav .selected a em, .yui-navset .yui-nav a, .yui-navset .yui-nav a em, .yui-navset .yui-nav a, .yui-navset .yui-navset-top .yui-nav a  {
-    border-color: #c3c3c3;
+    border-color: var(--border-color);
 }
 
 .yui-navset .yui-nav a em, .yui-navset .yui-navset-top .yui-nav a em {
@@ -5324,21 +5249,10 @@ padding: 2px 10px;
     border-color: #666;
 }
 .yui-module .hd, .yui-panel .hd {
-    background-image: -moz-linear-gradient(center top,
-    #eeeeee 0%,
-    #cccccc 100%
-    );
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #eeeeee),
-        color-stop(1, #cccccc)
-    );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc');
-    border-bottom: 1px solid #999999;
-    border-top: 1px solid #ffffff;
-    color: #666;
+    background-color: var(--headerpane-background);
+    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-color);
     text-shadow: none;
     padding: 6px 8px;
 }
@@ -5348,7 +5262,7 @@ padding: 2px 10px;
     top: 0px;
 }
 .yui-module .ft, .yui-panel .ft {
-
+  background-color: var(--primary-content-background);
 }
 
 .yui-dialog .container-close {
@@ -5471,16 +5385,16 @@ input, select, textarea, button
 }
 
 #filters_tab,#reportDetailsTable {
-    background-color:#FFFFFF;
+    background-color: var(--primary-content-background);
     margin-bottom:20px;
     padding:10px;
     -moz-border-radius:6px 6px 6px 6px;
     border-radius:6px 6px 6px 6px;
     -webkit-border-radius:6px 6px 6px 6px;
-    -moz-box-shadow:0 0 10px #CCCCCC;
-    box-shadow:0 0 10px #CCCCCC;
-    -webkit-box-shadow:0 0 10px #CCCCCC;
-    border: 1px solid #AFAFAE;
+    -moz-box-shadow:0 0 10px var(--shadow-color);
+    box-shadow:0 0 10px var(--shadow-color);
+    -webkit-box-shadow:0 0 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
 }
 
 .reportChartContainer {
@@ -5501,6 +5415,8 @@ input, select, textarea, button
   box-shadow:0 0 10px #CCCCCC;
   -webkit-box-shadow:0 0 10px #CCCCCC;
   border: 1px solid #AFAFAE;
+    overflow: auto;
+    height: 480px;
 }
 .reportChartContainer .scrollBars {
   border-radius: 8px;
@@ -5510,6 +5426,45 @@ input, select, textarea, button
 }
 .reportChartContainer svg {
     max-height: none;
+}
+
+.reportChartContainer .chartWrapper {
+    width: 100%;
+    height: 480px;
+}
+
+.reportChartContainer .sc-chart {
+    height: 480px;
+}
+
+.reportChartContainer .chartNoData {
+    height: 50px;
+    padding: 12px;
+    display: none;
+}
+
+/* Special styling for reports viewer when a report is empty */
+.reportChartContainer.noData {
+    height: auto;
+}
+
+.reportChartContainer.noData .chartContainer {
+    float: none;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.reportChartContainer.noData .chartWrapper {
+    height: auto;
+}
+
+.reportChartContainer.noData .sc-chart {
+    display: none;
+}
+
+.reportChartContainer.noData .chartNoData {
+    display: block;
 }
 
 /* for all views */
@@ -5604,7 +5559,7 @@ padding-left: 10px;
 .oddListRowS1 td a, .evenListRowS1 td a {
 
     text-decoration:none;
-    color: #176de5;
+    color: var(--link-color);
     font-size: 13px;
 }
 /*.oddListRowS1 td:first-child + td + td a, .oddListRowS1 td:first-child + td + td + td a,.evenListRowS1 td:first-child + td + td a, .evenListRowS1 td:first-child + td + td + td a, .oddListRowS1 td:first-child , .evenListRowS1 td:first-child
@@ -5613,11 +5568,11 @@ padding-left: 10px;
 
 }*/
 .oddListRowS1:hover td, .evenListRowS1:hover td {
-color: #000;
+color: var(--text-color-hover);
 }
 .oddListRowS1:hover td a, .evenListRowS1:hover td  a
 {
-    color: #176de5;
+    color: var(--link-color-hover);
 }
 
 .oddListRowS1 td .info, .evenListRowS1 td  .info {
@@ -6241,12 +6196,12 @@ color: #0B578F;
 
 table.dcListView th,table.dcListView td {
     text-align: left;
-    color: #666;
+    color: var(--text-color);
     padding: 5px 10px;
 }
 
 table.dcListView th {
-    background-color:#EBEBED;
+    background-color: var(--headerpane-background);
 }
 
 
@@ -6260,8 +6215,9 @@ text-decoration: underline;
 }
 
 table.dcListView td {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
     white-space: nowrap;
+    background: var(--primary-content-background);
 }
 
 table.dcSearch {
@@ -6417,7 +6373,7 @@ input#sugar_spot_search:focus {
 
 #sugar_spot_search_results ul li a, #sugar_full_search_results ul li a,
 #sugar_spot_search_results section ul li a, #sugar_full_search_results section ul li a {
-    color:#176de5;
+    color: var(--link-color);
     text-decoration:none;
 }
 
@@ -6600,10 +6556,8 @@ ul.clickMenu {
     background-image: linear-gradient(top, #ffffff, #cdcccb);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#cdcccb', GradientType=0);
-    border-color: #cdcccb #cdcccb #a8a6a4;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-    border: 1px solid rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -6650,6 +6604,7 @@ ul.clickMenu li, ul.SugarActionMenuIESub li {
     list-style: none;
     position: relative; /*--Declare X and Y axis base--*/
     cursor: pointer;
+    background-color: var(--btn-background);
 }
 ul.SugarActionMenuIESub li a,
 ul.clickMenu li a, .list tr.pagination td.buttons ul.clickMenu > li > a:link, .list tr.pagination td.buttons ul.clickMenu > li > a{
@@ -6658,7 +6613,9 @@ ul.clickMenu li a, .list tr.pagination td.buttons ul.clickMenu > li > a:link, .l
     float: left;
     font-weight: normal !important;
     padding: 4px 10px 4px 10px !important;
-    color: #000;
+    color: var(--text-color);
+    background-color: var(--btn-background);
+    border-color: var(--border-color);
     font-size: 12px;
 }
 
@@ -6678,6 +6635,7 @@ ul.clickMenu li > span { /*--Drop down trigger styles--*/
     height: 23px;
     float: left;
     background: url(../../../../index.php?entryPoint=getImage&imageName=actionMenuArrow.png) no-repeat 5px -25px;
+    background-color: var(--btn-background);
     cursor: pointer;
 }
 
@@ -6693,15 +6651,12 @@ ul.clickMenu li ul.subnav, ul.clickMenu ul.subnav-sub, ul.SugarActionMenuIESub {
     list-style: none;
     position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
     left: 0; top: 23px;
-    background: #fff;
+    background: var(--dropdown-background);
     margin: 0;
     display: none;
     float: left;
     width: auto;
-    border: 1px solid #ccc;
-    box-shadow: #999 0px 5px 10px;
-    -moz-box-shadow: #999 0px 5px 10px;
-    -webkit-box-shadow: #999 0px 5px 10px;
+    border: 1px solid var(--border-color);
     padding: 8px 0px;
     z-index: 10;
     overflow:hidden;
@@ -6810,7 +6765,7 @@ ul.clickMenu li a.disabled {
 }
 
 .oddListRowS1:hover td ul.clickMenu.subpanel.records li a, .evenListRowS1:hover td ul.clickMenu.subpanel.records li a {
-    color: #000;
+    color: var(--text-color);
 }
 
 .oddListRowS1:hover td ul.clickMenu.subpanel.records li span, .evenListRowS1:hover td ul.clickMenu.subpanel.records li span {
@@ -6819,14 +6774,14 @@ ul.clickMenu li a.disabled {
 
 ul.clickMenu li ul.subnav li a,ul.clickMenu li ul.subnav li input, ul.subnav-sub li a, ul.SugarActionMenuIESub li a {
     float: left;
-    background: #fff;
+    background: var(--dropdown-background);
     padding: 3px 10px !important;
     border: 0px !important;
     /*width: 150px;*/
     width:100%;
     text-align: left;
     font-size: 12px !important;
-    color: #000;
+    color: var(--text-color);
 
 }
 
@@ -6839,7 +6794,7 @@ td.paginationActionButtons ul.clickMenu li a { font-size:12px !important; }
 
 ul.SugarActionMenuIESub li a:hover, ul.clickMenu.SugarActionMenu li a:hover, ul.clickMenu.SugarActionMenu li span.subhover:hover,
 ul.clickMenu li ul.subnav li a:hover,ul.clickMenu li ul.subnav li input:hover, ul.clickMenu.subpanel.records li ul.subnav li a:hover, ul.clickMenu ul.subnav-sub li a:hover { /*--Hover effect for subnav links--*/
-    color: #313130;
+    color: var(--text-color-hover);
     text-decoration: none;
     font-weight: 500;
 cursor: pointer;
@@ -6856,7 +6811,7 @@ ul.clickMenu.showLess .moreOverflow , ul.clickMenu.showLess .moduleMenuOverFlowL
 }
 
 ul#selectLinkBottom li>span, ul#selectLinkTop li>span {
-    border-left: 1px #aaa solid;
+    border-left: 1px var(--border-color) solid;
 }
 
 #globalLinksDivider {
@@ -6951,16 +6906,13 @@ ul.clickMenu.show {
 
 .selectActionsDisabled {
     display: inline-block;
-    background-color: #eee;
-    border: 1px solid #ddd;
+    background-color: var(--btn-background);
+    border: 1px solid var(--border-color);
     -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
     border-radius: 1px;
     vertical-align: bottom;
     padding: 0 3px 0 10px;
-    /*css hack for IE*/
-    *display:inline;
-    *zoom:1;
 }
 
 .selectActionsDisabled span {
@@ -6981,7 +6933,7 @@ ul.clickMenu.show {
     float: left;
     display: block;
     text-decoration: none !important;
-    color: #999 !important;
+    color: var(--text-disabled-color);
     padding: 3px 0 3px 0px!important;
     text-shadow: none;
     font-weight: normal !important;
@@ -7165,23 +7117,23 @@ ul#globalLinksSubnav, ul#quickCreateULSubnav,
 /* miscellaneaous 508 classes */
 .detail508 tr td[scope="col"]
 {
-    color: #888;
-    background-color: #eee;
-    border-color: #ccc;
+    color: var(--label-color);
+    background-color: var(--primary-content-active);
+    border-color: var(--border-color);
     text-align: right;
     white-space: nowrap;
 }
 
 .edit508 tr td[scope="col"]
 {
-    color: #444;
-    background-color: #eee;
-    border-color: #ccc;
+    color: var(--label-color);
+    background-color: var(--primary-content-active);
+    border-color: var(--border-color);
     white-space: nowrap;
 }
 
 .listViewEmpty{
-    background-color: #f6f6f6;
+    background-color: var(--content-background);
     text-shadow: none;
 }
 .listViewEmpty p, .listViewEmpty a {
@@ -7219,6 +7171,7 @@ p.submsg a{
 .inlineHelpTip {
     cursor: pointer;
     margin: 0px 5px;
+    vertical-align: middle;
 }
 
 
@@ -7227,32 +7180,19 @@ p.submsg a{
     padding: 0px;
     box-shadow: 0 5px 10px #999999;
     z-index: 1000;
+    background-color: var(--content-background);
 }
 
 .ui-dialog .ui-dialog-titlebar {
     border: 0px none;
-    background-image: -moz-linear-gradient(center top,
-        #ffffff 0%,
-        #f1f1f1 10%,
-        #efefef 100%
-        );
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #ffffff),
-        color-stop(.10, #f1f1f1),
-        color-stop(1, #efefef)
-       );
-
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#dfdfdf');
     padding-bottom: 2px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--headerpane-background);
+    color: var(--text-color);
 }
 
 .ui-dialog .ui-widget-content {
-    color: #444;
-
+    color: var(--text-color);
 }
 
 .ui-dialog .ui-dialog-titlebar .ui-dialog-title div {
@@ -9177,4 +9117,65 @@ sup.heading {
 /* Styles for admin pages */
 .edit #api_platforms tr th {
   padding: 5px 3px !important;
+}
+
+.field-wrapp {
+    padding: 10px 0;
+}
+
+.record-visibility {
+    padding-top: 10px;
+}
+
+.indented {
+    padding-left: 10px;
+}
+
+/* Main content buttons in Studio */
+table.wizardButton td {
+  border: none;
+  background-color: transparent;
+}
+
+table.wizardButton td:hover {
+  border: none;
+  background-color: var(--primary-content-hover);
+}
+
+table.wizardButtonDown td {
+  border: none;
+  background-color: var(--primary-content-active);
+}
+
+table .tabDetailViewDF {
+  background-color: var(--content-background);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+span.crumbLink {
+  color: var(--text-color);
+}
+
+/* Styles for configuring portal */
+.portal-section-title {
+    margin-top: 10px;
+}
+
+#auth_warning {
+    background-color: var(--alert-background);
+    color: #bb0e1b;
+    font-weight: bold;
+    padding: 5px;
+    margin: 2px;
+}
+
+.convert-lead-rli-cell {
+    padding: 5px;
+}
+
+.convert-lead-rli-cell .rli-check-container {
+    display: block;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }

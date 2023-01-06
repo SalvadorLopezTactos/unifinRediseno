@@ -390,7 +390,7 @@ class WorkFlowTriggerShell extends SugarBean {
                 WHERE expressions.parent_id = ?
                 AND expressions.deleted=0',
                 [$triggershell_id]
-            )->fetch();
+            )->fetchAssociative();
 
         if ($row !== false) {
 			//datetime time_int;

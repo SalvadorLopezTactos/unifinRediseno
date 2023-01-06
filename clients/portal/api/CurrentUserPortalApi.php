@@ -143,8 +143,8 @@ class CurrentUserPortalApi extends CurrentUserApi
      */
     protected function enforceModuleACLs(array $acls)
     {
-        // nobody can create new Filters
-        $acls['Filters']['create'] = 'no';
+        // Filters! Filters for everyone!!!
+        $acls['Filters']['create'] = 'yes';
         // nobody can create new Dashboards
         $acls['Dashboards']['create'] = 'no';
 

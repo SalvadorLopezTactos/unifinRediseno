@@ -28,6 +28,27 @@
   }
 }
 
+.kb-contents-create {
+  .record {
+    max-width: 1024px;
+
+    .record-cell {
+      &.edit {
+        span[data-fieldname="attachment_list"],
+        div[data-name="attachment_list"] {
+          > span.edit {
+            .select2-container {
+              &.with-padding {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .record-cell {
   .record-label {
     &[data-name="kbdocument_body_set"] {
@@ -50,16 +71,25 @@
     position: absolute;
     right: 0;
     top: -33px;
+    display: flex;
+    align-items: center;
   }
 }
 
 [data-type="usefulness"] {
-  .btn {
-    padding-right: 10px;
-    padding-left: 10px;
+  .btn-group {
+    display: flex;
+    flex-direction: row;
 
-    i {
-      margin-right: 5px;
+    .btn {
+      padding-right: 10px;
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: 5px;
+      }
     }
   }
 
@@ -94,85 +124,6 @@
     .select2-search-choice {
       background: @dropdownLinkBackgroundHover !important;
     }
-  }
-}
-
-body.kbdocument-body {
-  margin: 8px;
-  background-color: @bodyBackground;
-}
-
-.kbdocument-body {
-  font-size: @baseFontSize;
-  font-family: @baseFontFamily;
-  line-height: @baseLineHeight;
-  line-height: @baseLineHeight;
-  color: @textColor;
-  font-weight: normal;
-  width: 100%;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 36px;
-    font-weight: bold;
-  }
-
-  h1 {
-    font-size: @baseFontSize + 12;
-    line-height: @baseLineHeight + 12;
-  }
-
-  h2 {
-    font-size: @baseFontSize + 10;
-    line-height: @baseLineHeight + 10;
-  }
-
-  h3 {
-    font-size: @baseFontSize + 8;
-    line-height: @baseLineHeight + 8;
-  }
-
-  h4 {
-    font-size: @baseFontSize + 6;
-    line-height: @baseLineHeight + 6;
-  }
-
-  h5 {
-    font-size: @baseFontSize + 4;
-    line-height: @baseLineHeight + 4;
-  }
-
-  h6 {
-    font-size: @baseFontSize + 2;
-    line-height: @baseLineHeight + 2;
-  }
-
-  .fontSizeNormal {
-    font-size: @baseFontSize;
-  }
-
-  .fontSizeHeader {
-    font-size: @fontSizeHeader;
-  }
-
-  .fontSizeLarge {
-    font-size: @fontSizeLarge;
-  }
-
-  .fontSizeMedium {
-    font-size: @fontSizeMedium;
-  }
-
-  .fontSizeSmall {
-    font-size: @fontSizeSmall;
-  }
-
-  .fontSizeMini {
-    font-size: @fontSizeMini;
   }
 }
 

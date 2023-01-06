@@ -122,9 +122,8 @@
             return;
         }
 
-        var tpl = app.template.getLayout(this.name + '.list', component.module) ||
-            app.template.getLayout(this.name + '.list'),
-            $content = $(tpl({module: component.module})).append(component.el);
+        var tpl = this._getListTemplate(component);
+        var $content = $(tpl({module: component.module})).append(component.el);
 
         // initialize catalog if isn't initialized
         this._catalog[component.module] = this._catalog[component.module] || {};
@@ -137,6 +136,17 @@
             this._catalog[component.module].long = $content;
             this.$('[data-action="more-modules"]').before($content);
         }
+    },
+
+    /**
+     * Get the list template to wrap our `module-menu` components.
+     * @param {View.View} component
+     * @return {Layout.Template} list template for this layout
+     * @private
+     */
+    _getListTemplate: function(component) {
+        return app.template.getLayout(this.name + '.list', component.module) ||
+            app.template.getLayout(this.name + '.list');
     },
 
     /**
@@ -372,18 +382,17 @@
      * @chainable
      */
     _setActiveModule: function(module) {
-
         if (_.isEmpty(this._components)) {
             // wait until we have the mega menu in place
             return this;
         }
 
-        var tabMap = app.metadata.getModuleTabMap(),
-            mappedModule = _.isUndefined(tabMap[module]) ? module : tabMap[module],
-            $activeModule = this.$('[data-container=module-list]').children('.active').removeClass('active'),
-            activeModule = $activeModule.data('module'),
-            moduleList = app.metadata.getFullModuleList(),
-            inModuleList = !_.isUndefined(moduleList[mappedModule]);
+        let tabMap = app.metadata.getModuleTabMap();
+        let mappedModule = _.isUndefined(tabMap[module]) ? module : tabMap[module];
+        let $activeModule = this.$('[data-container=module-list]').children('.active').removeClass('active');
+        let activeModule = $activeModule.data('module');
+        let moduleList = app.metadata.getFullModuleList();
+        let inModuleList = !_.isUndefined(moduleList[mappedModule]);
 
         if (this._catalog[activeModule] && !this._catalog[activeModule].short) {
             // hide the cached version only module

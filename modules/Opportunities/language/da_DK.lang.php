@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Regneark',
     'LBL_PURCHASED_LINE_ITEMS' => 'Købte linjeprodukter',
 
+    'LBL_FORECASTED_LIKELY' => 'Forudset som Sandsynlig',
     'LBL_RENEWAL' => 'Fornyelse',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Fornyelsesmuligheder',
     'LBL_RENEWAL_PARENT' => 'Overordnet mulighed',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# Av Total Revenue poster',
     'LBL_CLOSED_RLIS' => '# Lukket Revenue poster',
+    'LBL_CLOSED_WON_RLIS' => '# lukkede vundne indtægtsposter',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# af Open Service Flex-varighed Linjeprodukter',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Du kan ikke slette Opportunities som inneholder lukkede Revenue poster',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'En eller flere av de valgte postene inneholder lukkede Revenue poster og kan ikke slettes.',
     'LBL_INCLUDED_RLIS' => '# af inkluderede indtægt linje-emner',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Åben opdatering',
+    'LBL_CASCADE_RLI_EDIT' => 'Opdater Åbne Revenue Line-produkter',
+    'LBL_CASCADE_RLI_CREATE' => 'Angiv På Tværs Af Revenue Line-produkter',
     'LBL_SERVICE_START_DATE_INVALID' => 'Startdatoen for tjenesten kan ikke ligge tidligere end slutdatoen for tjenesten for evt. åbne tilføjelsesprodukter.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Tilbud',
@@ -207,25 +211,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter du indleder denne ændring, vil indtægt lije. emneposter blive oprettet for hver eksisterende {{module_name}} i baggrunden. Når indtægt linje-emner er fuldstændige og tilgængelige, vil en meddelelse blive sendt til e-mailadressen på din brugerprofil. Bemærk, at dit eksempel skal konfigureres til at sende e-mail via Admin > E-mail-indstillinger, for at beskeden kan sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulet {{plural_module_name}} giver dig mulighed for at spore enkelte salg fra start til slut. Hvert enkelt {{module_name}}-register angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige registre, såsom {{quotes_module}}, {{contacts_module}} osv. Et {{module_name}} gennemgår typisk flere salgsstadier, indtil det markeres som "Lukket, vundet" eller "Lukket, tabt". {{plural_module_name}} kan give yderligere fordele, hvis man benytter Sugars {{forecasts_singular_module}}ing-modul til at forstå og forudse salgstendenser samt fokusere arbejde mod at opnå salgskvoter.',
+    'LBL_HELP_RECORDS' => 'Med modulet {{plural_module_name}} kan du spore individuelle salg fra start til slut. Hver {{module_name}}-post repræsenterer et fremtidigt køb og omfatter relevante salgsdata samt data i forbindelse med andre vigtige poster såsom {{quotes_module}}, {{contacts_module}} osv. Et {{module_name}} går typisk gennem flere salgsfaser, indtil det markeres som enten "Lukket vundet" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved at bruge Sugars {{forecasts_singular_module}}ing-modul til at forstå og forudse salgstendenser samt forkusere arbejde for at opnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulet {{plural_module_name}} gør det muligt for dig at følge individuelle salg, og de produkter, der hører til de pågældende salg, fra start til slut. Hvert enkelt {{module_name}}-register angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige registre, såsom {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => 'Modulet {{plural_module_name}} giver dig mulighed for at spore individuelle salg og de linjeelementer, der tilhøre de salg, fra start til slut. Hver {{module_name}}-post repræsenterer et fremtidigt salg og omfatter relevante salgsdata samt data i forbindelse med andre vigtige poster, som f.eks. {{quotes_module}}, {{contacts_module}} osv.
 
-- Redigér dette registers felter ved at klikke på et individuelt felt eller på knappen Redigér.
-- Se eller modificér links til andre registre i underpanelerne ved at skifte den nederste venstre rude til "Datavisning".
-- Skriv og se brugerkommentarer, og registrér ændringshistorik i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Aktivitetsstrøm".
-- Følg eller gør dette register til en favorit vha. ikonerne til højre for registernavnet.
-- Yderligere handlinger er tilgængelige i rullelisten Handlinger til højre for knappen Redigér.',
+- Redigér felter for denne post ved at klikke på et individuelt felt eller på knappen Redigér.
+- Du kan få vist eller ændre links til andre poster i underpanelerne ved at slå ruden nederst til venstre til "Datavisning".
+- Skriv og se brugerkommentarer, og registrér ændringshistorik i {{activitystream_singular_module}} ved at slå ruden nederst til venstre til "Activitetsstream".
+- Følg denne post, eller indstil den som favorit, ved hjælp af ikonerne til højre for postens navn.
+- Yderligere handlinger er tilgængelige i rullemenuen Handlinger til højre for knappen Redigér.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulet {{plural_module_name}} giver dig mulighed for at følge individuelle salg og de produkter, der hører til disse salg, fra start til slut. Hvert enkelt {{module_name}}-register angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige registre, såsom {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => 'Med modulet {{plural_module_name}} kan du spore individuelle salg og de linjeelementer, der tilhører de salg, fra start til slut. Hver {{module_name}}-post repræsenterer et fremtidigt salg og omfatter relevante salgsdata samt data i forbindelse med andre vigtigeposter, som f.eks. {{quotes_module}}, {{contacts_module}} osv.
 
-For at oprette et {{module_name}}:
-1. Angiv værdier for felterne som ønsket.
- - Felter med "Obligatorisk" skal udfyldes, inden der gemmes.
+Sådan oprettes et {{module_name}}:
+1. Angiv værdier for felterne efter behov.
+ - Felter, der er mærket "Obligatorisk", skal udfyldes, inden du gemmer.
  - Klik på "Vis mere" for at vise yderligere felter, hvis det er nødvendigt.
-2. Klik på "Gem" for at afslutte det nye register og vende tilbage til den foregående side.',
+2. Klik på "Gem" for at afslutte den nye post og vende tilbage til den forrige side.',
 
 // END ENT/ULT
 
@@ -239,7 +243,10 @@ For at oprette et {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mit teams muligheder",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Kunne ikke ændre {{fieldName}}, eftersom dette {{moduleSingular}} ikke har nogle åbne varelinjer.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Mulighed for interaktioner',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Mulighed tidslinje',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' kan ikke angives på tværs af nogen af disse Revenue Line-produkter, fordi de ikke er tjenester. Vil du fortsætte med oprettelsen?',
+    'LBL_CASCADE_DURATION_WARNING' => ' kan ikke indstilles på tværs af nogen af disse Revenue Line-produkter, fordi deres varighed er låst. Vil du fortsætte med oprettelsen?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Mulighed Luk Prognose',

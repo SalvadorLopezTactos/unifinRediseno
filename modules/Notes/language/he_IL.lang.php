@@ -32,6 +32,9 @@ $mod_strings = array(
     'LBL_EMAIL_ADDRESS' => 'כתובת דואר אלקטרוני:',
     'LBL_EMAIL_ATTACHMENT' => 'צרופה לדואר אלקטרוני',
     'LBL_EMAIL_ATTACHMENT_FOR' => 'צרופה להודעת דוא"ל ל-',
+    'LBL_NOTE_ATTACHMENT' => 'קבצים מצורפים לפתקים',
+    'LBL_KB_ATTACHMENT' => 'קבצים מצורפים מ-KBDocument',
+    'LBL_CASE_ATTACHMENT' => 'קבצים מצורפים לאירועים',
     'LBL_FILE_MIME_TYPE' => 'סוג Mime',
     'LBL_FILE_EXTENSION' => 'סיומת קובץ',
     'LBL_FILE_SOURCE' => 'מקור הקובץ',
@@ -100,6 +103,7 @@ $mod_strings = array(
     'LBL_ENTRY_SOURCE' => 'מקור הפתק',
     'LBL_SOURCE_EXTERNAL' => 'חיצוני',
     'LBL_SOURCE_INTERNAL' => 'פנימי',
+    'LBL_PORTAL' => 'פורטל',
 
     // Help Text
     // List View Help Text

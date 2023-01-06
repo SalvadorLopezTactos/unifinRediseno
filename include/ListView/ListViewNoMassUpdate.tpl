@@ -99,7 +99,7 @@
 {include file='include/ListView/ListViewPagination.tpl'}
 </table>
 <script type='text/javascript'>
-{literal}
+
     function lvg_nav(m, id, act, offset, t) {
         t = $(t);
         if (t.attr('href') !== '#') {
@@ -116,17 +116,19 @@
                 act = 'EditView';
                 break;
         }
-{/literal}
+
         var url = '#bwc/index.php?module=' + m + '&offset=' + offset + '&stamp={$pageData.stamp}&return_module=' +
             m +'&action=' + act + '&record=' + id;
-{literal}
+
         t.attr('href', location.origin + location.pathname + url);
         if (!_.isUndefined(parent.SUGAR) && !_.isUndefined(parent.SUGAR.App.view)) {
             parent.SUGAR.App.controller.layout.getComponent('bwc').convertToSidecarLink(t);
         }
     }
-{/literal}
-{literal}function lvg_dtails(id){{/literal}return SUGAR.util.getAdditionalDetails( '{$pageData.bean.moduleDir}',id, 'adspan_'+id);{literal}}{/literal}
+
+    function lvg_dtails(id) {
+        return SUGAR.util.getAdditionalDetails({$pageData.bean.moduleDir|@json}, id, 'adspan_' + id);
+    }
 {if $contextMenus}
 	{$contextMenuScript}
 {/if}

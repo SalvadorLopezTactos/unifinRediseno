@@ -79,17 +79,21 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Popis',
     'LBL_OW_TYPE'=>'Typ',
 
+    // Forecast manager worksheet (rollup)
+    'LBL_RU_TEAM_FORECAST_HEADER' => 'Prognóza tímu pre <span class="sicon sicon-user-group mx-1"></span> {{name}}',
+
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Priame hlásenie',
     'LBL_FDR_OPPORTUNITIES'=>'Príležitosti v prognóze:',
     'LBL_FDR_WEIGH'=>'Vážená čiastka príležitostí:',
     'LBL_FDR_COMMIT'=>'Schválená čiastka',
     'LBL_FDR_DATE_COMMIT'=>'Dátum schválenia',
+    'LBL_FDR_FORECAST_HEADER' => 'Prognóza predajcu pre <span class="sicon sicon-user mx-1"></span> {{name}}',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognózy: Tabuľka',
     'LBL_DV_MY_FORECASTS' => 'Moje prognózy',
-    'LBL_DV_MY_TEAM' => "Moje tímové prognózy" ,
+    'LBL_DV_MY_TEAM' => "Moje tímové prognózy",
     'LBL_DV_TIMEPERIODS' => 'Časové obdobia:',
     'LBL_DV_FORECAST_PERIOD' => 'Časové obdobie prognózy',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Príležitosti prognózy',
@@ -153,7 +157,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => 'Základná sadzba',
 
     'LBL_QUOTA' => 'Kvóta',
-    'LBL_QUOTA_ADJUSTED' => 'Kvóta (upravená)',
+    'LBL_QUOTA_ADJUSTED' => 'Upravená kvóta',
 
     'LBL_FORECAST_FOR'=>'Prognostická tabuľka pre: ',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Kumulatívne)',
@@ -182,6 +186,10 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Kvóta verzus schválené verzus aktuálne',
 
     'LBL_FORECAST' => 'Prognóza',
+    'LBL_COMMITMENT' => 'Záväzok',
+    'LBL_TEAM_COMMITMENT' => 'Tímový záväzok',
+    'LBL_FORECASTED' => 'Prognózované',
+    'LBL_ADJUSTED_TOTAL' => 'Upravené celkom',
     'LBL_COMMIT_STAGE' => 'Fáza schválenia',
     'LBL_SALES_STAGE' => 'Fáza',
     'LBL_AMOUNT' => 'Čiastka',
@@ -206,12 +214,12 @@ $mod_strings = array (
     'LBL_COMMITTED_HISTORY_1_SHOWN' => '{{{intro}}} {{{first}}}',
     'LBL_COMMITTED_HISTORY_2_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}}',
     'LBL_COMMITTED_HISTORY_3_SHOWN' => '{{{intro}}} {{{first}}}, {{{second}}} a {{{third}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'pravdepodobné {{{direction}}} {{{from}}} až {{{to}}}',
-    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'najlepšie {{{direction}}} {{{from}}} až {{{to}}}',
-    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'najhoršie {{{direction}}} {{{from}}} až {{{to}}}',
-    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'pravdepodobné zostali rovnaké',
-    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'najlepšie zostali rovnaké',
-    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'najhoršie zostali rovnaké',
+    'LBL_COMMITTED_HISTORY_LIKELY_CHANGED' => 'Potvrdené (pravdepodobné) {{{direction}}} {{{from}}} až {{{to}}}',
+    'LBL_COMMITTED_HISTORY_BEST_CHANGED' => 'Potvrdené (najlepšie) {{{direction}}} {{{from}}} až {{{to}}}',
+    'LBL_COMMITTED_HISTORY_WORST_CHANGED' => 'Potvrdené (najhoršie) {{{direction}}} {{{from}}} až {{{to}}}',
+    'LBL_COMMITTED_HISTORY_LIKELY_SAME' => 'Potvrdené (pravdepodobné) zostali rovnaké',
+    'LBL_COMMITTED_HISTORY_BEST_SAME' => 'Potvrdené (najlepšie) zostali rovnaké',
+    'LBL_COMMITTED_HISTORY_WORST_SAME' => 'Potvrdené (najhoršie) zostali rovnaké',
 
 
     'LBL_COMMITTED_THIS_MONTH' => 'Tento mesiac: {0}',
@@ -229,7 +237,7 @@ $mod_strings = array (
     'LBL_DISPLAYED_TOTAL' => 'Zobrazená celková suma',
     'LBL_TOTAL' => 'Celkom',
     'LBL_OVERALL_TOTAL' => 'Celkový súčet',
-    'LBL_EDITABLE_INVALID' => 'Neplatná hodnota pre {0}',
+    'LBL_EDITABLE_INVALID' => 'Neplatná hodnota pre {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Hodnota musí byť medzi {0} a {1}',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => 'V tabuľke máte neuložené zmeny.',
     'LBL_WORKSHEET_EXPORT_CONFIRM' => 'Upozorňujeme, že exportovať možno iba uložené alebo schválené dáta. Kliknutím na tlačidlo Zrušiť operáciu zrušte. Potvrdením spustite export uložených dát.',
@@ -280,7 +288,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Zahrnutý',
     'LBL_CHART_NOT_INCLUDED' => 'Nezahrnutý',
     'LBL_CHART_ADJUSTED' => '(Upravený)',
-    'LBL_SAVE_DRAFT' => 'Uložiť návrh',
+    'LBL_SAVE_DRAFT' => 'Uložiť',
     'LBL_CHANGES_BY' => 'Zmeny vykonané používateľom {0}',
     'LBL_FORECAST_SETTINGS' => 'Nastavenia',
 
@@ -412,6 +420,9 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_EXCEED' => 'Presahuje o',
     'LBL_FORECAST_DETAILS_NO_DATA' => 'Žiadne údaje',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Kvóta schôdzky',
+    'LBL_OPEN_LIKELY' => 'Otvoriť pravdepodobné',
+    'LBL_OPEN_BEST' => 'Otvoriť najlepšie',
+    'LBL_OPEN_WORST' => 'Otvoriť najhoršie',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Priradiť kvótu',
     'LBL_ASSIGNING_QUOTA' => 'Priradenie kvóty',
@@ -425,6 +436,13 @@ $mod_strings = array (
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Prognóza môjho tímu",
 
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Neuložili ste zmeny. Naozaj chcete zoradiť tabuľku a zahodiť zmeny?',
+
+    'LBL_SAVE_TOOLTIP' => 'Uložiť zmeny vykonané v riadkoch tabuľky',
+    'LBL_COMMIT_TOOLTIP_REP' => 'Uložiť zmeny v záznamoch a odoslať prognózu manažérovi',
+    'LBL_COMMIT_TOOLTIP_MGR' => 'Odoslať prognózu manažérovi a priradiť kvótu',
+
+    'LBL_SAVE_LABEL_REP' => 'Uložiť ',
+    'LBL_SAVE_LABEL_MGR' => 'Uložiť upravené hodnoty',
 
     // Forecasts Records View Help Text
     'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} využíva záznamy {{forecastby_singular_module}} na zostavenie {{forecastworksheets_module}} a predpovedanie predaja. Používatelia môžu pracovať vo vzťahu k predaju {{quotas_module}} na úrovni jednotlivca, tímu a predajnej organizácie. Pred tým, ako používatelia získajú prístup k modulu {{plural_module_name}}, administrátor musí vybrať časové obdobia, rozsahy a scenáre požadované organizáciou.

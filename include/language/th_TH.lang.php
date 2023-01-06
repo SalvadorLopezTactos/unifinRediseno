@@ -42,7 +42,6 @@ $app_list_strings = array (
     'Forecasts' => 'ประมาณการ',
     'ForecastWorksheets' => 'เวิร์กชีทประมาณการ',
     'ForecastManagerWorksheets' => 'เวิร์กชีทเครื่องมือจัดการประมาณการ',
-    'MergeRecords'=>'ผสานระเบียน',
       'VisualPipeline'=>'กระบวนการขายเสมือน',
       'ConsoleConfiguration' => 'การกำหนดค่าคอนโซล',
       'SugarLive' => 'SugarLive',
@@ -71,6 +70,10 @@ $app_list_strings = array (
     'Roles'=>'บทบาท',
     'Notifications'=>'การแจ้งเตือน',
     'Sync'=>'ซิงค์',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
     'ReportMaker' => 'รายงานขั้นสูง',
     'DataSets' => 'รูปแบบข้อมูล',
     'CustomQueries' => 'การสืบค้นที่กำหนดเอง',
@@ -85,6 +88,9 @@ $app_list_strings = array (
     'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
     'MobileDevices' => 'อุปกรณ์เคลื่อนที่',
     'PushNotifications' => 'การแจ้งเตือนแบบพุช',
+    'Escalations' => 'การเพิ่มขึ้น',
+    'DocumentTemplates' => 'เทมเพลทเอกสาร',
+    'DocumentMerges' => 'ผสานเอกสาร',
     'WorkFlow' => 'การกำหนดเวิร์กโฟลว์',
     'EAPM' => 'บัญชีภายนอก',
     'Worksheet' => 'เวิร์กชีท',
@@ -131,6 +137,10 @@ $app_list_strings = array (
     'Holidays' => 'วันหยุด',
     'ChangeTimers' => 'เปลี่ยนตัวตั้งเวลา',
     'Messages' => 'ข้อความ',
+    'Audit' => 'ตรวจสอบ',
+    'RevenueLineItems' => 'รายการบรรทัดรายได้',
+    'DocuSignEnvelopes' => 'ซอง DocuSign',
+    'Geocode' => 'จีโอโค้ด',
   ),
 
     'moduleIconList' =>
@@ -146,8 +156,11 @@ $app_list_strings = array (
         'Tasks' => 'Ts',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'DocuSignEnvelopes' => 'DS',
         'BusinessCenters' => 'BC',
         'PurchasedLineItems' => 'PL',
+        'DocumentTemplates' => 'DT',
+        'DocumentMerges' => 'DM',
     ),
 
   'moduleListSingular' =>
@@ -184,7 +197,6 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'เวิร์กชีทประมาณการ',
     'ForecastManagerWorksheets' => 'เวิร์กชีทเครื่องมือจัดการประมาณการ',
     'Quotas' => 'โควตา',
-    'MergeRecords'=>'ผสานระเบียน',
     'Teams' => 'ทีม',
     'TeamNotices' => 'ประกาศของทีม',
     'Activities' => 'กิจกรรม',
@@ -225,6 +237,9 @@ $app_list_strings = array (
     'Purchases' => 'ซื้อ',
     'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
     'PushNotifications' => 'การแจ้งเตือนแบบพุช',
+    'Escalations' => 'การเพิ่มขึ้น',
+    'DocumentTemplates' => 'เทมเพลทเอกสาร',
+    'DocumentMerges' => 'ผสานเอกสาร',
     'WorkFlow' => 'เวิร์กโฟลว์',
     'EAPM' => 'บัญชีภายนอก',
     'Worksheet' => 'เวิร์กชีท',
@@ -268,6 +283,13 @@ $app_list_strings = array (
     'Holidays' => 'วันหยุด',
     'ChangeTimers' => 'เปลี่ยนตัวตั้งเวลา',
     'Messages' => 'ข้อความ',
+    'Audit' => 'ตรวจสอบ',
+    'DocuSignEnvelopes' => 'DocuSignEnvelope',
+    'HintAccountsets' => 'HintAccountsets',
+    'HintNotificationTargets' => 'HintNotificationTargets',
+    'HintNewsNotifications' => 'HintNewsNotifications',
+    'HintEnrichFieldConfigs' => 'HintEnrichFieldConfigs',
+    'Geocode' => 'จีโอโค้ด',
   ),
 
 /*
@@ -346,6 +368,11 @@ $app_list_strings = array (
     'Utilities' => 'สาธารณูปโภค',
     'Other' => 'อื่นๆ',
   ),
+    'file_type_dom' => [
+        'PDF' => 'PDF',
+        'CSV' => 'CSV',
+        'PDF and CSV' => 'PDF และ CSV',
+    ],
     'message_status_dom' => [
         '' => '',
         'In Progress' => 'อยู่ระหว่างดำเนินการ',
@@ -765,6 +792,7 @@ $app_list_strings = array (
       'KBContents' => 'ฐานความรู้',
       'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
       'Purchases' => 'ซื้อ',
+      'Escalations' => 'การเพิ่มขึ้น',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'บัญชี',
@@ -796,6 +824,7 @@ $app_list_strings = array (
       'Notes' => 'หมายเหตุ',
     'PurchasedLineItems' => 'ซื้อสินค้าในไลน์',
     'Purchases' => 'ซื้อ',
+    'Escalations' => 'การเพิ่มขึ้น',
   ),
 
   'changetimer_parent_type' => [
@@ -811,6 +840,16 @@ $app_list_strings = array (
       'Orders' => 'สั่งซื้อแล้ว',
       'Ship' => 'ส่งแล้ว',
   ),
+    'active_status_dom' => [
+        'Active' => 'ใช้งาน',
+        'Inactive' => 'ไม่ใช้งาน',
+        'Retired' => 'ถอนตัวออก',
+    ],
+    'appearance_options' => [
+        'system_default' => 'ใช้การตั้งค่าระบบ',
+        'light' => 'สว่าง',
+        'dark' => 'เข้ม',
+    ],
 
 
   'pricing_formula_default_key' => 'คงที่',
@@ -1072,7 +1111,10 @@ $app_list_strings = array (
         'Television' => 'โทรทัศน์',
         'NewsLetter' => 'จดหมายข่าว',
         ),
-
+  'web_to_lead_redirect_type_dom' => [
+      'GET' => 'GET',
+      'POST' => 'POST',
+  ],
   'newsletter_frequency_dom' =>
   array (
         '' => '',
@@ -2007,14 +2049,16 @@ $app_list_strings = array (
         'print'       => 'พิมพ์',
         'pieWedgeName'      => 'ส่วน',
     ),
-    'd3_chart_types' => array (
+    'chart_types' => array (
         'pie chart' => 'แผนภูมิวงกลม',
+        'donut chart' => 'แผนภูมิโดนัท',
+        'treemap chart' => 'แผนภูมิทรีแม็ป',
         'bar chart' => 'แผนภูมิแท่งแนวตั้ง',
-        'group by chart' => 'แผนภูมิแท่งแนวตั้งที่จัดกลุ่ม',
+        'group by chart' => 'แผนภูมิแท่งแนวตั้งแบบกลุ่ม',
         'horizontal bar chart' => 'แผนภูมิแท่งแนวนอน',
-        'horizontal group by chart' => 'แผนภูมิแท่งแนวนอนที่จัดกลุ่ม',
+        'horizontal group by chart' => 'แผนภูมิแท่งแนวนอนแบบกลุ่ม',
         'line chart' => 'แผนภูมิเส้น',
-        'funnel chart' => 'แผนภูมิกรวย',
+        'funnel chart' => 'แผนภูมิทรงกรวย',
     ),
     'd3_value_placement' => array (
         '0'            => 'ไม่มี',
@@ -2289,6 +2333,75 @@ $app_list_strings = array (
             'total_revenue:desc' => 'ราคา (ยอดรวมสูงสุด)',
             'total_revenue:asc' => 'ราคา (ยอดรวมต่ำสุด)',
         ],
+        'calendar_type_list' => [
+          'main' => 'ศูนย์กลางปฏิทิน',
+        ],
+        'calendar_views_options' => [
+          'day' => 'วัน',
+          'week' => 'สัปดาห์',
+          'workWeek' => 'สัปดาห์ทำงาน',
+          'expandedMonth' => 'เดือน',
+          'agenda' => 'กำหนดวาระ',
+          'timeline' => 'ไทม์ไลน์',
+          'monthSchedule' => 'เครื่องมือวางกำหนดการ',
+        ],
+        'docusign_envelope_status_list' => [
+          'created' => 'สร้างแล้ว',
+          'completed' => 'สมบูรณ์แล้ว',
+          'declined' => 'ปฏิเสธแล้ว',
+          'delivered' => 'ส่งมอบแล้ว',
+          'sent' => 'ส่งแล้ว',
+          'signed' => 'เซ็นแล้ว',
+          'voided' => 'เป็นโมฆะแล้ว',
+        ],
+        'portaltheme_banner_background_style_dom' => [
+            'default' => 'ค่าเริ่มต้น',
+            'color' => 'สี',
+            'image' => 'รูปภาพ',
+        ],
+        // Escalations module
+        'escalation_status_dom' => [
+            'New' => 'ใหม่',
+            'In Progress' => 'อยู่ระหว่างดำเนินการ',
+            'Closed' => 'ปิดแล้ว',
+        ],
+        'escalation_reason_dom' => [
+            'Inactivity' => 'ไม่ได้ใช้งานอยู่',
+            'Lack of Progress' => 'ขาดความก้าวหน้า',
+            'Customer-Imposed Deadline' => 'วันครบกำหนดที่ลูกค้ากำหนด',
+            'Account at Risk' => 'บัญชีที่มีความเสี่ยง',
+        ],
+        'escalation_source_dom' => [
+            'Customer Requested' => 'คำขอจากลูกค้า',
+            'Internally Requested' => 'คำขอภายใน',
+        ],
+        'parent_type_display_escalations' => [
+            'Cases' => 'เคส',
+            'Bugs' => 'บัก',
+            'Accounts' => 'บัญชี',
+            'Opportunities' => 'โอกาสทางการขาย',
+        ],
+
+        // Sentiment
+        'sentiment_score_dom' => [
+            'Positive' => 'เชิงบวก',
+            'Negative' => 'เชิงลบ',
+            'Neutral' => 'ธรรมดา',
+        ],
+        'ai_conv_score_classification_dropdown' => [
+            '' => '',
+            '01_not_likely' => 'ไม่น่าเป็นไปได้',
+            '02_less_likely' => 'เป็นไปได้น้อย',
+            '03_neutral' => 'เฉย ๆ',
+            '04_more_likely' => 'น่าจะเป็นไปได้',
+            '05_very_likely' => 'เป็นไปได้มาก',
+        ],
+        'ai_icp_fit_score_classification_dropdown' => [
+            '' => '',
+            '03_does_not_match_customers' => 'ไม่ตรงกับลูกค้า',
+            '02_no_match' => '',
+            '01_matches_customers' => 'ตรงกับลูกค้า',
+        ],
 );
 
 $app_strings = array (
@@ -2300,7 +2413,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'เปิดลิงก์',
   'LBL_TOGGLE_VISIBILITY' => 'สลับการแสดงผล', // Record view header panel element
   'LBL_ACTIVITIES' => 'สตรีมกิจกรรม',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2022 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'SugarCRM ®, Sugar Enterprise™ และ Sugar™ เป็นเครื่องหมายการค้าของ SugarCRM Inc.',
@@ -2347,6 +2460,8 @@ $app_strings = array (
   'LBL_ADD' => 'เพิ่ม' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'โลโก้บริษัท' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'ปฏิทิน' /*for 508 compliance fix*/,
+    'LBL_DROPDOWN_VIEW_CHANGE_WARNING' => 'ค่าดรอปดาวน์ที่คุณเลือกได้เปลีี่ยนเลย์เอาต์มุมมองระเบียนของคุณ ' .
+        'ฟิลด์ที่ซ่อนอยู่ในเลย์เอาต์นี้ถูกล้างค่าไปแล้ว ',
 
   // ARIA label additions (should be lowercase)
   'LBL_ARIA_MODULENAVIGATION' => 'การนำทางโมดูลหลัก',
@@ -2860,6 +2975,8 @@ $app_strings = array (
     'LBL_CLOSE_BUTTON_LABEL' => 'ปิด',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}} ถูกทำเครื่องหมายว่า {{status}}',
 
+    'LBL_FOCUS' => 'โฟกัส',
+
     'LBL_QUERY_VALID'=>'ถูกต้อง',
     'LBL_QUERY_ERROR'=>'ข้อผิดพลาด',
     'LBL_QUERY_CHILD'=>'การสืบค้นย่อยที่ถูกต้อง',
@@ -3066,6 +3183,10 @@ $app_strings = array (
     'LBL_CASES'=>'เคส',
     'LBL_MESSAGE'=>'ข้อความ',
     'LBL_MESSAGES'=>'ข้อความ',
+    'LBL_ESCALATIONS' => 'การเพิ่มขึ้น',
+    'LBL_ESCALATION' => 'การเพิ่มขึ้น',
+    'LBL_DOCUSIGN_ENVELOPES' => 'ซอง DocuSign',
+    'LBL_DOCUSIGN_ENVELOPE' => 'ซอง DocuSign',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'เปลี่ยนรหัสผ่าน',
     'LBL_CHANGE_BUTTON_LABEL' => 'เปลี่ยน',
@@ -3091,6 +3212,7 @@ $app_strings = array (
     'LBL_OPEN_ITEMS' => 'รายการที่เปิด:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'เขียนอีเมล',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL2' => 'อีเมล',
     'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'เขียนอีเมล',
     'LBL_SEARCH_DROPDOWN_YES'=>'ใช่',
     'LBL_SEARCH_DROPDOWN_NO'=>'ไม่',
@@ -3116,6 +3238,7 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'เอกสาร',
     'LBL_DATE_ENTERED' => 'วันที่สร้าง:',
     'LBL_DATE_MODIFIED' => 'วันที่แก้ไข:',
+    'LBL_ACTIVITY_MODIFIED' => 'แก้ไขแล้ว',
     'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'แก้ไขแท็บภาพรวม',
     'LBL_EDIT_MODULE_TABS_BUTTON' => 'แก้ไขแท็บโมดูล',
     'LBL_EDIT_BUTTON' => 'แก้ไข',
@@ -3138,6 +3261,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'เลือกฟิลด์...',
     'LBL_FILTER_SELECT_OPERATOR' => 'เลือกโอเปอเรเตอร์...',
     'LBL_FILTER_CREATE_NEW' => 'สร้าง',
+    'LBL_FILTER_CREATE_NEW_UNSAVED' => 'สร้างตัวกรอง (ไม่ได้บันทึก)',
+    'LBL_FILTER_EDIT_UNSAVED_SUFFIX' => '(ไม่ได้บันทึก)',
     'LBL_FILTER_CREATE_FILTER' => 'สร้างตัวกรองใหม่',
     'LBL_FILTER_CLOSE_FILTER' => 'ปิดตัวกรอง',
     'LBL_FILTER_EDIT_FILTER' => 'แก้ไขตัวกรอง',
@@ -3200,6 +3325,8 @@ $app_strings = array (
     'LBL_SHOW_MORE_GENERIC' => '{{name}} เพิ่มเติม...',
     'LBL_TODAYS_ACTIVITIES' => 'กิจกรรมวันนี้',
     'LBL_LEADS'=>'ผู้สนใจ',
+    'LBL_LEAD'=>'ผู้สนใจ',
+    'LBL_QUOTES_BILL_TO' => 'การเสนอราคา (เรียกเก็บเงิน)',
     'LBL_LESS' => 'น้อยลง',
     'LBL_CAMPAIGN' => 'แคมเปญ:',
     'LBL_CAMPAIGNS' => 'แคมเปญ',
@@ -3227,16 +3354,18 @@ $app_strings = array (
     'LBL_LISTVIEW_TWO_REQUIRED' => 'โปรดเลือกอย่างน้อย 2 ระเบียนเพื่อดำเนินการต่อ',
     'LBL_LISTVIEW_LESS_THAN_TEN_SELECT' => 'โปรดเลือกไม่เกิน 10 ระเบียนเพื่อดำเนินการต่อ',
     'LBL_LISTVIEW_ALL' => 'ทั้งหมด',
+    'LBL_LISTVIEW_FREEZE_COLUMN_1' => 'ตรึงแนวคอลัมน์ 1',
     'LBL_DUPECHECK_FILTER_DEFAULT' => 'รายการซ้ำทั้งหมด',
     'LBL_LISTVIEW_NONE' => 'ยกเลิกการเลือกทั้งหมด',
     'LBL_LISTVIEW_OPTION_CURRENT' => 'เลือกเพจนี้',
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'เลือกทั้งหมด',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'ระเบียนที่เลือก',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'เลือกไว้: ',
-    'LBL_LISTVIEW_SELECTED_CLEAR' => 'ล้างการเลือก',
+    'LBL_LISTVIEW_SELECTED_CLEAR' => 'ล้างตัวเลือกทั้งหมด',
     'LBL_LISTVIEW_SELECT_ALL_RECORDS' => 'เลือกระเบียนทั้งหมด',
     'TPL_LISTVIEW_SELECTED_FIRST_OFFSET' => 'มีระเบียนมากกว่า {{num}} รายการในชุดผลลัพธ์ คุณเลือกระเบียน {{num}} รายการแรกไว้',
     'TPL_LISTVIEW_SELECTED' => 'You have selected {{num}} records in the result set.',
+    'TPL_LISTVIEW_SELECTED_ONE' => 'คุณได้เลือก 1 ระเบียนในชุดผลลัพธ์',
     'TPL_LISTVIEW_SELECTED_ALL' => 'คุณเลือกระเบียนทั้งหมด {{num}} รายการในชุดผลลัพธ์ไว้',
     'TPL_LISTVIEW_SELECT_ALL_RECORDS' => 'คุณเลือกระเบียนทั้ง {{num}} รายการในมุมมองนี้ {{link}} ในชุดผลลัพธ์',
     'TPL_MASSUPDATE_PROGRESS_STATUS' => 'กำลังอัปเดต {{num}} จาก {{total}}',
@@ -3272,10 +3401,17 @@ $app_strings = array (
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'เลือก',
     'LBL_LISTVIEW_ACTIONS' => 'การดำเนินการ',
 
+    'LBL_LISTVIEW_SELECT_ALL_ON_PAGE' => 'เลือกระเบียนทั้งหมดในหน้านี้',
+    'LBL_LISTVIEW_DESELECT_ALL_ON_PAGE' => 'ยกเลิกการเลือกระเบียนทั้งหมดในหน้านี้',
+
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} จาก {{total}}',
+    'TPL_LIST_HEADER_COUNT_LOADING' => '{{num}} กำลังโหลด...',
     'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'คลิกเพื่อดูยอดรวม',
+    // List View Pagination
+    'LBL_LIST_PAGINATION_OF' => 'จาก',
+    'LBL_GET_PAGE_COUNT_TOOLTIP' => 'รับหมายเลขหน้า',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'เดวิด',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'ลิฟวิงสโตน',
@@ -3283,10 +3419,15 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Code Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => 'โปรดเข้าสู่ระบบเพื่อเข้าถึงพื้นที่นี้',
     'LBL_LOGOUT' => 'ล็อกเอาต์',
+    'LBL_FINISH_IMPERSONATING' => 'จบการแสดงบทบาท',
+    'LBL_RESET_MFA' => 'รีเซ็ตการยืนยันตัวตนหลายปัจจัย',
+    'LBL_YOU_ARE_CURRENTLY_IMPERSONATING' => '{{sudoer}} คุณกำลังเลียนแบบ {{user}} อยู่ในขณะนี้',
     'LBL_PROFILE' => 'โปรไฟล์',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'จดหมายเวียน',
     'LBL_MASS_UPDATE' => 'การอัปเดตเป็นกลุ่ม',
+    'LBL_MASS_UPDATE_ALL_RECORDS' => 'เลือกระเบียนทั้งหมดเพื่ออัปเดตเป็นกลุ่ม',
+    'LBL_MASS_UPDATE_SINGLE_RECORD' => 'รวมระเบียนที่อัปเดตเป็นกลุ่มเข้าด้วย',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'เพิ่มฟิลด์',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'นำฟิลด์ออก',
     'LBL_GENERATE_QUOTE' => 'สร้างการเสนอราคา',
@@ -3341,6 +3482,7 @@ $app_strings = array (
     'LBL_PANEL_ADVANCED' => 'ข้อมูลเพิ่มเติม',
     'LBL_PANEL_BODY' => 'ภาพรวม',
     'LBL_PARENT_TYPE' => 'ประเภทหลัก',
+    'LBL_RELATED_TYPE' => 'ประเภทที่เกี่ยวข้อง',
     'LBL_PERCENTAGE_SYMBOL' => '%',
     'LBL_PHASE' => 'ช่วง',
     'LBL_PICTURE_FILE' => 'อวาตาร์',
@@ -3414,7 +3556,7 @@ $app_strings = array (
 
     'LBL_RELATED' => 'เกี่ยวข้อง',
     'LBL_RELATED_INFORMATION' => 'ข้อมูลที่เกี่ยวข้อง',
-    'LBL_RELATED_RECORDS' => 'ระเบียนที่เกี่ยวข้อง',
+    'LBL_RELATED_RECORDS' => '{{module}} ที่เกี่ยวข้อง',
     'LBL_REPORTS_TO' => 'ผู้บังคับบัญชา',
     'LBL_REQUIRED_SYMBOL' => '*',
     'LBL_REQUIRED_TITLE' => 'แสดงว่าเป็นฟิลด์ที่ต้องระบุ',
@@ -3533,7 +3675,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2022 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'สงวนลิขสิทธิ์<br />SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'บริษัทที่เกี่ยวข้องนั้นๆ',
@@ -3602,6 +3744,7 @@ $app_strings = array (
     'LBL_UNDELETE' => 'ยกเลิกการลบ',
     'LBL_UNSYNC' => 'ยกเลิกการซิงค์',
     'LBL_UPDATE' => 'อัปเดต',
+    'LBL_UPDATES' => 'อัปเดต',
     'LBL_USER_LIST' => 'รายชื่อผู้ใช้',
     'LBL_USER_MENU' => 'เมนูผู้ใช้',
     'LBL_USERS_SYNC'=>'การซิงค์ของผู้ใช้',
@@ -3668,6 +3811,8 @@ $app_strings = array (
     'NTC_DELETE_SUCCESS' => 'คุณลบ {0} แล้ว',
     'NTC_UNLINK_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการเชื่อมโยงระเบียนนี้',
     'NTC_UNLINK_CONFIRMATION_FORMATTED' => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการเชื่อมโยง {0}',
+    'NTC_UNLINK_CASES_CONTACT_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการลิงก์ {0} การกระทำนี้จะเป็นการลบลิงก์ออกจากฟิลด์ผู้ติดต่อหลักอีกด้วย',
+    'NTC_UNLINK_CASES_CONTACT_ERROR' => 'ไม่สามารถยกเลิกลิงก์สำหรับ {0} ได้เพราะพวกเขาเป็นผู้ติดต่อหลักในเคสนี้ โปรดอัปเดตฟิลด์ผู้ติดต่อหลักก่อนที่จะยกเลิกลิงก์ระเบียน',
     'NTC_UNLINK_SUCCESS' => 'คุณเลิกเชื่อมโยง {0} แล้ว',
     'NTC_LOGIN_MESSAGE' => 'โปรดป้อนชื่อผู้ใช้และรหัสผ่าน',
     'NTC_NO_ITEMS_DISPLAY' => 'ไม่มี',
@@ -3699,6 +3844,9 @@ $app_strings = array (
     'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'การรีเฟรชเบราว์เซอร์จะเป็นการปิดสายเรียกเข้า SugarLive หรือรอบการสนทนาที่คุณเปิดไว้โดยอัตโนมัติ การเปลี่ยนแปลงใด ๆ ที่ไม่ได้บันทึกไว้จะสูญหาย คุณต้องการดำเนินการต่อไปหรือไม่',
     'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'คุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก คุณต้องการออกจากเพจและยกเลิกการเปลี่ยนแปลงหรือไม่',
+    'LBL_MFA_RESET_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ต <a href="https://support.sugarcrm.com/SmartLinks/Custom/Logging_In_Using_MFA/" target="_blank">การยืนยันตนหลายปัจจัย</a>ของคุณ 
+การกระทำนี้จะพาคุณออกจากระบบทันที และคุณจะต้องยืนยันตนโดยใช้แอปยืนยันตนในการเข้าระบบครั้งต่อไป',
+    'LBL_MFA_RESET_CONFIRMATION_BTN' => 'ยืนยันและเข้าระบบ',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'ส่วนข้อมูลหนึ่งหรือมากกว่าหนึ่งแห่งมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก',
     'LBL_NAVIGATE_TO_REPORTS' => 'คุณกำลังย้ายไปที่โมดูลรายงาน การเปลี่ยนแปลงในส่วนข้อมูลจะไม่ได้รับการบันทึก ต้องการดำเนินการต่อหรือไม่',
     'ERROR_NO_RECORD' => 'เกิดข้อผิดพลาดในการเรียกระเบียน ระเบียนนี้อาจะถูกลบแล้วหรือคุณไม่ได้รับอนุญาตให้ดู',
@@ -3794,6 +3942,11 @@ $app_strings = array (
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "ขณะนี้คุณไม่มีระเบียน <item1> บันทึกไว้ <item2> ทันที",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "คุณสามารถสร้าง <item1> จากรายการ <item2>. <item3> <item2>",
 
+    // sentiment
+    'LBL_SENTIMENT_POSITIVE' => 'เชิงบวก',
+    'LBL_SENTIMENT_NEUTRAL' => 'ธรรมดา',
+    'LBL_SENTIMENT_NEGATIVE' => 'เชิงลบ',
+
     'LBL_GENERATING_PDF' => 'Generating PDF',
     'LBL_CLICK_HERE' => "คลิกที่นี่",
     // contextMenu strings
@@ -3803,11 +3956,16 @@ $app_strings = array (
     'LBL_CREATE_NOTE' => 'สร้างบันทึก',
     'LBL_CREATE_OPPORTUNITY' => 'สร้างโอกาสทางการขาย',
     'LBL_SCHEDULE_CALL' => 'ล็อกการโทร',
+    'LBL_SCHEDULE_CALL2' => 'การโทร',
     'LBL_SCHEDULE_MEETING' => 'วางกำหนดการประชุม',
+    'LBL_SCHEDULE_MEETING2' => 'การประชุม',
     'LBL_CREATE_MESSAGE' => 'สร้างข้อความ',
+    'LBL_CREATE_MESSAGE2' => 'ข้อความ',
     'LBL_CREATE_TASK' => 'สร้างงาน',
+    'LBL_CREATE_TASK2' => 'งาน',
     'LBL_REMOVE_FROM_FAVORITES' => 'นำออกจากรายการโปรดของฉัน',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT2' => 'บันทึก',
     'LBL_DOWNLOAD_ALL' => 'ดาวน์โหลดทั้งหมด',
     'LBL_DOWNLOAD_ONE' => 'ดาวน์โหลด',
     'LBL_ATTACHMENTS' => 'ไฟล์แนบ',
@@ -3847,13 +4005,14 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'แสดงแถว',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'เชื่อมโยงกับระเบียนปัจจุบัน',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'ฟิลด์ที่เชื่อมโยง',
+    'LBL_DASHLET_FREEZE_FIRST_COLUMN' => 'ตรึงแนวคอลัมน์แรก',
 
     'LBL_REMOVE_DASHLET_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการนำส่วนข้อมูล Sugar ออก',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการนำแถวนี้ออก',
     'LBL_MAXIMUM_OF' => 'จำนวนสูงสุด ',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' คอลัมน์สามารถแสดงผลได้',
 
-    /* Sugar7 Dashboard */
+    /* SugarCRM Dashboard */
     'LBL_DASHBOARD' => 'แดชบอร์ด',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'แดชบอร์ดของฉัน',
     'LBL_COLLAPSE_ALL' => 'ยุบทั้งหมด',
@@ -3870,12 +4029,15 @@ $app_strings = array (
     'LBL_DASHLET_CONFIGURE' => 'กำหนดค่า',
     'LBL_DASHLET_TOGGLE' => 'เปิด/ปิด',
     'LBL_SIDEPANE_TOGGLE' => 'เปิด/ปิดช่องด้านข้าง',
+    'LBL_RESTORE_DEFAULT_DASHLETS' => 'เรียกคืนส่วนข้อมูลเริ่มต้น',
+    'LBL_NO_DASHBOARD_CONFIGURED' => 'ไม่มีแดชบอร์ดใดได้รับการกำหนดค่า',
+    'LBL_CREATE_DASHBOARD_LINK' => 'สร้างแดชบอร์ด',
 
-    /* Sugar7 Help Component */
+    /* SugarCRM Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => 'ความช่วยเหลือ',
     'LBL_HELPLET_TOGGLE' => 'เปิด/ปิด',
 
-    /* Sugar7 search facets */
+    /* SugarCRM search facets */
     'LBL_FACET_MODULES' => 'โมดูล',
     'LBL_FACET_MODIFIED_BY_ME' => 'แก้ไขโดยฉัน',
     'LBL_FACET_CREATED_BY_ME' => 'สร้างโดยฉัน',
@@ -3892,6 +4054,7 @@ $app_strings = array (
 
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'มุมมองระเบียน',
+    'LBL_RELATED_RECORDS' => '{{module}} ที่เกี่ยวข้อง',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'แสดงระเบียนและระเบียนเกี่ยวข้องที่เลือกในแท็บ',
     'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'ประเภทฐานระเบียน',
     'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => '{{moduleSingular}} นี้',
@@ -3941,7 +4104,7 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'ไม่พบระเบียนในขณะนี้',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'สรุปเคส',
-    'LBL_DASHLET_ITERACTIONS_NAME' => 'การโต้ตอบ',
+    'LBL_DASHLET_ITERACTIONS_NAME' => 'ไทม์ไลน์',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'บันทึกและไฟล์แนบ',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'บันทึกและไฟล์แนบอยู่ในระเบียน',
     'LBL_DASHLET_PIPLINE_NAME' => 'กระบวนการขาย',
@@ -4212,6 +4375,8 @@ $app_strings = array (
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'อัปโหลดจากคอมพิวเตอร์',
     'LBL_SEARCH_EXTERNAL_API' => 'ไฟล์ในแหล่งข้อมูลภายนอก',
+    'LBL_FILE_UPLOAD_TO_EXTERNAL_API' => 'อัปโหลดไปยังแหล่งภายนอก',
+    'LBL_FILE_LINK_FROM_EXTERNAL_API' => 'ลิงก์จากแหล่งภายนอก',
     'LBL_EXTERNAL_SECURITY_LEVEL' => 'การรักษาความปลอดภัย',
     'LBL_SHARE_PRIVATE' => 'ส่วนตัว',
     'LBL_SHARE_COMPANY' => 'บริษัท',
@@ -4336,6 +4501,9 @@ $app_strings = array (
     'LBL_GLOBAL_SEARCH_LNK_KEY' => '0',
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'แป้นพิมพ์ลัด',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>ฟังก์ชันของฟอร์ม - Alt+</strong><br/> I = ed<b>I</b>t - แก้ไข (มุมมองรายละเอียด)<br/> U = d<b>U</b>plicate - ทำซ้ำ (มุมมองรายละเอียด)<br/> D = <b>D</b>elete - ลบ (มุมมองรายละเอียด)<br/> R = Sha<b>R</b>e - แชร์ (มุมมองรายละเอียด)<br/> A = s<b>A</b>ve - บันทึก (มุมมองแก้ไข)<br/> L = cance<b>L</b> - ยกเลิก (มุมมองแก้ไข) <br/><br/></p><p><strong>การค้นหาและการนำทาง - Alt+</strong><br/> 7 = การป้อนข้อมูลแรกในฟอร์มแก้ไข<br/> 8 = ลิงก์การค้นหาขั้นสูง<br/> 9 = อินพุตแรกของฟอร์มค้นหา<br/> 0 = อินพุตของการค้นหาแบบรวม<br></p>' ,
+
+    // For Escalating a record
+    'LBL_ESCALATE_BUTTON_LABEL' => 'การเพิ่มขึ้น',
 
     // Share feature on record
     'LBL_RECORD_SHARE_BUTTON' => 'แชร์',
@@ -4463,14 +4631,14 @@ $app_strings = array (
     'LBL_LANGUAGE' => 'ภาษา / Sprache / Idioma',
     'LBL_LOADING_LANGUAGE' => 'โหลดชุดภาษา',
     'LBL_UPLOADING' => 'อัปโหลด',
+    'LBL_UPLOADING_DOTS' => 'กำลังอัปโหลด...',
     'LBL_IMAGE_DELETE_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการลบรูปภาพนี้',
     'LBL_FILE_DELETE_CONFIRM' => "คุณแน่ใจหรือไม่ว่าต้องการลบไฟล์นี้ ขั้นตอนนี้ไม่สามารถยกเลิกได้",
     'LBL_FILE_DELETED' => 'ลบไฟล์สำเร็จแล้ว',
 
     //theme roller
     'LBL_PORTAL_THEME' => 'ธีมของพอร์ทัล',
-    'LBL_COFIGURE_PORTAL_THEME' => 'กำหนดค่าธีมของพอร์ทัล',
-    'LBL_THEME_PREVIEW' => 'แสดงตัวอย่างธีม',
+    'LBL_THEME_PREVIEW' => 'ดูตัวอย่างธีมของพอร์ทัล',
     'LBL_LOADING_PREVIEW' => 'กำลังโหลดตัวอย่าง',
     'LBL_RESET' => 'รีเซ็ต',
     'LBL_COLORS' => 'สี',
@@ -4621,10 +4789,18 @@ $app_strings = array (
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'การประชุม',
     'LBL_TASKS_SUBPANEL_TITLE' => 'งาน',
     'LBL_CALLS_SUBPANEL_TITLE' => 'การโทร',
+    'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'บัญชี',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => 'ติดต่อ',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'อีเมล',
     'LBL_SHIFTS_SUBPANEL_TITLE' => 'เวรทำงาน',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'รายการบรรทัดการเสนอราคา',
     'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'ข้อยกเว้นเวรทำงาน',
+    'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'เอกสาร',
+    'LBL_ESCALATIONS' => 'การเพิ่มขึ้น',
+    'LBL_ESCALATED' => 'เพิ่มขึ้นแล้ว',
+    'LBL_ESCALATIONS_SUBPANEL_TITLE' => 'การเพิ่มขึ้น',
+    'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE' => 'การเพิ่มขึ้นอื่น ๆ ที่เกี่ยวข้อง',
+    'LBL_ESCALATIONS' => 'การเพิ่มขึ้น',
     'LNK_SETTINGS' => 'การตั้งค่า',
     'LBL_MOBILE_SUPPORT' => 'การสนับสนุน',
     'LBL_MOBILE_SHOW_MORE' => 'แสดงเพิ่มเติม...',
@@ -4832,6 +5008,55 @@ $app_strings = array (
     'ERR_OFFLINE_SERVERTIME_UNAVAILABLE' => 'ไม่สามารถเรียกเวลาของเซิร์ฟเวอร์',
     'ERR_OFFLINE_NO_CONNECTION_ENABLE_ERROR' => 'ไม่สามารถเปิดใช้งานโหมดออฟไลน์ ไม่สามารถติดต่อเซิร์ฟเวอร์',
 
+    // Dark mode related
+    'LBL_MOBILE_APP_THEME' => 'ลักษณะ',
+    'LBL_MOBILE_APP_THEME_SYSTEM' => 'ใช้การตั้งค่าระบบ',
+    'LBL_MOBILE_APP_THEME_LIGHT' => 'สว่าง',
+    'LBL_MOBILE_APP_THEME_DARK' => 'เข้ม',
+    // Attachments related
+    'LBL_ATTACHMENT_RENAME_TITLE' => 'ชื่อไฟล์ใหม่',
+    'LBL_ATTACHMENT_RENAME_MSG' => 'ตั้งชื่อไฟล์ใหม่',
+    // Filters related
+    'LBL_CREATED_BY_ME' => 'สร้างโดยตัวฉัน',
+    'LBL_OPERATOR_CONTAINS' => 'ค่าใดค่าหนึ่งจาก',
+    'LBL_OPERATOR_NOT_CONTAINS' => 'ไม่ใช่ค่าใดค่าหนึ่งจาก',
+    'LBL_OPERATOR_EMPTY' => 'ว่างเปล่า',
+    'LBL_OPERATOR_NOT_EMPTY' => 'ไม่ว่างเปล่า',
+    'LBL_OPERATOR_MATCHES' => 'ตรงทั้งหมด',
+    'LBL_OPERATOR_STARTS_WITH' => 'เริ่มต้นด้วย',
+    'LBL_OPERATOR_EQUALS' => 'เท่ากับ',
+    'LBL_OPERATOR_NOT_EQUALS' => 'ไม่เท่ากับ',
+    'LBL_OPERATOR_GREATER_THAN' => 'มากกว่า',
+    'LBL_OPERATOR_LESS_THAN' => 'น้อยกว่า',
+    'LBL_OPERATOR_GREATER_THAN_OR_EQUALS' => 'มากกว่าหรือเท่ากับ',
+    'LBL_OPERATOR_LESS_THAN_OR_EQUALS' => 'น้อยกว่าหรือเท่ากับ',
+    'LBL_OPERATOR_BETWEEN' => 'อยู่ระหว่าง',
+    'LBL_OPERATOR_BEFORE' => 'ก่อน',
+    'LBL_OPERATOR_AFTER' => 'หลัง',
+    'LBL_OPERATOR_YESTERDAY' => 'เมื่อวานนี้',
+    'LBL_OPERATOR_TODAY' => 'วันนี้',
+    'LBL_OPERATOR_TOMORROW' => 'พรุ่งนี้',
+    'LBL_OPERATOR_LAST_7_DAYS' => '7 วันที่ผ่านมา',
+    'LBL_OPERATOR_NEXT_7_DAYS' => '7 วันถัดไป',
+    'LBL_OPERATOR_LAST_30_DAYS' => '30 วันที่ผ่านมา',
+    'LBL_OPERATOR_NEXT_30_DAYS' => '30 วันถัดไป',
+    'LBL_OPERATOR_LAST_MONTH' => 'เดือนล่าสุด',
+    'LBL_OPERATOR_THIS_MONTH' => 'เดือนนี้',
+    'LBL_OPERATOR_NEXT_MONTH' => 'เดือนถัดไป',
+    'LBL_OPERATOR_LAST_YEAR' => 'ปีล่าสุด',
+    'LBL_OPERATOR_THIS_YEAR' => 'ปีนี้',
+    'LBL_OPERATOR_NEXT_YEAR' => 'ปีถัดไป',
+    'LBL_OPERATOR_IS' => 'เป็น',
+    'LBL_OPERATOR_IS_NOT' => 'ไม่ใช่',
+    'LBL_ERROR_FILTER_EMPTY' => 'โปรดใส่เกณฑ์ตัวกรอง',
+    'LBL_ADD_FILTER' => 'ใส่เกณฑ์ตัวกรอง',
+    'LBL_FILTER_NAME' => 'ชื่อตัวกรอง',
+    'LBL_FILTER_FIELD' => 'ฟิลด์',
+    'LBL_FILTER_OPERATOR' => 'โอเปอเรเตอร์',
+    'LBL_FILTER_VALUE' => 'ค่า',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'บันทึกลงในแอป Desktop',
+    'LBL_FILTER_LOCAL' => 'ตัวกรองในระบบ',
+
     // Nomad Tutorial
     'LBL_MOBILE_TUTORIAL_HOME_INTRO' => 'ยินดีต้อนรับสู่ {{{brandName}}}<br/><br/> เราจะขอแนะนำคุณลักษณะใหม่บางประการ...',
     'LBL_MOBILE_TUTORIAL_HOME_LOGO' => 'การนำทางของเมนูหลัก',
@@ -4877,6 +5102,7 @@ $app_strings = array (
     'LBL_COMMENT_ADD' => 'ใส่ความคิดเห็น',
     'LBL_REQUIRED' => 'ต้องระบุ',
     'LBL_MORE_BUTTON' => 'เพิ่มเติม',
+    'LBL_NO_OPTIONS' => 'ไม่มีตัวเลือกที่ใช้ได้',
     'LBL_TRY_AGAIN' => 'ลองใหม่อีกครั้ง',
     'LBL_NEW_RECORDS' => 'สร้างล่าสุด',
     'LBL_ASSIGNED_TO_ME' => '{{{module}}} ของฉัน',
@@ -5102,11 +5328,15 @@ $app_strings = array (
     'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
     'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'คุณแน่ใจหรือไม่ว่าต้องการปิดการสนทนา',
 
+    // Portal timeline view
+    'LBL_PORTAL_NEW_NOTE_TITLE' => 'สร้างบันทึกหรือเพิ่มไฟล์แนบ',
+    'LBL_PORTAL_NEW_NOTE_BTN' => 'เพิ่มบันทึก',
+
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'ล็อกอินไม่สำเร็จ โปรดลองใหม่อีกครั้ง',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'ข้อมูลประจำตัวไม่ถูกต้อง',
-    'LBL_PORTAL_INVALID_GRANT' => 'โทเค็นของคุณไม่ถูกต้องหรือหมดอายุ โปรดล็อกอินอีกครั้ง',
-    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'โทเค็นหมดอายุแล้ว',
+    'LBL_PORTAL_INVALID_GRANT' => 'เซสชันของคุณไม่ถูกต้องหรือหมดอายุ โปรดล็อกอินอีกครั้ง',
+    'LBL_PORTAL_INVALID_GRANT_TITLE' => 'เซสชันหมดอายุแล้ว',
     'LBL_PORTAL_AUTH_FAILED' => 'การตรวจสอบสิทธิ์ไคลเอนต์ล้มเหลว',
     'LBL_PORTAL_AUTH_FAILED_TITLE' => 'ไคลเอนต์ไม่ถูกต้อง',
     'LBL_PORTAL_INVALID_REQUEST' => 'คำขอที่ส่งไม่ถูกต้องหรือมีรูปแบบไม่ถูกต้อง โปรดติดต่อฝ่ายสนับสนุนด้านเทคนิค',
@@ -5140,6 +5370,8 @@ $app_strings = array (
     'LBL_CASE_DUE_SOON' => 'Due soon',
     'LBL_CASE_DUE_LATER' => 'Due later',
 
+    'LBL_RESTORE_DASHBOARD_DEFAULT' => 'เรียกคืนแดชบอร์ดเริ่มต้น',
+
     // Renewals Console
     'LBL_RENEWALS_CONSOLE' => 'ต่ออายุคอนโซล',
     'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'ภาพรวม',
@@ -5159,6 +5391,7 @@ $app_strings = array (
     'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'ข้อความแบบสรุปย่อ',
     'LBL_OMNICHANNEL_CALL_SUMMARY' => 'การโทรแบบสรุปย่อ',
     'LBL_OMNICHANNEL_LINK_TO' => 'เชื่อมโยง {{fromModule}} ไปยัง {{toModule}}',
+    'LBL_OMNICHANNEL_LINK_RECORD' => 'ลิงก์ไปยัง {{module}}',
     'LBL_OMNICHANNEL_LINKED' => 'เชื่อมโยงแล้ว',
     'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'เบราว์เซอร์ของคุณไม่รองรับการใช้งานการสนทนา โปรดใช้ Google Chrome หรือ Mozilla Firefox',
     'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'โปรดติดต่อผู้ดูแลระบบ Sugar ของคุณเพื่อขอความช่วยเหลือ',
@@ -5166,6 +5399,8 @@ $app_strings = array (
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'โปรดทำการกำหนดค่า SugarLive ให้แล้วเสร็จก่อนที่จะทำการโทรออก',
     'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'โปรดทำการกำหนดค่าเลย์เอาต์ SugarLive ให้แล้วเสร็จก่อนเปิด SugarLive',
     'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'ตั้งให้ตัวคุณ "ออฟไลน์" ใน SugarLive ก่อนกำหนดค่าเลย์เอาต์ SugarLive',
+    'LBL_OMNICHANNEL_COMPACT_VIEW' => 'มุมมองกระทัดรัด',
+    'LBL_OMNICHANNEL_FULL_VIEW' => 'มุมมองแบบเต็ม',
 
     // Omnichannel Console Config
     'LBL_RESTORE_TAB_DEFAULT' => 'กู้คืนแท็บให้เป็นค่าเริ่มต้น',
@@ -5578,9 +5813,12 @@ $app_strings = array (
     'LBL_BEST' => 'ดีที่สุด',
     'LBL_WORST' => 'แย่ที่สุด',
     'LBL_LIKELY' => 'ความเป็นไปได้',
-    'LBL_BEST_ADJUSTED' => 'ดีที่สุด (ปรับค่า)',
-    'LBL_WORST_ADJUSTED' => 'แย่ที่สุด (ปรับค่า)',
-    'LBL_LIKELY_ADJUSTED' => 'เป็นไปได้ (ปรับค่า)',
+    'LBL_BEST_FORECAST' => 'คำมั่นสัญญา (ดีที่สุด)',
+    'LBL_WORST_FORECAST' => 'คำมั่นสัญญา (แย่ที่สุด)',
+    'LBL_LIKELY_FORECAST' => 'คำมั่นสัญญา (ที่เป็นไปได้)',
+    'LBL_BEST_ADJUSTED' => 'คำมั่นสัญญาที่แก้ไข (ดีที่สุด)',
+    'LBL_WORST_ADJUSTED' => 'คำมั่นสัญญาที่แก้ไข (แย่ที่สุด)',
+    'LBL_LIKELY_ADJUSTED' => 'คำมั่นสัญญาที่แก้ไข (ที่เป็นไปได้)',
     'LBL_AMOUNT_USDOLLAR' => 'จำนวนเงินที่แปลง',
     'LBL_OVERDUE' => 'เกินกำหนด',
 
@@ -5601,6 +5839,8 @@ $app_strings = array (
     // Generic Help Strings
     'LBL_HELP_MORE_INFO' => 'สำหรับข้อมูลเพิ่มเติม โปรดดูเอกสารประกอบของ {{{more_info_url}}} {{plural_module_name}} {{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'ไม่มีข้อมูล',
+    'LBL_NEED_HELP' => 'ต้องการความช่วยเหลือเรื่องใหม่ ๆ หรือไม่',
+    'LBL_NEW_CASE' => 'เคสใหม่',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'ส่วนข้อมูลความช่วยเหลือจะให้ข้อมูลที่เจาะจงเกี่ยวกับโมดูลที่คุณกำลังดู พร้อมด้วยลิงก์ไปยังเอกสารประกอบที่ตรงกัน (เช่น เอกสารประกอบของผู้สนใจ) ในคู่มือแอปพลิเคชันเพื่อดูข้อมูลเพิ่มเติม',
@@ -5748,9 +5988,19 @@ $app_strings = array (
     'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'ไม่ตอบ',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'ไม่มีกำหนดการ',
 
+    'LBL_CALENDAR_AVAILABLE_VIEWS' => 'มุมมองที่ใช้ได้',
+    'LBL_CALENDAR_DASHLET_NAME' => 'เครื่องมือกำหนดปฏิทิน',
+    'LBL_CALENDAR_DEFAULT_VIEW' => 'มุมมองค่าเริ่มต้น',
+    'LBL_CALENDAR_MY_CALENDARS' => 'ปฏิทินของฉัน',
+    'LBL_CALENDAR_OTHER_CALENDARS' => 'ผู้ใช้และปฏิทินทีม',
+    'LBL_CALENDAR' => 'ปฏิทิน',
+
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'เกิดข้อผิดพลาดขณะเรียกกำหนดการ',
 
     'LBL_SAVE_AND_SEND_INVITES_BUTTON' => 'บันทึกและส่งคำเชิญ',
+
+    // Meetings, Calls, and Messages accept status
+    'LBL_ACCEPT_STATUS' => 'สถานะยอมรับ',
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => 'กระบวนการ',
@@ -5867,15 +6117,21 @@ $app_strings = array (
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'คัดลอกลิงก์ยืนยัน',
 
     // Activity Timeline Dashlet
-    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'การโต้ตอบ',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} การโต้ตอบ',
-    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์',
+    'LBL_NO_ACTIVITY' => 'ไม่มีกิจกรรม',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} ไทม์ไลน์',
+    'LBL_ACTIVITY_TIMELINE_SHOW_MORE' => 'เพิ่มเติม',
+    'LBL_ACTIVITY_TIMELINE_SHOW_LESS' => 'น้อยลง',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'ไทม์ไลน์แสดงการโทร อีเมล ' .
         'Meetings and Notes related to a record.',
 
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'แสดงเพิ่มเติม...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'แสดงน้อยลง...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'ไม่มีข้อมูล',
+
+    // Dashlet Console List
+    'LBL_MODULE_UNAVAILABLE' => 'โมดูลไม่มีใบอนุญาต',
 
     // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'การเป็นสมาชิกที่เปิดใช้งาน',
@@ -5924,8 +6180,10 @@ $app_strings = array (
 
     // Focus Drawer dashboards
     'LBL_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชัก',
+    'LBL_CLOSE_FOCUS_DRAWER' => 'ระบบลิ้นชักปิด',
     'LBL_EXTERNAL_GUESTS' => 'ผู้เยี่ยมชมภายนอก',
     'LBL_MY_FAVORITE_TASKS' => 'งานโปรดของฉัน',
+
     'LBL_MY_TASKS' => 'งานของฉัน',
 
     // Sugar Integrate
@@ -5942,7 +6200,367 @@ $app_strings = array (
     'LBL_TIME_AWARE_TYPE' => 'ประเภท',
     'LBL_TIME_AWARE_BEAN_ID' => 'Bean ID',
 
+    // Export display label
+    'LBL_ENUM_DISPLAY_LABEL' => 'ป้ายกำกับที่แสดง',
+
     'LBL_BLANK' => '-blank-',
+
+    'LBL_OPEN_RECORD_VIEW' => 'เปิดมุมมองระเบียน',
+
+    // actionbutton
+    'LBL_ACTIONBUTTON_ADD' => 'เพิ่ม',
+    'LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE' => 'ไม่มีความช่วยเหลือในส่วนนี้',
+    'LBL_ACTIONBUTTON_FUNCTIONS' => 'ฟังก์ชัน',
+    'LBL_ACTIONBUTTON_FIELDS' => 'ฟิลด์',
+    'LBL_ACTIONBUTTON_SELECT_FIELD' => 'เลือกฟิลด์...',
+    'LBL_ACTIONBUTTON_ROLLUP' => 'ทบยอด',
+    'LBL_ACTIONBUTTON_RELATED' => 'เกี่ยวข้อง',
+    'LBL_ACTIONBUTTON_SAVE' => 'บันทึก',
+    'LBL_ACTIONBUTTON_CANCEL' => 'ยกเลิก',
+    'LBL_ACTIONBUTTON_R_MODULE' => 'โมดูลที่เกี่ยวข้อง',
+    'LBL_ACTIONBUTTON_R_FIELDS' => 'ฟิลด์ที่เกี่ยวข้อง',
+    'LBL_ACTIONBUTTON_ROLL_MODULE' => 'โมดูลทบยอด',
+    'LBL_ACTIONBUTTON_ROLL_FIELDS' => 'ฟิลด์ทบยอด',
+    'LBL_ACTIONBUTTON_ROLL_TYPE' => 'ฟังก์ชันทบยอด',
+    'LBL_ACTIONBUTTON_MINIMUM' => 'น้อยสุด',
+    'LBL_ACTIONBUTTON_MAXIMUM' => 'มากสุด',
+    'LBL_ACTIONBUTTON_AVERAGE' => 'เฉลี่ย',
+    'LBL_ACTIONBUTTON_SUM' => 'รวม',
+    'LBL_ACTIONBUTTON_ASSIGN_RECORD' => 'ระบุระเบียน',
+    'LBL_ACTIONBUTTON_COMPOSE_EMAIL' => 'เขียนอีเมล',
+    'LBL_ACTIONBUTTON_CREATE_RECORD' => 'สร้างระเบียน',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'ผสานเอกสาร',
+    'LBL_ACTIONBUTTON_OPEN_URL' => 'เปิด Url',
+    'LBL_ACTIONBUTTON_RUN_REPORT' => 'เรียกใช้รายงาน',
+    'LBL_ACTIONBUTTON_UPDATE_RECORD' => 'อัปเดตระเบียน',
+    'LBL_ACTIONBUTTON_ACTION' => 'การดำเนินการ',
+    'LBL_ACTIONBUTTON_ASSIGN_TO' => 'ระบุให้กับ',
+    'LBL_ACTIONBUTTON_EMAIL_TO' => 'อีเมลถึง',
+    'LBL_ACTIONBUTTON_USE_PMSE' => 'ใช้ PMSE',
+    'LBL_ACTIONBUTTON_TEMPLATE' => 'เทมเพลท',
+    'LBL_ACTIONBUTTON_MODULE' => 'โมดูล',
+    'LBL_ACTIONBUTTON_DISPLAY_SETTINGS' => 'การตั้งค่าหน้าจอแสดงผล',
+    'LBL_ACTIONBUTTON_BUTTON_TYPE' => 'ประเภท',
+    'LBL_ACTIONBUTTON_DROPDOWN' => 'ดรอปดาวน์',
+    'LBL_ACTIONBUTTON_BUTTON' => 'ปุ่ม',
+    'LBL_ACTIONBUTTON_BUTTON_GROUP' => 'กลุ่มปุ่ม',
+    'LBL_ACTIONBUTTON_SHOW_FIELD_LABEL' => 'แสดงป้ายกำกับในระเบียน',
+    'LBL_ACTIONBUTTON_SHOW_RECORD_HEADER' => 'แสดงที่ส่วนหัว',
+    'LBL_ACTIONBUTTON_HIDE_ON_EDIT' => 'ซ่อนการแก้ไข',
+    'LBL_ACTIONBUTTON_SIZE' => 'ขนาด',
+    'LBL_ACTIONBUTTON_DEFAULT' => 'ค่าเริ่มต้น',
+    'LBL_ACTIONBUTTON_SMALL' => 'เล็ก',
+    'LBL_ACTIONBUTTON_LARGE' => 'ใหญ่',
+    'LBL_ACTIONBUTTON_CALCULATED' => 'คำนวณ',
+    'LBL_ACTIONBUTTON_DOCUMENT_CONVERT' => 'แปลงเป็น PDF',
+    'LBL_ACTIONBUTTON_DOCUMENT_MERGE' => 'ผสานเอกสาร',
+    'LBL_ACTIONBUTTON_URL' => 'URL',
+    'LBL_ACTIONBUTTON_PREVIEW' => 'ดูตัวอย่าง',
+    'LBL_ACTIONBUTTON_PROPERTIES' => 'คุณสมบัติ',
+    'LBL_ACTIONBUTTON_LABEL_TITLE' => 'ป้ายกำกับ',
+    'LBL_ACTIONBUTTON_DESC' => 'ทูลทิป',
+    'LBL_ACTIONBUTTON_SHOW_LABEL' => 'แสดงป้ายกำกับ',
+    'LBL_ACTIONBUTTON_SHOW_ICON' => 'แสดงไอคอน',
+    'LBL_ACTIONBUTTON_SCHEME' => 'โครงสี',
+    'LBL_ACTIONBUTTON_ICON' => 'ไอคอน',
+    'LBL_ACTIONBUTTON_IS_DEPENDENT' => 'รายการที่อ้างอิง',
+    'LBL_ACTIONBUTTON_DESIGN' => 'กำหนดค่าเลย์เอาต์',
+    'LBL_ACTIONBUTTON_STOP_ON_ERROR' => 'หยุดที่ข้อผิดพลาด',
+    'LBL_ACTIONBUTTON_AUTOSAVE' => 'บันทึกอัตโนมัติ',
+    'LBL_ACTIONBUTTON_CONFIG' => 'การกำหนดค่า',
+    'LBL_ACTIONBUTTON_CONFIG_ERROR' => 'โปรดกำหนดค่า ปุ่มดำเนินการ ก่อนบันทึก',
+    'LBL_ACTIONBUTTON_CONFIG_BTN' => 'ปุ่มกำหนดค่า',
+    'LBL_ACTIONBUTTON_AUTO_CREATE' => 'สร้างอัตโนมัติ',
+    'LBL_ACTIONBUTTON_LINK' => 'ลิงก์',
+    'LBL_ACTIONBUTTON_COPY_PARENT' => 'คัดลอกค่าหลัก',
+    'LBL_ACTIONBUTTON_PRESET' => 'ตั้งไว้ล่างหน้า',
+    'LBL_ACTIONBUTTON_PRESET_PARENT' => 'ตั้งค่าล่วงหน้าจากค่าหลัก',
+    'LBL_ACTIONBUTTON_SELECT_OPTION' => 'เลือก...',
+    'LBL_ACTIONBUTTON_PARENT_FIELD' => 'จากฟิลด์หลัก ',
+    'LBL_ACTIONBUTTON_DELETE_BUTTON' => 'คุณแน่ใจหรือไม่ว่าต้องการลบปุ่มนี้',
+    'LBL_ACTIONBUTTON_DELETE_ACTION' => 'คุณแน่ใจหรือไม่ว่าต้องการลบการกระทำนี้',
+    'LBL_ACTIONBUTTON_INVALID_DATA' => 'ข้อมูลการดำเนินการปุ่มไม่ถูกต้อง',
+    'LBL_ACTIONBUTTON_SELECT_MODULE' => 'โปรดเลือกโมดูลก่อนที่จะบันทึก',
+    'LBL_ACTIONBUTTON_SELECT_LINK' => 'โปรดเลือกลิงก์ก่อนบันทึก หากไม่มีลิงก์ให้เลือก โปรดยกเลิกเครื่องหมายตัวเลือกลิงก์',
+    'LBL_ACTIONBUTTON_SELECT_RECORD' => 'โปรดเลือกระเบียนก่อนที่จะบันทึก',
+    'LBL_ACTIONBUTTON_SELECT_TEMPLATE' => 'โปรดเลือกเทมเพลทก่อนที่จะบันทึก',
+    'LBL_ACTIONBUTTON_THEME_PRIMARY' => 'หลัก',
+    'LBL_ACTIONBUTTON_THEME_SECONDARY' => 'รอง',
+    'LBL_ACTIONBUTTON_THEME_HIGHVIZ' => 'HighViz',
+    'LBL_ACTIONBUTTON_THEME_OCEAN' => 'มหาสมุทร',
+    'LBL_ACTIONBUTTON_THEME_PINK' => 'ชมพู',
+    'LBL_ACTIONBUTTON_THEME_ARMY' => 'กองทัพ',
+    'LBL_ACTIONBUTTON_THEME_TEAL' => 'น้ำเงินอมเขียว',
+    'LBL_ACTIONBUTTON_THEME_PACIFIC' => 'แปซิฟิก',
+    'LBL_ACTIONBUTTON_THEME_GREEN' => 'เขียว',
+    'LBL_ACTIONBUTTON_THEME_YELLOW' => 'เหลือง',
+    'LBL_ACTIONBUTTON_THEME_ORANGE' => 'ส้ม',
+    'LBL_ACTIONBUTTON_THEME_RED' => 'แดง',
+    'LBL_ACTIONBUTTON_THEME_CORAL' => 'ปะการัง',
+    'LBL_ACTIONBUTTON_THEME_PURPLE' => 'ม่วง',
+    'LBL_ACTIONBUTTON_FORMULA' => 'สูตร',
+    'LBL_ACTIONBUTTON_ACTIONS' => 'การดำเนินการ',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR' => 'ข้อมูลปุ่มยืนยันผิดพลาด',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL_OR_ICON' => 'ปุ่มจะต้องมีอย่างน้อยหนึ่งป้ายกำกับหรือหนึ่งชุดไอคอน',
+    'LBL_ACTIONBUTTON_VALIDATION_ERROR_NEED_LABEL' => 'โปรดใส่ป้ายกำกับปุ่มที่ถูกต้อง',
+    'LBL_ACTIONBUTTON_INVALID_FIELD_VALUES' => 'ไม่สามารถสร้างระเบียนได้เนื่องจากขาดค่าที่จำเป็น โปรดติดต่อผู้ดูแลระบบของคุณ',
+    'LBL_ACTIONBUTTON_INVALID_DROPDOWN_ERROR' => 'คุณจะต้องมีปุ่มสำหรับประเภทปุ่มนี้ที่ใช้งานอยู่อย่างน้อยสองปุ่ม',
+    'LBL_ACTIONBUTTON_RECORD' => 'มุมมองระเบียน',
+    'LBL_ACTIONBUTTON_ACTION_MENU' => 'เมนูกการดำเนินนการ',
+    'LBL_ACTIONBUTTON_ORDER' => 'คำสั่ง',
+    'LBL_ACTIONBUTTON_LIST_VIEW' => 'มุมมองรายการ',
+    'LBL_ACTIONBUTTON_RECORD_VIEW' => 'มุมมองระเบียน',
+    'LBL_ACTIONBUTTON_RECORD_VIEW_DASHLET' => 'ส่วนข้อมูลมุมมองระเบียน',
+    'LBL_ACTIONBUTTON_SUBPANELS' => 'แผงข้อมูลย่อย',
+    'LBL_ACTIONBUTTON_TASK_SEQUENCE_FAILED' => 'ผลที่ตามมาของงานทำให้เครื่องมือประสบความล้มเหลวในการกระทำการดังงต่อไปนี้: ',
+    'LBL_ACTIONBUTTON_ADD_ACTION' => 'เพิ่มการกระทำ',
+    'LBL_ACTIONBUTTON_REMOVE_ACTION' => 'ถอนการกระทำ',
+
+    //document merging
+    'LBL_MERGE_TEMPLATE_BUTTON_LABEL' => 'ผสานเอกสาร',
+    'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL' => 'ผสานเอกสารเป็น PDF',
+
+    //hint
+    'LBL_HINT_COMPANY_SIZE' => 'ขนาดบริษัท',
+    'LBL_HINT_COMPANY_INDUSTRY' => 'อุตสาหกรรม',
+    'LBL_HINT_COMPANY_INDUSTRY_TAGS' => 'แท็กอุตสาหกรรม',
+    'LBL_HINT_COMPANY_LOCATION' => 'ที่ตั้งบริษัท',
+    'LBL_HINT_COMPANY_DESCRIPTION' => 'รายละเอียดบริษัท',
+    'LBL_HINT_COMPANY_FOUNDED_YEAR' => 'ปีที่ก่อตั้ง',
+    'LBL_HINT_COMPANY_FACEBOOK' => 'Facebook บริษัท',
+    'LBL_HINT_COMPANY_TWITTER' => 'Twitter บริษัท',
+    'LBL_HINT_COMPANY_PIC' => 'โลโก้บริษัท',
+    'LBL_HINT_CONTACT_PIC' => 'รูปภาพบริษัท',
+    'LBL_HINT_COMPANY_WEBSITE' => 'เว็บไซต์บริษัท',
+    'LBL_HINT_PHOTO' => 'ลิงก์รูปภาพ',
+    'LBL_HINT_JOB_2' => 'งานที่ผ่านมา',
+    'LBL_HINT_EDUCATION' => 'การศึกษา',
+    'LBL_HINT_EDUCATION_2' => 'การศึกษาเพิ่มเติม',
+    'LBL_HINT_TWITTER' => 'ลิงก์ Twitter',
+    'LBL_HINT_FACEBOOK' => 'ลิงก์ Facebook',
+    'LBL_HINT_COMPANY_NAICS_CODE_LABEL' => 'รหัส NAICS',
+    'LBL_HINT_COMPANY_SIC_CODE_LABEL' => 'รหัส SIC',
+    'LBL_HINT_COMPANY_FISCAL_YEAR_END' => 'สิ้นปีงบประมาณ',
+    'LBL_HINT_COMPANY_ANNUAL_REVENUE' => 'รายได้ต่อปี',
+    'LBL_HINT_PHONE_1' => 'โทรศัพท์ 1',
+    'LBL_HINT_PHONE_2' => 'โทรศัพท์ 2',
+    'LBL_HINT_PANEL' => 'Hint',
+    'LBL_HINT_JOIN_TABLE' => 'ร่วมโต๊ะ',
+    'LBL_HINT_FULL_NAME' => 'ชื่อเต็ม',
+    'LBL_HINT_JOB_TITLE' => 'ตำแหน่งงาน',
+    'LBL_HINT_OFFICE_PHONE' => 'โทรศัพท์ที่ทำงาน',
+    'LBL_HINT_MOBILE_PHONE' => 'โทรศัพท์มือถือ',
+    'LBL_HINT_OTHER_PHONE' => 'โทรศัพท์อื่น',
+    'LBL_HINT_WEBSITE' => 'เว็บไซต์',
+    'LBL_HINT_MSG_OVERWRITE_ALL' => 'คุณต้องการเขียนทับข้อมูลทั้งหมดที่มีอยู่ในระเบียนด้วยข้อมูลใหม่ที่เจอใน Hint หรือไม่',
+    'LBL_HINT_MSG_OVERWRITE_FIELD' => 'คุณต้องการเขียนทับ {{fieldName}} ที่มีอยู่สำหรับระเบียนนี้ด้วย {{fieldName}} ใหม่ที่เจอใน Hint หรือไม่',
+    'LBL_HINT_MSG_TOTAL_OVERWRITE' => 'ข้อมูลทั้งหมดที่เกี่ยวข้องกับบัญชีจะถูกลบ คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ',
+    'LBL_HINT_COMPANY_LOGO' => 'โลโก้',
+    'LBL_HINT_CONTACTS_AVATAR' => 'รูปภาพ',
+    'LBL_HINT_ACCOUNTSETS' => 'แท็กชุดบัญชีของ Hint',
+
+    'LBL_HINT_LOADING' => 'กำลังโหลด ...',
+    'LBL_HINT_UNINSTALL_PROCESSING' => 'กำลังติดตั้ง Hint กรุณารอ',
+    'LBL_HINT_VALUE_ERASED' => ' ลบค่าแล้ว ',
+    'LBL_HINT_VALUE_ERASED_TOOLTIP' => 'ลบข้อมูลนี้ตามการร้องขอการคุ้มครองข้อมูลส่วนบุคคลแล้ว',
+
+    'LBL_HINT_UNINSTALL_TITLE' => 'โปรดเลือกหนึ่งในการถอนการติดตั้งจากตัวเลือกด้านล่างนี้:',
+    'LBL_HINT_UNINSTALL_PARTIAL' => 'แพ็กเกจถอนการติดตั้ง Hint เท่านั้น',
+    'LBL_HINT_UNINSTALL_FULL' => 'ถอนการติดตั้ง Hint สมบูรณ์',
+    'LBL_HINT_UNINSTALL_PARTIAL_DESCRIPTION' => 'ตัวเลือกนี้จะลบถอดถอน Hint MLP และปิดการใช้งานการเป็นสมาชิก Hint Insights ที่เคลื่อนไหวอยู่
+    การติดตั้ง Hint อีกครั้งจะเป็นการเปิดใช้งานการเป็นสมาชิกโดยอัตโนมัติ',
+    'LBL_HINT_UNINSTALL_FULL_DESCRIPTION' => 'ตัวเลือกนี้จะดำเนินการถอนการติดตั้ง Hint เต็มรูปแบบ รวมถึงการถอน MLP และลบการกำหนดค่าและข้อมูลการเป็นสมาชิกทั้งหมดด้วย',
+    'LBL_HINT_UNINSTALL' => 'ถอนการติดตั้ง',
+    'LBL_HINT_UNINSTALL_HEADER' => 'ถอนการติดตั้ง Hint',
+    'LBL_HINT_CANCEL' => 'ยกเลิก',
+    'LBL_HINT_UNINSTALL_WARNING1' => 'คำเตือน: โปรดเลือกตัวเลือกนี้ในกรณีที่คุณจะไม่ใช้งาน Hint อีกในอนาคตเท่านั้น
+    ก่อนดำเนินการถอนการติดตั้ง โปรดสำรองฐานข้อมูล Sugar อย่างเต็มรูปแบบก่อน และตั้งให้ Sugar อยู่ในโหมดบำรุงรักษา ',
+    'LBL_HINT_UNINSTALL_WARNING2' => 'ดูที่ ',
+    'LBL_HINT_UNINSTALL_WARNING_LINK' => 'คู่มือการบริหารจัดการ Hint ', // TODO: This URL needs to be changed.
+    'LBL_HINT_UNINSTALL_WARNING3' => 'สำหรับรายละเอียดขั้นตอนการถอนการติดตั้ง',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE1' => 'คุณแน่ใจหรือไม่ว่าต้องการถอนการติดตั้งแพ็กเกจ Hint เท่านั้น',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2' => 'คุณแน่ใจหรือไม่ว่าต้องการถอนการติดตั้ง Hint อย่างสมบูรณ์',
+    'LBL_HINT_UNINSTALL_WARNING_MESSAGE2_SUBTEXT' => '(โปรดทราบ: คุณจะไม่สามารถยกเลิกการกระทำนี้ได้)',
+
+    'LBL_HINT_CONFIG_TITLE' => 'ฟิลด์ Hint',
+    'LBL_HINT_NO_RESULTS_MSG' => 'ไม่พบผลลัพธ์',
+    'LBL_HINT_CONFIG_BASIC_PREVIEW' => 'เลย์เอาต์แผงข้อมูลพื้นฐานของ Hint',
+    'LBL_HINT_CONFIG_TAB_ACCOUNTS' => 'บัญชี',
+    'LBL_HINT_CONFIG_TAB_CONTACTS' => 'ติดต่อ',
+    'LBL_HINT_CONFIG_TAB_LEADS' => 'ผู้สนใจ',
+    'LBL_HINT_CONFIG_EXPANDED_PREVIEW' => 'เลย์เอาต์แผงข้อมูลขั้นสูง Hint',
+    'LBL_HINT_CONFIG_DIR_PAR1' => 'จัดตำแหน่งฟิลด์ใหม่โดยการลากและวางภายในส่วนเลย์เอาต์แผงข้อมูลของ Hint ข้างต้น',
+    'LBL_HINT_CONFIG_DIR_PAR2' => 'หากต้องการคำแนะนำแบบละเอียด พร้อมรายการฟิลด์เริ่มต้นต่าง ๆ โปรดไปที่ ',
+    'LBL_HINT_CONFIG_RESTORE_TEXT' => ' เพื่อเรียกคืนการตั้งค่าเริ่มต้นสำหรับ ',
+    'LBL_HINT_CONFIG_MODULE_TEXT' => 'โมดูล',
+    'LBL_HINT_CONFIG_WARNING_MESSAGE' => 'คุณแน่ใจหรือไม่ว่าต้องการกู้ข้อมูลกลับไปที่ค่าเริ่มต้นให้กับโมดูล {{module}}',
+    'LBL_HINT_CONFIG_RESTORE_BUTTON' => 'คลิกที่นี่',
+    'LBL_HINT_CONFIG_NAME' => 'คู่มือการบริหารจัดการ Hint',
+    'LBL_HINT_CONFIG_FIELD_SELECTOR' => 'ฟิลด์',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE' => 'ฟิลด์ที่ได้รับการเพิ่มค่า',
+    'LBL_HINT_ENRICHED_FIELD_SUBTITLE_NOTE' => 'ส่วนนี้เป็นรายการฟิลด์ Hint และฟิลด์ Sugar ทั้งหมดที่เพิ่มค่าโดย Hint โดยฟิลด์ Hint จะมีเครื่องหมายดอกจัน (*) และจะแสดงอยู่ในแผลข้อมูล Hint ในกรณีที่ได้รับการเพิ่มค่าเท่านั้น',
+    'LBL_HINT_CONFIG_FIELD_NAME' => 'ชื่อฟิลด์',
+    'LBL_HINT_CONFIG_ENRICH_FIELD' => 'ฟิลด์ที่เพิ่มค่า',
+    'LBL_HINT_CONFIG_FIELD_SHOW1' => 'แสดงใน Hint',
+    'LBL_HINT_CONFIG_FIELD_SHOW2' => 'แสดงในแผงข้อมูล Hint',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE' => 'ฟิลด์ Sugar เพิ่มเติม',
+    'LBL_HINT_ADDITIONAL_FIELD_SUBTITLE_NOTE' => 'ส่วนนี้แสดงรายการฟิลด์ Sugar ทั้งหมดที่ไม่ได้เพิ่มค่าโดย Hint',
+    'LBL_HINT_RESYNC_NOTIFICATION_TITLE' => 'คำเตือน',
+    'LBL_HINT_RESYNC_NOTIFICATION_DESCRIPTION' => 'คำเตือน: คุณกำลังจะซิงค์กับบริการ Hint Insights อีเมลสรุปที่กำลังอยู่ระหว่างการดำเนินการจะสูญหาย และข่าวสารที่มีอยู่จะถูกล้างออกจากส่วนข้อมูลเชิงลึก การแจ้งเตือนทุกชนิดจะกลับมาทำงานเมื่อการซิงค์เสร็จสมบูรณ์',
+
+    'LBL_HINT_ACCOUNT_CHANGE_TITLE' => 'บริษัทแนะนำที่เกี่ยวข้องกับ {{_moduleSingular}} ของคุณมีรายชื่อตามด้านล่าง โปรดเลือกข้อมูลบริษัทเพื่อแสดง',
+    'LBL_HINT_NO_ACCOUNT_SELECTED' => 'ไม่ได้เลือกบัญชี',
+
+    'LBL_HINT_EMAIL_IMPORT_TITLE' => 'พบหลายอีเมล โปรดเลือกอีเมลเพื่อนำเข้า: ',
+
+    'LBL_HINT_HELP_MESSAGE1' => 'ตามข้อมูลที่กรอกไว้ hint ไม่สามารถหาข้อมูลที่ตรงกันกับในระบบ',
+    'LBL_HINT_HELP_MESSAGE2' => 'สามารถค้นหาผลลัพธ์ที่ดีที่สุดใน hint ได้ด้วยชื่อบุคคลและที่อยู่อีเมล',
+    'LBL_HINT_HELP_MESSAGE3' => 'สามารถค้นหาผลลัพธ์ที่ดีที่สุดใน hint ได้ด้วย url เว็บไซต์ของบริษัท',
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1A' => "กรอก {{_moduleSingular}} ของชื่อบริษัทคุณหรือเว็บไซต์ และ hint จะค้นหาข้อมูลเพิ่มเติมให้คุณ",
+    'LBL_HINT_HELP_DEFAULT_MESSAGE1B' => "กรอก {{currentModule}} ของอีเมลคุณ และ hint จะค้นหาข้อมูลเพิ่มเติมให้คุณ",
+
+    'LBL_HINT_HISTORY_NONE' => 'ไม่มีข้อมูลย้อนหลังให้ดู',
+    'LBL_HINT_HISTORY_TITLE' => 'ประวัติกิจกรรม',
+
+    'LBL_HINT_PREVIEW_TITLE' => 'การเพิ่มค่าข้อมูล',
+    'LBL_HINT_PREVIEW_LICENSE_EXPIRED' => 'ใบอนุญาตบริการ SugarCRM Hint หมดอายุแล้ว ติดต่อผู้ดูแลระบบ SugarCRM ของคุณเพื่อต่ออายุใบอนุญาตของคุณ',
+    'LBL_HINT_PREVIEW_QUESTION' => 'อยากรู้ว่า SugarCRM Hint สามารถทำประโยชน์อะไรให้กับคุณและบริษัทของคุณได้บ้างใช่ไหม โปรดติดต่อผู้ดูแลระบบ SugarCRM เพื่อเพิ่ม Hint',
+    'LBL_HINT_PREVIEW_NO_ACCOUNT_INFO' => 'ไม่พบข้อมูลบัญชี',
+    'LBL_HINT_PREVIEW_TOOLTIP_TITLE' => 'พบข้อมูลที่มีการเพิ่มค่า โปรดคลิกเพื่อบันทึกข้อมูลที่เพิ่มค่าทั้งหมดไว้ในระเบียนของคุณ',
+    'LBL_HINT_PREVIEW_CLICK_TO_SAVE' => 'คลิกเพื่อบันทึกข้อมูลที่เพิ่มค่าลงไปในระเบียน',
+
+    'LBL_HINT_CONTACTS_TITLE' => 'ผู้ติดต่อที่เกี่ยวข้อง',
+    'LBL_HINT_CONTACTS_NONE' => 'ไม่มีผู้ติดต่อที่เกี่ยวข้อง',
+
+    'LBL_HINT_NEWS' => 'ข่าวสาร',
+    'LBL_HINT_GENERAL' => 'ทั่วไป',
+    'LBL_HINT_ALL_NEWS' => 'ข่าวสารทั้งหมด',
+    'LBL_HINT_FILTER_NEWS' => 'ตัวกรองข่าวสาร',
+    'LBL_HINT_FINANCIAL_NEWS' => 'การเงิน',
+    'LBL_HINT_PERSONNEL_NEWS' => 'ฝ่ายบุคคล',
+    'LBL_HINT_PRESS_RELEASES' => 'ข่าวประชาสัมพันธ์',
+    'LBL_HINT_OTHER_NEWS' => 'อื่น ๆ',
+    'LBL_HINT_NEWS_PLACEHOLDER' => 'ค้นหาบทความใหม่',
+    'LBL_HINT_NEWS_ALERT' => 'Hint Insights',
+    'LBL_HINT_NEWS_NONE' => 'ไม่มีข่าวสารให้อ่าน',
+    'LBL_NEW_NOTIFICATIONS' => 'การแจ้งเตือนใหม่',
+    'LBL_HINT_DASHLET_ALLOWED1' => 'คุณต้องมีใบอนุญาตใช้งาน Hint เพื่อเข้าดูส่วนข้อมูล Hint Insights
+    โปรดสอบถามผู้ดูแลระบบของคุณเกี่ยวกับการขอใบอนุญาตใช้งาน Hint',
+
+    'LBL_HINT_FOR' => 'สำหรับ',
+    'LBL_HINT_WITH' => 'กับ',
+    'LBL_HINT_SHOW_ME' => 'แสดงให้ฉัน: ',
+    'LBL_HINT_NOTIFY_ME_BY' => 'แจ้งฉันโดย: ',
+
+    'LBL_NOTIFICATIONS_TITLE' => 'ศูนย์การตั้งค่า Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE' => 'คีย์ตัวเลือกการตั้งค่า',
+    'LBL_HINT_PREFERENCES' => 'การตั้งค่า',
+    'LBL_HINT_MINIMUM_PREFERENCES' => 'ปิดใช้งานการลบ จำเป็นต้องใช้อย่างน้อยหนึ่งคำสั่งการตั้งค่า',
+    'LBL_HINT_MAXIMUM_PREFERENCES' => 'ปิดใช้งานการเพิ่ม คุณได้ใช้คำสั่งการตั้งค่าถึงขีดจำกัดสูงสุดแล้ว',
+
+    'LBL_NOTIFICATIONS_KEY_TITLE_DASHLET' => 'รวมในส่วนข้อมูล Hint Insights',
+    'LBL_NOTIFICATIONS_KEY_TITLE_BROWSER' => 'เด้งขึ้นเป็นการแจ้งเตือนในเดสก์ท็อป',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER' => 'ต้องเปิดใช้งานการแจ้งเตือนในทุกเบราว์เซอร์ และในคอมพิวเตอร์เดสก์ท็อปทุกเครื่องเพื่อให้สามารถรับการแจ้งเตือนได้อย่างสม่ำเสมอ',
+    'LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED' => 'บางเบราว์เซอร์ เช่น Internet Explorer จะไม่รองรับการแจ้งเตือน การแจ้งเตือนจะไม่สามารถใช้งานได้หากใช้เบราว์เซอร์ที่ไม่รองรับการแจ้งเตือน',
+    'LBL_NOTIFICATIONS_KEY_TITLE_EMAIL' => 'ส่งอีเมลแบบทันทีเพื่อเตือนให้เห็นการแจ้งเตือนแต่ละรายการ',
+    'LBL_NOTIFICATIONS_KEY_TITLE_DAILY' => 'ส่งอีเมลสรุปรายวัน',
+    'LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY' => 'ส่งอีเมลสรุปรายสัปดาห์',
+
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_FAILEDSYNC' => 'ไม่สามารถบันทึกค่าที่ต้องการได้ โปรดตรวจสอบการเชื่อมต่อของระบบและลองใหม่อีกครั้ง',
+    'LBL_NOTIFICATIONS_ERROR_MESSAGE_MISSING_REQUIRED' => 'ค่าในฟิลด์ที่ต้องระบุบางช่องหายไป โปรดตรวจสอบการตั้งค่าของคุณและดูให้แน่ใจว่าได้ใส่ข้อมูลลงในฟิลด์ที่ต้องระบุครบทุกช่อง',
+
+    'LBL_HINT_PUSH_MESSAGES_PERMISSION' => 'คุณกำลังจะเปิดใช้งานการแจ้งเตือนทางเบราว์เซอร์สำหรับ Hint Insights โปรดคลิก "ยืนยัน" เพื่อดำเนินการต่อ จากนั้นเบราว์เซอร์ของคุณจะขอสิทธิ์ในการรับการแจ้งเตือนกิจกรรมต่าง ๆ',
+    'LBL_HINT_PUSH_ERROR' => 'มีการลงทะเบียนปลั๊กอินการแจ้งเตือนแบบพุชสำหรับ{{options.type}} โดยไม่มีการอ้างอิงใด ๆ ปลั๊กอินนี้จะไม่ทำงานตามที่คาดหวัง โปรดตรวจดูให้แน่ใจว่าคุณได้ให้เส้นทางไปยังไฟล์ผู้ทำงาน และวิธีสำหรับการบันทึกการเป็นสมาชิกในเซิร์ฟเวอร์',
+
+    'LBL_HINT_CONFIG_ENABLE_NOTIFICATIONS' => 'เปิดการแจ้งเตือน Hint สำหรับผู้ใช้ทุกคน',
+    'LBL_HINT_CONFIG_DISABLE_NOTIFICATIONS' => 'ปิดการแจ้งเตือน Hint สำหรับผู้ใช้ทุกคน',
+
+    'LBL_HINT_SOFT_DISABLE_NOTIFICATIONS_FAILURE' => 'คำเตือน: การปิดการทำงานการแจ้งเตือนระหว่างการถอนการติดตั้ง Sugar Hint ล้มเหลว หากต้องการปิดการใช้งานการแจ้งเตือน โปรดติดตั้ง Hint 5.4.0 หรือรุ่นใหม่กว่า และดำเนินการถอนการติดตั้งให้สมบูรณ์โดยใช้โปรแกรมถอนการติดตั้ง Hint ที่ได้จากแผนกบริหารจัดการของ Sugar',
+
+
+    //Maps
+    'LBL_MAP_CONFIG_TITLE' => 'การกำหนดค่าแผนที่',
+    'LBL_MAP_MAP' => 'แผนที่',
+    'LBL_MAP_MAPS' => 'แผนที่',
+    'LBL_MAP_GEOCODING_RECORD' => 'จีโอโค้ด',
+    'LBL_MAP_GEOCODE_SUCCESS' => 'ทำจีโอโค้ดระเบียนสำเร็จแล้ว',
+    'LBL_MAP_LATITUDE' => 'ละติจูด',
+    'LBL_MAP_LONGITUDE' => 'ลองจิจูด',
+    'LBL_MAP_SEARCH_BY_ADDRESS' => 'ค้นหาจากที่อยู่...',
+    'LBL_MAP_ALREADY_GEOCODED' => 'มีการทำจีโอโค้ดระเบียนปัจจุบันแล้ว คุณแน่ใจหรือไม่ว่าต้องการเขียนทับจีโอโค้ดให้กับระเบียนนี้',
+    'LBL_MAPS_MANUAL_GEOCODING' => 'จีโอโค้ดแบบกำหนดเอง',
+    'LBL_MAP_POINT_COORDINATES' => 'จุดพิกัดแผนที่',
+    'LBL_MAP_CALCULATING_DIRECTIONS' => 'การคำนวณเส้นทางที่มีประสิทธิภาพมากที่สุด...',
+    'LBL_MAP_DIRECTIONS' => 'ทิศทาง',
+    'LBL_MAP_DIRECTIONS_FROM_USER' => 'ทิศทางโดยเริ่มจากผู้ใช้ปัจจุบัน',
+    'LBL_MAP_DIRECTIONS_FROM_RECORD' => 'ทิศทางโดยเริ่มจากระเบียน',
+    'LBL_MAPS_RADIUS_INPUT' => 'รัศมี (0-250)',
+    'LBL_MAPS_IN_RADIUS_FROM_ZIP' => 'ในรัศมีจากรหัสไปรษณีย์',
+    'LBL_MAPS_DISTANCE' => 'ระยะทาง',
+    'LBL_MAPS_CENTER_ZIP_CODE' => 'รหัสไปรษณีย์',
+    'LBL_MAPS_CONFIG_INVALID_MODULE_TITLE' => 'การกำหนดค่าไม่ถูกต้อง: ',
+    'LBL_MAPS_CONFIG_INVALID_MODULE' => '<strong>{{module}}</strong> ฟิลด์แผนที่ไม่ถูกต้อง',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_TYPE' => 'ประเภทแผนที่',
+    'LBL_MAP_DASHLET_CONFIGURE_MAP_ZOOM' => 'ระดับการขยาย',
+    'LBL_MAPS_DASHLET' => 'แผนที่',
+    'LBL_MAPS_DASHLET_DESCRIPTION' => 'แสดงระเบียนที่มีจีโอโค้ดในแผนที่',
+    'LBL_MAPS_DASHLET_MODULE_UNAVAILABLE' => 'แผนที่ไม่พร้อมให้บริการสำหรับโมดูลนี้ โปรดเปิดใช้งานแผนที่ในคอนโซลผู้ดูแลระบบ',
+    'LBL_MAP_MODULES' => 'โมดูล',
+    'LBL_MAP_FILTER_BY' => 'กรองตาม',
+    'LBL_MAP_UNIT_TYPE' => 'ประเภทหน่วย',
+    'LBL_MAP_UNIT_TYPE_MILES' => 'ไมล์',
+    'LBL_MAP_UNIT_TYPE_KM' => 'กิโลเมตร',
+    'LBL_MAP_ADDRESS' => 'ที่อยู่',
+    'LBL_MAP_NO_STARTING_POINT' => 'จุดเริ่มต้นไม่ได้ทำจีโอโค้ด',
+    'LBL_MAPS_MISSING_GEOCODING_START_POINT' => 'ระเบียนจุดเริ่มต้นไม่ได้ทำจีโอโค้ด',
+    'LBL_MAPS_MISSING_GEOCODING_RECORDS' => 'บางระเบียนที่เลือกไม่ได้ทำจีโอโค้ด และจะไม่สามารถแสดงขึ้นในแผนที่ได้',
+    'LBL_MAPS_MISSING_GEOCODING_RECORD' => 'ระเบียนไม่ได้ทำจีโอโค้ด',
+    'LBL_MAPS_MODULE_FIELDS' => 'ฟิลด์โมดูล',
+    'LBL_MAPS_SELECT_FIELD' => 'เลือกฟิลด์',
+    'LBL_MAPS_RELATE_RECORD' => 'ระเบียนที่เกี่ยวข้อง',
+    'LBL_MAPS_MAPPING_TYPE' => 'ประเภทแผนที่',
+    'LBL_MAPS_NO_GEOCODED_RECORDS' => 'ไม่มีระเบียนที่ทำจีโอโค้ด',
+    'LBL_MAPS_ADDRESS' => 'ที่อยู่',
+    'LBL_MAPS_ASSIGNED_USER_NAME' => 'ผู้ใช้ที่กำหนด',
+    'LBL_MAPS_STREET_VIEW_POINT_NOT_AVAILABLE' => 'มุมมองข้างถนนไม่พร้อมให้บริการในจุดดังกล่าว',
+    'LBL_MAPS_INVALID_MODULE' => '<strong>{0}</strong> ระเบียนไม่พร้อมสำหรับการทำแผนที่ โปรดลบโมดูลออกจากรายการนี้',
+    'LBL_MAPS_CLOSE_TOOLTIP' => 'ปิด',
+    'LBL_MAPS_EXPAND_TOOLTIP' => 'ขยาย',
+    'LBL_MAPS_SAVE_PDF_TOOLTIP' => 'บันทึกเป็น PDF',
+    'LBL_MAPS_EMAIL_LINK' => 'ลิงก์อีเมล',
+    'LBL_MAPS_ONE_GEOCDED_RECORD_NEEDED' => 'คุณต้องมีระเบียนจีโอโค้ดอย่างน้อยหนึ่งระเบียน',
+    'LBL_MAPS_GENERATING' => 'กำลังสร้างแผนที่',
+    'LBL_MAPS_POINTS' => 'จุดแผนที่',
+    'LBL_MAPS_POINT' => 'จุด',
+    'LBL_MAPS_TRAVEL_DETAILS' => 'รายละเอียดการเดินทาง',
+    'LBL_MAPS_TOTAL_DISTANCE' => 'ระยะทางทั้งหมด',
+    'LBL_MAPS_TOTAL_DURATION' => 'ระยะเวลาทั้งหมด',
+    'LBL_MAPS_TOTAL_DURATION_WITHOUT_TRAFIC' => 'ระยะเวลาทั้งหมดโดยไม่นับการจราจร',
+    'LBL_MAPS_ITINERARY' => 'แผนการเดินทาง',
+    'LBL_MAPS_TRAVEL_DISTANCE' => 'ระยะทางการเดินทาง',
+    'LBL_MAPS_TRAVEL_DURATION' => 'ระยะเวลาการเดินทาง',
+    'LBL_MAPS_TRAVEL_STEPS' => 'ก้าว',
+    'LBL_MAPS_TRAVEL_WARNINGS' => 'คำเตือน',
+    'LBL_MAPS_MAX_GEOCDED_RECORD_EXCEDED' => 'Bing Maps รองรับการปักหมุดสูงสุด 10 ตำแหน่งในแผนที่ที่แชร์ โปรดตรวจสอบตัวเลือกของคุณ',
+    'LBL_MAPS_NO_LICENSE_ACCESS' => 'ต้องใช้ใบอนุญาตใช้งานแผนที่',
+
+    'LBL_INVALID_FORMULA' => 'สูตรไม่ถูกต้อง',
+    'LBL_RETURN_TYPE_MISSMATCH' => 'ประเภทฟังก์ชันที่กลับมาไม่ตรงกัน',
+
+    'LBL_PREDICT_TOOLTIP' => 'SugarPredict',
+
+    'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD' => 'การพยากรณ์',
+    'LBL_AI_ICP_FIT_SCORE_CLASSIFICATION_FIELD' => 'โปรไฟล์ลูกค้าในอุดมคติ',
+
+    // User last state
+    'LBL_LAST_STATE' => 'สถานะสุดท้าย',
+    // DocuSign
+    'LBL_SEND_TO_DOCUSIGN_BUTTON_LABEL' => 'ส่งไปยัง DocuSign',
+
+    // Base sales stages
+    'LBL_OPEN' => 'เปิด',
+    'LBL_CLOSED_WON' => 'ปิดโดยได้รับการขาย',
+    'LBL_CLOSED_LOST' => 'ปิดโดยไม่ได้รับการขาย',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6779,8 +7397,8 @@ $app_list_strings['state_dom'] = array(
     'IBMSmartCloud'=>'IBM SmartCloud',
     'Google' => 'Google',
     'Box' => 'Box.net',
-    'Facebook'=>'Facebook',
     'Twitter'=>'Twitter',
+    'Microsoft' => 'Microsoft',
   );
   $app_list_strings['eapm_list_import']= array(
     'Google' => 'Google Contacts',
@@ -7120,6 +7738,14 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'ไฟล์ที�
     'YER' => 'รีอัล',
     'ZWD' => 'ดอลลาร์ซิมบับเว',
     );
+
+    $app_list_strings['market_interest_prediction_dom'] = [
+        '5' => 'สูงมาก',
+        '4' => 'สูง',
+        '3' => 'ธรรมดา',
+        '2' => 'ต่ำ',
+        '1' => 'ต่ำมาก',
+    ];
     $app_list_strings['process_et_field_type'] = array(
         'none' => 'ไม่มี',
         'future' => 'ค่าปัจจุบัน',
@@ -7129,3 +7755,116 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'ไฟล์ที�
     $app_list_strings['business_rule_type_list'] = array(
         'single' => 'รายการที่พบครั้งเดียว',
     );
+
+    $app_list_strings['merge_status_list'] = [
+        'processing' => 'กำลังประมวลผล',
+        'error' => 'ข้อผิดพลาด',
+        'success' => 'สำเร็จ',
+        'canceled' => 'ยกเลิก',
+        'document_load' => 'กำลังโหลดเทมเพลท',
+        'tags_extract' => 'กำลังสกัดแท็ก',
+        'tags_validate' => 'กำลังตรวจสอบแท็ก',
+        'data_retrieving' => 'กำลังเรียกข้อมูล',
+        'serialize_document' => 'กำลังใส่เอกสารกลับเข้าด้วยกัน',
+        'send_document' => 'กำลังส่งเอกสารให้คุณ',
+    ];
+
+    $app_list_strings['merge_type_list'] = [
+        'merge' => 'ผสาน',
+        'convert' => 'ผสาน PDF',
+        'multimerge' => 'ผสานหลายไฟล์',
+        'multimerge_convert' => 'ผสาน PDF หลายไฟล์',
+        'labelsgenerate' => 'สร้างป้ายกำกับ',
+        'labelsgenerate_convert' => 'สร้างป้ายกำกับ PDF',
+        'excel' => 'ผสาน Excel',
+        'excel_convert' => 'แปลงผสาน Excel',
+        'presentation' => 'ผสาน PowerPoint',
+        'presentation_convert' => 'PowerPoint ผสาน PDF',
+    ];
+
+    $app_list_strings['file_type_list'] = [
+        'DOC' => 'DOC',
+        'PDF' => 'PDF',
+        'PPT' =>  'PPT',
+        'XLS' => 'XLS',
+    ];
+
+    $app_list_strings['stage2_preferences_type'] = [
+      'owner' => 'บัญชีของฉัน',
+      'favorites' => 'บัญชีโปรด',
+      'tags' => 'บัญชีที่ติดแท็ก',
+    ];
+
+    $app_list_strings['stage2_preferences_category'] = [
+      'All' => 'ข่าวสารทั้งหมด',
+      'General' => 'ทั่วไป',
+      'Finance' => 'การเงิน',
+      'People' => 'ฝ่ายบุคคล',
+      'Press Releases' => 'ข่าวประชาสัมพันธ์',
+      'Other' => 'อื่น ๆ',
+    ];
+
+    $app_strings['LBL_OWNERS'] = 'เจ้าของ';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_NAME'] = 'Cloud Drive';
+    $app_strings['LBL_DASHLET_CLOUD_DRIVE_DESCRIPTION'] = 'ส่วนข้อมูลบูรณาการ Cloud Drive';
+    $app_strings['LBL_COPY_GOOGLE_DRIVE_LINK'] = 'คัดลอกลิงก์';
+    $app_strings['LBL_DOWNLOAD_DRIVE_FILE'] = 'ดาวน์โหลด';
+    $app_strings['LBL_CREATE_SUGAR_DOCUMENT'] = 'สร้างเอกสาร Sugar';
+    $app_strings['LBL_SYNC_TO_GOOGLE_BUTTON_LABEL'] = 'ซิงค์ไปยัง Google ไดร์ฟ';
+    $app_strings['LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL'] = 'ซิงค์ทั้งหมดไปยัง Google ไดร์ฟ';
+    $app_strings['LBL_DRIVE_UNABLE_TO_DOWNLOAD'] = 'ไม่สามารถดาวน์โหลดไฟล์นี้ได้';
+    $app_strings['LBL_DRIVE_CLOUD_DASHLET_NOT_PRESENT'] = 'ไม่ปรากฏส่วนข้อมูลคลาวด์';
+    $app_strings['LBL_DRIVE_DOCUMENT_CREATED'] = 'สร้างเอกสาร Sugar แล้ว';
+
+    $app_string['LBL_MY_FILES'] = 'ไฟล์ของฉัน';
+    $app_strings['LBL_SHARED_WITH_ME'] = 'แชร์กับฉัน';
+    $app_strings['LBL_CLOUD_PROVIDER'] = 'ผู้ให้บริการคลาวด์';
+
+    $app_list_strings['drive_types'] = [
+      'google' => 'Google ไดร์ฟ',
+      'onedrive' => 'Microsoft Onedrive',
+    ];
+    $app_strings['LBL_SHARED_WITH_ME'] = 'แชร์กับฉัน';
+    $app_strings['LBL_MY_FILES'] = 'ไฟล์ของฉัน';
+    $app_strings['LBL_UPLOAD_FILE'] = 'อัปโหลดไฟล์';
+    $app_strings['LBL_FOLDER_NOT_FOUND'] = 'ไม่พบโฟลเดอร์';
+    $app_strings['LBL_CREATE_FOLDER'] = 'สร้างโฟลเดอร์';
+    $app_strings['LBL_LOAD_MORE'] = 'โหลดเพิ่มเติม...';
+
+    $app_strings['LBL_CHECK_GOOGLE_CONNECTION'] = 'ไม่พบการเชื่อมต่อกับ Google...';
+    $app_strings['LBL_CHECK_MICROSOFT_CONNECTION'] = 'ไม่พบการเชื่อมต่อกับ Microsoft...';
+
+    $app_list_strings['gc_status_list'] = [
+      '-blank-' => '-ว่าง-',
+      'Exact' => 'ตรงทั้งหมด',
+      'Null_address_components' => 'องค์ประกอบที่อยู่หนึ่งหรือมากกว่าหนึ่งองค์ประกอบว่างเปล่า',
+      'Invalid_address' => 'ที่อยู่ไม่ถูกต้อง, ส่งคืนเซิร์ฟเวอร์ผิดพลาด',
+      'Invalid_server_response_not_XML' => 'การตอบกลับเซิร์ฟเวอร์ไม่ถูกต้อง, ไม่ใช่ XML',
+      'Invalid_address_no_location' => 'ที่อยู่ไม่ถูกต้อง, ส่งคืนเซิร์ฟเวอร์ไม่มีตำแหน่ง',
+      'Ambiguous_address' => 'ที่อยู่คลุมเคลือ, ตรงกับหลายรายการ',
+    ];
+
+    $app_list_strings['maps_display_type_list'] = [
+      'r' => 'ถนน',
+      'a' => 'เสาอากาศ',
+      'be' => 'ภาพมุมสูง',
+      'rd' => 'ถนนมืด',
+    ];
+
+    $app_list_strings['maps_display_zoom_list'] = [
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+      '13' => '13',
+      '14' => '14',
+      '15' => '15',
+    ];

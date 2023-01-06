@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Kreirao korisnik',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Poslednji put promenio korisnik',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Sistemska e-poruka',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'Šablon dokumenta',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Spajanje dok.',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Izaberi...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Spajanje dokumenata u PDF',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Spajanje dok.',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Poslovna pravila',
     'LBL_PMSE_LABEL_RULE' => 'Pravilo',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Samo ažurirani zapisi (sve nadogradnje - pogledajte tekst pomoći)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Novi zapisi ili prvo ažuriranje',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Novi zapisi i sva ažuriranja',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Promena veze',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Odaberite kada će proces započeti.<br><br>Novo: Pokreni proces kada se kreira nov zapis.<br><br>Prvo ažuriranje: Proces se pokreće samo kada se ispuni kriterijum po prvi put za postojeći zapis.<br><br>Sva ažuriranja: Proces se pokreće svaki put kada se ispuni kriterijum za postojeći zapis..<br><br>Novi zapisi ili prvo ažuriranje: proces se pokreće samo prvi put kada se zadovolje kriterijumi za zapis pri kreiranju ili ažuriranju zapisa.<br><br>Novi zapisi i sva ažuriranja: proces se pokreće svaki put za sve nove i postojeće zapise.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Odaberite kada će proces započeti.<br><br>Novo: Pokrenite proces kada se kreira nov zapis.<br><br>Prvo ažuriranje: Proces se pokreće samo kada se ispuni kriterijum po prvi put za postojeći zapis.<br><br>Sva ažuriranja: Proces se pokreće svaki put kada se ispuni kriterijum za postojeći zapis.<br><br>Novi zapisi ili prvo ažuriranje: proces se pokreće samo prvi put kada se zadovolje kriterijumi za zapis pri kreiranju ili ažuriranju zapisa.<br><br>Novi zapisi i sva ažuriranja: proces se pokreće svaki put za sve nove i postojeće zapise.<br><br>Promene veze: proces se pokreće svaki put kada postoji promena veze.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Odabrati SugarCRM modul koji će biti primenjen prilikom pokretanja događaja',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fiksiran datum',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' Greška',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'Evaluacija promene veze',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'Polja',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'Procena polja modula',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'Modul',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'Svi povezani zapisi',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'Bilo koji povezani zapis',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => 'Dodato',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => 'Uklonjeno',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => 'Dodato ili uklonjeno',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => 'Bilo koja veza',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'Vreme izvršavanja',
 

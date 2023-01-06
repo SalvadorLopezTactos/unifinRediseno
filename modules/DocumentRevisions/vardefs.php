@@ -13,6 +13,7 @@
 $dictionary['DocumentRevision'] = array(
     'table' => 'document_revisions',
     'archive' => false,
+    'favorites' => true,
     'fields' => array(
         'id' => array(
             'name' => 'id',
@@ -34,6 +35,29 @@ $dictionary['DocumentRevision'] = array(
             'required' => false,
             'reportable' => false,
         ),
+        'related_document_name' => [
+            'name' => 'related_document_name',
+            'rname' => 'name',
+            'id_name' => 'document_id',
+            'vname' => 'LBL_DOC_NAME',
+            'join_name' => 'documents',
+            'type' => 'relate',
+            'link' => 'document_link',
+            'table' => 'documents',
+            'module' => 'Documents',
+            'source' => 'non-db',
+            'massupdate' => false,
+        ],
+        'document_link' => [
+            'name' => 'document_link',
+            'type' => 'link',
+            'relationship' => 'documentrevisions_document',
+            'vname' => 'LBL_DOCUMENT',
+            'link_type' => 'one',
+            'module' => 'Documents',
+            'bean_name' => 'Document',
+            'source' => 'non-db',
+        ],
         'doc_id' => array(
             'name' => 'doc_id',
             'vname' => 'LBL_DOC_ID',
@@ -84,6 +108,9 @@ $dictionary['DocumentRevision'] = array(
             'required' => true,
             'len' => '255',
             'allowEapm' => true,
+            'docType' => 'doc_type',
+            'docUrl' => 'doc_url',
+            'docId' => 'doc_id',
             'linkModuleOverride' => 'Documents',
         ),
         'file_ext' => array(
@@ -194,6 +221,15 @@ $dictionary['DocumentRevision'] = array(
             'rhs_module' => 'DocumentRevisions', 'rhs_table' => 'document_revisions', 'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many'
         ),
+        'documentrevisions_document' => [
+            'lhs_module' => 'Documents',
+            'lhs_table' => 'documents',
+            'lhs_key' => 'id',
+            'rhs_module' => 'DocumentRevisions',
+            'rhs_table' => 'document_revisions',
+            'rhs_key' => 'document_id',
+            'relationship_type' => 'one-to-many',
+        ],
     ),
     'indices' => array(
         array('name' => 'documentrevisionspk', 'type' => 'primary', 'fields' => array('id')),

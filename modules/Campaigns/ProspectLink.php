@@ -28,7 +28,6 @@ class ProspectLink extends Link2
      * This method changes join of any item to campaign through target list
      * if you want to use this join method you should add code below to your vardef.php
      * 'link_class' => 'ProspectLink',
-     * 'link_file' => 'modules/Campaigns/ProspectLink.php'
      *
      * @see Link::getJoin method
      */

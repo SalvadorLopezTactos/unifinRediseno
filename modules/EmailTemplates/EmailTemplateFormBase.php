@@ -197,7 +197,7 @@ EOQ;
 			if(isset($_FILES[$key]) && $upload_file->confirm_upload() && preg_match("/^email_attachment/",$key)) {
 				$note->filename = $upload_file->get_stored_file_name();
 				$note->file = $upload_file;
-				$note->name = $mod_strings['LBL_EMAIL_ATTACHMENT'].': '.$note->file->original_file_name;
+                $note->name = $note->file->original_file_name;
 				$note->team_id = $focus->team_id;
 				if(isset($_REQUEST['embedded'.$i]) && !empty($_REQUEST['embedded'.$i])){
                   if($_REQUEST['embedded'.$i]=='true'){
@@ -226,7 +226,7 @@ EOQ;
 					$newNote = BeanFactory::getBean('Notes', $note->id);
 					$newNote->id = create_guid();
 					$newNote->email_id = $focus->id;
-                    //FIXME: Should email_type be set to Emails or EmailTemplates ($focus->module_name)?
+                    $newNote->email_type = $focus->getModuleName();
 					$newNote->new_with_id = true;
 					$newNote->date_modified = '';
 					$newNote->date_entered = '';
@@ -238,9 +238,7 @@ EOQ;
 				continue;
 			}
 			$note->email_id = $focus->id;
-            //FIXME: Is this code used for anything other than saving a template? If no, then email_type should be
-            // EmailTemplates. If yes, then email_type may be Emails or EmailTemplates depending on the use.
-			$note->email_type = 'Emails';
+            $note->email_type = $focus->getModuleName();
 			$note->file_mime_type = $note->file->mime_type;
 			$note_id = $note->save();
 			array_push($focus->saved_attachments, $note);
@@ -279,9 +277,7 @@ EOQ;
 			$docNote->filename = $docRev->filename;
 			$docNote->description = $doc->description;
 			$docNote->email_id = $focus->id;
-            //FIXME: Is this code used for anything other than saving a template? If no, then email_type should be
-            // EmailTemplates. If yes, then email_type may be Emails or EmailTemplates depending on the use.
-			$docNote->email_type = 'Emails';
+                $docNote->email_type = $focus->getModuleName();
 			$docNote->file_mime_type = $docRev->file_mime_type;
 
             // Duplicate the file before saving so that the file size is captured during save.

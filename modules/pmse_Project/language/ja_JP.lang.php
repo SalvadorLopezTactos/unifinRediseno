@@ -201,6 +201,13 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'ユーザーにより作成',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => '最後に変更したユーザー',
     'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'システムEメール',
+    // Document Merge
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE' => 'ドキュメントテンプレート',
+    'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'ドキュメントマージ',
+    'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => '選択...',
+    'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'PDF にドキュメントマージ',
+    // Document Merge BPM Context Menu
+    'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'ドキュメントマージ',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'ビジネスルール',
     'LBL_PMSE_LABEL_RULE' => 'ルール',
@@ -244,8 +251,9 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => '更新済みレコードのみ (すべての更新 - ヘルプテキストを参照)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => '新規記録または初回アップデート',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => '新規記録とすべての更新',
+    'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'リレーションシップ変更',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'プロセスの開始時に選択します。<br><br>新規: レコードが作成される時にプロセスを実行します。<br><br>初回更新: プロセスは、既存のレコードの基準が最初に満たされたときにのみ実行されます。<br><br>すべて更新: プロセスは、既存のレコードの基準が満たされるたびに実行されます。<br><br>新規レコードまたは初回更新: プロセスは、レコードの作成中またはレコードの更新中に、レコードの基準が最初に満たされたときにのみ実行されます。<br><br>新規レコードとすべて更新: プロセスは、すべての新規および既存のレコードに対して毎回実行されます。',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'プロセスの開始時に選択します。<br><br>新規: レコードが作成される時にプロセスを実行します。<br><br>初回更新: プロセスは、既存のレコードの基準が最初に満たされたときにのみ実行されます。<br><br>すべて更新: プロセスは、既存のレコードの基準が満たされるたびに実行されます。<br><br>新規レコードまたは初回更新: プロセスは、レコードの作成中またはレコードの更新中に、レコードの基準が最初に満たされたときにのみ実行されます。',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'イベントトリガーに適用するSugarCRMを選択',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => '固定の日付',
@@ -284,6 +292,7 @@ $mod_strings = array (
     'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => 'エラー',
 
     /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_RELATIONSHIP_CHANGE_EVALUATION_TITLE' => 'リレーションシップ変更の評価',
     'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => 'フィールド',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => 'モジュールフィールド評価',
     'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => 'モジュール',
@@ -370,6 +379,11 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => 'すべての関連するレコード',
     'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => 'すべての関連するレコード',
+
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED' => '追加済み',
+    'LBL_PMSE_EXPCONTROL_RELATION_REMOVED' => '削除済み',
+    'LBL_PMSE_EXPCONTROL_RELATION_ADDED_OR_REMOVED' => '追加済みまたは削除済み',
+    'LBL_PMSE_EXPCONTROL_MODULE_ANY_RELATIONSHIP' => '関連の追加',
 
     'LBL_PMSE_RUNTIME_BUTTON' => 'ランタイム',
 

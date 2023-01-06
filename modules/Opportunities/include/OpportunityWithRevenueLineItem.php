@@ -32,6 +32,11 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'massupdate' => false,
             'importable' => true,
         ),
+        'forecasted_likely' => [
+            'formula' => 'rollupSum($revenuelineitems, "forecasted_likely")',
+            'calculated' => true,
+            'enforced' => true,
+        ],
         'best_case' => array(
             'calculated' => true,
             'enforced' => true,
@@ -57,16 +62,10 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'massupdate' => false,
             'hidemassupdate' => true,
         ),
-        'commit_stage' => array(
-            'massupdate' => false,
-            'studio' => false,
-            'reportable' => false,
-            'workflow' => false,
-        ),
         'sales_stage' => array(
             'calculated' => false,
             'formula' => '',
-            'audited' => false,
+            'audited' => true,
             'required' => false,
             'massupdate' => false,
             'reportable' => false,
@@ -84,7 +83,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
         'sales_status' => array(
             'studio' => true,
             'reportable' => true,
-            'audited' => true,
+            'audited' => false,
             'massupdate' => true,
             'importable' => true,
         ),
@@ -102,6 +101,19 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'reportable' => true,
             'workflow' => true
         ),
+        'closed_won_revenue_line_items' => [
+            'reportable' => true,
+            'workflow' => true,
+        ],
+        'commit_stage' => [
+            'massupdate' => false,
+            'hidemassupdate' => true,
+            'importable' => false,
+            'studio' => true,
+            'reportable' => true,
+            'workflow' => true,
+            'calculated' => false,
+        ],
     );
 
     /**
@@ -134,24 +146,26 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
         // fix the view defs now
         $this->fixRecordView(
             array(
-                'commit_stage' => false,
+                'forecasted_likely' => true,
                 'sales_status' => true,
                 'service_start_date' => true,
                 'probability' => false,
                 'renewal' => true,
                 'renewal_parent_name' => true,
                 'service_duration' => true,
+                'commit_stage' => false,
             )
         );
 
         $this->fixListViews(
             array(
+                'forecasted_likely' => true,
                 'service_start_date' => true,
                 'sales_stage' => true,
                 'sales_status' => true,
                 'probability' => false,
-                'commit_stage' => false,
                 'service_duration' => true,
+                'commit_stage' => false,
             )
         );
 
@@ -164,6 +178,10 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
                 'service_duration' => true,
             )
         );
+
+        if ($this->isForecastSetup()) {
+            $this->fixForecastFields(true);
+        }
     }
 
     /**
@@ -460,5 +478,14 @@ EOL;
         if (file_exists($this->accModuleExtFolder . '/Vardefs/' . $this->accModuleExtVardefFile)) {
             unlink($this->accModuleExtFolder . '/Vardefs/' . $this->accModuleExtVardefFile);
         }
+    }
+
+    /**
+     * Fix Lead Convert views
+     */
+    protected function fixLeadConvertView()
+    {
+        $view = new LeadViews();
+        $view->toggleConvertDashboardProductDashlets(Lead::isUsingRLIsInConvert());
     }
 }

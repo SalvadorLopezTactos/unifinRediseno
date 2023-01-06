@@ -85,6 +85,15 @@ $dictionary['ProductCategory'] = array(
     'acls' => array('SugarACLProduct' => true),
     'indices' => array (
         array('name' => 'idx_producttemplate_id_parent_name', 'type' => 'index', 'fields' => array('id', 'parent_id', 'name', 'deleted')),
+        [
+            'name' => 'idx_id_name_list_order',
+            'type' => 'index',
+            'fields' => [
+                'id',
+                'name',
+                'list_order',
+            ],
+        ],
     ),
     'relationships' => array(
         'member_categories' => array(

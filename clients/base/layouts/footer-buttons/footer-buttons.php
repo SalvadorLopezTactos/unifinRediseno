@@ -11,16 +11,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['footer-buttons'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['footer-buttons'] = [
+    'components' => [
+        [
             'view' => 'mobile-action',
-        ),
-        array(
+        ],
+        [
+            'view' => 'merge-widget-action',
+        ],
+        [
             'view' => 'language-actions',
-        ),
-        array(
+        ],
+        [
             'view' => 'footer-actions',
-        ),
-    ),
-);
+        ],
+    ],
+];

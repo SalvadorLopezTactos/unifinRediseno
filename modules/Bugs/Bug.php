@@ -168,7 +168,7 @@ SQL;
 
         $stmt = $this->db->getConnection()
             ->executeQuery($query, [$this->id]);
-        $row = $stmt->fetch();
+        $row = $stmt->fetchAssociative();
 
         if ($row !== false) {
             $this->release_name = $row['name'];
@@ -203,7 +203,7 @@ SQL;
             ->executeQuery(
                 $query,
                 [$this->id]
-            )->fetch();
+            )->fetchAssociative();
 
         if ($row !== false) {
             $this->fixed_in_release_name = $row['name'];

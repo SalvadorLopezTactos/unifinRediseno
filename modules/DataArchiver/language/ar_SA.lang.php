@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'أرشفة',
     'LBL_PROCESS_TYPE_DELETE' => 'حذف نهائي',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'أرشفة عمليات التشغيل',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'تحذير',
+    'LBL_ARCHIVER_WARNING' => 'يوصى بتنفيذ هذا الإجراء أثناء الاستخدام المنخفض أو ساعات التوقف عن العمل '
+        . 'لأن هذا يمكن أن يؤثر على أداء النظام. هل تريد بالتأكيد تنفيذ هذا الإجراء الآن؟',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'يجب ضبط {{fieldName}} كعامل تصفية لمؤرشف وحدة {{moduleName}}',
 );

@@ -15,8 +15,8 @@ class ConnectorsController extends SugarController {
 	protected $action_remap = array('index'=>'ConnectorSettings');
 
 	var $admin_actions = array('ConnectorSettings', 'DisplayProperties', 'MappingProperties', 'ModifyMapping', 'ModifyDisplay', 'ModifyProperties',
-	                           'ModifySearch', 'SearchProperties', 'SourceProperties',
-	                           'SavedModifyDisplay', 'SaveModifyProperties', 'SaveModifySearch', 'RunTest');
+        'ModifySearch', 'SourceProperties',
+        'SavedModifyDisplay', 'SaveModifyProperties', 'SaveModifySearch', 'RunTest');
 
 
 	function process() {

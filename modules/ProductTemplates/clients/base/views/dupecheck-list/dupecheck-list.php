@@ -52,6 +52,8 @@ $viewdefs['ProductTemplates']['base']['view']['dupecheck-list'] = array(
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => false,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
                 array(
                     'name' => 'list_price',
@@ -65,6 +67,8 @@ $viewdefs['ProductTemplates']['base']['view']['dupecheck-list'] = array(
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => false,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
                 array(
                     'name' => 'discount_price',
@@ -78,6 +82,8 @@ $viewdefs['ProductTemplates']['base']['view']['dupecheck-list'] = array(
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => false,
+                    'convertToBase' => true,
+                    'showTransactionalAmount' => true,
                 ),
             ),
         ),

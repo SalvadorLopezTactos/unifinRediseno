@@ -51,13 +51,6 @@ $dictionary['roles_modules'] = array(
             ),
         ),
         array(
-            'name' => 'idx_role_id',
-            'type' => 'index',
-            'fields' => array(
-                'role_id',
-            ),
-        ),
-        array(
             'name' => 'idx_module_id',
             'type' => 'index',
             'fields' => array(

@@ -243,6 +243,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities'] = ar
                     'quote_id',
                     'quote_name',
                     'worst_case',
+                    'quantity',
                 ),
             ),
             array(
@@ -266,13 +267,13 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities'] = ar
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
-                'icon' => 'fa-eye',
+                'icon' => 'sicon-preview',
                 'acl_action' => 'view',
             ),
             array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
-                'icon' => 'fa-pencil',
+                'icon' => 'sicon-edit',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',

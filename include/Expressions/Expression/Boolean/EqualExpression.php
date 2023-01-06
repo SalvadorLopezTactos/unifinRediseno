@@ -36,6 +36,11 @@ class EqualExpression extends BooleanExpression
                 return AbstractExpression::$FALSE;
             }
         }
+        // In PHP8 type comparison rules changed, make a special case for numeric zero and empty string comparison to
+        // maintain backwards compatibility
+        if (($a === 0.0 & $b === '') || ($a === '' && $b === 0.0)) {
+            return AbstractExpression::$TRUE;
+        }
         if ($a == $b) {
             return AbstractExpression::$TRUE;
         }

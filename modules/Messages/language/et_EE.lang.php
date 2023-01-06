@@ -33,4 +33,12 @@ $mod_strings = [
     'LNK_MESSAGE_REPORTS' => 'Vaata sõnumite aruandeid',
     'LNK_IMPORT_MESSAGES' => 'Impordi sõnumid',
     'LBL_CREATED_BY' => 'Created By',
+    'LBL_LEAD_ID' => 'Müügivihje ID',
+    'LBL_LEAD_NAME' => 'Müügivihje',
+    'LBL_ACTIVITY_STATUS_TEXT' => 'Kliendipoolne vestlus',
+    'LBL_ACTIVITY_CUSTOMER' => 'Klient',
+    'LBL_ACTIVITY_FINISHED' => 'lõppenud',
+    'LBL_ACTIVITY_IN_PROGRESS' => 'pooleli',
+
+    'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Sõnumi fookuse sahtel',
 ];

@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Camps auditats en aquest mòdul:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'No hi ha camps auditats en aquest mòdul',
     'LBL_CHANGE_LOG' => 'Registre d&#39;auditories',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Quan es guarden camps de moneda auditats en una moneda no definida per defecte al sistema, el registre de canvis mostra els valors antics i nous en la monea per defecte convertida i definida pel sistema.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Quan es guarden camps de moneda auditats en una moneda no definida per defecte al sistema, el registre de canvis mostra els valors antics i nous en la monea per defecte convertida i definida pel sistema.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Actualitza a',
+    'LBL_BLANK' => '-buit-',
 );

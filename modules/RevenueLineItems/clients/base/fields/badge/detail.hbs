@@ -24,6 +24,6 @@
            title="{{str def.tooltip module}}"
             {{/if}}
            name="convert_to_quote_button" track="click:convert_to_quote_button">
-            {{#if def.icon}}<i class="fa {{def.icon}}"></i>{{/if}}<span class="label label-pending label-dark-text">{{str "LBL_NOT_QUOTED" this.module}}</span></a>
+            {{#if def.icon}}<i class="{{buildIcon def.icon}}"></i>{{/if}}<span class="label label-pending label-dark-text">{{str "LBL_NOT_QUOTED" this.module}}</span></a>
     {{/if}}
 {{/if}}

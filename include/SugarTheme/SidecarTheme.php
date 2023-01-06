@@ -16,7 +16,9 @@
  * theme basis.
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
+use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
 
 /**
  * Class that provides tools for working with a theme.
@@ -137,7 +139,7 @@ class SidecarTheme
     }
 
     /**
-     * Compile a less file and save the output css file
+     * Compile a less file and save the output css file. With race condition protection
      *
      * @param string $lessFile Name of Less file to compile
      * @param bool $min True to minify the CSS
@@ -147,6 +149,48 @@ class SidecarTheme
      * @throws SugarApiExceptionError
      */
     public function compileFile($lessFile, $min = true, $writeFile = true)
+    {
+        // the key is based on the filename, cannot exceed 255 chars
+        $uniqueProcessKey = substr($lessFile, -255);
+        $systemProcessLock = new SystemProcessLock(__METHOD__, $uniqueProcessKey);
+
+        $shouldBeExecutedAnyway = $GLOBALS['current_user']->isAdmin()
+            || AccessControlManager::instance()->getAdminWork()
+            || !$writeFile;
+
+        $checkCondition = function () use ($shouldBeExecutedAnyway, $lessFile) {
+            if ($shouldBeExecutedAnyway) {
+                return true;
+            }
+            $compiledHash = $this->getCompiledHash($lessFile);
+            if (null !== $compiledHash) {
+                return false;
+            }
+
+            return true;
+        };
+
+        $longRunningFunction = function (int $attempt) use ($lessFile, $min, $writeFile) {
+            return $this->compileFileUnsafe($lessFile, $min, $writeFile);
+        };
+
+        $refuseFunction = $longRunningFunction;
+
+        // the following is designed to prevent process race conditions in a long running process
+        return $systemProcessLock->isolatedCall($checkCondition, $longRunningFunction, $refuseFunction);
+    }
+
+    /**
+     * Compile a less file and save the output css file. No race condition protection
+     *
+     * @param string $lessFile Name of Less file to compile
+     * @param bool $min True to minify the CSS
+     * @param bool $writeFile True to write the file on the file system
+     *
+     * @return mixed Plaintext CSS if writeFile is false, a hash otherwise
+     * @throws SugarApiExceptionError
+     */
+    public function compileFileUnsafe($lessFile, $min = true, $writeFile = true)
     {
         try {
             //In case we are building customer css file we need to create a temporary compiler.less
@@ -188,6 +232,12 @@ class SidecarTheme
         } catch (Exception $e) {
             throw new SugarApiExceptionError('lessc fatal error:<br />' . $e->getMessage());
         }
+    }
+
+    public function getCompiledHash(string $lessFile): ?string
+    {
+        $files = $this->retrieveCssFilesInCache();
+        return $files[$lessFile] ?? null;
     }
 
 

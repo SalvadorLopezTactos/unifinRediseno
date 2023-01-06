@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Συστήθηκε Από',
     'LBL_LIST_STATUS' => 'Κατάσταση',
     'LBL_LIST_TITLE' => 'Τίτλος',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Πρόβλεψη ενδιαφέροντος αγοράς',
+    'LBL_MARKET_SCORE' => 'Βαθμολογία αγοράς',
     'LBL_MOBILE_PHONE' => 'Κινητό Τηλέφωνο:',
     'LBL_MODULE_NAME' => 'Δυνητικοί Πελάτες',
     'LBL_MODULE_NAME_SINGULAR' => 'Δυνητικός Πελάτης',
@@ -330,4 +332,9 @@ $mod_strings = array (
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Πρόβλεψη μετατροπής δυνητικών πελατών',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Προβολή λεπτομερειών πρόβλεψης για έναν συγκεκριμένο δυνητικό πελάτη',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Ενεργοποίηση στοιχείων γραμμής εσόδων',
+    'LBL_REQUIRE_RLIS' => 'Απαιτούνται στοιχεία γραμμής εσόδων κατά τη δημιουργία νέας ευκαιρίας',
+    'LBL_COPY_DATA_RLIS' => 'Αντιγράψτε τα δεδομένα του δυνητικού πελάτη στα στοιχεία γραμμής εσόδων κατά τη δημιουργία νέας ευκαιρίας',
 );

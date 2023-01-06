@@ -128,7 +128,7 @@ $mod_strings = array (
     'LBL_BASE_RATE' => '基本利率',
 
     'LBL_QUOTA' => '定额',
-    'LBL_QUOTA_ADJUSTED' => '定额（调整后的）',
+    'LBL_QUOTA_ADJUSTED' => '调整后的配额',
 
     'LBL_FORECAST' => '销售预测',
     'LBL_COMMIT_STAGE' => '提交阶段',

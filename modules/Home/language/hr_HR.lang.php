@@ -115,9 +115,7 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar Dashlet dodan',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Promijenit će se raspored dashleta, jeste li sigurni da želite promijeniti izgled stupca?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Jeste li sigurni da želite ukloniti Sugar Dashlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nema konfigurirane nadzorne ploče',
   'LBL_NO_DASHLETS_CONFIGURED' => 'Nema konfiguriranog Dashleta',
-  'LBL_CREATE_DASHBOARD_LINK' => 'Stvori nadzornu ploču',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web-stranica',
   'LBL_DASHLET_WEBPAGE_DESC' => 'Web-stranica',
@@ -215,7 +213,6 @@ $mod_strings = array (
   'LBL_SOURCE_CODE' => 'Izvorni kod',
   'LBL_SOURCE_SUGAR' => 'Sugar - najpopularnija aplikacija za automatizaciju prodaje koju je stvorila tvrtka SugarCRM Inc.',
   'LBL_SOURCE_XTEMPLATE' => 'XTemplate - mehanizam za predloške PHP-a koji je stvorio BarnabÃ¡s Debreceni',
-  'LBL_SOURCE_NUSOAP' => 'NuSOAP - skup klasa PHP-a koje razvojnim programerima omogućavaju stvaranje i upotrebu web-servisa, a koje je stvorila tvrtka NuSphere i Dietrich Ayala',
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - kalendar za unos datuma koji je stvorio Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - biblioteka za stvaranje dokumenata u formatu PDF koju je stvorio Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - implementacija poslužitelja WebDAV u PHP-u.',
@@ -270,4 +267,6 @@ $mod_strings = array (
     'LBL_HELP_RECORD' => 'Pomoć prikazuje određene informacije o modulu koji prikazujete, navodi detaljne korake za izvršavanje nekih radnji u modulu i usmjerava vas kako pronaći detaljnije informacije i podršku.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtar',
+
+    'LBL_ABOUT_VERSION' => 'Upotrebljavate verziju {{version}} sa sljedećim licencama:',
 );

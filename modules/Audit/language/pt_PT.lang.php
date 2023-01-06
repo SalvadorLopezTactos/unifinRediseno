@@ -20,5 +20,9 @@ $mod_strings = array(
     'LBL_AUDITED_FIELDS' => 'Campos auditados neste módulo:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'Não existem campos auditados neste módulo',
     'LBL_CHANGE_LOG' => 'Registo de Auditorias',
-    'LBL_CURRENCY_CONVERSION_TEXT' => 'Quando os campos de moeda auditada são guardados numa moeda que não pertença a um sistema padrão, o registo de alterações mostra o valor antigo e o valor novo na moeda convertida predefinida pelo sistema.'
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Quando os campos de moeda auditada são guardados numa moeda que não pertença a um sistema padrão, o registo de alterações mostra o valor antigo e o valor novo na moeda convertida predefinida pelo sistema.',
+
+    // Activity Timeline
+    'LBL_UPDATE_TO_MODULE' => 'Actualizar para',
+    'LBL_BLANK' => '-em branco-',
 );

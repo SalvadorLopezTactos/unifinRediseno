@@ -36,6 +36,7 @@ $mod_strings = array (
     'LBL_CONTACT_ID'   => 'معرّف جهة الاتصال',
     'LBL_DESCRIPTION_INFORMATION' => 'معلومات الوصف',
     'LBL_DESCRIPTION' => 'الوصف:',
+    'LBL_INTERNAL_NOTES' => 'ملاحظات داخلية:',
     'LBL_STATUS' => 'الحالة:',
     'LBL_DIRECTION' => 'الاتجاه:',
     'LBL_DATE' => 'تاريخ البدء:',
@@ -105,7 +106,6 @@ $mod_strings = array (
     'NOTICE_DURATION_TIME' => 'يجب أن يكون وقت المدة أكبر من 0',
     'LBL_CALL_INFORMATION' => 'نظرة عامة',
     'LBL_REMOVE' => 'تذكير',
-    'LBL_ACCEPT_STATUS' => 'قبول الحالة',
     'LBL_ACCEPT_LINK' => 'قبول الارتباط',
     //For export labels
     'LBL_PARENT_ID' => 'معرّف الأصل',
@@ -154,6 +154,9 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'المكالمة:',
     'LBL_CALL_RECORDING_URL' => 'عنوان URL التسجيل',
     'LBL_CALL_RECORDING' => 'التسجيل',
+
+    'LBL_LEAD_ID' => 'معرّف العميل المتوقع',
+    'LBL_LEAD_NAME' => 'العميل المتوقع',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'تم إنشاء {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a> بنجاح.',

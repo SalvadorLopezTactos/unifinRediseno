@@ -82,6 +82,10 @@
                 previewLayout.removeComponent(index);
             }
 
+            if (app.controller.context.get('layout') == 'portaltheme-config' && app.metadata.portalModules) {
+                metadata.preview.module = app.metadata.portalModules[0];
+            }
+
             var contextDef,
                 component = {
                     label: app.lang.get(metadata.label, metadata.preview.module),
@@ -109,7 +113,7 @@
             previewLayout.initComponents([
                 {
                     layout: {
-                        type: 'dashlet',
+                        type: 'dashlet-grid-wrapper',
                         label: app.lang.get(metadata.preview.label || metadata.label, metadata.preview.module),
                         preview: true,
                         components: [
@@ -203,6 +207,7 @@
 
                 var filterModules = filter.module || [parentModule];
                 var filterViews = filter.view || [parentView];
+                let filterLicenses = filter.licenseType ? filter.licenseType : app.user.get('licenses');
 
                 if (_.isString(filterModules)) {
                     filterModules = [filterModules];
@@ -211,8 +216,15 @@
                     filterViews = [filterViews];
                 }
 
+                if (_.isString(filterLicenses)) {
+                    filterLicenses = [filterLicenses];
+                }
+
                 // if the filter is matched, then this will be true
                 var inModuleAndView = _.contains(filterModules, parentModule) && _.contains(filterViews, parentView);
+
+                // check if we got the right license
+                let hasValidLicense = filterLicenses ? app.user.hasLicense(filterLicenses) : true;
 
                 // also allow blacklisting in addition to whitelisting
                 var blacklisted = false;
@@ -229,7 +241,7 @@
                     blacklisted = _.contains(filterModules, parentModule) || _.contains(filterViews, parentView);
                 }
 
-                return inModuleAndView && !blacklisted;
+                return inModuleAndView && hasValidLicense && !blacklisted;
             })
             .value();
 

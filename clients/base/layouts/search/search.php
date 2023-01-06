@@ -11,72 +11,87 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['search'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['base']['layout']['search'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'search-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'search-list',
                                     'primary' => true,
-                                ),
-                                array(
-                                    'view' => array(
+                                ],
+                                [
+                                    'view' => [
                                         'name' => 'list-bottom',
                                         'label' => 'LBL_SHOW_MORE_RESULTS',
                                         'css_class' => 'search-more-results',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'type' => 'base',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'type' => 'tabbed-layout',
                             'name' => 'dashboard-pane',
+                            'label' => 'LBL_DASHBOARD',
                             'css_class' => 'dashboard-pane',
-                            'components' => array(
-                                array(
-                                    'layout' => array(
-                                        'type' => 'dashboard',
-                                        'last_state' => array(
-                                            'id' => 'last-visit',
-                                        ),
-                                    ),
-                                    'context' => array(
-                                        'forceNew' => true,
-                                        'module' => 'Home',
-                                    ),
-                                    'loadModule' => 'Dashboards',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'type' => 'base',
+                            'notabs' => true,
+                            'components' => [
+                                [
+                                    'layout' => [
+                                        'type' => 'base',
+                                        'label' => 'LBL_DASHBOARD',
+                                        'css_class' => 'dashboard-pane',
+                                        'components' => [
+                                            [
+                                                'layout' => [
+                                                    'label' => 'LBL_DASHBOARD',
+                                                    'type' => 'dashboard',
+                                                    'last_state' => [
+                                                        'id' => 'last-visit',
+                                                    ],
+                                                ],
+                                                'context' => [
+                                                    'forceNew' => true,
+                                                    'module' => 'Home',
+                                                ],
+                                                'loadModule' => 'Dashboards',
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'type' => 'tabbed-layout',
                             'name' => 'preview-pane',
+                            'label' => 'LBL_PREVIEW',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'notabs' => false,
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                    'label' => 'preview',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -148,6 +148,7 @@ $mod_strings = array(
     'LBL_WORKSHEET' => 'Työkirja',
     'LBL_PURCHASED_LINE_ITEMS' => 'Ostojen tuoterivit',
 
+    'LBL_FORECASTED_LIKELY' => 'Ennuste: todennäköinen',
     'LBL_RENEWAL' => 'Uusinta',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Uusintamahdollisuudet',
     'LBL_RENEWAL_PARENT' => 'Päätason myyntimahdollisuus',
@@ -165,11 +166,14 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'Tuoterivien yhteismäärä',
     'LBL_CLOSED_RLIS' => 'Suljettujen tuoterivien määrä',
+    'LBL_CLOSED_WON_RLIS' => 'Suljettujen voitettujen tuoterivien määrä',
     'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Tuoterivien määrä, joissa avoin palvelu ja joustava kesto',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Et voi poistaa myyntimahdollisuuksia joissa on suljettuja tuoterivejä',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Valituista tietueista yhdessä tai useammassa on suljettuja tuoterivejä, eikä niitä voi poistaa.',
     'LBL_INCLUDED_RLIS' => 'Mukana olevien tuoterivien #',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Päivitys avoinna',
+    'LBL_CASCADE_RLI_EDIT' => 'Päivitä avoinna olevat tuoterivit',
+    'LBL_CASCADE_RLI_CREATE' => 'Määritä tuoteriveille',
     'LBL_SERVICE_START_DATE_INVALID' => 'Avointen lisätuoterivien palvelun aloituspäivä ei voi olla palvelun päättymispäivää myöhemmin.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Tarjoukset',
@@ -219,7 +223,7 @@ $mod_strings = array(
 - Muita toimintoja löytyy Muokkaa-painikkeen oikealla puolella olevasta Toiminnot-pudotusvalikosta.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne. 
+    'LBL_HELP_CREATE' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne.
 
 Luo {{module_name}} seuraavasti:
 1. Syötä kenttiin haluamasi arvot.
@@ -239,7 +243,10 @@ Luo {{module_name}} seuraavasti:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Tiimini myyntimahdollisuudet",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Moduulin {{fieldName}} nimeä ei voida muuttaa, koska tässä moduulissa {{moduleSingular}} ei ole avoinna olevia tuoterivejä.',
-    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Myyntimahdollisuuden yhteydet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Myyntimahdollisuuden aikajana',
+
+    'LBL_CASCADE_SERVICE_WARNING' => ' ei voida määrittää millekään näille tuoteriveille, koska ne eivät ole palveluita. Haluatko jatkaa luontia?',
+    'LBL_CASCADE_DURATION_WARNING' => ' ei voida määrittää millekään näille tuoteriveille, koska niiden kestot on lukittu. Haluatko jatkaa luontia?',
 
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Myyntimahdollisuuden sulkeutumisennuste',

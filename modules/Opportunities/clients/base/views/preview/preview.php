@@ -49,6 +49,13 @@ $viewdefs['Opportunities']['base']['view']['preview'] = array(
                     'dismiss_label' => true,
                 ),
                 [
+                    'name' => 'is_escalated',
+                    'type' => 'badge',
+                    'badge_label' => 'LBL_ESCALATED',
+                    'warning_level' => 'important',
+                    'dismiss_label' => true,
+                ],
+                [
                     'name' => 'renewal',
                     'type' => 'renewal',
                     'dismiss_label' => true,

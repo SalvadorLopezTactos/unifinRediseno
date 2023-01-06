@@ -158,6 +158,18 @@
                         return;
                     }
 
+                    let slCtx = self.closestComponent('main-pane').getComponent('record')._slCtx;
+                    if (slCtx) {
+                        slCtx.updateRelatedCollectionValues(
+                            parentModel,
+                            link,
+                            null,
+                            null,
+                            model,
+                            'add'
+                        );
+                    }
+
                     self.trigger('linked-model:create', model);
                 });
             },

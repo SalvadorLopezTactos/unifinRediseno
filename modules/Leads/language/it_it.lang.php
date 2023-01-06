@@ -136,6 +136,8 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Riferito Da',
     'LBL_LIST_STATUS' => 'Stato',
     'LBL_LIST_TITLE' => 'Funzione',
+    'LBL_MARKET_INTEREST_PREDICTION' => 'Previsione interesse di mercato',
+    'LBL_MARKET_SCORE' => 'Punteggio di mercato',
     'LBL_MOBILE_PHONE' => 'Telefono Cellulare:',
     'LBL_MODULE_NAME' => 'Lead',
     'LBL_MODULE_NAME_SINGULAR' => 'Lead',
@@ -323,4 +325,9 @@ Per creare un {{module_name}}:
     // AI Predict
     'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Previsione di conversione dei lead',
     'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Visualizza dettagli di previsione per un lead specifico',
+
+    // Admin convert lead layout
+    'LBL_ENABLE_RLIS' => 'Abilita elementi ricavi',
+    'LBL_REQUIRE_RLIS' => 'Richiedi elementi riga ricavi durante la creazione di una nuova opportunità',
+    'LBL_COPY_DATA_RLIS' => 'Copia i dati del lead nelle voci dei ricavi durante la creazione di una nuova opportunità',
 );

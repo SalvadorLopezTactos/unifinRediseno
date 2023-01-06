@@ -53,6 +53,14 @@ $viewdefs['base']['view']['dashablelist'] = array(
                     'hasBlank' => true,
                     'options' => array('' => ''),
                 ),
+                [
+                    'name' => 'freeze_first_column',
+                    'label' => 'LBL_DASHLET_FREEZE_FIRST_COLUMN',
+                    'type' => 'bool',
+                    'span' => 12,
+                    'default' => true,
+                    'showOnConfig' => 'allowFreezeFirstColumn',
+                ],
                 array(
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',

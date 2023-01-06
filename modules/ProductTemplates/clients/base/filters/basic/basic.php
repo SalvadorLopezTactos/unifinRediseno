@@ -46,5 +46,18 @@ $viewdefs['ProductTemplates']['base']['filter']['basic'] = array(
             ),
             'editable' => false,
         ),
+        [
+            'id' => 'product_template_status',
+            'name' => 'LBL_FILTER_ACTIVE_STATUS',
+            'filter_definition' => [
+                [
+                    'active_status' => [
+                        '$in' => [],
+                    ],
+                ],
+            ],
+            'editable' => true,
+            'is_template' => true,
+        ],
     ),
 );

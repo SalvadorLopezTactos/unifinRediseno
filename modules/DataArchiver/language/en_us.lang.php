@@ -40,4 +40,9 @@ $mod_strings = array (
     'LBL_PROCESS_TYPE_ARCHIVE' => 'Archive',
     'LBL_PROCESS_TYPE_DELETE' => 'Hard Delete',
     'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE' => 'Archive Runs',
+    'LBL_ARCHIVER_WARNING_TITLE' => 'Warning',
+    'LBL_ARCHIVER_WARNING' => 'It is recommended to perform this action during low usage or off-hours '
+        . 'as it can affect system performance. Are you sure you want to execute this action now?',
+
+    'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Archiver for {{moduleName}} module must have {{fieldName}} set as filter',
 );

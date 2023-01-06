@@ -28,11 +28,6 @@
     arrow: '',
 
     /**
-     * What was the first total we got for a given type
-     */
-    initial_total: '',
-
-    /**
      * The total we want to display
      */
     total: 0,
@@ -57,10 +52,18 @@
      */
     total_field: '',
 
+    cteTag: '.forecast-value-input',
+
+    /**
+     * When true, the field will not be editable
+     */
+    disableCTE: false,
+
     /**
      * @inheritdoc
      */
     initialize: function(options) {
+        this.plugins = _.union(this.plugins || [], ['ClickToEdit']);
         this._super('initialize', [options]);
 
         this.total_field = this.total_field || this.name;
@@ -73,27 +76,82 @@
 
         // before we try and render, lets see if we can actually render this field
         this.before('render', function() {
-            if (!this.hasAccess) {
-                return false;
-            }
-            // adjust the arrow
-            this.arrow = this._getArrowIconColorClass(this.total, this.initial_total);
-            this.checkIfNeedsCommit();
-            return true;
+            return this.hasAccess;
         }, this);
         //if user resizes browser, adjust datapoint layout accordingly
         $(window).on('resize.datapoints', _.bind(this.resize, this));
-        this.on('render', function() {
+        this.listenTo(this, 'render', function() {
             if (!this.hasAccess) {
                 return false;
             }
             this.resize();
             return true;
-        }, this);
+        });
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Formats the value as a number string
+     */
+    format: function(value) {
+        if (this.tplName === 'edit') {
+            return app.utils.formatNumberLocale(value);
+        }
+        return this._super('format', [value]);
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Unformats the value from a number string
+     */
+    unformat: function(value) {
+        let unformattedValue;
+        if (this.tplName === 'edit') {
+            unformattedValue = app.utils.unformatNumberStringLocale(value);
+        } else {
+            unformattedValue = app.currency.unformatAmountLocale(value);
+        }
+
+        if (_.isFinite(unformattedValue)) {
+            var precision = this.def && this.def.precision || 6;
+            return app.math.round(unformattedValue, precision, true);
+        }
+
+        return value;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        // Set the correct arrow style depending on the current Forecast state
+        this.arrow = this._getArrowIconColorClass(this.model.get(this.name), this.model.getSynced(this.name));
+        this.commitmentLabel = this.previous_type === 'manager' ? 'LBL_TEAM_COMMITMENT' : 'LBL_COMMITMENT';
+        this.totalLabel = this.previous_type === 'manager' ? 'LBL_ADJUSTED_TOTAL' : 'LBL_FORECASTED';
+        this.checkEditAccess();
+
+        this._super('_render');
+    },
+
+    /**
+     * If a user is viewing someone else's forecast page, it will disable the user's
+     * ability to edit the commitment value.
+     */
+    checkEditAccess: function() {
+        if (this.context && app.user && this.context.get('selectedUser') &&
+            this.context.get('selectedUser').id === app.user.get('id')) {
+            this.disableCTE = false;
+        } else {
+            this.disableCTE = true;
+        }
     },
 
     /**
      * Check to see if the worksheet needs commit
+     *
+     * @deprecated since 12.0, this is no longer used
      */
     checkIfNeedsCommit: function() {
         // if the initial_total is an empty string (default value) don't run this
@@ -101,18 +159,6 @@
 
             this.context.trigger('forecasts:worksheet:needs_commit', null);
         }
-    },
-
-    /**
-     * @inheritdoc
-     */
-    _dispose: function() {
-        $(window).off('resize.datapoints');
-
-        // make sure we've cleared the resize timer before navigating away
-        clearInterval(this.resizeDetectTimer);
-
-        this._super('_dispose');
     },
 
     /**
@@ -162,16 +208,18 @@
                 this.view.$('.info .last-commit .datapoints div.datapoint').height(lastCommitHeight);
             }
             //adjust height of last commit datapoints
-            var index = this.$el.index(),
-                width = this.$('div.datapoint').outerWidth(),
-                datapointLength = this.view.$('.info .last-commit .datapoints div.datapoint').length,
-                sel = this.view.$('.last-commit .datapoints div.datapoint:nth-child(' + index + ')');
+            let index = this.$el.index();
+            let width = this.$('div.datapoint').innerWidth(); // USE innerWidth?
+            let datapointLength = this.view.$('.info .last-commit .datapoints div.datapoint').length;
+            let sel = this.view.$('.last-commit .datapoints div.datapoint:nth-child(' + index + ')');
+
             if (datapointLength > 2 && index <= 2 || datapointLength == 2 && index == 1) {
                 // RTL was off 1px
-                var widthMod = (app.lang.direction === 'rtl') ? 7 : 8;
+                var widthMod = (app.lang.direction === 'rtl') ? 7 : 16;
                 $(sel).width(width - widthMod);
             } else {
-                $(sel).width(width);
+                // Minus 16 for padding-x 0.5rem (8px)
+                $(sel).width(width - 16);
             }
         }
     },
@@ -198,22 +246,42 @@
             return;
         }
 
-        this.context.on('change:selectedUser change:selectedTimePeriod', function() {
-            this.initial_total = '';
+        this.listenTo(this.context, 'change:selectedUser change:selectedTimePeriod', function() {
             this.total = 0;
             this.arrow = '';
-        }, this);
+        });
 
-        // any time the main forecast collection is reset this contains the commit history
-        this.collection.on('reset', this._onCommitCollectionReset, this);
-        this.context.on('forecasts:worksheet:totals', this._onWorksheetTotals, this);
-        this.context.on('forecasts:worksheet:committed', this._onWorksheetCommit, this);
+        this.listenTo(this.context, 'forecasts:commit-models:loaded', this._handleCommitModelsLoaded);
+        this.listenTo(this.context, 'forecasts:worksheet:totals', this._onWorksheetTotals);
+        this.listenTo(this.context, 'forecasts:worksheet:committed', this._onWorksheetCommit);
+        this.listenTo(this.model, `change:${this.name}`, this._handleValueChanged);
+    },
+
+    /**
+     * When the value is changed from its synced/initial value, signal the
+     * context so it can enable the cancel/commit buttons properly
+     *
+     * @private
+     */
+    _handleValueChanged: function() {
+        let syncedValue = this.model.getSynced(this.name);
+        let change = this.model.changedAttributes()[this.name];
+        if (!_.isEqual(syncedValue, change)) {
+            this.context.trigger('forecasts:datapoint:changed');
+        }
+
+        // Render is normally bound to data change on the model from
+        // bindDataChange in field.js, but since the model can change
+        // throughout the life of this field we need to render here
+        this.render();
     },
 
     /**
      * Collection Reset Handler
      * @param {Backbone.Collection} collection
      * @private
+     *
+     * @deprecated since 12.0 this is no longer used
      */
     _onCommitCollectionReset: function(collection) {
         // get the first line
@@ -233,6 +301,10 @@
      * @private
      */
     _onWorksheetTotals: function(totals, type) {
+        if (this.disposed) {
+            return;
+        }
+
         var field = this.total_field;
         if (type == 'manager') {
             // split off '_case'
@@ -240,10 +312,7 @@
         }
         this.total = totals[field];
         this.previous_type = type;
-
-        if (!this.disposed) {
-            this.render();
-        }
+        this.render();
     },
 
     /**
@@ -254,17 +323,11 @@
      * @private
      */
     _onWorksheetCommit: function(type, forecast) {
-        var field = this.total_field;
-        if (type == 'manager') {
-            // split off '_case'
-            field = field.split('_')[0] + '_adjusted';
+        if (this.disposed) {
+            return;
         }
-        this.total = forecast[field];
-        this.initial_total = forecast[field];
         this.arrow = '';
-        if (!this.disposed) {
-            this.render();
-        }
+        this.render();
     },
 
     /**
@@ -276,16 +339,36 @@
      * @private
      */
     _getArrowIconColorClass: function(newValue, oldValue) {
-        var cls = '';
+        // Make sure newValue and oldValue are numbers. If not, default them
+        // to 0
+        let newValueParsed =  parseFloat(newValue);
+        let newValueFinal = !_.isNaN(newValueParsed) ? newValueParsed : 0;
+        let oldValueParsed = parseFloat(oldValue);
+        let oldValueFinal = !_.isNaN(oldValueParsed) ? oldValueParsed : 0;
 
-        // Convert to big number first before any comparisons are done
-        newValue = Big(newValue || 0);
-        oldValue = Big(oldValue || 0);
+        // Convert the values to Bigs first before any comparisons are done
+        let newValueBig = Big(newValueFinal);
+        let oldValueBig = Big(oldValueFinal);
 
-        // figure out if it changed here based
-        if (app.math.isDifferentWithPrecision(newValue, oldValue)) {
-            cls = (newValue.gt(oldValue)) ? ' fa-arrow-up font-green' : ' fa-arrow-down font-red';
+        // Determine which class the arrow icon should use
+        let arrowIconClass = '';
+        if (app.math.isDifferentWithPrecision(newValueBig, oldValueBig)) {
+            arrowIconClass = newValueBig.gt(oldValueBig) ? ' sicon-arrow-up font-green' : ' sicon-arrow-down font-red';
         }
-        return cls;
+        return arrowIconClass;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        // Clear any listeners
+        $(window).off('resize.datapoints');
+        this.stopListening();
+
+        // make sure we've cleared the resize timer before navigating away
+        clearInterval(this.resizeDetectTimer);
+
+        this._super('_dispose');
     }
 })

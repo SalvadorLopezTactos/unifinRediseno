@@ -54,11 +54,11 @@
         }
         var $el = this.layout.$('i[data-action=loading]');
         if (startLoading) {
-            $el.removeClass('fa-cog');
-            $el.addClass('fa-refresh fa-spin');
+            $el.removeClass('sicon-settings');
+            $el.addClass('sicon-refresh sicon-is-spinning');
         } else {
-            $el.removeClass('fa-refresh fa-spin');
-            $el.addClass('fa-cog');
+            $el.removeClass('sicon-refresh sicon-is-spinning');
+            $el.addClass('sicon-settings');
         }
     }
 })

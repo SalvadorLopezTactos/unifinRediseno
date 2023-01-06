@@ -92,7 +92,5 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Flux de lucru'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tip',
 
-  // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Notă:</strong> Funcționalitatea opțiunilor Flux de lucru Sugar și Management Flux de Lucru este în modul de întreținere. Clienții ediției Sugar Enterprise ar trebui să înceapă să utilizeze funcționalitatea furnizată de SugarBPM<sup class="trademark">TM</sup>.',
 );
 

@@ -19,6 +19,11 @@ $viewdefs['base']['view']['product-catalog-dashlet'] = array(
             ),
             'preview' => array(
             ),
+            'filter' => [
+                'blacklist' => [
+                    'module' => 'Administration',
+                ],
+            ],
         ),
     ),
 );

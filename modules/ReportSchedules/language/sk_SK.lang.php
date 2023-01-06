@@ -26,4 +26,5 @@ $mod_strings = array(
     'LBL_THIS_REPORT_SCHEDULE' => 'Tento plán hlásení',
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Informačný panel so záznamom plánov hlásení',
+    'LBL_FILE_TYPE' => 'Typ(-y) súboru',
 );

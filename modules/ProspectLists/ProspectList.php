@@ -262,7 +262,7 @@ class ProspectList extends SugarBean {
         $query = "SELECT count(*) AS num FROM prospect_lists_prospects WHERE prospect_list_id= ? AND deleted = '0'";
         $count = $this->db->getConnection()
                     ->executeQuery($query, array($this->id))
-                    ->fetchColumn();
+                    ->fetchOne();
         return $count;
 	}
 

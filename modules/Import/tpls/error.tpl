@@ -26,7 +26,6 @@
         cancelLBL = '{$CANCELLABEL}';
     {/if}
 
-{literal}
     //function called when 'start over' button is pressed
     var chooseToStartOver = function() {
         //hide the modal and redirect window to previous step
@@ -60,7 +59,6 @@
         draggable: true,
         buttons: importButtons
     });
-{/literal}
     //display the window
     ImportErrorBox.setHeader(cnfgtitle);
     ImportErrorBox.setBody(modalBod);

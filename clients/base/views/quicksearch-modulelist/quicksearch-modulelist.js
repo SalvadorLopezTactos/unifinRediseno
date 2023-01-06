@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    className: 'table-cell quicksearch-modulelist-wrapper',
+    className: 'quicksearch-modulelist-wrapper',
     plugins: ['Dropdown'],
     dropdownItemSelector: '[data-action=select-module], [data-action=select-all]',
 

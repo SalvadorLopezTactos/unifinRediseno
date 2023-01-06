@@ -37,6 +37,7 @@ $mod_strings = array(
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID adrese e-pošte na koje se šalje odgovor',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adresa e-pošte na koje se šalje odgovor',
     'LBL_PRIMARY_TEAM' => 'Primarni tim',
+    'LBL_PREFERRED_SENDING_ACCOUNT' => 'Preferirani račun pošiljatelja',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za postavke e-pošte',
 );

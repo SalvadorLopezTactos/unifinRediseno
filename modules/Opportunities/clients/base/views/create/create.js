@@ -46,6 +46,13 @@
      */
     hasRliAccess: true,
 
+    /**
+     * Flag to store if the user has confirmed the save if there are validation warnings
+     *
+     * @property {boolean}
+     */
+    hasConfirmedSave: false,
+
 
     /**
      * If subpanel models are valid
@@ -100,13 +107,7 @@
         // override this.model.doValidate() to display error if subpanel model validation failed
         this.model.trigger('validation:start');
         this.model.isValidAsync(this.getFields(this.module), _.bind(function(isValid, errors) {
-            if (this.validSubpanelModels && isValid) {
-                this.model.trigger('validation:success');
-            } else if (!this.validSubpanelModels) {
-                this.model.trigger('error:validation');
-            }
-            this.model.trigger('validation:complete', this.model._processValidationErrors(errors));
-            callback(!isValid);
+            this._handleValidationComplete(isValid, errors, callback);
         }, this));
     },
 
@@ -140,6 +141,147 @@
         }
     },
 
+    /**
+     * When validation is complete, see if there are any cascade warnings to show
+     * @param isValid
+     * @param errors
+     * @param callback
+     * @private
+     */
+    _handleValidationComplete: function(isValid, errors, callback) {
+        let hasRlis = this.viewBy === 'RevenueLineItems' && this.hasRliAccess;
+        let cascadeWarning = this.validateCascadeFields();
+        if (this.validSubpanelModels &&
+            isValid &&
+            hasRlis &&
+            cascadeWarning &&
+            (!this._isOnLeadConvert() || !this.hasConfirmedSave)
+        ) {
+            app.alert.show('delete_recurrence_confirmation', {
+                title: app.lang.get('LBL_WARNING'),
+                level: 'confirmation',
+                messages: cascadeWarning,
+                onConfirm: () => {
+                    this.hasConfirmedSave = true;
+                    this.model.trigger('validation:success');
+                    this.model.trigger('validation:complete', this.model._processValidationErrors(errors));
+                    callback(!isValid);
+                },
+                onCancel: () => {
+                    this.enableButtons();
+                }
+            });
+        } else {
+            if (this.validSubpanelModels && isValid) {
+                this.model.trigger('validation:success');
+            } else if (!this.validSubpanelModels) {
+                this.model.trigger('error:validation');
+            }
+            this.model.trigger('validation:complete', this.model._processValidationErrors(errors));
+            callback(!isValid);
+        }
+    },
+
+
+    /**
+     * Checks if the Opp create view is on the leads convert layout
+     * @return {boolean}
+     * @private
+     */
+    _isOnLeadConvert: function() {
+        return this.context && this.context.parent && this.context.parent.get('convertModuleList');
+    },
+
+    /**
+     * Gets the RLIs under this Opp
+     * @return {*}
+     * @private
+     */
+    _getRliCollection: function() {
+        let rliContext = this.context.getChildContext({link: 'revenuelineitems'});
+        rliContext.prepare();
+        return rliContext.get('collection');
+    },
+
+    /**
+     * Returns true if every RLI is not marked as a service
+     * @param rliCollection
+     * @return {boolean}
+     * @private
+     */
+    _checkForNonServiceRlis: function(rliCollection) {
+        return rliCollection.models.every(model => !app.utils.isTruthy(model.get('service')));
+    },
+
+    /**
+     * Returns true if every RLI has an uneditable duration
+     * @param rliCollection
+     * @return {boolean}
+     * @private
+     */
+    _checkForLockedDurationServiceRlis: function(rliCollection) {
+        let serviceRlis = rliCollection.models.filter(model => app.utils.isTruthy(model.get('service')));
+        if (serviceRlis.length === 0) {
+            return false;
+        }
+        return serviceRlis.every(model => {
+            return !_.isEmpty(model.get('add_on_to_id')) || app.utils.isTruthy(model.get('lock_duration'));
+        });
+    },
+
+    /**
+     * Checks if there are any warnings to show for the cascade fields. Returns the message if a warning exists,
+     * or null otherwise.
+     * @return {null|string}
+     */
+    validateCascadeFields: function() {
+        if (this.viewBy !== 'RevenueLineItems' || !this.hasRliAccess) {
+            return null;
+        }
+
+        let rliCollection = this._getRliCollection();
+        if (_.isEmpty(rliCollection)) {
+            return null;
+        }
+
+        let durationFields = ['service_duration_value', 'service_duration_unit'];
+        let durationFieldsEmpty = durationFields.every(field => !this.model.get(field));
+        let startDateEmpty = _.isEmpty(this.model.get('service_start_date'));
+        let durationChecked = app.utils.isTruthy(this.model.get('service_duration_cascade_checked'));
+        let startDateChecked = app.utils.isTruthy(this.model.get('service_start_date_cascade_checked'));
+
+        if (this._checkForNonServiceRlis(rliCollection)) {
+            let fieldsWithErrors = [];
+            if (!durationFieldsEmpty && durationChecked) {
+                fieldsWithErrors.push('LBL_SERVICE_DURATION');
+            }
+            if (!startDateEmpty && startDateChecked) {
+                fieldsWithErrors.push('LBL_SERVICE_START_DATE');
+            }
+            if (!_.isEmpty(fieldsWithErrors)) {
+                return this._buildCascadeWarning(fieldsWithErrors, 'LBL_CASCADE_SERVICE_WARNING');
+            }
+        }
+
+        if (this._checkForLockedDurationServiceRlis(rliCollection) && !durationFieldsEmpty && durationChecked) {
+            return this._buildCascadeWarning(['LBL_SERVICE_DURATION'], 'LBL_CASCADE_DURATION_WARNING');
+        }
+
+        return null;
+    },
+
+    /**
+     * Builds the cascade field warnings from the provided field labels
+     * @param fieldLabels
+     * @param baseLabel
+     * @return {string}
+     * @private
+     */
+    _buildCascadeWarning: function(fieldLabels, baseLabel) {
+        let translatedFieldLabels = fieldLabels.map(fieldLabel => app.lang.get(fieldLabel, 'Opportunities'));
+        let andLabel = app.lang.get('LBL_AND').toLowerCase().trim();
+        return translatedFieldLabels.join(` ${andLabel} `) + app.lang.get(baseLabel, 'Opportunities');
+    },
 
     /**
      * Custom logic to make sure that none of the rli records have changed

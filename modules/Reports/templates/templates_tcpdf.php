@@ -11,10 +11,9 @@
  */
 
 
-
-function preprocess($type = NULL, $reporter){
-    $pdf = SugarpdfFactory::loadSugarpdf($type, "Reports", $reporter, array());
-    return $pdf;
+function preprocess(string $type, Report $reporter): Sugarpdf
+{
+    return SugarpdfFactory::loadSugarpdf($type, "Reports", $reporter, array());
 }
 
 function process($pdf, $reportname, $stream){

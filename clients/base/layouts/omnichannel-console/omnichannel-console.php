@@ -26,4 +26,7 @@ $viewdefs['base']['layout']['omnichannel-console'] = [
             'layout' => 'omnichannel-dashboard-switch',
         ],
     ],
+    'last_state' => [
+        'id' => 'omnichannel-console',
+    ],
 ];

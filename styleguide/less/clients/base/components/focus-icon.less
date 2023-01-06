@@ -10,14 +10,28 @@
   // Focus icon and hover
   .focus-icon {
     display: block;
-    background-image: url("@{baseUrl}/img/icon_focus.svg");
-    background-repeat: no-repeat;
-    width: 18px;
-    height: 18px;
+    padding: 3px;
+    height: 12px;
+    width: 12px;
 
     &:hover {
-      background-image: url("@{baseUrl}/img/icon_focus_hover.svg");
       cursor: pointer;
+      color: @sicon-hover-color;
+    }
+  }
+}
+
+// Improved accessibility for keyboard navigation
+.relate-field-container {
+  padding: 2px;
+
+  &:focus-within {
+    .focus-icon-container:not(.hide) {
+      display: block;
+
+      .focus-icon:focus-within {
+        color: @sicon-hover-color;
+      }
     }
   }
 }
@@ -55,12 +69,11 @@ table.search-and-select {
   &[data-type="relate"] {
     .relate-field-container {
       display: flex;
+      align-items: center;
 
       .focus-icon-container {
         margin-left: 10px;
         margin-right: 10px;
-        width: 18px;
-        height: 18px;
       }
     }
   }
@@ -92,6 +105,11 @@ td {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
+
+      .parent_avatar {
+        margin-right: 2px;
+      }
 
       .focus-icon-container {
         margin-left: 10px;
@@ -119,12 +137,11 @@ td {
       &[data-type="relate"] {
         .relate-field-container {
           display: flex;
+          align-items: center;
 
           .focus-icon-container {
             margin-left: 10px;
             margin-right: 10px;
-            width: 18px;
-            height: 18px;
           }
         }
       }
@@ -132,6 +149,87 @@ td {
       &:hover {
         .focus-icon-container:not(.hide) {
           display: block;
+        }
+      }
+    }
+  }
+}
+
+// Tabbed dashlet styling
+.tabbed-dashlet-list-item {
+  .details {
+    .name {
+      .tabbed-dashlet-field {
+        &[data-fieldname="name"] {
+          .relate-field-container {
+            padding: 0;
+            display: flex;
+            align-items: center;
+
+            .focus-icon-container {
+              margin-left: 10px;
+              margin-right: 10px;
+
+              .focus-icon {
+                padding: 0;
+              }
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .focus-icon-container:not(.hide) {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// Purchase History dashlet styling
+.purchase-history {
+  .purchase-name,
+  .pli-name {
+    &[data-fieldname="name"] {
+      .relate-field-container {
+        padding: 0;
+        display: flex;
+        align-items: center;
+
+        .focus-icon-container {
+          margin-left: 10px;
+          margin-right: 10px;
+
+          .focus-icon {
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      .focus-icon-container:not(.hide) {
+        display: block;
+      }
+    }
+  }
+
+  .pli-name {
+    &[data-fieldname="name"] {
+      .relate-field-container {
+        justify-content: flex-end;
+        padding-right: 32px;
+
+        .focus-icon-container {
+          position: relative;
+          right: -32px;
+        }
+      }
+
+      &:hover {
+        .date-name-link {
+          margin-right: -32px;
         }
       }
     }

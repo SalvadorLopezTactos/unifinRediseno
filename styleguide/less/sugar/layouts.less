@@ -10,8 +10,8 @@
 
 // Fluid layouts (left aligned, with sidebar, min- & max-width content)
 .container-fluid {
-  padding-right: @gridGutterWidth;
-  padding-left: @gridGutterWidth;
+  margin-left: @gridGutterWidth;
+  margin-right: @gridGutterWidth;
   .clearfix();
 }
 
@@ -26,7 +26,7 @@
   width: 100%;
   top: 0;
   right: 0;
-  bottom: 44px;
+  bottom: 1.875rem;
   left: 0;
   margin: 0;
   padding: 0;
@@ -36,7 +36,7 @@
 
 #content:empty,
 .nprogress-busy #content {
-  background: none;
+  background: @contentLoadingBackground;
 }
 
 .main-pane {
@@ -45,15 +45,13 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-top: 0 !important;
-  background: @white;
 
-  .list-view {
-    overflow-y: auto;
-    width: 100%;
+  &:not(.bg-transparent) {
+    .bg-primary-content-background();
   }
 
-  .padded {
-    padding: 20px;
+  .list-view {
+    width: 100%;
   }
 
   &.main-pane.span12 {
@@ -61,8 +59,19 @@
   }
 
   &.span8 {
-    width: calc(~"65.957446802% + 0px");
+    width: 66vw;
     left: 0;
+  }
+}
+
+// when omniconsole is visible, need to account for record width
+.omniconsole-visible {
+  .main-pane {
+    width: calc(~"100% - 320px");
+
+    &.span8 {
+      width: calc(~"66vw - 320px");
+    }
   }
 }
 
@@ -81,7 +90,7 @@
 }
 
 .side.sidebar-content {
-  width: calc(~"34.042553198% + 1px");
+  width: 34vw;
   border-left: @borderWidget;
   position: absolute;
   top: 0;
@@ -107,7 +116,7 @@
 
 #content {
   /* override */
-  background: none;
+  background: @contentBackground;
 }
 
 #header:not(.hide) + #content {
@@ -117,7 +126,39 @@
 
 .main-pane {
   /* override */
-  top: 51px;
+  top: 49px;
 }
 
 /* NEW SKIN END */
+
+.banner-shifted {
+  #header:not(.hide) + #content {
+    /* override */
+    top: @bannerHeight + 45px;
+  }
+}
+
+/* Impersonation banner START */
+
+.impersonation-banner {
+  top: 0;
+  left: 0;
+  height: @bannerHeight;
+  color: @white;
+  justify-content: space-between;
+  z-index: @zindexImpersonationBanner;
+
+  .icon {
+    color: @white;
+  }
+
+  .text {
+    font-size: @fontSizeHeaderSubTitle;
+  }
+
+  .btn {
+    font-size: @fontSizeHeaderSubTitle;
+  }
+}
+
+/* Impersonation banner END */

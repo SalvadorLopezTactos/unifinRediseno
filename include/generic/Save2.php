@@ -147,7 +147,15 @@ if ($refreshsubpanel) {
 	$GLOBALS['log']->debug("Location: index.php?sugar_body_only=1&module=".$_REQUEST['module']."&subpanel=".$_REQUEST['subpanel_module_name']."&action=SubPanelViewer&inline=1&record=".$_REQUEST['record']);
 	if( empty($_REQUEST['refresh_page']) || $_REQUEST['refresh_page'] != 1){
 		$inline = isset($_REQUEST['inline'])?$_REQUEST['inline']: $inline;
-		header("Location: index.php?sugar_body_only=1&module=".$_REQUEST['module']."&subpanel=".$_REQUEST['subpanel_module_name']."&action=SubPanelViewer&inline=$inline&record=".$_REQUEST['record']);
+        $query = http_build_query(array(
+            'sugar_body_only' => 1,
+            'module' => $_REQUEST['module'],
+            'subpanel' => $_REQUEST['subpanel_module_name'],
+            'action' => 'SubPanelViewer',
+            'inline' => $inline,
+            'record' => $_REQUEST['record'],
+        ));
+        header('Location: index.php?' . $query);
 	}
 	exit;
 }

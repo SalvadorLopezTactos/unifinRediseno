@@ -193,7 +193,7 @@ class CommentLog extends Basic
                 )
             );
 
-        $row = $qry->execute()->fetch();
+        $row = $qry->execute()->fetchAssociative();
         return $this->verifyParentData($row) ? $row : [];
     }
 
@@ -256,6 +256,11 @@ class CommentLog extends Basic
                 // send email notification on mention if user preference is checked
                 if ($user->getPreference('send_email_on_mention') == 'on') {
                     $this->sendNotificationsEmail($user, $module, $recordId, $singularModuleName);
+                }
+
+                // Send push notification on mention if user preference is enabled
+                if ($user->canReceivePushNotifications('mobile_notification_on_mention')) {
+                    $this->sendPushNotification($user, $module, $recordId, $singularModuleName);
                 }
 
                 $mentionedUsers[] = $userId;
@@ -335,6 +340,77 @@ class CommentLog extends Basic
         return return_app_list_strings_language($language);
     }
 
+
+    /**
+     * Builds the text that is sent with the push notification
+     * @param $singularModuleName
+     * @param $relatedBean
+     * @param $currentUser
+     * @param $receivingUser
+     * @return array
+     */
+    public function getMentionPushNotificationText($singularModuleName, $relatedBean, $currentUser, $receivingUser)
+    {
+        $userLanguage = $receivingUser->getUserLanguageWithFallback();
+        $modStrings = $this->getModStrings($userLanguage, 'PushNotifications');
+        $msg = $modStrings['LBL_USER_MENTIONED'];
+        $msg = str_replace('{{mentioning_user}}', $currentUser->full_name, $msg);
+        $msg = str_replace('{{module_name_singular}}', $singularModuleName, $msg);
+        $msg = str_replace('{{record_name}}', $relatedBean->name, $msg);
+
+        $title = $modStrings['LBL_USER_MENTIONED_TITLE'];
+        $title = str_replace('{{module_name_singular}}', $singularModuleName, $title);
+
+        return [
+            'title' => $title,
+            'description' => $msg,
+        ];
+    }
+
+    /**
+     * Helper to create a new push notification
+     * @return SugarBean|null
+     */
+    public function createPushNotification()
+    {
+        return BeanFactory::newBean('PushNotifications');
+    }
+
+    /**
+     * Sends a push notification when a user is mentioned
+     * @param $user
+     * @param $moduleName
+     * @param $recordId
+     * @param $singularModuleName
+     * @return SugarBean
+     */
+    public function sendPushNotification($user, $moduleName, $recordId, $singularModuleName)
+    {
+        $relatedBean = $this->getBean($moduleName, $recordId);
+        $currentUser = $this->getCurrentUser();
+        $pushText = $this->getMentionPushNotificationText($singularModuleName, $relatedBean, $currentUser, $user);
+
+        $push = $this->createPushNotification();
+        $push->notification_type = 'user_mentioned';
+        $push->assigned_user_id = $user->id;
+        $push->parent_type = $moduleName;
+        $push->parent_id = $recordId;
+        $push->name = $pushText['title'];
+        $push->description = $pushText['description'];
+        $push->extra_data = json_encode([
+            'data' => [
+                'mentioned_by_id' => $currentUser->id,
+                'mentioned_by_name' => $currentUser->full_name,
+                'record_name' => $relatedBean->name,
+            ],
+        ]);
+        $push->is_sent = $push->send();
+
+        $push->save();
+        return $push;
+    }
+
+
     /**
      * Send an email to the assigned user of the job
      *
@@ -350,23 +426,7 @@ class CommentLog extends Basic
         $mailTransmissionProtocol = "unknown";
         $record = $this->getBean($moduleName, $recordId);
         $recordName = $record->name;
-        $description="";
-        
-        $record->load_relationship('commentlog_link');
 
-        if ($record->commentlog_link){
-            $commentlog_beans = $record->commentlog_link->getBeans(array('orderby' => 'date_entered ASC'));
-            $commentlogs = array();
-
-            foreach ($commentlog_beans as $commentlog_bean) {
-
-                $description=$commentlog_bean->entry;
-                //Limpiando cadea para dejar únicamente el comentario y quitar la mención
-                //La cadena viene: @[Users:c57e811e-b81a-cde4-d6b4-5626c9961772] Comentario
-                $description=str_replace("@[Users:".$user->id."]","",$description);
-            }
-        }
-        
         try {
             $mailer = $this->getSystemMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
@@ -394,15 +454,11 @@ class CommentLog extends Basic
                 strtolower($singularModuleName),
                 $emailTemplate->subject
             );
-            $emailTemplate->body_html = str_replace('$user_mention',$user->full_name, $emailTemplate->body_html);
             $emailTemplate->body_html = str_replace('$record_name', $recordName, $emailTemplate->body_html);
             $emailTemplate->body_html = str_replace('$record_url', $recordUrl, $emailTemplate->body_html);
-            $emailTemplate->body_html = str_replace('$description', $description, $emailTemplate->body_html);
 
             $emailTemplate->body = str_replace('$record_name', $recordName, $emailTemplate->body);
             $emailTemplate->body = str_replace('$record_url', $recordUrl, $emailTemplate->body);
-
-            $emailTemplate->body = str_replace('$description', $description, $emailTemplate->body);
 
             // add the recipient...
             $mailer->addRecipientsTo(new EmailIdentity($user->email1, $user->full_name));

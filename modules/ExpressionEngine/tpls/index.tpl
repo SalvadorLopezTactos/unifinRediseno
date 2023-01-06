@@ -11,22 +11,21 @@
  */
 *}
 <script src="{sugar_getjspath file='include/javascript/sugarwidgets/SugarYUILoader.js'}"></script>
-{literal}
 <script type="text/javascript">
 var loader = new YAHOO.util.YUILoader({
     require : ["sugarwidgets"],
     loadOptional: true,
     skin: { base: 'blank', defaultSkin: '' },
-	onSuccess: function(){console.log("loaded")},
+    onSuccess: function () {
+        console.log("loaded");
+    },
     allowRollup: true,
     base: "include/javascript/yui/build/"
 });
 loader.addModule({
     name :"sugarwidgets",
     type : "js",
-{/literal}
     fullpath: "{sugar_getjspath file='include/javascript/sugarwidgets/SugarYUIWidgets.js'}",
-{literal}
     varName: "YAHOO.SUGAR",
     requires: ["datatable", "dragdrop", "treeview", "tabview"]
 });
@@ -66,6 +65,6 @@ showEditor = function() {
     win.center();
 }
 </script>
-{/literal}
+
 <input class="button" type="button" onclick="showEditor()" value="Show"/>
 <div id="editorDiv"></div>
