@@ -37,7 +37,7 @@ $dependencies['Cases']['team_name'] = array
     'notActions' => array(),
 );
 
-$dependencies['Cases']['follow_up_datetime'] = array
+/*$dependencies['Cases']['follow_up_datetime'] = array
 (
     'hooks' => array("edit"),
     'trigger' => 'true',
@@ -54,4 +54,4 @@ $dependencies['Cases']['follow_up_datetime'] = array
         ),
     ),
     'notActions' => array(),
-);
+);*/
