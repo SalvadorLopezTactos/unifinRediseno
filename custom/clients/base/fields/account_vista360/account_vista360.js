@@ -147,6 +147,14 @@
         this.model.on('sync', this.hideElements, this);
     },
 
+    _render: function () {
+      this._super("_render");
+
+      if($('[data-fieldname="account_vista360"] > span').length >0){
+        $('[data-fieldname="account_vista360"] > span').show();
+      }
+    },
+
     openGpoEmpresarial:function(){
         var modal = $('#modalGpoEmpresarial');
         if (modal) {

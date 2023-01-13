@@ -151,6 +151,10 @@
 
     _render: function () {
         this._super("_render");
+
+        if($('[data-fieldname="account_clasf_sectorial"] > span').length >0){
+            $('[data-fieldname="account_clasf_sectorial"] > span').show();
+        }
         //campo custom account_clasf_sectorial ocualta la Etiqueta
         $("div.record-label[data-name='account_clasf_sectorial']").attr('style', 'display:none;');
         //Muestra y Oculta campos dependientes de Actividad Economica

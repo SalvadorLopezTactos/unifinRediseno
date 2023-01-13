@@ -15,7 +15,7 @@ array (
             'name' => 'bloquea_cuenta',
             'label' => 'Bloquear Cuenta',
             'css_class' => 'btn-danger hidden',
-            'showOn' => 'view',
+            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:bloquea_cuenta:click',
@@ -27,7 +27,7 @@ array (
             'name' => 'desbloquea_cuenta',
             'label' => 'Desbloquear Cuenta',
             'css_class' => 'btn-success hidden',
-            'showOn' => 'view',
+            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:desbloquea_cuenta:click',
@@ -39,7 +39,7 @@ array (
             'name' => 'aprobar_noviable',
             'label' => 'Confirmar Bloqueo',
             'css_class' => 'btn-success hidden',
-            'showOn' => 'view',
+            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:aprobar_noviable:click',
@@ -51,7 +51,7 @@ array (
             'name' => 'desaprobar_noviable',
             'label' => 'Rechazar Bloqueo',
             'css_class' => 'btn-danger hidden',
-            'showOn' => 'view',
+            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:desaprobar_noviable:click',
@@ -63,7 +63,7 @@ array (
             'name' => 'reactivar_noviable',
             'label' => 'Reactivar Cuenta',
             'css_class' => 'btn-success hidden',
-            'showOn' => 'view',
+            //'showOn' => 'view',
             'events' => 
             array (
               'click' => 'button:reactivar_noviable:click',
@@ -451,7 +451,8 @@ array (
               array (
                 'name' => 'account_disposiciones',
                 'studio' => 'visible',
-                'label' => 'LBL_ACCOUNT_DISPOSICIONES',
+                'dismiss_label' => true,
+                //'label' => 'LBL_ACCOUNT_DISPOSICIONES',
                 'span' => 12,
               ),
             ),
@@ -1284,7 +1285,8 @@ array (
               array (
                 'name' => 'account_telefonos',
                 'studio' => 'visible',
-                'label' => 'ACCOUNT_TELEFONOS',
+                'dismiss_label' => true,
+                //'label' => 'ACCOUNT_TELEFONOS',
                 'span' => 12,
               ),
             ),
@@ -1304,7 +1306,8 @@ array (
               array (
                 'name' => 'account_direcciones',
                 'studio' => 'visible',
-                'label' => 'ACCOUNT_DIRECCIONES',
+                'dismiss_label' => true,
+                //'label' => 'ACCOUNT_DIRECCIONES',
                 'span' => 12,
               ),
             ),

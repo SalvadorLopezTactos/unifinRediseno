@@ -164,6 +164,10 @@
     _render: function () {
         this._super("_render");
 
+        if($('[data-fieldname="account_uni_productos"] > span').length >0){
+            $('[data-fieldname="account_uni_productos"] > span').show();
+        }
+
         this.$("div.record-label[data-name='accounts_uni_productos']").attr('style', 'display:none;');
 
         $("span.normal[data-fieldname='account_uni_productos']").find('.row-fluid > .record-label').attr('style', 'display:none;');

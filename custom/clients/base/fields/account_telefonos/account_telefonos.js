@@ -52,6 +52,11 @@
 
     _render: function () {
         this._super("_render");
+
+        if($('[data-fieldname="account_telefonos"] > span').length >0){
+            $('[data-fieldname="account_telefonos"] > span').show();
+        }
+
         this.$("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
         $('#nuevo').hide();
         if (this.action == 'edit' && this.oTelefonos) {

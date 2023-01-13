@@ -72,6 +72,11 @@
 
     _render: function () {
         this._super("_render");
+
+        if($('[data-fieldname="account_direcciones"] > span').length >0){
+            $('[data-fieldname="account_direcciones"] > span').show();
+        }
+
         if (this.accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != 4 && this.cont_render == 0) {
           var auxindicador = new Object();
           for (var [key, value] of Object.entries(this.def.listIndicador)) {

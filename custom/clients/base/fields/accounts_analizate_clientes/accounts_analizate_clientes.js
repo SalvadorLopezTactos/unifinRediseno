@@ -44,6 +44,9 @@
 
     _render: function () {
         this._super("_render");
+        if($('[data-fieldname="accounts_analizate_clientes"] > span').length >0){
+            $('[data-fieldname="accounts_analizate_clientes"] > span').show();
+        }
     },
 
     cargapipelineCliente: function () {
@@ -100,10 +103,6 @@
             this.AnalizateCliente.Estado1.Valor = 'Pendiente';
             this.AnalizateCliente.Estado1.Class = 'current';
         }
-    },
-
-    _render: function () {
-        this._super("_render");
     },
 
     ReenviaCorreoCliente: function () {
