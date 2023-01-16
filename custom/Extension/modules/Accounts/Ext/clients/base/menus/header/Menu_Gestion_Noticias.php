@@ -8,5 +8,5 @@ $viewdefs['Accounts']['base']['menu']['header'][] = array(
     'route'=>'#Accounts/layout/Gestion_Noticias_Layout',
     'label' =>'LNK_GESTION_NOTICIAS',
     'acl_module'=>'Accounts',
-    'icon' => 'fa-edit',
+    'icon' => 'sicon-edit',
 );
