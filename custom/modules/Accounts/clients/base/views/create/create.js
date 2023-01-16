@@ -743,13 +743,6 @@
         this.estableceOpcionesOrigen();
     },
 
-    _renderHtml: function() {
-        this._super('_renderHtml');
-
-        this.hideRowsNoHideByDependencyCreate();
-        
-    },
-
     /** BEGIN CUSTOMIZATION:
      * Salvador Lopez 19/01/2018
      * Descripci�n: Funci�n que oculta o muestra panel de fideicomiso dependiendo el valor de check �Es Fideicomisio? */
@@ -765,18 +758,6 @@
             this.$("li.tab.LBL_RECORDVIEW_PANEL2").hide();
         }
     },
-
-    hideRowsNoHideByDependencyCreate:function(){
-        //La clase vis_action_hidden se agrega cuando un campo se oculta a través de una fórmula en studio o una dependencia
-        var hidden_rows=$('.LBL_RECORDVIEW_PANEL16 > .vis_action_hidden');
-        hidden_rows.each(function(i, obj) {
-            //Se oculta la fila cuando se detecta que el campo está oculto y además el campo que está junto a el es el campo custom "blank_space" o es una celda "relleno" habilitada desde studio
-            if($(obj).siblings('[data-name="blank_space"]').length > 0 || $(obj).siblings('.filler-cell').length > 0){
-                $(obj).parent().addClass('hide');
-            }
-        });
-    },
-
 
     /* F. Javier G. Solar
      OBS299 Validar que las Direcciones no se repitan 21/11/2018
