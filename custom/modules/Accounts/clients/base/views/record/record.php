@@ -1406,7 +1406,7 @@ array (
               array (
                 'name' => 'accounts_tct_pld',
                 'studio' => 'visible',
-                'label' => 'accounts_tct_pld',
+                'dismiss_label' => true,
                 'span' => 12,
               ),
               9 => 

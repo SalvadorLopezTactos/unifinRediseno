@@ -1409,20 +1409,21 @@
 
     ocultaFunc: function () {
         _.each(this.fields, function (field) {
-            $('[data-name="' + field.name + '"]').hide();
+            $('.record-cell[data-name="' + field.name + '"]').hide();
         });
-        $('[data-name="name"]').show();
+        $('.record-cell[data-name="name"]').css('display','block');
         //$('[data-name="tct_etapa_ddw_c"]').show();
         //$('[data-name="estatus_c"]').show();
         //$('[data-name="idsolicitud_c"]').show();
-        $('[data-name="account_name"]').show();
-        $('[data-name="tipo_producto_c"]').show();
-        // $('[data-name="producto_financiero_c"]').show();
-        $('[data-name="negocio_c"]').show();
-        $('[data-name="monto_c"]').show();
-        $('[data-name="assigned_user_name"]').show();
+        $('.record-cell[data-name="account_name"]').css('display','block');
+        $('.record-cell[data-name="tipo_producto_c"]').css('display','block');
+        //$('[data-name="producto_financiero_c"]').show();
+        $('.record-cell[data-name="negocio_c"]').css('display','block');
+        $('.record-cell[data-name="monto_c"]').css('display','block');
+        $('.record-cell[data-name="assigned_user_name"]').css('display','block');
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
+        
 
         //Se visualiza campo de Administrador cartera solo si el usuario tiene activo el check
         if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
@@ -1448,18 +1449,6 @@
         $('div[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
 		$('[data-name="condiciones_financieras_quantico"]').remove();
     },
-
-    /*
-     validaDatosRequeridos: function(fields, errors, callback){
-     console.log("Entro a validacion de mes");
-     console.log(this.model.get('mes_c'));
-     if(this.model.get('mes_c') == null || this.model.get('mes_c') == ''){
-     errors['mes_c'] = errors['mes_c'] || {};
-     errors['mes_c'].required = true;
-     }
-     callback(null, fields, errors);
-     },
-     */
 
     _dispose: function () {
         this._super('_dispose', []);
@@ -2356,16 +2345,16 @@
 						window.render = 1;
                         this.render();
                         if (temp_array != "") {
-                            $('[data-name="producto_financiero_c"]').show();
+                            $('.record-cell[data-name="producto_financiero_c"]').css('display','block');
                             this.exist_PRodFinanciero = true;
                         }
                         else {
-                            $('[data-name="producto_financiero_c"]').hide();
+                            $('.record-cell[data-name="producto_financiero_c"]').css('display','none');
                             this.exist_PRodFinanciero = false;
                         }
                     }
                     else {
-                        $('[data-name="producto_financiero_c"]').hide();
+                        $('.record-cell[data-name="producto_financiero_c"]').css('display','none');
                     }
                 }, this),
             });
