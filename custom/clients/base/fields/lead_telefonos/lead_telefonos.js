@@ -136,6 +136,10 @@
 
   _render: function () {
     this._super("_render");
+
+    if($('[data-fieldname="lead_telefonos"] > span').length >0){
+      $('[data-fieldname="lead_telefonos"] > span').show();
+    }
     //Parche para ocultar espacios en blanco de los campos de Origen en creación de Leads
     this.hideRowsNoHideByDependencyLeads();
     if(window.cancel) {
