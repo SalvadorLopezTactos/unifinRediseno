@@ -255,9 +255,11 @@ SQL;
                 $tipo_string = "";
                 if (count($direccion_row['tipodedireccion']) > 0) {
                     $tipo_string .= '^' . $direccion_row['tipodedireccion'][0] . '^';
+                    /*
                     for ($i = 1; $i < count($direccion_row['tipodedireccion']); $i++) {
                         $tipo_string .= ',^' . $direccion_row['tipodedireccion'][$i] . '^';
                     }
+                    */
                 }
                 $direccion->tipodedireccion = $tipo_string;
                 $direccion->calle = $direccion_row['calle'];
