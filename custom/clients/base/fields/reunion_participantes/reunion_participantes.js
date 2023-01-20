@@ -22,6 +22,7 @@
         this.loadData();
         //Registro
         this.model.on('sync', this.loadData, this);
+        this.model.on("change:parent_id", _.bind(this.loadData, this));
     },
 
 	loadData: function (options) {
