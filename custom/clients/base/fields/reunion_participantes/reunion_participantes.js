@@ -44,7 +44,7 @@
 					throw e;
 				}
 			});
-		} else {
+		} else if (this.action!='disabled') {
 			if(this.model.get('parent_id') != undefined && this.model.get('parent_id') != '' && this.model.get('parent_type') == 'Accounts') {
 				//Recupera datos para vista de creación
 				app.alert.show('alert_participants', {
