@@ -95,7 +95,7 @@
         var temp_prod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userprod = temp_prod.split(",");
         var productos = app.lang.getAppListStrings('tipo_producto_list');
-        var context360 = v360.ResumenCliente; // contiene la información vista 360
+        var context360 = vista360.ResumenCliente; // contiene la información vista 360
         var userpuesto = app.user.attributes.puestousuario_c;
         var product_dispo = ['1', '3', '4', '6', '8','11'];
         var id_user = app.user.id; //id de usuario firmado
