@@ -133,6 +133,11 @@
 
     _render: function () {
       this._super("_render");
+
+      if($('[data-fieldname="prospects_telefonos"] > span').length >0){
+        $('[data-fieldname="prospects_telefonos"] > span').show();
+      }
+      
       if(window.cancel) {
         this.phone_work = this.model.get('phone_work');
         this.phone_home = this.model.get('phone_home');
