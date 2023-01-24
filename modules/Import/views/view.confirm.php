@@ -404,12 +404,16 @@ eoq;
     public function getMaxColumnsInSampleSet($sampleSet)
     {
         $maxColumns = 0;
+        $GLOBALS['log']->fatal(print_r($sampleSet,true));
         foreach($sampleSet as $v)
         {
-            if(count($v) > $maxColumns)
-                $maxColumns = count($v);
-            else
-                continue;
+            if(!empty($v)){
+
+                if(count($v) > $maxColumns)
+                    $maxColumns = count($v);
+                else
+                    continue;
+            }
         }
 
         return $maxColumns;
