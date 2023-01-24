@@ -416,7 +416,7 @@ array (
               array (
                 'name' => 'calls_meeting_call',
                 'studio' => 'visible',
-                'label' => 'calls_meeting_call',
+                'dismiss_label' => true,
                 'span' => 12,
               ),
               22 => 

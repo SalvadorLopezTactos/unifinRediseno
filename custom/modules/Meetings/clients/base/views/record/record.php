@@ -411,7 +411,7 @@ array (
               array (
                 'name' => 'reunion_objetivos',
                 'studio' => 'visible',
-                'label' => 'reunion_objetivos',
+                'dismiss_label' => true,
                 'span' => 12,
               ),
             ),
