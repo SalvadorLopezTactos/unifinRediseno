@@ -219,7 +219,7 @@
                             cont_dir.nuevaDireccion.pais = (Object.keys(cont_dir.nuevaDireccion.listPais)[0] != undefined) ? Object.keys(cont_dir.nuevaDireccion.listPais)[0] : "";
                             cont_dir.nuevaDireccion.municipio = (Object.keys(cont_dir.nuevaDireccion.listMunicipio)[0] != undefined) ? Object.keys(cont_dir.nuevaDireccion.listMunicipio)[0] : "";
                             cont_dir.nuevaDireccion.estado = (Object.keys(cont_dir.nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(cont_dir.nuevaDireccion.listEstado)[0] : "";
-                            cont_dir.nuevaDireccion.colonia = (Object.keys(cont_dir.nuevaDireccion.listColonia)[0] != undefined) ? Object.keys(cont_dir.nuevaDireccion.listColonia)[0] : "";
+                            cont_dir.nuevaDireccion.colonia = (cont_dir.nuevaDireccion.listColonia[0].idColonia != undefined) ? cont_dir.nuevaDireccion.listColonia[0].idColonia : "";
                             cont_dir.nuevaDireccion.ciudad = (Object.keys(cont_dir.nuevaDireccion.listCiudad)[0] != undefined) ? Object.keys(cont_dir.nuevaDireccion.listCiudad)[0] : "";
                             //cont_dir.populateEdoByPais(cont_dir.nuevaDireccion.pais);
                             //cont_dir.populateCiudadesByEstado(cont_dir.nuevaDireccion.estado);
@@ -421,7 +421,7 @@
         //Limpia dependencias
         this.nuevaDireccion.municipio = (Object.keys(this.nuevaDireccion.listMunicipio)[0] != undefined) ? Object.keys(this.nuevaDireccion.listMunicipio)[0] : "";
         this.nuevaDireccion.estado = (Object.keys(this.nuevaDireccion.listEstado)[0] != undefined) ? Object.keys(this.nuevaDireccion.listEstado)[0] : "";
-        this.nuevaDireccion.colonia = (Object.keys(this.nuevaDireccion.listColonia)[0] != undefined) ? Object.keys(this.nuevaDireccion.listColonia)[0] : "";
+        this.nuevaDireccion.colonia = (this.nuevaDireccion.listColonia[0].idColonia != undefined) ? this.nuevaDireccion.listColonia[0].idColonia : "";
         this.nuevaDireccion.ciudad = (Object.keys(this.nuevaDireccion.listCiudad)[0] != undefined) ? Object.keys(this.nuevaDireccion.listCiudad)[0] : "";
         this.render();
     },
@@ -511,7 +511,7 @@
         this.nuevaDireccion.listColonia = filtroColonia;
 
         //Establece ids default
-        this.nuevaDireccion.colonia = (Object.keys(this.nuevaDireccion.listColonia)[0] != undefined) ? Object.keys(this.nuevaDireccion.listColonia)[0] : "";
+        this.nuevaDireccion.colonia = (this.nuevaDireccion.listColonia[0].idColonia != undefined) ? this.nuevaDireccion.listColonia[0].idColonia : "";
         this.render();
     },
 
