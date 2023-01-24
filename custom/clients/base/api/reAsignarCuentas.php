@@ -700,7 +700,7 @@ SQL;
         try {
             $response = curl_exec($curl);
             $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response);
-            $GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response['respStore']);
+            //$GLOBALS['log']->fatal("respuesta servicio Anexo\n" . $response['respStore']);
 
             $responseArray= json_decode($response,true);
             $GLOBALS['log']->fatal("Respuesta response Anexos Areglos " .  print_r($responseArray,true));
