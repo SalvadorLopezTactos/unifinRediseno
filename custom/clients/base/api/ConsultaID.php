@@ -31,8 +31,8 @@ class ConsultaID extends SugarApi
         $timedate = new SugarDateTime();
         $today = $timedate->asDb();
         $Respuesta = array(
-            Estado => "",
-            Descripcion => "",
+            "Estado" => "",
+            "Descripcion" => "",
         );
         /*Recupera argumentos de la petición.
         Dependiendo el número de petición es su asociación en la tabla unifin_folios:
@@ -50,8 +50,8 @@ class ConsultaID extends SugarApi
                           from unifin_folios
                           where id=" . $idTipo . "
                               ;";
-                $folio = $GLOBALS['db']->query($query);
-                while ($row = $GLOBALS['db']->fetchByAssoc($folio)) {
+                $folioResult = $GLOBALS['db']->query($query);
+                while ($row = $GLOBALS['db']->fetchByAssoc($folioResult)) {
                     $folio = $row['valor'];
                 }
                 //Se realiza la suma al objeto nuevoFolio de +1
