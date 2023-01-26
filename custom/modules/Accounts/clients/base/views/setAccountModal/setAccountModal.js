@@ -320,8 +320,8 @@
 
             var usuario = App.data.createBean('Users');
             usuario.set('id', user_select);
-            usuario.fetch({
-                success: function (model, data) {
+            app.api.call("read", app.api.buildURL("Infouser/" + user_select, null, null, {}), null, {
+                success: function (data) {
                     // console.log(model, data, usuario);
                     // console.log(data);
                     // console.log(data.full_name);
@@ -472,7 +472,7 @@
     },
 
     obten_status_producto: function (idProducto_selec) {
-        var context360 = v360.ResumenCliente;
+        var context360 = vista360.ResumenCliente;
         var id_user_firmado = app.user.id; //id de usuario firmado
         var respuesta = {'estusAtencion': '', 'propietario': false};
         var modalAccount = this.context_Account;
@@ -546,63 +546,63 @@
                         case "1": // LEASING
                             self.model.set('user_id_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorleasing_c', full_name);// nombre
-                            v360.ResumenCliente.leasing.promotor = full_name;
+                            vista360.ResumenCliente.leasing.promotor = full_name;
                             cont_uni_p.ResumenProductos.leasing.dias = 0;
                             cont_uni_p.ResumenProductos.leasing.full_name = full_name;
                             cont_uni_p.ResumenProductos.leasing.assigned_user_id = id_user_new;
                             cont_uni_p.render();
-                            v360.render();
+                            vista360.render();
                             break;
                         case '3': //Credito-Automotriz
                             self.model.set('user_id2_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorcredit_c', full_name);// nombre
-                            v360.ResumenCliente.credito_auto.promotor = full_name;
+                            vista360.ResumenCliente.credito_auto.promotor = full_name;
                             cont_uni_p.ResumenProductos.credito_auto.dias = 0;
                             cont_uni_p.ResumenProductos.credito_auto.full_name = full_name;
                             cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = id_user_new;
                             cont_uni_p.render();
-                            v360.render();
+                            vista360.render();
                             break;
 
                         case '4': // FACTORAJE
                             self.model.set('user_id1_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorfactoraje_c', full_name);// nombre
-                            v360.ResumenCliente.factoring.promotor = full_name;
+                            vista360.ResumenCliente.factoring.promotor = full_name;
                             cont_uni_p.ResumenProductos.factoring.dias = 0;
                             cont_uni_p.ResumenProductos.factoring.full_name = full_name;
                             cont_uni_p.ResumenProductos.factoring.assigned_user_id = id_user_new;
                             cont_uni_p.render();
-                            v360.render();
+                            vista360.render();
                             break;
 
                         case '6': // FLEET
                             self.model.set('user_id6_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorfleet_c', full_name);// nombre
-                            v360.ResumenCliente.fleet.promotor = full_name;
+                            vista360.ResumenCliente.fleet.promotor = full_name;
                             cont_uni_p.ResumenProductos.fleet.dias = 0;
                             cont_uni_p.ResumenProductos.fleet.full_name = full_name;
                             cont_uni_p.ResumenProductos.fleet.assigned_user_id = id_user_new;
                             cont_uni_p.render();
-                            v360.render();
+                            vista360.render();
                             break;
 
                         case '8': // UNICLICK
                             self.model.set('user_id7_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotoruniclick_c', full_name);// nombre
-                            v360.ResumenCliente.uniclick.promotor = full_name;
+                            vista360.ResumenCliente.uniclick.promotor = full_name;
                             cont_uni_p.ResumenProductos.uniclick.dias = 0;
                             cont_uni_p.ResumenProductos.uniclick.full_name = full_name;
                             cont_uni_p.ResumenProductos.uniclick.assigned_user_id = id_user_new;
                             cont_uni_p.render();
-                            v360.render();
+                            vista360.render();
                             break;
                         case '11': // RM
                             self.model.set('user_id8_c', id_user_new); // id del nuevo asesor
                             self.model.set('promotorrm_c', full_name);// nombre
-                            v360.ResumenCliente.general_cliente.asesorRM = full_name;
+                            vista360.ResumenCliente.general_cliente.asesorRM = full_name;
 
                             cont_uni_p.render();
-                            v360.render();
+                            vista360.render();
                             break;
                     }
                 }

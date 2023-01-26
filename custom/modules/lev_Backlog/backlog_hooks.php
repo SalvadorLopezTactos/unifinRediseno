@@ -83,7 +83,7 @@ class backlog_hooks {
                 if ($montoTMP < 0) {
                     $montoTMP = 0;
                 }
-                $RITMP = $montoTMP * ($bean->porciento_ri/100);
+                $RITMP = $montoTMP * ((float)$bean->porciento_ri/100);
                 $GLOBALS['log']->fatal('Si Linea Disponible >= montoTMP - RITMP'.'-'.$montoTMP.'-'.$RITMP.'-'.$bean->monto_original);
                 //Si Linea Disponible >= montoTMP - RITMP
                 if ($bean->monto_original >= ($montoTMP - $RITMP)) {
