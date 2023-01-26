@@ -426,6 +426,21 @@ class CommentLog extends Basic
         $mailTransmissionProtocol = "unknown";
         $record = $this->getBean($moduleName, $recordId);
         $recordName = $record->name;
+        $description="";
+
+        $record->load_relationship('commentlog_link');
+        if ($record->commentlog_link){
+            $commentlog_beans = $record->commentlog_link->getBeans(array('orderby' => 'date_entered ASC'));
+            $commentlogs = array();
+
+            foreach ($commentlog_beans as $commentlog_bean) {
+
+                $description=$commentlog_bean->entry;
+                //Limpiando cadea para dejar únicamente el comentario y quitar la mención
+                //La cadena viene: @[Users:c57e811e-b81a-cde4-d6b4-5626c9961772] Comentario
+                $description=str_replace("@[Users:".$user->id."]","",$description);
+            }
+        }
 
         try {
             $mailer = $this->getSystemMailer();
@@ -454,11 +469,15 @@ class CommentLog extends Basic
                 strtolower($singularModuleName),
                 $emailTemplate->subject
             );
+
+            $emailTemplate->body_html = str_replace('$user_mention',$user->full_name, $emailTemplate->body_html);
             $emailTemplate->body_html = str_replace('$record_name', $recordName, $emailTemplate->body_html);
             $emailTemplate->body_html = str_replace('$record_url', $recordUrl, $emailTemplate->body_html);
+            $emailTemplate->body_html = str_replace('$description', $description, $emailTemplate->body_html);
 
             $emailTemplate->body = str_replace('$record_name', $recordName, $emailTemplate->body);
             $emailTemplate->body = str_replace('$record_url', $recordUrl, $emailTemplate->body);
+            $emailTemplate->body = str_replace('$description', $description, $emailTemplate->body);
 
             // add the recipient...
             $mailer->addRecipientsTo(new EmailIdentity($user->email1, $user->full_name));
