@@ -3416,7 +3416,7 @@
     valida_actividad_economica: function (fields, errors, callback){
         //Validacion de Actividad Economica si el Tipo de Cuenta es "3" - Cliente
         if (this.model.get('tipo_registro_cuenta_c') == '3' && this.model.get('tipo_registro_cuenta_c') != '1' && this.model.get('subtipo_registro_cuenta_c') != '2' &&
-        ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null)) {
+        ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null)) {
 
             app.alert.show("tipo_cuenta_cliente_ae", {
                 level: "error",
