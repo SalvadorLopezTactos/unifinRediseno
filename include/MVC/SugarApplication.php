@@ -919,10 +919,12 @@ EOF;
     public static function endSession()
     {
         $trackerManager = TrackerManager::getInstance();
+        /*
         if ($monitor = $trackerManager->getMonitor('tracker_sessions')) {
             $monitor->closeSession();
             $trackerManager->saveMonitor($monitor);
         }
+        */
         $sess = SessionStorage::getInstance();
         if ($sess->getId()) {
             $sess->destroy();
